@@ -1,8 +1,8 @@
-import { Text, Image, View, Button, StyleSheet, FlatList } from 'react-native';
+import { Text, Image, View, Button, StyleSheet, FlatList, ViewToken } from 'react-native';
 import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
 import CarouselItem from './CarouselItem';
 import CarouselPager from './CarouselPager';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 export default function Carousel() {
   const scrollX = useSharedValue(0);
@@ -13,6 +13,19 @@ export default function Carousel() {
     },
   });
   
+  const viewabilityConfig = {
+    itemVisiblePercentTreshold: 50,
+  };
+
+  const onViewableItemsChanged = ({viewableItems} : {viewableItems: ViewToken[] }) => {
+    if (viewableItems[0].index !== undefined && viewableItems[0].index !== null) {
+      setPagerIndex(viewableItems[0].index)
+    }
+  };
+
+  const viewabilityConfigCallbackPairs = useRef([
+    { viewabilityConfig, onViewableItemsChanged }
+  ]);
 
   return (  
     <View style={styles.container}>
@@ -23,6 +36,7 @@ export default function Carousel() {
         pagingEnabled={true}
         showsHorizontalScrollIndicator={false}
         onScroll={onScrollHandler}
+        viewabilityConfigCallbackPairs={viewabilityConfigCallbackPairs.current}
       />
 
       <CarouselPager data={data} scrollX={scrollX} pagerIndex={pagerIndex}/> 
