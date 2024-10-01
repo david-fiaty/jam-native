@@ -22,13 +22,15 @@ export default function Carousel() {
         onScroll={onScrollHandler}
       />
 
-      <CarouselPagination />
+      <CarouselPagination /> 
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: 'green',
     width: '100%',
     height: 200,
