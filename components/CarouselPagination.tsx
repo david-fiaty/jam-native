@@ -1,7 +1,13 @@
 import { StyleSheet, View } from 'react-native';
+import Animated, { SharedValue, useAnimatedStyle, interpolate, Extrapolation } from 'react-native-reanimated';
 
+type Props = {
+  items: object,
+  index: number,
+  scrollX: SharedValue<number>
+}
 
-export default function CarouselPagination() {
+export default function CarouselPagination({ items, index, scrollX }: Props) {
 
   return (  
     <View style={styles.container}>
