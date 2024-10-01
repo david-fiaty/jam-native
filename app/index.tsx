@@ -1,7 +1,6 @@
 import { Text, Image, View, StyleSheet } from 'react-native';
 import Carousel from '../components/Carousel';
 import { Button } from '@rneui/themed';
-import LOGOSVG from '../assets/jam-logo.svg';
 
 export default function Home() {
   return (  
