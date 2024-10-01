@@ -6,7 +6,6 @@ export default function Home() {
   return (  
     <View style={styles.container}>
       <Image source={require('@/assets/images/jam-logo.png')} style={styles.logo} />    
-      <Text style={styles.slogan}>Create better, together</Text> 
       <Carousel />
       <Button title="Login/Signup" type="outline" />
       <Button title="Skip" type="clear" />
@@ -26,9 +25,5 @@ const styles = StyleSheet.create({
   logo: {
     alignSelf: "center",
     marginTop: 100,
-  },
-  slogan: {
-    color: "#0a00aa",
-    textTransform: "uppercase",
   },
 });
