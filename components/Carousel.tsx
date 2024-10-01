@@ -1,6 +1,6 @@
 import { Text, Image, View, Button, StyleSheet, FlatList } from 'react-native';
 
-export default function WelcomeCarousel() {
+export default function Carousel() {
   return (  
     <View style={styles.container}>
       <FlatList />
