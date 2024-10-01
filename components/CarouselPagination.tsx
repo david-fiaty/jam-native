@@ -13,5 +13,7 @@ export default function CarouselPagination() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'red',
+    width: 50,
+    height: 50,
   },
 });
