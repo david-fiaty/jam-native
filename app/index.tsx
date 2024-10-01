@@ -1,11 +1,12 @@
 import { Text, Image, View, StyleSheet } from 'react-native';
 import Carousel from '../components/Carousel';
 import { Button } from '@rneui/themed';
+import LOGOSVG from '../assets/jam-logo.svg';
 
 export default function Home() {
   return (  
     <View style={styles.container}>
-      <Image source={require('@/assets/images/jam-logo.svg')} style={styles.logo} />    
+      <Image source={require('@/assets/images/jam-logo.png')} style={styles.logo} />    
       <Carousel />
       <Button title="Login/Signup" type="outline" />
       <Button title="Skip" type="clear" />
