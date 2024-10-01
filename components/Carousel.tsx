@@ -1,15 +1,18 @@
 import { Text, Image, View, Button, StyleSheet, FlatList } from 'react-native';
 import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
 import CarouselItem from './CarouselItem';
-import CarouselPagination from './CarouselPagination';
+import CarouselPager from './CarouselPager';
+import { useState } from 'react';
 
 export default function Carousel() {
   const scrollX = useSharedValue(0);
+  const [pagerIndex, setPagerIndex] = useState(0);
   const onScrollHandler = useAnimatedScrollHandler({
     onScroll: (e) => {
       scrollX.value = e.contentOffset.x;
     },
   });
+  
 
   return (  
     <View style={styles.container}>
@@ -21,12 +24,16 @@ export default function Carousel() {
         showsHorizontalScrollIndicator={false}
         onScroll={onScrollHandler}
       />
+
+      <CarouselPager data={data} scrollX={scrollX} pagerIndex={pagerIndex}/> 
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: 'green',
     width: '100%',
     height: 200,
