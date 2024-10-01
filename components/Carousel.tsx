@@ -21,6 +21,8 @@ export default function Carousel() {
         showsHorizontalScrollIndicator={false}
         onScroll={onScrollHandler}
       />
+
+      <CarouselPagination />
     </View>
   );
 }
