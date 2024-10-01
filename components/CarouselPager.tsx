@@ -8,7 +8,6 @@ type Props = {
 }
 
 export default function CarouselPager({ data, pagerIndex, scrollX }: Props) {
-
   return (  
     <View style={styles.container}>
       {data.map((_, index) => {
