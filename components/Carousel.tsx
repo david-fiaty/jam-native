@@ -41,7 +41,7 @@ export default function Carousel() {
         onScroll={onScrollHandler}
       />
 
-      <CarouselPagination />
+      
     </View>
   );
 }
