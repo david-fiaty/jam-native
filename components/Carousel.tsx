@@ -1,7 +1,7 @@
 import { Text, Image, View, Button, StyleSheet, FlatList } from 'react-native';
 import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
 import CarouselItem from './CarouselItem';
-import CarouselPagination from './CarouselPagination';
+import CarouselPager from './CarouselPager';
 
 export default function Carousel() {
   const scrollX = useSharedValue(0);
@@ -22,7 +22,7 @@ export default function Carousel() {
         onScroll={onScrollHandler}
       />
 
-      <CarouselPagination /> 
+      <CarouselPager data={data} scrollX={scrollX}/> 
     </View>
   );
 }
