@@ -37,8 +37,6 @@ export default function CarouselItem({item, index, scrollX}: Props) {
             [-width * 0.25, 0 , width * 0.25],
             Extrapolation.CLAMP,
           ),
-        },
-        {
           scale: interpolate(
             scrollX.value,
             [(index - 1) * width, index * width, (index + 1) * width],
