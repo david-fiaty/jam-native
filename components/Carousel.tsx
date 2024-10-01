@@ -3,35 +3,6 @@ import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native
 import CarouselItem from './CarouselItem';
 import CarouselPagination from './CarouselPagination';
 
-export default function Carousel() {
-  const scrollX = useSharedValue(0);
-  const onScrollHandler = useAnimatedScrollHandler({
-    onScroll: (e) => {
-      scrollX.value = e.contentOffset.x;
-    },
-  });
-
-  return (  
-    <View style={styles.container}>
-      <Animated.FlatList 
-        data={data} 
-        renderItem={({item, index}) => <CarouselItem item={item} index={index} scrollX={scrollX}/>} 
-        horizontal={true}
-        pagingEnabled={true}
-        showsHorizontalScrollIndicator={false}
-        onScroll={onScrollHandler}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'green',
-    width: '100%',
-    height: 200,
-  },
-});
 
 const data = [
   {
@@ -50,3 +21,34 @@ const data = [
     link: 'ccc link',
   },
 ];
+
+export default function Carousel() {
+  const scrollX = useSharedValue(0);
+  const onScrollHandler = useAnimatedScrollHandler({
+    onScroll: (e) => {
+      scrollX.value = e.contentOffset.x;
+    },
+  });
+
+  return (  
+    <View style={styles.container}>
+      <Animated.FlatList 
+        data={data} 
+        renderItem={({item, index}) => <CarouselItem item={item} index={index} scrollX={scrollX}/>} 
+        horizontal={true}
+        pagingEnabled={true}
+        showsHorizontalScrollIndicator={false}
+        onScroll={onScrollHandler}
+      />
+
+      <CarouselPagination />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+});
