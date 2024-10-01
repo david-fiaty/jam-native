@@ -1,6 +1,7 @@
 import { Text, Image, View, StyleSheet } from 'react-native';
 import Carousel from '../components/Carousel';
 import { Button } from '@rneui/themed';
+import { ButtonGroup } from '@rneui/base';
 
 export default function Home() {
   return (  
@@ -9,6 +10,10 @@ export default function Home() {
       <Carousel />
       <Button title="Login/Signup" type="outline" />
       <Button title="Skip" type="clear" />
+      <View style={styles.buttonGroup}>
+        <Button title="About" type="clear" />
+        <Button title="Legal" type="clear" />
+      </View>
     </View>
   );
 }
@@ -25,5 +30,11 @@ const styles = StyleSheet.create({
   logo: {
     alignSelf: "center",
     marginTop: 100,
+  },
+  buttonGroup: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignContent: 'center',
+    alignItems: 'center',
   },
 });
