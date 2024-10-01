@@ -4,7 +4,11 @@ import CarouselItem from './CarouselItem';
 export default function Carousel() {
   return (  
     <View style={styles.container}>
-      <FlatList data={data} renderItem={({item, index}) => <CarouselItem item={item} index={index} />} />
+      <FlatList 
+        data={data} 
+        renderItem={({item, index}) => <CarouselItem item={item} index={index} />} 
+        horizontal
+      />
     </View>
   );
 }

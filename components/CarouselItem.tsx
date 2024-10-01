@@ -1,27 +1,11 @@
-import { Text, Image, View, Button, StyleSheet, FlatList } from 'react-native';
+import { StyleSheet, View, Text, Dimensions } from 'react-native';
 
 type Props = {
   item: object,
   index: number,
 }
 
-
-export default function CarouselItem({item, index}: Props) {
-  return (  
-    <View>
-      <Text>{index}</Text>
-      <Text>{item.content}</Text>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'green',
-    width: '100%',
-    height: 200,
-  },
-});
+const {width} = Dimensions.get('screen');
 
 const data = [
   {
@@ -40,3 +24,22 @@ const data = [
     link: 'ccc link',
   },
 ];
+
+export default function CarouselItem({item, index}: Props) {
+  return (  
+    <View style={styles.itemContainer}>
+      <Text>{index}</Text>
+      <Text>{item.content}</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  itemContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 20,
+    width: width,
+    backgroundColor: 'orange',
+  },
+});
