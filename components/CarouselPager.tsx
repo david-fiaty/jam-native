@@ -13,7 +13,7 @@ export default function CarouselPager({ data, pagerIndex, scrollX }: Props) {
     <View style={styles.container}>
       {data.map((_, index) => {
         return (
-          <View style={[styles.dot, {backgroundColor: pagerIndex == index ? 'black' : 'gray'}]}></View>
+          <View key={index} style={[styles.dot, {backgroundColor: pagerIndex == index ? 'black' : 'gray'}]}></View>
         );
       })}
     </View>
