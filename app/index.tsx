@@ -2,7 +2,7 @@ import { Text, Image, View, StyleSheet } from 'react-native';
 import Carousel from '../components/Carousel';
 import { Button } from '@rneui/themed';
 
-export default function WelcomeScreen() {
+export default function HomeScreen() {
   return (  
     <View style={styles.container}>
       <Image source={require('@/assets/images/jam-logo.png')} style={styles.logo} />    
