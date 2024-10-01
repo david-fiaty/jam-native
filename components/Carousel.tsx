@@ -1,6 +1,7 @@
 import { Text, Image, View, Button, StyleSheet, FlatList } from 'react-native';
-import CarouselItem from './CarouselItem';
 import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
+import CarouselItem from './CarouselItem';
+import CarouselPagination from './CarouselPagination';
 
 export default function Carousel() {
   const scrollX = useSharedValue(0);
@@ -14,7 +15,7 @@ export default function Carousel() {
     <View style={styles.container}>
       <Animated.FlatList 
         data={data} 
-        renderItem={({item, index}) => <CarouselItem item={item} index={index} />} 
+        renderItem={({item, index}) => <CarouselItem item={item} index={index} scrollX={scrollX}/>} 
         horizontal={true}
         pagingEnabled={true}
         showsHorizontalScrollIndicator={false}
