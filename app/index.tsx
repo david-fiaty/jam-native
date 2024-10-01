@@ -5,7 +5,7 @@ import { Button } from '@rneui/themed';
 export default function Home() {
   return (  
     <View style={styles.container}>
-      <Image source={require('@/assets/images/jam-logo.png')} style={styles.logo} />    
+      <Image source={require('@/assets/images/jam-logo.svg')} style={styles.logo} />    
       <Carousel />
       <Button title="Login/Signup" type="outline" />
       <Button title="Skip" type="clear" />
