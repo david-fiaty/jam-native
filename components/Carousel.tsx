@@ -3,25 +3,6 @@ import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native
 import CarouselItem from './CarouselItem';
 import CarouselPagination from './CarouselPagination';
 
-
-const data = [
-  {
-    id: 1,
-    content: 'aaaa',
-    link: 'aaa link',
-  },
-  {
-    id: 2,
-    content: 'bbb',
-    link: 'bbb link',
-  },
-  {
-    id: 3,
-    content: 'aaaa',
-    link: 'ccc link',
-  },
-];
-
 export default function Carousel() {
   const scrollX = useSharedValue(0);
   const onScrollHandler = useAnimatedScrollHandler({
@@ -40,15 +21,32 @@ export default function Carousel() {
         showsHorizontalScrollIndicator={false}
         onScroll={onScrollHandler}
       />
-
-      <CarouselPagination />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
+    backgroundColor: 'green',
+    width: '100%',
+    height: 200,
   },
 });
+
+const data = [
+  {
+    id: 1,
+    content: 'aaaa',
+    link: 'aaa link',
+  },
+  {
+    id: 2,
+    content: 'bbb',
+    link: 'bbb link',
+  },
+  {
+    id: 3,
+    content: 'aaaa',
+    link: 'ccc link',
+  },
+];
