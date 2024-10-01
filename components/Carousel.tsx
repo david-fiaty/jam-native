@@ -13,7 +13,6 @@ export default function Carousel() {
     },
   });
   
-
   return (  
     <View style={styles.container}>
       <Animated.FlatList 
