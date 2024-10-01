@@ -1,10 +1,16 @@
 import { Text, Image, View, Button, StyleSheet, FlatList } from 'react-native';
-import CarouselItem from './CarouselItem';
 
-export default function Carousel() {
+type Props = {
+  item: object,
+  index: number,
+}
+
+
+export default function CarouselItem({item, index}: Props) {
   return (  
-    <View style={styles.container}>
-      <FlatList data={data} renderItem={({item, index}) => <CarouselItem item={item} index={index} />} />
+    <View>
+      <Text>{index}</Text>
+      <Text>{item.content}</Text>
     </View>
   );
 }
