@@ -1,10 +1,10 @@
+import { useState } from 'react';
 import { View, StyleSheet, ViewToken } from 'react-native';
 import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
 import CarouselItem from './CarouselItem';
 import CarouselPager from './CarouselPager';
-import { useState, } from 'react';
 
-export default function Carousel() {
+export default function CarouselController() {
   const scrollX = useSharedValue(0);
   const [pagerIndex, setPagerIndex] = useState(0);
   const onScrollHandler = useAnimatedScrollHandler({

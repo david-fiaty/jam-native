@@ -1,5 +1,5 @@
 import { Text, Image, View, StyleSheet } from 'react-native';
-import Carousel from '../components/Carousel';
+import Carousel from '../components/carousel/Controller';
 import { Button } from '@rneui/themed';
 
 export default function Home() {
