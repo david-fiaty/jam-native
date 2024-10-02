@@ -13,7 +13,7 @@ export default function Home() {
         <Carousel />
       </View>
       <View style={styles.loginContainer}>
-        <Button title="Login/Signup" type="outline" style={styles.loginButton} />
+        <Button title="Login/Signup" type="outline" buttonStyle={styles.loginButton} />
       </View>
       <Button title="Skip" type="clear" />
       <View style={styles.buttonGroup}>
@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
   },
   loginButton: {
     borderRadius: 10,
+    overflow: 'hidden',
   },
   buttonGroup: {
     display: 'flex',
