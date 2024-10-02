@@ -35,7 +35,6 @@ export default function CarouselController() {
         viewabilityConfig={viewabilityConfig}
         onViewableItemsChanged={onViewableItemsChanged}
       />
-
       <CarouselPager data={data} pagerIndex={pagerIndex}/> 
     </View>
   );
@@ -45,9 +44,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'green',
     width: '100%',
-    height: 200,
   },
 });
 
