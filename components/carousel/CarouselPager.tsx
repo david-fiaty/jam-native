@@ -19,9 +19,7 @@ export default function CarouselPager({ data, pagerIndex }: Props) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'red',
     flexDirection: 'row',
-    height: 60,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -29,7 +27,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'gray',
     height: 8,
     width: 8,
-    marginHorizontal: 2,
+    marginHorizontal: 4,
     borderRadius: 8,
   },
 });

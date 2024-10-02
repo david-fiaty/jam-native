@@ -38,12 +38,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: width,
-    backgroundColor: 'orange',
+    paddingLeft: 30,
+    paddingRight: 30,
   },
   itemTitle: {
     textTransform: 'uppercase',
+    marginBottom: 20,
+    textAlign: 'center',
   },
   itemContent: {
-
+    textAlign: 'center',
   },
 });
