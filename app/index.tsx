@@ -1,11 +1,12 @@
-import { Text, Image, View, StyleSheet } from 'react-native';
+import { Image, View, StyleSheet } from 'react-native';
 import Carousel from '../components/carousel/Controller';
 import { Button } from '@rneui/themed';
+import { SvgImage } from '@/components/SvgImage';
 
 export default function Home() {
   return (  
     <View style={styles.container}>
-      <Image source={require('@/assets/images/jam-logo.png')} style={styles.logo} />    
+      <SvgImage />    
       <Carousel />
       <Button title="Login/Signup" type="outline" />
       <Button title="Skip" type="clear" />
@@ -25,10 +26,6 @@ const styles = StyleSheet.create({
     alignItems: "center", 
     alignContent: "center",
     backgroundColor: "#FFFFFF",
-  },
-  logo: {
-    alignSelf: "center",
-    marginTop: 100,
   },
   buttonGroup: {
     display: 'flex',
