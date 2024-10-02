@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Dimensions } from 'react-native';
+import { StyleSheet, Text, Dimensions } from 'react-native';
 import Animated, { SharedValue, useAnimatedStyle, interpolate, Extrapolation } from 'react-native-reanimated';
 
 type Props = {
@@ -17,7 +17,7 @@ export default function CarouselItem({item, index, scrollX}: Props) {
           translateX: interpolate(
             scrollX.value,
             [(index - 1) * width, index * width, (index + 1) * width],
-            [-width * 0.25, 0 , width * 0.25],
+            [-width * 0.1, 0, width * 0.1],
             Extrapolation.CLAMP,
           ),
         },

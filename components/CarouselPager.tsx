@@ -1,13 +1,11 @@
 import { StyleSheet, View } from 'react-native';
-import Animated, { SharedValue, useAnimatedStyle, interpolate, Extrapolation } from 'react-native-reanimated';
 
 type Props = {
   data: [],
   pagerIndex: number,
-  scrollX: SharedValue<number>
 }
 
-export default function CarouselPager({ data, pagerIndex, scrollX }: Props) {
+export default function CarouselPager({ data, pagerIndex }: Props) {
   return (  
     <View style={styles.container}>
       {data.map((_, index) => {
