@@ -6,8 +6,12 @@ import { SvgImage } from '@/components/SvgImage';
 export default function Home() {
   return (  
     <View style={styles.container}>
-      <SvgImage uri={require('@/assets/images/jam-logo.png')} />    
-      <Carousel />
+      <View>
+        <SvgImage uri={require('@/assets/images/jam-logo.png')} />    
+      </View>
+      <View style={styles.carousel}>
+        <Carousel />
+      </View>
       <Button title="Login/Signup" type="outline" />
       <Button title="Skip" type="clear" />
       <View style={styles.buttonGroup}>
@@ -20,12 +24,15 @@ export default function Home() {
 
 const styles = StyleSheet.create({
   container: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center", 
-    alignContent: "center",
-    backgroundColor: "#FFFFFF",
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center', 
+    alignContent: 'center',
+    backgroundColor: '#FFFFFF',
+  },
+  carousel: {
+    width: '80%',
   },
   buttonGroup: {
     display: 'flex',
