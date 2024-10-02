@@ -1,16 +1,19 @@
 import { Image, View, StyleSheet } from 'react-native';
 
-export function SvgImage() {
+type Props = {
+  uri: string,
+};
+
+export function SvgImage({uri}: Props) {
   return (
     <View style={styles.container}>
-      <Image source={require('@/assets/images/jam-logo.png')} style={styles.image} />    
+      <Image source={uri} style={styles.image} />    
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'blue',
     marginTop: 100,
   },
   image: {

@@ -5,7 +5,7 @@ type Props = {
   item: object,
   index: number,
   scrollX: SharedValue<number>
-}
+};
 
 const {width} = Dimensions.get('screen');
 
@@ -27,18 +27,23 @@ export default function CarouselItem({item, index, scrollX}: Props) {
 
   return (  
     <Animated.View style={[styles.itemContainer, itemAnimation]}>
-      <Text>{item.title}</Text>
-      <Text>{item.content}</Text>
+      <Text style={styles.itemTitle}>{item.title}</Text>
+      <Text style={styles.itemContent}>{item.content}</Text>
     </Animated.View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   itemContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    gap: 20,
     width: width,
     backgroundColor: 'orange',
+  },
+  itemTitle: {
+    textTransform: 'uppercase',
+  },
+  itemContent: {
+
   },
 });
