@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
   itemContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    gap: 20,
     width: width,
     backgroundColor: 'orange',
   },
