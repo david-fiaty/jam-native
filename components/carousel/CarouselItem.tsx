@@ -27,8 +27,8 @@ export default function CarouselItem({item, index, scrollX}: Props) {
 
   return (  
     <Animated.View style={[styles.itemContainer, itemAnimation]}>
-      <Text>{item.title}</Text>
-      <Text>{item.content}</Text>
+      <Text style={styles.itemTitle}>{item.title}</Text>
+      <Text style={styles.itemContent}>{item.content}</Text>
     </Animated.View>
   );
 };
@@ -40,5 +40,11 @@ const styles = StyleSheet.create({
     gap: 20,
     width: width,
     backgroundColor: 'orange',
+  },
+  itemTitle: {
+    textTransform: 'uppercase',
+  },
+  itemContent: {
+
   },
 });
