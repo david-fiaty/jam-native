@@ -6,7 +6,7 @@ import { SvgImage } from '@/components/SvgImage';
 export default function Home() {
   return (  
     <View style={styles.container}>
-      <SvgImage />    
+      <SvgImage uri={require('@/assets/images/jam-logo.png')} />    
       <Carousel />
       <Button title="Login/Signup" type="outline" />
       <Button title="Skip" type="clear" />
@@ -16,7 +16,7 @@ export default function Home() {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
