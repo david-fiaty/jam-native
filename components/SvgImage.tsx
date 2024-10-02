@@ -14,7 +14,6 @@ export function SvgImage({uri}: Props) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'blue',
     marginTop: 100,
   },
   image: {
