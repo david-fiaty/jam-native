@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   carousel: {
-    width: '80%',
+    justifyContent: "center",
+    alignItems: 'center',
   },
   buttonGroup: {
     display: 'flex',
