@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   loginButton: {
-    borderRadius: 10,
+    borderRadius: 30,
     overflow: 'hidden',
   },
   buttonGroup: {
