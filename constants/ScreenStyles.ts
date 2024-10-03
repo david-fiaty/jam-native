@@ -8,4 +8,7 @@ export const ScreenStyles = {
     backgroundColor: '#FFFFFF',
     height: '100%',
   },
+  logo: {
+    marginTop: -100,
+  },
 };

@@ -2,15 +2,15 @@ import { View, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Button } from '@rneui/themed';
 import Carousel from '../components/carousel/Controller';
-import { SvgImage } from '@/components/SvgImage';
 import { ScreenStyles } from '@/constants/ScreenStyles';
+import { SvgImage } from '@/components/SvgImage';
 
 const HomeScreen = () => {
   const router = useRouter();
 
   return (  
     <View style={ScreenStyles.container}>
-      <View style={styles.logo}>
+      <View style={ScreenStyles.logo}>
         <SvgImage uri={require('@/assets/images/jam-logo.png')} />    
       </View>
       <View style={styles.carousel}>
@@ -29,9 +29,6 @@ const HomeScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  logo: {
-    marginTop: -100,
-  },
   carousel: {
     justifyContent: "center",
     alignItems: 'center',
