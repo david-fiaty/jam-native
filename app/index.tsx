@@ -3,12 +3,13 @@ import { useRouter } from 'expo-router';
 import { Button } from '@rneui/themed';
 import Carousel from '../components/carousel/Controller';
 import { SvgImage } from '@/components/SvgImage';
+import { ScreenStyles } from '@/constants/ScreenStyles';
 
 const HomeScreen = () => {
   const router = useRouter();
 
   return (  
-    <View style={styles.container}>
+    <View style={ScreenStyles.container}>
       <View style={styles.logo}>
         <SvgImage uri={require('@/assets/images/jam-logo.png')} />    
       </View>
@@ -28,15 +29,6 @@ const HomeScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center', 
-    alignContent: 'center',
-    backgroundColor: '#FFFFFF',
-    height: '100%',
-  },
   logo: {
     marginTop: -100,
   },

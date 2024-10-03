@@ -1,9 +1,10 @@
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
+import { ScreenStyles } from '@/constants/ScreenStyles';
 
 const AuthenticationScreen = () => {
-  return (
-    <Text>AuthenticationScreen</Text>
-  );
+  <View style={ScreenStyles.container}>
+    <Text>Authentication Screen</Text>
+  </View>
 };
 
 const styles = StyleSheet.create({
