@@ -1,9 +1,13 @@
-import { Image, View, StyleSheet } from 'react-native';
-import Carousel from '../components/carousel/Controller';
+import { View, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
 import { Button } from '@rneui/themed';
+import Carousel from '../components/carousel/Controller';
 import { SvgImage } from '@/components/SvgImage';
 
+
 export default function Home() {
+  const router = useRouter();
+
   return (  
     <View style={styles.container}>
       <View style={styles.logo}>
@@ -12,9 +16,14 @@ export default function Home() {
       <View style={styles.carousel}>
         <Carousel />
       </View>
+
       <View style={styles.loginContainer}>
-        <Button title="Login/Signup" type="outline" buttonStyle={styles.loginButton} />
+        <Button title="Login/Signup" type="outline" buttonStyle={styles.loginButton} onPress={() => router.push('/authentication')}/>
       </View>
+
+
+
+
       <Button title="Skip" type="clear" />
       <View style={styles.buttonGroup}>
         <Button title="About" type="clear" />
