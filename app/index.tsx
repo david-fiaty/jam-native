@@ -17,13 +17,13 @@ const HomeScreen = () => {
       </View>
 
       <View style={styles.loginContainer}>
-        <Button title="Login/Signup" type="outline" buttonStyle={styles.loginButton} onPress={() => router.push('/authentication')}/>
+        <Button title="Login/Signup" type="outline" buttonStyle={styles.loginButton} onPress={() => router.push('/authentication')} />
       </View>
 
       <Button title="Skip" type="clear" />
       <View style={styles.buttonGroup}>
-        <Button title="About" type="clear" />
-        <Button title="Legal" type="clear" />
+        <Button title="About" type="clear" onPress={() => router.push('/about')} />
+        <Button title="Legal" type="clear" onPress={() => router.push('/legal')} />
       </View>
     </View>
   );
