@@ -4,8 +4,7 @@ import { Button } from '@rneui/themed';
 import Carousel from '../components/carousel/Controller';
 import { SvgImage } from '@/components/SvgImage';
 
-
-export default function Home() {
+const HomeScreen = () => {
   const router = useRouter();
 
   return (  
@@ -18,13 +17,13 @@ export default function Home() {
       </View>
 
       <View style={styles.loginContainer}>
-        <Button title="Login/Signup" type="outline" buttonStyle={styles.loginButton} onPress={() => router.push('/authentication')}/>
+        <Button title="Login/Signup" type="outline" buttonStyle={styles.loginButton} onPress={() => router.push('/authentication')} />
       </View>
 
       <Button title="Skip" type="clear" />
       <View style={styles.buttonGroup}>
-        <Button title="About" type="clear" />
-        <Button title="Legal" type="clear" />
+        <Button title="About" type="clear" onPress={() => router.push('/about')} />
+        <Button title="Legal" type="clear" onPress={() => router.push('/legal')} />
       </View>
     </View>
   );
@@ -62,3 +61,5 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 });
+
+export default HomeScreen;

@@ -1,12 +1,13 @@
 import { StyleSheet, Text } from 'react-native';
 
-
-export default function AboutScreen() {
+const AboutScreen = () => {
   return (
     <Text>AuthenticationScreen</Text>
   );
-}
+};
 
 const styles = StyleSheet.create({
 
 });
+
+export default AboutScreen;
