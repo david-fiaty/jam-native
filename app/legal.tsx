@@ -1,12 +1,13 @@
 import { StyleSheet, Text } from 'react-native';
 
-
-export default function LegalScreen() {
+const LegalScreen = () => {
   return (
     <Text>LegalScreen</Text>
   );
-}
+};
 
 const styles = StyleSheet.create({
 
 });
+
+export default LegalScreen;
