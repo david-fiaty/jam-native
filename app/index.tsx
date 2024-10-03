@@ -4,8 +4,7 @@ import { Button } from '@rneui/themed';
 import Carousel from '../components/carousel/Controller';
 import { SvgImage } from '@/components/SvgImage';
 
-
-export default function Home() {
+const HomeScreen = () => {
   const router = useRouter();
 
   return (  
@@ -62,3 +61,5 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 });
+
+export default HomeScreen;
