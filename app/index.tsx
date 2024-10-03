@@ -21,9 +21,6 @@ export default function Home() {
         <Button title="Login/Signup" type="outline" buttonStyle={styles.loginButton} onPress={() => router.push('/authentication')}/>
       </View>
 
-
-
-
       <Button title="Skip" type="clear" />
       <View style={styles.buttonGroup}>
         <Button title="About" type="clear" />
