@@ -14,7 +14,7 @@ const ItemHeader = ({item, index}: Props) => {
         <Text style={styles.text}>User name</Text>
       </View>
       <View>
-        <Ionicons name="ellipsis-horizontal-sharp" size={24} color="black" />
+        <Ionicons name="ellipsis-horizontal-sharp" size={24} color={GlobalStyles.icon.color} />
       </View>
     </View>
   );
@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: GlobalStyles.text,
-  icon: GlobalStyles.icon,
 });
 
 export default ItemHeader;
