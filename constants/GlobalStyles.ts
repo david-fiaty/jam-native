@@ -16,10 +16,11 @@ export const GlobalStyles = {
     fontSize: 14,
   },
   input: {
-    width: 300,
+    width: '80%',
+    height: 45,
     borderWidth: 1, 
-    borderColor: '#000', 
-    borderRadius: 5,
-    paddingHorizontal: 10, 
+    borderColor: '#0A00AA', 
+    borderRadius: 6,
+    paddingHorizontal: 12, 
   },
 };
