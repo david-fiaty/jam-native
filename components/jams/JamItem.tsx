@@ -16,6 +16,7 @@ const JamItem = ({item, index}: Props) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'gray',
+    marginBottom: 20,
   },
 });
 
