@@ -1,4 +1,8 @@
 export const GlobalStyles = {
+  color: {
+    primary: '#0A00AA',
+    secondary: '#FAA000',
+  },
   container: {
     display: 'flex',
     flexDirection: 'column',
