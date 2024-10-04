@@ -16,7 +16,7 @@ const Login = () => {
         placeholder="Enter your email address"
         placeholderTextColor={GlobalStyles.text.color}
       />
-      <View style={GlobalStyles.buttonContainer}>
+      <View style={styles.continue}>
         <Button 
           title="Continue" 
         />
@@ -31,6 +31,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 20,
     textAlign: 'center',
+  },
+  coninue: {
+    width: '80%',
+    height: 45,
   },
 });
 
