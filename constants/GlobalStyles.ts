@@ -1,26 +1,28 @@
+const color = {
+  primary: '#0A00AA',
+  secondary: '#FAA000',
+  background: '#FFFFFF',
+};
+
 export const GlobalStyles = {
-  color: {
-    primary: '#0A00AA',
-    secondary: '#FAA000',
-  },
   container: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center', 
     alignContent: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: color.background,
     height: '100%',
   },
   text: {
-    color: '#0A00AA',
+    color: color.primary,
     fontSize: 14,
   },
   input: {
     width: '80%',
     height: 45,
     borderWidth: 1, 
-    borderColor: '#0A00AA', 
+    borderColor: color.primary, 
     borderRadius: 6,
     paddingHorizontal: 12, 
     marginBottom: 10,
