@@ -1,8 +1,11 @@
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 
 const AboutScreen = () => {
   return (
-    <Text>AuthenticationScreen</Text>
+    <View style={GlobalStyles.container}>
+      <Text>About Screen</Text>
+    </View>
   );
 };
 

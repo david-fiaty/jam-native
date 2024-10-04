@@ -1,8 +1,15 @@
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
+import { GlobalStyles } from '@/constants/GlobalStyles';
+import { SvgImage } from '@/components/SvgImage';
 
 const AuthenticationScreen = () => {
   return (
-    <Text>AuthenticationScreen</Text>
+    <View style={GlobalStyles.container}>
+      <View style={GlobalStyles.logo}>
+        <SvgImage uri={require('@/assets/images/jam-logo.png')} />    
+      </View>
+      <Text>Authentication Screen</Text>
+    </View>
   );
 };
 

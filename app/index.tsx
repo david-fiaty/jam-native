@@ -2,44 +2,51 @@ import { View, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Button } from '@rneui/themed';
 import Carousel from '../components/carousel/Controller';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 import { SvgImage } from '@/components/SvgImage';
 
 const HomeScreen = () => {
   const router = useRouter();
 
   return (  
-    <View style={styles.container}>
-      <View style={styles.logo}>
+    <View style={GlobalStyles.container}>
+      <View style={GlobalStyles.logo}>
         <SvgImage uri={require('@/assets/images/jam-logo.png')} />    
       </View>
       <View style={styles.carousel}>
         <Carousel />
       </View>
       <View style={styles.loginContainer}>
-        <Button title="Login/Signup" type="outline" buttonStyle={styles.loginButton} onPress={() => router.push('/authentication')} />
+        <Button 
+          title="Login / Signup" 
+          type="outline" 
+          buttonStyle={styles.loginButton} 
+          titleStyle={[GlobalStyles.text, {textTransform: 'uppercase', fontSize: 13}]}
+          onPress={() => router.push('/authentication')} 
+        />
       </View>
-      <Button title="Skip" type="clear" />
+      <View>
+        <Button title="Skip" type="clear" titleStyle={GlobalStyles.text} />
+      </View>
       <View style={styles.buttonGroup}>
-        <Button title="About" type="clear" onPress={() => router.push('/about')} />
-        <Button title="Legal" type="clear" onPress={() => router.push('/legal')} />
+        <Button 
+          title="About" 
+          type="clear" 
+          onPress={() => router.push('/about')} 
+          titleStyle={GlobalStyles.text}
+        />
+        <Button 
+          title="Legal" 
+          type="clear" 
+          onPress={() => router.push('/legal')} 
+          titleStyle={GlobalStyles.text}
+        />
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center', 
-    alignContent: 'center',
-    backgroundColor: '#FFFFFF',
-    height: '100%',
-  },
-  logo: {
-    marginTop: -100,
-  },
   carousel: {
     justifyContent: "center",
     alignItems: 'center',
