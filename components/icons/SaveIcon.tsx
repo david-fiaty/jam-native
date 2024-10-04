@@ -4,14 +4,19 @@ import { GlobalStyles } from '@/constants/GlobalStyles';
 
 const SaveIcon = () => {
   return (
-    <View>        
+    <View style={styles.container}>       
       <AntDesign name="arrowdown" size={24} color={GlobalStyles.icon.color} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  text: GlobalStyles.text,
+  container: {
+    backgroundColor: GlobalStyles.icon.backgroundColor,
+    borderRadius: 35,
+    width: 35,
+    height: 35,
+  },
 });
 
 export default SaveIcon;
