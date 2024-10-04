@@ -1,6 +1,9 @@
 # Multilanguages
 https://medium.com/@prathiba2796/internationalization-and-localization-in-react-native-d37c412f42f9
 
+# SVG
+https://withfra.me/react-native-tutorials/how-to-use-svg-in-react-native
+
 ### SCREEN COMPONENTS ###
 Splash
   Logo
