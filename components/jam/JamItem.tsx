@@ -1,7 +1,7 @@
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import { StyleSheet, View, Text } from 'react-native';
 import ItemHeader from './ItemHeader';
-import ItemCarousel from './ItemCarousel';
+import ItemImages from './ItemImages';
 import ItemToolbar from './ItemToolbar';
 import ItemContent from './ItemContent';
 
@@ -14,7 +14,7 @@ const JamItem = ({item, index}: Props) => {
   return (
     <View style={styles.container}>
       <ItemHeader item={item} index={index} />
-      <ItemCarousel item={item} index={index} />
+      <ItemImages item={item} index={index} />
       <ItemToolbar item={item} index={index} />
       <ItemContent item={item} index={index} />
     </View>
