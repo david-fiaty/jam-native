@@ -11,7 +11,7 @@ const ItemToolbar = ({item, index}: Props) => {
   return (
     <View style={styles.container}>
       <View>        
-        <AntDesign name="arrowdown" size={24} color={GlobalStyles.text.color} />
+        <AntDesign name="arrowdown" size={24} color={GlobalStyles.icon.color} />
       </View>
     </View>
   );

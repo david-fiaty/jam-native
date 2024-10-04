@@ -11,7 +11,7 @@ export default function CarouselPager({ data, pagerIndex }: Props) {
     <View style={styles.container}>
       {data.map((_, index) => {
         return (
-          <View key={index} style={[styles.dot, {backgroundColor: pagerIndex == index ? GlobalStyles.text.color : '#F1F1F1'}]}></View>
+          <View key={index} style={[styles.pager, {backgroundColor: pagerIndex == index ? GlobalStyles.pager.color : '#F1F1F1'}]}></View>
         );
       })}
     </View>
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  dot: {
+  pager: {
     height: 8,
     width: 8,
     marginHorizontal: 4,
