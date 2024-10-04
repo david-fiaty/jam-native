@@ -18,10 +18,10 @@ const HomeScreen = () => {
       </View>
       <View style={styles.loginContainer}>
         <Button 
-          title="Login/Signup" 
+          title="Login / Signup" 
           type="outline" 
           buttonStyle={styles.loginButton} 
-          titleStyle={[GlobalStyles.text, {textTransform: 'uppercase', fontSize: 14}]}
+          titleStyle={[GlobalStyles.text, {textTransform: 'uppercase', fontSize: 13}]}
           onPress={() => router.push('/authentication')} 
         />
       </View>
