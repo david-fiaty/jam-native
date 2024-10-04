@@ -1,4 +1,4 @@
-export const ScreenStyles = {
+export const GlobalStyles = {
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -13,5 +13,6 @@ export const ScreenStyles = {
   },
   text: {
     color: '#0A00AA',
+    fontSize: 14,
   },
 };

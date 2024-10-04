@@ -2,15 +2,15 @@ import { View, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Button } from '@rneui/themed';
 import Carousel from '../components/carousel/Controller';
-import { ScreenStyles } from '@/constants/ScreenStyles';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 import { SvgImage } from '@/components/SvgImage';
 
 const HomeScreen = () => {
   const router = useRouter();
 
   return (  
-    <View style={ScreenStyles.container}>
-      <View style={ScreenStyles.logo}>
+    <View style={GlobalStyles.container}>
+      <View style={GlobalStyles.logo}>
         <SvgImage uri={require('@/assets/images/jam-logo.png')} />    
       </View>
       <View style={styles.carousel}>
@@ -18,28 +18,28 @@ const HomeScreen = () => {
       </View>
       <View style={styles.loginContainer}>
         <Button 
-          title="Login/Signup" 
+          title="Login / Signup" 
           type="outline" 
           buttonStyle={styles.loginButton} 
-          titleStyle={ScreenStyles.text}
+          titleStyle={[GlobalStyles.text, {textTransform: 'uppercase', fontSize: 13}]}
           onPress={() => router.push('/authentication')} 
         />
       </View>
       <View>
-        <Button title="Skip" type="clear" titleStyle={ScreenStyles.text} />
+        <Button title="Skip" type="clear" titleStyle={GlobalStyles.text} />
       </View>
       <View style={styles.buttonGroup}>
         <Button 
           title="About" 
           type="clear" 
           onPress={() => router.push('/about')} 
-          titleStyle={ScreenStyles.text}
+          titleStyle={GlobalStyles.text}
         />
         <Button 
           title="Legal" 
           type="clear" 
           onPress={() => router.push('/legal')} 
-          titleStyle={ScreenStyles.text}
+          titleStyle={GlobalStyles.text}
         />
       </View>
     </View>

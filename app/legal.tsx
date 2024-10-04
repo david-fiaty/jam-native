@@ -1,9 +1,9 @@
 import { StyleSheet, View, Text } from 'react-native';
-import { ScreenStyles } from '@/constants/ScreenStyles';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 
 const LegalScreen = () => {
   return (
-    <View style={ScreenStyles.container}>
+    <View style={GlobalStyles.container}>
       <Text>Legal Screen</Text>
     </View>
   );
