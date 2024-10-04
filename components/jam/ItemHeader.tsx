@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     paddingRight: 14,
     paddingBottom: 8,
     paddingLeft: 14,
-
   },
   text: GlobalStyles.text,
 });
