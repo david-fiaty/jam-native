@@ -9,6 +9,7 @@ type Props = {
 const ItemHeader = ({item, index}: Props) => {
   return (
     <View style={styles.container}>
+      <Text>User name</Text>
       <Ionicons name="ellipsis-horizontal-sharp" size={24} color="black" />
     </View>
   );
@@ -16,6 +17,8 @@ const ItemHeader = ({item, index}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
+    display: 'flex',
+    flexDirection: 'row',
   },
 });
 
