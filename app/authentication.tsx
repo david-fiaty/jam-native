@@ -8,13 +8,17 @@ const AuthenticationScreen = () => {
       <View style={GlobalStyles.logo}>
         <SvgImage uri={require('@/assets/images/jam-logo.png')} />    
       </View>
-      <Text>Authentication Screen</Text>
+      <Text style={[GlobalStyles.text, styles.title]}>Authentication Screen</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-
+  title: {
+    textTransform: 'uppercase',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
 });
 
 export default AuthenticationScreen;
