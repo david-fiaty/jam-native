@@ -3,7 +3,7 @@ import { useRouter } from 'expo-router';
 import { Button } from '@rneui/themed';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 
-const BottomNavigation = () => {
+const BottomLinks = () => {
   const router = useRouter();
 
   return (
@@ -35,4 +35,4 @@ const styles = StyleSheet.create({
   text: GlobalStyles.text,
 });
 
-export default BottomNavigation;
+export default BottomLinks;

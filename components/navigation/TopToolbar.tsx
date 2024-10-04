@@ -1,7 +1,7 @@
 import { View, StyleSheet } from 'react-native';
 import { SvgImage } from '@/components/SvgImage';
 
-const TopNavigation = () => {
+const TopToolbar = () => {
   return (
     <View style={styles.container}>
       <SvgImage uri={require('@/assets/images/jam-logo.png')} width={45} height={45} />    
@@ -19,4 +19,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TopNavigation;
+export default TopToolbar;
