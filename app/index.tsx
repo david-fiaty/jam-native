@@ -17,7 +17,13 @@ const HomeScreen = () => {
         <Carousel />
       </View>
       <View style={styles.loginContainer}>
-        <Button title="Login/Signup" type="outline" buttonStyle={styles.loginButton} onPress={() => router.push('/authentication')} />
+        <Button 
+          title="Login/Signup" 
+          type="outline" 
+          buttonStyle={styles.loginButton} 
+          titleStyle={ScreenStyles.text}
+          onPress={() => router.push('/authentication')} 
+        />
       </View>
       <Button title="Skip" type="clear" />
       <View style={styles.buttonGroup}>
