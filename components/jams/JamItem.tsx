@@ -1,3 +1,4 @@
+import { GlobalStyles } from '@/constants/GlobalStyles';
 import { StyleSheet, View, FlatList, Text } from 'react-native';
 
 type Props = {
@@ -15,8 +16,10 @@ const JamItem = ({item, index}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'gray',
     marginBottom: 20,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: GlobalStyles.border.borderColor,
   },
 });
 
