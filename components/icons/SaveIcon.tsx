@@ -5,7 +5,7 @@ import { GlobalStyles } from '@/constants/GlobalStyles';
 const SaveIcon = () => {
   return (
     <View style={styles.container}>       
-      <AntDesign name="arrowdown" size={24} color={GlobalStyles.icon.color} />
+      <AntDesign name="arrowdown" size={18} color={GlobalStyles.icon.color} />
     </View>
   );
 };
@@ -14,9 +14,8 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     alignItems: 'center',
-    borderRadius: 35,
-    width: 35,
-    height: 35,
+    borderRadius: 40,
+    padding: 10,
     backgroundColor: GlobalStyles.icon.backgroundColor,
   },
 });

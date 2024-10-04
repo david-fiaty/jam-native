@@ -1,6 +1,7 @@
-const color = {
+export const Colors = {
   primary: '#0A00AA',
   secondary: '#FAA000',
+  tertiary: '#E1E0F4',
   background: '#FFFFFF',
 };
 
@@ -11,28 +12,28 @@ export const GlobalStyles = {
     justifyContent: 'center',
     alignItems: 'center', 
     alignContent: 'center',
-    backgroundColor: color.background,
+    backgroundColor: Colors.background,
     height: '100%',
   },
   text: {
-    color: color.primary,
+    color: Colors.primary,
     fontSize: 14,
   },
   border: {
-    color: color.primary,
+    color: Colors.primary,
   },
   icon: {
-    color: color.primary,
-    backgroundColor: color.secondary,
+    color: Colors.primary,
+    backgroundColor: Colors.secondary,
   },
   pager: {
-    color: color.primary,
+    color: Colors.primary,
   },
   input: {
     width: '80%',
     height: 45,
     borderWidth: 1, 
-    borderColor: color.primary, 
+    borderColor: Colors.primary, 
     borderRadius: 6,
     paddingHorizontal: 12, 
     marginBottom: 10,
