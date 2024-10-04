@@ -16,12 +16,6 @@ export const GlobalStyles = {
     color: '#0A00AA',
     fontSize: 14,
   },
-  border: {
-    borderColor: '#0A00AA', 
-  },
-  icon: {
-    color: '#0A00AA', 
-  },
   input: {
     width: '80%',
     height: 45,
