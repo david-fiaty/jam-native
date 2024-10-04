@@ -1,6 +1,6 @@
 import { StyleSheet, Text, Dimensions } from 'react-native';
 import Animated, { SharedValue, useAnimatedStyle, interpolate, Extrapolation } from 'react-native-reanimated';
-import { ScreenStyles } from '@/constants/ScreenStyles';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 
 type Props = {
   item: object,
@@ -28,8 +28,8 @@ export default function CarouselItem({item, index, scrollX}: Props) {
 
   return (  
     <Animated.View style={[styles.itemContainer, itemAnimation]}>
-      <Text style={[ScreenStyles.text, styles.itemTitle]}>{item.title}</Text>
-      <Text style={[ScreenStyles.text, styles.itemContent]}>{item.content}</Text>
+      <Text style={[GlobalStyles.text, styles.itemTitle]}>{item.title}</Text>
+      <Text style={[GlobalStyles.text, styles.itemContent]}>{item.content}</Text>
     </Animated.View>
   );
 };
