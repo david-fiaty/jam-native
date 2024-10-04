@@ -15,6 +15,10 @@ const ItemContent = ({item, index}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 8,
+    paddingRight: 14,
+    paddingBottom: 8,
+    paddingLeft: 14,
   },
 });
 
