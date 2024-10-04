@@ -20,14 +20,14 @@ const Index = () => {
           type="outline" 
           buttonStyle={styles.loginButton} 
           titleStyle={[GlobalStyles.text, {textTransform: 'uppercase', fontSize: 13}]}
-          onPress={() => router.push('/authentication')} 
+          onPress={() => router.push('/login')} 
         />
       </View>
       <Button 
         title="Skip" 
         type="clear" 
         titleStyle={GlobalStyles.text} 
-        onPress={() => router.push('/jam')} 
+        onPress={() => router.push('/jams')} 
       />
       <View style={styles.buttonGroup}>
         <Button 
