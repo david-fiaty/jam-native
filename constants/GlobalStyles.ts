@@ -15,4 +15,11 @@ export const GlobalStyles = {
     color: '#0A00AA',
     fontSize: 14,
   },
+  input: {
+    width: 300,
+    borderWidth: 1, 
+    borderColor: '#000', 
+    borderRadius: 5,
+    paddingHorizontal: 10, 
+  },
 };
