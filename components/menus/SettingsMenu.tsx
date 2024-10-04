@@ -5,7 +5,7 @@ import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 const SettingsMenu = () => {
   return (
     <View style={styles.container}>        
-      <SimpleLineIcons name="menu" size={20} color={GlobalStyles.icon.color} />
+      <SimpleLineIcons name="menu" size={14} color={GlobalStyles.icon.color} />
     </View>
   );
 };
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.tertiary,
     borderRadius: 40,
-    padding: 10,
+    padding: 6,
   },
 });
 
