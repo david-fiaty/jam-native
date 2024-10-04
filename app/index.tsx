@@ -21,7 +21,7 @@ const HomeScreen = () => {
           title="Login/Signup" 
           type="outline" 
           buttonStyle={styles.loginButton} 
-          titleStyle={GlobalStyles.text}
+          titleStyle={[GlobalStyles.text, {textTransform: 'uppercase', fontSize: 14}]}
           onPress={() => router.push('/authentication')} 
         />
       </View>
