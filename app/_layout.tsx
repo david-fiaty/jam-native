@@ -32,7 +32,7 @@ export default function RootLayout() {
         <Stack.Screen name="authentication" options={{ headerShown: false }} />
         <Stack.Screen name="about" options={{ headerShown: false }} />
         <Stack.Screen name="legal" options={{ headerShown: false }} />
-        <Stack.Screen name="jam" options={{ headerShown: false }} />
+        <Stack.Screen name="jams" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: true, title: "Tab title" }} />
       </Stack>
     </ThemeProvider>

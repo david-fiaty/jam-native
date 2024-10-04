@@ -5,7 +5,7 @@ import Carousel from '../components/carousel/Controller';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import { SvgImage } from '@/components/SvgImage';
 
-const HomeScreen = () => {
+const Index = () => {
   const router = useRouter();
 
   return (  
@@ -70,4 +70,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default Index;

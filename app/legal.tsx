@@ -4,7 +4,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 
-const LegalScreen = () => {
+const Legal = () => {
   const navigation = useNavigation();
 
   return (
@@ -39,4 +39,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LegalScreen;
+export default Legal;
