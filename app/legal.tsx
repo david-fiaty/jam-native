@@ -5,8 +5,6 @@ import TopNavigation from '@/components/navigation/TopNavigation';
 import BackButton from '@/components/navigation/BackButton';
 
 const Legal = () => {
-  const navigation = useNavigation();
-
   return (
     <View style={styles.container}>
       <TopNavigation />
