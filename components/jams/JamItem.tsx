@@ -1,5 +1,6 @@
 import { GlobalStyles } from '@/constants/GlobalStyles';
-import { StyleSheet, View, FlatList, Text } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 type Props = {
   item: object,
@@ -10,11 +11,11 @@ const JamItem = ({item, index}: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text>header</Text> 
-        <Text>carousel</Text>
-        <Text>toolbar</Text> 
-        <Text>footer</Text> 
+        <Ionicons name="ellipsis-horizontal-sharp" size={24} color="black" />
       </View>
+      <Text>carousel</Text>
+      <Text>toolbar</Text> 
+      <Text>footer</Text> 
     </View>
   );
 };
