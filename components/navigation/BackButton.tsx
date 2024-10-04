@@ -9,7 +9,7 @@ const BackButton = () => {
 
   return (
     <View style={styles.container}>
-      <AntDesign name="left" size={20} color={GlobalStyles.text.color} style={{marginTop: 8}} />
+      <AntDesign name="left" size={20} color={GlobalStyles.color.primary} style={{marginTop: 8}} />
       <Button 
         title="About" 
         type="clear" 
