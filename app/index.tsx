@@ -25,7 +25,12 @@ const HomeScreen = () => {
           onPress={() => router.push('/authentication')} 
         />
       </View>
-      <Button title="Skip" type="clear" titleStyle={GlobalStyles.text} />
+      <Button 
+        title="Skip" 
+        type="clear" 
+        titleStyle={GlobalStyles.text} 
+        onPress={() => router.push('/jam')} 
+      />
       <View style={styles.buttonGroup}>
         <Button 
           title="About" 
