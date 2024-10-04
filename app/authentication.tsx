@@ -10,6 +10,9 @@ const AuthenticationScreen = () => {
         <SvgImage uri={require('@/assets/images/jam-logo.png')} />    
       </View>
       <Text style={[GlobalStyles.text, styles.title]}>Welcome back</Text>
+      <View>
+        <Input placeholder="yuo"></Input>
+      </View>
     </View>
   );
 };
