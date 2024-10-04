@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     textAlign: 'center',
   },
-  coninue: {
+  continue: {
     width: '80%',
     height: 45,
   },

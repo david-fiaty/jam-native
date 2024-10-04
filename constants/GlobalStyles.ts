@@ -18,6 +18,16 @@ export const GlobalStyles = {
     color: color.primary,
     fontSize: 14,
   },
+  border: {
+    color: color.primary,
+  },
+  icon: {
+    color: color.primary,
+    backgroundColor: color.secondary,
+  },
+  pager: {
+    color: color.primary,
+  },
   input: {
     width: '80%',
     height: 45,
