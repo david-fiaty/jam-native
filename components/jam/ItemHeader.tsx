@@ -10,8 +10,12 @@ type Props = {
 const ItemHeader = ({item, index}: Props) => {
   return (
     <View style={styles.container}>
-      <View><Text style={styles.text}>User name</Text></View>
-      <View><Ionicons name="ellipsis-horizontal-sharp" size={24} color="black" /></View>
+      <View>
+        <Text style={styles.text}>User name</Text>
+      </View>
+      <View>
+        <Ionicons name="ellipsis-horizontal-sharp" size={24} color="black" />
+      </View>
     </View>
   );
 };
