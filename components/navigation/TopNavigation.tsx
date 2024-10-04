@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     marginBottom: 20,
+    backgroundColor: 'black'
   },
 });
 
