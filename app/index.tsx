@@ -25,10 +25,22 @@ const HomeScreen = () => {
           onPress={() => router.push('/authentication')} 
         />
       </View>
-      <Button title="Skip" type="clear" />
+      <View>
+        <Button title="Skip" type="clear" titleStyle={ScreenStyles.text} />
+      </View>
       <View style={styles.buttonGroup}>
-        <Button title="About" type="clear" onPress={() => router.push('/about')} />
-        <Button title="Legal" type="clear" onPress={() => router.push('/legal')} />
+        <Button 
+          title="About" 
+          type="clear" 
+          onPress={() => router.push('/about')} 
+          titleStyle={ScreenStyles.text}
+        />
+        <Button 
+          title="Legal" 
+          type="clear" 
+          onPress={() => router.push('/legal')} 
+          titleStyle={ScreenStyles.text}
+        />
       </View>
     </View>
   );
