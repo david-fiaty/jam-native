@@ -20,12 +20,6 @@ const styles = StyleSheet.create({
     padding: 25,
     height: '100%',
   },
-  header: {
-
-  },
-  toolbar: {
-
-  },
   text: {
     color: GlobalStyles.text.color,
   },
