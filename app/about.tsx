@@ -10,7 +10,7 @@ const AboutScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.navbarContainer}>
-        <AntDesign name="left" size={20} color={GlobalStyles.text.color} />
+        <AntDesign name="left" size={20} color={GlobalStyles.text.color} style={{marginTop: 8}} />
         <Button 
           title="About" 
           type="clear" 
