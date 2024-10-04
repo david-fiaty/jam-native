@@ -13,6 +13,6 @@ export const GlobalStyles = {
   },
   text: {
     color: '#0A00AA',
-    fontSize: 16,
+    fontSize: 14,
   },
 };
