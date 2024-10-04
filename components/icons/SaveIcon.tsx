@@ -12,10 +12,12 @@ const SaveIcon = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: GlobalStyles.icon.backgroundColor,
+    display: 'flex',
+    alignItems: 'center',
     borderRadius: 35,
     width: 35,
     height: 35,
+    backgroundColor: GlobalStyles.icon.backgroundColor,
   },
 });
 
