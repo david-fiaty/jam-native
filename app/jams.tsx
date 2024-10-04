@@ -1,32 +1,24 @@
 import { StyleSheet, View, Text } from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
+import JamList from '@/components/jams/JamList';
 
 const Jams = () => {
   return (  
-    <View style={GlobalStyles.container}>
-      <Text>Jam list</Text>
+    <View style={styles.container}>
+      <JamList />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  carousel: {
-    justifyContent: "center",
-    alignItems: 'center',
-  },
-  loginContainer: {
-    marginTop: 40,
-  },
-  loginButton: {
-    borderRadius: 30,
-    overflow: 'hidden',
-  },
-  buttonGroup: {
+  container: {
     display: 'flex',
-    flexDirection: 'row',
-    alignContent: 'center',
-    alignItems: 'center',
-    marginTop: 20,
+    flexDirection: 'column', 
+    marginTop: 30,
+    padding: 25,
+  },
+  text: {
+    color: GlobalStyles.text.color,
   },
 });
 

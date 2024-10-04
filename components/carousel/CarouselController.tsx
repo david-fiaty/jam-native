@@ -27,7 +27,7 @@ export default function CarouselController() {
     <View style={styles.container}>
       <Animated.FlatList 
         data={data} 
-        renderItem={({item, index}) => <CarouselItem item={item} index={index} scrollX={scrollX}/>} 
+        renderItem={({item, index}) => <CarouselItem item={item} index={index} scrollX={scrollX} />} 
         horizontal={true}
         pagingEnabled={true}
         showsHorizontalScrollIndicator={false}
