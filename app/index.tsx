@@ -10,9 +10,7 @@ const Index = () => {
   return (  
     <View style={styles.container}>
       <SvgImage uri={require('@/assets/images/jam-logo.png')} width={110} height={110} />    
-      <View style={styles.carousel}>
-        <Carousel />
-      </View>
+      <Carousel />
       <LoginButton />
       <SkipButton />
       <BottomNavigation />
@@ -22,10 +20,6 @@ const Index = () => {
 
 const styles = StyleSheet.create({
   container: GlobalStyles.container,
-  carousel: {
-    justifyContent: "center",
-    alignItems: 'center',
-  },
 });
 
 export default Index;
