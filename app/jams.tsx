@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
     marginTop: 30,
     padding: 25,
     height: '100%',
-    backgroundColor: 'red',
   },
   text: {
     color: GlobalStyles.text.color,
