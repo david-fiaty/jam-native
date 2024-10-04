@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, TextInput } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import { SvgImage } from '@/components/SvgImage';
 
@@ -18,6 +18,11 @@ const AuthenticationScreen = () => {
         placeholder="Enter your email address"
         placeholderTextColor={GlobalStyles.text.color}
       />
+      <View style={GlobalStyles.buttonContainer}>
+        <Button 
+          title="Continue" 
+        />
+      </View>
     </View>
   );
 };

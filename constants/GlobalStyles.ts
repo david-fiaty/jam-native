@@ -23,4 +23,8 @@ export const GlobalStyles = {
     borderRadius: 6,
     paddingHorizontal: 12, 
   },
+  buttonContainer: {
+    width: '80%',
+    height: 45,
+  },
 };
