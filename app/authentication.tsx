@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
   title: {
     textTransform: 'uppercase',
     marginBottom: 20,
+    marginTop: 20,
     textAlign: 'center',
   },
 });
