@@ -9,7 +9,12 @@ type Props = {
 const JamItem = ({item, index}: Props) => {
   return (
     <View style={styles.container}>
-      <Text>{index}</Text>
+      <View style={styles.header}>
+        <Text>header</Text> 
+        <Text>carousel</Text>
+        <Text>toolbar</Text> 
+        <Text>footer</Text> 
+      </View>
     </View>
   );
 };
@@ -20,6 +25,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     borderColor: GlobalStyles.border.borderColor,
+  },
+  header: {
+
+  },
+  toolbar: {
+
   },
 });
 
