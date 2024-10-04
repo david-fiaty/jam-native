@@ -1,7 +1,7 @@
 import { View, StyleSheet } from 'react-native';
-import Carousel from '../components/carousel/Controller';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import { SvgImage } from '@/components/SvgImage';
+import Carousel from '@/components/carousel/Controller';
 import SkipButton from '@/components/buttons/SkipButton';
 import LoginButton from '@/components/buttons/LoginButton';
 import BottomLinks from '@/components/navigation/BottomLinks';

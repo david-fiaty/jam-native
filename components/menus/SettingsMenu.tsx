@@ -1,5 +1,6 @@
 import { StyleSheet, View } from 'react-native';
-import MenuIcon from '../icons/MenuIcon';
+import { MenuView } from '@react-native-menu/menu';
+import MenuIcon from '@/icons/MenuIcon';
 
 const SettingsMenu = () => {
   return (
