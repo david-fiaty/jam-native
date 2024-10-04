@@ -1,12 +1,12 @@
 import { StyleSheet, View, FlatList, Text } from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
-import TopNavigation from '@/components/navigation/TopNavigation';
+import TopToolbar from '@/components/navigation/TopToolbar';
 import JamItem from '@/components/jam/JamItem';
 
 const Jams = () => {
   return (  
     <View style={styles.container}>
-      <TopNavigation />
+      <TopToolbar />
       <FlatList 
         data={data} 
         horizontal={false}  
