@@ -4,6 +4,8 @@ import { Button } from '@rneui/themed';
 import Carousel from '../components/carousel/Controller';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import { SvgImage } from '@/components/SvgImage';
+import SkipButton from '@/components/buttons/SkipButton';
+import LoginButton from '@/components/buttons/LoginButton';
 
 const Index = () => {
   const router = useRouter();
@@ -14,15 +16,8 @@ const Index = () => {
       <View style={styles.carousel}>
         <Carousel />
       </View>
-      <View style={styles.loginContainer}>
-        <Button 
-          title="Login / Signup" 
-          type="outline" 
-          buttonStyle={styles.loginButton} 
-          titleStyle={[GlobalStyles.text, {textTransform: 'uppercase', fontSize: 13}]}
-          onPress={() => router.push('/login')} 
-        />
-      </View>
+      <LoginButton />
+      <SkipButton />
 
       <View style={styles.buttonGroup}>
         <Button 
@@ -46,13 +41,6 @@ const styles = StyleSheet.create({
   carousel: {
     justifyContent: "center",
     alignItems: 'center',
-  },
-  loginContainer: {
-    marginTop: 40,
-  },
-  loginButton: {
-    borderRadius: 30,
-    overflow: 'hidden',
   },
   buttonGroup: {
     display: 'flex',
