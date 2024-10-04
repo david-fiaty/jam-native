@@ -3,20 +3,16 @@ import JamItem from './JamItem';
 
 const JamList = () => {
   return (
-    <View style={styles.container}>
-      <FlatList 
-        data={data} 
-        horizontal={false}  
-        renderItem={({item, index}) => <JamItem item={item} index={index} />} 
-      />
-    </View>
+    <FlatList 
+      data={data} 
+      horizontal={false}  
+      renderItem={({item, index}) => <JamItem item={item} index={index} />} 
+    />
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'gray',
-  },
+
 });
 
 const data = [

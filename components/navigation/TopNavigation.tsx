@@ -1,5 +1,4 @@
 import { View, StyleSheet } from 'react-native';
-import { GlobalStyles } from '@/constants/GlobalStyles';
 import { SvgImage } from '@/components/SvgImage';
 
 const TopNavigation = () => {
@@ -16,6 +15,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     marginBottom: 20,
+    backgroundColor: 'black'
   },
 });
 
