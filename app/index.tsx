@@ -23,12 +23,7 @@ const Index = () => {
           onPress={() => router.push('/login')} 
         />
       </View>
-      <Button 
-        title="Skip" 
-        type="clear" 
-        titleStyle={GlobalStyles.text} 
-        onPress={() => router.push('/jams')} 
-      />
+
       <View style={styles.buttonGroup}>
         <Button 
           title="About" 
