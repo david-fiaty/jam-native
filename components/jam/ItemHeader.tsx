@@ -26,9 +26,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  text: {
-    color: GlobalStyles.text.color,
-  }
+  text: GlobalStyles.text,
+  icon: GlobalStyles.icon,
 });
 
 export default ItemHeader;
