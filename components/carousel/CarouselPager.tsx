@@ -1,4 +1,5 @@
 import { StyleSheet, View } from 'react-native';
+import { ScreenStyles } from '@/constants/ScreenStyles';
 
 type Props = {
   data: [],
@@ -10,7 +11,7 @@ export default function CarouselPager({ data, pagerIndex }: Props) {
     <View style={styles.container}>
       {data.map((_, index) => {
         return (
-          <View key={index} style={[styles.dot, {backgroundColor: pagerIndex == index ? 'black' : 'gray'}]}></View>
+          <View key={index} style={[styles.dot, {backgroundColor: pagerIndex == index ? ScreenStyles.text.color : '#F1F1F1'}]}></View>
         );
       })}
     </View>
@@ -24,10 +25,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   dot: {
-    backgroundColor: 'gray',
     height: 8,
     width: 8,
     marginHorizontal: 4,
     borderRadius: 8,
   },
 });
+
+

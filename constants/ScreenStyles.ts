@@ -11,4 +11,7 @@ export const ScreenStyles = {
   logo: {
     marginTop: -100,
   },
+  text: {
+    color: '#0A00AA',
+  },
 };
