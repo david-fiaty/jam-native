@@ -3,12 +3,14 @@ import { Button } from '@rneui/themed';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
+import TopNavigation from '@/components/navigation/TopNavigation';
 
 const About = () => {
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
+      <TopNavigation />
       <View style={styles.navbarContainer}>
         <AntDesign name="left" size={20} color={GlobalStyles.text.color} style={{marginTop: 8}} />
         <Button 
