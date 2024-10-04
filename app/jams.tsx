@@ -1,6 +1,6 @@
 import { StyleSheet, View, Text } from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
-import JamList from '@/components/JamList';
+import JamList from '@/components/jams/JamList';
 
 const Jams = () => {
   return (  
