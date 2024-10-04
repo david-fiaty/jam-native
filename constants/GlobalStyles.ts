@@ -22,6 +22,7 @@ export const GlobalStyles = {
     borderColor: '#0A00AA', 
     borderRadius: 6,
     paddingHorizontal: 12, 
+    marginBottom: 10,
   },
   buttonContainer: {
     width: '80%',
