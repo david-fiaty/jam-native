@@ -1,6 +1,6 @@
 import { View, StyleSheet } from 'react-native';
 
-const Navbar = () => {
+const BottomNavigation = () => {
   return (
     <View></View>
   );
@@ -10,4 +10,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default Navbar;
+export default BottomNavigation;

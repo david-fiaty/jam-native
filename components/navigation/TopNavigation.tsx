@@ -1,6 +1,6 @@
 import { View, StyleSheet } from 'react-native';
 
-const BottomLinks = () => {
+const TopNavigation = () => {
   return (
     <View></View>
   );
@@ -10,4 +10,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default BottomLinks;
+export default TopNavigation;
