@@ -10,9 +10,7 @@ const Index = () => {
 
   return (  
     <View style={GlobalStyles.container}>
-      <View style={GlobalStyles.logo}>
-        <SvgImage uri={require('@/assets/images/jam-logo.png')} />    
-      </View>
+      <SvgImage uri={require('@/assets/images/jam-logo.png')} width={110} height={110} />    
       <View style={styles.carousel}>
         <Carousel />
       </View>
