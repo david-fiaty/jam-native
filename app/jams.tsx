@@ -1,13 +1,17 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, FlatList, Text } from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
-import JamList from '@/components/jams/JamList';
 import TopNavigation from '@/components/navigation/TopNavigation';
+import JamItem from '@/components/jam/JamItem';
 
 const Jams = () => {
   return (  
     <View style={styles.container}>
       <TopNavigation />
-      <JamList />
+      <FlatList 
+        data={data} 
+        horizontal={false}  
+        renderItem={({item, index}) => <JamItem item={item} index={index} />} 
+      />
     </View>
   );
 };
