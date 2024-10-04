@@ -27,8 +27,4 @@ export const GlobalStyles = {
     paddingHorizontal: 12, 
     marginBottom: 10,
   },
-  buttonContainer: {
-    width: '80%',
-    height: 45,
-  },
 };
