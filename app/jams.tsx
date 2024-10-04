@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   text: {
-    color: GlobalStyles.text.color,
+    color: GlobalStyles.color.primary,
   },
 });
 

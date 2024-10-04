@@ -14,7 +14,7 @@ const Login = () => {
         maxLength={40}
         style={GlobalStyles.input}
         placeholder="Enter your email address"
-        placeholderTextColor={GlobalStyles.text.color}
+        placeholderTextColor={GlobalStyles.color.primary}
       />
       <View style={GlobalStyles.buttonContainer}>
         <Button 

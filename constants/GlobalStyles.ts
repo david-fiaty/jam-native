@@ -1,3 +1,9 @@
+const color = {
+  primary: '#0A00AA',
+  secondary: '#FAA000',
+  background: '#FFFFFF',
+};
+
 export const GlobalStyles = {
   container: {
     display: 'flex',
@@ -5,24 +11,18 @@ export const GlobalStyles = {
     justifyContent: 'center',
     alignItems: 'center', 
     alignContent: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: color.background,
     height: '100%',
   },
   text: {
-    color: '#0A00AA',
+    color: color.primary,
     fontSize: 14,
-  },
-  border: {
-    borderColor: '#0A00AA', 
-  },
-  icon: {
-    color: '#0A00AA', 
   },
   input: {
     width: '80%',
     height: 45,
     borderWidth: 1, 
-    borderColor: '#0A00AA', 
+    borderColor: color.primary, 
     borderRadius: 6,
     paddingHorizontal: 12, 
     marginBottom: 10,

@@ -14,7 +14,7 @@ const ItemHeader = ({item, index}: Props) => {
         <Text style={styles.text}>User name</Text>
       </View>
       <View>
-        <Ionicons name="ellipsis-horizontal-sharp" size={24} color={GlobalStyles.icon.color} />
+        <Ionicons name="ellipsis-horizontal-sharp" size={24} color={GlobalStyles.color.primary} />
       </View>
     </View>
   );
@@ -25,6 +25,10 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    paddingTop: 8,
+    paddingRight: 14,
+    paddingBottom: 8,
+    paddingLeft: 14,
   },
   text: GlobalStyles.text,
 });
