@@ -9,13 +9,15 @@ type Props = {
 const ItemImages = ({item, index}: Props) => {
   return (
     <View style={styles.container}>
-      <Text>carousel</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'gray',
+    width: '100%',
+    height: 280,
   },
 });
 
