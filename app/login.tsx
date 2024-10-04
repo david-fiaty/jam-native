@@ -2,7 +2,7 @@ import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import { SvgImage } from '@/components/SvgImage';
 
-const Authentication = () => {
+const Login = () => {
   return (
     <View style={GlobalStyles.container}>
       <View style={GlobalStyles.logo}>
@@ -36,4 +36,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Authentication;
+export default Login;
