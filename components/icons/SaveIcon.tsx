@@ -5,7 +5,7 @@ import { GlobalStyles } from '@/constants/GlobalStyles';
 const SaveIcon = () => {
   return (
     <View style={styles.container}>       
-      <AntDesign name="arrowdown" size={24} color={GlobalStyles.icon.color} />
+      <AntDesign name="arrowdown" size={18} color={GlobalStyles.icon.color} />
     </View>
   );
 };

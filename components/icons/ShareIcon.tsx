@@ -5,7 +5,7 @@ import { GlobalStyles } from '@/constants/GlobalStyles';
 const ShareIcon = () => {
   return (
     <View style={styles.container}>        
-      <AntDesign name="arrowup" size={24} color={GlobalStyles.icon.color} />
+      <AntDesign name="arrowup" size={18} color={GlobalStyles.icon.color} />
     </View>
   );
 };
