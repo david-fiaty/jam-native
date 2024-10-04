@@ -14,7 +14,7 @@ const ItemHeader = ({item, index}: Props) => {
         <Text style={styles.text}>User name</Text>
       </View>
       <View>
-        <Ionicons name="ellipsis-horizontal-sharp" size={24} color={GlobalStyles.color.primary} />
+        <Ionicons name="ellipsis-horizontal-sharp" size={24} color={GlobalStyles.text.color} />
       </View>
     </View>
   );

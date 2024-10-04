@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     padding: 25,
   },
   text: {
-    color: GlobalStyles.color.primary,
+    color: GlobalStyles.text.color,
   },
 });
 
