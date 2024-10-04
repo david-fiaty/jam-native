@@ -15,6 +15,7 @@ const AuthenticationScreen = () => {
         numberOfLines={4}
         maxLength={40}
         style={GlobalStyles.input}
+        placeholder="Enter your email address"
       />
     </View>
   );
