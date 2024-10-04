@@ -4,7 +4,7 @@ import { GlobalStyles } from '@/constants/GlobalStyles';
 import { SvgImage } from '@/components/SvgImage';
 import SkipButton from '@/components/buttons/SkipButton';
 import LoginButton from '@/components/buttons/LoginButton';
-import BottomNavigation from '@/components/navigation/BottomNavigation';
+import BottomLinks from '@/components/navigation/BottomLinks';
 
 const Index = () => {
   return (  
@@ -13,7 +13,7 @@ const Index = () => {
       <Carousel />
       <LoginButton />
       <SkipButton />
-      <BottomNavigation />
+      <BottomLinks />
     </View>
   );
 };
