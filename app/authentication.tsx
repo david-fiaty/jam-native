@@ -16,6 +16,7 @@ const AuthenticationScreen = () => {
         maxLength={40}
         style={GlobalStyles.input}
         placeholder="Enter your email address"
+        placeholderTextColor={GlobalStyles.text.color}
       />
     </View>
   );
