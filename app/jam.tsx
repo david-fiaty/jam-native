@@ -1,7 +1,7 @@
 import { StyleSheet, View, Text } from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 
-const JamListScreen = () => {
+const JamScreen = () => {
   return (  
     <View style={GlobalStyles.container}>
       <Text>Jam list</Text>
@@ -30,4 +30,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default JamListScreen;
+export default JamScreen;
