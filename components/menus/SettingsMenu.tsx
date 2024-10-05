@@ -5,7 +5,6 @@ import MenuItem from './MenuItem';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import BackButton from '../navigation/BackButton';
 
-
 const SettingsMenu = () => {
   const [modalVisible, setModalVisible] = useState(false);
   
