@@ -11,9 +11,13 @@ type Props = {
 const ItemToolbar = ({item, index}: Props) => {
   return (
     <View style={styles.container}>
-      <JammersIcon />
-      <SaveIcon />
-      <ShareIcon />
+      <View style={styles.left}>
+        <JammersIcon />
+      </View>
+      <View style={styles.right}>
+        <SaveIcon />
+        <ShareIcon />
+      </View>
     </View>
   );
 };
@@ -23,10 +27,21 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: 8,
+    justifyContent: 'space-between',
+    paddingTop: 10,
     paddingRight: 14,
     paddingBottom: 8,
     paddingLeft: 14,
+  },
+  left: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 10,
+  },
+  right: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 10,
   },
 });
 
