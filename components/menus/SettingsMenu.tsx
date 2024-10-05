@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Modal, StyleSheet, Text, Pressable, View, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Modal, Text, Pressable, View, FlatList,TouchableWithoutFeedback } from 'react-native';
 import MenuIcon from '../icons/MenuIcon';
+import MenuItem from './MenuItem';
 import { GlobalStyles } from '@/constants/GlobalStyles';
-import { color } from '@rneui/base';
+
 
 const SettingsMenu = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -22,7 +23,11 @@ const SettingsMenu = () => {
                 <Pressable onPress={() => setModalVisible(!modalVisible)}>
                   <Text style={styles.title}>Settings</Text>
                 </Pressable>
-                <Text style={styles.text}>Hello World!</Text>
+                <FlatList 
+                  data={data} 
+                  horizontal={false}  
+                  renderItem={({item, index}) => <MenuItem item={item} index={index} />} 
+                />
               </View>
               </TouchableWithoutFeedback>
           </View>
@@ -41,10 +46,29 @@ const styles = StyleSheet.create({
   title: {
     ...GlobalStyles.text,
     ...{
-      fontSize: 20,
+      fontSize: 16,
+      fontWeight: 'bold',
     },
   },
-  text: GlobalStyles.text,
 });
+
+const data = [
+  {
+    'label': 'Account information',
+    'path': '/jams',
+  },
+  {
+    'label': 'Change password',
+    'path': '/jams',
+  },
+  {
+    'label': 'Change user name',
+    'path': '/jams',
+  },
+  {
+    'label': 'Delete account',
+    'path': '/jams',
+  },
+];
 
 export default SettingsMenu;
