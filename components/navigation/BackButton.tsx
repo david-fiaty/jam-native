@@ -4,17 +4,22 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 
-const BackButton = () => {
+type Props = {
+  title: string,
+  style: {},
+};
+
+const BackButton = ({title, style}: Props) => {
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
       <AntDesign name="left" size={20} color={GlobalStyles.icon.color} style={{marginTop: 8}} />
       <Button 
-        title="About" 
+        title={title} 
         type="clear" 
         onPress={() => navigation.goBack()}
-        titleStyle={GlobalStyles.text}
+        titleStyle={[GlobalStyles.text, style]}
       />
     </View>
   );

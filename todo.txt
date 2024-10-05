@@ -4,57 +4,8 @@ https://medium.com/@prathiba2796/internationalization-and-localization-in-react-
 # SVG
 https://withfra.me/react-native-tutorials/how-to-use-svg-in-react-native
 
-### SCREEN COMPONENTS ###
-Splash
-  Logo
-  Dotted slideshow
-  Login/Sign up button
-  Skip button
-  About/Legal links
-
-Login
-  Logo
-  Message text
-  Email address input
-  Continue button
-  Signup/skip links
-  Google login button
-  Microsoft login button
-  Apple login button
-
-About 
-  Logo
-  Back button
-  Screen content
-  About/Legal links
-
-Legal
-  Logo
-  Back button
-  Screen content
-  About/Legal links
-
-Jams list
-  Logo
-  Search icon
-  Items list
-  Bottom toolbar links (map, add, account)
-
-Add new Jam
-  Category selector
-  Add media button
-  Add collaborators button
-  Add caption field
-  Location section
-  Status section
-  Main industries section
-  Sub industries section
-  Post button
-
-Account
-  User details form
-  User projects
-  User Jams
-
+# Questions to MM
+- Is language item in settings necessary? Language auto detected and never switched on phones
+- Is carousel pager in Jam items at the right place? Not enough space for many images
 
 

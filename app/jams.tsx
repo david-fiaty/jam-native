@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
   },
 });
 
-
 const data = [
   {
     id: 1,
