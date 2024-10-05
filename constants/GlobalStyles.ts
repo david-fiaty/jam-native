@@ -41,15 +41,16 @@ export const GlobalStyles = {
   modal: {
     container: {
       flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
+      flexDirection: 'column',
+      alignItems: 'flex-start',
       backgroundColor: 'red',
+      marginTop: 90,
     },
     view: {
       backgroundColor: 'white',
       width: '100%',
       padding: 20,
-      alignItems: 'center',
+      alignItems: 'flex-start',
       shadowColor: '#000',
       shadowOffset: {
         width: 0,
