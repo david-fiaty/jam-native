@@ -2,6 +2,7 @@ import { StyleSheet, View } from 'react-native';
 import SaveIcon from '../icons/SaveIcon';
 import ShareIcon from '../icons/ShareIcon';
 import JammersIcon from '../icons/JammersIcon';
+import ItemJammers from './ItemJammers';
 
 type Props = {
   item: object,
@@ -12,7 +13,7 @@ const ItemToolbar = ({item, index}: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.left}>
-        <JammersIcon />
+        <ItemJammers />
       </View>
       <View style={styles.right}>
         <SaveIcon />
