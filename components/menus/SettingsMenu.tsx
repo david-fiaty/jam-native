@@ -47,4 +47,23 @@ const styles = StyleSheet.create({
   text: GlobalStyles.text,
 });
 
+const data = [
+  {
+    'title': 'Account information',
+    'path': '/jams',
+  },
+  {
+    'title': 'Change password',
+    'path': '/jams',
+  },
+  {
+    'title': 'Change user name',
+    'path': '/jams',
+  },
+  {
+    'title': 'Delete account',
+    'path': '/jams',
+  },
+];
+
 export default SettingsMenu;
