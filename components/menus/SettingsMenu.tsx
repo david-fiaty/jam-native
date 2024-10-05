@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Alert, Modal, StyleSheet, Text, Pressable, View } from 'react-native';
+import { Alert, Modal, StyleSheet, Text, Pressable, View, TouchableWithoutFeedback } from 'react-native';
 import MenuIcon from '../icons/MenuIcon';
 
 const SettingsMenu = () => {
@@ -15,16 +15,20 @@ const SettingsMenu = () => {
           Alert.alert('Modal has been closed.');
           setModalVisible(!modalVisible);
         }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </Pressable>
+        <TouchableWithoutFeedback onPress={() => setModalVisible(!modalVisible)}>
+          <View style={styles.centeredView}>
+            <TouchableWithoutFeedback>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>Hello World!</Text>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() => setModalVisible(!modalVisible)}>
+                  <Text style={styles.textStyle}>Hide Modal</Text>
+                </Pressable>
+              </View>
+              </TouchableWithoutFeedback>
           </View>
-        </View>
+        </TouchableWithoutFeedback>
       </Modal>
       <Pressable onPress={() => setModalVisible(true)}>
         <MenuIcon />
@@ -41,6 +45,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 22,
+    backgroundColor: 'red',
   },
   modalView: {
     margin: 20,
