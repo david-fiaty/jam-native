@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { StyleSheet, Modal, Text, Pressable, View, FlatList,TouchableWithoutFeedback } from 'react-native';
 import MenuIcon from '../icons/MenuIcon';
+import MenuItem from './MenuItem';
 import { GlobalStyles } from '@/constants/GlobalStyles';
+
 
 const SettingsMenu = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -24,7 +26,7 @@ const SettingsMenu = () => {
                 <FlatList 
                   data={data} 
                   horizontal={false}  
-                  renderItem={({item, index}) => <Text style={styles.text}>{item.label}</Text>} 
+                  renderItem={({item, index}) => <MenuItem item={item} index={index} />} 
                 />
               </View>
               </TouchableWithoutFeedback>
@@ -47,7 +49,6 @@ const styles = StyleSheet.create({
       fontSize: 24,
     },
   },
-  text: GlobalStyles.text,
 });
 
 const data = [
