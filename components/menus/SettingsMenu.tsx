@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { StyleSheet, Modal, Text, Pressable, View, FlatList,TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Modal, Text, Pressable, View, FlatList, TouchableWithoutFeedback } from 'react-native';
 import MenuIcon from '../icons/MenuIcon';
 import MenuItem from './MenuItem';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import BackButton from '../navigation/BackButton';
-
 
 const SettingsMenu = () => {
   const [modalVisible, setModalVisible] = useState(false);
