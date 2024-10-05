@@ -1,11 +1,15 @@
-import { StyleSheet, View } from 'react-native';
-import { MenuView } from '@react-native-menu/menu';
+import { useState } from 'react';
+import { Alert, Modal, StyleSheet, Text, Pressable, View } from 'react-native';
 import MenuIcon from '../icons/MenuIcon';
 
 const SettingsMenu = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  
   return (
     <View style={styles.container}>        
-      <MenuIcon />
+      <Pressable onPress={() => setModalVisible(true)}>
+        <MenuIcon />
+      </Pressable>
     </View>
   );
 };
