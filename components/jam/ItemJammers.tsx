@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet, Modal, Pressable, View, FlatList, Text, TouchableWithoutFeedback } from 'react-native';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import BackButton from '../navigation/BackButton';
 import JammersIcon from '../icons/JammersIcon';
@@ -26,7 +27,14 @@ const ItemJammers = () => {
                   data={data} 
                   horizontal={false}  
                   style={styles.list}
-                  renderItem={({item, index}) => <Text>Jammer {index}</Text>} 
+                  renderItem={({item, index}) => {
+                    return (
+                      <View style={styles.row}>
+                        <FontAwesome name="user-circle" size={32} color={GlobalStyles.icon.color} />
+                        <Text style={styles.text}>Jammer {index}</Text>
+                      </View>
+                    );
+                  }} 
                 />
               </View>
               </TouchableWithoutFeedback>
@@ -53,6 +61,15 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
     },
   },
+  text: GlobalStyles.text,
+  row: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingTop: 8,
+    paddingBottom: 8,
+    gap: 16,
+  }
 });
 
 const data = [
