@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Modal, StyleSheet, Text, Pressable, View, TouchableWithoutFeedback } from 'react-native';
 import MenuIcon from '../icons/MenuIcon';
 import { GlobalStyles } from '@/constants/GlobalStyles';
-import { color } from '@rneui/base';
 
 const SettingsMenu = () => {
   const [modalVisible, setModalVisible] = useState(false);
