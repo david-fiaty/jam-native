@@ -27,6 +27,7 @@ const SettingsMenu = () => {
                 <FlatList 
                   data={data} 
                   horizontal={false}  
+                  style={styles.list}
                   renderItem={({item, index}) => <MenuItem item={item} index={index} />} 
                 />
               </View>
@@ -43,6 +44,9 @@ const SettingsMenu = () => {
 
 const styles = StyleSheet.create({
   container: {
+  },
+  list: {
+    width: '100%',
   },
   title: {
     ...GlobalStyles.text,

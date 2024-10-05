@@ -43,13 +43,13 @@ export const GlobalStyles = {
       flex: 1,
       flexDirection: 'column',
       alignItems: 'flex-start',
-      backgroundColor: 'red',
       marginTop: 90,
+      marginLeft: 20,
+      marginRight: 20,
     },
     view: {
       backgroundColor: 'white',
       width: '100%',
-      padding: 20,
       alignItems: 'flex-start',
       shadowColor: '#000',
       shadowOffset: {
@@ -59,6 +59,7 @@ export const GlobalStyles = {
       shadowOpacity: 0.25,
       shadowRadius: 4,
       elevation: 5,
+      padding: 20,
     },
   },
 };

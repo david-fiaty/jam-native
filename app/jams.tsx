@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column', 
     marginTop: 30,
-    padding: 25,
+    padding: 20,
     height: '100%',
   },
   text: {
