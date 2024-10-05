@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.tertiary,
     width: '100%',
     height: 280,
-    opacity: 0.6,
+    opacity: 0.7,
   },
 });
 
