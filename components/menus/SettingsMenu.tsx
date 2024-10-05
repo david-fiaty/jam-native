@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Modal, StyleSheet, Text, Pressable, View, TouchableWithoutFeedback } from 'react-native';
 import MenuIcon from '../icons/MenuIcon';
 import { GlobalStyles } from '@/constants/GlobalStyles';
+import { color } from '@rneui/base';
 
 const SettingsMenu = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -18,13 +19,10 @@ const SettingsMenu = () => {
           <View style={GlobalStyles.modal.container}>
             <TouchableWithoutFeedback>
               <View style={GlobalStyles.modal.view}>
-                <Pressable
-                  style={[styles.button, styles.buttonClose]}
-                  onPress={() => setModalVisible(!modalVisible)}
-                >
-                  <Text style={styles.textStyle}>Hide Modal</Text>
+                <Pressable onPress={() => setModalVisible(!modalVisible)}>
+                  <Text style={styles.title}>Settings</Text>
                 </Pressable>
-                <Text>Hello World!</Text>
+                <Text style={styles.text}>Hello World!</Text>
               </View>
               </TouchableWithoutFeedback>
           </View>
@@ -40,6 +38,13 @@ const SettingsMenu = () => {
 const styles = StyleSheet.create({
   container: {
   },
+  title: {
+    ...GlobalStyles.text,
+    ...{
+      fontSize: 20,
+    },
+  },
+  text: GlobalStyles.text,
 });
 
 export default SettingsMenu;
