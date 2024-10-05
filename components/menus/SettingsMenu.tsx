@@ -24,7 +24,7 @@ const SettingsMenu = () => {
                 <FlatList 
                   data={data} 
                   horizontal={false}  
-                  renderItem={({item, index}) => <Text>{item.label}</Text>} 
+                  renderItem={({item, index}) => <Text style={styles.text}>{item.label}</Text>} 
                 />
               </View>
               </TouchableWithoutFeedback>
@@ -41,10 +41,10 @@ const SettingsMenu = () => {
 const styles = StyleSheet.create({
   container: {
   },
-  label: {
+  title: {
     ...GlobalStyles.text,
     ...{
-      fontSize: 20,
+      fontSize: 24,
     },
   },
   text: GlobalStyles.text,
