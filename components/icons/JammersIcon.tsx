@@ -5,7 +5,7 @@ import { GlobalStyles } from '@/constants/GlobalStyles';
 const JammersIcon = () => {
   return (
     <View style={styles.container}>        
-      <MaterialCommunityIcons name="asterisk" size={18} color={GlobalStyles.icon.color} />
+      <MaterialCommunityIcons name="asterisk" size={16} color={GlobalStyles.icon.color} />
     </View>
   );
 };

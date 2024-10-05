@@ -1,5 +1,6 @@
 import { StyleSheet, View, Text } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { Colors } from '@/constants/GlobalStyles';
 
 type Props = {
   item: object,
@@ -15,7 +16,7 @@ const ItemImages = ({item, index}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'gray',
+    backgroundColor: Colors.tertiary,
     width: '100%',
     height: 280,
   },

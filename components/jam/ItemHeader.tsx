@@ -10,10 +10,10 @@ type Props = {
 const ItemHeader = ({item, index}: Props) => {
   return (
     <View style={styles.container}>
-      <View>
+      <View style={styles.left}>
         <Text style={styles.text}>User name</Text>
       </View>
-      <View>
+      <View style={styles.right}>
         <Ionicons name="ellipsis-horizontal-sharp" size={24} color={GlobalStyles.icon.color} />
       </View>
     </View>
@@ -24,11 +24,22 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     paddingTop: 8,
     paddingRight: 14,
     paddingBottom: 8,
     paddingLeft: 14,
+  },
+  left: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 10,
+  },
+  right: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 10,
   },
   text: GlobalStyles.text,
 });
