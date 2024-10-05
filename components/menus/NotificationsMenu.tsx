@@ -21,7 +21,7 @@ const NotificationsMenu = () => {
             <TouchableWithoutFeedback>
               <View style={GlobalStyles.modal.view}>
                 <Pressable onPress={() => setModalVisible(!modalVisible)}>
-                  <BackButton title="Settings" style={styles.title} />
+                  <BackButton title="Notifications" style={styles.title} />
                 </Pressable>
                 <FlatList 
                   data={data} 
@@ -58,19 +58,31 @@ const styles = StyleSheet.create({
 
 const data = [
   {
-    'label': 'Account information',
+    'label': 'Lorem ipsum dolor sit amet',
     'path': '/jams',
   },
   {
-    'label': 'Change password',
+    'label': 'Consectetur adipiscing elit',
     'path': '/jams',
   },
   {
-    'label': 'Change user name',
+    'label': 'Sed do eiusmod tempor',
     'path': '/jams',
   },
   {
-    'label': 'Delete account',
+    'label': 'Incididunt ut labore et dolore magna aliqua',
+    'path': '/jams',
+  },
+  {
+    'label': 'Ut enim ad minim veniam, quis nostrud',
+    'path': '/jams',
+  },
+  {
+    'label': 'Exercitation ullamco laboris nisi',
+    'path': '/jams',
+  },
+  {
+    'label': 'Excepteur sint occaecat cupidatat',
     'path': '/jams',
   },
 ];
