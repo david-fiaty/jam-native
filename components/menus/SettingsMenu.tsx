@@ -46,7 +46,8 @@ const styles = StyleSheet.create({
   title: {
     ...GlobalStyles.text,
     ...{
-      fontSize: 24,
+      fontSize: 16,
+      fontWeight: 'bold',
     },
   },
 });
