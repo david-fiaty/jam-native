@@ -16,16 +16,16 @@ const MenuItem = ({item, index}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'red',
   },
   text: {
     ...GlobalStyles.text,
     ...{
-      paddingTop: 14,
+      paddingTop: 10,
       paddingRight: 0,
-      paddingBottom: 14,
+      paddingBottom: 10,
       paddingLeft: 0,
       borderBottomWidth: 1,
+      borderBottomColor: GlobalStyles.border.color,
     },
   },
 });
