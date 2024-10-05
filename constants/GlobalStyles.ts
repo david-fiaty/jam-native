@@ -38,4 +38,26 @@ export const GlobalStyles = {
     paddingHorizontal: 12, 
     marginBottom: 10,
   },
+  modal: {
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'red',
+    },
+    view: {
+      backgroundColor: 'white',
+      width: '100%',
+      padding: 20,
+      alignItems: 'center',
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 5,
+    },
+  },
 };
