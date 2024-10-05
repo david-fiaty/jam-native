@@ -24,11 +24,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: 20,
-    backgroundColor: 'black',
   },
   buttons: {
     display: 'flex',
     flexDirection: 'row',
+    gap: 10,
   },
 });
 
