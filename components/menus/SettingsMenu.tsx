@@ -16,6 +16,13 @@ const SettingsMenu = () => {
       >
         <TouchableWithoutFeedback onPress={() => setModalVisible(!modalVisible)}>
           <View style={GlobalStyles.modal.container}>
+          <Pressable
+            style={[styles.button, styles.buttonClose]}
+            onPress={() => setModalVisible(!modalVisible)}
+          >
+            <Text style={styles.textStyle}>Hide Modal</Text>
+          </Pressable>
+
             <TouchableWithoutFeedback>
               <View style={GlobalStyles.modal.view}>
                 <Text>Hello World!</Text>
