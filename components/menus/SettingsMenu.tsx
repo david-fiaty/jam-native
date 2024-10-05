@@ -3,6 +3,7 @@ import { StyleSheet, Modal, Text, Pressable, View, FlatList,TouchableWithoutFeed
 import MenuIcon from '../icons/MenuIcon';
 import MenuItem from './MenuItem';
 import { GlobalStyles } from '@/constants/GlobalStyles';
+import BackButton from '../navigation/BackButton';
 
 
 const SettingsMenu = () => {
@@ -21,7 +22,7 @@ const SettingsMenu = () => {
             <TouchableWithoutFeedback>
               <View style={GlobalStyles.modal.view}>
                 <Pressable onPress={() => setModalVisible(!modalVisible)}>
-                  <Text style={styles.title}>Settings</Text>
+                  <BackButton title="Settings" style={styles.title} />
                 </Pressable>
                 <FlatList 
                   data={data} 
