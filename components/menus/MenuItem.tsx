@@ -8,7 +8,7 @@ type Props = {
 
 const MenuItem = ({item, index}: Props) => {
   return (
-    <View style={styles.container}>        
+    <View style={styles.container}>      
       <Text style={styles.text}>{item.label}</Text>
     </View>
   );
@@ -16,8 +16,18 @@ const MenuItem = ({item, index}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'red',
   },
-  text: GlobalStyles.text,
+  text: {
+    ...GlobalStyles.text,
+    ...{
+      paddingTop: 14,
+      paddingRight: 0,
+      paddingBottom: 14,
+      paddingLeft: 0,
+      borderBottomWidth: 1,
+    },
+  },
 });
 
 export default MenuItem;
