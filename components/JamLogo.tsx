@@ -1,14 +1,14 @@
-import { Image, View, StyleSheet } from 'react-native';
-import X from './assets/images/jam-logo.svg';
+import { StyleSheet, Text, Image, View } from 'react-native';
+import X from '../assets/images/jam-logo.svg';
 
 type Props = {
   width: number,
   height: number,
 };
 
-const JamLogo = ({width, height}: Props) {
+const JamLogo = ({width, height}: Props) => {
   return (
-    <X style={[styles.image, {width: width}, {height: height}]} />    
+    <X width={width} height={height} />    
   );
 };
 
