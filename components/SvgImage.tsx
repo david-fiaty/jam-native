@@ -8,12 +8,14 @@ type Props = {
 
 export function SvgImage({uri, width, height}: Props) {
   return (
-    <Image source={uri} style={[styles.image, {width: width}, {height: height}]} />    
+    <View style={[{width: width}, {height: height}]}>
+      <Image source={uri} style={styles.image} />  
+    </View>  
   );
 };
 
 const styles = StyleSheet.create({
   image: {
-    alignSelf: "center",
+    alignSelf: 'center',
   },
 });
