@@ -8,7 +8,12 @@ type Props = {
 
 export function SvgImage({uri, width, height}: Props) {
   return (
-    <Image source={uri} style={[styles.image, {width: width}, {height: height}]} />    
+    <Image 
+      source={uri} 
+      resizeMethod="scale"
+      resizeMode="contain"
+      style={[styles.image, {width: width}, {height: height}]} 
+    />   
   );
 };
 
