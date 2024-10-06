@@ -5,6 +5,7 @@ https://medium.com/@prathiba2796/internationalization-and-localization-in-react-
 https://withfra.me/react-native-tutorials/how-to-use-svg-in-react-native
 
 # Questions to MM
+- How to structure content links in home text carousel
 - Is language item in settings necessary? Language auto detected and never switched on phones
 - Is carousel pager in Jam items at the right place? Not enough space for many images
 - Is inserting jam item actions windows ont top of list a good idea? Got to scrool up if at bottom of list
