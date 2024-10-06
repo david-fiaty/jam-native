@@ -1,11 +1,11 @@
 import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
-import { SvgImage } from '@/components/SvgImage';
+import { StaticImage } from '@/components/StaticImage';
 
 const Login = () => {
   return (
     <View style={GlobalStyles.container}>
-      <SvgImage uri={require('@/assets/images/jam-logo.png')} width={110} height={110} />  
+      <StaticImage uri={require('@/assets/images/jam-logo.png')} width={110} height={110} />  
       <Text style={[GlobalStyles.text, styles.title]}>Welcome back</Text>
       <TextInput
         editable
