@@ -8,7 +8,9 @@ type Props = {
 
 const JamLogo = ({width, height}: Props) => {
   return (
-    <X width={width} height={height} />    
+    <View>
+      <X width={width} height={height} />    
+    </View>
   );
 };
 
