@@ -6,7 +6,7 @@ import { GlobalStyles } from '@/constants/GlobalStyles';
 
 type Props = {
   title: string,
-  style: {},
+  style?: {},
 };
 
 const BackButton = ({title, style}: Props) => {
