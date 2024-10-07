@@ -18,14 +18,14 @@ const AddJam = () => {
           <View style={GlobalStyles.modal.container}>
             <TouchableWithoutFeedback>
               <View style={styles.view}>
-                <Text>JAM FORM</Text>
+                <Text>ADD JAM</Text>
               </View>
             </TouchableWithoutFeedback>
           </View>
         </TouchableWithoutFeedback>
       </Modal>
       <Pressable onPress={() => setModalVisible(true)}>
-        <Ionicons name="location" size={26} color={Colors.primary} />
+        <Ionicons name="add" size={26} color={Colors.primary} />
       </Pressable>
     </View>
   );
@@ -49,24 +49,5 @@ const styles = StyleSheet.create({
     },
   },
 });
-
-const data = [
-  {
-    'label': 'Account information',
-    'path': '/jams',
-  },
-  {
-    'label': 'Change password',
-    'path': '/jams',
-  },
-  {
-    'label': 'Change user name',
-    'path': '/jams',
-  },
-  {
-    'label': 'Delete account',
-    'path': '/jams',
-  },
-];
 
 export default AddJam;
