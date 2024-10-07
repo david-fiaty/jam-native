@@ -20,7 +20,7 @@ const SaveJam = () => {
             <TouchableWithoutFeedback>
               <View style={GlobalStyles.modal.view}>
                 <Pressable onPress={() => setModalVisible(!modalVisible)}>
-                  <BackButton title="Jam is now Save to your Jams" style={styles.title} />
+                  <BackButton title="Jam is now saved to your Jams" style={styles.title} />
                 </Pressable>
                 
               </View>
