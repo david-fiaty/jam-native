@@ -2,7 +2,7 @@ import { StyleSheet, View } from 'react-native';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 
-const JammersIcon = () => {
+const AsteriskIcon = () => {
   return (
     <View style={styles.container}>        
       <MaterialCommunityIcons name="asterisk" size={16} color={GlobalStyles.icon.color} />
@@ -20,4 +20,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default JammersIcon;
+export default AsteriskIcon;
