@@ -1,4 +1,5 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Pressable } from 'react-native';
+import { useRouter } from 'expo-router';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import JamsMap from '../JamsMap';
@@ -7,21 +8,26 @@ import { Colors } from '@/constants/GlobalStyles';
 
 const BottomTabs = () => {
   const Tab = createBottomTabNavigator();
+  const router = useRouter();
 
   return (
     <View style={styles.container}>
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          return <Ionicons name="home" size={40} color={Colors.primary} />;
-        },
-        tabBarActiveTintColor: 'tomato',
-        tabBarInactiveTintColor: 'gray',
-      })}
-    >
-      <Tab.Screen name="Map" component={JamsMap} />
-      <Tab.Screen name="Add" component={AddJam} />
-    </Tab.Navigator>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            return (
+              <Pressable style={styles.pressable} onPress={() => router.push('/jams') }>
+                <Ionicons name="home" size={40} color={Colors.primary} />
+              </Pressable>
+            );
+          },
+          tabBarActiveTintColor: 'tomato',
+          tabBarInactiveTintColor: 'gray',
+        })}
+      >
+        <Tab.Screen name="Map" component={JamsMap} />
+        <Tab.Screen name="Add" component={AddJam} />
+      </Tab.Navigator>
     </View>
   );
 }
