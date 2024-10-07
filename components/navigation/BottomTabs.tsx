@@ -1,10 +1,9 @@
 import { StyleSheet, View, Pressable, Text } from 'react-native';
 import { useRouter } from 'expo-router';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import JamsMap from '../JamsMap';
 import AddJam from '../AddJam';
-import { Colors } from '@/constants/GlobalStyles';
+import UserAccount from '../UserAccount';
 
 const BottomTabs = () => {
   const Tab = createBottomTabNavigator();
@@ -33,9 +32,7 @@ const BottomTabs = () => {
           options={{
             tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
-              <Pressable style={styles.pressable} onPress={() => router.push('/jams') }>
-                <Ionicons name="add" size={26} color={Colors.primary} />
-              </Pressable>
+              <AddJam />
             ),
           }}
         />
@@ -45,9 +42,7 @@ const BottomTabs = () => {
           options={{
             tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
-              <Pressable style={styles.pressable} onPress={() => router.push('/jams') }>
-                <Ionicons name="person-circle" size={26} color={Colors.primary} />
-              </Pressable>
+              <UserAccount />
             ),
           }}
         />
