@@ -2,7 +2,7 @@ import { GlobalStyles } from '@/constants/GlobalStyles';
 import { StyleSheet, View, Text } from 'react-native';
 import Header from './jam/Header';
 import Images from './jam/Images';
-import Toolbar from './jam/Toolbar';
+import JamToolbar from './jam/JamToolbar';
 import Content from './jam/Content';
 
 type Props = {
@@ -15,7 +15,7 @@ const Jam = ({item, index}: Props) => {
     <View style={styles.container}>
       <Header item={item} index={index} />
       <Images item={item} index={index} />
-      <Toolbar item={item} index={index} />
+      <JamToolbar item={item} index={index} />
       <Content item={item} index={index} />
     </View>
   );
