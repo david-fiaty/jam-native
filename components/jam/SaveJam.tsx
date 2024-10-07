@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, Modal, Pressable, View, Text, TouchableWithoutFeedback } from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import BackButton from '../navigation/BackButton';
-import JammersIcon from '../icons/JammersIcon';
+import SaveIcon from '../icons/SaveIcon';
 
 const SaveJam = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -29,7 +29,7 @@ const SaveJam = () => {
         </TouchableWithoutFeedback>
       </Modal>
       <Pressable onPress={() => setModalVisible(true)}>
-        <JammersIcon />
+        <SaveIcon />
       </Pressable>
     </View>
   );
