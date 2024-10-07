@@ -3,7 +3,7 @@ import { StyleSheet, Modal, Pressable, View, FlatList, Text, TouchableWithoutFee
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import BackButton from '../navigation/BackButton';
-import JammersIcon from '../icons/JammersIcon';
+import AsteriskIcon from '../icons/AsteriskIcon';
 
 const JamJammers = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -42,7 +42,7 @@ const JamJammers = () => {
         </TouchableWithoutFeedback>
       </Modal>
       <Pressable onPress={() => setModalVisible(true)}>
-        <JammersIcon />
+        <AsteriskIcon />
       </Pressable>
     </View>
   );
