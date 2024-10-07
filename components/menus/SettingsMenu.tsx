@@ -17,7 +17,7 @@ const SettingsMenu = () => {
             renderItem={({item, index}) => <MenuItem item={item} index={index} />} 
           />
         }
-        animation="slide"
+        animation="fade"
       />   
     </View>
   );
