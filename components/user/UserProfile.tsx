@@ -10,6 +10,7 @@ const UserProfile = () => {
         label={<Ionicons name="person-circle" size={26} color={Colors.primary} />}
         title="Profile" 
         content={<Text>USER PROFILE</Text>}
+        animation="none"
       />    
     </View>
   );
