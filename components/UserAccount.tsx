@@ -3,7 +3,7 @@ import { StyleSheet, Modal, Pressable, Text, View, TouchableWithoutFeedback } fr
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
-const JamsMap = () => {
+const UserAccount = () => {
   const [modalVisible, setModalVisible] = useState(false);
   
   return (
@@ -18,14 +18,14 @@ const JamsMap = () => {
           <View style={GlobalStyles.modal.container}>
             <TouchableWithoutFeedback>
               <View style={styles.view}>
-                <Text>JAMS MAP</Text>
+                <Text>USER ACCOUNT</Text>
               </View>
             </TouchableWithoutFeedback>
           </View>
         </TouchableWithoutFeedback>
       </Modal>
       <Pressable onPress={() => setModalVisible(true)}>
-        <Ionicons name="location" size={26} color={Colors.primary} />
+        <Ionicons name="person-circle" size={26} color={Colors.primary} />
       </Pressable>
     </View>
   );
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default JamsMap;
+export default UserAccount;
