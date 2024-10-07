@@ -1,4 +1,4 @@
-import { StyleSheet, View, Pressable } from 'react-native';
+import { StyleSheet, View, Pressable, Text } from 'react-native';
 import { useRouter } from 'expo-router';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -19,13 +19,11 @@ const BottomTabs = () => {
       >
         <Tab.Screen 
           name="map" 
-          component={JamsMap} 
+          component={Text}
           options={{
             tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
-              <Pressable style={styles.pressable} onPress={() => router.push('/jams') }>
-                <Ionicons name="location" size={26} color={Colors.primary} />
-              </Pressable>
+              <JamsMap />
             ),
           }}
         />
