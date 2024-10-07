@@ -3,7 +3,7 @@ import { useRouter } from 'expo-router';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import JamsMap from '../JamsMap';
-import AddJam from '../jam/AddJam';
+import AddJam from '../AddJam';
 import { Colors } from '@/constants/GlobalStyles';
 
 const BottomTabs = () => {

@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   view: {
     ...GlobalStyles.modal.view,
     ...{
-      backgroundColor: 'blue',
+      backgroundColor: Colors.tertiary,
       height: '92.3%',
     }
   },
