@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import { StyleSheet, Modal, Text, Pressable, View, FlatList, TouchableWithoutFeedback } from 'react-native';
-import { useRouter } from 'expo-router';
 import MenuIcon from '../icons/MenuIcon';
 import MenuItem from './MenuItem';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import BackButton from '../navigation/BackButton';
 
 const SettingsMenu = () => {
-  const router = useRouter();
   const [modalVisible, setModalVisible] = useState(false);
   
   return (
@@ -29,13 +27,7 @@ const SettingsMenu = () => {
                   data={data} 
                   horizontal={false}  
                   style={styles.list}
-                  renderItem={({item, index}) => {
-                    return (
-                      <Pressable onPress={() => router.push('/account-information')}>
-                        <MenuItem item={item} index={index} />
-                      </Pressable>
-                    );
-                  }}
+                  renderItem={({item, index}) => <MenuItem item={item} index={index} />} 
                 />
               </View>
               </TouchableWithoutFeedback>
