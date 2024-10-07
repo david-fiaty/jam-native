@@ -2,7 +2,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import JamsMap from '../jams/JamsMap';
 import AddJam from '../jam/AddJam';
-import UserProfile from '../UserProfile';
+import UserProfile from '../user/UserProfile';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const BottomTabs = () => {
