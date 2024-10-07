@@ -1,7 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import SaveIcon from '../icons/SaveIcon';
 import ShareIcon from '../icons/ShareIcon';
-import JammersIcon from '../icons/JammersIcon';
 import Jammers from './Jammers';
 
 type Props = {
