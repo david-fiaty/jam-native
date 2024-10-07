@@ -11,7 +11,9 @@ const JamHeader = ({item, index}: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.left}>
-        <Text style={styles.text}>User name</Text>
+        <Text style={styles.text}>
+          @host +{item.host_count}
+        </Text>
       </View>
       <View style={styles.right}>
         <JamActions />
