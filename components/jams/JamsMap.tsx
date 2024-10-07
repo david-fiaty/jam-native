@@ -1,52 +1,23 @@
-import { useState } from 'react';
-import { StyleSheet, Modal, Pressable, Text, View, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+import { Colors } from '@/constants/GlobalStyles';
+import ModalWindow from '../ModalWindow';
 
 const JamsMap = () => {
-  const [modalVisible, setModalVisible] = useState(false);
-  
   return (
-    <View style={styles.container}>        
-      <Modal
-        animationType="none"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(!modalVisible)}
-      >
-        <TouchableWithoutFeedback onPress={() => setModalVisible(!modalVisible)}>
-          <View style={GlobalStyles.modal.container}>
-            <TouchableWithoutFeedback>
-              <View style={styles.view}>
-                <Text>JAMS MAP</Text>
-              </View>
-            </TouchableWithoutFeedback>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
-      <Pressable onPress={() => setModalVisible(true)}>
-        <Ionicons name="location" size={26} color={Colors.primary} />
-      </Pressable>
+    <View style={styles.container}>       
+      <ModalWindow 
+        label={<Ionicons name="location" size={26} color={Colors.primary} />}
+        title="Jams map" 
+        content={<Text>JAMS MAP</Text>}
+        animation="none"
+      />    
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-  },
-  view: {
-    ...GlobalStyles.modal.view,
-    ...{
-      backgroundColor: Colors.tertiary,
-      height: '92.3%',
-    }
-  },
-  title: {
-    ...GlobalStyles.text,
-    ...{
-      fontSize: 16,
-      fontWeight: 'bold',
-    },
   },
 });
 
