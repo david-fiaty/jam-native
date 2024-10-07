@@ -9,7 +9,7 @@ const JamsMap = () => {
   return (
     <View style={styles.container}>        
       <Modal
-        animationType="slide"
+        animationType="none"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => setModalVisible(!modalVisible)}
