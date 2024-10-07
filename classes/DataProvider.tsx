@@ -10,10 +10,12 @@ const ApiData = {
 
 type DataKey = keyof typeof ApiData;
 
-const DataProvider = class DataProvider {
+const DataProviderClass = class DataProviderClass {
   get(key: DataKey) : object {
     return ApiData[key];
   }
 };
+
+const DataProvider = new DataProviderClass();
 
 export default DataProvider;
