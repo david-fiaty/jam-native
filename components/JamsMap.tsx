@@ -18,7 +18,7 @@ const JamsMap = () => {
           <View style={GlobalStyles.modal.container}>
             <TouchableWithoutFeedback>
               <View style={styles.view}>
-              <Text>Map</Text>
+                <Text>JAMS MAP</Text>
               </View>
             </TouchableWithoutFeedback>
           </View>
