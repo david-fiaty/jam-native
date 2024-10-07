@@ -1,6 +1,6 @@
 import { StyleSheet, View, Text } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { GlobalStyles } from '@/constants/GlobalStyles';
+import JamActions from './JamActions';
 
 type Props = {
   item: object,
@@ -14,7 +14,7 @@ const JamHeader = ({item, index}: Props) => {
         <Text style={styles.text}>User name</Text>
       </View>
       <View style={styles.right}>
-        <Ionicons name="ellipsis-horizontal-sharp" size={24} color={GlobalStyles.icon.color} />
+        <JamActions />
       </View>
     </View>
   );

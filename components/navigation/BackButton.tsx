@@ -6,7 +6,7 @@ import { GlobalStyles } from '@/constants/GlobalStyles';
 type Props = {
   title: string,
   style?: {},
-  onPress: () => void,
+  onPress?: () => void,
 };
 
 const BackButton = ({title, style, onPress}: Props) => {
