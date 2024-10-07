@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { StyleSheet, Modal, Pressable, View, Text, TouchableWithoutFeedback } from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import BackButton from '../navigation/BackButton';
-import SaveIcon from '../icons/SaveIcon';
+import ShareIcon from '../icons/ShareIcon';
 
-const SaveJam = () => {
+const ShareJam = () => {
   const [modalVisible, setModalVisible] = useState(false);
   
   return (
@@ -20,7 +20,7 @@ const SaveJam = () => {
             <TouchableWithoutFeedback>
               <View style={GlobalStyles.modal.view}>
                 <Pressable onPress={() => setModalVisible(!modalVisible)}>
-                  <BackButton title="Jam is now Save to your Jams" style={styles.title} />
+                  <BackButton title="Share Jam" style={styles.title} />
                 </Pressable>
                 
               </View>
@@ -29,7 +29,7 @@ const SaveJam = () => {
         </TouchableWithoutFeedback>
       </Modal>
       <Pressable onPress={() => setModalVisible(true)}>
-        <SaveIcon />
+        <ShareIcon />
       </Pressable>
     </View>
   );
@@ -78,4 +78,4 @@ const data = [
   },
 ];
 
-export default SaveJam;
+export default ShareJam;
