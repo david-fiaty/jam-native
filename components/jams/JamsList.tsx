@@ -1,12 +1,12 @@
 import { StyleSheet, FlatList } from 'react-native';
-import Jam from '../Jam';
+import JamItem from '../jam/JamItem';
 
 const JamsList = () => {
   return (
     <FlatList 
       data={data} 
       horizontal={false}  
-      renderItem={({item, index}) => <Jam item={item} index={index} />} 
+      renderItem={({item, index}) => <JamItem item={item} index={index} />} 
     />
   );
 };
