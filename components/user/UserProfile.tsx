@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet, Text, View} from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ModalWindow from '../ModalWindow';
 
@@ -9,10 +10,9 @@ const UserProfile = () => {
   return (
     <View style={styles.container}>    
       <ModalWindow 
-        label="OOPP"
+        label={<Ionicons name="person-circle" size={26} color={Colors.primary} />}
         title="Profile" 
-        animation="slide" 
-        component={<Text>USER PROFILE</Text>}
+        content={<Text>USER PROFILE</Text>}
       />    
     </View>
   );
