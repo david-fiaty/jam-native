@@ -4,7 +4,7 @@ import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import BackButton from './navigation/BackButton';
 
 type Props = {
-  label: string, 
+  label: JSX.Element, 
   title: string,
   content: JSX.Element,
   animation?: string,
