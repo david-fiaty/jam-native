@@ -7,7 +7,7 @@ type Props = {
   index: number,
 };
 
-const Header = ({item, index}: Props) => {
+const JamHeader = ({item, index}: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.left}>
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
   text: GlobalStyles.text,
 });
 
-export default Header;
+export default JamHeader;

@@ -6,10 +6,10 @@ type Props = {
   index: number,
 };
 
-const Content = ({item, index}: Props) => {
+const JamContent = ({item, index}: Props) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{item.content}</Text>
+      <Text style={styles.text}>{item.JamContent}</Text>
       <Pressable style={styles.pressable} onPress={() => console.log('Clicked')}>
         <Text style={styles.text}>View more</Text>
       </Pressable>
@@ -30,4 +30,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Content;
+export default JamContent;
