@@ -12,6 +12,7 @@ const BottomTabs = () => {
       <Tab.Navigator
         screenOptions={{
           tabBarActiveTintColor: '#e91e63',
+          tabBarStyle: styles.tabs,
         }}
       >
         <Tab.Screen 
@@ -56,9 +57,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
   },
-  pressable: {
-    display: 'flex',
-    marginTop: 10,
+  tabs: {
+    paddingTop: 10,
   },
 });
 
