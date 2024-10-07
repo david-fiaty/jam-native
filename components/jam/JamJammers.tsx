@@ -5,7 +5,7 @@ import { GlobalStyles } from '@/constants/GlobalStyles';
 import BackButton from '../navigation/BackButton';
 import JammersIcon from '../icons/JammersIcon';
 
-const Jammers = () => {
+const JamJammers = () => {
   const [modalVisible, setModalVisible] = useState(false);
   
   return (
@@ -91,4 +91,4 @@ const data = [
   },
 ];
 
-export default Jammers;
+export default JamJammers;
