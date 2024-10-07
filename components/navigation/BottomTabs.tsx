@@ -13,20 +13,46 @@ const BottomTabs = () => {
   return (
     <View style={styles.container}>
       <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            return (
+        screenOptions={{
+          tabBarActiveTintColor: '#e91e63',
+        }}
+      >
+        <Tab.Screen 
+          name="Map" 
+          component={JamsMap} 
+          options={{
+            tabBarLabel: 'Home',
+            tabBarIcon: ({ color, size }) => (
               <Pressable style={styles.pressable} onPress={() => router.push('/jams') }>
                 <Ionicons name="home" size={40} color={Colors.primary} />
               </Pressable>
-            );
-          },
-          tabBarActiveTintColor: 'tomato',
-          tabBarInactiveTintColor: 'gray',
-        })}
-      >
-        <Tab.Screen name="Map" component={JamsMap} />
-        <Tab.Screen name="Add" component={AddJam} />
+            ),
+          }}
+        />
+        <Tab.Screen 
+          name="Add" 
+          component={AddJam} 
+          options={{
+            tabBarLabel: 'Add',
+            tabBarIcon: ({ color, size }) => (
+              <Pressable style={styles.pressable} onPress={() => router.push('/jams') }>
+                <Ionicons name="add" size={40} color={Colors.primary} />
+              </Pressable>
+            ),
+          }}
+        />
+        <Tab.Screen 
+          name="Account" 
+          component={AddJam} 
+          options={{
+            tabBarLabel: 'Account',
+            tabBarIcon: ({ color, size }) => (
+              <Pressable style={styles.pressable} onPress={() => router.push('/jams') }>
+                <Ionicons name="person-circle" size={40} color={Colors.primary} />
+              </Pressable>
+            ),
+          }}
+        />
       </Tab.Navigator>
     </View>
   );
