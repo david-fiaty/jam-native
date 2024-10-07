@@ -1,5 +1,5 @@
 import { StyleSheet, View, FlatList, Text } from 'react-native';
-import { GlobalStyles } from '@/constants/GlobalStyles';
+import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import TopToolbar from '@/components/navigation/TopToolbar';
 import JamItem from '@/components/jam/JamItem';
 
@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     padding: 20,
     height: '100%',
+    backgroundColor: Colors.background,
   },
   text: {
     color: GlobalStyles.text.color,
