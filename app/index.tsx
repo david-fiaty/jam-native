@@ -5,6 +5,7 @@ import { StaticImage } from '@/components/StaticImage';
 import SkipButton from '@/components/buttons/SkipButton';
 import LoginButton from '@/components/buttons/LoginButton';
 import BottomLinks from '@/components/navigation/BottomLinks';
+import BottomTabs from '@/components/navigation/BottomTabs';
 
 const Index = () => {
   return (  
@@ -14,6 +15,7 @@ const Index = () => {
       <LoginButton />
       <SkipButton />
       <BottomLinks />
+      <BottomTabs />
     </View>
   );
 };
