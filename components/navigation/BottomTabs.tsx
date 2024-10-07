@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import JamsMap from '../JamsMap';
 import AddJam from '../AddJam';
 import UserAccount from '../UserAccount';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const BottomTabs = () => {
   const Tab = createBottomTabNavigator();
@@ -53,9 +54,10 @@ const BottomTabs = () => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    backgroundColor: 'blue',
     position: 'absolute',
     bottom: 0,
+    borderTopWidth: 1,
+    borderTopColor: Colors.primary,
   },
   tabs: {
     paddingTop: 10,
