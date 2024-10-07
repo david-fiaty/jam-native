@@ -9,14 +9,16 @@ import BottomTabs from '@/components/navigation/BottomTabs';
 
 const Index = () => {
   return (  
+    <>
     <View style={styles.container}>
       <StaticImage uri={require('@/assets/images/jam-logo.png')} width={110} height={110} />    
       <Carousel />
       <LoginButton />
       <SkipButton />
       <BottomLinks />
-      <BottomTabs />
     </View>
+    <BottomTabs />
+    </>
   );
 };
 
