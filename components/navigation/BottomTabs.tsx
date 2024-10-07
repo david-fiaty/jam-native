@@ -18,37 +18,37 @@ const BottomTabs = () => {
         }}
       >
         <Tab.Screen 
-          name="Map" 
+          name="map" 
           component={JamsMap} 
           options={{
-            tabBarLabel: 'Map',
+            tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
               <Pressable style={styles.pressable} onPress={() => router.push('/jams') }>
-                <Ionicons name="location" size={40} color={Colors.primary} />
+                <Ionicons name="location" size={26} color={Colors.primary} />
               </Pressable>
             ),
           }}
         />
         <Tab.Screen 
-          name="Add" 
+          name="add" 
           component={AddJam} 
           options={{
-            tabBarLabel: 'Add',
+            tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
               <Pressable style={styles.pressable} onPress={() => router.push('/jams') }>
-                <Ionicons name="add" size={40} color={Colors.primary} />
+                <Ionicons name="add" size={26} color={Colors.primary} />
               </Pressable>
             ),
           }}
         />
         <Tab.Screen 
-          name="Account" 
+          name="account" 
           component={AddJam} 
           options={{
-            tabBarLabel: 'Account',
+            tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
               <Pressable style={styles.pressable} onPress={() => router.push('/jams') }>
-                <Ionicons name="person-circle" size={40} color={Colors.primary} />
+                <Ionicons name="person-circle" size={26} color={Colors.primary} />
               </Pressable>
             ),
           }}
@@ -64,6 +64,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'blue',
     position: 'absolute',
     bottom: 0,
+  },
+  pressable: {
+    display: 'flex',
+    marginTop: 10,
   },
 });
 
