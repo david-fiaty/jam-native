@@ -1,7 +1,7 @@
 import { StyleSheet, View, FlatList, Text } from 'react-native';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import TopToolbar from '@/components/navigation/TopToolbar';
-import JamItem from '@/components/jam/JamItem';
+import Jam from '@/components/Jam';
 
 const Jams = () => {
   return (  
@@ -10,7 +10,7 @@ const Jams = () => {
       <FlatList 
         data={data} 
         horizontal={false}  
-        renderItem={({item, index}) => <JamItem item={item} index={index} />} 
+        renderItem={({item, index}) => <Jam item={item} index={index} />} 
       />
     </View>
   );

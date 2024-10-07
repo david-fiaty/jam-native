@@ -5,7 +5,7 @@ import { GlobalStyles } from '@/constants/GlobalStyles';
 import BackButton from '../navigation/BackButton';
 import JammersIcon from '../icons/JammersIcon';
 
-const ItemJammers = () => {
+const Saved = () => {
   const [modalVisible, setModalVisible] = useState(false);
   
   return (
@@ -21,21 +21,9 @@ const ItemJammers = () => {
             <TouchableWithoutFeedback>
               <View style={GlobalStyles.modal.view}>
                 <Pressable onPress={() => setModalVisible(!modalVisible)}>
-                  <BackButton title="Jammers" style={styles.title} />
+                  <BackButton title="Jam is now saved to your Jams" style={styles.title} />
                 </Pressable>
-                <FlatList 
-                  data={data} 
-                  horizontal={false}  
-                  style={styles.list}
-                  renderItem={({item, index}) => {
-                    return (
-                      <View style={styles.row}>
-                        <FontAwesome name="user-circle" size={32} color={GlobalStyles.icon.color} />
-                        <Text style={styles.text}>Jammer {index}</Text>
-                      </View>
-                    );
-                  }} 
-                />
+                
               </View>
               </TouchableWithoutFeedback>
           </View>
@@ -91,4 +79,4 @@ const data = [
   },
 ];
 
-export default ItemJammers;
+export default Saved;

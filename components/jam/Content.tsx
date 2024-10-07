@@ -1,5 +1,4 @@
 import { StyleSheet, View, Text, Pressable } from 'react-native';
-import { Button } from '@rneui/themed';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 
 type Props = {
@@ -7,7 +6,7 @@ type Props = {
   index: number,
 };
 
-const ItemContent = ({item, index}: Props) => {
+const Content = ({item, index}: Props) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{item.content}</Text>
@@ -31,4 +30,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ItemContent;
+export default Content;
