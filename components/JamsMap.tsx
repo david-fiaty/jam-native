@@ -17,7 +17,7 @@ const JamsMap = () => {
         <TouchableWithoutFeedback onPress={() => setModalVisible(!modalVisible)}>
           <View style={GlobalStyles.modal.container}>
             <TouchableWithoutFeedback>
-              <View style={GlobalStyles.modal.view}>
+              <View style={styles.view}>
               <Text>Map</Text>
               </View>
             </TouchableWithoutFeedback>
@@ -34,8 +34,12 @@ const JamsMap = () => {
 const styles = StyleSheet.create({
   container: {
   },
-  list: {
-    width: '100%',
+  view: {
+    ...GlobalStyles.modal.view,
+    ...{
+      backgroundColor: 'blue',
+      height: '92.3%',
+    }
   },
   title: {
     ...GlobalStyles.text,
