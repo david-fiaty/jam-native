@@ -1,12 +1,12 @@
 import { StyleSheet, View, Text} from 'react-native';
-import ShareIcon from '../icons/ShareIcon';
+import SaveIcon from '../icons/SaveIcon';
 import ModalWindow from '../ModalWindow';
 
 const SaveJam = () => {
   return (
     <View style={styles.container}>        
       <ModalWindow 
-        label={<ShareIcon />}
+        label={<SaveIcon />}
         title="Save Jam" 
         content={
           <Text>SAVE JAM</Text>
