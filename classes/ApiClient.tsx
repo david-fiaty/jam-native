@@ -20,7 +20,7 @@ const ApiClient = class ApiClient {
     }
   }
 
-  handleResponse() {
+  processResponse() {
 
   }
 };
