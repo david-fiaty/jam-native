@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, Modal, Pressable, View, Text, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Modal, Pressable, View, TouchableWithoutFeedback } from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import BackButton from '../navigation/BackButton';
 import SaveIcon from '../icons/SaveIcon';

@@ -17,7 +17,7 @@ https://withfra.me/react-native-tutorials/how-to-use-svg-in-react-native
 - Is carousel pager in Jam items at the right place? Not enough space for many images
 - Is inserting jam item actions windows ont top of list a good idea? Got to scrool up if at bottom of list
 - About/legal links => shouldn't there be only one bottom link on each page
-
+- Why is form changing on second bottom account tab click
 
 
 import Ionicons from '@expo/vector-icons/Ionicons';
