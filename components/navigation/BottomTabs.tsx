@@ -2,7 +2,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import JamsMap from '../jams/JamsMap';
 import AddJam from '../jam/AddJam';
-import UserAccount from '../UserAccount';
+import UserProfile from '../UserProfile';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const BottomTabs = () => {
@@ -42,7 +42,7 @@ const BottomTabs = () => {
           options={{
             tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
-              <UserAccount />
+              <UserProfile />
             ),
           }}
         />
