@@ -8,7 +8,7 @@ const LoginButton = () => {
 
   return (
     <Button 
-      title="Hello" 
+      title="Login / Signup" 
       type="outline" 
       buttonStyle={styles.button} 
       titleStyle={[GlobalStyles.text, {textTransform: 'uppercase', fontSize: 13}]}
