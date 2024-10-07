@@ -1,9 +1,9 @@
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import { StyleSheet, View, Text } from 'react-native';
-import ItemHeader from './jam/ItemHeader';
-import ItemImages from './jam/ItemImages';
-import ItemToolbar from './jam/ItemToolbar';
-import ItemContent from './jam/ItemContent';
+import Header from './jam/Header';
+import Images from './jam/Images';
+import Toolbar from './jam/Toolbar';
+import Content from './jam/Content';
 
 type Props = {
   item: object,
@@ -13,10 +13,10 @@ type Props = {
 const Jam = ({item, index}: Props) => {
   return (
     <View style={styles.container}>
-      <ItemHeader item={item} index={index} />
-      <ItemImages item={item} index={index} />
-      <ItemToolbar item={item} index={index} />
-      <ItemContent item={item} index={index} />
+      <Header item={item} index={index} />
+      <Images item={item} index={index} />
+      <Toolbar item={item} index={index} />
+      <Content item={item} index={index} />
     </View>
   );
 };
