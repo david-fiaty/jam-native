@@ -19,6 +19,9 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "runtimeVersion": {
+        "policy": "appVersion"
       }
     },
     "web": {
@@ -31,6 +34,15 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "bc105b9c-d776-42e2-bd2e-2ebcff179748"
+      }
+    },
+    "owner": "david-fiaty-org",
+    "updates": {
+      "url": "https://u.expo.dev/bc105b9c-d776-42e2-bd2e-2ebcff179748"
     }
   }
 }
