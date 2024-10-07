@@ -1,5 +1,4 @@
-import { StyleSheet, View, Pressable, Text } from 'react-native';
-import { useRouter } from 'expo-router';
+import { StyleSheet, View, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import JamsMap from '../JamsMap';
 import AddJam from '../AddJam';
@@ -7,7 +6,6 @@ import UserAccount from '../UserAccount';
 
 const BottomTabs = () => {
   const Tab = createBottomTabNavigator();
-  const router = useRouter();
 
   return (
     <View style={styles.container}>
@@ -28,7 +26,7 @@ const BottomTabs = () => {
         />
         <Tab.Screen 
           name="add" 
-          component={AddJam} 
+          component={Text}
           options={{
             tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
@@ -38,7 +36,7 @@ const BottomTabs = () => {
         />
         <Tab.Screen 
           name="account" 
-          component={AddJam} 
+          component={Text}
           options={{
             tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
