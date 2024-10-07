@@ -7,7 +7,7 @@ type Props = {
   index: number,
 };
 
-const ItemImages = ({item, index}: Props) => {
+const JamImages = ({item, index}: Props) => {
   return (
     <View style={styles.container}>
     </View>
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ItemImages;
+export default JamImages;

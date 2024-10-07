@@ -1,19 +1,18 @@
 import { StyleSheet, View } from 'react-native';
 import SaveIcon from '../icons/SaveIcon';
 import ShareIcon from '../icons/ShareIcon';
-import JammersIcon from '../icons/JammersIcon';
-import ItemJammers from './ItemJammers';
+import JamJammers from './JamJammers';
 
 type Props = {
   item: object,
   index: number,
 };
 
-const ItemToolbar = ({item, index}: Props) => {
+const JamToolbar = ({item, index}: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.left}>
-        <ItemJammers />
+        <JamJammers />
       </View>
       <View style={styles.right}>
         <SaveIcon />
@@ -46,4 +45,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ItemToolbar;
+export default JamToolbar;
