@@ -1,18 +1,22 @@
 import { StyleSheet, View, FlatList, Text } from 'react-native';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import TopToolbar from '@/components/navigation/TopToolbar';
+import BottomTabs from '@/components/navigation/BottomTabs';
 import Jam from '@/components/Jam';
 
 const Jams = () => {
   return (  
-    <View style={styles.container}>
-      <TopToolbar />
-      <FlatList 
-        data={data} 
-        horizontal={false}  
-        renderItem={({item, index}) => <Jam item={item} index={index} />} 
-      />
-    </View>
+    <>
+      <View style={styles.container}>
+        <TopToolbar />
+        <FlatList 
+          data={data} 
+          horizontal={false}  
+          renderItem={({item, index}) => <Jam item={item} index={index} />} 
+        />
+      </View>
+      <BottomTabs />
+    </>
   );
 };
 
