@@ -1,4 +1,4 @@
-import DataProvider from "./DataProvider";
+import DataProvider from './DataProvider';
 
 const ApiClient = class ApiClient {
   constructor() {
@@ -6,7 +6,7 @@ const ApiClient = class ApiClient {
   }
 
   getApiData(dataKey: string) {
-    
+    return DataProvider.get(dataKey);
   }
 
   async sendRequest() {
