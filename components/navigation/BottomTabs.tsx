@@ -21,10 +21,10 @@ const BottomTabs = () => {
           name="Map" 
           component={JamsMap} 
           options={{
-            tabBarLabel: 'Home',
+            tabBarLabel: 'Map',
             tabBarIcon: ({ color, size }) => (
               <Pressable style={styles.pressable} onPress={() => router.push('/jams') }>
-                <Ionicons name="home" size={40} color={Colors.primary} />
+                <Ionicons name="location" size={40} color={Colors.primary} />
               </Pressable>
             ),
           }}
