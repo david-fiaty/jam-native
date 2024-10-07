@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet, Modal, Pressable, View, Text, TouchableWithoutFeedback } from 'react-native';
-import { GlobalStyles } from '@/constants/GlobalStyles';
+import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import BackButton from './navigation/BackButton';
 
 type Props = {
@@ -45,8 +45,12 @@ const ModalWindow = ({label, title, content, animation}: Props) => {
 const styles = StyleSheet.create({
   container: {
   },
-  list: {
-    width: '100%',
+  view: {
+    ...GlobalStyles.modal.view,
+    ...{
+      backgroundColor: Colors.tertiary,
+      height: '92.3%',
+    }
   },
   title: {
     ...GlobalStyles.text,
