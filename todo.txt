@@ -19,3 +19,17 @@ https://withfra.me/react-native-tutorials/how-to-use-svg-in-react-native
 - About/legal links => shouldn't there be only one bottom link on each page
 
 
+
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { type IconProps } from '@expo/vector-icons/build/createIconSet';
+import { type ComponentProps } from 'react';
+
+export function TabBarIcon({ style, ...rest }: IconProps<ComponentProps<typeof Ionicons>['name']>) {
+  return <Ionicons size={28} style={[{ marginBottom: -3 }, style]} {...rest} />;
+}
+
+
+  <TabBarIcon name={focused ? 'location' : 'location-outline'} color={color} />
+  <TabBarIcon name={focused ? 'add' : 'add-outline'} color={color} />
+
+     <TabBarIcon name={focused ? 'person-circle' : 'person-circle-outline'} color={color} />
