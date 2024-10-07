@@ -1,3 +1,10 @@
+# Commands
+eas init --id "bc105b9c-d776-42e2-bd2e-2ebcff179748"
+eas update --platform android
+
+
+bc105b9c-d776-42e2-bd2e-2ebcff179748
+
 # Multilanguages
 https://medium.com/@prathiba2796/internationalization-and-localization-in-react-native-d37c412f42f9
 
