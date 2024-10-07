@@ -1,4 +1,4 @@
-import { StyleSheet, View, Pressable } from 'react-native';
+import { StyleSheet, View, Pressable, Text } from 'react-native';
 import { useRouter } from 'expo-router';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -18,37 +18,35 @@ const BottomTabs = () => {
         }}
       >
         <Tab.Screen 
-          name="Map" 
-          component={JamsMap} 
+          name="map" 
+          component={Text}
           options={{
-            tabBarLabel: 'Map',
+            tabBarLabel: '',
+            tabBarIcon: ({ color, size }) => (
+              <JamsMap />
+            ),
+          }}
+        />
+        <Tab.Screen 
+          name="add" 
+          component={AddJam} 
+          options={{
+            tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
               <Pressable style={styles.pressable} onPress={() => router.push('/jams') }>
-                <Ionicons name="location" size={40} color={Colors.primary} />
+                <Ionicons name="add" size={26} color={Colors.primary} />
               </Pressable>
             ),
           }}
         />
         <Tab.Screen 
-          name="Add" 
+          name="account" 
           component={AddJam} 
           options={{
-            tabBarLabel: 'Add',
+            tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
               <Pressable style={styles.pressable} onPress={() => router.push('/jams') }>
-                <Ionicons name="add" size={40} color={Colors.primary} />
-              </Pressable>
-            ),
-          }}
-        />
-        <Tab.Screen 
-          name="Account" 
-          component={AddJam} 
-          options={{
-            tabBarLabel: 'Account',
-            tabBarIcon: ({ color, size }) => (
-              <Pressable style={styles.pressable} onPress={() => router.push('/jams') }>
-                <Ionicons name="person-circle" size={40} color={Colors.primary} />
+                <Ionicons name="person-circle" size={26} color={Colors.primary} />
               </Pressable>
             ),
           }}
@@ -64,6 +62,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'blue',
     position: 'absolute',
     bottom: 0,
+  },
+  pressable: {
+    display: 'flex',
+    marginTop: 10,
   },
 });
 
