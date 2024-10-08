@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View} from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+import { Colors } from '@/constants/GlobalStyles';
 import ModalWindow from '../ModalWindow';
 
 const UserProfile = () => {
