@@ -1,5 +1,5 @@
 import { StyleSheet, View, Text} from 'react-native';
-import AntDesign from '@expo/vector-icons/AntDesign';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ModalWindow from '../ModalWindow';
 
@@ -7,7 +7,11 @@ const SaveJam = () => {
   return (
     <View style={styles.container}>        
       <ModalWindow 
-        label={<AntDesign name="arrowdown" size={16} style={styles.icon} />}
+        label={<MaterialIcons 
+          name="favorite-border" 
+          size={14} 
+          style={styles.icon} 
+        />}
         title="Save Jam" 
         content={
           <Text>SAVE JAM</Text>
@@ -25,7 +29,7 @@ const styles = StyleSheet.create({
     ...GlobalStyles.icon,
     ...{
       backgroundColor: Colors.secondary,
-      padding: 5,
+      padding: 6,
       borderRadius: 40,
     },
   }
