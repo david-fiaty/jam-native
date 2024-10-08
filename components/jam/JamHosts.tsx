@@ -1,17 +1,24 @@
 import { StyleSheet, View, Text} from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { GlobalStyles } from '@/constants/GlobalStyles';
-
 import ModalWindow from '../ModalWindow';
 
-const JamActions = () => {
+type Props = {
+  item: object,
+  index: number,
+};
+
+const JamHosts = ({item, index}: Props) => {
   return (
     <View style={styles.container}>        
       <ModalWindow 
-        label={<Ionicons name="ellipsis-horizontal-sharp" size={24} color={GlobalStyles.icon.color} />}
-        title="More actions" 
+        label={        
+          <Text style={GlobalStyles.text}>
+            @host +{item.host_count}
+          </Text>
+        }
+        title="Jam Hosts" 
         content={
-          <Text>MORE ACTIONS</Text>
+          <Text>JAM HOSTS</Text>
         }
         animation="slide"
       />   
@@ -24,4 +31,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default JamActions;
+export default JamHosts;
