@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet, Modal, Pressable, View, TouchableWithoutFeedback } from 'react-native';
-import { GlobalStyles } from '@/constants/GlobalStyles';
+import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import BackButton from './navigation/BackButton';
 
 type Props = {
@@ -8,10 +8,9 @@ type Props = {
   title: string,
   content: JSX.Element,
   animation?: string,
-  menu?: boolean,
 };
 
-const ModalView = ({label, title, content, animation, menu}: Props) => {
+const ModalView = ({label, title, content, animation}: Props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const animationType = animation ? animation : 'slide';
   
@@ -27,7 +26,7 @@ const ModalView = ({label, title, content, animation, menu}: Props) => {
         <TouchableWithoutFeedback onPress={() => setModalVisible(!modalVisible)}>
           <View style={styles.modal.container}>
             <TouchableWithoutFeedback>
-              <View style={menu ? styles.modal.menu : styles.modal.view}>
+              <View style={styles.modal.view}>
                 <Pressable onPress={() => setModalVisible(!modalVisible)}>
                   <BackButton title={title} />
                 </Pressable>
@@ -60,17 +59,11 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       flexDirection: 'column',
-      alignItems: 'flex-start',
+      alignItems: 'center',
       marginTop: 88,
     },
     view: {
-      backgroundColor: 'red',
-      width: '100%',
-      alignItems: 'flex-start',
-      padding: 20,
-    },
-    menu: {
-      backgroundColor: 'blue',
+      backgroundColor: 'white',
       width: '100%',
       alignItems: 'flex-start',
       padding: 20,

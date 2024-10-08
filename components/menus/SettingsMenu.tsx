@@ -10,7 +10,6 @@ const SettingsMenu = () => {
       <ModalView 
         label={<SimpleLineIcons name="menu" size={12} style={styles.icon} />}
         title="Settings" 
-        menu={true}
         content={
           <FlatList 
             data={data} 
