@@ -17,7 +17,7 @@ export const GlobalStyles = {
   },
   text: {
     color: Colors.primary,
-    fontSize: 14,
+    fontSize: 13.5,
   },
   border: {
     color: Colors.primary,
