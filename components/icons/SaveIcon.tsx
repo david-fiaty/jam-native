@@ -14,9 +14,8 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     alignItems: 'center',
-    width: 40,
     borderRadius: 40,
-    padding: 10,
+    padding: 6,
     backgroundColor: GlobalStyles.icon.backgroundColor,
   },
 });
