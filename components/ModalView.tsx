@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, Modal, Pressable, View, Text, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Modal, Pressable, View, TouchableWithoutFeedback } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import BackButton from './navigation/BackButton';
 
@@ -10,7 +10,7 @@ type Props = {
   animation?: string,
 };
 
-const ModalWindow = ({label, title, content, animation}: Props) => {
+const ModalView = ({label, title, content, animation}: Props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const animationType = animation ? animation : 'slide';
   
@@ -18,14 +18,15 @@ const ModalWindow = ({label, title, content, animation}: Props) => {
     <View style={styles.container}>        
       <Modal
         animationType={animationType}
+        hardwareAccelerated={true}
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => setModalVisible(!modalVisible)}
       >
         <TouchableWithoutFeedback onPress={() => setModalVisible(!modalVisible)}>
-          <View style={GlobalStyles.modal.container}>
+          <View style={styles.modal.container}>
             <TouchableWithoutFeedback>
-              <View style={GlobalStyles.modal.view}>
+              <View style={styles.modal.view}>
                 <Pressable onPress={() => setModalVisible(!modalVisible)}>
                   <BackButton title={title} />
                 </Pressable>
@@ -45,13 +46,6 @@ const ModalWindow = ({label, title, content, animation}: Props) => {
 const styles = StyleSheet.create({
   container: {
   },
-  view: {
-    ...GlobalStyles.modal.view,
-    ...{
-      backgroundColor: Colors.tertiary,
-      height: '92.3%',
-    }
-  },
   text: GlobalStyles.text,
   row: {
     display: 'flex',
@@ -60,7 +54,21 @@ const styles = StyleSheet.create({
     paddingTop: 8,
     paddingBottom: 8,
     gap: 16,
-  }
+  },
+  modal: {
+    container: {
+      flex: 1,
+      flexDirection: 'column',
+      alignItems: 'center',
+      marginTop: 88,
+    },
+    view: {
+      backgroundColor: 'white',
+      width: '100%',
+      alignItems: 'flex-start',
+      padding: 20,
+    },
+  },
 });
 
-export default ModalWindow;
+export default ModalView;

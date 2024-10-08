@@ -1,6 +1,6 @@
 import { StyleSheet, View, Text} from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
-import ModalWindow from '../ModalWindow';
+import ModalView from '../ModalView';
 
 type Props = {
   item: object,
@@ -10,7 +10,7 @@ type Props = {
 const JamHosts = ({item, index}: Props) => {
   return (
     <View style={styles.container}>        
-      <ModalWindow 
+      <ModalView 
         label={        
           <Text style={GlobalStyles.text}>
             @host +{item.host_count}

@@ -2,7 +2,7 @@ import { StyleSheet, View, FlatList, Text } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Feather from '@expo/vector-icons/Feather';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
-import ModalWindow from '../ModalWindow';
+import ModalView from '../ModalView';
 
 type Props = {
   item: object,
@@ -12,7 +12,7 @@ type Props = {
 const JamJammers = ({item, index}: Props) => {
   return (
     <View style={styles.container}>   
-      <ModalWindow 
+      <ModalView 
         label={
           <View style={styles.label}>
             <Feather
