@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
     marginTop: 20,
   },
   text: GlobalStyles.text,
