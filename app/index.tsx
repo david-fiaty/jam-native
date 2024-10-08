@@ -1,7 +1,7 @@
 import { View, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Button } from '@rneui/themed';
-import Carousel from '../components/carousel/Controller';
+import Slideshow from '../components/Slideshow';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import { StaticImage } from '@/components/StaticImage';
 import BottomLinks from '@/components/navigation/BottomLinks';
@@ -12,7 +12,7 @@ const Index = () => {
   return (  
     <View style={styles.container}>
       <StaticImage uri={require('@/assets/images/jam-logo.png')} width={110} height={110} />    
-      <Carousel />
+      <Slideshow />
       <Button 
         title="Login / Signup" 
         type="outline" 
