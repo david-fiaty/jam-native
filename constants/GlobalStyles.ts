@@ -17,7 +17,7 @@ export const GlobalStyles = {
   },
   text: {
     color: Colors.primary,
-    fontSize: 14,
+    fontSize: 13.5,
   },
   border: {
     color: Colors.primary,
@@ -30,7 +30,7 @@ export const GlobalStyles = {
     color: Colors.primary,
   },
   input: {
-    width: '80%',
+    width: '100%',
     height: 45,
     borderWidth: 1, 
     borderColor: Colors.primary, 
