@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     ...GlobalStyles.icon,
     ...{
       backgroundColor: Colors.secondary,
-      padding: 4,
+      padding: 5,
       borderRadius: 40,
     },
   }
