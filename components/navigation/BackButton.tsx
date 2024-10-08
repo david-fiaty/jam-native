@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   text: {
     ...GlobalStyles.text,
     ...{
-      fontSize: 16,
+      fontSize: 14,
       fontWeight: 'bold',
     },
   },
