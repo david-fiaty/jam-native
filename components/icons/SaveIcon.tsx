@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     borderRadius: 40,
-    padding: 6,
+    padding: 5,
     backgroundColor: GlobalStyles.icon.backgroundColor,
   },
 });
