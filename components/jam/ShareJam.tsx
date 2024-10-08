@@ -1,12 +1,12 @@
 import { StyleSheet, View, Text} from 'react-native';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import ModalWindow from '../ModalWindow';
+import ModalView from '../ModalView';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
 const ShareJam = () => {
   return (
     <View style={styles.container}>        
-      <ModalWindow 
+      <ModalView 
         label={<MaterialCommunityIcons 
           name="share" 
           size={14} style={styles.icon} 

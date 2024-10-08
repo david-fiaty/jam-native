@@ -1,12 +1,12 @@
 import { StyleSheet, View, Text} from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-import ModalWindow from '../ModalWindow';
+import ModalView from '../ModalView';
 
 const SaveJam = () => {
   return (
     <View style={styles.container}>        
-      <ModalWindow 
+      <ModalView 
         label={<MaterialIcons 
           name="favorite-border" 
           size={14} 
