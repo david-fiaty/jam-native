@@ -1,16 +1,16 @@
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import { StyleSheet, View, Text } from 'react-native';
-import JamHeader from './jam/JamHeader';
-import JamImages from './jam/JamImages';
-import JamToolbar from './jam/JamToolbar';
-import JamContent from './jam/JamContent';
+import JamHeader from './JamHeader';
+import JamImages from './JamImages';
+import JamToolbar from './JamToolbar';
+import JamContent from './JamContent';
 
 type Props = {
   item: object,
   index: number,
 };
 
-const Jam = ({item, index}: Props) => {
+const JamItem = ({item, index}: Props) => {
   return (
     <View style={styles.container}>
       <JamHeader item={item} index={index} />
@@ -30,4 +30,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Jam;
+export default JamItem;

@@ -1,49 +1,32 @@
-import { useState } from 'react';
-import { StyleSheet, Modal, Pressable, View, FlatList, Text, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, View, FlatList, Text } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { GlobalStyles } from '@/constants/GlobalStyles';
-import BackButton from '../navigation/BackButton';
 import AsteriskIcon from '../icons/AsteriskIcon';
+import ModalWindow from '../ModalWindow';
 
 const JamJammers = () => {
-  const [modalVisible, setModalVisible] = useState(false);
-  
   return (
-    <View style={styles.container}>        
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(!modalVisible)}
-      >
-        <TouchableWithoutFeedback onPress={() => setModalVisible(!modalVisible)}>
-          <View style={GlobalStyles.modal.container}>
-            <TouchableWithoutFeedback>
-              <View style={GlobalStyles.modal.view}>
-                <Pressable onPress={() => setModalVisible(!modalVisible)}>
-                  <BackButton title="Jammers" style={styles.title} />
-                </Pressable>
-                <FlatList 
-                  data={data} 
-                  horizontal={false}  
-                  style={styles.list}
-                  renderItem={({item, index}) => {
-                    return (
-                      <View style={styles.row}>
-                        <FontAwesome name="user-circle" size={32} color={GlobalStyles.icon.color} />
-                        <Text style={styles.text}>Jammer {index}</Text>
-                      </View>
-                    );
-                  }} 
-                />
-              </View>
-              </TouchableWithoutFeedback>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
-      <Pressable onPress={() => setModalVisible(true)}>
-        <AsteriskIcon />
-      </Pressable>
+    <View style={styles.container}>   
+      <ModalWindow 
+        label={<AsteriskIcon />}
+        title="Jammers" 
+        content={
+          <FlatList 
+            data={data} 
+            horizontal={false}  
+            style={styles.list}
+            renderItem={({item, index}) => {
+              return (
+                <View style={styles.row}>
+                  <FontAwesome name="user-circle" size={32} color={GlobalStyles.icon.color} />
+                  <Text style={styles.text}>Jammer {index}</Text>
+                </View>
+              );
+            }} 
+          />
+        }
+        animation="slide"
+      />       
     </View>
   );
 };
@@ -53,13 +36,6 @@ const styles = StyleSheet.create({
   },
   list: {
     width: '100%',
-  },
-  title: {
-    ...GlobalStyles.text,
-    ...{
-      fontSize: 16,
-      fontWeight: 'bold',
-    },
   },
   text: GlobalStyles.text,
   row: {
