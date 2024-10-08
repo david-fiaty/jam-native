@@ -1,24 +1,17 @@
-import { View, StyleSheet } from 'react-native';
-import { Button } from '@rneui/themed';
+import { View, StyleSheet, Text } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 
 type Props = {
   title: string,
-  style?: {},
   onPress?: () => void,
 };
 
-const BackButton = ({title, style, onPress}: Props) => {
+const BackButton = ({title, onPress}: Props) => {
   return (
     <View style={styles.container}>
-      <AntDesign name="left" size={20} color={GlobalStyles.icon.color} style={{marginTop: 8}} />
-      <Button 
-        title={title} 
-        type="clear" 
-        onPress={onPress}
-        titleStyle={[GlobalStyles.text, style]}
-      />
+      <AntDesign name="left" size={20} color={GlobalStyles.icon.color} />
+      <Text style={styles.text}>{title}</Text>
     </View>
   );
 };
@@ -26,8 +19,17 @@ const BackButton = ({title, style, onPress}: Props) => {
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     flexDirection: 'row',
+    marginBottom: 16,
+    gap: 8,
+  },
+  text: {
+    ...GlobalStyles.text,
+    ...{
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
   },
 });
 
