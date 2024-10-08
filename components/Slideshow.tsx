@@ -1,10 +1,10 @@
-import { useState } from 'react';
 import { View, StyleSheet, ViewToken } from 'react-native';
 import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
-import CarouselItem from './CarouselItem';
-import CarouselPager from './CarouselPager';
+import SlideshowItem from '@/components/slideshow/SlideshowItem';
+import SlideshowPager from '@/components/slideshow/SlideshowPager';
+import { useState, } from 'react';
 
-export default function CarouselController() {
+const Slideshow = () => {
   const scrollX = useSharedValue(0);
   const [pagerIndex, setPagerIndex] = useState(0);
   const onScrollHandler = useAnimatedScrollHandler({
@@ -27,7 +27,7 @@ export default function CarouselController() {
     <View style={styles.container}>
       <Animated.FlatList 
         data={data} 
-        renderItem={({item, index}) => <CarouselItem item={item} index={index} scrollX={scrollX} />} 
+        renderItem={({item, index}) => <SlideshowItem item={item} index={index} scrollX={scrollX}/>} 
         horizontal={true}
         pagingEnabled={true}
         showsHorizontalScrollIndicator={false}
@@ -35,7 +35,8 @@ export default function CarouselController() {
         viewabilityConfig={viewabilityConfig}
         onViewableItemsChanged={onViewableItemsChanged}
       />
-      <CarouselPager data={data} pagerIndex={pagerIndex}/> 
+
+      <SlideshowPager data={data} pagerIndex={pagerIndex}/> 
     </View>
   );
 }
@@ -45,6 +46,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
+    height: 200,
   },
 });
 
@@ -68,3 +70,5 @@ const data = [
     link: 'ccc link',
   },
 ];
+
+export default Slideshow;
