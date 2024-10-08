@@ -18,6 +18,7 @@ const ModalView = ({label, title, content, animation}: Props) => {
     <View style={styles.container}>        
       <Modal
         animationType={animationType}
+        hardwareAccelerated={true}
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => setModalVisible(!modalVisible)}
