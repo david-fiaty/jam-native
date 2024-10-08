@@ -1,13 +1,13 @@
 import { StyleSheet, View, FlatList, Text } from 'react-native';
 import MenuItem from './MenuItem';
 import ModalWindow from '../ModalWindow';
-import { GlobalStyles } from '@/constants/GlobalStyles';
+import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
 const NotificationsMenu = () => {  
   return (
     <View style={styles.container}>   
       <ModalWindow 
-        label={<Text style={GlobalStyles.text}>20+</Text>}
+        label={<Text style={[styles.icon]}>20+</Text>}
         title="Notifications" 
         content={
           <FlatList 
@@ -28,6 +28,18 @@ const styles = StyleSheet.create({
   },
   list: {
     width: '100%',
+  },
+  icon: {
+    ...GlobalStyles.text,
+    ...GlobalStyles.icon,
+    ...{
+      backgroundColor: Colors.tertiary,
+      paddingTop: 5,
+      paddingBottom: 5,
+      paddingLeft: 8,
+      paddingRight: 8,
+      borderRadius: 40,
+    },
   },
 });
 
