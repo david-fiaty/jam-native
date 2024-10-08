@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Pressable } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 
@@ -8,12 +8,24 @@ type Props = {
 };
 
 const BackButton = ({title, onPress}: Props) => {
-  return (
-    <View style={styles.container}>
-      <AntDesign name="left" size={20} color={GlobalStyles.icon.color} />
-      <Text style={styles.text}>{title}</Text>
-    </View>
-  );
+  const ButtonView = () => {
+    return (        
+      <View style={styles.container}>
+        <AntDesign name="left" size={20} color={GlobalStyles.icon.color} />
+        <Text style={styles.text}>{title}</Text>
+      </View>
+    );
+  };
+
+  if (onPress) {
+    return (
+      <Pressable onPress={onPress}>
+        <ButtonView />
+      </Pressable>
+    );
+  }
+
+  return (<ButtonView />);
 };
 
 const styles = StyleSheet.create({
