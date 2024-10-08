@@ -1,6 +1,6 @@
-import { StyleSheet, View, Text } from 'react-native';
-import { GlobalStyles } from '@/constants/GlobalStyles';
+import { StyleSheet, View } from 'react-native';
 import JamActions from './JamActions';
+import JamHosts from './JamHosts';
 
 type Props = {
   item: object,
@@ -11,9 +11,7 @@ const JamHeader = ({item, index}: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.left}>
-        <Text style={styles.text}>
-          @host +{item.host_count}
-        </Text>
+        <JamHosts item={item} index={index} />
       </View>
       <View style={styles.right}>
         <JamActions />
@@ -43,7 +41,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 10,
   },
-  text: GlobalStyles.text,
 });
 
 export default JamHeader;
