@@ -1,13 +1,13 @@
-import { StyleSheet, View, FlatList } from 'react-native';
-import NotificationsIcon from '../icons/NotificationsIcon';
+import { StyleSheet, View, FlatList, Text } from 'react-native';
 import MenuItem from './MenuItem';
 import ModalWindow from '../ModalWindow';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 
 const NotificationsMenu = () => {  
   return (
     <View style={styles.container}>   
       <ModalWindow 
-        label={<NotificationsIcon />}
+        label={<Text style={GlobalStyles.text}>20+</Text>}
         title="Notifications" 
         content={
           <FlatList 

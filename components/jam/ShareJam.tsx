@@ -1,12 +1,13 @@
 import { StyleSheet, View, Text} from 'react-native';
-import ShareIcon from '../icons/ShareIcon';
+import AntDesign from '@expo/vector-icons/AntDesign';
 import ModalWindow from '../ModalWindow';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 
 const ShareJam = () => {
   return (
     <View style={styles.container}>        
       <ModalWindow 
-        label={<ShareIcon />}
+        label={<AntDesign name="arrowup" size={16} color={GlobalStyles.icon.color} />}
         title="Share Jam" 
         content={
           <Text>SHARE JAM</Text>

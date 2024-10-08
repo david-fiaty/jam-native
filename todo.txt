@@ -2,7 +2,6 @@
 eas init --id "bc105b9c-d776-42e2-bd2e-2ebcff179748"
 eas update --platform android
 
-
 bc105b9c-d776-42e2-bd2e-2ebcff179748
 
 # Multilanguages
@@ -12,13 +11,20 @@ https://medium.com/@prathiba2796/internationalization-and-localization-in-react-
 https://withfra.me/react-native-tutorials/how-to-use-svg-in-react-native
 
 # Questions to MM
-- How to structure content links in home text carousel
-- How to structure paragraphs in about/link
+- home text carousel link => collabslible to view more
+- How to structure paragraphs in about/link: hard code for now
+
 - Is carousel pager in Jam items at the right place? Not enough space for many images
+
 - Is inserting jam item actions windows ont top of list a good idea? Got to scrool up if at bottom of list
-- About/legal links => shouldn't there be only one bottom link on each page
+- About/legal links => shouldn't there be only one bottom link on each page : disable account click
 - Why is form changing on second bottom account tab click
 
+# Todo
+- Integrate leaflet
+
+Email verification
+Twilio => SMS
 
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { type IconProps } from '@expo/vector-icons/build/createIconSet';
