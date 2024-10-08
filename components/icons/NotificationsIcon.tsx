@@ -1,10 +1,10 @@
 import { StyleSheet, View, Text } from 'react-native';
-import { Colors } from '@/constants/GlobalStyles';
+import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 
 const NotificationsIcon = () => {
   return (
     <View style={styles.container}>        
-      <Text>20+</Text>
+      <Text style={GlobalStyles.text}>20+</Text>
     </View>
   );
 };
