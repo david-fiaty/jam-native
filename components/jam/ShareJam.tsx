@@ -1,5 +1,5 @@
 import { StyleSheet, View, Text} from 'react-native';
-import AntDesign from '@expo/vector-icons/AntDesign';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import ModalWindow from '../ModalWindow';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
@@ -7,7 +7,10 @@ const ShareJam = () => {
   return (
     <View style={styles.container}>        
       <ModalWindow 
-        label={<AntDesign name="arrowup" size={16} style={styles.icon} />}
+        label={<MaterialCommunityIcons 
+          name="share" 
+          size={14} style={styles.icon} 
+        />}
         title="Share Jam" 
         content={
           <Text>SHARE JAM</Text>
@@ -25,7 +28,7 @@ const styles = StyleSheet.create({
     ...GlobalStyles.icon,
     ...{
       backgroundColor: Colors.secondary,
-      padding: 5,
+      padding: 6,
       borderRadius: 40,
     },
   }

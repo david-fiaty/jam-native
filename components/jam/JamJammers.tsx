@@ -1,6 +1,6 @@
 import { StyleSheet, View, FlatList, Text } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import Feather from '@expo/vector-icons/Feather';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import ModalWindow from '../ModalWindow';
 
@@ -15,9 +15,9 @@ const JamJammers = ({item, index}: Props) => {
       <ModalWindow 
         label={
           <View style={styles.label}>
-            <MaterialCommunityIcons 
-              name="asterisk" 
-              size={16} 
+            <Feather
+              name="users" 
+              size={14} 
               style={styles.icon}
             />
             <Text style={GlobalStyles.text}>{item.host_count} jammers</Text>
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     ...GlobalStyles.icon,
     ...{
       backgroundColor: Colors.secondary,
-      padding: 5,
+      padding: 6,
       borderRadius: 40,
     },
   }
