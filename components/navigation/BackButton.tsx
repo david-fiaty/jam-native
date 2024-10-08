@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
-    marginBottom: 16,
+    marginBottom: 12,
     gap: 8,
   },
   text: {
