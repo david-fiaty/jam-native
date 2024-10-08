@@ -9,7 +9,7 @@ const JamActions = () => {
     <View style={styles.container}>        
       <ModalWindow 
         label={<Ionicons name="ellipsis-horizontal-sharp" size={24} color={GlobalStyles.icon.color} />}
-        title="More" 
+        title="More actions" 
         content={
           <Text>MORE ACTIONS</Text>
         }
