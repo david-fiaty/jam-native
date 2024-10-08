@@ -7,7 +7,7 @@ import SearchIcon from '../icons/SearchIcon';
 const TopToolbar = () => {
   return (
     <View style={styles.container}>
-      <StaticImage uri={require('@/assets/images/jam-logo.png')} width={45} height={45} /> 
+      <StaticImage uri={require('@/assets/images/jam-logo.png')} width={40} height={42} /> 
       <View style={styles.buttons}> 
         <SettingsMenu />  
         <NotificationsMenu />
