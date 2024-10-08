@@ -1,12 +1,13 @@
 import { StyleSheet, View, Text} from 'react-native';
-import SaveIcon from '../icons/SaveIcon';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 import ModalWindow from '../ModalWindow';
 
 const SaveJam = () => {
   return (
     <View style={styles.container}>        
       <ModalWindow 
-        label={<SaveIcon />}
+        label={<AntDesign name="arrowdown" size={16} color={GlobalStyles.icon.color} />}
         title="Save Jam" 
         content={
           <Text>SAVE JAM</Text>

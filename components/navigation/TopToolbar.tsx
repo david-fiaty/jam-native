@@ -1,8 +1,10 @@
 import { View, StyleSheet, Text } from 'react-native';
 import { StaticImage } from '@/components/StaticImage';
+import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import SettingsMenu from '../menus/SettingsMenu';
 import NotificationsMenu from '../menus/NotificationsMenu';
-import SearchIcon from '../icons/SearchIcon';
+import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
+
 
 const TopToolbar = () => {
   return (
@@ -11,7 +13,7 @@ const TopToolbar = () => {
       <View style={styles.buttons}> 
         <SettingsMenu />  
         <NotificationsMenu />
-        <SearchIcon />
+        <SimpleLineIcons name="magnifier" size={14} color={GlobalStyles.icon.color} />
       </View>
     </View>
   );
