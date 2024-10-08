@@ -38,18 +38,4 @@ export const GlobalStyles = {
     paddingHorizontal: 12, 
     marginBottom: 10,
   },
-  modal: {
-    container: {
-      flex: 1,
-      flexDirection: 'column',
-      alignItems: 'flex-start',
-      marginTop: 88,
-    },
-    view: {
-      backgroundColor: 'white',
-      width: '100%',
-      alignItems: 'flex-start',
-      padding: 20,
-    },
-  },
 };

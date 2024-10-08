@@ -8,9 +8,10 @@ type Props = {
   title: string,
   content: JSX.Element,
   animation?: string,
+  menu?: boolean,
 };
 
-const ModalView = ({label, title, content, animation}: Props) => {
+const ModalView = ({label, title, content, animation, menu}: Props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const animationType = animation ? animation : 'slide';
   
@@ -26,7 +27,7 @@ const ModalView = ({label, title, content, animation}: Props) => {
         <TouchableWithoutFeedback onPress={() => setModalVisible(!modalVisible)}>
           <View style={styles.modal.container}>
             <TouchableWithoutFeedback>
-              <View style={styles.modal.view}>
+              <View style={menu ? styles.modal.menu : styles.modal.view}>
                 <Pressable onPress={() => setModalVisible(!modalVisible)}>
                   <BackButton title={title} />
                 </Pressable>
@@ -63,7 +64,13 @@ const styles = StyleSheet.create({
       marginTop: 88,
     },
     view: {
-      backgroundColor: 'white',
+      backgroundColor: 'red',
+      width: '100%',
+      alignItems: 'flex-start',
+      padding: 20,
+    },
+    menu: {
+      backgroundColor: 'blue',
       width: '100%',
       alignItems: 'flex-start',
       padding: 20,
