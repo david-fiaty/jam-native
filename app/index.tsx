@@ -1,18 +1,31 @@
 import { View, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
+import { Button } from '@rneui/themed';
 import Carousel from '../components/carousel/Controller';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import { StaticImage } from '@/components/StaticImage';
-import SkipButton from '@/components/buttons/SkipButton';
-import LoginButton from '@/components/buttons/LoginButton';
 import BottomLinks from '@/components/navigation/BottomLinks';
 
 const Index = () => {
+  const router = useRouter();
+
   return (  
     <View style={styles.container}>
       <StaticImage uri={require('@/assets/images/jam-logo.png')} width={110} height={110} />    
       <Carousel />
-      <LoginButton />
-      <SkipButton />
+      <Button 
+        title="Login / Signup" 
+        type="outline" 
+        buttonStyle={styles.button} 
+        titleStyle={[GlobalStyles.text, {textTransform: 'uppercase', fontSize: 13}]}
+        onPress={() => router.push('/login')} 
+      />
+      <Button 
+        title="Skip" 
+        type="clear" 
+        titleStyle={styles.text} 
+        onPress={() => router.push('/jams')} 
+      />
       <BottomLinks />
     </View>
   );
@@ -20,6 +33,12 @@ const Index = () => {
 
 const styles = StyleSheet.create({
   container: GlobalStyles.container,
+  text: GlobalStyles.text,
+  button: {
+    marginTop: 40,
+    borderRadius: 30,
+    overflow: 'hidden',
+  },
 });
 
 export default Index;
