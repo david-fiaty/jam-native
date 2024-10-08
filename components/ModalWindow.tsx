@@ -27,7 +27,7 @@ const ModalWindow = ({label, title, content, animation}: Props) => {
             <TouchableWithoutFeedback>
               <View style={GlobalStyles.modal.view}>
                 <Pressable onPress={() => setModalVisible(!modalVisible)}>
-                  <BackButton title={title} style={styles.title} />
+                  <BackButton title={title} />
                 </Pressable>
                 {content}
               </View>
@@ -51,13 +51,6 @@ const styles = StyleSheet.create({
       backgroundColor: Colors.tertiary,
       height: '92.3%',
     }
-  },
-  title: {
-    ...GlobalStyles.text,
-    ...{
-      fontSize: 16,
-      fontWeight: 'bold',
-    },
   },
   text: GlobalStyles.text,
   row: {
