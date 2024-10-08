@@ -12,7 +12,7 @@ const JamToolbar = ({item, index}: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.left}>
-        <JamJammers />
+        <JamJammers item={item} index={index} />
       </View>
       <View style={styles.right}>
         <SaveJam />
