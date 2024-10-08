@@ -21,6 +21,10 @@ const LoginForm = () => {
           buttonStyle={styles.button} 
           onPress={() => router.push('/login')} 
         />
+        <View style={styles.signup}>
+          <Text style={GlobalStyles.text}>Don't have an account? Sign Up</Text>
+          <Text style={GlobalStyles.text}>skip</Text>
+        </View>
       </View>
     </View>
   );
@@ -35,6 +39,13 @@ const styles = StyleSheet.create({
   },
   continue: {
     width: '100%',
+  },
+  signup: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 10,
   },
   button: {
     height: 45,
