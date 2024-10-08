@@ -10,7 +10,7 @@ type Props = {
 
 const {width} = Dimensions.get('screen');
 
-export default function CarouselItem({item, index, scrollX}: Props) {
+export default function SlideshowItem({item, index, scrollX}: Props) {
   const itemAnimation = useAnimatedStyle(() => {
     return {
       transform: [
