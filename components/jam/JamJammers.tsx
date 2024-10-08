@@ -4,11 +4,21 @@ import { GlobalStyles } from '@/constants/GlobalStyles';
 import AsteriskIcon from '../icons/AsteriskIcon';
 import ModalWindow from '../ModalWindow';
 
-const JamJammers = () => {
+type Props = {
+  item: object,
+  index: number,
+};
+
+const JamJammers = ({item, index}: Props) => {
   return (
     <View style={styles.container}>   
       <ModalWindow 
-        label={<AsteriskIcon />}
+        label={
+          <View style={styles.label}>
+            <AsteriskIcon />
+            <Text style={GlobalStyles.text}>{item.host_count} jammers</Text>
+          </View>
+        }
         title="Jammers" 
         content={
           <FlatList 
@@ -19,7 +29,7 @@ const JamJammers = () => {
               return (
                 <View style={styles.row}>
                   <FontAwesome name="user-circle" size={32} color={GlobalStyles.icon.color} />
-                  <Text style={styles.text}>Jammer {index}</Text>
+                  <Text style={GlobalStyles.text}>Jammer {index}</Text>
                 </View>
               );
             }} 
@@ -37,7 +47,12 @@ const styles = StyleSheet.create({
   list: {
     width: '100%',
   },
-  text: GlobalStyles.text,
+  label: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
   row: {
     display: 'flex',
     flexDirection: 'row',
