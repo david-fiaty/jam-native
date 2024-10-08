@@ -2,13 +2,13 @@ import { StyleSheet, View, FlatList } from 'react-native';
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import MenuItem from './MenuItem';
 import ModalWindow from '../ModalWindow';
-import { GlobalStyles } from '@/constants/GlobalStyles';
+import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
 const SettingsMenu = () => {
   return (
     <View style={styles.container}>        
       <ModalWindow 
-        label={<SimpleLineIcons name="menu" size={14} color={GlobalStyles.icon.color} />}
+        label={<SimpleLineIcons name="menu" size={12} style={styles.icon} />}
         title="Settings" 
         content={
           <FlatList 
@@ -29,6 +29,14 @@ const styles = StyleSheet.create({
   },
   list: {
     width: '100%',
+  },
+  icon: {
+    ...GlobalStyles.icon,
+    ...{
+      backgroundColor: Colors.tertiary,
+      padding: 8,
+      borderRadius: 40,
+    },
   },
 });
 

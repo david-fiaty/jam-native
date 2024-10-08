@@ -13,7 +13,7 @@ const TopToolbar = () => {
       <View style={styles.buttons}> 
         <SettingsMenu />  
         <NotificationsMenu />
-        <SimpleLineIcons name="magnifier" size={14} color={GlobalStyles.icon.color} />
+        <SimpleLineIcons name="magnifier" size={12} style={styles.icon} />
       </View>
     </View>
   );
@@ -30,7 +30,15 @@ const styles = StyleSheet.create({
   buttons: {
     display: 'flex',
     flexDirection: 'row',
-    gap: 10,
+    gap: 12,
+  },
+  icon: {
+    ...GlobalStyles.icon,
+    ...{
+      backgroundColor: Colors.tertiary,
+      padding: 8,
+      borderRadius: 40,
+    },
   },
 });
 
