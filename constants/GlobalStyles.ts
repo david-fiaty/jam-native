@@ -43,7 +43,7 @@ export const GlobalStyles = {
       flex: 1,
       flexDirection: 'column',
       alignItems: 'flex-start',
-      marginTop: 90,
+      marginTop: 88,
     },
     view: {
       backgroundColor: 'white',
