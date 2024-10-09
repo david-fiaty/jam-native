@@ -11,7 +11,7 @@ const AddJam = () => {
         label={<Ionicons name="add" size={26} color={Colors.primary} />}
         title="Add a new Jam" 
         content={<JamForm />}
-        animation="none"
+        animation="slide"
       />   
     </View>
   );
