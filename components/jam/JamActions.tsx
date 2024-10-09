@@ -1,7 +1,8 @@
 import { StyleSheet, View, Text} from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { GlobalStyles } from '@/constants/GlobalStyles';
-
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
 
 const JamActions = () => {
@@ -9,9 +10,45 @@ const JamActions = () => {
     <View style={styles.container}>        
       <ModalView 
         label={<Ionicons name="ellipsis-horizontal-sharp" size={24} color={GlobalStyles.icon.color} />}
-        title="More actions" 
+        title="More" 
         content={
-          <Text>MORE ACTIONS</Text>
+          <View style={GlobalStyles.modal.wrapper}>
+            <View style={styles.row}>
+              <MaterialIcons 
+                name="content-copy" 
+                size={20} style={styles.icon} 
+              />
+              <Text style={GlobalStyles.text}>Copy link</Text>
+            </View>
+            <View style={styles.row}>
+              <MaterialIcons 
+                name="email" 
+                size={20} style={styles.icon} 
+              />
+              <Text style={GlobalStyles.text}>Send email</Text>
+            </View>
+            <View style={styles.row}>
+              <MaterialCommunityIcons 
+                name="instagram" 
+                size={20} style={styles.icon} 
+              />
+              <Text style={GlobalStyles.text}>Instagram</Text>
+            </View>
+            <View style={styles.row}>
+              <MaterialCommunityIcons 
+                name="facebook" 
+                size={20} style={styles.icon} 
+              />
+              <Text style={GlobalStyles.text}>Facebook</Text>
+            </View>
+            <View style={styles.row}>
+              <MaterialCommunityIcons 
+                name="twitter" 
+                size={20} style={styles.icon} 
+              />
+              <Text style={GlobalStyles.text}>Twitter</Text>
+            </View>
+          </View>
         }
         animation="slide"
       />   
@@ -21,6 +58,20 @@ const JamActions = () => {
 
 const styles = StyleSheet.create({
   container: {
+  },
+  row: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 15,
+  },
+  icon: {
+    ...GlobalStyles.icon,
+    ...{
+      backgroundColor: Colors.secondary,
+      padding: 6,
+      borderRadius: 40,
+    },
   },
 });
 
