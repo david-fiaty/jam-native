@@ -9,6 +9,9 @@ import BottomLinks from '@/components/navigation/BottomLinks';
 const Index = () => {
   const router = useRouter();
 
+  console.log(process.env.AAA);
+  console.log(process.env.BBB);
+
   return (  
     <View style={styles.container}>
       <StaticImage uri={require('@/assets/images/jam-logo.png')} width={110} height={110} />    
