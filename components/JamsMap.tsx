@@ -11,6 +11,7 @@ const JamsMap = () => {
         title="Jams map" 
         content={<Text>JAMS MAP</Text>}
         animation="none"
+        backButton={false}
       />    
     </View>
   );
