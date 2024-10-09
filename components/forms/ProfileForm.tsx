@@ -1,5 +1,7 @@
 import { StyleSheet, Text, TextInput, View} from 'react-native';
+import { Button } from '@rneui/themed';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
 
@@ -11,6 +13,18 @@ const ProfileForm = () => {
         title="Your profile" 
         content={
           <View style={styles.wrapper}>    
+            <View style={styles.picture}>
+              <FontAwesome name="user-circle" size={86} color={GlobalStyles.icon.color} />
+              <Button 
+                type="outline" 
+                buttonStyle={styles.button} 
+                titleStyle={GlobalStyles.text}
+                onPress={() => console.log('Clicked') } 
+              >
+                <Ionicons name="cloud-upload-outline" size={20} color={GlobalStyles.icon.color} />
+                <Text style={GlobalStyles.text}>Upload an image</Text> 
+              </Button>
+            </View>
             <TextInput
               style={styles.input}
               placeholder="Full name"
@@ -64,6 +78,20 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     width: '100%',
+  },
+  picture: {
+    paddingBottom: 20,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 20,
+  },
+  button: {
+    borderRadius: 30,
+    overflow: 'hidden',
+    paddingTop: 5,
+    paddingBottom: 5,
+    gap: 8,
   },
   input: {
     backgroundColor: Colors.tertiary,
