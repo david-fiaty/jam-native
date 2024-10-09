@@ -1,6 +1,4 @@
 import { StyleSheet, View, Text} from 'react-native';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
@@ -9,8 +7,8 @@ const SaveJam = () => {
   return (
     <View style={styles.container}>        
       <ModalView 
-        label={<MaterialIcons 
-          name="favorite-border" 
+        label={<Ionicons 
+          name="save-outline" 
           size={14} 
           style={styles.icon} 
         />}
@@ -18,8 +16,8 @@ const SaveJam = () => {
         content={
           <View style={GlobalStyles.modal.wrapper}>
             <View style={styles.row}>
-              <MaterialCommunityIcons 
-                name="share" 
+              <Ionicons 
+                name="share-social-outline" 
                 size={20} style={styles.icon} 
               />
               <Text style={GlobalStyles.text}>Share</Text>

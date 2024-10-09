@@ -1,7 +1,6 @@
 import { StyleSheet, View, Text} from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
 
@@ -14,39 +13,39 @@ const JamActions = () => {
         content={
           <View style={GlobalStyles.modal.wrapper}>
             <View style={styles.row}>
-              <MaterialIcons 
-                name="content-copy" 
+              <Ionicons 
+                name="save-outline" 
                 size={20} style={styles.icon} 
               />
-              <Text style={GlobalStyles.text}>Copy link</Text>
+              <Text style={GlobalStyles.text}>Save Jam</Text>
             </View>
             <View style={styles.row}>
-              <MaterialIcons 
-                name="email" 
+              <Ionicons 
+                name="share-social-outline" 
                 size={20} style={styles.icon} 
               />
-              <Text style={GlobalStyles.text}>Send email</Text>
-            </View>
-            <View style={styles.row}>
-              <MaterialCommunityIcons 
-                name="instagram" 
-                size={20} style={styles.icon} 
-              />
-              <Text style={GlobalStyles.text}>Instagram</Text>
+              <Text style={GlobalStyles.text}>Share Jam</Text>
             </View>
             <View style={styles.row}>
               <MaterialCommunityIcons 
-                name="facebook" 
+                name="briefcase-plus-outline" 
                 size={20} style={styles.icon} 
               />
-              <Text style={GlobalStyles.text}>Facebook</Text>
+              <Text style={GlobalStyles.text}>Add to project</Text>
             </View>
             <View style={styles.row}>
               <MaterialCommunityIcons 
-                name="twitter" 
+                name="view-dashboard-outline" 
                 size={20} style={styles.icon} 
               />
-              <Text style={GlobalStyles.text}>Twitter</Text>
+              <Text style={GlobalStyles.text}>View project</Text>
+            </View>
+            <View style={styles.row}>
+              <MaterialCommunityIcons 
+                name="clipboard-edit-outline" 
+                size={20} style={styles.icon} 
+              />
+              <Text style={GlobalStyles.text}>Edit jam</Text>
             </View>
           </View>
         }
