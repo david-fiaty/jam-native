@@ -12,7 +12,6 @@ const ProfileForm = () => {
         content={
           <View style={styles.wrapper}>    
             <TextInput
-              editable
               style={styles.input}
               placeholder="Full name"
               placeholderTextColor={GlobalStyles.text.color}
