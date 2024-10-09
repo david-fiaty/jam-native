@@ -16,6 +16,41 @@ const ProfileForm = () => {
               placeholder="Full name"
               placeholderTextColor={GlobalStyles.text.color}
             />
+            <TextInput
+              style={styles.input}
+              placeholder="IG handle"
+              placeholderTextColor={GlobalStyles.text.color}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Email"
+              placeholderTextColor={GlobalStyles.text.color}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Phone number"
+              placeholderTextColor={GlobalStyles.text.color}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Where am I now"
+              placeholderTextColor={GlobalStyles.text.color}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Main industries"
+              placeholderTextColor={GlobalStyles.text.color}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Sub industries"
+              placeholderTextColor={GlobalStyles.text.color}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Creative organisation"
+              placeholderTextColor={GlobalStyles.text.color}
+            />
           </View>
         }
         animation="none"

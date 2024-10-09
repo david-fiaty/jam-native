@@ -7,7 +7,7 @@ i18n
     resources: {
       en: {
         translation: {
-          'Welcome to React': 'Welcome to React and react-i18next',
+          'ZZZ': 'Welcome to React and react-i18next',
         }
       }
     },
