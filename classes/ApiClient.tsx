@@ -1,12 +1,17 @@
-import DataProvider from './DataProvider';
+import DataProvider from '@/classes/DataProvider';
+import ApiEndpoints from '@/constants/ApiEndpoints';
 
-const ApiClient = class ApiClient {
+const ApiClientClass = class ApiClient {
   constructor() {
 
   }
 
-  getApiData(dataKey: string) {
-    return DataProvider.get(dataKey);
+  get(key: keyof typeof ApiEndpoints) {
+
+    //console.log(process.env.API_URL);
+    //console.log(process.env.API_ENABLED);
+  
+    return DataProvider.get(key);
   }
 
   async sendRequest() {
@@ -25,4 +30,5 @@ const ApiClient = class ApiClient {
   }
 };
 
+const ApiClient = new ApiClientClass();
 export default ApiClient;
