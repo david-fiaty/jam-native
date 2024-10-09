@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     width: '100%',
-    height: '100%',
+    height: '90%',
+    backgroundColor: 'red',
   },
   map: {
     flex: 1,
