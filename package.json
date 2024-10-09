@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
+    "@maplibre/maplibre-react-native": "^10.0.0-alpha.17",
     "@react-navigation/bottom-tabs": "^6.6.1",
     "@react-navigation/native": "^6.1.18",
     "@rneui/base": "^4.0.0-rc.7",
