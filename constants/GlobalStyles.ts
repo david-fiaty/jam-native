@@ -38,4 +38,14 @@ export const GlobalStyles = {
     paddingHorizontal: 12, 
     marginBottom: 10,
   },
+  modal: {
+    wrapper: {
+      gap: 15,
+      padding: 15,
+      borderWidth: 1,
+      borderColor: Colors.primary,
+      borderRadius: 8,
+      width: '100%',
+    },
+  },
 };
