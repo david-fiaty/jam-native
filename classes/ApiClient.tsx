@@ -3,10 +3,10 @@ import ApiEndpoints from '@/constants/ApiEndpoints';
 const ApiClientClass = class ApiClient {
   get(key: keyof typeof ApiEndpoints) {
     if (process.env.API_ENABLED === 'true') {
-      return 'pppp';
+      return 'uuu';
     }
 
-    return ApiEndpoints[key];
+    return ApiEndpoints[key].data;
   }
 
   async sendRequest() {
