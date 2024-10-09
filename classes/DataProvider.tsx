@@ -1,17 +1,9 @@
-const ApiData = {
-  jams: {
-    url: '',
-    method: 'POST',
-    data: {},
-  },
-  jammers: {},
-  notifications: {},
-};
+import ApiEndpoints from '@/constants/ApiEndpoints';
 
 const DataProviderClass = class DataProviderClass {
-  get(key: string) {
-    console.log(ApiData.jams);
-    return 'Data provider';
+  get(key: keyof typeof ApiEndpoints) {
+    console.log(ApiEndpoints[key]);
+    return 'Data xxx';
   }
 };
 

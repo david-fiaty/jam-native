@@ -10,7 +10,7 @@ import ApiClient from '@/classes/ApiClient';
 const Index = () => {
   const router = useRouter();
 
-  console.log(ApiClient.get('AAA'));
+  console.log(ApiClient.get('jams'));
 
   return (  
     <View style={styles.container}>
