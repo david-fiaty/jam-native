@@ -11,19 +11,22 @@ const JamsMap = () => {
         label={<Ionicons name="location" size={26} color={Colors.primary} />}
         title="Jams map" 
         content={
-          <MapView
-            style={styles.map}
-            initialRegion={{
-              latitude: 37.78825,
-              longitude: -122.4324,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
-          />
+          <View style={styles.wrapper}>
+            <MapView
+              style={styles.map}
+              provider="google"
+              initialRegion={{
+                latitude: 37.78825,
+                longitude: -122.4324,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+              }}
+            />
+          </View>
         }
         animation="none"
         backButton={false}
-      />    
+      />   
     </View>
   );
 };
@@ -31,10 +34,14 @@ const JamsMap = () => {
 const styles = StyleSheet.create({
   container: {
   },
+  wrapper: {
+    width: '100%',
+    height: '100%',
+  },
   map: {
     flex: 1,
     width: '100%',
-    height: '92.3%',
+    height: '100%',
     backgroundColor: '#FFFFFF',
   },
 });
