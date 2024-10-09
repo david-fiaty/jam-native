@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
       flexDirection: 'column',
       alignItems: 'center',
       marginTop: 88,
+      height: '100%',
     },
     view: {
       backgroundColor: 'white',
