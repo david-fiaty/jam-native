@@ -1,9 +1,7 @@
 const ApiEndpoints = {
   jams: {
-    params: {
-      url: '/jams/get',
-      method: 'POST',
-    },
+    url: '/jams/get',
+    method: 'POST',
     mock: [
       {
         yes: 'bruh',
@@ -11,7 +9,7 @@ const ApiEndpoints = {
       {
         no: 'foe',
       },
-    ],
+    ],  
   },
   jammers: {},
   notifications: {},
