@@ -1,7 +1,8 @@
 import { StyleSheet, View, Text} from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { GlobalStyles } from '@/constants/GlobalStyles';
-
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
 
 const JamActions = () => {
@@ -9,9 +10,59 @@ const JamActions = () => {
     <View style={styles.container}>        
       <ModalView 
         label={<Ionicons name="ellipsis-horizontal-sharp" size={24} color={GlobalStyles.icon.color} />}
-        title="More actions" 
+        title="More" 
         content={
-          <Text>MORE ACTIONS</Text>
+          <View style={GlobalStyles.modal.wrapper}>
+            <View style={styles.row}>
+              <Ionicons 
+                name="save-outline" 
+                size={20} style={styles.icon} 
+              />
+              <Text style={GlobalStyles.text}>Save Jam</Text>
+            </View>
+            <View style={styles.row}>
+              <Ionicons 
+                name="share-social-outline" 
+                size={20} style={styles.icon} 
+              />
+              <Text style={GlobalStyles.text}>Share Jam</Text>
+            </View>
+            <View style={styles.row}>
+              <MaterialCommunityIcons 
+                name="briefcase-plus-outline" 
+                size={20} style={styles.icon} 
+              />
+              <Text style={GlobalStyles.text}>Add to project</Text>
+            </View>
+            <View style={styles.row}>
+              <MaterialCommunityIcons 
+                name="view-dashboard-outline" 
+                size={20} style={styles.icon} 
+              />
+              <Text style={GlobalStyles.text}>View project</Text>
+            </View>
+            <View style={styles.row}>
+              <MaterialCommunityIcons 
+                name="clipboard-edit-outline" 
+                size={20} style={styles.icon} 
+              />
+              <Text style={GlobalStyles.text}>Edit jam</Text>
+            </View>
+            <View style={styles.row}>
+              <MaterialIcons 
+                name="warning-amber" 
+                size={20} style={styles.icon} 
+              />
+              <Text style={GlobalStyles.text}>Report Jam</Text>
+            </View>
+            <View style={styles.row}>
+              <MaterialIcons 
+                name="delete-outline" 
+                size={20} style={styles.icon} 
+              />
+              <Text style={GlobalStyles.text}>Delete Jam</Text>
+            </View>
+          </View>
         }
         animation="slide"
       />   
@@ -21,6 +72,20 @@ const JamActions = () => {
 
 const styles = StyleSheet.create({
   container: {
+  },
+  row: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 15,
+  },
+  icon: {
+    ...GlobalStyles.icon,
+    ...{
+      backgroundColor: Colors.secondary,
+      padding: 6,
+      borderRadius: 40,
+    },
   },
 });
 
