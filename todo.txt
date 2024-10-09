@@ -26,3 +26,7 @@ https://withfra.me/react-native-tutorials/how-to-use-svg-in-react-native
 Email verification
 Twilio => SMS
 
+
+
+import ApiClient from '@/classes/ApiClient';
+console.log(ApiClient.get('jams'));

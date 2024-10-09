@@ -5,12 +5,9 @@ import Slideshow from '../components/Slideshow';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import { StaticImage } from '@/components/StaticImage';
 import BottomLinks from '@/components/navigation/BottomLinks';
-import ApiClient from '@/classes/ApiClient';
 
 const Index = () => {
   const router = useRouter();
-
-  console.log(ApiClient.get('jams'));
 
   return (  
     <View style={styles.container}>
