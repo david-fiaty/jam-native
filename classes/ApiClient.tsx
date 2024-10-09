@@ -2,15 +2,7 @@ import DataProvider from '@/classes/DataProvider';
 import ApiEndpoints from '@/constants/ApiEndpoints';
 
 const ApiClientClass = class ApiClient {
-  constructor() {
-
-  }
-
   get(key: keyof typeof ApiEndpoints) {
-
-    //console.log(process.env.API_URL);
-    //console.log(process.env.API_ENABLED);
-  
     return DataProvider.get(key);
   }
 
