@@ -10,6 +10,7 @@ const ApiData = {
 
 const DataProviderClass = class DataProviderClass {
   get(key: string) {
+    console.log(ApiData.jams);
     return 'Data provider';
   }
 };
