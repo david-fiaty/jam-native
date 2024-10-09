@@ -24,8 +24,7 @@ const JamsMap = () => {
             />
           </View>
         }
-        animation="none"
-        backButton={false}
+        animation="slide"
       />   
     </View>
   );
@@ -36,14 +35,10 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     width: '100%',
-    height: '90%',
-    backgroundColor: 'red',
+    height: 550,
   },
   map: {
     flex: 1,
-    width: '100%',
-    height: '100%',
-    backgroundColor: '#FFFFFF',
   },
 });
 
