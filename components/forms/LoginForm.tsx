@@ -9,11 +9,7 @@ const LoginForm = () => {
   return (
     <View style={styles.container}>    
       <TextInput
-        editable
-        multiline
-        numberOfLines={4}
-        maxLength={40}
-        style={GlobalStyles.input}
+        style={styles.input}
         placeholder="Enter your email address"
         placeholderTextColor={GlobalStyles.text.color}
       />
@@ -57,6 +53,15 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary,
     borderWidth: 1,
     borderRadius: 8,
+  },
+  input: {
+    width: '100%',
+    height: 45,
+    borderWidth: 1, 
+    borderColor: Colors.primary, 
+    borderRadius: 6,
+    paddingHorizontal: 12, 
+    marginBottom: 10,
   },
 });
 

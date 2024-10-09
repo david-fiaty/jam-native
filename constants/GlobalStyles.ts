@@ -29,15 +29,6 @@ export const GlobalStyles = {
   pager: {
     color: Colors.primary,
   },
-  input: {
-    width: '100%',
-    height: 45,
-    borderWidth: 1, 
-    borderColor: Colors.primary, 
-    borderRadius: 6,
-    paddingHorizontal: 12, 
-    marginBottom: 10,
-  },
   modal: {
     wrapper: {
       gap: 15,
