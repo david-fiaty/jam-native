@@ -2,8 +2,8 @@ import ApiEndpoints from '@/constants/ApiEndpoints';
 
 const ApiClientClass = class ApiClient {
   get(key: keyof typeof ApiEndpoints) {
-    if (process.env.API_ENABLED) {
-      return 'oo';
+    if (process.env.API_ENABLED === 'true') {
+      return 'pppp';
     }
 
     return ApiEndpoints[key];
