@@ -9,8 +9,8 @@ const ShareJam = () => {
   return (
     <View style={styles.container}>        
       <ModalView 
-        label={<MaterialCommunityIcons 
-          name="share" 
+        label={<Ionicons 
+          name="share-social-outline" 
           size={14} style={styles.icon} 
         />}
         title="Share Jam" 
@@ -32,10 +32,10 @@ const ShareJam = () => {
             </View>
             <View style={styles.row}>
               <MaterialCommunityIcons 
-                name="twitter" 
+                name="instagram" 
                 size={20} style={styles.icon} 
               />
-              <Text style={GlobalStyles.text}>Twitter</Text>
+              <Text style={GlobalStyles.text}>Instagram</Text>
             </View>
             <View style={styles.row}>
               <MaterialCommunityIcons 
@@ -43,6 +43,13 @@ const ShareJam = () => {
                 size={20} style={styles.icon} 
               />
               <Text style={GlobalStyles.text}>Facebook</Text>
+            </View>
+            <View style={styles.row}>
+              <MaterialCommunityIcons 
+                name="twitter" 
+                size={20} style={styles.icon} 
+              />
+              <Text style={GlobalStyles.text}>Twitter</Text>
             </View>
           </View>
         }
@@ -68,7 +75,7 @@ const styles = StyleSheet.create({
       padding: 6,
       borderRadius: 40,
     },
-  }
+  },
 });
 
 export default ShareJam;
