@@ -9,7 +9,6 @@ const LoginForm = () => {
   return (
     <View style={styles.container}>    
       <TextInput
-        editable
         style={styles.input}
         placeholder="Enter your email address"
         placeholderTextColor={GlobalStyles.text.color}
