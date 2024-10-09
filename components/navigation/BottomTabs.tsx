@@ -1,6 +1,6 @@
 import { StyleSheet, View, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import JamsMap from '../jams/JamsMap';
+import JamsMap from '../JamsMap';
 import AddJam from '../jam/AddJam';
 import UserProfile from '../user/UserProfile';
 import { Colors } from 'react-native/Libraries/NewAppScreen';

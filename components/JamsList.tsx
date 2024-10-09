@@ -1,5 +1,5 @@
 import { StyleSheet, FlatList } from 'react-native';
-import JamItem from '../jam/JamItem';
+import JamItem from '@/components/jam/JamItem';
 
 const JamsList = () => {
   return (

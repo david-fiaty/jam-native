@@ -25,19 +25,21 @@ const JamJammers = ({item, index}: Props) => {
         }
         title="Jammers" 
         content={
-          <FlatList 
-            data={data} 
-            horizontal={false}  
-            style={styles.list}
-            renderItem={({item, index}) => {
-              return (
-                <View style={styles.row}>
-                  <FontAwesome name="user-circle" size={32} color={GlobalStyles.icon.color} />
-                  <Text style={GlobalStyles.text}>Jammer {index}</Text>
-                </View>
-              );
-            }} 
-          />
+          <View style={GlobalStyles.modal.wrapper}>
+            <FlatList 
+              data={data} 
+              horizontal={false}  
+              style={styles.list}
+              renderItem={({item, index}) => {
+                return (
+                  <View style={styles.row}>
+                    <FontAwesome name="user-circle" size={28} color={GlobalStyles.icon.color} />
+                    <Text style={GlobalStyles.text}>Jammer {index}</Text>
+                  </View>
+                );
+              }} 
+            />
+          </View>
         }
         animation="slide"
       />       
@@ -61,9 +63,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: 8,
+    paddingTop: 4,
     paddingBottom: 8,
-    gap: 16,
+    gap: 12,
   },
   icon: {
     ...GlobalStyles.icon,
