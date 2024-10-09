@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { StyleSheet, Text, TextInput, View, ScrollView} from 'react-native';
-import { SelectList } from 'react-native-dropdown-select-list'
 import { Button } from '@rneui/themed';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
@@ -55,29 +54,20 @@ const ProfileForm = () => {
                 placeholder="Where am I now"
                 placeholderTextColor={GlobalStyles.text.color}
               />
-              <SelectList 
-                setSelected={(val) => setSelected(val)} 
-                data={data} 
-                save="value"
+              <TextInput
+                style={styles.input}
                 placeholder="Main industries"
-                inputStyles={GlobalStyles.text}
-                dropdownTextStyles={GlobalStyles.text}
+                placeholderTextColor={GlobalStyles.text.color}
               />
-              <SelectList 
-                setSelected={(val) => setSelected(val)} 
-                data={data} 
-                save="value"
+              <TextInput
+                style={styles.input}
                 placeholder="Sub industries"
-                inputStyles={GlobalStyles.text}
-                dropdownTextStyles={GlobalStyles.text}
+                placeholderTextColor={GlobalStyles.text.color}
               />
-              <SelectList 
-                setSelected={(val) => setSelected(val)} 
-                data={data} 
-                save="value"
-                placeholder="Creatiive organization"
-                inputStyles={GlobalStyles.text}
-                dropdownTextStyles={GlobalStyles.text}
+              <TextInput
+                style={styles.input}
+                placeholder="Creative organisation"
+                placeholderTextColor={GlobalStyles.text.color}
               />
             </ScrollView>  
           </View>
@@ -122,15 +112,5 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 });
-
-const data = [
-  {key:'1', value:'Mobiles', disabled:true},
-  {key:'2', value:'Appliances'},
-  {key:'3', value:'Cameras'},
-  {key:'4', value:'Computers', disabled:true},
-  {key:'5', value:'Vegetables'},
-  {key:'6', value:'Diary Products'},
-  {key:'7', value:'Drinks'},
-]
 
 export default ProfileForm;
