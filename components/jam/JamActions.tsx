@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text} from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
 
@@ -46,6 +47,20 @@ const JamActions = () => {
                 size={20} style={styles.icon} 
               />
               <Text style={GlobalStyles.text}>Edit jam</Text>
+            </View>
+            <View style={styles.row}>
+              <MaterialIcons 
+                name="warning-amber" 
+                size={20} style={styles.icon} 
+              />
+              <Text style={GlobalStyles.text}>Report Jam</Text>
+            </View>
+            <View style={styles.row}>
+              <MaterialIcons 
+                name="delete-outline" 
+                size={20} style={styles.icon} 
+              />
+              <Text style={GlobalStyles.text}>Delete Jam</Text>
             </View>
           </View>
         }
