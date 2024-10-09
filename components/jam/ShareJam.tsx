@@ -32,10 +32,10 @@ const ShareJam = () => {
             </View>
             <View style={styles.row}>
               <MaterialCommunityIcons 
-                name="twitter" 
+                name="instagram" 
                 size={20} style={styles.icon} 
               />
-              <Text style={GlobalStyles.text}>Twitter</Text>
+              <Text style={GlobalStyles.text}>Instagram</Text>
             </View>
             <View style={styles.row}>
               <MaterialCommunityIcons 
@@ -43,6 +43,13 @@ const ShareJam = () => {
                 size={20} style={styles.icon} 
               />
               <Text style={GlobalStyles.text}>Facebook</Text>
+            </View>
+            <View style={styles.row}>
+              <MaterialCommunityIcons 
+                name="twitter" 
+                size={20} style={styles.icon} 
+              />
+              <Text style={GlobalStyles.text}>Twitter</Text>
             </View>
           </View>
         }
