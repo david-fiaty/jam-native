@@ -24,7 +24,7 @@ const JamsMap = () => {
             />
           </View>
         }
-        animation="none"
+        animation="slide"
       />   
     </View>
   );

@@ -67,7 +67,7 @@ const ProfileForm = () => {
             />
           </View>
         }
-        animation="none"
+        animation="slide"
       />    
     </View>
   );

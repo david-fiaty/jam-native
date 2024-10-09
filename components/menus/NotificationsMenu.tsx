@@ -17,7 +17,7 @@ const NotificationsMenu = () => {
             renderItem={({item, index}) => <MenuItem item={item} index={index} />} 
           />
         }
-        animation="fade"
+        animation="slide"
       />   
     </View>
   );
