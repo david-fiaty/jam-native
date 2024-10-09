@@ -25,7 +25,6 @@ const JamsMap = () => {
           </View>
         }
         animation="none"
-        backButton={false}
       />   
     </View>
   );
