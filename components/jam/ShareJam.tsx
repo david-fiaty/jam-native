@@ -1,7 +1,6 @@
 import { StyleSheet, View, Text} from 'react-native';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import ModalView from '../ModalView';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
@@ -75,7 +74,7 @@ const styles = StyleSheet.create({
       padding: 6,
       borderRadius: 40,
     },
-  }
+  },
 });
 
 export default ShareJam;
