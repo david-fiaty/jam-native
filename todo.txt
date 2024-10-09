@@ -26,7 +26,3 @@ https://withfra.me/react-native-tutorials/how-to-use-svg-in-react-native
 Email verification
 Twilio => SMS
 
-
-
-//console.log(process.env.API_URL);
-//console.log(process.env.API_ENABLED);

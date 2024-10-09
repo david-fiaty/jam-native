@@ -1,9 +1,12 @@
-import DataProvider from '@/classes/DataProvider';
 import ApiEndpoints from '@/constants/ApiEndpoints';
 
 const ApiClientClass = class ApiClient {
   get(key: keyof typeof ApiEndpoints) {
-    return DataProvider.get(key);
+    if (process.env.API_ENABLED) {
+
+    }
+
+    return ApiEndpoints[key];
   }
 
   async sendRequest() {
