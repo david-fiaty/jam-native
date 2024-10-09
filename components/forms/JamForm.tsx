@@ -6,9 +6,6 @@ const JamForm = () => {
     <View style={styles.container}>    
       <TextInput
         editable
-        multiline
-        numberOfLines={4}
-        maxLength={40}
         style={GlobalStyles.input}
         placeholder="Enter your email address"
         placeholderTextColor={GlobalStyles.text.color}

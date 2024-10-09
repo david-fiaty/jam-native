@@ -8,20 +8,16 @@ const ProfileForm = () => {
     <View style={styles.container}>    
       <ModalView 
         label={<Ionicons name="person-circle" size={26} color={Colors.primary} />}
-        title="Profile" 
+        title="Your profile" 
         content={
           <View style={styles.wrapper}>    
             <TextInput
               editable
-              multiline
-              numberOfLines={4}
-              maxLength={40}
-              style={GlobalStyles.input}
-              placeholder="Enter your email address"
+              style={styles.input}
+              placeholder="Full name"
               placeholderTextColor={GlobalStyles.text.color}
             />
           </View>
-    
         }
         animation="none"
       />    
@@ -33,7 +29,17 @@ const styles = StyleSheet.create({
   container: {
   },
   wrapper: {
-    
+    width: '100%',
+  },
+  input: {
+    backgroundColor: Colors.tertiary,
+    width: '100%',
+    height: 36,
+    borderWidth: 1, 
+    borderColor: Colors.tertiary, 
+    borderRadius: 6,
+    paddingHorizontal: 12, 
+    marginBottom: 10,
   },
 });
 
