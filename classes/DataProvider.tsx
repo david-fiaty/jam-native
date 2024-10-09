@@ -8,14 +8,11 @@ const ApiData = {
   notifications: {},
 };
 
-type DataKey = keyof typeof ApiData;
-
 const DataProviderClass = class DataProviderClass {
-  get(key: DataKey) : object {
-    return ApiData[key];
+  get(key: string) {
+    return 'Data provider';
   }
 };
 
 const DataProvider = new DataProviderClass();
-
 export default DataProvider;

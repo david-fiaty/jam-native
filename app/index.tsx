@@ -5,12 +5,12 @@ import Slideshow from '../components/Slideshow';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import { StaticImage } from '@/components/StaticImage';
 import BottomLinks from '@/components/navigation/BottomLinks';
+import ApiClient from '@/classes/ApiClient';
 
 const Index = () => {
   const router = useRouter();
 
-  console.log(process.env.API_URL);
-  console.log(process.env.API_ENABLED);
+  console.log(ApiClient.get('AAA'));
 
   return (  
     <View style={styles.container}>
