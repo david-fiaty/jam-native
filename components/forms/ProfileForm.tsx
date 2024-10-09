@@ -69,6 +69,7 @@ const ProfileForm = () => {
                 placeholder="Creative organisation"
                 placeholderTextColor={GlobalStyles.text.color}
               />
+              <Text style={styles.title}>Your projects</Text> 
             </ScrollView>  
           </View>
         }
@@ -100,6 +101,13 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     paddingBottom: 5,
     gap: 8,
+  },
+  title: {
+    ...GlobalStyles.text,
+    ...{
+      fontWeight: 'bold',
+      marginTop: 10,
+    },
   },
   input: {
     backgroundColor: Colors.tertiary,
