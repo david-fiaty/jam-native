@@ -9,8 +9,8 @@ import BottomLinks from '@/components/navigation/BottomLinks';
 const Index = () => {
   const router = useRouter();
 
-  console.log(process.env.AAA);
-  console.log(process.env.BBB);
+  console.log(process.env.API_URL);
+  console.log(process.env.API_ENABLED);
 
   return (  
     <View style={styles.container}>
