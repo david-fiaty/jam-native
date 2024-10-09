@@ -5,7 +5,6 @@ const JamForm = () => {
   return (
     <View style={styles.container}>    
       <TextInput
-        editable
         style={GlobalStyles.input}
         placeholder="Enter your email address"
         placeholderTextColor={GlobalStyles.text.color}
