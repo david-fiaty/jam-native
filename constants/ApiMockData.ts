@@ -125,6 +125,36 @@ const ApiMockData = {
       handle: 'CM'
     },
   ],
+  notifications: [
+    {
+      'label': 'Lorem ipsum dolor sit amet',
+      'path': '/notifications',
+    },
+    {
+      'label': 'Consectetur adipiscing elit',
+      'path': '/notifications',
+    },
+    {
+      'label': 'Sed do eiusmod tempor',
+      'path': '/notifications',
+    },
+    {
+      'label': 'Incididunt ut labore et dolore magna aliqua',
+      'path': '/notifications',
+    },
+    {
+      'label': 'Ut enim ad minim veniam, quis nostrud',
+      'path': '/notifications',
+    },
+    {
+      'label': 'Exercitation ullamco laboris nisi',
+      'path': '/notifications',
+    },
+    {
+      'label': 'Excepteur sint occaecat cupidatat',
+      'path': '/notifications',
+    },  
+  ],
 };
 
 export default ApiMockData;
