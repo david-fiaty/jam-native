@@ -12,8 +12,8 @@ const ProfileForm = () => {
   return (
     <View style={styles.container}>    
       <ModalView 
-        label={<Ionicons name="person-circle" size={26} color={Colors.primary} />}
         title="Your profile" 
+        label={<Ionicons name="person-circle" size={26} color={Colors.primary} />}
         content={
           <View style={styles.wrapper}>  
             <ScrollView contentContainerStyle={styles.scroller}>

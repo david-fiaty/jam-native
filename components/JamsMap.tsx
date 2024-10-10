@@ -8,8 +8,8 @@ const JamsMap = () => {
   return (
     <View style={styles.container}>       
       <ModalView 
-        label={<Ionicons name="location" size={26} color={Colors.primary} />}
         title="Jams map" 
+        label={<Ionicons name="location" size={26} color={Colors.primary} />}
         content={
           <View style={styles.wrapper}>
             <MapView

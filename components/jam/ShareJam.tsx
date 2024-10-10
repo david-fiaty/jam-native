@@ -9,11 +9,11 @@ const ShareJam = () => {
   return (
     <View style={styles.container}>        
       <ModalView 
+        title="Share Jam" 
         label={<Ionicons 
           name="share-social-outline" 
           size={14} style={styles.icon} 
         />}
-        title="Share Jam" 
         content={
           <View style={GlobalStyles.modal.wrapper}>
             <View style={styles.row}>

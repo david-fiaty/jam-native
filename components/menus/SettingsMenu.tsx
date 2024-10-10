@@ -8,8 +8,8 @@ const SettingsMenu = () => {
   return (
     <View style={styles.container}>        
       <ModalView 
-        label={<SimpleLineIcons name="menu" size={12} style={styles.icon} />}
         title="Settings" 
+        label={<SimpleLineIcons name="menu" size={12} style={styles.icon} />}
         content={
           <FlatList 
             data={data} 

@@ -7,12 +7,12 @@ const SaveJam = () => {
   return (
     <View style={styles.container}>        
       <ModalView 
+        title="Jam is now saved to your Jams" 
         label={<Ionicons 
           name="save-outline" 
           size={14} 
           style={styles.icon} 
         />}
-        title="Jam is now saved to your Jams" 
         content={
           <View style={GlobalStyles.modal.wrapper}>
             <View style={styles.row}>

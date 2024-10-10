@@ -1,5 +1,7 @@
-import { StyleSheet, View, Text} from 'react-native';
-import { GlobalStyles } from '@/constants/GlobalStyles';
+import { StyleSheet, View, FlatList, Text } from 'react-native';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import Feather from '@expo/vector-icons/Feather';
+import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
 
 type Props = {
@@ -9,19 +11,38 @@ type Props = {
 
 const JamHosts = ({item, index}: Props) => {
   return (
-    <View style={styles.container}>        
+    <View style={styles.container}>   
       <ModalView 
-        label={        
-          <Text style={GlobalStyles.text}>
-            @host +{item.host_count}
-          </Text>
+        label={
+          <View style={styles.label}>
+            <Feather
+              name="users" 
+              size={14} 
+              style={styles.icon}
+            />
+            <Text style={GlobalStyles.text}>@host +{item.host_count}</Text>
+          </View>
         }
-        title="Jam Hosts" 
+        title="Hosts" 
         content={
-          <Text>JAM HOSTS</Text>
+          <View style={GlobalStyles.modal.wrapper}>
+            <FlatList 
+              data={data} 
+              horizontal={false}  
+              style={styles.list}
+              renderItem={({item, index}) => {
+                return (
+                  <View style={styles.row}>
+                    <FontAwesome name="user-circle" size={28} color={GlobalStyles.icon.color} />
+                    <Text style={GlobalStyles.text}>Host {index}</Text>
+                  </View>
+                );
+              }} 
+            />
+          </View>
         }
         animation="slide"
-      />   
+      />       
     </View>
   );
 };
@@ -29,6 +50,51 @@ const JamHosts = ({item, index}: Props) => {
 const styles = StyleSheet.create({
   container: {
   },
+  list: {
+    width: '100%',
+  },
+  label: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  row: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingTop: 4,
+    paddingBottom: 8,
+    gap: 12,
+  },
+  icon: {
+    ...GlobalStyles.icon,
+    ...{
+      backgroundColor: Colors.secondary,
+      padding: 6,
+      borderRadius: 40,
+    },
+  }
 });
+
+
+const data = [
+  {
+    'label': 'Account information',
+    'path': '/jams',
+  },
+  {
+    'label': 'Change password',
+    'path': '/jams',
+  },
+  {
+    'label': 'Change user name',
+    'path': '/jams',
+  },
+  {
+    'label': 'Delete account',
+    'path': '/jams',
+  },
+];
 
 export default JamHosts;
