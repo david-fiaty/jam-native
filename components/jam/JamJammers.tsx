@@ -13,6 +13,7 @@ const JamJammers = ({item, index}: Props) => {
   return (
     <View style={styles.container}>   
       <ModalView 
+        title="Jammers" 
         label={
           <View style={styles.label}>
             <Feather
@@ -23,7 +24,6 @@ const JamJammers = ({item, index}: Props) => {
             <Text style={GlobalStyles.text}>{item.host_count} jammers</Text>
           </View>
         }
-        title="Jammers" 
         content={
           <View style={GlobalStyles.modal.wrapper}>
             <FlatList 

@@ -10,8 +10,8 @@ const JamActions = () => {
   return (
     <View style={styles.container}>        
       <ModalView 
-        label={<Ionicons name="ellipsis-horizontal-sharp" size={24} color={GlobalStyles.icon.color} />}
         title="More" 
+        label={<Ionicons name="ellipsis-horizontal-sharp" size={24} color={GlobalStyles.icon.color} />}
         content={
           <View style={GlobalStyles.modal.wrapper}>
             <View style={styles.row}>

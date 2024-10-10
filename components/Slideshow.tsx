@@ -1,10 +1,12 @@
+import { useState, } from 'react';
 import { View, StyleSheet, ViewToken } from 'react-native';
 import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
 import SlideshowItem from '@/components/slideshow/SlideshowItem';
 import SlideshowPager from '@/components/slideshow/SlideshowPager';
-import { useState, } from 'react';
+import WelcomeSlidehowContent from '@/data/WelcomeSlideshowContent';
 
 const Slideshow = () => {
+  const data = WelcomeSlidehowContent;
   const scrollX = useSharedValue(0);
   const [pagerIndex, setPagerIndex] = useState(0);
   const onScrollHandler = useAnimatedScrollHandler({
@@ -49,26 +51,5 @@ const styles = StyleSheet.create({
     height: 200,
   },
 });
-
-const data = [
-  {
-    id: 1,
-    title: 'Create better, together',
-    content: 'Welcome to the Jam app. Jam is a place to explore and experience artists and creatives from different backgrounds in West Africa.',
-    link: 'aaa link',
-  },
-  {
-    id: 2,
-    title: 'Everything you need',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    link: 'bbb link',
-  },
-  {
-    id: 3,
-    title: 'The place to excel',
-    content: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.',
-    link: 'ccc link',
-  },
-];
 
 export default Slideshow;

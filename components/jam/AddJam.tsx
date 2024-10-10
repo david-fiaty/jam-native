@@ -8,8 +8,8 @@ const AddJam = () => {
   return (
     <View style={styles.container}>     
       <ModalView 
-        label={<Ionicons name="add" size={26} color={Colors.primary} />}
         title="Add a new Jam" 
+        label={<Ionicons name="add" size={26} color={Colors.primary} />}
         content={<JamForm />}
         animation="slide"
       />   
