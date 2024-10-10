@@ -5,14 +5,9 @@ import Slideshow from '../components/Slideshow';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import { StaticImage } from '@/components/StaticImage';
 import BottomLinks from '@/components/navigation/BottomLinks';
-//import UserLocation from '@/components/user/UserLocation';
-import UserLocation from '@/classes/UserLocation';
 
 const Index = () => {
   const router = useRouter();
-
-  console.log(UserLocation.get());
-  
 
   return (  
     <View style={styles.container}>
