@@ -1,6 +1,6 @@
 import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
-import { StaticImage } from '@/components/StaticImage';
+import { StaticImage } from '@/components/images/StaticImage';
 import LoginForm from '@/components/forms/LoginForm';
 
 const Login = () => {
