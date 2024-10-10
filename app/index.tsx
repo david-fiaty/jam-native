@@ -3,7 +3,7 @@ import { useRouter } from 'expo-router';
 import { Button } from '@rneui/themed';
 import Slideshow from '../components/Slideshow';
 import { GlobalStyles } from '@/constants/GlobalStyles';
-import { StaticImage } from '@/components/StaticImage';
+import { StaticImage } from '@/components/images/StaticImage';
 import BottomLinks from '@/components/navigation/BottomLinks';
 
 const Index = () => {
