@@ -32,13 +32,7 @@ const JamsMap = () => {
   }, []);
 
   let userLocation = location || {};
-  let initialRegion = {
-    latitude: userLocation.coords.latitude,
-    longitude: userLocation.coords.longitude,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
-  };
-  
+
   return (
     <View style={styles.container}>       
       <ModalView 
@@ -49,7 +43,12 @@ const JamsMap = () => {
             <MapView
               style={styles.map}
               provider="google"
-              initialRegion={initialRegion}
+              initialRegion={{
+                latitude: 37.78825,
+                longitude: -122.4324,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+              }}
             />
           </View>
         }
