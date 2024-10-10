@@ -4,7 +4,7 @@ import { GlobalStyles } from '@/constants/GlobalStyles';
 import TopToolbar from '@/components/navigation/TopToolbar';
 import BackButton from '@/components/navigation/BackButton';
 import BottomLinks from '@/components/navigation/BottomLinks';
-import AboutScreenContent from '@/data/AboutScreenContent';
+import AboutScreenContent from '@/constants/AboutScreenContent';
 
 const About = () => {
   const navigation = useNavigation();

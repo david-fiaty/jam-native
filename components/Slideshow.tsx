@@ -3,7 +3,7 @@ import { View, StyleSheet, ViewToken } from 'react-native';
 import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
 import SlideshowItem from '@/components/slideshow/SlideshowItem';
 import SlideshowPager from '@/components/slideshow/SlideshowPager';
-import WelcomeSlidehowContent from '@/data/WelcomeSlideshowContent';
+import WelcomeSlidehowContent from '@/constants/WelcomeSlideshowContent';
 
 const Slideshow = () => {
   const data = WelcomeSlidehowContent;
