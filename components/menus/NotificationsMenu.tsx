@@ -2,8 +2,11 @@ import { StyleSheet, View, FlatList, Text } from 'react-native';
 import MenuItem from './MenuItem';
 import ModalView from '../ModalView';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+import ApiClient from '@/classes/ApiClient';
 
 const NotificationsMenu = () => {  
+  const data = ApiClient.get('notifications');
+
   return (
     <View style={styles.container}>   
       <ModalView 
@@ -42,36 +45,5 @@ const styles = StyleSheet.create({
     },
   },
 });
-
-const data = [
-  {
-    'label': 'Lorem ipsum dolor sit amet',
-    'path': '/jams',
-  },
-  {
-    'label': 'Consectetur adipiscing elit',
-    'path': '/jams',
-  },
-  {
-    'label': 'Sed do eiusmod tempor',
-    'path': '/jams',
-  },
-  {
-    'label': 'Incididunt ut labore et dolore magna aliqua',
-    'path': '/jams',
-  },
-  {
-    'label': 'Ut enim ad minim veniam, quis nostrud',
-    'path': '/jams',
-  },
-  {
-    'label': 'Exercitation ullamco laboris nisi',
-    'path': '/jams',
-  },
-  {
-    'label': 'Excepteur sint occaecat cupidatat',
-    'path': '/jams',
-  },
-];
 
 export default NotificationsMenu;
