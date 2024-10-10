@@ -3,24 +3,6 @@ import { Platform, Text, View, StyleSheet } from 'react-native';
 import * as Device from 'expo-device';
 import * as Location from 'expo-location';
 
-
-const UserLocationClass = class UserLocationClass {
-  get() {
-    return this.requestLocation();
-  }
-
-  async requestLocation() {
-    const [location, setLocation] = useState('');
-
-    let { status } = await Location.requestForegroundPermissionsAsync();
-    if (status === 'granted') {
-      return await Location.getCurrentPositionAsync({});
-    }
-
-    return {};
-  }
-};
-
 const UserLocation = () => {
   const [location, setLocation] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
@@ -44,7 +26,7 @@ const UserLocation = () => {
     })();
   }, []);
 
-
+  let text = 'Waiting..';
   if (errorMsg) {
     text = errorMsg;
   } else if (location) {
