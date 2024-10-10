@@ -5,7 +5,6 @@ import SettingsMenu from '../menus/SettingsMenu';
 import NotificationsMenu from '../menus/NotificationsMenu';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 
-
 const TopToolbar = () => {
   return (
     <View style={styles.container}>
@@ -26,6 +25,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: 20,
+    height: GlobalStyles.toolbar.height,
   },
   buttons: {
     display: 'flex',
