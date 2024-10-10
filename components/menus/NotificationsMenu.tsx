@@ -7,8 +7,8 @@ const NotificationsMenu = () => {
   return (
     <View style={styles.container}>   
       <ModalView 
-        label={<Text style={[styles.icon]}>20+</Text>}
         title="Notifications" 
+        label={<Text style={[styles.icon]}>20+</Text>}
         content={
           <FlatList 
             data={data} 
