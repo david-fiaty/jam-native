@@ -1,12 +1,11 @@
-
+import { useState, useEffect } from 'react';
+import { Platform, Text, View, StyleSheet } from 'react-native';
+import * as Device from 'expo-device';
+import * as Location from 'expo-location';
 
 const UserLocationClass = class UserLocation {
-  get(key: keyof typeof ApiEndpoints) {
+  get() {
     
-    let data = await import(`../data/${key}'.json`);
-
-    console.log(data);
-    return {};
 
   }
 };
