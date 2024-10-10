@@ -19,6 +19,6 @@ export function StaticImage({uri, width, height}: Props) {
 
 const styles = StyleSheet.create({
   image: {
-    alignSelf: "center",
+    alignSelf: 'center',
   },
 });

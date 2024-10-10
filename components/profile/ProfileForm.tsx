@@ -6,6 +6,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
 import ApiClient from '@/classes/ApiClient';
+import { ProjectItem } from '@/components/profile/ProjectItem';
 
 const ProfileForm = () => {
   const [selected, setSelected] = useState('');
@@ -76,7 +77,7 @@ const ProfileForm = () => {
                 style={styles.projects}
                 data={projects} 
                 horizontal={true}  
-                renderItem={({item, index}) => <Text>{item.title}</Text>} 
+                renderItem={({item, index}) => <ProjectItem item={item} index={index} />} 
               />
             </ScrollView>  
           </View>
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
     ...GlobalStyles.text,
     ...{
       fontWeight: 'bold',
-      marginTop: 10,
+      marginTop: 15,
     },
   },
   input: {
@@ -128,9 +129,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   projects: {
-    display: 'flex',
-    backgroundColor: 'red',
-    padding: 10,
+    marginTop: 10,
   },
 });
 
