@@ -3,10 +3,10 @@ import { View, StyleSheet, ViewToken } from 'react-native';
 import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
 import SlideshowItem from '@/components/slideshow/SlideshowItem';
 import SlideshowPager from '@/components/slideshow/SlideshowPager';
-import WelcomeSlidehowData from '@/data/WelcomeSlideshowData';
+import WelcomeSlidehowContent from '@/data/WelcomeSlideshowContent';
 
 const Slideshow = () => {
-  const data = WelcomeSlidehowData;
+  const data = WelcomeSlidehowContent;
   const scrollX = useSharedValue(0);
   const [pagerIndex, setPagerIndex] = useState(0);
   const onScrollHandler = useAnimatedScrollHandler({
