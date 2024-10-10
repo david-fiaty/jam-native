@@ -27,17 +27,18 @@ const JamsMap = () => {
       }
 
       let location = await Location.getCurrentPositionAsync({});
-
-      console.log(location);
       setLocation(location);
     })();
   }, []);
 
-  let locationData = location || {};
-
-  console.log(locationData);
-  console.log('yeah');
-
+  let userLocation = location || {};
+  let initialRegion = {
+    latitude: userLocation.coords.latitude,
+    longitude: userLocation.coords.longitude,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  };
+  
   return (
     <View style={styles.container}>       
       <ModalView 
@@ -48,12 +49,7 @@ const JamsMap = () => {
             <MapView
               style={styles.map}
               provider="google"
-              initialRegion={{
-                latitude: 37.78825,
-                longitude: -122.4324,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
-              }}
+              initialRegion={initialRegion}
             />
           </View>
         }
