@@ -45,10 +45,10 @@ const JamsMap = () => {
               style={styles.map}
               provider="google"
               initialRegion={{
-                latitude: 6.1296,
-                longitude: 1.2197,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
+                latitude: 8.6195,
+                longitude: 0.8248,
+                latitudeDelta: 5,
+                longitudeDelta: 5,
               }}
             >
               <Marker
