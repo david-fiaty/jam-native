@@ -3,8 +3,11 @@ import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import MenuItem from './MenuItem';
 import ModalView from '../ModalView';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+import SettingsMenuItems from '@/constants/SettingsMenuItems';
 
 const SettingsMenu = () => {
+  const data = SettingsMenuItems;
+
   return (
     <View style={styles.container}>        
       <ModalView 
@@ -39,24 +42,5 @@ const styles = StyleSheet.create({
     },
   },
 });
-
-const data = [
-  {
-    'label': 'Account information',
-    'path': '/jams',
-  },
-  {
-    'label': 'Change password',
-    'path': '/jams',
-  },
-  {
-    'label': 'Change user name',
-    'path': '/jams',
-  },
-  {
-    'label': 'Delete account',
-    'path': '/jams',
-  },
-];
 
 export default SettingsMenu;
