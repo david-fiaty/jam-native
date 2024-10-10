@@ -5,12 +5,14 @@ import Slideshow from '../components/Slideshow';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import { StaticImage } from '@/components/StaticImage';
 import BottomLinks from '@/components/navigation/BottomLinks';
+import UserLocation from '@/classes/UserLocation';
 
 const Index = () => {
   const router = useRouter();
 
   return (  
     <View style={styles.container}>
+      <UserLocation />
       <StaticImage uri={require('@/assets/images/jam-logo.png')} width={110} height={110} />    
       <Slideshow />
       <Button 
