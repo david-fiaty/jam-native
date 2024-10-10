@@ -5,9 +5,6 @@ import ApiClient from '@/classes/ApiClient';
 const JamsList = () => {
   const data = ApiClient.get('jams');
 
-
-  console.log(data);
-
   return (
     <FlatList 
       data={data} 
