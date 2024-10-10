@@ -3,6 +3,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Feather from '@expo/vector-icons/Feather';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
+import ApiClient from '@/classes/ApiClient';
 
 type Props = {
   item: object,
@@ -10,6 +11,8 @@ type Props = {
 };
 
 const JamHosts = ({item, index}: Props) => {
+  const data = ApiClient.get('hosts');
+
   return (
     <View style={styles.container}>   
       <ModalView 
@@ -34,7 +37,7 @@ const JamHosts = ({item, index}: Props) => {
                 return (
                   <View style={styles.row}>
                     <FontAwesome name="user-circle" size={28} color={GlobalStyles.icon.color} />
-                    <Text style={GlobalStyles.text}>Host {index}</Text>
+                    <Text style={GlobalStyles.text}>{item.name} / {item.handle}</Text>
                   </View>
                 );
               }} 
@@ -76,25 +79,5 @@ const styles = StyleSheet.create({
     },
   }
 });
-
-
-const data = [
-  {
-    'label': 'Account information',
-    'path': '/jams',
-  },
-  {
-    'label': 'Change password',
-    'path': '/jams',
-  },
-  {
-    'label': 'Change user name',
-    'path': '/jams',
-  },
-  {
-    'label': 'Delete account',
-    'path': '/jams',
-  },
-];
 
 export default JamHosts;
