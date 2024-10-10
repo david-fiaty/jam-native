@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Platform } from 'react-native';
+import { Marker } from 'react-native-maps';
 import * as Device from 'expo-device';
 import * as Location from 'expo-location';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -49,7 +50,26 @@ const JamsMap = () => {
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421,
               }}
-            />
+            >
+              <Marker
+                key={1}
+                coordinate={{latitude: 6.1296, longitude: 1.2197}}
+                title="Jam location 1"
+                description="Jam location 1"
+              />
+              <Marker
+                key={2}
+                coordinate={{latitude: 6.2273, longitude: 1.5814}}
+                title="Jam location 2"
+                description="Jam location 2"
+              />
+              <Marker
+                key={3}
+                coordinate={{latitude: 9.7216, longitude: 1.0586}}
+                title="Jam location 3"
+                description="Jam location 3"
+              />
+            </MapView>
           </View>
         }
         animation="slide"
