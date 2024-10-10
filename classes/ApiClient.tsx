@@ -6,7 +6,7 @@ const ApiClientClass = class ApiClient {
       return this.sendRequest(ApiEndpoints[key]);
     }
 
-    return ApiEndpoints[key].mock;
+    return ApiEndpoints[key];
   }
 
   async sendRequest(endpoint: object) {
