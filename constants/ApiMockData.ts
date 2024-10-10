@@ -65,64 +65,64 @@ const ApiMockData = {
     {
       id: 1,
       name: 'Kwami Mtume',
-      handle: 'KM'
+      handle: 'KM',
     },
     {
       id: 2,
       name: 'Gilles Fontaine',
-      handle: 'GF'
+      handle: 'GF',
     },
     {
       id: 3,
       name: 'Melanie Dupont',
-      handle: 'MD'
+      handle: 'MD',
     },
     {
       id: 4,
       name: 'Alex Jones',
-      handle: 'AJ'
+      handle: 'AJ',
     },
     {
       id: 5,
       name: 'Sika Fall',
-      handle: 'SF'
+      handle: 'SF',
     },
     {
       id: 6,
       name: 'Thandiwe Newton',
-      handle: 'TN'
+      handle: 'TN',
     },
   ],
   jammers: [
     {
       id: 1,
       name: 'Koffi Vignon',
-      handle: 'KV'
+      handle: 'KV',
     },
     {
       id: 2,
       name: 'Josiane Amegan',
-      handle: 'JA'
+      handle: 'JA',
     },
     {
       id: 3,
       name: 'John Meyer',
-      handle: 'JM'
+      handle: 'JM',
     },
     {
       id: 4,
       name: 'Clinton Donovan',
-      handle: 'AJ'
+      handle: 'AJ',
     },
     {
       id: 5,
       name: 'Yves Montand',
-      handle: 'YM'
+      handle: 'YM',
     },
     {
       id: 6,
       name: 'Carlos Montana',
-      handle: 'CM'
+      handle: 'CM',
     },
   ],
   notifications: [
