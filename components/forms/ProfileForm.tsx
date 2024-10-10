@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { StyleSheet, Text, TextInput, View, ScrollView} from 'react-native';
+import { StyleSheet, Text, TextInput, View, ScrollView, FlatList } from 'react-native';
 import { Button } from '@rneui/themed';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
+import ApiClient from '@/classes/ApiClient';
 
 const ProfileForm = () => {
   const [selected, setSelected] = useState('');
+  const projects = ApiClient.get('projects');
 
   return (
     <View style={styles.container}>    
@@ -70,6 +72,12 @@ const ProfileForm = () => {
                 placeholderTextColor={GlobalStyles.text.color}
               />
               <Text style={styles.title}>Your projects</Text> 
+              <FlatList 
+                style={styles.projects}
+                data={projects} 
+                horizontal={true}  
+                renderItem={({item, index}) => <Text>{item.title}</Text>} 
+              />
             </ScrollView>  
           </View>
         }
@@ -118,6 +126,11 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     paddingHorizontal: 12, 
     marginBottom: 10,
+  },
+  projects: {
+    display: 'flex',
+    backgroundColor: 'red',
+    padding: 10,
   },
 });
 
