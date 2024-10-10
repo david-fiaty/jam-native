@@ -4,7 +4,7 @@ import { GlobalStyles } from '@/constants/GlobalStyles';
 import TopToolbar from '@/components/navigation/TopToolbar';
 import BackButton from '@/components/navigation/BackButton';
 import BottomLinks from '@/components/navigation/BottomLinks';
-import LegalScreenContent from '@/data/LegalScreenContent';
+import LegalScreenContent from '@/constants/LegalScreenContent';
 
 const Legal = () => {
   const navigation = useNavigation();
