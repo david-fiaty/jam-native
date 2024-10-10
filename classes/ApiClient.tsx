@@ -1,4 +1,5 @@
 import ApiEndpoints from '@/constants/ApiEndpoints';
+import ApiMockData from '@/constants/ApiMockData';
 
 const ApiClientClass = class ApiClient {
   get(key: keyof typeof ApiEndpoints) {
@@ -6,7 +7,7 @@ const ApiClientClass = class ApiClient {
       return this.sendRequest(ApiEndpoints[key]);
     }
 
-    return ApiEndpoints[key].mock;
+    return ApiMockData[key];
   }
 
   async sendRequest(endpoint: object) {
