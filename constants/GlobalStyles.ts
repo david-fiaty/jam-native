@@ -6,6 +6,9 @@ export const Colors = {
 };
 
 export const GlobalStyles = {
+  statusbar: {
+    height: 42,
+  },
   container: {
     display: 'flex',
     flexDirection: 'column',

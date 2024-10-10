@@ -1,10 +1,9 @@
 import { View, StyleSheet, Text } from 'react-native';
-import { StaticImage } from '@/components/StaticImage';
+import { StaticImage } from '@/components/images/StaticImage';
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import SettingsMenu from '../menus/SettingsMenu';
 import NotificationsMenu from '../menus/NotificationsMenu';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
-
 
 const TopToolbar = () => {
   return (
@@ -26,6 +25,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: 20,
+    height: GlobalStyles.toolbar.height,
   },
   buttons: {
     display: 'flex',
