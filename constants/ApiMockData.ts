@@ -171,6 +171,21 @@ const ApiMockData = {
       name: 'Project 3',
       image: '',
     },
+    {
+      id: 4,
+      name: 'Project 4',
+      image: '',
+    },
+    {
+      id: 5,
+      name: 'Project 5',
+      image: '',
+    },
+    {
+      id: 6,
+      name: 'Project 6',
+      image: '',
+    },
   ],
 };
 

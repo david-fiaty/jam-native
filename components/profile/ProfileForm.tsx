@@ -6,11 +6,13 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
 import ApiClient from '@/classes/ApiClient';
-import { ProjectItem } from '@/components/profile/ProjectItem';
+import { ProfileProject } from '@/components/profile/ProfileProject';
+import { ProfileJam } from '@/components/profile/ProfileJam';
 
 const ProfileForm = () => {
   const [selected, setSelected] = useState('');
-  const projects = ApiClient.get('projects');
+  const projects = ApiClient.get('projects').slice(0, 3);
+  const jams = ApiClient.get('jams').slice(0, 3);
 
   return (
     <View style={styles.container}>    
@@ -74,10 +76,24 @@ const ProfileForm = () => {
               />
               <Text style={styles.title}>Your projects</Text> 
               <FlatList 
-                style={styles.projects}
+                style={styles.list}
                 data={projects} 
                 horizontal={true}  
-                renderItem={({item, index}) => <ProjectItem item={item} index={index} />} 
+                renderItem={({item, index}) => <ProfileProject item={item} index={index} />} 
+              />
+              <Text style={styles.title}>Your jams</Text> 
+              <FlatList 
+                style={styles.list}
+                data={jams} 
+                horizontal={true}  
+                renderItem={({item, index}) => <ProfileJam item={item} index={index} />} 
+              />
+              <Text style={styles.title}>Saved jams</Text> 
+              <FlatList 
+                style={styles.list}
+                data={jams} 
+                horizontal={true}  
+                renderItem={({item, index}) => <ProfileJam item={item} index={index} />} 
               />
             </ScrollView>  
           </View>
@@ -93,6 +109,7 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     width: '100%',
+    paddingBottom: 40,
   },
   scroller: {
     flexGrow: 1,
@@ -128,7 +145,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12, 
     marginBottom: 10,
   },
-  projects: {
+  list: {
     marginTop: 10,
   },
 });

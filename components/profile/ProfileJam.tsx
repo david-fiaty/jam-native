@@ -6,10 +6,10 @@ type Props = {
   index: number,
 };
 
-export function ProjectItem({item, index}: Props) {
+export function ProfileJam({item, index}: Props) {
   return (
     <View style={styles.container}>
-    <Text style={GlobalStyles.text}>{item.name}</Text>   
+      <Text style={GlobalStyles.text}>{item.id}</Text>   
     </View>
   );
 };
