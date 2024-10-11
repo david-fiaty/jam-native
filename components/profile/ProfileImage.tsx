@@ -30,6 +30,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 20,
   },
+  button: {
+    borderRadius: 30,
+    overflow: 'hidden',
+    paddingTop: 5,
+    paddingBottom: 5,
+    gap: 8,
+  },
 });
 
 export default ProfileImage;
