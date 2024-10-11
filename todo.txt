@@ -28,12 +28,9 @@ Twilio => SMS
 
 
 
-import ApiClient from '@/classes/ApiClient';
-console.log(ApiClient.get('jams'));
-
-
-
-  UserLocation.get().then((location) => {
-
-    console.log(location);
-  });
+  const renderItem = ({ item }) => (
+    <View style={styles.item}>
+      <Image source={item.image} style={styles.image} />
+      <Text style={styles.text}>{item.text}</Text>
+    </View>
+  );

@@ -1,6 +1,6 @@
 import { StyleSheet, View } from 'react-native';
-import JamActions from './JamActions';
-import JamHosts from './JamHosts';
+import JamActions from '@/components/jam/JamActions';
+import JamHosts from '@/components/jam/JamHosts';
 
 type Props = {
   item: object,

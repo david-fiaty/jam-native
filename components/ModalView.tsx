@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, Modal, Pressable, View, TouchableWithoutFeedback, StatusBar } from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
-import BackButton from './navigation/BackButton';
+import BackButton from '@/components/navigation/BackButton';
 
 type Props = {
   label: JSX.Element, 
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
       flex: 1,
       flexDirection: 'column',
       alignItems: 'center',
-      marginTop: 0,
+      marginTop: StatusBar.currentHeight + GlobalStyles.statusbar.height,
       height: '100%',
     },
     view: {

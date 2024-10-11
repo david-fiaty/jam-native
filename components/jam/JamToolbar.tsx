@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
-import JamJammers from './JamJammers';
-import SaveJam from './SaveJam';
-import ShareJam from './ShareJam';
+import JamJammers from '@/components/jam/JamJammers';
+import SaveJam from '@/components/jam/SaveJam';
+import ShareJam from '@/components/jam/ShareJam';
 
 type Props = {
   item: object,
