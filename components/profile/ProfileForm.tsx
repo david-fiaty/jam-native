@@ -66,12 +66,15 @@ const styles = StyleSheet.create({
   scroller: {
     flexGrow: 1,
   },  
-  picture: {
-    paddingBottom: 20,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 20,
+  input: {
+    backgroundColor: Colors.tertiary,
+    width: '100%',
+    height: 36,
+    borderWidth: 1, 
+    borderColor: Colors.tertiary, 
+    borderRadius: 6,
+    paddingHorizontal: 12, 
+    marginBottom: 10,
   },
   button: {
     borderRadius: 30,

@@ -34,12 +34,15 @@ const ProfileScreen = () => {
                 renderItem={({item, index}) => <ProfileProject item={item} index={index} />} 
               />
               <Text style={styles.title}>Your jams</Text> 
+
               <FlatList 
                 style={styles.list}
                 data={jams} 
                 horizontal={true}  
                 renderItem={({item, index}) => <ProfileJam item={item} index={index} />} 
               />
+
+
               <Text style={styles.title}>Saved jams</Text> 
               <FlatList 
                 style={styles.list}
@@ -72,26 +75,6 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     paddingBottom: 5,
     gap: 8,
-  },
-  title: {
-    ...GlobalStyles.text,
-    ...{
-      fontWeight: 'bold',
-      marginTop: 15,
-    },
-  },
-  input: {
-    backgroundColor: Colors.tertiary,
-    width: '100%',
-    height: 36,
-    borderWidth: 1, 
-    borderColor: Colors.tertiary, 
-    borderRadius: 6,
-    paddingHorizontal: 12, 
-    marginBottom: 10,
-  },
-  list: {
-    marginTop: 10,
   },
 });
 
