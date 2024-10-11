@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, } from 'react-native';
 import Collapsible from 'react-native-collapsible';
 
-const AccordionView = () => {
+const CollapsibleView = () => {
   const [collapsed, setCollapsed] = useState(true);
 
   return (
@@ -46,4 +46,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AccordionView;
+export default CollapsibleView;

@@ -1,12 +1,12 @@
 import { View, StyleSheet, Text } from 'react-native';
 import { Colors } from '@/constants/GlobalStyles';
 import WelcomeScreen from '@/components/screens/WelcomeScreen';
-import AccordionView from '@/components/AccordionView';
+import CollapsibleView from '@/components/CollapsibleView';
 
 const Index = () => {
   return (  
     <View style={styles.container}>
-      <AccordionView />
+      <CollapsibleView />
       {/* <WelcomeScreen /> */}
     </View>
   );
