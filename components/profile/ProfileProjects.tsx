@@ -9,19 +9,18 @@ const ProfileProjects = () => {
     <View style={styles.container}>
       <Text style={styles.title}>Your projects</Text> 
       <View style={styles.list}>
-
-      <FlatList 
-        data={data} 
-        horizontal={true}  
-        numColumns={4}
-        renderItem={({item, index}) => {
-          return (
-            <View style={styles.item}>
-              <Text style={GlobalStyles.text}>{item.id}</Text>   
-            </View>
-          );
-        }}
-      />
+        <FlatList 
+          data={data} 
+          numColumns={4}
+          scrollEnabled={false}
+          renderItem={({item, index}) => {
+            return (
+              <View style={styles.item}>
+                <Text style={GlobalStyles.text}>{item.id}</Text>   
+              </View>
+            );
+          }}
+        />
       </View>
     </View>
   );
@@ -40,9 +39,6 @@ const styles = StyleSheet.create({
     },
   },
   list: {
-    //flex: 4,
-    //flexDirection: 'row',
-    //gap: 10,
   },
   item: {
     backgroundColor: Colors.tertiary,
