@@ -10,11 +10,9 @@ export function SaveIcon({size}: Props) {
   size = size ? size : GlobalStyles.icon.fontSize;
   
   return (
-    <TouchableOpacity>
-      <View style={styles.container}>
-        <Ionicons name="star-outline" size={size} style={styles.icon} />   
-      </View>
-    </TouchableOpacity>
+    <View style={styles.container}>
+        <Ionicons name="star-outline" size={size} style={styles.icon} />  
+    </View>
   );
 };
 
