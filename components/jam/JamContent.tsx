@@ -1,5 +1,6 @@
 import { StyleSheet, View, Text, Pressable } from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
+import CollapsibleView from '@/components/CollapsibleView';
 
 type Props = {
   item: object,
@@ -9,15 +10,10 @@ type Props = {
 const JamContent = ({item, index}: Props) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>
+      <Text style={GlobalStyles.text}>
         {item.content}
       </Text>
-      <Pressable 
-        style={styles.pressable} 
-        onPress={() => console.log('Clicked')}
-      >
-        <Text style={styles.text}>View more</Text>
-      </Pressable>
+      <CollapsibleView />
     </View>
   );
 };
@@ -28,10 +24,6 @@ const styles = StyleSheet.create({
     paddingRight: 14,
     paddingBottom: 8,
     paddingLeft: 14,
-  },
-  text: GlobalStyles.text,
-  pressable: {
-    marginTop: 15,
   },
 });
 
