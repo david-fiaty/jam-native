@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import JamActions from '@/components/jam/JamActions';
 import JamHosts from '@/components/jam/JamHosts';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 
 type Props = {
   item: object,
@@ -34,12 +35,12 @@ const styles = StyleSheet.create({
   left: {
     display: 'flex',
     flexDirection: 'row',
-    gap: 10,
+    gap: GlobalStyles.gap,
   },
   right: {
     display: 'flex',
     flexDirection: 'row',
-    gap: 10,
+    gap: GlobalStyles.gap,
   },
 });
 
