@@ -1,6 +1,5 @@
 import { StyleSheet, View, Text, FlatList } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-import MegaphoneIcon from '../icons/MegaphoneIcon';
 import ApiClient from '@/classes/ApiClient';
 
 const JamForm = () => {
@@ -9,7 +8,6 @@ const JamForm = () => {
   return (
     <View style={styles.container}>    
       <Text style={GlobalStyles.text}>What kind of Jam is it?</Text>
-      <MegaphoneIcon size={32} />
       <View style={styles.list}>
         <FlatList 
           data={data} 
