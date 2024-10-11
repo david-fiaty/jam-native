@@ -32,13 +32,6 @@ const ProfileScreen = () => {
                 renderItem={({item, index}) => <ProfileProject item={item} index={index} />} 
               />
               <ProfileJams/>
-              <Text style={styles.title}>Saved jams</Text> 
-              <FlatList 
-                style={styles.list}
-                data={jams} 
-                horizontal={true}  
-                renderItem={({item, index}) => <ProfileJam item={item} index={index} />} 
-              />
             </ScrollView>  
           </View>
         }
