@@ -1,15 +1,14 @@
-import { StyleSheet, View } from 'react-native';
-import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
+import { StyleSheet, View, Text } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
 type Props = {
-  size?: number,
+  count: number,
 };
 
-export function MenuIcon({size}: Props) {
+export function NotificationsIcon({count}: Props) {
   return (
     <View style={styles.container}>
-      <SimpleLineIcons name="menu" size={size} style={styles.icon} />   
+      <Text style={styles.icon}>{count}+</Text>
     </View>
   );
 };
@@ -22,12 +21,16 @@ const styles = StyleSheet.create({
   },
   icon: {
     ...GlobalStyles.icon,
+    ...GlobalStyles.text,
     ...{
       backgroundColor: Colors.tertiary,
-      padding: 8,
+      paddingTop: 5.5,
+      paddingRight: 8,
+      paddingBottom: 5.5,
+      paddingLeft: 8,
       borderRadius: 40,
     },
   },
 });
 
-export default MenuIcon;
+export default NotificationsIcon;

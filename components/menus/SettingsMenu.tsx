@@ -33,14 +33,6 @@ const styles = StyleSheet.create({
   list: {
     width: '100%',
   },
-  icon: {
-    ...GlobalStyles.icon,
-    ...{
-      backgroundColor: Colors.tertiary,
-      padding: 8,
-      borderRadius: 40,
-    },
-  },
 });
 
 export default SettingsMenu;
