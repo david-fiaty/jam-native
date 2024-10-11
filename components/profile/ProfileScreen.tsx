@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { StyleSheet, Text, View, ScrollView, FlatList } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+import { Colors } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
 import ApiClient from '@/classes/ApiClient';
 import { ProfileProject } from '@/components/profile/ProfileProject';
-import { ProfileJams } from '@/components/profile/ProfileJams';
 import ProfileForm from '@/components/profile/ProfileForm';
 import ProfileImage from '@/components/profile/ProfileImage';
+import ProfileJams from '@/components/profile/ProfileJams';
 
 const ProfileScreen = () => {
   const [selected, setSelected] = useState('');
@@ -32,7 +32,6 @@ const ProfileScreen = () => {
                 renderItem={({item, index}) => <ProfileProject item={item} index={index} />} 
               />
               <ProfileJams/>
-
               <Text style={styles.title}>Saved jams</Text> 
               <FlatList 
                 style={styles.list}
