@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
@@ -10,9 +10,7 @@ export function ShareIcon({size}: Props) {
   size = size ? size : GlobalStyles.icon.fontSize;
   
   return (
-    <TouchableOpacity>
-      <Ionicons name="share-social-outline" size={size} style={styles.icon} /> 
-    </TouchableOpacity>  
+    <Ionicons name="share-social-outline" size={size} style={styles.icon} />   
   );
 };
 
