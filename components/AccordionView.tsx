@@ -76,11 +76,12 @@ export default function AccordionView() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'gray',
     marginTop: 100,
+    width: '100%',
   },
   header: {
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'orange',
     padding: 10,
   },
   headerText: {
@@ -90,13 +91,6 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 20,
-    backgroundColor: '#fff',
-    height: 200,
-  },
-  active: {
-    backgroundColor: 'rgba(255,255,255,1)',
-  },
-  inactive: {
-    backgroundColor: 'rgba(245,252,255,1)',
+    backgroundColor: 'blue',
   },
 });
