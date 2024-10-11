@@ -12,6 +12,8 @@ const ProfileJams = () => {
         <FlatList 
           data={data} 
           numColumns={3}
+          contentContainerStyle={{gap: 10}}
+          columnWrapperStyle={{gap: 10}}
           scrollEnabled={false}
           renderItem={({item, index}) => {
             return (
@@ -46,8 +48,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     borderColor: Colors.tertiary,
-    width: 60,
-    height: 60,
+    width: 99,
+    height: 99,
   },
 });
 
