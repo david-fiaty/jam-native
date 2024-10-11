@@ -1,6 +1,6 @@
 import { StyleSheet, View, FlatList, Text } from 'react-native';
-import MenuItem from './MenuItem';
-import ModalView from '../ModalView';
+import MenuItem from '@/components/menus/MenuItem';
+import ModalView from '@/components/ModalView';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ApiClient from '@/classes/ApiClient';
 

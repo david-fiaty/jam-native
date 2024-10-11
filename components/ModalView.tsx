@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, Modal, Pressable, View, TouchableWithoutFeedback, StatusBar } from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
-import BackButton from './navigation/BackButton';
+import BackButton from '@/components/navigation/BackButton';
 
 type Props = {
   label: JSX.Element, 
