@@ -21,7 +21,7 @@ const ProfileForm = () => {
         label={<Ionicons name="person-circle" size={26} color={Colors.primary} />}
         content={
           <View style={styles.wrapper}>  
-            <ScrollView contentContainerStyle={styles.scroller} nestedScrollEnabled={true}>
+            <ScrollView contentContainerStyle={styles.scroller}>
               <View style={styles.picture}>
                 <FontAwesome name="user-circle" size={86} color={GlobalStyles.icon.color} />
                 <Button 
@@ -79,7 +79,6 @@ const ProfileForm = () => {
                 style={styles.list}
                 data={projects} 
                 horizontal={true}  
-                scrollEnabled={false}
                 renderItem={({item, index}) => <ProfileProject item={item} index={index} />} 
               />
               <Text style={styles.title}>Your jams</Text> 
@@ -87,7 +86,6 @@ const ProfileForm = () => {
                 style={styles.list}
                 data={jams} 
                 horizontal={true}  
-                scrollEnabled={false}
                 renderItem={({item, index}) => <ProfileJam item={item} index={index} />} 
               />
               <Text style={styles.title}>Saved jams</Text> 
@@ -95,7 +93,6 @@ const ProfileForm = () => {
                 style={styles.list}
                 data={jams} 
                 horizontal={true}  
-                scrollEnabled={false}
                 renderItem={({item, index}) => <ProfileJam item={item} index={index} />} 
               />
             </ScrollView>  
