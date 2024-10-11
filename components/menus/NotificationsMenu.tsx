@@ -3,6 +3,7 @@ import MenuItem from '@/components/menus/MenuItem';
 import ModalView from '@/components/ModalView';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ApiClient from '@/classes/ApiClient';
+import NotificationsIcon from '../icons/NotificationsIcon';
 
 const NotificationsMenu = () => {  
   const data = ApiClient.get('notifications');
@@ -11,7 +12,7 @@ const NotificationsMenu = () => {
     <View style={styles.container}>   
       <ModalView 
         title="Notifications" 
-        label={<Text style={[styles.icon]}>20+</Text>}
+        label={<NotificationsIcon count={20}/>}
         content={
           <FlatList 
             data={data} 
