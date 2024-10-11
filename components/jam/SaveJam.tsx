@@ -1,9 +1,9 @@
 import { StyleSheet, View, Text} from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
 import SaveIcon from '../icons/SaveIcon';
 import ShareIcon from '../icons/ShareIcon';
+import LayersIcon from '../icons/LayersIcon';
 
 const SaveJam = () => {
   return (
@@ -14,14 +14,11 @@ const SaveJam = () => {
         content={
           <View style={GlobalStyles.modal.wrapper}>
             <View style={styles.row}>
-              <ShareIcon size={20} />
+              <ShareIcon size={22} />
               <Text style={GlobalStyles.text}>Share</Text>
             </View>
             <View style={styles.row}>
-            <Ionicons 
-              name="apps-sharp" 
-              size={20} style={styles.icon} 
-            />
+            <LayersIcon size={22} />
             <Text style={GlobalStyles.text}>View my Jams</Text>
             </View>
           </View>

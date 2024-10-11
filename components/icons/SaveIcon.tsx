@@ -9,7 +9,7 @@ type Props = {
 export function SaveIcon({size}: Props) {
   return (
     <View style={styles.container}>
-      <Ionicons name="save-outline" size={size} style={styles.icon} />   
+      <Ionicons name="star-outline" size={size} style={styles.icon} />   
     </View>
   );
 };
