@@ -1,54 +1,39 @@
 import { StyleSheet, View, Text} from 'react-native';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import ModalView from '../ModalView';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+import ModalView from '../ModalView';
+import ShareIcon from '../icons/ShareIcon';
+import CopyIcon from '../icons/CopyIcon';
+import EmailIcon from '../icons/EmailIcon';
+import InstagramIcon from '../icons/InstagramIcon';
+import FacebookIcon from '../icons/FacebookIcon';
+import TwitterIcon from '../icons/TwitterIcon';
 
 const ShareJam = () => {
   return (
     <View style={styles.container}>        
       <ModalView 
         title="Share Jam" 
-        label={<Ionicons 
-          name="share-social-outline" 
-          size={14} style={styles.icon} 
-        />}
+        label={<ShareIcon size={14} />}
         content={
           <View style={GlobalStyles.modal.wrapper}>
             <View style={styles.row}>
-              <MaterialIcons 
-                name="content-copy" 
-                size={20} style={styles.icon} 
-              />
+              <CopyIcon size={22} />
               <Text style={GlobalStyles.text}>Copy link</Text>
             </View>
             <View style={styles.row}>
-              <MaterialIcons 
-                name="email" 
-                size={20} style={styles.icon} 
-              />
+              <EmailIcon size={22} />
               <Text style={GlobalStyles.text}>Send email</Text>
             </View>
             <View style={styles.row}>
-              <MaterialCommunityIcons 
-                name="instagram" 
-                size={20} style={styles.icon} 
-              />
+              <InstagramIcon size={22} />
               <Text style={GlobalStyles.text}>Instagram</Text>
             </View>
             <View style={styles.row}>
-              <MaterialCommunityIcons 
-                name="facebook" 
-                size={20} style={styles.icon} 
-              />
+              <FacebookIcon size={22} />
               <Text style={GlobalStyles.text}>Facebook</Text>
             </View>
             <View style={styles.row}>
-              <MaterialCommunityIcons 
-                name="twitter" 
-                size={20} style={styles.icon} 
-              />
+              <TwitterIcon size={22} />
               <Text style={GlobalStyles.text}>Twitter</Text>
             </View>
           </View>

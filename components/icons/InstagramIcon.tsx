@@ -1,14 +1,14 @@
 import { StyleSheet } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
 type Props = {
   size?: number
 };
 
-export function ShareIcon({size}: Props) {
+export function InstagramIcon({size}: Props) {
   return (
-    <Ionicons name="share-social-outline" size={size} style={styles.icon} />   
+    <MaterialCommunityIcons name="instagram" size={size} style={styles.icon} />   
   );
 };
 
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ShareIcon;
+export default InstagramIcon;

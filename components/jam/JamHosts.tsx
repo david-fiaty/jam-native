@@ -1,9 +1,8 @@
 import { StyleSheet, View, FlatList, Text } from 'react-native';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import Feather from '@expo/vector-icons/Feather';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
 import ApiClient from '@/classes/ApiClient';
+import UserIcon from '../icons/UserIcon';
 
 type Props = {
   item: object,
@@ -19,11 +18,6 @@ const JamHosts = ({item, index}: Props) => {
         title="Hosts" 
         label={
           <View style={styles.label}>
-            <Feather
-              name="users" 
-              size={14} 
-              style={styles.icon}
-            />
             <Text style={GlobalStyles.text}>@host +{item.host_count}</Text>
           </View>
         }
@@ -36,7 +30,7 @@ const JamHosts = ({item, index}: Props) => {
               renderItem={({item, index}) => {
                 return (
                   <View style={styles.row}>
-                    <FontAwesome name="user-circle" size={28} color={GlobalStyles.icon.color} />
+                    <UserIcon size={22} />
                     <Text style={GlobalStyles.text}>{item.name} / {item.handle}</Text>
                   </View>
                 );

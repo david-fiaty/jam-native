@@ -1,14 +1,14 @@
 import { StyleSheet } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
 type Props = {
   size?: number
 };
 
-export function ShareIcon({size}: Props) {
+export function LayersIcon({size}: Props) {
   return (
-    <Ionicons name="share-social-outline" size={size} style={styles.icon} />   
+    <SimpleLineIcons name="layers" size={size} style={styles.icon} />   
   );
 };
 
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ShareIcon;
+export default LayersIcon;
