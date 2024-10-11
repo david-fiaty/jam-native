@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   scroll: {
-    flexGrow: 1,
+    display: 'flex',
   },  
 });
 
