@@ -24,6 +24,7 @@ const JamItem = ({item, index}: Props) => {
 const styles = StyleSheet.create({
   container: {
     marginBottom: 20,
+    paddingBottom: GlobalStyles.gap,
     borderWidth: 1,
     borderRadius: 5,
     borderColor: GlobalStyles.border.color,
