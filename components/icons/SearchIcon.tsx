@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
@@ -10,11 +10,9 @@ export function SearchIcon({size}: Props) {
   size = size ? size : GlobalStyles.icon.fontSize;
   
   return (
-    <TouchableOpacity>
-      <View style={styles.container}>
-        <SimpleLineIcons name="magnifier" size={size} style={styles.icon} />   
-      </View>
-    </TouchableOpacity>
+    <View style={styles.container}>
+      <SimpleLineIcons name="magnifier" size={size} style={styles.icon} />   
+    </View>
   );
 };
 

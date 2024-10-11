@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
@@ -10,11 +10,9 @@ export function SaveIcon({size}: Props) {
   size = size ? size : GlobalStyles.icon.fontSize;
   
   return (
-    <TouchableOpacity>
-      <View style={styles.container}>
-        <Ionicons name="star-outline" size={size} style={styles.icon} />   
-      </View>
-    </TouchableOpacity>
+    <View style={styles.container}>
+      <Ionicons name="star-outline" size={size} style={styles.icon} />   
+    </View>
   );
 };
 
