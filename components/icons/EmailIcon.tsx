@@ -1,15 +1,14 @@
 import { StyleSheet } from 'react-native';
-import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 type Props = {
   size?: number
 };
 
-export function LayersIcon({size}: Props) {
+export function EmailIcon({size}: Props) {
   return (
-    <SimpleLineIcons name="layers" size={size} style={styles.icon} />   
+    <MaterialIcons name="email" size={size} style={styles.icon} />   
   );
 };
 
@@ -24,4 +23,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LayersIcon;
+export default EmailIcon;

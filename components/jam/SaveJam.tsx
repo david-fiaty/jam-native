@@ -1,5 +1,4 @@
 import { StyleSheet, View, Text} from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
 import SaveIcon from '../icons/SaveIcon';

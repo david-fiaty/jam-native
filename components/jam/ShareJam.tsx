@@ -4,6 +4,8 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import ModalView from '../ModalView';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ShareIcon from '../icons/ShareIcon';
+import CopyIcon from '../icons/CopyIcon';
+import EmailIcon from '../icons/EmailIcon';
 
 const ShareJam = () => {
   return (
@@ -14,17 +16,11 @@ const ShareJam = () => {
         content={
           <View style={GlobalStyles.modal.wrapper}>
             <View style={styles.row}>
-              <MaterialIcons 
-                name="content-copy" 
-                size={20} style={styles.icon} 
-              />
+              <CopyIcon size={22} />
               <Text style={GlobalStyles.text}>Copy link</Text>
             </View>
             <View style={styles.row}>
-              <MaterialIcons 
-                name="email" 
-                size={20} style={styles.icon} 
-              />
+              <EmailIcon size={22} />
               <Text style={GlobalStyles.text}>Send email</Text>
             </View>
             <View style={styles.row}>
