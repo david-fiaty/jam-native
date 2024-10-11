@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   item: {
-    alignSelf: 'center',
+    display: 'flex',
     backgroundColor: Colors.tertiary,
     padding: 10,
     borderWidth: 1,
