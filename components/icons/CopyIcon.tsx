@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
@@ -10,7 +10,9 @@ export function CopyIcon({size}: Props) {
   size = size ? size : GlobalStyles.icon.fontSize;
   
   return (
-    <MaterialIcons name="content-copy" size={size} style={styles.icon} />   
+    <TouchableOpacity>
+      <MaterialIcons name="content-copy" size={size} style={styles.icon} />  
+    </TouchableOpacity> 
   );
 };
 

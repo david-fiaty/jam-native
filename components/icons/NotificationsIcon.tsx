@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
 type Props = {
