@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
@@ -10,7 +10,9 @@ export function TwitterIcon({size}: Props) {
   size = size ? size : GlobalStyles.icon.fontSize;
   
   return (
-    <MaterialCommunityIcons name="twitter" size={size} style={styles.icon} />   
+    <TouchableOpacity>
+      <MaterialCommunityIcons name="twitter" size={size} style={styles.icon} />   
+    </TouchableOpacity>
   );
 };
 

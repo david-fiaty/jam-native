@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import Feather from '@expo/vector-icons/Feather';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
@@ -10,9 +10,11 @@ export function UsersIcon({size}: Props) {
   size = size ? size : GlobalStyles.icon.fontSize;
   
   return (
-    <View style={styles.container}>
-      <Feather name="users" size={size} style={styles.icon} />   
-    </View>
+    <TouchableOpacity>
+      <View style={styles.container}>
+        <Feather name="users" size={size} style={styles.icon} />   
+      </View>
+    </TouchableOpacity>
   );
 };
 
