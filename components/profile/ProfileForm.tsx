@@ -79,7 +79,6 @@ const styles = StyleSheet.create({
     ...GlobalStyles.text,
     ...{
       fontWeight: 'bold',
-      marginTop: 15,
     },
   },
   input: {
