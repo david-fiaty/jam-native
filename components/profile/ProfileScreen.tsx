@@ -16,7 +16,7 @@ const ProfileScreen = () => {
         label={<Ionicons name="person-circle" size={26} color={Colors.primary} />}
         content={
           <SafeAreaView style={styles.wrapper}>  
-            <ScrollView style={styles.scroll}>
+            <ScrollView style={styles.scroll} nestedScrollEnabled={true}>
               <ProfileImage />
               <ProfileForm />
               <ProfileProjects />
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get('screen').height,
   },
   scroll: {
-
+    flexGrow: 1,
   },  
 });
 
