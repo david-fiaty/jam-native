@@ -1,14 +1,11 @@
 import { StyleSheet, View, Text, TextInput, Pressable } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+import MegaphoneIcon from '../icons/MegaphoneIcon';
 
 const JamForm = () => {
   return (
     <View style={styles.container}>    
-      <TextInput
-        style={GlobalStyles.input}
-        placeholder="Enter your email address"
-        placeholderTextColor={GlobalStyles.text.color}
-      />
+      <MegaphoneIcon size={32} />
     </View>
   );
 };
