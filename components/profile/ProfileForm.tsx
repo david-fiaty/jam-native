@@ -68,13 +68,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12, 
     marginBottom: 10,
   },
-  button: {
-    borderRadius: 30,
-    overflow: 'hidden',
-    paddingTop: 5,
-    paddingBottom: 5,
-    gap: 8,
-  },
   title: {
     ...GlobalStyles.text,
     ...{
