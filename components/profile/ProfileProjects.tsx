@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     ...GlobalStyles.text,
     ...{
       fontWeight: 'bold',
-      marginBottom: 15,
+      marginBottom: 10,
     },
   },
   list: {
