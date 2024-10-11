@@ -7,18 +7,16 @@ const ProfileJams = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Saved jams</Text> 
-      <FlatList 
-        data={data} 
-        horizontal={true}  
-        renderItem={({item, index}) => {
+      <Text style={styles.title}>Saved Jams</Text> 
+      <View style={styles.list}>
+        {data.map((item, index) => {
           return (
-            <View style={styles.item}>
+            <View style={styles.item} key={index}>
               <Text style={GlobalStyles.text}>{item.id}</Text>   
             </View>
           );
-        }}
-      />
+        })}
+      </View>
     </View>
   );
 };
@@ -34,11 +32,16 @@ const styles = StyleSheet.create({
       marginBottom: 15,
     },
   },
+  list: {
+    flex: 4,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    gap: 10,
+  },
   item: {
     alignSelf: 'center',
     backgroundColor: Colors.tertiary,
     padding: 10,
-    marginRight: 10,
     borderWidth: 1,
     borderRadius: 8,
     borderColor: Colors.tertiary,
