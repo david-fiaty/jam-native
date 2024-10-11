@@ -3,10 +3,12 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
 type Props = {
-  size?: number
+  size?: number,
 };
 
 export function CopyIcon({size}: Props) {
+  size = size ? size : GlobalStyles.icon.fontSize;
+  
   return (
     <MaterialIcons name="content-copy" size={size} style={styles.icon} />   
   );

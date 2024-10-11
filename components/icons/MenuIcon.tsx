@@ -7,6 +7,8 @@ type Props = {
 };
 
 export function MenuIcon({size}: Props) {
+  size = size ? size : GlobalStyles.icon.fontSize;
+  
   return (
     <View style={styles.container}>
       <SimpleLineIcons name="menu" size={size} style={styles.icon} />   

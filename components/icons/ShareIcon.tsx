@@ -7,6 +7,8 @@ type Props = {
 };
 
 export function ShareIcon({size}: Props) {
+  size = size ? size : GlobalStyles.icon.fontSize;
+  
   return (
     <Ionicons name="share-social-outline" size={size} style={styles.icon} />   
   );

@@ -3,12 +3,15 @@ import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
 type Props = {
   count: number,
+  size?: number,
 };
 
-export function NotificationsIcon({count}: Props) {
+export function NotificationsIcon({count, size}: Props) {
+  size = size ? size : GlobalStyles.icon.fontSize;
+
   return (
     <View style={styles.container}>
-      <Text style={styles.icon}>{count}+</Text>
+      <Text style={[styles.icon, {fontSize: size}]}>{count}+</Text>
     </View>
   );
 };
