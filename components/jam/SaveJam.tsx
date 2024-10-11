@@ -2,24 +2,19 @@ import { StyleSheet, View, Text} from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
+import SaveIcon from '../icons/SaveIcon';
+import ShareIcon from '../icons/ShareIcon';
 
 const SaveJam = () => {
   return (
     <View style={styles.container}>        
       <ModalView 
         title="Jam is now saved to your Jams" 
-        label={<Ionicons 
-          name="save-outline" 
-          size={14} 
-          style={styles.icon} 
-        />}
+        label={<SaveIcon size={14} />}
         content={
           <View style={GlobalStyles.modal.wrapper}>
             <View style={styles.row}>
-              <Ionicons 
-                name="share-social-outline" 
-                size={20} style={styles.icon} 
-              />
+              <ShareIcon size={20} />
               <Text style={GlobalStyles.text}>Share</Text>
             </View>
             <View style={styles.row}>

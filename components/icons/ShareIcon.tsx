@@ -1,24 +1,26 @@
-import { Image, View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
 type Props = {
-  uri: string,
-  width: number,
-  height: number,
+  size?: number
 };
 
-export function ShareIcon({uri, width, height}: Props) {
+export function ShareIcon({size}: Props) {
   return (
-    <Image 
-      source={uri} 
-      resizeMethod="scale"
-      resizeMode="contain"
-      style={[styles.image, {width: width}, {height: height}]} 
-    />   
+    <Ionicons name="share-social-outline" size={size} style={styles.icon} />   
   );
 };
 
 const styles = StyleSheet.create({
-  image: {
-    alignSelf: 'center',
+  icon: {
+    ...GlobalStyles.icon,
+    ...{
+      backgroundColor: Colors.secondary,
+      padding: 6,
+      borderRadius: 40,
+    },
   },
 });
+
+export default ShareIcon;

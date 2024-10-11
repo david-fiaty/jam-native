@@ -1,19 +1,16 @@
 import { StyleSheet, View, Text} from 'react-native';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import ModalView from '../ModalView';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+import ShareIcon from '../icons/ShareIcon';
 
 const ShareJam = () => {
   return (
     <View style={styles.container}>        
       <ModalView 
         title="Share Jam" 
-        label={<Ionicons 
-          name="share-social-outline" 
-          size={14} style={styles.icon} 
-        />}
+        label={<ShareIcon size={14} />}
         content={
           <View style={GlobalStyles.modal.wrapper}>
             <View style={styles.row}>

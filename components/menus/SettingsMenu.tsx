@@ -1,9 +1,9 @@
 import { StyleSheet, View, FlatList } from 'react-native';
-import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import MenuItem from './MenuItem';
 import ModalView from '../ModalView';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import SettingsMenuItems from '@/constants/SettingsMenuItems';
+import MenuIcon from '../icons/MenuIcon';
 
 const SettingsMenu = () => {
   const data = SettingsMenuItems;
@@ -12,7 +12,7 @@ const SettingsMenu = () => {
     <View style={styles.container}>        
       <ModalView 
         title="Settings" 
-        label={<SimpleLineIcons name="menu" size={12} style={styles.icon} />}
+        label={<MenuIcon size={14} />}
         content={
           <FlatList 
             data={data} 
