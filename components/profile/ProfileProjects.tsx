@@ -9,13 +9,19 @@ const ProfileProjects = () => {
     <View style={styles.container}>
       <Text style={styles.title}>Your projects</Text> 
       <View style={styles.list}>
-        {data.map((item, index) => {
+
+      <FlatList 
+        data={data} 
+        horizontal={true}  
+        numColumns={4}
+        renderItem={({item, index}) => {
           return (
-            <View style={styles.item} key={index}>
+            <View style={styles.item}>
               <Text style={GlobalStyles.text}>{item.id}</Text>   
             </View>
           );
-        })}
+        }}
+      />
       </View>
     </View>
   );
@@ -34,9 +40,9 @@ const styles = StyleSheet.create({
     },
   },
   list: {
-    flex: 4,
-    flexDirection: 'row',
-    gap: 10,
+    //flex: 4,
+    //flexDirection: 'row',
+    //gap: 10,
   },
   item: {
     backgroundColor: Colors.tertiary,
