@@ -33,12 +33,16 @@ const WelcomeScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
+    display: 'flex',
   },
   text: GlobalStyles.text,
   button: {
     marginTop: 40,
     borderRadius: 30,
     overflow: 'hidden',
+    minWidth: '35%',
+    maxWidth: '40%',
+    alignSelf: 'center',
   },
 });
 
