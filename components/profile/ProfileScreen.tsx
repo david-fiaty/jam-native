@@ -1,4 +1,4 @@
-import { StyleSheet, View, ScrollView, Dimensions } from 'react-native';
+import { StyleSheet, View, ScrollView, Dimensions, Pressable } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Colors } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
@@ -16,11 +16,22 @@ const ProfileScreen = () => {
         label={<Ionicons name="person-circle" size={26} color={Colors.primary} />}
         content={
           <SafeAreaView style={styles.wrapper}>  
-            <ScrollView style={styles.scroll} nestedScrollEnabled={true}>
-              <ProfileImage />
-              <ProfileForm />
-              <ProfileProjects />
-              <ProfileJams />
+            <ScrollView 
+              nestedScrollEnabled={true}
+              contentContainerStyle={{ flexGrow: 1 }}
+            >
+              <Pressable>
+                <ProfileImage />
+              </Pressable>
+              <Pressable>
+                <ProfileForm />
+              </Pressable>
+              <Pressable>
+                <ProfileProjects />
+              </Pressable>
+              <Pressable>
+                <ProfileJams />
+              </Pressable>
             </ScrollView>  
           </SafeAreaView>
         }
