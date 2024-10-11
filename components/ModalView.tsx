@@ -51,14 +51,6 @@ const styles = StyleSheet.create({
   container: {
   },
   text: GlobalStyles.text,
-  row: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingTop: 8,
-    paddingBottom: 8,
-    gap: 16,
-  },
   modal: {
     container: {
       flex: 1,

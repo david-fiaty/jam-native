@@ -6,6 +6,7 @@ export const Colors = {
 };
 
 export const GlobalStyles = {
+  gap: 10,
   statusbar: {
     height: 42,
   },

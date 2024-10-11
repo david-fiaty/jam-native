@@ -2,6 +2,7 @@ import { StyleSheet, View } from 'react-native';
 import JamJammers from '@/components/jam/JamJammers';
 import SaveJam from '@/components/jam/SaveJam';
 import ShareJam from '@/components/jam/ShareJam';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 
 type Props = {
   item: object,
@@ -36,12 +37,12 @@ const styles = StyleSheet.create({
   left: {
     display: 'flex',
     flexDirection: 'row',
-    gap: 12,
+    gap: GlobalStyles.gap,
   },
   right: {
     display: 'flex',
     flexDirection: 'row',
-    gap: 12,
+    gap: GlobalStyles.gap,
   },
 });
 

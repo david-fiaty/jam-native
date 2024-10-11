@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    gap: GlobalStyles.gap,
   },
   row: {
     display: 'flex',
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 4,
     paddingBottom: 8,
-    gap: 12,
+    gap: GlobalStyles.gap,
   },
   icon: {
     ...GlobalStyles.icon,
