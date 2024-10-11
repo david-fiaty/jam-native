@@ -4,7 +4,7 @@ import MegaphoneIcon from '../icons/MegaphoneIcon';
 import ApiClient from '@/classes/ApiClient';
 
 const JamForm = () => {
-  const data = ApiClient.get('jams');
+  const data = ApiClient.get('jams').slice(0, 4);
 
   return (
     <View style={styles.container}>    
@@ -13,7 +13,7 @@ const JamForm = () => {
       <View style={styles.list}>
         <FlatList 
           data={data} 
-          numColumns={3}
+          numColumns={4}
           contentContainerStyle={{gap: GlobalStyles.gap}}
           columnWrapperStyle={{gap: GlobalStyles.gap}}
           scrollEnabled={false}
@@ -45,8 +45,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     borderColor: Colors.tertiary,
-    width: 99,
-    height: 99,
+    width: 72,
+    height: 72,
   },
 });
 
