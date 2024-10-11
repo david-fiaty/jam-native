@@ -1,3 +1,4 @@
+import { GlobalStyles } from '@/constants/GlobalStyles';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Collapsible from 'react-native-collapsible';
@@ -9,12 +10,12 @@ const CollapsibleView = () => {
     <View style={styles.container}>
       <TouchableOpacity onPress={() => setCollapsed((prev) => !prev)}>
         <View style={styles.header}>
-          <Text style={styles.headerText}>Single Collapsible</Text>
+          <Text style={GlobalStyles.text}>View more.</Text>
         </View>
       </TouchableOpacity>
       <Collapsible collapsed={collapsed} align="center">
         <View style={styles.content}>
-          <Text>
+          <Text style={GlobalStyles.text}>
             Bacon ipsum dolor amet chuck turducken landjaeger tongue spare
             ribs
           </Text>
@@ -27,12 +28,10 @@ const CollapsibleView = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'gray',
     width: '100%',
+    marginTop: GlobalStyles.gap,
   },
   header: {
-    backgroundColor: 'orange',
-    padding: 10,
   },
   headerText: {
     textAlign: 'center',
@@ -40,8 +39,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   content: {
-    padding: 20,
-    backgroundColor: 'blue',
+    paddingTop: GlobalStyles.gap/2,
   },
 });
 

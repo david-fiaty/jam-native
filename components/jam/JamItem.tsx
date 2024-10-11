@@ -4,7 +4,6 @@ import JamHeader from '@/components/jam/JamHeader';
 import JamImages from '@/components/jam/JamImages';
 import JamToolbar from '@/components/jam/JamToolbar';
 import JamContent from '@/components/jam/JamContent';
-import CollapsibleView from '@/components/CollapsibleView';
 
 type Props = {
   item: object,
@@ -18,7 +17,6 @@ const JamItem = ({item, index}: Props) => {
       <JamImages item={item} index={index} />
       <JamToolbar item={item} index={index} />
       <JamContent item={item} index={index} />
-      <CollapsibleView />
     </View>
   );
 };
@@ -26,6 +24,7 @@ const JamItem = ({item, index}: Props) => {
 const styles = StyleSheet.create({
   container: {
     marginBottom: 20,
+    paddingBottom: GlobalStyles.gap,
     borderWidth: 1,
     borderRadius: 5,
     borderColor: GlobalStyles.border.color,
