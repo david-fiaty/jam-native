@@ -10,6 +10,9 @@ https://medium.com/@prathiba2796/internationalization-and-localization-in-react-
 # SVG
 https://withfra.me/react-native-tutorials/how-to-use-svg-in-react-native
 
+# Grid layout
+https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-7948f1a6f949
+
 # Questions to MM
 - home text slideshow link => collabslible to view more
 - How to structure paragraphs in about/link: hard code for now
