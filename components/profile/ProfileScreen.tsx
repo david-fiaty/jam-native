@@ -1,19 +1,13 @@
-import { useState } from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Colors } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
-import ApiClient from '@/classes/ApiClient';
 import ProfileForm from '@/components/profile/ProfileForm';
 import ProfileImage from '@/components/profile/ProfileImage';
 import ProfileJams from '@/components/profile/ProfileJams';
 import ProfileProjects from '@/components/profile/ProfileProjects';
 
 const ProfileScreen = () => {
-  const [selected, setSelected] = useState('');
-  const projects = ApiClient.get('projects').slice(0, 3);
-  const jams = ApiClient.get('jams').slice(0, 3);
-
   return (
     <View style={styles.container}>    
       <ModalView 
