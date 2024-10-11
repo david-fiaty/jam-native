@@ -36,7 +36,6 @@ const styles = StyleSheet.create({
   list: {
     flex: 4,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
     gap: 10,
   },
   item: {
