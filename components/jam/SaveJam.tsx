@@ -4,6 +4,7 @@ import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
 import SaveIcon from '../icons/SaveIcon';
 import ShareIcon from '../icons/ShareIcon';
+import SquaresIcon from '../icons/SquaresIcon';
 
 const SaveJam = () => {
   return (
@@ -14,14 +15,11 @@ const SaveJam = () => {
         content={
           <View style={GlobalStyles.modal.wrapper}>
             <View style={styles.row}>
-              <ShareIcon size={20} />
+              <ShareIcon size={22} />
               <Text style={GlobalStyles.text}>Share</Text>
             </View>
             <View style={styles.row}>
-            <Ionicons 
-              name="apps-sharp" 
-              size={20} style={styles.icon} 
-            />
+            <SquaresIcon size={22} />
             <Text style={GlobalStyles.text}>View my Jams</Text>
             </View>
           </View>
