@@ -2,12 +2,7 @@ import { StyleSheet, View, Text, FlatList } from 'react-native';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import ApiClient from '@/classes/ApiClient';
 
-type Props = {
-  item: object,
-  index: number,
-};
-
-const ProfileJams = ({item, index}: Props) => {
+const ProfileJams = () => {
   const jams = ApiClient.get('jams').slice(0, 3);
 
   return (
