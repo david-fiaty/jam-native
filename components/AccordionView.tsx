@@ -59,8 +59,6 @@ export default function AccordionView() {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ paddingTop: 30 }}>
-        <Text style={styles.title}>Accordion Example</Text>
-
         <View style={styles.multipleToggle}>
           <Text style={styles.multipleToggle__title}>Multiple Select?</Text>
           <Switch
