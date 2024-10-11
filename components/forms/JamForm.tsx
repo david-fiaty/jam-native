@@ -5,6 +5,7 @@ import MegaphoneIcon from '../icons/MegaphoneIcon';
 const JamForm = () => {
   return (
     <View style={styles.container}>    
+      <Text style={GlobalStyles.text}>What kind of Jam is it?</Text>
       <MegaphoneIcon size={32} />
     </View>
   );
@@ -14,7 +15,7 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     width: '80%',
   },
   continue: {
