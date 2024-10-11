@@ -7,6 +7,8 @@ type Props = {
 };
 
 export function UserIcon({size}: Props) {
+  size = size ? size : GlobalStyles.icon.fontSize;
+  
   return (
     <View style={styles.container}>
       <FontAwesome name="user-circle" size={size} style={styles.icon} />   

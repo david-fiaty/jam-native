@@ -7,6 +7,8 @@ type Props = {
 };
 
 export function PlusIcon({size}: Props) {
+  size = size ? size : GlobalStyles.icon.fontSize;
+  
   return (
     <View style={styles.container}>
       <Ionicons name="add" size={size} style={styles.icon} />   
