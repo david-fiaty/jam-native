@@ -7,7 +7,7 @@ const ProfileJams = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Your projects</Text> 
+      <Text style={styles.title}>Saved Jams</Text> 
       <View style={styles.list}>
         {data.map((item, index) => {
           return (
