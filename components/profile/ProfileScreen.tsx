@@ -1,4 +1,4 @@
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView, Dimensions, Pressable } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Colors } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
@@ -6,6 +6,7 @@ import ProfileForm from '@/components/profile/ProfileForm';
 import ProfileImage from '@/components/profile/ProfileImage';
 import ProfileJams from '@/components/profile/ProfileJams';
 import ProfileProjects from '@/components/profile/ProfileProjects';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const ProfileScreen = () => {
   return (
@@ -14,14 +15,25 @@ const ProfileScreen = () => {
         title="Your profile" 
         label={<Ionicons name="person-circle" size={26} color={Colors.primary} />}
         content={
-          <View style={styles.wrapper}>  
-            <ScrollView contentContainerStyle={styles.scroll}>
-              <ProfileImage />
-              <ProfileForm />
-              <ProfileProjects />
-              <ProfileJams/>
+          <SafeAreaView style={styles.wrapper}>  
+            <ScrollView 
+              nestedScrollEnabled={true}
+              contentContainerStyle={{ flexGrow: 1 }}
+            >
+              <Pressable>
+                <ProfileImage />
+              </Pressable>
+              <Pressable>
+                <ProfileForm />
+              </Pressable>
+              <Pressable>
+                <ProfileProjects />
+              </Pressable>
+              <Pressable>
+                <ProfileJams />
+              </Pressable>
             </ScrollView>  
-          </View>
+          </SafeAreaView>
         }
         animation="slide"
       />    
@@ -34,10 +46,10 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     width: '100%',
-    paddingBottom: 40,
+    flex: 1,
   },
   scroll: {
-    display: 'flex',
+    flexGrow: 1,
   },  
 });
 
