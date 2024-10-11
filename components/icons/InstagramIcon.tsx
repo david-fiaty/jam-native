@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
@@ -10,9 +10,7 @@ export function InstagramIcon({size}: Props) {
   size = size ? size : GlobalStyles.icon.fontSize;
   
   return (
-    <TouchableOpacity>
-      <MaterialCommunityIcons name="instagram" size={size} style={styles.icon} />   
-    </TouchableOpacity>
+    <MaterialCommunityIcons name="instagram" size={size} style={styles.icon} />   
   );
 };
 

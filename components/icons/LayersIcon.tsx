@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
@@ -10,9 +10,7 @@ export function LayersIcon({size}: Props) {
   size = size ? size : GlobalStyles.icon.fontSize;
   
   return (
-    <TouchableOpacity>
-      <SimpleLineIcons name="layers" size={size} style={styles.icon} />   
-    </TouchableOpacity>
+    <SimpleLineIcons name="layers" size={size} style={styles.icon} />   
   );
 };
 
