@@ -4,7 +4,7 @@ import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
 import SaveIcon from '../icons/SaveIcon';
 import ShareIcon from '../icons/ShareIcon';
-import SquaresIcon from '../icons/SquaresIcon';
+import LayersIcon from '../icons/LayersIcon';
 
 const SaveJam = () => {
   return (
@@ -19,7 +19,7 @@ const SaveJam = () => {
               <Text style={GlobalStyles.text}>Share</Text>
             </View>
             <View style={styles.row}>
-            <SquaresIcon size={22} />
+            <LayersIcon size={22} />
             <Text style={GlobalStyles.text}>View my Jams</Text>
             </View>
           </View>
