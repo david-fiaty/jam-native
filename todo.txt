@@ -24,7 +24,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Why is form changing on second bottom account tab click
 
 # Todo
-- Flat lists items in profile should have dynamic width/height depending on screen size
+- Flat lists items in jam form, profile should have dynamic width/height depending on screen size
 
 
 Email verification
