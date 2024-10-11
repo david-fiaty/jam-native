@@ -1,4 +1,5 @@
 import { StyleSheet, View, Text, FlatList } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ApiClient from '@/classes/ApiClient';
 
@@ -7,23 +8,26 @@ const JamForm = () => {
 
   return (
     <View style={styles.container}>    
+
       <Text style={GlobalStyles.text}>What kind of Jam is it?</Text>
-      <View style={styles.list}>
-        <FlatList 
-          data={data} 
-          numColumns={4}
-          contentContainerStyle={{gap: GlobalStyles.gap}}
-          columnWrapperStyle={{gap: GlobalStyles.gap}}
-          scrollEnabled={false}
-          renderItem={({item, index}) => {
-            return (
-              <View style={styles.item}>
-                <Text style={GlobalStyles.text}>{item.id}</Text>   
-              </View>
-            );
-          }}
-        />
-      </View>
+
+      <FlatList 
+        data={data} 
+        numColumns={4}
+        contentContainerStyle={{gap: GlobalStyles.gap}}
+        columnWrapperStyle={{gap: GlobalStyles.gap}}
+        scrollEnabled={false}
+        renderItem={({item, index}) => {
+          return (
+            <View style={styles.item}>
+              <Text style={GlobalStyles.text}>{item.id}</Text>   
+            </View>
+          );
+        }}
+      />
+
+      <Ionicons name="add" size={18} style={styles.icon} />   
+      
     </View>
   );
 };
@@ -35,9 +39,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     width: '100%',
   },
-  list: {
-    marginTop: GlobalStyles.gap,
-  },
   item: {
     backgroundColor: Colors.tertiary,
     padding: 10,
@@ -46,6 +47,16 @@ const styles = StyleSheet.create({
     borderColor: Colors.tertiary,
     width: 72,
     height: 72,
+  },
+
+  icon: {
+    ...GlobalStyles.icon,
+    ...{
+      backgroundColor: Colors.tertiary,
+      borderColor: Colors.tertiary,
+      borderWidth: 1,
+      borderRadius: 4,
+    },
   },
 });
 
