@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Platform, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, View, Platform, TouchableWithoutFeedback } from 'react-native';
 import { Marker } from 'react-native-maps';
 import * as Device from 'expo-device';
 import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
-import { Colors } from '@/constants/GlobalStyles';
 import ModalView from '@/components/ModalView';
-import LocationIcon from './icons/LocationIcon';
+import LocationIcon from '@/components/icons/LocationIcon';
 
 const JamsMap = () => {
   const [location, setLocation] = useState('');

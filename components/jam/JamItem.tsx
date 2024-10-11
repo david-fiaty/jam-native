@@ -1,9 +1,9 @@
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import { StyleSheet, View, Text } from 'react-native';
-import JamHeader from './JamHeader';
-import JamImages from './JamImages';
-import JamToolbar from './JamToolbar';
-import JamContent from './JamContent';
+import JamHeader from '@/components/jam/JamHeader';
+import JamImages from '@/components/jam/JamImages';
+import JamToolbar from '@/components/jam/JamToolbar';
+import JamContent from '@/components/jam/JamContent';
 
 type Props = {
   item: object,

@@ -1,9 +1,9 @@
 import { StyleSheet, View, FlatList } from 'react-native';
-import MenuItem from './MenuItem';
-import ModalView from '../ModalView';
+import MenuItem from '@/components/menus/MenuItem';
+import ModalView from '@/components/ModalView';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import SettingsMenuItems from '@/constants/SettingsMenuItems';
-import MenuIcon from '../icons/MenuIcon';
+import MenuIcon from '@/components/icons/MenuIcon';
 
 const SettingsMenu = () => {
   const data = SettingsMenuItems;
