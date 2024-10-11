@@ -32,12 +32,10 @@ const ProfileScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
   },
   wrapper: {
     width: '100%',
     flex: 1,
-    height: Dimensions.get('screen').height,
   },
   scroll: {
     flexGrow: 1,
