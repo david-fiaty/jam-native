@@ -1,15 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { Colors } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
 import JamForm from '../forms/JamForm';
+import PlusIcon from '../icons/PlusIcon';
 
 const AddJam = () => {
   return (
     <View style={styles.container}>     
       <ModalView 
         title="Add a new Jam" 
-        label={<Ionicons name="add" size={26} color={Colors.primary} />}
+        label={<PlusIcon size={26} />}
         content={<JamForm />}
         animation="slide"
       />   
