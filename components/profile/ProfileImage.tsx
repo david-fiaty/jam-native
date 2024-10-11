@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from '@rneui/themed';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -28,14 +27,14 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 20,
+    gap: GlobalStyles.gap,
   },
   button: {
     borderRadius: 30,
     overflow: 'hidden',
     paddingTop: 5,
     paddingBottom: 5,
-    gap: 8,
+    gap: GlobalStyles.gap,
   },
 });
 
