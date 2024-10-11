@@ -13,7 +13,7 @@ const ProfileProjects = () => {
         horizontal={true}  
         renderItem={({item, index}) => {
           return (
-            <View style={styles.container}>
+            <View style={styles.item}>
               <Text style={GlobalStyles.text}>{item.id}</Text>   
             </View>
           );
@@ -25,13 +25,13 @@ const ProfileProjects = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 10,
+    marginTop: 20,
   },
   title: {
     ...GlobalStyles.text,
     ...{
       fontWeight: 'bold',
-      marginTop: 15,
+      marginBottom: 15,
     },
   },
   item: {
