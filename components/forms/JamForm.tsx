@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   list: {
+    marginTop: GlobalStyles.gap,
   },
   item: {
     backgroundColor: Colors.tertiary,
