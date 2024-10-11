@@ -1,9 +1,9 @@
 import { StyleSheet, View, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import JamsMap from '../JamsMap';
-import AddJam from '../jam/AddJam';
-import ProfileForm from '../profile/ProfileForm';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import JamsMap from '@/components/JamsMap';
+import AddJam from '@/components/jam/AddJam';
+import ProfileScreen from '@/components/profile/ProfileScreen';
+import { Colors } from '@/constants/GlobalStyles';
 
 const BottomTabs = () => {
   const Tab = createBottomTabNavigator();
@@ -42,7 +42,7 @@ const BottomTabs = () => {
           options={{
             tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
-              <ProfileForm />
+              <ProfileScreen />
             ),
           }}
         />

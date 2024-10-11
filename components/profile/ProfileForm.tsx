@@ -10,96 +10,48 @@ import { ProfileProject } from '@/components/profile/ProfileProject';
 import { ProfileJam } from '@/components/profile/ProfileJam';
 
 const ProfileForm = () => {
-  const [selected, setSelected] = useState('');
-  const projects = ApiClient.get('projects').slice(0, 3);
-  const jams = ApiClient.get('jams').slice(0, 3);
-
   return (
     <View style={styles.container}>    
-      <ModalView 
-        title="Your profile" 
-        label={<Ionicons name="person-circle" size={26} color={Colors.primary} />}
-        content={
-          <View style={styles.wrapper}>  
-            <ScrollView contentContainerStyle={styles.scroller}>
-              <View style={styles.picture}>
-                <FontAwesome name="user-circle" size={86} color={GlobalStyles.icon.color} />
-                <Button 
-                  type="outline" 
-                  buttonStyle={styles.button} 
-                  titleStyle={GlobalStyles.text}
-                  onPress={() => console.log('Clicked') } 
-                >
-                  <Ionicons name="cloud-upload-outline" size={20} color={GlobalStyles.icon.color} />
-                  <Text style={GlobalStyles.text}>Upload an image</Text> 
-                </Button>
-              </View>
-              <TextInput
-                style={styles.input}
-                placeholder="Full name"
-                placeholderTextColor={GlobalStyles.text.color}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="IG handle"
-                placeholderTextColor={GlobalStyles.text.color}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Email"
-                placeholderTextColor={GlobalStyles.text.color}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Phone number"
-                placeholderTextColor={GlobalStyles.text.color}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Where am I now"
-                placeholderTextColor={GlobalStyles.text.color}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Main industries"
-                placeholderTextColor={GlobalStyles.text.color}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Sub industries"
-                placeholderTextColor={GlobalStyles.text.color}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Creative organisation"
-                placeholderTextColor={GlobalStyles.text.color}
-              />
-              <Text style={styles.title}>Your projects</Text> 
-              <FlatList 
-                style={styles.list}
-                data={projects} 
-                horizontal={true}  
-                renderItem={({item, index}) => <ProfileProject item={item} index={index} />} 
-              />
-              <Text style={styles.title}>Your jams</Text> 
-              <FlatList 
-                style={styles.list}
-                data={jams} 
-                horizontal={true}  
-                renderItem={({item, index}) => <ProfileJam item={item} index={index} />} 
-              />
-              <Text style={styles.title}>Saved jams</Text> 
-              <FlatList 
-                style={styles.list}
-                data={jams} 
-                horizontal={true}  
-                renderItem={({item, index}) => <ProfileJam item={item} index={index} />} 
-              />
-            </ScrollView>  
-          </View>
-        }
-        animation="slide"
-      />    
+      <TextInput
+        style={styles.input}
+        placeholder="Full name"
+        placeholderTextColor={GlobalStyles.text.color}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="IG handle"
+        placeholderTextColor={GlobalStyles.text.color}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        placeholderTextColor={GlobalStyles.text.color}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Phone number"
+        placeholderTextColor={GlobalStyles.text.color}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Where am I now"
+        placeholderTextColor={GlobalStyles.text.color}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Main industries"
+        placeholderTextColor={GlobalStyles.text.color}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Sub industries"
+        placeholderTextColor={GlobalStyles.text.color}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Creative organisation"
+        placeholderTextColor={GlobalStyles.text.color}
+      />
     </View>
   );
 };
