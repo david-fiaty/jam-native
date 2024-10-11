@@ -6,10 +6,10 @@ type Props = {
   size?: number,
 };
 
-export function MenuIcon({size}: Props) {
+export function SearchIcon({size}: Props) {
   return (
     <View style={styles.container}>
-      <SimpleLineIcons name="menu" size={size} style={styles.icon} />   
+      <SimpleLineIcons name="magnifier" size={size} style={styles.icon} />   
     </View>
   );
 };
@@ -23,11 +23,11 @@ const styles = StyleSheet.create({
   icon: {
     ...GlobalStyles.icon,
     ...{
-      backgroundColor: Colors.tertiary,
+      backgroundColor: '#FFFFFF',
       padding: 6,
       borderRadius: 40,
     },
   },
 });
 
-export default MenuIcon;
+export default SearchIcon;
