@@ -5,13 +5,14 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Entypo from '@expo/vector-icons/Entypo';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
+import ActionsIcon from '../icons/ActionsIcon';
 
 const JamActions = () => {
   return (
     <View style={styles.container}>        
       <ModalView 
         title="More" 
-        label={<Ionicons name="ellipsis-horizontal-sharp" size={24} color={GlobalStyles.icon.color} />}
+        label={<ActionsIcon size={14}/>}
         content={
           <View style={GlobalStyles.modal.wrapper}>
             <View style={styles.row}>
