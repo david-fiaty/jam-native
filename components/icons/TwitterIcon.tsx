@@ -7,6 +7,8 @@ type Props = {
 };
 
 export function TwitterIcon({size}: Props) {
+  size = size ? size : GlobalStyles.icon.fontSize;
+  
   return (
     <MaterialCommunityIcons name="twitter" size={size} style={styles.icon} />   
   );

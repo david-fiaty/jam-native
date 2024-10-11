@@ -7,6 +7,8 @@ type Props = {
 };
 
 export function MegaphoneIcon({size}: Props) {
+  size = size ? size : GlobalStyles.icon.fontSize;
+  
   return (
     <View style={styles.container}>
       <Entypo name="megaphone" size={size} style={styles.icon} />   

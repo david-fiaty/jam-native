@@ -7,6 +7,8 @@ type Props = {
 };
 
 export function FacebookIcon({size}: Props) {
+  size = size ? size : GlobalStyles.icon.fontSize;
+  
   return (
     <MaterialCommunityIcons name="facebook" size={size} style={styles.icon} />   
   );

@@ -28,6 +28,7 @@ export const GlobalStyles = {
   icon: {
     color: Colors.primary,
     backgroundColor: Colors.secondary,
+    size: 14,
   },
   pager: {
     color: Colors.primary,
