@@ -1,8 +1,8 @@
 import { StyleSheet, View, FlatList, Text } from 'react-native';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
 import ApiClient from '@/classes/ApiClient';
+import UserIcon from '../icons/UserIcon';
 
 type Props = {
   item: object,
@@ -30,7 +30,7 @@ const JamHosts = ({item, index}: Props) => {
               renderItem={({item, index}) => {
                 return (
                   <View style={styles.row}>
-                    <FontAwesome name="user-circle" size={28} color={GlobalStyles.icon.color} />
+                    <UserIcon size={22} />
                     <Text style={GlobalStyles.text}>{item.name} / {item.handle}</Text>
                   </View>
                 );
