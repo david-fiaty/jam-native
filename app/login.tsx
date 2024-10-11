@@ -1,11 +1,11 @@
 import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
-import { GlobalStyles } from '@/constants/GlobalStyles';
+import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import { StaticImage } from '@/components/images/StaticImage';
 import LoginForm from '@/components/forms/LoginForm';
 
 const Login = () => {
   return (
-    <View style={GlobalStyles.container}>
+    <View style={styles.container}>
       <StaticImage uri={require('@/assets/images/jam-logo.png')} width={110} height={110} />  
       <Text style={[GlobalStyles.text, styles.title]}>Welcome back</Text>
       <LoginForm />
@@ -14,6 +14,15 @@ const Login = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center', 
+    alignContent: 'center',
+    backgroundColor: Colors.background,
+    height: '100%',
+  },
   title: {
     textTransform: 'uppercase',
     marginBottom: 20,
