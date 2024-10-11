@@ -1,7 +1,7 @@
 import { StyleSheet, View, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import JamsMap from '@/components/JamsMap';
-import AddJam from '@/components/jam/AddJam';
+import AddJamScreen from '@/components/jam/AddJamScreen';
 import ProfileScreen from '@/components/profile/ProfileScreen';
 import { Colors } from '@/constants/GlobalStyles';
 
@@ -32,7 +32,7 @@ const BottomTabs = () => {
           options={{
             tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
-              <AddJam />
+              <AddJamScreen />
             ),
           }}
         />

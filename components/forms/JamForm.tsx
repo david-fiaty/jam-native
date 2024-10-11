@@ -1,14 +1,12 @@
 import { StyleSheet, View, Text, TextInput, Pressable } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+import MegaphoneIcon from '../icons/MegaphoneIcon';
 
 const JamForm = () => {
   return (
     <View style={styles.container}>    
-      <TextInput
-        style={GlobalStyles.input}
-        placeholder="Enter your email address"
-        placeholderTextColor={GlobalStyles.text.color}
-      />
+      <Text style={GlobalStyles.text}>What kind of Jam is it?</Text>
+      <MegaphoneIcon size={32} />
     </View>
   );
 };
@@ -17,7 +15,7 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     width: '80%',
   },
   continue: {

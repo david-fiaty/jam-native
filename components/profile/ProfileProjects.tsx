@@ -3,13 +3,13 @@ import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import ApiClient from '@/classes/ApiClient';
 
 const ProfileProjects = () => {
-  const jams = ApiClient.get('projects').slice(0, 3);
+  const data = ApiClient.get('projects').slice(0, 3);
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Your projects</Text> 
       <FlatList 
-        data={jams} 
+        data={data} 
         horizontal={true}  
         renderItem={({item, index}) => {
           return (
