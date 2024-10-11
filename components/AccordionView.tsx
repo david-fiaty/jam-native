@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Switch,
   ScrollView,
@@ -51,10 +51,10 @@ const SELECTORS = [
   },
 ];
 
-export default function App() {
-  const [activeSections, setActiveSections] = React.useState<number[]>([]);
-  const [collapsed, setCollapsed] = React.useState(true);
-  const [multipleSelect, setMultipleSelect] = React.useState(false);
+export default function AccordionView() {
+  const [activeSections, setActiveSections] = useState<number[]>([]);
+  const [collapsed, setCollapsed] = useState(true);
+  const [multipleSelect, setMultipleSelect] = useState(false);
 
   return (
     <View style={styles.container}>
