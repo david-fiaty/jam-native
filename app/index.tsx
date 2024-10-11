@@ -6,13 +6,8 @@ import AccordionView from '@/components/AccordionView';
 const Index = () => {
   return (  
     <View style={styles.container}>
-
-
-
-  <AccordionView />
-
-
-      <WelcomeScreen />
+      <AccordionView />
+      {/* <WelcomeScreen /> */}
     </View>
   );
 };
