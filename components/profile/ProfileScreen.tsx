@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, FlatList } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Colors } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
 import ApiClient from '@/classes/ApiClient';
-import { ProfileProject } from '@/components/profile/ProfileProject';
 import ProfileForm from '@/components/profile/ProfileForm';
 import ProfileImage from '@/components/profile/ProfileImage';
 import ProfileJams from '@/components/profile/ProfileJams';
+import ProfileProjects from '@/components/profile/ProfileProjects';
 
 const ProfileScreen = () => {
   const [selected, setSelected] = useState('');
@@ -24,13 +24,7 @@ const ProfileScreen = () => {
             <ScrollView contentContainerStyle={styles.scroller}>
               <ProfileImage />
               <ProfileForm />
-              <Text style={styles.title}>Your projects</Text> 
-              <FlatList 
-                style={styles.list}
-                data={projects} 
-                horizontal={true}  
-                renderItem={({item, index}) => <ProfileProject item={item} index={index} />} 
-              />
+              <ProfileProjects />
               <ProfileJams/>
             </ScrollView>  
           </View>
@@ -51,13 +45,6 @@ const styles = StyleSheet.create({
   scroller: {
     flexGrow: 1,
   },  
-  button: {
-    borderRadius: 30,
-    overflow: 'hidden',
-    paddingTop: 5,
-    paddingBottom: 5,
-    gap: 8,
-  },
 });
 
 export default ProfileScreen;

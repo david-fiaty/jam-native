@@ -1,13 +1,5 @@
-import { useState } from 'react';
-import { StyleSheet, Text, TextInput, View, ScrollView, FlatList } from 'react-native';
-import { Button } from '@rneui/themed';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { StyleSheet, TextInput, View } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-import ModalView from '../ModalView';
-import ApiClient from '@/classes/ApiClient';
-import { ProfileProject } from '@/components/profile/ProfileProject';
-import { ProfileJam } from '@/components/profile/ProfileJam';
 
 const ProfileForm = () => {
   return (
