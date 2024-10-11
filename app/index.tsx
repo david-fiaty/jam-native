@@ -1,13 +1,11 @@
 import { View, StyleSheet, Text } from 'react-native';
 import { Colors } from '@/constants/GlobalStyles';
 import WelcomeScreen from '@/components/screens/WelcomeScreen';
-import CollapsibleView from '@/components/CollapsibleView';
 
 const Index = () => {
   return (  
     <View style={styles.container}>
-      <CollapsibleView />
-      {/* <WelcomeScreen /> */}
+      <WelcomeScreen />
     </View>
   );
 };

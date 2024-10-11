@@ -4,6 +4,7 @@ import JamHeader from '@/components/jam/JamHeader';
 import JamImages from '@/components/jam/JamImages';
 import JamToolbar from '@/components/jam/JamToolbar';
 import JamContent from '@/components/jam/JamContent';
+import CollapsibleView from '@/components/CollapsibleView';
 
 type Props = {
   item: object,
@@ -17,6 +18,7 @@ const JamItem = ({item, index}: Props) => {
       <JamImages item={item} index={index} />
       <JamToolbar item={item} index={index} />
       <JamContent item={item} index={index} />
+      <CollapsibleView />
     </View>
   );
 };
