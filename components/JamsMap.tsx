@@ -3,10 +3,10 @@ import { StyleSheet, Text, View, Platform, TouchableWithoutFeedback } from 'reac
 import { Marker } from 'react-native-maps';
 import * as Device from 'expo-device';
 import * as Location from 'expo-location';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import MapView from 'react-native-maps';
 import { Colors } from '@/constants/GlobalStyles';
 import ModalView from '@/components/ModalView';
+import LocationIcon from './icons/LocationIcon';
 
 const JamsMap = () => {
   const [location, setLocation] = useState('');
@@ -38,7 +38,7 @@ const JamsMap = () => {
     <View style={styles.container}>       
       <ModalView 
         title="Jams map" 
-        label={<Ionicons name="location" size={26} color={Colors.primary} />}
+        label={<LocationIcon size={26}/>}
         content={
           <TouchableWithoutFeedback>
             <View style={styles.wrapper}>
