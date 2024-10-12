@@ -8,7 +8,7 @@ type Props = {
   children?: ReactNode,
 };
 
-const CenteredScreenView = ({style, children}: Props) => {
+const ScreenView = ({style, children}: Props) => {
   return (
     <View style={styles.container}>{children}</View>   
   );
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CenteredScreenView;
+export default ScreenView;

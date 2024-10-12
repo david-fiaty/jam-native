@@ -5,7 +5,7 @@ import BottomLinks from '@/components/navigation/BottomLinks';
 import JamLogo from '../images/JamLogo';
 import LoginSignupButton from '../buttons/LoginSignupButton';
 import SkipButton from '../buttons/SkipButton';
-import CenteredScreenView from '@/components/base/CenteredScreenView';
+import ScreenView from '@/components/base/ScreenView';
 
 
 const WelcomeScreen = () => {
@@ -13,13 +13,13 @@ const WelcomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <CenteredScreenView>
+      <ScreenView>
         <JamLogo width={110} height={110} />    
         <Slideshow />
         <LoginSignupButton />
         <SkipButton onPress={() => router.push('/jams')} />
         <BottomLinks />
-      </CenteredScreenView>
+      </ScreenView>
     </View>
   );
 };
