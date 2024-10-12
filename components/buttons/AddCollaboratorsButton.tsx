@@ -7,7 +7,7 @@ type Props = {
   size?: number,
 };
 
-export function AddCollaboratorsButton({size}: Props) {
+const AddCollaboratorsButton = ({size}: Props) => {
   size = size ? size : GlobalStyles.icon.size;
   
   return (

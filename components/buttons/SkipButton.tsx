@@ -7,7 +7,7 @@ type Props = {
   size?: number,
 };
 
-export function SkipButton({size}: Props) {
+const SkipButton = ({size}: Props) => {
   size = size ? size : GlobalStyles.icon.size;
   const router = useRouter();
   

@@ -7,7 +7,7 @@ type Props = {
   size?: number,
 };
 
-export function AddMediaButton({size}: Props) {
+const AddMediaButton = ({size}: Props) => {
   size = size ? size : GlobalStyles.icon.size;
   
   return (
