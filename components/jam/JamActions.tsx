@@ -6,6 +6,7 @@ import Entypo from '@expo/vector-icons/Entypo';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
 import ActionsIcon from '../icons/ActionsIcon';
+import TextBlock from '../base/TextBlock';
 
 const JamActions = () => {
   return (
@@ -20,49 +21,49 @@ const JamActions = () => {
                 name="save-outline" 
                 size={20} style={styles.icon} 
               />
-              <Text style={GlobalStyles.text}>Save Jam</Text>
+              <TextBlock>Save Jam</TextBlock>
             </View>
             <View style={styles.row}>
               <Ionicons 
                 name="share-social-outline" 
                 size={20} style={styles.icon} 
               />
-              <Text style={GlobalStyles.text}>Share Jam</Text>
+              <TextBlock>Share Jam</TextBlock>
             </View>
             <View style={styles.row}>
               <MaterialCommunityIcons 
                 name="briefcase-plus-outline" 
                 size={20} style={styles.icon} 
               />
-              <Text style={GlobalStyles.text}>Add to project</Text>
+              <TextBlock>Add to project</TextBlock>
             </View>
             <View style={styles.row}>
               <MaterialCommunityIcons 
                 name="view-dashboard-outline" 
                 size={20} style={styles.icon} 
               />
-              <Text style={GlobalStyles.text}>View project</Text>
+              <TextBlock>View project</TextBlock>
             </View>
             <View style={styles.row}>
               <MaterialCommunityIcons 
                 name="clipboard-edit-outline" 
                 size={20} style={styles.icon} 
               />
-              <Text style={GlobalStyles.text}>Edit jam</Text>
+              <TextBlock>Edit jam</TextBlock>
             </View>
             <View style={styles.row}>
               <MaterialIcons 
                 name="warning-amber" 
                 size={20} style={styles.icon} 
               />
-              <Text style={GlobalStyles.text}>Report Jam</Text>
+              <TextBlock>Report Jam</TextBlock>
             </View>
             <View style={styles.row}>
               <Entypo 
                 name="cross" 
                 size={20} style={styles.icon} 
               />
-              <Text style={GlobalStyles.text}>Delete Jam</Text>
+              <TextBlock>Delete Jam</TextBlock>
             </View>
           </View>
         }
