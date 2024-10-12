@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    marginTop: GlobalStyles.gap,
+    marginTop: GlobalStyles.space,
   },
   header: {
   },
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   content: {
-    paddingTop: GlobalStyles.gap/2,
+    paddingTop: GlobalStyles.space/2,
   },
 });
 

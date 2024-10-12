@@ -37,12 +37,12 @@ const styles = StyleSheet.create({
   left: {
     display: 'flex',
     flexDirection: 'row',
-    gap: GlobalStyles.gap,
+    gap: GlobalStyles.space,
   },
   right: {
     display: 'flex',
     flexDirection: 'row',
-    gap: GlobalStyles.gap,
+    gap: GlobalStyles.space,
   },
 });
 

@@ -7,8 +7,8 @@ import TextBlock from './TextBlock';
 type Props = {
   label?: string,
   icon?: ReactNode,
-  containerStyle?: {},
-  labelStyle?: {},
+  containerStyle?: object,
+  labelStyle?: object,
   onPress?: () => void,
 };
 
@@ -25,13 +25,12 @@ export function StaticButton({label, icon, containerStyle, labelStyle, onPress}:
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    flexDirection: 'row',
     alignItems: 'center',
     marginLeft: 'auto',
     marginRight: 'auto',
     justifyContent: 'center',
-    padding: GlobalStyles.gap,
-    gap: GlobalStyles.gap,
+    padding: GlobalStyles.space,
+    gap: GlobalStyles.space,
   },
   label: {
     textAlign: 'center',

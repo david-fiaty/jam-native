@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     borderWidth: 1, 
     borderColor: Colors.primary,
     borderRadius: 30,
-    marginTop: GlobalStyles.gap*2,
+    marginTop: GlobalStyles.space*2,
   },
   label: {
     textTransform: 'uppercase'

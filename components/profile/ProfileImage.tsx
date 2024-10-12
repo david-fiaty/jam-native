@@ -28,14 +28,14 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: GlobalStyles.gap,
+    gap: GlobalStyles.space,
   },
   button: {
     borderRadius: 30,
     overflow: 'hidden',
     paddingTop: 5,
     paddingBottom: 5,
-    gap: GlobalStyles.gap,
+    gap: GlobalStyles.space,
   },
 });
 
