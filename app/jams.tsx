@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import TopToolbar from '@/components/navigation/TopToolbar';
 import BottomTabs from '@/components/navigation/BottomTabs';
