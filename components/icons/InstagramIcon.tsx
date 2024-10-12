@@ -7,7 +7,7 @@ type Props = {
 };
 
 export function InstagramIcon({size}: Props) {
-  size = size ? size : GlobalStyles.icon.fontSize;
+  size = size ? size : GlobalStyles.icon.size;
   
   return (
     <MaterialCommunityIcons name="instagram" size={size} style={styles.icon} />   
