@@ -2,16 +2,16 @@ import { StyleSheet, View } from 'react-native';
 import LoginForm from '@/components/forms/LoginForm';
 import TextBlock from '@/components/base/TextBlock';
 import JamLogo from '../images/JamLogo';
-import ScreenView from '../base/ScreenView';
+import CenteredScreenView from '@/components/base/CenteredScreenView';
 
 const SignupScreen = () => {
   return (
     <View style={styles.container}>
-      <ScreenView>
+      <CenteredScreenView>
         <JamLogo width={110} height={110} />  
         <TextBlock>Welcome back</TextBlock>
         <LoginForm />
-      </ScreenView>
+      </CenteredScreenView>
     </View>
   );
 };
