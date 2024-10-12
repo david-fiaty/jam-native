@@ -7,8 +7,8 @@ import TextBlock from './TextBlock';
 type Props = {
   label?: string,
   icon?: ReactNode,
-  containerStyle?: {},
-  labelStyle?: {},
+  containerStyle?: object,
+  labelStyle?: object,
   onPress?: () => void,
 };
 

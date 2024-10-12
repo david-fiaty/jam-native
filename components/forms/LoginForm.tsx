@@ -4,6 +4,7 @@ import { Button } from '@rneui/themed';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import TextBlock from '../base/TextBlock';
 import TextField from '../fields/TextField';
+import ContinueButton from '../buttons/ContinueButton';
 
 const LoginForm = () => {
   const router = useRouter();
@@ -11,6 +12,8 @@ const LoginForm = () => {
   return (
     <View style={styles.container}>    
       <TextField placeholder="Enter your email address" style={styles.field} />
+      <ContinueButton onPress={() => router.push('/login')} />
+
       <View style={styles.buttonContainer}>
         <Button 
           title="Continue" 

@@ -9,7 +9,7 @@ type Props = {
 
 const TextBlock = ({style, children}: Props) => {
   return (
-    <Text style={[style, GlobalStyles.text]}>{children}</Text>   
+    <Text style={[GlobalStyles.text, style]}>{children}</Text>   
   );
 };
 
