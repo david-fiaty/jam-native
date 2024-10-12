@@ -50,7 +50,7 @@ export const GlobalStyles = {
     height: 36,
     borderWidth: 1, 
     borderColor: Colors.tertiary, 
-    borderRadius: 8,
+    borderRadius: 10,
     paddingHorizontal: 10, 
     marginBottom: 10,
   },
