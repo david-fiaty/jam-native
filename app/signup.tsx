@@ -1,10 +1,10 @@
 import { StyleSheet, View } from 'react-native';
-import LoginScreen from '@/components/screens/LoginScreen';
+import SignupScreen from '@/components/screens/SignupScreen';
 
-const Login = () => {
+const Signup = () => {
   return (
     <View style={styles.container}>
-      <LoginScreen />
+      <SignupScreen />
     </View>
   );
 };
@@ -14,4 +14,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default Signup;

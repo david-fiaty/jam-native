@@ -4,7 +4,7 @@ import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import { StaticImage } from '@/components/images/StaticImage';
 import LoginForm from '@/components/forms/LoginForm';
 
-const LoginScreen = () => {
+const SignupScreen = () => {
   const router = useRouter();
 
   return (
@@ -34,4 +34,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default SignupScreen;
