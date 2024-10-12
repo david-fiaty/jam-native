@@ -7,7 +7,7 @@ type Props = {
 };
 
 export function CopyIcon({size}: Props) {
-  size = size ? size : GlobalStyles.icon.fontSize;
+  size = size ? size : GlobalStyles.icon.size;
   
   return (
     <MaterialIcons name="content-copy" size={size} style={styles.icon} />   
