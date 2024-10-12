@@ -6,7 +6,7 @@ import { GlobalStyles } from '@/constants/GlobalStyles';
 
 const ProfileImage = () => {
   return (
-    <View style={styles.image}>
+    <View style={styles.container}>
       <FontAwesome name="user-circle" size={86} color={GlobalStyles.icon.color} />
       <Button 
         type="outline" 
@@ -22,7 +22,7 @@ const ProfileImage = () => {
 };
 
 const styles = StyleSheet.create({
-  image: {
+  container: {
     paddingBottom: 20,
     display: 'flex',
     flexDirection: 'row',
