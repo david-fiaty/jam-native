@@ -34,8 +34,10 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
+    //alignItems: 'center',
     alignSelf: 'flex-start',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     justifyContent: 'center',
     backgroundColor: 'red',
     padding: GlobalStyles.gap,
