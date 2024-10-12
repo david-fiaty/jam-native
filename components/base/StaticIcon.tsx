@@ -6,6 +6,26 @@ type Props = {
   labelStyle?: object,
 };
 
+const icons = {
+  location: () => {},
+  megaphone: () => {},
+  menu: () => {},
+  notifications: () => {},
+  plus: () => {},
+  save: () => {},
+  search: () => {},
+  share: () => {},
+  twitter: () => {},
+  user: () => {},
+  users: () => {},
+  actions: () => {},
+  copy: () => {},
+  email: () => {},
+  facebook: () => {},
+  instagram: () => {},
+  layers: () => {},
+};
+
 export function StaticIcon({name, containerStyle, labelStyle}: Props) {
   return (
     <View style={[styles.container, containerStyle]}>
