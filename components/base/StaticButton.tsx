@@ -2,6 +2,7 @@
 import { StyleSheet, View, Pressable } from 'react-native';
 import { Button } from '@rneui/themed';
 import { GlobalStyles } from '@/constants/GlobalStyles';
+import TextBlock from './TextBlock';
 
 type Props = {
   title: string,
@@ -12,18 +13,10 @@ type Props = {
 };
 
 export function StaticButton({...props}: Props) {
-  console.log(props);
-
   return (
-    <Pressable>
+    <Pressable onPress={props.onPress}>
       <View style={styles.container}>
-        <Button 
-          title={props.title} 
-          type={props.type}
-          buttonStyle={[styles.button, props.buttonStyle]} 
-          titleStyle={[styles.title, props.titleStyle]}
-          onPress={props.onPress}
-        />
+        <TextBlock>{props.title}</TextBlock>
       </View>
     </Pressable>
   );
@@ -32,6 +25,8 @@ export function StaticButton({...props}: Props) {
 const styles = StyleSheet.create({
   container: {
     alignSelf: 'center',
+    backgroundColor: 'red',
+    padding: GlobalStyles.gap,
   },
   button: {
     marginTop: 40,
@@ -41,7 +36,4 @@ const styles = StyleSheet.create({
     maxWidth: '40%',
     alignSelf: 'center',
   },
-  title: {
-    ...GlobalStyles.text,
-  }
 });
