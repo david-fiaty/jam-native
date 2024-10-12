@@ -5,9 +5,9 @@ type Props = {
   height: number,
 };
 
+const source = require('@/assets/images/jam-logo.png'); 
+
 const JamLogo = ({width, height}: Props) => {
-  const source = require('@/assets/images/jam-logo.png'); 
-  
   return (
     <StaticImage 
       source={source} 
