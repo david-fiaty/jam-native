@@ -2,6 +2,7 @@ import { StyleSheet, View, Text, FlatList } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ApiClient from '@/classes/ApiClient';
 import AddMediaButton from '../buttons/AddMediaButton';
+import AddCollaboratorsButton from '../buttons/AddCollaboratorsButton';
 
 const JamForm = () => {
   const data = ApiClient.get('jams').slice(0, 4);
@@ -11,7 +12,6 @@ const JamForm = () => {
     
       <Text style={GlobalStyles.text}>What kind of Jam is it?</Text>
       <FlatList 
-        style={styles.list}
         data={data} 
         numColumns={4}
         contentContainerStyle={{gap: GlobalStyles.gap}}
@@ -28,6 +28,7 @@ const JamForm = () => {
     
       <View style={styles.section}>
         <AddMediaButton size={20} /> 
+        <AddCollaboratorsButton size={20} />
       </View>
       
     </View>
@@ -40,9 +41,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'flex-start',
     width: '100%',
+    gap: GlobalStyles.gap,
   },
   section: {
-    marginTop: GlobalStyles.gap*2,
+    marginTop: GlobalStyles.gap,
   },
   item: {
     backgroundColor: Colors.tertiary,
@@ -52,9 +54,6 @@ const styles = StyleSheet.create({
     borderColor: Colors.tertiary,
     width: 72,
     height: 72,
-  },
-  list: {
-    marginTop: GlobalStyles.gap,
   },
 });
 
