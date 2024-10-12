@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
     marginRight: 'auto',
     justifyContent: 'center',
-    padding: GlobalStyles.gap,
-    gap: GlobalStyles.gap,
+    padding: GlobalStyles.space,
+    gap: GlobalStyles.space,
   },
   label: {
     textAlign: 'center',

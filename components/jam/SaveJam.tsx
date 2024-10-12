@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: GlobalStyles.gap,
+    gap: GlobalStyles.space,
   },
   icon: {
     ...GlobalStyles.icon,

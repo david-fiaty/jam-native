@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: GlobalStyles.gap,
+    marginTop: GlobalStyles.space,
   },
 });
 

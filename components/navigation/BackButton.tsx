@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: 12,
-    gap: GlobalStyles.gap,
+    gap: GlobalStyles.space,
   },
 });
 
