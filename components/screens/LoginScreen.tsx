@@ -1,16 +1,16 @@
 import { useRouter } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 import { Colors } from '@/constants/GlobalStyles';
-import { StaticImage } from '@/components/images/StaticImage';
 import LoginForm from '@/components/forms/LoginForm';
 import TextBlock from '../base/TextBlock';
+import { JamLogo } from '../images/JamLogo';
 
 const LoginScreen = () => {
   const router = useRouter();
 
   return (
     <View style={styles.container}>
-      <StaticImage uri={require('@/assets/images/jam-logo.png')} width={110} height={110} />  
+      <JamLogo width={110} height={110} />  
       <TextBlock>Welcome back</TextBlock>
       <LoginForm />
     </View>
