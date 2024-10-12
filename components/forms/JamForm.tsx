@@ -1,4 +1,5 @@
 import { StyleSheet, View, Text, FlatList, TextInput } from 'react-native';
+import { Button } from '@rneui/themed';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ApiClient from '@/classes/ApiClient';
 import AddMediaButton from '../buttons/AddMediaButton';
@@ -53,7 +54,14 @@ const JamForm = () => {
         placeholder="Sub industries"
         placeholderTextColor={GlobalStyles.text.color}
       />
-      
+      <View style={styles.buttonContainer}>
+        <Button 
+          title="Post" 
+          type="solid" 
+          titleStyle={{textTransform: 'uppercase'}}
+          buttonStyle={styles.button} 
+        />
+      </View>
     </View>
   );
 };
@@ -85,6 +93,15 @@ const styles = StyleSheet.create({
       paddingTop: GlobalStyles.gap,
       height: 100,
     },
+  },
+  buttonContainer: {
+    width: '100%',
+  },
+  button: {
+    height: 45,
+    backgroundColor: Colors.primary,
+    borderWidth: 1,
+    borderRadius: 8,
   },
 });
 
