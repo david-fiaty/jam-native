@@ -6,25 +6,23 @@ type Props = {
   labelStyle?: object,
 };
 
-const icons = {
-  location: () => {},
-  megaphone: () => {},
-  menu: () => {},
-  notifications: () => {},
-  plus: () => {},
-  save: () => {},
-  search: () => {},
-  share: () => {},
-  twitter: () => {},
-  user: () => {},
-  users: () => {},
-  actions: () => {},
-  copy: () => {},
-  email: () => {},
-  facebook: () => {},
-  instagram: () => {},
-  layers: () => {},
-};
+const location = () => {};
+const megaphone = () => {};
+const menu = () => {};
+const notifications = () => {};
+const plus = () => {};
+const save = () => {};
+const search = () => {};
+const share = () => {};
+const twitter = () => {};
+const user = () => {};
+const users = () => {};
+const actions = () => {};
+const copy = () => {};
+const email = () => {};
+const facebook = () => {};
+const instagram = () => {};
+const layers = () => {};
 
 export function StaticIcon({name, containerStyle, labelStyle}: Props) {
   return (
