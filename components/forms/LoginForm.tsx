@@ -5,6 +5,7 @@ import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import TextBlock from '../base/TextBlock';
 import TextField from '../fields/TextField';
 import ContinueButton from '../buttons/ContinueButton';
+import SkipButton from '../buttons/SkipButton';
 
 const LoginForm = () => {
   const router = useRouter();
@@ -16,9 +17,7 @@ const LoginForm = () => {
         <ContinueButton onPress={() => router.push('/login')} />
         <View style={styles.signup}>
           <TextBlock>Don't have an account? Sign Up</TextBlock>
-          <Pressable onPress={() => router.push('/jams')}>
-            <TextBlock>skip</TextBlock>
-          </Pressable>
+          <SkipButton onPress={() => router.push('/jams')} />
         </View>
       </View>
     </View>

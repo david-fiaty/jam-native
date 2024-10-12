@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import ModalView from '../ModalView';
+import ModalView from '@/components/base/ModalView';
 import JamForm from '../forms/JamForm';
 import PlusIcon from '../icons/PlusIcon';
 

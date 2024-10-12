@@ -1,7 +1,7 @@
 import { StyleSheet, View, ScrollView, Pressable } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Colors } from '@/constants/GlobalStyles';
-import ModalView from '../ModalView';
+import ModalView from '@/components/base/ModalView';
 import ProfileForm from '@/components/profile/ProfileForm';
 import ProfileImage from '@/components/profile/ProfileImage';
 import ProfileJams from '@/components/profile/ProfileJams';
