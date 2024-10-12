@@ -1,5 +1,5 @@
 import { View, StyleSheet, Text } from 'react-native';
-import { JamLogo } from '@/components/images/JamLogo';
+import JamLogo from '@/components/images/JamLogo';
 import SettingsMenu from '../menus/SettingsMenu';
 import NotificationsMenu from '../menus/NotificationsMenu';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
