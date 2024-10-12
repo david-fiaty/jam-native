@@ -30,12 +30,10 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
     marginRight: 'auto',
     justifyContent: 'center',
-    backgroundColor: 'red',
     padding: GlobalStyles.gap,
     gap: GlobalStyles.gap,
   },
   label: {
     textAlign: 'center',
-    backgroundColor: 'yellow', 
   },
 });
