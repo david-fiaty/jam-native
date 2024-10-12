@@ -1,6 +1,7 @@
 import { View, StyleSheet } from 'react-native';
 import AboutButton from '../buttons/AboutButton';
 import LegalButton from '../buttons/LegalButton';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 
 const BottomLinks = () => {
   return (
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 20,
+    marginTop: GlobalStyles.gap,
   },
 });
 
