@@ -1,8 +1,7 @@
-
 import { ReactNode } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
-import TextBlock from './TextBlock';
+import TextBlock from '@/components/base/TextBlock';
 
 type Props = {
   label?: string,
