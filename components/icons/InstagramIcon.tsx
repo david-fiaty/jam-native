@@ -6,7 +6,7 @@ type Props = {
   size?: number
 };
 
-export function InstagramIcon({size}: Props) {
+const InstagramIcon = ({size}: Props) => {
   size = size ? size : GlobalStyles.icon.size;
   
   return (
