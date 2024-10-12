@@ -42,6 +42,17 @@ const JamForm = () => {
           textAlignVertical="top"
         />
       </View>
+
+      <TextInput
+        style={GlobalStyles.input}
+        placeholder="Main industries"
+        placeholderTextColor={GlobalStyles.text.color}
+      />
+      <TextInput
+        style={GlobalStyles.input}
+        placeholder="Sub industries"
+        placeholderTextColor={GlobalStyles.text.color}
+      />
       
     </View>
   );
