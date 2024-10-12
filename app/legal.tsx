@@ -1,6 +1,5 @@
 import { StyleSheet, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { GlobalStyles } from '@/constants/GlobalStyles';
 import TopToolbar from '@/components/navigation/TopToolbar';
 import BackButton from '@/components/navigation/BackButton';
 import BottomLinks from '@/components/navigation/BottomLinks';

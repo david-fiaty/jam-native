@@ -1,9 +1,10 @@
-import { StyleSheet, View, Text, FlatList, TextInput } from 'react-native';
+import { StyleSheet, View, FlatList, TextInput } from 'react-native';
 import { Button } from '@rneui/themed';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ApiClient from '@/classes/ApiClient';
 import AddMediaButton from '../buttons/AddMediaButton';
 import AddCollaboratorsButton from '../buttons/AddCollaboratorsButton';
+import TextBlock from '../base/TextBlock';
 
 const JamForm = () => {
   const data = ApiClient.get('jams').slice(0, 4);
@@ -11,7 +12,7 @@ const JamForm = () => {
   return (
     <View style={styles.container}>    
     
-      <Text style={GlobalStyles.text}>What kind of Jam is it?</Text>
+      <TextBlock>What kind of Jam is it?</TextBlock>
       <FlatList 
         data={data} 
         numColumns={4}
@@ -21,7 +22,7 @@ const JamForm = () => {
         renderItem={({item, index}) => {
           return (
             <View style={styles.item}>
-              <Text style={GlobalStyles.text}>{item.id}</Text>   
+              <TextBlock>{item.id}</TextBlock>   
             </View>
           );
         }}
