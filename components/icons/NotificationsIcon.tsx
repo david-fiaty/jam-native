@@ -12,7 +12,7 @@ export function NotificationsIcon({count, size}: Props) {
 
   return (
     <View style={styles.container}>
-      <TextBlock>{count}+</TextBlock>
+      <TextBlock style={styles.icon}>{count}+</TextBlock>
     </View>
   );
 };
