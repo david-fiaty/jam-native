@@ -1,3 +1,5 @@
+const spacing = 10;
+
 export const Colors = {
   primary: '#0A00AA',
   secondary: '#FAA000',
@@ -6,7 +8,7 @@ export const Colors = {
 };
 
 export const GlobalStyles = {
-  gap: 10,
+  gap: spacing,
   statusbar: {
     height: 42,
   },
@@ -36,11 +38,11 @@ export const GlobalStyles = {
   },
   modal: {
     wrapper: {
-      gap: 15,
-      padding: 15,
+      gap: spacing,
+      padding: spacing,
       borderWidth: 1,
       borderColor: Colors.primary,
-      borderRadius: 8,
+      borderRadius: spacing,
       width: '100%',
     },
   },
@@ -50,8 +52,8 @@ export const GlobalStyles = {
     height: 36,
     borderWidth: 1, 
     borderColor: Colors.tertiary, 
-    borderRadius: 10,
-    paddingHorizontal: 10, 
-    marginBottom: 10,
+    borderRadius: spacing,
+    paddingHorizontal: spacing, 
+    marginBottom: spacing,
   },
 };
