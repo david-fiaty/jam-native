@@ -1,6 +1,6 @@
 import { StyleSheet, View, FlatList, Text } from 'react-native';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
-import ModalView from '../ModalView';
+import ModalView from '@/components/base/ModalView';
 import ApiClient from '@/classes/ApiClient';
 import UserIcon from '../icons/UserIcon';
 import TextBlock from '../base/TextBlock';
