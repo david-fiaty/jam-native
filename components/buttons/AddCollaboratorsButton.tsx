@@ -1,6 +1,7 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+import TextBlock from '../base/TextBlock';
 
 type Props = {
   size?: number,
@@ -12,7 +13,7 @@ export function AddCollaboratorsButton({size}: Props) {
   return (
     <View style={styles.container}>
       <Ionicons name="add" size={size} style={styles.icon} />   
-      <Text style={GlobalStyles.text}>Add collaborators</Text>
+      <TextBlock>Add collaborators</TextBlock>
     </View>
   );
 };

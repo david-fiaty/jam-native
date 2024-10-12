@@ -1,6 +1,7 @@
-import { View, StyleSheet, Text, Pressable } from 'react-native';
+import { View, StyleSheet, Pressable } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { GlobalStyles } from '@/constants/GlobalStyles';
+import TextBlock from '../base/TextBlock';
 
 type Props = {
   title: string,
@@ -12,7 +13,7 @@ const BackButton = ({title, onPress}: Props) => {
     return (        
       <View style={styles.container}>
         <AntDesign name="left" size={20} color={GlobalStyles.icon.color} />
-        <Text style={styles.text}>{title}</Text>
+        <TextBlock>{title}</TextBlock>
       </View>
     );
   };
@@ -35,13 +36,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 12,
     gap: GlobalStyles.gap,
-  },
-  text: {
-    ...GlobalStyles.text,
-    ...{
-      fontSize: 14,
-      fontWeight: 'bold',
-    },
   },
 });
 

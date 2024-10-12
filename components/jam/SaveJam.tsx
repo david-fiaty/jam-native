@@ -4,6 +4,7 @@ import ModalView from '../ModalView';
 import SaveIcon from '../icons/SaveIcon';
 import ShareIcon from '../icons/ShareIcon';
 import LayersIcon from '../icons/LayersIcon';
+import TextBlock from '../base/TextBlock';
 
 const SaveJam = () => {
   return (
@@ -15,11 +16,11 @@ const SaveJam = () => {
           <View style={GlobalStyles.modal.wrapper}>
             <View style={styles.row}>
               <ShareIcon size={22} />
-              <Text style={GlobalStyles.text}>Share</Text>
+              <TextBlock>Share</TextBlock>
             </View>
             <View style={styles.row}>
             <LayersIcon size={22} />
-            <Text style={GlobalStyles.text}>View my Jams</Text>
+            <TextBlock>View my Jams</TextBlock>
             </View>
           </View>
         }

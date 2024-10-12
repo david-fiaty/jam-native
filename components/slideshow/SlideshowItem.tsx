@@ -1,6 +1,7 @@
 import { StyleSheet, Text, Dimensions } from 'react-native';
 import Animated, { SharedValue, useAnimatedStyle, interpolate, Extrapolation } from 'react-native-reanimated';
 import { GlobalStyles } from '@/constants/GlobalStyles';
+import TextBlock from '../base/TextBlock';
 
 type Props = {
   item: object,
@@ -28,8 +29,8 @@ export default function SlideshowItem({item, index, scrollX}: Props) {
 
   return (  
     <Animated.View style={[styles.itemContainer, itemAnimation]}>
-      <Text style={[GlobalStyles.text, styles.itemTitle]}>{item.title}</Text>
-      <Text style={[GlobalStyles.text, styles.itemContent]}>{item.content}</Text>
+      <TextBlock>{item.title}</TextBlock>
+      <TextBlock>{item.content}</TextBlock>
     </Animated.View>
   );
 };

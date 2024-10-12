@@ -1,13 +1,14 @@
-import { StyleSheet, View, Text, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import ApiClient from '@/classes/ApiClient';
+import TextBlock from '../base/TextBlock';
 
 const ProfileJams = () => {
   const data = ApiClient.get('jams');
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Saved Jams</Text> 
+      <TextBlock>Saved Jams</TextBlock> 
       <View style={styles.list}>
         <FlatList 
           data={data} 
@@ -18,7 +19,7 @@ const ProfileJams = () => {
           renderItem={({item, index}) => {
             return (
               <View style={styles.item}>
-                <Text style={GlobalStyles.text}>{item.id}</Text>   
+                <TextBlock>{item.id}</TextBlock>   
               </View>
             );
           }}
