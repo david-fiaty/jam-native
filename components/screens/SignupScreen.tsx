@@ -10,7 +10,7 @@ const SignupScreen = () => {
 
   return (
     <View style={styles.container}>
-      <JamLogo />  
+      <JamLogo width={110} height={110} />  
       <TextBlock>Welcome back</TextBlock>
       <LoginForm />
     </View>
