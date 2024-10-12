@@ -5,7 +5,7 @@ import BottomLinks from '@/components/navigation/BottomLinks';
 import JamLogo from '../images/JamLogo';
 import LoginSignupButton from '../buttons/LoginSignupButton';
 import SkipButton from '../buttons/SkipButton';
-import ScreenView from '../base/ScreenView';
+import ScreenView from '@/components/base/ScreenView';
 
 
 const WelcomeScreen = () => {
