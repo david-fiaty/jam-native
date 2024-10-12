@@ -46,12 +46,12 @@ const JamForm = () => {
       </View>
 
       <TextInput
-        style={GlobalStyles.input}
+        style={GlobalStyles.field}
         placeholder="Main industries"
         placeholderTextColor={GlobalStyles.text.color}
       />
       <TextInput
-        style={GlobalStyles.input}
+        style={GlobalStyles.field}
         placeholder="Sub industries"
         placeholderTextColor={GlobalStyles.text.color}
       />
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     height: 72,
   },
   caption: {
-    ...GlobalStyles.input,
+    ...GlobalStyles.field,
     ...{
       paddingTop: GlobalStyles.gap,
       height: 100,

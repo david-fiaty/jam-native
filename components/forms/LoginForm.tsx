@@ -3,17 +3,14 @@ import { useRouter } from 'expo-router';
 import { Button } from '@rneui/themed';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import TextBlock from '../base/TextBlock';
+import TextField from '../fields/TextField';
 
 const LoginForm = () => {
   const router = useRouter();
 
   return (
     <View style={styles.container}>    
-      <TextInput
-        style={styles.input}
-        placeholder="Enter your email address"
-        placeholderTextColor={GlobalStyles.text.color}
-      />
+      <TextField placeholder="Enter your email address" style={styles.field} />
       <View style={styles.buttonContainer}>
         <Button 
           title="Continue" 
@@ -55,14 +52,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
   },
-  input: {
-    width: '100%',
+  field: {
+    backgroundColor: '#FFFFFF',
     height: 45,
-    borderWidth: 1, 
     borderColor: Colors.primary, 
-    borderRadius: 6,
-    paddingHorizontal: 12, 
-    marginBottom: 10,
   },
 });
 
