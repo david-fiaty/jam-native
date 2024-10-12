@@ -1,5 +1,4 @@
 import { View, StyleSheet, Text } from 'react-native';
-import { Colors } from '@/constants/GlobalStyles';
 import WelcomeScreen from '@/components/screens/WelcomeScreen';
 
 const Index = () => {

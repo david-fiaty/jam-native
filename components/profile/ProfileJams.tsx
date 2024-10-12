@@ -13,8 +13,8 @@ const ProfileJams = () => {
         <FlatList 
           data={data} 
           numColumns={3}
-          contentContainerStyle={{gap: GlobalStyles.gap}}
-          columnWrapperStyle={{gap: GlobalStyles.gap}}
+          contentContainerStyle={{gap: GlobalStyles.space}}
+          columnWrapperStyle={{gap: GlobalStyles.space}}
           scrollEnabled={false}
           renderItem={({item, index}) => {
             return (

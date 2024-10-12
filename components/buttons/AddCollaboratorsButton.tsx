@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'row',
-    gap: GlobalStyles.gap,
+    gap: GlobalStyles.space,
   },
   icon: {
     ...GlobalStyles.icon,

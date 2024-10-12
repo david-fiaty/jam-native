@@ -16,8 +16,8 @@ const JamForm = () => {
       <FlatList 
         data={data} 
         numColumns={4}
-        contentContainerStyle={{gap: GlobalStyles.gap}}
-        columnWrapperStyle={{gap: GlobalStyles.gap}}
+        contentContainerStyle={{gap: GlobalStyles.space}}
+        columnWrapperStyle={{gap: GlobalStyles.space}}
         scrollEnabled={false}
         renderItem={({item, index}) => {
           return (
@@ -73,10 +73,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'flex-start',
     width: '100%',
-    gap: GlobalStyles.gap,
+    gap: GlobalStyles.space,
   },
   section: {
-    marginTop: GlobalStyles.gap,
+    marginTop: GlobalStyles.space,
     width: '100%',
   },
   item: {
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   caption: {
     ...GlobalStyles.field,
     ...{
-      paddingTop: GlobalStyles.gap,
+      paddingTop: GlobalStyles.space,
       height: 100,
     },
   },

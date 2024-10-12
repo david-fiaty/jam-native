@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   buttons: {
     display: 'flex',
     flexDirection: 'row',
-    gap: GlobalStyles.gap,
+    gap: GlobalStyles.space,
   },
   icon: {
     ...GlobalStyles.icon,

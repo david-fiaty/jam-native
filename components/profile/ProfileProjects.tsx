@@ -13,8 +13,8 @@ const ProfileProjects = () => {
         <FlatList 
           data={data} 
           numColumns={4}
-          contentContainerStyle={{gap: GlobalStyles.gap}}
-          columnWrapperStyle={{gap: GlobalStyles.gap}}
+          contentContainerStyle={{gap: GlobalStyles.space}}
+          columnWrapperStyle={{gap: GlobalStyles.space}}
           scrollEnabled={false}
           renderItem={({item, index}) => {
             return (

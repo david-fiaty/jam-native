@@ -4,6 +4,7 @@ import { Button } from '@rneui/themed';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import TextBlock from '../base/TextBlock';
 import TextField from '../fields/TextField';
+import ContinueButton from '../buttons/ContinueButton';
 
 const LoginForm = () => {
   const router = useRouter();
@@ -12,12 +13,7 @@ const LoginForm = () => {
     <View style={styles.container}>    
       <TextField placeholder="Enter your email address" style={styles.field} />
       <View style={styles.buttonContainer}>
-        <Button 
-          title="Continue" 
-          type="solid" 
-          buttonStyle={styles.button} 
-          onPress={() => router.push('/login')} 
-        />
+        <ContinueButton onPress={() => router.push('/login')} />
         <View style={styles.signup}>
           <TextBlock>Don't have an account? Sign Up</TextBlock>
           <Pressable onPress={() => router.push('/jams')}>
@@ -44,7 +40,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: 10,
+    marginTop: GlobalStyles.space,
   },
   button: {
     height: 45,
