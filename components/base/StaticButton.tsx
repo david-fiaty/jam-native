@@ -17,14 +17,14 @@ export function StaticButton({label, icon, radius, uppercase, onPress}: Props) {
     ...styles.container,
   };
 
-  const labeStyle = {
+  const labelStyle = {
     ...styles.label,
   };;
 
   return (
     <TouchableOpacity onPress={onPress}>
-      <View style={styles.container}>
-        {icon}<TextBlock style={styles.label}>{label}</TextBlock>
+      <View style={containerStyle}>
+        {icon}<TextBlock style={labelStyle}>{label}</TextBlock>
       </View>
     </TouchableOpacity>
   );
