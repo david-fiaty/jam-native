@@ -2,7 +2,7 @@ import { StyleSheet, FlatList } from 'react-native';
 import JamItem from '@/components/jam/JamItem';
 import ApiClient from '@/classes/ApiClient';
 
-const JamsList = () => {
+const JamsScreen = () => {
   const data = ApiClient.get('jams');
 
   return (
@@ -18,4 +18,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default JamsList;
+export default JamsScreen;
