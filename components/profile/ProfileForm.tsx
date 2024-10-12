@@ -5,42 +5,42 @@ const ProfileForm = () => {
   return (
     <View style={styles.container}>    
       <TextInput
-        style={styles.input}
+        style={GlobalStyles.input}
         placeholder="Full name"
         placeholderTextColor={GlobalStyles.text.color}
       />
       <TextInput
-        style={styles.input}
+        style={GlobalStyles.input}
         placeholder="IG handle"
         placeholderTextColor={GlobalStyles.text.color}
       />
       <TextInput
-        style={styles.input}
+        style={GlobalStyles.input}
         placeholder="Email"
         placeholderTextColor={GlobalStyles.text.color}
       />
       <TextInput
-        style={styles.input}
+        style={GlobalStyles.input}
         placeholder="Phone number"
         placeholderTextColor={GlobalStyles.text.color}
       />
       <TextInput
-        style={styles.input}
+        style={GlobalStyles.input}
         placeholder="Where am I now"
         placeholderTextColor={GlobalStyles.text.color}
       />
       <TextInput
-        style={styles.input}
+        style={GlobalStyles.input}
         placeholder="Main industries"
         placeholderTextColor={GlobalStyles.text.color}
       />
       <TextInput
-        style={styles.input}
+        style={GlobalStyles.input}
         placeholder="Sub industries"
         placeholderTextColor={GlobalStyles.text.color}
       />
       <TextInput
-        style={styles.input}
+        style={GlobalStyles.input}
         placeholder="Creative organisation"
         placeholderTextColor={GlobalStyles.text.color}
       />
@@ -58,16 +58,6 @@ const styles = StyleSheet.create({
   scroller: {
     flexGrow: 1,
   },  
-  input: {
-    backgroundColor: Colors.tertiary,
-    width: '100%',
-    height: 36,
-    borderWidth: 1, 
-    borderColor: Colors.tertiary, 
-    borderRadius: 6,
-    paddingHorizontal: 12, 
-    marginBottom: 10,
-  },
   title: {
     ...GlobalStyles.text,
     ...{
