@@ -44,14 +44,12 @@ export const GlobalStyles = {
       width: '100%',
     },
   },
-  input: {
+  field: {
     backgroundColor: Colors.tertiary,
     width: '100%',
     height: 36,
     borderWidth: 1, 
     borderColor: Colors.tertiary, 
     borderRadius: 6,
-    paddingHorizontal: 12, 
-    marginBottom: 10,
   },
 };
