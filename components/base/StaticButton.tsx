@@ -7,24 +7,14 @@ import TextBlock from './TextBlock';
 type Props = {
   label?: string,
   icon?: ReactNode,
-  radius?: number,
-  uppercase?: boolean,
   onPress?: () => void,
 };
 
-export function StaticButton({label, icon, radius, uppercase, onPress}: Props) {
-  const containerStyle = {
-    ...styles.container,
-  };
-
-  const labelStyle = {
-    ...styles.label,
-  };;
-
+export function StaticButton({label, icon, onPress}: Props) {
   return (
     <TouchableOpacity onPress={onPress}>
-      <View style={containerStyle}>
-        {icon}<TextBlock style={labelStyle}>{label}</TextBlock>
+      <View style={styles.container}>
+        {icon}<TextBlock style={styles.label}>{label}</TextBlock>
       </View>
     </TouchableOpacity>
   );
