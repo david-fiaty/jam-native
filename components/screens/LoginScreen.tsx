@@ -1,4 +1,3 @@
-import { useRouter } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 import { Colors } from '@/constants/GlobalStyles';
 import LoginForm from '@/components/forms/LoginForm';
@@ -6,8 +5,6 @@ import TextBlock from '../base/TextBlock';
 import JamLogo from '../images/JamLogo';
 
 const LoginScreen = () => {
-  const router = useRouter();
-
   return (
     <View style={styles.container}>
       <JamLogo width={110} height={110} />  

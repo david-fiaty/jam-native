@@ -1,7 +1,6 @@
 import { View, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Button } from '@rneui/themed';
-import { GlobalStyles } from '@/constants/GlobalStyles';
+import { Colors } from '@/constants/GlobalStyles';
 import Slideshow from '@/components/Slideshow';
 import BottomLinks from '@/components/navigation/BottomLinks';
 import JamLogo from '../images/JamLogo';
@@ -26,14 +25,12 @@ const WelcomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-  },
-  button: {
-    marginTop: 40,
-    borderRadius: 30,
-    overflow: 'hidden',
-    minWidth: '35%',
-    maxWidth: '40%',
-    alignSelf: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center', 
+    alignContent: 'center',
+    backgroundColor: Colors.background,
+    height: '100%',
   },
 });
 
