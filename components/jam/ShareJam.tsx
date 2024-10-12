@@ -1,6 +1,6 @@
 import { StyleSheet, View, Text} from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-import ModalView from '../ModalView';
+import ModalView from '@/components/base/ModalView';
 import ShareIcon from '../icons/ShareIcon';
 import CopyIcon from '../icons/CopyIcon';
 import EmailIcon from '../icons/EmailIcon';

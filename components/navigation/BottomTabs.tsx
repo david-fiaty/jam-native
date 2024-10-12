@@ -1,7 +1,7 @@
 import { StyleSheet, View, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import JamsMap from '@/components/JamsMap';
-import AddJamScreen from '@/components/jam/AddJamScreen';
+import AddJamScreen from '@/components/screens/AddJamScreen';
 import ProfileScreen from '@/components/profile/ProfileScreen';
 import { Colors } from '@/constants/GlobalStyles';
 

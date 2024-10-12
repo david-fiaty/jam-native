@@ -2,14 +2,14 @@ import { StyleSheet, View, FlatList, Text } from 'react-native';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import TopToolbar from '@/components/navigation/TopToolbar';
 import BottomTabs from '@/components/navigation/BottomTabs';
-import JamsList from '@/components/JamsList';
+import JamsScreen from '@/components/screens/JamsScreen';
 
 const Jams = () => {
   return (  
     <>
       <View style={styles.container}>
         <TopToolbar />
-        <JamsList />
+        <JamsScreen />
       </View>
       <BottomTabs />
     </>
