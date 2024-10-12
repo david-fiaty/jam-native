@@ -11,15 +11,7 @@ const Index = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center', 
-    alignContent: 'center',
-    backgroundColor: Colors.background,
-    height: '100%',
-  },
+  container: {},
 });
 
 export default Index;
