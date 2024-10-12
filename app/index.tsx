@@ -2,10 +2,56 @@ import { View, StyleSheet, Text } from 'react-native';
 import { Colors } from '@/constants/GlobalStyles';
 import WelcomeScreen from '@/components/screens/WelcomeScreen';
 
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import ShareIcon from '@/components/icons/ShareIcon';
+import CopyIcon from '@/components/icons/CopyIcon';
+
+const Tab = createBottomTabNavigator();
+
+function A() {
+  return <View><Text>Home</Text></View>;
+}
+
+function B() {
+  return <View><Text>Settings</Text></View>;
+}
+
+function TabsNavigator() {
+  return (
+    <View>
+      <Tab.Navigator>
+        <Tab.Screen 
+          name="Arm" 
+          component={A} 
+          options={{
+            tabBarLabel: 'AA',
+            tabBarIcon: ({ color, size }) => (
+              <ShareIcon size={20} />
+            ),
+          }}  
+        />
+        <Tab.Screen 
+          name="Base" 
+          component={B} 
+          options={{
+            tabBarLabel: 'BB',
+            tabBarIcon: ({ color, size }) => (
+              <CopyIcon size={20} />
+            ),
+          }}  
+        />
+      </Tab.Navigator>
+    </View>
+
+  );
+}
+
+
 const Index = () => {
   return (  
     <View style={styles.container}>
       <WelcomeScreen />
+      <TabsNavigator />
     </View>
   );
 };
