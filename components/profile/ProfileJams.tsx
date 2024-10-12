@@ -1,7 +1,7 @@
 import { StyleSheet, View, FlatList } from 'react-native';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import ApiClient from '@/classes/ApiClient';
-import TextBlock from '../base/TextBlock';
+import TextBlock from '@/components/base/TextBlock';
 
 const ProfileJams = () => {
   const data = ApiClient.get('jams');

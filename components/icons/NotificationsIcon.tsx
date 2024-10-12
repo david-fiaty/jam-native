@@ -1,6 +1,6 @@
 import { StyleSheet, View, Text } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-import TextBlock from '../base/TextBlock';
+import TextBlock from '@/components/base/TextBlock';
 
 type Props = {
   count: number,

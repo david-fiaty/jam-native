@@ -3,7 +3,7 @@ import { Button } from '@rneui/themed';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { GlobalStyles } from '@/constants/GlobalStyles';
-import TextBlock from '../base/TextBlock';
+import TextBlock from '@/components/base/TextBlock';
 
 const ProfileImage = () => {
   return (

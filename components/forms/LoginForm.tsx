@@ -2,7 +2,7 @@ import { StyleSheet, View, TextInput, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Button } from '@rneui/themed';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-import TextBlock from '../base/TextBlock';
+import TextBlock from '@/components/base/TextBlock';
 import TextField from '../fields/TextField';
 import ContinueButton from '../buttons/ContinueButton';
 import SkipButton from '../buttons/SkipButton';

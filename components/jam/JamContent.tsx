@@ -1,7 +1,6 @@
-import { StyleSheet, View, Text, Pressable } from 'react-native';
-import { GlobalStyles } from '@/constants/GlobalStyles';
-import CollapsibleView from '@/components/CollapsibleView';
-import TextBlock from '../base/TextBlock';
+import { StyleSheet, View } from 'react-native';
+import CollapsibleBlock from '@/components/base/CollapsibleBlock';
+import TextBlock from '@/components/base/TextBlock';
 
 type Props = {
   item: object,
@@ -12,7 +11,7 @@ const JamContent = ({item, index}: Props) => {
   return (
     <View style={styles.container}>
       <TextBlock>{item.content}</TextBlock>
-      <CollapsibleView />
+      <CollapsibleBlock />
     </View>
   );
 };

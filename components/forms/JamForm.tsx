@@ -4,7 +4,7 @@ import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ApiClient from '@/classes/ApiClient';
 import AddMediaButton from '../buttons/AddMediaButton';
 import AddCollaboratorsButton from '../buttons/AddCollaboratorsButton';
-import TextBlock from '../base/TextBlock';
+import TextBlock from '@/components/base/TextBlock';
 
 const JamForm = () => {
   const data = ApiClient.get('jams').slice(0, 4);

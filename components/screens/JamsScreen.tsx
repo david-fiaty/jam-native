@@ -1,4 +1,4 @@
-import { StyleSheet, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 import JamItem from '@/components/jam/JamItem';
 import ApiClient from '@/classes/ApiClient';
 
@@ -13,9 +13,5 @@ const JamsScreen = () => {
     />
   );
 };
-
-const styles = StyleSheet.create({
-
-});
 
 export default JamsScreen;
