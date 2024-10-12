@@ -1,4 +1,4 @@
-import { StyleSheet, View, ScrollView, Dimensions, Pressable } from 'react-native';
+import { StyleSheet, View, ScrollView, Pressable } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Colors } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
