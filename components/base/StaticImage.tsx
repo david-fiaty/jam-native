@@ -1,15 +1,15 @@
-import { Image, View, StyleSheet } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 
 type Props = {
-  uri: string,
+  source: string,
   width: number,
   height: number,
 };
 
-export function StaticImage({uri, width, height}: Props) {
+export function StaticImage({source, width, height}: Props) {
   return (
     <Image 
-      source={uri} 
+      source={source} 
       resizeMethod="scale"
       resizeMode="contain"
       style={[styles.image, {width: width}, {height: height}]} 
