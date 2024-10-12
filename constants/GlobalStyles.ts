@@ -27,6 +27,8 @@ export const GlobalStyles = {
   },
   border: {
     color: Colors.primary,
+    borderWidth: 1,
+    borderRadius: spacing,
   },
   icon: {
     color: Colors.primary,
@@ -54,6 +56,5 @@ export const GlobalStyles = {
     borderColor: Colors.tertiary, 
     borderRadius: spacing,
     paddingHorizontal: spacing, 
-    marginBottom: spacing,
   },
 };
