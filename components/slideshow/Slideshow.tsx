@@ -29,7 +29,7 @@ const Slideshow = () => {
     <View style={styles.container}>
       <Animated.FlatList 
         data={data} 
-        renderItem={({item, index}) => <SlideshowItem item={item} index={index} scrollX={scrollX}/>} 
+        renderItem={({item, index}) => <SlideshowItem item={item} index={index} scrollX={scrollX} />} 
         horizontal={true}
         pagingEnabled={true}
         showsHorizontalScrollIndicator={false}
