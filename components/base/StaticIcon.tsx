@@ -1,12 +1,13 @@
 import { StyleSheet, View, Text } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 type Props = {
-  name: string,
+  name?: string,
   containerStyle?: object,
   labelStyle?: object,
 };
 
-const Location = () => {};
+const Location = () => <Ionicons name="location" size={50} style={styles.icon} />;
 const Megaphone = () => {};
 const Menu = () => {};
 const Notifications = () => {};
@@ -27,7 +28,7 @@ const Layers = () => {};
 export function StaticIcon({name, containerStyle, labelStyle}: Props) {
   return (
     <View style={[styles.container, containerStyle]}>
-      
+      <Location />
     </View>
   );
 };
