@@ -13,7 +13,7 @@ const LoginForm = () => {
         placeholder="Enter your email address"
         placeholderTextColor={GlobalStyles.text.color}
       />
-      <View style={styles.continue}>
+      <View style={styles.buttonContainer}>
         <Button 
           title="Continue" 
           type="solid" 
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '80%',
   },
-  continue: {
+  buttonContainer: {
     width: '100%',
   },
   signup: {
