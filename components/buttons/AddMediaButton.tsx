@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-import TextBlock from '../base/TextBlock';
+import TextBlock from '@/components/base/TextBlock';
 
 type Props = {
   size?: number,

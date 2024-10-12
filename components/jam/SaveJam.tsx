@@ -4,7 +4,7 @@ import ModalView from '@/components/base/ModalView';
 import SaveIcon from '../icons/SaveIcon';
 import ShareIcon from '../icons/ShareIcon';
 import LayersIcon from '../icons/LayersIcon';
-import TextBlock from '../base/TextBlock';
+import TextBlock from '@/components/base/TextBlock';
 
 const SaveJam = () => {
   return (

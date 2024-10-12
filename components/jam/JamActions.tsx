@@ -6,7 +6,7 @@ import Entypo from '@expo/vector-icons/Entypo';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ModalView from '@/components/base/ModalView';
 import ActionsIcon from '../icons/ActionsIcon';
-import TextBlock from '../base/TextBlock';
+import TextBlock from '@/components/base/TextBlock';
 
 const JamActions = () => {
   return (
