@@ -11,7 +11,7 @@ type Props = {
   onPress?: () => void,
 };
 
-export function StaticButton({label, icon, containerStyle, labelStyle, onPress}: Props) {
+export function StaticIcon({label, icon, containerStyle, labelStyle, onPress}: Props) {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={[styles.container, containerStyle]}>

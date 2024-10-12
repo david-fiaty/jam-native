@@ -6,7 +6,7 @@ type Props = {
   size?: number
 };
 
-export function ShareIcon({size}: Props) {
+const ShareIcon = ({size}: Props) => {
   size = size ? size : GlobalStyles.icon.size;
   
   return (
