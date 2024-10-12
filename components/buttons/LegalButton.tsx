@@ -1,15 +1,14 @@
 import { StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
 import { StaticButton } from '../base/StaticButton';
 
-type Props = {
-  onPress: () => void,
-};
+const LegalButton = () => {
+  const router = useRouter();
 
-const SkipButton = ({onPress}: Props) => {
   return (
     <StaticButton
-      label="Skip" 
-      onPress={onPress} 
+      label="Legal" 
+      onPress={() => router.push('/legal')} 
       containerStyle={styles.container}
       labelStyle={styles.label}
     />
@@ -22,4 +21,4 @@ const styles = StyleSheet.create({
   label: {},
 });
 
-export default SkipButton;
+export default LegalButton;
