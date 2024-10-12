@@ -13,10 +13,18 @@ type Props = {
 };
 
 export function StaticButton({label, icon, radius, uppercase, onPress}: Props) {
+  const containerStyle = {
+    ...styles.container,
+  };
+
+  const labeStyle = {
+    ...styles.label,
+  };;
+
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
-        {icon}<TextBlock style={styles.text}>{label}</TextBlock>
+        {icon}<TextBlock style={styles.label}>{label}</TextBlock>
       </View>
     </TouchableOpacity>
   );
@@ -33,7 +41,7 @@ const styles = StyleSheet.create({
     padding: GlobalStyles.gap,
     gap: GlobalStyles.gap,
   },
-  text: {
+  label: {
     textAlign: 'center',
     backgroundColor: 'yellow', 
   },
