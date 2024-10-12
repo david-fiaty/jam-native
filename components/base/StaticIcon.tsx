@@ -1,6 +1,4 @@
 import { StyleSheet, View } from 'react-native';
-import { GlobalStyles } from '@/constants/GlobalStyles';
-import TextBlock from '@/components/base/TextBlock';
 
 type Props = {
   name: string,
