@@ -18,31 +18,28 @@ function B() {
 
 function TabsNavigator() {
   return (
-    <View>
-      <Tab.Navigator>
-        <Tab.Screen 
-          name="Arm" 
-          component={A} 
-          options={{
-            tabBarLabel: 'AA',
-            tabBarIcon: ({ color, size }) => (
-              <ShareIcon size={20} />
-            ),
-          }}  
-        />
-        <Tab.Screen 
-          name="Base" 
-          component={B} 
-          options={{
-            tabBarLabel: 'BB',
-            tabBarIcon: ({ color, size }) => (
-              <CopyIcon size={20} />
-            ),
-          }}  
-        />
-      </Tab.Navigator>
-    </View>
-
+    <Tab.Navigator>
+      <Tab.Screen 
+        name="Arm" 
+        component={A} 
+        options={{
+          tabBarLabel: '',
+          tabBarIcon: ({ color, size }) => (
+            <ShareIcon size={20} />
+          ),
+        }}  
+      />
+      <Tab.Screen 
+        name="Base" 
+        component={B} 
+        options={{
+          tabBarLabel: '',
+          tabBarIcon: ({ color, size }) => (
+            <CopyIcon size={20} />
+          ),
+        }}  
+      />
+    </Tab.Navigator>
   );
 }
 
@@ -58,13 +55,14 @@ const Index = () => {
 
 const styles = StyleSheet.create({
   container: {
+    /*
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center', 
     alignContent: 'center',
     backgroundColor: Colors.background,
-    height: '100%',
+    height: '100%',*/
   },
 });
 
