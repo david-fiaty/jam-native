@@ -4,6 +4,7 @@ import ModalView from '../ModalView';
 import ApiClient from '@/classes/ApiClient';
 import UsersIcon from '../icons/UsersIcon';
 import UserIcon from '../icons/UserIcon';
+import TextBlock from '../base/TextBlock';
 
 type Props = {
   item: object,
@@ -20,7 +21,7 @@ const JamJammers = ({item, index}: Props) => {
         label={
           <View style={styles.label}>
             <UsersIcon size={14} />
-            <Text style={GlobalStyles.text}>{item.host_count} jammers</Text>
+            <TextBlock>{item.host_count} jammers</TextBlock>
           </View>
         }
         content={
@@ -33,7 +34,7 @@ const JamJammers = ({item, index}: Props) => {
                 return (
                   <View style={styles.row}>
                     <UserIcon size={22} />
-                    <Text style={GlobalStyles.text}>{item.name}</Text>
+                    <TextBlock>{item.name}</TextBlock>
                   </View>
                 );
               }} 

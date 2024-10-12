@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Button } from '@rneui/themed';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { GlobalStyles } from '@/constants/GlobalStyles';
+import TextBlock from '../base/TextBlock';
 
 const ProfileImage = () => {
   return (
@@ -15,7 +16,7 @@ const ProfileImage = () => {
         onPress={() => console.log('Clicked') } 
       >
         <Ionicons name="cloud-upload-outline" size={20} color={GlobalStyles.icon.color} />
-        <Text style={GlobalStyles.text}>Upload an image</Text> 
+        <TextBlock>Upload an image</TextBlock> 
       </Button>
     </View>
   );

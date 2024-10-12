@@ -7,6 +7,7 @@ import EmailIcon from '../icons/EmailIcon';
 import InstagramIcon from '../icons/InstagramIcon';
 import FacebookIcon from '../icons/FacebookIcon';
 import TwitterIcon from '../icons/TwitterIcon';
+import TextBlock from '../base/TextBlock';
 
 const ShareJam = () => {
   return (
@@ -18,23 +19,23 @@ const ShareJam = () => {
           <View style={GlobalStyles.modal.wrapper}>
             <View style={styles.row}>
               <CopyIcon size={22} />
-              <Text style={GlobalStyles.text}>Copy link</Text>
+              <TextBlock>Copy link</TextBlock>
             </View>
             <View style={styles.row}>
               <EmailIcon size={22} />
-              <Text style={GlobalStyles.text}>Send email</Text>
+              <TextBlock>Send email</TextBlock>
             </View>
             <View style={styles.row}>
               <InstagramIcon size={22} />
-              <Text style={GlobalStyles.text}>Instagram</Text>
+              <TextBlock>Instagram</TextBlock>
             </View>
             <View style={styles.row}>
               <FacebookIcon size={22} />
-              <Text style={GlobalStyles.text}>Facebook</Text>
+              <TextBlock>Facebook</TextBlock>
             </View>
             <View style={styles.row}>
               <TwitterIcon size={22} />
-              <Text style={GlobalStyles.text}>Twitter</Text>
+              <TextBlock>Twitter</TextBlock>
             </View>
           </View>
         }

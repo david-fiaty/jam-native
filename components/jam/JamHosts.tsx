@@ -3,6 +3,7 @@ import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import ModalView from '../ModalView';
 import ApiClient from '@/classes/ApiClient';
 import UserIcon from '../icons/UserIcon';
+import TextBlock from '../base/TextBlock';
 
 type Props = {
   item: object,
@@ -18,7 +19,7 @@ const JamHosts = ({item, index}: Props) => {
         title="Hosts" 
         label={
           <View style={styles.label}>
-            <Text style={GlobalStyles.text}>@host +{item.host_count}</Text>
+            <TextBlock>@host +{item.host_count}</TextBlock>
           </View>
         }
         content={
@@ -31,7 +32,7 @@ const JamHosts = ({item, index}: Props) => {
                 return (
                   <View style={styles.row}>
                     <UserIcon size={22} />
-                    <Text style={GlobalStyles.text}>{item.name} / {item.handle}</Text>
+                    <TextBlock>{item.name} / {item.handle}</TextBlock>
                   </View>
                 );
               }} 

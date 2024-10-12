@@ -1,7 +1,8 @@
-import { StyleSheet, View, Text, TextInput, Pressable } from 'react-native';
+import { StyleSheet, View, TextInput, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Button } from '@rneui/themed';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+import TextBlock from '../base/TextBlock';
 
 const LoginForm = () => {
   const router = useRouter();
@@ -21,9 +22,9 @@ const LoginForm = () => {
           onPress={() => router.push('/login')} 
         />
         <View style={styles.signup}>
-          <Text style={[GlobalStyles.text, {fontWeight: 'normal'}]}>Don't have an account? Sign Up</Text>
+          <TextBlock>Don't have an account? Sign Up</TextBlock>
           <Pressable onPress={() => router.push('/jams')}>
-            <Text style={GlobalStyles.text}>skip</Text>
+            <TextBlock>skip</TextBlock>
           </Pressable>
         </View>
       </View>

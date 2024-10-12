@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { GlobalStyles } from '@/constants/GlobalStyles';
+import TextBlock from '../base/TextBlock';
 
 type Props = {
   size?: number,
@@ -13,7 +14,7 @@ export function SkipButton({size}: Props) {
   return (
     <Pressable onPress={() => router.push('/jams')}>
       <View style={styles.container}>
-        <Text style={GlobalStyles.text}>skip</Text>
+        <TextBlock>skip</TextBlock>
       </View>
     </Pressable>
   );

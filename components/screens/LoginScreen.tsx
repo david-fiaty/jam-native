@@ -1,8 +1,9 @@
 import { useRouter } from 'expo-router';
-import { StyleSheet, View, Text } from 'react-native';
-import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+import { StyleSheet, View } from 'react-native';
+import { Colors } from '@/constants/GlobalStyles';
 import { StaticImage } from '@/components/images/StaticImage';
 import LoginForm from '@/components/forms/LoginForm';
+import TextBlock from '../base/TextBlock';
 
 const LoginScreen = () => {
   const router = useRouter();
@@ -10,7 +11,7 @@ const LoginScreen = () => {
   return (
     <View style={styles.container}>
       <StaticImage uri={require('@/assets/images/jam-logo.png')} width={110} height={110} />  
-      <Text style={[GlobalStyles.text, styles.title]}>Welcome back</Text>
+      <TextBlock>Welcome back</TextBlock>
       <LoginForm />
     </View>
   );

@@ -1,5 +1,6 @@
 import { StyleSheet, View, Text } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+import TextBlock from '../base/TextBlock';
 
 type Props = {
   count: number,
@@ -11,7 +12,7 @@ export function NotificationsIcon({count, size}: Props) {
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.icon, {fontSize: size}]}>{count}+</Text>
+      <TextBlock>{count}+</TextBlock>
     </View>
   );
 };
