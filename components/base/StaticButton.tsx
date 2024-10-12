@@ -34,8 +34,7 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'row',
-    //alignItems: 'center',
-    alignSelf: 'flex-start',
+    alignItems: 'center',
     marginLeft: 'auto',
     marginRight: 'auto',
     justifyContent: 'center',
