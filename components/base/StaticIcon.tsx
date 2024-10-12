@@ -6,23 +6,23 @@ type Props = {
   labelStyle?: object,
 };
 
-const location = () => {};
-const megaphone = () => {};
-const menu = () => {};
-const notifications = () => {};
-const plus = () => {};
-const save = () => {};
-const search = () => {};
-const share = () => {};
-const twitter = () => {};
-const user = () => {};
-const users = () => {};
-const actions = () => {};
-const copy = () => {};
-const email = () => {};
-const facebook = () => {};
-const instagram = () => {};
-const layers = () => {};
+const Location = () => {};
+const Megaphone = () => {};
+const Menu = () => {};
+const Notifications = () => {};
+const Plus = () => {};
+const Save = () => {};
+const Search = () => {};
+const Share = () => {};
+const Twitter = () => {};
+const User = () => {};
+const Users = () => {};
+const Actions = () => {};
+const Copy = () => {};
+const Email = () => {};
+const Facebook = () => {};
+const Instagram = () => {};
+const Layers = () => {};
 
 export function StaticIcon({name, containerStyle, labelStyle}: Props) {
   return (
