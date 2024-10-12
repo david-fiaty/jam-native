@@ -1,5 +1,6 @@
-import { StyleSheet, View, Text } from 'react-native';
-import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
+import { StyleSheet, View } from 'react-native';
+import { Colors } from '@/constants/GlobalStyles';
+import TextBlock from '../base/TextBlock';
 
 type Props = {
   item: object,
@@ -9,7 +10,7 @@ type Props = {
 export function ProfileProject({item, index}: Props) {
   return (
     <View style={styles.container}>
-    <Text style={GlobalStyles.text}>{item.name}</Text>   
+    <TextBlock>{item.name}</TextBlock>   
     </View>
   );
 };
