@@ -11,7 +11,7 @@ const WelcomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <JamLogo width={110} height={110} />    
+      <JamLogo />    
       <Slideshow />
       <Button 
         title="Login / Signup" 
