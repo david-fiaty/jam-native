@@ -1,27 +1,25 @@
-import { StyleSheet, View, Text, Pressable } from 'react-native';
-import { useRouter } from 'expo-router';
-import { GlobalStyles } from '@/constants/GlobalStyles';
-import TextBlock from '../base/TextBlock';
+import { StyleSheet } from 'react-native';
+import { StaticButton } from '../base/StaticButton';
 
 type Props = {
-  size?: number,
+  onPress: () => void,
 };
 
-const SkipButton = ({size}: Props) => {
-  size = size ? size : GlobalStyles.icon.size;
-  const router = useRouter();
-  
+const SkipButton = ({onPress}: Props) => {
   return (
-    <Pressable onPress={() => router.push('/jams')}>
-      <View style={styles.container}>
-        <TextBlock>skip</TextBlock>
-      </View>
-    </Pressable>
+    <StaticButton
+      label="Skip" 
+      onPress={onPress} 
+      containerStyle={styles.container}
+      labelStyle={styles.label}
+    />
   );
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+  },
+  label: {},
 });
 
 export default SkipButton;
