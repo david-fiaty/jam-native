@@ -15,9 +15,7 @@ const WelcomeScreen = () => {
       <JamLogo width={110} height={110} />    
       <Slideshow />
       <StaticButton
-        title="Login / Signup" 
-        type="outline" 
-        buttonStyle={styles.button} 
+        label="Login / Signup" 
         onPress={() => router.push('/login')} 
         
       />

@@ -1,39 +1,37 @@
 
-import { StyleSheet, View, Pressable } from 'react-native';
-import { Button } from '@rneui/themed';
+import { ReactNode } from 'react';
+import { StyleSheet, View, Pressable, TouchableOpacity } from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import TextBlock from './TextBlock';
 
 type Props = {
-  title: string,
-  type: string,
-  buttonStyle: object,
-  titleStyle: object,
-  onPress: () => void,
+  label?: string,
+  icon?: ReactNode,
+  onPress?: () => void,
 };
 
-export function StaticButton({...props}: Props) {
+export function StaticButton({label, icon, onPress}: Props) {
   return (
-    <Pressable onPress={props.onPress}>
+    <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
-        <TextBlock>{props.title}</TextBlock>
+        {icon}<TextBlock style={styles.text}>{label}</TextBlock>
       </View>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    alignSelf: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: 'red',
     padding: GlobalStyles.gap,
+    gap: GlobalStyles.gap,
   },
-  button: {
-    marginTop: 40,
-    borderRadius: 30,
-    overflow: 'hidden',
-    minWidth: '35%',
-    maxWidth: '40%',
-    alignSelf: 'center',
+  text: {
+    textAlign: 'center',
+    backgroundColor: 'yellow', 
   },
 });
