@@ -1,16 +1,17 @@
 import { StyleSheet, Text } from 'react-native';
-import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
+import { GlobalStyles } from '@/constants/GlobalStyles';
+import React, { ReactNode } from 'react';
 
 type Props = {
-  content: string,
   fontSize?: number,
   textTransform?: boolean,
   textDecoration?: boolean,
+  children: ReactNode,
 };
 
-export function TextBlock({content, fontSize, textTransform, textDecoration}: Props) {
+const TextBlock = ({fontSize, textTransform, textDecoration, children}: Props) => {
   return (
-    <Text style={styles.text}>{content}</Text>   
+    <Text style={styles.text}>{children}</Text>   
   );
 };
 

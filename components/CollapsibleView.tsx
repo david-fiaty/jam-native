@@ -1,7 +1,8 @@
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import Collapsible from 'react-native-collapsible';
+import TextBlock from './base/TextBlock';
 
 const CollapsibleView = () => {
   const [collapsed, setCollapsed] = useState(true);
@@ -10,15 +11,12 @@ const CollapsibleView = () => {
     <View style={styles.container}>
       <TouchableOpacity onPress={() => setCollapsed((prev) => !prev)}>
         <View style={styles.header}>
-          <Text style={GlobalStyles.text}>View more.</Text>
+          <TextBlock>View more.</TextBlock>
         </View>
       </TouchableOpacity>
       <Collapsible collapsed={collapsed} align="center">
         <View style={styles.content}>
-          <Text style={GlobalStyles.text}>
-            Bacon ipsum dolor amet chuck turducken landjaeger tongue spare
-            ribs
-          </Text>
+        <TextBlock>Bacon ipsum dolor amet chuck turducken landjaeger tongue spare ribs</TextBlock>
         </View>
       </Collapsible>
     </View>

@@ -1,10 +1,11 @@
-import { StyleSheet, View, Text} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import TopToolbar from '@/components/navigation/TopToolbar';
 import BackButton from '@/components/navigation/BackButton';
 import BottomLinks from '@/components/navigation/BottomLinks';
 import LegalScreenContent from '@/constants/LegalScreenContent';
+import TextBlock from '@/components/base/TextBlock';
 
 const Legal = () => {
   const navigation = useNavigation();
@@ -13,9 +14,7 @@ const Legal = () => {
     <View style={styles.container}>
       <TopToolbar />
       <BackButton title={LegalScreenContent.title} onPress={() => navigation.popToTop()}/>
-      <Text style={styles.text}>
-        {LegalScreenContent.text}
-      </Text>
+      <TextBlock>{LegalScreenContent.text}</TextBlock>
       <BottomLinks />
     </View>
   );
@@ -27,9 +26,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column', 
     marginTop: 30,
     padding: 25,
-  },
-  text: {
-    color: GlobalStyles.text.color,
   },
 });
 
