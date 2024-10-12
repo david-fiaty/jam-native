@@ -1,23 +1,20 @@
 import { StyleSheet, Text } from 'react-native';
-import { Colors } from '@/constants/GlobalStyles';
+import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 
 type Props = {
   content: string,
-  uppercase?: boolean,
+  transform?: boolean,
   underline?: boolean,
 };
 
-export function TextBlock({content, uppercase, underline}: Props) {
+export function TextBlock({content, transform, underline}: Props) {
   return (
     <Text style={styles.text}>{content}</Text>   
   );
 };
 
 const styles = StyleSheet.create({
-  text: {
-    color: Colors.primary,
-    fontSize: 13.5,
-  },
+  text: GlobalStyles.text,
 });
 
 export default TextBlock;
