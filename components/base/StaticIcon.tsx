@@ -1,37 +1,42 @@
-import { ReactNode } from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { GlobalStyles } from '@/constants/GlobalStyles';
-import TextBlock from '@/components/base/TextBlock';
+import { StyleSheet, View, Text } from 'react-native';
 
 type Props = {
-  label?: string,
-  icon?: ReactNode,
+  name: string,
   containerStyle?: object,
   labelStyle?: object,
-  onPress?: () => void,
 };
 
-export function StaticIcon({label, icon, containerStyle, labelStyle, onPress}: Props) {
+const location = () => {};
+const megaphone = () => {};
+const menu = () => {};
+const notifications = () => {};
+const plus = () => {};
+const save = () => {};
+const search = () => {};
+const share = () => {};
+const twitter = () => {};
+const user = () => {};
+const users = () => {};
+const actions = () => {};
+const copy = () => {};
+const email = () => {};
+const facebook = () => {};
+const instagram = () => {};
+const layers = () => {};
+
+export function StaticIcon({name, containerStyle, labelStyle}: Props) {
   return (
-    <TouchableOpacity onPress={onPress}>
-      <View style={[styles.container, containerStyle]}>
-        {icon}<TextBlock style={[styles.label, labelStyle]}>{label}</TextBlock>
-      </View>
-    </TouchableOpacity>
+    <View style={[styles.container, containerStyle]}>
+      
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    alignItems: 'center',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    justifyContent: 'center',
-    padding: GlobalStyles.space,
-    gap: GlobalStyles.space,
+
   },
-  label: {
-    textAlign: 'center',
+  icon: {
+    
   },
 });
