@@ -23,7 +23,7 @@ const WelcomeScreen = () => {
       <Button 
         title="Skip" 
         type="clear" 
-        titleStyle={styles.text} 
+        titleStyle={GlobalStyles.text} 
         onPress={() => router.push('/jams')} 
       />
       <BottomLinks />
@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
   },
-  text: GlobalStyles.text,
   button: {
     marginTop: 40,
     borderRadius: 30,
