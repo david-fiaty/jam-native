@@ -2,7 +2,7 @@ import { StyleSheet, View } from 'react-native';
 import LoginForm from '@/components/forms/LoginForm';
 import TextBlock from '@/components/base/TextBlock';
 import JamLogo from '../images/JamLogo';
-import ScreenView from '../base/ScreenView';
+import ScreenView from '@/components/base/ScreenView';
 
 const LoginScreen = () => {
   return (
