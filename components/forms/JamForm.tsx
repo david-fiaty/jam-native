@@ -1,17 +1,17 @@
 import { StyleSheet, View, Text, FlatList } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ApiClient from '@/classes/ApiClient';
+import AddMediaButton from '../buttons/AddMediaButton';
 
 const JamForm = () => {
   const data = ApiClient.get('jams').slice(0, 4);
 
   return (
     <View style={styles.container}>    
-
+    
       <Text style={GlobalStyles.text}>What kind of Jam is it?</Text>
-
       <FlatList 
+        style={styles.list}
         data={data} 
         numColumns={4}
         contentContainerStyle={{gap: GlobalStyles.gap}}
@@ -25,8 +25,10 @@ const JamForm = () => {
           );
         }}
       />
-
-      <Ionicons name="add" size={18} style={styles.icon} />   
+    
+      <View style={styles.section}>
+        <AddMediaButton size={20} /> 
+      </View>
       
     </View>
   );
@@ -39,6 +41,9 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     width: '100%',
   },
+  section: {
+    marginTop: GlobalStyles.gap*2,
+  },
   item: {
     backgroundColor: Colors.tertiary,
     padding: 10,
@@ -48,15 +53,8 @@ const styles = StyleSheet.create({
     width: 72,
     height: 72,
   },
-
-  icon: {
-    ...GlobalStyles.icon,
-    ...{
-      backgroundColor: Colors.tertiary,
-      borderColor: Colors.tertiary,
-      borderWidth: 1,
-      borderRadius: 4,
-    },
+  list: {
+    marginTop: GlobalStyles.gap,
   },
 });
 
