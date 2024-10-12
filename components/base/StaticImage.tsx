@@ -12,7 +12,7 @@ export function StaticImage({source, width, height}: Props) {
       source={source} 
       resizeMethod="scale"
       resizeMode="contain"
-      style={[styles.image, {width: width}, {height: height}]} 
+      style={[styles.image, {width: width, height: height}]} 
     />   
   );
 };

@@ -4,7 +4,7 @@ import { Button } from '@rneui/themed';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import Slideshow from '@/components/Slideshow';
 import BottomLinks from '@/components/navigation/BottomLinks';
-import { JamLogo } from '../images/JamLogo';
+import JamLogo from '../images/JamLogo';
 
 const WelcomeScreen = () => {
   const router = useRouter();

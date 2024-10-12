@@ -5,9 +5,9 @@ type Props = {
   height: number,
 };
 
-const source = '@/assets/images/jam-logo.png'; 
-
-export function JamLogo({width, height}: Props) {
+const JamLogo = ({width, height}: Props) => {
+  const source = require('@/assets/images/jam-logo.png'); 
+  
   return (
     <StaticImage 
       source={source} 
@@ -17,4 +17,5 @@ export function JamLogo({width, height}: Props) {
   );
 };
 
+export default JamLogo;
 
