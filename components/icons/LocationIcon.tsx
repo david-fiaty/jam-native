@@ -6,7 +6,7 @@ type Props = {
   size?: number,
 };
 
-const LocationIcon({size}: Props) {
+const LocationIcon = ({size}: Props) => {
   size = size ? size : GlobalStyles.icon.size;
   
   return (

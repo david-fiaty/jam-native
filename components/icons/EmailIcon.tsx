@@ -6,7 +6,7 @@ type Props = {
   size?: number
 };
 
-const EmailIcon({size}: Props) {
+const EmailIcon = ({size}: Props) => {
   size = size ? size : GlobalStyles.icon.size;
   
   return (

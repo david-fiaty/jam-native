@@ -6,7 +6,7 @@ type Props = {
   size?: number,
 };
 
-const MegaphoneIcon({size}: Props) {
+const MegaphoneIcon = ({size}: Props) => {
   size = size ? size : GlobalStyles.icon.size;
   
   return (

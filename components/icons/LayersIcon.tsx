@@ -6,7 +6,7 @@ type Props = {
   size?: number
 };
 
-const LayersIcon({size}: Props) {
+const LayersIcon = ({size}: Props) => {
   size = size ? size : GlobalStyles.icon.size;
   
   return (

@@ -6,7 +6,7 @@ type Props = {
   size?: number,
 };
 
-const CopyIcon({size}: Props) {
+const CopyIcon = ({size}: Props) => {
   size = size ? size : GlobalStyles.icon.size;
   
   return (

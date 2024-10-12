@@ -6,7 +6,7 @@ type Props = {
   size?: number
 };
 
-const InstagramIcon({size}: Props) {
+const InstagramIcon = ({size}: Props) => {
   size = size ? size : GlobalStyles.icon.size;
   
   return (

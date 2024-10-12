@@ -6,7 +6,7 @@ type Props = {
   size?: number,
 };
 
-const MenuIcon({size}: Props) {
+const MenuIcon = ({size}: Props) => {
   size = size ? size : GlobalStyles.icon.size;
   
   return (

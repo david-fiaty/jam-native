@@ -6,7 +6,7 @@ type Props = {
   size?: number
 };
 
-const TwitterIcon({size}: Props) {
+const TwitterIcon = ({size}: Props) => {
   size = size ? size : GlobalStyles.icon.size;
   
   return (

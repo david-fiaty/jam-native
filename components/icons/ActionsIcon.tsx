@@ -6,7 +6,7 @@ type Props = {
   size?: number,
 };
 
-const ActionsIcon({size}: Props) {
+const ActionsIcon = ({size}: Props) => {
   size = size ? size : GlobalStyles.icon.size;
   
   return (
