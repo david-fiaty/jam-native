@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     gap: GlobalStyles.gap,
+    marginBottom: GlobalStyles.gap,
   },
   icon: {
     ...GlobalStyles.icon,
