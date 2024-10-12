@@ -4,6 +4,12 @@ eas update --platform android
 
 bc105b9c-d776-42e2-bd2e-2ebcff179748
 
+# Dropdown element
+https://www.npmjs.com/package/react-native-element-dropdown
+
+# Dependent dropdowns
+https://medium.com/@varungm24/creating-dependent-dropdown-in-react-native-e47179fe723c
+
 # Multilanguages
 https://medium.com/@prathiba2796/internationalization-and-localization-in-react-native-d37c412f42f9
 
