@@ -6,7 +6,7 @@ type Props = {
   size?: number,
 };
 
-export function PlusIcon({size}: Props) {
+const PlusIcon({size}: Props) {
   size = size ? size : GlobalStyles.icon.size;
   
   return (

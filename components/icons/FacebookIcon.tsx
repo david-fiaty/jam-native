@@ -6,7 +6,7 @@ type Props = {
   size?: number
 };
 
-export function FacebookIcon({size}: Props) {
+const FacebookIcon({size}: Props) {
   size = size ? size : GlobalStyles.icon.size;
   
   return (

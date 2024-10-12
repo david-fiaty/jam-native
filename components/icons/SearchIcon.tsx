@@ -6,7 +6,7 @@ type Props = {
   size?: number,
 };
 
-export function SearchIcon({size}: Props) {
+const SearchIcon({size}: Props) {
   size = size ? size : GlobalStyles.icon.size;
   
   return (

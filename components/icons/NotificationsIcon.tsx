@@ -7,7 +7,7 @@ type Props = {
   size?: number,
 };
 
-export function NotificationsIcon({count, size}: Props) {
+const NotificationsIcon({count, size}: Props) {
   size = size ? size : GlobalStyles.icon.size;
 
   return (
