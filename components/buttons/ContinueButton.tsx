@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { Colors } from '@/constants/GlobalStyles';
+import { StyleSheet, View } from 'react-native';
+import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import { StaticButton } from '../base/StaticButton';
 
 type Props = {
@@ -8,21 +8,28 @@ type Props = {
 
 const ContinueButton = ({onPress}: Props) => {
   return (
-    <StaticButton
-      label="Continue" 
-      onPress={onPress} 
-      containerStyle={styles.container}
-      labelStyle={styles.label}
-    />
+    <View style={styles.container}>
+      <StaticButton
+        label="Continue" 
+        onPress={onPress} 
+        containerStyle={styles.button}
+        labelStyle={styles.label}
+      />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: 45,
-    backgroundColor: Colors.primary,
-    borderWidth: 1,
-    borderRadius: 8,
+    width: '100%',
+  },
+  button: {
+    ...GlobalStyles.border,
+    ...{
+      height: 45,
+      backgroundColor: Colors.primary,
+      width: '100%',
+    }
   },
   label: {
     color: '#FFFFFF',
