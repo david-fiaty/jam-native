@@ -1,4 +1,4 @@
-import { StyleSheet, Text } from 'react-native';
+import { Text } from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import React, { ReactNode } from 'react';
 
