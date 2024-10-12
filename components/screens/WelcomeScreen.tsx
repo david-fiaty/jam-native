@@ -17,7 +17,8 @@ const WelcomeScreen = () => {
       <StaticButton
         label="Login / Signup" 
         onPress={() => router.push('/login')} 
-        
+        containerStyle={{borderWidth: 3, borderRadius: 8}}
+        labelStyle={{textTransform: 'uppercase'}}
       />
       <Button 
         title="Login / Signup" 
