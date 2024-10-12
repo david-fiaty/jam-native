@@ -4,7 +4,7 @@ import ModalView from '@/components/base/ModalView';
 import ApiClient from '@/classes/ApiClient';
 import UsersIcon from '../icons/UsersIcon';
 import UserIcon from '../icons/UserIcon';
-import TextBlock from '../base/TextBlock';
+import TextBlock from '@/components/base/TextBlock';
 
 type Props = {
   item: object,

@@ -2,9 +2,9 @@ import { GlobalStyles } from '@/constants/GlobalStyles';
 import React, { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import Collapsible from 'react-native-collapsible';
-import TextBlock from './base/TextBlock';
+import TextBlock from '@/components/base/TextBlock';
 
-const CollapsibleView = () => {
+const CollapsibleBlock = () => {
   const [collapsed, setCollapsed] = useState(true);
 
   return (
@@ -41,4 +41,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CollapsibleView;
+export default CollapsibleBlock;

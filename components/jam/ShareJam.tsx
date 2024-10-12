@@ -7,7 +7,7 @@ import EmailIcon from '../icons/EmailIcon';
 import InstagramIcon from '../icons/InstagramIcon';
 import FacebookIcon from '../icons/FacebookIcon';
 import TwitterIcon from '../icons/TwitterIcon';
-import TextBlock from '../base/TextBlock';
+import TextBlock from '@/components/base/TextBlock';
 
 const ShareJam = () => {
   return (

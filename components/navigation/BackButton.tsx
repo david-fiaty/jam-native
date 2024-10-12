@@ -1,7 +1,7 @@
 import { View, StyleSheet, Pressable } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { GlobalStyles } from '@/constants/GlobalStyles';
-import TextBlock from '../base/TextBlock';
+import TextBlock from '@/components/base/TextBlock';
 
 type Props = {
   title: string,
