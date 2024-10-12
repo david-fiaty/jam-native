@@ -53,13 +53,9 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   field: {
-    width: '100%',
+    backgroundColor: '#FFFFFF',
     height: 45,
-    borderWidth: 1, 
     borderColor: Colors.primary, 
-    borderRadius: 6,
-    paddingHorizontal: 12, 
-    marginBottom: 10,
   },
 });
 
