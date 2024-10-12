@@ -1,5 +1,5 @@
 import { View, StyleSheet, Text } from 'react-native';
-import { StaticImage } from '@/components/images/StaticImage';
+import { JamLogo } from '@/components/images/JamLogo';
 import SettingsMenu from '../menus/SettingsMenu';
 import NotificationsMenu from '../menus/NotificationsMenu';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
@@ -8,7 +8,7 @@ import SearchIcon from '../icons/SearchIcon';
 const TopToolbar = () => {
   return (
     <View style={styles.container}>
-      <StaticImage uri={require('@/assets/images/jam-logo.png')} width={46} height={46} /> 
+      <JamLogo width={46} height={46} /> 
       <View style={styles.buttons}> 
         <SettingsMenu />  
         <NotificationsMenu />

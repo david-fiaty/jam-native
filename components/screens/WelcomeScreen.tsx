@@ -3,15 +3,15 @@ import { useRouter } from 'expo-router';
 import { Button } from '@rneui/themed';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import Slideshow from '@/components/Slideshow';
-import { StaticImage } from '@/components/images/StaticImage';
 import BottomLinks from '@/components/navigation/BottomLinks';
+import JamLogo from '../images/JamLogo';
 
 const WelcomeScreen = () => {
   const router = useRouter();
 
   return (
     <View style={styles.container}>
-      <StaticImage uri={require('@/assets/images/jam-logo.png')} width={110} height={110} />    
+      <JamLogo width={110} height={110} />    
       <Slideshow />
       <Button 
         title="Login / Signup" 
