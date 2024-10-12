@@ -5,7 +5,9 @@ import { GlobalStyles } from '@/constants/GlobalStyles';
 import Slideshow from '@/components/Slideshow';
 import BottomLinks from '@/components/navigation/BottomLinks';
 import JamLogo from '../images/JamLogo';
-import { StaticButton } from '../base/StaticButton';
+import LoginSignupButton from '../buttons/LoginSignupButton';
+import SkipButton from '../buttons/SkipButton';
+
 
 const WelcomeScreen = () => {
   const router = useRouter();
@@ -14,24 +16,8 @@ const WelcomeScreen = () => {
     <View style={styles.container}>
       <JamLogo width={110} height={110} />    
       <Slideshow />
-      <StaticButton
-        label="Login / Signup" 
-        onPress={() => router.push('/login')} 
-        
-      />
-      <Button 
-        title="Login / Signup" 
-        type="outline" 
-        buttonStyle={styles.button} 
-        titleStyle={[GlobalStyles.text, {textTransform: 'uppercase', fontSize: 13}]}
-        onPress={() => router.push('/login')} 
-      />
-      <Button 
-        title="Skip" 
-        type="clear" 
-        titleStyle={GlobalStyles.text} 
-        onPress={() => router.push('/jams')} 
-      />
+      <LoginSignupButton />
+      <SkipButton onPress={() => router.push('/jams')} />
       <BottomLinks />
     </View>
   );

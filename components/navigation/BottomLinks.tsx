@@ -1,25 +1,12 @@
 import { View, StyleSheet } from 'react-native';
-import { useRouter } from 'expo-router';
-import { Button } from '@rneui/themed';
-import { GlobalStyles } from '@/constants/GlobalStyles';
+import AboutButton from '../buttons/AboutButton';
+import LegalButton from '../buttons/LegalButton';
 
 const BottomLinks = () => {
-  const router = useRouter();
-
   return (
     <View style={styles.container}>
-      <Button 
-        title="About" 
-        type="clear" 
-        onPress={() => router.push('/about')} 
-        titleStyle={GlobalStyles.text}
-      />
-      <Button 
-        title="Legal" 
-        type="clear" 
-        onPress={() => router.push('/legal')} 
-        titleStyle={styles.text}
-      />
+      <AboutButton />
+      <LegalButton />
     </View>
   );
 };
@@ -33,7 +20,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 20,
   },
-  text: GlobalStyles.text,
 });
 
 export default BottomLinks;
