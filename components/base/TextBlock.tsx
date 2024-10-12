@@ -3,11 +3,12 @@ import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 
 type Props = {
   content: string,
-  transform?: boolean,
-  underline?: boolean,
+  fontSize?: number,
+  textTransform?: boolean,
+  textDecoration?: boolean,
 };
 
-export function TextBlock({content, transform, underline}: Props) {
+export function TextBlock({content, fontSize, textTransform, textDecoration}: Props) {
   return (
     <Text style={styles.text}>{content}</Text>   
   );
