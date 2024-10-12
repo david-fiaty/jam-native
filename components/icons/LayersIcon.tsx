@@ -7,7 +7,7 @@ type Props = {
 };
 
 export function LayersIcon({size}: Props) {
-  size = size ? size : GlobalStyles.icon.fontSize;
+  size = size ? size : GlobalStyles.icon.size;
   
   return (
     <SimpleLineIcons name="layers" size={size} style={styles.icon} />   

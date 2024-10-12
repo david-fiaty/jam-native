@@ -7,7 +7,7 @@ type Props = {
 };
 
 export function SearchIcon({size}: Props) {
-  size = size ? size : GlobalStyles.icon.fontSize;
+  size = size ? size : GlobalStyles.icon.size;
   
   return (
     <View style={styles.container}>

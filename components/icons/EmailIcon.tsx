@@ -7,7 +7,7 @@ type Props = {
 };
 
 export function EmailIcon({size}: Props) {
-  size = size ? size : GlobalStyles.icon.fontSize;
+  size = size ? size : GlobalStyles.icon.size;
   
   return (
     <MaterialIcons name="email" size={size} style={styles.icon} />   
