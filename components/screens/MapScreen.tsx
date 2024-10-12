@@ -7,7 +7,7 @@ import MapView from 'react-native-maps';
 import ModalView from '@/components/base/ModalView';
 import LocationIcon from '@/components/icons/LocationIcon';
 
-const JamsMap = () => {
+const MapScreen = () => {
   const [location, setLocation] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -91,4 +91,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default JamsMap;
+export default MapScreen;
