@@ -66,16 +66,6 @@ export const GlobalStyles = {
   pager: {
     color: Colors.primary,
   },
-  modal: {
-    wrapper: {
-      gap: space,
-      padding: space,
-      borderWidth: 1,
-      borderColor: Colors.primary,
-      borderRadius: space,
-      width: '100%',
-    },
-  },
   tabs: {
     icon: {
       size: 26,

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet, Modal, Pressable, View, TouchableWithoutFeedback, StatusBar, TouchableOpacity } from 'react-native';
-import { GlobalStyles } from '@/constants/GlobalStyles';
+import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import BackButton from '@/components/navigation/BackButton';
 
 type Props = {
@@ -34,7 +34,9 @@ const ModalView = ({label, title, content, animation, backButton}: Props) => {
                 >
                   <BackButton title={title} />
                 </Pressable>
-                {content}
+                <View style={styles.modal.wrapper}>
+                  {content}
+                </View>
               </View>
               </TouchableWithoutFeedback>
           </View>
@@ -59,6 +61,14 @@ const styles = StyleSheet.create({
       marginTop: StatusBar.currentHeight + GlobalStyles.toolbar.height,
       backgroundColor: 'black',
       height: '100%',
+    },
+    wrapper: {
+      gap: GlobalStyles.space,
+      padding: GlobalStyles.space,
+      borderWidth: 1,
+      borderColor: Colors.primary,
+      borderRadius: GlobalStyles.space,
+      width: '100%',
     },
     view: {
       backgroundColor: 'white',
