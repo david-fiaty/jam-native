@@ -30,14 +30,8 @@ const ProfileScreen = () => {
             >
               <Pressable>
                 <ProfileImage />
-              </Pressable>
-              <Pressable>
                 <ProfileForm />
-              </Pressable>
-              <Pressable>
                 <ProfileProjects />
-              </Pressable>
-              <Pressable>
                 <ProfileJams />
               </Pressable>
             </ScrollView>  
