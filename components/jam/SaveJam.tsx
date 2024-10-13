@@ -1,8 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ModalView from '@/components/base/ModalView';
-import ShareIcon from '../icons/ShareIcon';
-import LayersIcon from '../icons/LayersIcon';
 import StaticIcon from '../base/StaticIcon';
 import TextBlock from '@/components/base/TextBlock';
 
