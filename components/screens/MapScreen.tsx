@@ -6,6 +6,7 @@ import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
 import ModalView from '@/components/base/ModalView';
 import ClearIcon from '../icons/ClearIcon';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 
 const MapScreen = () => {
   const [location, setLocation] = useState('');
@@ -38,9 +39,7 @@ const MapScreen = () => {
       <ModalView 
         title="Jams map" 
         animation="slide"
-        label={
-          <ClearIcon name="location" />
-        }
+        label={<ClearIcon name="location" size={GlobalStyles.tabsbar.icon.size} />}
         content={
           <TouchableWithoutFeedback>
             <View style={styles.wrapper}>

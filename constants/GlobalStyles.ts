@@ -12,6 +12,12 @@ export const GlobalStyles = {
   toolbar: {
     height: 42,
   },
+  tabsbar: {
+    icon: {
+      size: 24,
+      color: Colors.primary,
+    },
+  },
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -65,12 +71,6 @@ export const GlobalStyles = {
   },
   pager: {
     color: Colors.primary,
-  },
-  tabs: {
-    icon: {
-      size: 26,
-      color: Colors.primary,
-    },
   },
   field: {
     backgroundColor: Colors.tertiary,
