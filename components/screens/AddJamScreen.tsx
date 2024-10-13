@@ -9,16 +9,27 @@ const AddJamScreen = () => {
     <View style={styles.container}>     
       <ModalView 
         title="Add a new Jam" 
-        label={<StaticIcon name="plus" iconStyle={GlobalStyles.tabs.icon} size={GlobalStyles.tabs.icon.size} />}
-        content={<JamForm />}
         animation="slide"
+        label={
+          <StaticIcon 
+            name="plus" 
+            iconStyle={GlobalStyles.tabs.icon} 
+            containerStyle={[GlobalStyles.icon.clear, styles.icon]}
+            size={GlobalStyles.tabs.icon.size} 
+          />
+        }
+        content={<JamForm />}
       />   
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  container: {},
+  icon: {
+    borderRadius: 0,
+    padding: 0,
+    borderWidth: 0,
   },
 });
 
