@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     backgroundColor: Colors.background,
     height: '100%',
+    gap: 20,
   },
 });
 
