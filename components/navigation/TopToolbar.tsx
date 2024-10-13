@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: 'red',
     marginBottom: GlobalStyles.space*2,
     height: GlobalStyles.toolbar.height,
   },
