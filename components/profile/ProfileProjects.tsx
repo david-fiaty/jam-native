@@ -8,7 +8,7 @@ const ProfileProjects = () => {
 
   return (
     <View style={styles.container}>
-      <TextBlock>Your projects</TextBlock> 
+      <TextBlock style={styles.title}>Your projects</TextBlock> 
       <View style={styles.list}>
         <FlatList 
           data={data} 
