@@ -8,8 +8,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const Jams = () => {
   return (  
     <>
-      <TopToolbar /> 
+      
       <SafeAreaView style={styles.container}>
+      <TopToolbar /> 
         <JamsScreen />
       </SafeAreaView>
       <BottomTabs />
