@@ -4,31 +4,33 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 type Props = {
   name?: string,
   containerStyle?: object,
-  labelStyle?: object,
+  iconStyle?: object,
 };
 
-const Location = () => <Ionicons name="location" size={50} style={styles.icon} />;
-const Megaphone = () => {};
-const Menu = () => {};
-const Notifications = () => {};
-const Plus = () => {};
-const Save = () => {};
-const Search = () => {};
-const Share = () => {};
-const Twitter = () => {};
-const User = () => {};
-const Users = () => {};
-const Actions = () => {};
-const Copy = () => {};
-const Email = () => {};
-const Facebook = () => {};
-const Instagram = () => {};
-const Layers = () => {};
+const icons = {
+  location: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  megaphone: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  menu: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  notifications: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  plus: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  save: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  search: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  share: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  twitter: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  user: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  users: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  actions: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  copy: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  email: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  facebook: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  instagram: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  layers: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+};
 
-export function StaticIcon({name, containerStyle, labelStyle}: Props) {
+export function StaticIcon({name, containerStyle, iconStyle}: Props) {
   return (
     <View style={[styles.container, containerStyle]}>
-      <Location />
+      {icons[name](iconStyle)}
     </View>
   );
 };
