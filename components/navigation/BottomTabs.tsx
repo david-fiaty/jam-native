@@ -2,7 +2,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MapScreen from '@/components/screens/MapScreen';
 import AddJamScreen from '@/components/screens/AddJamScreen';
-import ProfileScreen from '@/components/profile/ProfileScreen';
+import ProfileScreen from '@/components/screens/ProfileScreen';
 import { Colors } from '@/constants/GlobalStyles';
 
 const BottomTabs = () => {
