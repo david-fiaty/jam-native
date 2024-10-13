@@ -50,6 +50,9 @@ const ProfileForm = () => {
 
 const styles = StyleSheet.create({
   container: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: GlobalStyles.space,
   },
   wrapper: {
     width: '100%',

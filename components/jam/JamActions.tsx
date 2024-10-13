@@ -1,8 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import Entypo from '@expo/vector-icons/Entypo';
+import StaticIcon from '../base/StaticIcon';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ModalView from '@/components/base/ModalView';
 import ActionsIcon from '../icons/ActionsIcon';
@@ -14,57 +13,76 @@ const JamActions = () => {
       <ModalView 
         title="More" 
         label={
-          <ActionsIcon size={14} />
+          <StaticIcon 
+            name="actions" 
+            iconStyle={GlobalStyles.tabs.icon} 
+            containerStyle={[GlobalStyles.icon.clear, styles.icon]}
+            size={styles.icon.size} 
+          />          
         }
         content={
           <View style={GlobalStyles.modal.wrapper}>
             <View style={styles.row}>
-              <Ionicons 
-                name="save-outline" 
-                size={20} style={styles.icon} 
-              />
+              <StaticIcon 
+                name="save" 
+                iconStyle={GlobalStyles.tabs.icon} 
+                containerStyle={[GlobalStyles.icon.clear, styles.icon]}
+                size={styles.icon.size} 
+              />          
               <TextBlock>Save Jam</TextBlock>
             </View>
             <View style={styles.row}>
-              <Ionicons 
-                name="share-social-outline" 
-                size={20} style={styles.icon} 
-              />
+              <StaticIcon 
+                name="share" 
+                iconStyle={GlobalStyles.tabs.icon} 
+                containerStyle={[GlobalStyles.icon.clear, styles.icon]}
+                size={styles.icon.size} 
+              />          
               <TextBlock>Share Jam</TextBlock>
             </View>
             <View style={styles.row}>
-              <MaterialCommunityIcons 
-                name="briefcase-plus-outline" 
-                size={20} style={styles.icon} 
-              />
+              <StaticIcon 
+                name="plus" 
+                iconStyle={GlobalStyles.tabs.icon} 
+                containerStyle={[GlobalStyles.icon.clear, styles.icon]}
+                size={styles.icon.size} 
+              />          
               <TextBlock>Add to project</TextBlock>
             </View>
             <View style={styles.row}>
-              <MaterialCommunityIcons 
-                name="view-dashboard-outline" 
-                size={20} style={styles.icon} 
-              />
+              <StaticIcon 
+                name="view" 
+                iconStyle={GlobalStyles.tabs.icon} 
+                containerStyle={[GlobalStyles.icon.clear, styles.icon]}
+                size={styles.icon.size} 
+              />         
               <TextBlock>View project</TextBlock>
             </View>
             <View style={styles.row}>
-              <MaterialCommunityIcons 
-                name="clipboard-edit-outline" 
-                size={20} style={styles.icon} 
-              />
+              <StaticIcon 
+                name="edit" 
+                iconStyle={GlobalStyles.tabs.icon} 
+                containerStyle={[GlobalStyles.icon.clear, styles.icon]}
+                size={styles.icon.size} 
+              />          
               <TextBlock>Edit jam</TextBlock>
             </View>
             <View style={styles.row}>
-              <MaterialIcons 
-                name="warning-amber" 
-                size={20} style={styles.icon} 
-              />
+              <StaticIcon 
+                name="report" 
+                iconStyle={GlobalStyles.tabs.icon} 
+                containerStyle={[GlobalStyles.icon.clear, styles.icon]}
+                size={styles.icon.size} 
+              />          
               <TextBlock>Report Jam</TextBlock>
             </View>
             <View style={styles.row}>
-              <Ionicons 
-                name="trash-bin-outline" 
-                size={20} style={styles.icon} 
-              />
+              <StaticIcon 
+                name="delete" 
+                iconStyle={GlobalStyles.tabs.icon} 
+                containerStyle={[GlobalStyles.icon.clear, styles.icon]}
+                size={styles.icon.size} 
+              />          
               <TextBlock>Delete Jam</TextBlock>
             </View>
           </View>

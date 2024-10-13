@@ -2,7 +2,7 @@ import { StyleSheet, View, FlatList, Text } from 'react-native';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import ModalView from '@/components/base/ModalView';
 import ApiClient from '@/classes/ApiClient';
-import UserIcon from '../icons/UserIcon';
+import StaticIcon from '../base/StaticIcon';
 import TextBlock from '@/components/base/TextBlock';
 
 type Props = {
@@ -31,7 +31,12 @@ const JamHosts = ({item, index}: Props) => {
               renderItem={({item, index}) => {
                 return (
                   <View style={styles.row}>
-                    <UserIcon size={22} />
+                    <StaticIcon 
+                      name="user" 
+                      iconStyle={GlobalStyles.tabs.icon} 
+                      containerStyle={[GlobalStyles.icon.clear, styles.icon]}
+                      size={styles.icon.size} 
+                    />          
                     <TextBlock>{item.name} / {item.handle}</TextBlock>
                   </View>
                 );
