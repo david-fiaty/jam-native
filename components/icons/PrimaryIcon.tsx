@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     color: '#FFFFFF',
-    size: 18,
+    size: GlobalStyles.space*1.5,
   },
 });
 
