@@ -1,7 +1,7 @@
-import { StyleSheet, View, FlatList, Text } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import ModalView from '@/components/base/ModalView';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-import StaticIcon from '../base/StaticIcon';
+import ClearIcon from '../icons/ClearIcon';
 
 const SearchMenu = () => {
   return (
@@ -9,12 +9,7 @@ const SearchMenu = () => {
       <ModalView 
         title="Search" 
         label={
-          <StaticIcon 
-            name="search" 
-            iconStyle={GlobalStyles.tabs.icon} 
-            containerStyle={[GlobalStyles.icon.clear, styles.icon]}
-            size={styles.icon.size} 
-          />
+          <ClearIcon name="search" />
         }
         content={
           <Text>SEARCH</Text>
@@ -30,15 +25,6 @@ const styles = StyleSheet.create({
   },
   list: {
     width: '100%',
-  },
-  icon: {
-    ...GlobalStyles.icon,
-    ...{
-      backgroundColor: Colors.secondary,
-      padding: GlobalStyles.space/1.5,
-      borderRadius: 40,
-      size: GlobalStyles.tabs.icon.size/1.5,
-    },
   },
 });
 

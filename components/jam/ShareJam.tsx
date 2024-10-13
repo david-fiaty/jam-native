@@ -1,8 +1,8 @@
 import { StyleSheet, View } from 'react-native';
-import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 import ModalView from '@/components/base/ModalView';
-import StaticIcon from '../base/StaticIcon';
 import TextBlock from '@/components/base/TextBlock';
+import SecondaryIcon from '../icons/SecondaryIcon';
 
 const ShareJam = () => {
   return (
@@ -10,58 +10,28 @@ const ShareJam = () => {
       <ModalView 
         title="Share Jam" 
         label={
-          <StaticIcon 
-            name="share" 
-            iconStyle={GlobalStyles.tabs.icon} 
-            containerStyle={[GlobalStyles.icon.clear, styles.icon]}
-            size={styles.icon.size} 
-          />          
+          <SecondaryIcon name="share" />
         }
         content={
           <View style={GlobalStyles.modal.wrapper}>
             <View style={styles.row}>
-              <StaticIcon 
-                name="copy" 
-                iconStyle={GlobalStyles.tabs.icon} 
-                containerStyle={[GlobalStyles.icon.clear, styles.icon]}
-                size={styles.icon.size} 
-              />          
+              <SecondaryIcon name="share" />        
               <TextBlock>Copy link</TextBlock>
             </View>
             <View style={styles.row}>
-              <StaticIcon 
-                name="email" 
-                iconStyle={GlobalStyles.tabs.icon} 
-                containerStyle={[GlobalStyles.icon.clear, styles.icon]}
-                size={styles.icon.size} 
-              />          
+              <SecondaryIcon name="email" />
               <TextBlock>Send email</TextBlock>
             </View>
             <View style={styles.row}>
-              <StaticIcon 
-                name="instagram" 
-                iconStyle={GlobalStyles.tabs.icon} 
-                containerStyle={[GlobalStyles.icon.clear, styles.icon]}
-                size={styles.icon.size} 
-              />          
+              <SecondaryIcon name="instagram" />
               <TextBlock>Instagram</TextBlock>
             </View>
             <View style={styles.row}>
-              <StaticIcon 
-                name="facebook" 
-                iconStyle={GlobalStyles.tabs.icon} 
-                containerStyle={[GlobalStyles.icon.clear, styles.icon]}
-                size={styles.icon.size} 
-              />          
+              <SecondaryIcon name="facebook" />
               <TextBlock>Facebook</TextBlock>
             </View>
             <View style={styles.row}>
-              <StaticIcon 
-                name="twitter" 
-                iconStyle={GlobalStyles.tabs.icon} 
-                containerStyle={[GlobalStyles.icon.clear, styles.icon]}
-                size={styles.icon.size} 
-              />          
+              <SecondaryIcon name="twitter" />
               <TextBlock>Twitter</TextBlock>
             </View>
           </View>
@@ -80,15 +50,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: GlobalStyles.space,
-  },
-  icon: {
-    ...GlobalStyles.icon,
-    ...{
-      backgroundColor: Colors.secondary,
-      padding: GlobalStyles.space/1.5,
-      borderRadius: 40,
-      size: GlobalStyles.tabs.icon.size/1.5,
-    },
   },
 });
 
