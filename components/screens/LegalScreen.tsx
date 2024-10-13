@@ -11,7 +11,7 @@ const LegalScreen = () => {
 
   return (
     <View style={styles.container}>
-      <TopToolbar />
+      { /*<TopToolbar />*/ }
       <BackButton title={LegalScreenContent.title} onPress={() => navigation.popToTop()}/>
       <TextBlock>{LegalScreenContent.text}</TextBlock>
       <BottomLinks />

@@ -1,11 +1,12 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import SignupScreen from '@/components/screens/SignupScreen';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Signup = () => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <SignupScreen />
-    </View>
+    </SafeAreaView>
   );
 };
 
