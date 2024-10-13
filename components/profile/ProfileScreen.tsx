@@ -13,6 +13,7 @@ const ProfileScreen = () => {
     <View style={styles.container}>    
       <ModalView 
         title="Your profile" 
+        animation="slide"
         label={
           <StaticIcon 
             name="user" 
@@ -42,7 +43,6 @@ const ProfileScreen = () => {
             </ScrollView>  
           </SafeAreaView>
         }
-        animation="slide"
       />    
     </View>
   );
