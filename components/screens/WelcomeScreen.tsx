@@ -16,7 +16,7 @@ const WelcomeScreen = () => {
       <ScreenView>
 
         <StaticIcon name="location" size={32} />
-        <StaticIcon name="user" size={32} />
+        <StaticIcon name="megaphone" size={32} />
 
 
         <JamLogo width={110} height={110} />    
