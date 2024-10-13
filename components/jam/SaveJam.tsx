@@ -14,11 +14,11 @@ const SaveJam = () => {
         label={<SecondaryIcon name="save" />}
         content={
           <View>
-            <View style={styles.row}>
+            <View style={styles.item}>
               <SecondaryIcon name="share" />
               <TextBlock>Share</TextBlock>
             </View>
-            <View style={styles.row}>
+            <View style={styles.item}>
               <SecondaryIcon name="layers" />
             <TextBlock>View my Jams</TextBlock>
             </View>
@@ -32,11 +32,12 @@ const SaveJam = () => {
 const styles = StyleSheet.create({
   container: {
   },
-  row: {
+  item: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     gap: GlobalStyles.space,
+    padding: GlobalStyles.space,
   },
 });
 
