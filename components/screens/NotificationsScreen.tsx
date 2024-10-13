@@ -13,9 +13,9 @@ const NotificationsScreen = () => {
     <View style={styles.container}>   
       <ModalView 
         title="Notifications" 
-        label={
-          <TextBlock style={styles.icon}>{count}+</TextBlock>
-        }
+        animation="slide"
+        showBorder={true}
+        label={<TextBlock style={styles.icon}>{count}+</TextBlock>}
         content={
           <FlatList 
             data={data} 
@@ -24,7 +24,6 @@ const NotificationsScreen = () => {
             renderItem={({item, index}) => <MenuItem item={item} index={index} />} 
           />
         }
-        animation="slide"
       />   
     </View>
   );
