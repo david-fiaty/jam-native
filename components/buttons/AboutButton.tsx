@@ -17,6 +17,7 @@ const AboutButton = () => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'red',
   },
   label: {},
 });
