@@ -35,48 +35,47 @@ const MapScreen = () => {
   let userLocation = location || {};
 
   return (
-    <View style={styles.container}>       
-      <ModalView 
-        title="Jams map" 
-        animation="slide"
-        label={<ClearIcon name="location" size={GlobalStyles.tabsbar.icon.size} />}
-        content={
-          <TouchableWithoutFeedback>
-            <View style={styles.wrapper}>
-              <MapView
-                style={styles.map}
-                provider="google"
-                initialRegion={{
-                  latitude: 8.6195,
-                  longitude: 0.8248,
-                  latitudeDelta: 5,
-                  longitudeDelta: 5,
-                }}
-              >
-                <Marker
-                  key={1}
-                  coordinate={{latitude: 6.1296, longitude: 1.2197}}
-                  title="Jam location 1"
-                  description="Jam location 1"
-                />
-                <Marker
-                  key={2}
-                  coordinate={{latitude: 6.2273, longitude: 1.5814}}
-                  title="Jam location 2"
-                  description="Jam location 2"
-                />
-                <Marker
-                  key={3}
-                  coordinate={{latitude: 9.7216, longitude: 1.0586}}
-                  title="Jam location 3"
-                  description="Jam location 3"
-                />
-              </MapView>
-            </View>
-          </TouchableWithoutFeedback>
-        }
-      />   
-    </View>
+    <ModalView 
+      title="Jams map" 
+      animation="slide"
+      label={<ClearIcon name="location" size={GlobalStyles.tabsbar.icon.size} />}
+      content={
+        <TouchableWithoutFeedback>
+          <View style={styles.wrapper}>
+            <MapView
+              style={styles.map}
+              provider="google"
+              initialRegion={{
+                latitude: 8.6195,
+                longitude: 0.8248,
+                latitudeDelta: 5,
+                longitudeDelta: 5,
+              }}
+            >
+              <Marker
+                key={1}
+                coordinate={{latitude: 6.1296, longitude: 1.2197}}
+                title="Jam location 1"
+                description="Jam location 1"
+              />
+              <Marker
+                key={2}
+                coordinate={{latitude: 6.2273, longitude: 1.5814}}
+                title="Jam location 2"
+                description="Jam location 2"
+              />
+              <Marker
+                key={3}
+                coordinate={{latitude: 9.7216, longitude: 1.0586}}
+                title="Jam location 3"
+                description="Jam location 3"
+              />
+            </MapView>
+          </View>
+        </TouchableWithoutFeedback>
+      }
+    />   
+
   );
 };
 
