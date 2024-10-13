@@ -4,11 +4,11 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 type Props = {
   name?: string,
   containerStyle?: object,
-  labelStyle?: object,
+  iconStyle?: object,
 };
 
 const icons = {
-  location: () => <Ionicons name="location" size={50} style={styles.icon} />,
+  location: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
   megaphone: () => {},
   menu: () => {},
   notifications: () => {},
@@ -27,10 +27,10 @@ const icons = {
   layers: () => {},
 };
 
-export function StaticIcon({name, containerStyle, labelStyle}: Props) {
+export function StaticIcon({name, containerStyle, iconStyle}: Props) {
   return (
     <View style={[styles.container, containerStyle]}>
-      {icons[name]()}
+      {icons[name](iconStyle)}
     </View>
   );
 };
