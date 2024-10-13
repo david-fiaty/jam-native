@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from '@/constants/GlobalStyles';
+import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import StaticIcon from '../base/StaticIcon';
 
 type Props = {
@@ -26,9 +26,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 32,
-    height: 32,
-    borderRadius: 16,
+    width: GlobalStyles.space*3,
+    height: GlobalStyles.space*3,
+    borderRadius: GlobalStyles.space*1.5,
     backgroundColor: '#FFFFFF',
     borderColor: '#FFFFFF',
   },

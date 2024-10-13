@@ -39,9 +39,9 @@ const styles = StyleSheet.create({
   },
   icon: {
     backgroundColor: Colors.tertiary,
-    borderRadius: 16,
-    height: 32,
-    minWidth: 32,
+    width: GlobalStyles.space*3,
+    height: GlobalStyles.space*3,
+    borderRadius: GlobalStyles.space*1.5,
     textAlign: 'center',
     verticalAlign: 'middle',
   },
