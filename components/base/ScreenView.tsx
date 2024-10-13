@@ -1,4 +1,3 @@
-
 import { ReactNode } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Colors } from '@/constants/GlobalStyles';
@@ -24,6 +23,7 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     backgroundColor: Colors.background,
     height: '100%',
+    gap: 20,
   },
 });
 
