@@ -16,7 +16,7 @@ const CollapsibleBlock = () => {
       </TouchableOpacity>
       <Collapsible collapsed={collapsed} align="center">
         <View style={styles.content}>
-        <TextBlock>Bacon ipsum dolor amet chuck turducken landjaeger tongue spare ribs</TextBlock>
+        <TextBlock>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. sit amet, consectetur adipiscing elit </TextBlock>
         </View>
       </Collapsible>
     </View>
