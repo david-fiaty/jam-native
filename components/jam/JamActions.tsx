@@ -13,7 +13,9 @@ const JamActions = () => {
     <View style={styles.container}>        
       <ModalView 
         title="More" 
-        label={<ActionsIcon size={14}/>}
+        label={
+          <ActionsIcon size={14} />
+        }
         content={
           <View style={GlobalStyles.modal.wrapper}>
             <View style={styles.row}>
