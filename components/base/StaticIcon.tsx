@@ -7,28 +7,30 @@ type Props = {
   labelStyle?: object,
 };
 
-const Location = () => <Ionicons name="location" size={50} style={styles.icon} />;
-const Megaphone = () => {};
-const Menu = () => {};
-const Notifications = () => {};
-const Plus = () => {};
-const Save = () => {};
-const Search = () => {};
-const Share = () => {};
-const Twitter = () => {};
-const User = () => {};
-const Users = () => {};
-const Actions = () => {};
-const Copy = () => {};
-const Email = () => {};
-const Facebook = () => {};
-const Instagram = () => {};
-const Layers = () => {};
+const icons = {
+  location: () => <Ionicons name="location" size={50} style={styles.icon} />,
+  megaphone: () => {},
+  menu: () => {},
+  notifications: () => {},
+  plus: () => {},
+  save: () => {},
+  search: () => {},
+  share: () => {},
+  twitter: () => {},
+  user: () => {},
+  users: () => {},
+  actions: () => {},
+  copy: () => {},
+  email: () => {},
+  facebook: () => {},
+  instagram: () => {},
+  layers: () => {},
+};
 
 export function StaticIcon({name, containerStyle, labelStyle}: Props) {
   return (
     <View style={[styles.container, containerStyle]}>
-      <Location />
+      {icons[name]()}
     </View>
   );
 };
