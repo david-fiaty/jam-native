@@ -1,11 +1,11 @@
 import { StyleSheet, View, FlatList } from 'react-native';
-import MenuItem from '@/components/menus/MenuItem';
+import MenuItem from '@/components/base/MenuItem';
 import ModalView from '@/components/base/ModalView';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ApiClient from '@/classes/ApiClient';
 import TextBlock from '../base/TextBlock';
 
-const NotificationsMenu = () => {  
+const NotificationsScreen = () => {  
   const data = ApiClient.get('notifications');
   const count = 22;
 
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NotificationsMenu;
+export default NotificationsScreen;

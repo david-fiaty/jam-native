@@ -1,12 +1,12 @@
 import { StyleSheet, View, FlatList } from 'react-native';
-import MenuItem from '@/components/menus/MenuItem';
+import MenuItem from '@/components/base/MenuItem';
 import ModalView from '@/components/base/ModalView';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-import SettingsMenuItems from '@/constants/SettingsMenuItems';
+import SettingsScreenItems from '@/constants/SettingsScreenItems';
 import TertiaryIcon from '../icons/TertiaryIcon';
 
-const SettingsMenu = () => {
-  const data = SettingsMenuItems;
+const SettingsScreen = () => {
+  const data = SettingsScreenItems;
 
   return (
     <View style={styles.container}>        
@@ -46,4 +46,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SettingsMenu;
+export default SettingsScreen;
