@@ -6,7 +6,7 @@ import JamLogo from '../images/JamLogo';
 import LoginSignupButton from '../buttons/LoginSignupButton';
 import SkipButton from '../buttons/SkipButton';
 import ScreenView from '@/components/base/ScreenView';
-
+import { StaticIcon } from '../base/StaticIcon';
 
 const WelcomeScreen = () => {
   const router = useRouter();
@@ -14,6 +14,7 @@ const WelcomeScreen = () => {
   return (
     <View style={styles.container}>
       <ScreenView>
+      <StaticIcon name="location" iconStyle={{color: 'red'}} />
         <JamLogo width={110} height={110} />    
         <Slideshow />
         <LoginSignupButton />

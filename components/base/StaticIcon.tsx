@@ -1,37 +1,45 @@
-import { ReactNode } from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { GlobalStyles } from '@/constants/GlobalStyles';
-import TextBlock from '@/components/base/TextBlock';
+import { StyleSheet, View, Text } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 type Props = {
-  label?: string,
-  icon?: ReactNode,
+  name?: string,
   containerStyle?: object,
-  labelStyle?: object,
-  onPress?: () => void,
+  iconStyle?: object,
 };
 
-export function StaticIcon({label, icon, containerStyle, labelStyle, onPress}: Props) {
+const icons = {
+  location: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  megaphone: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  menu: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  notifications: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  plus: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  save: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  search: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  share: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  twitter: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  user: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  users: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  actions: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  copy: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  email: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  facebook: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  instagram: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  layers: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+};
+
+export function StaticIcon({name, containerStyle, iconStyle}: Props) {
   return (
-    <TouchableOpacity onPress={onPress}>
-      <View style={[styles.container, containerStyle]}>
-        {icon}<TextBlock style={[styles.label, labelStyle]}>{label}</TextBlock>
-      </View>
-    </TouchableOpacity>
+    <View style={[styles.container, containerStyle]}>
+      {icons[name](iconStyle)}
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    alignItems: 'center',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    justifyContent: 'center',
-    padding: GlobalStyles.space,
-    gap: GlobalStyles.space,
+
   },
-  label: {
-    textAlign: 'center',
+  icon: {
+    
   },
 });
