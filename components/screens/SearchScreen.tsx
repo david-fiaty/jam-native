@@ -8,9 +8,7 @@ const SearchScreen = () => {
       <ModalView 
         title="Search" 
         animation="slide"
-        label={
-          <ClearIcon name="search" />
-        }
+        label={<ClearIcon name="search" />}
         content={
           <Text>SEARCH</Text>
         }
