@@ -20,7 +20,7 @@ const icons = {
   megaphone: ({iconStyle, size}: IconProps) => <Entypo name="megaphone" size={size} style={[styles.icon, iconStyle]} />,
   menu: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
   notifications: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
-  plus: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
+  plus: ({iconStyle, size}: IconProps) => <Ionicons name="add" size={size} style={[styles.icon, iconStyle]} />,
   save: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
   search: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
   share: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
