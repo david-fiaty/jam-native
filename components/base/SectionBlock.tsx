@@ -15,6 +15,7 @@ const SectionBlock = ({style, children}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
+    
   },
 });
 
