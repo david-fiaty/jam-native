@@ -6,7 +6,6 @@ import TopToolbar from '@/components/navigation/TopToolbar';
 const Index = () => {
   return (  
     <SafeAreaView style={styles.container}>
-      <TopToolbar />
       <WelcomeScreen />
     </SafeAreaView>
   );
