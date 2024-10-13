@@ -6,14 +6,12 @@ import { GlobalStyles } from '@/constants/GlobalStyles';
 
 const AddJamScreen = () => {
   return (
-    <View style={styles.container}>     
-      <ModalView 
-        title="Add a new Jam" 
-        animation="slide"
-        label={<ClearIcon name="plus" size={GlobalStyles.tabsbar.icon.size} />}
-        content={<JamForm />}
-      />   
-    </View>
+    <ModalView 
+      title="Add a new Jam" 
+      animation="slide"
+      label={<ClearIcon name="plus" size={GlobalStyles.tabsbar.icon.size} />}
+      content={<JamForm />}
+    />   
   );
 };
 
