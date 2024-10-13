@@ -28,13 +28,10 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   icon: {
-    ...GlobalStyles.icon,
-    ...{
-      backgroundColor: Colors.secondary,
-      padding: GlobalStyles.space/1.5,
-      borderRadius: 40,
-      size: GlobalStyles.tabs.icon.size/1.5,
-    },
+    backgroundColor: Colors.secondary,
+    padding: GlobalStyles.space/1.5,
+    borderRadius: 40,
+    size: GlobalStyles.tabs.icon.size/1.5,
   },
 });
 
