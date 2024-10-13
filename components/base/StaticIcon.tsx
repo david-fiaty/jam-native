@@ -1,5 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import Entypo from '@expo/vector-icons/Entypo';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 type Props = {
   name?: string,
@@ -9,31 +11,31 @@ type Props = {
 };
 
 type IconProps = {
-  itemStyle?: object,
+  iconStyle?: object,
   size?: number, 
 }
 
 const icons = {
-  location: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
-  megaphone: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
-  menu: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
-  notifications: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
-  plus: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
-  save: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
-  search: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
-  share: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
-  twitter: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
-  user: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
-  users: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
-  actions: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
-  copy: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
-  email: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
-  facebook: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
-  instagram: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
-  layers: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
+  location: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
+  megaphone: ({iconStyle, size}: IconProps) => <Entypo name="megaphone" size={size} style={[styles.icon, iconStyle]} />,
+  menu: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
+  notifications: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
+  plus: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
+  save: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
+  search: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
+  share: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
+  twitter: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
+  user: ({iconStyle, size}: IconProps) => <FontAwesome name="user-circle" size={size} style={[styles.icon, iconStyle]} />,
+  users: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
+  actions: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
+  copy: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
+  email: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
+  facebook: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
+  instagram: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
+  layers: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
 };
 
-export function StaticIcon({name, size, containerStyle, iconStyle}: Props) {
+const StaticIcon = ({name, size, containerStyle, iconStyle}: Props) => {
   return (
     <View style={[styles.container, containerStyle]}>
       {icons[name]({iconStyle, size})}
@@ -49,3 +51,5 @@ const styles = StyleSheet.create({
     
   },
 });
+
+export default StaticIcon;
