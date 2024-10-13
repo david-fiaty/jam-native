@@ -17,7 +17,7 @@ type IconProps = {
 
 const icons = {
   location: ({iconStyle, size}: IconProps) => <Ionicons name="location-sharp" size={size} style={[styles.icon, iconStyle]} />,
-  megaphone: ({iconStyle, size}: IconProps) => <Entypo name="megaphone" size={size} style={[styles.icon, iconStyle]} />,
+  megaphone: ({iconStyle, size}: IconProps) => <Ionicons name="megaphone-outline" size={size} style={[styles.icon, iconStyle]} />,
   menu: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
   notifications: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
   plus: ({iconStyle, size}: IconProps) => <Ionicons name="add" size={size} style={[styles.icon, iconStyle]} />,
