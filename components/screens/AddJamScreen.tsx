@@ -9,6 +9,7 @@ const AddJamScreen = () => {
     <View style={styles.container}>     
       <ModalView 
         title="Add a new Jam" 
+        animation="slide"
         label={
           <StaticIcon 
             name="plus" 
@@ -18,7 +19,6 @@ const AddJamScreen = () => {
           />
         }
         content={<JamForm />}
-        animation="slide"
       />   
     </View>
   );
