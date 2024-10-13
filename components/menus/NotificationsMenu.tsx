@@ -1,18 +1,21 @@
-import { StyleSheet, View, FlatList, Text } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import MenuItem from '@/components/menus/MenuItem';
 import ModalView from '@/components/base/ModalView';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ApiClient from '@/classes/ApiClient';
-import NotificationsIcon from '../icons/NotificationsIcon';
+import TextBlock from '../base/TextBlock';
 
 const NotificationsMenu = () => {  
   const data = ApiClient.get('notifications');
+  const count = 22;
 
   return (
     <View style={styles.container}>   
       <ModalView 
         title="Notifications" 
-        label={<NotificationsIcon count={20}/>}
+        label={
+          <TextBlock style={styles.icon}>{count}+</TextBlock>
+        }
         content={
           <FlatList 
             data={data} 

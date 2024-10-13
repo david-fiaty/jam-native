@@ -1,32 +1,23 @@
-import { StyleSheet, View, FlatList } from 'react-native';
-import MenuItem from '@/components/menus/MenuItem';
+import { StyleSheet, View, FlatList, Text } from 'react-native';
 import ModalView from '@/components/base/ModalView';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-import SettingsMenuItems from '@/constants/SettingsMenuItems';
 import StaticIcon from '../base/StaticIcon';
 
-const SettingsMenu = () => {
-  const data = SettingsMenuItems;
-
+const SearchMenu = () => {
   return (
     <View style={styles.container}>        
       <ModalView 
-        title="Settings" 
+        title="Search" 
         label={
           <StaticIcon 
-            name="menu" 
+            name="search" 
             iconStyle={GlobalStyles.tabs.icon} 
             containerStyle={[GlobalStyles.icon.clear, styles.icon]}
             size={styles.icon.size} 
           />
         }
         content={
-          <FlatList 
-            data={data} 
-            horizontal={false}  
-            style={styles.list}
-            renderItem={({item, index}) => <MenuItem item={item} index={index} />} 
-          />
+          <Text>SEARCH</Text>
         }
         animation="slide"
       />   
@@ -51,4 +42,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SettingsMenu;
+export default SearchMenu;
