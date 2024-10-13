@@ -5,8 +5,6 @@ import ProfileImage from '@/components/profile/ProfileImage';
 import ProfileJams from '@/components/profile/ProfileJams';
 import ProfileProjects from '@/components/profile/ProfileProjects';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import StaticIcon from '@/components/base/StaticIcon';
-import { GlobalStyles } from '@/constants/GlobalStyles';
 import ClearIcon from '../icons/ClearIcon';
 
 const ProfileScreen = () => {
@@ -40,10 +38,6 @@ const ProfileScreen = () => {
 
 const styles = StyleSheet.create({
   container: {},
-  wrapper: {
-    width: '100%',
-    flex: 1,
-  },
   scroll: {
     flexGrow: 1,
   },  

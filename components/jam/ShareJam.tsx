@@ -14,7 +14,7 @@ const ShareJam = () => {
           <SecondaryIcon name="share" />
         }
         content={
-          <View style={GlobalStyles.modal.wrapper}>
+          <View>
             <View style={styles.row}>
               <SecondaryIcon name="share" />        
               <TextBlock>Copy link</TextBlock>
