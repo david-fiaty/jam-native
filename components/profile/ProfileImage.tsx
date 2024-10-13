@@ -1,22 +1,15 @@
 import { StyleSheet, View } from 'react-native';
-import { Button } from '@rneui/themed';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import TextBlock from '@/components/base/TextBlock';
+import ClearIcon from '../icons/ClearIcon';
 
 const ProfileImage = () => {
   return (
     <View style={styles.container}>
       <Ionicons name="person-circle" size={86} color={GlobalStyles.icon.color} />
-      <Button 
-        type="outline" 
-        buttonStyle={styles.button} 
-        titleStyle={GlobalStyles.text}
-        onPress={() => console.log('Clicked') } 
-      >
-        <Ionicons name="cloud-upload-outline" size={20} color={GlobalStyles.icon.color} />
-        <TextBlock>Upload an image</TextBlock> 
-      </Button>
+      <TextBlock style={styles.text}>Upload a Jam user profile image</TextBlock>
+      <ClearIcon name="next" size={28}/>
     </View>
   );
 };
@@ -26,13 +19,16 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: GlobalStyles.space,
+    gap: GlobalStyles.space*2,
     marginBottom: GlobalStyles.space*2,
   },
   button: {
     borderRadius: 30,
     overflow: 'hidden',
     gap: GlobalStyles.space,
+  },
+  text: {
+    width: '40%',
   },
 });
 
