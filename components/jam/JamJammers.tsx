@@ -1,8 +1,8 @@
-import { StyleSheet, View, FlatList, Text } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import ModalView from '@/components/base/ModalView';
 import ApiClient from '@/classes/ApiClient';
-import UsersIcon from '../icons/UsersIcon';
+import StaticIcon from '../base/StaticIcon';
 import UserIcon from '../icons/UserIcon';
 import TextBlock from '@/components/base/TextBlock';
 
@@ -20,7 +20,12 @@ const JamJammers = ({item, index}: Props) => {
         title="Jammers" 
         label={
           <View style={styles.label}>
-            <UsersIcon size={14} />
+            <StaticIcon 
+              name="users" 
+              iconStyle={GlobalStyles.tabs.icon} 
+              containerStyle={[GlobalStyles.icon.clear, styles.icon]}
+              size={styles.icon.size} 
+            />
             <TextBlock>{item.host_count} jammers</TextBlock>
           </View>
         }
@@ -71,10 +76,11 @@ const styles = StyleSheet.create({
     ...GlobalStyles.icon,
     ...{
       backgroundColor: Colors.secondary,
-      padding: 6,
+      padding: GlobalStyles.space/1.5,
       borderRadius: 40,
+      size: GlobalStyles.tabs.icon.size/1.5,
     },
-  }
+  },
 });
 
 export default JamJammers;
