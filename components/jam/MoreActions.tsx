@@ -3,19 +3,15 @@ import StaticIcon from '../base/StaticIcon';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ModalView from '@/components/base/ModalView';
 import TextBlock from '@/components/base/TextBlock';
+import ClearIcon from '../icons/ClearIcon';
 
-const JamActions = () => {
+const MoreActions = () => {
   return (
     <View style={styles.container}>        
       <ModalView 
         title="More" 
         label={
-          <StaticIcon 
-            name="actions" 
-            iconStyle={GlobalStyles.tabs.icon} 
-            containerStyle={[GlobalStyles.icon.clear, styles.icon]}
-            size={styles.icon.size} 
-          />          
+          <ClearIcon name="actions" />
         }
         content={
           <View style={GlobalStyles.modal.wrapper}>
@@ -109,4 +105,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default JamActions;
+export default MoreActions;
