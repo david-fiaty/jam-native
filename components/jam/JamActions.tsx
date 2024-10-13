@@ -61,8 +61,8 @@ const JamActions = () => {
               <TextBlock>Report Jam</TextBlock>
             </View>
             <View style={styles.row}>
-              <Entypo 
-                name="cross" 
+              <Ionicons 
+                name="trash-bin-outline" 
                 size={20} style={styles.icon} 
               />
               <TextBlock>Delete Jam</TextBlock>
