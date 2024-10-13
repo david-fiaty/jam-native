@@ -42,6 +42,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.tertiary,
     borderRadius: 16,
     height: 32,
+    minWidth: 32,
+    textAlign: 'center',
     verticalAlign: 'middle',
   },
 });
