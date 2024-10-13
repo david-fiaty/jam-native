@@ -5,7 +5,7 @@ import ProfileImage from '@/components/profile/ProfileImage';
 import ProfileJams from '@/components/profile/ProfileJams';
 import ProfileProjects from '@/components/profile/ProfileProjects';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import StaticIcon from '../base/StaticIcon';
+import StaticIcon from '@/components/base/StaticIcon';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 
 const ProfileScreen = () => {
