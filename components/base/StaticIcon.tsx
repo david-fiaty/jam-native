@@ -34,6 +34,8 @@ const icons = {
   report: ({iconStyle, size}: IconProps) => <Ionicons name="alert-circle-outline" size={size} style={iconStyle} />,
   edit: ({iconStyle, size}: IconProps) => <Ionicons name="create-outline" size={size} style={iconStyle} />,
   view: ({iconStyle, size}: IconProps) => <Ionicons name="albums-outline" size={size} style={iconStyle} />,
+  previous: ({iconStyle, size}: IconProps) => <Ionicons name="chevron-back" size={size} style={iconStyle} />,
+  next: ({iconStyle, size}: IconProps) => <Ionicons name="chevron-forward" size={size} style={iconStyle} />,
 };
 
 const StaticIcon = ({name, size, containerStyle, iconStyle}: Props) => {

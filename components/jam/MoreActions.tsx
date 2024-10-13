@@ -11,9 +11,8 @@ const MoreActions = () => {
       <ModalView 
         title="More" 
         animation="slide"
-        label={
-          <ClearIcon name="actions" />
-        }
+        showBorder={true}
+        label={<ClearIcon name="actions" />}
         content={
           <View>
             <View style={styles.row}>
