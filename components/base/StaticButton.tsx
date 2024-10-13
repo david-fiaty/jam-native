@@ -11,7 +11,7 @@ type Props = {
   onPress?: () => void,
 };
 
-export function StaticButton({label, icon, containerStyle, labelStyle, onPress}: Props) {
+const StaticButton = ({label, icon, containerStyle, labelStyle, onPress}: Props) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={[styles.container, containerStyle]}>
@@ -35,3 +35,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+export default StaticButton;
