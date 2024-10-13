@@ -1,6 +1,5 @@
 import { StyleSheet, View, Text } from 'react-native';
 import ModalView from '@/components/base/ModalView';
-import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ClearIcon from '../icons/ClearIcon';
 
 const SearchMenu = () => {
