@@ -9,7 +9,7 @@ const LoginScreen = () => {
     <View style={styles.container}>
       <ScreenView>
         <JamLogo width={110} height={110} />  
-        <TextBlock>Welcome back</TextBlock>
+        <TextBlock style={styles.text}>Welcome back</TextBlock>
         <LoginForm />
       </ScreenView>
     </View>
@@ -18,6 +18,9 @@ const LoginScreen = () => {
 
 const styles = StyleSheet.create({
   container: {},
+  text: {
+    textTransform: 'uppercase',
+  }
 });
 
 export default LoginScreen;
