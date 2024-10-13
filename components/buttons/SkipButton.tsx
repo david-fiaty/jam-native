@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { StaticButton } from '../base/StaticButton';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 
 type Props = {
   onPress: () => void,
@@ -18,6 +19,8 @@ const SkipButton = ({onPress}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
+    padding: 0,
+    paddingHorizontal: GlobalStyles.space,
   },
   label: {},
 });
