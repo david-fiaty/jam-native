@@ -30,7 +30,6 @@ const NotificationsScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'red',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
