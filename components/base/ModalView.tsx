@@ -68,7 +68,6 @@ const wrapperVisible = {
 const styles = StyleSheet.create({
   container: {
   },
-  text: GlobalStyles.text,
   modal: {
     container: {
       flex: 1,
