@@ -8,13 +8,13 @@ const SearchMenu = () => {
     <View style={styles.container}>        
       <ModalView 
         title="Search" 
+        animation="slide"
         label={
           <ClearIcon name="search" />
         }
         content={
           <Text>SEARCH</Text>
         }
-        animation="slide"
       />   
     </View>
   );
