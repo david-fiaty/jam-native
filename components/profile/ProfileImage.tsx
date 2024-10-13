@@ -24,17 +24,15 @@ const ProfileImage = () => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingBottom: 20,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     gap: GlobalStyles.space,
+    marginBottom: GlobalStyles.space*2,
   },
   button: {
     borderRadius: 30,
     overflow: 'hidden',
-    paddingTop: 5,
-    paddingBottom: 5,
     gap: GlobalStyles.space,
   },
 });
