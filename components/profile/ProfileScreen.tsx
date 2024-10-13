@@ -13,7 +13,14 @@ const ProfileScreen = () => {
     <View style={styles.container}>    
       <ModalView 
         title="Your profile" 
-        label={<StaticIcon name="user" iconStyle={GlobalStyles.tabs.icon} size={GlobalStyles.tabs.icon.size} />}
+        label={
+          <StaticIcon 
+            name="user" 
+            iconStyle={GlobalStyles.tabs.icon} 
+            containerStyle={[GlobalStyles.icon.clear, styles.icon]}
+            size={GlobalStyles.tabs.icon.size} 
+          />
+        }
         content={
           <SafeAreaView style={styles.wrapper}>  
             <ScrollView 
@@ -42,8 +49,7 @@ const ProfileScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-  },
+  container: {},
   wrapper: {
     width: '100%',
     flex: 1,
@@ -51,6 +57,11 @@ const styles = StyleSheet.create({
   scroll: {
     flexGrow: 1,
   },  
+  icon: {
+    borderRadius: 0,
+    padding: 0,
+    borderWidth: 0,
+  },
 });
 
 export default ProfileScreen;
