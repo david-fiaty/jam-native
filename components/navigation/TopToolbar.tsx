@@ -4,12 +4,14 @@ import SettingsMenu from '../menus/SettingsMenu';
 import NotificationsMenu from '../menus/NotificationsMenu';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import SearchMenu from '../menus/SearchMenu';
+import PrimaryIcon from '../icons/PrimaryIcon';
 
 const TopToolbar = () => {
   return (
     <View style={styles.container}>
       <JamLogo width={46} height={46} /> 
       <View style={styles.buttons}> 
+        <PrimaryIcon name="plus" />
         <SettingsMenu />  
         <NotificationsMenu />
         <SearchMenu />

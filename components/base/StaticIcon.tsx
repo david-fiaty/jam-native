@@ -1,10 +1,8 @@
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import Entypo from '@expo/vector-icons/Entypo';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 type Props = {
-  name?: string,
+  name: string,
   size?: number,
   containerStyle?: object,
   iconStyle?: object,
@@ -16,43 +14,34 @@ type IconProps = {
 }
 
 const icons = {
-  location: ({iconStyle, size}: IconProps) => <Ionicons name="location-sharp" size={size} style={[styles.icon, iconStyle]} />,
-  megaphone: ({iconStyle, size}: IconProps) => <Ionicons name="megaphone-outline" size={size} style={[styles.icon, iconStyle]} />,
-  menu: ({iconStyle, size}: IconProps) => <Ionicons name="menu" size={size} style={[styles.icon, iconStyle]} />,
-  plus: ({iconStyle, size}: IconProps) => <Ionicons name="add" size={size} style={[styles.icon, iconStyle]} />,
-  save: ({iconStyle, size}: IconProps) => <Ionicons name="star-outline" size={size} style={[styles.icon, iconStyle]} />,
-  search: ({iconStyle, size}: IconProps) => <Ionicons name="search-sharp" size={size} style={[styles.icon, iconStyle]} />,
-  share: ({iconStyle, size}: IconProps) => <Ionicons name="share-social-outline" size={size} style={[styles.icon, iconStyle]} />,
-  twitter: ({iconStyle, size}: IconProps) => <Ionicons name="logo-twitter" size={size} style={[styles.icon, iconStyle]} />,
-  user: ({iconStyle, size}: IconProps) => <Ionicons name="person-circle" size={size} style={[styles.icon, iconStyle]} />,
-  users: ({iconStyle, size}: IconProps) => <Ionicons name="people-outline" size={size} style={[styles.icon, iconStyle]} />,
-  actions: ({iconStyle, size}: IconProps) => <Ionicons name="ellipsis-horizontal-sharp" size={size} style={[styles.icon, iconStyle]} />,
-  copy: ({iconStyle, size}: IconProps) => <Ionicons name="copy-outline" size={size} style={[styles.icon, iconStyle]} />,
-  email: ({iconStyle, size}: IconProps) => <Ionicons name="mail-outline" size={size} style={[styles.icon, iconStyle]} />,
-  facebook: ({iconStyle, size}: IconProps) => <Ionicons name="logo-facebook" size={size} style={[styles.icon, iconStyle]} />,
-  instagram: ({iconStyle, size}: IconProps) => <Ionicons name="logo-instagram" size={size} style={[styles.icon, iconStyle]} />,
-  layers: ({iconStyle, size}: IconProps) => <Ionicons name="layers-outline" size={size} style={[styles.icon, iconStyle]} />,
-  delete: ({iconStyle, size}: IconProps) => <Ionicons name="close-circle-outline" size={size} style={[styles.icon, iconStyle]} />,
-  report: ({iconStyle, size}: IconProps) => <Ionicons name="alert-circle-outline" size={size} style={[styles.icon, iconStyle]} />,
-  edit: ({iconStyle, size}: IconProps) => <Ionicons name="create-outline" size={size} style={[styles.icon, iconStyle]} />,
-  view: ({iconStyle, size}: IconProps) => <Ionicons name="albums-outline" size={size} style={[styles.icon, iconStyle]} />,
+  location: ({iconStyle, size}: IconProps) => <Ionicons name="location-sharp" size={size} style={iconStyle} />,
+  megaphone: ({iconStyle, size}: IconProps) => <Ionicons name="megaphone-outline" size={size} style={iconStyle} />,
+  menu: ({iconStyle, size}: IconProps) => <Ionicons name="menu" size={size} style={iconStyle} />,
+  plus: ({iconStyle, size}: IconProps) => <Ionicons name="add" size={size} style={iconStyle} />,
+  save: ({iconStyle, size}: IconProps) => <Ionicons name="star-outline" size={size} style={iconStyle} />,
+  search: ({iconStyle, size}: IconProps) => <Ionicons name="search-sharp" size={size} style={iconStyle} />,
+  share: ({iconStyle, size}: IconProps) => <Ionicons name="share-social-outline" size={size} style={iconStyle} />,
+  twitter: ({iconStyle, size}: IconProps) => <Ionicons name="logo-twitter" size={size} style={iconStyle} />,
+  user: ({iconStyle, size}: IconProps) => <Ionicons name="person-circle" size={size} style={iconStyle} />,
+  users: ({iconStyle, size}: IconProps) => <Ionicons name="people-outline" size={size} style={iconStyle} />,
+  actions: ({iconStyle, size}: IconProps) => <Ionicons name="ellipsis-horizontal-sharp" size={size} style={iconStyle} />,
+  copy: ({iconStyle, size}: IconProps) => <Ionicons name="copy-outline" size={size} style={iconStyle} />,
+  email: ({iconStyle, size}: IconProps) => <Ionicons name="mail-outline" size={size} style={iconStyle} />,
+  facebook: ({iconStyle, size}: IconProps) => <Ionicons name="logo-facebook" size={size} style={iconStyle} />,
+  instagram: ({iconStyle, size}: IconProps) => <Ionicons name="logo-instagram" size={size} style={iconStyle} />,
+  layers: ({iconStyle, size}: IconProps) => <Ionicons name="layers-outline" size={size} style={iconStyle} />,
+  delete: ({iconStyle, size}: IconProps) => <Ionicons name="close-circle-outline" size={size} style={iconStyle} />,
+  report: ({iconStyle, size}: IconProps) => <Ionicons name="alert-circle-outline" size={size} style={iconStyle} />,
+  edit: ({iconStyle, size}: IconProps) => <Ionicons name="create-outline" size={size} style={iconStyle} />,
+  view: ({iconStyle, size}: IconProps) => <Ionicons name="albums-outline" size={size} style={iconStyle} />,
 };
 
 const StaticIcon = ({name, size, containerStyle, iconStyle}: Props) => {
   return (
-    <View style={[styles.container, containerStyle]}>
+    <View style={containerStyle}>
       {icons[name]({iconStyle, size})}
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-
-  },
-  icon: {
-    
-  },
-});
 
 export default StaticIcon;
