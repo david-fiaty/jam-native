@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+import { Colors } from '@/constants/GlobalStyles';
 import StaticIcon from '../base/StaticIcon';
 
 type Props = {

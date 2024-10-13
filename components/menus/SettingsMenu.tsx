@@ -3,7 +3,7 @@ import MenuItem from '@/components/menus/MenuItem';
 import ModalView from '@/components/base/ModalView';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import SettingsMenuItems from '@/constants/SettingsMenuItems';
-import StaticIcon from '../base/StaticIcon';
+import TertiaryIcon from '../icons/TertiaryIcon';
 
 const SettingsMenu = () => {
   const data = SettingsMenuItems;
@@ -12,13 +12,9 @@ const SettingsMenu = () => {
     <View style={styles.container}>        
       <ModalView 
         title="Settings" 
+        animation="slide"
         label={
-          <StaticIcon 
-            name="menu" 
-            iconStyle={GlobalStyles.tabs.icon} 
-            containerStyle={[GlobalStyles.icon.clear, styles.icon]}
-            size={styles.icon.size} 
-          />
+          <TertiaryIcon name="menu" />
         }
         content={
           <FlatList 
@@ -28,7 +24,6 @@ const SettingsMenu = () => {
             renderItem={({item, index}) => <MenuItem item={item} index={index} />} 
           />
         }
-        animation="slide"
       />   
     </View>
   );
