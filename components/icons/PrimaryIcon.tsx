@@ -22,17 +22,17 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    width: GlobalStyles.tabs.icon.size,
-    height: GlobalStyles.tabs.icon.size,
+    justifyContent: 'center',
+    width: 32,
+    height: 32,
+    borderRadius: 16,
     backgroundColor: Colors.primary,
     borderColor: Colors.primary,
-    borderRadius: GlobalStyles.tabs.icon.size/2,
-    borderWidth: 1,
-    padding: 6,
+
   },
   icon: {
     color: '#FFFFFF',
-    //size: GlobalStyles.tabs.icon.size,
+    size: 18,
   },
 });
 
