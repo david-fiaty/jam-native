@@ -38,7 +38,14 @@ const MapScreen = () => {
     <View style={styles.container}>       
       <ModalView 
         title="Jams map" 
-        label={<StaticIcon name="location" iconStyle={GlobalStyles.tabs.icon} size={GlobalStyles.tabs.icon.size} />}
+        label={
+          <StaticIcon 
+            name="location" 
+            iconStyle={GlobalStyles.tabs.icon} 
+            containerStyle={[GlobalStyles.icon.clear, styles.icon]}
+            size={GlobalStyles.tabs.icon.size} 
+          />
+        }
         content={
           <TouchableWithoutFeedback>
             <View style={styles.wrapper}>
@@ -89,6 +96,11 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1,
+  },
+  icon: {
+    borderRadius: 0,
+    padding: 0,
+    borderWidth: 0,
   },
 });
 
