@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-import { Colors } from '@/constants/GlobalStyles';
+import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
 type Props = {
   data: [],
@@ -33,8 +33,9 @@ const styles = StyleSheet.create({
   pager: {
     height: 8,
     width: 8,
-    marginHorizontal: 4,
     borderRadius: 8,
+    marginHorizontal: 4,
+    marginVertical: GlobalStyles.space,
   },
 });
 
