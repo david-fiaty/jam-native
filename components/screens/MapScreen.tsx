@@ -88,8 +88,7 @@ const MapScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-  },
+  container: {},
   wrapper: {
     width: '100%',
     height: 550,
