@@ -9,11 +9,13 @@ type Props = {
   content: JSX.Element,
   animation?: string,
   backButton?: boolean,
+  showBorder?: boolean,
 };
 
-const ModalView = ({label, title, content, animation, backButton}: Props) => {
+const ModalView = ({label, title, content, animation, backButton, showBorder}: Props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const animationType = animation ? animation : 'slide';
+  const wrapperStyle = showBorder === true ? wrapperVisible : wrapperHidden;
 
   return (
     <View style={styles.container}>        
@@ -34,7 +36,7 @@ const ModalView = ({label, title, content, animation, backButton}: Props) => {
                 >
                   <BackButton title={title} />
                 </Pressable>
-                <View style={styles.modal.wrapper}>
+                <View style={wrapperStyle}>
                   {content}
                 </View>
               </View>
@@ -49,6 +51,24 @@ const ModalView = ({label, title, content, animation, backButton}: Props) => {
   );
 };
 
+const wrapperVisible = {
+  gap: GlobalStyles.space,
+  padding: GlobalStyles.space,
+  borderWidth: 1,
+  borderColor: Colors.primary,
+  borderRadius: GlobalStyles.space,
+  width: '100%',
+};
+
+const wrapperHidden = {
+  gap: GlobalStyles.space,
+  padding: GlobalStyles.space,
+  borderWidth: 1,
+  borderColor: Colors.primary,
+  borderRadius: GlobalStyles.space,
+  width: '100%',
+};
+
 const styles = StyleSheet.create({
   container: {
   },
@@ -61,14 +81,6 @@ const styles = StyleSheet.create({
       marginTop: StatusBar.currentHeight + GlobalStyles.toolbar.height,
       backgroundColor: 'black',
       height: '100%',
-    },
-    wrapper: {
-      gap: GlobalStyles.space,
-      padding: GlobalStyles.space,
-      borderWidth: 1,
-      borderColor: Colors.primary,
-      borderRadius: GlobalStyles.space,
-      width: '100%',
     },
     view: {
       backgroundColor: 'white',
