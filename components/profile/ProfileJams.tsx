@@ -8,7 +8,7 @@ const ProfileJams = () => {
 
   return (
     <View style={styles.container}>
-      <TextBlock>Saved Jams</TextBlock> 
+      <TextBlock style={styles.title}>Saved Jams</TextBlock> 
       <View style={styles.list}>
         <FlatList 
           data={data} 
