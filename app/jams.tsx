@@ -1,16 +1,17 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import TopToolbar from '@/components/navigation/TopToolbar';
 import BottomTabs from '@/components/navigation/BottomTabs';
 import JamsScreen from '@/components/screens/JamsScreen';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Jams = () => {
   return (  
     <>
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         { /*<TopToolbar />*/ }
         <JamsScreen />
-      </View>
+      </SafeAreaView>
       <BottomTabs />
     </>
   );

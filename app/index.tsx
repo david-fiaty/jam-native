@@ -1,11 +1,12 @@
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import WelcomeScreen from '@/components/screens/WelcomeScreen';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Index = () => {
   return (  
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <WelcomeScreen />
-    </View>
+    </SafeAreaView>
   );
 };
 
