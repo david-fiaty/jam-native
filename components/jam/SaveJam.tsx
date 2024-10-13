@@ -1,9 +1,9 @@
-import { StyleSheet, View, Text} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ModalView from '@/components/base/ModalView';
-import SaveIcon from '../icons/SaveIcon';
 import ShareIcon from '../icons/ShareIcon';
 import LayersIcon from '../icons/LayersIcon';
+import StaticIcon from '../base/StaticIcon';
 import TextBlock from '@/components/base/TextBlock';
 
 const SaveJam = () => {
@@ -11,7 +11,14 @@ const SaveJam = () => {
     <View style={styles.container}>        
       <ModalView 
         title="Jam is now saved to your Jams" 
-        label={<SaveIcon size={14} />}
+        label={
+          <StaticIcon 
+            name="save" 
+            iconStyle={GlobalStyles.tabs.icon} 
+            containerStyle={[GlobalStyles.icon.clear, styles.icon]}
+            size={styles.icon.size} 
+          />
+        }
         content={
           <View style={GlobalStyles.modal.wrapper}>
             <View style={styles.row}>
@@ -43,10 +50,11 @@ const styles = StyleSheet.create({
     ...GlobalStyles.icon,
     ...{
       backgroundColor: Colors.secondary,
-      padding: 6,
+      padding: GlobalStyles.space/1.5,
       borderRadius: 40,
+      size: GlobalStyles.tabs.icon.size/1.5,
     },
-  }
+  },
 });
 
 export default SaveJam;
