@@ -1,5 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import Entypo from '@expo/vector-icons/Entypo';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 type Props = {
   name?: string,
@@ -15,7 +17,7 @@ type IconProps = {
 
 const icons = {
   location: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
-  megaphone: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
+  megaphone: ({itemStyle, size}: IconProps) => <Entypo name="megaphone" size={size} style={[styles.icon, itemStyle]} />,
   menu: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
   notifications: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
   plus: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
@@ -23,7 +25,7 @@ const icons = {
   search: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
   share: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
   twitter: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
-  user: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
+  user: ({itemStyle, size}: IconProps) => <FontAwesome name="user-circle" size={size} style={[styles.icon, itemStyle]} />,
   users: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
   actions: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
   copy: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
