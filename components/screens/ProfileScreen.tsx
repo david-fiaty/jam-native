@@ -7,6 +7,7 @@ import ProfileProjects from '@/components/profile/ProfileProjects';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import StaticIcon from '@/components/base/StaticIcon';
 import { GlobalStyles } from '@/constants/GlobalStyles';
+import ClearIcon from '../icons/ClearIcon';
 
 const ProfileScreen = () => {
   return (
@@ -15,12 +16,7 @@ const ProfileScreen = () => {
         title="Your profile" 
         animation="slide"
         label={
-          <StaticIcon 
-            name="user" 
-            iconStyle={GlobalStyles.tabs.icon} 
-            containerStyle={[GlobalStyles.icon.clear, styles.icon]}
-            size={GlobalStyles.tabs.icon.size} 
-          />
+          <ClearIcon name="user" />
         }
         content={
           <SafeAreaView style={styles.wrapper}>  
@@ -51,11 +47,6 @@ const styles = StyleSheet.create({
   scroll: {
     flexGrow: 1,
   },  
-  icon: {
-    borderRadius: 0,
-    padding: 0,
-    borderWidth: 0,
-  },
 });
 
 export default ProfileScreen;

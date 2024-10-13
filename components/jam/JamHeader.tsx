@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-import JamActions from '@/components/jam/JamActions';
+import MoreActions from '@/components/jam/MoreActions';
 import JamHosts from '@/components/jam/JamHosts';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 
@@ -15,7 +15,7 @@ const JamHeader = ({item, index}: Props) => {
         <JamHosts item={item} index={index} />
       </View>
       <View style={styles.right}>
-        <JamActions />
+        <MoreActions />
       </View>
     </View>
   );

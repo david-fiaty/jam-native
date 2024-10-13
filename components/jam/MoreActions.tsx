@@ -2,38 +2,47 @@ import { StyleSheet, View } from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import ModalView from '@/components/base/ModalView';
 import TextBlock from '@/components/base/TextBlock';
+import ClearIcon from '../icons/ClearIcon';
 import SecondaryIcon from '../icons/SecondaryIcon';
 
-const ShareJam = () => {
+const MoreActions = () => {
   return (
     <View style={styles.container}>        
       <ModalView 
-        title="Share Jam" 
+        title="More" 
         animation="slide"
         label={
-          <SecondaryIcon name="share" />
+          <ClearIcon name="actions" />
         }
         content={
           <View style={GlobalStyles.modal.wrapper}>
             <View style={styles.row}>
-              <SecondaryIcon name="share" />        
-              <TextBlock>Copy link</TextBlock>
+              <SecondaryIcon name="save" />
+              <TextBlock>Save Jam</TextBlock>
             </View>
             <View style={styles.row}>
-              <SecondaryIcon name="email" />
-              <TextBlock>Send email</TextBlock>
+              <SecondaryIcon name="share" />
+              <TextBlock>Share Jam</TextBlock>
             </View>
             <View style={styles.row}>
-              <SecondaryIcon name="instagram" />
-              <TextBlock>Instagram</TextBlock>
+              <SecondaryIcon name="plus" />          
+              <TextBlock>Add to project</TextBlock>
             </View>
             <View style={styles.row}>
-              <SecondaryIcon name="facebook" />
-              <TextBlock>Facebook</TextBlock>
+              <SecondaryIcon name="view" />
+              <TextBlock>View project</TextBlock>
             </View>
             <View style={styles.row}>
-              <SecondaryIcon name="twitter" />
-              <TextBlock>Twitter</TextBlock>
+              <SecondaryIcon name="edit" />
+              <TextBlock>Edit jam</TextBlock>
+            </View>
+            <View style={styles.row}>
+              <SecondaryIcon name="report" />
+              <TextBlock>Report Jam</TextBlock>
+            </View>
+            <View style={styles.row}>
+              <SecondaryIcon name="delete" />
+              <TextBlock>Delete Jam</TextBlock>
             </View>
           </View>
         }
@@ -53,4 +62,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ShareJam;
+export default MoreActions;

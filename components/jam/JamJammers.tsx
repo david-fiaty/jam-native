@@ -1,9 +1,9 @@
 import { StyleSheet, View, FlatList } from 'react-native';
-import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 import ModalView from '@/components/base/ModalView';
 import ApiClient from '@/classes/ApiClient';
-import StaticIcon from '../base/StaticIcon';
 import TextBlock from '@/components/base/TextBlock';
+import SecondaryIcon from '../icons/SecondaryIcon';
 
 type Props = {
   item: object,
@@ -19,12 +19,7 @@ const JamJammers = ({item, index}: Props) => {
         title="Jammers" 
         label={
           <View style={styles.label}>
-            <StaticIcon 
-              name="users" 
-              iconStyle={GlobalStyles.tabs.icon} 
-              containerStyle={[GlobalStyles.icon.clear, styles.icon]}
-              size={styles.icon.size} 
-            />
+            <SecondaryIcon name="users" />
             <TextBlock>{item.host_count} jammers</TextBlock>
           </View>
         }
@@ -37,12 +32,7 @@ const JamJammers = ({item, index}: Props) => {
               renderItem={({item, index}) => {
                 return (
                   <View style={styles.row}>
-                    <StaticIcon 
-                      name="user" 
-                      iconStyle={GlobalStyles.tabs.icon} 
-                      containerStyle={[GlobalStyles.icon.clear, styles.icon]}
-                      size={styles.icon.size} 
-                    />          
+                    <SecondaryIcon name="user" />
                     <TextBlock>{item.name}</TextBlock>
                   </View>
                 );
@@ -75,15 +65,6 @@ const styles = StyleSheet.create({
     paddingTop: 4,
     paddingBottom: 8,
     gap: GlobalStyles.space,
-  },
-  icon: {
-    ...GlobalStyles.icon,
-    ...{
-      backgroundColor: Colors.secondary,
-      padding: GlobalStyles.space/1.5,
-      borderRadius: 40,
-      size: GlobalStyles.tabs.icon.size/1.5,
-    },
   },
 });
 

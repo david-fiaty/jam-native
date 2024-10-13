@@ -6,7 +6,7 @@ type Props = {
   name: string,
 };
 
-const PrimaryIcon = ({name}: Props) => {
+const ClearIcon = ({name}: Props) => {
   return (
     <StaticIcon 
       name={name} 
@@ -26,13 +26,13 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: Colors.primary,
-    borderColor: Colors.primary,
+    backgroundColor: '#FFFFFF',
+    borderColor: '#FFFFFF',
   },
   icon: {
-    color: '#FFFFFF',
+    color: Colors.primary,
     size: 18,
   },
 });
 
-export default PrimaryIcon;
+export default ClearIcon;

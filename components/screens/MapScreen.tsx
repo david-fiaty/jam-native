@@ -5,8 +5,7 @@ import * as Device from 'expo-device';
 import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
 import ModalView from '@/components/base/ModalView';
-import StaticIcon from '../base/StaticIcon';
-import { GlobalStyles } from '@/constants/GlobalStyles';
+import ClearIcon from '../icons/ClearIcon';
 
 const MapScreen = () => {
   const [location, setLocation] = useState('');
@@ -40,12 +39,7 @@ const MapScreen = () => {
         title="Jams map" 
         animation="slide"
         label={
-          <StaticIcon 
-            name="location" 
-            iconStyle={GlobalStyles.tabs.icon} 
-            containerStyle={[GlobalStyles.icon.clear, styles.icon]}
-            size={GlobalStyles.tabs.icon.size} 
-          />
+          <ClearIcon name="location" />
         }
         content={
           <TouchableWithoutFeedback>
@@ -95,11 +89,6 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1,
-  },
-  icon: {
-    borderRadius: 0,
-    padding: 0,
-    borderWidth: 0,
   },
 });
 
