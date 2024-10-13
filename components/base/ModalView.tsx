@@ -30,12 +30,9 @@ const ModalView = ({label, title, content, animation, backButton, showBorder}: P
           <View style={styles.modal.container}>
             <TouchableWithoutFeedback>
               <View style={styles.modal.view}>
-                <Pressable 
-                  onPress={() => setModalVisible(!modalVisible)} 
-                  style={backButton === false ? { display: 'none'} : {}}
-                >
-                  <BackButton title={title} />
-                </Pressable>
+              
+                  <BackButton title={title} onPress={() => setModalVisible(!modalVisible)}  />
+              
                 <View style={wrapperStyle}>
                   {content}
                 </View>
