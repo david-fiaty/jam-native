@@ -3,7 +3,7 @@ import JamLogo from '@/components/images/JamLogo';
 import SettingsScreen from '../screens/SettingsScreen';
 import NotificationsMenu from '../menus/NotificationsMenu';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
-import SearchMenu from '../menus/SearchMenu';
+import SearchScreen from '../menus/SearchScreen';
 
 const TopToolbar = () => {
   return (
@@ -12,7 +12,7 @@ const TopToolbar = () => {
       <View style={styles.buttons}> 
         <SettingsScreen />  
         <NotificationsMenu />
-        <SearchMenu />
+        <SearchScreen />
       </View>
     </View>
   );
