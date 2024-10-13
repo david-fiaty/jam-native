@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text } from 'react-native';
 import ModalView from '@/components/base/ModalView';
 import ClearIcon from '../icons/ClearIcon';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 
 const SearchScreen = () => {
   return (
@@ -8,7 +9,7 @@ const SearchScreen = () => {
       <ModalView 
         title="Search" 
         animation="slide"
-        label={<ClearIcon name="search" />}
+        label={<ClearIcon name="search" size={styles.icon.size} />}
         content={
           <Text>SEARCH</Text>
         }
@@ -22,6 +23,9 @@ const styles = StyleSheet.create({
   },
   list: {
     width: '100%',
+  },
+  icon: {
+    size: GlobalStyles.space*2,
   },
 });
 
