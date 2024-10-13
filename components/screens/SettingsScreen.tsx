@@ -13,9 +13,8 @@ const SettingsScreen = () => {
       <ModalView 
         title="Settings" 
         animation="slide"
-        label={
-          <TertiaryIcon name="menu" />
-        }
+        showBorder={true}
+        label={<TertiaryIcon name="menu" />}
         content={
           <FlatList 
             data={data} 
