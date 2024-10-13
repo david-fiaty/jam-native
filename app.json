@@ -22,7 +22,11 @@
       },
       "runtimeVersion": {
         "policy": "appVersion"
-      }
+      },
+      "permissions": [
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -49,6 +53,9 @@
     "owner": "david-fiaty-org",
     "updates": {
       "url": "https://u.expo.dev/bc105b9c-d776-42e2-bd2e-2ebcff179748"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
     }
   }
 }
