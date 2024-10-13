@@ -2,7 +2,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import ModalView from '@/components/base/ModalView';
 import ClearIcon from '../icons/ClearIcon';
 
-const SearchMenu = () => {
+const SearchScreen = () => {
   return (
     <View style={styles.container}>        
       <ModalView 
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SearchMenu;
+export default SearchScreen;
