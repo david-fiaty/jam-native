@@ -22,11 +22,21 @@ const SaveJam = () => {
         content={
           <View style={GlobalStyles.modal.wrapper}>
             <View style={styles.row}>
-              <ShareIcon size={22} />
+              <StaticIcon 
+                name="share" 
+                iconStyle={GlobalStyles.tabs.icon} 
+                containerStyle={[GlobalStyles.icon.clear, styles.icon]}
+                size={styles.icon.size} 
+              />          
               <TextBlock>Share</TextBlock>
             </View>
             <View style={styles.row}>
-            <LayersIcon size={22} />
+              <StaticIcon 
+                name="layers" 
+                iconStyle={GlobalStyles.tabs.icon} 
+                containerStyle={[GlobalStyles.icon.clear, styles.icon]}
+                size={styles.icon.size} 
+              />          
             <TextBlock>View my Jams</TextBlock>
             </View>
           </View>

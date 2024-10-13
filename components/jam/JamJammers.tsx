@@ -3,7 +3,6 @@ import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import ModalView from '@/components/base/ModalView';
 import ApiClient from '@/classes/ApiClient';
 import StaticIcon from '../base/StaticIcon';
-import UserIcon from '../icons/UserIcon';
 import TextBlock from '@/components/base/TextBlock';
 
 type Props = {
@@ -38,7 +37,12 @@ const JamJammers = ({item, index}: Props) => {
               renderItem={({item, index}) => {
                 return (
                   <View style={styles.row}>
-                    <UserIcon size={22} />
+                    <StaticIcon 
+                      name="user" 
+                      iconStyle={GlobalStyles.tabs.icon} 
+                      containerStyle={[GlobalStyles.icon.clear, styles.icon]}
+                      size={styles.icon.size} 
+                    />          
                     <TextBlock>{item.name}</TextBlock>
                   </View>
                 );

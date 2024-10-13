@@ -2,11 +2,6 @@ import { StyleSheet, View } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ModalView from '@/components/base/ModalView';
 import StaticIcon from '../base/StaticIcon';
-import CopyIcon from '../icons/CopyIcon';
-import EmailIcon from '../icons/EmailIcon';
-import InstagramIcon from '../icons/InstagramIcon';
-import FacebookIcon from '../icons/FacebookIcon';
-import TwitterIcon from '../icons/TwitterIcon';
 import TextBlock from '@/components/base/TextBlock';
 
 const ShareJam = () => {
