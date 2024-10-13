@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { StaticButton } from '../base/StaticButton';
-import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
+import { Colors } from '@/constants/GlobalStyles';
 
 const LoginSignupButton = () => {
   const router = useRouter();
@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
     borderWidth: 1, 
     borderColor: Colors.primary,
     borderRadius: 30,
-    marginTop: GlobalStyles.space*2,
   },
   label: {
     textTransform: 'uppercase'

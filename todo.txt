@@ -27,11 +27,12 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 
 - Is inserting jam item actions windows ont top of list a good idea? Got to scrool up if at bottom of list
 - About/legal links => shouldn't there be only one bottom link on each page : disable account click
-- Why is form changing on second bottom account tab click
+- Why is form changing on second cabottom account tab click
 
 # Todo
+- Replace all icons by <StaticIon> with merged global icon styles and remove /components/icons folder
 - Flat lists items in jam form, profile should have dynamic width/height depending on screen size
-
+- Make <JamLogo> size optional 
 
 Email verification
 Twilio => SMS
