@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import CollapsibleBlock from '@/components/base/CollapsibleBlock';
 import TextBlock from '@/components/base/TextBlock';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 
 type Props = {
   item: object,
@@ -18,10 +19,7 @@ const JamContent = ({item, index}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 8,
-    paddingRight: 14,
-    paddingBottom: 8,
-    paddingLeft: 14,
+    paddingHorizontal: GlobalStyles.space*1.5,
   },
 });
 

@@ -13,7 +13,6 @@ const SettingsScreen = () => {
       <ModalView 
         title="Settings" 
         animation="slide"
-        showBorder={true}
         label={<TertiaryIcon name="menu" />}
         content={
           <FlatList 
@@ -33,15 +32,6 @@ const styles = StyleSheet.create({
   },
   list: {
     width: '100%',
-  },
-  icon: {
-    ...GlobalStyles.icon,
-    ...{
-      backgroundColor: Colors.secondary,
-      padding: GlobalStyles.space/1.5,
-      borderRadius: 40,
-      size: GlobalStyles.tabs.icon.size/1.5,
-    },
   },
 });
 

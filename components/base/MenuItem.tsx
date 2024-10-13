@@ -1,5 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import TextBlock from '@/components/base/TextBlock';
+import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
 type Props = {
   index: number,
@@ -16,6 +17,13 @@ const MenuItem = ({item, index}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.primary,
+    gap: GlobalStyles.space,
+    padding: GlobalStyles.space,
   },
 });
 

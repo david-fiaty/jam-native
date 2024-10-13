@@ -4,15 +4,18 @@ import StaticIcon from '../base/StaticIcon';
 
 type Props = {
   name: string,
+  size?: number, 
 };
 
-const TertiaryIcon = ({name}: Props) => {
+const TertiaryIcon = ({name, size}: Props) => {
+  const iconSize = size ? size : styles.icon.size;
+
   return (
     <StaticIcon 
       name={name} 
       iconStyle={styles.icon} 
       containerStyle={styles.container}
-      size={styles.icon.size} 
+      size={iconSize} 
     />
   );
 };
