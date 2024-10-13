@@ -1,6 +1,6 @@
 import { View, StyleSheet } from 'react-native';
 import JamLogo from '@/components/images/JamLogo';
-import SettingsMenu from '../menus/SettingsMenu';
+import SettingsScreen from '../screens/SettingsScreen';
 import NotificationsMenu from '../menus/NotificationsMenu';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import SearchMenu from '../menus/SearchMenu';
@@ -10,7 +10,7 @@ const TopToolbar = () => {
     <View style={styles.container}>
       <JamLogo width={46} height={46} /> 
       <View style={styles.buttons}> 
-        <SettingsMenu />  
+        <SettingsScreen />  
         <NotificationsMenu />
         <SearchMenu />
       </View>

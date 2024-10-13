@@ -1,4 +1,4 @@
-const SettingsMenuItems = [
+const SettingsScreenItems = [
   {
     'label': 'Account information',
     'path': '/jams',
@@ -17,4 +17,4 @@ const SettingsMenuItems = [
   },
 ];
 
-export default SettingsMenuItems;
+export default SettingsScreenItems;
