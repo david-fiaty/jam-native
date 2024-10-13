@@ -17,6 +17,8 @@ const JamHosts = ({item, index}: Props) => {
     <View style={styles.container}>   
       <ModalView 
         title="Hosts" 
+        animation="slide"
+        showBorder={true}
         label={
           <View style={styles.label}>
             <TextBlock>@host +{item.host_count}</TextBlock>
@@ -37,7 +39,6 @@ const JamHosts = ({item, index}: Props) => {
             }} 
           />
         }
-        animation="slide"
       />       
     </View>
   );

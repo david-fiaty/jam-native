@@ -10,9 +10,8 @@ const ShareJam = () => {
       <ModalView 
         title="Share Jam" 
         animation="slide"
-        label={
-          <SecondaryIcon name="share" />
-        }
+        showBorder={true}
+        label={<SecondaryIcon name="share" />}
         content={
           <View>
             <View style={styles.row}>
