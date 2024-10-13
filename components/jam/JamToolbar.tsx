@@ -29,10 +29,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: 12,
-    paddingRight: 14,
-    paddingBottom: 8,
-    paddingLeft: 14,
+    paddingVertical: GlobalStyles.space*1.5,
+    paddingHorizontal: GlobalStyles.space*1.5,
   },
   left: {
     display: 'flex',
