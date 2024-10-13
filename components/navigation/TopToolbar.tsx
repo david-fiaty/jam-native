@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: 'red',
     //marginBottom: 20,
-    //height: GlobalStyles.statusbar.height,
+    height: GlobalStyles.toolbar.height,
   },
   buttons: {
     display: 'flex',
