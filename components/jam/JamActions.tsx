@@ -1,10 +1,7 @@
 import { StyleSheet, View } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import StaticIcon from '../base/StaticIcon';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ModalView from '@/components/base/ModalView';
-import ActionsIcon from '../icons/ActionsIcon';
 import TextBlock from '@/components/base/TextBlock';
 
 const JamActions = () => {

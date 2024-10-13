@@ -1,11 +1,12 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import LegalScreen from '@/components/screens/LegalScreen';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Legal = () => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <LegalScreen />
-    </View>
+    </SafeAreaView>
   );
 };
 

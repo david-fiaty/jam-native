@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList, Text } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import ModalView from '@/components/base/ModalView';
 import ApiClient from '@/classes/ApiClient';

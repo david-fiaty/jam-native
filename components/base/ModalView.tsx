@@ -56,7 +56,6 @@ const styles = StyleSheet.create({
       flex: 1,
       flexDirection: 'column',
       alignItems: 'center',
-      marginTop: StatusBar.currentHeight + GlobalStyles.statusbar.height,
       height: '100%',
     },
     view: {
