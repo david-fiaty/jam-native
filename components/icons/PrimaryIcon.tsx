@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     backgroundColor: Colors.primary,
     borderColor: Colors.primary,
-
   },
   icon: {
     color: '#FFFFFF',
