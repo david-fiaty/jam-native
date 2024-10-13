@@ -51,22 +51,18 @@ const ModalView = ({label, title, content, animation, backButton, showBorder}: P
   );
 };
 
-const wrapperVisible = {
-  gap: GlobalStyles.space,
-  padding: GlobalStyles.space,
-  borderWidth: 1,
-  borderColor: Colors.primary,
-  borderRadius: GlobalStyles.space,
+const wrapperHidden = {
   width: '100%',
+  gap: GlobalStyles.space,
 };
 
-const wrapperHidden = {
+const wrapperVisible = {
+  width: '100%',
   gap: GlobalStyles.space,
   padding: GlobalStyles.space,
   borderWidth: 1,
   borderColor: Colors.primary,
   borderRadius: GlobalStyles.space,
-  width: '100%',
 };
 
 const styles = StyleSheet.create({
