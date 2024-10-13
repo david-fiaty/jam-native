@@ -14,23 +14,23 @@ const ShareJam = () => {
         label={<SecondaryIcon name="share" />}
         content={
           <View>
-            <View style={styles.row}>
+            <View style={styles.item}>
               <SecondaryIcon name="share" />        
               <TextBlock>Copy link</TextBlock>
             </View>
-            <View style={styles.row}>
+            <View style={styles.item}>
               <SecondaryIcon name="email" />
               <TextBlock>Send email</TextBlock>
             </View>
-            <View style={styles.row}>
+            <View style={styles.item}>
               <SecondaryIcon name="instagram" />
               <TextBlock>Instagram</TextBlock>
             </View>
-            <View style={styles.row}>
+            <View style={styles.item}>
               <SecondaryIcon name="facebook" />
               <TextBlock>Facebook</TextBlock>
             </View>
-            <View style={styles.row}>
+            <View style={styles.item}>
               <SecondaryIcon name="twitter" />
               <TextBlock>Twitter</TextBlock>
             </View>
@@ -44,11 +44,12 @@ const ShareJam = () => {
 const styles = StyleSheet.create({
   container: {
   },
-  row: {
+  item: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     gap: GlobalStyles.space,
+    padding: GlobalStyles.space,
   },
 });
 
