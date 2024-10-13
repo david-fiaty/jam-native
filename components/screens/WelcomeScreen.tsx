@@ -15,6 +15,7 @@ const WelcomeScreen = () => {
     <View style={styles.container}>
       <ScreenView>
         <StaticIcon name="location" size={80} iconStyle={{color: 'red'}} />
+        <StaticIcon name="user" size={80} iconStyle={{color: 'red'}} />
         <JamLogo width={110} height={110} />    
         <Slideshow />
         <LoginSignupButton />
