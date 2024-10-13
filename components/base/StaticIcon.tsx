@@ -34,9 +34,10 @@ const icons = {
 };
 
 export function StaticIcon({name, size, containerStyle, iconStyle}: Props) {
+  console.log(size);
   return (
     <View style={[styles.container, containerStyle]}>
-      {icons[name](iconStyle, size)}
+      {icons[name]({iconStyle, size})}
     </View>
   );
 };
