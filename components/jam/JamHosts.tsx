@@ -31,7 +31,7 @@ const JamHosts = ({item, index}: Props) => {
             style={styles.list}
             renderItem={({item, index}) => {
               return (
-                <View style={styles.row}>
+                <View style={styles.item}>
                   <SecondaryIcon name="user" />
                   <TextBlock>{item.name} / {item.handle}</TextBlock>
                 </View>
@@ -56,13 +56,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: GlobalStyles.space,
   },
-  row: {
+  item: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: 4,
-    paddingBottom: 8,
     gap: GlobalStyles.space,
+    padding: GlobalStyles.space,
   },
 });
 

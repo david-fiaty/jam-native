@@ -15,31 +15,31 @@ const MoreActions = () => {
         label={<ClearIcon name="actions" />}
         content={
           <View>
-            <View style={styles.row}>
+            <View style={styles.item}>
               <SecondaryIcon name="save" />
               <TextBlock>Save Jam</TextBlock>
             </View>
-            <View style={styles.row}>
+            <View style={styles.item}>
               <SecondaryIcon name="share" />
               <TextBlock>Share Jam</TextBlock>
             </View>
-            <View style={styles.row}>
+            <View style={styles.item}>
               <SecondaryIcon name="plus" />          
               <TextBlock>Add to project</TextBlock>
             </View>
-            <View style={styles.row}>
+            <View style={styles.item}>
               <SecondaryIcon name="view" />
               <TextBlock>View project</TextBlock>
             </View>
-            <View style={styles.row}>
+            <View style={styles.item}>
               <SecondaryIcon name="edit" />
               <TextBlock>Edit jam</TextBlock>
             </View>
-            <View style={styles.row}>
+            <View style={styles.item}>
               <SecondaryIcon name="report" />
               <TextBlock>Report Jam</TextBlock>
             </View>
-            <View style={styles.row}>
+            <View style={styles.item}>
               <SecondaryIcon name="delete" />
               <TextBlock>Delete Jam</TextBlock>
             </View>
@@ -53,11 +53,12 @@ const MoreActions = () => {
 const styles = StyleSheet.create({
   container: {
   },
-  row: {
+  item: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     gap: GlobalStyles.space,
+    padding: GlobalStyles.space,
   },
 });
 
