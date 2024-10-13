@@ -7,24 +7,28 @@ type Props = {
   iconStyle?: object,
 };
 
+type IconStyle = {
+  itemStyle: object, 
+}
+
 const icons = {
-  location: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
-  megaphone: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
-  menu: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
-  notifications: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
-  plus: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
-  save: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
-  search: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
-  share: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
-  twitter: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
-  user: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
-  users: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
-  actions: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
-  copy: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
-  email: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
-  facebook: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
-  instagram: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
-  layers: (iconStyle) => <Ionicons name="location" size={50} style={[styles.icon, iconStyle]} />,
+  location: (itemStyle: IconStyle) => <Ionicons name="location" size={50} style={[styles.icon, itemStyle]} />,
+  megaphone: (itemStyle: IconStyle) => <Ionicons name="location" size={50} style={[styles.icon, itemStyle]} />,
+  menu: (itemStyle: IconStyle) => <Ionicons name="location" size={50} style={[styles.icon, itemStyle]} />,
+  notifications: (itemStyle: IconStyle) => <Ionicons name="location" size={50} style={[styles.icon, itemStyle]} />,
+  plus: (itemStyle: IconStyle) => <Ionicons name="location" size={50} style={[styles.icon, itemStyle]} />,
+  save: (itemStyle: IconStyle) => <Ionicons name="location" size={50} style={[styles.icon, itemStyle]} />,
+  search: (itemStyle: IconStyle) => <Ionicons name="location" size={50} style={[styles.icon, itemStyle]} />,
+  share: (itemStyle: IconStyle) => <Ionicons name="location" size={50} style={[styles.icon, itemStyle]} />,
+  twitter: (itemStyle: IconStyle) => <Ionicons name="location" size={50} style={[styles.icon, itemStyle]} />,
+  user: (itemStyle: IconStyle) => <Ionicons name="location" size={50} style={[styles.icon, itemStyle]} />,
+  users: (itemStyle: IconStyle) => <Ionicons name="location" size={50} style={[styles.icon, itemStyle]} />,
+  actions: (itemStyle: IconStyle) => <Ionicons name="location" size={50} style={[styles.icon, itemStyle]} />,
+  copy: (itemStyle: IconStyle) => <Ionicons name="location" size={50} style={[styles.icon, itemStyle]} />,
+  email: (itemStyle: IconStyle) => <Ionicons name="location" size={50} style={[styles.icon, itemStyle]} />,
+  facebook: (itemStyle: IconStyle) => <Ionicons name="location" size={50} style={[styles.icon, itemStyle]} />,
+  instagram: (itemStyle: IconStyle) => <Ionicons name="location" size={50} style={[styles.icon, itemStyle]} />,
+  layers: (itemStyle: IconStyle) => <Ionicons name="location" size={50} style={[styles.icon, itemStyle]} />,
 };
 
 export function StaticIcon({name, containerStyle, iconStyle}: Props) {
