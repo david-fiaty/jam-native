@@ -14,7 +14,7 @@ const WelcomeScreen = () => {
   return (
     <View style={styles.container}>
       <ScreenView>
-      <StaticIcon />
+      <StaticIcon name="location" />
         <JamLogo width={110} height={110} />    
         <Slideshow />
         <LoginSignupButton />
