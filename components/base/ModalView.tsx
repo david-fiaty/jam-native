@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, Modal, Pressable, View, TouchableWithoutFeedback, StatusBar } from 'react-native';
+import { StyleSheet, Modal, Pressable, View, TouchableWithoutFeedback, StatusBar, TouchableOpacity } from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import BackButton from '@/components/navigation/BackButton';
 
@@ -40,9 +40,9 @@ const ModalView = ({label, title, content, animation, backButton}: Props) => {
           </View>
         </TouchableWithoutFeedback>
       </Modal>
-      <Pressable onPress={() => setModalVisible(true)}>
+      <TouchableOpacity onPress={() => setModalVisible(true)}>
         {label}
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 };
