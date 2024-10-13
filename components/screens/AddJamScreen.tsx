@@ -3,6 +3,7 @@ import ModalView from '@/components/base/ModalView';
 import JamForm from '../forms/JamForm';
 import StaticIcon from '../base/StaticIcon';
 import { GlobalStyles } from '@/constants/GlobalStyles';
+import ClearIcon from '../icons/ClearIcon';
 
 const AddJamScreen = () => {
   return (
@@ -11,12 +12,7 @@ const AddJamScreen = () => {
         title="Add a new Jam" 
         animation="slide"
         label={
-          <StaticIcon 
-            name="plus" 
-            iconStyle={GlobalStyles.tabs.icon} 
-            containerStyle={[GlobalStyles.icon.clear, styles.icon]}
-            size={GlobalStyles.tabs.icon.size} 
-          />
+          <ClearIcon name="plus" />
         }
         content={<JamForm />}
       />   
