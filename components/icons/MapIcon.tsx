@@ -6,7 +6,7 @@ type Props = {
   size?: number,
 };
 
-const LocationIcon = ({size}: Props) => {
+const MapIcon = ({size}: Props) => {
   size = size ? size : GlobalStyles.icon.size;
   
   return (
@@ -30,4 +30,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LocationIcon;
+export default MapIcon;

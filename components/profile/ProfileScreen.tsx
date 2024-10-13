@@ -6,13 +6,14 @@ import ProfileJams from '@/components/profile/ProfileJams';
 import ProfileProjects from '@/components/profile/ProfileProjects';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import StaticIcon from '../base/StaticIcon';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 
 const ProfileScreen = () => {
   return (
     <View style={styles.container}>    
       <ModalView 
         title="Your profile" 
-        label={<StaticIcon name="user" size={26} />}
+        label={<StaticIcon name="user" iconStyle={GlobalStyles.tabs.icon} size={GlobalStyles.tabs.icon.size} />}
         content={
           <SafeAreaView style={styles.wrapper}>  
             <ScrollView 
