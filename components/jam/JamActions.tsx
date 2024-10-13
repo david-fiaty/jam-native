@@ -54,15 +54,15 @@ const JamActions = () => {
               <TextBlock>Edit jam</TextBlock>
             </View>
             <View style={styles.row}>
-              <MaterialIcons 
-                name="warning-amber" 
+              <Ionicons 
+                name="alert-circle-outline" 
                 size={20} style={styles.icon} 
               />
               <TextBlock>Report Jam</TextBlock>
             </View>
             <View style={styles.row}>
               <Ionicons 
-                name="trash-bin-outline" 
+                name="close-circle-outline" 
                 size={20} style={styles.icon} 
               />
               <TextBlock>Delete Jam</TextBlock>
