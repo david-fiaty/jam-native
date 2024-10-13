@@ -7,6 +7,7 @@ import SearchMenu from '../menus/SearchMenu';
 import PrimaryIcon from '../icons/PrimaryIcon';
 import SecondaryIcon from '../icons/SecondaryIcon';
 import TertiaryIcon from '../icons/TertiaryIcon';
+import ClearIcon from '../icons/ClearIcon';
 
 const TopToolbar = () => {
   return (
@@ -16,6 +17,7 @@ const TopToolbar = () => {
         <PrimaryIcon name="plus" />
         <SecondaryIcon name="plus" />
         <TertiaryIcon name="plus" />
+        <ClearIcon name="plus" />
         <SettingsMenu />  
         <NotificationsMenu />
         <SearchMenu />
