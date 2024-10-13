@@ -8,7 +8,7 @@ const Jams = () => {
   return (  
     <>
       <View style={styles.container}>
-        <TopToolbar />
+        { /*<TopToolbar />*/ }
         <JamsScreen />
       </View>
       <BottomTabs />
