@@ -2,7 +2,7 @@ import { StyleSheet, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 type Props = {
-  name?: string,
+  name: string,
   size?: number,
   containerStyle?: object,
   iconStyle?: object,
