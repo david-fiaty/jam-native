@@ -9,6 +9,7 @@ const ShareJam = () => {
     <View style={styles.container}>        
       <ModalView 
         title="Share Jam" 
+        animation="slide"
         label={
           <SecondaryIcon name="share" />
         }
@@ -36,7 +37,6 @@ const ShareJam = () => {
             </View>
           </View>
         }
-        animation="slide"
       />   
     </View>
   );
