@@ -28,27 +28,26 @@ export default function SlideshowItem({item, index, scrollX}: Props) {
   });
 
   return (  
-    <Animated.View style={[styles.itemContainer, itemAnimation]}>
-      <TextBlock>{item.title}</TextBlock>
-      <TextBlock>{item.content}</TextBlock>
+    <Animated.View style={[styles.container, itemAnimation]}>
+      <TextBlock style={styles.title}>{item.title}</TextBlock>
+      <TextBlock style={styles.content}>{item.content}</TextBlock>
     </Animated.View>
   );
 };
 
 const styles = StyleSheet.create({
-  itemContainer: {
+  container: {
     justifyContent: 'center',
     alignItems: 'center',
     width: width,
-    paddingLeft: 30,
-    paddingRight: 30,
+    paddingHorizontal: GlobalStyles.space,
+    gap: GlobalStyles.space,
   },
-  itemTitle: {
+  title: {
     textTransform: 'uppercase',
-    marginBottom: 20,
     textAlign: 'center',
   },
-  itemContent: {
+  content: {
     textAlign: 'center',
   },
 });

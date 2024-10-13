@@ -4,6 +4,7 @@ import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native
 import SlideshowItem from '@/components/slideshow/SlideshowItem';
 import SlideshowPager from '@/components/slideshow/SlideshowPager';
 import WelcomeSlidehowContent from '@/constants/WelcomeSlideshowContent';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 
 const Slideshow = () => {
   const data = WelcomeSlidehowContent;
@@ -37,7 +38,6 @@ const Slideshow = () => {
         viewabilityConfig={viewabilityConfig}
         onViewableItemsChanged={onViewableItemsChanged}
       />
-
       <SlideshowPager data={data} pagerIndex={pagerIndex}/> 
     </View>
   );
@@ -48,7 +48,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    backgroundColor: 'red',
+    gap: GlobalStyles.space,
+    marginVertical: GlobalStyles.space,
   },
 });
 
