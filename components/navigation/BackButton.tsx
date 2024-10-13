@@ -1,4 +1,4 @@
-import { View, StyleSheet, Pressable } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import TextBlock from '@/components/base/TextBlock';
 import ClearIcon from '../icons/ClearIcon';
@@ -20,9 +20,9 @@ const BackButton = ({title, onPress}: Props) => {
 
   if (onPress) {
     return (
-      <Pressable onPress={onPress}>
+      <TouchableOpacity onPress={onPress}>
         <ButtonView />
-      </Pressable>
+      </TouchableOpacity>
     );
   }
 
