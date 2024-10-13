@@ -1,11 +1,12 @@
-import { View, StyleSheet } from 'react-native';
-import WelcomeScreen from '@/components/screens/WelcomeScreen';
+import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import TopToolbar from '@/components/navigation/TopToolbar';
+import WelcomeScreen from '@/components/screens/WelcomeScreen';
+import PrimaryIcon from '@/components/icons/PrimaryIcon';
 
 const Index = () => {
   return (  
     <SafeAreaView style={styles.container}>
+      <PrimaryIcon name="user" />
       <WelcomeScreen />
     </SafeAreaView>
   );
