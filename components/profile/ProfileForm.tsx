@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     gap: GlobalStyles.space,
+    marginBottom: GlobalStyles.space*2,
   },
   wrapper: {
     width: '100%',
