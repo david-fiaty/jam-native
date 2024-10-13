@@ -12,7 +12,6 @@ const BottomTabs = () => {
     <View style={styles.container}>
       <Tab.Navigator
         screenOptions={{
-          tabBarActiveTintColor: '#e91e63',
           tabBarStyle: styles.tabs,
         }}
       >
