@@ -15,7 +15,7 @@ const MoreActions = () => {
           <ClearIcon name="actions" />
         }
         content={
-          <View style={GlobalStyles.modal.wrapper}>
+          <View>
             <View style={styles.row}>
               <SecondaryIcon name="save" />
               <TextBlock>Save Jam</TextBlock>
