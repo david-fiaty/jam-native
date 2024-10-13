@@ -30,21 +30,19 @@ const NotificationsScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'red',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   list: {
     width: '100%',
   },
   icon: {
-    ...GlobalStyles.text,
-    ...GlobalStyles.icon,
-    ...{
-      backgroundColor: Colors.tertiary,
-      paddingTop: 5,
-      paddingBottom: 5,
-      paddingLeft: 8,
-      paddingRight: 8,
-      borderRadius: 40,
-    },
+    backgroundColor: Colors.tertiary,
+    borderRadius: 16,
+    height: 32,
+    verticalAlign: 'middle',
   },
 });
 
