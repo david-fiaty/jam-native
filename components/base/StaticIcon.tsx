@@ -33,7 +33,7 @@ const icons = {
   layers: ({itemStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, itemStyle]} />,
 };
 
-export function StaticIcon({name, size, containerStyle, iconStyle}: Props) {
+const StaticIcon = ({name, size, containerStyle, iconStyle}: Props) => {
   return (
     <View style={[styles.container, containerStyle]}>
       {icons[name]({iconStyle, size})}
@@ -49,3 +49,5 @@ const styles = StyleSheet.create({
     
   },
 });
+
+export default StaticIcon;
