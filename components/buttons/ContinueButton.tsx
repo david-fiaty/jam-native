@@ -1,6 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
-import { StaticButton } from '../base/StaticButton';
+import StaticButton from '../base/StaticButton';
 
 type Props = {
   onPress: () => void,

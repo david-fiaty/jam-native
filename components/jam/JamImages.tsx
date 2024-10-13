@@ -1,5 +1,4 @@
-import { StyleSheet, View, Text } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import { StyleSheet, View } from 'react-native';
 import { Colors } from '@/constants/GlobalStyles';
 
 type Props = {
