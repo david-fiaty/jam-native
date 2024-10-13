@@ -1,15 +1,20 @@
 import { Text } from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
+import StaticIcon from '../base/StaticIcon';
 
 type Props = {
-  style?: {},
-  children?: ReactNode,
+  name: string,
 };
 
-const TextBlock = ({style, children}: Props) => {
+const PrimaryIcon = ({name}: Props) => {
   return (
-    <Text style={[GlobalStyles.text, style]}>{children}</Text>   
+    <StaticIcon 
+      name={nanme} 
+      iconStyle={GlobalStyles.tabs.icon} 
+      containerStyle={[GlobalStyles.icon.clear, styles.icon]}
+      size={styles.icon.size} 
+    />
   );
 };
 
-export default TextBlock;
+export default PrimaryIcon;
