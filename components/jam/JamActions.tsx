@@ -50,24 +50,30 @@ const JamActions = () => {
               <TextBlock>Add to project</TextBlock>
             </View>
             <View style={styles.row}>
-              <MaterialCommunityIcons 
-                name="view-dashboard-outline" 
-                size={20} style={styles.icon} 
-              />
+              <StaticIcon 
+                name="view" 
+                iconStyle={GlobalStyles.tabs.icon} 
+                containerStyle={[GlobalStyles.icon.clear, styles.icon]}
+                size={styles.icon.size} 
+              />         
               <TextBlock>View project</TextBlock>
             </View>
             <View style={styles.row}>
-              <MaterialCommunityIcons 
-                name="clipboard-edit-outline" 
-                size={20} style={styles.icon} 
-              />
+              <StaticIcon 
+                name="edit" 
+                iconStyle={GlobalStyles.tabs.icon} 
+                containerStyle={[GlobalStyles.icon.clear, styles.icon]}
+                size={styles.icon.size} 
+              />          
               <TextBlock>Edit jam</TextBlock>
             </View>
             <View style={styles.row}>
-              <Ionicons 
-                name="alert-circle-outline" 
-                size={20} style={styles.icon} 
-              />
+              <StaticIcon 
+                name="report" 
+                iconStyle={GlobalStyles.tabs.icon} 
+                containerStyle={[GlobalStyles.icon.clear, styles.icon]}
+                size={styles.icon.size} 
+              />          
               <TextBlock>Report Jam</TextBlock>
             </View>
             <View style={styles.row}>
