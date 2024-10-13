@@ -11,7 +11,7 @@ const TopToolbar = () => {
     <View style={styles.container}>
       <JamLogo width={46} height={46} /> 
       <View style={styles.buttons}> 
-        <PrimaryIcon name="user" />
+        <PrimaryIcon name="plus" />
         <SettingsMenu />  
         <NotificationsMenu />
         <SearchMenu />
