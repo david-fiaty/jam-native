@@ -4,6 +4,7 @@ import ModalView from '@/components/base/ModalView';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import SettingsMenuItems from '@/constants/SettingsMenuItems';
 import StaticIcon from '../base/StaticIcon';
+import TertiaryIcon from '../icons/TertiaryIcon';
 
 const SettingsMenu = () => {
   const data = SettingsMenuItems;
@@ -13,12 +14,7 @@ const SettingsMenu = () => {
       <ModalView 
         title="Settings" 
         label={
-          <StaticIcon 
-            name="menu" 
-            iconStyle={GlobalStyles.tabs.icon} 
-            containerStyle={[GlobalStyles.icon.clear, styles.icon]}
-            size={styles.icon.size} 
-          />
+          <TertiaryIcon name="menu" />
         }
         content={
           <FlatList 
