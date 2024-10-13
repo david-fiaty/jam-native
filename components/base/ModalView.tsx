@@ -14,7 +14,7 @@ type Props = {
 const ModalView = ({label, title, content, animation, backButton}: Props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const animationType = animation ? animation : 'slide';
-  
+
   return (
     <View style={styles.container}>        
       <Modal
@@ -56,6 +56,8 @@ const styles = StyleSheet.create({
       flex: 1,
       flexDirection: 'column',
       alignItems: 'center',
+      marginTop: StatusBar.currentHeight + GlobalStyles.toolbar.height,
+      backgroundColor: 'black',
       height: '100%',
     },
     view: {
