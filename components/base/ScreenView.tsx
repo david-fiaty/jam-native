@@ -1,4 +1,3 @@
-
 import { ReactNode } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Colors } from '@/constants/GlobalStyles';
