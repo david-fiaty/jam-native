@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: 'red',
-    //marginBottom: 20,
+    marginBottom: GlobalStyles.space*2,
     height: GlobalStyles.toolbar.height,
   },
   buttons: {
