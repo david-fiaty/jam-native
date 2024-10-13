@@ -48,6 +48,12 @@ export const GlobalStyles = {
       width: '100%',
     },
   },
+  tabs: {
+    icon: {
+      size: 26,
+      color: Colors.primary,
+    },
+  },
   field: {
     backgroundColor: Colors.tertiary,
     width: '100%',
