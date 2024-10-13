@@ -27,9 +27,9 @@ const ModalView = ({label, title, content, animation, backButton, showBorder}: P
         onRequestClose={() => setModalVisible(!modalVisible)}
       >
         <TouchableWithoutFeedback onPress={() => setModalVisible(!modalVisible)}>
-          <View style={styles.modal.container}>
+          <View style={styles.container}>
             <TouchableWithoutFeedback>
-              <View style={styles.modal.view}>
+              <View style={styles.view}>
                 <Pressable 
                   onPress={() => setModalVisible(!modalVisible)} 
                   style={backButton === false ? { display: 'none'} : {}}
@@ -70,25 +70,21 @@ const wrapperHidden = {
 };
 
 const styles = StyleSheet.create({
-  container: {
-  },
   text: GlobalStyles.text,
-  modal: {
-    container: {
-      flex: 1,
-      flexDirection: 'column',
-      alignItems: 'center',
-      marginTop: StatusBar.currentHeight + GlobalStyles.toolbar.height,
-      backgroundColor: 'black',
-      height: '100%',
-    },
-    view: {
-      backgroundColor: 'white',
-      width: '100%',
-      height: '100%',
-      alignItems: 'flex-start',
-      padding: 20,
-    },
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: StatusBar.currentHeight + GlobalStyles.toolbar.height,
+    backgroundColor: 'black',
+    height: '100%',
+  },
+  view: {
+    backgroundColor: 'white',
+    width: '100%',
+    height: '100%',
+    alignItems: 'flex-start',
+    padding: 20,
   },
 });
 
