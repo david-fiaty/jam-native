@@ -5,7 +5,7 @@ import * as Device from 'expo-device';
 import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
 import ModalView from '@/components/base/ModalView';
-import LocationIcon from '@/components/icons/LocationIcon';
+import StaticIcon from '../base/StaticIcon';
 
 const MapScreen = () => {
   const [location, setLocation] = useState('');
@@ -15,7 +15,7 @@ const MapScreen = () => {
     (async () => {
       if (Platform.OS === 'android' && !Device.isDevice) {
         setErrorMsg(
-          'Oops, this will not work on Snack in an Android Emulator. Try it on your device!'
+          'Location features are not available for simulator virtual devices.'
         );
         return;
       }
@@ -37,7 +37,7 @@ const MapScreen = () => {
     <View style={styles.container}>       
       <ModalView 
         title="Jams map" 
-        label={<LocationIcon size={26}/>}
+        label={<StaticIcon name="location" size={26} />}
         content={
           <TouchableWithoutFeedback>
             <View style={styles.wrapper}>

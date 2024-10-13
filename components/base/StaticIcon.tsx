@@ -16,16 +16,16 @@ type IconProps = {
 }
 
 const icons = {
-  location: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
-  megaphone: ({iconStyle, size}: IconProps) => <Entypo name="megaphone" size={size} style={[styles.icon, iconStyle]} />,
+  location: ({iconStyle, size}: IconProps) => <Ionicons name="location-sharp" size={size} style={[styles.icon, iconStyle]} />,
+  megaphone: ({iconStyle, size}: IconProps) => <Ionicons name="megaphone-outline" size={size} style={[styles.icon, iconStyle]} />,
   menu: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
   notifications: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
-  plus: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
+  plus: ({iconStyle, size}: IconProps) => <Ionicons name="add" size={size} style={[styles.icon, iconStyle]} />,
   save: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
   search: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
   share: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
   twitter: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
-  user: ({iconStyle, size}: IconProps) => <FontAwesome name="user-circle" size={size} style={[styles.icon, iconStyle]} />,
+  user: ({iconStyle, size}: IconProps) => <Ionicons name="person-circle" size={size} style={[styles.icon, iconStyle]} />,
   users: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
   actions: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,
   copy: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={[styles.icon, iconStyle]} />,

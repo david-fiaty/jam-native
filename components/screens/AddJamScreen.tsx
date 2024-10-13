@@ -1,14 +1,14 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import ModalView from '@/components/base/ModalView';
 import JamForm from '../forms/JamForm';
-import PlusIcon from '../icons/PlusIcon';
+import StaticIcon from '../base/StaticIcon';
 
 const AddJamScreen = () => {
   return (
     <View style={styles.container}>     
       <ModalView 
         title="Add a new Jam" 
-        label={<PlusIcon size={26} />}
+        label={<StaticIcon name="plus" size={26} />}
         content={<JamForm />}
         animation="slide"
       />   

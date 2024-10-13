@@ -1,19 +1,18 @@
 import { StyleSheet, View, ScrollView, Pressable } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { Colors } from '@/constants/GlobalStyles';
 import ModalView from '@/components/base/ModalView';
 import ProfileForm from '@/components/profile/ProfileForm';
 import ProfileImage from '@/components/profile/ProfileImage';
 import ProfileJams from '@/components/profile/ProfileJams';
 import ProfileProjects from '@/components/profile/ProfileProjects';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import StaticIcon from '../base/StaticIcon';
 
 const ProfileScreen = () => {
   return (
     <View style={styles.container}>    
       <ModalView 
         title="Your profile" 
-        label={<Ionicons name="person-circle" size={26} color={Colors.primary} />}
+        label={<StaticIcon name="user" size={26} />}
         content={
           <SafeAreaView style={styles.wrapper}>  
             <ScrollView 
