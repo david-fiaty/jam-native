@@ -9,7 +9,7 @@ export const Colors = {
 
 export const GlobalStyles = {
   space: space,
-  statusbar: {
+  toolbar: {
     height: 42,
   },
   container: {
