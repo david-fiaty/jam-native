@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     width: '80%',
+    gap: GlobalStyles.space,
   },
   buttonContainer: {
     width: '100%',
