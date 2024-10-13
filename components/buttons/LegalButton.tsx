@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
-import { StaticButton } from '../base/StaticButton';
+import StaticButton from '../base/StaticButton';
 
 const LegalButton = () => {
   const router = useRouter();

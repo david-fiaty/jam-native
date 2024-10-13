@@ -1,18 +1,22 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useRouter } from 'expo-router';
-import { StaticButton } from '../base/StaticButton';
+import StaticButton from '../base/StaticButton';
+import SkipButton from '../buttons/SkipButton';
 import { Colors } from '@/constants/GlobalStyles';
 
 const LoginSignupButton = () => {
   const router = useRouter();
 
   return (
-    <StaticButton
-      label="Login / Signup" 
-      onPress={() => router.push('/login')} 
-      containerStyle={styles.container}
-      labelStyle={styles.label}
-    />
+    <View>
+      <StaticButton
+        label="Login / Signup" 
+        onPress={() => router.push('/login')} 
+        containerStyle={styles.container}
+        labelStyle={styles.label}
+      />
+      <SkipButton onPress={() => router.push('/jams')} />
+    </View>
   );
 };
 
