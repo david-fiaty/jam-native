@@ -37,10 +37,8 @@ const styles = StyleSheet.create({
     ...GlobalStyles.text,
     ...{
       fontWeight: 'bold',
-      marginBottom: 10,
+      marginBottom: GlobalStyles.space/2,
     },
-  },
-  list: {
   },
   item: {
     backgroundColor: Colors.tertiary,
