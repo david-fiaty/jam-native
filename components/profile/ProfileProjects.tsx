@@ -8,7 +8,7 @@ const ProfileProjects = () => {
 
   return (
     <View style={styles.container}>
-      <TextBlock>Your projects</TextBlock> 
+      <TextBlock style={styles.title}>Your projects</TextBlock> 
       <View style={styles.list}>
         <FlatList 
           data={data} 
@@ -31,17 +31,14 @@ const ProfileProjects = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
-    flex: 1,
+    gap: GlobalStyles.space,
   },
   title: {
     ...GlobalStyles.text,
     ...{
       fontWeight: 'bold',
-      marginBottom: 10,
+      marginBottom: GlobalStyles.space/2,
     },
-  },
-  list: {
   },
   item: {
     backgroundColor: Colors.tertiary,

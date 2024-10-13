@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     gap: GlobalStyles.space,
+    marginBottom: GlobalStyles.space*2,
   },
   wrapper: {
     width: '100%',
@@ -61,12 +62,6 @@ const styles = StyleSheet.create({
   scroller: {
     flexGrow: 1,
   },  
-  title: {
-    ...GlobalStyles.text,
-    ...{
-      fontWeight: 'bold',
-    },
-  },
   input: {
     backgroundColor: Colors.tertiary,
     width: '100%',
@@ -76,9 +71,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 12, 
     marginBottom: 10,
-  },
-  list: {
-    marginTop: 10,
   },
 });
 

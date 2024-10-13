@@ -8,7 +8,7 @@ const ProfileJams = () => {
 
   return (
     <View style={styles.container}>
-      <TextBlock>Saved Jams</TextBlock> 
+      <TextBlock style={styles.title}>Saved Jams</TextBlock> 
       <View style={styles.list}>
         <FlatList 
           data={data} 
@@ -31,17 +31,14 @@ const ProfileJams = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
-    flex: 1,
+    gap: GlobalStyles.space,
   },
   title: {
     ...GlobalStyles.text,
     ...{
       fontWeight: 'bold',
-      marginBottom: 10,
+      marginBottom: GlobalStyles.space/2,
     },
-  },
-  list: {
   },
   item: {
     backgroundColor: Colors.tertiary,
