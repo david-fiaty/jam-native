@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList, Text } from 'react-native';
+import { StyleSheet, View, FlatList, Text, Touchable, TouchableOpacity } from 'react-native';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import ModalView from '@/components/base/ModalView';
 import ApiClient from '@/classes/ApiClient';
@@ -19,10 +19,12 @@ const JamJammers = ({item, index}: Props) => {
       <ModalView 
         title="Jammers" 
         label={
-          <View style={styles.label}>
-            <UsersIcon size={14} />
-            <TextBlock>{item.host_count} jammers</TextBlock>
-          </View>
+          <TouchableOpacity>
+            <View style={styles.label}>
+              <UsersIcon size={14} />
+              <TextBlock>{item.host_count} jammers</TextBlock>
+            </View>
+          </TouchableOpacity>
         }
         content={
           <View style={GlobalStyles.modal.wrapper}>
