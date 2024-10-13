@@ -31,8 +31,7 @@ const ProfileProjects = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
-    flex: 1,
+    gap: GlobalStyles.space,
   },
   title: {
     ...GlobalStyles.text,
