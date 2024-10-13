@@ -20,15 +20,19 @@ const PrimaryIcon = ({name}: Props) => {
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: GlobalStyles.tabs.icon.size,
+    height: GlobalStyles.tabs.icon.size,
     backgroundColor: Colors.primary,
     borderColor: Colors.primary,
-    //borderWidth: 1,
-    borderRadius: 40,
+    borderRadius: GlobalStyles.tabs.icon.size/2,
+    borderWidth: 1,
     padding: 6,
   },
   icon: {
     color: '#FFFFFF',
-    size: GlobalStyles.tabs.icon.size,
+    //size: GlobalStyles.tabs.icon.size,
   },
 });
 
