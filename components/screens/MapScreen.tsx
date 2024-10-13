@@ -38,6 +38,7 @@ const MapScreen = () => {
     <View style={styles.container}>       
       <ModalView 
         title="Jams map" 
+        animation="slide"
         label={
           <StaticIcon 
             name="location" 
@@ -81,7 +82,6 @@ const MapScreen = () => {
             </View>
           </TouchableWithoutFeedback>
         }
-        animation="slide"
       />   
     </View>
   );
