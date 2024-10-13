@@ -4,7 +4,6 @@ import ProfileForm from '@/components/profile/ProfileForm';
 import ProfileImage from '@/components/profile/ProfileImage';
 import ProfileJams from '@/components/profile/ProfileJams';
 import ProfileProjects from '@/components/profile/ProfileProjects';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import ClearIcon from '../icons/ClearIcon';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 
@@ -16,19 +15,17 @@ const ProfileScreen = () => {
         animation="slide"
         label={<ClearIcon name="user" size={GlobalStyles.tabsbar.icon.size} />}
         content={
-          <SafeAreaView style={styles.wrapper}>  
-            <ScrollView 
-              nestedScrollEnabled={true}
-              contentContainerStyle={{ flexGrow: 1 }}
-            >
-              <Pressable>
-                <ProfileImage />
-                <ProfileForm />
-                <ProfileProjects />
-                <ProfileJams />
-              </Pressable>
-            </ScrollView>  
-          </SafeAreaView>
+          <ScrollView 
+            nestedScrollEnabled={true}
+            contentContainerStyle={{ flexGrow: 1 }}
+          >
+            <Pressable>
+              <ProfileImage />
+              <ProfileForm />
+              <ProfileProjects />
+              <ProfileJams />
+            </Pressable>
+          </ScrollView>  
         }
       />    
     </View>
