@@ -17,6 +17,7 @@ const JamJammers = ({item, index}: Props) => {
     <View style={styles.container}>   
       <ModalView 
         title="Jammers" 
+        animation="slide"
         label={
           <View style={styles.label}>
             <SecondaryIcon name="users" />
@@ -24,23 +25,20 @@ const JamJammers = ({item, index}: Props) => {
           </View>
         }
         content={
-          <View style={GlobalStyles.modal.wrapper}>
-            <FlatList 
-              data={data} 
-              horizontal={false}  
-              style={styles.list}
-              renderItem={({item, index}) => {
-                return (
-                  <View style={styles.row}>
-                    <SecondaryIcon name="user" />
-                    <TextBlock>{item.name}</TextBlock>
-                  </View>
-                );
-              }} 
-            />
-          </View>
+          <FlatList 
+            data={data} 
+            horizontal={false}  
+            style={styles.list}
+            renderItem={({item, index}) => {
+              return (
+                <View style={styles.row}>
+                  <SecondaryIcon name="user" />
+                  <TextBlock>{item.name}</TextBlock>
+                </View>
+              );
+            }} 
+          />
         }
-        animation="slide"
       />       
     </View>
   );

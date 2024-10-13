@@ -11,7 +11,6 @@ const JamForm = () => {
 
   return (
     <View style={styles.container}>    
-    
       <TextBlock>What kind of Jam is it?</TextBlock>
       <FlatList 
         data={data} 

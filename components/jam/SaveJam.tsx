@@ -14,7 +14,7 @@ const SaveJam = () => {
           <SecondaryIcon name="save" />
         }
         content={
-          <View style={GlobalStyles.modal.wrapper}>
+          <View>
             <View style={styles.row}>
               <SecondaryIcon name="share" />
               <TextBlock>Share</TextBlock>

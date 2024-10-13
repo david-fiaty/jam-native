@@ -23,21 +23,19 @@ const JamHosts = ({item, index}: Props) => {
           </View>
         }
         content={
-          <View style={GlobalStyles.modal.wrapper}>
-            <FlatList 
-              data={data} 
-              horizontal={false}  
-              style={styles.list}
-              renderItem={({item, index}) => {
-                return (
-                  <View style={styles.row}>
-                    <SecondaryIcon name="user" />
-                    <TextBlock>{item.name} / {item.handle}</TextBlock>
-                  </View>
-                );
-              }} 
-            />
-          </View>
+          <FlatList 
+            data={data} 
+            horizontal={false}  
+            style={styles.list}
+            renderItem={({item, index}) => {
+              return (
+                <View style={styles.row}>
+                  <SecondaryIcon name="user" />
+                  <TextBlock>{item.name} / {item.handle}</TextBlock>
+                </View>
+              );
+            }} 
+          />
         }
         animation="slide"
       />       
