@@ -14,12 +14,10 @@ const JamForm = () => {
     <View style={styles.container}>    
       <TextBlock>What kind of Jam is it?</TextBlock>
       <SquareOptionsField data={data} />
-    
       <View style={styles.section}>
-        <MediaField size={20} /> 
-        <CollaboratorsField size={20} />
+        <MediaField /> 
+        <CollaboratorsField />
       </View>
-    
       <View style={styles.section}>
         <TextInput
           style={styles.caption}
