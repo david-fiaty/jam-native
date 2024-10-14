@@ -8,11 +8,10 @@ type Props = {
   title: string,
   content: JSX.Element,
   animation?: string,
-  backButton?: boolean,
   showBorder?: boolean,
 };
 
-const ModalView = ({label, title, content, animation, backButton, showBorder}: Props) => {
+const ModalView = ({label, title, content, animation, showBorder}: Props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const animationType = animation ? animation : 'slide';
   const wrapperStyle = showBorder === true ? wrapperVisible : wrapperHidden;

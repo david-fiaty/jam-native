@@ -6,6 +6,7 @@ import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 type Props = {
   item: object,
   index: number,
+  onPress: () => void,
   path: string,
 };
 
