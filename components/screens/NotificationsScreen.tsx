@@ -7,7 +7,7 @@ import TextBlock from '../base/TextBlock';
 
 const NotificationsScreen = () => {  
   const data = ApiClient.get('notifications');
-  const count = 22;
+  const count = data.length;
 
   return (
     <View style={styles.container}>   
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     borderRadius: GlobalStyles.space*1.5,
     textAlign: 'center',
     verticalAlign: 'middle',
-    fontSize: GlobalStyles.space,
+    fontSize: GlobalStyles.space*1.2,
   },
 });
 
