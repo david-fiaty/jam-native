@@ -8,12 +8,10 @@ type Props = {
 };
 
 const JamImages = ({item, index}: Props) => {
-  const source = require(`@/assets/images/${item.image}`); 
-
   return (
     <View style={styles.container}>
       <StaticImage 
-        source={source} 
+        source={item.image} 
         width={200}
         height={200}
       />   
