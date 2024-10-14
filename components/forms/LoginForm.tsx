@@ -3,7 +3,7 @@ import { useRouter } from 'expo-router';
 import { Button } from '@rneui/themed';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import TextBlock from '@/components/base/TextBlock';
-import TextField from '../fields/TextField';
+import InputTextField from '../fields/InputTextField';
 import ContinueButton from '../buttons/ContinueButton';
 import SkipButton from '../buttons/SkipButton';
 
@@ -12,7 +12,7 @@ const LoginForm = () => {
 
   return (
     <View style={styles.container}>    
-      <TextField placeholder="Enter your email address" style={styles.field} />
+      <InputTextField placeholder="Enter your email address" style={styles.field} />
       <View style={styles.buttonContainer}>
         <ContinueButton onPress={() => router.push('/login')} />
         <View style={styles.signup}>
