@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View, FlatList, Touchable, TouchableOpacity } from 'react-native';
 import TextBlock from '../base/TextBlock';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+import StaticIcon from '../base/StaticIcon';
 
 type Props = {
   data: object,
@@ -20,6 +21,7 @@ const SquareOptionsField = ({data}: Props) => {
           <TouchableOpacity onPress={() => console.log('clicked')}>
             <View style={styles.container}>
               <View style={styles.item.square}>
+                <StaticIcon name={item.icon} />
               </View>
               <TextBlock>{item.label}</TextBlock>   
             </View>
