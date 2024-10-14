@@ -5,12 +5,9 @@ import ModalView from '@/components/base/ModalView';
 import SettingsScreenItems from '@/constants/SettingsScreenItems';
 import TertiaryIcon from '../icons/TertiaryIcon';
 
-import { useNavigation } from '@react-navigation/native';
-
 const SettingsScreen = () => {
   const data = SettingsScreenItems;
   const router = useRouter();
-  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>        
@@ -25,7 +22,11 @@ const SettingsScreen = () => {
             style={styles.list}
             renderItem={({item, index}) => {
               return (
-                <MenuItem item={item} index={index}  onPress={() => navigation.navigate('test')} /*path={item.path} */ />
+                <MenuItem 
+                  item={item} 
+                  index={index}  
+                  onPress={() => router.replace(item.path)} 
+                />
               );
             }} 
           />
