@@ -7,7 +7,7 @@ import TextBlock from '../base/TextBlock';
 
 const NotificationsScreen = () => {  
   const data = ApiClient.get('notifications');
-  const count = data.length;
+  const count = data.length < 100 ? data.length : 99;
 
   return (
     <View style={styles.container}>   
