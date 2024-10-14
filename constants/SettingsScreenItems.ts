@@ -1,19 +1,19 @@
 const SettingsScreenItems = [
   {
     'label': 'Account information',
-    'path': '/jams',
+    'path': '/account',
   },
   {
     'label': 'Change password',
-    'path': '/jams',
+    'path': '/password',
   },
   {
     'label': 'Change user name',
-    'path': '/jams',
+    'path': '/username',
   },
   {
-    'label': 'Delete account',
-    'path': '/jams',
+    'label': 'Language',
+    'path': '/language',
   },
 ];
 
