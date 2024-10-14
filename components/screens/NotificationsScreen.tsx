@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     borderRadius: GlobalStyles.space*1.5,
     textAlign: 'center',
     verticalAlign: 'middle',
+    fontSize: GlobalStyles.space,
   },
 });
 
