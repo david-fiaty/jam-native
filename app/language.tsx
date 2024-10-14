@@ -6,7 +6,7 @@ const Language = () => {
   return (
     <SafeAreaView style={styles.container}>
       <TopToolbar />
-      <Text>USER NAME</Text>
+      <Text>LANGUAGE</Text>
     </SafeAreaView>
   );
 };
