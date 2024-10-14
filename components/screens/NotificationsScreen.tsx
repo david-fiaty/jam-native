@@ -20,7 +20,11 @@ const NotificationsScreen = () => {
             data={data} 
             horizontal={false}  
             style={styles.list}
-            renderItem={({item, index}) => <MenuItem item={item} index={index} />} 
+            renderItem={({item, index}) => {
+              return (
+                <MenuItem item={item} index={index} />
+              );
+            }} 
           />
         }
       />   
