@@ -6,7 +6,6 @@ import TopToolbar from '@/components/navigation/TopToolbar';
 import BackButton from '@/components/navigation/BackButton';
 
 const Account = () => {
-  const navigation = useNavigation();
   const router = useRouter();
 
   return (
