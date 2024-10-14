@@ -9,8 +9,8 @@ const PasswordScreen = () => {
 
   return (
     <View style={styles.container}>
-      <BackButton title="Account title" onPress={() => navigation.popToTop()}/>
-      <TextBlock>Account content</TextBlock>
+      <BackButton title="Password title" onPress={() => navigation.popToTop()}/>
+      <TextBlock>Password content</TextBlock>
       <BottomLinks />
     </View>
   );
