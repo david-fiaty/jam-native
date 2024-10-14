@@ -2,22 +2,22 @@ const JamCategories = [
   {
     id: 'calls',
     label: 'Calls',
-    icon: '',
+    icon: 'megaphone',
   },
   {
     id: 'looking',
     label: 'Looking',
-    icon: '',
+    icon: 'link',
   },
   {
     id: 'events',
     label: 'Events',
-    icon: '',
+    icon: 'users',
   },
   {
     id: 'random',
     label: 'Random',
-    icon: '',
+    icon: 'infinite',
   },
 ];
 
