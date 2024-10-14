@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 
 type Props = {
-  style?: {},
+  style?: object,
   children?: ReactNode,
 };
 
