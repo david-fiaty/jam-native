@@ -1,8 +1,8 @@
 import { StaticImage } from '../base/StaticImage';
 
 type Props = {
-  width?: string | object,
-  height?: string | object,
+  width?: string | number,
+  height?: string | number,
 };
 
 const source = require('@/assets/images/jam-logo.png'); 

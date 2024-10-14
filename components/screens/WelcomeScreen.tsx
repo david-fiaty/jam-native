@@ -7,8 +7,6 @@ import LoginSignupButton from '../buttons/LoginSignupButton';
 import ScreenView from '@/components/base/ScreenView';
 
 const WelcomeScreen = () => {
-  const router = useRouter();
-
   return (
     <View style={styles.container}>
       <ScreenView>
