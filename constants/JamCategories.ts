@@ -7,17 +7,17 @@ const JamCategories = [
   {
     id: 'looking',
     label: 'Looking',
-    icon: 'megaphone',
+    icon: 'link',
   },
   {
     id: 'events',
     label: 'Events',
-    icon: 'megaphone',
+    icon: 'users',
   },
   {
     id: 'random',
     label: 'Random',
-    icon: 'megaphone',
+    icon: 'infinite',
   },
 ];
 
