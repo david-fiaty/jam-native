@@ -1,7 +1,7 @@
-import { StyleSheet, View, FlatList, TextInput } from 'react-native';
+import { StyleSheet, View, TextInput } from 'react-native';
 import { Button } from '@rneui/themed';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-import AddMediaButton from '../buttons/AddMediaButton';
+import MediaField from '../fields/MediaField';
 import AddCollaboratorsButton from '../buttons/AddCollaboratorsButton';
 import TextBlock from '@/components/base/TextBlock';
 import SquareOptionsField from '../fields/SquareOptionsField';
@@ -16,7 +16,7 @@ const JamForm = () => {
       <SquareOptionsField data={data} />
     
       <View style={styles.section}>
-        <AddMediaButton size={20} /> 
+        <MediaField size={20} /> 
         <AddCollaboratorsButton size={20} />
       </View>
     
