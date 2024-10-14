@@ -11,7 +11,7 @@ type Props = {
 const MenuItem = ({item, index, onPress}: Props) => {
   return (
     <View style={styles.container}>      
-      <TouchableOpacity onPress={onPress}>
+      <TouchableOpacity /*onPress={onPress} */>
         <TextBlock>{item.label}</TextBlock>
       </TouchableOpacity>
     </View>
