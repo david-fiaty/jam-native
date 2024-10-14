@@ -30,6 +30,7 @@ export default function RootLayout() {
         <Stack.Screen name="about" options={{ headerShown: false }} />
         <Stack.Screen name="legal" options={{ headerShown: false }} />
         <Stack.Screen name="jams" options={{ headerShown: false }} />
+        <Stack.Screen name="account" options={{ headerShown: false }} />
       </Stack>
     </ThemeProvider>
   );
