@@ -1,4 +1,5 @@
 import { StyleSheet, View } from 'react-native';
+import { StaticImage } from '../base/StaticImage';
 import { Colors } from '@/constants/GlobalStyles';
 
 type Props = {
@@ -9,6 +10,11 @@ type Props = {
 const JamImages = ({item, index}: Props) => {
   return (
     <View style={styles.container}>
+      <StaticImage 
+        source={item.image} 
+        width={200}
+        height={200}
+      />   
     </View>
   );
 };
