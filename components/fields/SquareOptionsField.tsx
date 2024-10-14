@@ -55,6 +55,9 @@ const styles = StyleSheet.create({
   },
   icon: {
     ...GlobalStyles.text,
+    ...{
+      fontSize: GlobalStyles.space*2,
+    },
   },
   selected: {
     borderColor: Colors.primary,
