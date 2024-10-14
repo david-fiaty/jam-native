@@ -4,7 +4,7 @@ import MenuItem from '@/components/base/MenuItem';
 import ModalView from '@/components/base/ModalView';
 import SettingsScreenItems from '@/constants/SettingsScreenItems';
 import TertiaryIcon from '../icons/TertiaryIcon';
-import ProfileScreen from './ProfileScreen';
+import AccountScreen from './AccountScreen';
 
 const SettingsScreen = () => {
   const data = SettingsScreenItems;
@@ -23,7 +23,7 @@ const SettingsScreen = () => {
             style={styles.list}
             renderItem={({item, index}) => {
               return (
-                <ProfileScreen />
+                <AccountScreen />
                 /*
                 <MenuItem 
                   item={item} 
