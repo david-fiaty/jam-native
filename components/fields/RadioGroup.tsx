@@ -2,7 +2,7 @@ import RadioGroup from 'react-native-radio-buttons-group';
 import React, { useState } from 'react';
 import { View } from 'react-native';
 
-const RadioGroup = () => {
+const SquareSelectList = () => {
   const [radioButtons, setRadioButtons] = useState([
     {
       id: '1',
@@ -41,4 +41,4 @@ const RadioGroup = () => {
   );
 }
 
-export default RadioGroup;
+export default SquareSelectList;
