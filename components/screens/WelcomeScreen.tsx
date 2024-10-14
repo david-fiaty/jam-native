@@ -1,5 +1,4 @@
 import { View, StyleSheet } from 'react-native';
-import { useRouter } from 'expo-router';
 import Slideshow from '@/components/slideshow/Slideshow';
 import BottomLinks from '@/components/navigation/BottomLinks';
 import JamLogo from '../images/JamLogo';
