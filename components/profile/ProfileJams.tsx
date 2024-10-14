@@ -2,6 +2,7 @@ import { StyleSheet, View, FlatList } from 'react-native';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import ApiClient from '@/classes/ApiClient';
 import TextBlock from '@/components/base/TextBlock';
+import { StaticImage } from '../base/StaticImage';
 
 const ProfileJams = () => {
   const data = ApiClient.get('jams');
@@ -19,7 +20,13 @@ const ProfileJams = () => {
           renderItem={({item, index}) => {
             return (
               <View style={styles.item}>
-                <TextBlock>{item.id}</TextBlock>   
+                 <StaticImage 
+                    source={item.image} 
+                    width="100%"
+                    height="100%"
+                    resizeMode="cover"
+                    style={styles.image}
+                 />
               </View>
             );
           }}
@@ -43,12 +50,13 @@ const styles = StyleSheet.create({
   },
   item: {
     backgroundColor: Colors.tertiary,
-    padding: 10,
-    borderWidth: 1,
     borderRadius: 8,
     borderColor: Colors.tertiary,
-    width: 99,
-    height: 99,
+    width: GlobalStyles.space*10,
+    height: GlobalStyles.space*10,
+  },
+  image: {
+    borderRadius: GlobalStyles.space,
   },
 });
 
