@@ -2,7 +2,7 @@ import { StyleSheet, View, TextInput } from 'react-native';
 import { Button } from '@rneui/themed';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import MediaField from '../fields/MediaField';
-import AddCollaboratorsButton from '../buttons/AddCollaboratorsButton';
+import CollaboratorsField from '../fields/CollaboratorsField';
 import TextBlock from '@/components/base/TextBlock';
 import SquareOptionsField from '../fields/SquareOptionsField';
 import JamCategories from '@/constants/JamCategories';
@@ -17,7 +17,7 @@ const JamForm = () => {
     
       <View style={styles.section}>
         <MediaField size={20} /> 
-        <AddCollaboratorsButton size={20} />
+        <CollaboratorsField size={20} />
       </View>
     
       <View style={styles.section}>
