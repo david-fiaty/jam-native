@@ -39,6 +39,10 @@ const styles = StyleSheet.create({
     gap: GlobalStyles.space/2,
   },
   square: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: Colors.tertiary,
     padding: 10,
     borderWidth: 1,
