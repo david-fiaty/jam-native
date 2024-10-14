@@ -1,9 +1,9 @@
 import { StyleSheet, Text } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import TopToolbar from '@/components/navigation/TopToolbar';
 import BackButton from '@/components/navigation/BackButton';
+import ProfileScreen from '@/components/screens/ProfileScreen';
 
 const Account = () => {
   const router = useRouter();
@@ -12,7 +12,7 @@ const Account = () => {
     <SafeAreaView style={styles.container}>
       <TopToolbar />
       <BackButton title="Account information" onPress={() => router.replace('/jams')}/>
-      <Text>ACCOUNT</Text>
+      <ProfileScreen />
     </SafeAreaView>
   );
 };
