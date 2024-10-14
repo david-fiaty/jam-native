@@ -2,8 +2,8 @@ import { Image, StyleSheet } from 'react-native';
 
 type Props = {
   source: string,
-  width: number,
-  height: number,
+  width?: string | object,
+  height?: number | object,
 };
 
 export function StaticImage({source, width, height}: Props) {
