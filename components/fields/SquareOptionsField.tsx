@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList, Touchable, TouchableOpacity } from 'react-native';
 import TextBlock from '../base/TextBlock';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
@@ -17,9 +17,11 @@ const SquareOptionsField = ({data}: Props) => {
       scrollEnabled={false}
       renderItem={({item, index}) => {
         return (
-          <View style={styles.item}>
-            <TextBlock>{item.label}</TextBlock>   
-          </View>
+          <TouchableOpacity onPress={() => console.log('clicked')}>
+            <View style={styles.item}>
+              <TextBlock>{item.label}</TextBlock>   
+            </View>
+          </TouchableOpacity>
         );
       }}
     />
