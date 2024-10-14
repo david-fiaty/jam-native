@@ -1,45 +1,43 @@
-import RadioGroup from 'react-native-radio-buttons-group';
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
+import TextBlock from '../base/TextBlock';
+import ApiClient from '@/classes/ApiClient';
+import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
-const SquareSelectList = () => {
-  const [radioButtons, setRadioButtons] = useState([
-    {
-      id: '1',
-      label: 'Option 1',
-      value: 'option1',
-      color: '#f39c12',
-      selected: false,
-      size: 24, // Size of the square
-      borderColor: '#34495e', // Border color for square
-      shape: 'square', // Custom shape
-    },
-    {
-      id: '2',
-      label: 'Option 2',
-      value: 'option2',
-      color: '#e74c3c',
-      selected: false,
-      size: 24,
-      borderColor: '#34495e',
-      shape: 'square',
-    },
-  ]);
+const SquareSelectList = () => {  
+  const data = ApiClient.get('jams').slice(0, 4);
 
-  function onPressRadioButton(radioButtonsArray) {
-    setRadioButtons(radioButtonsArray);
-  }
-
-  
   return (
-    <View>
-      <RadioGroup
-        radioButtons={radioButtons}
-        onPress={onPressRadioButton}
-        layout="row" // Horizontal layout
-      />
-    </View>
+    <FlatList 
+      data={data} 
+      numColumns={4}
+      contentContainerStyle={{gap: GlobalStyles.space}}
+      columnWrapperStyle={{gap: GlobalStyles.space}}
+      scrollEnabled={false}
+      renderItem={({item, index}) => {
+        return (
+          <View style={styles.item}>
+            <TextBlock>{item.id}</TextBlock>   
+          </View>
+        );
+      }}
+    />
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+  },
+  item: {
+    backgroundColor: Colors.tertiary,
+    padding: 10,
+    borderWidth: 1,
+    borderRadius: 8,
+    borderColor: Colors.tertiary,
+    width: 72,
+    height: 72,
+  },
+});
+
 
 export default SquareSelectList;
