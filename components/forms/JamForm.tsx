@@ -5,7 +5,7 @@ import ApiClient from '@/classes/ApiClient';
 import AddMediaButton from '../buttons/AddMediaButton';
 import AddCollaboratorsButton from '../buttons/AddCollaboratorsButton';
 import TextBlock from '@/components/base/TextBlock';
-import SquareSelectList from '../fields/SquareSelectList';
+import SquareOptionsField from '../fields/SquareOptionsField';
 
 const JamForm = () => {
   const data = ApiClient.get('jams').slice(0, 4);
@@ -13,7 +13,7 @@ const JamForm = () => {
   return (
     <View style={styles.container}>    
       <TextBlock>What kind of Jam is it?</TextBlock>
-      <SquareSelectList />
+      <SquareOptionsField data={data} />
     
       <View style={styles.section}>
         <AddMediaButton size={20} /> 
