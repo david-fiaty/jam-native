@@ -1,17 +1,21 @@
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { useRouter } from 'expo-router';
 import TextBlock from '@/components/base/TextBlock';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
 type Props = {
   item: object,
   index: number,
-  onPress?: () => void,
+  onPress: () => void,
+  path: string,
 };
 
-const MenuItem = ({item, index, onPress}: Props) => {
+const MenuItem = ({item, index, path}: Props) => {
+  const router = useRouter();
+
   return (
     <View style={styles.container}>      
-      <TouchableOpacity /*onPress={onPress} */>
+      <TouchableOpacity onPress={() => router.push(item.path) }>
         <TextBlock>{item.label}</TextBlock>
       </TouchableOpacity>
     </View>
