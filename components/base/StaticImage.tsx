@@ -2,8 +2,8 @@ import { Image, StyleSheet } from 'react-native';
 
 type Props = {
   source: string,
-  width?: string | object,
-  height?: number | object,
+  width?: string | number,
+  height?: number | number,
   resizeMethod?: string,
   resizeMode?: string,
   style?: object,
