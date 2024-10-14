@@ -28,8 +28,10 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Why is form changing on second cabottom account tab click
 
 # New questions 
-- Notifications count: show total or less than total?
 - Industries lists implementation?
+- Add collaborators implementation?
+- How to add project?
+- Notifications count: show total or less than total?
 
 # Todo
 - Make <JamLogo> size optional 

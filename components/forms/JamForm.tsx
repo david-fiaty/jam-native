@@ -1,8 +1,8 @@
-import { StyleSheet, View, FlatList, TextInput } from 'react-native';
+import { StyleSheet, View, TextInput } from 'react-native';
 import { Button } from '@rneui/themed';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-import AddMediaButton from '../buttons/AddMediaButton';
-import AddCollaboratorsButton from '../buttons/AddCollaboratorsButton';
+import MediaField from '../fields/MediaField';
+import CollaboratorsField from '../fields/CollaboratorsField';
 import TextBlock from '@/components/base/TextBlock';
 import SquareOptionsField from '../fields/SquareOptionsField';
 import JamCategories from '@/constants/JamCategories';
@@ -14,24 +14,29 @@ const JamForm = () => {
     <View style={styles.container}>    
       <TextBlock>What kind of Jam is it?</TextBlock>
       <SquareOptionsField data={data} />
-    
       <View style={styles.section}>
-        <AddMediaButton size={20} /> 
-        <AddCollaboratorsButton size={20} />
+        <MediaField /> 
+        <CollaboratorsField />
       </View>
-    
       <View style={styles.section}>
         <TextInput
           style={styles.caption}
           placeholder="Add caption"
           placeholderTextColor={GlobalStyles.text.color}
           multiline={true}
-          numberOfLines={4}
-          maxLength={200}
           textAlignVertical="top"
         />
       </View>
-
+      <TextInput
+        style={GlobalStyles.field}
+        placeholder="Location"
+        placeholderTextColor={GlobalStyles.text.color}
+      />
+      <TextInput
+        style={GlobalStyles.field}
+        placeholder="Status"
+        placeholderTextColor={GlobalStyles.text.color}
+      />
       <TextInput
         style={GlobalStyles.field}
         placeholder="Main industries"

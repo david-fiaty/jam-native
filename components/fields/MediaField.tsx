@@ -1,20 +1,16 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import TextBlock from '@/components/base/TextBlock';
 
-type Props = {
-  size?: number,
-};
-
-const AddMediaButton = ({size}: Props) => {
-  size = size ? size : GlobalStyles.icon.size;
-  
+const MediaField = () => {  
   return (
-    <View style={styles.container}>
-      <Ionicons name="add" size={size} style={styles.icon} />   
-      <TextBlock>Add media</TextBlock>
-    </View>
+    <TouchableOpacity onPress={() => console.log('clicked')}>
+      <View style={styles.container}>
+        <Ionicons name="add" size={GlobalStyles.icon.size} style={styles.icon} />   
+        <TextBlock>Add media</TextBlock>
+      </View>
+    </TouchableOpacity>
   );
 };
 
@@ -36,4 +32,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddMediaButton;
+export default MediaField;
