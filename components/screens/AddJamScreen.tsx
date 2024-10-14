@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import ModalView from '@/components/base/ModalView';
 import JamForm from '../forms/JamForm';
 import ClearIcon from '../icons/ClearIcon';

@@ -6,6 +6,8 @@ import CollaboratorsField from '../fields/CollaboratorsField';
 import TextBlock from '@/components/base/TextBlock';
 import SquareOptionsField from '../fields/SquareOptionsField';
 import JamCategories from '@/constants/JamCategories';
+import TextareaField from '../fields/TextareaField';
+import InputTextField from '../fields/InputTextField';
 
 const JamForm = () => {
   const data = JamCategories;
@@ -19,13 +21,7 @@ const JamForm = () => {
         <CollaboratorsField />
       </View>
       <View style={styles.section}>
-        <TextInput
-          style={styles.caption}
-          placeholder="Add caption"
-          placeholderTextColor={GlobalStyles.text.color}
-          multiline={true}
-          textAlignVertical="top"
-        />
+        <TextareaField placeholder="Add caption" />
       </View>
       <TextInput
         style={GlobalStyles.field}
