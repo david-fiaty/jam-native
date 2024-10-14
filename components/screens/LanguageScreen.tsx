@@ -7,14 +7,20 @@ import ProfileJams from '@/components/profile/ProfileJams';
 import ProfileProjects from '@/components/profile/ProfileProjects';
 
 import { GlobalStyles } from '@/constants/GlobalStyles';
+import MenuItem from '../base/MenuItem';
+import TextBlock from '../base/TextBlock';
 
-const LanguageScreen = () => {
+type Props = {
+  menuItem: object,
+};
+
+const LanguageScreen = ({menuItem}: Props) => {
   return (
     <View style={styles.container}>    
       <ModalView 
-        title="Your profile" 
-        animation="slide"
-        label={<ClearIcon name="user" size={GlobalStyles.tabsbar.icon.size} />}
+        title={menuItem.label} 
+        animation="fade"
+        label={<TextBlock>{menuItem.label}</TextBlock>}
         content={
           <ScrollView 
             nestedScrollEnabled={true}

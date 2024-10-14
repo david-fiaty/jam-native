@@ -23,7 +23,7 @@ const SettingsScreen = () => {
             style={styles.list}
             renderItem={({item, index}) => {
               return (
-                <AccountScreen />
+                <AccountScreen menuItem={item}/>
                 /*
                 <MenuItem 
                   item={item} 
