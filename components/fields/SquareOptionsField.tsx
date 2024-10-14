@@ -18,7 +18,9 @@ const SquareOptionsField = ({data}: Props) => {
       renderItem={({item, index}) => {
         return (
           <TouchableOpacity onPress={() => console.log('clicked')}>
-            <View style={styles.item}>
+            <View style={styles.container}>
+              <View style={styles.item.square}>
+              </View>
               <TextBlock>{item.label}</TextBlock>   
             </View>
           </TouchableOpacity>
@@ -30,15 +32,23 @@ const SquareOptionsField = ({data}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: GlobalStyles.space/2,
   },
   item: {
-    backgroundColor: Colors.tertiary,
-    padding: 10,
-    borderWidth: 1,
-    borderRadius: 8,
-    borderColor: Colors.tertiary,
-    width: 72,
-    height: 72,
+    square: {
+      backgroundColor: Colors.tertiary,
+      padding: 10,
+      borderWidth: 1,
+      borderRadius: 8,
+      borderColor: Colors.tertiary,
+      width: 72,
+      height: 72,
+    },
+    icon: {
+
+    },
   },
 });
 
