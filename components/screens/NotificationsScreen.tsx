@@ -7,7 +7,7 @@ import TextBlock from '../base/TextBlock';
 
 const NotificationsScreen = () => {  
   const data = ApiClient.get('notifications');
-  const count = 22;
+  const count = data.length < 100 ? data.length : 99;
 
   return (
     <View style={styles.container}>   
@@ -20,7 +20,11 @@ const NotificationsScreen = () => {
             data={data} 
             horizontal={false}  
             style={styles.list}
-            renderItem={({item, index}) => <MenuItem item={item} index={index} />} 
+            renderItem={({item, index}) => {
+              return (
+                <MenuItem item={item} index={index} />
+              );
+            }} 
           />
         }
       />   
@@ -44,7 +48,7 @@ const styles = StyleSheet.create({
     borderRadius: GlobalStyles.space*1.5,
     textAlign: 'center',
     verticalAlign: 'middle',
-    fontSize: GlobalStyles.space,
+    fontSize: GlobalStyles.space*1.2,
   },
 });
 
