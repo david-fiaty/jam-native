@@ -6,11 +6,11 @@ import BackButton from '@/components/navigation/BackButton';
 
 const Account = () => {
   const navigation = useNavigation();
-  
+
   return (
     <SafeAreaView style={styles.container}>
       <TopToolbar />
-      <BackButton title="Account information" onPress={() => navigation.popToTop()}/>
+      <BackButton title="Account information" onPress={() => navigation.goBack()}/>
       <Text>ACCOUNT</Text>
     </SafeAreaView>
   );
