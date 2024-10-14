@@ -20,9 +20,9 @@ const SquareOptionsField = ({data}: Props) => {
       scrollEnabled={false}
       renderItem={({item, index}) => {
         return (
-          <TouchableOpacity onPress={() => console.log('clicked')}>
+          <TouchableOpacity onPress={() => setSelectedOption(item.id)}>
             <View style={styles.container}>
-              <View style={styles.square}>
+              <View style={[styles.square, selectedOption == item.id ? styles.selected : {}]}>
                 <StaticIcon name={item.icon} iconStyle={styles.icon} />
               </View>
               <TextBlock>{item.label}</TextBlock>   
@@ -55,6 +55,9 @@ const styles = StyleSheet.create({
   },
   icon: {
     ...GlobalStyles.text,
+  },
+  selected: {
+    borderColor: Colors.primary,
   },
 });
 
