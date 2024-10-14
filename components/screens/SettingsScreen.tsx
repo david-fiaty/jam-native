@@ -1,7 +1,6 @@
 import { StyleSheet, View, FlatList } from 'react-native';
 import MenuItem from '@/components/base/MenuItem';
 import ModalView from '@/components/base/ModalView';
-import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import SettingsScreenItems from '@/constants/SettingsScreenItems';
 import TertiaryIcon from '../icons/TertiaryIcon';
 

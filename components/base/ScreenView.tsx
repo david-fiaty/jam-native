@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { Colors } from '@/constants/GlobalStyles';
 
 type Props = {
-  style?: {},
+  style?: object,
   children?: ReactNode,
 };
 

@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 type Props = {
-  style?: {},
+  style?: object,
   children?: ReactNode,
 };
 

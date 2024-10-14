@@ -3,8 +3,8 @@ import TextBlock from '@/components/base/TextBlock';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
 type Props = {
+  item: object,
   index: number,
-  item: {},
 };
 
 const MenuItem = ({item, index}: Props) => {
