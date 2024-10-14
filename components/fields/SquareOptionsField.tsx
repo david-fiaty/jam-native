@@ -9,6 +9,8 @@ type Props = {
 };
 
 const SquareOptionsField = ({data}: Props) => {  
+  const [selectedOption, setSelectedOption] = useState(null);
+
   return (
     <FlatList 
       data={data} 
