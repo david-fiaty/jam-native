@@ -5,13 +5,11 @@ import BottomLinks from '@/components/navigation/BottomLinks';
 import JamLogo from '../images/JamLogo';
 import LoginSignupButton from '../buttons/LoginSignupButton';
 import ScreenView from '@/components/base/ScreenView';
-import SquareSelectList from '../fields/RadioGroup';
 
 const WelcomeScreen = () => {
   return (
     <View style={styles.container}>
       <ScreenView>
-        <SquareSelectList />
         <JamLogo width={110} height={110} />    
         <Slideshow />
         <LoginSignupButton />
