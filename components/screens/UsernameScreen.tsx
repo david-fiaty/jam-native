@@ -9,8 +9,8 @@ const UsernameScreen = () => {
 
   return (
     <View style={styles.container}>
-      <BackButton title="Account title" onPress={() => navigation.popToTop()}/>
-      <TextBlock>Account content</TextBlock>
+      <BackButton title="Username title" onPress={() => navigation.popToTop()}/>
+      <TextBlock>Username content</TextBlock>
       <BottomLinks />
     </View>
   );
