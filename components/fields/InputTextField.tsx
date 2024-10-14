@@ -6,7 +6,7 @@ type Props = {
   style?: object,
 };
 
-const TextField = ({placeholder, style}: Props) => {
+const InputTextField = ({placeholder, style}: Props) => {
   return (
     <View style={styles.container}>
       <TextInput
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
   field: GlobalStyles.field,
 });
 
-export default TextField;
+export default InputTextField;
