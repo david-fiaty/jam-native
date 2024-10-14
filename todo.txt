@@ -30,6 +30,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 # New questions 
 - Notifications count: show total or less than total?
 - Industries lists implementation?
+- Add collaborators implementation?
 
 # Todo
 - Make <JamLogo> size optional 
