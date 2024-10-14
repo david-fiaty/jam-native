@@ -40,7 +40,6 @@ const ProfileJams = () => {
 
 const styles = StyleSheet.create({
   container: {
-    gap: GlobalStyles.space,
     marginTop: GlobalStyles.space*2,
   },
   title: {
