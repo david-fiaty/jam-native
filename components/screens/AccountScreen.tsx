@@ -10,13 +10,17 @@ import { GlobalStyles } from '@/constants/GlobalStyles';
 import MenuItem from '../base/MenuItem';
 import TextBlock from '../base/TextBlock';
 
-const AccountScreen = () => {
+type Props = {
+  menuItem: object,
+};
+
+const AccountScreen = ({menuItem}: Props) => {
   return (
     <View style={styles.container}>    
       <ModalView 
-        title="Account screen" 
+        title={menuItem.label} 
         animation="fade"
-        label={<TextBlock>Account information</TextBlock>}
+        label={<TextBlock>{menuItem.label}</TextBlock>}
         content={
           <ScrollView 
             nestedScrollEnabled={true}
