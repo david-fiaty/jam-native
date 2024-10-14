@@ -26,8 +26,6 @@ const JamForm = () => {
           placeholder="Add caption"
           placeholderTextColor={GlobalStyles.text.color}
           multiline={true}
-          numberOfLines={4}
-          maxLength={200}
           textAlignVertical="top"
         />
       </View>
