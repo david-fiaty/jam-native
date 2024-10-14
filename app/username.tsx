@@ -6,7 +6,7 @@ const Username = () => {
   return (
     <SafeAreaView style={styles.container}>
       <TopToolbar />
-      <Text>USER NAME</Text>
+      <Text>USERNAME</Text>
     </SafeAreaView>
   );
 };
