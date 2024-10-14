@@ -22,13 +22,7 @@ const SettingsScreen = () => {
             style={styles.list}
             renderItem={({item, index}) => {
               return (
-                <MenuItem 
-                  item={item} 
-                  index={index} 
-                  onPress={() => {
-                    router.push(item.path) 
-                  }}
-                />
+                <MenuItem item={item} index={index} path={item.path} />
               );
             }} 
           />
