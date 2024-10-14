@@ -5,6 +5,7 @@ import ApiClient from '@/classes/ApiClient';
 import AddMediaButton from '../buttons/AddMediaButton';
 import AddCollaboratorsButton from '../buttons/AddCollaboratorsButton';
 import TextBlock from '@/components/base/TextBlock';
+import SquareSelectList from '../fields/SquareSelectList';
 
 const JamForm = () => {
   const data = ApiClient.get('jams').slice(0, 4);
@@ -12,20 +13,7 @@ const JamForm = () => {
   return (
     <View style={styles.container}>    
       <TextBlock>What kind of Jam is it?</TextBlock>
-      <FlatList 
-        data={data} 
-        numColumns={4}
-        contentContainerStyle={{gap: GlobalStyles.space}}
-        columnWrapperStyle={{gap: GlobalStyles.space}}
-        scrollEnabled={false}
-        renderItem={({item, index}) => {
-          return (
-            <View style={styles.item}>
-              <TextBlock>{item.id}</TextBlock>   
-            </View>
-          );
-        }}
-      />
+      <SquareSelectList />
     
       <View style={styles.section}>
         <AddMediaButton size={20} /> 
