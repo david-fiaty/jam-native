@@ -5,7 +5,7 @@ import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 type Props = {
   item: object,
   index: number,
-  onPress: () => void,
+  onPress?: () => void,
 };
 
 const MenuItem = ({item, index, onPress}: Props) => {
