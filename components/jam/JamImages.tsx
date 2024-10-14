@@ -14,6 +14,7 @@ const JamImages = ({item, index}: Props) => {
         source={item.image} 
         width="100%"
         height="100%"
+        resizeMode="cover"
       />   
     </View>
   );

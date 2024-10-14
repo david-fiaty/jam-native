@@ -4,14 +4,16 @@ type Props = {
   source: string,
   width?: string | object,
   height?: number | object,
+  resizeMethod?: string,
+  resizeMode?: string,
 };
 
-export function StaticImage({source, width, height}: Props) {
+export function StaticImage({source, width, height, resizeMethod, resizeMode}: Props) {
   return (
     <Image 
       source={source} 
-      resizeMethod="scale"
-      resizeMode="contain"
+      resizeMethod={resizeMethod || 'scale'}
+      resizeMode={resizeMode || 'contain'}
       style={[styles.image, {width: width, height: height}]} 
     />   
   );
