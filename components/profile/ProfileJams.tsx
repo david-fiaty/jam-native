@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import ApiClient from '@/classes/ApiClient';
 import TextBlock from '@/components/base/TextBlock';
@@ -19,15 +19,17 @@ const ProfileJams = () => {
           scrollEnabled={false}
           renderItem={({item, index}) => {
             return (
-              <View style={styles.item}>
-                 <StaticImage 
+              <TouchableOpacity>
+                <View style={styles.item}>
+                  <StaticImage 
                     source={item.image} 
                     width="100%"
                     height="100%"
                     resizeMode="cover"
                     style={styles.image}
-                 />
-              </View>
+                  />
+                </View>
+              </TouchableOpacity>
             );
           }}
         />
