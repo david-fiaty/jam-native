@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList, Touchable, TouchableOpacity } from 'react-native';
 import TextBlock from '../base/TextBlock';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+import StaticIcon from '../base/StaticIcon';
 
 type Props = {
   data: object,
@@ -17,9 +18,14 @@ const SquareOptionsField = ({data}: Props) => {
       scrollEnabled={false}
       renderItem={({item, index}) => {
         return (
-          <View style={styles.item}>
-            <TextBlock>{item.id}</TextBlock>   
-          </View>
+          <TouchableOpacity onPress={() => console.log('clicked')}>
+            <View style={styles.container}>
+              <View style={styles.item.square}>
+                <StaticIcon name={item.icon} />
+              </View>
+              <TextBlock>{item.label}</TextBlock>   
+            </View>
+          </TouchableOpacity>
         );
       }}
     />
@@ -28,15 +34,23 @@ const SquareOptionsField = ({data}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: GlobalStyles.space/2,
   },
   item: {
-    backgroundColor: Colors.tertiary,
-    padding: 10,
-    borderWidth: 1,
-    borderRadius: 8,
-    borderColor: Colors.tertiary,
-    width: 72,
-    height: 72,
+    square: {
+      backgroundColor: Colors.tertiary,
+      padding: 10,
+      borderWidth: 1,
+      borderRadius: 8,
+      borderColor: Colors.tertiary,
+      width: 72,
+      height: 72,
+    },
+    icon: {
+
+    },
   },
 });
 

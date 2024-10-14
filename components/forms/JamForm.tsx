@@ -1,14 +1,14 @@
 import { StyleSheet, View, FlatList, TextInput } from 'react-native';
 import { Button } from '@rneui/themed';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-import ApiClient from '@/classes/ApiClient';
 import AddMediaButton from '../buttons/AddMediaButton';
 import AddCollaboratorsButton from '../buttons/AddCollaboratorsButton';
 import TextBlock from '@/components/base/TextBlock';
 import SquareOptionsField from '../fields/SquareOptionsField';
+import JamCategories from '@/constants/JamCategories';
 
 const JamForm = () => {
-  const data = ApiClient.get('jams').slice(0, 4);
+  const data = JamCategories;
 
   return (
     <View style={styles.container}>    
