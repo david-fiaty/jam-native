@@ -6,19 +6,23 @@ import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 type Props = {
   item: object,
   index: number,
-  path: string,
+  path?: string,
+  onPress: () => void,
 };
 
-const MenuItem = ({item, index, path}: Props) => {
+const MenuItem = ({item, index, path, onPress}: Props) => {
   const router = useRouter();
 
   return (
     <View style={styles.container}>      
       <TouchableOpacity 
+      onPress={onPress}
+      /*
         onPress={() => {
           console.log(item.path);
           router.push(item.path) 
         }}
+          */
       >
         <TextBlock>{item.label}</TextBlock>
       </TouchableOpacity>
