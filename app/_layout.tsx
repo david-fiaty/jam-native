@@ -34,6 +34,13 @@ export default function RootLayout() {
         <Stack.Screen name="password" options={{ headerShown: false }} />
         <Stack.Screen name="username" options={{ headerShown: false }} />
         <Stack.Screen name="language" options={{ headerShown: false }} />
+        <Stack.Screen 
+          name="test" 
+          options={{
+            headerShown: false,
+            presentation: 'modal',
+          }} 
+        />
       </Stack>
     </ThemeProvider>
   );
