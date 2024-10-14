@@ -1,8 +1,8 @@
-import { StyleSheet, View, FlatList, TextInput } from 'react-native';
+import { StyleSheet, View, TextInput } from 'react-native';
 import { Button } from '@rneui/themed';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-import AddMediaButton from '../buttons/AddMediaButton';
-import AddCollaboratorsButton from '../buttons/AddCollaboratorsButton';
+import MediaField from '../fields/MediaField';
+import CollaboratorsField from '../fields/CollaboratorsField';
 import TextBlock from '@/components/base/TextBlock';
 import SquareOptionsField from '../fields/SquareOptionsField';
 import JamCategories from '@/constants/JamCategories';
@@ -16,8 +16,8 @@ const JamForm = () => {
       <SquareOptionsField data={data} />
     
       <View style={styles.section}>
-        <AddMediaButton size={20} /> 
-        <AddCollaboratorsButton size={20} />
+        <MediaField size={20} /> 
+        <CollaboratorsField size={20} />
       </View>
     
       <View style={styles.section}>
@@ -31,7 +31,16 @@ const JamForm = () => {
           textAlignVertical="top"
         />
       </View>
-
+      <TextInput
+        style={GlobalStyles.field}
+        placeholder="Location"
+        placeholderTextColor={GlobalStyles.text.color}
+      />
+      <TextInput
+        style={GlobalStyles.field}
+        placeholder="Status"
+        placeholderTextColor={GlobalStyles.text.color}
+      />
       <TextInput
         style={GlobalStyles.field}
         placeholder="Main industries"

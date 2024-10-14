@@ -39,6 +39,8 @@ export const GlobalStyles = {
   icon: {
     color: Colors.primary,
     backgroundColor: Colors.secondary,
+    textAlign: 'center',
+    verticalAlign: 'middle',
     size: 14,
     primary: {
       backgroundColor: Colors.primary,
