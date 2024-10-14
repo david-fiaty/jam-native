@@ -9,8 +9,8 @@ const LanguageScreen = () => {
 
   return (
     <View style={styles.container}>
-      <BackButton title="Account title" onPress={() => navigation.popToTop()}/>
-      <TextBlock>Account content</TextBlock>
+      <BackButton title="Language title" onPress={() => navigation.popToTop()}/>
+      <TextBlock>Language content</TextBlock>
       <BottomLinks />
     </View>
   );
