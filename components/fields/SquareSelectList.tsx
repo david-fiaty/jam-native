@@ -30,6 +30,7 @@ const SquareSelectList = () => {
     setRadioButtons(radioButtonsArray);
   }
 
+  
   return (
     <View>
       <RadioGroup
