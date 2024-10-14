@@ -29,7 +29,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 
 # New questions 
 - Notifications count: show total or less than total?
-- How to quit search when it's opened? there is only a clear search button?
+- Industries lists implementation?
 
 # Todo
 - Make <JamLogo> size optional 
