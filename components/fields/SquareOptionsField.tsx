@@ -9,6 +9,8 @@ type Props = {
 };
 
 const SquareOptionsField = ({data}: Props) => {  
+  const [selectedOption, setSelectedOption] = useState(null);
+
   return (
     <FlatList 
       data={data} 
@@ -18,10 +20,10 @@ const SquareOptionsField = ({data}: Props) => {
       scrollEnabled={false}
       renderItem={({item, index}) => {
         return (
-          <TouchableOpacity onPress={() => console.log('clicked')}>
+          <TouchableOpacity onPress={() => setSelectedOption(item.id)}>
             <View style={styles.container}>
-              <View style={styles.item.square}>
-                <StaticIcon name={item.icon} />
+              <View style={[styles.square, selectedOption == item.id ? styles.selected : {}]}>
+                <StaticIcon name={item.icon} iconStyle={styles.icon} />
               </View>
               <TextBlock>{item.label}</TextBlock>   
             </View>
@@ -38,19 +40,24 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     gap: GlobalStyles.space/2,
   },
-  item: {
-    square: {
-      backgroundColor: Colors.tertiary,
-      padding: 10,
-      borderWidth: 1,
-      borderRadius: 8,
-      borderColor: Colors.tertiary,
-      width: 72,
-      height: 72,
-    },
-    icon: {
-
-    },
+  square: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.tertiary,
+    padding: 10,
+    borderWidth: 1,
+    borderRadius: 8,
+    borderColor: Colors.tertiary,
+    width: 72,
+    height: 72,
+  },
+  icon: {
+    ...GlobalStyles.text,
+  },
+  selected: {
+    borderColor: Colors.primary,
   },
 });
 
