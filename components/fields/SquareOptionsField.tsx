@@ -18,7 +18,7 @@ const SquareOptionsField = ({data}: Props) => {
       renderItem={({item, index}) => {
         return (
           <View style={styles.item}>
-            <TextBlock>{item.id}</TextBlock>   
+            <TextBlock>{item.label}</TextBlock>   
           </View>
         );
       }}
