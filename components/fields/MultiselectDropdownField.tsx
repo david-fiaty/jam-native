@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 import { MaterialIcons as Icon } from '@expo/vector-icons';
-import { GlobalStyles } from '@/constants/GlobalStyles';
+import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
 const items = [
   { name: 'Cars', id: 1},
@@ -37,8 +37,10 @@ const styles = StyleSheet.create({
     ...{
       justifyContent: 'center',
       width: '100%',
+      height: 'auto',
     },
   },
 });
+
 
 export default MultiselectDropdownField;
