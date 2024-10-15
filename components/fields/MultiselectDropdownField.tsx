@@ -18,7 +18,6 @@ const MultiselectDropdownField = () => {
 
   return (
     <View style={styles.container}>
-      <View>
         <SectionedMultiSelect
           items={items}
           IconRenderer={Icon}
@@ -26,7 +25,6 @@ const MultiselectDropdownField = () => {
           onSelectedItemsChange={setSelectedItems}
           selectedItems={selectedItems}
         />
-      </View>
     </View>
   );
 }
@@ -41,6 +39,5 @@ const styles = StyleSheet.create({
     },
   },
 });
-
 
 export default MultiselectDropdownField;
