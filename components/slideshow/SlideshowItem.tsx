@@ -1,4 +1,4 @@
-import { StyleSheet, Text, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import Animated, { SharedValue, useAnimatedStyle, interpolate, Extrapolation } from 'react-native-reanimated';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import TextBlock from '@/components/base/TextBlock';
