@@ -1,10 +1,7 @@
-import { StyleSheet, View, ScrollView, Pressable } from 'react-native';
+import { StyleSheet, View, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 import ModalView from '@/components/base/ModalView';
-import ProfileForm from '@/components/profile/ProfileForm';
-import ProfileImage from '@/components/profile/ProfileImage';
-import ProfileJams from '@/components/profile/ProfileJams';
-import ProfileProjects from '@/components/profile/ProfileProjects';
 import TextBlock from '../base/TextBlock';
+import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
 type Props = {
   label: JSX.Element,
@@ -13,6 +10,8 @@ type Props = {
 };
 
 const CheckboxListField = ({label, title, data}: Props) => {
+  console.log(data);
+
   return (
     <View style={styles.container}>    
       <ModalView 
@@ -24,12 +23,22 @@ const CheckboxListField = ({label, title, data}: Props) => {
             nestedScrollEnabled={true}
             contentContainerStyle={{ flexGrow: 1 }}
           >
-            <Pressable>
-              <ProfileImage />
-              <ProfileForm />
-              <ProfileProjects />
-              <ProfileJams />
-            </Pressable>
+            <FlatList 
+              data={data} 
+              numColumns={1}
+              contentContainerStyle={{gap: GlobalStyles.space}}
+              columnWrapperStyle={{gap: GlobalStyles.space}}
+              scrollEnabled={false}
+              renderItem={({item, index}) => {
+                return (
+                  <TouchableOpacity onPress={() => console.log('clicked')}>
+                    <View style={styles.container}>
+                      <TextBlock>{item.name}</TextBlock>   
+                    </View>
+                  </TouchableOpacity>
+                );
+              }}
+            />
           </ScrollView>  
         }
       />    
@@ -39,6 +48,7 @@ const CheckboxListField = ({label, title, data}: Props) => {
 
 const styles = StyleSheet.create({
   container: {},
+  item: {},
   scroll: {
     flexGrow: 1,
   },  
