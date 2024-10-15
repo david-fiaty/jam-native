@@ -9,14 +9,15 @@ import JamCategories from '@/constants/JamCategories';
 import TextareaField from '../fields/TextareaField';
 import InputTextField from '../fields/InputTextField';
 import CheckboxListField from '../fields/CheckboxListField';
+import ApiClient from '@/classes/ApiClient';
 
 const JamForm = () => {
-  const data = JamCategories;
+  const jammers = ApiClient.get('jammers');
 
   return (
     <View style={styles.container}>    
       <TextBlock>What kind of Jam is it?</TextBlock>
-      <SquareOptionsField data={data} />
+      <SquareOptionsField data={JamCategories} />
       <View style={styles.section}>
         <MediaPickerField /> 
         <CheckboxListField 
@@ -27,7 +28,7 @@ const JamForm = () => {
             </View>
           }
           title={<TextBlock>Add collaborators</TextBlock>}
-          data={data}
+          data={jammers}
         />
       </View>
       <View style={styles.section}>
