@@ -82,5 +82,6 @@ export const GlobalStyles = {
     borderColor: Colors.tertiary, 
     borderRadius: space,
     paddingHorizontal: space, 
+    justifyContent: 'center',
   },
 };
