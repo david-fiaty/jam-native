@@ -10,6 +10,7 @@ import TextareaField from '../fields/TextareaField';
 import InputTextField from '../fields/InputTextField';
 import CheckboxListField from '../fields/CheckboxListField';
 import ApiClient from '@/classes/ApiClient';
+import LocationPickerField from '../fields/LocationPickerField';
 
 const JamForm = () => {
   const jammers = ApiClient.get('jammers');
@@ -34,10 +35,9 @@ const JamForm = () => {
       <View style={styles.section}>
         <TextareaField placeholder="Add caption" />
       </View>
-      <InputTextField
-        style={GlobalStyles.field}
-        placeholder="Location"
-        placeholderTextColor={GlobalStyles.text.color}
+      <LocationPickerField 
+        title={<TextBlock>Select your location</TextBlock>}
+        label="Location"
       />
       <InputTextField
         style={GlobalStyles.field}

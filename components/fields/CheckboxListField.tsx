@@ -14,8 +14,6 @@ type Props = {
 };
 
 const CheckboxListField = ({label, title, data}: Props) => {
-  console.log(data);
-
   return (
     <View style={styles.container}>    
       <ModalView 
