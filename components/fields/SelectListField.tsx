@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
-import { GlobalStyles } from "@/constants/GlobalStyles";
+import { GlobalStyles, Colors } from "@/constants/GlobalStyles";
+import TextBlock from "../base/TextBlock";
 
 const data = [
-  { label: "Item 1", value: "1" },
-  { label: "Item 2", value: "2" },
+  { label: "Public", value: 1 },
+  { label: "Private", value: 0 },
 ];
 
 const SelectListField = () => {
@@ -23,24 +24,32 @@ const SelectListField = () => {
     <View style={styles.container}>
       {renderLabel()}
       <Dropdown
-        style={[styles.dropdown, isFocus && { borderColor: "blue" }]}
+        style={[styles.field, isFocus && { borderColor: Colors.tertiary }]}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
-        inputSearchStyle={styles.inputSearchStyle}
         iconStyle={styles.iconStyle}
+        itemTextStyle={styles.itemTextStyle}
         data={data}
-        search
+        search={false}
         maxHeight={300}
         labelField="label"
         valueField="value"
-        placeholder={!isFocus ? "Status" : "..."}
+        placeholder="Status"
         searchPlaceholder="Search..."
+        iconColor={Colors.primary}
         value={value}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
         onChange={(item) => {
           setValue(item.value);
           setIsFocus(false);
+        }}
+        renderItem={(item, selected) => {
+          return (
+            <View style={styles.item}>
+              <TextBlock>{item.label}</TextBlock>
+            </View>
+          );
         }}
       />
     </View>
@@ -52,11 +61,11 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     width: '100%',
   },
-  dropdown: {
+  field: {
     ...GlobalStyles.field,
   },
   icon: {
-    marginRight: 5,
+    marginRight: GlobalStyles.space,
   },
   label: {
     ...GlobalStyles.text,
@@ -70,15 +79,16 @@ const styles = StyleSheet.create({
       fontSize: 14,
     },
   },
+  item: {
+    paddingVertical: GlobalStyles.space,
+    paddingHorizontal: GlobalStyles.space,
+  },
   placeholderStyle: GlobalStyles.text,
   selectedTextStyle: GlobalStyles.text,
+  itemTextStyle: GlobalStyles.text,
   iconStyle: {
-    width: 20,
-    height: 20,
-  },
-  inputSearchStyle: {
-    height: 40,
-    fontSize: 16,
+    width: GlobalStyles.space*2,
+    height: GlobalStyles.space*2,
   },
 });
 
