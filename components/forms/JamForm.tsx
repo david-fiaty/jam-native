@@ -26,7 +26,7 @@ const JamForm = () => {
               <TextBlock>Add collaborators</TextBlock>
             </View>
           }
-          title={<TextBlock>Title</TextBlock>}
+          title={<TextBlock>Add collaborators</TextBlock>}
           data={data}
         />
       </View>
