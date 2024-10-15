@@ -47,21 +47,22 @@ const MultiselectDropdownField = () => {
   console.log('Selected:', selectedItems);
 
   return (
-    <View style={styles.container}>
-        <SectionedMultiSelect
-          items={items}
-          uniqueKey="id"
-          subKey="children"
-          IconRenderer={Icon}
-          onSelectedItemsChange={setSelectedItems}
-          selectedItems={selectedItems}
-        />
+    <View style={styles.field}>
+      <SectionedMultiSelect
+        items={items}
+        uniqueKey="id"
+        subKey="children"
+        showDropDowns={true}
+        IconRenderer={Icon}
+        onSelectedItemsChange={setSelectedItems}
+        selectedItems={selectedItems}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  field: {
     ...GlobalStyles.field,
     ...{
       justifyContent: 'center',
