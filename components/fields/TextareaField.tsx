@@ -6,13 +6,15 @@ type Props = {
   style?: object,
 };
 
-const InputTextField = ({placeholder, style}: Props) => {
+const TextareaField = ({placeholder, style}: Props) => {
   return (
     <View style={styles.container}>
       <TextInput
         style={[styles.field, style]}
         placeholder={placeholder}
         placeholderTextColor={GlobalStyles.text.color}
+        multiline={true}
+        textAlignVertical="top"
       />
     </View>
   );
@@ -24,7 +26,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  field: GlobalStyles.field,
+  field: {
+    ...GlobalStyles.field,
+    ...{
+      paddingTop: GlobalStyles.space,
+      height: GlobalStyles.space*10,
+    },
+  },
 });
 
-export default InputTextField;
+export default TextareaField;
