@@ -92,7 +92,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'red',
   },
   icon: {
     position: 'absolute',
