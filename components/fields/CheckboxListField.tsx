@@ -5,6 +5,7 @@ import TextBlock from '../base/TextBlock';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ClearIcon from '../icons/ClearIcon';
 import SecondaryIcon from '../icons/SecondaryIcon';
+import InputTextField from './InputTextField';
 
 type Props = {
   label: JSX.Element,
@@ -26,6 +27,7 @@ const CheckboxListField = ({label, title, data}: Props) => {
             nestedScrollEnabled={true}
             contentContainerStyle={{ flexGrow: 1 }}
           >
+            <InputTextField placeholder="Search users" />
             <FlatList 
               data={data} 
               horizontal={false}  
@@ -45,7 +47,9 @@ const CheckboxListField = ({label, title, data}: Props) => {
                         <CheckBox 
                           iconRight={true}
                           containerStyle={styles.checkbox} 
+                          size={GlobalStyles.space*2}
                           checked={true} 
+                          checkedColor={Colors.primary}
                         />
                       </View>
                     </View>
@@ -66,6 +70,11 @@ const styles = StyleSheet.create({
   },
   list: {
     width: '100%',
+    marginTop: GlobalStyles.space*2,
+    borderWidth: 1,
+    borderColor: Colors.primary,
+    borderRadius: GlobalStyles.space,
+    padding: GlobalStyles.space,
   },
   item: {
     display: 'flex',
