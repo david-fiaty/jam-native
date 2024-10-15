@@ -52,6 +52,7 @@ const MultiselectDropdownField = () => {
         uniqueKey="id"
         subKey="children"
         modalAnimationType="slide"
+        selectText="Industries"
         single={false}
         readOnlyHeadings={true}
         showDropDowns={true}
