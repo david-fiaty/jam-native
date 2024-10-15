@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     ...GlobalStyles.field,
     ...{
       paddingTop: GlobalStyles.space,
-      height: 100,
+      height: GlobalStyles.space*10,
     },
   },
 });
