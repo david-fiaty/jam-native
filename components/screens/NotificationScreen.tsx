@@ -11,7 +11,7 @@ type Props = {
   menuItem: object,
 };
 
-const UsernameScreen = ({menuItem}: Props) => {
+const NotificationScreen = ({menuItem}: Props) => {
   return (
     <View style={styles.container}>    
       <ModalView 
@@ -23,12 +23,7 @@ const UsernameScreen = ({menuItem}: Props) => {
             nestedScrollEnabled={true}
             contentContainerStyle={{ flexGrow: 1 }}
           >
-            <Pressable>
-              <ProfileImage />
-              <ProfileForm />
-              <ProfileProjects />
-              <ProfileJams />
-            </Pressable>
+            <TextBlock>{menuItem.content}</TextBlock>
           </ScrollView>  
         }
       />    
@@ -43,4 +38,4 @@ const styles = StyleSheet.create({
   },  
 });
 
-export default UsernameScreen;
+export default NotificationScreen;
