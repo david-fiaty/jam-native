@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     width: '100%',
     gap: GlobalStyles.space,
+    marginBottom: GlobalStyles.space,
   },
   section: {
     marginTop: GlobalStyles.space,
@@ -99,6 +100,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: '100%',
+    marginTop: GlobalStyles.space,
   },
   button: {
     height: 45,
