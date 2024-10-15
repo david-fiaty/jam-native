@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, StatusBar } from 'react-native';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 import { MaterialIcons as Icon } from '@expo/vector-icons';
 import { GlobalStyles } from '@/constants/GlobalStyles';
@@ -52,6 +52,7 @@ const MultiselectDropdownField = () => {
         items={items}
         uniqueKey="id"
         subKey="children"
+        modalAnimationType="slide"
         single={false}
         readOnlyHeadings={true}
         showDropDowns={true}
@@ -62,12 +63,22 @@ const MultiselectDropdownField = () => {
         IconRenderer={Icon}
         onSelectedItemsChange={setSelectedItems}
         selectedItems={selectedItems}
+        styles={styles.modal}
       />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  modal: {
+    modalWrapper: {
+      marginTop: StatusBar.currentHeight + GlobalStyles.toolbar.height,
+      backgroundColor: '#FFFFFF',
+    },
+    scrollView: {
+      backgroundColor: '#FFFFFF',
+    },
+  },
   field: {
     ...GlobalStyles.field,
     ...{
