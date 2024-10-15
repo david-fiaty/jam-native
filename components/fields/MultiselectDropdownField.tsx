@@ -44,7 +44,6 @@ const items = [
 
 const MultiselectDropdownField = () => {
   const [selectedItems, setSelectedItems] = useState([]);
-  console.log('Selected:', selectedItems);
 
   return (
     <View style={styles.field}>
@@ -70,6 +69,7 @@ const MultiselectDropdownField = () => {
 }
 
 const styles = StyleSheet.create({
+  field: GlobalStyles.field,
   modal: {
     modalWrapper: {
       marginTop: StatusBar.currentHeight + GlobalStyles.toolbar.height,
@@ -78,13 +78,10 @@ const styles = StyleSheet.create({
     scrollView: {
       backgroundColor: '#FFFFFF',
     },
-    selectToggle: {
-      
-    },
+    selectToggle: {},
     selectToggleText: GlobalStyles.text,
     searchTextInput: GlobalStyles.text,
   },
-  field: GlobalStyles.field,
 });
 
 export default MultiselectDropdownField;
