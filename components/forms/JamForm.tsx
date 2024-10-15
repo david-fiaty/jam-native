@@ -7,7 +7,6 @@ import TextBlock from '@/components/base/TextBlock';
 import SquareOptionsField from '../fields/SquareOptionsField';
 import JamCategories from '@/constants/JamCategories';
 import TextareaField from '../fields/TextareaField';
-import InputTextField from '../fields/InputTextField';
 import CheckboxListField from '../fields/CheckboxListField';
 import ApiClient from '@/classes/ApiClient';
 import LocationPickerField from '../fields/LocationPickerField';
@@ -42,11 +41,6 @@ const JamForm = () => {
         label="Location"
       />
       <SelectListField />
-      <InputTextField
-        style={GlobalStyles.field}
-        placeholder="Status"
-        placeholderTextColor={GlobalStyles.text.color}
-      />
       <MultiselectDropdownField />
       <View style={styles.buttonContainer}>
         <Button 
