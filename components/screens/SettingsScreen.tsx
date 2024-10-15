@@ -1,6 +1,5 @@
 import { StyleSheet, View, FlatList } from 'react-native';
 import { useRouter } from 'expo-router';
-import MenuItem from '@/components/base/MenuItem';
 import ModalView from '@/components/base/ModalView';
 import SettingsScreenItems from '@/constants/SettingsScreenItems';
 import TertiaryIcon from '../icons/TertiaryIcon';
@@ -24,13 +23,6 @@ const SettingsScreen = () => {
             renderItem={({item, index}) => {
               return (
                 <AccountScreen menuItem={item}/>
-                /*
-                <MenuItem 
-                  item={item} 
-                  index={index}  
-                  onPress={() => router.replace(item.path)} 
-                />
-                */
               );
             }} 
           />
