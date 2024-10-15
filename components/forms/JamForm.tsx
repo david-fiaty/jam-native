@@ -1,7 +1,7 @@
 import { StyleSheet, View, TextInput } from 'react-native';
 import { Button } from '@rneui/themed';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-import MediaField from '../fields/MediaField';
+import MediaPickerField from '../fields/MediaPickerField';
 import CollaboratorsField from '../fields/CollaboratorsField';
 import TextBlock from '@/components/base/TextBlock';
 import SquareOptionsField from '../fields/SquareOptionsField';
@@ -17,7 +17,7 @@ const JamForm = () => {
       <TextBlock>What kind of Jam is it?</TextBlock>
       <SquareOptionsField data={data} />
       <View style={styles.section}>
-        <MediaField /> 
+        <MediaPickerField /> 
         <CollaboratorsField />
       </View>
       <View style={styles.section}>

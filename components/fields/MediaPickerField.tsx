@@ -3,7 +3,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import TextBlock from '@/components/base/TextBlock';
 
-const MediaField = () => {  
+const MediaPickerField = () => {  
   return (
     <TouchableOpacity onPress={() => console.log('clicked')}>
       <View style={styles.container}>
@@ -32,4 +32,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MediaField;
+export default MediaPickerField;
