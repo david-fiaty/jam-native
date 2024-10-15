@@ -1,8 +1,11 @@
 const SettingsScreenItems = [
+  // Todo - Set content for account information
+  /*
   {
     'label': 'Account information',
     'path': '/account',
   },
+  */
   {
     'label': 'Change password',
     'path': '/password',
