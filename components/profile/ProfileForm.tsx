@@ -1,13 +1,15 @@
-import { StyleSheet, TextInput, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import InputTextField from '../fields/InputTextField';
-
+import MultiselectDropdownField from '../fields/MultiselectDropdownField';
+import LocationPickerField from '../fields/LocationPickerField';
+import TextBlock from '../base/TextBlock';
 const ProfileForm = () => {
   return (
     <View style={styles.container}>    
       <InputTextField
         style={GlobalStyles.field}
-        placeholder="Full name"
+        placeholder="Public name"
         placeholderTextColor={GlobalStyles.text.color}
       />
       <InputTextField
@@ -25,21 +27,11 @@ const ProfileForm = () => {
         placeholder="Phone number"
         placeholderTextColor={GlobalStyles.text.color}
       />
-      <InputTextField
-        style={GlobalStyles.field}
-        placeholder="Where am I now"
-        placeholderTextColor={GlobalStyles.text.color}
+      <LocationPickerField 
+        title={<TextBlock>Select your location</TextBlock>}
+        label="Current location"
       />
-      <InputTextField
-        style={GlobalStyles.field}
-        placeholder="Main industries"
-        placeholderTextColor={GlobalStyles.text.color}
-      />
-      <InputTextField
-        style={GlobalStyles.field}
-        placeholder="Sub industries"
-        placeholderTextColor={GlobalStyles.text.color}
-      />
+      <MultiselectDropdownField />
       <InputTextField
         style={GlobalStyles.field}
         placeholder="Creative organisation"
