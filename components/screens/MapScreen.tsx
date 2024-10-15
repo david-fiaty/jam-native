@@ -75,7 +75,6 @@ const MapScreen = () => {
         </TouchableWithoutFeedback>
       }
     />   
-
   );
 };
 
