@@ -44,12 +44,14 @@ const LocationPickerField = ({label, title}: Props) => {
       title={title} 
       animation="slide"
       label={
-        <InputTextField
-          style={GlobalStyles.field}
-          placeholder={label}
-          placeholderTextColor={GlobalStyles.text.color}
-          editable={false}
-        />
+        <View style={styles.label}>
+          <InputTextField
+            style={GlobalStyles.field}
+            placeholder={label}
+            placeholderTextColor={GlobalStyles.text.color}
+            editable={false}
+          />
+        </View>
       }
       content={
         <TouchableWithoutFeedback>
@@ -85,12 +87,9 @@ const styles = StyleSheet.create({
     height: 550,
   },
   label: {
-    ...GlobalStyles.field,
-    ...{
-      display: 'flex',
-      backgroundColor: 'red',
-      width: '100%',
-    },
+    display: 'flex',
+    flexDirection: 'row',
+    backgroundColor: 'red',
   },
   map: {
     flex: 1,
