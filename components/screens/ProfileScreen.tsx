@@ -35,9 +35,6 @@ const ProfileScreen = () => {
 
 const styles = StyleSheet.create({
   container: {},
-  scroll: {
-    flexGrow: 1,
-  },  
 });
 
 export default ProfileScreen;

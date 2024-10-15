@@ -5,10 +5,16 @@ import * as Device from 'expo-device';
 import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
 import ModalView from '@/components/base/ModalView';
-import ClearIcon from '../icons/ClearIcon';
-import { GlobalStyles } from '@/constants/GlobalStyles';
+import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+import InputTextField from '../fields/InputTextField';
+import TertiaryIcon from '../icons/TertiaryIcon';
 
-const MapScreen = () => {
+type Props = {
+  label: string,
+  title: JSX.Element,
+};
+
+const LocationPickerField = ({label, title}: Props) => {
   const [location, setLocation] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -36,9 +42,19 @@ const MapScreen = () => {
 
   return (
     <ModalView 
-      title="Jams map" 
+      title={title} 
       animation="slide"
-      label={<ClearIcon name="location" size={GlobalStyles.tabsbar.icon.size} />}
+      label={
+        <View style={styles.label}>
+          <TertiaryIcon name="location" size={GlobalStyles.space*1.5} containerStyle={styles.icon} />
+          <InputTextField
+            style={GlobalStyles.field}
+            placeholder={label}
+            placeholderTextColor={GlobalStyles.text.color}
+            editable={false}
+          />
+        </View>
+      }
       content={
         <TouchableWithoutFeedback>
           <View style={styles.wrapper}>
@@ -55,20 +71,8 @@ const MapScreen = () => {
               <Marker
                 key={1}
                 coordinate={{latitude: 6.1296, longitude: 1.2197}}
-                title="Jam location 1"
-                description="Jam location 1"
-              />
-              <Marker
-                key={2}
-                coordinate={{latitude: 6.2273, longitude: 1.5814}}
-                title="Jam location 2"
-                description="Jam location 2"
-              />
-              <Marker
-                key={3}
-                coordinate={{latitude: 9.7216, longitude: 1.0586}}
-                title="Jam location 3"
-                description="Jam location 3"
+                title="You are here"
+                description="Your current location"
               />
             </MapView>
           </View>
@@ -84,9 +88,20 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 550,
   },
+  label: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  icon: {
+    position: 'absolute',
+    zIndex: 1,
+    right: 0,
+    backgroundColor: 'transparent',
+  },
   map: {
     flex: 1,
   },
 });
 
-export default MapScreen;
+export default LocationPickerField;
