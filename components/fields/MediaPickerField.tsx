@@ -25,7 +25,7 @@ const MediaPickerField = () => {
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
+      allowsEditing: false,
       quality: 1,
     });
   
@@ -42,9 +42,13 @@ const MediaPickerField = () => {
         <Ionicons name="add" size={GlobalStyles.icon.size} style={styles.icon} />   
         <TextBlock>Add media</TextBlock>
       </View>
+      
+      {/*
       <View style={styles.preview}>
         <ImagePreview selectedImage={selectedImage} />
       </View>
+      */}
+      
     </TouchableOpacity>
   );
 };
