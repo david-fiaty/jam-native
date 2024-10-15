@@ -4,16 +4,30 @@ import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
 type Props = {
   item: object,
-  index: number,
-  onPress: () => void,
+  index?: number,
+  onPress?: () => void,
 };
 
 const MenuItem = ({item, index, onPress}: Props) => {
-  return (
-    <View style={styles.container}>      
+  const ItemView = () => {
+    return (        
       <TouchableOpacity onPress={onPress}>
         <TextBlock>{item.label}</TextBlock>
       </TouchableOpacity>
+    );
+  };
+
+  if (onPress) {
+    return (
+      <View style={styles.container}>      
+        <ItemView />
+      </View>
+    );
+  }
+
+  return (
+    <View style={styles.container}>      
+      <TextBlock>{item.label}</TextBlock>
     </View>
   );
 };
