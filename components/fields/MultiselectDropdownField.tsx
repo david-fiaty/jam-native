@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     scrollView: {
       backgroundColor: '#FFFFFF',
     },
+    selectToggleText: GlobalStyles.text,
   },
   field: {
     ...GlobalStyles.field,
