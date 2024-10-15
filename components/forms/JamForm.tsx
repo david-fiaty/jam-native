@@ -11,6 +11,7 @@ import InputTextField from '../fields/InputTextField';
 import CheckboxListField from '../fields/CheckboxListField';
 import ApiClient from '@/classes/ApiClient';
 import LocationPickerField from '../fields/LocationPickerField';
+import SelectListField from '../fields/SelectListField';
 
 const JamForm = () => {
   const jammers = ApiClient.get('jammers');
@@ -39,6 +40,8 @@ const JamForm = () => {
         title={<TextBlock>Select your location</TextBlock>}
         label="Location"
       />
+
+      <SelectListField />
       <InputTextField
         style={GlobalStyles.field}
         placeholder="Status"
