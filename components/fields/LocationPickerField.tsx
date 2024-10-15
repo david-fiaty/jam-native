@@ -5,10 +5,9 @@ import * as Device from 'expo-device';
 import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
 import ModalView from '@/components/base/ModalView';
-import { GlobalStyles } from '@/constants/GlobalStyles';
+import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import InputTextField from '../fields/InputTextField';
-import StaticIcon from '../base/StaticIcon';
-import PrimaryIcon from '../icons/PrimaryIcon';
+import TertiaryIcon from '../icons/TertiaryIcon';
 
 type Props = {
   label: string,
@@ -47,9 +46,7 @@ const LocationPickerField = ({label, title}: Props) => {
       animation="slide"
       label={
         <View style={styles.label}>
-          <View style={styles.icon}>
-            <PrimaryIcon name="location" size={GlobalStyles.space} />
-          </View>
+          <TertiaryIcon name="location" size={GlobalStyles.space*1.5} containerStyle={styles.icon} />
           <InputTextField
             style={GlobalStyles.field}
             placeholder={label}
@@ -101,6 +98,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 1,
     right: 0,
+    backgroundColor: 'transparent',
   },
   map: {
     flex: 1,
