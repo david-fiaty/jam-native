@@ -9,9 +9,10 @@ import TextBlock from '../base/TextBlock';
 type Props = {
   label: JSX.Element,
   title: JSX.Element,
+  data: object,
 };
 
-const CheckboxListField = ({label, title}: Props) => {
+const CheckboxListField = ({label, title, data}: Props) => {
   return (
     <View style={styles.container}>    
       <ModalView 
