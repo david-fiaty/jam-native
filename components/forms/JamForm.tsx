@@ -8,6 +8,7 @@ import SquareOptionsField from '../fields/SquareOptionsField';
 import JamCategories from '@/constants/JamCategories';
 import TextareaField from '../fields/TextareaField';
 import InputTextField from '../fields/InputTextField';
+import CheckboxListField from '../fields/CheckboxListField';
 
 const JamForm = () => {
   const data = JamCategories;
@@ -18,7 +19,10 @@ const JamForm = () => {
       <SquareOptionsField data={data} />
       <View style={styles.section}>
         <MediaPickerField /> 
-        <CollaboratorsField />
+        <CheckboxListField 
+          label={<TextBlock>Label</TextBlock>}
+          title={<TextBlock>Title</TextBlock>}
+        />
       </View>
       <View style={styles.section}>
         <TextareaField placeholder="Add caption" />
