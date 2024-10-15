@@ -23,22 +23,22 @@ const JamForm = () => {
       <View style={styles.section}>
         <TextareaField placeholder="Add caption" />
       </View>
-      <TextInput
+      <InputTextField
         style={GlobalStyles.field}
         placeholder="Location"
         placeholderTextColor={GlobalStyles.text.color}
       />
-      <TextInput
+      <InputTextField
         style={GlobalStyles.field}
         placeholder="Status"
         placeholderTextColor={GlobalStyles.text.color}
       />
-      <TextInput
+      <InputTextField
         style={GlobalStyles.field}
         placeholder="Main industries"
         placeholderTextColor={GlobalStyles.text.color}
       />
-      <TextInput
+      <InputTextField
         style={GlobalStyles.field}
         placeholder="Sub industries"
         placeholderTextColor={GlobalStyles.text.color}

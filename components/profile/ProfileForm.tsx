@@ -1,45 +1,46 @@
 import { StyleSheet, TextInput, View } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+import InputTextField from '../fields/InputTextField';
 
 const ProfileForm = () => {
   return (
     <View style={styles.container}>    
-      <TextInput
+      <InputTextField
         style={GlobalStyles.field}
         placeholder="Full name"
         placeholderTextColor={GlobalStyles.text.color}
       />
-      <TextInput
+      <InputTextField
         style={GlobalStyles.field}
         placeholder="IG handle"
         placeholderTextColor={GlobalStyles.text.color}
       />
-      <TextInput
+      <InputTextField
         style={GlobalStyles.field}
         placeholder="Email"
         placeholderTextColor={GlobalStyles.text.color}
       />
-      <TextInput
+      <InputTextField
         style={GlobalStyles.field}
         placeholder="Phone number"
         placeholderTextColor={GlobalStyles.text.color}
       />
-      <TextInput
+      <InputTextField
         style={GlobalStyles.field}
         placeholder="Where am I now"
         placeholderTextColor={GlobalStyles.text.color}
       />
-      <TextInput
+      <InputTextField
         style={GlobalStyles.field}
         placeholder="Main industries"
         placeholderTextColor={GlobalStyles.text.color}
       />
-      <TextInput
+      <InputTextField
         style={GlobalStyles.field}
         placeholder="Sub industries"
         placeholderTextColor={GlobalStyles.text.color}
       />
-      <TextInput
+      <InputTextField
         style={GlobalStyles.field}
         placeholder="Creative organisation"
         placeholderTextColor={GlobalStyles.text.color}
