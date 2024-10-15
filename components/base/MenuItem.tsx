@@ -27,7 +27,7 @@ const MenuItem = ({label, index, onPress}: Props) => {
 
   return (
     <View style={styles.container}>      
-      <TextBlock>{item.label}</TextBlock>
+      <TextBlock>{label}</TextBlock>
     </View>
   );
 };
