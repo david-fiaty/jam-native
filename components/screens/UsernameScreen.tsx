@@ -1,20 +1,23 @@
 import { StyleSheet, View, ScrollView, Pressable } from 'react-native';
-import ClearIcon from '../icons/ClearIcon';
 import ModalView from '@/components/base/ModalView';
 import ProfileForm from '@/components/profile/ProfileForm';
 import ProfileImage from '@/components/profile/ProfileImage';
 import ProfileJams from '@/components/profile/ProfileJams';
 import ProfileProjects from '@/components/profile/ProfileProjects';
+import MenuItem from '../base/MenuItem';
+import TextBlock from '../base/TextBlock';
 
-import { GlobalStyles } from '@/constants/GlobalStyles';
+type Props = {
+  menuItem: object,
+};
 
-const UsernameScreen = () => {
+const UsernameScreen = ({menuItem}: Props) => {
   return (
     <View style={styles.container}>    
       <ModalView 
-        title="Your profile" 
-        animation="slide"
-        label={<ClearIcon name="user" size={GlobalStyles.tabsbar.icon.size} />}
+        title={<TextBlock>{menuItem.label}</TextBlock>} 
+        animation="fade"
+        label={<MenuItem item={menuItem} />}
         content={
           <ScrollView 
             nestedScrollEnabled={true}
