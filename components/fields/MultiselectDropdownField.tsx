@@ -78,16 +78,13 @@ const styles = StyleSheet.create({
     scrollView: {
       backgroundColor: '#FFFFFF',
     },
-    selectToggleText: GlobalStyles.text,
-  },
-  field: {
-    ...GlobalStyles.field,
-    ...{
-      justifyContent: 'center',
-      width: '100%',
-      height: 'auto',
+    selectToggle: {
+      
     },
+    selectToggleText: GlobalStyles.text,
+    searchTextInput: GlobalStyles.text,
   },
+  field: GlobalStyles.field,
 });
 
 export default MultiselectDropdownField;
