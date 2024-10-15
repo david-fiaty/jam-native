@@ -1,8 +1,8 @@
-import { StyleSheet, View, TextInput } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { Button } from '@rneui/themed';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import MediaPickerField from '../fields/MediaPickerField';
-import CollaboratorsField from '../fields/CollaboratorsField';
 import TextBlock from '@/components/base/TextBlock';
 import SquareOptionsField from '../fields/SquareOptionsField';
 import JamCategories from '@/constants/JamCategories';
@@ -20,8 +20,14 @@ const JamForm = () => {
       <View style={styles.section}>
         <MediaPickerField /> 
         <CheckboxListField 
-          label={<TextBlock>Label</TextBlock>}
+          label={
+            <View style={styles.plus.container}>
+              <Ionicons name="add" size={GlobalStyles.icon.size} style={styles.plus.icon} />
+              <TextBlock>Add collaborators</TextBlock>
+            </View>
+          }
           title={<TextBlock>Title</TextBlock>}
+          data={data}
         />
       </View>
       <View style={styles.section}>
@@ -95,6 +101,23 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary,
     borderWidth: 1,
     borderRadius: 8,
+  },
+  plus: {
+    container: {
+      display: 'flex',
+      flexDirection: 'row',
+      gap: GlobalStyles.space,
+      marginBottom: GlobalStyles.space,
+    },
+    icon: {
+      ...GlobalStyles.icon,
+      ...{
+        backgroundColor: Colors.tertiary,
+        borderColor: Colors.tertiary,
+        borderWidth: 1,
+        borderRadius: 4,
+      },
+    },
   },
 });
 
