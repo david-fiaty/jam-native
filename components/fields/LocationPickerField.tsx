@@ -7,6 +7,8 @@ import MapView from 'react-native-maps';
 import ModalView from '@/components/base/ModalView';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import InputTextField from '../fields/InputTextField';
+import StaticIcon from '../base/StaticIcon';
+import PrimaryIcon from '../icons/PrimaryIcon';
 
 type Props = {
   label: string,
@@ -45,6 +47,9 @@ const LocationPickerField = ({label, title}: Props) => {
       animation="slide"
       label={
         <View style={styles.label}>
+          <View style={styles.icon}>
+            <PrimaryIcon name="location" size={GlobalStyles.space} />
+          </View>
           <InputTextField
             style={GlobalStyles.field}
             placeholder={label}
@@ -89,7 +94,13 @@ const styles = StyleSheet.create({
   label: {
     display: 'flex',
     flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: 'red',
+  },
+  icon: {
+    position: 'absolute',
+    zIndex: 1,
+    right: 0,
   },
   map: {
     flex: 1,
