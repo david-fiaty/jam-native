@@ -17,7 +17,7 @@ const UsernameScreen = ({menuItem}: Props) => {
       <ModalView 
         title={<TextBlock>{menuItem.label}</TextBlock>} 
         animation="fade"
-        label={<MenuItem item={menuItem} />}
+        label={<MenuItem label={menuItem.label} />}
         content={
           <ScrollView 
             nestedScrollEnabled={true}

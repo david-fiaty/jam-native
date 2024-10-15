@@ -5,9 +5,19 @@ import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ApiClient from '@/classes/ApiClient';
 import TextBlock from '../base/TextBlock';
 
+type NotificationProps = {
+  item: object,
+};
+
 const NotificationsScreen = () => {  
   const data = ApiClient.get('notifications');
   const count = data.length < 100 ? data.length : 99;
+
+  const NotificationView = ({item}: NotificationProps) => {
+    return (
+      <TextBlock>{item.content}</TextBlock>
+    );
+  };
 
   return (
     <View style={styles.container}>   
@@ -22,7 +32,7 @@ const NotificationsScreen = () => {
             style={styles.list}
             renderItem={({item, index}) => {
               return (
-                <MenuItem item={item} index={index} />
+                <MenuItem label={item.label} index={index} />
               );
             }} 
           />

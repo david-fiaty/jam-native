@@ -3,16 +3,16 @@ import TextBlock from '@/components/base/TextBlock';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
 type Props = {
-  item: object,
+  label: string,
   index?: number,
   onPress?: () => void,
 };
 
-const MenuItem = ({item, index, onPress}: Props) => {
+const MenuItem = ({label, index, onPress}: Props) => {
   const ItemView = () => {
     return (        
       <TouchableOpacity onPress={onPress}>
-        <TextBlock>{item.label}</TextBlock>
+        <TextBlock>{label}</TextBlock>
       </TouchableOpacity>
     );
   };
