@@ -6,7 +6,7 @@ import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
 import ModalView from '@/components/base/ModalView';
 import { GlobalStyles } from '@/constants/GlobalStyles';
-import TextBlock from '@/components/base/TextBlock';
+import InputTextField from '../fields/InputTextField';
 
 type Props = {
   label: string,
@@ -44,9 +44,12 @@ const LocationPickerField = ({label, title}: Props) => {
       title={title} 
       animation="slide"
       label={
-        <View style={styles.label}>
-          <TextBlock>{label}</TextBlock>
-        </View>
+        <InputTextField
+          style={GlobalStyles.field}
+          placeholder={label}
+          placeholderTextColor={GlobalStyles.text.color}
+          editable={false}
+        />
       }
       content={
         <TouchableWithoutFeedback>
@@ -85,8 +88,8 @@ const styles = StyleSheet.create({
     ...GlobalStyles.field,
     ...{
       display: 'flex',
-      alignSelf: 'flex-start',
       backgroundColor: 'red',
+      width: '100%',
     },
   },
   map: {
