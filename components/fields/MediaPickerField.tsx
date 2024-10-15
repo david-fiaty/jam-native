@@ -1,11 +1,25 @@
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import TextBlock from '@/components/base/TextBlock';
 
-const MediaField = () => {  
+const pickImageAsync = async () => {
+  let result = await ImagePicker.launchImageLibraryAsync({
+    allowsEditing: true,
+    quality: 1,
+  });
+
+  if (!result.canceled) {
+    console.log(result);
+  } else {
+    alert('No image was selected.');
+  }
+};
+
+const MediaPickerField = () => {  
   return (
-    <TouchableOpacity onPress={() => console.log('clicked')}>
+    <TouchableOpacity onPress={pickImageAsync}>
       <View style={styles.container}>
         <Ionicons name="add" size={GlobalStyles.icon.size} style={styles.icon} />   
         <TextBlock>Add media</TextBlock>
@@ -32,4 +46,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MediaField;
+export default MediaPickerField;
