@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 import { MaterialIcons as Icon } from '@expo/vector-icons';
-import StaticIcon from '../base/StaticIcon';
-import PrimaryIcon from '../icons/PrimaryIcon';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 
 const items = [
   { name: 'Cars', id: 1},
@@ -22,7 +21,7 @@ const MultiselectDropdownField = () => {
       <View>
         <SectionedMultiSelect
           items={items}
-          IconRenderer={<PrimaryIcon name="user" size={24}/>}
+          IconRenderer={Icon}
           uniqueKey="id"
           onSelectedItemsChange={setSelectedItems}
           selectedItems={selectedItems}
@@ -34,10 +33,11 @@ const MultiselectDropdownField = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: 'red',
-    justifyContent: 'center',
-    padding: 24,
+    ...GlobalStyles.field,
+    ...{
+      justifyContent: 'center',
+      width: '100%',
+    },
   },
 });
 
