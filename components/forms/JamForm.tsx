@@ -12,6 +12,7 @@ import CheckboxListField from '../fields/CheckboxListField';
 import ApiClient from '@/classes/ApiClient';
 import LocationPickerField from '../fields/LocationPickerField';
 import MultiselectDropdownField from '../fields/MultiselectDropdownField';
+import SelectListField from '../fields/SelectListField';
 
 const JamForm = () => {
   const jammers = ApiClient.get('jammers');
@@ -40,24 +41,13 @@ const JamForm = () => {
         title={<TextBlock>Select your location</TextBlock>}
         label="Location"
       />
-
-      <MultiselectDropdownField />
-
+      <SelectListField />
       <InputTextField
         style={GlobalStyles.field}
         placeholder="Status"
         placeholderTextColor={GlobalStyles.text.color}
       />
-      <InputTextField
-        style={GlobalStyles.field}
-        placeholder="Main industries"
-        placeholderTextColor={GlobalStyles.text.color}
-      />
-      <InputTextField
-        style={GlobalStyles.field}
-        placeholder="Sub industries"
-        placeholderTextColor={GlobalStyles.text.color}
-      />
+      <MultiselectDropdownField />
       <View style={styles.buttonContainer}>
         <Button 
           title="Post" 
