@@ -52,7 +52,12 @@ const MultiselectDropdownField = () => {
         items={items}
         uniqueKey="id"
         subKey="children"
+        single={false}
         showDropDowns={true}
+        expandDropDowns={true}
+        animateDropDowns={true}
+        hideConfirm={true}
+        alwaysShowSelectText={true}
         IconRenderer={Icon}
         onSelectedItemsChange={setSelectedItems}
         selectedItems={selectedItems}
