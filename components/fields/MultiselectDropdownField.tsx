@@ -53,6 +53,7 @@ const MultiselectDropdownField = () => {
         uniqueKey="id"
         subKey="children"
         single={false}
+        readOnlyHeadings={true}
         showDropDowns={true}
         expandDropDowns={true}
         animateDropDowns={true}
