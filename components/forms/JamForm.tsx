@@ -7,11 +7,11 @@ import TextBlock from '@/components/base/TextBlock';
 import SquareOptionsField from '../fields/SquareOptionsField';
 import JamCategories from '@/constants/JamCategories';
 import TextareaField from '../fields/TextareaField';
-import InputTextField from '../fields/InputTextField';
 import CheckboxListField from '../fields/CheckboxListField';
 import ApiClient from '@/classes/ApiClient';
 import LocationPickerField from '../fields/LocationPickerField';
 import MultiselectDropdownField from '../fields/MultiselectDropdownField';
+import SelectListField from '../fields/SelectListField';
 
 const JamForm = () => {
   const jammers = ApiClient.get('jammers');
@@ -40,24 +40,8 @@ const JamForm = () => {
         title={<TextBlock>Select your location</TextBlock>}
         label="Location"
       />
-
+      <SelectListField />
       <MultiselectDropdownField />
-
-      <InputTextField
-        style={GlobalStyles.field}
-        placeholder="Status"
-        placeholderTextColor={GlobalStyles.text.color}
-      />
-      <InputTextField
-        style={GlobalStyles.field}
-        placeholder="Main industries"
-        placeholderTextColor={GlobalStyles.text.color}
-      />
-      <InputTextField
-        style={GlobalStyles.field}
-        placeholder="Sub industries"
-        placeholderTextColor={GlobalStyles.text.color}
-      />
       <View style={styles.buttonContainer}>
         <Button 
           title="Post" 
