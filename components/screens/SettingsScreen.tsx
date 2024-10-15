@@ -1,5 +1,4 @@
 import { StyleSheet, View, FlatList } from 'react-native';
-import { useRouter } from 'expo-router';
 import ModalView from '@/components/base/ModalView';
 import SettingsScreenItems from '@/constants/SettingsScreenItems';
 import TertiaryIcon from '../icons/TertiaryIcon';
@@ -7,7 +6,6 @@ import AccountScreen from './AccountScreen';
 
 const SettingsScreen = () => {
   const data = SettingsScreenItems;
-  const router = useRouter();
 
   return (
     <View style={styles.container}>        

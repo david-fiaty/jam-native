@@ -1,9 +1,13 @@
 import { StyleSheet, View, FlatList } from 'react-native';
-import MenuItem from '@/components/base/MenuItem';
 import ModalView from '@/components/base/ModalView';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ApiClient from '@/classes/ApiClient';
 import TextBlock from '../base/TextBlock';
+import NotificationScreen from './NotificationScreen';
+
+type NotificationProps = {
+  item: object,
+};
 
 const NotificationsScreen = () => {  
   const data = ApiClient.get('notifications');
@@ -22,7 +26,7 @@ const NotificationsScreen = () => {
             style={styles.list}
             renderItem={({item, index}) => {
               return (
-                <MenuItem item={item} index={index} />
+                <NotificationScreen menuItem={item} />
               );
             }} 
           />

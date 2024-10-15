@@ -139,30 +139,37 @@ const ApiMockData = {
     {
       label: 'Lorem ipsum dolor sit amet',
       path: '/notifications',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     },
     {
       label: 'Consectetur adipiscing elit',
       path: '/notifications',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     },
     {
       label: 'Sed do eiusmod tempor',
       path: '/notifications',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     },
     {
       label: 'Incididunt ut labore et dolore magna aliqua',
       path: '/notifications',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     },
     {
       label: 'Ut enim ad minim veniam, quis nostrud',
       path: '/notifications',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     },
     {
       label: 'Exercitation ullamco laboris nisi',
       path: '/notifications',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     },
     {
       label: 'Excepteur sint occaecat cupidatat',
       path: '/notifications',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     },  
   ],
   projects: [
