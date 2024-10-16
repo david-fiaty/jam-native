@@ -18,9 +18,13 @@ const ViewportContainer = ({style, children}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: 'green'
+    /*
     display: 'flex',
     flexDirection: 'column', 
     backgroundColor: Colors.background,
+    */
   },
 });
 
