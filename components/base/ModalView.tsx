@@ -68,15 +68,14 @@ const styles = StyleSheet.create({
       flexDirection: 'column',
       alignItems: 'center',
       marginTop: StatusBar.currentHeight + GlobalStyles.toolbar.height,
-      backgroundColor: 'black',
-      height: Dimensions.get('screen').height,
     },
     view: {
       backgroundColor: 'white',
       width: '100%',
-      height: '100%',
+      height: 612,
+      //height: Dimensions.get('screen').height - GlobalStyles.tabsbar.height,
       alignItems: 'flex-start',
-      padding: 20,
+      padding: GlobalStyles.space*2,
     },
   },
 });
