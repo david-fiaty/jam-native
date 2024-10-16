@@ -11,8 +11,8 @@ const LanguageForm = () => {
       <SelectListField 
         placeholder="Language"
         data={[
-          { label: "English", value: 'en' },
-          { label: "French", value: 'fr' },
+          { label: "English (EN)", value: 'en' },
+          { label: "French (FR)", value: 'fr' },
         ]} 
       />
     </View>
