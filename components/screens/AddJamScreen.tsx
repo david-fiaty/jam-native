@@ -1,4 +1,4 @@
-import { StyleSheet, View, ScrollView, Pressable, Dimensions } from 'react-native';
+import { StyleSheet, ScrollView, Pressable } from 'react-native';
 import ModalView from '@/components/base/ModalView';
 import JamForm from '../forms/JamForm';
 import ClearIcon from '../icons/ClearIcon';
@@ -16,9 +16,7 @@ const AddJamScreen = () => {
           contentContainerStyle={{ flexGrow: 1 }}
         >
           <Pressable>
-            <View style={styles.container}>
-              <JamForm />
-            </View>
+            <JamForm />
           </Pressable>
         </ScrollView>
       }
@@ -27,9 +25,7 @@ const AddJamScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    height: Dimensions.get('window').height - GlobalStyles.toolbar.height - GlobalStyles.space*2,
-  },
+  container: {},
 });
 
 export default AddJamScreen;

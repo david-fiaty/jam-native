@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
   },
   tabs: {
     backgroundColor: 'red',
+    //verticalAlign: 'middle',
     paddingTop: GlobalStyles.space,
   },
 });
