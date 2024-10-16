@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import TopToolbar from '@/components/navigation/TopToolbar';
 import BottomTabs from '@/components/navigation/BottomTabs';
 import JamsScreen from '@/components/screens/JamsScreen';
@@ -15,10 +15,16 @@ const Jams = () => {
 };
 
 const styles = StyleSheet.create({
+
+  /*
   container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
     height: '100%',
     backgroundColor: 'blue',
   },
+  */
 });
 
 export default Jams;
