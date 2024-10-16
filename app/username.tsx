@@ -1,23 +1,12 @@
-import { StyleSheet, Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import TopToolbar from '@/components/navigation/TopToolbar';
+import { Text } from 'react-native';
+import ViewportContainer from '@/components/base/ViewportContainer';
 
 const Username = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <TopToolbar />
+    <ViewportContainer>
       <Text>USERNAME</Text>
-    </SafeAreaView>
+    </ViewportContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    flexDirection: 'column', 
-    marginTop: 30,
-    padding: 25,
-  },
-});
 
 export default Username;

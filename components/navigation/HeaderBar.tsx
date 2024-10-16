@@ -1,16 +1,23 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
+import { useRouter } from 'expo-router';
 import JamLogo from '@/components/images/JamLogo';
 import SettingsScreen from '../screens/SettingsScreen';
 import NotificationsScreen from '../screens/NotificationsScreen';
 import SearchScreen from '../screens/SearchScreen';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 
-const TopToolbar = () => {
+const HeaderBar = () => {
+  const router = useRouter();
+
   return (
     <View style={styles.container}>
-      <JamLogo width={46} height={46} /> 
-      <View style={styles.buttons}> 
-        <SettingsScreen />  
+      <View style={styles.left}>
+        <TouchableOpacity onPress={() => router.replace('/jams')}>
+          <JamLogo width={46} height={46} /> 
+        </TouchableOpacity>
+      </View>
+      <View style={styles.right}>
+      <SettingsScreen />  
         <NotificationsScreen />
         <SearchScreen />
       </View>
@@ -21,13 +28,18 @@ const TopToolbar = () => {
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
+    flexGrow: 1,
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: 'gray', 
     justifyContent: 'space-between',
-    marginBottom: GlobalStyles.space*2,
-    height: GlobalStyles.toolbar.height,
+    marginTop: StatusBar.currentHeight,
+    padding: GlobalStyles.space,
   },
-  buttons: {
+  left: {
+    gap: GlobalStyles.space,
+  },
+  right: {
     display: 'flex',
     flexDirection: 'row',
     gap: GlobalStyles.space,
@@ -42,4 +54,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TopToolbar;
+export default HeaderBar;

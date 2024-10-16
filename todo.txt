@@ -41,17 +41,59 @@ Twilio => SMS
 
 
 
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="login" options={{ headerShown: false }} />
-        <Stack.Screen name="about" options={{ headerShown: false }} />
-        <Stack.Screen name="legal" options={{ headerShown: false }} />
-        <Stack.Screen name="jams" options={{ headerShown: false }} />
-        <Stack.Screen name="account" options={{ headerShown: false }} />
-        <Stack.Screen name="password" options={{ headerShown: false }} />
-        <Stack.Screen name="username" options={{ headerShown: false }} />
-        <Stack.Screen name="language" options={{ headerShown: false }} />
-      </Stack>
+          header: (props) => (
+            <View style={{ 
+              display: 'flex',
+              flexGrow: 1,
+              flexDirection: 'row',
+              alignItems: 'center',
+              backgroundColor: 'gray', 
+              justifyContent: 'center',
+              marginTop: StatusBar.currentHeight,
+            }}>
+              <Button
+                onPress={() => alert('This is a button!')}
+                title="Left"
+                color="#000"
+              />
+              <View style={{ 
+                backgroundColor: 'orange',
+                flexGrow: 1,
+              }}>
+                <Text>Custom Header</Text>
+              </View>
+              <Button
+                onPress={() => alert('This is a button!')}
+                title="Right"
+                color="#000"
+              />
+            </View>
+          ),     
+           
+
+
+          headerTitle: () => (
+            <View style={{
+              backgroundColor: 'white',
+            }}><Text>Header title</Text></View>
+          ),  
+
+        
+          headerLeft: () => (
+            <Button
+              onPress={() => alert('This is a button!')}
+              title="Left"
+              color="#000"
+            />
+          ),
+    
+          headerRight: () => (
+            <Button
+              onPress={() => alert('This is a button!')}
+              title="Right"
+              color="#000"
+            />
+          ),
 
 
   const renderItem = ({ item }) => (

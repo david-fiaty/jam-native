@@ -3,10 +3,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MapScreen from '@/components/screens/MapScreen';
 import AddJamScreen from '@/components/screens/AddJamScreen';
 import ProfileScreen from '@/components/screens/ProfileScreen';
-import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-import ClearIcon from '../icons/ClearIcon';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 
-const BottomTabs = () => {
+const FooterBar = () => {
   const Tab = createBottomTabNavigator();
 
   return (
@@ -53,15 +52,17 @@ const BottomTabs = () => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     width: '100%',
     position: 'absolute',
     bottom: 0,
     borderTopWidth: 1,
-    borderTopColor: Colors.primary,
   },
   tabs: {
-    paddingTop: 10,
+    flex: 1,
+    paddingVertical: GlobalStyles.space,
+    backgroundColor: 'red',
   },
 });
 
-export default BottomTabs;
+export default FooterBar;

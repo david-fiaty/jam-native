@@ -9,7 +9,7 @@ type Props = {
   scrollX: SharedValue<number>
 };
 
-const {width} = Dimensions.get('screen');
+const {width} = Dimensions.get('window');
 
 export default function SlideshowItem({item, index, scrollX}: Props) {
   const itemAnimation = useAnimatedStyle(() => {

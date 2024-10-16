@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { StyleSheet, Modal, View, TouchableWithoutFeedback, StatusBar, TouchableOpacity } from 'react-native';
+import { StyleSheet, Modal, View, TouchableWithoutFeedback, StatusBar, TouchableOpacity, Dimensions } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import BackButton from '@/components/navigation/BackButton';
+import DeviceManager from '@/classes/DeviceManager';
 
 type Props = {
   label: JSX.Element, 
@@ -14,10 +15,10 @@ type Props = {
 const ModalView = ({label, title, content, animation, showBorder}: Props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const animationType = animation ? animation : 'slide';
-  const wrapperStyle = showBorder === true ? wrapperVisible : wrapperHidden;
+  const borderStyle = showBorder === true ? borderVisible : borderHidden;
 
   return (
-    <View style={styles.container}>        
+    <>
       <Modal
         animationType={animationType}
         hardwareAccelerated={true}
@@ -26,11 +27,11 @@ const ModalView = ({label, title, content, animation, showBorder}: Props) => {
         onRequestClose={() => setModalVisible(!modalVisible)}
       >
         <TouchableWithoutFeedback onPress={() => setModalVisible(!modalVisible)}>
-          <View style={styles.modal.container}>
+          <View style={styles.container}>
             <TouchableWithoutFeedback>
-              <View style={styles.modal.view}>
+              <View style={styles.view}>
                 <BackButton title={title} onPress={() => setModalVisible(!modalVisible)} />
-                <View style={wrapperStyle}>
+                <View style={borderStyle}>
                   {content}
                 </View>
               </View>
@@ -41,16 +42,16 @@ const ModalView = ({label, title, content, animation, showBorder}: Props) => {
       <TouchableOpacity onPress={() => setModalVisible(true)}>
         {label}
       </TouchableOpacity>
-    </View>
+    </>
   );
 };
 
-const wrapperHidden = {
+const borderHidden = {
   width: '100%',
   gap: GlobalStyles.space,
 };
 
-const wrapperVisible = {
+const borderVisible = {
   width: '100%',
   gap: GlobalStyles.space,
   padding: GlobalStyles.space,
@@ -61,23 +62,18 @@ const wrapperVisible = {
 
 const styles = StyleSheet.create({
   container: {
+    height: DeviceManager.modal.height - GlobalStyles.space,
+    marginTop: 'auto',
+    marginBottom: GlobalStyles.tabsbar.height,
+    backgroundColor: 'black',
+    borderWidth: 1,
   },
-  modal: {
-    container: {
-      flex: 1,
-      flexDirection: 'column',
-      alignItems: 'center',
-      marginTop: StatusBar.currentHeight + GlobalStyles.toolbar.height,
-      backgroundColor: 'black',
-      height: '100%',
-    },
-    view: {
-      backgroundColor: 'white',
-      width: '100%',
-      height: '100%',
-      alignItems: 'flex-start',
-      padding: 20,
-    },
+  view: {
+    backgroundColor: 'yellow',
+    width: '100%',
+    height: '100%',
+    alignItems: 'flex-start',
+    padding: GlobalStyles.space*2,
   },
 });
 

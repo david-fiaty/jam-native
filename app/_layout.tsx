@@ -5,6 +5,24 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 
+import { Button, View, Text, StatusBar } from 'react-native';
+import TextBlock from '@/components/base/TextBlock';
+import HeaderBar from '@/components/navigation/HeaderBar';
+
+const headerOptions = { 
+  headerShown: true,
+  headerStyle: {
+    backgroundColor: 'gray', 
+  },
+  headerTintColor: '#fff',   
+  headerTitleStyle: {
+    fontWeight: 'bold',          
+  }, 
+  header: (props: object) => (
+    <HeaderBar />
+  ),     
+};
+
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -29,8 +47,7 @@ export default function RootLayout() {
         <Stack.Screen name="login" options={{ headerShown: false }} />
         <Stack.Screen name="about" options={{ headerShown: false }} />
         <Stack.Screen name="legal" options={{ headerShown: false }} />
-        <Stack.Screen name="jams" options={{ headerShown: false }} />
-        <Stack.Screen name="account" options={{ headerShown: false }} />
+        <Stack.Screen name="jams" options={headerOptions} />
         <Stack.Screen name="password" options={{ headerShown: false }} />
         <Stack.Screen name="username" options={{ headerShown: false }} />
         <Stack.Screen name="language" options={{ headerShown: false }} />

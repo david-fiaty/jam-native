@@ -1,17 +1,52 @@
-import { FlatList } from 'react-native';
-import JamItem from '@/components/jam/JamItem';
+import { View, FlatList } from 'react-native';
 import ApiClient from '@/classes/ApiClient';
+import { GlobalStyles } from '@/constants/GlobalStyles';
+import JamHeader from '@/components/jam/JamHeader';
+import JamImages from '@/components/jam/JamImages';
+import JamToolbar from '@/components/jam/JamToolbar';
+import JamContent from '@/components/jam/JamContent';
+
+type ItemProps = {
+  item: object,
+  index: number,
+};
+
+const Item = ({item, index}: ItemProps) => {
+  return (
+    <View style={styles.item}>
+      <JamHeader item={item} index={index} />
+      <JamImages item={item} index={index} />
+      <JamToolbar item={item} index={index} />
+      <JamContent item={item} index={index} />
+    </View>
+  );
+};
 
 const JamsScreen = () => {
   const data = ApiClient.get('jams');
 
   return (
-    <FlatList 
-      data={data} 
-      horizontal={false}  
-      renderItem={({item, index}) => <JamItem item={item} index={index} />} 
-    />
+    <View style={styles.container}>
+      <FlatList 
+        data={data} 
+        horizontal={false}  
+        renderItem={({item, index}) => <Item item={item} index={index} />} 
+      />
+    </View>
   );
+};
+
+const styles = {
+  container: {
+    paddingHorizontal: GlobalStyles.space,
+  },
+  item: {
+    borderWidth: 1,
+    marginBottom: GlobalStyles.space,
+    paddingBottom: GlobalStyles.space*1,
+    borderRadius: GlobalStyles.space,
+    borderColor: GlobalStyles.border.color,
+  },
 };
 
 export default JamsScreen;
