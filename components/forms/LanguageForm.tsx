@@ -8,7 +8,13 @@ import SelectListField from '../fields/SelectListField';
 const LanguageForm = () => {
   return (
     <View style={styles.container}>    
-      <SelectListField />
+      <SelectListField 
+        placeholder="Language"
+        data={[
+          { label: "English", value: 'en' },
+          { label: "French", value: 'fr' },
+        ]} 
+      />
     </View>
   );
 };

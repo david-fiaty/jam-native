@@ -40,7 +40,13 @@ const JamForm = () => {
         title={<TextBlock>Select your location</TextBlock>}
         label="Location"
       />
-      <SelectListField />
+      <SelectListField 
+        placeholder="Status"
+        data={[
+          { label: "Public", value: 1 },
+          { label: "Private", value: 0 },
+        ]} 
+      />
       <MultiselectDropdownField />
       <View style={styles.buttonContainer}>
         <Button 
