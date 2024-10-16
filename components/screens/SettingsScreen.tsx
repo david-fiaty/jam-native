@@ -5,21 +5,25 @@ import AccountScreen from './AccountScreen';
 import PasswordScreen from './PasswordScreen';
 import LanguageScreen from './LanguageScreen';
 
+type ItemProps = {
+  item: object,
+};
+
 const data = [
   {
     'label': 'Account information',
     'path': '/account',
-    'screen': () => <AccountScreen />,
+    'screen': ({item} : ItemProps) => <AccountScreen menuItem={item}/>,
   },
   {
     'label': 'Change password',
     'path': '/password',
-    'screen': PasswordScreen,
+    'screen': ({item} : ItemProps) => <PasswordScreen menuItem={item}/>,
   },
   {
     'label': 'Language',
     'path': '/language',
-    'screen': LanguageScreen,
+    'screen': ({item} : ItemProps) => <LanguageScreen menuItem={item}/>,
   },
 ];
 
