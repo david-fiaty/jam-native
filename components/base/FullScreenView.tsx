@@ -7,12 +7,11 @@ type Props = {
   children?: ReactNode,
 };
 
-const ScreenView = ({style, children}: Props) => {
+const FullScreenView = ({style, children}: Props) => {
   return (
     <View style={styles.container}>{children}</View>   
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -27,4 +26,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ScreenView;
+export default FullScreenView;
