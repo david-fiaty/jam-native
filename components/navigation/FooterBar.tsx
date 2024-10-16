@@ -5,7 +5,7 @@ import AddJamScreen from '@/components/screens/AddJamScreen';
 import ProfileScreen from '@/components/screens/ProfileScreen';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 
-const BottomTabs = () => {
+const FooterBar = () => {
   const Tab = createBottomTabNavigator();
 
   return (
@@ -65,4 +65,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BottomTabs;
+export default FooterBar;

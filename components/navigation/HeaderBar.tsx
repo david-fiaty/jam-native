@@ -1,4 +1,4 @@
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
 import { useRouter } from 'expo-router';
 import JamLogo from '@/components/images/JamLogo';
 import SettingsScreen from '../screens/SettingsScreen';
@@ -6,7 +6,7 @@ import NotificationsScreen from '../screens/NotificationsScreen';
 import SearchScreen from '../screens/SearchScreen';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 
-const TopToolbar = () => {
+const HeaderBar = () => {
   const router = useRouter();
 
   return (
@@ -25,13 +25,14 @@ const TopToolbar = () => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'none',
-    //display: 'flex',
-    //flex: 1,
+    display: 'flex',
+    flexGrow: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: 'red',
+    backgroundColor: 'gray', 
+    justifyContent: 'center',
+    marginTop: StatusBar.currentHeight,
+
   },
   buttons: {
     display: 'flex',
@@ -48,4 +49,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TopToolbar;
+export default HeaderBar;
