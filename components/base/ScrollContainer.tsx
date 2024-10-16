@@ -10,7 +10,7 @@ const ScrollContainer = ({style, children}: Props) => {
   return (
     <ScrollView 
       style={[styles.container, style]}
-      nestedScrollEnabled={false}
+      nestedScrollEnabled={true}
       contentContainerStyle={styles.container}
     >
       <Pressable>{children}</Pressable>
