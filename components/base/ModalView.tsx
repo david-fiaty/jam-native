@@ -71,9 +71,10 @@ const styles = StyleSheet.create({
   view: {
     backgroundColor: 'yellow',
     width: '100%',
-    height: '100%',
+    flex: 1,
     alignItems: 'flex-start',
     padding: GlobalStyles.space,
+    paddingBottom: GlobalStyles.tabsbar.height,
   },
 });
 
