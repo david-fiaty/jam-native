@@ -56,15 +56,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     borderTopWidth: 1,
-    display: 'flex',
     backgroundColor: 'red',
   },
   tabs: {
     backgroundColor: 'red',
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: GlobalStyles.tabsbar.height,
+    paddingTop: GlobalStyles.space,
   },
 });
 
