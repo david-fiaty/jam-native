@@ -1,11 +1,11 @@
-import TopToolbar from '@/components/navigation/TopToolbar';
+import HeaderBar from '@/components/navigation/HeaderBar';
 import AboutScreen from '@/components/screens/AboutScreen';
 import ViewportContainer from '@/components/base/ViewportContainer';
 
 const About = () => {
   return (
     <ViewportContainer>
-      <TopToolbar />
+      <HeaderBar />
       <AboutScreen />
     </ViewportContainer>
   );
