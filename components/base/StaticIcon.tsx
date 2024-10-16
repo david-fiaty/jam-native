@@ -14,7 +14,7 @@ type IconProps = {
 }
 
 const icons = {
-  location: ({iconStyle, size}: IconProps) => <Ionicons name="location-sharp" size={size} style={iconStyle} />,
+  location: ({iconStyle, size}: IconProps) => <Ionicons name="location-outline" size={size} style={iconStyle} />,
   megaphone: ({iconStyle, size}: IconProps) => <Ionicons name="megaphone-outline" size={size} style={iconStyle} />,
   menu: ({iconStyle, size}: IconProps) => <Ionicons name="menu" size={size} style={iconStyle} />,
   plus: ({iconStyle, size}: IconProps) => <Ionicons name="add" size={size} style={iconStyle} />,
@@ -22,7 +22,7 @@ const icons = {
   search: ({iconStyle, size}: IconProps) => <Ionicons name="search-sharp" size={size} style={iconStyle} />,
   share: ({iconStyle, size}: IconProps) => <Ionicons name="share-social-outline" size={size} style={iconStyle} />,
   twitter: ({iconStyle, size}: IconProps) => <Ionicons name="logo-twitter" size={size} style={iconStyle} />,
-  user: ({iconStyle, size}: IconProps) => <Ionicons name="person-circle" size={size} style={iconStyle} />,
+  user: ({iconStyle, size}: IconProps) => <Ionicons name="person-outline" size={size} style={iconStyle} />,
   users: ({iconStyle, size}: IconProps) => <Ionicons name="people-outline" size={size} style={iconStyle} />,
   actions: ({iconStyle, size}: IconProps) => <Ionicons name="ellipsis-horizontal-sharp" size={size} style={iconStyle} />,
   copy: ({iconStyle, size}: IconProps) => <Ionicons name="copy-outline" size={size} style={iconStyle} />,
@@ -38,6 +38,7 @@ const icons = {
   next: ({iconStyle, size}: IconProps) => <Ionicons name="chevron-forward" size={size} style={iconStyle} />,
   link: ({iconStyle, size}: IconProps) => <Ionicons name="link-outline" size={size} style={iconStyle} />,
   infinite: ({iconStyle, size}: IconProps) => <Ionicons name="infinite-outline" size={size} style={iconStyle} />,
+  stack: ({iconStyle, size}: IconProps) => <Ionicons name="albums-outline" size={size} style={iconStyle} />,
 };
 
 const StaticIcon = ({name, size, containerStyle, iconStyle}: Props) => {
