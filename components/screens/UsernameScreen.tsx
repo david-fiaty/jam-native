@@ -1,4 +1,4 @@
-import { StyleSheet, View, ScrollView, Pressable } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import ModalView from '@/components/base/ModalView';
 import ProfileForm from '@/components/profile/ProfileForm';
 import ProfileImage from '@/components/profile/ProfileImage';
@@ -6,6 +6,7 @@ import ProfileJams from '@/components/profile/ProfileJams';
 import ProfileProjects from '@/components/profile/ProfileProjects';
 import MenuItem from '../base/MenuItem';
 import TextBlock from '../base/TextBlock';
+import ScrollContainer from '../base/ScrollContainer';
 
 type Props = {
   menuItem: object,
@@ -19,17 +20,12 @@ const UsernameScreen = ({menuItem}: Props) => {
         animation="fade"
         label={<MenuItem label={menuItem.label} />}
         content={
-          <ScrollView 
-            nestedScrollEnabled={true}
-            contentContainerStyle={{ flexGrow: 1 }}
-          >
-            <Pressable>
-              <ProfileImage />
-              <ProfileForm />
-              <ProfileProjects />
-              <ProfileJams />
-            </Pressable>
-          </ScrollView>  
+          <ScrollContainer>
+            <ProfileImage />
+            <ProfileForm />
+            <ProfileProjects />
+            <ProfileJams />
+          </ScrollContainer>
         }
       />    
     </View>
@@ -38,9 +34,6 @@ const UsernameScreen = ({menuItem}: Props) => {
 
 const styles = StyleSheet.create({
   container: {},
-  scroll: {
-    flexGrow: 1,
-  },  
 });
 
 export default UsernameScreen;

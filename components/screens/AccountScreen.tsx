@@ -1,8 +1,9 @@
-import { StyleSheet, View, ScrollView, Pressable } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import ModalView from '@/components/base/ModalView';
 import MenuItem from '../base/MenuItem';
 import TextBlock from '../base/TextBlock';
 import AccountForm from '../forms/AccountForm';
+import ScrollContainer from '../base/ScrollContainer';
 
 type Props = {
   menuItem: object,
@@ -16,14 +17,9 @@ const AccountScreen = ({menuItem}: Props) => {
         animation="fade"
         label={<MenuItem label={menuItem.label} />}
         content={
-          <ScrollView 
-            nestedScrollEnabled={true}
-            contentContainerStyle={{ flexGrow: 1 }}
-          >
-            <Pressable>
-              <AccountForm />
-            </Pressable>
-          </ScrollView>  
+          <ScrollContainer>
+            <AccountForm />
+          </ScrollContainer>
         }
       />    
     </View>
@@ -32,9 +28,6 @@ const AccountScreen = ({menuItem}: Props) => {
 
 const styles = StyleSheet.create({
   container: {},
-  scroll: {
-    flexGrow: 1,
-  },  
 });
 
 export default AccountScreen;
