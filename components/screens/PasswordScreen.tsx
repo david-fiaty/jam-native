@@ -2,6 +2,7 @@ import { StyleSheet, View, ScrollView, Pressable } from 'react-native';
 import ModalView from '@/components/base/ModalView';
 import MenuItem from '../base/MenuItem';
 import TextBlock from '../base/TextBlock';
+import PasswordForm from '../forms/PasswordForm';
 
 type Props = {
   menuItem: object,
@@ -20,7 +21,7 @@ const PasswordScreen = ({menuItem}: Props) => {
             contentContainerStyle={{ flexGrow: 1 }}
           >
             <Pressable>
-              <TextBlock>PasswordScreen</TextBlock>
+              <PasswordForm />
             </Pressable>
           </ScrollView>  
         }

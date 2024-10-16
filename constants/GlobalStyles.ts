@@ -36,6 +36,11 @@ export const GlobalStyles = {
     borderWidth: 1,
     borderRadius: space,
   },
+  divider: {
+    width: '100%', 
+    borderColor: Colors.primary, 
+    marginVertical: space/2,
+  },
   icon: {
     color: Colors.primary,
     backgroundColor: Colors.secondary,
