@@ -4,19 +4,20 @@ import { GlobalStyles } from "@/constants/GlobalStyles";
 class DeviceManager {
   screen: ScaledSize;
   window: ScaledSize;
+  modal: object;
 
   constructor() {
     this.screen = Dimensions.get('screen');
     this.window = Dimensions.get('window');
+    this.modal = this.getModalSize();
   }
 
-  viewport()  {
-    //console.log(this.screen);
-  
-    //console.log(a - b - (GlobalStyles.space*4));
-  
-    return this.window;
-  }
+  getModalSize() {
+    return {
+      width: this.window.width,
+      height: this.window.height - GlobalStyles.toolbar.height - GlobalStyles.tabsbar.height - GlobalStyles.space/2,
+    };
+  } 
 };
 
 export default (new DeviceManager());
