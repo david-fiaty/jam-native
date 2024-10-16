@@ -34,8 +34,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'gray', 
     justifyContent: 'space-between',
     marginTop: StatusBar.currentHeight,
+    padding: GlobalStyles.space,
   },
-  left: {},
+  left: {
+    gap: GlobalStyles.space,
+  },
   right: {
     display: 'flex',
     flexDirection: 'row',
