@@ -20,7 +20,10 @@ const ModalView = ({label, title, content, animation, showBorder}: Props) => {
   const a = Dimensions.get('window').height;
   const b = StatusBar.currentHeight + GlobalStyles.toolbar.height;
 
-  console.log(a - b - (GlobalStyles.space*4));
+  //console.log(a - b - (GlobalStyles.space*4));
+
+  console.log(DeviceManager.screen);
+  console.log(DeviceManager.window);
 
 
   return (
