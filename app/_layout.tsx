@@ -45,6 +45,7 @@ export default function RootLayout() {
           header: (props) => (
             <View style={{ 
               display: 'flex',
+              flexGrow: 1,
               flexDirection: 'row',
               alignItems: 'center',
               backgroundColor: 'gray', 
