@@ -13,7 +13,7 @@ type ItemProps = {
 
 const Item = ({item, index}: ItemProps) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.item}>
       <JamHeader item={item} index={index} />
       <JamImages item={item} index={index} />
       <JamToolbar item={item} index={index} />
@@ -39,6 +39,13 @@ const JamsScreen = () => {
 const styles = {
   container: {
     paddingHorizontal: GlobalStyles.space,
+  },
+  item: {
+    marginBottom: GlobalStyles.space,
+    paddingBottom: GlobalStyles.space*1,
+    borderWidth: 1,
+    borderRadius: GlobalStyles.space,
+    borderColor: GlobalStyles.border.color,
   },
 };
 
