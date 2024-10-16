@@ -8,7 +8,7 @@ const AddJamScreen = () => {
   return (
     <ModalView 
       title="Add a new Jam" 
-      animation="slide"
+      animation="fade"
       label={<ClearIcon name="plus" size={GlobalStyles.tabsbar.icon.size} />}
       content={
         <ScrollView 

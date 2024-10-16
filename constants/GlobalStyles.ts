@@ -38,7 +38,7 @@ export const GlobalStyles = {
   },
   divider: {
     width: '100%', 
-    borderColor: Colors.primary, 
+    borderColor: Colors.tertiary, 
     marginVertical: space/2,
   },
   icon: {
