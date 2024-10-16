@@ -58,7 +58,7 @@ export default function RootLayout() {
                 color="#000"
               />
               <View style={{ 
-                backgroundColor: '#fff',
+                backgroundColor: 'orange',
                 flexGrow: 1,
               }}>
                 <Text>Custom Header</Text>
