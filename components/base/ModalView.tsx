@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, Modal, View, TouchableWithoutFeedback, StatusBar, TouchableOpacity } from 'react-native';
+import { StyleSheet, Modal, View, TouchableWithoutFeedback, StatusBar, TouchableOpacity, Dimensions } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import BackButton from '@/components/navigation/BackButton';
 
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       marginTop: StatusBar.currentHeight + GlobalStyles.toolbar.height,
       backgroundColor: 'black',
-      height: '100%',
+      height: Dimensions.get('screen').height,
     },
     view: {
       backgroundColor: 'white',
