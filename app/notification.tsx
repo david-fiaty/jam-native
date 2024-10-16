@@ -1,21 +1,14 @@
 import { StyleSheet, Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import TopToolbar from '@/components/navigation/TopToolbar';
+import ViewportContainer from '@/components/base/ViewportContainer';
 
 const Notification = () => {
   return (
-    <SafeAreaView style={styles.container}>
+    <ViewportContainer>
       <TopToolbar />
       <Text>NOTIFICATION</Text>
-    </SafeAreaView>
+    </ViewportContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    flexDirection: 'column', 
-  },
-});
 
 export default Notification;
