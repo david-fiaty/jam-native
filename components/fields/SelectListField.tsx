@@ -9,11 +9,6 @@ type Props = {
   placeholder: string,
 };
 
-const data = [
-  { label: "Public", value: 1 },
-  { label: "Private", value: 0 },
-];
-
 const SelectListField = ({data, placeholder}: Props) => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
