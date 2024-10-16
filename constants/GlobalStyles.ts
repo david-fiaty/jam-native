@@ -13,6 +13,7 @@ export const GlobalStyles = {
     height: 42,
   },
   tabsbar: {
+    height: 42,
     icon: {
       size: 24,
       color: Colors.primary,
