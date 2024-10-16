@@ -1,4 +1,3 @@
-import { StyleSheet, View } from 'react-native';
 import ModalView from '@/components/base/ModalView';
 import ProfileForm from '@/components/profile/ProfileForm';
 import ProfileImage from '@/components/profile/ProfileImage';
@@ -14,26 +13,20 @@ type Props = {
 
 const UsernameScreen = ({menuItem}: Props) => {
   return (
-    <View style={styles.container}>    
-      <ModalView 
-        title={<TextBlock>{menuItem.label}</TextBlock>} 
-        animation="fade"
-        label={<MenuItem label={menuItem.label} />}
-        content={
-          <ScrollContainer>
-            <ProfileImage />
-            <ProfileForm />
-            <ProfileProjects />
-            <ProfileJams />
-          </ScrollContainer>
-        }
-      />    
-    </View>
+    <ModalView 
+      title={<TextBlock>{menuItem.label}</TextBlock>} 
+      animation="fade"
+      label={<MenuItem label={menuItem.label} />}
+      content={
+        <ScrollContainer>
+          <ProfileImage />
+          <ProfileForm />
+          <ProfileProjects />
+          <ProfileJams />
+        </ScrollContainer>
+      }
+    />    
   );
 };
-
-const styles = StyleSheet.create({
-  container: {},
-});
 
 export default UsernameScreen;

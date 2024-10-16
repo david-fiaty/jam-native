@@ -1,4 +1,3 @@
-import { StyleSheet, View } from 'react-native';
 import ModalView from '@/components/base/ModalView';
 import MenuItem from '../base/MenuItem';
 import TextBlock from '../base/TextBlock';
@@ -10,23 +9,17 @@ type Props = {
 
 const NotificationScreen = ({menuItem}: Props) => {
   return (
-    <View style={styles.container}>    
-      <ModalView 
-        title={<TextBlock>{menuItem.label}</TextBlock>} 
-        animation="fade"
-        label={<MenuItem label={menuItem.label} />}
-        content={
-          <ScrollContainer>
-            <TextBlock>{menuItem.content}</TextBlock>
-          </ScrollContainer>
-        }
-      />    
-    </View>
+    <ModalView 
+      title={<TextBlock>{menuItem.label}</TextBlock>} 
+      animation="fade"
+      label={<MenuItem label={menuItem.label} />}
+      content={
+        <ScrollContainer>
+          <TextBlock>{menuItem.content}</TextBlock>
+        </ScrollContainer>
+      }
+    />    
   );
 };
-
-const styles = StyleSheet.create({
-  container: {},
-});
 
 export default NotificationScreen;

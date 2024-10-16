@@ -15,54 +15,49 @@ type Props = {
 
 const CheckboxListField = ({label, title, data}: Props) => {
   return (
-    <View style={styles.container}>    
-      <ModalView 
-        title={title} 
-        animation="slide"
-        label={label}
-        content={
-          <ScrollContainer>
-            <InputTextField placeholder="Search users" />
-            <FlatList 
-              data={data} 
-              horizontal={false}  
-              numColumns={1}
-              style={styles.list}
-              contentContainerStyle={{gap: GlobalStyles.space}}
-              scrollEnabled={false}
-              renderItem={({item, index}) => {
-                return (
-                  <TouchableOpacity onPress={() => console.log('clicked')}>
-                    <View style={styles.item}>
-                      <View style={styles.left}>
-                        <SecondaryIcon name="user" />
-                        <TextBlock>{item.name}</TextBlock>
-                      </View>
-                      <View style={styles.right}>
-                        <CheckBox 
-                          iconRight={true}
-                          containerStyle={styles.checkbox} 
-                          size={GlobalStyles.space*2}
-                          checked={true} 
-                          checkedColor={Colors.primary}
-                        />
-                      </View>
+    <ModalView 
+      title={title} 
+      animation="slide"
+      label={label}
+      content={
+        <ScrollContainer>
+          <InputTextField placeholder="Search users" />
+          <FlatList 
+            data={data} 
+            horizontal={false}  
+            numColumns={1}
+            style={styles.list}
+            contentContainerStyle={{gap: GlobalStyles.space}}
+            scrollEnabled={false}
+            renderItem={({item, index}) => {
+              return (
+                <TouchableOpacity onPress={() => console.log('clicked')}>
+                  <View style={styles.item}>
+                    <View style={styles.left}>
+                      <SecondaryIcon name="user" />
+                      <TextBlock>{item.name}</TextBlock>
                     </View>
-                  </TouchableOpacity>
-                );
-              }}
-            />
-          </ScrollContainer>
-        }
-      />    
-    </View>
+                    <View style={styles.right}>
+                      <CheckBox 
+                        iconRight={true}
+                        containerStyle={styles.checkbox} 
+                        size={GlobalStyles.space*2}
+                        checked={true} 
+                        checkedColor={Colors.primary}
+                      />
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              );
+            }}
+          />
+        </ScrollContainer>
+      }
+    /> 
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-
-  },
   list: {
     width: '100%',
     marginTop: GlobalStyles.space*2,

@@ -1,4 +1,3 @@
-import { StyleSheet } from 'react-native';
 import ModalView from '@/components/base/ModalView';
 import JamForm from '../forms/JamForm';
 import ClearIcon from '../icons/ClearIcon';
@@ -19,9 +18,5 @@ const AddJamScreen = () => {
     />   
   );
 };
-
-const styles = StyleSheet.create({
-  container: {},
-});
 
 export default AddJamScreen;
