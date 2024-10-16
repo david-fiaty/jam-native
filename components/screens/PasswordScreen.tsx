@@ -24,10 +24,7 @@ const PasswordScreen = ({menuItem}: Props) => {
             contentContainerStyle={{ flexGrow: 1 }}
           >
             <Pressable>
-              <ProfileImage />
-              <ProfileForm />
-              <ProfileProjects />
-              <ProfileJams />
+              <TextBlock>PasswordScreen</TextBlock>
             </Pressable>
           </ScrollView>  
         }

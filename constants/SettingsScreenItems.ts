@@ -8,10 +8,6 @@ const SettingsScreenItems = [
     'path': '/password',
   },
   {
-    'label': 'Change user name',
-    'path': '/username',
-  },
-  {
     'label': 'Language',
     'path': '/language',
   },

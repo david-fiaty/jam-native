@@ -10,22 +10,18 @@ const ProfileForm = () => {
       <InputTextField
         style={GlobalStyles.field}
         placeholder="Public name"
-        placeholderTextColor={GlobalStyles.text.color}
       />
       <InputTextField
         style={GlobalStyles.field}
         placeholder="IG handle"
-        placeholderTextColor={GlobalStyles.text.color}
       />
       <InputTextField
         style={GlobalStyles.field}
         placeholder="Email"
-        placeholderTextColor={GlobalStyles.text.color}
       />
       <InputTextField
         style={GlobalStyles.field}
         placeholder="Phone number"
-        placeholderTextColor={GlobalStyles.text.color}
       />
       <LocationPickerField 
         title={<TextBlock>Select your location</TextBlock>}
@@ -35,7 +31,6 @@ const ProfileForm = () => {
       <InputTextField
         style={GlobalStyles.field}
         placeholder="Creative organisation"
-        placeholderTextColor={GlobalStyles.text.color}
       />
     </View>
   );
