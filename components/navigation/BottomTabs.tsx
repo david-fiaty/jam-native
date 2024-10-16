@@ -57,13 +57,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     borderTopWidth: 1,
-    backgroundColor: 'red',
   },
   tabs: {
-    backgroundColor: 'red',
     flex: 1,
-    verticalAlign: 'middle',
     paddingVertical: GlobalStyles.space,
+    backgroundColor: 'red',
   },
 });
 
