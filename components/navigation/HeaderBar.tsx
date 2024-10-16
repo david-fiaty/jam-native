@@ -1,4 +1,4 @@
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
 import { useRouter } from 'expo-router';
 import JamLogo from '@/components/images/JamLogo';
 import SettingsScreen from '../screens/SettingsScreen';
@@ -25,13 +25,14 @@ const HeaderBar = () => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'none',
-    //display: 'flex',
-    //flex: 1,
+    display: 'flex',
+    flexGrow: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: 'red',
+    backgroundColor: 'gray', 
+    justifyContent: 'center',
+    marginTop: StatusBar.currentHeight,
+
   },
   buttons: {
     display: 'flex',
