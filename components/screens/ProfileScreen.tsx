@@ -1,4 +1,4 @@
-import { StyleSheet, View, ScrollView, Pressable } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import ClearIcon from '../icons/ClearIcon';
 import ModalView from '@/components/base/ModalView';
 import ProfileForm from '@/components/profile/ProfileForm';
