@@ -17,10 +17,7 @@ const Jams = () => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    flexDirection: 'column', 
     height: '100%',
-    backgroundColor: Colors.background,
   },
   text: {
     color: GlobalStyles.text.color,
