@@ -2,22 +2,24 @@ import { StyleSheet, View, FlatList } from 'react-native';
 import ModalView from '@/components/base/ModalView';
 import TertiaryIcon from '../icons/TertiaryIcon';
 import AccountScreen from './AccountScreen';
+import PasswordScreen from './PasswordScreen';
+import LanguageScreen from './LanguageScreen';
 
 const data = [
   {
     'label': 'Account information',
     'path': '/account',
-    'component': '',
+    'screen': () => <AccountScreen />,
   },
   {
     'label': 'Change password',
     'path': '/password',
-    'component': '',
+    'screen': PasswordScreen,
   },
   {
     'label': 'Language',
     'path': '/language',
-    'component': '',
+    'screen': LanguageScreen,
   },
 ];
 
@@ -35,7 +37,9 @@ const SettingsScreen = () => {
             style={styles.list}
             renderItem={({item, index}) => {
               return (
-                <AccountScreen menuItem={item}/>
+                <View>
+                {item.screen()}
+                </View>
               );
             }} 
           />
