@@ -11,10 +11,11 @@ class DeviceManager {
   }
 
   viewport()  {
-    console.log(this.screen);
+    //console.log(this.screen);
   
     //console.log(a - b - (GlobalStyles.space*4));
   
+    return this.window;
   }
 };
 
