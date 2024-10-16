@@ -1,14 +1,14 @@
-import TopToolbar from '@/components/navigation/TopToolbar';
-import BottomTabs from '@/components/navigation/BottomTabs';
+import HeaderBar from '@/components/navigation/HeaderBar';
+import FooterBar from '@/components/navigation/FooterBar';
 import JamsScreen from '@/components/screens/JamsScreen';
 import ViewportContainer from '@/components/base/ViewportContainer';
 
 const Jams = () => {
   return (  
     <ViewportContainer>
-      <TopToolbar /> 
+      <HeaderBar /> 
       <JamsScreen />
-      <BottomTabs />
+      <FooterBar />
     </ViewportContainer>
   );
 };

@@ -6,7 +6,7 @@ import NotificationsScreen from '../screens/NotificationsScreen';
 import SearchScreen from '../screens/SearchScreen';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 
-const TopToolbar = () => {
+const HeaderBar = () => {
   const router = useRouter();
 
   return (
@@ -48,4 +48,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TopToolbar;
+export default HeaderBar;

@@ -1,12 +1,12 @@
 import { StyleSheet } from 'react-native';
-import TopToolbar from '@/components/navigation/TopToolbar';
+import HeaderBar from '@/components/navigation/HeaderBar';
 import LegalScreen from '@/components/screens/LegalScreen';
 import ViewportContainer from '@/components/base/ViewportContainer';
 
 const Legal = () => {
   return (
     <ViewportContainer>
-      <TopToolbar />
+      <HeaderBar />
       <LegalScreen />
     </ViewportContainer>
   );
