@@ -3,17 +3,17 @@ import Slideshow from '@/components/slideshow/Slideshow';
 import BottomLinks from '@/components/navigation/BottomLinks';
 import JamLogo from '../images/JamLogo';
 import LoginSignupButton from '../buttons/LoginSignupButton';
-import ScreenView from '@/components/base/ScreenView';
+import FullScreenView from '@/components/base/FullScreenView';
 
 const WelcomeScreen = () => {
   return (
     <View style={styles.container}>
-      <ScreenView>
+      <FullScreenView>
         <JamLogo width={110} height={110} />    
         <Slideshow />
         <LoginSignupButton />
         <BottomLinks />
-      </ScreenView>
+      </FullScreenView>
     </View>
   );
 };

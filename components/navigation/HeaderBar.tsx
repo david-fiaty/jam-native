@@ -11,11 +11,13 @@ const HeaderBar = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => router.replace('/jams')}>
-        <JamLogo width={46} height={46} /> 
-      </TouchableOpacity>
-      <View style={styles.buttons}> 
-        <SettingsScreen />  
+      <View style={styles.left}>
+        <TouchableOpacity onPress={() => router.replace('/jams')}>
+          <JamLogo width={46} height={46} /> 
+        </TouchableOpacity>
+      </View>
+      <View style={styles.right}>
+      <SettingsScreen />  
         <NotificationsScreen />
         <SearchScreen />
       </View>
@@ -30,11 +32,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'gray', 
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     marginTop: StatusBar.currentHeight,
-
+    padding: GlobalStyles.space,
   },
-  buttons: {
+  left: {
+    gap: GlobalStyles.space,
+  },
+  right: {
     display: 'flex',
     flexDirection: 'row',
     gap: GlobalStyles.space,
