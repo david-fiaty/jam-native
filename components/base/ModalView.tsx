@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
       marginTop: 'auto',
       marginBottom: GlobalStyles.tabsbar.height,
       backgroundColor: 'black',
+      borderWidth: 1,
     },
     view: {
       backgroundColor: 'yellow',
