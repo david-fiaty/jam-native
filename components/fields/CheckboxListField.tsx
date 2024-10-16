@@ -1,11 +1,11 @@
-import { StyleSheet, View, ScrollView, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
 import { CheckBox } from '@rneui/themed';
 import ModalView from '@/components/base/ModalView';
 import TextBlock from '../base/TextBlock';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-import ClearIcon from '../icons/ClearIcon';
 import SecondaryIcon from '../icons/SecondaryIcon';
 import InputTextField from './InputTextField';
+import ScrollContainer from '../base/ScrollContainer';
 
 type Props = {
   label: JSX.Element,
@@ -21,10 +21,7 @@ const CheckboxListField = ({label, title, data}: Props) => {
         animation="slide"
         label={label}
         content={
-          <ScrollView 
-            nestedScrollEnabled={true}
-            contentContainerStyle={{ flexGrow: 1 }}
-          >
+          <ScrollContainer>
             <InputTextField placeholder="Search users" />
             <FlatList 
               data={data} 
@@ -55,7 +52,7 @@ const CheckboxListField = ({label, title, data}: Props) => {
                 );
               }}
             />
-          </ScrollView>  
+          </ScrollContainer>
         }
       />    
     </View>
