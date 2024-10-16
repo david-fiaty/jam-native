@@ -1,4 +1,5 @@
 import { Dimensions, ScaledSize } from "react-native";
+import { GlobalStyles } from "@/constants/GlobalStyles";
 
 class DeviceManager {
   screen: ScaledSize;
@@ -10,7 +11,10 @@ class DeviceManager {
   }
 
   viewport()  {
-    
+    console.log(this.screen);
+  
+    //console.log(a - b - (GlobalStyles.space*4));
+  
   }
 };
 
