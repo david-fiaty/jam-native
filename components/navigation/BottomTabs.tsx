@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MapScreen from '@/components/screens/MapScreen';
 import AddJamScreen from '@/components/screens/AddJamScreen';
 import ProfileScreen from '@/components/screens/ProfileScreen';
-import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 
 const BottomTabs = () => {
   const Tab = createBottomTabNavigator();
