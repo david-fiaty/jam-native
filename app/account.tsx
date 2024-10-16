@@ -1,27 +1,19 @@
-import { StyleSheet, Text } from 'react-native';
 import { useRouter } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import TopToolbar from '@/components/navigation/TopToolbar';
 import BackButton from '@/components/navigation/BackButton';
 import ProfileScreen from '@/components/screens/ProfileScreen';
+import ViewportContainer from '@/components/base/ViewportContainer';
 
 const Account = () => {
   const router = useRouter();
 
   return (
-    <SafeAreaView style={styles.container}>
+    <ViewportContainer>
       <TopToolbar />
       <BackButton title="Account information" onPress={() => router.replace('/jams')} />
       <ProfileScreen />
-    </SafeAreaView>
+    </ViewportContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    flexDirection: 'column', 
-  },
-});
 
 export default Account;
