@@ -52,15 +52,16 @@ const BottomTabs = () => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     width: '100%',
     position: 'absolute',
     bottom: 0,
     borderTopWidth: 1,
-    backgroundColor: 'red',
   },
   tabs: {
+    flex: 1,
+    paddingVertical: GlobalStyles.space,
     backgroundColor: 'red',
-    paddingTop: GlobalStyles.space,
   },
 });
 
