@@ -13,7 +13,7 @@ const ProfileScreen = () => {
     <View style={styles.container}>    
       <ModalView 
         title="Your profile" 
-        animation="slide"
+        animation="fade"
         label={<ClearIcon name="user" size={GlobalStyles.tabsbar.icon.size} />}
         content={
           <ScrollView 
