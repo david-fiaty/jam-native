@@ -15,13 +15,7 @@ type Props = {
 const ModalView = ({label, title, content, animation, showBorder}: Props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const animationType = animation ? animation : 'slide';
-  const wrapperStyle = showBorder === true ? wrapperVisible : wrapperHidden;
-
-  //console.log(DeviceManager.viewport());
-
-  //console.log(DeviceManager.screen);
-  //console.log(DeviceManager.window);
-
+  const borderStyle = showBorder === true ? borderVisible : borderHidden;
 
   return (
     <>
@@ -37,7 +31,7 @@ const ModalView = ({label, title, content, animation, showBorder}: Props) => {
             <TouchableWithoutFeedback>
               <View style={styles.view}>
                 <BackButton title={title} onPress={() => setModalVisible(!modalVisible)} />
-                <View style={wrapperStyle}>
+                <View style={borderStyle}>
                   {content}
                 </View>
               </View>
@@ -52,12 +46,12 @@ const ModalView = ({label, title, content, animation, showBorder}: Props) => {
   );
 };
 
-const wrapperHidden = {
+const borderHidden = {
   width: '100%',
   gap: GlobalStyles.space,
 };
 
-const wrapperVisible = {
+const borderVisible = {
   width: '100%',
   gap: GlobalStyles.space,
   padding: GlobalStyles.space,
