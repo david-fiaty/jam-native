@@ -41,9 +41,9 @@ const styles = {
     paddingHorizontal: GlobalStyles.space,
   },
   item: {
+    borderWidth: 1,
     marginBottom: GlobalStyles.space,
     paddingBottom: GlobalStyles.space*1,
-    borderWidth: 1,
     borderRadius: GlobalStyles.space,
     borderColor: GlobalStyles.border.color,
   },
