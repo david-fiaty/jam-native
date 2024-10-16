@@ -7,6 +7,7 @@ import 'react-native-reanimated';
 
 import { Button, View, Text, StatusBar } from 'react-native';
 import TextBlock from '@/components/base/TextBlock';
+import HeaderBar from '@/components/navigation/HeaderBar';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -43,33 +44,9 @@ export default function RootLayout() {
           }, 
 
           header: (props) => (
-            <View style={{ 
-              display: 'flex',
-              flexGrow: 1,
-              flexDirection: 'row',
-              alignItems: 'center',
-              backgroundColor: 'gray', 
-              justifyContent: 'center',
-              marginTop: StatusBar.currentHeight,
-            }}>
-              <Button
-                onPress={() => alert('This is a button!')}
-                title="Left"
-                color="#000"
-              />
-              <View style={{ 
-                backgroundColor: 'orange',
-                flexGrow: 1,
-              }}>
-                <Text>Custom Header</Text>
-              </View>
-              <Button
-                onPress={() => alert('This is a button!')}
-                title="Right"
-                color="#000"
-              />
-            </View>
-          ),          
+            <HeaderBar />
+          ),     
+               
         }} />
         <Stack.Screen name="password" options={{ headerShown: false }} />
         <Stack.Screen name="username" options={{ headerShown: false }} />
