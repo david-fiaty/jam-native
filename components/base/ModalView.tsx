@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'flex-start',
-    padding: GlobalStyles.space*2,
+    padding: GlobalStyles.space,
   },
 });
 
