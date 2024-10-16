@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList, Text } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import ModalView from '@/components/base/ModalView';
 import TertiaryIcon from '../icons/TertiaryIcon';
 import AccountScreen from './AccountScreen';
@@ -41,7 +41,7 @@ const SettingsScreen = () => {
             style={styles.list}
             renderItem={({item, index}) => {
               return (
-                <AccountScreen menuItem={item}/>
+                <View>{item.screen({item})}</View>
               );
             }} 
           />
