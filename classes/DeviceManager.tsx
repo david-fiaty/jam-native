@@ -8,6 +8,10 @@ class DeviceManager {
     this.screen = Dimensions.get('screen');
     this.window = Dimensions.get('window');
   }
+
+  viewport()  {
+    
+  }
 };
 
 export default (new DeviceManager());
