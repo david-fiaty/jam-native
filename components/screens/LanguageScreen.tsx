@@ -6,6 +6,7 @@ import ProfileJams from '@/components/profile/ProfileJams';
 import ProfileProjects from '@/components/profile/ProfileProjects';
 import MenuItem from '../base/MenuItem';
 import TextBlock from '../base/TextBlock';
+import LanguageForm from '../forms/LanguageForm';
 
 type Props = {
   menuItem: object,
@@ -24,10 +25,7 @@ const LanguageScreen = ({menuItem}: Props) => {
             contentContainerStyle={{ flexGrow: 1 }}
           >
             <Pressable>
-              <ProfileImage />
-              <ProfileForm />
-              <ProfileProjects />
-              <ProfileJams />
+              <LanguageForm />
             </Pressable>
           </ScrollView>  
         }
