@@ -3,8 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MapScreen from '@/components/screens/MapScreen';
 import AddJamScreen from '@/components/screens/AddJamScreen';
 import ProfileScreen from '@/components/screens/ProfileScreen';
-import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-import ClearIcon from '../icons/ClearIcon';
+import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 
 const BottomTabs = () => {
   const Tab = createBottomTabNavigator();
@@ -57,10 +56,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     borderTopWidth: 1,
-    borderTopColor: Colors.primary,
+    backgroundColor: 'red',
   },
   tabs: {
-    paddingTop: 10,
+    backgroundColor: 'red',
+    paddingTop: GlobalStyles.space,
   },
 });
 

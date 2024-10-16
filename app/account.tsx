@@ -11,7 +11,7 @@ const Account = () => {
   return (
     <SafeAreaView style={styles.container}>
       <TopToolbar />
-      <BackButton title="Account information" onPress={() => router.replace('/jams')}/>
+      <BackButton title="Account information" onPress={() => router.replace('/jams')} />
       <ProfileScreen />
     </SafeAreaView>
   );

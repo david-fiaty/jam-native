@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { StyleSheet, Modal, View, TouchableWithoutFeedback, StatusBar, TouchableOpacity } from 'react-native';
+import { StyleSheet, Modal, View, TouchableWithoutFeedback, StatusBar, TouchableOpacity, Dimensions } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import BackButton from '@/components/navigation/BackButton';
+import DeviceManager from '@/classes/DeviceManager';
 
 type Props = {
   label: JSX.Element, 
@@ -15,6 +16,12 @@ const ModalView = ({label, title, content, animation, showBorder}: Props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const animationType = animation ? animation : 'slide';
   const wrapperStyle = showBorder === true ? wrapperVisible : wrapperHidden;
+
+  console.log(DeviceManager.viewport());
+
+  //console.log(DeviceManager.screen);
+  //console.log(DeviceManager.window);
+
 
   return (
     <View style={styles.container}>        
@@ -64,19 +71,19 @@ const styles = StyleSheet.create({
   },
   modal: {
     container: {
-      flex: 1,
+      display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      marginTop: StatusBar.currentHeight + GlobalStyles.toolbar.height,
+      //marginTop: StatusBar.currentHeight + GlobalStyles.toolbar.height,
       backgroundColor: 'black',
-      height: '100%',
     },
     view: {
       backgroundColor: 'white',
       width: '100%',
-      height: '100%',
+      height: 612,
+      //height: Dimensions.get('window').height - GlobalStyles.tabsbar.height,
       alignItems: 'flex-start',
-      padding: 20,
+      padding: GlobalStyles.space*2,
     },
   },
 });

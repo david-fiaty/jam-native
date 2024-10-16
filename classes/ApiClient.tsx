@@ -1,7 +1,7 @@
 import ApiEndpoints from '@/constants/ApiEndpoints';
 import ApiMockData from '@/constants/ApiMockData';
 
-const ApiClientClass = class ApiClient {
+class ApiClient {
   get(key: keyof typeof ApiEndpoints) {
     if (process.env.API_ENABLED === 'true') {
       return this.sendRequest(ApiEndpoints[key]);
@@ -34,5 +34,4 @@ const ApiClientClass = class ApiClient {
   }
 };
 
-const ApiClient = new ApiClientClass();
-export default ApiClient;
+export default (new ApiClient());
