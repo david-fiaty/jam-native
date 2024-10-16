@@ -19,7 +19,7 @@ const ModalView = ({label, title, content, animation, showBorder}: Props) => {
   const a = Dimensions.get('window').height;
   const b = StatusBar.currentHeight + GlobalStyles.toolbar.height;
 
-  console.log(a -b);
+  console.log(a - b - (GlobalStyles.space*4));
 
 
   return (
@@ -73,14 +73,14 @@ const styles = StyleSheet.create({
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      marginTop: StatusBar.currentHeight + GlobalStyles.toolbar.height,
+      //marginTop: StatusBar.currentHeight + GlobalStyles.toolbar.height,
       backgroundColor: 'black',
     },
     view: {
       backgroundColor: 'white',
       width: '100%',
       height: 612,
-      //height: Dimensions.get('screen').height - GlobalStyles.tabsbar.height,
+      //height: Dimensions.get('window').height - GlobalStyles.tabsbar.height,
       alignItems: 'flex-start',
       padding: GlobalStyles.space*2,
     },
