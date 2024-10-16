@@ -17,13 +17,10 @@ const ModalView = ({label, title, content, animation, showBorder}: Props) => {
   const animationType = animation ? animation : 'slide';
   const wrapperStyle = showBorder === true ? wrapperVisible : wrapperHidden;
 
-  const a = Dimensions.get('window').height;
-  const b = StatusBar.currentHeight + GlobalStyles.toolbar.height;
+  console.log(DeviceManager.viewport());
 
-  //console.log(a - b - (GlobalStyles.space*4));
-
-  console.log(DeviceManager.screen);
-  console.log(DeviceManager.window);
+  //console.log(DeviceManager.screen);
+  //console.log(DeviceManager.window);
 
 
   return (
