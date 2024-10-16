@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Colors } from '@/constants/GlobalStyles';
+import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 
 type Props = {
   style?: object,
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     backgroundColor: Colors.background,
     height: '100%',
-    gap: 20,
+    gap: GlobalStyles.space*2,
   },
 });
 
