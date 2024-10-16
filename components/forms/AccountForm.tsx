@@ -1,11 +1,19 @@
 import { StyleSheet, View } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import InputTextField from '../fields/InputTextField';
+import LocationPickerField from '../fields/LocationPickerField';
+import TextBlock from '../base/TextBlock';
 
 const AccountForm = () => {
   return (
     <View style={styles.container}>    
-      <InputTextField placeholder="Fullname" style={GlobalStyles.field} />
+      <InputTextField placeholder="Full name" style={GlobalStyles.field} />
+      <InputTextField placeholder="Email" style={GlobalStyles.field} />
+      <InputTextField placeholder="Phone number" style={GlobalStyles.field} />
+      <LocationPickerField 
+        title={<TextBlock>Select your location</TextBlock>}
+        label="Address"
+      />
     </View>
   );
 };
