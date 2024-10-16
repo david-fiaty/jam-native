@@ -10,7 +10,10 @@ type Props = {
 
 const ViewportContainer = ({style, children}: Props) => {
   return (
-    <SafeAreaView style={[styles.container, style]}>
+    <SafeAreaView 
+      edges={['left', 'right', 'bottom']} 
+      style={[styles.container, style]}
+    >
       {children}
     </SafeAreaView>
   );
@@ -19,12 +22,15 @@ const ViewportContainer = ({style, children}: Props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'green'
+    backgroundColor: 'green',
+    
     /*
     display: 'flex',
     flexDirection: 'column', 
-    backgroundColor: Colors.background,
+    justifyContent: 'flex-start',
     */
+    //backgroundColor: Colors.background,
+    
   },
 });
 
