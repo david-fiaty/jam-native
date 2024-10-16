@@ -7,14 +7,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Jams = () => {
   return (  
-    <>
-      
-      <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <TopToolbar /> 
-        <JamsScreen />
-      </SafeAreaView>
+      <JamsScreen />
       <BottomTabs />
-    </>
+    </SafeAreaView>
   );
 };
 
@@ -22,7 +19,6 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'column', 
-    padding: 20,
     height: '100%',
     backgroundColor: Colors.background,
   },

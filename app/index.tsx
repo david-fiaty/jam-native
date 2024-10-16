@@ -1,17 +1,12 @@
-import { StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import WelcomeScreen from '@/components/screens/WelcomeScreen';
+import ViewportContainer from '@/components/base/ViewportContainer';
 
 const Index = () => {
   return (  
-    <SafeAreaView style={styles.container}>
+    <ViewportContainer>
       <WelcomeScreen />
-    </SafeAreaView>
+    </ViewportContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {},
-});
 
 export default Index;
