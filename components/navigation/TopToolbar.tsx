@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: GlobalStyles.space*2,
     height: GlobalStyles.toolbar.height,
+    backgroundColor: 'red',
   },
   buttons: {
     display: 'flex',
