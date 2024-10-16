@@ -5,6 +5,9 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 
+import { Button, View, Text } from 'react-native';
+import TextBlock from '@/components/base/TextBlock';
+
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -29,8 +32,45 @@ export default function RootLayout() {
         <Stack.Screen name="login" options={{ headerShown: false }} />
         <Stack.Screen name="about" options={{ headerShown: false }} />
         <Stack.Screen name="legal" options={{ headerShown: false }} />
-        <Stack.Screen name="jams" options={{ headerShown: false }} />
-        <Stack.Screen name="account" options={{ headerShown: false }} />
+        <Stack.Screen name="jams" options={{ 
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: 'gray', 
+          },
+          headerTintColor: '#fff',   
+          headerTitleStyle: {
+            fontWeight: 'bold',          
+          }, 
+
+          header: (props) => (
+            <View style={{ 
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              backgroundColor: 'gray', 
+              //height: 120, 
+              justifyContent: 'center' 
+
+            }}>
+              <Button
+                onPress={() => alert('This is a button!')}
+                title="Left"
+                color="#000"
+              />
+              <View style={{ 
+                backgroundColor: '#fff',
+                flexGrow: 1,
+              }}>
+                <Text>Custom Header</Text>
+              </View>
+              <Button
+                onPress={() => alert('This is a button!')}
+                title="Right"
+                color="#000"
+              />
+            </View>
+          ),          
+        }} />
         <Stack.Screen name="password" options={{ headerShown: false }} />
         <Stack.Screen name="username" options={{ headerShown: false }} />
         <Stack.Screen name="language" options={{ headerShown: false }} />
