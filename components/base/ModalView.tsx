@@ -17,7 +17,7 @@ const ModalView = ({label, title, content, animation, showBorder}: Props) => {
   const animationType = animation ? animation : 'slide';
   const wrapperStyle = showBorder === true ? wrapperVisible : wrapperHidden;
 
-  console.log(DeviceManager.viewport());
+  //console.log(DeviceManager.viewport());
 
   //console.log(DeviceManager.screen);
   //console.log(DeviceManager.window);
@@ -71,18 +71,16 @@ const styles = StyleSheet.create({
   },
   modal: {
     container: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      //marginTop: StatusBar.currentHeight + GlobalStyles.toolbar.height,
+      height: DeviceManager.modal.height,
+      marginTop: 'auto',
       marginBottom: GlobalStyles.tabsbar.height,
       backgroundColor: 'black',
+      borderWidth: 1,
     },
     view: {
-      backgroundColor: 'white',
+      backgroundColor: 'yellow',
       width: '100%',
       height: '100%',
-      //height: Dimensions.get('window').height - GlobalStyles.tabsbar.height,
       alignItems: 'flex-start',
       padding: GlobalStyles.space*2,
     },

@@ -1,8 +1,9 @@
-import { StyleSheet, ScrollView, Pressable } from 'react-native';
+import { StyleSheet } from 'react-native';
 import ModalView from '@/components/base/ModalView';
 import JamForm from '../forms/JamForm';
 import ClearIcon from '../icons/ClearIcon';
 import { GlobalStyles } from '@/constants/GlobalStyles';
+import ScrollContainer from '../base/ScrollContainer';
 
 const AddJamScreen = () => {
   return (
@@ -11,14 +12,9 @@ const AddJamScreen = () => {
       animation="fade"
       label={<ClearIcon name="plus" size={GlobalStyles.tabsbar.icon.size} />}
       content={
-        <ScrollView 
-          nestedScrollEnabled={true}
-          contentContainerStyle={{ flexGrow: 1 }}
-        >
-          <Pressable>
-            <JamForm />
-          </Pressable>
-        </ScrollView>
+        <ScrollContainer>
+          <JamForm />
+        </ScrollContainer>
       }
     />   
   );

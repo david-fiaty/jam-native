@@ -4,6 +4,7 @@ import InputTextField from '../fields/InputTextField';
 import MultiselectDropdownField from '../fields/MultiselectDropdownField';
 import LocationPickerField from '../fields/LocationPickerField';
 import TextBlock from '../base/TextBlock';
+
 const ProfileForm = () => {
   return (
     <View style={styles.container}>    
