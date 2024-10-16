@@ -28,9 +28,6 @@ const AccountScreen = ({menuItem}: Props) => {
 
 const styles = StyleSheet.create({
   container: {},
-  scroll: {
-    flexGrow: 1,
-  },  
 });
 
 export default AccountScreen;
