@@ -4,12 +4,17 @@ import { Dropdown } from "react-native-element-dropdown";
 import { GlobalStyles, Colors } from "@/constants/GlobalStyles";
 import TextBlock from "../base/TextBlock";
 
+type Props = {
+  data: object,
+  placeholder: string,
+};
+
 const data = [
   { label: "Public", value: 1 },
   { label: "Private", value: 0 },
 ];
 
-const SelectListField = () => {
+const SelectListField = ({data, placeholder}: Props) => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
 
@@ -34,8 +39,7 @@ const SelectListField = () => {
         maxHeight={300}
         labelField="label"
         valueField="value"
-        placeholder="Status"
-        searchPlaceholder="Search..."
+        placeholder={placeholder}
         iconColor={Colors.primary}
         value={value}
         onFocus={() => setIsFocus(true)}
