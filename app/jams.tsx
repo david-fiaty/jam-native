@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import TopToolbar from '@/components/navigation/TopToolbar';
 import BottomTabs from '@/components/navigation/BottomTabs';
 import JamsScreen from '@/components/screens/JamsScreen';
