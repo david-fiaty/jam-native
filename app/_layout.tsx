@@ -5,7 +5,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 
-import { Button, View, Text } from 'react-native';
+import { Button, View, Text, StatusBar } from 'react-native';
 import TextBlock from '@/components/base/TextBlock';
 
 SplashScreen.preventAutoHideAsync();
@@ -49,9 +49,8 @@ export default function RootLayout() {
               flexDirection: 'row',
               alignItems: 'center',
               backgroundColor: 'gray', 
-              //height: 120, 
-              justifyContent: 'center' 
-
+              justifyContent: 'center',
+              marginTop: StatusBar.currentHeight,
             }}>
               <Button
                 onPress={() => alert('This is a button!')}
