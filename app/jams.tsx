@@ -15,9 +15,16 @@ const Jams = () => {
 };
 
 const styles = StyleSheet.create({
+
+  /*
   container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
     height: '100%',
+    backgroundColor: 'blue',
   },
+  */
 });
 
 export default Jams;

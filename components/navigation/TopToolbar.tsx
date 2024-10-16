@@ -25,13 +25,13 @@ const TopToolbar = () => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
+    display: 'none',
+    //display: 'flex',
+    //flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    height: GlobalStyles.toolbar.height,
     backgroundColor: 'red',
-    borderWidth: 1,
   },
   buttons: {
     display: 'flex',

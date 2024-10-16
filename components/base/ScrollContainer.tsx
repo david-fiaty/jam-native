@@ -20,7 +20,10 @@ const ScrollContainer = ({style, children}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
+    //flexGrow: 1, // Todo - Enable or remove
+    backgroundColor: 'green',
+    //marginBottom: 25,
+    marginBottom: 0,
   },
 });
 
