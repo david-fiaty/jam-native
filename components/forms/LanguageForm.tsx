@@ -3,18 +3,17 @@ import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import InputTextField from '../fields/InputTextField';
 import LocationPickerField from '../fields/LocationPickerField';
 import TextBlock from '../base/TextBlock';
-import ReactNativePhoneInput from 'react-native-phone-input';
+import SelectListField from '../fields/SelectListField';
 
-const AccountForm = () => {
+const LanguageForm = () => {
   return (
     <View style={styles.container}>    
-      <InputTextField placeholder="Full name" style={GlobalStyles.field} />
-      <InputTextField placeholder="Email" style={GlobalStyles.field} />
-      <ReactNativePhoneInput />
-      <InputTextField placeholder="Phone number" style={GlobalStyles.field} />
-      <LocationPickerField 
-        title={<TextBlock>Select your location</TextBlock>}
-        label="Address"
+      <SelectListField 
+        placeholder="Language"
+        data={[
+          { label: "English", value: 'en' },
+          { label: "French", value: 'fr' },
+        ]} 
       />
     </View>
   );
@@ -51,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AccountForm;
+export default LanguageForm;

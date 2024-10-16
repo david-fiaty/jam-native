@@ -1,21 +1,15 @@
 import { StyleSheet, View } from 'react-native';
+import { Divider } from '@rneui/themed';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import InputTextField from '../fields/InputTextField';
-import LocationPickerField from '../fields/LocationPickerField';
-import TextBlock from '../base/TextBlock';
-import ReactNativePhoneInput from 'react-native-phone-input';
 
-const AccountForm = () => {
+const PasswordForm = () => {
   return (
     <View style={styles.container}>    
-      <InputTextField placeholder="Full name" style={GlobalStyles.field} />
-      <InputTextField placeholder="Email" style={GlobalStyles.field} />
-      <ReactNativePhoneInput />
-      <InputTextField placeholder="Phone number" style={GlobalStyles.field} />
-      <LocationPickerField 
-        title={<TextBlock>Select your location</TextBlock>}
-        label="Address"
-      />
+      <InputTextField placeholder="Current password" style={GlobalStyles.field} />
+      <Divider style={GlobalStyles.divider} />
+      <InputTextField placeholder="New password" style={GlobalStyles.field} />
+      <InputTextField placeholder="Confirm new password" style={GlobalStyles.field} />
     </View>
   );
 };
@@ -51,4 +45,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AccountForm;
+export default PasswordForm;
