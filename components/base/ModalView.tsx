@@ -16,6 +16,12 @@ const ModalView = ({label, title, content, animation, showBorder}: Props) => {
   const animationType = animation ? animation : 'slide';
   const wrapperStyle = showBorder === true ? wrapperVisible : wrapperHidden;
 
+  const a = Dimensions.get('window').height;
+  const b = StatusBar.currentHeight + GlobalStyles.toolbar.height;
+
+  console.log(a -b);
+
+
   return (
     <View style={styles.container}>        
       <Modal
@@ -64,10 +70,11 @@ const styles = StyleSheet.create({
   },
   modal: {
     container: {
-      flex: 1,
+      display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       marginTop: StatusBar.currentHeight + GlobalStyles.toolbar.height,
+      backgroundColor: 'black',
     },
     view: {
       backgroundColor: 'white',
