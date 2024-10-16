@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Pressable, StyleSheet, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView, Pressable } from 'react-native';
 
 type Props = {
   style?: object,
@@ -8,22 +8,25 @@ type Props = {
 
 const ScrollContainer = ({style, children}: Props) => {
   return (
+    <View>
     <ScrollView 
-      style={[styles.container, style]}
+      style={[styles.view, style]}
       nestedScrollEnabled={true}
       contentContainerStyle={styles.container}
     >
       <Pressable>{children}</Pressable>
     </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    //flexGrow: 1, // Todo - Enable or remove
+    flex: 1,
+  },
+  view: {
     backgroundColor: 'green',
-    //marginBottom: 25,
-    marginBottom: 0,
+    height: '100%',
   },
 });
 
