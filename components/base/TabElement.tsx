@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { View, Text, Button, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-import ClearIcon from '../icons/ClearIcon';
+import DeviceManager from '@/classes/DeviceManager';
+
 
 type Props = {
   label: JSX.Element,
@@ -41,12 +42,15 @@ const styles = StyleSheet.create({
   },
   modal: {
     position: 'absolute',
+    top: -DeviceManager.screen.height,
     left: 0,
     right: 0,
-    bottom: 100,
     backgroundColor: 'rgba(0,0,0,0.5)', // This creates the backdrop effect
     justifyContent: 'center',
     alignItems: 'center',
+    height: DeviceManager.modal.height - GlobalStyles.space.container*2,
+    //marginTop: 'auto',
+    marginBottom: GlobalStyles.footer.height,
   },
   modalContent: {
     backgroundColor: 'white',
