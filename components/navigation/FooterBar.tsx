@@ -3,7 +3,9 @@ import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import TestModal from '../TestModal';
-import TestScreen from '../TestScreen';
+import ClearIcon from '../icons/ClearIcon';
+import TabElement from '../base/TabElement';
+import AddJamScreen from '../screens/AddJamScreen';
 
 const FooterBar = () => {
   const [isMapTabActive, setIsMapTabActive] = useState(false);
@@ -13,7 +15,10 @@ const FooterBar = () => {
   return (
     <View style={styles.container}>
       <TestModal />
-      <TestScreen />
+      <TabElement 
+        label={<ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />} 
+        content={<AddJamScreen />} 
+      />
     </View>
   );
 }
