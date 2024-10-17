@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
   modal: {
     position: 'absolute',
-    bottom: '-100%',
+    bottom: 31,
     left: 0,
     right: 0,
     backgroundColor: 'rgba(0,0,0,0.5)', // This creates the backdrop effect
