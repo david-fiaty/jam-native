@@ -7,10 +7,12 @@ const TestModal = () => {
   const [isModalVisible, setModalVisible] = useState(false);
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={() => setModalVisible(!isModalVisible)}>
-        <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
-      </TouchableOpacity>
+    <>
+      <View style={styles.container}>
+        <TouchableOpacity onPress={() => setModalVisible(!isModalVisible)}>
+          <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
+        </TouchableOpacity>
+      </View>
 
       {isModalVisible && (
         <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
@@ -24,7 +26,7 @@ const TestModal = () => {
           </View>
         </TouchableWithoutFeedback>
       )}
-    </View>
+    </>
   );
 }
 
