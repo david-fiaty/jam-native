@@ -4,37 +4,22 @@ import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ClearIcon from '../icons/ClearIcon';
+import AddJamScreen from '../screens/AddJamScreen';
+import MapScreen from '../screens/MapScreen';
+import ProfileScreen from '../screens/ProfileScreen';
+import ModalTester from '../base/ModalTester';
 
 const FooterBar = () => {
-  const router = useRouter();
-  const [isActive, setIsActive] = useState(false);
+  const [isMapTabActive, setIsJamTabActive] = useState(false);
+  const [isAddJamTabActive, setIsAddJamTabActive] = useState(false);
+  const [isAddProfileTabActive, setIsAddProfileTabActive] = useState(false);
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => {
-        setIsActive(!isActive);
-        router.replace('/map');
-      }}>
-        <ClearIcon name="location" size={GlobalStyles.footer.icon.size} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => {
-        setIsActive(!isActive);
-        router.replace('/jams');
-      }}>
-        <ClearIcon name="list" size={GlobalStyles.footer.icon.size} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => {
-        setIsActive(!isActive);
-        router.replace('/add-jam');
-      }}>
-        <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => {
-        setIsActive(!isActive);
-        router.replace('/profile');
-      }}>
-        <ClearIcon name="user" size={GlobalStyles.footer.icon.size} />
-      </TouchableOpacity>
+      <ModalTester />
+      <MapScreen />
+      <AddJamScreen />
+      <ProfileScreen />
     </View>
   );
 }
