@@ -15,15 +15,13 @@ const MapScreen = () => {
   useEffect(() => {
     (async () => {
       if (Platform.OS === 'android' && !Device.isDevice) {
-        setErrorMsg(
-          'Location features are not available for simulator virtual devices.'
-        );
+        setErrorMsg('Location features are not available for simulator virtual devices.');
         return;
       }
       
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
+        setErrorMsg('Permission to access location was denied.');
         return;
       }
 

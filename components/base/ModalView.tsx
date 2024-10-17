@@ -40,7 +40,9 @@ const ModalView = ({label, title, content, animation, showBorder}: Props) => {
         </TouchableWithoutFeedback>
       </Modal>
       <TouchableOpacity onPress={() => setModalVisible(true)}>
-        {label}
+        <View style={modalVisible ? styles.active : {}}>
+          {label}
+        </View>
       </TouchableOpacity>
     </>
   );
@@ -74,6 +76,9 @@ const styles = StyleSheet.create({
     paddingTop: GlobalStyles.space.base,
     paddingBottom: GlobalStyles.footer.height,
     paddingHorizontal: GlobalStyles.space.container,
+  },
+  active: {
+    backgroundColor: 'orange',
   },
 });
 
