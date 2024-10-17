@@ -12,27 +12,35 @@ const TabElement = ({label, content}: Props) => {
   const [isModalVisible, setModalVisible] = useState(false);
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={() => setModalVisible(!isModalVisible)}>
-        <View style={styles.label}>
-          {label}
-        </View>
-      </TouchableOpacity>
-  
-      {isModalVisible && (
-        <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
-          <View style={styles.modal}>
-            <TouchableWithoutFeedback>
-              {content}
-            </TouchableWithoutFeedback>
+    <View style={styles.tab}>
+      <View style={styles.container}>
+        <TouchableOpacity onPress={() => setModalVisible(!isModalVisible)}>
+          <View style={styles.label}>
+            {label}
           </View>
-        </TouchableWithoutFeedback>
-      )}
+        </TouchableOpacity>
+    
+        {isModalVisible && (
+          <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+            <View style={styles.modal}>
+              <TouchableWithoutFeedback>
+                {content}
+              </TouchableWithoutFeedback>
+            </View>
+          </TouchableWithoutFeedback>
+        )}
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  tab: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: 'green',
+    paddingVertical: GlobalStyles.space.base,
+  },
   container: {
     backgroundColor: 'red',
     width: '100%',
