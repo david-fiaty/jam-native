@@ -1,13 +1,11 @@
-import { StyleSheet, View, Text } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import { StyleSheet, View } from 'react-native';
 import MapScreen from '@/components/screens/MapScreen';
 import AddJamScreen from '@/components/screens/AddJamScreen';
 import ProfileScreen from '@/components/screens/ProfileScreen';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
 const FooterBar = () => {
-  
-
   return (
     <View style={styles.container}>
       <MapScreen />
@@ -24,17 +22,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     width: '100%',
     padding: GlobalStyles.space.base,
-    backgroundColor: 'black',
+    backgroundColor: Colors.background,
     borderTopWidth: 1,
     borderTopColor: Colors.primary,
-  },
-  tabs: {
-    flex: 1,
-    padding: GlobalStyles.space.base,
-    backgroundColor: Colors.background,
   },
 });
 
