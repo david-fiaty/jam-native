@@ -11,19 +11,22 @@ import TestModal from '../TestModal';
 import TestScreen from '../TestScreen';
 
 const FooterBar = () => {
-  const [isMapTabActive, setIsJamTabActive] = useState(false);
+  const [isMapTabActive, setIsMapTabActive] = useState(false);
   const [isAddJamTabActive, setIsAddJamTabActive] = useState(false);
   const [isAddProfileTabActive, setIsAddProfileTabActive] = useState(false);
 
   return (
     <View style={styles.container}>
+      <TestModal />
+      <TestScreen />
       <TouchableOpacity onPress={() => {
-        setIsJamTabActive(!isAddJamTabActive);
+        setIsAddJamTabActive(!isAddJamTabActive);
+        console.log(isAddJamTabActive);
       }}>
         <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
       </TouchableOpacity>
 
-      {isAddJamTabActive && (<TestScreen />) }
+      {isAddJamTabActive && (<AddJamScreen />) }
       
     </View>
   );
