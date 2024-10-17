@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet, TouchableWithoutFeedback, TouchableOpac
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ClearIcon from './icons/ClearIcon';
 
-export default function TestModal() {
+const TestModal = () => {
   const [isModalVisible, setModalVisible] = useState(false);
 
   return (
@@ -50,3 +50,5 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 });
+
+export default TestModal;
