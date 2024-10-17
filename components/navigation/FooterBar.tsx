@@ -28,10 +28,7 @@ const FooterBar = () => {
       >
         <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
       </TouchableOpacity>
-      </TouchableWithoutFeedback>
-
-      {isAddJamTabActive && (<AddJamScreen />) }
-      
+      </TouchableWithoutFeedback>      
     </View>
   );
 }
