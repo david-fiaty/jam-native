@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { useRouter } from 'expo-router';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ClearIcon from '../icons/ClearIcon';
@@ -19,12 +19,15 @@ const FooterBar = () => {
     <View style={styles.container}>
       <TestModal />
       <TestScreen />
+      <TouchableWithoutFeedback>
       <TouchableOpacity onPress={() => {
         setIsAddJamTabActive(!isAddJamTabActive);
         console.log(isAddJamTabActive);
       }}>
+      
         <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
       </TouchableOpacity>
+      </TouchableWithoutFeedback>
 
       {isAddJamTabActive && (<AddJamScreen />) }
       
