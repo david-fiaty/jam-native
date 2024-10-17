@@ -13,12 +13,14 @@ const TabElement = ({label, content}: Props) => {
   const [isModalVisible, setModalVisible] = useState(false);
 
   return (
-    <>
-      <View style={styles.label}>
+    <View style={styles.container}>
+      
         <TouchableOpacity onPress={() => setModalVisible(!isModalVisible)}>
-          {label}
+          <View style={styles.label}>
+            {label}
+          </View>
         </TouchableOpacity>
-      </View>
+    
 
       {isModalVisible && (
         <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
@@ -29,20 +31,39 @@ const TabElement = ({label, content}: Props) => {
           </View>
         </TouchableWithoutFeedback>
       )}
-    </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  label: {
+
+  /*
+  container: {
+    opacity: 0, // Todo - Remove
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'black',
     height: '100%',
   },
+  */
+
+  container: {
+    backgroundColor: 'red',
+    width: '100%',
+    height: '100%',
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+  },
+  label: {
+    //position: 'absolute',
+    //bottom: 0,
+    top: 0,
+    left: 0,
+  }, 
   modal: {
     position: 'absolute',
-    bottom: GlobalStyles.footer.height,
+    //bottom: GlobalStyles.footer.height,
+    top: 0,
     left: 0,
     right: 0,
     backgroundColor: 'rgba(0,0,0,0.5)', // This creates the backdrop effect

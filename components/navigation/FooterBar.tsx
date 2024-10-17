@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-
 import ClearIcon from '../icons/ClearIcon';
 import TabElement from '../base/TabElement';
 import AddJamScreen from '../screens/AddJamScreen';
