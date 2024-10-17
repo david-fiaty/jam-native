@@ -31,8 +31,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   tabs: {
-    //position: 'absolute',
-    //bottom: 0,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
