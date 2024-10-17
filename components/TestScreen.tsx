@@ -8,7 +8,7 @@ export default function TestModal() {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity  onPress={() => setModalVisible(true)}>
+      <TouchableOpacity onPress={() => setModalVisible(!isModalVisible)}>
         <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
       </TouchableOpacity>
 
