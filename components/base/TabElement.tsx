@@ -35,7 +35,6 @@ const TabElement = ({label, content}: Props) => {
 
 const styles = StyleSheet.create({
   label: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'black',
@@ -50,7 +49,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 300,
     //height: DeviceManager.modal.height - GlobalStyles.space.container*2,
-    //marginTop: 'auto',
   },
   modalContent: {
     backgroundColor: 'white',
