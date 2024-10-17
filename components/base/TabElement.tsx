@@ -3,7 +3,6 @@ import { View, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 're
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import DeviceManager from '@/classes/DeviceManager';
 
-
 type Props = {
   label: JSX.Element,
   content: JSX.Element,
