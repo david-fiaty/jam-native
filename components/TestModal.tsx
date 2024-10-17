@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { View, Text, Button, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 
-export default function ModalTester() {
+export default function TestModal() {
   const [isModalVisible, setModalVisible] = useState(false);
 
   return (

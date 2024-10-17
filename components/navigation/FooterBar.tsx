@@ -7,7 +7,8 @@ import ClearIcon from '../icons/ClearIcon';
 import AddJamScreen from '../screens/AddJamScreen';
 import MapScreen from '../screens/MapScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-import ModalTester from '../base/ModalTester';
+import TestModal from '../TestModal';
+import TestScreen from '../TestScreen';
 
 const FooterBar = () => {
   const [isMapTabActive, setIsJamTabActive] = useState(false);
@@ -17,11 +18,12 @@ const FooterBar = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => {
-        
-    
+        setIsJamTabActive(!isAddJamTabActive);
       }}>
-        <ClearIcon name="location" size={GlobalStyles.footer.icon.size} />
+        <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
       </TouchableOpacity>
+
+      {isAddJamTabActive && (<TestScreen />) }
       
     </View>
   );
