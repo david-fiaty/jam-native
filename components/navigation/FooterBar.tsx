@@ -16,10 +16,13 @@ const FooterBar = () => {
 
   return (
     <View style={styles.container}>
-      <ModalTester />
-      <MapScreen />
-      <AddJamScreen />
-      <ProfileScreen />
+      <TouchableOpacity onPress={() => {
+        
+    
+      }}>
+        <ClearIcon name="location" size={GlobalStyles.footer.icon.size} />
+      </TouchableOpacity>
+      
     </View>
   );
 }
