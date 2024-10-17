@@ -8,6 +8,10 @@ npm cache clean --force
 
 bc105b9c-d776-42e2-bd2e-2ebcff179748
 
+
+# Goolge maps integration
+https://medium.com/@vipinnation/exploring-maps-in-expo-with-react-native-d4559829c2cb
+
 # Dropdown element
 https://www.npmjs.com/package/react-native-element-dropdown
 
