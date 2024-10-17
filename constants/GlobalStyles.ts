@@ -10,7 +10,7 @@ export const Colors = {
 export const GlobalStyles = {
   space: {
     base: space,
-    container: space,
+    container: space*2,
   },
   toolbar: {
     height: 46,
