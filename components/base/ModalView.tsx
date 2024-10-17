@@ -22,7 +22,7 @@ const ModalView = ({label, title, content, animation, showBorder}: Props) => {
       <Modal
         animationType={animationType}
         hardwareAccelerated={true}
-        transparent={false}
+        transparent={true}
         visible={modalVisible}
         onRequestClose={() => setModalVisible(!modalVisible)}
       >
@@ -67,14 +67,11 @@ const styles = StyleSheet.create({
     height: DeviceManager.modal.height - GlobalStyles.space.container,
     marginTop: 'auto',
     marginBottom: GlobalStyles.footer.height,
-    //backgroundColor: Colors.background,
-    backgroundColor: 'blue',
+    backgroundColor: Colors.background,
   },
   view: {
     width: '100%',
-    height: 200,
-    //flex: 1,
-    backgroundColor: 'yellow',
+    flex: 1,
     alignItems: 'flex-start',
     paddingTop: GlobalStyles.space.base,
     paddingBottom: GlobalStyles.footer.height,
