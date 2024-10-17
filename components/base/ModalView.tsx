@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, Modal, View, TouchableWithoutFeedback, StatusBar, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, Modal, View, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import BackButton from '@/components/navigation/BackButton';
 import DeviceManager from '@/classes/DeviceManager';
@@ -26,22 +26,22 @@ const ModalView = ({label, title, content, animation, showBorder}: Props) => {
         visible={modalVisible}
         onRequestClose={() => setModalVisible(!modalVisible)}
       >
-        <TouchableWithoutFeedback onPress={() => setModalVisible(!modalVisible)}>
+        
           <View style={styles.container}>
            
            
-            <TouchableWithoutFeedback>
+            
               <View style={styles.view}>
                 <BackButton title={title} onPress={() => setModalVisible(!modalVisible)} />
                 <View style={borderStyle}>
                   {content}
                 </View>
               </View>
-            </TouchableWithoutFeedback>
-
             
+
+
           </View>
-        </TouchableWithoutFeedback>
+        
       </Modal>
       <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
         <View style={modalVisible ? styles.active : {}}>
