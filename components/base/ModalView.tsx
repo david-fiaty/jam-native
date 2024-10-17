@@ -62,7 +62,7 @@ const borderVisible = {
 
 const styles = StyleSheet.create({
   container: {
-    height: DeviceManager.modal.height - GlobalStyles.space.container*2,
+    height: DeviceManager.modal.height - GlobalStyles.space.container,
     marginTop: 'auto',
     marginBottom: GlobalStyles.tabsbar.height,
     backgroundColor: Colors.background,
