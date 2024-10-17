@@ -15,13 +15,22 @@ const Index = () => {
       <View style={styles.container}>
         <View style={styles.tabs}>
           <View style={styles.tab}>
-            <ClearIcon name="location" size={GlobalStyles.footer.icon.size} />
+            <TabElement 
+              label={<ClearIcon name="location" size={GlobalStyles.footer.icon.size} />}
+              content={<AddJamScreen />}
+            />
           </View>
           <View style={styles.tab}>
-            <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
+            <TabElement 
+              label={<ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />}
+              content={<AddJamScreen />}
+            />
           </View>
           <View style={styles.tab}>
-            <ClearIcon name="user" size={GlobalStyles.footer.icon.size} />
+            <TabElement 
+              label={<ClearIcon name="user" size={GlobalStyles.footer.icon.size} />}
+              content={<AddJamScreen />}
+            />
           </View>
         </View>
       </View>
