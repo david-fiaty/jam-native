@@ -28,8 +28,6 @@ const ModalView = ({label, title, content, animation, showBorder}: Props) => {
       >
         <TouchableWithoutFeedback onPress={() => setModalVisible(!modalVisible)}>
           <View style={styles.container}>
-           
-           
             <TouchableWithoutFeedback>
               <View style={styles.view}>
                 <BackButton title={title} onPress={() => setModalVisible(!modalVisible)} />
@@ -37,13 +35,11 @@ const ModalView = ({label, title, content, animation, showBorder}: Props) => {
                   {content}
                 </View>
               </View>
-            </TouchableWithoutFeedback>
-
-            
+              </TouchableWithoutFeedback>
           </View>
         </TouchableWithoutFeedback>
       </Modal>
-      <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+      <TouchableOpacity onPress={() => setModalVisible(true)}>
         <View style={modalVisible ? styles.active : {}}>
           {label}
         </View>
