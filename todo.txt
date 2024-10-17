@@ -1,6 +1,10 @@
 # Commands
 eas init --id "bc105b9c-d776-42e2-bd2e-2ebcff179748"
 eas update --platform android
+eas build -p android --profile preview
+
+npm cache clean --force
+
 
 bc105b9c-d776-42e2-bd2e-2ebcff179748
 
