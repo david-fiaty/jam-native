@@ -12,8 +12,8 @@ const TabElement = ({label, content}: Props) => {
   const [isModalVisible, setModalVisible] = useState(false);
 
   return (
-    <View style={styles.tab}>
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <View style={styles.tab}>
         <TouchableOpacity onPress={() => setModalVisible(!isModalVisible)}>
           <View style={styles.label}>
             {label}
@@ -35,14 +35,12 @@ const TabElement = ({label, content}: Props) => {
 }
 
 const styles = StyleSheet.create({
-  tab: {
+  container: {
     flex: 1,
     alignItems: 'center',
     backgroundColor: 'green',
-    paddingVertical: GlobalStyles.space.base,
   },
-  container: {
-    backgroundColor: 'red',
+  tab: {
     width: '100%',
     height: '100%',
     flexDirection: 'column',
@@ -61,7 +59,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.5)',
     justifyContent: 'center',
     alignItems: 'center',
-    height: DeviceManager.modal.height - GlobalStyles.header.height,
+    width: '100%',
+    //height: DeviceManager.modal.height - GlobalStyles.header.height,
   },
   modalContent: {
     backgroundColor: 'white',
