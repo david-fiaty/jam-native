@@ -14,9 +14,15 @@ const Index = () => {
     <ViewportContainer>
       <View style={styles.container}>
         <View style={styles.tabs}>
-          <ClearIcon name="location" size={GlobalStyles.footer.icon.size} />
-          <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
-          <ClearIcon name="user" size={GlobalStyles.footer.icon.size} />
+          <View style={styles.tab}>
+            <ClearIcon name="location" size={GlobalStyles.footer.icon.size} />
+          </View>
+          <View style={styles.tab}>
+            <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
+          </View>
+          <View style={styles.tab}>
+            <ClearIcon name="user" size={GlobalStyles.footer.icon.size} />
+          </View>
         </View>
       </View>
     </ViewportContainer>
@@ -34,6 +40,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  tab: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: 'green',
   },
 });
 
