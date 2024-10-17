@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'column',
-    gap: GlobalStyles.space,
+    gap: GlobalStyles.space.base,
   },
   wrapper: {
     width: '100%',

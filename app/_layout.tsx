@@ -9,6 +9,7 @@ import HeaderBar from '@/components/navigation/HeaderBar';
 
 const headerOptions = { 
   headerShown: true,
+  statusBarColor: '#f4511e',
   headerStyle: {
     backgroundColor: Colors.background, 
   },

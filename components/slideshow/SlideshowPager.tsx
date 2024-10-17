@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     width: 8,
     borderRadius: 8,
     marginHorizontal: 4,
-    marginVertical: GlobalStyles.space,
+    marginVertical: GlobalStyles.space.base,
   },
 });
 

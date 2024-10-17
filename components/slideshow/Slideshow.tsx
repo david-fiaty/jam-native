@@ -48,8 +48,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    gap: GlobalStyles.space,
-    marginVertical: GlobalStyles.space,
+    gap: GlobalStyles.space.base,
+    marginVertical: GlobalStyles.space.base,
   },
 });
 

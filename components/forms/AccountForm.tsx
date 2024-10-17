@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     width: '100%',
-    gap: GlobalStyles.space,
+    gap: GlobalStyles.space.base,
   },
   buttonContainer: {
     width: '100%',
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: GlobalStyles.space,
+    marginTop: GlobalStyles.space.base,
   },
   button: {
     height: 45,

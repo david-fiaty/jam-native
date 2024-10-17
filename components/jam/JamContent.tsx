@@ -19,7 +19,7 @@ const JamContent = ({item, index}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: GlobalStyles.space*1.5,
+    paddingHorizontal: GlobalStyles.space.base*1.5,
   },
 });
 
