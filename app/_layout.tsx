@@ -8,16 +8,14 @@ import { Colors } from '@/constants/GlobalStyles';
 import HeaderBar from '@/components/navigation/HeaderBar';
 
 const headerOptions = { 
+  header: (props: object) => <HeaderBar />,    
   headerShown: true,
   statusBarColor: Colors.background,
   statusBarStyle: 'dark',
+  headerTintColor: Colors.background,    
   headerStyle: {
     backgroundColor: Colors.background, 
   },
-  headerTintColor: Colors.background,   
-  header: (props: object) => (
-    <HeaderBar />
-  ),     
 };
 
 SplashScreen.preventAutoHideAsync();
