@@ -33,15 +33,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginTop: StatusBar.currentHeight,
-    padding: GlobalStyles.space,
+    padding: GlobalStyles.space.base,
+    backgroundColor: Colors.background,
   },
   left: {
-    gap: GlobalStyles.space,
+    gap: GlobalStyles.space.base,
   },
   right: {
     display: 'flex',
     flexDirection: 'row',
-    gap: GlobalStyles.space,
+    gap: GlobalStyles.space.base,
   },
   icon: {
     ...GlobalStyles.icon,

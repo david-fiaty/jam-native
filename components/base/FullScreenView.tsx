@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     backgroundColor: Colors.background,
     height: '100%',
-    gap: GlobalStyles.space*2,
+    gap: GlobalStyles.space.base*2,
   },
 });
 

@@ -57,8 +57,8 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'row',
-    gap: GlobalStyles.space,
-    marginBottom: GlobalStyles.space,
+    gap: GlobalStyles.space.base,
+    marginBottom: GlobalStyles.space.base,
   },
   icon: {
     ...GlobalStyles.icon,

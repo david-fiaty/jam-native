@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
-    marginBottom: GlobalStyles.space*1.5,
+    marginBottom: GlobalStyles.space.base*1.5,
   },
   text: {
     fontWeight: 'bold',

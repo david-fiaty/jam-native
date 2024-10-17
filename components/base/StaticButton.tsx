@@ -28,8 +28,8 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
     marginRight: 'auto',
     justifyContent: 'center',
-    padding: GlobalStyles.space,
-    gap: GlobalStyles.space,
+    padding: GlobalStyles.space.base,
+    gap: GlobalStyles.space.base,
   },
   label: {
     textAlign: 'center',

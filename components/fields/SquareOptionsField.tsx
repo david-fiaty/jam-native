@@ -15,8 +15,8 @@ const SquareOptionsField = ({data}: Props) => {
     <FlatList 
       data={data} 
       numColumns={4}
-      contentContainerStyle={{gap: GlobalStyles.space}}
-      columnWrapperStyle={{gap: GlobalStyles.space}}
+      contentContainerStyle={{gap: GlobalStyles.space.base}}
+      columnWrapperStyle={{gap: GlobalStyles.space.base}}
       scrollEnabled={false}
       renderItem={({item, index}) => {
         return (
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'column',
-    gap: GlobalStyles.space/2,
+    gap: GlobalStyles.space.base/2,
   },
   square: {
     display: 'flex',
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   icon: {
     ...GlobalStyles.text,
     ...{
-      fontSize: GlobalStyles.space*2,
+      fontSize: GlobalStyles.space.base*2,
     },
   },
   selected: {

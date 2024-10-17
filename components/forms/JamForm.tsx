@@ -66,11 +66,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'flex-start',
     width: '100%',
-    gap: GlobalStyles.space,
-    marginBottom: GlobalStyles.space,
+    gap: GlobalStyles.space.base,
+    marginBottom: GlobalStyles.space.base,
   },
   section: {
-    marginTop: GlobalStyles.space,
+    marginTop: GlobalStyles.space.base,
     width: '100%',
   },
   item: {
@@ -85,13 +85,13 @@ const styles = StyleSheet.create({
   caption: {
     ...GlobalStyles.field,
     ...{
-      paddingTop: GlobalStyles.space,
+      paddingTop: GlobalStyles.space.base,
       height: 100,
     },
   },
   buttonContainer: {
     width: '100%',
-    marginTop: GlobalStyles.space,
+    marginTop: GlobalStyles.space.base,
   },
   button: {
     height: 45,
@@ -103,8 +103,8 @@ const styles = StyleSheet.create({
     container: {
       display: 'flex',
       flexDirection: 'row',
-      gap: GlobalStyles.space,
-      marginBottom: GlobalStyles.space,
+      gap: GlobalStyles.space.base,
+      marginBottom: GlobalStyles.space.base,
     },
     icon: {
       ...GlobalStyles.icon,

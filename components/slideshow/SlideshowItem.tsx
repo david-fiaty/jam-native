@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: width,
-    paddingHorizontal: GlobalStyles.space,
-    gap: GlobalStyles.space,
+    paddingHorizontal: GlobalStyles.space.base,
+    gap: GlobalStyles.space.base,
   },
   title: {
     textTransform: 'uppercase',

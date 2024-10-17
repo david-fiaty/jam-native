@@ -54,14 +54,14 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: GlobalStyles.space,
+    gap: GlobalStyles.space.base,
   },
   item: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: GlobalStyles.space,
-    padding: GlobalStyles.space,
+    gap: GlobalStyles.space.base,
+    padding: GlobalStyles.space.base,
   },
 });
 

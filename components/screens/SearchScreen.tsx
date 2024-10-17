@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   icon: {
-    size: GlobalStyles.space*2,
+    size: GlobalStyles.space.base*2,
   },
 });
 

@@ -13,8 +13,8 @@ const ProfileProjects = () => {
         <FlatList 
           data={data} 
           numColumns={4}
-          contentContainerStyle={{gap: GlobalStyles.space}}
-          columnWrapperStyle={{gap: GlobalStyles.space}}
+          contentContainerStyle={{gap: GlobalStyles.space.base}}
+          columnWrapperStyle={{gap: GlobalStyles.space.base}}
           scrollEnabled={false}
           renderItem={({item, index}) => {
             return (
@@ -31,13 +31,13 @@ const ProfileProjects = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: GlobalStyles.space*2,
+    marginTop: GlobalStyles.space.base*2,
   },
   title: {
     ...GlobalStyles.text,
     ...{
       fontWeight: 'bold',
-      marginBottom: GlobalStyles.space/2,
+      marginBottom: GlobalStyles.space.base/2,
     },
   },
   item: {

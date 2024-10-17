@@ -8,7 +8,7 @@ const LoginSignupButton = () => {
   const router = useRouter();
 
   return (
-    <View style={{gap: GlobalStyles.space}}>
+    <View style={{gap: GlobalStyles.space.base}}>
       <StaticButton
         label="Login / Signup" 
         onPress={() => router.push('/login')} 

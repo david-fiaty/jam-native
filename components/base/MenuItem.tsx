@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomWidth: 1,
     borderBottomColor: Colors.primary,
-    gap: GlobalStyles.space,
-    padding: GlobalStyles.space,
+    gap: GlobalStyles.space.base,
+    padding: GlobalStyles.space.base,
   },
 });
 
