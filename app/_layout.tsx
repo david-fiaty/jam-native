@@ -1,15 +1,16 @@
+import 'react-native-reanimated';
 import { DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
-import 'react-native-reanimated';
 import { Colors } from '@/constants/GlobalStyles';
 import HeaderBar from '@/components/navigation/HeaderBar';
 
 const headerOptions = { 
   headerShown: true,
-  statusBarColor: '#f4511e',
+  statusBarColor: Colors.background,
+  statusBarStyle: 'dark',
   headerStyle: {
     backgroundColor: Colors.background, 
   },
