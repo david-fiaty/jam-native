@@ -13,34 +13,34 @@ const TabElement = ({label, content}: Props) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.tab}>
-        <TouchableOpacity onPress={() => setModalVisible(!isModalVisible)}>
-          <View style={styles.label}>
-            {label}
+      <TouchableOpacity onPress={() => setModalVisible(!isModalVisible)}>
+        <View style={styles.label}>
+          {label}
+        </View>
+      </TouchableOpacity>
+  
+      {isModalVisible && (
+        <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+          <View style={styles.modal}>
+            <TouchableWithoutFeedback>
+              {content}
+            </TouchableWithoutFeedback>
           </View>
-        </TouchableOpacity>
-    
-        {isModalVisible && (
-          <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
-            <View style={styles.modal}>
-              <TouchableWithoutFeedback>
-                {content}
-              </TouchableWithoutFeedback>
-            </View>
-          </TouchableWithoutFeedback>
-        )}
-      </View>
+        </TouchableWithoutFeedback>
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  tab: {
     flex: 1,
     alignItems: 'center',
     backgroundColor: 'green',
+    paddingVertical: GlobalStyles.space.base,
   },
-  tab: {
+  container: {
+    backgroundColor: 'red',
     width: '100%',
     height: '100%',
     flexDirection: 'column',
@@ -59,8 +59,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.5)',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
-    //height: DeviceManager.modal.height - GlobalStyles.header.height,
+    height: DeviceManager.modal.height - GlobalStyles.header.height,
   },
   modalContent: {
     backgroundColor: 'white',
