@@ -1,40 +1,23 @@
 
 import { useState } from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { useRouter } from 'expo-router';
+import { StyleSheet, View } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+
 import ClearIcon from '../icons/ClearIcon';
+import TabElement from '../base/TabElement';
+import AddJamScreen from '../screens/AddJamScreen';
 
 const FooterBar = () => {
-  const router = useRouter();
-  const [isActive, setIsActive] = useState(false);
+  const [isMapTabActive, setIsMapTabActive] = useState(false);
+  const [isAddJamTabActive, setIsAddJamTabActive] = useState(false);
+  const [isAddProfileTabActive, setIsAddProfileTabActive] = useState(false);
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => {
-        setIsActive(!isActive);
-        router.replace('/map');
-      }}>
-        <ClearIcon name="location" size={GlobalStyles.footer.icon.size} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => {
-        setIsActive(!isActive);
-        router.replace('/jams');
-      }}>
-        <ClearIcon name="list" size={GlobalStyles.footer.icon.size} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => {
-        setIsActive(!isActive);
-        router.replace('/add-jam');
-      }}>
-        <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => {
-        setIsActive(!isActive);
-        router.replace('/profile');
-      }}>
-        <ClearIcon name="user" size={GlobalStyles.footer.icon.size} />
-      </TouchableOpacity>
+      <TabElement 
+        label={<ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />} 
+        content={<AddJamScreen />} 
+      />
     </View>
   );
 }
@@ -48,7 +31,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     width: '100%',
-    padding: GlobalStyles.space.base,
+    height: GlobalStyles.footer.height,
     backgroundColor: Colors.background,
     borderTopWidth: 1,
     borderTopColor: Colors.primary,

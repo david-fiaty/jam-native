@@ -1,7 +1,7 @@
 # Commands
 eas init --id "bc105b9c-d776-42e2-bd2e-2ebcff179748"
 eas update --platform android
-eas build -p android --profile preview
+eas build -p android --clear-cache --profile preview 
 
 npm cache clean --force
 
@@ -42,6 +42,14 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 
 Email verification
 Twilio => SMS
+
+
+
+
+        onLayout={event => {
+          console.log(event.nativeEvent.layout);
+        }}
+
 
 
 
