@@ -1,14 +1,21 @@
 
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
 import MapScreen from '@/components/screens/MapScreen';
 import AddJamScreen from '@/components/screens/AddJamScreen';
 import ProfileScreen from '@/components/screens/ProfileScreen';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-import ModalTester from '../base/ModalTester';
+import TextBlock from '../base/TextBlock';
 
 const FooterBar = () => {
+
+  const router = useRouter();
+
   return (
     <View style={styles.container}>
+      <TouchableOpacity onPress={() => router.push('/about')}>
+        <TextBlock> OOO</TextBlock>    
+      </TouchableOpacity>
       <MapScreen />
       <AddJamScreen />
       <ProfileScreen />
