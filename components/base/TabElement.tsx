@@ -14,7 +14,7 @@ const TabElement = ({label, content}: Props) => {
 
   return (
     <>
-      <View style={styles.label}>
+      <View style={styles.container}>
         <TouchableOpacity onPress={() => setModalVisible(!isModalVisible)}>
           {label}
         </TouchableOpacity>
@@ -34,7 +34,8 @@ const TabElement = ({label, content}: Props) => {
 }
 
 const styles = StyleSheet.create({
-  label: {
+  container: {
+    opacity: 0, // Todo - Remove
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'black',
