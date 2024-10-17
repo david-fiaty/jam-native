@@ -12,10 +12,10 @@ export const GlobalStyles = {
     base: space,
     container: space*1.5,
   },
-  toolbar: {
+  header: {
     height: 46,
   },
-  tabsbar: {
+  footer: {
     height: 50,
     icon: {
       size: 24,

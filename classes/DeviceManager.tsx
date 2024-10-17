@@ -15,7 +15,7 @@ class DeviceManager {
   getModalSize() {
     return {
       width: this.window.width,
-      height: this.window.height - GlobalStyles.toolbar.height - GlobalStyles.tabsbar.height - GlobalStyles.space.base/2,
+      height: this.window.height - GlobalStyles.header.height - GlobalStyles.footer.height - GlobalStyles.space.base/2,
     };
   } 
 };
