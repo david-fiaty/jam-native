@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: 'green',
+    paddingVertical: GlobalStyles.space.base,
   },
 });
 
