@@ -1,40 +1,36 @@
 
 import { useState } from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { useRouter } from 'expo-router';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ClearIcon from '../icons/ClearIcon';
+import AddJamScreen from '../screens/AddJamScreen';
+import MapScreen from '../screens/MapScreen';
+import ProfileScreen from '../screens/ProfileScreen';
+import TestModal from '../TestModal';
+import TestScreen from '../TestScreen';
 
 const FooterBar = () => {
-  const router = useRouter();
-  const [isActive, setIsActive] = useState(false);
+  const [isMapTabActive, setIsMapTabActive] = useState(false);
+  const [isAddJamTabActive, setIsAddJamTabActive] = useState(false);
+  const [isAddProfileTabActive, setIsAddProfileTabActive] = useState(false);
 
   return (
     <View style={styles.container}>
+      <TestModal />
+      <TestScreen />
+      <TouchableWithoutFeedback>
       <TouchableOpacity onPress={() => {
-        setIsActive(!isActive);
-        router.replace('/map');
+        setIsAddJamTabActive(!isAddJamTabActive);
+        console.log(isAddJamTabActive);
       }}>
-        <ClearIcon name="location" size={GlobalStyles.footer.icon.size} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => {
-        setIsActive(!isActive);
-        router.replace('/jams');
-      }}>
-        <ClearIcon name="list" size={GlobalStyles.footer.icon.size} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => {
-        setIsActive(!isActive);
-        router.replace('/add-jam');
-      }}>
+      
         <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => {
-        setIsActive(!isActive);
-        router.replace('/profile');
-      }}>
-        <ClearIcon name="user" size={GlobalStyles.footer.icon.size} />
-      </TouchableOpacity>
+      </TouchableWithoutFeedback>
+
+      {isAddJamTabActive && (<AddJamScreen />) }
+      
     </View>
   );
 }
