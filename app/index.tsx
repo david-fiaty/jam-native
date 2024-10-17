@@ -1,7 +1,3 @@
-import WelcomeScreen from '@/components/screens/WelcomeScreen';
-import FooterBar from '@/components/navigation/FooterBar';
-import JamsScreen from '@/components/screens/JamsScreen';
-
 import { StyleSheet, View } from 'react-native';
 import ClearIcon from '@/components/icons/ClearIcon';
 import TabElement from '@/components/base/TabElement';
