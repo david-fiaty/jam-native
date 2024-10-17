@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     width: '100%',
+    height: GlobalStyles.footer.height,
     //padding: GlobalStyles.space.base,
     backgroundColor: Colors.background,
     borderTopWidth: 1,
