@@ -20,17 +20,15 @@ const FooterBar = () => {
       <TestModal />
       <TestScreen />
       <TouchableWithoutFeedback>
-      <TouchableOpacity onPress={() => {
-        setIsAddJamTabActive(!isAddJamTabActive);
-        console.log(isAddJamTabActive);
-      }}>
-      
+      <TouchableOpacity 
+        onPress={() => {
+          setIsAddJamTabActive(!isAddJamTabActive);
+          console.log(isAddJamTabActive);
+        }}
+      >
         <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
       </TouchableOpacity>
-      </TouchableWithoutFeedback>
-
-      {isAddJamTabActive && (<AddJamScreen />) }
-      
+      </TouchableWithoutFeedback>      
     </View>
   );
 }
