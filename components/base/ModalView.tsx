@@ -62,17 +62,18 @@ const borderVisible = {
 
 const styles = StyleSheet.create({
   container: {
-    height: DeviceManager.modal.height - GlobalStyles.space.base,
+    height: DeviceManager.modal.height - GlobalStyles.space.container,
     marginTop: 'auto',
-    marginBottom: GlobalStyles.tabsbar.height,
+    marginBottom: GlobalStyles.footer.height,
     backgroundColor: Colors.background,
   },
   view: {
     width: '100%',
     flex: 1,
     alignItems: 'flex-start',
-    padding: GlobalStyles.space.base,
-    paddingBottom: GlobalStyles.tabsbar.height,
+    paddingTop: GlobalStyles.space.base,
+    paddingBottom: GlobalStyles.footer.height,
+    paddingHorizontal: GlobalStyles.space.container,
   },
 });
 
