@@ -12,15 +12,9 @@ const FooterBar = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => router.push('/map')}>
-        <MapScreen />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => router.push('/add-jam')}>
-        <AddJamScreen />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => router.push('/profile')}>
-        <ProfileScreen />
-      </TouchableOpacity>
+      <MapScreen />
+      <AddJamScreen />
+      <ProfileScreen />
     </View>
   );
 }
