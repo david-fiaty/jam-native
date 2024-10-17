@@ -1,7 +1,3 @@
-import WelcomeScreen from '@/components/screens/WelcomeScreen';
-import FooterBar from '@/components/navigation/FooterBar';
-import JamsScreen from '@/components/screens/JamsScreen';
-
 import { StyleSheet, View } from 'react-native';
 import ClearIcon from '@/components/icons/ClearIcon';
 import TabElement from '@/components/base/TabElement';
@@ -15,13 +11,22 @@ const Index = () => {
       <View style={styles.container}>
         <View style={styles.tabs}>
           <View style={styles.tab}>
-            <ClearIcon name="location" size={GlobalStyles.footer.icon.size} />
+            <TabElement 
+              label={<ClearIcon name="location" size={GlobalStyles.footer.icon.size} />}
+              content={<AddJamScreen />}
+            />
           </View>
           <View style={styles.tab}>
-            <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
+            <TabElement 
+              label={<ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />}
+              content={<AddJamScreen />}
+            />
           </View>
           <View style={styles.tab}>
-            <ClearIcon name="user" size={GlobalStyles.footer.icon.size} />
+            <TabElement 
+              label={<ClearIcon name="user" size={GlobalStyles.footer.icon.size} />}
+              content={<AddJamScreen />}
+            />
           </View>
         </View>
       </View>
