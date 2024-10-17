@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   tabs: {
     flex: 1,
-    paddingVertical: GlobalStyles.space,
+    padding: GlobalStyles.space,
   },
 });
 
