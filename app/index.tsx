@@ -6,7 +6,6 @@ import JamsScreen from '@/components/screens/JamsScreen';
 const Index = () => {
   return (  
     <ViewportContainer>
-      <JamsScreen />
       <FooterBar />
     </ViewportContainer>
   );
