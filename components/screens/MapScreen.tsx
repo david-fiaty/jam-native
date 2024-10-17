@@ -4,9 +4,6 @@ import { Marker } from 'react-native-maps';
 import * as Device from 'expo-device';
 import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
-import ModalView from '@/components/base/ModalView';
-import ClearIcon from '../icons/ClearIcon';
-import { GlobalStyles } from '@/constants/GlobalStyles';
 
 const MapScreen = () => {
   const [location, setLocation] = useState('');
@@ -33,46 +30,39 @@ const MapScreen = () => {
   let userLocation = location || {};
 
   return (
-    <ModalView 
-      title="Jams map" 
-      animation="fade"
-      label={<ClearIcon name="location" size={GlobalStyles.footer.icon.size} />}
-      content={
-        <TouchableWithoutFeedback>
-          <View style={styles.wrapper}>
-            <MapView
-              style={styles.map}
-              provider="google"
-              initialRegion={{
-                latitude: 8.6195,
-                longitude: 0.8248,
-                latitudeDelta: 5,
-                longitudeDelta: 5,
-              }}
-            >
-              <Marker
-                key={1}
-                coordinate={{latitude: 6.1296, longitude: 1.2197}}
-                title="Jam location 1"
-                description="Jam location 1"
-              />
-              <Marker
-                key={2}
-                coordinate={{latitude: 6.2273, longitude: 1.5814}}
-                title="Jam location 2"
-                description="Jam location 2"
-              />
-              <Marker
-                key={3}
-                coordinate={{latitude: 9.7216, longitude: 1.0586}}
-                title="Jam location 3"
-                description="Jam location 3"
-              />
-            </MapView>
-          </View>
-        </TouchableWithoutFeedback>
-      }
-    />   
+    <TouchableWithoutFeedback>
+      <View style={styles.wrapper}>
+        <MapView
+          style={styles.map}
+          provider="google"
+          initialRegion={{
+            latitude: 8.6195,
+            longitude: 0.8248,
+            latitudeDelta: 5,
+            longitudeDelta: 5,
+          }}
+        >
+          <Marker
+            key={1}
+            coordinate={{latitude: 6.1296, longitude: 1.2197}}
+            title="Jam location 1"
+            description="Jam location 1"
+          />
+          <Marker
+            key={2}
+            coordinate={{latitude: 6.2273, longitude: 1.5814}}
+            title="Jam location 2"
+            description="Jam location 2"
+          />
+          <Marker
+            key={3}
+            coordinate={{latitude: 9.7216, longitude: 1.0586}}
+            title="Jam location 3"
+            description="Jam location 3"
+          />
+        </MapView>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -80,7 +70,7 @@ const styles = StyleSheet.create({
   container: {},
   wrapper: {
     width: '100%',
-    height: 550,
+    flex: 1,
   },
   map: {
     flex: 1,
