@@ -4,6 +4,7 @@ import MapScreen from '@/components/screens/MapScreen';
 import AddJamScreen from '@/components/screens/AddJamScreen';
 import ProfileScreen from '@/components/screens/ProfileScreen';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+import ModalTester from '../base/ModalTester';
 
 const FooterBar = () => {
   return (
