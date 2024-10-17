@@ -33,13 +33,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'black',
   },
   modal: {
     position: 'absolute',
-    top: -200,
     left: 0,
     right: 0,
-    
+    bottom: 100,
     backgroundColor: 'rgba(0,0,0,0.5)', // This creates the backdrop effect
     justifyContent: 'center',
     alignItems: 'center',
