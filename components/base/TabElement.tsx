@@ -47,8 +47,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.5)', // This creates the backdrop effect
     justifyContent: 'center',
     alignItems: 'center',
-    height: 300,
-    //height: DeviceManager.modal.height - GlobalStyles.space.container*2,
+    height: DeviceManager.modal.height - GlobalStyles.header.height,
   },
   modalContent: {
     backgroundColor: 'white',
