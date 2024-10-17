@@ -13,15 +13,15 @@ const FooterBar = () => {
     <View style={styles.container}>
       <TouchableOpacity onPress={() => {
         setIsActive(!isActive);
-        router.replace('/jams');
+        router.replace('/map');
       }}>
         <ClearIcon name="location" size={GlobalStyles.footer.icon.size} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => {
         setIsActive(!isActive);
-        router.replace('/map');
+        router.replace('/jams');
       }}>
-        <ClearIcon name="location" size={GlobalStyles.footer.icon.size} />
+        <ClearIcon name="list" size={GlobalStyles.footer.icon.size} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => {
         setIsActive(!isActive);
