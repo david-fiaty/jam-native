@@ -1,12 +1,7 @@
 
 import { useState } from 'react';
-import { StyleSheet, View, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
-import { useRouter } from 'expo-router';
+import { StyleSheet, View } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-import ClearIcon from '../icons/ClearIcon';
-import AddJamScreen from '../screens/AddJamScreen';
-import MapScreen from '../screens/MapScreen';
-import ProfileScreen from '../screens/ProfileScreen';
 import TestModal from '../TestModal';
 import TestScreen from '../TestScreen';
 
@@ -19,16 +14,6 @@ const FooterBar = () => {
     <View style={styles.container}>
       <TestModal />
       <TestScreen />
-      <TouchableWithoutFeedback>
-      <TouchableOpacity 
-        onPress={() => {
-          setIsAddJamTabActive(!isAddJamTabActive);
-          console.log(isAddJamTabActive);
-        }}
-      >
-        <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
-      </TouchableOpacity>
-      </TouchableWithoutFeedback>      
     </View>
   );
 }
