@@ -62,9 +62,9 @@ const borderVisible = {
 
 const styles = StyleSheet.create({
   container: {
-    height: DeviceManager.modal.height - GlobalStyles.space.container*2,
+    height: DeviceManager.modal.height - GlobalStyles.space.container,
     marginTop: 'auto',
-    marginBottom: GlobalStyles.tabsbar.height,
+    marginBottom: GlobalStyles.footer.height,
     backgroundColor: Colors.background,
   },
   view: {
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'flex-start',
     paddingTop: GlobalStyles.space.base,
-    paddingBottom: GlobalStyles.tabsbar.height,
+    paddingBottom: GlobalStyles.footer.height,
     paddingHorizontal: GlobalStyles.space.container,
   },
 });
