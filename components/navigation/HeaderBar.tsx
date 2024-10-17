@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'gray', 
     justifyContent: 'space-between',
     marginTop: StatusBar.currentHeight,
     padding: GlobalStyles.space,

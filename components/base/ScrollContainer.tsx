@@ -19,12 +19,8 @@ const ScrollContainer = ({style, children}: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'green',
-  },
-  content: {
-    backgroundColor: 'blue',
-  },
+  container: {},
+  content: {},
 });
 
 export default ScrollContainer;
