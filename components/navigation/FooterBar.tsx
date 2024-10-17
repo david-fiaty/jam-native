@@ -61,7 +61,6 @@ const styles = StyleSheet.create({
   tabs: {
     flex: 1,
     paddingVertical: GlobalStyles.space,
-    backgroundColor: 'red',
   },
 });
 
