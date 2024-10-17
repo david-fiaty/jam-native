@@ -39,7 +39,7 @@ const ModalView = ({label, title, content, animation, showBorder}: Props) => {
           </View>
         </TouchableWithoutFeedback>
       </Modal>
-      <TouchableOpacity onPress={() => setModalVisible(true)}>
+      <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
         <View style={modalVisible ? styles.active : {}}>
           {label}
         </View>
