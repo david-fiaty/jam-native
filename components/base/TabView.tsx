@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { View, Text, Button, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-import ClearIcon from './icons/ClearIcon';
+import ClearIcon from '../icons/ClearIcon';
 
 const TabView = () => {
   const [isModalVisible, setModalVisible] = useState(false);
