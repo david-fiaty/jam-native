@@ -1,4 +1,4 @@
-import { useState } from 'react';
+
 import { StyleSheet, View } from 'react-native';
 import MapScreen from '@/components/screens/MapScreen';
 import AddJamScreen from '@/components/screens/AddJamScreen';
@@ -6,8 +6,6 @@ import ProfileScreen from '@/components/screens/ProfileScreen';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
 const FooterBar = () => {
-  const [isActive, setIsActive] = useState(false);
-
   return (
     <View style={styles.container}>
       <MapScreen />
