@@ -25,21 +25,19 @@ const LoginForm = () => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     width: '80%',
-    gap: GlobalStyles.space,
+    gap: GlobalStyles.space.base,
   },
   buttonContainer: {
     width: '100%',
   },
   signup: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: GlobalStyles.space,
+    marginTop: GlobalStyles.space.base,
   },
   button: {
     height: 45,

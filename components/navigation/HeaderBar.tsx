@@ -27,21 +27,20 @@ const HeaderBar = () => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     flexGrow: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     marginTop: StatusBar.currentHeight,
-    padding: GlobalStyles.space,
+    paddingHorizontal: GlobalStyles.space.container,
+    backgroundColor: 'green',
   },
   left: {
-    gap: GlobalStyles.space,
+    gap: GlobalStyles.space.base,
   },
   right: {
-    display: 'flex',
     flexDirection: 'row',
-    gap: GlobalStyles.space,
+    gap: GlobalStyles.space.base,
   },
   icon: {
     ...GlobalStyles.icon,

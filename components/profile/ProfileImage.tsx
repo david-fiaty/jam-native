@@ -16,16 +16,15 @@ const ProfileImage = () => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: GlobalStyles.space*2,
-    marginBottom: GlobalStyles.space*2,
+    gap: GlobalStyles.space.base*2,
+    marginBottom: GlobalStyles.space.base*2,
   },
   button: {
     borderRadius: 30,
     overflow: 'hidden',
-    gap: GlobalStyles.space,
+    gap: GlobalStyles.space.base,
   },
   text: {
     width: '40%',

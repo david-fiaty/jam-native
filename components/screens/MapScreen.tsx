@@ -38,7 +38,7 @@ const MapScreen = () => {
     <ModalView 
       title="Jams map" 
       animation="fade"
-      label={<ClearIcon name="location" size={GlobalStyles.tabsbar.icon.size} />}
+      label={<ClearIcon name="location" size={GlobalStyles.footer.icon.size} />}
       content={
         <TouchableWithoutFeedback>
           <View style={styles.wrapper}>

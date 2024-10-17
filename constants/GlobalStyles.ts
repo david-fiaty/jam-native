@@ -8,11 +8,14 @@ export const Colors = {
 };
 
 export const GlobalStyles = {
-  space: space,
-  toolbar: {
+  space: {
+    base: space,
+    container: space*1.5,
+  },
+  header: {
     height: 46,
   },
-  tabsbar: {
+  footer: {
     height: 50,
     icon: {
       size: 24,
@@ -20,7 +23,6 @@ export const GlobalStyles = {
     },
   },
   container: {
-    display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center', 

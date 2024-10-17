@@ -23,13 +23,12 @@ const StaticButton = ({label, icon, containerStyle, labelStyle, onPress}: Props)
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     alignItems: 'center',
     marginLeft: 'auto',
     marginRight: 'auto',
     justifyContent: 'center',
-    padding: GlobalStyles.space,
-    gap: GlobalStyles.space,
+    padding: GlobalStyles.space.base,
+    gap: GlobalStyles.space.base,
   },
   label: {
     textAlign: 'center',

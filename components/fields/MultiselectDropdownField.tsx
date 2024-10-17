@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   field: GlobalStyles.field,
   modal: {
     modalWrapper: {
-      marginTop: StatusBar.currentHeight + GlobalStyles.toolbar.height,
+      marginTop: StatusBar.currentHeight + GlobalStyles.header.height,
       backgroundColor: '#FFFFFF',
     },
     scrollView: {

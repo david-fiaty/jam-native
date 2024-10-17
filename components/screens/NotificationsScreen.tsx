@@ -38,7 +38,6 @@ const NotificationsScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -47,12 +46,12 @@ const styles = StyleSheet.create({
   },
   icon: {
     backgroundColor: Colors.tertiary,
-    width: GlobalStyles.space*3,
-    height: GlobalStyles.space*3,
-    borderRadius: GlobalStyles.space*1.5,
+    width: GlobalStyles.space.base*3,
+    height: GlobalStyles.space.base*3,
+    borderRadius: GlobalStyles.space.base*1.5,
     textAlign: 'center',
     verticalAlign: 'middle',
-    fontSize: GlobalStyles.space*1.2,
+    fontSize: GlobalStyles.space.base*1.2,
   },
 });
 

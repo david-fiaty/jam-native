@@ -38,13 +38,13 @@ const JamsScreen = () => {
 
 const styles = {
   container: {
-    paddingHorizontal: GlobalStyles.space,
+    paddingHorizontal: GlobalStyles.space.container,
   },
   item: {
     borderWidth: 1,
-    marginBottom: GlobalStyles.space,
-    paddingBottom: GlobalStyles.space*1,
-    borderRadius: GlobalStyles.space,
+    marginBottom: GlobalStyles.space.container,
+    paddingBottom: GlobalStyles.space.base,
+    borderRadius: GlobalStyles.space.base,
     borderColor: GlobalStyles.border.color,
   },
 };

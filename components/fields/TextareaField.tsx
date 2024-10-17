@@ -22,15 +22,14 @@ const TextareaField = ({placeholder, style}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
   },
   field: {
     ...GlobalStyles.field,
     ...{
-      paddingTop: GlobalStyles.space,
-      height: GlobalStyles.space*10,
+      paddingTop: GlobalStyles.space.base,
+      height: GlobalStyles.space.base*10,
     },
   },
 });

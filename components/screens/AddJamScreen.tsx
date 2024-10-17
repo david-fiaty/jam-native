@@ -9,7 +9,7 @@ const AddJamScreen = () => {
     <ModalView 
       title="Add a new Jam" 
       animation="fade"
-      label={<ClearIcon name="plus" size={GlobalStyles.tabsbar.icon.size} />}
+      label={<ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />}
       content={
         <ScrollContainer>
           <JamForm />

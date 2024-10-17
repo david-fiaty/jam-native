@@ -15,14 +15,13 @@ const FullScreenView = ({style, children}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center', 
     alignContent: 'center',
     backgroundColor: Colors.background,
     height: '100%',
-    gap: GlobalStyles.space*2,
+    gap: GlobalStyles.space.base*2,
   },
 });
 

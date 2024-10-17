@@ -20,7 +20,7 @@ const SkipButton = ({onPress}: Props) => {
 const styles = StyleSheet.create({
   container: {
     padding: 0,
-    paddingHorizontal: GlobalStyles.space,
+    paddingHorizontal: GlobalStyles.space.base,
   },
   label: {},
 });

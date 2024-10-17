@@ -23,10 +23,10 @@ const JamItem = ({item, index}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: GlobalStyles.space*2,
-    paddingBottom: GlobalStyles.space*1.5,
+    marginBottom: GlobalStyles.space.base*2,
+    paddingBottom: GlobalStyles.space.base*1.5,
     borderWidth: 1,
-    borderRadius: GlobalStyles.space,
+    borderRadius: GlobalStyles.space.base,
     borderColor: GlobalStyles.border.color,
   },
 });

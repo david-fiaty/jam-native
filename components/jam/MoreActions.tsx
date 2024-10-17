@@ -54,11 +54,10 @@ const styles = StyleSheet.create({
   container: {
   },
   item: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: GlobalStyles.space,
-    padding: GlobalStyles.space,
+    gap: GlobalStyles.space.base,
+    padding: GlobalStyles.space.base,
   },
 });
 

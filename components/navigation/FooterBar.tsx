@@ -3,49 +3,16 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MapScreen from '@/components/screens/MapScreen';
 import AddJamScreen from '@/components/screens/AddJamScreen';
 import ProfileScreen from '@/components/screens/ProfileScreen';
-import { GlobalStyles } from '@/constants/GlobalStyles';
+import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 
 const FooterBar = () => {
-  const Tab = createBottomTabNavigator();
+  
 
   return (
     <View style={styles.container}>
-      <Tab.Navigator
-        screenOptions={{
-          tabBarStyle: styles.tabs,
-        }}
-      >
-        <Tab.Screen 
-          name="map" 
-          component={Text}
-          options={{
-            tabBarLabel: '',
-            tabBarIcon: ({ color, size }) => (
-              <MapScreen />
-            ),
-          }}
-        />
-        <Tab.Screen 
-          name="add" 
-          component={Text}
-          options={{
-            tabBarLabel: '',
-            tabBarIcon: ({ color, size }) => (
-              <AddJamScreen />
-            ),
-          }}
-        />
-        <Tab.Screen 
-          name="account" 
-          component={Text}
-          options={{
-            tabBarLabel: '',
-            tabBarIcon: ({ color, size }) => (
-              <ProfileScreen />
-            ),
-          }}
-        />
-      </Tab.Navigator>
+      <MapScreen />
+      <AddJamScreen />
+      <ProfileScreen />
     </View>
   );
 }
@@ -53,14 +20,21 @@ const FooterBar = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%',
-    position: 'absolute',
     bottom: 0,
+    position: 'absolute',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    padding: GlobalStyles.space.base,
+    backgroundColor: 'black',
     borderTopWidth: 1,
+    borderTopColor: Colors.primary,
   },
   tabs: {
     flex: 1,
-    paddingVertical: GlobalStyles.space,
+    padding: GlobalStyles.space.base,
+    backgroundColor: Colors.background,
   },
 });
 

@@ -24,19 +24,18 @@ const PrimaryIcon = ({name, size, iconStyle, containerStyle}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    width: GlobalStyles.space*3,
-    height: GlobalStyles.space*3,
-    borderRadius: GlobalStyles.space*1.5,
+    width: GlobalStyles.space.base*3,
+    height: GlobalStyles.space.base*3,
+    borderRadius: GlobalStyles.space.base*1.5,
     backgroundColor: Colors.primary,
     borderColor: Colors.primary,
   },
   icon: {
     color: '#FFFFFF',
-    size: GlobalStyles.space*1.5,
+    size: GlobalStyles.space.base*1.5,
   },
 });
 

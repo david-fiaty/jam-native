@@ -34,13 +34,12 @@ const MenuItem = ({label, index, onPress}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 1,
     borderBottomColor: Colors.primary,
-    gap: GlobalStyles.space,
-    padding: GlobalStyles.space,
+    gap: GlobalStyles.space.base,
+    padding: GlobalStyles.space.base,
   },
 });
 
