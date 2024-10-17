@@ -1,22 +1,23 @@
-import ModalView from '@/components/base/ModalView';
+import { View } from 'react-native';
 import JamForm from '../forms/JamForm';
-import ClearIcon from '../icons/ClearIcon';
-import { GlobalStyles } from '@/constants/GlobalStyles';
 import ScrollContainer from '../base/ScrollContainer';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 
 const AddJamScreen = () => {
   return (
-    <ModalView 
-      title="Add a new Jam" 
-      animation="fade"
-      label={<ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />}
-      content={
-        <ScrollContainer>
-          <JamForm />
-        </ScrollContainer>
-      }
-    />   
+    <View style={styles.container}>
+      <ScrollContainer>
+        <JamForm />
+      </ScrollContainer>
+    </View>
   );
 };
+
+const styles = {
+  container: {
+    paddingHorizontal: GlobalStyles.space.container,
+  },
+};
+
 
 export default AddJamScreen;
