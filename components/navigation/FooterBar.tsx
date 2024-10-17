@@ -8,17 +8,19 @@ import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import TextBlock from '../base/TextBlock';
 
 const FooterBar = () => {
-
   const router = useRouter();
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => router.push('/about')}>
-        <TextBlock> OOO</TextBlock>    
+      <TouchableOpacity onPress={() => router.push('/map')}>
+        <MapScreen />
       </TouchableOpacity>
-      <MapScreen />
-      <AddJamScreen />
-      <ProfileScreen />
+      <TouchableOpacity onPress={() => router.push('/add-jam')}>
+        <AddJamScreen />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => router.push('/profile')}>
+        <ProfileScreen />
+      </TouchableOpacity>
     </View>
   );
 }
