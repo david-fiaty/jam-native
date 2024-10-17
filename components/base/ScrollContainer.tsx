@@ -11,7 +11,7 @@ const ScrollContainer = ({style, children}: Props) => {
     <ScrollView 
       style={[styles.container, style]}
       nestedScrollEnabled={true}
-      contentContainerStyle={styles.container}
+      contentContainerStyle={styles.content}
     >
       <Pressable>{children}</Pressable>
     </ScrollView>
@@ -19,12 +19,8 @@ const ScrollContainer = ({style, children}: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    //flexGrow: 1, // Todo - Enable or remove
-    backgroundColor: 'green',
-    //marginBottom: 25,
-    marginBottom: 0,
-  },
+  container: {},
+  content: {},
 });
 
 export default ScrollContainer;
