@@ -4,20 +4,15 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-
-import { Button, View, Text, StatusBar } from 'react-native';
-import TextBlock from '@/components/base/TextBlock';
+import { Colors } from '@/constants/GlobalStyles';
 import HeaderBar from '@/components/navigation/HeaderBar';
 
 const headerOptions = { 
   headerShown: true,
   headerStyle: {
-    backgroundColor: 'gray', 
+    backgroundColor: Colors.background, 
   },
-  headerTintColor: '#fff',   
-  headerTitleStyle: {
-    fontWeight: 'bold',          
-  }, 
+  headerTintColor: Colors.background,   
   header: (props: object) => (
     <HeaderBar />
   ),     

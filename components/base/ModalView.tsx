@@ -65,15 +65,14 @@ const styles = StyleSheet.create({
     height: DeviceManager.modal.height - GlobalStyles.space,
     marginTop: 'auto',
     marginBottom: GlobalStyles.tabsbar.height,
-    backgroundColor: 'black',
-    borderWidth: 1,
+    backgroundColor: Colors.background,
   },
   view: {
-    backgroundColor: 'yellow',
     width: '100%',
-    height: '100%',
+    flex: 1,
     alignItems: 'flex-start',
-    padding: GlobalStyles.space*2,
+    padding: GlobalStyles.space,
+    paddingBottom: GlobalStyles.tabsbar.height,
   },
 });
 

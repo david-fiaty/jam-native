@@ -1,4 +1,4 @@
-import { GlobalStyles } from '@/constants/GlobalStyles';
+import { Colors } from '@/constants/GlobalStyles';
 import { ReactNode } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -22,7 +22,7 @@ const ViewportContainer = ({style, children}: Props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'green',
+    backgroundColor: Colors.background,
   },
 });
 
