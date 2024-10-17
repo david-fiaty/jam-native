@@ -16,7 +16,6 @@ const ProfileImage = () => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     gap: GlobalStyles.space.base*2,

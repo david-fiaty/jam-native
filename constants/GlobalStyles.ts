@@ -23,7 +23,6 @@ export const GlobalStyles = {
     },
   },
   container: {
-    display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center', 

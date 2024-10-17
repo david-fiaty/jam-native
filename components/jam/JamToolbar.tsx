@@ -25,7 +25,6 @@ const JamToolbar = ({item, index}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -33,12 +32,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: GlobalStyles.space.base*1.5,
   },
   left: {
-    display: 'flex',
     flexDirection: 'row',
     gap: GlobalStyles.space.base,
   },
   right: {
-    display: 'flex',
     flexDirection: 'row',
     gap: GlobalStyles.space.base,
   },

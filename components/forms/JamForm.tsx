@@ -62,7 +62,6 @@ const JamForm = () => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
     width: '100%',
@@ -101,7 +100,6 @@ const styles = StyleSheet.create({
   },
   plus: {
     container: {
-      display: 'flex',
       flexDirection: 'row',
       gap: GlobalStyles.space.base,
       marginBottom: GlobalStyles.space.base,

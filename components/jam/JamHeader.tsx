@@ -23,7 +23,6 @@ const JamHeader = ({item, index}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -31,12 +30,10 @@ const styles = StyleSheet.create({
     paddingVertical: GlobalStyles.space.base/1.5,
   },
   left: {
-    display: 'flex',
     flexDirection: 'row',
     gap: GlobalStyles.space.base,
   },
   right: {
-    display: 'flex',
     flexDirection: 'row',
     gap: GlobalStyles.space.base,
   },

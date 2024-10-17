@@ -27,7 +27,6 @@ const HeaderBar = () => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     flexGrow: 1,
     flexDirection: 'row',
     alignItems: 'center',
@@ -40,7 +39,6 @@ const styles = StyleSheet.create({
     gap: GlobalStyles.space.base,
   },
   right: {
-    display: 'flex',
     flexDirection: 'row',
     gap: GlobalStyles.space.base,
   },
