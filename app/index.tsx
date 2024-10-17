@@ -13,10 +13,11 @@ const Index = () => {
   return (  
     <ViewportContainer>
       <View style={styles.container}>
-        <TabElement 
-          label={<ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />} 
-          content={<AddJamScreen />} 
-        />
+        <View style={styles.tabs}>
+          <ClearIcon name="location" size={GlobalStyles.footer.icon.size} />
+          <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
+          <ClearIcon name="user" size={GlobalStyles.footer.icon.size} />
+        </View>
       </View>
     </ViewportContainer>
   );
@@ -27,6 +28,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'yellow',
     width: '100%',
     height: '100%',
+    justifyContent: 'flex-end',
+  },
+  tabs: {
+    //position: 'absolute',
+    //bottom: 0,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 });
 
