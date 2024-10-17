@@ -4,9 +4,6 @@ import { Marker } from 'react-native-maps';
 import * as Device from 'expo-device';
 import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
-import ModalView from '@/components/base/ModalView';
-import ClearIcon from '../icons/ClearIcon';
-import { GlobalStyles } from '@/constants/GlobalStyles';
 
 const MapScreen = () => {
   const [location, setLocation] = useState('');
