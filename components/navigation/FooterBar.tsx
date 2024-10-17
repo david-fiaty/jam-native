@@ -8,14 +8,10 @@ import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import TextBlock from '../base/TextBlock';
 
 const FooterBar = () => {
-
   const router = useRouter();
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => router.push('/about')}>
-        <TextBlock> OOO</TextBlock>    
-      </TouchableOpacity>
       <MapScreen />
       <AddJamScreen />
       <ProfileScreen />

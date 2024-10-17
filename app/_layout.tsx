@@ -18,6 +18,11 @@ const headerOptions = {
   },
 };
 
+const fadeAnimationOptions = {  
+  animation: 'fade',
+  animationDuration: 2000,
+};
+
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -40,18 +45,15 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="login" options={{ headerShown: false }} />
-        <Stack.Screen name="about" options={{ 
-          ...headerOptions,
-          ...{  
-            animation: 'fade',
-            animationDuration: 2000,
-          },
-         }} />
+        <Stack.Screen name="about" options={{ headerShown: false }} />
         <Stack.Screen name="legal" options={{ headerShown: false }} />
         <Stack.Screen name="jams" options={headerOptions} />
         <Stack.Screen name="password" options={{ headerShown: false }} />
         <Stack.Screen name="username" options={{ headerShown: false }} />
         <Stack.Screen name="language" options={{ headerShown: false }} />
+        <Stack.Screen name="map" options={{...headerOptions, ...fadeAnimationOptions }} />
+        <Stack.Screen name="add-jam" options={{...headerOptions, ...fadeAnimationOptions }} />
+        <Stack.Screen name="profile" options={{...headerOptions, ...fadeAnimationOptions }} />
       </Stack>
     </ThemeProvider>
   );
