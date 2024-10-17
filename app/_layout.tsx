@@ -1,21 +1,21 @@
+import 'react-native-reanimated';
 import { DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
-import 'react-native-reanimated';
 import { Colors } from '@/constants/GlobalStyles';
 import HeaderBar from '@/components/navigation/HeaderBar';
 
 const headerOptions = { 
+  header: (props: object) => <HeaderBar />,    
   headerShown: true,
+  statusBarColor: Colors.background,
+  statusBarStyle: 'dark',
+  headerTintColor: Colors.background,    
   headerStyle: {
     backgroundColor: Colors.background, 
   },
-  headerTintColor: Colors.background,   
-  header: (props: object) => (
-    <HeaderBar />
-  ),     
 };
 
 SplashScreen.preventAutoHideAsync();

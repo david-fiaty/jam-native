@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     ...GlobalStyles.field,
   },
   icon: {
-    marginRight: GlobalStyles.space,
+    marginRight: GlobalStyles.space.base,
   },
   label: {
     ...GlobalStyles.text,
@@ -79,15 +79,15 @@ const styles = StyleSheet.create({
     },
   },
   item: {
-    paddingVertical: GlobalStyles.space,
-    paddingHorizontal: GlobalStyles.space,
+    paddingVertical: GlobalStyles.space.base,
+    paddingHorizontal: GlobalStyles.space.base,
   },
   placeholderStyle: GlobalStyles.text,
   selectedTextStyle: GlobalStyles.text,
   itemTextStyle: GlobalStyles.text,
   iconStyle: {
-    width: GlobalStyles.space*2,
-    height: GlobalStyles.space*2,
+    width: GlobalStyles.space.base*2,
+    height: GlobalStyles.space.base*2,
   },
 });
 

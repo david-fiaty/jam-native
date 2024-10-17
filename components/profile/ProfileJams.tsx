@@ -14,8 +14,8 @@ const ProfileJams = () => {
         <FlatList 
           data={data} 
           numColumns={3}
-          contentContainerStyle={{gap: GlobalStyles.space}}
-          columnWrapperStyle={{gap: GlobalStyles.space}}
+          contentContainerStyle={{gap: GlobalStyles.space.base}}
+          columnWrapperStyle={{gap: GlobalStyles.space.base}}
           scrollEnabled={false}
           renderItem={({item, index}) => {
             return (
@@ -40,24 +40,24 @@ const ProfileJams = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: GlobalStyles.space*2,
+    marginTop: GlobalStyles.space.base*2,
   },
   title: {
     ...GlobalStyles.text,
     ...{
       fontWeight: 'bold',
-      marginBottom: GlobalStyles.space/2,
+      marginBottom: GlobalStyles.space.base/2,
     },
   },
   item: {
     backgroundColor: Colors.tertiary,
     borderRadius: 8,
     borderColor: Colors.tertiary,
-    width: GlobalStyles.space*10,
-    height: GlobalStyles.space*10,
+    width: GlobalStyles.space.base*10,
+    height: GlobalStyles.space.base*10,
   },
   image: {
-    borderRadius: GlobalStyles.space,
+    borderRadius: GlobalStyles.space.base,
   },
 });
 

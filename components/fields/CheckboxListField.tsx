@@ -27,7 +27,7 @@ const CheckboxListField = ({label, title, data}: Props) => {
             horizontal={false}  
             numColumns={1}
             style={styles.list}
-            contentContainerStyle={{gap: GlobalStyles.space}}
+            contentContainerStyle={{gap: GlobalStyles.space.base}}
             scrollEnabled={false}
             renderItem={({item, index}) => {
               return (
@@ -41,7 +41,7 @@ const CheckboxListField = ({label, title, data}: Props) => {
                       <CheckBox 
                         iconRight={true}
                         containerStyle={styles.checkbox} 
-                        size={GlobalStyles.space*2}
+                        size={GlobalStyles.space.base*2}
                         checked={true} 
                         checkedColor={Colors.primary}
                       />
@@ -60,25 +60,25 @@ const CheckboxListField = ({label, title, data}: Props) => {
 const styles = StyleSheet.create({
   list: {
     width: '100%',
-    marginTop: GlobalStyles.space*2,
+    marginTop: GlobalStyles.space.base*2,
     borderWidth: 1,
     borderColor: Colors.primary,
-    borderRadius: GlobalStyles.space,
-    padding: GlobalStyles.space,
+    borderRadius: GlobalStyles.space.base,
+    padding: GlobalStyles.space.base,
   },
   item: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: GlobalStyles.space,
+    padding: GlobalStyles.space.base,
   },
   left: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    gap: GlobalStyles.space,
+    gap: GlobalStyles.space.base,
   },
   right: {
     display: 'flex',

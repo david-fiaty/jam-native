@@ -28,15 +28,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    width: GlobalStyles.space*3,
-    height: GlobalStyles.space*3,
-    borderRadius: GlobalStyles.space*1.5,
+    width: GlobalStyles.space.base*3,
+    height: GlobalStyles.space.base*3,
+    borderRadius: GlobalStyles.space.base*1.5,
     backgroundColor: '#FFFFFF',
     borderColor: '#FFFFFF',
   },
   icon: {
     color: Colors.primary,
-    size: GlobalStyles.space*1.5,
+    size: GlobalStyles.space.base*1.5,
   },
 });
 

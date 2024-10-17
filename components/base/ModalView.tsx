@@ -48,21 +48,21 @@ const ModalView = ({label, title, content, animation, showBorder}: Props) => {
 
 const borderHidden = {
   width: '100%',
-  gap: GlobalStyles.space,
+  gap: GlobalStyles.space.base,
 };
 
 const borderVisible = {
   width: '100%',
-  gap: GlobalStyles.space,
-  padding: GlobalStyles.space,
+  gap: GlobalStyles.space.base,
+  padding: GlobalStyles.space.base,
   borderWidth: 1,
   borderColor: Colors.primary,
-  borderRadius: GlobalStyles.space,
+  borderRadius: GlobalStyles.space.base,
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: DeviceManager.modal.height - GlobalStyles.space,
+    height: DeviceManager.modal.height - GlobalStyles.space.base,
     marginTop: 'auto',
     marginBottom: GlobalStyles.tabsbar.height,
     backgroundColor: Colors.background,
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     width: '100%',
     flex: 1,
     alignItems: 'flex-start',
-    padding: GlobalStyles.space,
+    padding: GlobalStyles.space.base,
     paddingBottom: GlobalStyles.tabsbar.height,
   },
 });

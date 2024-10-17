@@ -46,7 +46,7 @@ const LocationPickerField = ({label, title}: Props) => {
       animation="slide"
       label={
         <View style={styles.label}>
-          <TertiaryIcon name="location" size={GlobalStyles.space*1.5} containerStyle={styles.icon} />
+          <TertiaryIcon name="location" size={GlobalStyles.space.base*1.5} containerStyle={styles.icon} />
           <InputTextField
             style={GlobalStyles.field}
             placeholder={label}
