@@ -123,3 +123,17 @@ Twilio => SMS
       </View>
     );
   })}
+
+
+          <TabElement 
+          label={<ClearIcon name="location" size={GlobalStyles.footer.icon.size} />} 
+          content={<AddJamScreen />} 
+        />
+        <TabElement 
+          label={<ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />} 
+          content={<AddJamScreen />} 
+        />
+        <TabElement 
+          label={<ClearIcon name="user" size={GlobalStyles.footer.icon.size} />} 
+          content={<AddJamScreen />} 
+        />
