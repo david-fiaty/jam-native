@@ -1,4 +1,4 @@
-import { Colors } from '@/constants/GlobalStyles';
+import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import { ReactNode } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background,
+    paddingTop: GlobalStyles.space.container,
   },
 });
 

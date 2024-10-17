@@ -1,4 +1,5 @@
 
+import { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
@@ -6,16 +7,32 @@ import ClearIcon from '../icons/ClearIcon';
 
 const FooterBar = () => {
   const router = useRouter();
+  const [isActive, setIsActive] = useState(false);
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => router.push('/map')}>
+      <TouchableOpacity onPress={() => {
+        setIsActive(!isActive);
+        router.replace('/map');
+      }}>
         <ClearIcon name="location" size={GlobalStyles.footer.icon.size} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => router.push('/add-jam')}>
-      <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
+      <TouchableOpacity onPress={() => {
+        setIsActive(!isActive);
+        router.replace('/jams');
+      }}>
+        <ClearIcon name="list" size={GlobalStyles.footer.icon.size} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => router.push('/profile')}>
+      <TouchableOpacity onPress={() => {
+        setIsActive(!isActive);
+        router.replace('/add-jam');
+      }}>
+        <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => {
+        setIsActive(!isActive);
+        router.replace('/profile');
+      }}>
         <ClearIcon name="user" size={GlobalStyles.footer.icon.size} />
       </TouchableOpacity>
     </View>

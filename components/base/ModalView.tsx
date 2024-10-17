@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, Modal, View, TouchableWithoutFeedback, StatusBar, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, Modal, View, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import BackButton from '@/components/navigation/BackButton';
 import DeviceManager from '@/classes/DeviceManager';
@@ -64,7 +64,7 @@ const borderVisible = {
 
 const styles = StyleSheet.create({
   container: {
-    height: DeviceManager.modal.height - GlobalStyles.space.container,
+    height: DeviceManager.modal.height - GlobalStyles.space.container*2,
     marginTop: 'auto',
     marginBottom: GlobalStyles.footer.height,
     backgroundColor: Colors.background,
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: GlobalStyles.space.container,
   },
   active: {
-    backgroundColor: 'orange',
+    //backgroundColor: 'orange',
   },
 });
 
