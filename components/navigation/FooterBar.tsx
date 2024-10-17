@@ -12,20 +12,20 @@ const FooterBar = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => {
-        router.push(isActive ? '/jams' : '/map')
-        setIsActive(false);
+        setIsActive(!isActive);
+        router.push(isActive ? '/map' : '/jams');
       }}>
         <ClearIcon name="location" size={GlobalStyles.footer.icon.size} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => {
-        router.push(isActive ? '/jams' : '/add-jam')
-        setIsActive(false);
+        setIsActive(!isActive);
+        router.replace(!isActive ? '/add-jam' : '/jams');
       }}>
         <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => {
-        router.push(isActive ? '/jams' : '/profile')
-        setIsActive(false);
+        setIsActive(!isActive);
+        router.push(isActive ? '/profile' : '/jams');
       }}>
         <ClearIcon name="user" size={GlobalStyles.footer.icon.size} />
       </TouchableOpacity>
