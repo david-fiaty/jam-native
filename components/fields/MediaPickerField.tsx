@@ -55,7 +55,6 @@ const MediaPickerField = () => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     flexDirection: 'row',
     gap: GlobalStyles.space.base,
     marginBottom: GlobalStyles.space.base,

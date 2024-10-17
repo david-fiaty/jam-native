@@ -38,7 +38,6 @@ const NotificationsScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
   },

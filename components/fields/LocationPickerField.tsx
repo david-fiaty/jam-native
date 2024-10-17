@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
     height: 550,
   },
   label: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
   },

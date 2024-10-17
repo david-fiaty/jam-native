@@ -36,12 +36,10 @@ const SquareOptionsField = ({data}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     flexDirection: 'column',
     gap: GlobalStyles.space.base/2,
   },
   square: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

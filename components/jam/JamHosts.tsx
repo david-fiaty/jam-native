@@ -51,13 +51,11 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   label: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     gap: GlobalStyles.space.base,
   },
   item: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     gap: GlobalStyles.space.base,

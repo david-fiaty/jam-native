@@ -67,21 +67,18 @@ const styles = StyleSheet.create({
     padding: GlobalStyles.space.base,
   },
   item: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: GlobalStyles.space.base,
   },
   left: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
     gap: GlobalStyles.space.base,
   },
   right: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',

@@ -25,7 +25,6 @@ const LoginForm = () => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     width: '80%',
@@ -35,7 +34,6 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   signup: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
