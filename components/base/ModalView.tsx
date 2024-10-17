@@ -22,7 +22,7 @@ const ModalView = ({label, title, content, animation, showBorder}: Props) => {
       <Modal
         animationType={animationType}
         hardwareAccelerated={true}
-        transparent={true}
+        transparent={false}
         visible={modalVisible}
         onRequestClose={() => setModalVisible(!modalVisible)}
       >
@@ -39,7 +39,7 @@ const ModalView = ({label, title, content, animation, showBorder}: Props) => {
           </View>
         </TouchableWithoutFeedback>
       </Modal>
-      <TouchableOpacity onPress={() => setModalVisible(true)}>
+      <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
         <View style={modalVisible ? styles.active : {}}>
           {label}
         </View>
@@ -67,11 +67,14 @@ const styles = StyleSheet.create({
     height: DeviceManager.modal.height - GlobalStyles.space.container,
     marginTop: 'auto',
     marginBottom: GlobalStyles.footer.height,
-    backgroundColor: Colors.background,
+    //backgroundColor: Colors.background,
+    backgroundColor: 'blue',
   },
   view: {
     width: '100%',
-    flex: 1,
+    height: 200,
+    //flex: 1,
+    backgroundColor: 'yellow',
     alignItems: 'flex-start',
     paddingTop: GlobalStyles.space.base,
     paddingBottom: GlobalStyles.footer.height,
