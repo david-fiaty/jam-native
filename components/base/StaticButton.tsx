@@ -23,7 +23,6 @@ const StaticButton = ({label, icon, containerStyle, labelStyle, onPress}: Props)
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     alignItems: 'center',
     marginLeft: 'auto',
     marginRight: 'auto',

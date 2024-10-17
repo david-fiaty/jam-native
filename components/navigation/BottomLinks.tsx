@@ -14,7 +14,6 @@ const BottomLinks = () => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     flexDirection: 'row',
     alignContent: 'center',
     alignItems: 'center',

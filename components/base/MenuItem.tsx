@@ -34,7 +34,6 @@ const MenuItem = ({label, index, onPress}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 1,

@@ -31,7 +31,6 @@ const BackButton = ({title, onPress}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: GlobalStyles.space.base*1.5,
