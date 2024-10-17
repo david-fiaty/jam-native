@@ -45,6 +45,14 @@ Twilio => SMS
 
 
 
+
+        onLayout={event => {
+          console.log(event.nativeEvent.layout);
+        }}
+
+
+
+
           header: (props) => (
             <View style={{ 
               display: 'flex',
