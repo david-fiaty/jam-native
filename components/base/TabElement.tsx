@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     height: '100%',
     flexDirection: 'column',
     justifyContent: 'flex-end',
+    alignItems: 'center',
   },
   label: {
     //position: 'absolute',
