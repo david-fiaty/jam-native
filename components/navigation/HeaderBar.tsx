@@ -33,9 +33,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginTop: StatusBar.currentHeight,
-    paddingVertical: GlobalStyles.space.base,
     paddingHorizontal: GlobalStyles.space.container,
-    backgroundColor: Colors.background,
+    backgroundColor: 'green',
   },
   left: {
     gap: GlobalStyles.space.base,
