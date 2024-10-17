@@ -40,7 +40,13 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="login" options={{ headerShown: false }} />
-        <Stack.Screen name="about" options={{ headerShown: false }} />
+        <Stack.Screen name="about" options={{ 
+          ...headerOptions,
+          ...{  
+            animation: 'fade',
+            animationDuration: 2000,
+          },
+         }} />
         <Stack.Screen name="legal" options={{ headerShown: false }} />
         <Stack.Screen name="jams" options={headerOptions} />
         <Stack.Screen name="password" options={{ headerShown: false }} />
