@@ -10,18 +10,24 @@ const Index = () => {
     <ViewportContainer>
       <View style={styles.container}>
         <View style={styles.tabs}>
-          <TabElement 
-            label={<ClearIcon name="location" size={GlobalStyles.footer.icon.size} />}
-            content={<AddJamScreen />}
-          />
-          <TabElement 
-            label={<ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />}
-            content={<AddJamScreen />}
-          />
-          <TabElement 
-            label={<ClearIcon name="user" size={GlobalStyles.footer.icon.size} />}
-            content={<AddJamScreen />}
-          />
+          <View style={styles.tab}>
+            <TabElement 
+              label={<ClearIcon name="location" size={GlobalStyles.footer.icon.size} />}
+              content={<AddJamScreen />}
+            />
+          </View>
+          <View style={styles.tab}>
+            <TabElement 
+              label={<ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />}
+              content={<AddJamScreen />}
+            />
+          </View>
+          <View style={styles.tab}>
+            <TabElement 
+              label={<ClearIcon name="user" size={GlobalStyles.footer.icon.size} />}
+              content={<AddJamScreen />}
+            />
+          </View>
         </View>
       </View>
     </ViewportContainer>
@@ -39,6 +45,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  tab: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: 'green',
+    paddingVertical: GlobalStyles.space.base,
   },
 });
 
