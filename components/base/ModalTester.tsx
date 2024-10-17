@@ -13,8 +13,12 @@ function ModalTester() {
     <View style={{ flex: 1 }}>
       <Button title="Show modal" onPress={toggleModal} />
 
-      <Modal isVisible={isModalVisible}>
-        <View style={{ flex: 1 }}>
+      <Modal 
+        isVisible={isModalVisible} 
+        coverScreen={true}
+        hasBackdrop={false}
+      >
+        <View style={{  backgroundColor: 'green', height: 200, top: 0 }}>
           <Text>Hello!</Text>
 
           <Button title="Hide modal" onPress={toggleModal} />
