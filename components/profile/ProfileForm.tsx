@@ -35,10 +35,7 @@ const ProfileForm = () => {
       />
       <SelectListField 
         placeholder="Sub industries"
-        data={[
-          { label: "Public", value: 1 },
-          { label: "Private", value: 0 },
-        ]} 
+        data={IndustriesData} 
       />
       <InputTextField
         style={GlobalStyles.field}
