@@ -36,8 +36,6 @@ const TabElement = ({label, content}: Props) => {
 const styles = StyleSheet.create({
   label: {
     paddingHorizontal: GlobalStyles.space.container*2,
-    //top: 0,
-    //left: 0,
   }, 
   modal: {
     position: 'absolute',
@@ -48,11 +46,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     height: DeviceManager.modal.height - GlobalStyles.header.height + GlobalStyles.space.base,
-  },
-  modalContent: {
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 10,
   },
 });
 
