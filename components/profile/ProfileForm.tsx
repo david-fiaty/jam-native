@@ -4,6 +4,7 @@ import InputTextField from '../fields/InputTextField';
 import SelectListField from '../fields/SelectListField';
 import LocationPickerField from '../fields/LocationPickerField';
 import TextBlock from '../base/TextBlock';
+import IndustriesData from '@/constants/IndustriesData';
 
 const ProfileForm = () => {
   return (
@@ -29,11 +30,8 @@ const ProfileForm = () => {
         label="Current location"
       />
       <SelectListField 
-        placeholder="Indutries"
-        data={[
-          { label: "Public", value: 1 },
-          { label: "Private", value: 0 },
-        ]} 
+        placeholder="Industries"
+        data={IndustriesData} 
       />
       <SelectListField 
         placeholder="Sub industries"
