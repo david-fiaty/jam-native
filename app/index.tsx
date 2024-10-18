@@ -17,15 +17,27 @@ const Index = () => {
     <ViewportContainer>
       <View style={styles.container}>
         <View style={styles.tabs}>
-          <TouchableOpacity style={styles.item} onPress={() => setMapTabActive(!mapTabActive)}>
+          <TouchableOpacity style={styles.item} onPress={() => {
+            setMapTabActive(!mapTabActive);
+            setAddTabActive(false);
+            setProfileTabActive(false);
+          }}>
             <ClearIcon name="location" size={GlobalStyles.footer.icon.size} />
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.item} onPress={() => setAddTabActive(!addTabActive)}>
+          <TouchableOpacity style={styles.item} onPress={() => {
+            setMapTabActive(false);
+            setAddTabActive(!addTabActive);
+            setProfileTabActive(false);
+          }}>
             <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.item} onPress={() => setProfileTabActive(!profileTabActive)}>
+          <TouchableOpacity style={styles.item} onPress={() => {
+            setMapTabActive(false);
+            setAddTabActive(false);
+            setProfileTabActive(!profileTabActive);
+          }}>
             <ClearIcon name="user" size={GlobalStyles.footer.icon.size} />
           </TouchableOpacity>
         </View>
