@@ -14,6 +14,7 @@ const SearchScreen = () => {
         content={
           <TestScreen />
         }
+        viewStyle={{paddingHorizontal: 0}}
       />   
     </View>
   );
