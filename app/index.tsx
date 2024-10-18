@@ -28,7 +28,6 @@ const Index = () => {
               active={mapTabActive}
             />
           </TouchableOpacity>
-
           <TouchableOpacity 
             onPress={() => {
               setAddTabActive(!addTabActive);
@@ -40,7 +39,6 @@ const Index = () => {
               active={addTabActive}
             />
           </TouchableOpacity>
-
           <TouchableOpacity 
             onPress={() => {
               setProfileTabActive(!profileTabActive);
