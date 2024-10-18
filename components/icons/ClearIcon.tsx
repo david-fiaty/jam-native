@@ -27,10 +27,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    width: GlobalStyles.space.base*3,
+    height: GlobalStyles.space.base*3,
     borderRadius: GlobalStyles.space.base*1.5,
     backgroundColor: '#FFFFFF',
     borderColor: '#FFFFFF',
-
   },
   icon: {
     color: Colors.primary,
