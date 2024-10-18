@@ -1,12 +1,17 @@
 import React from "react";
-import { Tab, Text, TabView } from "@rneui/themed";
+import { View, FlatList, TouchableOpacity  } from "react-native";
+import { Tab, TabView } from "@rneui/themed";
 import { GlobalStyles, Colors } from "@/constants/GlobalStyles";
+import { StaticImage } from './base/StaticImage';
+import ApiClient from '@/classes/ApiClient';
 
 const TestScreen = () => {
   const [index, setIndex] = React.useState(0);
+  const jamsData = ApiClient.get('jams');
+  const projectsData = ApiClient.get('projects');
 
   return (
-    <>
+    <View style={styles.container}>
       <Tab
         value={index}
         dense={true}
@@ -17,15 +22,15 @@ const TestScreen = () => {
         }}
       >
         <Tab.Item
-          title="Recent"
+          title="All"
           titleStyle={GlobalStyles.text}
         />
         <Tab.Item
-          title="favorite"
+          title="Jams"
           titleStyle={GlobalStyles.text}
         />
         <Tab.Item
-          title="cart"
+          title="Projects"
           titleStyle={GlobalStyles.text}
         />
       </Tab>
@@ -34,31 +39,107 @@ const TestScreen = () => {
         value={index} 
         onChange={setIndex} 
         animationType="timing" 
-        containerStyle={styles.content}
         disableTransition={true}
       >
-        <TabView.Item style={styles.item}>
-          <Text h1>Recent</Text>
+        <TabView.Item style={styles.tab}>
+          <FlatList 
+            data={jamsData} 
+            numColumns={3}
+            contentContainerStyle={{gap: GlobalStyles.space.base}}
+            columnWrapperStyle={{gap: GlobalStyles.space.base}}
+            scrollEnabled={false}
+            renderItem={({item, index}) => {
+              return (
+                <TouchableOpacity>
+                  <View style={styles.item}>
+                    <StaticImage 
+                      source={item.image} 
+                      width="100%"
+                      height="100%"
+                      resizeMode="cover"
+                      style={styles.image}
+                    />
+                  </View>
+                </TouchableOpacity>
+              );
+            }}
+          />
         </TabView.Item>
-        <TabView.Item style={styles.item}>
-          <Text h1>Favorite</Text>
+
+        <TabView.Item style={styles.tab}>
+          <FlatList 
+            data={jamsData} 
+            numColumns={3}
+            contentContainerStyle={{gap: GlobalStyles.space.base}}
+            columnWrapperStyle={{gap: GlobalStyles.space.base}}
+            scrollEnabled={false}
+            renderItem={({item, index}) => {
+              return (
+                <TouchableOpacity>
+                  <View style={styles.item}>
+                    <StaticImage 
+                      source={item.image} 
+                      width="100%"
+                      height="100%"
+                      resizeMode="cover"
+                      style={styles.image}
+                    />
+                  </View>
+                </TouchableOpacity>
+              );
+            }}
+          />
         </TabView.Item>
-        <TabView.Item style={styles.item}>
-          <Text h1>Cart</Text>
+
+        <TabView.Item style={styles.tab}>
+          <FlatList 
+            data={projectsData} 
+            numColumns={3}
+            contentContainerStyle={{gap: GlobalStyles.space.base}}
+            columnWrapperStyle={{gap: GlobalStyles.space.base}}
+            scrollEnabled={false}
+            renderItem={({item, index}) => {
+              return (
+                <TouchableOpacity>
+                  <View style={styles.item}>
+                    <StaticImage 
+                      source={item.image} 
+                      width="100%"
+                      height="100%"
+                      resizeMode="cover"
+                      style={styles.image}
+                    />
+                  </View>
+                </TouchableOpacity>
+              );
+            }}
+          />
         </TabView.Item>
+
       </TabView>
-    </>
+    </View>
   );
 };
 
 const styles = {
-  content: {
-    flex: 1,
+  container: {
+    flexDirection: 'column',
+    height: '100%',
+  },
+  tab: {
+    width: '100%',
+    height: '100%',
+    padding: GlobalStyles.space.container,
   },
   item: {
-    width: '100%',
-    height: 300,
-    backgroundColor: 'red',
+    backgroundColor: Colors.tertiary,
+    borderRadius: 8,
+    borderColor: Colors.tertiary,
+    width: GlobalStyles.space.base*10.3,
+    height: GlobalStyles.space.base*10.3,
+  },
+  image: {
+    borderRadius: GlobalStyles.space.base,
   },
 };
 
