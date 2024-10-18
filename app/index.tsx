@@ -42,12 +42,13 @@ const Index = () => {
             <ClearIcon name="user" size={GlobalStyles.footer.icon.size} />
           </TouchableOpacity>
         </View>
+
         <View style={styles.modal}>
-          {!mapTabActive && !addTabActive && !profileTabActive && (<JamsScreen />)}
           {mapTabActive && (<MapScreen />)}
           {addTabActive && (<AddJamScreen />)}
           {profileTabActive && (<ProfileScreen />)}
         </View>
+        
       </View>
     </ViewportContainer>
   );
