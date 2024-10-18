@@ -47,7 +47,29 @@ const JamForm = () => {
           { label: "Private", value: 0 },
         ]} 
       />
-      <MultiselectDropdownField />
+      <SelectListField 
+        placeholder="Indutries"
+        data={[
+          { label: "Public", value: 1 },
+          { label: "Private", value: 0 },
+        ]} 
+      />
+      <SelectListField 
+        placeholder="Sub industries"
+        data={[
+          { label: "Public", value: 1 },
+          { label: "Private", value: 0 },
+        ]} 
+      />
+      <SelectListField 
+        placeholder="Creative organization"
+        data={[
+          { label: "Public", value: 1 },
+          { label: "Private", value: 0 },
+        ]} 
+      />
+
+      { /* <MultiselectDropdownField /> */ }
       <View style={styles.buttonContainer}>
         <Button 
           title="Post" 
