@@ -20,18 +20,19 @@ const Index = () => {
           <TouchableOpacity onPress={() => setMapTabActive(!mapTabActive)}>
             <ClearIcon name="location" size={GlobalStyles.footer.icon.size} />
           </TouchableOpacity>
-          {mapTabActive && (<MapScreen />)}
 
           <TouchableOpacity onPress={() => setAddTabActive(!addTabActive)}>
             <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
           </TouchableOpacity>
-          {addTabActive && (<AddJamScreen />)}
 
           <TouchableOpacity onPress={() => setProfileTabActive(!profileTabActive)}>
-            <ClearIcon name="profile" size={GlobalStyles.footer.icon.size} />
+            <ClearIcon name="user" size={GlobalStyles.footer.icon.size} />
           </TouchableOpacity>
-          {profileTabActive && (<ProfileScreen />)}
         </View>
+
+        {mapTabActive && (<MapScreen />)}
+        {addTabActive && (<AddJamScreen />)}
+        {profileTabActive && (<ProfileScreen />)}
       </View>
     </ViewportContainer>
   );
