@@ -62,7 +62,7 @@ const JamForm = () => {
         ]} 
       />
       <SelectListField 
-        placeholder="Sub industries"
+        placeholder="Creative organization"
         data={[
           { label: "Public", value: 1 },
           { label: "Private", value: 0 },
