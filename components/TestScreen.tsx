@@ -1,24 +1,22 @@
 import React, { useRef, useEffect } from 'react';
 import { View, Button, Animated, StyleSheet, Dimensions } from 'react-native';
 
-const { height } = Dimensions.get('window'); // Get the height of the screen
+const { height } = Dimensions.get('window'); 
 
 const TestScreen = () => {
-  const slideAnim = useRef(new Animated.Value(height)).current; // Initial position is off-screen (bottom)
+  const slideAnim = useRef(new Animated.Value(height)).current; 
 
-  // Function to start the animation
   const slideIn = () => {
     Animated.timing(slideAnim, {
-      toValue: 0, // Slide to top of the screen (or the original position)
-      duration: 500, // Animation duration in ms
-      useNativeDriver: true, // Use native driver for better performance
+      toValue: 0, 
+      duration: 500, 
+      useNativeDriver: true, 
     }).start();
   };
 
-  // Function to hide the view again
   const slideOut = () => {
     Animated.timing(slideAnim, {
-      toValue: height, // Slide out to bottom of the screen
+      toValue: height,
       duration: 500,
       useNativeDriver: true,
     }).start();
@@ -32,7 +30,7 @@ const TestScreen = () => {
       <Animated.View
         style={[
           styles.animatedView,
-          { transform: [{ translateY: slideAnim }] }, // Bind translateY to the animated value
+          { transform: [{ translateY: slideAnim }] }, 
         ]}
       >
         <View style={styles.content}>
