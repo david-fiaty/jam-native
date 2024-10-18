@@ -176,32 +176,32 @@ const ApiMockData = {
     {
       id: 1,
       name: 'Project 1',
-      image: '',
+      image: require('@/assets/images/project-1.jpg'),
     },
     {
       id: 2,
       name: 'Project 2',
-      image: '',
+      image: require('@/assets/images/project-2.jpg'),
     },
     {
       id: 3,
       name: 'Project 3',
-      image: '',
+      image: require('@/assets/images/project-1.jpg'),
     },
     {
       id: 4,
       name: 'Project 4',
-      image: '',
+      image: require('@/assets/images/project-1.jpg'),
     },
     {
       id: 5,
       name: 'Project 5',
-      image: '',
+      image: require('@/assets/images/project-1.jpg'),
     },
     {
       id: 6,
       name: 'Project 6',
-      image: '',
+      image: require('@/assets/images/project-1.jpg'),
     },
   ],
 };
