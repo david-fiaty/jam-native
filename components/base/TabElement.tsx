@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { View, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import DeviceManager from '@/classes/DeviceManager';
+import TextBlock from './TextBlock';
 
 type Props = {
   label: JSX.Element,
@@ -12,7 +13,7 @@ const TabElement = ({label, content}: Props) => {
   const [isModalVisible, setModalVisible] = useState(false);
 
   return (
-    <View style={styles.container}>
+    <>
       <TouchableOpacity onPress={() => setModalVisible(!isModalVisible)}>
         <View style={styles.label}>
           {label}
@@ -23,12 +24,12 @@ const TabElement = ({label, content}: Props) => {
         <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
           <View style={styles.modal}>
             <TouchableWithoutFeedback>
-              {content}
+              <TextBlock>hhh</TextBlock>
             </TouchableWithoutFeedback>
           </View>
         </TouchableWithoutFeedback>
       )}
-    </View>
+    </>
   );
 }
 
@@ -38,29 +39,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'green',
     paddingVertical: GlobalStyles.space.base,
-  },
-  container: {
-    backgroundColor: 'red',
-    width: '100%',
-    height: '100%',
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    width: DeviceManager.window.width,
   },
   label: {
-    top: 0,
-    left: 0,
+    //top: 0,
+    //left: 0,
   }, 
   modal: {
     position: 'absolute',
-    top: 0,
     left: 0,
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(0,0,0,0.5)',
-    justifyContent: 'center',
     alignItems: 'center',
-    //height: DeviceManager.modal.height - GlobalStyles.header.height,
+    width: '100%',
+    height: DeviceManager.modal.height - GlobalStyles.header.height,
   },
   modalContent: {
     backgroundColor: 'white',
