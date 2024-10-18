@@ -8,53 +8,50 @@ import ViewportContainer from '@/components/base/ViewportContainer';
 import MapScreen from '@/components/screens/MapScreen';
 import ProfileScreen from '@/components/screens/ProfileScreen';
 
-type TabStatesProps = {
-  name: string,
-  states: object,
-};
-
 const Index = () => {
-  const [tabStates, setTabStates] = useState({
-    map: false,
-    add: false,
-    profile: false,
-  });
-
-  const setActiveTab = ({name, states}: TabStatesProps) => {
-    for (let key in states) {
-      if (key == name) {
-        states[key] = key == name ? true : false;
-      }
-    } 
-  };
+  const [mapTabActive, setMapTabActive] = useState(false);
+  const [addTabActive, setAddTabActive] = useState(false);
+  const [profileTabActive, setProfileTabActive] = useState(false);
   
   return (  
     <ViewportContainer>
       <View style={styles.container}>
         <View style={styles.tabs}>
-          <TabElement 
-            label={<ClearIcon name="location" size={GlobalStyles.footer.icon.size} />}
-            content={<MapScreen />}
-            active={tabStates.map}
-          />
+          <TouchableOpacity 
+            onPress={() => {
+              setMapTabActive(!mapTabActive);
+            }}
+          >
+            <TabElement 
+              label={<ClearIcon name="location" size={GlobalStyles.footer.icon.size} />}
+              content={<MapScreen />}
+              active={mapTabActive}
+            />
+          </TouchableOpacity>
 
           <TouchableOpacity 
             onPress={() => {
-              setActiveTab({name: 'map', states: tabStates});
+              setAddTabActive(!addTabActive);
             }}
           >
             <TabElement 
               label={<ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />}
               content={<AddJamScreen />}
-              active={tabStates.add}
+              active={addTabActive}
             />
           </TouchableOpacity>
 
-          <TabElement 
-            label={<ClearIcon name="user" size={GlobalStyles.footer.icon.size} />}
-            content={<ProfileScreen />}
-            active={tabStates.profile}
-          />
+          <TouchableOpacity 
+            onPress={() => {
+              setProfileTabActive(!profileTabActive);
+            }}
+          >
+            <TabElement 
+              label={<ClearIcon name="user" size={GlobalStyles.footer.icon.size} />}
+              content={<ProfileScreen />}
+              active={profileTabActive}
+            />
+          </TouchableOpacity>
         </View>
       </View>
     </ViewportContainer>
