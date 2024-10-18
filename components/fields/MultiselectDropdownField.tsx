@@ -46,7 +46,7 @@ const MultiselectDropdownField = () => {
   const [selectedItems, setSelectedItems] = useState([]);
 
   return (
-    <View style={styles.field}>
+    <View style={styles.container}>
       <SectionedMultiSelect
         items={items}
         uniqueKey="id"
@@ -70,7 +70,13 @@ const MultiselectDropdownField = () => {
 }
 
 const styles = StyleSheet.create({
-  field: GlobalStyles.field,
+  container: {
+    ...GlobalStyles.field,
+    ...{
+      flexDirection: 'row',
+      justifyContent: 'center',
+    }
+  },
   modal: {
     modalWrapper: {
       marginTop: StatusBar.currentHeight + GlobalStyles.header.height,
