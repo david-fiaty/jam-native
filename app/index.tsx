@@ -8,12 +8,20 @@ import ViewportContainer from '@/components/base/ViewportContainer';
 import MapScreen from '@/components/screens/MapScreen';
 import ProfileScreen from '@/components/screens/ProfileScreen';
 
+type TabStatesProps = {
+  states: object,
+};
+
 const Index = () => {
-  const [tabStates, setTabStates] = useState({
-    map: false,
-    add: false,
-    profile: false,
-  });
+  const [tabStates, setTabStates] = useState({});
+  const handleTabPress = ({states}: TabStatesProps) => {
+    setTabStates({
+      tab1: false,
+      tab2: false,
+      tab3: false,
+      [tabName]: true,
+    });
+  };
   
   return (  
     <ViewportContainer>
