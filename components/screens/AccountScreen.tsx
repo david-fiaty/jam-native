@@ -13,6 +13,7 @@ const AccountScreen = ({menuItem}: Props) => {
     <ModalView 
       title={<TextBlock>{menuItem.label}</TextBlock>} 
       animation="fade"
+      showBackButton={true}
       label={<MenuItem label={menuItem.label} />}
       content={
         <ScrollContainer>
