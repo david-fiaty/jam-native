@@ -7,6 +7,7 @@ import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ViewportContainer from '@/components/base/ViewportContainer';
 import MapScreen from '@/components/screens/MapScreen';
 import ProfileScreen from '@/components/screens/ProfileScreen';
+import JamsScreen from '@/components/screens/JamsScreen';
 
 const Index = () => {
   const [mapTabActive, setMapTabActive] = useState(false);
@@ -41,8 +42,8 @@ const Index = () => {
             <ClearIcon name="user" size={GlobalStyles.footer.icon.size} />
           </TouchableOpacity>
         </View>
-
         <View style={styles.modal}>
+          {!mapTabActive && !addTabActive && !profileTabActive && (<JamsScreen />)}
           {mapTabActive && (<MapScreen />)}
           {addTabActive && (<AddJamScreen />)}
           {profileTabActive && (<ProfileScreen />)}
