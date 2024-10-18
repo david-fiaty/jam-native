@@ -12,7 +12,7 @@ const TestScreen = () => {
   const slideIn = () => {
     Animated.timing(slideAnim, {
       toValue: -height, 
-      duration: 500, 
+      duration: 300, 
       useNativeDriver: true, 
     }).start();
   };
@@ -20,7 +20,7 @@ const TestScreen = () => {
   const slideOut = () => {
     Animated.timing(slideAnim, {
       toValue: height,
-      duration: 500,
+      duration: 300,
       useNativeDriver: true,
     }).start();
   };
@@ -28,7 +28,6 @@ const TestScreen = () => {
   return (
     <View style={styles.container}>
       <Button title="Slide Up" onPress={slideIn} />
-      <Button title="Slide Down" onPress={slideOut} />
 
       <Animated.View
         style={[
@@ -37,7 +36,7 @@ const TestScreen = () => {
         ]}
       >
         <View style={styles.content}>
-          <Button title="Content Inside" onPress={() => {}} />
+          <Button title="Slide Down" onPress={slideOut} />
         </View>
       </Animated.View>
     </View>
