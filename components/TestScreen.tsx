@@ -1,56 +1,66 @@
-import { useState } from 'react';
-import { View, Text, Button, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
-import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-import ClearIcon from './icons/ClearIcon';
+import React, { useRef, useEffect } from 'react';
+import { View, Button, Animated, StyleSheet, Dimensions } from 'react-native';
 
-const TestModal = () => {
-  const [isModalVisible, setModalVisible] = useState(false);
+const { height } = Dimensions.get('window'); // Get the height of the screen
+
+const TestScreen = () => {
+  const slideAnim = useRef(new Animated.Value(height)).current; // Initial position is off-screen (bottom)
+
+  // Function to start the animation
+  const slideIn = () => {
+    Animated.timing(slideAnim, {
+      toValue: 0, // Slide to top of the screen (or the original position)
+      duration: 500, // Animation duration in ms
+      useNativeDriver: true, // Use native driver for better performance
+    }).start();
+  };
+
+  // Function to hide the view again
+  const slideOut = () => {
+    Animated.timing(slideAnim, {
+      toValue: height, // Slide out to bottom of the screen
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
 
   return (
-    <>
-      <View style={styles.container}>
-        <TouchableOpacity onPress={() => setModalVisible(!isModalVisible)}>
-          <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
-        </TouchableOpacity>
-      </View>
+    <View style={styles.container}>
+      <Button title="Slide Up" onPress={slideIn} />
+      <Button title="Slide Down" onPress={slideOut} />
 
-      {isModalVisible && (
-        <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
-          <View style={styles.modal}>
-            <TouchableWithoutFeedback>
-              <View style={styles.modalContent}>
-                <Text>This is a custom modal!</Text>
-                <Button title="Close" onPress={() => setModalVisible(false)} />
-              </View>
-            </TouchableWithoutFeedback>
-          </View>
-        </TouchableWithoutFeedback>
-      )}
-    </>
+      <Animated.View
+        style={[
+          styles.animatedView,
+          { transform: [{ translateY: slideAnim }] }, // Bind translateY to the animated value
+        ]}
+      >
+        <View style={styles.content}>
+          <Button title="Content Inside" onPress={() => {}} />
+        </View>
+      </Animated.View>
+    </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'black',
   },
-  modal: {
+  animatedView: {
     position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 100,
-    backgroundColor: 'rgba(0,0,0,0.5)', // This creates the backdrop effect
+    bottom: 0,
+    width: '100%',
+    height: 300, // Adjust the height as needed
+    backgroundColor: 'lightblue',
+  },
+  content: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  modalContent: {
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 10,
-  },
 });
 
-export default TestModal;
+export default TestScreen;
