@@ -9,7 +9,11 @@ import MapScreen from '@/components/screens/MapScreen';
 import ProfileScreen from '@/components/screens/ProfileScreen';
 
 const Index = () => {
-  const [isTabActive, setTabActive] = useState(false);
+  const [tabStates, setTabStates] = useState({
+    map: false,
+    add: false,
+    profile: false,
+  });
   
   return (  
     <ViewportContainer>
@@ -18,14 +22,17 @@ const Index = () => {
           <TabElement 
             label={<ClearIcon name="location" size={GlobalStyles.footer.icon.size} />}
             content={<MapScreen />}
+            active={tabStates.map}
           />
           <TabElement 
             label={<ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />}
             content={<AddJamScreen />}
+            active={tabStates.add}
           />
           <TabElement 
             label={<ClearIcon name="user" size={GlobalStyles.footer.icon.size} />}
             content={<ProfileScreen />}
+            active={tabStates.profile}
           />
         </View>
       </View>
