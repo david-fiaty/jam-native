@@ -6,10 +6,13 @@ import DeviceManager from '@/classes/DeviceManager';
 type Props = {
   label: JSX.Element,
   content: JSX.Element,
+  active: boolean,
 }
 
-const TabElement = ({label, content}: Props) => {
+const TabElement = ({label, content, active}: Props) => {
   const [isTabActive, setTabActive] = useState(false);
+
+  console.log(active);
 
   return (
     <>
