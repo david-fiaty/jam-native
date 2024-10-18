@@ -10,7 +10,6 @@ import TextareaField from '../fields/TextareaField';
 import CheckboxListField from '../fields/CheckboxListField';
 import ApiClient from '@/classes/ApiClient';
 import LocationPickerField from '../fields/LocationPickerField';
-import MultiselectDropdownField from '../fields/MultiselectDropdownField';
 import SelectListField from '../fields/SelectListField';
 
 const JamForm = () => {
@@ -68,8 +67,6 @@ const JamForm = () => {
           { label: "Private", value: 0 },
         ]} 
       />
-
-      { /* <MultiselectDropdownField /> */ }
       <View style={styles.buttonContainer}>
         <Button 
           title="Post" 

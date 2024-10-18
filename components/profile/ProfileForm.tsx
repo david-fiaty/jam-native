@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import InputTextField from '../fields/InputTextField';
-import MultiselectDropdownField from '../fields/MultiselectDropdownField';
+import SelectListField from '../fields/SelectListField';
 import LocationPickerField from '../fields/LocationPickerField';
 import TextBlock from '../base/TextBlock';
 
@@ -28,7 +28,20 @@ const ProfileForm = () => {
         title={<TextBlock>Select your location</TextBlock>}
         label="Current location"
       />
-      <MultiselectDropdownField />
+      <SelectListField 
+        placeholder="Indutries"
+        data={[
+          { label: "Public", value: 1 },
+          { label: "Private", value: 0 },
+        ]} 
+      />
+      <SelectListField 
+        placeholder="Sub industries"
+        data={[
+          { label: "Public", value: 1 },
+          { label: "Private", value: 0 },
+        ]} 
+      />
       <InputTextField
         style={GlobalStyles.field}
         placeholder="Creative organisation"
