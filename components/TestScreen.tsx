@@ -51,7 +51,8 @@ const styles = StyleSheet.create({
   },
   animatedView: {
     position: 'absolute',
-    width: '100%',
+    width: DeviceManager.window.width,
+    left: 0,
     backgroundColor: 'lightblue',
     top: DeviceManager.window.height,
     height: DeviceManager.modal.height - GlobalStyles.header.height + GlobalStyles.space.base,
