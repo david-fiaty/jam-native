@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { View, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import DeviceManager from '@/classes/DeviceManager';
+import TextBlock from './TextBlock';
 
 type Props = {
   label: JSX.Element,
@@ -12,56 +13,41 @@ const TabElement = ({label, content}: Props) => {
   const [isModalVisible, setModalVisible] = useState(false);
 
   return (
-    <View style={styles.tab}>
-      <View style={styles.container}>
-        <TouchableOpacity onPress={() => setModalVisible(!isModalVisible)}>
-          <View style={styles.label}>
-            {label}
+    <>
+      <TouchableOpacity onPress={() => setModalVisible(!isModalVisible)}>
+        <View style={styles.label}>
+          {label}
+        </View>
+      </TouchableOpacity>
+  
+      {isModalVisible && (
+        <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+          <View style={styles.modal}>
+            <TouchableWithoutFeedback>
+              <TextBlock>hhh</TextBlock>
+            </TouchableWithoutFeedback>
           </View>
-        </TouchableOpacity>
-    
-        {isModalVisible && (
-          <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
-            <View style={styles.modal}>
-              <TouchableWithoutFeedback>
-                {content}
-              </TouchableWithoutFeedback>
-            </View>
-          </TouchableWithoutFeedback>
-        )}
-      </View>
-    </View>
+        </TouchableWithoutFeedback>
+      )}
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  tab: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: 'green',
-    paddingVertical: GlobalStyles.space.base,
-  },
-  container: {
-    backgroundColor: 'red',
-    width: '100%',
-    height: '100%',
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
   label: {
-    top: 0,
-    left: 0,
+    paddingHorizontal: GlobalStyles.space.container*2,
+    //top: 0,
+    //left: 0,
   }, 
   modal: {
     position: 'absolute',
-    top: 0,
     left: 0,
     right: 0,
+    bottom: GlobalStyles.footer.height,
     backgroundColor: 'rgba(0,0,0,0.5)',
-    justifyContent: 'center',
     alignItems: 'center',
-    height: DeviceManager.modal.height - GlobalStyles.header.height,
+    width: '100%',
+    height: DeviceManager.modal.height - GlobalStyles.header.height + GlobalStyles.space.base,
   },
   modalContent: {
     backgroundColor: 'white',
