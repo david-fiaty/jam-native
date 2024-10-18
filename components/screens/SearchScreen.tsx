@@ -2,7 +2,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import ModalView from '@/components/base/ModalView';
 import ClearIcon from '../icons/ClearIcon';
 import { GlobalStyles } from '@/constants/GlobalStyles';
-//import TestScreen from '../TestScreen';
+import TestScreen from '../TestScreen';
 
 const SearchScreen = () => {
   return (
@@ -12,7 +12,7 @@ const SearchScreen = () => {
         animation="slide"
         label={<ClearIcon name="search" size={styles.icon.size} />}
         content={
-          <Text>SEARCH</Text>
+          <TestScreen />
         }
       />   
     </View>
