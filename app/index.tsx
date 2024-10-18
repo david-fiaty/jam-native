@@ -4,6 +4,8 @@ import TabElement from '@/components/base/TabElement';
 import AddJamScreen from '@/components/screens/AddJamScreen';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ViewportContainer from '@/components/base/ViewportContainer';
+import MapScreen from '@/components/screens/MapScreen';
+import ProfileScreen from '@/components/screens/ProfileScreen';
 
 const Index = () => {
   return (  
@@ -12,7 +14,7 @@ const Index = () => {
         <View style={styles.tabs}>
           <TabElement 
             label={<ClearIcon name="location" size={GlobalStyles.footer.icon.size} />}
-            content={<AddJamScreen />}
+            content={<MapScreen />}
           />
           <TabElement 
             label={<ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />}
@@ -20,7 +22,7 @@ const Index = () => {
           />
           <TabElement 
             label={<ClearIcon name="user" size={GlobalStyles.footer.icon.size} />}
-            content={<AddJamScreen />}
+            content={<ProfileScreen />}
           />
         </View>
       </View>
@@ -30,7 +32,6 @@ const Index = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'yellow',
     width: '100%',
     height: '100%',
     justifyContent: 'flex-end',
@@ -39,8 +40,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: 'blue',
     paddingVertical: GlobalStyles.space.base,
+    borderTopWidth: 1,
+    borderTopColor: Colors.primary,
   },
 });
 
