@@ -9,8 +9,6 @@ type Props = {
 }
 
 const TabElement = ({label, content, active}: Props) => {
-  console.log(Date.now(), active);
-
   return (
     <>
       <View style={styles.label}>
@@ -41,7 +39,7 @@ const styles = StyleSheet.create({
     bottom: GlobalStyles.footer.height,
     backgroundColor: 'rgba(0,0,0,0.5)',
     alignItems: 'center',
-    width: '100%',
+    width: DeviceManager.window.width,
     padding: GlobalStyles.space.container,
     paddingBottom: 0,
     height: DeviceManager.modal.height - GlobalStyles.header.height + GlobalStyles.space.base,
