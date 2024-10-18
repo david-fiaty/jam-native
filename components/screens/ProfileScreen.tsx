@@ -21,7 +21,7 @@ const ProfileScreen = () => {
 
 const styles = {
   container: {
-    paddingHorizontal: GlobalStyles.space.container,
+    //paddingHorizontal: GlobalStyles.space.container,
   },
 };
 
