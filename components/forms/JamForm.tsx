@@ -47,7 +47,7 @@ const JamForm = () => {
           { label: "Private", value: 0 },
         ]} 
       />
-      <MultiselectDropdownField />
+      { /* <MultiselectDropdownField /> */ }
       <View style={styles.buttonContainer}>
         <Button 
           title="Post" 
