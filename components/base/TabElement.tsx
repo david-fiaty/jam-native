@@ -6,21 +6,24 @@ import DeviceManager from '@/classes/DeviceManager';
 type Props = {
   label: JSX.Element,
   content: JSX.Element,
+  active: boolean,
 }
 
-const TabElement = ({label, content}: Props) => {
-  const [isModalVisible, setModalVisible] = useState(false);
+const TabElement = ({label, content, active}: Props) => {
+  const [isTabActive, setTabActive] = useState(false);
+
+  console.log(active);
 
   return (
     <>
-      <TouchableOpacity onPress={() => setModalVisible(!isModalVisible)}>
+      <TouchableOpacity onPress={() => setTabActive(!isTabActive)}>
         <View style={styles.label}>
           {label}
         </View>
       </TouchableOpacity>
   
-      {isModalVisible && (
-        <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+      {isTabActive && (
+        <TouchableWithoutFeedback onPress={() => setTabActive(false)}>
           <View style={styles.modal}>
             <TouchableWithoutFeedback>
               {content}
@@ -44,6 +47,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.5)',
     alignItems: 'center',
     width: '100%',
+    padding: GlobalStyles.space.container,
+    paddingBottom: 0,
     height: DeviceManager.modal.height - GlobalStyles.header.height + GlobalStyles.space.base,
   },
 });
