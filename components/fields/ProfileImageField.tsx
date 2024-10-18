@@ -40,7 +40,7 @@ const ProfileImageField = () => {
   return (
     <TouchableOpacity onPress={pickImage}>
       <View style={styles.container}>
-        <Ionicons name="person-circle" size={86} color={GlobalStyles.icon.color} />
+        <Ionicons name="person-circle" size={80} color={GlobalStyles.icon.color} />
         <TextBlock style={styles.text}>Upload a Jam user profile image</TextBlock>
         <ClearIcon name="next" size={28}/>  
       </View>
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: GlobalStyles.space.base,
     alignItems: 'center',
-    //marginBottom: GlobalStyles.space.base,
+    justifyContent: 'center',
   },
   icon: {
     ...GlobalStyles.icon,
@@ -73,12 +73,8 @@ const styles = StyleSheet.create({
   },
   preview: {
     width: '100%',
-    height: 200,
+    height: GlobalStyles.space.base*20,
     backgroundColor: Colors.tertiary,
-  },
-  image: {
-    width: 100,
-    height: 100,
   },
   text: {
     width: '50%',
