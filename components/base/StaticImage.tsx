@@ -3,7 +3,7 @@ import { Image, StyleSheet } from 'react-native';
 type Props = {
   source: string,
   width?: string | number,
-  height?: number | number,
+  height?: string | number,
   resizeMethod?: string,
   resizeMode?: string,
   style?: object,
