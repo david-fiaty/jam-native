@@ -16,6 +16,7 @@ const HeaderBar = () => {
           <JamLogo width={46} height={46} /> 
         </TouchableOpacity>
       </View>
+      <TestScreen />
       <View style={styles.right}>
       <SettingsScreen />  
         <NotificationsScreen />
