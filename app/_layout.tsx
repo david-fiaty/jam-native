@@ -43,7 +43,8 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={DefaultTheme}>
       <Stack>
-        <Stack.Screen name="index" options={{...headerOptions, ...fadeAnimationOptions }} />
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="main" options={{...headerOptions, ...fadeAnimationOptions }} />
         <Stack.Screen name="jams" options={{...headerOptions, ...fadeAnimationOptions }} />
         <Stack.Screen name="add-jam" options={{...headerOptions, ...fadeAnimationOptions }} />
         <Stack.Screen name="profile" options={{...headerOptions, ...fadeAnimationOptions }} />
