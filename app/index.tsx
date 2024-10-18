@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import ClearIcon from '@/components/icons/ClearIcon';
 import TabElement from '@/components/base/TabElement';
@@ -8,6 +9,8 @@ import MapScreen from '@/components/screens/MapScreen';
 import ProfileScreen from '@/components/screens/ProfileScreen';
 
 const Index = () => {
+  const [isTabActive, setTabActive] = useState(false);
+  
   return (  
     <ViewportContainer>
       <View style={styles.container}>
