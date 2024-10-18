@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import ClearIcon from '@/components/icons/ClearIcon';
 import TabElement from '@/components/base/TabElement';
 import AddJamScreen from '@/components/screens/AddJamScreen';
@@ -9,18 +9,33 @@ import MapScreen from '@/components/screens/MapScreen';
 import ProfileScreen from '@/components/screens/ProfileScreen';
 
 type TabStatesProps = {
+  name: string,
   states: object,
 };
 
 const Index = () => {
-  const [tabStates, setTabStates] = useState({});
-  const handleTabPress = ({states}: TabStatesProps) => {
+  const [tabStates, setTabStates] = useState({
+    map: false,
+    add: false,
+    profile: false,
+  });
+
+  const setActiveTab = ({name, states}: TabStatesProps) => {
+    for (let key in states) {
+      if (key == name) {
+        states[key] = key == name ? true : false;
+      }
+    } 
+
+    console.log(states);
+
+    /*
     setTabStates({
-      tab1: false,
-      tab2: false,
-      tab3: false,
-      [tabName]: true,
+      map: false,
+      add: false,
+      profile: false,
     });
+    */
   };
   
   return (  
@@ -32,11 +47,19 @@ const Index = () => {
             content={<MapScreen />}
             active={tabStates.map}
           />
-          <TabElement 
-            label={<ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />}
-            content={<AddJamScreen />}
-            active={tabStates.add}
-          />
+
+          <TouchableOpacity 
+            onPress={() => {
+              setActiveTab({name: 'map', states: tabStates});
+            }}
+          >
+            <TabElement 
+              label={<ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />}
+              content={<AddJamScreen />}
+              active={tabStates.add}
+            />
+          </TouchableOpacity>
+
           <TabElement 
             label={<ClearIcon name="user" size={GlobalStyles.footer.icon.size} />}
             content={<ProfileScreen />}
