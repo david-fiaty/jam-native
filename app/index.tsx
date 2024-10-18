@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     paddingVertical: GlobalStyles.space.base,
     borderTopWidth: 1,
     borderTopColor: Colors.primary,
+    zIndex: 100,
   },
   item: {
     paddingHorizontal: GlobalStyles.space.container*2,
@@ -80,6 +81,7 @@ const styles = StyleSheet.create({
     padding: GlobalStyles.space.container,
     paddingBottom: 0,
     height: DeviceManager.modal.height - GlobalStyles.header.height + GlobalStyles.space.base,
+    zIndex: 0,
   },
 });
 
