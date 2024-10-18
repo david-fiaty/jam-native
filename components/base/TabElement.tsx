@@ -1,26 +1,22 @@
-import { useState } from 'react';
-import { View, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import DeviceManager from '@/classes/DeviceManager';
 
 type Props = {
   label: JSX.Element,
   content: JSX.Element,
+  active: boolean,
 }
 
-const TabElement = ({label, content}: Props) => {
-  const [isModalVisible, setModalVisible] = useState(false);
-
+const TabElement = ({label, content, active}: Props) => {
   return (
     <>
-      <TouchableOpacity onPress={() => setModalVisible(!isModalVisible)}>
-        <View style={styles.label}>
-          {label}
-        </View>
-      </TouchableOpacity>
-  
-      {isModalVisible && (
-        <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+      <View style={styles.label}>
+        {label}
+      </View>
+    
+      {active && (
+        <TouchableWithoutFeedback>
           <View style={styles.modal}>
             <TouchableWithoutFeedback>
               {content}
@@ -43,7 +39,9 @@ const styles = StyleSheet.create({
     bottom: GlobalStyles.footer.height,
     backgroundColor: 'rgba(0,0,0,0.5)',
     alignItems: 'center',
-    width: '100%',
+    width: DeviceManager.window.width,
+    padding: GlobalStyles.space.container,
+    paddingBottom: 0,
     height: DeviceManager.modal.height - GlobalStyles.header.height + GlobalStyles.space.base,
   },
 });
