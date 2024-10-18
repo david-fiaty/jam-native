@@ -9,7 +9,7 @@ type Props = {
 }
 
 const TabElement = ({label, content, active}: Props) => {
-  console.log(active);
+  console.log(Date.now(), active);
 
   return (
     <>
