@@ -5,6 +5,7 @@ import SettingsScreen from '../screens/SettingsScreen';
 import NotificationsScreen from '../screens/NotificationsScreen';
 import SearchScreen from '../screens/SearchScreen';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
+import TestScreen from '../TestScreen';
 
 const HeaderBar = () => {
   const router = useRouter();
@@ -16,6 +17,7 @@ const HeaderBar = () => {
           <JamLogo width={46} height={46} /> 
         </TouchableOpacity>
       </View>
+      { /* <TestScreen /> */  }
       <View style={styles.right}>
       <SettingsScreen />  
         <NotificationsScreen />
