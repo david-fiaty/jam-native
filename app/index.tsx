@@ -23,7 +23,11 @@ const Index = () => {
             setAddTabActive(false);
             setProfileTabActive(false);
           }}>
-            <ClearIcon name="location" size={GlobalStyles.footer.icon.size} />
+            <ClearIcon 
+              name="location" 
+              size={GlobalStyles.footer.icon.size} 
+              containerStyle={mapTabActive ? styles.active : {}}
+            />
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.item} onPress={() => {
@@ -31,7 +35,11 @@ const Index = () => {
             setAddTabActive(!addTabActive);
             setProfileTabActive(false);
           }}>
-            <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
+            <ClearIcon 
+              name="plus" 
+              size={GlobalStyles.footer.icon.size} 
+              containerStyle={addTabActive ? styles.active : {}}
+            />
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.item} onPress={() => {
@@ -39,7 +47,11 @@ const Index = () => {
             setAddTabActive(false);
             setProfileTabActive(!profileTabActive);
           }}>
-            <ClearIcon name="user" size={GlobalStyles.footer.icon.size} />
+            <ClearIcon 
+              name="user" 
+              size={GlobalStyles.footer.icon.size} 
+              containerStyle={profileTabActive ? styles.active : {}}
+            />
           </TouchableOpacity>
         </View>
         <View style={styles.modal}>
@@ -71,12 +83,16 @@ const styles = StyleSheet.create({
   item: {
     paddingHorizontal: GlobalStyles.space.container*2,
   },
+  active: {
+    backgroundColor: Colors.tertiary,
+    borderRadius: 4,
+  },
   modal: {
     position: 'absolute',
     left: 0,
     right: 0,
     bottom: GlobalStyles.footer.height,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: '#FFFFFF',
     alignItems: 'center',
     width: '100%',
     padding: GlobalStyles.space.container,
