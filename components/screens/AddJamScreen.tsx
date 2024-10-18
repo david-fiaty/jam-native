@@ -1,11 +1,11 @@
 import { View } from 'react-native';
 import JamForm from '../forms/JamForm';
-import ScrollContainer from '../base/ScrollContainer';
-import { GlobalStyles } from '@/constants/GlobalStyles';
+import BackButton from '../navigation/BackButton';
 
 const AddJamScreen = () => {
   return (
     <View style={styles.container}>
+      <BackButton title="Add new Jam" />
       <JamForm />
     </View>
   );

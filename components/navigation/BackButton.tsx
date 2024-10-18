@@ -12,7 +12,7 @@ const BackButton = ({title, onPress}: Props) => {
   const ButtonView = () => {
     return (        
       <View style={styles.container}>
-        <ClearIcon name="previous" />
+        <ClearIcon name="previous" containerStyle={styles.icon} size={24} />
         <TextBlock style={styles.text}>{title}</TextBlock>
       </View>
     );
@@ -34,9 +34,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: GlobalStyles.space.base*1.5,
+    gap: GlobalStyles.space.base/2,
   },
   text: {
     fontWeight: 'bold',
+  },
+  icon: {
+    width: 'auto',
+    height: 'auto',
   },
 });
 
