@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { View, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import DeviceManager from '@/classes/DeviceManager';
-
+import TextBlock from './TextBlock';
 
 type Props = {
   label: JSX.Element,
@@ -14,17 +14,17 @@ const TabElement = ({label, content}: Props) => {
 
   return (
     <>
-      <View style={styles.label}>
-        <TouchableOpacity onPress={() => setModalVisible(!isModalVisible)}>
+      <TouchableOpacity onPress={() => setModalVisible(!isModalVisible)}>
+        <View style={styles.label}>
           {label}
-        </TouchableOpacity>
-      </View>
-
+        </View>
+      </TouchableOpacity>
+  
       {isModalVisible && (
         <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
           <View style={styles.modal}>
             <TouchableWithoutFeedback>
-              {content}
+              <TextBlock>hhh</TextBlock>
             </TouchableWithoutFeedback>
           </View>
         </TouchableWithoutFeedback>
@@ -35,20 +35,19 @@ const TabElement = ({label, content}: Props) => {
 
 const styles = StyleSheet.create({
   label: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'black',
-    height: '100%',
-  },
+    paddingHorizontal: GlobalStyles.space.container*2,
+    //top: 0,
+    //left: 0,
+  }, 
   modal: {
     position: 'absolute',
-    bottom: GlobalStyles.footer.height,
     left: 0,
     right: 0,
-    backgroundColor: 'rgba(0,0,0,0.5)', // This creates the backdrop effect
-    justifyContent: 'center',
+    bottom: GlobalStyles.footer.height,
+    backgroundColor: 'rgba(0,0,0,0.5)',
     alignItems: 'center',
-    height: DeviceManager.modal.height - GlobalStyles.header.height,
+    width: '100%',
+    height: DeviceManager.modal.height - GlobalStyles.header.height + GlobalStyles.space.base,
   },
   modalContent: {
     backgroundColor: 'white',
