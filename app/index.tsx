@@ -26,16 +26,6 @@ const Index = () => {
         states[key] = key == name ? true : false;
       }
     } 
-
-    console.log(states);
-
-    /*
-    setTabStates({
-      map: false,
-      add: false,
-      profile: false,
-    });
-    */
   };
   
   return (  
