@@ -10,8 +10,8 @@ import TextareaField from '../fields/TextareaField';
 import CheckboxListField from '../fields/CheckboxListField';
 import ApiClient from '@/classes/ApiClient';
 import LocationPickerField from '../fields/LocationPickerField';
-import MultiselectDropdownField from '../fields/MultiselectDropdownField';
 import SelectListField from '../fields/SelectListField';
+import IndustriesData from '@/constants/IndustriesData';
 
 const JamForm = () => {
   const jammers = ApiClient.get('jammers');
@@ -47,7 +47,21 @@ const JamForm = () => {
           { label: "Private", value: 0 },
         ]} 
       />
-      <MultiselectDropdownField />
+      <SelectListField 
+        placeholder="Industries"
+        data={IndustriesData} 
+      />
+      <SelectListField 
+        placeholder="Sub industries"
+        data={IndustriesData} 
+      />
+      <SelectListField 
+        placeholder="Creative organization"
+        data={[
+          { label: "Public", value: 1 },
+          { label: "Private", value: 0 },
+        ]} 
+      />
       <View style={styles.buttonContainer}>
         <Button 
           title="Post" 

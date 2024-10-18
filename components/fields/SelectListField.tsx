@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
     width: '100%',
+    flexDirection: 'row',
   },
   field: {
     ...GlobalStyles.field,

@@ -53,8 +53,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.tertiary,
     borderRadius: 8,
     borderColor: Colors.tertiary,
-    width: GlobalStyles.space.base*10,
-    height: GlobalStyles.space.base*10,
+    width: GlobalStyles.space.base*10.3,
+    height: GlobalStyles.space.base*10.3,
   },
   image: {
     borderRadius: GlobalStyles.space.base,

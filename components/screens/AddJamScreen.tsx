@@ -1,12 +1,18 @@
+import { useRouter } from 'expo-router';
 import { View } from 'react-native';
 import JamForm from '../forms/JamForm';
+import BackButton from '../navigation/BackButton';
 import ScrollContainer from '../base/ScrollContainer';
-import { GlobalStyles } from '@/constants/GlobalStyles';
 
 const AddJamScreen = () => {
+  const router = useRouter();
+
   return (
     <View style={styles.container}>
+      <BackButton title="Add new Jam" onPress={() => router.replace('/') } />
+      <ScrollContainer>
       <JamForm />
+      </ScrollContainer>
     </View>
   );
 };
