@@ -16,7 +16,7 @@ const LoginForm = () => {
         <ContinueButton onPress={() => router.push('/login')} />
         <View style={styles.signup}>
           <TextBlock>Don't have an account? Sign Up</TextBlock>
-          <SkipButton onPress={() => router.push('/jams')} />
+          <SkipButton onPress={() => router.push('/main')} />
         </View>
       </View>
     </View>
