@@ -67,8 +67,6 @@ const styles = StyleSheet.create({
     height: DeviceManager.modal.height - GlobalStyles.space.container*2,
     marginTop: 'auto',
     marginBottom: GlobalStyles.footer.height,
-    //backgroundColor: Colors.background,
-    backgroundColor: 'black',
   },
   view: {
     width: '100%',
@@ -77,10 +75,10 @@ const styles = StyleSheet.create({
     paddingTop: GlobalStyles.space.base,
     paddingBottom: GlobalStyles.footer.height,
     paddingHorizontal: GlobalStyles.space.container,
-    backgroundColor: 'yellow',
+    backgroundColor: '#FFFFFF',
   },
   active: {
-    backgroundColor: 'orange',
+    opacity: 0.5,
   },
 });
 
