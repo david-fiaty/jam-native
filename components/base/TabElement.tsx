@@ -49,11 +49,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    bottom: 0,
+    bottom: GlobalStyles.footer.height,
     backgroundColor: 'rgba(0,0,0,0.5)',
     alignItems: 'center',
     width: '100%',
-    height: DeviceManager.modal.height - GlobalStyles.header.height,
+    height: DeviceManager.modal.height - GlobalStyles.header.height + GlobalStyles.space.base,
   },
   modalContent: {
     backgroundColor: 'white',
