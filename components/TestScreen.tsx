@@ -1,14 +1,17 @@
 import React, { useRef, useEffect } from 'react';
-import { View, Button, Animated, StyleSheet, Dimensions } from 'react-native';
+import { View, Button, Animated, StyleSheet } from 'react-native';
+import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+import DeviceManager from '@/classes/DeviceManager';
 
-const { height } = Dimensions.get('window'); 
+
 
 const TestScreen = () => {
+  const { height } = DeviceManager.window; 
   const slideAnim = useRef(new Animated.Value(height)).current; 
-
+  
   const slideIn = () => {
     Animated.timing(slideAnim, {
-      toValue: 0, 
+      toValue: -height, 
       duration: 500, 
       useNativeDriver: true, 
     }).start();
@@ -43,17 +46,16 @@ const TestScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
   },
   animatedView: {
     position: 'absolute',
-    bottom: 0,
     width: '100%',
-    height: 300, // Adjust the height as needed
     backgroundColor: 'lightblue',
+    top: DeviceManager.window.height,
+    height: DeviceManager.modal.height - GlobalStyles.header.height + GlobalStyles.space.base,
   },
   content: {
     flex: 1,
