@@ -8,12 +8,30 @@ import ViewportContainer from '@/components/base/ViewportContainer';
 import MapScreen from '@/components/screens/MapScreen';
 import ProfileScreen from '@/components/screens/ProfileScreen';
 import JamsScreen from '@/components/screens/JamsScreen';
+import Slideshow from '@/components/slideshow/Slideshow';
+import BottomLinks from '@/components/navigation/BottomLinks';
+import JamLogo from '@/components/images/JamLogo';
+import LoginSignupButton from '@/components/buttons/LoginSignupButton';
+import FullScreenView from '@/components/base/FullScreenView';
 
 const Index = () => {
   const [mapTabActive, setMapTabActive] = useState(false);
   const [addTabActive, setAddTabActive] = useState(false);
   const [profileTabActive, setProfileTabActive] = useState(false);
   
+  const WelcomeScreen = () => {
+    return (
+      <View style={styles.container}>
+        <FullScreenView>
+          <JamLogo width={110} height={110} />    
+          <Slideshow />
+          <LoginSignupButton />
+          <BottomLinks />
+        </FullScreenView>
+      </View>
+    );
+  };
+
   return (  
     <ViewportContainer>
       <View style={styles.container}>
@@ -55,6 +73,7 @@ const Index = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.modal}>
+          <WelcomeScreen />
           {!mapTabActive && !addTabActive && !profileTabActive && (<JamsScreen />)}
           {mapTabActive && (<MapScreen />)}
           {addTabActive && (<AddJamScreen />)}
