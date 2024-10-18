@@ -35,6 +35,7 @@ const TabElement = ({label, content}: Props) => {
 
 const styles = StyleSheet.create({
   label: {
+    paddingHorizontal: GlobalStyles.space.container*2,
     //top: 0,
     //left: 0,
   }, 
