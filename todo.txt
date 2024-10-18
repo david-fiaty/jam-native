@@ -48,7 +48,7 @@ Email verification
 Twilio => SMS
 
 
-
+{!mapTabActive && !addTabActive && !profileTabActive && (<JamsScreen />)}
 
         onLayout={event => {
           console.log(event.nativeEvent.layout);
