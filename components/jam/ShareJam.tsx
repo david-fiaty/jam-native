@@ -10,6 +10,7 @@ const ShareJam = () => {
       <ModalView 
         title="Share Jam" 
         animation="slide"
+        showBackButton={true}
         showBorder={true}
         label={<SecondaryIcon name="share" />}
         content={

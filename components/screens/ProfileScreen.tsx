@@ -4,7 +4,6 @@ import ProfileImage from '@/components/profile/ProfileImage';
 import ProfileJams from '@/components/profile/ProfileJams';
 import ProfileProjects from '@/components/profile/ProfileProjects';
 import ScrollContainer from '../base/ScrollContainer';
-import { GlobalStyles } from '@/constants/GlobalStyles';
 
 const ProfileScreen = () => {
   return (
@@ -20,9 +19,7 @@ const ProfileScreen = () => {
 };
 
 const styles = {
-  container: {
-    //paddingHorizontal: GlobalStyles.space.container,
-  },
+  container: {},
 };
 
 export default ProfileScreen;

@@ -10,9 +10,11 @@ type Props = {
   content: JSX.Element,
   animation?: string,
   showBorder?: boolean,
+  viewStyle?: object,
+  showBackButton?: boolean, 
 };
 
-const ModalView = ({label, title, content, animation, showBorder}: Props) => {
+const ModalView = ({label, title, content, animation, showBorder, viewStyle, showBackButton}: Props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const animationType = animation ? animation : 'slide';
   const borderStyle = showBorder === true ? borderVisible : borderHidden;
@@ -29,8 +31,8 @@ const ModalView = ({label, title, content, animation, showBorder}: Props) => {
         <TouchableWithoutFeedback onPress={() => setModalVisible(!modalVisible)}>
           <View style={styles.container}>
             <TouchableWithoutFeedback>
-              <View style={styles.view}>
-                <BackButton title={title} onPress={() => setModalVisible(!modalVisible)} />
+              <View style={[styles.view, viewStyle]}>
+                {showBackButton && <BackButton title={title} onPress={() => setModalVisible(!modalVisible)} />}
                 <View style={borderStyle}>
                   {content}
                 </View>

@@ -19,6 +19,7 @@ const CheckboxListField = ({label, title, data}: Props) => {
       title={title} 
       animation="slide"
       label={label}
+      showBackButton={true}
       content={
         <ScrollContainer>
           <InputTextField placeholder="Search users" />

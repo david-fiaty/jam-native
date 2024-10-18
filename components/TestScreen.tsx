@@ -1,67 +1,190 @@
-import React, { useRef, useEffect } from 'react';
-import { View, Button, Animated, StyleSheet } from 'react-native';
-import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-import DeviceManager from '@/classes/DeviceManager';
-
-
+import React from "react";
+import { View, FlatList, TouchableOpacity  } from "react-native";
+import { Tab, TabView } from "@rneui/themed";
+import { GlobalStyles, Colors } from "@/constants/GlobalStyles";
+import { StaticImage } from './base/StaticImage';
+import ApiClient from '@/classes/ApiClient';
 
 const TestScreen = () => {
-  const { height } = DeviceManager.window; 
-  const slideAnim = useRef(new Animated.Value(height)).current; 
-  
-  const slideIn = () => {
-    Animated.timing(slideAnim, {
-      toValue: -height, 
-      duration: 300, 
-      useNativeDriver: true, 
-    }).start();
-  };
-
-  const slideOut = () => {
-    Animated.timing(slideAnim, {
-      toValue: height,
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
-  };
+  const [index, setIndex] = React.useState(0);
+  const jamsData = ApiClient.get('jams');
+  const projectsData = ApiClient.get('projects');
 
   return (
     <View style={styles.container}>
-      <Button title="Slide Up" onPress={slideIn} />
-
-      <Animated.View
-        style={[
-          styles.animatedView,
-          { transform: [{ translateY: slideAnim }] }, 
-        ]}
+      <Tab
+        value={index}
+        dense={true}
+        onChange={(e) => setIndex(e)}
+        indicatorStyle={{
+          backgroundColor: Colors.primary,
+          height: 1,
+        }}
       >
-        <View style={styles.content}>
-          <Button title="Slide Down" onPress={slideOut} />
-        </View>
-      </Animated.View>
+        <Tab.Item
+          title="All"
+          titleStyle={styles.title}
+          buttonStyle={styles.button}
+        />
+        <Tab.Item
+          title="Calls"
+          titleStyle={styles.title}
+          buttonStyle={styles.button}
+        />
+        <Tab.Item
+          title="Jams"
+          titleStyle={styles.title}
+          buttonStyle={styles.button}
+        />
+        <Tab.Item
+          title="Projects"
+          titleStyle={styles.title}
+          buttonStyle={styles.button}
+        />
+      
+      </Tab>
+
+      <TabView 
+        value={index} 
+        onChange={setIndex} 
+        animationType="timing" 
+        disableTransition={true}
+      >
+        <TabView.Item style={styles.tab}>
+          <FlatList 
+            data={jamsData} 
+            numColumns={3}
+            contentContainerStyle={{gap: GlobalStyles.space.base}}
+            columnWrapperStyle={{gap: GlobalStyles.space.base}}
+            scrollEnabled={false}
+            renderItem={({item, index}) => {
+              return (
+                <TouchableOpacity>
+                  <View style={styles.item}>
+                    <StaticImage 
+                      source={item.image} 
+                      width="100%"
+                      height="100%"
+                      resizeMode="cover"
+                      style={styles.image}
+                    />
+                  </View>
+                </TouchableOpacity>
+              );
+            }}
+          />
+        </TabView.Item>
+
+        <TabView.Item style={styles.tab}>
+          <FlatList 
+            data={projectsData} 
+            numColumns={3}
+            contentContainerStyle={{gap: GlobalStyles.space.base}}
+            columnWrapperStyle={{gap: GlobalStyles.space.base}}
+            scrollEnabled={false}
+            renderItem={({item, index}) => {
+              return (
+                <TouchableOpacity>
+                  <View style={styles.item}>
+                    <StaticImage 
+                      source={item.image} 
+                      width="100%"
+                      height="100%"
+                      resizeMode="cover"
+                      style={styles.image}
+                    />
+                  </View>
+                </TouchableOpacity>
+              );
+            }}
+          />
+        </TabView.Item>
+
+        <TabView.Item style={styles.tab}>
+          <FlatList 
+            data={jamsData} 
+            numColumns={3}
+            contentContainerStyle={{gap: GlobalStyles.space.base}}
+            columnWrapperStyle={{gap: GlobalStyles.space.base}}
+            scrollEnabled={false}
+            renderItem={({item, index}) => {
+              return (
+                <TouchableOpacity>
+                  <View style={styles.item}>
+                    <StaticImage 
+                      source={item.image} 
+                      width="100%"
+                      height="100%"
+                      resizeMode="cover"
+                      style={styles.image}
+                    />
+                  </View>
+                </TouchableOpacity>
+              );
+            }}
+          />
+        </TabView.Item>
+
+
+        <TabView.Item style={styles.tab}>
+          <FlatList 
+            data={projectsData} 
+            numColumns={3}
+            contentContainerStyle={{gap: GlobalStyles.space.base}}
+            columnWrapperStyle={{gap: GlobalStyles.space.base}}
+            scrollEnabled={false}
+            renderItem={({item, index}) => {
+              return (
+                <TouchableOpacity>
+                  <View style={styles.item}>
+                    <StaticImage 
+                      source={item.image} 
+                      width="100%"
+                      height="100%"
+                      resizeMode="cover"
+                      style={styles.image}
+                    />
+                  </View>
+                </TouchableOpacity>
+              );
+            }}
+          />
+        </TabView.Item>
+
+      </TabView>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
+    flexDirection: 'column',
+    height: '100%',
   },
-  animatedView: {
-    position: 'absolute',
-    width: DeviceManager.window.width,
-    left: 0,
-    backgroundColor: 'lightblue',
-    top: DeviceManager.window.height,
-    height: DeviceManager.modal.height - GlobalStyles.header.height + GlobalStyles.space.base,
+  tab: {
+    width: '100%',
+    height: '100%',
+    padding: GlobalStyles.space.container,
   },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  button: {
+    padding: 0,
+    margin: 0,
+    fontWeight: 'normal',
+    fontSize: 10,
   },
-});
+  title: {
+    ...GlobalStyles.text,
+  },
+  item: {
+    backgroundColor: Colors.tertiary,
+    borderRadius: 8,
+    borderColor: Colors.tertiary,
+    width: GlobalStyles.space.base*10.3,
+    height: GlobalStyles.space.base*10.3,
+  },
+  image: {
+    borderRadius: GlobalStyles.space.base,
+  },
+};
 
 export default TestScreen;
