@@ -44,6 +44,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.5)',
     alignItems: 'center',
     width: '100%',
+    padding: GlobalStyles.space.container,
+    paddingBottom: 0,
     height: DeviceManager.modal.height - GlobalStyles.header.height + GlobalStyles.space.base,
   },
 });
