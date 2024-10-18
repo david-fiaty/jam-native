@@ -22,33 +22,24 @@ const Index = () => {
               setMapTabActive(!mapTabActive);
             }}
           >
-            <TabElement 
-              label={<ClearIcon name="location" size={GlobalStyles.footer.icon.size} />}
-              content={<MapScreen />}
-              active={mapTabActive}
-            />
+            <ClearIcon name="location" size={GlobalStyles.footer.icon.size} />
+            <MapScreen />
           </TouchableOpacity>
           <TouchableOpacity 
             onPress={() => {
               setAddTabActive(!addTabActive);
             }}
           >
-            <TabElement 
-              label={<ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />}
-              content={<AddJamScreen />}
-              active={addTabActive}
-            />
+            <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
+            <AddJamScreen />
           </TouchableOpacity>
           <TouchableOpacity 
             onPress={() => {
               setProfileTabActive(!profileTabActive);
             }}
           >
-            <TabElement 
-              label={<ClearIcon name="user" size={GlobalStyles.footer.icon.size} />}
-              content={<ProfileScreen />}
-              active={profileTabActive}
-            />
+            <ClearIcon name="user" size={GlobalStyles.footer.icon.size} />
+            <ProfileScreen />
           </TouchableOpacity>
         </View>
       </View>
