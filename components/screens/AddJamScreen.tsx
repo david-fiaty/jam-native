@@ -13,8 +13,6 @@ const AddJamScreen = () => {
 
 const styles = {
   container: {
-    //width: '100%',
-    //paddingHorizontal: GlobalStyles.space.container,
   },
 };
 

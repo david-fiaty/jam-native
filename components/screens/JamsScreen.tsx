@@ -38,7 +38,6 @@ const JamsScreen = () => {
 
 const styles = {
   container: {
-    paddingHorizontal: GlobalStyles.space.container,
   },
   item: {
     borderWidth: 1,
