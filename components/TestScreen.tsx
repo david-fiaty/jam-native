@@ -11,5 +11,6 @@ const TestScreen = () => {
       </Tab>
     </>
   );
-
 };
+
+export default TestScreen;
