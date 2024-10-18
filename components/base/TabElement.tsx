@@ -1,27 +1,22 @@
-import { useState } from 'react';
-import { View, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
-import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 import DeviceManager from '@/classes/DeviceManager';
-
 
 type Props = {
   label: JSX.Element,
   content: JSX.Element,
+  active: boolean,
 }
 
-const TabElement = ({label, content}: Props) => {
-  const [isModalVisible, setModalVisible] = useState(false);
-
+const TabElement = ({label, content, active}: Props) => {
   return (
     <>
       <View style={styles.label}>
-        <TouchableOpacity onPress={() => setModalVisible(!isModalVisible)}>
-          {label}
-        </TouchableOpacity>
+        {label}
       </View>
-
-      {isModalVisible && (
-        <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+    
+      {active && (
+        <TouchableWithoutFeedback>
           <View style={styles.modal}>
             <TouchableWithoutFeedback>
               {content}
@@ -35,25 +30,19 @@ const TabElement = ({label, content}: Props) => {
 
 const styles = StyleSheet.create({
   label: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'black',
-    height: '100%',
-  },
+    paddingHorizontal: GlobalStyles.space.container*2,
+  }, 
   modal: {
     position: 'absolute',
-    bottom: GlobalStyles.footer.height,
     left: 0,
     right: 0,
-    backgroundColor: 'rgba(0,0,0,0.5)', // This creates the backdrop effect
-    justifyContent: 'center',
+    bottom: GlobalStyles.footer.height,
+    backgroundColor: 'rgba(0,0,0,0.5)',
     alignItems: 'center',
-    height: DeviceManager.modal.height - GlobalStyles.header.height,
-  },
-  modalContent: {
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 10,
+    width: '100%',
+    padding: GlobalStyles.space.container,
+    paddingBottom: 0,
+    height: DeviceManager.modal.height - GlobalStyles.header.height + GlobalStyles.space.base,
   },
 });
 
