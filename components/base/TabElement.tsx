@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     bottom: GlobalStyles.footer.height,
     backgroundColor: 'rgba(0,0,0,0.5)',
     alignItems: 'center',
-    width: DeviceManager.window.width,
+    width: '100%',
     padding: GlobalStyles.space.container,
     paddingBottom: 0,
     height: DeviceManager.modal.height - GlobalStyles.header.height + GlobalStyles.space.base,

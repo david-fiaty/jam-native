@@ -17,42 +17,22 @@ const Index = () => {
     <ViewportContainer>
       <View style={styles.container}>
         <View style={styles.tabs}>
-          <TouchableOpacity 
-            onPress={() => {
-              setMapTabActive(!mapTabActive);
-            }}
-          >
-            <TabElement 
-              label={<ClearIcon name="location" size={GlobalStyles.footer.icon.size} />}
-              content={<MapScreen />}
-              active={mapTabActive}
-            />
+          <TouchableOpacity onPress={() => setMapTabActive(!mapTabActive)}>
+            <ClearIcon name="location" size={GlobalStyles.footer.icon.size} />
           </TouchableOpacity>
 
-          <TouchableOpacity 
-            onPress={() => {
-              setAddTabActive(!addTabActive);
-            }}
-          >
-            <TabElement 
-              label={<ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />}
-              content={<AddJamScreen />}
-              active={addTabActive}
-            />
+          <TouchableOpacity onPress={() => setAddTabActive(!addTabActive)}>
+            <ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />
           </TouchableOpacity>
 
-          <TouchableOpacity 
-            onPress={() => {
-              setProfileTabActive(!profileTabActive);
-            }}
-          >
-            <TabElement 
-              label={<ClearIcon name="user" size={GlobalStyles.footer.icon.size} />}
-              content={<ProfileScreen />}
-              active={profileTabActive}
-            />
+          <TouchableOpacity onPress={() => setProfileTabActive(!profileTabActive)}>
+            <ClearIcon name="user" size={GlobalStyles.footer.icon.size} />
           </TouchableOpacity>
         </View>
+
+        {mapTabActive && (<MapScreen />)}
+        {addTabActive && (<AddJamScreen />)}
+        {profileTabActive && (<ProfileScreen />)}
       </View>
     </ViewportContainer>
   );
