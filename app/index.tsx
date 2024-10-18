@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import ClearIcon from '@/components/icons/ClearIcon';
-import TabElement from '@/components/base/TabElement';
+import DeviceManager from '@/classes/DeviceManager';
 import AddJamScreen from '@/components/screens/AddJamScreen';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import ViewportContainer from '@/components/base/ViewportContainer';
@@ -30,9 +30,11 @@ const Index = () => {
           </TouchableOpacity>
         </View>
 
-        {mapTabActive && (<MapScreen />)}
-        {addTabActive && (<AddJamScreen />)}
-        {profileTabActive && (<ProfileScreen />)}
+        <View style={styles.modal}>
+          {mapTabActive && (<MapScreen />)}
+          {addTabActive && (<AddJamScreen />)}
+          {profileTabActive && (<ProfileScreen />)}
+        </View>
       </View>
     </ViewportContainer>
   );
@@ -51,6 +53,21 @@ const styles = StyleSheet.create({
     paddingVertical: GlobalStyles.space.base,
     borderTopWidth: 1,
     borderTopColor: Colors.primary,
+  },
+  item: {
+    paddingHorizontal: GlobalStyles.space.container*2,
+  },
+  modal: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: GlobalStyles.footer.height,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    alignItems: 'center',
+    width: '100%',
+    padding: GlobalStyles.space.container,
+    paddingBottom: 0,
+    height: DeviceManager.modal.height - GlobalStyles.header.height + GlobalStyles.space.base,
   },
 });
 
