@@ -11,6 +11,7 @@ import CheckboxListField from '../fields/CheckboxListField';
 import ApiClient from '@/classes/ApiClient';
 import LocationPickerField from '../fields/LocationPickerField';
 import SelectListField from '../fields/SelectListField';
+import IndustriesData from '@/constants/IndustriesData';
 
 const JamForm = () => {
   const jammers = ApiClient.get('jammers');
@@ -47,18 +48,12 @@ const JamForm = () => {
         ]} 
       />
       <SelectListField 
-        placeholder="Indutries"
-        data={[
-          { label: "Public", value: 1 },
-          { label: "Private", value: 0 },
-        ]} 
+        placeholder="Industries"
+        data={IndustriesData} 
       />
       <SelectListField 
         placeholder="Sub industries"
-        data={[
-          { label: "Public", value: 1 },
-          { label: "Private", value: 0 },
-        ]} 
+        data={IndustriesData} 
       />
       <SelectListField 
         placeholder="Creative organization"
