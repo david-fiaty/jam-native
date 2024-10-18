@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, useWindowDimensions } from 'react-native';
-//import { TabView, SceneMap } from 'react-native-tab-view';
+import { TabView, SceneMap } from 'react-native-pager-view';
 
 const FirstRoute = () => (
   <View style={{ flex: 1, backgroundColor: '#ff4081' }} />
@@ -15,7 +15,7 @@ const renderScene = SceneMap({
   second: SecondRoute,
 });
 
-export default function TestSceen() {
+export default function TestScreen() {
   const layout = useWindowDimensions();
 
   const [index, setIndex] = React.useState(0);
