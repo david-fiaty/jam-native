@@ -14,7 +14,7 @@ const AboutScreen = () => {
 
   return (
     <View style={styles.container}>
-      <BackButton title={data.title} onPress={() => navigation.popToTop()}/>
+      <BackButton title={data.title} onPress={() => navigation.popToTop()} />
       <TextBlock>{data.text}</TextBlock>
       <BottomLinks />
     </View>
