@@ -34,13 +34,6 @@ const TabElement = ({label, content}: Props) => {
 }
 
 const styles = StyleSheet.create({
-  tab: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: 'green',
-    paddingVertical: GlobalStyles.space.base,
-    width: DeviceManager.window.width,
-  },
   label: {
     //top: 0,
     //left: 0,
