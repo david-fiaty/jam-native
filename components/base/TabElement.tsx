@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { View, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
-import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 import DeviceManager from '@/classes/DeviceManager';
 
 type Props = {
