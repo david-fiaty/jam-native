@@ -12,7 +12,7 @@ const HeaderBar = () => {
   return (
     <View style={styles.container}>
       <View style={styles.left}>
-        <TouchableOpacity onPress={() => router.replace('/jams')}>
+        <TouchableOpacity onPress={() => router.replace('/')}>
           <JamLogo width={46} height={46} /> 
         </TouchableOpacity>
       </View>
