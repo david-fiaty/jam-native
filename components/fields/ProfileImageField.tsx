@@ -5,6 +5,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import TextBlock from '@/components/base/TextBlock';
 import { StaticImage } from '../base/StaticImage';
+import ClearIcon from '../icons/ClearIcon';
 
 type ImagePreviewProps = {
   selectedImage?: string;
@@ -39,8 +40,9 @@ const ProfileImageField = () => {
   return (
     <TouchableOpacity onPress={pickImage}>
       <View style={styles.container}>
-        <Ionicons name="add" size={GlobalStyles.icon.size} style={styles.icon} />   
-        <TextBlock>Add media</TextBlock>
+        <Ionicons name="person-circle" size={86} color={GlobalStyles.icon.color} />
+        <TextBlock style={styles.text}>Upload a Jam user profile image</TextBlock>
+        <ClearIcon name="next" size={28}/>  
       </View>
       
       {/*
@@ -57,7 +59,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     gap: GlobalStyles.space.base,
-    marginBottom: GlobalStyles.space.base,
+    alignItems: 'center',
+    //marginBottom: GlobalStyles.space.base,
   },
   icon: {
     ...GlobalStyles.icon,
@@ -76,6 +79,9 @@ const styles = StyleSheet.create({
   image: {
     width: 100,
     height: 100,
+  },
+  text: {
+    width: '50%',
   },
 });
 
