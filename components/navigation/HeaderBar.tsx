@@ -19,7 +19,7 @@ const HeaderBar = () => {
       </View>
       { /* <TestScreen /> */  }
       <View style={styles.right}>
-      <SettingsScreen />  
+        <SettingsScreen />  
         <NotificationsScreen />
         <SearchScreen />
       </View>
