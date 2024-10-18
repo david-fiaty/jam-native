@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from 'react';
-import { StyleSheet, Modal, View, TouchableWithoutFeedback, TouchableOpacity, Animated, Dimensions } from 'react-native';
+import { useState } from 'react';
+import { StyleSheet, Modal, View, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
 import BackButton from '@/components/navigation/BackButton';
 import DeviceManager from '@/classes/DeviceManager';
@@ -12,39 +12,19 @@ type Props = {
   showBorder?: boolean,
 };
 
-const { height } = Dimensions.get('window'); 
-
 const ModalView = ({label, title, content, animation, showBorder}: Props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const animationType = animation ? animation : 'slide';
   const borderStyle = showBorder === true ? borderVisible : borderHidden;
 
-  const slideAnim = useRef(new Animated.Value(height)).current;
-  const slideIn = () => {
-    Animated.timing(slideAnim, {
-      toValue: 0, 
-      duration: 500, 
-      useNativeDriver: true, 
-    }).start();
-  };
-
-  const slideOut = () => {
-    Animated.timing(slideAnim, {
-      toValue: height, 
-      duration: 500,
-      useNativeDriver: true,
-    }).start();
-  };
-
-
-
   return (
     <>
-      <Animated.View
-        style={[
-          styles.animatedView,
-          { transform: [{ translateY: slideAnim }] }, 
-        ]}
+      <Modal
+        animationType={animationType}
+        hardwareAccelerated={true}
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(!modalVisible)}
       >
         <TouchableWithoutFeedback onPress={() => setModalVisible(!modalVisible)}>
           <View style={styles.container}>
@@ -58,8 +38,7 @@ const ModalView = ({label, title, content, animation, showBorder}: Props) => {
               </TouchableWithoutFeedback>
           </View>
         </TouchableWithoutFeedback>
-      </Animated.View>
-      
+      </Modal>
       <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
         <View style={modalVisible ? styles.active : {}}>
           {label}
