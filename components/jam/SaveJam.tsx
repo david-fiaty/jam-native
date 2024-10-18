@@ -10,6 +10,7 @@ const SaveJam = () => {
       <ModalView 
         title="Jam is now saved to your Jams" 
         animation="slide"
+        showBackButton={true}
         showBorder={true}
         label={<SecondaryIcon name="save" />}
         content={

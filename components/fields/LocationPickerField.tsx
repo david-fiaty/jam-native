@@ -44,6 +44,7 @@ const LocationPickerField = ({label, title}: Props) => {
     <ModalView 
       title={title} 
       animation="slide"
+      showBackButton={true}
       label={
         <View style={styles.label}>
           <TertiaryIcon name="location" size={GlobalStyles.space.base*1.5} containerStyle={styles.icon} />

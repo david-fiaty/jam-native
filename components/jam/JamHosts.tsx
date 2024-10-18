@@ -18,6 +18,7 @@ const JamHosts = ({item, index}: Props) => {
       <ModalView 
         title="Hosts" 
         animation="slide"
+        showBackButton={true}
         showBorder={true}
         label={
           <View style={styles.label}>
