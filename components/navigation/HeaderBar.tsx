@@ -5,7 +5,6 @@ import SettingsScreen from '../screens/SettingsScreen';
 import NotificationsScreen from '../screens/NotificationsScreen';
 import SearchScreen from '../screens/SearchScreen';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
-import TestScreen from '../TestScreen';
 
 const HeaderBar = () => {
   const router = useRouter();
@@ -13,7 +12,7 @@ const HeaderBar = () => {
   return (
     <View style={styles.container}>
       <View style={styles.left}>
-        <TouchableOpacity onPress={() => router.replace('/')}>
+        <TouchableOpacity onPress={() => router.replace('/main')}>
           <JamLogo width={46} height={46} /> 
         </TouchableOpacity>
       </View>

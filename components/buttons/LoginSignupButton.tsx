@@ -15,7 +15,7 @@ const LoginSignupButton = () => {
         containerStyle={styles.container}
         labelStyle={styles.label}
       />
-      <SkipButton onPress={() => router.push('/jams')} />
+      <SkipButton onPress={() => router.push('/main')} />
     </View>
   );
 };

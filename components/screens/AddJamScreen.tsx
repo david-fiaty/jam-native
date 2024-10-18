@@ -9,7 +9,7 @@ const AddJamScreen = () => {
 
   return (
     <View style={styles.container}>
-      <BackButton title="Add new Jam" onPress={() => router.replace('/') } />
+      <BackButton title="Add new Jam" onPress={() => router.replace('/main') } />
       <ScrollContainer>
       <JamForm />
       </ScrollContainer>
