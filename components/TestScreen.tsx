@@ -1,5 +1,6 @@
 import React from "react";
 import { Tab, Text, TabView } from "@rneui/themed";
+import { GlobalStyles, Colors } from "@/constants/GlobalStyles";
 
 const TestScreen = () => {
   const [index, setIndex] = React.useState(0);
@@ -8,31 +9,34 @@ const TestScreen = () => {
     <>
       <Tab
         value={index}
+        dense={true}
         onChange={(e) => setIndex(e)}
         indicatorStyle={{
-          backgroundColor: "white",
+          backgroundColor: Colors.primary,
           height: 3,
         }}
-        variant="primary"
       >
         <Tab.Item
           title="Recent"
-          titleStyle={{ fontSize: 12 }}
-          icon={{ name: "timer", type: "ionicon", color: "white" }}
+          titleStyle={GlobalStyles.text}
         />
         <Tab.Item
           title="favorite"
-          titleStyle={{ fontSize: 12 }}
-          icon={{ name: "heart", type: "ionicon", color: "white" }}
+          titleStyle={GlobalStyles.text}
         />
         <Tab.Item
           title="cart"
-          titleStyle={{ fontSize: 12 }}
-          icon={{ name: "cart", type: "ionicon", color: "white" }}
+          titleStyle={GlobalStyles.text}
         />
       </Tab>
 
-      <TabView value={index} onChange={setIndex} animationType="spring" containerStyle={styles.content}>
+      <TabView 
+        value={index} 
+        onChange={setIndex} 
+        animationType="timing" 
+        containerStyle={styles.content}
+        disableTransition={true}
+      >
         <TabView.Item style={styles.item}>
           <Text h1>Recent</Text>
         </TabView.Item>
