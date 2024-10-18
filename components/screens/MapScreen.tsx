@@ -4,6 +4,7 @@ import { Marker } from 'react-native-maps';
 import * as Device from 'expo-device';
 import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
+import BackButton from '../navigation/BackButton';
 
 const MapScreen = () => {
   const [location, setLocation] = useState('');
