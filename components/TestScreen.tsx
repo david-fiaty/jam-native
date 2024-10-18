@@ -32,11 +32,6 @@ const TestScreen = () => {
           buttonStyle={styles.button}
         />
         <Tab.Item
-          title="Jammers"
-          titleStyle={styles.title}
-          buttonStyle={styles.button}
-        />
-        <Tab.Item
           title="Jams"
           titleStyle={styles.title}
           buttonStyle={styles.button}
@@ -133,32 +128,6 @@ const TestScreen = () => {
 
         <TabView.Item style={styles.tab}>
           <FlatList 
-            data={jamsData} 
-            numColumns={3}
-            contentContainerStyle={{gap: GlobalStyles.space.base}}
-            columnWrapperStyle={{gap: GlobalStyles.space.base}}
-            scrollEnabled={false}
-            renderItem={({item, index}) => {
-              return (
-                <TouchableOpacity>
-                  <View style={styles.item}>
-                    <StaticImage 
-                      source={item.image} 
-                      width="100%"
-                      height="100%"
-                      resizeMode="cover"
-                      style={styles.image}
-                    />
-                  </View>
-                </TouchableOpacity>
-              );
-            }}
-          />
-        </TabView.Item>
-
-
-        <TabView.Item style={styles.tab}>
-          <FlatList 
             data={projectsData} 
             numColumns={3}
             contentContainerStyle={{gap: GlobalStyles.space.base}}
@@ -198,7 +167,6 @@ const styles = {
     padding: GlobalStyles.space.container,
   },
   button: {
-    backgroundColor: 'red',
     padding: 0,
     margin: 0,
     fontWeight: 'normal',

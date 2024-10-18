@@ -18,6 +18,7 @@ const NotificationsScreen = () => {
       <ModalView 
         title="Notifications" 
         animation="slide"
+        showBackButton={true}
         label={<TextBlock style={styles.icon}>{count}+</TextBlock>}
         content={
           <FlatList 
