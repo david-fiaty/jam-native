@@ -9,18 +9,18 @@ type Props = {
 }
 
 const TabElement = ({label, content}: Props) => {
-  const [isModalVisible, setModalVisible] = useState(false);
+  const [isTabActive, setTabActive] = useState(false);
 
   return (
     <>
-      <TouchableOpacity onPress={() => setModalVisible(!isModalVisible)}>
+      <TouchableOpacity onPress={() => setTabActive(!isTabActive)}>
         <View style={styles.label}>
           {label}
         </View>
       </TouchableOpacity>
   
-      {isModalVisible && (
-        <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+      {isTabActive && (
+        <TouchableWithoutFeedback onPress={() => setTabActive(false)}>
           <View style={styles.modal}>
             <TouchableWithoutFeedback>
               {content}
