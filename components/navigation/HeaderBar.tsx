@@ -1,9 +1,6 @@
 import { View, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
 import { useRouter } from 'expo-router';
-import JamLogo from '@/components/images/JamLogo';
-import SettingsScreen from '../screens/SettingsScreen';
-import NotificationsScreen from '../screens/NotificationsScreen';
-import SearchScreen from '../screens/SearchScreen';
+import JamLogo from '@/components/image/JamLogo';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import TextBlock from '../base/TextBlock';
 
