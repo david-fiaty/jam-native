@@ -1,21 +1,23 @@
 import { StyleSheet } from 'react-native';
-import StaticIcon from '../base/IconBase';
+import IconBase from '../base/IconBase';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
 
 type Props = {
   name: string,
   size?: number, 
+  style?: object,
+  text?: string,
 };
 
-const PrimaryIcon = ({name, size}: Props) => {
-
+const PrimaryIcon = ({name, size, style, text}: Props) => {
   return (
-    <StaticIcon 
+    <IconBase 
       name={name} 
-      iconStyle={styles.iconStyle} 
+      iconStyle={[styles.iconStyle, style]} 
       containerStyle={styles.containerStyle}
       size={size} 
+      text={text}
     />
   );
 };
