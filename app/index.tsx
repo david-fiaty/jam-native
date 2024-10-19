@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { View } from 'react-native';
 import * as ExpoSplashScreen from 'expo-splash-screen';
-import * as Font from 'expo-font';
-import Entypo from '@expo/vector-icons/Entypo';
+import * as ExpoFont from 'expo-font';
 import { ThemeProvider } from '@rneui/themed';
 import BaseTheme from "@/constants/BaseTheme";
 import ScreenView from '@/components/view/ScreenView';
@@ -20,7 +19,10 @@ export default () => {
   useEffect(() => {
     async function prepare() {
       try {
-        await Font.loadAsync(Entypo.font);
+        await ExpoFont.loadAsync({
+          'BaseFont': require('../assets/fonts/SpaceMono-Regular.ttf'),
+        });
+
         await new Promise(resolve => setTimeout(resolve, 3000));
       } catch (e) {
         console.warn(e);
