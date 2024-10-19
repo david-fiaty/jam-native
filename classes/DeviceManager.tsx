@@ -1,23 +1,32 @@
-import { Dimensions, ScaledSize } from "react-native";
+import { Dimensions, ScaledSize, StatusBar } from "react-native";
 import { GlobalStyles } from "@/constants/GlobalStyles";
 
 class DeviceManager {
   screen: ScaledSize;
   window: ScaledSize;
-  modal: object;
+  modalView: object;
+  statusBar: object;
 
   constructor() {
     this.screen = Dimensions.get('screen');
     this.window = Dimensions.get('window');
-    this.modal = this.getModalSize();
+    this.modalView = this.getModalViewSize();
+    this.statusBar = this.getStatusBarSize();
   }
 
-  getModalSize() {
+  getModalViewSize() {
     return {
       width: this.window.width,
       height: this.window.height - GlobalStyles.header.height - GlobalStyles.footer.height - GlobalStyles.space.base/2,
     };
   } 
+
+  getStatusBarSize() {
+    return {
+      height: StatusBar.currentHeight,
+      width: this.window.width,
+    };
+  }
 };
 
 export default (new DeviceManager());
