@@ -3,7 +3,7 @@ import ViewportContainer from "@/components/base/ViewportContainer";
 import SplashScreen from "@/components/screen/SplashScreen";
 import BaseTheme from "@/constants/BaseTheme";
 
-const Index = () => {
+export default () => {
   return (  
     <ThemeProvider theme={BaseTheme}>
       <ViewportContainer>
@@ -12,5 +12,3 @@ const Index = () => {
     </ThemeProvider>
   );
 };
-
-export default Index;
