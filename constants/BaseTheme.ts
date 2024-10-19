@@ -7,9 +7,12 @@ export default createTheme({
   darkColors: {
     primary: 'blue',
   },
+
   components: {
     Button: {
-      raised: true,
+      titleStyle: {
+        color: 'black',
+      },
     },
   },
 });
