@@ -5,7 +5,7 @@ type Props = {
   height?: string | number,
 };
 
-const source = require('@/assets/images/jam-logo.png'); 
+const source = require('@/assets/images/base-logo.png'); 
 
 export default ({width, height}: Props) => {
   return (
