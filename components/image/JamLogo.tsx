@@ -1,4 +1,4 @@
-import { StaticImage } from '../base/StaticImage';
+import { StaticImage } from '@/components/base/StaticImage';
 
 type Props = {
   width?: string | number,
