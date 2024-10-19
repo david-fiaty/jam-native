@@ -5,6 +5,7 @@ import i18n from '@/translation/i18n';
 import TextBase from '@/components/base/TextBase';
 import ImageBase from '@/components/base/ImageBase';
 import ScreenView from '../view/ScreenView';
+import PrimaryIcon from '../icon/PrimaryIcon';
 
 const source = require('@/assets/images/logo-48.png'); 
 
@@ -26,6 +27,8 @@ export default () => {
  
       <Button title="My Button" />
       <Text>{i18n.t('welcome')}</Text>
+
+      <PrimaryIcon name="location" size={32} />
     </ScreenView>
   );
 }
