@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
-import * as SplashScreen from 'expo-splash-screen';
+import * as ExpoSplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 import { Button } from '@rneui/themed';
 import { ThemeProvider } from '@rneui/themed';
@@ -10,10 +10,10 @@ import BaseTheme from "@/constants/BaseTheme";
 
 
 // Keep the splash screen visible while we fetch resources
-SplashScreen.preventAutoHideAsync();
+ExpoSplashScreen.preventAutoHideAsync();
 
 export default () => {
-  const [appIsReady, setSplashScreenIsReady] = useState(false);
+  const [appIsReady, setExpoSplashScreenIsReady] = useState(false);
 
   useEffect(() => {
     async function prepare() {
@@ -23,7 +23,7 @@ export default () => {
       } catch (e) {
         console.warn(e);
       } finally {
-        setSplashScreenIsReady(true);
+        setExpoSplashScreenIsReady(true);
       }
     }
 
@@ -31,14 +31,14 @@ export default () => {
   }, []);
 
   const onLayoutReady = useCallback(async () => {
-    if (appIsReady) await SplashScreen.hideAsync();
+    if (appIsReady) await ExpoSplashScreen.hideAsync();
   }, [appIsReady]);
 
   if (!appIsReady) {
     return (
       <View onLayout={onLayoutReady}>
   
-        <Text>SplashScreen Demo! 👋</Text>
+        <Text>ExpoSplashScreen Demo! 👋</Text>
         
       </View>
     );
