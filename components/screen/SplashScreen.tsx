@@ -29,13 +29,15 @@ export default function SplashScreen() {
     if (appIsReady) await ExpoSplashScreen.hideAsync();
   }, [appIsReady]);
 
-  if (!appIsReady) return null;
+  if (!appIsReady) {
+    return (
+      <View onLayout={onLayoutReady}>
+  
+        <Text>ExpoSplashScreen Demo! 👋</Text>
+        
+      </View>
+    );
+  }
 
-  return (
-    <View onLayout={onLayoutReady}>
-
-      {!appIsReady ? (<Text>ExpoSplashScreen Demo! 👋</Text>) : (<Entypo name="rocket" size={30} />)}
-      
-    </View>
-  );
+  return (<></>);
 }
