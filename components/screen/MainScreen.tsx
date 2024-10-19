@@ -17,11 +17,7 @@ export default () => {
       <View style={styles.container}>
         <View style={styles.left}>
           <TouchableOpacity onPress={() => {}}>
-            <StaticImage 
-              source={source} 
-              width={Layout.header.logo.width} 
-              height={Layout.header.logo.height}
-            />   
+            <StaticImage source={source} width={Layout.header.logo.width} height={Layout.header.logo.height} />   
           </TouchableOpacity>
         </View>
         <View style={styles.right}>
