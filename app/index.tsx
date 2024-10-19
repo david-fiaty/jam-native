@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { View } from 'react-native';
 import * as ExpoSplashScreen from 'expo-splash-screen';
-import * as Font from 'expo-font';
-import Entypo from '@expo/vector-icons/Entypo';
+import * as ExpoFont from 'expo-font';
 import { ThemeProvider } from '@rneui/themed';
 import BaseTheme from "@/constants/BaseTheme";
 import ScreenView from '@/components/view/ScreenView';
@@ -20,8 +19,9 @@ export default () => {
   useEffect(() => {
     async function prepare() {
       try {
-        await Font.loadAsync(Entypo.font);
-        await new Promise(resolve => setTimeout(resolve, 3000));
+        await ExpoFont.loadAsync({
+          'BaseFont': require('../assets/fonts/HelveticaNeueLight.otf'),
+        });
       } catch (e) {
         console.warn(e);
       } finally {
