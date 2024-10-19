@@ -37,8 +37,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'flex-start',
     justifyContent: 'center',
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    // Todo - Enable or remove
+    //marginLeft: 'auto',
+    //marginRight: 'auto',
   },
   iconStyle: {
     color: 'red',
