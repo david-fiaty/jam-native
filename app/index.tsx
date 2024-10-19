@@ -34,7 +34,7 @@ export default () => {
   return ( 
     <ThemeProvider theme={BaseTheme}>
       <ViewportContainer>
-        
+        {(!appIsReady ? <SplashScreen /> : <MainScreen />)}
       </ViewportContainer>
     </ThemeProvider>
   );
