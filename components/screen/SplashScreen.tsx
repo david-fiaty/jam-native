@@ -25,16 +25,17 @@ export default function SplashScreen() {
     prepare();
   }, []);
 
-  const onLayoutRootView = useCallback(async () => {
+  const onLayoutReady = useCallback(async () => {
     if (appIsReady) await ExpoSplashScreen.hideAsync();
   }, [appIsReady]);
 
   if (!appIsReady) return null;
 
   return (
-    <View onLayout={onLayoutRootView}>
-      <Text>ExpoSplashScreen Demo! 👋</Text>
-      <Entypo name="rocket" size={30} />
+    <View onLayout={onLayoutReady}>
+
+      {!appIsReady ? (<Text>ExpoSplashScreen Demo! 👋</Text>) : (<Entypo name="rocket" size={30} />)}
+      
     </View>
   );
 }
