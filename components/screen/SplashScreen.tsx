@@ -1,6 +1,6 @@
 import { Text } from 'react-native';
 
-export default function SplashScreen() {
+export default () => {
   return (
     <Text>ExpoSplashScreen Demo! 👋</Text>
   );

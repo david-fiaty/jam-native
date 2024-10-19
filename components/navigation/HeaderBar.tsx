@@ -1,10 +1,10 @@
 import { View, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
 import { useRouter } from 'expo-router';
-import JamLogo from '@/components/image/JamLogo';
+import JamLogo from '@/components/image/AppLogo';
 import { Colors, GlobalStyles } from '@/constants/GlobalStyles';
 import TextBlock from '@/components/base/TextBlock';
 
-const HeaderBar = () => {
+export default () => {
   const router = useRouter();
 
   return (
@@ -48,4 +48,3 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HeaderBar;

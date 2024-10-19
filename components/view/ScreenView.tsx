@@ -8,7 +8,7 @@ type Props = {
   children?: ReactNode,
 };
 
-const ScreenView = ({style, children}: Props) => {
+export default ({style, children}: Props) => {
   return (
     <SafeAreaView 
       edges={['left', 'right', 'bottom']} 
@@ -26,5 +26,3 @@ const styles = StyleSheet.create({
     paddingTop: GlobalStyles.space.container,
   },
 });
-
-export default ScreenView;
