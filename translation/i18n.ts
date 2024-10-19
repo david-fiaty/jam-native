@@ -1,7 +1,5 @@
 import { initReactI18next } from "react-i18next";
 import i18n from "i18next";
-import 'intl/locale-data/jsonp/en'; 
-import 'intl/locale-data/jsonp/fr';
 import english from '@/translation/resources/english';
 import french from '@/translation/resources/french';
 
