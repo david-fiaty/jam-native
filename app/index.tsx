@@ -22,8 +22,6 @@ export default () => {
         await ExpoFont.loadAsync({
           'BaseFont': require('../assets/fonts/HelveticaNeueLight.otf'),
         });
-
-        //await new Promise(resolve => setTimeout(resolve, 3000));
       } catch (e) {
         console.warn(e);
       } finally {
