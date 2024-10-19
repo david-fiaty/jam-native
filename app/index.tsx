@@ -11,10 +11,10 @@ import MainScreen from '@/components/screen/MainScreen';
 ExpoSplashScreen.preventAutoHideAsync();
 
 export default () => {
-  const [appIsReady, setExpoSplashScreenIsReady] = useState(false);
+  const [isAppReady, setExpoSplashScreenIsReady] = useState(false);
   const onLayoutReady = useCallback(async () => {
-    if (appIsReady) await ExpoSplashScreen.hideAsync();
-  }, [appIsReady]);
+    if (isAppReady) await ExpoSplashScreen.hideAsync();
+  }, [isAppReady]);
 
   useEffect(() => {
     async function prepare() {
@@ -35,7 +35,7 @@ export default () => {
   return ( 
     <ThemeProvider theme={BaseTheme}>
       <ScreenView>
-        {!appIsReady ? (<SplashScreen />) : (
+        {!isAppReady ? (<SplashScreen />) : (
           <View onLayout={onLayoutReady}>
             <MainScreen />
           </View>
