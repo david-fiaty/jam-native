@@ -7,6 +7,7 @@ import BaseTheme from "@/constants/BaseTheme";
 import ScreenView from '@/components/view/ScreenView';
 import SplashScreen from '@/components/screen/SplashScreen';
 import MainScreen from '@/components/screen/MainScreen';
+import { View } from 'react-native';
 
 ExpoSplashScreen.preventAutoHideAsync();
 
@@ -34,7 +35,11 @@ export default () => {
   return ( 
     <ThemeProvider theme={BaseTheme}>
       <ScreenView>
-        {(!appIsReady ? <SplashScreen /> : <MainScreen />)}
+        {!appIsReady ? (<SplashScreen />) : (
+          <View onLayout={onLayoutReady}>
+            <MainScreen />
+          </View>
+        )}
       </ScreenView>
     </ThemeProvider>
   );
