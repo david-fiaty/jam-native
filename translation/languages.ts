@@ -1,6 +1,5 @@
 import { initReactI18next } from "react-i18next";
 import i18n from "i18next";
-
 import english from '@/translation/resources/english';
 import french from '@/translation/resources/french';
 
