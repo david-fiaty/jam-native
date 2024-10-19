@@ -1,13 +1,15 @@
-import { View, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import TextBlock from '@/components/base/TextBlock';
 import StaticImage from '@/components/base/StaticImage';
+import DeviceManager from '@/classes/DeviceManager';
 
 const source = require('@/assets/images/logo-48.png'); 
 
 export default () => {
+
   return (
     <View style={styles.container}>
       <View style={styles.left}>
@@ -32,7 +34,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: StatusBar.currentHeight,
+    marginTop: DeviceManager.statusBar.height,
     paddingHorizontal: Layout.space.container,
   },
   left: {
