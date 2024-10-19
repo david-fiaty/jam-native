@@ -1,17 +1,15 @@
 import { View, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
 import { Colors } from '@/constants/Colors';
+import { Layout } from '@/constants/Layout';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import TextBlock from '@/components/base/TextBlock';
 import StaticImage from '@/components/base/StaticImage';
-import { Layout } from '@/constants/Layout';
-
 
 const source = require('@/assets/images/logo-48.png'); 
 
 export default () => {
   return (
     <View style={styles.container}>
-
       <View style={styles.left}>
         <TouchableOpacity onPress={() => {}}>
           <StaticImage 
@@ -21,11 +19,9 @@ export default () => {
           />   
         </TouchableOpacity>
       </View>
-      
       <View style={styles.right}>
         <TextBlock>X</TextBlock>
       </View>
-
     </View>
   );
 };
@@ -37,14 +33,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginTop: StatusBar.currentHeight,
-    paddingHorizontal: GlobalStyles.space.container,
+    paddingHorizontal: Layout.space.container,
   },
   left: {
     gap: GlobalStyles.space.base,
   },
   right: {
     flexDirection: 'row',
-    gap: GlobalStyles.space.base,
+    gap: Layout.space.base,
   },
   icon: {
     ...GlobalStyles.icon,
