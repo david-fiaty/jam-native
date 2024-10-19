@@ -1,5 +1,5 @@
 import { Stack } from 'expo-router';
-import { Colors } from '@/constants/GlobalStyles';
+import { Colors } from '@/constants/Colors';
 import HeaderBar from '@/components/navigation/HeaderBar';
 
 const headerOptions = { 
