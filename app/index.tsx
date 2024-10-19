@@ -4,9 +4,10 @@ import * as Font from 'expo-font';
 import Entypo from '@expo/vector-icons/Entypo';
 import { ThemeProvider } from '@rneui/themed';
 import BaseTheme from "@/constants/BaseTheme";
-import ViewportContainer from '@/components/base/ViewportContainer';
+import ScreenView from '@/components/view/ScreenView';
 import SplashScreen from '@/components/screen/SplashScreen';
 import MainScreen from '@/components/screen/MainScreen';
+import { View } from 'react-native';
 
 ExpoSplashScreen.preventAutoHideAsync();
 
@@ -33,9 +34,13 @@ export default () => {
 
   return ( 
     <ThemeProvider theme={BaseTheme}>
-      <ViewportContainer>
-        {(!appIsReady ? <SplashScreen /> : <MainScreen />)}
-      </ViewportContainer>
+      <ScreenView>
+        {!appIsReady ? (<SplashScreen />) : (
+          <View onLayout={onLayoutReady}>
+            <MainScreen />
+          </View>
+        )}
+      </ScreenView>
     </ThemeProvider>
   );
 }
