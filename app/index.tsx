@@ -1,10 +1,10 @@
-import TextBlock from "@/components/base/TextBlock";
 import ViewportContainer from "@/components/base/ViewportContainer";
+import SplashScreen from "@/components/screens/SplashScreen";
 
 const Index = () => {
   return (  
     <ViewportContainer>
-      <TextBlock>Hello</TextBlock>
+      <SplashScreen />
     </ViewportContainer>
   );
 };
