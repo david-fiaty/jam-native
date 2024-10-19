@@ -1,7 +1,6 @@
 import { Text, Button } from '@rneui/themed';
 import i18n from '@/translation/i18n'; 
 
-
 export default () => {  
   return (
     <>
