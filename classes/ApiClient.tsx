@@ -1,5 +1,5 @@
-import ApiEndpoints from '@/constants/ApiEndpoints';
-import ApiMockData from '@/constants/ApiMockData';
+import ApiEndpoints from '@/constants/Endpoints';
+import ApiMockData from '@/data/ApiMockData';
 
 class ApiClient {
   get(key: keyof typeof ApiEndpoints) {
