@@ -6,6 +6,11 @@ export default createTheme({
     primary: Colors.primary,
   },
   components: {
+    Text: {
+      style: {
+        color: Colors.primary,
+      },
+    },
     Button: {
       titleStyle: {
         color: '#FFFFFF',
