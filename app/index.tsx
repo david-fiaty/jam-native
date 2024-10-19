@@ -9,7 +9,6 @@ import ScreenView from '@/components/view/ScreenView';
 import SplashScreen from '@/components/screen/SplashScreen';
 import MainScreen from '@/components/screen/MainScreen';
 
-
 ExpoSplashScreen.preventAutoHideAsync();
 
 export default () => {
