@@ -9,11 +9,13 @@ export default createTheme({
     Text: {
       style: {
         color: Colors.primary,
+        fontFamily: 'BaseFont',
       },
     },
     Button: {
       titleStyle: {
         color: '#FFFFFF',
+        fontFamily: 'BaseFont',
       },
     },
   },
