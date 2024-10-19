@@ -2,7 +2,7 @@ import React from "react";
 import { View, FlatList, TouchableOpacity  } from "react-native";
 import { Tab, TabView } from "@rneui/themed";
 import { GlobalStyles, Colors } from "@/constants/GlobalStyles";
-import { StaticImage } from './base/StaticImage';
+import { StaticImage } from '@/components/base/StaticImage';
 import ApiClient from '@/classes/ApiClient';
 
 const TestScreen = () => {

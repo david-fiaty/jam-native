@@ -8,7 +8,7 @@ type Props = {
   children?: ReactNode,
 };
 
-const ViewportContainer = ({style, children}: Props) => {
+const ScreenView = ({style, children}: Props) => {
   return (
     <SafeAreaView 
       edges={['left', 'right', 'bottom']} 
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ViewportContainer;
+export default ScreenView;
