@@ -1,10 +1,7 @@
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text, Button } from '@rneui/themed';
-import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
-import { GlobalStyles } from '@/constants/GlobalStyles';
 import i18n from '@/translation/i18n'; 
-import DeviceManager from '@/classes/DeviceManager';
 import TextBlock from '@/components/base/TextBlock';
 import StaticImage from '@/components/base/StaticImage';
 import ScreenView from '../view/ScreenView';
@@ -34,7 +31,9 @@ export default () => {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    backgroundColor: 'yellow',
+  },
   header: {},
   headerLeft: {},
   headerRight: {},
