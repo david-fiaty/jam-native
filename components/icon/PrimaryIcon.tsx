@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import StaticIcon from '../base/IconBase';
 import { Layout } from '@/constants/Layout';
+import { Colors } from '@/constants/Colors';
 
 type Props = {
   name: string,
@@ -42,8 +43,8 @@ const styles = StyleSheet.create({
     //marginRight: 'auto',
   },
   iconStyle: {
-    color: 'red',
-    backgroundColor: 'orange',
+    color: '#FFFFFF',
+    backgroundColor: Colors.primary,
     padding: Layout.space.base,
     borderRadius: 40,
   },
