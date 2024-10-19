@@ -15,12 +15,12 @@ export default () => {
   return (
     <ScreenView>
       <View style={styles.container}>
-        <View style={styles.left}>
+        <View style={styles.headerLeft}>
           <TouchableOpacity onPress={() => {}}>
-            <StaticImage source={source} width={Layout.header.logo.width} height={Layout.header.logo.height} />   
+            <StaticImage source={source} width={styles.headerLogo.width} height={styles.headerLogo.height} />   
           </TouchableOpacity>
         </View>
-        <View style={styles.right}>
+        <View style={styles.headerRight}>
           <TextBlock>X</TextBlock>
         </View>
       </View>
@@ -34,6 +34,16 @@ export default () => {
 }
 
 const styles = StyleSheet.create({
+  container: {},
+  header: {},
+  headerLeft: {},
+  headerRight: {},
+  headerLogo: {
+    width: Layout.header.logo.width,
+    height: Layout.header.logo.height,
+  },
+
+  /*
   container: {
     flexGrow: 1,
     flexDirection: 'row',
@@ -57,5 +67,6 @@ const styles = StyleSheet.create({
       borderRadius: 40,
     },
   },
+  */
 });
 
