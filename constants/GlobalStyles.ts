@@ -1,11 +1,6 @@
-const space = 10;
+import { Colors } from "./Colors";
 
-export const Colors = {
-  primary: '#0A00AA',
-  secondary: '#FAA000',
-  tertiary: '#E1E0F4',
-  background: '#FFFFFF',
-};
+const space = 10;
 
 export const GlobalStyles = {
   space: {
