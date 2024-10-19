@@ -23,7 +23,7 @@ export default () => {
           'BaseFont': require('../assets/fonts/SpaceMono-Regular.ttf'),
         });
 
-        await new Promise(resolve => setTimeout(resolve, 3000));
+        //await new Promise(resolve => setTimeout(resolve, 3000));
       } catch (e) {
         console.warn(e);
       } finally {
