@@ -3,7 +3,7 @@ import i18n from "i18next";
 import english from '@/translation/resources/english';
 import french from '@/translation/resources/french';
 
-i18n
+export default i18n
   .use(initReactI18next)
   .init({
     lng: 'en',
