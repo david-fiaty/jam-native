@@ -9,7 +9,7 @@ type Props = {
   style?: object,
 };
 
-export function StaticImage({source, width, height, resizeMethod, resizeMode, style}: Props) {
+export default ({source, width, height, resizeMethod, resizeMode, style}: Props) => {
   return (
     <Image 
       source={source} 
