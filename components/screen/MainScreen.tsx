@@ -19,7 +19,7 @@ export default () => {
           </TouchableOpacity>
         </View>
         <View style={styles.headerRight}>
-          <TextBase>X</TextBase>
+          <PrimaryIcon name="menu" size={32} />
         </View>
       </View>
 
@@ -27,8 +27,6 @@ export default () => {
  
       <Button title="My Button" />
       <Text>{i18n.t('welcome')}</Text>
-
-      <PrimaryIcon name="location" size={32} />
     </ScreenView>
   );
 }
