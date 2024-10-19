@@ -1,20 +1,25 @@
 import { View, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
-import JamLogo from '@/components/image/AppLogo';
+import { Colors } from '@/constants/Colors';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import TextBlock from '@/components/base/TextBlock';
+import { StaticImage } from '@/components/base/StaticImage';
+
+const source = require('@/assets/images/logo-48.png'); 
 
 export default () => {
   return (
     <View style={styles.container}>
+
       <View style={styles.left}>
         <TouchableOpacity onPress={() => {}}>
-          <JamLogo width={46} height={46} /> 
+          <StaticImage source={source} width={48} height={48} />   
         </TouchableOpacity>
       </View>
       
       <View style={styles.right}>
         <TextBlock>X</TextBlock>
       </View>
+
     </View>
   );
 };

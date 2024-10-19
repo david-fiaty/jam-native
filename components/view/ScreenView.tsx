@@ -22,7 +22,7 @@ export default ({style, children}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.background,
-    paddingTop: Layout.space.container,
+    backgroundColor: 'red',
+    //paddingTop: Layout.space.container,
   },
 });
