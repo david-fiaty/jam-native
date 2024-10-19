@@ -2,8 +2,8 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text, Button } from '@rneui/themed';
 import { Layout } from '@/constants/Layout';
 import i18n from '@/translation/i18n'; 
-import TextBlock from '@/components/base/TextBlock';
-import StaticImage from '@/components/base/StaticImage';
+import TextBase from '@/components/base/TextBase';
+import ImageBase from '@/components/base/ImageBase';
 import ScreenView from '../view/ScreenView';
 
 const source = require('@/assets/images/logo-48.png'); 
@@ -14,11 +14,11 @@ export default () => {
       <View style={styles.container}>
         <View style={styles.headerLeft}>
           <TouchableOpacity onPress={() => {}}>
-            <StaticImage source={source} width={styles.headerLogo.width} height={styles.headerLogo.height} />   
+            <ImageBase source={source} width={styles.headerLogo.width} height={styles.headerLogo.height} />   
           </TouchableOpacity>
         </View>
         <View style={styles.headerRight}>
-          <TextBlock>X</TextBlock>
+          <TextBase>X</TextBase>
         </View>
       </View>
 
