@@ -1,19 +1,17 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
 import * as ExpoSplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
-import { Button } from '@rneui/themed';
-import { ThemeProvider } from '@rneui/themed';
 import Entypo from '@expo/vector-icons/Entypo';
-import ViewportContainer from "@/components/base/ViewportContainer";
-import BaseTheme from "@/constants/BaseTheme";
+import SplashScreen from '@/components/screen/SplashScreen';
+import MainScreen from '@/components/screen/MainScreen';
 
-
-// Keep the splash screen visible while we fetch resources
 ExpoSplashScreen.preventAutoHideAsync();
 
 export default () => {
   const [appIsReady, setExpoSplashScreenIsReady] = useState(false);
+  const onLayoutReady = useCallback(async () => {
+    if (appIsReady) await ExpoSplashScreen.hideAsync();
+  }, [appIsReady]);
 
   useEffect(() => {
     async function prepare() {
@@ -30,25 +28,5 @@ export default () => {
     prepare();
   }, []);
 
-  const onLayoutReady = useCallback(async () => {
-    if (appIsReady) await ExpoSplashScreen.hideAsync();
-  }, [appIsReady]);
-
-  if (!appIsReady) {
-    return (
-      <View onLayout={onLayoutReady}>
-  
-        <Text>ExpoSplashScreen Demo! 👋</Text>
-        
-      </View>
-    );
-  }
-
-  return (
-    <ThemeProvider theme={BaseTheme}>
-      <ViewportContainer>
-        <Button title="My Button" titleStyle={{ color: 'pink' }} />
-      </ViewportContainer>
-    </ThemeProvider>
-  );
+  return ( !appIsReady ? <SplashScreen /> : <MainScreen />);
 }
