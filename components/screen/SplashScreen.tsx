@@ -26,19 +26,13 @@ export default function SplashScreen() {
   }, []);
 
   const onLayoutRootView = useCallback(async () => {
-    if (appIsReady) {
-      await ExpoSplashScreen.hideAsync();
-    }
+    if (appIsReady) await ExpoSplashScreen.hideAsync();
   }, [appIsReady]);
 
-  if (!appIsReady) {
-    return null;
-  }
+  if (!appIsReady) return null;
 
   return (
-    <View
-      style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
-      onLayout={onLayoutRootView}>
+    <View onLayout={onLayoutRootView}>
       <Text>ExpoSplashScreen Demo! 👋</Text>
       <Entypo name="rocket" size={30} />
     </View>
