@@ -1,4 +1,4 @@
-const ApiEndpoints = {
+const Endpoints = {
   jams: {
     url: '/jams/get',
     method: 'POST',
@@ -15,4 +15,4 @@ const ApiEndpoints = {
   notifications: {},
 };
 
-export default ApiEndpoints;
+export default Endpoints;

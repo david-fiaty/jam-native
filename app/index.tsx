@@ -1,10 +1,11 @@
-import WelcomeScreen from '@/components/screens/WelcomeScreen';
-import ViewportContainer from '@/components/base/ViewportContainer';
+import { ThemeProvider, createTheme } from '@rneui/themed';
+import ViewportContainer from "@/components/base/ViewportContainer";
+import SplashScreen from "@/components/screen/SplashScreen";
 
 const Index = () => {
   return (  
     <ViewportContainer>
-      <WelcomeScreen />
+      <SplashScreen />
     </ViewportContainer>
   );
 };
