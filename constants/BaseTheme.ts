@@ -1,17 +1,19 @@
 import { createTheme } from '@rneui/themed';
+import { Colors } from './Colors';
 
 export default createTheme({
   lightColors: {
-    primary: 'red',
+    primary: Colors.primary,
   },
-  darkColors: {
-    primary: 'blue',
-  },
-
   components: {
+    Text: {
+      style: {
+        color: Colors.primary,
+      },
+    },
     Button: {
       titleStyle: {
-        color: 'black',
+        color: '#FFFFFF',
       },
     },
   },
