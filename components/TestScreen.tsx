@@ -2,7 +2,7 @@ import React from "react";
 import { View, FlatList, TouchableOpacity  } from "react-native";
 import { Tab, TabView } from "@rneui/themed";
 import { GlobalStyles, Colors } from "@/constants/GlobalStyles";
-import { StaticImage } from '@/components/base/StaticImage';
+import { ImageBase } from '@/components/base/ImageBase';
 import ApiClient from '@/classes/ApiClient';
 
 const TestScreen = () => {
@@ -61,7 +61,7 @@ const TestScreen = () => {
               return (
                 <TouchableOpacity>
                   <View style={styles.item}>
-                    <StaticImage 
+                    <ImageBase 
                       source={item.image} 
                       width="100%"
                       height="100%"
@@ -86,7 +86,7 @@ const TestScreen = () => {
               return (
                 <TouchableOpacity>
                   <View style={styles.item}>
-                    <StaticImage 
+                    <ImageBase 
                       source={item.image} 
                       width="100%"
                       height="100%"
@@ -111,7 +111,7 @@ const TestScreen = () => {
               return (
                 <TouchableOpacity>
                   <View style={styles.item}>
-                    <StaticImage 
+                    <ImageBase 
                       source={item.image} 
                       width="100%"
                       height="100%"
@@ -137,7 +137,7 @@ const TestScreen = () => {
               return (
                 <TouchableOpacity>
                   <View style={styles.item}>
-                    <StaticImage 
+                    <ImageBase 
                       source={item.image} 
                       width="100%"
                       height="100%"
