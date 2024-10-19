@@ -23,7 +23,7 @@ export default () => {
       </View>
 
 
-
+ 
       <Button title="My Button" />
       <Text>{i18n.t('welcome')}</Text>
     </ScreenView>
