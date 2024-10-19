@@ -8,6 +8,7 @@ i18n
   .init({
     lng: 'en',
     fallbackLng: 'en',
+    compatibilityJSON: 'v3',
     interpolation: {
       escapeValue: false,
     },
