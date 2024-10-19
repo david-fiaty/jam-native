@@ -7,10 +7,8 @@ type Props = {
   children?: ReactNode,
 };
 
-const TextBlock = ({style, children}: Props) => {
+export default ({style, children}: Props) => {
   return (
     <Text style={[GlobalStyles.text, style]}>{children}</Text>   
   );
 };
-
-export default TextBlock;
