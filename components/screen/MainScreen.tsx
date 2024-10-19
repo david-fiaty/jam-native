@@ -1,10 +1,7 @@
 import i18n from '@/translation/i18n'; 
-import { useTranslation } from 'react-i18next';
 import { Text, Button } from '@rneui/themed';
 
-export default function MainScreen() {
-  //const { t } = useTranslation();
-  
+export default () => {  
   return (
     <>
       <Text>Text block</Text>

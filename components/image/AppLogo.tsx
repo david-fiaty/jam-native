@@ -7,7 +7,7 @@ type Props = {
 
 const source = require('@/assets/images/jam-logo.png'); 
 
-const JamLogo = ({width, height}: Props) => {
+export default ({width, height}: Props) => {
   return (
     <StaticImage 
       source={source} 
@@ -17,5 +17,4 @@ const JamLogo = ({width, height}: Props) => {
   );
 };
 
-export default JamLogo;
 
