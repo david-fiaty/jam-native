@@ -2,7 +2,9 @@ import { View, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import TextBlock from '@/components/base/TextBlock';
-import { StaticImage } from '@/components/base/StaticImage';
+import StaticImage from '@/components/base/StaticImage';
+import { Layout } from '@/constants/Layout';
+
 
 const source = require('@/assets/images/logo-48.png'); 
 
@@ -12,7 +14,11 @@ export default () => {
 
       <View style={styles.left}>
         <TouchableOpacity onPress={() => {}}>
-          <StaticImage source={source} width={48} height={48} />   
+          <StaticImage 
+            source={source} 
+            width={Layout.header.logo.width} 
+            height={Layout.header.logo.height}
+          />   
         </TouchableOpacity>
       </View>
       
