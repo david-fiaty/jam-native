@@ -20,10 +20,8 @@ export default () => {
     async function prepare() {
       try {
         await ExpoFont.loadAsync({
-          'BaseFont': require('../assets/fonts/SpaceMono-Regular.ttf'),
+          'BaseFont': require('../assets/fonts/HelveticaNeueLight.otf'),
         });
-
-        //await new Promise(resolve => setTimeout(resolve, 3000));
       } catch (e) {
         console.warn(e);
       } finally {
