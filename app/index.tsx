@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { View } from 'react-native';
 import * as ExpoSplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 import Entypo from '@expo/vector-icons/Entypo';
@@ -7,7 +8,7 @@ import BaseTheme from "@/constants/BaseTheme";
 import ScreenView from '@/components/view/ScreenView';
 import SplashScreen from '@/components/screen/SplashScreen';
 import MainScreen from '@/components/screen/MainScreen';
-import { View } from 'react-native';
+
 
 ExpoSplashScreen.preventAutoHideAsync();
 
