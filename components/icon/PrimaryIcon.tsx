@@ -33,14 +33,10 @@ const styles = StyleSheet.create({
   },
   */
   containerStyle: {
-    //width: 40,
-    //height: 40,
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'flex-start',
     justifyContent: 'center',
-    borderRadius: 8,
-    borderWidth: 1,
     marginLeft: 'auto',
     marginRight: 'auto',
   },
@@ -48,6 +44,7 @@ const styles = StyleSheet.create({
     color: 'red',
     backgroundColor: 'orange',
     padding: Layout.space.base,
+    borderRadius: 40,
   },
 });
 
