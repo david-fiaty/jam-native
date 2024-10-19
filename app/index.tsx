@@ -1,10 +1,10 @@
-import WelcomeScreen from '@/components/screens/WelcomeScreen';
-import ViewportContainer from '@/components/base/ViewportContainer';
+import TextBlock from "@/components/base/TextBlock";
+import ViewportContainer from "@/components/base/ViewportContainer";
 
 const Index = () => {
   return (  
     <ViewportContainer>
-      <WelcomeScreen />
+      <TextBlock>Hello</TextBlock>
     </ViewportContainer>
   );
 };

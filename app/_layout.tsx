@@ -44,17 +44,6 @@ export default function RootLayout() {
     <ThemeProvider value={DefaultTheme}>
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="main" options={{...headerOptions, ...fadeAnimationOptions }} />
-        <Stack.Screen name="jams" options={{...headerOptions, ...fadeAnimationOptions }} />
-        <Stack.Screen name="add-jam" options={{...headerOptions, ...fadeAnimationOptions }} />
-        <Stack.Screen name="profile" options={{...headerOptions, ...fadeAnimationOptions }} />
-        <Stack.Screen name="login" options={{ headerShown: false }} />
-        <Stack.Screen name="about" options={{...headerOptions, ...fadeAnimationOptions }} />
-        <Stack.Screen name="legal" options={{...headerOptions, ...fadeAnimationOptions }} />
-        <Stack.Screen name="password" options={{ headerShown: false }} />
-        <Stack.Screen name="username" options={{ headerShown: false }} />
-        <Stack.Screen name="language" options={{ headerShown: false }} />
-        <Stack.Screen name="map" options={{...headerOptions, ...fadeAnimationOptions }} />
       </Stack>
     </ThemeProvider>
   );
