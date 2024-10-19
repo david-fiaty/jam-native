@@ -1,4 +1,4 @@
-const WelcomeSlidehowContent = [
+const WelcomeSlidehowData = [
   {
     id: 1,
     title: 'Create better, together',
@@ -19,4 +19,4 @@ const WelcomeSlidehowContent = [
   },
 ];
 
-export default WelcomeSlidehowContent;
+export default WelcomeSlidehowData;
