@@ -39,7 +39,7 @@ export default () => {
     }).start();
   };
 
-  const hideScreens = () => {
+  const hideScreen = () => {
     setActiveScreen('');
     slideOut();
   }; 
@@ -51,13 +51,13 @@ export default () => {
 
   const toggleScreen = (name: string) => {
     if (activeScreen && !name) {
-      hideScreens();
+      hideScreen();
     }
     else if (activeScreen == name) {
-      hideScreens();
+      hideScreen();
     }
     else if (activeScreen && activeScreen != name) {
-      hideScreens();
+      hideScreen();
       showScreen(name);
     }
     else {
