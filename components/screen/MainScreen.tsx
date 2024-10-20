@@ -14,6 +14,7 @@ import SearchMenu from '../menu/SearchMenu';
 import MapView from '../view/MapView';
 import AddJamForm from '../form/AddJamForm';
 import ProfileForm from '../form/ProfileForm';
+import { Colors } from '@/constants/Colors';
 
 export default () => {  
   // Parameters
@@ -185,15 +186,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightblue',
   },
   modal: {
-    backgroundColor: 'blue',
     position: 'absolute',
     top: 0,
     left: 0,
     width: '100%',
     height: DeviceManager.modalView.height,
+    backgroundColor: Colors.white,
   },
   content: {
-    backgroundColor: 'green',
+    backgroundColor: Colors.white,
     flexGrow: 1,
   },
 });
