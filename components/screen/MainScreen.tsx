@@ -104,10 +104,9 @@ export default () => {
     }).start();
   };
 
-  const hideScreen = () => {
+  const hideScreen = (name: string) => {
     setActiveScreen('');
-    //slideOut();
-    fadeOut();
+    screenAnimations[screenStack[name].effect].out().start();
   }; 
 
   const showScreen = (name: string) => {
@@ -116,14 +115,11 @@ export default () => {
   };
 
   const toggleScreen = (name: string) => {
-    if (activeScreen && !name) {
-      hideScreen();
-    }
-    else if (activeScreen == name) {
-      hideScreen();
+    if (activeScreen && !name || activeScreen == name) {
+      hideScreen(activeScreen);
     }
     else if (activeScreen && activeScreen != name) {
-      hideScreen();
+      hideScreen(name);
       showScreen(name);
     }
     else {
