@@ -4,13 +4,21 @@ import { Layout } from '@/constants/Layout';
 
 type Props = {
   direction?: string,
+  align?: string,
+  justify?: string,
   style?: object,
   children?: ReactNode,
 };
 
-export default ({direction, style, children}: Props) => {
+export default ({direction, align, justify, style, children}: Props) => {
+  const containerStyle = {
+    flexDirection: direction,
+    alignItems: align || 'center',
+    justifyContent: justify,
+  };
+
   return (
-    <View style={[styles.container, style, styles[direction]]}>
+    <View style={[styles.container, style, containerStyle]}>
       {children}
     </View>
   );
@@ -18,8 +26,6 @@ export default ({direction, style, children}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    justifyContent: 'space-between',
     gap: Layout.space.base,
   },
   row: {
