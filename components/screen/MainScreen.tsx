@@ -115,10 +115,7 @@ export default () => {
   };
 
   const toggleScreen = (name: string) => {
-    if (activeScreen && !name) {
-      hideScreen(activeScreen);
-    }
-    else if (activeScreen == name) {
+    if (activeScreen && !name || activeScreen == name) {
       hideScreen(activeScreen);
     }
     else if (activeScreen && activeScreen != name) {
