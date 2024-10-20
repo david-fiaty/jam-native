@@ -14,6 +14,7 @@ import SearchMenu from '../menu/SearchMenu';
 import MapView from '../view/MapView';
 import AddJamForm from '../form/AddJamForm';
 import ProfileForm from '../form/ProfileForm';
+import { Colors } from '@/constants/Colors';
 
 export default () => {  
   // Parameters
@@ -142,7 +143,7 @@ export default () => {
         </BoxView>
 
         {/* Bottom navigation */}
-        <BoxView direction="row" justify="space-between" style={styles.footer}>
+        <BoxView direction="row" justify="space-around" style={styles.footer}>
           <IconView name="menu" theme="primary" size={22} onPress={() => toggleScreen('mapView')} />
           <IconView label="15+" theme="secondary" size={13} onPress={() => toggleScreen('addJamForm')} />
           <IconView name="search" theme="clear" size={22} onPress={() => toggleScreen('profileForm')} />
@@ -159,12 +160,8 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: 'gray',
   },
-  header: {
-    height: Layout.header.height,
-  },
-  footer: {
-    height: Layout.footer.height,
-  },
+  header: Layout.header,
+  footer: Layout.footer,
   headerLeft: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -189,15 +186,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightblue',
   },
   modal: {
-    backgroundColor: 'blue',
     position: 'absolute',
     top: 0,
     left: 0,
     width: '100%',
     height: DeviceManager.modalView.height,
+    backgroundColor: Colors.white,
   },
   content: {
-    backgroundColor: 'green',
+    backgroundColor: Colors.white,
     flexGrow: 1,
   },
 });
