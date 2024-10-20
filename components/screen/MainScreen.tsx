@@ -111,14 +111,8 @@ export default () => {
   }; 
 
   const showScreen = (name: string) => {
-    
-    console.log(screenStack[name]);
-    console.log(screenAnimations['fade']);
-
     setActiveScreen(name);
-    //slideIn();
-    //fadeIn();
-    screenAnimations['fade'].in().start();
+    screenAnimations[screenStack[name].effect].in().start();
   };
 
   const toggleScreen = (name: string) => {
