@@ -3,6 +3,7 @@ import IconBase from '../base/IconBase';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
 import TextBase from '../base/TextBase';
+import TextView from '../view/TextView';
 
 type Props = {
   name: string,
@@ -15,9 +16,9 @@ const PrimaryIcon = ({name, size, label, style}: Props) => {
   if (label) {
     return (
       <View style={styles.containerStyle}>
-        <TextBase style={[styles.iconStyle, {fontSize: size}]}>
+        <TextView style={[styles.iconStyle, {fontSize: size}]}>
           {label}
-        </TextBase>
+        </TextView>
       </View>
     );
   }
