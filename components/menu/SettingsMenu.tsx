@@ -1,5 +1,4 @@
 import { StyleSheet, FlatList } from 'react-native';
-import TextBase from '../base/TextBase';
 import { BaseProps } from '@/constants/Types';
 import TextView from '../view/TextView';
 
