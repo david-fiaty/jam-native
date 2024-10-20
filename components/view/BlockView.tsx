@@ -10,7 +10,7 @@ type Props = {
 
 export default ({direction, style, children}: Props) => {
   return (
-    <View style={[styles.container, style]}>
+    <View style={[styles.container, style, styles[direction]]}>
       {children}
     </View>
   );
@@ -18,9 +18,14 @@ export default ({direction, style, children}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     gap: Layout.space.base,
+  },
+  row: {
+    flexDirection: 'row',
+  },
+  column: {
+    flexDirection: 'column',
   },
 });
