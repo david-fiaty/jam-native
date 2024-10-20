@@ -1,6 +1,6 @@
 import { Colors } from '@/constants/Colors';
 import { ReactNode } from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 type Props = {
@@ -19,5 +19,8 @@ export default ({style, children}: Props) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.background,
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
   },
 });

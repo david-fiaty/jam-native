@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Touchable, TouchableOpacity, View } from 'react-native';
 import IconBase from '../base/IconBase';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
@@ -17,21 +17,25 @@ export default ({name, size, label, theme, style}: Props) => {
 
   if (label) {
     return (
-      <View style={styles.containerStyle}>
-        <TextView style={iconStyle}>
-          {label}
-        </TextView>
-      </View>
+      <TouchableOpacity>
+        <View style={styles.containerStyle}>
+          <TextView style={iconStyle}>
+            {label}
+          </TextView>
+        </View>
+      </TouchableOpacity>
     );
   }
 
   return (
-    <IconBase 
-      name={name}
-      iconStyle={iconStyle} 
-      containerStyle={styles.containerStyle}
-      size={size} 
-    />
+    <TouchableOpacity>
+      <IconBase 
+        name={name}
+        iconStyle={iconStyle} 
+        containerStyle={styles.containerStyle}
+        size={size} 
+      />
+    </TouchableOpacity>
   );
 };
 
@@ -43,21 +47,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   iconStyle: {
-    color: '#FFFFFF',
+    color: Colors.white,
     backgroundColor: Colors.primary,
     padding: Layout.space.small,
     borderRadius: Layout.radius.circle,
   },
   primary: {
+    color: Colors.white,
     backgroundColor: Colors.primary,
   },
   secondary: {
+    color: Colors.primary,
     backgroundColor: Colors.secondary,
   },
   tertiary: {
+    color: Colors.white,
     backgroundColor: Colors.tertiary,
   },
   clear: {
+    color: Colors.primary,
     backgroundColor: Colors.white,
   },
 });
