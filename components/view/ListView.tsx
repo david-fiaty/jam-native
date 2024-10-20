@@ -3,6 +3,7 @@ import { BaseProps } from '@/constants/Types';
 import TextView from './TextView';
 import { Layout } from '@/constants/Layout';
 import DeviceManager from '@/classes/DeviceManager';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 type Props = BaseProps & {
   data: object,
@@ -31,18 +32,20 @@ export default ({data, style}: Props) => {
 const styles = StyleSheet.create({
   list: {
     width: DeviceManager.window.width,
-    backgroundColor: 'blue',
+    //backgroundColor: 'blue',
+    //gap: Layout.space.base,
   },
   label: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: Layout.space.base,
   },
   item: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
-    gap: Layout.space.base,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    //gap: Layout.space.base,
     padding: Layout.space.base,
-    backgroundColor: 'red',
+    borderBottomWidth: 0.5,
+    borderBottomColor: Colors.primary,
   },
 });
