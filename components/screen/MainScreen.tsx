@@ -6,6 +6,7 @@ import ScreenView from '../view/ScreenView';
 import IconView from '../view/IconView';
 import BoxView from '../view/BoxView';
 import LogoView from '../view/LogoView';
+import ModalView from '../view/ModalView';
 
 export default () => {  
   return (
@@ -30,6 +31,8 @@ export default () => {
         <BoxView style={styles.content}>
           <Button title="My Button" />
           <Text>{i18n.t('welcome')}</Text>
+
+          <ModalView />
         </BoxView>
 
         {/* Bottom navigation */}
