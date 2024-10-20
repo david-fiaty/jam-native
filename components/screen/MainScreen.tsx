@@ -10,7 +10,7 @@ const source = require('@/assets/images/logo-48.png');
 export default () => {  
   return (
     <ScreenView>
-      <View style={styles.container}>
+      <View style={styles.header}>
         <View style={styles.headerLeft}>
           <TouchableOpacity onPress={() => {}}>
             <ImageBase source={source} width={styles.headerLogo.width} height={styles.headerLogo.height} />   
@@ -32,12 +32,21 @@ export default () => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'yellow',
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
-  header: {},
-  headerLeft: {},
-  headerRight: {},
+  headerLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Layout.space.base,
+  },
+  headerRight: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Layout.space.base,
+  },
   headerLogo: {
     width: Layout.header.logo.width,
     height: Layout.header.logo.height,
