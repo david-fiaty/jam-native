@@ -1,7 +1,8 @@
 export const Layout = {
   space: {
+    small: 5,
     base: 10,
-    container: 20,
+    big: 20,
   },
   header: {
     logo: {
