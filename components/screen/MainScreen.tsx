@@ -95,6 +95,11 @@ export default () => {
     },
   };
 
+  const animationStyles = [
+    styles.animatedView, 
+    { opacity: fadeEffect },
+  ];
+
   return (
     <ScreenView>
       <View style={styles.container}>
