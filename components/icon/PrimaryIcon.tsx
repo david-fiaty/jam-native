@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import IconBase from '../base/IconBase';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
@@ -13,7 +13,13 @@ type Props = {
 
 const PrimaryIcon = ({name, size, label, style}: Props) => {
   if (label) {
-    return (<TextBase>{label}</TextBase>);
+    return (
+      <View style={styles.containerStyle}>
+        <TextBase style={[styles.iconStyle, {fontSize: size}]}>
+          {label}
+        </TextBase>
+      </View>
+    );
   }
 
   return (
