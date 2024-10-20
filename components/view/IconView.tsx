@@ -5,17 +5,20 @@ import { Colors } from '@/constants/Colors';
 import TextView from '../view/TextView';
 
 type Props = {
-  name: string,
+  name?: string,
   size?: number, 
   label?: string,
+  theme: string,
   style?: object,
 };
 
-export default ({name, size, label, style}: Props) => {
+export default ({name, size, label, theme, style}: Props) => {
+  const iconStyle = [styles.iconStyle, styles[theme], {fontSize: size}];
+
   if (label) {
     return (
       <View style={styles.containerStyle}>
-        <TextView style={[styles.iconStyle, {fontSize: size}]}>
+        <TextView style={iconStyle}>
           {label}
         </TextView>
       </View>
@@ -24,8 +27,8 @@ export default ({name, size, label, style}: Props) => {
 
   return (
     <IconBase 
-      name={name} 
-      iconStyle={[styles.iconStyle, style]} 
+      name={name}
+      iconStyle={iconStyle} 
       containerStyle={styles.containerStyle}
       size={size} 
     />
@@ -38,14 +41,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'flex-start',
     justifyContent: 'center',
-    // Todo - Enable or remove
-    //marginLeft: 'auto',
-    //marginRight: 'auto',
   },
   iconStyle: {
     color: '#FFFFFF',
     backgroundColor: Colors.primary,
     padding: Layout.space.small,
-    borderRadius: 40,
+    borderRadius: Layout.radius.circle,
+  },
+  primary: {
+    backgroundColor: Colors.primary,
+  },
+  secondary: {
+    backgroundColor: Colors.secondary,
+  },
+  tertiary: {
+    backgroundColor: Colors.tertiary,
+  },
+  clear: {
+    backgroundColor: Colors.white,
   },
 });
