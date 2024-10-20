@@ -176,8 +176,8 @@ const styles = StyleSheet.create({
     gap: Layout.space.base,
   },
   headerLogo: {
-    width: Layout.header.logo.width,
-    height: Layout.header.logo.height,
+    width: Layout.headerLogo.width,
+    height: Layout.headerLogo.height,
   },
   animatedView: {
     position: 'absolute',
