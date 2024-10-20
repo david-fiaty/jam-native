@@ -40,7 +40,11 @@ export default () => {
   };
 
   const toggleScreen = (name: string) => {
-    if (activeScreen == name) {
+    if (activeScreen && !name) {
+      setActiveScreen('');
+      slideOut();
+    }
+    else if (activeScreen == name) {
       setActiveScreen('');
       slideOut();
     }
@@ -63,7 +67,7 @@ export default () => {
         {/* Top navigation */}
         <BoxView direction="row" justify="space-between">
           <BoxView direction="row">
-            <TouchableOpacity onPress={() => {}}>
+            <TouchableOpacity onPress={() => {activeScreen && toggleScreen('')}}>
               <LogoView size={styles.headerLogo} />
             </TouchableOpacity>
           </BoxView>
