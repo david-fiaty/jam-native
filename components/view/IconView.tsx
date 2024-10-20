@@ -28,12 +28,14 @@ export default ({name, size, label, theme, style}: Props) => {
   }
 
   return (
-    <IconBase 
-      name={name}
-      iconStyle={iconStyle} 
-      containerStyle={styles.containerStyle}
-      size={size} 
-    />
+    <TouchableOpacity>
+      <IconBase 
+        name={name}
+        iconStyle={iconStyle} 
+        containerStyle={styles.containerStyle}
+        size={size} 
+      />
+    </TouchableOpacity>
   );
 };
 
