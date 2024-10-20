@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList, Touchable, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import TextView from './TextView';
 import { Layout } from '@/constants/Layout';
