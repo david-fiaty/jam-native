@@ -2,11 +2,11 @@ import { ReactNode } from 'react';
 import TextBase from '../base/TextBase';
 
 type Props = {
-  children?: ReactNode,
   style?: object,
+  children?: ReactNode,
 };
 
-export default ({children, style}: Props) => {
+export default ({style, children}: Props) => {
   return (
     <TextBase style={style}>
       {children}

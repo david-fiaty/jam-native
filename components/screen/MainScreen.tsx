@@ -5,26 +5,24 @@ import i18n from '@/translation/i18n';
 import ImageBase from '@/components/base/ImageBase';
 import ScreenView from '../view/ScreenView';
 import IconView from '../view/IconView';
+import HorizontalView from '../view/HorizontalView';
 const source = require('@/assets/images/logo-48.png'); 
 
 export default () => {  
   return (
-    <ScreenView>
-      <View style={styles.container}>
-        <View style={styles.headerLeft}>
+    <ScreenView>      
+      <HorizontalView>
+        <HorizontalView>
           <TouchableOpacity onPress={() => {}}>
             <ImageBase source={source} width={styles.headerLogo.width} height={styles.headerLogo.height} />   
           </TouchableOpacity>
-        </View>
-        <View style={styles.headerRight}>
-          <IconView name="menu" size={22} />
-          <IconView name="menu" size={22} />
-          <IconView name="menu" size={22} />
-        </View>
-      </View>
-
-
- 
+        </HorizontalView>
+        <HorizontalView>
+          <IconView name="menu" theme="primary" size={22} />
+          <IconView label="15+" theme="secondary" size={13} />
+          <IconView name="menu" theme="tertiary" size={22} />
+        </HorizontalView>
+      </HorizontalView>
       <Button title="My Button" />
       <Text>{i18n.t('welcome')}</Text>
     </ScreenView>
@@ -32,12 +30,21 @@ export default () => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'yellow',
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
-  header: {},
-  headerLeft: {},
-  headerRight: {},
+  headerLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Layout.space.base,
+  },
+  headerRight: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Layout.space.base,
+  },
   headerLogo: {
     width: Layout.header.logo.width,
     height: Layout.header.logo.height,
