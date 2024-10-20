@@ -28,13 +28,13 @@ export default () => {
       component: () => <SettingsMenu />,
     },
     notificationsMenu: {
-      show: 'slideIn',
-      hide: 'slideOut',
+      show: 'fadeIn',
+      hide: 'fadeOut',
       component: () => <NotificationsMenu />,
     }, 
     searchMenu: {
-      show: 'fadeIn',
-      hide: 'fadeOut',
+      show: 'slideIn',
+      hide: 'slideOut',
       component: () => <SearchMenu />,
     },
   };
