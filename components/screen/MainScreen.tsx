@@ -39,6 +39,7 @@ export default () => {
 
   const toggleScreen = (name: string) => {
     setActiveScreen(name);
+    slideIn();
   };
 
   return (
@@ -53,8 +54,8 @@ export default () => {
             </TouchableOpacity>
           </BoxView>
           <BoxView direction="row"> 
-            <IconView name="menu" theme="primary" size={22} onPress={slideIn} />
-            <IconView label="15+" theme="secondary" size={13} onPress={slideIn} />
+            <IconView name="menu" theme="primary" size={22} onPress={() => toggleScreen('settingsMenu')} />
+            <IconView label="15+" theme="secondary" size={13} onPress={() => toggleScreen('notificationsMenu')} />
             <IconView name="search" theme="clear" size={22} onPress={slideIn} />
           </BoxView>
         </BoxView>
@@ -65,6 +66,8 @@ export default () => {
             <BoxView style={styles.container}>
               <TextView>{i18n.t('welcome')}</TextView>
               <IconView name="menu" theme="primary" size={22} onPress={slideOut} />
+              { activeScreen && (<TextView>{activeScreen}</TextView>)}
+              { activeScreen && screenStack[activeScreen]()}
             </BoxView>
           </Animated.View>
         </BoxView>
