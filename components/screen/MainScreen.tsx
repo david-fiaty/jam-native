@@ -10,6 +10,7 @@ import DeviceManager from '@/classes/DeviceManager';
 import TextView from '../view/TextView';
 import SettingsMenu from '../menu/SettingsMenu';
 import NotificationsMenu from '../menu/NotificationsMenu';
+import SearchMenu from '../menu/SearchMenu';
 
 export default () => {  
   const windowHeight = DeviceManager.window.height
@@ -35,12 +36,23 @@ export default () => {
   const screenStack = {
     settingsMenu: () => <SettingsMenu />,
     notificationsMenu: () => <NotificationsMenu />,
+    searchMenu: () => <SearchMenu />,
   };
 
   const toggleScreen = (name: string) => {
-    if (activeScreen == name) {
+    if (activeScreen && !name) {
       setActiveScreen('');
       slideOut();
+    }
+    else if (activeScreen == name) {
+      setActiveScreen('');
+      slideOut();
+    }
+    else if (activeScreen && activeScreen != name) {
+      setActiveScreen('');
+      slideOut();
+      setActiveScreen(name);
+      slideIn();
     }
     else {
       setActiveScreen(name);
@@ -55,14 +67,14 @@ export default () => {
         {/* Top navigation */}
         <BoxView direction="row" justify="space-between">
           <BoxView direction="row">
-            <TouchableOpacity onPress={() => {}}>
+            <TouchableOpacity onPress={() => {activeScreen && toggleScreen('')}}>
               <LogoView size={styles.headerLogo} />
             </TouchableOpacity>
           </BoxView>
           <BoxView direction="row"> 
             <IconView name="menu" theme="primary" size={22} onPress={() => toggleScreen('settingsMenu')} />
             <IconView label="15+" theme="secondary" size={13} onPress={() => toggleScreen('notificationsMenu')} />
-            <IconView name="search" theme="clear" size={22} onPress={slideIn} />
+            <IconView name="search" theme="clear" size={22} onPress={() => toggleScreen('searchMenu')} />
           </BoxView>
         </BoxView>
 
