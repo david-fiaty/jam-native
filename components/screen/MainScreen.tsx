@@ -11,7 +11,7 @@ export default () => {
   return (
     <ScreenView>
       <View style={styles.container}>
-        <BlockView direction="row">
+        <BlockView direction="row" justify="space-between">
           <BlockView direction="row">
             <TouchableOpacity onPress={() => {}}>
               <LogoView size={styles.headerLogo} />
@@ -29,7 +29,7 @@ export default () => {
           <Text>{i18n.t('welcome')}</Text>
         </BlockView>
 
-        <BlockView direction="row">
+        <BlockView direction="row" justify="space-between">
           <BlockView direction="row">
             <TouchableOpacity onPress={() => {}}>
               <LogoView size={styles.headerLogo} />
