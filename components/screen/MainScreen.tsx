@@ -62,7 +62,7 @@ export default () => {
           <BoxView direction="row"> 
             <IconView name="menu" theme="primary" size={22} onPress={() => toggleScreen('settingsMenu')} />
             <IconView label="15+" theme="secondary" size={13} onPress={() => toggleScreen('notificationsMenu')} />
-            <IconView name="search" theme="clear" size={22} onPress={slideIn} />
+            <IconView name="search" theme="clear" size={22} onPress={() => toggleScreen('searchMenu')} />
           </BoxView>
         </BoxView>
 
