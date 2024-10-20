@@ -6,6 +6,11 @@ import DeviceManager from '@/classes/DeviceManager';
 
 const height = DeviceManager.window.height;
 
+type Props = BaseProps & {
+  component: JSX.Element,
+  
+};
+
 export default ({style, children}: BaseProps) => {
   const slideAnim = useRef(new Animated.Value(height)).current; 
 
@@ -30,12 +35,10 @@ export default ({style, children}: BaseProps) => {
       <Button title="Slide Up" onPress={slideIn} />
       <Button title="Slide Down" onPress={slideOut} />
 
-      <Animated.View
-        style={[
-          styles.animatedView,
-          { transform: [{ translateY: slideAnim }] }, 
-        ]}
-      >
+      <Animated.View style={[
+        styles.animatedView,
+        { transform: [{ translateY: slideAnim }] }, 
+      ]}>
         <BoxView style={[styles.container, style]}>
           {children}
         </BoxView>

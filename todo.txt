@@ -48,6 +48,10 @@ Email verification
 Twilio => SMS
 
 
+          <Button title="My Button" />
+          <Text>{i18n.t('welcome')}</Text>
+
+
 {!mapTabActive && !addTabActive && !profileTabActive && (<JamsScreen />)}
 
         onLayout={event => {
