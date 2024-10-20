@@ -53,7 +53,7 @@ export default () => {
             </TouchableOpacity>
           </BoxView>
           <BoxView direction="row"> 
-            <IconView name="menu" theme="primary" size={22} onPress={() => toggleScreen('settingsMenu')} />
+            <IconView name="menu" theme="primary" size={22} onPress={slideIn} />
             <IconView label="15+" theme="secondary" size={13} onPress={slideIn} />
             <IconView name="search" theme="clear" size={22} onPress={slideIn} />
           </BoxView>
@@ -65,7 +65,6 @@ export default () => {
             <BoxView style={styles.container}>
               <TextView>{i18n.t('welcome')}</TextView>
               <IconView name="menu" theme="primary" size={22} onPress={slideOut} />
-              {activeScreen == 'settingsMenu' && screenStack['settingsMenu']()}
             </BoxView>
           </Animated.View>
         </BoxView>
