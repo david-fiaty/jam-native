@@ -1,14 +1,34 @@
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { Text, Button } from '@rneui/themed';
+import React, { useRef } from 'react';
+import { StyleSheet, View, TouchableOpacity, Animated } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import i18n from '@/translation/i18n'; 
 import ScreenView from '../view/ScreenView';
 import IconView from '../view/IconView';
 import BoxView from '../view/BoxView';
 import LogoView from '../view/LogoView';
-import ModalView from '../view/ModalView';
+import DeviceManager from '@/classes/DeviceManager';
+import TextView from '../view/TextView';
 
 export default () => {  
+  const windowHeight = DeviceManager.window.height
+  const slideAnim = useRef(new Animated.Value(windowHeight)).current; 
+
+  const slideIn = () => {
+    Animated.timing(slideAnim, {
+      toValue: 100, 
+      duration: 500, 
+      useNativeDriver: true, 
+    }).start();
+  };
+
+  const slideOut = () => {
+    Animated.timing(slideAnim, {
+      toValue: windowHeight, 
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
+
   return (
     <ScreenView>
       <View style={styles.container}>
@@ -20,19 +40,21 @@ export default () => {
               <LogoView size={styles.headerLogo} />
             </TouchableOpacity>
           </BoxView>
-          <BoxView direction="row">
-            <IconView name="menu" theme="primary" size={22} />
-            <IconView label="15+" theme="secondary" size={13} />
-            <IconView name="search" theme="clear" size={22} />
+          <BoxView direction="row"> 
+            <IconView name="menu" theme="primary" size={22} onPress={slideIn} />
+            <IconView label="15+" theme="secondary" size={13} onPress={slideIn} />
+            <IconView name="search" theme="clear" size={22} onPress={slideIn} />
           </BoxView>
         </BoxView>
 
         {/* Main content */}
         <BoxView style={styles.content}>
-          <Button title="My Button" />
-          <Text>{i18n.t('welcome')}</Text>
-
-          <ModalView />
+          <Animated.View style={[styles.animatedView, { transform: [{ translateY: slideAnim }] }]}>
+            <BoxView style={styles.container}>
+              <TextView>{i18n.t('welcome')}</TextView>
+              <IconView name="menu" theme="primary" size={22} onPress={slideOut} />
+            </BoxView>
+          </Animated.View>
         </BoxView>
 
         {/* Bottom navigation */}
@@ -79,6 +101,13 @@ const styles = StyleSheet.create({
   headerLogo: {
     width: Layout.header.logo.width,
     height: Layout.header.logo.height,
+  },
+  animatedView: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    height: 500, 
+    backgroundColor: 'lightblue',
   },
   content: {
     backgroundColor: 'green',

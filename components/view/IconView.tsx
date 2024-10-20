@@ -11,14 +11,15 @@ type Props = BaseProps & {
   label?: string,
   theme: string,
   style?: object,
+  onPress?: () => void,
 };
 
-export default ({name, size, label, theme, style}: Props) => {
+export default ({name, size, label, theme, style, onPress}: Props) => {
   const iconStyle = [styles.iconStyle, styles[theme], {fontSize: size}];
 
   if (label) {
     return (
-      <TouchableOpacity>
+      <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
         <View style={styles.containerStyle}>
           <TextView style={iconStyle}>
             {label}
@@ -29,7 +30,7 @@ export default ({name, size, label, theme, style}: Props) => {
   }
 
   return (
-    <TouchableOpacity activeOpacity={0.5}>
+    <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
       <IconBase 
         name={name}
         iconStyle={iconStyle} 
