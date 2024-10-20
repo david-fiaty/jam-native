@@ -21,6 +21,31 @@ export default () => {
 
   const [activeScreen, setActiveScreen] = useState('');
 
+  const screenAnimations = {
+    fade: {
+      in: () => {
+        /*
+        Animated.timing(slideEffect, {
+          toValue: 0, 
+          duration: 300, 
+          useNativeDriver: true, 
+        }).start();
+        */
+      },
+      out: () => {
+
+      },
+    },
+    slide: {
+      in: () => {
+
+      },
+      out: () => {
+
+      },
+    },
+  };
+
   const screenStack = {
     settingsMenu: {
       show: 'fadeIn',
