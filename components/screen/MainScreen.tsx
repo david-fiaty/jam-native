@@ -95,11 +95,6 @@ export default () => {
     },
   };
 
-  const animationStyles = [
-    styles.animatedView, 
-    { opacity: fadeEffect },
-  ];
-
   return (
     <ScreenView>
       <View style={styles.container}>
@@ -120,8 +115,11 @@ export default () => {
 
         {/* Main content */}
         <BoxView style={styles.content}>
-         {/* <Animated.View style={[styles.animatedView, { transform: [{ translateY: slideEffect }] }]}> */}
-         <Animated.View style={[styles.animatedView, { opacity: fadeEffect }]}>
+          {/* <Animated.View style={[styles.animatedView, { transform: [{ translateY: slideEffect }] }]}> */}
+          <Animated.View style={[{
+            ...styles.animatedView, 
+            ...(screenStack[activeScreen]?.effect == 'fade' ? { opacity: fadeEffect } : { transform: [{ translateY: slideEffect }] }),
+          }]}>
             <BoxView style={styles.modal}>
               <TextView>{i18n.t('welcome')}</TextView>
               { activeScreen && (<TextView>{activeScreen}</TextView>)}
