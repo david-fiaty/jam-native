@@ -11,6 +11,9 @@ import TextView from '../view/TextView';
 import SettingsMenu from '../menu/SettingsMenu';
 import NotificationsMenu from '../menu/NotificationsMenu';
 import SearchMenu from '../menu/SearchMenu';
+import MapView from '../view/MapView';
+import AddJamForm from '../form/AddJamForm';
+import ProfileForm from '../form/ProfileForm';
 
 export default () => {  
   // Parameters
@@ -93,6 +96,18 @@ export default () => {
       effect: 'slide',
       component: () => <SearchMenu />,
     },
+    mapView: {
+      effect: 'fade',
+      component: () => <MapView />,
+    },
+    addJamForm: {
+      effect: 'fade',
+      component: () => <AddJamForm />,
+    },
+    profileForm: {
+      effect: 'fade',
+      component: () => <ProfileForm />,
+    },
   };
 
   return (
@@ -134,9 +149,9 @@ export default () => {
             </TouchableOpacity>
           </BoxView>
           <BoxView direction="row">
-            <IconView name="menu" theme="primary" size={22} onPress={() => toggleScreen('settingsMenu')} />
-            <IconView label="15+" theme="secondary" size={13} onPress={() => toggleScreen('notificationsMenu')} />
-            <IconView name="search" theme="clear" size={22} onPress={() => toggleScreen('searchMenu')} />
+            <IconView name="menu" theme="primary" size={22} onPress={() => toggleScreen('mapView')} />
+            <IconView label="15+" theme="secondary" size={13} onPress={() => toggleScreen('addJamForm')} />
+            <IconView name="search" theme="clear" size={22} onPress={() => toggleScreen('profileForm')} />
           </BoxView>
         </BoxView>
         
