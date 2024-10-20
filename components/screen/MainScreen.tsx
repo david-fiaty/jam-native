@@ -22,9 +22,21 @@ export default () => {
   const [activeScreen, setActiveScreen] = useState('');
 
   const screenStack = {
-    settingsMenu: () => <SettingsMenu />,
-    notificationsMenu: () => <NotificationsMenu />,
-    searchMenu: () => <SearchMenu />,
+    settingsMenu: {
+      show: 'fadeIn',
+      hide: 'fadeOut',
+      component: () => <SettingsMenu />,
+    },
+    notificationsMenu: {
+      show: 'slideIn',
+      hide: 'slideOut',
+      component: () => <NotificationsMenu />,
+    }, 
+    searchMenu: {
+      show: 'fadeIn',
+      hide: 'fadeOut',
+      component: () => <SearchMenu />,
+    },
   };
 
   const slideIn = () => {
@@ -113,7 +125,7 @@ export default () => {
               <TextView>{i18n.t('welcome')}</TextView>
               <IconView name="menu" theme="primary" size={22} onPress={slideOut} />
               { activeScreen && (<TextView>{activeScreen}</TextView>)}
-              { activeScreen && screenStack[activeScreen]()}
+              { activeScreen && screenStack[activeScreen].component()}
             </BoxView>
           </Animated.View>
         </BoxView>
