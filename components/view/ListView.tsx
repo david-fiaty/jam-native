@@ -1,8 +1,9 @@
-import { StyleSheet, View, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import TextView from './TextView';
 import { Layout } from '@/constants/Layout';
 import DeviceManager from '@/classes/DeviceManager';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 type Props = BaseProps & {
   data: object,
@@ -17,9 +18,11 @@ export default ({data, style}: Props) => {
       contentContainerStyle={styles.list}
       renderItem={({item, index}) => {
         return (
-          <View style={styles.item}>
-            <TextView>{item.name}</TextView>
-          </View>
+          <TouchableOpacity>
+            <View style={styles.item}>
+              <TextView>{item.name}</TextView>
+            </View>
+          </TouchableOpacity>
         );
       }} 
     />
@@ -29,19 +32,20 @@ export default ({data, style}: Props) => {
 const styles = StyleSheet.create({
   list: {
     width: DeviceManager.window.width,
-    backgroundColor: 'blue',
+    //backgroundColor: 'blue',
+    //gap: Layout.space.base,
   },
   label: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: Layout.space.base,
   },
   item: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
-    gap: Layout.space.base,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    //gap: Layout.space.base,
     padding: Layout.space.base,
-    //width: '100%',
-    backgroundColor: 'red',
+    borderBottomWidth: 0.70,
+    borderBottomColor: Colors.primary,
   },
 });
