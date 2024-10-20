@@ -19,7 +19,7 @@ export default () => {
           </TouchableOpacity>
         </View>
         <View style={styles.headerRight}>
-          <PrimaryIcon name="menu" size={32} label='hh' />
+          <PrimaryIcon name="menu" size={22} />
         </View>
       </View>
 
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginTop: DeviceManager.statusBar.height,
-    paddingHorizontal: Layout.space.container,
+    paddingHorizontal: Layout.space.big,
   },
   left: {
     gap: GlobalStyles.space.base,
