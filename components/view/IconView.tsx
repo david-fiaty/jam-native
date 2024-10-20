@@ -5,7 +5,7 @@ import { Colors } from '@/constants/Colors';
 import TextView from '../view/TextView';
 
 type Props = {
-  name: string,
+  name?: string,
   size?: number, 
   label?: string,
   style?: object,
