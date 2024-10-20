@@ -142,19 +142,11 @@ export default () => {
         </BoxView>
 
         {/* Bottom navigation */}
-        <BoxView direction="row" justify="space-between">
-          <BoxView direction="row">
-            <TouchableOpacity onPress={() => {}}>
-              <LogoView size={styles.headerLogo} />
-            </TouchableOpacity>
-          </BoxView>
-          <BoxView direction="row">
-            <IconView name="menu" theme="primary" size={22} onPress={() => toggleScreen('mapView')} />
-            <IconView label="15+" theme="secondary" size={13} onPress={() => toggleScreen('addJamForm')} />
-            <IconView name="search" theme="clear" size={22} onPress={() => toggleScreen('profileForm')} />
-          </BoxView>
+        <BoxView direction="row" justify="space-between" style={styles.footer}>
+          <IconView name="menu" theme="primary" size={22} onPress={() => toggleScreen('mapView')} />
+          <IconView label="15+" theme="secondary" size={13} onPress={() => toggleScreen('addJamForm')} />
+          <IconView name="search" theme="clear" size={22} onPress={() => toggleScreen('profileForm')} />
         </BoxView>
-        
       </View>        
     </ScreenView>
   );
@@ -171,6 +163,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  footer: {
+    height: Layout.footer.height,
   },
   headerLeft: {
     flexDirection: 'row',
