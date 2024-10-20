@@ -6,18 +6,23 @@ import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
 import { ListItemProps } from '@/constants/Types';
 
-const items = [
+type ItemProps = {
+  label: string,
+  path: string,
+};
+
+const items: ItemProps[] = [
   {
-    'label': 'Account information',
-    'path': '/account',
+    label: 'Account information',
+    path: '/account',
   },
   {
-    'label': 'Change password',
-    'path': '/password',
+    label: 'Change password',
+    path: '/password',
   },
   {
-    'label': 'Language',
-    'path': '/language',
+    label: 'Language',
+    path: '/language',
   },
 ];
 

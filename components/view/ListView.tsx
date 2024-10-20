@@ -3,7 +3,7 @@ import { BaseProps, ListItemProps } from '@/constants/Types';
 import DeviceManager from '@/classes/DeviceManager';
 
 type Props = BaseProps & {
-  data: [],
+  data: object,
   renderItem: ({item, index}: ListItemProps) => JSX.Element, 
   style?: object,
 };
