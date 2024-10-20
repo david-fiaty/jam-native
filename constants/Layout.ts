@@ -17,7 +17,6 @@ export const Layout = {
   },
   footer: {
     height: 50,
-    paddingHorizontal: 20,
   },
 };
 
