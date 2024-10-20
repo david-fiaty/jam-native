@@ -2,11 +2,13 @@ import { StyleSheet, View, FlatList } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import TextView from './TextView';
 import { Layout } from '@/constants/Layout';
-import ApiClient from '@/classes/ApiClient';
 
-export default ({style, children}: BaseProps) => {
-  const data = ApiClient.get('jammers');
+type Props = BaseProps & {
+  data: object,
+  style?: object,
+};
 
+export default ({data, style}: BaseProps) => {
   return (
     <FlatList 
       data={data} 
