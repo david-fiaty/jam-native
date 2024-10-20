@@ -39,24 +39,29 @@ export default () => {
     searchMenu: () => <SearchMenu />,
   };
 
+  const hideScreens = () => {
+    setActiveScreen('');
+    slideOut();
+  }; 
+
+  const showScreen = (name: string) => {
+    setActiveScreen(name);
+    slideIn();
+  };
+
   const toggleScreen = (name: string) => {
     if (activeScreen && !name) {
-      setActiveScreen('');
-      slideOut();
+      hideScreens();
     }
     else if (activeScreen == name) {
-      setActiveScreen('');
-      slideOut();
+      hideScreens();
     }
     else if (activeScreen && activeScreen != name) {
-      setActiveScreen('');
-      slideOut();
-      setActiveScreen(name);
-      slideIn();
+      hideScreens();
+      showScreen(name);
     }
     else {
-      setActiveScreen(name);
-      slideIn();
+      showScreen(name);
     }
   };
 
