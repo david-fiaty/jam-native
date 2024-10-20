@@ -8,15 +8,17 @@ type Props = {
   name?: string,
   size?: number, 
   label?: string,
-  theme?: string,
+  theme: string,
   style?: object,
 };
 
 export default ({name, size, label, theme, style}: Props) => {
+  const iconStyle = [styles.iconStyle, styles[theme], {fontSize: size}];
+
   if (label) {
     return (
       <View style={styles.containerStyle}>
-        <TextView style={[styles.iconStyle, {fontSize: size}]}>
+        <TextView style={iconStyle}>
           {label}
         </TextView>
       </View>
@@ -26,7 +28,7 @@ export default ({name, size, label, theme, style}: Props) => {
   return (
     <IconBase 
       name={name}
-      iconStyle={[styles.iconStyle, style]} 
+      iconStyle={iconStyle} 
       containerStyle={styles.containerStyle}
       size={size} 
     />
@@ -45,5 +47,17 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary,
     padding: Layout.space.small,
     borderRadius: Layout.radius.circle,
+  },
+  primary: {
+    backgroundColor: Colors.primary,
+  },
+  secondary: {
+    backgroundColor: Colors.secondary,
+  },
+  tertiary: {
+    backgroundColor: Colors.tertiary,
+  },
+  clear: {
+    backgroundColor: Colors.white,
   },
 });
