@@ -1,6 +1,7 @@
-import { StyleSheet, View, FlatList } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { BaseProps } from '@/constants/Types';
-import TextView from '../view/TextView';
+import ListView from '../view/ListView';
+import ApiClient from '@/classes/ApiClient';
 
 const items = [
   {
@@ -20,36 +21,12 @@ const items = [
 export default ({style, children}: BaseProps) => {
   return (
     <View style={styles.container}>
-      <TextView>Settings menu</TextView>
+      <ListView data={items} labelField="label" />
     </View>
   );
-
-  /*
-  return (
-    <FlatList 
-      data={items} 
-      horizontal={false}  
-      style={styles.list}
-      renderItem={({item, index}) => {
-        return (
-          <TextView>{item.label}</TextView>
-        );
-      }} 
-    />
-  );
-  */
 };
 
 const styles = StyleSheet.create({
   container: {
-    width: 200,
-    height: 200,
-    backgroundColor: 'yellow',
-  },
-  list: {
-    width: '100%',
-  },
-  item: {
-
   },
 });
