@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { StyleSheet, View, TouchableOpacity, Animated, Modal } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Animated } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import i18n from '@/translation/i18n'; 
 import ScreenView from '../view/ScreenView';
@@ -13,90 +13,86 @@ import NotificationsMenu from '../menu/NotificationsMenu';
 import SearchMenu from '../menu/SearchMenu';
 
 export default () => {  
+  // Parameters
   const windowHeight = DeviceManager.window.height;
   const windowWidth = DeviceManager.window.width;
 
+  // Hooks
   const slideEffect = useRef(new Animated.Value(windowHeight)).current; 
   const fadeEffect = useRef(new Animated.Value(0)).current; 
-
   const [activeScreen, setActiveScreen] = useState('');
 
-  const screenStack = {
-    settingsMenu: {
-      show: 'fadeIn',
-      hide: 'fadeOut',
-      component: () => <SettingsMenu />,
-    },
-    notificationsMenu: {
-      show: 'fadeIn',
-      hide: 'fadeOut',
-      component: () => <NotificationsMenu />,
-    }, 
-    searchMenu: {
-      show: 'slideIn',
-      hide: 'slideOut',
-      component: () => <SearchMenu />,
-    },
-  };
-
-  const slideIn = () => {
-    Animated.timing(slideEffect, {
-      toValue: 0, 
-      duration: 300, 
-      useNativeDriver: true, 
-    }).start();
-  };
-
-  const slideOut = () => {
-    Animated.timing(slideEffect, {
-      toValue: windowHeight, 
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const fadeIn = () => {
-    Animated.timing(fadeEffect, {
-      toValue: 1, 
-      duration: 300, 
-      useNativeDriver: true, 
-    }).start();
-  };
-
-  const fadeOut = () => {
-    Animated.timing(fadeEffect, {
-      toValue: 0, 
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const hideScreen = () => {
-    setActiveScreen('');
-    //slideOut();
-    fadeOut();
-  }; 
-
-  const showScreen = (name: string) => {
-    setActiveScreen(name);
-    //slideIn();
-    fadeIn();
-  };
-
   const toggleScreen = (name: string) => {
-    if (activeScreen && !name) {
-      hideScreen();
-    }
-    else if (activeScreen == name) {
-      hideScreen();
+    if (activeScreen && !name || activeScreen == name) {
+      hideScreen(activeScreen);
     }
     else if (activeScreen && activeScreen != name) {
-      hideScreen();
+      hideScreen(name);
       showScreen(name);
     }
     else {
       showScreen(name);
     }
+  };
+
+  const hideScreen = (name: string) => {
+    setActiveScreen('');
+    screenAnimations[screenStack[name].effect].out().start();
+  }; 
+
+  const showScreen = (name: string) => {
+    setActiveScreen(name);
+    screenAnimations[screenStack[name].effect].in().start();
+  };
+
+  const screenAnimations = {
+    slide: {
+      in: () => {
+        return Animated.timing(slideEffect, {
+          toValue: 0, 
+          duration: 300, 
+          useNativeDriver: true, 
+        });
+      },
+      out: () => {
+        return Animated.timing(slideEffect, {
+          toValue: windowHeight, 
+          duration: 300,
+          useNativeDriver: true,
+        });
+      },
+    },
+    fade: {
+      in: () => {
+        return Animated.timing(fadeEffect, {
+          toValue: 1, 
+          duration: 300, 
+          useNativeDriver: true, 
+        });
+      },
+      out: () => {
+        return Animated.timing(fadeEffect, {
+          toValue: 0, 
+          duration: 300, 
+          useNativeDriver: true, 
+        });
+      },
+    },
+  };
+
+  const screenStack = {
+    settingsMenu: {
+      effect: 'fade',
+      component: () => <SettingsMenu />,
+    },
+    notificationsMenu: {
+      effect: 'fade',
+      component: () => <NotificationsMenu />,
+    }, 
+    searchMenu: {
+      effect: 'slide',
+      component: () => <SearchMenu />,
+    },
   };
 
   return (
@@ -119,11 +115,13 @@ export default () => {
 
         {/* Main content */}
         <BoxView style={styles.content}>
-         {/* <Animated.View style={[styles.animatedView, { transform: [{ translateY: slideEffect }] }]}> */}
-         <Animated.View style={[styles.animatedView, { opacity: fadeEffect }]}>
+          {/* <Animated.View style={[styles.animatedView, { transform: [{ translateY: slideEffect }] }]}> */}
+          <Animated.View style={[{
+            ...styles.animatedView, 
+            ...(screenStack[activeScreen]?.effect == 'fade' ? { opacity: fadeEffect } : { transform: [{ translateY: slideEffect }] }),
+          }]}>
             <BoxView style={styles.modal}>
               <TextView>{i18n.t('welcome')}</TextView>
-              <IconView name="menu" theme="primary" size={22} onPress={slideOut} />
               { activeScreen && (<TextView>{activeScreen}</TextView>)}
               { activeScreen && screenStack[activeScreen].component()}
             </BoxView>
