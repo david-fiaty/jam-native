@@ -32,8 +32,6 @@ export default ({data, style}: Props) => {
 const styles = StyleSheet.create({
   list: {
     width: DeviceManager.window.width,
-    //backgroundColor: 'blue',
-    //gap: Layout.space.base,
   },
   label: {
     flexDirection: 'row',
@@ -43,9 +41,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    //gap: Layout.space.base,
     padding: Layout.space.base,
-    borderBottomWidth: 0.70,
+    borderBottomWidth: 0.76,
     borderBottomColor: Colors.primary,
   },
 });
