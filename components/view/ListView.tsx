@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     //gap: Layout.space.base,
     padding: Layout.space.base,
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 0.70,
     borderBottomColor: Colors.primary,
   },
 });
