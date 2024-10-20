@@ -115,7 +115,7 @@ export default () => {
       <View style={styles.container}>
 
         {/* Top navigation */}
-        <BoxView direction="row" justify="space-between">
+        <BoxView direction="row" justify="space-between" style={styles.header}>
           <BoxView direction="row">
             <TouchableOpacity onPress={() => {activeScreen && toggleScreen('')}}>
               <LogoView size={styles.headerLogo} />
@@ -160,9 +160,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'gray',
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    height: Layout.header.height,
   },
   footer: {
     height: Layout.footer.height,
@@ -178,8 +176,8 @@ const styles = StyleSheet.create({
     gap: Layout.space.base,
   },
   headerLogo: {
-    width: Layout.header.logo.width,
-    height: Layout.header.logo.height,
+    width: Layout.headerLogo.width,
+    height: Layout.headerLogo.height,
   },
   animatedView: {
     position: 'absolute',
