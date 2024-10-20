@@ -19,5 +19,8 @@ export default ({style, children}: Props) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.background,
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
   },
 });
