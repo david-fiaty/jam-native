@@ -4,44 +4,43 @@ import { Layout } from '@/constants/Layout';
 import i18n from '@/translation/i18n'; 
 import ScreenView from '../view/ScreenView';
 import IconView from '../view/IconView';
-import HorizontalView from '../view/HorizontalView';
+import BlockView from '../view/BlockView';
 import LogoView from '../view/LogoView';
-import VerticalView from '../view/VerticalView';
 
 export default () => {  
   return (
     <ScreenView>
       <View style={styles.container}>
-        <HorizontalView>
-          <HorizontalView>
+        <BlockView direction="row" justify="space-between">
+          <BlockView direction="row">
             <TouchableOpacity onPress={() => {}}>
               <LogoView size={styles.headerLogo} />
             </TouchableOpacity>
-          </HorizontalView>
-          <HorizontalView>
+          </BlockView>
+          <BlockView direction="row">
             <IconView name="menu" theme="primary" size={22} />
             <IconView label="15+" theme="secondary" size={13} />
             <IconView name="search" theme="clear" size={22} />
-          </HorizontalView>
-        </HorizontalView>
+          </BlockView>
+        </BlockView>
 
-        <VerticalView style={styles.content}>
+        <BlockView style={styles.content}>
           <Button title="My Button" />
           <Text>{i18n.t('welcome')}</Text>
-        </VerticalView>
+        </BlockView>
 
-        <HorizontalView>
-          <HorizontalView>
+        <BlockView direction="row" justify="space-between">
+          <BlockView direction="row">
             <TouchableOpacity onPress={() => {}}>
               <LogoView size={styles.headerLogo} />
             </TouchableOpacity>
-          </HorizontalView>
-          <HorizontalView>
+          </BlockView>
+          <BlockView direction="row">
             <IconView name="menu" theme="primary" size={22} />
             <IconView label="15+" theme="secondary" size={13} />
             <IconView name="search" theme="clear" size={22} />
-          </HorizontalView>
-        </HorizontalView>
+          </BlockView>
+        </BlockView>
       </View>        
     </ScreenView>
   );
