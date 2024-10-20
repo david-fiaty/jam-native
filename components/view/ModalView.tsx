@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-import { Colors } from '@/constants/Colors';
 import { StyleSheet } from 'react-native';
 import BoxView from './BoxView';
 
@@ -18,9 +17,6 @@ export default ({style, children}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.background,
-    display: 'flex',
-    flexDirection: 'column',
-    flexGrow: 1,
+
   },
 });
