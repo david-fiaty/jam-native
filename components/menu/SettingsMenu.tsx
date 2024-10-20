@@ -1,4 +1,4 @@
-import { StyleSheet, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import TextView from '../view/TextView';
 
@@ -19,7 +19,9 @@ const items = [
 
 export default ({style, children}: BaseProps) => {
   return (
-    <TextView>Settings menu</TextView>
+    <View style={styles.container}>
+      <TextView>Settings menu</TextView>
+    </View>
   );
 
   /*
@@ -40,6 +42,9 @@ export default ({style, children}: BaseProps) => {
 
 const styles = StyleSheet.create({
   container: {
+    width: 200,
+    height: 200,
+    backgroundColor: 'yellow',
   },
   list: {
     width: '100%',
