@@ -118,12 +118,10 @@ export default () => {
           <Animated.View style={[{
             ...styles.animatedView, 
             ...(screenStack[activeScreen]?.effect == 'fade' ? { opacity: fadeEffect } : { transform: [{ translateY: slideEffect }] }),
-            //...(screenStack[activeScreen]?.effect == 'fade' ? { top: DeviceManager.modalView.height, opacity: 0 } : { top: DeviceManager.modalView.height }),
           }]}>
             <BoxView style={styles.modal}>
               <TextView>{i18n.t('welcome')}</TextView>
-              { activeScreen && (<TextView>{activeScreen}</TextView>)}
-              { activeScreen && screenStack[activeScreen].component()}
+              { activeScreen && screenStack[activeScreen].component() }
             </BoxView>
           </Animated.View>
         </BoxView>
@@ -136,9 +134,9 @@ export default () => {
             </TouchableOpacity>
           </BoxView>
           <BoxView direction="row">
-            <IconView name="menu" theme="primary" size={22} />
-            <IconView label="15+" theme="secondary" size={13} />
-            <IconView name="search" theme="clear" size={22} />
+            <IconView name="menu" theme="primary" size={22} onPress={() => toggleScreen('settingsMenu')} />
+            <IconView label="15+" theme="secondary" size={13} onPress={() => toggleScreen('notificationsMenu')} />
+            <IconView name="search" theme="clear" size={22} onPress={() => toggleScreen('searchMenu')} />
           </BoxView>
         </BoxView>
         
