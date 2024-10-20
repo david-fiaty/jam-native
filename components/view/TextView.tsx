@@ -1,10 +1,5 @@
-import { ReactNode } from 'react';
 import TextBase from '../base/TextBase';
-
-type Props = {
-  style?: object,
-  children?: ReactNode,
-};
+import { Props } from '@/constants/Types';
 
 export default ({style, children}: Props) => {
   return (

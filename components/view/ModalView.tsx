@@ -1,11 +1,6 @@
-import { ReactNode } from 'react';
 import { StyleSheet } from 'react-native';
 import BoxView from './BoxView';
-
-type Props = {
-  style?: object,
-  children?: ReactNode,
-};
+import { Props } from '@/constants/Types';
 
 export default ({style, children}: Props) => {
   return (
