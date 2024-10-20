@@ -17,10 +17,16 @@ export default () => {
   const slideAnim = useRef(new Animated.Value(windowHeight)).current; 
   const [activeScreen, setActiveScreen] = useState('');
 
+  const screenStack = {
+    settingsMenu: () => <SettingsMenu />,
+    notificationsMenu: () => <NotificationsMenu />,
+    searchMenu: () => <SearchMenu />,
+  };
+
   const slideIn = () => {
     Animated.timing(slideAnim, {
       toValue: 0, 
-      duration: 500, 
+      duration: 300, 
       useNativeDriver: true, 
     }).start();
   };
@@ -28,35 +34,34 @@ export default () => {
   const slideOut = () => {
     Animated.timing(slideAnim, {
       toValue: windowHeight, 
-      duration: 500,
+      duration: 300,
       useNativeDriver: true,
     }).start();
   };
 
-  const screenStack = {
-    settingsMenu: () => <SettingsMenu />,
-    notificationsMenu: () => <NotificationsMenu />,
-    searchMenu: () => <SearchMenu />,
+  const hideScreens = () => {
+    setActiveScreen('');
+    slideOut();
+  }; 
+
+  const showScreen = (name: string) => {
+    setActiveScreen(name);
+    slideIn();
   };
 
   const toggleScreen = (name: string) => {
     if (activeScreen && !name) {
-      setActiveScreen('');
-      slideOut();
+      hideScreens();
     }
     else if (activeScreen == name) {
-      setActiveScreen('');
-      slideOut();
+      hideScreens();
     }
     else if (activeScreen && activeScreen != name) {
-      setActiveScreen('');
-      slideOut();
-      setActiveScreen(name);
-      slideIn();
+      hideScreens();
+      showScreen(name);
     }
     else {
-      setActiveScreen(name);
-      slideIn();
+      showScreen(name);
     }
   };
 
