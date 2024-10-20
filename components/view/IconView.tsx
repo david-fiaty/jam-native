@@ -28,7 +28,7 @@ export default ({name, size, label, theme, style}: Props) => {
   }
 
   return (
-    <TouchableOpacity>
+    <TouchableOpacity activeOpacity={0.5}>
       <IconBase 
         name={name}
         iconStyle={iconStyle} 
