@@ -4,15 +4,18 @@ export const Layout = {
     base: 10,
     big: 20,
   },
+  radius: {
+    round: 8,
+    circle: 40,
+  },
   header: {
     logo: {
       width: 48,
       height: 48,
     },
   },
-  radius: {
-    round: 8,
-    circle: 40,
+  footer: {
+    height: 50,
   },
 };
 
