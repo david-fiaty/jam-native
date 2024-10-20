@@ -3,7 +3,7 @@ import { BaseProps } from '@/constants/Types';
 import DeviceManager from '@/classes/DeviceManager';
 
 type Props = BaseProps & {
-  data: object,
+  data: [],
   renderItem: () => JSX.Element, 
   style?: object,
 };
