@@ -2,22 +2,26 @@ import { StyleSheet } from 'react-native';
 import IconBase from '../base/IconBase';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
+import TextBase from '../base/TextBase';
 
 type Props = {
   name: string,
   size?: number, 
+  label?: string,
   style?: object,
-  text?: string,
 };
 
-const PrimaryIcon = ({name, size, style, text}: Props) => {
+const PrimaryIcon = ({name, size, label, style}: Props) => {
+  if (label) {
+    return (<TextBase>{label}</TextBase>);
+  }
+
   return (
     <IconBase 
       name={name} 
       iconStyle={[styles.iconStyle, style]} 
       containerStyle={styles.containerStyle}
       size={size} 
-      text={text}
     />
   );
 };
