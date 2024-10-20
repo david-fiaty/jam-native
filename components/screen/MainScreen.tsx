@@ -11,6 +11,9 @@ import TextView from '../view/TextView';
 import SettingsMenu from '../menu/SettingsMenu';
 import NotificationsMenu from '../menu/NotificationsMenu';
 import SearchMenu from '../menu/SearchMenu';
+import MapView from '../view/MapView';
+import AddJamForm from '../form/AddJamForm';
+import ProfileForm from '../form/ProfileForm';
 
 export default () => {  
   // Parameters
@@ -93,6 +96,18 @@ export default () => {
       effect: 'slide',
       component: () => <SearchMenu />,
     },
+    mapView: {
+      effect: 'fade',
+      component: () => <MapView />,
+    },
+    addJamForm: {
+      effect: 'fade',
+      component: () => <AddJamForm />,
+    },
+    profileForm: {
+      effect: 'fade',
+      component: () => <ProfileForm />,
+    },
   };
 
   return (
@@ -118,12 +133,10 @@ export default () => {
           <Animated.View style={[{
             ...styles.animatedView, 
             ...(screenStack[activeScreen]?.effect == 'fade' ? { opacity: fadeEffect } : { transform: [{ translateY: slideEffect }] }),
-            //...(screenStack[activeScreen]?.effect == 'fade' ? { top: DeviceManager.modalView.height, opacity: 0 } : { top: DeviceManager.modalView.height }),
           }]}>
             <BoxView style={styles.modal}>
               <TextView>{i18n.t('welcome')}</TextView>
-              { activeScreen && (<TextView>{activeScreen}</TextView>)}
-              { activeScreen && screenStack[activeScreen].component()}
+              { activeScreen && screenStack[activeScreen].component() }
             </BoxView>
           </Animated.View>
         </BoxView>
@@ -136,9 +149,9 @@ export default () => {
             </TouchableOpacity>
           </BoxView>
           <BoxView direction="row">
-            <IconView name="menu" theme="primary" size={22} />
-            <IconView label="15+" theme="secondary" size={13} />
-            <IconView name="search" theme="clear" size={22} />
+            <IconView name="menu" theme="primary" size={22} onPress={() => toggleScreen('mapView')} />
+            <IconView label="15+" theme="secondary" size={13} onPress={() => toggleScreen('addJamForm')} />
+            <IconView name="search" theme="clear" size={22} onPress={() => toggleScreen('profileForm')} />
           </BoxView>
         </BoxView>
         
