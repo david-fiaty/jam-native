@@ -10,5 +10,9 @@ export const Layout = {
       height: 48,
     },
   },
+  radius: {
+    round: 8,
+    circle: 40,
+  },
 };
 
