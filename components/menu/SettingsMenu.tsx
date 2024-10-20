@@ -1,6 +1,10 @@
-import { StyleSheet, View, FlatList } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { BaseProps } from '@/constants/Types';
+import ListView from '../view/ListView';
 import TextView from '../view/TextView';
+import { Layout } from '@/constants/Layout';
+import { Colors } from '@/constants/Colors';
+import { ListItemProps } from '@/constants/Types';
 
 const items = [
   {
@@ -20,36 +24,35 @@ const items = [
 export default ({style, children}: BaseProps) => {
   return (
     <View style={styles.container}>
-      <TextView>Settings menu</TextView>
+      <ListView 
+        data={items} 
+        renderItem={({item, index}: ListItemProps) => {
+          return (
+            <TouchableOpacity>
+              <View style={styles.item}>
+                <TextView>{item.label}</TextView>
+              </View>
+            </TouchableOpacity>
+          );
+        }}   
+      />
     </View>
   );
-
-  /*
-  return (
-    <FlatList 
-      data={items} 
-      horizontal={false}  
-      style={styles.list}
-      renderItem={({item, index}) => {
-        return (
-          <TextView>{item.label}</TextView>
-        );
-      }} 
-    />
-  );
-  */
 };
 
 const styles = StyleSheet.create({
   container: {
-    width: 200,
-    height: 200,
-    backgroundColor: 'yellow',
-  },
-  list: {
-    width: '100%',
   },
   item: {
-
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    padding: Layout.space.base,
+    borderBottomWidth: 0.76,
+    borderBottomColor: Colors.primary,
+  },
+  label: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
