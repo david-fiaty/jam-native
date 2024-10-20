@@ -4,8 +4,7 @@ import BoxView from './BoxView';
 import { BaseProps } from '@/constants/Types';
 import DeviceManager from '@/classes/DeviceManager';
 
-const { height } = DeviceManager.window.height;
-
+const height = DeviceManager.window.height;
 
 export default ({style, children}: BaseProps) => {
   return (
