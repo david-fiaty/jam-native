@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { StyleSheet, View, TouchableOpacity, Animated } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Animated, Modal } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import i18n from '@/translation/i18n'; 
 import ScreenView from '../view/ScreenView';
@@ -18,7 +18,7 @@ export default () => {
 
   const slideIn = () => {
     Animated.timing(slideAnim, {
-      toValue: 100, 
+      toValue: 0, 
       duration: 500, 
       useNativeDriver: true, 
     }).start();
@@ -69,7 +69,7 @@ export default () => {
         {/* Main content */}
         <BoxView style={styles.content}>
           <Animated.View style={[styles.animatedView, { transform: [{ translateY: slideAnim }] }]}>
-            <BoxView style={styles.container}>
+            <BoxView style={styles.modal}>
               <TextView>{i18n.t('welcome')}</TextView>
               <IconView name="menu" theme="primary" size={22} onPress={slideOut} />
               { activeScreen && (<TextView>{activeScreen}</TextView>)}
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
     height: '100%',
-    backgroundColor: 'red',
+    backgroundColor: 'gray',
   },
   header: {
     flexDirection: 'row',
@@ -125,10 +125,20 @@ const styles = StyleSheet.create({
   },
   animatedView: {
     position: 'absolute',
-    bottom: 0,
+    top: 0,
+    left: 0,
+    bottom: Layout.footer.height,
     width: '100%',
-    height: 500, 
+    height: DeviceManager.modalView.height, 
     backgroundColor: 'lightblue',
+  },
+  modal: {
+    backgroundColor: 'blue',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: DeviceManager.modalView.height,
   },
   content: {
     backgroundColor: 'green',

@@ -17,7 +17,7 @@ class DeviceManager {
   getModalViewSize() {
     return {
       width: this.window.width,
-      height: this.window.height - GlobalStyles.header.height - GlobalStyles.footer.height - GlobalStyles.space.base/2,
+      height: this.window.height - StatusBar.currentHeight - GlobalStyles.header.height - GlobalStyles.footer.height,
     };
   } 
 
