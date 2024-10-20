@@ -11,29 +11,25 @@ type Props = BaseProps & {
 
 export default ({data, style}: Props) => {
   return (
-    <View style={styles.container}>
-      <FlatList 
-        data={data} 
-        horizontal={false}  
-        contentContainerStyle={styles.list}
-        renderItem={({item, index}) => {
-          return (
-            <View style={styles.item}>
-              <TextView>{item.name}</TextView>
-            </View>
-          );
-        }} 
-      />
-    </View>
+    <FlatList 
+      data={data} 
+      horizontal={false}  
+      contentContainerStyle={styles.list}
+      renderItem={({item, index}) => {
+        return (
+          <View style={styles.item}>
+            <TextView>{item.name}</TextView>
+          </View>
+        );
+      }} 
+    />
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: DeviceManager.window.width,
-  },
   list: {
-    width: '100%',
+    width: DeviceManager.window.width,
+    backgroundColor: 'blue',
   },
   label: {
     flexDirection: 'row',
