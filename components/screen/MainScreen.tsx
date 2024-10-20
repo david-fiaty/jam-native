@@ -14,7 +14,7 @@ import NotificationsMenu from '../menu/NotificationsMenu';
 export default () => {  
   const windowHeight = DeviceManager.window.height
   const slideAnim = useRef(new Animated.Value(windowHeight)).current; 
-  const [activeScreen, setActiveScreen] = useState('');
+  const [activeScreen, setActiveScreen] = useState('settingsMenu');
 
   const slideIn = () => {
     Animated.timing(slideAnim, {
@@ -39,6 +39,7 @@ export default () => {
 
   const toggleScreen = (name: string) => {
     setActiveScreen(name);
+    slideIn();
   };
 
   return (
@@ -65,6 +66,10 @@ export default () => {
             <BoxView style={styles.container}>
               <TextView>{i18n.t('welcome')}</TextView>
               <IconView name="menu" theme="primary" size={22} onPress={slideOut} />
+              { activeScreen && (<TextView>{activeScreen}</TextView>)}
+              { activeScreen && screenStack[activeScreen]()}
+              
+
             </BoxView>
           </Animated.View>
         </BoxView>
