@@ -159,12 +159,8 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: 'gray',
   },
-  header: {
-    height: Layout.header.height,
-  },
-  footer: {
-    height: Layout.footer.height,
-  },
+  header: Layout.header,
+  footer: Layout.footer,
   headerLeft: {
     flexDirection: 'row',
     alignItems: 'center',
