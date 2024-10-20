@@ -38,8 +38,14 @@ export default () => {
   };
 
   const toggleScreen = (name: string) => {
-    setActiveScreen(name);
-    slideIn();
+    if (activeScreen == name) {
+      setActiveScreen('');
+      slideOut();
+    }
+    else {
+      setActiveScreen(name);
+      slideIn();
+    }
   };
 
   return (
