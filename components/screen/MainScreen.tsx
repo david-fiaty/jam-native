@@ -20,6 +20,8 @@ export default () => {
         </View>
         <View style={styles.headerRight}>
           <PrimaryIcon name="menu" size={22} />
+          <PrimaryIcon name="menu" size={22} />
+          <PrimaryIcon name="menu" size={22} />
         </View>
       </View>
 
