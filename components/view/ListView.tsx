@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList, Touchable, TouchableOpacity } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import TextView from './TextView';
 import { Layout } from '@/constants/Layout';
@@ -17,9 +17,11 @@ export default ({data, style}: Props) => {
       contentContainerStyle={styles.list}
       renderItem={({item, index}) => {
         return (
-          <View style={styles.item}>
-            <TextView>{item.name}</TextView>
-          </View>
+          <TouchableOpacity>
+            <View style={styles.item}>
+              <TextView>{item.name}</TextView>
+            </View>
+          </TouchableOpacity>
         );
       }} 
     />
@@ -41,7 +43,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     gap: Layout.space.base,
     padding: Layout.space.base,
-    //width: '100%',
     backgroundColor: 'red',
   },
 });
