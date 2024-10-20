@@ -118,6 +118,7 @@ export default () => {
           <Animated.View style={[{
             ...styles.animatedView, 
             ...(screenStack[activeScreen]?.effect == 'fade' ? { opacity: fadeEffect } : { transform: [{ translateY: slideEffect }] }),
+            //...(screenStack[activeScreen]?.effect == 'fade' ? { top: DeviceManager.modalView.height, opacity: 0 } : { top: DeviceManager.modalView.height }),
           }]}>
             <BoxView style={styles.modal}>
               <TextView>{i18n.t('welcome')}</TextView>
@@ -180,7 +181,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: DeviceManager.modalView.height, 
     backgroundColor: 'lightblue',
-    opacity: 0,
   },
   modal: {
     backgroundColor: 'blue',
