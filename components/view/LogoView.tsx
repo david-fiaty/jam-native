@@ -1,18 +1,23 @@
-import { ReactNode } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import ImageBase from '@/components/base/ImageBase';
+import { BaseProps } from '@/constants/Types';
 
-const source = require('@/assets/images/logo-48.png'); 
-
-type Props = {
+type Props = BaseProps & {
   size: object,
   style?: object,
 };
 
+const source = require('@/assets/images/logo-48.png'); 
+
 export default ({size, style}: Props) => {
   return (
-    <ImageBase source={source} width={size.width} height={size.height} />   
+    <ImageBase 
+      source={source} 
+      width={size.width} 
+      height={size.height} 
+      style={style}
+    />   
   );
 };
 

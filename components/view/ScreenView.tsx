@@ -1,14 +1,9 @@
 import { Colors } from '@/constants/Colors';
-import { ReactNode } from 'react';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { BaseProps } from '@/constants/Types';
 
-type Props = {
-  style?: object,
-  children?: ReactNode,
-};
-
-export default ({style, children}: Props) => {
+export default ({style, children}: BaseProps) => {
   return (
     <SafeAreaView style={[styles.container, style]}>
       {children}

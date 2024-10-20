@@ -4,43 +4,48 @@ import { Layout } from '@/constants/Layout';
 import i18n from '@/translation/i18n'; 
 import ScreenView from '../view/ScreenView';
 import IconView from '../view/IconView';
-import BlockView from '../view/BlockView';
+import BoxView from '../view/BoxView';
 import LogoView from '../view/LogoView';
 
 export default () => {  
   return (
     <ScreenView>
       <View style={styles.container}>
-        <BlockView direction="row" justify="space-between">
-          <BlockView direction="row">
+
+        {/* Top navigation */}
+        <BoxView direction="row" justify="space-between">
+          <BoxView direction="row">
             <TouchableOpacity onPress={() => {}}>
               <LogoView size={styles.headerLogo} />
             </TouchableOpacity>
-          </BlockView>
-          <BlockView direction="row">
+          </BoxView>
+          <BoxView direction="row">
             <IconView name="menu" theme="primary" size={22} />
             <IconView label="15+" theme="secondary" size={13} />
             <IconView name="search" theme="clear" size={22} />
-          </BlockView>
-        </BlockView>
+          </BoxView>
+        </BoxView>
 
-        <BlockView style={styles.content}>
+        {/* Main content */}
+        <BoxView style={styles.content}>
           <Button title="My Button" />
           <Text>{i18n.t('welcome')}</Text>
-        </BlockView>
+        </BoxView>
 
-        <BlockView direction="row" justify="space-between">
-          <BlockView direction="row">
+        {/* Bottom navigation */}
+        <BoxView direction="row" justify="space-between">
+          <BoxView direction="row">
             <TouchableOpacity onPress={() => {}}>
               <LogoView size={styles.headerLogo} />
             </TouchableOpacity>
-          </BlockView>
-          <BlockView direction="row">
+          </BoxView>
+          <BoxView direction="row">
             <IconView name="menu" theme="primary" size={22} />
             <IconView label="15+" theme="secondary" size={13} />
             <IconView name="search" theme="clear" size={22} />
-          </BlockView>
-        </BlockView>
+          </BoxView>
+        </BoxView>
+        
       </View>        
     </ScreenView>
   );
