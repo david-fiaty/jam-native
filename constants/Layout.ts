@@ -9,10 +9,12 @@ export const Layout = {
     circle: 40,
   },
   header: {
-    logo: {
-      width: 48,
-      height: 48,
-    },
+    width: 48,
+    height: 48,
+  },
+  headerLogo: {
+    width: 48,
+    height: 48,
   },
   footer: {
     height: 50,
