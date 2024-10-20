@@ -19,7 +19,7 @@ export default () => {
           </TouchableOpacity>
         </View>
         <View style={styles.headerRight}>
-          <PrimaryIcon name="menu" size={32} />
+          <PrimaryIcon name="menu" size={32} label='hh' />
         </View>
       </View>
 
