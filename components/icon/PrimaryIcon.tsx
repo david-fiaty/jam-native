@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   iconStyle: {
     color: '#FFFFFF',
     backgroundColor: Colors.primary,
-    padding: Layout.space.base,
+    padding: Layout.space.small,
     borderRadius: 40,
   },
 });
