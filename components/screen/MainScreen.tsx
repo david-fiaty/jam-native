@@ -18,9 +18,9 @@ export default () => {
           </TouchableOpacity>
         </HorizontalView>
         <HorizontalView>
-          <IconView name="menu" size={22} />
-          <IconView label="15+" size={13} />
-          <IconView name="menu" size={22} />
+          <IconView name="menu" theme="primary" size={22} />
+          <IconView label="15+" theme="secondary" size={13} />
+          <IconView name="menu" theme="tertiary" size={22} />
         </HorizontalView>
       </HorizontalView>
       <Button title="My Button" />
