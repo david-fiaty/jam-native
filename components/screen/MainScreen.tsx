@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { StyleSheet, View, TouchableOpacity, Animated } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import i18n from '@/translation/i18n'; 
@@ -9,10 +9,12 @@ import LogoView from '../view/LogoView';
 import DeviceManager from '@/classes/DeviceManager';
 import TextView from '../view/TextView';
 import SettingsMenu from '../menu/SettingsMenu';
+import NotificationsMenu from '../menu/NotificationsMenu';
 
 export default () => {  
   const windowHeight = DeviceManager.window.height
   const slideAnim = useRef(new Animated.Value(windowHeight)).current; 
+  const [activeScreen, setActiveScreen] = useState('');
 
   const slideIn = () => {
     Animated.timing(slideAnim, {
@@ -30,9 +32,13 @@ export default () => {
     }).start();
   };
 
+  const screenStack = {
+    settingsMenu: () => <SettingsMenu />,
+    notificationsMenu: () => <NotificationsMenu />,
+  };
+
   const toggleScreen = (name: string) => {
-    console.log(Date.now());
-    return (<SettingsMenu />);
+    setActiveScreen(name);
   };
 
   return (
@@ -59,6 +65,7 @@ export default () => {
             <BoxView style={styles.container}>
               <TextView>{i18n.t('welcome')}</TextView>
               <IconView name="menu" theme="primary" size={22} onPress={slideOut} />
+              {activeScreen == 'settingsMenu' && screenStack['settingsMenu']()}
             </BoxView>
           </Animated.View>
         </BoxView>
