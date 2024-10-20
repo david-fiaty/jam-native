@@ -11,13 +11,13 @@ export default () => {
   return (
     <ScreenView>
       <View style={styles.container}>
-        <BlockView>
-          <BlockView>
+        <BlockView direction="row">
+          <BlockView direction="row">
             <TouchableOpacity onPress={() => {}}>
               <LogoView size={styles.headerLogo} />
             </TouchableOpacity>
           </BlockView>
-          <BlockView>
+          <BlockView direction="row">
             <IconView name="menu" theme="primary" size={22} />
             <IconView label="15+" theme="secondary" size={13} />
             <IconView name="search" theme="clear" size={22} />
@@ -29,13 +29,13 @@ export default () => {
           <Text>{i18n.t('welcome')}</Text>
         </BlockView>
 
-        <BlockView>
-          <BlockView>
+        <BlockView direction="row">
+          <BlockView direction="row">
             <TouchableOpacity onPress={() => {}}>
               <LogoView size={styles.headerLogo} />
             </TouchableOpacity>
           </BlockView>
-          <BlockView>
+          <BlockView direction="row">
             <IconView name="menu" theme="primary" size={22} />
             <IconView label="15+" theme="secondary" size={13} />
             <IconView name="search" theme="clear" size={22} />
