@@ -115,7 +115,6 @@ export default () => {
 
         {/* Main content */}
         <BoxView style={styles.content}>
-          {/* <Animated.View style={[styles.animatedView, { transform: [{ translateY: slideEffect }] }]}> */}
           <Animated.View style={[{
             ...styles.animatedView, 
             ...(screenStack[activeScreen]?.effect == 'fade' ? { opacity: fadeEffect } : { transform: [{ translateY: slideEffect }] }),
