@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export type Props = {
+export type BaseProps = {
   style?: object,
   children?: ReactNode,
 };

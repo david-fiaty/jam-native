@@ -1,10 +1,11 @@
-import { StyleSheet, Touchable, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import IconBase from '../base/IconBase';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
 import TextView from '../view/TextView';
+import { BaseProps } from '@/constants/Types';
 
-type Props = {
+interface Props {
   name?: string,
   size?: number, 
   label?: string,

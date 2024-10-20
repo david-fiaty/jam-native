@@ -1,5 +1,5 @@
 import { Text } from 'react-native';
-import Props from '@/constants/Interfaces';
+import { BaseProps } from '@/constants/Types';
 
 export default ({style, children}: Props) => {
   return (

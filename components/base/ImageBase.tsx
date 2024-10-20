@@ -1,12 +1,13 @@
 import { Image, StyleSheet } from 'react-native';
+import { BaseProps } from '@/constants/Types';
 
-type Props = {
+interface Props {
   source: string,
   width?: string | number,
   height?: string | number,
   resizeMethod?: string,
   resizeMode?: string,
-  style?: object,
+  style?: object, 
 };
 
 export default ({source, width, height, resizeMethod, resizeMode, style}: Props) => {
