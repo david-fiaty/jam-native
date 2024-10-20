@@ -6,6 +6,7 @@ import ScreenView from '../view/ScreenView';
 import IconView from '../view/IconView';
 import HorizontalView from '../view/HorizontalView';
 import LogoView from '../view/LogoView';
+import VerticalView from '../view/VerticalView';
 
 export default () => {  
   return (
@@ -22,8 +23,10 @@ export default () => {
           <IconView name="search" theme="clear" size={22} />
         </HorizontalView>
       </HorizontalView>
-      <Button title="My Button" />
-      <Text>{i18n.t('welcome')}</Text>
+      <VerticalView>
+        <Button title="My Button" />
+        <Text>{i18n.t('welcome')}</Text>
+      </VerticalView>
     </ScreenView>
   );
 }
