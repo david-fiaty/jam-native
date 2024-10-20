@@ -1,9 +1,9 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
 import { BaseProps } from '@/constants/Types';
 import ListView from '../view/ListView';
 import TextView from '../view/TextView';
 import { Layout } from '@/constants/Layout';
-import { Colors } from '@/constants/Colors';
 import { ListItemProps } from '@/constants/Types';
 
 type ItemProps = {
@@ -27,13 +27,17 @@ const items: ItemProps[] = [
 ];
 
 export default ({style, children}: BaseProps) => {
+  const router = useRouter();
+  
   return (
     <View style={styles.container}>
       <ListView 
         data={items} 
         renderItem={({item, index}: ListItemProps) => {
           return (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => {
+              console.log('clicked', item, index);
+            }}>
               <View style={styles.item}>
                 <TextView>{item.label}</TextView>
               </View>
