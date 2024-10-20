@@ -4,7 +4,7 @@ import DeviceManager from '@/classes/DeviceManager';
 
 type Props = BaseProps & {
   data: object,
-  renderItem: (item: object, index: number) => {}, 
+  renderItem: (item: object, index: number) => JSX.Element, 
   style?: object,
 };
 

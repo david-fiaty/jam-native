@@ -4,6 +4,7 @@ import ListView from '../view/ListView';
 import TextView from '../view/TextView';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
+import { ListItemProps } from '@/constants/Types';
 
 const items = [
   {
@@ -25,7 +26,7 @@ export default ({style, children}: BaseProps) => {
     <View style={styles.container}>
       <ListView 
         data={items} 
-        renderItem={({item, index}) => {
+        renderItem={({item, index}: ListItemProps) => {
           return (
             <TouchableOpacity>
               <View style={styles.item}>
