@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { StyleSheet, View, TouchableOpacity, Animated } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import i18n from '@/translation/i18n'; 
@@ -8,10 +8,13 @@ import BoxView from '../view/BoxView';
 import LogoView from '../view/LogoView';
 import DeviceManager from '@/classes/DeviceManager';
 import TextView from '../view/TextView';
+import SettingsMenu from '../menu/SettingsMenu';
+import NotificationsMenu from '../menu/NotificationsMenu';
 
 export default () => {  
   const windowHeight = DeviceManager.window.height
   const slideAnim = useRef(new Animated.Value(windowHeight)).current; 
+  const [activeScreen, setActiveScreen] = useState('');
 
   const slideIn = () => {
     Animated.timing(slideAnim, {
@@ -29,8 +32,13 @@ export default () => {
     }).start();
   };
 
-  const loadComponent = (name: string) => {
-    console.log(name);
+  const screenStack = {
+    settingsMenu: () => <SettingsMenu />,
+    notificationsMenu: () => <NotificationsMenu />,
+  };
+
+  const toggleScreen = (name: string) => {
+    setActiveScreen(name);
   };
 
   return (
@@ -45,7 +53,7 @@ export default () => {
             </TouchableOpacity>
           </BoxView>
           <BoxView direction="row"> 
-            <IconView name="menu" theme="primary" size={22} onPress={() => loadComponent('settingsMenu')} />
+            <IconView name="menu" theme="primary" size={22} onPress={slideIn} />
             <IconView label="15+" theme="secondary" size={13} onPress={slideIn} />
             <IconView name="search" theme="clear" size={22} onPress={slideIn} />
           </BoxView>

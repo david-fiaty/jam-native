@@ -19,7 +19,7 @@ const items = [
 
 export default ({style, children}: BaseProps) => {
   return (
-    <TextView>Settings menu</TextView>
+    <TextView>Notifications menu</TextView>
   );
 
   /*
