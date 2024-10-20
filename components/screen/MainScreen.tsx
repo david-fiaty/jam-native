@@ -136,7 +136,6 @@ export default () => {
             ...(screenStack[activeScreen]?.effect == 'fade' ? { opacity: fadeEffect } : { transform: [{ translateY: slideEffect }] }),
           }]}>
             <BoxView style={styles.modal}>
-              <TextView>{i18n.t('welcome')}</TextView>
               { activeScreen && screenStack[activeScreen].component() }
             </BoxView>
           </Animated.View>
