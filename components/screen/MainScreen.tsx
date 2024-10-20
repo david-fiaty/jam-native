@@ -8,6 +8,7 @@ import BoxView from '../view/BoxView';
 import LogoView from '../view/LogoView';
 import DeviceManager from '@/classes/DeviceManager';
 import TextView from '../view/TextView';
+import SettingsMenu from '../menu/SettingsMenu';
 
 export default () => {  
   const windowHeight = DeviceManager.window.height
@@ -29,8 +30,9 @@ export default () => {
     }).start();
   };
 
-  const loadComponent = (name: string) => {
-    console.log(name);
+  const toggleScreen = (name: string) => {
+    console.log(Date.now());
+    return (<SettingsMenu />);
   };
 
   return (
@@ -45,7 +47,7 @@ export default () => {
             </TouchableOpacity>
           </BoxView>
           <BoxView direction="row"> 
-            <IconView name="menu" theme="primary" size={22} onPress={() => loadComponent('settingsMenu')} />
+            <IconView name="menu" theme="primary" size={22} onPress={() => toggleScreen('settingsMenu')} />
             <IconView label="15+" theme="secondary" size={13} onPress={slideIn} />
             <IconView name="search" theme="clear" size={22} onPress={slideIn} />
           </BoxView>
