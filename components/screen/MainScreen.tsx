@@ -44,6 +44,12 @@ export default () => {
       setActiveScreen('');
       slideOut();
     }
+    else if (activeScreen && activeScreen != name) {
+      setActiveScreen('');
+      slideOut();
+      setActiveScreen(name);
+      slideIn();
+    }
     else {
       setActiveScreen(name);
       slideIn();
