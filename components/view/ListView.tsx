@@ -8,7 +8,7 @@ type Props = BaseProps & {
   style?: object,
 };
 
-export default ({data, style}: BaseProps) => {
+export default ({data, style}: Props) => {
   return (
     <FlatList 
       data={data} 
