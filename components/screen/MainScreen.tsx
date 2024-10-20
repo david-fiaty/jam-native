@@ -13,28 +13,61 @@ import NotificationsMenu from '../menu/NotificationsMenu';
 import SearchMenu from '../menu/SearchMenu';
 
 export default () => {  
+  // Parameters
   const windowHeight = DeviceManager.window.height;
   const windowWidth = DeviceManager.window.width;
 
+  // Hooks
   const slideEffect = useRef(new Animated.Value(windowHeight)).current; 
   const fadeEffect = useRef(new Animated.Value(0)).current; 
-
   const [activeScreen, setActiveScreen] = useState('');
+
+  const screenAnimations = {
+    slide: {
+      in: () => {
+        return Animated.timing(slideEffect, {
+          toValue: 0, 
+          duration: 300, 
+          useNativeDriver: true, 
+        });
+      },
+      out: () => {
+        return Animated.timing(slideEffect, {
+          toValue: windowHeight, 
+          duration: 300,
+          useNativeDriver: true,
+        });
+      },
+    },
+    fade: {
+      in: () => {
+        return Animated.timing(fadeEffect, {
+          toValue: 1, 
+          duration: 300, 
+          useNativeDriver: true, 
+        });
+      },
+      out: () => {
+        return Animated.timing(fadeEffect, {
+          toValue: 0, 
+          duration: 300, 
+          useNativeDriver: true, 
+        });
+      },
+    },
+  };
 
   const screenStack = {
     settingsMenu: {
-      show: 'fadeIn',
-      hide: 'fadeOut',
+      effect: 'fade',
       component: () => <SettingsMenu />,
     },
     notificationsMenu: {
-      show: 'fadeIn',
-      hide: 'fadeOut',
+      effect: 'fade',
       component: () => <NotificationsMenu />,
     }, 
     searchMenu: {
-      show: 'slideIn',
-      hide: 'slideOut',
+      effect: 'slide',
       component: () => <SearchMenu />,
     },
   };
@@ -79,8 +112,7 @@ export default () => {
 
   const showScreen = (name: string) => {
     setActiveScreen(name);
-    //slideIn();
-    fadeIn();
+    screenAnimations[screenStack[name].effect].in().start();
   };
 
   const toggleScreen = (name: string) => {
