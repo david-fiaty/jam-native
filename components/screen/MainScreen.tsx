@@ -160,9 +160,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'gray',
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
   },
   footer: {
     height: Layout.footer.height,
