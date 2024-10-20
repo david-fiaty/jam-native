@@ -19,7 +19,7 @@ export default () => {
         <HorizontalView>
           <IconView name="menu" theme="primary" size={22} />
           <IconView label="15+" theme="secondary" size={13} />
-          <IconView name="menu" theme="tertiary" size={22} />
+          <IconView name="search" theme="clear" size={22} />
         </HorizontalView>
       </HorizontalView>
       <Button title="My Button" />
