@@ -5,26 +5,24 @@ import i18n from '@/translation/i18n';
 import ImageBase from '@/components/base/ImageBase';
 import ScreenView from '../view/ScreenView';
 import IconView from '../view/IconView';
+import HorizontalView from '../view/HorizontalView';
 const source = require('@/assets/images/logo-48.png'); 
 
 export default () => {  
   return (
-    <ScreenView>
-      <View style={styles.header}>
-        <View style={styles.headerLeft}>
+    <ScreenView>      
+      <HorizontalView>
+        <HorizontalView>
           <TouchableOpacity onPress={() => {}}>
             <ImageBase source={source} width={styles.headerLogo.width} height={styles.headerLogo.height} />   
           </TouchableOpacity>
-        </View>
-        <View style={styles.headerRight}>
+        </HorizontalView>
+        <HorizontalView>
           <IconView name="menu" size={22} />
           <IconView label="15+" size={13} />
           <IconView name="menu" size={22} />
-        </View>
-      </View>
-
-
- 
+        </HorizontalView>
+      </HorizontalView>
       <Button title="My Button" />
       <Text>{i18n.t('welcome')}</Text>
     </ScreenView>
