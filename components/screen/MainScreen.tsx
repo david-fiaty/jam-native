@@ -2,11 +2,9 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text, Button } from '@rneui/themed';
 import { Layout } from '@/constants/Layout';
 import i18n from '@/translation/i18n'; 
-import TextBase from '@/components/base/TextBase';
 import ImageBase from '@/components/base/ImageBase';
 import ScreenView from '../view/ScreenView';
-import PrimaryIcon from '../icon/PrimaryIcon';
-
+import IconView from '../view/IconView';
 const source = require('@/assets/images/logo-48.png'); 
 
 export default () => {  
@@ -19,9 +17,9 @@ export default () => {
           </TouchableOpacity>
         </View>
         <View style={styles.headerRight}>
-          <PrimaryIcon name="menu" size={22} />
-          <PrimaryIcon name="menu" size={22} />
-          <PrimaryIcon name="menu" size={22} />
+          <IconView name="menu" size={22} />
+          <IconView name="menu" size={22} />
+          <IconView name="menu" size={22} />
         </View>
       </View>
 
