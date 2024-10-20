@@ -18,7 +18,7 @@ export default () => {
         </View>
         <View style={styles.headerRight}>
           <IconView name="menu" size={22} />
-          <IconView name="menu" size={22} />
+          <IconView label="15+" size={22} />
           <IconView name="menu" size={22} />
         </View>
       </View>
