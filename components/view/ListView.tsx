@@ -1,10 +1,10 @@
 import { StyleSheet, FlatList } from 'react-native';
-import { BaseProps } from '@/constants/Types';
+import { BaseProps, ListItemProps } from '@/constants/Types';
 import DeviceManager from '@/classes/DeviceManager';
 
 type Props = BaseProps & {
   data: [],
-  renderItem: () => JSX.Element, 
+  renderItem: ({item, index}: ListItemProps)  => JSX.Element, 
   style?: object,
 };
 
