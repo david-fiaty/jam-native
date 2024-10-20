@@ -29,6 +29,10 @@ export default () => {
     }).start();
   };
 
+  const loadComponent = (name: string) => {
+    console.log(name);
+  };
+
   return (
     <ScreenView>
       <View style={styles.container}>
@@ -41,7 +45,7 @@ export default () => {
             </TouchableOpacity>
           </BoxView>
           <BoxView direction="row"> 
-            <IconView name="menu" theme="primary" size={22} onPress={slideIn} />
+            <IconView name="menu" theme="primary" size={22} onPress={() => loadComponent('settingsMenu')} />
             <IconView label="15+" theme="secondary" size={13} onPress={slideIn} />
             <IconView name="search" theme="clear" size={22} onPress={slideIn} />
           </BoxView>
