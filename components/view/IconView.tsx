@@ -5,7 +5,7 @@ import { Colors } from '@/constants/Colors';
 import TextView from '../view/TextView';
 import { BaseProps } from '@/constants/Types';
 
-interface Props {
+type Props = BaseProps & {
   name?: string,
   size?: number, 
   label?: string,

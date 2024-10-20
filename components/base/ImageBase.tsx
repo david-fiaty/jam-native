@@ -1,7 +1,7 @@
 import { Image, StyleSheet } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 
-interface Props {
+type Props = BaseProps & {
   source: string,
   width?: string | number,
   height?: string | number,

@@ -1,8 +1,9 @@
 import { StyleSheet } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import ImageBase from '@/components/base/ImageBase';
+import { BaseProps } from '@/constants/Types';
 
-type Props = {
+type Props = BaseProps & {
   size: object,
   style?: object,
 };

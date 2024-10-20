@@ -2,7 +2,7 @@ import { View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { BaseProps } from '@/constants/Types';
 
-interface Props {
+type Props = BaseProps & {
   name: string,
   size?: number,
   containerStyle?: object,
