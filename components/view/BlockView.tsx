@@ -3,11 +3,12 @@ import { StyleSheet, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 
 type Props = {
+  direction?: string,
   style?: object,
   children?: ReactNode,
 };
 
-export default ({style, children}: Props) => {
+export default ({direction, style, children}: Props) => {
   return (
     <View style={[styles.container, style]}>
       {children}
