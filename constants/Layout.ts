@@ -9,7 +9,6 @@ export const Layout = {
     circle: 40,
   },
   header: {
-    width: 48,
     height: 48,
   },
   headerLogo: {

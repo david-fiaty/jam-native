@@ -142,7 +142,7 @@ export default () => {
         </BoxView>
 
         {/* Bottom navigation */}
-        <BoxView direction="row" justify="space-between" style={styles.footer}>
+        <BoxView direction="row" justify="space-around" style={styles.footer}>
           <IconView name="menu" theme="primary" size={22} onPress={() => toggleScreen('mapView')} />
           <IconView label="15+" theme="secondary" size={13} onPress={() => toggleScreen('addJamForm')} />
           <IconView name="search" theme="clear" size={22} onPress={() => toggleScreen('profileForm')} />
@@ -159,12 +159,8 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: 'gray',
   },
-  header: {
-    height: Layout.header.height,
-  },
-  footer: {
-    height: Layout.footer.height,
-  },
+  header: Layout.header,
+  footer: Layout.footer,
   headerLeft: {
     flexDirection: 'row',
     alignItems: 'center',
