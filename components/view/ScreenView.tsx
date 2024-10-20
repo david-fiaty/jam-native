@@ -1,7 +1,7 @@
 import { Colors } from '@/constants/Colors';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Props } from '@/constants/Types';
+import Props from '@/constants/Interfaces';
 
 export default ({style, children}: Props) => {
   return (

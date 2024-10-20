@@ -1,7 +1,8 @@
 import { View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import Props from '@/constants/Interfaces';
 
-type Props = {
+interface Props {
   name: string,
   size?: number,
   containerStyle?: object,
