@@ -17,10 +17,16 @@ export default () => {
   const slideAnim = useRef(new Animated.Value(windowHeight)).current; 
   const [activeScreen, setActiveScreen] = useState('');
 
+  const screenStack = {
+    settingsMenu: () => <SettingsMenu />,
+    notificationsMenu: () => <NotificationsMenu />,
+    searchMenu: () => <SearchMenu />,
+  };
+
   const slideIn = () => {
     Animated.timing(slideAnim, {
       toValue: 0, 
-      duration: 500, 
+      duration: 300, 
       useNativeDriver: true, 
     }).start();
   };
@@ -28,15 +34,9 @@ export default () => {
   const slideOut = () => {
     Animated.timing(slideAnim, {
       toValue: windowHeight, 
-      duration: 500,
+      duration: 300,
       useNativeDriver: true,
     }).start();
-  };
-
-  const screenStack = {
-    settingsMenu: () => <SettingsMenu />,
-    notificationsMenu: () => <NotificationsMenu />,
-    searchMenu: () => <SearchMenu />,
   };
 
   const hideScreens = () => {
