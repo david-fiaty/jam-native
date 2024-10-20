@@ -1,50 +1,46 @@
-import { StyleSheet, FlatList } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { BaseProps } from '@/constants/Types';
+import ListView from '../view/ListView';
 import TextView from '../view/TextView';
-
-const items = [
-  {
-    'label': 'Account information',
-    'path': '/account',
-  },
-  {
-    'label': 'Change password',
-    'path': '/password',
-  },
-  {
-    'label': 'Language',
-    'path': '/language',
-  },
-];
+import { Layout } from '@/constants/Layout';
+import { Colors } from '@/constants/Colors';
+import { ListItemProps } from '@/constants/Types';
+import ApiClient from '@/classes/ApiClient';
 
 export default ({style, children}: BaseProps) => {
-  return (
-    <TextView>Notifications menu</TextView>
-  );
+  const items = ApiClient.get('notifications');
 
-  /*
   return (
-    <FlatList 
-      data={items} 
-      horizontal={false}  
-      style={styles.list}
-      renderItem={({item, index}) => {
-        return (
-          <TextView>{item.label}</TextView>
-        );
-      }} 
-    />
+    <View style={styles.container}>
+      <ListView 
+        data={items} 
+        renderItem={({item, index}: ListItemProps) => {
+          return (
+            <TouchableOpacity>
+              <View style={styles.item}>
+                <TextView>{item.label}</TextView>
+              </View>
+            </TouchableOpacity>
+          );
+        }}   
+      />
+    </View>
   );
-  */
 };
 
 const styles = StyleSheet.create({
   container: {
   },
-  list: {
-    width: '100%',
-  },
   item: {
-
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    padding: Layout.space.base,
+    borderBottomWidth: 0.76,
+    borderBottomColor: Colors.primary,
+  },
+  label: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
