@@ -10,6 +10,7 @@ import DeviceManager from '@/classes/DeviceManager';
 import TextView from '../view/TextView';
 import SettingsMenu from '../menu/SettingsMenu';
 import NotificationsMenu from '../menu/NotificationsMenu';
+import SearchMenu from '../menu/SearchMenu';
 
 export default () => {  
   const windowHeight = DeviceManager.window.height
@@ -35,6 +36,7 @@ export default () => {
   const screenStack = {
     settingsMenu: () => <SettingsMenu />,
     notificationsMenu: () => <NotificationsMenu />,
+    searchMenu: () => <SearchMenu />,
   };
 
   const toggleScreen = (name: string) => {
