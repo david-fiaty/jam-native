@@ -13,8 +13,12 @@ import NotificationsMenu from '../menu/NotificationsMenu';
 import SearchMenu from '../menu/SearchMenu';
 
 export default () => {  
-  const windowHeight = DeviceManager.window.height
-  const slideAnim = useRef(new Animated.Value(windowHeight)).current; 
+  const windowHeight = DeviceManager.window.height;
+  const windowWidth = DeviceManager.window.width;
+
+  const slideEffect = useRef(new Animated.Value(windowHeight)).current; 
+  const fadeEffect = useRef(new Animated.Value(0)).current; 
+
   const [activeScreen, setActiveScreen] = useState('');
 
   const screenStack = {
@@ -24,7 +28,7 @@ export default () => {
   };
 
   const slideIn = () => {
-    Animated.timing(slideAnim, {
+    Animated.timing(slideEffect, {
       toValue: 0, 
       duration: 300, 
       useNativeDriver: true, 
@@ -32,32 +36,50 @@ export default () => {
   };
 
   const slideOut = () => {
-    Animated.timing(slideAnim, {
+    Animated.timing(slideEffect, {
       toValue: windowHeight, 
       duration: 300,
       useNativeDriver: true,
     }).start();
   };
 
-  const hideScreens = () => {
+  const fadeIn = () => {
+    Animated.timing(fadeEffect, {
+      toValue: 1, 
+      duration: 300, 
+      useNativeDriver: true, 
+    }).start();
+  };
+
+  const fadeOut = () => {
+    Animated.timing(fadeEffect, {
+      toValue: 0, 
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const hideScreen = () => {
     setActiveScreen('');
-    slideOut();
+    //slideOut();
+    fadeOut();
   }; 
 
   const showScreen = (name: string) => {
     setActiveScreen(name);
-    slideIn();
+    //slideIn();
+    fadeIn();
   };
 
   const toggleScreen = (name: string) => {
     if (activeScreen && !name) {
-      hideScreens();
+      hideScreen();
     }
     else if (activeScreen == name) {
-      hideScreens();
+      hideScreen();
     }
     else if (activeScreen && activeScreen != name) {
-      hideScreens();
+      hideScreen();
       showScreen(name);
     }
     else {
@@ -85,7 +107,8 @@ export default () => {
 
         {/* Main content */}
         <BoxView style={styles.content}>
-          <Animated.View style={[styles.animatedView, { transform: [{ translateY: slideAnim }] }]}>
+         {/* <Animated.View style={[styles.animatedView, { transform: [{ translateY: slideEffect }] }]}> */}
+         <Animated.View style={[styles.animatedView, { opacity: fadeEffect }]}>
             <BoxView style={styles.modal}>
               <TextView>{i18n.t('welcome')}</TextView>
               <IconView name="menu" theme="primary" size={22} onPress={slideOut} />
@@ -148,6 +171,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: DeviceManager.modalView.height, 
     backgroundColor: 'lightblue',
+    opacity: 0,
   },
   modal: {
     backgroundColor: 'blue',
