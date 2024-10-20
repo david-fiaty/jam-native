@@ -48,16 +48,6 @@ export default ({style, children}: BaseProps) => {
 const styles = StyleSheet.create({
   container: {
   },
-  item: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    padding: Layout.space.base,
-    borderBottomWidth: 0.76,
-    borderBottomColor: Colors.primary,
-  },
-  label: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
+  item: Layout.menuItem,
+  label: Layout.menuItemLabel,
 });
