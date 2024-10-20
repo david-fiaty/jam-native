@@ -11,6 +11,8 @@ export default () => {
   return (
     <ScreenView>
       <View style={styles.container}>
+
+        {/* Top navigation */}
         <BoxView direction="row" justify="space-between">
           <BoxView direction="row">
             <TouchableOpacity onPress={() => {}}>
@@ -24,11 +26,13 @@ export default () => {
           </BoxView>
         </BoxView>
 
+        {/* Main content */}
         <BoxView style={styles.content}>
           <Button title="My Button" />
           <Text>{i18n.t('welcome')}</Text>
         </BoxView>
 
+        {/* Bottom navigation */}
         <BoxView direction="row" justify="space-between">
           <BoxView direction="row">
             <TouchableOpacity onPress={() => {}}>
@@ -41,6 +45,7 @@ export default () => {
             <IconView name="search" theme="clear" size={22} />
           </BoxView>
         </BoxView>
+        
       </View>        
     </ScreenView>
   );
