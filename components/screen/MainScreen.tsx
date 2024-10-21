@@ -31,7 +31,7 @@ export default () => {
 
   const showScreen = (name: string) => {
     setActiveScreen(name);
-    ScreenAnimation[`${Screens[name].effect}In`](slideEffect).start();
+    ScreenAnimation[Screens[name].effect + 'In'](slideEffect).start();
   };
 
   const hideScreen = (name: string) => {
