@@ -19,7 +19,7 @@ export default () => {
   const slideEffect = useRef(new Animated.Value(DeviceManager.window.height)).current; 
   const pushEffect = useRef(new Animated.Value(DeviceManager.window.width)).current; 
   const fadeEffect = useRef(new Animated.Value(0)).current; 
-  const Screens = {
+  const screens = {
     settingsMenu: {
       effect: 'push',
       component: () => <SettingsMenu />,
@@ -61,24 +61,24 @@ export default () => {
 
   const showScreen = (name: string) => {
     setActiveScreen(name);
-    ScreenAnimation[Screens[name]?.effect + 'In'](slideEffect).start();
+    ScreenAnimation[screens[name]?.effect + 'In'](slideEffect).start();
   };
 
   const hideScreen = (name: string) => {
     setActiveScreen('');
-    ScreenAnimation[`${Screens[name]?.effect}Out`](slideEffect).start();
+    ScreenAnimation[`${screens[name]?.effect}Out`](slideEffect).start();
   }; 
 
   const getEffectStyle = () => {
-    if (Screens[activeScreen]?.effect == 'fade') {
+    if (screens[activeScreen]?.effect == 'fade') {
       return { opacity: fadeEffect };
     }
 
-    if (Screens[activeScreen]?.effect == 'slide') {
+    if (screens[activeScreen]?.effect == 'slide') {
       return { transform: [{ translateY: slideEffect }] };
     }
 
-    if (Screens[activeScreen]?.effect == 'push') {
+    if (screens[activeScreen]?.effect == 'push') {
       return { transform: [{ translateX: pushEffect }] };
     }
 
@@ -92,7 +92,7 @@ export default () => {
         <BoxView style={Layout.modalContainer}>
           <Animated.View style={[Layout.animatedView]}>
             <BoxView style={Layout.modalContent}>
-              { activeScreen && Screens[activeScreen].component() }
+              { activeScreen && screens[activeScreen].component() }
             </BoxView>
           </Animated.View>
         </BoxView>
