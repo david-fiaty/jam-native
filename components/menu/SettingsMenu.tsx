@@ -1,10 +1,9 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { useRouter } from 'expo-router';
 import { BaseProps } from '@/constants/Types';
-import ListView from '../view/ListView';
-import TextView from '../view/TextView';
 import { Layout } from '@/constants/Layout';
 import { ListItemProps } from '@/constants/Types';
+import ListView from '../view/ListView';
+import TextView from '../view/TextView';
 
 type ItemProps = {
   label: string,
@@ -27,8 +26,6 @@ const items: ItemProps[] = [
 ];
 
 export default ({style, children}: BaseProps) => {
-  const router = useRouter();
-  
   return (
     <View style={styles.container}>
       <ListView 
