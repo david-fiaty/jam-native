@@ -62,12 +62,12 @@ export default () => {
         </BoxView>
 
         {/* Main content */}
-        <BoxView style={styles.content}>
+        <BoxView style={styles.modalContainer}>
           <Animated.View style={[{
             ...styles.animatedView, 
             ...(Screens[activeScreen]?.effect == 'fade' ? { opacity: fadeEffect } : { transform: [{ translateY: slideEffect }] }),
           }]}>
-            <BoxView style={styles.modal}>
+            <BoxView style={styles.modalContent}>
               { activeScreen && Screens[activeScreen].component() }
             </BoxView>
           </Animated.View>
@@ -107,26 +107,8 @@ const styles = StyleSheet.create({
     width: Layout.headerLogo.width,
     height: Layout.headerLogo.height,
   },
-  animatedView: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: Layout.footer.height,
-    width: '100%',
-    height: DeviceManager.modalView.height, 
-    backgroundColor: 'lightblue',
-  },
-  modal: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: DeviceManager.modalView.height,
-    backgroundColor: Colors.white,
-  },
-  content: {
-    backgroundColor: Colors.white,
-    flexGrow: 1,
-  },
+  modalContainer: Layout.modalContainer,
+  animatedView: Layout.animatedView,
+  modalContent: Layout.modalContent, 
 });
 
