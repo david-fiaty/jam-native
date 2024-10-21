@@ -6,20 +6,21 @@ import { BaseProps } from '@/constants/Types';
 type Props = BaseProps & {
   direction?: string,
   align?: string,
+  x?: string,
   justify?: string,
   style?: object,
   children?: ReactNode,
 };
 
-export default ({direction, align, justify, style, children}: Props) => {
+export default ({direction, x, align, justify, style, children}: Props) => {
   const containerStyle = {
     flexDirection: direction,
-    alignItems: align || 'center',
+    alignItems: align,
     justifyContent: justify,
   };
 
   return (
-    <View style={[styles.container, style, containerStyle]}>
+    <View style={[styles.container, containerStyle, style]}>
       {children}
     </View>
   );
@@ -28,11 +29,5 @@ export default ({direction, align, justify, style, children}: Props) => {
 const styles = StyleSheet.create({
   container: {
     gap: Layout.space.base,
-  },
-  row: {
-    flexDirection: 'row',
-  },
-  column: {
-    flexDirection: 'column',
   },
 });
