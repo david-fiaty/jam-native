@@ -33,13 +33,11 @@ export default ({ style, children }: BaseProps) => {
     })();
   }, []);
 
-
   //if (!location) {
     return <SpinnerView />
   //}
 
   const userLocation = location || {};
-
 
   return (
     <TouchableWithoutFeedback>
