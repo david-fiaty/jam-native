@@ -12,7 +12,6 @@ class ApiClient {
 
   async sendRequest(endpoint: object) {
     try {
-      // Send request
       let response = await fetch(endpoint.url, {
         method: endpoint.method,
         credentials: 'include',
@@ -21,7 +20,6 @@ class ApiClient {
         },
       });
 
-      // Process response
       return await response.json();
 
     } catch (error) {
