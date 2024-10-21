@@ -11,11 +11,10 @@ import LogoView from '../view/LogoView';
 import DeviceManager from '@/classes/DeviceManager';
 
 export default () => {  
-  // Hooks
+  const [activeScreen, setActiveScreen] = useState('');
   const slideEffect = useRef(new Animated.Value(DeviceManager.window.height)).current; 
   const pushEffect = useRef(new Animated.Value(DeviceManager.window.width)).current; 
   const fadeEffect = useRef(new Animated.Value(0)).current; 
-  const [activeScreen, setActiveScreen] = useState('');
 
   const toggleScreen = (name: string) => {
     if (activeScreen && !name || activeScreen == name) {
@@ -41,15 +40,15 @@ export default () => {
   }; 
 
   const getEffectStyle = () => {
-    if (!Screens[activeScreen]?.effect == 'fade') {
+    if (Screens[activeScreen]?.effect == 'fade') {
       return { opacity: fadeEffect };
     }
 
-    if (!Screens[activeScreen]?.effect == 'slide') {
+    if (Screens[activeScreen]?.effect == 'slide') {
       return { transform: [{ translateY: slideEffect }] };
     }
 
-    if (!Screens[activeScreen]?.effect == 'push') {
+    if (Screens[activeScreen]?.effect == 'push') {
       return { transform: [{ translateX: pushEffect }] };
     }
 
