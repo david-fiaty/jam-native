@@ -37,9 +37,6 @@ const JamsScreen = () => {
     return <></>;
   }
 
-  console.log('yyyyyyyyyyyyyuuuu');
-  console.log(data);
-
   return (
     <View style={styles.container}>
       <FlatList 
