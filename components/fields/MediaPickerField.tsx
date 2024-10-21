@@ -13,7 +13,7 @@ type ImagePreviewProps = {
 const ImagePreview = ({selectedImage}: ImagePreviewProps) => {
   if (selectedImage) {
     return (
-      <StaticImage source={selectedImage} style={styles.image} />
+      <StaticImage path={selectedImage} style={styles.image} />
     );
   }
 

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { View, FlatList } from 'react-native';
 import ApiClient from '@/classes/ApiClient';
 import { GlobalStyles } from '@/constants/GlobalStyles';
@@ -23,7 +24,17 @@ const Item = ({item, index}: ItemProps) => {
 };
 
 const JamsScreen = () => {
-  const data = ApiClient.get('jams');
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      setData(await ApiClient.get('jams', true));
+    })();
+  }, []);
+
+  if (!data) {
+    return <></>;
+  }
 
   return (
     <View style={styles.container}>

@@ -62,7 +62,7 @@ const TestScreen = () => {
                 <TouchableOpacity>
                   <View style={styles.item}>
                     <StaticImage 
-                      source={item.image} 
+                      path={item.image} 
                       width="100%"
                       height="100%"
                       resizeMode="cover"
@@ -87,7 +87,7 @@ const TestScreen = () => {
                 <TouchableOpacity>
                   <View style={styles.item}>
                     <StaticImage 
-                      source={item.image} 
+                      path={item.image} 
                       width="100%"
                       height="100%"
                       resizeMode="cover"
@@ -112,7 +112,7 @@ const TestScreen = () => {
                 <TouchableOpacity>
                   <View style={styles.item}>
                     <StaticImage 
-                      source={item.image} 
+                      path={item.image} 
                       width="100%"
                       height="100%"
                       resizeMode="cover"
@@ -138,7 +138,7 @@ const TestScreen = () => {
                 <TouchableOpacity>
                   <View style={styles.item}>
                     <StaticImage 
-                      source={item.image} 
+                      path={item.image} 
                       width="100%"
                       height="100%"
                       resizeMode="cover"

@@ -2,8 +2,8 @@ import ApiEndpoints from '@/constants/ApiEndpoints';
 import ApiMockData from '@/constants/ApiMockData';
 
 class ApiClient {
-  get(key: keyof typeof ApiEndpoints) {
-    if (process.env.API_ENABLED === 'true') {
+  get(key: keyof typeof ApiEndpoints, apiEnabled: boolean) {
+    if (process.env.API_ENABLED === 'true' || apiEnabled === true) {
       return this.sendRequest(ApiEndpoints[key]);
     }
 
@@ -12,7 +12,6 @@ class ApiClient {
 
   async sendRequest(endpoint: object) {
     try {
-      // Send request
       let response = await fetch(endpoint.url, {
         method: endpoint.method,
         credentials: 'include',
@@ -21,16 +20,11 @@ class ApiClient {
         },
       });
 
-      // Process response
-      return this.processResponse(await response.json());
+      return await response.json();
 
     } catch (error) {
       console.error(error);
     }
-  }
-
-  processResponse(jsonResponse: string) {
-    return jsonResponse;
   }
 };
 

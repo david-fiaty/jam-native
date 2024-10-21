@@ -10,7 +10,7 @@ const source = require('@/assets/images/jam-logo.png');
 const JamLogo = ({width, height}: Props) => {
   return (
     <StaticImage 
-      source={source} 
+      path={source} 
       width={width}
       height={height}
     />   
