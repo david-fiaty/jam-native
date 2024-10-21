@@ -44,7 +44,7 @@ export default () => {
   }; 
 
   const animatedViewStyle = [Layout.animatedView, { 
-    ...( Screens[activeScreen]?.effect == 'fade' ? { opacity: fadeEffect } : { transform: [{ translateY: slideEffect }] } ),
+    ...Screens[activeScreen]?.effect == 'fade' ? { opacity: fadeEffect } : { transform: [{ translateY: slideEffect }] },
   }];
 
   return (
