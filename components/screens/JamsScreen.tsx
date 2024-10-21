@@ -6,7 +6,6 @@ import JamHeader from '@/components/jam/JamHeader';
 import JamImages from '@/components/jam/JamImages';
 import JamToolbar from '@/components/jam/JamToolbar';
 import JamContent from '@/components/jam/JamContent';
-import TextBlock from '../base/TextBlock';
 
 type ItemProps = {
   item: object,
