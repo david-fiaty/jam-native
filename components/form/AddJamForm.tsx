@@ -3,10 +3,12 @@ import { BaseProps } from '@/constants/Types';
 import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
+import BackButton from '../button/BackButton';
 
 export default ({style, children}: BaseProps) => {
   return (
     <BoxView align="flex-start" justify="flex-start">
+      <BackButton title="Add new Jam" onPress={() => console.log('clicked')} />
       <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
     </BoxView>
   );
