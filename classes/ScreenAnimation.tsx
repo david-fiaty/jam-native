@@ -26,7 +26,6 @@ class ScreenAnimation {
     });
   }
 
-
   fadeOut(reference: Animated.Value) {
     return Animated.timing(reference, {
       toValue: 0, 
