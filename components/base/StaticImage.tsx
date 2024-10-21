@@ -1,7 +1,8 @@
 import { Image, StyleSheet } from 'react-native';
 
 type Props = {
-  source: string,
+  uri?: string,
+  path?: string,
   width?: string | number,
   height?: string | number,
   resizeMethod?: string,
@@ -9,10 +10,14 @@ type Props = {
   style?: object,
 };
 
-export function StaticImage({source, width, height, resizeMethod, resizeMode, style}: Props) {
+export function StaticImage({uri, path, width, height, resizeMethod, resizeMode, style}: Props) {
+  const imageSource = path ? path : {
+    uri: uri,
+  };
+
   return (
     <Image 
-      source={source} 
+      source={imageSource} 
       resizeMethod={resizeMethod || 'scale'}
       resizeMode={resizeMode || 'contain'}
       style={[

@@ -11,7 +11,7 @@ type Props = {
 const JamContent = ({item, index}: Props) => {
   return (
     <View style={styles.container}>
-      <TextBlock>{item.content}</TextBlock>
+      <TextBlock>{item.caption}</TextBlock>
       <CollapsibleBlock />
     </View>
   );
