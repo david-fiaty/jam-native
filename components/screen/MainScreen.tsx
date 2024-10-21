@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { StyleSheet, View, TouchableOpacity, Animated } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import { Colors } from '@/constants/Colors';
 import { Screens } from '@/constants/Screens';
 import ScreenAnimation from '@/classes/ScreenAnimation';
 import i18n from '@/translation/i18n'; 
@@ -35,13 +34,17 @@ export default () => {
 
   const showScreen = (name: string) => {
     setActiveScreen(name);
-    ScreenAnimation[Screens[name].effect](fadeEffect).in(Screens[name].axis).start();
+    ScreenAnimation[`${Screens[name].effect}In`](fadeEffect).start();
   };
 
   const hideScreen = (name: string) => {
     setActiveScreen('');
-    ScreenAnimation[Screens[name].effect](fadeEffect).out(Screens[name].axis).start();
+    ScreenAnimation[`${Screens[name].effect}Out`](fadeEffect).start();
   }; 
+
+  const animatedViewStyle = [Layout.animatedView, { 
+    ...Screens[activeScreen]?.effect == 'fade' ? { opacity: fadeEffect } : { transform: [{ translateY: slideEffect }] },
+  }];
 
   return (
     <ScreenView>
@@ -63,9 +66,7 @@ export default () => {
 
         {/* Main content */}
         <BoxView style={Layout.modalContainer}>
-          <Animated.View style={[Layout.animatedView, { 
-            ...(Screens[activeScreen]?.effect == 'fade' ? { opacity: fadeEffect } : { transform: [{ translateY: slideEffect }] }),
-          }]}>
+          <Animated.View style={animatedViewStyle}>
             <BoxView style={Layout.modalContent}>
               { activeScreen && Screens[activeScreen].component() }
             </BoxView>
