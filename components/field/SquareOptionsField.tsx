@@ -1,0 +1,58 @@
+import React, { useState } from 'react';
+import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
+import { GlobalStyles } from '@/constants/GlobalStyles';
+import { Colors } from '@/constants/Colors';
+import IconView from '../view/IconView';
+import TextView from '../view/TextView';
+
+type Props = {
+  data: object,
+};
+
+export default ({data}: Props) => {  
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  return (
+    <FlatList 
+      data={data} 
+      numColumns={4}
+      contentContainerStyle={{gap: GlobalStyles.space.base}}
+      columnWrapperStyle={{gap: GlobalStyles.space.base}}
+      scrollEnabled={false}
+      renderItem={({item, index}) => {
+        return (
+          <TouchableOpacity onPress={() => setSelectedOption(item.id)}>
+            <View style={styles.container}>
+              <View style={[styles.square, selectedOption == item.id ? styles.selected : {}]}>
+                <IconView name={item.icon} theme="secondary" size={22} />
+              </View>
+              <TextView>{item.label}</TextView>   
+            </View>
+          </TouchableOpacity>
+        );
+      }}
+    />
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'column',
+    gap: GlobalStyles.space.base/2,
+  },
+  square: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.secondary,
+    padding: 10,
+    borderWidth: 1,
+    borderRadius: 8,
+    borderColor: Colors.secondary,
+    width: 72,
+    height: 72,
+  },
+  selected: {
+    borderColor: Colors.primary,
+  },
+});
