@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { View, FlatList } from 'react-native';
 import ApiClient from '@/classes/ApiClient';
 import { GlobalStyles } from '@/constants/GlobalStyles';
@@ -5,6 +6,7 @@ import JamHeader from '@/components/jam/JamHeader';
 import JamImages from '@/components/jam/JamImages';
 import JamToolbar from '@/components/jam/JamToolbar';
 import JamContent from '@/components/jam/JamContent';
+import TextBlock from '../base/TextBlock';
 
 type ItemProps = {
   item: object,
@@ -23,7 +25,20 @@ const Item = ({item, index}: ItemProps) => {
 };
 
 const JamsScreen = () => {
-  const data = ApiClient.get('jams');
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      setData(await ApiClient.get('jams', true));
+    })();
+  }, []);
+
+  if (!data) {
+    return <TextBlock>Loadinig...</TextBlock>
+  }
+
+  console.log('yyyyyyyyyyyyyuuuu');
+  console.log(data);
 
   return (
     <View style={styles.container}>
