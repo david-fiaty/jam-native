@@ -6,13 +6,12 @@ import { BaseProps } from '@/constants/Types';
 type Props = BaseProps & {
   direction?: string,
   align?: string,
-  x?: string,
   justify?: string,
   style?: object,
   children?: ReactNode,
 };
 
-export default ({direction, x, align, justify, style, children}: Props) => {
+export default ({direction, align, justify, style, children}: Props) => {
   const containerStyle = {
     flexDirection: direction,
     alignItems: align,
