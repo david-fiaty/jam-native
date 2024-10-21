@@ -14,7 +14,6 @@ import DeviceManager from '@/classes/DeviceManager';
 export default () => {  
   // Parameters
   const windowHeight = DeviceManager.window.height;
-  const windowWidth = DeviceManager.window.width;
 
   // Hooks
   const slideEffect = useRef(new Animated.Value(windowHeight)).current; 
