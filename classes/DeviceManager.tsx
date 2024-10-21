@@ -1,5 +1,5 @@
-import { Dimensions, ScaledSize, StatusBar } from "react-native";
-import { GlobalStyles } from "@/constants/GlobalStyles";
+import { Dimensions, ScaledSize, StatusBar } from 'react-native';
+import { GlobalStyles } from '@/constants/GlobalStyles';
 
 class DeviceManager {
   screen: ScaledSize;
