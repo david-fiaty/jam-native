@@ -4,15 +4,16 @@ import DeviceManager from '@/classes/DeviceManager';
 
 type Props = BaseProps & {
   data: object,
+  horizontal?: boolean,
   renderItem: () => JSX.Element, 
   style?: object,
 };
 
-export default ({data, renderItem, style}: Props) => {
+export default ({data, horizontal, renderItem, style}: Props) => {
   return (
     <FlatList 
       data={data} 
-      horizontal={false}  
+      horizontal={horizontal}  
       contentContainerStyle={[style, styles.container]}
       renderItem={renderItem} 
     />
