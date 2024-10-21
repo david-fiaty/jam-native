@@ -7,11 +7,15 @@ type Props = {
   index: number,
 };
 
+const url = 'https://dev.jammm.app/backend';
+
 const JamImages = ({item, index}: Props) => {
+  const imageUri = url + item?.medias[0]?.url;
+
   return (
     <View style={styles.container}>
       <StaticImage 
-        source={item.image} 
+        uri={imageUri} 
         width="100%"
         height="100%"
         resizeMode="cover"
