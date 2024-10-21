@@ -1,12 +1,33 @@
-import { StyleSheet, View, TouchableOpacity, StatusBar } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { StyleSheet, TouchableOpacity, Animated, StatusBar } from 'react-native';
 import IconView from '../view/IconView';
 import BoxView from '../view/BoxView';
 import LogoView from '../view/LogoView';
 import { BaseProps } from '@/constants/Types';
-import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
+import DeviceManager from '@/classes/DeviceManager';
 
 export default ({style, children}: BaseProps) => {
+  const windowHeight = DeviceManager.window.height;
+  const slideAnim = useRef(new Animated.Value(windowHeight)).current; 
+
+  const slideIn = () => {
+    Animated.timing(slideAnim, {
+      toValue: 0, 
+      duration: 500, 
+      useNativeDriver: true, 
+    }).start();
+  };
+
+  // Function to hide the view again
+  const slideOut = () => {
+    Animated.timing(slideAnim, {
+      toValue: windowHeight, 
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
+
   return (
     <BoxView direction="row" justify="space-between" style={styles.container}>
       <BoxView direction="row" style={styles.left}>
@@ -38,4 +59,3 @@ const styles = StyleSheet.create({
     backgroundColor: 'yellow',
   },
 });
-
