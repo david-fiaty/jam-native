@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
   container: {
     marginTop: StatusBar.currentHeight,
     paddingHorizontal: Layout.space.base,
-    backgroundColor: 'red',
   },
   left: {
     gap: Layout.space.base,
@@ -58,6 +57,5 @@ const styles = StyleSheet.create({
   right: {
     flexDirection: 'row',
     gap: Layout.space.base,
-    backgroundColor: 'yellow',
   },
 });
