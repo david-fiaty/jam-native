@@ -1,21 +1,50 @@
 import React, { useState, useRef } from 'react';
-import { StyleSheet, View, TouchableOpacity, Animated } from 'react-native';
+import { StyleSheet, View, Animated } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import { Screens } from '@/constants/Screens';
 import ScreenAnimation from '@/classes/ScreenAnimation';
 import i18n from '@/translation/i18n'; 
 import ScreenView from '../view/ScreenView';
 import IconView from '../view/IconView';
 import BoxView from '../view/BoxView';
-import LogoView from '../view/LogoView';
 import DeviceManager from '@/classes/DeviceManager';
+import SettingsMenu from '@/components/menu/SettingsMenu';
+import NotificationsMenu from '@/components/menu/NotificationsMenu';
+import SearchMenu from '@/components/menu/SearchMenu';
+import MapView from '@/components/view/MapView';
+import AddJamForm from '@/components/form/AddJamForm';
+import ProfileForm from '@/components/form/ProfileForm';
 
 export default () => {  
-  // Hooks
+  const [activeScreen, setActiveScreen] = useState('');
   const slideEffect = useRef(new Animated.Value(DeviceManager.window.height)).current; 
   const pushEffect = useRef(new Animated.Value(DeviceManager.window.width)).current; 
   const fadeEffect = useRef(new Animated.Value(0)).current; 
-  const [activeScreen, setActiveScreen] = useState('');
+  const screens = {
+    settingsMenu: {
+      effect: 'push',
+      component: () => <SettingsMenu />,
+    },
+    notificationsMenu: {
+      effect: 'fade',
+      component: () => <NotificationsMenu />,
+    }, 
+    searchMenu: {
+      effect: 'slide',
+      component: () => <SearchMenu />,
+    },
+    mapView: {
+      effect: 'fade',
+      component: () => <MapView />,
+    },
+    addJamForm: {
+      effect: 'fade',
+      component: () => <AddJamForm />,
+    },
+    profileForm: {
+      effect: 'fade',
+      component: () => <ProfileForm />,
+    },
+  };
 
   const toggleScreen = (name: string) => {
     if (activeScreen && !name || activeScreen == name) {
@@ -32,24 +61,24 @@ export default () => {
 
   const showScreen = (name: string) => {
     setActiveScreen(name);
-    ScreenAnimation[`${Screens[name].effect}In`](fadeEffect).start();
+    ScreenAnimation[screens[name]?.effect + 'In'](slideEffect).start();
   };
 
   const hideScreen = (name: string) => {
     setActiveScreen('');
-    ScreenAnimation[`${Screens[name].effect}Out`](fadeEffect).start();
+    ScreenAnimation[`${screens[name]?.effect}Out`](slideEffect).start();
   }; 
 
   const getEffectStyle = () => {
-    if (!Screens[activeScreen]?.effect == 'fade') {
+    if (screens[activeScreen]?.effect == 'fade') {
       return { opacity: fadeEffect };
     }
 
-    if (!Screens[activeScreen]?.effect == 'slide') {
+    if (screens[activeScreen]?.effect == 'slide') {
       return { transform: [{ translateY: slideEffect }] };
     }
 
-    if (!Screens[activeScreen]?.effect == 'push') {
+    if (screens[activeScreen]?.effect == 'push') {
       return { transform: [{ translateX: pushEffect }] };
     }
 
@@ -59,26 +88,11 @@ export default () => {
   return (
     <ScreenView>
       <View style={styles.container}>
-
-        {/* Top navigation */}
-        <BoxView direction="row" justify="space-between" style={styles.header}>
-          <BoxView direction="row">
-            <TouchableOpacity onPress={() => {activeScreen && toggleScreen('')}}>
-              <LogoView size={styles.headerLogo} />
-            </TouchableOpacity>
-          </BoxView>
-          <BoxView direction="row"> 
-            <IconView name="menu" theme="primary" size={22} onPress={() => toggleScreen('settingsMenu')} />
-            <IconView label="15+" theme="secondary" size={13} onPress={() => toggleScreen('notificationsMenu')} />
-            <IconView name="search" theme="clear" size={22} onPress={() => toggleScreen('searchMenu')} />
-          </BoxView>
-        </BoxView>
-
         {/* Main content */}
         <BoxView style={Layout.modalContainer}>
-          <Animated.View style={[Layout.animatedView, getEffectStyle]}>
+          <Animated.View style={[Layout.animatedView]}>
             <BoxView style={Layout.modalContent}>
-              { activeScreen && Screens[activeScreen].component() }
+              { activeScreen && screens[activeScreen].component() }
             </BoxView>
           </Animated.View>
         </BoxView>
@@ -101,21 +115,6 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: 'gray',
   },
-  header: Layout.header,
   footer: Layout.footer,
-  headerLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Layout.space.base,
-  },
-  headerRight: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Layout.space.base,
-  },
-  headerLogo: {
-    width: Layout.headerLogo.width,
-    height: Layout.headerLogo.height,
-  },
 });
 

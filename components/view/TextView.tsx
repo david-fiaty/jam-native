@@ -13,7 +13,7 @@ export default ({style, children}: BaseProps) => {
 const styles = StyleSheet.create({
   content: {
     color: Colors.primary,
-    fontFamily: 'BaseFont',
+    //fontFamily: 'BaseFont', // Todo - Enable font
   },
 });
 

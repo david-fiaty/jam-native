@@ -20,7 +20,9 @@ export default () => {
     async function prepare() {
       try {
         await ExpoFont.loadAsync({
-          'BaseFont': require('../assets/fonts/HelveticaNeueLight.otf'),
+          // Todo - Enable font
+          //'BaseFont': require('../assets/fonts/SpaceMono-Regular.ttf'),
+          //'BaseFont': require('../assets/fonts/HelveticaNeueLight.otf'),
         });
       } catch (e) {
         console.warn(e);
