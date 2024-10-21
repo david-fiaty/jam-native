@@ -59,6 +59,7 @@ export const Layout = {
     width: '100%',
     height: DeviceManager.modalView.height,
     backgroundColor: Colors.white,
+    padding: space.base,
   },
 };
 
