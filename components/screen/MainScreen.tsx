@@ -35,12 +35,12 @@ export default () => {
 
   const showScreen = (name: string) => {
     setActiveScreen(name);
-    ScreenAnimation[Screens[name].effect](fadeEffect, Screens[name].axis).in().start();
+    ScreenAnimation[Screens[name].effect](fadeEffect).in(Screens[name].axis).start();
   };
 
   const hideScreen = (name: string) => {
     setActiveScreen('');
-    ScreenAnimation[Screens[name].effect](fadeEffect, Screens[name].axis).out().start();
+    ScreenAnimation[Screens[name].effect](fadeEffect).out(Screens[name].axis).start();
   }; 
 
   return (
@@ -62,12 +62,11 @@ export default () => {
         </BoxView>
 
         {/* Main content */}
-        <BoxView style={styles.content}>
-          <Animated.View style={[{
-            ...styles.animatedView, 
+        <BoxView style={Layout.modalContainer}>
+          <Animated.View style={[Layout.animatedView, { 
             ...(Screens[activeScreen]?.effect == 'fade' ? { opacity: fadeEffect } : { transform: [{ translateY: slideEffect }] }),
           }]}>
-            <BoxView style={styles.modal}>
+            <BoxView style={Layout.modalContent}>
               { activeScreen && Screens[activeScreen].component() }
             </BoxView>
           </Animated.View>
@@ -106,27 +105,6 @@ const styles = StyleSheet.create({
   headerLogo: {
     width: Layout.headerLogo.width,
     height: Layout.headerLogo.height,
-  },
-  animatedView: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: Layout.footer.height,
-    width: '100%',
-    height: DeviceManager.modalView.height, 
-    backgroundColor: 'lightblue',
-  },
-  modal: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: DeviceManager.modalView.height,
-    backgroundColor: Colors.white,
-  },
-  content: {
-    backgroundColor: Colors.white,
-    flexGrow: 1,
   },
 });
 
