@@ -33,9 +33,9 @@ export default ({ style, children }: BaseProps) => {
     })();
   }, []);
 
-  //if (!location) {
+  if (!location) {
     return <SpinnerView />
-  //}
+  }
 
   const userLocation = location || {};
 
