@@ -11,11 +11,9 @@ import LogoView from '../view/LogoView';
 import DeviceManager from '@/classes/DeviceManager';
 
 export default () => {  
-  // Parameters
-  const windowHeight = DeviceManager.window.height;
-
   // Hooks
-  const slideEffect = useRef(new Animated.Value(windowHeight)).current; 
+  const slideEffect = useRef(new Animated.Value(DeviceManager.window.height)).current; 
+  const pushEffect = useRef(new Animated.Value(DeviceManager.window.width)).current; 
   const fadeEffect = useRef(new Animated.Value(0)).current; 
   const [activeScreen, setActiveScreen] = useState('');
 
@@ -42,10 +40,22 @@ export default () => {
     ScreenAnimation[`${Screens[name].effect}Out`](fadeEffect).start();
   }; 
 
-  const animatedViewStyle = [Layout.animatedView, { 
-    ...Screens[activeScreen]?.effect == 'fade' ? { opacity: fadeEffect } : { transform: [{ translateY: slideEffect }] },
-  }];
+  const getEffectStyle = () => {
+    if (!Screens[activeScreen]?.effect == 'fade') {
+      return { opacity: fadeEffect };
+    }
 
+    if (!Screens[activeScreen]?.effect == 'slide') {
+      return { transform: [{ translateY: slideEffect }] };
+    }
+
+    if (!Screens[activeScreen]?.effect == 'push') {
+      return { transform: [{ translateX: pushEffect }] };
+    }
+
+    return {};
+  };
+  
   return (
     <ScreenView>
       <View style={styles.container}>
@@ -66,7 +76,7 @@ export default () => {
 
         {/* Main content */}
         <BoxView style={Layout.modalContainer}>
-          <Animated.View style={animatedViewStyle}>
+          <Animated.View style={[Layout.animatedView, getEffectStyle]}>
             <BoxView style={Layout.modalContent}>
               { activeScreen && Screens[activeScreen].component() }
             </BoxView>
