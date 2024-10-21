@@ -7,6 +7,7 @@ import MapView from "react-native-maps";
 import { BaseProps } from "@/constants/Types";
 import TextView from "../view/TextView";
 import { Layout } from '@/constants/Layout';
+import SpinnerView from './SpinnerView';
 
 export default ({ style, children }: BaseProps) => {
   const [location, setLocation] = useState("");
@@ -32,7 +33,13 @@ export default ({ style, children }: BaseProps) => {
     })();
   }, []);
 
-  let userLocation = location || {};
+
+  //if (!location) {
+    return <SpinnerView />
+  //}
+
+  const userLocation = location || {};
+
 
   return (
     <TouchableWithoutFeedback>
