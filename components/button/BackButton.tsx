@@ -3,6 +3,7 @@ import { GlobalStyles } from '@/constants/GlobalStyles';
 import IconView from '../view/IconView';
 import TextView from '../view/TextView';
 import { Layout } from '@/constants/Layout';
+import BoxView from '../view/BoxView';
 
 type Props = {
   title: string,
@@ -12,10 +13,10 @@ type Props = {
 const BackButton = ({title, onPress}: Props) => {
   const ButtonView = () => {
     return (        
-      <View style={styles.container}>
-        <IconView label="<" theme="clear" size={24} onPress={onPress} />
+      <BoxView direction="row" align="center">
+        <IconView name="previous" theme="clear" size={22} onPress={onPress} />
         <TextView>{title}</TextView>
-      </View>
+      </BoxView>
     );
   };
 
@@ -34,15 +35,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     flexDirection: 'row',
-    marginBottom: Layout.space.base,
     gap: Layout.space.base,
-  },
-  text: {
-    fontWeight: 'bold',
-  },
-  icon: {
-    width: 'auto',
-    height: 'auto',
   },
 });
 
