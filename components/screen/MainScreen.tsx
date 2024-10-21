@@ -58,21 +58,6 @@ export default () => {
   return (
     <ScreenView>
       <View style={styles.container}>
-
-        {/* Top navigation */}
-        <BoxView direction="row" justify="space-between" style={styles.header}>
-          <BoxView direction="row">
-            <TouchableOpacity onPress={() => {activeScreen && toggleScreen('')}}>
-              <LogoView size={styles.headerLogo} />
-            </TouchableOpacity>
-          </BoxView>
-          <BoxView direction="row"> 
-            <IconView name="menu" theme="primary" size={22} onPress={() => toggleScreen('settingsMenu')} />
-            <IconView label="15+" theme="secondary" size={13} onPress={() => toggleScreen('notificationsMenu')} />
-            <IconView name="search" theme="clear" size={22} onPress={() => toggleScreen('searchMenu')} />
-          </BoxView>
-        </BoxView>
-
         {/* Main content */}
         <BoxView style={Layout.modalContainer}>
           <Animated.View style={[Layout.animatedView, getEffectStyle]}>
