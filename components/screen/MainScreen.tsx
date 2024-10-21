@@ -43,6 +43,10 @@ export default () => {
     ScreenAnimation[Screens[name].effect](fadeEffect).out(Screens[name].axis).start();
   }; 
 
+  const animatedViewStyle = [Layout.animatedView, { 
+    ...( Screens[activeScreen]?.effect == 'fade' ? { opacity: fadeEffect } : { transform: [{ translateY: slideEffect }] } ),
+  }];
+
   return (
     <ScreenView>
       <View style={styles.container}>
@@ -63,9 +67,7 @@ export default () => {
 
         {/* Main content */}
         <BoxView style={Layout.modalContainer}>
-          <Animated.View style={[Layout.animatedView, { 
-            ...( Screens[activeScreen]?.effect == 'fade' ? { opacity: fadeEffect } : { transform: [{ translateY: slideEffect }] } ),
-          }]}>
+          <Animated.View style={animatedViewStyle}>
             <BoxView style={Layout.modalContent}>
               { activeScreen && Screens[activeScreen].component() }
             </BoxView>
