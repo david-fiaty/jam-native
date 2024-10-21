@@ -6,6 +6,7 @@ import * as Location from "expo-location";
 import MapView from "react-native-maps";
 import { BaseProps } from "@/constants/Types";
 import TextView from "../view/TextView";
+import { Layout } from '@/constants/Layout';
 
 export default ({ style, children }: BaseProps) => {
   const [location, setLocation] = useState("");
@@ -35,7 +36,7 @@ export default ({ style, children }: BaseProps) => {
 
   return (
     <TouchableWithoutFeedback>
-      <View style={styles.wrapper}>
+      <View style={styles.container}>
         <MapView
           style={styles.map}
           provider="google"
@@ -71,9 +72,8 @@ export default ({ style, children }: BaseProps) => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
-  wrapper: {
-    width: "100%",
+  container: {
+    width: '100%',
     flex: 1,
   },
   map: {
