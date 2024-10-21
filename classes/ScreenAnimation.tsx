@@ -2,7 +2,7 @@ import { Animated } from 'react-native';
 import DeviceManager from '@/classes/DeviceManager';
 
 class ScreenAnimation {
-  slide(effect) {
+  slide(effect: Animated.Value) {
     return {
       in: () => {
         return Animated.timing(effect, {
@@ -21,7 +21,7 @@ class ScreenAnimation {
     };
   }
 
-  fade(effect) {
+  fade(effect: Animated.Value) {
     return {
       in: () => {
         return Animated.timing(effect, {
