@@ -1,13 +1,45 @@
 import React, { useState, useRef } from 'react';
 import { StyleSheet, View, Animated } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import { Screens } from '@/constants/Screens';
 import ScreenAnimation from '@/classes/ScreenAnimation';
 import i18n from '@/translation/i18n'; 
 import ScreenView from '../view/ScreenView';
 import IconView from '../view/IconView';
 import BoxView from '../view/BoxView';
 import DeviceManager from '@/classes/DeviceManager';
+import SettingsMenu from '@/components/menu/SettingsMenu';
+import NotificationsMenu from '@/components/menu/NotificationsMenu';
+import SearchMenu from '@/components/menu/SearchMenu';
+import MapView from '@/components/view/MapView';
+import AddJamForm from '@/components/form/AddJamForm';
+import ProfileForm from '@/components/form/ProfileForm';
+
+const Screens = {
+  settingsMenu: {
+    effect: 'push',
+    component: () => <SettingsMenu />,
+  },
+  notificationsMenu: {
+    effect: 'fade',
+    component: () => <NotificationsMenu />,
+  }, 
+  searchMenu: {
+    effect: 'slide',
+    component: () => <SearchMenu />,
+  },
+  mapView: {
+    effect: 'fade',
+    component: () => <MapView />,
+  },
+  addJamForm: {
+    effect: 'fade',
+    component: () => <AddJamForm />,
+  },
+  profileForm: {
+    effect: 'fade',
+    component: () => <ProfileForm />,
+  },
+};
 
 export default () => {  
   const [activeScreen, setActiveScreen] = useState('');
