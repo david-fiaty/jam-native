@@ -14,38 +14,37 @@ import MapView from '@/components/view/MapView';
 import AddJamForm from '@/components/form/AddJamForm';
 import ProfileForm from '@/components/form/ProfileForm';
 
-const Screens = {
-  settingsMenu: {
-    effect: 'push',
-    component: () => <SettingsMenu />,
-  },
-  notificationsMenu: {
-    effect: 'fade',
-    component: () => <NotificationsMenu />,
-  }, 
-  searchMenu: {
-    effect: 'slide',
-    component: () => <SearchMenu />,
-  },
-  mapView: {
-    effect: 'fade',
-    component: () => <MapView />,
-  },
-  addJamForm: {
-    effect: 'fade',
-    component: () => <AddJamForm />,
-  },
-  profileForm: {
-    effect: 'fade',
-    component: () => <ProfileForm />,
-  },
-};
-
 export default () => {  
   const [activeScreen, setActiveScreen] = useState('');
   const slideEffect = useRef(new Animated.Value(DeviceManager.window.height)).current; 
   const pushEffect = useRef(new Animated.Value(DeviceManager.window.width)).current; 
   const fadeEffect = useRef(new Animated.Value(0)).current; 
+  const Screens = {
+    settingsMenu: {
+      effect: 'push',
+      component: () => <SettingsMenu />,
+    },
+    notificationsMenu: {
+      effect: 'fade',
+      component: () => <NotificationsMenu />,
+    }, 
+    searchMenu: {
+      effect: 'slide',
+      component: () => <SearchMenu />,
+    },
+    mapView: {
+      effect: 'fade',
+      component: () => <MapView />,
+    },
+    addJamForm: {
+      effect: 'fade',
+      component: () => <AddJamForm />,
+    },
+    profileForm: {
+      effect: 'fade',
+      component: () => <ProfileForm />,
+    },
+  };
 
   const toggleScreen = (name: string) => {
     if (activeScreen && !name || activeScreen == name) {
@@ -91,7 +90,7 @@ export default () => {
       <View style={styles.container}>
         {/* Main content */}
         <BoxView style={Layout.modalContainer}>
-          <Animated.View style={[Layout.animatedView, getEffectStyle]}>
+          <Animated.View style={[Layout.animatedView]}>
             <BoxView style={Layout.modalContent}>
               { activeScreen && Screens[activeScreen].component() }
             </BoxView>
