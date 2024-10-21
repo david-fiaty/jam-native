@@ -8,12 +8,12 @@ import ProfileForm from '@/components/form/ProfileForm';
 export const Screens = {
   settingsMenu: {
     effect: 'fade',
-    axis: null,
+    axis: 'x',
     component: () => <SettingsMenu />,
   },
   notificationsMenu: {
     effect: 'fade',
-    axis: null,
+    axis: 'x',
     component: () => <NotificationsMenu />,
   }, 
   searchMenu: {
@@ -23,17 +23,17 @@ export const Screens = {
   },
   mapView: {
     effect: 'fade',
-    axis: null,
+    axis: 'x',
     component: () => <MapView />,
   },
   addJamForm: {
     effect: 'fade',
-    axis: null,
+    axis: 'x',
     component: () => <AddJamForm />,
   },
   profileForm: {
     effect: 'fade',
-    axis: null,
+    axis: 'x',
     component: () => <ProfileForm />,
   },
 };
