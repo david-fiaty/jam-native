@@ -34,7 +34,7 @@ const JamsScreen = () => {
   }, []);
 
   if (!data) {
-    return <TextBlock>Loadinig...</TextBlock>
+    return <TextBlock>Loading...</TextBlock>
   }
 
   console.log('yyyyyyyyyyyyyuuuu');
