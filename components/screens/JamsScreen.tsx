@@ -26,6 +26,8 @@ const Item = ({item, index}: ItemProps) => {
 const JamsScreen = () => {
   const [data, setData] = useState(null);
 
+  console.log(data);
+
   useEffect(() => {
     (async () => {
       setData(await ApiClient.get('jams', true));
@@ -36,6 +38,8 @@ const JamsScreen = () => {
     return <></>;
   }
 
+  const url = '';
+  
   return (
     <View style={styles.container}>
       <FlatList 
