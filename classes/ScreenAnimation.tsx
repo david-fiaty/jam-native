@@ -25,35 +25,16 @@ class ScreenAnimation {
     return {
       in: (axis?: string) => {
         return Animated.timing(effect, {
-          toValue: 0, 
+          toValue: 1, 
           duration: 300, 
           useNativeDriver: true, 
         });
       },
       out: (axis?: string) => {
         return Animated.timing(effect, {
-          toValue: DeviceManager.window.width, 
-          duration: 300, 
-          useNativeDriver: true, 
-        });
-      },
-    };
-  }
-
-  push(effect: Animated.Value) {
-    return {
-      in: (axis?: string) => {
-        return Animated.timing(effect, {
           toValue: 0, 
           duration: 300, 
           useNativeDriver: true, 
-        });
-      },
-      out: (axis?: string) => {
-        return Animated.timing(effect, {
-          toValue: DeviceManager.window.height, 
-          duration: 300,
-          useNativeDriver: true,
         });
       },
     };
