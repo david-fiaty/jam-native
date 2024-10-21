@@ -3,6 +3,7 @@ import { StyleSheet, View, TouchableOpacity, Animated } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
 import { Screens } from '@/constants/Screens';
+import ScreenAnimation from '@/classes/ScreenAnimation';
 import i18n from '@/translation/i18n'; 
 import ScreenView from '../view/ScreenView';
 import IconView from '../view/IconView';
@@ -33,50 +34,15 @@ export default () => {
     }
   };
 
-  const hideScreen = (name: string) => {
-    setActiveScreen('');
-    screenAnimations[Screens[name].effect].out().start();
-  }; 
-
   const showScreen = (name: string) => {
     setActiveScreen(name);
-    screenAnimations[Screens[name].effect].in().start();
+    ScreenAnimation[Screens[name].effect](fadeEffect).in().start();
   };
 
-  const screenAnimations = {
-    slide: {
-      in: () => {
-        return Animated.timing(slideEffect, {
-          toValue: 0, 
-          duration: 300, 
-          useNativeDriver: true, 
-        });
-      },
-      out: () => {
-        return Animated.timing(slideEffect, {
-          toValue: windowHeight, 
-          duration: 300,
-          useNativeDriver: true,
-        });
-      },
-    },
-    fade: {
-      in: () => {
-        return Animated.timing(fadeEffect, {
-          toValue: 1, 
-          duration: 300, 
-          useNativeDriver: true, 
-        });
-      },
-      out: () => {
-        return Animated.timing(fadeEffect, {
-          toValue: 0, 
-          duration: 300, 
-          useNativeDriver: true, 
-        });
-      },
-    },
-  };
+  const hideScreen = (name: string) => {
+    setActiveScreen('');
+    ScreenAnimation[Screens[name].effect](fadeEffect).out().start();
+  }; 
 
   return (
     <ScreenView>
