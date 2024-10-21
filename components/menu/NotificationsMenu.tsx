@@ -18,11 +18,7 @@ export default ({style, children}: BaseProps) => {
         renderItem={({item, index}: ListItemProps) => {
           return (
             <TouchableOpacity onPress={() => {
-              router.push({
-                pathname: '/notification',
-                params: item,
-          
-              });
+              console.log('clicked', item, index);
             }}>
               <View style={styles.item}>
                 <TextView>{item.label}</TextView>

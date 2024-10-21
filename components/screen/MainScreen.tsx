@@ -1,20 +1,14 @@
 import React, { useState, useRef } from 'react';
 import { StyleSheet, View, TouchableOpacity, Animated } from 'react-native';
 import { Layout } from '@/constants/Layout';
+import { Colors } from '@/constants/Colors';
+import { Screens } from '@/constants/Screens';
 import i18n from '@/translation/i18n'; 
 import ScreenView from '../view/ScreenView';
 import IconView from '../view/IconView';
 import BoxView from '../view/BoxView';
 import LogoView from '../view/LogoView';
 import DeviceManager from '@/classes/DeviceManager';
-import TextView from '../view/TextView';
-import SettingsMenu from '../menu/SettingsMenu';
-import NotificationsMenu from '../menu/NotificationsMenu';
-import SearchMenu from '../menu/SearchMenu';
-import MapView from '../view/MapView';
-import AddJamForm from '../form/AddJamForm';
-import ProfileForm from '../form/ProfileForm';
-import { Colors } from '@/constants/Colors';
 
 export default () => {  
   // Parameters
@@ -41,12 +35,12 @@ export default () => {
 
   const hideScreen = (name: string) => {
     setActiveScreen('');
-    screenAnimations[screenStack[name].effect].out().start();
+    screenAnimations[Screens[name].effect].out().start();
   }; 
 
   const showScreen = (name: string) => {
     setActiveScreen(name);
-    screenAnimations[screenStack[name].effect].in().start();
+    screenAnimations[Screens[name].effect].in().start();
   };
 
   const screenAnimations = {
@@ -84,33 +78,6 @@ export default () => {
     },
   };
 
-  const screenStack = {
-    settingsMenu: {
-      effect: 'fade',
-      component: () => <SettingsMenu />,
-    },
-    notificationsMenu: {
-      effect: 'fade',
-      component: () => <NotificationsMenu />,
-    }, 
-    searchMenu: {
-      effect: 'slide',
-      component: () => <SearchMenu />,
-    },
-    mapView: {
-      effect: 'fade',
-      component: () => <MapView />,
-    },
-    addJamForm: {
-      effect: 'fade',
-      component: () => <AddJamForm />,
-    },
-    profileForm: {
-      effect: 'fade',
-      component: () => <ProfileForm />,
-    },
-  };
-
   return (
     <ScreenView>
       <View style={styles.container}>
@@ -133,10 +100,10 @@ export default () => {
         <BoxView style={styles.content}>
           <Animated.View style={[{
             ...styles.animatedView, 
-            ...(screenStack[activeScreen]?.effect == 'fade' ? { opacity: fadeEffect } : { transform: [{ translateY: slideEffect }] }),
+            ...(Screens[activeScreen]?.effect == 'fade' ? { opacity: fadeEffect } : { transform: [{ translateY: slideEffect }] }),
           }]}>
             <BoxView style={styles.modal}>
-              { activeScreen && screenStack[activeScreen].component() }
+              { activeScreen && Screens[activeScreen].component() }
             </BoxView>
           </Animated.View>
         </BoxView>
