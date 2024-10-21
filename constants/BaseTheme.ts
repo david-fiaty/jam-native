@@ -9,7 +9,7 @@ export default createTheme({
     Button: {
       titleStyle: {
         color: '#FFFFFF',
-        fontFamily: 'BaseFont',
+        //fontFamily: 'BaseFont', // Todo - Enable font
       },
     },
   },
