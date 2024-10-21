@@ -1,22 +1,25 @@
-import { Layout } from '@/constants/Layout';
 import React from 'react';
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
+import { Layout } from '@/constants/Layout';
+import { Colors } from '@/constants/Colors';
 
-export default () => (
-  <View style={[styles.container, styles.horizontal]}>
-    <ActivityIndicator />
-    <ActivityIndicator size="large" />
-    <ActivityIndicator size="small" color="#0000ff" />
-    <ActivityIndicator size="large" color="#00ff00" />
-  </View>
-);
+type Props = {
+  size?: string,
+};
+
+export default ({size}: Props) => {
+  const spinnerSize = size || 'large';
+
+  return (
+    <View style={[styles.container, styles.horizontal]}>
+      <ActivityIndicator size={spinnerSize} color={Colors.primary} />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-  },
-  horizontal: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     padding: Layout.space.base,
