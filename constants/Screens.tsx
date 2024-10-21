@@ -7,7 +7,7 @@ import ProfileForm from '@/components/form/ProfileForm';
 
 export const Screens = {
   settingsMenu: {
-    effect: 'fade',
+    effect: 'push',
     component: () => <SettingsMenu />,
   },
   notificationsMenu: {
