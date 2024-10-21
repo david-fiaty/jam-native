@@ -29,16 +29,18 @@ export default ({style, children}: BaseProps) => {
   };
 
   return (
-    <BoxView direction="row" justify="space-between" style={styles.container}>
-      <BoxView direction="row" style={styles.left}>
+    <BoxView direction="row" align="center" justify="space-between" style={styles.container}>
+      <BoxView direction="row" align="center" style={styles.left}>
         <TouchableOpacity onPress={() => {}}>
           <LogoView size={{width: 48, height: 48}} />
         </TouchableOpacity>
       </BoxView>
-      <BoxView direction="row" style={styles.right}> 
-        <IconView name="menu" theme="primary" size={22} onPress={() => {}} />
-        <IconView label="15+" theme="secondary" size={13} onPress={() => {}} />
-        <IconView name="search" theme="clear" size={22} onPress={() => {}} />
+      <BoxView direction="row" align="center" justify="space-between">
+        <BoxView direction="row" align="center" style={styles.right}> 
+          <IconView name="menu" theme="primary" size={22} onPress={() => {}} />
+          <IconView label="15+" theme="secondary" size={13} onPress={() => {}} />
+          <IconView name="search" theme="clear" size={22} onPress={() => {}} />
+        </BoxView>
       </BoxView>
     </BoxView>
   );
