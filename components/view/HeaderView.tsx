@@ -20,7 +20,6 @@ export default ({style, children}: BaseProps) => {
         <IconView name="search" theme="clear" size={22} onPress={() => {}} />
       </BoxView>
     </BoxView>
-  
   );
 };
 
