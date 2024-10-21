@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { StyleSheet, View, TouchableOpacity, Animated } from 'react-native';
+import { StyleSheet, View, Animated } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import { Screens } from '@/constants/Screens';
 import ScreenAnimation from '@/classes/ScreenAnimation';
@@ -7,7 +7,6 @@ import i18n from '@/translation/i18n';
 import ScreenView from '../view/ScreenView';
 import IconView from '../view/IconView';
 import BoxView from '../view/BoxView';
-import LogoView from '../view/LogoView';
 import DeviceManager from '@/classes/DeviceManager';
 
 export default () => {  
@@ -85,21 +84,6 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: 'gray',
   },
-  header: Layout.header,
   footer: Layout.footer,
-  headerLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Layout.space.base,
-  },
-  headerRight: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Layout.space.base,
-  },
-  headerLogo: {
-    width: Layout.headerLogo.width,
-    height: Layout.headerLogo.height,
-  },
 });
 
