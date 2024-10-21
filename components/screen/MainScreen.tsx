@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { StyleSheet, View, TouchableOpacity, Animated } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import { Colors } from '@/constants/Colors';
 import { Screens } from '@/constants/Screens';
 import ScreenAnimation from '@/classes/ScreenAnimation';
 import i18n from '@/translation/i18n'; 
