@@ -36,7 +36,7 @@ class ScreenAnimation {
 
   pushIn(reference: Animated.Value) {
     return Animated.timing(reference, {
-      toValue: 0, 
+      toValue: -DeviceManager.window.width, 
       duration: 300, 
       useNativeDriver: true, 
     });
