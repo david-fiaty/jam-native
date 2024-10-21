@@ -62,12 +62,11 @@ export default () => {
         </BoxView>
 
         {/* Main content */}
-        <BoxView style={styles.modalContainer}>
-          <Animated.View style={[{
-            ...styles.animatedView, 
+        <BoxView style={Layout.modalContainer}>
+          <Animated.View style={[Layout.animatedView, { 
             ...(Screens[activeScreen]?.effect == 'fade' ? { opacity: fadeEffect } : { transform: [{ translateY: slideEffect }] }),
           }]}>
-            <BoxView style={styles.modalContent}>
+            <BoxView style={Layout.modalContent}>
               { activeScreen && Screens[activeScreen].component() }
             </BoxView>
           </Animated.View>
@@ -107,8 +106,5 @@ const styles = StyleSheet.create({
     width: Layout.headerLogo.width,
     height: Layout.headerLogo.height,
   },
-  modalContainer: Layout.modalContainer,
-  animatedView: Layout.animatedView,
-  modalContent: Layout.modalContent, 
 });
 
