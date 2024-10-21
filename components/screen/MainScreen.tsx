@@ -64,7 +64,7 @@ export default () => {
         {/* Main content */}
         <BoxView style={Layout.modalContainer}>
           <Animated.View style={[Layout.animatedView, { 
-            ...(Screens[activeScreen]?.effect == 'fade' ? { opacity: fadeEffect } : { transform: [{ translateY: slideEffect }] }),
+            ...( Screens[activeScreen]?.effect == 'fade' ? { opacity: fadeEffect } : { transform: [{ translateY: slideEffect }] } ),
           }]}>
             <BoxView style={Layout.modalContent}>
               { activeScreen && Screens[activeScreen].component() }
