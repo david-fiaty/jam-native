@@ -34,12 +34,12 @@ export default () => {
 
   const showScreen = (name: string) => {
     setActiveScreen(name);
-    ScreenAnimation[Screens[name].effect](fadeEffect).in(Screens[name].axis).start();
+    ScreenAnimation[`${Screens[name].effect}In`](fadeEffect).start();
   };
 
   const hideScreen = (name: string) => {
     setActiveScreen('');
-    ScreenAnimation[Screens[name].effect](fadeEffect).out(Screens[name].axis).start();
+    ScreenAnimation[`${Screens[name].effect}Out`](fadeEffect).start();
   }; 
 
   const animatedViewStyle = [Layout.animatedView, { 
