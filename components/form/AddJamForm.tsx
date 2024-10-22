@@ -24,10 +24,15 @@ const AddJamForm = ({ style, children }: BaseProps) => {
       />
       <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
       <JamCategoriesField data={JamCategoriesData} />
+
       <DividerView />
       <AddMediaField />
       <AddCollaboratorsField />
+
+      <DividerView />
       <AddCaptionField />
+
+      <DividerView />
       <UserLocationField />
       <StatusField />
       <IndustryField />
