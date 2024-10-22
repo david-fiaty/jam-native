@@ -11,29 +11,34 @@ const UserJamsList = () => {
   const data = ApiClient.get('jams');
 
   return (
-    <FlatList 
-      data={data} 
-      numColumns={4}
-      contentContainerStyle={{gap: Layout.space.base}}
-      columnWrapperStyle={{gap: Layout.space.base}}
-      scrollEnabled={false}
-      renderItem={({item, index}) => {
-        return (
-          <TouchableOpacity onPress={() => setSelectedOption(item.id)}>
-            <View style={styles.container}>
-              <View style={[styles.square, selectedOption == item.id ? styles.selected : {}]}>
-                <TextView>{item.id}</TextView>
+    <View style={styles.container}>
+      <FlatList 
+        data={data} 
+        numColumns={4}
+        contentContainerStyle={{gap: Layout.space.base}}
+        columnWrapperStyle={{gap: Layout.space.base}}
+        scrollEnabled={false}
+        renderItem={({item, index}) => {
+          return (
+            <TouchableOpacity onPress={() => setSelectedOption(item.id)}>
+              <View style={styles.item}>
+                <View style={[styles.square, selectedOption == item.id ? styles.selected : {}]}>
+                  <TextView>{item.id}</TextView>
+                </View>
               </View>
-            </View>
-          </TouchableOpacity>
-        );
-      }}
-    />
+            </TouchableOpacity>
+          );
+        }}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    
+  },
+  item: {
     flexDirection: 'column',
     gap: Layout.space.small,
   },
