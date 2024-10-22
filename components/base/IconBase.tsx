@@ -44,10 +44,12 @@ const icons = {
   stack: ({iconStyle, size}: IconProps) => <Ionicons name="albums-outline" size={size} style={iconStyle} />,
 };
 
-export default ({name, size, containerStyle, iconStyle}: Props) => {
+const IconBase = ({name, size, containerStyle, iconStyle}: Props) => {
   return (
     <View style={containerStyle}>
       {icons[name]({iconStyle, size})}
     </View>
   );
 };
+
+export default IconBase;

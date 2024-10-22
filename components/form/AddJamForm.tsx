@@ -30,7 +30,7 @@ const jamCategories = [
   },
 ];
 
-export default ({style, children}: BaseProps) => {
+const AddJamForm = ({style, children}: BaseProps) => {
   return (
     <BoxView align="flex-start" justify="flex-start">
       <BackButton title={i18n.t('Add new Jam')} onPress={() => console.log('clicked')} />
@@ -46,3 +46,5 @@ const styles = StyleSheet.create({
     //justifyContent
   },
 });
+
+export default AddJamForm;

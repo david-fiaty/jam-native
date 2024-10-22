@@ -7,7 +7,7 @@ import { BaseProps } from '@/constants/Types';
 import { Layout } from '@/constants/Layout';
 import DeviceManager from '@/classes/DeviceManager';
 
-export default ({style, children}: BaseProps) => {
+const HeaderView = ({style, children}: BaseProps) => {
   const windowHeight = DeviceManager.window.height;
   const slideAnim = useRef(new Animated.Value(windowHeight)).current; 
 
@@ -37,7 +37,7 @@ export default ({style, children}: BaseProps) => {
       </BoxView>
       <BoxView direction="row" align="center" justify="space-between">
         <BoxView direction="row" align="center" style={styles.right}> 
-          <IconView name="menu" theme="primary" size={22} onPress={() => {}} />
+          <IconView name="menu" theme="secondary" size={22} onPress={() => {}} />
           <IconView label="15+" theme="secondary" size={13} onPress={() => {}} />
           <IconView name="search" theme="clear" size={22} onPress={() => {}} />
         </BoxView>
@@ -59,3 +59,5 @@ const styles = StyleSheet.create({
     gap: Layout.space.base,
   },
 });
+
+export default HeaderView;

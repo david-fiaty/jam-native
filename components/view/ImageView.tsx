@@ -11,8 +11,10 @@ type Props = BaseProps & {
   style?: object, 
 };
 
-export default (props: Props) => {
+const ImageView = (props: Props) => {
   return (
     <ImageBase {...props} />
   );
 };
+
+export default ImageView;

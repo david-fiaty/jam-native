@@ -3,13 +3,13 @@ import { StyleSheet, View, Platform, TouchableWithoutFeedback } from "react-nati
 import { Marker } from "react-native-maps";
 import * as Device from "expo-device";
 import * as Location from "expo-location";
-import MapView from "react-native-maps";
+import RNMapView from "react-native-maps";
 import { BaseProps } from "@/constants/Types";
 import TextView from "../view/TextView";
 import { Layout } from '@/constants/Layout';
 import SpinnerView from './SpinnerView';
 
-export default ({ style, children }: BaseProps) => {
+const MapView = ({ style, children }: BaseProps) => {
   const [location, setLocation] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -42,7 +42,7 @@ export default ({ style, children }: BaseProps) => {
   return (
     <TouchableWithoutFeedback>
       <View style={styles.container}>
-        <MapView
+        <RNMapView
           style={styles.map}
           provider="google"
           initialRegion={{
@@ -70,7 +70,7 @@ export default ({ style, children }: BaseProps) => {
             title="Jam location 3"
             description="Jam location 3"
           />
-        </MapView>
+        </RNMapView>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -85,3 +85,5 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+export default MapView;

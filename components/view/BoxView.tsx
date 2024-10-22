@@ -11,7 +11,7 @@ type Props = BaseProps & {
   children?: ReactNode,
 };
 
-export default ({direction, align, justify, style, children}: Props) => {
+const BoxView = ({direction, align, justify, style, children}: Props) => {
   const containerStyle = {
     flexDirection: direction,
     alignItems: align,
@@ -30,3 +30,5 @@ const styles = StyleSheet.create({
     gap: Layout.space.base,
   },
 });
+
+export default BoxView;

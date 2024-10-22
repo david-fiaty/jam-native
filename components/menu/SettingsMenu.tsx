@@ -25,7 +25,7 @@ const items: ItemProps[] = [
   },
 ];
 
-export default ({style, children}: BaseProps) => {
+const SettingsMenu = ({style, children}: BaseProps) => {
   return (
     <View style={styles.container}>
       <ListView 
@@ -52,3 +52,5 @@ const styles = StyleSheet.create({
   item: Layout.menuItem,
   label: Layout.menuItemLabel,
 });
+
+export default SettingsMenu;

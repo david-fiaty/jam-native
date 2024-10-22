@@ -9,7 +9,7 @@ type Props = {
   data: object,
 };
 
-export default ({data}: Props) => {  
+const SquareOptionsField = ({data}: Props) => {  
   const [selectedOption, setSelectedOption] = useState(null);
 
   return (
@@ -56,3 +56,5 @@ const styles = StyleSheet.create({
     borderColor: Colors.primary,
   },
 });
+
+export default SquareOptionsField;
