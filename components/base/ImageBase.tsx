@@ -14,16 +14,11 @@ const ImageBase = ({source, width, height, resizeMethod, resizeMode, style}: Pro
   return (
     <Image 
       source={source} 
-      resizeMethod={resizeMethod || 'scale'}
+      resizeMethod={resizeMethod || 'cover'}
       resizeMode={resizeMode || 'contain'}
-      style={[
-        styles.image, 
-        {
-          width: width || '100%', 
-          height: height || '100%',
-        }, 
-        style]
-      } 
+      width={width || '100%'}
+      height={height || '100%'}
+      style={[styles.image,style]} 
     />   
   );
 };
