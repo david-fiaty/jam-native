@@ -14,7 +14,7 @@ const data = [
   { label: "Item 8", value: "8" },
 ];
 
-const DropdownComponent = () => {
+const DropdownField = () => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
 
@@ -65,7 +65,7 @@ const DropdownComponent = () => {
   );
 };
 
-export default DropdownComponent;
+export default DropdownField;
 
 const styles = StyleSheet.create({
   container: {
