@@ -8,9 +8,10 @@ type Props = BaseProps & {
   value?: string,
   placeholder?: string,
   containerStyle?: object,
+  disabled?: boolean, 
 };
 
-const InputTextareaBase = ({value, placeholder, containerStyle}: Props) => {
+const InputTextareaBase = ({value, placeholder, containerStyle, disabled}: Props) => {
   return (
     <BoxView style={[styles.container, containerStyle]}>
       <Input
@@ -20,6 +21,7 @@ const InputTextareaBase = ({value, placeholder, containerStyle}: Props) => {
         multiline={true}
         textAlignVertical="top"
         numberOfLines={5}
+        editable={!disabled}
         value={value}
       />
     </BoxView>
