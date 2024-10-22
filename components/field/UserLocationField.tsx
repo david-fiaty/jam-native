@@ -18,11 +18,8 @@ const UserLocationField = () => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
   },
   containerStyle: {
-    width: 'auto',
-    flexGrow: 1,
   }
 });
 
