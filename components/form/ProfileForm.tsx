@@ -13,6 +13,7 @@ import StatusField from "../field/StatusField";
 import IndustryField from "../field/IndustryField";
 import PostButton from "../button/PostButton";
 import DividerView from "../view/DividerView";
+import UserProfileImageField from '../field/UserProfileImageField';
 
 const ProfileForm = ({style, children}: BaseProps) => {
 
@@ -22,7 +23,7 @@ const ProfileForm = ({style, children}: BaseProps) => {
         title={i18n.t('Add new Jam')}
         onPress={() => console.log('clicked')}
       />
-      <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
+      <UserProfileImageField />
 
       <DividerView />
       <AddMediaField />
