@@ -5,13 +5,12 @@ import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
 import UserLocationField from "../field/UserLocationField";
 import IndustryField from "../field/IndustryField";
-import PostButton from "../button/PostButton";
 import DividerView from "../view/DividerView";
 import UserProfileImageField from '../field/UserProfileImageField';
 import InputTextBase from '../base/InputTextBase';
 import CreativeOrganizationField from '../field/CreativeOrganizationField';
-import JamCategoriesField from '../field/JamCategoriesField';
 import { JamCategoriesData } from "@/constants/Data";
+import UserJamsList from '../list/UserJamsList';
 
 const ProfileForm = ({style, children}: BaseProps) => {
 
@@ -34,7 +33,7 @@ const ProfileForm = ({style, children}: BaseProps) => {
       <CreativeOrganizationField />
 
       <DividerView />
-      <JamCategoriesField data={JamCategoriesData} />
+      <UserJamsList data={JamCategoriesData} />
 
     </BoxView>
   );
