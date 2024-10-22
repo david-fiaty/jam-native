@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
-import AntDesign from "@expo/vector-icons/AntDesign";
+import TextView from "../view/TextView";
+import i18n from "@/translation/i18n";
+import { Colors } from "@/constants/Colors";
+import { Layout } from "@/constants/Layout";
 
 const data = [
   { label: "Item 1", value: "1" },
@@ -21,9 +24,7 @@ const DropdownField = () => {
   const renderLabel = () => {
     if (value || isFocus) {
       return (
-        <Text style={[styles.label, isFocus && { color: "blue" }]}>
-          Dropdown label
-        </Text>
+        <TextView style={styles.label}>{i18n.t('Add collaborators')}</TextView>
       );
     }
     return null;
@@ -33,7 +34,7 @@ const DropdownField = () => {
     <View style={styles.container}>
       {renderLabel()}
       <Dropdown
-        style={[styles.dropdown, isFocus && { borderColor: "blue" }]}
+        style={styles.dropdown}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         inputSearchStyle={styles.inputSearchStyle}
@@ -52,14 +53,6 @@ const DropdownField = () => {
           setValue(item.value);
           setIsFocus(false);
         }}
-        renderLeftIcon={() => (
-          <AntDesign
-            style={styles.icon}
-            color={isFocus ? "blue" : "black"}
-            name="Safety"
-            size={20}
-          />
-        )}
       />
     </View>
   );
@@ -69,22 +62,18 @@ export default DropdownField;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
-    padding: 16,
+    backgroundColor: Colors.secondary,
+    width: '100%',
   },
   dropdown: {
-    height: 50,
-    borderColor: "gray",
-    borderWidth: 0.5,
-    borderRadius: 8,
-    paddingHorizontal: 8,
+    ...Layout.formField,
   },
   icon: {
     marginRight: 5,
   },
   label: {
-    position: "absolute",
-    backgroundColor: "white",
+    position: 'absolute',
+    backgroundColor: 'white',
     left: 22,
     top: 8,
     zIndex: 999,
