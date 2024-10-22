@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
-import MediaPicker from '../base/MediaPicker';
+import MediaPickerBase from '../base/MediaPickerBase';
+import BoxView from '../view/BoxView';
 
 type ImagePreviewProps = {
   selectedImage?: string;
@@ -7,12 +8,14 @@ type ImagePreviewProps = {
 
 const AddMediaField = () => {  
   return (
-    <MediaPicker />
+      <MediaPickerBase />
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'green',
+    width: '100%',
   },
 });
 
