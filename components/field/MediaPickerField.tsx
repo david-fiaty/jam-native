@@ -3,11 +3,11 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import { Colors } from '@/constants/Colors';
+import { Layout } from '@/constants/Layout';
 import ImageView from '../view/ImageView';
 import TextView from '../view/TextView';
 import IconView from '../view/IconView';
 import BoxView from '../view/BoxView';
-import { Layout } from '@/constants/Layout';
 
 type ImagePreviewProps = {
   selectedImage?: string;
