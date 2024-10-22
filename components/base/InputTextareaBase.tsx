@@ -5,11 +5,12 @@ import { Colors } from '@/constants/Colors';
 import BoxView from '../view/BoxView';
 
 type Props = BaseProps & {
+  value?: string,
   placeholder?: string,
   containerStyle?: object,
 };
 
-const InputTextareaBase = ({placeholder, containerStyle}: Props) => {
+const InputTextareaBase = ({value, placeholder, containerStyle}: Props) => {
   return (
     <BoxView style={[styles.container, containerStyle]}>
       <TextInput
@@ -19,6 +20,7 @@ const InputTextareaBase = ({placeholder, containerStyle}: Props) => {
         multiline={true}
         textAlignVertical="top"
         numberOfLines={5}
+        value={value}
       />
     </BoxView>
   );
