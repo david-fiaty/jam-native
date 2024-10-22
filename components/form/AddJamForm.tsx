@@ -5,6 +5,7 @@ import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
 import BackButton from '../button/BackButton';
 import SquareOptionsField from '../field/SquareOptionsField';
+import MediaPickerField from '../field/MediaPickerField';
 
 const jamCategories = [
   {
@@ -35,6 +36,7 @@ export default ({style, children}: BaseProps) => {
       <BackButton title="Add new Jam" onPress={() => console.log('clicked')} />
       <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
       <SquareOptionsField data={jamCategories} />
+      <MediaPickerField />
     </BoxView>
   );
 };
