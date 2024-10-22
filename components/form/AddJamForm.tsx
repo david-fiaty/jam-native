@@ -37,6 +37,7 @@ const AddJamForm = ({style, children}: BaseProps) => {
       <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
       <SquareOptionsField data={jamCategories} />
       <MediaPickerField />
+      
     </BoxView>
   );
 };
