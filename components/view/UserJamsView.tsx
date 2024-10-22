@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   content: {
     color: Colors.primary,
     fontSize: Layout.fontSize,
-    //fontFamily: 'BaseFont', // Todo - Enable font
+
   },
 });
 
