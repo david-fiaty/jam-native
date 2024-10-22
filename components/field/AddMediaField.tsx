@@ -14,7 +14,6 @@ const AddMediaField = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'green',
     width: '100%',
   },
 });
