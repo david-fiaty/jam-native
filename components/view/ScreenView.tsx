@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { BaseProps } from '@/constants/Types';
 
-export default ({style, children}: BaseProps) => {
+const ScreenView = ({style, children}: BaseProps) => {
   return (
     <SafeAreaView style={[styles.container, style]}>
       {children}
@@ -19,3 +19,5 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 });
+
+export default ScreenView;
