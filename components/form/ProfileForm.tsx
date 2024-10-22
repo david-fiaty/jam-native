@@ -13,6 +13,7 @@ import PostButton from "../button/PostButton";
 import DividerView from "../view/DividerView";
 import UserProfileImageField from '../field/UserProfileImageField';
 import InputTextBase from '../base/InputTextBase';
+import CreativeOrganizationField from '../field/CreativeOrganizationField';
 
 const ProfileForm = ({style, children}: BaseProps) => {
 
@@ -32,7 +33,7 @@ const ProfileForm = ({style, children}: BaseProps) => {
       <InputTextBase placeholder={i18n.t('Phone number')} />
       <UserLocationField />
       <IndustryField />
-      <StatusField />
+      <CreativeOrganizationField />
       <PostButton />
     </BoxView>
   );
