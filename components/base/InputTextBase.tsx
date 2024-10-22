@@ -8,18 +8,22 @@ type Props = BaseProps & {
   value?: string,
   placeholder?: string,
   containerStyle?: object,
+  leftIcon?: JSX.Element,
+  rightIcon?: JSX.Element,
 };
 
-const InputTextBase = ({value, placeholder, containerStyle}: Props) => {
+const InputTextBase = ({value, placeholder, containerStyle, leftIcon, rightIcon}: Props) => {
   return (
     <BoxView style={[styles.container, containerStyle]}>
       <Input
+        textAlignVertical="center"
+        numberOfLines={1}
+        leftIcon={leftIcon}
+        rightIcon={rightIcon}
         style={styles.element}
         placeholder={placeholder}
         placeholderTextColor={Colors.primary}
         multiline={false}
-        textAlignVertical="center"
-        numberOfLines={1}
         value={value}
       />
     </BoxView>
@@ -27,7 +31,9 @@ const InputTextBase = ({value, placeholder, containerStyle}: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    width: '100%',
+  },
   element: {},
 });
 

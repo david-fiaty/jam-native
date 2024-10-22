@@ -71,6 +71,10 @@ const styles = StyleSheet.create({
     color: Colors.primary,
     backgroundColor: Colors.white,
   },
+  transparent: {
+    color: Colors.primary,
+    backgroundColor: 'transparent',
+  },
 });
 
 export default IconView;
