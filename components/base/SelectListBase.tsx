@@ -61,10 +61,20 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   element: {
-    //width: '100%',
-    padding: 10,
+    padding: Layout.space.base,
+  },
+  item: {
+    paddingVertical: Layout.space.base,
+    paddingHorizontal: Layout.space.base,
   },
   placeholderStyle: {
+    color: Colors.primary,
+    fontSize: Layout.fontSize,
+  },
+  itemTextStyle: {
+    padding: Layout.space.base,
+  },
+  selectedTextStyle: {
     color: Colors.primary,
     fontSize: Layout.fontSize,
   },
