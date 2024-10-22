@@ -9,19 +9,30 @@ const BaseTheme = createTheme({
   components: {
     Button: {
       titleStyle: {
-        color: '#FFFFFF',
+        color: Colors.white,
         //fontFamily: 'BaseFont', // Todo - Enable font
       },
     },
     Input: {
-      style: {
+      placeholderTextColor: Colors.primary,
+      containerStyle: {
         backgroundColor: Colors.secondary,
-        width: '100%',
         borderWidth: 1, 
         borderColor: Colors.secondary, 
         borderRadius: Layout.radius.round,
-        paddingHorizontal: Layout.space.base, 
-        justifyContent: 'center',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+      },
+      inputContainerStyle: {
+        borderBottomWidth: 0,
+        flexGrow: 1,
+      },
+      inputStyle: {
+        padding: 0,
+        margin: 0,
+        color: Colors.primary,
+        fontSize: Layout.fontSize,
       },
     },
   },
