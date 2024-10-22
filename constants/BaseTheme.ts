@@ -14,6 +14,7 @@ const BaseTheme = createTheme({
       },
     },
     Input: {
+      placeholderTextColor: Colors.primary,
       containerStyle: {
         backgroundColor: Colors.secondary,
         borderWidth: 1, 
