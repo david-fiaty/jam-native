@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import TextView from './TextView';
 
-const ModalView = (props: Props) => {
+const ModalView = () => {
   return (
     <TextView>Modal view</TextView>
   );
