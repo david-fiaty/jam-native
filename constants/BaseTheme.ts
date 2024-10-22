@@ -32,6 +32,7 @@ const BaseTheme = createTheme({
         padding: 0,
         margin: 0,
         color: Colors.primary,
+        fontSize: Layout.fontSize,
       },
     },
   },
