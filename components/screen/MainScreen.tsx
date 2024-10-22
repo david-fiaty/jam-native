@@ -14,6 +14,7 @@ import MapView from "@/components/view/MapView";
 import AddJamForm from "@/components/form/AddJamForm";
 import ProfileForm from "@/components/form/ProfileForm";
 import { Colors } from "@/constants/Colors";
+import JamsList from "../list/JamsList";
 
 const MainScreen = () => {
   const [activeScreen, setActiveScreen] = useState("");
@@ -25,28 +26,32 @@ const MainScreen = () => {
   ).current;
   const fadeEffect = useRef(new Animated.Value(0)).current;
   const screens = {
+    jamsList: {
+      effect: 'fade',
+      component: () => <JamsList />,
+    },
     settingsMenu: {
-      effect: "push",
+      effect: 'push',
       component: () => <SettingsMenu />,
     },
     notificationsMenu: {
-      effect: "fade",
+      effect: 'fade',
       component: () => <NotificationsMenu />,
     },
     searchMenu: {
-      effect: "slide",
+      effect: 'slide',
       component: () => <SearchMenu />,
     },
     mapView: {
-      effect: "fade",
+      effect: 'fade',
       component: () => <MapView />,
     },
     addJamForm: {
-      effect: "fade",
+      effect: 'fade',
       component: () => <AddJamForm />,
     },
     profileForm: {
-      effect: "fade",
+      effect: 'fade',
       component: () => <ProfileForm />,
     },
   };
@@ -96,6 +101,7 @@ const MainScreen = () => {
           <Animated.View style={[Layout.animatedView]}>
             <BoxView style={Layout.modalContent}>
               {activeScreen && screens[activeScreen].component()}
+              {!activeScreen && screens['jamsList'].component()}
             </BoxView>
           </Animated.View>
         </BoxView>
