@@ -22,7 +22,7 @@ const SelectListBase = ({data, placeholder}: Props) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, Layout.formField]}>
       {renderLabel()}
       <Dropdown
         style={[styles.field]}
@@ -57,12 +57,8 @@ const SelectListBase = ({data, placeholder}: Props) => {
 };
 
 const styles = StyleSheet.create({
-
   container: {
-    ...Layout.formField,
-    ...{
-      width: '100%',
-    },
+    width: '100%',
   },
   placeholderStyle: {
     color: Colors.primary,
