@@ -19,6 +19,7 @@ export const Layout = {
   space: space,
   header: header,
   footer: footer,
+  fontSize: 14,
   radius: {
     round: 8,
     circle: 40,

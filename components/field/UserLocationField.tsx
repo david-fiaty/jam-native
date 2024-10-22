@@ -8,7 +8,7 @@ const UserLocationField = () => {
   return (
     <BoxView direction="row" align="space-between" style={styles.container}>
       <InputTextBase placeholder={i18n.t('Location')} containerStyle={styles.containerStyle} />
-      <IconView  name="location" size={22} theme="clear" />
+      <IconView name="location" size={22} theme="clear" />
     </BoxView>
   );
 };

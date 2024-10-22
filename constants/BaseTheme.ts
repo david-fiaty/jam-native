@@ -9,11 +9,12 @@ const BaseTheme = createTheme({
   components: {
     Button: {
       titleStyle: {
-        color: '#FFFFFF',
+        color: Colors.white,
         //fontFamily: 'BaseFont', // Todo - Enable font
       },
     },
     Input: {
+      placeholderTextColor: Colors.primary,
       containerStyle: {
         backgroundColor: Colors.secondary,
         borderWidth: 1, 
@@ -25,13 +26,13 @@ const BaseTheme = createTheme({
       },
       inputContainerStyle: {
         borderBottomWidth: 0,
-        backgroundColor: 'red',
         flexGrow: 1,
       },
       inputStyle: {
         padding: 0,
         margin: 0,
         color: Colors.primary,
+        fontSize: Layout.fontSize,
       },
     },
   },
