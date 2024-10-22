@@ -7,6 +7,7 @@ import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
 import JamCategoriesField from "../field/JamCategoriesField";
 import AddMediaField from "../field/AddMediaField";
+import AddCollaboratorsField from "../field/AddCollaboratorsField";
 
 const AddJamForm = ({ style, children }: BaseProps) => {
   return (
@@ -18,6 +19,7 @@ const AddJamForm = ({ style, children }: BaseProps) => {
       <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
       <JamCategoriesField data={JamCategoriesData} />
       <AddMediaField />
+      <AddCollaboratorsField />
     </BoxView>
   );
 };
