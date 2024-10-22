@@ -13,6 +13,7 @@ import SearchMenu from "@/components/menu/SearchMenu";
 import MapView from "@/components/view/MapView";
 import AddJamForm from "@/components/form/AddJamForm";
 import ProfileForm from "@/components/form/ProfileForm";
+import { Colors } from "@/constants/Colors";
 
 const MainScreen = () => {
   const [activeScreen, setActiveScreen] = useState("");
@@ -100,7 +101,7 @@ const MainScreen = () => {
         </BoxView>
 
         {/* Bottom navigation */}
-        <BoxView direction="row" justify="space-around" style={styles.footer}>
+        <BoxView direction="row" align="center" justify="space-around" style={styles.footer}>
           <IconView
             name="location"
             theme="clear"
@@ -127,10 +128,10 @@ const MainScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "column",
-    justifyContent: "space-between",
-    height: "100%",
-    backgroundColor: "gray",
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    height: '100%',
+    backgroundColor: Colors.white,
   },
   footer: Layout.footer,
 });
