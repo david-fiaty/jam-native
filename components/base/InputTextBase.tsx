@@ -32,15 +32,7 @@ const InputTextBase = ({value, placeholder, containerStyle}: Props) => {
 
 const styles = StyleSheet.create({
   container: {},
-  element: {
-    backgroundColor: Colors.secondary,
-    width: '100%',
-    borderWidth: 1, 
-    borderColor: Colors.secondary, 
-    borderRadius: Layout.radius.round,
-    paddingHorizontal: Layout.space.base, 
-    justifyContent: 'center',
-  },
+  element: {},
 });
 
 export default InputTextBase;
