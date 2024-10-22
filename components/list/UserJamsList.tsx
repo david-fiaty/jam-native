@@ -4,13 +4,12 @@ import { Colors } from '@/constants/Colors';
 import IconView from '../view/IconView';
 import TextView from '../view/TextView';
 import { Layout } from '@/constants/Layout';
+import ApiClient from '@/classes/ApiClient';
+import ImageBase from '../base/ImageBase';
 
-type Props = {
-  data: object,
-};
-
-const UserJamsList = ({data}: Props) => {  
+const UserJamsList = () => {  
   const [selectedOption, setSelectedOption] = useState(null);
+  const data = ApiClient.get('jams');
 
   return (
     <FlatList 
@@ -24,9 +23,8 @@ const UserJamsList = ({data}: Props) => {
           <TouchableOpacity onPress={() => setSelectedOption(item.id)}>
             <View style={styles.container}>
               <View style={[styles.square, selectedOption == item.id ? styles.selected : {}]}>
-                <IconView name={item.icon} theme="secondary" size={22} />
+                <ImageBase source={item.image} />
               </View>
-              <TextView>{item.label}</TextView>   
             </View>
           </TouchableOpacity>
         );
