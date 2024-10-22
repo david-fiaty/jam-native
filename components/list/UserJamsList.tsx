@@ -5,7 +5,6 @@ import IconView from '../view/IconView';
 import TextView from '../view/TextView';
 import { Layout } from '@/constants/Layout';
 import ApiClient from '@/classes/ApiClient';
-import ImageBase from '../base/ImageBase';
 
 const UserJamsList = () => {  
   const [selectedOption, setSelectedOption] = useState(null);
@@ -23,7 +22,7 @@ const UserJamsList = () => {
           <TouchableOpacity onPress={() => setSelectedOption(item.id)}>
             <View style={styles.container}>
               <View style={[styles.square, selectedOption == item.id ? styles.selected : {}]}>
-                <ImageBase source={item.image} />
+                <TextView>{item.id}</TextView>
               </View>
             </View>
           </TouchableOpacity>
