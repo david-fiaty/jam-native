@@ -10,12 +10,13 @@ type Props = BaseProps & {
   size?: number, 
   label?: string,
   theme: string,
+  radius?: string, 
   style?: object,
   onPress?: () => void,
 };
 
-const IconView = ({name, size, label, theme, style, onPress}: Props) => {
-  const iconStyle = [styles.iconStyle, styles[theme], {fontSize: size}];
+const IconView = ({name, size, label, theme, radius = 'circle', style, onPress}: Props) => {
+  const iconStyle = [styles.iconStyle, styles[theme], {fontSize: size}, {borderRadius: Layout.radius[radius]}];
 
   if (label) {
     return (
