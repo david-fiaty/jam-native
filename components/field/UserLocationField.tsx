@@ -7,8 +7,11 @@ import IconView from '../view/IconView';
 const UserLocationField = () => {
   return (
     <BoxView direction="row" align="space-between" style={styles.container}>
-      <InputTextBase placeholder={i18n.t('Location')} containerStyle={styles.containerStyle} />
-      <IconView name="location" size={22} theme="clear" />
+      <InputTextBase 
+        placeholder={i18n.t('Location')} 
+        containerStyle={styles.containerStyle} 
+        rightIcon={<IconView name="location" size={22} theme="transparent" />}
+      />
     </BoxView>
   );
 };
