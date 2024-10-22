@@ -23,7 +23,7 @@ const ImagePreview = ({selectedImage}: ImagePreviewProps) => {
   return <></>;
 };
 
-const MediaPickerField = () => {  
+const MediaPicker = () => {  
   const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -82,4 +82,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MediaPickerField;
+export default MediaPicker;
