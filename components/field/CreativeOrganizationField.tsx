@@ -1,13 +1,13 @@
 import { StyleSheet } from 'react-native';
-import { StatusOptionsData } from '@/constants/Data';
+import { CreativeOrganizationOptionsData } from '@/constants/Data';
 import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
 import SelectListBase from '../base/SelectListBase';
 
-const StatusField = () => {
+const CreativeOrganizationField = () => {
   return (
     <BoxView direction="row" align="space-between" style={styles.container}>
-      <SelectListBase data={StatusOptionsData} placeholder={i18n.t('Status')} />
+      <SelectListBase data={CreativeOrganizationOptionsData} placeholder={i18n.t('Creative organization')} />
     </BoxView>
   );
 };
@@ -18,4 +18,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StatusField;
+export default CreativeOrganizationField;
