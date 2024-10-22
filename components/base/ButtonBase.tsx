@@ -1,40 +1,27 @@
-import { StyleSheet } from 'react-native';
-import { Input } from '@rneui/themed';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { Button } from '@rneui/themed';
 import { BaseProps } from '@/constants/Types';
-import { Colors } from '@/constants/Colors';
 import BoxView from '../view/BoxView';
 
 type Props = BaseProps & {
-  value?: string,
-  placeholder?: string,
-  containerStyle?: object,
-  leftIcon?: JSX.Element,
-  rightIcon?: JSX.Element,
-  disabled?: boolean, 
+  label: string,
+  onPress?: () => void,
+  style?: object,
 };
 
-const ButtonBase = ({value, placeholder, containerStyle, leftIcon, rightIcon, disabled}: Props) => {
+const ButtonBase = ({label, onPress, style}: Props) => {
   return (
-    <BoxView style={[styles.container, containerStyle]}>
-      <Input
-        textAlignVertical="center"
-        numberOfLines={1}
-        leftIcon={leftIcon}
-        rightIcon={rightIcon}
-        style={styles.element}
-        placeholder={placeholder}
-        placeholderTextColor={Colors.primary}
-        multiline={false}
-        editable={!disabled}
-        value={value}
-      />
-    </BoxView>
+    <TouchableOpacity onPress={onPress}>
+      <BoxView style={[styles.container]}>
+        <Button title={label} />
+      </BoxView>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    
   },
   element: {},
 });
