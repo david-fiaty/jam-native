@@ -55,29 +55,7 @@ const MediaPickerBase = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'yellow',
-  },
-  /*
-  icon: {
-    ...GlobalStyles.icon,
-    ...{
-      backgroundColor: Colors.tertiary,
-      borderColor: Colors.tertiary,
-      borderWidth: 1,
-      borderRadius: 4,
-    },
-  },
-  preview: {
-    width: '100%',
-    height: 200,
-    backgroundColor: Colors.tertiary,
-  },
-  image: {
-    width: 100,
-    height: 100,
-  },
-  */
+  container: {},
 });
 
 export default MediaPickerBase;
