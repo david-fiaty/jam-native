@@ -1,10 +1,11 @@
 
 import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
 import CheckboxSelectBase from '../base/CheckboxSelectBase';
+import i18n from '@/translation/i18n';
 
 const AddCollaboratorsField = () => {  
   return (
-    <CheckboxSelectBase />
+    <CheckboxSelectBase label={i18n.t('Add collaborators')} />
   );
 }
 
