@@ -13,32 +13,35 @@ import UserLocationField from "../field/UserLocationField";
 import StatusField from "../field/StatusField";
 import IndustryField from "../field/IndustryField";
 import PostButton from "../button/PostButton";
+import ScrollView from "../view/ScrollView";
 
 const AddJamForm = ({ style, children }: BaseProps) => {
   return (
-    <BoxView align="flex-start" justify="flex-start">
-      <BackButton
-        title={i18n.t('Add new Jam')}
-        onPress={() => console.log('clicked')}
-      />
-      <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
-      <JamCategoriesField data={JamCategoriesData} />
-      <AddMediaField />
-      <AddCollaboratorsField />
-      <AddCaptionField />
-      <UserLocationField />
-      <StatusField />
-      <IndustryField />
+    <ScrollView>
+      <BoxView align="flex-start" justify="flex-start">
+        <BackButton
+          title={i18n.t('Add new Jam')}
+          onPress={() => console.log('clicked')}
+        />
+        <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
+        <JamCategoriesField data={JamCategoriesData} />
+        <AddMediaField />
+        <AddCollaboratorsField />
+        <AddCaptionField />
+        <UserLocationField />
+        <StatusField />
+        <IndustryField />
 
-      <IndustryField />
-      <IndustryField />
-      <IndustryField />
-      <IndustryField />
-      <IndustryField />
-      <IndustryField />
+        <IndustryField />
+        <IndustryField />
+        <IndustryField />
+        <IndustryField />
+        <IndustryField />
+        <IndustryField />
 
-      <PostButton />
-    </BoxView>
+        <PostButton />
+      </BoxView>
+    </ScrollView>
   );
 };
 
