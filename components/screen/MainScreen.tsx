@@ -14,7 +14,7 @@ import MapView from '@/components/view/MapView';
 import AddJamForm from '@/components/form/AddJamForm';
 import ProfileForm from '@/components/form/ProfileForm';
 
-export default () => {  
+const MainScreen = () => {  
   const [activeScreen, setActiveScreen] = useState('');
   const slideEffect = useRef(new Animated.Value(DeviceManager.window.height)).current; 
   const pushEffect = useRef(new Animated.Value(DeviceManager.window.width)).current; 
@@ -118,3 +118,4 @@ const styles = StyleSheet.create({
   footer: Layout.footer,
 });
 
+export default MainScreen;

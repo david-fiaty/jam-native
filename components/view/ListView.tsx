@@ -9,7 +9,7 @@ type Props = BaseProps & {
   style?: object,
 };
 
-export default ({data, horizontal, renderItem, style}: Props) => {
+const ListView = ({data, horizontal, renderItem, style}: Props) => {
   return (
     <FlatList 
       data={data} 
@@ -25,3 +25,5 @@ const styles = StyleSheet.create({
     width: DeviceManager.window.width,
   },
 });
+
+export default ListView;

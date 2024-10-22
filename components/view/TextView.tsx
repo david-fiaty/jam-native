@@ -2,7 +2,7 @@ import { StyleSheet, Text } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import { Colors } from '@/constants/Colors';
 
-export default ({style, children}: BaseProps) => {
+const TextView = ({style, children}: BaseProps) => {
   return (
     <Text style={[styles.content, style]}>
       {children}
@@ -17,3 +17,4 @@ const styles = StyleSheet.create({
   },
 });
 
+export default TextView;

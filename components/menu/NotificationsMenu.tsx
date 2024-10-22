@@ -7,7 +7,7 @@ import { Layout } from '@/constants/Layout';
 import { ListItemProps } from '@/constants/Types';
 import ApiClient from '@/classes/ApiClient';
 
-export default ({style, children}: BaseProps) => {
+const NotificationsMenu = ({style, children}: BaseProps) => {
   const router = useRouter();
   const items = ApiClient.get('notifications');
 
@@ -38,3 +38,4 @@ const styles = StyleSheet.create({
   label: Layout.menuItemLabel,
 });
 
+export default NotificationsMenu;
