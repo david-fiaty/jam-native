@@ -15,15 +15,17 @@ const header = {
   height: 48,
 };
 
+const radius = {
+  round: 8,
+  circle: 40,
+};
+
 export const Layout = {
   space: space,
   header: header,
   footer: footer,
+  radius: radius,
   fontSize: 14,
-  radius: {
-    round: 8,
-    circle: 40,
-  },
   headerLogo: {
     width: 48,
     height: 48,
@@ -63,14 +65,14 @@ export const Layout = {
     padding: space.base,
   },
   formField: {
-    backgroundColor: Colors.tertiary,
-    width: '100%',
-    height: 36,
+    backgroundColor: Colors.secondary,
     borderWidth: 1, 
-    borderColor: Colors.tertiary, 
-    borderRadius: space,
-    paddingHorizontal: space, 
-    justifyContent: 'center',
+    borderColor: Colors.secondary, 
+    borderRadius: radius.round,
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: space.base*4,
+    justifyContent: 'flex-start',
   },
 };
 

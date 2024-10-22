@@ -10,6 +10,7 @@ import AddMediaField from "../field/AddMediaField";
 import AddCollaboratorsField from "../field/AddCollaboratorsField";
 import AddCaptionField from "../field/AddCaptionField";
 import UserLocationField from "../field/UserLocationField";
+import StatusField from "../field/StatusField";
 
 const AddJamForm = ({ style, children }: BaseProps) => {
   return (
@@ -24,6 +25,7 @@ const AddJamForm = ({ style, children }: BaseProps) => {
       <AddCollaboratorsField />
       <AddCaptionField />
       <UserLocationField />
+      <StatusField />
     </BoxView>
   );
 };

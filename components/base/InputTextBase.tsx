@@ -10,9 +10,10 @@ type Props = BaseProps & {
   containerStyle?: object,
   leftIcon?: JSX.Element,
   rightIcon?: JSX.Element,
+  disabled?: boolean, 
 };
 
-const InputTextBase = ({value, placeholder, containerStyle, leftIcon, rightIcon}: Props) => {
+const InputTextBase = ({value, placeholder, containerStyle, leftIcon, rightIcon, disabled}: Props) => {
   return (
     <BoxView style={[styles.container, containerStyle]}>
       <Input
@@ -24,6 +25,7 @@ const InputTextBase = ({value, placeholder, containerStyle, leftIcon, rightIcon}
         placeholder={placeholder}
         placeholderTextColor={Colors.primary}
         multiline={false}
+        editable={!disabled}
         value={value}
       />
     </BoxView>
