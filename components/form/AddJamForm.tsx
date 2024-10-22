@@ -15,8 +15,8 @@ import IndustryField from "../field/IndustryField";
 import PostButton from "../button/PostButton";
 
 const AddJamForm = ({ style, children }: BaseProps) => {
-  return (
-    <BoxView align="flex-start" justify="flex-start">
+  return (    
+    <BoxView align="flex-start" justify="flex-start" scroll={true}>
       <BackButton
         title={i18n.t('Add new Jam')}
         onPress={() => console.log('clicked')}
@@ -29,6 +29,14 @@ const AddJamForm = ({ style, children }: BaseProps) => {
       <UserLocationField />
       <StatusField />
       <IndustryField />
+
+      <IndustryField />
+      <IndustryField />
+      <IndustryField />
+      <IndustryField />
+      <IndustryField />
+      <IndustryField />
+
       <PostButton />
     </BoxView>
   );
