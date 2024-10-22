@@ -3,17 +3,15 @@ import { BaseProps } from '@/constants/Types';
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
-import AddMediaField from "../field/AddMediaField";
-import AddCollaboratorsField from "../field/AddCollaboratorsField";
-import AddCaptionField from "../field/AddCaptionField";
 import UserLocationField from "../field/UserLocationField";
-import StatusField from "../field/StatusField";
 import IndustryField from "../field/IndustryField";
 import PostButton from "../button/PostButton";
 import DividerView from "../view/DividerView";
 import UserProfileImageField from '../field/UserProfileImageField';
 import InputTextBase from '../base/InputTextBase';
 import CreativeOrganizationField from '../field/CreativeOrganizationField';
+import JamCategoriesField from '../field/JamCategoriesField';
+import { JamCategoriesData } from "@/constants/Data";
 
 const ProfileForm = ({style, children}: BaseProps) => {
 
@@ -34,7 +32,10 @@ const ProfileForm = ({style, children}: BaseProps) => {
       <UserLocationField />
       <IndustryField />
       <CreativeOrganizationField />
-      <PostButton />
+
+      <DividerView />
+      <JamCategoriesField data={JamCategoriesData} />
+
     </BoxView>
   );
 };
