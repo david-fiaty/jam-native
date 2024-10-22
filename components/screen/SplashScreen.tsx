@@ -1,7 +1,9 @@
 import { Text } from 'react-native';
 
-export default () => {
+const SplashScreen = () => {
   return (
     <Text>ExpoSplashScreen Demo! 👋</Text>
   );
 }
+
+export default SplashScreen;

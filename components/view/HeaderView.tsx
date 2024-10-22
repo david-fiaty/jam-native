@@ -7,7 +7,7 @@ import { BaseProps } from '@/constants/Types';
 import { Layout } from '@/constants/Layout';
 import DeviceManager from '@/classes/DeviceManager';
 
-export default ({style, children}: BaseProps) => {
+const HeaderView = ({style, children}: BaseProps) => {
   const windowHeight = DeviceManager.window.height;
   const slideAnim = useRef(new Animated.Value(windowHeight)).current; 
 
@@ -59,3 +59,5 @@ const styles = StyleSheet.create({
     gap: Layout.space.base,
   },
 });
+
+export default HeaderView;

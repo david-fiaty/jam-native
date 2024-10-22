@@ -10,7 +10,7 @@ type Props = BaseProps & {
 
 const source = require('@/assets/images/logo-48.png'); 
 
-export default ({size, style}: Props) => {
+const LogoView = ({size, style}: Props) => {
   return (
     <ImageBase 
       source={source} 
@@ -29,3 +29,5 @@ const styles = StyleSheet.create({
     gap: Layout.space.base,
   },
 });
+
+export default LogoView;

@@ -10,7 +10,7 @@ type Props = BaseProps & {
   style?: object, 
 };
 
-export default ({source, width, height, resizeMethod, resizeMode, style}: Props) => {
+const ImageBase = ({source, width, height, resizeMethod, resizeMode, style}: Props) => {
   return (
     <Image 
       source={source} 
@@ -30,3 +30,5 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
 });
+
+export default ImageBase;

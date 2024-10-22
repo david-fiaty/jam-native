@@ -14,7 +14,7 @@ type Props = BaseProps & {
   onPress?: () => void,
 };
 
-export default ({name, size, label, theme, style, onPress}: Props) => {
+const IconView = ({name, size, label, theme, style, onPress}: Props) => {
   const iconStyle = [styles.iconStyle, styles[theme], {fontSize: size}];
 
   if (label) {
@@ -71,3 +71,5 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
 });
+
+export default IconView;

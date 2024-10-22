@@ -17,7 +17,7 @@ const items = [
   },
 ];
 
-export default ({style, children}: BaseProps) => {
+const SearchMenu = ({style, children}: BaseProps) => {
   return (
     <View style={styles.container}>
       <TextView>Search menu</TextView>
@@ -53,3 +53,5 @@ const styles = StyleSheet.create({
 
   },
 });
+
+export default SearchMenu;

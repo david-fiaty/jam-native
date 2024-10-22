@@ -3,7 +3,7 @@ import { BaseProps } from '@/constants/Types';
 import ListView from '../view/ListView';
 import ApiClient from '@/classes/ApiClient';
 
-export default ({style, children}: BaseProps) => {
+const ProfileForm = ({style, children}: BaseProps) => {
   const data = ApiClient.get('jammers');
 
   return (
@@ -17,3 +17,5 @@ const styles = StyleSheet.create({
   container: {
   },
 });
+
+export default ProfileForm;
