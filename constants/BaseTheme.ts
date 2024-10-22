@@ -15,15 +15,7 @@ const BaseTheme = createTheme({
     },
     Input: {
       placeholderTextColor: Colors.primary,
-      containerStyle: {
-        backgroundColor: Colors.secondary,
-        borderWidth: 1, 
-        borderColor: Colors.secondary, 
-        borderRadius: Layout.radius.round,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-      },
+      containerStyle: Layout.formField,
       inputContainerStyle: {
         borderBottomWidth: 0,
         flexGrow: 1,
