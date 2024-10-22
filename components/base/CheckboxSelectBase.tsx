@@ -1,22 +1,30 @@
 import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
 import { CheckBox } from '@rneui/themed';
-import TextView from '../view/TextView';
-//import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
-//import ScrollContainer from '../base/ScrollContainer';
+import BoxView from "../view/BoxView";
+import TextView from "../view/TextView";
+import IconView from "../view/IconView";
 
 type Props = {
-  label?: JSX.Element,
-  title?: JSX.Element,
+  label: string,
+  title?: string,
   data?: object,
 };
 
 const CheckboxSelectBase = ({label, title, data}: Props) => {
+  console.log(data);
+  
   return (
-    <TextView>Checkboxes</TextView>
+    <BoxView direction="row" align="center" style={styles.container}>
+      <IconView name="plus" theme="secondary" size={22} radius="round" />
+      <TextView>{label}</TextView>
+    </BoxView>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {},
+
+  
   /*
   list: {
     width: '100%',
