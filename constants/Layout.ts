@@ -71,6 +71,7 @@ export const Layout = {
     borderRadius: radius.round,
     flexDirection: 'row',
     alignItems: 'center',
+    height: space.base*4,
     justifyContent: 'flex-start',
   },
 };
