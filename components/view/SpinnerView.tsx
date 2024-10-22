@@ -7,7 +7,7 @@ type Props = {
   size?: string,
 };
 
-export default ({size}: Props) => {
+const SpinnerView = ({size}: Props) => {
   const spinnerSize = size || 'large';
 
   return (
@@ -25,3 +25,5 @@ const styles = StyleSheet.create({
     padding: Layout.space.base,
   },
 });
+
+export default SpinnerView;
