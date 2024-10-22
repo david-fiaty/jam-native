@@ -29,6 +29,14 @@ const AddJamForm = ({ style, children }: BaseProps) => {
       <UserLocationField />
       <StatusField />
       <IndustryField />
+
+      <IndustryField />
+      <IndustryField />
+      <IndustryField />
+      <IndustryField />
+      <IndustryField />
+      <IndustryField />
+
       <PostButton />
     </BoxView>
   );
