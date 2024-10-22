@@ -3,6 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import { Colors } from "@/constants/Colors";
 import TextView from "../view/TextView";
+import { Layout } from "@/constants/Layout";
 
 type Props = {
   data?: object,
@@ -58,11 +59,15 @@ const SelectListBase = ({data, placeholder}: Props) => {
 const styles = StyleSheet.create({
 
   container: {
-    backgroundColor: 'yellow',
-    width: '100%',
-    //flexDirection: 'row',
+    ...Layout.formField,
+    ...{
+      width: '100%',
+    },
   },
-
+  placeholderStyle: {
+    color: Colors.primary,
+    fontSize: Layout.fontSize,
+  },
     /*
   field: {
     ...GlobalStyles.field,
