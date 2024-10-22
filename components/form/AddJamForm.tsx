@@ -12,6 +12,7 @@ import AddCaptionField from "../field/AddCaptionField";
 import UserLocationField from "../field/UserLocationField";
 import StatusField from "../field/StatusField";
 import IndustryField from "../field/IndustryField";
+import PostButton from "../button/PostButton";
 
 const AddJamForm = ({ style, children }: BaseProps) => {
   return (
@@ -28,6 +29,7 @@ const AddJamForm = ({ style, children }: BaseProps) => {
       <UserLocationField />
       <StatusField />
       <IndustryField />
+      <PostButton />
     </BoxView>
   );
 };
