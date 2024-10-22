@@ -26,11 +26,22 @@ export const JamCategoriesData = [
 export const StatusOptionsData = [
   { 
     label: i18n.t('Enabled'), 
-    value: 1 
+    value: 1,
   },
   { 
     label: i18n.t('Disabled'), 
-    value: 0 
+    value: 0,
+  },
+];
+
+export const CreativeOrganizationOptionsData = [
+  { 
+    label: i18n.t('Organization 1'), 
+    value: 1, 
+  },
+  { 
+    label: i18n.t('Organization 2'), 
+    value: 2,
   },
 ];
 
@@ -92,7 +103,6 @@ export const IndustriesData = [
     value: 'Cultural Activities',
   },
 ];
-
 
 export const SubIndustriesData = [
   {
