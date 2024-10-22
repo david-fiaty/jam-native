@@ -1,5 +1,4 @@
-import { StyleSheet, View, TextInput } from 'react-native';
-import { GlobalStyles } from '@/constants/GlobalStyles';
+import { StyleSheet, TextInput } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
@@ -9,13 +8,13 @@ type Props = BaseProps & {
   placeholder?: string,
 };
 
-const TextareaField = ({placeholder}: Props) => {
+const InputTextareaBase = ({placeholder}: Props) => {
   return (
     <BoxView style={styles.container}>
       <TextInput
         style={styles.element}
         placeholder={placeholder}
-        placeholderTextColor={GlobalStyles.text.color}
+        placeholderTextColor={Colors.primary}
         multiline={true}
         textAlignVertical="top"
         numberOfLines={5}
@@ -39,4 +38,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TextareaField;
+export default InputTextareaBase;
