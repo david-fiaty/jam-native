@@ -21,9 +21,6 @@ const PostButton = ({onPress}: Props) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    //alignItems: 'center',
-    //flexDirection: 'row',
-    //gap: Layout.space.base,
   },
 });
 
