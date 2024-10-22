@@ -9,7 +9,7 @@ const BaseTheme = createTheme({
   components: {
     Button: {
       titleStyle: {
-        color: '#FFFFFF',
+        color: Colors.white,
         //fontFamily: 'BaseFont', // Todo - Enable font
       },
     },
@@ -25,7 +25,6 @@ const BaseTheme = createTheme({
       },
       inputContainerStyle: {
         borderBottomWidth: 0,
-        backgroundColor: 'red',
         flexGrow: 1,
       },
       inputStyle: {
