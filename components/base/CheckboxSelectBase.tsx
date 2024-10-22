@@ -1,23 +1,19 @@
-import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { CheckBox } from '@rneui/themed';
-import BoxView from "../view/BoxView";
-import TextView from "../view/TextView";
-import IconView from "../view/IconView";
 
 type Props = {
-  label: string,
+  label: JSX.Element,
   title?: string,
   data?: object,
 };
 
 const CheckboxSelectBase = ({label, title, data}: Props) => {
   console.log(data);
-  
+
   return (
-    <BoxView direction="row" align="center" style={styles.container}>
-      <IconView name="plus" theme="secondary" size={22} radius="round" />
-      <TextView>{label}</TextView>
-    </BoxView>
+    <TouchableOpacity>
+      {label}
+    </TouchableOpacity>
   );
 };
 
