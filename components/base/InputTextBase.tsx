@@ -12,8 +12,6 @@ type Props = BaseProps & {
 
 const InputTextBase = ({value, placeholder, containerStyle}: Props) => {
   return (
-    <>
-    <Input />
     <BoxView style={[styles.container, containerStyle]}>
       <Input
         style={styles.element}
@@ -25,7 +23,6 @@ const InputTextBase = ({value, placeholder, containerStyle}: Props) => {
         value={value}
       />
     </BoxView>
-    </>
   );
 };
 
