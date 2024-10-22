@@ -12,9 +12,10 @@ const UserJamsList = () => {
 
   return (
     <View style={styles.container}>
+      <TextView style={styles.title}>Your Jams</TextView>
       <FlatList 
         data={data} 
-        numColumns={4}
+        numColumns={3}
         contentContainerStyle={{gap: Layout.space.base}}
         columnWrapperStyle={{gap: Layout.space.base}}
         scrollEnabled={false}
@@ -36,7 +37,11 @@ const UserJamsList = () => {
 
 const styles = StyleSheet.create({
   container: {
-    
+    width: '100%',
+  },
+  title: {
+    fontWeight: 'bold',
+    marginBottom: Layout.space.base,
   },
   item: {
     flexDirection: 'column',
@@ -51,8 +56,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: Layout.radius.round,
     borderColor: Colors.secondary,
-    width: Layout.space.base*7,
-    height: Layout.space.base*7,
+    width: Layout.space.base*10,
+    height: Layout.space.base*10,
   },
   selected: {
     borderColor: Colors.primary,
