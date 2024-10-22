@@ -1,8 +1,13 @@
 import { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+import { GlobalStyles } from '@/constants/GlobalStyles';
+import { Colors } from '@/constants/Colors';
+import ImageView from '../view/ImageView';
+import TextView from '../view/TextView';
+import IconView from '../view/IconView';
+import BoxView from '../view/BoxView';
+import { Layout } from '@/constants/Layout';
 
 type ImagePreviewProps = {
   selectedImage?: string;
@@ -11,7 +16,7 @@ type ImagePreviewProps = {
 const ImagePreview = ({selectedImage}: ImagePreviewProps) => {
   if (selectedImage) {
     return (
-      <StaticImage source={selectedImage} style={styles.image} />
+      <ImageView source={selectedImage} style={styles.image} />
     );
   }
 
@@ -36,10 +41,10 @@ const MediaPickerField = () => {
 
   return (
     <TouchableOpacity onPress={pickImage}>
-      <View style={styles.container}>
-        <Ionicons name="add" size={GlobalStyles.icon.size} style={styles.icon} />   
-        <TextBlock>Add media</TextBlock>
-      </View>
+      <BoxView direction="row" align="center" style={styles.container}>
+        <IconView name="plus" theme="secondary" size={22} />
+        <TextView>Add media</TextView> 
+      </BoxView>
       
       {/*
       <View style={styles.preview}>
@@ -53,9 +58,9 @@ const MediaPickerField = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    gap: GlobalStyles.space.base,
-    marginBottom: GlobalStyles.space.base,
+    paddingRight: Layout.space.base,
+    backgroundColor: Colors.secondary,
+    borderRadius: Layout.radius.round,
   },
   icon: {
     ...GlobalStyles.icon,
