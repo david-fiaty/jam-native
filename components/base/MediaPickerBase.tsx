@@ -23,7 +23,7 @@ const ImagePreview = ({selectedImage}: ImagePreviewProps) => {
   return <></>;
 };
 
-const MediaPicker = () => {  
+const MediaPickerBase = () => {  
   const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -34,15 +34,13 @@ const MediaPicker = () => {
   
     if (!result.canceled) {
       setSelectedImage(result.assets[0].uri);
-    } else {
-      console.log('No image was selected.');
     }
   };
 
   return (
     <TouchableOpacity onPress={pickImage}>
       <BoxView direction="row" align="center" style={styles.container}>
-        <IconView name="plus" theme="secondary" size={22} />
+        <IconView name="plus" theme="secondary" size={22} radius="round" />
         <TextView>Add media</TextView> 
       </BoxView>
       
@@ -58,10 +56,9 @@ const MediaPicker = () => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingRight: Layout.space.base,
-    backgroundColor: Colors.secondary,
-    borderRadius: Layout.radius.round,
+    backgroundColor: 'yellow',
   },
+  /*
   icon: {
     ...GlobalStyles.icon,
     ...{
@@ -80,6 +77,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
   },
+  */
 });
 
-export default MediaPicker;
+export default MediaPickerBase;
