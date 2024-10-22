@@ -11,6 +11,8 @@ type Props = {
 };
 
 const CheckboxSelectBase = ({label, title, data}: Props) => {
+  console.log(data);
+  
   return (
     <BoxView direction="row" align="center" style={styles.container}>
       <IconView name="plus" theme="secondary" size={22} radius="round" />
