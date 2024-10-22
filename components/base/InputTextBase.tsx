@@ -31,7 +31,9 @@ const InputTextBase = ({value, placeholder, containerStyle, leftIcon, rightIcon}
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    width: '100%',
+  },
   element: {},
 });
 
