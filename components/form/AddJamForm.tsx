@@ -10,22 +10,22 @@ import MediaPickerField from '../field/MediaPickerField';
 const jamCategories = [
   {
     id: 'calls',
-    label: 'Calls',
+    label: i18n.t('Calls'),
     icon: 'megaphone',
   },
   {
     id: 'looking',
-    label: 'Looking',
+    label: i18n.t('Looking'),
     icon: 'link',
   },
   {
     id: 'events',
-    label: 'Events',
+    label: i18n.t('Events'),
     icon: 'users',
   },
   {
     id: 'random',
-    label: 'Random',
+    label: i18n.t('Random'),
     icon: 'infinite',
   },
 ];
@@ -33,7 +33,7 @@ const jamCategories = [
 export default ({style, children}: BaseProps) => {
   return (
     <BoxView align="flex-start" justify="flex-start">
-      <BackButton title="Add new Jam" onPress={() => console.log('clicked')} />
+      <BackButton title={i18n.t('Add new Jam')} onPress={() => console.log('clicked')} />
       <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
       <SquareOptionsField data={jamCategories} />
       <MediaPickerField />
