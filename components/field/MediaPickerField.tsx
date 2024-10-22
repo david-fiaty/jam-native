@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { GlobalStyles } from '@/constants/GlobalStyles';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 import ImageView from '../view/ImageView';
-
-type Props = {
-  label: JSX.Element,
-};
+import TextView from '../view/TextView';
+import IconView from '../view/IconView';
+import BoxView from '../view/BoxView';
 
 type ImagePreviewProps = {
   selectedImage?: string;
@@ -24,7 +23,7 @@ const ImagePreview = ({selectedImage}: ImagePreviewProps) => {
   return <></>;
 };
 
-const MediaPickerField = ({label}: Props) => {  
+const MediaPickerField = () => {  
   const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -35,12 +34,18 @@ const MediaPickerField = ({label}: Props) => {
   
     if (!result.canceled) {
       setSelectedImage(result.assets[0].uri);
+    } else {
+      console.log('No image was selected.');
     }
   };
 
   return (
     <TouchableOpacity onPress={pickImage}>
-      {label}      
+      <BoxView direction="row" align="center" style={styles.container}>
+        <IconView name="plus" theme="secondary" size={22} />
+        <TextView>Add media</TextView> 
+      </BoxView>
+      
       {/*
       <View style={styles.preview}>
         <ImagePreview selectedImage={selectedImage} />
