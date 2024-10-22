@@ -4,6 +4,7 @@ import { GlobalStyles } from '@/constants/GlobalStyles';
 import { Colors } from '@/constants/Colors';
 import IconView from '../view/IconView';
 import TextView from '../view/TextView';
+import { Layout } from '@/constants/Layout';
 
 type Props = {
   data: object,
@@ -38,18 +39,18 @@ export default ({data}: Props) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
-    gap: GlobalStyles.space.base/2,
+    gap: Layout.space.small,
   },
   square: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: Colors.secondary,
-    padding: 10,
+    padding: Layout.space.base,
     borderWidth: 1,
     borderRadius: 8,
     borderColor: Colors.secondary,
-    width: 72,
+    width: Layout.space.base*7,
     height: 72,
   },
   selected: {
