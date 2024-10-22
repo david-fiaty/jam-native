@@ -78,37 +78,6 @@ const styles = StyleSheet.create({
     color: Colors.primary,
     fontSize: Layout.fontSize,
   },
-    /*
-  field: {
-    ...GlobalStyles.field,
-  },
-  icon: {
-    marginRight: GlobalStyles.space.base,
-  },
-  label: {
-    ...GlobalStyles.text,
-    ...{
-      position: "absolute",
-      backgroundColor: "white",
-      left: 22,
-      top: 8,
-      zIndex: 999,
-      paddingHorizontal: 8,
-      fontSize: 14,
-    },
-  },
-  item: {
-    paddingVertical: GlobalStyles.space.base,
-    paddingHorizontal: GlobalStyles.space.base,
-  },
-  placeholderStyle: GlobalStyles.text,
-  selectedTextStyle: GlobalStyles.text,
-  itemTextStyle: GlobalStyles.text,
-  iconStyle: {
-    width: GlobalStyles.space.base*2,
-    height: GlobalStyles.space.base*2,
-  },
-  */
 });
 
 export default SelectListBase;
