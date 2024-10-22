@@ -6,7 +6,7 @@ import IconView from "../view/IconView";
 
 type Props = {
   label: string,
-  title?: JSX.Element,
+  title?: string,
   data?: object,
 };
 
