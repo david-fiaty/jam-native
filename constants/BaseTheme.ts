@@ -20,9 +20,16 @@ const BaseTheme = createTheme({
         borderWidth: 1, 
         borderColor: Colors.secondary, 
         borderRadius: Layout.radius.round,
-        paddingHorizontal: Layout.space.base, 
         justifyContent: 'center',
       },
+      inputContainerStyle: {
+        borderBottomWidth: 0,
+        backgroundColor: 'red',
+      },
+      inputStyle: {
+        padding: 0,
+        margin: 0,
+      }
     },
   },
 });
