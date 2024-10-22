@@ -6,10 +6,9 @@ import IconView from '../view/IconView';
 
 const UserLocationField = () => {
   return (
-    <BoxView direction="row" align="center" style={styles.container}>
-      <IconView  name="location" size={22} theme="clear" />
+    <BoxView direction="row" align="space-between" style={styles.container}>
       <InputTextBase placeholder={i18n.t('Location')} containerStyle={styles.containerStyle} />
-      
+      <IconView  name="location" size={22} theme="clear" />
     </BoxView>
   );
 };
@@ -19,7 +18,8 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   containerStyle: {
-    width: '100%',
+    width: 'auto',
+    flexGrow: 1,
   }
 });
 
