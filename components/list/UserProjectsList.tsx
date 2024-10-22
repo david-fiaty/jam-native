@@ -6,16 +6,16 @@ import { Layout } from '@/constants/Layout';
 import ApiClient from '@/classes/ApiClient';
 import i18n from '@/translation/i18n';
 
-const UserJamsList = () => {  
+const UserProjectsList = () => {  
   const [selectedOption, setSelectedOption] = useState(null);
-  const data = ApiClient.get('jams');
+  const data = ApiClient.get('projects');
 
   return (
     <View style={styles.container}>
-      <TextView style={styles.title}>{i18n.t('Your Jams')}</TextView>
+      <TextView style={styles.title}>{i18n.t('Your Projects')}</TextView>
       <FlatList 
         data={data} 
-        numColumns={3}
+        numColumns={4}
         contentContainerStyle={{gap: Layout.space.base}}
         columnWrapperStyle={{gap: Layout.space.base}}
         scrollEnabled={false}
@@ -56,12 +56,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: Layout.radius.round,
     borderColor: Colors.secondary,
-    width: Layout.space.base*10,
-    height: Layout.space.base*10,
+    width: Layout.space.base*7,
+    height: Layout.space.base*7,
   },
   selected: {
     borderColor: Colors.primary,
   },
 });
 
-export default UserJamsList;
+export default UserProjectsList;
