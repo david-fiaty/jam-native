@@ -66,7 +66,8 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   dropdown: {
-    ...Layout.formField,
+    backgroundColor: Colors.secondary,
+    borderRadius: Layout.radius.round,
   },
   icon: {
     marginRight: 5,
