@@ -1,5 +1,4 @@
-import { StyleSheet, View, TextInput } from 'react-native';
-import { GlobalStyles } from '@/constants/GlobalStyles';
+import { StyleSheet, TextInput } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
@@ -15,7 +14,7 @@ const InputTextareaBase = ({placeholder}: Props) => {
       <TextInput
         style={styles.element}
         placeholder={placeholder}
-        placeholderTextColor={GlobalStyles.text.color}
+        placeholderTextColor={Colors.primary}
         multiline={true}
         textAlignVertical="top"
         numberOfLines={5}

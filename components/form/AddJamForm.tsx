@@ -8,7 +8,7 @@ import BackButton from "../button/BackButton";
 import JamCategoriesField from "../field/JamCategoriesField";
 import AddMediaField from "../field/AddMediaField";
 import AddCollaboratorsField from "../field/AddCollaboratorsField";
-import TextareaField from "../field/TextareaField";
+import AddCaptionField from "../field/AddCaptionField";
 
 const AddJamForm = ({ style, children }: BaseProps) => {
   return (
@@ -21,7 +21,7 @@ const AddJamForm = ({ style, children }: BaseProps) => {
       <JamCategoriesField data={JamCategoriesData} />
       <AddMediaField />
       <AddCollaboratorsField />
-      <TextareaField placeholder={i18n.t('Add captiooopppppn')} />
+      <AddCaptionField />
     </BoxView>
   );
 };
