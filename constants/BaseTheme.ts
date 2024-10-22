@@ -14,14 +14,24 @@ const BaseTheme = createTheme({
       },
     },
     Input: {
-      style: {
+      containerStyle: {
         backgroundColor: Colors.secondary,
-        width: '100%',
         borderWidth: 1, 
         borderColor: Colors.secondary, 
         borderRadius: Layout.radius.round,
-        paddingHorizontal: Layout.space.base, 
-        justifyContent: 'center',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+      },
+      inputContainerStyle: {
+        borderBottomWidth: 0,
+        backgroundColor: 'red',
+        flexGrow: 1,
+      },
+      inputStyle: {
+        padding: 0,
+        margin: 0,
+        color: Colors.primary,
       },
     },
   },

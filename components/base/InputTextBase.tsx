@@ -1,7 +1,6 @@
-import { StyleSheet, TextInput } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Input } from '@rneui/themed';
 import { BaseProps } from '@/constants/Types';
-import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
 import BoxView from '../view/BoxView';
 
