@@ -20,7 +20,7 @@ const DividerView = ({theme, style}: Props) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    marginVertical: Layout.space.base/2,
+    marginVertical: Layout.space.base/4,
   },
   primary: {
     borderWidth: 0.1,
