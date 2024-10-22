@@ -4,7 +4,6 @@ import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
 import SelectListBase from '../base/SelectListBase';
 
-
 const StatusField = () => {
   return (
     <BoxView direction="row" align="space-between" style={styles.container}>
