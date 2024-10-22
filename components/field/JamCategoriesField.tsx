@@ -9,7 +9,7 @@ type Props = {
   data: object,
 };
 
-const SquareOptionsField = ({data}: Props) => {  
+const JamCategoriesField = ({data}: Props) => {  
   const [selectedOption, setSelectedOption] = useState(null);
 
   return (
@@ -57,4 +57,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SquareOptionsField;
+export default JamCategoriesField;

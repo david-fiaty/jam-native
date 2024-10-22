@@ -5,8 +5,9 @@ import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
-import SquareOptionsField from "../field/SquareOptionsField";
+import JamCategoriesField from "../field/JamCategoriesField";
 import AddMediaField from "../field/AddMediaField";
+import AddCollaboratorsField from "../field/AddCollaboratorsField";
 
 const AddJamForm = ({ style, children }: BaseProps) => {
   return (
@@ -16,8 +17,9 @@ const AddJamForm = ({ style, children }: BaseProps) => {
         onPress={() => console.log('clicked')}
       />
       <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
-      <SquareOptionsField data={JamCategoriesData} />
+      <JamCategoriesField data={JamCategoriesData} />
       <AddMediaField />
+      <AddCollaboratorsField />
     </BoxView>
   );
 };
