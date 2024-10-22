@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   element: {
     backgroundColor: Colors.secondary,
     width: '100%',
-    height: 36,
+    //height: 36,
     borderWidth: 1, 
     borderColor: Colors.secondary, 
     borderRadius: Layout.radius.round,
