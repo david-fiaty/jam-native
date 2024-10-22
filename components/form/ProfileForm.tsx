@@ -11,6 +11,7 @@ import InputTextBase from '../base/InputTextBase';
 import CreativeOrganizationField from '../field/CreativeOrganizationField';
 import { JamCategoriesData } from "@/constants/Data";
 import UserJamsList from '../list/UserJamsList';
+import UserProjectsList from '../list/UserProjectsList';
 
 const ProfileForm = ({style, children}: BaseProps) => {
 
@@ -33,8 +34,10 @@ const ProfileForm = ({style, children}: BaseProps) => {
       <CreativeOrganizationField />
 
       <DividerView />
-      <UserJamsList data={JamCategoriesData} />
+      <UserProjectsList />
 
+      <DividerView />
+      <UserJamsList />
     </BoxView>
   );
 };
