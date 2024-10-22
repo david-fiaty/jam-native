@@ -1,12 +1,7 @@
-import { ReactNode } from 'react';
 import { Pressable, StyleSheet, ScrollView } from 'react-native';
+import { BaseProps } from '@/constants/Types';
 
-type Props = {
-  style?: object,
-  children?: ReactNode,
-};
-
-const ScrollContainer = ({style, children}: Props) => {
+const ScrollBoxView = ({style, children}: BaseProps) => {
   return (
     <ScrollView 
       style={[styles.container, style]}
@@ -23,4 +18,4 @@ const styles = StyleSheet.create({
   content: {},
 });
 
-export default ScrollContainer;
+export default ScrollBoxView; 
