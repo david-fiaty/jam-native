@@ -10,7 +10,10 @@ const BaseTheme = createTheme({
     Button: {
       titleStyle: {
         color: Colors.white,
-        //fontFamily: 'BaseFont', // Todo - Enable font
+      },
+      buttonStyle: {
+        backgroundColor: Colors.primary,
+        borderRadius: Layout.radius.round,
       },
     },
     Input: {
