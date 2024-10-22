@@ -14,11 +14,10 @@ import UserJamsList from '../list/UserJamsList';
 import UserProjectsList from '../list/UserProjectsList';
 
 const ProfileForm = ({style, children}: BaseProps) => {
-
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true}>
       <BackButton
-        title={i18n.t('Add new Jam')}
+        title={i18n.t('Your profile')}
         onPress={() => console.log('clicked')}
       />
 
