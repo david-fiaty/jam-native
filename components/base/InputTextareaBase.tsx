@@ -6,11 +6,12 @@ import BoxView from '../view/BoxView';
 
 type Props = BaseProps & {
   placeholder?: string,
+  containerStyle?: object,
 };
 
-const InputTextareaBase = ({placeholder}: Props) => {
+const InputTextareaBase = ({placeholder, containerStyle}: Props) => {
   return (
-    <BoxView style={styles.container}>
+    <BoxView style={[styles.container, containerStyle]}>
       <TextInput
         style={styles.element}
         placeholder={placeholder}
