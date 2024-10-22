@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
   text: {
     width: '50%',
     paddingHorizontal: Layout.space.base,
-    backgroundColor: 'red',
   },
 });
 
