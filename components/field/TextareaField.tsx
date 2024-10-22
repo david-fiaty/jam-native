@@ -11,7 +11,7 @@ type Props = BaseProps & {
 
 const TextareaField = ({placeholder}: Props) => {
   return (
-    <BoxView>
+    <BoxView style={styles.container}>
       <TextInput
         style={styles.element}
         placeholder={placeholder}
@@ -25,8 +25,18 @@ const TextareaField = ({placeholder}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
+    width: '100%',
   },
-  element: Layout.formField,
+  element: {
+    backgroundColor: Colors.secondary,
+    width: '100%',
+    height: 36,
+    borderWidth: 1, 
+    borderColor: Colors.secondary, 
+    borderRadius: Layout.radius.round,
+    paddingHorizontal: Layout.space.base, 
+    justifyContent: 'center',
+  },
 });
 
 export default TextareaField;
