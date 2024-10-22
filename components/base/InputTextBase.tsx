@@ -11,27 +11,28 @@ type Props = BaseProps & {
   containerStyle?: object,
 };
 
-const InputTextareaBase = ({value, placeholder, containerStyle}: Props) => {
+const InputTextBase = ({value, placeholder, containerStyle}: Props) => {
   return (
+    <>
+    <Input />
     <BoxView style={[styles.container, containerStyle]}>
       <Input
         style={styles.element}
         placeholder={placeholder}
         placeholderTextColor={Colors.primary}
-        multiline={true}
-        textAlignVertical="top"
-        numberOfLines={5}
+        multiline={false}
+        textAlignVertical="center"
+        numberOfLines={1}
         value={value}
       />
     </BoxView>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-  },
+  container: {},
   element: {},
 });
 
-export default InputTextareaBase;
+export default InputTextBase;
