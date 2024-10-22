@@ -1,4 +1,5 @@
 import { StyleSheet, TextInput } from 'react-native';
+import { Input } from '@rneui/themed';
 import { BaseProps } from '@/constants/Types';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
@@ -12,17 +13,20 @@ type Props = BaseProps & {
 
 const InputTextBase = ({value, placeholder, containerStyle}: Props) => {
   return (
+    <>
+    <Input />
     <BoxView style={[styles.container, containerStyle]}>
-      <TextInput
+      <Input
         style={styles.element}
         placeholder={placeholder}
         placeholderTextColor={Colors.primary}
-        multiline={true}
+        multiline={false}
         textAlignVertical="center"
         numberOfLines={1}
         value={value}
       />
     </BoxView>
+    </>
   );
 };
 
