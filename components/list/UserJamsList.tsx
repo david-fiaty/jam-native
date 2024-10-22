@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
 import { Colors } from '@/constants/Colors';
-import IconView from '../view/IconView';
 import TextView from '../view/TextView';
 import { Layout } from '@/constants/Layout';
 import ApiClient from '@/classes/ApiClient';
+import i18n from '@/translation/i18n';
 
 const UserJamsList = () => {  
   const [selectedOption, setSelectedOption] = useState(null);
@@ -12,7 +12,7 @@ const UserJamsList = () => {
 
   return (
     <View style={styles.container}>
-      <TextView style={styles.title}>Your Jams</TextView>
+      <TextView style={styles.title}>{i18n.t('Your Jams')}</TextView>
       <FlatList 
         data={data} 
         numColumns={3}
