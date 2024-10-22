@@ -9,8 +9,6 @@ type Props = {
 };
 
 const CheckboxSelectBase = ({label, title, data}: Props) => {
-  console.log(data);
-
   return (
     <TouchableOpacity>
       {label}
