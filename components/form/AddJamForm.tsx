@@ -13,6 +13,7 @@ import UserLocationField from "../field/UserLocationField";
 import StatusField from "../field/StatusField";
 import IndustryField from "../field/IndustryField";
 import PostButton from "../button/PostButton";
+import DividerView from "../view/DividerView";
 
 const AddJamForm = ({ style, children }: BaseProps) => {
   return (    
@@ -23,6 +24,7 @@ const AddJamForm = ({ style, children }: BaseProps) => {
       />
       <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
       <JamCategoriesField data={JamCategoriesData} />
+      <DividerView />
       <AddMediaField />
       <AddCollaboratorsField />
       <AddCaptionField />
