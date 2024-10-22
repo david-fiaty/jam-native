@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
-import { GlobalStyles } from '@/constants/GlobalStyles';
 import { Colors } from '@/constants/Colors';
 import IconView from '../view/IconView';
 import TextView from '../view/TextView';
@@ -17,8 +16,8 @@ export default ({data}: Props) => {
     <FlatList 
       data={data} 
       numColumns={4}
-      contentContainerStyle={{gap: GlobalStyles.space.base}}
-      columnWrapperStyle={{gap: GlobalStyles.space.base}}
+      contentContainerStyle={{gap: Layout.space.base}}
+      columnWrapperStyle={{gap: Layout.space.base}}
       scrollEnabled={false}
       renderItem={({item, index}) => {
         return (
