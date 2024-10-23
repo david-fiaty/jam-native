@@ -163,7 +163,7 @@ const MainScreen = () => {
             name="user"
             theme="clear"
             size={22}
-            onPress={() => toggleScreen("profileForm")}
+            //onPress={() => toggleScreen("profileForm")}
           />
         </BoxView>
       </View>
