@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import { StyleSheet, View, Animated, TouchableOpacity } from "react-native";
 import { Layout } from "@/constants/Layout";
-import i18n from "@/translation/i18n";
 import ScreenView from "../view/ScreenView";
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
