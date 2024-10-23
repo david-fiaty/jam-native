@@ -2,9 +2,17 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Screens } from '@/constants/Screens';
 
 const initialState = () => {
-  for (const [name, config] of Object.entries(Screens)) {
-    console.log(name, config);
+  let stack = JSON.parse(JSON.stringify(Screens));
+
+  for (const [name, config] of Object.entries(stack)) {
+    if (config.hasOwnProperty('component')) {
+      delete config['component'];
+      stack[name] = config;
+    }
   }
+
+  console.log('------');
+  console.log(stack);
 
   return {
     active: null,
