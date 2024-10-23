@@ -89,8 +89,10 @@ const MainScreen = () => {
   };
 
   useEffect(() => {
-
-    console.log(tabState);
+    if (tabState.active) {
+      
+      //console.log(Screens[tabState.active].effect);
+    }
     
   }, [tabState]); 
 
