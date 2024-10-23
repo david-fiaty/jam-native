@@ -77,7 +77,7 @@ const MainScreen = () => {
     ScreenAnimation[`${screens[name]?.effect}Out`](slideEffect).start();
   };
 
-  const getEffectStyle = () => {
+  const animatedStyle = () => {
     if (screens[activeScreen]?.effect == "fade") {
       return { opacity: fadeEffect };
     }
@@ -98,7 +98,7 @@ const MainScreen = () => {
       <View style={styles.container}>
         {/* Main content */}
         <BoxView style={Layout.modalContainer}>
-          <Animated.View style={[Layout.animatedView]}>
+          <Animated.View style={[Layout.animatedView, animatedStyle]}>
             <BoxView style={Layout.modalContent}>
               {activeScreen && screens[activeScreen].component()}
               {!activeScreen && screens['jamsList'].component()}
