@@ -1,33 +1,10 @@
-import React, { useState, useRef } from 'react';
-import { StyleSheet, TouchableOpacity, Animated, StatusBar } from 'react-native';
+import { StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
 import IconView from '../view/IconView';
 import BoxView from '../view/BoxView';
 import LogoView from '../view/LogoView';
-import { BaseProps } from '@/constants/Types';
 import { Layout } from '@/constants/Layout';
-import DeviceManager from '@/classes/DeviceManager';
 
-const HeaderView = ({style, children}: BaseProps) => {
-  const windowHeight = DeviceManager.window.height;
-  const slideAnim = useRef(new Animated.Value(windowHeight)).current; 
-
-  const slideIn = () => {
-    Animated.timing(slideAnim, {
-      toValue: 0, 
-      duration: 500, 
-      useNativeDriver: true, 
-    }).start();
-  };
-
-  // Function to hide the view again
-  const slideOut = () => {
-    Animated.timing(slideAnim, {
-      toValue: windowHeight, 
-      duration: 500,
-      useNativeDriver: true,
-    }).start();
-  };
-
+const HeaderView = () => {
   return (
     <BoxView direction="row" align="center" justify="space-between" style={styles.container}>
       <BoxView direction="row" align="center" style={styles.left}>
