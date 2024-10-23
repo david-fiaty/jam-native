@@ -7,6 +7,22 @@ const space = {
   big: 20,
 };
 
+const radius = {
+  round: 8,
+  circle: 40,
+};
+
+const header = {
+  height: 48,
+  marginTop: DeviceManager.statusBar.height,
+  paddingHorizontal: space.base,
+};
+
+const logo = {
+  width: 48,
+  height: 48,
+};
+
 const footer = {
   height: 50,
   borderTopWidth: 0.3,
@@ -14,21 +30,20 @@ const footer = {
   backgroundColor: Colors.white,
 };
 
-const header = {
-  height: 48,
-};
-
-const radius = {
-  round: 8,
-  circle: 40,
-};
-
 export const Layout = {
   space: space,
-  header: header,
-  footer: footer,
   radius: radius,
+  header: header,
+  logo: logo,
+  footer: footer,
   fontSize: 14,
+  headerLeft: {
+    gap: space.base,
+  },
+  headerRight: {
+    flexDirection: 'row',
+    gap: space.base,
+  },
   headerLogo: {
     width: 48,
     height: 48,
