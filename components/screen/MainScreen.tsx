@@ -64,7 +64,7 @@ const MainScreen = () => {
 
   useEffect(() => {
     if (tabState.active) {
-      animations[Screens[tabState.active].effect](false);
+      animations['slide'](false);
     }
     else {
       animations['slide'](true);
