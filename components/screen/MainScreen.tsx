@@ -15,7 +15,7 @@ import AddJamForm from "@/components/form/AddJamForm";
 import ProfileForm from "@/components/form/ProfileForm";
 import JamsList from "../list/JamsList";
 import LogoView from '../view/LogoView';
-import { setActive } from "@/redux/slices/TabSlice";
+import { setTabActive } from "@/redux/slices/TabSlice";
 
 const MainScreen = () => {
 
