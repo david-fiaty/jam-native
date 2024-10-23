@@ -8,7 +8,7 @@ import JamsList from "@/components/list/JamsList";
 
 export const Screens = {
   jamsList: {
-    effect: 'fade',
+    effect: 'push',
     component: () => <JamsList />,
   },
   settingsMenu: {
