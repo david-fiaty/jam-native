@@ -112,10 +112,22 @@ const MainScreen = () => {
     }
   };
 
+
+  const animations = {
+    push: (isVisible: boolean) => {
+      Animated.timing(pushEffectReference, {
+        toValue: isVisible ? windowWidth : 0, 
+        duration: 500, 
+        useNativeDriver: true, 
+      }).start();
+    },
+  };
+  
   useEffect(() => {
     if (tabState.active) {
+      console.log(tabState.active);
+      animations.push(true);
       console.log(Screens[tabState.active].effect);
-      animatedEffects.push(true);
     }
   }, [tabState]); 
 
