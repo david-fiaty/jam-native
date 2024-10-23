@@ -17,15 +17,22 @@ import { Colors } from "@/constants/Colors";
 import JamsList from "../list/JamsList";
 
 const MainScreen = () => {
+
+  const windowWidth = DeviceManager.window.width;
+  const windowHeight = DeviceManager.window.height;
+
   const [activeScreen, setActiveScreen] = useState("");
+
   const slideEffect = useRef(
-    new Animated.Value(DeviceManager.window.height)
+    new Animated.Value(windowHeight)
   ).current;
- /* const pushEffect = useRef(
-    new Animated.Value(DeviceManager.window.width)
+
+  const pushEffect = useRef(
+    new Animated.Value(-windowWidth)
   ).current;
+
   const fadeEffect = useRef(new Animated.Value(0)).current;
-  */
+  
   const screens = {
     jamsList: {
       effect: 'fade',
@@ -57,47 +64,6 @@ const MainScreen = () => {
     },
   };
 
-  /*
-
-  const toggleScreen = (name: string) => {
-    if ((activeScreen && !name) || activeScreen == name) {
-      hideScreen(activeScreen);
-    } else if (activeScreen && activeScreen != name) {
-      hideScreen(name);
-      showScreen(name);
-    } else {
-      showScreen(name);
-    }
-  };
-
-  const showScreen = (name: string) => {
-    setActiveScreen(name);
-    ScreenAnimation[screens[name]?.effect + "In"](slideEffect).start();
-  };
-
-  const hideScreen = (name: string) => {
-    setActiveScreen("");
-    ScreenAnimation[`${screens[name]?.effect}Out`](slideEffect).start();
-  };
-
-  const animatedStyle = () => {
-    if (screens[activeScreen]?.effect == "fade") {
-      return { opacity: fadeEffect };
-    }
-
-    if (screens[activeScreen]?.effect == "slide") {
-      return { transform: [{ translateY: slideEffect }] };
-    }
-
-    if (screens[activeScreen]?.effect == "push") {
-      return { transform: [{ translateX: pushEffect }] };
-    }
-
-    return {};
-  };
-
-  */
-
   const slideIn = () => {
     Animated.timing(slideEffect, {
       toValue: 0, 
@@ -108,20 +74,65 @@ const MainScreen = () => {
 
   const slideOut = () => {
     Animated.timing(slideEffect, {
-      toValue: DeviceManager.window.height, 
+      toValue: windowHeight, 
       duration: 500,
       useNativeDriver: true,
     }).start();
   };
 
-  const animatedStyle = { transform: [{ translateY: slideEffect }] };
+  const fadeIn = () => {
+    Animated.timing(fadeEffect, {
+      toValue: 1, 
+      duration: 500, 
+      useNativeDriver: true, 
+    }).start();
+  };
+
+  const fadeOut = () => {
+    Animated.timing(fadeEffect, {
+      toValue: 0, 
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const pushIn = () => {
+    Animated.timing(pushEffect, {
+      toValue: 0, 
+      duration: 500, 
+      useNativeDriver: true, 
+    }).start();
+  };
+
+  const pushOut = () => {
+    Animated.timing(pushEffect, {
+      toValue: windowWidth, 
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
+
+
+
+  const slideEffectStyle = { transform: [{ translateY: slideEffect }] };
+  const fadeEffectStyle = { opacity: fadeEffect };
+  const pushEffectStyle = { transform: [{ translateX: pushEffect }] };
+
+  const animatedViewStyle = {
+    ...Layout.animatedView,
+    ...{
+      top: 0,
+      left: 0,
+    },
+    ...pushEffectStyle,
+  };
 
   return (
     <ScreenView>
       <View style={styles.container}>
         {/* Main content */}
         <BoxView style={Layout.modalContainer}>
-          <Animated.View style={[Layout.animatedView, animatedStyle]}>
+          <Animated.View style={animatedViewStyle}>
             <BoxView style={Layout.modalContent}>
               {activeScreen && screens[activeScreen].component()}
               {!activeScreen && screens['jamsList'].component()}
@@ -135,14 +146,18 @@ const MainScreen = () => {
             name="location"
             theme="clear"
             size={22}
-            onPress={() => slideIn()}
+            onPress={() => pushIn()}
+            //onPress={() => fadeIn()}
+            //onPress={() => slideIn()}
             //onPress={() => toggleScreen("mapView")}
           />
           <IconView
             name="plus"
             theme="clear"
             size={22}
-            onPress={() => slideOut()}
+            onPress={() => pushOut()}
+            //onPress={() => fadeOut()}
+            //onPress={() => slideOut()}
           />
           <IconView
             name="user"
