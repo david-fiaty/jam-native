@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
   },
   itemImage: {
     height: 300,
+    backgroundColor: Colors.secondary,
   },
 });
 
