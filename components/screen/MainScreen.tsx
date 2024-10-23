@@ -53,14 +53,12 @@ const MainScreen = () => {
     },
   };
   
-  const toggleTab = (tabName?: string, screens?: object) => {
+  const toggleTab = (tabName?: string) => {
     if (tabName && tabName != tabState.active) {
       dispatch(setTabActive(tabName));
-      //setTimeout(() => pushIn(), 0);
     }
     else if (!tabName || tabName == tabState.active) {
       dispatch(setTabActive(null));
-      //setTimeout(() => pushOut(), 0); 
     }
   };
 
