@@ -6,14 +6,14 @@ import { Layout } from '@/constants/Layout';
 
 const HeaderView = () => {
   return (
-    <BoxView direction="row" align="center" justify="space-between" style={styles.container}>
-      <BoxView direction="row" align="center" style={styles.left}>
+    <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
+      <BoxView direction="row" align="center" style={Layout.headerLeft}>
         <TouchableOpacity onPress={() => {}}>
           <LogoView size={Layout.logo} />
         </TouchableOpacity>
       </BoxView>
       <BoxView direction="row" align="center" justify="space-between">
-        <BoxView direction="row" align="center" style={styles.right}> 
+        <BoxView direction="row" align="center" style={Layout.headerRight}> 
           <IconView name="menu" theme="secondary" size={22} onPress={() => {}} />
           <IconView label="15+" theme="secondary" size={13} onPress={() => {}} />
           <IconView name="search" theme="clear" size={22} onPress={() => {}} />
@@ -22,19 +22,5 @@ const HeaderView = () => {
     </BoxView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: StatusBar.currentHeight,
-    paddingHorizontal: Layout.space.base,
-  },
-  left: {
-    gap: Layout.space.base,
-  },
-  right: {
-    flexDirection: 'row',
-    gap: Layout.space.base,
-  },
-});
 
 export default HeaderView;
