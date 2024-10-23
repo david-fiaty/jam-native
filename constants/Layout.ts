@@ -11,7 +11,7 @@ const footer = {
   height: 50,
   borderTopWidth: 0.3,
   borderTopColor: Colors.primary,
-  
+  backgroundColor: Colors.white,
 };
 
 const header = {
