@@ -50,7 +50,25 @@ const JamsList = () => {
               </BoxView>
 
               <BoxView style={styles.itemCollapsible}>
-                <CollapsibleView label={i18n.t('View more.')} />
+                <CollapsibleView 
+                  label={i18n.t('View more.')} 
+                  content={
+                    <BoxView direction="column" align="center" justify="space-aroun" style={styles.itemDetails}>
+                      <View style={styles.itemDetail}>
+                        <TextView>Sed do eiusmod tempor</TextView>
+                      </View>
+                      <View style={styles.itemDetail}>
+                        <TextView>Sed do eiusmod tempor</TextView>
+                      </View>
+                      <View style={styles.itemDetail}>
+                        <TextView>Sed do eiusmod tempor</TextView>
+                      </View>
+                      <View style={styles.itemDetail}>
+                        <TextView>Sed do eiusmod tempor</TextView>
+                      </View>
+                    </BoxView>
+                  }
+                />
               </BoxView>
             </View>
           );
@@ -85,6 +103,14 @@ const styles = StyleSheet.create({
   itemImage: {
     height: 300,
     backgroundColor: Colors.secondary,
+  },
+  itemDetails: {
+    width: '100%',
+  },
+  itemDetail: {
+    backgroundColor: Colors.secondary,
+    padding: Layout.space.base,
+    borderRadius: Layout.radius.round,
   },
 });
 
