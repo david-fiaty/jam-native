@@ -8,6 +8,7 @@ import i18n from '@/translation/i18n';
 import ImageView from '../view/ImageView';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
+import CollapsibleView from '../view/CollapsibleView';
 
 const JamsList = () => {  
   const [selectedOption, setSelectedOption] = useState(null);
@@ -45,6 +46,10 @@ const JamsList = () => {
               <BoxView style={styles.itemDescription}>
                 <TextView>{item.content}</TextView>
               </BoxView>
+
+              <BoxView style={styles.itemCollapsible}>
+                <CollapsibleView label={i18n.t('View more.')} />
+              </BoxView>
             </View>
           );
         }}
@@ -70,6 +75,9 @@ const styles = StyleSheet.create({
     padding: Layout.space.base,
   },
   itemDescription: {
+    padding: Layout.space.base,
+  },
+  itemCollapsible: {
     padding: Layout.space.base,
   },
   itemImage: {
