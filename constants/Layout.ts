@@ -1,3 +1,4 @@
+import { StatusBar } from 'react-native';
 import { Colors } from './Colors';
 import DeviceManager from '@/classes/DeviceManager';
 
@@ -7,6 +8,22 @@ const space = {
   big: 20,
 };
 
+const radius = {
+  round: 8,
+  circle: 40,
+};
+
+const header = {
+  height: 48,
+  marginTop: StatusBar.currentHeight,
+  paddingHorizontal: space.base,
+};
+
+const logo = {
+  width: 48,
+  height: 48,
+};
+
 const footer = {
   height: 50,
   borderTopWidth: 0.3,
@@ -14,21 +31,25 @@ const footer = {
   backgroundColor: Colors.white,
 };
 
-const header = {
-  height: 48,
-};
-
-const radius = {
-  round: 8,
-  circle: 40,
+const modal = {
+  width: DeviceManager.window.width,
+  height: DeviceManager.window.height - DeviceManager.statusBar.height - header.height - footer.height,
 };
 
 export const Layout = {
   space: space,
-  header: header,
-  footer: footer,
   radius: radius,
+  header: header,
+  logo: logo,
+  footer: footer,
   fontSize: 14,
+  headerLeft: {
+    gap: space.base,
+  },
+  headerRight: {
+    flexDirection: 'row',
+    gap: space.base,
+  },
   headerLogo: {
     width: 48,
     height: 48,
@@ -55,7 +76,7 @@ export const Layout = {
     left: 0,
     bottom: footer.height,
     width: '100%',
-    height: DeviceManager.modalView.height, 
+    height: modal.height, 
     backgroundColor: 'lightblue',
   },
   modalContent: {
@@ -63,7 +84,7 @@ export const Layout = {
     top: 0,
     left: 0,
     width: '100%',
-    height: DeviceManager.modalView.height,
+    height: modal.height,
     backgroundColor: Colors.white,
     padding: space.base,
   },
