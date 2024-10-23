@@ -11,7 +11,7 @@ const initialState = () => {
   };
 }
 
-const TabSlice = createSlice({
+const ScreenSlice = createSlice({
   name: 'tab',
   initialState: initialState(),
   reducers: {
@@ -21,5 +21,5 @@ const TabSlice = createSlice({
   },
 });
 
-export const { setTabActive } = TabSlice.actions;
-export default TabSlice.reducer;
+export const { setTabActive } = ScreenSlice.actions;
+export default ScreenSlice.reducer;

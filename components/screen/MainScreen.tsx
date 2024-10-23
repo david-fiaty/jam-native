@@ -8,7 +8,7 @@ import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 import DeviceManager from "@/classes/DeviceManager";
 import LogoView from '../view/LogoView';
-import { setTabActive } from "@/redux/slices/TabSlice";
+import { setTabActive } from "@/redux/slices/ScreenSlice";
 import { Screens } from "@/constants/Screens";
 
 const MainScreen = () => {

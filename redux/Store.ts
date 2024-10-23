@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import TabReducer from './slices/TabSlice';
+import TabReducer from './slices/ScreenSlice';
 import ModalReducer from './slices/ModalSlice';
 
 const Store = configureStore({
