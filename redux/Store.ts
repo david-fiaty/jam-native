@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import TabReducer from './slices/ScreenSlice';
+import ScreenReducer from './slices/ScreenSlice';
 import ModalReducer from './slices/ModalSlice';
 
 const Store = configureStore({
   reducer: {
-    tab: TabReducer,
+    screen: ScreenReducer,
     modal: ModalReducer,
   },
 });
