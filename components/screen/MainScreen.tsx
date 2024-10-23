@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Provider } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { StyleSheet, View, Animated, TouchableOpacity } from "react-native";
 import { Layout } from "@/constants/Layout";
 import ScreenView from "../view/ScreenView";
@@ -15,12 +15,15 @@ import ProfileForm from "@/components/form/ProfileForm";
 import { Colors } from "@/constants/Colors";
 import JamsList from "../list/JamsList";
 import LogoView from '../view/LogoView';
-import Store from "@/redux/Store";
 
 const MainScreen = () => {
 
   const windowWidth = DeviceManager.window.width;
   const windowHeight = DeviceManager.window.height;
+
+  const tabState = useSelector((state) => state.tab.active);
+  const dispatch = useDispatch();
+
 
   const [activeScreen, setActiveScreen] = useState("");
 
@@ -127,64 +130,62 @@ const MainScreen = () => {
   };
 
   return (
-    <Provider store={Store}>
-      <ScreenView>
-        <View style={styles.container}>
-          {/* Top navigation */}
-          <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
-            <BoxView direction="row" align="center" style={Layout.headerRight}>
-              <TouchableOpacity onPress={() => {}}>
-                <LogoView size={Layout.logo} />
-              </TouchableOpacity>
-            </BoxView>
-            <BoxView direction="row" align="center" justify="space-between">
-              <BoxView direction="row" align="center" style={Layout.headerRight}> 
-                <IconView name="menu" theme="secondary" size={22} onPress={() => pushIn()} />
-                <IconView label="15+" theme="secondary" size={13} onPress={() => pushOut()} />
-                <IconView name="search" theme="clear" size={22} onPress={() => {}} />
-              </BoxView>
+    <ScreenView>
+      <View style={styles.container}>
+        {/* Top navigation */}
+        <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
+          <BoxView direction="row" align="center" style={Layout.headerRight}>
+            <TouchableOpacity onPress={() => {}}>
+              <LogoView size={Layout.logo} />
+            </TouchableOpacity>
+          </BoxView>
+          <BoxView direction="row" align="center" justify="space-between">
+            <BoxView direction="row" align="center" style={Layout.headerRight}> 
+              <IconView name="menu" theme="secondary" size={22} onPress={() => pushIn()} />
+              <IconView label="15+" theme="secondary" size={13} onPress={() => pushOut()} />
+              <IconView name="search" theme="clear" size={22} onPress={() => {}} />
             </BoxView>
           </BoxView>
+        </BoxView>
 
-          {/* Main content */}
-          <BoxView style={Layout.modalContainer}>
-            <Animated.View style={animatedViewStyle}>
-              <BoxView style={Layout.modalContent}>
-                {activeScreen && screens[activeScreen].component()}
-                {!activeScreen && screens['jamsList'].component()}
-              </BoxView>
-            </Animated.View>
-          </BoxView>
+        {/* Main content */}
+        <BoxView style={Layout.modalContainer}>
+          <Animated.View style={animatedViewStyle}>
+            <BoxView style={Layout.modalContent}>
+              {activeScreen && screens[activeScreen].component()}
+              {!activeScreen && screens['jamsList'].component()}
+            </BoxView>
+          </Animated.View>
+        </BoxView>
 
-          {/* Bottom navigation */}
-          <BoxView direction="row" align="center" justify="space-around" style={Layout.footer}>
-            <IconView
-              name="location"
-              theme="clear"
-              size={22}
-              onPress={() => pushIn()}
-              //onPress={() => fadeIn()}
-              //onPress={() => slideIn()}
-              //onPress={() => toggleScreen("mapView")}
-            />
-            <IconView
-              name="plus"
-              theme="clear"
-              size={22}
-              onPress={() => pushOut()}
-              //onPress={() => fadeOut()}
-              //onPress={() => slideOut()}
-            />
-            <IconView
-              name="user"
-              theme="clear"
-              size={22}
-              //onPress={() => toggleScreen("profileForm")}
-            />
-          </BoxView>
-        </View>
-      </ScreenView>
-    </Provider>
+        {/* Bottom navigation */}
+        <BoxView direction="row" align="center" justify="space-around" style={Layout.footer}>
+          <IconView
+            name="location"
+            theme="clear"
+            size={22}
+            onPress={() => pushIn()}
+            //onPress={() => fadeIn()}
+            //onPress={() => slideIn()}
+            //onPress={() => toggleScreen("mapView")}
+          />
+          <IconView
+            name="plus"
+            theme="clear"
+            size={22}
+            onPress={() => pushOut()}
+            //onPress={() => fadeOut()}
+            //onPress={() => slideOut()}
+          />
+          <IconView
+            name="user"
+            theme="clear"
+            size={22}
+            //onPress={() => toggleScreen("profileForm")}
+          />
+        </BoxView>
+      </View>
+    </ScreenView>
   );
 };
 
