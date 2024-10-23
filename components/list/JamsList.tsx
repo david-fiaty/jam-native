@@ -33,6 +33,15 @@ const JamsList = () => {
               
               <ImageView source={item.image} resizeMode="cover" style={styles.itemImage} />
 
+              <BoxView direction="row" align="center" justify="space-between" style={styles.itemToolbar}>
+                <BoxView>
+                  <TextView>@{i18n.t('host')} +{item.host_count}</TextView>
+                </BoxView>
+                <BoxView>
+                  <IconView name="actions" size={22} theme="clear" />
+                </BoxView> 
+              </BoxView>
+
               <TextView>{item.id}</TextView>
               <TextView>{item.id}</TextView>
               <TextView>{item.id}</TextView>
@@ -57,6 +66,10 @@ const styles = StyleSheet.create({
     borderColor: Colors.primary,
   }, 
   itemHeader: {
+    padding: Layout.space.base,
+    marginBottom: 0,
+  },
+  itemToolbar: {
     padding: Layout.space.base,
     marginBottom: 0,
   },
