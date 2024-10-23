@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import TextView from '../view/TextView';
 import { Layout } from '@/constants/Layout';
 import ApiClient from '@/classes/ApiClient';
 import i18n from '@/translation/i18n';
+import ImageView from '../view/ImageView';
+import BoxView from '../view/BoxView';
 
 const JamsList = () => {  
   const [selectedOption, setSelectedOption] = useState(null);
@@ -12,22 +14,21 @@ const JamsList = () => {
 
   return (
     <View style={styles.container}>
-      <TextView style={styles.title}>{i18n.t('Your Jams')}</TextView>
       <FlatList 
         data={data} 
-        numColumns={3}
+        numColumns={1}
         contentContainerStyle={{gap: Layout.space.base}}
-        columnWrapperStyle={{gap: Layout.space.base}}
-        scrollEnabled={false}
+        scrollEnabled={true}
         renderItem={({item, index}) => {
-          return (
-            <TouchableOpacity onPress={() => setSelectedOption(item.id)}>
-              <View style={styles.item}>
-                <View style={[styles.square, selectedOption == item.id ? styles.selected : {}]}>
-                  <TextView>{item.id}</TextView>
-                </View>
-              </View>
-            </TouchableOpacity>
+          return (  
+            <BoxView direction="column" style={styles.item}>
+              <ImageView source={item.image} />
+              <TextView>{item.id}</TextView>
+              <TextView>{item.id}</TextView>
+              <TextView>{item.id}</TextView>
+              <TextView>{item.id}</TextView>
+              <TextView>{item.id}</TextView>
+            </BoxView>
           );
         }}
       />
@@ -45,10 +46,6 @@ const styles = StyleSheet.create({
   },
   item: {
     flexDirection: 'column',
-    gap: Layout.space.small,
-  },
-  square: {
-    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: Colors.secondary,
@@ -56,8 +53,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: Layout.radius.round,
     borderColor: Colors.secondary,
-    width: Layout.space.base*10,
-    height: Layout.space.base*10,
   },
   selected: {
     borderColor: Colors.primary,
