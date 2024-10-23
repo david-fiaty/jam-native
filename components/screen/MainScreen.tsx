@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { StyleSheet, View, Animated, TouchableOpacity } from "react-native";
 import { Layout } from "@/constants/Layout";
+import { Colors } from "@/constants/Colors";
 import ScreenView from "../view/ScreenView";
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
@@ -12,7 +13,6 @@ import SearchMenu from "@/components/menu/SearchMenu";
 import MapView from "@/components/view/MapView";
 import AddJamForm from "@/components/form/AddJamForm";
 import ProfileForm from "@/components/form/ProfileForm";
-import { Colors } from "@/constants/Colors";
 import JamsList from "../list/JamsList";
 import LogoView from '../view/LogoView';
 
