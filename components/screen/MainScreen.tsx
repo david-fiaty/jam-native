@@ -17,20 +17,18 @@ const MainScreen = () => {
   const windowHeight = DeviceManager.window.height;
   const dispatch = useDispatch();
 
-  const [activeScreen, setActiveScreen] = useState("");
-
-  const slideEffect = useRef(
+  const slideEffectReference = useRef(
     new Animated.Value(windowHeight)
   ).current;
 
-  const pushEffect = useRef(
+  const pushEffectReference = useRef(
     new Animated.Value(-windowWidth)
   ).current;
 
-  const fadeEffect = useRef(new Animated.Value(0)).current;
+  const fadeEffectReference = useRef(new Animated.Value(0)).current;
   
   const slideIn = () => {
-    Animated.timing(slideEffect, {
+    Animated.timing(slideEffectReference, {
       toValue: 0, 
       duration: 500, 
       useNativeDriver: true, 
@@ -38,7 +36,7 @@ const MainScreen = () => {
   };
 
   const slideOut = () => {
-    Animated.timing(slideEffect, {
+    Animated.timing(slideEffectReference, {
       toValue: windowHeight, 
       duration: 500,
       useNativeDriver: true,
@@ -46,7 +44,7 @@ const MainScreen = () => {
   };
 
   const fadeIn = () => {
-    Animated.timing(fadeEffect, {
+    Animated.timing(fadeEffectReference, {
       toValue: 1, 
       duration: 500, 
       useNativeDriver: true, 
@@ -54,7 +52,7 @@ const MainScreen = () => {
   };
 
   const fadeOut = () => {
-    Animated.timing(fadeEffect, {
+    Animated.timing(fadeEffectReference, {
       toValue: 0, 
       duration: 500,
       useNativeDriver: true,
@@ -62,9 +60,7 @@ const MainScreen = () => {
   };
 
   const pushIn = () => {
-    dispatch(setTabActive('tab 1'));
-
-    Animated.timing(pushEffect, {
+    Animated.timing(pushEffectReference, {
       toValue: 0, 
       duration: 500, 
       useNativeDriver: true, 
@@ -72,21 +68,23 @@ const MainScreen = () => {
   };
 
   const pushOut = () => {
-    dispatch(setTabActive('tab 2'));
-
-    Animated.timing(pushEffect, {
+    Animated.timing(pushEffectReference, {
       toValue: windowWidth, 
       duration: 500,
       useNativeDriver: true,
     }).start();
   };
 
+  const toggleScreen = () => {
+    dispatch(setTabActive('tab 2'));
+  };
+
   const tabState = useSelector((state) => state.tab.active);
   console.log(tabState);
 
-  const slideEffectStyle = { transform: [{ translateY: slideEffect }] };
-  const fadeEffectStyle = { opacity: fadeEffect };
-  const pushEffectStyle = { transform: [{ translateX: pushEffect }] };
+  const slideEffectReferenceStyle = { transform: [{ translateY: slideEffectReference }] };
+  const fadeEffectReferenceStyle = { opacity: fadeEffectReference };
+  const pushEffectReferenceStyle = { transform: [{ translateX: pushEffectReference }] };
 
   const animatedViewStyle = {
     ...Layout.animatedView,
@@ -94,7 +92,7 @@ const MainScreen = () => {
       top: 0,
       left: 0,
     },
-    ...pushEffectStyle,
+    ...pushEffectReferenceStyle,
   };
 
   return (
@@ -120,8 +118,8 @@ const MainScreen = () => {
         <BoxView style={Layout.modalContainer}>
           <Animated.View style={animatedViewStyle}>
             <BoxView style={Layout.modalContent}>
-              {activeScreen && Screens[activeScreen].component()}
-              {!activeScreen && Screens['jamsList'].component()}
+              { /*activeScreen && Screens[activeScreen].component()*/}
+              {/*!activeScreen && Screens['jamsList'].component()*/}
             </BoxView>
           </Animated.View>
         </BoxView>
