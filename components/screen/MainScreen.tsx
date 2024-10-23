@@ -7,15 +7,9 @@ import ScreenView from "../view/ScreenView";
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 import DeviceManager from "@/classes/DeviceManager";
-import SettingsMenu from "@/components/menu/SettingsMenu";
-import NotificationsMenu from "@/components/menu/NotificationsMenu";
-import SearchMenu from "@/components/menu/SearchMenu";
-import MapView from "@/components/view/MapView";
-import AddJamForm from "@/components/form/AddJamForm";
-import ProfileForm from "@/components/form/ProfileForm";
-import JamsList from "../list/JamsList";
 import LogoView from '../view/LogoView';
 import { setTabActive } from "@/redux/slices/TabSlice";
+import { Screens } from "@/constants/Screens";
 
 const MainScreen = () => {
 
@@ -35,37 +29,6 @@ const MainScreen = () => {
 
   const fadeEffect = useRef(new Animated.Value(0)).current;
   
-  const screens = {
-    jamsList: {
-      effect: 'fade',
-      component: () => <JamsList />,
-    },
-    settingsMenu: {
-      effect: 'push',
-      component: () => <SettingsMenu />,
-    },
-    notificationsMenu: {
-      effect: 'fade',
-      component: () => <NotificationsMenu />,
-    },
-    searchMenu: {
-      effect: 'slide',
-      component: () => <SearchMenu />,
-    },
-    mapView: {
-      effect: 'fade',
-      component: () => <MapView />,
-    },
-    addJamForm: {
-      effect: 'fade',
-      component: () => <AddJamForm />,
-    },
-    profileForm: {
-      effect: 'fade',
-      component: () => <ProfileForm />,
-    },
-  };
-
   const slideIn = () => {
     Animated.timing(slideEffect, {
       toValue: 0, 
@@ -157,8 +120,8 @@ const MainScreen = () => {
         <BoxView style={Layout.modalContainer}>
           <Animated.View style={animatedViewStyle}>
             <BoxView style={Layout.modalContent}>
-              {activeScreen && screens[activeScreen].component()}
-              {!activeScreen && screens['jamsList'].component()}
+              {activeScreen && Screens[activeScreen].component()}
+              {!activeScreen && Screens['jamsList'].component()}
             </BoxView>
           </Animated.View>
         </BoxView>
