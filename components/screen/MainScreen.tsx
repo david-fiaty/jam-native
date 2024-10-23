@@ -66,11 +66,15 @@ const MainScreen = () => {
 
   useEffect(() => {
     if (tabState.active) {
-      console.log(tabState?.active?.effect);
-      animations.push(false);
+      //console.log(tabState.active);
+      //console.log(Screens[tabState.active].effect);
+      //animations[Screens[tabState.active]?.effect].?(false);
+      console.log(Screens[tabState.active]?.effect);
+      animations['push'](false);
     }
     else {
-      animations.push(true);
+      console.log(Screens[tabState.active]?.effect);
+      animations['push'](true);
     }
   }, [tabState]); 
 
