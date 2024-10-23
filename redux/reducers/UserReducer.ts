@@ -1,6 +1,6 @@
 
 const initialState = {
-  modal: [],
+  user: [],
 };
 
 const UserReducer = (state = initialState, action) => {
@@ -8,7 +8,7 @@ const UserReducer = (state = initialState, action) => {
     case 'SET_ACTIVE':
       return {
         ...state,
-        tab: [...state.modal, action.payload],
+        user: [...state.user, action.payload],
       };
     default:
       return state;
