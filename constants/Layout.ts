@@ -1,3 +1,4 @@
+import { StatusBar } from 'react-native';
 import { Colors } from './Colors';
 import DeviceManager from '@/classes/DeviceManager';
 
@@ -14,7 +15,7 @@ const radius = {
 
 const header = {
   height: 48,
-  marginTop: DeviceManager.statusBar.height,
+  marginTop: StatusBar.currentHeight,
   paddingHorizontal: space.base,
 };
 
@@ -28,6 +29,11 @@ const footer = {
   borderTopWidth: 0.3,
   borderTopColor: Colors.primary,
   backgroundColor: Colors.white,
+};
+
+const modal = {
+  width: DeviceManager.window.width,
+  height: DeviceManager.window.height - DeviceManager.statusBar.height - header.height - footer.height,
 };
 
 export const Layout = {
@@ -70,7 +76,7 @@ export const Layout = {
     left: 0,
     bottom: footer.height,
     width: '100%',
-    height: DeviceManager.modalView.height, 
+    height: modal.height, 
     backgroundColor: 'lightblue',
   },
   modalContent: {
@@ -78,7 +84,7 @@ export const Layout = {
     top: 0,
     left: 0,
     width: '100%',
-    height: DeviceManager.modalView.height,
+    height: modal.height,
     backgroundColor: Colors.white,
     padding: space.base,
   },
