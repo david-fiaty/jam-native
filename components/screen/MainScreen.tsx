@@ -143,17 +143,12 @@ const MainScreen = () => {
             theme="clear"
             size={22}
             onPress={() => toggleTab('mapView')}
-            //onPress={() => fadeIn()}
-            //onPress={() => slideIn()}
-            //onPress={() => pushIn()}
           />
           <IconView
             name="plus"
             theme="clear"
             size={22}
             onPress={() => toggleTab('addJamForm')}
-            //onPress={() => fadeOut()}
-            //onPress={() => slideOut()}
           />
           <IconView
             name="user"
