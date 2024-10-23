@@ -98,17 +98,13 @@ const MainScreen = () => {
     
   }, [tabState]); 
 
-  const slideEffectReferenceStyle = { transform: [{ translateY: slideEffectReference }] };
-  const fadeEffectReferenceStyle = { opacity: fadeEffectReference };
-  const pushEffectReferenceStyle = { transform: [{ translateX: pushEffectReference }] };
+  const slideEffectStyle = { transform: [{ translateY: slideEffectReference }] };
+  const fadeEffectStyle = { opacity: fadeEffectReference };
+  const pushEffectStyle = { transform: [{ translateX: pushEffectReference }] };
 
-  const animatedViewStyle = {
+  const animatedStyle = {
     ...Layout.animatedView,
-    ...{
-      top: 0,
-      left: 0,
-    },
-    ...pushEffectReferenceStyle,
+    ...pushEffectStyle,
   };
 
   return (
@@ -132,7 +128,7 @@ const MainScreen = () => {
 
         {/* Main content */}
         <BoxView style={Layout.modalContainer}>
-          <Animated.View style={animatedViewStyle}>
+          <Animated.View style={animatedStyle}>
             <BoxView style={Layout.modalContent}>
               { /*tabState.active && Screens[tabState.active].component() */}
               { true && Screens['jamsList'].component() }
