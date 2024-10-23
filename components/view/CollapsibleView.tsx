@@ -6,9 +6,10 @@ import { Layout } from '@/constants/Layout';
 
 type Props = {
   label: string,
+  content: JSX.Element,
 };
 
-const CollapsibleView = ({label}: Props) => {
+const CollapsibleView = ({label, content}: Props) => {
   const [collapsed, setCollapsed] = useState(true);
 
   return (
@@ -20,7 +21,7 @@ const CollapsibleView = ({label}: Props) => {
       </TouchableOpacity>
       <Collapsible collapsed={collapsed} align="center">
         <View style={styles.content}>
-          <TextView>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. sit amet, consectetur adipiscing elit </TextView>
+          <TextView>{content}</TextView>
         </View>
       </Collapsible>
     </View>
