@@ -92,10 +92,9 @@ const MainScreen = () => {
   useEffect(() => {
     if (tabState.active) {
       //console.log(tabState.active);
-      //pushOut();
+      pushOut();
       console.log(Screens[tabState.active].effect);
     }
-    
   }, [tabState]); 
 
   const slideEffectStyle = { transform: [{ translateY: slideEffectReference }] };
