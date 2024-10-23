@@ -32,7 +32,7 @@ const HeaderView = ({style, children}: BaseProps) => {
     <BoxView direction="row" align="center" justify="space-between" style={styles.container}>
       <BoxView direction="row" align="center" style={styles.left}>
         <TouchableOpacity onPress={() => {}}>
-          <LogoView size={{width: 48, height: 48}} />
+          <LogoView size={Layout.logo} />
         </TouchableOpacity>
       </BoxView>
       <BoxView direction="row" align="center" justify="space-between">
