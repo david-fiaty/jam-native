@@ -78,7 +78,6 @@ const MainScreen = () => {
   };
 
   const toggleTab = (tabName?: string, screens?: object) => {
-    console.log(screens);
     if (tabName && tabName != tabState.active) {
       dispatch(setTabActive(tabName));
       //setTimeout(() => pushIn(), 0);
@@ -91,8 +90,8 @@ const MainScreen = () => {
 
   useEffect(() => {
     if (tabState.active) {
-      //console.log(tabState.active);
-      pushOut();
+      console.log(tabState.active);
+      //pushOut();
       console.log(Screens[tabState.active].effect);
     }
   }, [tabState]); 
