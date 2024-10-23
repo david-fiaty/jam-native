@@ -14,10 +14,10 @@ const ImageBase = ({source, width, height, resizeMethod, resizeMode, style}: Pro
   return (
     <Image 
       source={source} 
-      resizeMethod={resizeMethod || 'cover'}
+      resizeMethod={resizeMethod || 'scale'}
       resizeMode={resizeMode || 'contain'}
-      width={width || '100%'}
-      height={height || '100%'}
+      width={width}
+      height={height}
       style={[styles.image,style]} 
     />   
   );
@@ -26,6 +26,8 @@ const ImageBase = ({source, width, height, resizeMethod, resizeMode, style}: Pro
 const styles = StyleSheet.create({
   image: {
     alignSelf: 'center',
+    margin: 0,
+    padding: 0,
   },
 });
 
