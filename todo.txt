@@ -145,3 +145,15 @@ Twilio => SMS
           label={<ClearIcon name="user" size={GlobalStyles.footer.icon.size} />} 
           content={<AddJamScreen />} 
         />
+
+
+const screenOptions = { 
+  header: (props: object) => <HeaderView />,    
+  headerShown: true,
+  statusBarColor: Colors.background,
+  statusBarStyle: 'dark',
+  headerTintColor: Colors.background,    
+  headerStyle: {
+    backgroundColor: Colors.background, 
+  },
+};
