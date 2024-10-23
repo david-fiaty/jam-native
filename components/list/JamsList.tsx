@@ -7,6 +7,8 @@ import ApiClient from '@/classes/ApiClient';
 import i18n from '@/translation/i18n';
 import ImageView from '../view/ImageView';
 import BoxView from '../view/BoxView';
+import IconView from '../view/IconView';
+import CollapsibleView from '../view/CollapsibleView';
 
 const JamsList = () => {  
   const [selectedOption, setSelectedOption] = useState(null);
@@ -23,20 +25,31 @@ const JamsList = () => {
             <View style={styles.item}>
               <BoxView direction="row" align="center" justify="space-between" style={styles.itemHeader}>
                 <BoxView>
-                  <TextView>Left</TextView>
+                  <TextView>@{i18n.t('host')} +{item.host_count}</TextView>
                 </BoxView>
                 <BoxView>
-                  <TextView>Right</TextView>
+                  <IconView name="actions" size={22} theme="clear" />
                 </BoxView> 
               </BoxView>
               
               <ImageView source={item.image} resizeMode="cover" style={styles.itemImage} />
 
-              <TextView>{item.id}</TextView>
-              <TextView>{item.id}</TextView>
-              <TextView>{item.id}</TextView>
-              <TextView>{item.id}</TextView>
-              <TextView>{item.id}</TextView>
+              <BoxView direction="row" align="center" justify="space-between" style={styles.itemToolbar}>
+                <BoxView>
+                  <TextView>@{i18n.t('host')} +{item.host_count}</TextView>
+                </BoxView>
+                <BoxView>
+                  <IconView name="actions" size={22} theme="clear" />
+                </BoxView> 
+              </BoxView>
+
+              <BoxView style={styles.itemDescription}>
+                <TextView>{item.content}</TextView>
+              </BoxView>
+
+              <BoxView style={styles.itemCollapsible}>
+                <CollapsibleView label={i18n.t('View more.')} />
+              </BoxView>
             </View>
           );
         }}
@@ -54,21 +67,18 @@ const styles = StyleSheet.create({
     borderRadius: Layout.radius.round,
     marginBottom: Layout.space.base,
     borderColor: Colors.primary,
-
-    /*
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: Colors.secondary,
-    padding: Layout.space.base,
-    borderWidth: 1,
-    borderRadius: Layout.radius.round,
-    borderColor: Colors.secondary,
-    */
   }, 
   itemHeader: {
     padding: Layout.space.base,
-    marginBottom: 0,
+  },
+  itemToolbar: {
+    padding: Layout.space.base,
+  },
+  itemDescription: {
+    padding: Layout.space.base,
+  },
+  itemCollapsible: {
+    padding: Layout.space.base,
   },
   itemImage: {
     height: 300,
