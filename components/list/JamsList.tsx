@@ -7,6 +7,7 @@ import ApiClient from '@/classes/ApiClient';
 import i18n from '@/translation/i18n';
 import ImageView from '../view/ImageView';
 import BoxView from '../view/BoxView';
+import IconView from '../view/IconView';
 
 const JamsList = () => {  
   const [selectedOption, setSelectedOption] = useState(null);
@@ -26,7 +27,7 @@ const JamsList = () => {
                   <TextView>@{i18n.t('host')} +{item.host_count}</TextView>
                 </BoxView>
                 <BoxView>
-                  <TextView>Right</TextView>
+                  <IconView name="actions" size={22} theme="clear" />
                 </BoxView> 
               </BoxView>
               
