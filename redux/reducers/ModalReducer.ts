@@ -8,7 +8,7 @@ const ModalReducer = (state = initialState, action) => {
     case 'SET_ACTIVE':
       return {
         ...state,
-        tab: [...state.modal, action.payload],
+        modal: [...state.modal, action.payload],
       };
     default:
       return state;
