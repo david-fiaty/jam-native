@@ -28,6 +28,30 @@ const MainScreen = () => {
   ).current;
 
   const fadeEffectReference = useRef(new Animated.Value(0)).current;
+
+  const animatedEffects = {
+    slide: (isVisible?: boolean) => {
+      Animated.timing(slideEffectReference, {
+        toValue: isVisible ? windowHeight : 0, 
+        duration: 500, 
+        useNativeDriver: true, 
+      }).start();
+    },
+    fade: (isVisible?: boolean) => {
+      Animated.timing(fadeEffectReference, {
+        toValue: isVisible ? 0 : 1, 
+        duration: 500, 
+        useNativeDriver: true, 
+      }).start();
+    },
+    push: (isVisible?: boolean) => {
+      Animated.timing(pushEffectReference, {
+        toValue: isVisible ? windowWidth : 0, 
+        duration: 500, 
+        useNativeDriver: true, 
+      }).start();
+    },
+  };
   
   const slideIn = () => {
     Animated.timing(slideEffectReference, {
@@ -90,9 +114,8 @@ const MainScreen = () => {
 
   useEffect(() => {
     if (tabState.active) {
-      console.log(tabState.active);
-      //pushOut();
       console.log(Screens[tabState.active].effect);
+      animatedEffects.push(true);
     }
   }, [tabState]); 
 
@@ -117,8 +140,8 @@ const MainScreen = () => {
           </BoxView>
           <BoxView direction="row" align="center" justify="space-between">
             <BoxView direction="row" align="center" style={Layout.headerRight}> 
-              <IconView name="menu" theme="secondary" size={22} onPress={() => pushIn()} />
-              <IconView label="15+" theme="secondary" size={13} onPress={() => pushOut()} />
+              <IconView name="menu" theme="secondary" size={22} onPress={() => {}} />
+              <IconView label="15+" theme="secondary" size={13} onPress={() => {}} />
               <IconView name="search" theme="clear" size={22} onPress={() => {}} />
             </BoxView>
           </BoxView>
