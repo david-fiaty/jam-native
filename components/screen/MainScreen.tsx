@@ -17,7 +17,7 @@ const MainScreen = () => {
   const windowHeight = DeviceManager.window.height;
 
   const dispatch = useDispatch();
-  const tabState = useSelector((state) => state.tab.active);
+  const tabState = useSelector((state) => state.tab);
 
   const slideEffectReference = useRef(
     new Animated.Value(windowHeight)
@@ -78,9 +78,9 @@ const MainScreen = () => {
   };
 
   const toggleTab = (tabName: string) => {
-    console.log(tabName, 'a');
-    console.log(tabState, 'b');
-    dispatch(setTabActive(tabName));
+    if (tabName == tabState.active) {
+      dispatch(setTabActive(tabName));
+    }
   };
 
   
