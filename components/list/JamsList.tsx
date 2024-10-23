@@ -17,12 +17,21 @@ const JamsList = () => {
       <FlatList 
         data={data} 
         numColumns={1}
-        contentContainerStyle={{gap: Layout.space.base}}
         scrollEnabled={true}
         renderItem={({item, index}) => {
           return (  
-            <BoxView direction="column" style={styles.item}>
-              <ImageView source={item.image} />
+            <BoxView style={styles.item}>
+              <BoxView direction="row" align="center" justify="space-between" style={styles.itemHeader}>
+                <BoxView>
+                  <TextView>Left</TextView>
+                </BoxView>
+                <BoxView>
+                  <TextView>Right</TextView>
+                </BoxView> 
+              </BoxView>
+              
+              <ImageView source={item.image} resizeMode="cover" style={styles.itemImage} />
+
               <TextView>{item.id}</TextView>
               <TextView>{item.id}</TextView>
               <TextView>{item.id}</TextView>
@@ -40,11 +49,11 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
   },
-  title: {
-    fontWeight: 'bold',
-    marginBottom: Layout.space.base,
-  },
   item: {
+    borderWidth: 1,
+    borderRadius: Layout.radius.round,
+    marginBottom: Layout.space.base,
+    /*
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
@@ -53,9 +62,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: Layout.radius.round,
     borderColor: Colors.secondary,
+    */
+  }, 
+  itemHeader: {
+    backgroundColor: 'gray',
+    padding: Layout.space.base,
+    marginBottom: 0,
   },
-  selected: {
-    borderColor: Colors.primary,
+  itemImage: {
+    height: 300,
   },
 });
 
