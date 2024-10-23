@@ -15,15 +15,13 @@ import AddJamForm from "@/components/form/AddJamForm";
 import ProfileForm from "@/components/form/ProfileForm";
 import JamsList from "../list/JamsList";
 import LogoView from '../view/LogoView';
+import { setTabActive } from "@/redux/slices/TabSlice";
 
 const MainScreen = () => {
 
   const windowWidth = DeviceManager.window.width;
   const windowHeight = DeviceManager.window.height;
-
-  const tabState = useSelector((state) => state.tab.active);
   const dispatch = useDispatch();
-
 
   const [activeScreen, setActiveScreen] = useState("");
 
@@ -101,6 +99,8 @@ const MainScreen = () => {
   };
 
   const pushIn = () => {
+    dispatch(setTabActive('tab 1'));
+
     Animated.timing(pushEffect, {
       toValue: 0, 
       duration: 500, 
@@ -109,12 +109,17 @@ const MainScreen = () => {
   };
 
   const pushOut = () => {
+    dispatch(setTabActive('tab 2'));
+
     Animated.timing(pushEffect, {
       toValue: windowWidth, 
       duration: 500,
       useNativeDriver: true,
     }).start();
   };
+
+  const tabState = useSelector((state) => state.tab.active);
+  console.log(tabState);
 
   const slideEffectStyle = { transform: [{ translateY: slideEffect }] };
   const fadeEffectStyle = { opacity: fadeEffect };
