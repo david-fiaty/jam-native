@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { StyleSheet, View, Animated, TouchableOpacity } from "react-native";
 import { Layout } from "@/constants/Layout";
@@ -78,21 +78,21 @@ const MainScreen = () => {
   };
 
   const toggleTab = (tabName?: string) => {
-    if (tabName != tabState.active) {
-      pushIn();
+    if (tabName && tabName != tabState.active) {
       dispatch(setTabActive(tabName));
+      setTimeout(() => pushIn(), 0);
     }
-    else if (tabName == tabState.active || !tabName) {
+    else if (!tabName || tabName == tabState.active) {
       dispatch(setTabActive(null));
-
-      setTimeout(() => {
-        pushOut(); 
-      }, 0); 
-    
+      setTimeout(() => pushOut(), 0); 
     }
   };
-  
-  console.log(tabState);
+
+  useEffect(() => {
+
+    console.log(tabState);
+    
+  }, [tabState]); 
 
   const slideEffectReferenceStyle = { transform: [{ translateY: slideEffectReference }] };
   const fadeEffectReferenceStyle = { opacity: fadeEffectReference };
@@ -151,10 +151,9 @@ const MainScreen = () => {
             name="plus"
             theme="clear"
             size={22}
-            //onPress={() => toggleTab('addJamForm')}
+            onPress={() => toggleTab('addJamForm')}
             //onPress={() => fadeOut()}
             //onPress={() => slideOut()}
-            onPress={() => pushOut()}
           />
           <IconView
             name="user"
