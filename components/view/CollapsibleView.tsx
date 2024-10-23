@@ -6,21 +6,20 @@ import { Layout } from '@/constants/Layout';
 
 type Props = {
   label: string,
+  content: JSX.Element,
 };
 
-const CollapsibleView = ({label}: Props) => {
+const CollapsibleView = ({label, content}: Props) => {
   const [collapsed, setCollapsed] = useState(true);
 
   return (
-    <View style={styles.container}>
+    <View>
       <TouchableOpacity onPress={() => setCollapsed((prev) => !prev)}>
-        <View style={styles.header}>
-          <TextView>{label}</TextView>
-        </View>
+        <TextView>{label}</TextView>
       </TouchableOpacity>
       <Collapsible collapsed={collapsed} align="center">
         <View style={styles.content}>
-          <TextView>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. sit amet, consectetur adipiscing elit </TextView>
+          {content}
         </View>
       </Collapsible>
     </View>
@@ -28,20 +27,9 @@ const CollapsibleView = ({label}: Props) => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: '100%',
-  },
-  header: {
-    //paddingBottom: Layout.space.base,
-  },
-  headerText: {
-    textAlign: 'center',
-    fontSize: 16,
-    fontWeight: '500',
-  },
   content: {
     marginTop: Layout.space.base,
+    width: '100%',
   },
 });
 

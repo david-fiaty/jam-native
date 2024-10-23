@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.secondary,
   },
   tertiary: {
-    color: Colors.white,
+    color: Colors.primary,
     backgroundColor: Colors.tertiary,
   },
   clear: {

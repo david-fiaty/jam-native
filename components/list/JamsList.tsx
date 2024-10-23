@@ -35,11 +35,13 @@ const JamsList = () => {
               <ImageView source={item.image} resizeMode="cover" style={styles.itemImage} />
 
               <BoxView direction="row" align="center" justify="space-between" style={styles.itemToolbar}>
-                <BoxView>
-                  <TextView>@{i18n.t('host')} +{item.host_count}</TextView>
+                <BoxView direction="row" align="center">
+                  <IconView name="users" size={22} theme="tertiary" />
+                  <TextView>{item.host_count} {i18n.t('jammers')}</TextView>
                 </BoxView>
-                <BoxView>
-                  <IconView name="actions" size={22} theme="clear" />
+                <BoxView direction="row" align="center">
+                  <IconView name="save" size={22} theme="tertiary" />
+                  <IconView name="share" size={22} theme="tertiary" />
                 </BoxView> 
               </BoxView>
 
@@ -48,7 +50,25 @@ const JamsList = () => {
               </BoxView>
 
               <BoxView style={styles.itemCollapsible}>
-                <CollapsibleView label={i18n.t('View more.')} />
+                <CollapsibleView 
+                  label={i18n.t('View more.')} 
+                  content={
+                    <BoxView direction="column" align="flex-start" style={styles.itemDetails}>
+                      <View style={styles.itemDetail}>
+                        <TextView>Sed do eiusmod tempor</TextView>
+                      </View>
+                      <View style={styles.itemDetail}>
+                        <TextView>Sed do eiusmod tempor</TextView>
+                      </View>
+                      <View style={styles.itemDetail}>
+                        <TextView>Sed do eiusmod tempor</TextView>
+                      </View>
+                      <View style={styles.itemDetail}>
+                        <TextView>Sed do eiusmod tempor</TextView>
+                      </View>
+                    </BoxView>
+                  }
+                />
               </BoxView>
             </View>
           );
@@ -83,6 +103,16 @@ const styles = StyleSheet.create({
   itemImage: {
     height: 300,
     backgroundColor: Colors.secondary,
+  },
+  itemDetails: {
+    width: '100%',
+    backgroundColor: 'green',
+  },
+  itemDetail: {
+    backgroundColor: Colors.secondary,
+    padding: Layout.space.base,
+    borderRadius: Layout.radius.round,
+    width: '100%',
   },
 });
 
