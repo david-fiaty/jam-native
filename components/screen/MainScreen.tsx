@@ -8,7 +8,7 @@ import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 import DeviceManager from "@/classes/DeviceManager";
 import LogoView from '../view/LogoView';
-import { setTabActive } from "@/redux/slices/ScreenSlice";
+import { setScreenActive } from "@/redux/slices/ScreenSlice";
 import { Screens } from "@/constants/Screens";
 
 const MainScreen = () => {
@@ -17,7 +17,7 @@ const MainScreen = () => {
   const windowHeight = DeviceManager.window.height;
 
   const dispatch = useDispatch();
-  const tabState = useSelector((state) => state.tab);
+  const tabState = useSelector((state) => state.screen);
 
   const slideEffectReference = useRef(
     new Animated.Value(windowHeight)
@@ -55,10 +55,10 @@ const MainScreen = () => {
   
   const toggleTab = (tabName?: string) => {
     if (tabName && tabName != tabState.active) {
-      dispatch(setTabActive(tabName));
+      dispatch(setScreenActive(tabName));
     }
     else if (!tabName || tabName == tabState.active) {
-      dispatch(setTabActive(null));
+      dispatch(setScreenActive(null));
     }
   };
 
