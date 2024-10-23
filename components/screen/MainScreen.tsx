@@ -24,7 +24,7 @@ const MainScreen = () => {
   ).current;
 
   const pushEffectReference = useRef(
-    new Animated.Value(-windowWidth)
+    new Animated.Value(windowWidth)
   ).current;
 
   const fadeEffectReference = useRef(new Animated.Value(0)).current;
@@ -77,12 +77,20 @@ const MainScreen = () => {
     }).start();
   };
 
-  const toggleTab = (tabName: string) => {
-    if (tabName == tabState.active) {
+  const toggleTab = (tabName?: string) => {
+    if (tabName != tabState.active) {
+      pushIn();
       dispatch(setTabActive(tabName));
     }
-  };
+    else if (tabName == tabState.active || !tabName) {
+      dispatch(setTabActive(null));
 
+      setTimeout(() => {
+        pushOut(); 
+      }, 0); 
+    
+    }
+  };
   
   console.log(tabState);
 
@@ -122,8 +130,8 @@ const MainScreen = () => {
         <BoxView style={Layout.modalContainer}>
           <Animated.View style={animatedViewStyle}>
             <BoxView style={Layout.modalContent}>
-              { /*activeScreen && Screens[activeScreen].component()*/}
-              {/*!activeScreen && Screens['jamsList'].component()*/}
+              { /*tabState.active && Screens[tabState.active].component() */}
+              { true && Screens['jamsList'].component() }
             </BoxView>
           </Animated.View>
         </BoxView>
@@ -134,24 +142,25 @@ const MainScreen = () => {
             name="location"
             theme="clear"
             size={22}
-            onPress={() => toggleTab('jamList')}
+            onPress={() => toggleTab('mapView')}
             //onPress={() => fadeIn()}
             //onPress={() => slideIn()}
-            //onPress={() => toggleScreen("mapView")}
+            //onPress={() => pushIn()}
           />
           <IconView
             name="plus"
             theme="clear"
             size={22}
-            onPress={() => pushOut()}
+            //onPress={() => toggleTab('addJamForm')}
             //onPress={() => fadeOut()}
             //onPress={() => slideOut()}
+            onPress={() => pushOut()}
           />
           <IconView
             name="user"
             theme="clear"
             size={22}
-            //onPress={() => toggleScreen("profileForm")}
+            onPress={() => toggleTab("profileForm")}
           />
         </BoxView>
       </View>
