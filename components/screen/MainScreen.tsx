@@ -66,12 +66,10 @@ const MainScreen = () => {
 
   useEffect(() => {
     if (tabState.active) {
-      console.log(Screens[tabState.active]?.effect);
-      animations['push'](false);
+      animations[Screens[tabState.active].effect](false);
     }
     else {
-      console.log(Screens[tabState.active]?.effect);
-      animations['push'](true);
+      animations['slide'](true);
     }
   }, [tabState]); 
 
@@ -81,7 +79,7 @@ const MainScreen = () => {
 
   const animatedStyle = {
     ...Layout.animatedView,
-    ...pushEffectStyle,
+    ...slideEffectStyle,
   };
 
   return (
