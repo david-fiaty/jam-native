@@ -15,7 +15,9 @@ const MainScreen = () => {
 
   const windowWidth = DeviceManager.window.width;
   const windowHeight = DeviceManager.window.height;
+
   const dispatch = useDispatch();
+  const tabState = useSelector((state) => state.tab.active);
 
   const slideEffectReference = useRef(
     new Animated.Value(windowHeight)
@@ -75,11 +77,13 @@ const MainScreen = () => {
     }).start();
   };
 
-  const toggleScreen = () => {
-    dispatch(setTabActive('tab 2'));
+  const toggleTab = (tabName: string) => {
+    console.log(tabName, 'a');
+    console.log(tabState, 'b');
+    dispatch(setTabActive(tabName));
   };
 
-  const tabState = useSelector((state) => state.tab.active);
+  
   console.log(tabState);
 
   const slideEffectReferenceStyle = { transform: [{ translateY: slideEffectReference }] };
@@ -130,7 +134,7 @@ const MainScreen = () => {
             name="location"
             theme="clear"
             size={22}
-            onPress={() => pushIn()}
+            onPress={() => toggleTab('jamList')}
             //onPress={() => fadeIn()}
             //onPress={() => slideIn()}
             //onPress={() => toggleScreen("mapView")}
