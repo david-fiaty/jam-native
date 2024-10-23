@@ -79,20 +79,14 @@ const MainScreen = () => {
 
   const toggleTab = (tabName?: string) => {
     if (tabName != tabState.active) {
-      pushIn();
       dispatch(setTabActive(tabName));
+      setTimeout(() => pushIn(), 0);
     }
     else if (tabName == tabState.active || !tabName) {
       dispatch(setTabActive(null));
-
-      setTimeout(() => {
-        pushOut(); 
-      }, 0); 
-    
+      setTimeout(() => pushOut(), 0); 
     }
   };
-  
-  console.log(tabState);
 
   const slideEffectReferenceStyle = { transform: [{ translateY: slideEffectReference }] };
   const fadeEffectReferenceStyle = { opacity: fadeEffectReference };
