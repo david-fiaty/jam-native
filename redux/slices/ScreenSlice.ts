@@ -12,14 +12,14 @@ const initialState = () => {
 }
 
 const ScreenSlice = createSlice({
-  name: 'tab',
+  name: 'screen',
   initialState: initialState(),
   reducers: {
-    setTabActive: (state, action) => {
+    setScreenActive: (state, action) => {
       state.active = action.payload;
     },
   },
 });
 
-export const { setTabActive } = ScreenSlice.actions;
+export const { setScreenActive } = ScreenSlice.actions;
 export default ScreenSlice.reducer;
