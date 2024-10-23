@@ -13,15 +13,13 @@ const CollapsibleView = ({label, content}: Props) => {
   const [collapsed, setCollapsed] = useState(true);
 
   return (
-    <View style={styles.container}>
+    <View>
       <TouchableOpacity onPress={() => setCollapsed((prev) => !prev)}>
-        <View style={styles.header}>
-          <TextView>{label}</TextView>
-        </View>
+        <TextView>{label}</TextView>
       </TouchableOpacity>
       <Collapsible collapsed={collapsed} align="center">
         <View style={styles.content}>
-          <TextView>{content}</TextView>
+          {content}
         </View>
       </Collapsible>
     </View>
@@ -29,20 +27,9 @@ const CollapsibleView = ({label, content}: Props) => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: '100%',
-  },
-  header: {
-    //paddingBottom: Layout.space.base,
-  },
-  headerText: {
-    textAlign: 'center',
-    fontSize: 16,
-    fontWeight: '500',
-  },
   content: {
     marginTop: Layout.space.base,
+    width: '100%',
   },
 });
 
