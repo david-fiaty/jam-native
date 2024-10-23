@@ -24,7 +24,7 @@ export const Screens = {
     component: () => <SearchMenu />,
   },
   mapView: {
-    effect: 'fade',
+    effect: 'push',
     component: () => <MapView />,
   },
   addJamForm: {
