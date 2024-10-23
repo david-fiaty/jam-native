@@ -20,7 +20,7 @@ const JamsList = () => {
         scrollEnabled={true}
         renderItem={({item, index}) => {
           return (  
-            <BoxView style={styles.item}>
+            <View style={styles.item}>
               <BoxView direction="row" align="center" justify="space-between" style={styles.itemHeader}>
                 <BoxView>
                   <TextView>Left</TextView>
@@ -37,7 +37,7 @@ const JamsList = () => {
               <TextView>{item.id}</TextView>
               <TextView>{item.id}</TextView>
               <TextView>{item.id}</TextView>
-            </BoxView>
+            </View>
           );
         }}
       />
@@ -53,6 +53,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: Layout.radius.round,
     marginBottom: Layout.space.base,
+    borderColor: Colors.primary,
+
     /*
     flexDirection: 'column',
     alignItems: 'center',
@@ -65,7 +67,6 @@ const styles = StyleSheet.create({
     */
   }, 
   itemHeader: {
-    backgroundColor: 'gray',
     padding: Layout.space.base,
     marginBottom: 0,
   },
