@@ -112,8 +112,6 @@ const MainScreen = () => {
     }).start();
   };
 
-
-
   const slideEffectStyle = { transform: [{ translateY: slideEffect }] };
   const fadeEffectStyle = { opacity: fadeEffect };
   const pushEffectStyle = { transform: [{ translateX: pushEffect }] };
