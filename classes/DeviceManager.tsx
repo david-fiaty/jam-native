@@ -1,5 +1,6 @@
 import { Dimensions, ScaledSize, StatusBar } from 'react-native';
 import { GlobalStyles } from '@/constants/GlobalStyles';
+import { Layout } from '@/constants/Layout';
 
 class DeviceManager {
   screen: ScaledSize;
@@ -17,7 +18,7 @@ class DeviceManager {
   getModalViewSize() {
     return {
       width: this.window.width,
-      height: this.window.height - StatusBar.currentHeight - GlobalStyles.header.height - GlobalStyles.footer.height,
+      height: this.window.height - StatusBar.currentHeight - Layout.header.height - Layout.footer.height,
     };
   } 
 
