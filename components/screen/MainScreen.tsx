@@ -77,7 +77,8 @@ const MainScreen = () => {
     }).start();
   };
 
-  const toggleTab = (tabName?: string) => {
+  const toggleTab = (tabName?: string, screens?: object) => {
+    console.log(screens);
     if (tabName && tabName != tabState.active) {
       dispatch(setTabActive(tabName));
       setTimeout(() => pushIn(), 0);
@@ -90,8 +91,7 @@ const MainScreen = () => {
 
   useEffect(() => {
     if (tabState.active) {
-      
-      //console.log(Screens[tabState.active].effect);
+      console.log(tabState.active.effect);
     }
     
   }, [tabState]); 
@@ -144,7 +144,7 @@ const MainScreen = () => {
             name="location"
             theme="clear"
             size={22}
-            onPress={() => toggleTab('mapView')}
+            onPress={() => toggleTab('mapView', Screens)}
             //onPress={() => fadeIn()}
             //onPress={() => slideIn()}
             //onPress={() => pushIn()}
@@ -153,7 +153,7 @@ const MainScreen = () => {
             name="plus"
             theme="clear"
             size={22}
-            onPress={() => toggleTab('addJamForm')}
+            onPress={() => toggleTab('addJamForm', Screens)}
             //onPress={() => fadeOut()}
             //onPress={() => slideOut()}
           />
@@ -161,7 +161,7 @@ const MainScreen = () => {
             name="user"
             theme="clear"
             size={22}
-            onPress={() => toggleTab("profileForm")}
+            onPress={() => toggleTab('profileForm', Screens)}
           />
         </BoxView>
       </View>
