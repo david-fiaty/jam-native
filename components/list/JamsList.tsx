@@ -53,7 +53,7 @@ const JamsList = () => {
                 <CollapsibleView 
                   label={i18n.t('View more.')} 
                   content={
-                    <BoxView direction="column" align="center" justify="space-aroun" style={styles.itemDetails}>
+                    <BoxView direction="column" align="flex-start" style={styles.itemDetails}>
                       <View style={styles.itemDetail}>
                         <TextView>Sed do eiusmod tempor</TextView>
                       </View>
@@ -106,11 +106,13 @@ const styles = StyleSheet.create({
   },
   itemDetails: {
     width: '100%',
+    backgroundColor: 'green',
   },
   itemDetail: {
     backgroundColor: Colors.secondary,
     padding: Layout.space.base,
     borderRadius: Layout.radius.round,
+    width: '100%',
   },
 });
 
