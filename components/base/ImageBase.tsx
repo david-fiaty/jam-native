@@ -26,6 +26,8 @@ const ImageBase = ({source, width, height, resizeMethod, resizeMode, style}: Pro
 const styles = StyleSheet.create({
   image: {
     alignSelf: 'center',
+    margin: 0,
+    padding: 0,
   },
 });
 
