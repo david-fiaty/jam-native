@@ -21,10 +21,11 @@ const MainScreen = () => {
   const slideEffect = useRef(
     new Animated.Value(DeviceManager.window.height)
   ).current;
-  const pushEffect = useRef(
+ /* const pushEffect = useRef(
     new Animated.Value(DeviceManager.window.width)
   ).current;
   const fadeEffect = useRef(new Animated.Value(0)).current;
+  */
   const screens = {
     jamsList: {
       effect: 'fade',
@@ -55,6 +56,8 @@ const MainScreen = () => {
       component: () => <ProfileForm />,
     },
   };
+
+  /*
 
   const toggleScreen = (name: string) => {
     if ((activeScreen && !name) || activeScreen == name) {
@@ -93,6 +96,26 @@ const MainScreen = () => {
     return {};
   };
 
+  */
+
+  const slideIn = () => {
+    Animated.timing(slideEffect, {
+      toValue: 0, 
+      duration: 500, 
+      useNativeDriver: true, 
+    }).start();
+  };
+
+  const slideOut = () => {
+    Animated.timing(slideEffect, {
+      toValue: DeviceManager.window.height, 
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const animatedStyle = { transform: [{ translateY: slideEffect }] };
+
   return (
     <ScreenView>
       <View style={styles.container}>
@@ -107,18 +130,19 @@ const MainScreen = () => {
         </BoxView>
 
         {/* Bottom navigation */}
-        <BoxView direction="row" align="center" justify="space-around" style={styles.footer}>
+        <BoxView direction="row" align="center" justify="space-around" style={Layout.footer}>
           <IconView
             name="location"
             theme="clear"
             size={22}
-            onPress={() => toggleScreen("mapView")}
+            onPress={() => slideIn()}
+            //onPress={() => toggleScreen("mapView")}
           />
           <IconView
             name="plus"
             theme="clear"
             size={22}
-            onPress={() => toggleScreen("addJamForm")}
+            onPress={() => slideOut()}
           />
           <IconView
             name="user"
@@ -139,7 +163,6 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: Colors.white,
   },
-  footer: Layout.footer,
 });
 
 export default MainScreen;
