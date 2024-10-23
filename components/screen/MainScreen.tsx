@@ -81,18 +81,19 @@ const MainScreen = () => {
     console.log(screens);
     if (tabName && tabName != tabState.active) {
       dispatch(setTabActive(tabName));
-      setTimeout(() => pushIn(), 0);
+      //setTimeout(() => pushIn(), 0);
     }
     else if (!tabName || tabName == tabState.active) {
       dispatch(setTabActive(null));
-      setTimeout(() => pushOut(), 0); 
+      //setTimeout(() => pushOut(), 0); 
     }
   };
 
   useEffect(() => {
     if (tabState.active) {
-      console.log(tabState.active);
-      //console.log(Screens[tabState.active].effect);
+      //console.log(tabState.active);
+      //pushOut();
+      console.log(Screens[tabState.active].effect);
     }
     
   }, [tabState]); 
