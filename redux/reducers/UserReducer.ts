@@ -3,7 +3,7 @@ const initialState = {
   modal: [],
 };
 
-const ModalReducer = (state = initialState, action) => {
+const UserReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'SET_ACTIVE':
       return {
@@ -15,4 +15,4 @@ const ModalReducer = (state = initialState, action) => {
   }
 };
 
-export default ModalReducer;
+export default UserReducer;
