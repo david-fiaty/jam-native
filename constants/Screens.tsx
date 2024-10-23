@@ -8,7 +8,7 @@ import JamsList from "@/components/list/JamsList";
 
 export const Screens = {
   jamsList: {
-    effect: 'fade',
+    effect: 'push',
     component: () => <JamsList />,
   },
   settingsMenu: {
@@ -24,7 +24,7 @@ export const Screens = {
     component: () => <SearchMenu />,
   },
   mapView: {
-    effect: 'fade',
+    effect: 'slide',
     component: () => <MapView />,
   },
   addJamForm: {

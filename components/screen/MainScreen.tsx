@@ -29,7 +29,7 @@ const MainScreen = () => {
 
   const fadeEffectReference = useRef(new Animated.Value(0)).current;
 
-  const animatedEffects = {
+  const animations = {
     slide: (isVisible?: boolean) => {
       Animated.timing(slideEffectReference, {
         toValue: isVisible ? windowHeight : 0, 
@@ -53,69 +53,21 @@ const MainScreen = () => {
     },
   };
   
-  const slideIn = () => {
-    Animated.timing(slideEffectReference, {
-      toValue: 0, 
-      duration: 500, 
-      useNativeDriver: true, 
-    }).start();
-  };
-
-  const slideOut = () => {
-    Animated.timing(slideEffectReference, {
-      toValue: windowHeight, 
-      duration: 500,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const fadeIn = () => {
-    Animated.timing(fadeEffectReference, {
-      toValue: 1, 
-      duration: 500, 
-      useNativeDriver: true, 
-    }).start();
-  };
-
-  const fadeOut = () => {
-    Animated.timing(fadeEffectReference, {
-      toValue: 0, 
-      duration: 500,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const pushIn = () => {
-    Animated.timing(pushEffectReference, {
-      toValue: 0, 
-      duration: 500, 
-      useNativeDriver: true, 
-    }).start();
-  };
-
-  const pushOut = () => {
-    Animated.timing(pushEffectReference, {
-      toValue: windowWidth, 
-      duration: 500,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const toggleTab = (tabName?: string, screens?: object) => {
+  const toggleTab = (tabName?: string) => {
     if (tabName && tabName != tabState.active) {
       dispatch(setTabActive(tabName));
-      //setTimeout(() => pushIn(), 0);
     }
     else if (!tabName || tabName == tabState.active) {
       dispatch(setTabActive(null));
-      //setTimeout(() => pushOut(), 0); 
     }
   };
 
   useEffect(() => {
     if (tabState.active) {
-      console.log(Screens[tabState.active].effect);
-      animatedEffects.push(true);
+      animations[Screens[tabState.active].effect](false);
+    }
+    else {
+      animations['slide'](true);
     }
   }, [tabState]); 
 
@@ -125,7 +77,7 @@ const MainScreen = () => {
 
   const animatedStyle = {
     ...Layout.animatedView,
-    ...pushEffectStyle,
+    ...slideEffectStyle,
   };
 
   return (
