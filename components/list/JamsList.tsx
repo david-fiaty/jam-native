@@ -23,7 +23,7 @@ const JamsList = () => {
             <View style={styles.item}>
               <BoxView direction="row" align="center" justify="space-between" style={styles.itemHeader}>
                 <BoxView>
-                  <TextView>Left</TextView>
+                  <TextView>@{i18n.t('host')} +{item.host_count}</TextView>
                 </BoxView>
                 <BoxView>
                   <TextView>Right</TextView>
@@ -54,17 +54,6 @@ const styles = StyleSheet.create({
     borderRadius: Layout.radius.round,
     marginBottom: Layout.space.base,
     borderColor: Colors.primary,
-
-    /*
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: Colors.secondary,
-    padding: Layout.space.base,
-    borderWidth: 1,
-    borderRadius: Layout.radius.round,
-    borderColor: Colors.secondary,
-    */
   }, 
   itemHeader: {
     padding: Layout.space.base,
