@@ -42,11 +42,9 @@ const JamsList = () => {
                 </BoxView> 
               </BoxView>
 
-              <TextView>{item.id}</TextView>
-              <TextView>{item.id}</TextView>
-              <TextView>{item.id}</TextView>
-              <TextView>{item.id}</TextView>
-              <TextView>{item.id}</TextView>
+              <BoxView style={styles.itemDescription}>
+                <TextView>{item.content}</TextView>
+              </BoxView>
             </View>
           );
         }}
@@ -67,11 +65,12 @@ const styles = StyleSheet.create({
   }, 
   itemHeader: {
     padding: Layout.space.base,
-    marginBottom: 0,
   },
   itemToolbar: {
     padding: Layout.space.base,
-    marginBottom: 0,
+  },
+  itemDescription: {
+    padding: Layout.space.base,
   },
   itemImage: {
     height: 300,
