@@ -6,11 +6,11 @@ const TabSlice = createSlice({
     active: null,
   },
   reducers: {
-    setActive: (state, action) => {
+    active: (state, action) => {
       state.active = action.payload;
     },
   },
 });
 
-export const { setActive } = TabSlice.actions;
+export const { active } = TabSlice.actions;
 export default TabSlice.reducer;
