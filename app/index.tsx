@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Provider } from 'react-redux';
 import { View } from 'react-native';
 import * as ExpoSplashScreen from 'expo-splash-screen';
 import * as ExpoFont from 'expo-font';
@@ -8,7 +7,6 @@ import BaseTheme from "@/constants/BaseTheme";
 import ScreenView from '@/components/view/ScreenView';
 import SplashScreen from '@/components/screen/SplashScreen';
 import MainScreen from '@/components/screen/MainScreen';
-import Store from "@/redux/Store";
 
 ExpoSplashScreen.preventAutoHideAsync();
 
@@ -19,7 +17,6 @@ export default () => {
   }, [isAppReady]);
 
   useEffect(() => {
-
     async function prepare() {
       try {
         await ExpoFont.loadAsync({
@@ -38,16 +35,14 @@ export default () => {
   }, []);
 
   return ( 
-    <Provider store={Store}>
-      <ThemeProvider theme={BaseTheme}>
-        <ScreenView>
-          {!isAppReady ? (<SplashScreen />) : (
-            <View onLayout={onLayoutReady}>
-              <MainScreen />
-            </View>
-          )}
-        </ScreenView>
-      </ThemeProvider>
-    </Provider>
+    <ThemeProvider theme={BaseTheme}>
+      <ScreenView>
+        {!isAppReady ? (<SplashScreen />) : (
+          <View onLayout={onLayoutReady}>
+            <MainScreen />
+          </View>
+        )}
+      </ScreenView>
+    </ThemeProvider>
   );
 }
