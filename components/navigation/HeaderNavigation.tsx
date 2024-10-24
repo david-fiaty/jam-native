@@ -18,9 +18,9 @@ const HeaderNavigation = () => {
       </BoxView>
       <BoxView direction="row" align="center" justify="space-between">
         <BoxView direction="row" align="center" style={Layout.headerRight}> 
-          <IconView name="menu" theme="secondary" size={22} onPress={() => dispatch(setTabActive('AddJamForm'))} />
-          <IconView label="15+" theme="secondary" size={13} onPress={() => {}} />
-          <IconView name="search" theme="clear" size={22} onPress={() => {}} />
+          <IconView name="menu" theme="secondary" size={22} onPress={() => dispatch(setTabActive('SettingsMenu'))} />
+          <IconView label="15+" theme="secondary" size={13} onPress={() => dispatch(setTabActive('SettingsMenu'))} />
+          <IconView name="search" theme="clear" size={22} onPress={() => dispatch(setTabActive('SearchScreen'))} />
         </BoxView>
       </BoxView>
     </BoxView>
