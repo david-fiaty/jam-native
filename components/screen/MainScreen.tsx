@@ -28,7 +28,7 @@ const MainScreen = () => {
   const pushEffectReference = useRef(new Animated.Value(windowWidth)).current;
 
   // Animation effects
-  const animations = {
+  const animationEffects = {
     slide: (show?: boolean) => {
       Animated.timing(slideEffectReference, {
         toValue: show ? 0 : windowHeight, 
@@ -52,6 +52,26 @@ const MainScreen = () => {
     },
   };
   
+  const animationStyles = {
+    fade: { 
+      opacity: fadeEffectReference 
+    },
+    slide: {
+      transform: [
+        { 
+          translateY: slideEffectReference 
+        }
+      ]
+    },
+    push: { 
+      transform: [
+        { 
+          translateX: pushEffectReference 
+        }
+      ] 
+    },
+  };
+
   // Tab navigation
   const toggleTab = (tabName?: string) => {
     dispatch(setTabActive(tabName));
@@ -67,25 +87,20 @@ const MainScreen = () => {
   // Prepare display
   useEffect(() => {
     const activeScreen = getActiveScreen(tabState);
-    
+
     if (activeScreen) {
       setCurrentScreen(activeScreen);
-      animations[activeScreen.effect](true);
+      animationEffects[activeScreen.effect](true);
     }
     else if (currentScreen) {
-      animations[currentScreen.effect](false);    
+      animationEffects[currentScreen.effect](false);    
       setTimeout(() => setCurrentScreen(null), Layout.animation.duration);
     }
-  
   }, [tabState]); 
-
-  const slideEffectStyle = { transform: [{ translateY: slideEffectReference }] };
-  const fadeEffectStyle = { opacity: fadeEffectReference };
-  const pushEffectStyle = { transform: [{ translateX: pushEffectReference }] };
 
   const animatedStyle = {
     ...Layout.animatedView,
-    ...slideEffectStyle,
+    ...animationStyles.slide,
   };
   
   return (
