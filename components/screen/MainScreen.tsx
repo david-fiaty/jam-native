@@ -10,6 +10,7 @@ import DeviceManager from "@/classes/DeviceManager";
 import LogoView from '../view/LogoView';
 import { setTabActive } from "@/redux/slices/TabSlice";
 import { Screens } from "@/constants/Screens";
+import { active } from "@/redux/slices/ModalSlice";
 
 const MainScreen = () => {
 
@@ -58,20 +59,17 @@ const MainScreen = () => {
   };
 
   useEffect(() => {
-    let activeTab = tabState.find(item => item.active === true);
+    const activeTab = tabState.find(item => item.active === true);
 
     console.log(activeTab);
-         
-    //console.log('zzzzzz');
-    //console.log(tabState);
     /*
-    if (tabState.active) {
+    if (activeTab) {
       animations['slide'](false);
     }
     else {
       animations['slide'](true);
     }
-      */
+    */
   }, [tabState]); 
 
   const slideEffectStyle = { transform: [{ translateY: slideEffectReference }] };
@@ -106,8 +104,7 @@ const MainScreen = () => {
         <BoxView style={Layout.modalContainer}>
           <Animated.View style={animatedStyle}>
             <BoxView style={Layout.modalContent}>
-              { /*tabState.active && Screens[tabState.active].component() */}
-              { /* true && Screens['jamsList'].component() */ }
+              { true && Screens[0].component() }
             </BoxView>
           </Animated.View>
         </BoxView>
