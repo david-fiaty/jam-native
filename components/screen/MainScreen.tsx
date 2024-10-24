@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { StyleSheet, View, Animated } from "react-native";
-import { useSelector, useDispatch } from 'react-redux';
-import { setTabActive } from "@/redux/slices/TabSlice";
+import { useSelector } from 'react-redux';
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import { Stack } from "@/constants/Stack";
@@ -20,7 +19,6 @@ const MainScreen = () => {
   const [animatedStyle, setAnimatedStyle] = useState(null);
 
   // Store state
-  const dispatch = useDispatch();
   const tabState = useSelector((state) => state.tab);
 
   // Animation references
