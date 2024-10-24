@@ -10,13 +10,13 @@ import DeviceManager from "@/classes/DeviceManager";
 import LogoView from '../view/LogoView';
 import { setTabActive } from "@/redux/slices/TabSlice";
 import { Screens } from "@/constants/Screens";
-import { active } from "@/redux/slices/ModalSlice";
 
 const MainScreen = () => {
   // Parameters
   const windowWidth = DeviceManager.window.width;
   const windowHeight = DeviceManager.window.height;
   const [currentScreen, setCurrentScreen] = useState(null);
+  const [animatedStyle, setAnimatedStyle] = useState(null);
 
   // Store state
   const dispatch = useDispatch();
@@ -73,12 +73,6 @@ const MainScreen = () => {
     },
   };
 
-  // Animated style
-  const animatedStyle = {
-    ...Layout.animatedView,
-    ...animationStyles.slide,
-  };
-
   // Tab navigation
   const toggleTab = (tabName?: string) => {
     dispatch(setTabActive(tabName));
@@ -92,20 +86,25 @@ const MainScreen = () => {
     return activeScreen;
   };
 
-  // Prepare display
+  // Display
   useEffect(() => {
     const activeScreen = getActiveScreen(tabState);
 
     if (activeScreen) {
       setCurrentScreen(activeScreen);
+      setAnimatedStyle(animationStyles[activeScreen.effect]);
       animationEffects[activeScreen.effect](true);
     }
     else if (currentScreen) {
       animationEffects[currentScreen.effect](false);    
-      setTimeout(() => setCurrentScreen(null), Layout.animation.duration);
+      setTimeout(() => {
+        setCurrentScreen(null);
+        setAnimatedStyle(animationStyles[currentScreen.effect]);
+      }, Layout.animation.duration);
     }
   }, [tabState]); 
   
+  // Render
   return (
     <ScreenView>
       <View style={styles.container}>
@@ -127,7 +126,7 @@ const MainScreen = () => {
 
         {/* Main content */}
         <BoxView style={Layout.modalContainer}>
-          <Animated.View style={animatedStyle}>
+          <Animated.View style={[Layout.animatedView, animatedStyle]}>
             <BoxView style={Layout.modalContent}>
               {currentScreen?.component?.()}
             </BoxView>
