@@ -25,9 +25,9 @@ const JamsList = () => {
         contentContainerStyle={Layout.list}
         renderItem={({item, index}) => {
           return (  
-            <View style={styles.item}>
+            <View style={styles.listItem}>
               {/* Item header */}
-              <BoxView direction="row" align="center" justify="space-between" style={styles.itemHeader}>
+              <BoxView direction="row" align="center" justify="space-between" style={styles.listItemHeader}>
                 <BoxView>
                   <TouchableOpacity onPress={() => {}}>
                     <TextView>@{i18n.t('host')} +{item.host_count}</TextView>
@@ -39,10 +39,10 @@ const JamsList = () => {
               </BoxView>
               
               {/* Item images */}
-              <ImageView source={item.image} resizeMode="cover" style={styles.itemImage} />
+              <ImageView source={item.image} resizeMode="cover" style={styles.listItemImage} />
 
               {/* Item toolbar */}
-              <BoxView direction="row" align="center" justify="space-between" style={styles.itemToolbar}>
+              <BoxView direction="row" align="center" justify="space-between" style={styles.listItemToolbar}>
                 <TouchableOpacity onPress={() => dispatch(setTabActive('JammersList'))}>
                   <BoxView direction="row" align="center">
                     <IconView name="users" size={22} theme="tertiary" />
@@ -57,26 +57,26 @@ const JamsList = () => {
               </BoxView>
 
               {/* Item description */}
-              <BoxView style={styles.itemDescription}>
+              <BoxView style={styles.listItemDescription}>
                 <TextView>{item.content}</TextView>
               </BoxView>
 
               {/* Item collapsible */}
-              <BoxView style={styles.itemCollapsible}>
+              <BoxView style={styles.listItemCollapsible}>
                 <CollapsibleView 
                   label={i18n.t('View more.')} 
                   content={
-                    <BoxView direction="column" align="flex-start" style={styles.itemDetails}>
-                      <View style={styles.itemDetail}>
+                    <BoxView direction="column" align="flex-start" style={styles.listItemDetails}>
+                      <View style={styles.listItemDetail}>
                         <TextView>Sed do eiusmod tempor</TextView>
                       </View>
-                      <View style={styles.itemDetail}>
+                      <View style={styles.listItemDetail}>
                         <TextView>Sed do eiusmod tempor</TextView>
                       </View>
-                      <View style={styles.itemDetail}>
+                      <View style={styles.listItemDetail}>
                         <TextView>Sed do eiusmod tempor</TextView>
                       </View>
-                      <View style={styles.itemDetail}>
+                      <View style={styles.listItemDetail}>
                         <TextView>Sed do eiusmod tempor</TextView>
                       </View>
                     </BoxView>
@@ -92,37 +92,37 @@ const JamsList = () => {
 };
 
 const styles = StyleSheet.create({
-  item: {
+  listItem: {
     borderWidth: 1,
     borderRadius: Layout.radius.round,
     marginBottom: Layout.space.base,
     borderColor: Colors.primary,
   }, 
-  itemHeader: {
+  listItemHeader: {
     padding: Layout.space.base,
   },
-  itemToolbar: {
+  listItemToolbar: {
     padding: Layout.space.base,
   },
-  itemDescription: {
+  listItemDescription: {
     padding: Layout.space.base,
   },
-  itemCollapsible: {
+  listItemCollapsible: {
     padding: Layout.space.base,
   },
-  itemImage: {
+  listItemImage: {
     height: 300,
     backgroundColor: Colors.secondary,
   },
-  itemDetails: {
+  listItemDetails: {
     width: '100%',
     backgroundColor: 'green',
   },
-  itemDetail: {
+  listItemDetail: {
+    width: '100%',
     backgroundColor: Colors.secondary,
     padding: Layout.space.base,
     borderRadius: Layout.radius.round,
-    width: '100%',
   },
 });
 
