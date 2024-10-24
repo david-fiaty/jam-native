@@ -139,19 +139,19 @@ const MainScreen = () => {
             name="location"
             theme="clear"
             size={22}
-            onPress={() => toggleTab('MapView')}
+            onPress={() => dispatch(setTabActive('MapView'))}
           />
           <IconView
             name="plus"
             theme="clear"
             size={22}
-            onPress={() => toggleTab('AddJamForm')}
+            onPress={() => dispatch(setTabActive('AddJamForm'))}
           />
           <IconView
             name="user"
             theme="clear"
             size={22}
-            onPress={() => toggleTab('ProfileForm')}
+            onPress={() => dispatch(setTabActive('ProfileForm'))}
           />
         </BoxView>
       </View>
