@@ -1,6 +1,6 @@
 import SettingsMenu from "@/components/menu/SettingsMenu";
 import NotificationsMenu from "@/components/menu/NotificationsMenu";
-import SearchMenu from "@/components/menu/SearchMenu";
+import SearchScreen from "@/components/screen/SearchScreen";
 import MapView from "@/components/view/MapView";
 import AddJamForm from "@/components/form/AddJamForm";
 import ProfileForm from "@/components/form/ProfileForm";
@@ -44,9 +44,9 @@ export const Screens = [
     component: () => <NotificationsMenu />,
   },
   {
-    name: 'SearchMenu', 
+    name: 'SearchScreen', 
     effect: 'push',
     active: false,
-    component: () => <SearchMenu />,
+    component: () => <SearchScreen />,
   },
 ];
