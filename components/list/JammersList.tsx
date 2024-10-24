@@ -15,7 +15,7 @@ const JammersList = () => {
   const dispatch = useDispatch();
 
   return (
-    <View style={styles.container}>
+    <BoxView direction="column">
       <BackButton
         title={i18n.t('Jammers')}
         onPress={() => dispatch(setTabActive('JammersList'))}
@@ -39,12 +39,11 @@ const JammersList = () => {
           }}
         />
       </View>
-    </View>
+    </BoxView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {},
   listContainer: {
     ...Layout.listContainer,
     ...{
