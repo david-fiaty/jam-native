@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { StyleSheet, View, Animated, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Animated } from "react-native";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import ScreenView from "../view/ScreenView";
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 import DeviceManager from "@/classes/DeviceManager";
-import LogoView from '../view/LogoView';
+
 import { setTabActive } from "@/redux/slices/TabSlice";
 import { Screens } from "@/constants/Screens";
 
@@ -109,20 +109,7 @@ const MainScreen = () => {
     <ScreenView>
       <View style={styles.container}>
         {/* Top navigation */}
-        <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
-          <BoxView direction="row" align="center" style={Layout.headerRight}>
-            <TouchableOpacity onPress={() => {}}>
-              <LogoView size={Layout.logo} />
-            </TouchableOpacity>
-          </BoxView>
-          <BoxView direction="row" align="center" justify="space-between">
-            <BoxView direction="row" align="center" style={Layout.headerRight}> 
-              <IconView name="menu" theme="secondary" size={22} onPress={() => {}} />
-              <IconView label="15+" theme="secondary" size={13} onPress={() => {}} />
-              <IconView name="search" theme="clear" size={22} onPress={() => {}} />
-            </BoxView>
-          </BoxView>
-        </BoxView>
+
 
         {/* Main content */}
         <BoxView style={Layout.modalContainer}>
