@@ -1,14 +1,13 @@
 import { TouchableOpacity } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Layout } from '@/constants/Layout';
+import { setTabActive } from "@/redux/slices/TabSlice";
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 import LogoView from '../view/LogoView';
-import { setTabActive } from "@/redux/slices/TabSlice";
 
 const HeaderNavigation = () => {
   const dispatch = useDispatch();
-  const tabState = useSelector((state) => state.tab);
   
   return (
     <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
