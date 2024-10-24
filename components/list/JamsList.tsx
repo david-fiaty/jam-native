@@ -29,7 +29,7 @@ const JamsList = () => {
               {/* Item header */}
               <BoxView direction="row" align="center" justify="space-between" style={styles.itemHeader}>
                 <BoxView>
-                  <TouchableOpacity onPress={() => dispatch(setTabActive('SettingsMenu'))}>
+                  <TouchableOpacity onPress={() => dispatch(setTabActive('JammersList'))}>
                     <TextView>@{i18n.t('host')} +{item.host_count}</TextView>
                   </TouchableOpacity>
                 </BoxView>
