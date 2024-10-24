@@ -17,7 +17,9 @@ const NotificationsMenu = ({style, children}: BaseProps) => {
         data={items} 
         renderItem={({item, index}: ListItemProps) => {
           return (
-            <TouchableOpacity onPress={() => router.push('/notification')}>
+            <TouchableOpacity onPress={() => {
+              console.log('clicked', item, index);
+            }}>
               <View style={styles.item}>
                 <TextView>{item.label}</TextView>
               </View>
