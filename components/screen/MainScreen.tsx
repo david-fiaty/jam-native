@@ -76,7 +76,7 @@ const MainScreen = () => {
   // Animated style
   const animatedStyle = {
     ...Layout.animatedView,
-    ...animationStyles.slide,
+    ...animationStyles.push,
   };
 
   // Tab navigation
