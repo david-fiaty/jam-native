@@ -13,23 +13,21 @@ import { Screens } from "@/constants/Screens";
 import { active } from "@/redux/slices/ModalSlice";
 
 const MainScreen = () => {
-
+  // Parameters
   const windowWidth = DeviceManager.window.width;
   const windowHeight = DeviceManager.window.height;
+  const [currentScreen, setCurrentScreen] = useState(null);
 
+  // Store state
   const dispatch = useDispatch();
   const tabState = useSelector((state) => state.tab);
 
-  const slideEffectReference = useRef(
-    new Animated.Value(windowHeight)
-  ).current;
-
-  const pushEffectReference = useRef(
-    new Animated.Value(windowWidth)
-  ).current;
-
+  // Animation references
   const fadeEffectReference = useRef(new Animated.Value(0)).current;
+  const slideEffectReference = useRef(new Animated.Value(windowHeight)).current;
+  const pushEffectReference = useRef(new Animated.Value(windowWidth)).current;
 
+  // Animation effects
   const animations = {
     slide: (show?: boolean) => {
       Animated.timing(slideEffectReference, {
@@ -54,6 +52,7 @@ const MainScreen = () => {
     },
   };
   
+  // Tab navigation
   const toggleTab = (tabName?: string) => {
     dispatch(setTabActive(tabName));
   };
@@ -62,9 +61,12 @@ const MainScreen = () => {
     return tabState.find(item => item.active === true);
   };
 
+  // Prepare display
   useEffect(() => {
     const activeTab = getActiveTab();
-    
+
+    console.log(activeTab);
+
     if (activeTab) {
       animations['slide'](true);
     }
