@@ -7,6 +7,7 @@ import HeaderNavigation from '@/components/navigation/HeaderNavigation';
 const screenOptions = { 
   header: (props: object) => <HeaderNavigation />,    
   headerShown: true,
+  headerMode: 'float',
   statusBarColor: Colors.background,
   statusBarStyle: 'dark',
   headerTintColor: Colors.background,    
@@ -20,6 +21,7 @@ export default function RootLayout() {
     <Provider store={Store}>
       <Stack>
         <Stack.Screen name="index" options={screenOptions} />
+        <Stack.Screen name="notification" options={screenOptions} />
       </Stack>
     </Provider>
   );
