@@ -19,7 +19,17 @@ const TabSlice = createSlice({
   initialState: initialState(),
   reducers: {
     setTabActive: (state, action) => {
-      state.map(item => item.active = item.name == action.payload ? true : false);
+      state.map(item => {
+        if (item.name == action.payload && item.active) {
+          item.active = false;
+        }
+        else if (item.name == action.payload && !item.active) {
+          item.active = true;
+        }
+        else {
+          item.active = false;
+        }
+      });
     },
   },
 });
