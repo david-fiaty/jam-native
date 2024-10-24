@@ -11,12 +11,7 @@ const initialState = () => {
     }
   }
 
-  console.log('------');
-  console.log(stack);
-
-  return {
-    active: null,
-  };
+  return stack;
 }
 
 const TabSlice = createSlice({
@@ -24,7 +19,9 @@ const TabSlice = createSlice({
   initialState: initialState(),
   reducers: {
     setTabActive: (state, action) => {
-      state.active = action.payload;
+      for (const [name, config] of Object.entries(state)) {
+        state[name].active = name == action.payload ? true : false;
+      }
     },
   },
 });
