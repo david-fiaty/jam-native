@@ -13,23 +13,21 @@ import { Screens } from "@/constants/Screens";
 import { active } from "@/redux/slices/ModalSlice";
 
 const MainScreen = () => {
-
+  // Parameters
   const windowWidth = DeviceManager.window.width;
   const windowHeight = DeviceManager.window.height;
+  const [currentScreen, setCurrentScreen] = useState(null);
 
+  // Store state
   const dispatch = useDispatch();
   const tabState = useSelector((state) => state.tab);
 
-  const slideEffectReference = useRef(
-    new Animated.Value(windowHeight)
-  ).current;
-
-  const pushEffectReference = useRef(
-    new Animated.Value(windowWidth)
-  ).current;
-
+  // Animation references
   const fadeEffectReference = useRef(new Animated.Value(0)).current;
+  const slideEffectReference = useRef(new Animated.Value(windowHeight)).current;
+  const pushEffectReference = useRef(new Animated.Value(windowWidth)).current;
 
+  // Animation effects
   const animations = {
     slide: (show?: boolean) => {
       Animated.timing(slideEffectReference, {
@@ -54,20 +52,28 @@ const MainScreen = () => {
     },
   };
   
+  // Tab navigation
   const toggleTab = (tabName?: string) => {
-    
-    //console.log(JSON.stringify(tabState, 0, 2));
-
     dispatch(setTabActive(tabName));
   };
 
-  useEffect(() => {
-    const activeTab = tabState.find(item => item.active === true);
+  const getActiveScreen = () => {
+    let activeTab = tabState.find(item => item.active === true);
+    let activeScreen = activeTab ? Screens.find(item => item.name == activeTab.name) : null;
 
-    if (activeTab) {
+    return activeScreen;
+  };
+
+  // Prepare display
+  useEffect(() => {
+    const activeScreen = getActiveScreen();
+
+    if (activeScreen) {
+      setCurrentScreen(activeScreen.component());
       animations['slide'](true);
     }
     else {
+      setCurrentScreen(null);
       animations['slide'](false);
     }
   
@@ -81,6 +87,7 @@ const MainScreen = () => {
     ...Layout.animatedView,
     ...slideEffectStyle,
   };
+  
 
   return (
     <ScreenView>
@@ -105,7 +112,7 @@ const MainScreen = () => {
         <BoxView style={Layout.modalContainer}>
           <Animated.View style={animatedStyle}>
             <BoxView style={Layout.modalContent}>
-              { true && Screens[0].component() }
+              { currentScreen }
             </BoxView>
           </Animated.View>
         </BoxView>
