@@ -57,8 +57,8 @@ const MainScreen = () => {
     dispatch(setTabActive(tabName));
   };
 
-  const getActiveScreen = () => {
-    let activeTab = tabState.find(item => item.active === true);
+  const getActiveScreen = (state: object) => {
+    let activeTab = state.find(item => item.active === true);
     let activeScreen = activeTab ? Screens.find(item => item.name == activeTab.name) : null;
 
     return activeScreen;
@@ -66,15 +66,19 @@ const MainScreen = () => {
 
   // Prepare display
   useEffect(() => {
-    const activeScreen = getActiveScreen();
+    const activeScreen = getActiveScreen(tabState);
+
+    console.log(activeScreen);
 
     if (activeScreen) {
       setCurrentScreen(activeScreen.component());
       animations['slide'](true);
     }
     else {
-      setCurrentScreen(null);
-      animations['slide'](false);
+      animations['slide'](false);    
+      setTimeout(() => {
+        setCurrentScreen(null);
+      }, 500);
     }
   
   }, [tabState]); 
