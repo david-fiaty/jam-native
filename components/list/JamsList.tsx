@@ -50,10 +50,12 @@ const JamsList = () => {
                   </BoxView>
                 </TouchableOpacity>
                 
-                <BoxView direction="row" align="center">
-                  <IconView name="save" size={22} theme="tertiary" />
-                  <IconView name="share" size={22} theme="tertiary" />
-                </BoxView> 
+                <TouchableOpacity onPress={() => dispatch(setTabActive('SaveJamView'))}>
+                  <BoxView direction="row" align="center">
+                    <IconView name="save" size={22} theme="tertiary" />
+                    <IconView name="share" size={22} theme="tertiary" />
+                  </BoxView> 
+                </TouchableOpacity>
               </BoxView>
 
               {/* Item description */}
