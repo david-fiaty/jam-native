@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { View } from 'react-native';
+import { ThemeProvider } from '@rneui/themed';
 import * as ExpoSplashScreen from 'expo-splash-screen';
 import * as ExpoFont from 'expo-font';
-import { ThemeProvider } from '@rneui/themed';
 import BaseTheme from "@/constants/BaseTheme";
 import ScreenView from '@/components/view/ScreenView';
 import SplashScreen from '@/components/screen/SplashScreen';
