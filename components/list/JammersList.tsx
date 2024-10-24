@@ -26,7 +26,7 @@ const JammersList = () => {
           contentContainerStyle={Layout.list}
           renderItem={({item, index}) => {
             return (
-              <View style={styles.item}>
+              <View style={styles.listItem}>
                 <TextView>{item.name}</TextView>
               </View>
             );
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
       backgroundColor: 'red',
     },
   },
-  item: {
+  listItem: {
     padding: Layout.space.base,
     backgroundColor: 'green',
   },
