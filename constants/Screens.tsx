@@ -8,12 +8,12 @@ import JamsList from "@/components/list/JamsList";
 import JammersList from "@/components/list/JammersList";
 
 export const Screens = {
-  MapView: () => <MapView />,
-  AddJamForm: () => <AddJamForm />,
-  ProfileForm: () => <ProfileForm />,
-  JamsList: () => <JamsList />,
-  SettingsMenu: () => <SettingsMenu />,
-  NotificationsMenu: () => <NotificationsMenu />,
-  SearchScreen: () => <SearchScreen />,
-  JammersList: () => <JammersList />,
+  MapView: <MapView />,
+  AddJamForm: <AddJamForm />,
+  ProfileForm: <ProfileForm />,
+  JamsList: <JamsList />,
+  SettingsMenu: <SettingsMenu />,
+  NotificationsMenu: <NotificationsMenu />,
+  SearchScreen: <SearchScreen />,
+  JammersList: <JammersList />,
 };
