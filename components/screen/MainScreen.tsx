@@ -1,10 +1,9 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { StyleSheet, View, Animated } from "react-native";
 import { useSelector, useDispatch } from 'react-redux';
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import ScreenView from "../view/ScreenView";
-import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 import DeviceManager from "@/classes/DeviceManager";
 import { setTabActive } from "@/redux/slices/TabSlice";
