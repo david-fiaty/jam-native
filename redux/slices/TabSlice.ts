@@ -1,17 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { Screens } from '@/constants/Screens';
+
+const initialState = () => {
+  let stack = JSON.parse(JSON.stringify(Screens));
+
+  for (const [name, config] of Object.entries(stack)) {
+    if (config.hasOwnProperty('component')) {
+      delete config['component'];
+      stack[name] = config;
+    }
+  }
+
+  return stack;
+}
 
 const TabSlice = createSlice({
   name: 'tab',
-  initialState: {},
+  initialState: initialState(),
   reducers: {
-    setInitialState: (state, action) => {
-      for (const [name, config] of Object.entries(action.payload.screens)) {
-        if (config.hasOwnProperty('component')) {
-          delete config['component'];
-          state[name] = config;
-        }
-      }    
-    },
     setTabActive: (state, action) => {
       state.map(item => {
         if (item.name == action.payload && item.active) {
@@ -28,5 +34,5 @@ const TabSlice = createSlice({
   },
 });
 
-export const { setTabActive, setInitialState } = TabSlice.actions;
+export const { setTabActive } = TabSlice.actions;
 export default TabSlice.reducer;
