@@ -50,6 +50,8 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 Email verification
 Twilio => SMS
 
+console.log(JSON.stringify(obj, 0, 2));
+
 
           <Button title="My Button" />
           <Text>{i18n.t('welcome')}</Text>
