@@ -15,13 +15,13 @@ export const Screens = [
   },
   {
     name: 'AddJamForm', 
-    effect: 'slide',
+    effect: 'push',
     active: false,
     component: () => <AddJamForm />,
   },
   {
     name: 'ProfileForm', 
-    effect: 'slide',
+    effect: 'fade',
     active: false,
     component: () => <ProfileForm />,
   },
