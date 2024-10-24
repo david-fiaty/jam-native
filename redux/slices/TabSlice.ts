@@ -1,20 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Screens } from '@/constants/Screens';
-
-const initialState = () => {
-  let stack = JSON.parse(JSON.stringify(Screens));
-  for (const [name, config] of Object.entries(stack)) {
-    if (config.hasOwnProperty('component')) {
-      delete config['component'];
-      stack[name] = config;
-    }
-  }
-  return stack;
-}
+import { Stack } from '@/constants/Stack';
 
 const TabSlice = createSlice({
   name: 'tab',
-  initialState: initialState(),
+  initialState: Stack,
   reducers: {
     setTabActive: (state, action) => {
       state.map(item => {
