@@ -73,8 +73,13 @@ const MainScreen = () => {
   };
 
   useEffect(() => {
-    console.log('zzzzzz');
-    console.log(tabState);
+    if (tabState) {
+
+      console.log(tabState);
+    }
+
+    //console.log('zzzzzz');
+    //console.log(tabState);
     /*
     if (tabState.active) {
       animations['slide'](false);
