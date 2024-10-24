@@ -53,7 +53,7 @@ const MainScreen = () => {
     },
   };
   
-  const toggleTab = (tabName?: string) => {
+  const toggleTab = (tabName?: string, screens?: object) => {
     if (tabName && tabName != tabState.active) {
       dispatch(setTabActive(tabName));
     }
@@ -104,7 +104,7 @@ const MainScreen = () => {
           <Animated.View style={animatedStyle}>
             <BoxView style={Layout.modalContent}>
               { /*tabState.active && Screens[tabState.active].component() */}
-              { true && Screens['jamsList'].component() }
+              { /* true && Screens['jamsList'].component() */ }
             </BoxView>
           </Animated.View>
         </BoxView>
@@ -115,19 +115,19 @@ const MainScreen = () => {
             name="location"
             theme="clear"
             size={22}
-            onPress={() => toggleTab('mapView')}
+            onPress={() => toggleTab('mapView', Screens)}
           />
           <IconView
             name="plus"
             theme="clear"
             size={22}
-            onPress={() => toggleTab('addJamForm')}
+            onPress={() => toggleTab('addJamForm', Screens)}
           />
           <IconView
             name="user"
             theme="clear"
             size={22}
-            onPress={() => toggleTab('profileForm')}
+            onPress={() => toggleTab('profileForm', Screens)}
           />
         </BoxView>
       </View>
