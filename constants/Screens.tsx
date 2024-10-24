@@ -9,7 +9,7 @@ import JamsList from "@/components/list/JamsList";
 export const Screens = [
   {
     name: 'MapView', 
-    effect: 'push',
+    effect: 'slide',
     active: false,
     component: () => <MapView />,
   },
@@ -21,7 +21,7 @@ export const Screens = [
   },
   {
     name: 'ProfileForm', 
-    effect: 'push',
+    effect: 'fade',
     active: false,
     component: () => <ProfileForm />,
   },
