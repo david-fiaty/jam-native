@@ -55,15 +55,16 @@ const MainScreen = () => {
   };
   
   const toggleTab = (tabName?: string) => {
-    
-    //console.log(JSON.stringify(tabState, 0, 2));
-
     dispatch(setTabActive(tabName));
   };
 
-  useEffect(() => {
-    const activeTab = tabState.find(item => item.active === true);
+  const getActiveTab = () => {
+    return tabState.find(item => item.active === true);
+  };
 
+  useEffect(() => {
+    const activeTab = getActiveTab();
+    
     if (activeTab) {
       animations['slide'](true);
     }
