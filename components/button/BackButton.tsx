@@ -26,7 +26,7 @@ const BackButton = ({title, onPress}: Props) => {
     );
   }
 
-  return (<ButtonView />);
+  return <ButtonView />;
 };
 
 export default BackButton;
