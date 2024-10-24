@@ -34,7 +34,7 @@ const JamsList = () => {
                   </TouchableOpacity>
                 </BoxView>
                 <BoxView>
-                  <IconView name="actions" size={22} theme="clear" />
+                  <IconView name="actions" size={22} theme="clear" onPress={() => dispatch(setTabActive('MoreJamView'))} />
                 </BoxView> 
               </BoxView>
               
@@ -52,7 +52,7 @@ const JamsList = () => {
                 {/* Save button */}
                 <BoxView direction="row" align="center">
                   <IconView name="save" size={22} theme="tertiary" onPress={() => dispatch(setTabActive('SaveJamView'))} />
-                  <IconView name="share" size={22} theme="tertiary" onPress={() => dispatch(setTabActive('SaveJamView'))} />
+                  <IconView name="share" size={22} theme="tertiary" onPress={() => dispatch(setTabActive('ShareJamView'))} />
                 </BoxView> 
               </BoxView>
 
