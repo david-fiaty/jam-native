@@ -118,6 +118,14 @@ export const Layout = {
     width: '100%',
     flexGrow: 1,
   },
+  borderedListContainer: {
+    width: '100%',
+    flexGrow: 1,
+    borderWidth: 1,
+    borderRadius: radius.round,
+    borderColor: Colors.primary,
+    padding: space.base,
+  },
   list: {
     flexGrow: 1,
   },
