@@ -1,13 +1,15 @@
 import { useState, useRef, useEffect } from "react";
 import { StyleSheet, View, Animated } from "react-native";
 import { useSelector, useDispatch } from 'react-redux';
+import { setTabActive } from "@/redux/slices/TabSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
+import { Stack } from "@/constants/Stack";
+import { Screens } from "@/constants/Screens";
 import ScreenView from "../view/ScreenView";
 import BoxView from "../view/BoxView";
 import DeviceManager from "@/classes/DeviceManager";
-import { setTabActive } from "@/redux/slices/TabSlice";
-import { Screens } from "@/constants/Screens";
+
 import FooterNavigation from "../navigation/FooterNavigation";
 import JamsList from "../list/JamsList";
 
@@ -81,7 +83,7 @@ const MainScreen = () => {
   // Get the active screen
   const getActiveScreen = (state: object) => {
     let activeTab = state.find(item => item.active === true);
-    let activeScreen = activeTab ? Screens.find(item => item.name == activeTab.name) : null;
+    let activeScreen = activeTab ? Stack.find(item => item.name == activeTab.name) : null;
 
     return activeScreen;
   };
@@ -117,7 +119,7 @@ const MainScreen = () => {
           {/* Modal content */}
           <Animated.View style={[Layout.animatedView, animatedStyle]}>
             <BoxView style={Layout.modalContent}>
-              {currentScreen?.component()}
+              {Screens?.[currentScreen?.name]}
             </BoxView>
           </Animated.View>
         </BoxView>
