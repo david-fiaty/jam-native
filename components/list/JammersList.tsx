@@ -1,6 +1,5 @@
 import { StyleSheet, View, FlatList } from "react-native";
 import TextView from "../view/TextView";
-import BoxView from "../view/BoxView";
 import ApiClient from "@/classes/ApiClient";
 
 const JammersList = () => {
