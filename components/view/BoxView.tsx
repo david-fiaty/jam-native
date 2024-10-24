@@ -8,11 +8,12 @@ type Props = BaseProps & {
   align?: string,
   justify?: string,
   scroll?: boolean,
+  onPress?: () => void,
   style?: object,
   children?: ReactNode,
 };
 
-const BoxView = ({direction, align, justify, scroll, style, children}: Props) => {
+const BoxView = ({direction, align, justify, scroll, onPress, style, children}: Props) => {
   const containerStyle = {
     flexDirection: direction,
     alignItems: align,
