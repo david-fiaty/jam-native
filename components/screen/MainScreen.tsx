@@ -92,7 +92,7 @@ const MainScreen = () => {
     return activeScreen;
   };
 
-  // Prepare display
+  // Display
   useEffect(() => {
     const activeScreen = getActiveScreen(tabState);
 
@@ -106,6 +106,7 @@ const MainScreen = () => {
     }
   }, [tabState]); 
   
+  // Render
   return (
     <ScreenView>
       <View style={styles.container}>
