@@ -78,6 +78,7 @@ const MainScreen = () => {
     dispatch(setTabActive(tabName));
   };
 
+  // Get the active screen
   const getActiveScreen = (state: object) => {
     let activeTab = state.find(item => item.active === true);
     let activeScreen = activeTab ? Screens.find(item => item.name == activeTab.name) : null;
@@ -99,6 +100,7 @@ const MainScreen = () => {
     }
   }, [tabState]); 
 
+  // Build the animated style
   const animatedStyle = {
     ...Layout.animatedView,
     ...animationStyles.slide,
