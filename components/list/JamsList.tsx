@@ -23,6 +23,7 @@ const JamsList = () => {
         renderItem={({item, index}) => {
           return (  
             <View style={styles.item}>
+              {/* Item header */}
               <BoxView direction="row" align="center" justify="space-between" style={styles.itemHeader}>
                 <BoxView>
                   <TextView>@{i18n.t('host')} +{item.host_count}</TextView>
@@ -32,8 +33,10 @@ const JamsList = () => {
                 </BoxView> 
               </BoxView>
               
+              {/* Item images */}
               <ImageView source={item.image} resizeMode="cover" style={styles.itemImage} />
 
+              {/* Item toolbar */}
               <BoxView direction="row" align="center" justify="space-between" style={styles.itemToolbar}>
                 <BoxView direction="row" align="center">
                   <IconView name="users" size={22} theme="tertiary" />
@@ -45,10 +48,12 @@ const JamsList = () => {
                 </BoxView> 
               </BoxView>
 
+              {/* Item description */}
               <BoxView style={styles.itemDescription}>
                 <TextView>{item.content}</TextView>
               </BoxView>
 
+              {/* Item collapsible */}
               <BoxView style={styles.itemCollapsible}>
                 <CollapsibleView 
                   label={i18n.t('View more.')} 
