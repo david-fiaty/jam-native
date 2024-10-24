@@ -1,6 +1,6 @@
 import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { setTabActive } from "@/redux/slices/TabSlice";
+//import { setTabActive } from "@/redux/slices/TabSlice";
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 import TextView from '../view/TextView';
@@ -29,7 +29,7 @@ const JamsList = () => {
               {/* Item header */}
               <BoxView direction="row" align="center" justify="space-between" style={styles.itemHeader}>
                 <BoxView>
-                  <TouchableOpacity onPress={() => dispatch(setTabActive('JammersList'))}>
+                  <TouchableOpacity onPress={() => console.log('clicked') /*dispatch(setTabActive('JammersList'))*/ }>
                     <TextView>@{i18n.t('host')} +{item.host_count}</TextView>
                   </TouchableOpacity>
                 </BoxView>
