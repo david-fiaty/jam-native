@@ -16,7 +16,7 @@ const JamsList = () => {
   const dispatch = useDispatch();
 
   return (
-    <View style={Layout.listContainer}>
+    <BoxView direction="column" style={Layout.listContainer}>
       <FlatList 
         data={data} 
         numColumns={1}
@@ -29,7 +29,7 @@ const JamsList = () => {
               {/* Item header */}
               <BoxView direction="row" align="center" justify="space-between" style={styles.listItemHeader}>
                 <BoxView>
-                  <TouchableOpacity onPress={() => {}}>
+                  <TouchableOpacity onPress={() => dispatch(setTabActive('HostsList'))}>
                     <TextView>@{i18n.t('host')} +{item.host_count}</TextView>
                   </TouchableOpacity>
                 </BoxView>
@@ -43,16 +43,16 @@ const JamsList = () => {
 
               {/* Item toolbar */}
               <BoxView direction="row" align="center" justify="space-between" style={styles.listItemToolbar}>
-                <TouchableOpacity onPress={() => dispatch(setTabActive('JammersList'))}>
-                  <BoxView direction="row" align="center">
-                    <IconView name="users" size={22} theme="tertiary" />
-                    <TextView>{item.host_count} {i18n.t('jammers')}</TextView>
-                  </BoxView>
-                </TouchableOpacity>
-                
+                {/* Jammers button */}
+                <BoxView direction="row" align="center" onPress={() => dispatch(setTabActive('JammersList'))}>
+                  <IconView name="users" size={22} theme="tertiary" />
+                  <TextView>{item.host_count} {i18n.t('jammers')}</TextView>
+                </BoxView>
+              
+                {/* Save button */}
                 <BoxView direction="row" align="center">
-                  <IconView name="save" size={22} theme="tertiary" />
-                  <IconView name="share" size={22} theme="tertiary" />
+                  <IconView name="save" size={22} theme="tertiary" onPress={() => dispatch(setTabActive('SaveJamView'))} />
+                  <IconView name="share" size={22} theme="tertiary" onPress={() => dispatch(setTabActive('SaveJamView'))} />
                 </BoxView> 
               </BoxView>
 
@@ -87,7 +87,7 @@ const JamsList = () => {
           );
         }}
       />
-    </View>
+    </BoxView>
   );
 };
 

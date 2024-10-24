@@ -6,14 +6,18 @@ import AddJamForm from "@/components/form/AddJamForm";
 import ProfileForm from "@/components/form/ProfileForm";
 import JamsList from "@/components/list/JamsList";
 import JammersList from "@/components/list/JammersList";
+import HostsList from "@/components/list/HostsList";
+import SaveJamView from "@/components/view/SaveJamView";
 
 export const Screens = {
+  JamsList: <JamsList />,
   MapView: <MapView />,
   AddJamForm: <AddJamForm />,
   ProfileForm: <ProfileForm />,
-  JamsList: <JamsList />,
   SettingsMenu: <SettingsMenu />,
   NotificationsMenu: <NotificationsMenu />,
   SearchScreen: <SearchScreen />,
   JammersList: <JammersList />,
+  HostsList: <HostsList />,
+  SaveJamView: <SaveJamView />,
 };

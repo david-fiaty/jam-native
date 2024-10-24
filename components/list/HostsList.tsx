@@ -10,15 +10,15 @@ import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
 import { Colors } from "@/constants/Colors";
 
-const JammersList = () => {
-  const data = ApiClient.get('jammers');
+const HostsList = () => {
+  const data = ApiClient.get('hosts');
   const dispatch = useDispatch();
 
   return (
     <BoxView direction="column">
       <BackButton
-        title={i18n.t('Jammers')}
-        onPress={() => dispatch(setTabActive('JammersList'))}
+        title={i18n.t('Jam hosts')}
+        onPress={() => dispatch(setTabActive('HostsList'))}
       />
       <View style={Layout.borderedListContainer}>
         <FlatList
@@ -44,18 +44,9 @@ const JammersList = () => {
 };
 
 const styles = StyleSheet.create({
-  listContainer: {
-    ...Layout.listContainer,
-    ...{
-      borderWidth: 1,
-      borderRadius: Layout.radius.round,
-      borderColor: Colors.primary,
-      padding: Layout.space.base,
-    },
-  },
   listItem: {
     padding: Layout.space.small,
   },
 });
 
-export default JammersList;
+export default HostsList;
