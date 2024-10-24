@@ -88,7 +88,6 @@ const MainScreen = () => {
     ...slideEffectStyle,
   };
   
-
   return (
     <ScreenView>
       <View style={styles.container}>
