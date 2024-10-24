@@ -1,8 +1,6 @@
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import { GlobalStyles } from '@/constants/GlobalStyles';
+import { TouchableOpacity } from 'react-native';
 import IconView from '../view/IconView';
 import TextView from '../view/TextView';
-import { Layout } from '@/constants/Layout';
 import BoxView from '../view/BoxView';
 
 type Props = {
@@ -30,13 +28,5 @@ const BackButton = ({title, onPress}: Props) => {
 
   return (<ButtonView />);
 };
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    gap: Layout.space.base,
-  },
-});
 
 export default BackButton;
