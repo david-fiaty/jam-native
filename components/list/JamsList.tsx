@@ -16,7 +16,7 @@ const JamsList = () => {
   const dispatch = useDispatch();
 
   return (
-    <View style={Layout.listContainer}>
+    <BoxView direction="column" style={Layout.listContainer}>
       <FlatList 
         data={data} 
         numColumns={1}
@@ -87,7 +87,7 @@ const JamsList = () => {
           );
         }}
       />
-    </View>
+    </BoxView>
   );
 };
 
