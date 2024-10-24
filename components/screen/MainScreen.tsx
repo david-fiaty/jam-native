@@ -113,7 +113,7 @@ const MainScreen = () => {
         <BoxView style={Layout.modalContainer}>
           <Animated.View style={[Layout.animatedView, animatedStyle]}>
             <BoxView style={Layout.modalContent}>
-              {currentScreen?.component?.()}
+              {currentScreen?.component()}
             </BoxView>
           </Animated.View>
         </BoxView>
