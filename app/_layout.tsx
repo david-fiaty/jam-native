@@ -1,8 +1,17 @@
 import { Stack } from 'expo-router';
+import { Colors } from '@/constants/Colors';
+import HeaderNavigation from '@/components/navigation/HeaderNavigation';
+
 
 const screenOptions = { 
-  headerShown: false,
+  header: (props: object) => <HeaderNavigation />,    
+  headerShown: true,
+  statusBarColor: Colors.background,
   statusBarStyle: 'dark',
+  headerTintColor: Colors.background,    
+  headerStyle: {
+    backgroundColor: Colors.background, 
+  },
 };
 
 export default function RootLayout() {
