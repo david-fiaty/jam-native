@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import TabReducer from './slices/TabSlice';
-import ModalReducer from './slices/ModalSlice';
+import JamReducer from './slices/JamSlice';
 
 const Store = configureStore({
   reducer: {
     tab: TabReducer,
-    modal: ModalReducer,
+    jam: JamReducer,
   },
 });
 
