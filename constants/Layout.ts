@@ -57,7 +57,7 @@ export const Layout = {
   logo: logo,
   footer: footer,
   animation: {
-    duration: 500,
+    duration: 300,
   },
   headerLeft: {
     gap: space.base,
