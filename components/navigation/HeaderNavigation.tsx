@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { Layout } from '@/constants/Layout';
 import { setTabActive } from "@/redux/slices/TabSlice";
+import { Layout } from '@/constants/Layout';
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 import LogoView from '../view/LogoView';

@@ -114,5 +114,12 @@ export const Layout = {
     height: space.base*4,
     justifyContent: 'flex-start',
   },
+  listContainer: {
+    width: '100%',
+    flexGrow: 1,
+  },
+  list: {
+    flexGrow: 1,
+  },
 };
 
