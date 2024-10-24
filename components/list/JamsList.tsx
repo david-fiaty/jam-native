@@ -86,7 +86,7 @@ const JamsList = () => {
       />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
