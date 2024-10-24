@@ -54,21 +54,35 @@ const MainScreen = () => {
   };
   
   const toggleTab = (tabName?: string) => {
+
+    dispatch(setTabActive(tabName));
+    //console.log('+++++++++++++++++++++++++++++++++++');
+    //console.log(tabName); 
+    //console.log(tabState); 
+
+
+
+    /*
     if (tabName && tabName != tabState.active) {
-      dispatch(setTabActive(tabName));
+      //dispatch(setTabActive(tabName));
     }
     else if (!tabName || tabName == tabState.active) {
-      dispatch(setTabActive(null));
+      //dispatch(setTabActive(null));
     }
+    */
   };
 
   useEffect(() => {
+    console.log('zzzzzz');
+    console.log(tabState);
+    /*
     if (tabState.active) {
       animations['slide'](false);
     }
     else {
       animations['slide'](true);
     }
+      */
   }, [tabState]); 
 
   const slideEffectStyle = { transform: [{ translateY: slideEffectReference }] };
@@ -104,7 +118,7 @@ const MainScreen = () => {
           <Animated.View style={animatedStyle}>
             <BoxView style={Layout.modalContent}>
               { /*tabState.active && Screens[tabState.active].component() */}
-              { true && Screens['jamsList'].component() }
+              { /* true && Screens['jamsList'].component() */ }
             </BoxView>
           </Animated.View>
         </BoxView>
