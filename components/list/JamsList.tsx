@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import TextView from '../view/TextView';
@@ -11,7 +10,6 @@ import IconView from '../view/IconView';
 import CollapsibleView from '../view/CollapsibleView';
 
 const JamsList = () => {  
-  const [selectedOption, setSelectedOption] = useState(null);
   const data = ApiClient.get('jams');
 
   return (
@@ -20,9 +18,12 @@ const JamsList = () => {
         data={data} 
         numColumns={1}
         scrollEnabled={true}
+        horizontal={false}
+        contentContainerStyle={styles.contentContainerStyle}
         renderItem={({item, index}) => {
           return (  
             <View style={styles.item}>
+              {/* Item header */}
               <BoxView direction="row" align="center" justify="space-between" style={styles.itemHeader}>
                 <BoxView>
                   <TextView>@{i18n.t('host')} +{item.host_count}</TextView>
@@ -32,8 +33,10 @@ const JamsList = () => {
                 </BoxView> 
               </BoxView>
               
+              {/* Item images */}
               <ImageView source={item.image} resizeMode="cover" style={styles.itemImage} />
 
+              {/* Item toolbar */}
               <BoxView direction="row" align="center" justify="space-between" style={styles.itemToolbar}>
                 <BoxView direction="row" align="center">
                   <IconView name="users" size={22} theme="tertiary" />
@@ -45,10 +48,12 @@ const JamsList = () => {
                 </BoxView> 
               </BoxView>
 
+              {/* Item description */}
               <BoxView style={styles.itemDescription}>
                 <TextView>{item.content}</TextView>
               </BoxView>
 
+              {/* Item collapsible */}
               <BoxView style={styles.itemCollapsible}>
                 <CollapsibleView 
                   label={i18n.t('View more.')} 
@@ -81,6 +86,10 @@ const JamsList = () => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+    flexGrow: 1,
+  },
+  contentContainerStyle: {
+    flexGrow: 1,
   },
   item: {
     borderWidth: 1,
