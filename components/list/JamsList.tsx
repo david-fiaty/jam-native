@@ -16,13 +16,13 @@ const JamsList = () => {
   const dispatch = useDispatch();
 
   return (
-    <View style={styles.listContainer}>
+    <View style={Layout.listContainer}>
       <FlatList 
         data={data} 
         numColumns={1}
         scrollEnabled={true}
         horizontal={false}
-        contentContainerStyle={styles.list}
+        contentContainerStyle={Layout.list}
         renderItem={({item, index}) => {
           return (  
             <View style={styles.item}>
@@ -92,13 +92,6 @@ const JamsList = () => {
 };
 
 const styles = StyleSheet.create({
-  listContainer: {
-    width: '100%',
-    flexGrow: 1,
-  },
-  list: {
-    flexGrow: 1,
-  },
   item: {
     borderWidth: 1,
     borderRadius: Layout.radius.round,
