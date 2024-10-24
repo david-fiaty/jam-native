@@ -60,12 +60,16 @@ const MainScreen = () => {
 
   useEffect(() => {
     const activeTab = tabState.find(item => item.active === true);
+
+    console.log(activeTab);
+    /*
     if (activeTab) {
       animations['slide'](false);
     }
     else {
       animations['slide'](true);
     }
+    */
   }, [tabState]); 
 
   const slideEffectStyle = { transform: [{ translateY: slideEffectReference }] };
