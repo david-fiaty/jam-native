@@ -32,21 +32,21 @@ const MainScreen = () => {
     slide: (show?: boolean) => {
       Animated.timing(slideEffectReference, {
         toValue: show ? 0 : windowHeight, 
-        duration: 500, 
+        duration: Layout.animation.duration, 
         useNativeDriver: true, 
       }).start();
     },
     fade: (show?: boolean) => {
       Animated.timing(fadeEffectReference, {
         toValue: show ? 1 : 0, 
-        duration: 500, 
+        duration: Layout.animation.duration, 
         useNativeDriver: true, 
       }).start();
     },
     push: (show?: boolean) => {
       Animated.timing(pushEffectReference, {
         toValue: show ? 0 : windowWidth, 
-        duration: 500, 
+        duration: Layout.animation.duration, 
         useNativeDriver: true, 
       }).start();
     },
@@ -76,7 +76,7 @@ const MainScreen = () => {
       animations['slide'](false);    
       setTimeout(() => {
         setCurrentScreen(null);
-      }, 500);
+      }, Layout.animation.duration);
     }
   
   }, [tabState]); 

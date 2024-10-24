@@ -43,6 +43,9 @@ export const Layout = {
   logo: logo,
   footer: footer,
   fontSize: 14,
+  animation: {
+    duration: 500,
+  },
   headerLeft: {
     gap: space.base,
   },
