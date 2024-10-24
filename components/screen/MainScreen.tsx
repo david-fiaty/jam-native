@@ -67,16 +67,14 @@ const MainScreen = () => {
   // Prepare display
   useEffect(() => {
     const activeScreen = getActiveScreen(tabState);
-
     if (activeScreen) {
-      setCurrentScreen(activeScreen.component());
+      setCurrentScreen(activeScreen);
       animations[activeScreen.effect](true);
     }
-    else {
+    else if (currentScreen) {
+      console.log(currentScreen);
       animations['slide'](false);    
-      setTimeout(() => {
-        setCurrentScreen(null);
-      }, Layout.animation.duration);
+      setTimeout(() => setCurrentScreen(null), Layout.animation.duration);
     }
   
   }, [tabState]); 
@@ -113,7 +111,7 @@ const MainScreen = () => {
         <BoxView style={Layout.modalContainer}>
           <Animated.View style={animatedStyle}>
             <BoxView style={Layout.modalContent}>
-              {currentScreen}
+              {currentScreen?.component?.()}
             </BoxView>
           </Animated.View>
         </BoxView>
