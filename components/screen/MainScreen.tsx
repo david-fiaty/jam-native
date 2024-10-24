@@ -73,6 +73,12 @@ const MainScreen = () => {
     },
   };
 
+  // Animated style
+  const animatedStyle = {
+    ...Layout.animatedView,
+    ...animationStyles.slide,
+  };
+
   // Tab navigation
   const toggleTab = (tabName?: string) => {
     dispatch(setTabActive(tabName));
@@ -99,12 +105,6 @@ const MainScreen = () => {
       setTimeout(() => setCurrentScreen(null), Layout.animation.duration);
     }
   }, [tabState]); 
-
-  // Build the animated style
-  const animatedStyle = {
-    ...Layout.animatedView,
-    ...animationStyles.slide,
-  };
   
   return (
     <ScreenView>

@@ -69,14 +69,14 @@ const styles = StyleSheet.create({
   },
   placeholderStyle: {
     color: Colors.primary,
-    fontSize: Layout.fontSize,
+    fontSize: Layout.fontSize.base,
   },
   itemTextStyle: {
     padding: Layout.space.base,
   },
   selectedTextStyle: {
     color: Colors.primary,
-    fontSize: Layout.fontSize,
+    fontSize: Layout.fontSize.base,
   },
 });
 
