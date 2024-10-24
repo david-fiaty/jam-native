@@ -57,20 +57,23 @@ const MainScreen = () => {
     dispatch(setTabActive(tabName));
   };
 
-  const getActiveTab = () => {
-    return tabState.find(item => item.active === true);
+  const getActiveScreen = () => {
+    let activeTab = tabState.find(item => item.active === true);
+    let activeScreen = activeTab ? Screens.find(item => item.name == activeTab.name) : null;
+
+    return activeScreen;
   };
 
   // Prepare display
   useEffect(() => {
-    const activeTab = getActiveTab();
+    const activeScreen = getActiveScreen();
 
-    console.log(activeTab);
-
-    if (activeTab) {
+    if (activeScreen) {
+      setCurrentScreen(activeScreen.component());
       animations['slide'](true);
     }
     else {
+      setCurrentScreen(null);
       animations['slide'](false);
     }
   
@@ -84,6 +87,7 @@ const MainScreen = () => {
     ...Layout.animatedView,
     ...slideEffectStyle,
   };
+  
 
   return (
     <ScreenView>
@@ -108,7 +112,7 @@ const MainScreen = () => {
         <BoxView style={Layout.modalContainer}>
           <Animated.View style={animatedStyle}>
             <BoxView style={Layout.modalContent}>
-              { true && Screens[0].component() }
+              { currentScreen }
             </BoxView>
           </Animated.View>
         </BoxView>
