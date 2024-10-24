@@ -12,7 +12,7 @@ const HeaderNavigation = () => {
   const dispatch = useDispatch();
   
   useEffect(() => {
-    setIsLoaded(true);
+    setTimeout(() => setIsLoaded(true), Layout.animation.duration*1.5);
   });
 
   if (!isLoaded) return <></>;
