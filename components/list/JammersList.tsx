@@ -6,6 +6,9 @@ import TextView from "../view/TextView";
 import ApiClient from "@/classes/ApiClient";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
+import BoxView from "../view/BoxView";
+import IconView from "../view/IconView";
+import { Colors } from "@/constants/Colors";
 
 const JammersList = () => {
   const data = ApiClient.get('jammers');
@@ -26,9 +29,10 @@ const JammersList = () => {
           contentContainerStyle={Layout.list}
           renderItem={({item, index}) => {
             return (
-              <View style={styles.listItem}>
+              <BoxView direction="row" align="center" justify="flex-start" style={styles.listItem}>
+                <IconView name="user" size={22} theme="tertiary" />
                 <TextView>{item.name}</TextView>
-              </View>
+              </BoxView>
             );
           }}
         />
@@ -42,13 +46,14 @@ const styles = StyleSheet.create({
   listContainer: {
     ...Layout.listContainer,
     ...{
+      borderWidth: 1,
+      borderRadius: Layout.radius.round,
+      borderColor: Colors.primary,
       padding: Layout.space.base,
-      backgroundColor: 'red',
     },
   },
   listItem: {
-    padding: Layout.space.base,
-    backgroundColor: 'green',
+    padding: Layout.space.small,
   },
 });
 
