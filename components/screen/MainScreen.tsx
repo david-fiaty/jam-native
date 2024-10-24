@@ -1,16 +1,14 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { StyleSheet, View, Animated } from "react-native";
 import { useSelector, useDispatch } from 'react-redux';
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import ScreenView from "../view/ScreenView";
-import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 import DeviceManager from "@/classes/DeviceManager";
 import { setTabActive } from "@/redux/slices/TabSlice";
 import { Screens } from "@/constants/Screens";
 import FooterNavigation from "../navigation/FooterNavigation";
-import HeaderNavigation from "../navigation/HeaderNavigation";
 
 const MainScreen = () => {
   // Parameters
@@ -109,8 +107,6 @@ const MainScreen = () => {
   return (
     <ScreenView>
       <View style={styles.container}>
-        {/* Header navigation */}
-        <HeaderNavigation />
         
         {/* Main content */}
         <BoxView style={Layout.modalContainer}>
@@ -121,7 +117,7 @@ const MainScreen = () => {
           </Animated.View>
         </BoxView>
 
-        {/* Footer navigation */}
+        {/* Bottom navigation */}
         <FooterNavigation />
       </View>
     </ScreenView>
