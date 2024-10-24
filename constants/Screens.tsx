@@ -5,6 +5,7 @@ import MapView from "@/components/view/MapView";
 import AddJamForm from "@/components/form/AddJamForm";
 import ProfileForm from "@/components/form/ProfileForm";
 import JamsList from "@/components/list/JamsList";
+import JammersList from "@/components/list/JammersList";
 
 export const Screens = [
   {
@@ -48,5 +49,11 @@ export const Screens = [
     effect: 'push',
     active: false,
     component: () => <SearchScreen />,
+  },
+  {
+    name: 'JammersList', 
+    effect: 'slide',
+    active: false,
+    component: () => <JammersList />,
   },
 ];
