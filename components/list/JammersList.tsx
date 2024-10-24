@@ -1,6 +1,7 @@
 import { StyleSheet, View, FlatList } from "react-native";
 import { useDispatch } from 'react-redux';
 import { setTabActive } from "@/redux/slices/TabSlice";
+import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
 import ApiClient from "@/classes/ApiClient";
 import BackButton from "../button/BackButton";
@@ -22,7 +23,7 @@ const JammersList = () => {
           numColumns={1}
           scrollEnabled={true}
           horizontal={false}
-          contentContainerStyle={styles.list}
+          contentContainerStyle={Layout.list}
           renderItem={({item, index}) => {
             return (
               <View style={styles.item}>
@@ -37,13 +38,12 @@ const JammersList = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {},
   listContainer: {
-    width: '100%',
-    flexGrow: 1,
-    backgroundColor: 'red',
-  },
-  list: {
-    flexGrow: 1,
+    ...Layout.listContainer,
+    ...{
+      backgroundColor: 'red',
+    },
   },
 });
 
