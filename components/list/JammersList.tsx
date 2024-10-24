@@ -20,7 +20,7 @@ const JammersList = () => {
         title={i18n.t('Jammers')}
         onPress={() => dispatch(setTabActive('JammersList'))}
       />
-      <View style={styles.listContainer}>
+      <View style={Layout.borderedListContainer}>
         <FlatList
           data={data}
           numColumns={1}
