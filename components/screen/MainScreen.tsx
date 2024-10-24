@@ -67,13 +67,13 @@ const MainScreen = () => {
   // Prepare display
   useEffect(() => {
     const activeScreen = getActiveScreen(tabState);
+    
     if (activeScreen) {
       setCurrentScreen(activeScreen);
       animations[activeScreen.effect](true);
     }
     else if (currentScreen) {
-      console.log(currentScreen);
-      animations['slide'](false);    
+      animations[currentScreen.effect](false);    
       setTimeout(() => setCurrentScreen(null), Layout.animation.duration);
     }
   
