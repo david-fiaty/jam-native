@@ -54,27 +54,16 @@ const MainScreen = () => {
   };
   
   const toggleTab = (tabName?: string) => {
-
     dispatch(setTabActive(tabName));
-    //console.log('+++++++++++++++++++++++++++++++++++');
-    //console.log(tabName); 
-    //console.log(tabState); 
-
-
-
-    /*
-    if (tabName && tabName != tabState.active) {
-      //dispatch(setTabActive(tabName));
-    }
-    else if (!tabName || tabName == tabState.active) {
-      //dispatch(setTabActive(null));
-    }
-    */
   };
 
   useEffect(() => {
-    console.log('zzzzzz');
-    console.log(tabState);
+    let activeTab = tabState.find(item => item.active === true);
+
+    console.log(activeTab);
+         
+    //console.log('zzzzzz');
+    //console.log(tabState);
     /*
     if (tabState.active) {
       animations['slide'](false);
@@ -129,19 +118,19 @@ const MainScreen = () => {
             name="location"
             theme="clear"
             size={22}
-            onPress={() => toggleTab('mapView')}
+            onPress={() => toggleTab('MapView')}
           />
           <IconView
             name="plus"
             theme="clear"
             size={22}
-            onPress={() => toggleTab('addJamForm')}
+            onPress={() => toggleTab('AddJamForm')}
           />
           <IconView
             name="user"
             theme="clear"
             size={22}
-            onPress={() => toggleTab('profileForm')}
+            onPress={() => toggleTab('ProfileForm')}
           />
         </BoxView>
       </View>
