@@ -3,11 +3,10 @@ import { BaseProps } from '@/constants/Types';
 import TextView from '../view/TextView';
 
 type Props = BaseProps & {
-  item: object,
-  style?: object,
+  item?: object,
 };
 
-const NotificationScreen = ({item, style}: Props) => {
+const NotificationScreen = ({item}: Props) => {
   
   console.log(item);
 
