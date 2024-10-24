@@ -6,40 +6,47 @@ import AddJamForm from "@/components/form/AddJamForm";
 import ProfileForm from "@/components/form/ProfileForm";
 import JamsList from "@/components/list/JamsList";
 
-export const Screens = {
-  jamsList: {
+export const Screens = [
+  {
+    name: 'MapView', 
+    effect: 'push',
+    active: false,
+    component: () => <MapView />,
+  },
+  {
+    name: 'AddJamForm', 
+    effect: 'push',
+    active: false,
+    component: () => <AddJamForm />,
+  },
+  {
+    name: 'ProfileForm', 
+    effect: 'push',
+    active: false,
+    component: () => <ProfileForm />,
+  },
+  {
+    name: 'JamsList', 
     effect: 'push',
     active: false,
     component: () => <JamsList />,
   },
-  settingsMenu: {
+  {
+    name: 'SettingsMenu', 
     effect: 'push',
     active: false,
     component: () => <SettingsMenu />,
   },
-  notificationsMenu: {
-    effect: 'fade',
+  {
+    name: 'NotificationsMenu', 
+    effect: 'push',
     active: false,
     component: () => <NotificationsMenu />,
   },
-  searchMenu: {
-    effect: 'slide',
+  {
+    name: 'SearchMenu', 
+    effect: 'push',
     active: false,
     component: () => <SearchMenu />,
   },
-  mapView: {
-    effect: 'slide',
-    active: false,
-    component: () => <MapView />,
-  },
-  addJamForm: {
-    effect: 'fade',
-    active: false,
-    component: () => <AddJamForm />,
-  },
-  profileForm: {
-    effect: 'fade',
-    active: false,
-    component: () => <ProfileForm />,
-  },
-};
+];
