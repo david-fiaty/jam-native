@@ -68,8 +68,6 @@ const MainScreen = () => {
   useEffect(() => {
     const activeScreen = getActiveScreen(tabState);
 
-    console.log(activeScreen);
-
     if (activeScreen) {
       setCurrentScreen(activeScreen.component());
       animations['slide'](true);
@@ -115,7 +113,7 @@ const MainScreen = () => {
         <BoxView style={Layout.modalContainer}>
           <Animated.View style={animatedStyle}>
             <BoxView style={Layout.modalContent}>
-              { currentScreen }
+              {currentScreen}
             </BoxView>
           </Animated.View>
         </BoxView>
