@@ -74,11 +74,6 @@ const MainScreen = () => {
     },
   };
 
-  // Tab navigation
-  const toggleTab = (tabName?: string) => {
-    dispatch(setTabActive(tabName));
-  };
-
   // Get the active screen
   const getActiveScreen = (state: object) => {
     let activeTab = state.find(item => item.active === true);
