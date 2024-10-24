@@ -52,23 +52,24 @@ const MainScreen = () => {
     },
   };
   
+  // Animation styles
   const animationStyles = {
     fade: { 
-      opacity: fadeEffectReference 
+      opacity: fadeEffectReference,
     },
     slide: {
       transform: [
         { 
-          translateY: slideEffectReference 
+          translateY: slideEffectReference,
         }
-      ]
+      ],
     },
     push: { 
       transform: [
         { 
-          translateX: pushEffectReference 
-        }
-      ] 
+          translateX: pushEffectReference,
+        },
+      ],
     },
   };
 
