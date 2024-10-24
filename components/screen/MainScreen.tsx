@@ -53,22 +53,36 @@ const MainScreen = () => {
     },
   };
   
-  const toggleTab = (tabName?: string, screens?: object) => {
+  const toggleTab = (tabName?: string) => {
+
+    dispatch(setTabActive(tabName));
+    //console.log('+++++++++++++++++++++++++++++++++++');
+    //console.log(tabName); 
+    //console.log(tabState); 
+
+
+
+    /*
     if (tabName && tabName != tabState.active) {
-      dispatch(setTabActive(tabName));
+      //dispatch(setTabActive(tabName));
     }
     else if (!tabName || tabName == tabState.active) {
-      dispatch(setTabActive(null));
+      //dispatch(setTabActive(null));
     }
+    */
   };
 
   useEffect(() => {
+    console.log('zzzzzz');
+    console.log(tabState);
+    /*
     if (tabState.active) {
       animations['slide'](false);
     }
     else {
       animations['slide'](true);
     }
+      */
   }, [tabState]); 
 
   const slideEffectStyle = { transform: [{ translateY: slideEffectReference }] };
@@ -115,19 +129,19 @@ const MainScreen = () => {
             name="location"
             theme="clear"
             size={22}
-            onPress={() => toggleTab('mapView', Screens)}
+            onPress={() => toggleTab('mapView')}
           />
           <IconView
             name="plus"
             theme="clear"
             size={22}
-            onPress={() => toggleTab('addJamForm', Screens)}
+            onPress={() => toggleTab('addJamForm')}
           />
           <IconView
             name="user"
             theme="clear"
             size={22}
-            onPress={() => toggleTab('profileForm', Screens)}
+            onPress={() => toggleTab('profileForm')}
           />
         </BoxView>
       </View>
