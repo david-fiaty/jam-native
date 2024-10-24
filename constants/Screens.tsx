@@ -8,6 +8,8 @@ import JamsList from "@/components/list/JamsList";
 import JammersList from "@/components/list/JammersList";
 import HostsList from "@/components/list/HostsList";
 import SaveJamView from "@/components/view/SaveJamView";
+import ShareJamView from "@/components/view/ShareJamView";
+import MoreJamView from "@/components/view/MoreJamView";
 
 export const Screens = {
   JamsList: <JamsList />,
@@ -20,4 +22,6 @@ export const Screens = {
   JammersList: <JammersList />,
   HostsList: <HostsList />,
   SaveJamView: <SaveJamView />,
+  ShareJamView: <ShareJamView />,
+  MoreJamView: <MoreJamView />,
 };
