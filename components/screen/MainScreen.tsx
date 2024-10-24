@@ -9,6 +9,7 @@ import DeviceManager from "@/classes/DeviceManager";
 import { setTabActive } from "@/redux/slices/TabSlice";
 import { Screens } from "@/constants/Screens";
 import FooterNavigation from "../navigation/FooterNavigation";
+import JamsList from "../list/JamsList";
 
 const MainScreen = () => {
   // Parameters
@@ -107,9 +108,13 @@ const MainScreen = () => {
   return (
     <ScreenView>
       <View style={styles.container}>
-        
-        {/* Main content */}
         <BoxView style={Layout.modalContainer}>
+          {/* Main content */}
+          <BoxView style={Layout.modalContent}>
+            <JamsList />
+          </BoxView>
+
+          {/* Modal content */}
           <Animated.View style={[Layout.animatedView, animatedStyle]}>
             <BoxView style={Layout.modalContent}>
               {currentScreen?.component()}
