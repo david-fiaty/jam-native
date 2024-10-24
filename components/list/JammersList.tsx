@@ -42,8 +42,13 @@ const styles = StyleSheet.create({
   listContainer: {
     ...Layout.listContainer,
     ...{
+      padding: Layout.space.base,
       backgroundColor: 'red',
     },
+  },
+  item: {
+    padding: Layout.space.base,
+    backgroundColor: 'green',
   },
 });
 
