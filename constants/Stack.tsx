@@ -44,4 +44,9 @@ export const Stack = [
     effect: 'slide',
     active: false,
   },
+  {
+    name: 'SaveJamView', 
+    effect: 'slide',
+    active: false,
+  },
 ];
