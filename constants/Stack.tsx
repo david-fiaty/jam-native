@@ -1,5 +1,10 @@
 export const Stack = [
   {
+    name: 'JamsList', 
+    effect: 'push',
+    active: false,
+  },
+  {
     name: 'MapView', 
     effect: 'slide',
     active: false,
@@ -12,11 +17,6 @@ export const Stack = [
   {
     name: 'ProfileForm', 
     effect: 'fade',
-    active: false,
-  },
-  {
-    name: 'JamsList', 
-    effect: 'push',
     active: false,
   },
   {
@@ -36,6 +36,11 @@ export const Stack = [
   },
   {
     name: 'JammersList', 
+    effect: 'slide',
+    active: false,
+  },
+  {
+    name: 'HostsList', 
     effect: 'slide',
     active: false,
   },

@@ -10,15 +10,15 @@ import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
 import { Colors } from "@/constants/Colors";
 
-const JammersList = () => {
-  const data = ApiClient.get('jammers');
+const HostsList = () => {
+  const data = ApiClient.get('hosts');
   const dispatch = useDispatch();
 
   return (
     <BoxView direction="column">
       <BackButton
-        title={i18n.t('Jammers')}
-        onPress={() => dispatch(setTabActive('JammersList'))}
+        title={i18n.t('Jam hosts')}
+        onPress={() => dispatch(setTabActive('HostsList'))}
       />
       <View style={styles.listContainer}>
         <FlatList
@@ -58,4 +58,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default JammersList;
+export default HostsList;
