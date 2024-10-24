@@ -20,7 +20,7 @@ const HostsList = () => {
         title={i18n.t('Jam hosts')}
         onPress={() => dispatch(setTabActive('HostsList'))}
       />
-      <View style={styles.listContainer}>
+      <View style={Layout.borderedListContainer}>
         <FlatList
           data={data}
           numColumns={1}
@@ -44,15 +44,6 @@ const HostsList = () => {
 };
 
 const styles = StyleSheet.create({
-  listContainer: {
-    ...Layout.listContainer,
-    ...{
-      borderWidth: 1,
-      borderRadius: Layout.radius.round,
-      borderColor: Colors.primary,
-      padding: Layout.space.base,
-    },
-  },
   listItem: {
     padding: Layout.space.small,
   },

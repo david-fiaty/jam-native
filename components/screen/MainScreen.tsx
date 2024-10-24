@@ -9,7 +9,6 @@ import { Screens } from "@/constants/Screens";
 import ScreenView from "../view/ScreenView";
 import BoxView from "../view/BoxView";
 import DeviceManager from "@/classes/DeviceManager";
-
 import FooterNavigation from "../navigation/FooterNavigation";
 import JamsList from "../list/JamsList";
 
