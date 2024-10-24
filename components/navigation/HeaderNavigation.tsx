@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Layout } from '@/constants/Layout';
@@ -7,8 +8,15 @@ import BoxView from "../view/BoxView";
 import LogoView from '../view/LogoView';
 
 const HeaderNavigation = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
   const dispatch = useDispatch();
   
+  useEffect(() => {
+    setTimeout(() => setIsLoaded(true), Layout.animation.duration);
+  });
+
+  if (!isLoaded) return <></>;
+
   return (
     <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
       <BoxView direction="row" align="center" style={Layout.headerRight}>
