@@ -43,12 +43,13 @@ const JamsList = () => {
 
               {/* Item toolbar */}
               <BoxView direction="row" align="center" justify="space-between" style={styles.itemToolbar}>
-                <BoxView direction="row" align="center">
-                  <TouchableOpacity onPress={() => dispatch(setTabActive('JammersList'))}>
+                <TouchableOpacity onPress={() => dispatch(setTabActive('JammersList'))}>
+                  <BoxView direction="row" align="center">
                     <IconView name="users" size={22} theme="tertiary" />
                     <TextView>{item.host_count} {i18n.t('jammers')}</TextView>
-                  </TouchableOpacity>
-                </BoxView>
+                  </BoxView>
+                </TouchableOpacity>
+                
                 <BoxView direction="row" align="center">
                   <IconView name="save" size={22} theme="tertiary" />
                   <IconView name="share" size={22} theme="tertiary" />
