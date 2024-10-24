@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList, Touchable, TouchableOpacity } from "react-native";
 import { useDispatch } from 'react-redux';
 import { setTabActive } from "@/redux/slices/TabSlice";
 import { Layout } from "@/constants/Layout";
@@ -29,10 +29,12 @@ const JammersList = () => {
           contentContainerStyle={Layout.list}
           renderItem={({item, index}) => {
             return (
-              <BoxView direction="row" align="center" justify="flex-start" style={styles.listItem}>
-                <IconView name="user" size={22} theme="tertiary" />
-                <TextView>{item.name}</TextView>
-              </BoxView>
+              <TouchableOpacity onPress={() => console.log('clicked')}>
+                <BoxView direction="row" align="center" justify="flex-start" style={styles.listItem}>
+                  <IconView name="user" size={22} theme="tertiary" />
+                  <TextView>{item.name}</TextView>
+                </BoxView>
+              </TouchableOpacity>
             );
           }}
         />
