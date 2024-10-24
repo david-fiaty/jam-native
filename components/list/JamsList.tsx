@@ -43,19 +43,17 @@ const JamsList = () => {
 
               {/* Item toolbar */}
               <BoxView direction="row" align="center" justify="space-between" style={styles.listItemToolbar}>
-                <TouchableOpacity onPress={() => dispatch(setTabActive('JammersList'))}>
-                  <BoxView direction="row" align="center">
-                    <IconView name="users" size={22} theme="tertiary" />
-                    <TextView>{item.host_count} {i18n.t('jammers')}</TextView>
-                  </BoxView>
-                </TouchableOpacity>
-                
-                <TouchableOpacity onPress={() => dispatch(setTabActive('SaveJamView'))}>
-                  <BoxView direction="row" align="center">
-                    <IconView name="save" size={22} theme="tertiary" />
-                    <IconView name="share" size={22} theme="tertiary" />
-                  </BoxView> 
-                </TouchableOpacity>
+                {/* Jammers button */}
+                <BoxView direction="row" align="center" onPress={() => dispatch(setTabActive('JammersList'))}>
+                  <IconView name="users" size={22} theme="tertiary" />
+                  <TextView>{item.host_count} {i18n.t('jammers')}</TextView>
+                </BoxView>
+              
+                {/* Save button */}
+                <BoxView direction="row" align="center">
+                  <IconView name="save" size={22} theme="tertiary" onPress={() => dispatch(setTabActive('SaveJamView'))} />
+                  <IconView name="share" size={22} theme="tertiary" onPress={() => dispatch(setTabActive('SaveJamView'))} />
+                </BoxView> 
               </BoxView>
 
               {/* Item description */}
