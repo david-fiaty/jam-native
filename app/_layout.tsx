@@ -1,7 +1,8 @@
 import { Stack } from 'expo-router';
+import { Provider } from 'react-redux';
+import Store from "@/redux/Store";
 import { Colors } from '@/constants/Colors';
 import HeaderNavigation from '@/components/navigation/HeaderNavigation';
-
 
 const screenOptions = { 
   header: (props: object) => <HeaderNavigation />,    
@@ -16,8 +17,10 @@ const screenOptions = {
 
 export default function RootLayout() {
   return (
-    <Stack>
-      <Stack.Screen name="index" options={screenOptions} />
-    </Stack>
+    <Provider store={Store}>
+      <Stack>
+        <Stack.Screen name="index" options={screenOptions} />
+      </Stack>
+    </Provider>
   );
 }
