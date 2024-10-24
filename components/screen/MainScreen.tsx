@@ -31,23 +31,23 @@ const MainScreen = () => {
   const fadeEffectReference = useRef(new Animated.Value(0)).current;
 
   const animations = {
-    slide: (isVisible?: boolean) => {
+    slide: (show?: boolean) => {
       Animated.timing(slideEffectReference, {
-        toValue: isVisible ? windowHeight : 0, 
+        toValue: show ? 0 : windowHeight, 
         duration: 500, 
         useNativeDriver: true, 
       }).start();
     },
-    fade: (isVisible?: boolean) => {
+    fade: (show?: boolean) => {
       Animated.timing(fadeEffectReference, {
-        toValue: isVisible ? 0 : 1, 
+        toValue: show ? 1 : 0, 
         duration: 500, 
         useNativeDriver: true, 
       }).start();
     },
-    push: (isVisible?: boolean) => {
+    push: (show?: boolean) => {
       Animated.timing(pushEffectReference, {
-        toValue: isVisible ? windowWidth : 0, 
+        toValue: show ? 0 : windowWidth, 
         duration: 500, 
         useNativeDriver: true, 
       }).start();
@@ -63,11 +63,12 @@ const MainScreen = () => {
 
   useEffect(() => {
     const activeTab = tabState.find(item => item.active === true);
+
     if (activeTab) {
-      animations['slide'](false);
+      animations['slide'](true);
     }
     else {
-      animations['slide'](true);
+      animations['slide'](false);
     }
   
   }, [tabState]); 
