@@ -16,26 +16,35 @@ const JammersList = () => {
         title={i18n.t('Jammers')}
         onPress={() => dispatch(setTabActive('JammersList'))}
       />
-      <FlatList
-        data={data}
-        numColumns={1}
-        scrollEnabled={true}
-        horizontal={false}
-        contentContainerStyle={styles.contentContainerStyle}
-        renderItem={({item, index}) => {
-          return (
-            <View style={styles.item}>
-              <TextView>{item.name}</TextView>
-            </View>
-          );
-        }}
-      />
+      <View style={styles.listContainer}>
+        <FlatList
+          data={data}
+          numColumns={1}
+          scrollEnabled={true}
+          horizontal={false}
+          contentContainerStyle={styles.list}
+          renderItem={({item, index}) => {
+            return (
+              <View style={styles.item}>
+                <TextView>{item.name}</TextView>
+              </View>
+            );
+          }}
+        />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  listContainer: {
+    width: '100%',
+    flexGrow: 1,
+    backgroundColor: 'red',
+  },
+  list: {
+    flexGrow: 1,
+  },
 });
 
 export default JammersList;
