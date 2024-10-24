@@ -6,7 +6,7 @@ import { Colors } from "@/constants/Colors";
 import ScreenView from "../view/ScreenView";
 import BoxView from "../view/BoxView";
 import DeviceManager from "@/classes/DeviceManager";
-import { setTabActive } from "@/redux/slices/TabSlice";
+import { setTabActive, setInitialState } from "@/redux/slices/TabSlice";
 import { Screens } from "@/constants/Screens";
 import FooterNavigation from "../navigation/FooterNavigation";
 import JamsList from "../list/JamsList";
@@ -85,6 +85,9 @@ const MainScreen = () => {
 
     return activeScreen;
   };
+
+  // Set the initial state
+  dispatch(setInitialState(Screens));
 
   // Display
   useEffect(() => {
