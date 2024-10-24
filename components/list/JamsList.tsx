@@ -1,6 +1,6 @@
 import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
-//import { setTabActive } from "@/redux/slices/TabSlice";
+import { setTabActive } from "@/redux/slices/TabSlice";
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 import TextView from '../view/TextView';
@@ -29,7 +29,7 @@ const JamsList = () => {
               {/* Item header */}
               <BoxView direction="row" align="center" justify="space-between" style={styles.itemHeader}>
                 <BoxView>
-                  <TouchableOpacity onPress={() => console.log('clicked') /*dispatch(setTabActive('JammersList'))*/ }>
+                  <TouchableOpacity onPress={() => {}}>
                     <TextView>@{i18n.t('host')} +{item.host_count}</TextView>
                   </TouchableOpacity>
                 </BoxView>
@@ -43,10 +43,13 @@ const JamsList = () => {
 
               {/* Item toolbar */}
               <BoxView direction="row" align="center" justify="space-between" style={styles.itemToolbar}>
-                <BoxView direction="row" align="center">
-                  <IconView name="users" size={22} theme="tertiary" />
-                  <TextView>{item.host_count} {i18n.t('jammers')}</TextView>
-                </BoxView>
+                <TouchableOpacity onPress={() => dispatch(setTabActive('JammersList'))}>
+                  <BoxView direction="row" align="center">
+                    <IconView name="users" size={22} theme="tertiary" />
+                    <TextView>{item.host_count} {i18n.t('jammers')}</TextView>
+                  </BoxView>
+                </TouchableOpacity>
+                
                 <BoxView direction="row" align="center">
                   <IconView name="save" size={22} theme="tertiary" />
                   <IconView name="share" size={22} theme="tertiary" />

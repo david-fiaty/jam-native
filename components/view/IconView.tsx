@@ -16,30 +16,41 @@ type Props = BaseProps & {
 };
 
 const IconView = ({name, size, label, theme, radius = 'circle', style, onPress}: Props) => {
+  // Icon style
   const iconStyle = [styles.iconStyle, styles[theme], {fontSize: size}, {borderRadius: Layout.radius[radius]}];
 
-  if (label) {
-    return (
-      <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
-        <View style={styles.containerStyle}>
-          <TextView style={iconStyle}>
-            {label}
-          </TextView>
-        </View>
+  // Image icon
+  const imageIcon = (
+    <IconBase 
+      name={name}
+      iconStyle={iconStyle} 
+      containerStyle={styles.containerStyle}
+      size={size} 
+    />
+  ); 
+
+  // Text icon
+  const textIcon = (
+    <View style={styles.containerStyle}>
+      <TextView style={iconStyle}>
+        {label}
+      </TextView>
+    </View>
+  );
+
+  // Output
+  let output = label ? textIcon : imageIcon;
+
+  // Press event
+  if (onPress) {
+    output = (
+      <TouchableOpacity onPress={onPress}>
+        {output}
       </TouchableOpacity>
     );
   }
 
-  return (
-    <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
-      <IconBase 
-        name={name}
-        iconStyle={iconStyle} 
-        containerStyle={styles.containerStyle}
-        size={size} 
-      />
-    </TouchableOpacity>
-  );
+  return output;
 };
 
 const styles = StyleSheet.create({

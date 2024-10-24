@@ -53,6 +53,8 @@ Twilio => SMS
 console.log(JSON.stringify(obj, 0, 2));
 
 
+<TouchableOpacity activeOpacity={0.5} onPress={onPress}>
+
           <Button title="My Button" />
           <Text>{i18n.t('welcome')}</Text>
 
