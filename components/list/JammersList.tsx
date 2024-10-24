@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList, Touchable, TouchableOpacity } from "react-native";
 import { useDispatch } from 'react-redux';
 import { setTabActive } from "@/redux/slices/TabSlice";
 import { Layout } from "@/constants/Layout";
@@ -6,6 +6,9 @@ import TextView from "../view/TextView";
 import ApiClient from "@/classes/ApiClient";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
+import BoxView from "../view/BoxView";
+import IconView from "../view/IconView";
+import { Colors } from "@/constants/Colors";
 
 const JammersList = () => {
   const data = ApiClient.get('jammers');
@@ -26,9 +29,12 @@ const JammersList = () => {
           contentContainerStyle={Layout.list}
           renderItem={({item, index}) => {
             return (
-              <View style={styles.item}>
-                <TextView>{item.name}</TextView>
-              </View>
+              <TouchableOpacity onPress={() => console.log('clicked')}>
+                <BoxView direction="row" align="center" justify="flex-start" style={styles.listItem}>
+                  <IconView name="user" size={22} theme="tertiary" />
+                  <TextView>{item.name}</TextView>
+                </BoxView>
+              </TouchableOpacity>
             );
           }}
         />
@@ -42,8 +48,14 @@ const styles = StyleSheet.create({
   listContainer: {
     ...Layout.listContainer,
     ...{
-      backgroundColor: 'red',
+      borderWidth: 1,
+      borderRadius: Layout.radius.round,
+      borderColor: Colors.primary,
+      padding: Layout.space.base,
     },
+  },
+  listItem: {
+    padding: Layout.space.small,
   },
 });
 
