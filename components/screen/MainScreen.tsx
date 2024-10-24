@@ -9,6 +9,7 @@ import BoxView from "../view/BoxView";
 import DeviceManager from "@/classes/DeviceManager";
 import { setTabActive } from "@/redux/slices/TabSlice";
 import { Screens } from "@/constants/Screens";
+import FooterNavigation from "../navigation/FooterNavigation";
 
 const MainScreen = () => {
   // Parameters
@@ -107,9 +108,7 @@ const MainScreen = () => {
   return (
     <ScreenView>
       <View style={styles.container}>
-        {/* Top navigation */}
-
-
+        
         {/* Main content */}
         <BoxView style={Layout.modalContainer}>
           <Animated.View style={[Layout.animatedView, animatedStyle]}>
@@ -120,26 +119,7 @@ const MainScreen = () => {
         </BoxView>
 
         {/* Bottom navigation */}
-        <BoxView direction="row" align="center" justify="space-around" style={Layout.footer}>
-          <IconView
-            name="location"
-            theme="clear"
-            size={22}
-            onPress={() => dispatch(setTabActive('MapView'))}
-          />
-          <IconView
-            name="plus"
-            theme="clear"
-            size={22}
-            onPress={() => dispatch(setTabActive('AddJamForm'))}
-          />
-          <IconView
-            name="user"
-            theme="clear"
-            size={22}
-            onPress={() => dispatch(setTabActive('ProfileForm'))}
-          />
-        </BoxView>
+        <FooterNavigation />
       </View>
     </ScreenView>
   );
