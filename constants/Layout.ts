@@ -13,6 +13,18 @@ const radius = {
   circle: 40,
 };
 
+const iconSize = {
+  small: 11,
+  base: 22,
+  big: 44,
+};
+
+const fontSize = {
+  small: 10,
+  base: 14,
+  big: 24,
+};
+
 const header = {
   height: 48,
   marginTop: StatusBar.currentHeight,
@@ -39,10 +51,11 @@ const modal = {
 export const Layout = {
   space: space,
   radius: radius,
+  iconSize: iconSize,
+  fontSize: fontSize,
   header: header,
   logo: logo,
   footer: footer,
-  fontSize: 14,
   animation: {
     duration: 500,
   },

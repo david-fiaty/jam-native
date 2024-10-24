@@ -14,7 +14,7 @@ const TextView = ({style, children}: BaseProps) => {
 const styles = StyleSheet.create({
   content: {
     color: Colors.primary,
-    fontSize: Layout.fontSize,
+    fontSize: Layout.fontSize.base,
     //fontFamily: 'BaseFont', // Todo - Enable font
   },
 });
