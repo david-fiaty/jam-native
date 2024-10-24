@@ -9,19 +9,19 @@ import JamsList from "@/components/list/JamsList";
 export const Screens = [
   {
     name: 'MapView', 
-    effect: 'push',
+    effect: 'slide',
     active: false,
     component: () => <MapView />,
   },
   {
     name: 'AddJamForm', 
-    effect: 'push',
+    effect: 'slide',
     active: false,
     component: () => <AddJamForm />,
   },
   {
     name: 'ProfileForm', 
-    effect: 'push',
+    effect: 'slide',
     active: false,
     component: () => <ProfileForm />,
   },
