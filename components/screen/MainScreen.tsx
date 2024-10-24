@@ -70,7 +70,7 @@ const MainScreen = () => {
 
     if (activeScreen) {
       setCurrentScreen(activeScreen.component());
-      animations['slide'](true);
+      animations[activeScreen.effect](true);
     }
     else {
       animations['slide'](false);    
