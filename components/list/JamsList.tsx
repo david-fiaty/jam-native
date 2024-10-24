@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import TextView from '../view/TextView';
