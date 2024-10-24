@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Layout } from '@/constants/Layout';
