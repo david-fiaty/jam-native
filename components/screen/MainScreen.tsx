@@ -58,9 +58,7 @@ const MainScreen = () => {
   };
 
   useEffect(() => {
-    let activeTab = tabState.find(item => {
-      return item.active === true;
-    });
+    let activeTab = tabState.find(item => item.active === true);
 
     console.log(activeTab);
          
