@@ -1,5 +1,6 @@
-import { StyleSheet, View } from 'react-native';
-import { BaseProps } from '@/constants/Types';
+import { StyleSheet } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { setTabActive } from "@/redux/slices/TabSlice";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
@@ -9,16 +10,17 @@ import DividerView from "../view/DividerView";
 import UserProfileImageField from '../field/UserProfileImageField';
 import InputTextBase from '../base/InputTextBase';
 import CreativeOrganizationField from '../field/CreativeOrganizationField';
-import { JamCategoriesData } from "@/constants/Data";
 import UserJamsList from '../list/UserJamsList';
 import UserProjectsList from '../list/UserProjectsList';
 
-const ProfileForm = ({style, children}: BaseProps) => {
+const ProfileForm = () => {
+  const dispatch = useDispatch();
+
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true}>
       <BackButton
         title={i18n.t('Your profile')}
-        onPress={() => console.log('clicked')}
+        onPress={() => dispatch(setTabActive('ProfileForm'))}
       />
 
       <UserProfileImageField />
