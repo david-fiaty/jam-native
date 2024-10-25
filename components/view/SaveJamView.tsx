@@ -9,9 +9,23 @@ import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
 
+type ItemProps = {
+  item: object,
+  index: number,
+};
+
 const SaveJamView = () => {
   const data = ApiClient.get('hosts');
   const dispatch = useDispatch();
+
+  const renderItem = ({item, index}: ItemProps) => (
+    <TouchableOpacity onPress={() => console.log('clicked')}>
+      <BoxView direction="row" align="center" justify="flex-start" style={styles.listItem}>
+        <IconView name="user" size={22} theme="tertiary" />
+        <TextView>{item.name}</TextView>
+      </BoxView>
+    </TouchableOpacity>
+  );
 
   return (
     <BoxView direction="column">
@@ -26,16 +40,7 @@ const SaveJamView = () => {
           scrollEnabled={true}
           horizontal={false}
           contentContainerStyle={Layout.list}
-          renderItem={({item, index}) => {
-            return (
-              <TouchableOpacity onPress={() => console.log('clicked')}>
-                <BoxView direction="row" align="center" justify="flex-start" style={styles.listItem}>
-                  <IconView name="user" size={22} theme="tertiary" />
-                  <TextView>{item.name}</TextView>
-                </BoxView>
-              </TouchableOpacity>
-            );
-          }}
+          renderItem={({item, index}) => { renderItem(item, index) }}
         />
       </View>
     </BoxView>
