@@ -1,7 +1,7 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useDispatch } from 'react-redux';
-import { setTabActive } from "@/redux/slices/TabSlice";
+import { setActiveTab } from "@/redux/slices/TabSlice";
 import { Layout } from '@/constants/Layout';
 import { ListItemProps } from '@/constants/Types';
 import ListView from '../view/ListView';
@@ -37,7 +37,7 @@ const SettingsMenu = () => {
     <View style={styles.container}>
       <BackButton
         title={i18n.t('Settings')}
-        onPress={() => dispatch(setTabActive('SettingsMenu'))}
+        onPress={() => dispatch(setActiveTab('SettingsMenu'))}
       />
       <ListView 
         data={items} 

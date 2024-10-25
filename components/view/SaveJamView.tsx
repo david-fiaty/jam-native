@@ -1,6 +1,6 @@
 import { StyleSheet, View, FlatList, TouchableOpacity } from "react-native";
 import { useDispatch } from 'react-redux';
-import { setTabActive } from "@/redux/slices/TabSlice";
+import { setActiveTab } from "@/redux/slices/TabSlice";
 import { Layout } from "@/constants/Layout";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
@@ -20,7 +20,7 @@ const SaveJamView = () => {
     <BoxView direction="column">
       <BackButton
         title={i18n.t('Jam is now saved to your jams')}
-        onPress={() => dispatch(setTabActive('SaveJamView'))}
+        onPress={() => dispatch(setActiveTab('SaveJamView'))}
       />
       <View style={Layout.borderedListContainer}>
         <FlatList

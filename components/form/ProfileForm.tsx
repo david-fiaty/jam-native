@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setTabActive } from "@/redux/slices/TabSlice";
+import { setActiveTab } from "@/redux/slices/TabSlice";
 import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
@@ -29,7 +29,7 @@ const ProfileForm = () => {
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Your profile')}
-        onPress={() => dispatch(setTabActive('ProfileForm'))}
+        onPress={() => dispatch(setActiveTab('ProfileForm'))}
       />
 
       <UserProfileImageField />
