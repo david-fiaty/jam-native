@@ -28,26 +28,14 @@ const AccountForm = () => {
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true}>
       <BackButton
-        title={i18n.t('Your profile')}
+        title={i18n.t('Account information')}
         onPress={() => dispatch(setTabActive('AccountForm'))}
       />
-
-      <UserProfileImageField />
-
-      <DividerView />
-      <InputTextBase placeholder={i18n.t('Public name')} />
-      <InputTextBase placeholder={i18n.t('IG handle')} />
-      <InputTextBase placeholder={i18n.t('Email address')} />
-      <InputTextBase placeholder={i18n.t('Phone number')} />
-      <UserLocationField />
-      <IndustryField />
-      <CreativeOrganizationField />
-
-      <DividerView />
-      <UserProjectsList />
-
-      <DividerView />
-      <UserJamsList />
+      <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.pageContent}>
+        <InputTextBase placeholder={i18n.t('Full name')} />
+        <InputTextBase placeholder={i18n.t('Email address')} />
+        <InputTextBase placeholder={i18n.t('Phone number')} />
+      </BoxView>
     </BoxView>
   );
 };
