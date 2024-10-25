@@ -40,7 +40,7 @@ const MapView = ({ style, children }: BaseProps) => {
 
   return (
     <TouchableWithoutFeedback>
-      <View style={Layout.screenContent}>
+      <View style={[Layout.screenContent, styles.container]}>
         <RNMapView
           style={styles.map}
           provider="google"
@@ -76,6 +76,10 @@ const MapView = ({ style, children }: BaseProps) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 0,
+    paddingTop: Layout.space.base*2,
+  },
   map: {
     flex: 1,
   },
