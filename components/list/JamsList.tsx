@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.primary,
   }, 
   listItemHeader: {
-    padding: Layout.space.base,
+    paddingHorizontal: Layout.space.base,
   },
   listItemToolbar: {
     padding: Layout.space.base,
