@@ -17,6 +17,12 @@ class DeviceManager {
       width: this.window.width,
     };
   }
+
+  getGridCellSize(numColumns: number) {
+    return {
+      
+    };
+  }
 };
 
 export default (new DeviceManager());
