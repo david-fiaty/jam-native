@@ -102,13 +102,11 @@ const MainScreen = () => {
   return (
     <ScreenView>
       <View style={styles.container}>
+        {/* Main content */}
+        <JamsList />
+        
+        {/* Modal content */}
         <BoxView style={Layout.modalContainer}>
-          {/* Main content */}
-          <BoxView style={Layout.modalContent}>
-            <JamsList />
-          </BoxView>
-
-          {/* Modal content */}
           <Animated.View style={[Layout.animatedView, animatedStyle]}>
             <BoxView style={Layout.modalContent}>
               {Screens?.[currentScreen?.name]}
