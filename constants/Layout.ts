@@ -145,6 +145,7 @@ export const Layout = {
   },
   pageContent: {
     padding: space.base,
+    width: '100%',
   },
 };
 
