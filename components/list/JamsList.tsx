@@ -44,7 +44,7 @@ const JamsList = () => {
                   </TouchableOpacity>
                 </BoxView>
                 <BoxView>
-                  <JamStatusButton />
+                  <JamStatusButton active={item.active} />
                 </BoxView>
                 <BoxView>
                   <IconView name="actions" theme="clear" onPress={() => dispatch(setTabActive('MoreJamView'))} />
