@@ -70,6 +70,9 @@ export const Layout = {
     width: 48,
     height: 48,
   },
+  menuContainer: {
+    padding: space.base*1.5,
+  },
   menuItem: {
     flexDirection: 'row',
     alignItems: 'center',
