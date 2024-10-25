@@ -6,15 +6,20 @@ import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
 
-const JamStatusButton = () => {
+type Props = {
+  active?: boolean,
+};
+
+const JamStatusButton = ({active}: Props) => {
   const [labelVisible, setLabelVisible] = useState(false);
-  const buttonLabel = i18n.t('Active');
-  
+  const buttonLabel = active ? i18n.t('Active') : i18n.t('Inactive');
+  const statusStyle = active ? styles.active : styles.inactive;
+
   return (       
     <TouchableOpacity onPress={() => {setLabelVisible(!labelVisible)}}>
       <BoxView direction="row" align="center" justify="center" style={styles.container}>
-        { !labelVisible && <View style={styles.dot} /> }
-        { labelVisible && <TextView style={styles.label}>{buttonLabel}</TextView> }
+        { !labelVisible && <View style={[styles.dot, statusStyle]} /> }
+        { labelVisible && <TextView style={[styles.label, statusStyle]}>{buttonLabel}</TextView> }
       </BoxView> 
     </TouchableOpacity>
   );
