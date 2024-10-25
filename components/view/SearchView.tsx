@@ -1,9 +1,10 @@
 import React from "react";
 import { View, FlatList, TouchableOpacity  } from "react-native";
 import { Tab, TabView } from "@rneui/themed";
-import { GlobalStyles, Colors } from "@/constants/GlobalStyles";
-import { StaticImage } from './base/StaticImage';
+import { GlobalStyles} from "@/constants/GlobalStyles";
+import { Colors } from "@/constants/Colors";
 import ApiClient from '@/classes/ApiClient';
+import ImageView from "./ImageView";
 
 const SearchView = () => {
   const [index, setIndex] = React.useState(0);
@@ -41,7 +42,6 @@ const SearchView = () => {
           titleStyle={styles.title}
           buttonStyle={styles.button}
         />
-      
       </Tab>
 
       <TabView 
@@ -61,7 +61,7 @@ const SearchView = () => {
               return (
                 <TouchableOpacity>
                   <View style={styles.item}>
-                    <StaticImage 
+                    <ImageView 
                       source={item.image} 
                       width="100%"
                       height="100%"
@@ -86,7 +86,7 @@ const SearchView = () => {
               return (
                 <TouchableOpacity>
                   <View style={styles.item}>
-                    <StaticImage 
+                    <ImageView 
                       source={item.image} 
                       width="100%"
                       height="100%"
@@ -111,7 +111,7 @@ const SearchView = () => {
               return (
                 <TouchableOpacity>
                   <View style={styles.item}>
-                    <StaticImage 
+                    <ImageView 
                       source={item.image} 
                       width="100%"
                       height="100%"
@@ -137,7 +137,7 @@ const SearchView = () => {
               return (
                 <TouchableOpacity>
                   <View style={styles.item}>
-                    <StaticImage 
+                    <ImageView 
                       source={item.image} 
                       width="100%"
                       height="100%"
@@ -150,7 +150,6 @@ const SearchView = () => {
             }}
           />
         </TabView.Item>
-
       </TabView>
     </View>
   );
