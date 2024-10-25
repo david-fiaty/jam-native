@@ -82,11 +82,17 @@ export const Layout = {
     flexDirection: 'row',
     alignItems: 'center',
   },
+  screenContent: {
+    padding: space.base*1.5,
+    paddingBottom: 0,
+    width: '100%',
+    height: '100%',
+    flexGrow: 1,
+  },
   mainContent: {
     width: '100%',
     height: modal.height,
     backgroundColor: Colors.white,
-    padding: space.base,
   },
   modalContainer: {
     backgroundColor: Colors.white,
@@ -99,7 +105,6 @@ export const Layout = {
     width: '100%',
     height: modal.height,
     backgroundColor: Colors.white,
-    padding: space.base,
   },
   animatedView: {
     position: 'absolute',
@@ -109,12 +114,6 @@ export const Layout = {
     width: '100%',
     height: modal.height, 
     backgroundColor: 'lightblue',
-  },
-  screenContent: {
-    padding: space.small,
-    width: '100%',
-    height: '100%',
-    flexGrow: 1,
   },
   formField: {
     backgroundColor: Colors.secondary,
