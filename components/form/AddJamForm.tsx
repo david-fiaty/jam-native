@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 import { useDispatch } from 'react-redux';
 import { setTabActive } from "@/redux/slices/TabSlice";
 import { JamCategoriesData } from "@/constants/Data";
+import { Layout } from '@/constants/Layout';
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
@@ -17,6 +18,7 @@ import IndustryField from "../field/IndustryField";
 import PostButton from "../button/PostButton";
 import DividerView from "../view/DividerView";
 import SpinnerView from '../view/SpinnerView';
+
 
 const AddJamForm = () => {
   const dispatch = useDispatch();
