@@ -90,12 +90,12 @@ export const Layout = {
     height: modal.height,
     backgroundColor: Colors.white,
     padding: space.base,
-    zIndex: 0,
+    //zIndex: 0,
   },
   modalContainer: {
     backgroundColor: Colors.white,
     flexGrow: 1,
-    zIndex: 1,
+    //zIndex: 1,
   },
   modalContent: {
     top: 0,
