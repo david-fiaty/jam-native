@@ -21,7 +21,7 @@ const iconSize = {
 
 const fontSize = {
   small: 10,
-  base: 14,
+  base: 13.5,
   big: 24,
 };
 
@@ -83,19 +83,14 @@ export const Layout = {
     alignItems: 'center',
   },
   mainContent: {
-    //top: 0,
-    //left: 0,
-    //position: 'absolute',
     width: '100%',
     height: modal.height,
     backgroundColor: Colors.white,
     padding: space.base,
-    //zIndex: 0,
   },
   modalContainer: {
     backgroundColor: Colors.white,
     flexGrow: 1,
-    //zIndex: 1,
   },
   modalContent: {
     top: 0,
