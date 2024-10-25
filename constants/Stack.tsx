@@ -30,7 +30,7 @@ export const Stack = [
     active: false,
   },
   {
-    name: 'SearchScreen', 
+    name: 'SearchView', 
     effect: 'push',
     active: false,
   },

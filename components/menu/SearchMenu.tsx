@@ -17,7 +17,7 @@ const items = [
   },
 ];
 
-const SearchScreen = ({style, children}: BaseProps) => {
+const SearchView = ({style, children}: BaseProps) => {
   return (
     <View style={styles.container}>
       <TextView>Search menu</TextView>
@@ -54,4 +54,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SearchScreen;
+export default SearchView;
