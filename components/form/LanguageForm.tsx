@@ -23,11 +23,10 @@ const LanguageForm = () => {
         title={i18n.t('Language')}
         onPress={() => router.back()}
       />
-      <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.screenContent}>
-        <InputTextBase placeholder={i18n.t('Full name')} />
-        <InputTextBase placeholder={i18n.t('Email address')} />
-        <InputTextBase placeholder={i18n.t('Phone number')} />
-      </BoxView>
+      
+      <InputTextBase placeholder={i18n.t('Full name')} />
+      <InputTextBase placeholder={i18n.t('Email address')} />
+      <InputTextBase placeholder={i18n.t('Phone number')} />
     </BoxView>
   );
 };
