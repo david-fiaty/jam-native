@@ -1,6 +1,6 @@
 import SettingsMenu from "@/components/menu/SettingsMenu";
 import NotificationsMenu from "@/components/menu/NotificationsMenu";
-import SearchScreen from "@/components/screen/SearchScreen";
+import SearchView from "@/components/view/SearchView";
 import MapView from "@/components/view/MapView";
 import AddJamForm from "@/components/form/AddJamForm";
 import ProfileForm from "@/components/form/ProfileForm";
@@ -18,7 +18,7 @@ export const Screens = {
   ProfileForm: <ProfileForm />,
   SettingsMenu: <SettingsMenu />,
   NotificationsMenu: <NotificationsMenu />,
-  SearchScreen: <SearchScreen />,
+  SearchView: <SearchView />,
   JammersList: <JammersList />,
   HostsList: <HostsList />,
   SaveJamView: <SaveJamView />,
