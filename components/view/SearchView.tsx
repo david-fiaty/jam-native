@@ -126,7 +126,6 @@ const SearchView = () => {
           />
         </TabView.Item>
 
-
         <TabView.Item style={styles.tab}>
           <FlatList 
             data={projectsData} 
@@ -181,7 +180,7 @@ const styles = {
     borderColor: Colors.tertiary,
   },
   image: {
-    borderRadius: GlobalStyles.space.base,
+    borderRadius: Layout.space.base,
     width: 96.7,
     height: 96.7,
   },
