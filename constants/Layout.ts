@@ -83,7 +83,7 @@ export const Layout = {
     alignItems: 'center',
   },
   screenContent: {
-    padding: space.base,
+    padding: space.base*1.5,
     paddingBottom: 0,
     width: '100%',
     height: '100%',
@@ -93,7 +93,6 @@ export const Layout = {
     width: '100%',
     height: modal.height,
     backgroundColor: Colors.white,
-    //padding: space.base,
   },
   modalContainer: {
     backgroundColor: Colors.white,
@@ -106,7 +105,6 @@ export const Layout = {
     width: '100%',
     height: modal.height,
     backgroundColor: Colors.white,
-    //padding: space.base/2,
   },
   animatedView: {
     position: 'absolute',
