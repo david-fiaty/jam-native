@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { setTabActive } from "@/redux/slices/TabSlice";
@@ -10,10 +11,18 @@ import ImageView from '../view/ImageView';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
 import CollapsibleView from '../view/CollapsibleView';
+import SpinnerView from '../view/SpinnerView';
 
 const JamsList = () => {  
   const data = ApiClient.get('jams');
   const dispatch = useDispatch();
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setIsLoaded(true), Layout.animation.duration);
+  });
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView direction="column" style={Layout.listContainer}>
