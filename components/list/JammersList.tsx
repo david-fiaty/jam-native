@@ -1,6 +1,6 @@
 import { View, FlatList, TouchableOpacity } from "react-native";
 import { useDispatch } from 'react-redux';
-import { setTabActive } from "@/redux/slices/TabSlice";
+import { setActiveTab } from "@/redux/slices/TabSlice";
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
 import ApiClient from "@/classes/ApiClient";
@@ -17,7 +17,7 @@ const JammersList = () => {
     <BoxView direction="column">
       <BackButton
         title={i18n.t('Jammers')}
-        onPress={() => dispatch(setTabActive('JammersList'))}
+        onPress={() => dispatch(setActiveTab('JammersList'))}
       />
       <View style={Layout.borderedListContainer}>
         <FlatList

@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { Layout } from '@/constants/Layout';
-import { setTabActive } from "@/redux/slices/TabSlice";
+import { setActiveTab } from "@/redux/slices/TabSlice";
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 
@@ -12,17 +12,17 @@ const FooterNavigation = () => {
       <IconView
         name="location"
         theme="clear"
-        onPress={() => dispatch(setTabActive('MapView'))}
+        onPress={() => dispatch(setActiveTab('MapView'))}
       />
       <IconView
         name="plus"
         theme="clear"
-        onPress={() => dispatch(setTabActive('AddJamForm'))}
+        onPress={() => dispatch(setActiveTab('AddJamForm'))}
       />
       <IconView
         name="user"
         theme="clear"
-        onPress={() => dispatch(setTabActive('ProfileForm'))}
+        onPress={() => dispatch(setActiveTab('ProfileForm'))}
       />
     </BoxView>
   );

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { setTabActive } from "@/redux/slices/TabSlice";
+import { setActiveTab } from "@/redux/slices/TabSlice";
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 import TextView from '../view/TextView';
@@ -39,7 +39,7 @@ const JamsList = () => {
               {/* Item header */}
               <BoxView direction="row" align="center" justify="space-between" style={styles.listItemHeader}>
                 <BoxView>
-                  <TouchableOpacity onPress={() => dispatch(setTabActive('HostsList'))}>
+                  <TouchableOpacity onPress={() => dispatch(setActiveTab('HostsList'))}>
                     <TextView>@{i18n.t('host')} +{item.host_count}</TextView>
                   </TouchableOpacity>
                 </BoxView>
@@ -47,7 +47,7 @@ const JamsList = () => {
                   <JamStatusButton active={item.active} />
                 </BoxView>
                 <BoxView>
-                  <IconView name="actions" theme="clear" onPress={() => dispatch(setTabActive('MoreJamView'))} />
+                  <IconView name="actions" theme="clear" onPress={() => dispatch(setActiveTab('MoreJamView'))} />
                 </BoxView> 
               </BoxView>
               
@@ -57,15 +57,15 @@ const JamsList = () => {
               {/* Item toolbar */}
               <BoxView direction="row" align="center" justify="space-between" style={styles.listItemToolbar}>
                 {/* Jammers button */}
-                <BoxView direction="row" align="center" onPress={() => dispatch(setTabActive('JammersList'))}>
+                <BoxView direction="row" align="center" onPress={() => dispatch(setActiveTab('JammersList'))}>
                   <IconView name="users" theme="tertiary" />
                   <TextView>{item.host_count} {i18n.t('jammers')}</TextView>
                 </BoxView>
               
                 {/* Save button */}
                 <BoxView direction="row" align="center">
-                  <IconView name="save" theme="tertiary" onPress={() => dispatch(setTabActive('SaveJamView'))} />
-                  <IconView name="share" theme="tertiary" onPress={() => dispatch(setTabActive('ShareJamView'))} />
+                  <IconView name="save" theme="tertiary" onPress={() => dispatch(setActiveTab('SaveJamView'))} />
+                  <IconView name="share" theme="tertiary" onPress={() => dispatch(setActiveTab('ShareJamView'))} />
                 </BoxView> 
               </BoxView>
 

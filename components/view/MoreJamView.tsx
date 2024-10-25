@@ -1,6 +1,6 @@
 import { View, FlatList } from "react-native";
 import { useDispatch } from 'react-redux';
-import { setTabActive } from "@/redux/slices/TabSlice";
+import { setActiveTab } from "@/redux/slices/TabSlice";
 import { Layout } from "@/constants/Layout";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
@@ -30,7 +30,7 @@ const MoreJamView = () => {
     <BoxView direction="column">
       <BackButton
         title={i18n.t('More')}
-        onPress={() => dispatch(setTabActive('MoreJamView'))}
+        onPress={() => dispatch(setActiveTab('MoreJamView'))}
       />
       <View style={Layout.borderedListContainer}>
         <FlatList

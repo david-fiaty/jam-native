@@ -5,7 +5,7 @@ const TabSlice = createSlice({
   name: 'tab',
   initialState: Stack,
   reducers: {
-    setTabActive: (state, action) => {
+    setActiveTab: (state, action) => {
       state.map(item => {
         if (item.name == action.payload && item.active) {
           item.active = false;
@@ -21,5 +21,5 @@ const TabSlice = createSlice({
   },
 });
 
-export const { setTabActive } = TabSlice.actions;
+export const { setActiveTab } = TabSlice.actions;
 export default TabSlice.reducer;
