@@ -5,7 +5,7 @@ import BaseTheme from "@/constants/BaseTheme";
 import NotificationScreen from '@/components/screen/NotificationScreen';
 
 export default () => {
-  const { item } = useLocalSearchParams();
+  const item = useLocalSearchParams();
 
   return ( 
     <ThemeProvider theme={BaseTheme}>

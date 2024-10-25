@@ -28,12 +28,12 @@ const NotificationsMenu = () => {
             <TouchableOpacity 
               onPress={() => {
                 console.log('clicked');
-                /*
+                
                 router.push({
                   pathname: '/notification', 
-                  params: {item: item},
+                  params: item,
                 });
-                */
+            
               }}>
               <View style={styles.item}>
                 <TextView>{item.label}</TextView>
