@@ -3,19 +3,26 @@ import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import TextView from './TextView';
 import { Layout } from '@/constants/Layout';
+import i18n from '@/translation/i18n';
 
 type Props = {
   label: string,
+  openedLabel: string,
   content: JSX.Element,
 };
 
-const CollapsibleView = ({label, content}: Props) => {
+const CollapsibleView = ({label, content, openedLabel}: Props) => {
   const [collapsed, setCollapsed] = useState(true);
+  let buttonLabel = label;
+  
+  if (!collapsed && openedLabel) {
+    buttonLabel = openedLabel;
+  }
 
   return (
     <View>
       <TouchableOpacity onPress={() => setCollapsed((prev) => !prev)}>
-        <TextView>{label}</TextView>
+        <TextView>{buttonLabel}</TextView>
       </TouchableOpacity>
       <Collapsible collapsed={collapsed} align="center">
         <View style={styles.content}>
