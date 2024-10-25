@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
-import { BaseProps } from "@/constants/Types";
+import { useDispatch } from 'react-redux';
+import { setTabActive } from "@/redux/slices/TabSlice";
 import { JamCategoriesData } from "@/constants/Data";
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
@@ -15,12 +16,14 @@ import IndustryField from "../field/IndustryField";
 import PostButton from "../button/PostButton";
 import DividerView from "../view/DividerView";
 
-const AddJamForm = ({ style, children }: BaseProps) => {
+const AddJamForm = () => {
+  const dispatch = useDispatch();
+
   return (    
     <BoxView align="flex-start" justify="flex-start" scroll={true}>
       <BackButton
         title={i18n.t('Add new Jam')}
-        onPress={() => console.log('clicked')}
+        onPress={() => dispatch(setTabActive('ProfileForm'))}
       />
       <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
       <JamCategoriesField data={JamCategoriesData} />
