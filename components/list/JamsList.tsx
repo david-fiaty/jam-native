@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   listItem: {
     borderWidth: 1,
     borderRadius: Layout.radius.round,
-    marginBottom: Layout.space.base,
+    marginBottom: Layout.space.base*1.5,
     borderColor: Colors.primary,
   }, 
   listItemHeader: {
