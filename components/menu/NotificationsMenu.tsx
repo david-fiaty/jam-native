@@ -8,6 +8,7 @@ import ListView from '../view/ListView';
 import TextView from '../view/TextView';
 import ApiClient from '@/classes/ApiClient';
 import BackButton from '../button/BackButton';
+import i18n from '@/translation/i18n';
 
 const NotificationsMenu = () => {
   const router = useRouter();
@@ -17,8 +18,8 @@ const NotificationsMenu = () => {
   return (
     <View style={styles.container}>
       <BackButton
-        title={i18n.t('Settings')}
-        onPress={() => dispatch(setTabActive('SettingsMenu'))}
+        title={i18n.t('Notifications')}
+        onPress={() => dispatch(setTabActive('NotificationsMenu'))}
       />
       <ListView 
         data={items} 
