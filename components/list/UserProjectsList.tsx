@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
 import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
-import { Colors } from '@/constants/Colors';
 import TextView from '../view/TextView';
 import { Layout } from '@/constants/Layout';
 import ApiClient from '@/classes/ApiClient';
@@ -8,7 +6,6 @@ import i18n from '@/translation/i18n';
 import ImageView from '../view/ImageView';
 
 const UserProjectsList = () => {  
-  const [selectedOption, setSelectedOption] = useState(null);
   const data = ApiClient.get('projects');
 
   return (
