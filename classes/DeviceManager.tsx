@@ -1,3 +1,4 @@
+import { Layout } from '@/constants/Layout';
 import { Dimensions, ScaledSize, StatusBar } from 'react-native';
 
 class DeviceManager {
@@ -19,8 +20,11 @@ class DeviceManager {
   }
 
   getGridCellSize(numColumns: number) {
+    let value = (this.window.width/numColumns); 
+    
     return {
-      
+      width: value,
+      height: value,
     };
   }
 };
