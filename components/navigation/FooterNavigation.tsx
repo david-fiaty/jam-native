@@ -12,8 +12,6 @@ const FooterNavigation = () => {
   const tabState = useSelector((state) => state.tab);
   const activeTab = ScreenManager.getActiveScreen(tabState);
 
-  console.log(activeTab?.name);
-
   return (
     <BoxView direction="row" align="center" justify="space-around" style={Layout.footer}>
       <IconView

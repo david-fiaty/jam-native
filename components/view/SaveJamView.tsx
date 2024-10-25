@@ -17,7 +17,7 @@ const SaveJamView = () => {
   ];
 
   return (
-    <BoxView direction="column">
+    <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Jam is now saved to your jams')}
         onPress={() => dispatch(setActiveTab('SaveJamView'))}
