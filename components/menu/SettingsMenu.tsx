@@ -1,4 +1,4 @@
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useDispatch } from 'react-redux';
 import { setActiveTab } from "@/redux/slices/TabSlice";
@@ -34,7 +34,7 @@ const SettingsMenu = () => {
   const dispatch = useDispatch();
   
   return (
-    <View style={styles.container}>
+    <View style={Layout.menuContainer}>
       <BackButton
         title={i18n.t('Settings')}
         onPress={() => dispatch(setActiveTab('SettingsMenu'))}
@@ -44,7 +44,7 @@ const SettingsMenu = () => {
         renderItem={({item, index}: ListItemProps) => {
           return (
             <TouchableOpacity onPress={() => router.push(item.path)}>
-              <View style={styles.item}>
+              <View style={Layout.menuItem}>
                 <TextView>{item.label}</TextView>
               </View>
             </TouchableOpacity>
@@ -54,12 +54,5 @@ const SettingsMenu = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-  },
-  item: Layout.menuItem,
-  label: Layout.menuItemLabel,
-});
 
 export default SettingsMenu;
