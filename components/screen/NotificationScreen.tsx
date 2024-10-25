@@ -9,6 +9,7 @@ import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
 import SpinnerView from '../view/SpinnerView';
 import i18n from '@/translation/i18n';
+import TextView from '../view/TextView';
 
 type Props = BaseProps & {
   item?: object,
@@ -25,20 +26,24 @@ const NotificationScreen = ({item}: Props) => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(item);
-
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true}>
       <BackButton
         title={i18n.t('Your profile')}
         onPress={() => router.back() }
       />
+      <BoxView direction="column" align="flex-start" justify="flex-start" style={styles.container}>
+        <TextView>
+          {item.content}
+        </TextView>
+      </BoxView>
     </BoxView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    padding: Layout.space.base,
   },
 });
 
