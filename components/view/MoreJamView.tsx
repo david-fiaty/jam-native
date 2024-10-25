@@ -20,7 +20,7 @@ const MoreJamView = () => {
     <SaveJamButton style={Layout.listItem} />,
     <ShareJamButton style={Layout.listItem} />,
     <AddToProjectButton style={Layout.listItem} />,
-    <ViewProjectButton style={Layout.listItem}/>,
+    <ViewProjectButton style={Layout.listItem} />,
     <EditJamButton style={Layout.listItem} />,
     <ReportJamButton style={Layout.listItem} />,
     <DeleteJamButton style={Layout.listItem} />,
