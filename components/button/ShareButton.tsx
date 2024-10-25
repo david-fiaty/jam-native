@@ -9,7 +9,7 @@ type Props = {
   style?: object,
 };
 
-const ShareButton = ({title, style}: Props) => {
+const ShareJamButton = ({title, style}: Props) => {
   const buttonTitle = title ? i18n.t(title) : i18n.t('Share');
 
   return (       
@@ -22,4 +22,4 @@ const ShareButton = ({title, style}: Props) => {
   );
 };
 
-export default ShareButton;
+export default ShareJamButton;
