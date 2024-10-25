@@ -6,12 +6,12 @@ export const Stack = [
   },
   {
     name: 'MapView', 
-    effect: 'slide',
+    effect: 'fade',
     active: false,
   },
   {
     name: 'AddJamForm', 
-    effect: 'push',
+    effect: 'fade',
     active: false,
   },
   {
@@ -21,17 +21,17 @@ export const Stack = [
   },
   {
     name: 'SettingsMenu', 
-    effect: 'push',
+    effect: 'fade',
     active: false,
   },
   {
     name: 'NotificationsMenu', 
-    effect: 'push',
+    effect: 'fade',
     active: false,
   },
   {
     name: 'SearchView', 
-    effect: 'push',
+    effect: 'fade',
     active: false,
   },
   {
