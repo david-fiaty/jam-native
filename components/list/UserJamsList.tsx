@@ -5,6 +5,7 @@ import TextView from '../view/TextView';
 import { Layout } from '@/constants/Layout';
 import ApiClient from '@/classes/ApiClient';
 import i18n from '@/translation/i18n';
+import ImageView from '../view/ImageView';
 
 const UserJamsList = () => {  
   const [selectedOption, setSelectedOption] = useState(null);
@@ -21,11 +22,15 @@ const UserJamsList = () => {
         scrollEnabled={false}
         renderItem={({item, index}) => {
           return (
-            <TouchableOpacity onPress={() => setSelectedOption(item.id)}>
+            <TouchableOpacity>
               <View style={styles.item}>
-                <View style={[styles.square, selectedOption == item.id ? styles.selected : {}]}>
-                  <TextView>{item.id}</TextView>
-                </View>
+                <ImageView 
+                  source={item.image} 
+                  width="100%"
+                  height="100%"
+                  resizeMode="cover"
+                  style={styles.image}
+                />
               </View>
             </TouchableOpacity>
           );
@@ -47,20 +52,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     gap: Layout.space.small,
   },
-  square: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: Colors.secondary,
-    padding: Layout.space.base,
-    borderWidth: 1,
-    borderRadius: Layout.radius.round,
-    borderColor: Colors.secondary,
-    width: Layout.space.base*10,
-    height: Layout.space.base*10,
-  },
-  selected: {
-    borderColor: Colors.primary,
+  image: {
+    borderRadius: Layout.space.base,
+    width: 96.7,
+    height: 96.7,
   },
 });
 
