@@ -1,9 +1,12 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { BaseProps } from '@/constants/Types';
+import { useDispatch } from 'react-redux';
+import { setTabActive } from "@/redux/slices/TabSlice";
 import { Layout } from '@/constants/Layout';
 import { ListItemProps } from '@/constants/Types';
 import ListView from '../view/ListView';
 import TextView from '../view/TextView';
+import BackButton from '../button/BackButton';
+import i18n from '@/translation/i18n';
 
 type ItemProps = {
   label: string,
@@ -25,9 +28,15 @@ const items: ItemProps[] = [
   },
 ];
 
-const SettingsMenu = ({style, children}: BaseProps) => {
+const SettingsMenu = () => {
+  const dispatch = useDispatch();
+  
   return (
     <View style={styles.container}>
+      <BackButton
+        title={i18n.t('Settings')}
+        onPress={() => dispatch(setTabActive('SettingsMenu'))}
+      />
       <ListView 
         data={items} 
         renderItem={({item, index}: ListItemProps) => {
