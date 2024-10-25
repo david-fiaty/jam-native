@@ -20,7 +20,7 @@ const iconSize = {
 };
 
 const fontSize = {
-  small: 10,
+  small: 12,
   base: 13.5,
   big: 24,
 };
