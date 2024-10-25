@@ -12,8 +12,8 @@ import i18n from '@/translation/i18n';
 
 const NotificationsMenu = () => {
   const router = useRouter();
-  const items = ApiClient.get('notifications');
   const dispatch = useDispatch();
+  const items = ApiClient.get('notifications');
 
   return (
     <View style={styles.container}>

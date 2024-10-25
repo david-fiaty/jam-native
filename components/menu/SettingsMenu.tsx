@@ -1,4 +1,5 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
 import { useDispatch } from 'react-redux';
 import { setTabActive } from "@/redux/slices/TabSlice";
 import { Layout } from '@/constants/Layout';
@@ -29,6 +30,7 @@ const items: ItemProps[] = [
 ];
 
 const SettingsMenu = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   
   return (
@@ -41,9 +43,7 @@ const SettingsMenu = () => {
         data={items} 
         renderItem={({item, index}: ListItemProps) => {
           return (
-            <TouchableOpacity onPress={() => {
-              console.log('clicked', item, index);
-            }}>
+            <TouchableOpacity onPress={() => router.push('/account')}>
               <View style={styles.item}>
                 <TextView>{item.label}</TextView>
               </View>
