@@ -1,7 +1,7 @@
 export const Stack = [
   {
     name: 'JamsList', 
-    effect: 'push',
+    effect: 'fade',
     active: false,
   },
   {
