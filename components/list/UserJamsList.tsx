@@ -1,22 +1,21 @@
-import React, { useState } from 'react';
 import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
-import { Colors } from '@/constants/Colors';
-import TextView from '../view/TextView';
 import { Layout } from '@/constants/Layout';
+import TextView from '../view/TextView';
 import ApiClient from '@/classes/ApiClient';
 import i18n from '@/translation/i18n';
 import ImageView from '../view/ImageView';
+import ScreenManager from '@/classes/ScreenManager';
 
 const UserJamsList = () => {  
-  const [selectedOption, setSelectedOption] = useState(null);
   const data = ApiClient.get('jams');
+  const numColumns = 3;
 
   return (
     <View style={styles.container}>
       <TextView style={styles.title}>{i18n.t('Your Jams')}</TextView>
       <FlatList 
         data={data} 
-        numColumns={3}
+        numColumns={numColumns}
         contentContainerStyle={{gap: Layout.space.base}}
         columnWrapperStyle={{gap: Layout.space.base}}
         scrollEnabled={false}
@@ -29,7 +28,7 @@ const UserJamsList = () => {
                   width="100%"
                   height="100%"
                   resizeMode="cover"
-                  style={styles.image}
+                  style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
                 />
               </View>
             </TouchableOpacity>
