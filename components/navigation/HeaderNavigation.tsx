@@ -20,7 +20,7 @@ const HeaderNavigation = () => {
   return (
     <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
       <BoxView direction="row" align="center" style={Layout.headerRight}>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={() => dispatch(setTabActive('JamsList'))}>
           <LogoView size={Layout.logo} />
         </TouchableOpacity>
       </BoxView>
