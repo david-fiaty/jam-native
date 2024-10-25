@@ -78,6 +78,7 @@ const JamsList = () => {
               <BoxView style={styles.listItemCollapsible}>
                 <CollapsibleView 
                   label={i18n.t('View more.')} 
+                  openedLabel={i18n.t('View less.')} 
                   content={
                     <BoxView direction="column" align="flex-start" style={styles.listItemDetails}>
                       <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
