@@ -29,10 +29,10 @@ const NotificationScreen = ({item}: Props) => {
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true}>
       <BackButton
-        title={i18n.t('Your profile')}
+        title={item.label}
         onPress={() => router.back() }
       />
-      <BoxView direction="column" align="flex-start" justify="flex-start" style={styles.container}>
+      <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.pageContent}>
         <TextView>
           {item.content}
         </TextView>
@@ -40,11 +40,5 @@ const NotificationScreen = ({item}: Props) => {
     </BoxView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    padding: Layout.space.base,
-  },
-});
 
 export default NotificationScreen;
