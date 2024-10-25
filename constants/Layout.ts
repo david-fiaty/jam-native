@@ -143,5 +143,8 @@ export const Layout = {
   listItem: {
     padding: space.small,
   },
+  pageContent: {
+    padding: space.base,
+  },
 };
 
