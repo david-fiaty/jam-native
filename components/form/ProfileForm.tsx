@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { setTabActive } from "@/redux/slices/TabSlice";
@@ -12,9 +13,17 @@ import InputTextBase from '../base/InputTextBase';
 import CreativeOrganizationField from '../field/CreativeOrganizationField';
 import UserJamsList from '../list/UserJamsList';
 import UserProjectsList from '../list/UserProjectsList';
+import SpinnerView from '../view/SpinnerView';
 
 const ProfileForm = () => {
   const dispatch = useDispatch();
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setIsLoaded(true), Layout.animation.duration);
+  });
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true}>
