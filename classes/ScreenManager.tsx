@@ -10,6 +10,10 @@ class ScreenManager {
       height: value,
     };
   }
+
+  getActiveScreen(state: []) {
+    return state.find(item => item.active === true);
+  }
 };
 
 export default (new ScreenManager());
