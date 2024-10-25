@@ -1,6 +1,9 @@
 # Commands
 eas init --id "bc105b9c-d776-42e2-bd2e-2ebcff179748"
+
 eas update --platform android
+eas update --branch dev-features-6 --platform android
+
 eas build -p android --clear-cache --profile preview 
 
 npm cache clean --force
