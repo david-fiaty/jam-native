@@ -8,7 +8,6 @@ import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
-import { Colors } from "@/constants/Colors";
 
 const HostsList = () => {
   const data = ApiClient.get('hosts');
