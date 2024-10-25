@@ -1,4 +1,4 @@
-import { TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import IconView from '../view/IconView';
 import TextView from '../view/TextView';
 import BoxView from '../view/BoxView';
@@ -13,7 +13,7 @@ const BackButton = ({title, onPress}: Props) => {
     return (        
       <BoxView direction="row" align="center">
         <IconView name="previous" theme="clear" size={22} onPress={onPress} />
-        <TextView>{title}</TextView>
+        <TextView style={styles.text}>{title}</TextView>
       </BoxView>
     );
   };
@@ -28,5 +28,11 @@ const BackButton = ({title, onPress}: Props) => {
 
   return <ButtonView />;
 };
+
+const styles = StyleSheet.create({
+  text: {
+    fontWeight: 'bold',
+  },
+});
 
 export default BackButton;
