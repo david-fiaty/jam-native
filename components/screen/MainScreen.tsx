@@ -18,7 +18,7 @@ const MainScreen = () => {
   const [currentScreen, setCurrentScreen] = useState(null);
   const [animatedStyle, setAnimatedStyle] = useState(null);
 
-  // Store state
+  // Storage state
   const tabState = useSelector((state) => state.tab);
 
   // Animation references
