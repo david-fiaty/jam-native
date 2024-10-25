@@ -14,9 +14,9 @@ const HeaderView = () => {
       </BoxView>
       <BoxView direction="row" align="center" justify="space-between">
         <BoxView direction="row" align="center" style={Layout.headerRight}> 
-          <IconView name="menu" theme="secondary" size={22} onPress={() => {}} />
+          <IconView name="menu" theme="secondary" onPress={() => {}} />
           <IconView label="15+" theme="secondary" size={13} onPress={() => {}} />
-          <IconView name="search" theme="clear" size={22} onPress={() => {}} />
+          <IconView name="search" theme="clear" onPress={() => {}} />
         </BoxView>
       </BoxView>
     </BoxView>

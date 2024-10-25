@@ -30,7 +30,7 @@ const JammersList = () => {
             return (
               <TouchableOpacity onPress={() => console.log('clicked')}>
                 <BoxView direction="row" align="center" justify="flex-start" style={Layout.listItem}>
-                  <IconView name="user" size={22} theme="tertiary" />
+                  <IconView name="user" theme="tertiary" />
                   <TextView>{item.name}</TextView>
                 </BoxView>
               </TouchableOpacity>

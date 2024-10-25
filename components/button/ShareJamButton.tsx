@@ -15,7 +15,7 @@ const ShareJamButton = ({title, style}: Props) => {
   return (       
     <TouchableOpacity onPress={() => {}}>
       <BoxView direction="row" align="center" justify="flex-start" style={style}>
-        <IconView name="user" size={22} theme="tertiary" />
+        <IconView name="user" theme="tertiary" />
         <TextView>{buttonTitle}</TextView>
       </BoxView>
     </TouchableOpacity>

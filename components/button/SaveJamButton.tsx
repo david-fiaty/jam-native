@@ -15,7 +15,7 @@ const SaveJamButton = ({title, style}: Props) => {
   return (       
     <TouchableOpacity onPress={() => {}}>
       <BoxView direction="row" align="center" justify="flex-start" style={style}>
-        <IconView name="save" size={22} theme="tertiary" />
+        <IconView name="save" theme="tertiary" />
         <TextView>{buttonTitle}</TextView>
       </BoxView>
     </TouchableOpacity>

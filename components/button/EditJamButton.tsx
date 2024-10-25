@@ -15,7 +15,7 @@ const EditJamButton = ({title, style}: Props) => {
   return (       
     <TouchableOpacity onPress={() => {}}>
       <BoxView direction="row" align="center" justify="flex-start" style={style}>
-        <IconView name="edit" size={22} theme="tertiary" />
+        <IconView name="edit" theme="tertiary" />
         <TextView>{buttonTitle}</TextView>
       </BoxView>
     </TouchableOpacity>

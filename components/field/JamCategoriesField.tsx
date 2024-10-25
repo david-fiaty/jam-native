@@ -24,7 +24,7 @@ const JamCategoriesField = ({data}: Props) => {
           <TouchableOpacity onPress={() => setSelectedOption(item.id)}>
             <View style={styles.container}>
               <View style={[styles.square, selectedOption == item.id ? styles.selected : {}]}>
-                <IconView name={item.icon} theme="secondary" size={22} />
+                <IconView name={item.icon} theme="secondary" />
               </View>
               <TextView>{item.label}</TextView>   
             </View>

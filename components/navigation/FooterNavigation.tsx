@@ -12,19 +12,19 @@ const FooterNavigation = () => {
       <IconView
         name="location"
         theme="clear"
-        size={22}
+       
         onPress={() => dispatch(setTabActive('MapView'))}
       />
       <IconView
         name="plus"
         theme="clear"
-        size={22}
+       
         onPress={() => dispatch(setTabActive('AddJamForm'))}
       />
       <IconView
         name="user"
         theme="clear"
-        size={22}
+       
         onPress={() => dispatch(setTabActive('ProfileForm'))}
       />
     </BoxView>

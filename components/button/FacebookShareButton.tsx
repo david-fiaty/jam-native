@@ -15,7 +15,7 @@ const FacebookShareButton = ({title, style}: Props) => {
   return (       
     <TouchableOpacity onPress={() => {}}>
       <BoxView direction="row" align="center" justify="flex-start" style={style}>
-        <IconView name="instagram" size={22} theme="tertiary" />
+        <IconView name="instagram" theme="tertiary" />
         <TextView>{buttonTitle}</TextView>
       </BoxView>
     </TouchableOpacity>
