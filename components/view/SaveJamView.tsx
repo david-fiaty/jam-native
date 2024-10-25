@@ -5,14 +5,14 @@ import { Layout } from "@/constants/Layout";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
-import ShareButton from "../button/ShareButton";
+import ShareJamButton from "../button/ShareJamButton";
 import ViewMyJamsButton from "../button/ViewMyJamsButton";
 
 const SaveJamView = () => {
   const dispatch = useDispatch();
 
   const data = [
-    <ShareButton style={Layout.listItem} />,
+    <ShareJamButton style={Layout.listItem} />,
     <ViewMyJamsButton style={Layout.listItem} />,
   ];
 

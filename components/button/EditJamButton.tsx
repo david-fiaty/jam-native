@@ -9,17 +9,17 @@ type Props = {
   style?: object,
 };
 
-const ViewMyJams = ({title, style}: Props) => {
-  const buttonTitle = title ? i18n.t(title) : i18n.t('View my Jams');
+const EditJamButton = ({title, style}: Props) => {
+  const buttonTitle = title ? i18n.t(title) : i18n.t('Edit Jam');
 
   return (       
     <TouchableOpacity onPress={() => {}}>
       <BoxView direction="row" align="center" justify="flex-start" style={style}>
-        <IconView name="view" size={22} theme="tertiary" />
+        <IconView name="edit" size={22} theme="tertiary" />
         <TextView>{buttonTitle}</TextView>
       </BoxView>
     </TouchableOpacity>
   );
 };
 
-export default ViewMyJams;
+export default EditJamButton;

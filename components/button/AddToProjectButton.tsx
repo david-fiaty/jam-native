@@ -9,17 +9,17 @@ type Props = {
   style?: object,
 };
 
-const ShareButton = ({title, style}: Props) => {
-  const buttonTitle = title ? i18n.t(title) : i18n.t('Share');
+const AddToProjectButton = ({title, style}: Props) => {
+  const buttonTitle = title ? i18n.t(title) : i18n.t('Add to project');
 
   return (       
     <TouchableOpacity onPress={() => {}}>
       <BoxView direction="row" align="center" justify="flex-start" style={style}>
-        <IconView name="user" size={22} theme="tertiary" />
+        <IconView name="plus" size={22} theme="tertiary" />
         <TextView>{buttonTitle}</TextView>
       </BoxView>
     </TouchableOpacity>
   );
 };
 
-export default ShareButton;
+export default AddToProjectButton;

@@ -3,15 +3,30 @@ import { useDispatch } from 'react-redux';
 import { setTabActive } from "@/redux/slices/TabSlice";
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
-import ApiClient from "@/classes/ApiClient";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
+import SaveJamButton from "../button/SaveJamButton";
+import ShareJamButton from "../button/ShareJamButton";
+import AddToProjectButton from "../button/AddToProjectButton";
+import ViewProjectButton from "../button/ViewProjectButton";
+import EditJamButton from "../button/EditJamButton";
+import ReportJamButton from "../button/ReportJamButton";
+import DeleteJamButton from "../button/DeleteJamButton";
 
 const MoreJamView = () => {
-  const data = ApiClient.get('hosts');
   const dispatch = useDispatch();
+
+  const data = [
+    <SaveJamButton style={Layout.listItem} />,
+    <ShareJamButton style={Layout.listItem} />,
+    <AddToProjectButton style={Layout.listItem} />,
+    <ViewProjectButton style={Layout.listItem}/>,
+    <EditJamButton style={Layout.listItem} />,
+    <ReportJamButton style={Layout.listItem} />,
+    <DeleteJamButton style={Layout.listItem} />,
+  ];
 
   return (
     <BoxView direction="column">
@@ -26,16 +41,7 @@ const MoreJamView = () => {
           scrollEnabled={true}
           horizontal={false}
           contentContainerStyle={Layout.list}
-          renderItem={({item, index}) => {
-            return (
-              <TouchableOpacity onPress={() => console.log('clicked')}>
-                <BoxView direction="row" align="center" justify="flex-start" style={styles.listItem}>
-                  <IconView name="user" size={22} theme="tertiary" />
-                  <TextView>{item.name}</TextView>
-                </BoxView>
-              </TouchableOpacity>
-            );
-          }}
+          renderItem={({item, index}) => data[index]}
         />
       </View>
     </BoxView>

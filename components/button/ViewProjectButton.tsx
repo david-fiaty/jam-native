@@ -9,8 +9,8 @@ type Props = {
   style?: object,
 };
 
-const ViewMyJams = ({title, style}: Props) => {
-  const buttonTitle = title ? i18n.t(title) : i18n.t('View my Jams');
+const ViewProjectButton = ({title, style}: Props) => {
+  const buttonTitle = title ? i18n.t(title) : i18n.t('View project');
 
   return (       
     <TouchableOpacity onPress={() => {}}>
@@ -22,4 +22,4 @@ const ViewMyJams = ({title, style}: Props) => {
   );
 };
 
-export default ViewMyJams;
+export default ViewProjectButton;
