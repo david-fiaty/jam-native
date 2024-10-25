@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList, TouchableOpacity } from "react-native";
 import { useDispatch } from 'react-redux';
 import { setTabActive } from "@/redux/slices/TabSlice";
 import { Layout } from "@/constants/Layout";
@@ -6,13 +6,14 @@ import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import ShareButton from "../button/ShareButton";
+import ViewMyJams from "../button/ViewMyJamsButton";
 
 const SaveJamView = () => {
   const dispatch = useDispatch();
 
   const data = [
     <ShareButton />,
-    <ShareButton />,
+    <ViewMyJams />,
   ];
 
   return (
