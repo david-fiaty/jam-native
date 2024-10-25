@@ -2,11 +2,9 @@ import { StyleSheet, View, FlatList } from "react-native";
 import { useDispatch } from 'react-redux';
 import { setTabActive } from "@/redux/slices/TabSlice";
 import { Layout } from "@/constants/Layout";
-import ApiClient from "@/classes/ApiClient";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
-import IconView from "./IconView";
 import ShareButton from "../button/ShareButton";
 
 const SaveJamView = () => {
