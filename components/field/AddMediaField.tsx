@@ -5,10 +5,6 @@ import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
 import IconView from "../view/IconView";
 
-type ImagePreviewProps = {
-  selectedImage?: string;
-};
-
 const AddMediaField = () => {
   return (
     <MediaPickerBase

@@ -25,7 +25,7 @@ const IconView = ({name, size, label, theme, radius = 'circle', style, onPress}:
       name={name}
       iconStyle={iconStyle} 
       containerStyle={styles.containerStyle}
-      size={size} 
+      size={size ? size : Layout.iconSize.base} 
     />
   ); 
 
