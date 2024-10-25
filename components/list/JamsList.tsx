@@ -113,6 +113,7 @@ const styles = StyleSheet.create({
   }, 
   listItemHeader: {
     paddingHorizontal: Layout.space.base,
+    paddingVertical: Layout.space.base/2,
   },
   listItemToolbar: {
     padding: Layout.space.base,
