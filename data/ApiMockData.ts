@@ -2,6 +2,7 @@ const ApiMockData = {
   jams: [
     {
       id: 1,
+      active: true,
       host_count: 5,
       jammer_count: 8,
       image: require('@/assets/images/jam-1.jpg'),
@@ -9,6 +10,7 @@ const ApiMockData = {
     },
     {
       id: 2,
+      active: true,
       host_count: 12,
       jammer_count: 7,
       image: require('@/assets/images/jam-2.jpg'),
@@ -16,6 +18,7 @@ const ApiMockData = {
     },
     {
       id: 3,
+      active: true,
       host_count: 9,
       jammer_count: 4,
       image: require('@/assets/images/jam-3.jpg'),
@@ -23,6 +26,7 @@ const ApiMockData = {
     },
     {
       id: 4,
+      active: true,
       host_count: 5,
       jammer_count: 11,
       image: require('@/assets/images/jam-4.jpg'),
@@ -30,6 +34,7 @@ const ApiMockData = {
     },
     {
       id: 5,
+      active: true,
       host_count: 8,
       jammer_count: 3,
       image: require('@/assets/images/jam-5.jpg'),
@@ -37,6 +42,7 @@ const ApiMockData = {
     },
     {
       id: 6,
+      active: true,
       host_count: 2,
       jammer_count: 10,
       image: require('@/assets/images/jam-2.jpg'),
@@ -44,6 +50,7 @@ const ApiMockData = {
     },
     {
       id: 7,
+      active: true,
       host_count: 2,
       jammer_count: 10,
       image: require('@/assets/images/jam-1.jpg'),
@@ -51,6 +58,7 @@ const ApiMockData = {
     },
     {
       id: 8,
+      active: true,
       host_count: 4,
       jammer_count: 18,
       image: require('@/assets/images/jam-3.jpg'),
@@ -58,6 +66,7 @@ const ApiMockData = {
     },
     {
       id: 9,
+      active: true,
       host_count: 1,
       jammer_count: 5,
       image: require('@/assets/images/jam-5.jpg'),
@@ -65,6 +74,7 @@ const ApiMockData = {
     },
     {
       id: 10,
+      active: true,
       host_count: 3,
       jammer_count: 55,
       image: require('@/assets/images/jam-4.jpg'),
