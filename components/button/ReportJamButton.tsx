@@ -15,7 +15,7 @@ const ReportJamButton = ({title, style}: Props) => {
   return (       
     <TouchableOpacity onPress={() => {}}>
       <BoxView direction="row" align="center" justify="flex-start" style={style}>
-        <IconView name="delete" size={22} theme="tertiary" />
+        <IconView name="report" size={22} theme="tertiary" />
         <TextView>{buttonTitle}</TextView>
       </BoxView>
     </TouchableOpacity>
