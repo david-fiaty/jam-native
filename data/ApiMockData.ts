@@ -10,7 +10,7 @@ const ApiMockData = {
     },
     {
       id: 2,
-      active: true,
+      active: false,
       host_count: 12,
       jammer_count: 7,
       image: require('@/assets/images/jam-2.jpg'),
