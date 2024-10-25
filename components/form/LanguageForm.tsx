@@ -1,17 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
-import { BaseProps } from '@/constants/Types';
+import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
+import InputTextBase from '../base/InputTextBase';
 import SpinnerView from '../view/SpinnerView';
-import TextView from '../view/TextView';
 
-type Props = BaseProps & {
-  item?: object,
-};
-
-const NotificationScreen = ({item}: Props) => {
+const LanguageForm = () => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -24,16 +20,16 @@ const NotificationScreen = ({item}: Props) => {
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true}>
       <BackButton
-        title={item.label}
+        title={i18n.t('Account information')}
         onPress={() => router.back()}
       />
       <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.pageContent}>
-        <TextView>
-          {item.content}
-        </TextView>
+        <InputTextBase placeholder={i18n.t('Full name')} />
+        <InputTextBase placeholder={i18n.t('Email address')} />
+        <InputTextBase placeholder={i18n.t('Phone number')} />
       </BoxView>
     </BoxView>
   );
 };
 
-export default NotificationScreen;
+export default LanguageForm;

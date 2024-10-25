@@ -1,22 +1,14 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { setTabActive } from "@/redux/slices/TabSlice";
+import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
-import UserLocationField from "../field/UserLocationField";
-import IndustryField from "../field/IndustryField";
-import DividerView from "../view/DividerView";
-import UserProfileImageField from '../field/UserProfileImageField';
 import InputTextBase from '../base/InputTextBase';
-import CreativeOrganizationField from '../field/CreativeOrganizationField';
-import UserJamsList from '../list/UserJamsList';
-import UserProjectsList from '../list/UserProjectsList';
 import SpinnerView from '../view/SpinnerView';
 
 const AccountForm = () => {
-  const dispatch = useDispatch();
+  const router = useRouter();
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -29,7 +21,7 @@ const AccountForm = () => {
     <BoxView align="flex-start" justify="flex-start" scroll={true}>
       <BackButton
         title={i18n.t('Account information')}
-        onPress={() => dispatch(setTabActive('AccountForm'))}
+        onPress={() => router.back()}
       />
       <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.pageContent}>
         <InputTextBase placeholder={i18n.t('Full name')} />
