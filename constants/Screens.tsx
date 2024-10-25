@@ -1,6 +1,6 @@
 import SettingsMenu from "@/components/menu/SettingsMenu";
 import NotificationsMenu from "@/components/menu/NotificationsMenu";
-import SearchView from "@/components/screen/SearchView";
+import SearchView from "@/components/view/SearchView";
 import MapView from "@/components/view/MapView";
 import AddJamForm from "@/components/form/AddJamForm";
 import ProfileForm from "@/components/form/ProfileForm";
