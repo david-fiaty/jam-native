@@ -12,6 +12,7 @@ import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
 import CollapsibleView from '../view/CollapsibleView';
 import SpinnerView from '../view/SpinnerView';
+import JamStatusButton from '../button/JamStatusButton';
 
 const JamsList = () => {  
   const data = ApiClient.get('jams');
@@ -41,6 +42,9 @@ const JamsList = () => {
                   <TouchableOpacity onPress={() => dispatch(setTabActive('HostsList'))}>
                     <TextView>@{i18n.t('host')} +{item.host_count}</TextView>
                   </TouchableOpacity>
+                </BoxView>
+                <BoxView>
+                  <JamStatusButton />
                 </BoxView>
                 <BoxView>
                   <IconView name="actions" theme="clear" onPress={() => dispatch(setTabActive('MoreJamView'))} />
