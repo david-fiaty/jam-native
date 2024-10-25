@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
@@ -7,11 +8,11 @@ import TextView from '../view/TextView';
 
 
 const JamStatusButton = () => {
+  const [labelVisible, setLabelVisible] = useState(false);
   const buttonLabel = i18n.t('Active');
-  const active = true;
-
+  
   return (       
-    <TouchableOpacity onPress={() => {}}>
+    <TouchableOpacity onPress={() => {setLabelVisible(!labelVisible)}}>
       <BoxView direction="row" align="center" justify="center" style={styles.container}>
         <View style={styles.dot} />
         <TextView style={styles.label}>{buttonLabel}</TextView>
