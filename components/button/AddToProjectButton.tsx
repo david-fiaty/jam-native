@@ -10,7 +10,7 @@ type Props = {
 };
 
 const AddToProjectButton = ({title, style}: Props) => {
-  const buttonTitle = title ? i18n.t(title) : i18n.t('Save Jam');
+  const buttonTitle = title ? i18n.t(title) : i18n.t('Add to project');
 
   return (       
     <TouchableOpacity onPress={() => {}}>
