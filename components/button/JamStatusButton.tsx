@@ -1,24 +1,47 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Colors } from '@/constants/Colors';
-import i18n from '@/translation/i18n';
 import { Layout } from '@/constants/Layout';
+import i18n from '@/translation/i18n';
+import BoxView from '../view/BoxView';
+import TextView from '../view/TextView';
 
 
 const JamStatusButton = () => {
+  const buttonLabel = i18n.t('Active');
+  const active = true;
 
   return (       
     <TouchableOpacity onPress={() => {}}>
-      <View style={styles.dot}></View>
+      <BoxView direction="row" align="center" justify="center" style={styles.container}>
+        <View style={styles.dot} />
+        <TextView style={styles.label}>{buttonLabel}</TextView>
+      </BoxView> 
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    borderRadius: Layout.radius.circle,
+    width: Layout.space.base*2.5,
+    height: Layout.space.base*2.5,
+  },
   dot: {
     backgroundColor: Colors.primary,
     width: Layout.space.base*0.75,
     height: Layout.space.base*0.75,
     borderRadius: Layout.radius.round,
+  },
+  label: {
+    width: '100%',
+    height: '100%',
+    minWidth: 56,
+    textAlign: 'center',
+    verticalAlign: 'middle',
+    borderRadius: Layout.radius.round,
+    color: Colors.white,
+    fontSize: Layout.fontSize.small,
+    backgroundColor: Colors.primary,
   },
   active: {
     backgroundColor: Colors.primary,
