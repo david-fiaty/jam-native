@@ -6,7 +6,6 @@ const TabSlice = createSlice({
   initialState: Stack,
   reducers: {
     setTabActive: (state, action) => {
-      console.log(action);
       state.map(item => {
         if (item.name == action.payload && item.active) {
           item.active = false;
