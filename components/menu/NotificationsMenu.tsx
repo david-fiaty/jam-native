@@ -12,8 +12,8 @@ import i18n from '@/translation/i18n';
 
 const NotificationsMenu = () => {
   const router = useRouter();
-  const items = ApiClient.get('notifications');
   const dispatch = useDispatch();
+  const items = ApiClient.get('notifications');
 
   return (
     <View style={styles.container}>
@@ -26,15 +26,8 @@ const NotificationsMenu = () => {
         renderItem={({item, index}: ListItemProps) => {
           return (
             <TouchableOpacity 
-              onPress={() => {
-                console.log('clicked');
-                
-                router.push({
-                  pathname: '/notification', 
-                  params: item,
-                });
-            
-              }}>
+              onPress={() => router.push({ pathname: '/notification', params: item })}
+            >
               <View style={styles.item}>
                 <TextView>{item.label}</TextView>
               </View>
