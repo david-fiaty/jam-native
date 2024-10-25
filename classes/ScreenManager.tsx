@@ -3,7 +3,7 @@ import DeviceManager from './DeviceManager';
 
 class ScreenManager {
   getGridCellSize(numColumns: number) {
-    let value = (DeviceManager.window.width - Layout.space.base*(numColumns + 1))/numColumns; 
+    let value = (DeviceManager.window.width - Layout.space.base*(numColumns + 2))/numColumns; 
 
     return {
       width: value,
