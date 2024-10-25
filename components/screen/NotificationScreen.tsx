@@ -22,16 +22,15 @@ const NotificationScreen = ({item}: Props) => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView align="flex-start" justify="flex-start" scroll={true}>
+    <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
         title={item.label}
         onPress={() => router.back()}
       />
-      <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.screenContent}>
-        <TextView>
-          {item.content}
-        </TextView>
-      </BoxView>
+      
+      <TextView>
+        {item.content}
+      </TextView>
     </BoxView>
   );
 };

@@ -91,6 +91,7 @@ export const Layout = {
     width: '100%',
     height: '100%',
     flexGrow: 1,
+    backgroundColor: Colors.white,
   },
   mainContent: {
     width: '100%',
@@ -116,7 +117,7 @@ export const Layout = {
     bottom: footer.height,
     width: '100%',
     height: modal.height, 
-    backgroundColor: 'lightblue',
+    backgroundColor: Colors.white,
   },
   formField: {
     backgroundColor: Colors.secondary,
