@@ -1,12 +1,10 @@
-import { StyleSheet, View, FlatList, TouchableOpacity } from "react-native";
+import { View, FlatList } from "react-native";
 import { useDispatch } from 'react-redux';
 import { setTabActive } from "@/redux/slices/TabSlice";
 import { Layout } from "@/constants/Layout";
-import TextView from "../view/TextView";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
-import IconView from "../view/IconView";
 import SaveJamButton from "../button/SaveJamButton";
 import ShareJamButton from "../button/ShareJamButton";
 import AddToProjectButton from "../button/AddToProjectButton";
@@ -47,11 +45,5 @@ const MoreJamView = () => {
     </BoxView>
   );
 };
-
-const styles = StyleSheet.create({
-  listItem: {
-    padding: Layout.space.small,
-  },
-});
 
 export default MoreJamView;
