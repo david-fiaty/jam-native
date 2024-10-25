@@ -20,7 +20,7 @@ const PasswordForm = () => {
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true}>
       <BackButton
-        title={i18n.t('Account information')}
+        title={i18n.t('Change password')}
         onPress={() => router.back()}
       />
       <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.pageContent}>

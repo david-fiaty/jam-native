@@ -43,7 +43,7 @@ const SettingsMenu = () => {
         data={items} 
         renderItem={({item, index}: ListItemProps) => {
           return (
-            <TouchableOpacity onPress={() => router.push('/account')}>
+            <TouchableOpacity onPress={() => router.push(item.path)}>
               <View style={styles.item}>
                 <TextView>{item.label}</TextView>
               </View>

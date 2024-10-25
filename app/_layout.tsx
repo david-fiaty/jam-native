@@ -21,6 +21,8 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="index" options={screenOptions} />
         <Stack.Screen name="account" options={screenOptions} />
+        <Stack.Screen name="password" options={screenOptions} />
+        <Stack.Screen name="language" options={screenOptions} />
         <Stack.Screen name="notification" options={screenOptions} />
       </Stack>
     </Provider>
