@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { setTabActive } from "@/redux/slices/TabSlice";
 import { Layout } from '@/constants/Layout';
@@ -52,10 +51,5 @@ const ProfileForm = () => {
     </BoxView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-  },
-});
 
 export default ProfileForm;
