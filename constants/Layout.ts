@@ -135,7 +135,6 @@ export const Layout = {
   },
   borderedListContainer: {
     width: '100%',
-    flexGrow: 1,
     borderWidth: 1,
     borderRadius: radius.round,
     borderColor: Colors.primary,

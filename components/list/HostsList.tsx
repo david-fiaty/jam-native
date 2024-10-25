@@ -14,7 +14,7 @@ const HostsList = () => {
   const dispatch = useDispatch();
 
   return (
-    <BoxView direction="column">
+    <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Jam hosts')}
         onPress={() => dispatch(setActiveTab('HostsList'))}

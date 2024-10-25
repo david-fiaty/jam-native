@@ -21,7 +21,7 @@ const ShareJamView = () => {
   ];
 
   return (
-    <BoxView direction="column">
+    <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Share Jam')}
         onPress={() => dispatch(setActiveTab('ShareJamView'))}
