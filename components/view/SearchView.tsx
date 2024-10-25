@@ -5,6 +5,7 @@ import { GlobalStyles} from "@/constants/GlobalStyles";
 import { Colors } from "@/constants/Colors";
 import ApiClient from '@/classes/ApiClient';
 import ImageView from "./ImageView";
+import { Layout } from "@/constants/Layout";
 
 const SearchView = () => {
   const [index, setIndex] = React.useState(0);
@@ -125,7 +126,6 @@ const SearchView = () => {
           />
         </TabView.Item>
 
-
         <TabView.Item style={styles.tab}>
           <FlatList 
             data={projectsData} 
@@ -163,26 +163,26 @@ const styles = {
   tab: {
     width: '100%',
     height: '100%',
-    padding: GlobalStyles.space.container,
+    padding: Layout.space.base,
   },
   button: {
     padding: 0,
     margin: 0,
     fontWeight: 'normal',
-    fontSize: 10,
+    fontSize: Layout.fontSize,
   },
   title: {
     ...GlobalStyles.text,
   },
   item: {
     backgroundColor: Colors.tertiary,
-    borderRadius: 8,
+    borderRadius: Layout.radius.round,
     borderColor: Colors.tertiary,
-    width: GlobalStyles.space.base*10.3,
-    height: GlobalStyles.space.base*10.3,
   },
   image: {
-    borderRadius: GlobalStyles.space.base,
+    borderRadius: Layout.space.base,
+    width: 96.7,
+    height: 96.7,
   },
 };
 
