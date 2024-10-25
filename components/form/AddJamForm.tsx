@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { StyleSheet } from "react-native";
 import { useDispatch } from 'react-redux';
 import { setTabActive } from "@/redux/slices/TabSlice";
@@ -15,9 +16,17 @@ import StatusField from "../field/StatusField";
 import IndustryField from "../field/IndustryField";
 import PostButton from "../button/PostButton";
 import DividerView from "../view/DividerView";
+import SpinnerView from '../view/SpinnerView';
 
 const AddJamForm = () => {
   const dispatch = useDispatch();
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setIsLoaded(true), Layout.animation.duration);
+  });
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (    
     <BoxView align="flex-start" justify="flex-start" scroll={true}>
