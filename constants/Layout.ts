@@ -140,5 +140,8 @@ export const Layout = {
   list: {
     flexGrow: 1,
   },
+  listItem: {
+    padding: space.small,
+  },
 };
 

@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList, TouchableOpacity } from "react-native";
+import { View, FlatList, TouchableOpacity } from "react-native";
 import { useDispatch } from 'react-redux';
 import { setTabActive } from "@/redux/slices/TabSlice";
 import { Layout } from "@/constants/Layout";
@@ -8,7 +8,6 @@ import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
-import { Colors } from "@/constants/Colors";
 
 const JammersList = () => {
   const data = ApiClient.get('jammers');
@@ -30,7 +29,7 @@ const JammersList = () => {
           renderItem={({item, index}) => {
             return (
               <TouchableOpacity onPress={() => console.log('clicked')}>
-                <BoxView direction="row" align="center" justify="flex-start" style={styles.listItem}>
+                <BoxView direction="row" align="center" justify="flex-start" style={Layout.listItem}>
                   <IconView name="user" size={22} theme="tertiary" />
                   <TextView>{item.name}</TextView>
                 </BoxView>
@@ -42,20 +41,5 @@ const JammersList = () => {
     </BoxView>
   );
 };
-
-const styles = StyleSheet.create({
-  listContainer: {
-    ...Layout.listContainer,
-    ...{
-      borderWidth: 1,
-      borderRadius: Layout.radius.round,
-      borderColor: Colors.primary,
-      padding: Layout.space.base,
-    },
-  },
-  listItem: {
-    padding: Layout.space.small,
-  },
-});
 
 export default JammersList;

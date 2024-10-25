@@ -6,14 +6,15 @@ import TextView from '../view/TextView';
 
 type Props = {
   title?: string,
+  style?: object,
 };
 
-const ViewMyJams = ({title}: Props) => {
+const ViewMyJams = ({title, style}: Props) => {
   const buttonTitle = title ? i18n.t(title) : i18n.t('View my jams');
 
   return (       
     <TouchableOpacity onPress={() => {}}>
-      <BoxView direction="row" align="center" justify="flex-start">
+      <BoxView direction="row" align="center" justify="flex-start" style={style}>
         <IconView name="view" size={22} theme="tertiary" />
         <TextView>{buttonTitle}</TextView>
       </BoxView>

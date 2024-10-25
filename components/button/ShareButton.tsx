@@ -6,14 +6,15 @@ import TextView from '../view/TextView';
 
 type Props = {
   title?: string,
+  style?: object,
 };
 
-const ShareButton = ({title}: Props) => {
+const ShareButton = ({title, style}: Props) => {
   const buttonTitle = title ? i18n.t(title) : i18n.t('Share');
 
   return (       
     <TouchableOpacity onPress={() => {}}>
-      <BoxView direction="row" align="center" justify="flex-start">
+      <BoxView direction="row" align="center" justify="flex-start" style={style}>
         <IconView name="user" size={22} theme="tertiary" />
         <TextView>{buttonTitle}</TextView>
       </BoxView>

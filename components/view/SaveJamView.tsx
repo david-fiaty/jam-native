@@ -6,14 +6,14 @@ import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import ShareButton from "../button/ShareButton";
-import ViewMyJams from "../button/ViewMyJamsButton";
+import ViewMyJamsButton from "../button/ViewMyJamsButton";
 
 const SaveJamView = () => {
   const dispatch = useDispatch();
 
   const data = [
-    <ShareButton />,
-    <ViewMyJams />,
+    <ShareButton style={Layout.listItem} />,
+    <ViewMyJamsButton style={Layout.listItem} />,
   ];
 
   return (
@@ -35,11 +35,5 @@ const SaveJamView = () => {
     </BoxView>
   );
 };
-
-const styles = StyleSheet.create({
-  listItem: {
-    padding: Layout.space.small,
-  },
-});
 
 export default SaveJamView;
