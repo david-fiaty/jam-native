@@ -11,7 +11,7 @@ const UserLocationField = () => {
         disabled={true}
         placeholder={i18n.t('Location')} 
         containerStyle={styles.containerStyle} 
-        rightIcon={<IconView name="location" size={22} theme="transparent" />}
+        rightIcon={<IconView name="location" theme="transparent" />}
       />
     </BoxView>
   );

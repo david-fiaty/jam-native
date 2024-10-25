@@ -10,7 +10,7 @@ const AddMediaField = () => {
     <MediaPickerBase
       label={
         <BoxView direction="row" align="center" style={styles.container}>
-          <IconView name="plus" theme="secondary" size={22} radius="round" />
+          <IconView name="plus" theme="secondary" radius="round" />
           <TextView>{i18n.t('Add media')}</TextView>
         </BoxView>
       }

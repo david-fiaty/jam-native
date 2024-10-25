@@ -17,7 +17,7 @@ type Props = BaseProps & {
 
 const IconView = ({name, size, label, theme, radius = 'circle', style, onPress}: Props) => {
   // Icon style
-  const iconStyle = [styles.iconStyle, styles[theme], {fontSize: size}, {borderRadius: Layout.radius[radius]}];
+  const iconStyle = [styles.iconStyle, styles[theme], {borderRadius: Layout.radius[radius]}];
 
   // Image icon
   const imageIcon = (
@@ -25,7 +25,7 @@ const IconView = ({name, size, label, theme, radius = 'circle', style, onPress}:
       name={name}
       iconStyle={iconStyle} 
       containerStyle={styles.containerStyle}
-      size={size ? size : Layout.iconSize.base} 
+      size={size || Layout.iconSize.base} 
     />
   ); 
 
