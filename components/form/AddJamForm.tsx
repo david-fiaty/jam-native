@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet } from "react-native";
 import { useDispatch } from 'react-redux';
 import { setTabActive } from "@/redux/slices/TabSlice";
 import { JamCategoriesData } from "@/constants/Data";
@@ -19,7 +18,6 @@ import PostButton from "../button/PostButton";
 import DividerView from "../view/DividerView";
 import SpinnerView from '../view/SpinnerView';
 
-
 const AddJamForm = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -31,7 +29,7 @@ const AddJamForm = () => {
   if (!isLoaded) return <SpinnerView />;
 
   return (    
-    <BoxView align="flex-start" justify="flex-start" scroll={true}>
+    <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Add new Jam')}
         onPress={() => dispatch(setTabActive('ProfileForm'))}
@@ -54,9 +52,5 @@ const AddJamForm = () => {
     </BoxView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {},
-});
 
 export default AddJamForm;

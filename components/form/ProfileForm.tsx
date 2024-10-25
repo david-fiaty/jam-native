@@ -26,7 +26,7 @@ const ProfileForm = () => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView align="flex-start" justify="flex-start" scroll={true}>
+    <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Your profile')}
         onPress={() => dispatch(setTabActive('ProfileForm'))}
