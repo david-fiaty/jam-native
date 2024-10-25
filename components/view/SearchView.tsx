@@ -178,11 +178,12 @@ const styles = {
     backgroundColor: Colors.tertiary,
     borderRadius: 8,
     borderColor: Colors.tertiary,
-    width: GlobalStyles.space.base*10.3,
-    height: GlobalStyles.space.base*10.3,
+
   },
   image: {
     borderRadius: GlobalStyles.space.base,
+    width: 96.7,
+    height: 96.7,
   },
 };
 
