@@ -27,7 +27,7 @@ const NotificationScreen = ({item}: Props) => {
         title={item.label}
         onPress={() => router.back()}
       />
-      <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.pageContent}>
+      <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.screenContent}>
         <TextView>
           {item.content}
         </TextView>

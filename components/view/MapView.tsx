@@ -6,6 +6,7 @@ import * as Location from "expo-location";
 import RNMapView from "react-native-maps";
 import { BaseProps } from "@/constants/Types";
 import SpinnerView from './SpinnerView';
+import { Layout } from '@/constants/Layout';
 
 const MapView = ({ style, children }: BaseProps) => {
   const [location, setLocation] = useState("");
@@ -39,7 +40,7 @@ const MapView = ({ style, children }: BaseProps) => {
 
   return (
     <TouchableWithoutFeedback>
-      <View style={styles.container}>
+      <View style={Layout.screenContent}>
         <RNMapView
           style={styles.map}
           provider="google"
@@ -75,10 +76,6 @@ const MapView = ({ style, children }: BaseProps) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    flex: 1,
-  },
   map: {
     flex: 1,
   },

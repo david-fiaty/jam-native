@@ -28,7 +28,7 @@ const fontSize = {
 const header = {
   height: 48,
   marginTop: StatusBar.currentHeight,
-  paddingHorizontal: space.base,
+  paddingHorizontal: space.base*1.5,
 };
 
 const logo = {
@@ -110,6 +110,12 @@ export const Layout = {
     height: modal.height, 
     backgroundColor: 'lightblue',
   },
+  screenContent: {
+    padding: space.small,
+    width: '100%',
+    height: '100%',
+    flexGrow: 1,
+  },
   formField: {
     backgroundColor: Colors.secondary,
     borderWidth: 1, 
@@ -137,10 +143,6 @@ export const Layout = {
   },
   listItem: {
     padding: space.small,
-  },
-  pageContent: {
-    padding: space.base,
-    width: '100%',
   },
 };
 

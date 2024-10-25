@@ -25,7 +25,7 @@ const JamsList = () => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView direction="column" style={Layout.listContainer}>
+    <BoxView direction="column" style={Layout.screenContent}>
       <FlatList 
         data={data} 
         numColumns={1}
