@@ -5,8 +5,6 @@ import * as Device from "expo-device";
 import * as Location from "expo-location";
 import RNMapView from "react-native-maps";
 import { BaseProps } from "@/constants/Types";
-import TextView from "../view/TextView";
-import { Layout } from '@/constants/Layout';
 import SpinnerView from './SpinnerView';
 
 const MapView = ({ style, children }: BaseProps) => {

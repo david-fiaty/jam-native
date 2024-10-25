@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { setTabActive } from "@/redux/slices/TabSlice";
@@ -10,10 +11,18 @@ import ImageView from '../view/ImageView';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
 import CollapsibleView from '../view/CollapsibleView';
+import SpinnerView from '../view/SpinnerView';
 
 const JamsList = () => {  
   const data = ApiClient.get('jams');
   const dispatch = useDispatch();
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setIsLoaded(true), Layout.animation.duration);
+  });
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView direction="column" style={Layout.listContainer}>
@@ -67,18 +76,22 @@ const JamsList = () => {
                   label={i18n.t('View more.')} 
                   content={
                     <BoxView direction="column" align="flex-start" style={styles.listItemDetails}>
-                      <View style={styles.listItemDetail}>
-                        <TextView>Sed do eiusmod tempor</TextView>
-                      </View>
-                      <View style={styles.listItemDetail}>
-                        <TextView>Sed do eiusmod tempor</TextView>
-                      </View>
-                      <View style={styles.listItemDetail}>
-                        <TextView>Sed do eiusmod tempor</TextView>
-                      </View>
-                      <View style={styles.listItemDetail}>
-                        <TextView>Sed do eiusmod tempor</TextView>
-                      </View>
+                      <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
+                        <IconView name="arrow" size={14} theme="transparent" />
+                        <TextView>{i18n.t('Location')}</TextView>
+                      </BoxView>
+                      <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
+                        <IconView name="arrow" size={14} theme="transparent" />
+                        <TextView>{i18n.t('Timestamp')}</TextView>
+                      </BoxView>
+                      <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
+                        <IconView name="arrow" size={14} theme="transparent" />
+                        <TextView>{i18n.t('Main industry')}</TextView>
+                      </BoxView>
+                      <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
+                        <IconView name="arrow" size={14} theme="transparent" />
+                        <TextView>{i18n.t('Sub industry')}</TextView>
+                      </BoxView>
                     </BoxView>
                   }
                 />
@@ -99,7 +112,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.primary,
   }, 
   listItemHeader: {
-    padding: Layout.space.base,
+    paddingHorizontal: Layout.space.base,
   },
   listItemToolbar: {
     padding: Layout.space.base,
@@ -115,13 +128,14 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.secondary,
   },
   listItemDetails: {
+    gap: Layout.space.base,
     width: '100%',
-    backgroundColor: 'green',
   },
   listItemDetail: {
     width: '100%',
+    gap: Layout.space.base/6,
     backgroundColor: Colors.secondary,
-    padding: Layout.space.base,
+    padding: Layout.space.base/6,
     borderRadius: Layout.radius.round,
   },
 });
