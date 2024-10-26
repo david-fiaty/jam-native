@@ -1,6 +1,6 @@
 import { TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { setActiveTab } from "@/redux/slices/TabSlice";
+import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from '@/constants/Layout';
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
@@ -12,15 +12,15 @@ const HeaderNavigation = () => {
   return (
     <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
       <BoxView direction="row" align="center" style={Layout.headerRight}>
-        <TouchableOpacity onPress={() => dispatch(setActiveTab('JamsList'))}>
+        <TouchableOpacity onPress={() => dispatch(setActiveScreen('JamsList'))}>
           <LogoView size={Layout.logo} />
         </TouchableOpacity>
       </BoxView>
       <BoxView direction="row" align="center" justify="space-between">
         <BoxView direction="row" align="center" style={Layout.headerRight}> 
-          <IconView name="menu" theme="secondary" onPress={() => dispatch(setActiveTab('SettingsMenu'))} />
-          <IconView label="15+" theme="secondary" size={13} onPress={() => dispatch(setActiveTab('NotificationsMenu'))} />
-          <IconView name="search" theme="clear" onPress={() => dispatch(setActiveTab('SearchView'))} />
+          <IconView name="menu" theme="secondary" onPress={() => dispatch(setActiveScreen('SettingsMenu'))} />
+          <IconView label="15+" theme="secondary" size={13} onPress={() => dispatch(setActiveScreen('NotificationsMenu'))} />
+          <IconView name="search" theme="clear" onPress={() => dispatch(setActiveScreen('SearchView'))} />
         </BoxView>
       </BoxView>
     </BoxView>

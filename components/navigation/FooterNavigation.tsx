@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { Layout } from '@/constants/Layout';
-import { setActiveTab } from "@/redux/slices/TabSlice";
+import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Colors } from "@/constants/Colors";
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
@@ -18,20 +18,20 @@ const FooterNavigation = () => {
         name="location"
         radius="round"
         theme={activeTab?.name == 'MapView' ? 'secondary' : 'clear'}
-        onPress={() => dispatch(setActiveTab('MapView'))}
+        onPress={() => dispatch(setActiveScreen('MapView'))}
       />
       <IconView
         name="plus"
         radius="round"
         theme={activeTab?.name == 'AddJamForm' ? 'secondary' : 'clear'}
-        onPress={() => dispatch(setActiveTab('AddJamForm'))}
+        onPress={() => dispatch(setActiveScreen('AddJamForm'))}
         style={activeTab?.name == 'AddJamForm' ? styles.active : {}}
       />
       <IconView
         name="user"
         radius="round"
         theme={activeTab?.name == 'ProfileForm' ? 'secondary' : 'clear'}
-        onPress={() => dispatch(setActiveTab('ProfileForm'))}
+        onPress={() => dispatch(setActiveScreen('ProfileForm'))}
         style={activeTab?.name == 'ProfileForm' ? styles.active : {}}
       />
     </BoxView>

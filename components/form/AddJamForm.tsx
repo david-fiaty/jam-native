@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setActiveTab } from "@/redux/slices/TabSlice";
+import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { JamCategoriesData } from "@/constants/Data";
 import { Layout } from '@/constants/Layout';
 import TextView from "../view/TextView";
@@ -32,7 +32,7 @@ const AddJamForm = () => {
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Add new Jam')}
-        onPress={() => dispatch(setActiveTab('ProfileForm'))}
+        onPress={() => dispatch(setActiveScreen('ProfileForm'))}
       />
       <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
       <JamCategoriesField data={JamCategoriesData} />

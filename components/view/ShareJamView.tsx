@@ -1,6 +1,6 @@
 import { View, FlatList } from "react-native";
 import { useDispatch } from 'react-redux';
-import { setActiveTab } from "@/redux/slices/TabSlice";
+import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from "@/constants/Layout";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
@@ -24,7 +24,7 @@ const ShareJamView = () => {
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Share Jam')}
-        onPress={() => dispatch(setActiveTab('ShareJamView'))}
+        onPress={() => dispatch(setActiveScreen('ShareJamView'))}
       />
       <View style={Layout.borderedListContainer}>
         <FlatList
