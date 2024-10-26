@@ -5,13 +5,11 @@ import { Layout } from '@/constants/Layout';
 import IconView from '../view/IconView';
 import TextView from '../view/TextView';
 import ListView from '../view/ListView';
+import { JamCategoriesData } from '@/constants/Data';
 
-type Props = {
-  data: object,
-};
-
-const JamCategoriesField = ({data}: Props) => {  
+const JamCategoriesField = () => {  
   const [selectedOption, setSelectedOption] = useState(null);
+  const data = JamCategoriesData;
 
   const renderItem = (item, index) => (
     <TouchableOpacity onPress={() => setSelectedOption(item.id)}>
@@ -30,7 +28,8 @@ const JamCategoriesField = ({data}: Props) => {
       numColumns={4}
       horizontal={false}
       scrollEnabled={false}
-      contentContainerStyle={Layout.listContainer}
+      conten
+      tContainerStyle={Layout.listContainer}
       columnWrapperStyle={Layout.listColumnWrapper}
       renderItem={({item, index}) => renderItem(item, index)}
     />

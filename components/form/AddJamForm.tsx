@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
-import { JamCategoriesData } from "@/constants/Data";
 import { Layout } from '@/constants/Layout';
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
@@ -35,7 +34,7 @@ const AddJamForm = () => {
         onPress={() => dispatch(setActiveScreen('ProfileForm'))}
       />
       <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
-      <JamCategoriesField data={JamCategoriesData} />
+      <JamCategoriesField />
 
       <DividerView />
       <AddMediaField />
