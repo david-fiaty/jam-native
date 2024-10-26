@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: width,
-    paddingHorizontal: Layout.space.base,
     gap: Layout.space.base,
   },
   title: {
@@ -52,7 +51,7 @@ const styles = StyleSheet.create({
   },
   listItemImage: {
     width: '100%',
-    height: 316,
+    height: 346,
     backgroundColor: Colors.secondary,
   },
 });

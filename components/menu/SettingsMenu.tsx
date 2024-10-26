@@ -33,6 +33,14 @@ const SettingsMenu = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   
+  const renderItem = (item, index) => (
+    <TouchableOpacity onPress={() => router.push(item.path)}>
+      <View style={Layout.menuItem}>
+        <TextView>{item.label}</TextView>
+      </View>
+    </TouchableOpacity>
+  );
+
   return (
     <View style={Layout.menuContainer}>
       <BackButton
@@ -41,15 +49,7 @@ const SettingsMenu = () => {
       />
       <ListView 
         data={items} 
-        renderItem={({item, index}: ListItemProps) => {
-          return (
-            <TouchableOpacity onPress={() => router.push(item.path)}>
-              <View style={Layout.menuItem}>
-                <TextView>{item.label}</TextView>
-              </View>
-            </TouchableOpacity>
-          );
-        }}   
+        renderItem={({item, index}) => renderItem(item, index)}   
       />
     </View>
   );

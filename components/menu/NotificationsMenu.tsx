@@ -3,7 +3,6 @@ import { useRouter } from 'expo-router';
 import { useDispatch } from 'react-redux';
 import { setActiveTab } from "@/redux/slices/TabSlice";
 import { Layout } from '@/constants/Layout';
-import { ListItemProps } from '@/constants/Types';
 import ListView from '../view/ListView';
 import TextView from '../view/TextView';
 import ApiClient from '@/classes/ApiClient';
@@ -15,6 +14,17 @@ const NotificationsMenu = () => {
   const dispatch = useDispatch();
   const items = ApiClient.get('notifications');
 
+  const renderItem = (item, index) => (
+    <TouchableOpacity onPress={() => router.push({ 
+      pathname: '/notification', 
+      params: item, 
+    })}>
+      <View style={Layout.menuItem}>
+        <TextView>{item.label}</TextView>
+      </View>
+    </TouchableOpacity>
+  );
+
   return (
     <View style={Layout.menuContainer}>
       <BackButton
@@ -23,17 +33,7 @@ const NotificationsMenu = () => {
       />
       <ListView 
         data={items} 
-        renderItem={({item, index}: ListItemProps) => {
-          return (
-            <TouchableOpacity 
-              onPress={() => router.push({ pathname: '/notification', params: item })}
-            >
-              <View style={Layout.menuItem}>
-                <TextView>{item.label}</TextView>
-              </View>
-            </TouchableOpacity>
-          );
-        }}   
+        renderItem={({item, index}) => renderItem(item, index)}   
       />
     </View>
   );

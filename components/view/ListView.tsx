@@ -1,20 +1,24 @@
 import { StyleSheet, FlatList } from 'react-native';
-import { BaseProps, ListItemProps } from '@/constants/Types';
+import { BaseProps } from '@/constants/Types';
 import DeviceManager from '@/classes/DeviceManager';
 
 type Props = BaseProps & {
   data: object,
+  numColumns?: number,
+  scrollEnabled?: boolean,
   horizontal?: boolean,
+  contentContainerStyle?: object,
   renderItem: () => JSX.Element, 
-  style?: object,
 };
 
-const ListView = ({data, horizontal, renderItem, style}: Props) => {
+const ListView = ({data, numColumns, scrollEnabled, horizontal, contentContainerStyle, renderItem, style}: Props) => {
   return (
     <FlatList 
-      data={data} 
-      horizontal={horizontal}  
-      contentContainerStyle={[style, styles.container]}
+      data={data || []} 
+      numColumns={numColumns || 1}
+      scrollEnabled={scrollEnabled === false ? false : true}
+      horizontal={horizontal === true ? horizontal : false}  
+      contentContainerStyle={[styles.container, contentContainerStyle]}
       renderItem={renderItem} 
     />
   );

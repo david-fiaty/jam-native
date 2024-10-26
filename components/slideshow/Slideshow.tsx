@@ -83,8 +83,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    gap: Layout.space.base,
-    marginVertical: Layout.space.base,
   },
 });
 
