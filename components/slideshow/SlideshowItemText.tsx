@@ -2,6 +2,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 import Animated, { SharedValue, useAnimatedStyle, interpolate, Extrapolation } from 'react-native-reanimated';
 import { Layout } from '@/constants/Layout';
 import TextView from '../view/TextView';
+import DeviceManager from '@/classes/DeviceManager';
 
 type Props = {
   item: object,
@@ -9,7 +10,7 @@ type Props = {
   scrollX: SharedValue<number>
 };
 
-const {width} = Dimensions.get('window');
+const width = DeviceManager.window.width - Layout.space.base*2;
 
 export default function SlideshowItemText({item, index, scrollX}: Props) {
   const itemAnimation = useAnimatedStyle(() => {
@@ -18,8 +19,8 @@ export default function SlideshowItemText({item, index, scrollX}: Props) {
         {
           translateX: interpolate(
             scrollX.value,
-            [(index - 1) * width, index * width, (index + 1) * width],
-            [-width * 0.1, 0, width * 0.1],
+            [(index-1)*width, index*width, (index+1)*width],
+            [-width*0.25, 0, width*0.25],
             Extrapolation.CLAMP,
           ),
         },
