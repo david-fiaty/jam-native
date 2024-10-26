@@ -5,6 +5,7 @@ import { Layout } from '@/constants/Layout';
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 import LogoView from '../view/LogoView';
+import SearchField from '../field/SearchField';
 
 const HeaderNavigation = () => {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const HeaderNavigation = () => {
         <BoxView direction="row" align="center" style={Layout.headerRight}> 
           <IconView name="menu" theme="secondary" onPress={() => dispatch(setActiveScreen('SettingsMenu'))} />
           <IconView label="15+" theme="secondary" size={13} onPress={() => dispatch(setActiveScreen('NotificationsMenu'))} />
-          <IconView name="search" theme="clear" onPress={() => dispatch(setActiveScreen('SearchView'))} />
+          <SearchField />
         </BoxView>
       </BoxView>
     </BoxView>
