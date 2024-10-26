@@ -1,4 +1,4 @@
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { useDispatch } from 'react-redux';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from "@/constants/Layout";
@@ -16,7 +16,7 @@ const JammersList = () => {
 
   const renderItem = (item, index) => (
     <TouchableOpacity onPress={() => console.log('clicked')}>
-      <BoxView direction="row" align="center" justify="flex-start" style={styles.listItem}>
+      <BoxView direction="row" align="center" justify="flex-start" style={Layout.listItem}>
         <IconView name="user" theme="tertiary" />
         <TextView>{item.name}</TextView>
       </BoxView>
@@ -38,11 +38,5 @@ const JammersList = () => {
     </BoxView>
   );
 };
-
-const styles = StyleSheet.create({
-  listItem: {
-    padding: Layout.space.small,
-  },
-});
 
 export default JammersList;
