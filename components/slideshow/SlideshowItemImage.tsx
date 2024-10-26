@@ -1,7 +1,8 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import Animated, { SharedValue, useAnimatedStyle, interpolate, Extrapolation } from 'react-native-reanimated';
-import TextView from '../view/TextView';
 import { Layout } from '@/constants/Layout';
+import { Colors } from '@/constants/Colors';
+import ImageView from '../view/ImageView';
 
 type Props = {
   item: object,
@@ -29,8 +30,7 @@ export default function SlideshowItemImage({item, index, scrollX}: Props) {
 
   return (  
     <Animated.View style={[styles.container, itemAnimation]}>
-      <TextView style={styles.title}>{item.title}</TextView>
-      <TextView style={styles.content}>{item.content}</TextView>
+      <ImageView source={require('@/assets/images/jam-2.jpg')} resizeMode="cover" style={styles.listItemImage} />
     </Animated.View>
   );
 };
@@ -49,5 +49,10 @@ const styles = StyleSheet.create({
   },
   content: {
     textAlign: 'center',
+  },
+  listItemImage: {
+    width: '100%',
+    height: 316,
+    backgroundColor: Colors.secondary,
   },
 });

@@ -7,7 +7,6 @@ import { Layout } from '@/constants/Layout';
 import TextView from '../view/TextView';
 import ApiClient from '@/classes/ApiClient';
 import i18n from '@/translation/i18n';
-import ImageView from '../view/ImageView';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
 import CollapsibleView from '../view/CollapsibleView';
@@ -53,8 +52,7 @@ const JamsList = () => {
               </BoxView>
               
               {/* Item images */}
-              <Slideshow dataType="text" />
-              {/* <ImageView source={item.image} resizeMode="cover" style={styles.listItemImage} /> */}
+              <Slideshow dataType="image" />
 
               {/* Item toolbar */}
               <BoxView direction="row" align="center" justify="space-between" style={styles.listItemToolbar}>
