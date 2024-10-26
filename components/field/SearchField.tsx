@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { StyleSheet } from 'react-native';
 import { Input } from '@rneui/themed';
 import BoxView from '../view/BoxView';
@@ -5,12 +6,25 @@ import IconView from '../view/IconView';
 import { Layout } from '@/constants/Layout';
 
 const SearchField = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const currentStyle = {
+    width: isExpanded ? 190 : 45,
+  };
+
   return (
-    <BoxView direction="row" align="space-between" style={styles.container}>
+    <BoxView direction="row" align="space-between" style={[styles.container, currentStyle]}>
       <Input 
         inputContainerStyle={styles.inputContainerStyle}
         inputStyle={styles.inputStyle}
-        rightIcon={<IconView name="search" theme="clear" onPress={() => {/*dispatch(setActiveScreen('SearchView')) */}} />}
+        rightIconContainerStyle={styles.rightIconContainerStyle}
+        rightIcon={
+          <IconView 
+            name="search" 
+            theme="clear" 
+            onPress={() => setIsExpanded(!isExpanded)}
+          />
+        }
       />
     </BoxView>
   );
@@ -18,15 +32,18 @@ const SearchField = () => {
 
 const styles = StyleSheet.create({
   container: {
-    width: Layout.header.width/4,
+    width: 45,
   },
   inputContainerStyle: {
     borderBottomWidth: 0,
-    flexGrow: 1,
+    flexGrow: 0,
   },
   inputStyle: {
     borderBottomWidth: 0,
     flexGrow: 1,
+  },
+  rightIconContainerStyle: {
+    marginRight: -Layout.space.base,
   },
 });
 
