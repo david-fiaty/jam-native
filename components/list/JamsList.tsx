@@ -14,6 +14,11 @@ import SpinnerView from '../view/SpinnerView';
 import JamStatusButton from '../button/JamStatusButton';
 import Slideshow from '../slideshow/Slideshow';
 
+type ItemProps = {
+  item: object,
+  index: number,
+};
+
 const JamsList = () => {  
   const data = ApiClient.get('jams');
   const dispatch = useDispatch();
@@ -25,6 +30,76 @@ const JamsList = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
+  const renderItem = (item, index) => (
+    <View style={styles.listItem}>
+      {/* Item header */}
+      <BoxView direction="row" align="center" justify="space-between" style={styles.listItemHeader}>
+        <BoxView>
+          <TouchableOpacity onPress={() => dispatch(setActiveTab('HostsList'))}>
+            <TextView>@{i18n.t('host')} +{item.host_count}</TextView>
+          </TouchableOpacity>
+        </BoxView>
+        <BoxView>
+          <JamStatusButton active={item.active} />
+        </BoxView>
+        <BoxView>
+          <IconView name="actions" theme="clear" onPress={() => dispatch(setActiveTab('MoreJamView'))} />
+        </BoxView> 
+      </BoxView>
+      
+      {/* Item images */}
+      <Slideshow dataType="image" />
+
+      {/* Item toolbar */}
+      <BoxView direction="row" align="center" justify="space-between" style={styles.listItemToolbar}>
+        {/* Jammers button */}
+        <BoxView direction="row" align="center" onPress={() => dispatch(setActiveTab('JammersList'))}>
+          <IconView name="users" theme="tertiary" />
+          <TextView>{item.host_count} {i18n.t('jammers')}</TextView>
+        </BoxView>
+      
+        {/* Save button */}
+        <BoxView direction="row" align="center">
+          <IconView name="save" theme="tertiary" onPress={() => dispatch(setActiveTab('SaveJamView'))} />
+          <IconView name="share" theme="tertiary" onPress={() => dispatch(setActiveTab('ShareJamView'))} />
+        </BoxView> 
+      </BoxView>
+
+      {/* Item description */}
+      <BoxView style={styles.listItemDescription}>
+        <TextView>{item.content}</TextView>
+      </BoxView>
+
+      {/* Item collapsible */}
+      <BoxView style={styles.listItemCollapsible}>
+        <CollapsibleView 
+          label={i18n.t('View more.')} 
+          openedLabel={i18n.t('View less.')} 
+          content={
+            <BoxView direction="column" align="flex-start" style={styles.listItemDetails}>
+              <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
+                <IconView name="arrow" size={14} theme="transparent" />
+                <TextView>{i18n.t('Location')}</TextView>
+              </BoxView>
+              <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
+                <IconView name="arrow" size={14} theme="transparent" />
+                <TextView>{i18n.t('Timestamp')}</TextView>
+              </BoxView>
+              <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
+                <IconView name="arrow" size={14} theme="transparent" />
+                <TextView>{i18n.t('Main industry')}</TextView>
+              </BoxView>
+              <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
+                <IconView name="arrow" size={14} theme="transparent" />
+                <TextView>{i18n.t('Sub industry')}</TextView>
+              </BoxView>
+            </BoxView>
+          }
+        />
+      </BoxView>
+    </View>
+  );
+
   return (
     <BoxView direction="column" style={Layout.screenContent}>
       <FlatList 
@@ -33,77 +108,7 @@ const JamsList = () => {
         scrollEnabled={true}
         horizontal={false}
         contentContainerStyle={Layout.list}
-        renderItem={({item, index}) => {
-          return (  
-            <View style={styles.listItem}>
-              {/* Item header */}
-              <BoxView direction="row" align="center" justify="space-between" style={styles.listItemHeader}>
-                <BoxView>
-                  <TouchableOpacity onPress={() => dispatch(setActiveTab('HostsList'))}>
-                    <TextView>@{i18n.t('host')} +{item.host_count}</TextView>
-                  </TouchableOpacity>
-                </BoxView>
-                <BoxView>
-                  <JamStatusButton active={item.active} />
-                </BoxView>
-                <BoxView>
-                  <IconView name="actions" theme="clear" onPress={() => dispatch(setActiveTab('MoreJamView'))} />
-                </BoxView> 
-              </BoxView>
-              
-              {/* Item images */}
-              <Slideshow dataType="image" />
-
-              {/* Item toolbar */}
-              <BoxView direction="row" align="center" justify="space-between" style={styles.listItemToolbar}>
-                {/* Jammers button */}
-                <BoxView direction="row" align="center" onPress={() => dispatch(setActiveTab('JammersList'))}>
-                  <IconView name="users" theme="tertiary" />
-                  <TextView>{item.host_count} {i18n.t('jammers')}</TextView>
-                </BoxView>
-              
-                {/* Save button */}
-                <BoxView direction="row" align="center">
-                  <IconView name="save" theme="tertiary" onPress={() => dispatch(setActiveTab('SaveJamView'))} />
-                  <IconView name="share" theme="tertiary" onPress={() => dispatch(setActiveTab('ShareJamView'))} />
-                </BoxView> 
-              </BoxView>
-
-              {/* Item description */}
-              <BoxView style={styles.listItemDescription}>
-                <TextView>{item.content}</TextView>
-              </BoxView>
-
-              {/* Item collapsible */}
-              <BoxView style={styles.listItemCollapsible}>
-                <CollapsibleView 
-                  label={i18n.t('View more.')} 
-                  openedLabel={i18n.t('View less.')} 
-                  content={
-                    <BoxView direction="column" align="flex-start" style={styles.listItemDetails}>
-                      <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
-                        <IconView name="arrow" size={14} theme="transparent" />
-                        <TextView>{i18n.t('Location')}</TextView>
-                      </BoxView>
-                      <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
-                        <IconView name="arrow" size={14} theme="transparent" />
-                        <TextView>{i18n.t('Timestamp')}</TextView>
-                      </BoxView>
-                      <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
-                        <IconView name="arrow" size={14} theme="transparent" />
-                        <TextView>{i18n.t('Main industry')}</TextView>
-                      </BoxView>
-                      <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
-                        <IconView name="arrow" size={14} theme="transparent" />
-                        <TextView>{i18n.t('Sub industry')}</TextView>
-                      </BoxView>
-                    </BoxView>
-                  }
-                />
-              </BoxView>
-            </View>
-          );
-        }}
+        renderItem={({item, index}) => renderItem(item, index)}
       />
     </BoxView>
   );
