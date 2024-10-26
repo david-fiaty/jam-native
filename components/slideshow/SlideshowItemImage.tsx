@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
   listItemImage: {
     width: width,
-    height: 346,
+    height: 346, // Todo - Move to Layout
     backgroundColor: Colors.secondary,
   },
 });

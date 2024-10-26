@@ -1,11 +1,17 @@
 import { Stack } from 'expo-router';
 import { Provider } from 'react-redux';
-import Store from "@/redux/Store";
+import { ThemeProvider } from '@rneui/themed';
 import { Colors } from '@/constants/Colors';
+import BaseTheme from "@/constants/BaseTheme";
+import Store from "@/redux/Store";
 import HeaderNavigation from '@/components/navigation/HeaderNavigation';
 
 const screenOptions = { 
-  header: (props: object) => <HeaderNavigation />,    
+  header: (props: object) => (
+    <ThemeProvider theme={BaseTheme}>
+      <HeaderNavigation />
+    </ThemeProvider>
+  ),    
   headerShown: true,
   statusBarColor: Colors.background,
   statusBarStyle: 'dark',
