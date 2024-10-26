@@ -29,6 +29,7 @@ const JamCategoriesField = ({data}: Props) => {
       data={data} 
       numColumns={4}
       horizontal={false}
+      scrollEnabled={false}
       contentContainerStyle={Layout.listContainer}
       columnWrapperStyle={Layout.listColumnWrapper}
       renderItem={({item, index}) => renderItem(item, index)}
