@@ -48,7 +48,7 @@ const Slideshow = ({data, dataType}: Props) => {
   };
 
   const onViewableItemsChanged = ({viewableItems} : {viewableItems: ViewToken[]}) => {
-    if (viewableItems[0].index !== undefined && viewableItems[0].index !== null) {
+    if (viewableItems.length > 0 && viewableItems[0].index !== undefined && viewableItems[0].index !== null) {
       setPagerIndex(viewableItems[0].index);
     }
   };
