@@ -68,7 +68,7 @@ const SearchView = () => {
       align="flex-start"
       justify="flex-start"
       scroll={true}
-      style={[Layout.screenContent, styles.container]}
+      style={Layout.screenContent}
     >
       <FlatList
         data={tabs}
@@ -83,18 +83,12 @@ const SearchView = () => {
 };
 
 const styles = {
-  container: {
-    width: '100%',
-    backgroundColor: 'red',
-    gap: 0,
-  },
   tabItem: {
     padding: 10,
+    margin: 0,
     backgroundColor: 'green',
     height: '100%',
-    marginHorizontal: 0,
   },
-
 };
 
 export default SearchView;
