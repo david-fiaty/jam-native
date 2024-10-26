@@ -14,7 +14,6 @@ import SpinnerView from '../view/SpinnerView';
 import JamStatusButton from '../button/JamStatusButton';
 import Slideshow from '../slideshow/Slideshow';
 
-
 const JamsList = () => {  
   const data = ApiClient.get('jams');
   const dispatch = useDispatch();
