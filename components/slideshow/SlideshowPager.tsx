@@ -1,5 +1,6 @@
 import { StyleSheet, View } from 'react-native';
-import { GlobalStyles, Colors } from '@/constants/GlobalStyles';
+import { Colors } from '@/constants/Colors';
+import { Layout } from '@/constants/Layout';
 
 type Props = {
   data: [],
@@ -15,7 +16,7 @@ export default function SlideshowPager({ data, pagerIndex }: Props) {
             key={index} 
             style={[
               styles.pager, 
-              {backgroundColor: pagerIndex == index ? Colors.primary : Colors.tertiary},
+              {backgroundColor: pagerIndex == index ? Colors.primary : Colors.secondary},
             ]}
           />
         );
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
     width: 8,
     borderRadius: 8,
     marginHorizontal: 4,
-    marginVertical: GlobalStyles.space.base,
+    marginVertical: Layout.space.base,
   },
 });
 

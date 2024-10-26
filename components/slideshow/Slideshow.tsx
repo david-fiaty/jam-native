@@ -2,10 +2,11 @@ import { useState, } from 'react';
 import { View, StyleSheet, ViewToken } from 'react-native';
 import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
 import { Layout } from '@/constants/Layout';
-import SlideshowItem from '@/components/slideshow/SlideshowItem';
-import SlideshowPager from '@/components/slideshow/SlideshowPager';
+import SlideshowPager from './SlideshowPager';
+import SlideshowItemText from './SlideshowItemText';
+import SlideshowItemImage from './SlideshowItemImage';
 
-const data = [
+const test = [
   {
     id: 1,
     title: 'Create better, together',
@@ -26,7 +27,14 @@ const data = [
   },
 ];
 
-const Slideshow = () => {
+type Props = {
+  data?: [],
+  dataType: string,
+};
+
+const Slideshow = ({data, dataType}: Props) => {
+  data = test;
+
   const scrollX = useSharedValue(0);
   const [pagerIndex, setPagerIndex] = useState(0);
   const onScrollHandler = useAnimatedScrollHandler({
@@ -47,16 +55,24 @@ const Slideshow = () => {
 
   return (  
     <View style={styles.container}>
+
       <Animated.FlatList 
         data={data} 
-        renderItem={({item, index}) => <SlideshowItem item={item} index={index} scrollX={scrollX} />} 
         horizontal={true}
         pagingEnabled={true}
         showsHorizontalScrollIndicator={false}
         onScroll={onScrollHandler}
         viewabilityConfig={viewabilityConfig}
         onViewableItemsChanged={onViewableItemsChanged}
+        renderItem={({item, index}) => {
+          return (
+            dataType == 'image' 
+            ? <SlideshowItemImage item={item} index={index} scrollX={scrollX} />
+            : <SlideshowItemText item={item} index={index} scrollX={scrollX} />
+          );
+        }} 
       />
+
       <SlideshowPager data={data} pagerIndex={pagerIndex}/> 
     </View>
   );

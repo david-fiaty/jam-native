@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import Animated, { SharedValue, useAnimatedStyle, interpolate, Extrapolation } from 'react-native-reanimated';
-import { GlobalStyles } from '@/constants/GlobalStyles';
-import TextBlock from '@/components/base/TextBlock';
+import TextView from '../view/TextView';
+import { Layout } from '@/constants/Layout';
 
 type Props = {
   item: object,
@@ -11,7 +11,7 @@ type Props = {
 
 const {width} = Dimensions.get('window');
 
-export default function SlideshowItem({item, index, scrollX}: Props) {
+export default function SlideshowItemText({item, index, scrollX}: Props) {
   const itemAnimation = useAnimatedStyle(() => {
     return {
       transform: [
@@ -29,8 +29,8 @@ export default function SlideshowItem({item, index, scrollX}: Props) {
 
   return (  
     <Animated.View style={[styles.container, itemAnimation]}>
-      <TextBlock style={styles.title}>{item.title}</TextBlock>
-      <TextBlock style={styles.content}>{item.content}</TextBlock>
+      <TextView style={styles.title}>{item.title}</TextView>
+      <TextView style={styles.content}>{item.content}</TextView>
     </Animated.View>
   );
 };
@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: width,
-    paddingHorizontal: GlobalStyles.space.base,
-    gap: GlobalStyles.space.base,
+    paddingHorizontal: Layout.space.base,
+    gap: Layout.space.base,
   },
   title: {
     textTransform: 'uppercase',
