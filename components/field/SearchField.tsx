@@ -10,6 +10,7 @@ const SearchField = () => {
       <Input 
         inputContainerStyle={styles.inputContainerStyle}
         inputStyle={styles.inputStyle}
+        rightIconContainerStyle={styles.rightIconContainerStyle}
         rightIcon={<IconView name="search" theme="clear" onPress={() => {/*dispatch(setActiveScreen('SearchView')) */}} />}
       />
     </BoxView>
@@ -27,6 +28,9 @@ const styles = StyleSheet.create({
   inputStyle: {
     borderBottomWidth: 0,
     flexGrow: 1,
+  },
+  rightIconContainerStyle: {
+    backgroundColor: 'blue',
   },
 });
 
