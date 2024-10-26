@@ -14,6 +14,15 @@ const HostsList = () => {
   const data = ApiClient.get('hosts');
   const dispatch = useDispatch();
 
+  const renderItem = (item, index) => (
+    <TouchableOpacity onPress={() => console.log('clicked')}>
+      <BoxView direction="row" align="center" justify="flex-start" style={styles.listItem}>
+        <IconView name="user" theme="tertiary" />
+        <TextView>{item.name}</TextView>
+      </BoxView>
+    </TouchableOpacity>
+  );
+
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
@@ -23,16 +32,7 @@ const HostsList = () => {
       <View style={Layout.borderedListContainer}>
         <ListView
           data={data}
-          renderItem={({item, index}) => {
-            return (
-              <TouchableOpacity onPress={() => console.log('clicked')}>
-                <BoxView direction="row" align="center" justify="flex-start" style={styles.listItem}>
-                  <IconView name="user" theme="tertiary" />
-                  <TextView>{item.name}</TextView>
-                </BoxView>
-              </TouchableOpacity>
-            );
-          }}
+          renderItem={({item, index}) => renderItem(item, index)}
         />
       </View>
     </BoxView>
