@@ -140,9 +140,6 @@ export const Layout = {
     borderColor: Colors.primary,
     padding: space.base,
   },
-  list: {
-    //flexGrow: 1,
-  },
   listItem: {
     padding: space.small,
   },

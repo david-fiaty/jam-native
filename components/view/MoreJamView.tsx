@@ -38,7 +38,7 @@ const MoreJamView = () => {
           numColumns={1}
           scrollEnabled={true}
           horizontal={false}
-          contentContainerStyle={Layout.list}
+          contentContainerStyle={{}}
           renderItem={({item, index}) => data[index]}
         />
       </View>
