@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import TabReducer from './slices/TabSlice';
+import ScreenReducer from './slices/ScreenSlice';
 import JamReducer from './slices/JamSlice';
 
 const Store = configureStore({
   reducer: {
-    tab: TabReducer,
+    screen: ScreenReducer,
     jam: JamReducer,
   },
 });

@@ -1,6 +1,6 @@
 import { StyleSheet, View, FlatList, TouchableOpacity } from "react-native";
 import { useDispatch } from 'react-redux';
-import { setActiveTab } from "@/redux/slices/TabSlice";
+import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from "@/constants/Layout";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
@@ -20,7 +20,7 @@ const SaveJamView = () => {
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Jam is now saved to your jams')}
-        onPress={() => dispatch(setActiveTab('SaveJamView'))}
+        onPress={() => dispatch(setActiveScreen('SaveJamView'))}
       />
       <View style={Layout.borderedListContainer}>
         <FlatList

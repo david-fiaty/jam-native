@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { setActiveTab } from "@/redux/slices/TabSlice";
+import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 import TextView from '../view/TextView';
@@ -30,7 +30,7 @@ const JamsList = () => {
       {/* Item header */}
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItemHeader}>
         <BoxView>
-          <TouchableOpacity onPress={() => dispatch(setActiveTab('HostsList'))}>
+          <TouchableOpacity onPress={() => dispatch(setActiveScreen('HostsList'))}>
             <TextView>@{i18n.t('host')} +{item.host_count}</TextView>
           </TouchableOpacity>
         </BoxView>
@@ -38,7 +38,7 @@ const JamsList = () => {
           <JamStatusButton active={item.active} />
         </BoxView>
         <BoxView>
-          <IconView name="actions" theme="clear" onPress={() => dispatch(setActiveTab('MoreJamView'))} />
+          <IconView name="actions" theme="clear" onPress={() => dispatch(setActiveScreen('MoreJamView'))} />
         </BoxView> 
       </BoxView>
       
@@ -48,15 +48,15 @@ const JamsList = () => {
       {/* Item toolbar */}
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItemToolbar}>
         {/* Jammers button */}
-        <BoxView direction="row" align="center" onPress={() => dispatch(setActiveTab('JammersList'))}>
+        <BoxView direction="row" align="center" onPress={() => dispatch(setActiveScreen('JammersList'))}>
           <IconView name="users" theme="tertiary" />
           <TextView>{item.host_count} {i18n.t('jammers')}</TextView>
         </BoxView>
       
         {/* Save button */}
         <BoxView direction="row" align="center">
-          <IconView name="save" theme="tertiary" onPress={() => dispatch(setActiveTab('SaveJamView'))} />
-          <IconView name="share" theme="tertiary" onPress={() => dispatch(setActiveTab('ShareJamView'))} />
+          <IconView name="save" theme="tertiary" onPress={() => dispatch(setActiveScreen('SaveJamView'))} />
+          <IconView name="share" theme="tertiary" onPress={() => dispatch(setActiveScreen('ShareJamView'))} />
         </BoxView> 
       </BoxView>
 

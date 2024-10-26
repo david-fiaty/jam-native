@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Stack } from '@/constants/Stack';
 
-const TabSlice = createSlice({
-  name: 'tab',
+const ScreenSlice = createSlice({
+  name: 'screen',
   initialState: Stack,
   reducers: {
-    setActiveTab: (state, action) => {
+    setActiveScreen: (state, action) => {
       state.map(item => {
         if (item.name == action.payload && item.active) {
           item.active = false;
@@ -21,5 +21,5 @@ const TabSlice = createSlice({
   },
 });
 
-export const { setActiveTab } = TabSlice.actions;
-export default TabSlice.reducer;
+export const { setActiveScreen } = ScreenSlice.actions;
+export default ScreenSlice.reducer;

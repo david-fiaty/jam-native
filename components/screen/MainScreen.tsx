@@ -19,7 +19,7 @@ const MainScreen = () => {
   const [animatedStyle, setAnimatedStyle] = useState(null);
 
   // Storage state
-  const tabState = useSelector((state) => state.tab);
+  const screenState = useSelector((state) => state.screen);
 
   // Animation references
   const fadeEffectReference = useRef(new Animated.Value(0)).current;
@@ -74,15 +74,15 @@ const MainScreen = () => {
 
   // Get the active screen
   const getActiveScreen = (state: object) => {
-    let activeTab = state.find(item => item.active === true);
-    let activeScreen = activeTab ? Stack.find(item => item.name == activeTab.name) : null;
+    let screen = state.find(item => item.active === true);
+    let activeScreen = screen ? Stack.find(item => item.name == screen.name) : null;
 
     return activeScreen;
   };
 
   // Display
   useEffect(() => {
-    const activeScreen = getActiveScreen(tabState);
+    const activeScreen = getActiveScreen(screenState);
 
     if (activeScreen) {
       setCurrentScreen(activeScreen);
@@ -96,7 +96,7 @@ const MainScreen = () => {
         setAnimatedStyle(animationStyles[currentScreen.effect]);
       }, Layout.animation.duration);
     }
-  }, [tabState]); 
+  }, [screenState]); 
   
   // Render
   return (
