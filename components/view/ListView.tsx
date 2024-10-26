@@ -8,10 +8,11 @@ type Props = BaseProps & {
   scrollEnabled?: boolean,
   horizontal?: boolean,
   contentContainerStyle?: object,
+  columnWrapperStyle?: object,
   renderItem: () => JSX.Element, 
 };
 
-const ListView = ({data, numColumns, scrollEnabled, horizontal, contentContainerStyle, renderItem, style}: Props) => {
+const ListView = ({data, numColumns, scrollEnabled, horizontal, contentContainerStyle, columnWrapperStyle, renderItem, style}: Props) => {
   return (
     <FlatList 
       data={data || []} 
@@ -19,6 +20,7 @@ const ListView = ({data, numColumns, scrollEnabled, horizontal, contentContainer
       scrollEnabled={scrollEnabled === false ? false : true}
       horizontal={horizontal === true ? horizontal : false}  
       contentContainerStyle={[styles.container, contentContainerStyle]}
+      columnWrapperStyle={columnWrapperStyle}
       renderItem={renderItem} 
     />
   );

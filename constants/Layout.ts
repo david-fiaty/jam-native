@@ -133,6 +133,9 @@ export const Layout = {
     width: '100%',
     flexGrow: 1,
   },
+  listColumnWrapper: {
+    gap: space.base,
+  },
   borderedListContainer: {
     width: '100%',
     borderWidth: 1,
