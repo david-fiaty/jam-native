@@ -5,6 +5,7 @@ import ApiClient from "@/classes/ApiClient";
 import ImageView from "./ImageView";
 import BoxView from "./BoxView";
 import TextView from "./TextView";
+import ScreenManager from '@/classes/ScreenManager';
 
 const tabs = [
   {
@@ -51,8 +52,10 @@ const tabs = [
 
 const SearchView = () => {
   const [index, setIndex] = React.useState(0);
-  //const jamsData = ApiClient.get("jams");
+  const jamsData = ApiClient.get("jams");
   //const projectsData = ApiClient.get("projects");
+
+  const numColumns = 3;
 
   const renderTab = (item, index) => (
     <TouchableOpacity>
@@ -66,17 +69,42 @@ const SearchView = () => {
     <BoxView
       direction="column"
       align="flex-start"
-      justify="flex-start"
+      justify="space-between"
       scroll={true}
       style={Layout.screenContent}
     >
+      {/* Tabs */}
       <FlatList
         data={tabs}
         horizontal={true}
-        contentContainerStyle={{ gap: Layout.space.base }}
+        contentContainerStyle={{}}
         scrollEnabled={true}
         keyExtractor={(item) => item.id}
         renderItem={({ item, index }) => renderTab(item, index)}
+      />
+
+      {/* Results */}
+      <FlatList 
+        data={jamsData} 
+        numColumns={numColumns}
+        contentContainerStyle={{gap: Layout.space.base}}
+        columnWrapperStyle={{gap: Layout.space.base}}
+        scrollEnabled={false}
+        renderItem={({item, index}) => {
+          return (
+            <TouchableOpacity>
+              <View style={styles.item}>
+                <ImageView 
+                  source={item.image} 
+                  width="100%"
+                  height="100%"
+                  resizeMode="cover"
+                  style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
+                />
+              </View>
+            </TouchableOpacity>
+          );
+        }}
       />
     </BoxView>
   );
@@ -87,7 +115,16 @@ const styles = {
     padding: 10,
     margin: 0,
     backgroundColor: 'gray',
-    height: '100%',
+    //height: '100%',
+  },
+  item: {
+    flexDirection: 'column',
+    gap: Layout.space.small,
+  },
+  image: {
+    borderRadius: Layout.space.base,
+    width: 96.7,
+    height: 96.7,
   },
 };
 
