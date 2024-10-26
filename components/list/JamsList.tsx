@@ -13,6 +13,7 @@ import IconView from '../view/IconView';
 import CollapsibleView from '../view/CollapsibleView';
 import SpinnerView from '../view/SpinnerView';
 import JamStatusButton from '../button/JamStatusButton';
+import Slideshow from '../slideshow/Slideshow';
 
 const JamsList = () => {  
   const data = ApiClient.get('jams');
@@ -52,7 +53,8 @@ const JamsList = () => {
               </BoxView>
               
               {/* Item images */}
-              <ImageView source={item.image} resizeMode="cover" style={styles.listItemImage} />
+              <Slideshow dataType="text" />
+              {/* <ImageView source={item.image} resizeMode="cover" style={styles.listItemImage} /> */}
 
               {/* Item toolbar */}
               <BoxView direction="row" align="center" justify="space-between" style={styles.listItemToolbar}>
