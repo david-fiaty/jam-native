@@ -1,189 +1,100 @@
 import React from "react";
-import { View, FlatList, TouchableOpacity  } from "react-native";
-import { Tab, TabView } from "@rneui/themed";
-import { GlobalStyles} from "@/constants/GlobalStyles";
+import { View, FlatList, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
+import { GlobalStyles } from "@/constants/GlobalStyles";
 import { Colors } from "@/constants/Colors";
-import ApiClient from '@/classes/ApiClient';
+import ApiClient from "@/classes/ApiClient";
 import ImageView from "./ImageView";
 import { Layout } from "@/constants/Layout";
+import BoxView from "./BoxView";
+import TextView from "./TextView";
+
+const data = [
+  {
+    id: 1,
+    label: 'Tab 1',
+  },
+  {
+    id: 2,
+    label: 'Tab 2',
+  },
+  {
+    id: 3,
+    label: 'Tab 3',
+  },
+  {
+    id: 4,
+    label: 'Tab 4',
+  },
+  {
+    id: 5,
+    label: 'Tab 5',
+  },
+  {
+    id: 6,
+    label: 'Tab 6',
+  },
+  {
+    id: 7,
+    label: 'Tab 7',
+  },
+  {
+    id:8,
+    label: 'Tab 8',
+  },
+  {
+    id: 9,
+    label: 'Tab 9',
+  },
+  {
+    id: 10,
+    label: 'Tab 10',
+  },
+];
 
 const SearchView = () => {
   const [index, setIndex] = React.useState(0);
-  const jamsData = ApiClient.get('jams');
-  const projectsData = ApiClient.get('projects');
+  //const jamsData = ApiClient.get("jams");
+  //const projectsData = ApiClient.get("projects");
 
   return (
-    <View style={styles.container}>
-      <Tab
-        value={index}
-        dense={true}
-        onChange={(e) => setIndex(e)}
-        indicatorStyle={{
-          backgroundColor: Colors.primary,
-          height: 1,
+    <BoxView
+      direction="column"
+      align="flex-start"
+      justify="flex-start"
+      scroll={true}
+      style={[Layout.screenContent, styles.container]}
+    >
+      <FlatList
+        data={data}
+        horizontal={true}
+        contentContainerStyle={{ gap: Layout.space.base }}
+        scrollEnabled={true}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item, index }) => {
+          return (
+            <TouchableWithoutFeedback>
+              <View style={styles.tabItem}>
+                <TextView>{item.label}</TextView>
+              </View>
+            </TouchableWithoutFeedback>
+          );
         }}
-      >
-        <Tab.Item
-          title="All"
-          titleStyle={styles.title}
-          buttonStyle={styles.button}
-        />
-        <Tab.Item
-          title="Calls"
-          titleStyle={styles.title}
-          buttonStyle={styles.button}
-        />
-        <Tab.Item
-          title="Jams"
-          titleStyle={styles.title}
-          buttonStyle={styles.button}
-        />
-        <Tab.Item
-          title="Projects"
-          titleStyle={styles.title}
-          buttonStyle={styles.button}
-        />
-      </Tab>
-
-      <TabView 
-        value={index} 
-        onChange={setIndex} 
-        animationType="timing" 
-        disableTransition={true}
-      >
-        <TabView.Item style={styles.tab}>
-          <FlatList 
-            data={jamsData} 
-            numColumns={3}
-            contentContainerStyle={{gap: GlobalStyles.space.base}}
-            columnWrapperStyle={{gap: GlobalStyles.space.base}}
-            scrollEnabled={false}
-            renderItem={({item, index}) => {
-              return (
-                <TouchableOpacity>
-                  <View style={styles.item}>
-                    <ImageView 
-                      source={item.image} 
-                      width="100%"
-                      height="100%"
-                      resizeMode="cover"
-                      style={styles.image}
-                    />
-                  </View>
-                </TouchableOpacity>
-              );
-            }}
-          />
-        </TabView.Item>
-
-        <TabView.Item style={styles.tab}>
-          <FlatList 
-            data={projectsData} 
-            numColumns={3}
-            contentContainerStyle={{gap: GlobalStyles.space.base}}
-            columnWrapperStyle={{gap: GlobalStyles.space.base}}
-            scrollEnabled={false}
-            renderItem={({item, index}) => {
-              return (
-                <TouchableOpacity>
-                  <View style={styles.item}>
-                    <ImageView 
-                      source={item.image} 
-                      width="100%"
-                      height="100%"
-                      resizeMode="cover"
-                      style={styles.image}
-                    />
-                  </View>
-                </TouchableOpacity>
-              );
-            }}
-          />
-        </TabView.Item>
-
-        <TabView.Item style={styles.tab}>
-          <FlatList 
-            data={jamsData} 
-            numColumns={3}
-            contentContainerStyle={{gap: GlobalStyles.space.base}}
-            columnWrapperStyle={{gap: GlobalStyles.space.base}}
-            scrollEnabled={false}
-            renderItem={({item, index}) => {
-              return (
-                <TouchableOpacity>
-                  <View style={styles.item}>
-                    <ImageView 
-                      source={item.image} 
-                      width="100%"
-                      height="100%"
-                      resizeMode="cover"
-                      style={styles.image}
-                    />
-                  </View>
-                </TouchableOpacity>
-              );
-            }}
-          />
-        </TabView.Item>
-
-        <TabView.Item style={styles.tab}>
-          <FlatList 
-            data={projectsData} 
-            numColumns={3}
-            contentContainerStyle={{gap: GlobalStyles.space.base}}
-            columnWrapperStyle={{gap: GlobalStyles.space.base}}
-            scrollEnabled={false}
-            renderItem={({item, index}) => {
-              return (
-                <TouchableOpacity>
-                  <View style={styles.item}>
-                    <ImageView 
-                      source={item.image} 
-                      width="100%"
-                      height="100%"
-                      resizeMode="cover"
-                      style={styles.image}
-                    />
-                  </View>
-                </TouchableOpacity>
-              );
-            }}
-          />
-        </TabView.Item>
-      </TabView>
-    </View>
+      />
+    </BoxView>
   );
 };
 
 const styles = {
   container: {
-    flexDirection: 'column',
-    height: '100%',
+    width: "100%",
+    backgroundColor: "red",
+
   },
-  tab: {
-    width: '100%',
-    height: '100%',
-    padding: Layout.space.base,
+  tabItem: {
+    padding: 10,
+    marginHorizontal: 10,
   },
-  button: {
-    padding: 0,
-    margin: 0,
-    fontWeight: 'normal',
-    fontSize: Layout.fontSize,
-  },
-  title: {
-    ...GlobalStyles.text,
-  },
-  item: {
-    backgroundColor: Colors.tertiary,
-    borderRadius: Layout.radius.round,
-    borderColor: Colors.tertiary,
-  },
-  image: {
-    borderRadius: Layout.space.base,
-    width: 96.7,
-    height: 96.7,
-  },
+
 };
 
 export default SearchView;
