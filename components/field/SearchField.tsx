@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { Input } from '@rneui/themed';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
@@ -14,18 +14,14 @@ const SearchField = () => {
 
   return (
     <BoxView direction="row" align="space-between" style={[styles.container, currentStyle]}>
-      <Input 
-        inputContainerStyle={styles.inputContainerStyle}
-        inputStyle={styles.inputStyle}
-        rightIconContainerStyle={styles.rightIconContainerStyle}
-        rightIcon={
-          <IconView 
-            name="search" 
-            theme="clear" 
-            onPress={() => setIsExpanded(!isExpanded)}
-          />
-        }
-      />
+      <TouchableOpacity onPress={() => setIsExpanded(!isExpanded)}>
+        <Input 
+          inputContainerStyle={styles.inputContainerStyle}
+          inputStyle={styles.inputStyle}
+          rightIconContainerStyle={styles.rightIconContainerStyle}
+          rightIcon={{type: 'ionicons', name: 'search'}}
+        />
+      </TouchableOpacity>
     </BoxView>
   );
 };
@@ -43,7 +39,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   rightIconContainerStyle: {
-    marginRight: -Layout.space.base,
+    //marginRight: -Layout.space.base,
   },
 });
 
