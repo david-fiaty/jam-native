@@ -8,10 +8,12 @@ import { Layout } from '@/constants/Layout';
 const SearchField = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  console.log(isExpanded);
-  
+  const currentStyle = {
+    width: isExpanded ? 190 : 45,
+  };
+
   return (
-    <BoxView direction="row" align="space-between" style={styles.container}>
+    <BoxView direction="row" align="space-between" style={[styles.container, currentStyle]}>
       <Input 
         inputContainerStyle={styles.inputContainerStyle}
         inputStyle={styles.inputStyle}
