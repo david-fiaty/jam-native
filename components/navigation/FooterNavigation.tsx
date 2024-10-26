@@ -9,30 +9,30 @@ import ScreenManager from '@/classes/ScreenManager';
 
 const FooterNavigation = () => {
   const dispatch = useDispatch();
-  const tabState = useSelector((state) => state.tab);
-  const activeTab = ScreenManager.getActiveScreen(tabState);
+  const screenState = useSelector((state) => state.screen);
+  const activeScreen = ScreenManager.getActiveScreen(screenState);
 
   return (
     <BoxView direction="row" align="center" justify="space-around" style={Layout.footer}>
       <IconView
         name="location"
         radius="round"
-        theme={activeTab?.name == 'MapView' ? 'secondary' : 'clear'}
+        theme={activeScreen?.name == 'MapView' ? 'secondary' : 'clear'}
         onPress={() => dispatch(setActiveScreen('MapView'))}
       />
       <IconView
         name="plus"
         radius="round"
-        theme={activeTab?.name == 'AddJamForm' ? 'secondary' : 'clear'}
+        theme={activeScreen?.name == 'AddJamForm' ? 'secondary' : 'clear'}
         onPress={() => dispatch(setActiveScreen('AddJamForm'))}
-        style={activeTab?.name == 'AddJamForm' ? styles.active : {}}
+        style={activeScreen?.name == 'AddJamForm' ? styles.active : {}}
       />
       <IconView
         name="user"
         radius="round"
-        theme={activeTab?.name == 'ProfileForm' ? 'secondary' : 'clear'}
+        theme={activeScreen?.name == 'ProfileForm' ? 'secondary' : 'clear'}
         onPress={() => dispatch(setActiveScreen('ProfileForm'))}
-        style={activeTab?.name == 'ProfileForm' ? styles.active : {}}
+        style={activeScreen?.name == 'ProfileForm' ? styles.active : {}}
       />
     </BoxView>
   );

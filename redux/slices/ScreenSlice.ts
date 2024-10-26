@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Stack } from '@/constants/Stack';
 
 const ScreenSlice = createSlice({
-  name: 'tab',
+  name: 'screen',
   initialState: Stack,
   reducers: {
     setActiveScreen: (state, action) => {
