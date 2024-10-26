@@ -129,19 +129,19 @@ export const Layout = {
     height: space.base*4,
     justifyContent: 'flex-start',
   },
-  listContainer: {
-    width: '100%',
-    flexGrow: 1,
-  },
-  listColumnWrapper: {
-    gap: space.base,
-  },
   borderedListContainer: {
     width: '100%',
     borderWidth: 1,
     borderRadius: radius.round,
     borderColor: Colors.primary,
     padding: space.base,
+  },
+  listContainer: {
+    width: '100%',
+    flexGrow: 1,
+  },
+  listColumnWrapper: {
+    gap: space.base,
   },
   listItem: {
     padding: space.small,
