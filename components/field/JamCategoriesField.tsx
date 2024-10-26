@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Colors } from '@/constants/Colors';
+import { Layout } from '@/constants/Layout';
 import IconView from '../view/IconView';
 import TextView from '../view/TextView';
-import { Layout } from '@/constants/Layout';
+import ListView from '../view/ListView';
 
 type Props = {
   data: object,
@@ -12,25 +13,25 @@ type Props = {
 const JamCategoriesField = ({data}: Props) => {  
   const [selectedOption, setSelectedOption] = useState(null);
 
+  const renderItem = (item, index) => (
+    <TouchableOpacity onPress={() => setSelectedOption(item.id)}>
+      <View style={styles.container}>
+        <View style={[styles.square, selectedOption == item.id ? styles.selected : {}]}>
+          <IconView name={item.icon} theme="secondary" />
+        </View>
+        <TextView>{item.label}</TextView>   
+      </View>
+    </TouchableOpacity>
+  );
+
   return (
-    <FlatList 
+    <ListView 
       data={data} 
       numColumns={4}
-      contentContainerStyle={{gap: Layout.space.base}}
-      columnWrapperStyle={{gap: Layout.space.base}}
-      scrollEnabled={false}
-      renderItem={({item, index}) => {
-        return (
-          <TouchableOpacity onPress={() => setSelectedOption(item.id)}>
-            <View style={styles.container}>
-              <View style={[styles.square, selectedOption == item.id ? styles.selected : {}]}>
-                <IconView name={item.icon} theme="secondary" />
-              </View>
-              <TextView>{item.label}</TextView>   
-            </View>
-          </TouchableOpacity>
-        );
-      }}
+      horizontal={false}
+      contentContainerStyle={Layout.listContainer}
+      columnWrapperStyle={Layout.listColumnWrapper}
+      renderItem={({item, index}) => renderItem(item, index)}
     />
   );
 }
