@@ -1,14 +1,12 @@
 import React from "react";
-import { View, FlatList, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
-import { GlobalStyles } from "@/constants/GlobalStyles";
-import { Colors } from "@/constants/Colors";
+import { View, FlatList, TouchableOpacity } from "react-native";
+import { Layout } from "@/constants/Layout";
 import ApiClient from "@/classes/ApiClient";
 import ImageView from "./ImageView";
-import { Layout } from "@/constants/Layout";
 import BoxView from "./BoxView";
 import TextView from "./TextView";
 
-const data = [
+const tabs = [
   {
     id: 1,
     label: 'Tab 1',
@@ -56,45 +54,41 @@ const SearchView = () => {
   //const jamsData = ApiClient.get("jams");
   //const projectsData = ApiClient.get("projects");
 
+  const renderTab = (item, index) => (
+    <TouchableOpacity>
+      <View style={styles.tabItem}>
+        <TextView>{item.label}</TextView>
+      </View>
+    </TouchableOpacity>
+  );
+
   return (
     <BoxView
       direction="column"
       align="flex-start"
       justify="flex-start"
       scroll={true}
-      style={[Layout.screenContent, styles.container]}
+      style={Layout.screenContent}
     >
       <FlatList
-        data={data}
+        data={tabs}
         horizontal={true}
         contentContainerStyle={{ gap: Layout.space.base }}
         scrollEnabled={true}
         keyExtractor={(item) => item.id}
-        renderItem={({ item, index }) => {
-          return (
-            <TouchableWithoutFeedback>
-              <View style={styles.tabItem}>
-                <TextView>{item.label}</TextView>
-              </View>
-            </TouchableWithoutFeedback>
-          );
-        }}
+        renderItem={({ item, index }) => renderTab(item, index)}
       />
     </BoxView>
   );
 };
 
 const styles = {
-  container: {
-    width: "100%",
-    backgroundColor: "red",
-
-  },
   tabItem: {
     padding: 10,
-    marginHorizontal: 10,
+    margin: 0,
+    backgroundColor: 'gray',
+    height: '100%',
   },
-
 };
 
 export default SearchView;
