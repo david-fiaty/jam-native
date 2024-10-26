@@ -86,7 +86,7 @@ const styles = {
   tabItem: {
     padding: 10,
     margin: 0,
-    backgroundColor: 'green',
+    backgroundColor: 'gray',
     height: '100%',
   },
 };
