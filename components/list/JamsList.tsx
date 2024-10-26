@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Colors } from '@/constants/Colors';
@@ -13,6 +13,7 @@ import CollapsibleView from '../view/CollapsibleView';
 import SpinnerView from '../view/SpinnerView';
 import JamStatusButton from '../button/JamStatusButton';
 import Slideshow from '../slideshow/Slideshow';
+import ListView from '../view/ListView';
 
 const JamsList = () => {  
   const data = ApiClient.get('jams');
@@ -97,12 +98,8 @@ const JamsList = () => {
 
   return (
     <BoxView direction="column" style={Layout.screenContent}>
-      <FlatList 
+      <ListView
         data={data} 
-        numColumns={1}
-        scrollEnabled={true}
-        horizontal={false}
-        contentContainerStyle={{}}
         renderItem={({item, index}) => renderItem(item, index)}
       />
     </BoxView>
