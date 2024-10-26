@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import ScreenReducer from './slices/ScreenSlice';
-import JamReducer from './slices/JamSlice';
+import SearchReducer from './slices/SearchSlice';
 
 const Store = configureStore({
   reducer: {
     screen: ScreenReducer,
-    jam: JamReducer,
+    search: SearchReducer,
   },
 });
 
