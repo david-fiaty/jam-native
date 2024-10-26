@@ -6,47 +6,37 @@ import ImageView from "./ImageView";
 import BoxView from "./BoxView";
 import TextView from "./TextView";
 import ScreenManager from '@/classes/ScreenManager';
+import i18n from "@/translation/i18n";
+import { Colors } from "@/constants/Colors";
 
 const tabs = [
   {
     id: 1,
-    label: 'Tab 1',
+    label: i18n.t('All'),
   },
   {
     id: 2,
-    label: 'Tab 2',
+    label: i18n.t('Calls'),
   },
   {
     id: 3,
-    label: 'Tab 3',
+    label: i18n.t('Jammers'),
   },
   {
     id: 4,
-    label: 'Tab 4',
+    label: i18n.t('Jams'),
   },
   {
     id: 5,
-    label: 'Tab 5',
+    label: i18n.t('Projects'),
   },
   {
     id: 6,
-    label: 'Tab 6',
+    label: i18n.t('Events'),
   },
   {
     id: 7,
-    label: 'Tab 7',
-  },
-  {
-    id:8,
-    label: 'Tab 8',
-  },
-  {
-    id: 9,
-    label: 'Tab 9',
-  },
-  {
-    id: 10,
-    label: 'Tab 10',
+    label: i18n.t('Venues'),
   },
 ];
 
@@ -77,7 +67,7 @@ const SearchView = () => {
       <FlatList
         data={tabs}
         horizontal={true}
-        contentContainerStyle={{}}
+        contentContainerStyle={styles.tabContainer}
         scrollEnabled={true}
         keyExtractor={(item) => item.id}
         renderItem={({ item, index }) => renderTab(item, index)}
@@ -111,11 +101,13 @@ const SearchView = () => {
 };
 
 const styles = {
+  tabContainer: {
+    backgroundColor: Colors.white,
+  },
   tabItem: {
-    padding: 10,
-    margin: 0,
-    backgroundColor: 'gray',
-    //height: '100%',
+    padding: Layout.space.base,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.primary,
   },
   item: {
     flexDirection: 'column',
