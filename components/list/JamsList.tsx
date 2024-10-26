@@ -14,10 +14,6 @@ import SpinnerView from '../view/SpinnerView';
 import JamStatusButton from '../button/JamStatusButton';
 import Slideshow from '../slideshow/Slideshow';
 
-type ItemProps = {
-  item: object,
-  index: number,
-};
 
 const JamsList = () => {  
   const data = ApiClient.get('jams');
