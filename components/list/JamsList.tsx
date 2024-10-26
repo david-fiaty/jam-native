@@ -100,6 +100,7 @@ const JamsList = () => {
     <BoxView direction="column" style={Layout.screenContent}>
       <ListView
         data={data} 
+        contentContainerStyle={Layout.listContainer}
         renderItem={({item, index}) => renderItem(item, index)}
       />
     </BoxView>
