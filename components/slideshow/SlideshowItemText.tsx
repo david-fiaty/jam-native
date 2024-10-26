@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import Animated, { SharedValue, useAnimatedStyle, interpolate, Extrapolation } from 'react-native-reanimated';
-import TextView from '../view/TextView';
 import { Layout } from '@/constants/Layout';
+import TextView from '../view/TextView';
 
 type Props = {
   item: object,
