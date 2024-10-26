@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Input } from '@rneui/themed';
+import { Colors } from "@/constants/Colors";
 import BoxView from '../view/BoxView';
-import IconView from '../view/IconView';
-import { Layout } from '@/constants/Layout';
 
 const SearchField = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const currentStyle = {
-    width: isExpanded ? 190 : 45,
+    width: isExpanded ? 160 : 45,
   };
 
   return (
@@ -19,7 +18,11 @@ const SearchField = () => {
           inputContainerStyle={styles.inputContainerStyle}
           inputStyle={styles.inputStyle}
           rightIconContainerStyle={styles.rightIconContainerStyle}
-          rightIcon={{type: 'ionicons', name: 'search'}}
+          rightIcon={{
+            type: 'ionicons', 
+            name: 'search',
+            color: Colors.primary,
+          }}
         />
       </TouchableOpacity>
     </BoxView>
@@ -39,7 +42,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   rightIconContainerStyle: {
-    //marginRight: -Layout.space.base,
+    
   },
 });
 
