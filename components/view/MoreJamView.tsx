@@ -1,4 +1,4 @@
-import { View, FlatList } from "react-native";
+import { View } from "react-native";
 import { useDispatch } from 'react-redux';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from "@/constants/Layout";
@@ -12,6 +12,7 @@ import ViewProjectButton from "../button/ViewProjectButton";
 import EditJamButton from "../button/EditJamButton";
 import ReportJamButton from "../button/ReportJamButton";
 import DeleteJamButton from "../button/DeleteJamButton";
+import ListView from "./ListView";
 
 const MoreJamView = () => {
   const dispatch = useDispatch();
@@ -33,12 +34,8 @@ const MoreJamView = () => {
         onPress={() => dispatch(setActiveScreen('MoreJamView'))}
       />
       <View style={Layout.borderedListContainer}>
-        <FlatList
+        <ListView
           data={data}
-          numColumns={1}
-          scrollEnabled={true}
-          horizontal={false}
-          contentContainerStyle={{}}
           renderItem={({item, index}) => data[index]}
         />
       </View>

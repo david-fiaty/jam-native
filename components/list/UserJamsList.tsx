@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import TextView from '../view/TextView';
 import ApiClient from '@/classes/ApiClient';

@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList, TouchableOpacity } from "react-native";
+import { View } from "react-native";
 import { useDispatch } from 'react-redux';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from "@/constants/Layout";
@@ -7,6 +7,7 @@ import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import ShareJamButton from "../button/ShareJamButton";
 import ViewMyJamsButton from "../button/ViewMyJamsButton";
+import ListView from "./ListView";
 
 const SaveJamView = () => {
   const dispatch = useDispatch();
@@ -23,12 +24,8 @@ const SaveJamView = () => {
         onPress={() => dispatch(setActiveScreen('SaveJamView'))}
       />
       <View style={Layout.borderedListContainer}>
-        <FlatList
+        <ListView
           data={data}
-          numColumns={1}
-          scrollEnabled={true}
-          horizontal={false}
-          contentContainerStyle={{}}
           renderItem={({item, index}) => data[index]}
         />
       </View>
