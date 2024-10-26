@@ -38,12 +38,7 @@ export default function SlideshowItemImage({item, index, scrollX}: Props) {
 
 const styles = StyleSheet.create({
   container: {
-    //justifyContent: 'center',
-    //alignItems: 'center',
-    //width: width,
-    //gap: Layout.space.base,
   },
- 
   listItemImage: {
     width: width,
     height: 346,
