@@ -27,6 +27,7 @@ const fontSize = {
 
 const header = {
   height: 48,
+  width: DeviceManager.window.width,
   marginTop: StatusBar.currentHeight,
   paddingHorizontal: space.base*1.5,
 };

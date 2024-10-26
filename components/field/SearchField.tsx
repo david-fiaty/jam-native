@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import { Input } from '@rneui/themed';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
+import { Layout } from '@/constants/Layout';
 
 const SearchField = () => {
   return (
@@ -17,7 +18,7 @@ const SearchField = () => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 100,
+    width: Layout.header.width/4,
   },
   inputContainerStyle: {
     borderBottomWidth: 0,
