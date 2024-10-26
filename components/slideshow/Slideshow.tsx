@@ -33,7 +33,7 @@ type Props = {
 };
 
 const Slideshow = ({data, dataType}: Props) => {
-  data = test;
+  data = test; // Todo - Remove test
 
   const scrollX = useSharedValue(0);
   const [pagerIndex, setPagerIndex] = useState(0);
