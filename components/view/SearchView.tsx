@@ -8,46 +8,47 @@ import TextView from "./TextView";
 import ScreenManager from '@/classes/ScreenManager';
 import i18n from "@/translation/i18n";
 import { Colors } from "@/constants/Colors";
+import ListView from "./ListView";
 
 const tabs = [
   {
-    id: 1,
+    id: 'all',
     label: i18n.t('All'),
     numColumns: 2,
     items: ApiClient.get('jams'),
   },
   {
-    id: 2,
+    id: 'calls',
     label: i18n.t('Calls'),
     numColumns: 2,
     items: [],
   },
   {
-    id: 3,
+    id: 'jammers',
     label: i18n.t('Jammers'),
     numColumns: 1,
     items: ApiClient.get('jammers'),
   },
   {
-    id: 4,
+    id: 'jams',
     label: i18n.t('Jams'),
     numColumns: 2,
     items: ApiClient.get('jams'),
   },
   {
-    id: 5,
+    id: 'projects',
     label: i18n.t('Projects'),
     numColumns: 2,
     items: ApiClient.get('projects'),
   },
   {
-    id: 6,
+    id: 'events',
     label: i18n.t('Events'),
     numColumns: 2,
     items: [],
   },
   {
-    id: 7,
+    id: 'venues',
     label: i18n.t('Venues'),
     numColumns: 2,
     items: [],
@@ -55,7 +56,6 @@ const tabs = [
 ];
 
 const SearchView = () => {
-  const [index, setIndex] = useState(0);
   const numColumns = 3;
 
   const renderTab = (item, index) => (
@@ -75,17 +75,16 @@ const SearchView = () => {
       style={Layout.screenContent}
     >
       {/* Tabs */}
-      <FlatList
+      <ListView
         data={tabs}
         horizontal={true}
         contentContainerStyle={styles.tabContainer}
-        scrollEnabled={true}
         keyExtractor={(item) => item.id}
-        renderItem={({ item, index }) => renderTab(item, index)}
+        renderItem={({item, index}) => renderTab(item, index)}
       />
 
-      {/* Results */}
-      <FlatList 
+      {/* All */}
+      <ListView
         data={tabs[0].items} 
         numColumns={numColumns}
         contentContainerStyle={{gap: Layout.space.base}}

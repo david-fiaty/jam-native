@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
+import { setSearchValue, setSearchFilter } from "@/redux/slices/SearchSlice";
 import { Input } from '@rneui/themed';
 import { Colors } from "@/constants/Colors";
 import BoxView from '../view/BoxView';
@@ -9,10 +10,13 @@ import BoxView from '../view/BoxView';
 const SearchField = () => {
   const dispatch = useDispatch();
   const [isExpanded, setIsExpanded] = useState(false);
+  const searchState = useSelector((state) => state.search);
 
   const currentStyle = {
     width: isExpanded ? 160 : 45,
   };
+
+  console.log(searchState);
 
   return (
     <BoxView direction="row" align="space-between" style={[styles.container, currentStyle]}>
@@ -26,7 +30,7 @@ const SearchField = () => {
           inputContainerStyle={styles.inputContainerStyle}
           inputStyle={styles.inputStyle}
           rightIconContainerStyle={styles.rightIconContainerStyle}
-          onChangeText={(text) => console.log(text)}
+          onChangeText={(text) => dispatch(setSearchValue(text))}
           rightIcon={{
             type: 'ionicons', 
             name: 'search',
