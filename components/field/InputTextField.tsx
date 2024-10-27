@@ -24,6 +24,7 @@ const InputTextField = ({value, placeholder, containerStyle, leftIcon, rightIcon
         rightIcon={rightIcon}
         placeholder={placeholder}
         placeholderTextColor={Colors.primary}
+        containerStyle={containerStyle}
         multiline={false}
         editable={!disabled}
         value={value}
