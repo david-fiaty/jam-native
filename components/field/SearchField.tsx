@@ -16,38 +16,48 @@ const SearchField = () => {
   const searchState = useSelector((state) => state.search);
   const screenState = useSelector((state) => state.screen);
 
-console.log(searchState);
-console.log(ScreenManager.getActiveScreen(screenState));
+  const toggleButton = (
+    <IconView 
+      name="search" 
+      theme="secondary" 
+      style={styles.iconContainer}
+      onPress={() => {
+        //dispatch(setActiveScreen('SearchView'));
+        dispatch(toggleSearchField(!isExpanded));
 
-  return (
-    <View direction="row" align="center" justify="space-between" style={styles.container}>
+        setTimeout(() => {
+          setIsExpanded(!isExpanded);
+        }, 0);
+      }}
+    />
+  );
 
-      { isExpanded && 
-        <InputTextField 
-          containerStyle={styles.inputContainer} 
-          rightIcon={
-            <TouchableOpacity>
-              <IconView name="delete" theme="primary" onPress={() => console.log('clicked')} />
-            </TouchableOpacity>
-          }
-        /> 
-      }
-      
-      
+  const searchField = (
+    <InputTextField 
+      containerStyle={styles.inputContainer} 
+      rightIcon={  
         <IconView 
-          name="search" 
-          theme="secondary" 
-          style={styles.iconContainer}
+          name="delete" 
+          theme="primary" 
           onPress={() => {
             //dispatch(setActiveScreen('SearchView'));
             dispatch(toggleSearchField(!isExpanded));
-
+    
             setTimeout(() => {
               setIsExpanded(!isExpanded);
             }, 0);
           }}
         />
+      }
+    /> 
+  );
 
+console.log(searchState);
+//console.log(ScreenManager.getActiveScreen(screenState));
+
+  return (
+    <View direction="row" align="center" justify="space-between" style={styles.container}>
+      { isExpanded ? searchField : toggleButton }
     </View>
   );
 };
