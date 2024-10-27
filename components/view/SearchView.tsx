@@ -3,7 +3,6 @@ import { View, FlatList, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchFilter } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
-import ApiClient from "@/classes/ApiClient";
 import ImageView from "./ImageView";
 import BoxView from "./BoxView";
 import TextView from "./TextView";
@@ -11,13 +10,14 @@ import ScreenManager from '@/classes/ScreenManager';
 import i18n from "@/translation/i18n";
 import { Colors } from "@/constants/Colors";
 import ListView from "./ListView";
+import DataManager from "@/classes/DataManager";
 
 const tabs = [
   {
     id: 'all',
     label: i18n.t('All'),
     numColumns: 2,
-    items: ApiClient.get('jams'),
+    items: DataManager.get('jams'),
   },
   {
     id: 'calls',
@@ -29,19 +29,19 @@ const tabs = [
     id: 'jammers',
     label: i18n.t('Jammers'),
     numColumns: 1,
-    items: ApiClient.get('jammers'),
+    items: DataManager.get('jammers'),
   },
   {
     id: 'jams',
     label: i18n.t('Jams'),
     numColumns: 2,
-    items: ApiClient.get('jams'),
+    items: DataManager.get('jams'),
   },
   {
     id: 'projects',
     label: i18n.t('Projects'),
     numColumns: 2,
-    items: ApiClient.get('projects'),
+    items: DataManager.get('projects'),
   },
   {
     id: 'events',
@@ -71,7 +71,7 @@ const SearchView = () => {
     </TouchableOpacity>
   );
 
-  console.log(searchState);
+  //console.log(searchState);
 
   return (
     <BoxView

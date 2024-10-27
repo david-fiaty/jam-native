@@ -1,14 +1,14 @@
 
-import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
 import CheckboxSelectBase from '../base/CheckboxSelectBase';
 import i18n from '@/translation/i18n';
-import ApiClient from '@/classes/ApiClient';
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
 import IconView from "../view/IconView";
+import DataManager from '@/classes/DataManager';
 
 const AddCollaboratorsField = () => {  
-  const data = ApiClient.get('jammers');
+  const data = DataManager.get('jammers');
 
   return (
     <CheckboxSelectBase 
