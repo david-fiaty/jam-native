@@ -4,6 +4,12 @@ const SearchSlice = createSlice({
   name: 'search',
   initialState: {},
   reducers: {
+    setSearchValue: (state, action) => {
+      
+    },
+    setSearchFilter: (state, action) => {
+      
+    },
     setSearchResult: (state, action) => {
       
     },
