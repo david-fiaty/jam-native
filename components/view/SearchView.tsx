@@ -71,7 +71,7 @@ const SearchView = () => {
     </TouchableOpacity>
   );
 
-  console.log(searchState);
+  //console.log(searchState);
 
   return (
     <BoxView
