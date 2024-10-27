@@ -11,7 +11,7 @@ type Props = BaseProps & {
   disabled?: boolean, 
 };
 
-const InputTextareaBase = ({value, placeholder, containerStyle, disabled}: Props) => {
+const InputTextareaField = ({value, placeholder, containerStyle, disabled}: Props) => {
   return (
     <BoxView style={[styles.container, containerStyle]}>
       <Input
@@ -35,4 +35,4 @@ const styles = StyleSheet.create({
   element: {},
 });
 
-export default InputTextareaBase;
+export default InputTextareaField;

@@ -7,42 +7,36 @@ import { Input } from '@rneui/themed';
 import { Colors } from "@/constants/Colors";
 import BoxView from '../view/BoxView';
 import IconView from "../view/IconView";
+import InputTextField from "../field/InputTextField";
 
 const SearchField = () => {
   const dispatch = useDispatch();
   const [isExpanded, setIsExpanded] = useState(false);
 
   const currentStyle = {
-    width: isExpanded ? 160 : 30,
+    width: isExpanded ? 160 : 160,
   };
 
   return (
     <BoxView direction="row" align="center" justify="flex-end" style={[styles.container, currentStyle]}>
-      <TouchableOpacity onPress={() => {
-        dispatch(setActiveScreen('SearchView'));
-        setTimeout(() => {
-          setIsExpanded(!isExpanded);
-        }, 0);
-      }}>
-        <IconView name="search" theme="secondary" />
-      </TouchableOpacity>
+      <InputTextField />
+      <IconView name="search" theme="secondary" />
     </BoxView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    //width: 45,
     backgroundColor: 'red',
   },
-  inputContainerStyle: {
-    borderBottomWidth: 0,
-    //flexGrow: 0,
-    //width: 45,
+  input: {
+    position: 'absolute',
+    top: 0,
   },
-  inputStyle: {
-    borderBottomWidth: 0,
-    flexGrow: 1,
+  icon: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
   },
 });
 

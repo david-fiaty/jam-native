@@ -4,7 +4,7 @@ import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
-import InputTextBase from '../base/InputTextBase';
+import InputTextField from '../field/InputTextField';
 import SpinnerView from '../view/SpinnerView';
 
 const LanguageForm = () => {
@@ -24,9 +24,9 @@ const LanguageForm = () => {
         onPress={() => router.back()}
       />
       
-      <InputTextBase placeholder={i18n.t('Full name')} />
-      <InputTextBase placeholder={i18n.t('Email address')} />
-      <InputTextBase placeholder={i18n.t('Phone number')} />
+      <InputTextField placeholder={i18n.t('Full name')} />
+      <InputTextField placeholder={i18n.t('Email address')} />
+      <InputTextField placeholder={i18n.t('Phone number')} />
     </BoxView>
   );
 };
