@@ -1,23 +1,24 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/Colors';
+import { Layout } from '@/constants/Layout';
 import SkipButton from '../button/SkipButton';
-import ButtonBase from '../base/ButtonBase';
 import BoxView from '../view/BoxView';
 import i18n from '@/translation/i18n';
+import TextView from '../view/TextView';
 
 const LoginSignupButton = () => {
   const router = useRouter();
 
   return (
     <BoxView direction="column" align="center" justify="space-between">
-      <ButtonBase
-        title={i18n.t('Login') + ' / ' + i18n.t('Signup')} 
-        titleStyle={styles.titleStyle}
-        buttonStyle={styles.buttonStyle}
-        containerStyle={styles.containerStyle}
-        onPress={() => router.push('/login')} 
-      />
+      <TouchableOpacity onPress={() => router.push('/login')}>
+        <View style={styles.containerStyle}>
+          <TextView style={[styles.buttonStyle, styles.titleStyle]}>
+            {i18n.t('Login') + ' / ' + i18n.t('Signup')}
+          </TextView>
+        </View>
+      </TouchableOpacity>
       <SkipButton onPress={() => router.push('/main')} />
     </BoxView>
   );
@@ -25,9 +26,10 @@ const LoginSignupButton = () => {
 
 const styles = StyleSheet.create({
   containerStyle: {
-    borderWidth: 1, 
+    borderWidth: 0.5, 
     borderColor: Colors.primary,
     borderRadius: 30,
+    padding: Layout.space.base,
   },
   buttonStyle: {
     backgroundColor: Colors.white,

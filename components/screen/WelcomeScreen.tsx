@@ -4,12 +4,15 @@ import BottomLinks from '@/components/navigation/BottomLinks';
 import LoginSignupButton from '../button/LoginSignupButton';
 import LogoView from '../view/LogoView';
 import BoxView from '../view/BoxView';
+import { Divider } from '@rneui/base';
 
 const WelcomeScreen = () => {
   return (
     <BoxView direction="column" align="center" justify="center" style={styles.container}>
       <LogoView size={{ width: 110, height: 110 }} />    
       <LoginSignupButton />
+      
+      <Divider />
       <BottomLinks />
     </BoxView>
   );
