@@ -60,8 +60,6 @@ const SearchView = () => {
   const numColumns = 3;
   const searchState = useSelector((state) => state.search);
 
-  console.log(searchState);
-
   const renderTab = (item, index) => (
     <TouchableOpacity>
       <View style={styles.tabItem}>
