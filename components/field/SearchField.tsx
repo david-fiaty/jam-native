@@ -1,10 +1,7 @@
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
-import { setSearchValue, setSearchFilter, toggleSearchField } from "@/redux/slices/SearchSlice";
-import { Input } from '@rneui/themed';
-import { Colors } from "@/constants/Colors";
-import BoxView from '../view/BoxView';
+import { setSearchValue, toggleSearchField } from "@/redux/slices/SearchSlice";
 import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
 import ScreenManager from "@/classes/ScreenManager";
