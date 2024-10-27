@@ -5,7 +5,6 @@ import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 import TextView from '../view/TextView';
-import ApiClient from '@/classes/ApiClient';
 import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
@@ -14,11 +13,12 @@ import SpinnerView from '../view/SpinnerView';
 import JamStatusButton from '../button/JamStatusButton';
 import Slideshow from '../slideshow/Slideshow';
 import ListView from '../view/ListView';
+import DataManager from '@/classes/DataManager';
 
 const JamsList = () => {  
-  const data = ApiClient.get('jams');
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const data = DataManager.get('jams');
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), Layout.animation.duration);
