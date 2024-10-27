@@ -26,8 +26,7 @@ const ShareJamButton = ({title, style}: Props) => {
   const onShare = async () => {
     try {
       const result = await Share.share({
-        message:
-          'React Native | A framework for building native apps using React',
+        message: 'React Native | A framework for building native apps using React',
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -44,7 +43,7 @@ const ShareJamButton = ({title, style}: Props) => {
   };
 
   return (       
-    <TouchableOpacity onPress={() => {}}>
+    <TouchableOpacity onPress={() => onShare}>
       <BoxView direction="row" align="center" justify="flex-start" style={style}>
         <IconView name="user" theme="tertiary" />
         <TextView>{buttonTitle}</TextView>
