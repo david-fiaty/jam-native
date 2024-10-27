@@ -20,16 +20,13 @@ const SearchField = () => {
   return (
     <BoxView direction="row" align="center" justify="flex-end" style={[styles.container, currentStyle]}>
       <InputTextBase />
-
-        <IconView name="search" theme="secondary" />
-
+      <IconView name="search" theme="secondary" />
     </BoxView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    //width: 45,
     backgroundColor: 'red',
   },
   input: {
