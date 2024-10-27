@@ -1,4 +1,3 @@
-import { View } from 'react-native';
 import { ThemeProvider } from '@rneui/themed';
 import BaseTheme from "@/constants/BaseTheme";
 import ScreenView from '@/components/view/ScreenView';
