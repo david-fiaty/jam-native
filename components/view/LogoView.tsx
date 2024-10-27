@@ -8,7 +8,7 @@ type Props = BaseProps & {
   style?: object,
 };
 
-const source = require('@/assets/images/logo-48.png'); 
+const source = require('@/assets/images/logo-512.png'); 
 
 const LogoView = ({size, style}: Props) => {
   return (

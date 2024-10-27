@@ -16,9 +16,7 @@ const ImageBase = ({source, width, height, resizeMethod, resizeMode, style}: Pro
       source={source} 
       resizeMethod={resizeMethod || 'scale'}
       resizeMode={resizeMode || 'contain'}
-      width={width}
-      height={height}
-      style={[styles.image,style]} 
+      style={[styles.image, style, {width: width, height: height}]} 
     />   
   );
 };

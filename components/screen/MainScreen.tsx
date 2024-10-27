@@ -10,6 +10,7 @@ import BoxView from "../view/BoxView";
 import DeviceManager from "@/classes/DeviceManager";
 import FooterNavigation from "../navigation/FooterNavigation";
 import JamsList from "../list/JamsList";
+import WelcomeScreen from "./WelcomeScreen";
 
 const MainScreen = () => {
   // Parameters
@@ -105,7 +106,8 @@ const MainScreen = () => {
         {/* Main content */}
         { !currentScreen && (
           <BoxView style={Layout.mainContent}>
-            <JamsList />
+            <WelcomeScreen />
+            { /* <JamsList /> */ }
           </BoxView>
         )}
 
