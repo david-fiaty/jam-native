@@ -17,16 +17,14 @@ const CopyJamLinkButton = ({title, style}: Props) => {
   const [copiedText, setCopiedText] = useState('');
 
   const copyToClipboard = async () => {
-    await Clipboard.setStringAsync('hello world');
-  };
-
-  const getFromClipboard = async () => {
-    const text = await Clipboard.getStringAsync();
+    let text = 'hello world'; // Todo - Link to Jam item
+    await Clipboard.setStringAsync(text);
     setCopiedText(text);
   };
 
-
-  console.log(copiedText);
+  const getFromClipboard = async () => {
+    return await Clipboard.getStringAsync();
+  };
 
   return (       
     <TouchableOpacity onPress={copyToClipboard}>
