@@ -57,11 +57,11 @@ const tabs = [
   },
 ];
 
+const numColumns = 3;
+
 const SearchView = () => {
   const dispatch = useDispatch();
   const searchState = useSelector((state) => state.search);
-
-  const numColumns = 3;
 
   const renderTab = (item, index) => (
     <TouchableOpacity onPress={() => dispatch(setSearchFilter(item.id))}>
