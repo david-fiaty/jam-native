@@ -1,4 +1,5 @@
 import { Cache } from "react-native-cache";
+import { Config } from "@/constants/Config";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ApiEndpoints from '@/constants/Endpoints';
 import ApiMockData from '@/data/ApiMockData';
@@ -14,7 +15,7 @@ const cache = new Cache({
 
 class ApiClient {
   get(key: keyof typeof ApiEndpoints) {
-    if (process.env.API_ENABLED === 'true') {
+    if (Config.apiEnabled === true) {
       return this.sendRequest(ApiEndpoints[key]);
     }
 
