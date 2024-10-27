@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { setSearchValue, setSearchFilter } from "@/redux/slices/SearchSlice";
@@ -18,25 +18,29 @@ const SearchField = () => {
   };
 
   return (
-    <BoxView direction="row" align="center" justify="flex-end" style={[styles.container, currentStyle]}>
-      <InputTextField />
+    <View direction="row" align="center" justify="flex-end" style={[styles.container, currentStyle]}>
+      <InputTextField style={styles.input} />
       <IconView name="search" theme="secondary" />
-    </BoxView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'red',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   input: {
     position: 'absolute',
     top: 0,
+    left: 0,
+    width: 50,
   },
   icon: {
     position: 'absolute',
     top: 0,
-    left: 0,
+    right: 0,
   },
 });
 
