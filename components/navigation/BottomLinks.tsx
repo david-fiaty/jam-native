@@ -1,23 +1,15 @@
 import { View, StyleSheet } from 'react-native';
 import AboutButton from '../button/AboutButton';
 import LegalButton from '../button/LegalButton';
+import BoxView from '../view/BoxView';
 
 const BottomLinks = () => {
   return (
-    <View style={styles.container}>
+    <BoxView direction="row" align="center" justify="space-between">
       <AboutButton />
       <LegalButton />
-    </View>
+    </BoxView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignContent: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default BottomLinks;

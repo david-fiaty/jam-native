@@ -8,16 +8,15 @@ import BoxView from '../view/BoxView';
 const WelcomeScreen = () => {
   return (
     <BoxView direction="column" align="center" justify="center" style={styles.container}>
-        <LogoView size={{ width: 110, height: 110 }} />    
-        <LoginSignupButton />
-        <BottomLinks />
+      <LogoView size={{ width: 110, height: 110 }} />    
+      <LoginSignupButton />
+      <BottomLinks />
     </BoxView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'red',
     height: '100%',
   },
 });

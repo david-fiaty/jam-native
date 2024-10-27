@@ -25,15 +25,13 @@ const SkipButton = ({onPress}: Props) => {
 
 const styles = StyleSheet.create({
   containerStyle: {
-    borderWidth: 1, 
     borderColor: Colors.primary,
-    borderRadius: 30,
   },
   buttonStyle: {
     backgroundColor: Colors.white,
+    padding: 0,
   },
   titleStyle: {
-    textTransform: 'uppercase',
     color: Colors.primary,
   },
 });
