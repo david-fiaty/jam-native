@@ -58,11 +58,35 @@ console.log(JSON.stringify(obj, 0, 2));
 
 <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
 
-          <Button title="My Button" />
-          <Text>{i18n.t('welcome')}</Text>
+
+      <TouchableOpacity onPress={() => {
+        dispatch(setActiveScreen('SearchView'));
+        setTimeout(() => {
+          setIsExpanded(!isExpanded);
+        }, 0);
+      }}>
 
 
-{!mapTabActive && !addTabActive && !profileTabActive && (<JamsScreen />)}
+
+
+    <Input 
+          inputContainerStyle={styles.inputContainerStyle}
+          inputStyle={styles.inputStyle}
+          rightIconContainerStyle={styles.rightIconContainerStyle}
+          onChangeText={(text) => dispatch(setSearchValue(text))}
+          rightIcon={{
+            type: 'ionicons', 
+            name: 'search',
+            color: Colors.primary,
+          }}
+        />
+
+
+
+
+
+
+
 
         onLayout={event => {
           console.log(event.nativeEvent.layout);
