@@ -1,27 +1,41 @@
 import { StyleSheet } from 'react-native';
-import { GlobalStyles } from '@/constants/GlobalStyles';
+import { useRouter } from 'expo-router';
+import { Colors } from '@/constants/Colors';
 import ButtonBase from '../base/ButtonBase';
 import i18n from '@/translation/i18n';
 
 type Props = {
-  onPress: () => void,
+  onPress: () => {},
 };
 
 const SkipButton = ({onPress}: Props) => {
+  const router = useRouter();
+  onPress = onPress ? onPress : router.push('/login');
+
   return (
     <ButtonBase
       title={i18n.t('Skip')} 
+      titleStyle={styles.titleStyle}
+      buttonStyle={styles.buttonStyle}
+      containerStyle={styles.containerStyle}
       onPress={onPress} 
     />
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 0,
-    paddingHorizontal: GlobalStyles.space.base,
+  containerStyle: {
+    borderWidth: 1, 
+    borderColor: Colors.primary,
+    borderRadius: 30,
   },
-  label: {},
+  buttonStyle: {
+    backgroundColor: Colors.white,
+  },
+  titleStyle: {
+    textTransform: 'uppercase',
+    color: Colors.primary,
+  },
 });
 
 export default SkipButton;
