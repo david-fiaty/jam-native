@@ -1,6 +1,16 @@
+import { Cache } from "react-native-cache";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import ApiEndpoints from '@/constants/Endpoints';
 import ApiMockData from '@/data/ApiMockData';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const cache = new Cache({
+  namespace: 'jam-native',
+  policy: {
+    maxEntries: 50000, 
+    stdTTL: 0,
+  },
+  backend: AsyncStorage,
+});
 
 class ApiClient {
   get(key: keyof typeof ApiEndpoints) {
