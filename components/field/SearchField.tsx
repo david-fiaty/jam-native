@@ -21,7 +21,7 @@ const SearchField = () => {
       theme="secondary" 
       style={styles.iconContainer}
       onPress={() => {
-        //dispatch(setActiveScreen('SearchView'));
+        dispatch(setActiveScreen('SearchView'));
         dispatch(toggleSearchField(true));
       }}
     />
@@ -36,7 +36,6 @@ const SearchField = () => {
           theme="primary" 
           size={16}
           onPress={() => {
-            //dispatch(setActiveScreen('SearchView'));
             dispatch(toggleSearchField(false));
           }}
         />
