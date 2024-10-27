@@ -22,7 +22,16 @@ console.log(ScreenManager.getActiveScreen(screenState));
   return (
     <View direction="row" align="center" justify="space-between" style={styles.container}>
 
-      { isExpanded  && <InputTextField containerStyle={styles.inputContainer} /> }
+      { isExpanded && 
+        <InputTextField 
+          containerStyle={styles.inputContainer} 
+          rightIcon={
+            <TouchableOpacity>
+              <IconView name="delete" theme="primary" onPress={() => console.log('clicked')} />
+            </TouchableOpacity>
+          }
+        /> 
+      }
       
       
         <IconView 
@@ -49,7 +58,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   inputContainer: {
-    width: 140,
+    minWidth: 140,
+    maxWidth: 160,
   },
   iconContainer: {
     position: 'absolute',
