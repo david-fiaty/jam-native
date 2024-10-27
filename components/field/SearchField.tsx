@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
@@ -12,9 +11,9 @@ import ScreenManager from "@/classes/ScreenManager";
 
 const SearchField = () => {
   const dispatch = useDispatch();
-  const [isExpanded, setIsExpanded] = useState(false);
   const searchState = useSelector((state) => state.search);
   const screenState = useSelector((state) => state.screen);
+  const isExpanded = searchState.expanded === true;
 
   const toggleButton = (
     <IconView 
@@ -23,11 +22,7 @@ const SearchField = () => {
       style={styles.iconContainer}
       onPress={() => {
         //dispatch(setActiveScreen('SearchView'));
-        dispatch(toggleSearchField(!isExpanded));
-
-        setTimeout(() => {
-          setIsExpanded(!isExpanded);
-        }, 0);
+        dispatch(toggleSearchField(true));
       }}
     />
   );
@@ -41,11 +36,7 @@ const SearchField = () => {
           theme="primary" 
           onPress={() => {
             //dispatch(setActiveScreen('SearchView'));
-            dispatch(toggleSearchField(!isExpanded));
-    
-            setTimeout(() => {
-              setIsExpanded(!isExpanded);
-            }, 0);
+            dispatch(toggleSearchField(false));
           }}
         />
       }
