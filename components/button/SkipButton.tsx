@@ -1,8 +1,8 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/Colors';
-import ButtonBase from '../base/ButtonBase';
 import i18n from '@/translation/i18n';
+import TextView from '../view/TextView';
 
 type Props = {
   onPress: () => {},
@@ -10,16 +10,16 @@ type Props = {
 
 const SkipButton = ({onPress}: Props) => {
   const router = useRouter();
-  onPress = onPress ? onPress : router.push('/login');
+  onPress = onPress ? onPress : router.push('/main');
 
   return (
-    <ButtonBase
-      title={i18n.t('Skip')} 
-      titleStyle={styles.titleStyle}
-      buttonStyle={styles.buttonStyle}
-      containerStyle={styles.containerStyle}
-      onPress={onPress} 
-    />
+    <TouchableOpacity onPress={onPress}>
+      <View style={styles.containerStyle}>
+        <TextView style={[styles.buttonStyle, styles.titleStyle]}>
+          {i18n.t('Skip')}
+        </TextView>
+      </View>
+    </TouchableOpacity>
   );
 };
 
