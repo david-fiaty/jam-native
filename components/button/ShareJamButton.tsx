@@ -14,7 +14,6 @@ const ShareJamButton = ({title, style}: Props) => {
   const buttonTitle = title ? i18n.t(title) : i18n.t('Share Jam');
 
   const onShare = async () => {
-    console.log('clicked');
     try {
       const result = await Share.share({
         message: 'React Native | A framework for building native apps using React',
@@ -29,7 +28,7 @@ const ShareJamButton = ({title, style}: Props) => {
         // dismissed
       }
     } catch (error) {
-      alert(error.message);
+      console.log(error);
     }
   };
 
