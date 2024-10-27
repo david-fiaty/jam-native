@@ -7,7 +7,7 @@ class DataManager {
     const data = ApiClient.get(key);
     let results: object = [];
 
-    if (!filter) {
+    if (filter) {
       console.log('------');
       console.log(Store.getState().search);
       //return Store.getState().screen.find(item => item.active === true);
