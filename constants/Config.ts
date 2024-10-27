@@ -1,7 +1,8 @@
 export const Config = {
+  cacheEnabled: true,
   apiEnabled: false,
   apiUrl: 'http://localhost',
-  cacheEnabled: true,
   defaultLanguage: 'en',
   fallbackLanguage: 'en',
+  appNamespace: 'jam-native',
 };
