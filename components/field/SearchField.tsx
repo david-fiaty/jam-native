@@ -45,15 +45,10 @@ console.log(ScreenManager.getActiveScreen(screenState));
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'red',
     flexDirection: 'row',
     alignItems: 'center',
-    position: 'relative',
   },
   inputContainer: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
     width: 140,
   },
   iconContainer: {
