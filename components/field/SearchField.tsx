@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
-import { setSearchValue, setSearchFilter } from "@/redux/slices/SearchSlice";
+import { setSearchValue, setSearchFilter, toggleSearchField } from "@/redux/slices/SearchSlice";
 import { Input } from '@rneui/themed';
 import { Colors } from "@/constants/Colors";
 import BoxView from '../view/BoxView';
@@ -12,6 +12,9 @@ import InputTextField from "../field/InputTextField";
 const SearchField = () => {
   const dispatch = useDispatch();
   const [isExpanded, setIsExpanded] = useState(false);
+  const searchState = useSelector((state) => state.search);
+  
+console.log(searchState);
 
   const currentStyle = {
     width: isExpanded ? 160 : 160,
@@ -20,7 +23,18 @@ const SearchField = () => {
   return (
     <View direction="row" align="center" justify="flex-end" style={[styles.container, currentStyle]}>
       <InputTextField containerStyle={styles.input} />
-      <IconView name="search" theme="secondary" />
+
+      <TouchableOpacity onPress={() => {
+        //dispatch(setActiveScreen('SearchView'));
+        dispatch(toggleSearchField(!isExpanded));
+
+        setTimeout(() => {
+          setIsExpanded(!isExpanded);
+        }, 0);
+      }}>
+        <IconView name="search" theme="secondary" />
+      </TouchableOpacity>
+
     </View>
   );
 };
