@@ -8,9 +8,7 @@ export default () => {
   return ( 
     <ThemeProvider theme={BaseTheme}>
       <ScreenView>
-        <View>
-          <WelcomeScreen />
-        </View>
+        <WelcomeScreen />
       </ScreenView>
     </ThemeProvider>
   );
