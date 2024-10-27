@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
@@ -12,9 +11,10 @@ import ScreenManager from "@/classes/ScreenManager";
 
 const SearchField = () => {
   const dispatch = useDispatch();
-  const [isExpanded, setIsExpanded] = useState(false);
   const searchState = useSelector((state) => state.search);
   const screenState = useSelector((state) => state.screen);
+  const activeScreen = ScreenManager.getActiveScreen(screenState);
+  const isExpanded = searchState.expanded === true;
 
   const toggleButton = (
     <IconView 
@@ -22,42 +22,39 @@ const SearchField = () => {
       theme="secondary" 
       style={styles.iconContainer}
       onPress={() => {
-        //dispatch(setActiveScreen('SearchView'));
-        dispatch(toggleSearchField(!isExpanded));
-
-        setTimeout(() => {
-          setIsExpanded(!isExpanded);
-        }, 0);
+        dispatch(toggleSearchField(true));
+        dispatch(setActiveScreen('SearchView'));
       }}
     />
   );
 
-  const searchField = (
+  const inputField = (
     <InputTextField 
+      value={searchState.value}
       containerStyle={styles.inputContainer} 
+      onChangeText={(text) => dispatch(setSearchValue(text))}
       rightIcon={  
         <IconView 
           name="delete" 
           theme="primary" 
+          size={16}
           onPress={() => {
-            //dispatch(setActiveScreen('SearchView'));
-            dispatch(toggleSearchField(!isExpanded));
-    
-            setTimeout(() => {
-              setIsExpanded(!isExpanded);
-            }, 0);
+            if (searchState.value.length) {
+              dispatch(setSearchValue(''));
+            }
+            else if (!searchState.value.length && activeScreen?.name == 'SearchView') {
+              dispatch(toggleSearchField(false));
+              dispatch(setActiveScreen('SearchView'));
+            }
           }}
         />
       }
     /> 
   );
 
-console.log(searchState);
-//console.log(ScreenManager.getActiveScreen(screenState));
-
   return (
     <View direction="row" align="center" justify="space-between" style={styles.container}>
-      { isExpanded ? searchField : toggleButton }
+      { isExpanded ? inputField : toggleButton }
     </View>
   );
 };
@@ -69,7 +66,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     minWidth: 140,
-    maxWidth: 160,
+    maxWidth: 188,
   },
   iconContainer: {
     position: 'absolute',

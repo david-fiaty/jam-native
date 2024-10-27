@@ -15,7 +15,7 @@ const SearchSlice = createSlice({
       state.filter = action.payload;
     },
     toggleSearchField: (state, action) => {
-      state.expanded = !action.payload;
+      state.expanded = action.payload;
     },
   },
 });
