@@ -14,7 +14,7 @@ const ShareJamView = () => {
 
   const data = [
     <CopyJamLinkButton style={Layout.listItem} />,
-    <ShareJamButton />
+    <ShareJamButton style={Layout.listItem} />,
   ];
 
   return (
