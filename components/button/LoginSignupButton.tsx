@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     //textTransform: 'uppercase'
   },
   titleStyle: {
-    textTransform: 'uppercase'
+    textTransform: 'uppercase',
   },
 });
 
