@@ -34,7 +34,7 @@ const ShareJamButton = ({title, style}: Props) => {
   };
 
   return (       
-    <TouchableOpacity onPress={() => onShare}>
+    <TouchableOpacity onPress={onShare}>
       <BoxView direction="row" align="center" justify="flex-start" style={style}>
         <IconView name="user" theme="tertiary" />
         <TextView>{buttonTitle}</TextView>
