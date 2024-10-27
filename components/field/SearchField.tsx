@@ -8,13 +8,16 @@ import { Colors } from "@/constants/Colors";
 import BoxView from '../view/BoxView';
 import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
+import ScreenManager from "@/classes/ScreenManager";
 
 const SearchField = () => {
   const dispatch = useDispatch();
   const [isExpanded, setIsExpanded] = useState(false);
   const searchState = useSelector((state) => state.search);
-  
+  const screenState = useSelector((state) => state.screen);
+
 console.log(searchState);
+console.log(ScreenManager.getActiveScreen(screenState));
 
   const currentStyle = {
     width: isExpanded ? 160 : 160,
@@ -22,7 +25,9 @@ console.log(searchState);
 
   return (
     <View direction="row" align="center" justify="flex-end" style={[styles.container, currentStyle]}>
-      <InputTextField containerStyle={styles.input} />
+
+      { isExpanded && <InputTextField containerStyle={styles.input} />}
+      
 
       <TouchableOpacity onPress={() => {
         //dispatch(setActiveScreen('SearchView'));
