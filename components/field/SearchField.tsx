@@ -6,34 +6,25 @@ import { setSearchValue, setSearchFilter } from "@/redux/slices/SearchSlice";
 import { Input } from '@rneui/themed';
 import { Colors } from "@/constants/Colors";
 import BoxView from '../view/BoxView';
+import IconView from "../view/IconView";
 
 const SearchField = () => {
   const dispatch = useDispatch();
   const [isExpanded, setIsExpanded] = useState(false);
 
   const currentStyle = {
-    width: isExpanded ? 160 : 45,
+    width: isExpanded ? 160 : 30,
   };
 
   return (
-    <BoxView direction="row" align="space-between" style={[styles.container, currentStyle]}>
+    <BoxView direction="row" align="center" justify="flex-end" style={[styles.container, currentStyle]}>
       <TouchableOpacity onPress={() => {
         dispatch(setActiveScreen('SearchView'));
         setTimeout(() => {
           setIsExpanded(!isExpanded);
         }, 0);
       }}>
-        <Input 
-          inputContainerStyle={styles.inputContainerStyle}
-          inputStyle={styles.inputStyle}
-          rightIconContainerStyle={styles.rightIconContainerStyle}
-          onChangeText={(text) => dispatch(setSearchValue(text))}
-          rightIcon={{
-            type: 'ionicons', 
-            name: 'search',
-            color: Colors.primary,
-          }}
-        />
+        <IconView name="search" theme="secondary" />
       </TouchableOpacity>
     </BoxView>
   );
@@ -41,18 +32,17 @@ const SearchField = () => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 45,
+    //width: 45,
+    backgroundColor: 'red',
   },
   inputContainerStyle: {
     borderBottomWidth: 0,
-    flexGrow: 0,
+    //flexGrow: 0,
+    //width: 45,
   },
   inputStyle: {
     borderBottomWidth: 0,
     flexGrow: 1,
-  },
-  rightIconContainerStyle: {
-    
   },
 });
 
