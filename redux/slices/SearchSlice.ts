@@ -10,11 +10,8 @@ const SearchSlice = createSlice({
     setSearchFilter: (state, action) => {
       
     },
-    setSearchResult: (state, action) => {
-      
-    },
   },
 });
 
-export const { setSearchResult } = SearchSlice.actions;
+export const { setSearchValue, setSearchFilter } = SearchSlice.actions;
 export default SearchSlice.reducer;
