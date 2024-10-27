@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Stack } from 'expo-router';
+import { useFonts } from 'expo-font';
 import * as ExpoSplashScreen from 'expo-splash-screen';
 import * as ExpoFont from 'expo-font';
 import { Provider } from 'react-redux';
@@ -28,11 +29,15 @@ const screenOptions = {
 ExpoSplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded] = useFonts({
+    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+  });
 
   useEffect(() => {
-    setIsLoaded(true);
-  }, []);
+    if (isLoaded) {
+      ExpoSplashScreen.hideAsync();
+    }
+  }, [isLoaded]);
 
   if (!isLoaded) return <SplashScreen /> 
 
