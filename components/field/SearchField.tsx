@@ -28,7 +28,6 @@ console.log(ScreenManager.getActiveScreen(screenState));
 
       { isExpanded && <InputTextField containerStyle={styles.input} />}
       
-
       <TouchableOpacity onPress={() => {
         //dispatch(setActiveScreen('SearchView'));
         dispatch(toggleSearchField(!isExpanded));
