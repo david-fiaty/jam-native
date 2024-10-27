@@ -21,7 +21,6 @@ const InputTextBase = ({value, placeholder, containerStyle, leftIcon, rightIcon,
         numberOfLines={1}
         leftIcon={leftIcon}
         rightIcon={rightIcon}
-        style={styles.element}
         placeholder={placeholder}
         placeholderTextColor={Colors.primary}
         multiline={false}
@@ -36,7 +35,6 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
   },
-  element: {},
 });
 
 export default InputTextBase;
