@@ -15,6 +15,25 @@ const cache = new Cache({
 
 class ApiClient {
   get(key: keyof typeof ApiEndpoints) {
+    (async () => {
+      try {
+        let data = await cache.get(key);
+        if (!data) {
+          data = ApiMockData[key];
+          await cache.set(key, data);
+
+          return data;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+
+    if (Config.cacheEnabled === true) {
+
+    }
+
+
     if (Config.apiEnabled === true) {
       return this.sendRequest(ApiEndpoints[key]);
     }
