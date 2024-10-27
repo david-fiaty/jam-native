@@ -16,6 +16,20 @@ const BaseTheme = createTheme({
         borderRadius: Layout.radius.round,
       },
     },
+    Input: {
+      placeholderTextColor: Colors.primary,
+      containerStyle: Layout.formField,
+      inputContainerStyle: {
+        borderBottomWidth: 0,
+        flexGrow: 1,
+      },
+      inputStyle: {
+        padding: 0,
+        margin: 0,
+        color: Colors.primary,
+        fontSize: Layout.fontSize.base,
+      },
+    },
   },
 });
 

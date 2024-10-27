@@ -9,7 +9,7 @@ import UserLocationField from "../field/UserLocationField";
 import IndustryField from "../field/IndustryField";
 import DividerView from "../view/DividerView";
 import UserProfileImageField from '../field/UserProfileImageField';
-import InputTextBase from '../base/InputTextBase';
+import InputTextField from '../field/InputTextField';
 import CreativeOrganizationField from '../field/CreativeOrganizationField';
 import UserJamsList from '../list/UserJamsList';
 import UserProjectsList from '../list/UserProjectsList';
@@ -35,10 +35,10 @@ const ProfileForm = () => {
       <UserProfileImageField />
 
       <DividerView />
-      <InputTextBase placeholder={i18n.t('Public name')} />
-      <InputTextBase placeholder={i18n.t('IG handle')} />
-      <InputTextBase placeholder={i18n.t('Email address')} />
-      <InputTextBase placeholder={i18n.t('Phone number')} />
+      <InputTextField placeholder={i18n.t('Public name')} />
+      <InputTextField placeholder={i18n.t('IG handle')} />
+      <InputTextField placeholder={i18n.t('Email address')} />
+      <InputTextField placeholder={i18n.t('Phone number')} />
       <UserLocationField />
       <IndustryField />
       <CreativeOrganizationField />

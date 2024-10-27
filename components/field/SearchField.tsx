@@ -7,7 +7,7 @@ import { Input } from '@rneui/themed';
 import { Colors } from "@/constants/Colors";
 import BoxView from '../view/BoxView';
 import IconView from "../view/IconView";
-import InputTextBase from "../base/InputTextBase";
+import InputTextField from "../field/InputTextField";
 
 const SearchField = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const SearchField = () => {
 
   return (
     <BoxView direction="row" align="center" justify="flex-end" style={[styles.container, currentStyle]}>
-      <InputTextBase />
+      <InputTextField />
       <IconView name="search" theme="secondary" />
     </BoxView>
   );
@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
   input: {
     position: 'absolute',
     top: 0,
-    left: 0,
   },
   icon: {
     position: 'absolute',
