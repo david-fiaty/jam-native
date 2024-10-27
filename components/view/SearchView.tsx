@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { View, FlatList, TouchableOpacity } from "react-native";
 import { Layout } from "@/constants/Layout";
 import ApiClient from "@/classes/ApiClient";
@@ -13,35 +13,42 @@ const tabs = [
   {
     id: 1,
     label: i18n.t('All'),
+    items: ApiClient.get('jams'),
   },
   {
     id: 2,
     label: i18n.t('Calls'),
+    items: [],
   },
   {
     id: 3,
     label: i18n.t('Jammers'),
+    items: ApiClient.get('jammers'),
   },
   {
     id: 4,
     label: i18n.t('Jams'),
+    items: ApiClient.get('jams'),
   },
   {
     id: 5,
     label: i18n.t('Projects'),
+    items: ApiClient.get('projects'),
   },
   {
     id: 6,
     label: i18n.t('Events'),
+    items: [],
   },
   {
     id: 7,
     label: i18n.t('Venues'),
+    items: [],
   },
 ];
 
 const SearchView = () => {
-  const [index, setIndex] = React.useState(0);
+  const [index, setIndex] = useState(0);
   const jamsData = ApiClient.get("jams");
   //const projectsData = ApiClient.get("projects");
 
@@ -65,7 +72,7 @@ const SearchView = () => {
     >
       {/* Tabs */}
       <FlatList
-        data={tabs}
+        data={jamsData}
         horizontal={true}
         contentContainerStyle={styles.tabContainer}
         scrollEnabled={true}
@@ -75,7 +82,7 @@ const SearchView = () => {
 
       {/* Results */}
       <FlatList 
-        data={jamsData} 
+        data={tabs[0]} 
         numColumns={numColumns}
         contentContainerStyle={{gap: Layout.space.base}}
         columnWrapperStyle={{gap: Layout.space.base}}
