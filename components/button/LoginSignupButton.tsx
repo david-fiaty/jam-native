@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/Colors';
 import SkipButton from '../button/SkipButton';
@@ -10,15 +10,15 @@ const LoginSignupButton = () => {
   const router = useRouter();
 
   return (
-    <BoxView direction="row" align="center" justify="space-between">
+    <BoxView direction="column" align="center" justify="space-between">
       <ButtonBase
-        title={i18n.t('Login / Signup')} 
+        title={i18n.t('Login') + ' / ' + i18n.t('Signup')} 
         titleStyle={styles.titleStyle}
         buttonStyle={styles.buttonStyle}
         containerStyle={styles.containerStyle}
         onPress={() => router.push('/login')} 
       />
-      <SkipButton onPress={() => router.push('/')} />
+      <SkipButton onPress={() => router.push('/main')} />
     </BoxView>
   );
 };
@@ -28,13 +28,13 @@ const styles = StyleSheet.create({
     borderWidth: 1, 
     borderColor: Colors.primary,
     borderRadius: 30,
-    backgroundColor: 'black',
   },
   buttonStyle: {
-    //textTransform: 'uppercase'
+    backgroundColor: Colors.white,
   },
   titleStyle: {
     textTransform: 'uppercase',
+    color: Colors.primary,
   },
 });
 
