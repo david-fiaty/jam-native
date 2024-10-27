@@ -51,11 +51,10 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   inputContainer: {
-    //position: 'absolute',
-    //top: 0,
-    //left: 0,
+    position: 'absolute',
+    top: 0,
+    right: 0,
     width: 140,
-    //flex: 1,
   },
   iconContainer: {
     position: 'absolute',
