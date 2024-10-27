@@ -22,18 +22,22 @@ console.log(ScreenManager.getActiveScreen(screenState));
   return (
     <View direction="row" align="center" justify="space-between" style={styles.container}>
 
-      { isExpanded  && <InputTextField containerStyle={styles.input} /> }
+      { isExpanded  && <InputTextField containerStyle={styles.inputContainer} /> }
       
-      <TouchableOpacity onPress={() => {
-        //dispatch(setActiveScreen('SearchView'));
-        dispatch(toggleSearchField(!isExpanded));
+      
+        <IconView 
+          name="search" 
+          theme="secondary" 
+          style={styles.iconContainer}
+          onPress={() => {
+            //dispatch(setActiveScreen('SearchView'));
+            dispatch(toggleSearchField(!isExpanded));
 
-        setTimeout(() => {
-          setIsExpanded(!isExpanded);
-        }, 0);
-      }}>
-        <IconView name="search" theme="secondary" />
-      </TouchableOpacity>
+            setTimeout(() => {
+              setIsExpanded(!isExpanded);
+            }, 0);
+          }}
+        />
 
     </View>
   );
@@ -43,18 +47,20 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'red',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    alignItems: 'center',
+    position: 'relative',
   },
-  input: {
+  inputContainer: {
     //position: 'absolute',
     //top: 0,
     //left: 0,
-    width: 130,
+    width: 140,
+    //flex: 1,
   },
-  icon: {
-    //position: 'absolute',
-    //top: 0,
-    //right: 0,
+  iconContainer: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
   },
 });
 
