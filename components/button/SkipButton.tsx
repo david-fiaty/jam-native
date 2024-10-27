@@ -10,7 +10,7 @@ type Props = {
 const SkipButton = ({onPress}: Props) => {
   return (
     <ButtonBase
-      label={i18n.t('Skip')} 
+      title={i18n.t('Skip')} 
       onPress={onPress} 
     />
   );

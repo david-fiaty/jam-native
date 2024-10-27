@@ -13,7 +13,7 @@ type Props = {
 const PostButton = ({onPress}: Props) => {
   return (       
     <BoxView style={styles.container}>
-    <ButtonBase label={i18n.t('Post')} onPress={onPress} />
+    <ButtonBase title={i18n.t('Post')} onPress={onPress} />
     </BoxView> 
   );
 };

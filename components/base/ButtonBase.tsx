@@ -1,29 +1,34 @@
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { Button } from '@rneui/themed';
 import { BaseProps } from '@/constants/Types';
-import BoxView from '../view/BoxView';
 
 type Props = BaseProps & {
-  label: string,
+  title: string,
+  titleStyle?: object,
+  buttonStyle?: object,
+  containerStyle?: object,
   onPress?: () => void,
-  style?: object,
 };
 
-const ButtonBase = ({label, onPress, style}: Props) => {
-  return (
-    <TouchableOpacity onPress={onPress}>
-      <BoxView style={[styles.container]}>
-        <Button title={label} />
-      </BoxView>
-    </TouchableOpacity>
+const ButtonBase = ({title, titleStyle, buttonStyle, containerStyle, onPress}: Props) => {
+  let output = (
+    <Button 
+      title={title} 
+      titleStyle={titleStyle}
+      buttonStyle={buttonStyle} 
+      containerStyle={containerStyle} 
+    />
   );
-};
 
-const styles = StyleSheet.create({
-  container: {
-    
-  },
-  element: {},
-});
+  if (onPress) {
+    output = (
+      <TouchableOpacity onPress={onPress}>
+        {output}
+      </TouchableOpacity>
+    );
+  }
+
+  return output;
+};
 
 export default ButtonBase;
