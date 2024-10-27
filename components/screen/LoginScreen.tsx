@@ -8,6 +8,7 @@ import i18n from '@/translation/i18n';
 
 import InputTextField from '../field/InputTextField';
 import ContinueButton from '../button/ContinueButton';
+import SkipButton from '../button/SkipButton';
 
 const LoginScreen = () => {
   return (
@@ -19,6 +20,10 @@ const LoginScreen = () => {
         placeholder={i18n.t('Enter your email address')} 
       />
       <ContinueButton onPress={() => console.log('clicked') }/>
+      <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
+        <TextView>{i18n.t("Don't have an account?")}</TextView>
+        <SkipButton onPress={() => {}} />
+      </BoxView>
     </BoxView>
   );
 };
