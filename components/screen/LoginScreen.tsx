@@ -9,6 +9,7 @@ import i18n from '@/translation/i18n';
 import InputTextField from '../field/InputTextField';
 import ContinueButton from '../button/ContinueButton';
 import SkipButton from '../button/SkipButton';
+import GoogleLoginButton from '../button/GoogleLoginButton';
 
 const LoginScreen = () => {
   return (
@@ -24,6 +25,7 @@ const LoginScreen = () => {
         <TextView>{i18n.t("Don't have an account?")}</TextView>
         <SkipButton onPress={() => {}} />
       </BoxView>
+      <GoogleLoginButton />
     </BoxView>
   );
 };
