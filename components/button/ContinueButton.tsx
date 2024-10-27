@@ -10,11 +10,11 @@ type Props = {
 
 const ContinueButton = ({onPress}: Props) => {
   return (
-      <ButtonBase
-        title={i18n.t('Continue')} 
-        onPress={onPress} 
-        containerStyle={styles.buttonContainer}
-      />
+    <ButtonBase
+      title={i18n.t('Continue')} 
+      onPress={onPress} 
+      containerStyle={styles.buttonContainer}
+    />
   );
 };
 
