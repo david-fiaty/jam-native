@@ -1,11 +1,12 @@
 import { StyleSheet } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useNavigation } from '@react-navigation/native';
 import { Layout } from '@/constants/Layout';
 import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 import { Divider } from '@rneui/base';
 import BackButton from '../button/BackButton';
+import BottomLinks from '../navigation/BottomLinks';
 
 const data = {
   title: 'About',
@@ -18,16 +19,18 @@ const data = {
 };
 
 const AboutScreen = () => {
-  const router = useRouter();
+  const navigation = useNavigation();
 
   return (
     <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={i18n.t('About')}
-        onPress={() => router.back()}
+        onPress={() => navigation.popToTop()}
       />
       <TextView>{data.text}</TextView> 
       <Divider />
+
+      <BottomLinks />
       
     </BoxView>
   );
