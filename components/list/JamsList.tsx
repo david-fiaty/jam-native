@@ -16,9 +16,10 @@ import Slideshow from '../slideshow/Slideshow';
 import ListView from '../view/ListView';
 
 const JamsList = () => {  
-  const data = ApiClient.get('jams');
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const data = ApiClient.get('jams');
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), Layout.animation.duration);
