@@ -8,6 +8,7 @@ import BoxView from '../view/BoxView';
 import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
 import ScreenManager from "@/classes/ScreenManager";
+import i18n from '@/translation/i18n';
 
 const SearchField = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const SearchField = () => {
   const inputField = (
     <InputTextField 
       value={searchState.value}
+      placeholder={i18n.t('Search...')}
       containerStyle={styles.inputContainer} 
       onChangeText={(text) => dispatch(setSearchValue(text))}
       rightIcon={  
