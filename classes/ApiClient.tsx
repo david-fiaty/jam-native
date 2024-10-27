@@ -1,5 +1,6 @@
 import ApiEndpoints from '@/constants/Endpoints';
 import ApiMockData from '@/data/ApiMockData';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class ApiClient {
   get(key: keyof typeof ApiEndpoints) {
