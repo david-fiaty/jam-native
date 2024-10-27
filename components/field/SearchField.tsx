@@ -30,6 +30,7 @@ const SearchField = () => {
 
   const inputField = (
     <InputTextField 
+      value={searchState.value}
       containerStyle={styles.inputContainer} 
       onChangeText={(text) => dispatch(setSearchValue(text))}
       rightIcon={  
@@ -38,13 +39,12 @@ const SearchField = () => {
           theme="primary" 
           size={16}
           onPress={() => {
-            //dispatch(toggleSearchField(false));
-            //dispatch(setActiveScreen('SearchView'));
-
-console.log(searchState);
-
-            if (activeScreen?.name == 'SearchView' && searchState.value?.length) {
-
+            if (searchState.value.length) {
+              dispatch(setSearchValue(''));
+            }
+            else if (!searchState.value.length && activeScreen?.name == 'SearchView') {
+              dispatch(toggleSearchField(false));
+              dispatch(setActiveScreen('SearchView'));
             }
           }}
         />
