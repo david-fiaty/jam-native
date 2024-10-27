@@ -21,7 +21,6 @@ const BaseTheme = createTheme({
       containerStyle: Layout.formField,
       inputContainerStyle: {
         borderBottomWidth: 0,
-        flexGrow: 1,
       },
       inputStyle: {
         padding: 0,

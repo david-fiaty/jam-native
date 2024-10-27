@@ -5,6 +5,7 @@ const SearchSlice = createSlice({
   initialState: {
     value: '',
     filter: '',
+    expanded: false,
   },
   reducers: {
     setSearchValue: (state, action) => {
@@ -13,8 +14,11 @@ const SearchSlice = createSlice({
     setSearchFilter: (state, action) => {
       state.filter = action.payload;
     },
+    toggleSearchField: (state, action) => {
+      state.expanded = !action.payload;
+    },
   },
 });
 
-export const { setSearchValue, setSearchFilter } = SearchSlice.actions;
+export const { setSearchValue, setSearchFilter, toggleSearchField } = SearchSlice.actions;
 export default SearchSlice.reducer;
