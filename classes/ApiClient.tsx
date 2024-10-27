@@ -18,25 +18,20 @@ class ApiClient {
     (async () => {
       try {
         let data = await cache.get(key);
+
         if (!data) {
-          data = ApiMockData[key];
+          data = Config.apiEnabled === true ? this.sendRequest(ApiEndpoints[key]) : ApiMockData[key];
           await cache.set(key, data);
 
           return data;
         }
+        
+        return data;
+
       } catch (error) {
         console.log(error);
       }
     })();
-
-    if (Config.cacheEnabled === true) {
-
-    }
-
-
-    if (Config.apiEnabled === true) {
-      return this.sendRequest(ApiEndpoints[key]);
-    }
 
     return ApiMockData[key];
   }
