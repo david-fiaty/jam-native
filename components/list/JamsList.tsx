@@ -18,7 +18,7 @@ import DataManager from '@/classes/DataManager';
 const JamsList = () => {  
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  const data = DataManager.get('jams', true);
+  const data = DataManager.get('jams');
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), Layout.animation.duration);
