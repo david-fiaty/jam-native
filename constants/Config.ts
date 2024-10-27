@@ -5,4 +5,5 @@ export const Config = {
   defaultLanguage: 'en',
   fallbackLanguage: 'en',
   appNamespace: 'jam-native',
+  logoImageSize: 512,
 };
