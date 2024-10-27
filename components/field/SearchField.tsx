@@ -28,19 +28,18 @@ const SearchField = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'red',
-    flexDirection: 'row',
-    alignItems: 'center',
+    width: '100%',
   },
   input: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
+    //position: 'absolute',
+    //top: 0,
+    //left: 0,
     width: 50,
   },
   icon: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
+    //position: 'absolute',
+    //top: 0,
+    //right: 0,
   },
 });
 
