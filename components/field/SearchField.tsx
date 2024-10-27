@@ -19,7 +19,7 @@ const SearchField = () => {
 
   return (
     <View direction="row" align="center" justify="flex-end" style={[styles.container, currentStyle]}>
-      <InputTextField style={styles.input} />
+      <InputTextField containerStyle={styles.input} />
       <IconView name="search" theme="secondary" />
     </View>
   );
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     //position: 'absolute',
     //top: 0,
     //left: 0,
-    width: 50,
+    //width: 20,
   },
   icon: {
     //position: 'absolute',
