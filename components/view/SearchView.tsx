@@ -13,44 +13,44 @@ const tabs = [
   {
     id: 1,
     label: i18n.t('All'),
-    items: ApiClient.get('jams'),
     numColumns: 2,
+    items: ApiClient.get('jams'),
   },
   {
     id: 2,
     label: i18n.t('Calls'),
-    items: [],
     numColumns: 2,
+    items: [],
   },
   {
     id: 3,
     label: i18n.t('Jammers'),
-    items: ApiClient.get('jammers'),
     numColumns: 1,
+    items: ApiClient.get('jammers'),
   },
   {
     id: 4,
     label: i18n.t('Jams'),
-    items: ApiClient.get('jams'),
     numColumns: 2,
+    items: ApiClient.get('jams'),
   },
   {
     id: 5,
     label: i18n.t('Projects'),
-    items: ApiClient.get('projects'),
     numColumns: 2,
+    items: ApiClient.get('projects'),
   },
   {
     id: 6,
     label: i18n.t('Events'),
-    items: [],
     numColumns: 2,
+    items: [],
   },
   {
     id: 7,
     label: i18n.t('Venues'),
-    items: [],
     numColumns: 2,
+    items: [],
   },
 ];
 
