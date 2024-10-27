@@ -1,4 +1,3 @@
-import { useDispatch, useSelector } from 'react-redux';
 import Store from '@/redux/Store';
 import { Layout } from '@/constants/Layout';
 import DeviceManager from './DeviceManager';
