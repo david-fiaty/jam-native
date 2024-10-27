@@ -9,8 +9,7 @@ import ScreenManager from '@/classes/ScreenManager';
 
 const FooterNavigation = () => {
   const dispatch = useDispatch();
-  const screenState = useSelector((state) => state.screen);
-  const activeScreen = ScreenManager.getActiveScreen(screenState);
+  const activeScreen = ScreenManager.getActiveScreen();
 
   return (
     <BoxView direction="row" align="center" justify="space-around" style={Layout.footer}>

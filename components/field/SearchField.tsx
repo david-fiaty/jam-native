@@ -10,8 +10,7 @@ import i18n from '@/translation/i18n';
 const SearchField = () => {
   const dispatch = useDispatch();
   const searchState = useSelector((state) => state.search);
-  const screenState = useSelector((state) => state.screen);
-  const activeScreen = ScreenManager.getActiveScreen(screenState);
+  const activeScreen = ScreenManager.getActiveScreen();
   const isExpanded = searchState.expanded === true;
 
   const toggleButton = (

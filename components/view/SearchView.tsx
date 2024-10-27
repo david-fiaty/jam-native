@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { View, FlatList, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
+import { setSearchFilter } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
 import ApiClient from "@/classes/ApiClient";
 import ImageView from "./ImageView";
@@ -56,19 +57,21 @@ const tabs = [
   },
 ];
 
+const numColumns = 3;
+
 const SearchView = () => {
-  const numColumns = 3;
+  const dispatch = useDispatch();
   const searchState = useSelector((state) => state.search);
 
-  console.log(searchState);
-
   const renderTab = (item, index) => (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={() => dispatch(setSearchFilter(item.id))}>
       <View style={styles.tabItem}>
         <TextView>{item.label}</TextView>
       </View>
     </TouchableOpacity>
   );
+
+  console.log(searchState);
 
   return (
     <BoxView
