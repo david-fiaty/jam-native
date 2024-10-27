@@ -34,6 +34,7 @@ const SearchField = () => {
         <IconView 
           name="delete" 
           theme="primary" 
+          size={16}
           onPress={() => {
             //dispatch(setActiveScreen('SearchView'));
             dispatch(toggleSearchField(false));
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     minWidth: 140,
-    maxWidth: 160,
+    maxWidth: 188,
   },
   iconContainer: {
     position: 'absolute',
