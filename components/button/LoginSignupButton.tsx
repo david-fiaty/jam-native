@@ -25,7 +25,7 @@ const LoginSignupButton = () => {
 
 const styles = StyleSheet.create({
   containerStyle: {
-    borderWidth: 1, 
+    borderWidth: 0.5, 
     borderColor: Colors.primary,
     borderRadius: 30,
   },
