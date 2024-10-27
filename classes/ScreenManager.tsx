@@ -1,3 +1,4 @@
+import Store from '@/redux/Store';
 import { Layout } from '@/constants/Layout';
 import DeviceManager from './DeviceManager';
 
@@ -11,8 +12,8 @@ class ScreenManager {
     };
   }
 
-  getActiveScreen(state: []) {
-    return state.find(item => item.active === true);
+  getActiveScreen() {
+    return Store.getState().screen.find(item => item.active === true);
   }
 };
 
