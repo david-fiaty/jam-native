@@ -8,6 +8,7 @@ import TextView from "./TextView";
 import ScreenManager from '@/classes/ScreenManager';
 import i18n from "@/translation/i18n";
 import { Colors } from "@/constants/Colors";
+import ListView from "./ListView";
 
 const tabs = [
   {
@@ -75,17 +76,16 @@ const SearchView = () => {
       style={Layout.screenContent}
     >
       {/* Tabs */}
-      <FlatList
+      <ListView
         data={tabs}
         horizontal={true}
         contentContainerStyle={styles.tabContainer}
-        scrollEnabled={true}
         keyExtractor={(item) => item.id}
         renderItem={({ item, index }) => renderTab(item, index)}
       />
 
-      {/* Results */}
-      <FlatList 
+      {/* All */}
+      <ListView
         data={tabs[0].items} 
         numColumns={numColumns}
         contentContainerStyle={{gap: Layout.space.base}}
