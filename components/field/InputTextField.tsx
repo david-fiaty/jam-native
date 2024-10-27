@@ -11,14 +11,16 @@ type Props = BaseProps & {
   leftIcon?: JSX.Element,
   rightIcon?: JSX.Element,
   disabled?: boolean, 
+  style?: object,
 };
 
-const InputTextField = ({value, placeholder, containerStyle, leftIcon, rightIcon, disabled}: Props) => {
+const InputTextField = ({value, placeholder, containerStyle, leftIcon, rightIcon, disabled, style}: Props) => {
   return (
     <BoxView style={[styles.container, containerStyle]}>
       <Input
         textAlignVertical="center"
         numberOfLines={1}
+        style={style}
         leftIcon={leftIcon}
         rightIcon={rightIcon}
         placeholder={placeholder}
