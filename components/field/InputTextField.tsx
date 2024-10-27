@@ -11,9 +11,10 @@ type Props = BaseProps & {
   leftIcon?: JSX.Element,
   rightIcon?: JSX.Element,
   disabled?: boolean, 
+  onChangeText?: () => void,
 };
 
-const InputTextField = ({value, placeholder, containerStyle, leftIcon, rightIcon, disabled}: Props) => {
+const InputTextField = ({value, placeholder, containerStyle, leftIcon, rightIcon, disabled, onChangeText}: Props) => {
   return (
     <BoxView style={[styles.container, containerStyle]}>
       <Input
@@ -26,6 +27,7 @@ const InputTextField = ({value, placeholder, containerStyle, leftIcon, rightIcon
         multiline={false}
         editable={!disabled}
         value={value}
+        onChangeText={onChangeText}
       />
     </BoxView>
   );
