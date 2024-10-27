@@ -1,6 +1,5 @@
 import React from "react"
-import { TouchableOpacity } from 'react-native';
-import Share from "react-native-share";
+import { TouchableOpacity, Share } from 'react-native';
 import IconView from '../view/IconView';
 import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
@@ -24,11 +23,23 @@ const options = {
 const ShareJamButton = ({title, style}: Props) => {
   const buttonTitle = title ? i18n.t(title) : i18n.t('Share Jam');
 
-  const share = async (customOptions = options) => {
+  const onShare = async () => {
     try {
-      await Share.open(customOptions);
-    } catch (err) {
-      console.log(err);
+      const result = await Share.share({
+        message:
+          'React Native | A framework for building native apps using React',
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
     }
   };
 
