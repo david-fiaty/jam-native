@@ -10,6 +10,7 @@ const BaseTheme = createTheme({
     Button: {
       titleStyle: {
         color: Colors.white,
+        fontWeight: 'normal',
       },
       buttonStyle: {
         backgroundColor: Colors.primary,
