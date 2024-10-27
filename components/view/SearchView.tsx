@@ -12,43 +12,43 @@ import ListView from "./ListView";
 
 const tabs = [
   {
-    id: 1,
+    id: 'all',
     label: i18n.t('All'),
     numColumns: 2,
     items: ApiClient.get('jams'),
   },
   {
-    id: 2,
+    id: 'calls',
     label: i18n.t('Calls'),
     numColumns: 2,
     items: [],
   },
   {
-    id: 3,
+    id: 'jammers',
     label: i18n.t('Jammers'),
     numColumns: 1,
     items: ApiClient.get('jammers'),
   },
   {
-    id: 4,
+    id: 'jams',
     label: i18n.t('Jams'),
     numColumns: 2,
     items: ApiClient.get('jams'),
   },
   {
-    id: 5,
+    id: 'projects',
     label: i18n.t('Projects'),
     numColumns: 2,
     items: ApiClient.get('projects'),
   },
   {
-    id: 6,
+    id: 'events',
     label: i18n.t('Events'),
     numColumns: 2,
     items: [],
   },
   {
-    id: 7,
+    id: 'venues',
     label: i18n.t('Venues'),
     numColumns: 2,
     items: [],
@@ -56,7 +56,6 @@ const tabs = [
 ];
 
 const SearchView = () => {
-  const [index, setIndex] = useState(0);
   const numColumns = 3;
 
   const renderTab = (item, index) => (
@@ -81,7 +80,7 @@ const SearchView = () => {
         horizontal={true}
         contentContainerStyle={styles.tabContainer}
         keyExtractor={(item) => item.id}
-        renderItem={({ item, index }) => renderTab(item, index)}
+        renderItem={({item, index}) => renderTab(item, index)}
       />
 
       {/* All */}
