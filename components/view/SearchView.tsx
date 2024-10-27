@@ -49,7 +49,7 @@ const tabs = [
 
 const SearchView = () => {
   const [index, setIndex] = useState(0);
-  const jamsData = ApiClient.get("jams");
+  const jamsData = ApiClient.get('jams');
   //const projectsData = ApiClient.get("projects");
 
   const numColumns = 3;
@@ -72,7 +72,7 @@ const SearchView = () => {
     >
       {/* Tabs */}
       <FlatList
-        data={jamsData}
+        data={tabs}
         horizontal={true}
         contentContainerStyle={styles.tabContainer}
         scrollEnabled={true}
@@ -82,7 +82,7 @@ const SearchView = () => {
 
       {/* Results */}
       <FlatList 
-        data={tabs[0]} 
+        data={tabs[0].items} 
         numColumns={numColumns}
         contentContainerStyle={{gap: Layout.space.base}}
         columnWrapperStyle={{gap: Layout.space.base}}
