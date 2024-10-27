@@ -5,7 +5,7 @@ import ApiEndpoints from '@/constants/Endpoints';
 import ApiMockData from '@/data/ApiMockData';
 
 const cache = new Cache({
-  namespace: 'jam-native',
+  namespace: Config.appNamespace,
   policy: {
     maxEntries: 50000, 
     stdTTL: 0,
