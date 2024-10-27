@@ -16,6 +16,7 @@ const ShareJamButton = ({title, style}: Props) => {
   const onShare = async () => {
     try {
       const result = await Share.share({
+        // Todo - Link content to jam
         message: 'React Native | A framework for building native apps using React',
       });
       if (result.action === Share.sharedAction) {
