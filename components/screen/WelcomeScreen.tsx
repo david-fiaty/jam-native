@@ -7,7 +7,7 @@ import BoxView from '../view/BoxView';
 
 const WelcomeScreen = () => {
   return (
-    <BoxView direction="column" align="flex-start" justify="center">
+    <BoxView direction="column" align="center" justify="center" style={styles.container}>
         <LogoView size={{ width: 110, height: 110 }} />    
         
         <LoginSignupButton />
@@ -17,7 +17,10 @@ const WelcomeScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    backgroundColor: 'red',
+    height: '100%',
+  },
 });
 
 export default WelcomeScreen;
