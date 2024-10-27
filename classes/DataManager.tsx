@@ -3,23 +3,21 @@ import ApiEndpoints from '@/constants/Endpoints';
 import ApiClient from './ApiClient';
 
 class DataManager {
-  get(key: keyof typeof ApiEndpoints, search?: boolean, filter?: boolean) {
-    let results: object = [];
-    const data = ApiClient.get(key);
+  get(key: keyof typeof ApiEndpoints, options: object) {
     const searchState = Store.getState().search;
+    let data = ApiClient.get(key);
+    let results: object = [];
 
-    search = search === false ? false : true;
-    filter = filter === false ? false : true;
-
-
-    if (filter) {
-      console.log(searchState);
-      //results = searchState.filter(item => item?.active === true);
+    if (options?.filter !== false && searchState.filter.length) {
+      results = data.filter(item => item?.active === true); // Todo - Apply filter fields
     }
 
-    return data;
+    if (options?.search !== false && searchState.value.length) {
+      results = results.length ? results : data;
+      results.filter(item => item?.active === true); // Todo - Apply filter fields
+    }
 
-    return results?.length ? results : data;
+    return results.length ? results : data;
   }
 };
 
