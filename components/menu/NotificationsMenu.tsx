@@ -5,14 +5,14 @@ import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from '@/constants/Layout';
 import ListView from '../view/ListView';
 import TextView from '../view/TextView';
-import ApiClient from '@/classes/ApiClient';
 import BackButton from '../button/BackButton';
 import i18n from '@/translation/i18n';
+import DataManager from '@/classes/DataManager';
 
 const NotificationsMenu = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const items = ApiClient.get('notifications');
+  const items = DataManager.get('notifications');
 
   const renderItem = (item, index) => (
     <TouchableOpacity onPress={() => router.push({ 
