@@ -19,14 +19,10 @@ const SearchField = () => {
 console.log(searchState);
 console.log(ScreenManager.getActiveScreen(screenState));
 
-  const currentStyle = {
-    width: isExpanded ? 160 : 160,
-  };
-
   return (
-    <View direction="row" align="center" justify="flex-end" style={[styles.container, currentStyle]}>
+    <View direction="row" align="center" justify="space-between" style={styles.container}>
 
-      { isExpanded && <InputTextField containerStyle={styles.input} />}
+      { isExpanded  && <InputTextField containerStyle={styles.input} /> }
       
       <TouchableOpacity onPress={() => {
         //dispatch(setActiveScreen('SearchView'));
@@ -46,13 +42,14 @@ console.log(ScreenManager.getActiveScreen(screenState));
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'red',
-    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   input: {
     //position: 'absolute',
     //top: 0,
     //left: 0,
-    //width: 20,
+    width: 130,
   },
   icon: {
     //position: 'absolute',
