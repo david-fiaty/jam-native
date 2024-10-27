@@ -33,7 +33,7 @@ const icons = {
   facebook: ({iconStyle, size}: IconProps) => <Ionicons name="logo-facebook" size={size} style={iconStyle} />,
   instagram: ({iconStyle, size}: IconProps) => <Ionicons name="logo-instagram" size={size} style={iconStyle} />,
   layers: ({iconStyle, size}: IconProps) => <Ionicons name="layers-outline" size={size} style={iconStyle} />,
-  delete: ({iconStyle, size}: IconProps) => <Ionicons name="close-circle-outline" size={size} style={iconStyle} />,
+  delete: ({iconStyle, size}: IconProps) => <Ionicons name="close-outline" size={size} style={iconStyle} />,
   report: ({iconStyle, size}: IconProps) => <Ionicons name="alert-circle-outline" size={size} style={iconStyle} />,
   edit: ({iconStyle, size}: IconProps) => <Ionicons name="create-outline" size={size} style={iconStyle} />,
   view: ({iconStyle, size}: IconProps) => <Ionicons name="albums-outline" size={size} style={iconStyle} />,
