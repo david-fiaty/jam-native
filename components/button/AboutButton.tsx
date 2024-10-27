@@ -1,20 +1,20 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/Colors';
-import ButtonBase from '../base/ButtonBase';
+import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 
 const AboutButton = () => {
   const router = useRouter();
 
   return (
-    <ButtonBase
-      title={i18n.t('About')} 
-      titleStyle={styles.titleStyle}
-      buttonStyle={styles.buttonStyle}
-      containerStyle={styles.containerStyle}
-      onPress={() => router.push('/about')} 
-    />
+    <TouchableOpacity onPress={() => router.push('/about')}>
+      <View style={styles.containerStyle}>
+        <TextView style={[styles.buttonStyle, styles.titleStyle]}>
+          {i18n.t('About')}
+        </TextView>
+      </View>
+    </TouchableOpacity>
   );
 };
 

@@ -1,12 +1,11 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/Colors';
+import { Layout } from '@/constants/Layout';
 import SkipButton from '../button/SkipButton';
-import ButtonBase from '../base/ButtonBase';
 import BoxView from '../view/BoxView';
 import i18n from '@/translation/i18n';
 import TextView from '../view/TextView';
-import { Layout } from '@/constants/Layout';
 
 const LoginSignupButton = () => {
   const router = useRouter();
