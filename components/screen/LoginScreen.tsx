@@ -10,6 +10,7 @@ import InputTextField from '../field/InputTextField';
 import ContinueButton from '../button/ContinueButton';
 import SkipButton from '../button/SkipButton';
 import GoogleLoginButton from '../button/GoogleLoginButton';
+import { Divider } from '@rneui/base';
 
 const LoginScreen = () => {
   return (
@@ -25,6 +26,8 @@ const LoginScreen = () => {
         <TextView>{i18n.t("Don't have an account?")}</TextView>
         <SkipButton onPress={() => {}} />
       </BoxView>
+
+      <Divider />
       <GoogleLoginButton />
     </BoxView>
   );
