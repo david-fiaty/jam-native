@@ -1,4 +1,4 @@
-import { View, FlatList } from "react-native";
+import { View } from "react-native";
 import { useDispatch } from 'react-redux';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from "@/constants/Layout";
@@ -6,19 +6,15 @@ import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import CopyJamLinkButton from "../button/CopyJamLinkButton";
-import InstagramShareButton from "../button/InstagramShareButton";
-import FacebookShareButton from "../button/FacebookShareButton";
-import TwitterShareButton from "../button/TwitterShareButton";
 import ListView from "./ListView";
+import ShareJamButton from "../button/ShareJamButton";
 
 const ShareJamView = () => {
   const dispatch = useDispatch();
 
   const data = [
     <CopyJamLinkButton style={Layout.listItem} />,
-    <InstagramShareButton style={Layout.listItem} />,
-    <FacebookShareButton style={Layout.listItem} />,
-    <TwitterShareButton style={Layout.listItem} />,
+    <ShareJamButton />
   ];
 
   return (
