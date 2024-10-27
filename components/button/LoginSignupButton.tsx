@@ -13,6 +13,7 @@ const LoginSignupButton = () => {
     <BoxView direction="row" align="center" justify="space-between">
       <ButtonBase
         title={i18n.t('Login / Signup')} 
+        titleStyle={styles.titleStyle}
         buttonStyle={styles.buttonStyle}
         containerStyle={styles.containerStyle}
         onPress={() => router.push('/login')} 
@@ -30,6 +31,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
   },
   buttonStyle: {
+    //textTransform: 'uppercase'
+  },
+  titleStyle: {
     textTransform: 'uppercase'
   },
 });
