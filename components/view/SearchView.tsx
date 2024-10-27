@@ -14,44 +14,48 @@ const tabs = [
     id: 1,
     label: i18n.t('All'),
     items: ApiClient.get('jams'),
+    numColumns: 2,
   },
   {
     id: 2,
     label: i18n.t('Calls'),
     items: [],
+    numColumns: 2,
   },
   {
     id: 3,
     label: i18n.t('Jammers'),
     items: ApiClient.get('jammers'),
+    numColumns: 1,
   },
   {
     id: 4,
     label: i18n.t('Jams'),
     items: ApiClient.get('jams'),
+    numColumns: 2,
   },
   {
     id: 5,
     label: i18n.t('Projects'),
     items: ApiClient.get('projects'),
+    numColumns: 2,
   },
   {
     id: 6,
     label: i18n.t('Events'),
     items: [],
+    numColumns: 2,
   },
   {
     id: 7,
     label: i18n.t('Venues'),
     items: [],
+    numColumns: 2,
   },
 ];
 
 const SearchView = () => {
   const [index, setIndex] = useState(0);
-  const jamsData = ApiClient.get('jams');
-  //const projectsData = ApiClient.get("projects");
-
   const numColumns = 3;
 
   const renderTab = (item, index) => (
