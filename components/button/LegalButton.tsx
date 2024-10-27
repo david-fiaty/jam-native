@@ -7,7 +7,7 @@ const LegalButton = () => {
 
   return (
     <ButtonBase
-      label="Legal" 
+      tite="Legal" 
       onPress={() => router.push('/legal')} 
       //containerStyle={styles.container}
       //labelStyle={styles.label}

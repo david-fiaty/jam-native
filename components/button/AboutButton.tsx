@@ -7,7 +7,7 @@ const AboutButton = () => {
 
   return (
     <ButtonBase
-      label="About" 
+      title="About" 
       onPress={() => router.push('/about')} 
       //containerStyle={styles.container}
       //labelStyle={styles.label}
