@@ -39,7 +39,11 @@ export default function RootLayout() {
   return (
     <Provider store={Store}>
       <Stack>
-        <Stack.Screen name="index" options={screenOptions} />
+        <Stack.Screen name="index" options={{headerShown: false}} />
+        <Stack.Screen name="login" options={{headerShown: false}} />
+        <Stack.Screen name="about" options={screenOptions} />
+        <Stack.Screen name="legal" options={screenOptions} />
+        <Stack.Screen name="main" options={screenOptions} />
         <Stack.Screen name="account" options={screenOptions} />
         <Stack.Screen name="password" options={screenOptions} />
         <Stack.Screen name="language" options={screenOptions} />
