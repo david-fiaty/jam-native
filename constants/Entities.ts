@@ -8,7 +8,7 @@ const Entities = [
       description: 'caption',
       medias: 'medias',
       profile: 'profile',
-      collaborators: 'collaborators',
+      hosts: 'collaborators',
       jammers: 'jammers',
       comments: 'comments',
       sectors: 'sectors',
