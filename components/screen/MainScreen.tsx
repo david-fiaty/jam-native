@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { StyleSheet, View, Animated } from "react-native";
+import { useRoute } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
@@ -10,7 +11,6 @@ import BoxView from "../view/BoxView";
 import DeviceManager from "@/classes/DeviceManager";
 import FooterNavigation from "../navigation/FooterNavigation";
 import JamsList from "../list/JamsList";
-import WelcomeScreen from "./WelcomeScreen";
 
 const MainScreen = () => {
   // Parameters
@@ -18,6 +18,7 @@ const MainScreen = () => {
   const windowHeight = DeviceManager.window.height;
   const [currentScreen, setCurrentScreen] = useState(null);
   const [animatedStyle, setAnimatedStyle] = useState(null);
+  const route = useRoute();
 
   // Storage state
   const screenState = useSelector((state) => state.screen);
@@ -120,7 +121,7 @@ const MainScreen = () => {
         </BoxView>
 
         {/* Footer navigation */}
-        { currentScreen?.footerNavigation && <FooterNavigation /> }
+        { (route.name == 'main' || currentScreen?.footerNavigation) && <FooterNavigation /> }
       </View>
     </ScreenView>
   );
