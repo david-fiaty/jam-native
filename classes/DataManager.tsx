@@ -29,7 +29,7 @@ class DataManager {
 
     if (data) {
       //console.log(console.log(JSON.stringify(data[0].id, 0, 2)));
-      let entity = EntityManager.create(data[0]);
+      let entity = EntityManager.create(key, data[0]);
       
     }
 
