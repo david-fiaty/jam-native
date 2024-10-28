@@ -1,5 +1,7 @@
 class EntityBase {
-
+  create() {
+    console.log('create called');
+  }
 };
 
-export default (new EntityBase());
+export default EntityBase;
