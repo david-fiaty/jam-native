@@ -27,7 +27,7 @@ const JamsList = () => {
       data = await DataManager.get('jams');
 
       
-      console.log(data[1].caption); 
+      console.log(data[0]); 
 
       setIsLoaded(true);
     })();
