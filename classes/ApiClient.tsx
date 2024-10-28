@@ -18,10 +18,10 @@ class ApiClient {
       try {
         let response = await fetch(endpoint?.url, {
           method: endpoint?.method,
-          credentials: 'include',
+          //credentials: 'include',
           headers: this.getHeaders(),
         });
-        
+
         return this.processResponse(await response.json());
       } catch (error) {
         console.error(error);
