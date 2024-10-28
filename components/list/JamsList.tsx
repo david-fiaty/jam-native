@@ -18,7 +18,7 @@ import DataManager from '@/classes/DataManager';
 const JamsList = () => {  
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  let data = [];
+  let data: object = [];
   //const data = DataManager.get('jams');
 
 
