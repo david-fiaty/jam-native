@@ -8,7 +8,8 @@ class ApiClient {
   async get(key: keyof typeof Endpoints) {
     try {
       return await this.sendRequest(Endpoints[key]);
-    } catch (error) {
+    } 
+    catch (error) {
       console.log(error);
     }
   }
@@ -23,7 +24,8 @@ class ApiClient {
         });
 
         return this.processResponse(await response.json());
-      } catch (error) {
+      } 
+      catch (error) {
         console.error(error);
       }
     }
