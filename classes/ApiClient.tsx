@@ -16,16 +16,13 @@ class ApiClient {
   async sendRequest(endpoint: object) {
     if (endpoint) {
       try {
-        // Send request
         let response = await fetch(endpoint?.url, {
           method: endpoint?.method,
           credentials: 'include',
           headers: this.getHeaders(),
         });
-
-        // Process response
+        
         return this.processResponse(await response.json());
-
       } catch (error) {
         console.error(error);
       }
