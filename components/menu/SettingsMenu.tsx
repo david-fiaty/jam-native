@@ -45,7 +45,9 @@ const SettingsMenu = () => {
     <View style={Layout.menuContainer}>
       <BackButton
         title={i18n.t('Settings')}
-        onPress={() => dispatch(setActiveScreen('SettingsMenu'))}
+        onPress={() => dispatch(setActiveScreen({
+          name: 'SettingsMenu',
+        }))}
       />
       <ListView 
         data={items} 

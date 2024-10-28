@@ -17,15 +17,21 @@ const HeaderNavigation = () => {
   return (
     <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
       <BoxView direction="row" align="center" style={Layout.headerRight}>
-        <TouchableOpacity onPress={() => dispatch(setActiveScreen('JamsList'))}>
+        <TouchableOpacity onPress={() => dispatch(setActiveScreen({
+          name: 'JamsList',
+        }))}>
           <LogoView size={Layout.logo} />
         </TouchableOpacity>
       </BoxView>
       { (route.name == 'main' || activeScreen?.headerNavigation) &&
         <BoxView direction="row" align="center" justify="space-between">
           <BoxView direction="row" align="center" style={Layout.headerRight}> 
-            <IconView name="menu" theme="secondary" onPress={() => dispatch(setActiveScreen('SettingsMenu'))} />
-            <IconView label="15+" theme="secondary" size={13} onPress={() => dispatch(setActiveScreen('NotificationsMenu'))} />
+            <IconView name="menu" theme="secondary" onPress={() => dispatch(setActiveScreen({
+              name: 'SettingsMenu',
+            }))} />
+            <IconView label="15+" theme="secondary" size={13} onPress={() => dispatch(setActiveScreen({
+              name: 'NotificationsMenu',
+            }))} />
             <SearchField />
           </BoxView>
         </BoxView>

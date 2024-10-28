@@ -37,7 +37,9 @@ const JamsList = () => {
       {/* Item header */}
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItemHeader}>
         <BoxView>
-          <TouchableOpacity onPress={() => dispatch(setActiveScreen('HostsList'))}>
+          <TouchableOpacity onPress={() => dispatch(setActiveScreen({
+          name: 'HostsList',
+        }))}>
             <TextView>
               @{i18n.t('host')} +{parseInt(item?.hosts?.length)}
             </TextView>
@@ -47,7 +49,9 @@ const JamsList = () => {
           <JamStatusButton active={item.active} />
         </BoxView>
         <BoxView>
-          <IconView name="actions" theme="clear" onPress={() => dispatch(setActiveScreen('MoreJamView'))} />
+          <IconView name="actions" theme="clear" onPress={() => dispatch(setActiveScreen({
+            name: 'MoreJamView',
+          }))} />
         </BoxView> 
       </BoxView>
       
@@ -57,15 +61,21 @@ const JamsList = () => {
       {/* Item toolbar */}
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItemToolbar}>
         {/* Jammers button */}
-        <BoxView direction="row" align="center" onPress={() => dispatch(setActiveScreen('JammersList'))}>
+        <BoxView direction="row" align="center" onPress={() => dispatch(setActiveScreen({
+          name: 'JammersList',
+        }))}>
           <IconView name="users" theme="tertiary" />
           <TextView>{item.host_count} {i18n.t('jammers')}</TextView>
         </BoxView>
       
         {/* Save button */}
         <BoxView direction="row" align="center">
-          <IconView name="save" theme="tertiary" onPress={() => dispatch(setActiveScreen('SaveJamView'))} />
-          <IconView name="share" theme="tertiary" onPress={() => dispatch(setActiveScreen('ShareJamView'))} />
+          <IconView name="save" theme="tertiary" onPress={() => dispatch(setActiveScreen({
+            name: 'SaveJamView',
+          }))} />
+          <IconView name="share" theme="tertiary" onPress={() => dispatch(setActiveScreen({
+            name: 'ShareJamView',
+          }))} />
         </BoxView> 
       </BoxView>
 
