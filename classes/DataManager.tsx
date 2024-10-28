@@ -1,7 +1,6 @@
 import Store from '@/redux/Store';
 import ApiEndpoints from '@/constants/Endpoints';
 import ApiClient from './ApiClient';
-import Fields from '@/constants/Fields';
 
 class DataManager {
   async get(key: keyof typeof ApiEndpoints, options: object) {
@@ -27,9 +26,9 @@ class DataManager {
   async getData(key: keyof typeof ApiEndpoints) {
     let data = await ApiClient.get(key);
 
-
-    console.log(typeof data);
-
+    if (data) {
+      console.log(console.log(JSON.stringify(data[0].id, 0, 2)));
+    }
 
     return data;
   }
