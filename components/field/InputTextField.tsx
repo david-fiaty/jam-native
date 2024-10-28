@@ -16,7 +16,7 @@ type Props = BaseProps & {
 
 const InputTextField = ({value, placeholder, containerStyle, leftIcon, rightIcon, disabled, onChangeText}: Props) => {
   return (
-    <BoxView style={[styles.container, containerStyle]}>
+    <BoxView style={styles.container}>
       <Input
         textAlignVertical="center"
         numberOfLines={1}
@@ -24,7 +24,7 @@ const InputTextField = ({value, placeholder, containerStyle, leftIcon, rightIcon
         rightIcon={rightIcon}
         placeholder={placeholder}
         placeholderTextColor={Colors.primary}
-        containerStyle={containerStyle}
+        containerStyle={containerStyle ?? {}}
         multiline={false}
         editable={!disabled}
         value={value}

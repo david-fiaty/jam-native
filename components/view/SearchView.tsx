@@ -103,8 +103,8 @@ const SearchView = () => {
               <View style={styles.item}>
                 <ImageView 
                   source={item.image} 
-                  width="100%"
-                  height="100%"
+                  width={96.7}
+                  height={96.7}
                   resizeMode="cover"
                   style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
                 />
@@ -132,8 +132,8 @@ const styles = {
   },
   image: {
     borderRadius: Layout.space.base,
-    width: 96.7,
-    height: 96.7,
+    //width: 96.7,
+    //height: 96.7,
   },
 };
 

@@ -31,7 +31,13 @@ export default function SlideshowItemImage({item, index, scrollX}: Props) {
 
   return (  
     <Animated.View style={[styles.container, itemAnimation]}>
-      <ImageView source={require('@/assets/images/jam-2.jpg')} resizeMode="cover" style={styles.listItemImage} />
+      <ImageView 
+        source={require('@/assets/images/jam-2.jpg')} 
+        resizeMode="cover" 
+        style={styles.listItemImage}
+        width={width}
+        height={346}
+       />
     </Animated.View>
   );
 };
@@ -43,8 +49,8 @@ const styles = StyleSheet.create({
     width: width,
   },
   listItemImage: {
-    width: width,
-    height: 346, // Todo - Move to Layout
+    //width: width,
+    //height: 346, // Todo - Move to Layout
     backgroundColor: Colors.secondary,
   },
 });

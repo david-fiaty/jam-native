@@ -16,8 +16,8 @@ const UserJamsList = () => {
       <View style={styles.item}>
         <ImageView 
           source={item.image} 
-          width="100%"
-          height="100%"
+          width={96.7}
+          height={96.7}
           resizeMode="cover"
           style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
         />
@@ -31,8 +31,8 @@ const UserJamsList = () => {
       <ListView
         data={data} 
         numColumns={numColumns}
-        contentContainerStyle={Layout.listContainer}
-        columnWrapperStyle={Layout.listColumnWrapper}
+        contentContainerStyle={{gap: Layout.space.base}}
+        columnWrapperStyle={{gap: Layout.space.base}}
         scrollEnabled={false}
         renderItem={({item, index}) => renderItem(item, index)}   
       />
@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
   },
   image: {
     borderRadius: Layout.space.base,
-    width: 96.7,
-    height: 96.7,
+    //width: 96.7,
+    //height: 96.7,
   },
 });
 
