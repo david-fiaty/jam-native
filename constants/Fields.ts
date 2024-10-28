@@ -1,7 +1,13 @@
 const Fields = {
-  jam: [],
-  project: [],
-  user: [],
+  jam: {
+    id: '',
+  },
+  project: {
+
+  },
+  user: {
+
+  },
 };
 
 export default Fields;
