@@ -28,9 +28,7 @@ class DataManager {
     let data = await ApiClient.get(key);
 
     if (data) {
-      if (key == 'jams') {
-        let entity = EntityManager.create(key, data[0]);
-      }     
+      let entity = EntityManager.create(key, data[0]);
     }
 
     return data;
