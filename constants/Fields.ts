@@ -1,5 +1,5 @@
 const Fields = {
-  jam: {
+  jams: {
     id: 'id',
     category: 'type',
     description: 'caption',
