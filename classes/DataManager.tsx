@@ -3,9 +3,9 @@ import ApiEndpoints from '@/constants/Endpoints';
 import ApiClient from './ApiClient';
 
 class DataManager {
-  get(key: keyof typeof ApiEndpoints, options: object) {
+  async get(key: keyof typeof ApiEndpoints, options: object) {
     const searchState = Store.getState().search;
-    let data = ApiClient.get(key);
+    let data = await ApiClient.get(key);
     let results: object = [];
 
     if (options?.filter !== false && searchState.filter.length) {

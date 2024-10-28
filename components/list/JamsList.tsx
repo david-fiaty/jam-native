@@ -18,10 +18,22 @@ import DataManager from '@/classes/DataManager';
 const JamsList = () => {  
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  const data = DataManager.get('jams');
+  //const data = DataManager.get('jams');
+
 
   useEffect(() => {
-    setTimeout(() => setIsLoaded(true), Layout.animation.duration);
+    (async () => {
+      let data = await DataManager.get('jams');
+      console.log('----');
+      console.log(data); 
+      setIsLoaded(true);
+    })();
+
+    /*
+    setTimeout(() => {
+
+    }, Layout.animation.duration);
+    */
   });
 
   if (!isLoaded) return <SpinnerView />;

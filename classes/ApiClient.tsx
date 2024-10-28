@@ -1,62 +1,42 @@
 import { Cache } from "react-native-cache";
 import { Config } from "@/constants/Config";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import ApiEndpoints from '@/constants/Endpoints';
+import Endpoints from '@/constants/Endpoints';
 import ApiMockData from '@/data/ApiMockData';
 
-const cache = new Cache({
-  namespace: Config.appNamespace,
-  policy: {
-    maxEntries: 50000, 
-    stdTTL: 0,
-  },
-  backend: AsyncStorage,
-});
-
 class ApiClient {
-  get(key: keyof typeof ApiEndpoints) {
-    (async () => {
-      try {
-        let data = await cache.get(key);
-
-        if (!data) {
-          data = Config.apiEnabled === true ? this.sendRequest(ApiEndpoints[key]) : ApiMockData[key];
-          await cache.set(key, data);
-
-          return data;
-        }
-        
-        return data;
-
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-
-    return ApiMockData[key];
-  }
-
-  async sendRequest(endpoint: object) {
+  async get(key: keyof typeof Endpoints) {
     try {
-      // Send request
-      let response = await fetch(endpoint.url, {
-        method: endpoint.method,
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      // Process response
-      return this.processResponse(await response.json());
-
+      return await this.sendRequest(Endpoints[key]);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 
-  processResponse(jsonResponse: string) {
+  async sendRequest(endpoint: object) {
+    if (endpoint) {
+      try {
+        let response = await fetch(endpoint?.url, {
+          method: endpoint?.method,
+          credentials: 'include',
+          headers: this.getHeaders(),
+        });
+        
+        return this.processResponse(await response.json());
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
+
+  processResponse(jsonResponse: any) {
     return jsonResponse;
+  }
+
+  getHeaders() {
+    return {
+      'Content-Type': 'application/json',
+    };
   }
 };
 
