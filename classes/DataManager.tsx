@@ -29,9 +29,9 @@ class DataManager {
     let result = [];
 
     if (data) {
-      for (const item in data) {
-        result.push(EntityManager.create(key, data[0]));
-      }
+      data.forEach(item => {
+        result.push(EntityManager.create(key, item));
+      }); 
     }
 
     return result;
