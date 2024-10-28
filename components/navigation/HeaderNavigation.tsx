@@ -6,9 +6,13 @@ import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 import LogoView from '../view/LogoView';
 import SearchField from '../field/SearchField';
+import ScreenManager from "@/classes/ScreenManager";
 
 const HeaderNavigation = () => {
   const dispatch = useDispatch();
+  const activeScreen = ScreenManager.getActiveScreen();
+
+  console.log(activeScreen);
 
   return (
     <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
