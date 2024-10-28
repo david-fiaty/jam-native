@@ -1,4 +1,5 @@
 import { Image, StyleSheet } from 'react-native';
+import { CachedImage } from '@georstat/react-native-image-cache';
 import { BaseProps } from '@/constants/Types';
 
 type Props = BaseProps & {
@@ -12,7 +13,7 @@ type Props = BaseProps & {
 
 const ImageBase = ({source, width, height, resizeMethod, resizeMode, style}: Props) => {
   return (
-    <Image 
+    <CachedImage
       source={source} 
       resizeMethod={resizeMethod || 'scale'}
       resizeMode={resizeMode || 'contain'}
