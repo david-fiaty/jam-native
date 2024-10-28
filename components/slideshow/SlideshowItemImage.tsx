@@ -21,7 +21,7 @@ export default function SlideshowItemImage({item, index, scrollX}: Props) {
           translateX: interpolate(
             scrollX.value,
             [(index-1)*width, index*width, (index+1)*width],
-            [-width*0.25, 0, width*0.25],
+            [-width, 0, width],
             Extrapolation.CLAMP,
           ),
         },
@@ -46,11 +46,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.secondary,
     height: 346,
-    width: width,
+    width: 'auto',
   },
   listItemImage: {
-    //width: width,
-    //height: 346, // Todo - Move to Layout
     backgroundColor: Colors.secondary,
   },
 });
