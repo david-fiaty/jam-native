@@ -21,10 +21,6 @@ class ApiClient {
           //let data = await cache.get(key);
           //if (!data) {
             data = this.sendRequest(ApiEndpoints[key]);
-
-            console.log(ApiEndpoints[key]);
-            console.log('gggg');
-            console.log(data);
           //}
         }
         else {
@@ -63,6 +59,7 @@ class ApiClient {
   }
 
   processResponse(jsonResponse: string) {
+    console.log(jsonResponse);
     return jsonResponse;
   }
 };
