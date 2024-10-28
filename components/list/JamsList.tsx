@@ -38,7 +38,9 @@ const JamsList = () => {
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItemHeader}>
         <BoxView>
           <TouchableOpacity onPress={() => dispatch(setActiveScreen('HostsList'))}>
-            <TextView>@{i18n.t('host')} +{item.id}</TextView>
+            <TextView>
+              @{i18n.t('host')} +{parseInt(item?.hosts?.length)}
+            </TextView>
           </TouchableOpacity>
         </BoxView>
         <BoxView>
