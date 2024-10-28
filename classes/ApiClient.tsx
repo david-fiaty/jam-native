@@ -14,18 +14,25 @@ const cache = new Cache({
 });
 
 class ApiClient {
-  get(key: keyof typeof ApiEndpoints) {
+  get(key: keyof typeof ApiEndpoints, apiEnabled: boolean) {
     (async () => {
       try {
-        let data = await cache.get(key);
+        if (Config.apiEnabled === true || apiEnabled) {
+          //let data = await cache.get(key);
+          //if (!data) {
+            data = this.sendRequest(ApiEndpoints[key]);
 
-        if (!data) {
-          data = Config.apiEnabled === true ? this.sendRequest(ApiEndpoints[key]) : ApiMockData[key];
-          await cache.set(key, data);
-
-          return data;
+            console.log(ApiEndpoints[key]);
+            console.log('gggg');
+            console.log(data);
+          //}
         }
-        
+        else {
+          data = ApiMockData[key];
+        }
+
+        await cache.set(key, data).then;
+
         return data;
 
       } catch (error) {
