@@ -14,7 +14,6 @@ import JamStatusButton from '../button/JamStatusButton';
 import Slideshow from '../slideshow/Slideshow';
 import ListView from '../view/ListView';
 import DataManager from '@/classes/DataManager';
-import ApiClient from '@/classes/ApiClient';
 
 const JamsList = () => {  
   const dispatch = useDispatch();
@@ -24,7 +23,7 @@ const JamsList = () => {
 
   useEffect(() => {
     (async () => {
-      let data = await ApiClient.get('jams');
+      let data = await DataManager.get('jams');
       console.log('----');
       console.log(data); 
       setIsLoaded(true);
