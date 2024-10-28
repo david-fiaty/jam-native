@@ -18,23 +18,19 @@ import ApiMockData from '@/data/ApiMockData';
 
 const JamsList = () => {  
   const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
-  let data: object = [];
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     (async () => {
-      //data = await DataManager.get('jams');
-  
-      data = ApiMockData['jams'];
+      const data = await DataManager.get('jams');
 
       setTimeout(() => {
-        setIsLoaded(true);
+        setData(data);
       }, Layout.animation.duration);
-
     })();
   });
 
-  if (!isLoaded || !data) return <SpinnerView />;
+  if (!data) return <SpinnerView />;
 
   const renderItem = (item, index) => (
     <View style={styles.listItem}>
@@ -42,7 +38,7 @@ const JamsList = () => {
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItemHeader}>
         <BoxView>
           <TouchableOpacity onPress={() => dispatch(setActiveScreen('HostsList'))}>
-            <TextView>@{i18n.t('host')} +{item.host.length}</TextView>
+            <TextView>@{i18n.t('host')} +{item.id}</TextView>
           </TouchableOpacity>
         </BoxView>
         <BoxView>
