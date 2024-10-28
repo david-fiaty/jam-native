@@ -29,7 +29,9 @@ const NotificationsMenu = () => {
     <View style={Layout.menuContainer}>
       <BackButton
         title={i18n.t('Notifications')}
-        onPress={() => dispatch(setActiveScreen('NotificationsMenu'))}
+        onPress={() => dispatch(setActiveScreen({
+          name: 'NotificationsMenu',
+        }))}
       />
       <ListView 
         data={items} 

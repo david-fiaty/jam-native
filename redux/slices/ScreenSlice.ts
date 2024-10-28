@@ -7,11 +7,14 @@ const ScreenSlice = createSlice({
   reducers: {
     setActiveScreen: (state, action) => {
       state.map(item => {
-        if (item.name == action.payload && item.active) {
+        if (item.name == action.payload.name && item.active) {
           item.active = false;
         }
-        else if (item.name == action.payload && !item.active) {
+        else if (item.name == action.payload.name && !item.active) {
+          console.log(action.payload);
+
           item.active = true;
+          item.entityId = action.payload?.entityId;
         }
         else {
           item.active = false;

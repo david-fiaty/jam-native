@@ -37,7 +37,10 @@ const JamsList = () => {
       {/* Item header */}
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItemHeader}>
         <BoxView>
-          <TouchableOpacity onPress={() => dispatch(setActiveScreen('HostsList'))}>
+          <TouchableOpacity onPress={() => dispatch(setActiveScreen({
+            name: 'HostsList',
+            entityId: item.id, 
+          }))}>
             <TextView>
               @{i18n.t('host')} +{parseInt(item?.hosts?.length)}
             </TextView>
@@ -47,7 +50,10 @@ const JamsList = () => {
           <JamStatusButton active={item.active} />
         </BoxView>
         <BoxView>
-          <IconView name="actions" theme="clear" onPress={() => dispatch(setActiveScreen('MoreJamView'))} />
+          <IconView name="actions" theme="clear" onPress={() => dispatch(setActiveScreen({
+            name: 'MoreJamView',
+            entityId: item.id, 
+          }))} />
         </BoxView> 
       </BoxView>
       
@@ -57,21 +63,30 @@ const JamsList = () => {
       {/* Item toolbar */}
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItemToolbar}>
         {/* Jammers button */}
-        <BoxView direction="row" align="center" onPress={() => dispatch(setActiveScreen('JammersList'))}>
+        <BoxView direction="row" align="center" onPress={() => dispatch(setActiveScreen({
+          name: 'JammersList',
+          entityId: item.id, 
+        }))}>
           <IconView name="users" theme="tertiary" />
-          <TextView>{item.host_count} {i18n.t('jammers')}</TextView>
+          <TextView>{parseInt(item?.jammers?.length)} {i18n.t('jammers')}</TextView>
         </BoxView>
       
         {/* Save button */}
         <BoxView direction="row" align="center">
-          <IconView name="save" theme="tertiary" onPress={() => dispatch(setActiveScreen('SaveJamView'))} />
-          <IconView name="share" theme="tertiary" onPress={() => dispatch(setActiveScreen('ShareJamView'))} />
+          <IconView name="save" theme="tertiary" onPress={() => dispatch(setActiveScreen({
+            name: 'SaveJamView',
+            entityId: item.id, 
+          }))} />
+          <IconView name="share" theme="tertiary" onPress={() => dispatch(setActiveScreen({
+            name: 'ShareJamView',
+            entityId: item.id, 
+          }))} />
         </BoxView> 
       </BoxView>
 
       {/* Item description */}
       <BoxView style={styles.listItemDescription}>
-        <TextView>{item.content}</TextView>
+        <TextView>{item?.description}</TextView>
       </BoxView>
 
       {/* Item collapsible */}
@@ -83,19 +98,19 @@ const JamsList = () => {
             <BoxView direction="column" align="flex-start" style={styles.listItemDetails}>
               <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
                 <IconView name="arrow" size={14} theme="transparent" />
-                <TextView>{i18n.t('Location')}</TextView>
+                <TextView>{item?.location}</TextView>
               </BoxView>
               <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
                 <IconView name="arrow" size={14} theme="transparent" />
-                <TextView>{i18n.t('Timestamp')}</TextView>
+                <TextView>{item?.period?.start_datetime}</TextView>
               </BoxView>
               <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
                 <IconView name="arrow" size={14} theme="transparent" />
-                <TextView>{i18n.t('Main industry')}</TextView>
+                <TextView>{item?.sectors?.[0]?.name}</TextView>
               </BoxView>
               <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
                 <IconView name="arrow" size={14} theme="transparent" />
-                <TextView>{i18n.t('Sub industry')}</TextView>
+                <TextView>{item?.sectors?.[0]?.name}</TextView>
               </BoxView>
             </BoxView>
           }

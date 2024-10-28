@@ -5,6 +5,7 @@ export const Stack = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
+    entityId: null,
   },
   {
     name: 'MapView', 
@@ -12,6 +13,7 @@ export const Stack = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
+    entityId: null,
   },
   {
     name: 'AddJamForm', 
@@ -19,6 +21,7 @@ export const Stack = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
+    entityId: null,
   },
   {
     name: 'ProfileForm', 
@@ -26,6 +29,7 @@ export const Stack = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
+    entityId: null,
   },
   {
     name: 'SettingsMenu', 
@@ -33,6 +37,7 @@ export const Stack = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
+    entityId: null,
   },
   {
     name: 'NotificationsMenu', 
@@ -40,6 +45,7 @@ export const Stack = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
+    entityId: null,
   },
   {
     name: 'SearchView', 
@@ -47,6 +53,7 @@ export const Stack = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
+    entityId: null,
   },
   {
     name: 'JammersList', 
@@ -54,6 +61,7 @@ export const Stack = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
+    entityId: null,
   },
   {
     name: 'HostsList', 
@@ -61,6 +69,7 @@ export const Stack = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
+    entityId: null,
   },
   {
     name: 'SaveJamView', 
@@ -68,6 +77,7 @@ export const Stack = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
+    entityId: null,
   },
   {
     name: 'ShareJamView', 
@@ -75,6 +85,7 @@ export const Stack = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
+    entityId: null,
   },
   {
     name: 'MoreJamView', 
@@ -82,5 +93,6 @@ export const Stack = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
+    entityId: null,
   },
 ];

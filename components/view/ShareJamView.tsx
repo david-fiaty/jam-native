@@ -21,7 +21,9 @@ const ShareJamView = () => {
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Share Jam')}
-        onPress={() => dispatch(setActiveScreen('ShareJamView'))}
+        onPress={() => dispatch(setActiveScreen({
+          name: 'ShareJamView',
+        }))}
       />
       <View style={Layout.borderedListContainer}>
         <ListView

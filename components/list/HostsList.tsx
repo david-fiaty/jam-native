@@ -27,7 +27,9 @@ const HostsList = () => {
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Jam hosts')}
-        onPress={() => dispatch(setActiveScreen('HostsList'))}
+        onPress={() => dispatch(setActiveScreen({
+          name: 'HostsList',
+        }))}
       />
       <View style={Layout.borderedListContainer}>
         <ListView
