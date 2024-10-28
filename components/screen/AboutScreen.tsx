@@ -31,7 +31,6 @@ const AboutScreen = () => {
       <Divider />
 
       <BottomLinks />
-      
     </BoxView>
   );
 };
