@@ -1,42 +1,19 @@
 import { Cache } from "react-native-cache";
 import { Config } from "@/constants/Config";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import ApiEndpoints from '@/constants/Endpoints';
+import Endpoints from '@/constants/Endpoints';
 import ApiMockData from '@/data/ApiMockData';
 
-const cache = new Cache({
-  namespace: Config.appNamespace,
-  policy: {
-    maxEntries: 50000, 
-    stdTTL: 0,
-  },
-  backend: AsyncStorage,
-});
 
 class ApiClient {
-  get(key: keyof typeof ApiEndpoints, apiEnabled: boolean) {
+  async get(key: keyof typeof Endpoints) {
     (async () => {
       try {
-        if (Config.apiEnabled === true || apiEnabled) {
-          //let data = await cache.get(key);
-          //if (!data) {
-            data = this.sendRequest(ApiEndpoints[key]);
-          //}
-        }
-        else {
-          data = ApiMockData[key];
-        }
-
-        await cache.set(key, data).then;
-
-        return data;
-
+        return this.sendRequest(Endpoints[key]);
       } catch (error) {
         console.log(error);
       }
     })();
-
-    return ApiMockData[key];
   }
 
   async sendRequest(endpoint: object) {
@@ -58,8 +35,7 @@ class ApiClient {
     }
   }
 
-  processResponse(jsonResponse: string) {
-    console.log(jsonResponse);
+  processResponse(jsonResponse: any) {
     return jsonResponse;
   }
 };
