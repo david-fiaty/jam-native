@@ -104,12 +104,7 @@ const MainScreen = () => {
     <ScreenView>
       <View style={styles.container}>
         {/* Main content */}
-        { !currentScreen && (
-          <BoxView style={Layout.mainContent}>
-            <WelcomeScreen />
-            { /* <JamsList /> */ }
-          </BoxView>
-        )}
+        { !currentScreen && (<BoxView style={Layout.mainContent}><JamsList /></BoxView>) }
 
         {/* Modal content */}
         <BoxView style={Layout.modalContainer}>
