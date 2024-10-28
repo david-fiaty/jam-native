@@ -5,15 +5,7 @@ import Endpoints from '@/constants/Endpoints';
 import ApiMockData from '@/data/ApiMockData';
 
 class ApiClient {
-  key: string;
-
-  constructor() {
-    this.key = '';
-  }
-
   async get(key: keyof typeof Endpoints) {
-    this.key = key;
-
     try {
       return await this.sendRequest(Endpoints[key]);
     } catch (error) {
@@ -22,27 +14,32 @@ class ApiClient {
   }
 
   async sendRequest(endpoint: object) {
-    try {
-      // Send request
-      let response = await fetch(endpoint?.url, {
-        method: endpoint?.method,
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+    if (endpoint) {
+      try {
+        // Send request
+        let response = await fetch(endpoint?.url, {
+          method: endpoint?.method,
+          credentials: 'include',
+          headers: this.getHeaders(),
+        });
 
-      // Process response
-      return this.processResponse(await response.json());
+        // Process response
+        return this.processResponse(await response.json());
 
-    } catch (error) {
-      console.error(error);
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 
   processResponse(jsonResponse: any) {
-    
     return jsonResponse;
+  }
+
+  getHeaders() {
+    return {
+      'Content-Type': 'application/json',
+    };
   }
 };
 
