@@ -38,6 +38,9 @@ export default function SlideshowItemImage({item, index, scrollX}: Props) {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: Colors.secondary,
+    height: 346,
+    width: width,
   },
   listItemImage: {
     width: width,

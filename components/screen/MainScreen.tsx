@@ -104,12 +104,11 @@ const MainScreen = () => {
     <ScreenView>
       <View style={styles.container}>
         {/* Main content */}
-        { !currentScreen && (
+        { !currentScreen && 
           <BoxView style={Layout.mainContent}>
-            <WelcomeScreen />
-            { /* <JamsList /> */ }
+            <JamsList />
           </BoxView>
-        )}
+        }
 
         {/* Modal content */}
         <BoxView style={Layout.modalContainer}>
@@ -120,8 +119,8 @@ const MainScreen = () => {
           </Animated.View>
         </BoxView>
 
-        {/* Bottom navigation */}
-        <FooterNavigation />
+        {/* Footer navigation */}
+        { currentScreen?.footerNavigation && <FooterNavigation /> }
       </View>
     </ScreenView>
   );
