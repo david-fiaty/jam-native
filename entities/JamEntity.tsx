@@ -1,4 +1,6 @@
-class JamEntity {
+import EntityBase from "./EntityBase";
+
+class JamEntity extends EntityBase {
 
 };
 
