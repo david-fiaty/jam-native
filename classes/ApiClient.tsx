@@ -5,7 +5,15 @@ import Endpoints from '@/constants/Endpoints';
 import ApiMockData from '@/data/ApiMockData';
 
 class ApiClient {
+  key: string;
+
+  constructor() {
+    this.key = '';
+  }
+
   async get(key: keyof typeof Endpoints) {
+    this.key = key;
+
     try {
       return await this.sendRequest(Endpoints[key]);
     } catch (error) {
@@ -33,6 +41,7 @@ class ApiClient {
   }
 
   processResponse(jsonResponse: any) {
+    
     return jsonResponse;
   }
 };
