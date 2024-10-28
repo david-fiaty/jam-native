@@ -7,13 +7,11 @@ import ApiMockData from '@/data/ApiMockData';
 
 class ApiClient {
   async get(key: keyof typeof Endpoints) {
-    (async () => {
-      try {
-        return this.sendRequest(Endpoints[key]);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
+    try {
+      return await this.sendRequest(Endpoints[key]);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async sendRequest(endpoint: object) {
