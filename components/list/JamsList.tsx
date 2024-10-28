@@ -21,10 +21,12 @@ const JamsList = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   //const data = DataManager.get('jams');
 
-  const data = [];
+
   useEffect(() => {
     (async () => {
-      let test = await ApiClient.get('jams', true);
+      let test = await ApiClient.get('jams');
+
+      console.log(test);
 
       //console.log('-----');
       //console.log(test);
