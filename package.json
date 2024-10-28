@@ -16,7 +16,6 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
-    "@georstat/react-native-image-cache": "^3.1.0",
     "@react-native-async-storage/async-storage": "^2.0.0",
     "@react-navigation/bottom-tabs": "^6.6.1",
     "@react-navigation/native": "^6.1.18",
@@ -47,7 +46,6 @@
     "react-native-cache": "^2.0.3",
     "react-native-collapsible": "^1.6.2",
     "react-native-element-dropdown": "^2.12.2",
-    "react-native-file-access": "^3.1.1",
     "react-native-maps": "^1.14.0",
     "react-native-modal": "^13.0.1",
     "react-native-reanimated": "~3.10.1",
