@@ -1,7 +1,7 @@
 import Store from '@/redux/Store';
 import ApiEndpoints from '@/constants/Endpoints';
 import ApiClient from './ApiClient';
-import JamEntity from '@/entities/JamEntity';
+import EntityManager from './EntityManager';
 
 class DataManager {
   async get(key: keyof typeof ApiEndpoints, options: object) {
@@ -28,8 +28,9 @@ class DataManager {
     let data = await ApiClient.get(key);
 
     if (data) {
-      JamEntity.create();
-      console.log(console.log(JSON.stringify(data[0].id, 0, 2)));
+      //console.log(console.log(JSON.stringify(data[0].id, 0, 2)));
+      let entity = EntityManager.create(data[0]);
+      
     }
 
     return data;
