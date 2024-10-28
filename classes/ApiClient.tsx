@@ -17,8 +17,8 @@ class ApiClient {
   async sendRequest(endpoint: object) {
     try {
       // Send request
-      let response = await fetch(endpoint.url, {
-        method: endpoint.method,
+      let response = await fetch(endpoint?.url, {
+        method: endpoint?.method,
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
