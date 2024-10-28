@@ -1,5 +1,6 @@
 import { TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
+import { useRoute } from '@react-navigation/native';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from '@/constants/Layout';
 import IconView from "../view/IconView";
@@ -9,6 +10,7 @@ import SearchField from '../field/SearchField';
 import ScreenManager from "@/classes/ScreenManager";
 
 const HeaderNavigation = () => {
+  const route = useRoute();
   const dispatch = useDispatch();
   const activeScreen = ScreenManager.getActiveScreen();
 
@@ -19,7 +21,7 @@ const HeaderNavigation = () => {
           <LogoView size={Layout.logo} />
         </TouchableOpacity>
       </BoxView>
-      { activeScreen?.headerNavigation &&
+      { (route.name == 'main' || activeScreen?.headerNavigation) &&
         <BoxView direction="row" align="center" justify="space-between">
           <BoxView direction="row" align="center" style={Layout.headerRight}> 
             <IconView name="menu" theme="secondary" onPress={() => dispatch(setActiveScreen('SettingsMenu'))} />

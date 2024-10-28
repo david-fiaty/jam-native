@@ -1,4 +1,3 @@
-import { StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Layout } from '@/constants/Layout';
 import BoxView from '../view/BoxView';
@@ -24,7 +23,7 @@ const LegalScreen = () => {
   return (
     <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
-        title={i18n.t('About')}
+        title={i18n.t('Legal')}
         onPress={() => navigation.popToTop()}
       />
       <TextView>{data.text}</TextView> 
@@ -34,8 +33,5 @@ const LegalScreen = () => {
     </BoxView>
   );
 };
-
-const styles = StyleSheet.create({
-});
 
 export default LegalScreen;
