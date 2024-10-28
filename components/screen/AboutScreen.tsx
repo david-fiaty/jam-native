@@ -1,10 +1,10 @@
-import { StyleSheet } from 'react-native';
+
 import { useNavigation } from '@react-navigation/native';
 import { Layout } from '@/constants/Layout';
+import { Divider } from '@rneui/base';
 import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
-import { Divider } from '@rneui/base';
 import BackButton from '../button/BackButton';
 import BottomLinks from '../navigation/BottomLinks';
 
@@ -34,8 +34,5 @@ const AboutScreen = () => {
     </BoxView>
   );
 };
-
-const styles = StyleSheet.create({
-});
 
 export default AboutScreen;
