@@ -14,14 +14,29 @@ import JamStatusButton from '../button/JamStatusButton';
 import Slideshow from '../slideshow/Slideshow';
 import ListView from '../view/ListView';
 import DataManager from '@/classes/DataManager';
+import ApiClient from '@/classes/ApiClient';
 
 const JamsList = () => {  
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  const data = DataManager.get('jams');
+  //const data = DataManager.get('jams');
 
+  const data = [];
   useEffect(() => {
-    setTimeout(() => setIsLoaded(true), Layout.animation.duration);
+    (async () => {
+      let test = await ApiClient.get('jams', true);
+
+      //console.log('-----');
+      //console.log(test);
+      setIsLoaded(true);
+    })();
+
+
+    /*
+    setTimeout(() => {
+
+    }, Layout.animation.duration);
+    */
   });
 
   if (!isLoaded) return <SpinnerView />;
