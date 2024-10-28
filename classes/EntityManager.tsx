@@ -8,7 +8,9 @@ class EntityManager {
       let definition = Entities.find(item => item.type == key);
 
       for (const [sourceField, targetField] of Object.entries(definition.fields)) {
-        entity[sourceField] = data[targetField]; 
+        if (data?.[targetField]) {
+          entity[sourceField] = data?.[targetField];       
+        }
       }
 
       return entity;
