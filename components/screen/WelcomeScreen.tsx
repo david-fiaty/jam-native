@@ -5,11 +5,17 @@ import LoginSignupButton from '../button/LoginSignupButton';
 import LogoView from '../view/LogoView';
 import BoxView from '../view/BoxView';
 import { Divider } from '@rneui/base';
+import WelcomeSlideshow from '../welcome-slideshow/WelcomeSlideshow';
 
 const WelcomeScreen = () => {
   return (
     <BoxView direction="column" align="center" justify="center" style={styles.container}>
       <LogoView size={{ width: 110, height: 110 }} />    
+      
+      <Divider />
+      <WelcomeSlideshow />
+
+      <Divider />
       <LoginSignupButton />
       
       <Divider />
