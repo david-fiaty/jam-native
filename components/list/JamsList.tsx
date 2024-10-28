@@ -21,25 +21,49 @@ const JamsList = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   //const data = DataManager.get('jams');
 
+  useEffect(() => {
+    const fetchData = async () => {
+      let data = await ApiClient.get('jams');
+      console.log(data); // Should log data if it’s fetched correctly
+    };
+    
+    
+    fetchData();
+  }, []);
 
+/*
   useEffect(() => {
     (async () => {
-      let test = await ApiClient.get('jams');
+    let data = await ApiClient.get('jams');
+      console.log('---');
+      console.log(data);
+    })();
 
+
+  
+    (async () => {
+
+
+
+
+      //let test = await ApiClient.get('jams');
+      let test = await ApiClient.get('jams');
       console.log(test);
 
       //console.log('-----');
       //console.log(test);
-      setIsLoaded(true);
+      //setIsLoaded(true);
     })();
 
 
-    /*
+    
     setTimeout(() => {
 
     }, Layout.animation.duration);
-    */
+  
   });
+
+  */
 
   if (!isLoaded) return <SpinnerView />;
 
