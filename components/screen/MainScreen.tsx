@@ -83,7 +83,7 @@ const MainScreen = () => {
 
   // Display
   useEffect(() => {
-    let activeScreen = getActiveScreen(screenState);
+    const activeScreen = getActiveScreen(screenState);
 
     if (activeScreen) {
       setCurrentScreen(activeScreen);
@@ -96,10 +96,6 @@ const MainScreen = () => {
         setCurrentScreen(null);
         setAnimatedStyle(animationStyles[currentScreen.effect]);
       }, Layout.animation.duration);
-    }
-    else {
-      activeScreen = Stack.find(item => item.name == 'JamsList');
-      setCurrentScreen(activeScreen);
     }
   }, [screenState]); 
   
