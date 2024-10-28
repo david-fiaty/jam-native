@@ -14,32 +14,23 @@ import JamStatusButton from '../button/JamStatusButton';
 import Slideshow from '../slideshow/Slideshow';
 import ListView from '../view/ListView';
 import DataManager from '@/classes/DataManager';
+import ApiMockData from '@/data/ApiMockData';
 
 const JamsList = () => {  
   const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
-  let data = [];
-  //const data = DataManager.get('jams');
-
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     (async () => {
-      data = await DataManager.get('jams');
+      const data = await DataManager.get('jams');
 
-      
-      console.log(data[0]); 
-
-      setIsLoaded(true);
+      setTimeout(() => {
+        setData(data);
+      }, Layout.animation.duration);
     })();
-
-    /*
-    setTimeout(() => {
-
-    }, Layout.animation.duration);
-    */
   });
 
-  if (!isLoaded || !data ) return <SpinnerView />;
+  if (!data) return <SpinnerView />;
 
   const renderItem = (item, index) => (
     <View style={styles.listItem}>
@@ -47,7 +38,7 @@ const JamsList = () => {
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItemHeader}>
         <BoxView>
           <TouchableOpacity onPress={() => dispatch(setActiveScreen('HostsList'))}>
-            <TextView>@{i18n.t('host')} +{item.host_count}</TextView>
+            <TextView>@{i18n.t('host')} +{item.id}</TextView>
           </TouchableOpacity>
         </BoxView>
         <BoxView>
