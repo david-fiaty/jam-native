@@ -2,8 +2,8 @@
 import Fields from "@/constants/Fields";
 
 class EntityManager {
-  create(type: string, data: object) {
-    console.log(type);
+  create(key: string, data: object) {
+    console.log(key);
     console.log('create called');
   }
 };
