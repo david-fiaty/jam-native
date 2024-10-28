@@ -25,15 +25,16 @@ class DataManager {
   }
 
   async getData(key: keyof typeof ApiEndpoints) {
-    let data = await ApiClient.get(key);
+    const data = await ApiClient.get(key);
+    let result = [];
 
     if (data) {
-      //console.log(console.log(JSON.stringify(data[0].id, 0, 2)));
-      let entity = EntityManager.create(key, data[0]);
-      
+      data.forEach(item => {
+        result.push(EntityManager.create(key, item));
+      }); 
     }
 
-    return data;
+    return result;
   }
 };
 
