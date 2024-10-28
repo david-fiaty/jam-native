@@ -31,7 +31,9 @@ const AddJamForm = () => {
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Add new Jam')}
-        onPress={() => dispatch(setActiveScreen('ProfileForm'))}
+        onPress={() => dispatch(setActiveScreen({
+          name: 'ProfileForm',
+        }))}
       />
       <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
       <JamCategoriesField />

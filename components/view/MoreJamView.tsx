@@ -31,7 +31,9 @@ const MoreJamView = () => {
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={i18n.t('More')}
-        onPress={() => dispatch(setActiveScreen('MoreJamView'))}
+        onPress={() => dispatch(setActiveScreen({
+          name: 'MoreJamView',
+        }))}
       />
       <View style={Layout.borderedListContainer}>
         <ListView

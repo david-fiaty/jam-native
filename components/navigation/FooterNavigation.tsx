@@ -17,20 +17,26 @@ const FooterNavigation = () => {
         name="location"
         radius="round"
         theme={activeScreen?.name == 'MapView' ? 'secondary' : 'clear'}
-        onPress={() => dispatch(setActiveScreen('MapView'))}
+        onPress={() => dispatch(setActiveScreen({
+          name: 'MapView',
+        }))}
       />
       <IconView
         name="plus"
         radius="round"
         theme={activeScreen?.name == 'AddJamForm' ? 'secondary' : 'clear'}
-        onPress={() => dispatch(setActiveScreen('AddJamForm'))}
+        onPress={() => dispatch(setActiveScreen({
+          name: 'AddJamForm',
+        }))}
         style={activeScreen?.name == 'AddJamForm' ? styles.active : {}}
       />
       <IconView
         name="user"
         radius="round"
         theme={activeScreen?.name == 'ProfileForm' ? 'secondary' : 'clear'}
-        onPress={() => dispatch(setActiveScreen('ProfileForm'))}
+        onPress={() => dispatch(setActiveScreen({
+          name: 'ProfileForm',
+        }))}
         style={activeScreen?.name == 'ProfileForm' ? styles.active : {}}
       />
     </BoxView>

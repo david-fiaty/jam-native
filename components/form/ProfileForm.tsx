@@ -29,7 +29,9 @@ const ProfileForm = () => {
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Your profile')}
-        onPress={() => dispatch(setActiveScreen('ProfileForm'))}
+        onPress={() => dispatch(setActiveScreen({
+          name: 'ProfileForm',
+        }))}
       />
 
       <UserProfileImageField />

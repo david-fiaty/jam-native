@@ -20,7 +20,9 @@ const SearchField = () => {
       style={styles.iconContainer}
       onPress={() => {
         dispatch(toggleSearchField(true));
-        dispatch(setActiveScreen('SearchView'));
+        dispatch(setActiveScreen({
+          name: 'SearchView',
+        }));
       }}
     />
   );
@@ -42,11 +44,15 @@ const SearchField = () => {
             }
             else if (activeScreen?.name != 'SearchView') {
               dispatch(setSearchValue(''));
-              dispatch(setActiveScreen('SearchView'));
+              dispatch(setActiveScreen({
+                name: 'SearchView',
+              }));
             }
             else if (!searchState.value.length && activeScreen?.name == 'SearchView') {
               dispatch(toggleSearchField(false));
-              dispatch(setActiveScreen('SearchView'));
+              dispatch(setActiveScreen({
+                name: 'SearchView',
+              }));
             }
           }}
         />

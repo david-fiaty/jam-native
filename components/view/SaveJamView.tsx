@@ -21,7 +21,9 @@ const SaveJamView = () => {
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Jam is now saved to your jams')}
-        onPress={() => dispatch(setActiveScreen('SaveJamView'))}
+        onPress={() => dispatch(setActiveScreen({
+          name: 'SaveJamView',
+        }))}
       />
       <View style={Layout.borderedListContainer}>
         <ListView
