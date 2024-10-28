@@ -5,6 +5,7 @@ import ApiClient from './ApiClient';
 class DataManager {
   async get(key: keyof typeof ApiEndpoints, options: object) {
     const searchState = Store.getState().search;
+    
     let data = await ApiClient.get(key);
     let results: object = [];
 
