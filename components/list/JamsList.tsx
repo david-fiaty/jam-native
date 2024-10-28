@@ -25,8 +25,9 @@ const JamsList = () => {
   useEffect(() => {
     (async () => {
       data = await DataManager.get('jams');
-      console.log('----');
-      console.log(data); 
+      
+      //console.log(data); 
+      
       setIsLoaded(true);
     })();
 
