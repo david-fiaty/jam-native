@@ -72,6 +72,7 @@ const JamsList = () => {
         <BoxView direction="row" align="center">
           <IconView name="save" theme="tertiary" onPress={() => dispatch(setActiveScreen({
             name: 'SaveJamView',
+            entityId: item.id, 
           }))} />
           <IconView name="share" theme="tertiary" onPress={() => dispatch(setActiveScreen({
             name: 'ShareJamView',
