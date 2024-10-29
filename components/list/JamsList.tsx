@@ -24,7 +24,7 @@ const JamsList = () => {
     (async () => {
       const data = await DataManager.get('jams');
       
-      //console.log(data?.[0]);
+      console.log(data?.[0]);
 
       setTimeout(() => {
         setData(data);
