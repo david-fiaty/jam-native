@@ -33,7 +33,7 @@ export default function SlideshowItemImage({item, index, scrollX}: Props) {
   return (  
     <Animated.View style={[styles.container, itemAnimation]}>
       <ImageView 
-        url={Config.imageUrl + item?.url} 
+        source={{uri: Config.imageUrl + item?.url}} 
         resizeMode="cover" 
         style={styles.listItemImage}
         width={width}
@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.secondary,
     height: 346,
-    width: 'auto',
+    width: '100%',
+    opacity: 1,
   },
   listItemImage: {
     backgroundColor: Colors.secondary,
