@@ -2,6 +2,7 @@ import { useState, } from 'react';
 import { View, StyleSheet, ViewToken } from 'react-native';
 import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
 import { Layout } from '@/constants/Layout';
+import { Config } from '@/constants/Config';
 import SlideshowPager from './SlideshowPager';
 import SlideshowItemText from './SlideshowItemText';
 import SlideshowItemImage from './SlideshowItemImage';
