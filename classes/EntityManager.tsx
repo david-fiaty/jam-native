@@ -21,6 +21,9 @@ class EntityManager {
       if (data?.[targetField]) {
         entity[sourceField] = data?.[targetField];       
       }
+      else if (false) {
+
+      }
     }
 
     return entity;
@@ -28,6 +31,10 @@ class EntityManager {
 
   getFieldDefinition(key: string) {
     return Entities.find(item => item.type == key);
+  }
+
+  isEntityData(key: string) {
+
   }
 };
 
