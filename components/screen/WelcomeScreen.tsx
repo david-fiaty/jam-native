@@ -11,7 +11,6 @@ const WelcomeScreen = () => {
   return (
     <BoxView direction="column" align="center" justify="center" style={styles.container}>
       <LogoView size={{ width: 110, height: 110 }} />    
-      <Slider
       
       <Divider />
       <WelcomeSlideshow />
