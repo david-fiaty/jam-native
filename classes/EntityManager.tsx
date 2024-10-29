@@ -32,10 +32,6 @@ class EntityManager {
   getFieldDefinition(key: string) {
     return Entities.find(item => item.type == key);
   }
-
-  isEntityData(key: string) {
-
-  }
 };
 
 export default (new EntityManager());
