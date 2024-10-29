@@ -15,21 +15,33 @@ class EntityManager {
 
   buildEntity(key: string, data: object) {
     let entity = {};
-    let definition = this.getFieldDefinition(key);
+    let entityDefinition = this.getEntityDefinition(key);
 
-    for (const [sourceField, targetField] of Object.entries(definition.fields)) {
-      if (data?.[targetField]) {
-        entity[sourceField] = data?.[targetField];       
-      }
-      else if (false) {
+    if (entityDefinition) {
+      for (const [sourceField, targetField] of Object.entries(entityDefinition.fields)) {
+        if (definition = this.getEntityDefinition(sourceField)) {
+          console.log(sourceField);
+        }
 
+        /*
+        if (Entities.includes(sourceField)) {
+          entity[sourceField] = this.buildEntity(Entities);      
+        }
+
+
+        if (data?.[targetField]) {
+          entity[sourceField] = data?.[targetField];       
+        }
+          */
+
+         
       }
     }
 
     return entity;
   }
 
-  getFieldDefinition(key: string) {
+  getEntityDefinition(key: string) {
     return Entities.find(item => item.type == key);
   }
 };
