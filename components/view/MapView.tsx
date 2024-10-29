@@ -48,8 +48,8 @@ const MapView = ({ style, children }: BaseProps) => {
           style={styles.map}
           provider="google"
           initialRegion={{
-            latitude: location?.latitude,
-            longitude: location?.longitude,
+            latitude: 8.6195,
+            longitude: 0.8248,
             latitudeDelta: 3,
             longitudeDelta: 3,
           }}
