@@ -22,8 +22,8 @@ class EntityManager {
       let coreFieldName = this.getCoreFieldName(targetFieldName, entityDefinition);
       
 
-      if (definition = this.getEntityDefinition(coreFieldName)) {
-        console.log(definition);
+      if (subEntitydefinition = this.getEntityDefinition(coreFieldName)) {
+        console.log(subEntityDefinition);
       }
       
 
