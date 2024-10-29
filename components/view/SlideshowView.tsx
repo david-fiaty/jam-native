@@ -1,12 +1,5 @@
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
- 
-import Slick from 'react-native-slick';
+import { StyleSheet, Text, View } from 'react-native';
+ import Slick from 'react-native-slick';
 
 const SlideshowView = () => {
     return (
