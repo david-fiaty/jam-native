@@ -15,12 +15,27 @@ class EntityManager {
 
   buildEntity(entityType: string, data: object) {
     let entity = {};
-    let entityDefinition = this.getEntityDefinition(entityType);
+    //let entityDefinition = this.getEntityDefinition(entityType);
 
     for (const [targetFieldName, targetFieldValue] of Object.entries(data)) {
-      let definition = this.getEntityDefinition(entityType);
-      if (targetFieldName == definition?.type) {
+      let entityDefinition = this.getEntityDefinition(entityType);
+      let coreFieldName = this.getCoreFieldName(targetFieldName, entityDefinition);
+      
 
+      if (definition = this.getEntityDefinition(coreFieldName)) {
+        console.log(definition);
+      }
+      
+
+      //let targetFieldEntityDefinition = this.getEntityDefinition(targetFieldName)
+
+      //console.log(targetFieldName, entityDefinition);
+
+      if (targetFieldName == entityDefinition?.type) {
+        let coreFieldName = this.getCoreFieldName(targetFieldName, entityDefinition);
+          
+        //console.log(coreFieldName);
+        // entity[]
       }
       /*
       if (definition = this.getEntityDefinition(entityType)) {
@@ -47,7 +62,7 @@ class EntityManager {
 
   
 
-  /*
+
   getCoreFieldName(targetFieldName: string, entityDefinition: object) {
     for (const [name, value] of Object.entries(entityDefinition.fields)) {
       if (targetFieldName == value) return name;
@@ -55,7 +70,7 @@ class EntityManager {
     
     return null;
   }
-  */
+
 
   getEntityDefinition(key: string) {
     return Entities.find(item => item.type == key);
