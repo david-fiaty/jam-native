@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from 'react';
 import { View, FlatList, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchFilter } from "@/redux/slices/SearchSlice";
@@ -11,49 +11,45 @@ import i18n from "@/translation/i18n";
 import { Colors } from "@/constants/Colors";
 import ListView from "./ListView";
 import DataManager from "@/classes/DataManager";
+import { Config } from '@/constants/Config';
 
 const tabs = [
+  
   {
     id: 'all',
     label: i18n.t('All'),
     numColumns: 2,
-    items: DataManager.get('jams'),
   },
+  
   {
     id: 'calls',
     label: i18n.t('Calls'),
     numColumns: 2,
-    items: [],
   },
   {
     id: 'jammers',
     label: i18n.t('Jammers'),
     numColumns: 1,
-    items: DataManager.get('jammers'),
   },
   {
     id: 'jams',
     label: i18n.t('Jams'),
     numColumns: 2,
-    items: DataManager.get('jams'),
   },
   {
     id: 'projects',
     label: i18n.t('Projects'),
     numColumns: 2,
-    items: DataManager.get('projects'),
   },
   {
     id: 'events',
     label: i18n.t('Events'),
     numColumns: 2,
-    items: [],
   },
   {
     id: 'venues',
     label: i18n.t('Venues'),
     numColumns: 2,
-    items: [],
   },
 ];
 
@@ -63,6 +59,13 @@ const SearchView = () => {
   const dispatch = useDispatch();
   const searchState = useSelector((state) => state.search);
 
+  const [callsData, setCallsData] = useState([]);
+  const [jammersData, setJammersData] = useState([]);
+  const [jamsData, setJamsData] = useState([]);
+  const [projectsData, setProjectsData] = useState([]);
+  const [eventsData, setEventsData] = useState([]);
+  const [venuesData, setVenuesData] = useState([]);
+
   const renderTab = (item, index) => (
     <TouchableOpacity onPress={() => dispatch(setSearchFilter(item.id))}>
       <View style={styles.tabItem}>
@@ -71,7 +74,23 @@ const SearchView = () => {
     </TouchableOpacity>
   );
 
-  //console.log(searchState);
+  useEffect(() => {
+    (async () => {
+      const calls = await DataManager.get('calls');
+      const jammers = await DataManager.get('jammers');
+      const jams = await DataManager.get('jams');
+      const projects = await DataManager.get('projects');
+      const events = await DataManager.get('events');
+      const venues = await DataManager.get('venues');
+  
+      setTimeout(() => {
+        setJamsData(jams);
+
+        
+
+      }, Layout.animation.duration);
+    })();
+  });
 
   return (
     <BoxView
@@ -92,17 +111,16 @@ const SearchView = () => {
 
       {/* All */}
       <ListView
-        data={tabs[0].items} 
+        data={jamsData} 
         numColumns={numColumns}
         contentContainerStyle={{gap: Layout.space.base}}
         columnWrapperStyle={{gap: Layout.space.base}}
         scrollEnabled={false}
-        renderItem={({item, index}) => {
-          return (
+        renderItem={({item, index}) => (
             <TouchableOpacity>
               <View style={styles.item}>
                 <ImageView 
-                  source={item.image} 
+                  source={{uri: Config.imageUrl + item?.medias?.[0]?.url}} 
                   width={96.7}
                   height={96.7}
                   resizeMode="cover"
@@ -110,8 +128,8 @@ const SearchView = () => {
                 />
               </View>
             </TouchableOpacity>
-          );
-        }}
+          )
+        }
       />
     </BoxView>
   );
