@@ -6,6 +6,7 @@ import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
 import InputTextField from '../field/InputTextField';
 import SpinnerView from '../view/SpinnerView';
+import { Divider } from '@rneui/base';
 
 const PasswordForm = () => {
   const router = useRouter();
@@ -24,9 +25,9 @@ const PasswordForm = () => {
         onPress={() => router.back()}
       />
       
-      <InputTextField placeholder={i18n.t('Full name')} />
-      <InputTextField placeholder={i18n.t('Email address')} />
-      <InputTextField placeholder={i18n.t('Phone number')} />
+      <InputTextField placeholder={i18n.t('Old password')} />
+      <InputTextField placeholder={i18n.t('New password')} />
+      <InputTextField placeholder={i18n.t('Confirm new password')} />
     </BoxView>
   );
 };

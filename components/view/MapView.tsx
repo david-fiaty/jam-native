@@ -7,36 +7,39 @@ import RNMapView from "react-native-maps";
 import { BaseProps } from "@/constants/Types";
 import SpinnerView from './SpinnerView';
 import { Layout } from '@/constants/Layout';
+import DataManager from '@/classes/DataManager';
 
 const MapView = ({ style, children }: BaseProps) => {
-  const [location, setLocation] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
+  const [location, setLocation] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     (async () => {
-      if (Platform.OS === "android" && !Device.isDevice) {
-        setErrorMsg(
-          "Location features are not available for simulator virtual devices."
-        );
+      if (Platform.OS === 'android' && !Device.isDevice) {
+        console.log('Location features are not available for virtual devices');
         return;
       }
 
       let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied.");
+      if (status !== 'granted') {
+        console.log('Permission to access location was denied.');
         return;
       }
 
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
+
+      let data = await DataManager.get('jams');
+      setTimeout(() => {
+        setData(data);
+      }, Layout.animation.duration);
     })();
   }, []);
 
-  if (!location) {
+  if (!location || !data)  {
     return <SpinnerView />
   }
-
-  const userLocation = location || {};
 
   return (
     <TouchableWithoutFeedback>
@@ -47,28 +50,27 @@ const MapView = ({ style, children }: BaseProps) => {
           initialRegion={{
             latitude: 8.6195,
             longitude: 0.8248,
-            latitudeDelta: 5,
-            longitudeDelta: 5,
+            latitudeDelta: 3,
+            longitudeDelta: 3,
           }}
         >
-          <Marker
-            key={1}
-            coordinate={{ latitude: 6.1296, longitude: 1.2197 }}
-            title="Jam location 1"
-            description="Jam location 1"
-          />
-          <Marker
-            key={2}
-            coordinate={{ latitude: 6.2273, longitude: 1.5814 }}
-            title="Jam location 2"
-            description="Jam location 2"
-          />
-          <Marker
-            key={3}
-            coordinate={{ latitude: 9.7216, longitude: 1.0586 }}
-            title="Jam location 3"
-            description="Jam location 3"
-          />
+          {
+            data.map(item => {
+              if (item?.longitude && item?.latitude) {
+                return (
+                  <Marker
+                    key={item.id}
+                    coordinate={{ latitude: parseFloat(item?.latitude), longitude: parseFloat(item?.longitude) }}
+                    title={item?.description?.substring(0, 20) + '...'}
+                    description={item?.description}
+                  />
+                );
+              }
+
+              return null;
+            })
+          }
+
         </RNMapView>
       </View>
     </TouchableWithoutFeedback>
