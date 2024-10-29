@@ -24,6 +24,61 @@ const Entities = [
       comments_count: 'comments_count',
     },
   },
+  {
+    name: 'media',
+    type: 'medias',
+    fields: {
+      id: 'id',
+      url: 'url',
+    },
+  },
+  {
+    name: 'profile',
+    type: 'profiles',
+    fields: {
+      id: 'id',
+      name: 'profile_name',
+      description: 'profile_description',
+      picture: 'profile_picture',
+      sectors: 'sectors',
+      country: 'country',
+      region: 'region',
+      city: 'town_or_locality',
+      latitude: 'geolocation_latitude',
+      longitude: 'geolocation_longitude',
+      type: 'profile_type',
+      organization: 'profile_organization',
+      email: 'email',
+      whatsapp: 'whatsapp_number',
+      phone: 'phone_number',
+      website: 'website_link',
+      instagram: 'instagram_id',
+      facebook: 'facebook_link',
+      linkedin: 'linkedin_link',
+      active: 'is_active',
+      deleted: 'is_deleted',
+    },
+  },
+  {
+    name: 'organization',
+    type: 'organizations',
+    fields: {
+      id: 'id',
+      name: 'organization_name',
+      created: 'creation_year',
+      management: 'type_of_management',
+      activities: 'organization_main_creative_activities',
+      others: 'organization_other_creative_activities',
+    },    
+  },
+  {
+    name: 'picture',
+    type: 'pictures',
+    fields: {
+      id: 'id',
+      url: 'url',
+    },
+  },
 ];
 
 export default Entities;
