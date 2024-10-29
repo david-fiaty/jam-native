@@ -17,23 +17,21 @@ class EntityManager {
     let entity = {};
     let entityDefinition = this.getEntityDefinition(key);
 
-    /*
-    if (entityDefinition) {
-      for (const [sourceField, targetField] of Object.entries(entityDefinition.fields)) {
-        if (definition = this.getEntityDefinition(sourceField)) {
-          entity[sourceField] = this.buildEntity(definition.type, data?.[sourceField]); 
-        }
-        else if (data?.[targetField]) {
-          entity[sourceField] = data[targetField];
-        }
+    for (const [sourceField, targetField] of Object.entries(entityDefinition.fields)) {
+      const value = data[sourceField];
+
+      if (value && typeof value === 'object') {
+        const nestedType = Entities.find(entry => entry.fields && Object.values(entry.fields).includes(sourceField));
+
+        entity[targetField] = nestedType ? this.buildEntity(value, nestedType.type) : value;
+
+      } else {
+        entity[targetField] = value;
       }
     }
 
     console.log(entity);
 
-    */
-
-    
 
     return entity;
   }
