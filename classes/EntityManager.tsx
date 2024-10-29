@@ -18,12 +18,19 @@ class EntityManager {
     let entityDefinition = this.getEntityDefinition(entityType);
 
     for (const [targetFieldName, targetFieldValue] of Object.entries(data)) {
-      if (definition = this.getEntityDefinition(entityType)) {
-        let coreFieldName = this.getCoreFieldName(targetFieldName, definition);
-        
-        console.log(coreFieldName);
+      let definition = this.getEntityDefinition(entityType);
+      if (targetFieldName == definition?.type) {
 
       }
+      /*
+      if (definition = this.getEntityDefinition(entityType)) {
+
+        //let coreFieldName = this.getCoreFieldName(targetFieldName, definition);
+        
+        //console.log(coreFieldName);
+
+      }
+        */
     }
 
     /*
@@ -38,13 +45,17 @@ class EntityManager {
     return entity;
   }
 
+  
+
+  /*
   getCoreFieldName(targetFieldName: string, entityDefinition: object) {
-    for (const [name, value] of Object.entries(entityDefinition)) {
+    for (const [name, value] of Object.entries(entityDefinition.fields)) {
       if (targetFieldName == value) return name;
     }
     
     return null;
   }
+  */
 
   getEntityDefinition(key: string) {
     return Entities.find(item => item.type == key);
