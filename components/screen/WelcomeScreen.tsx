@@ -1,19 +1,18 @@
-import { View, StyleSheet } from 'react-native';
-import Slideshow from '@/components/slideshow/Slideshow';
+import { StyleSheet } from 'react-native';
 import BottomLinks from '@/components/navigation/BottomLinks';
 import LoginSignupButton from '../button/LoginSignupButton';
 import LogoView from '../view/LogoView';
 import BoxView from '../view/BoxView';
 import { Divider } from '@rneui/base';
 import WelcomeSlideshow from '../welcome-slideshow/WelcomeSlideshow';
-import SlideshowManager from '@/classes/SlideshowManager';
+import SlideshowView from '../view/SlideshowView';
 
 const WelcomeScreen = () => {
   return (
     <BoxView direction="column" align="center" justify="center" style={styles.container}>
       <LogoView size={{ width: 110, height: 110 }} />    
       
-<SlideshowManager />
+<SlideshowView />
 
       <Divider />
       <WelcomeSlideshow />
