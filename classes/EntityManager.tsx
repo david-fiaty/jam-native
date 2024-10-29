@@ -21,16 +21,16 @@ class EntityManager {
       let coreFieldName = this.getCoreFieldName(targetFieldName, entityDefinition);
       
       if (subEntityDefinition = this.getEntityDefinition(coreFieldName)) {
-
+        entity[coreFieldName] = this.buildEntity(subEntityDefinition.type, targetFieldValue);
       }
       else {
         entity[coreFieldName] = targetFieldValue;
       }
-    
+  
     }
 
 
-    console.log(entity);
+    //console.log(entity);
     return entity;
   }
 
