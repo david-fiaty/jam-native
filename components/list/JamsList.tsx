@@ -24,6 +24,8 @@ const JamsList = () => {
     (async () => {
       const data = await DataManager.get('jams');
 
+      console.log(JSON.stringify(data[0], 0, 2));
+
       setTimeout(() => {
         setData(data);
       }, Layout.animation.duration);
