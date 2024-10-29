@@ -15,14 +15,12 @@ class EntityManager {
 
   buildEntity(entityType: string, data: object) {
     let entity = {};
-    //let entityDefinition = this.getEntityDefinition(entityType);
 
     for (const [targetFieldName, targetFieldValue] of Object.entries(data)) {
       let entityDefinition = this.getEntityDefinition(entityType);
       let coreFieldName = this.getCoreFieldName(targetFieldName, entityDefinition);
       
-
-      if (subEntitydefinition = this.getEntityDefinition(coreFieldName)) {
+      if (subEntityDefinition = this.getEntityDefinition(coreFieldName)) {
         console.log(subEntityDefinition);
       }
       
