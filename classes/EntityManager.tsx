@@ -5,7 +5,7 @@ class EntityManager {
   create(key: string, data: object) {
     try {
       let entity = this.buildEntity(key, data);
-      
+
       return entity;
     }
     catch (error) {
@@ -13,70 +13,31 @@ class EntityManager {
     }
   }
 
-  buildEntity(entityType: string, data: object) {
+  buildEntity(key, data) {
     let entity = {};
-    //let entityDefinition = this.getEntityDefinition(entityType);
-
-    for (const [targetFieldName, targetFieldValue] of Object.entries(data)) {
-      let entityDefinition = this.getEntityDefinition(entityType);
-      let coreFieldName = this.getCoreFieldName(targetFieldName, entityDefinition);
-      
-
-      if (subEntitydefinition = this.getEntityDefinition(coreFieldName)) {
-        console.log(subEntityDefinition);
+    let definition = Entities.find(item => item.type === key);
+  
+    function mapFields(fields, data) {
+      let result = {};
+      for (const [sourceField, targetField] of Object.entries(fields)) {
+        if (typeof targetField === 'object' && data?.[sourceField]) {
+          // Recursive call if the targetField is an object (indicating nested fields)
+          result[sourceField] = mapFields(targetField, data[sourceField]);
+        } else if (data?.[targetField] !== undefined) {
+          // Direct mapping for non-nested fields
+          result[sourceField] = data[targetField];
+        }
       }
-      
-
-      //let targetFieldEntityDefinition = this.getEntityDefinition(targetFieldName)
-
-      //console.log(targetFieldName, entityDefinition);
-
-      if (targetFieldName == entityDefinition?.type) {
-        let coreFieldName = this.getCoreFieldName(targetFieldName, entityDefinition);
-          
-        //console.log(coreFieldName);
-        // entity[]
-      }
-      /*
-      if (definition = this.getEntityDefinition(entityType)) {
-
-        //let coreFieldName = this.getCoreFieldName(targetFieldName, definition);
-        
-        //console.log(coreFieldName);
-
-      }
-        */
+      return result;
     }
-
-    /*
-    if (data?.[targetField]) {
-      entity[sourceField] = data?.[targetField];
+  
+    if (definition) {
+      entity = mapFields(definition.fields, data);
     }
-    else if (definition = this.getEntityDefinition(sourceField)) {
-      entity[sourceField] = this.buildEntity(definition.type, data?.[targetField]);   
-    }
-      */
-
+  
     return entity;
   }
-
   
-
-
-  getCoreFieldName(targetFieldName: string, entityDefinition: object) {
-    for (const [name, value] of Object.entries(entityDefinition.fields)) {
-      if (targetFieldName == value) return name;
-    }
-    
-    return null;
-  }
-
-
-  getEntityDefinition(key: string) {
-    return Entities.find(item => item.type == key);
-  }
-
-
 };
 
 export default (new EntityManager());

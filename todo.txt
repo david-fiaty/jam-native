@@ -58,6 +58,22 @@ Twilio => SMS
 console.log(JSON.stringify(obj, 0, 2));
 
 
+
+
+  buildEntity(key: string, data: object) {
+    let entity = {};
+    let definition = Entities.find(item => item.type == key);
+
+    for (const [sourceField, targetField] of Object.entries(definition.fields)) {
+      if (data?.[targetField]) {
+        entity[sourceField] = data?.[targetField];       
+      }
+    }
+
+    return entity;
+  }
+
+
 <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
 
 
