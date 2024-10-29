@@ -13,27 +13,44 @@ class EntityManager {
     }
   }
 
-  buildEntity(key: string, data: object) {
+  buildEntity(entityType: string, data: object) {
     let entity = {};
-    let entityDefinition = this.getEntityDefinition(key);
+    let entityDefinition = this.getEntityDefinition(entityType);
 
-    if (entityDefinition) {
-      for (const [sourceField, targetField] of Object.entries(entityDefinition.fields)) {
-        if (definition = this.getEntityDefinition(sourceField)) {
-          entity[sourceField] = this.buildEntity(definition.type, data?.[targetField]);   
-        }
-        else if (data?.[targetField]) {
-          entity[sourceField] = data?.[targetField];
-        }
+    for (const [targetFieldName, targetFieldValue] of Object.entries(data)) {
+      if (definition = this.getEntityDefinition(entityType)) {
+        let coreFieldName = this.getCoreFieldName(targetFieldName, definition);
+        
+        console.log(coreFieldName);
+
       }
     }
 
+    /*
+    if (data?.[targetField]) {
+      entity[sourceField] = data?.[targetField];
+    }
+    else if (definition = this.getEntityDefinition(sourceField)) {
+      entity[sourceField] = this.buildEntity(definition.type, data?.[targetField]);   
+    }
+      */
+
     return entity;
+  }
+
+  getCoreFieldName(targetFieldName: string, entityDefinition: object) {
+    for (const [name, value] of Object.entries(entityDefinition)) {
+      if (targetFieldName == value) return name;
+    }
+    
+    return null;
   }
 
   getEntityDefinition(key: string) {
     return Entities.find(item => item.type == key);
   }
+
+
 };
 
 export default (new EntityManager());
