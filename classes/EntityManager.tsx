@@ -21,39 +21,16 @@ class EntityManager {
       let coreFieldName = this.getCoreFieldName(targetFieldName, entityDefinition);
       
       if (subEntityDefinition = this.getEntityDefinition(coreFieldName)) {
-        console.log(subEntityDefinition);
+        entity[coreFieldName] = this.buildEntity(subEntityDefinition.type, data[targetFieldName]);
+        //console.log(subEntityDefinition);
+      }
+      else {
+        entity[coreFieldName] = data[targetFieldName];
       }
       
-
-      //let targetFieldEntityDefinition = this.getEntityDefinition(targetFieldName)
-
-      //console.log(targetFieldName, entityDefinition);
-
-      if (targetFieldName == entityDefinition?.type) {
-        let coreFieldName = this.getCoreFieldName(targetFieldName, entityDefinition);
-          
-        //console.log(coreFieldName);
-        // entity[]
-      }
-      /*
-      if (definition = this.getEntityDefinition(entityType)) {
-
-        //let coreFieldName = this.getCoreFieldName(targetFieldName, definition);
-        
-        //console.log(coreFieldName);
-
-      }
-        */
     }
 
-    /*
-    if (data?.[targetField]) {
-      entity[sourceField] = data?.[targetField];
-    }
-    else if (definition = this.getEntityDefinition(sourceField)) {
-      entity[sourceField] = this.buildEntity(definition.type, data?.[targetField]);   
-    }
-      */
+    console.log('--------------------------', entity);
 
     return entity;
   }
