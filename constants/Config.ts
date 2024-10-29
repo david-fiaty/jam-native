@@ -1,7 +1,8 @@
 export const Config = {
   cacheEnabled: true,
   apiEnabled: false,
-  apiUrl: 'http://localhost',
+  apiUrl: 'https://dev.jammm.app/backend/api',
+  imageUrl: 'https://dev.jammm.app/backend',
   defaultLanguage: 'en',
   fallbackLanguage: 'en',
   appNamespace: 'jam-native',
