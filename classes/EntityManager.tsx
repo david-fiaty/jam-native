@@ -30,9 +30,6 @@ class EntityManager {
       }
     }
 
-    console.log(entity);
-
-
     return entity;
   }
 
