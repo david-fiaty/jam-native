@@ -20,7 +20,6 @@ const ImageView = (props: Props) => {
   );
 };
 
-
 const styles = StyleSheet.create({
   container: {
     width: '100%',
