@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import Animated, { SharedValue, useAnimatedStyle, interpolate, Extrapolation } from 'react-native-reanimated';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
+import { Config } from '@/constants/Config';
 import ImageView from '../view/ImageView';
 import DeviceManager from '@/classes/DeviceManager';
 
@@ -32,7 +33,7 @@ export default function SlideshowItemImage({item, index, scrollX}: Props) {
   return (  
     <Animated.View style={[styles.container, itemAnimation]}>
       <ImageView 
-        source={require('@/assets/images/jam-2.jpg')} 
+        url={Config.imageUrl + item?.url} 
         resizeMode="cover" 
         style={styles.listItemImage}
         width={width}
