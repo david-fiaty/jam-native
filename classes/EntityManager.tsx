@@ -5,7 +5,7 @@ class EntityManager {
   create(key: string, data: object) {
     try {
       let entity = this.buildEntity(key, data);
-      
+
       return entity;
     }
     catch (error) {
@@ -13,38 +13,18 @@ class EntityManager {
     }
   }
 
-  buildEntity(entityType: string, data: object) {
+  buildEntity(key: string, data: object) {
     let entity = {};
+    let definition = Entities.find(item => item.type == key);
 
-    for (const [targetFieldName, targetFieldValue] of Object.entries(data)) {
-      let entityDefinition = this.getEntityDefinition(entityType);
-      let coreFieldName = this.getCoreFieldName(targetFieldName, entityDefinition);
-      
-      if (subEntityDefinition = this.getEntityDefinition(coreFieldName)) {
-        entity[coreFieldName] = this.buildEntity(subEntityDefinition.type, targetFieldValue);
-      }
-      else {
-        entity[coreFieldName] = targetFieldValue;
+    for (const [sourceField, targetField] of Object.entries(definition.fields)) {
+      if (data?.[targetField]) {
+        entity[sourceField] = data?.[targetField];       
       }
     }
 
     return entity;
   }
-
-  getCoreFieldName(targetFieldName: string, entityDefinition: object) {
-    for (const [name, value] of Object.entries(entityDefinition.fields)) {
-      if (targetFieldName == value) return name;
-    }
-    
-    return null;
-  }
-
-
-  getEntityDefinition(key: string) {
-    return Entities.find(item => item.type == key);
-  }
-
-
 };
 
 export default (new EntityManager());
