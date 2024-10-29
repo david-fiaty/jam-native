@@ -12,13 +12,18 @@ class DataManager {
 
     // Apply search
     if (options?.filter !== false && searchState.filter.length) {
-      results = data.filter(item => item?.active === true); // Todo - Apply filter fields
+      results = data.filter(item => item?.type == searchState.filter); 
     }
 
     // Apply filters
     if (options?.search !== false && searchState.value.length) {
       results = results.length ? results : data;
-      results.filter(item => item?.active === true); // Todo - Apply filter fields
+      results = data.filter(item => {
+        let haystack = item?.description?.toLowerCase();
+        let needle = searchState.value.toLowerCase();
+
+        return haystack.includes(needle);
+      }); 
     }
 
     return results.length ? results : data;
