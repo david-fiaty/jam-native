@@ -3,7 +3,6 @@ import { Dimensions, Text, View } from "react-native";
 import { useSharedValue } from "react-native-reanimated";
 import Carousel, {
   ICarouselInstance,
-  Pagination,
 } from "react-native-reanimated-carousel";
  
 const data = [...new Array(6).keys()];
@@ -45,13 +44,6 @@ const SlideshowView = () => {
         )}
       />
  
-      <Pagination.Basic
-        progress={progress}
-        data={data}
-        dotStyle={{ backgroundColor: "rgba(0,0,0,0.2)", borderRadius: 50 }}
-        containerStyle={{ gap: 5, marginTop: 10 }}
-        onPress={onPressPagination}
-      />
     </View>
   );
 }
