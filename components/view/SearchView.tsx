@@ -21,7 +21,7 @@ const tabs = [
     numColumns: 2,
   },
   */
-  
+  /*
   {
     id: 'calls',
     label: i18n.t('Calls'),
@@ -32,11 +32,16 @@ const tabs = [
     label: i18n.t('Jammers'),
     numColumns: 1,
   },
+  */
+
+
   {
     id: 'jams',
     label: i18n.t('Jams'),
     numColumns: 2,
   },
+
+  /*
   {
     id: 'projects',
     label: i18n.t('Projects'),
@@ -52,6 +57,7 @@ const tabs = [
     label: i18n.t('Venues'),
     numColumns: 2,
   },
+  */
 ];
 
 const numColumns = 3;
@@ -85,10 +91,12 @@ const SearchView = () => {
       const venues = await DataManager.get('venues');
   
       setTimeout(() => {
+        setCallsData(calls);
+        setJammersData(jammers);
         setJamsData(jams);
-
-        
-
+        setProjectsData(projects);
+        setEventsData(events);
+        setVenuesData(venues);
       }, Layout.animation.duration);
     })();
   });
