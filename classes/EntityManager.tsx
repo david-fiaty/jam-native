@@ -31,9 +31,6 @@ class EntityManager {
     return entity;
   }
 
-  
-
-
   getCoreFieldName(targetFieldName: string, entityDefinition: object) {
     for (const [name, value] of Object.entries(entityDefinition.fields)) {
       if (targetFieldName == value) return name;
