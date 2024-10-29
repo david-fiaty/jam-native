@@ -1,6 +1,6 @@
 const Endpoints = {
   jams: {
-    url: 'https://dev.jammm.app/backend/api/jams/',
+    url: '/jams',
     method: 'GET',
   },
   jammers: {},

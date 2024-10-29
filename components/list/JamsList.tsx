@@ -57,7 +57,7 @@ const JamsList = () => {
       </BoxView>
       
       {/* Item images */}
-      <Slideshow dataType="image" />
+      <Slideshow dataType="image" data={item.medias} />
 
       {/* Item toolbar */}
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItemToolbar}>

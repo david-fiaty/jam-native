@@ -1,4 +1,5 @@
 import Endpoints from '@/constants/Endpoints';
+import { Config } from '@/constants/Config';
 
 class ApiClient {
   async get(key: keyof typeof Endpoints) {
@@ -13,9 +14,10 @@ class ApiClient {
   async sendRequest(endpoint: object) {
     if (endpoint?.url && endpoint?.method) {
       try {
-        let response = await fetch(endpoint?.url, {
-          method: endpoint?.method,
-          //credentials: 'include',
+
+        let url = Config.apiUrl + '/' + endpoint.url + '/';
+        let response = await fetch(url, {
+          method: endpoint.method,
           headers: this.getHeaders(),
         });
 
