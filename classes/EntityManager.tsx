@@ -26,11 +26,8 @@ class EntityManager {
       else {
         entity[coreFieldName] = targetFieldValue;
       }
-  
     }
 
-
-    //console.log(entity);
     return entity;
   }
 
