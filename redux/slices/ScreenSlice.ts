@@ -11,8 +11,6 @@ const ScreenSlice = createSlice({
           item.active = false;
         }
         else if (item.name == action.payload.name && !item.active) {
-          console.log(action.payload);
-
           item.active = true;
           item.entityId = action.payload?.entityId;
         }
