@@ -16,7 +16,6 @@ const SlideshowView = () => {
       </Slick>
     );
 };
-
  
 const styles = StyleSheet.create({
   wrapper: {
