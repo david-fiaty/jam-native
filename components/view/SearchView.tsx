@@ -66,7 +66,7 @@ const SearchView = () => {
   const renderTab = (item, index) => (
     <TouchableOpacity onPress={() => dispatch(setSearchFilter(item.id))}>
       <View style={styles.tabItem}>
-        <TextView>{item.label}</TextView>
+        <TextView style={searchState.filter == item.id ? {fontWeight: 'bold'} : {} }>{item.label}</TextView>
       </View>
     </TouchableOpacity>
   );
