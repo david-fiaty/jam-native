@@ -5,7 +5,7 @@ class EntityManager {
   create(key: string, data: object) {
     try {
       let entity = this.buildEntity(key, data);
-
+      
       return entity;
     }
     catch (error) {
@@ -19,25 +19,20 @@ class EntityManager {
 
     if (entityDefinition) {
       for (const [sourceField, targetField] of Object.entries(entityDefinition.fields)) {
-        if (definition = this.getEntityDefinition(sourceField)) {
-          console.log(sourceField);
-        }
 
         /*
-        if (Entities.includes(sourceField)) {
-          entity[sourceField] = this.buildEntity(Entities);      
+        if (definition = this.getEntityDefinition(sourceField)) {
+          entity[sourceField] = this.buildEntity(definition.type, data?.[targetField]);   
         }
-
-
-        if (data?.[targetField]) {
-          entity[sourceField] = data?.[targetField];       
+        else if (data?.[targetField]) {
+          entity[sourceField] = data?.[targetField];
         }
           */
-
-         
       }
     }
 
+
+    console.log(entity);
     return entity;
   }
 
