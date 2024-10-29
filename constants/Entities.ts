@@ -50,6 +50,26 @@ const Entities = [
     },
   },
   {
+    name: 'country',
+    type: 'countries',
+    fields: {
+      name: 'name',
+      code: 'code',
+    },
+  },
+  {
+    name: 'personal',
+    type: 'personals',
+    fields: {
+      id: 'id',
+      first_name: 'first_name',
+      last_name: 'last_name',
+      experience: 'experience_in_field',
+      creative_works: 'main_creative_works',
+      other_works: 'other_creative_works',
+    },
+  },
+  {
     name: 'organization',
     type: 'organizations',
     fields: {
@@ -93,6 +113,7 @@ const Entities = [
       latitude: 'geolocation_latitude',
       longitude: 'geolocation_longitude',
       type: 'profile_type',
+      personal: 'profile_personal',
       organization: 'profile_organization',
       email: 'email',
       whatsapp: 'whatsapp_number',
@@ -120,6 +141,7 @@ const Entities = [
       latitude: 'geolocation_latitude',
       longitude: 'geolocation_longitude',
       type: 'profile_type',
+      personal: 'profile_personal',
       organization: 'profile_organization',
       email: 'email',
       whatsapp: 'whatsapp_number',
@@ -147,6 +169,7 @@ const Entities = [
       latitude: 'geolocation_latitude',
       longitude: 'geolocation_longitude',
       type: 'profile_type',
+      personal: 'profile_personal',
       organization: 'profile_organization',
       email: 'email',
       whatsapp: 'whatsapp_number',
