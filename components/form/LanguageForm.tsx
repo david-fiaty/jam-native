@@ -6,6 +6,18 @@ import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
 import InputTextField from '../field/InputTextField';
 import SpinnerView from '../view/SpinnerView';
+import SelectListBase from '../base/SelectListBase';
+
+const data = [
+  {
+    label: i18n.t('French'),
+    value: 'fr',
+  },
+  {
+    label: i18n.t('English'),
+    value: 'en',
+  },
+];
 
 const LanguageForm = () => {
   const router = useRouter();
@@ -23,10 +35,7 @@ const LanguageForm = () => {
         title={i18n.t('Language')}
         onPress={() => router.back()}
       />
-      
-      <InputTextField placeholder={i18n.t('Full name')} />
-      <InputTextField placeholder={i18n.t('Email address')} />
-      <InputTextField placeholder={i18n.t('Phone number')} />
+      <SelectListBase data={data} placeholder={i18n.t('English')} />
     </BoxView>
   );
 };

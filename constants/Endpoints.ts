@@ -3,6 +3,10 @@ const Endpoints = {
     url: '/jams',
     method: 'GET',
   },
+  projects: {
+    url: '/projects',
+    method: 'GET',
+  },
   jammers: {},
   notifications: {},
 };

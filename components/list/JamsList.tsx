@@ -14,7 +14,6 @@ import JamStatusButton from '../button/JamStatusButton';
 import Slideshow from '../slideshow/Slideshow';
 import ListView from '../view/ListView';
 import DataManager from '@/classes/DataManager';
-import ApiMockData from '@/data/ApiMockData';
 
 const JamsList = () => {  
   const dispatch = useDispatch();
@@ -23,7 +22,7 @@ const JamsList = () => {
   useEffect(() => {
     (async () => {
       const data = await DataManager.get('jams');
-        setTimeout(() => {
+      setTimeout(() => {
         setData(data);
       }, Layout.animation.duration);
     })();
