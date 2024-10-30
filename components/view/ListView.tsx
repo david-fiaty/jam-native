@@ -9,11 +9,10 @@ type Props = BaseProps & {
   horizontal?: boolean,
   contentContainerStyle?: object,
   columnWrapperStyle?: object,
-  keyExtractor?: () => void, 
   renderItem: () => JSX.Element, 
 };
 
-const ListView = ({data, numColumns, scrollEnabled, horizontal, contentContainerStyle, columnWrapperStyle, keyExtractor, renderItem, style}: Props) => {
+const ListView = ({data, numColumns, scrollEnabled, horizontal, contentContainerStyle, columnWrapperStyle, renderItem, style}: Props) => {
   return (
     <FlatList 
       data={data || []} 
@@ -22,7 +21,7 @@ const ListView = ({data, numColumns, scrollEnabled, horizontal, contentContainer
       horizontal={horizontal === true ? horizontal : false}  
       contentContainerStyle={[styles.container, contentContainerStyle]}
       columnWrapperStyle={columnWrapperStyle}
-      keyExtractor={keyExtractor}
+      keyExtractor={(item) => item.id}
       renderItem={renderItem} 
     />
   );
