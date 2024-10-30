@@ -1,13 +1,15 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Slick from "react-native-slick";
 import TextView from "../view/TextView";
+import { Layout } from "@/constants/Layout";
+import { Colors } from "@/constants/Colors";
 
 type Props = {
-  data?: [];
+  data?: [] | object;
 };
 
 const ImageSlideshow = ({data}: Props) => {
-  const SlideshowItem = data?.map((item, index) => {
+  const SlideshowItem = data?.map((item: object, index: number) => {
     return (
       <View style={styles.item} key={`dot-${index}`}>
         <TextView style={styles.title}>{item.title}</TextView>
@@ -17,24 +19,48 @@ const ImageSlideshow = ({data}: Props) => {
   });
 
   return (
-    <Slick style={styles.container} >
-      {SlideshowItem}
-    </Slick>
+    <View style={styles.container}>
+      <Slick 
+        paginationStyle={styles.pagination}
+        dotStyle={styles.dot}
+        activeDotStyle={styles.activeDot}
+      >
+        {SlideshowItem}
+      </Slick>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: { 
+    height: 122,
+    marginTop: Layout.space.base,
+    marginBottom: Layout.space.base*2,
+  },
   item: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#9DD6EB",
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: Layout.space.base,
+    padding: Layout.space.base*2,
   },
-  text: {
-    color: '#fff',
-    fontSize: 30,
-    fontWeight: 'bold',
+  title: {
+    textTransform: 'uppercase',
+  },
+  content: {
+    textAlign: 'center',
+  },
+  pagination: {
+    bottom: 0, 
+    left: 0,
+    right: 0,
+    height: Layout.space.base,
+  },
+  dot: {
+    backgroundColor: Colors.secondary,
+  },
+  activeDot: {
+    backgroundColor: Colors.primary,
   },
 });
 
