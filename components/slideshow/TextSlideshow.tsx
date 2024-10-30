@@ -18,7 +18,7 @@ const TextSlideshow = ({data}: Props) => {
   });
 
   return (
-    <Slick style={styles.container} >
+    <Slick style={styles.container}>
       {SlideshowItem}
     </Slick>
   );
@@ -26,6 +26,7 @@ const TextSlideshow = ({data}: Props) => {
 
 const styles = StyleSheet.create({
   container: { 
+    backgroundColor: 'green',
   },
   item: {
     flex: 1,
