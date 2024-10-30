@@ -14,14 +14,11 @@ import DataManager from "@/classes/DataManager";
 import { Config } from '@/constants/Config';
 
 const tabs = [
-  /*
   {
     id: 'all',
     label: i18n.t('All'),
     numColumns: 2,
   },
-  */
-  /*
   {
     id: 'calls',
     label: i18n.t('Calls'),
@@ -32,16 +29,11 @@ const tabs = [
     label: i18n.t('Jammers'),
     numColumns: 1,
   },
-  */
-
-
   {
     id: 'jams',
     label: i18n.t('Jams'),
     numColumns: 2,
   },
-
-  /*
   {
     id: 'projects',
     label: i18n.t('Projects'),
@@ -57,7 +49,6 @@ const tabs = [
     label: i18n.t('Venues'),
     numColumns: 2,
   },
-  */
 ];
 
 const numColumns = 3;
@@ -73,10 +64,12 @@ const SearchView = () => {
   const [eventsData, setEventsData] = useState([]);
   const [venuesData, setVenuesData] = useState([]);
 
-  const renderTab = (item, index) => (
+  const renderTab = (item: object, index: number) => (
     <TouchableOpacity onPress={() => dispatch(setSearchFilter(item.id))}>
       <View style={styles.tabItem}>
-        <TextView style={searchState.filter == item.id ? {fontWeight: 'bold'} : {} }>{item.label}</TextView>
+        <TextView style={searchState.filter == item.id ? {fontWeight: 'bold'} : {} }>
+          {item.label}
+        </TextView>
       </View>
     </TouchableOpacity>
   );
@@ -116,7 +109,6 @@ const SearchView = () => {
         contentContainerStyle={styles.tabContainer}
         renderItem={({item, index}) => renderTab(item, index)}
       />
-
 
       {/* Calls */}
       { searchState.filter == 'calls' &&

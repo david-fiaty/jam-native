@@ -32,10 +32,16 @@ const HostsList = () => {
         }))}
       />
       <View style={Layout.borderedListContainer}>
-        <ListView
-          data={data}
-          renderItem={({item, index}) => renderItem(item, index)}
-        />
+        {data?.length > 0 &&
+          <ListView
+            data={data}
+            renderItem={({item, index}) => renderItem(item, index)}
+          />
+        }
+
+        {!data.length && 
+          <TextView>{i18n.t('There are no hosts available for this Jam.')}</TextView>
+        }
       </View>
     </BoxView>
   );
