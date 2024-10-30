@@ -39,7 +39,7 @@ const JammersList = () => {
           />
         }
 
-        {!data.length && 
+        {!data?.length && 
           <TextView>{i18n.t('There are no jammers available for this Jam.')}</TextView>
         }
       </View>
