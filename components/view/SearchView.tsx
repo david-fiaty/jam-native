@@ -56,13 +56,7 @@ const numColumns = 3;
 const SearchView = () => {
   const dispatch = useDispatch();
   const searchState = useSelector((state) => state.search);
-
-  const [callsData, setCallsData] = useState([]);
-  const [jammersData, setJammersData] = useState([]);
-  const [jamsData, setJamsData] = useState([]);
-  const [projectsData, setProjectsData] = useState([]);
-  const [eventsData, setEventsData] = useState([]);
-  const [venuesData, setVenuesData] = useState([]);
+  const [data, setData] = useState([]);
 
   const renderTab = (item: object, index: number) => (
     <TouchableOpacity onPress={() => dispatch(setSearchFilter(item.id))}>
@@ -76,20 +70,19 @@ const SearchView = () => {
 
   useEffect(() => {
     (async () => {
+      const listData = await DataManager.get(searchState.filter);
+
+      /*
       const calls = await DataManager.get('calls');
       const jammers = await DataManager.get('jammers');
       const jams = await DataManager.get('jams');
       const projects = await DataManager.get('projects');
       const events = await DataManager.get('events');
       const venues = await DataManager.get('venues');
+      */
   
       setTimeout(() => {
-        setCallsData(calls);
-        setJammersData(jammers);
-        setJamsData(jams);
-        setProjectsData(projects);
-        setEventsData(events);
-        setVenuesData(venues);
+        setData(listData);
       }, Layout.animation.duration);
     })();
   });
@@ -110,157 +103,28 @@ const SearchView = () => {
         renderItem={({item, index}) => renderTab(item, index)}
       />
 
-      {/* Calls */}
-      { searchState.filter == 'calls' &&
-        <ListView
-          data={callsData} 
-          numColumns={numColumns}
-          contentContainerStyle={{gap: Layout.space.base}}
-          columnWrapperStyle={{gap: Layout.space.base}}
-          scrollEnabled={false}
-          renderItem={({item, index}) => (
-              <TouchableOpacity>
-                <View style={styles.item}>
-                  <ImageView 
-                    source={{uri: Config.imageUrl + item?.medias?.[0]?.url}} 
-                    width={96.7}
-                    height={96.7}
-                    resizeMode="cover"
-                    style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
-                  />
-                </View>
-              </TouchableOpacity>
-            )
-          }
-        />
-      }
-
-      {/* Jammers */}
-      { searchState.filter == 'jammers' &&
-        <ListView
-          data={jammersData} 
-          numColumns={numColumns}
-          contentContainerStyle={{gap: Layout.space.base}}
-          columnWrapperStyle={{gap: Layout.space.base}}
-          scrollEnabled={false}
-          renderItem={({item, index}) => (
-              <TouchableOpacity>
-                <View style={styles.item}>
-                  <ImageView 
-                    source={{uri: Config.imageUrl + item?.medias?.[0]?.url}} 
-                    width={96.7}
-                    height={96.7}
-                    resizeMode="cover"
-                    style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
-                  />
-                </View>
-              </TouchableOpacity>
-            )
-          }
-        />
-      }
-
-      {/* Jams */}
-      { searchState.filter == 'jams' &&
-        <ListView
-          data={jamsData} 
-          numColumns={numColumns}
-          contentContainerStyle={{gap: Layout.space.base}}
-          columnWrapperStyle={{gap: Layout.space.base}}
-          scrollEnabled={false}
-          renderItem={({item, index}) => (
-              <TouchableOpacity>
-                <View style={styles.item}>
-                  <ImageView 
-                    source={{uri: Config.imageUrl + item?.medias?.[0]?.url}} 
-                    width={96.7}
-                    height={96.7}
-                    resizeMode="cover"
-                    style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
-                  />
-                </View>
-              </TouchableOpacity>
-            )
-          }
-        />
-      }
-
-
-      {/* Projects */}
-      { searchState.filter == 'projects' &&
-        <ListView
-          data={projectsData} 
-          numColumns={numColumns}
-          contentContainerStyle={{gap: Layout.space.base}}
-          columnWrapperStyle={{gap: Layout.space.base}}
-          scrollEnabled={false}
-          renderItem={({item, index}) => (
-              <TouchableOpacity>
-                <View style={styles.item}>
-                  <ImageView 
-                    source={{uri: Config.imageUrl + item?.medias?.[0]?.url}} 
-                    width={96.7}
-                    height={96.7}
-                    resizeMode="cover"
-                    style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
-                  />
-                </View>
-              </TouchableOpacity>
-            )
-          }
-        />
-      }
-
-      {/* Events */}
-      { searchState.filter == 'events' &&
-        <ListView
-          data={eventsData} 
-          numColumns={numColumns}
-          contentContainerStyle={{gap: Layout.space.base}}
-          columnWrapperStyle={{gap: Layout.space.base}}
-          scrollEnabled={false}
-          renderItem={({item, index}) => (
-              <TouchableOpacity>
-                <View style={styles.item}>
-                  <ImageView 
-                    source={{uri: Config.imageUrl + item?.medias?.[0]?.url}} 
-                    width={96.7}
-                    height={96.7}
-                    resizeMode="cover"
-                    style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
-                  />
-                </View>
-              </TouchableOpacity>
-            )
-          }
-        />
-      }
-
-      {/* Venues */}
-      { searchState.filter == 'events' &&
-        <ListView
-          data={venuesData} 
-          numColumns={numColumns}
-          contentContainerStyle={{gap: Layout.space.base}}
-          columnWrapperStyle={{gap: Layout.space.base}}
-          scrollEnabled={false}
-          renderItem={({item, index}) => (
-              <TouchableOpacity>
-                <View style={styles.item}>
-                  <ImageView 
-                    source={{uri: Config.imageUrl + item?.medias?.[0]?.url}} 
-                    width={96.7}
-                    height={96.7}
-                    resizeMode="cover"
-                    style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
-                  />
-                </View>
-              </TouchableOpacity>
-            )
-          }
-        />
-      }
-
+      {/* Results */}
+      <ListView
+        data={data} 
+        numColumns={numColumns}
+        contentContainerStyle={{gap: Layout.space.base}}
+        columnWrapperStyle={{gap: Layout.space.base}}
+        scrollEnabled={false}
+        renderItem={({item, index}) => (
+            <TouchableOpacity>
+              <View style={styles.item}>
+                <ImageView 
+                  source={{uri: Config.imageUrl + item?.medias?.[0]?.url}} 
+                  width={96.7}
+                  height={96.7}
+                  resizeMode="cover"
+                  style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
+                />
+              </View>
+            </TouchableOpacity>
+          )
+        }
+      />
     </BoxView>
   );
 };
