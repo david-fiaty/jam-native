@@ -100,7 +100,11 @@ const JamsList = () => {
               </BoxView>
               <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
                 <IconView name="arrow" size={14} theme="transparent" />
-                <TextView>{i18n.t('Start')}: {item?.period?.start_datetime}</TextView>
+                <TextView>{i18n.t('Start date')}: {item?.period?.start_datetime}</TextView>
+              </BoxView>
+              <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
+                <IconView name="arrow" size={14} theme="transparent" />
+                <TextView>{i18n.t('End date')}: {item?.period?.end_datetime}</TextView>
               </BoxView>
               <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
                 <IconView name="arrow" size={14} theme="transparent" />
