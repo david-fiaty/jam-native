@@ -21,7 +21,6 @@ const TextSlideshow = ({data}: Props) => {
   return (
     <View style={styles.container}>
       <Slick 
-        style={styles.slideshow} 
         paginationStyle={styles.pagination}
         dotStyle={styles.dot}
         activeDotStyle={styles.activeDot}
@@ -34,16 +33,13 @@ const TextSlideshow = ({data}: Props) => {
 
 const styles = StyleSheet.create({
   container: { 
-    backgroundColor: 'green',
     height: 122,
-  },
-  slideshow: {
+    marginVertical: Layout.space.base,
   },
   item: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#9DD6EB',
     gap: Layout.space.base,
     padding: Layout.space.base*2,
   },
@@ -52,10 +48,9 @@ const styles = StyleSheet.create({
   },
   content: {
     textAlign: 'center',
-    backgroundColor: 'yellow',
   },
   pagination: {
-    //top: 122, 
+    bottom: 0, 
     left: 0,
     right: 0,
     height: Layout.space.base,
