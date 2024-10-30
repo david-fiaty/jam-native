@@ -1,7 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native';
- import Slick from 'react-native-slick';
+import Slick from 'react-native-slick';
 
-const SlideshowView = () => {
+type Props = {
+  data?: [],
+};
+
+const SlideshowView = ({data}: Props) => {
+
+    const SlideshowItem = (<></>);
+
     return (
       <Slick style={styles.wrapper} showsButtons={true}>
         <View style={styles.slide1}>
