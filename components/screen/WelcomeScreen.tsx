@@ -8,7 +8,7 @@ import { Divider } from '@rneui/base';
 import WelcomeSlideshow from '../welcome-slideshow/WelcomeSlideshow';
 import TextSlideshow from '../slideshow/TextSlideshow';
 
-const test = [
+const textSlideshowData = [
   {
     id: 1,
     title: 'A',
@@ -29,7 +29,7 @@ const WelcomeScreen = () => {
       <LogoView size={{ width: 110, height: 110 }} />    
       
 
-      <TextSlideshow data={test} />
+      <TextSlideshow data={textSlideshowData} />
 
       <Divider />
       <WelcomeSlideshow />
