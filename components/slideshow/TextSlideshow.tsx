@@ -5,7 +5,7 @@ import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 
 type Props = {
-  data?: [];
+  data?: [] | object;
 };
 
 const TextSlideshow = ({data}: Props) => {
