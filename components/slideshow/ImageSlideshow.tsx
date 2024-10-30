@@ -1,8 +1,9 @@
 import { StyleSheet, View } from "react-native";
 import Slick from "react-native-slick";
-import TextView from "../view/TextView";
+import { Config } from '@/constants/Config';
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
+import ImageView from "../view/ImageView";
 
 type Props = {
   data?: [] | object;
@@ -12,8 +13,13 @@ const ImageSlideshow = ({data}: Props) => {
   const SlideshowItem = data?.map((item: object, index: number) => {
     return (
       <View style={styles.item} key={`dot-${index}`}>
-        <TextView style={styles.title}>{item.title}</TextView>
-        <TextView style={styles.content}>{item.content}</TextView>
+        <ImageView 
+          source={{uri: Config.imageUrl + item?.url}} 
+          resizeMode="cover" 
+          //style={styles.listItemImage}
+          //width={width}
+          //height={346}
+        />
       </View>
     );
   });
