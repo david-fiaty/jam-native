@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'yellow',
   },
   pagination: {
-    //top: 122, 
+    bottom: 0, 
     left: 0,
     right: 0,
     height: Layout.space.base,
