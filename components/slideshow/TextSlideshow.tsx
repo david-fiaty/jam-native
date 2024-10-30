@@ -33,12 +33,12 @@ const TextSlideshow = ({data}: Props) => {
 const styles = StyleSheet.create({
   container: { 
     backgroundColor: 'green',
-    height: 250,
+    height: 200,
   },
   item: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: "#9DD6EB",
     gap: Layout.space.base,
     paddingHorizontal: Layout.space.base*2,
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   pagination: {
-    bottom: 0, 
+    top: 40, 
     left: 0,
     right: 0,
   },
