@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   iconStyle: {
     color: Colors.white,
     backgroundColor: Colors.primary,
-    padding: Layout.space.base*0.75,
+    padding: Layout.space.base*0.72,
     borderRadius: Layout.radius.circle,
   },
   primary: {
