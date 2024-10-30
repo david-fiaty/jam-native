@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
@@ -19,13 +19,25 @@ import ImageSlideshow from '../slideshow/ImageSlideshow';
 const JamsList = () => {  
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
+  const listViewRef = useRef(null);
+
+  const scrollToItem = (id: number) => {
+    const index = data.findIndex(item => item.id === id);
+    if (index !== -1 && listViewRef.current) {
+      listViewRef.current.scrollToIndex({ animated: true, index });
+    }
+  };
 
   useEffect(() => {
     (async () => {
       const data = await DataManager.get('jams');
+
       setTimeout(() => {
         setData(data);
       }, Layout.animation.duration);
+
+
+      scrollToItem(24);
     })();
   });
 
@@ -41,7 +53,7 @@ const JamsList = () => {
             entityId: item.id, 
           }))}>
             <TextView>
-              @{i18n.t('host')} +{parseInt(item?.hosts?.length)}
+              @{i18n.t('host')} +{parseInt(item?.hosts?.length)} {item.id}
             </TextView>
           </TouchableOpacity>
         </BoxView>
