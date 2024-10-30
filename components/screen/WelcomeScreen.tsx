@@ -39,7 +39,7 @@ const WelcomeScreen = () => {
       <Divider />
       <LoginSignupButton />
       
-      <Divider />
+      <Divider /><Divider />
       <BottomLinks />
     </BoxView>
   );
