@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
@@ -19,33 +19,17 @@ import ImageSlideshow from '../slideshow/ImageSlideshow';
 const JamsList = () => {  
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
-  const listViewRef = useRef(null);
-
-  const scrollToItem = (id: number) => {
-    const index = data.findIndex(item => item.id === id);
-
-    console.log(index);
-    if (index !== -1 && listViewRef.current) {
-      listViewRef.current.scrollToIndex({ animated: true, index });
-    }
-  };
 
   useEffect(() => {
     (async () => {
       const data = await DataManager.get('jams');
-
       setTimeout(() => {
         setData(data);
-        scrollToItem(24);
       }, Layout.animation.duration);
-
-
     })();
   });
 
   if (!data) return <SpinnerView />;
-
-  //scrollToItem(24);
 
   const renderItem = (item, index) => (
     <View style={styles.listItem}>
@@ -57,7 +41,7 @@ const JamsList = () => {
             entityId: item.id, 
           }))}>
             <TextView>
-              @{i18n.t('host')} +{parseInt(item?.hosts?.length)} {item.id}
+              @{i18n.t('host')} +{parseInt(item?.hosts?.length)}
             </TextView>
           </TouchableOpacity>
         </BoxView>
@@ -141,8 +125,6 @@ const JamsList = () => {
   return (
     <BoxView direction="column" style={Layout.screenContent}>
       <ListView
-        //ref={listViewRef}
-        initialScrollIndex={7}
         data={data} 
         contentContainerStyle={Layout.listContainer}
         renderItem={({item, index}) => renderItem(item, index)}
