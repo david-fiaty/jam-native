@@ -1,15 +1,17 @@
 import { StyleSheet, Text, View } from "react-native";
 import Slick from "react-native-slick";
+import TextView from "../view/TextView";
 
 type Props = {
   data?: [];
 };
 
 const ImageSlideshow = ({data}: Props) => {
-  const SlideshowItem = data?.map((item) => {
+  const SlideshowItem = data?.map((item, index) => {
     return (
-      <View style={styles.item}>
-        <Text style={styles.text}>{item.title}</Text>
+      <View style={styles.item} key={`dot-${index}`}>
+        <TextView style={styles.title}>{item.title}</TextView>
+        <TextView style={styles.content}>{item.content}</TextView>
       </View>
     );
   });
