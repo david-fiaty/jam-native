@@ -3,28 +3,19 @@ import Slick from "react-native-slick";
 
 type Props = {
   data?: [];
-  type?: string;
 };
 
-const SlideshowView = ({ data, type }: Props) => {
+const ImageSlideshow = ({data}: Props) => {
   const SlideshowItem = data?.map((item) => {
-    if (type == "text") {
-      return (
-        <View style={styles.item}>
-          <Text style={styles.text}>{item.title}</Text>
-        </View>
-      );
-    } else if (type == "image") {
-      return (
-        <View style={styles.item}>
-          <Text style={styles.text}>{item.title}</Text>
-        </View>
-      );
-    }
+    return (
+      <View style={styles.item}>
+        <Text style={styles.text}>{item.title}</Text>
+      </View>
+    );
   });
 
   return (
-    <Slick style={styles.container} showsButtons={true}>
+    <Slick style={styles.container} >
       {SlideshowItem}
     </Slick>
   );
@@ -45,4 +36,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SlideshowView;
+export default ImageSlideshow;

@@ -6,7 +6,7 @@ import LogoView from '../view/LogoView';
 import BoxView from '../view/BoxView';
 import { Divider } from '@rneui/base';
 import WelcomeSlideshow from '../welcome-slideshow/WelcomeSlideshow';
-import SlideshowView from '../view/SlideshowView';
+import TextSlideshow from '../slideshow/TextSlideshow';
 
 const test = [
   {
@@ -28,7 +28,8 @@ const WelcomeScreen = () => {
     <BoxView direction="column" align="center" justify="center" style={styles.container}>
       <LogoView size={{ width: 110, height: 110 }} />    
       
-      <SlideshowView type="image" data={test} />
+
+      <TextSlideshow data={test} />
 
       <Divider />
       <WelcomeSlideshow />
