@@ -4,6 +4,7 @@ import DeviceManager from '@/classes/DeviceManager';
 
 type Props = BaseProps & {
   data: object,
+  ref?: object,
   numColumns?: number,
   scrollEnabled?: boolean,
   horizontal?: boolean,
@@ -12,10 +13,11 @@ type Props = BaseProps & {
   renderItem: () => JSX.Element, 
 };
 
-const ListView = ({data, numColumns, scrollEnabled, horizontal, contentContainerStyle, columnWrapperStyle, renderItem, style}: Props) => {
+const ListView = ({data, ref, numColumns, scrollEnabled, horizontal, contentContainerStyle, columnWrapperStyle, renderItem, style}: Props) => {
   return (
     <FlatList 
       data={data || []} 
+      ref={ref} 
       numColumns={numColumns || 1}
       scrollEnabled={scrollEnabled === false ? false : true}
       horizontal={horizontal === true ? horizontal : false}  
