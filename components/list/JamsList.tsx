@@ -96,19 +96,23 @@ const JamsList = () => {
             <BoxView direction="column" align="flex-start" style={styles.listItemDetails}>
               <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
                 <IconView name="arrow" size={14} theme="transparent" />
-                <TextView>{item?.location}</TextView>
+                <TextView>{i18n.t('Location')}: {item?.location}</TextView>
               </BoxView>
               <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
                 <IconView name="arrow" size={14} theme="transparent" />
-                <TextView>{item?.period?.start_datetime}</TextView>
+                <TextView>{i18n.t('Start')}: {item?.period?.start_datetime}</TextView>
               </BoxView>
               <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
                 <IconView name="arrow" size={14} theme="transparent" />
-                <TextView>{item?.sectors?.[0]?.name}</TextView>
+                <TextView>{i18n.t('End')}: {item?.period?.end_datetime}</TextView>
               </BoxView>
               <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
                 <IconView name="arrow" size={14} theme="transparent" />
-                <TextView>{item?.sectors?.[0]?.name}</TextView>
+                <TextView>{i18n.t('Industry')}: {item?.sectors?.[0]?.name}</TextView>
+              </BoxView>
+              <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
+                <IconView name="arrow" size={14} theme="transparent" />
+                <TextView>{i18n.t('Sector')}: {item?.sectors?.[0]?.name}</TextView>
               </BoxView>
             </BoxView>
           }
@@ -158,7 +162,7 @@ const styles = StyleSheet.create({
   },
   listItemDetail: {
     width: '100%',
-    gap: Layout.space.base/6,
+    gap: 0,
     backgroundColor: Colors.secondary,
     padding: Layout.space.base/6,
     borderRadius: Layout.radius.round,
