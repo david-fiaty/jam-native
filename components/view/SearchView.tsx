@@ -71,19 +71,11 @@ const SearchView = () => {
   useEffect(() => {
     (async () => {
       const listData = await DataManager.get(searchState.filter);
-
-      /*
-      const calls = await DataManager.get('calls');
-      const jammers = await DataManager.get('jammers');
-      const jams = await DataManager.get('jams');
-      const projects = await DataManager.get('projects');
-      const events = await DataManager.get('events');
-      const venues = await DataManager.get('venues');
-      */
-  
-      setTimeout(() => {
-        setData(listData);
-      }, Layout.animation.duration);
+      if (listData) {
+        setTimeout(() => {
+          setData(listData);
+        }, Layout.animation.duration);
+      }
     })();
   });
 
