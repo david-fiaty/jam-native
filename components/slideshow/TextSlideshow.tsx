@@ -2,6 +2,7 @@ import { StyleSheet, View } from "react-native";
 import Slick from "react-native-slick";
 import TextView from "../view/TextView";
 import { Layout } from "@/constants/Layout";
+import { Colors } from "@/constants/Colors";
 
 type Props = {
   data?: object;
@@ -18,7 +19,12 @@ const TextSlideshow = ({data}: Props) => {
   });
 
   return (
-    <Slick style={styles.container}>
+    <Slick 
+      style={styles.container} 
+      paginationStyle={styles.pagination}
+      dotStyle={styles.dot}
+      activeDotStyle={styles.activeDot}
+    >
       {SlideshowItem}
     </Slick>
   );
@@ -27,6 +33,7 @@ const TextSlideshow = ({data}: Props) => {
 const styles = StyleSheet.create({
   container: { 
     backgroundColor: 'green',
+    height: 250,
   },
   item: {
     flex: 1,
@@ -41,6 +48,17 @@ const styles = StyleSheet.create({
   },
   content: {
     textAlign: 'center',
+  },
+  pagination: {
+    bottom: 0, 
+    left: 0,
+    right: 0,
+  },
+  dot: {
+    backgroundColor: Colors.secondary,
+  },
+  activeDot: {
+    backgroundColor: Colors.primary,
   },
 });
 
