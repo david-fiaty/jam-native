@@ -4,10 +4,13 @@ import { Config } from '@/constants/Config';
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import ImageView from "../view/ImageView";
+import DeviceManager from '@/classes/DeviceManager';
 
 type Props = {
   data?: [] | object;
 };
+
+const width = DeviceManager.window.width - Layout.space.base*2;
 
 const ImageSlideshow = ({data}: Props) => {
   const SlideshowItem = data?.map((item: object, index: number) => {
@@ -17,8 +20,8 @@ const ImageSlideshow = ({data}: Props) => {
           source={{uri: Config.imageUrl + item?.url}} 
           resizeMode="cover" 
           //style={styles.listItemImage}
-          //width={width}
-          //height={346}
+          width={width}
+          height={346}
         />
       </View>
     );
@@ -39,7 +42,7 @@ const ImageSlideshow = ({data}: Props) => {
 
 const styles = StyleSheet.create({
   container: { 
-    height: 122,
+    //height: 122,
     marginTop: Layout.space.base,
     marginBottom: Layout.space.base*2,
   },

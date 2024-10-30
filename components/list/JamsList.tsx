@@ -11,9 +11,9 @@ import IconView from '../view/IconView';
 import CollapsibleView from '../view/CollapsibleView';
 import SpinnerView from '../view/SpinnerView';
 import JamStatusButton from '../button/JamStatusButton';
-import Slideshow from '../slideshow/Slideshow';
 import ListView from '../view/ListView';
 import DataManager from '@/classes/DataManager';
+import ImageSlideshow from '../slideshow/ImageSlideshow';
 
 const JamsList = () => {  
   const dispatch = useDispatch();
@@ -56,7 +56,7 @@ const JamsList = () => {
       </BoxView>
       
       {/* Item images */}
-      <Slideshow dataType="image" data={item.medias} />
+      <ImageSlideshow data={item.medias} />
 
       {/* Item toolbar */}
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItemToolbar}>
