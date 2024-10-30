@@ -37,9 +37,6 @@ const WelcomeScreen = () => {
       <TextSlideshow data={textSlideshowData} />
 
       <Divider />
-      <WelcomeSlideshow />
-
-      <Divider />
       <LoginSignupButton />
       
       <Divider />
