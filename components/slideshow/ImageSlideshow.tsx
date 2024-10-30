@@ -42,16 +42,13 @@ const ImageSlideshow = ({data}: Props) => {
 
 const styles = StyleSheet.create({
   container: { 
-    //height: 122,
-    marginTop: Layout.space.base,
-    marginBottom: Layout.space.base*2,
+    height: 346,
+    backgroundColor: Colors.secondary,
   },
   item: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    gap: Layout.space.base,
-    padding: Layout.space.base*2,
   },
   title: {
     textTransform: 'uppercase',
