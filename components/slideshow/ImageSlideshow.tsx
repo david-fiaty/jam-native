@@ -43,7 +43,7 @@ const ImageSlideshow = ({data}: Props) => {
 const styles = StyleSheet.create({
   container: { 
     height: 346,
-    backgroundColor: 'green',
+    backgroundColor: Colors.secondary,
   },
   item: {
     flex: 1,
