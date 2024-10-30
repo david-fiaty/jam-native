@@ -12,6 +12,7 @@ import { Colors } from "@/constants/Colors";
 import ListView from "./ListView";
 import DataManager from "@/classes/DataManager";
 import { Config } from '@/constants/Config';
+import SpinnerView from './SpinnerView';
 
 const tabs = [
   {
@@ -71,7 +72,7 @@ const SearchView = () => {
   useEffect(() => {
     (async () => {
       const listData = await DataManager.get(searchState.filter);
-      
+
       if (listData) {
         setTimeout(() => {
           setData(listData);
@@ -79,6 +80,8 @@ const SearchView = () => {
       }
     })();
   });
+
+  if (!data) return <SpinnerView />
 
   return (
     <BoxView
