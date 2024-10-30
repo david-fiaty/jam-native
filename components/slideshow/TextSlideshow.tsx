@@ -3,14 +3,13 @@ import Slick from "react-native-slick";
 import TextView from "../view/TextView";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
-import { GlobalStyles } from "@/constants/GlobalStyles";
 
 type Props = {
-  data?: object;
+  data?: [];
 };
 
 const TextSlideshow = ({data}: Props) => {
-  const SlideshowItem = data?.map((item, index) => {
+  const SlideshowItem = data?.map((item: object, index: number) => {
     return (
       <View style={styles.item} key={`dot-${index}`}>
         <TextView style={styles.title}>{item.title}</TextView>
@@ -20,21 +19,25 @@ const TextSlideshow = ({data}: Props) => {
   });
 
   return (
-    <Slick 
-      style={styles.container} 
-      paginationStyle={styles.pagination}
-      dotStyle={styles.dot}
-      activeDotStyle={styles.activeDot}
-    >
-      {SlideshowItem}
-    </Slick>
+    <View style={styles.container}>
+      <Slick 
+        style={styles.slideshow} 
+        paginationStyle={styles.pagination}
+        dotStyle={styles.dot}
+        activeDotStyle={styles.activeDot}
+      >
+        {SlideshowItem}
+      </Slick>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: { 
     backgroundColor: 'green',
-    //height: 122,
+    height: 122,
+  },
+  slideshow: {
   },
   item: {
     flex: 1,
@@ -55,7 +58,7 @@ const styles = StyleSheet.create({
     //top: 122, 
     left: 0,
     right: 0,
-    height: GlobalStyles.space.base,
+    height: Layout.space.base,
   },
   dot: {
     backgroundColor: Colors.secondary,
