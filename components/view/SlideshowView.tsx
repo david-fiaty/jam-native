@@ -4,34 +4,25 @@ import Slick from 'react-native-slick';
 
 type Props = {
   data?: [],
+  type?: string,
 };
 
-
-const test = [
-  {
-    id: 1,
-    title: 'A',
-  },
-  {
-    id: 2,
-    title: 'B',
-  },
-  {
-    id: 3,
-    title: 'C',
-  },
-];
-
-const SlideshowView = ({data}: Props) => {
-
-    data = test;
-
+const SlideshowView = ({data, type}: Props) => {
     const SlideshowItem = data?.map(item => {
-      return (
-        <View style={styles.slide1}>
-          <Text style={styles.text}>{item.title}</Text>
-        </View>
-      );
+      if (type == 'text') {
+        return (
+          <View style={styles.slide1}>
+            <Text style={styles.text}>{item.title}</Text>
+          </View>
+        );
+      }
+      else if (type == 'image') {
+        return (
+          <View style={styles.slide1}>
+            <Text style={styles.text}>{item.title}</Text>
+          </View>
+        );
+      }
     });
 
     return (
