@@ -1,25 +1,42 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Slick from 'react-native-slick';
 
+
 type Props = {
   data?: [],
 };
 
+
+const test = [
+  {
+    id: 1,
+    title: 'A',
+  },
+  {
+    id: 2,
+    title: 'B',
+  },
+  {
+    id: 3,
+    title: 'C',
+  },
+];
+
 const SlideshowView = ({data}: Props) => {
 
-    const SlideshowItem = (<></>);
+    data = test;
+
+    const SlideshowItem = data?.map(item => {
+      return (
+        <View style={styles.slide1}>
+          <Text style={styles.text}>{item.title}</Text>
+        </View>
+      );
+    });
 
     return (
       <Slick style={styles.wrapper} showsButtons={true}>
-        <View style={styles.slide1}>
-          <Text style={styles.text}>Hello Slick</Text>
-        </View>
-        <View style={styles.slide2}>
-          <Text style={styles.text}>Beautiful</Text>
-        </View>
-        <View style={styles.slide3}>
-          <Text style={styles.text}>And simple</Text>
-        </View>
+        {SlideshowItem}
       </Slick>
     );
 };
