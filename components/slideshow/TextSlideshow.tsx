@@ -34,7 +34,8 @@ const TextSlideshow = ({data}: Props) => {
 const styles = StyleSheet.create({
   container: { 
     height: 122,
-    marginVertical: Layout.space.base*2,
+    marginTop: Layout.space.base,
+    marginBottom: Layout.space.base*2,
   },
   item: {
     flex: 1,
