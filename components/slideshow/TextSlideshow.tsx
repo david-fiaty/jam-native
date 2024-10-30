@@ -3,15 +3,16 @@ import Slick from "react-native-slick";
 import TextView from "../view/TextView";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
+import { GlobalStyles } from "@/constants/GlobalStyles";
 
 type Props = {
   data?: object;
 };
 
 const TextSlideshow = ({data}: Props) => {
-  const SlideshowItem = data?.map((item) => {
+  const SlideshowItem = data?.map((item, index) => {
     return (
-      <View style={styles.item}>
+      <View style={styles.item} key={`dot-${index}`}>
         <TextView style={styles.title}>{item.title}</TextView>
         <TextView style={styles.content}>{item.content}</TextView>
       </View>
@@ -33,26 +34,28 @@ const TextSlideshow = ({data}: Props) => {
 const styles = StyleSheet.create({
   container: { 
     backgroundColor: 'green',
-    height: 200,
+    //height: 122,
   },
   item: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: "#9DD6EB",
+    justifyContent: 'center',
+    backgroundColor: '#9DD6EB',
     gap: Layout.space.base,
-    paddingHorizontal: Layout.space.base*2,
+    padding: Layout.space.base*2,
   },
   title: {
     textTransform: 'uppercase',
   },
   content: {
     textAlign: 'center',
+    backgroundColor: 'yellow',
   },
   pagination: {
-    top: 40, 
+    //top: 122, 
     left: 0,
     right: 0,
+    height: GlobalStyles.space.base,
   },
   dot: {
     backgroundColor: Colors.secondary,
