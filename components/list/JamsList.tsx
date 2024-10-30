@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
+import moment from 'moment';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
@@ -100,11 +101,11 @@ const JamsList = () => {
               </BoxView>
               <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
                 <IconView name="arrow" size={14} theme="transparent" />
-                <TextView>{i18n.t('Start')}: {item?.period?.start_datetime}</TextView>
+                <TextView>{i18n.t('Start')}: {moment(item?.period?.start_datetime).format('MM/DD/YYYY')}</TextView>
               </BoxView>
               <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
                 <IconView name="arrow" size={14} theme="transparent" />
-                <TextView>{i18n.t('End')}: {item?.period?.end_datetime}</TextView>
+                <TextView>{i18n.t('End')}: {moment(item?.period?.end_datetime).format('MM/DD/YYYY')}</TextView>
               </BoxView>
               <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
                 <IconView name="arrow" size={14} theme="transparent" />
