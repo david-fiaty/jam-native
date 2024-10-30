@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   pagination: {
-    bottom: 0, 
+    bottom: -Layout.space.base, 
     left: 0,
     right: 0,
     height: Layout.space.base,
