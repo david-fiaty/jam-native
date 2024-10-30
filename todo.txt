@@ -49,8 +49,12 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - How to add project?
 - Notifications count: show total or less than total?
 
-# Todo
-- Make <JamLogo> size optional 
+# API remarks
+- Jams list sectors field:
+  * should not have language in the payload
+  * language should be a request parameter
+
+
 
 Email verification
 Twilio => SMS
