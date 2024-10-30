@@ -29,9 +29,10 @@ const HeaderNavigation = () => {
             <IconView name="menu" theme="secondary" onPress={() => dispatch(setActiveScreen({
               name: 'SettingsMenu',
             }))} />
-            <IconView label="15+" theme="secondary" size={13} onPress={() => dispatch(setActiveScreen({
+            <IconView label="15+" theme="secondary" size={11.5} onPress={() => dispatch(setActiveScreen({
               name: 'NotificationsMenu',
             }))} />
+            
             <SearchField />
           </BoxView>
         </BoxView>

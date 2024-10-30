@@ -33,7 +33,7 @@ const IconView = ({name, size, label, theme, radius = 'circle', iconStyle, conta
   // Text icon
   const textIcon = (
     <View style={styles.containerStyle}>
-      <TextView style={themeIconStyle}>
+      <TextView style={[themeIconStyle, {fontSize: size}]}>
         {label}
       </TextView>
     </View>

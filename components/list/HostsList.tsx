@@ -39,7 +39,7 @@ const HostsList = () => {
           />
         }
 
-        {!data.length && 
+        {!data?.length && 
           <TextView>{i18n.t('There are no hosts available for this Jam.')}</TextView>
         }
       </View>
