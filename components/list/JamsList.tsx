@@ -23,6 +23,8 @@ const JamsList = () => {
 
   const scrollToItem = (id: number) => {
     const index = data.findIndex(item => item.id === id);
+
+    console.log(index);
     if (index !== -1 && listViewRef.current) {
       listViewRef.current.scrollToIndex({ animated: true, index });
     }
@@ -34,14 +36,16 @@ const JamsList = () => {
 
       setTimeout(() => {
         setData(data);
+        scrollToItem(24);
       }, Layout.animation.duration);
 
 
-      scrollToItem(24);
     })();
   });
 
   if (!data) return <SpinnerView />;
+
+  //scrollToItem(24);
 
   const renderItem = (item, index) => (
     <View style={styles.listItem}>
@@ -137,6 +141,8 @@ const JamsList = () => {
   return (
     <BoxView direction="column" style={Layout.screenContent}>
       <ListView
+        //ref={listViewRef}
+        initialScrollIndex={7}
         data={data} 
         contentContainerStyle={Layout.listContainer}
         renderItem={({item, index}) => renderItem(item, index)}
