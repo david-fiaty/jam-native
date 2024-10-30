@@ -6,20 +6,26 @@ import LogoView from '../view/LogoView';
 import BoxView from '../view/BoxView';
 import { Divider } from '@rneui/base';
 import WelcomeSlideshow from '../welcome-slideshow/WelcomeSlideshow';
-import SlideshowView from '../view/SlideshowView';
+import TextSlideshow from '../slideshow/TextSlideshow';
 
-const test = [
+const textSlideshowData = [
   {
     id: 1,
-    title: 'A',
+    title: 'Create better, together',
+    content: 'Welcome to the Jam app. Jam is a place to explore and experience artists and creatives from different backgrounds in West Africa.',
+    link: 'aaa link',
   },
   {
     id: 2,
-    title: 'B',
+    title: 'Everything you need',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    link: 'bbb link',
   },
   {
     id: 3,
-    title: 'C',
+    title: 'The place to excel',
+    content: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.',
+    link: 'ccc link',
   },
 ];
 
@@ -27,11 +33,8 @@ const WelcomeScreen = () => {
   return (
     <BoxView direction="column" align="center" justify="center" style={styles.container}>
       <LogoView size={{ width: 110, height: 110 }} />    
-      
-      <SlideshowView type="image" data={test} />
-
-      <Divider />
-      <WelcomeSlideshow />
+    
+      <TextSlideshow data={textSlideshowData} />
 
       <Divider />
       <LoginSignupButton />
