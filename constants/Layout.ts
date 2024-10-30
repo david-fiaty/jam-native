@@ -15,7 +15,7 @@ const radius = {
 
 const iconSize = {
   small: 11,
-  base: 20,
+  base: 16,
   big: 44,
 };
 
