@@ -114,7 +114,6 @@ const SearchView = () => {
         data={tabs}
         horizontal={true}
         contentContainerStyle={styles.tabContainer}
-        keyExtractor={(item) => item.id}
         renderItem={({item, index}) => renderTab(item, index)}
       />
 
