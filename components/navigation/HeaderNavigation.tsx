@@ -8,16 +8,12 @@ import BoxView from "../view/BoxView";
 import LogoView from '../view/LogoView';
 import SearchField from '../field/SearchField';
 import ScreenManager from "@/classes/ScreenManager";
+import UserManager from '@/classes/UserManager';
 
 const HeaderNavigation = () => {
   const route = useRoute();
   const dispatch = useDispatch();
-  const userState = useSelector((state) => state.user);
   const activeScreen = ScreenManager.getActiveScreen();
-
-
-  console.log('--000----');
-  console.log(userState);
 
   return (
     <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
@@ -28,7 +24,7 @@ const HeaderNavigation = () => {
           <LogoView size={Layout.logo} />
         </TouchableOpacity>
       </BoxView>
-      { (route.name == 'main' || activeScreen?.headerNavigation) &&
+      { (route.name == 'main' || activeScreen?.headerNavigation) && UserManager.isLoggedIn() === true &&
         <BoxView direction="row" align="center" justify="space-between">
           <BoxView direction="row" align="center" style={Layout.headerRight}> 
             <IconView name="menu" theme="secondary" onPress={() => dispatch(setActiveScreen({
