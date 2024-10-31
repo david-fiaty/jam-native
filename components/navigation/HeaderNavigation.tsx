@@ -24,7 +24,7 @@ const HeaderNavigation = () => {
           <LogoView size={Layout.logo} />
         </TouchableOpacity>
       </BoxView>
-      { (route.name == 'main' || activeScreen?.headerNavigation) && UserManager.isLoggedIn() === true &&
+      { (route.name == 'main' || activeScreen?.headerNavigation) &&
         <BoxView direction="row" align="center" justify="space-between">
           <BoxView direction="row" align="center" style={Layout.headerRight}> 
             <IconView name="menu" theme="secondary" onPress={() => dispatch(setActiveScreen({
@@ -34,7 +34,7 @@ const HeaderNavigation = () => {
               name: 'NotificationsMenu',
             }))} />
             
-            <SearchField />
+            { UserManager.isLoggedIn() === true && <SearchField /> }
             
           </BoxView>
         </BoxView>
