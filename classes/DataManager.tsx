@@ -30,10 +30,9 @@ class DataManager {
   }
 
   async post(key: keyof typeof ApiEndpoints, data: object, options?: object) {
-    console.log(data);
-    //const response = await ApiClient.post(key, data);
+    let response = await ApiClient.post(key, data);
 
-    //console.log(response);
+    console.log(response);
   }
 
   async getData(key: keyof typeof ApiEndpoints) {
