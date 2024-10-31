@@ -14,7 +14,7 @@ const HeaderNavigation = () => {
   const route = useRoute();
   const dispatch = useDispatch();
   const activeScreen = ScreenManager.getActiveScreen();
-  const isLoggedIn = UserManager.isLoggedIn() === true;
+  const isLoggedIn = UserManager.isLoggedIn();
 
   return (
     <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
@@ -35,7 +35,7 @@ const HeaderNavigation = () => {
               }))} />
             }
 
-            { isLoggedIn === true &&
+            { isLoggedIn &&
               <IconView label="15+" theme="secondary" size={11.5} onPress={() => dispatch(setActiveScreen({
                 name: 'NotificationsMenu',
               }))} />
