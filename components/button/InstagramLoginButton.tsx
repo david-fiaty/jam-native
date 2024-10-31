@@ -7,9 +7,9 @@ import { Layout } from '@/constants/Layout';
 import TextView from '../view/TextView';
 import ImageView from '../view/ImageView';
 
-const source = require('@/assets/images/google-logo.png'); 
+const source = require('@/assets/images/instagram-logo.png'); 
 
-const GoogleLoginButton = () => {
+const InstagramLoginButton = () => {
   return (
     <BoxView direction="row" align="center" justify="flex-start" style={styles.container}>
       <ImageView 
@@ -18,7 +18,7 @@ const GoogleLoginButton = () => {
         height={32}
         resizeMode="cover"
       />
-      <TextView>{i18n.t('Continue with Google')}</TextView>
+      <TextView>{i18n.t('Continue with Instagram')}</TextView>
     </BoxView>
   );
 };
@@ -33,4 +33,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GoogleLoginButton;
+export default InstagramLoginButton;
