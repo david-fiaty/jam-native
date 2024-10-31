@@ -54,6 +54,8 @@ const styles = StyleSheet.create({
   },
   image: {
     borderRadius: Layout.space.base,
+    width: 96.7,
+    height: 96.7,
   },
 });
 
