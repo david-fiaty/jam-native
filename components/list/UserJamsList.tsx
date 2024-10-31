@@ -7,8 +7,11 @@ import ScreenManager from '@/classes/ScreenManager';
 import ListView from '../view/ListView';
 import DataManager from '@/classes/DataManager';
 
-const UserJamsList = () => {  
-  const data = DataManager.get('jams');
+type Props = {
+  data?: object,
+};
+
+const UserJamsList = ({data} : Props) => {  
   const numColumns = 3;
 
   const renderItem = (item, index) => (
@@ -54,8 +57,8 @@ const styles = StyleSheet.create({
   },
   image: {
     borderRadius: Layout.space.base,
-    //width: 96.7,
-    //height: 96.7,
+    width: 96.7,
+    height: 96.7,
   },
 });
 
