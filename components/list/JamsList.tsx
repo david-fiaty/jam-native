@@ -88,7 +88,6 @@ const JamsList = () => {
             name: 'ShareJamView',
             entityId: item.id, 
           }))} />
-
         </BoxView> 
       </BoxView>
 
