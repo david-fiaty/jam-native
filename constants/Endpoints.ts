@@ -1,10 +1,10 @@
 const Endpoints = {
   jams: {
-    url: 'https://dev.jammm.app/backend/api/jams',
+    url: 'https://dev.jammm.app/backend/api/jams/',
     method: 'GET',
   },
   projects: {
-    url: 'https://dev.jammm.app/backend/api/projects',
+    url: 'https://dev.jammm.app/backend/api/projects/',
     method: 'GET',
   },
   jammers: {},
