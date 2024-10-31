@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'expo-router';
@@ -29,13 +29,17 @@ const LoginScreen = () => {
     // Todo - Connect username and password
     //let response = await UserManager.login(username, password);
     let response = await UserManager.login('mitsiomotu@yopmail.com', 'Password1234');
-    
+
     if (response?.tokens?.access_token?.length) {
-      dispatch(setAccessToken(response.tokens.access_token));
+      dispatch(setAccessToken(JSON.stringify(response.tokens)));
       dispatch(setIsLoggedIn(true));
+
+      router.push('/main');
     }
-  }
-  
+  }  
+
+  console.log(userState);
+
   return (
     <BoxView direction="column" align="center" justify="center" style={Layout.screenContent}>
       <LogoView size={{ width: 80, height: 80 }} />    
