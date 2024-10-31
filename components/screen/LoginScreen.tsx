@@ -34,7 +34,7 @@ const LoginScreen = () => {
       dispatch(setAccessToken(JSON.stringify(response.tokens)));
       dispatch(setIsLoggedIn(true));
 
-      router.push('/main');
+      router.replace('/main');
     }
   }  
 
@@ -64,7 +64,7 @@ const LoginScreen = () => {
 
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
         <TextView>{i18n.t('New user? Create an account')}</TextView>
-        <SkipButton onPress={() => router.replace('/main')} />
+        <SkipButton onPress={() => router.push('/main')} />
       </BoxView>
 
       <Divider /><Divider />
