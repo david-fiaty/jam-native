@@ -11,14 +11,26 @@ class ApiClient {
     }
   }
 
-  async sendRequest(endpoint: object) {
+  async post(key: keyof typeof Endpoints, data: object) {
+    try {
+      return await this.sendRequest(Endpoints[key], data);
+    } 
+    catch (error) {
+      console.log(error);
+    }
+  }
+
+  async sendRequest(endpoint: object, data?: object ) {
     if (endpoint?.url && endpoint?.method) {
       try {
+        // Todo - Enable domain inclusion
+        //let url = Config.apiUrl + '/' + endpoint.url + '/';
+        let url = endpoint.url;
 
-        let url = Config.apiUrl + '/' + endpoint.url + '/';
         let response = await fetch(url, {
           method: endpoint.method,
           headers: this.getHeaders(),
+          body: JSON.stringify(data || {}),
         });
 
         return this.processResponse(await response.json());
