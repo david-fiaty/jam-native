@@ -34,8 +34,8 @@ class DataManager {
   }
 
   async getData(key: keyof typeof ApiEndpoints) {
-    const data = await ApiClient.get(key);
-    let result = [];
+    const data: object = await ApiClient.get(key);
+    let result: object = [];
 
     if (data) {
       data.forEach(item => {
