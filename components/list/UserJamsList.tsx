@@ -1,5 +1,6 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Layout } from '@/constants/Layout';
+import { Config } from '@/constants/Config';
 import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 import ImageView from '../view/ImageView';
@@ -10,14 +11,17 @@ type Props = {
   data?: object,
 };
 
+
 const UserJamsList = ({data} : Props) => {  
   const numColumns = 3;
+
+  console.log(data);
 
   const renderItem = (item, index) => (
     <TouchableOpacity>
       <View style={styles.item}>
         <ImageView 
-          source={item.image} 
+          source={{uri: Config.imageUrl + item?.url}} 
           width={96.7}
           height={96.7}
           resizeMode="cover"

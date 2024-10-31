@@ -19,16 +19,19 @@ import DataManager from '@/classes/DataManager';
 const ProfileForm = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-
-  let userJamsData = {};
-  let userProjectsData = {};
+  const [userJamsData, setUserJamsData] = useState({});
+  const [userProjectsData, setUserProjectsData] = useState({});
 
   useEffect(() => {
     (async () => {
-      userJamsData = await DataManager.get('jams');
-      userProjectsData = await DataManager.get('projects');
+      const userJamsData = await DataManager.get('jams');
+      const userProjectsData = await DataManager.get('projects');
 
-      setTimeout(() => setIsLoaded(true), Layout.animation.duration);
+      setTimeout(() => {
+        setUserJamsData(userJamsData);
+        setUserProjectsData(userProjectsData);
+        setIsLoaded(true);
+      }, Layout.animation.duration);
     })();
   });
 
@@ -58,7 +61,7 @@ const ProfileForm = () => {
       <UserProjectsList data={userProjectsData}  />
 
       <DividerView />
-      <UserJamsList />
+      <UserJamsList data={userJamsData} />
     </BoxView>
   );
 };

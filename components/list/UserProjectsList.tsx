@@ -1,11 +1,11 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Layout } from '@/constants/Layout';
+import { Config } from '@/constants/Config';
 import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 import ImageView from '../view/ImageView';
 import ScreenManager from '@/classes/ScreenManager';
 import ListView from '../view/ListView';
-
 
 type Props = {
   data?: object,
@@ -18,7 +18,7 @@ const UserProjectsList = ({data}: Props) => {
     <TouchableOpacity>
       <View style={styles.item}>
         <ImageView 
-          source={item.image} 
+          source={{uri: Config.imageUrl + item?.url}} 
           width={96.7}
           height={96.7}
           resizeMode="cover"

@@ -19,7 +19,6 @@ const ImageSlideshow = ({data}: Props) => {
         <ImageView 
           source={{uri: Config.imageUrl + item?.url}} 
           resizeMode="cover" 
-          //style={styles.listItemImage}
           width={width}
           height={346}
         />
