@@ -27,7 +27,7 @@ const JamsList = () => {
   useEffect(() => {
     (async () => {
       const data = await DataManager.get('jams');
-      setTimeout(() => setIsLoaded(true), Layout.animation.duration);
+      setTimeout(() => setData(data), Layout.animation.duration);
     })();
   });
 
