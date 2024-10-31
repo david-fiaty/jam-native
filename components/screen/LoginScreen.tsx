@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'expo-router';
@@ -33,9 +33,13 @@ const LoginScreen = () => {
     if (response?.tokens?.access_token?.length) {
       dispatch(setAccessToken(response.tokens));
       dispatch(setIsLoggedIn(true));
+
+      router.push('/main');
     }
   }
   
+
+  console.log(userState);
   return (
     <BoxView direction="column" align="center" justify="center" style={Layout.screenContent}>
       <LogoView size={{ width: 80, height: 80 }} />    
