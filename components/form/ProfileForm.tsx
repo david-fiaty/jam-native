@@ -24,8 +24,8 @@ const ProfileForm = () => {
 
   useEffect(() => {
     (async () => {
-      const userJamsData = await DataManager.get('jams');
-      const userProjectsData = await DataManager.get('projects');
+      let userJamsData = await DataManager.get('jams');
+      let userProjectsData = await DataManager.get('projects');
 
       setTimeout(() => {
         setUserJamsData(userJamsData);
