@@ -1,5 +1,5 @@
-import Store from '@/redux/Store';
-import { setIsLoggedIn, setAccessToken } from '@/redux/slices/UserSlice';
+import { useSelector } from 'react-redux';
+import { setIsLoggedIn } from '@/redux/slices/UserSlice';
 import DataManager from './DataManager';
 
 class UserManager {
@@ -10,6 +10,10 @@ class UserManager {
     });
     
     return response;
+  }
+
+  isLoggedIn() {
+    return (useSelector((state) => state.user)).isLoggedIn === true;
   }
 };
 

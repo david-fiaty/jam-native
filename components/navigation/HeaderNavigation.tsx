@@ -1,5 +1,5 @@
 import { TouchableOpacity } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useRoute } from '@react-navigation/native';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from '@/constants/Layout';
@@ -8,11 +8,13 @@ import BoxView from "../view/BoxView";
 import LogoView from '../view/LogoView';
 import SearchField from '../field/SearchField';
 import ScreenManager from "@/classes/ScreenManager";
+import UserManager from '@/classes/UserManager';
 
 const HeaderNavigation = () => {
   const route = useRoute();
   const dispatch = useDispatch();
   const activeScreen = ScreenManager.getActiveScreen();
+  const isLoggedIn = UserManager.isLoggedIn() === true;
 
   return (
     <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
@@ -26,13 +28,19 @@ const HeaderNavigation = () => {
       { (route.name == 'main' || activeScreen?.headerNavigation) &&
         <BoxView direction="row" align="center" justify="space-between">
           <BoxView direction="row" align="center" style={Layout.headerRight}> 
-            <IconView name="menu" theme="secondary" onPress={() => dispatch(setActiveScreen({
-              name: 'SettingsMenu',
-            }))} />
-            <IconView label="15+" theme="secondary" size={11.5} onPress={() => dispatch(setActiveScreen({
-              name: 'NotificationsMenu',
-            }))} />
-            
+
+            { isLoggedIn &&
+              <IconView name="menu" theme="secondary" onPress={() => dispatch(setActiveScreen({
+                name: 'SettingsMenu',
+              }))} />
+            }
+
+            { isLoggedIn === true &&
+              <IconView label="15+" theme="secondary" size={11.5} onPress={() => dispatch(setActiveScreen({
+                name: 'NotificationsMenu',
+              }))} />
+            }
+              
             <SearchField />
             
           </BoxView>
