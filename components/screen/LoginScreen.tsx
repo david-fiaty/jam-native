@@ -1,16 +1,15 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { Divider } from '@rneui/base';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
 import LogoView from '../view/LogoView';
 import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
-
 import InputTextField from '../field/InputTextField';
 import ContinueButton from '../button/ContinueButton';
 import SkipButton from '../button/SkipButton';
 import GoogleLoginButton from '../button/GoogleLoginButton';
-import { Divider } from '@rneui/base';
 import FacebookLoginButton from '../button/FacebookLoginButton';
 import InstagramLoginButton from '../button/InstagramLoginButton';
 
@@ -24,6 +23,7 @@ const LoginScreen = () => {
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Enter your email address')} 
+        onChangeText={(text) => console.log(text) }
       />
       <ContinueButton onPress={() => console.log('clicked') } />
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
