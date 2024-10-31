@@ -31,7 +31,7 @@ const LoginScreen = () => {
     let response = await UserManager.login('mitsiomotu@yopmail.com', 'Password1234');
 
     if (response?.tokens?.access_token?.length) {
-      dispatch(setAccessToken(response.tokens));
+      dispatch(setAccessToken(JSON.stringify(response.tokens)));
       dispatch(setIsLoggedIn(true));
 
       router.push('/main');
