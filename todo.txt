@@ -57,7 +57,8 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Jams endpoint: 
   * post a jam and get a jam should not have same URL, even if method is different
   * /api/save-jams should be /api/jam/save
-  
+  * is unlike jam url correct? it's currently the same as like-jam
+
 
 
 Email verification
