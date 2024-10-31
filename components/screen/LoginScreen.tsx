@@ -14,14 +14,12 @@ import SkipButton from '../button/SkipButton';
 import GoogleLoginButton from '../button/GoogleLoginButton';
 import FacebookLoginButton from '../button/FacebookLoginButton';
 import InstagramLoginButton from '../button/InstagramLoginButton';
+import UserManager from '@/classes/UserManager';
 
 const LoginScreen = () => {
   const router = useRouter();
-  const [emailValue, setEmailValue] = useState('');
-  const [passwordValue, setPasswordValue] = useState('');
-
-  console.log(emailValue);
-  console.log(passwordValue);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <BoxView direction="column" align="center" justify="center" style={Layout.screenContent}>
@@ -32,7 +30,7 @@ const LoginScreen = () => {
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Email address')} 
-        onChangeText={(text) => setEmailValue(text)}
+        onChangeText={(text) => setEmail(text)}
       />
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
@@ -40,9 +38,11 @@ const LoginScreen = () => {
         secureTextEntry={true} 
         autoCapitalize="none"
         spellCheck={false}
-        onChangeText={(text) => setPasswordValue(text)}
+        onChangeText={(text) => setPassword(text)}
       />
-      <ContinueButton onPress={() => console.log('clicked') } />
+
+      <ContinueButton onPress={() => UserManager.login(email, password) } />
+
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
         <TextView>{i18n.t('New user? Create an account')}</TextView>
         <SkipButton onPress={() => router.push('/main')} />
