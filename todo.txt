@@ -59,6 +59,9 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
   * No endpoints for events, jammers, calls, venues
   * What is refresh_token in login response payload
 
+# Todo 
+- Implement image cache : https://github.com/echowaves/expo-cached-image
+
 
 Email verification
 Twilio => SMS
