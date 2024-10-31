@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
@@ -15,10 +16,13 @@ import JamStatusButton from '../button/JamStatusButton';
 import ListView from '../view/ListView';
 import DataManager from '@/classes/DataManager';
 import ImageSlideshow from '../slideshow/ImageSlideshow';
+import UserManager from '@/classes/UserManager';
 
 const JamsList = () => {  
   const dispatch = useDispatch();
+  const router = useRouter();
   const [data, setData] = useState([]);
+  const isLoggedIn = UserManager.isLoggedIn();
 
   useEffect(() => {
     (async () => {
@@ -37,10 +41,10 @@ const JamsList = () => {
       {/* Item header */}
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItemHeader}>
         <BoxView>
-          <TouchableOpacity onPress={() => dispatch(setActiveScreen({
+          <TouchableOpacity onPress={() => isLoggedIn ? dispatch(setActiveScreen({
             name: 'HostsList',
             entityId: item.id, 
-          }))}>
+          })) : router.push('/login')}>
             <TextView>
               @{i18n.t('host')} +{parseInt(item?.hosts?.length)}
             </TextView>
@@ -50,10 +54,10 @@ const JamsList = () => {
           <JamStatusButton active={item?.active} />
         </BoxView>
         <BoxView>
-          <IconView name="actions" theme="clear" onPress={() => dispatch(setActiveScreen({
+          <IconView name="actions" theme="clear" onPress={() => isLoggedIn ? dispatch(setActiveScreen({
             name: 'MoreJamView',
             entityId: item?.id, 
-          }))} />
+          })) : router.push('/login') } />
         </BoxView> 
       </BoxView>
       
@@ -62,25 +66,31 @@ const JamsList = () => {
 
       {/* Item toolbar */}
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItemToolbar}>
+
         {/* Jammers button */}
-        <BoxView direction="row" align="center" onPress={() => dispatch(setActiveScreen({
+        <BoxView direction="row" align="center" onPress={() => isLoggedIn ? dispatch(setActiveScreen({
           name: 'JammersList',
           entityId: item.id, 
-        }))}>
+        })) : router.push('/login') }>
+
           <IconView name="users" theme="tertiary" />
           <TextView>{parseInt(item?.jammers?.length)} {i18n.t('jammers')}</TextView>
+
         </BoxView>
       
-        {/* Save button */}
         <BoxView direction="row" align="center">
-          <IconView name="save" theme="tertiary" onPress={() => dispatch(setActiveScreen({
+          {/* Save button */}
+          <IconView name="save" theme="tertiary" onPress={() => isLoggedIn ? dispatch(setActiveScreen({
             name: 'SaveJamView',
             entityId: item.id, 
-          }))} />
+          })) : router.push('/login')} />
+
+          {/* Share button */}
           <IconView name="share" theme="tertiary" onPress={() => dispatch(setActiveScreen({
             name: 'ShareJamView',
             entityId: item.id, 
           }))} />
+
         </BoxView> 
       </BoxView>
 
