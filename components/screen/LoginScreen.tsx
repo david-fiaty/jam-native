@@ -34,7 +34,7 @@ const LoginScreen = () => {
       dispatch(setAccessToken(JSON.stringify(response.tokens)));
       dispatch(setIsLoggedIn(true));
 
-      router.push('/main');
+      router.replace('/main');
     }
   }  
 
