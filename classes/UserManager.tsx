@@ -12,8 +12,9 @@ class UserManager {
     return response;
   }
 
-  isLoggedIn () {
+  isLoggedIn() {
     const userState = useSelector((state) => state.user);
+    
     return userState.isLoggedIn === true;
   }
 };
