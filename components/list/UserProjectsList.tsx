@@ -31,14 +31,20 @@ const UserProjectsList = ({data}: Props) => {
   return (
     <View style={styles.container}>
       <TextView style={styles.title}>{i18n.t('Your Projects')}</TextView>
-      <ListView
-        data={data} 
-        numColumns={numColumns}
-        contentContainerStyle={{gap: Layout.space.base}}
-        columnWrapperStyle={{gap: Layout.space.base}}
-        scrollEnabled={false}
-        renderItem={({item, index}) => renderItem(item, index)}   
-      />
+      { data?.length && 
+        <ListView
+          data={data} 
+          numColumns={numColumns}
+          contentContainerStyle={{gap: Layout.space.base}}
+          columnWrapperStyle={{gap: Layout.space.base}}
+          scrollEnabled={false}
+          renderItem={({item, index}) => renderItem(item, index)}   
+        />
+      }
+
+      {!data?.length && 
+        <TextView>{i18n.t('Create a project')}</TextView>
+      } 
     </View>
   );
 }
