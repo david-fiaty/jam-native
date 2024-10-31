@@ -11,8 +11,8 @@ import ScreenManager from "@/classes/ScreenManager";
 import UserManager from '@/classes/UserManager';
 
 const HeaderNavigation = () => {
-  const route = useRoute();
   const dispatch = useDispatch();
+  const route = useRoute();
   const activeScreen = ScreenManager.getActiveScreen();
   const isLoggedIn = UserManager.isLoggedIn();
 
