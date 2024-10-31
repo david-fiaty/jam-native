@@ -42,7 +42,7 @@ const LoginScreen = () => {
       />
       <ContinueButton onPress={() => console.log('clicked') } />
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
-        <TextView>{i18n.t("Don't have an account?")}</TextView>
+        <TextView>{i18n.t('New user? Create an account')}</TextView>
         <SkipButton onPress={() => {}} />
       </BoxView>
 
