@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { Layout } from '@/constants/Layout';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
@@ -9,6 +10,7 @@ import ScreenManager from '@/classes/ScreenManager';
 
 const FooterNavigation = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const activeScreen = ScreenManager.getActiveScreen();
 
   return (
@@ -34,9 +36,13 @@ const FooterNavigation = () => {
         name="user"
         radius="round"
         theme={activeScreen?.name == 'ProfileForm' ? 'secondary' : 'clear'}
-        onPress={() => dispatch(setActiveScreen({
+        onPress={() => 
+          router.push('/login')
+          /*dispatch(setActiveScreen({
           name: 'ProfileForm',
-        }))}
+        }))*/
+
+          }
         style={activeScreen?.name == 'ProfileForm' ? styles.active : {}}
       />
     </BoxView>
