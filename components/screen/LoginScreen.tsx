@@ -27,7 +27,12 @@ const LoginScreen = () => {
       <Divider /><Divider />
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
-        placeholder={i18n.t('Enter your email address')} 
+        placeholder={i18n.t('Email address')} 
+        onChangeText={(text) => setEmailValue(text) }
+      />
+      <InputTextField 
+        containerStyle={styles.inputTextFieldContainer}
+        placeholder={i18n.t('Password')} 
         onChangeText={(text) => setEmailValue(text) }
       />
       <ContinueButton onPress={() => console.log('clicked') } />
