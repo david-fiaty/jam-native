@@ -10,9 +10,8 @@ class UserManager {
       email: 'mitsiomotu@yopmail.com',
       password: 'Password1234',
     });
-
-    console.log(response);
-
+    
+    return response;
   }
 };
 
