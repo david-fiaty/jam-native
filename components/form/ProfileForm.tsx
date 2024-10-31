@@ -14,13 +14,25 @@ import CreativeOrganizationField from '../field/CreativeOrganizationField';
 import UserJamsList from '../list/UserJamsList';
 import UserProjectsList from '../list/UserProjectsList';
 import SpinnerView from '../view/SpinnerView';
+import DataManager from '@/classes/DataManager';
 
 const ProfileForm = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [userJamsData, setUserJamsData] = useState({});
+  const [userProjectsData, setUserProjectsData] = useState({});
 
   useEffect(() => {
-    setTimeout(() => setIsLoaded(true), Layout.animation.duration);
+    (async () => {
+      const userJamsData = await DataManager.get('jams');
+      const userProjectsData = await DataManager.get('projects');
+
+      setTimeout(() => {
+        setUserJamsData(userJamsData);
+        setUserProjectsData(userProjectsData);
+        setIsLoaded(true);
+      }, Layout.animation.duration);
+    })();
   });
 
   if (!isLoaded) return <SpinnerView />;
@@ -46,10 +58,10 @@ const ProfileForm = () => {
       <CreativeOrganizationField />
 
       <DividerView />
-      <UserProjectsList />
+      <UserProjectsList data={userProjectsData}  />
 
       <DividerView />
-      <UserJamsList />
+      <UserJamsList data={userJamsData} />
     </BoxView>
   );
 };
