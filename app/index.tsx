@@ -6,11 +6,13 @@ import WelcomeScreen from '@/components/screen/WelcomeScreen';
 
 export default () => {
   return ( 
-    <ThemeProvider theme={BaseTheme}>
-      <ScreenView>
-        <WelcomeScreen />
-      </ScreenView>
+    <>
+      <ThemeProvider theme={BaseTheme}>
+        <ScreenView>
+          <WelcomeScreen />
+        </ScreenView>
+      </ThemeProvider>
       <Toast />
-    </ThemeProvider>
+    </>
   );
 }

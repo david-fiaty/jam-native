@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'expo-router';
 import { Divider } from '@rneui/base';
-import Toast from 'react-native-toast-message';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
 import LogoView from '../view/LogoView';
@@ -34,12 +33,6 @@ const LoginScreen = () => {
     if (response?.tokens?.access_token?.length) {
       dispatch(setAccessToken(JSON.stringify(response.tokens)));
       dispatch(setIsLoggedIn(true));
-
-      Toast.show({
-        type: 'success',
-        text1: 'Hello',
-        text2: 'This is some something',
-      });
 
       router.replace('/main');
     }
