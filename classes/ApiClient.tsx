@@ -28,9 +28,11 @@ class ApiClient {
         let url = endpoint.url;
 
         let payload = {
-          method: endpoint.method,
-          headers: this.getHeaders(),
-          body: JSON.stringify(data || {}),
+          ...{
+            method: endpoint.method,
+            headers: this.getHeaders(),
+          },
+          ...data ? { body: JSON.stringify(data) } : {},
         };
 
         let response = await fetch(url, payload);
