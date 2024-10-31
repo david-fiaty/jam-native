@@ -27,11 +27,13 @@ class ApiClient {
         //let url = Config.apiUrl + '/' + endpoint.url + '/';
         let url = endpoint.url;
 
-        let response = await fetch(url, {
+        let payload = {
           method: endpoint.method,
           headers: this.getHeaders(),
           body: JSON.stringify(data || {}),
-        });
+        };
+
+        let response = await fetch(url, payload);
 
         return this.processResponse(await response.json());
       } 
