@@ -66,25 +66,31 @@ const JamsList = () => {
 
       {/* Item toolbar */}
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItemToolbar}>
+
         {/* Jammers button */}
         <BoxView direction="row" align="center" onPress={() => isLoggedIn ? dispatch(setActiveScreen({
           name: 'JammersList',
           entityId: item.id, 
         })) : router.push('/login') }>
+
           <IconView name="users" theme="tertiary" />
           <TextView>{parseInt(item?.jammers?.length)} {i18n.t('jammers')}</TextView>
+
         </BoxView>
       
-        {/* Save button */}
         <BoxView direction="row" align="center">
+          {/* Save button */}
           <IconView name="save" theme="tertiary" onPress={() => isLoggedIn ? dispatch(setActiveScreen({
             name: 'SaveJamView',
             entityId: item.id, 
           })) : router.push('/login')} />
+
+          {/* Share button */}
           <IconView name="share" theme="tertiary" onPress={() => dispatch(setActiveScreen({
             name: 'ShareJamView',
             entityId: item.id, 
           }))} />
+
         </BoxView> 
       </BoxView>
 
