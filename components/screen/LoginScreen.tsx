@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'expo-router';
 import { Divider } from '@rneui/base';
 import { Layout } from '@/constants/Layout';
@@ -16,18 +16,24 @@ import GoogleLoginButton from '../button/GoogleLoginButton';
 import FacebookLoginButton from '../button/FacebookLoginButton';
 import InstagramLoginButton from '../button/InstagramLoginButton';
 import UserManager from '@/classes/UserManager';
+import { setAccessToken } from '@/redux/slices/UserSlice';
 
 const LoginScreen = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const userState = useSelector((state) => state.user);
 
   const login = async () => {
-    let test = await UserManager.login(email, password);
-  
+    let response = await UserManager.login('mitsiomotu@yopmail.com', 'Password1234');
+    dispatch(setAccessToken(response?.tokens?.access_token));
   }
 
+  console.log('xxx');
+
+  console.log(userState);
+  
   return (
     <BoxView direction="column" align="center" justify="center" style={Layout.screenContent}>
       <LogoView size={{ width: 80, height: 80 }} />    
