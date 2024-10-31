@@ -30,15 +30,15 @@ const LoginScreen = () => {
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Email address')} 
-        onChangeText={(text) => setEmailValue(text) }
+        onChangeText={(text) => setEmailValue(text)}
       />
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Password')} 
-        onChangeText={(text) => setPasswordValue(text) }
         secureTextEntry={true} 
         autoCapitalize="none"
         spellCheck={false}
+        onChangeText={(text) => setPasswordValue(text)}
       />
       <ContinueButton onPress={() => console.log('clicked') } />
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
