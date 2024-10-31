@@ -15,8 +15,8 @@ import FacebookLoginButton from '../button/FacebookLoginButton';
 import InstagramLoginButton from '../button/InstagramLoginButton';
 
 const LoginScreen = () => {
-  const [emailValue, setEmailValue] = useState(null);
-  const [passwordValue, setPasswordValue] = useState(null);
+  const [emailValue, setEmailValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
 
   console.log(emailValue);
   console.log(passwordValue);
