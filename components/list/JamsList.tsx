@@ -72,10 +72,8 @@ const JamsList = () => {
           name: 'JammersList',
           entityId: item.id, 
         })) : router.push('/login') }>
-
           <IconView name="users" theme="tertiary" />
           <TextView>{parseInt(item?.jammers?.length)} {i18n.t('jammers')}</TextView>
-
         </BoxView>
       
         <BoxView direction="row" align="center">
