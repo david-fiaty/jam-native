@@ -19,17 +19,19 @@ const LoginScreen = () => {
     <BoxView direction="column" align="center" justify="center" style={Layout.screenContent}>
       <LogoView size={{ width: 80, height: 80 }} />    
       <TextView style={styles.wecomeMessage}>{i18n.t('Welcome back')}</TextView> 
+
+      <Divider /><Divider />
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Enter your email address')} 
       />
-      <ContinueButton onPress={() => console.log('clicked') }/>
+      <ContinueButton onPress={() => console.log('clicked') } />
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
         <TextView>{i18n.t("Don't have an account?")}</TextView>
         <SkipButton onPress={() => {}} />
       </BoxView>
 
-      <Divider />
+      <Divider /><Divider />
       <GoogleLoginButton />
       <FacebookLoginButton />
       <InstagramLoginButton />
@@ -46,7 +48,7 @@ const styles = StyleSheet.create({
   },
   wecomeMessage: {
     textTransform: 'uppercase',
-    fontSize: Layout.fontSize.base*1.2,
+    fontSize: Layout.fontSize.base*1.1,
   }
 });
 
