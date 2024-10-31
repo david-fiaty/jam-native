@@ -38,7 +38,7 @@ const FooterNavigation = () => {
         name="user"
         radius="round"
         theme={activeScreen?.name == 'ProfileForm' ? 'secondary' : 'clear'}
-        onPress={() => isLoggedIn ? router.push('/login') : dispatch(setActiveScreen({ name: 'ProfileForm' }))}
+        onPress={() => isLoggedIn ? dispatch(setActiveScreen({ name: 'ProfileForm' })) : router.push('/login')}
         style={activeScreen?.name == 'ProfileForm' ? styles.active : {}}
       />
     </BoxView>
