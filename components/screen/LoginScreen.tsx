@@ -16,8 +16,10 @@ import InstagramLoginButton from '../button/InstagramLoginButton';
 
 const LoginScreen = () => {
   const [emailValue, setEmailValue] = useState(null);
+  const [passwordValue, setPasswordValue] = useState(null);
 
   console.log(emailValue);
+  console.log(passwordValue);
 
   return (
     <BoxView direction="column" align="center" justify="center" style={Layout.screenContent}>
@@ -33,7 +35,10 @@ const LoginScreen = () => {
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Password')} 
-        onChangeText={(text) => setEmailValue(text) }
+        onChangeText={(text) => setPasswordValue(text) }
+        secureTextEntry={true} 
+        autoCapitalize="none"
+        spellCheck={false}
       />
       <ContinueButton onPress={() => console.log('clicked') } />
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
