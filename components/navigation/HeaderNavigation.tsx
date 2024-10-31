@@ -1,5 +1,5 @@
 import { TouchableOpacity } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useRoute } from '@react-navigation/native';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from '@/constants/Layout';
@@ -12,7 +12,12 @@ import ScreenManager from "@/classes/ScreenManager";
 const HeaderNavigation = () => {
   const route = useRoute();
   const dispatch = useDispatch();
+  const userState = useSelector((state) => state.user);
   const activeScreen = ScreenManager.getActiveScreen();
+
+
+  console.log('--000----');
+  console.log(userState);
 
   return (
     <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
