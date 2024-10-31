@@ -5,10 +5,13 @@ import i18n from '@/translation/i18n';
 import ImageView from '../view/ImageView';
 import ScreenManager from '@/classes/ScreenManager';
 import ListView from '../view/ListView';
-import DataManager from '@/classes/DataManager';
 
-const UserProjectsList = () => {  
-  const data = DataManager.get('projects');
+
+type Props = {
+  data?: object,
+};
+
+const UserProjectsList = ({data}: Props) => {  
   const numColumns = 4;
 
   const renderItem = (item, index) => (
