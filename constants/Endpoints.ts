@@ -9,6 +9,10 @@ const Endpoints = {
   },
   jammers: {},
   notifications: {},
+  login: {
+    url: '/login',
+    method: 'POST',
+  },
 };
 
 export default Endpoints;

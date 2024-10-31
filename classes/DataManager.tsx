@@ -26,12 +26,19 @@ class DataManager {
       }); 
     }
 
-    return results.length ? results : data;
+    return results?.length ? results : data;
+  }
+
+  async post(key: keyof typeof ApiEndpoints, data: object, options: object) {
+    console.log(data);
+    //const response = await ApiClient.post(key, data);
+
+    //console.log(response);
   }
 
   async getData(key: keyof typeof ApiEndpoints) {
-    const data = await ApiClient.get(key);
-    let result = [];
+    const data: object = await ApiClient.get(key);
+    let result: object = [];
 
     if (data) {
       data.forEach(item => {
@@ -40,6 +47,11 @@ class DataManager {
     }
 
     return result;
+  }
+
+
+  async postData(key: keyof typeof ApiEndpoints, data: object, options: object) {
+
   }
 };
 
