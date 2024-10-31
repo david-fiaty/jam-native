@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
 import { Divider } from '@rneui/base';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
@@ -15,6 +16,7 @@ import FacebookLoginButton from '../button/FacebookLoginButton';
 import InstagramLoginButton from '../button/InstagramLoginButton';
 
 const LoginScreen = () => {
+  const router = useRouter();
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
 
@@ -43,7 +45,7 @@ const LoginScreen = () => {
       <ContinueButton onPress={() => console.log('clicked') } />
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
         <TextView>{i18n.t('New user? Create an account')}</TextView>
-        <SkipButton onPress={() => {}} />
+        <SkipButton onPress={() => router.push('/main')} />
       </BoxView>
 
       <Divider /><Divider />
