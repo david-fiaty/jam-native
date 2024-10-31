@@ -7,7 +7,7 @@ import { Layout } from '@/constants/Layout';
 import TextView from '../view/TextView';
 import ImageView from '../view/ImageView';
 
-const source = require('@/assets/images/google-logo.png'); 
+const source = require('@/assets/images/facebook-logo.png'); 
 
 const GoogleLoginButton = () => {
   return (
@@ -18,7 +18,7 @@ const GoogleLoginButton = () => {
         height={32}
         resizeMode="cover"
       />
-      <TextView>{i18n.t('Continue with Google')}</TextView>
+      <TextView>{i18n.t('Continue with Facebook')}</TextView>
     </BoxView>
   );
 };

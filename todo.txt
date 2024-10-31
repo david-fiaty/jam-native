@@ -51,8 +51,13 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 
 # API remarks
 - Jams list sectors field:
-  * should not have language in the payload
-  * language should be a request parameter
+  * Jams list sectors field: should not have language in the payload / language should be a request parameter
+  * post a jam and get a jam should not have same URL, even if method is different
+  * /api/save-jams should be /api/jam/save
+  * is unlike jam url correct? it's currently the same as like-jam
+  * No title for jams? Projects have a field "name" for title
+  * No image field for projects? Search items require images
+  * No endpoints for events, jammers, calls, venues
 
 
 
