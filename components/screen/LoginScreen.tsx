@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { Divider } from '@rneui/base';
 import { Layout } from '@/constants/Layout';
@@ -14,6 +15,10 @@ import FacebookLoginButton from '../button/FacebookLoginButton';
 import InstagramLoginButton from '../button/InstagramLoginButton';
 
 const LoginScreen = () => {
+  const [emailValue, setEmailValue] = useState(null);
+
+  console.log(emailValue);
+
   return (
     <BoxView direction="column" align="center" justify="center" style={Layout.screenContent}>
       <LogoView size={{ width: 80, height: 80 }} />    
@@ -23,7 +28,7 @@ const LoginScreen = () => {
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Enter your email address')} 
-        onChangeText={(text) => console.log(text) }
+        onChangeText={(text) => setEmailValue(text) }
       />
       <ContinueButton onPress={() => console.log('clicked') } />
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
