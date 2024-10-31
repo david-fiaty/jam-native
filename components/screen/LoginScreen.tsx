@@ -24,8 +24,10 @@ const LoginScreen = () => {
   const userState = useSelector((state) => state.user);
 
   const login = async () => {
-    let test = await UserManager.login(email, password);
-  
+    //let result = await UserManager.login(email, password);
+    let result = await UserManager.login('mitsiomotu@yopmail.com', 'Password1234');
+    
+    console.log(result);
   }
 
   return (
