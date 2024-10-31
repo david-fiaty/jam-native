@@ -54,6 +54,10 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
   * should not have language in the payload
   * language should be a request parameter
 
+- Jams endpoint: 
+  * post a jam and get a jam should not have same URL, even if method is different
+  * /api/save-jams should be /api/jam/save
+  
 
 
 Email verification
