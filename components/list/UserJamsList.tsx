@@ -15,13 +15,11 @@ type Props = {
 const UserJamsList = ({data} : Props) => {  
   const numColumns = 3;
 
-  console.log(data);
-
   const renderItem = (item, index) => (
     <TouchableOpacity>
       <View style={styles.item}>
         <ImageView 
-          source={{uri: Config.imageUrl + item?.url}} 
+          source={{uri: Config.imageUrl + item?.medias?.[0].url}} 
           width={96.7}
           height={96.7}
           resizeMode="cover"
