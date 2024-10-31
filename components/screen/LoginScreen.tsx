@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'expo-router';
@@ -21,18 +21,25 @@ import { setAccessToken, setIsLoggedIn } from '@/redux/slices/UserSlice';
 const LoginScreen = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const userState = useSelector((state) => state.user);
 
   const login = async () => {
+    // Todo - Connect username and password
+    //let response = await UserManager.login(username, password);
     let response = await UserManager.login('mitsiomotu@yopmail.com', 'Password1234');
+
     if (response?.tokens?.access_token?.length) {
-      dispatch(setAccessToken(response.tokens.access_token));
+      dispatch(setAccessToken(JSON.stringify(response.tokens)));
       dispatch(setIsLoggedIn(true));
+
+      router.push('/main');
     }
-  }
-  
+  }  
+
+  console.log(userState);
+
   return (
     <BoxView direction="column" align="center" justify="center" style={Layout.screenContent}>
       <LogoView size={{ width: 80, height: 80 }} />    
@@ -42,7 +49,7 @@ const LoginScreen = () => {
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Email address')} 
-        onChangeText={(text) => setEmail(text)}
+        onChangeText={(text) => setUsername(text)}
       />
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
