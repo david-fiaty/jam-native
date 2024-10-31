@@ -29,10 +29,10 @@ const FooterNavigation = () => {
         name="plus"
         radius="round"
         theme={activeScreen?.name == 'AddJamForm' ? 'secondary' : 'clear'}
+        style={activeScreen?.name == 'AddJamForm' ? styles.active : {}}
         onPress={() => dispatch(setActiveScreen({
           name: 'AddJamForm',
         }))}
-        style={activeScreen?.name == 'AddJamForm' ? styles.active : {}}
       />
       <IconView
         name="user"
