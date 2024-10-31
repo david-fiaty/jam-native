@@ -26,6 +26,7 @@ const LoginScreen = () => {
   const userState = useSelector((state) => state.user);
 
   const login = async () => {
+    // Todo - Connect username and password
     let response = await UserManager.login('mitsiomotu@yopmail.com', 'Password1234');
     if (response?.tokens?.access_token?.length) {
       dispatch(setAccessToken(response.tokens.access_token));
