@@ -23,11 +23,14 @@ class ApiClient {
   async sendRequest(endpoint: object, data?: object ) {
     if (endpoint?.url && endpoint?.method) {
       try {
+        // Todo - Enable domain inclusion
+        //let url = Config.apiUrl + '/' + endpoint.url + '/';
+        let url = endpoint.url;
 
-        let url = Config.apiUrl + '/' + endpoint.url + '/';
         let response = await fetch(url, {
           method: endpoint.method,
           headers: this.getHeaders(),
+          body: JSON.stringify(data || {}),
         });
 
         return this.processResponse(await response.json());

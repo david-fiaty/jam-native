@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux';
 import { useRouter } from 'expo-router';
 import { Divider } from '@rneui/base';
 import { Layout } from '@/constants/Layout';
@@ -20,6 +21,12 @@ const LoginScreen = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const userState = useSelector((state) => state.user);
+
+  const login = async () => {
+    let test = await UserManager.login(email, password);
+  
+  }
 
   return (
     <BoxView direction="column" align="center" justify="center" style={Layout.screenContent}>
@@ -41,7 +48,7 @@ const LoginScreen = () => {
         onChangeText={(text) => setPassword(text)}
       />
 
-      <ContinueButton onPress={() => UserManager.login(email, password) } />
+      <ContinueButton onPress={login} />
 
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
         <TextView>{i18n.t('New user? Create an account')}</TextView>
