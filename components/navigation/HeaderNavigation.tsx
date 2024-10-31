@@ -1,5 +1,5 @@
 import { TouchableOpacity } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useRoute } from '@react-navigation/native';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from '@/constants/Layout';
@@ -11,8 +11,8 @@ import ScreenManager from "@/classes/ScreenManager";
 import UserManager from '@/classes/UserManager';
 
 const HeaderNavigation = () => {
-  const route = useRoute();
   const dispatch = useDispatch();
+  const route = useRoute();
   const activeScreen = ScreenManager.getActiveScreen();
   const isLoggedIn = UserManager.isLoggedIn();
 
