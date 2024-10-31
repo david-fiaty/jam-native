@@ -1,16 +1,16 @@
 const Endpoints = {
   jams: {
-    url: '/jams',
+    url: 'https://dev.jammm.app/backend/api/jams',
     method: 'GET',
   },
   projects: {
-    url: '/projects',
+    url: 'https://dev.jammm.app/backend/api/projects',
     method: 'GET',
   },
   jammers: {},
   notifications: {},
   login: {
-    url: '/login',
+    url: 'https://the.jammm.app/backend/api/login/',
     method: 'POST',
   },
 };

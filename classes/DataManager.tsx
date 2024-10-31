@@ -29,7 +29,7 @@ class DataManager {
     return results?.length ? results : data;
   }
 
-  async post(key: keyof typeof ApiEndpoints, data: object, options: object) {
+  async post(key: keyof typeof ApiEndpoints, data: object, options?: object) {
     console.log(data);
     //const response = await ApiClient.post(key, data);
 

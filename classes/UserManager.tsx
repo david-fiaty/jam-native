@@ -1,12 +1,17 @@
 import Store from '@/redux/Store';
+import { setIsLoggedIn, setAccessToken } from '@/redux/slices/UserSlice';
 import DataManager from './DataManager';
 
 class UserManager {
   async login(email: string, password: string) {
-    let response = await DataManager.post('user', {
-      email: email,
-      password: password,
+    let response = await DataManager.post('login', {
+      //email: email,
+      //password: password,
+      email: 'mitsiomotu@yopmail.com',
+      password: 'Password1234',
     });
+
+    console.log(response);
 
   }
 };
