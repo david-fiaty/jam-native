@@ -38,8 +38,6 @@ const LoginScreen = () => {
     }
   }  
 
-  console.log(userState);
-
   return (
     <BoxView direction="column" align="center" justify="center" style={Layout.screenContent}>
       <LogoView size={{ width: 80, height: 80 }} />    
