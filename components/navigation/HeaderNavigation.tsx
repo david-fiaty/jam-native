@@ -14,6 +14,7 @@ const HeaderNavigation = () => {
   const route = useRoute();
   const dispatch = useDispatch();
   const activeScreen = ScreenManager.getActiveScreen();
+  const isLoggedIn = UserManager.isLoggedIn() === true;
 
   return (
     <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
@@ -27,16 +28,20 @@ const HeaderNavigation = () => {
       { (route.name == 'main' || activeScreen?.headerNavigation) &&
         <BoxView direction="row" align="center" justify="space-between">
           <BoxView direction="row" align="center" style={Layout.headerRight}> 
-            
-            <IconView name="menu" theme="secondary" onPress={() => dispatch(setActiveScreen({
-              name: 'SettingsMenu',
-            }))} />
 
-            <IconView label="15+" theme="secondary" size={11.5} onPress={() => dispatch(setActiveScreen({
-              name: 'NotificationsMenu',
-            }))} />
-            
-            { UserManager.isLoggedIn() === true && <SearchField /> }
+            { isLoggedIn &&
+              <IconView name="menu" theme="secondary" onPress={() => dispatch(setActiveScreen({
+                name: 'SettingsMenu',
+              }))} />
+            }
+
+            { isLoggedIn === true &&
+              <IconView label="15+" theme="secondary" size={11.5} onPress={() => dispatch(setActiveScreen({
+                name: 'NotificationsMenu',
+              }))} />
+            }
+              
+            <SearchField />
             
           </BoxView>
         </BoxView>
