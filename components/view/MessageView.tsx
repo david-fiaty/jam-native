@@ -3,7 +3,8 @@ import { BaseProps } from '@/constants/Types';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 
-const TextView = ({style, children}: BaseProps) => {
+const MessageView = ({style, children}: BaseProps) => {
+  
   return (
     <Text style={[styles.content, style]}>
       {children}
@@ -18,4 +19,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TextView;
+export default MessageView;
