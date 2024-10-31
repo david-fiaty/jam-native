@@ -9,7 +9,7 @@ import ImageView from '../view/ImageView';
 
 const source = require('@/assets/images/google-logo.png'); 
 
-const GoogleLoginButton = () => {
+const InstagramLoginButton = () => {
   return (
     <BoxView direction="row" align="center" justify="flex-start" style={styles.container}>
       <ImageView 
@@ -33,4 +33,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GoogleLoginButton;
+export default InstagramLoginButton;
