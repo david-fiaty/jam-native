@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
-import Toast from 'react-native-toast-message';
 import moment from 'moment';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Colors } from '@/constants/Colors';
@@ -24,15 +23,7 @@ const JamsList = () => {
   useEffect(() => {
     (async () => {
       const data = await DataManager.get('jams');
-
       
-      Toast.show({
-        type: 'success',
-        text1: 'Hello',
-        text2: 'This is some something',
-      });
-
-  
       setTimeout(() => {
         setData(data);
       }, Layout.animation.duration);
