@@ -16,7 +16,7 @@ import GoogleLoginButton from '../button/GoogleLoginButton';
 import FacebookLoginButton from '../button/FacebookLoginButton';
 import InstagramLoginButton from '../button/InstagramLoginButton';
 import UserManager from '@/classes/UserManager';
-import { setAccessToken } from '@/redux/slices/UserSlice';
+import { setAccessToken, setIsLoggedIn } from '@/redux/slices/UserSlice';
 
 const LoginScreen = () => {
   const router = useRouter();
@@ -27,12 +27,11 @@ const LoginScreen = () => {
 
   const login = async () => {
     let response = await UserManager.login('mitsiomotu@yopmail.com', 'Password1234');
-    dispatch(setAccessToken(response?.tokens?.access_token));
+    if (response?.tokens?.access_token?.length) {
+      dispatch(setAccessToken(response.tokens.access_token));
+      dispatch(setIsLoggedIn(true));
+    }
   }
-
-  console.log('xxx');
-
-  console.log(userState);
   
   return (
     <BoxView direction="column" align="center" justify="center" style={Layout.screenContent}>
