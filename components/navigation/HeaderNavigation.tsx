@@ -1,5 +1,5 @@
 import { TouchableOpacity } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useRoute } from '@react-navigation/native';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from '@/constants/Layout';
