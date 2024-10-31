@@ -20,14 +20,16 @@ const ProfileForm = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
 
+  let userJamsData = {};
+  let userProjectsData = {};
+
   useEffect(() => {
     (async () => {
-      const jamsData = await DataManager.get('jams');
-      const projectsData = DataManager.get('projects');
+      userJamsData = await DataManager.get('jams');
+      userProjectsData = await DataManager.get('projects');
+
       setTimeout(() => setIsLoaded(true), Layout.animation.duration);
     })();
-
-    
   });
 
   if (!isLoaded) return <SpinnerView />;
@@ -53,7 +55,7 @@ const ProfileForm = () => {
       <CreativeOrganizationField />
 
       <DividerView />
-      <UserProjectsList />
+      <UserProjectsList data={userProjectsData}  />
 
       <DividerView />
       <UserJamsList />
