@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View, FlatList, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchFilter } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
