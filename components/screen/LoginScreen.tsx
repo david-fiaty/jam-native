@@ -11,6 +11,8 @@ import ContinueButton from '../button/ContinueButton';
 import SkipButton from '../button/SkipButton';
 import GoogleLoginButton from '../button/GoogleLoginButton';
 import { Divider } from '@rneui/base';
+import FacebookLoginButton from '../button/FacebookLoginButton';
+import InstagramLoginButton from '../button/InstagramLoginButton';
 
 const LoginScreen = () => {
   return (
@@ -29,6 +31,8 @@ const LoginScreen = () => {
 
       <Divider />
       <GoogleLoginButton />
+      <FacebookLoginButton />
+      <InstagramLoginButton />
     </BoxView>
   );
 };
