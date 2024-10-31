@@ -32,7 +32,7 @@ class ApiClient {
             method: endpoint.method,
             headers: this.getHeaders(),
           },
-          ...data ? { body: JSON.stringify(data) } : {},
+          ...(data ? { body: JSON.stringify(data) } : {}),
         };
 
         let response = await fetch(url, payload);
