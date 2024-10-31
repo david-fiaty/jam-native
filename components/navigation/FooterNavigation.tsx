@@ -7,11 +7,13 @@ import { Colors } from "@/constants/Colors";
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 import ScreenManager from '@/classes/ScreenManager';
+import UserManager from '@/classes/UserManager';
 
 const FooterNavigation = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const activeScreen = ScreenManager.getActiveScreen();
+  const isLoggedIn = UserManager.isLoggedIn();
 
   return (
     <BoxView direction="row" align="center" justify="space-around" style={Layout.footer}>
@@ -36,13 +38,7 @@ const FooterNavigation = () => {
         name="user"
         radius="round"
         theme={activeScreen?.name == 'ProfileForm' ? 'secondary' : 'clear'}
-        onPress={() => 
-          router.push('/login')
-          /*dispatch(setActiveScreen({
-          name: 'ProfileForm',
-        }))*/
-
-          }
+        onPress={() => isLoggedIn ? router.push('/login') : dispatch(setActiveScreen({ name: 'ProfileForm' }))}
         style={activeScreen?.name == 'ProfileForm' ? styles.active : {}}
       />
     </BoxView>
