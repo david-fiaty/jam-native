@@ -11,7 +11,16 @@ class ApiClient {
     }
   }
 
-  async sendRequest(endpoint: object) {
+  async post(key: keyof typeof Endpoints, data: object) {
+    try {
+      return await this.sendRequest(Endpoints[key], data);
+    } 
+    catch (error) {
+      console.log(error);
+    }
+  }
+
+  async sendRequest(endpoint: object, data?: object ) {
     if (endpoint?.url && endpoint?.method) {
       try {
 
