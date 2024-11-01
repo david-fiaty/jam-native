@@ -8,7 +8,6 @@ class UserManager {
       password: password,
     });
     
-    console.log(response);
     return response;
   }
 
