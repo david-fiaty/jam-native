@@ -35,8 +35,25 @@ class EntityManager {
         result[sourceField] = data[targetField];
       }
     }
+
     return result;
   }
+  
+  /*
+  mapEntity(fields: object, data: any) {
+    let result: any = {};
+
+    for (const [sourceField, targetField] of Object.entries(fields)) {
+      if (typeof targetField === 'object' && data?.[sourceField]) {
+        result[sourceField] = this.mapEntity(targetField, data[sourceField]);
+      } 
+      else if (data?.[targetField] !== undefined) {
+        result[sourceField] = data[targetField];
+      }
+    }
+
+    return result;
+  }*/
 };
 
 export default (new EntityManager());
