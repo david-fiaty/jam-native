@@ -15,6 +15,7 @@ import UserJamsList from '../list/UserJamsList';
 import UserProjectsList from '../list/UserProjectsList';
 import SpinnerView from '../view/SpinnerView';
 import DataManager from '@/classes/DataManager';
+import InputTextareaField from '../field/InputTextareaField';
 
 const ProfileForm = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const ProfileForm = () => {
   const [userProjectsData, setUserProjectsData] = useState([]);
   const userState = useSelector((state: any) => state.user);
 
-  const accountData = userState.accountData;
+  const accountData = JSON.parse(userState.accountData);
 
   useEffect(() => {
     (async () => {
@@ -53,14 +54,31 @@ const ProfileForm = () => {
 
       <DividerView />
 
-      <InputTextField placeholder={i18n.t('Public name')} />
-
+      <InputTextField 
+        placeholder={i18n.t('Email address')} 
+        value={accountData?.email}  
+        onChangeText={(text: string) => {}}
+      />
+      <InputTextField 
+        placeholder={i18n.t('User name')} 
+        value={accountData?.username}  
+        onChangeText={(text: string) => {}}
+      />
+      <InputTextField 
+        placeholder={i18n.t('Phone number')} 
+        value={accountData?.phone}  
+        onChangeText={(text: string) => {}}
+      />
+      <InputTextareaField
+        placeholder={i18n.t('Description')} 
+        value={accountData?.profiles[0].description}  
+        onChangeText={(text: string) => {}}
+      />
       
-      <InputTextField placeholder={i18n.t('IG handle')} />
-      <InputTextField placeholder={i18n.t('Email address')} />
-      <InputTextField placeholder={i18n.t('Phone number')} />
       <UserLocationField />
+
       <IndustryField />
+      
       <CreativeOrganizationField />
 
       <DividerView />
