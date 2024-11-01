@@ -11,7 +11,6 @@ type Props = {
   data?: object,
 };
 
-
 const UserJamsList = ({data} : Props) => {  
   const numColumns = 3;
 
@@ -32,14 +31,19 @@ const UserJamsList = ({data} : Props) => {
   return (
     <View style={styles.container}>
       <TextView style={styles.title}>{i18n.t('Your Jams')}</TextView>
-      <ListView
-        data={data} 
-        numColumns={numColumns}
-        contentContainerStyle={{gap: Layout.space.base}}
-        columnWrapperStyle={{gap: Layout.space.base}}
-        scrollEnabled={false}
-        renderItem={({item, index}) => renderItem(item, index)}   
-      />
+
+      { data?.length > 0 && 
+        <ListView
+          data={data} 
+          numColumns={numColumns}
+          contentContainerStyle={{gap: Layout.space.base}}
+          columnWrapperStyle={{gap: Layout.space.base}}
+          scrollEnabled={false}
+          renderItem={({item, index}) => renderItem(item, index)}   
+        />
+      }
+
+      {!data?.length && <TextView>{i18n.t('Create a new Jam')}</TextView> } 
     </View>
   );
 }
