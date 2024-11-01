@@ -13,9 +13,9 @@ type Props = {
 
 const UserProjectsList = ({data}: Props) => {  
   const numColumns = 4;
-
   
-  console.log('------ UserProjectsList ---------');
+  
+  console.log('------ UserProjectsListoooo ---------');
   console.log(data);
 
 
@@ -36,7 +36,7 @@ const UserProjectsList = ({data}: Props) => {
   return (
     <View style={styles.container}>
       <TextView style={styles.title}>{i18n.t('Your Projects')}</TextView>
-      { data?.length && 
+      { data?.length > 0 && 
         <ListView
           data={data} 
           numColumns={numColumns}
