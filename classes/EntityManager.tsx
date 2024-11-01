@@ -28,28 +28,32 @@ class EntityManager {
     return Entities.find(item => item.type === entityType);
   }
 
+  getCoreFieldName(fieldName: string, fields: string) {
+    
+  }
+
   mapEntityFields(fields: object, data: any) {
     let result: any = {};
 
     for (const [fieldName, fieldValue] of Object.entries(data)) {
-      let definition: any = this.findEntityDefinition(fieldName);
+      let coreFieldName = {};
+
+
       /*
-      if (fields?.[fieldName]) {
-
+      if (definition = this.findEntityDefinition(fieldName)) {
+        //console.log('---');
+        //console.log(definition);
+        //result[fieldName] = this.mapEntityFields(definition.fields, fieldValue);
       }
-      */
+      else {
+        //result[fieldName] = fieldValue;
+      }
+        */
     }
 
-    /*
-    for (const [sourceField, targetField] of Object.entries(fields)) {
-      if (data?.[targetField]) {
-        result[sourceField] = this.mapEntity(targetField, data[sourceField]);
-      } 
-      else if (data?.[targetField] !== undefined) {
-        result[sourceField] = data[targetField];
-      }
-    }
-      */
+    //console.log(result);
+
+    return {};
 
     return result;
   }
