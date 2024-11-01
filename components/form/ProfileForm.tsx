@@ -53,11 +53,11 @@ const ProfileForm = () => {
       style={Layout.screenContent}
     >
       <BackButton
-        title={i18n.t("Your profile")}
+        title={i18n.t('Your profile')}
         onPress={() =>
           dispatch(
             setActiveScreen({
-              name: "ProfileForm",
+              name: 'ProfileForm',
             })
           )
         }
@@ -81,22 +81,22 @@ const ProfileForm = () => {
       <DividerView />
 
       <InputTextField
-        placeholder={i18n.t("Email address")}
+        placeholder={i18n.t('Email address')}
         value={accountData?.email}
         onChangeText={(text: string) => {}}
       />
       <InputTextField
-        placeholder={i18n.t("User name")}
+        placeholder={i18n.t('User name')}
         value={accountData?.username}
         onChangeText={(text: string) => {}}
       />
       <InputTextField
-        placeholder={i18n.t("Phone number")}
+        placeholder={i18n.t('Phone number')}
         value={accountData?.phone}
         onChangeText={(text: string) => {}}
       />
       <InputTextareaField
-        placeholder={i18n.t("Description")}
+        placeholder={i18n.t('Description')}
         value={accountData?.profiles[0].profile_description}
         onChangeText={(text: string) => {}}
       />
