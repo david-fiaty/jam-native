@@ -1,0 +1,53 @@
+{
+  "tokens": {
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMxMzM2NzIzLCJpYXQiOjE3MzA0NzI3MjMsImp0aSI6IjU3ZGNhOWFmYjQ3MzQzNmNiZjAwMzcyNTMxNTcyMjc2IiwidXNlcl9pZCI6MTJ9.6eAcjVQkSploNQAUEX_nVK8nhkwA35BKJaZ69lGKPNM",
+    "access_token_exp": 1731336723,
+    "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTczMzA2NDcyMywiaWF0IjoxNzMwNDcyNzIzLCJqdGkiOiJhNGYzMGYzMTNjNDA0NTU5OThmMzRiYWQ1NGQzZmU2NiIsInVzZXJfaWQiOjEyfQ.07gTVRyuaCqM9Zk_6etzpQpqh8Zxj3IKGqYFlV_FdEM",
+    "refresh_token_exp": 1733064723
+  },
+  "user": {
+    "email": "mitsiomotu@yopmail.com",
+    "username": "Email-mitsiomotu@yopmail.com",
+    "phone": null,
+    "profiles": [
+      {
+        "access": "owner",
+        "id": 3,
+        "profile_name": "mitsiomotu",
+        "profile_description": "Mitsio Motu provides strategy consulting & research services to private companies, foundations, governments and public institutions.\r\nWe deploy high value, efficient and smart solutions, and use unique-cross sectoral, data driven, implementation oriented and integrated approaches",
+        "profile_picture": {
+          "id": 34,
+          "url": "/media/files/bb4669ed-8bb6-454b-a740-503ce42f935f.png"
+        },
+        "sectors": [],
+        "country": {
+          "code": "tg",
+          "name": "Togo"
+        },
+        "region": null,
+        "town_or_locality": null,
+        "geolocation_latitude": "6.1276639",
+        "geolocation_longitude": "1.2063038",
+        "profile_type": "organization",
+        "profile_organization": {
+          "id": 6,
+          "organization_name": "Mitsio Motu",
+          "creation_year": null,
+          "type_of_management": null,
+          "organization_main_creative_activities": null,
+          "organization_other_creative_activities": null
+        },
+        "email": null,
+        "whatsapp_number": null,
+        "phone_number": null,
+        "website_link": null,
+        "instagram_id": null,
+        "facebook_link": null,
+        "linkedin_link": null,
+        "is_active": true,
+        "is_deleted": false
+      }
+    ]
+  },
+  "is_user_created": false
+}
