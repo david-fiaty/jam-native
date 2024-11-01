@@ -26,7 +26,11 @@ class DataManager {
       }); 
     }
 
-    return results?.length ? results : data;
+    // Process results
+    results = results?.length > 0 ? results : data;
+    //results = results.filter(item => JSON.stringify(item) !== '{}');
+    
+    return results;
   }
 
   async post(key: keyof typeof ApiEndpoints, data: object, options?: object) {
