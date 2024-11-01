@@ -24,11 +24,12 @@ const screenOptions = {
   headerStyle: {
     backgroundColor: Colors.background, 
   },
+  cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
 };
 
 ExpoSplashScreen.preventAutoHideAsync();
 
-export default function RootLayout() {
+const RootLayout = () => {
   const [isLoaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
@@ -57,3 +58,6 @@ export default function RootLayout() {
     </Provider>
   );
 }
+
+
+export default RootLayout;
