@@ -20,6 +20,7 @@ import DataManager from "@/classes/DataManager";
 import InputTextareaField from "../field/InputTextareaField";
 import TextView from "../view/TextView";
 import IconView from "../view/IconView";
+import ImageView from '../view/ImageView';
 
 const ProfileForm = () => {
   const dispatch = useDispatch();
@@ -65,14 +66,28 @@ const ProfileForm = () => {
 
       <MediaPickerBase
         label={
-          <BoxView direction="row" align="center">
-            { !accountData?.profiles[0].profile_description?.length && 
-              <BoxView direction="row" align="center" justify="space-between" style={styles.userProfileFieldContainer}>
+          <BoxView direction="row" align="center" style={styles.profileImageContainer}>
+            { !accountData?.profiles[0].profile_picture?.url?.length && 
+              <BoxView direction="row" align="center" justify="space-between">
                 <IconView name="user" theme="primary" size={60} radius="circle" />
                 <TextView>{i18n.t('Upload your Jammer user profile image.')}</TextView>
                 <IconView name="next" theme="clear" size={60} />
               </BoxView>
             } 
+
+            { accountData?.profiles[0].profile_picture?.url?.length > 0 && 
+              <BoxView direction="row" align="center" justify="space-between">
+                <ImageView 
+                  source={{uri: Config.imageUrl + accountData?.profiles[0].profile_picture?.url }} 
+                  width={96.7}
+                  height={96.7}
+                  resizeMode="cover"
+                />
+                <TextView>{i18n.t('Upload your Jammer user profile image.')}</TextView>
+                <IconView name="next" theme="clear" size={60} />
+              </BoxView>
+            } 
+
           </BoxView>
         }
       />
@@ -116,8 +131,7 @@ const ProfileForm = () => {
 };
 
 const styles = StyleSheet.create({
-  userProfileFieldContainer: {
-    width: '50%',
+  profileImageContainer: {
     paddingHorizontal: Layout.space.base,
   },
 });
