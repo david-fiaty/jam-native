@@ -13,28 +13,43 @@ class EntityManager {
     }
   }
 
-  createEntity(key: string, data: object) {
+  createEntity(entityType: string, data: object) {
     let entity: object = {};
-    let definition: any = Entities.find(item => item.type === key);
+    let definition: any = this.findEntityDefinition(entityType);
     
     if (definition) {
-      entity = this.mapEntity(definition.fields, data);
+      entity = this.mapEntityFields(definition.fields, data);
     }
   
     return entity;
   }
 
-  mapEntity(fields: object, data: any) {
+  findEntityDefinition(entityType: string) {
+    return Entities.find(item => item.type === entityType);
+  }
+
+  mapEntityFields(fields: object, data: any) {
     let result: any = {};
 
+    for (const [fieldName, fieldValue] of Object.entries(data)) {
+      let definition: any = this.findEntityDefinition(fieldName);
+      /*
+      if (fields?.[fieldName]) {
+
+      }
+      */
+    }
+
+    /*
     for (const [sourceField, targetField] of Object.entries(fields)) {
-      if (typeof targetField === 'object' && data?.[sourceField]) {
+      if (data?.[targetField]) {
         result[sourceField] = this.mapEntity(targetField, data[sourceField]);
       } 
       else if (data?.[targetField] !== undefined) {
         result[sourceField] = data[targetField];
       }
     }
+      */
 
     return result;
   }
