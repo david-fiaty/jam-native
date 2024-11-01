@@ -20,7 +20,6 @@ const screenOptions = {
   headerShown: true,
   statusBarColor: Colors.background,
   statusBarStyle: 'dark',
-  animation: 'fade',
   headerTintColor: Colors.background,    
   headerStyle: {
     backgroundColor: Colors.background, 
