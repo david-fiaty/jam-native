@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
@@ -21,6 +21,9 @@ const ProfileForm = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [userJamsData, setUserJamsData] = useState([]);
   const [userProjectsData, setUserProjectsData] = useState([]);
+  const userState = useSelector((state: any) => state.user);
+
+  console.log(userState.accountData);
 
   useEffect(() => {
     (async () => {
