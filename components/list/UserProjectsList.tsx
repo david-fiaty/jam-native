@@ -14,6 +14,11 @@ type Props = {
 const UserProjectsList = ({data}: Props) => {  
   const numColumns = 4;
 
+  
+  console.log('------ UserProjectsList ---------');
+  console.log(data);
+
+
   const renderItem = (item, index) => (
     <TouchableOpacity>
       <View style={styles.item}>
