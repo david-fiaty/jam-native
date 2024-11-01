@@ -22,8 +22,9 @@ const ProfileForm = () => {
   const [userJamsData, setUserJamsData] = useState([]);
   const [userProjectsData, setUserProjectsData] = useState([]);
   const userState = useSelector((state: any) => state.user);
+  const accountData = userState.accountData;
 
-  console.log(userState.accountData);
+  //console.log(userState.accountData);
 
   useEffect(() => {
     (async () => {
