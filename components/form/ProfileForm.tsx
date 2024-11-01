@@ -25,10 +25,8 @@ const ProfileForm = () => {
 
   const accountData = userState.accountData;
   const formFields = [
-    
-  ];
 
-  //console.log(userState.accountData);
+  ];
 
   useEffect(() => {
     (async () => {
