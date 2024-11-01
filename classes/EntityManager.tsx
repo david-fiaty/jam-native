@@ -36,7 +36,7 @@ class EntityManager {
     return null;
   }
 
-
+/*
 
   mapEntityFields(fields: object, data: any) {
     let result: any = [];
@@ -62,15 +62,13 @@ class EntityManager {
 
     return result;
   }
+  */
   
-  /*
   mapEntityFields(fields: object, data: any) {
-    let result: any = {};
+    let result: any = [];
 
     for (const [sourceField, targetField] of Object.entries(fields)) {
       if (typeof targetField === 'object' && data?.[sourceField]) {
-        console.log('xxxxxx');
-        console.log(targetField);
         result[sourceField] = this.mapEntityFields(targetField, data[sourceField]);
       } 
       else if (data?.[targetField] !== undefined) {
@@ -80,7 +78,6 @@ class EntityManager {
 
     return result;
   }
-    */
 };
 
 export default (new EntityManager());
