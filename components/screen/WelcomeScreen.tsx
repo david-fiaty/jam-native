@@ -1,8 +1,9 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { Divider } from "@rneui/base";
+import { Layout } from '@/constants/Layout';
 import LoginSignupButton from "../button/LoginSignupButton";
 import LogoView from "../view/LogoView";
 import BoxView from "../view/BoxView";
-import { Divider } from "@rneui/base";
 import TextSlideshow from "../slideshow/TextSlideshow";
 import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
@@ -53,23 +54,22 @@ const WelcomeScreen = () => {
         direction="row"
         align="center"
         justify="space-around"
-        style={styles.container}
+        style={styles.bottomLinksContainer}
       >
-        <TouchableOpacity onPress={() => router.push("/about")}>
-          <View style={styles.containerStyle}>
-            <TextView style={[styles.buttonStyle, styles.titleStyle]}>
+        <TouchableOpacity onPress={() => {}}>
+          
+            <TextView>
               {i18n.t('About')}
             </TextView>
-          </View>
+    
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => router.push('/legal')}>
-          <View style={styles.containerStyle}>
-            <TextView style={[styles.buttonStyle, styles.titleStyle]}>
+        <TouchableOpacity onPress={() => {}}>
+            <TextView>
               {i18n.t('Legal')}
             </TextView>
-          </View>
         </TouchableOpacity>
+
       </BoxView>
     </BoxView>
   );
@@ -77,7 +77,11 @@ const WelcomeScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: "100%",
+    height: '100%',
+  },
+  bottomLinksContainer: {
+    alignSelf: 'center',
+    gap: Layout.space.base*2,
   },
 });
 
