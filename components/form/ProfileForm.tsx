@@ -65,15 +65,14 @@ const ProfileForm = () => {
 
       <MediaPickerBase
         label={
-          <BoxView
-            direction="row"
-            align="center"
-            justify="space-between"
-            style={styles.userProfileFieldContainer}
-          >
-            <IconView name="user" theme="primary" size={60} radius="circle" />
-            <TextView>{i18n.t('Upload your Jammer user profile image.')}</TextView>
-            <IconView name="next" theme="clear" size={60} />
+          <BoxView direction="row" align="center">
+            { !accountData?.profiles[0].profile_description?.length && 
+              <BoxView direction="row" align="center" justify="space-between" style={styles.userProfileFieldContainer}>
+                <IconView name="user" theme="primary" size={60} radius="circle" />
+                <TextView>{i18n.t('Upload your Jammer user profile image.')}</TextView>
+                <IconView name="next" theme="clear" size={60} />
+              </BoxView>
+            } 
           </BoxView>
         }
       />
