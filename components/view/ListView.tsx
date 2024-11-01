@@ -23,7 +23,6 @@ const ListView = ({data, ref, numColumns, scrollEnabled, horizontal, contentCont
       horizontal={horizontal === true ? horizontal : false}  
       contentContainerStyle={[styles.container, contentContainerStyle]}
       columnWrapperStyle={columnWrapperStyle}
-      keyExtractor={(item) => item.id}
       renderItem={renderItem} 
       initialNumToRender={10}
       maxToRenderPerBatch={5}
