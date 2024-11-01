@@ -13,12 +13,12 @@ class EntityManager {
     }
   }
 
-  buildEntity(key, data) {
-    let entity = {};
-    let definition = Entities.find(item => item.type === key);
+  buildEntity(key: string, data: object) {
+    let entity: any = {};
+    let definition: any = Entities.find(item => item.type === key);
   
-    function mapFields(fields, data) {
-      let result = {};
+    function mapFields(fields: object, data: any) {
+      let result: any = {};
       for (const [sourceField, targetField] of Object.entries(fields)) {
         if (typeof targetField === 'object' && data?.[sourceField]) {
           // Recursive call if the targetField is an object (indicating nested fields)
