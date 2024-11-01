@@ -71,14 +71,14 @@ const ProfileForm = () => {
       />
       <InputTextareaField
         placeholder={i18n.t('Description')} 
-        value={accountData?.profiles[0].description}  
+        value={accountData?.profiles[0].profile_description}  
         onChangeText={(text: string) => {}}
       />
       
       <UserLocationField />
 
       <IndustryField />
-      
+
       <CreativeOrganizationField />
 
       <DividerView />
