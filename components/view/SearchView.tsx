@@ -56,7 +56,7 @@ const numColumns = 3;
 
 const SearchView = () => {
   const dispatch = useDispatch();
-  const searchState = useSelector((state) => state.search);
+  const searchState = useSelector((state: any) => state.search);
   const [data, setData] = useState([]);
 
   const renderTab = (item: object, index: number) => (
