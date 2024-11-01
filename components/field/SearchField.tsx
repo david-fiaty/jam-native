@@ -33,7 +33,7 @@ const SearchField = () => {
       value={searchState.value}
       placeholder={i18n.t('Search...')}
       containerStyle={styles.inputContainer} 
-      onChangeText={(text) => dispatch(setSearchValue(text))}
+      onChangeText={(text: string) => dispatch(setSearchValue(text))}
       rightIcon={  
         <IconView 
           name="delete" 
