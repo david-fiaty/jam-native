@@ -9,7 +9,7 @@ import i18n from '@/translation/i18n';
 
 const SearchField = () => {
   const dispatch = useDispatch();
-  const searchState = useSelector((state) => state.search);
+  const searchState = useSelector((state: any) => state.search);
   const activeScreen = ScreenManager.getActiveScreen();
   const isExpanded = searchState.expanded === true;
 

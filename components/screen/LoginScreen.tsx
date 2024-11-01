@@ -23,7 +23,7 @@ const LoginScreen = () => {
   const dispatch = useDispatch();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const userState = useSelector((state) => state.user);
+  const userState = useSelector((state: any) => state.user);
 
   const login = async () => {
     // Todo - Connect username and password

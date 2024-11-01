@@ -12,13 +12,13 @@ class UserManager {
   }
 
   isLoggedIn() {
-    return (useSelector((state) => state.user)).isLoggedIn === true;
+    return (useSelector((state: any) => state.user)).isLoggedIn === true;
   }
 
   isAccessTokenValid() {
     // Todo - Validate token duration
     console.log('---oooppp---');
-    console.log(useSelector((state) => state.user));
+    console.log(useSelector((state: any) => state.user));
   }
 };
 
