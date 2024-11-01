@@ -45,9 +45,9 @@ class EntityManager {
       let coreFieldName: any = this.getCoreFieldName(fieldName, fields);
       let entityDefinition: any = this.findEntityDefinition(coreFieldName);
 
-      console.log('----------------------------------------');
-      console.log(coreFieldName, entityDefinition, fieldValue);
-      console.log('----------------------------------------');
+      //console.log('----------------------------------------');
+      //console.log(coreFieldName, entityDefinition, fieldValue);
+      //console.log('----------------------------------------');
       
       
       if (coreFieldName && entityDefinition) {
