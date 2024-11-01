@@ -19,8 +19,8 @@ import DataManager from '@/classes/DataManager';
 const ProfileForm = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [userJamsData, setUserJamsData] = useState({});
-  const [userProjectsData, setUserProjectsData] = useState({});
+  const [userJamsData, setUserJamsData] = useState([]);
+  const [userProjectsData, setUserProjectsData] = useState([]);
 
   useEffect(() => {
     (async () => {
