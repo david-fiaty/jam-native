@@ -24,9 +24,6 @@ const ProfileForm = () => {
   const userState = useSelector((state: any) => state.user);
 
   const accountData = userState.accountData;
-  const formFields = [
-
-  ];
 
   useEffect(() => {
     (async () => {
