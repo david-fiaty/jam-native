@@ -62,7 +62,7 @@ const LoginScreen = () => {
 
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
         <TextView>{i18n.t('New user? Create an account')}</TextView>
-        <SkipButton onPress={() => router.push('/main')} />
+        <SkipButton onPress={async () => router.push('/main')} />
       </BoxView>
 
       <Divider /><Divider />
