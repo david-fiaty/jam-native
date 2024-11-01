@@ -7,12 +7,20 @@ class UserManager {
       email: email,
       password: password,
     });
+
+    this.isAccessTokenValid();
     
     return response;
   }
 
   isLoggedIn() {
     return (useSelector((state) => state.user)).isLoggedIn === true;
+  }
+
+  isAccessTokenValid() {
+    const userState = useSelector((state) => state.user);
+    console.log('---oooppp---');
+    console.log(userState);
   }
 };
 
