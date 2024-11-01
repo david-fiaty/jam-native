@@ -1,14 +1,21 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import AboutButton from '../button/AboutButton';
-import LegalButton from '../button/LegalButton';
 import BoxView from '../view/BoxView';
+import TextView from '../view/TextView';
+import i18n from '@/translation/i18n';
 
 const BottomLinks = () => {
   return (
     <BoxView direction="row" align="center" justify="space-around" style={styles.container}>
-      <AboutButton />
-      <LegalButton />
+
+    <TouchableOpacity onPress={() => {}}>
+      <TextView>{i18n.t('About')}</TextView>
+    </TouchableOpacity>
+
+    <TouchableOpacity onPress={() => {}}>
+      <TextView>{i18n.t('Legal')}</TextView>
+    </TouchableOpacity>
+
     </BoxView>
   );
 };

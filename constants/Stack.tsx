@@ -1,5 +1,21 @@
 export const Stack = [
   {
+    name: 'AboutScreen', 
+    effect: 'fade',
+    active: false,
+    headerNavigation: true,
+    footerNavigation: true,
+    entityId: null,
+  },
+  {
+    name: 'LegalScreen', 
+    effect: 'slide',
+    active: false,
+    headerNavigation: true,
+    footerNavigation: true,
+    entityId: null,
+  },
+  {
     name: 'JamsList', 
     effect: 'fade',
     active: false,
