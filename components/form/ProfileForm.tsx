@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import MediaPickerBase from "../base/MediaPickerBase";
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from "@/constants/Layout";
+import { Config } from "@/constants/Config";
+import MediaPickerBase from "../base/MediaPickerBase";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
