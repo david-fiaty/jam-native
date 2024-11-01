@@ -11,7 +11,6 @@ type Props = {
   data?: object,
 };
 
-
 const UserJamsList = ({data} : Props) => {  
   const numColumns = 3;
 
