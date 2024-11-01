@@ -11,8 +11,6 @@ const BottomLinks = () => {
   const router = useRouter();
   const route = useRoute();
 
-  console.log(route.name);
-
   let aboutLink = <TextView style={route.name == 'about' ? styles.disabled : {}}>{i18n.t('About')}</TextView>;
   let legalLink = <TextView style={route.name == 'legal' ? styles.disabled : {}}>{i18n.t('Legal')}</TextView>;
 
