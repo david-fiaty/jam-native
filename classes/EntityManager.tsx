@@ -14,22 +14,22 @@ class EntityManager {
   }
 
   createEntity(key: string, data: object) {
-    let entity: any = {};
+    let entity: object = {};
     let definition: any = Entities.find(item => item.type === key);
     
     if (definition) {
-      entity = this.mapFields(definition.fields, data);
+      entity = this.mapEntity(definition.fields, data);
     }
   
     return entity;
   }
 
-  mapFields(fields: object, data: any) {
+  mapEntity(fields: object, data: any) {
     let result: any = {};
 
     for (const [sourceField, targetField] of Object.entries(fields)) {
       if (typeof targetField === 'object' && data?.[sourceField]) {
-        result[sourceField] = this.mapFields(targetField, data[sourceField]);
+        result[sourceField] = this.mapEntity(targetField, data[sourceField]);
       } 
       else if (data?.[targetField] !== undefined) {
         result[sourceField] = data[targetField];
