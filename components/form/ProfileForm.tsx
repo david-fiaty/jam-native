@@ -1,21 +1,24 @@
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from "react";
+import { StyleSheet } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import MediaPickerBase from "../base/MediaPickerBase";
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
-import { Layout } from '@/constants/Layout';
+import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
 import UserLocationField from "../field/UserLocationField";
 import IndustryField from "../field/IndustryField";
 import DividerView from "../view/DividerView";
-import UserProfileImageField from '../field/UserProfileImageField';
-import InputTextField from '../field/InputTextField';
-import CreativeOrganizationField from '../field/CreativeOrganizationField';
-import UserJamsList from '../list/UserJamsList';
-import UserProjectsList from '../list/UserProjectsList';
-import SpinnerView from '../view/SpinnerView';
-import DataManager from '@/classes/DataManager';
-import InputTextareaField from '../field/InputTextareaField';
+import InputTextField from "../field/InputTextField";
+import CreativeOrganizationField from "../field/CreativeOrganizationField";
+import UserJamsList from "../list/UserJamsList";
+import UserProjectsList from "../list/UserProjectsList";
+import SpinnerView from "../view/SpinnerView";
+import DataManager from "@/classes/DataManager";
+import InputTextareaField from "../field/InputTextareaField";
+import TextView from "../view/TextView";
+import IconView from "../view/IconView";
 
 const ProfileForm = () => {
   const dispatch = useDispatch();
@@ -28,8 +31,8 @@ const ProfileForm = () => {
 
   useEffect(() => {
     (async () => {
-      let userJamsData = await DataManager.get('jams');
-      let userProjectsData = await DataManager.get('projects');
+      let userJamsData = await DataManager.get("jams");
+      let userProjectsData = await DataManager.get("projects");
 
       setTimeout(() => {
         setUserJamsData(userJamsData);
@@ -42,39 +45,61 @@ const ProfileForm = () => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
+    <BoxView
+      align="flex-start"
+      justify="flex-start"
+      scroll={true}
+      style={Layout.screenContent}
+    >
       <BackButton
-        title={i18n.t('Your profile')}
-        onPress={() => dispatch(setActiveScreen({
-          name: 'ProfileForm',
-        }))}
+        title={i18n.t("Your profile")}
+        onPress={() =>
+          dispatch(
+            setActiveScreen({
+              name: "ProfileForm",
+            })
+          )
+        }
       />
 
-      <UserProfileImageField />
+      <MediaPickerBase
+        label={
+          <BoxView
+            direction="row"
+            align="center"
+            justify="space-between"
+            style={styles.userProfileFieldContainer}
+          >
+            <IconView name="user" theme="primary" size={60} radius="circle" />
+            <TextView>{i18n.t('Upload your Jammer user profile image.')}</TextView>
+            <IconView name="next" theme="clear" size={60} />
+          </BoxView>
+        }
+      />
 
       <DividerView />
 
-      <InputTextField 
-        placeholder={i18n.t('Email address')} 
-        value={accountData?.email}  
+      <InputTextField
+        placeholder={i18n.t("Email address")}
+        value={accountData?.email}
         onChangeText={(text: string) => {}}
       />
-      <InputTextField 
-        placeholder={i18n.t('User name')} 
-        value={accountData?.username}  
+      <InputTextField
+        placeholder={i18n.t("User name")}
+        value={accountData?.username}
         onChangeText={(text: string) => {}}
       />
-      <InputTextField 
-        placeholder={i18n.t('Phone number')} 
-        value={accountData?.phone}  
+      <InputTextField
+        placeholder={i18n.t("Phone number")}
+        value={accountData?.phone}
         onChangeText={(text: string) => {}}
       />
       <InputTextareaField
-        placeholder={i18n.t('Description')} 
-        value={accountData?.profiles[0].profile_description}  
+        placeholder={i18n.t("Description")}
+        value={accountData?.profiles[0].profile_description}
         onChangeText={(text: string) => {}}
       />
-      
+
       <UserLocationField />
 
       <IndustryField />
@@ -82,12 +107,19 @@ const ProfileForm = () => {
       <CreativeOrganizationField />
 
       <DividerView />
-      <UserProjectsList data={userProjectsData}  />
+      <UserProjectsList data={userProjectsData} />
 
       <DividerView />
       <UserJamsList data={userJamsData} />
     </BoxView>
   );
 };
+
+const styles = StyleSheet.create({
+  userProfileFieldContainer: {
+    width: '50%',
+    paddingHorizontal: Layout.space.base,
+  },
+});
 
 export default ProfileForm;
