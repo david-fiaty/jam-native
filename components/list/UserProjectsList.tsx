@@ -15,7 +15,7 @@ const UserProjectsList = ({data}: Props) => {
   const numColumns = 4;
 
   
-  console.log('------ UserProjectsList ---------');
+  console.log('------ UserProjectsListyyyyyy ---------');
   console.log(data);
 
 
