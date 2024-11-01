@@ -13,26 +13,41 @@ class EntityManager {
     }
   }
 
-  createEntity(key: string, data: object) {
+  createEntity(entityType: string, data: object) {
     let entity: object = {};
-    let definition: any = Entities.find(item => item.type === key);
+    let definition: any = this.findEntityDefinition(entityType);
     
     if (definition) {
-      entity = this.mapEntity(definition.fields, data);
+      entity = this.mapEntityFields(definition.fields, data);
     }
   
     return entity;
   }
 
-  mapEntity(fields: object, data: any) {
-    let result: any = {};
+  findEntityDefinition(entityType: string) {
+    return Entities.find(item => item.type === entityType);
+  }
 
-    for (const [sourceField, targetField] of Object.entries(fields)) {
-      if (typeof targetField === 'object' && data?.[sourceField]) {
-        result[sourceField] = this.mapEntity(targetField, data[sourceField]);
-      } 
-      else if (data?.[targetField] !== undefined) {
-        result[sourceField] = data[targetField];
+  getCoreFieldName(fieldName: string, fields: object) {
+    for (const [key, value] of Object.entries(fields)) {
+      if (value == fieldName) return key;
+    }
+
+    return null;
+  }
+
+  mapEntityFields(fields: object, data: any) {
+    let result: any = [];
+
+    for (const [fieldName, fieldValue] of Object.entries(data)) {
+      let coreFieldName: any = this.getCoreFieldName(fieldName, fields);
+      let entityDefinition: any = this.findEntityDefinition(coreFieldName);
+
+      if (entityDefinition) {
+        result[coreFieldName] = this.mapEntityFields(entityDefinition.fields, fieldValue);
+      }
+      else {
+        result[coreFieldName] = fieldValue;
       }
     }
 
