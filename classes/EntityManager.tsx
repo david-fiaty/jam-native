@@ -28,15 +28,20 @@ class EntityManager {
     return Entities.find(item => item.type === entityType);
   }
 
-  getCoreFieldName(fieldName: string, fields: string) {
-    
+  getCoreFieldName(fieldName: string, fields: object) {
+    for (const [key, value] of Object.entries(fields)) {
+      if (value == fieldName) return key;
+    }
+
+    return null;
   }
 
   mapEntityFields(fields: object, data: any) {
     let result: any = {};
 
     for (const [fieldName, fieldValue] of Object.entries(data)) {
-      let coreFieldName = {};
+      let coreFieldName = this.getCoreFieldName(fieldName, fields);
+      //console.log(coreFieldName);
 
 
       /*
