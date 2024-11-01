@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-import { setIsLoggedIn } from '@/redux/slices/UserSlice';
 import DataManager from './DataManager';
 
 class UserManager {
