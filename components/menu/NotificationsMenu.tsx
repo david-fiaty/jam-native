@@ -9,13 +9,50 @@ import BackButton from '../button/BackButton';
 import i18n from '@/translation/i18n';
 import DataManager from '@/classes/DataManager';
 
+const data = [
+  {
+    label: 'Lorem ipsum dolor sit amet',
+    path: '/notifications',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },
+  {
+    label: 'Consectetur adipiscing elit',
+    path: '/notifications',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },
+  {
+    label: 'Sed do eiusmod tempor',
+    path: '/notifications',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },
+  {
+    label: 'Incididunt ut labore et dolore magna aliqua',
+    path: '/notifications',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },
+  {
+    label: 'Ut enim ad minim veniam, quis nostrud',
+    path: '/notifications',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },
+  {
+    label: 'Exercitation ullamco laboris nisi',
+    path: '/notifications',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },
+  {
+    label: 'Excepteur sint occaecat cupidatat',
+    path: '/notifications',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },  
+];
+
 const NotificationsMenu = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const items = DataManager.get('notifications');
 
   const renderItem = (item, index) => (
-    <TouchableOpacity onPress={() => router.push({ 
+    <TouchableOpacity key="id" onPress={() => router.push({ 
       pathname: '/notification', 
       params: item, 
     })}>
@@ -34,7 +71,7 @@ const NotificationsMenu = () => {
         }))}
       />
       <ListView 
-        data={items} 
+        data={data} 
         renderItem={({item, index}) => renderItem(item, index)}   
       />
     </View>

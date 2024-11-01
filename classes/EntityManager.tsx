@@ -25,7 +25,7 @@ class EntityManager {
   }
 
   findEntityDefinition(entityType: string) {
-    return Entities.find(item => item.type === entityType);
+    return Entities.find(item => item.type === entityType) || null;
   }
 
   getCoreFieldName(fieldName: string, fields: object) {
@@ -36,6 +36,8 @@ class EntityManager {
     return null;
   }
 
+/*
+
   mapEntityFields(fields: object, data: any) {
     let result: any = [];
 
@@ -43,24 +45,31 @@ class EntityManager {
       let coreFieldName: any = this.getCoreFieldName(fieldName, fields);
       let entityDefinition: any = this.findEntityDefinition(coreFieldName);
 
-      if (entityDefinition) {
+      //console.log('----------------------------------------');
+      //console.log(coreFieldName, entityDefinition, fieldValue);
+      //console.log('----------------------------------------');
+      
+      
+      if (coreFieldName && entityDefinition) {
         result[coreFieldName] = this.mapEntityFields(entityDefinition.fields, fieldValue);
       }
-      else {
+      else if (coreFieldName) {
         result[coreFieldName] = fieldValue;
       }
     }
 
+    //console.warn('xx', result);
+
     return result;
   }
+  */
   
-  /*
-  mapEntity(fields: object, data: any) {
-    let result: any = {};
+  mapEntityFields(fields: object, data: any) {
+    let result: any = [];
 
     for (const [sourceField, targetField] of Object.entries(fields)) {
       if (typeof targetField === 'object' && data?.[sourceField]) {
-        result[sourceField] = this.mapEntity(targetField, data[sourceField]);
+        result[sourceField] = this.mapEntityFields(targetField, data[sourceField]);
       } 
       else if (data?.[targetField] !== undefined) {
         result[sourceField] = data[targetField];
@@ -68,7 +77,7 @@ class EntityManager {
     }
 
     return result;
-  }*/
+  }
 };
 
 export default (new EntityManager());
