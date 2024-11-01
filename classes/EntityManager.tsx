@@ -43,11 +43,14 @@ class EntityManager {
       let coreFieldName: any = this.getCoreFieldName(fieldName, fields);
       let entityDefinition: any = this.findEntityDefinition(coreFieldName);
 
-      if (entityDefinition) {
+      if (coreFieldName && entityDefinition) {
         result[coreFieldName] = this.mapEntityFields(entityDefinition.fields, fieldValue);
       }
-      else {
+      else if (coreFieldName) {
         result[coreFieldName] = fieldValue;
+      }
+      else {
+        console.warn('Missing entity field definition', [coreFieldName, fieldName]);
       }
     }
 
