@@ -47,7 +47,7 @@ const LoginScreen = () => {
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Email address')} 
-        onChangeText={(text) => setUsername(text)}
+        onChangeText={(text: string) => setUsername(text)}
       />
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
@@ -55,7 +55,7 @@ const LoginScreen = () => {
         secureTextEntry={true} 
         autoCapitalize="none"
         spellCheck={false}
-        onChangeText={(text) => setPassword(text)}
+        onChangeText={(text: string) => setPassword(text)}
       />
 
       <ContinueButton onPress={login} />
