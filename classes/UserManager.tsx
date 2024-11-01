@@ -2,13 +2,11 @@ import { useSelector } from 'react-redux';
 import DataManager from './DataManager';
 
 class UserManager {
-  async login(email: string, password: string) {
+  async login(email: string, password: string, userState?: object) {
     let response = await DataManager.post('login', {
       email: email,
       password: password,
     });
-
-    this.isAccessTokenValid();
     
     return response;
   }
@@ -18,9 +16,8 @@ class UserManager {
   }
 
   isAccessTokenValid() {
-    const userState = useSelector((state) => state.user);
     console.log('---oooppp---');
-    console.log(userState);
+    console.log(useSelector((state) => state.user));
   }
 };
 
