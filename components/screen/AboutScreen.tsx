@@ -1,5 +1,5 @@
 
-import { useNavigation } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import { Divider } from '@rneui/base';
 import BoxView from '../view/BoxView';
@@ -19,13 +19,13 @@ const data = {
 };
 
 const AboutScreen = () => {
-  const navigation = useNavigation();
+  const router = useRouter();
 
   return (
     <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={i18n.t('About')}
-        onPress={() => navigation.popToTop()}
+        onPress={() => router.push('/')}
       />
       <TextView>{data.text}</TextView> 
       <Divider />
