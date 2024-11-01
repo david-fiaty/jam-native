@@ -28,7 +28,7 @@ class DataManager {
 
     // Process results
     results = results?.length > 0 ? results : data;
-    //results = results.filter(item => JSON.stringify(item) !== '{}');
+    results = Array.isArray(results) ? results.filter(item => Object.keys(item).length !== 0) : [];
     
     return results;
   }
