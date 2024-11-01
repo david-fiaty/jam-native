@@ -52,7 +52,10 @@ const ProfileForm = () => {
       <UserProfileImageField />
 
       <DividerView />
+
       <InputTextField placeholder={i18n.t('Public name')} />
+
+      
       <InputTextField placeholder={i18n.t('IG handle')} />
       <InputTextField placeholder={i18n.t('Email address')} />
       <InputTextField placeholder={i18n.t('Phone number')} />
