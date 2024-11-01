@@ -58,6 +58,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
   * No image field for projects? Search items require images
   * No endpoints for events, jammers, calls, venues
   * What is refresh_token in login response payload
+  * user login response payload should not contain more than token data (exclude user data email, profile...)
 
 # Todo 
 - Implement image cache : https://github.com/echowaves/expo-cached-image
