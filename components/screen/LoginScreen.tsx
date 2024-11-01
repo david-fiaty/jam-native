@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { setAccessToken, setIsLoggedIn } from '@/redux/slices/UserSlice';
 import { useRouter } from 'expo-router';
 import { Divider } from '@rneui/base';
 import { Layout } from '@/constants/Layout';
@@ -16,7 +17,6 @@ import GoogleLoginButton from '../button/GoogleLoginButton';
 import FacebookLoginButton from '../button/FacebookLoginButton';
 import InstagramLoginButton from '../button/InstagramLoginButton';
 import UserManager from '@/classes/UserManager';
-import { setAccessToken, setIsLoggedIn } from '@/redux/slices/UserSlice';
 
 const LoginScreen = () => {
   const router = useRouter();
