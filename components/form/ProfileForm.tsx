@@ -22,7 +22,11 @@ const ProfileForm = () => {
   const [userJamsData, setUserJamsData] = useState([]);
   const [userProjectsData, setUserProjectsData] = useState([]);
   const userState = useSelector((state: any) => state.user);
+
   const accountData = userState.accountData;
+  const formFields = [
+    
+  ];
 
   //console.log(userState.accountData);
 
