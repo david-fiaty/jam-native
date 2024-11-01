@@ -42,9 +42,7 @@ const UserProjectsList = ({data}: Props) => {
         />
       }
 
-      {!data?.length && 
-        <TextView>{i18n.t('Create a project')}</TextView>
-      } 
+      {!data?.length && <TextView>{i18n.t('Create a project')}</TextView> } 
     </View>
   );
 }

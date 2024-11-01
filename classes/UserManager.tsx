@@ -1,9 +1,8 @@
 import { useSelector } from 'react-redux';
-import { setIsLoggedIn } from '@/redux/slices/UserSlice';
 import DataManager from './DataManager';
 
 class UserManager {
-  async login(email: string, password: string) {
+  async login(email: string, password: string, userState?: object) {
     let response = await DataManager.post('login', {
       email: email,
       password: password,
@@ -14,6 +13,11 @@ class UserManager {
 
   isLoggedIn() {
     return (useSelector((state) => state.user)).isLoggedIn === true;
+  }
+
+  isAccessTokenValid() {
+    console.log('---oooppp---');
+    console.log(useSelector((state) => state.user));
   }
 };
 

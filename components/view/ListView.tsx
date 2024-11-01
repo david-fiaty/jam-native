@@ -25,6 +25,10 @@ const ListView = ({data, ref, numColumns, scrollEnabled, horizontal, contentCont
       columnWrapperStyle={columnWrapperStyle}
       keyExtractor={(item) => item.id}
       renderItem={renderItem} 
+      initialNumToRender={10}
+      maxToRenderPerBatch={5}
+      removeClippedSubviews={true}
+      windowSize={5}
     />
   );
 };
