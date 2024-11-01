@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAccessToken, setIsLoggedIn, setAccountData, setProfileData } from '@/redux/slices/UserSlice';
+import { setAccessToken, setIsLoggedIn, setAccountData } from '@/redux/slices/UserSlice';
 import { useRouter } from 'expo-router';
 import { Divider } from '@rneui/base';
 import { Layout } from '@/constants/Layout';
@@ -32,8 +32,7 @@ const LoginScreen = () => {
 
     if (response?.tokens?.access_token?.length) {
       dispatch(setAccessToken(JSON.stringify(response.tokens)));
-      dispatch(setAccountData(JSON.stringify(response.tokens)));
-      dispatch(setProfileData(JSON.stringify(response.tokens)));
+      dispatch(setAccountData(JSON.stringify(response.user)));
       dispatch(setIsLoggedIn(true));
 
       router.replace('/main');
