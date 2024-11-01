@@ -24,7 +24,7 @@ const LegalScreen = () => {
     <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Legal')}
-        onPress={() => router.back()}
+        onPress={() => router.push('/')}
       />
       <TextView>{data.text}</TextView> 
       <Divider />
