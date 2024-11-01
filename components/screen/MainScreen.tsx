@@ -21,7 +21,7 @@ const MainScreen = () => {
   const route = useRoute();
 
   // Storage state
-  const screenState = useSelector((state) => state.screen);
+  const screenState = useSelector((state: any) => state.screen);
 
   // Animation references
   const fadeEffectReference = useRef(new Animated.Value(0)).current;

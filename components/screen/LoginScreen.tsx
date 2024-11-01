@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAccessToken, setIsLoggedIn } from '@/redux/slices/UserSlice';
+import { setAccessToken, setIsLoggedIn, setAccountData } from '@/redux/slices/UserSlice';
 import { useRouter } from 'expo-router';
 import { Divider } from '@rneui/base';
 import { Layout } from '@/constants/Layout';
@@ -23,7 +23,7 @@ const LoginScreen = () => {
   const dispatch = useDispatch();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const userState = useSelector((state) => state.user);
+  const userState = useSelector((state: any) => state.user);
 
   const login = async () => {
     // Todo - Connect username and password
@@ -32,6 +32,7 @@ const LoginScreen = () => {
 
     if (response?.tokens?.access_token?.length) {
       dispatch(setAccessToken(JSON.stringify(response.tokens)));
+      dispatch(setAccountData(JSON.stringify(response.user)));
       dispatch(setIsLoggedIn(true));
 
       router.replace('/main');
@@ -47,7 +48,7 @@ const LoginScreen = () => {
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Email address')} 
-        onChangeText={(text) => setUsername(text)}
+        onChangeText={(text: string) => setUsername(text)}
       />
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
@@ -55,14 +56,14 @@ const LoginScreen = () => {
         secureTextEntry={true} 
         autoCapitalize="none"
         spellCheck={false}
-        onChangeText={(text) => setPassword(text)}
+        onChangeText={(text: string) => setPassword(text)}
       />
 
       <ContinueButton onPress={login} />
 
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
         <TextView>{i18n.t('New user? Create an account')}</TextView>
-        <SkipButton onPress={() => router.push('/main')} />
+        <SkipButton onPress={async () => router.push('/main')} />
       </BoxView>
 
       <Divider /><Divider />
