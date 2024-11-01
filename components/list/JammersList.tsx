@@ -31,6 +31,7 @@ const JammersList = () => {
           name: 'JammersList',
         }))}
       />
+      
       <View style={Layout.borderedListContainer}>
         {data?.length > 0 &&
           <ListView

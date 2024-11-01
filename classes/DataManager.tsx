@@ -4,11 +4,11 @@ import ApiClient from './ApiClient';
 import EntityManager from './EntityManager';
 
 class DataManager {
-  async get(key: keyof typeof ApiEndpoints, options: object) {
+  async get(key: keyof typeof ApiEndpoints, options: any) {
     // Variables
     const searchState = Store.getState().search;
-    let data = await this.getData(key);
-    let results: object = [];
+    let data: any = await this.getData(key);
+    let results: any = [];
 
     // Apply search
     if (options?.filter !== false && searchState.filter.length) {
@@ -33,7 +33,7 @@ class DataManager {
     return results;
   }
 
-  async post(key: keyof typeof ApiEndpoints, data: object, options?: object) {
+  async post(key: keyof typeof ApiEndpoints, data: any, options?: any) {
     return await ApiClient.post(key, data);
   }
 
