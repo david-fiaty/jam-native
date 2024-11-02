@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
 import * as ExpoSplashScreen from 'expo-splash-screen';
@@ -11,7 +11,7 @@ import Store from "@/redux/Store";
 import HeaderNavigation from '@/components/navigation/HeaderNavigation';
 import SplashScreen from '@/components/screen/SplashScreen';
 
-const screenOptions = { 
+const screenOptions: object = { 
   header: (props: object) => (
     <ThemeProvider theme={BaseTheme}>
       <HeaderNavigation />
