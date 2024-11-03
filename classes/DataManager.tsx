@@ -12,13 +12,13 @@ class DataManager {
 
     // Apply search
     if (options?.filter !== false && searchState.filter.length) {
-      results = data.filter(item => item?.type == searchState.filter); 
+      results = data.filter((item: any)  => item?.type == searchState.filter); 
     }
 
     // Apply filters
     if (options?.search !== false && searchState.value.length) {
       results = results.length ? results : data;
-      results = data.filter(item => {
+      results = data.filter((item: any) => {
         let haystack = item?.description?.toLowerCase();
         let needle = searchState.value.toLowerCase();
 
@@ -38,11 +38,11 @@ class DataManager {
   }
 
   async getData(key: keyof typeof ApiEndpoints) {
-    const data: object = await ApiClient.get(key);
-    let result: object = [];
+    const data: any = await ApiClient.get(key);
+    let result: any = [];
 
     if (data) {
-      data.forEach(item => {
+      data.forEach((item: object) => {
         result.push(EntityManager.create(key, item));
       }); 
     }
