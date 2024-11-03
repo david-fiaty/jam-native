@@ -19,14 +19,14 @@ import InstagramLoginButton from '../button/InstagramLoginButton';
 import UserManager from '@/classes/UserManager';
 import LinkView from '../view/LinkView';
 
-const LoginScreen = () => {
+const SignupScreen = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const userState = useSelector((state: any) => state.user);
 
-  const login = async () => {
+  const signup = async () => {
     // Todo - Connect username and password
     let response = await UserManager.login(username, password);
     //let response = await UserManager.login('mitsiomotu@yopmail.com', 'Password1234');
@@ -43,7 +43,7 @@ const LoginScreen = () => {
   return (
     <BoxView direction="column" align="center" justify="center" style={Layout.screenContent}>
       <LogoView size={{ width: 80, height: 80 }} />    
-      <TextView style={styles.wecomeMessage}>{i18n.t('Welcome back')}</TextView> 
+      <TextView style={styles.wecomeMessage}>{i18n.t('Create an account')}</TextView> 
 
       <Divider /><Divider />
       <InputTextField 
@@ -60,13 +60,13 @@ const LoginScreen = () => {
         onChangeText={(text: string) => setPassword(text)}
       />
 
-      <ContinueButton onPress={login} />
+      <ContinueButton onPress={signup} />
 
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
         <BoxView direction="row" align="center" justify="flex-start">
-          <TextView>{i18n.t('New user?')}</TextView>
-          <LinkView onPress={async () => router.push('/signup')}>
-            {i18n.t('Sign up')}
+          <TextView>{i18n.t('Already have an account?')}</TextView>
+          <LinkView onPress={async () => router.push('/login')}>
+            {i18n.t('Sign in')}
           </LinkView>
         </BoxView>
         <SkipButton onPress={async () => router.push('/main')} />
@@ -76,7 +76,6 @@ const LoginScreen = () => {
       <GoogleLoginButton />
       <FacebookLoginButton />
       <InstagramLoginButton />
-
     </BoxView>
   );
 };
@@ -94,4 +93,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default LoginScreen;
+export default SignupScreen;

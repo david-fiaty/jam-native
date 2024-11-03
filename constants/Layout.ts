@@ -25,6 +25,12 @@ const fontSize = {
   big: 24,
 };
 
+const borderWidth = {
+  small: 0.1,
+  base: 0.5,
+  big: 1,
+};
+
 const header = {
   height: 48,
   width: DeviceManager.window.width,
@@ -54,6 +60,7 @@ export const Layout = {
   radius: radius,
   iconSize: iconSize,
   fontSize: fontSize,
+  borderWidth: borderWidth,
   header: header,
   logo: logo,
   footer: footer,
