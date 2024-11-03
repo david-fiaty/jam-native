@@ -1,9 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Modals } from '@/constants/Modals';
 
 const ScreenSlice = createSlice({
   name: 'screen',
-  initialState: Modals,
+  initialState: {},
   reducers: {
     setScreenState: (state, action) => {
       state = action.payload;
