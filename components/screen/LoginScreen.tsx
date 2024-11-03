@@ -17,6 +17,7 @@ import GoogleLoginButton from '../button/GoogleLoginButton';
 import FacebookLoginButton from '../button/FacebookLoginButton';
 import InstagramLoginButton from '../button/InstagramLoginButton';
 import UserManager from '@/classes/UserManager';
+import LinkView from '../view/LinkView';
 
 const LoginScreen = () => {
   const router = useRouter();
@@ -62,7 +63,11 @@ const LoginScreen = () => {
       <ContinueButton onPress={login} />
 
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
-        <TextView>{i18n.t('New user? Create an account')}</TextView>
+        <TextView>
+          {i18n.t('New user?')}
+          <LinkView>{i18n.t('Create an account')}</LinkView>s
+        </TextView>
+        
         <SkipButton onPress={async () => router.push('/main')} />
       </BoxView>
 
@@ -77,7 +82,7 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   inputTextFieldContainer: {
     backgroundColor: Colors.white,
-    borderWidth: 0.5,
+    borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
     borderColor: Colors.primary,
   },

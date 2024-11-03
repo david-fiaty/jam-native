@@ -77,7 +77,7 @@ const SignupScreen = () => {
 const styles = StyleSheet.create({
   inputTextFieldContainer: {
     backgroundColor: Colors.white,
-    borderWidth: 0.5,
+    borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
     borderColor: Colors.primary,
   },

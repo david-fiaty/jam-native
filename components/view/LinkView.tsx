@@ -15,7 +15,8 @@ const styles = StyleSheet.create({
   content: {
     color: Colors.primary,
     fontSize: Layout.fontSize.base,
-    textDecorationColor: 'underline',
+    borderBottomWidth: Layout.borderWidth.base,
+    borderBottomColor: Colors.primary,
   },
 });
 
