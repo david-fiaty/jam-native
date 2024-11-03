@@ -147,7 +147,7 @@ const JamsScreen = () => {
         </BoxView>
 
         {/* Footer navigation */}
-        { (route.name == 'main' || currentScreen?.footerNavigation) && <FooterNavigation /> }
+        { (route.name == 'jams' || currentScreen?.footerNavigation) && <FooterNavigation /> }
       </View>
     </ScreenView>
   );
