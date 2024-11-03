@@ -55,7 +55,7 @@ const stackScreens = [
   },
 ];
 
-const screenOptions: object = { 
+const headerVisibleOptions: object = { 
   header: (props: object) => (
     <ThemeProvider theme={BaseTheme}>
       <HeaderNavigation />
@@ -68,6 +68,10 @@ const screenOptions: object = {
   headerStyle: {
     backgroundColor: Colors.background, 
   },
+};
+
+const headerHiddenOptions: object = { 
+  headerShown: false,
 };
 
 ExpoSplashScreen.preventAutoHideAsync();
@@ -91,13 +95,13 @@ const RootLayout = () => {
         <Stack.Screen name="index" options={{headerShown: false}} />
         <Stack.Screen name="login" options={{headerShown: false, animation:'fade'}} />
         <Stack.Screen name="signup" options={{headerShown: false, animation:'fade'}} />
-        <Stack.Screen name="about" options={screenOptions} />
-        <Stack.Screen name="legal" options={screenOptions} />
-        <Stack.Screen name="main" options={screenOptions} />
-        <Stack.Screen name="account" options={screenOptions} />
-        <Stack.Screen name="password" options={screenOptions} />
-        <Stack.Screen name="language" options={screenOptions} />
-        <Stack.Screen name="notification" options={screenOptions} />
+        <Stack.Screen name="about" options={headerVisibleOptions} />
+        <Stack.Screen name="legal" options={headerVisibleOptions} />
+        <Stack.Screen name="main" options={headerVisibleOptions} />
+        <Stack.Screen name="account" options={headerVisibleOptions} />
+        <Stack.Screen name="password" options={headerVisibleOptions} />
+        <Stack.Screen name="language" options={headerVisibleOptions} />
+        <Stack.Screen name="notification" options={headerVisibleOptions} />
       </Stack>
     </Provider>
   );
