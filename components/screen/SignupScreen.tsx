@@ -36,7 +36,7 @@ const SignupScreen = () => {
       dispatch(setAccountData(JSON.stringify(response.user)));
       dispatch(setIsLoggedIn(true));
 
-      router.replace('/main');
+      router.replace('/jams');
     }
   }  
 
@@ -69,7 +69,7 @@ const SignupScreen = () => {
             {i18n.t('Sign in')}
           </LinkView>
         </BoxView>
-        <SkipButton onPress={async () => router.push('/main')} />
+        <SkipButton onPress={async () => router.push('/jams')} />
       </BoxView>
 
       <Divider /><Divider />

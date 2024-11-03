@@ -10,7 +10,7 @@ type Props = {
 
 const SkipButton = ({onPress}: Props) => {
   const router = useRouter();
-  onPress = onPress ? onPress : router.push('/main');
+  onPress = onPress ? onPress : router.push('/jams');
 
   return (
     <TouchableOpacity onPress={onPress}>
