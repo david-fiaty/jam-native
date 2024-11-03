@@ -15,7 +15,6 @@ export default () => {
   });
 
   useEffect(() => {
-    console.log(screens);
     dispatch(setScreenState(screens));
   }, []);
 
