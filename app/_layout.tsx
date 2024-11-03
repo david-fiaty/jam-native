@@ -42,39 +42,70 @@ const routes = [
   },
   {
     name: 'login',
-    options: {},
+    options: {
+      ...headerHiddenOptions,
+      ...{
+        animation: 'fade',
+      },
+    },
   },
   {
     name: 'signup',
-    options: {},
+    options: {
+      ...headerHiddenOptions,
+      ...{
+        animation: 'fade',
+      },
+    },
   },
   {
     name: 'about',
-    options: {},
+    options: {
+      ...headerVisibleOptions,
+      ...{},
+    },
   },
   {
     name: 'legal',
-    options: {},
+    options: {
+      ...headerVisibleOptions,
+      ...{},
+    },
   },
   {
     name: 'jams',
-    options: {},
+    options: {
+      ...headerVisibleOptions,
+      ...{},
+    },
   },
   {
     name: 'account',
-    options: {},
+    options: {
+      ...headerVisibleOptions,
+      ...{},
+    },
   },
   {
     name: 'password',
-    options: {},
+    options: {
+      ...headerVisibleOptions,
+      ...{},
+    },
   },
   {
     name: 'language',
-    options: {},
+    options: {
+      ...headerVisibleOptions,
+      ...{},
+    },
   },
   {
     name: 'notification',
-    options: {},
+    options: {
+      ...headerVisibleOptions,
+      ...{},
+    },
   },
 ];
 
@@ -96,16 +127,13 @@ const RootLayout = () => {
   return (
     <Provider store={Store}>
       <Stack>
-        <Stack.Screen name="index" options={{headerShown: false}} />
-        <Stack.Screen name="login" options={{headerShown: false, animation:'fade'}} />
-        <Stack.Screen name="signup" options={{headerShown: false, animation:'fade'}} />
-        <Stack.Screen name="about" options={headerVisibleOptions} />
-        <Stack.Screen name="legal" options={headerVisibleOptions} />
-        <Stack.Screen name="jams" options={headerVisibleOptions} />
-        <Stack.Screen name="account" options={headerVisibleOptions} />
-        <Stack.Screen name="password" options={headerVisibleOptions} />
-        <Stack.Screen name="language" options={headerVisibleOptions} />
-        <Stack.Screen name="notification" options={headerVisibleOptions} />
+        {
+          routes.map((item: any) => {
+            return (
+              <Stack.Screen name={item.name} options={item.options} />
+            );
+          })
+        }
       </Stack>
     </Provider>
   );
