@@ -13,24 +13,6 @@ import MoreJamView from "@/components/view/MoreJamView";
 
 export const Screens = [
   {
-    name: 'AboutScreen', 
-    effect: 'fade',
-    active: false,
-    headerNavigation: true,
-    footerNavigation: true,
-    entityId: null,
-    component: null,
-  },
-  {
-    name: 'LegalScreen', 
-    effect: 'slide',
-    active: false,
-    headerNavigation: true,
-    footerNavigation: true,
-    entityId: null,
-    component: null,
-  },
-  {
     name: 'JamsList', 
     effect: 'fade',
     active: false,
@@ -137,5 +119,22 @@ export const Screens = [
     footerNavigation: true,
     entityId: null,
     component: <MoreJamView />,
+  },  {
+    name: 'AboutScreen', 
+    effect: 'fade',
+    active: false,
+    headerNavigation: true,
+    footerNavigation: true,
+    entityId: null,
+    component: null,
+  },
+  {
+    name: 'LegalScreen', 
+    effect: 'slide',
+    active: false,
+    headerNavigation: true,
+    footerNavigation: true,
+    entityId: null,
+    component: null,
   },
 ];
