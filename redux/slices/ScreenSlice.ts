@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Stack } from '@/constants/Stack';
+import { Modals } from '@/constants/Modals';
 
 const ScreenSlice = createSlice({
   name: 'screen',
-  initialState: Stack,
+  initialState: Modals,
   reducers: {
     setActiveScreen: (state, action) => {
       state.map(item => {
