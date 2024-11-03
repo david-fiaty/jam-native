@@ -11,6 +11,24 @@ import Store from "@/redux/Store";
 import HeaderNavigation from '@/components/navigation/HeaderNavigation';
 import SplashScreen from '@/components/screen/SplashScreen';
 
+const headerHiddenOptions: object = { 
+  headerShown: false,
+};
+
+const headerVisibleOptions: object = { 
+  header: (props: object) => (
+    <ThemeProvider theme={BaseTheme}>
+      <HeaderNavigation />
+    </ThemeProvider>
+  ),    
+  headerShown: true,
+  statusBarColor: Colors.background,
+  statusBarStyle: 'dark',
+  headerTintColor: Colors.background,    
+  headerStyle: {
+    backgroundColor: Colors.background, 
+  },
+};
 
 const stackScreens = [
   {
@@ -54,25 +72,6 @@ const stackScreens = [
     options: {},
   },
 ];
-
-const headerVisibleOptions: object = { 
-  header: (props: object) => (
-    <ThemeProvider theme={BaseTheme}>
-      <HeaderNavigation />
-    </ThemeProvider>
-  ),    
-  headerShown: true,
-  statusBarColor: Colors.background,
-  statusBarStyle: 'dark',
-  headerTintColor: Colors.background,    
-  headerStyle: {
-    backgroundColor: Colors.background, 
-  },
-};
-
-const headerHiddenOptions: object = { 
-  headerShown: false,
-};
 
 ExpoSplashScreen.preventAutoHideAsync();
 
