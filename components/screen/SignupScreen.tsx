@@ -60,7 +60,7 @@ const SignupScreen = () => {
         onChangeText={(text: string) => setPassword(text)}
       />
 
-      <ContinueButton onPress={login} />
+      <ContinueButton onPress={signup} />
 
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
         <BoxView direction="row" align="center" justify="flex-start">
