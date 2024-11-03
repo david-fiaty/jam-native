@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const ScreenSlice = createSlice({
   name: 'screen',
-  initialState: {},
+  initialState: [],
   reducers: {
     setScreenState: (state, action) => {
       state = action.payload;
