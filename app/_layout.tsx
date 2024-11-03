@@ -57,7 +57,7 @@ const routes = [
     options: {},
   },
   {
-    name: 'main',
+    name: 'jams',
     options: {},
   },
   {
