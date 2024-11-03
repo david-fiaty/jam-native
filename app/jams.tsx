@@ -1,13 +1,13 @@
 import { ThemeProvider } from '@rneui/themed';
 import ScreenView from '@/components/view/ScreenView';
 import BaseTheme from "@/constants/BaseTheme";
-import MainScreen from '@/components/screen/MainScreen';
+import JamsScreen from '@/components/screen/JamsScreen';
 
 export default () => {
   return ( 
     <ThemeProvider theme={BaseTheme}>
       <ScreenView>
-        <MainScreen />
+        <JamsScreen />
       </ScreenView>
     </ThemeProvider>
   );

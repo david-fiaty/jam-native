@@ -38,7 +38,7 @@ const screenComponents: any = {
   MoreJamView: <MoreJamView />,
 };
 
-const MainScreen = () => {
+const JamsScreen = () => {
   // Parameters
   const windowWidth = DeviceManager.window.width;
   const windowHeight = DeviceManager.window.height;
@@ -162,4 +162,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MainScreen;
+export default JamsScreen;

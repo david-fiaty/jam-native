@@ -101,7 +101,7 @@ const RootLayout = () => {
         <Stack.Screen name="signup" options={{headerShown: false, animation:'fade'}} />
         <Stack.Screen name="about" options={headerVisibleOptions} />
         <Stack.Screen name="legal" options={headerVisibleOptions} />
-        <Stack.Screen name="main" options={headerVisibleOptions} />
+        <Stack.Screen name="jams" options={headerVisibleOptions} />
         <Stack.Screen name="account" options={headerVisibleOptions} />
         <Stack.Screen name="password" options={headerVisibleOptions} />
         <Stack.Screen name="language" options={headerVisibleOptions} />
