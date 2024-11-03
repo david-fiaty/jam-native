@@ -4,7 +4,7 @@ import { useRoute } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
-import { Stack } from "@/constants/Stack";
+import { Modals } from "@/constants/Modals";
 import { Screens } from "@/constants/Screens";
 import ScreenView from "../view/ScreenView";
 import BoxView from "../view/BoxView";
@@ -77,7 +77,7 @@ const MainScreen = () => {
   // Get the active screen
   const getActiveScreen = (state: object) => {
     let screen = state.find(item => item.active === true);
-    let activeScreen = screen ? Stack.find(item => item.name == screen.name) : null;
+    let activeScreen = screen ? Modals.find(item => item.name == screen.name) : null;
 
     return activeScreen;
   };

@@ -26,7 +26,7 @@ const InstagramLoginButton = () => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    borderWidth: 0.5, 
+    borderWidth: Layout.borderWidth.base, 
     borderColor: Colors.primary,
     borderRadius: Layout.radius.round,
     padding: Layout.space.base/2,
