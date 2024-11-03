@@ -23,7 +23,7 @@ import SaveJamView from "@/components/view/SaveJamView";
 import ShareJamView from "@/components/view/ShareJamView";
 import MoreJamView from "@/components/view/MoreJamView";
 
-const Screens = {
+const Screens: any = {
   JamsList: <JamsList />,
   MapView: <MapView />,
   AddJamForm: <AddJamForm />,
