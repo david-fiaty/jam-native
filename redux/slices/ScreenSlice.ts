@@ -8,7 +8,7 @@ const ScreenSlice = createSlice({
       state = action.payload;
     },    
     setActiveScreen: (state, action) => {
-      state.map(item => {
+      state.map((item: any) => {
         if (item.name == action.payload.name && item.active) {
           item.active = false;
         }
