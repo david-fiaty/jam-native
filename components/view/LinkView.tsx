@@ -1,13 +1,22 @@
-import { StyleSheet, Text } from 'react-native';
+import { ReactNode } from 'react';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 
-const LinkView = ({style, children}: BaseProps) => {
+type Props = BaseProps & {
+  style?: object,
+  children?: ReactNode,
+  onPress: () => void,
+};
+
+const LinkView = ({onPress, style, children}: Props) => {
   return (
-    <Text style={[styles.content, style]}>
-      {children}
-    </Text>
+    <TouchableOpacity onPress={onPress}>
+      <Text style={[styles.content, style]}>
+        {children}
+      </Text>
+    </TouchableOpacity>
   );
 };
 

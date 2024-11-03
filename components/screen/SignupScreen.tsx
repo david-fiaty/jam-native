@@ -65,7 +65,9 @@ const SignupScreen = () => {
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
         <BoxView direction="row" align="center" justify="flex-start">
           <TextView>{i18n.t('Already have an account?')}</TextView>
-          <LinkView>{i18n.t('Sign in')}</LinkView>
+          <LinkView onPress={async () => router.push('/login')}>
+            {i18n.t('Sign in')}
+          </LinkView>
         </BoxView>
         <SkipButton onPress={async () => router.push('/main')} />
       </BoxView>
