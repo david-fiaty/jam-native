@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
-import { Stack } from 'expo-router';
+import { Stack, useSegments } from 'expo-router';
 import { useFonts } from 'expo-font';
 import * as ExpoSplashScreen from 'expo-splash-screen';
-import * as ExpoFont from 'expo-font';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@rneui/themed';
 import { Colors } from '@/constants/Colors';
@@ -112,6 +111,7 @@ const routes = [
 ExpoSplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
+  const segments = useSegments(); 
   const [isLoaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
