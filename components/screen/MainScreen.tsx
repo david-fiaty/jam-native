@@ -4,7 +4,6 @@ import { useRoute } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
-import { Modals } from "@/constants/Modals";
 import { Screens } from "@/constants/Screens";
 import ScreenView from "../view/ScreenView";
 import BoxView from "../view/BoxView";
