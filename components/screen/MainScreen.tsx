@@ -11,6 +11,7 @@ import BoxView from "../view/BoxView";
 import DeviceManager from "@/classes/DeviceManager";
 import FooterNavigation from "../navigation/FooterNavigation";
 import JamsList from "../list/JamsList";
+import ScreenManager from "@/classes/ScreenManager";
 
 const MainScreen = () => {
   // Parameters
@@ -29,7 +30,7 @@ const MainScreen = () => {
   const pushEffectReference = useRef(new Animated.Value(windowWidth)).current;
 
   // Animation effects
-  const animationEffects = {
+  const animationEffects: any = {
     slide: (show?: boolean) => {
       Animated.timing(slideEffectReference, {
         toValue: show ? 0 : windowHeight, 
@@ -54,7 +55,7 @@ const MainScreen = () => {
   };
   
   // Animation styles
-  const animationStyles = {
+  const animationStyles: any = {
     fade: { 
       opacity: fadeEffectReference,
     },
@@ -74,22 +75,22 @@ const MainScreen = () => {
     },
   };
 
-  // Get the active screen
-  const getActiveScreen = (state: object) => {
-    let screen = state.find(item => item.active === true);
-    let activeScreen = screen ? Modals.find(item => item.name == screen.name) : null;
+  // Get the active modal window
+  const getActiveModal = (state: object) => {
+    let screen = ScreenManager.getActiveScreen();
+    let activeModal = screen ? Modals.find(item => item.name == screen.name) : null;
 
-    return activeScreen;
+    return activeModal;
   };
 
   // Display
   useEffect(() => {
-    const activeScreen = getActiveScreen(screenState);
+    const activeModal: any = getActiveModal(screenState);
 
-    if (activeScreen) {
-      setCurrentScreen(activeScreen);
-      setAnimatedStyle(animationStyles[activeScreen.effect]);
-      animationEffects[activeScreen.effect](true);
+    if (activeModal) {
+      setCurrentScreen(activeModal);
+      setAnimatedStyle(animationStyles[activeModal.effect]);
+      animationEffects[activeModal.effect](true);
     }
     else if (currentScreen) {
       animationEffects[currentScreen.effect](false);    
