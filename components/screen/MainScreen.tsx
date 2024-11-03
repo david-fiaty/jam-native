@@ -77,7 +77,7 @@ const MainScreen = () => {
   // Get the active modal window
   const getActiveModal = (state: object) => {
     let screen = ScreenManager.getActiveScreen();
-    let activeModal = screen ? Modals.find(item => item.name == screen.name) : null;
+    let activeModal = screen ? Screens.find(item => item.name == screen.name) : null;
 
     return activeModal;
   };
