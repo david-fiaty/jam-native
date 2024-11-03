@@ -23,7 +23,7 @@ import SaveJamView from "@/components/view/SaveJamView";
 import ShareJamView from "@/components/view/ShareJamView";
 import MoreJamView from "@/components/view/MoreJamView";
 
-const Screens: any = {
+const screenComponents: any = {
   JamsList: <JamsList />,
   MapView: <MapView />,
   AddJamForm: <AddJamForm />,
@@ -38,7 +38,7 @@ const Screens: any = {
   MoreJamView: <MoreJamView />,
 };
 
-const MainScreen = () => {
+const JamsScreen = () => {
   // Parameters
   const windowWidth = DeviceManager.window.width;
   const windowHeight = DeviceManager.window.height;
@@ -141,13 +141,13 @@ const MainScreen = () => {
         <BoxView style={Layout.modalContainer}>
           <Animated.View style={[Layout.animatedView, animatedStyle]}>
             <BoxView style={Layout.modalContent}>
-              {Screens?.[currentScreen?.name]}
+              {screenComponents?.[currentScreen?.name]}
             </BoxView>
           </Animated.View>
         </BoxView>
 
         {/* Footer navigation */}
-        { (route.name == 'main' || currentScreen?.footerNavigation) && <FooterNavigation /> }
+        { (route.name == 'jams' || currentScreen?.footerNavigation) && <FooterNavigation /> }
       </View>
     </ScreenView>
   );
@@ -162,4 +162,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MainScreen;
+export default JamsScreen;
