@@ -127,16 +127,13 @@ const RootLayout = () => {
   return (
     <Provider store={Store}>
       <Stack>
-        <Stack.Screen name="index" options={{headerShown: false}} />
-        <Stack.Screen name="login" options={{headerShown: false, animation:'fade'}} />
-        <Stack.Screen name="signup" options={{headerShown: false, animation:'fade'}} />
-        <Stack.Screen name="about" options={headerVisibleOptions} />
-        <Stack.Screen name="legal" options={headerVisibleOptions} />
-        <Stack.Screen name="jams" options={headerVisibleOptions} />
-        <Stack.Screen name="account" options={headerVisibleOptions} />
-        <Stack.Screen name="password" options={headerVisibleOptions} />
-        <Stack.Screen name="language" options={headerVisibleOptions} />
-        <Stack.Screen name="notification" options={headerVisibleOptions} />
+        {
+          routes.map((item: any) => {
+            return (
+              <Stack.Screen name={item.name} options={item.options} />
+            );
+          })
+        }
       </Stack>
     </Provider>
   );
