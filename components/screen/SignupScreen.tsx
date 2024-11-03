@@ -17,6 +17,7 @@ import GoogleLoginButton from '../button/GoogleLoginButton';
 import FacebookLoginButton from '../button/FacebookLoginButton';
 import InstagramLoginButton from '../button/InstagramLoginButton';
 import UserManager from '@/classes/UserManager';
+import LinkView from '../view/LinkView';
 
 const SignupScreen = () => {
   const router = useRouter();
@@ -62,7 +63,10 @@ const SignupScreen = () => {
       <ContinueButton onPress={login} />
 
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
-        <TextView>{i18n.t('Already have an account? Signup')}</TextView>
+        <BoxView direction="row" align="center" justify="flex-start">
+          <TextView>{i18n.t('Already have an account?')}</TextView>
+          <LinkView>{i18n.t('Sign in')}</LinkView>
+        </BoxView>
         <SkipButton onPress={async () => router.push('/main')} />
       </BoxView>
 
