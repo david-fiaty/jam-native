@@ -63,11 +63,10 @@ const LoginScreen = () => {
       <ContinueButton onPress={login} />
 
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
-        <TextView>
-          {i18n.t('New user?')}
-          <LinkView>{i18n.t('Create an account')}</LinkView>s
-        </TextView>
-        
+        <BoxView direction="row" align="center" justify="flex-start">
+          <TextView>{i18n.t('New user?')}</TextView>
+          <LinkView>{i18n.t('Sign up')}</LinkView>
+        </BoxView>
         <SkipButton onPress={async () => router.push('/main')} />
       </BoxView>
 
@@ -75,6 +74,7 @@ const LoginScreen = () => {
       <GoogleLoginButton />
       <FacebookLoginButton />
       <InstagramLoginButton />
+
     </BoxView>
   );
 };
