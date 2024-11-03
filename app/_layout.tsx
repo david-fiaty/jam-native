@@ -46,6 +46,7 @@ const RootLayout = () => {
       <Stack>
         <Stack.Screen name="index" options={{headerShown: false}} />
         <Stack.Screen name="login" options={{headerShown: false}} />
+        <Stack.Screen name="signup" options={{headerShown: false}} />
         <Stack.Screen name="about" options={screenOptions} />
         <Stack.Screen name="legal" options={screenOptions} />
         <Stack.Screen name="main" options={screenOptions} />
@@ -57,6 +58,5 @@ const RootLayout = () => {
     </Provider>
   );
 }
-
 
 export default RootLayout;
