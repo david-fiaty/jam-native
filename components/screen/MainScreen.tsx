@@ -74,22 +74,22 @@ const MainScreen = () => {
     },
   };
 
-  // Get the active screen
-  const getActiveScreen = (state: object) => {
+  // Get the active modal window
+  const getActiveModal = (state: object) => {
     let screen = state.find(item => item.active === true);
-    let activeScreen = screen ? Modals.find(item => item.name == screen.name) : null;
+    let activeModal = screen ? Modals.find(item => item.name == screen.name) : null;
 
-    return activeScreen;
+    return activeModal;
   };
 
   // Display
   useEffect(() => {
-    const activeScreen = getActiveScreen(screenState);
+    const activeModal= getActiveModal(screenState);
 
-    if (activeScreen) {
-      setCurrentScreen(activeScreen);
-      setAnimatedStyle(animationStyles[activeScreen.effect]);
-      animationEffects[activeScreen.effect](true);
+    if (activeModal) {
+      setCurrentScreen(activeModal);
+      setAnimatedStyle(animationStyles[activeModal.effect]);
+      animationEffects[activeModal.effect](true);
     }
     else if (currentScreen) {
       animationEffects[currentScreen.effect](false);    
