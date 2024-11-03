@@ -116,6 +116,8 @@ const RootLayout = () => {
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
 
+  const animationOptions = !segments.length ? {animation: 'default'} : {};
+
   useEffect(() => {
     if (isLoaded) {
       ExpoSplashScreen.hideAsync();
