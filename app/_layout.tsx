@@ -42,39 +42,70 @@ const routes = [
   },
   {
     name: 'login',
-    options: {},
+    options: {
+      ...headerHiddenOptions,
+      ...{
+        animation: 'fade',
+      },
+    },
   },
   {
     name: 'signup',
-    options: {},
+    options: {
+      ...headerHiddenOptions,
+      ...{
+        animation: 'fade',
+      },
+    },
   },
   {
     name: 'about',
-    options: {},
+    options: {
+      ...headerVisibleOptions,
+      ...{},
+    },
   },
   {
     name: 'legal',
-    options: {},
+    options: {
+      ...headerVisibleOptions,
+      ...{},
+    },
   },
   {
     name: 'jams',
-    options: {},
+    options: {
+      ...headerVisibleOptions,
+      ...{},
+    },
   },
   {
     name: 'account',
-    options: {},
+    options: {
+      ...headerVisibleOptions,
+      ...{},
+    },
   },
   {
     name: 'password',
-    options: {},
+    options: {
+      ...headerVisibleOptions,
+      ...{},
+    },
   },
   {
     name: 'language',
-    options: {},
+    options: {
+      ...headerVisibleOptions,
+      ...{},
+    },
   },
   {
     name: 'notification',
-    options: {},
+    options: {
+      ...headerVisibleOptions,
+      ...{},
+    },
   },
 ];
 
