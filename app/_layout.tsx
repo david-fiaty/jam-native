@@ -30,10 +30,15 @@ const headerVisibleOptions: object = {
   },
 };
 
-const stackScreens = [
+const routes = [
   {
     name: 'index',
-    options: {},
+    options: {
+      ...headerHiddenOptions,
+      ...{
+        animation: 'fade',
+      },
+    },
   },
   {
     name: 'login',
