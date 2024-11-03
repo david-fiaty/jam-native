@@ -1,4 +1,4 @@
-export const Stack = [
+export const Modals = [
   {
     name: 'AboutScreen', 
     effect: 'fade',

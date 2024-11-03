@@ -45,8 +45,8 @@ const RootLayout = () => {
     <Provider store={Store}>
       <Stack>
         <Stack.Screen name="index" options={{headerShown: false}} />
-        <Stack.Screen name="login" options={{headerShown: false}} />
-        <Stack.Screen name="signup" options={{headerShown: false}} />
+        <Stack.Screen name="login" options={{headerShown: false, animation:'fade'}} />
+        <Stack.Screen name="signup" options={{headerShown: false, animation:'fade'}} />
         <Stack.Screen name="about" options={screenOptions} />
         <Stack.Screen name="legal" options={screenOptions} />
         <Stack.Screen name="main" options={screenOptions} />

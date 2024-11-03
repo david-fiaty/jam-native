@@ -55,7 +55,7 @@ const LoginScreen = () => {
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Password')} 
         secureTextEntry={true} 
-        autoCapitalize="none"
+        autoCapitalize={false}
         spellCheck={false}
         onChangeText={(text: string) => setPassword(text)}
       />
@@ -64,7 +64,7 @@ const LoginScreen = () => {
 
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
         <BoxView direction="row" align="center" justify="flex-start">
-          <TextView>{i18n.t('New user?')}</TextView>
+          <TextView>{i18n.t('Don\'t have an account?')}</TextView>
           <LinkView onPress={async () => router.push('/signup')}>
             {i18n.t('Sign up')}
           </LinkView>
