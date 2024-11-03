@@ -11,6 +11,50 @@ import Store from "@/redux/Store";
 import HeaderNavigation from '@/components/navigation/HeaderNavigation';
 import SplashScreen from '@/components/screen/SplashScreen';
 
+
+const stackScreens = [
+  {
+    name: 'index',
+    options: {},
+  },
+  {
+    name: 'login',
+    options: {},
+  },
+  {
+    name: 'signup',
+    options: {},
+  },
+  {
+    name: 'about',
+    options: {},
+  },
+  {
+    name: 'legal',
+    options: {},
+  },
+  {
+    name: 'main',
+    options: {},
+  },
+  {
+    name: 'account',
+    options: {},
+  },
+  {
+    name: 'password',
+    options: {},
+  },
+  {
+    name: 'language',
+    options: {},
+  },
+  {
+    name: 'notification',
+    options: {},
+  },
+];
+
 const screenOptions: object = { 
   header: (props: object) => (
     <ThemeProvider theme={BaseTheme}>
