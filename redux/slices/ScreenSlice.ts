@@ -5,6 +5,9 @@ const ScreenSlice = createSlice({
   name: 'screen',
   initialState: Modals,
   reducers: {
+    setScreenState: (state, action) => {
+      state = action.payload;
+    },    
     setActiveScreen: (state, action) => {
       state.map(item => {
         if (item.name == action.payload.name && item.active) {
@@ -22,5 +25,5 @@ const ScreenSlice = createSlice({
   },
 });
 
-export const { setActiveScreen } = ScreenSlice.actions;
+export const { setScreenState, setActiveScreen } = ScreenSlice.actions;
 export default ScreenSlice.reducer;
