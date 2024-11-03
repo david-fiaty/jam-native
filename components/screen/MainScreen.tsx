@@ -23,7 +23,7 @@ import SaveJamView from "@/components/view/SaveJamView";
 import ShareJamView from "@/components/view/ShareJamView";
 import MoreJamView from "@/components/view/MoreJamView";
 
-const Screens: any = {
+const screenComponents: any = {
   JamsList: <JamsList />,
   MapView: <MapView />,
   AddJamForm: <AddJamForm />,
@@ -141,7 +141,7 @@ const MainScreen = () => {
         <BoxView style={Layout.modalContainer}>
           <Animated.View style={[Layout.animatedView, animatedStyle]}>
             <BoxView style={Layout.modalContent}>
-              {Screens?.[currentScreen?.name]}
+              {screenComponents?.[currentScreen?.name]}
             </BoxView>
           </Animated.View>
         </BoxView>
