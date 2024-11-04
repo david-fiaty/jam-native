@@ -52,7 +52,7 @@ const RootLayout = () => {
       options: {
         ...headerHiddenOptions,
         ...{
-          animation: 'fade',
+          animation: !segments.length ? 'default' : 'fade',
         },
       },
     },
@@ -61,7 +61,7 @@ const RootLayout = () => {
       options: {
         ...headerHiddenOptions,
         ...{
-          animation: 'fade',
+          animation: !segments.length ? 'default' : 'fade',
         },
       },
     },
@@ -69,14 +69,18 @@ const RootLayout = () => {
       name: 'about',
       options: {
         ...headerVisibleOptions,
-        ...{},
+        ...{
+          animation: !segments.length ? 'default' : 'fade',
+        },
       },
     },
     {
       name: 'legal',
       options: {
         ...headerVisibleOptions,
-        ...{},
+        ...{
+          animation: !segments.length ? 'default' : 'fade',
+        },
       },
     },
     {
