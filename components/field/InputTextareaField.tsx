@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   element: {
     paddingTop: Layout.space.base/2,
-    height: Layout.space.base*8,
+    height: Layout.space.base*12,
   },
 });
 
