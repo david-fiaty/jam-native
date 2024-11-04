@@ -129,7 +129,13 @@ const RootLayout = () => {
   return (
     <Provider store={Store}>
       <Stack>
-        {routes.map((item: any) => <Stack.Screen name={item.name} options={item.options} />)}
+        {routes.map((item: any) => (
+          <Stack.Screen 
+            key={item.name}
+            name={item.name} 
+            options={item.options} 
+          />
+        ))}
       </Stack>
     </Provider>
   );
