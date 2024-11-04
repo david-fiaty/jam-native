@@ -13,7 +13,7 @@ type Props = {
 const width = DeviceManager.window.width - Layout.space.base*2;
 
 const ImageSlideshow = ({data}: Props) => {
-  const SlideshowItem = data?.map((item: object, index: number) => {
+  const SlideshowItem = data?.map((item: any, index: number) => {
     return (
       <View style={styles.item} key={`dot-${index}`}>
         <ImageView 
