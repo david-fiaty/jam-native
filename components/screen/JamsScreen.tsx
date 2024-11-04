@@ -41,7 +41,7 @@ const JamsScreen = () => {
   // Parameters
   const windowWidth = DeviceManager.window.width;
   const windowHeight = DeviceManager.window.height;
-  const [currentModal, setCurrentModal] = useState(null);
+  const [nextModal, setNextModal] = useState(null);
   const [animatedStyle, setAnimatedStyle] = useState(null);
   const route = useRoute();
 
@@ -103,18 +103,16 @@ const JamsScreen = () => {
   useEffect(() => {
     const activeModal: any = ScreenManager.getActiveModal();
 
-    console.log(activeModal);
-
     if (activeModal) {
-      setCurrentModal(activeModal);
+      setNextModal(activeModal);
       setAnimatedStyle(animationStyles[activeModal.effect]);
       animationEffects[activeModal.effect](true);
     }
-    else if (currentModal) {
-      animationEffects[currentModal.effect](false);    
+    else if (nextModal) {
+      animationEffects[nextModal.effect](false);    
       setTimeout(() => {
-        setCurrentModal(null);
-        setAnimatedStyle(animationStyles[currentModal.effect]);
+        setNextModal(null);
+        setAnimatedStyle(animationStyles[nextModal.effect]);
       }, Layout.animation.duration);
     }
   }, [screenState]); 
@@ -124,7 +122,7 @@ const JamsScreen = () => {
     <ScreenView>
       <View style={styles.container}>
         {/* Main content */}
-        { !currentModal && 
+        { !nextModal && 
           <BoxView style={Layout.mainContent}>
             <JamsList />
           </BoxView>
@@ -134,13 +132,13 @@ const JamsScreen = () => {
         <BoxView style={Layout.modalContainer}>
           <Animated.View style={[Layout.animatedView, animatedStyle]}>
             <BoxView style={Layout.modalContent}>
-              {screenComponents?.[currentModal?.name]}
+              {screenComponents?.[nextModal?.name]}
             </BoxView>
           </Animated.View>
         </BoxView>
 
         {/* Footer navigation */}
-        { (route.name == 'jams' || currentModal?.footerNavigation) && <FooterNavigation /> }
+        { (route.name == 'jams' || nextModal?.footerNavigation) && <FooterNavigation /> }
       </View>
     </ScreenView>
   );
