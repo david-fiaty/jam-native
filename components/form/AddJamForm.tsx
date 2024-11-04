@@ -45,7 +45,6 @@ const AddJamForm = () => {
       <DividerView />
       <AddCaptionField />
 
-      <DividerView />
       <UserLocationField />
       <StatusField />
       <IndustryField />
