@@ -27,7 +27,7 @@ const MapView = ({ style, children }: BaseProps) => {
         return;
       }
 
-      let location = await Location.getCurrentPositionAsync({});
+      let location: any = await Location.getCurrentPositionAsync({});
       setLocation(location);
 
       let data = await DataManager.get('jams');
