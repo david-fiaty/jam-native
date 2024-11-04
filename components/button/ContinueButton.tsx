@@ -13,13 +13,13 @@ const ContinueButton = ({onPress}: Props) => {
     <ButtonBase
       title={i18n.t('Continue')} 
       onPress={onPress} 
-      containerStyle={styles.containerStyle}
+      containerStyle={styles.container}
     />
   );
 };
 
 const styles = StyleSheet.create({
-  containerStyle: {
+  container: {
     width: '100%',
     borderRadius: Layout.radius.round,
   },
