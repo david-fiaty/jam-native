@@ -52,7 +52,7 @@ const RootLayout = () => {
       options: {
         ...headerHiddenOptions,
         ...{
-          animation: 'fade',
+          animation: !segments.length ? 'default' : 'fade',
         },
       },
     },
@@ -61,7 +61,7 @@ const RootLayout = () => {
       options: {
         ...headerHiddenOptions,
         ...{
-          animation: 'fade',
+          animation: !segments.length ? 'default' : 'fade',
         },
       },
     },
@@ -69,49 +69,63 @@ const RootLayout = () => {
       name: 'about',
       options: {
         ...headerVisibleOptions,
-        ...{},
+        ...{
+          animation: !segments.length ? 'default' : 'fade',
+        },
       },
     },
     {
       name: 'legal',
       options: {
         ...headerVisibleOptions,
-        ...{},
+        ...{
+          animation: !segments.length ? 'default' : 'fade',
+        },
       },
     },
     {
       name: 'jams',
       options: {
         ...headerVisibleOptions,
-        ...{},
+        ...{
+          animation: 'fade',
+        },
       },
     },
     {
       name: 'account',
       options: {
         ...headerVisibleOptions,
-        ...{},
+        ...{
+          animation: 'default',
+        },
       },
     },
     {
       name: 'password',
       options: {
         ...headerVisibleOptions,
-        ...{},
+        ...{
+          animation: 'default',
+        },
       },
     },
     {
       name: 'language',
       options: {
         ...headerVisibleOptions,
-        ...{},
+        ...{
+          animation: 'default',
+        },
       },
     },
     {
       name: 'notification',
       options: {
         ...headerVisibleOptions,
-        ...{},
+        ...{
+          animation: 'default',
+        },
       },
     },
   ];
