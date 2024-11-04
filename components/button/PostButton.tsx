@@ -1,8 +1,5 @@
-import { StyleSheet, TouchableOpacity } from 'react-native';
-import IconView from '../view/IconView';
-import TextView from '../view/TextView';
+import { StyleSheet } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import BoxView from '../view/BoxView';
 import ButtonBase from '../base/ButtonBase';
 import i18n from '@/translation/i18n';
 
@@ -12,15 +9,22 @@ type Props = {
 
 const PostButton = ({onPress}: Props) => {
   return (       
-    <BoxView style={styles.container}>
-    <ButtonBase title={i18n.t('Post')} onPress={onPress} />
-    </BoxView> 
+    <ButtonBase 
+      title={i18n.t('Post')} 
+      onPress={onPress} 
+      containerStyle={styles.container}  
+      titleStyle={styles.title}
+    />
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+    borderRadius: Layout.radius.round,
+  },
+  title: {
+    textTransform: 'uppercase',
   },
 });
 
