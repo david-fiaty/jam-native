@@ -40,7 +40,7 @@ const JamsScreen = () => {
   // Parameters
   const windowWidth = DeviceManager.window.width;
   const windowHeight = DeviceManager.window.height;
-  const [nextModal, setNextModal] = useState(null);
+  const [closeModal, setCloseModal] = useState(null);
   const [animatedStyle, setAnimatedStyle] = useState(null);
   const route = useRoute();
 
@@ -100,15 +100,15 @@ const JamsScreen = () => {
     const activeModal: any = ScreenManager.getActiveModal();
 
     if (activeModal) {
-      setNextModal(activeModal);
+      setCloseModal(activeModal);
       setAnimatedStyle(animationStyles[activeModal.effect]);
       animationEffects[activeModal.effect](true);
     }
-    else if (nextModal) {
-      animationEffects[nextModal.effect](false);    
+    else if (closeModal) {
+      animationEffects[closeModal.effect](false);    
       setTimeout(() => {
-        setNextModal(null);
-        setAnimatedStyle(animationStyles[nextModal.effect]);
+        setCloseModal(null);
+        setAnimatedStyle(animationStyles[closeModal.effect]);
       }, Layout.animation.duration);
     }
   }); 
@@ -118,7 +118,7 @@ const JamsScreen = () => {
     <ScreenView>
       <View style={styles.container}>
         {/* Main content */}
-        { !nextModal && 
+        { !closeModal && 
           <BoxView style={Layout.mainContent}>
             <JamsList />
           </BoxView>
@@ -128,13 +128,13 @@ const JamsScreen = () => {
         <BoxView style={Layout.modalContainer}>
           <Animated.View style={[Layout.animatedView, animatedStyle]}>
             <BoxView style={Layout.modalContent}>
-              {screenComponents?.[nextModal?.name]}
+              {screenComponents?.[closeModal?.name]}
             </BoxView>
           </Animated.View>
         </BoxView>
 
         {/* Footer navigation */}
-        { (route.name == 'jams' || nextModal?.footerNavigation) && <FooterNavigation /> }
+        { (route.name == 'jams' || closeModal?.footerNavigation) && <FooterNavigation /> }
       </View>
     </ScreenView>
   );
