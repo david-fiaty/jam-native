@@ -13,7 +13,7 @@ type Props = {
 const PostButton = ({onPress}: Props) => {
   return (       
     <BoxView style={styles.container}>
-    <ButtonBase title={i18n.t('Post')} onPress={onPress} />
+      <ButtonBase title={i18n.t('Post')} onPress={onPress} />
     </BoxView> 
   );
 };
@@ -21,6 +21,7 @@ const PostButton = ({onPress}: Props) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+    borderRadius: Layout.radius.round,
   },
 });
 
