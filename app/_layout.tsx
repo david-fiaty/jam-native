@@ -87,35 +87,45 @@ const RootLayout = () => {
       name: 'jams',
       options: {
         ...headerVisibleOptions,
-        ...{},
+        ...{
+          animation: 'fade',
+        },
       },
     },
     {
       name: 'account',
       options: {
         ...headerVisibleOptions,
-        ...{},
+        ...{
+          animation: 'default',
+        },
       },
     },
     {
       name: 'password',
       options: {
         ...headerVisibleOptions,
-        ...{},
+        ...{
+          animation: 'default',
+        },
       },
     },
     {
       name: 'language',
       options: {
         ...headerVisibleOptions,
-        ...{},
+        ...{
+          animation: 'default',
+        },
       },
     },
     {
       name: 'notification',
       options: {
         ...headerVisibleOptions,
-        ...{},
+        ...{
+          animation: 'default',
+        },
       },
     },
   ];
