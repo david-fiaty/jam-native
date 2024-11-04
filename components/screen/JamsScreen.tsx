@@ -4,7 +4,6 @@ import { useRoute } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
-import { Modals } from "@/constants/Modals";
 import ScreenView from "../view/ScreenView";
 import BoxView from "../view/BoxView";
 import DeviceManager from "@/classes/DeviceManager";
@@ -42,7 +41,7 @@ const JamsScreen = () => {
   // Parameters
   const windowWidth = DeviceManager.window.width;
   const windowHeight = DeviceManager.window.height;
-  const [currentScreen, setCurrentScreen] = useState(null);
+  const [currentModal, setCurrentModal] = useState(null);
   const [animatedStyle, setAnimatedStyle] = useState(null);
   const route = useRoute();
 
@@ -105,15 +104,15 @@ const JamsScreen = () => {
     const activeModal: any = ScreenManager.getActiveModal();
 
     if (activeModal) {
-      setCurrentScreen(activeModal);
+      setCurrentModal(activeModal);
       setAnimatedStyle(animationStyles[activeModal.effect]);
       animationEffects[activeModal.effect](true);
     }
-    else if (currentScreen) {
-      animationEffects[currentScreen.effect](false);    
+    else if (currentModal) {
+      animationEffects[currentModal.effect](false);    
       setTimeout(() => {
-        setCurrentScreen(null);
-        setAnimatedStyle(animationStyles[currentScreen.effect]);
+        setCurrentModal(null);
+        setAnimatedStyle(animationStyles[currentModal.effect]);
       }, Layout.animation.duration);
     }
   }, [screenState]); 
@@ -123,7 +122,7 @@ const JamsScreen = () => {
     <ScreenView>
       <View style={styles.container}>
         {/* Main content */}
-        { !currentScreen && 
+        { !currentModal && 
           <BoxView style={Layout.mainContent}>
             <JamsList />
           </BoxView>
@@ -133,13 +132,13 @@ const JamsScreen = () => {
         <BoxView style={Layout.modalContainer}>
           <Animated.View style={[Layout.animatedView, animatedStyle]}>
             <BoxView style={Layout.modalContent}>
-              {screenComponents?.[currentScreen?.name]}
+              {screenComponents?.[currentModal?.name]}
             </BoxView>
           </Animated.View>
         </BoxView>
 
         {/* Footer navigation */}
-        { (route.name == 'jams' || currentScreen?.footerNavigation) && <FooterNavigation /> }
+        { (route.name == 'jams' || currentModal?.footerNavigation) && <FooterNavigation /> }
       </View>
     </ScreenView>
   );
