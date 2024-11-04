@@ -2,7 +2,6 @@ export const Modals = [
   {
     name: 'JamsList', 
     effect: 'fade',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     entityId: null,
@@ -10,7 +9,6 @@ export const Modals = [
   {
     name: 'MapView', 
     effect: 'fade',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     entityId: null,
@@ -18,7 +16,6 @@ export const Modals = [
   {
     name: 'AddJamForm', 
     effect: 'fade',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     entityId: null,
@@ -26,7 +23,6 @@ export const Modals = [
   {
     name: 'ProfileForm', 
     effect: 'fade',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     entityId: null,
@@ -34,7 +30,6 @@ export const Modals = [
   {
     name: 'SettingsMenu', 
     effect: 'fade',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     entityId: null,
@@ -42,7 +37,6 @@ export const Modals = [
   {
     name: 'NotificationsMenu', 
     effect: 'fade',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     entityId: null,
@@ -50,7 +44,6 @@ export const Modals = [
   {
     name: 'SearchView', 
     effect: 'fade',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     entityId: null,
@@ -58,7 +51,6 @@ export const Modals = [
   {
     name: 'JammersList', 
     effect: 'slide',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     entityId: null,
@@ -66,7 +58,6 @@ export const Modals = [
   {
     name: 'HostsList', 
     effect: 'slide',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     entityId: null,
@@ -74,7 +65,6 @@ export const Modals = [
   {
     name: 'SaveJamView', 
     effect: 'slide',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     entityId: null,
@@ -82,7 +72,6 @@ export const Modals = [
   {
     name: 'ShareJamView', 
     effect: 'slide',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     entityId: null,
@@ -90,7 +79,6 @@ export const Modals = [
   {
     name: 'MoreJamView', 
     effect: 'slide',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     entityId: null,

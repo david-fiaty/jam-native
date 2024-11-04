@@ -1,26 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Modals } from '@/constants/Modals';
 
 const ScreenSlice = createSlice({
   name: 'screen',
-  initialState: Modals,
+  initialState: {
+    name: null,
+    entityId: null,
+  },
   reducers: {
-    setActiveScreen: (state, action) => {
-      state.map(item => {
-        if (item.name == action.payload.name && item.active) {
-          item.active = false;
-        }
-        else if (item.name == action.payload.name && !item.active) {
-          item.active = true;
-          item.entityId = action.payload?.entityId;
-        }
-        else {
-          item.active = false;
-        }
-      });
+    setActiveModal: (state, action) => {
+      state.name = action.payload.name;
+      state.entityId = action.payload?.entityId;
     },
   },
 });
 
-export const { setActiveScreen } = ScreenSlice.actions;
+export const { setActiveModal } = ScreenSlice.actions;
 export default ScreenSlice.reducer;

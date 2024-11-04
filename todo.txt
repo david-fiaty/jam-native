@@ -97,7 +97,7 @@ console.log(JSON.stringify(obj, 0, 2));
 
 
       <TouchableOpacity onPress={() => {
-        dispatch(setActiveScreen('SearchView'));
+        dispatch(setActiveModal('SearchView'));
         setTimeout(() => {
           setIsExpanded(!isExpanded);
         }, 0);

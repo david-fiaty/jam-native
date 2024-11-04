@@ -1,7 +1,7 @@
 import { View, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useDispatch } from 'react-redux';
-import { setActiveScreen } from "@/redux/slices/ScreenSlice";
+import { setActiveModal } from "@/redux/slices/ScreenSlice";
 import { Layout } from '@/constants/Layout';
 import ListView from '../view/ListView';
 import TextView from '../view/TextView';
@@ -66,7 +66,7 @@ const NotificationsMenu = () => {
     <View style={Layout.menuContainer}>
       <BackButton
         title={i18n.t('Notifications')}
-        onPress={() => dispatch(setActiveScreen({
+        onPress={() => dispatch(setActiveModal({
           name: 'NotificationsMenu',
         }))}
       />

@@ -4,7 +4,6 @@ import { useRoute } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
-import { Modals } from "@/constants/Modals";
 import ScreenView from "../view/ScreenView";
 import BoxView from "../view/BoxView";
 import DeviceManager from "@/classes/DeviceManager";
@@ -42,7 +41,7 @@ const JamsScreen = () => {
   // Parameters
   const windowWidth = DeviceManager.window.width;
   const windowHeight = DeviceManager.window.height;
-  const [currentScreen, setCurrentScreen] = useState(null);
+  const [nextModal, setNextModal] = useState(null);
   const [animatedStyle, setAnimatedStyle] = useState(null);
   const route = useRoute();
 
@@ -100,28 +99,20 @@ const JamsScreen = () => {
     },
   };
 
-  // Get the active modal window
-  const getActiveModal = (state: object) => {
-    let screen = ScreenManager.getActiveScreen();
-    let activeModal = screen ? Modals.find(item => item.name == screen.name) : null;
-
-    return activeModal;
-  };
-
   // Display
   useEffect(() => {
-    const activeModal: any = getActiveModal(screenState);
+    const activeModal: any = ScreenManager.getActiveModal();
 
     if (activeModal) {
-      setCurrentScreen(activeModal);
+      setNextModal(activeModal);
       setAnimatedStyle(animationStyles[activeModal.effect]);
       animationEffects[activeModal.effect](true);
     }
-    else if (currentScreen) {
-      animationEffects[currentScreen.effect](false);    
+    else if (nextModal) {
+      animationEffects[nextModal.effect](false);    
       setTimeout(() => {
-        setCurrentScreen(null);
-        setAnimatedStyle(animationStyles[currentScreen.effect]);
+        setNextModal(null);
+        setAnimatedStyle(animationStyles[nextModal.effect]);
       }, Layout.animation.duration);
     }
   }, [screenState]); 
@@ -131,7 +122,7 @@ const JamsScreen = () => {
     <ScreenView>
       <View style={styles.container}>
         {/* Main content */}
-        { !currentScreen && 
+        { !nextModal && 
           <BoxView style={Layout.mainContent}>
             <JamsList />
           </BoxView>
@@ -141,13 +132,13 @@ const JamsScreen = () => {
         <BoxView style={Layout.modalContainer}>
           <Animated.View style={[Layout.animatedView, animatedStyle]}>
             <BoxView style={Layout.modalContent}>
-              {screenComponents?.[currentScreen?.name]}
+              { nextModal?.component}
             </BoxView>
           </Animated.View>
         </BoxView>
 
         {/* Footer navigation */}
-        { (route.name == 'jams' || currentScreen?.footerNavigation) && <FooterNavigation /> }
+        { (route.name == 'jams' || nextModal?.footerNavigation) && <FooterNavigation /> }
       </View>
     </ScreenView>
   );

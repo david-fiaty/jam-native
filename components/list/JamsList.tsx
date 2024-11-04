@@ -3,7 +3,7 @@ import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
-import { setActiveScreen } from "@/redux/slices/ScreenSlice";
+import { setActiveModal } from "@/redux/slices/ScreenSlice";
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 import TextView from '../view/TextView';
@@ -38,7 +38,7 @@ const JamsList = () => {
       {/* Item header */}
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItemHeader}>
         <BoxView>
-          <TouchableOpacity onPress={() => isLoggedIn ? dispatch(setActiveScreen({
+          <TouchableOpacity onPress={() => isLoggedIn ? dispatch(setActiveModal({
             name: 'HostsList',
             entityId: item.id, 
           })) : router.push('/login')}>
@@ -51,7 +51,7 @@ const JamsList = () => {
           <JamStatusButton active={item?.active} />
         </BoxView>
         <BoxView>
-          <IconView name="actions" theme="clear" onPress={() => isLoggedIn ? dispatch(setActiveScreen({
+          <IconView name="actions" theme="clear" onPress={() => isLoggedIn ? dispatch(setActiveModal({
             name: 'MoreJamView',
             entityId: item?.id, 
           })) : router.push('/login') } />
@@ -65,7 +65,7 @@ const JamsList = () => {
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItemToolbar}>
 
         {/* Jammers button */}
-        <BoxView direction="row" align="center" onPress={() => isLoggedIn ? dispatch(setActiveScreen({
+        <BoxView direction="row" align="center" onPress={() => isLoggedIn ? dispatch(setActiveModal({
           name: 'JammersList',
           entityId: item.id, 
         })) : router.push('/login') }>
@@ -75,13 +75,13 @@ const JamsList = () => {
       
         <BoxView direction="row" align="center">
           {/* Save button */}
-          <IconView name="save" theme="tertiary" onPress={() => isLoggedIn ? dispatch(setActiveScreen({
+          <IconView name="save" theme="tertiary" onPress={() => isLoggedIn ? dispatch(setActiveModal({
             name: 'SaveJamView',
             entityId: item.id, 
           })) : router.push('/login')} />
 
           {/* Share button */}
-          <IconView name="share" theme="tertiary" onPress={() => dispatch(setActiveScreen({
+          <IconView name="share" theme="tertiary" onPress={() => dispatch(setActiveModal({
             name: 'ShareJamView',
             entityId: item.id, 
           }))} />

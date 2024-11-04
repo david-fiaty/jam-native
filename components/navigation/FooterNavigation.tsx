@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { Layout } from '@/constants/Layout';
-import { setActiveScreen } from "@/redux/slices/ScreenSlice";
+import { setActiveModal } from "@/redux/slices/ScreenSlice";
 import { Colors } from "@/constants/Colors";
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
@@ -12,7 +12,7 @@ import UserManager from '@/classes/UserManager';
 const FooterNavigation = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const activeScreen = ScreenManager.getActiveScreen();
+  const activeScreen = ScreenManager.getActiveModal();
   const isLoggedIn = UserManager.isLoggedIn();
 
   return (
@@ -21,7 +21,7 @@ const FooterNavigation = () => {
         name="location"
         radius="round"
         theme={activeScreen?.name == 'MapView' ? 'secondary' : 'clear'}
-        onPress={() => dispatch(setActiveScreen({
+        onPress={() => dispatch(setActiveModal({
           name: 'MapView',
         }))}
       />
@@ -30,7 +30,7 @@ const FooterNavigation = () => {
         radius="round"
         theme={activeScreen?.name == 'AddJamForm' ? 'secondary' : 'clear'}
         style={activeScreen?.name == 'AddJamForm' ? styles.active : {}}
-        onPress={() => dispatch(setActiveScreen({
+        onPress={() => dispatch(setActiveModal({
           name: 'AddJamForm',
         }))}
       />
@@ -38,7 +38,7 @@ const FooterNavigation = () => {
         name="user"
         radius="round"
         theme={activeScreen?.name == 'ProfileForm' ? 'secondary' : 'clear'}
-        onPress={() => isLoggedIn ? dispatch(setActiveScreen({ name: 'ProfileForm' })) : router.push('/login')}
+        onPress={() => isLoggedIn ? dispatch(setActiveModal({ name: 'ProfileForm' })) : router.push('/login')}
         style={activeScreen?.name == 'ProfileForm' ? styles.active : {}}
       />
     </BoxView>

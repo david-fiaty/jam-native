@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { setActiveScreen } from "@/redux/slices/ScreenSlice";
+import { setActiveModal } from "@/redux/slices/ScreenSlice";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import MediaPickerBase from "../base/MediaPickerBase";
@@ -57,7 +57,7 @@ const ProfileForm = () => {
         title={i18n.t('Your profile')}
         onPress={() =>
           dispatch(
-            setActiveScreen({
+            setActiveModal({
               name: 'ProfileForm',
             })
           )
