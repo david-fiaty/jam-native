@@ -132,7 +132,7 @@ const JamsScreen = () => {
         <BoxView style={Layout.modalContainer}>
           <Animated.View style={[Layout.animatedView, animatedStyle]}>
             <BoxView style={Layout.modalContent}>
-              {screenComponents?.[nextModal?.name]}
+              { nextModal?.component}
             </BoxView>
           </Animated.View>
         </BoxView>
