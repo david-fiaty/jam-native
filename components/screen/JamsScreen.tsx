@@ -102,7 +102,7 @@ const JamsScreen = () => {
 
   // Display
   useEffect(() => {
-    const activeModal: any = ScreenManager.getActiveScreen();
+    const activeModal: any = ScreenManager.getActiveModal();
 
     if (activeModal) {
       setCurrentScreen(activeModal);

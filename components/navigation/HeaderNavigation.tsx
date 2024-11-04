@@ -1,7 +1,7 @@
 import { TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useRoute } from '@react-navigation/native';
-import { setActiveScreen } from "@/redux/slices/ScreenSlice";
+import { setActiveModal } from "@/redux/slices/ScreenSlice";
 import { Layout } from '@/constants/Layout';
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
@@ -13,13 +13,13 @@ import UserManager from '@/classes/UserManager';
 const HeaderNavigation = () => {
   const dispatch = useDispatch();
   const route = useRoute();
-  const activeScreen = ScreenManager.getActiveScreen();
+  const activeScreen = ScreenManager.getActiveModal();
   const isLoggedIn = UserManager.isLoggedIn();
 
   return (
     <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
       <BoxView direction="row" align="center" style={Layout.headerRight}>
-        <TouchableOpacity onPress={() => dispatch(setActiveScreen({
+        <TouchableOpacity onPress={() => dispatch(setActiveModal({
           name: 'JamsList',
         }))}>
           <LogoView size={Layout.logo} />
@@ -30,13 +30,13 @@ const HeaderNavigation = () => {
           <BoxView direction="row" align="center" style={Layout.headerRight}> 
 
             { isLoggedIn &&
-              <IconView name="menu" theme="secondary" onPress={() => dispatch(setActiveScreen({
+              <IconView name="menu" theme="secondary" onPress={() => dispatch(setActiveModal({
                 name: 'SettingsMenu',
               }))} />
             }
 
             { isLoggedIn &&
-              <IconView label="15+" theme="secondary" size={11} onPress={() => dispatch(setActiveScreen({
+              <IconView label="15+" theme="secondary" size={11} onPress={() => dispatch(setActiveModal({
                 name: 'NotificationsMenu',
               }))} />
             }

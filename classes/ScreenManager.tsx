@@ -13,7 +13,7 @@ class ScreenManager {
     };
   }
 
-  getActiveScreen() {
+  getActiveModal() {
     let screenState: any = Store.getState().screen;
     let screenName: any = screenState.name;
 

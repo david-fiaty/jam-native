@@ -1,7 +1,7 @@
 import { View, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useDispatch } from 'react-redux';
-import { setActiveScreen } from "@/redux/slices/ScreenSlice";
+import { setActiveModal } from "@/redux/slices/ScreenSlice";
 import { Layout } from '@/constants/Layout';
 import { ListItemProps } from '@/constants/Types';
 import ListView from '../view/ListView';
@@ -45,7 +45,7 @@ const SettingsMenu = () => {
     <View style={Layout.menuContainer}>
       <BackButton
         title={i18n.t('Settings')}
-        onPress={() => dispatch(setActiveScreen({
+        onPress={() => dispatch(setActiveModal({
           name: 'SettingsMenu',
         }))}
       />

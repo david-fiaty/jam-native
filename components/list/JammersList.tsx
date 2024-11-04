@@ -1,6 +1,6 @@
 import { View, TouchableOpacity } from "react-native";
 import { useDispatch } from 'react-redux';
-import { setActiveScreen } from "@/redux/slices/ScreenSlice";
+import { setActiveModal } from "@/redux/slices/ScreenSlice";
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
 import BackButton from "../button/BackButton";
@@ -27,7 +27,7 @@ const JammersList = () => {
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Jammers')}
-        onPress={() => dispatch(setActiveScreen({
+        onPress={() => dispatch(setActiveModal({
           name: 'JammersList',
         }))}
       />

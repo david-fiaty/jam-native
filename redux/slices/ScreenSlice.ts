@@ -7,12 +7,12 @@ const ScreenSlice = createSlice({
     entityId: null,
   },
   reducers: {
-    setActiveScreen: (state, action) => {
+    setActiveModal: (state, action) => {
       state.name = action.payload.name;
       state.entityId = action.payload?.entityId;
     },
   },
 });
 
-export const { setActiveScreen } = ScreenSlice.actions;
+export const { setActiveModal } = ScreenSlice.actions;
 export default ScreenSlice.reducer;
