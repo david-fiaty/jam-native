@@ -29,87 +29,6 @@ const headerVisibleOptions: object = {
   ),    
 };
 
-const routes = [
-  {
-    name: 'index',
-    options: {
-      ...headerHiddenOptions,
-      ...{
-        animation: 'default',
-      },
-    },
-  },
-  {
-    name: 'login',
-    options: {
-      ...headerHiddenOptions,
-      ...{
-        animation: 'fade',
-      },
-    },
-  },
-  {
-    name: 'signup',
-    options: {
-      ...headerHiddenOptions,
-      ...{
-        animation: 'fade',
-      },
-    },
-  },
-  {
-    name: 'about',
-    options: {
-      ...headerVisibleOptions,
-      ...{},
-    },
-  },
-  {
-    name: 'legal',
-    options: {
-      ...headerVisibleOptions,
-      ...{
-        animation: 'fade',
-      },
-    },
-  },
-  {
-    name: 'jams',
-    options: {
-      ...headerVisibleOptions,
-      ...{},
-    },
-  },
-  {
-    name: 'account',
-    options: {
-      ...headerVisibleOptions,
-      ...{},
-    },
-  },
-  {
-    name: 'password',
-    options: {
-      ...headerVisibleOptions,
-      ...{},
-    },
-  },
-  {
-    name: 'language',
-    options: {
-      ...headerVisibleOptions,
-      ...{},
-    },
-  },
-  {
-    name: 'notification',
-    options: {
-      ...headerVisibleOptions,
-      ...{},
-    },
-  },
-];
-
 ExpoSplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
@@ -118,7 +37,84 @@ const RootLayout = () => {
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
 
-  const animationOptions = !segments.length ? {animation: 'default'} : {};
+  const routes = [
+    {
+      name: 'index',
+      options: {
+        ...headerHiddenOptions,
+        ...{
+          animation: 'default',
+        },
+      },
+    },
+    {
+      name: 'login',
+      options: {
+        ...headerHiddenOptions,
+        ...{
+          animation: 'fade',
+        },
+      },
+    },
+    {
+      name: 'signup',
+      options: {
+        ...headerHiddenOptions,
+        ...{
+          animation: 'fade',
+        },
+      },
+    },
+    {
+      name: 'about',
+      options: {
+        ...headerVisibleOptions,
+        ...{},
+      },
+    },
+    {
+      name: 'legal',
+      options: {
+        ...headerVisibleOptions,
+        ...{},
+      },
+    },
+    {
+      name: 'jams',
+      options: {
+        ...headerVisibleOptions,
+        ...{},
+      },
+    },
+    {
+      name: 'account',
+      options: {
+        ...headerVisibleOptions,
+        ...{},
+      },
+    },
+    {
+      name: 'password',
+      options: {
+        ...headerVisibleOptions,
+        ...{},
+      },
+    },
+    {
+      name: 'language',
+      options: {
+        ...headerVisibleOptions,
+        ...{},
+      },
+    },
+    {
+      name: 'notification',
+      options: {
+        ...headerVisibleOptions,
+        ...{},
+      },
+    },
+  ];
 
   useEffect(() => {
     if (isLoaded) {
@@ -135,7 +131,7 @@ const RootLayout = () => {
           <Stack.Screen 
             key={item.name}
             name={item.name} 
-            options={{...item.options, ...animationOptions}} 
+            options={item.options} 
           />
         ))}
       </Stack>
