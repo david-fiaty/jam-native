@@ -15,18 +15,18 @@ const headerHiddenOptions: object = {
 };
 
 const headerVisibleOptions: object = { 
+  statusBarStyle: 'dark',
+  headerShown: true,
+  statusBarColor: Colors.background,
+  headerTintColor: Colors.background,    
+  headerStyle: {
+    backgroundColor: Colors.background, 
+  },
   header: (props: object) => (
     <ThemeProvider theme={BaseTheme}>
       <HeaderNavigation />
     </ThemeProvider>
   ),    
-  headerShown: true,
-  statusBarColor: Colors.background,
-  statusBarStyle: 'dark',
-  headerTintColor: Colors.background,    
-  headerStyle: {
-    backgroundColor: Colors.background, 
-  },
 };
 
 const routes = [
