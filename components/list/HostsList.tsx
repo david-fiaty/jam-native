@@ -35,7 +35,7 @@ const HostsList = () => {
         {data?.length > 0 &&
           <ListView
             data={data}
-            renderItem={({item, index}) => renderItem(item, index)}
+            renderItem={(item: any, index: number) => renderItem(item, index)}
           />
         }
 
