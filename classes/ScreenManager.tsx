@@ -1,5 +1,6 @@
-import Store from '@/redux/Store';
 import { Layout } from '@/constants/Layout';
+import { Modals } from '@/constants/Modals';
+import Store from '@/redux/Store';
 import DeviceManager from './DeviceManager';
 
 class ScreenManager {
@@ -13,7 +14,10 @@ class ScreenManager {
   }
 
   getActiveScreen() {
-    return Store.getState().screen.find(item => item.active === true);
+    let state: any = Store.getState();
+    let screenName = state.name;
+
+    return Modals.find((item: any) => item.name === screenName);
   }
 };
 
