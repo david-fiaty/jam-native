@@ -13,6 +13,7 @@ const PostButton = ({onPress}: Props) => {
       title={i18n.t('Post')} 
       onPress={onPress} 
       containerStyle={styles.container}  
+      titleStyle={styles.title}
     />
   );
 };
@@ -21,6 +22,9 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     borderRadius: Layout.radius.round,
+  },
+  title: {
+    textTransform: 'uppercase',
   },
 });
 
