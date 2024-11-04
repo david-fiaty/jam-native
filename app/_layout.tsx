@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
-import { Stack } from 'expo-router';
+import { Stack, useSegments } from 'expo-router';
 import { useFonts } from 'expo-font';
 import * as ExpoSplashScreen from 'expo-splash-screen';
-import * as ExpoFont from 'expo-font';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@rneui/themed';
 import { Colors } from '@/constants/Colors';
@@ -16,69 +15,120 @@ const headerHiddenOptions: object = {
 };
 
 const headerVisibleOptions: object = { 
+  statusBarStyle: 'dark',
+  headerShown: true,
+  statusBarColor: Colors.background,
+  headerTintColor: Colors.background,    
+  headerStyle: {
+    backgroundColor: Colors.background, 
+  },
   header: (props: object) => (
     <ThemeProvider theme={BaseTheme}>
       <HeaderNavigation />
     </ThemeProvider>
   ),    
-  headerShown: true,
-  statusBarColor: Colors.background,
-  statusBarStyle: 'dark',
-  headerTintColor: Colors.background,    
-  headerStyle: {
-    backgroundColor: Colors.background, 
-  },
 };
-
-const stackScreens = [
-  {
-    name: 'index',
-    options: {},
-  },
-  {
-    name: 'login',
-    options: {},
-  },
-  {
-    name: 'signup',
-    options: {},
-  },
-  {
-    name: 'about',
-    options: {},
-  },
-  {
-    name: 'legal',
-    options: {},
-  },
-  {
-    name: 'main',
-    options: {},
-  },
-  {
-    name: 'account',
-    options: {},
-  },
-  {
-    name: 'password',
-    options: {},
-  },
-  {
-    name: 'language',
-    options: {},
-  },
-  {
-    name: 'notification',
-    options: {},
-  },
-];
 
 ExpoSplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
+  const segments = useSegments(); 
   const [isLoaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
+
+  const routes = [
+    {
+      name: 'index',
+      options: {
+        ...headerHiddenOptions,
+        ...{
+          animation: 'default',
+        },
+      },
+    },
+    {
+      name: 'login',
+      options: {
+        ...headerHiddenOptions,
+        ...{
+          animation: !segments.length ? 'default' : 'fade',
+        },
+      },
+    },
+    {
+      name: 'signup',
+      options: {
+        ...headerHiddenOptions,
+        ...{
+          animation: !segments.length ? 'default' : 'fade',
+        },
+      },
+    },
+    {
+      name: 'about',
+      options: {
+        ...headerVisibleOptions,
+        ...{
+          animation: !segments.length ? 'default' : 'fade',
+        },
+      },
+    },
+    {
+      name: 'legal',
+      options: {
+        ...headerVisibleOptions,
+        ...{
+          animation: !segments.length ? 'default' : 'fade',
+        },
+      },
+    },
+    {
+      name: 'jams',
+      options: {
+        ...headerVisibleOptions,
+        ...{
+          animation: 'fade',
+        },
+      },
+    },
+    {
+      name: 'account',
+      options: {
+        ...headerVisibleOptions,
+        ...{
+          animation: 'default',
+        },
+      },
+    },
+    {
+      name: 'password',
+      options: {
+        ...headerVisibleOptions,
+        ...{
+          animation: 'default',
+        },
+      },
+    },
+    {
+      name: 'language',
+      options: {
+        ...headerVisibleOptions,
+        ...{
+          animation: 'default',
+        },
+      },
+    },
+    {
+      name: 'notification',
+      options: {
+        ...headerVisibleOptions,
+        ...{
+          animation: 'default',
+        },
+      },
+    },
+  ];
 
   useEffect(() => {
     if (isLoaded) {
@@ -91,16 +141,13 @@ const RootLayout = () => {
   return (
     <Provider store={Store}>
       <Stack>
-        <Stack.Screen name="index" options={{headerShown: false}} />
-        <Stack.Screen name="login" options={{headerShown: false, animation:'fade'}} />
-        <Stack.Screen name="signup" options={{headerShown: false, animation:'fade'}} />
-        <Stack.Screen name="about" options={headerVisibleOptions} />
-        <Stack.Screen name="legal" options={headerVisibleOptions} />
-        <Stack.Screen name="main" options={headerVisibleOptions} />
-        <Stack.Screen name="account" options={headerVisibleOptions} />
-        <Stack.Screen name="password" options={headerVisibleOptions} />
-        <Stack.Screen name="language" options={headerVisibleOptions} />
-        <Stack.Screen name="notification" options={headerVisibleOptions} />
+        {routes.map((item: any) => (
+          <Stack.Screen 
+            key={item.name}
+            name={item.name} 
+            options={item.options} 
+          />
+        ))}
       </Stack>
     </Provider>
   );

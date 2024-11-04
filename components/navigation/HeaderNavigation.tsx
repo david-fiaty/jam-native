@@ -25,7 +25,7 @@ const HeaderNavigation = () => {
           <LogoView size={Layout.logo} />
         </TouchableOpacity>
       </BoxView>
-      { (route.name == 'main' || activeScreen?.headerNavigation) &&
+      { (route.name == 'jams' || activeScreen?.headerNavigation) &&
         <BoxView direction="row" align="center" justify="space-between">
           <BoxView direction="row" align="center" style={Layout.headerRight}> 
 

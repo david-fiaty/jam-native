@@ -27,7 +27,7 @@ const MapView = ({ style, children }: BaseProps) => {
         return;
       }
 
-      let location = await Location.getCurrentPositionAsync({});
+      let location: any = await Location.getCurrentPositionAsync({});
       setLocation(location);
 
       let data = await DataManager.get('jams');
@@ -54,22 +54,20 @@ const MapView = ({ style, children }: BaseProps) => {
             longitudeDelta: 3,
           }}
         >
-          {
-            data.map(item => {
-              if (item?.longitude && item?.latitude) {
-                return (
-                  <Marker
-                    key={item.id}
-                    coordinate={{ latitude: parseFloat(item?.latitude), longitude: parseFloat(item?.longitude) }}
-                    title={item?.description?.substring(0, 20) + '...'}
-                    description={item?.description}
-                  />
-                );
-              }
+          { data.map((item: any) => {
+            if (item?.longitude && item?.latitude) {
+              return (
+                <Marker
+                  key={item.id}
+                  coordinate={{ latitude: parseFloat(item?.latitude), longitude: parseFloat(item?.longitude) }}
+                  title={item?.description?.substring(0, 20) + '...'}
+                  description={item?.description}
+                />
+              );
+            }
 
-              return null;
-            })
-          }
+            return null;
+          }) }
 
         </RNMapView>
       </View>

@@ -5,15 +5,40 @@ import { useSelector } from 'react-redux';
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import { Modals } from "@/constants/Modals";
-import { Screens } from "@/constants/Screens";
 import ScreenView from "../view/ScreenView";
 import BoxView from "../view/BoxView";
 import DeviceManager from "@/classes/DeviceManager";
 import FooterNavigation from "../navigation/FooterNavigation";
 import JamsList from "../list/JamsList";
 import ScreenManager from "@/classes/ScreenManager";
+import SettingsMenu from "@/components/menu/SettingsMenu";
+import NotificationsMenu from "@/components/menu/NotificationsMenu";
+import SearchView from "@/components/view/SearchView";
+import MapView from "@/components/view/MapView";
+import AddJamForm from "@/components/form/AddJamForm";
+import ProfileForm from "@/components/form/ProfileForm";
+import JammersList from "@/components/list/JammersList";
+import HostsList from "@/components/list/HostsList";
+import SaveJamView from "@/components/view/SaveJamView";
+import ShareJamView from "@/components/view/ShareJamView";
+import MoreJamView from "@/components/view/MoreJamView";
 
-const MainScreen = () => {
+const screenComponents: any = {
+  JamsList: <JamsList />,
+  MapView: <MapView />,
+  AddJamForm: <AddJamForm />,
+  ProfileForm: <ProfileForm />,
+  SettingsMenu: <SettingsMenu />,
+  NotificationsMenu: <NotificationsMenu />,
+  SearchView: <SearchView />,
+  JammersList: <JammersList />,
+  HostsList: <HostsList />,
+  SaveJamView: <SaveJamView />,
+  ShareJamView: <ShareJamView />,
+  MoreJamView: <MoreJamView />,
+};
+
+const JamsScreen = () => {
   // Parameters
   const windowWidth = DeviceManager.window.width;
   const windowHeight = DeviceManager.window.height;
@@ -116,13 +141,13 @@ const MainScreen = () => {
         <BoxView style={Layout.modalContainer}>
           <Animated.View style={[Layout.animatedView, animatedStyle]}>
             <BoxView style={Layout.modalContent}>
-              {Screens?.[currentScreen?.name]}
+              {screenComponents?.[currentScreen?.name]}
             </BoxView>
           </Animated.View>
         </BoxView>
 
         {/* Footer navigation */}
-        { (route.name == 'main' || currentScreen?.footerNavigation) && <FooterNavigation /> }
+        { (route.name == 'jams' || currentScreen?.footerNavigation) && <FooterNavigation /> }
       </View>
     </ScreenView>
   );
@@ -137,4 +162,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MainScreen;
+export default JamsScreen;

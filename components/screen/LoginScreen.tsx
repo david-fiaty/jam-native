@@ -36,7 +36,7 @@ const LoginScreen = () => {
       dispatch(setAccountData(JSON.stringify(response.user)));
       dispatch(setIsLoggedIn(true));
 
-      router.replace('/main');
+      router.replace('/jams');
     }
   }  
 
@@ -65,11 +65,11 @@ const LoginScreen = () => {
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
         <BoxView direction="row" align="center" justify="flex-start">
           <TextView>{i18n.t('Don\'t have an account?')}</TextView>
-          <LinkView onPress={async () => router.push('/signup')}>
+          <LinkView onPress={async () => router.replace('/signup')}>
             {i18n.t('Sign up')}
           </LinkView>
         </BoxView>
-        <SkipButton onPress={async () => router.push('/main')} />
+        <SkipButton onPress={async () => router.replace('/jams')} />
       </BoxView>
 
       <Divider /><Divider />
