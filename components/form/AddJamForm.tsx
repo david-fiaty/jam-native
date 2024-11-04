@@ -50,6 +50,8 @@ const AddJamForm = () => {
       <StatusField />
       <IndustryField />
       <PostButton />
+
+      <DividerView />
     </BoxView>
   );
 };
