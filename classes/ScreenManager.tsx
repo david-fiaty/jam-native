@@ -14,10 +14,10 @@ class ScreenManager {
   }
 
   getActiveScreen() {
-    let state: any = Store.getState();
-    let screenName = state.name;
+    let screenState: any = Store.getState().screen;
+    let screenName: any = screenState.name;
 
-    return Modals.find((item: any) => item.name === screenName);
+    return Modals.find((item: any) => item.name == screenName);
   }
 };
 
