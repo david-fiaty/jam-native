@@ -16,7 +16,7 @@ const BottomLinks = () => {
 
   if (route.name != 'about') {
     aboutLink = (
-      <TouchableOpacity onPress={() => route.name == 'legal' ? router.navigate('/about') : router.push('/about')}>
+      <TouchableOpacity onPress={() => route.name == 'legal' ? router.replace('/about') : router.push('/about')}>
         {aboutLink}
       </TouchableOpacity>
     );
@@ -24,7 +24,7 @@ const BottomLinks = () => {
 
   if (route.name != 'legal') {
     legalLink = (
-      <TouchableOpacity onPress={() => route.name == 'about' ? router.navigate('/legal') : router.push('/legal')}>
+      <TouchableOpacity onPress={() => route.name == 'about' ? router.replace('/legal') : router.push('/legal')}>
         {legalLink}
       </TouchableOpacity>
     );

@@ -9,7 +9,7 @@ type Props = {
 };
 
 const TextSlideshow = ({data}: Props) => {
-  const SlideshowItem = data?.map((item: object, index: number) => {
+  const SlideshowItem = data?.map((item: any, index: number) => {
     return (
       <View style={styles.item} key={`dot-${index}`}>
         <TextView style={styles.title}>{item.title}</TextView>

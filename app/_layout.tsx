@@ -15,98 +15,19 @@ const headerHiddenOptions: object = {
 };
 
 const headerVisibleOptions: object = { 
+  statusBarStyle: 'dark',
+  headerShown: true,
+  statusBarColor: Colors.background,
+  headerTintColor: Colors.background,    
+  headerStyle: {
+    backgroundColor: Colors.background, 
+  },
   header: (props: object) => (
     <ThemeProvider theme={BaseTheme}>
       <HeaderNavigation />
     </ThemeProvider>
   ),    
-  headerShown: true,
-  statusBarColor: Colors.background,
-  statusBarStyle: 'dark',
-  headerTintColor: Colors.background,    
-  headerStyle: {
-    backgroundColor: Colors.background, 
-  },
 };
-
-const routes = [
-  {
-    name: 'index',
-    options: {
-      ...headerHiddenOptions,
-      ...{
-        animation: 'fade',
-      },
-    },
-  },
-  {
-    name: 'login',
-    options: {
-      ...headerHiddenOptions,
-      ...{
-        animation: 'fade',
-      },
-    },
-  },
-  {
-    name: 'signup',
-    options: {
-      ...headerHiddenOptions,
-      ...{
-        animation: 'fade',
-      },
-    },
-  },
-  {
-    name: 'about',
-    options: {
-      ...headerVisibleOptions,
-      ...{},
-    },
-  },
-  {
-    name: 'legal',
-    options: {
-      ...headerVisibleOptions,
-      ...{},
-    },
-  },
-  {
-    name: 'jams',
-    options: {
-      ...headerVisibleOptions,
-      ...{},
-    },
-  },
-  {
-    name: 'account',
-    options: {
-      ...headerVisibleOptions,
-      ...{},
-    },
-  },
-  {
-    name: 'password',
-    options: {
-      ...headerVisibleOptions,
-      ...{},
-    },
-  },
-  {
-    name: 'language',
-    options: {
-      ...headerVisibleOptions,
-      ...{},
-    },
-  },
-  {
-    name: 'notification',
-    options: {
-      ...headerVisibleOptions,
-      ...{},
-    },
-  },
-];
 
 ExpoSplashScreen.preventAutoHideAsync();
 
@@ -116,7 +37,84 @@ const RootLayout = () => {
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
 
-  const animationOptions = !segments.length ? {animation: 'default'} : {};
+  const routes = [
+    {
+      name: 'index',
+      options: {
+        ...headerHiddenOptions,
+        ...{
+          animation: 'default',
+        },
+      },
+    },
+    {
+      name: 'login',
+      options: {
+        ...headerHiddenOptions,
+        ...{
+          animation: 'fade',
+        },
+      },
+    },
+    {
+      name: 'signup',
+      options: {
+        ...headerHiddenOptions,
+        ...{
+          animation: 'fade',
+        },
+      },
+    },
+    {
+      name: 'about',
+      options: {
+        ...headerVisibleOptions,
+        ...{},
+      },
+    },
+    {
+      name: 'legal',
+      options: {
+        ...headerVisibleOptions,
+        ...{},
+      },
+    },
+    {
+      name: 'jams',
+      options: {
+        ...headerVisibleOptions,
+        ...{},
+      },
+    },
+    {
+      name: 'account',
+      options: {
+        ...headerVisibleOptions,
+        ...{},
+      },
+    },
+    {
+      name: 'password',
+      options: {
+        ...headerVisibleOptions,
+        ...{},
+      },
+    },
+    {
+      name: 'language',
+      options: {
+        ...headerVisibleOptions,
+        ...{},
+      },
+    },
+    {
+      name: 'notification',
+      options: {
+        ...headerVisibleOptions,
+        ...{},
+      },
+    },
+  ];
 
   useEffect(() => {
     if (isLoaded) {
