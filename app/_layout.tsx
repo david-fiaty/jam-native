@@ -35,7 +35,7 @@ const routes = [
     options: {
       ...headerHiddenOptions,
       ...{
-        animation: 'fade',
+        animation: 'default',
       },
     },
   },
