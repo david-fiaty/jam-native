@@ -100,17 +100,9 @@ const JamsScreen = () => {
     },
   };
 
-  // Get the active modal window
-  const getActiveModal = (state: object) => {
-    let screen = ScreenManager.getActiveScreen();
-    let activeModal = screen ? Modals.find(item => item.name == screen.name) : null;
-
-    return activeModal;
-  };
-
   // Display
   useEffect(() => {
-    const activeModal: any = getActiveModal(screenState);
+    const activeModal: any = ScreenManager.getActiveScreen();
 
     if (activeModal) {
       setCurrentScreen(activeModal);
