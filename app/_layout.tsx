@@ -68,7 +68,9 @@ const routes = [
     name: 'legal',
     options: {
       ...headerVisibleOptions,
-      ...{},
+      ...{
+        animation: 'fade',
+      },
     },
   },
   {
@@ -133,7 +135,7 @@ const RootLayout = () => {
           <Stack.Screen 
             key={item.name}
             name={item.name} 
-            options={item.options} 
+            options={{...item.options, ...animationOptions}} 
           />
         ))}
       </Stack>
