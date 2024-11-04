@@ -103,6 +103,8 @@ const JamsScreen = () => {
   useEffect(() => {
     const activeModal: any = ScreenManager.getActiveModal();
 
+    console.log(activeModal);
+
     if (activeModal) {
       setCurrentModal(activeModal);
       setAnimatedStyle(animationStyles[activeModal.effect]);
