@@ -8,7 +8,7 @@ const ScreenSlice = createSlice({
   },
   reducers: {
     setActiveModal: (state, action) => {
-      state.name = action.payload.name;
+      state.name = state.name == action.payload.name ? null : action.payload.name;
       state.entityId = action.payload?.entityId;
     },
   },
