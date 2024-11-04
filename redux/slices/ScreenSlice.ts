@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const ScreenSlice = createSlice({
   name: 'screen',
   initialState: {
-    name: '',
-    entityId: 0,
+    name: null,
+    entityId: null,
   },
   reducers: {
     setActiveScreen: (state, action) => {
