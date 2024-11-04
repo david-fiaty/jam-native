@@ -36,7 +36,7 @@ const HeaderNavigation = () => {
             }
 
             { isLoggedIn &&
-              <IconView label="15+" theme="secondary" size={11.5} onPress={() => dispatch(setActiveScreen({
+              <IconView label="15+" theme="secondary" size={11} onPress={() => dispatch(setActiveScreen({
                 name: 'NotificationsMenu',
               }))} />
             }
