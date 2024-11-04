@@ -1,5 +1,4 @@
-import { StyleSheet, View } from 'react-native';
-import { Colors } from '@/constants/Colors';
+import { StyleSheet } from 'react-native';
 import ButtonBase from '../base/ButtonBase';
 import i18n from '@/translation/i18n';
 import { Layout } from '@/constants/Layout';
