@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { StyleSheet, View, Animated } from "react-native";
 import { useRoute } from '@react-navigation/native';
-import { useSelector } from 'react-redux';
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import ScreenView from "../view/ScreenView";
@@ -44,9 +43,6 @@ const JamsScreen = () => {
   const [nextModal, setNextModal] = useState(null);
   const [animatedStyle, setAnimatedStyle] = useState(null);
   const route = useRoute();
-
-  // Storage state
-  const screenState = useSelector((state: any) => state.screen);
 
   // Animation references
   const fadeEffectReference = useRef(new Animated.Value(0)).current;
@@ -103,7 +99,6 @@ const JamsScreen = () => {
   useEffect(() => {
     const activeModal: any = ScreenManager.getActiveModal();
 
-
     if (activeModal) {
       setNextModal(activeModal);
       setAnimatedStyle(animationStyles[activeModal.effect]);
@@ -116,12 +111,7 @@ const JamsScreen = () => {
         setAnimatedStyle(animationStyles[nextModal.effect]);
       }, Layout.animation.duration);
     }
-
-    
-    console.log(activeModal);
-    console.log(nextModal);
-    
-  }, [screenState]); 
+  }); 
   
   // Render
   return (
