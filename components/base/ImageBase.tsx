@@ -1,5 +1,4 @@
 import { Image, StyleSheet } from 'react-native';
-import FastImage from 'react-native-fast-image';
 import { BaseProps } from '@/constants/Types';
 
 type Props = BaseProps & {
@@ -13,7 +12,7 @@ type Props = BaseProps & {
 
 const ImageBase = ({source, width, height, resizeMethod, resizeMode, style}: Props) => {
   return (
-    <FastImage 
+    <Image 
       source={source} 
       resizeMethod={resizeMethod || 'scale'}
       resizeMode={resizeMode || 'contain'}
