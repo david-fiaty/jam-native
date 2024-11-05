@@ -71,6 +71,16 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Implement image cache : https://github.com/echowaves/expo-cached-image
 
 
+# endpoints
+
+POST   /api/products            # Create a new product
+GET    /api/products            # Get a list of products
+GET    /api/products/{id}       # Get a single product by ID
+PUT    /api/products/{id}       # Update an existing product by ID
+DELETE /api/products/{id}       # Delete a product by ID
+
+
+
 Email verification
 Twilio => SMS
 
