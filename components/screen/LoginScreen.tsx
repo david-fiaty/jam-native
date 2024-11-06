@@ -24,6 +24,7 @@ const LoginScreen = () => {
   const dispatch = useDispatch();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
   const userState = useSelector((state: any) => state.user);
 
   const login = async () => {
@@ -60,7 +61,11 @@ const LoginScreen = () => {
         onChangeText={(text: string) => setPassword(text)}
       />
 
-      <ButtonView label={i18n.t('Continue')} onPress={login} isProcessing={true} />
+      <ButtonView 
+        label={i18n.t('Continue')} 
+        isProcessing={isProcessing} 
+        onPress={login} 
+      />
 
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
         <BoxView direction="row" align="center" justify="flex-start">
