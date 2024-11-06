@@ -57,18 +57,26 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 
 # API remarks
   * Jams list sectors field: should not have language in the payload / language should be a request parameter
-  * post a jam and get a jam should not have same URL, even if method is different
   * /api/save-jams should be /api/jam/save
   * is unlike jam url correct? it's currently the same as like-jam
   * No title for jams? Projects have a field "name" for title
   * No image field for projects? Search items require images
   * No endpoints for events, jammers, calls, venues
-  * What is refresh_token in login response payload
-  * user login response payload should not contain more than token data (exclude user data email, profile...)
-  * User has no ID
+  * //user login response payload should not contain more than token data (exclude user data email, profile...)
+  * //User has no ID
 
 # Todo 
 - Implement image cache : https://github.com/echowaves/expo-cached-image
+
+
+# endpoints
+
+POST   /api/products            # Create a new product
+GET    /api/products            # Get a list of products
+GET    /api/products/{id}       # Get a single product by ID
+PUT    /api/products/{id}       # Update an existing product by ID
+DELETE /api/products/{id}       # Delete a product by ID
+
 
 
 Email verification
@@ -80,7 +88,7 @@ console.log(JSON.stringify(obj, 0, 2));
 
 
   buildEntity(key: string, data: object) {
-    let entity = {};
+    let entity = {}; 
     let definition = Entities.find(item => item.type == key);
 
     for (const [sourceField, targetField] of Object.entries(definition.fields)) {
