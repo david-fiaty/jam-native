@@ -3,10 +3,14 @@ import { BaseProps } from '@/constants/Types';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 
-const UserMessageView = ({style, children}: BaseProps) => {
+type Props = BaseProps & {
+  content: string,
+};
+
+const UserMessageView = ({content}: Props) => {
   return (
-    <Text style={[styles.content, style]}>
-      {children}
+    <Text style={styles.content}>
+      {content}
     </Text>
   );
 };
