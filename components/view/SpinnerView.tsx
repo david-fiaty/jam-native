@@ -8,10 +8,10 @@ type Props = {
 };
 
 const SpinnerView = ({size}: Props) => {
-  const spinnerSize = size || 'large';
+  const spinnerSize: any = size || 'large';
 
   return (
-    <View style={[styles.container, styles.horizontal]}>
+    <View style={styles.container}>
       <ActivityIndicator size={spinnerSize} color={Colors.primary} />
     </View>
   );
