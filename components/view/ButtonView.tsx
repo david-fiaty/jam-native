@@ -13,8 +13,8 @@ type Props = {
 const ButtonView = ({label, onPress, isProcessing}: Props) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
-      {!isProcessing && <TextView style={styles.label}>{label}</TextView>}
-      {isProcessing && <SpinnerView color="white" size="small" />}      
+      { !isProcessing && <TextView style={styles.label}>{label}</TextView> }
+      { isProcessing && <SpinnerView color="white" size="small" /> }      
     </TouchableOpacity>
   );
 };
