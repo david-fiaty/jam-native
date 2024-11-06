@@ -5,12 +5,12 @@ import { Colors } from '@/constants/Colors';
 
 type Props = {
   size?: string,
-  theme?: string,
+  color?: string,
 };
 
-const SpinnerView = ({size, theme}: Props) => {
+const SpinnerView = ({size, color}: Props) => {
   const spinnerSize: any = size || 'large';
-  const spinnerColor: any = Colors[theme || 'primary'];
+  const spinnerColor: string = Colors[color || 'primary'];
 
   return (
     <View style={styles.container}>
