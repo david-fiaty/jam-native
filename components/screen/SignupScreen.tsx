@@ -36,8 +36,12 @@ const SignupScreen = () => {
       dispatch(setAccessToken(JSON.stringify(response.tokens)));
       dispatch(setAccountData(JSON.stringify(response.user)));
       dispatch(setIsLoggedIn(true));
+      setIsProcessing(false);
 
       router.replace('/jams');
+    }
+    else {
+      setIsProcessing(false);
     }
   }  
 
@@ -64,7 +68,10 @@ const SignupScreen = () => {
       <ButtonView 
         label={i18n.t('Continue')} 
         isProcessing={isProcessing} 
-        onPress={signup} 
+        onPress={() => {
+          setIsProcessing(true);
+          signup();
+        }} 
       />
 
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
