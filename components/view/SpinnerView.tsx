@@ -1,5 +1,5 @@
 import React from 'react';
-import {ActivityIndicator, StyleSheet, View} from 'react-native';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
 
@@ -8,10 +8,10 @@ type Props = {
 };
 
 const SpinnerView = ({size}: Props) => {
-  const spinnerSize = size || 'large';
+  const spinnerSize: any = size || 'large';
 
   return (
-    <View style={[styles.container, styles.horizontal]}>
+    <View style={styles.container}>
       <ActivityIndicator size={spinnerSize} color={Colors.primary} />
     </View>
   );
