@@ -13,7 +13,7 @@ const ContinueButton = ({onPress}: Props) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
       <TextView style={styles.label}>{i18n.t('Continue')}</TextView>
-      <SpinnerView theme="secondary"/>
+      <SpinnerView color="white"/>
     </TouchableOpacity>
   );
 };
