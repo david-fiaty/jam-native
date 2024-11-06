@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
 import TextView from '../view/TextView';
@@ -11,12 +11,20 @@ type Props = {
 };
 
 const ButtonView = ({label, onPress, isProcessing}: Props) => {
-  return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
-      {!isProcessing && <TextView style={styles.label}>{label}</TextView>}
-      {isProcessing && <SpinnerView color="white" size="small" />}      
-    </TouchableOpacity>
-  );
+  if (isProcessing) {
+    return (
+      <View style={[styles.container, styles.processing]}>
+        <SpinnerView color="white" size="small" />
+      </View>
+    );
+  }
+  else {
+    return (
+      <TouchableOpacity onPress={onPress} style={styles.container}>
+        <TextView style={styles.label}>{label}</TextView>
+      </TouchableOpacity>
+    );
+  }
 };
 
 const styles = StyleSheet.create({
@@ -33,6 +41,9 @@ const styles = StyleSheet.create({
     color: Colors.white,
     fontWeight: 'bold',
   },
+  processing: {
+    backgroundColor: Colors.secondary,
+  }
 });
 
 export default ButtonView;
