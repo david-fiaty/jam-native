@@ -5,14 +5,16 @@ import { Colors } from '@/constants/Colors';
 
 type Props = {
   size?: string,
+  color?: string,
 };
 
-const SpinnerView = ({size}: Props) => {
+const SpinnerView = ({size, color}: Props) => {
   const spinnerSize: any = size || 'large';
+  const spinnerColor: string = Colors[color || 'primary'];
 
   return (
     <View style={styles.container}>
-      <ActivityIndicator size={spinnerSize} color={Colors.primary} />
+      <ActivityIndicator size={spinnerSize} color={spinnerColor} />
     </View>
   );
 };
