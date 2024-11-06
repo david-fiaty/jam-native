@@ -9,7 +9,7 @@ import BaseTheme from "@/constants/BaseTheme";
 import Store from "@/redux/Store";
 import HeaderNavigation from '@/components/navigation/HeaderNavigation';
 import SplashScreen from '@/components/screen/SplashScreen';
-import TextView from '@/components/view/TextView';
+import UserMessageView from '@/components/view/UserMessageView';
 
 const headerHiddenOptions: object = { 
   headerShown: false,
@@ -141,7 +141,7 @@ const RootLayout = () => {
 
   return (
     <Provider store={Store}>
-      <TextView>HEllo</TextView>
+      <UserMessageView content="yo brother" />
       <Stack>
         {routes.map((item: any) => (
           <Stack.Screen 
