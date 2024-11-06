@@ -1,10 +1,9 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
-import ButtonBase from '../base/ButtonBase';
 import i18n from '@/translation/i18n';
 import TextView from '../view/TextView';
-import BoxView from '../view/BoxView';
+import SpinnerView from '../view/SpinnerView';
 
 type Props = {
   onPress: () => void,
@@ -14,6 +13,7 @@ const ContinueButton = ({onPress}: Props) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
       <TextView style={styles.label}>{i18n.t('Continue')}</TextView>
+      <SpinnerView theme="secondary"/>
     </TouchableOpacity>
   );
 };
