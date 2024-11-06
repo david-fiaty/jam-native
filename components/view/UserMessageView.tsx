@@ -20,12 +20,12 @@ const UserMessageView = ({content}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.primary,
-    color: Colors.white,
-    padding: Layout.space.base,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: Colors.primary,
+    color: Colors.white,
+    padding: Layout.space.base,
   },
   content: {
     color: 'white',
