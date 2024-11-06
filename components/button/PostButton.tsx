@@ -1,10 +1,8 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
-import ButtonBase from '../base/ButtonBase';
 import i18n from '@/translation/i18n';
 import TextView from '../view/TextView';
-import BoxView from '../view/BoxView';
 
 type Props = {
   onPress: () => void,
