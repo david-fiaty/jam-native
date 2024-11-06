@@ -22,13 +22,13 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.primary,
     color: Colors.white,
-    height: 200,
+    padding: Layout.space.base,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
   content: {
-    backgroundColor: 'yellow',
+    color: 'white',
   },
 });
 
