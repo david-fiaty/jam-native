@@ -7,13 +7,14 @@ import SpinnerView from '../view/SpinnerView';
 
 type Props = {
   onPress: () => void,
+  isProcessing: boolean,
 };
 
-const ContinueButton = ({onPress}: Props) => {
+const ContinueButton = ({onPress, isProcessing}: Props) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
       <TextView style={styles.label}>{i18n.t('Continue')}</TextView>
-      <SpinnerView color="white"/>
+      <SpinnerView color="white" size="small" />
     </TouchableOpacity>
   );
 };
