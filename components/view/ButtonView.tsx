@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   processing: {
-    opacity: 0.5,
+    backgroundColor: Colors.secondary,
   }
 });
 
