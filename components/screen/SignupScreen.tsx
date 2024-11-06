@@ -68,7 +68,10 @@ const SignupScreen = () => {
       <ButtonView 
         label={i18n.t('Continue')} 
         isProcessing={isProcessing} 
-        onPress={signup} 
+        onPress={() => {
+          setIsProcessing(true);
+          signup();
+        }} 
       />
 
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
