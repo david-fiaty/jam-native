@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import Store from '@/redux/Store';
 import DataManager from './DataManager';
 
 class UserManager {
@@ -12,13 +12,13 @@ class UserManager {
   }
 
   isLoggedIn() {
-    return (useSelector((state: any) => state.user)).isLoggedIn === true;
+    return Store.getState().user.isLoggedIn === true;
   }
 
   isAccessTokenValid() {
     // Todo - Validate token duration
     console.log('---oooppp---');
-    console.log(useSelector((state: any) => state.user));
+    console.log(Store.getState().user);
   }
 };
 
