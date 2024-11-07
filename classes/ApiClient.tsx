@@ -1,5 +1,16 @@
-import Endpoints from '@/constants/Endpoints';
 import { Config } from '@/constants/Config';
+import { Cache } from "react-native-cache";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Endpoints from '@/constants/Endpoints';
+
+const cache = new Cache({
+  namespace: Config.appNamespace,
+  policy: {
+    maxEntries: 50000,
+    stdTTL: 0 // the standard ttl as number in seconds, default: 0 (unlimited)
+  },
+  backend: AsyncStorage,
+});
 
 class ApiClient {
   async get(key: keyof typeof Endpoints) {
