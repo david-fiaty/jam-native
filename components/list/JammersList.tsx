@@ -1,6 +1,5 @@
 import { View, TouchableOpacity } from "react-native";
-import { useLocalSearchParams } from "expo-router";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
@@ -12,13 +11,12 @@ import ListView from "../view/ListView";
 import DataManager from "@/classes/DataManager";
 
 const JammersList = () => {
-  const item = useLocalSearchParams();
-
-  console.log(item);
   //const data = DataManager.get('jammers');
-  const data = [];
-
+  const data: any = [];
   const dispatch = useDispatch();
+  const screenState = useSelector((state: any) => state.screen);
+
+  console.log(screenState?.entity);
 
   const renderItem = (item, index) => (
     <TouchableOpacity onPress={() => console.log('clicked')}>
