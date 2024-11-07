@@ -16,9 +16,7 @@ class ApiClient {
   async get(key: keyof typeof Endpoints) {
     let data: any = [];
 
-    if (Config.cacheEnabled === true) {
-      data = await cache.get(key);
-    }
+    if (Config.cacheEnabled === true) data = await cache.get(key);
     
     try {
       if (!data.length) {
