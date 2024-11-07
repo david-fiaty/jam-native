@@ -45,15 +45,15 @@ const SearchField = () => {
             }
             else if (activeScreen?.name != 'SearchView') {
               dispatch(setSearchValue(''));
-              dispatch(setActiveScreen({
+              ScreenManager.toggleModal({
                 name: 'SearchView',
-              }));
+              });
             }
             else if (!searchState.value.length && activeScreen?.name == 'SearchView') {
               dispatch(toggleSearchField(false));
-              dispatch(setActiveScreen({
+              ScreenManager.toggleModal({
                 name: 'SearchView',
-              }));
+              });
             }
           }}
         />
