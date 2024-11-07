@@ -10,7 +10,7 @@ type Props = BaseProps & {
   horizontal?: boolean,
   contentContainerStyle?: object,
   columnWrapperStyle?: object,
-  renderItem: () => JSX.Element, 
+  renderItem: () => void, 
 };
 
 const ListView = ({data, ref, numColumns, scrollEnabled, horizontal, contentContainerStyle, columnWrapperStyle, renderItem, style}: Props) => {
@@ -27,6 +27,7 @@ const ListView = ({data, ref, numColumns, scrollEnabled, horizontal, contentCont
       initialNumToRender={10}
       maxToRenderPerBatch={5}
       removeClippedSubviews={true}
+
       windowSize={5}
     />
   );
