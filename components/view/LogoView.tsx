@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import { BaseProps } from '@/constants/Types';
 import { Config } from '@/constants/Config';
-import ImageBase from '@/components/base/ImageBase';
+import ImageView from './ImageView';
 
 type Props = BaseProps & {
   size: object,
@@ -10,11 +10,11 @@ type Props = BaseProps & {
 };
 
 // Todo - Move image size to config
-const path = require('@/assets/images/logo-512.png'); 
+const path: any = require('@/assets/images/logo-512.png'); 
 
 const LogoView = ({size, style}: Props) => {
   return (
-    <ImageBase 
+    <ImageView 
       path={path} 
       width={size.width} 
       height={size.height} 
