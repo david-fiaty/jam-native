@@ -1,4 +1,5 @@
 import { View, TouchableOpacity } from "react-native";
+import { useLocalSearchParams } from "expo-router";
 import { useDispatch } from 'react-redux';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from "@/constants/Layout";
@@ -11,7 +12,12 @@ import ListView from "../view/ListView";
 import DataManager from "@/classes/DataManager";
 
 const JammersList = () => {
-  const data = DataManager.get('jammers');
+  const item = useLocalSearchParams();
+
+  console.log(item);
+  //const data = DataManager.get('jammers');
+  const data = [];
+
   const dispatch = useDispatch();
 
   const renderItem = (item, index) => (
