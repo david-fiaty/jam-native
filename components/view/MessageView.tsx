@@ -29,6 +29,10 @@ const styles = StyleSheet.create({
     color: Colors.white,
     padding: Layout.space.base,
     marginTop: Layout.space.base + statusBarHeight,
+    position: 'absolute', 
+    top: 0,       
+    left: 0, 
+    right: 0,
   },
   content: {
     color: 'white',
