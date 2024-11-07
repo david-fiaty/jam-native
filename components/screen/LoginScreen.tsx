@@ -38,12 +38,10 @@ const LoginScreen = () => {
       dispatch(setAccountData(JSON.stringify(response.user)));
       dispatch(setIsLoggedIn(true));
       setIsProcessing(false);
-
       router.replace('/jams');
     }
     else {
       setIsProcessing(false);
-     
       dispatch(setMessage('Invalid credentials'));
     }
   }  
