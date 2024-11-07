@@ -16,7 +16,9 @@ class ApiClient {
   async get(key: keyof typeof Endpoints) {
     let data: any = [];
 
-    if (Config.cacheEnabled === true) data = await cache.get(key);
+    if (Config.cacheEnabled === true) {
+      data = await cache.get(key);
+    }
     
     try {
       if (!data.length) {
@@ -48,9 +50,9 @@ class ApiClient {
       try {
         // Todo - Enable domain inclusion
         //let url = Config.apiUrl + '/' + endpoint.url + '/';
-        let url = endpoint.url;
+        let url: string = endpoint.url;
 
-        let payload = {
+        let payload: object = {
           ...{
             method: endpoint.method,
             headers: this.getHeaders(),
@@ -58,7 +60,7 @@ class ApiClient {
           ...(data ? { body: JSON.stringify(data) } : {}),
         };
 
-        let response = await fetch(url, payload);
+        let response: any = await fetch(url, payload);
 
         return this.processResponse(await response.json());
       } 
