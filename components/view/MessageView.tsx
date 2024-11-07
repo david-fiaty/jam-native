@@ -1,21 +1,34 @@
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
+import BoxView from './BoxView';
 
-const MessageView = ({style, children}: BaseProps) => {
-  
+type Props = BaseProps & {
+  content: string,
+};
+
+const MessageView = ({content}: Props) => {
   return (
-    <Text style={[styles.content, style]}>
-      {children}
-    </Text>
+    <View style={styles.container}>
+      <Text style={styles.content}>
+        {content}
+      </Text>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.primary,
+    color: Colors.white,
+    padding: Layout.space.base,
+  },
   content: {
-    color: Colors.primary,
-    fontSize: Layout.fontSize.base,
+    color: 'white',
   },
 });
 
