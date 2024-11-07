@@ -42,7 +42,7 @@ const LoginScreen = () => {
     }
     else {
       setIsProcessing(false);
-      dispatch(setMessage('Invalid credentials'));
+      dispatch(setMessage('Invalid user name or password'));
     }
   }  
 

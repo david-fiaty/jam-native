@@ -7,7 +7,7 @@ import IconView from './IconView';
 import BoxView from './BoxView';
 import { setMessage } from '@/redux/slices/MessageSlice';
 
-const statusBarHeight = DeviceManager.getStatusBarSize().height;
+const statusBarHeight: any = DeviceManager.getStatusBarSize().height;
 
 const MessageView = () => {
   const dispatch = useDispatch();
