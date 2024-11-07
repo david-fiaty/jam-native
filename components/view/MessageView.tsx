@@ -1,12 +1,17 @@
 import { StyleSheet, Text, View } from 'react-native';
+import { useSelector } from 'react-redux';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 
 const MessageView = () => {
+  const messageState = useSelector((state: any) => state.message);
+
+  if (!messageState?.text.length) return <></>;
+
   return (
     <View style={styles.container}>
       <Text style={styles.content}>
-        UI message
+        {messageState.text}
       </Text>
     </View>
   );
