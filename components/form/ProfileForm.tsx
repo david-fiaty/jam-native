@@ -78,7 +78,7 @@ const ProfileForm = () => {
             { accountData?.profiles[0].profile_picture?.url?.length > 0 && 
               <BoxView direction="row" align="center" justify="space-between" style={styles.profileImageContainer}>
                 <ImageView 
-                  source={{uri: Config.imageUrl + accountData?.profiles[0].profile_picture?.url }} 
+                  uri={Config.imageUrl + accountData?.profiles[0].profile_picture?.url} 
                   width={96.7}
                   height={96.7}
                   resizeMode="cover"
