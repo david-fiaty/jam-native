@@ -1,11 +1,11 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
+import { setMessage } from '@/redux/slices/MessageSlice';
 import DeviceManager from '@/classes/DeviceManager';
 import IconView from './IconView';
 import BoxView from './BoxView';
-import { setMessage } from '@/redux/slices/MessageSlice';
 
 const statusBarHeight: any = DeviceManager.getStatusBarSize().height;
 
