@@ -1,7 +1,6 @@
 import { View, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useDispatch } from 'react-redux';
-import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from '@/constants/Layout';
 import ListView from '../view/ListView';
 import TextView from '../view/TextView';
