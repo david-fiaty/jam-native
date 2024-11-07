@@ -22,7 +22,7 @@ class ApiClient {
       if (!data.length) {
         data = await this.sendRequest(Endpoints[key]);
 
-        if (Config.cacheEnabled === true) {
+        if (Config.cacheEnabled === true && data?.length > 0) {
           await cache.set(key, data);
         }
       }
