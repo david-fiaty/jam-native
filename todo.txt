@@ -14,6 +14,14 @@ npm cache clean --force
 bc105b9c-d776-42e2-bd2e-2ebcff179748
 
 
+# Latest Updates
+- Data caching
+- Image caching
+- Social login logos display fix
+- Profile form freeze bugfix
+
+
+
 # Screen animation
 https://iamshadi.medium.com/re-creating-the-wolts-smooth-page-transition-with-expo-router-in-react-native-0b34541452db
 
