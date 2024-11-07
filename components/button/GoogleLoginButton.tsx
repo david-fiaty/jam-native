@@ -13,7 +13,7 @@ const GoogleLoginButton = () => {
   return (
     <BoxView direction="row" align="center" justify="flex-start" style={styles.container}>
       <ImageView 
-        source={source} 
+        path={source} 
         width={32}
         height={32}
         resizeMode="cover"

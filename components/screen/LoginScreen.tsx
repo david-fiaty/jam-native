@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { setMessage } from '@/redux/slices/MessageSlice';
+import { useDispatch } from 'react-redux';
 import { setAccessToken, setIsLoggedIn, setAccountData } from '@/redux/slices/UserSlice';
 import { useRouter } from 'expo-router';
 import { Divider } from '@rneui/base';
@@ -27,7 +26,6 @@ const LoginScreen = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
-  const userState = useSelector((state: any) => state.user);
 
   const login = async () => {
     // Todo - Connect username and password
@@ -43,7 +41,7 @@ const LoginScreen = () => {
     }
     else {
       setIsProcessing(false);
-      MessageManager.show('Invalid user name or password.');
+      MessageManager.show(i18n.t('Invalid user name or password.'));
     }
   }  
 
