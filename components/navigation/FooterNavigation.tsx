@@ -1,8 +1,7 @@
 import { StyleSheet } from "react-native";
 import { useRouter } from 'expo-router';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Layout } from '@/constants/Layout';
-import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Colors } from "@/constants/Colors";
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
@@ -10,7 +9,6 @@ import ScreenManager from '@/classes/ScreenManager';
 import UserManager from '@/classes/UserManager';
 
 const FooterNavigation = () => {
-  const dispatch = useDispatch();
   const router = useRouter();
   const activeScreen = ScreenManager.getActiveScreen();
   const isLoggedIn = UserManager.isLoggedIn();
