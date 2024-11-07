@@ -29,17 +29,17 @@ const MessageView = () => {
 
 const styles = StyleSheet.create({
   container: {
+    position: 'absolute', 
+    top: 0,      
+    left: 0, 
+    right: 0,
+    zIndex: 10,
     backgroundColor: Colors.primary,
     color: Colors.white,
     padding: Layout.space.base,
     marginTop: Layout.space.base + statusBarHeight,
     marginHorizontal: Layout.space.base*1.5,
     borderRadius: Layout.radius.round,
-    position: 'absolute', 
-    top: 0,      
-    left: 0, 
-    right: 0,
-    zIndex: 10,
   },
   content: {
     color: 'white',
