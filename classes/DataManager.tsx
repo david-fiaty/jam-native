@@ -11,12 +11,12 @@ class DataManager {
     let results: any = [];
 
     // Apply search
-    if (options?.filter !== false && searchState.filter.length) {
+    if (options?.filter !== false && searchState.filter?.length) {
       results = data.filter((item: any)  => item?.type == searchState.filter); 
     }
 
     // Apply filters
-    if (options?.search !== false && searchState.value.length) {
+    if (options?.search !== false && searchState.value?.length) {
       results = results.length ? results : data;
       results = data.filter((item: any) => {
         let haystack = item?.description?.toLowerCase();
