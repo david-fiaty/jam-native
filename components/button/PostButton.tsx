@@ -1,20 +1,18 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import ButtonBase from '../base/ButtonBase';
+import { Colors } from '@/constants/Colors';
 import i18n from '@/translation/i18n';
+import TextView from '../view/TextView';
 
 type Props = {
-  onPress?: () => void,
+  onPress: () => void,
 };
 
 const PostButton = ({onPress}: Props) => {
-  return (       
-    <ButtonBase 
-      title={i18n.t('Post')} 
-      onPress={onPress} 
-      containerStyle={styles.container}  
-      titleStyle={styles.title}
-    />
+  return (
+    <TouchableOpacity onPress={onPress} style={styles.container}>
+      <TextView style={styles.label}>{i18n.t('Post')}</TextView>
+    </TouchableOpacity>
   );
 };
 
@@ -22,8 +20,15 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     borderRadius: Layout.radius.round,
+    backgroundColor: Colors.primary,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: Layout.space.base*4.3,
   },
-  title: {
+  label: {
+    color: Colors.white,
+    fontWeight: 'bold',
     textTransform: 'uppercase',
   },
 });

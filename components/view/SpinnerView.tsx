@@ -1,18 +1,20 @@
 import React from 'react';
-import {ActivityIndicator, StyleSheet, View} from 'react-native';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
 
 type Props = {
   size?: string,
+  color?: string,
 };
 
-const SpinnerView = ({size}: Props) => {
-  const spinnerSize = size || 'large';
+const SpinnerView = ({size, color}: Props) => {
+  const spinnerSize: any = size || 'large';
+  const spinnerColor: string = Colors[color || 'primary'];
 
   return (
-    <View style={[styles.container, styles.horizontal]}>
-      <ActivityIndicator size={spinnerSize} color={Colors.primary} />
+    <View style={styles.container}>
+      <ActivityIndicator size={spinnerSize} color={spinnerColor} />
     </View>
   );
 };
