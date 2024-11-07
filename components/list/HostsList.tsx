@@ -1,6 +1,4 @@
 import { View, TouchableOpacity } from "react-native";
-import { useDispatch } from 'react-redux';
-import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
 import BackButton from "../button/BackButton";
@@ -9,12 +7,12 @@ import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
 import ListView from "../view/ListView";
 import DataManager from "@/classes/DataManager";
+import ScreenManager from "@/classes/ScreenManager";
 
 const HostsList = () => {
-  const data = DataManager.get('hosts');
-  const dispatch = useDispatch();
+  const data: any = DataManager.get('hosts');
 
-  const renderItem = (item, index) => (
+  const renderItem = (item: any, index: number) => (
     <TouchableOpacity onPress={() => console.log('clicked')}>
       <BoxView direction="row" align="center" justify="flex-start" style={Layout.listItem}>
         <IconView name="user" theme="tertiary" />
@@ -27,15 +25,15 @@ const HostsList = () => {
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Jam hosts')}
-        onPress={() => dispatch(setActiveScreen({
+        onPress={() => ScreenManager.toggleModal({
           name: 'HostsList',
-        }))}
+        })}
       />
       <View style={Layout.borderedListContainer}>
         {data?.length > 0 &&
           <ListView
             data={data}
-            renderItem={({item, index}) => renderItem(item, index)}
+            renderItem={(item: any, index: number) => renderItem(item, index)}
           />
         }
 

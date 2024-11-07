@@ -17,6 +17,7 @@ import ListView from '../view/ListView';
 import DataManager from '@/classes/DataManager';
 import ImageSlideshow from '../slideshow/ImageSlideshow';
 import UserManager from '@/classes/UserManager';
+import ScreenManager from '@/classes/ScreenManager';
 
 const JamsList = () => {  
   const dispatch = useDispatch();
@@ -38,10 +39,10 @@ const JamsList = () => {
       {/* Item header */}
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItemHeader}>
         <BoxView>
-          <TouchableOpacity onPress={() => isLoggedIn ? dispatch(setActiveScreen({
+          <TouchableOpacity onPress={() => isLoggedIn ? ScreenManager.toggleModal({
             name: 'HostsList',
-            entityId: item.id, 
-          })) : router.push('/login')}>
+            entity: item, 
+          }) : router.push('/login')}>
             <TextView>
               @{i18n.t('host')} +{parseInt(item?.hosts?.length)}
             </TextView>
@@ -51,10 +52,10 @@ const JamsList = () => {
           <JamStatusButton active={item?.active} />
         </BoxView>
         <BoxView>
-          <IconView name="actions" theme="clear" onPress={() => isLoggedIn ? dispatch(setActiveScreen({
+          <IconView name="actions" theme="clear" onPress={() => isLoggedIn ? ScreenManager.toggleModal({
             name: 'MoreJamView',
-            entityId: item?.id, 
-          })) : router.push('/login') } />
+            entity: item, 
+          }) : router.push('/login') } />
         </BoxView> 
       </BoxView>
       
@@ -65,26 +66,26 @@ const JamsList = () => {
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItemToolbar}>
 
         {/* Jammers button */}
-        <BoxView direction="row" align="center" onPress={() => isLoggedIn ? dispatch(setActiveScreen({
+        <BoxView direction="row" align="center" onPress={() => isLoggedIn ? ScreenManager.toggleModal({
           name: 'JammersList',
-          entityId: item.id, 
-        })) : router.push('/login') }>
+          entity: item, 
+        }) : router.push('/login') }>
           <IconView name="users" theme="tertiary" />
           <TextView>{parseInt(item?.jammers?.length)} {i18n.t('jammers')}</TextView>
         </BoxView>
       
         <BoxView direction="row" align="center">
           {/* Save button */}
-          <IconView name="save" theme="tertiary" onPress={() => isLoggedIn ? dispatch(setActiveScreen({
+          <IconView name="save" theme="tertiary" onPress={() => isLoggedIn ? ScreenManager.toggleModal({
             name: 'SaveJamView',
-            entityId: item.id, 
-          })) : router.push('/login')} />
+            entity: item, 
+          }) : router.push('/login')} />
 
           {/* Share button */}
-          <IconView name="share" theme="tertiary" onPress={() => dispatch(setActiveScreen({
+          <IconView name="share" theme="tertiary" onPress={() => ScreenManager.toggleModal({
             name: 'ShareJamView',
-            entityId: item.id, 
-          }))} />
+            entity: item, 
+          })} />
         </BoxView> 
       </BoxView>
 
