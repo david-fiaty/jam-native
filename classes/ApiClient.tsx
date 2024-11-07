@@ -21,7 +21,7 @@ class ApiClient {
     }
     
     try {
-      if (!data.length) {
+      if (!data?.length) {
         data = await this.sendRequest(Endpoints[key]);
 
         if (Config.cacheEnabled === true && data?.length > 0) {
