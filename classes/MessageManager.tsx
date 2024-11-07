@@ -2,10 +2,15 @@ import Store from '@/redux/Store';
 import { setMessage } from '@/redux/slices/MessageSlice';
 
 class MessageManager {
+  timeout?: any;
+
   show(text: string): void {
+    if (this.timeout) clearTimeout(this.timeout);
+    
     Store.dispatch(setMessage(''));
     Store.dispatch(setMessage(text));
-    setTimeout(() => Store.dispatch(setMessage('')), 5000);
+
+    this.timeout = setTimeout(() => Store.dispatch(setMessage('')), 5000);
   }
 };
 
