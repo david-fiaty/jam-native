@@ -43,7 +43,7 @@ const LoginScreen = () => {
     }
     else {
       setIsProcessing(false);
-      MessageManager.show('Invalid uuser name or password.');
+      MessageManager.show('Invalid user name or password.');
     }
   }  
 
