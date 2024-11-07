@@ -21,24 +21,24 @@ const FooterNavigation = () => {
         name="location"
         radius="round"
         theme={activeScreen?.name == 'MapView' ? 'secondary' : 'clear'}
-        onPress={() => dispatch(setActiveScreen({
+        onPress={() => ScreenManager.toggleModal({
           name: 'MapView',
-        }))}
+        })}
       />
       <IconView
         name="plus"
         radius="round"
         theme={activeScreen?.name == 'AddJamForm' ? 'secondary' : 'clear'}
         style={activeScreen?.name == 'AddJamForm' ? styles.active : {}}
-        onPress={() => dispatch(setActiveScreen({
+        onPress={() => ScreenManager.toggleModal({
           name: 'AddJamForm',
-        }))}
+        })}
       />
       <IconView
         name="user"
         radius="round"
         theme={activeScreen?.name == 'ProfileForm' ? 'secondary' : 'clear'}
-        onPress={() => isLoggedIn ? dispatch(setActiveScreen({ name: 'ProfileForm' })) : router.push('/login')}
+        onPress={() => isLoggedIn ? ScreenManager.toggleModal({ name: 'ProfileForm' }) : router.push('/login')}
         style={activeScreen?.name == 'ProfileForm' ? styles.active : {}}
       />
     </BoxView>
