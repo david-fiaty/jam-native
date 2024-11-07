@@ -1,10 +1,28 @@
-import Endpoints from '@/constants/Endpoints';
 import { Config } from '@/constants/Config';
+import { Cache } from "react-native-cache";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Endpoints from '@/constants/Endpoints';
+
+const cache = new Cache({
+  namespace: Config.appNamespace,
+  policy: {
+    maxEntries: 50000,
+    stdTTL: 0,
+  },
+  backend: AsyncStorage,
+});
 
 class ApiClient {
   async get(key: keyof typeof Endpoints) {
+    let data: any = await cache.get(key);
+    
     try {
-      return await this.sendRequest(Endpoints[key]);
+      if (!data) {
+        data = await this.sendRequest(Endpoints[key]);
+        await cache.set(key, data);
+      }
+
+      return data;
     } 
     catch (error) {
       console.log(error);
@@ -20,7 +38,7 @@ class ApiClient {
     }
   }
 
-  async sendRequest(endpoint: object, data?: object ) {
+  async sendRequest(endpoint: any, data?: any) {
     if (endpoint?.url && endpoint?.method) {
       try {
         // Todo - Enable domain inclusion
