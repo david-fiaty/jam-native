@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import { useRouter } from 'expo-router';
-import { useDispatch } from 'react-redux';
 import { Layout } from '@/constants/Layout';
 import { Colors } from "@/constants/Colors";
 import IconView from "../view/IconView";
