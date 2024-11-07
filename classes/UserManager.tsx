@@ -1,8 +1,8 @@
-import { useSelector } from 'react-redux';
+import Store from '@/redux/Store';
 import DataManager from './DataManager';
 
 class UserManager {
-  async login(email: string, password: string, userState?: object) {
+  async login(email: string, password: string) {
     let response = await DataManager.post('login', {
       email: email,
       password: password,
@@ -12,13 +12,13 @@ class UserManager {
   }
 
   isLoggedIn() {
-    return (useSelector((state: any) => state.user)).isLoggedIn === true;
+    return Store.getState().user.isLoggedIn === true;
   }
 
   isAccessTokenValid() {
     // Todo - Validate token duration
     console.log('---oooppp---');
-    console.log(useSelector((state: any) => state.user));
+    console.log(Store.getState().user);
   }
 };
 
