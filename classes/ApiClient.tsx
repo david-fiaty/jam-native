@@ -15,9 +15,7 @@ const cache = new Cache({
 class ApiClient {
   async get(key: keyof typeof Endpoints) {
     try {
-      let response = await this.sendRequest(Endpoints[key]);
-
-      return response;
+      return await cache.get(key) || await this.sendRequest(Endpoints[key]) ;
     } 
     catch (error) {
       console.log(error);
@@ -26,9 +24,7 @@ class ApiClient {
 
   async post(key: keyof typeof Endpoints, data: object) {
     try {
-      let response = await this.sendRequest(Endpoints[key], data);
-
-      return response;
+      return await this.sendRequest(Endpoints[key], data);
     } 
     catch (error) {
       console.log(error);
