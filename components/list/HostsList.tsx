@@ -9,6 +9,7 @@ import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
 import ListView from "../view/ListView";
 import DataManager from "@/classes/DataManager";
+import ScreenManager from "@/classes/ScreenManager";
 
 const HostsList = () => {
   const data = DataManager.get('hosts');
@@ -27,9 +28,9 @@ const HostsList = () => {
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Jam hosts')}
-        onPress={() => dispatch(setActiveScreen({
+        onPress={() => ScreenManager.toggleModal({
           name: 'HostsList',
-        }))}
+        })}
       />
       <View style={Layout.borderedListContainer}>
         {data?.length > 0 &&
