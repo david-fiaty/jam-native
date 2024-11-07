@@ -4,7 +4,9 @@ import { Config } from '@/constants/Config';
 class ApiClient {
   async get(key: keyof typeof Endpoints) {
     try {
-      return await this.sendRequest(Endpoints[key]);
+      let response = await this.sendRequest(Endpoints[key]);
+
+      return response;
     } 
     catch (error) {
       console.log(error);
@@ -13,14 +15,16 @@ class ApiClient {
 
   async post(key: keyof typeof Endpoints, data: object) {
     try {
-      return await this.sendRequest(Endpoints[key], data);
+      let response = await this.sendRequest(Endpoints[key], data);
+
+      return response;
     } 
     catch (error) {
       console.log(error);
     }
   }
 
-  async sendRequest(endpoint: object, data?: object ) {
+  async sendRequest(endpoint: any, data?: any) {
     if (endpoint?.url && endpoint?.method) {
       try {
         // Todo - Enable domain inclusion
