@@ -3,11 +3,11 @@ import { useRouter } from 'expo-router';
 import { useDispatch } from 'react-redux';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from '@/constants/Layout';
-import { ListItemProps } from '@/constants/Types';
 import ListView from '../view/ListView';
 import TextView from '../view/TextView';
 import BackButton from '../button/BackButton';
 import i18n from '@/translation/i18n';
+import ScreenManager from '@/classes/ScreenManager';
 
 type ItemProps = {
   label: string,
@@ -33,7 +33,7 @@ const SettingsMenu = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   
-  const renderItem = (item, index) => (
+  const renderItem = (item: any, index: number) => (
     <TouchableOpacity onPress={() => router.push(item.path)}>
       <View style={Layout.menuItem}>
         <TextView>{item.label}</TextView>
@@ -45,13 +45,13 @@ const SettingsMenu = () => {
     <View style={Layout.menuContainer}>
       <BackButton
         title={i18n.t('Settings')}
-        onPress={() => dispatch(setActiveScreen({
+        onPress={() => ScreenManager.toggleModal({
           name: 'SettingsMenu',
-        }))}
+        })}
       />
       <ListView 
         data={items} 
-        renderItem={({item, index}) => renderItem(item, index)}   
+        renderItem={(item: any, index: number) => renderItem(item, index)}   
       />
     </View>
   );
