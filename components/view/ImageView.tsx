@@ -1,9 +1,10 @@
+import { Image, StyleSheet } from 'react-native';
+import CachedImage from 'expo-cached-image'
 import { BaseProps } from '@/constants/Types';
-import ImageBase from '../base/ImageBase';
-import { View } from 'react-native';
 
 type Props = BaseProps & {
-  source: string,
+  path?: any,
+  uri?: any,
   width?: string | number,
   height?: string | number,
   resizeMethod?: string,
@@ -11,12 +12,25 @@ type Props = BaseProps & {
   style?: object, 
 };
 
-const ImageView = (props: Props) => {
+const ImageView = ({path, uri, width, height, resizeMethod, resizeMode, style}: Props) => {
+  const source = path ? path : {uri: uri};
+
   return (
-    <View>
-      <ImageBase {...props} />
-    </View>
+    <Image 
+      source={source} 
+      resizeMethod={resizeMethod || 'scale'}
+      resizeMode={resizeMode || 'contain'}
+      style={[styles.image, style, {width: width, height: height}]} 
+    />   
   );
 };
+
+const styles = StyleSheet.create({
+  image: {
+    alignSelf: 'center',
+    margin: 0,
+    padding: 0,
+  },
+});
 
 export default ImageView;

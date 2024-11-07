@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from '@/constants/Layout';
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
@@ -16,9 +14,9 @@ import IndustryField from "../field/IndustryField";
 import PostButton from "../button/PostButton";
 import DividerView from "../view/DividerView";
 import SpinnerView from '../view/SpinnerView';
+import ScreenManager from '@/classes/ScreenManager';
 
 const AddJamForm = () => {
-  const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -31,9 +29,9 @@ const AddJamForm = () => {
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Add new Jam')}
-        onPress={() => dispatch(setActiveScreen({
+        onPress={() => ScreenManager.toggleModal({
           name: 'ProfileForm',
-        }))}
+        })}
       />
       <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
       <JamCategoriesField />

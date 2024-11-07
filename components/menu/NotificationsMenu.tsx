@@ -1,13 +1,11 @@
 import { View, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useDispatch } from 'react-redux';
-import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from '@/constants/Layout';
 import ListView from '../view/ListView';
 import TextView from '../view/TextView';
 import BackButton from '../button/BackButton';
 import i18n from '@/translation/i18n';
-import DataManager from '@/classes/DataManager';
+import ScreenManager from '@/classes/ScreenManager';
 
 const data = [
   {
@@ -49,9 +47,8 @@ const data = [
 
 const NotificationsMenu = () => {
   const router = useRouter();
-  const dispatch = useDispatch();
 
-  const renderItem = (item, index) => (
+  const renderItem = (item: any, index: number) => (
     <TouchableOpacity key="id" onPress={() => router.push({ 
       pathname: '/notification', 
       params: item, 
@@ -66,13 +63,13 @@ const NotificationsMenu = () => {
     <View style={Layout.menuContainer}>
       <BackButton
         title={i18n.t('Notifications')}
-        onPress={() => dispatch(setActiveScreen({
+        onPress={() => ScreenManager.toggleModal({
           name: 'NotificationsMenu',
-        }))}
+        })}
       />
       <ListView 
         data={data} 
-        renderItem={({item, index}) => renderItem(item, index)}   
+        renderItem={(item: any, index: number) => renderItem(item, index)}   
       />
     </View>
   );

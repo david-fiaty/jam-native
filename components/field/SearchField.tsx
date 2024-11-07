@@ -1,6 +1,5 @@
 import { StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { setSearchValue, toggleSearchField } from "@/redux/slices/SearchSlice";
 import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
@@ -21,9 +20,9 @@ const SearchField = () => {
       style={styles.iconContainer}
       onPress={() => {
         dispatch(toggleSearchField(true));
-        dispatch(setActiveScreen({
+        ScreenManager.toggleModal({
           name: 'SearchView',
-        }));
+        });
       }}
     />
   );
@@ -45,15 +44,15 @@ const SearchField = () => {
             }
             else if (activeScreen?.name != 'SearchView') {
               dispatch(setSearchValue(''));
-              dispatch(setActiveScreen({
+              ScreenManager.toggleModal({
                 name: 'SearchView',
-              }));
+              });
             }
             else if (!searchState.value.length && activeScreen?.name == 'SearchView') {
               dispatch(toggleSearchField(false));
-              dispatch(setActiveScreen({
+              ScreenManager.toggleModal({
                 name: 'SearchView',
-              }));
+              });
             }
           }}
         />

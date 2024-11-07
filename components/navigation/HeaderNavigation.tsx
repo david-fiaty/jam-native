@@ -1,7 +1,5 @@
 import { TouchableOpacity } from 'react-native';
-import { useDispatch } from 'react-redux';
 import { useRoute } from '@react-navigation/native';
-import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from '@/constants/Layout';
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
@@ -11,7 +9,6 @@ import ScreenManager from "@/classes/ScreenManager";
 import UserManager from '@/classes/UserManager';
 
 const HeaderNavigation = () => {
-  const dispatch = useDispatch();
   const route = useRoute();
   const activeScreen = ScreenManager.getActiveScreen();
   const isLoggedIn = UserManager.isLoggedIn();
@@ -19,9 +16,9 @@ const HeaderNavigation = () => {
   return (
     <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
       <BoxView direction="row" align="center" style={Layout.headerRight}>
-        <TouchableOpacity onPress={() => dispatch(setActiveScreen({
+        <TouchableOpacity onPress={() => ScreenManager.toggleModal({
           name: 'JamsList',
-        }))}>
+        })}>
           <LogoView size={Layout.logo} />
         </TouchableOpacity>
       </BoxView>
@@ -30,15 +27,15 @@ const HeaderNavigation = () => {
           <BoxView direction="row" align="center" style={Layout.headerRight}> 
 
             { isLoggedIn &&
-              <IconView name="menu" theme="secondary" onPress={() => dispatch(setActiveScreen({
+              <IconView name="menu" theme="secondary" onPress={() => ScreenManager.toggleModal({
                 name: 'SettingsMenu',
-              }))} />
+              })} />
             }
 
             { isLoggedIn &&
-              <IconView label="15+" theme="secondary" size={11.5} onPress={() => dispatch(setActiveScreen({
+              <IconView label="15+" theme="secondary" size={11.5} onPress={() => ScreenManager.toggleModal({
                 name: 'NotificationsMenu',
-              }))} />
+              })} />
             }
               
             <SearchField />

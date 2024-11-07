@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { setMessage } from '@/redux/slices/MessageSlice';
+import { useDispatch } from 'react-redux';
 import { setAccessToken, setIsLoggedIn, setAccountData } from '@/redux/slices/UserSlice';
 import { useRouter } from 'expo-router';
 import { Divider } from '@rneui/base';
@@ -19,6 +18,7 @@ import InstagramLoginButton from '../button/InstagramLoginButton';
 import UserManager from '@/classes/UserManager';
 import LinkView from '../view/LinkView';
 import ButtonView from '../view/ButtonView';
+import ScreenManager from '@/classes/ScreenManager';
 
 const LoginScreen = () => {
   const router = useRouter();
@@ -26,12 +26,11 @@ const LoginScreen = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
-  const userState = useSelector((state: any) => state.user);
 
   const login = async () => {
     // Todo - Connect username and password
-    let response = await UserManager.login(username, password);
-    //let response = await UserManager.login('mitsiomotu@yopmail.com', 'Password1234');
+    //let response = await UserManager.login(username, password);
+    let response = await UserManager.login('mitsiomotu@yopmail.com', 'Password1234');
 
     if (response?.tokens?.access_token?.length) {
       dispatch(setAccessToken(JSON.stringify(response.tokens)));
@@ -42,7 +41,7 @@ const LoginScreen = () => {
     }
     else {
       setIsProcessing(false);
-      dispatch(setMessage('Invalid credentials'));
+      ScreenManager.showMessage(i18n.t('Invalid user name or password.'));
     }
   }  
 

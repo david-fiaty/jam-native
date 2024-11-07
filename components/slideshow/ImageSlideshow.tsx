@@ -7,7 +7,7 @@ import ImageView from "../view/ImageView";
 import DeviceManager from '@/classes/DeviceManager';
 
 type Props = {
-  data?: [] | object;
+  data?: any;
 };
 
 const width = DeviceManager.window.width - Layout.space.base*2;
@@ -17,7 +17,7 @@ const ImageSlideshow = ({data}: Props) => {
     return (
       <View style={styles.item} key={`dot-${index}`}>
         <ImageView 
-          source={{uri: Config.imageUrl + item?.url}} 
+          uri={Config.imageUrl + item?.url} 
           resizeMode="cover" 
           width={width}
           height={346}

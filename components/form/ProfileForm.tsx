@@ -33,8 +33,8 @@ const ProfileForm = () => {
 
   useEffect(() => {
     (async () => {
-      let userJamsData = await DataManager.get("jams");
-      let userProjectsData = await DataManager.get("projects");
+      let userJamsData: any = await DataManager.get('jams');
+      let userProjectsData: any = await DataManager.get('projects');
 
       setTimeout(() => {
         setUserJamsData(userJamsData);
@@ -78,7 +78,7 @@ const ProfileForm = () => {
             { accountData?.profiles[0].profile_picture?.url?.length > 0 && 
               <BoxView direction="row" align="center" justify="space-between" style={styles.profileImageContainer}>
                 <ImageView 
-                  source={{uri: Config.imageUrl + accountData?.profiles[0].profile_picture?.url }} 
+                  uri={Config.imageUrl + accountData?.profiles[0].profile_picture?.url} 
                   width={96.7}
                   height={96.7}
                   resizeMode="cover"
