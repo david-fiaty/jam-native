@@ -18,7 +18,7 @@ import InstagramLoginButton from '../button/InstagramLoginButton';
 import UserManager from '@/classes/UserManager';
 import LinkView from '../view/LinkView';
 import ButtonView from '../view/ButtonView';
-import MessageManager from '@/classes/MessageManager';
+import ScreenManager from '@/classes/ScreenManager';
 
 const LoginScreen = () => {
   const router = useRouter();
@@ -41,7 +41,7 @@ const LoginScreen = () => {
     }
     else {
       setIsProcessing(false);
-      MessageManager.show(i18n.t('Invalid user name or password.'));
+      ScreenManager.showMessage(i18n.t('Invalid user name or password.'));
     }
   }  
 
