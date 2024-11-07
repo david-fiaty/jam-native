@@ -16,7 +16,8 @@ const JammersList = () => {
   const dispatch = useDispatch();
   const screenState = useSelector((state: any) => state.screen);
 
-  console.log(screenState?.entity);
+  console.log('-----');
+  console.log(screenState);
 
   const renderItem = (item, index) => (
     <TouchableOpacity onPress={() => console.log('clicked')}>
