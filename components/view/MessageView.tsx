@@ -1,21 +1,28 @@
-import { StyleSheet, Text } from 'react-native';
-import { BaseProps } from '@/constants/Types';
+import { StyleSheet, Text, View } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 
-const MessageView = ({style, children}: BaseProps) => {
-  
+const MessageView = () => {
   return (
-    <Text style={[styles.content, style]}>
-      {children}
-    </Text>
+    <View style={styles.container}>
+      <Text style={styles.content}>
+        UI message
+      </Text>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.primary,
+    color: Colors.white,
+    padding: Layout.space.base,
+  },
   content: {
-    color: Colors.primary,
-    fontSize: Layout.fontSize.base,
+    color: 'white',
   },
 });
 
