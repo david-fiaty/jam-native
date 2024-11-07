@@ -1,5 +1,5 @@
 import { View, TouchableOpacity } from "react-native";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
@@ -8,13 +8,18 @@ import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
 import ListView from "../view/ListView";
-import DataManager from "@/classes/DataManager";
+import ScreenManager from "@/classes/ScreenManager";
 
 const JammersList = () => {
-  const data = DataManager.get('jammers');
+  //const data = DataManager.get('jammers');
+  const data: any = [];
   const dispatch = useDispatch();
+  const screenState = useSelector((state: any) => state.screen);
 
-  const renderItem = (item, index) => (
+  console.log('-----');
+  console.log(screenState);
+
+  const renderItem = (item: any, index: number) => (
     <TouchableOpacity onPress={() => console.log('clicked')}>
       <BoxView direction="row" align="center" justify="flex-start" style={Layout.listItem}>
         <IconView name="user" theme="tertiary" />
@@ -27,16 +32,16 @@ const JammersList = () => {
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Jammers')}
-        onPress={() => dispatch(setActiveScreen({
+        onPress={() => ScreenManager.toggleModal({
           name: 'JammersList',
-        }))}
+        })}
       />
       
       <View style={Layout.borderedListContainer}>
         {data?.length > 0 &&
           <ListView
             data={data}
-            renderItem={({item, index}) => renderItem(item, index)}
+            renderItem={(item: any, index: number) => renderItem(item, index)}
           />
         }
 
