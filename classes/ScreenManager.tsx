@@ -20,7 +20,7 @@ class ScreenManager {
     return Store.getState().screen.find(item => item.active === true);
   }
 
-  toggleScreen(data: object) {
+  toggleModal(data: object) {
     Store.dispatch(setActiveScreen(data));
   }
 
