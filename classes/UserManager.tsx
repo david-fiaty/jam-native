@@ -1,6 +1,5 @@
-import Store from '@/redux/Store';
+import { useSelector } from 'react-redux';
 import DataManager from './DataManager';
-import { setAccessToken, setAccountData, setIsLoggedIn } from '@/redux/slices/UserSlice';
 
 class UserManager {
   async login(email: string, password: string) {
@@ -8,26 +7,18 @@ class UserManager {
       email: email,
       password: password,
     });
-
-    if (response?.tokens?.access_token?.length) {
-      Store.dispatch(setAccessToken(JSON.stringify(response.tokens)));
-      Store.dispatch(setAccountData(JSON.stringify(response.user)));
-      Store.dispatch(setIsLoggedIn(JSON.stringify(true)));
-
-      return true;
-    }
     
-    return false;
+    return response;
   }
 
   isLoggedIn() {
-    return Store.getState().user.isLoggedIn === true;
+    return (useSelector((state: any) => state.user)).isLoggedIn === true;
   }
 
   isAccessTokenValid() {
     // Todo - Validate token duration
     console.log('---oooppp---');
-    console.log(Store.getState().user);
+    console.log(useSelector((state: any) => state.user));
   }
 };
 
