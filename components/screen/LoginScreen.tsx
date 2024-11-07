@@ -23,8 +23,8 @@ import ScreenManager from '@/classes/ScreenManager';
 const LoginScreen = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const [isProcessing, setIsProcessing] = useState(false);
 
   const login = async () => {
@@ -51,6 +51,7 @@ const LoginScreen = () => {
       <TextView style={styles.wecomeMessage}>{i18n.t('Welcome back')}</TextView> 
 
       <Divider /><Divider />
+      
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Email address')} 
@@ -85,6 +86,7 @@ const LoginScreen = () => {
       </BoxView>
 
       <Divider /><Divider />
+
       <GoogleLoginButton />
       <FacebookLoginButton />
       <InstagramLoginButton />
