@@ -1,14 +1,16 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 import DeviceManager from '@/classes/DeviceManager';
 import IconView from './IconView';
 import BoxView from './BoxView';
+import { setMessage } from '@/redux/slices/MessageSlice';
 
 const statusBarHeight = DeviceManager.getStatusBarSize().height;
 
 const MessageView = () => {
+  const dispatch = useDispatch();
   const messageState = useSelector((state: any) => state.message);
 
   if (!messageState?.text.length) return <></>;
@@ -18,7 +20,7 @@ const MessageView = () => {
       <Text style={styles.content}>
         {messageState.text}
       </Text>
-      <TouchableOpacity onPress={() => console.log('clicked')}>
+      <TouchableOpacity onPress={() => dispatch(setMessage('')) }>
         <IconView name="delete" theme="primary" />
       </TouchableOpacity>
     </BoxView>
