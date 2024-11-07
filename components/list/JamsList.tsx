@@ -3,7 +3,6 @@ import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
-import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 import TextView from '../view/TextView';
@@ -20,21 +19,20 @@ import UserManager from '@/classes/UserManager';
 import ScreenManager from '@/classes/ScreenManager';
 
 const JamsList = () => {  
-  const dispatch = useDispatch();
   const router = useRouter();
   const [data, setData] = useState([]);
   const isLoggedIn = UserManager.isLoggedIn();
 
   useEffect(() => {
     (async () => {
-      const data = await DataManager.get('jams');
+      const data: any = await DataManager.get('jams');
       setTimeout(() => setData(data), Layout.animation.duration);
     })();
   });
 
   if (!data) return <SpinnerView />;
 
-  const renderItem = (item, index) => (
+  const renderItem = (item: any, index: number) => (
     <View style={styles.listItem}>
       {/* Item header */}
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItemHeader}>
