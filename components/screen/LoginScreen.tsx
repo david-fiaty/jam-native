@@ -47,7 +47,7 @@ const LoginScreen = () => {
   }  
 
   return (
-    <BoxView direction="column" align="center" justify="center" style={Layout.screenContent}>
+    <BoxView direction="column" align="center" justify="center" style={[Layout.screenContent]}>
       <LogoView size={{ width: 80, height: 80 }} />    
       <TextView style={styles.wecomeMessage}>{i18n.t('Welcome back')}</TextView> 
 
