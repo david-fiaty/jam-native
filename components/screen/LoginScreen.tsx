@@ -29,14 +29,18 @@ const LoginScreen = () => {
 
   const login = async () => {
     // Todo - Connect username and password
-    //let success = await UserManager.login(username, password);
-    let success = await UserManager.login('mitsiomotu@yopmail.com', 'Password1234');
-    setIsProcessing(false);
+    //let response = await UserManager.login(username, password);
+    let response = await UserManager.login('mitsiomotu@yopmail.com', 'Password1234');
 
-    if (success) {
+    if (response?.tokens?.access_token?.length) {
+      dispatch(setAccessToken(JSON.stringify(response.tokens)));
+      dispatch(setAccountData(JSON.stringify(response.user)));
+      dispatch(setIsLoggedIn(true));
+      setIsProcessing(false);
       router.replace('/jams');
     }
     else {
+      setIsProcessing(false);
       ScreenManager.showMessage(i18n.t('Invalid user name or password.'));
     }
   }  
