@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { setMessage } from '@/redux/slices/MessageSlice';
 import { setAccessToken, setIsLoggedIn, setAccountData } from '@/redux/slices/UserSlice';
 import { useRouter } from 'expo-router';
 import { Divider } from '@rneui/base';
@@ -37,16 +38,16 @@ const LoginScreen = () => {
       dispatch(setAccountData(JSON.stringify(response.user)));
       dispatch(setIsLoggedIn(true));
       setIsProcessing(false);
-
       router.replace('/jams');
     }
     else {
       setIsProcessing(false);
+      dispatch(setMessage('Invalid credentials'));
     }
   }  
 
   return (
-    <BoxView direction="column" align="center" justify="center" style={Layout.screenContent}>
+    <BoxView direction="column" align="center" justify="center" style={[Layout.screenContent]}>
       <LogoView size={{ width: 80, height: 80 }} />    
       <TextView style={styles.wecomeMessage}>{i18n.t('Welcome back')}</TextView> 
 
