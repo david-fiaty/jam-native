@@ -14,8 +14,15 @@ const cache = new Cache({
 
 class ApiClient {
   async get(key: keyof typeof Endpoints) {
+    let data: any = await cache.get(key);
+    
     try {
-      return await cache.get(key) || await this.sendRequest(Endpoints[key]) ;
+      if (!data) {
+        data = await this.sendRequest(Endpoints[key]);
+        await cache.set(key, data);
+      }
+
+      return data;
     } 
     catch (error) {
       console.log(error);
