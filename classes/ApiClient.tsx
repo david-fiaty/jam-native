@@ -7,7 +7,7 @@ const cache = new Cache({
   namespace: Config.appNamespace,
   policy: {
     maxEntries: 50000,
-    stdTTL: 0 // the standard ttl as number in seconds, default: 0 (unlimited)
+    stdTTL: 0,
   },
   backend: AsyncStorage,
 });
