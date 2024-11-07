@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { setMessage } from '@/redux/slices/MessageSlice';
 import { setAccessToken, setIsLoggedIn, setAccountData } from '@/redux/slices/UserSlice';
 import { useRouter } from 'expo-router';
 import { Divider } from '@rneui/base';
@@ -42,6 +43,8 @@ const LoginScreen = () => {
     }
     else {
       setIsProcessing(false);
+     
+      dispatch(setMessage('Invalid credentials'));
     }
   }  
 
