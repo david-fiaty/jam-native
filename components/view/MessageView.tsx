@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     left: 0, 
     right: 0,
     height: 50,
-    zIndex: 900,
+    zIndex: 1,
   },
   content: {
     color: 'white',
