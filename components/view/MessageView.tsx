@@ -1,18 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { BaseProps } from '@/constants/Types';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
-import BoxView from './BoxView';
 
-type Props = BaseProps & {
-  content: string,
-};
-
-const MessageView = ({content}: Props) => {
+const MessageView = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.content}>
-        {content}
+        UI message
       </Text>
     </View>
   );

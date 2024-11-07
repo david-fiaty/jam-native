@@ -141,7 +141,7 @@ const RootLayout = () => {
 
   return (
     <Provider store={Store}>
-      <MessageView content="yo brother" />
+      <MessageView />
       <Stack>
         {routes.map((item: any) => (
           <Stack.Screen 
