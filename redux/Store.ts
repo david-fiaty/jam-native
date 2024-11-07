@@ -11,6 +11,12 @@ const Store = configureStore({
     user: UserReducer,
     message: MessageReducer,
   },
+  middleware: getDefaultMiddleware =>
+    process.env.NODE_ENV === 'production' ? getDefaultMiddleware() : getDefaultMiddleware({
+      serializableCheck: {
+        warnAfter: 64,
+      },
+    })
 });
 
 export default Store;

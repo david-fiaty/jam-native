@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     left: 22,
     top: 8,
-    zIndex: 999,
+    zIndex: 10,
     paddingHorizontal: 8,
     fontSize: 14,
   },
