@@ -1,5 +1,6 @@
 import { Layout } from '@/constants/Layout';
 import { setMessage } from '@/redux/slices/MessageSlice';
+import { setActiveScreen } from '@/redux/slices/ScreenSlice';
 import Store from '@/redux/Store';
 import DeviceManager from './DeviceManager';
 
@@ -17,6 +18,10 @@ class ScreenManager {
 
   getActiveScreen() {
     return Store.getState().screen.find(item => item.active === true);
+  }
+
+  toggleScreen(data: object) {
+    Store.dispatch(setActiveScreen(data));
   }
 
   showMessage(text: string): void {
