@@ -17,10 +17,8 @@ type Props = BaseProps & {
 };
 
 const IconView = ({name, size, label, theme, radius = 'circle', iconStyle, containerStyle, onPress}: Props) => {
-  // Icon style
   const themeIconStyle = [styles.iconStyle, styles[theme], {borderRadius: Layout.radius[radius]}];
 
-  // Image icon
   const imageIcon = (
     <IconBase 
       name={name}
@@ -30,7 +28,6 @@ const IconView = ({name, size, label, theme, radius = 'circle', iconStyle, conta
     />
   ); 
 
-  // Text icon
   const textIcon = (
     <View style={styles.containerStyle}>
       <TextView style={[themeIconStyle, {fontSize: size}]}>
@@ -39,10 +36,8 @@ const IconView = ({name, size, label, theme, radius = 'circle', iconStyle, conta
     </View>
   );
 
-  // Output
   let output = label ? textIcon : imageIcon;
 
-  // Press event
   if (onPress) {
     output = (
       <TouchableOpacity onPress={onPress}>
