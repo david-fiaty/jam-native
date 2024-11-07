@@ -71,7 +71,7 @@ const SearchView = () => {
 
   useEffect(() => {
     (async () => {
-      const listData = await DataManager.get(searchState.filter);
+      const listData: any = await DataManager.get(searchState.filter);
 
       if (listData) {
         setTimeout(() => {
