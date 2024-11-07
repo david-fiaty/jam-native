@@ -40,7 +40,7 @@ const JamsList = () => {
         <BoxView>
           <TouchableOpacity onPress={() => isLoggedIn ? dispatch(setActiveScreen({
             name: 'HostsList',
-            entityId: item.id, 
+            entity: item, 
           })) : router.push('/login')}>
             <TextView>
               @{i18n.t('host')} +{parseInt(item?.hosts?.length)}
@@ -53,7 +53,7 @@ const JamsList = () => {
         <BoxView>
           <IconView name="actions" theme="clear" onPress={() => isLoggedIn ? dispatch(setActiveScreen({
             name: 'MoreJamView',
-            entityId: item?.id, 
+            entity: item, 
           })) : router.push('/login') } />
         </BoxView> 
       </BoxView>
@@ -67,7 +67,7 @@ const JamsList = () => {
         {/* Jammers button */}
         <BoxView direction="row" align="center" onPress={() => isLoggedIn ? dispatch(setActiveScreen({
           name: 'JammersList',
-          entityId: item.id, 
+          entity: item, 
         })) : router.push('/login') }>
           <IconView name="users" theme="tertiary" />
           <TextView>{parseInt(item?.jammers?.length)} {i18n.t('jammers')}</TextView>
@@ -77,13 +77,13 @@ const JamsList = () => {
           {/* Save button */}
           <IconView name="save" theme="tertiary" onPress={() => isLoggedIn ? dispatch(setActiveScreen({
             name: 'SaveJamView',
-            entityId: item.id, 
+            entity: item, 
           })) : router.push('/login')} />
 
           {/* Share button */}
           <IconView name="share" theme="tertiary" onPress={() => dispatch(setActiveScreen({
             name: 'ShareJamView',
-            entityId: item.id, 
+            entity: item, 
           }))} />
         </BoxView> 
       </BoxView>
