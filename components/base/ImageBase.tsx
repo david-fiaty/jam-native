@@ -3,7 +3,8 @@ import CachedImage from 'expo-cached-image'
 import { BaseProps } from '@/constants/Types';
 
 type Props = BaseProps & {
-  source: string,
+  path?: string,
+  uri?: string,
   width?: string | number,
   height?: string | number,
   resizeMethod?: string,
@@ -11,9 +12,9 @@ type Props = BaseProps & {
   style?: object, 
 };
 
-const ImageBase = ({source, width, height, resizeMethod, resizeMode, style}: Props) => {
-  console.log(source);
-  
+const ImageBase = ({path, uri, width, height, resizeMethod, resizeMode, style}: Props) => {
+  const source = path ? path : {uri: uri};
+
   return (
     <Image 
       source={source} 
