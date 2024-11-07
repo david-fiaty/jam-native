@@ -1,4 +1,5 @@
 import { Image, StyleSheet } from 'react-native';
+import CachedImage from 'expo-cached-image'
 import { BaseProps } from '@/constants/Types';
 
 type Props = BaseProps & {
@@ -11,6 +12,8 @@ type Props = BaseProps & {
 };
 
 const ImageBase = ({source, width, height, resizeMethod, resizeMode, style}: Props) => {
+  console.log(source);
+  
   return (
     <Image 
       source={source} 
