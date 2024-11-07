@@ -30,11 +30,9 @@ const styles = StyleSheet.create({
     padding: Layout.space.base,
     marginTop: Layout.space.base + statusBarHeight,
     position: 'absolute', 
-    top: 100,
-    bottom: 100,       
+    top: 0,      
     left: 0, 
     right: 0,
-    height: 50,
     zIndex: 10,
   },
   content: {
