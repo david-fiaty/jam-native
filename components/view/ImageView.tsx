@@ -16,6 +16,7 @@ type Props = BaseProps & {
 const ImageView = ({path, uri, width, height, resizeMethod, resizeMode, style}: Props) => {
   const source = path ? path : {uri: uri};
   const cacheKey = 'image-' + Math.random().toString(16).slice(2);
+  
   resizeMethod = resizeMethod || 'scale';
   resizeMode = resizeMode || 'contain';
 
