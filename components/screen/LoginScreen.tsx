@@ -29,8 +29,8 @@ const LoginScreen = () => {
 
   const submitForm = async () => {
     // Todo - Connect username and password
-    //let response = await UserManager.login(username, password);
-    let response = await UserManager.login('mitsiomotu@yopmail.com', 'Password1234');
+    let response = await UserManager.login(username, password);
+    //let response = await UserManager.login('mitsiomotu@yopmail.com', 'Password1234');
 
     if (response?.tokens?.access_token?.length) {
       dispatch(setAccessToken(JSON.stringify(response.tokens)));
