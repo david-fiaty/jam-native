@@ -21,16 +21,14 @@ const ImageView = ({path, uri, width, height, resizeMethod, resizeMode, style}: 
   resizeMethod = resizeMethod || 'scale';
   resizeMode = resizeMode || 'contain';
   
-  if (false) {
-  // Todo - Enable image cache
-  //if (Config.imageCacheEnabled === true && uri) {
+  if (Config.imageCacheEnabled === true && source.uri) {
     return (
       <CachedImage
         source={source} 
         resizeMethod={resizeMethod}
         resizeMode={resizeMode}
         style={[styles.image, style, {width: width, height: height}]} 
-        cacheKey={source}
+        cacheKey={source.uri}
         placeholderContent={<SpinnerView />}
       />   
     );
