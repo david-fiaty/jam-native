@@ -22,6 +22,7 @@ const ImageView = ({path, uri, width, height, resizeMethod, resizeMode, style}: 
   resizeMode = resizeMode || 'contain';
   
   if (false) {
+  // Todo - Enable image cache
   //if (Config.imageCacheEnabled === true && uri) {
     return (
       <CachedImage
@@ -34,7 +35,7 @@ const ImageView = ({path, uri, width, height, resizeMethod, resizeMode, style}: 
       />   
     );
   }
-  else if (path) {
+  else {
     return (
       <Image
         source={source} 
@@ -44,8 +45,6 @@ const ImageView = ({path, uri, width, height, resizeMethod, resizeMode, style}: 
       />   
     );
   }
-
-  return <></>;
 };
 
 const styles = StyleSheet.create({
