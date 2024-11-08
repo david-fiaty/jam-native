@@ -30,9 +30,18 @@ const AccountForm = () => {
         onPress={() => router.back()}
       />
     
-      <InputTextField placeholder={i18n.t('Full name')} />
-      <InputTextField placeholder={i18n.t('Email address')} />
-      <InputTextField placeholder={i18n.t('Phone number')} />
+      <InputTextField 
+        placeholder={i18n.t('User name')} 
+        value={accountData?.username}
+      />
+      <InputTextField 
+        placeholder={i18n.t('Email address')} 
+        value={accountData?.email}  
+      />
+      <InputTextField 
+        placeholder={i18n.t('Phone number')} 
+        value={accountData?.phone}
+      />
     </BoxView>
   );
 };
