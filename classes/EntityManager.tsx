@@ -39,6 +39,7 @@ class EntityManager {
       }
       else {
         result[fieldName] = fieldValue;
+        console.warn(`Missing field definition ${fieldName}`);
       }
     }
 
