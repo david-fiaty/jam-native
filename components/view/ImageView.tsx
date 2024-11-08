@@ -4,7 +4,6 @@ import { Config } from '@/constants/Config';
 import CachedImage from 'expo-cached-image'
 import SpinnerView from './SpinnerView';
 
-
 type Props = BaseProps & {
   path?: any,
   uri?: any,
@@ -21,16 +20,14 @@ const ImageView = ({path, uri, width, height, resizeMethod, resizeMode, style}: 
   resizeMethod = resizeMethod || 'scale';
   resizeMode = resizeMode || 'contain';
   
-  if (false) {
-  // Todo - Enable image cache
-  //if (Config.imageCacheEnabled === true && uri) {
+  if (Config.imageCacheEnabled === true && source?.uri?.length > 0) {
     return (
       <CachedImage
         source={source} 
         resizeMethod={resizeMethod}
         resizeMode={resizeMode}
         style={[styles.image, style, {width: width, height: height}]} 
-        cacheKey={source}
+        cacheKey={source.uri}
         placeholderContent={<SpinnerView />}
       />   
     );
