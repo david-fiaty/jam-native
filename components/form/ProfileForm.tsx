@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
@@ -21,15 +21,14 @@ import InputTextareaField from "../field/InputTextareaField";
 import TextView from "../view/TextView";
 import IconView from "../view/IconView";
 import ImageView from '../view/ImageView';
+import UserManager from "@/classes/UserManager";
 
 const ProfileForm = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const [userJamsData, setUserJamsData] = useState([]);
   const [userProjectsData, setUserProjectsData] = useState([]);
-  const userState = useSelector((state: any) => state.user);
-
-  const accountData = JSON.parse(userState.accountData);
+  const accountData = UserManager.getAccountData();
 
   useEffect(() => {
     (async () => {
