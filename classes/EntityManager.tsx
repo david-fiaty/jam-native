@@ -18,10 +18,33 @@ class EntityManager {
     let definition: any = this.findEntityDefinition(entityType);
     
     if (definition) {
-      entity = this.mapEntityFields(definition.fields, data);
+      entity = this.importEntity(definition.fields, data);
     }
   
     return entity;
+  }
+
+  importEntity(fields: object, data: any) {
+    let result: any = [];
+
+    for (const [fieldName, fieldValue] of Object.entries(data)) {
+      let coreFieldName: any = this.getCoreFieldName(fieldName, fields);
+      let entityDefinition: any = this.findEntityDefinition(coreFieldName);
+
+      if (entityDefinition) {
+        result[coreFieldName] = this.importEntity(entityDefinition.fields, fieldValue);
+      }
+      else if (coreFieldName) {
+        result[coreFieldName] = fieldValue;
+      }
+      else {
+        result[fieldName] = fieldValue;
+        //console.warn(`${fieldName}: ` + JSON.stringify(fieldValue));
+        // Todo - Improve handling here
+      }
+    }
+
+    return result;
   }
 
   findEntityDefinition(entityType: string) {
@@ -34,49 +57,6 @@ class EntityManager {
     }
 
     return null;
-  }
-
-/*
-
-  mapEntityFields(fields: object, data: any) {
-    let result: any = [];
-
-    for (const [fieldName, fieldValue] of Object.entries(data)) {
-      let coreFieldName: any = this.getCoreFieldName(fieldName, fields);
-      let entityDefinition: any = this.findEntityDefinition(coreFieldName);
-
-      //console.log('----------------------------------------');
-      //console.log(coreFieldName, entityDefinition, fieldValue);
-      //console.log('----------------------------------------');
-      
-      
-      if (coreFieldName && entityDefinition) {
-        result[coreFieldName] = this.mapEntityFields(entityDefinition.fields, fieldValue);
-      }
-      else if (coreFieldName) {
-        result[coreFieldName] = fieldValue;
-      }
-    }
-
-    //console.warn('xx', result);
-
-    return result;
-  }
-  */
-  
-  mapEntityFields(fields: object, data: any) {
-    let result: any = [];
-
-    for (const [sourceField, targetField] of Object.entries(fields)) {
-      if (typeof targetField === 'object' && data?.[sourceField]) {
-        result[sourceField] = this.mapEntityFields(targetField, data[sourceField]);
-      } 
-      else if (data?.[targetField] !== undefined) {
-        result[sourceField] = data[targetField];
-      }
-    }
-
-    return result;
   }
 };
 
