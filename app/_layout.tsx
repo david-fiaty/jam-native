@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { Stack, useSegments } from 'expo-router';
 import { useFonts } from 'expo-font';
-import * as ExpoSplashScreen from 'expo-splash-screen';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@rneui/themed';
 import { Colors } from '@/constants/Colors';
+import * as ExpoSplashScreen from 'expo-splash-screen';
 import BaseTheme from "@/constants/BaseTheme";
 import Store from "@/redux/Store";
 import HeaderNavigation from '@/components/navigation/HeaderNavigation';
