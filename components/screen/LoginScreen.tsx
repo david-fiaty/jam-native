@@ -27,7 +27,7 @@ const LoginScreen = () => {
   const [password, setPassword] = useState<string>('');
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const login = async () => {
+  const submitForm = async () => {
     // Todo - Connect username and password
     //let response = await UserManager.login(username, password);
     let response = await UserManager.login('mitsiomotu@yopmail.com', 'Password1234');
@@ -71,7 +71,7 @@ const LoginScreen = () => {
         isProcessing={isProcessing} 
         onPress={() => {
           setIsProcessing(true);
-          login();
+          submitForm();
         }} 
       />
 
