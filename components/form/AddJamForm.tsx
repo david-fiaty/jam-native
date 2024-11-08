@@ -62,6 +62,7 @@ const AddJamForm = () => {
         }} 
       />
 
+      <DividerView />
     </BoxView>
   );
 };
