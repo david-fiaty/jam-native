@@ -21,7 +21,12 @@ const ImageView = ({path, uri, width, height, resizeMethod, resizeMode, style}: 
   resizeMethod = resizeMethod || 'scale';
   resizeMode = resizeMode || 'contain';
 
-  if (Config.imageCacheEnabled === true) {
+  if (uri) {
+    console.log(uri);
+  }
+  
+  if (false) {
+  //if (Config.imageCacheEnabled === true && uri) {
     return (
       <CachedImage
         source={source} 
@@ -33,7 +38,7 @@ const ImageView = ({path, uri, width, height, resizeMethod, resizeMode, style}: 
       />   
     );
   }
-  else {
+  else if (path) {
     return (
       <Image
         source={source} 
@@ -43,6 +48,8 @@ const ImageView = ({path, uri, width, height, resizeMethod, resizeMode, style}: 
       />   
     );
   }
+
+  return <></>;
 };
 
 const styles = StyleSheet.create({
