@@ -27,47 +27,23 @@ class EntityManager {
   importEntity(fields: object, data: any) {
     let result: any = [];
 
-    for (const [sourceField, targetField] of Object.entries(fields)) {
-      if (typeof targetField === 'object' && data?.[sourceField]) {
-        result[sourceField] = this.importEntity(targetField, data[sourceField]);
-      } 
-      else if (data?.[targetField] !== undefined) {
-        result[sourceField] = data[targetField];
-      }
-    }
-
-    return result;
-  }
-
-
-/*
-
-  mapEntityFields(fields: object, data: any) {
-    let result: any = [];
-
     for (const [fieldName, fieldValue] of Object.entries(data)) {
       let coreFieldName: any = this.getCoreFieldName(fieldName, fields);
       let entityDefinition: any = this.findEntityDefinition(coreFieldName);
 
-      //console.log('----------------------------------------');
-      //console.log(coreFieldName, entityDefinition, fieldValue);
-      //console.log('----------------------------------------');
-      
-      
-      if (coreFieldName && entityDefinition) {
-        result[coreFieldName] = this.mapEntityFields(entityDefinition.fields, fieldValue);
+      if (entityDefinition) {
+        result[coreFieldName] = this.importEntity(entityDefinition.fields, fieldValue);
       }
       else if (coreFieldName) {
         result[coreFieldName] = fieldValue;
       }
+      else {
+        result[fieldName] = fieldValue;
+      }
     }
-
-    //console.warn('xx', result);
 
     return result;
   }
-  */
-
 
   findEntityDefinition(entityType: string) {
     return Entities.find(item => item.type === entityType) || null;
