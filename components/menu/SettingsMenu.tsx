@@ -1,6 +1,5 @@
 import { View, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useDispatch } from 'react-redux';
 import { Layout } from '@/constants/Layout';
 import ListView from '../view/ListView';
 import TextView from '../view/TextView';
@@ -13,7 +12,7 @@ type ItemProps = {
   path: string,
 };
 
-const items: ItemProps[] = [
+const data: ItemProps[] = [
   {
     label: 'Account information',
     path: '/account',
@@ -30,12 +29,11 @@ const items: ItemProps[] = [
 
 const SettingsMenu = () => {
   const router = useRouter();
-  const dispatch = useDispatch();
   
-  const renderItem = (item: any, index: number) => (
-    <TouchableOpacity onPress={() => router.push(item.path)}>
+  const renderItem = (row: any) => (
+    <TouchableOpacity onPress={() => router.push(row.item.path)}>
       <View style={Layout.menuItem}>
-        <TextView>{item.label}</TextView>
+        <TextView>{row.item.label}</TextView>
       </View>
     </TouchableOpacity>
   );
@@ -49,8 +47,8 @@ const SettingsMenu = () => {
         })}
       />
       <ListView 
-        data={items} 
-        renderItem={(item: any, index: number) => renderItem(item, index)}   
+        data={data} 
+        renderItem={(row: any) => renderItem(row)}   
       />
     </View>
   );
