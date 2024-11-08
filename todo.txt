@@ -20,6 +20,7 @@ bc105b9c-d776-42e2-bd2e-2ebcff179748
 - Social login logos display fix
 - Profile form freeze bugfix
 - Jam actions button lists fix
+- Indicateurs de chargement sur tous les formulaires
 
 
 

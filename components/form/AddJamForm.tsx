@@ -11,13 +11,18 @@ import AddCaptionField from "../field/AddCaptionField";
 import UserLocationField from "../field/UserLocationField";
 import StatusField from "../field/StatusField";
 import IndustryField from "../field/IndustryField";
-import PostButton from "../button/PostButton";
 import DividerView from "../view/DividerView";
 import SpinnerView from '../view/SpinnerView';
 import ScreenManager from '@/classes/ScreenManager';
+import ButtonView from '../view/ButtonView';
 
 const AddJamForm = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const submitForm = async () => {
+    setTimeout(() => setIsProcessing(false), 3000);
+  }  
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), Layout.animation.duration);
@@ -46,7 +51,16 @@ const AddJamForm = () => {
       <UserLocationField />
       <StatusField />
       <IndustryField />
-      <PostButton />
+
+      <DividerView />
+      <ButtonView 
+        label={i18n.t('Save')} 
+        isProcessing={isProcessing} 
+        onPress={() => {
+          setIsProcessing(true);
+          submitForm();
+        }} 
+      />
 
       <DividerView />
     </BoxView>
