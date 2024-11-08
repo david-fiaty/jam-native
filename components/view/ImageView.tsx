@@ -21,7 +21,7 @@ const ImageView = ({path, uri, width, height, resizeMethod, resizeMode, style}: 
   resizeMethod = resizeMethod || 'scale';
   resizeMode = resizeMode || 'contain';
   
-  if (Config.imageCacheEnabled === true && source.uri) {
+  if (Config.imageCacheEnabled === true && source?.uri?.length > 0) {
     return (
       <CachedImage
         source={source} 
