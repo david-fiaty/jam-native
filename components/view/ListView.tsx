@@ -10,7 +10,7 @@ type Props = BaseProps & {
   horizontal?: boolean,
   contentContainerStyle?: object,
   columnWrapperStyle?: object,
-  keyExtractor: object, 
+  keyExtractor?: object, 
   renderItem: object, 
 };
 
