@@ -20,10 +20,6 @@ const ImageView = ({path, uri, width, height, resizeMethod, resizeMode, style}: 
   
   resizeMethod = resizeMethod || 'scale';
   resizeMode = resizeMode || 'contain';
-
-  if (uri) {
-    console.log(uri);
-  }
   
   if (false) {
   //if (Config.imageCacheEnabled === true && uri) {
