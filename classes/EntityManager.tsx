@@ -18,18 +18,18 @@ class EntityManager {
     let definition: any = this.findEntityDefinition(entityType);
     
     if (definition) {
-      entity = this.mapEntityFields(definition.fields, data);
+      entity = this.importEntity(definition.fields, data);
     }
   
     return entity;
   }
 
-  mapEntityFields(fields: object, data: any) {
+  importEntity(fields: object, data: any) {
     let result: any = [];
 
     for (const [sourceField, targetField] of Object.entries(fields)) {
       if (typeof targetField === 'object' && data?.[sourceField]) {
-        result[sourceField] = this.mapEntityFields(targetField, data[sourceField]);
+        result[sourceField] = this.importEntity(targetField, data[sourceField]);
       } 
       else if (data?.[targetField] !== undefined) {
         result[sourceField] = data[targetField];
