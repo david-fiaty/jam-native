@@ -1,6 +1,5 @@
 import { View, TouchableOpacity } from "react-native";
-import { useDispatch, useSelector } from 'react-redux';
-import { setActiveScreen } from "@/redux/slices/ScreenSlice";
+import { useSelector } from 'react-redux';
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
 import BackButton from "../button/BackButton";
@@ -9,21 +8,16 @@ import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
 import ListView from "../view/ListView";
 import ScreenManager from "@/classes/ScreenManager";
+import DataManager from "@/classes/DataManager";
 
 const JammersList = () => {
-  //const data = DataManager.get('jammers');
-  const data: any = [];
-  const dispatch = useDispatch();
-  const screenState = useSelector((state: any) => state.screen);
+  const data: any = DataManager.get('jammers');
 
-  console.log('-----');
-  console.log(screenState);
-
-  const renderItem = (item: any, index: number) => (
+  const renderItem = (row: any) => (
     <TouchableOpacity onPress={() => console.log('clicked')}>
       <BoxView direction="row" align="center" justify="flex-start" style={Layout.listItem}>
         <IconView name="user" theme="tertiary" />
-        <TextView>{item.name}</TextView>
+        <TextView>{row.item.name}</TextView>
       </BoxView>
     </TouchableOpacity>
   );
@@ -41,7 +35,7 @@ const JammersList = () => {
         {data?.length > 0 &&
           <ListView
             data={data}
-            renderItem={(item: any, index: number) => renderItem(item, index)}
+            renderItem={(row: any) => renderItem(row)}
           />
         }
 

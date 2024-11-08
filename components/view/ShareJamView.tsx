@@ -1,5 +1,4 @@
 import { View } from "react-native";
-import { useDispatch } from 'react-redux';
 import { Layout } from "@/constants/Layout";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
@@ -26,7 +25,7 @@ const ShareJamView = () => {
       <View style={Layout.borderedListContainer}>
         <ListView
           data={data}
-          renderItem={(item: any, index: number) => data[index]}
+          renderItem={(row: any) => data[row.index]}
         />
       </View>
     </BoxView>
