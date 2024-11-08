@@ -20,6 +20,13 @@ class UserManager {
     console.log('---oooppp---');
     console.log(useSelector((state: any) => state.user));
   }
+
+  getAccountData() {
+    let userState = useSelector((state: any) => state.user);
+    let accountData = userState?.accountData || '{}';
+
+    return JSON.parse(accountData);
+  }
 };
 
 export default (new UserManager());
