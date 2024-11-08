@@ -6,11 +6,17 @@ import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
 import InputTextField from '../field/InputTextField';
 import SpinnerView from '../view/SpinnerView';
-import { Divider } from '@rneui/base';
+import ButtonView from '../view/ButtonView';
+import DividerView from '../view/DividerView';
 
 const PasswordForm = () => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const submitForm = async () => {
+    setTimeout(() => setIsProcessing(false), 3000);
+  }  
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), Layout.animation.duration);
@@ -26,8 +32,20 @@ const PasswordForm = () => {
       />
       
       <InputTextField placeholder={i18n.t('Old password')} />
+
+      <DividerView theme="secondary" />
       <InputTextField placeholder={i18n.t('New password')} />
       <InputTextField placeholder={i18n.t('Confirm new password')} />
+
+      <DividerView />
+      <ButtonView 
+        label={i18n.t('Save')} 
+        isProcessing={isProcessing} 
+        onPress={() => {
+          setIsProcessing(true);
+          submitForm();
+        }} 
+      />
     </BoxView>
   );
 };
