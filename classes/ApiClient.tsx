@@ -16,7 +16,7 @@ class ApiClient {
   async get(key: keyof typeof Endpoints) {
     let data: any = [];
 
-    if (Config.cacheEnabled === true) {
+    if (Config.dataCacheEnabled === true) {
       data = await cache.get(key);
     }
     
@@ -24,7 +24,7 @@ class ApiClient {
       if (!data?.length) {
         data = await this.sendRequest(Endpoints[key]);
 
-        if (Config.cacheEnabled === true && data?.length > 0) {
+        if (Config.dataCacheEnabled === true && data?.length > 0) {
           await cache.set(key, data);
         }
       }
