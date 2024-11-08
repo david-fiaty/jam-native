@@ -1,6 +1,5 @@
 import { View, TouchableOpacity } from "react-native";
-import { useDispatch, useSelector } from 'react-redux';
-import { setActiveScreen } from "@/redux/slices/ScreenSlice";
+import { useSelector } from 'react-redux';
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
 import BackButton from "../button/BackButton";
@@ -9,15 +8,10 @@ import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
 import ListView from "../view/ListView";
 import ScreenManager from "@/classes/ScreenManager";
+import DataManager from "@/classes/DataManager";
 
 const JammersList = () => {
-  //const data = DataManager.get('jammers');
-  const data: any = [];
-  const dispatch = useDispatch();
-  const screenState = useSelector((state: any) => state.screen);
-
-  console.log('-----');
-  console.log(screenState);
+  const data: any = DataManager.get('jammers');
 
   const renderItem = (item: any, index: number) => (
     <TouchableOpacity onPress={() => console.log('clicked')}>
