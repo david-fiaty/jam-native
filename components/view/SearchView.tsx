@@ -59,11 +59,11 @@ const SearchView = () => {
   const searchState = useSelector((state: any) => state.search);
   const [data, setData] = useState([]);
 
-  const renderTab = (item: any, index: number) => (
-    <TouchableOpacity onPress={() => dispatch(setSearchFilter(item.id))}>
+  const renderTab = (row: any) => (
+    <TouchableOpacity onPress={() => dispatch(setSearchFilter(row.item.id))}>
       <View style={styles.tabItem}>
-        <TextView style={searchState.filter == item.id ? {fontWeight: 'bold'} : {}}>
-          {item.label}
+        <TextView style={searchState.filter == row.item.id ? {fontWeight: 'bold'} : {}}>
+          {row.item.label}
         </TextView>
       </View>
     </TouchableOpacity>
@@ -96,7 +96,7 @@ const SearchView = () => {
         data={tabs}
         horizontal={true}
         contentContainerStyle={styles.tabContainer}
-        renderItem={({item, index}) => renderTab(item, index)}
+        renderItem={(row: any) => renderTab(row)}
       />
 
       {/* Results */}
@@ -106,11 +106,11 @@ const SearchView = () => {
         contentContainerStyle={{gap: Layout.space.base}}
         columnWrapperStyle={{gap: Layout.space.base}}
         scrollEnabled={false}
-        renderItem={({item, index}) => (
+        renderItem={(row: any) => (
             <TouchableOpacity>
               <View style={styles.item}>
                 <ImageView 
-                  source={{uri: Config.imageUrl + item?.medias?.[0]?.url}} 
+                  uri={Config.imageUrl + row.item?.medias?.[0]?.url} 
                   width={96.7}
                   height={96.7}
                   resizeMode="cover"
