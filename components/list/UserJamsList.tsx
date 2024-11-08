@@ -18,7 +18,7 @@ const UserJamsList = ({data} : Props) => {
     <TouchableOpacity>
       <View style={styles.item}>
         <ImageView 
-          source={{uri: Config.imageUrl + item?.medias?.[0].url}} 
+          uri={Config.imageUrl + item?.medias?.[0].url} 
           width={96.7}
           height={96.7}
           resizeMode="cover"
