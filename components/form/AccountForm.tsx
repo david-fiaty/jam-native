@@ -7,15 +7,20 @@ import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
 import InputTextField from '../field/InputTextField';
 import SpinnerView from '../view/SpinnerView';
+import ButtonView from '../view/ButtonView';
+import DividerView from '../view/DividerView';
 
 const AccountForm = () => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState(false);
   const userState = useSelector((state: any) => state.user);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const accountData = JSON.parse(userState.accountData);
 
-  console.log(accountData);
+  const submitForm = async () => {
+    setTimeout(() => setIsProcessing(false), 3000);
+  }  
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), Layout.animation.duration);
@@ -42,6 +47,17 @@ const AccountForm = () => {
         placeholder={i18n.t('Phone number')} 
         value={accountData?.phone}
       />
+
+    <DividerView />
+    <ButtonView 
+      label={i18n.t('Save')} 
+      isProcessing={isProcessing} 
+      onPress={() => {
+        setIsProcessing(true);
+        submitForm();
+      }} 
+    />
+
     </BoxView>
   );
 };
