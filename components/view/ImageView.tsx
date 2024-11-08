@@ -4,7 +4,6 @@ import { Config } from '@/constants/Config';
 import CachedImage from 'expo-cached-image'
 import SpinnerView from './SpinnerView';
 
-
 type Props = BaseProps & {
   path?: any,
   uri?: any,
