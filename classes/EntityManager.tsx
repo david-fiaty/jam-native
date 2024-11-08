@@ -39,7 +39,8 @@ class EntityManager {
       }
       else {
         result[fieldName] = fieldValue;
-        console.warn(`Missing field definition ${fieldName}`);
+        //console.warn(`${fieldName}: ` + JSON.stringify(fieldValue));
+        // Todo - Improve handling here
       }
     }
 
