@@ -25,7 +25,7 @@ const SaveJamView = () => {
       <View style={Layout.borderedListContainer}>
         <ListView
           data={data}
-          renderItem={(item: any, index: number) => data[index]}
+          renderItem={(item: any) => data[item.index]}
         />
       </View>
     </BoxView>
