@@ -8,17 +8,17 @@ import ScreenManager from '@/classes/ScreenManager';
 import ListView from '../view/ListView';
 
 type Props = {
-  data?: object,
+  data?: any,
 };
 
 const UserJamsList = ({data} : Props) => {  
   const numColumns = 3;
 
-  const renderItem = (item, index) => (
+  const renderItem = (row: any) => (
     <TouchableOpacity>
       <View style={styles.item}>
         <ImageView 
-          source={{uri: Config.imageUrl + item?.medias?.[0].url}} 
+          uri={Config.imageUrl + row?.item?.medias?.[0].url} 
           width={96.7}
           height={96.7}
           resizeMode="cover"
@@ -39,7 +39,7 @@ const UserJamsList = ({data} : Props) => {
           contentContainerStyle={{gap: Layout.space.base}}
           columnWrapperStyle={{gap: Layout.space.base}}
           scrollEnabled={false}
-          renderItem={({item, index}) => renderItem(item, index)}   
+          renderItem={(row: any) => renderItem(row)}   
         />
       }
 
