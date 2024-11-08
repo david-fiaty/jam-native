@@ -1,5 +1,6 @@
 export const Config = {
-  cacheEnabled: true,
+  dataCacheEnabled: true,
+  imageCacheEnabled: true,
   apiEnabled: false,
   apiUrl: 'https://dev.jammm.app/backend/api',
   imageUrl: 'https://dev.jammm.app/backend',

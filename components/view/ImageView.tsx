@@ -1,7 +1,9 @@
 import { Image, StyleSheet } from 'react-native';
-import CachedImage from 'expo-cached-image'
 import { BaseProps } from '@/constants/Types';
+import { Config } from '@/constants/Config';
+import CachedImage from 'expo-cached-image'
 import SpinnerView from './SpinnerView';
+
 
 type Props = BaseProps & {
   path?: any,
@@ -18,17 +20,32 @@ const ImageView = ({path, uri, width, height, resizeMethod, resizeMode, style}: 
   
   resizeMethod = resizeMethod || 'scale';
   resizeMode = resizeMode || 'contain';
+  
+  if (false) {
+  //if (Config.imageCacheEnabled === true && uri) {
+    return (
+      <CachedImage
+        source={source} 
+        resizeMethod={resizeMethod}
+        resizeMode={resizeMode}
+        style={[styles.image, style, {width: width, height: height}]} 
+        cacheKey={source}
+        placeholderContent={<SpinnerView />}
+      />   
+    );
+  }
+  else if (path) {
+    return (
+      <Image
+        source={source} 
+        resizeMethod={resizeMethod}
+        resizeMode={resizeMode}
+        style={[styles.image, style, {width: width, height: height}]} 
+      />   
+    );
+  }
 
-  return (
-    <CachedImage
-      source={source} 
-      cacheKey={source}
-      resizeMethod={resizeMethod}
-      resizeMode={resizeMode}
-      style={[styles.image, style, {width: width, height: height}]} 
-      placeholderContent={<SpinnerView />}
-    />   
-  );
+  return <></>;
 };
 
 const styles = StyleSheet.create({
