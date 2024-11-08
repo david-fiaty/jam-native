@@ -35,7 +35,7 @@ const ImageView = ({path, uri, width, height, resizeMethod, resizeMode, style}: 
       />   
     );
   }
-  else if (path) {
+  else {
     return (
       <Image
         source={source} 
@@ -45,8 +45,6 @@ const ImageView = ({path, uri, width, height, resizeMethod, resizeMode, style}: 
       />   
     );
   }
-
-  return <></>;
 };
 
 const styles = StyleSheet.create({
