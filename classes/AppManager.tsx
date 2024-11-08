@@ -1,9 +1,13 @@
-import { useSelector } from 'react-redux';
+import Store from '@/redux/Store';
 
 class AppManager {
-
   flushCache() {
+    let appState = Store.getState().app;
+    if (appState.isStarted === false) {
 
+    }
+
+    appState.isStarted = true;
   }
 
   flushDataCache() {
@@ -11,7 +15,7 @@ class AppManager {
   }
 
   flushImageCache() {
-    
+
   }
 };
 
