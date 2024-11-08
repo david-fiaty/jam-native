@@ -48,13 +48,13 @@ const data = [
 const NotificationsMenu = () => {
   const router = useRouter();
 
-  const renderItem = (item: any, index: number) => (
+  const renderItem = (row: any) => (
     <TouchableOpacity key="id" onPress={() => router.push({ 
       pathname: '/notification', 
-      params: item, 
+      params: row.item, 
     })}>
       <View style={Layout.menuItem}>
-        <TextView>{item.label}</TextView>
+        <TextView>{row.item.label}</TextView>
       </View>
     </TouchableOpacity>
   );
@@ -69,7 +69,7 @@ const NotificationsMenu = () => {
       />
       <ListView 
         data={data} 
-        renderItem={(item: any, index: number) => renderItem(item, index)}   
+        renderItem={(row: any) => renderItem(row)}   
       />
     </View>
   );

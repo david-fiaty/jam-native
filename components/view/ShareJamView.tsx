@@ -25,7 +25,7 @@ const ShareJamView = () => {
       <View style={Layout.borderedListContainer}>
         <ListView
           data={data}
-          renderItem={(item: any) => data[item.index]}
+          renderItem={(row: any) => data[row.index]}
         />
       </View>
     </BoxView>
