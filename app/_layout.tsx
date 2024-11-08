@@ -10,6 +10,7 @@ import Store from "@/redux/Store";
 import HeaderNavigation from '@/components/navigation/HeaderNavigation';
 import SplashScreen from '@/components/screen/SplashScreen';
 import MessageView from '@/components/view/MessageView';
+import AppManager from '@/classes/AppManager';
 
 const headerHiddenOptions: object = { 
   headerShown: false,
@@ -134,6 +135,7 @@ const RootLayout = () => {
   useEffect(() => {
     if (isLoaded) {
       ExpoSplashScreen.hideAsync();
+      AppManager.flushCache();
     }
   }, [isLoaded]);
 
