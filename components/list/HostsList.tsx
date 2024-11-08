@@ -12,11 +12,11 @@ import ScreenManager from "@/classes/ScreenManager";
 const HostsList = () => {
   const data: any = DataManager.get('hosts');
 
-  const renderItem = (item: any, index: number) => (
+  const renderItem = (row: any) => (
     <TouchableOpacity onPress={() => console.log('clicked')}>
       <BoxView direction="row" align="center" justify="flex-start" style={Layout.listItem}>
         <IconView name="user" theme="tertiary" />
-        <TextView>{item.name}</TextView>
+        <TextView>{row.item.name}</TextView>
       </BoxView>
     </TouchableOpacity>
   );
@@ -33,7 +33,7 @@ const HostsList = () => {
         {data?.length > 0 &&
           <ListView
             data={data}
-            renderItem={(item: any, index: number) => renderItem(item, index)}
+            renderItem={(row: any) => renderItem(row)}
           />
         }
 

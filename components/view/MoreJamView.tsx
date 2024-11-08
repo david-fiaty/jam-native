@@ -13,17 +13,17 @@ import DeleteJamButton from "../button/DeleteJamButton";
 import ListView from "./ListView";
 import ScreenManager from "@/classes/ScreenManager";
 
-const MoreJamView = () => {
-  const data = [
-    <SaveJamButton style={Layout.listItem} />,
-    <ShareJamButton style={Layout.listItem} />,
-    <AddToProjectButton style={Layout.listItem} />,
-    <ViewProjectButton style={Layout.listItem} />,
-    <EditJamButton style={Layout.listItem} />,
-    <ReportJamButton style={Layout.listItem} />,
-    <DeleteJamButton style={Layout.listItem} />,
-  ];
+const data = [
+  <SaveJamButton style={Layout.listItem} />,
+  <ShareJamButton style={Layout.listItem} />,
+  <AddToProjectButton style={Layout.listItem} />,
+  <ViewProjectButton style={Layout.listItem} />,
+  <EditJamButton style={Layout.listItem} />,
+  <ReportJamButton style={Layout.listItem} />,
+  <DeleteJamButton style={Layout.listItem} />,
+];
 
+const MoreJamView = () => {
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
@@ -35,7 +35,7 @@ const MoreJamView = () => {
       <View style={Layout.borderedListContainer}>
         <ListView
           data={data}
-          renderItem={(item: any, index: number) => data[index]}
+          renderItem={(item: any) => data[item.index]}
         />
       </View>
     </BoxView>
