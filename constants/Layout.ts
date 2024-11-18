@@ -36,6 +36,7 @@ const header = {
   width: DeviceManager.window.width,
   marginTop: StatusBar.currentHeight,
   paddingHorizontal: space.base*1.5,
+  backgroundColor: Colors.white,
 };
 
 const logo = {
@@ -44,14 +45,13 @@ const logo = {
 };
 
 const footer = {
-  height: 50,
+  position: 'absolute',
   bottom: 50 + space.base*2,
+  height: 50,
   width: '100%',
   borderTopWidth: 0.3,
   borderTopColor: Colors.primary,
   backgroundColor: Colors.white,
-  position: 'absolute',
-  
 };
 
 const modal = {
