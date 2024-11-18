@@ -50,7 +50,7 @@ const footer = {
   borderTopColor: Colors.primary,
   backgroundColor: Colors.white,
   position: 'absolute',
-  top: DeviceManager.window.height - 150,
+  bottom: 70,
 };
 
 const modal = {
