@@ -28,15 +28,17 @@ const ProfileForm = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [userJamsData, setUserJamsData] = useState([]);
   const [userProjectsData, setUserProjectsData] = useState([]);
+  const [userProfileData, setUserProfileData] = useState([]);
 
-  let accountData = UserManager.getAccountData();
 
   useEffect(() => {
     (async () => {
+      let userProfileData: any = await UserManager.getProfileData();
       let userJamsData: any = await DataManager.get('jams');
       let userProjectsData: any = await DataManager.get('projects');
 
       setTimeout(() => {
+        setUserProfileData(userProfileData);
         setUserJamsData(userJamsData);
         setUserProjectsData(userProjectsData);
         setIsLoaded(true);
@@ -67,7 +69,7 @@ const ProfileForm = () => {
       <MediaPickerBase
         label={
           <BoxView direction="row" align="center" style={styles.profileImageContainer}>
-            { !accountData?.profiles[0].profile_picture?.url?.length && 
+            { !profileData?.profiles[0].profile_picture?.url?.length && 
               <BoxView direction="row" align="center" justify="space-between">
                 <IconView name="user" theme="primary" size={60} radius="circle" />
                 <TextView>{i18n.t('Change your Jammer user profile image.')}</TextView>
@@ -75,10 +77,10 @@ const ProfileForm = () => {
               </BoxView>
             } 
 
-            { accountData?.profiles[0].profile_picture?.url?.length > 0 && 
+            { profileData?.profiles[0].profile_picture?.url?.length > 0 && 
               <BoxView direction="row" align="center" justify="space-between" style={styles.profileImageContainer}>
                 <ImageView 
-                  uri={Config.imageUrl + accountData?.profiles[0].profile_picture?.url} 
+                  uri={Config.imageUrl + profileData?.profiles[0].profile_picture?.url} 
                   width={96.7}
                   height={96.7}
                   resizeMode="cover"
@@ -96,30 +98,30 @@ const ProfileForm = () => {
 
       <InputTextField
         placeholder={i18n.t('Email address')}
-        value={accountData?.email}
+        value={profileData?.email}
         onChangeText={(text: string) => {
-          accountData.email = text;
+          profileData.email = text;
         }}
       />
       <InputTextField
         placeholder={i18n.t('User name')}
-        value={accountData?.username}
+        value={profileData?.username}
         onChangeText={(text: string) => {
-          accountData.username = text;
+          profileData.username = text;
         }}
       />
       <InputTextField
         placeholder={i18n.t('Phone number')}
-        value={accountData?.phone}
+        value={profileData?.phone}
         onChangeText={(text: string) => {
-          accountData.phone = text;
+          profileData.phone = text;
         }}
       />
       <InputTextareaField
         placeholder={i18n.t('Description')}
-        value={accountData?.profiles[0].profile_description}
+        value={profileData?.profiles[0].profile_description}
         onChangeText={(text: string) => {
-          accountData.profiles[0].profile_description = text;
+          profileData.profiles[0].profile_description = text;
         }}
       />
 
