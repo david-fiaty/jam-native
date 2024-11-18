@@ -1,5 +1,7 @@
 import { useSelector } from 'react-redux';
+import Store from '@/redux/Store';
 import DataManager from './DataManager';
+import { setAccessToken, setAccountData, setIsLoggedIn } from '@/redux/slices/UserSlice';
 
 class UserManager {
   async login(email: string, password: string) {
@@ -7,6 +9,12 @@ class UserManager {
       email: email,
       password: password,
     });
+
+    if (response?.tokens?.access_token?.length) {
+      
+    }
+
+    Store.dispatch(setActiveScreen(data));
     
     return response;
   }
