@@ -10,9 +10,6 @@ eas build -p android --clear-cache --profile preview
 
 npm cache clean --force
 
-
-bc105b9c-d776-42e2-bd2e-2ebcff179748
-
 # Screen animation
 https://iamshadi.medium.com/re-creating-the-wolts-smooth-page-transition-with-expo-router-in-react-native-0b34541452db
 
