@@ -1,13 +1,13 @@
 import { ThemeProvider } from '@rneui/themed';
-import BaseTheme from "@/constants/BaseTheme";
 import ScreenView from '@/components/view/ScreenView';
-import WelcomeScreen from '@/components/screen/WelcomeScreen';
+import BaseTheme from "@/constants/BaseTheme";
+import PasswordForm from '@/components/form/PasswordForm';
 
 export default () => {
   return ( 
     <ThemeProvider theme={BaseTheme}>
       <ScreenView>
-        <WelcomeScreen />
+        <PasswordForm />
       </ScreenView>
     </ThemeProvider>
   );
