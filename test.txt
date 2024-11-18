@@ -1,0 +1,517 @@
+##### JAM #####
+
+###  Post Jam
+POST http://0.0.0.0:8000/api/v1/jams/
+Content-Type: application/json
+
+{	"caption": "jam name",
+	"upload_medias" : [],
+    "profile_id": 4318,
+    "callaborators_ids" : [1, 4318],
+    "period": {"start_datetime":"2018-11-20T15:58:44-06:00", "end_datetime":"2018-11-20T15:58:44-06:01" },
+    "sectors_ids": [13, 25],
+	"location_type": "online_physical",
+    "geolocation_latitude": "9",
+    "geolocation_longitude": "2",
+    "geographical_scope": "specific",
+    "scope_countries_codes": ["ng"],
+    "type": "call"
+}
+
+###  Update Jam
+PUT http://0.0.0.0:8000/api/v1/jams/1/
+Content-Type: application/json
+
+{	"caption": "jam name",
+	"upload_medias" : [],
+    "profile_id": 1,
+    "callaborators_ids" : [8],
+    "period": {"start_datetime":"2018-11-20T15:57:44-06:00", "end_datetime":"2018-11-20T15:58:44-06:01" },
+    "sectors_ids": [],
+	"location_type": "online_physical",
+    "geolocation_latitude": 89.2,
+    "geolocation_longitude": 189.2,
+    "geographical_scope": "specific",
+    "scope_countries_codes": ["gh", "fr"],
+    "type": "call",
+    "remove_medias_ids": [],
+    "remove_collaborators_ids": [],
+    "remove_sectors_ids": [],
+    "remove_scope_countries_codes": []
+}
+
+### Get list of all jams
+GET http://0.0.0.0:8000/api/v1/jams/
+Content-Type: application/json
+
+### Get specific jam
+GET http://0.0.0.0:8000/api/v1/jams/1/
+Content-Type: application/json
+
+### Save jams
+POST http://0.0.0.0:8000/api/v1/jams/save/
+Content-Type: application/json
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5NDE0MDEyLCJpYXQiOjE3Mjg1NTAwMTIsImp0aSI6Ijc0ZGY2MTRjZThhODRjZTA4N2JlODY1MjkyZTFjYmI3IiwidXNlcl9pZCI6MX0.wpA4K1tSQu6ev63WMd_t7iKE3F3zihZxyzqEkR5t6bc
+
+{
+    "profile_id": 1,
+    "save_items_ids": [1, 2]
+}
+
+### Unsave jams
+POST http://0.0.0.0:8000/api/v1/jams/save/
+Content-Type: application/json
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5NDE0MDEyLCJpYXQiOjE3Mjg1NTAwMTIsImp0aSI6Ijc0ZGY2MTRjZThhODRjZTA4N2JlODY1MjkyZTFjYmI3IiwidXNlcl9pZCI6MX0.wpA4K1tSQu6ev63WMd_t7iKE3F3zihZxyzqEkR5t6bc
+
+{
+    "profile_id": 1,
+    "unsave_items_ids": [1, 2]
+}
+
+### Like jam
+POST http://0.0.0.0:8000/api/v1/jams/like/
+Content-Type: application/json
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMxMDA3MjEwLCJpYXQiOjE3MzAxNDMyMTAsImp0aSI6ImI5MWE1NGM0OTc4NzRiNWU4Y2FkMjhhY2IyM2JjZjg4IiwidXNlcl9pZCI6M30.B7c49P7MgCd8f0Yd9SHN-gPGF7p_9fiYncz6PLcT__0
+
+{
+    "profile_id": 4310,
+    "item_id": 23,
+    "like_action": "like"
+}
+
+### Unlike jam
+POST http://0.0.0.0:8000/api/v1/jams/like/
+Content-Type: application/json
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMxMDA3MjEwLCJpYXQiOjE3MzAxNDMyMTAsImp0aSI6ImI5MWE1NGM0OTc4NzRiNWU4Y2FkMjhhY2IyM2JjZjg4IiwidXNlcl9pZCI6M30.B7c49P7MgCd8f0Yd9SHN-gPGF7p_9fiYncz6PLcT__0
+
+{
+    "profile_id": 4311,
+    "item_id": 20,
+    "like_action": "unlike"
+}
+
+### Add comment to jam
+POST http://0.0.0.0:8000/api/v1/jams/comments/create/
+Content-Type: application/json
+
+{
+    "profile_id": 4311,
+    "item_id": 70,
+    "comment_text": "Test",
+    "main_comment_id": 1
+}
+
+### Get profile jams
+GET http://0.0.0.0:8000/api/v1/profiles/1/jams/
+Content-Type: application/json
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5NDE0MDEyLCJpYXQiOjE3Mjg1NTAwMTIsImp0aSI6Ijc0ZGY2MTRjZThhODRjZTA4N2JlODY1MjkyZTFjYmI3IiwidXNlcl9pZCI6MX0.wpA4K1tSQu6ev63WMd_t7iKE3F3zihZxyzqEkR5t6bc
+
+
+##### PROJECT #####
+
+###  Post Project
+POST http://0.0.0.0:8000/api/v1/projects/
+Content-Type: application/json
+
+{
+    "name": "Project Name",
+	"description": "Project Name",
+	"profile_id": 1,
+    "jams_ids": [1, 2],
+    "sectors_ids": [1, 3],
+    "scope_countries_codes" : ["gh", "tg"],
+    "privacy_status": "public",
+    "period": {"start_datetime":"2018-11-20T15:58:44-06:00", "end_datetime":"2018-11-20T15:58:44-06:01" }
+}
+
+###  Update Project
+PUT http://0.0.0.0:8000/api/v1/projects/1/
+Content-Type: application/json
+
+{
+    "name": "Project Name",
+	"description": "Project Name",
+	"profile_id": 1,
+    "jams_ids": [1, 2],
+    "sectors_ids": [1, 2],
+    "scope_countries_codes" : ["gh"],
+    "remove_jams_ids": [3, 23],
+    "privacy_status": "public",
+    "period": {"start_datetime":"2018-11-20T15:56:44-06:00", "end_datetime":"2018-11-20T15:58:44-06:01" }
+}
+
+### Get list of all projects
+GET http://0.0.0.0:8000/api/v1/projects/
+Content-Type: application/json
+
+### Get specific project
+GET http://0.0.0.0:8000/api/v1/projects/1/
+Content-Type: application/json
+
+### Like project
+POST http://0.0.0.0:8000/api/v1/projects/like/
+Content-Type: application/json
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5NDE0MDEyLCJpYXQiOjE3Mjg1NTAwMTIsImp0aSI6Ijc0ZGY2MTRjZThhODRjZTA4N2JlODY1MjkyZTFjYmI3IiwidXNlcl9pZCI6MX0.wpA4K1tSQu6ev63WMd_t7iKE3F3zihZxyzqEkR5t6bc
+
+{
+    "profile_id": 1,
+    "item_id": 1,
+    "like_action": "like"
+}
+
+### Unlike project
+POST http://0.0.0.0:8000/api/v1/projects/like/
+Content-Type: application/json
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5NDE0MDEyLCJpYXQiOjE3Mjg1NTAwMTIsImp0aSI6Ijc0ZGY2MTRjZThhODRjZTA4N2JlODY1MjkyZTFjYmI3IiwidXNlcl9pZCI6MX0.wpA4K1tSQu6ev63WMd_t7iKE3F3zihZxyzqEkR5t6bc
+
+{
+    "profile_id": 1,
+    "item_id": 1,
+    "like_action": "unlike"
+}
+
+### Add comment to Project
+POST http://0.0.0.0:8000/api/v1/projects/comments/create/
+Content-Type: application/json
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5NDE0MDEyLCJpYXQiOjE3Mjg1NTAwMTIsImp0aSI6Ijc0ZGY2MTRjZThhODRjZTA4N2JlODY1MjkyZTFjYmI3IiwidXNlcl9pZCI6MX0.wpA4K1tSQu6ev63WMd_t7iKE3F3zihZxyzqEkR5t6bc
+
+{
+    "profile_id": 1,
+    "item_id": 1,
+    "comment_text": "Test",
+    "main_comment_id": 1
+}
+
+### Get profile projects
+GET http://0.0.0.0:8000/api/v1/profiles/1/projects/
+Content-Type: application/json
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5NDE0MDEyLCJpYXQiOjE3Mjg1NTAwMTIsImp0aSI6Ijc0ZGY2MTRjZThhODRjZTA4N2JlODY1MjkyZTFjYmI3IiwidXNlcl9pZCI6MX0.wpA4K1tSQu6ev63WMd_t7iKE3F3zihZxyzqEkR5t6bc
+
+##### COMMENT #####
+
+### Update specific comment
+PUT http://0.0.0.0:8000/api/v1/comments/1/
+Content-Type: application/json
+
+{"profile_id": 1, "comment_text": "123456"}
+
+##### PROFILE #####
+
+### Get all profiles
+GET http://0.0.0.0:8000/api/v1/profiles/
+Content-Type: application/json
+
+### Create new profile
+POST http://0.0.0.0:8000/api/v1/profiles/
+Content-Type: application/json
+
+{}
+
+### Get specific profile
+GET http://0.0.0.0:8000/api/v1/profiles/1/
+Content-Type: application/json
+
+### Update specific profile
+PUT http://0.0.0.0:8000/api/v1/profiles/1/
+Content-Type: application/json
+
+{"profile_name":"abc", "sectors_ids": [1, 12], "scope_country_code": "tg", "geolocation_latitude": "9.8080", "geolocation_longitude": "2.80", "profile_type":"venue", "profile_venue":{"venue_name":"Hello ab"}}
+
+#{"profile_name":"test", "scope_country_code": "gh", "geolocation_latitude": "9,80", "geolocation_longitude": "2,80", "profile_type":"personal", "profile_personal":{"first_name":"Hello", "last_name":"World"}}
+
+### Delete bulk import profiles
+DELETE http://0.0.0.0:8000/api/v1/delete-bulk-import-profiles/
+Content-Type: application/json
+
+### PROD !!! Delete bulk import profiles
+DELETE https://dev.jammm.app/backend/api/v1/delete-bulk-import-profiles/
+Content-Type: application/json
+
+##### SECTOR #####
+
+### Get all sectors
+GET http://0.0.0.0:8000/api/v1/sectors/
+Content-Type: application/json
+
+##### FEED #####
+
+### Get jams feed
+POST http://0.0.0.0:8000/api/v1/jams/feed/
+Content-Type: application/json
+
+{
+    "profile_id": 1,
+    "jam_type": "all",
+    "displayed_items_ids": [1, 2],
+    "nbr_items_to_return": 10
+}
+
+### Get jams feed with search text and sectors selection
+POST http://0.0.0.0:8000/api/v1/jams/feed/
+Content-Type: application/json
+
+{
+    "profile_id": 1,
+    "jam_type": "all",
+    "displayed_items_ids": [1, 2],
+    "nbr_items_to_return": 10,
+    "query_countries_codes": []
+}
+
+### Get projects feed
+POST http://0.0.0.0:8000/api/v1/projects/feed/
+Content-Type: application/json
+
+{
+    "profile_id": 1,
+    "displayed_items_ids": [1, 2],
+    "nbr_items_to_return": 10
+}
+
+### Get projects feed with search text
+POST http://0.0.0.0:8000/api/v1/projects/feed/
+Content-Type: application/json
+
+{
+    "profile_id": 1,
+    "displayed_items_ids": [1, 2],
+    "nbr_items_to_return": 10,
+    "query_countries_codes": []
+}
+
+### Get profiles feed
+POST http://0.0.0.0:8000/api/v1/profiles/feed/
+Content-Type: application/json
+
+{
+    "profile_id": 1,
+    "profile_type": "all",
+    "displayed_items_ids": [1, 2],
+    "nbr_items_to_return": 20
+}
+
+### Get profiles feed with search text
+POST http://0.0.0.0:8000/api/v1/profiles/feed/
+Content-Type: application/json
+
+{
+    "profile_id": 1,
+    "profile_type": "all",
+    "displayed_items_ids": [1, 2],
+    "nbr_items_to_return": 10,
+    "query_text": "ABCD"
+}
+
+##### ADMIN #####
+
+### Report an item authenticated
+POST http://0.0.0.0:8000/api/v1/report-items/
+Content-Type: application/json
+
+{
+    "reporting_person_is_anonymous": false,
+    "reporting_profile_id": 1,
+    "reporting_content_type": "jam",
+    "reporting_content_id": 1,
+    "reporting_cause": "",
+    "reporting_comment": "ABCD"
+}
+
+### Report an item anonymous
+POST http://0.0.0.0:8000/api/v1/report-items/
+Content-Type: application/json
+
+{
+    "reporting_person_is_anonymous": true,
+    "reporting_profile_id": null,
+    "reporting_content_type": "project",
+    "reporting_content_id": 1,
+    "reporting_cause": "",
+    "reporting_comment": "ABCD"
+}
+
+### Treat a report item
+POST http://0.0.0.0:8000/api/v1/report-items/7/treat/
+Content-Type: application/json
+
+{
+    "treatment_status": "report-approved",
+    "treatment_comment": "test 1234"
+}
+
+### Get report items for specific content
+POST http://0.0.0.0:8000/api/v1/get-report-items-for-specific-content/
+Content-Type: application/json
+
+{
+    "content_type": "jam",
+    "content_id": 1
+}
+
+### Get report items for specific content
+GET http://0.0.0.0:8000/api/v1/get-report-items-stats-per-content-type/
+Content-Type: application/json
+
+### Admin get users view
+GET http://0.0.0.0:8000/api/v1/admin/users/
+Content-Type: application/json
+
+### Admin activate users view
+PUT http://0.0.0.0:8000/api/v1/admin/users/activate/
+Content-Type: application/json
+
+{
+    "action": "activate",
+    "items_ids": [1]
+}
+
+### Admin deactivate users view
+PUT http://0.0.0.0:8000/api/v1/admin/users/activate/
+Content-Type: application/json
+
+{
+    "action": "deactivate",
+    "items_ids": [1]
+}
+
+### Admin delete users view
+DELETE http://0.0.0.0:8000/api/v1/admin/users/delete/
+Content-Type: application/json
+
+{
+    "action": "delete",
+    "items_ids": [1]
+}
+
+### Admin undelete users view
+DELETE http://0.0.0.0:8000/api/v1/admin/users/delete/
+Content-Type: application/json
+
+{
+    "action": "undelete",
+    "items_ids": [1]
+}
+
+### Admin get profiles view
+GET http://0.0.0.0:8000/api/v1/admin/profiles/
+Content-Type: application/json
+
+### Admin delete users view
+DELETE http://0.0.0.0:8000/api/v1/admin/profiles/delete/
+Content-Type: application/json
+
+{
+    "action": "delete",
+    "items_ids": [1]
+}
+
+### Admin undelete users view
+DELETE http://0.0.0.0:8000/api/v1/admin/profiles/delete/
+Content-Type: application/json
+
+{
+    "action": "undelete",
+    "items_ids": [1]
+}
+
+### Admin get jams view
+GET http://0.0.0.0:8000/api/v1/admin/jams/
+Content-Type: application/json
+
+### Admin get projects view
+GET http://0.0.0.0:8000/api/v1/admin/projects/
+Content-Type: application/json
+
+### Admin get comments view
+GET http://0.0.0.0:8000/api/v1/admin/comments/
+Content-Type: application/json
+
+##### NOTIFICATIONS #####
+
+#eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMxMDA2ODczLCJpYXQiOjE3MzAxNDI4NzMsImp0aSI6ImI3N2RiMTYyNjVhNjQ3N2E4ZjJlZDRjOTU0OThiYTY1IiwidXNlcl9pZCI6Mn0.5j3WEnJ82GSLofhE_NCVBSokRWwQJVJHWVSVEK7ZCEU
+#abcde@test.com
+#abcde
+
+### Get notifications for profile
+POST http://0.0.0.0:8000/api/v1/profiles/1/notifications/
+Content-Type: application/json
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMxMTY4MTkyLCJpYXQiOjE3MzAzMDQxOTIsImp0aSI6ImE1MjdiMTRlNmU5YjQ5ZmRhZjM0ODY1YWE0MzZhYzdlIiwidXNlcl9pZCI6MTB9.z2qnSuw-QguTbXcSybtAT3mD_Ms3iTjnafdZZqywDK0
+
+{"displayed_items_ids": [64, 65], "nbr_items_to_return": 10}
+
+### Put notifications as read
+PUT http://0.0.0.0:8000/api/v1/profiles/1/notifications/read/
+Content-Type: application/json
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMxMDA2ODczLCJpYXQiOjE3MzAxNDI4NzMsImp0aSI6ImI3N2RiMTYyNjVhNjQ3N2E4ZjJlZDRjOTU0OThiYTY1IiwidXNlcl9pZCI6Mn0.5j3WEnJ82GSLofhE_NCVBSokRWwQJVJHWVSVEK7ZCEU
+
+{"items_ids": [7]}
+
+##### REGISTRATION AND LOGIN #####
+
+### Registration
+POST http://0.0.0.0:8000/api/v1/register/
+Content-Type: application/json
+
+{"profile":{"sectors_ids":[1, 3], "profile_name":"1234", "scope_country_code": "gh", "geolocation_latitude": "9.80", "geolocation_longitude": "2.80", "profile_type":"personal", "profile_personal":{"first_name":"ABCD", "last_name":"DEF"}},
+"email":"abcdefghijklmnopqrs@test.com", "password":"abcdef", "username":"abc", "session":"b9f2f805a3324c5eb23520132c3dede3"}
+
+###
+POST http://0.0.0.0:8000/api/v1/send-registration-verification/
+Content-Type: application/json
+
+{"email":"test1234@yopmail.com"}
+
+###
+POST http://0.0.0.0:8000/api/v1/verify-registration/
+Content-Type: application/json
+
+{"session":"b9f2f805-a332-4c5e-b235-20132c3dede3", "code":"34027"}
+
+### Login
+POST http://0.0.0.0:8000/api/v1/login/
+Content-Type: application/json
+
+{"email":"abcdefghijklmn@test.com", "password":"abcdef"}
+
+
+### Refresh API token
+POST http://0.0.0.0:8000/api/v1/token/refresh/
+Content-Type: application/json
+
+{"refresh":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyNTk4NTUzNiwiaWF0IjoxNzI1ODk5MTM2LCJqdGkiOiI1ZTAzM2VjMjNmMmU0ZTlhOTU4YzJhNDMyN2NkZDM0YyIsInVzZXJfaWQiOjR9.u36yrYQZiD97El95rszUwuIOZuCuUPO-g_oraPJot7w"}
+
+
+### Get user info
+GET http://0.0.0.0:8000/api/v1/get-user-info/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5NDQwODgwLCJpYXQiOjE3Mjg1NzY4ODAsImp0aSI6IjkwZDVkZjkxYzUwYzRkMTk5ODg2ZWUzNWZiN2JiN2EwIiwidXNlcl9pZCI6MX0.Nb6BOh3EDoLJNR7Znxi3FmG8CtuBOPmgoV4dFt7FHpU
+
+
+### Get current user info
+GET http://0.0.0.0:8000/api/v1/get-current-user-info/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5NDQwODgwLCJpYXQiOjE3Mjg1NzY4ODAsImp0aSI6IjkwZDVkZjkxYzUwYzRkMTk5ODg2ZWUzNWZiN2JiN2EwIiwidXNlcl9pZCI6MX0.Nb6BOh3EDoLJNR7Znxi3FmG8CtuBOPmgoV4dFt7FHpU
+
+
+### Get other user info
+POST http://0.0.0.0:8000/api/v1/get-other-user-info/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5NDQwODgwLCJpYXQiOjE3Mjg1NzY4ODAsImp0aSI6IjkwZDVkZjkxYzUwYzRkMTk5ODg2ZWUzNWZiN2JiN2EwIiwidXNlcl9pZCI6MX0.Nb6BOh3EDoLJNR7Znxi3FmG8CtuBOPmgoV4dFt7FHpU
+
+{"email":"testbdd@test.com", "password":"testkhbhHH"}
+
+
+### Add managed profile to user
+POST http://0.0.0.0:8000/api/v1/add-managed-profile-to-user/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMxNzYzMDA1LCJpYXQiOjE3MzA4OTkwMDUsImp0aSI6ImZhMmQxYWQ5ODY1MDRiOTU5MTIwOGQyODVmZmI2Njk1IiwidXNlcl9pZCI6MTB9.4rd8BE-kb8f8wMGhMrlnCj1rNu7906PVjHVYRzbjzJI
+
+{"email_other_user":"abcdefghijklm@test.com","password_other_user":"abcdef","profile_type":"personal","profile_id_other_user":"1"}
+
+
+### Add owned profile to user
+POST http://0.0.0.0:8000/api/v1/add-owned-profile-to-user/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5NDQwODgwLCJpYXQiOjE3Mjg1NzY4ODAsImp0aSI6IjkwZDVkZjkxYzUwYzRkMTk5ODg2ZWUzNWZiN2JiN2EwIiwidXNlcl9pZCI6MX0.Nb6BOh3EDoLJNR7Znxi3FmG8CtuBOPmgoV4dFt7FHpU
+
+{"profile_name": "1234", "scope_country_code": "gh", "geolocation_latitude": "9,80", "geolocation_longitude": "2,80", "profile_type":"personal","profile_personal":{"first_name":"ABC", "last_name":"DEFGHI"}}
