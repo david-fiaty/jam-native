@@ -18,10 +18,10 @@ const headerHiddenOptions: object = {
 const headerVisibleOptions: object = { 
   statusBarStyle: 'dark',
   headerShown: true,
-  statusBarBackgroundColor: Colors.background,
-  headerTintColor: Colors.background,    
+  statusBarBackgroundColor: Colors.white,
+  headerTintColor: Colors.white,    
   headerStyle: {
-    backgroundColor: Colors.background, 
+    backgroundColor: Colors.white, 
   },
   header: (props: object) => (
     <ThemeProvider theme={BaseTheme}>

@@ -36,6 +36,7 @@ const header = {
   width: DeviceManager.window.width,
   marginTop: StatusBar.currentHeight,
   paddingHorizontal: space.base*1.5,
+  backgroundColor: Colors.white,
 };
 
 const logo = {
