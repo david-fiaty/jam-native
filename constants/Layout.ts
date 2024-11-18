@@ -45,9 +45,12 @@ const logo = {
 
 const footer = {
   height: 50,
+  width: '100%',
   borderTopWidth: 0.3,
   borderTopColor: Colors.primary,
   backgroundColor: Colors.white,
+  position: 'absolute',
+  top: DeviceManager.window.height - 150,
 };
 
 const modal = {
