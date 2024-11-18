@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { setAccessToken, setIsLoggedIn, setAccountData } from '@/redux/slices/UserSlice';
 import { useRouter } from 'expo-router';
 import { Divider } from '@rneui/base';
 import { Layout } from '@/constants/Layout';
@@ -22,7 +20,6 @@ import ScreenManager from '@/classes/ScreenManager';
 
 const LoginScreen = () => {
   const router = useRouter();
-  const dispatch = useDispatch();
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [isProcessing, setIsProcessing] = useState(false);
@@ -30,13 +27,13 @@ const LoginScreen = () => {
   const submitForm = async () => {
     // Todo - Connect username and password
     //let response = await UserManager.login(username, password);
-    const success: boolean = await UserManager.login('mitsiomotu@yopmail.com', 'Password1234');
-    if (success === true) {
-      setIsProcessing(false);
+    let success: boolean = await UserManager.login('mitsiomotu@yopmail.com', 'Password1234');
+    setIsProcessing(false);
+
+    if (success === true) {  
       router.replace('/jams');
     }
     else {
-      setIsProcessing(false);
       ScreenManager.showMessage(i18n.t('Invalid user name or password.'));
     }
   }  

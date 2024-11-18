@@ -21,6 +21,16 @@ class UserManager {
     return false;
   }
 
+  async signup(data: any) {
+    let response = await DataManager.post('signup', data);
+
+    if (response) {
+      return true;
+    }
+    
+    return false;
+  }
+
   isLoggedIn() {
     return (useSelector((state: any) => state.user)).isLoggedIn === true;
   }
