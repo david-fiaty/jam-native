@@ -47,7 +47,8 @@ const footer = {
   height: 50,
   borderTopWidth: 0.3,
   borderTopColor: Colors.primary,
-  backgroundColor: Colors.white,
+  //backgroundColor: Colors.white,
+  backgroundColor: 'green',
 };
 
 const modal = {
