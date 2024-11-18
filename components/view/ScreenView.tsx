@@ -13,7 +13,7 @@ const ScreenView = ({style, children}: BaseProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.background,
+    backgroundColor: Colors.white,
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,

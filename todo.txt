@@ -228,11 +228,11 @@ console.log(JSON.stringify(obj, 0, 2));
 const screenOptions = { 
   header: (props: object) => <HeaderView />,    
   headerShown: true,
-  statusBarColor: Colors.background,
+  statusBarColor: Colors.white,
   statusBarStyle: 'dark',
-  headerTintColor: Colors.background,    
+  headerTintColor: Colors.white,    
   headerStyle: {
-    backgroundColor: Colors.background, 
+    backgroundColor: Colors.white, 
   },
 };
 

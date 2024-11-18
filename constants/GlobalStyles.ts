@@ -22,7 +22,7 @@ export const GlobalStyles = {
     justifyContent: 'center',
     alignItems: 'center', 
     alignContent: 'center',
-    backgroundColor: Colors.background,
+    backgroundColor: Colors.white,
     height: '100%',
   },
   text: {
