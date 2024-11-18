@@ -11,12 +11,14 @@ class UserManager {
     });
 
     if (response?.tokens?.access_token?.length) {
-      
-    }
+      Store.dispatch(setAccessToken(JSON.stringify(response.tokens)));
+      Store.dispatch(setAccountData(JSON.stringify(response.user)));
+      Store.dispatch(setIsLoggedIn(true));
 
-    Store.dispatch(setActiveScreen(data));
+      return true;
+    }
     
-    return response;
+    return false;
   }
 
   isLoggedIn() {
