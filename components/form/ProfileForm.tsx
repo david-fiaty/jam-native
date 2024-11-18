@@ -46,8 +46,6 @@ const ProfileForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(accountData);
-  
   return (
     <BoxView
       align="flex-start"
