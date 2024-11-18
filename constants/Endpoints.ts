@@ -13,6 +13,10 @@ const Endpoints = {
     url: 'https://the.jammm.app/backend/api/login/',
     method: 'POST',
   },
+  signup: {
+    url: 'https://the.jammm.app/backend/api/register/',
+    method: 'POST',
+  },
 };
 
 export default Endpoints;
