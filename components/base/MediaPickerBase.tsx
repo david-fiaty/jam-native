@@ -25,7 +25,7 @@ const MediaPickerBase = ({label}: Props) => {
   const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      mediaTypes: ImagePicker.MediaType.Images,
       allowsEditing: false,
       quality: 1,
     });
