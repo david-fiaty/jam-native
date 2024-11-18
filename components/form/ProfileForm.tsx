@@ -28,7 +28,8 @@ const ProfileForm = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [userJamsData, setUserJamsData] = useState([]);
   const [userProjectsData, setUserProjectsData] = useState([]);
-  const accountData = UserManager.getAccountData();
+
+  let accountData = UserManager.getAccountData();
 
   useEffect(() => {
     (async () => {
@@ -45,6 +46,8 @@ const ProfileForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
+  console.log(accountData);
+  
   return (
     <BoxView
       align="flex-start"
