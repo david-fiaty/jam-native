@@ -8,7 +8,8 @@ eas update --branch dev-features-8 --platform android
 # Build apk
 eas build -p android --clear-cache --profile preview 
 
-npm cache clean --force
+# Run
+npm start --tunnel
 
 # Screen animation
 https://iamshadi.medium.com/re-creating-the-wolts-smooth-page-transition-with-expo-router-in-react-native-0b34541452db
