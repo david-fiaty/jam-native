@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import ImageView from '../view/ImageView';
 
@@ -25,13 +25,21 @@ const MediaPickerBase = ({label}: Props) => {
   const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      mediaTypes: ['images'],
       allowsEditing: false,
+      aspect: [4, 3],
       quality: 1,
     });
+
+
+    console.log(result);
   
     if (!result.canceled) {
       setSelectedImage(result.assets[0].uri);
+      console.log(selectedImage);
+    }
+    else {
+      console.log('Cancelled');
     }
   };
 
@@ -39,11 +47,11 @@ const MediaPickerBase = ({label}: Props) => {
     <TouchableOpacity onPress={pickImage}>
       {label}
       
-      {/*
+      { selectedImage &&
       <View style={styles.preview}>
         <ImagePreview selectedImage={selectedImage} />
       </View>
-      */}
+      }
       
     </TouchableOpacity>
   );

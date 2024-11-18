@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { StyleSheet, View, Animated } from "react-native";
-import { useRoute } from '@react-navigation/native';
-import { useSelector } from 'react-redux';
+import { useRoute } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import { Modals } from "@/constants/Modals";
@@ -58,42 +58,42 @@ const JamsScreen = () => {
   const animationEffects: any = {
     slide: (show?: boolean) => {
       Animated.timing(slideEffectReference, {
-        toValue: show ? 0 : windowHeight, 
-        duration: Layout.animation.duration, 
-        useNativeDriver: true, 
+        toValue: show ? 0 : windowHeight,
+        duration: Layout.animation.duration,
+        useNativeDriver: true,
       }).start();
     },
     fade: (show?: boolean) => {
       Animated.timing(fadeEffectReference, {
-        toValue: show ? 1 : 0, 
-        duration: Layout.animation.duration, 
-        useNativeDriver: true, 
+        toValue: show ? 1 : 0,
+        duration: Layout.animation.duration,
+        useNativeDriver: true,
       }).start();
     },
     push: (show?: boolean) => {
       Animated.timing(pushEffectReference, {
-        toValue: show ? 0 : windowWidth, 
-        duration: Layout.animation.duration, 
-        useNativeDriver: true, 
+        toValue: show ? 0 : windowWidth,
+        duration: Layout.animation.duration,
+        useNativeDriver: true,
       }).start();
     },
   };
-  
+
   // Animation styles
   const animationStyles: any = {
-    fade: { 
+    fade: {
       opacity: fadeEffectReference,
     },
     slide: {
       transform: [
-        { 
+        {
           translateY: slideEffectReference,
-        }
+        },
       ],
     },
-    push: { 
+    push: {
       transform: [
-        { 
+        {
           translateX: pushEffectReference,
         },
       ],
@@ -103,7 +103,9 @@ const JamsScreen = () => {
   // Get the active modal window
   const getActiveModal = (state: object) => {
     let screen = ScreenManager.getActiveScreen();
-    let activeModal = screen ? Modals.find(item => item.name == screen.name) : null;
+    let activeModal = screen
+      ? Modals.find((item) => item.name == screen.name)
+      : null;
 
     return activeModal;
   };
@@ -116,38 +118,41 @@ const JamsScreen = () => {
       setCurrentScreen(activeModal);
       setAnimatedStyle(animationStyles[activeModal.effect]);
       animationEffects[activeModal.effect](true);
-    }
-    else if (currentScreen) {
-      animationEffects[currentScreen.effect](false);    
+    } else if (currentScreen) {
+      animationEffects[currentScreen.effect](false);
       setTimeout(() => {
         setCurrentScreen(null);
         setAnimatedStyle(animationStyles[currentScreen.effect]);
       }, Layout.animation.duration);
     }
-  }, [screenState]); 
-  
+  }, [screenState]);
+
   // Render
   return (
     <ScreenView>
       <View style={styles.container}>
         {/* Main content */}
-        { !currentScreen && 
+        {!currentScreen && (
           <BoxView style={Layout.mainContent}>
             <JamsList />
           </BoxView>
-        }
+        )}
 
         {/* Modal content */}
-        <BoxView style={Layout.modalContainer}>
-          <Animated.View style={[Layout.animatedView, animatedStyle]}>
-            <BoxView style={Layout.modalContent}>
-              {screenComponents?.[currentScreen?.name]}
-            </BoxView>
-          </Animated.View>
-        </BoxView>
+        {
+          <BoxView style={Layout.modalContainer}>
+            <Animated.View style={[Layout.animatedView, animatedStyle]}>
+              <BoxView style={Layout.modalContent}>
+                {screenComponents?.[currentScreen?.name]}
+              </BoxView>
+            </Animated.View>
+          </BoxView>
+        }
 
         {/* Footer navigation */}
-        { (route.name == 'jams' || currentScreen?.footerNavigation) && <FooterNavigation /> }
+        {(route.name == "jams" || currentScreen?.footerNavigation) && (
+          <FooterNavigation />
+        )}
       </View>
     </ScreenView>
   );
@@ -155,9 +160,9 @@ const JamsScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    height: '100%',
+    flexDirection: "column",
+    justifyContent: "space-between",
+    height: DeviceManager.window.height,
     backgroundColor: Colors.white,
   },
 });

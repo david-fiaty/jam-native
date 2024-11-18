@@ -8,21 +8,8 @@ eas update --branch dev-features-8 --platform android
 # Build apk
 eas build -p android --clear-cache --profile preview 
 
-npm cache clean --force
-
-
-bc105b9c-d776-42e2-bd2e-2ebcff179748
-
-
-# Latest Updates
-- Data caching
-- Image caching
-- Social login logos display fix
-- Profile form freeze bugfix
-- Jam actions button lists fix
-- Indicateurs de chargement sur tous les formulaires
-
-
+# Run
+npm start --tunnel
 
 # Screen animation
 https://iamshadi.medium.com/re-creating-the-wolts-smooth-page-transition-with-expo-router-in-react-native-0b34541452db
@@ -239,11 +226,11 @@ console.log(JSON.stringify(obj, 0, 2));
 const screenOptions = { 
   header: (props: object) => <HeaderView />,    
   headerShown: true,
-  statusBarColor: Colors.background,
+  statusBarColor: Colors.white,
   statusBarStyle: 'dark',
-  headerTintColor: Colors.background,    
+  headerTintColor: Colors.white,    
   headerStyle: {
-    backgroundColor: Colors.background, 
+    backgroundColor: Colors.white, 
   },
 };
 
