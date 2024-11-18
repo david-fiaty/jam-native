@@ -97,22 +97,30 @@ const ProfileForm = () => {
       <InputTextField
         placeholder={i18n.t('Email address')}
         value={accountData?.email}
-        onChangeText={(text: string) => {}}
+        onChangeText={(text: string) => {
+          accountData.email = text;
+        }}
       />
       <InputTextField
         placeholder={i18n.t('User name')}
         value={accountData?.username}
-        onChangeText={(text: string) => {}}
+        onChangeText={(text: string) => {
+          accountData.username = text;
+        }}
       />
       <InputTextField
         placeholder={i18n.t('Phone number')}
         value={accountData?.phone}
-        onChangeText={(text: string) => {}}
+        onChangeText={(text: string) => {
+          accountData.phone = text;
+        }}
       />
       <InputTextareaField
         placeholder={i18n.t('Description')}
         value={accountData?.profiles[0].profile_description}
-        onChangeText={(text: string) => {}}
+        onChangeText={(text: string) => {
+          accountData.profiles[0].profile_description = text;
+        }}
       />
 
       <UserLocationField />
