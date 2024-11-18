@@ -1,4 +1,4 @@
-import { TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { Layout } from '@/constants/Layout';
 import IconView from "../view/IconView";
@@ -7,6 +7,7 @@ import LogoView from '../view/LogoView';
 import SearchField from '../field/SearchField';
 import ScreenManager from "@/classes/ScreenManager";
 import UserManager from '@/classes/UserManager';
+import { Colors } from '@/constants/Colors';
 
 const HeaderNavigation = () => {
   const route = useRoute();
@@ -14,38 +15,45 @@ const HeaderNavigation = () => {
   const isLoggedIn = UserManager.isLoggedIn();
 
   return (
-    <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
-      <BoxView direction="row" align="center" style={Layout.headerRight}>
-        <TouchableOpacity onPress={() => ScreenManager.toggleModal({
-          name: 'JamsList',
-        })}>
-          <LogoView size={Layout.logo} />
-        </TouchableOpacity>
-      </BoxView>
-      { (route.name == 'jams' || activeScreen?.headerNavigation) &&
-        <BoxView direction="row" align="center" justify="space-between">
-          <BoxView direction="row" align="center" style={Layout.headerRight}> 
-
-            { isLoggedIn &&
-              <IconView name="menu" theme="secondary" onPress={() => ScreenManager.toggleModal({
-                name: 'SettingsMenu',
-              })} />
-            }
-
-            { isLoggedIn &&
-              <IconView label="15+" theme="secondary" size={11.5} onPress={() => ScreenManager.toggleModal({
-                name: 'NotificationsMenu',
-              })} />
-            }
-              
-            <SearchField />
-            
-          </BoxView>
+    <View style={styles.container}>
+      <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
+        <BoxView direction="row" align="center" style={Layout.headerRight}>
+          <TouchableOpacity onPress={() => ScreenManager.toggleModal({
+            name: 'JamsList',
+          })}>
+            <LogoView size={Layout.logo} />
+          </TouchableOpacity>
         </BoxView>
-      }
-      
-    </BoxView>
+        { (route.name == 'jams' || activeScreen?.headerNavigation) &&
+          <BoxView direction="row" align="center" justify="space-between">
+            <BoxView direction="row" align="center" style={Layout.headerRight}> 
+
+              { isLoggedIn &&
+                <IconView name="menu" theme="secondary" onPress={() => ScreenManager.toggleModal({
+                  name: 'SettingsMenu',
+                })} />
+              }
+
+              { isLoggedIn &&
+                <IconView label="15+" theme="secondary" size={11.5} onPress={() => ScreenManager.toggleModal({
+                  name: 'NotificationsMenu',
+                })} />
+              }
+                
+              <SearchField />
+              
+            </BoxView>
+          </BoxView>
+        }
+      </BoxView>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.white,
+  },
+});
 
 export default HeaderNavigation;
