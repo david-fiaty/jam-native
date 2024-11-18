@@ -18,7 +18,7 @@ const headerHiddenOptions: object = {
 const headerVisibleOptions: object = { 
   statusBarStyle: 'dark',
   headerShown: true,
-  statusBarColor: Colors.background,
+  statusBarBackgroundColor: Colors.background,
   headerTintColor: Colors.background,    
   headerStyle: {
     backgroundColor: Colors.background, 
