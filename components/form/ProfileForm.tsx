@@ -33,7 +33,9 @@ const ProfileForm = () => {
 
   useEffect(() => {
     (async () => {
-      let userProfileData: any = {};
+      let userProfileData: any = await DataManager.get('currentUser');
+
+
       //let userProfileData: any = await UserManager.getProfileData();
       let userJamsData: any = await DataManager.get('jams');
       let userProjectsData: any = await DataManager.get('projects');

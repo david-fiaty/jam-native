@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
@@ -22,6 +21,12 @@ const JamsList = () => {
   const router = useRouter();
   const [data, setData] = useState([]);
   const isLoggedIn = UserManager.isLoggedIn();
+
+
+  let userProfileData: any = DataManager.get('currentUser');
+
+  console.log(userProfileData);
+
 
   useEffect(() => {
     (async () => {
