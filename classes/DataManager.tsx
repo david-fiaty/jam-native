@@ -43,8 +43,7 @@ class DataManager {
 
     if (data) {
       data.forEach((item: object) => {
-        result.push(item);
-        //result.push(EntityManager.create(key, item));
+        result.push(EntityManager.create(key, item));
       }); 
     }
 
