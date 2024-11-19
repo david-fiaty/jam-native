@@ -59,15 +59,9 @@ class ApiManager {
         };
 
         let response: any = await fetch(url, payload);
-
-        if (!response.ok) {
-          console.log(url);
-          throw Error(response.status);
-        }
-
+        if (!response.ok) throw Error(response.status);
+    
         let jsonResponse = await response.json();
-
-        //console.log(jsonResponse);
 
         return this.processResponse(jsonResponse);
       } 
