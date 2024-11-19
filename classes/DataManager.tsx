@@ -1,6 +1,6 @@
 import Store from '@/redux/Store';
 import ApiEndpoints from '@/constants/Endpoints';
-import ApiClient from './ApiClient';
+import ApiManager from './ApiManager';
 import EntityManager from './EntityManager';
 
 class DataManager {
@@ -34,11 +34,11 @@ class DataManager {
   }
 
   async post(key: keyof typeof ApiEndpoints, data: any, options?: any) {
-    return await ApiClient.post(key, data);
+    return await ApiManager.post(key, data);
   }
 
   async getData(key: keyof typeof ApiEndpoints) {
-    const data: any = await ApiClient.get(key);
+    const data: any = await ApiManager.get(key);
     let result: any = [];
 
     if (data) {
