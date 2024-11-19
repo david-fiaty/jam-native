@@ -49,10 +49,7 @@ class ApiManager {
   async sendRequest(endpoint: any, data?: any) {
     if (endpoint?.url && endpoint?.method) {
       try {
-        // Todo - Enable domain inclusion
-        let url = Config.apiUrl + '/' + endpoint.url;
-        //let url: string = endpoint.url;
-
+        let url = Config.apiUrl + endpoint.url;
         let payload: object = {
           ...{
             method: endpoint.method,
@@ -62,8 +59,12 @@ class ApiManager {
         };
 
         let response: any = await fetch(url, payload);
+        if (!response.ok) throw Error(response.status);
+    
+        let jsonResponse = await response.json();
+        let processedResponse = this.processResponse(jsonResponse);
 
-        return this.processResponse(await response.json());
+        return processedResponse;
       } 
       catch (error) {
         console.error(error);
@@ -76,13 +77,17 @@ class ApiManager {
   }
 
   getHeaders() {
-    const userState = Store.getState().user;
+    const userState: any = Store.getState().user;
+    let tokenData: any = userState.tokenData ? userState.tokenData : {};
+    let isLoggedIn: boolean = userState.isLoggedIn === true;
+
     let headers: any = {
       'Content-Type': 'application/json',
     };
 
-    if (userState.isLoggedIn === true) {
-      headers['Authorization'] = `Bearer ${userState.tokenData.access_token}`; 
+    if (isLoggedIn && tokenData) {
+      let tokenObject = JSON.parse(tokenData);
+      headers['Authorization'] = `Bearer ${tokenObject.access_token}`; 
     }
     
     return headers;
