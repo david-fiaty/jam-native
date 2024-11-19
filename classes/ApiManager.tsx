@@ -6,11 +6,11 @@ import Endpoints from '@/constants/Endpoints';
 
 const cache = new Cache({
   namespace: Config.appNamespace,
+  backend: AsyncStorage,
   policy: {
     maxEntries: 50000,
     stdTTL: 0,
   },
-  backend: AsyncStorage,
 });
 
 class ApiManager {
