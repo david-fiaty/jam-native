@@ -1,12 +1,11 @@
 import Store from '@/redux/Store';
 import Endpoints from '@/constants/Endpoints';
 import ApiManager from './ApiManager';
-import EntityManager from './EntityManager';
 
 class DataManager {
   async get(key: keyof typeof Endpoints, options: any) {
     // Variables
-    let data: any = await this.getData(key);
+    let data: any =  await ApiManager.get(key);
     let results: any = [];
 
     // Apply search and filter
@@ -37,33 +36,6 @@ class DataManager {
 
   async post(key: keyof typeof Endpoints, data: any, options?: any) {
     return await ApiManager.post(key, data);
-  }
-
-  async getData(key: keyof typeof Endpoints) {
-
-    console.log(key);
-
-    let data: any = await ApiManager.get(key);
-    
-    if (key == 'currentUser') {
-      console.log(data);
-    }
-
-
-
-    let result: any = [];
-
-    if (data) {
-      data.forEach((item: object) => {
-        result.push(EntityManager.create(key, item));
-      }); 
-    }
-
-    return result;
-  }
-
-  async postData(key: keyof typeof Endpoints, data: object, options: object) {
-
   }
 };
 
