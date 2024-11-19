@@ -49,10 +49,7 @@ class ApiManager {
   async sendRequest(endpoint: any, data?: any) {
     if (endpoint?.url && endpoint?.method) {
       try {
-        // Todo - Enable domain inclusion
         let url = Config.apiUrl + '/' + endpoint.url;
-        //let url: string = endpoint.url;
-
         let payload: object = {
           ...{
             method: endpoint.method,
