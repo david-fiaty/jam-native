@@ -22,15 +22,16 @@ const JamsList = () => {
   const [data, setData] = useState([]);
   const isLoggedIn = UserManager.isLoggedIn();
 
-
-  let userProfileData: any = DataManager.get('currentUser');
-
-  //console.log(userProfileData);
-
-
   useEffect(() => {
     (async () => {
       const data: any = await DataManager.get('jams');
+
+      let userProfileData: any = await DataManager.get('currentUser');
+
+      //console.log(userProfileData);
+    
+
+
       setTimeout(() => setData(data), Layout.animation.duration);
     })();
   });
