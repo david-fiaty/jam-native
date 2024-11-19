@@ -9,6 +9,12 @@ class DataManager {
     let data: any = await this.getData(key);
     let results: any = [];
 
+    console.log(key);
+    if (key == 'currentUser') {
+      console.log('zzz');
+    console.log(data);
+    }
+
     // Apply search and filter
     if (Endpoints[key].searcheable === true) {
       const searchState = Store.getState().search;
