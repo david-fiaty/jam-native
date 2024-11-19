@@ -62,8 +62,9 @@ class ApiManager {
         if (!response.ok) throw Error(response.status);
     
         let jsonResponse = await response.json();
+        let processedResponse = this.processResponse(jsonResponse);
 
-        return this.processResponse(jsonResponse);
+        return processedResponse;
       } 
       catch (error) {
         console.error(error);
