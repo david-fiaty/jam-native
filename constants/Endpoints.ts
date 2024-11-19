@@ -1,24 +1,24 @@
 const Endpoints = {
   jams: {
-    url: 'https://the.jammm.app/backend/api/v1/jams/',
+    url: '/jams/',
     method: 'GET',
   },
   projects: {
-    url: 'https://the.jammm.app/backend/api/v1/projects/',
+    url: '/projects/',
     method: 'GET',
   },
   jammers: {},
   notifications: {},
   login: {
-    url: 'https://the.jammm.app/backend/api/v1/login/',
+    url: '/login/',
     method: 'POST',
   },
   signup: {
-    url: 'https://the.jammm.app/backend/api/v1/register/',
+    url: '/register/',
     method: 'POST',
   },
   currentUser: {
-    url: 'https://the.jammm.app/backend/api/v1/get-current-user-info/',
+    url: '/get-current-user-info/',
     method: 'GET',
   }
 };
