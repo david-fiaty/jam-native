@@ -77,15 +77,17 @@ class ApiManager {
 
   getHeaders() {
     const userState: any = Store.getState().user;
-    //const accessToken: any = userState.tokenData?.access_token;
+    //const accessToken: any = userState.tokenData.access_token;
     const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMyOTAxNzYxLCJpYXQiOjE3MzIwMzc3NjEsImp0aSI6IjNkZmU5ZTc0NGMwMzRlYzU5YmRmYzU4Y2E0YTA1MzkyIiwidXNlcl9pZCI6MTJ9.ZR0ooM7Vhe4c-d1Lu7WEOwgQdsPOotfQr7hg3wzgzCw';
     const isLoggedIn: boolean = userState.isLoggedIn === true;
+
+console.log(JSON.parse(userState.tokenData));
 
     let headers: any = {
       'Content-Type': 'application/json',
     };
 
-    if (isLoggedIn && accessToken) {
+    if (isLoggedIn && accessToken?.length) {
       headers['Authorization'] = `Bearer ${accessToken}`; 
     }
     
