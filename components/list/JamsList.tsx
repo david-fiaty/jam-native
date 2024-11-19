@@ -27,7 +27,6 @@ const JamsList = () => {
       const data: any = await DataManager.get('jams');
 
       //let userProfileData: any = await DataManager.get('currentUser');
-
       //console.log(userProfileData);
     
 
