@@ -31,20 +31,22 @@ class UserManager {
   }
 
   isLoggedIn() {
-    return (useSelector((state: any) => state.user)).isLoggedIn === true;
+    return Store.getState().user.isLoggedIn === true;
   }
 
   isAccessTokenValid() {
     // Todo - Validate token duration
     console.log('---oooppp---');
-    console.log(useSelector((state: any) => state.user));
   }
 
   getProfileData() {
-    let userState = useSelector((state: any) => state.user);
-    let profileData = userState?.profileData || '{}';
+    let userState = Store.getState().user;
 
-    return JSON.parse(profileData);
+    // Todo - Get profile data
+    //let profileData = userState?.profileData || '{}';
+    //return JSON.parse(profileData);
+
+    return {};
   }
 };
 
