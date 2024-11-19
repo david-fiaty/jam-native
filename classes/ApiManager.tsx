@@ -21,20 +21,15 @@ class ApiManager {
       data = await this.getCacheItem(key);
     }
     
-    try {
-      if (!data?.length) {
-        data = await this.sendRequest(Endpoints[key]);
+    if (!data?.length) {
+      data = await this.sendRequest(Endpoints[key]);
 
-        if (Config.dataCacheEnabled === true && data?.length > 0) {
-          await cache.set(key, data);
-        }
+      if (Config.dataCacheEnabled === true && data?.length > 0) {
+        await cache.set(key, data);
       }
-
-      return data;
-    } 
-    catch (error) {
-      console.log(error);
     }
+
+    return data;
   }
 
   async getCacheItem(key: keyof typeof Endpoints) {
