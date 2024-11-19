@@ -26,24 +26,21 @@ import UserManager from "@/classes/UserManager";
 const ProfileForm = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [userJamsData, setUserJamsData] = useState([]);
-  const [userProjectsData, setUserProjectsData] = useState([]);
-  const [userProfileData, setUserProfileData] = useState([]);
+  const [userJams, setUserJams] = useState([]);
+  const [userProjects, setUserProjects] = useState([]);
+  const [userProfile, setUserProfile] = useState([]);
 
 
   useEffect(() => {
     (async () => {
-      let userProfileData: any = await DataManager.get('currentUser');
-
-
-      //let userProfileData: any = await UserManager.getProfileData();
+      let userProfileData: any = {};
       let userJamsData: any = await DataManager.get('jams');
       let userProjectsData: any = await DataManager.get('projects');
 
       setTimeout(() => {
-        setUserProfileData(userProfileData);
-        setUserJamsData(userJamsData);
-        setUserProjectsData(userProjectsData);
+        setUserProfile(userProfileData);
+        setUserJams(userJamsData);
+        setUserProjects(userProjectsData);
         setIsLoaded(true);
       }, Layout.animation.duration);
     })();
@@ -72,7 +69,7 @@ const ProfileForm = () => {
       <MediaPickerBase
         label={
           <BoxView direction="row" align="center" style={styles.profileImageContainer}>
-            { !profileData?.profiles[0].profile_picture?.url?.length && 
+            { !userProfile?.profiles[0].profile_picture?.url?.length && 
               <BoxView direction="row" align="center" justify="space-between">
                 <IconView name="user" theme="primary" size={60} radius="circle" />
                 <TextView>{i18n.t('Change your Jammer user profile image.')}</TextView>
@@ -80,10 +77,10 @@ const ProfileForm = () => {
               </BoxView>
             } 
 
-            { profileData?.profiles[0].profile_picture?.url?.length > 0 && 
+            { userProfile?.profiles[0].profile_picture?.url?.length > 0 && 
               <BoxView direction="row" align="center" justify="space-between" style={styles.profileImageContainer}>
                 <ImageView 
-                  uri={Config.imageUrl + profileData?.profiles[0].profile_picture?.url} 
+                  uri={Config.imageUrl + userProfile?.profiles[0].profile_picture?.url} 
                   width={96.7}
                   height={96.7}
                   resizeMode="cover"
@@ -101,30 +98,30 @@ const ProfileForm = () => {
 
       <InputTextField
         placeholder={i18n.t('Email address')}
-        value={profileData?.email}
+        value={userProfile?.email}
         onChangeText={(text: string) => {
-          profileData.email = text;
+          userProfile.email = text;
         }}
       />
       <InputTextField
         placeholder={i18n.t('User name')}
-        value={profileData?.username}
+        value={userProfile?.username}
         onChangeText={(text: string) => {
-          profileData.username = text;
+          userProfile.username = text;
         }}
       />
       <InputTextField
         placeholder={i18n.t('Phone number')}
-        value={profileData?.phone}
+        value={userProfile?.phone}
         onChangeText={(text: string) => {
-          profileData.phone = text;
+          userProfile.phone = text;
         }}
       />
       <InputTextareaField
         placeholder={i18n.t('Description')}
-        value={profileData?.profiles[0].profile_description}
+        value={userProfile?.profiles[0].profile_description}
         onChangeText={(text: string) => {
-          profileData.profiles[0].profile_description = text;
+          userProfile.profiles[0].profile_description = text;
         }}
       />
 
