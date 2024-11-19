@@ -480,13 +480,6 @@ Content-Type: application/json
 
 {"refresh":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyNTk4NTUzNiwiaWF0IjoxNzI1ODk5MTM2LCJqdGkiOiI1ZTAzM2VjMjNmMmU0ZTlhOTU4YzJhNDMyN2NkZDM0YyIsInVzZXJfaWQiOjR9.u36yrYQZiD97El95rszUwuIOZuCuUPO-g_oraPJot7w"}
 
-
-### Get user info
-GET http://0.0.0.0:8000/api/v1/get-user-info/
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5NDQwODgwLCJpYXQiOjE3Mjg1NzY4ODAsImp0aSI6IjkwZDVkZjkxYzUwYzRkMTk5ODg2ZWUzNWZiN2JiN2EwIiwidXNlcl9pZCI6MX0.Nb6BOh3EDoLJNR7Znxi3FmG8CtuBOPmgoV4dFt7FHpU
-
-
 ### Get current user info
 GET http://0.0.0.0:8000/api/v1/get-current-user-info/
 Content-Type: application/json
