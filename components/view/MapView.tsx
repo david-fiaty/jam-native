@@ -55,13 +55,18 @@ const MapView = ({ style, children }: BaseProps) => {
           }}
         >
           { data.map((item: any) => {
-            if (item?.longitude && item?.latitude) {
+            if (item?.geolocation_longitude && item?.geolocation_latitude) {
+              let coordinate = { 
+                latitude: parseFloat(item?.geolocation_latitude), 
+                longitude: parseFloat(item?.geolocation_longitude),
+              };
+
               return (
                 <Marker
                   key={item.id}
-                  coordinate={{ latitude: parseFloat(item?.latitude), longitude: parseFloat(item?.longitude) }}
-                  title={item?.description?.substring(0, 20) + '...'}
-                  description={item?.description}
+                  coordinate={coordinate}
+                  title={item?.caption?.substring(0, 20) + '...'}
+                  description={item?.caption}
                 />
               );
             }
