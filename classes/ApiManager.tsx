@@ -16,7 +16,7 @@ const cache = new Cache({
 class ApiManager {
   async get(key: keyof typeof Endpoints) {
     let data: any = [];
-    if (Config.dataCacheEnabled === true) {
+    if (Config.dataCacheEnabled === true && Endpoints[key].cacheable === true) {
       data = await this.getCacheItem(key);
     }
     

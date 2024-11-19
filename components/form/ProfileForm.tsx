@@ -26,27 +26,24 @@ import UserManager from "@/classes/UserManager";
 const ProfileForm = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [userJams, setUserJams] = useState([]);
-  const [userProjects, setUserProjects] = useState([]);
-  const [userProfile, setUserProfile] = useState([]);
-
+  const [userData, setUserData] = useState([]);
 
   useEffect(() => {
     (async () => {
-      let userProfileData: any = {};
-      let userJamsData: any = await DataManager.get('jams');
-      let userProjectsData: any = await DataManager.get('projects');
+      let currentUserData: any = await UserManager.getUserData();
+      console.log('-----');
+      console.log(currentUserData);
 
       setTimeout(() => {
-        setUserProfile(userProfileData);
-        setUserJams(userJamsData);
-        setUserProjects(userProjectsData);
+        setUserData(currentUserData);
         setIsLoaded(true);
       }, Layout.animation.duration);
     })();
   });
 
   if (!isLoaded) return <SpinnerView />;
+
+  return <></>;
 
   return (
     <BoxView
