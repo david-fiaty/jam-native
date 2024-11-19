@@ -80,7 +80,6 @@ class ApiManager {
     const tokenData: any = JSON.parse(userState.tokenData || '{}');
     const isLoggedIn: boolean = userState.isLoggedIn === true;
 
-
     let headers: any = {
       'Content-Type': 'application/json',
     };
