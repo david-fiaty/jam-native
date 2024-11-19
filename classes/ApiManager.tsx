@@ -46,6 +46,7 @@ class ApiManager {
       } 
 
     } catch (error) {
+      console.log(error);
       await cache.remove(key);
     }
 
