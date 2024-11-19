@@ -6,46 +6,35 @@ import Endpoints from '@/constants/Endpoints';
 
 const cache = new Cache({
   namespace: Config.appNamespace,
+  backend: AsyncStorage,
   policy: {
     maxEntries: 50000,
     stdTTL: 0,
   },
-  backend: AsyncStorage,
 });
 
 class ApiManager {
   async get(key: keyof typeof Endpoints) {
     let data: any = [];
-
     if (Config.dataCacheEnabled === true) {
       data = await this.getCacheItem(key);
     }
     
-    try {
-      if (!data?.length) {
-        data = await this.sendRequest(Endpoints[key]);
-
-        if (Config.dataCacheEnabled === true && data?.length > 0) {
-          await cache.set(key, data);
-        }
+    if (!data?.length) {
+      data = await this.sendRequest(Endpoints[key]);
+      if (Config.dataCacheEnabled === true && data?.length > 0) {
+        await cache.set(key, data);
       }
-
-      return data;
-    } 
-    catch (error) {
-      console.log(error);
     }
+
+    return data;
   }
 
   async getCacheItem(key: keyof typeof Endpoints) {
     try {
-      const value = await cache.get(key);
-
-      if (value !== null) {
-        return value;
-      } 
-
-    } catch (error) {
+      return await cache.get(key);
+    } 
+    catch (error) {
       console.log(error);
       await cache.remove(key);
     }
