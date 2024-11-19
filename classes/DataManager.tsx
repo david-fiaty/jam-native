@@ -3,7 +3,7 @@ import Endpoints from '@/constants/Endpoints';
 import ApiManager from './ApiManager';
 
 class DataManager {
-  async get(key: keyof typeof Endpoints, options: any) {
+  async get(key: keyof typeof Endpoints, options?: any) {
     // Variables
     let data: any =  await ApiManager.get(key);
     let results: any = [];
@@ -33,7 +33,6 @@ class DataManager {
     else {
       results = data;
     }
-
 
     return results;
   }
