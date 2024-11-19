@@ -17,6 +17,10 @@ const Endpoints = {
     url: 'https://the.jammm.app/backend/api/register/',
     method: 'POST',
   },
+  currentUser: {
+    url: 'https://the.jammm.app/backend/api/v1/get-current-user-info/',
+    method: 'GET',
+  }
 };
 
 export default Endpoints;

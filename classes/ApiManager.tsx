@@ -12,7 +12,7 @@ const cache = new Cache({
   backend: AsyncStorage,
 });
 
-class ApiClient {
+class ApiManager {
   async get(key: keyof typeof Endpoints) {
     let data: any = [];
 
@@ -81,4 +81,4 @@ class ApiClient {
   }
 };
 
-export default (new ApiClient());
+export default (new ApiManager());

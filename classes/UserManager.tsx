@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import Store from '@/redux/Store';
 import DataManager from './DataManager';
-import { setAccessToken, setProfileData, setIsLoggedIn } from '@/redux/slices/UserSlice';
+import { setTokenData, setProfileData, setIsLoggedIn } from '@/redux/slices/UserSlice';
 
 class UserManager {
   async login(email: string, password: string) {
@@ -11,8 +11,7 @@ class UserManager {
     });
 
     if (response?.tokens?.access_token?.length) {
-      Store.dispatch(setAccessToken(JSON.stringify(response.tokens)));
-      Store.dispatch(setProfileData(JSON.stringify(response.user)));
+      Store.dispatch(setTokenData(JSON.stringify(response.tokens)));
       Store.dispatch(setIsLoggedIn(true));
 
       return true;
