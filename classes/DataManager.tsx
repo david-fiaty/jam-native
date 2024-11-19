@@ -34,7 +34,6 @@ class DataManager {
       results = data;
     }
 
-
     return results;
   }
 
