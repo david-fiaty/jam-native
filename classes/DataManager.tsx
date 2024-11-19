@@ -9,12 +9,6 @@ class DataManager {
     let data: any = await this.getData(key);
     let results: any = [];
 
-    console.log(key);
-    if (key == 'currentUser') {
-      console.log('zzz');
-    console.log(data);
-    }
-
     // Apply search and filter
     if (Endpoints[key].searcheable === true) {
       const searchState = Store.getState().search;
@@ -46,7 +40,17 @@ class DataManager {
   }
 
   async getData(key: keyof typeof Endpoints) {
+
+    console.log(key);
+
     let data: any = await ApiManager.get(key);
+    
+    if (key == 'currentUser') {
+      console.log(data);
+    }
+
+
+
     let result: any = [];
 
     if (data) {
