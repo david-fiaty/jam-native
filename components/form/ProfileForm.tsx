@@ -33,9 +33,12 @@ const ProfileForm = () => {
 
   useEffect(() => {
     (async () => {
-      let userProfileData: any = {};
+      let userProfileData: any = await DataManager.get('currentUser');
       let userJamsData: any = await DataManager.get('jams');
       let userProjectsData: any = await DataManager.get('projects');
+
+      //console.log('-----');
+      //console.log(userProfileData);
 
       setTimeout(() => {
         setUserProfile(userProfileData);
@@ -47,6 +50,8 @@ const ProfileForm = () => {
   });
 
   if (!isLoaded) return <SpinnerView />;
+
+  return <></>;
 
   return (
     <BoxView
