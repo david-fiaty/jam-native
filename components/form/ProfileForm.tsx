@@ -37,8 +37,8 @@ const ProfileForm = () => {
       let userJamsData: any = await DataManager.get('jams');
       let userProjectsData: any = await DataManager.get('projects');
 
-      console.log('-----');
-      console.log(userProfileData);
+      //console.log('-----');
+      //console.log(userProfileData);
 
       setTimeout(() => {
         setUserProfile(userProfileData);
