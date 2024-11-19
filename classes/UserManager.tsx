@@ -1,7 +1,6 @@
-import { useSelector } from 'react-redux';
 import Store from '@/redux/Store';
 import DataManager from './DataManager';
-import { setAccessToken, setProfileData, setIsLoggedIn } from '@/redux/slices/UserSlice';
+import { setTokenData, setIsLoggedIn } from '@/redux/slices/UserSlice';
 
 class UserManager {
   async login(email: string, password: string) {
@@ -11,8 +10,7 @@ class UserManager {
     });
 
     if (response?.tokens?.access_token?.length) {
-      Store.dispatch(setAccessToken(JSON.stringify(response.tokens)));
-      Store.dispatch(setProfileData(JSON.stringify(response.user)));
+      Store.dispatch(setTokenData(JSON.stringify(response.tokens)));
       Store.dispatch(setIsLoggedIn(true));
 
       return true;
@@ -32,20 +30,22 @@ class UserManager {
   }
 
   isLoggedIn() {
-    return (useSelector((state: any) => state.user)).isLoggedIn === true;
+    return Store.getState().user.isLoggedIn === true;
   }
 
   isAccessTokenValid() {
     // Todo - Validate token duration
     console.log('---oooppp---');
-    console.log(useSelector((state: any) => state.user));
   }
 
   getProfileData() {
-    let userState = useSelector((state: any) => state.user);
-    let profileData = userState?.profileData || '{}';
+    let userState = Store.getState().user;
 
-    return JSON.parse(profileData);
+    // Todo - Get profile data
+    //let profileData = userState?.profileData || '{}';
+    //return JSON.parse(profileData);
+
+    return {};
   }
 };
 

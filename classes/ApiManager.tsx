@@ -1,5 +1,6 @@
 import { Config } from '@/constants/Config';
 import { Cache } from "react-native-cache";
+import Store from '@/redux/Store';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Endpoints from '@/constants/Endpoints';
 
@@ -12,7 +13,7 @@ const cache = new Cache({
   backend: AsyncStorage,
 });
 
-class ApiClient {
+class ApiManager {
   async get(key: keyof typeof Endpoints) {
     let data: any = [];
 
@@ -75,10 +76,17 @@ class ApiClient {
   }
 
   getHeaders() {
-    return {
+    const userState = Store.getState().user;
+    let headers: any = {
       'Content-Type': 'application/json',
     };
+
+    if (userState.isLoggedIn === true) {
+      headers['Authorization'] = `Bearer ${userState.tokenData.access_token}`; 
+    }
+    
+    return headers;
   }
 };
 
-export default (new ApiClient());
+export default (new ApiManager());
