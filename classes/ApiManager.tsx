@@ -6,35 +6,40 @@ import Endpoints from '@/constants/Endpoints';
 
 const cache = new Cache({
   namespace: Config.appNamespace,
+  backend: AsyncStorage,
   policy: {
     maxEntries: 50000,
     stdTTL: 0,
   },
-  backend: AsyncStorage,
 });
 
 class ApiManager {
   async get(key: keyof typeof Endpoints) {
     let data: any = [];
-
     if (Config.dataCacheEnabled === true) {
-      data = await cache.get(key);
+      data = await this.getCacheItem(key);
     }
     
-    try {
-      if (!data?.length) {
-        data = await this.sendRequest(Endpoints[key]);
-
-        if (Config.dataCacheEnabled === true && data?.length > 0) {
-          await cache.set(key, data);
-        }
+    if (!data?.length) {
+      data = await this.sendRequest(Endpoints[key]);
+      if (Config.dataCacheEnabled === true && data?.length > 0) {
+        await cache.set(key, data);
       }
+    }
 
-      return data;
+    return data;
+  }
+
+  async getCacheItem(key: keyof typeof Endpoints) {
+    try {
+      return await cache.get(key);
     } 
     catch (error) {
       console.log(error);
+      await cache.remove(key);
     }
+
+    return null;
   }
 
   async post(key: keyof typeof Endpoints, data: object) {
@@ -49,10 +54,7 @@ class ApiManager {
   async sendRequest(endpoint: any, data?: any) {
     if (endpoint?.url && endpoint?.method) {
       try {
-        // Todo - Enable domain inclusion
-        let url = Config.apiUrl + '/' + endpoint.url;
-        //let url: string = endpoint.url;
-
+        let url = Config.apiUrl + endpoint.url;
         let payload: object = {
           ...{
             method: endpoint.method,
@@ -62,8 +64,12 @@ class ApiManager {
         };
 
         let response: any = await fetch(url, payload);
+        if (!response.ok) throw Error(response.status);
+    
+        let jsonResponse = await response.json();
+        let processedResponse = this.processResponse(jsonResponse);
 
-        return this.processResponse(await response.json());
+        return processedResponse;
       } 
       catch (error) {
         console.error(error);
@@ -76,13 +82,17 @@ class ApiManager {
   }
 
   getHeaders() {
-    const userState = Store.getState().user;
+    const userState: any = Store.getState().user;
+    let tokenData: any = userState.tokenData ? userState.tokenData : {};
+    let isLoggedIn: boolean = userState.isLoggedIn === true;
+
     let headers: any = {
       'Content-Type': 'application/json',
     };
 
-    if (userState.isLoggedIn === true) {
-      headers['Authorization'] = `Bearer ${userState.tokenData.access_token}`; 
+    if (isLoggedIn && tokenData) {
+      let tokenObject = JSON.parse(tokenData);
+      headers['Authorization'] = `Bearer ${tokenObject.access_token}`; 
     }
     
     return headers;
