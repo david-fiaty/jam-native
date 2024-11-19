@@ -26,24 +26,16 @@ import UserManager from "@/classes/UserManager";
 const ProfileForm = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [userJams, setUserJams] = useState([]);
-  const [userProjects, setUserProjects] = useState([]);
-  const [userProfile, setUserProfile] = useState([]);
-
+  const [userData, setUserData] = useState([]);
 
   useEffect(() => {
     (async () => {
-      let userProfileData: any = await DataManager.get('currentUser');
-      let userJamsData: any = await DataManager.get('jams');
-      let userProjectsData: any = await DataManager.get('projects');
-
-      //console.log('-----');
-      //console.log(userProfileData);
+      let currentUserData: any = await DataManager.get('currentUser');
+      console.log('-----');
+      console.log(currentUserData);
 
       setTimeout(() => {
-        setUserProfile(userProfileData);
-        setUserJams(userJamsData);
-        setUserProjects(userProjectsData);
+        setUserData(currentUserData);
         setIsLoaded(true);
       }, Layout.animation.duration);
     })();
