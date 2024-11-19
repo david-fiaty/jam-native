@@ -50,7 +50,6 @@ class DataManager {
     return result;
   }
 
-
   async postData(key: keyof typeof ApiEndpoints, data: object, options: object) {
 
   }
