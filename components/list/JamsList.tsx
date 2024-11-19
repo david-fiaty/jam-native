@@ -25,7 +25,7 @@ const JamsList = () => {
 
   let userProfileData: any = DataManager.get('currentUser');
 
-  console.log(userProfileData);
+  //console.log(userProfileData);
 
 
   useEffect(() => {
