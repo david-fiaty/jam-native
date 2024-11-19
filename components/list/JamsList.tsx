@@ -25,11 +25,7 @@ const JamsList = () => {
   useEffect(() => {
     (async () => {
       const data: any = await DataManager.get('jams');
-
-      //let userProfileData: any = await DataManager.get('currentUser');
-      //console.log(userProfileData);
-    
-
+      const currentUser: any = await DataManager.get('currentUser');
 
       setTimeout(() => setData(data), Layout.animation.duration);
     })();
@@ -47,12 +43,12 @@ const JamsList = () => {
             entity: item, 
           }) : router.push('/login')}>
             <TextView>
-              @{i18n.t('host')} +{parseInt(item?.hosts?.length)}
+              @{i18n.t('host')} +{parseInt(item?.collaborators?.length)}
             </TextView>
           </TouchableOpacity>
         </BoxView>
         <BoxView>
-          <JamStatusButton active={item?.active} />
+          <JamStatusButton active={item?.is_active} />
         </BoxView>
         <BoxView>
           <IconView name="actions" theme="clear" onPress={() => isLoggedIn ? ScreenManager.toggleModal({
@@ -94,7 +90,7 @@ const JamsList = () => {
 
       {/* Item description */}
       <BoxView style={styles.listItemDescription}>
-        <TextView>{item?.description}</TextView>
+        <TextView>{item?.caption}</TextView>
       </BoxView>
 
       {/* Item collapsible */}
@@ -106,7 +102,7 @@ const JamsList = () => {
             <BoxView direction="column" align="flex-start" style={styles.listItemDetails}>
               <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
                 <IconView name="arrow" size={14} theme="transparent" />
-                <TextView>{i18n.t('Location')}: {item?.location}</TextView>
+                <TextView>{i18n.t('Location')}: {item?.location_type}</TextView>
               </BoxView>
               <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
                 <IconView name="arrow" size={14} theme="transparent" />
