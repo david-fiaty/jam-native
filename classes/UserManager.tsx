@@ -30,19 +30,15 @@ class UserManager {
   }
 
   async getUserData() {
-    let currentUser: any = await DataManager.get('currentUser');
+    let userAccount: any = await DataManager.get('currentUser');
     let userJams: any = await DataManager.get('jams');
     let userProjects: any = await DataManager.get('projects');
 
-
-    // Todo - Get profile data
-    //let profileData = userState?.profileData || '{}';
-    //return JSON.parse(profileData);
-
     return {
-      
+      account: userAccount,
+      jams: userJams,
+      projects: userProjects,
     };
-  
   }
 
   isLoggedIn() {
