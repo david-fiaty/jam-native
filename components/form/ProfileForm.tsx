@@ -30,7 +30,7 @@ const ProfileForm = () => {
 
   useEffect(() => {
     (async () => {
-      let currentUserData: any = await DataManager.get('currentUser');
+      let currentUserData: any = await UserManager.getUserData();
       console.log('-----');
       console.log(currentUserData);
 
