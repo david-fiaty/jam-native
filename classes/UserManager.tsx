@@ -29,6 +29,20 @@ class UserManager {
     return false;
   }
 
+  async getUserData() {
+    let currentUserData: any = await DataManager.get('currentUser');
+    let userJamsData: any = await DataManager.get('jams');
+    let userProjectsData: any = await DataManager.get('projects');
+
+
+    // Todo - Get profile data
+    //let profileData = userState?.profileData || '{}';
+    //return JSON.parse(profileData);
+
+    return {};
+  
+  }
+
   isLoggedIn() {
     return Store.getState().user.isLoggedIn === true;
   }
@@ -37,16 +51,6 @@ class UserManager {
     // Todo - Validate token duration
     console.log('---oooppp---');
   }
-
-  getProfileData() {
-    let userState = Store.getState().user;
-
-    // Todo - Get profile data
-    //let profileData = userState?.profileData || '{}';
-    //return JSON.parse(profileData);
-
-    return {};
-  }
-};
+}
 
 export default (new UserManager());
