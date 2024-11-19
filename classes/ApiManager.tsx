@@ -78,14 +78,8 @@ class ApiManager {
 
   getHeaders() {
     const userState: any = Store.getState().user;
-
-    
-    let tokenData: any = JSON.parse(userState.tokenData || '{}');
+    let tokenData: any = userState.tokenData;
     let isLoggedIn: boolean = userState.isLoggedIn === true;
-
-
-    console.log(tokenData);
-
 
     let headers: any = {
       'Content-Type': 'application/json',
