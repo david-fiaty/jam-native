@@ -26,7 +26,7 @@ const JamsList = () => {
     (async () => {
       const data: any = await DataManager.get('jams');
 
-      let userProfileData: any = await DataManager.get('currentUser');
+      //let userProfileData: any = await DataManager.get('currentUser');
 
       //console.log(userProfileData);
     
