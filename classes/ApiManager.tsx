@@ -32,11 +32,9 @@ class ApiManager {
 
   async getCacheItem(key: keyof typeof Endpoints) {
     try {
-      const value = await cache.get(key);
-      if (value !== null) {
-        return value;
-      } 
-    } catch (error) {
+      return await cache.get(key);
+    } 
+    catch (error) {
       console.log(error);
       await cache.remove(key);
     }
