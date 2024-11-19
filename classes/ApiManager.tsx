@@ -1,5 +1,6 @@
 import { Config } from '@/constants/Config';
 import { Cache } from "react-native-cache";
+import Store from '@/redux/Store';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Endpoints from '@/constants/Endpoints';
 
@@ -75,9 +76,16 @@ class ApiManager {
   }
 
   getHeaders() {
-    return {
+    const userState = Store.getState().user;
+    let headers: any = {
       'Content-Type': 'application/json',
     };
+
+    if (userState.isLoggedIn === true) {
+      headers['Authorization'] = `Bearer ${userState.tokenData.access_token}`; 
+    }
+    
+    return headers;
   }
 };
 
