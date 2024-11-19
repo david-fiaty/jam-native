@@ -18,7 +18,7 @@ class ApiManager {
     let data: any = [];
 
     if (Config.dataCacheEnabled === true) {
-      data = await cache.get(key);
+      data = await this.getCacheItem(key);
     }
     
     try {
@@ -35,6 +35,22 @@ class ApiManager {
     catch (error) {
       console.log(error);
     }
+  }
+
+  async getCacheItem(key: keyof typeof Endpoints) {
+    try {
+      const value = await cache.get(key);
+
+      if (value !== null) {
+        return value;
+      } 
+
+    } catch (error) {
+      console.log(error);
+      await cache.remove(key);
+    }
+
+    return null;
   }
 
   async post(key: keyof typeof Endpoints, data: object) {
