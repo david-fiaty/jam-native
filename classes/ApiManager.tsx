@@ -92,6 +92,7 @@ class ApiManager {
 
     if (isLoggedIn && tokenData) {
       let tokenObject = JSON.parse(tokenData);
+      console.log(tokenObject);
       headers['Authorization'] = `Bearer ${tokenObject.access_token}`; 
     }
     
