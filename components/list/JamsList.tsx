@@ -25,11 +25,7 @@ const JamsList = () => {
   useEffect(() => {
     (async () => {
       const data: any = await DataManager.get('jams');
-
-      //let userProfileData: any = await DataManager.get('currentUser');
-      //console.log(userProfileData);
-    
-
+      const currentUser: any = await DataManager.get('currentUser');
 
       setTimeout(() => setData(data), Layout.animation.duration);
     })();
