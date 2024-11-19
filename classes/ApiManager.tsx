@@ -16,14 +16,12 @@ const cache = new Cache({
 class ApiManager {
   async get(key: keyof typeof Endpoints) {
     let data: any = [];
-
     if (Config.dataCacheEnabled === true) {
       data = await this.getCacheItem(key);
     }
     
     if (!data?.length) {
       data = await this.sendRequest(Endpoints[key]);
-
       if (Config.dataCacheEnabled === true && data?.length > 0) {
         await cache.set(key, data);
       }
@@ -35,11 +33,9 @@ class ApiManager {
   async getCacheItem(key: keyof typeof Endpoints) {
     try {
       const value = await cache.get(key);
-
       if (value !== null) {
         return value;
       } 
-
     } catch (error) {
       console.log(error);
       await cache.remove(key);
