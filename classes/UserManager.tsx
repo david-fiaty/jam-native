@@ -1,7 +1,6 @@
-import { useSelector } from 'react-redux';
 import Store from '@/redux/Store';
 import DataManager from './DataManager';
-import { setTokenData, setProfileData, setIsLoggedIn } from '@/redux/slices/UserSlice';
+import { setTokenData, setIsLoggedIn } from '@/redux/slices/UserSlice';
 
 class UserManager {
   async login(email: string, password: string) {
