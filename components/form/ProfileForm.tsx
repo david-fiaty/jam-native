@@ -31,8 +31,9 @@ const ProfileForm = () => {
   useEffect(() => {
     (async () => {
       let currentUserData: any = await UserManager.getUserData();
-      console.log('-----');
-      console.log(currentUserData);
+      
+      //console.log('-----');
+      //console.log(currentUserData);
 
       setTimeout(() => {
         setUserData(currentUserData);

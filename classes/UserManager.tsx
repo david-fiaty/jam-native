@@ -35,7 +35,7 @@ class UserManager {
     let userProjects: any = await DataManager.get('projects');
 
     return {
-      account: userAccount,
+      account: userAccount?.user,
       jams: userJams,
       projects: userProjects,
     };
