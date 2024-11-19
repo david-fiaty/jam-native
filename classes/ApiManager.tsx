@@ -67,7 +67,7 @@ class ApiManager {
 
         let jsonResponse = await response.json();
 
-        console.log(jsonResponse);
+        //console.log(jsonResponse);
 
         return this.processResponse(jsonResponse);
       } 
