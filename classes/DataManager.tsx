@@ -25,12 +25,16 @@ class DataManager {
           return haystack.includes(needle);
         }); 
       }
+
+      // Process results
+      results = results?.length > 0 ? results : data;
+      results = Array.isArray(results) ? results.filter(item => Object.keys(item).length !== 0) : [];
+    }
+    else {
+      results = data;
     }
 
-    // Process results
-    results = results?.length > 0 ? results : data;
-    results = Array.isArray(results) ? results.filter(item => Object.keys(item).length !== 0) : [];
-    
+
     return results;
   }
 
