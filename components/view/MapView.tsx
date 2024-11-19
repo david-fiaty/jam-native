@@ -60,8 +60,8 @@ const MapView = ({ style, children }: BaseProps) => {
                 <Marker
                   key={item.id}
                   coordinate={{ latitude: parseFloat(item?.latitude), longitude: parseFloat(item?.longitude) }}
-                  title={item?.description?.substring(0, 20) + '...'}
-                  description={item?.description}
+                  title={item?.caption?.substring(0, 20) + '...'}
+                  description={item?.caption}
                 />
               );
             }

@@ -19,7 +19,7 @@ class DataManager {
       if (options?.search !== false && searchState.value?.length) {
         results = results.length ? results : data;
         results = data.filter((item: any) => {
-          let haystack = item?.description?.toLowerCase();
+          let haystack = item?.caption?.toLowerCase();
           let needle = searchState.value.toLowerCase();
 
           return haystack.includes(needle);

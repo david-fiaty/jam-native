@@ -90,7 +90,7 @@ const JamsList = () => {
 
       {/* Item description */}
       <BoxView style={styles.listItemDescription}>
-        <TextView>{item?.description}</TextView>
+        <TextView>{item?.caption}</TextView>
       </BoxView>
 
       {/* Item collapsible */}
