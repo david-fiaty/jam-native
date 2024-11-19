@@ -14,7 +14,7 @@ const AccountForm = () => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
-  const profileData = UserManager.getProfileData();
+  const userData = UserManager.getUserData();
 
   const submitForm = async () => {
     setTimeout(() => setIsProcessing(false), 3000);
@@ -35,15 +35,15 @@ const AccountForm = () => {
     
       <InputTextField 
         placeholder={i18n.t('User name')} 
-        value={profileData?.username}
+        value={userData?.username}
       />
       <InputTextField 
         placeholder={i18n.t('Email address')} 
-        value={profileData?.email}  
+        value={userData?.email}  
       />
       <InputTextField 
         placeholder={i18n.t('Phone number')} 
-        value={profileData?.phone}
+        value={userData?.phone}
       />
 
     <DividerView />
