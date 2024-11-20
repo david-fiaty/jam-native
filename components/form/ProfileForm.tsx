@@ -35,8 +35,9 @@ const ProfileForm = () => {
       let currentUserProfile: any = currentUserData?.account?.profiles?.[0];
       
       setTimeout(() => {
-        setUserData(currentUserData);
-        setProfileData(Object.assign({}, currentUserProfile));
+        if (!userData) setUserData(currentUserData);
+        if (!profileData) setProfileData(currentUserProfile);
+      
         setIsLoaded(true);
       }, Layout.animation.duration);
     })();
@@ -107,7 +108,7 @@ console.log(profileData?.email);
         placeholder={i18n.t('Profile name')}
         value={profileData?.profile_name}
         onChangeText={(text: string) => {
-          userData.profile_name = text;
+          profileData.profile_name = text;
         }}
       />
       <InputTextField
