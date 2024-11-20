@@ -32,9 +32,6 @@ const ProfileForm = () => {
     (async () => {
       let currentUserData: any = await UserManager.getUserData();
       
-      //console.log('-----');
-      //console.log(currentUserData);
-
       setTimeout(() => {
         setUserData(currentUserData);
         setIsLoaded(true);
@@ -43,6 +40,8 @@ const ProfileForm = () => {
   });
 
   if (!isLoaded) return <SpinnerView />;
+
+  //console.log(userData);
 
   return <></>;
 
