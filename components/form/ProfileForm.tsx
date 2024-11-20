@@ -62,7 +62,7 @@ const ProfileForm = () => {
       <MediaPickerBase
         label={
           <BoxView direction="row" align="center" style={styles.profileImageContainer}>
-            { !userData?.profiles?.[0].profile_picture?.url?.length && 
+            { !userData?.account?.profiles?.[0].profile_picture?.url?.length && 
               <BoxView direction="row" align="center" justify="space-between">
                 <IconView name="user" theme="primary" size={60} radius="circle" />
                 <TextView>{i18n.t('Change your Jammer user profile image.')}</TextView>
@@ -70,10 +70,10 @@ const ProfileForm = () => {
               </BoxView>
             } 
 
-            { userData?.profiles?.[0].profile_picture?.url?.length > 0 && 
+            { userData?.account?.profiles?.[0].profile_picture?.url?.length > 0 && 
               <BoxView direction="row" align="center" justify="space-between" style={styles.profileImageContainer}>
                 <ImageView 
-                  uri={Config.imageUrl + userData?.profiles?.[0].profile_picture?.url} 
+                  uri={Config.imageUrl + userData?.account?.profiles?.[0].profile_picture?.url} 
                   width={96.7}
                   height={96.7}
                   resizeMode="cover"
@@ -91,7 +91,7 @@ const ProfileForm = () => {
 
       <InputTextField
         placeholder={i18n.t('Email address')}
-        value={userData?.email}
+        value={userData?.account?.email}
         onChangeText={(text: string) => {
           userData.email = text;
         }}
@@ -100,21 +100,21 @@ const ProfileForm = () => {
       
       <InputTextField
         placeholder={i18n.t('User name')}
-        value={userData?.username}
+        value={userData?.account?.username}
         onChangeText={(text: string) => {
           userData.username = text;
         }}
       />
       <InputTextField
         placeholder={i18n.t('Phone number')}
-        value={userData?.phone}
+        value={userData?.account?.phone}
         onChangeText={(text: string) => {
           userData.phone = text;
         }}
       />
       <InputTextareaField
         placeholder={i18n.t('Description')}
-        value={userData?.profiles?.[0].profile_description}
+        value={userData?.account?.profiles?.[0].profile_description}
         onChangeText={(text: string) => {
           userData.profiles[0].profile_description = text;
         }}
