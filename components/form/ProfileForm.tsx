@@ -41,10 +41,6 @@ const ProfileForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  //console.log(userData);
-
-  return <></>;
-
   return (
     <BoxView
       align="flex-start"
@@ -63,10 +59,11 @@ const ProfileForm = () => {
         }
       />
 
+{/*
       <MediaPickerBase
         label={
           <BoxView direction="row" align="center" style={styles.profileImageContainer}>
-            { !userProfile?.profiles[0].profile_picture?.url?.length && 
+            { !userData?.profiles[0].profile_picture?.url?.length && 
               <BoxView direction="row" align="center" justify="space-between">
                 <IconView name="user" theme="primary" size={60} radius="circle" />
                 <TextView>{i18n.t('Change your Jammer user profile image.')}</TextView>
@@ -74,10 +71,10 @@ const ProfileForm = () => {
               </BoxView>
             } 
 
-            { userProfile?.profiles[0].profile_picture?.url?.length > 0 && 
+            { userData?.profiles[0].profile_picture?.url?.length > 0 && 
               <BoxView direction="row" align="center" justify="space-between" style={styles.profileImageContainer}>
                 <ImageView 
-                  uri={Config.imageUrl + userProfile?.profiles[0].profile_picture?.url} 
+                  uri={Config.imageUrl + userData?.profiles[0].profile_picture?.url} 
                   width={96.7}
                   height={96.7}
                   resizeMode="cover"
@@ -90,49 +87,50 @@ const ProfileForm = () => {
           </BoxView>
         }
       />
-
+*/}
       <DividerView />
 
+{/*
       <InputTextField
         placeholder={i18n.t('Email address')}
-        value={userProfile?.email}
+        value={userData?.email}
         onChangeText={(text: string) => {
-          userProfile.email = text;
+          userData.email = text;
         }}
       />
       <InputTextField
         placeholder={i18n.t('User name')}
-        value={userProfile?.username}
+        value={userData?.username}
         onChangeText={(text: string) => {
-          userProfile.username = text;
+          userData.username = text;
         }}
       />
       <InputTextField
         placeholder={i18n.t('Phone number')}
-        value={userProfile?.phone}
+        value={userData?.phone}
         onChangeText={(text: string) => {
-          userProfile.phone = text;
+          userData.phone = text;
         }}
       />
       <InputTextareaField
         placeholder={i18n.t('Description')}
-        value={userProfile?.profiles[0].profile_description}
+        value={userData?.profiles[0].profile_description}
         onChangeText={(text: string) => {
-          userProfile.profiles[0].profile_description = text;
+          userData.profiles[0].profile_description = text;
         }}
       />
+ */}
+      {/* <UserLocationField /> */}
 
-      <UserLocationField />
+      {/* <IndustryField /> */}
 
-      <IndustryField />
-
-      <CreativeOrganizationField />
-
-      <DividerView />
-      <UserProjectsList data={userProjectsData} />
+      {/* <CreativeOrganizationField /> */}
 
       <DividerView />
-      <UserJamsList data={userJamsData} />
+      {/* <UserProjectsList data={userData?.projects} /> */}
+
+      <DividerView />
+      {/* <UserJamsList data={userData?.jams} /> */}
     </BoxView>
   );
 };
