@@ -4,7 +4,8 @@
 POST http://0.0.0.0:8000/api/v1/jams/
 Content-Type: application/json
 
-{	"caption": "jam name",
+{	"title": "test title",
+    "caption": "jam name",
 	"upload_medias" : [],
     "profile_id": 4318,
     "callaborators_ids" : [1, 4318],
@@ -15,7 +16,8 @@ Content-Type: application/json
     "geolocation_longitude": "2",
     "geographical_scope": "specific",
     "scope_countries_codes": ["ng"],
-    "type": "call"
+    "type": "call",
+    "projects": [1, 2]
 }
 
 ###  Update Jam
@@ -233,74 +235,43 @@ Content-Type: application/json
 GET http://0.0.0.0:8000/api/v1/sectors/
 Content-Type: application/json
 
+##### PROFESSION #####
+
+### Get all professions
+GET http://0.0.0.0:8000/api/v1/professions/
+Content-Type: application/json
+
+##### VENUE TYPES #####
+
+### Get all venue types
+GET http://0.0.0.0:8000/api/v1/venue-types/
+Content-Type: application/json
+
+##### CULTURAL ACTIVITIES #####
+
+### Get all cultural activities
+GET http://0.0.0.0:8000/api/v1/cultural-activities/
+Content-Type: application/json
+
 ##### FEED #####
 
 ### Get jams feed
-POST http://0.0.0.0:8000/api/v1/jams/feed/
-Content-Type: application/json
-
-{
-    "profile_id": 1,
-    "jam_type": "all",
-    "displayed_items_ids": [1, 2],
-    "nbr_items_to_return": 10
-}
+GET http://0.0.0.0:8000/api/v1/jams/feed/?profile_id=1&jam_type=all&displayed_items_ids=1,2&nbr_items_to_return=10
 
 ### Get jams feed with search text and sectors selection
-POST http://0.0.0.0:8000/api/v1/jams/feed/
-Content-Type: application/json
-
-{
-    "profile_id": 1,
-    "jam_type": "all",
-    "displayed_items_ids": [1, 2],
-    "nbr_items_to_return": 10,
-    "query_countries_codes": []
-}
+GET http://0.0.0.0:8000/api/v1/jams/feed/?profile_id=1&jam_type=all&displayed_items_ids=1,2&nbr_items_to_return=10&query_countries_codes=tg
 
 ### Get projects feed
-POST http://0.0.0.0:8000/api/v1/projects/feed/
-Content-Type: application/json
-
-{
-    "profile_id": 1,
-    "displayed_items_ids": [1, 2],
-    "nbr_items_to_return": 10
-}
+GET http://0.0.0.0:8000/api/v1/projects/feed/?profile_id=1&displayed_items_ids=1,2&nbr_items_to_return=10
 
 ### Get projects feed with search text
-POST http://0.0.0.0:8000/api/v1/projects/feed/
-Content-Type: application/json
-
-{
-    "profile_id": 1,
-    "displayed_items_ids": [1, 2],
-    "nbr_items_to_return": 10,
-    "query_countries_codes": []
-}
+GET http://0.0.0.0:8000/api/v1/projects/feed/?profile_id=1&displayed_items_ids=1,2&nbr_items_to_return=10&query_countries_codes=tg&query_text=Project
 
 ### Get profiles feed
-POST http://0.0.0.0:8000/api/v1/profiles/feed/
-Content-Type: application/json
-
-{
-    "profile_id": 1,
-    "profile_type": "all",
-    "displayed_items_ids": [1, 2],
-    "nbr_items_to_return": 20
-}
+GET http://0.0.0.0:8000/api/v1/profiles/feed/?profile_id=1&profile_type=all&displayed_items_ids=1,2&nbr_items_to_return=10
 
 ### Get profiles feed with search text
-POST http://0.0.0.0:8000/api/v1/profiles/feed/
-Content-Type: application/json
-
-{
-    "profile_id": 1,
-    "profile_type": "all",
-    "displayed_items_ids": [1, 2],
-    "nbr_items_to_return": 10,
-    "query_text": "ABCD"
-}
+GET http://0.0.0.0:8000/api/v1/profiles/feed/?profile_id=1&profile_type=all&displayed_items_ids=1,2&nbr_items_to_return=10&query_text=Krys
 
 ##### ADMIN #####
 
@@ -453,7 +424,7 @@ POST http://0.0.0.0:8000/api/v1/register/
 Content-Type: application/json
 
 {"profile":{"sectors_ids":[1, 3], "profile_name":"1234", "scope_country_code": "gh", "geolocation_latitude": "9.80", "geolocation_longitude": "2.80", "profile_type":"personal", "profile_personal":{"first_name":"ABCD", "last_name":"DEF"}},
-"email":"abcdefghijklmnopqrs@test.com", "password":"abcdef", "username":"abc", "session":"b9f2f805a3324c5eb23520132c3dede3"}
+"email":"abcdefghijklmnopqrst@test.com", "password":"abcdef", "username":"abc", "session":"b9f2f805a3324c5eb23520132c3dede3"}
 
 ###
 POST http://0.0.0.0:8000/api/v1/send-registration-verification/
@@ -480,18 +451,19 @@ Content-Type: application/json
 
 {"refresh":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyNTk4NTUzNiwiaWF0IjoxNzI1ODk5MTM2LCJqdGkiOiI1ZTAzM2VjMjNmMmU0ZTlhOTU4YzJhNDMyN2NkZDM0YyIsInVzZXJfaWQiOjR9.u36yrYQZiD97El95rszUwuIOZuCuUPO-g_oraPJot7w"}
 
+
 ### Get current user info
 GET http://0.0.0.0:8000/api/v1/get-current-user-info/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5NDQwODgwLCJpYXQiOjE3Mjg1NzY4ODAsImp0aSI6IjkwZDVkZjkxYzUwYzRkMTk5ODg2ZWUzNWZiN2JiN2EwIiwidXNlcl9pZCI6MX0.Nb6BOh3EDoLJNR7Znxi3FmG8CtuBOPmgoV4dFt7FHpU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMyODk3NDA3LCJpYXQiOjE3MzIwMzM0MDcsImp0aSI6ImQ3NDYyZGI3MDY4YTQ1YjM5NWM2MTIxMDkxYTk2ZTdiIiwidXNlcl9pZCI6MTB9.6AT3p6HklfUzzgO6jxcxISjfQRypgiOlqrJkO_pcrh4
 
 
 ### Get other user info
 POST http://0.0.0.0:8000/api/v1/get-other-user-info/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5NDQwODgwLCJpYXQiOjE3Mjg1NzY4ODAsImp0aSI6IjkwZDVkZjkxYzUwYzRkMTk5ODg2ZWUzNWZiN2JiN2EwIiwidXNlcl9pZCI6MX0.Nb6BOh3EDoLJNR7Znxi3FmG8CtuBOPmgoV4dFt7FHpU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMyODk3NDA3LCJpYXQiOjE3MzIwMzM0MDcsImp0aSI6ImQ3NDYyZGI3MDY4YTQ1YjM5NWM2MTIxMDkxYTk2ZTdiIiwidXNlcl9pZCI6MTB9.6AT3p6HklfUzzgO6jxcxISjfQRypgiOlqrJkO_pcrh4
 
-{"email":"testbdd@test.com", "password":"testkhbhHH"}
+{"email":"abcdefghijklmnopqrst@test.com", "password":"abcdef"}
 
 
 ### Add managed profile to user
