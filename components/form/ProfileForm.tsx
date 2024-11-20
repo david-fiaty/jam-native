@@ -26,16 +26,19 @@ import UserManager from "@/classes/UserManager";
 const ProfileForm = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [userData, setUserData] = useState([]);
-  const [profileData, setProfileData] = useState([]);
+  const [userData, setUserData] = useState({});
+  const [profileData, setProfileData] = useState({});
 
   useEffect(() => {
     (async () => {
       let currentUserData: any = await UserManager.getUserData();
+      let currentUserProfile: any = currentUserData?.account?.profiles?.[0];
+
+      console.log(profileData?.email);
       
       setTimeout(() => {
         setUserData(currentUserData);
-        setProfileData(currentUserData?.account?.profiles?.[0]);
+        setProfileData(currentUserProfile);
         setIsLoaded(true);
       }, Layout.animation.duration);
     })();
@@ -96,6 +99,7 @@ const ProfileForm = () => {
         value={profileData?.email}
         onChangeText={(text: string) => {
           profileData.email = text;
+          setProfileData(profileData);
         }}
       />
       
