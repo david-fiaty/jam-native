@@ -41,7 +41,7 @@ const JamsList = () => {
             entity: item, 
           }) : router.push('/login')}>
             <TextView>
-              @{i18n.t('host')} +{parseInt(item?.collaborators?.length)}
+              @{i18n.t('host')} +{ parseInt(item?.collaborators?.length) }
             </TextView>
           </TouchableOpacity>
         </BoxView>
