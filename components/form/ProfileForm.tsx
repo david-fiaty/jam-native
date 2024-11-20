@@ -26,25 +26,25 @@ import UserManager from "@/classes/UserManager";
 const ProfileForm = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [userData, setUserData] = useState({});
-  const [profileData, setProfileData] = useState({});
+  const [userData, setUserData] = useState();
+  const [profileData, setProfileData] = useState();
 
   useEffect(() => {
     (async () => {
       let currentUserData: any = await UserManager.getUserData();
       let currentUserProfile: any = currentUserData?.account?.profiles?.[0];
-
-      console.log(profileData?.email);
       
       setTimeout(() => {
         setUserData(currentUserData);
-        setProfileData(currentUserProfile);
+        setProfileData(Object.assign({}, currentUserProfile));
         setIsLoaded(true);
       }, Layout.animation.duration);
     })();
   });
 
   if (!isLoaded) return <SpinnerView />;
+
+console.log(profileData?.email);
 
   return (
     <BoxView
