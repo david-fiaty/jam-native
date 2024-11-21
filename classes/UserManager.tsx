@@ -41,6 +41,10 @@ class UserManager {
     };
   }
 
+  async getProfileId() {
+    
+  }
+
   isLoggedIn() {
     return Store.getState().user.isLoggedIn === true;
   }
