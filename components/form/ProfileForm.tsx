@@ -29,15 +29,22 @@ const ProfileForm = () => {
   const [userData, setUserData] = useState();
   const [profileData, setProfileData] = useState();
 
+  UserManager.getUserData().then(data => {
+    console.log(data);
+  });
+
   useEffect(() => {
     (async () => {
-      let currentUserData: any = await UserManager.getUserData();
-      let currentUserProfile: any = currentUserData?.account?.profiles?.[0];
       
+      if (!userData) {
+        //userData = await UserManager.getUserData();
+        //profileData = currentUserData?.account?.profiles?.[0];
+
+        //setUserData(currentUserData);
+        //setProfileData(currentUserProfile);
+      }
+
       setTimeout(() => {
-        if (!userData) setUserData(currentUserData);
-        if (!profileData) setProfileData(currentUserProfile);
-      
         setIsLoaded(true);
       }, Layout.animation.duration);
     })();
@@ -100,7 +107,6 @@ console.log(profileData?.email);
         value={profileData?.email}
         onChangeText={(text: string) => {
           profileData.email = text;
-          setProfileData(profileData);
         }}
       />
       
