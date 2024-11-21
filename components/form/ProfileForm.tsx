@@ -29,8 +29,10 @@ const ProfileForm = () => {
   const [userData, setUserData] = useState();
   const [profileData, setProfileData] = useState();
 
-  UserManager.getUserData().then(data => {
-    console.log(data);
+  UserManager.getUserData().then((currentUserData: any) => {
+
+    setUserData(Object.assign({}, currentUserData));
+    setProfileData(Object.assign({}, currentUserData.account.profiles[0]));
 
     setIsLoaded(true);
   });
@@ -55,6 +57,7 @@ const ProfileForm = () => {
 */
   if (!isLoaded) return <SpinnerView />;
 
+  
 console.log(profileData?.email);
 
   return (
@@ -110,6 +113,7 @@ console.log(profileData?.email);
         value={profileData?.email}
         onChangeText={(text: string) => {
           profileData.email = text;
+          setProfileData(profileData);
         }}
       />
       
