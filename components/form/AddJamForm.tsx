@@ -17,8 +17,9 @@ import ScreenManager from '@/classes/ScreenManager';
 import ButtonView from '../view/ButtonView';
 
 const AddJamForm = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [isProcessing, setIsProcessing] = useState(false);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const [jamData, setJamData] = useState<any>({});
 
   const submitForm = async () => {
     setTimeout(() => setIsProcessing(false), 3000);
