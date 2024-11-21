@@ -15,7 +15,7 @@ const UserSlice = createSlice({
       state.tokenData = action.payload;
     },
     setProfileId: (state, action) => {
-      state.profileId = action.payload;
+      state.profileId = parseInt(action.payload || 0);
     },
   },
 });
