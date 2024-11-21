@@ -41,6 +41,16 @@ class UserManager {
     };
   }
 
+  async getProfileId() {
+    let profileId: any = Store.getState().user.profileId;
+    if (profileId === 0) {
+      let userAccount: any = await DataManager.get('currentUser');
+      profileId = parseInt(userAccount?.user?.id || 0);
+    }
+
+    return profileId;
+  }
+
   isLoggedIn() {
     return Store.getState().user.isLoggedIn === true;
   }
