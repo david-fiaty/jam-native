@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
+import { Data } from '@/constants/Data';
 import IconView from '../view/IconView';
 import TextView from '../view/TextView';
 import ListView from '../view/ListView';
-import { Data } from '@/constants/Data';
 
 const JamCategoriesField = () => {  
   const [selectedOption, setSelectedOption] = useState(null);
