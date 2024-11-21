@@ -29,9 +29,9 @@ const ProfileForm = () => {
   const [userData, setUserData] = useState(null);
   const [profileData, setProfileData] = useState(null);
 
-  UserManager.getUserData().then((currentUserData: any) => {
-    if (!userData) setUserData(Object.assign({}, currentUserData));
-    if (!profileData) setProfileData(Object.assign({}, currentUserData.account.profiles[0]));
+  UserManager.getUserData().then((data: any) => {
+    if (!userData) setUserData(Object.assign({}, data));
+    if (!profileData) setProfileData(Object.assign({}, data?.account?.profiles?.[0]));
 
     setIsLoaded(true);
   });
