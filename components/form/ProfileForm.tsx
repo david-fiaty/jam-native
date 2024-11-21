@@ -26,14 +26,14 @@ import UserManager from "@/classes/UserManager";
 const ProfileForm = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [userData, setUserData] = useState();
-  const [profileData, setProfileData] = useState();
+  const [userData, setUserData] = useState(null);
+  const [profileData, setProfileData] = useState(null);
 
   UserManager.getUserData().then((currentUserData: any) => {
+    if (!userData) setUserData(Object.assign({}, currentUserData));
+    if (!profileData) setProfileData(Object.assign({}, currentUserData.account.profiles[0]));
 
-    setUserData(Object.assign({}, currentUserData));
-    setProfileData(Object.assign({}, currentUserData.account.profiles[0]));
-
+    console.log('xxxxxx');
     setIsLoaded(true);
   });
 
@@ -57,8 +57,8 @@ const ProfileForm = () => {
 */
   if (!isLoaded) return <SpinnerView />;
 
-  
-console.log(profileData?.email);
+  console.log(profileData?.email);
+
 
   return (
     <BoxView
@@ -111,10 +111,7 @@ console.log(profileData?.email);
       <InputTextField
         placeholder={i18n.t('Email address')}
         value={profileData?.email}
-        onChangeText={(text: string) => {
-          profileData.email = text;
-          setProfileData(profileData);
-        }}
+        onChangeText={(text: string) => setProfileData({...profileData, ...{ email: text }})}
       />
       
       <InputTextField
