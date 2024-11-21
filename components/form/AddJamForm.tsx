@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Layout } from '@/constants/Layout';
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
@@ -16,11 +16,13 @@ import ScreenManager from '@/classes/ScreenManager';
 import ButtonView from '../view/ButtonView';
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
+import UserManager from '@/classes/UserManager';
 
 const AddJamForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [jamData, setJamData] = useState<any>({});
+  const [profileId, setProfileId] = useState<number>(0);
 
   const submitForm = async () => {
     setTimeout(() => setIsProcessing(false), 3000);
@@ -30,8 +32,9 @@ const AddJamForm = () => {
     setJamData({...jamData, ...{ [key]: value }});
   };
 
-  useEffect(() => {
-    setTimeout(() => setIsLoaded(true), Layout.animation.duration);
+  UserManager.getProfileId().then((id: number)  => {
+    if (!profileId) setProfileId(id);
+    setIsLoaded(true);
   });
 
   if (!isLoaded) return <SpinnerView />;
@@ -39,8 +42,8 @@ const AddJamForm = () => {
   return (    
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
-        title={i18n.t('Add new Jam')}
-        onPress={() => ScreenManager.toggleModal({name: 'ProfileForm'})}
+        title={i18n.t('Create a Jam')}
+        onPress={() => ScreenManager.toggleModal({name: 'AddJamForm'})}
       />
 
       <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
