@@ -11,16 +11,7 @@ const JamCategoriesField = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const data = Data.jamCategories;
 
-  const renderItem = (row: any) => (
-    <TouchableOpacity onPress={() => setSelectedOption(row.item.id)}>
-      <View style={styles.container}>
-        <View style={[styles.square, selectedOption == row.item.id ? styles.selected : {}]}>
-          <IconView name={row.item.icon} theme="secondary" />
-        </View>
-        <TextView>{row.item.label}</TextView>   
-      </View>
-    </TouchableOpacity>
-  );
+  const renderItem = ;
 
   return (
     <ListView 
