@@ -21,6 +21,10 @@ const ProfileForm = () => {
   const [userData, setUserData] = useState<any>(null);
   const [profileData, setProfileData] = useState<any>(null);
 
+  const updateValue = (key: string, value: string) => {
+    setProfileData({...profileData, ...{ [key]: value }});
+  };
+
   UserManager.getUserData().then((data: any) => {
     if (!userData) setUserData(Object.assign({}, data));
     if (!profileData) setProfileData(Object.assign({}, data?.account?.profiles?.[0]));
@@ -49,25 +53,25 @@ const ProfileForm = () => {
       <InputTextField
         placeholder={i18n.t('Email address')}
         value={profileData?.email}
-        onChangeText={(text: string) => setProfileData({...profileData, ...{ email: text }})}
+        onChangeText={(value: string) => updateValue('email', value)}
       />
       
       <InputTextField
         placeholder={i18n.t('Profile name')}
         value={profileData?.profile_name}
-        onChangeText={(text: string) => setProfileData({...profileData, ...{ profile_name: text }})}
+        onChangeText={(value: string) => updateValue('profile_name', value)}
       />
 
       <InputTextField
         placeholder={i18n.t('Phone number')}
         value={profileData?.phone_number}
-        onChangeText={(text: string) => setProfileData({...profileData, ...{ phone_number: text }})}
+        onChangeText={(value: string) => updateValue('phone_number', value)}
       />
 
       <InputTextareaField
         placeholder={i18n.t('Description')}
         value={profileData?.profile_description}
-        onChangeText={(text: string) => setProfileData({...profileData, ...{ profile_description: text }})}
+        onChangeText={(value: string) => updateValue('profile_description', value)}
       />
 
       <UserLocationField 
