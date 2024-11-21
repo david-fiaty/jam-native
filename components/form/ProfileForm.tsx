@@ -21,7 +21,7 @@ const ProfileForm = () => {
   const [userData, setUserData] = useState<any>(null);
   const [profileData, setProfileData] = useState<any>(null);
 
-  const updateField = (key: string, value: string) => {
+  const updateField = (key: string, value: any) => {
     setProfileData({...profileData, ...{ [key]: value }});
   };
 
