@@ -114,7 +114,11 @@ const ProfileForm = () => {
         }}
       />
 
-      <UserLocationField />
+      <UserLocationField 
+        latitude={profileData?.geolocation_latitude} 
+        longitude={profileData?.geolocation_longitude} 
+      />
+      
       <IndustryField />
       <CreativeOrganizationField />
 
