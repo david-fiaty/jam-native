@@ -33,6 +33,9 @@ const AddJamForm = () => {
   const jamCategoriesData = Data.jamCategories;
 
   const submitForm = async () => {
+
+    console.log(jamData);
+    
     setTimeout(() => setIsProcessing(false), 3000);
   }  
 
