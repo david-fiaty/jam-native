@@ -3,7 +3,7 @@ import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
-import UserLocationField from "../field/UserLocationField";
+import LocationPickerField from "../field/LocationPickerField";
 import IndustryField from "../field/IndustryField";
 import DividerView from "../view/DividerView";
 import InputTextField from "../field/InputTextField";
@@ -21,7 +21,7 @@ const ProfileForm = () => {
   const [userData, setUserData] = useState<any>(null);
   const [profileData, setProfileData] = useState<any>(null);
 
-  const updateField = (key: string, value: any) => {
+  const upDatePickerField = (key: string, value: any) => {
     setProfileData({...profileData, ...{ [key]: value }});
   };
 
@@ -53,28 +53,28 @@ const ProfileForm = () => {
       <InputTextField
         placeholder={i18n.t('Email address')}
         value={profileData?.email}
-        onChangeText={(value: string) => updateField('email', value)}
+        onChangeText={(value: string) => upDatePickerField('email', value)}
       />
       
       <InputTextField
         placeholder={i18n.t('Profile name')}
         value={profileData?.profile_name}
-        onChangeText={(value: string) => updateField('profile_name', value)}
+        onChangeText={(value: string) => upDatePickerField('profile_name', value)}
       />
 
       <InputTextField
         placeholder={i18n.t('Phone number')}
         value={profileData?.phone_number}
-        onChangeText={(value: string) => updateField('phone_number', value)}
+        onChangeText={(value: string) => upDatePickerField('phone_number', value)}
       />
 
       <InputTextareaField
         placeholder={i18n.t('Description')}
         value={profileData?.profile_description}
-        onChangeText={(value: string) => updateField('profile_description', value)}
+        onChangeText={(value: string) => upDatePickerField('profile_description', value)}
       />
 
-      <UserLocationField 
+      <LocationPickerField 
         latitude={profileData?.geolocation_latitude} 
         longitude={profileData?.geolocation_longitude} 
       />

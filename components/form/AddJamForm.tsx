@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { Layout } from '@/constants/Layout';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Colors } from '@/constants/Colors';
+import DatePicker from 'react-native-date-picker'
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
 import AddMediaField from "../field/AddMediaField";
 import AddCollaboratorsField from "../field/AddCollaboratorsField";
-import UserLocationField from "../field/UserLocationField";
+import LocationPickerField from "../field/LocationPickerField";
 import StatusField from "../field/StatusField";
 import IndustryField from "../field/IndustryField";
 import DividerView from "../view/DividerView";
@@ -21,6 +22,7 @@ import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
 import UserManager from '@/classes/UserManager';
 import Data from '@/constants/StaticData';
+import DatePickerField from '../field/DatePickerField';
 
 const AddJamForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -34,7 +36,7 @@ const AddJamForm = () => {
     setTimeout(() => setIsProcessing(false), 3000);
   }  
 
-  const updateField = (key: string, value: any) => {
+  const upDatePickerField = (key: string, value: any) => {
     setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }});
   };
 
@@ -81,13 +83,15 @@ const AddJamForm = () => {
       <InputTextField
         placeholder={i18n.t('Title')}
         value={jamData?.title}
-        onChangeText={(value: string) => updateField('title', value)}
+        onChangeText={(value: string) => upDatePickerField('title', value)}
       />
       <InputTextareaField
         placeholder={i18n.t('Description')}
         value={jamData?.caption}
-        onChangeText={(value: string) => updateField('caption', value)}
+        onChangeText={(value: string) => upDatePickerField('caption', value)}
       />
+
+      <DatePickerField />
 
       <DividerView />
       <AddMediaField />
@@ -95,7 +99,7 @@ const AddJamForm = () => {
 
       <DividerView />
 
-      <UserLocationField />
+      <LocationPickerField />
       <StatusField />
       <IndustryField />
 
@@ -113,7 +117,6 @@ const AddJamForm = () => {
     </BoxView>
   );
 };
-
 
 const styles = StyleSheet.create({
   categoryContainer: {
