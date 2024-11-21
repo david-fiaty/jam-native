@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Layout } from '@/constants/Layout';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Colors } from '@/constants/Colors';
-import DatePicker from 'react-native-date-picker'
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
@@ -29,14 +28,13 @@ const AddJamForm = () => {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [jamData, setJamData] = useState<any>({});
   const [profileId, setProfileId] = useState<number>(0);
-
   const jamCategoriesData = Data.jamCategories;
 
-  const submitForm = async () => {
+  const submitForm = async () => {    
     setTimeout(() => setIsProcessing(false), 3000);
   }  
 
-  const upDatePickerField = (key: string, value: any) => {
+  const updateField = (key: string, value: any) => {
     setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }});
   };
 
@@ -83,12 +81,12 @@ const AddJamForm = () => {
       <InputTextField
         placeholder={i18n.t('Title')}
         value={jamData?.title}
-        onChangeText={(value: string) => upDatePickerField('title', value)}
+        onChangeText={(value: string) => updateField('title', value)}
       />
       <InputTextareaField
         placeholder={i18n.t('Description')}
         value={jamData?.caption}
-        onChangeText={(value: string) => upDatePickerField('caption', value)}
+        onChangeText={(value: string) => updateField('caption', value)}
       />
 
       <DatePickerField />
