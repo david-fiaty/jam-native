@@ -9,7 +9,7 @@ import UserLocationField from "../field/UserLocationField";
 import IndustryField from "../field/IndustryField";
 import DividerView from "../view/DividerView";
 import InputTextField from "../field/InputTextField";
-import CreativeOrganizationField from "../field/CreativeOrganizationField";
+import CountryField from "../field/CountryField";
 import UserJamsList from "../list/UserJamsList";
 import UserProjectsList from "../list/UserProjectsList";
 import SpinnerView from "../view/SpinnerView";
@@ -85,7 +85,7 @@ const ProfileForm = () => {
 
       <IndustryField selected={profileData?.sectors} />
 
-      <CreativeOrganizationField />
+      <CountryField />
 
       <DividerView />
       <UserProjectsList data={userData?.projects} /> 

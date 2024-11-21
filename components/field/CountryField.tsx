@@ -4,7 +4,7 @@ import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
 import SelectListBase from '../base/SelectListBase';
 
-const CreativeOrganizationField = () => {
+const CountryField = () => {
   return (
     <BoxView direction="row" align="space-between" style={styles.container}>
       <SelectListBase data={CreativeOrganizationOptionsData} placeholder={i18n.t('Creative organization')} />
@@ -18,4 +18,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CreativeOrganizationField;
+export default CountryField;
