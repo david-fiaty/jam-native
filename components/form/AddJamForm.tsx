@@ -22,6 +22,7 @@ import InputTextareaField from "../field/InputTextareaField";
 import UserManager from '@/classes/UserManager';
 import Data from '@/constants/StaticData';
 import DatePickerField from '../field/DatePickerField';
+import DataManager from '@/classes/DataManager';
 
 const AddJamForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -30,17 +31,19 @@ const AddJamForm = () => {
   const [profileId, setProfileId] = useState<number>(0);
   const jamCategoriesData = Data.jamCategories;
 
-  const submitForm = async () => {    
-    setTimeout(() => setIsProcessing(false), 3000);
-  }  
-
   const updateField = (key: string, value: any) => {
     setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }});
   };
 
-  const selectCategory = (value: string) => {
+  const updateCategory = (value: string) => {
     setJamData({...jamData, ...{ type: value }, ...{ profile_id: profileId }});
   };
+
+
+  const submitForm = async () => {    
+    DataManager.post('jams', jamsData);
+    setTimeout(() => setIsProcessing(false), 3000);
+  }  
 
   UserManager.getProfileId().then((id: number)  => {
     if (!profileId) setProfileId(id);
@@ -66,7 +69,7 @@ const AddJamForm = () => {
         contentContainerStyle={Layout.listContainer}
         columnWrapperStyle={Layout.listColumnWrapper}
         renderItem={(row: any) => (
-          <TouchableOpacity onPress={() => selectCategory(row.item.id)}>
+          <TouchableOpacity onPress={() => updateCategory(row.item.id)}>
             <View style={styles.categoryContainer}>
               <View style={[styles.categoryItem, jamData?.type == row.item.id ? styles.categoryItemSelected : {}]}>
                 <IconView name={row.item.icon} theme="secondary" />
