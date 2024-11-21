@@ -22,7 +22,7 @@ import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
 import UserManager from '@/classes/UserManager';
 import Data from '@/constants/StaticData';
-import DateField from '../field/DateField';
+import DatePickerField from '../field/DatePickerField';
 
 const AddJamForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -36,7 +36,7 @@ const AddJamForm = () => {
     setTimeout(() => setIsProcessing(false), 3000);
   }  
 
-  const updateField = (key: string, value: any) => {
+  const upDatePickerField = (key: string, value: any) => {
     setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }});
   };
 
@@ -83,15 +83,15 @@ const AddJamForm = () => {
       <InputTextField
         placeholder={i18n.t('Title')}
         value={jamData?.title}
-        onChangeText={(value: string) => updateField('title', value)}
+        onChangeText={(value: string) => upDatePickerField('title', value)}
       />
       <InputTextareaField
         placeholder={i18n.t('Description')}
         value={jamData?.caption}
-        onChangeText={(value: string) => updateField('caption', value)}
+        onChangeText={(value: string) => upDatePickerField('caption', value)}
       />
 
-      <DateField />
+      <DatePickerField />
 
       <DividerView />
       <AddMediaField />
