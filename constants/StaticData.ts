@@ -1,6 +1,6 @@
 import i18n from "@/translation/i18n";
 
-export const Data = {
+const StaticData = {
   statusOptions: [  
     { 
       label: i18n.t('Enabled'), 
@@ -151,4 +151,4 @@ export const Data = {
   ],
 };
 
-
+export default StaticData;

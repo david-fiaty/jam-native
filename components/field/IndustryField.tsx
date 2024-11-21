@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
-import { Data } from '@/constants/Data';
 import { BaseProps } from '@/constants/Types';
 import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
 import SelectListBase from '../base/SelectListBase';
+import Data from '@/constants/StaticData';
 
 type Props = BaseProps & {
   selected?: any,
