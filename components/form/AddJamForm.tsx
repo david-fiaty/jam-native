@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Layout } from '@/constants/Layout';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Colors } from '@/constants/Colors';
+import DatePicker from 'react-native-date-picker'
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
@@ -21,6 +22,7 @@ import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
 import UserManager from '@/classes/UserManager';
 import Data from '@/constants/StaticData';
+import DateField from '../field/DateField';
 
 const AddJamForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -89,6 +91,8 @@ const AddJamForm = () => {
         onChangeText={(value: string) => updateField('caption', value)}
       />
 
+      <DateField />
+
       <DividerView />
       <AddMediaField />
       <AddCollaboratorsField />
@@ -113,7 +117,6 @@ const AddJamForm = () => {
     </BoxView>
   );
 };
-
 
 const styles = StyleSheet.create({
   categoryContainer: {
