@@ -26,19 +26,14 @@ import UserManager from "@/classes/UserManager";
 const ProfileForm = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [userData, setUserData] = useState([]);
-  const [profileData, setProfileData] = useState([]);
+  const [userData, setUserData] = useState(null);
+  const [profileData, setProfileData] = useState(null);
 
-  useEffect(() => {
-    (async () => {
-      let currentUserData: any = await UserManager.getUserData();
-      
-      setTimeout(() => {
-        setUserData(currentUserData);
-        setProfileData(currentUserData?.account?.profiles?.[0]);
-        setIsLoaded(true);
-      }, Layout.animation.duration);
-    })();
+  UserManager.getUserData().then((currentUserData: any) => {
+    if (!userData) setUserData(Object.assign({}, currentUserData));
+    if (!profileData) setProfileData(Object.assign({}, currentUserData.account.profiles[0]));
+
+    setIsLoaded(true);
   });
 
   if (!isLoaded) return <SpinnerView />;
@@ -94,16 +89,14 @@ const ProfileForm = () => {
       <InputTextField
         placeholder={i18n.t('Email address')}
         value={profileData?.email}
-        onChangeText={(text: string) => {
-          profileData.email = text;
-        }}
+        onChangeText={(text: string) => setProfileData({...profileData, ...{ email: text }})}
       />
       
       <InputTextField
         placeholder={i18n.t('Profile name')}
         value={profileData?.profile_name}
         onChangeText={(text: string) => {
-          userData.profile_name = text;
+          profileData.profile_name = text;
         }}
       />
       <InputTextField
