@@ -19,9 +19,9 @@ import ProfileImageField from "../field/ProfileImageField";
 
 const ProfileForm = () => {
   const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [userData, setUserData] = useState(null);
-  const [profileData, setProfileData] = useState(null);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [userData, setUserData] = useState<any>(null);
+  const [profileData, setProfileData] = useState<any>(null);
 
   UserManager.getUserData().then((data: any) => {
     if (!userData) setUserData(Object.assign({}, data));
