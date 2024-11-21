@@ -95,31 +95,26 @@ const ProfileForm = () => {
       <InputTextField
         placeholder={i18n.t('Profile name')}
         value={profileData?.profile_name}
-        onChangeText={(text: string) => {
-          profileData.profile_name = text;
-        }}
+        onChangeText={(text: string) => setProfileData({...profileData, ...{ profile_name: text }})}
       />
       <InputTextField
         placeholder={i18n.t('Phone number')}
         value={profileData?.phone_number}
-        onChangeText={(text: string) => {
-          profileData.phone_number = text;
-        }}
+        onChangeText={(text: string) => setProfileData({...profileData, ...{ phone_number: text }})}
       />
       <InputTextareaField
         placeholder={i18n.t('Description')}
         value={profileData?.profile_description}
-        onChangeText={(text: string) => {
-          profileData.profile_description = text;
-        }}
+        onChangeText={(text: string) => setProfileData({...profileData, ...{ profile_description: text }})}
       />
 
       <UserLocationField 
         latitude={profileData?.geolocation_latitude} 
         longitude={profileData?.geolocation_longitude} 
       />
-      
-      <IndustryField />
+
+      <IndustryField selected={profileData?.sectors} />
+
       <CreativeOrganizationField />
 
       <DividerView />
