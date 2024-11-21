@@ -85,7 +85,7 @@ const ProfileForm = () => {
 
       <IndustryField selected={profileData?.sectors} />
 
-      <CountryField />
+      <CountryField selected={profileData?.country} />
 
       <DividerView />
       <UserProjectsList data={userData?.projects} /> 
