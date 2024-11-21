@@ -33,32 +33,10 @@ const ProfileForm = () => {
     if (!userData) setUserData(Object.assign({}, currentUserData));
     if (!profileData) setProfileData(Object.assign({}, currentUserData.account.profiles[0]));
 
-    console.log('xxxxxx');
     setIsLoaded(true);
   });
 
-  /*
-  useEffect(() => {
-    (async () => {
-      
-      if (!userData) {
-        //userData = await UserManager.getUserData();
-        //profileData = currentUserData?.account?.profiles?.[0];
-
-        //setUserData(currentUserData);
-        //setProfileData(currentUserProfile);
-      }
-
-      setTimeout(() => {
-        setIsLoaded(true);
-      }, Layout.animation.duration);
-    })();
-  });
-*/
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(profileData?.email);
-
 
   return (
     <BoxView
