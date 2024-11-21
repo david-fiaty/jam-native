@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Layout } from '@/constants/Layout';
-import TextView from "../view/TextView";
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { Colors } from '@/constants/Colors';
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
-import JamCategoriesField from "../field/JamCategoriesField";
 import AddMediaField from "../field/AddMediaField";
 import AddCollaboratorsField from "../field/AddCollaboratorsField";
 import UserLocationField from "../field/UserLocationField";
@@ -14,9 +14,13 @@ import DividerView from "../view/DividerView";
 import SpinnerView from '../view/SpinnerView';
 import ScreenManager from '@/classes/ScreenManager';
 import ButtonView from '../view/ButtonView';
+import IconView from '../view/IconView';
+import TextView from '../view/TextView';
+import ListView from '../view/ListView';
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
 import UserManager from '@/classes/UserManager';
+import Data from '@/constants/StaticData';
 
 const AddJamForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -24,12 +28,18 @@ const AddJamForm = () => {
   const [jamData, setJamData] = useState<any>({});
   const [profileId, setProfileId] = useState<number>(0);
 
+  const jamCategoriesData = Data.jamCategories;
+
   const submitForm = async () => {
     setTimeout(() => setIsProcessing(false), 3000);
   }  
 
   const updateField = (key: string, value: any) => {
-    setJamData({...jamData, ...{ [key]: value }});
+    setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }});
+  };
+
+  const selectCategory = (value: string) => {
+    setJamData({...jamData, ...{ type: value }, ...{ profile_id: profileId }});
   };
 
   UserManager.getProfileId().then((id: number)  => {
@@ -47,7 +57,25 @@ const AddJamForm = () => {
       />
 
       <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
-      <JamCategoriesField />
+      
+      <ListView 
+        data={jamCategoriesData} 
+        numColumns={4}
+        horizontal={false}
+        scrollEnabled={false}
+        contentContainerStyle={Layout.listContainer}
+        columnWrapperStyle={Layout.listColumnWrapper}
+        renderItem={(row: any) => (
+          <TouchableOpacity onPress={() => selectCategory(row.item.id)}>
+            <View style={styles.categoryContainer}>
+              <View style={[styles.categoryItem, jamData?.type == row.item.id ? styles.categoryItemSelected : {}]}>
+                <IconView name={row.item.icon} theme="secondary" />
+              </View>
+              <TextView>{row.item.label}</TextView>   
+            </View>
+          </TouchableOpacity>
+        )}
+      />
 
       <DividerView />
       <InputTextField
@@ -60,8 +88,6 @@ const AddJamForm = () => {
         value={jamData?.caption}
         onChangeText={(value: string) => updateField('caption', value)}
       />
-
-
 
       <DividerView />
       <AddMediaField />
@@ -87,5 +113,28 @@ const AddJamForm = () => {
     </BoxView>
   );
 };
+
+
+const styles = StyleSheet.create({
+  categoryContainer: {
+    flexDirection: 'column',
+    gap: Layout.space.small,
+  },
+  categoryItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.secondary,
+    padding: Layout.space.base,
+    borderWidth: 1,
+    borderRadius: Layout.radius.round,
+    borderColor: Colors.secondary,
+    width: Layout.space.base*7,
+    height: Layout.space.base*7,
+  },
+  categoryItemSelected: {
+    borderColor: Colors.primary,
+  },
+});
 
 export default AddJamForm;
