@@ -22,6 +22,7 @@ import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
 import UserManager from '@/classes/UserManager';
 import Data from '@/constants/StaticData';
+import DateField from '../field/DateField';
 
 const AddJamForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -90,6 +91,8 @@ const AddJamForm = () => {
         onChangeText={(value: string) => updateField('caption', value)}
       />
 
+      <DateField />
+
       <DividerView />
       <AddMediaField />
       <AddCollaboratorsField />
@@ -114,7 +117,6 @@ const AddJamForm = () => {
     </BoxView>
   );
 };
-
 
 const styles = StyleSheet.create({
   categoryContainer: {
