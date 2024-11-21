@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { IndustriesData, SubIndustriesData } from '@/constants/Data';
+import { Data } from '@/constants/Data';
 import { BaseProps } from '@/constants/Types';
 import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
@@ -10,13 +10,13 @@ type Props = BaseProps & {
 };
 
 const IndustryField = ({selected}: Props) => {
-
-  console.log(selected);
+  const mainIndustries = Data.mainIndustries;
+  const subIndustries = Data.subIndustries;
   
   return (
     <BoxView direction="column" align="center" style={styles.container}>
-      <SelectListBase data={IndustriesData} placeholder={i18n.t('Industries')} />
-      <SelectListBase data={SubIndustriesData} placeholder={i18n.t('Sub industries')} />
+      <SelectListBase data={mainIndustries} placeholder={i18n.t('Industries')} />
+      <SelectListBase data={subIndustries} placeholder={i18n.t('Sub industries')} />
     </BoxView>
   );
 };
