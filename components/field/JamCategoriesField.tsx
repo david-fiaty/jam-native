@@ -5,11 +5,11 @@ import { Layout } from '@/constants/Layout';
 import IconView from '../view/IconView';
 import TextView from '../view/TextView';
 import ListView from '../view/ListView';
-import { JamCategoriesData } from '@/constants/Data';
+import { Data } from '@/constants/Data';
 
 const JamCategoriesField = () => {  
   const [selectedOption, setSelectedOption] = useState(null);
-  const data = JamCategoriesData;
+  const data = Data.jamCategories;
 
   const renderItem = (item, index) => (
     <TouchableOpacity onPress={() => setSelectedOption(item.id)}>
