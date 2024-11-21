@@ -29,13 +29,9 @@ const AddJamForm = () => {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [jamData, setJamData] = useState<any>({});
   const [profileId, setProfileId] = useState<number>(0);
-
   const jamCategoriesData = Data.jamCategories;
 
-  const submitForm = async () => {
-
-    console.log(jamData);
-    
+  const submitForm = async () => {    
     setTimeout(() => setIsProcessing(false), 3000);
   }  
 
