@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { setActiveScreen } from "@/redux/slices/ScreenSlice";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
@@ -9,19 +7,19 @@ import UserLocationField from "../field/UserLocationField";
 import IndustryField from "../field/IndustryField";
 import DividerView from "../view/DividerView";
 import InputTextField from "../field/InputTextField";
-import CreativeOrganizationField from "../field/CreativeOrganizationField";
+import CountryField from "../field/CountryField";
 import UserJamsList from "../list/UserJamsList";
 import UserProjectsList from "../list/UserProjectsList";
 import SpinnerView from "../view/SpinnerView";
 import InputTextareaField from "../field/InputTextareaField";
 import UserManager from "@/classes/UserManager";
 import ProfileImageField from "../field/ProfileImageField";
+import ScreenManager from "@/classes/ScreenManager";
 
 const ProfileForm = () => {
-  const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [userData, setUserData] = useState(null);
-  const [profileData, setProfileData] = useState(null);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [userData, setUserData] = useState<any>(null);
+  const [profileData, setProfileData] = useState<any>(null);
 
   UserManager.getUserData().then((data: any) => {
     if (!userData) setUserData(Object.assign({}, data));
@@ -41,13 +39,7 @@ const ProfileForm = () => {
     >
       <BackButton
         title={i18n.t('Your profile')}
-        onPress={() =>
-          dispatch(
-            setActiveScreen({
-              name: 'ProfileForm',
-            })
-          )
-        }
+        onPress={() => ScreenManager.toggleModal({ name: 'ProfileForm'})}
       />
 
       <ProfileImageField url={profileData?.profile_picture?.url} />
@@ -85,7 +77,7 @@ const ProfileForm = () => {
 
       <IndustryField selected={profileData?.sectors} />
 
-      <CreativeOrganizationField />
+      <CountryField selected={profileData?.country} />
 
       <DividerView />
       <UserProjectsList data={userData?.projects} /> 
