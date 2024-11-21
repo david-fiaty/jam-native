@@ -8,7 +8,7 @@ import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
 import AddMediaField from "../field/AddMediaField";
 import AddCollaboratorsField from "../field/AddCollaboratorsField";
-import UserLocationField from "../field/UserLocationField";
+import LocationPickerField from "../field/LocationPickerField";
 import StatusField from "../field/StatusField";
 import IndustryField from "../field/IndustryField";
 import DividerView from "../view/DividerView";
@@ -99,7 +99,7 @@ const AddJamForm = () => {
 
       <DividerView />
 
-      <UserLocationField />
+      <LocationPickerField />
       <StatusField />
       <IndustryField />
 

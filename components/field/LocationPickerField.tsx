@@ -10,7 +10,7 @@ type Props = BaseProps & {
   longitude?: any,
 };
 
-const UserLocationField = ({latitude, longitude}: Props) => {
+const LocationPickerField = ({latitude, longitude}: Props) => {
   return (
     <BoxView direction="row" align="space-between" style={styles.container}>
       <InputTextField 
@@ -30,4 +30,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default UserLocationField;
+export default LocationPickerField;

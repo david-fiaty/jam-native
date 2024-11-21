@@ -10,7 +10,7 @@ const DateField = () => {
       <Button title="Open" onPress={() => setOpen(true)} />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
