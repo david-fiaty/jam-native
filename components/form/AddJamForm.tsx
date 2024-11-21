@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Layout } from '@/constants/Layout';
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
@@ -33,11 +33,13 @@ const AddJamForm = () => {
   };
 
   UserManager.getProfileId().then((id: number)  => {
-    setProfileId(id);
+    if (!profileId) setProfileId(id);
     setIsLoaded(true);
   });
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(profileId);
 
   return (    
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
