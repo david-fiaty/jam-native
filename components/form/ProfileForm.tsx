@@ -31,8 +31,11 @@ const ProfileForm = () => {
 
   UserManager.getUserData().then(data => {
     console.log(data);
+
+    setIsLoaded(true);
   });
 
+  /*
   useEffect(() => {
     (async () => {
       
@@ -49,7 +52,7 @@ const ProfileForm = () => {
       }, Layout.animation.duration);
     })();
   });
-
+*/
   if (!isLoaded) return <SpinnerView />;
 
 console.log(profileData?.email);
