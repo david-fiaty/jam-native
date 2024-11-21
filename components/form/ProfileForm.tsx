@@ -3,7 +3,7 @@ import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
-import UserLocationField from "../field/UserLocationField";
+import LocationPickerField from "../field/LocationPickerField";
 import IndustryField from "../field/IndustryField";
 import DividerView from "../view/DividerView";
 import InputTextField from "../field/InputTextField";
@@ -74,7 +74,7 @@ const ProfileForm = () => {
         onChangeText={(value: string) => updateField('profile_description', value)}
       />
 
-      <UserLocationField 
+      <LocationPickerField 
         latitude={profileData?.geolocation_latitude} 
         longitude={profileData?.geolocation_longitude} 
       />

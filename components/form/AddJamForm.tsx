@@ -7,7 +7,7 @@ import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
 import AddMediaField from "../field/AddMediaField";
 import AddCollaboratorsField from "../field/AddCollaboratorsField";
-import UserLocationField from "../field/UserLocationField";
+import LocationPickerField from "../field/LocationPickerField";
 import StatusField from "../field/StatusField";
 import IndustryField from "../field/IndustryField";
 import DividerView from "../view/DividerView";
@@ -21,16 +21,16 @@ import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
 import UserManager from '@/classes/UserManager';
 import Data from '@/constants/StaticData';
+import DatePickerField from '../field/DatePickerField';
 
 const AddJamForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [jamData, setJamData] = useState<any>({});
   const [profileId, setProfileId] = useState<number>(0);
-
   const jamCategoriesData = Data.jamCategories;
 
-  const submitForm = async () => {
+  const submitForm = async () => {    
     setTimeout(() => setIsProcessing(false), 3000);
   }  
 
@@ -89,13 +89,15 @@ const AddJamForm = () => {
         onChangeText={(value: string) => updateField('caption', value)}
       />
 
+      <DatePickerField />
+
       <DividerView />
       <AddMediaField />
       <AddCollaboratorsField />
 
       <DividerView />
 
-      <UserLocationField />
+      <LocationPickerField />
       <StatusField />
       <IndustryField />
 
@@ -113,7 +115,6 @@ const AddJamForm = () => {
     </BoxView>
   );
 };
-
 
 const styles = StyleSheet.create({
   categoryContainer: {
