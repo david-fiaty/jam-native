@@ -27,10 +27,8 @@ const AddJamForm = () => {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [jamData, setJamData] = useState<any>({});
   const [profileId, setProfileId] = useState<number>(0);
-  const [selectedOption, setSelectedOption] = useState(null);
 
   const jamCategoriesData = Data.jamCategories;
-
 
   const submitForm = async () => {
     setTimeout(() => setIsProcessing(false), 3000);
@@ -38,6 +36,10 @@ const AddJamForm = () => {
 
   const updateField = (key: string, value: any) => {
     setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }});
+  };
+
+  const selectCategory = (value: string) => {
+    setJamData({...jamData, ...{ type: value }, ...{ profile_id: profileId }});
   };
 
   UserManager.getProfileId().then((id: number)  => {
@@ -64,9 +66,9 @@ const AddJamForm = () => {
         contentContainerStyle={Layout.listContainer}
         columnWrapperStyle={Layout.listColumnWrapper}
         renderItem={(row: any) => (
-          <TouchableOpacity onPress={() => setSelectedOption(row.item.id)}>
-            <View style={styles.container}>
-              <View style={[styles.square, selectedOption == row.item.id ? styles.selected : {}]}>
+          <TouchableOpacity onPress={() => selectCategory(row.item.id)}>
+            <View style={styles.categoryContainer}>
+              <View style={[styles.categoryItem, jamData?.type == row.item.id ? styles.categoryItemSelected : {}]}>
                 <IconView name={row.item.icon} theme="secondary" />
               </View>
               <TextView>{row.item.label}</TextView>   
@@ -86,8 +88,6 @@ const AddJamForm = () => {
         value={jamData?.caption}
         onChangeText={(value: string) => updateField('caption', value)}
       />
-
-
 
       <DividerView />
       <AddMediaField />
@@ -116,11 +116,11 @@ const AddJamForm = () => {
 
 
 const styles = StyleSheet.create({
-  container: {
+  categoryContainer: {
     flexDirection: 'column',
     gap: Layout.space.small,
   },
-  square: {
+  categoryItem: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     width: Layout.space.base*7,
     height: Layout.space.base*7,
   },
-  selected: {
+  categoryItemSelected: {
     borderColor: Colors.primary,
   },
 });
