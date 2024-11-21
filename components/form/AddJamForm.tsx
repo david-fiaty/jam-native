@@ -29,7 +29,7 @@ const AddJamForm = () => {
   }  
 
   const updateField = (key: string, value: any) => {
-    setJamData({...jamData, ...{ [key]: value }});
+    setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }});
   };
 
   UserManager.getProfileId().then((id: number)  => {

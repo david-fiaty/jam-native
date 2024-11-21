@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
+import { Data } from '@/constants/Data';
 import IconView from '../view/IconView';
 import TextView from '../view/TextView';
 import ListView from '../view/ListView';
-import { JamCategoriesData } from '@/constants/Data';
 
 const JamCategoriesField = () => {  
   const [selectedOption, setSelectedOption] = useState(null);
-  const data = JamCategoriesData;
+  const data = Data.jamCategories;
 
-  const renderItem = (item, index) => (
-    <TouchableOpacity onPress={() => setSelectedOption(item.id)}>
+  const renderItem = (row: any) => (
+    <TouchableOpacity onPress={() => setSelectedOption(row.item.id)}>
       <View style={styles.container}>
-        <View style={[styles.square, selectedOption == item.id ? styles.selected : {}]}>
-          <IconView name={item.icon} theme="secondary" />
+        <View style={[styles.square, selectedOption == row.item.id ? styles.selected : {}]}>
+          <IconView name={row.item.icon} theme="secondary" />
         </View>
-        <TextView>{item.label}</TextView>   
+        <TextView>{row.item.label}</TextView>   
       </View>
     </TouchableOpacity>
   );
@@ -28,10 +28,9 @@ const JamCategoriesField = () => {
       numColumns={4}
       horizontal={false}
       scrollEnabled={false}
-      conten
-      tContainerStyle={Layout.listContainer}
+      contentContainerStyle={Layout.listContainer}
       columnWrapperStyle={Layout.listColumnWrapper}
-      renderItem={({item, index}) => renderItem(item, index)}
+      renderItem={(item: any) => renderItem(item)}
     />
   );
 }

@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import { CreativeOrganizationOptionsData } from '@/constants/Data';
 import { BaseProps } from '@/constants/Types';
 import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
@@ -10,10 +9,12 @@ type Props = BaseProps & {
 };
 
 const CountryField = ({selected}: Props) => {
+  const data: any = [];
+
   return (
     <BoxView direction="row" align="space-between" style={styles.container}>
       <SelectListBase 
-        data={CreativeOrganizationOptionsData} 
+        data={data} 
         placeholder={i18n.t('Country')} 
       />
     </BoxView>
