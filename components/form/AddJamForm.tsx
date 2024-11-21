@@ -31,7 +31,6 @@ const AddJamForm = () => {
 
   const jamCategoriesData = Data.jamCategories;
 
-
   const submitForm = async () => {
     setTimeout(() => setIsProcessing(false), 3000);
   }  
