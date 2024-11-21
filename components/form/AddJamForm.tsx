@@ -16,11 +16,13 @@ import ScreenManager from '@/classes/ScreenManager';
 import ButtonView from '../view/ButtonView';
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
+import UserManager from '@/classes/UserManager';
 
 const AddJamForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [jamData, setJamData] = useState<any>({});
+  const [profileId, setProfileId] = useState<number>(0);
 
   const submitForm = async () => {
     setTimeout(() => setIsProcessing(false), 3000);
@@ -30,8 +32,9 @@ const AddJamForm = () => {
     setJamData({...jamData, ...{ [key]: value }});
   };
 
-  useEffect(() => {
-    setTimeout(() => setIsLoaded(true), Layout.animation.duration);
+  UserManager.getProfileId().then((id: number)  => {
+    setProfileId(id);
+    setIsLoaded(true);
   });
 
   if (!isLoaded) return <SpinnerView />;
