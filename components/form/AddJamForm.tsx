@@ -35,7 +35,7 @@ const AddJamForm = () => {
     setTimeout(() => setIsProcessing(false), 3000);
   }  
 
-  const upDatePickerField = (key: string, value: any) => {
+  const updateField = (key: string, value: any) => {
     setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }});
   };
 
@@ -82,12 +82,12 @@ const AddJamForm = () => {
       <InputTextField
         placeholder={i18n.t('Title')}
         value={jamData?.title}
-        onChangeText={(value: string) => upDatePickerField('title', value)}
+        onChangeText={(value: string) => updateField('title', value)}
       />
       <InputTextareaField
         placeholder={i18n.t('Description')}
         value={jamData?.caption}
-        onChangeText={(value: string) => upDatePickerField('caption', value)}
+        onChangeText={(value: string) => updateField('caption', value)}
       />
 
       <DatePickerField />
