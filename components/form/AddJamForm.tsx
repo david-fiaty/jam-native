@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Layout } from '@/constants/Layout';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Colors } from '@/constants/Colors';
+import DatePicker from 'react-native-date-picker'
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
