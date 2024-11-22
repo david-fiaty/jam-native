@@ -20,13 +20,10 @@ const JammersList = () => {
   DataManager.find('jams', 'id', entityId).then((item: any) => {
     if (!entity) setEntity(item);
     console.log(entity?.jammers);
+  });
 
-    DataManager.get('profiles').then((items: any) => {
-      if (!profilesData) setProfilesData(items);
-        console.log(profilesData);
-  
-        setIsLoaded(true);
-    });
+  DataManager.get('profiles').then((items: any) => {
+    console.log(items);
   });
 
   if (!isLoaded) return <SpinnerView />;
