@@ -8,12 +8,12 @@ import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
 
 type Props = BaseProps & {
-  label?: string,
+  placeholder?: string,
   value?: string,
   callback?: () => void,
 };
 
-const DatePickerField = ({label, value, callback}: Props) => {
+const DatePickerField = ({placeholder, value, callback}: Props) => {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
 
@@ -31,7 +31,7 @@ const DatePickerField = ({label, value, callback}: Props) => {
         <TouchableOpacity onPress={() => setShow(true)}>
           <InputTextField 
             readOnly={true}
-            placeholder={i18n.t('Location')} 
+            placeholder={placeholder} 
             rightIcon={<IconView name="calendar" theme="transparent" />}
             value={date.toLocaleDateString()}
           />
