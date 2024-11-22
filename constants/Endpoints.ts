@@ -9,7 +9,8 @@ const Endpoints = {
     cacheable: true,
     searcheable: true,
   },
-  jammers: {
+  profiles: {
+    url: '/profiles/feed/?profile_id=0&profile_type=all&displayed_items_ids=1,2&nbr_items_to_return=10',
     cacheable: false,
     searcheable: true,
   },
