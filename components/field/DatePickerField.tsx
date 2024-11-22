@@ -25,25 +25,25 @@ const DatePickerField = ({placeholder, value, callback}: Props) => {
   const display = Platform.OS === 'ios' ? 'spinner' : 'default';
 
   return (
-      <BoxView direction="row" align="space-between">
-        <TouchableOpacity onPress={() => setShow(true)}>
-          <InputTextField 
-            readOnly={true}
-            placeholder={placeholder} 
-            rightIcon={<IconView name="calendar" theme="transparent" />}
-            value={date.toLocaleDateString()}
-          />
-        </TouchableOpacity>
+    <BoxView direction="row" align="space-between">
+      <TouchableOpacity onPress={() => setShow(true)}>
+        <InputTextField 
+          readOnly={true}
+          placeholder={placeholder} 
+          rightIcon={<IconView name="calendar" theme="transparent" />}
+          value={date.toLocaleDateString()}
+        />
+      </TouchableOpacity>
 
-        {show && (
-          <DateTimePicker
-            value={date} 
-            mode="date"
-            display={display} 
-            onChange={onChange}
-          />
-        )}
-      </BoxView>
+      {show && (
+        <DateTimePicker
+          value={date} 
+          mode="date"
+          display={display} 
+          onChange={onChange}
+        />
+      )}
+    </BoxView>
   );
 };
 
