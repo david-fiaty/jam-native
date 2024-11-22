@@ -42,7 +42,7 @@ const AddJamForm = () => {
   const submitForm = async () => {    
     let result = await DataManager.post('jams', jamData);
     setIsProcessing(false);
-    //console.log(result);
+    console.log(result);
 
     //setTimeout(() => setIsProcessing(false), 3000);
   }  
