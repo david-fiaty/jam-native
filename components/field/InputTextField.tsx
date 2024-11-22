@@ -1,24 +1,36 @@
-import { StyleSheet } from 'react-native';
-import { Input } from '@rneui/themed';
-import { BaseProps } from '@/constants/Types';
-import { Colors } from '@/constants/Colors';
-import BoxView from '../view/BoxView';
+import { StyleSheet } from "react-native";
+import { Input } from "@rneui/themed";
+import { BaseProps } from "@/constants/Types";
+import { Colors } from "@/constants/Colors";
+import BoxView from "../view/BoxView";
 
 type Props = BaseProps & {
-  value?: string,
-  placeholder?: string,
-  containerStyle?: object,
-  leftIcon?: JSX.Element,
-  rightIcon?: JSX.Element,
-  disabled?: boolean, 
-  secureTextEntry?: boolean,
-  autoCapitalize?: boolean,
-  spellCheck?: boolean,
-
-  onChangeText?: () => void,
+  value?: string;
+  placeholder?: string;
+  containerStyle?: object;
+  leftIcon?: JSX.Element;
+  rightIcon?: JSX.Element;
+  disabled?: boolean;
+  secureTextEntry?: boolean;
+  autoCapitalize?: boolean;
+  spellCheck?: boolean;
+  readOnly?: boolean,
+  onChangeText?: () => void;
 };
 
-const InputTextField = ({value, placeholder, containerStyle, leftIcon, rightIcon, disabled, secureTextEntry, autoCapitalize, spellCheck, onChangeText}: Props) => {
+const InputTextField = ({
+  value,
+  placeholder,
+  containerStyle,
+  leftIcon,
+  rightIcon,
+  disabled,
+  secureTextEntry,
+  autoCapitalize,
+  spellCheck,
+  readOnly,
+  onChangeText,
+}: Props) => {
   return (
     <BoxView style={styles.container}>
       <Input
@@ -36,6 +48,7 @@ const InputTextField = ({value, placeholder, containerStyle, leftIcon, rightIcon
         spellCheck={spellCheck}
         value={value}
         onChangeText={onChangeText}
+        readOnly={readOnly}
       />
     </BoxView>
   );
@@ -43,7 +56,7 @@ const InputTextField = ({value, placeholder, containerStyle, leftIcon, rightIcon
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: "100%",
   },
 });
 
