@@ -15,8 +15,11 @@ const JammersList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [entity, setEntity] = useState<any>(null);
 
-  const profilesData: any = [];
+  const profilesData: any = DataManager.get('profiles');
   const entityId = ScreenManager.getActiveScreen()?.entityId;
+
+
+  console.log(profilesData);
   
   DataManager.find('jams', 'id', entityId).then((item: any) => {
     if (!entity) setEntity(item);
