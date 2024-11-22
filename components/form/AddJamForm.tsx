@@ -93,12 +93,12 @@ const AddJamForm = () => {
       <DatePickerField 
         value={'start value'}
         placeholder={i18n.t('Start date')}
-        callback={() =>  console.log('yoooooooo') } 
+        onValueChange={(value: any) =>  console.log(value) } 
       />
       <DatePickerField 
         value={'end value'}
         placeholder={i18n.t('End date')}
-        callback={() =>  console.log('yoooooooo') } 
+        onValueChange={(value: any) =>  console.log(value) } 
       />
 
       <DividerView />
