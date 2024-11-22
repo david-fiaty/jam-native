@@ -9,17 +9,17 @@ import IconView from '../view/IconView';
 type Props = BaseProps & {
   placeholder?: string,
   value?: string,
-  onValueChange?: (value: any) => void,
+  onChangeValue?: (value: any) => void,
 };
 
-const DatePickerField = ({placeholder, value, onValueChange}: Props) => {
+const DatePickerField = ({placeholder, value, onChangeValue}: Props) => {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
 
   const onChange = (event: any, value: any) => {
     setShow(false); 
     if (value) setDate(value);
-    if (onValueChange) onValueChange(value);
+    if (onChangeValue) onChangeValue(value);
   };
 
   const display = Platform.OS === 'ios' ? 'spinner' : 'default';
