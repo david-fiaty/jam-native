@@ -13,9 +13,11 @@ import DataManager from "@/manager/DataManager";
 
 const JammersList = () => {
   const data: any = DataManager.get('jammers');
-  const entityId = ScreenManager.getActiveScreen();
-
-  console.log(entityId);
+  const entityId = ScreenManager.getActiveScreen()?.entityId;
+  
+  DataManager.find('jams', 'id', entityId).then(entity => {
+    console.log(entity);
+  });
 
   const renderItem = (row: any) => (
     <TouchableOpacity onPress={() => console.log('clicked')}>
