@@ -18,9 +18,9 @@ const JammersList = () => {
   const profilesData: any = [];
   const entityId = ScreenManager.getActiveScreen()?.entityId;
   
-  DataManager.find('jams', 'id', [entityId]).then((item: any) => {
+  DataManager.find('jams', 'id', entityId).then((item: any) => {
     if (!entity) setEntity(item);
-    console.log('ooo');
+    console.log('aaa');
     console.log(entity?.jammers);
 
     setIsLoaded(true);
