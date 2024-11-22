@@ -101,15 +101,12 @@ const AddJamForm = () => {
         onChangeValue={ (value: any) => updateField('period', {...jamData?.period || {}, ...{ end_datetime: value }}) } 
       />
 
+      <LocationPickerField />
+      <IndustryField />
+
       <DividerView />
       <AddMediaField />
       <AddCollaboratorsField />
-
-      <DividerView />
-
-      <LocationPickerField />
-      <StatusField />
-      <IndustryField />
 
       <DividerView />
       <ButtonView 
