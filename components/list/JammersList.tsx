@@ -14,9 +14,14 @@ import DataManager from "@/manager/DataManager";
 const JammersList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [entity, setEntity] = useState<any>(null);
-
-  const profilesData: any = DataManager.get('profiles');
+  
   const entityId = ScreenManager.getActiveScreen()?.entityId;
+
+  DataManager.get('profiles').then((data: any) => {
+      console.log(data);
+
+    //setIsLoaded(true);
+  });
 
 
   console.log(profilesData);
