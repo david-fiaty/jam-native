@@ -35,10 +35,6 @@ const AddJamForm = () => {
     setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }});
   };
 
-  const updateCategory = (value: string) => {
-    setJamData({...jamData, ...{ type: value }, ...{ profile_id: profileId }});
-  };
-
   const submitForm = async () => {    
     let result = await DataManager.post('jams', jamData);
     setIsProcessing(false);
@@ -71,7 +67,7 @@ const AddJamForm = () => {
         contentContainerStyle={Layout.listContainer}
         columnWrapperStyle={Layout.listColumnWrapper}
         renderItem={(row: any) => (
-          <TouchableOpacity onPress={() => updateCategory(row.item.id)}>
+          <TouchableOpacity onPress={() => updateField('type', row.item.id)}>
             <View style={styles.categoryContainer}>
               <View style={[styles.categoryItem, jamData?.type == row.item.id ? styles.categoryItemSelected : {}]}>
                 <IconView name={row.item.icon} theme="secondary" />
@@ -94,7 +90,16 @@ const AddJamForm = () => {
         onChangeText={(value: string) => updateField('caption', value)}
       />
 
-      <DatePickerField />
+      <DatePickerField 
+        value={'start value'}
+        placeholder={i18n.t('Start date')}
+        callback={() =>  console.log('yoooooooo') } 
+      />
+      <DatePickerField 
+        value={'end value'}
+        placeholder={i18n.t('End date')}
+        callback={() =>  console.log('yoooooooo') } 
+      />
 
       <DividerView />
       <AddMediaField />
