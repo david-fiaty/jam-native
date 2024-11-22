@@ -14,23 +14,20 @@ import DataManager from "@/manager/DataManager";
 const JammersList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [entity, setEntity] = useState<any>(null);
-  
+  const [profilesData, setProfilesData] = useState<any>(null);
   const entityId = ScreenManager.getActiveScreen()?.entityId;
 
-  const profilesData: any = [];
-  
-  DataManager.get('profiles').then((data: any) => {
-      console.log(data);
-
-    //setIsLoaded(true);
-  });
-
-  
   DataManager.find('jams', 'id', entityId).then((item: any) => {
     if (!entity) setEntity(item);
     console.log(entity?.jammers);
 
-    setIsLoaded(true);
+    DataManager.get('profiles').then((items: any) => {
+      if (!profilesData) setProfilesData(items);
+        console.log(profilesData);
+  
+        setIsLoaded(true);
+    });
+ 
   });
 
   if (!isLoaded) return <SpinnerView />;
