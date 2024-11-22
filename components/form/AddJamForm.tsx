@@ -23,7 +23,6 @@ import UserManager from '@/manager/UserManager';
 import Data from '@/constants/StaticData';
 import DatePickerField from '../field/DatePickerField';
 import DataManager from '@/manager/DataManager';
-import ObjectHelper from '@/helper/ObjectHelper';
 
 const AddJamForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -33,10 +32,7 @@ const AddJamForm = () => {
   const jamCategoriesData = Data.jamCategories;
 
   const updateField = (key: string, value: any) => {
-      setJamData({...ObjectHelper.update(jamData, key, value), ...{ profile_id: profileId }});
-
-      console.log(jamData);
-
+    setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }});
   };
 
   const submitForm = async () => {    
@@ -53,6 +49,7 @@ const AddJamForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
+  console.log(jamData);
   return (    
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
@@ -96,12 +93,12 @@ const AddJamForm = () => {
       <DatePickerField 
         value={'start value'}
         placeholder={i18n.t('Start date')}
-        onChangeValue={(value: any) =>  updateField('period.start_datetime', value) } 
+        onChangeValue={ (value: any) => updateField('period', {...jamData?.period || {}, ...{ start_datetime: value }}) } 
       />
       <DatePickerField 
         value={'end value'}
         placeholder={i18n.t('End date')}
-        onChangeValue={(value: any) =>  updateField('period.end_datetime', value) } 
+        onChangeValue={ (value: any) => updateField('period', {...jamData?.period || {}, ...{ end_datetime: value }}) } 
       />
 
       <DividerView />
