@@ -5,7 +5,7 @@ import i18n from '@/translation/i18n';
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
 import IconView from "../view/IconView";
-import DataManager from '@/classes/DataManager';
+import DataManager from '@/manager/DataManager';
 
 const AddCollaboratorsField = () => {  
   const data = DataManager.get('jammers');

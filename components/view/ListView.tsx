@@ -1,6 +1,6 @@
 import { StyleSheet, FlatList } from 'react-native';
 import { BaseProps } from '@/constants/Types';
-import DeviceManager from '@/classes/DeviceManager';
+import DeviceManager from '@/manager/DeviceManager';
 
 type Props = BaseProps & {
   data: object,

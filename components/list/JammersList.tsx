@@ -7,8 +7,8 @@ import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
 import ListView from "../view/ListView";
-import ScreenManager from "@/classes/ScreenManager";
-import DataManager from "@/classes/DataManager";
+import ScreenManager from "@/manager/ScreenManager";
+import DataManager from "@/manager/DataManager";
 
 const JammersList = () => {
   const data: any = DataManager.get('jammers');

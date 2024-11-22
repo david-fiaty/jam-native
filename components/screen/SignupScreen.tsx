@@ -13,10 +13,10 @@ import SkipButton from '../button/SkipButton';
 import GoogleLoginButton from '../button/GoogleLoginButton';
 import FacebookLoginButton from '../button/FacebookLoginButton';
 import InstagramLoginButton from '../button/InstagramLoginButton';
-import UserManager from '@/classes/UserManager';
+import UserManager from '@/manager/UserManager';
 import LinkView from '../view/LinkView';
 import ButtonView from '../view/ButtonView';
-import ScreenManager from '@/classes/ScreenManager';
+import ScreenManager from '@/manager/ScreenManager';
 
 const SignupScreen = () => {
   const router = useRouter();
