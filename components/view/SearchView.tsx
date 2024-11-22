@@ -6,11 +6,11 @@ import { Layout } from "@/constants/Layout";
 import ImageView from "./ImageView";
 import BoxView from "./BoxView";
 import TextView from "./TextView";
-import ScreenManager from '@/classes/ScreenManager';
+import ScreenManager from '@/manager/ScreenManager';
 import i18n from "@/translation/i18n";
 import { Colors } from "@/constants/Colors";
 import ListView from "./ListView";
-import DataManager from "@/classes/DataManager";
+import DataManager from "@/manager/DataManager";
 import { Config } from '@/constants/Config';
 import SpinnerView from './SpinnerView';
 

@@ -4,7 +4,7 @@ import { Config } from '@/constants/Config';
 import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 import ImageView from '../view/ImageView';
-import ScreenManager from '@/classes/ScreenManager';
+import ScreenManager from '@/manager/ScreenManager';
 import ListView from '../view/ListView';
 
 type Props = {

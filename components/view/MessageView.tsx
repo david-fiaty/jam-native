@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 import { setMessage } from '@/redux/slices/MessageSlice';
-import DeviceManager from '@/classes/DeviceManager';
+import DeviceManager from '@/manager/DeviceManager';
 import IconView from './IconView';
 import BoxView from './BoxView';
 

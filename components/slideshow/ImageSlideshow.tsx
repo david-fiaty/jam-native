@@ -4,7 +4,7 @@ import { Config } from '@/constants/Config';
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import ImageView from "../view/ImageView";
-import DeviceManager from '@/classes/DeviceManager';
+import DeviceManager from '@/manager/DeviceManager';
 
 type Props = {
   data?: any;

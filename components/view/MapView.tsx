@@ -7,7 +7,7 @@ import RNMapView from "react-native-maps";
 import { BaseProps } from "@/constants/Types";
 import SpinnerView from './SpinnerView';
 import { Layout } from '@/constants/Layout';
-import DataManager from '@/classes/DataManager';
+import DataManager from '@/manager/DataManager';
 
 const MapView = ({ style, children }: BaseProps) => {
   const [location, setLocation] = useState('');
