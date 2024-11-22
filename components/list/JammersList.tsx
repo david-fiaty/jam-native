@@ -23,8 +23,6 @@ const JammersList = () => {
     //setIsLoaded(true);
   });
 
-
-  console.log(profilesData);
   
   DataManager.find('jams', 'id', entityId).then((item: any) => {
     if (!entity) setEntity(item);
