@@ -23,6 +23,8 @@ const DatePickerField = ({label, value, callback}: Props) => {
     if (callback) callback();
   };
 
+  const display: string = Platform.OS === 'ios' ? 'spinner' : 'default';
+
   return (
     <View style={styles.container}>
       <BoxView direction="row" align="space-between">
@@ -30,7 +32,7 @@ const DatePickerField = ({label, value, callback}: Props) => {
           <InputTextField 
             readOnly={true}
             placeholder={i18n.t('Location')} 
-            rightIcon={<IconView name="location" theme="transparent" />}
+            rightIcon={<IconView name="calendar" theme="transparent" />}
             value={date.toLocaleDateString()}
           />
         </TouchableOpacity>
@@ -40,7 +42,7 @@ const DatePickerField = ({label, value, callback}: Props) => {
         <DateTimePicker
           value={date} 
           mode="date"
-          display={Platform.OS === 'ios' ? 'spinner' : 'default'} 
+          display={display} 
           onChange={onChange}
         />
       )}
