@@ -4,10 +4,6 @@ import ApiManager from './ApiManager';
 
 class DataManager {
   async get(key: keyof typeof Endpoints, options?: any) {
-    return await this.getApiData(key, options);
-  }
-
-  async getApiData(key: keyof typeof Endpoints, options?: any) {
     // Variables
     let data: any =  await ApiManager.get(key);
     let results: any = [];
@@ -43,10 +39,6 @@ class DataManager {
 
   async post(key: keyof typeof Endpoints, data: any, options?: any) {
     return await ApiManager.post(key, data);
-  }
-
-  async postApiData(key: keyof typeof Endpoints, options?: any) {
-
   }
 
   getStaticData(key: keyof typeof Endpoints) {

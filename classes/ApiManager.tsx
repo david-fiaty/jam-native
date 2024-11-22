@@ -72,22 +72,15 @@ class ApiManager {
   async sendRequest(endpoint: any, method: string, data?: any) {
     if (endpoint?.url) {
       try {
-        let url = Config.apiUrl + endpoint.url;
-        let payload: object = {
+        let response: any = await fetch(Config.apiUrl + endpoint.url, {
           ...{
             method: method,
             headers: this.getHeaders(),
           },
           ...(data ? { body: JSON.stringify(data) } : {}),
-        };
-
-        let response: any = await fetch(url, payload);
-        if (!response.ok) throw Error(response.status);
+        });
     
-        let jsonResponse = await response.json();
-        let processedResponse = this.processResponse(jsonResponse);
-
-        return processedResponse;
+        return await this.processResponse(response);
       } 
       catch (error) {
         console.error(error);
@@ -95,8 +88,8 @@ class ApiManager {
     }
   }
 
-  processResponse(jsonResponse: any) {
-    return jsonResponse;
+  async processResponse(response: any) {
+    return await response.json();
   }
 
   getHeaders() {
