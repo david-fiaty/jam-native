@@ -1,5 +1,5 @@
+import { useState } from "react";
 import { View, TouchableOpacity } from "react-native";
-import { useSelector } from 'react-redux';
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
 import BackButton from "../button/BackButton";
@@ -7,11 +7,33 @@ import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
 import ListView from "../view/ListView";
+import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import DataManager from "@/manager/DataManager";
 
 const JammersList = () => {
-  const data: any = DataManager.get('jammers');
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [entity, setEntity] = useState<any>(null);
+  
+  const entityId = ScreenManager.getActiveScreen()?.entityId;
+
+  const profilesData: any = [];
+  
+  DataManager.get('profiles').then((data: any) => {
+      console.log(data);
+
+    //setIsLoaded(true);
+  });
+
+  
+  DataManager.find('jams', 'id', entityId).then((item: any) => {
+    if (!entity) setEntity(item);
+    console.log(entity?.jammers);
+
+    setIsLoaded(true);
+  });
+
+  if (!isLoaded) return <SpinnerView />;
 
   const renderItem = (row: any) => (
     <TouchableOpacity onPress={() => console.log('clicked')}>
@@ -32,14 +54,14 @@ const JammersList = () => {
       />
       
       <View style={Layout.borderedListContainer}>
-        {data?.length > 0 &&
+        {profilesData?.length > 0 &&
           <ListView
-            data={data}
+            data={profilesData}
             renderItem={(row: any) => renderItem(row)}
           />
         }
 
-        {!data?.length && 
+        {!profilesData?.length && 
           <TextView>{i18n.t('There are no jammers available for this Jam.')}</TextView>
         }
       </View>
