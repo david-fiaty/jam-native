@@ -41,9 +41,9 @@ class DataManager {
     return await ApiManager.post(key, data);
   }
 
-  async find(key: keyof typeof Endpoints, idField: string, idValue: any) {
+  async find(key: keyof typeof Endpoints, idField: string, idValues: any) {
     let data: any = await ApiManager.get(key);
-    let result: any = data.find((item: any) => item[idField] === idValue);
+    let result: any = data.find((item: any) => idValues.includes(item[idField]));
 
     return result || {};
   }
