@@ -33,6 +33,8 @@ const AddJamForm = () => {
 
   const updateField = (key: string, value: any) => {
     setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }});
+
+    console.log(jamData);
   };
 
   const submitForm = async () => {    
