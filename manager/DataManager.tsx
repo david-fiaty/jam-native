@@ -5,7 +5,7 @@ import ApiManager from './ApiManager';
 class DataManager {
   async get(key: keyof typeof Endpoints, options?: any) {
     // Variables
-    let data: any =  await ApiManager.get(key);
+    let data: any = await ApiManager.get(key);
     let results: any = [];
 
     // Apply search and filter
@@ -41,8 +41,11 @@ class DataManager {
     return await ApiManager.post(key, data);
   }
 
-  getStaticData(key: keyof typeof Endpoints) {
+  async find(key: keyof typeof Endpoints, idField: string, idValue: any) {
+    let data: any = await ApiManager.get(key);
+    let result: any = data.find((item: any) => item[idField] === idValue);
 
+    return result || {};
   }
 };
 
