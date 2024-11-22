@@ -90,7 +90,16 @@ const AddJamForm = () => {
         onChangeText={(value: string) => updateField('caption', value)}
       />
 
-      <DatePickerField callback={() =>  console.log('yoooooooo') } />
+      <DatePickerField 
+        value={'start value'}
+        placeholder={i18n.t('Start date')}
+        callback={() =>  console.log('yoooooooo') } 
+      />
+      <DatePickerField 
+        value={'end value'}
+        placeholder={i18n.t('End date')}
+        callback={() =>  console.log('yoooooooo') } 
+      />
 
       <DividerView />
       <AddMediaField />
