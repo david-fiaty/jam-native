@@ -15,13 +15,13 @@ const JammersList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [entity, setEntity] = useState<any>(null);
 
-  const data: any = DataManager.get('jammers');
+  const profilesData: any = [];
   const entityId = ScreenManager.getActiveScreen()?.entityId;
   
   DataManager.find('jams', 'id', entityId).then((item: any) => {
     if (!entity) setEntity(item);
     
-    console.log(entity);
+    console.log(entity?.jammers);
 
     setIsLoaded(true);
   });
@@ -47,14 +47,14 @@ const JammersList = () => {
       />
       
       <View style={Layout.borderedListContainer}>
-        {data?.length > 0 &&
+        {profilesData?.length > 0 &&
           <ListView
-            data={data}
+            data={profilesData}
             renderItem={(row: any) => renderItem(row)}
           />
         }
 
-        {!data?.length && 
+        {!profilesData?.length && 
           <TextView>{i18n.t('There are no jammers available for this Jam.')}</TextView>
         }
       </View>
