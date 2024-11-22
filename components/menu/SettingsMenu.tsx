@@ -5,7 +5,7 @@ import ListView from '../view/ListView';
 import TextView from '../view/TextView';
 import BackButton from '../button/BackButton';
 import i18n from '@/translation/i18n';
-import ScreenManager from '@/classes/ScreenManager';
+import ScreenManager from '@/manager/ScreenManager';
 
 type ItemProps = {
   label: string,

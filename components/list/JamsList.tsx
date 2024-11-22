@@ -12,10 +12,10 @@ import CollapsibleView from '../view/CollapsibleView';
 import SpinnerView from '../view/SpinnerView';
 import JamStatusButton from '../button/JamStatusButton';
 import ListView from '../view/ListView';
-import DataManager from '@/classes/DataManager';
+import DataManager from '@/manager/DataManager';
 import ImageSlideshow from '../slideshow/ImageSlideshow';
-import UserManager from '@/classes/UserManager';
-import ScreenManager from '@/classes/ScreenManager';
+import UserManager from '@/manager/UserManager';
+import ScreenManager from '@/manager/ScreenManager';
 
 const JamsList = () => {  
   const router = useRouter();

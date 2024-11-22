@@ -12,17 +12,17 @@ import StatusField from "../field/StatusField";
 import IndustryField from "../field/IndustryField";
 import DividerView from "../view/DividerView";
 import SpinnerView from '../view/SpinnerView';
-import ScreenManager from '@/classes/ScreenManager';
+import ScreenManager from '@/manager/ScreenManager';
 import ButtonView from '../view/ButtonView';
 import IconView from '../view/IconView';
 import TextView from '../view/TextView';
 import ListView from '../view/ListView';
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
-import UserManager from '@/classes/UserManager';
+import UserManager from '@/manager/UserManager';
 import Data from '@/constants/StaticData';
 import DatePickerField from '../field/DatePickerField';
-import DataManager from '@/classes/DataManager';
+import DataManager from '@/manager/DataManager';
 
 const AddJamForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -35,13 +35,11 @@ const AddJamForm = () => {
     setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }});
   };
 
-  const updateCategory = (value: string) => {
-    setJamData({...jamData, ...{ type: value }, ...{ profile_id: profileId }});
-  };
-
   const submitForm = async () => {    
-    DataManager.post('jams', jamData);
-    setTimeout(() => setIsProcessing(false), 3000);
+    let result = await DataManager.post('jams', jamData);
+    setIsProcessing(false);
+
+    //setTimeout(() => setIsProcessing(false), 3000);
   }  
 
   UserManager.getProfileId().then((id: number)  => {
@@ -51,6 +49,7 @@ const AddJamForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
+  console.log(jamData);
   return (    
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
@@ -68,7 +67,7 @@ const AddJamForm = () => {
         contentContainerStyle={Layout.listContainer}
         columnWrapperStyle={Layout.listColumnWrapper}
         renderItem={(row: any) => (
-          <TouchableOpacity onPress={() => updateCategory(row.item.id)}>
+          <TouchableOpacity onPress={() => updateField('type', row.item.id)}>
             <View style={styles.categoryContainer}>
               <View style={[styles.categoryItem, jamData?.type == row.item.id ? styles.categoryItemSelected : {}]}>
                 <IconView name={row.item.icon} theme="secondary" />
@@ -91,7 +90,16 @@ const AddJamForm = () => {
         onChangeText={(value: string) => updateField('caption', value)}
       />
 
-      <DatePickerField />
+      <DatePickerField 
+        value={'start value'}
+        placeholder={i18n.t('Start date')}
+        onChangeValue={ (value: any) => updateField('period', {...jamData?.period || {}, ...{ start_datetime: value }}) } 
+      />
+      <DatePickerField 
+        value={'end value'}
+        placeholder={i18n.t('End date')}
+        onChangeValue={ (value: any) => updateField('period', {...jamData?.period || {}, ...{ end_datetime: value }}) } 
+      />
 
       <DividerView />
       <AddMediaField />

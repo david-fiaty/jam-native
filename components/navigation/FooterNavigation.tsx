@@ -4,8 +4,8 @@ import { Layout } from '@/constants/Layout';
 import { Colors } from "@/constants/Colors";
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
-import ScreenManager from '@/classes/ScreenManager';
-import UserManager from '@/classes/UserManager';
+import ScreenManager from '@/manager/ScreenManager';
+import UserManager from '@/manager/UserManager';
 
 const FooterNavigation = () => {
   const router = useRouter();

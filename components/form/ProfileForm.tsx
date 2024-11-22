@@ -12,9 +12,9 @@ import UserJamsList from "../list/UserJamsList";
 import UserProjectsList from "../list/UserProjectsList";
 import SpinnerView from "../view/SpinnerView";
 import InputTextareaField from "../field/InputTextareaField";
-import UserManager from "@/classes/UserManager";
+import UserManager from "@/manager/UserManager";
 import ProfileImageField from "../field/ProfileImageField";
-import ScreenManager from "@/classes/ScreenManager";
+import ScreenManager from "@/manager/ScreenManager";
 
 const ProfileForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -79,9 +79,9 @@ const ProfileForm = () => {
         longitude={profileData?.geolocation_longitude} 
       />
 
-      <IndustryField selected={profileData?.sectors} />
+      <IndustryField value={profileData?.sectors} />
 
-      <CountryField selected={profileData?.country} />
+      <CountryField value={profileData?.country} />
 
       <DividerView />
       <UserProjectsList data={userData?.projects} /> 

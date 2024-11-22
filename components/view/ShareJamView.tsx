@@ -6,7 +6,7 @@ import BoxView from "../view/BoxView";
 import CopyJamLinkButton from "../button/CopyJamLinkButton";
 import ListView from "./ListView";
 import ShareJamButton from "../button/ShareJamButton";
-import ScreenManager from "@/classes/ScreenManager";
+import ScreenManager from "@/manager/ScreenManager";
 
 const ShareJamView = () => {
   const data = [
