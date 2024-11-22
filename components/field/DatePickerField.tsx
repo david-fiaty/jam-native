@@ -6,18 +6,12 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 type Props = BaseProps & {
   label?: string,
   value?: string,
+  onChange: () => void,
 };
 
 const DatePickerField = ({label, value}: Props) => {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
-
-  const onChange = (event: any, selectedDate: any) => {
-    setShow(false); 
-    if (selectedDate) {
-      setDate(selectedDate);
-    }
-  };
 
   return (
     <View style={styles.container}>
