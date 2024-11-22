@@ -17,6 +17,8 @@ const JammersList = () => {
   
   const entityId = ScreenManager.getActiveScreen()?.entityId;
 
+  const profilesData: any = [];
+  
   DataManager.get('profiles').then((data: any) => {
       console.log(data);
 
