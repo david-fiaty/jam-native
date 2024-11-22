@@ -23,7 +23,6 @@ import UserManager from '@/manager/UserManager';
 import Data from '@/constants/StaticData';
 import DatePickerField from '../field/DatePickerField';
 import DataManager from '@/manager/DataManager';
-import ObjectHelper from '@/helper/ObjectHelper';
 
 const AddJamForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -33,10 +32,13 @@ const AddJamForm = () => {
   const jamCategoriesData = Data.jamCategories;
 
   const updateField = (key: string, value: any) => {
-      setJamData({...ObjectHelper.update(jamData, key, value), ...{ profile_id: profileId }});
-
-      console.log(jamData);
-
+    let path = key.split('.');
+    if (path.length == 1) {
+      setJamData({...jamData, ...{ [path[0]]: value }, ...{ profile_id: profileId }});
+    }      
+    else {
+      console.log(path);
+    }
   };
 
   const submitForm = async () => {    
