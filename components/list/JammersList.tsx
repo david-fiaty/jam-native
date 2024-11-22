@@ -20,6 +20,7 @@ const JammersList = () => {
   
   DataManager.find('jams', 'id', [entityId]).then((item: any) => {
     if (!entity) setEntity(item);
+    console.log('ooo');
     console.log(entity?.jammers);
 
     setIsLoaded(true);
