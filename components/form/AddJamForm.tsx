@@ -39,9 +39,8 @@ const AddJamForm = () => {
     setJamData({...jamData, ...{ type: value }, ...{ profile_id: profileId }});
   };
 
-
   const submitForm = async () => {    
-    DataManager.post('jams', jamsData);
+    DataManager.post('jams', jamData);
     setTimeout(() => setIsProcessing(false), 3000);
   }  
 
