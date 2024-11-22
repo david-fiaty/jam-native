@@ -23,6 +23,7 @@ import UserManager from '@/manager/UserManager';
 import Data from '@/constants/StaticData';
 import DatePickerField from '../field/DatePickerField';
 import DataManager from '@/manager/DataManager';
+import ObjectHelper from '@/helper/ObjectHelper';
 
 const AddJamForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -32,13 +33,15 @@ const AddJamForm = () => {
   const jamCategoriesData = Data.jamCategories;
 
   const updateField = (key: string, value: any) => {
-    setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }});
+      setJamData({...ObjectHelper.update(jamData, key, value), ...{ profile_id: profileId }});
+
+      console.log(jamData);
+
   };
 
   const submitForm = async () => {    
     let result = await DataManager.post('jams', jamData);
     setIsProcessing(false);
-    console.log(result);
 
     //setTimeout(() => setIsProcessing(false), 3000);
   }  
@@ -93,12 +96,12 @@ const AddJamForm = () => {
       <DatePickerField 
         value={'start value'}
         placeholder={i18n.t('Start date')}
-        onValueChange={(value: any) =>  console.log(value) } 
+        onChangeValue={(value: any) =>  updateField('period.start_datetime', value) } 
       />
       <DatePickerField 
         value={'end value'}
         placeholder={i18n.t('End date')}
-        onValueChange={(value: any) =>  console.log(value) } 
+        onChangeValue={(value: any) =>  updateField('period.end_datetime', value) } 
       />
 
       <DividerView />
