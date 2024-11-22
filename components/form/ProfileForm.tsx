@@ -79,9 +79,9 @@ const ProfileForm = () => {
         longitude={profileData?.geolocation_longitude} 
       />
 
-      <IndustryField selected={profileData?.sectors} />
+      <IndustryField value={profileData?.sectors} />
 
-      <CountryField selected={profileData?.country} />
+      <CountryField value={profileData?.country} />
 
       <DividerView />
       <UserProjectsList data={userData?.projects} /> 
