@@ -5,10 +5,10 @@ import BoxView from '../view/BoxView';
 import SelectListBase from '../base/SelectListBase';
 
 type Props = BaseProps & {
-  selected?: any,
+  value?: any,
 };
 
-const CountryField = ({selected}: Props) => {
+const CountryField = ({value}: Props) => {
   const data: any = [];
 
   return (
