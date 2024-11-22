@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Platform, TouchableOpacity } from 'react-native';
+import { Platform, TouchableOpacity } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import i18n from '@/translation/i18n';
 import InputTextField from '../field/InputTextField';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
@@ -23,10 +22,9 @@ const DatePickerField = ({placeholder, value, callback}: Props) => {
     if (callback) callback();
   };
 
-  const display: string = Platform.OS === 'ios' ? 'spinner' : 'default';
+  const display = Platform.OS === 'ios' ? 'spinner' : 'default';
 
   return (
-    <View style={styles.container}>
       <BoxView direction="row" align="space-between">
         <TouchableOpacity onPress={() => setShow(true)}>
           <InputTextField 
@@ -36,26 +34,17 @@ const DatePickerField = ({placeholder, value, callback}: Props) => {
             value={date.toLocaleDateString()}
           />
         </TouchableOpacity>
-      </BoxView>
 
-      {show && (
-        <DateTimePicker
-          value={date} 
-          mode="date"
-          display={display} 
-          onChange={onChange}
-        />
-      )}
-    </View>
+        {show && (
+          <DateTimePicker
+            value={date} 
+            mode="date"
+            display={display} 
+            onChange={onChange}
+          />
+        )}
+      </BoxView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-  },
-});
 
 export default DatePickerField;
