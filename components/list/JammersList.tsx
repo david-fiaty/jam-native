@@ -1,5 +1,6 @@
 import { View, TouchableOpacity } from "react-native";
 import { useSelector } from 'react-redux';
+import { useLocalSearchParams } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
 import BackButton from "../button/BackButton";
@@ -12,6 +13,10 @@ import DataManager from "@/manager/DataManager";
 
 const JammersList = () => {
   const data: any = DataManager.get('jammers');
+  
+  const entity = ScreenManager.getActiveScreen();
+
+  console.log(entity);
 
   const renderItem = (row: any) => (
     <TouchableOpacity onPress={() => console.log('clicked')}>
