@@ -1,6 +1,5 @@
+import { useState } from "react";
 import { View, TouchableOpacity } from "react-native";
-import { useSelector } from 'react-redux';
-import { useLocalSearchParams } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
 import BackButton from "../button/BackButton";
@@ -8,16 +7,26 @@ import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
 import ListView from "../view/ListView";
+import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import DataManager from "@/manager/DataManager";
 
 const JammersList = () => {
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [entity, setEntity] = useState<any>(null);
+
   const data: any = DataManager.get('jammers');
   const entityId = ScreenManager.getActiveScreen()?.entityId;
   
-  DataManager.find('jams', 'id', entityId).then(entity => {
+  DataManager.find('jams', 'id', entityId).then((item: any) => {
+    if (!entity) setEntity(item);
+    
     console.log(entity);
+
+    setIsLoaded(true);
   });
+
+  if (!isLoaded) return <SpinnerView />;
 
   const renderItem = (row: any) => (
     <TouchableOpacity onPress={() => console.log('clicked')}>
