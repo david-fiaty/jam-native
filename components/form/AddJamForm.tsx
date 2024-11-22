@@ -8,7 +8,6 @@ import BackButton from "../button/BackButton";
 import AddMediaField from "../field/AddMediaField";
 import AddCollaboratorsField from "../field/AddCollaboratorsField";
 import LocationPickerField from "../field/LocationPickerField";
-import StatusField from "../field/StatusField";
 import IndustryField from "../field/IndustryField";
 import DividerView from "../view/DividerView";
 import SpinnerView from '../view/SpinnerView';
@@ -101,15 +100,12 @@ const AddJamForm = () => {
         onChangeValue={ (value: any) => updateField('period', {...jamData?.period || {}, ...{ end_datetime: value }}) } 
       />
 
+      <LocationPickerField />
+      <IndustryField />
+
       <DividerView />
       <AddMediaField />
       <AddCollaboratorsField />
-
-      <DividerView />
-
-      <LocationPickerField />
-      <StatusField />
-      <IndustryField />
 
       <DividerView />
       <ButtonView 

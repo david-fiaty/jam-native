@@ -1,16 +1,6 @@
 import i18n from "@/translation/i18n";
 
 const StaticData = {
-  statusOptions: [  
-    { 
-      label: i18n.t('Enabled'), 
-      value: 1,
-    },
-    { 
-      label: i18n.t('Disabled'), 
-      value: 0,
-    },
-  ],
   jamCategories: [
     {
       id: 'calls',
