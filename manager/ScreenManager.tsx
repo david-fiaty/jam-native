@@ -21,7 +21,6 @@ class ScreenManager {
   }
 
   toggleModal(data: object) {
-    console.log(data);
     Store.dispatch(setActiveScreen(data));
   }
 
