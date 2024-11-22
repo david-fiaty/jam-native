@@ -5,8 +5,8 @@ import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 import LogoView from '../view/LogoView';
 import SearchField from '../field/SearchField';
-import ScreenManager from "@/classes/ScreenManager";
-import UserManager from '@/classes/UserManager';
+import ScreenManager from "@/manager/ScreenManager";
+import UserManager from '@/manager/UserManager';
 import { Colors } from '@/constants/Colors';
 
 const HeaderNavigation = () => {

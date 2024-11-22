@@ -11,7 +11,7 @@ import EditJamButton from "../button/EditJamButton";
 import ReportJamButton from "../button/ReportJamButton";
 import DeleteJamButton from "../button/DeleteJamButton";
 import ListView from "./ListView";
-import ScreenManager from "@/classes/ScreenManager";
+import ScreenManager from "@/manager/ScreenManager";
 
 const data = [
   <SaveJamButton style={Layout.listItem} />,

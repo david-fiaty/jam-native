@@ -12,17 +12,17 @@ import StatusField from "../field/StatusField";
 import IndustryField from "../field/IndustryField";
 import DividerView from "../view/DividerView";
 import SpinnerView from '../view/SpinnerView';
-import ScreenManager from '@/classes/ScreenManager';
+import ScreenManager from '@/manager/ScreenManager';
 import ButtonView from '../view/ButtonView';
 import IconView from '../view/IconView';
 import TextView from '../view/TextView';
 import ListView from '../view/ListView';
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
-import UserManager from '@/classes/UserManager';
+import UserManager from '@/manager/UserManager';
 import Data from '@/constants/StaticData';
 import DatePickerField from '../field/DatePickerField';
-import DataManager from '@/classes/DataManager';
+import DataManager from '@/manager/DataManager';
 
 const AddJamForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);

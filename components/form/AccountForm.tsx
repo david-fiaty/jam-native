@@ -8,7 +8,7 @@ import InputTextField from '../field/InputTextField';
 import SpinnerView from '../view/SpinnerView';
 import ButtonView from '../view/ButtonView';
 import DividerView from '../view/DividerView';
-import UserManager from '@/classes/UserManager';
+import UserManager from '@/manager/UserManager';
 
 const AccountForm = () => {
   const router = useRouter();

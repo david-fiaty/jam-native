@@ -1,6 +1,6 @@
 import { StatusBar } from 'react-native';
 import { Colors } from './Colors';
-import DeviceManager from '@/classes/DeviceManager';
+import DeviceManager from '@/manager/DeviceManager';
 
 const space = {
   small: 5,
