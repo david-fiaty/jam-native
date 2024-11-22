@@ -1,19 +1,59 @@
-import { useState } from 'react'
-import { StyleSheet, View, TouchableOpacity, Button } from 'react-native';
+import React, { useState } from 'react';
+import { View, Button, Text, StyleSheet, Platform } from 'react-native';
+import { BaseProps } from '@/constants/Types';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
-const DatePickerField = () => {
-  const [date, setDate] = useState(new Date())
-  const [open, setOpen] = useState(false)
+type Props = BaseProps & {
+  label?: string,
+  value?: string,
+};
+
+const DatePickerField = ({label, value}: Props) => {
+  const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
+
+  const onChange = (event: any, selectedDate: any) => {
+    setShow(false); 
+    if (selectedDate) {
+      setDate(selectedDate);
+    }
+  };
 
   return (
     <View style={styles.container}>
-      <Button title="Open" onPress={() => setOpen(true)} />
+      <Text style={styles.dateText}>
+        {date.toLocaleDateString()}
+      </Text>
+      <Button
+        title="Pick a Date"
+        onPress={() => setShow(true)}
+      />
+      {show && (
+        <DateTimePicker
+          value={date} 
+          mode="date"
+          display={Platform.OS === 'ios' ? 'spinner' : 'default'} 
+          onChange={onChange}
+        />
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    padding: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  label: {
+    fontSize: 16,
+    marginBottom: 8,
+  },
+  dateText: {
+    fontSize: 18,
+    marginVertical: 16,
   },
 });
 
