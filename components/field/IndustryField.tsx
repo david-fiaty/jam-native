@@ -6,10 +6,10 @@ import SelectListBase from '../base/SelectListBase';
 import Data from '@/constants/StaticData';
 
 type Props = BaseProps & {
-  selected?: any,
+  value?: any,
 };
 
-const IndustryField = ({selected}: Props) => {
+const IndustryField = ({value}: Props) => {
   const mainIndustries = Data.mainIndustries;
   const subIndustries = Data.subIndustries;
   

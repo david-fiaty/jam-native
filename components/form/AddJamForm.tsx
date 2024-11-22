@@ -40,8 +40,11 @@ const AddJamForm = () => {
   };
 
   const submitForm = async () => {    
-    DataManager.post('jams', jamData);
-    setTimeout(() => setIsProcessing(false), 3000);
+    let result = await DataManager.post('jams', jamData);
+    setIsProcessing(false);
+    console.log(result);
+
+    //setTimeout(() => setIsProcessing(false), 3000);
   }  
 
   UserManager.getProfileId().then((id: number)  => {
