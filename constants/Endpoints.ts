@@ -31,7 +31,7 @@ const Endpoints = {
     url: '/get-current-user-info/',
     cacheable: false,
     searcheable: false,
-  }
+  },
 };
 
 export default Endpoints;
