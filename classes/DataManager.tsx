@@ -45,6 +45,9 @@ class DataManager {
     return await ApiManager.post(key, data);
   }
 
+  async postApiData(key: keyof typeof Endpoints, options?: any) {
+
+  }
 
   getStaticData(key: keyof typeof Endpoints) {
 
