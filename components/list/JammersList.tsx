@@ -27,7 +27,6 @@ const JammersList = () => {
   
         setIsLoaded(true);
     });
- 
   });
 
   if (!isLoaded) return <SpinnerView />;
