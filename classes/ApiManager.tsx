@@ -51,6 +51,24 @@ class ApiManager {
     }
   }
 
+  async put(key: keyof typeof Endpoints, data: object) {
+    try {
+      return await this.sendRequest(Endpoints[key], 'PUT', data);
+    } 
+    catch (error) {
+      console.log(error);
+    }
+  }
+
+  async delete(key: keyof typeof Endpoints, data: object) {
+    try {
+      return await this.sendRequest(Endpoints[key], 'DELETE', data);
+    } 
+    catch (error) {
+      console.log(error);
+    }
+  }
+
   async sendRequest(endpoint: any, method: string, data?: any) {
     if (endpoint?.url) {
       try {
