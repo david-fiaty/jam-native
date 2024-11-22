@@ -33,8 +33,6 @@ const AddJamForm = () => {
 
   const updateField = (key: string, value: any) => {
     setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }});
-
-    console.log(jamData);
   };
 
   const submitForm = async () => {    
@@ -51,6 +49,7 @@ const AddJamForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
+  console.log(jamData);
   return (    
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
