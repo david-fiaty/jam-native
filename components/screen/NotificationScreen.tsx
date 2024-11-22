@@ -8,7 +8,7 @@ import SpinnerView from '../view/SpinnerView';
 import TextView from '../view/TextView';
 
 type Props = BaseProps & {
-  item?: object,
+  item?: any,
 };
 
 const NotificationScreen = ({item}: Props) => {
