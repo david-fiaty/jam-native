@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from 'react';
 import { View, TouchableOpacity } from "react-native";
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
@@ -14,20 +14,27 @@ import DataManager from "@/manager/DataManager";
 const JammersList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [entity, setEntity] = useState<any>(null);
-  const [profilesData, setProfilesData] = useState<any>(null);
+  const [profiles, setProfiles] = useState<any>(null);
   const entityId = ScreenManager.getActiveScreen()?.entityId;
 
-  DataManager.find('jams', 'id', entityId).then((item: any) => {
-    if (!entity) setEntity(item);
-    console.log(entity?.jammers);
-  });
+  if (!entity) {
+    DataManager.find('jams', 'id', entityId).then((item: any) => {
+      setEntity(item);
+    });
+  }
 
-  DataManager.get('profiles').then((items: any) => {
-    console.log(items);
-  });
+  if (!profiles) {
+    DataManager.get('profiles').then((items: any) => {
+      setProfiles(items);
+    });
+  }
 
-  if (!isLoaded) return <SpinnerView />;
+  if (!entity || !profiles) return <SpinnerView />;
 
+  console.log('------entity', entity);
+  console.log('------profiles', profiles);
+
+  
   const renderItem = (row: any) => (
     <TouchableOpacity onPress={() => console.log('clicked')}>
       <BoxView direction="row" align="center" justify="flex-start" style={Layout.listItem}>
@@ -47,14 +54,14 @@ const JammersList = () => {
       />
       
       <View style={Layout.borderedListContainer}>
-        {profilesData?.length > 0 &&
+        {profiles?.length > 0 &&
           <ListView
-            data={profilesData}
+            data={profiles}
             renderItem={(row: any) => renderItem(row)}
           />
         }
 
-        {!profilesData?.length && 
+        {!profiles?.length && 
           <TextView>{i18n.t('There are no jammers available for this Jam.')}</TextView>
         }
       </View>
