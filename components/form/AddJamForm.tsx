@@ -8,6 +8,7 @@ import BackButton from "../button/BackButton";
 import AddMediaField from "../field/AddMediaField";
 import AddCollaboratorsField from "../field/AddCollaboratorsField";
 import LocationPickerField from "../field/LocationPickerField";
+import CountryField from '../field/CountryField';
 import SectorsField from "../field/SectorsField";
 import DividerView from "../view/DividerView";
 import SpinnerView from '../view/SpinnerView';
@@ -101,8 +102,24 @@ const AddJamForm = () => {
         onChangeValue={ (value: any) => updateField('period', {...jamData?.period || {}, ...{ end_datetime: value }}) } 
       />
 
-      <LocationPickerField />
-      <SectorsField />
+      { /* <LocationPickerField /> */}
+
+      <CountryField 
+        value={jamData?.scope_countries_codes}
+        onChangeValue={(option: any) => updateField('scope_countries_codes', [option.value])} 
+      />
+
+      <SectorsField 
+        value={jamData?.sectors_ids}
+        onChangeListValue={(option: any) => {
+          updateField('sectors_ids', [option.value]);
+        }}
+        onChangeSublistValue={(option: any) => {
+          let sectorsIds = [...jamData?.sectors_ids || []];
+          sectorsIds[1] = option.value;
+          updateField('sectors_ids', sectorsIds); 
+        }}
+      />
 
       <DividerView />
       <AddMediaField />
