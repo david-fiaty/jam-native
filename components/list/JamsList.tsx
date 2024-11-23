@@ -86,7 +86,7 @@ const JamsList = () => {
           <IconView 
             name="share" 
             theme="tertiary" 
-            onPress={() => EntityManager.shareJam(item?.id)} 
+            onPress={() => isLoggedIn ? EntityManager.shareJam(item?.id) : router.push('/login')} 
           />
         </BoxView> 
       </BoxView>
