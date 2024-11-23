@@ -134,7 +134,6 @@ const MoreJamView = () => {
           </BoxView>
         </TouchableOpacity>
 
-
       </View>
     </BoxView>
   );
