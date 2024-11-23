@@ -16,12 +16,10 @@ import InstagramLoginButton from '../button/InstagramLoginButton';
 import UserManager from '@/manager/UserManager';
 import LinkView from '../view/LinkView';
 import ButtonView from '../view/ButtonView';
-import SpinnerView from '../view/SpinnerView';
 import ScreenManager from '@/manager/ScreenManager';
 
 const LoginScreen = () => {
   const router = useRouter();
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [isProcessing, setIsProcessing] = useState(false);
@@ -40,8 +38,6 @@ const LoginScreen = () => {
       success === true ? router.replace('/jams') : ScreenManager.showMessage(i18n.t('Invalid user name or password.'));
     });
   }  
-
-  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView direction="column" align="center" justify="center" style={[Layout.screenContent]}>
