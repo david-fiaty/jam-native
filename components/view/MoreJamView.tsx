@@ -116,9 +116,24 @@ const MoreJamView = () => {
         >
           <BoxView direction="row" align="center" justify="flex-start">
             <IconView name="save" theme="tertiary" />
-            <TextView>{i18n.t('Add to project')}</TextView>
+            <TextView>{i18n.t('Add Jam to project')}</TextView>
           </BoxView>
         </TouchableOpacity>
+
+        {/* Delete jam */}
+        <TouchableOpacity 
+          style={styles.listItem}
+          onPress={() => isLoggedIn ? ScreenManager.toggleModal({
+            name: 'SaveJamView',
+            entityId: entityId, 
+          }) : router.push('/login')} 
+        >
+          <BoxView direction="row" align="center" justify="flex-start">
+            <IconView name="save" theme="tertiary" />
+            <TextView>{i18n.t('Delete Jam')}</TextView>
+          </BoxView>
+        </TouchableOpacity>
+
 
       </View>
     </BoxView>
