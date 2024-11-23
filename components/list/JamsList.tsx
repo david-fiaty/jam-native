@@ -73,16 +73,24 @@ const JamsList = () => {
       
         <BoxView direction="row" align="center">
           {/* Save button */}
-          <IconView name="save" theme="tertiary" onPress={() => isLoggedIn ? ScreenManager.toggleModal({
-            name: 'SaveJamView',
-            entityId: item?.id, 
-          }) : router.push('/login')} />
+          <IconView 
+            name="save" 
+            theme="tertiary" 
+            onPress={() => isLoggedIn ? ScreenManager.toggleModal({
+              name: 'SaveJamView',
+              entityId: item?.id, 
+            }) : router.push('/login')} 
+          />
 
           {/* Share button */}
-          <IconView name="share" theme="tertiary" onPress={() => ScreenManager.toggleModal({
-            name: 'ShareJamView',
-            entityId: item?.id, 
-          })} />
+          <IconView 
+            name="share" 
+            theme="tertiary" 
+            onPress={() => ScreenManager.toggleModal({
+              name: 'ShareJamView',
+              entityId: item?.id, 
+            })} 
+          />
         </BoxView> 
       </BoxView>
 
