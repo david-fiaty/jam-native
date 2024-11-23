@@ -52,6 +52,10 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - How to add project?
 - Notifications count: show total or less than total?
 
+# Issues
+  - Feeds/list endpoints : need item retrieval by ID => perf issue
+  - Profile endpoint: need too return saved jams, liked jams, saved projects, liked projects
+
 # API remarks
   * Jams list sectors field: should not have language in the payload / language should be a request parameter
   * /api/save-jams should be /api/jam/save
