@@ -26,8 +26,14 @@ const LoginScreen = () => {
 
   const submitForm = async () => {
     // Todo - Connect username and password
-    //UserManager.login(username, password).then((success: boolean) => {
-    UserManager.login('mitsiomotu@yopmail.com', 'Password1234').then((success: boolean) => {
+    let loginData = {
+      //email: email,
+      //password: password,
+      email: 'mitsiomotu@yopmail.com',
+      password: 'Password1234',
+    }
+
+    UserManager.login(loginData).then((success: boolean) => {
       setIsProcessing(false);
       success === true ? router.replace('/jams') : ScreenManager.showMessage(i18n.t('Invalid user name or password.'));
     });

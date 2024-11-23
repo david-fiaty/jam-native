@@ -16,27 +16,28 @@ import InstagramLoginButton from '../button/InstagramLoginButton';
 import UserManager from '@/manager/UserManager';
 import LinkView from '../view/LinkView';
 import ButtonView from '../view/ButtonView';
+import SpinnerView from '../view/SpinnerView';
 import ScreenManager from '@/manager/ScreenManager';
 
 const SignupScreen = () => {
   const router = useRouter();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [signupData, setSignupData] = useState<any>({});
   const [isProcessing, setIsProcessing] = useState(false);
+  
+  const updateField = (key: string, value: any) => {
+    setSignupData({...signupData, ...{ [key]: value }});
+  };
 
   const submitForm = async () => {
-    // Todo - Connect username and password
-    let data: any = [];
-    let success: boolean = await UserManager.register(data);
-    setIsProcessing(false);
-
-    if (success) { 
-      router.replace('/jams');
-    }
-    else {
-      ScreenManager.showMessage(i18n.t('Invalid registration data submitted. Please check and try again.'));
-    }
+    UserManager.register(signupData).then((success: boolean) => {
+      setIsProcessing(false);
+      success === true ? router.replace('/jams') : ScreenManager.showMessage(i18n.t('The data is invalid. Please check and try again.'));
+    });
   }  
+
+
+  //if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView direction="column" align="center" justify="center" style={Layout.screenContent}>
@@ -47,7 +48,8 @@ const SignupScreen = () => {
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Email address')} 
-        onChangeText={(text: string) => setUsername(text)}
+        value={signupData?.email}
+        onChangeText={(value: string) => updateField('email', value)}
       />
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
