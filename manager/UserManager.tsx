@@ -19,8 +19,8 @@ class UserManager {
     return false;
   }
 
-  async signup(data: any) {
-    let response = await DataManager.post('signup', data);
+  async register(data: any) {
+    let response = await DataManager.post('register', data);
 
     if (response) {
       return true;
