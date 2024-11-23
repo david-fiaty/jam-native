@@ -8,11 +8,19 @@ import { Layout } from "@/constants/Layout";
 type Props = {
   data?: object,
   placeholder?: string,
+  onChangeEvent?: (item: any) => void,
 };
 
-const SelectListBase = ({data, placeholder}: Props) => {
+const SelectListBase = ({data, placeholder, onChangeEvent}: Props) => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
+
+  const onChange = ((item: any) => {
+    setValue(item.value);
+    setIsFocus(false);
+
+    onChangeEvent(item);
+  });
 
   const renderLabel = () => {
     if (value || isFocus) {
