@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { View } from "react-native";
 import { Layout } from "@/constants/Layout";
 import BackButton from "../button/BackButton";
@@ -9,6 +10,11 @@ import ListView from "./ListView";
 import ScreenManager from "@/manager/ScreenManager";
 
 const SaveJamView = () => {
+  const [entity, setEntity] = useState<any>(null);
+  const entityId = ScreenManager.getActiveScreen()?.entityId;
+
+  console.log(entityId);
+
   const data = [
     <ShareJamButton style={Layout.listItem} />,
     <ViewMyJamsButton style={Layout.listItem} />,
