@@ -8,18 +8,18 @@ import { Layout } from "@/constants/Layout";
 type Props = {
   data?: object,
   placeholder?: string,
-  onChangeEvent?: (item: any) => void,
+  onChangeValue?: (option: any) => void,
 };
 
-const SelectListBase = ({data, placeholder, onChangeEvent}: Props) => {
+const SelectListBase = ({data, placeholder, onChangeValue}: Props) => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
 
-  const onChange = ((item: any) => {
-    setValue(item.value);
+  const onChange = ((option: any) => {
+    setValue(option.value);
     setIsFocus(false);
 
-    onChangeEvent(item);
+    if (onChangeValue) onChangeValue(option);
   });
 
   const renderLabel = () => {
@@ -48,10 +48,7 @@ const SelectListBase = ({data, placeholder, onChangeEvent}: Props) => {
         value={value}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
-        onChange={(item) => {
-          setValue(item.value);
-          setIsFocus(false);
-        }}
+        onChange={onChange}
         renderItem={(item: any, selected) => {
           return (
             <View style={styles.item}>
