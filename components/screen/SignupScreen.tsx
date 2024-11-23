@@ -39,6 +39,8 @@ const SignupScreen = () => {
 
   //if (!isLoaded) return <SpinnerView />;
 
+  console.log(signupData);
+
   return (
     <BoxView direction="column" align="center" justify="center" style={Layout.screenContent}>
       <LogoView size={{ width: 80, height: 80 }} />    
@@ -57,7 +59,8 @@ const SignupScreen = () => {
         secureTextEntry={true} 
         autoCapitalize={false}
         spellCheck={false}
-        onChangeText={(text: string) => setPassword(text)}
+        value={signupData?.password}
+        onChangeText={(value: string) => updateField('password', value)}
       />
 
       <DividerView />
@@ -81,7 +84,7 @@ const SignupScreen = () => {
         <SkipButton onPress={async () => router.replace('/jams')} />
       </BoxView>
 
-      <DividerView /><DividerView />
+      <DividerView />
       <GoogleLoginButton />
       <FacebookLoginButton />
       <InstagramLoginButton />
