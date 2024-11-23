@@ -1,15 +1,16 @@
 import { useState } from 'react';
-import { View } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Layout } from "@/constants/Layout";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
-import ShareJamButton from "../button/ShareJamButton";
-import ViewMyJamsButton from "../button/ViewMyJamsButton";
-import ListView from "./ListView";
+import IconView from '../view/IconView';
+import TextView from '../view/TextView';
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
+import ShareJamButton from "../button/ShareJamButton";
+import ViewMyJamsButton from "../button/ViewMyJamsButton";
 
 const SaveJamView = () => {
   const [entity, setEntity] = useState<any>(null);
@@ -47,14 +48,33 @@ const SaveJamView = () => {
           name: 'SaveJamView',
         })}
       />
-      <View style={Layout.borderedListContainer}>
-        <ListView
-          data={data}
-          renderItem={(row: any) => data[row.index]}
-        />
+
+      <View style={styles.listContainer}>
+        {/* Share jam */}
+        <TouchableOpacity 
+          style={styles.listItem}
+          onPress={() => ScreenManager.toggleModal({
+            name: 'SaveJamView',
+            entityId: entityId, 
+          })} 
+        >
+          <BoxView direction="row" align="center" justify="flex-start">
+            <IconView name="share" theme="tertiary" />
+            <TextView>{i18n.t('Save Jam')}</TextView>
+          </BoxView>
+        </TouchableOpacity>
+
       </View>
     </BoxView>
   );
 };
+
+const styles = StyleSheet.create({
+  listContainer: Layout.borderedListContainer,
+  listItem: {
+    marginBottom: Layout.space.base,
+  }, 
+});
+
 
 export default SaveJamView;
