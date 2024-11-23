@@ -33,7 +33,9 @@ const SignupScreen = () => {
   const submitForm = async () => {
     UserManager.register(signupData).then((success: boolean) => {
       setIsProcessing(false);
-      success === true ? router.replace('/jams') : ScreenManager.showMessage(i18n.t('The data is invalid. Please check and try again.'));
+      success === true 
+        ? router.replace('/jams') 
+        : ScreenManager.showMessage(i18n.t('The data is invalid. Please check and try again.'));
     });
   }  
 
