@@ -63,6 +63,7 @@ const SignupScreen = () => {
         value={signupData?.email}
         onChangeText={(value: string) => updateField('email', value)}
       />
+
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Password')} 
@@ -96,7 +97,8 @@ const SignupScreen = () => {
 
       <SectorsField 
         value={signupData?.profile?.sector_ids}
-        onChangeValue={(option: any) => console.log(option)}
+        onChangeListValue={(option: any) => console.log(option)}
+        onChangeSublistValue={(option: any) => console.log(option)}
       />
 
       <DividerView />
