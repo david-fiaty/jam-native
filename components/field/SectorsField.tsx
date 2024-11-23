@@ -37,8 +37,19 @@ const SectorsField = ({value}: Props) => {
 
   return (
     <BoxView direction="column" align="center" style={styles.container}>
-      <SelectListBase data={mainIndustries} placeholder={i18n.t('Industries')} />
-      <SelectListBase data={subIndustries} placeholder={i18n.t('Sub industries')} />
+
+      <SelectListBase 
+        data={mainIndustries} 
+        placeholder={i18n.t('Industries')} 
+        onChangeValue={(option: any) => console.log(option)}
+      />
+
+      <SelectListBase 
+        data={subIndustries} 
+        placeholder={i18n.t('Sub industries')} 
+        onChangeValue={(option: any) => console.log(option)}
+      />
+
     </BoxView>
   );
 };
