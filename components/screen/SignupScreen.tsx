@@ -92,7 +92,9 @@ const SignupScreen = () => {
       
       <CountryField />
 
-      <SectorsField />
+      <SectorsField 
+        value={signupData?.profile?.sector_ids}
+      />
 
       <DividerView />
 
