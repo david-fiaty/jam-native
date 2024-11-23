@@ -20,22 +20,15 @@ import ScreenManager from '@/manager/ScreenManager';
 
 const SignupScreen = () => {
   const router = useRouter();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [signupData, setSignupData] = useState<any>({});
   const [isProcessing, setIsProcessing] = useState(false);
+  
 
   const submitForm = async () => {
-    // Todo - Connect username and password
-    let data: any = [];
-    let success: boolean = await UserManager.register(data);
-    setIsProcessing(false);
-
-    if (success) { 
-      router.replace('/jams');
-    }
-    else {
-      ScreenManager.showMessage(i18n.t('Invalid registration data submitted. Please check and try again.'));
-    }
+    UserManager.register(signupData).then((success: boolean) => {
+      setIsProcessing(false);
+      success === true ? router.replace('/jams') : ScreenManager.showMessage(i18n.t('The data is invalid. Please check and try again.'));
+    });
   }  
 
   return (
