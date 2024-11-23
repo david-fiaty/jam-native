@@ -35,7 +35,9 @@ const LoginScreen = () => {
 
     UserManager.login(loginData).then((success: boolean) => {
       setIsProcessing(false);
-      success === true ? router.replace('/jams') : ScreenManager.showMessage(i18n.t('Invalid user name or password.'));
+      success === true 
+        ? router.replace('/jams') 
+        : ScreenManager.showMessage(i18n.t('Invalid user name or password.'));
     });
   }  
 
