@@ -23,6 +23,7 @@ import UserManager from '@/manager/UserManager';
 import StaticData from '@/constants/StaticData';
 import DatePickerField from '../field/DatePickerField';
 import DataManager from '@/manager/DataManager';
+import LocationTypeField from '../field/LocationTypeField';
 
 const AddJamForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -89,6 +90,11 @@ const AddJamForm = () => {
         placeholder={i18n.t('Description')}
         value={jamData?.caption}
         onChangeText={(value: string) => updateField('caption', value)}
+      />
+
+      <LocationTypeField 
+        value={jamData?.location_type}
+        onChangeValue={(option: any) => updateField('location_type', option.value)} 
       />
 
       <DatePickerField 
