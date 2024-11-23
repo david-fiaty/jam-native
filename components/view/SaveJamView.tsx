@@ -25,7 +25,7 @@ const SaveJamView = () => {
 
   if (!isSaved) {
     EntityManager.saveJam(entityId).then((success: boolean) => {
-      console.log(success);
+      setIsSaved(success);
     });
   }
 
