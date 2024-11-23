@@ -9,10 +9,11 @@ import EntityManager from '@/manager/EntityManager';
 
 type Props = BaseProps & {
   value?: any,
-  onChangeValue?: (option: any) => void,
+  onChangeListValue?: (option: any) => void,
+  onChangeSublistValue?: (option: any) => void,
 };
 
-const SectorsField = ({value, onChangeValue}: Props) => {
+const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [mainIndustries, setMainIndustries] = useState<any>([]);
   const [subIndustries, setSubIndustries] = useState<any>([]);
@@ -26,8 +27,12 @@ const SectorsField = ({value, onChangeValue}: Props) => {
     });
   };
 
-  const onChange = (option: any) => {
-    if (onChangeValue) onChangeValue(option);
+  const onChangeList = (option: any) => {
+    if (onChangeListValue) onChangeListValue(option);
+  };
+
+  const onChangeSubList = (option: any) => {
+    if (onChangeSublistValue) onChangeSublistValue(option);
   };
 
   if (!mainIndustries?.length) {
@@ -46,13 +51,13 @@ const SectorsField = ({value, onChangeValue}: Props) => {
         value={value}
         data={mainIndustries} 
         placeholder={i18n.t('Industries')} 
-        onChangeValue={onChange}
+        onChangeValue={onChangeList}
       />
       <SelectListBase 
         value={value}
         data={subIndustries} 
         placeholder={i18n.t('Sub industries')} 
-        onChangeValue={onChange}
+        onChangeValue={onChangeSubList}
       />
     </BoxView>
   );
