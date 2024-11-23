@@ -86,10 +86,7 @@ const JamsList = () => {
           <IconView 
             name="share" 
             theme="tertiary" 
-            onPress={() => ScreenManager.toggleModal({
-              name: 'ShareJamView',
-              entityId: item?.id, 
-            })} 
+            onPress={() => EntityManager.shareJam(item?.id)} 
           />
         </BoxView> 
       </BoxView>

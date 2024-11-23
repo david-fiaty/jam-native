@@ -8,23 +8,9 @@ import IconView from '../view/IconView';
 import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
 import SpinnerView from "../view/SpinnerView";
-import ShareJamButton from "../button/ShareJamButton";
-import ReportJamButton from "../button/ReportJamButton";
-import DeleteJamButton from "../button/DeleteJamButton";
 import ScreenManager from "@/manager/ScreenManager";
 import UserManager from '@/manager/UserManager';
 import EntityManager from '@/manager/EntityManager';
-
-/*
-const data = [
-  <SaveJamButton style={Layout.listItem} />,
-  <ShareJamButton style={Layout.listItem} />,
-  
-  <EditJamButton style={Layout.listItem} />,
-  <ReportJamButton style={Layout.listItem} />,
-  <DeleteJamButton style={Layout.listItem} />,
-];
-*/
 
 const MoreJamView = () => {
   const router = useRouter();
