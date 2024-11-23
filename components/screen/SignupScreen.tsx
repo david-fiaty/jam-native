@@ -96,9 +96,16 @@ const SignupScreen = () => {
       />
 
       <SectorsField 
-        value={signupData?.profile?.sector_ids}
-        onChangeListValue={(option: any) => console.log(option)}
-        onChangeSublistValue={(option: any) => console.log(option)}
+        value={signupData?.profile?.sectors_ids}
+        onChangeListValue={(option: any) => {
+          let sectorsIds = [option.value];
+          updateField('profile', {...signupData?.profile || {}, ...{ sectors_ids: sectorsIds }}) 
+        }}
+        onChangeSublistValue={(option: any) => {
+          let sectorsIds = [...signupData?.profile?.sectors_ids || []];
+          sectorsIds[1] = option.value;
+          updateField('profile', {...signupData?.profile || {}, ...{ sectors_ids: sectorsIds }}) 
+        }}
       />
 
       <DividerView />
