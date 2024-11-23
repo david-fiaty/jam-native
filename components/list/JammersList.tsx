@@ -9,7 +9,6 @@ import IconView from "../view/IconView";
 import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
-import DataManager from "@/manager/DataManager";
 import EntityManager from '@/manager/EntityManager';
 
 const JammersList = () => {
@@ -24,7 +23,7 @@ const JammersList = () => {
   }
 
   if (!profiles) {
-    DataManager.get('profiles').then((items: any) => {
+    EntityManager.getProfiles().then((items: any) => {
       setProfiles(items);
     });
   }
