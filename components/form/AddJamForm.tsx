@@ -19,7 +19,7 @@ import ListView from '../view/ListView';
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
 import UserManager from '@/manager/UserManager';
-import Data from '@/constants/StaticData';
+import StaticData from '@/constants/StaticData';
 import DatePickerField from '../field/DatePickerField';
 import DataManager from '@/manager/DataManager';
 
@@ -28,7 +28,7 @@ const AddJamForm = () => {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [jamData, setJamData] = useState<any>({});
   const [profileId, setProfileId] = useState<number>(0);
-  const jamCategoriesData = Data.jamCategories;
+  const jamCategoriesData = StaticData.jamCategories;
 
   const updateField = (key: string, value: any) => {
     setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }});
