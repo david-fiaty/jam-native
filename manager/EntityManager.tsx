@@ -43,8 +43,7 @@ class EntityManager {
   async addJam(entityData: any) {
     let response = await DataManager.post('addJam', entityData);
 
-    return response;
-    //return !!response;
+    return !!response;
   }
 
 
