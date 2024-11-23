@@ -74,14 +74,18 @@ const SignupScreen = () => {
         onChangeText={(value: string) => updateField('password', value)}
       />
 
+      <DividerView />
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Profile name')} 
         value={signupData?.profile?.profile_name}
-        onChangeValue={(option: any) => updateField('profile', {...signupData?.profile || {}, ...{ profile_name: option.value }}) } 
+        onChangeText={(value: string) => updateField('profile', {...signupData?.profile || {}, ...{ profile_name: value }}) } 
       />
 
-      <ProfileTypeField />
+      <ProfileTypeField 
+        value={signupData?.profile?.profile_type}
+        onChangeValue={(option: any) => updateField('profile', {...signupData?.profile || {}, ...{ profile_type: option.value }}) } 
+      />
 
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
