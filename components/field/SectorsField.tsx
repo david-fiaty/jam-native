@@ -9,9 +9,10 @@ import EntityManager from '@/manager/EntityManager';
 
 type Props = BaseProps & {
   value?: any,
+  onChangeValue?: (option: any) => void,
 };
 
-const SectorsField = ({value}: Props) => {
+const SectorsField = ({value, onChangeValue}: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [mainIndustries, setMainIndustries] = useState<any>([]);
   const [subIndustries, setSubIndustries] = useState<any>([]);
@@ -23,6 +24,10 @@ const SectorsField = ({value}: Props) => {
         label: item?.name,
       }
     });
+  };
+
+  const onChange = (option: any) => {
+    if (onChangeValue) onChangeValue(option);
   };
 
   if (!mainIndustries?.length) {
@@ -38,16 +43,17 @@ const SectorsField = ({value}: Props) => {
   return (
     <BoxView direction="column" align="center" style={styles.container}>
       <SelectListBase 
+        value={value}
         data={mainIndustries} 
         placeholder={i18n.t('Industries')} 
-        onChangeValue={(option: any) => console.log(option)}
+        onChangeValue={onChange}
       />
       <SelectListBase 
+        value={value}
         data={subIndustries} 
         placeholder={i18n.t('Sub industries')} 
-        onChangeValue={(option: any) => console.log(option)}
+        onChangeValue={onChange}
       />
-
     </BoxView>
   );
 };
