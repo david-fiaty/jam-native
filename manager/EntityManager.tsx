@@ -6,6 +6,10 @@ class EntityManager {
     return await DataManager.find(key, 'id', idValues);
   }
 
+  async getJams() {
+    return await DataManager.get('jams'); 
+  }
+
   async getProfiles() {
     return await DataManager.get('profiles'); 
   }
