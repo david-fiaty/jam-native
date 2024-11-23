@@ -19,6 +19,7 @@ import SpinnerView from '../view/SpinnerView';
 import ScreenManager from '@/manager/ScreenManager';
 import DividerView from '../view/DividerView';
 import SectorsField from '../field/SectorsField';
+import ProfileTypeField from '../field/ProfileTypeField';
 
 const SignupScreen = () => {
   const router = useRouter();
@@ -78,6 +79,8 @@ const SignupScreen = () => {
         onChangeText={(value: string) => updateField('last_name', value)}
       />
 
+      <ProfileTypeField />
+      
       <SectorsField />
 
       <DividerView />
