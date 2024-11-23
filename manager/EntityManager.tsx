@@ -4,10 +4,6 @@ import DataManager from './DataManager';
 import UserManager from './UserManager';
 
 class EntityManager {
-  async find(key: keyof typeof Endpoints, idValues: any) {
-    return await DataManager.find(key, 'id', idValues);
-  }
-
   async report(entityId: any) {
     let profileId = await UserManager.getProfileId();
     let response = await DataManager.post('report', {
