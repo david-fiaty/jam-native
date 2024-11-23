@@ -18,6 +18,7 @@ const Endpoints = {
     dataKey: 'new_profiles_to_display',
   },
   sectors: {
+    url: '/sectors/',
     cacheable: true,
     searcheable: false,
     dataKey: null,
