@@ -41,6 +41,7 @@ const SavedJamAction = () => {
           name: 'SavedJamAction',
         })}
       />
+      
       <View style={styles.listContainer}>
         {/* Share jam */}
         <TouchableOpacity 
