@@ -50,7 +50,7 @@ const MoreJamView = () => {
           </BoxView>
         </TouchableOpacity>
 
-        {/* Save jam */}
+        {/* Share jam */}
         <TouchableOpacity 
           style={styles.listItem}
           onPress={() => isLoggedIn ? ScreenManager.toggleModal({
@@ -59,7 +59,7 @@ const MoreJamView = () => {
           }) : router.push('/login')} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
-            <IconView name="save" theme="tertiary" />
+            <IconView name="share" theme="tertiary" />
             <TextView>{i18n.t('Share Jam')}</TextView>
           </BoxView>
         </TouchableOpacity>
@@ -73,12 +73,12 @@ const MoreJamView = () => {
           }) : router.push('/login')} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
-            <IconView name="save" theme="tertiary" />
-            <TextView>{i18n.t('Add to project')}</TextView>
+            <IconView name="plus" theme="tertiary" />
+            <TextView>{i18n.t('Add Jam to project')}</TextView>
           </BoxView>
         </TouchableOpacity>
 
-        {/* Edit jam to project */}
+        {/* Edit jam */}
         <TouchableOpacity 
           style={styles.listItem}
           onPress={() => isLoggedIn ? ScreenManager.toggleModal({
@@ -87,7 +87,7 @@ const MoreJamView = () => {
           }) : router.push('/login')} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
-            <IconView name="save" theme="tertiary" />
+            <IconView name="edit" theme="tertiary" />
             <TextView>{i18n.t('Edit Jam')}</TextView>
           </BoxView>
         </TouchableOpacity>
@@ -101,8 +101,8 @@ const MoreJamView = () => {
           }) : router.push('/login')} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
-            <IconView name="save" theme="tertiary" />
-            <TextView>{i18n.t('Add Jam to project')}</TextView>
+            <IconView name="report" theme="tertiary" />
+            <TextView>{i18n.t('Report Jam')}</TextView>
           </BoxView>
         </TouchableOpacity>
 
@@ -115,7 +115,7 @@ const MoreJamView = () => {
           }) : router.push('/login')} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
-            <IconView name="save" theme="tertiary" />
+            <IconView name="delete" theme="tertiary" />
             <TextView>{i18n.t('Delete Jam')}</TextView>
           </BoxView>
         </TouchableOpacity>
