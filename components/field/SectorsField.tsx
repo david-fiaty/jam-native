@@ -9,16 +9,20 @@ import EntityManager from '@/manager/EntityManager';
 
 type Props = BaseProps & {
   value?: any,
-  onChangeValue?: (option: any) => void,
+  onChangeListValue?: (option: any) => void,
+  onChangeSublistValue?: (option: any) => void,
 };
 
-const SectorsField = ({value, onChangeValue}: Props) => {
+const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [mainIndustries, setMainIndustries] = useState<any>([]);
-  const [subIndustries, setSubIndustries] = useState<any>([]);
-
-  const buildOptions = (optionsData: any) => {
-    return optionsData.map((item: any) => {
+  const [rawData, setRawData] = useState<any>([]);
+  const [listData, setListData] = useState<any>([]);
+  const [sublistData, setSublistData] = useState<any>([]);
+  const [selectedListOption, setSelectedListOption] = useState<any>({});
+  const [selectedSublistOption, setSelectedSublistOption] = useState<any>({});
+  
+  const buildOptions = (optionsData: any) => {    
+    return [...(optionsData || [])].map((item: any) => {
       return {
         value: item?.id,
         label: item?.name,
@@ -26,14 +30,22 @@ const SectorsField = ({value, onChangeValue}: Props) => {
     });
   };
 
-  const onChange = (option: any) => {
-    if (onChangeValue) onChangeValue(option);
+  const onChangeList = (option: any) => {
+    setSelectedListOption(option);
+    setSublistData(buildOptions(rawData.find((item: any) => item?.id == option?.value)?.sub_sectors));
+    if (onChangeListValue) onChangeListValue(option);
   };
 
-  if (!mainIndustries?.length) {
+  const onChangeSublist = (option: any) => {
+    setSelectedSublistOption(option);
+    if (onChangeSublistValue) onChangeSublistValue(option);
+  };
+
+  if (!rawData?.length) {
     EntityManager.getSectors().then((data: any) => {
-      setMainIndustries(buildOptions(data));
-      setSubIndustries([]);
+      setRawData(data);
+      setListData(buildOptions(data));
+      setSublistData([]);
       setIsLoaded(true);
     });
   }
@@ -43,16 +55,16 @@ const SectorsField = ({value, onChangeValue}: Props) => {
   return (
     <BoxView direction="column" align="center" style={styles.container}>
       <SelectListBase 
-        value={value}
-        data={mainIndustries} 
+        value={selectedSublistOption}
+        data={listData} 
         placeholder={i18n.t('Industries')} 
-        onChangeValue={onChange}
+        onChangeValue={onChangeList}
       />
       <SelectListBase 
         value={value}
-        data={subIndustries} 
+        data={sublistData} 
         placeholder={i18n.t('Sub industries')} 
-        onChangeValue={onChange}
+        onChangeValue={onChangeSublist}
       />
     </BoxView>
   );
