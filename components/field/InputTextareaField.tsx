@@ -10,9 +10,10 @@ type Props = BaseProps & {
   placeholder?: string,
   containerStyle?: object,
   disabled?: boolean, 
+  onChangeText?: () => void;
 };
 
-const InputTextareaField = ({value, placeholder, containerStyle, disabled}: Props) => {
+const InputTextareaField = ({value, placeholder, containerStyle, disabled, onChangeText}: Props) => {
   return (
     <BoxView style={styles.container}>
       <Input
@@ -25,6 +26,7 @@ const InputTextareaField = ({value, placeholder, containerStyle, disabled}: Prop
         numberOfLines={10}
         editable={!disabled}
         value={value}
+        onChangeText={onChangeText}
       />
     </BoxView>
   );
