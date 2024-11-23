@@ -35,8 +35,8 @@ const StaticData = {
   ],
   jamCategories: [
     {
-      id: 'calls',
-      label: i18n.t('Calls'),
+      id: 'call',
+      label: i18n.t('Call'),
       icon: 'megaphone',
     },
     {
@@ -45,8 +45,8 @@ const StaticData = {
       icon: 'link',
     },
     {
-      id: 'events',
-      label: i18n.t('Events'),
+      id: 'event',
+      label: i18n.t('Event'),
       icon: 'users',
     },
     {

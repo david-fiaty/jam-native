@@ -64,6 +64,12 @@ const Endpoints = {
     searcheable: false,
     dataKey: null,
   },
+  addJam: {
+    url: '/jams/',
+    cacheable: false,
+    searcheable: false,
+    dataKey: null,
+  },
 };
 
 export default Endpoints;

@@ -22,8 +22,8 @@ import InputTextareaField from "../field/InputTextareaField";
 import UserManager from '@/manager/UserManager';
 import StaticData from '@/constants/StaticData';
 import DatePickerField from '../field/DatePickerField';
-import DataManager from '@/manager/DataManager';
 import LocationTypeField from '../field/LocationTypeField';
+import EntityManager from '@/manager/EntityManager';
 
 const AddJamForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -33,11 +33,17 @@ const AddJamForm = () => {
   const jamCategoriesData = StaticData.jamCategories;
 
   const updateField = (key: string, value: any) => {
-    setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }});
+    setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }, ...{
+      // Todo - Handle user location
+      geolocation_latitude: 9, 
+      geolocation_longitude: 2,
+    }});
   };
 
-  const submitForm = async () => {    
-    let result = await DataManager.post('jams', jamData);
+  const submitForm = async () => {  
+    
+    console.log(jamData);
+    let result = await EntityManager.addJam(jamData);
 
     console.log(result);
     setIsProcessing(false);
@@ -92,7 +98,7 @@ const AddJamForm = () => {
         value={jamData?.caption}
         onChangeText={(value: string) => updateField('caption', value)}
       />
-      
+
       <LocationTypeField 
         value={jamData?.location_type}
         onChangeValue={(option: any) => updateField('location_type', option.value)} 
