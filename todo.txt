@@ -56,6 +56,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
   - Feeds/list endpoints (profiles, jams, projects) : need multiple items retrieval by ID => perf issue
   - Profile endpoint: need to return saved jams, liked jams, saved projects, liked projects => perf issue
   - Data endpoints: need to accept language as parameter
+  - Copy Jam link cannot be implemented (missing URL in payload, maybe irrelevant on native)
 
 # API remarks
   * Jams list sectors field: should not have language in the payload / language should be a request parameter
