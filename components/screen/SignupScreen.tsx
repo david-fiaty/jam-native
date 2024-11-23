@@ -18,6 +18,7 @@ import ButtonView from '../view/ButtonView';
 import SpinnerView from '../view/SpinnerView';
 import ScreenManager from '@/manager/ScreenManager';
 import DividerView from '../view/DividerView';
+import SectorsField from '../field/SectorsField';
 
 const SignupScreen = () => {
   const router = useRouter();
@@ -62,6 +63,8 @@ const SignupScreen = () => {
         value={signupData?.password}
         onChangeText={(value: string) => updateField('password', value)}
       />
+
+      <SectorsField />
 
       <DividerView />
 
