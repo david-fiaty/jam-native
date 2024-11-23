@@ -89,7 +89,6 @@ const SignupScreen = () => {
         onChangeText={(value: string) => updateField('last_name', value)}
       />
 
-      
       <CountryField 
         value={signupData?.profile?.sector_ids}
         onChangeValue={(option: any) => console.log(option)}
