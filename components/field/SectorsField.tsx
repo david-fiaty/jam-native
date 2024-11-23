@@ -27,7 +27,6 @@ const SectorsField = ({value, onChangeValue}: Props) => {
   };
 
   const onChange = (option: any) => {
-    console.log(option);
     if (onChangeValue) onChangeValue(option);
   };
 
