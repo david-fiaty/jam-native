@@ -20,17 +20,17 @@ import DividerView from '../view/DividerView';
 
 const LoginScreen = () => {
   const router = useRouter();
-  const [username, setUsername] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [isProcessing, setIsProcessing] = useState(false);
 
   const submitForm = async () => {
     // Todo - Connect username and password
     let loginData = {
-      //email: email,
-      //password: password,
-      email: 'mitsiomotu@yopmail.com',
-      password: 'Password1234',
+      email: email,
+      password: password,
+      //email: 'mitsiomotu@yopmail.com',
+      //password: 'Password1234',
     }
 
     UserManager.login(loginData).then((success: boolean) => {
@@ -51,7 +51,7 @@ const LoginScreen = () => {
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Email address')} 
-        onChangeText={(text: string) => setUsername(text)}
+        onChangeText={(text: string) => setEmail(text)}
       />
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
