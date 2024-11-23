@@ -10,6 +10,7 @@ import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import DataManager from "@/manager/DataManager";
 import ScreenManager from "@/manager/ScreenManager";
+import EntityManager from '@/manager/EntityManager';
 
 const HostsList = () => {
   const [profiles, setProfiles] = useState<any>(null);
@@ -17,7 +18,7 @@ const HostsList = () => {
   const entityId = ScreenManager.getActiveScreen()?.entityId;
 
   if (!entity) {
-    DataManager.find('jams', 'id', entityId).then((item: any) => {
+    EntityManager.find('jams', entityId).then((item: any) => {
       setEntity(item);
     });
   }
