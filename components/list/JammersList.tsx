@@ -43,9 +43,7 @@ const JammersList = () => {
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Jammers')}
-        onPress={() => ScreenManager.toggleModal({
-          name: 'JammersList',
-        })}
+        onPress={() => ScreenManager.toggleModal({ name: 'JammersList' })}
       />
       
       <View style={Layout.borderedListContainer}>
