@@ -9,7 +9,6 @@ import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
 import SpinnerView from "../view/SpinnerView";
 import ShareJamButton from "../button/ShareJamButton";
-import EditJamButton from "../button/EditJamButton";
 import ReportJamButton from "../button/ReportJamButton";
 import DeleteJamButton from "../button/DeleteJamButton";
 import ListView from "./ListView";
@@ -21,8 +20,7 @@ import EntityManager from '@/manager/EntityManager';
 const data = [
   <SaveJamButton style={Layout.listItem} />,
   <ShareJamButton style={Layout.listItem} />,
-  <AddToProjectButton style={Layout.listItem} />,
-  <ViewProjectButton style={Layout.listItem} />,
+  
   <EditJamButton style={Layout.listItem} />,
   <ReportJamButton style={Layout.listItem} />,
   <DeleteJamButton style={Layout.listItem} />,
@@ -92,6 +90,20 @@ const MoreJamView = () => {
           <BoxView direction="row" align="center" justify="flex-start">
             <IconView name="save" theme="tertiary" />
             <TextView>{i18n.t('Add to project')}</TextView>
+          </BoxView>
+        </TouchableOpacity>
+
+        {/* Edit jam to project */}
+        <TouchableOpacity 
+          style={styles.listItem}
+          onPress={() => isLoggedIn ? ScreenManager.toggleModal({
+            name: 'SaveJamView',
+            entityId: entityId, 
+          }) : router.push('/login')} 
+        >
+          <BoxView direction="row" align="center" justify="flex-start">
+            <IconView name="save" theme="tertiary" />
+            <TextView>{i18n.t('Edit Jam')}</TextView>
           </BoxView>
         </TouchableOpacity>
 
