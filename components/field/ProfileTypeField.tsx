@@ -14,7 +14,10 @@ const ProfileTypeField = ({value}: Props) => {
   
   return (
     <BoxView direction="column" align="center" style={styles.container}>
-      <SelectListBase data={profileTypes} placeholder={i18n.t('Profile type')} />
+      <SelectListBase 
+        data={profileTypes} 
+        placeholder={i18n.t('Profile type')} 
+      />
     </BoxView>
   );
 };
