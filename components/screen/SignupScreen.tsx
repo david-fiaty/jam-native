@@ -27,7 +27,7 @@ const SignupScreen = () => {
   const submitForm = async () => {
     // Todo - Connect username and password
     let data: any = [];
-    let success: boolean = await UserManager.signup(data);
+    let success: boolean = await UserManager.register(data);
     setIsProcessing(false);
 
     if (success) { 

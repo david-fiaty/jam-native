@@ -10,7 +10,7 @@ import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
 
-const SaveJamView = () => {
+const SavedJamAction = () => {
   const [entity, setEntity] = useState<any>(null);
   const [isSaved, setIsSaved] = useState<boolean>(false);
   const entityId = ScreenManager.getActiveScreen()?.entityId;
@@ -31,14 +31,14 @@ const SaveJamView = () => {
 
   const title = (entity && isSaved) 
     ? i18n.t('Jam is now saved to your jams') 
-    : i18n.t('Jam not saved, please try again'); 
+    : i18n.t('Save action failed. Please try again'); 
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={title}
         onPress={() => ScreenManager.toggleModal({
-          name: 'SaveJamView',
+          name: 'SavedJamAction',
         })}
       />
 
@@ -58,7 +58,7 @@ const SaveJamView = () => {
         <TouchableOpacity 
           style={styles.listItem}
           onPress={() => ScreenManager.toggleModal({
-            name: 'SaveJamView',
+            name: 'SavedJamAction',
             entityId: entityId, 
           })} 
         >
@@ -80,5 +80,4 @@ const styles = StyleSheet.create({
   }, 
 });
 
-
-export default SaveJamView;
+export default SavedJamAction;

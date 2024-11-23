@@ -8,6 +8,21 @@ class EntityManager {
     return await DataManager.find(key, 'id', idValues);
   }
 
+  async report(entityId: any) {
+    let profileId = await UserManager.getProfileId();
+    let response = await DataManager.post('report', {
+      profile_id: profileId,
+      item_id: entityId,
+      like_action: 'like',
+    });
+
+    return !!response;
+  }
+
+  async getProfiles() {
+    return await DataManager.get('profiles'); 
+  }
+
   async getJams() {
     return await DataManager.get('jams'); 
   }
@@ -21,6 +36,17 @@ class EntityManager {
     let response = await DataManager.post('saveJam', {
       profile_id: profileId,
       save_items_ids: [entityId],
+    });
+
+    return !!response;
+  }
+
+  async likeJam(entityId: any) {
+    let profileId = await UserManager.getProfileId();
+    let response = await DataManager.post('likeJam', {
+      profile_id: profileId,
+      item_id: entityId,
+      like_action: 'like',
     });
 
     return !!response;
@@ -44,10 +70,6 @@ class EntityManager {
     } catch (error) {
       console.log(error);
     }
-  }
-
-  async getProfiles() {
-    return await DataManager.get('profiles'); 
   }
 };
 

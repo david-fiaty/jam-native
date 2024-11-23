@@ -11,6 +11,11 @@ eas build -p android --clear-cache --profile preview
 # Run
 npm start --tunnel
 
+# Modal action confirm
+https://reactnative.dev/docs/alert
+https://github.com/jeremybarbet/react-native-modalize
+https://chatgpt.com/share/6741e3c7-c5d4-8003-bfbb-ce5710095aea
+
 # Screen animation
 https://iamshadi.medium.com/re-creating-the-wolts-smooth-page-transition-with-expo-router-in-react-native-0b34541452db
 
@@ -57,6 +62,10 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
   - Profile endpoint: need to return saved jams, liked jams, saved projects, liked projects => perf issue
   - Data endpoints: need to accept language as parameter
   - Copy Jam link cannot be implemented (missing URL in payload, maybe irrelevant on native)
+  - Errors with jam images having double extension .jpg.png or .png.png => error handling is additional performance load
+  - Report item: endpoint is asking for reporting_profile_id, but systematically returns error "reporting_user_id field missing"
+  - Missing delete endpoints for projects and jams
+  - Missing endpoint for add jam to project
 
 # API remarks
   * Jams list sectors field: should not have language in the payload / language should be a request parameter

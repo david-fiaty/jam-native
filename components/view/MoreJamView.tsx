@@ -35,13 +35,27 @@ const MoreJamView = () => {
         <TouchableOpacity 
           style={styles.listItem}
           onPress={() => ScreenManager.toggleModal({
-            name: 'SaveJamView',
+            name: 'SavedJamAction',
             entityId: entityId, 
           })} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
             <IconView name="save" theme="tertiary" />
             <TextView>{i18n.t('Save Jam')}</TextView>
+          </BoxView>
+        </TouchableOpacity>
+
+        {/* Like jam */}
+        <TouchableOpacity 
+          style={styles.listItem}
+          onPress={() => ScreenManager.toggleModal({
+            name: 'LikedJamAction',
+            entityId: entityId, 
+          })} 
+        >
+          <BoxView direction="row" align="center" justify="flex-start">
+            <IconView name="share" theme="tertiary" />
+            <TextView>{i18n.t('Like Jam')}</TextView>
           </BoxView>
         </TouchableOpacity>
 
@@ -60,7 +74,7 @@ const MoreJamView = () => {
         <TouchableOpacity 
           style={styles.listItem}
           onPress={() => ScreenManager.toggleModal({
-            name: 'SaveJamView',
+            name: 'SavedJamAction',
             entityId: entityId, 
           })} 
         >
@@ -74,7 +88,7 @@ const MoreJamView = () => {
         <TouchableOpacity 
           style={styles.listItem}
           onPress={() => ScreenManager.toggleModal({
-            name: 'SaveJamView',
+            name: 'SavedJamAction',
             entityId: entityId, 
           })} 
         >
@@ -88,7 +102,7 @@ const MoreJamView = () => {
         <TouchableOpacity 
           style={styles.listItem}
           onPress={() => ScreenManager.toggleModal({
-            name: 'SaveJamView',
+            name: 'SavedJamAction',
             entityId: entityId, 
           })} 
         >
@@ -102,7 +116,7 @@ const MoreJamView = () => {
         <TouchableOpacity 
           style={styles.listItem}
           onPress={() => ScreenManager.toggleModal({
-            name: 'SaveJamView',
+            name: 'SavedJamAction',
             entityId: entityId, 
           })} 
         >
