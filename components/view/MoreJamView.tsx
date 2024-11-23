@@ -62,7 +62,7 @@ const MoreJamView = () => {
         <TouchableOpacity 
           onPress={() => isLoggedIn ? ScreenManager.toggleModal({
             name: 'SaveJamView',
-            entityId: item?.id, 
+            entityId: entityId, 
           }) : router.push('/login')} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
