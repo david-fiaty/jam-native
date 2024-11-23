@@ -8,7 +8,7 @@ import BackButton from "../button/BackButton";
 import AddMediaField from "../field/AddMediaField";
 import AddCollaboratorsField from "../field/AddCollaboratorsField";
 import LocationPickerField from "../field/LocationPickerField";
-import IndustryField from "../field/IndustryField";
+import SectorsField from "../field/SectorsField";
 import DividerView from "../view/DividerView";
 import SpinnerView from '../view/SpinnerView';
 import ScreenManager from '@/manager/ScreenManager';
@@ -100,7 +100,7 @@ const AddJamForm = () => {
       />
 
       <LocationPickerField />
-      <IndustryField />
+      <SectorsField />
 
       <DividerView />
       <AddMediaField />

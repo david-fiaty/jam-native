@@ -4,7 +4,7 @@ import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
 import LocationPickerField from "../field/LocationPickerField";
-import IndustryField from "../field/IndustryField";
+import SectorsField from "../field/SectorsField";
 import DividerView from "../view/DividerView";
 import InputTextField from "../field/InputTextField";
 import CountryField from "../field/CountryField";
@@ -79,7 +79,7 @@ const ProfileForm = () => {
         longitude={profileData?.geolocation_longitude} 
       />
 
-      <IndustryField value={profileData?.sectors} />
+      <SectorsField value={profileData?.sectors} />
 
       <CountryField value={profileData?.country} />
 
