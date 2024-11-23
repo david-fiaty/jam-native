@@ -31,7 +31,7 @@ const SavedJamView = () => {
 
   const title = (entity && isSaved) 
     ? i18n.t('Jam is now saved to your jams') 
-    : i18n.t('Jam not saved, please try again'); 
+    : i18n.t('Save action failed. Please try again'); 
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
