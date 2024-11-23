@@ -20,6 +20,7 @@ import ScreenManager from '@/manager/ScreenManager';
 import DividerView from '../view/DividerView';
 import SectorsField from '../field/SectorsField';
 import ProfileTypeField from '../field/ProfileTypeField';
+import CountryField from '../field/CountryField';
 
 const SignupScreen = () => {
   const router = useRouter();
@@ -65,6 +66,8 @@ const SignupScreen = () => {
         onChangeText={(value: string) => updateField('password', value)}
       />
 
+      <ProfileTypeField />
+
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('First name')} 
@@ -79,8 +82,9 @@ const SignupScreen = () => {
         onChangeText={(value: string) => updateField('last_name', value)}
       />
 
-      <ProfileTypeField />
-
+      
+      <CountryField />
+      
       <SectorsField />
 
       <DividerView />
