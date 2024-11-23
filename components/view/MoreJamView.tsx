@@ -11,7 +11,6 @@ import SpinnerView from "../view/SpinnerView";
 import ShareJamButton from "../button/ShareJamButton";
 import ReportJamButton from "../button/ReportJamButton";
 import DeleteJamButton from "../button/DeleteJamButton";
-import ListView from "./ListView";
 import ScreenManager from "@/manager/ScreenManager";
 import UserManager from '@/manager/UserManager';
 import EntityManager from '@/manager/EntityManager';
