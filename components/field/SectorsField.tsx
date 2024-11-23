@@ -35,7 +35,6 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
     if (onChangeSublistValue) onChangeSublistValue(option);
   };
 
-
   if (!mainIndustries?.length) {
     EntityManager.getSectors().then((data: any) => {
       setMainIndustries(buildOptions(data));
