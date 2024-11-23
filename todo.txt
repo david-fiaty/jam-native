@@ -53,8 +53,9 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Notifications count: show total or less than total?
 
 # Issues
-  - Feeds/list endpoints : need item retrieval by ID => perf issue
-  - Profile endpoint: need too return saved jams, liked jams, saved projects, liked projects
+  - Feeds/list endpoints (profiles, jams, projects) : need multiple items retrieval by ID => perf issue
+  - Profile endpoint: need to return saved jams, liked jams, saved projects, liked projects => perf issue
+
 
 # API remarks
   * Jams list sectors field: should not have language in the payload / language should be a request parameter
