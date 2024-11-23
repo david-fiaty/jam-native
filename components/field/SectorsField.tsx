@@ -16,14 +16,14 @@ type Props = BaseProps & {
 const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedListOption, setSelectedListOption] = useState<any>(null);
-  const [selectedSublistValue, setSelectedSublistValue] = useState<any>(null);
+  const [selectedSublistOption, setSelectedSublistOption] = useState<any>(null);
   const [rawData, setRawData] = useState<any>([]);
   const [listData, setListData] = useState<any>([]);
   const [sublistData, setSublistData] = useState<any>([]);
   
-  const buildOptions = (data: any) => {
-    const optionsData = {...data};
-    
+  const buildOptions = (optionsData: any) => {    
+    optionsData = optionsData || [];
+
     return optionsData.map((item: any) => {
       return {
         value: item?.id,
@@ -33,24 +33,8 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
   };
 
   const filterSublist = () => {
-    //console.log('---', selectedListOption, selectedSublistValue);
-
-    //console.log('selectedListOption', selectedListOption);
-    //console.log('listData', listData);
-    
-
-    const filteredData = listData.find((item: any) => {
-      
-      /*
-      if (item?.value == selectedListOption?.value) {
-        return item?.sub_sectors;
-      }
-        */
-    });
-
-    //console.log(filteredData);
-
-
+    let selectedListOptionData = rawData.find((item: any) => item?.id == selectedListOption?.value);
+    setSublistData(buildOptions(selectedListOptionData?.sub_sectors));
   };
 
   const onChangeList = (option: any) => {
@@ -60,7 +44,7 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
   };
 
   const onChangeSubList = (option: any) => {
-    setSelectedSublistValue(option);
+    setSelectedSublistOption(option);
     if (onChangeSublistValue) onChangeSublistValue(option);
   };
 
@@ -77,7 +61,7 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
   return (
     <BoxView direction="column" align="center" style={styles.container}>
       <SelectListBase 
-        value={value}
+        value={selectedSublistOption}
         data={listData} 
         placeholder={i18n.t('Industries')} 
         onChangeValue={onChangeList}
