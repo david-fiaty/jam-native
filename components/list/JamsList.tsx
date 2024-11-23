@@ -86,10 +86,7 @@ const JamsList = () => {
           <IconView 
             name="share" 
             theme="tertiary" 
-            onPress={() => ScreenManager.toggleModal({
-              name: 'ShareJamView',
-              entityId: item?.id, 
-            })} 
+            onPress={() => isLoggedIn ? EntityManager.shareJam(item?.id) : router.push('/login')} 
           />
         </BoxView> 
       </BoxView>

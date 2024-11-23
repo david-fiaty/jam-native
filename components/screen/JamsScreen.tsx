@@ -20,7 +20,6 @@ import ProfileForm from "@/components/form/ProfileForm";
 import JammersList from "@/components/list/JammersList";
 import HostsList from "@/components/list/HostsList";
 import SaveJamView from "@/components/view/SaveJamView";
-import ShareJamView from "@/components/view/ShareJamView";
 import MoreJamView from "@/components/view/MoreJamView";
 
 const screenComponents: any = {
@@ -34,7 +33,6 @@ const screenComponents: any = {
   JammersList: <JammersList />,
   HostsList: <HostsList />,
   SaveJamView: <SaveJamView />,
-  ShareJamView: <ShareJamView />,
   MoreJamView: <MoreJamView />,
 };
 
