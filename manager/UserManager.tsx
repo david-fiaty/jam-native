@@ -3,11 +3,8 @@ import Store from '@/redux/Store';
 import DataManager from './DataManager';
 
 class UserManager {
-  async login(email: string, password: string) {
-    let response = await DataManager.post('login', {
-      email: email,
-      password: password,
-    });
+  async login(data: any) {
+    let response = await DataManager.post('login', data);
 
     if (response?.tokens?.access_token?.length) {
       Store.dispatch(setTokenData(JSON.stringify(response.tokens)));
@@ -20,13 +17,7 @@ class UserManager {
   }
 
   async register(data: any) {
-    let response = await DataManager.post('register', data);
-
-    if (response) {
-      return true;
-    }
-    
-    return false;
+    let response = await DataManager.post('login', data);
   }
 
   async getUserData() {
