@@ -40,6 +40,14 @@ class EntityManager {
     return !!response;
   }
 
+  async addJam(entityData: any) {
+    let response = await DataManager.post('addJam', entityData);
+
+    return response;
+    //return !!response;
+  }
+
+
   async likeJam(entityId: any) {
     let profileId = await UserManager.getProfileId();
     let response = await DataManager.post('likeJam', {

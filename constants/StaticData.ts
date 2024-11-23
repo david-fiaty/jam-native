@@ -1,28 +1,6 @@
 import i18n from "@/translation/i18n";
 
 const StaticData = {
-  jamTypes: [
-    {
-      id: null,
-      label: i18n.t('Jam type'),
-    },
-    {
-      id: 'call',
-      label: i18n.t('Call'),
-    },
-    {
-      id: 'event',
-      label: i18n.t('Event'),
-    },
-    {
-      id: 'looking',
-      label: i18n.t('Looking'),
-    },
-    {
-      id: 'random',
-      label: i18n.t('Random'),
-    },
-  ],
   profileTypes: [
     {
       id: null,
@@ -57,8 +35,8 @@ const StaticData = {
   ],
   jamCategories: [
     {
-      id: 'calls',
-      label: i18n.t('Calls'),
+      id: 'call',
+      label: i18n.t('Call'),
       icon: 'megaphone',
     },
     {
@@ -67,8 +45,8 @@ const StaticData = {
       icon: 'link',
     },
     {
-      id: 'events',
-      label: i18n.t('Events'),
+      id: 'event',
+      label: i18n.t('Event'),
       icon: 'users',
     },
     {
