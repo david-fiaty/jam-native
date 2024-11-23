@@ -9,7 +9,6 @@ import ViewMyJamsButton from "../button/ViewMyJamsButton";
 import ListView from "./ListView";
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
-import DataManager from "@/manager/DataManager";
 import EntityManager from '@/manager/EntityManager';
 
 const SaveJamView = () => {
@@ -25,12 +24,9 @@ const SaveJamView = () => {
 
   if (!isSaved) {
     EntityManager.saveJam(entityId).then((success: boolean) => {
-      console.log(success);
+      setIsSaved(success);
     });
   }
-
-
-  console.log(entityId);
 
   const data = [
     <ShareJamButton style={Layout.listItem} />,
@@ -39,10 +35,14 @@ const SaveJamView = () => {
 
   if (!entity) return <SpinnerView />;
 
+  const title = (entity && isSaved) 
+    ? i18n.t('Jam is now saved to your jams') 
+    : i18n.t('Jam not saved, please try again'); 
+
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
-        title={i18n.t('Jam is now saved to your jams')}
+        title={title}
         onPress={() => ScreenManager.toggleModal({
           name: 'SaveJamView',
         })}
