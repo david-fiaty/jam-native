@@ -18,7 +18,7 @@ const SaveJamView = () => {
   const entityId = ScreenManager.getActiveScreen()?.entityId;
 
   if (!entity) {
-    EntityManager.find('jams', entityId).then((item: any) => {
+    EntityManager.findJam(entityId).then((item: any) => {
       setEntity(item);
     });
   }
