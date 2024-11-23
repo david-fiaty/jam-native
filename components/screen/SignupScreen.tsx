@@ -52,6 +52,13 @@ const SignupScreen = () => {
       <DividerView />
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
+        placeholder={i18n.t('User name')} 
+        value={signupData?.email}
+        onChangeText={(value: string) => updateField('username', value)}
+      />
+
+      <InputTextField 
+        containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Email address')} 
         value={signupData?.email}
         onChangeText={(value: string) => updateField('email', value)}
@@ -84,7 +91,7 @@ const SignupScreen = () => {
 
       
       <CountryField />
-      
+
       <SectorsField />
 
       <DividerView />
