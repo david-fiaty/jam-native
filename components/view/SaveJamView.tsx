@@ -10,6 +10,7 @@ import ListView from "./ListView";
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import DataManager from "@/manager/DataManager";
+import EntityManager from '@/manager/EntityManager';
 
 const SaveJamView = () => {
   const [entity, setEntity] = useState<any>(null);
@@ -17,7 +18,7 @@ const SaveJamView = () => {
   const entityId = ScreenManager.getActiveScreen()?.entityId;
 
   if (!entity) {
-    DataManager.find('jams', 'id', entityId).then((item: any) => {
+    EntityManager.find('jams', entityId).then((item: any) => {
       setEntity(item);
     });
   }
