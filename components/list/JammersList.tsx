@@ -9,7 +9,7 @@ import IconView from "../view/IconView";
 import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
-import DataManager from "@/manager/DataManager";
+import EntityManager from '@/manager/EntityManager';
 
 const JammersList = () => {
   const [profiles, setProfiles] = useState<any>(null);
@@ -17,13 +17,13 @@ const JammersList = () => {
   const entityId = ScreenManager.getActiveScreen()?.entityId;
 
   if (!entity) {
-    DataManager.find('jams', 'id', entityId).then((item: any) => {
+    EntityManager.find('jams', entityId).then((item: any) => {
       setEntity(item);
     });
   }
 
   if (!profiles) {
-    DataManager.get('profiles').then((items: any) => {
+    EntityManager.getProfiles().then((items: any) => {
       setProfiles(items);
     });
   }

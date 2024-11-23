@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { View } from "react-native";
 import { Layout } from "@/constants/Layout";
 import BackButton from "../button/BackButton";
@@ -6,13 +7,36 @@ import BoxView from "../view/BoxView";
 import ShareJamButton from "../button/ShareJamButton";
 import ViewMyJamsButton from "../button/ViewMyJamsButton";
 import ListView from "./ListView";
+import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
+import DataManager from "@/manager/DataManager";
 
 const SaveJamView = () => {
+  const [entity, setEntity] = useState<any>(null);
+  const [isSaved, setIsSaved] = useState<boolean>(false);
+  const entityId = ScreenManager.getActiveScreen()?.entityId;
+
+  if (!entity) {
+    DataManager.find('jams', 'id', entityId).then((item: any) => {
+      setEntity(item);
+    });
+  }
+
+  DataManager.post('saveJam', {
+    profile_id: 3,
+    save_items_ids: [entityId],
+  }).then((response: any) => {
+    console.log(response);
+  });
+
+  console.log(entityId);
+
   const data = [
     <ShareJamButton style={Layout.listItem} />,
     <ViewMyJamsButton style={Layout.listItem} />,
   ];
+
+  if (!entity) return <SpinnerView />;
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
