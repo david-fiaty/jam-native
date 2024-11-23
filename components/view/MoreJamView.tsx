@@ -52,9 +52,7 @@ const MoreJamView = () => {
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={i18n.t('More actions')}
-        onPress={() => ScreenManager.toggleModal({
-          name: 'MoreJamView',
-        })}
+        onPress={() => ScreenManager.toggleModal({ name: 'MoreJamView' })}
       />
       
       <View style={Layout.borderedListContainer}>
