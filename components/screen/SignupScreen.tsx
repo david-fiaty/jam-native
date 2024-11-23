@@ -23,7 +23,6 @@ const SignupScreen = () => {
   const [signupData, setSignupData] = useState<any>({});
   const [isProcessing, setIsProcessing] = useState(false);
   
-
   const submitForm = async () => {
     UserManager.register(signupData).then((success: boolean) => {
       setIsProcessing(false);
