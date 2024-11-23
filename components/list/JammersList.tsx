@@ -12,8 +12,8 @@ import ScreenManager from "@/manager/ScreenManager";
 import DataManager from "@/manager/DataManager";
 
 const JammersList = () => {
-  const [entity, setEntity] = useState<any>(null);
   const [profiles, setProfiles] = useState<any>(null);
+  const [entity, setEntity] = useState<any>(null);
   const entityId = ScreenManager.getActiveScreen()?.entityId;
 
   if (!entity) {
