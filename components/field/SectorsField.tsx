@@ -43,11 +43,13 @@ const SectorsField = ({value, onChangeValue}: Props) => {
   return (
     <BoxView direction="column" align="center" style={styles.container}>
       <SelectListBase 
+        value={value}
         data={mainIndustries} 
         placeholder={i18n.t('Industries')} 
         onChangeValue={onChange}
       />
       <SelectListBase 
+        value={value}
         data={subIndustries} 
         placeholder={i18n.t('Sub industries')} 
         onChangeValue={onChange}
