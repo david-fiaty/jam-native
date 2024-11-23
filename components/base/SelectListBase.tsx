@@ -6,48 +6,47 @@ import TextView from "../view/TextView";
 import { Layout } from "@/constants/Layout";
 
 type Props = {
+  value?: any, 
   data?: object,
   placeholder?: string,
+  onChangeValue?: (option: any) => void,
 };
 
-const SelectListBase = ({data, placeholder}: Props) => {
-  const [value, setValue] = useState(null);
-  const [isFocus, setIsFocus] = useState(false);
+const SelectListBase = ({value, data, placeholder, onChangeValue}: Props) => {
+  const [selectedValue, setSelectedValue] = useState<any>(null);
+  const [isFocus, setIsFocus] = useState<boolean>(false);
 
-  const renderLabel = () => {
-    if (value || isFocus) {
-      return (<></>);
-    }
-    return null;
-  };
+  if (value) selectedValue(value);
+
+  const onChange = ((option: any) => {
+    setSelectedValue(option.value);
+    setIsFocus(false);
+    if (onChangeValue) onChangeValue(option);
+  });
 
   return (
-    <View style={[styles.container]}>
-      {renderLabel()}
+    <View style={styles.container}>
       <Dropdown
-        style={[Layout.formField, styles.element]}
+        value={selectedValue}
+        data={data}
+        style={styles.element}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         iconStyle={styles.iconStyle}
         itemTextStyle={styles.itemTextStyle}
-        data={data}
         search={false}
         maxHeight={300}
         labelField="label"
         valueField="value"
         placeholder={placeholder}
         iconColor={Colors.primary}
-        value={value}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
-        onChange={(item) => {
-          setValue(item.value);
-          setIsFocus(false);
-        }}
-        renderItem={(item, selected) => {
+        onChange={onChange}
+        renderItem={(item: any, selected) => {
           return (
             <View style={styles.item}>
-              <TextView>{item.label}</TextView>
+              <TextView>{item?.label}</TextView>
             </View>
           );
         }}
@@ -61,7 +60,8 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   element: {
-    padding: Layout.space.base,
+    ...Layout.formField, 
+    ...{ padding: Layout.space.base },
   },
   item: {
     paddingVertical: Layout.space.base,
@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     color: Colors.primary,
     fontSize: Layout.fontSize.base,
   },
+  iconStyle: {},
 });
 
 export default SelectListBase;

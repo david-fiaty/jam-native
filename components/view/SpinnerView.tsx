@@ -10,7 +10,7 @@ type Props = {
 
 const SpinnerView = ({size, color}: Props) => {
   const spinnerSize: any = size || 'large';
-  const spinnerColor: string = Colors[color || 'primary'];
+  const spinnerColor: any = color ? Colors[color] : Colors['primary'];
 
   return (
     <View style={styles.container}>
