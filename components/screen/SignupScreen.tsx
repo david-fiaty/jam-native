@@ -64,6 +64,20 @@ const SignupScreen = () => {
         onChangeText={(value: string) => updateField('password', value)}
       />
 
+      <InputTextField 
+        containerStyle={styles.inputTextFieldContainer}
+        placeholder={i18n.t('First name')} 
+        value={signupData?.email}
+        onChangeText={(value: string) => updateField('first_name', value)}
+      />
+
+      <InputTextField 
+        containerStyle={styles.inputTextFieldContainer}
+        placeholder={i18n.t('Last name')} 
+        value={signupData?.email}
+        onChangeText={(value: string) => updateField('last_name', value)}
+      />
+
       <SectorsField />
 
       <DividerView />
