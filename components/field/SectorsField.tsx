@@ -15,15 +15,13 @@ type Props = BaseProps & {
 
 const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [selectedListOption, setSelectedListOption] = useState<any>(null);
-  const [selectedSublistOption, setSelectedSublistOption] = useState<any>(null);
   const [rawData, setRawData] = useState<any>([]);
   const [listData, setListData] = useState<any>([]);
   const [sublistData, setSublistData] = useState<any>([]);
+  const [selectedListOption, setSelectedListOption] = useState<any>({});
+  const [selectedSublistOption, setSelectedSublistOption] = useState<any>({});
   
   const buildOptions = (optionsData: any) => {    
-    optionsData = optionsData || [];
-
     return optionsData.map((item: any) => {
       return {
         value: item?.id,
@@ -32,15 +30,15 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
     });
   };
 
-  const filterSublist = () => {
-    let selectedListOptionData = rawData.find((item: any) => item?.id == selectedListOption?.value);
-    setSublistData(buildOptions(selectedListOptionData?.sub_sectors));
-  };
-
   const onChangeList = (option: any) => {
     setSelectedListOption(option);
     filterSublist();
     if (onChangeListValue) onChangeListValue(option);
+  };
+
+  const filterSublist = () => {
+    let selectedListOptionData = rawData.find((item: any) => item?.id == selectedListOption?.value);
+    setSublistData(buildOptions(selectedListOptionData?.sub_sectors));
   };
 
   const onChangeSubList = (option: any) => {
@@ -52,6 +50,7 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
     EntityManager.getSectors().then((data: any) => {
       setRawData(data);
       setListData(buildOptions(data));
+      setSublistData([]);
       setIsLoaded(true);
     });
   }
