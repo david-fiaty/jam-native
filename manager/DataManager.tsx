@@ -8,6 +8,11 @@ class DataManager {
     let data: any = await ApiManager.get(key);
     let results: any = [];
 
+    // Extract data with key
+    if (Endpoints[key].dataKey !== null) {
+      console.log(data[Endpoints[key].dataKey]);
+    }
+
     // Apply search and filter
     if (Endpoints[key].searcheable === true) {
       const searchState = Store.getState().search;
