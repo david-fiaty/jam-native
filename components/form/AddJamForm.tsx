@@ -24,7 +24,6 @@ import StaticData from '@/constants/StaticData';
 import DatePickerField from '../field/DatePickerField';
 import DataManager from '@/manager/DataManager';
 import LocationTypeField from '../field/LocationTypeField';
-import JamTypeField from '../field/JamTypeField';
 
 const AddJamForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -52,8 +51,6 @@ const AddJamForm = () => {
   });
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(jamData);
 
   return (    
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
@@ -95,12 +92,7 @@ const AddJamForm = () => {
         value={jamData?.caption}
         onChangeText={(value: string) => updateField('caption', value)}
       />
-
-      <JamTypeField 
-        value={jamData?.jam_type}
-        onChangeValue={(option: any) => updateField('jam_type', option.value)} 
-      />
-
+      
       <LocationTypeField 
         value={jamData?.location_type}
         onChangeValue={(option: any) => updateField('location_type', option.value)} 
