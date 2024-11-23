@@ -37,13 +37,14 @@ const MoreJamView = () => {
         })}
       />
       
-      <TouchableOpacity onPress={() => {}}>
-        <BoxView direction="row" align="center" justify="flex-start">
-          <IconView name="save" theme="tertiary" />
-          <TextView>{i18n.t('Save Jam')}</TextView>
-        </BoxView>
-      </TouchableOpacity>
-      
+      <View style={Layout.borderedListContainer}>
+        <TouchableOpacity onPress={() => {}}>
+          <BoxView direction="row" align="center" justify="flex-start">
+            <IconView name="save" theme="tertiary" />
+            <TextView>{i18n.t('Save Jam')}</TextView>
+          </BoxView>
+        </TouchableOpacity>
+      </View>
     </BoxView>
   );
 };
