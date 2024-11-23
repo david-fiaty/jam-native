@@ -16,16 +16,24 @@ const SectorsField = ({value}: Props) => {
   const [mainIndustries, setMainIndustries] = useState<any>([]);
   const [subIndustries, setSubIndustries] = useState<any>([]);
 
-  if (!mainIndustries) {
+  const buildOptions = (optionsData: any) => {
+    return optionsData.map((item: any) => {
+      return {
+        id: item?.id,
+        label: item?.name,
+      }
+    });
+  };
+
+  if (!mainIndustries?.length) {
     EntityManager.getSectors().then((data: any) => {
-      setMainIndustries(data);
+      setMainIndustries(buildOptions(data));
+      setSubIndustries([]);
       setIsLoaded(true);
     });
   }
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(mainIndustries);
 
   return (
     <BoxView direction="column" align="center" style={styles.container}>
