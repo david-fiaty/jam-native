@@ -9,7 +9,7 @@ type Props = BaseProps & {
   value?: any,
 };
 
-const IndustryField = ({value}: Props) => {
+const SectorsField = ({value}: Props) => {
   const mainIndustries = Data.mainIndustries;
   const subIndustries = Data.subIndustries;
   
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default IndustryField;
+export default SectorsField;
