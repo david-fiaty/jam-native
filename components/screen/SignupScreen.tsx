@@ -90,7 +90,7 @@ const SignupScreen = () => {
       />
 
       <CountryField 
-        value={signupData?.profile?.sector_ids}
+        value={signupData?.profile?.scope_country_code}
         onChangeValue={(option: any) => console.log(option)}
       />
 
