@@ -22,9 +22,8 @@ import InputTextareaField from "../field/InputTextareaField";
 import UserManager from '@/manager/UserManager';
 import StaticData from '@/constants/StaticData';
 import DatePickerField from '../field/DatePickerField';
-import DataManager from '@/manager/DataManager';
 import LocationTypeField from '../field/LocationTypeField';
-import JamTypeField from '../field/JamTypeField';
+import EntityManager from '@/manager/EntityManager';
 
 const AddJamForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -34,11 +33,19 @@ const AddJamForm = () => {
   const jamCategoriesData = StaticData.jamCategories;
 
   const updateField = (key: string, value: any) => {
-    setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }});
+    setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }, ...{
+      // Todo - Handle user location
+      geolocation_latitude: 9, 
+      geolocation_longitude: 2,
+    }});
   };
 
-  const submitForm = async () => {    
-    let result = await DataManager.post('jams', jamData);
+  const submitForm = async () => {  
+    
+    console.log(jamData);
+    let result = await EntityManager.addJam(jamData);
+
+    console.log(result);
     setIsProcessing(false);
 
     //setTimeout(() => setIsProcessing(false), 3000);
@@ -50,8 +57,6 @@ const AddJamForm = () => {
   });
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(jamData);
 
   return (    
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
@@ -92,11 +97,6 @@ const AddJamForm = () => {
         placeholder={i18n.t('Description')}
         value={jamData?.caption}
         onChangeText={(value: string) => updateField('caption', value)}
-      />
-
-      <JamTypeField 
-        value={jamData?.jam_type}
-        onChangeValue={(option: any) => updateField('jam_type', option.value)} 
       />
 
       <LocationTypeField 
