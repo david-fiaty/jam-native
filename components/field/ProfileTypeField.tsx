@@ -7,16 +7,19 @@ import Data from '@/constants/StaticData';
 
 type Props = BaseProps & {
   value?: any,
+  onChangeValue?: (option: any) => void,
 };
 
-const ProfileTypeField = ({value}: Props) => {
+const ProfileTypeField = ({value, onChangeValue}: Props) => {
   const profileTypes = Data.profileTypes;
   
   return (
     <BoxView direction="column" align="center" style={styles.container}>
       <SelectListBase 
+        value={value}
         data={profileTypes} 
         placeholder={i18n.t('Profile type')} 
+        onChangeValue={onChangeValue}
       />
     </BoxView>
   );
