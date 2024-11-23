@@ -23,7 +23,8 @@
       ],
       "runtimeVersion": {
         "policy": "appVersion"
-      }
+      },
+      "package": "com.davidfiatyorg.jamnative"
     },
     "web": {
       "bundler": "metro",
