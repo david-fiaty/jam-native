@@ -109,6 +109,7 @@ const AddJamForm = () => {
         placeholder={i18n.t('Start date')}
         onChangeValue={ (value: any) => updateField('period', {...jamData?.period || {}, ...{ start_datetime: value }}) } 
       />
+      
       <DatePickerField 
         value={'end value'}
         placeholder={i18n.t('End date')}
