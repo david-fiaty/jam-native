@@ -1,6 +1,28 @@
 import i18n from "@/translation/i18n";
 
 const StaticData = {
+  jamTypes: [
+    {
+      id: null,
+      label: i18n.t('Jam type'),
+    },
+    {
+      id: 'call',
+      label: i18n.t('Call'),
+    },
+    {
+      id: 'event',
+      label: i18n.t('Event'),
+    },
+    {
+      id: 'looking',
+      label: i18n.t('Looking'),
+    },
+    {
+      id: 'random',
+      label: i18n.t('Random'),
+    },
+  ],
   profileTypes: [
     {
       id: null,
@@ -13,6 +35,24 @@ const StaticData = {
     {
       id: 'organization',
       label: i18n.t('Organization'),
+    },
+  ],
+  locationTypes: [
+    {
+      id: null,
+      label: i18n.t('Location type'),
+    },
+    {
+      id: 'online',
+      label: i18n.t('Online'),
+    },
+    {
+      id: 'physical',
+      label: i18n.t('Physical'),
+    },
+    {
+      id: 'online_physical',
+      label: i18n.t('Online/Physical'),
     },
   ],
   jamCategories: [
