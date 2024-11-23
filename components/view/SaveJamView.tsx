@@ -7,6 +7,7 @@ import BoxView from "../view/BoxView";
 import ShareJamButton from "../button/ShareJamButton";
 import ViewMyJamsButton from "../button/ViewMyJamsButton";
 import ListView from "./ListView";
+import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 
 const SaveJamView = () => {
@@ -19,6 +20,8 @@ const SaveJamView = () => {
     <ShareJamButton style={Layout.listItem} />,
     <ViewMyJamsButton style={Layout.listItem} />,
   ];
+
+  if (false) return <SpinnerView />;
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
