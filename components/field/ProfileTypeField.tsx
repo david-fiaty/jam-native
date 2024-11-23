@@ -3,20 +3,23 @@ import { BaseProps } from '@/constants/Types';
 import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
 import SelectListBase from '../base/SelectListBase';
-import Data from '@/constants/StaticData';
+import StaticData from '@/constants/StaticData';
 
 type Props = BaseProps & {
   value?: any,
+  onChangeValue?: (option: any) => void,
 };
 
-const ProfileTypeField = ({value}: Props) => {
-  const profileTypes = Data.profileTypes;
+const ProfileTypeField = ({value, onChangeValue}: Props) => {
+  const profileTypes = StaticData.profileTypes;
   
   return (
     <BoxView direction="column" align="center" style={styles.container}>
       <SelectListBase 
+        value={value}
         data={profileTypes} 
         placeholder={i18n.t('Profile type')} 
+        onChangeValue={onChangeValue}
       />
     </BoxView>
   );

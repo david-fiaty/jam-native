@@ -11,8 +11,8 @@ const StaticData = {
       label: i18n.t('Personal'),
     },
     {
-      id: 'organisation',
-      label: i18n.t('Organisation'),
+      id: 'organization',
+      label: i18n.t('Organization'),
     },
   ],
   jamCategories: [
