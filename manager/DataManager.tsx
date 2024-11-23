@@ -5,8 +5,13 @@ import ApiManager from './ApiManager';
 class DataManager {
   async get(key: keyof typeof Endpoints, options?: any) {
     // Variables
-    let data: any =  await ApiManager.get(key);
+    let data: any = await ApiManager.get(key);
     let results: any = [];
+
+    // Extract data with key
+    if (Endpoints[key].dataKey !== null) {
+      return data[Endpoints[key].dataKey];
+    }
 
     // Apply search and filter
     if (Endpoints[key].searcheable === true) {
@@ -41,8 +46,12 @@ class DataManager {
     return await ApiManager.post(key, data);
   }
 
-  getStaticData(key: keyof typeof Endpoints) {
+  async find(key: keyof typeof Endpoints, idField: string, idValues: any) {
+    idValues = Array.isArray(idValues) ? idValues : [idValues];
+    let data: any = await ApiManager.get(key);
+    let result: any = data.find((item: any) => idValues.includes(item[idField]));
 
+    return result || {};
   }
 };
 

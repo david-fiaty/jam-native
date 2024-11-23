@@ -38,7 +38,7 @@ const JamsList = () => {
         <BoxView>
           <TouchableOpacity onPress={() => isLoggedIn ? ScreenManager.toggleModal({
             name: 'HostsList',
-            entity: item, 
+            entityId: item?.id, 
           }) : router.push('/login')}>
             <TextView>
               @{i18n.t('host')} +{ parseInt(item?.collaborators?.length) }
@@ -51,7 +51,7 @@ const JamsList = () => {
         <BoxView>
           <IconView name="actions" theme="clear" onPress={() => isLoggedIn ? ScreenManager.toggleModal({
             name: 'MoreJamView',
-            entity: item, 
+            entityId: item?.id, 
           }) : router.push('/login') } />
         </BoxView> 
       </BoxView>
@@ -65,7 +65,7 @@ const JamsList = () => {
         {/* Jammers button */}
         <BoxView direction="row" align="center" onPress={() => isLoggedIn ? ScreenManager.toggleModal({
           name: 'JammersList',
-          entity: item, 
+          entityId: item?.id, 
         }) : router.push('/login') }>
           <IconView name="users" theme="tertiary" />
           <TextView>{parseInt(item?.jammers?.length)} {i18n.t('jammers')}</TextView>
@@ -75,13 +75,13 @@ const JamsList = () => {
           {/* Save button */}
           <IconView name="save" theme="tertiary" onPress={() => isLoggedIn ? ScreenManager.toggleModal({
             name: 'SaveJamView',
-            entity: item, 
+            entityId: item?.id, 
           }) : router.push('/login')} />
 
           {/* Share button */}
           <IconView name="share" theme="tertiary" onPress={() => ScreenManager.toggleModal({
             name: 'ShareJamView',
-            entity: item, 
+            entityId: item?.id, 
           })} />
         </BoxView> 
       </BoxView>
