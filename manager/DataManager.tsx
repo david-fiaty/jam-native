@@ -10,7 +10,7 @@ class DataManager {
 
     // Extract data with key
     if (Endpoints[key].dataKey !== null) {
-      console.log(data[Endpoints[key].dataKey]);
+      return data[Endpoints[key].dataKey];
     }
 
     // Apply search and filter
