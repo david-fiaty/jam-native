@@ -28,7 +28,7 @@ const Endpoints = {
     searcheable: false,
     dataKey: null,
   },
-  signup: {
+  register: {
     url: '/register/',
     cacheable: false,
     searcheable: false,
