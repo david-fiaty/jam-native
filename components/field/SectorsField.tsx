@@ -47,7 +47,6 @@ const SectorsField = ({value}: Props) => {
         placeholder={i18n.t('Sub industries')} 
         onChangeValue={(option: any) => console.log(option)}
       />
-
     </BoxView>
   );
 };
