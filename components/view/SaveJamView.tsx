@@ -9,10 +9,17 @@ import ViewMyJamsButton from "../button/ViewMyJamsButton";
 import ListView from "./ListView";
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
+import DataManager from "@/manager/DataManager";
 
 const SaveJamView = () => {
   const [entity, setEntity] = useState<any>(null);
   const entityId = ScreenManager.getActiveScreen()?.entityId;
+
+  if (!entity) {
+    DataManager.find('jams', 'id', entityId).then((item: any) => {
+      setEntity(item);
+    });
+  }
 
   console.log(entityId);
 
@@ -21,7 +28,7 @@ const SaveJamView = () => {
     <ViewMyJamsButton style={Layout.listItem} />,
   ];
 
-  if (false) return <SpinnerView />;
+  if (!entity) return <SpinnerView />;
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
