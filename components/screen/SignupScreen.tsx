@@ -15,7 +15,6 @@ import InstagramLoginButton from '../button/InstagramLoginButton';
 import UserManager from '@/manager/UserManager';
 import LinkView from '../view/LinkView';
 import ButtonView from '../view/ButtonView';
-import SpinnerView from '../view/SpinnerView';
 import ScreenManager from '@/manager/ScreenManager';
 import DividerView from '../view/DividerView';
 import SectorsField from '../field/SectorsField';
@@ -24,7 +23,6 @@ import CountryField from '../field/CountryField';
 
 const SignupScreen = () => {
   const router = useRouter();
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [signupData, setSignupData] = useState<any>({});
   const [isProcessing, setIsProcessing] = useState(false);
   
@@ -38,11 +36,6 @@ const SignupScreen = () => {
       success === true ? router.replace('/jams') : ScreenManager.showMessage(i18n.t('The data is invalid. Please check and try again.'));
     });
   }  
-
-
-  //if (!isLoaded) return <SpinnerView />;
-
-  console.log(signupData);
 
   return (
     <BoxView direction="column" align="center" justify="center" scroll={true} style={Layout.screenContent}>
