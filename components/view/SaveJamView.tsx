@@ -47,10 +47,7 @@ const SaveJamView = () => {
         {/* Share jam */}
         <TouchableOpacity 
           style={styles.listItem}
-          onPress={() => ScreenManager.toggleModal({
-            name: 'SaveJamView',
-            entityId: entityId, 
-          })} 
+          onPress={() => EntityManager.shareJam(entityId)} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
             <IconView name="share" theme="tertiary" />
