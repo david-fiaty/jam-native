@@ -49,7 +49,8 @@ class DataManager {
   async find(key: keyof typeof Endpoints, idField: string, idValues: any) {
     idValues = Array.isArray(idValues) ? idValues : [idValues];
     let data: any = await ApiManager.get(key);
-    let result: any = data.find((item: any) => idValues.includes(item[idField]));
+    let haystack: any = data?.[Endpoints[key].dataKey];
+    let result: any = haystack.find((item: any) => idValues.includes(item[idField]));
 
     return result || {};
   }
