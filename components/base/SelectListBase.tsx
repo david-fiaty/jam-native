@@ -44,10 +44,10 @@ const SelectListBase = ({data, placeholder}: Props) => {
           setValue(item.value);
           setIsFocus(false);
         }}
-        renderItem={(item, selected) => {
+        renderItem={(item: any, selected) => {
           return (
             <View style={styles.item}>
-              <TextView>{item.label}</TextView>
+              <TextView>{item?.label}</TextView>
             </View>
           );
         }}
