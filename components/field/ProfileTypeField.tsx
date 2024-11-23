@@ -3,7 +3,7 @@ import { BaseProps } from '@/constants/Types';
 import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
 import SelectListBase from '../base/SelectListBase';
-import Data from '@/constants/StaticData';
+import StaticData from '@/constants/StaticData';
 
 type Props = BaseProps & {
   value?: any,
@@ -11,7 +11,7 @@ type Props = BaseProps & {
 };
 
 const ProfileTypeField = ({value, onChangeValue}: Props) => {
-  const profileTypes = Data.profileTypes;
+  const profileTypes = StaticData.profileTypes;
   
   return (
     <BoxView direction="column" align="center" style={styles.container}>
