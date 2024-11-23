@@ -15,12 +15,8 @@ const SavedJamAction = () => {
   const [isSaved, setIsSaved] = useState<boolean>(false);
   const entityId = ScreenManager.getActiveScreen()?.entityId;
 
-  
-
   if (!entity) {
     EntityManager.findJam(entityId).then((item: any) => {
-      
-      console.log(item);
       setEntity(item);
     });
   }
