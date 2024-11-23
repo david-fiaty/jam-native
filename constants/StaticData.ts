@@ -3,6 +3,10 @@ import i18n from "@/translation/i18n";
 const StaticData = {
   profileTypes: [
     {
+      id: null,
+      label: i18n.t('Profile type'),
+    },
+    {
       id: 'personal',
       label: i18n.t('Personal'),
     },
