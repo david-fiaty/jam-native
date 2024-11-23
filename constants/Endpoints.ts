@@ -13,9 +13,15 @@ const Endpoints = {
   },
   profiles: {
     url: '/profiles/feed/?profile_id=0&profile_type=all&displayed_items_ids=1,2&nbr_items_to_return=100',
-    cacheable: false,
+    cacheable: true,
     searcheable: true,
     dataKey: 'new_profiles_to_display',
+  },
+  sectors: {
+    url: '/sectors/',
+    cacheable: true,
+    searcheable: false,
+    dataKey: null,
   },
   notifications: {
     cacheable: false,

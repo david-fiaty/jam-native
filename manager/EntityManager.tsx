@@ -27,6 +27,10 @@ class EntityManager {
     return await DataManager.get('jams'); 
   }
 
+  async getSectors() {
+    return await DataManager.get('sectors'); 
+  }
+
   async findJam(entityId: any) {
     return await DataManager.find('jams', 'id', entityId);
   }
