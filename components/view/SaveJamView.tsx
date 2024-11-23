@@ -9,7 +9,6 @@ import TextView from '../view/TextView';
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
-import ViewMyJamsButton from "../button/ViewMyJamsButton";
 
 const SaveJamView = () => {
   const [entity, setEntity] = useState<any>(null);
