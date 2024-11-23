@@ -20,6 +20,7 @@ import ScreenManager from '@/manager/ScreenManager';
 import DividerView from '../view/DividerView';
 import SectorsField from '../field/SectorsField';
 import ProfileTypeField from '../field/ProfileTypeField';
+import CountryField from '../field/CountryField';
 
 const SignupScreen = () => {
   const router = useRouter();
@@ -44,11 +45,18 @@ const SignupScreen = () => {
   console.log(signupData);
 
   return (
-    <BoxView direction="column" align="center" justify="center" style={Layout.screenContent}>
+    <BoxView direction="column" align="center" justify="center" scroll={true} style={Layout.screenContent}>
       <LogoView size={{ width: 80, height: 80 }} />    
       <TextView style={styles.wecomeMessage}>{i18n.t('Create an account')}</TextView> 
 
       <DividerView />
+      <InputTextField 
+        containerStyle={styles.inputTextFieldContainer}
+        placeholder={i18n.t('User name')} 
+        value={signupData?.email}
+        onChangeText={(value: string) => updateField('username', value)}
+      />
+
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Email address')} 
@@ -65,6 +73,8 @@ const SignupScreen = () => {
         onChangeText={(value: string) => updateField('password', value)}
       />
 
+      <ProfileTypeField />
+
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('First name')} 
@@ -79,8 +89,9 @@ const SignupScreen = () => {
         onChangeText={(value: string) => updateField('last_name', value)}
       />
 
-      <ProfileTypeField />
       
+      <CountryField />
+
       <SectorsField />
 
       <DividerView />
