@@ -36,14 +36,14 @@ const SaveJamView = () => {
 
   if (!entity) return <SpinnerView />;
 
-  const pageTitle = (entity && isSaved) 
+  const title = (entity && isSaved) 
     ? i18n.t('Jam is now saved to your jams') 
     : i18n.t('Could not save Jam'); 
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
-        title={i18n.t('Jam is now saved to your jams')}
+        title={title}
         onPress={() => ScreenManager.toggleModal({
           name: 'SaveJamView',
         })}
