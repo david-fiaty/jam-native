@@ -12,12 +12,21 @@ type Props = BaseProps & {
 
 const ProfileTypeField = ({value, onChangeValue}: Props) => {
   const profileTypes = StaticData.profileTypes;
+
+  const buildOptions = (optionsData: any) => {    
+    return [...(optionsData || [])].map((item: any) => {
+      return {
+        value: item?.id,
+        label: item?.label,
+      }
+    });
+  };
   
   return (
     <BoxView direction="column" align="center" style={styles.container}>
       <SelectListBase 
         value={value}
-        data={profileTypes} 
+        data={buildOptions(profileTypes)} 
         placeholder={i18n.t('Profile type')} 
         onChangeValue={onChangeValue}
       />

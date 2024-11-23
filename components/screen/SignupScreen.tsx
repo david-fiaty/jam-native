@@ -81,33 +81,37 @@ const SignupScreen = () => {
         value={signupData?.profile?.profile_name}
         onChangeText={(value: string) => updateField('profile', {...signupData?.profile || {}, ...{ profile_name: value }}) } 
       />
-
+    
       <ProfileTypeField 
         value={signupData?.profile?.profile_type}
         onChangeValue={(option: any) => updateField('profile', {...signupData?.profile || {}, ...{ profile_type: option.value }}) } 
       />
+    
+      { signupData?.profile?.profile_type == 'personal' && 
+        <InputTextField 
+          containerStyle={styles.inputTextFieldContainer}
+          placeholder={i18n.t('First name')} 
+          value={signupData?.profile?.profile_personal?.first_name}
+          onChangeText={(value: string) => {
+            let profilePersonal = Object.assign({}, signupData?.profile?.profile_personal || {});
+            profilePersonal['first_name'] = value;
+            updateField('profile', {...signupData?.profile || {}, ...{ profile_personal: profilePersonal }}) 
+          }} 
+        />
+      }
 
-      <InputTextField 
-        containerStyle={styles.inputTextFieldContainer}
-        placeholder={i18n.t('First name')} 
-        value={signupData?.profile?.profile_personal?.first_name}
-        onChangeText={(value: string) => {
-          let profilePersonal = Object.assign({}, signupData?.profile?.profile_personal || {});
-          profilePersonal['first_name'] = value;
-          updateField('profile', {...signupData?.profile || {}, ...{ profile_personal: profilePersonal }}) 
-        }} 
-      />
-
-      <InputTextField 
-        containerStyle={styles.inputTextFieldContainer}
-        placeholder={i18n.t('Last name')} 
-        value={signupData?.profile?.profile_personal?.last_name}
-        onChangeText={(value: string) => {
-          let profilePersonal = Object.assign({}, signupData?.profile?.profile_personal || {});
-          profilePersonal['last_name'] = value;
-          updateField('profile', {...signupData?.profile || {}, ...{ profile_personal: profilePersonal }}) 
-        }} 
-      />
+      { signupData?.profile?.profile_type == 'personal' && 
+        <InputTextField 
+          containerStyle={styles.inputTextFieldContainer}
+          placeholder={i18n.t('Last name')} 
+          value={signupData?.profile?.profile_personal?.last_name}
+          onChangeText={(value: string) => {
+            let profilePersonal = Object.assign({}, signupData?.profile?.profile_personal || {});
+            profilePersonal['last_name'] = value;
+            updateField('profile', {...signupData?.profile || {}, ...{ profile_personal: profilePersonal }}) 
+          }} 
+        />
+      }
 
       <CountryField 
         value={signupData?.profile?.scope_country_code}
