@@ -33,17 +33,15 @@ const SectorsField = ({value}: Props) => {
     });
   }
 
-  if (!isLoaded) return <SpinnerView />;
+  if (!isLoaded) return <SpinnerView size="small" />;
 
   return (
     <BoxView direction="column" align="center" style={styles.container}>
-
       <SelectListBase 
         data={mainIndustries} 
         placeholder={i18n.t('Industries')} 
         onChangeValue={(option: any) => console.log(option)}
       />
-
       <SelectListBase 
         data={subIndustries} 
         placeholder={i18n.t('Sub industries')} 
