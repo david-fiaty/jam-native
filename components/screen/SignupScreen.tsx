@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Divider } from '@rneui/base';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
 import LogoView from '../view/LogoView';
@@ -18,6 +17,7 @@ import LinkView from '../view/LinkView';
 import ButtonView from '../view/ButtonView';
 import SpinnerView from '../view/SpinnerView';
 import ScreenManager from '@/manager/ScreenManager';
+import DividerView from '../view/DividerView';
 
 const SignupScreen = () => {
   const router = useRouter();
@@ -44,7 +44,7 @@ const SignupScreen = () => {
       <LogoView size={{ width: 80, height: 80 }} />    
       <TextView style={styles.wecomeMessage}>{i18n.t('Create an account')}</TextView> 
 
-      <Divider /><Divider />
+      <DividerView />
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Email address')} 
@@ -59,6 +59,8 @@ const SignupScreen = () => {
         spellCheck={false}
         onChangeText={(text: string) => setPassword(text)}
       />
+
+      <DividerView />
 
       <ButtonView 
         label={i18n.t('Continue')} 
@@ -79,7 +81,7 @@ const SignupScreen = () => {
         <SkipButton onPress={async () => router.replace('/jams')} />
       </BoxView>
 
-      <Divider /><Divider />
+      <DividerView /><DividerView />
       <GoogleLoginButton />
       <FacebookLoginButton />
       <InstagramLoginButton />
