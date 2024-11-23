@@ -90,11 +90,14 @@ const SignupScreen = () => {
       />
 
       
-      <CountryField />
+      <CountryField 
+        value={signupData?.profile?.sector_ids}
+        onChangeValue={(option: any) => console.log(option)}
+      />
 
       <SectorsField 
         value={signupData?.profile?.sector_ids}
-        onChangeValue={(option: any) => console.log('---- uuu', option)}
+        onChangeValue={(option: any) => console.log(option)}
       />
 
       <DividerView />
