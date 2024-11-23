@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Colors } from '@/constants/Colors';
@@ -26,6 +27,7 @@ import LocationTypeField from '../field/LocationTypeField';
 import EntityManager from '@/manager/EntityManager';
 
 const AddJamForm = () => {
+  const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [jamData, setJamData] = useState<any>({});
@@ -41,14 +43,13 @@ const AddJamForm = () => {
   };
 
   const submitForm = async () => {  
-    
-    console.log(jamData);
-    let result = await EntityManager.addJam(jamData);
-
-    console.log(result);
-    setIsProcessing(false);
-
-    //setTimeout(() => setIsProcessing(false), 3000);
+    EntityManager.addJam(jamData).then((success: boolean) => {
+      setIsProcessing(false);
+      //success === true
+        false 
+        ? router.replace('/jams') 
+        : ScreenManager.showMessage(i18n.t('The Jam data is invalid. Please check and trya gain.'));
+    });
   }  
 
   UserManager.getProfileId().then((id: number)  => {
