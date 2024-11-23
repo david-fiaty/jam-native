@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Colors } from '@/constants/Colors';
@@ -8,6 +9,7 @@ import BackButton from "../button/BackButton";
 import AddMediaField from "../field/AddMediaField";
 import AddCollaboratorsField from "../field/AddCollaboratorsField";
 import LocationPickerField from "../field/LocationPickerField";
+import CountryField from '../field/CountryField';
 import SectorsField from "../field/SectorsField";
 import DividerView from "../view/DividerView";
 import SpinnerView from '../view/SpinnerView';
@@ -19,26 +21,35 @@ import ListView from '../view/ListView';
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
 import UserManager from '@/manager/UserManager';
-import Data from '@/constants/StaticData';
+import StaticData from '@/constants/StaticData';
 import DatePickerField from '../field/DatePickerField';
-import DataManager from '@/manager/DataManager';
+import LocationTypeField from '../field/LocationTypeField';
+import EntityManager from '@/manager/EntityManager';
 
 const AddJamForm = () => {
+  const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [jamData, setJamData] = useState<any>({});
   const [profileId, setProfileId] = useState<number>(0);
-  const jamCategoriesData = Data.jamCategories;
+  const jamCategoriesData = StaticData.jamCategories;
 
   const updateField = (key: string, value: any) => {
-    setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }});
+    setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }, ...{
+      // Todo - Handle user location
+      geolocation_latitude: 9, 
+      geolocation_longitude: 2,
+    }});
   };
 
-  const submitForm = async () => {    
-    let result = await DataManager.post('jams', jamData);
-    setIsProcessing(false);
-
-    //setTimeout(() => setIsProcessing(false), 3000);
+  const submitForm = async () => {  
+    EntityManager.addJam(jamData).then((success: boolean) => {
+      setIsProcessing(false);
+      //success === true
+        false 
+        ? router.replace('/jams') 
+        : ScreenManager.showMessage(i18n.t('The Jam data is invalid. Please check and trya gain.'));
+    });
   }  
 
   UserManager.getProfileId().then((id: number)  => {
@@ -82,10 +93,16 @@ const AddJamForm = () => {
         value={jamData?.title}
         onChangeText={(value: string) => updateField('title', value)}
       />
+
       <InputTextareaField
         placeholder={i18n.t('Description')}
         value={jamData?.caption}
         onChangeText={(value: string) => updateField('caption', value)}
+      />
+
+      <LocationTypeField 
+        value={jamData?.location_type}
+        onChangeValue={(option: any) => updateField('location_type', option.value)} 
       />
 
       <DatePickerField 
@@ -93,14 +110,31 @@ const AddJamForm = () => {
         placeholder={i18n.t('Start date')}
         onChangeValue={ (value: any) => updateField('period', {...jamData?.period || {}, ...{ start_datetime: value }}) } 
       />
+      
       <DatePickerField 
         value={'end value'}
         placeholder={i18n.t('End date')}
         onChangeValue={ (value: any) => updateField('period', {...jamData?.period || {}, ...{ end_datetime: value }}) } 
       />
 
-      <LocationPickerField />
-      <SectorsField />
+      { /* <LocationPickerField /> */}
+
+      <CountryField 
+        value={jamData?.scope_countries_codes}
+        onChangeValue={(option: any) => updateField('scope_countries_codes', [option.value])} 
+      />
+
+      <SectorsField 
+        value={jamData?.sectors_ids}
+        onChangeListValue={(option: any) => {
+          updateField('sectors_ids', [option.value]);
+        }}
+        onChangeSublistValue={(option: any) => {
+          let sectorsIds = [...jamData?.sectors_ids || []];
+          sectorsIds[1] = option.value;
+          updateField('sectors_ids', sectorsIds); 
+        }}
+      />
 
       <DividerView />
       <AddMediaField />

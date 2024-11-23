@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Divider } from '@rneui/base';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
 import LogoView from '../view/LogoView';
@@ -17,6 +16,7 @@ import UserManager from '@/manager/UserManager';
 import LinkView from '../view/LinkView';
 import ButtonView from '../view/ButtonView';
 import ScreenManager from '@/manager/ScreenManager';
+import DividerView from '../view/DividerView';
 
 const LoginScreen = () => {
   const router = useRouter();
@@ -35,7 +35,9 @@ const LoginScreen = () => {
 
     UserManager.login(loginData).then((success: boolean) => {
       setIsProcessing(false);
-      success === true ? router.replace('/jams') : ScreenManager.showMessage(i18n.t('Invalid user name or password.'));
+      success === true 
+        ? router.replace('/jams') 
+        : ScreenManager.showMessage(i18n.t('Invalid user name or password.'));
     });
   }  
 
@@ -44,7 +46,7 @@ const LoginScreen = () => {
       <LogoView size={{ width: 80, height: 80 }} />    
       <TextView style={styles.wecomeMessage}>{i18n.t('Welcome back')}</TextView> 
 
-      <Divider /><Divider />
+      <DividerView />
       
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
@@ -79,7 +81,7 @@ const LoginScreen = () => {
         <SkipButton onPress={async () => router.replace('/jams')} />
       </BoxView>
 
-      <Divider /><Divider />
+      <DividerView />
 
       <GoogleLoginButton />
       <FacebookLoginButton />

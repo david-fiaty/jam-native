@@ -15,7 +15,6 @@ import InstagramLoginButton from '../button/InstagramLoginButton';
 import UserManager from '@/manager/UserManager';
 import LinkView from '../view/LinkView';
 import ButtonView from '../view/ButtonView';
-import SpinnerView from '../view/SpinnerView';
 import ScreenManager from '@/manager/ScreenManager';
 import DividerView from '../view/DividerView';
 import SectorsField from '../field/SectorsField';
@@ -24,7 +23,6 @@ import CountryField from '../field/CountryField';
 
 const SignupScreen = () => {
   const router = useRouter();
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [signupData, setSignupData] = useState<any>({});
   const [isProcessing, setIsProcessing] = useState(false);
   
@@ -35,14 +33,11 @@ const SignupScreen = () => {
   const submitForm = async () => {
     UserManager.register(signupData).then((success: boolean) => {
       setIsProcessing(false);
-      success === true ? router.replace('/jams') : ScreenManager.showMessage(i18n.t('The data is invalid. Please check and try again.'));
+      success === true 
+        ? router.replace('/jams') 
+        : ScreenManager.showMessage(i18n.t('The data is invalid. Please check and try again.'));
     });
   }  
-
-
-  //if (!isLoaded) return <SpinnerView />;
-
-  console.log(signupData);
 
   return (
     <BoxView direction="column" align="center" justify="center" scroll={true} style={Layout.screenContent}>
@@ -74,21 +69,44 @@ const SignupScreen = () => {
         onChangeText={(value: string) => updateField('password', value)}
       />
 
-      <ProfileTypeField />
-
+      <DividerView />
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
-        placeholder={i18n.t('First name')} 
-        value={signupData?.email}
-        onChangeText={(value: string) => updateField('first_name', value)}
+        placeholder={i18n.t('Profile name')} 
+        value={signupData?.profile?.profile_name}
+        onChangeText={(value: string) => updateField('profile', {...signupData?.profile || {}, ...{ profile_name: value }}) } 
       />
+    
+      <ProfileTypeField 
+        value={signupData?.profile?.profile_type}
+        onChangeValue={(option: any) => updateField('profile', {...signupData?.profile || {}, ...{ profile_type: option.value }}) } 
+      />
+    
+      { signupData?.profile?.profile_type == 'personal' && 
+        <InputTextField 
+          containerStyle={styles.inputTextFieldContainer}
+          placeholder={i18n.t('First name')} 
+          value={signupData?.profile?.profile_personal?.first_name}
+          onChangeText={(value: string) => {
+            let profilePersonal = Object.assign({}, signupData?.profile?.profile_personal || {});
+            profilePersonal['first_name'] = value;
+            updateField('profile', {...signupData?.profile || {}, ...{ profile_personal: profilePersonal }}) 
+          }} 
+        />
+      }
 
-      <InputTextField 
-        containerStyle={styles.inputTextFieldContainer}
-        placeholder={i18n.t('Last name')} 
-        value={signupData?.email}
-        onChangeText={(value: string) => updateField('last_name', value)}
-      />
+      { signupData?.profile?.profile_type == 'personal' && 
+        <InputTextField 
+          containerStyle={styles.inputTextFieldContainer}
+          placeholder={i18n.t('Last name')} 
+          value={signupData?.profile?.profile_personal?.last_name}
+          onChangeText={(value: string) => {
+            let profilePersonal = Object.assign({}, signupData?.profile?.profile_personal || {});
+            profilePersonal['last_name'] = value;
+            updateField('profile', {...signupData?.profile || {}, ...{ profile_personal: profilePersonal }}) 
+          }} 
+        />
+      }
 
       <CountryField 
         value={signupData?.profile?.scope_country_code}
@@ -96,9 +114,16 @@ const SignupScreen = () => {
       />
 
       <SectorsField 
-        value={signupData?.profile?.sector_ids}
-        onChangeListValue={(option: any) => console.log(option)}
-        onChangeSublistValue={(option: any) => console.log(option)}
+        value={signupData?.profile?.sectors_ids}
+        onChangeListValue={(option: any) => {
+          let sectorsIds = [option.value];
+          updateField('profile', {...signupData?.profile || {}, ...{ sectors_ids: sectorsIds }});
+        }}
+        onChangeSublistValue={(option: any) => {
+          let sectorsIds = [...signupData?.profile?.sectors_ids || []];
+          sectorsIds[1] = option.value;
+          updateField('profile', {...signupData?.profile || {}, ...{ sectors_ids: sectorsIds }});
+        }}
       />
 
       <DividerView />

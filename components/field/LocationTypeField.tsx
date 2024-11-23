@@ -10,8 +10,8 @@ type Props = BaseProps & {
   onChangeValue?: (option: any) => void,
 };
 
-const ProfileTypeField = ({value, onChangeValue}: Props) => {
-  const profileTypes = StaticData.profileTypes;
+const LocationTypeField = ({value, onChangeValue}: Props) => {
+  const locationTypes = StaticData.locationTypes;
 
   const buildOptions = (optionsData: any) => {    
     return [...(optionsData || [])].map((item: any) => {
@@ -26,8 +26,8 @@ const ProfileTypeField = ({value, onChangeValue}: Props) => {
     <BoxView direction="column" align="center" style={styles.container}>
       <SelectListBase 
         value={value}
-        data={buildOptions(profileTypes)} 
-        placeholder={i18n.t('Profile type')} 
+        data={buildOptions(locationTypes)} 
+        placeholder={i18n.t('Location type')} 
         onChangeValue={onChangeValue}
       />
     </BoxView>
@@ -40,4 +40,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileTypeField;
+export default LocationTypeField;

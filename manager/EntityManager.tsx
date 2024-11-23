@@ -1,13 +1,8 @@
 import { Share } from 'react-native';
-import Endpoints from '@/constants/Endpoints';
 import DataManager from './DataManager';
 import UserManager from './UserManager';
 
 class EntityManager {
-  async find(key: keyof typeof Endpoints, idValues: any) {
-    return await DataManager.find(key, 'id', idValues);
-  }
-
   async report(entityId: any) {
     let profileId = await UserManager.getProfileId();
     let response = await DataManager.post('report', {
@@ -44,6 +39,13 @@ class EntityManager {
 
     return !!response;
   }
+
+  async addJam(entityData: any) {
+    let response = await DataManager.post('addJam', entityData);
+
+    return !!response;
+  }
+
 
   async likeJam(entityId: any) {
     let profileId = await UserManager.getProfileId();

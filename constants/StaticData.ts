@@ -11,14 +11,32 @@ const StaticData = {
       label: i18n.t('Personal'),
     },
     {
-      id: 'organisation',
-      label: i18n.t('Organisation'),
+      id: 'organization',
+      label: i18n.t('Organization'),
+    },
+  ],
+  locationTypes: [
+    {
+      id: null,
+      label: i18n.t('Location type'),
+    },
+    {
+      id: 'online',
+      label: i18n.t('Online'),
+    },
+    {
+      id: 'physical',
+      label: i18n.t('Physical'),
+    },
+    {
+      id: 'online_physical',
+      label: i18n.t('Online/Physical'),
     },
   ],
   jamCategories: [
     {
-      id: 'calls',
-      label: i18n.t('Calls'),
+      id: 'call',
+      label: i18n.t('Call'),
       icon: 'megaphone',
     },
     {
@@ -27,8 +45,8 @@ const StaticData = {
       icon: 'link',
     },
     {
-      id: 'events',
-      label: i18n.t('Events'),
+      id: 'event',
+      label: i18n.t('Event'),
       icon: 'users',
     },
     {
