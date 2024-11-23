@@ -1,3 +1,4 @@
+import { Share } from 'react-native';
 import Endpoints from '@/constants/Endpoints';
 import DataManager from './DataManager';
 import UserManager from './UserManager';
@@ -23,6 +24,26 @@ class EntityManager {
     });
 
     return !!response;
+  }
+
+  async shareJam(entityId: any) {
+    try {
+      const result = await Share.share({
+        // Todo - Link content to jam
+        message: 'React Native | A framework for building native apps using React',
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async getProfiles() {
