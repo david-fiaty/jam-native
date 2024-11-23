@@ -40,6 +40,18 @@ const Endpoints = {
     searcheable: false,
     dataKey: null,
   },
+  likeJam: {
+    url: '/jams/like/',
+    cacheable: false,
+    searcheable: false,
+    dataKey: null,
+  },
+  saveJam: {
+    url: '/jams/save/',
+    cacheable: false,
+    searcheable: false,
+    dataKey: null,
+  },
 };
 
 export default Endpoints;
