@@ -1,8 +1,8 @@
 import { TouchableOpacity } from 'react-native';
 import IconView from '../view/IconView';
-import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
+import i18n from '@/translation/i18n';
 
 type Props = {
   title?: string,
