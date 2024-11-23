@@ -22,18 +22,10 @@ const SelectListBase = ({data, placeholder, onChangeValue}: Props) => {
     if (onChangeValue) onChangeValue(option);
   });
 
-  const renderLabel = () => {
-    if (value || isFocus) {
-      return (<></>);
-    }
-    return null;
-  };
-
   return (
     <View style={[styles.container]}>
-      {renderLabel()}
       <Dropdown
-        style={[Layout.formField, styles.element]}
+        style={styles.element}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         iconStyle={styles.iconStyle}
@@ -66,7 +58,8 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   element: {
-    padding: Layout.space.base,
+    ...Layout.formField, 
+    ...{ padding: Layout.space.base },
   },
   item: {
     paddingVertical: Layout.space.base,
@@ -83,6 +76,7 @@ const styles = StyleSheet.create({
     color: Colors.primary,
     fontSize: Layout.fontSize.base,
   },
+  iconStyle: {},
 });
 
 export default SelectListBase;
