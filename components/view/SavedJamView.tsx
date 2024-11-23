@@ -10,7 +10,7 @@ import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
 
-const SaveJamView = () => {
+const SavedJamView = () => {
   const [entity, setEntity] = useState<any>(null);
   const [isSaved, setIsSaved] = useState<boolean>(false);
   const entityId = ScreenManager.getActiveScreen()?.entityId;
@@ -38,7 +38,7 @@ const SaveJamView = () => {
       <BackButton
         title={title}
         onPress={() => ScreenManager.toggleModal({
-          name: 'SaveJamView',
+          name: 'SavedJamView',
         })}
       />
 
@@ -58,7 +58,7 @@ const SaveJamView = () => {
         <TouchableOpacity 
           style={styles.listItem}
           onPress={() => ScreenManager.toggleModal({
-            name: 'SaveJamView',
+            name: 'SavedJamView',
             entityId: entityId, 
           })} 
         >
@@ -81,4 +81,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default SaveJamView;
+export default SavedJamView;

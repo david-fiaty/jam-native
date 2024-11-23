@@ -35,7 +35,7 @@ const MoreJamView = () => {
         <TouchableOpacity 
           style={styles.listItem}
           onPress={() => ScreenManager.toggleModal({
-            name: 'SaveJamView',
+            name: 'SavedJamView',
             entityId: entityId, 
           })} 
         >
@@ -71,7 +71,7 @@ const MoreJamView = () => {
         <TouchableOpacity 
           style={styles.listItem}
           onPress={() => ScreenManager.toggleModal({
-            name: 'SaveJamView',
+            name: 'SavedJamView',
             entityId: entityId, 
           })} 
         >
@@ -85,7 +85,7 @@ const MoreJamView = () => {
         <TouchableOpacity 
           style={styles.listItem}
           onPress={() => ScreenManager.toggleModal({
-            name: 'SaveJamView',
+            name: 'SavedJamView',
             entityId: entityId, 
           })} 
         >
@@ -99,7 +99,7 @@ const MoreJamView = () => {
         <TouchableOpacity 
           style={styles.listItem}
           onPress={() => ScreenManager.toggleModal({
-            name: 'SaveJamView',
+            name: 'SavedJamView',
             entityId: entityId, 
           })} 
         >
@@ -113,7 +113,7 @@ const MoreJamView = () => {
         <TouchableOpacity 
           style={styles.listItem}
           onPress={() => ScreenManager.toggleModal({
-            name: 'SaveJamView',
+            name: 'SavedJamView',
             entityId: entityId, 
           })} 
         >
