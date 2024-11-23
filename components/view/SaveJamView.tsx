@@ -13,6 +13,7 @@ import DataManager from "@/manager/DataManager";
 
 const SaveJamView = () => {
   const [entity, setEntity] = useState<any>(null);
+  const [isSaved, setIsSaved] = useState<boolean>(false);
   const entityId = ScreenManager.getActiveScreen()?.entityId;
 
   if (!entity) {
