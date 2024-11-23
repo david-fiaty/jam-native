@@ -22,6 +22,8 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
   const [selectedSublistOption, setSelectedSublistOption] = useState<any>({});
   
   const buildOptions = (optionsData: any) => {    
+    optionsData = optionsData || [];
+    
     return optionsData.map((item: any) => {
       return {
         value: item?.id,
@@ -37,7 +39,7 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
     if (onChangeListValue) onChangeListValue(option);
   };
 
-  const onChangeSubList = (option: any) => {
+  const onChangeSublist = (option: any) => {
     setSelectedSublistOption(option);
     if (onChangeSublistValue) onChangeSublistValue(option);
   };
@@ -65,7 +67,7 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
         value={value}
         data={sublistData} 
         placeholder={i18n.t('Sub industries')} 
-        onChangeValue={onChangeSubList}
+        onChangeValue={onChangeSublist}
       />
     </BoxView>
   );
