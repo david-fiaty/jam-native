@@ -8,6 +8,7 @@ import BackButton from "../button/BackButton";
 import AddMediaField from "../field/AddMediaField";
 import AddCollaboratorsField from "../field/AddCollaboratorsField";
 import LocationPickerField from "../field/LocationPickerField";
+import CountryField from '../field/CountryField';
 import SectorsField from "../field/SectorsField";
 import DividerView from "../view/DividerView";
 import SpinnerView from '../view/SpinnerView';
@@ -22,6 +23,8 @@ import UserManager from '@/manager/UserManager';
 import StaticData from '@/constants/StaticData';
 import DatePickerField from '../field/DatePickerField';
 import DataManager from '@/manager/DataManager';
+import LocationTypeField from '../field/LocationTypeField';
+import JamTypeField from '../field/JamTypeField';
 
 const AddJamForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -47,6 +50,8 @@ const AddJamForm = () => {
   });
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(jamData);
 
   return (    
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
@@ -82,10 +87,21 @@ const AddJamForm = () => {
         value={jamData?.title}
         onChangeText={(value: string) => updateField('title', value)}
       />
+
       <InputTextareaField
         placeholder={i18n.t('Description')}
         value={jamData?.caption}
         onChangeText={(value: string) => updateField('caption', value)}
+      />
+
+      <JamTypeField 
+        value={jamData?.jam_type}
+        onChangeValue={(option: any) => updateField('jam_type', option.value)} 
+      />
+
+      <LocationTypeField 
+        value={jamData?.location_type}
+        onChangeValue={(option: any) => updateField('location_type', option.value)} 
       />
 
       <DatePickerField 
@@ -93,14 +109,31 @@ const AddJamForm = () => {
         placeholder={i18n.t('Start date')}
         onChangeValue={ (value: any) => updateField('period', {...jamData?.period || {}, ...{ start_datetime: value }}) } 
       />
+      
       <DatePickerField 
         value={'end value'}
         placeholder={i18n.t('End date')}
         onChangeValue={ (value: any) => updateField('period', {...jamData?.period || {}, ...{ end_datetime: value }}) } 
       />
 
-      <LocationPickerField />
-      <SectorsField />
+      { /* <LocationPickerField /> */}
+
+      <CountryField 
+        value={jamData?.scope_countries_codes}
+        onChangeValue={(option: any) => updateField('scope_countries_codes', [option.value])} 
+      />
+
+      <SectorsField 
+        value={jamData?.sectors_ids}
+        onChangeListValue={(option: any) => {
+          updateField('sectors_ids', [option.value]);
+        }}
+        onChangeSublistValue={(option: any) => {
+          let sectorsIds = [...jamData?.sectors_ids || []];
+          sectorsIds[1] = option.value;
+          updateField('sectors_ids', sectorsIds); 
+        }}
+      />
 
       <DividerView />
       <AddMediaField />

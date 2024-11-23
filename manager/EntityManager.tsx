@@ -1,5 +1,4 @@
 import { Share } from 'react-native';
-import Endpoints from '@/constants/Endpoints';
 import DataManager from './DataManager';
 import UserManager from './UserManager';
 
