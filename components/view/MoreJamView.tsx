@@ -48,7 +48,10 @@ const MoreJamView = () => {
         {/* Like jam */}
         <TouchableOpacity 
           style={styles.listItem}
-          onPress={() => EntityManager.likeJam(entityId)} 
+          onPress={() => ScreenManager.toggleModal({
+            name: 'LikedJamView',
+            entityId: entityId, 
+          })} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
             <IconView name="share" theme="tertiary" />
