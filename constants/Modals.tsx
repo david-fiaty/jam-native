@@ -72,7 +72,7 @@ export const Modals = [
     entityId: 0,
   },
   {
-    name: 'SavedJamView', 
+    name: 'SavedJamAction', 
     effect: 'slide',
     active: false,
     headerNavigation: true,
@@ -80,7 +80,7 @@ export const Modals = [
     entityId: 0,
   },
   {
-    name: 'LikedJamView', 
+    name: 'LikedJamAction', 
     effect: 'slide',
     active: false,
     headerNavigation: true,

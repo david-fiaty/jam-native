@@ -77,7 +77,7 @@ const JamsList = () => {
             name="save" 
             theme="tertiary" 
             onPress={() => isLoggedIn ? ScreenManager.toggleModal({
-              name: 'SavedJamView',
+              name: 'SavedJamAction',
               entityId: item?.id, 
             }) : router.push('/login')} 
           />
