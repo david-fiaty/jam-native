@@ -6,38 +6,40 @@ import TextView from "../view/TextView";
 import { Layout } from "@/constants/Layout";
 
 type Props = {
+  value?: any, 
   data?: object,
   placeholder?: string,
   onChangeValue?: (option: any) => void,
 };
 
-const SelectListBase = ({data, placeholder, onChangeValue}: Props) => {
-  const [value, setValue] = useState(null);
-  const [isFocus, setIsFocus] = useState(false);
+const SelectListBase = ({value, data, placeholder, onChangeValue}: Props) => {
+  const [selectedValue, setSelectedValue] = useState<any>(null);
+  const [isFocus, setIsFocus] = useState<boolean>(false);
+
+  if (value) selectedValue(value);
 
   const onChange = ((option: any) => {
-    setValue(option.value);
+    setSelectedValue(option.value);
     setIsFocus(false);
-
     if (onChangeValue) onChangeValue(option);
   });
 
   return (
-    <View style={[styles.container]}>
+    <View style={styles.container}>
       <Dropdown
+        value={selectedValue}
+        data={data}
         style={styles.element}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         iconStyle={styles.iconStyle}
         itemTextStyle={styles.itemTextStyle}
-        data={data}
         search={false}
         maxHeight={300}
         labelField="label"
         valueField="value"
         placeholder={placeholder}
         iconColor={Colors.primary}
-        value={value}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
         onChange={onChange}
