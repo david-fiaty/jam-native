@@ -29,9 +29,6 @@ const SaveJamView = () => {
     });
   }
 
-
-  console.log(entityId);
-
   const data = [
     <ShareJamButton style={Layout.listItem} />,
     <ViewMyJamsButton style={Layout.listItem} />,
