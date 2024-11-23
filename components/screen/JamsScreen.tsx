@@ -20,6 +20,7 @@ import ProfileForm from "@/components/form/ProfileForm";
 import JammersList from "@/components/list/JammersList";
 import HostsList from "@/components/list/HostsList";
 import SavedJamView from "@/components/view/SavedJamView";
+import LikedJamView from "../view/LikedJamView";
 import MoreJamView from "@/components/view/MoreJamView";
 
 const screenComponents: any = {
@@ -33,6 +34,7 @@ const screenComponents: any = {
   JammersList: <JammersList />,
   HostsList: <HostsList />,
   SavedJamView: <SavedJamView />,
+  LikedJamView: <LikedJamView />,
   MoreJamView: <MoreJamView />,
 };
 
