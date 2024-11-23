@@ -1,10 +1,8 @@
-import { View, TouchableOpacity } from "react-native";
+import { View } from "react-native";
 import { Layout } from "@/constants/Layout";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
-import IconView from '../view/IconView';
-import BoxView from '../view/BoxView';
-import TextView from '../view/TextView';
+import BoxView from "../view/BoxView";
 import SaveJamButton from "../button/SaveJamButton";
 import ShareJamButton from "../button/ShareJamButton";
 import AddToProjectButton from "../button/AddToProjectButton";
@@ -15,7 +13,6 @@ import DeleteJamButton from "../button/DeleteJamButton";
 import ListView from "./ListView";
 import ScreenManager from "@/manager/ScreenManager";
 
-/*
 const data = [
   <SaveJamButton style={Layout.listItem} />,
   <ShareJamButton style={Layout.listItem} />,
@@ -25,7 +22,6 @@ const data = [
   <ReportJamButton style={Layout.listItem} />,
   <DeleteJamButton style={Layout.listItem} />,
 ];
-*/
 
 const MoreJamView = () => {
   return (
@@ -36,14 +32,12 @@ const MoreJamView = () => {
           name: 'MoreJamView',
         })}
       />
-      
-      <TouchableOpacity onPress={() => {}}>
-        <BoxView direction="row" align="center" justify="flex-start">
-          <IconView name="save" theme="tertiary" />
-          <TextView>{i18n.t('Save Jam')}</TextView>
-        </BoxView>
-      </TouchableOpacity>
-      
+      <View style={Layout.borderedListContainer}>
+        <ListView
+          data={data}
+          renderItem={(item: any) => data[item.index]}
+        />
+      </View>
     </BoxView>
   );
 };
