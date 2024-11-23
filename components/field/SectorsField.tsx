@@ -21,7 +21,9 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
   const [listData, setListData] = useState<any>([]);
   const [sublistData, setSublistData] = useState<any>([]);
   
-  const buildOptions = (optionsData: any) => {
+  const buildOptions = (data: any) => {
+    const optionsData = {...data};
+    
     return optionsData.map((item: any) => {
       return {
         value: item?.id,
@@ -33,8 +35,10 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
   const filterSublist = () => {
     //console.log('---', selectedListOption, selectedSublistValue);
 
-    console.log('selectedListOption', selectedListOption);
-    console.log('listData', listData);
+    //console.log('selectedListOption', selectedListOption);
+    //console.log('listData', listData);
+    
+
     const filteredData = listData.find((item: any) => {
       
       /*
@@ -60,7 +64,7 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
     if (onChangeSublistValue) onChangeSublistValue(option);
   };
 
-  if (!listData?.length) {
+  if (!rawData?.length) {
     EntityManager.getSectors().then((data: any) => {
       setRawData(data);
       setListData(buildOptions(data));
