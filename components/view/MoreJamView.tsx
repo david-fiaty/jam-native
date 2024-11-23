@@ -9,8 +9,6 @@ import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
 import SpinnerView from "../view/SpinnerView";
 import ShareJamButton from "../button/ShareJamButton";
-import AddToProjectButton from "../button/AddToProjectButton";
-import ViewProjectButton from "../button/ViewProjectButton";
 import EditJamButton from "../button/EditJamButton";
 import ReportJamButton from "../button/ReportJamButton";
 import DeleteJamButton from "../button/DeleteJamButton";
@@ -69,8 +67,23 @@ const MoreJamView = () => {
           </BoxView>
         </TouchableOpacity>
 
-        {/* Add to project */}
+        {/* Save jam */}
         <TouchableOpacity 
+          style={styles.listItem}
+          onPress={() => isLoggedIn ? ScreenManager.toggleModal({
+            name: 'SaveJamView',
+            entityId: entityId, 
+          }) : router.push('/login')} 
+        >
+          <BoxView direction="row" align="center" justify="flex-start">
+            <IconView name="save" theme="tertiary" />
+            <TextView>{i18n.t('Share Jam')}</TextView>
+          </BoxView>
+        </TouchableOpacity>
+
+        {/* Add jam to project */}
+        <TouchableOpacity 
+          style={styles.listItem}
           onPress={() => isLoggedIn ? ScreenManager.toggleModal({
             name: 'SaveJamView',
             entityId: entityId, 
@@ -81,6 +94,21 @@ const MoreJamView = () => {
             <TextView>{i18n.t('Add to project')}</TextView>
           </BoxView>
         </TouchableOpacity>
+
+        {/* Report jam */}
+        <TouchableOpacity 
+          style={styles.listItem}
+          onPress={() => isLoggedIn ? ScreenManager.toggleModal({
+            name: 'SaveJamView',
+            entityId: entityId, 
+          }) : router.push('/login')} 
+        >
+          <BoxView direction="row" align="center" justify="flex-start">
+            <IconView name="save" theme="tertiary" />
+            <TextView>{i18n.t('Add to project')}</TextView>
+          </BoxView>
+        </TouchableOpacity>
+
       </View>
     </BoxView>
   );
