@@ -9,7 +9,6 @@ import TextView from '../view/TextView';
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
-import ShareJamButton from "../button/ShareJamButton";
 import ViewMyJamsButton from "../button/ViewMyJamsButton";
 
 const SaveJamView = () => {
@@ -28,11 +27,6 @@ const SaveJamView = () => {
       setIsSaved(success);
     });
   }
-
-  const data = [
-    <ShareJamButton style={Layout.listItem} />,
-    <ViewMyJamsButton style={Layout.listItem} />,
-  ];
 
   if (!entity) return <SpinnerView />;
 
@@ -60,7 +54,21 @@ const SaveJamView = () => {
         >
           <BoxView direction="row" align="center" justify="flex-start">
             <IconView name="share" theme="tertiary" />
-            <TextView>{i18n.t('Save Jam')}</TextView>
+            <TextView>{i18n.t('Share Jam')}</TextView>
+          </BoxView>
+        </TouchableOpacity>
+
+        {/* View user Jams */}
+        <TouchableOpacity 
+          style={styles.listItem}
+          onPress={() => ScreenManager.toggleModal({
+            name: 'SaveJamView',
+            entityId: entityId, 
+          })} 
+        >
+          <BoxView direction="row" align="center" justify="flex-start">
+            <IconView name="share" theme="tertiary" />
+            <TextView>{i18n.t('View my Jams')}</TextView>
           </BoxView>
         </TouchableOpacity>
 
