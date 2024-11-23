@@ -22,6 +22,7 @@ import HostsList from "@/components/list/HostsList";
 import SavedJamAction from "@/components/action/SavedJamAction";
 import LikedJamAction from "../action/LikedJamAction";
 import MoreJamView from "@/components/view/MoreJamView";
+import AddedJamAction from "../action/AddedJamAction";
 
 const screenComponents: any = {
   JamsList: <JamsList />,
@@ -35,6 +36,7 @@ const screenComponents: any = {
   HostsList: <HostsList />,
   SavedJamAction: <SavedJamAction />,
   LikedJamAction: <LikedJamAction />,
+  AddedJamAction: <AddedJamAction />,
   MoreJamView: <MoreJamView />,
 };
 
