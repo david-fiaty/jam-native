@@ -15,9 +15,12 @@ type Props = BaseProps & {
 
 const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [mainIndustries, setMainIndustries] = useState<any>([]);
-  const [subIndustries, setSubIndustries] = useState<any>([]);
-
+  const [selectedListOption, setSelectedListOption] = useState<any>(null);
+  const [selectedSublistValue, setSelectedSublistValue] = useState<any>(null);
+  const [rawData, setRawData] = useState<any>([]);
+  const [listData, setListData] = useState<any>([]);
+  const [sublistData, setSublistData] = useState<any>([]);
+  
   const buildOptions = (optionsData: any) => {
     return optionsData.map((item: any) => {
       return {
@@ -27,18 +30,40 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
     });
   };
 
+  const filterSublist = () => {
+    //console.log('---', selectedListOption, selectedSublistValue);
+
+    console.log('selectedListOption', selectedListOption);
+    console.log('listData', listData);
+    const filteredData = listData.find((item: any) => {
+      
+      /*
+      if (item?.value == selectedListOption?.value) {
+        return item?.sub_sectors;
+      }
+        */
+    });
+
+    //console.log(filteredData);
+
+
+  };
+
   const onChangeList = (option: any) => {
+    setSelectedListOption(option);
+    filterSublist();
     if (onChangeListValue) onChangeListValue(option);
   };
 
   const onChangeSubList = (option: any) => {
+    setSelectedSublistValue(option);
     if (onChangeSublistValue) onChangeSublistValue(option);
   };
 
-  if (!mainIndustries?.length) {
+  if (!listData?.length) {
     EntityManager.getSectors().then((data: any) => {
-      setMainIndustries(buildOptions(data));
-      setSubIndustries([]);
+      setRawData(data);
+      setListData(buildOptions(data));
       setIsLoaded(true);
     });
   }
@@ -49,13 +74,13 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
     <BoxView direction="column" align="center" style={styles.container}>
       <SelectListBase 
         value={value}
-        data={mainIndustries} 
+        data={listData} 
         placeholder={i18n.t('Industries')} 
         onChangeValue={onChangeList}
       />
       <SelectListBase 
         value={value}
-        data={subIndustries} 
+        data={sublistData} 
         placeholder={i18n.t('Sub industries')} 
         onChangeValue={onChangeSubList}
       />
