@@ -10,9 +10,9 @@ import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
 
-const LikedJamView = () => {
+const SavedJamAction = () => {
   const [entity, setEntity] = useState<any>(null);
-  const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [isSaved, setIsSaved] = useState<boolean>(false);
   const entityId = ScreenManager.getActiveScreen()?.entityId;
 
   if (!entity) {
@@ -21,24 +21,24 @@ const LikedJamView = () => {
     });
   }
 
-  if (!isLiked) {
-    EntityManager.likeJam(entityId).then((success: boolean) => {
-      setIsLiked(success);
+  if (!isSaved) {
+    EntityManager.saveJam(entityId).then((success: boolean) => {
+      setIsSaved(success);
     });
   }
 
   if (!entity) return <SpinnerView />;
 
-  const title = (entity && isLiked) 
-    ? i18n.t('Jam is now liked') 
-    : i18n.t('Like action failed. Please try again'); 
+  const title = (entity && isSaved) 
+    ? i18n.t('Jam is now saved to your jams') 
+    : i18n.t('Save action failed. Please try again'); 
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={title}
         onPress={() => ScreenManager.toggleModal({
-          name: 'LikedJamView',
+          name: 'SavedJamAction',
         })}
       />
 
@@ -58,7 +58,7 @@ const LikedJamView = () => {
         <TouchableOpacity 
           style={styles.listItem}
           onPress={() => ScreenManager.toggleModal({
-            name: 'LikedJamView',
+            name: 'SavedJamAction',
             entityId: entityId, 
           })} 
         >
@@ -80,5 +80,4 @@ const styles = StyleSheet.create({
   }, 
 });
 
-
-export default LikedJamView;
+export default SavedJamAction;

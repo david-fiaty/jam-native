@@ -19,8 +19,8 @@ import AddJamForm from "@/components/form/AddJamForm";
 import ProfileForm from "@/components/form/ProfileForm";
 import JammersList from "@/components/list/JammersList";
 import HostsList from "@/components/list/HostsList";
-import SavedJamView from "@/components/view/SavedJamView";
-import LikedJamView from "../view/LikedJamView";
+import SavedJamAction from "@/components/action/SavedJamAction";
+import LikedJamAction from "../action/LikedJamAction";
 import MoreJamView from "@/components/view/MoreJamView";
 
 const screenComponents: any = {
@@ -33,8 +33,8 @@ const screenComponents: any = {
   SearchView: <SearchView />,
   JammersList: <JammersList />,
   HostsList: <HostsList />,
-  SavedJamView: <SavedJamView />,
-  LikedJamView: <LikedJamView />,
+  SavedJamAction: <SavedJamAction />,
+  LikedJamAction: <LikedJamAction />,
   MoreJamView: <MoreJamView />,
 };
 
