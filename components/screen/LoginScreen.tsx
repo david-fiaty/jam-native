@@ -26,16 +26,11 @@ const LoginScreen = () => {
 
   const submitForm = async () => {
     // Todo - Connect username and password
-    //let response = await UserManager.login(username, password);
-    let success: boolean = await UserManager.login('mitsiomotu@yopmail.com', 'Password1234');
-    setIsProcessing(false);
-
-    if (success === true) {  
-      router.replace('/jams');
-    }
-    else {
-      ScreenManager.showMessage(i18n.t('Invalid user name or password.'));
-    }
+    //UserManager.login(username, password).then((success: boolean) => {
+    UserManager.login('mitsiomotu@yopmail.com', 'Password1234').then((success: boolean) => {
+      setIsProcessing(false);
+      success === true ? router.replace('/jams') : ScreenManager.showMessage(i18n.t('Invalid user name or password.'));
+    });
   }  
 
   return (
