@@ -19,7 +19,7 @@ const SectorsField = ({value}: Props) => {
   const buildOptions = (optionsData: any) => {
     return optionsData.map((item: any) => {
       return {
-        id: item?.id,
+        value: item?.id,
         label: item?.name,
       }
     });
