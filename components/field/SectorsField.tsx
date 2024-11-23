@@ -37,10 +37,6 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
     if (onChangeListValue) onChangeListValue(option);
   };
 
-  const filterSublist = () => {
-
-  };
-
   const onChangeSubList = (option: any) => {
     setSelectedSublistOption(option);
     if (onChangeSublistValue) onChangeSublistValue(option);
