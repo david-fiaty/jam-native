@@ -5,7 +5,7 @@ import DataManager from './DataManager';
 class UserManager {
   async login(data: any) {
     let response = await DataManager.post('login', data);
-
+    
     if (response?.tokens?.access_token?.length) {
       Store.dispatch(setTokenData(JSON.stringify(response.tokens)));
       Store.dispatch(setIsLoggedIn(true));
@@ -17,7 +17,16 @@ class UserManager {
   }
 
   async register(data: any) {
-    let response = await DataManager.post('login', data);
+    let response = await DataManager.post('register', data);
+
+    if (response?.tokens?.access_token?.length) {
+      Store.dispatch(setTokenData(JSON.stringify(response.tokens)));
+      Store.dispatch(setIsLoggedIn(true));
+
+      return true;
+    }
+    
+    return false;
   }
 
   async getUserData() {
