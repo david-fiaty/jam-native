@@ -26,6 +26,17 @@ class EntityManager {
     return !!response;
   }
 
+  async likeJam(entityId: any) {
+    let profileId = await UserManager.getProfileId();
+    let response = await DataManager.post('likeJam', {
+      profile_id: profileId,
+      item_id: entityId,
+      like_action: 'like',
+    });
+
+    return !!response;
+  }
+
   async shareJam(entityId: any) {
     try {
       const result = await Share.share({
