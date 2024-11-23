@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { View, TouchableOpacity } from "react-native";
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
@@ -12,7 +12,6 @@ import ScreenManager from "@/manager/ScreenManager";
 import DataManager from "@/manager/DataManager";
 
 const JammersList = () => {
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [entity, setEntity] = useState<any>(null);
   const [profiles, setProfiles] = useState<any>(null);
   const entityId = ScreenManager.getActiveScreen()?.entityId;
@@ -31,10 +30,6 @@ const JammersList = () => {
 
   if (!entity || !profiles) return <SpinnerView />;
 
-  console.log('------entity', entity);
-  console.log('------profiles', profiles);
-
-  
   const renderItem = (row: any) => (
     <TouchableOpacity onPress={() => console.log('clicked')}>
       <BoxView direction="row" align="center" justify="flex-start" style={Layout.listItem}>
