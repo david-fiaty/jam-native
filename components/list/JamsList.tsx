@@ -12,10 +12,10 @@ import CollapsibleView from '../view/CollapsibleView';
 import SpinnerView from '../view/SpinnerView';
 import JamStatusButton from '../button/JamStatusButton';
 import ListView from '../view/ListView';
-import DataManager from '@/manager/DataManager';
 import ImageSlideshow from '../slideshow/ImageSlideshow';
 import UserManager from '@/manager/UserManager';
 import ScreenManager from '@/manager/ScreenManager';
+import EntityManager from '@/manager/EntityManager';
 
 const JamsList = () => {  
   const router = useRouter();
@@ -24,7 +24,7 @@ const JamsList = () => {
 
   useEffect(() => {
     (async () => {
-      const data: any = await DataManager.get('jams');
+      const data: any = await EntityManager.getJams();
       setTimeout(() => setData(data), Layout.animation.duration);
     })();
   });
