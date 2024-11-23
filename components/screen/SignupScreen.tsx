@@ -36,7 +36,8 @@ const SignupScreen = () => {
     });
   }  
 
-  if (!isLoaded) return <SpinnerView />;
+
+  //if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView direction="column" align="center" justify="center" style={Layout.screenContent}>
