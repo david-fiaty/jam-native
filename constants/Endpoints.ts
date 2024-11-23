@@ -34,6 +34,12 @@ const Endpoints = {
     searcheable: false,
     dataKey: null,
   },
+  report: {
+    url: '/report-items/',
+    cacheable: false,
+    searcheable: false,
+    dataKey: null,
+  },
   currentUser: {
     url: '/get-current-user-info/',
     cacheable: false,
