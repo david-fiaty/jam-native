@@ -9,12 +9,9 @@ import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
-import UserManager from '@/manager/UserManager';
 import EntityManager from '@/manager/EntityManager';
 
 const MoreJamView = () => {
-  const router = useRouter();
-  const isLoggedIn = UserManager.isLoggedIn();
   const [entity, setEntity] = useState<any>(null);
   const entityId = ScreenManager.getActiveScreen()?.entityId;
 
@@ -25,8 +22,6 @@ const MoreJamView = () => {
   }
 
   if (!entity) return <SpinnerView />;
-
-  console.log(entityId);
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
@@ -39,10 +34,10 @@ const MoreJamView = () => {
         {/* Save jam */}
         <TouchableOpacity 
           style={styles.listItem}
-          onPress={() => isLoggedIn ? ScreenManager.toggleModal({
+          onPress={() => ScreenManager.toggleModal({
             name: 'SaveJamView',
             entityId: entityId, 
-          }) : router.push('/login')} 
+          })} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
             <IconView name="save" theme="tertiary" />
@@ -53,10 +48,7 @@ const MoreJamView = () => {
         {/* Share jam */}
         <TouchableOpacity 
           style={styles.listItem}
-          onPress={() => isLoggedIn ? ScreenManager.toggleModal({
-            name: 'SaveJamView',
-            entityId: entityId, 
-          }) : router.push('/login')} 
+          onPress={() => EntityManager.shareJam(entityId)} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
             <IconView name="share" theme="tertiary" />
@@ -67,10 +59,10 @@ const MoreJamView = () => {
         {/* Add jam to project */}
         <TouchableOpacity 
           style={styles.listItem}
-          onPress={() => isLoggedIn ? ScreenManager.toggleModal({
+          onPress={() => ScreenManager.toggleModal({
             name: 'SaveJamView',
             entityId: entityId, 
-          }) : router.push('/login')} 
+          })} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
             <IconView name="plus" theme="tertiary" />
@@ -81,10 +73,10 @@ const MoreJamView = () => {
         {/* Edit jam */}
         <TouchableOpacity 
           style={styles.listItem}
-          onPress={() => isLoggedIn ? ScreenManager.toggleModal({
+          onPress={() => ScreenManager.toggleModal({
             name: 'SaveJamView',
             entityId: entityId, 
-          }) : router.push('/login')} 
+          })} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
             <IconView name="edit" theme="tertiary" />
@@ -95,10 +87,10 @@ const MoreJamView = () => {
         {/* Report jam */}
         <TouchableOpacity 
           style={styles.listItem}
-          onPress={() => isLoggedIn ? ScreenManager.toggleModal({
+          onPress={() => ScreenManager.toggleModal({
             name: 'SaveJamView',
             entityId: entityId, 
-          }) : router.push('/login')} 
+          })} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
             <IconView name="report" theme="tertiary" />
@@ -109,10 +101,10 @@ const MoreJamView = () => {
         {/* Delete jam */}
         <TouchableOpacity 
           style={styles.listItem}
-          onPress={() => isLoggedIn ? ScreenManager.toggleModal({
+          onPress={() => ScreenManager.toggleModal({
             name: 'SaveJamView',
             entityId: entityId, 
-          }) : router.push('/login')} 
+          })} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
             <IconView name="delete" theme="tertiary" />
