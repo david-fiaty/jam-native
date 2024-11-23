@@ -31,7 +31,7 @@ const LikedJamView = () => {
 
   const title = (entity && isLiked) 
     ? i18n.t('Jam is now liked') 
-    : i18n.t('Jam not liked, please try again'); 
+    : i18n.t('Like action failed. Please try again'); 
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
