@@ -9,7 +9,6 @@ import ViewMyJamsButton from "../button/ViewMyJamsButton";
 import ListView from "./ListView";
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
-import DataManager from "@/manager/DataManager";
 import EntityManager from '@/manager/EntityManager';
 
 const SaveJamView = () => {
