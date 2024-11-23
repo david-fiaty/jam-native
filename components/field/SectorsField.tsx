@@ -15,11 +15,14 @@ type Props = BaseProps & {
 
 const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [mainIndustries, setMainIndustries] = useState<any>([]);
-  const [subIndustries, setSubIndustries] = useState<any>([]);
-
-  const buildOptions = (optionsData: any) => {
-    return optionsData.map((item: any) => {
+  const [rawData, setRawData] = useState<any>([]);
+  const [listData, setListData] = useState<any>([]);
+  const [sublistData, setSublistData] = useState<any>([]);
+  const [selectedListOption, setSelectedListOption] = useState<any>({});
+  const [selectedSublistOption, setSelectedSublistOption] = useState<any>({});
+  
+  const buildOptions = (optionsData: any) => {    
+    return [...(optionsData || [])].map((item: any) => {
       return {
         value: item?.id,
         label: item?.name,
@@ -28,17 +31,22 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
   };
 
   const onChangeList = (option: any) => {
+    setSelectedListOption(option);
+    let selectedListOptionData = rawData.find((item: any) => item?.id == selectedListOption?.value);
+    setSublistData(buildOptions(selectedListOptionData?.sub_sectors));
     if (onChangeListValue) onChangeListValue(option);
   };
 
-  const onChangeSubList = (option: any) => {
+  const onChangeSublist = (option: any) => {
+    setSelectedSublistOption(option);
     if (onChangeSublistValue) onChangeSublistValue(option);
   };
 
-  if (!mainIndustries?.length) {
+  if (!rawData?.length) {
     EntityManager.getSectors().then((data: any) => {
-      setMainIndustries(buildOptions(data));
-      setSubIndustries([]);
+      setRawData(data);
+      setListData(buildOptions(data));
+      setSublistData([]);
       setIsLoaded(true);
     });
   }
@@ -48,16 +56,16 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
   return (
     <BoxView direction="column" align="center" style={styles.container}>
       <SelectListBase 
-        value={value}
-        data={mainIndustries} 
+        value={selectedSublistOption}
+        data={listData} 
         placeholder={i18n.t('Industries')} 
         onChangeValue={onChangeList}
       />
       <SelectListBase 
         value={value}
-        data={subIndustries} 
+        data={sublistData} 
         placeholder={i18n.t('Sub industries')} 
-        onChangeValue={onChangeSubList}
+        onChangeValue={onChangeSublist}
       />
     </BoxView>
   );

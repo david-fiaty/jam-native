@@ -67,6 +67,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
   - Missing delete endpoints for projects and jams
   - Missing endpoint for add jam to project
   - Update projects, jams, profiles: pending logic validation
+  - Sectors field in profile, jams an registration should accept sector/subsector pairs 
   - Missing endpoints for country codes. Required to be able to restrict countries in admin with business logic or user location. 
     Also add language parameter in request
 
