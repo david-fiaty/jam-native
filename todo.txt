@@ -58,6 +58,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
   - Data endpoints: need to accept language as parameter
   - Copy Jam link cannot be implemented (missing URL in payload, maybe irrelevant on native)
   - Errors with jam images having double extension .jpg.png or .png.png => error handling is additional performance load
+  - Report item: endpoint is asking for reporting_profile_id, but systematically returns error "reporting_user_id field missing"
 
 # API remarks
   * Jams list sectors field: should not have language in the payload / language should be a request parameter
