@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Divider } from '@rneui/base';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
 import LogoView from '../view/LogoView';
@@ -18,6 +17,9 @@ import LinkView from '../view/LinkView';
 import ButtonView from '../view/ButtonView';
 import SpinnerView from '../view/SpinnerView';
 import ScreenManager from '@/manager/ScreenManager';
+import DividerView from '../view/DividerView';
+import SectorsField from '../field/SectorsField';
+import ProfileTypeField from '../field/ProfileTypeField';
 
 const SignupScreen = () => {
   const router = useRouter();
@@ -39,12 +41,14 @@ const SignupScreen = () => {
 
   //if (!isLoaded) return <SpinnerView />;
 
+  console.log(signupData);
+
   return (
     <BoxView direction="column" align="center" justify="center" style={Layout.screenContent}>
       <LogoView size={{ width: 80, height: 80 }} />    
       <TextView style={styles.wecomeMessage}>{i18n.t('Create an account')}</TextView> 
 
-      <Divider /><Divider />
+      <DividerView />
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Email address')} 
@@ -57,8 +61,29 @@ const SignupScreen = () => {
         secureTextEntry={true} 
         autoCapitalize={false}
         spellCheck={false}
-        onChangeText={(text: string) => setPassword(text)}
+        value={signupData?.password}
+        onChangeText={(value: string) => updateField('password', value)}
       />
+
+      <InputTextField 
+        containerStyle={styles.inputTextFieldContainer}
+        placeholder={i18n.t('First name')} 
+        value={signupData?.email}
+        onChangeText={(value: string) => updateField('first_name', value)}
+      />
+
+      <InputTextField 
+        containerStyle={styles.inputTextFieldContainer}
+        placeholder={i18n.t('Last name')} 
+        value={signupData?.email}
+        onChangeText={(value: string) => updateField('last_name', value)}
+      />
+
+      <ProfileTypeField />
+      
+      <SectorsField />
+
+      <DividerView />
 
       <ButtonView 
         label={i18n.t('Continue')} 
@@ -79,7 +104,7 @@ const SignupScreen = () => {
         <SkipButton onPress={async () => router.replace('/jams')} />
       </BoxView>
 
-      <Divider /><Divider />
+      <DividerView />
       <GoogleLoginButton />
       <FacebookLoginButton />
       <InstagramLoginButton />

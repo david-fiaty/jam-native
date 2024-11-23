@@ -1,6 +1,16 @@
 import i18n from "@/translation/i18n";
 
 const StaticData = {
+  profileTypes: [
+    {
+      id: 'personal',
+      label: i18n.t('Personal'),
+    },
+    {
+      id: 'organisation',
+      label: i18n.t('Organisation'),
+    },
+  ],
   jamCategories: [
     {
       id: 'calls',
