@@ -45,6 +45,17 @@ const MoreJamView = () => {
           </BoxView>
         </TouchableOpacity>
 
+        {/* Like jam */}
+        <TouchableOpacity 
+          style={styles.listItem}
+          onPress={() => EntityManager.likeJam(entityId)} 
+        >
+          <BoxView direction="row" align="center" justify="flex-start">
+            <IconView name="share" theme="tertiary" />
+            <TextView>{i18n.t('Like Jam')}</TextView>
+          </BoxView>
+        </TouchableOpacity>
+
         {/* Share jam */}
         <TouchableOpacity 
           style={styles.listItem}
