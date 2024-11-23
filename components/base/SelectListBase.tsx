@@ -16,7 +16,7 @@ const SelectListBase = ({value, data, placeholder, onChangeValue}: Props) => {
   const [selectedValue, setSelectedValue] = useState<any>(null);
   const [isFocus, setIsFocus] = useState<boolean>(false);
 
-  if (value) selectedValue(value);
+  if (value && !selectedValue) setSelectedValue(value);
 
   const onChange = ((option: any) => {
     setSelectedValue(option.value);
