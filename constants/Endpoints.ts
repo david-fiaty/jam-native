@@ -9,7 +9,7 @@ const Endpoints = {
     url: '/projects/feed/?profile_id=0&displayed_items_ids=1,2&nbr_items_to_return=100',
     cacheable: true,
     searcheable: true,
-    dataKey: null,
+    dataKey: 'new_projects_to_display',
   },
   profiles: {
     url: '/profiles/feed/?profile_id=0&profile_type=all&displayed_items_ids=1,2&nbr_items_to_return=100',
