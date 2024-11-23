@@ -1,18 +1,18 @@
 const Endpoints = {
   jams: {
-    url: '/jams/',
+    url: '/jams/feed/?profile_id=0&jam_type=all&displayed_items_ids=1,2&nbr_items_to_return=100',
     cacheable: true,
     searcheable: true,
-    dataKey: null, 
+    dataKey: 'new_jams_to_display', 
   },
   projects: {
-    url: '/projects/',
+    url: '/projects/feed/?profile_id=0&displayed_items_ids=1,2&nbr_items_to_return=100',
     cacheable: true,
     searcheable: true,
     dataKey: null,
   },
   profiles: {
-    url: '/profiles/feed/?profile_id=0&profile_type=all&displayed_items_ids=1,2&nbr_items_to_return=10',
+    url: '/profiles/feed/?profile_id=0&profile_type=all&displayed_items_ids=1,2&nbr_items_to_return=100',
     cacheable: false,
     searcheable: true,
     dataKey: 'new_profiles_to_display',
