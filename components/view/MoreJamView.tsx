@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { useRouter } from 'expo-router';
 import { Layout } from "@/constants/Layout";
 import BackButton from "../button/BackButton";
@@ -8,7 +8,6 @@ import IconView from '../view/IconView';
 import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
 import SpinnerView from "../view/SpinnerView";
-import SaveJamButton from "../button/SaveJamButton";
 import ShareJamButton from "../button/ShareJamButton";
 import AddToProjectButton from "../button/AddToProjectButton";
 import ViewProjectButton from "../button/ViewProjectButton";
@@ -55,9 +54,10 @@ const MoreJamView = () => {
         onPress={() => ScreenManager.toggleModal({ name: 'MoreJamView' })}
       />
       
-      <View style={Layout.borderedListContainer}>
-        {/* Save button */}
+      <View style={styles.listContainer}>
+        {/* Save jam */}
         <TouchableOpacity 
+          style={styles.listItem}
           onPress={() => isLoggedIn ? ScreenManager.toggleModal({
             name: 'SaveJamView',
             entityId: entityId, 
@@ -68,9 +68,29 @@ const MoreJamView = () => {
             <TextView>{i18n.t('Save Jam')}</TextView>
           </BoxView>
         </TouchableOpacity>
+
+        {/* Add to project */}
+        <TouchableOpacity 
+          onPress={() => isLoggedIn ? ScreenManager.toggleModal({
+            name: 'SaveJamView',
+            entityId: entityId, 
+          }) : router.push('/login')} 
+        >
+          <BoxView direction="row" align="center" justify="flex-start">
+            <IconView name="save" theme="tertiary" />
+            <TextView>{i18n.t('Add to project')}</TextView>
+          </BoxView>
+        </TouchableOpacity>
       </View>
     </BoxView>
   );
 };
+
+const styles = StyleSheet.create({
+  listContainer: Layout.borderedListContainer,
+  listItem: {
+    marginBottom: Layout.space.base,
+  }, 
+});
 
 export default MoreJamView;
