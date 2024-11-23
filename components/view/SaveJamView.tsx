@@ -23,12 +23,10 @@ const SaveJamView = () => {
     });
   }
 
-  DataManager.post('saveJam', {
-    profile_id: 3,
-    save_items_ids: [entityId],
-  }).then((response: any) => {
-    console.log(response);
-  });
+  if (!isSaved) {
+
+  }
+
 
   console.log(entityId);
 
