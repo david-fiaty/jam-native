@@ -44,7 +44,7 @@ const SignupScreen = () => {
   console.log(signupData);
 
   return (
-    <BoxView direction="column" align="center" justify="center" style={Layout.screenContent}>
+    <BoxView direction="column" align="center" justify="center" scroll={true} style={Layout.screenContent}>
       <LogoView size={{ width: 80, height: 80 }} />    
       <TextView style={styles.wecomeMessage}>{i18n.t('Create an account')}</TextView> 
 
@@ -80,7 +80,7 @@ const SignupScreen = () => {
       />
 
       <ProfileTypeField />
-      
+
       <SectorsField />
 
       <DividerView />
