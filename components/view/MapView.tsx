@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, Platform, TouchableWithoutFeedback } from "react-native";
 import { Marker } from "react-native-maps";
+import { BaseProps } from "@/constants/Types";
+import { Layout } from '@/constants/Layout';
 import * as Device from "expo-device";
 import * as Location from "expo-location";
 import RNMapView from "react-native-maps";
-import { BaseProps } from "@/constants/Types";
 import SpinnerView from './SpinnerView';
-import { Layout } from '@/constants/Layout';
+
 import DataManager from '@/manager/DataManager';
 
 const MapView = ({ style, children }: BaseProps) => {
