@@ -3,7 +3,9 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import * as ImagePicker from 'expo-image-picker';
 import ImageView from '../view/ImageView';
-import MediaManager from '@/manager/MediaManager';
+import TextView from '../view/TextView';
+import BoxView from '../view/BoxView';
+import { Layout } from '@/constants/Layout';
 
 type Props = BaseProps & {
   label?: JSX.Element, 
@@ -12,9 +14,9 @@ type Props = BaseProps & {
 
 const MediaPickerBase = ({label, onSelectMedia}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
-
-  const ImagePreview = (selectedImage: string) => {
-    return selectedImage ? <ImageView source={selectedImage} style={styles.image} /> : <></>;
+  const renderImage = (data: any) => {
+    if (!data?.uri?.length) return <></>;
+    return <ImageView key={data.uri} uri={data.uri} width={64} height={64} resizeMode="cover" />;    
   };
 
   const pickImage = async () => {
@@ -27,7 +29,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
     });
 
     if (!result.canceled && result?.assets?.length) {
-      let mediaList = {...selectedMedia, ...result.assets};
+      const mediaList = [...selectedMedia, ...result.assets];
       setSelectedMedia(mediaList);
       if (onSelectMedia) onSelectMedia(mediaList);
     }
@@ -35,11 +37,11 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
 
   return (
     <TouchableOpacity onPress={pickImage}>
-      {label}
-      { selectedMedia &&
-        <View style={styles.preview}>
-          <ImagePreview selectedImage={selectedMedia} />
-        </View>
+      <TextView>{label}</TextView>
+      { selectedMedia?.length &&
+        <BoxView direction="row" align="flex-start" justify="left" style={styles.preview}>
+          { selectedMedia.map((data: any) => renderImage(data) )}
+        </BoxView>
       }
       
     </TouchableOpacity>
@@ -48,8 +50,10 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
 
 const styles = StyleSheet.create({
   container: {},
-  preview: {},
-  image: {},
+  preview: {
+    backgroundColor: 'red',
+    paddingVertical: Layout.space.base,
+  },
 });
 
 export default MediaPickerBase;
