@@ -11,8 +11,16 @@ import SpinnerView from './SpinnerView';
 import DataManager from '@/manager/DataManager';
 
 const MapView = ({ style, children }: BaseProps) => {
-  const [location, setLocation] = useState('');
-  const [data, setData] = useState([]);
+  const [userLocation, setUserLocation] = useState('');
+  const [jamsData, setJamsData] = useState<any>(null);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
+  if (!jamsData) {
+    DataManager.get('jams').then((data: any) => {
+      setJamsData(data);
+      setIsLoaded(true);
+    });
+  }
 
   useEffect(() => {
     (async () => {
@@ -28,18 +36,12 @@ const MapView = ({ style, children }: BaseProps) => {
       }
 
       let location: any = await Location.getCurrentPositionAsync({});
-      setLocation(location);
+      if (location) setUserLocation(location);
 
-      let data = await DataManager.get('jams');
-      setTimeout(() => {
-        setData(data);
-      }, Layout.animation.duration);
     })();
   }, []);
 
-  if (!location || !data)  {
-    return <SpinnerView />
-  }
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <TouchableWithoutFeedback>
@@ -54,7 +56,7 @@ const MapView = ({ style, children }: BaseProps) => {
             longitudeDelta: 3,
           }}
         >
-          { data.map((item: any) => {
+          { jamsData.map((item: any) => {
             if (item?.geolocation_longitude && item?.geolocation_latitude) {
               let coordinate = { 
                 latitude: parseFloat(item?.geolocation_latitude), 
