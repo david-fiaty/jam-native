@@ -15,8 +15,19 @@ type Props = BaseProps & {
 const MediaPickerBase = ({label, onSelectMedia}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const renderImage = (data: any) => {
-    if (!data?.uri?.length) return <></>;
-    return <ImageView key={data.uri} uri={data.uri} width={64} height={64} resizeMode="cover" />;    
+    if (data?.uri?.length) {
+      return (
+        <ImageView 
+          key={data.uri} 
+          uri={data.uri} 
+          width={64} 
+          height={64} 
+          resizeMode="cover" 
+        />
+      );    
+    }
+
+    return <></>;
   };
 
   const pickImage = async () => {
@@ -36,15 +47,17 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
   };
 
   return (
-    <TouchableOpacity onPress={pickImage}>
-      <TextView>{label}</TextView>
+    <View style={styles.container}>
+      <TouchableOpacity onPress={pickImage}>
+        <TextView>{label}</TextView>
+      </TouchableOpacity>
+
       { selectedMedia?.length &&
         <BoxView direction="row" align="flex-start" justify="left" style={styles.preview}>
           { selectedMedia.map((data: any) => renderImage(data) )}
         </BoxView>
       }
-      
-    </TouchableOpacity>
+    </View>
   );
 };
 
