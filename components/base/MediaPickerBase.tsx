@@ -15,7 +15,7 @@ type Props = BaseProps & {
 const MediaPickerBase = ({label, onSelectMedia}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
 
-  const renderImage = (data: any) => {
+  const renderImagePreview = (data: any) => {
     if (data?.uri?.length) {
       return (
         <ImageView 
@@ -55,7 +55,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
 
       { selectedMedia?.length &&
         <BoxView direction="row" align="flex-start" justify="left" style={styles.preview}>
-          { selectedMedia.map((data: any) => renderImage(data) )}
+          { selectedMedia.map((data: any) => renderImagePreview(data) )}
         </BoxView>
       }
     </View>
