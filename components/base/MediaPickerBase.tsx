@@ -31,9 +31,6 @@ const MediaPickerBase = ({label}: Props) => {
         setSelectedImage(data);
       });
     }
-    else {
-      console.log('Cancelled');
-    }
   };
 
   return (
