@@ -25,12 +25,12 @@ const MediaPickerBase = ({label}: Props) => {
       aspect: [4, 3],
       quality: 1,
     });
-
-    console.log(result);
   
     if (!result.canceled) {
       setSelectedImage(result.assets[0].uri);
-      console.log(selectedImage);
+      MediaManager.getBinaryData(result.assets[0].uri).then((data: any) => {
+        console.log(data);
+      });
     }
     else {
       console.log('Cancelled');
