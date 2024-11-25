@@ -63,9 +63,7 @@ const NotificationsMenu = () => {
     <View style={Layout.menuContainer}>
       <BackButton
         title={i18n.t('Notifications')}
-        onPress={() => ScreenManager.toggleModal({
-          name: 'NotificationsMenu',
-        })}
+        onPress={() => ScreenManager.toggleModal('NotificationsMenu')}
       />
       <ListView 
         data={data} 
