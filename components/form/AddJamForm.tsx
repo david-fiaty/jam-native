@@ -52,6 +52,17 @@ const AddJamForm = () => {
     });
   }  
 
+  const renderJamCategory = (row: any) => (
+    <TouchableOpacity onPress={() => updateField('type', row.item.id)}>
+    <View style={styles.categoryContainer}>
+      <View style={[styles.categoryItem, jamData?.type == row.item.id ? styles.categoryItemSelected : {}]}>
+        <IconView name={row.item.icon} theme="secondary" />
+      </View>
+      <TextView>{row.item.label}</TextView>   
+    </View>
+  </TouchableOpacity>
+  );
+
   UserManager.getProfileId().then((id: number)  => {
     if (!profileId) setProfileId(id);
     setIsLoaded(true);
@@ -75,16 +86,7 @@ const AddJamForm = () => {
         scrollEnabled={false}
         contentContainerStyle={Layout.listContainer}
         columnWrapperStyle={Layout.listColumnWrapper}
-        renderItem={(row: any) => (
-          <TouchableOpacity onPress={() => updateField('type', row.item.id)}>
-            <View style={styles.categoryContainer}>
-              <View style={[styles.categoryItem, jamData?.type == row.item.id ? styles.categoryItemSelected : {}]}>
-                <IconView name={row.item.icon} theme="secondary" />
-              </View>
-              <TextView>{row.item.label}</TextView>   
-            </View>
-          </TouchableOpacity>
-        )}
+        renderItem={(row: any) => renderJamCategory(row)}
       />
 
       <DividerView />

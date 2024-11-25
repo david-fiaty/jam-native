@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import ImageView from '../view/ImageView';
+import MediaManager from '@/manager/MediaManager';
 
 type Props = {
   label: JSX.Element, 
@@ -12,13 +13,7 @@ type ImagePreviewProps = {
 };
 
 const ImagePreview = ({selectedImage}: ImagePreviewProps) => {
-  if (selectedImage) {
-    return (
-      <ImageView source={selectedImage} style={styles.image} />
-    );
-  }
-
-  return <></>;
+  return selectedImage ? <ImageView source={selectedImage} style={styles.image} /> : <></>;
 };
 
 const MediaPickerBase = ({label}: Props) => {  
@@ -30,27 +25,22 @@ const MediaPickerBase = ({label}: Props) => {
       aspect: [4, 3],
       quality: 1,
     });
-
-
-    console.log(result);
   
     if (!result.canceled) {
-      setSelectedImage(result.assets[0].uri);
-      console.log(selectedImage);
-    }
-    else {
-      console.log('Cancelled');
+      MediaManager.getBase64Data(result.assets[0].uri).then((data: any) => {
+        setSelectedImage(data);
+        console.log(data);
+      });
     }
   };
 
   return (
     <TouchableOpacity onPress={pickImage}>
       {label}
-      
       { selectedImage &&
-      <View style={styles.preview}>
-        <ImagePreview selectedImage={selectedImage} />
-      </View>
+        <View style={styles.preview}>
+          <ImagePreview selectedImage={selectedImage} />
+        </View>
       }
       
     </TouchableOpacity>
@@ -59,6 +49,8 @@ const MediaPickerBase = ({label}: Props) => {
 
 const styles = StyleSheet.create({
   container: {},
+  preview: {},
+  image: {},
 });
 
 export default MediaPickerBase;
