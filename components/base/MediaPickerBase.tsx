@@ -3,9 +3,9 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import * as ImagePicker from 'expo-image-picker';
 import ImageView from '../view/ImageView';
-import MediaManager from '@/manager/MediaManager';
 import TextView from '../view/TextView';
 import BoxView from '../view/BoxView';
+import { Layout } from '@/constants/Layout';
 
 type Props = BaseProps & {
   label?: JSX.Element, 
@@ -16,7 +16,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const renderImage = (data: any) => {
     if (!data?.uri?.length) return <></>;
-    return <ImageView key={data.uri} path={data.uri} width={32} height={32} resizeMode="cover" />;    
+    return <ImageView key={data.uri} uri={data.uri} width={64} height={64} resizeMode="cover" />;    
   };
 
   const pickImage = async () => {
@@ -25,7 +25,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
       allowsEditing: false,
       aspect: [4, 3],
       quality: 1,
-      //base64: true,
+      base64: true,
     });
 
     if (!result.canceled && result?.assets?.length) {
@@ -39,7 +39,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
     <TouchableOpacity onPress={pickImage}>
       <TextView>{label}</TextView>
       { selectedMedia?.length &&
-        <BoxView direction="row" align="center" justify="space-between" style={styles.preview}>
+        <BoxView direction="row" align="flex-start" justify="left" style={styles.preview}>
           { selectedMedia.map((data: any) => renderImage(data) )}
         </BoxView>
       }
@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
   container: {},
   preview: {
     backgroundColor: 'red',
+    paddingVertical: Layout.space.base,
   },
 });
 
