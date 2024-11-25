@@ -35,14 +35,14 @@ const JamsList = () => {
           onPress={() =>
             isLoggedIn
               ? ScreenManager.toggleModal({
-                  name: "HostsList",
+                  name: 'HostsList',
                   entityId: row?.item?.id,
                 })
-              : router.push("/login")
+              : router.push('/login')
           }
         >
           <TextView>
-            @{i18n.t("host")} +{parseInt(row?.item?.collaborators?.length)}
+            @{i18n.t('host')} +{parseInt(row?.item?.collaborators?.length)}
           </TextView>
         </TouchableOpacity>
       </BoxView>
@@ -56,10 +56,10 @@ const JamsList = () => {
           onPress={() =>
             isLoggedIn
               ? ScreenManager.toggleModal({
-                  name: "MoreJamView",
+                  name: 'MoreJamView',
                   entityId: row?.item?.id,
                 })
-              : router.push("/login")
+              : router.push('/login')
           }
         />
       </BoxView>
@@ -84,15 +84,15 @@ const JamsList = () => {
         onPress={() =>
           isLoggedIn
             ? ScreenManager.toggleModal({
-                name: "JammersList",
+                name: 'JammersList',
                 entityId: row?.item?.id,
               })
-            : router.push("/login")
+            : router.push('/login')
         }
       >
         <IconView name="users" theme="tertiary" />
         <TextView>
-          {parseInt(row?.item?.jammers?.length)} {i18n.t("jammers")}
+          {parseInt(row?.item?.jammers?.length)} {i18n.t('jammers')}
         </TextView>
       </BoxView>
 
@@ -104,10 +104,10 @@ const JamsList = () => {
           onPress={() =>
             isLoggedIn
               ? ScreenManager.toggleModal({
-                  name: "SavedJamAction",
+                  name: 'SavedJamAction',
                   entityId: row?.item?.id,
                 })
-              : router.push("/login")
+              : router.push('/login')
           }
         />
 
@@ -118,7 +118,7 @@ const JamsList = () => {
           onPress={() =>
             isLoggedIn
               ? EntityManager.shareJam(row?.item?.id)
-              : router.push("/login")
+              : router.push('/login')
           }
         />
       </BoxView>
@@ -134,8 +134,8 @@ const JamsList = () => {
   const renderItemCollapsible = (row: any) => (
     <BoxView style={styles.listItemCollapsible}>
       <CollapsibleView
-        label={i18n.t("View more.")}
-        openedLabel={i18n.t("View less.")}
+        label={i18n.t('View more.')}
+        openedLabel={i18n.t('View less.')}
         content={
           <BoxView
             direction="column"
@@ -150,7 +150,7 @@ const JamsList = () => {
             >
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
-                {i18n.t("Location")}: {row?.item?.location_type}
+                {i18n.t('Location')}: {row?.item?.location_type}
               </TextView>
             </BoxView>
             <BoxView
@@ -161,10 +161,7 @@ const JamsList = () => {
             >
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
-                {i18n.t("Start")}:{" "}
-                {moment(row?.item?.period?.start_datetime).format(
-                  "MMM Do YYYY"
-                )}
+                {i18n.t('Start')}:{' '}{moment(row?.item?.period?.start_datetime).format('MMM Do YYYY')}
               </TextView>
             </BoxView>
             <BoxView
@@ -175,8 +172,7 @@ const JamsList = () => {
             >
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
-                {i18n.t("End")}:{" "}
-                {moment(row?.item?.period?.end_datetime).format("MMM Do YYYY")}
+              {i18n.t('End')}:{' '}{moment(row?.item?.period?.end_datetime).format('MMM Do YYYY')}
               </TextView>
             </BoxView>
             <BoxView
@@ -187,7 +183,7 @@ const JamsList = () => {
             >
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
-                {i18n.t("Industry")}: {row?.item?.sectors?.[0]?.name}
+                {i18n.t('Industry')}: {row?.item?.sectors?.[0]?.name}
               </TextView>
             </BoxView>
             <BoxView
@@ -198,7 +194,7 @@ const JamsList = () => {
             >
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
-                {i18n.t("Sector")}: {row?.item?.sectors?.[0]?.name}
+                {i18n.t('Sector')}: {row?.item?.sectors?.[0]?.name}
               </TextView>
             </BoxView>
           </BoxView>
