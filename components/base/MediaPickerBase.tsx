@@ -11,7 +11,7 @@ type Props = BaseProps & {
 };
 
 const MediaPickerBase = ({label, onSelectMedia}: Props) => {  
-  const [selectedImages, addImage] = useState<any>([]);
+  const [selectedMedia, addMedia] = useState<any>([]);
 
   const ImagePreview = (selectedImage: string) => {
     return selectedImage ? <ImageView source={selectedImage} style={styles.image} /> : <></>;
@@ -35,7 +35,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
     //if (onSelectMedia) onSelectMedia(result.assets[0].base64);
     /*
     MediaManager.getBase64Data(result.assets[0].uri).then((data: any) => {
-      addImage(data);
+      addMedia(data);
       if (onSelectMedia) onSelectMedia(data);
     });
     */
@@ -44,9 +44,9 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
   return (
     <TouchableOpacity onPress={pickImage}>
       {label}
-      { selectedImages &&
+      { selectedMedia &&
         <View style={styles.preview}>
-          <ImagePreview selectedImage={selectedImages} />
+          <ImagePreview selectedImage={selectedMedia} />
         </View>
       }
       
