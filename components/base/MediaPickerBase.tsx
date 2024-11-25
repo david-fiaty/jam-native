@@ -10,11 +10,7 @@ type Props = BaseProps & {
   onSelectMedia?: (data: any) => void,
 };
 
-type ImagePreviewProps = {
-  selectedImage?: string;
-};
-
-const ImagePreview = ({selectedImage}: ImagePreviewProps) => {
+const ImagePreview = (selectedImage: string) => {
   return selectedImage ? <ImageView source={selectedImage} style={styles.image} /> : <></>;
 };
 
