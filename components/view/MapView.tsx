@@ -37,7 +37,6 @@ const MapView = ({ style, children }: BaseProps) => {
 
       let location: any = await Location.getCurrentPositionAsync({});
       if (location) setUserLocation(location);
-
     })();
   }, []);
 
