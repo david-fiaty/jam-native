@@ -22,15 +22,19 @@ const MediaPickerBase = ({label}: Props) => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ['images'],
       allowsEditing: false,
+      base64: true,
       aspect: [4, 3],
       quality: 1,
     });
   
     if (!result.canceled) {
+      console.log(result);
+      /*
       MediaManager.getBase64Data(result.assets[0].uri).then((data: any) => {
         setSelectedImage(data);
         console.log(data);
       });
+      */
     }
   };
 
