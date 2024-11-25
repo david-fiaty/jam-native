@@ -70,6 +70,8 @@ const AddJamForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
+  console.log(jamData);
+
   return (    
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
@@ -139,9 +141,7 @@ const AddJamForm = () => {
       />
 
       <DividerView />
-      <AddMediaField 
-        onSelectMedia={(data: any) => console.log('---')}
-      />
+      <AddMediaField onSelectMedia={(data: any) => updateField('upload_medias', [data])} />
       <AddCollaboratorsField />
 
       <DividerView />
