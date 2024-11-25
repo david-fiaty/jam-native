@@ -64,16 +64,9 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 
 https://docs.google.com/spreadsheets/d/1sodzaVigD26XOopcXfLRykl51wPM5pKecS0i1QEDWMc/edit?hl=fr&gid=0#gid=0
 
-
-# API remarks
-  * Jams list sectors field: should not have language in the payload / language should be a request parameter
-  * /api/save-jams should be /api/jam/save
-  * is unlike jam url correct? it's currently the same as like-jam
-  * No title for jams? Projects have a field "name" for title
-  * No image field for projects? Search items require images
-  * No endpoints for events, jammers, calls, venues
-  * //user login response payload should not contain more than token data (exclude user data email, profile...)
-  * //User has no ID
+# New release:
+  - Ameliorations generales UI
+  - Amelioration notable performance jams list
 
 # Todo 
 - Implement image cache : https://github.com/echowaves/expo-cached-image
