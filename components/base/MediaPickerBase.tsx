@@ -10,38 +10,35 @@ type Props = BaseProps & {
   onSelectMedia?: (data: any) => void,
 };
 
-type ImagePreviewProps = {
-  selectedImage?: string;
-};
-
-const ImagePreview = ({selectedImage}: ImagePreviewProps) => {
-  return selectedImage ? <ImageView source={selectedImage} style={styles.image} /> : <></>;
-};
-
 const MediaPickerBase = ({label, onSelectMedia}: Props) => {  
-  const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
+  const [selectedMedia, setSelectedMedia] = useState<any>([]);
+
+  const ImagePreview = (selectedImage: string) => {
+    return selectedImage ? <ImageView source={selectedImage} style={styles.image} /> : <></>;
+  };
+
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ['images'],
       allowsEditing: false,
       aspect: [4, 3],
       quality: 1,
+      base64: true,
     });
-  
-    if (!result.canceled) {
-      MediaManager.getBase64Data(result.assets[0].uri).then((data: any) => {
-        setSelectedImage(data);
-        if (onSelectMedia) onSelectMedia(data);
-      });
+
+    if (!result.canceled && result?.assets?.length) {
+      let mediaList = {...selectedMedia, ...result.assets};
+      setSelectedMedia(mediaList);
+      if (onSelectMedia) onSelectMedia(mediaList);
     }
   };
 
   return (
     <TouchableOpacity onPress={pickImage}>
       {label}
-      { selectedImage &&
+      { selectedMedia &&
         <View style={styles.preview}>
-          <ImagePreview selectedImage={selectedImage} />
+          <ImagePreview selectedImage={selectedMedia} />
         </View>
       }
       
