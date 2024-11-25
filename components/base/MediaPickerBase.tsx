@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, TouchableOpacity, View, Pressable, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import * as ImagePicker from 'expo-image-picker';
 import ImageView from '../view/ImageView';
@@ -48,29 +48,22 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
   };
 
   return (
-    <Pressable onPress={() => console.log('PRESSED OUTSIDE')} style={styles.container}>
+    <View style={styles.container}>
       <TouchableOpacity onPress={pickImage}>
         <TextView>{label}</TextView>
       </TouchableOpacity>
 
       { selectedMedia?.length &&
-        
-          <TouchableOpacity onPress={() => console.log('PRESSED INSIDE')}>
-            <BoxView direction="row" align="flex-start" justify="left" style={styles.preview}>
-              { selectedMedia.map((data: any) => renderImage(data) )}
-            </BoxView>
-          </TouchableOpacity>
-  
+        <BoxView direction="row" align="flex-start" justify="left" style={styles.preview}>
+          { selectedMedia.map((data: any) => renderImage(data) )}
+        </BoxView>
       }
-  
-    </Pressable>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 30,
-  },
+  container: {},
   preview: {
     backgroundColor: 'red',
     paddingVertical: Layout.space.base,
