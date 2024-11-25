@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { BaseProps } from '@/constants/Types';
 import * as ImagePicker from 'expo-image-picker';
 import ImageView from '../view/ImageView';
 import MediaManager from '@/manager/MediaManager';
 
-type Props = {
-  label: JSX.Element, 
+type Props = BaseProps & {
+  label?: JSX.Element, 
+  onSelectMedia?: (data: any) => void,
 };
 
 type ImagePreviewProps = {
@@ -16,7 +18,7 @@ const ImagePreview = ({selectedImage}: ImagePreviewProps) => {
   return selectedImage ? <ImageView source={selectedImage} style={styles.image} /> : <></>;
 };
 
-const MediaPickerBase = ({label}: Props) => {  
+const MediaPickerBase = ({label, onSelectMedia}: Props) => {  
   const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -29,9 +31,7 @@ const MediaPickerBase = ({label}: Props) => {
     if (!result.canceled) {
       MediaManager.getBase64Data(result.assets[0].uri).then((data: any) => {
         setSelectedImage(data);
-
-        // Todo - Set image data in form
-        console.log(data);
+        if (onSelectMedia) onSelectMedia(data);
       });
     }
   };
