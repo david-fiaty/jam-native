@@ -13,7 +13,7 @@ class MediaManager {
     }
   }
 
-  getBinaryData(base64data: string ) {
+  getBinaryData(base64data: string) {
     return Uint8Array.from(atob(base64data), (char) => char.charCodeAt(0));
   }
 }
