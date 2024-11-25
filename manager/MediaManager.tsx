@@ -1,4 +1,4 @@
-import FileSystem from "react-native-fs";
+import * as FileSystem from 'expo-file-system';
 
 class MediaManager {
   async getBinaryData(uri: string) {
