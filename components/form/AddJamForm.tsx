@@ -139,7 +139,7 @@ const AddJamForm = () => {
       />
 
       <DividerView />
-      <AddMediaField />
+      <AddMediaField onSelectMedia={(data: any) => updateField('upload_medias', [data])} />
       <AddCollaboratorsField />
 
       <DividerView />

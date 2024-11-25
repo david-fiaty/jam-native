@@ -1,56 +1,72 @@
 import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { BaseProps } from '@/constants/Types';
 import * as ImagePicker from 'expo-image-picker';
 import ImageView from '../view/ImageView';
-import MediaManager from '@/manager/MediaManager';
+import TextView from '../view/TextView';
+import BoxView from '../view/BoxView';
+import { Layout } from '@/constants/Layout';
 
-type Props = {
-  label: JSX.Element, 
+type Props = BaseProps & {
+  label?: JSX.Element, 
+  onSelectMedia?: (data: any) => void,
 };
 
-type ImagePreviewProps = {
-  selectedImage?: string;
-};
+const MediaPickerBase = ({label, onSelectMedia}: Props) => {  
+  const [selectedMedia, setSelectedMedia] = useState<any>([]);
+  const renderImage = (data: any) => {
+    if (data?.uri?.length) {
+      return (
+        <ImageView 
+          key={data.uri} 
+          uri={data.uri} 
+          width={64} 
+          height={64} 
+          resizeMode="cover" 
+        />
+      );    
+    }
 
-const ImagePreview = ({selectedImage}: ImagePreviewProps) => {
-  return selectedImage ? <ImageView source={selectedImage} style={styles.image} /> : <></>;
-};
+    return <></>;
+  };
 
-const MediaPickerBase = ({label}: Props) => {  
-  const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ['images'],
       allowsEditing: false,
       aspect: [4, 3],
       quality: 1,
+      base64: true,
     });
-  
-    if (!result.canceled) {
-      MediaManager.getBase64Data(result.assets[0].uri).then((data: any) => {
-        setSelectedImage(data);
-        console.log(data);
-      });
+
+    if (!result.canceled && result?.assets?.length) {
+      const mediaList = [...selectedMedia, ...result.assets];
+      setSelectedMedia(mediaList);
+      if (onSelectMedia) onSelectMedia(mediaList);
     }
   };
 
   return (
-    <TouchableOpacity onPress={pickImage}>
-      {label}
-      { selectedImage &&
-        <View style={styles.preview}>
-          <ImagePreview selectedImage={selectedImage} />
-        </View>
+    <View style={styles.container}>
+      <TouchableOpacity onPress={pickImage}>
+        <TextView>{label}</TextView>
+      </TouchableOpacity>
+
+      { selectedMedia?.length &&
+        <BoxView direction="row" align="flex-start" justify="left" style={styles.preview}>
+          { selectedMedia.map((data: any) => renderImage(data) )}
+        </BoxView>
       }
-      
-    </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {},
-  preview: {},
-  image: {},
+  preview: {
+    backgroundColor: 'red',
+    paddingVertical: Layout.space.base,
+  },
 });
 
 export default MediaPickerBase;
