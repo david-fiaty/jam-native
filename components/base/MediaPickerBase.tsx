@@ -4,6 +4,7 @@ import { BaseProps } from '@/constants/Types';
 import * as ImagePicker from 'expo-image-picker';
 import ImageView from '../view/ImageView';
 import MediaManager from '@/manager/MediaManager';
+import TextView from '../view/TextView';
 
 type Props = BaseProps & {
   label?: JSX.Element, 
@@ -13,8 +14,12 @@ type Props = BaseProps & {
 const MediaPickerBase = ({label, onSelectMedia}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
 
-  const ImagePreview = (selectedImage: string) => {
-    return selectedImage ? <ImageView source={selectedImage} style={styles.image} /> : <></>;
+  const renderImage = (data: any) => {
+    if (data?.uri) {
+      return <ImageView key={data.uri} path={data.uri} style={styles.image} />;
+    }
+
+    return <></>;
   };
 
   const pickImage = async () => {
@@ -23,11 +28,12 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
       allowsEditing: false,
       aspect: [4, 3],
       quality: 1,
-      base64: true,
+      //base64: true,
     });
 
     if (!result.canceled && result?.assets?.length) {
-      let mediaList = {...selectedMedia, ...result.assets};
+      const mediaList = [...selectedMedia, ...result.assets];
+      console.log(mediaList);
       setSelectedMedia(mediaList);
       if (onSelectMedia) onSelectMedia(mediaList);
     }
@@ -35,10 +41,10 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
 
   return (
     <TouchableOpacity onPress={pickImage}>
-      {label}
-      { selectedMedia &&
+      <TextView>{label}</TextView>
+      { selectedMedia?.length &&
         <View style={styles.preview}>
-          <ImagePreview selectedImage={selectedMedia} />
+          { selectedMedia.map((data: any) => renderImage(data) )}
         </View>
       }
       
