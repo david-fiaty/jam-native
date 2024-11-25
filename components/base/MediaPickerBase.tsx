@@ -13,13 +13,7 @@ type ImagePreviewProps = {
 };
 
 const ImagePreview = ({selectedImage}: ImagePreviewProps) => {
-  if (selectedImage) {
-    return (
-      <ImageView source={selectedImage} style={styles.image} />
-    );
-  }
-
-  return <></>;
+  return selectedImage ? <ImageView source={selectedImage} style={styles.image} /> : <></>;
 };
 
 const MediaPickerBase = ({label}: Props) => {  
@@ -46,11 +40,10 @@ const MediaPickerBase = ({label}: Props) => {
   return (
     <TouchableOpacity onPress={pickImage}>
       {label}
-      
       { selectedImage &&
-      <View style={styles.preview}>
-        <ImagePreview selectedImage={selectedImage} />
-      </View>
+        <View style={styles.preview}>
+          <ImagePreview selectedImage={selectedImage} />
+        </View>
       }
       
     </TouchableOpacity>
