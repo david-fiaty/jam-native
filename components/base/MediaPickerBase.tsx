@@ -27,9 +27,8 @@ const MediaPickerBase = ({label}: Props) => {
     });
   
     if (!result.canceled) {
-      setSelectedImage(result.assets[0].uri);
       MediaManager.getBinaryData(result.assets[0].uri).then((data: any) => {
-        console.log(data);
+        setSelectedImage(data);
       });
     }
     else {
