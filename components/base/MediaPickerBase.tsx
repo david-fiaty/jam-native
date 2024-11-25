@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import ImageView from '../view/ImageView';
-import MediaManager from '@/manager/MediaManager';
 
 type Props = {
   label: JSX.Element, 
@@ -29,12 +28,6 @@ const MediaPickerBase = ({label}: Props) => {
   
     if (!result.canceled) {
       console.log(result);
-      /*
-      MediaManager.getBase64Data(result.assets[0].uri).then((data: any) => {
-        setSelectedImage(data);
-        console.log(data);
-      });
-      */
     }
   };
 
