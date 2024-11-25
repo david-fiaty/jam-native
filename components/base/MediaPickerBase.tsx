@@ -13,27 +13,7 @@ type Props = BaseProps & {
 };
 
 const MediaPickerBase = ({label, onSelectMedia}: Props) => {  
-  const [layout, setLayout] = useState(null);
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
-
-  const onLayout = (event: any) => {
-    setLayout(event.nativeEvent.layout);
-  };
-
-  const handleTap = (event: any) => {
-    const { pageX, pageY } = event.nativeEvent;
-    if (
-      layout &&
-      pageX >= layout.x &&
-      pageX <= layout.x + layout.width &&
-      pageY >= layout.y &&
-      pageY <= layout.y + layout.height
-    ) {
-      console.log('Tapped inside the component!');
-    } else {
-      console.log('Tapped outside the component!');
-    }
-  };
 
   const renderImage = (data: any) => {
     if (data?.uri?.length) {
