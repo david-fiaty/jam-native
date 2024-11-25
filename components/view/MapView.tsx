@@ -12,7 +12,6 @@ import DataManager from '@/manager/DataManager';
 
 const MapView = ({ style, children }: BaseProps) => {
   const [location, setLocation] = useState('');
-  const [errorMsg, setErrorMsg] = useState('');
   const [data, setData] = useState([]);
 
   useEffect(() => {
