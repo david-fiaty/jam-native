@@ -14,6 +14,7 @@ type Props = BaseProps & {
 
 const MediaPickerBase = ({label, onSelectMedia}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
+
   const renderImage = (data: any) => {
     if (data?.uri?.length) {
       return (
