@@ -36,8 +36,7 @@ const MediaPickerBase = ({label}: Props) => {
   
     if (!result.canceled) {
       setSelectedImage(result.assets[0].uri);
-      let binaryData = await MediaManager.getBinaryData(result.assets[0].uri);
-      console.log(binaryData);
+      console.log(selectedImage);
     }
     else {
       console.log('Cancelled');
