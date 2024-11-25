@@ -11,7 +11,7 @@ type Props = BaseProps & {
 };
 
 const MediaPickerBase = ({label, onSelectMedia}: Props) => {  
-  const [selectedMedia, addMedia] = useState<any>([]);
+  const [selectedMedia, setSelectedMedia] = useState<any>([]);
 
   const ImagePreview = (selectedImage: string) => {
     return selectedImage ? <ImageView source={selectedImage} style={styles.image} /> : <></>;
@@ -25,20 +25,12 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
       quality: 1,
       base64: true,
     });
-  
-    if (!result.canceled && result?.assets?.[0]?.base64?.length) {
-      console.log(result.assets[0].base64);
 
-      //if (onSelectMedia) onSelectMedia(data);
+    if (!result.canceled && result?.assets?.length) {
+      let mediaList = {...selectedMedia, ...result.assets};
+      setSelectedMedia(mediaList);
+      if (onSelectMedia) onSelectMedia(mediaList);
     }
-
-    //if (onSelectMedia) onSelectMedia(result.assets[0].base64);
-    /*
-    MediaManager.getBase64Data(result.assets[0].uri).then((data: any) => {
-      addMedia(data);
-      if (onSelectMedia) onSelectMedia(data);
-    });
-    */
   };
 
   return (
