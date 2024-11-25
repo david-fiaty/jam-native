@@ -36,15 +36,17 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
   };
 
   return (
-    <TouchableOpacity onPress={pickImage}>
-      <TextView>{label}</TextView>
+    <View style={styles.container}>
+      <TouchableOpacity onPress={pickImage}>
+        <TextView>{label}</TextView>
+      </TouchableOpacity>
+
       { selectedMedia?.length &&
         <BoxView direction="row" align="flex-start" justify="left" style={styles.preview}>
           { selectedMedia.map((data: any) => renderImage(data) )}
         </BoxView>
       }
-      
-    </TouchableOpacity>
+    </View>
   );
 };
 
