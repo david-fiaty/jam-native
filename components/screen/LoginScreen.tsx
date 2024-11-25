@@ -27,10 +27,10 @@ const LoginScreen = () => {
   const submitForm = async () => {
     // Todo - Connect username and password
     let loginData = {
-      email: email,
-      password: password,
-      //email: 'mitsiomotu@yopmail.com',
-      //password: 'Password1234',
+      //email: email,
+      //password: password,
+      email: 'mitsiomotu@yopmail.com',
+      password: 'Password1234',
     }
 
     UserManager.login(loginData).then((success: boolean) => {
@@ -42,7 +42,7 @@ const LoginScreen = () => {
   }  
 
   return (
-    <BoxView direction="column" align="center" justify="center" style={[Layout.screenContent]}>
+    <BoxView direction="column" align="center" justify="center" style={Layout.screenContent}>
       <LogoView size={{ width: 80, height: 80 }} />    
       <TextView style={styles.wecomeMessage}>{i18n.t('Welcome back')}</TextView> 
 
