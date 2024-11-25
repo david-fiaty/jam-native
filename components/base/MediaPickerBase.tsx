@@ -10,12 +10,13 @@ type Props = BaseProps & {
   onSelectMedia?: (data: any) => void,
 };
 
-const ImagePreview = (selectedImage: string) => {
-  return selectedImage ? <ImageView source={selectedImage} style={styles.image} /> : <></>;
-};
-
 const MediaPickerBase = ({label, onSelectMedia}: Props) => {  
-  const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
+  const [selectedImage, setSelectedImage] = useState<any>([]);
+
+  const ImagePreview = (selectedImage: string) => {
+    return selectedImage ? <ImageView source={selectedImage} style={styles.image} /> : <></>;
+  };
+
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ['images'],
