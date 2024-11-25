@@ -27,7 +27,8 @@ const MediaPickerBase = ({label}: Props) => {
     });
   
     if (!result.canceled) {
-      console.log(result);
+      setSelectedImage(result.base64);
+      console.log(result.base64);
     }
   };
 
