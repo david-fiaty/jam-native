@@ -16,7 +16,15 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const renderImage = (data: any) => {
     if (data?.uri?.length) {
-      return <ImageView key={data.uri} uri={data.uri} width={64} height={64} resizeMode="cover" />;    
+      return (
+        <ImageView 
+          key={data.uri} 
+          uri={data.uri} 
+          width={64} 
+          height={64} 
+          resizeMode="cover" 
+        />
+      );    
     }
 
     return <></>;
