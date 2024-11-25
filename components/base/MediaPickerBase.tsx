@@ -5,6 +5,7 @@ import * as ImagePicker from 'expo-image-picker';
 import ImageView from '../view/ImageView';
 import MediaManager from '@/manager/MediaManager';
 import TextView from '../view/TextView';
+import BoxView from '../view/BoxView';
 
 type Props = BaseProps & {
   label?: JSX.Element, 
@@ -13,10 +14,9 @@ type Props = BaseProps & {
 
 const MediaPickerBase = ({label, onSelectMedia}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
-
   const renderImage = (data: any) => {
     if (data?.uri) {
-      return <ImageView key={data.uri} path={data.uri} style={styles.image} />;
+      return <ImageView key={data.uri} path={data.uri} width={32} height={32} resizeMode="cover" />;
     }
 
     return <></>;
@@ -33,7 +33,6 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
 
     if (!result.canceled && result?.assets?.length) {
       const mediaList = [...selectedMedia, ...result.assets];
-      console.log(mediaList);
       setSelectedMedia(mediaList);
       if (onSelectMedia) onSelectMedia(mediaList);
     }
@@ -43,9 +42,9 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
     <TouchableOpacity onPress={pickImage}>
       <TextView>{label}</TextView>
       { selectedMedia?.length &&
-        <View style={styles.preview}>
+        <BoxView direction="row" align="center" justify="space-between" style={styles.preview}>
           { selectedMedia.map((data: any) => renderImage(data) )}
-        </View>
+        </BoxView>
       }
       
     </TouchableOpacity>
@@ -54,8 +53,9 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
 
 const styles = StyleSheet.create({
   container: {},
-  preview: {},
-  image: {},
+  preview: {
+    backgroundColor: 'red',
+  },
 });
 
 export default MediaPickerBase;
