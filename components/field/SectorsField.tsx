@@ -18,7 +18,6 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
   const [rawData, setRawData] = useState<any>([]);
   const [listData, setListData] = useState<any>([]);
   const [sublistData, setSublistData] = useState<any>([]);
-  const [selectedListOption, setSelectedListOption] = useState<any>({});
   const [selectedSublistOption, setSelectedSublistOption] = useState<any>({});
   
   const buildOptions = (optionsData: any) => {    
@@ -31,7 +30,6 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
   };
 
   const onChangeList = (option: any) => {
-    setSelectedListOption(option);
     setSublistData(buildOptions(rawData.find((item: any) => item?.id == option?.value)?.sub_sectors));
     if (onChangeListValue) onChangeListValue(option);
   };
