@@ -63,7 +63,7 @@ const AddJamForm = () => {
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Create a Jam')}
-        onPress={() => ScreenManager.toggleModal({name: 'AddJamForm'})}
+        onPress={() => ScreenManager.toggleModal('AddJamForm')}
       />
 
       <TextView>{i18n.t('What kind of Jam is it?')}</TextView>

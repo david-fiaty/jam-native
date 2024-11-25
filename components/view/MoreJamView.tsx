@@ -27,17 +27,14 @@ const MoreJamView = () => {
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={i18n.t('More actions')}
-        onPress={() => ScreenManager.toggleModal({ name: 'MoreJamView' })}
+        onPress={() => ScreenManager.toggleModal('MoreJamView')}
       />
       
       <View style={styles.listContainer}>
         {/* Save jam */}
         <TouchableOpacity 
           style={styles.listItem}
-          onPress={() => ScreenManager.toggleModal({
-            name: 'SavedJamAction',
-            entityId: entityId, 
-          })} 
+          onPress={() => ScreenManager.toggleModal('SavedJamAction', entityId)} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
             <IconView name="save" theme="tertiary" />
@@ -48,10 +45,7 @@ const MoreJamView = () => {
         {/* Like jam */}
         <TouchableOpacity 
           style={styles.listItem}
-          onPress={() => ScreenManager.toggleModal({
-            name: 'LikedJamAction',
-            entityId: entityId, 
-          })} 
+          onPress={() => ScreenManager.toggleModal('LikedJamAction', entityId)} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
             <IconView name="share" theme="tertiary" />
@@ -73,10 +67,7 @@ const MoreJamView = () => {
         {/* Add jam to project */}
         <TouchableOpacity 
           style={styles.listItem}
-          onPress={() => ScreenManager.toggleModal({
-            name: 'SavedJamAction',
-            entityId: entityId, 
-          })} 
+          onPress={() => ScreenManager.toggleModal('SavedJamAction', entityId)} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
             <IconView name="plus" theme="tertiary" />
@@ -87,10 +78,7 @@ const MoreJamView = () => {
         {/* Edit jam */}
         <TouchableOpacity 
           style={styles.listItem}
-          onPress={() => ScreenManager.toggleModal({
-            name: 'SavedJamAction',
-            entityId: entityId, 
-          })} 
+          onPress={() => ScreenManager.toggleModal('SavedJamAction', entityId)} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
             <IconView name="edit" theme="tertiary" />
@@ -101,10 +89,7 @@ const MoreJamView = () => {
         {/* Report jam */}
         <TouchableOpacity 
           style={styles.listItem}
-          onPress={() => ScreenManager.toggleModal({
-            name: 'SavedJamAction',
-            entityId: entityId, 
-          })} 
+          onPress={() => ScreenManager.toggleModal('SavedJamAction', entityId)} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
             <IconView name="report" theme="tertiary" />
@@ -115,10 +100,7 @@ const MoreJamView = () => {
         {/* Delete jam */}
         <TouchableOpacity 
           style={styles.listItem}
-          onPress={() => ScreenManager.toggleModal({
-            name: 'SavedJamAction',
-            entityId: entityId, 
-          })} 
+          onPress={() => ScreenManager.toggleModal('SavedJamAction', entityId)} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
             <IconView name="delete" theme="tertiary" />
