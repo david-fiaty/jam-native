@@ -8,13 +8,13 @@ class MediaManager {
       });
     } 
     catch (error) {
-      console.error('Error reading file:', error);
+      console.error('Error reading image file:', error);
       return null;
     }
   }
 
-  getBinaryData(base64data: string ) {
-    Uint8Array.from(atob(base64data), (char) => char.charCodeAt(0));
+  getBinaryData(base64data: string) {
+    return Uint8Array.from(atob(base64data), (char) => char.charCodeAt(0));
   }
 }
 
