@@ -20,8 +20,8 @@ const MessageView = () => {
       <Text style={styles.content}>
         {messageState.text}
       </Text>
-      <TouchableOpacity onPress={() => dispatch(setMessage('')) }>
-        <IconView name="delete" theme="primary" />
+      <TouchableOpacity onPress={() => dispatch(setMessage('')) } >
+        <IconView name="delete" theme="primary" style={styles.closeIcon}/>
       </TouchableOpacity>
     </BoxView>
   );
@@ -40,6 +40,9 @@ const styles = StyleSheet.create({
     marginTop: Layout.space.base + statusBarHeight,
     marginHorizontal: Layout.space.base*1.5,
     borderRadius: Layout.radius.round,
+  },
+  closeIcon: {
+    width: '100%',
   },
   content: {
     color: 'white',

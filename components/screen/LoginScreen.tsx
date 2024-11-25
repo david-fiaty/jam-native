@@ -20,7 +20,7 @@ import DividerView from '../view/DividerView';
 
 const LoginScreen = () => {
   const router = useRouter();
-  const [username, setUsername] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [isProcessing, setIsProcessing] = useState(false);
 
@@ -42,7 +42,7 @@ const LoginScreen = () => {
   }  
 
   return (
-    <BoxView direction="column" align="center" justify="center" style={[Layout.screenContent]}>
+    <BoxView direction="column" align="center" justify="center" style={Layout.screenContent}>
       <LogoView size={{ width: 80, height: 80 }} />    
       <TextView style={styles.wecomeMessage}>{i18n.t('Welcome back')}</TextView> 
 
@@ -51,7 +51,7 @@ const LoginScreen = () => {
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Email address')} 
-        onChangeText={(text: string) => setUsername(text)}
+        onChangeText={(text: string) => setEmail(text)}
       />
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
