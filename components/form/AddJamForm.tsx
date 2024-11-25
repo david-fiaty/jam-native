@@ -139,7 +139,9 @@ const AddJamForm = () => {
       />
 
       <DividerView />
-      <AddMediaField />
+      <AddMediaField 
+        onSelectMedia={(data: any) => console.log('---')}
+      />
       <AddCollaboratorsField />
 
       <DividerView />
