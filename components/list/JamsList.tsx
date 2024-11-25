@@ -19,45 +19,46 @@ import EntityManager from '@/manager/EntityManager';
 
 const JamsList = () => {  
   const router = useRouter();
-  const [data, setData] = useState([]);
+  const [jamsData, setJamsData] = useState<any>([]);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const isLoggedIn = UserManager.isLoggedIn();
 
-  useEffect(() => {
-    (async () => {
-      const data: any = await EntityManager.getJams();
-      setTimeout(() => setData(data), Layout.animation.duration);
-    })();
-  });
+  if (!jamsData?.length) {
+    EntityManager.getJams().then((data: any) => {
+      setJamsData(data);
+      setIsLoaded(true);
+    });
+  }
 
-  if (!data) return <SpinnerView />;
+  if (!isLoaded) return <SpinnerView />;
 
-  const renderItem = (item: any, index: number) => (
+  const renderItem = (row: any) => (
     <View style={styles.listItem}>
       {/* Item header */}
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItemHeader}>
         <BoxView>
           <TouchableOpacity onPress={() => isLoggedIn ? ScreenManager.toggleModal({
             name: 'HostsList',
-            entityId: item?.id, 
+            entityId: row?.item?.id, 
           }) : router.push('/login')}>
             <TextView>
-              @{i18n.t('host')} +{ parseInt(item?.collaborators?.length) }
+              @{i18n.t('host')} +{ parseInt(row?.item?.collaborators?.length) }
             </TextView>
           </TouchableOpacity>
         </BoxView>
         <BoxView>
-          <JamStatusButton active={item?.is_active} />
+          <JamStatusButton active={row?.item?.is_active} />
         </BoxView>
         <BoxView>
           <IconView name="actions" theme="clear" onPress={() => isLoggedIn ? ScreenManager.toggleModal({
             name: 'MoreJamView',
-            entityId: item?.id, 
+            entityId: row?.item?.id, 
           }) : router.push('/login') } />
         </BoxView> 
       </BoxView>
       
       {/* Item images */}
-      <ImageSlideshow data={item.medias} />
+      <ImageSlideshow data={row?.item.medias} />
 
       {/* Item toolbar */}
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItemToolbar}>
@@ -65,10 +66,10 @@ const JamsList = () => {
         {/* Jammers button */}
         <BoxView direction="row" align="center" onPress={() => isLoggedIn ? ScreenManager.toggleModal({
           name: 'JammersList',
-          entityId: item?.id, 
+          entityId: row?.item?.id, 
         }) : router.push('/login') }>
           <IconView name="users" theme="tertiary" />
-          <TextView>{parseInt(item?.jammers?.length)} {i18n.t('jammers')}</TextView>
+          <TextView>{parseInt(row?.item?.jammers?.length)} {i18n.t('jammers')}</TextView>
         </BoxView>
       
         <BoxView direction="row" align="center">
@@ -78,7 +79,7 @@ const JamsList = () => {
             theme="tertiary" 
             onPress={() => isLoggedIn ? ScreenManager.toggleModal({
               name: 'SavedJamAction',
-              entityId: item?.id, 
+              entityId: row?.item?.id, 
             }) : router.push('/login')} 
           />
 
@@ -86,14 +87,14 @@ const JamsList = () => {
           <IconView 
             name="share" 
             theme="tertiary" 
-            onPress={() => isLoggedIn ? EntityManager.shareJam(item?.id) : router.push('/login')} 
+            onPress={() => isLoggedIn ? EntityManager.shareJam(row?.item?.id) : router.push('/login')} 
           />
         </BoxView> 
       </BoxView>
 
       {/* Item description */}
       <BoxView style={styles.listItemDescription}>
-        <TextView>{item?.caption}</TextView>
+        <TextView>{row?.item?.caption}</TextView>
       </BoxView>
 
       {/* Item collapsible */}
@@ -105,23 +106,23 @@ const JamsList = () => {
             <BoxView direction="column" align="flex-start" style={styles.listItemDetails}>
               <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
                 <IconView name="arrow" size={14} theme="transparent" />
-                <TextView>{i18n.t('Location')}: {item?.location_type}</TextView>
+                <TextView>{i18n.t('Location')}: {row?.item?.location_type}</TextView>
               </BoxView>
               <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
                 <IconView name="arrow" size={14} theme="transparent" />
-                <TextView>{i18n.t('Start')}: {moment(item?.period?.start_datetime).format('MMM Do YYYY')}</TextView>
+                <TextView>{i18n.t('Start')}: {moment(row?.item?.period?.start_datetime).format('MMM Do YYYY')}</TextView>
               </BoxView>
               <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
                 <IconView name="arrow" size={14} theme="transparent" />
-                <TextView>{i18n.t('End')}: {moment(item?.period?.end_datetime).format('MMM Do YYYY')}</TextView>
+                <TextView>{i18n.t('End')}: {moment(row?.item?.period?.end_datetime).format('MMM Do YYYY')}</TextView>
               </BoxView>
               <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
                 <IconView name="arrow" size={14} theme="transparent" />
-                <TextView>{i18n.t('Industry')}: {item?.sectors?.[0]?.name}</TextView>
+                <TextView>{i18n.t('Industry')}: {row?.item?.sectors?.[0]?.name}</TextView>
               </BoxView>
               <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemDetail}>
                 <IconView name="arrow" size={14} theme="transparent" />
-                <TextView>{i18n.t('Sector')}: {item?.sectors?.[0]?.name}</TextView>
+                <TextView>{i18n.t('Sector')}: {row?.item?.sectors?.[0]?.name}</TextView>
               </BoxView>
             </BoxView>
           }
@@ -133,9 +134,9 @@ const JamsList = () => {
   return (
     <BoxView direction="column" style={Layout.screenContent}>
       <ListView
-        data={data} 
+        data={jamsData} 
         contentContainerStyle={Layout.listContainer}
-        renderItem={({item, index}) => renderItem(item, index)}
+        renderItem={(row: any) => renderItem(row)}
       />
     </BoxView>
   );
