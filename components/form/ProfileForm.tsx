@@ -43,7 +43,7 @@ const ProfileForm = () => {
     >
       <BackButton
         title={i18n.t('Your profile')}
-        onPress={() => ScreenManager.toggleModal({ name: 'ProfileForm'})}
+        onPress={() => ScreenManager.toggleModal('ProfileForm')}
       />
 
       <ProfileImageField url={profileData?.profile_picture?.url} />

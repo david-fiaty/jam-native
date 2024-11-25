@@ -20,8 +20,11 @@ class ScreenManager {
     return Store.getState().screen.find(item => item.active === true);
   }
 
-  toggleModal(data: object) {
-    Store.dispatch(setActiveScreen(data));
+  toggleModal(name: string, entityId?: number) {
+    Store.dispatch(setActiveScreen({
+      name: name,
+      entityId: entityId,
+    }));
   }
 
   showMessage(text: string): void {

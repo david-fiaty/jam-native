@@ -18,26 +18,28 @@ const HeaderNavigation = () => {
     <View style={styles.container}>
       <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
         <BoxView direction="row" align="center" style={Layout.headerRight}>
-          <TouchableOpacity onPress={() => ScreenManager.toggleModal({
-            name: 'JamsList',
-          })}>
+          <TouchableOpacity onPress={() => ScreenManager.toggleModal('JamsList')}>
             <LogoView size={Layout.logo} />
           </TouchableOpacity>
         </BoxView>
         { (route.name == 'jams' || activeScreen?.headerNavigation) &&
           <BoxView direction="row" align="center" justify="space-between">
             <BoxView direction="row" align="center" style={Layout.headerRight}> 
-
               { isLoggedIn &&
-                <IconView name="menu" theme="secondary" onPress={() => ScreenManager.toggleModal({
-                  name: 'SettingsMenu',
-                })} />
+                <IconView 
+                  name="menu" 
+                  theme="secondary" 
+                  onPress={() => ScreenManager.toggleModal('SettingsMenu')} 
+                />
               }
 
               { isLoggedIn &&
-                <IconView label="15+" theme="secondary" size={11.5} onPress={() => ScreenManager.toggleModal({
-                  name: 'NotificationsMenu',
-                })} />
+                <IconView 
+                  label="15+" 
+                  theme="secondary" 
+                  size={11.5} 
+                  onPress={() => ScreenManager.toggleModal('NotificationsMenu')} 
+                />
               }
                 
               <SearchField />
