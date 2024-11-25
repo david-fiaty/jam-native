@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import ImageView from '../view/ImageView';
+import MediaManager from '@/manager/MediaManager';
 
 type Props = {
   label: JSX.Element, 
@@ -31,7 +32,6 @@ const MediaPickerBase = ({label}: Props) => {
       quality: 1,
     });
 
-
     console.log(result);
   
     if (!result.canceled) {
@@ -59,6 +59,8 @@ const MediaPickerBase = ({label}: Props) => {
 
 const styles = StyleSheet.create({
   container: {},
+  preview: {},
+  image: {},
 });
 
 export default MediaPickerBase;
