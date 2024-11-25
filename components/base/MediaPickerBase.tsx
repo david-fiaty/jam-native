@@ -26,13 +26,19 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
       allowsEditing: false,
       aspect: [4, 3],
       quality: 1,
+      base64: true,
     });
   
     if (!result.canceled) {
+      console.log(result.assets[0].base64);
+
+      //if (onSelectMedia) onSelectMedia(result.assets[0].base64);
+      /*
       MediaManager.getBase64Data(result.assets[0].uri).then((data: any) => {
         setSelectedImage(data);
         if (onSelectMedia) onSelectMedia(data);
       });
+      */
     }
   };
 
