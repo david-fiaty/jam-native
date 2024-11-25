@@ -23,15 +23,6 @@ const JamsList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const isLoggedIn = UserManager.isLoggedIn();
 
-  if (!jamsData?.length) {
-    EntityManager.getJams().then((data: any) => {
-      setJamsData(data);
-      setIsLoaded(true);
-    });
-  }
-
-  if (!isLoaded) return <SpinnerView />;
-
   const renderItem = (row: any) => (
     <View style={styles.listItem}>
       {/* Item header */}
@@ -130,6 +121,15 @@ const JamsList = () => {
       </BoxView>
     </View>
   );
+
+  if (!jamsData?.length) {
+    EntityManager.getJams().then((data: any) => {
+      setJamsData(data);
+      setIsLoaded(true);
+    });
+  }
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView direction="column" style={Layout.screenContent}>
