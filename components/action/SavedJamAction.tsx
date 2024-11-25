@@ -37,9 +37,7 @@ const SavedJamAction = () => {
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={title}
-        onPress={() => ScreenManager.toggleModal({
-          name: 'SavedJamAction',
-        })}
+        onPress={() => ScreenManager.toggleModal('SavedJamAction')}
       />
       
       <View style={styles.listContainer}>
@@ -57,10 +55,7 @@ const SavedJamAction = () => {
         {/* View user Jams */}
         <TouchableOpacity 
           style={styles.listItem}
-          onPress={() => ScreenManager.toggleModal({
-            name: 'SavedJamAction',
-            entityId: entityId, 
-          })} 
+          onPress={() => ScreenManager.toggleModal('SavedJamAction', entityId)} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
             <IconView name="share" theme="tertiary" />

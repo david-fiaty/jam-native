@@ -20,9 +20,7 @@ const SearchField = () => {
       style={styles.iconContainer}
       onPress={() => {
         dispatch(toggleSearchField(true));
-        ScreenManager.toggleModal({
-          name: 'SearchView',
-        });
+        ScreenManager.toggleModal('SearchView');
       }}
     />
   );
@@ -44,15 +42,11 @@ const SearchField = () => {
             }
             else if (activeScreen?.name != 'SearchView') {
               dispatch(setSearchValue(''));
-              ScreenManager.toggleModal({
-                name: 'SearchView',
-              });
+              ScreenManager.toggleModal('SearchView');
             }
             else if (!searchState.value.length && activeScreen?.name == 'SearchView') {
               dispatch(toggleSearchField(false));
-              ScreenManager.toggleModal({
-                name: 'SearchView',
-              });
+              ScreenManager.toggleModal('SearchView');
             }
           }}
         />

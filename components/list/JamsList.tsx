@@ -32,14 +32,7 @@ const JamsList = () => {
     >
       <BoxView>
         <TouchableOpacity
-          onPress={() =>
-            isLoggedIn
-              ? ScreenManager.toggleModal({
-                  name: 'HostsList',
-                  entityId: row?.item?.id,
-                })
-              : router.push('/login')
-          }
+          onPress={() => isLoggedIn ? ScreenManager.toggleModal('HostsList', row?.item?.id) : router.push('/login')}
         >
           <TextView>
             @{i18n.t('host')} +{parseInt(row?.item?.collaborators?.length)}
@@ -53,14 +46,7 @@ const JamsList = () => {
         <IconView
           name="actions"
           theme="clear"
-          onPress={() =>
-            isLoggedIn
-              ? ScreenManager.toggleModal({
-                  name: 'MoreJamView',
-                  entityId: row?.item?.id,
-                })
-              : router.push('/login')
-          }
+          onPress={() => isLoggedIn ? ScreenManager.toggleModal('MoreJamView', row?.item?.id) : router.push('/login')}
         />
       </BoxView>
     </BoxView>
@@ -81,14 +67,7 @@ const JamsList = () => {
       <BoxView
         direction="row"
         align="center"
-        onPress={() =>
-          isLoggedIn
-            ? ScreenManager.toggleModal({
-                name: 'JammersList',
-                entityId: row?.item?.id,
-              })
-            : router.push('/login')
-        }
+        onPress={() => isLoggedIn ? ScreenManager.toggleModal('JammersList', row?.item?.id) : router.push('/login')}
       >
         <IconView name="users" theme="tertiary" />
         <TextView>
@@ -101,14 +80,7 @@ const JamsList = () => {
         <IconView
           name="save"
           theme="tertiary"
-          onPress={() =>
-            isLoggedIn
-              ? ScreenManager.toggleModal({
-                  name: 'SavedJamAction',
-                  entityId: row?.item?.id,
-                })
-              : router.push('/login')
-          }
+          onPress={() => isLoggedIn ? ScreenManager.toggleModal('SavedJamAction', row?.item?.id) : router.push('/login')}
         />
 
         {/* Share button */}
