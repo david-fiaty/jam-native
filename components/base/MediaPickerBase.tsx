@@ -29,19 +29,17 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
       base64: true,
     });
   
-    if (!result.canceled) {
-      if (result?.assets?.[0]?.base64?.length) {
-        console.log(result.assets[0].base64);
-      }
-
-      //if (onSelectMedia) onSelectMedia(result.assets[0].base64);
-      /*
-      MediaManager.getBase64Data(result.assets[0].uri).then((data: any) => {
-        setSelectedImage(data);
-        if (onSelectMedia) onSelectMedia(data);
-      });
-      */
+    if (!result.canceled && result?.assets?.[0]?.base64?.length) {
+      console.log(result.assets[0].base64);
     }
+
+    //if (onSelectMedia) onSelectMedia(result.assets[0].base64);
+    /*
+    MediaManager.getBase64Data(result.assets[0].uri).then((data: any) => {
+      setSelectedImage(data);
+      if (onSelectMedia) onSelectMedia(data);
+    });
+    */
   };
 
   return (
