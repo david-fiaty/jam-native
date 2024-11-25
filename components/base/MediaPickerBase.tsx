@@ -29,6 +29,8 @@ const MediaPickerBase = ({label}: Props) => {
     if (!result.canceled) {
       MediaManager.getBase64Data(result.assets[0].uri).then((data: any) => {
         setSelectedImage(data);
+
+        // Todo - Set image data in form
         console.log(data);
       });
     }
