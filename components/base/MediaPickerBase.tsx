@@ -15,6 +15,7 @@ type Props = BaseProps & {
 const MediaPickerBase = ({label, onSelectMedia}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedMediaPreview, setSelectedMediaPreview] = useState<any>([]);
+
   const renderImagePreview = (data: any) => {
     return (
       <TouchableOpacity 
@@ -29,8 +30,6 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
         />
       </TouchableOpacity>
     );    
-  
-    return <></>;
   };
 
   const pickImage = async () => {
