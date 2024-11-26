@@ -14,7 +14,6 @@ type Props = BaseProps & {
 
 const MediaPickerBase = ({label, onSelectMedia}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
-  const [selectedMediaPreview, setSelectedMediaPreview] = useState<any>([]);
   const renderImagePreview = (data: any) => {
     return (
       <TouchableOpacity 
@@ -43,7 +42,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
     });
 
     if (!result.canceled && result?.assets?.length) {
-      const mediaList = [...selectedMedia];
+      let mediaList = [...selectedMedia];
       const mediaExists = mediaList.some(item => item.fileName === result.assets[0].fileName);
       if (!mediaExists) {
         mediaList.push(result.assets[0]);
