@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { BaseProps } from '@/constants/Types';
+import { Layout } from '@/constants/Layout';
 import * as ImagePicker from 'expo-image-picker';
 import ImageView from '../view/ImageView';
 import TextView from '../view/TextView';
 import BoxView from '../view/BoxView';
-import { Layout } from '@/constants/Layout';
 
 type Props = BaseProps & {
   label?: JSX.Element, 
@@ -14,6 +14,7 @@ type Props = BaseProps & {
 
 const MediaPickerBase = ({label, onSelectMedia}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
+  const [selectedMediaPreview, setSelectedMediaPreview] = useState<any>([]);
   const renderImagePreview = (data: any) => {
     return (
       <TouchableOpacity 
