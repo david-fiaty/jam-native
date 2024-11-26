@@ -6,6 +6,7 @@ import * as ImagePicker from 'expo-image-picker';
 import ImageView from '../view/ImageView';
 import TextView from '../view/TextView';
 import BoxView from '../view/BoxView';
+import IconView from '../view/IconView';
 
 type Props = BaseProps & {
   label?: JSX.Element, 
@@ -14,17 +15,26 @@ type Props = BaseProps & {
 
 const MediaPickerBase = ({label, onSelectMedia}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
-  const [selectedMediaPreview, setSelectedMediaPreview] = useState<any>([]);
+  const [selectedPreview, setSelectedPreview] = useState<any>([]);
+
+  const deleteMedia = (data: any) => {
+    let selectedMediaList = [...selectedMedia];  
+    let selectedPreviewList = [...selectedPreview];
+    selectedMediaList = selectedMediaList.filter((item: any) => item.fileName !== data.fileName);
+    selectedPreviewList = selectedPreviewList.filter((value: any) => value !== data.fileName);
+    setSelectedMedia(selectedMediaList);
+    selectedPreview(selectedPreviewList);
+  };
 
   const updatePreviewSelection = (data: any) => {
-    let mediaList = [...selectedMediaPreview];
-    if (!selectedMediaPreview.includes(data.fileName)) {
-      mediaList.push(data.fileName);
-      setSelectedMediaPreview(mediaList);
+    let selectedMediaList = [...selectedPreview];
+    if (!selectedPreview.includes(data.fileName)) {
+      selectedMediaList.push(data.fileName);
+      setSelectedPreview(selectedMediaList);
     }
     else {
-      mediaList = mediaList.filter((item: any) => item.fileName == data.fileName);
-      setSelectedMediaPreview(mediaList);
+      selectedMediaList = selectedMediaList.filter((item: any) => item.fileName == data.fileName);
+      setSelectedPreview(selectedMediaList);
     }
   }; 
 
@@ -36,10 +46,20 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
       >
         <ImageView 
           uri={data.uri} 
-          width={64} 
-          height={64} 
+          width={80} 
+          height={80} 
           resizeMode="cover" 
+          style={styles.mediaPreview}
         />
+
+        { selectedPreview.includes(data.fileName) && 
+          <TouchableOpacity 
+            style={styles.deleteMedia}
+            onPress={() => deleteMedia(data)}
+          >
+            <IconView name="delete" theme="tertiary"/>
+          </TouchableOpacity>
+        } 
       </TouchableOpacity>
     );    
   };
@@ -54,12 +74,12 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
     });
 
     if (!result.canceled && result?.assets?.length) {
-      let mediaList = [...selectedMedia];
-      const mediaExists = mediaList.some(item => item.fileName === result.assets[0].fileName);
+      let selectedMediaList = [...selectedMedia];
+      let mediaExists = selectedMediaList.some(item => item.fileName === result.assets[0].fileName);
       if (!mediaExists) {
-        mediaList.push(result.assets[0]);
-        setSelectedMedia(mediaList);
-        if (onSelectMedia) onSelectMedia(mediaList);
+        selectedMediaList.push(result.assets[0]);
+        setSelectedMedia(selectedMediaList);
+        if (onSelectMedia) onSelectMedia(selectedMediaList);
       }
     }
   };
@@ -71,7 +91,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
       </TouchableOpacity>
 
       { selectedMedia?.length > 0 &&
-        <BoxView direction="row" align="flex-start" justify="left" style={styles.preview}>
+        <BoxView direction="row" align="flex-start" justify="left" style={styles.previewContainer}>
           { selectedMedia.map((data: any) => renderImagePreview(data) )}
         </BoxView>
       }
@@ -81,9 +101,18 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
 
 const styles = StyleSheet.create({
   container: {},
-  preview: {
+  previewContainer: {
     backgroundColor: 'red',
     paddingVertical: Layout.space.base,
+  },
+  mediaPreview: {
+    //opacity: 0.5,
+  },
+  deleteMedia: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+
   },
 });
 
