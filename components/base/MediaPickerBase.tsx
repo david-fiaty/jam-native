@@ -23,7 +23,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
     selectedMediaList = selectedMediaList.filter((item: any) => item.fileName !== data.fileName);
     selectedPreviewList = selectedPreviewList.filter((value: any) => value !== data.fileName);
     setSelectedMedia(selectedMediaList);
-    selectedPreview(selectedPreviewList);
+    setSelectedPreview(selectedPreviewList);
   };
 
   const updatePreviewSelection = (data: any) => {
@@ -33,7 +33,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
       setSelectedPreview(selectedMediaList);
     }
     else {
-      selectedMediaList = selectedMediaList.filter((item: any) => item.fileName == data.fileName);
+      selectedMediaList = selectedMediaList.filter((item: any) => item.fileName !== data.fileName);
       setSelectedPreview(selectedMediaList);
     }
   }; 
@@ -74,11 +74,17 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
     });
 
     if (!result.canceled && result?.assets?.length) {
+      let data = result.assets[0];
       let selectedMediaList = [...selectedMedia];
-      let mediaExists = selectedMediaList.some(item => item.fileName === result.assets[0].fileName);
+      let selectedPreviewList = [...selectedPreview];
+      let mediaExists = selectedMediaList.some(item => item.fileName === data.fileName);
       if (!mediaExists) {
-        selectedMediaList.push(result.assets[0]);
+        selectedMediaList.push(data);
         setSelectedMedia(selectedMediaList);
+
+        selectedPreviewList = selectedPreviewList.filter((value: any) => value !== data.fileName);
+        setSelectedPreview(selectedPreviewList);
+    
         if (onSelectMedia) onSelectMedia(selectedMediaList);
       }
     }
