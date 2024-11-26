@@ -26,8 +26,6 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
       mediaList = mediaList.filter((item: any) => item.fileName == data.fileName);
       setSelectedMediaPreview(mediaList);
     }
-
-    console.log(mediaList);
   }; 
 
   const renderImagePreview = (data: any) => {
