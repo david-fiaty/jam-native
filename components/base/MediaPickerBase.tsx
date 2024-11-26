@@ -6,6 +6,7 @@ import * as ImagePicker from 'expo-image-picker';
 import ImageView from '../view/ImageView';
 import TextView from '../view/TextView';
 import BoxView from '../view/BoxView';
+import IconView from '../view/IconView';
 
 type Props = BaseProps & {
   label?: JSX.Element, 
@@ -41,10 +42,13 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
           resizeMode="cover" 
           style={styles.mediaPreview}
         />
-        
+
         { selectedMediaPreview.includes(data.fileName) && 
-          <TextView>delete</TextView> 
+          <View style={styles.deleteMedia}>
+            <IconView name="delete" theme="tertiary"/>
+          </View>
         } 
+
       </TouchableOpacity>
     );    
   };
@@ -92,6 +96,12 @@ const styles = StyleSheet.create({
   },
   mediaPreview: {
     //opacity: 0.5,
+  },
+  deleteMedia: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+
   },
 });
 
