@@ -30,8 +30,8 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
       setSelectedPreview(mediaList);
     }
     else {
-      mediaList = mediaList.filter((item: any) => item.fileName == data.fileName);
-      setSelectedPreview(mediaList);
+      selectedMediaList = selectedMediaList.filter((item: any) => item.fileName === data.fileName);
+      setSelectedPreview(selectedMediaList);
     }
   }; 
 
@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
   container: {},
   previewContainer: {
     paddingVertical: Layout.space.base,
+    gap: Layout.space.base*1.5,
   },
   mediaPreview: {
     //opacity: 0.5,
