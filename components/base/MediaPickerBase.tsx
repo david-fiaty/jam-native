@@ -33,13 +33,15 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
       <TouchableOpacity 
         key={data.uri} 
         onPress={() => updatePreviewSelection(data)}
+        style={styles.mediaPreview}
       >
         <ImageView 
           uri={data.uri} 
-          width={64} 
-          height={64} 
+          width={80} 
+          height={80} 
           resizeMode="cover" 
         />
+        {selectedMediaPreview.includes(data.fileName) && <TextView>delete</TextView> } 
       </TouchableOpacity>
     );    
   };
@@ -71,7 +73,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
       </TouchableOpacity>
 
       { selectedMedia?.length > 0 &&
-        <BoxView direction="row" align="flex-start" justify="left" style={styles.preview}>
+        <BoxView direction="row" align="flex-start" justify="left" style={styles.previewContainer}>
           { selectedMedia.map((data: any) => renderImagePreview(data) )}
         </BoxView>
       }
@@ -81,9 +83,12 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
 
 const styles = StyleSheet.create({
   container: {},
-  preview: {
+  previewContainer: {
     backgroundColor: 'red',
     paddingVertical: Layout.space.base,
+  },
+  mediaPreview: {
+    //opacity: 0.5,
   },
 });
 
