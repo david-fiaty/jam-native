@@ -54,7 +54,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
             style={styles.deleteMedia}
             onPress={() => deleteMedia(data)}
           >
-            <IconView name="delete" theme="tertiary"/>
+            <IconView name="delete" theme="primary" size={8} />
           </TouchableOpacity>
         } 
       </TouchableOpacity>
@@ -99,7 +99,6 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
 const styles = StyleSheet.create({
   container: {},
   previewContainer: {
-    backgroundColor: 'red',
     paddingVertical: Layout.space.base,
   },
   mediaPreview: {
@@ -107,9 +106,8 @@ const styles = StyleSheet.create({
   },
   deleteMedia: {
     position: 'absolute',
-    top: 0,
-    left: 0,
-
+    top: -10,
+    right: -10,
   },
 });
 
