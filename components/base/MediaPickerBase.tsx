@@ -17,7 +17,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
   const [selectedMediaPreview, setSelectedMediaPreview] = useState<any>([]);
 
   const renderImagePreview = (data: any) => {
-    
+
     console.log(selectedMediaPreview);
 
     return (
@@ -50,7 +50,6 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
       if (!mediaExists) {
         mediaList.push(result.assets[0]);
         setSelectedMedia(mediaList);
-        setSelectedMediaPreview([...selectedMediaPreview, result.assets[0].fileName])
         if (onSelectMedia) onSelectMedia(mediaList);
       }
     }
