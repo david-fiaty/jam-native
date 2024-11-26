@@ -17,13 +17,6 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
   const [selectedMediaPreview, setSelectedMediaPreview] = useState<any>([]);
 
   const renderImagePreview = (data: any) => {
-    if (!selectedMediaPreview.includes(data.fileName)) {
-      setSelectedMediaPreview([...selectedMediaPreview, data.fileName]);
-    }
-    else {
-      setSelectedMediaPreview(selectedMediaPreview.filter((item: any) => item.fileName == data.fileName));
-    }
-
     return (
       <TouchableOpacity 
         key={data.uri} 
