@@ -41,9 +41,20 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
     });
 
     if (!result.canceled && result?.assets?.length) {
+      const mediaList = [...selectedMedia];
+      for (const item of result.assets) {
+        if (!mediaList.includes(item)) {
+          mediaList.push(item);
+        }
+  
+      }
+      /*
+
+
       const mediaList = [...selectedMedia, ...result.assets];
       setSelectedMedia(mediaList);
       if (onSelectMedia) onSelectMedia(mediaList);
+      */
     }
   };
 
