@@ -89,6 +89,21 @@ console.log(JSON.stringify(obj, 0, 2));
 
 
 
+    let mediaList = [...selectedMediaPreview];
+    if (!selectedMediaPreview.includes(data.fileName)) {
+      mediaList.push(data.fileName);
+      setSelectedMediaPreview(mediaList);
+    }
+    else {
+      mediaList = mediaList.filter((item: any) => item.fileName == data.fileName);
+      setSelectedMediaPreview(mediaList);
+    }
+
+
+
+
+
+
 
   buildEntity(key: string, data: object) {
     let entity = {}; 
