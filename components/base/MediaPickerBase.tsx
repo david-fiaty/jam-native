@@ -18,11 +18,11 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
 
   const deleteMedia = (data: any) => {
-    let mediaList = [...selectedMedia];
-    let previewList = [...selectedPreview]; 
-    
-    mediaList = mediaList.filter((item: any) => item.fileName == data.fileName);
-    previewList = previewList.filter((item: any) => item.fileName == data.fileName);
+    let mediaList = [...selectedMedia];  
+    let previewList = [...selectedPreview];  
+
+    mediaList = mediaList.filter((item: any) => item.fileName !== data.fileName);
+    previewList = previewList.filter((item: any) => item.fileName !== data.fileName);
 
     setSelectedMedia(mediaList);
     setSelectedPreview(previewList);
