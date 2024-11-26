@@ -44,11 +44,13 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
         />
 
         { selectedMediaPreview.includes(data.fileName) && 
-          <View style={styles.deleteMedia}>
+          <TouchableOpacity 
+            style={styles.deleteMedia}
+            onPress={() => console.log('delete')}
+          >
             <IconView name="delete" theme="tertiary"/>
-          </View>
+          </TouchableOpacity>
         } 
-
       </TouchableOpacity>
     );    
   };
