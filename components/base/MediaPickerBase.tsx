@@ -16,7 +16,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
 
   const renderImagePreview = (data: any) => {
-    if (data?.uri?.length) {
+    if (data?.uri?.length > 0) {
       return (
         <ImageView 
           key={data.uri} 
@@ -50,7 +50,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={pickImage}>
-        {label}
+        <TextView>{label}</TextView>
       </TouchableOpacity>
 
       { selectedMedia?.length > 0 &&
