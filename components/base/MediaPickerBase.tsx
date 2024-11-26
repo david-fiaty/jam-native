@@ -33,13 +33,13 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
       <TouchableOpacity 
         key={data.uri} 
         onPress={() => updatePreviewSelection(data)}
-        style={styles.mediaPreview}
       >
         <ImageView 
           uri={data.uri} 
           width={80} 
           height={80} 
           resizeMode="cover" 
+          style={styles.mediaPreview}
         />
         {selectedMediaPreview.includes(data.fileName) && <TextView>delete</TextView> } 
       </TouchableOpacity>
