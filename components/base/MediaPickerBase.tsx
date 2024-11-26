@@ -33,7 +33,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
       setSelectedPreview(selectedMediaList);
     }
     else {
-      selectedMediaList = selectedMediaList.filter((item: any) => item.fileName !== data.fileName);
+      selectedMediaList = selectedMediaList.filter((item: any) => item.fileName === data.fileName);
       setSelectedPreview(selectedMediaList);
     }
   }; 
@@ -57,7 +57,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
             style={styles.deleteMedia}
             onPress={() => deleteMedia(data)}
           >
-            <IconView name="delete" theme="primary"/>
+            <IconView name="delete" theme="primary" size={8} />
           </TouchableOpacity>
         } 
       </TouchableOpacity>
@@ -108,16 +108,16 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
 const styles = StyleSheet.create({
   container: {},
   previewContainer: {
-    backgroundColor: 'red',
     paddingVertical: Layout.space.base,
+    gap: Layout.space.base*1.5,
   },
   mediaPreview: {
     //opacity: 0.5,
   },
   deleteMedia: {
     position: 'absolute',
-    top: 0,
-    left: 0,
+    top: -10,
+    right: -10,
   },
 });
 
