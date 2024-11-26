@@ -14,8 +14,9 @@ type Props = BaseProps & {
 
 const MediaPickerBase = ({label, onSelectMedia}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
-  const renderImage = (data: any) => {
-    if (data?.uri?.length) {
+
+  const renderImagePreview = (data: any) => {
+    if (data?.uri?.length > 0) {
       return (
         <ImageView 
           key={data.uri} 
@@ -52,9 +53,9 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
         <TextView>{label}</TextView>
       </TouchableOpacity>
 
-      { selectedMedia?.length &&
+      { selectedMedia?.length > 0 &&
         <BoxView direction="row" align="flex-start" justify="left" style={styles.preview}>
-          { selectedMedia.map((data: any) => renderImage(data) )}
+          { selectedMedia.map((data: any) => renderImagePreview(data) )}
         </BoxView>
       }
     </View>
