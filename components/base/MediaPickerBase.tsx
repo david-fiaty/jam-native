@@ -15,17 +15,28 @@ type Props = BaseProps & {
 
 const MediaPickerBase = ({label, onSelectMedia}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
-  const [selectedMediaPreview, setSelectedMediaPreview] = useState<any>([]);
+  const [selectedPreview, setSelectedPreview] = useState<any>([]);
+
+  const deleteMedia = (data: any) => {
+    let mediaList = [...selectedMedia];
+    let previewList = [...selectedPreview]; 
+    
+    mediaList = mediaList.filter((item: any) => item.fileName == data.fileName);
+    previewList = previewList.filter((item: any) => item.fileName == data.fileName);
+
+    setSelectedMedia(mediaList);
+    setSelectedPreview(previewList);
+  };
 
   const updatePreviewSelection = (data: any) => {
-    let mediaList = [...selectedMediaPreview];
-    if (!selectedMediaPreview.includes(data.fileName)) {
+    let mediaList = [...selectedPreview];
+    if (!selectedPreview.includes(data.fileName)) {
       mediaList.push(data.fileName);
-      setSelectedMediaPreview(mediaList);
+      setSelectedPreview(mediaList);
     }
     else {
       mediaList = mediaList.filter((item: any) => item.fileName == data.fileName);
-      setSelectedMediaPreview(mediaList);
+      setSelectedPreview(mediaList);
     }
   }; 
 
@@ -43,10 +54,10 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
           style={styles.mediaPreview}
         />
 
-        { selectedMediaPreview.includes(data.fileName) && 
+        { selectedPreview.includes(data.fileName) && 
           <TouchableOpacity 
             style={styles.deleteMedia}
-            onPress={() => console.log('delete')}
+            onPress={() => deleteMedia(data)}
           >
             <IconView name="delete" theme="tertiary"/>
           </TouchableOpacity>
