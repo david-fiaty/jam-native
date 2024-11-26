@@ -6,6 +6,7 @@ import * as ImagePicker from 'expo-image-picker';
 import ImageView from '../view/ImageView';
 import TextView from '../view/TextView';
 import BoxView from '../view/BoxView';
+import IconView from '../view/IconView';
 
 type Props = BaseProps & {
   label?: JSX.Element, 
@@ -36,10 +37,18 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
       >
         <ImageView 
           uri={data.uri} 
-          width={64} 
-          height={64} 
+          width={80} 
+          height={80} 
           resizeMode="cover" 
+          style={styles.mediaPreview}
         />
+
+        { selectedMediaPreview.includes(data.fileName) && 
+          <View style={styles.deleteMedia}>
+            <IconView name="delete" theme="tertiary"/>
+          </View>
+        } 
+
       </TouchableOpacity>
     );    
   };
@@ -71,7 +80,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
       </TouchableOpacity>
 
       { selectedMedia?.length > 0 &&
-        <BoxView direction="row" align="flex-start" justify="left" style={styles.preview}>
+        <BoxView direction="row" align="flex-start" justify="left" style={styles.previewContainer}>
           { selectedMedia.map((data: any) => renderImagePreview(data) )}
         </BoxView>
       }
@@ -81,9 +90,18 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
 
 const styles = StyleSheet.create({
   container: {},
-  preview: {
+  previewContainer: {
     backgroundColor: 'red',
     paddingVertical: Layout.space.base,
+  },
+  mediaPreview: {
+    //opacity: 0.5,
+  },
+  deleteMedia: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+
   },
 });
 
