@@ -42,19 +42,18 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
 
     if (!result.canceled && result?.assets?.length) {
       const mediaList = [...selectedMedia];
-      for (const item of result.assets) {
-        if (!mediaList.includes(item)) {
-          mediaList.push(item);
+      for (const media of result.assets) {
+        const exists = mediaList.some(item => item.uri === media.uri);
+
+        console.log(exists);
+        
+        if (!exists) {
+          mediaList.push(media);
         }
-  
       }
-      /*
 
-
-      const mediaList = [...selectedMedia, ...result.assets];
       setSelectedMedia(mediaList);
       if (onSelectMedia) onSelectMedia(mediaList);
-      */
     }
   };
 
