@@ -41,17 +41,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
     });
 
     if (!result.canceled && result?.assets?.length) {
-      const mediaList = [...selectedMedia];
-      for (const media of result.assets) {
-        const exists = mediaList.some(item => item.uri === media.uri);
-
-        console.log(exists);
-        
-        if (!exists) {
-          mediaList.push(media);
-        }
-      }
-
+      const mediaList = [...selectedMedia, ...result.assets];
       setSelectedMedia(mediaList);
       if (onSelectMedia) onSelectMedia(mediaList);
     }
@@ -60,10 +50,10 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={pickImage}>
-        {label}
+        <TextView>{label}</TextView>
       </TouchableOpacity>
 
-      { selectedMedia?.length > 0 &&
+      { selectedMedia?.length &&
         <BoxView direction="row" align="flex-start" justify="left" style={styles.preview}>
           { selectedMedia.map((data: any) => renderImagePreview(data) )}
         </BoxView>
