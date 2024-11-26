@@ -46,7 +46,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
 
       console.log(exists);
 
-      if (!exists) {
+      if (exists === false) {
         mediaList.push(result.assets[0]);
         setSelectedMedia(mediaList);
         if (onSelectMedia) onSelectMedia(mediaList);
