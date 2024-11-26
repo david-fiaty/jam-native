@@ -15,17 +15,26 @@ type Props = BaseProps & {
 
 const MediaPickerBase = ({label, onSelectMedia}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
-  const [selectedMediaPreview, setSelectedMediaPreview] = useState<any>([]);
+  const [selectedPreview, setSelectedPreview] = useState<any>([]);
+
+  const deleteMedia = (data: any) => {
+    let selectedMediaList = [...selectedMedia];  
+    let selectedPreviewList = [...selectedPreview];
+    selectedMediaList = selectedMediaList.filter((item: any) => item.fileName !== data.fileName);
+    selectedPreviewList = selectedPreviewList.filter((value: any) => value !== data.fileName);
+    setSelectedMedia(selectedMediaList);
+    selectedPreview(selectedPreviewList);
+  };
 
   const updatePreviewSelection = (data: any) => {
-    let mediaList = [...selectedMediaPreview];
-    if (!selectedMediaPreview.includes(data.fileName)) {
-      mediaList.push(data.fileName);
-      setSelectedMediaPreview(mediaList);
+    let selectedMediaList = [...selectedPreview];
+    if (!selectedPreview.includes(data.fileName)) {
+      selectedMediaList.push(data.fileName);
+      setSelectedPreview(selectedMediaList);
     }
     else {
-      mediaList = mediaList.filter((item: any) => item.fileName == data.fileName);
-      setSelectedMediaPreview(mediaList);
+      selectedMediaList = selectedMediaList.filter((item: any) => item.fileName == data.fileName);
+      setSelectedPreview(selectedMediaList);
     }
   }; 
 
@@ -43,10 +52,10 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
           style={styles.mediaPreview}
         />
 
-        { selectedMediaPreview.includes(data.fileName) && 
+        { selectedPreview.includes(data.fileName) && 
           <TouchableOpacity 
             style={styles.deleteMedia}
-            onPress={() => console.log('delete')}
+            onPress={() => deleteMedia(data)}
           >
             <IconView name="delete" theme="tertiary"/>
           </TouchableOpacity>
@@ -65,12 +74,12 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
     });
 
     if (!result.canceled && result?.assets?.length) {
-      let mediaList = [...selectedMedia];
-      const mediaExists = mediaList.some(item => item.fileName === result.assets[0].fileName);
+      let selectedMediaList = [...selectedMedia];
+      let mediaExists = selectedMediaList.some(item => item.fileName === result.assets[0].fileName);
       if (!mediaExists) {
-        mediaList.push(result.assets[0]);
-        setSelectedMedia(mediaList);
-        if (onSelectMedia) onSelectMedia(mediaList);
+        selectedMediaList.push(result.assets[0]);
+        setSelectedMedia(selectedMediaList);
+        if (onSelectMedia) onSelectMedia(selectedMediaList);
       }
     }
   };
