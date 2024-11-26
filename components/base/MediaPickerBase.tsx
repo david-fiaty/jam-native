@@ -41,7 +41,10 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
           resizeMode="cover" 
           style={styles.mediaPreview}
         />
-        {selectedMediaPreview.includes(data.fileName) && <TextView>delete</TextView> } 
+        
+        { selectedMediaPreview.includes(data.fileName) && 
+          <TextView>delete</TextView> 
+        } 
       </TouchableOpacity>
     );    
   };
