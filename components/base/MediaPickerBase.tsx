@@ -18,23 +18,20 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
 
   const deleteMedia = (data: any) => {
-    let selectedMediaList = [...selectedMedia];  
-    let selectedPreviewList = [...selectedPreview];
-    selectedMediaList = selectedMediaList.filter((item: any) => item.fileName !== data.fileName);
-    selectedPreviewList = selectedPreviewList.filter((value: any) => value !== data.fileName);
-    setSelectedMedia(selectedMediaList);
-    setSelectedPreview(selectedPreviewList);
+    let mediaList = [...selectedMedia];  
+    mediaList = mediaList.filter((item: any) => item.fileName !== data.fileName);
+    setSelectedMedia(mediaList);
   };
 
   const updatePreviewSelection = (data: any) => {
-    let selectedMediaList = [...selectedPreview];
+    let mediaList = [...selectedPreview];
     if (!selectedPreview.includes(data.fileName)) {
-      selectedMediaList.push(data.fileName);
-      setSelectedPreview(selectedMediaList);
+      mediaList.push(data.fileName);
+      setSelectedPreview(mediaList);
     }
     else {
-      selectedMediaList = selectedMediaList.filter((item: any) => item.fileName !== data.fileName);
-      setSelectedPreview(selectedMediaList);
+      mediaList = mediaList.filter((item: any) => item.fileName == data.fileName);
+      setSelectedPreview(mediaList);
     }
   }; 
 
@@ -57,7 +54,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
             style={styles.deleteMedia}
             onPress={() => deleteMedia(data)}
           >
-            <IconView name="delete" theme="primary"/>
+            <IconView name="delete" theme="tertiary"/>
           </TouchableOpacity>
         } 
       </TouchableOpacity>
@@ -74,18 +71,12 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
     });
 
     if (!result.canceled && result?.assets?.length) {
-      let data = result.assets[0];
-      let selectedMediaList = [...selectedMedia];
-      let selectedPreviewList = [...selectedPreview];
-      let mediaExists = selectedMediaList.some(item => item.fileName === data.fileName);
+      let mediaList = [...selectedMedia];
+      const mediaExists = mediaList.some(item => item.fileName === result.assets[0].fileName);
       if (!mediaExists) {
-        selectedMediaList.push(data);
-        setSelectedMedia(selectedMediaList);
-
-        selectedPreviewList = selectedPreviewList.filter((value: any) => value !== data.fileName);
-        setSelectedPreview(selectedPreviewList);
-    
-        if (onSelectMedia) onSelectMedia(selectedMediaList);
+        mediaList.push(result.assets[0]);
+        setSelectedMedia(mediaList);
+        if (onSelectMedia) onSelectMedia(mediaList);
       }
     }
   };
@@ -98,7 +89,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
 
       { selectedMedia?.length > 0 &&
         <BoxView direction="row" align="flex-start" justify="left" style={styles.previewContainer}>
-          { selectedMedia.map((data: any) => renderImagePreview(data)) }
+          { selectedMedia.map((data: any) => renderImagePreview(data) )}
         </BoxView>
       }
     </View>
@@ -118,6 +109,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
+
   },
 });
 
