@@ -57,7 +57,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
             style={styles.deleteMedia}
             onPress={() => deleteMedia(data)}
           >
-            <IconView name="delete" theme="tertiary"/>
+            <IconView name="delete" theme="primary"/>
           </TouchableOpacity>
         } 
       </TouchableOpacity>
@@ -98,7 +98,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
 
       { selectedMedia?.length > 0 &&
         <BoxView direction="row" align="flex-start" justify="left" style={styles.previewContainer}>
-          { selectedMedia.map((data: any) => renderImagePreview(data) )}
+          { selectedMedia.map((data: any) => renderImagePreview(data)) }
         </BoxView>
       }
     </View>
@@ -118,7 +118,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
-
   },
 });
 
