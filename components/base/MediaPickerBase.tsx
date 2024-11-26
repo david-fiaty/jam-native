@@ -15,16 +15,24 @@ type Props = BaseProps & {
 const MediaPickerBase = ({label, onSelectMedia}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
 
+  const toggleImagePreview  = (data: any) => {
+    console.log(data.fileName);
+  }
+
   const renderImagePreview = (data: any) => {
     if (data?.uri?.length > 0) {
       return (
-        <ImageView 
+        <TouchableOpacity 
           key={data.uri} 
-          uri={data.uri} 
-          width={64} 
-          height={64} 
-          resizeMode="cover" 
-        />
+          onPress={() => toggleImagePreview(data)}
+        >
+          <ImageView 
+            uri={data.uri} 
+            width={64} 
+            height={64} 
+            resizeMode="cover" 
+          />
+        </TouchableOpacity>
       );    
     }
 
