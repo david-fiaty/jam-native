@@ -24,6 +24,7 @@ const Endpoints = {
     dataKey: null,
   },
   notifications: {
+    path: '',
     cacheable: false,
     searcheable: false,
     dataKey: null,
