@@ -11,7 +11,7 @@ import DeviceManager from '@/manager/DeviceManager';
 import DataManager from '@/manager/DataManager';
 
 const MapView = ({ style, children }: BaseProps) => {
-  const [userLocation, setUserLocation] = useState('');
+  const [deviceLocation, setDeviceLocation] = useState(null);
   const [jamsData, setJamsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
@@ -50,8 +50,8 @@ const MapView = ({ style, children }: BaseProps) => {
         return;
       }
 
-      let location: any =  await DeviceManager.getLocation();
-      if (location) setUserLocation(location);
+      let currentLocation: any = await DeviceManager.getLocation();
+      if (currentLocation) setDeviceLocation(currentLocation);
 
     })();
   }, []);
@@ -71,6 +71,17 @@ const MapView = ({ style, children }: BaseProps) => {
             longitudeDelta: 3,
           }}
         >
+          {deviceLocation && 
+            <Marker
+              title="Your Location"
+              description="This is where you are currently."
+              coordinate={{ 
+                latitude: parseFloat(deviceLocation.coords.latitude), 
+                longitude: parseFloat(deviceLocation.coords.latitude),
+              }}
+            />
+          }
+
           { jamsData.map((item: any) => {
             if (item?.geolocation_longitude && item?.geolocation_latitude) {
               return renderMarker(item);
