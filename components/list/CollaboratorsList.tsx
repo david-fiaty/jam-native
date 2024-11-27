@@ -18,6 +18,10 @@ const CollaboratorsList = () => {
   const [profiles, setProfiles] = useState<any>(null);
   const entityId = ScreenManager.getActiveScreen()?.entityId;
 
+  const onSubmitEditing = () => {
+    console.log('onSubmitSearch');
+  };
+
   if (!profiles) {
     EntityManager.getProfiles().then((items: any) => {
       setProfiles(items);
@@ -48,7 +52,7 @@ const CollaboratorsList = () => {
           containerStyle={styles.inputTextFieldContainer}
           placeholder={i18n.t('Search...')} 
           onChangeText={(text: string) => console.log(text)}
-          onSubmitEditing={() => console.log('Submit editing')}
+          onSubmitEditing={onSubmitEditing}
         />
 
         <DividerView />
