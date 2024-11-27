@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import { Layout } from '@/constants/Layout';
@@ -10,17 +10,25 @@ import IconView from '../view/IconView';
 
 type Props = BaseProps & {
   label?: JSX.Element, 
-  onSelectMedia?: (data: any) => void,
+  value?: any,
+  onSelectItem?: (data: any) => void,
+  onDeleteItem?: (data: any) => void,
 };
 
-const MediaPickerBase = ({label, onSelectMedia}: Props) => {  
+const MediaPickerBase = ({label, value, onSelectItem, onDeleteItem}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
+
+  if (value?.length && !selectedMedia.length) {
+    //setSelectedMedia(value);
+    //setSelectedPreview(value.map((item: any) => item.fileName));
+  }
 
   const deleteMedia = (data: any) => {
     let mediaList = [...selectedMedia];  
     mediaList = mediaList.filter((item: any) => item.fileName !== data.fileName);
     setSelectedMedia(mediaList);
+    if (onDeleteItem) onDeleteItem(mediaList);
   };
 
   const updatePreviewSelection = (data: any) => {
@@ -30,8 +38,8 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
       setSelectedPreview(mediaList);
     }
     else {
-      selectedMediaList = selectedMediaList.filter((item: any) => item.fileName === data.fileName);
-      setSelectedPreview(selectedMediaList);
+      mediaList = mediaList.filter((item: any) => item.fileName === data.fileName);
+      setSelectedPreview(mediaList);
     }
   }; 
 
@@ -67,17 +75,19 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
       allowsEditing: false,
       aspect: [4, 3],
       quality: 1,
-      base64: true,
+      //base64: true,
     });
 
     if (!result.canceled && result?.assets?.length) {
       let mediaList = [...selectedMedia];
-      const mediaExists = mediaList.some(item => item.fileName === result.assets[0].fileName);
-      if (!mediaExists) {
-        mediaList.push(result.assets[0]);
-        setSelectedMedia(mediaList);
-        if (onSelectMedia) onSelectMedia(mediaList);
+      for (const row of result?.assets) {
+        let mediaExists = mediaList.some(item => item.fileName === row.fileName);
+        if (!mediaExists) mediaList.push(row);
       }
+
+      setSelectedMedia(mediaList);
+      setSelectedPreview([]);
+      if (onSelectItem) onSelectItem(mediaList);
     }
   };
 
@@ -104,6 +114,7 @@ const styles = StyleSheet.create({
   },
   mediaPreview: {
     //opacity: 0.5,
+    borderRadius: Layout.radius.round,
   },
   deleteMedia: {
     position: 'absolute',

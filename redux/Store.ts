@@ -4,6 +4,7 @@ import SearchReducer from './slices/SearchSlice';
 import UserReducer from './slices/UserSlice';
 import MessageReducer from './slices/MessageSlice';
 import AppReducer from './slices/AppSlice';
+import AddJamReducer from './slices/AddJamSlice';
 
 const Store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const Store = configureStore({
     user: UserReducer,
     message: MessageReducer,
     app: AppReducer,
+    addJam: AddJamReducer, 
   },
   middleware: getDefaultMiddleware =>
     process.env.NODE_ENV === 'production' ? getDefaultMiddleware() : getDefaultMiddleware({

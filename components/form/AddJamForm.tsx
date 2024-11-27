@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
-import { Layout } from '@/constants/Layout';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { Colors } from '@/constants/Colors';
+import { setJamData } from '@/redux/slices/AddJamSlice';
+import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
-import AddMediaField from "../field/AddMediaField";
-import AddCollaboratorsField from "../field/AddCollaboratorsField";
+import MediaPickerBase from "../base/MediaPickerBase";;
 import LocationPickerField from "../field/LocationPickerField";
 import CountryField from '../field/CountryField';
 import SectorsField from "../field/SectorsField";
@@ -27,19 +28,17 @@ import LocationTypeField from '../field/LocationTypeField';
 import EntityManager from '@/manager/EntityManager';
 
 const AddJamForm = () => {
+  const dispatch = useDispatch();
+  const jamData = useSelector((state: any) => state.addJam);
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const [jamData, setJamData] = useState<any>({});
   const [profileId, setProfileId] = useState<number>(0);
   const jamCategoriesData = StaticData.jamCategories;
 
   const updateField = (key: string, value: any) => {
-    setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }, ...{
-      // Todo - Handle user location
-      geolocation_latitude: 9, 
-      geolocation_longitude: 2,
-    }});
+    let payload: any = {key: key, value: value, profile_id: profileId};
+    dispatch(setJamData(payload));
   };
 
   const submitForm = async () => {  
@@ -69,6 +68,8 @@ const AddJamForm = () => {
   });
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(jamData?.upload_medias);
 
   return (    
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
@@ -110,13 +111,13 @@ const AddJamForm = () => {
       <DatePickerField 
         value={'start value'}
         placeholder={i18n.t('Start date')}
-        onChangeValue={ (value: any) => updateField('period', {...jamData?.period || {}, ...{ start_datetime: value }}) } 
+        onChangeValue={(value: any) => updateField('period', {...jamData?.period || {}, ...{ start_datetime: value }})} 
       />
       
       <DatePickerField 
         value={'end value'}
         placeholder={i18n.t('End date')}
-        onChangeValue={ (value: any) => updateField('period', {...jamData?.period || {}, ...{ end_datetime: value }}) } 
+        onChangeValue={(value: any) => updateField('period', {...jamData?.period || {}, ...{ end_datetime: value }})} 
       />
 
       { /* <LocationPickerField /> */}
@@ -139,8 +140,26 @@ const AddJamForm = () => {
       />
 
       <DividerView />
-      <AddMediaField onSelectMedia={(data: any) => updateField('upload_medias', [data])} />
-      <AddCollaboratorsField />
+      <MediaPickerBase
+        value={jamData?.upload_medias}
+        label={
+          <BoxView direction="row" align="center">
+            <IconView name="plus" theme="secondary" radius="round" />
+            <TextView>{i18n.t('Add media')}</TextView>
+          </BoxView>
+        }
+        onSelectItem={(mediaList: any) => updateField('upload_medias', mediaList)} 
+        onDeleteItem={(mediaList: any) => updateField('upload_medias', mediaList)}
+      />
+
+      <BoxView 
+        direction="row" 
+        align="center" 
+        onPress={() => ScreenManager.toggleModal('CollaboratorsList')}
+      >
+        <IconView name="plus" theme="secondary" radius="round" />
+        <TextView>{i18n.t('Add collaborators')}</TextView>
+      </BoxView>
 
       <DividerView />
       <ButtonView 

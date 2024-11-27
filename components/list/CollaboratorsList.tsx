@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { Layout } from "@/constants/Layout";
+import { Colors } from '@/constants/Colors';
 import TextView from "../view/TextView";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
@@ -10,17 +11,19 @@ import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
+import InputTextField from '../field/InputTextField';
 
-const HostsList = () => {
+const CollaboratorsList = () => {
   const [profiles, setProfiles] = useState<any>(null);
-  const [entity, setEntity] = useState<any>(null);
-  const entityId = ScreenManager.getActiveScreen()?.entityId;
+  const [searchValue, setSearchValue] = useState<string>('');
 
-  if (!entity) {
-    EntityManager.findJam(entityId).then((item: any) => {
-      setEntity(item);
+  const onSubmitEditing = () => {
+    EntityManager.getProfiles().then((items: any) => {
+      setProfiles(items);
     });
-  }
+    
+    console.log(searchValue);
+  };
 
   if (!profiles) {
     EntityManager.getProfiles().then((items: any) => {
@@ -28,7 +31,7 @@ const HostsList = () => {
     });
   }
 
-  if (!entity || !profiles) return <SpinnerView />;
+  if (!profiles || !profiles) return <SpinnerView />;
 
   const renderItem = (row: any) => (
     <TouchableOpacity onPress={() => console.log('clicked')}>
@@ -42,9 +45,17 @@ const HostsList = () => {
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
-        title={i18n.t('Jam hosts')}
-        onPress={() => ScreenManager.toggleModal('HostsList')}
+        title={i18n.t('Add collaborators')}
+        onPress={() => ScreenManager.toggleModal('CollaboratorsList')}
       />
+      
+      <InputTextField 
+        containerStyle={styles.inputTextFieldContainer}
+        placeholder={i18n.t('Search...')} 
+        onChangeText={(text: string) => setSearchValue(text)}
+        onSubmitEditing={onSubmitEditing}
+      />
+
       <View style={Layout.borderedListContainer}>
         {profiles?.length > 0 &&
           <ListView
@@ -54,11 +65,24 @@ const HostsList = () => {
         }
 
         {!profiles?.length && 
-          <TextView>{i18n.t('No hosts available for this Jam.')}</TextView>
+          <TextView>{i18n.t('No collaborators found for this query.')}</TextView>
         }
       </View>
     </BoxView>
   );
 };
 
-export default HostsList;
+const styles = StyleSheet.create({
+  inputTextFieldContainer: {
+    backgroundColor: Colors.white,
+    borderWidth: Layout.borderWidth.base,
+    borderRadius: Layout.radius.round,
+    borderColor: Colors.primary,
+  },
+  wecomeMessage: {
+    textTransform: 'uppercase',
+    fontSize: Layout.fontSize.base*1.1,
+  }
+});
+
+export default CollaboratorsList;

@@ -14,20 +14,33 @@ const cache = new Cache({
 });
 
 class ApiManager {
-  async get(key: keyof typeof Endpoints) {
+  async get(key: keyof typeof Endpoints, options?: any) {
     let data: any = [];
+    let url: string = this.getUrl(key, options);
+
     if (Config.dataCacheEnabled === true && Endpoints[key].cacheable === true) {
       data = await this.getCacheItem(key);
     }
     
     if (!data?.length) {
-      data = await this.sendRequest(Endpoints[key], 'GET');
+      data = await this.sendRequest(url, 'GET');
       if (Config.dataCacheEnabled === true && data?.length > 0) {
         await cache.set(key, data);
       }
     }
 
     return data;
+  }
+
+  getUrl(key: keyof typeof Endpoints, options?: any) {
+    let path: string = Endpoints[key].path;
+    let url = Config.apiUrl + path;
+
+    if (options) {
+      console.log(options);
+    }
+
+    return url;
   }
 
   async getCacheItem(key: keyof typeof Endpoints) {
@@ -42,49 +55,48 @@ class ApiManager {
     return null;
   }
 
-  async post(key: keyof typeof Endpoints, data: object) {
+  async post(key: keyof typeof Endpoints, data: any) {
     try {
-      return await this.sendRequest(Endpoints[key], 'POST', data);
+
+      return await this.sendRequest(this.getUrl(key), 'POST', data);
     } 
     catch (error) {
       console.log(error);
     }
   }
 
-  async put(key: keyof typeof Endpoints, data: object) {
+  async put(key: keyof typeof Endpoints, data: any) {
     try {
-      return await this.sendRequest(Endpoints[key], 'PUT', data);
+      return await this.sendRequest(this.getUrl(key), 'PUT', data);
     } 
     catch (error) {
       console.log(error);
     }
   }
 
-  async delete(key: keyof typeof Endpoints, data: object) {
+  async delete(key: keyof typeof Endpoints, data: any) {
     try {
-      return await this.sendRequest(Endpoints[key], 'DELETE', data);
+      return await this.sendRequest(this.getUrl(key), 'DELETE', data);
     } 
     catch (error) {
       console.log(error);
     }
   }
 
-  async sendRequest(endpoint: any, method: string, data?: any) {
-    if (endpoint?.url) {
-      try {
-        let response: any = await fetch(Config.apiUrl + endpoint.url, {
-          ...{
-            method: method,
-            headers: this.getHeaders(),
-          },
-          ...(data ? { body: JSON.stringify(data) } : {}),
-        });
-    
-        return await this.processResponse(response);
-      } 
-      catch (error) {
-        console.error(error);
-      }
+  async sendRequest(url: string, method: string, data?: any) {
+    try {
+      let response: any = await fetch(url, {
+        ...{
+          method: method,
+          headers: this.getHeaders(),
+        },
+        ...(data ? { body: JSON.stringify(data) } : {}),
+      });
+  
+      return await this.processResponse(response);
+    } 
+    catch (error) {
+      console.error(error);
     }
   }
 
