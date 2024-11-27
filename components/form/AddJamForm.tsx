@@ -38,19 +38,8 @@ const AddJamForm = () => {
   const jamCategoriesData = StaticData.jamCategories;
 
   const updateField = (key: string, value: any) => {
-    let payload: any = {key: key, value: value};
-
-
-
+    let payload: any = {key: key, value: value, profile_id: profileId};
     dispatch(setJamData(payload));
-    
-    /*
-    setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }, ...{
-      // Todo - Handle user location
-      geolocation_latitude: 9, 
-      geolocation_longitude: 2,
-    }});
-  */
   };
 
   const submitForm = async () => {  
