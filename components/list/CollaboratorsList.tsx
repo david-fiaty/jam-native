@@ -16,10 +16,10 @@ import DividerView from '../view/DividerView';
 
 const CollaboratorsList = () => {
   const [profiles, setProfiles] = useState<any>(null);
-  const entityId = ScreenManager.getActiveScreen()?.entityId;
+  const [searchValue, setSearchValue] = useState('');
 
   const onSubmitEditing = () => {
-    console.log('onSubmitSearch');
+    console.log(searchValue);
   };
 
   if (!profiles) {
@@ -51,7 +51,7 @@ const CollaboratorsList = () => {
         <InputTextField 
           containerStyle={styles.inputTextFieldContainer}
           placeholder={i18n.t('Search...')} 
-          onChangeText={(text: string) => console.log(text)}
+          onChangeText={(text: string) => setSearchValue(text)}
           onSubmitEditing={onSubmitEditing}
         />
 
