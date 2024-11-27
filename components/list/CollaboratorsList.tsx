@@ -18,7 +18,7 @@ const CollaboratorsList = () => {
   const [searchValue, setSearchValue] = useState<string>('');
 
   const onSubmitEditing = () => {
-    let options = { query_text: searchValue };
+    let options = searchValue.length ? { query_text: searchValue } : {};
     EntityManager.getProfiles(options).then((items: any) => {
       setProfiles(items);
     });
