@@ -4,8 +4,8 @@ const AddJamSlice = createSlice({
   name: 'addJam',
   initialState: {},
   reducers: {
-    setValue: (state, action) => {
-      state.isLoggedIn = action.payload;
+    setValue: (state: any, action: any) => {
+      state[action.payload.field] = action.payload.value;
     },
   },
 });
