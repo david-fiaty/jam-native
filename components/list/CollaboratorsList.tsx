@@ -60,9 +60,6 @@ const CollaboratorsList = () => {
     </TouchableOpacity>
   );
 
-
-  console.log(selectedProfiles);
-
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
