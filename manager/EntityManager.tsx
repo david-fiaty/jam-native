@@ -46,7 +46,6 @@ class EntityManager {
     return !!response;
   }
 
-
   async likeJam(entityId: any) {
     let profileId = await UserManager.getProfileId();
     let response = await DataManager.post('likeJam', {
