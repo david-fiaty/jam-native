@@ -141,7 +141,7 @@ const AddJamForm = () => {
       <DividerView />
       <AddMediaField onSelectMedia={(data: any) => updateField('upload_medias', [data])} />
       <AddCollaboratorsField 
-        onPress={() => ScreenManager.toggleModal('CollaboratorsList')} 
+        onPressEvent={() => ScreenManager.toggleModal('CollaboratorsList')} 
       />
 
       <DividerView />
