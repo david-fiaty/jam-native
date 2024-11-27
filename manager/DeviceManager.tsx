@@ -1,4 +1,5 @@
 import { Dimensions, ScaledSize, StatusBar } from 'react-native';
+import * as Location from 'expo-location';
 
 class DeviceManager {
   screen: ScaledSize;
@@ -16,6 +17,16 @@ class DeviceManager {
       height: StatusBar.currentHeight,
       width: this.window.width,
     };
+  }
+
+  async getLocation() {
+    const { status } = await Location.requestForegroundPermissionsAsync();
+
+    if (status !== 'granted') {
+      return;
+    }
+
+    return await Location.getCurrentPositionAsync({});
   }
 };
 
