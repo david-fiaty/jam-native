@@ -74,14 +74,14 @@ const MediaPickerBase = ({label, onSelectMedia, onDeleteMedia}: Props) => {
 
     if (!result.canceled && result?.assets?.length) {
       let data = result.assets[0];
-      let selectedMediaList = [...selectedMedia];
-      let mediaExists = selectedMediaList.some(item => item.fileName === data.fileName);
+      let mediaList = [...selectedMedia];
+      let mediaExists = mediaList.some(item => item.fileName === data.fileName);
       if (!mediaExists) {
-        selectedMediaList.push(data);
-        setSelectedMedia(selectedMediaList);
+        mediaList.push(data);
+        setSelectedMedia(mediaList);
         setSelectedPreview([]);
     
-        if (onSelectMedia) onSelectMedia(selectedMediaList);
+        if (onSelectMedia) onSelectMedia(mediaList);
       }
     }
   };
