@@ -16,6 +16,7 @@ type Props = BaseProps & {
   spellCheck?: boolean;
   readOnly?: boolean,
   onChangeText?: () => void;
+  onSubmitEditing?: () => void;
 };
 
 const InputTextField = ({
@@ -30,6 +31,7 @@ const InputTextField = ({
   spellCheck,
   readOnly,
   onChangeText,
+  onSubmitEditing,
 }: Props) => {
   return (
     <BoxView style={styles.container}>
@@ -47,8 +49,9 @@ const InputTextField = ({
         autoCapitalize={autoCapitalize}
         spellCheck={spellCheck}
         value={value}
-        onChangeText={onChangeText}
         readOnly={readOnly}
+        onChangeText={onChangeText}
+        onSubmitEditing={onSubmitEditing}
       />
     </BoxView>
   );
