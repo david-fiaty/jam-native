@@ -53,9 +53,3 @@ class DeviceManager {
 
 export default (new DeviceManager());
 
-
-
-
-const 
-
-console.log("Current user language:", getUserLanguage());
