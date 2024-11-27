@@ -49,10 +49,13 @@ const NotificationsMenu = () => {
   const router = useRouter();
 
   const renderItem = (row: any) => (
-    <TouchableOpacity key="id" onPress={() => router.push({ 
-      pathname: '/notification', 
-      params: row.item, 
-    })}>
+    <TouchableOpacity 
+      key="id" 
+      onPress={() => router.push({ 
+        pathname: '/notification', 
+        params: row.item, 
+      })}
+    >
       <View style={Layout.menuItem}>
         <TextView>{row.item.label}</TextView>
       </View>
