@@ -4,11 +4,11 @@ const AddJamSlice = createSlice({
   name: 'addJam',
   initialState: {},
   reducers: {
-    setValue: (state: any, action: any) => {
+    setJamData: (state: any, action: any) => {
       state[action.payload.field] = action.payload.value;
     },
   },
 });
 
-export const { setValue } = AddJamSlice.actions;
+export const { setJamData } = AddJamSlice.actions;
 export default AddJamSlice.reducer;
