@@ -15,13 +15,26 @@ import InputTextField from '../field/InputTextField';
 
 const CollaboratorsList = () => {
   const [profiles, setProfiles] = useState<any>(null);
+  const [selectedProfiles, setSelectedProfiles] = useState<any>([]);
   const [searchValue, setSearchValue] = useState<string>('');
 
   const onSubmitEditing = () => {
-    let options = { query_text: searchValue };
+    let options = searchValue.length ? { query_text: searchValue } : {};
     EntityManager.getProfiles(options).then((items: any) => {
       setProfiles(items);
     });
+  };
+
+  const toogleProfile = (entityId: number) => {
+    let profileList = [...selectedProfiles];
+    if (profileList.includes(entityId)) {
+      profileList = profileList.filter((value: number) => value !== entityId);
+    }
+    else {
+      profileList.push(entityId);
+    }
+    
+    setSelectedProfiles(profileList);
   };
 
   if (!profiles) {
@@ -33,13 +46,22 @@ const CollaboratorsList = () => {
   if (!profiles || !profiles) return <SpinnerView />;
 
   const renderItem = (row: any) => (
-    <TouchableOpacity onPress={() => console.log('clicked')}>
+    <TouchableOpacity 
+      key={row.item.id}
+      onPress={() => toogleProfile(row.item.id)}
+    >
       <BoxView direction="row" align="center" justify="flex-start" style={Layout.listItem}>
         <IconView name="user" theme="tertiary" />
         <TextView>{row.item.profile_name}</TextView>
+        { selectedProfiles.includes(row.item.id) &&
+          <IconView name="checkmark" theme="clear" size={18}/>
+        }
       </BoxView>
     </TouchableOpacity>
   );
+
+
+  console.log(selectedProfiles);
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
