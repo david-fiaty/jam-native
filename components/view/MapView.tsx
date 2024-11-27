@@ -1,14 +1,12 @@
-import { useState, useEffect } from 'react';
-import { StyleSheet, View, Platform, TouchableWithoutFeedback } from "react-native";
+import { useState, useEffect } from "react";
+import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { Marker } from "react-native-maps";
 import { BaseProps } from "@/constants/Types";
-import { Layout } from '@/constants/Layout';
-import * as Device from "expo-device";
-import * as Location from "expo-location";
+import { Layout } from "@/constants/Layout";
 import RNMapView from "react-native-maps";
-import SpinnerView from './SpinnerView';
-import DeviceManager from '@/manager/DeviceManager';
-import DataManager from '@/manager/DataManager';
+import SpinnerView from "./SpinnerView";
+import DeviceManager from "@/manager/DeviceManager";
+import DataManager from "@/manager/DataManager";
 
 const MapView = ({ style, children }: BaseProps) => {
   const [deviceLocation, setDeviceLocation] = useState(null);
@@ -19,10 +17,10 @@ const MapView = ({ style, children }: BaseProps) => {
     return (
       <Marker
         key={item.id}
-        title={item?.caption?.substring(0, 20) + '...'}
+        title={item?.caption?.substring(0, 20) + "..."}
         description={item?.caption}
-        coordinate={{ 
-          latitude: parseFloat(item?.geolocation_latitude), 
+        coordinate={{
+          latitude: parseFloat(item?.geolocation_latitude),
           longitude: parseFloat(item?.geolocation_longitude),
         }}
       />
@@ -30,7 +28,7 @@ const MapView = ({ style, children }: BaseProps) => {
   };
 
   if (!jamsData) {
-    DataManager.get('jams').then((data: any) => {
+    DataManager.get("jams").then((data: any) => {
       setJamsData(data);
       setIsLoaded(true);
     });
@@ -38,21 +36,8 @@ const MapView = ({ style, children }: BaseProps) => {
 
   useEffect(() => {
     (async () => {
-      
-      if (Platform.OS === 'android' && !Device.isDevice) {
-        console.log('Location features are not available for virtual devices');
-        return;
-      }
-
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        console.log('Permission to access location was denied.');
-        return;
-      }
-
       let currentLocation: any = await DeviceManager.getLocation();
       if (currentLocation) setDeviceLocation(currentLocation);
-
     })();
   }, []);
 
@@ -71,25 +56,24 @@ const MapView = ({ style, children }: BaseProps) => {
             longitudeDelta: 3,
           }}
         >
-          {deviceLocation && 
+          {deviceLocation && (
             <Marker
               title="Your Location"
               description="This is where you are currently."
-              coordinate={{ 
-                latitude: parseFloat(deviceLocation.coords.latitude), 
+              coordinate={{
+                latitude: parseFloat(deviceLocation.coords.latitude),
                 longitude: parseFloat(deviceLocation.coords.latitude),
               }}
             />
-          }
+          )}
 
-          { jamsData.map((item: any) => {
+          {jamsData.map((item: any) => {
             if (item?.geolocation_longitude && item?.geolocation_latitude) {
               return renderMarker(item);
             }
 
             return null;
-          }) }
-
+          })}
         </RNMapView>
       </View>
     </TouchableWithoutFeedback>
@@ -99,7 +83,7 @@ const MapView = ({ style, children }: BaseProps) => {
 const styles = StyleSheet.create({
   container: {
     padding: 0,
-    paddingTop: Layout.space.base*2,
+    paddingTop: Layout.space.base * 2,
   },
   map: {
     flex: 1,
