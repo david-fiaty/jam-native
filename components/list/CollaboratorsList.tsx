@@ -53,6 +53,9 @@ const CollaboratorsList = () => {
       <BoxView direction="row" align="center" justify="flex-start" style={Layout.listItem}>
         <IconView name="user" theme="tertiary" />
         <TextView>{row.item.profile_name}</TextView>
+        { selectedProfiles.includes(row.item.id) &&
+          <IconView name="checkmark" theme="clear" size={18}/>
+        }
       </BoxView>
     </TouchableOpacity>
   );
