@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import { Layout } from '@/constants/Layout';
@@ -76,7 +76,6 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
     if (!result.canceled && result?.assets?.length) {
       let data = result.assets[0];
       let selectedMediaList = [...selectedMedia];
-      let selectedPreviewList = [...selectedPreview];
       let mediaExists = selectedMediaList.some(item => item.fileName === data.fileName);
       if (!mediaExists) {
         selectedMediaList.push(data);
