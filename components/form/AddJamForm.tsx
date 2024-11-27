@@ -26,6 +26,7 @@ import StaticData from '@/constants/StaticData';
 import DatePickerField from '../field/DatePickerField';
 import LocationTypeField from '../field/LocationTypeField';
 import EntityManager from '@/manager/EntityManager';
+import CollaboratorsField from '../field/CollaboratorsField';
 
 const AddJamForm = () => {
   const dispatch = useDispatch();
@@ -37,8 +38,7 @@ const AddJamForm = () => {
   const jamCategoriesData = StaticData.jamCategories;
 
   const updateField = (key: string, value: any) => {
-    let payload: any = {key: key, value: value, profile_id: profileId};
-    dispatch(setJamData(payload));
+    dispatch(setJamData<any>({key: key, value: value, profile_id: profileId}));
   };
 
   const submitForm = async () => {  
@@ -69,7 +69,7 @@ const AddJamForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(jamData?.upload_medias);
+  console.log(jamData?.collaborators_ids);
 
   return (    
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
@@ -152,14 +152,9 @@ const AddJamForm = () => {
         onDeleteItem={(mediaList: any) => updateField('upload_medias', mediaList)}
       />
 
-      <BoxView 
-        direction="row" 
-        align="center" 
-        onPress={() => ScreenManager.toggleModal('CollaboratorsList')}
-      >
-        <IconView name="plus" theme="secondary" radius="round" />
-        <TextView>{i18n.t('Add collaborators')}</TextView>
-      </BoxView>
+      <CollaboratorsField 
+        onPressEvent={() => ScreenManager.toggleModal('CollaboratorsList')}
+      />
 
       <DividerView />
       <ButtonView 
