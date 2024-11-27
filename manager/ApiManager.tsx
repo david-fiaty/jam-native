@@ -46,7 +46,7 @@ class ApiManager {
 
   async post(key: keyof typeof Endpoints, data: any) {
     try {
-      return await this.sendRequest(Endpoints[key],path, 'POST', data);
+      return await this.sendRequest(Endpoints[key].path, 'POST', data);
     } 
     catch (error) {
       console.log(error);
