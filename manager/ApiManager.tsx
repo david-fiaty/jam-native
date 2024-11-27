@@ -36,7 +36,10 @@ class ApiManager {
     let path: string = Endpoints[key].path;
     let url = Config.apiUrl + path;
 
-    if (options) url += (new URLSearchParams(options).toString());
+    if (options) {
+      url += '?' + (new URLSearchParams(options).toString());
+      console.log(url);
+    }
 
     return url;
   }
