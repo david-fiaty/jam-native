@@ -8,7 +8,7 @@ type Props = BaseProps & {
   onPressEvent?: () => void;
 };
 
-const CollaboratorsField = ({value, onPressEvent}: Props) => {
+const CollaboratorsField = ({onPressEvent}: Props) => {
   return (
     <BoxView
       direction="row"
