@@ -10,20 +10,22 @@ type Props = {
   data?: any;
 };
 
-const width = DeviceManager.window.width - Layout.space.base*2;
-
 const ImageSlideshow = ({data}: Props) => {
+  const width = DeviceManager.window.width - Layout.space.base*2;
+
+  const renderItem = (item: any, index: number) => (
+    <View style={styles.item} key={`dot-${index}`}>
+      <ImageView 
+        uri={Config.imageUrl + item?.url} 
+        resizeMode="cover" 
+        width={width}
+        height={346}
+      />
+    </View>
+  );  
+
   const SlideshowItem = data?.map((item: any, index: number) => {
-    return (
-      <View style={styles.item} key={`dot-${index}`}>
-        <ImageView 
-          uri={Config.imageUrl + item?.url} 
-          resizeMode="cover" 
-          width={width}
-          height={346}
-        />
-      </View>
-    );
+    return renderItem(item, index);
   });
 
   return (
