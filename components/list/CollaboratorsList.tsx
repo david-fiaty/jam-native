@@ -18,6 +18,10 @@ const CollaboratorsList = () => {
   const [searchValue, setSearchValue] = useState<string>('');
 
   const onSubmitEditing = () => {
+    EntityManager.getProfiles().then((items: any) => {
+      setProfiles(items);
+    });
+    
     console.log(searchValue);
   };
 
