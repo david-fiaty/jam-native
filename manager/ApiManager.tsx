@@ -18,6 +18,8 @@ class ApiManager {
     let data: any = [];
     let path: string = Endpoints[key].path;
 
+    console.log(options);
+
     if (Config.dataCacheEnabled === true && Endpoints[key].cacheable === true) {
       data = await this.getCacheItem(key);
     }
