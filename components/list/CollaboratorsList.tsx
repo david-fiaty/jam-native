@@ -46,17 +46,14 @@ const CollaboratorsList = () => {
         onPress={() => ScreenManager.toggleModal('CollaboratorsList')}
       />
       
+      <InputTextField 
+        containerStyle={styles.inputTextFieldContainer}
+        placeholder={i18n.t('Search...')} 
+        onChangeText={(text: string) => setSearchValue(text)}
+        onSubmitEditing={onSubmitEditing}
+      />
+
       <View style={Layout.borderedListContainer}>
-          
-        <InputTextField 
-          containerStyle={styles.inputTextFieldContainer}
-          placeholder={i18n.t('Search...')} 
-          onChangeText={(text: string) => setSearchValue(text)}
-          onSubmitEditing={onSubmitEditing}
-        />
-
-        <DividerView />
-
         {profiles?.length > 0 &&
           <ListView
             data={profiles}
