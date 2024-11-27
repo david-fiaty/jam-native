@@ -67,6 +67,7 @@ https://docs.google.com/spreadsheets/d/1sodzaVigD26XOopcXfLRykl51wPM5pKecS0i1QED
 # New release:
   - Ameliorations generales UI
   - Amelioration notable performance jams list
+  - Add jam form: add media, add collaborators
 
 # Todo 
 - Implement image cache : https://github.com/echowaves/expo-cached-image
