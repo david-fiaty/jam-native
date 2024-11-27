@@ -56,7 +56,7 @@ const CollaboratorsList = () => {
           placeholder={i18n.t('Search...')} 
         />
 
-        <DividerView /><DividerView />
+        <DividerView />
 
         {profiles?.length > 0 &&
           <ListView

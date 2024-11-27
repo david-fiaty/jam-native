@@ -1,6 +1,4 @@
-import { StyleSheet } from "react-native";
 import { BaseProps } from "@/constants/Types";
-import CheckboxSelectBase from "../base/CheckboxSelectBase";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
@@ -18,9 +16,5 @@ const AddCollaboratorsField = ({ onPressEvent }: Props) => {
     </BoxView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {},
-});
 
 export default AddCollaboratorsField;
