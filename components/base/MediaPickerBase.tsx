@@ -18,19 +18,16 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
 
   const deleteMedia = (data: any) => {
-    let selectedMediaList = [...selectedMedia];  
-    let selectedPreviewList = [...selectedPreview];
-    selectedMediaList = selectedMediaList.filter((item: any) => item.fileName !== data.fileName);
-    selectedPreviewList = selectedPreviewList.filter((value: any) => value !== data.fileName);
-    setSelectedMedia(selectedMediaList);
-    setSelectedPreview(selectedPreviewList);
+    let mediaList = [...selectedMedia];  
+    mediaList = mediaList.filter((item: any) => item.fileName !== data.fileName);
+    setSelectedMedia(mediaList);
   };
 
   const updatePreviewSelection = (data: any) => {
-    let selectedMediaList = [...selectedPreview];
+    let mediaList = [...selectedPreview];
     if (!selectedPreview.includes(data.fileName)) {
-      selectedMediaList.push(data.fileName);
-      setSelectedPreview(selectedMediaList);
+      mediaList.push(data.fileName);
+      setSelectedPreview(mediaList);
     }
     else {
       selectedMediaList = selectedMediaList.filter((item: any) => item.fileName === data.fileName);
@@ -95,7 +92,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
 
       { selectedMedia?.length > 0 &&
         <BoxView direction="row" align="flex-start" justify="left" style={styles.previewContainer}>
-          { selectedMedia.map((data: any) => renderImagePreview(data)) }
+          { selectedMedia.map((data: any) => renderImagePreview(data) )}
         </BoxView>
       }
     </View>
