@@ -1,5 +1,6 @@
-import { Dimensions, ScaledSize, StatusBar } from 'react-native';
+import { Dimensions, ScaledSize, StatusBar, Platform } from 'react-native';
 import * as Location from 'expo-location';
+import * as Device from "expo-device";
 
 class DeviceManager {
   screen: ScaledSize;
@@ -20,11 +21,17 @@ class DeviceManager {
   }
 
   async getLocation() {
+    if (Platform.OS === "android" && !Device.isDevice) {
+      console.log("Location features are not available for virtual devices");
+      return null;
+    }
+
     const { status } = await Location.requestForegroundPermissionsAsync();
 
     if (status !== 'granted') {
-      return;
+      return null;
     }
+    
 
     return await Location.getCurrentPositionAsync({});
   }
