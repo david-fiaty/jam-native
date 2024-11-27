@@ -1,8 +1,9 @@
 import { Dimensions, ScaledSize, StatusBar, Platform } from 'react-native';
+import { Config } from '@/constants/Config';
 import * as RNLocalize from "react-native-localize";
 import * as Location from 'expo-location';
 import * as Device from "expo-device";
-import { Config } from '@/constants/Config';
+
 
 class DeviceManager {
   screen: ScaledSize;
