@@ -70,7 +70,7 @@ const AddJamForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  //console.log(jamData?.upload_medias);
+  console.log(jamData?.upload_medias);
 
   return (    
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
@@ -149,8 +149,8 @@ const AddJamForm = () => {
             <TextView>{i18n.t('Add media')}</TextView>
           </BoxView>
         }
-        onSelectMedia={(mediaList: any) => updateField('upload_medias', [...jamData.upload_medias ?? [], ...mediaList ?? []])} 
-        onDeleteMedia={(mediaList: any) => updateField('upload_medias', [...jamData.upload_medias ?? [], ...mediaList ?? []])}
+        onSelectMedia={(mediaList: any) => updateField('upload_medias', mediaList)} 
+        onDeleteMedia={(mediaList: any) => updateField('upload_medias', mediaList)}
       />
       
       <AddCollaboratorsField 
