@@ -151,7 +151,6 @@ const AddJamForm = () => {
         onSelectItem={(mediaList: any) => updateField('upload_medias', mediaList)} 
         onDeleteItem={(mediaList: any) => updateField('upload_medias', mediaList)}
       />
-      
 
       <BoxView 
         direction="row" 
@@ -159,7 +158,7 @@ const AddJamForm = () => {
         onPress={() => ScreenManager.toggleModal('CollaboratorsList')}
       >
         <IconView name="plus" theme="secondary" radius="round" />
-        <TextView>{i18n.t("Add collaborators")}</TextView>
+        <TextView>{i18n.t('Add collaborators')}</TextView>
       </BoxView>
 
       <DividerView />
