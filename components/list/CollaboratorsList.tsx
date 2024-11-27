@@ -16,14 +16,7 @@ import DividerView from '../view/DividerView';
 
 const CollaboratorsList = () => {
   const [profiles, setProfiles] = useState<any>(null);
-  const [entity, setEntity] = useState<any>(null);
   const entityId = ScreenManager.getActiveScreen()?.entityId;
-
-  if (!entity) {
-    EntityManager.findJam(entityId).then((item: any) => {
-      setEntity(item);
-    });
-  }
 
   if (!profiles) {
     EntityManager.getProfiles().then((items: any) => {
@@ -31,7 +24,7 @@ const CollaboratorsList = () => {
     });
   }
 
-  if (!entity || !profiles) return <SpinnerView />;
+  if (!profiles || !profiles) return <SpinnerView />;
 
   const renderItem = (row: any) => (
     <TouchableOpacity onPress={() => console.log('clicked')}>
