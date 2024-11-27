@@ -25,6 +25,10 @@ const CollaboratorsList = () => {
     });
   };
 
+  const toogleProfile = (entityId: number) => {
+    console.log(entityId);
+  };
+
   if (!profiles) {
     EntityManager.getProfiles().then((items: any) => {
       setProfiles(items);
@@ -36,7 +40,7 @@ const CollaboratorsList = () => {
   const renderItem = (row: any) => (
     <TouchableOpacity 
       key={row.item.id}
-      onPress={() => console.log('clicked')}
+      onPress={() => toogleProfile(row.item.id)}
     >
       <BoxView direction="row" align="center" justify="flex-start" style={Layout.listItem}>
         <IconView name="user" theme="tertiary" />
@@ -44,6 +48,9 @@ const CollaboratorsList = () => {
       </BoxView>
     </TouchableOpacity>
   );
+
+
+  console.log(selectedProfiles);
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
