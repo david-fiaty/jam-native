@@ -16,7 +16,7 @@ import DividerView from '../view/DividerView';
 
 const CollaboratorsList = () => {
   const [profiles, setProfiles] = useState<any>(null);
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState<string>('');
 
   const onSubmitEditing = () => {
     console.log(searchValue);
