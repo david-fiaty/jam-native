@@ -28,7 +28,7 @@ const MediaPickerBase = ({label, value, onSelectMedia, onDeleteMedia}: Props) =>
     let mediaList = [...selectedMedia];  
     mediaList = mediaList.filter((item: any) => item.fileName !== data.fileName);
     setSelectedMedia(mediaList);
-    //if (onDeleteMedia) onDeleteMedia(data);
+    if (onDeleteMedia) onDeleteMedia(mediaList);
   };
 
   const updatePreviewSelection = (data: any) => {
