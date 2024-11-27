@@ -26,7 +26,7 @@ import StaticData from '@/constants/StaticData';
 import DatePickerField from '../field/DatePickerField';
 import LocationTypeField from '../field/LocationTypeField';
 import EntityManager from '@/manager/EntityManager';
-import { setValue } from '@/redux/slices/AddJamSlice';
+import { setAddJamValue, setJamData, setValue } from '@/redux/slices/AddJamSlice';
 
 const AddJamForm = () => {
   const dispatch = useDispatch();
@@ -38,8 +38,11 @@ const AddJamForm = () => {
   const jamCategoriesData = StaticData.jamCategories;
 
   const updateField = (key: string, value: any) => {
-    let payload: any = {field: 'test', value: 'hello D'};
-    dispatch(setValue(payload));
+    let payload: any = {key: key, value: value};
+
+
+
+    dispatch(setJamData(payload));
     
     /*
     setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }, ...{
@@ -77,6 +80,8 @@ const AddJamForm = () => {
   });
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(jamData);
 
   return (    
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
