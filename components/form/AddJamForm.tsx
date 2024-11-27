@@ -38,7 +38,9 @@ const AddJamForm = () => {
   const jamCategoriesData = StaticData.jamCategories;
 
   const updateField = (key: string, value: any) => {
-    dispatch(setValue({field: 'test', value: 'hello D'}));
+    let payload: any = {field: 'test', value: 'hello D'};
+    dispatch(setValue(payload));
+    
     /*
     setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }, ...{
       // Todo - Handle user location
