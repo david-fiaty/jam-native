@@ -5,7 +5,7 @@ const AddJamSlice = createSlice({
   initialState: {},
   reducers: {
     setJamData: (state: any, action: any) => {
-      state[action.payload.field] = action.payload.value;
+      state[action.payload.key] = action.payload.value;
     },
   },
 });
