@@ -8,8 +8,7 @@ import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
-import MediaPickerBase from "../base/MediaPickerBase";
-import AddCollaboratorsField from "../field/AddCollaboratorsField";
+import MediaPickerBase from "../base/MediaPickerBase";;
 import LocationPickerField from "../field/LocationPickerField";
 import CountryField from '../field/CountryField';
 import SectorsField from "../field/SectorsField";
@@ -153,9 +152,15 @@ const AddJamForm = () => {
         onDeleteItem={(mediaList: any) => updateField('upload_medias', mediaList)}
       />
       
-      <AddCollaboratorsField 
-        onPressEvent={() => ScreenManager.toggleModal('CollaboratorsList')} 
-      />
+
+      <BoxView 
+        direction="row" 
+        align="center" 
+        onPress={() => ScreenManager.toggleModal('CollaboratorsList')}
+      >
+        <IconView name="plus" theme="secondary" radius="round" />
+        <TextView>{i18n.t("Add collaborators")}</TextView>
+      </BoxView>
 
       <DividerView />
       <ButtonView 
