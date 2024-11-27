@@ -59,11 +59,13 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 
 # Issues
   - Jam Search: 
-    > Aucun parametre de recherche fourni, suppose query_text
+    > Aucun parametre de recherche fourni en exemple, suppose query_text
     > Je cree un jam avec title = "Jam - Native Test 2"
     > Je fais une recherche avec query_text=native => aucun resultat
 
-
+  - Get Profiles by ID
+    > Aucun parametre de recherche fourni en exemple, suppose item_ids
+    > Une requete /profiles/?items_ids=84,952 retoure tous les profils au lieu des 2 profils attendus
 
 
 
