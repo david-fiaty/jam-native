@@ -12,7 +12,6 @@ import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from '../field/InputTextField';
-import DividerView from '../view/DividerView';
 
 const CollaboratorsList = () => {
   const [profiles, setProfiles] = useState<any>(null);
