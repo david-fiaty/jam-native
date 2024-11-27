@@ -16,14 +16,11 @@ import DividerView from '../view/DividerView';
 
 const CollaboratorsList = () => {
   const [profiles, setProfiles] = useState<any>(null);
-  const [entity, setEntity] = useState<any>(null);
   const entityId = ScreenManager.getActiveScreen()?.entityId;
 
-  if (!entity) {
-    EntityManager.findJam(entityId).then((item: any) => {
-      setEntity(item);
-    });
-  }
+  const onSubmitEditing = () => {
+    console.log('onSubmitSearch');
+  };
 
   if (!profiles) {
     EntityManager.getProfiles().then((items: any) => {
@@ -31,7 +28,7 @@ const CollaboratorsList = () => {
     });
   }
 
-  if (!entity || !profiles) return <SpinnerView />;
+  if (!profiles || !profiles) return <SpinnerView />;
 
   const renderItem = (row: any) => (
     <TouchableOpacity onPress={() => console.log('clicked')}>
@@ -45,7 +42,7 @@ const CollaboratorsList = () => {
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
-        title={i18n.t('Jammers')}
+        title={i18n.t('Add collaborators')}
         onPress={() => ScreenManager.toggleModal('CollaboratorsList')}
       />
       
@@ -54,6 +51,8 @@ const CollaboratorsList = () => {
         <InputTextField 
           containerStyle={styles.inputTextFieldContainer}
           placeholder={i18n.t('Search...')} 
+          onChangeText={(text: string) => console.log(text)}
+          onSubmitEditing={onSubmitEditing}
         />
 
         <DividerView />
@@ -66,7 +65,7 @@ const CollaboratorsList = () => {
         }
 
         {!profiles?.length && 
-          <TextView>{i18n.t('There are no jammers available for this Jam.')}</TextView>
+          <TextView>{i18n.t('No collaborators found for this query.')}</TextView>
         }
       </View>
     </BoxView>
