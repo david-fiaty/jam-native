@@ -70,8 +70,6 @@ const AddJamForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(jamData?.upload_medias);
-
   return (    
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
@@ -154,6 +152,7 @@ const AddJamForm = () => {
       />
 
       <CollaboratorsField 
+        value={jamData?.callaborators_ids}
         onPressEvent={() => ScreenManager.toggleModal('CollaboratorsList')}
       />
 
