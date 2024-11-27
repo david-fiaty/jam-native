@@ -34,7 +34,9 @@ const CollaboratorsList = () => {
   if (!profiles || !profiles) return <SpinnerView />;
 
   const renderItem = (row: any) => (
-    <TouchableOpacity onPress={() => console.log('clicked')}>
+    <TouchableOpacity 
+      onPress={() => console.log('clicked')}
+    >
       <BoxView direction="row" align="center" justify="flex-start" style={Layout.listItem}>
         <IconView name="user" theme="tertiary" />
         <TextView>{row.item.profile_name}</TextView>
