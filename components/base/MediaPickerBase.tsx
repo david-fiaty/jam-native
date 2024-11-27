@@ -11,9 +11,10 @@ import IconView from '../view/IconView';
 type Props = BaseProps & {
   label?: JSX.Element, 
   onSelectMedia?: (data: any) => void,
+  onDeleteMedia?: (data: any) => void,
 };
 
-const MediaPickerBase = ({label, onSelectMedia}: Props) => {  
+const MediaPickerBase = ({label, onSelectMedia, onDeleteMedia}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
 
@@ -21,6 +22,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
     let mediaList = [...selectedMedia];  
     mediaList = mediaList.filter((item: any) => item.fileName !== data.fileName);
     setSelectedMedia(mediaList);
+    if (onDeleteMedia) onDeleteMedia(data);
   };
 
   const updatePreviewSelection = (data: any) => {
@@ -30,8 +32,8 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
       setSelectedPreview(mediaList);
     }
     else {
-      selectedMediaList = selectedMediaList.filter((item: any) => item.fileName === data.fileName);
-      setSelectedPreview(selectedMediaList);
+      mediaList = mediaList.filter((item: any) => item.fileName !== data.fileName);
+      setSelectedPreview(mediaList);
     }
   }; 
 
@@ -72,14 +74,14 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
 
     if (!result.canceled && result?.assets?.length) {
       let data = result.assets[0];
-      let selectedMediaList = [...selectedMedia];
-      let mediaExists = selectedMediaList.some(item => item.fileName === data.fileName);
+      let mediaList = [...selectedMedia];
+      let mediaExists = mediaList.some(item => item.fileName === data.fileName);
       if (!mediaExists) {
-        selectedMediaList.push(data);
-        setSelectedMedia(selectedMediaList);
+        mediaList.push(data);
+        setSelectedMedia(mediaList);
         setSelectedPreview([]);
     
-        if (onSelectMedia) onSelectMedia(selectedMediaList);
+        if (onSelectMedia) onSelectMedia(mediaList);
       }
     }
   };
