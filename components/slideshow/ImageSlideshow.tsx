@@ -1,8 +1,8 @@
 import { StyleSheet, View } from "react-native";
-import Slick from "react-native-slick";
 import { Config } from '@/constants/Config';
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
+import Slick from "react-native-slick";
 import ImageView from "../view/ImageView";
 import DeviceManager from '@/manager/DeviceManager';
 
