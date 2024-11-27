@@ -81,9 +81,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
       if (!mediaExists) {
         selectedMediaList.push(data);
         setSelectedMedia(selectedMediaList);
-
-        selectedPreviewList = selectedPreviewList.filter((value: any) => value !== data.fileName);
-        setSelectedPreview(selectedPreviewList);
+        setSelectedPreview([]);
     
         if (onSelectMedia) onSelectMedia(selectedMediaList);
       }
