@@ -38,8 +38,7 @@ const AddJamForm = () => {
   const jamCategoriesData = StaticData.jamCategories;
 
   const updateField = (key: string, value: any) => {
-    let payload: any = {key: key, value: value, profile_id: profileId};
-    dispatch(setJamData(payload));
+    dispatch(setJamData<any>({key: key, value: value, profile_id: profileId}));
   };
 
   const submitForm = async () => {  
