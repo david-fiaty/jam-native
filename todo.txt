@@ -69,6 +69,7 @@ https://docs.google.com/spreadsheets/d/1sodzaVigD26XOopcXfLRykl51wPM5pKecS0i1QED
   - Amelioration performance jams list
   - Add jam form: add media, add collaborators
   - Integration notifications feature
+  - upload profile image
 
 # Todo 
 - Implement image cache : https://github.com/echowaves/expo-cached-image

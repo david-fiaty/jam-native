@@ -54,7 +54,7 @@ const HostsList = () => {
         }
 
         {!profiles?.length && 
-          <TextView>{i18n.t('There are no hosts available for this Jam.')}</TextView>
+          <TextView>{i18n.t('No hosts available for this Jam.')}</TextView>
         }
       </View>
     </BoxView>

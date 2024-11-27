@@ -60,7 +60,7 @@ const CollaboratorsList = () => {
         }
 
         {!profiles?.length && 
-          <TextView>{i18n.t('There are no jammers available for this Jam.')}</TextView>
+          <TextView>{i18n.t('No collaborators found for this query.')}</TextView>
         }
       </View>
     </BoxView>
