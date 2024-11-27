@@ -26,7 +26,15 @@ const CollaboratorsList = () => {
   };
 
   const toogleProfile = (entityId: number) => {
-    console.log(entityId);
+    let profileList = [...selectedProfiles];
+    if (profileList.includes(entityId)) {
+      profileList = profileList.filter((value: number) => value !== entityId);
+    }
+    else {
+      profileList.push(entityId);
+    }
+    
+    setSelectedProfiles(profileList);
   };
 
   if (!profiles) {
