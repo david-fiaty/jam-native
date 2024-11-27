@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { View, TouchableOpacity, StyleSheet } from "react-native";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setJamData } from '@/redux/slices/AddJamSlice';
 import { Layout } from "@/constants/Layout";
 import { Colors } from '@/constants/Colors';
@@ -17,9 +17,14 @@ import InputTextField from '../field/InputTextField';
 
 const CollaboratorsList = () => {
   const dispatch = useDispatch();
+  const jamData = useSelector((state: any) => state.addJam);
   const [profiles, setProfiles] = useState<any>(null);
   const [selectedProfiles, setSelectedProfiles] = useState<any>([]);
   const [searchValue, setSearchValue] = useState<string>('');
+
+  if (jamData?.collaborators_ids?.length && !selectedProfiles.length) {
+    setSelectedProfiles(jamData.collaborators_ids);
+  }
 
   const onSubmitEditing = () => {
     let options = searchValue.length ? { query_text: searchValue } : {};
