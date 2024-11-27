@@ -47,6 +47,7 @@ const CollaboratorsList = () => {
         <InputTextField 
           containerStyle={styles.inputTextFieldContainer}
           placeholder={i18n.t('Search...')} 
+          onChangeText={(text: string) => console.log(text)}
         />
 
         <DividerView />
