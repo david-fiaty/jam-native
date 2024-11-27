@@ -142,13 +142,14 @@ const AddJamForm = () => {
 
       <DividerView />
       <MediaPickerBase
-        onSelectMedia={(data: any) => updateField('upload_medias', [data])} 
         label={
           <BoxView direction="row" align="center">
             <IconView name="plus" theme="secondary" radius="round" />
             <TextView>{i18n.t('Add media')}</TextView>
           </BoxView>
         }
+        onSelectMedia={(mediaList: any) => updateField('upload_medias', mediaList)} 
+        onDeleteMedia={(mediaList: any) => updateField('upload_medias', mediaList)}
       />
       
       <AddCollaboratorsField 
