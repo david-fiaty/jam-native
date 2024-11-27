@@ -35,6 +35,7 @@ const CollaboratorsList = () => {
 
   const renderItem = (row: any) => (
     <TouchableOpacity 
+      key={row.item.id}
       onPress={() => console.log('clicked')}
     >
       <BoxView direction="row" align="center" justify="flex-start" style={Layout.listItem}>
