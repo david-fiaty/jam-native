@@ -3,6 +3,7 @@ import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Colors } from '@/constants/Colors';
+import { useDispatch, useSelector } from 'react-redux';
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
@@ -25,21 +26,26 @@ import StaticData from '@/constants/StaticData';
 import DatePickerField from '../field/DatePickerField';
 import LocationTypeField from '../field/LocationTypeField';
 import EntityManager from '@/manager/EntityManager';
+import { setValue } from '@/redux/slices/AddJamSlice';
 
 const AddJamForm = () => {
+  const dispatch = useDispatch();
+  const jamData = useSelector((state: any) => state.addJam);
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const [jamData, setJamData] = useState<any>({});
   const [profileId, setProfileId] = useState<number>(0);
   const jamCategoriesData = StaticData.jamCategories;
 
   const updateField = (key: string, value: any) => {
+    dispatch(setValue({field: 'test', value: 'hello D'}));
+    /*
     setJamData({...jamData, ...{ [key]: value }, ...{ profile_id: profileId }, ...{
       // Todo - Handle user location
       geolocation_latitude: 9, 
       geolocation_longitude: 2,
     }});
+  */
   };
 
   const submitForm = async () => {  
