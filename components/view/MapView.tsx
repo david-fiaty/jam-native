@@ -7,13 +7,27 @@ import * as Device from "expo-device";
 import * as Location from "expo-location";
 import RNMapView from "react-native-maps";
 import SpinnerView from './SpinnerView';
-
+import DeviceManager from '@/manager/DeviceManager';
 import DataManager from '@/manager/DataManager';
 
 const MapView = ({ style, children }: BaseProps) => {
   const [userLocation, setUserLocation] = useState('');
   const [jamsData, setJamsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
+  const renderMarker = (item: any) => {
+    return (
+      <Marker
+        key={item.id}
+        title={item?.caption?.substring(0, 20) + '...'}
+        description={item?.caption}
+        coordinate={{ 
+          latitude: parseFloat(item?.geolocation_latitude), 
+          longitude: parseFloat(item?.geolocation_longitude),
+        }}
+      />
+    );
+  };
 
   if (!jamsData) {
     DataManager.get('jams').then((data: any) => {
@@ -24,6 +38,7 @@ const MapView = ({ style, children }: BaseProps) => {
 
   useEffect(() => {
     (async () => {
+      
       if (Platform.OS === 'android' && !Device.isDevice) {
         console.log('Location features are not available for virtual devices');
         return;
@@ -35,8 +50,9 @@ const MapView = ({ style, children }: BaseProps) => {
         return;
       }
 
-      let location: any = await Location.getCurrentPositionAsync({});
+      let location: any =  await DeviceManager.getLocation();
       if (location) setUserLocation(location);
+
     })();
   }, []);
 
@@ -57,19 +73,7 @@ const MapView = ({ style, children }: BaseProps) => {
         >
           { jamsData.map((item: any) => {
             if (item?.geolocation_longitude && item?.geolocation_latitude) {
-              let coordinate = { 
-                latitude: parseFloat(item?.geolocation_latitude), 
-                longitude: parseFloat(item?.geolocation_longitude),
-              };
-
-              return (
-                <Marker
-                  key={item.id}
-                  coordinate={coordinate}
-                  title={item?.caption?.substring(0, 20) + '...'}
-                  description={item?.caption}
-                />
-              );
+              return renderMarker(item);
             }
 
             return null;
