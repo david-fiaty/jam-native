@@ -67,6 +67,10 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
     > Aucun parametre de recherche fourni en exemple, suppose item_ids
     > Une requete /profiles/?items_ids=84,952 retoure tous les profils au lieu des 2 profils attendus
 
+  - Get Projects by ID
+    > Aucun parametre de recherche fourni en exemple, suppose item_ids
+    > Une requete /profiles/?items_ids=16,17 retoure tous les profils au lieu des 2 profils attendus
+
 
 
 
