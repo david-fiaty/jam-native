@@ -55,7 +55,7 @@ const JammersList = () => {
         }
 
         {!profiles?.length && 
-          <TextView>{i18n.t('There are no jammers available for this Jam.')}</TextView>
+          <TextView>{i18n.t('No jammers available for this Jam.')}</TextView>
         }
       </View>
     </BoxView>
