@@ -12,7 +12,7 @@ const Endpoints = {
     dataKey: 'new_projects_to_display',
   },
   profiles: {
-    path: '/profiles/feed/?profile_id=0&profile_type=all&displayed_items_ids=1,2&nbr_items_to_return=100',
+    path: '/profiles/feed/',
     cacheable: true,
     searcheable: true,
     dataKey: 'new_profiles_to_display',

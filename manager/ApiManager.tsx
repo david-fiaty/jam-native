@@ -37,7 +37,7 @@ class ApiManager {
     let url = Config.apiUrl + path;
 
     if (options) {
-      console.log(options);
+      url += '?' + (new URLSearchParams(options).toString());
     }
 
     return url;
