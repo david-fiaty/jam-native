@@ -30,8 +30,8 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
       setSelectedPreview(mediaList);
     }
     else {
-      selectedMediaList = selectedMediaList.filter((item: any) => item.fileName === data.fileName);
-      setSelectedPreview(selectedMediaList);
+      mediaList = mediaList.filter((item: any) => item.fileName !== data.fileName);
+      setSelectedPreview(mediaList);
     }
   }; 
 
