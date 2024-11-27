@@ -38,7 +38,6 @@ class ApiManager {
 
     if (options) {
       url += '?' + (new URLSearchParams(options).toString());
-      console.log(url);
     }
 
     return url;
