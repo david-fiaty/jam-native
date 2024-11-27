@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
-import { Layout } from '@/constants/Layout';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { Colors } from '@/constants/Colors';
 import { useDispatch, useSelector } from 'react-redux';
+import { Colors } from '@/constants/Colors';
+import { setJamData } from '@/redux/slices/AddJamSlice';
+import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
-import AddMediaField from "../field/AddMediaField";
+import MediaPickerBase from "../base/MediaPickerBase";
 import AddCollaboratorsField from "../field/AddCollaboratorsField";
 import LocationPickerField from "../field/LocationPickerField";
 import CountryField from '../field/CountryField';
@@ -26,7 +27,6 @@ import StaticData from '@/constants/StaticData';
 import DatePickerField from '../field/DatePickerField';
 import LocationTypeField from '../field/LocationTypeField';
 import EntityManager from '@/manager/EntityManager';
-import { setAddJamValue, setJamData, setValue } from '@/redux/slices/AddJamSlice';
 
 const AddJamForm = () => {
   const dispatch = useDispatch();
@@ -141,7 +141,17 @@ const AddJamForm = () => {
       />
 
       <DividerView />
-      <AddMediaField onSelectMedia={(data: any) => updateField('upload_medias', [data])} />
+      <MediaPickerBase
+        label={
+          <BoxView direction="row" align="center">
+            <IconView name="plus" theme="secondary" radius="round" />
+            <TextView>{i18n.t('Add media')}</TextView>
+          </BoxView>
+        }
+        onSelectMedia={(mediaList: any) => updateField('upload_medias', mediaList)} 
+        onDeleteMedia={(mediaList: any) => updateField('upload_medias', mediaList)}
+      />
+      
       <AddCollaboratorsField 
         onPressEvent={() => ScreenManager.toggleModal('CollaboratorsList')} 
       />
