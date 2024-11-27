@@ -12,13 +12,16 @@ import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from '../field/InputTextField';
-import DividerView from '../view/DividerView';
 
 const CollaboratorsList = () => {
   const [profiles, setProfiles] = useState<any>(null);
   const [searchValue, setSearchValue] = useState<string>('');
 
   const onSubmitEditing = () => {
+    EntityManager.getProfiles().then((items: any) => {
+      setProfiles(items);
+    });
+    
     console.log(searchValue);
   };
 
@@ -46,17 +49,14 @@ const CollaboratorsList = () => {
         onPress={() => ScreenManager.toggleModal('CollaboratorsList')}
       />
       
+      <InputTextField 
+        containerStyle={styles.inputTextFieldContainer}
+        placeholder={i18n.t('Search...')} 
+        onChangeText={(text: string) => setSearchValue(text)}
+        onSubmitEditing={onSubmitEditing}
+      />
+
       <View style={Layout.borderedListContainer}>
-          
-        <InputTextField 
-          containerStyle={styles.inputTextFieldContainer}
-          placeholder={i18n.t('Search...')} 
-          onChangeText={(text: string) => setSearchValue(text)}
-          onSubmitEditing={onSubmitEditing}
-        />
-
-        <DividerView />
-
         {profiles?.length > 0 &&
           <ListView
             data={profiles}
