@@ -13,6 +13,8 @@ const CollaboratorsField = ({onPressEvent}: Props) => {
   const jamData = useSelector((state: any) => state.addJam);
   const selectedProfiles = jamData?.collaborators_ids || [];
 
+  console.log(selectedProfiles);
+
   return (
     <BoxView
       direction="row"
@@ -20,7 +22,7 @@ const CollaboratorsField = ({onPressEvent}: Props) => {
       onPress={onPressEvent}
     >
       <IconView name="plus" theme="secondary" radius="round" />
-      <TextView>{i18n.t("Add collaborators")}</TextView>
+      <TextView>{i18n.t('Add collaborators')}</TextView>
     </BoxView>
   );
 };
