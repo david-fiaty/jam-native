@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import { Layout } from '@/constants/Layout';
@@ -71,12 +71,15 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
     });
 
     if (!result.canceled && result?.assets?.length) {
-      let mediaList = [...selectedMedia];
-      const mediaExists = mediaList.some(item => item.fileName === result.assets[0].fileName);
+      let data = result.assets[0];
+      let selectedMediaList = [...selectedMedia];
+      let mediaExists = selectedMediaList.some(item => item.fileName === data.fileName);
       if (!mediaExists) {
-        mediaList.push(result.assets[0]);
-        setSelectedMedia(mediaList);
-        if (onSelectMedia) onSelectMedia(mediaList);
+        selectedMediaList.push(data);
+        setSelectedMedia(selectedMediaList);
+        setSelectedPreview([]);
+    
+        if (onSelectMedia) onSelectMedia(selectedMediaList);
       }
     }
   };
@@ -104,6 +107,7 @@ const styles = StyleSheet.create({
   },
   mediaPreview: {
     //opacity: 0.5,
+    borderRadius: Layout.radius.round,
   },
   deleteMedia: {
     position: 'absolute',
