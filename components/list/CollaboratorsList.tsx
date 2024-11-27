@@ -15,6 +15,7 @@ import InputTextField from '../field/InputTextField';
 
 const CollaboratorsList = () => {
   const [profiles, setProfiles] = useState<any>(null);
+  const [selectedProfiles, setSelectedProfiles] = useState<any>([]);
   const [searchValue, setSearchValue] = useState<string>('');
 
   const onSubmitEditing = () => {
