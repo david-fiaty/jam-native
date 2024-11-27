@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
   },
   mediaPreview: {
     //opacity: 0.5,
+    borderRadius: Layout.radius.round,
   },
   deleteMedia: {
     position: 'absolute',
