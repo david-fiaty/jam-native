@@ -26,6 +26,7 @@ import StaticData from '@/constants/StaticData';
 import DatePickerField from '../field/DatePickerField';
 import LocationTypeField from '../field/LocationTypeField';
 import EntityManager from '@/manager/EntityManager';
+import CollaboratorsField from '../field/CollaboratorsField';
 
 const AddJamForm = () => {
   const dispatch = useDispatch();
@@ -152,14 +153,9 @@ const AddJamForm = () => {
         onDeleteItem={(mediaList: any) => updateField('upload_medias', mediaList)}
       />
 
-      <BoxView 
-        direction="row" 
-        align="center" 
-        onPress={() => ScreenManager.toggleModal('CollaboratorsList')}
-      >
-        <IconView name="plus" theme="secondary" radius="round" />
-        <TextView>{i18n.t('Add collaborators')}</TextView>
-      </BoxView>
+      <CollaboratorsField 
+        onPressEvent={() => ScreenManager.toggleModal('CollaboratorsList')}
+      />
 
       <DividerView />
       <ButtonView 
