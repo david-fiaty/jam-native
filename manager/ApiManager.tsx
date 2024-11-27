@@ -34,7 +34,7 @@ class ApiManager {
 
   getUrl(key: keyof typeof Endpoints, options?: any) {
     let path: string = Endpoints[key].path;
-    let url = Config.apiUrl + path;
+    let url: string = Config.apiUrl + path;
 
     if (options) {
       url += '?' + (new URLSearchParams(options).toString());
