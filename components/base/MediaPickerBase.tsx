@@ -10,19 +10,25 @@ import IconView from '../view/IconView';
 
 type Props = BaseProps & {
   label?: JSX.Element, 
+  value?: [],
   onSelectMedia?: (data: any) => void,
   onDeleteMedia?: (data: any) => void,
 };
 
-const MediaPickerBase = ({label, onSelectMedia, onDeleteMedia}: Props) => {  
+const MediaPickerBase = ({label, value, onSelectMedia, onDeleteMedia}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
+
+  if (value?.length) {
+    //selectedMedia(value);
+    //setSelectedPreview(value.map((item: any) => item.fileName));
+  }
 
   const deleteMedia = (data: any) => {
     let mediaList = [...selectedMedia];  
     mediaList = mediaList.filter((item: any) => item.fileName !== data.fileName);
     setSelectedMedia(mediaList);
-    if (onDeleteMedia) onDeleteMedia(data);
+    if (onDeleteMedia) onDeleteMedia(mediaList);
   };
 
   const updatePreviewSelection = (data: any) => {
@@ -32,7 +38,7 @@ const MediaPickerBase = ({label, onSelectMedia, onDeleteMedia}: Props) => {
       setSelectedPreview(mediaList);
     }
     else {
-      mediaList = mediaList.filter((item: any) => item.fileName !== data.fileName);
+      mediaList = mediaList.filter((item: any) => item.fileName === data.fileName);
       setSelectedPreview(mediaList);
     }
   }; 
@@ -69,20 +75,19 @@ const MediaPickerBase = ({label, onSelectMedia, onDeleteMedia}: Props) => {
       allowsEditing: false,
       aspect: [4, 3],
       quality: 1,
-      base64: true,
+      //base64: true,
     });
 
     if (!result.canceled && result?.assets?.length) {
-      let data = result.assets[0];
       let mediaList = [...selectedMedia];
-      let mediaExists = mediaList.some(item => item.fileName === data.fileName);
-      if (!mediaExists) {
-        mediaList.push(data);
-        setSelectedMedia(mediaList);
-        setSelectedPreview([]);
-    
-        if (onSelectMedia) onSelectMedia(mediaList);
+      for (const row of result?.assets) {
+        let mediaExists = mediaList.some(item => item.fileName === row.fileName);
+        if (!mediaExists) mediaList.push(row);
       }
+
+      setSelectedMedia(mediaList);
+      setSelectedPreview([]);
+      if (onSelectMedia) onSelectMedia(mediaList);
     }
   };
 

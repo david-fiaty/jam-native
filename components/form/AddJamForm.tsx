@@ -70,7 +70,7 @@ const AddJamForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(jamData);
+  //console.log(jamData?.upload_medias);
 
   return (    
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
@@ -112,13 +112,13 @@ const AddJamForm = () => {
       <DatePickerField 
         value={'start value'}
         placeholder={i18n.t('Start date')}
-        onChangeValue={ (value: any) => updateField('period', {...jamData?.period || {}, ...{ start_datetime: value }}) } 
+        onChangeValue={(value: any) => updateField('period', {...jamData?.period || {}, ...{ start_datetime: value }})} 
       />
       
       <DatePickerField 
         value={'end value'}
         placeholder={i18n.t('End date')}
-        onChangeValue={ (value: any) => updateField('period', {...jamData?.period || {}, ...{ end_datetime: value }}) } 
+        onChangeValue={(value: any) => updateField('period', {...jamData?.period || {}, ...{ end_datetime: value }})} 
       />
 
       { /* <LocationPickerField /> */}
@@ -142,14 +142,15 @@ const AddJamForm = () => {
 
       <DividerView />
       <MediaPickerBase
+        value={jamData?.upload_medias}
         label={
           <BoxView direction="row" align="center">
             <IconView name="plus" theme="secondary" radius="round" />
             <TextView>{i18n.t('Add media')}</TextView>
           </BoxView>
         }
-        onSelectMedia={(mediaList: any) => updateField('upload_medias', mediaList)} 
-        onDeleteMedia={(mediaList: any) => updateField('upload_medias', mediaList)}
+        onSelectMedia={(mediaList: any) => updateField('upload_medias', [...jamData.upload_medias ?? [], ...mediaList ?? []])} 
+        onDeleteMedia={(mediaList: any) => updateField('upload_medias', [...jamData.upload_medias ?? [], ...mediaList ?? []])}
       />
       
       <AddCollaboratorsField 
