@@ -46,6 +46,10 @@ Content-Type: application/json
 GET http://0.0.0.0:8000/api/v1/jams/
 Content-Type: application/json
 
+### Get specific list of jams
+GET http://0.0.0.0:8000/api/v1/jams/?items_ids=1,2
+Content-Type: application/json
+
 ### Get specific jam
 GET http://0.0.0.0:8000/api/v1/jams/1/
 Content-Type: application/json
@@ -235,10 +239,26 @@ Content-Type: application/json
 GET http://0.0.0.0:8000/api/v1/sectors/
 Content-Type: application/json
 
+### Get all sectors with language fr
+GET http://0.0.0.0:8000/api/v1/sectors/?lang=fr
+Content-Type: application/json
+
+### Get all sectors with language en
+GET http://0.0.0.0:8000/api/v1/sectors/?lang=en
+Content-Type: application/json
+
 ##### PROFESSION #####
 
 ### Get all professions
 GET http://0.0.0.0:8000/api/v1/professions/
+Content-Type: application/json
+
+### Get all professions with language fr
+GET http://0.0.0.0:8000/api/v1/professions/?lang=fr
+Content-Type: application/json
+
+### Get all professions with language en
+GET http://0.0.0.0:8000/api/v1/professions/?lang=en
 Content-Type: application/json
 
 ##### VENUE TYPES #####
@@ -247,10 +267,40 @@ Content-Type: application/json
 GET http://0.0.0.0:8000/api/v1/venue-types/
 Content-Type: application/json
 
+### Get all venue types with language fr
+GET http://0.0.0.0:8000/api/v1/venue-types/?lang=fr
+Content-Type: application/json
+
+### Get all venue types with language en
+GET http://0.0.0.0:8000/api/v1/venue-types/?lang=en
+Content-Type: application/json
+
+##### ORGANIZATION TYPES #####
+
+### Get all organization types
+GET http://0.0.0.0:8000/api/v1/organization-types/
+Content-Type: application/json
+
+### Get all organization types with language fr
+GET http://0.0.0.0:8000/api/v1/organization-types/?lang=fr
+Content-Type: application/json
+
+### Get all organization types with language en
+GET http://0.0.0.0:8000/api/v1/organization-types/?lang=en
+Content-Type: application/json
+
 ##### CULTURAL ACTIVITIES #####
 
 ### Get all cultural activities
 GET http://0.0.0.0:8000/api/v1/cultural-activities/
+Content-Type: application/json
+
+### Get all cultural activities with language fr
+GET http://0.0.0.0:8000/api/v1/cultural-activities/?lang=fr
+Content-Type: application/json
+
+### Get all cultural activities with language en
+GET http://0.0.0.0:8000/api/v1/cultural-activities/?lang=en
 Content-Type: application/json
 
 ##### FEED #####
@@ -311,13 +361,7 @@ Content-Type: application/json
 }
 
 ### Get report items for specific content
-POST http://0.0.0.0:8000/api/v1/get-report-items-for-specific-content/
-Content-Type: application/json
-
-{
-    "content_type": "jam",
-    "content_id": 1
-}
+GET http://0.0.0.0:8000/api/v1/get-report-items-for-specific-content/?content_type=jam&content_id=1
 
 ### Get report items for specific content
 GET http://0.0.0.0:8000/api/v1/get-report-items-stats-per-content-type/
@@ -404,11 +448,7 @@ Content-Type: application/json
 #abcde
 
 ### Get notifications for profile
-POST http://0.0.0.0:8000/api/v1/profiles/1/notifications/
-Content-Type: application/json
-#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMxMTY4MTkyLCJpYXQiOjE3MzAzMDQxOTIsImp0aSI6ImE1MjdiMTRlNmU5YjQ5ZmRhZjM0ODY1YWE0MzZhYzdlIiwidXNlcl9pZCI6MTB9.z2qnSuw-QguTbXcSybtAT3mD_Ms3iTjnafdZZqywDK0
-
-{"displayed_items_ids": [64, 65], "nbr_items_to_return": 10}
+GET http://0.0.0.0:8000/api/v1/profiles/1/notifications/?displayed_items_ids=64,65&nbr_items_to_return=10
 
 ### Put notifications as read
 PUT http://0.0.0.0:8000/api/v1/profiles/1/notifications/read/
