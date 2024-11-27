@@ -11,9 +11,10 @@ import IconView from '../view/IconView';
 type Props = BaseProps & {
   label?: JSX.Element, 
   onSelectMedia?: (data: any) => void,
+  onDeleteMedia?: (data: any) => void,
 };
 
-const MediaPickerBase = ({label, onSelectMedia}: Props) => {  
+const MediaPickerBase = ({label, onSelectMedia, onDeleteMedia}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
 
@@ -21,6 +22,7 @@ const MediaPickerBase = ({label, onSelectMedia}: Props) => {
     let mediaList = [...selectedMedia];  
     mediaList = mediaList.filter((item: any) => item.fileName !== data.fileName);
     setSelectedMedia(mediaList);
+    if (onDeleteMedia) onDeleteMedia(data);
   };
 
   const updatePreviewSelection = (data: any) => {

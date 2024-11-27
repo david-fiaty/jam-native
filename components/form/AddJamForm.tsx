@@ -8,7 +8,7 @@ import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
-import AddMediaField from "../field/AddMediaField";
+import MediaPickerBase from "../base/MediaPickerBase";
 import AddCollaboratorsField from "../field/AddCollaboratorsField";
 import LocationPickerField from "../field/LocationPickerField";
 import CountryField from '../field/CountryField';
@@ -141,7 +141,16 @@ const AddJamForm = () => {
       />
 
       <DividerView />
-      <AddMediaField onSelectMedia={(data: any) => updateField('upload_medias', [data])} />
+      <MediaPickerBase
+        onSelectMedia={(data: any) => updateField('upload_medias', [data])} 
+        label={
+          <BoxView direction="row" align="center">
+            <IconView name="plus" theme="secondary" radius="round" />
+            <TextView>{i18n.t('Add media')}</TextView>
+          </BoxView>
+        }
+      />
+      
       <AddCollaboratorsField 
         onPressEvent={() => ScreenManager.toggleModal('CollaboratorsList')} 
       />
