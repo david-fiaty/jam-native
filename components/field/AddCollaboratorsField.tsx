@@ -10,7 +10,7 @@ type Props = BaseProps & {
 
 const AddCollaboratorsField = ({ onPressEvent }: Props) => {
   return (
-    <BoxView direction="row" align="center" style={styles.container} onPress={onPressEvent}>
+    <BoxView direction="row" align="center" onPress={onPressEvent}>
       <IconView name="plus" theme="secondary" radius="round" />
       <TextView>{i18n.t("Add collaborators")}</TextView>
     </BoxView>
