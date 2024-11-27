@@ -20,9 +20,8 @@ const MediaPickerBase = ({label, value, onSelectMedia, onDeleteMedia}: Props) =>
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
 
   if (value?.length) {
-    console.log('xx');
-    selectedMedia(value);
-    setSelectedPreview(value.map((item: any) => item.fileName));
+    //selectedMedia(value);
+    //setSelectedPreview(value.map((item: any) => item.fileName));
   }
 
   const deleteMedia = (data: any) => {
@@ -80,16 +79,15 @@ const MediaPickerBase = ({label, value, onSelectMedia, onDeleteMedia}: Props) =>
     });
 
     if (!result.canceled && result?.assets?.length) {
-      let data = result.assets[0];
       let mediaList = [...selectedMedia];
-      let mediaExists = mediaList.some(item => item.fileName === data.fileName);
-      if (!mediaExists) {
-        mediaList.push(data);
-        setSelectedMedia(mediaList);
-        setSelectedPreview([]);
-    
-        if (onSelectMedia) onSelectMedia(mediaList);
+      for (const row of result?.assets) {
+        let mediaExists = mediaList.some(item => item.fileName === row.fileName);
+        if (!mediaExists) mediaList.push(row);
       }
+
+      setSelectedMedia(mediaList);
+      setSelectedPreview([]);
+      if (onSelectMedia) onSelectMedia(mediaList);
     }
   };
 
