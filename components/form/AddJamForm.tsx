@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
-import { Layout } from '@/constants/Layout';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { Colors } from '@/constants/Colors';
 import { useDispatch, useSelector } from 'react-redux';
+import { Colors } from '@/constants/Colors';
+import { setJamData } from '@/redux/slices/AddJamSlice';
+import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
@@ -26,7 +27,6 @@ import StaticData from '@/constants/StaticData';
 import DatePickerField from '../field/DatePickerField';
 import LocationTypeField from '../field/LocationTypeField';
 import EntityManager from '@/manager/EntityManager';
-import { setAddJamValue, setJamData, setValue } from '@/redux/slices/AddJamSlice';
 
 const AddJamForm = () => {
   const dispatch = useDispatch();
