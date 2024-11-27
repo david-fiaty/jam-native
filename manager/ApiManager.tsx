@@ -16,20 +16,31 @@ const cache = new Cache({
 class ApiManager {
   async get(key: keyof typeof Endpoints, options?: any) {
     let data: any = [];
-    let path: string = Endpoints[key].path;
+    let url: string = this.getUrl(key, options);
 
     if (Config.dataCacheEnabled === true && Endpoints[key].cacheable === true) {
       data = await this.getCacheItem(key);
     }
     
     if (!data?.length) {
-      data = await this.sendRequest(path, 'GET');
+      data = await this.sendRequest(url, 'GET');
       if (Config.dataCacheEnabled === true && data?.length > 0) {
         await cache.set(key, data);
       }
     }
 
     return data;
+  }
+
+  getUrl(key: keyof typeof Endpoints, options?: any) {
+    let path: string = Endpoints[key].path;
+    let url = Config.apiUrl + path;
+
+    if (options) {
+      console.log(options);
+    }
+
+    return url;
   }
 
   async getCacheItem(key: keyof typeof Endpoints) {
@@ -46,7 +57,8 @@ class ApiManager {
 
   async post(key: keyof typeof Endpoints, data: any) {
     try {
-      return await this.sendRequest(Endpoints[key].path, 'POST', data);
+
+      return await this.sendRequest(this.getUrl(key), 'POST', data);
     } 
     catch (error) {
       console.log(error);
@@ -55,7 +67,7 @@ class ApiManager {
 
   async put(key: keyof typeof Endpoints, data: any) {
     try {
-      return await this.sendRequest(Endpoints[key].path, 'PUT', data);
+      return await this.sendRequest(this.getUrl(key), 'PUT', data);
     } 
     catch (error) {
       console.log(error);
@@ -64,16 +76,15 @@ class ApiManager {
 
   async delete(key: keyof typeof Endpoints, data: any) {
     try {
-      return await this.sendRequest(Endpoints[key].path, 'DELETE', data);
+      return await this.sendRequest(this.getUrl(key), 'DELETE', data);
     } 
     catch (error) {
       console.log(error);
     }
   }
 
-  async sendRequest(path: string, method: string, data?: any) {
+  async sendRequest(url: string, method: string, data?: any) {
     try {
-      let url = Config.apiUrl + path;
       let response: any = await fetch(url, {
         ...{
           method: method,
