@@ -27,12 +27,21 @@ const CollaboratorsList = () => {
     setSelectedProfiles(jamData.collaborators_ids);
   }
 
+  const clearSearch = () => {
+    setIsSearching(true);
+    EntityManager.getProfiles().then((items: any) => {
+      setProfiles(items);
+      setIsSearching(false);
+      setSearchValue('');
+    });
+  };
+
   const renderSearchIcon = () => {
     if (!isSearching && searchValue) {
       return <IconView 
         name="delete" 
         theme="clear" 
-        onPress={() => console.log(searchValue) }
+        onPress={clearSearch}
       />;
     }
     else if (isSearching) {
