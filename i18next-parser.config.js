@@ -1,9 +1,6 @@
 module.exports = {
-  plugins: [
-    ['babel-plugin-i18next-extract', {
-      "locales": ["en", "fr"], 
-      "keyAsDefaultValue": ["en"],
-      "outputPath": "src/translation/{{locale}}/{{ns}}.json", 
-    }]
-  ]
-}
+  locales: ['en', 'fr'], 
+  output: 'translation/extract/$LOCALE/$NAMESPACE.json',
+  keySeparator: false, 
+  namespaceSeparator: false, 
+};
