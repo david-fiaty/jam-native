@@ -27,13 +27,34 @@ const CollaboratorsList = () => {
     setSelectedProfiles(jamData.collaborators_ids);
   }
 
+  const clearSearch = () => {
+    setIsSearching(true);
+    EntityManager.getProfiles().then((items: any) => {
+      setProfiles(items);
+      setIsSearching(false);
+      setSearchValue('');
+    });
+  };
+
   const renderSearchIcon = () => {
-    return isSearching ? <SpinnerView size="small" /> : <></>;
+    if (!isSearching && searchValue) {
+      return <IconView 
+        name="delete" 
+        theme="clear" 
+        onPress={clearSearch}
+      />;
+    }
+    else if (isSearching) {
+      return <SpinnerView size="small" />;
+    }
+
+    return <></>;
   };
 
   const onSubmitEditing = () => {
     setIsSearching(true);
     let options = searchValue.length ? { query_text: searchValue } : {};
+
     EntityManager.getProfiles(options).then((items: any) => {
       setIsSearching(false);
       setProfiles(items);
@@ -70,7 +91,7 @@ const CollaboratorsList = () => {
         <IconView name="user" theme="tertiary" />
         <TextView>{row.item.profile_name}</TextView>
         { selectedProfiles.includes(row.item.id) &&
-          <IconView name="checkmark" theme="clear" size={18}/>
+          <IconView name="checkmark" theme="clear" size={18} />
         }
       </BoxView>
     </TouchableOpacity>
@@ -84,6 +105,7 @@ const CollaboratorsList = () => {
       />
       
       <InputTextField 
+        value={searchValue}
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Search...')} 
         onChangeText={(text: string) => setSearchValue(text)}
