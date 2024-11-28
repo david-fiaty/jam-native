@@ -125,6 +125,7 @@ const AddJamForm = () => {
         onChangeValue={(option: any) => updateField('scope_countries_codes', [option.value])} 
       />
 
+{ /*
       <SectorsField 
         value={jamData?.sectors_ids}
         onChangeListValue={(option: any) => {
@@ -136,6 +137,8 @@ const AddJamForm = () => {
           updateField('sectors_ids', sectorsIds); 
         }}
       />
+
+  */    }
 
       <DividerView />
       <MediaPickerBase
