@@ -1,12 +1,12 @@
 const Endpoints = {
   jams: {
-    path: '/jams/feed/?profile_id=0&jam_type=all&displayed_items_ids=1,2&nbr_items_to_return=100',
+    path: '/jams/feed/',
     cacheable: true,
     searcheable: true,
     dataKey: 'new_jams_to_display', 
   },
   projects: {
-    path: '/projects/feed/?profile_id=0&displayed_items_ids=1,2&nbr_items_to_return=100',
+    path: '/projects/feed/',
     cacheable: true,
     searcheable: true,
     dataKey: 'new_projects_to_display',
