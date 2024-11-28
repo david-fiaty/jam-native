@@ -30,11 +30,9 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
   };
 
   const onChangeList = (option: any) => {
-    console.log(listData);
-    /*
-    setSublistData(buildOptions(rawData.find((item: any) => item?.id == option?.value)?.sub_sectors));
+    setSublistData(buildOptions(listData.find((item: any) => item?.id == option?.value)?.sub_sectors));
     if (onChangeListValue) onChangeListValue(option);
-    */
+
   };
 
   const onChangeSublist = (option: any) => {
