@@ -1,4 +1,5 @@
 import { Share } from 'react-native';
+import { Config } from '@/constants/Config';
 import DataManager from './DataManager';
 import UserManager from './UserManager';
 
@@ -20,18 +21,63 @@ class EntityManager {
       profile_id: profileId,
       profile_type: 'all',
       displayed_items_ids: '1,2',
-      nbr_items_to_return: 100,
+      nbr_items_to_return: Config.maxApiResults,
     };
 
     return await DataManager.get('profiles', {...defaults, ...options}); 
   }
 
-  async getJams() {
-    return await DataManager.get('jams'); 
+  async getJams(options?: any) {
+    let profileId = await UserManager.getProfileId();
+    let defaults = {
+      profile_id: profileId,
+      jam_type: 'all',
+      displayed_items_ids: '1,2',
+      nbr_items_to_return: Config.maxApiResults,
+    };
+
+    return await DataManager.get('jams', {...defaults, ...options}); 
+  }
+
+  async getProjects(options?: any) {
+    let profileId = await UserManager.getProfileId();
+    let defaults = {
+      profile_id: profileId,
+      displayed_items_ids: '1,2',
+      nbr_items_to_return: Config.maxApiResults,
+    };
+
+    return await DataManager.get('projects', {...defaults, ...options}); 
   }
 
   async getSectors() {
-    return await DataManager.get('sectors'); 
+    return await DataManager.get('sectors', {
+      lang: UserManager.getLanguage(),
+    }); 
+  }
+
+  async getProfessions() {
+    return await DataManager.get('professions', {
+      lang: UserManager.getLanguage(),
+    }); 
+  }
+
+  async getVenueTypes() {
+    return await DataManager.get('venueTypes', {
+      lang: UserManager.getLanguage(),
+    }); 
+  }
+
+  async getOrganizationTypes() {
+    return await DataManager.get('organizationTypes', {
+      lang: UserManager.getLanguage(),
+    }); 
+  }
+
+  async getCulturalActivities() {
+    return await DataManager.get('culturalActivities', {
+      lang: UserManager.getLanguage(),
+    }); 
   }
 
   async findJam(entityId: any) {

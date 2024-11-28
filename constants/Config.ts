@@ -8,4 +8,5 @@ export const Config = {
   fallbackLanguage: 'en',
   appNamespace: 'jam-native',
   logoImageSize: 512,
+  maxApiResults: 50,
 };

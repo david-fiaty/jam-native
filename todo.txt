@@ -75,6 +75,9 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
     > Besoin d'un user de test. Exemple fourni avec profile ID=1, mais pas de credentials disponibles pour tester
     > 2 options: ajouter des notifications pour le profile ID = 3 (mitsiomotu), ou fournir des credentials et ID d'un profil qui a des notifications
 
+  - Countries list
+    > Missing endpoint
+
   - Data endpoints: need to accept language as parameter
   - Copy Jam link cannot be implemented (missing URL in payload, maybe irrelevant on native)
   - Errors with jam images having double extension .jpg.png or .png.png => error handling is additional performance load
