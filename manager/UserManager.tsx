@@ -41,7 +41,7 @@ class UserManager {
   }
 
   async getProfileId() {
-    let profileId: any = Store.getState().user.profileId;
+    let profileId: number = Store.getState().user.profileId;
     if (profileId === 0) {
       let userAccount: any = await DataManager.get('currentUser');
       profileId = parseInt(userAccount?.user?.profiles?.[0]?.id || 0);
@@ -50,7 +50,7 @@ class UserManager {
     return profileId;
   }
 
-  async getLanguage() {
+  getLanguage() {
     return DeviceManager.getLanguage();
   }
 
