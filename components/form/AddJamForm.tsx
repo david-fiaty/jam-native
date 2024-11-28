@@ -162,7 +162,7 @@ const AddJamForm = () => {
           onChangeSublistValue={(option: any) => {
             let sectorsIds = [...(jamData?.sectors_ids || [])];
             sectorsIds[1] = option.value;
-            updateField("sectors_ids", sectorsIds);
+            updateField('sectors_ids', sectorsIds);
           }}
         />
       }
@@ -205,20 +205,20 @@ const AddJamForm = () => {
 
 const styles = StyleSheet.create({
   categoryContainer: {
-    flexDirection: "column",
+    flexDirection: 'column',
     gap: Layout.space.small,
   },
   categoryItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: Colors.secondary,
     padding: Layout.space.base,
     borderWidth: 1,
     borderRadius: Layout.radius.round,
     borderColor: Colors.secondary,
-    width: Layout.space.base * 7,
-    height: Layout.space.base * 7,
+    width: Layout.space.base*7,
+    height: Layout.space.base*7,
   },
   categoryItemSelected: {
     borderColor: Colors.primary,
