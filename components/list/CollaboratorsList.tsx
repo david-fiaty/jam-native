@@ -29,10 +29,17 @@ const CollaboratorsList = () => {
 
   const renderSearchIcon = () => {
     if (!isSearching && searchValue) {
-      return <IconView name="delete" theme="clear" />
+      return <IconView 
+        name="delete" 
+        theme="clear" 
+        onPress={() => console.log(searchValue) }
+      />;
+    }
+    else if (isSearching) {
+      return <SpinnerView size="small" />;
     }
 
-    return isSearching ? <SpinnerView size="small" /> : <></>;
+    return <></>;
   };
 
   const onSubmitEditing = () => {
