@@ -51,7 +51,33 @@ class EntityManager {
   }
 
   async getSectors() {
-    return await DataManager.get('sectors'); 
+    return await DataManager.get('sectors', {
+      lang: UserManager.getLanguage(),
+    }); 
+  }
+
+  async getProfessions() {
+    return await DataManager.get('professions', {
+      lang: UserManager.getLanguage(),
+    }); 
+  }
+
+  async getVenueTypes() {
+    return await DataManager.get('venueTypes', {
+      lang: UserManager.getLanguage(),
+    }); 
+  }
+
+  async getOrganizationTypes() {
+    return await DataManager.get('organizationTypes', {
+      lang: UserManager.getLanguage(),
+    }); 
+  }
+
+  async getCulturalActivities() {
+    return await DataManager.get('culturalActivities', {
+      lang: UserManager.getLanguage(),
+    }); 
   }
 
   async findJam(entityId: any) {
