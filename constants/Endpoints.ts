@@ -48,7 +48,7 @@ const Endpoints = {
     dataKey: null,
   },
   notifications: {
-    path: '',
+    path: '/profiles/{profile_id}/notifications/',
     cacheable: false,
     searcheable: false,
     dataKey: null,
