@@ -50,7 +50,7 @@ class UserManager {
     return profileId;
   }
 
-  async getLanguage() {
+  getLanguage() {
     return DeviceManager.getLanguage();
   }
 
