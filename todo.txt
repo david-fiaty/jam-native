@@ -71,8 +71,9 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
     > Aucun parametre de recherche fourni en exemple, suppose item_ids
     > Une requete /profiles/?items_ids=16,17 retoure tous les profils au lieu des 2 profils attendus
 
-
-
+  - Get Notifications
+    > Besoin d'un user de test. Exemple fourni avec profile ID=1, mais pas de credentials disponibles pour tester
+    > 2 options: ajouter des notifications pour le profile ID = 3 (mitsiomotu), ou fournir des credentials et ID d'un profil qui a des notifications
 
   - Data endpoints: need to accept language as parameter
   - Copy Jam link cannot be implemented (missing URL in payload, maybe irrelevant on native)
