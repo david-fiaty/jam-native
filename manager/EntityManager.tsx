@@ -26,8 +26,16 @@ class EntityManager {
     return await DataManager.get('profiles', {...defaults, ...options}); 
   }
 
-  async getJams() {
-    return await DataManager.get('jams'); 
+  async getJams(options?: any) {
+    let profileId = await UserManager.getProfileId();
+    let defaults = {
+      profile_id: profileId,
+      jam_type: 'all',
+      displayed_items_ids: '1,2',
+      nbr_items_to_return: 100,
+    };
+
+    return await DataManager.get('jams', {...defaults, ...options}); 
   }
 
   async getSectors() {
