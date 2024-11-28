@@ -48,15 +48,15 @@ const AddJamForm = () => {
       setIsProcessing(false);
       //success === true
       false
-        ? router.replace("/jams")
+        ? router.replace('/jams')
         : ScreenManager.showMessage(
-            i18n.t("The Jam data is invalid. Please check and trya gain.")
+            i18n.t('The Jam data is invalid. Please check and trya gain.')
           );
     });
   };
 
   const renderJamCategory = (row: any) => (
-    <TouchableOpacity onPress={() => updateField("type", row.item.id)}>
+    <TouchableOpacity onPress={() => updateField('type', row.item.id)}>
       <View style={styles.categoryContainer}>
         <View
           style={[
@@ -86,11 +86,11 @@ const AddJamForm = () => {
       style={Layout.screenContent}
     >
       <BackButton
-        title={i18n.t("Create a Jam")}
-        onPress={() => ScreenManager.toggleModal("AddJamForm")}
+        title={i18n.t('Create a Jam')}
+        onPress={() => ScreenManager.toggleModal('AddJamForm')}
       />
 
-      <TextView>{i18n.t("What kind of Jam is it?")}</TextView>
+      <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
 
       <ListView
         data={jamCategoriesData}
@@ -104,29 +104,29 @@ const AddJamForm = () => {
 
       <DividerView />
       <InputTextField
-        placeholder={i18n.t("Title")}
+        placeholder={i18n.t('Title')}
         value={jamData?.title}
-        onChangeText={(value: string) => updateField("title", value)}
+        onChangeText={(value: string) => updateField('title', value)}
       />
 
       <InputTextareaField
-        placeholder={i18n.t("Description")}
+        placeholder={i18n.t('Description')}
         value={jamData?.caption}
-        onChangeText={(value: string) => updateField("caption", value)}
+        onChangeText={(value: string) => updateField('caption', value)}
       />
 
       <LocationTypeField
         value={jamData?.location_type}
         onChangeValue={(option: any) =>
-          updateField("location_type", option.value)
+          updateField('location_type', option.value)
         }
       />
 
       <DatePickerField
-        value={"start value"}
-        placeholder={i18n.t("Start date")}
+        value={'start value'}
+        placeholder={i18n.t('Start date')}
         onChangeValue={(value: any) =>
-          updateField("period", {
+          updateField('period', {
             ...(jamData?.period || {}),
             ...{ start_datetime: value },
           })
@@ -135,9 +135,9 @@ const AddJamForm = () => {
 
       <DatePickerField
         value={"end value"}
-        placeholder={i18n.t("End date")}
+        placeholder={i18n.t('End date')}
         onChangeValue={(value: any) =>
-          updateField("period", {
+          updateField('period', {
             ...(jamData?.period || {}),
             ...{ end_datetime: value },
           })
@@ -149,7 +149,7 @@ const AddJamForm = () => {
       <CountryField
         value={jamData?.scope_countries_codes}
         onChangeValue={(option: any) =>
-          updateField("scope_countries_codes", [option.value])
+          updateField('scope_countries_codes', [option.value])
         }
       />
 
@@ -173,24 +173,24 @@ const AddJamForm = () => {
         label={
           <BoxView direction="row" align="center">
             <IconView name="plus" theme="secondary" radius="round" />
-            <TextView>{i18n.t("Add media")}</TextView>
+            <TextView>{i18n.t('Add media')}</TextView>
           </BoxView>
         }
         onSelectItem={(mediaList: any) =>
-          updateField("upload_medias", mediaList)
+          updateField('upload_medias', mediaList)
         }
         onDeleteItem={(mediaList: any) =>
-          updateField("upload_medias", mediaList)
+          updateField('upload_medias', mediaList)
         }
       />
 
       <CollaboratorsField
-        onPressEvent={() => ScreenManager.toggleModal("CollaboratorsList")}
+        onPressEvent={() => ScreenManager.toggleModal('CollaboratorsList')}
       />
 
       <DividerView />
       <ButtonView
-        label={i18n.t("Save")}
+        label={i18n.t('Save')}
         isProcessing={isProcessing}
         onPress={() => {
           setIsProcessing(true);
