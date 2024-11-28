@@ -30,8 +30,11 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
   };
 
   const onChangeList = (option: any) => {
+    console.log(listData);
+    /*
     setSublistData(buildOptions(rawData.find((item: any) => item?.id == option?.value)?.sub_sectors));
     if (onChangeListValue) onChangeListValue(option);
+    */
   };
 
   const onChangeSublist = (option: any) => {
@@ -41,7 +44,6 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
 
   if (!rawData?.length) {
     EntityManager.getSectors().then((data: any) => {
-      setRawData(data);
       setListData(buildOptions(data));
       setSublistData([]);
       setIsLoaded(true);
