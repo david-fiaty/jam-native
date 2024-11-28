@@ -1,6 +1,6 @@
 import { Dimensions, ScaledSize, StatusBar, Platform } from 'react-native';
 import { Config } from '@/constants/Config';
-import { Localization } from 'expo-localization';
+import { useLocales } from 'expo-localization';
 import * as Location from 'expo-location';
 import * as Device from "expo-device";
 
@@ -40,12 +40,9 @@ class DeviceManager {
   }
 
   getLanguage() {
-    const locales = Localization.getLocales();
-
-    console.log('---', locales);
-  
+    let locales = useLocales();
     if (Array.isArray(locales) && locales.length > 0) {
-      return locales[0].languageTag; 
+      return locales[0].languageCode; 
     }
   
     return Config.fallbackLanguage;
