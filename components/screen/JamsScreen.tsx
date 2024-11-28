@@ -50,9 +50,6 @@ const JamsScreen = () => {
   const [animatedStyle, setAnimatedStyle] = useState(null);
   const route = useRoute();
 
-
-  DeviceManager.getLanguage();
-
   // Storage state
   const screenState = useSelector((state: any) => state.screen);
 
