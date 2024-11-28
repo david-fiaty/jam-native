@@ -20,7 +20,7 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
   const [sublistData, setSublistData] = useState<any>([]);
   const [selectedSublistOption, setSelectedSublistOption] = useState<any>({});
   
-  const buildOptions = (optionsData: any) => {    
+  const buildOptions = (optionsData: any): any[] => {    
     return [...(optionsData || [])].map((item: any) => {
       return {
         value: item?.id,
