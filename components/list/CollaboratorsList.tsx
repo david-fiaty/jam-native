@@ -91,7 +91,7 @@ const CollaboratorsList = () => {
         <IconView name="user" theme="tertiary" />
         <TextView>{row.item.profile_name}</TextView>
         { selectedProfiles.includes(row.item.id) &&
-          <IconView name="checkmark" theme="clear" size={18} />
+          <IconView name="checkmark" theme="clear" size={14} />
         }
       </BoxView>
     </TouchableOpacity>
