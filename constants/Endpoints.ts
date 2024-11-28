@@ -1,3 +1,5 @@
+import Store from '@/redux/Store';
+
 const Endpoints = {
   jams: {
     path: '/jams/feed/',
@@ -48,7 +50,7 @@ const Endpoints = {
     dataKey: null,
   },
   notifications: {
-    path: '/profiles/{profile_id}/notifications/',
+    path: '/profiles/' + Store.getState().user.profileId + '/notifications/',
     cacheable: false,
     searcheable: false,
     dataKey: null,
