@@ -23,6 +23,30 @@ const Endpoints = {
     searcheable: false,
     dataKey: null,
   },
+  professions: {
+    path: '/professions/',
+    cacheable: true,
+    searcheable: false,
+    dataKey: null,
+  },
+  venueTypes: {
+    path: '/venue-types/',
+    cacheable: true,
+    searcheable: false,
+    dataKey: null,
+  },
+  organizationTypes: {
+    path: '/organization-types/',
+    cacheable: true,
+    searcheable: false,
+    dataKey: null,
+  },
+  culturalActivities: {
+    path: '/cultural-activities/',
+    cacheable: true,
+    searcheable: false,
+    dataKey: null,
+  },
   notifications: {
     path: '',
     cacheable: false,
