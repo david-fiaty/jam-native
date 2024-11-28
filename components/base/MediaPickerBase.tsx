@@ -7,6 +7,7 @@ import ImageView from '../view/ImageView';
 import TextView from '../view/TextView';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
+import { Colors } from '@/constants/Colors';
 
 type Props = BaseProps & {
   label?: JSX.Element, 
@@ -116,13 +117,15 @@ const styles = StyleSheet.create({
   container: {},
   previewContainer: {
     paddingVertical: Layout.space.base,
-    gap: Layout.space.base*1.5,
+    gap: Layout.space.base*1,
   },
   mediaPreview: {
     borderRadius: Layout.radius.round,
   },
   selectedPreview: {
     opacity: 0.5,
+    borderWidth: 1,
+    borderColor: Colors.primary,
   },
   deleteMedia: {
     position: 'absolute',
