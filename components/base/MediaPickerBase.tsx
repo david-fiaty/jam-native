@@ -7,6 +7,7 @@ import ImageView from '../view/ImageView';
 import TextView from '../view/TextView';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
+import { Colors } from '@/constants/Colors';
 
 type Props = BaseProps & {
   label?: JSX.Element, 
@@ -44,6 +45,12 @@ const MediaPickerBase = ({label, value, onSelectItem, onDeleteItem}: Props) => {
   }; 
 
   const renderImagePreview = (data: any) => {
+    const isSelected = selectedPreview.includes(data.fileName);
+    const imageStyle = {
+      ...styles.mediaPreview,
+      ...isSelected ? styles.selectedPreview : {},
+    };
+
     return (
       <TouchableOpacity 
         key={data.uri} 
@@ -54,10 +61,10 @@ const MediaPickerBase = ({label, value, onSelectItem, onDeleteItem}: Props) => {
           width={80} 
           height={80} 
           resizeMode="cover" 
-          style={styles.mediaPreview}
+          style={imageStyle}
         />
 
-        { selectedPreview.includes(data.fileName) && 
+        { isSelected && 
           <TouchableOpacity 
             style={styles.deleteMedia}
             onPress={() => deleteMedia(data)}
@@ -110,16 +117,20 @@ const styles = StyleSheet.create({
   container: {},
   previewContainer: {
     paddingVertical: Layout.space.base,
-    gap: Layout.space.base*1.5,
+    gap: Layout.space.base*1,
   },
   mediaPreview: {
-    //opacity: 0.5,
     borderRadius: Layout.radius.round,
+  },
+  selectedPreview: {
+    opacity: 0.7,
+    borderWidth: 1,
+    borderColor: Colors.primary,
   },
   deleteMedia: {
     position: 'absolute',
-    top: -10,
-    right: -10,
+    top: 5,
+    right: 5,
   },
 });
 
