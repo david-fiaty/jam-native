@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     borderRadius: Layout.radius.round,
   },
   selectedPreview: {
-    opacity: 0.5,
+    opacity: 0.7,
     borderWidth: 1,
     borderColor: Colors.primary,
   },
