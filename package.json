@@ -10,7 +10,7 @@
     "web": "expo start --web",
     "test": "jest --watchAll",
     "lint": "expo lint",
-    "extract": "i18next '**/*.{js,jsx,ts,tsx}'"
+    "extract": "i18next './**/*.{js,jsx,ts,tsx}' '!**/node_modules/**'"
   },
   "jest": {
     "preset": "jest-expo"
