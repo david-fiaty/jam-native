@@ -21,15 +21,18 @@ const CollaboratorsList = () => {
   const [profiles, setProfiles] = useState<any>(null);
   const [selectedProfiles, setSelectedProfiles] = useState<any>([]);
   const [searchValue, setSearchValue] = useState<string>('');
+  const [isSearching, setIsSearching] = useState<boolean>(false);
 
   if (jamData?.collaborators_ids?.length && !selectedProfiles.length) {
     setSelectedProfiles(jamData.collaborators_ids);
   }
 
   const onSubmitEditing = () => {
+    setIsSearching(true);
     let options = searchValue.length ? { query_text: searchValue } : {};
     EntityManager.getProfiles(options).then((items: any) => {
       setProfiles(items);
+      setIsSearching(false);
     });
   };
 
@@ -81,6 +84,7 @@ const CollaboratorsList = () => {
         placeholder={i18n.t('Search...')} 
         onChangeText={(text: string) => setSearchValue(text)}
         onSubmitEditing={onSubmitEditing}
+        rightIcon={isSearching ? <SpinnerView size="small" /> : <></>}
       />
 
       <View style={Layout.borderedListContainer}>
