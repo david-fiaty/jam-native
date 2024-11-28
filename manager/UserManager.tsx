@@ -1,6 +1,7 @@
 import { setTokenData, setIsLoggedIn } from '@/redux/slices/UserSlice';
 import Store from '@/redux/Store';
 import DataManager from './DataManager';
+import DeviceManager from './DeviceManager';
 
 class UserManager {
   async login(data: any) {
@@ -47,6 +48,10 @@ class UserManager {
     }
 
     return profileId;
+  }
+
+  async getLanguage() {
+    return DeviceManager.getLanguage();
   }
 
   isLoggedIn() {
