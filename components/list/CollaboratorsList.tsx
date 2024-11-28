@@ -28,12 +28,17 @@ const CollaboratorsList = () => {
   }
 
   const renderSearchIcon = () => {
+    if (!isSearching && searchValue) {
+      return <IconView name="delete" theme="clear" />
+    }
+
     return isSearching ? <SpinnerView size="small" /> : <></>;
   };
 
   const onSubmitEditing = () => {
     setIsSearching(true);
     let options = searchValue.length ? { query_text: searchValue } : {};
+
     EntityManager.getProfiles(options).then((items: any) => {
       setIsSearching(false);
       setProfiles(items);
