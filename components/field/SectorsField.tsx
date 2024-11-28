@@ -32,17 +32,12 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
 
   const onChangeList = (option: any) => {
 
-    //console.log(JSON.stringify(listData, 0, 2));
-   console.log(option);
+    let sublistOpions = buildOptions(listData.find((item: any) => item?.value == option?.value)?.children);
+    setSublistData(sublistOpions);
 
-    //setSublistData(buildOptions(listData.find((item: any) => item?.value == option?.value)?.sub_sectors));
-
-    /*
-    let x = listData.filter((item: any) => item?.id == option?.value)?.sub_sectors;
-    console.log(x);
-    */
-
-    //if (onChangeListValue) onChangeListValue(option);
+    console.log(sublistOpions);
+    
+    if (onChangeListValue) onChangeListValue(option);
   };
 
   const onChangeSublist = (option: any) => {
