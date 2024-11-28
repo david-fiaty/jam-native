@@ -38,6 +38,17 @@ class EntityManager {
     return await DataManager.get('jams', {...defaults, ...options}); 
   }
 
+  async getProjects(options?: any) {
+    let profileId = await UserManager.getProfileId();
+    let defaults = {
+      profile_id: profileId,
+      displayed_items_ids: '1,2',
+      nbr_items_to_return: 100,
+    };
+
+    return await DataManager.get('projects', {...defaults, ...options}); 
+  }
+
   async getSectors() {
     return await DataManager.get('sectors'); 
   }
