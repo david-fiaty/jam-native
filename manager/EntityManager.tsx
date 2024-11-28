@@ -1,4 +1,5 @@
 import { Share } from 'react-native';
+import { Config } from '@/constants/Config';
 import DataManager from './DataManager';
 import UserManager from './UserManager';
 
@@ -20,7 +21,7 @@ class EntityManager {
       profile_id: profileId,
       profile_type: 'all',
       displayed_items_ids: '1,2',
-      nbr_items_to_return: 100,
+      nbr_items_to_return: Config.maxApiResults,
     };
 
     return await DataManager.get('profiles', {...defaults, ...options}); 
@@ -32,7 +33,7 @@ class EntityManager {
       profile_id: profileId,
       jam_type: 'all',
       displayed_items_ids: '1,2',
-      nbr_items_to_return: 100,
+      nbr_items_to_return: Config.maxApiResults,
     };
 
     return await DataManager.get('jams', {...defaults, ...options}); 
@@ -43,7 +44,7 @@ class EntityManager {
     let defaults = {
       profile_id: profileId,
       displayed_items_ids: '1,2',
-      nbr_items_to_return: 100,
+      nbr_items_to_return: Config.maxApiResults,
     };
 
     return await DataManager.get('projects', {...defaults, ...options}); 
