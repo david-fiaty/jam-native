@@ -1,6 +1,6 @@
 import { Dimensions, ScaledSize, StatusBar, Platform } from 'react-native';
 import { Config } from '@/constants/Config';
-import { getLocales } from 'expo-localization';
+import { Localization } from 'expo-localization';
 import * as Location from 'expo-location';
 import * as Device from "expo-device";
 
@@ -40,7 +40,7 @@ class DeviceManager {
   }
 
   getLanguage() {
-    const locales = RNLocalize.getLocales();
+    const locales = Localization.getLocales();
 
     console.log('---', locales);
   
