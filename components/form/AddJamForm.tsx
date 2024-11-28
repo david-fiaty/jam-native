@@ -69,6 +69,10 @@ const AddJamForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
+  EntityManager.getSectors().then(x => {
+    console.log(x);
+  });
+
   return (    
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
@@ -125,6 +129,7 @@ const AddJamForm = () => {
         onChangeValue={(option: any) => updateField('scope_countries_codes', [option.value])} 
       />
 
+{ /*
       <SectorsField 
         value={jamData?.sectors_ids}
         onChangeListValue={(option: any) => {
@@ -136,6 +141,8 @@ const AddJamForm = () => {
           updateField('sectors_ids', sectorsIds); 
         }}
       />
+
+  */    }
 
       <DividerView />
       <MediaPickerBase
