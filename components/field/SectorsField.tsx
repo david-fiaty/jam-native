@@ -20,18 +20,29 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
   const [sublistData, setSublistData] = useState<any>([]);
   const [selectedSublistOption, setSelectedSublistOption] = useState<any>({});
   
-  const buildOptions = (optionsData: any) => {    
+  const buildOptions = (optionsData: any): any[] => {    
     return [...(optionsData || [])].map((item: any) => {
       return {
         value: item?.id,
         label: item?.name,
+        children: item?.sub_sectors?.length ? buildOptions(item?.sub_sectors) : [],
       }
     });
   };
 
   const onChangeList = (option: any) => {
-    setSublistData(buildOptions(rawData.find((item: any) => item?.id == option?.value)?.sub_sectors));
-    if (onChangeListValue) onChangeListValue(option);
+
+    //console.log(JSON.stringify(listData, 0, 2));
+   console.log(option);
+
+    //setSublistData(buildOptions(listData.find((item: any) => item?.value == option?.value)?.sub_sectors));
+
+    /*
+    let x = listData.filter((item: any) => item?.id == option?.value)?.sub_sectors;
+    console.log(x);
+    */
+
+    //if (onChangeListValue) onChangeListValue(option);
   };
 
   const onChangeSublist = (option: any) => {
@@ -41,7 +52,6 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
 
   if (!rawData?.length) {
     EntityManager.getSectors().then((data: any) => {
-      setRawData(data);
       setListData(buildOptions(data));
       setSublistData([]);
       setIsLoaded(true);
