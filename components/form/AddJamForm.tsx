@@ -37,6 +37,11 @@ const AddJamForm = () => {
   const [profileId, setProfileId] = useState<number>(0);
   const jamCategoriesData = StaticData.jamCategories;
 
+  
+  EntityManager.getSectors().then(x => {
+    console.log(x);
+  });
+
   const updateField = (key: string, value: any) => {
     dispatch(setJamData<any>({key: key, value: value, profile_id: profileId}));
   };
@@ -68,10 +73,6 @@ const AddJamForm = () => {
   });
 
   if (!isLoaded) return <SpinnerView />;
-
-  EntityManager.getSectors().then(x => {
-    console.log(x);
-  });
 
   return (    
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
