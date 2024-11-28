@@ -55,7 +55,8 @@
           "photosPermission": "Allow $(PRODUCT_NAME) to access your media files."
         }
       ],
-      "expo-font"
+      "expo-font",
+      "expo-localization"
     ],
     "experiments": {
       "typedRoutes": true

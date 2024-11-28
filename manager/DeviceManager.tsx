@@ -1,6 +1,6 @@
 import { Dimensions, ScaledSize, StatusBar, Platform } from 'react-native';
 import { Config } from '@/constants/Config';
-import * as RNLocalize from "react-native-localize";
+import { getLocales } from 'expo-localization';
 import * as Location from 'expo-location';
 import * as Device from "expo-device";
 
