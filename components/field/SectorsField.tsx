@@ -25,7 +25,6 @@ const SectorsField = ({value, onChangeListValue, onChangeSublistValue}: Props) =
       return {
         value: item?.id,
         label: item?.name,
-        children: item?.sub_sectors?.length ? buildOptions(item?.sub_sectors) : [],
       }
     });
   };
