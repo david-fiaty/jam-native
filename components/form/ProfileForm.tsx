@@ -79,7 +79,7 @@ const ProfileForm = () => {
         longitude={profileData?.geolocation_longitude} 
       />
 
-      <SectorsField value={profileData?.sectors} />
+      {/* <SectorsField value={profileData?.sectors} /> */}
 
       <CountryField value={profileData?.country} />
 
