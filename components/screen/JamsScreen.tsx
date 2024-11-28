@@ -44,13 +44,11 @@ const screenComponents: any = {
 
 const JamsScreen = () => {
   // Parameters
+  const route = useRoute();
   const windowWidth = DeviceManager.window.width;
   const windowHeight = DeviceManager.window.height;
   const [currentScreen, setCurrentScreen] = useState(null);
   const [animatedStyle, setAnimatedStyle] = useState(null);
-  const route = useRoute();
-
-  // Storage state
   const screenState = useSelector((state: any) => state.screen);
 
   // Animation references
