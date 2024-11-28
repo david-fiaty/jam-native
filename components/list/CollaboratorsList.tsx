@@ -27,6 +27,10 @@ const CollaboratorsList = () => {
     setSelectedProfiles(jamData.collaborators_ids);
   }
 
+  const renderSearchIcon = () => {
+    return isSearching ? <SpinnerView size="small" /> : <></>;
+  };
+
   const onSubmitEditing = () => {
     setIsSearching(true);
     let options = searchValue.length ? { query_text: searchValue } : {};
@@ -84,7 +88,7 @@ const CollaboratorsList = () => {
         placeholder={i18n.t('Search...')} 
         onChangeText={(text: string) => setSearchValue(text)}
         onSubmitEditing={onSubmitEditing}
-        rightIcon={isSearching ? <SpinnerView size="small" /> : <></>}
+        rightIcon={renderSearchIcon}
       />
 
       <View style={Layout.borderedListContainer}>
