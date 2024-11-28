@@ -126,8 +126,8 @@ const styles = StyleSheet.create({
   },
   deleteMedia: {
     position: 'absolute',
-    top: -10,
-    right: -10,
+    top: 5,
+    right: 5,
   },
 });
 
