@@ -1,11 +1,11 @@
 import { setTokenData, setIsLoggedIn } from '@/redux/slices/UserSlice';
 import Store from '@/redux/Store';
 import DataManager from './DataManager';
+import DeviceManager from './DeviceManager';
 
 class UserManager {
   async login(data: any) {
     let response = await DataManager.post('login', data);
-    
     if (response?.tokens?.access_token?.length) {
       Store.dispatch(setTokenData(JSON.stringify(response.tokens)));
       Store.dispatch(setIsLoggedIn(true));
@@ -18,7 +18,6 @@ class UserManager {
 
   async register(data: any) {
     let response = await DataManager.post('register', data);
-
     if (response?.tokens?.access_token?.length) {
       Store.dispatch(setTokenData(JSON.stringify(response.tokens)));
       Store.dispatch(setIsLoggedIn(true));
@@ -49,6 +48,10 @@ class UserManager {
     }
 
     return profileId;
+  }
+
+  async getLanguage() {
+    return DeviceManager.getLanguage();
   }
 
   isLoggedIn() {

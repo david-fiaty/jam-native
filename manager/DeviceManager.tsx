@@ -1,6 +1,9 @@
 import { Dimensions, ScaledSize, StatusBar, Platform } from 'react-native';
+import { Config } from '@/constants/Config';
+import { useLocales } from 'expo-localization';
 import * as Location from 'expo-location';
 import * as Device from "expo-device";
+
 
 class DeviceManager {
   screen: ScaledSize;
@@ -35,6 +38,16 @@ class DeviceManager {
 
     return await Location.getCurrentPositionAsync({});
   }
+
+  getLanguage() {
+    let locales = useLocales();
+    if (Array.isArray(locales) && locales.length > 0) {
+      return locales[0].languageCode; 
+    }
+  
+    return Config.fallbackLanguage;
+  };
 };
 
 export default (new DeviceManager());
+
