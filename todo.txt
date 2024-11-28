@@ -78,7 +78,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
   - Countries list
     > Missing endpoint
 
-  - Data endpoints: need to accept language as parameter
+  
   - Copy Jam link cannot be implemented (missing URL in payload, maybe irrelevant on native)
   - Errors with jam images having double extension .jpg.png or .png.png => error handling is additional performance load
 
