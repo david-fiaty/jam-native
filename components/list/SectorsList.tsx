@@ -65,8 +65,8 @@ const SectorsList = () => {
     return (
       <BoxView style={styles.listItemCollapsible}>
         <CollapsibleView
-          label={row?.item?.name}
-          openedLabel={row?.item?.name}
+          label={<TextView>{row?.item?.name}</TextView>}
+          openedLabel={<TextView>{row?.item?.name}</TextView>}
           content={
             <BoxView
               direction="column"
@@ -103,7 +103,7 @@ const SectorsList = () => {
         onPress={() => ScreenManager.toggleModal('AddJamForm')}
       />
 
-      <View style={Layout.borderedListContainer}>
+      <View style={styles.container}>
         {sectorsData?.length > 0 && (
           <ListView
             data={sectorsData}
@@ -116,6 +116,7 @@ const SectorsList = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {},
   listItemCollapsible: {
     paddingHorizontal: Layout.space.base/2,
     paddingVertical: Layout.space.base/1.2,
