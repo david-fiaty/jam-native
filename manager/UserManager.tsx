@@ -56,6 +56,12 @@ class UserManager {
     return DeviceManager.getLanguage();
   }
 
+  async setLanguage(languageCode: string) {
+    console.log('Set language', languageCode);
+
+  }
+
+
   isLoggedIn() {
     return Store.getState().user.isLoggedIn === true;
   }
