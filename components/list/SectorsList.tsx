@@ -24,7 +24,7 @@ const SectorsList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const toggleSelection = (item: any, subItem: any) => {
-    console.log(item, subItem);
+    //console.log(item, subItem);
   };
 
   const renderItem = (row: any) => {
