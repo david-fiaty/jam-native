@@ -52,13 +52,13 @@ class UserManager {
     return profileId;
   }
 
-  getLanguage() {
-    return DeviceManager.getLanguage();
-  }
-
   async setLanguage(languageCode: string) {
     // Todo - Implement asyncstorage language storage
     console.log('Set language', languageCode);
+  }
+
+  getLanguage() {
+    return DeviceManager.getLanguage();
   }
 
   isLoggedIn() {
