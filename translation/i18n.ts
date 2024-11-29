@@ -3,7 +3,6 @@ import { Config } from "@/constants/Config";
 import i18n from "i18next";
 import english from '@/translation/resources/english';
 import french from '@/translation/resources/french';
-import UserManager from "@/manager/UserManager"; 
 
 i18n.use(initReactI18next).init({
   lng: Config.defaultLanguage,
