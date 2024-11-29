@@ -39,12 +39,14 @@ const SectorsList = () => {
               {row?.item?.sub_sectors?.length > 0 &&
                 row?.item?.sub_sectors?.map((subItem: any) => {
                   return (
-                    <TextView 
-                      key={subItem?.id}
-                      style={styles.subItem}
-                    >
-                      {subItem?.name}
-                    </TextView>
+                    <TouchableOpacity onPress={() => console.log(subItem?.name) } >
+                      <TextView 
+                        key={subItem?.id}
+                        style={styles.subItem}
+                      >
+                        {subItem?.name}
+                      </TextView>
+                    </TouchableOpacity>
                   );
                 })
               }
