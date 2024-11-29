@@ -28,8 +28,6 @@ const SectorsList = () => {
   };
 
   const renderItem = (row: any) => {
-    //console.log(row?.item);
-
     return (
       <BoxView style={styles.listItemCollapsible}>
         <CollapsibleView
@@ -45,12 +43,12 @@ const SectorsList = () => {
                 row?.item?.sub_sectors?.map((subItem: any) => {
                   return (
                     <TouchableOpacity onPress={() => toggleSelection(row.item, subItem)} >
-                      <TextView 
-                        key={subItem?.id}
-                        style={styles.listSubItem}
-                      >
-                        {subItem?.name}
-                      </TextView>
+                      <BoxView direction="row" align="center" justify="space-around">
+                        <IconView name="return" theme="clear" />
+                        <TextView key={subItem?.id} style={styles.listSubItem}>
+                          {subItem?.name}
+                        </TextView>
+                      </BoxView>
                     </TouchableOpacity>
                   );
                 })
@@ -104,7 +102,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   listSubItem: {
-    marginLeft: Layout.space.base*1.8,
+    marginLeft: 0,
     paddingVertical: Layout.space.base/2.2,
   },
 });
