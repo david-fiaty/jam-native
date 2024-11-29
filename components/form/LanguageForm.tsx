@@ -16,7 +16,6 @@ const LanguageForm = () => {
 
   const changeLanguage = (language: any) => {
     i18next.changeLanguage(language.value);
-
     UserManager.setLanguage(language);
   };
 
