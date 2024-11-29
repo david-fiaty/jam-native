@@ -25,10 +25,34 @@ const SectorsList = () => {
 
   const toggleSelection = (item: any, subItem: any) => {
     let pair = [item.id, subItem.id];
+    let found = selectedSectors.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
+    let sectorsList = [...selectedSectors];
+
+    if (!found) {
+      sectorsList.push(pair);
+      setSelectedSectors(sectorsList);
+    }
+    else {
+      let index = selectedSectors.findIndex((item: any) => JSON.stringify(item) === JSON.stringify(pair));
+      if (index !== -1) {
+        delete sectorsList[index];
+        setSelectedSectors(sectorsList);
+      } 
+
+    }
+
+    /*
     if (!selectedSectors.includes(pair)) {
       selectedSectors.push(pair);
       setSelectedSectors(selectedSectors);
     }
+    else {
+      let index = selectedSectors.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
+
+      console.log(index);
+      //setSelectedSectors(selectedSectors);
+    }
+      */
   };
 
   const renderItem = (row: any) => {
