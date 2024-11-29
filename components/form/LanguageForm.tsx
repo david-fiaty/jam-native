@@ -12,6 +12,7 @@ import StaticData from '@/constants/StaticData';
 
 const LanguageForm = () => {
   const dispatch = useDispatch();
+  const appState = useSelector((state: any) => state.app);
   const router = useRouter();
   const data = StaticData.languages;
 
