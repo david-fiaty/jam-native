@@ -43,10 +43,11 @@ const SectorsList = () => {
   };
 
   const renderSubItem = (item: any, subItem: any) => {
-    let isSelected = true;
+    let pair = [item.id, subItem.id];
+    let isSelected = selectedSectors.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
 
     return (
-      <TouchableOpacity onPress={() => toggleSelection(row.item, subItem)} >
+      <TouchableOpacity onPress={() => toggleSelection(item, subItem)} >
         <BoxView direction="row" align="center" justify="space-around">
           <IconView name="return" theme="clear" />
           <TextView key={subItem?.id} style={styles.listSubItem}>
@@ -60,10 +61,6 @@ const SectorsList = () => {
   };
 
   const renderItem = (row: any) => {
-    //let pair = [item.id, subItem.id];
-    //let isSelected = selectedSectors.find((item: any) => JSON.stringify(item) === JSON.stringify(pair))
-
-
     return (
       <BoxView style={styles.listItemCollapsible}>
         <CollapsibleView
