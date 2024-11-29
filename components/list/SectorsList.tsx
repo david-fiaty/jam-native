@@ -91,8 +91,6 @@ const SectorsList = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(selectedSectors);
-
   return (
     <BoxView
       align="flex-start"
