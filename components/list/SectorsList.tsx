@@ -38,7 +38,14 @@ const SectorsList = () => {
             >
               {row?.item?.sub_sectors?.length > 0 &&
                 row?.item?.sub_sectors?.map((subItem: any) => {
-                  return <TextView key={subItem?.id}>{subItem?.name}</TextView>
+                  return (
+                    <TextView 
+                      key={subItem?.id}
+                      style={styles.subItem}
+                    >
+                      {subItem?.name}
+                    </TextView>
+                  );
                 })
               }
               
@@ -50,10 +57,10 @@ const SectorsList = () => {
   };
 
   //if (!sectorsData) {
-  EntityManager.getSectors().then((data: any) => {
-    setSectorsData(data);
-    setIsLoaded(true);
-  });
+    EntityManager.getSectors().then((data: any) => {
+      setSectorsData(data);
+      setIsLoaded(true);
+    });
   //}
 
   if (!isLoaded) return <SpinnerView />;
@@ -65,8 +72,8 @@ const SectorsList = () => {
       style={Layout.screenContent}
     >
       <BackButton
-        title={i18n.t("Add industries")}
-        onPress={() => ScreenManager.toggleModal("AddJamForm")}
+        title={i18n.t('Add industries')}
+        onPress={() => ScreenManager.toggleModal('AddJamForm')}
       />
 
       <View style={Layout.borderedListContainer}>
@@ -83,19 +90,22 @@ const SectorsList = () => {
 
 const styles = StyleSheet.create({
   listItemCollapsible: {
-    paddingHorizontal: Layout.space.base / 2,
-    paddingVertical: Layout.space.base / 1.2,
+    paddingHorizontal: Layout.space.base/2,
+    paddingVertical: Layout.space.base/1.2,
   },
   listItemDetails: {
     gap: Layout.space.base,
-    width: "100%",
+    width: '100%',
   },
   listItemDetail: {
-    width: "100%",
+    width: '100%',
     gap: 0,
     backgroundColor: Colors.secondary,
-    padding: Layout.space.base / 6,
+    padding: Layout.space.base/6,
     borderRadius: Layout.radius.round,
+  },
+  subItem: {
+    marginLeft: Layout.space.base*2,
   },
 });
 
