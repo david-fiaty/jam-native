@@ -4,7 +4,6 @@ import Store from '@/redux/Store';
 import DataManager from './DataManager';
 import DeviceManager from './DeviceManager';
 
-
 class UserManager {
   async login(data: any) {
     let response = await DataManager.post('login', data);
@@ -52,13 +51,13 @@ class UserManager {
     return profileId;
   }
 
-  getLanguage() {
-    return DeviceManager.getLanguage();
-  }
-
   async setLanguage(languageCode: string) {
     // Todo - Implement asyncstorage language storage
     console.log('Set language', languageCode);
+  }
+
+  getLanguage() {
+    return DeviceManager.getLanguage();
   }
 
   isLoggedIn() {
