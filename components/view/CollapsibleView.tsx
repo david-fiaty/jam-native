@@ -24,7 +24,10 @@ const CollapsibleView = ({label, content, openedLabel}: Props) => {
       <TouchableOpacity onPress={() => setCollapsed((prev) => !prev)}>
         <TextView>{buttonLabel}</TextView>
       </TouchableOpacity>
-      <Collapsible collapsed={collapsed} align="center">
+      <Collapsible 
+        collapsed={collapsed} 
+        align="center"
+      >
         <View style={styles.content}>
           {content}
         </View>
