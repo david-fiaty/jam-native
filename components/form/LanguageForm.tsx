@@ -1,6 +1,5 @@
 import { useRouter } from 'expo-router';
 import { useDispatch } from 'react-redux';
-import { setLanguage } from '@/redux/slices/AppSlice';
 import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
 import i18next from 'i18next';
@@ -16,8 +15,9 @@ const LanguageForm = () => {
   const data = StaticData.languages;
 
   const changeLanguage = (language: any) => {
-    dispatch(setLanguage(language.value));
     i18next.changeLanguage(language.value);
+
+    UserManager.setLanguage(language);
   };
 
   return (
