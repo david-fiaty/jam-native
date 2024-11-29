@@ -106,8 +106,8 @@ const JamsList = () => {
   const renderItemCollapsible = (row: any) => (
     <BoxView style={styles.listItemCollapsible}>
       <CollapsibleView
-        label={i18n.t('View more.')}
-        openedLabel={i18n.t('View less.')}
+        label={<TextView>{i18n.t('View more.')}</TextView>}
+        openedLabel={<TextView>{i18n.t('View less.')}</TextView>}
         content={
           <BoxView
             direction="column"

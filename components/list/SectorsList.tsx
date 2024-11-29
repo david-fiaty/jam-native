@@ -3,6 +3,7 @@ import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setJamData } from "@/redux/slices/AddJamSlice";
 import { Layout } from "@/constants/Layout";
+import { Colors } from "@/constants/Colors";
 import TextView from "../view/TextView";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
@@ -50,7 +51,7 @@ const SectorsList = () => {
         onPress={() => toggleSelection(item, subItem)} 
       >
         <BoxView direction="row" align="center" justify="space-around">
-          <IconView name="return" theme="clear" />
+          <IconView name="arrow" theme="clear" />
           <TextView key={subItem?.id} style={styles.listSubItem}>
             {subItem?.name}
           </TextView>
@@ -65,8 +66,9 @@ const SectorsList = () => {
     return (
       <BoxView style={styles.listItemCollapsible}>
         <CollapsibleView
-          label={row?.item?.name}
-          openedLabel={row?.item?.name}
+          label={<TextView>{row?.item?.name}</TextView>}
+          openedLabel={<TextView>{row?.item?.name}</TextView>}
+          headerStyle={styles.itemHeader}
           content={
             <BoxView
               direction="column"
@@ -103,7 +105,7 @@ const SectorsList = () => {
         onPress={() => ScreenManager.toggleModal('AddJamForm')}
       />
 
-      <View style={Layout.borderedListContainer}>
+      <View style={styles.container}>
         {sectorsData?.length > 0 && (
           <ListView
             data={sectorsData}
@@ -116,9 +118,13 @@ const SectorsList = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    width: '100%'
+  },
   listItemCollapsible: {
     paddingHorizontal: Layout.space.base/2,
     paddingVertical: Layout.space.base/1.2,
+    width: '100%',
   },
   listItemDetails: {
     gap: Layout.space.base,
@@ -127,6 +133,14 @@ const styles = StyleSheet.create({
   listSubItem: {
     marginLeft: 0,
     paddingVertical: Layout.space.base/2.2,
+  },
+  itemHeader: {
+    backgroundColor: Colors.secondary,
+    padding: Layout.space.base,
+    borderRadius: Layout.radius.round,
+  },
+  itemHeaderOpened: {
+    backgroundColor: Colors.secondary,
   },
 });
 
