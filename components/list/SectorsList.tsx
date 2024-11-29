@@ -24,7 +24,11 @@ const SectorsList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const toggleSelection = (item: any, subItem: any) => {
-    //console.log(item, subItem);
+    let pair = [item.id, subItem.id];
+    if (!selectedSectors.includes(pair)) {
+      selectedSectors.push(pair);
+      setSelectedSectors(selectedSectors);
+    }
   };
 
   const renderItem = (row: any) => {
@@ -68,6 +72,8 @@ const SectorsList = () => {
   //}
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(selectedSectors);
 
   return (
     <BoxView
