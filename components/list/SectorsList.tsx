@@ -20,12 +20,14 @@ const SectorsList = () => {
   const dispatch = useDispatch();
   const jamData = useSelector((state: any) => state.addJam);
   const [sectorsData, setSectorsData] = useState<any>([]);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  if (!sectorsData?.length) {
+  //if (!sectorsData?.length > 0) {
     EntityManager.getSectors().then((data: any) => {
       console.log(data);
+      setSectorsData(data);
     });
-  }
+  //}
 
   const renderItem = (row: any) => (
     <BoxView style={styles.listItemCollapsible}>
@@ -45,7 +47,7 @@ const SectorsList = () => {
     </BoxView>
   );
 
-  if (!sectorsData) return <SpinnerView />;
+  if (!sectorsData?.length > 0) return <SpinnerView />;
 
   return (
     <BoxView
