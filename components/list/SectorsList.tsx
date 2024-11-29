@@ -19,15 +19,8 @@ import CollapsibleView from "../view/CollapsibleView";
 const SectorsList = () => {
   const dispatch = useDispatch();
   const jamData = useSelector((state: any) => state.addJam);
-  const [sectorsData, setSectorsData] = useState<any>([]);
+  const [sectorsData, setSectorsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-
-  //if (!sectorsData?.length > 0) {
-    EntityManager.getSectors().then((data: any) => {
-      console.log(data);
-      setSectorsData(data);
-    });
-  //}
 
   const renderItem = (row: any) => (
     <BoxView style={styles.listItemCollapsible}>
@@ -47,7 +40,15 @@ const SectorsList = () => {
     </BoxView>
   );
 
-  if (!sectorsData?.length > 0) return <SpinnerView />;
+  if (!sectorsData) {
+    EntityManager.getSectors().then((data: any) => {
+      console.log(data);
+      //setSectorsData(data);
+      setIsLoaded(true);
+    });
+  }
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView
