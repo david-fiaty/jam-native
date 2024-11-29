@@ -138,7 +138,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.secondary,
     padding: Layout.space.base,
     borderRadius: Layout.radius.round,
-    flex: 1,
   },
   itemHeaderOpened: {
     backgroundColor: Colors.secondary,
