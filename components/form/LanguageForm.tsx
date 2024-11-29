@@ -7,21 +7,12 @@ import BackButton from "../button/BackButton";
 import InputTextField from '../field/InputTextField';
 import SpinnerView from '../view/SpinnerView';
 import SelectListBase from '../base/SelectListBase';
-
-const data = [
-  {
-    label: i18n.t('French'),
-    value: 'fr',
-  },
-  {
-    label: i18n.t('English'),
-    value: 'en',
-  },
-];
+import StaticData from '@/constants/StaticData';
 
 const LanguageForm = () => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState(false);
+  const data = StaticData.languages;
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), Layout.animation.duration);
