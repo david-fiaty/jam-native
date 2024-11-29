@@ -6,9 +6,9 @@ import { Layout } from '@/constants/Layout';
 import i18n from '@/translation/i18n';
 
 type Props = {
-  label: string,
-  openedLabel: string,
-  content: JSX.Element,
+  label?: any,
+  openedLabel?:any,
+  content?: any,
 };
 
 const CollapsibleView = ({label, content, openedLabel}: Props) => {
@@ -22,7 +22,7 @@ const CollapsibleView = ({label, content, openedLabel}: Props) => {
   return (
     <View>
       <TouchableOpacity onPress={() => setCollapsed((prev) => !prev)}>
-        <TextView>{buttonLabel}</TextView>
+        {buttonLabel}
       </TouchableOpacity>
       <Collapsible 
         collapsed={collapsed} 

@@ -13,6 +13,7 @@ import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from "@/manager/EntityManager";
 import CollapsibleView from "../view/CollapsibleView";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 const SectorsList = () => {
   const dispatch = useDispatch();
@@ -65,8 +66,8 @@ const SectorsList = () => {
     return (
       <BoxView style={styles.listItemCollapsible}>
         <CollapsibleView
-          label={<TextView>{row?.item?.name}</TextView>}
-          openedLabel={<TextView>{row?.item?.name}</TextView>}
+          label={<TextView style={styles.itemHeader}>{row?.item?.name}</TextView>}
+          openedLabel={<TextView style={styles.itemHeaderOpened}>{row?.item?.name}</TextView>}
           content={
             <BoxView
               direction="column"
@@ -128,6 +129,12 @@ const styles = StyleSheet.create({
   listSubItem: {
     marginLeft: 0,
     paddingVertical: Layout.space.base/2.2,
+  },
+  itemHeader: {
+    backgroundColor: Colors.secondary,
+  },
+  itemHeaderOpened: {
+    backgroundColor: Colors.secondary,
   },
 });
 
