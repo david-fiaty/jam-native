@@ -15,7 +15,7 @@ import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from '../field/InputTextField';
 
-const CollaboratorsList = () => {
+const SectorsList = () => {
   const dispatch = useDispatch();
   const jamData = useSelector((state: any) => state.addJam);
   const [profiles, setProfiles] = useState<any>(null);
@@ -100,7 +100,7 @@ const CollaboratorsList = () => {
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
-        title={i18n.t('Add collaborators')}
+        title={i18n.t('Add industries')}
         onPress={() => ScreenManager.toggleModal('AddJamForm')}
       />
       
@@ -142,4 +142,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CollaboratorsList;
+export default SectorsList;

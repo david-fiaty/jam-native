@@ -72,6 +72,14 @@ export const Modals = [
     entityId: 0,
   },
   {
+    name: 'SectorsList', 
+    effect: 'slide',
+    active: false,
+    headerNavigation: true,
+    footerNavigation: true,
+    entityId: 0,
+  },
+  {
     name: 'HostsList', 
     effect: 'slide',
     active: false,
