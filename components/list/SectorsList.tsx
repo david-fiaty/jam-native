@@ -3,7 +3,6 @@ import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setJamData } from "@/redux/slices/AddJamSlice";
 import { Layout } from "@/constants/Layout";
-import { Colors } from "@/constants/Colors";
 import TextView from "../view/TextView";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
@@ -13,12 +12,11 @@ import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from "@/manager/EntityManager";
-import InputTextField from "../field/InputTextField";
 import CollapsibleView from "../view/CollapsibleView";
 
 const SectorsList = () => {
-  //const dispatch = useDispatch();
-  //const jamData = useSelector((state: any) => state.addJam);
+  const dispatch = useDispatch();
+  const jamData = useSelector((state: any) => state.addJam);
   const [sectorsData, setSectorsData] = useState<any>(null);
   const [selectedSectors, setSelectedSectors] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -47,7 +45,10 @@ const SectorsList = () => {
     let isSelected = selectedSectors.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
 
     return (
-      <TouchableOpacity onPress={() => toggleSelection(item, subItem)} >
+      <TouchableOpacity 
+        key={subItem?.id}
+        onPress={() => toggleSelection(item, subItem)} 
+      >
         <BoxView direction="row" align="center" justify="space-around">
           <IconView name="return" theme="clear" />
           <TextView key={subItem?.id} style={styles.listSubItem}>
