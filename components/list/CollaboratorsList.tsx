@@ -80,7 +80,7 @@ const CollaboratorsList = () => {
     });
   }
 
-  if (!profiles || !profiles) return <SpinnerView />;
+  if (!profiles) return <SpinnerView />;
 
   const renderItem = (row: any) => (
     <TouchableOpacity 
