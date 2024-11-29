@@ -20,12 +20,10 @@ const SectorsList = () => {
   const dispatch = useDispatch();
   const jamData = useSelector((state: any) => state.addJam);
   const [sectorsData, setSectorsData] = useState<any>([]);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   if (!sectorsData?.length) {
     EntityManager.getSectors().then((data: any) => {
-      setSectorsData(data);
-      setIsLoaded(true);
+      console.log(data);
     });
   }
 
@@ -47,7 +45,7 @@ const SectorsList = () => {
     </BoxView>
   );
 
-  if (!isLoaded) return <SpinnerView />;
+  if (!sectorsData) return <SpinnerView />;
 
   return (
     <BoxView
