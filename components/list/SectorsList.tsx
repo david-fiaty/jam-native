@@ -22,29 +22,38 @@ const SectorsList = () => {
   const [sectorsData, setSectorsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const renderItem = (row: any) => (
-    <BoxView style={styles.listItemCollapsible}>
-      <CollapsibleView
-        label={row?.item?.name}
-        openedLabel={row?.item?.name}
-        content={
-          <BoxView
-            direction="column"
-            align="flex-start"
-            style={styles.listItemDetails}
-          >
-            <TextView>{'Subindustries'}</TextView>
-          </BoxView>
-        }
-      />
-    </BoxView>
-  );
+  const renderItem = (row: any) => {
+    //console.log(row?.item);
+
+    return (
+      <BoxView style={styles.listItemCollapsible}>
+        <CollapsibleView
+          label={row?.item?.name}
+          openedLabel={row?.item?.name}
+          content={
+            <BoxView
+              direction="column"
+              align="flex-start"
+              style={styles.listItemDetails}
+            >
+              {row?.item?.sub_sectors?.length > 0 &&
+                row?.item?.sub_sectors?.map((subItem: any) => {
+                  return <TextView key={subItem?.id}>{subItem?.name}</TextView>
+                })
+              }
+              
+            </BoxView>
+          }
+        />
+      </BoxView>
+    );
+  };
 
   //if (!sectorsData) {
-    EntityManager.getSectors().then((data: any) => {
-      setSectorsData(data);
-      setIsLoaded(true);
-    });
+  EntityManager.getSectors().then((data: any) => {
+    setSectorsData(data);
+    setIsLoaded(true);
+  });
   //}
 
   if (!isLoaded) return <SpinnerView />;
@@ -56,17 +65,17 @@ const SectorsList = () => {
       style={Layout.screenContent}
     >
       <BackButton
-        title={i18n.t('Add industries')}
-        onPress={() => ScreenManager.toggleModal('AddJamForm')}
+        title={i18n.t("Add industries")}
+        onPress={() => ScreenManager.toggleModal("AddJamForm")}
       />
 
       <View style={Layout.borderedListContainer}>
-        {sectorsData?.length > 0 && 
+        {sectorsData?.length > 0 && (
           <ListView
             data={sectorsData}
             renderItem={(row: any) => renderItem(row)}
           />
-        }
+        )}
       </View>
     </BoxView>
   );
@@ -74,8 +83,8 @@ const SectorsList = () => {
 
 const styles = StyleSheet.create({
   listItemCollapsible: {
-    paddingHorizontal: Layout.space.base/2,
-    paddingVertical: Layout.space.base/1.2,
+    paddingHorizontal: Layout.space.base / 2,
+    paddingVertical: Layout.space.base / 1.2,
   },
   listItemDetails: {
     gap: Layout.space.base,
