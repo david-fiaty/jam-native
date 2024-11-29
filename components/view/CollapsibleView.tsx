@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import Collapsible from 'react-native-collapsible';
 import { Layout } from '@/constants/Layout';
+import Collapsible from 'react-native-collapsible';
+import DeviceManager from '@/manager/DeviceManager';
 
 type Props = {
   label?: any,
@@ -19,7 +20,7 @@ const CollapsibleView = ({label, openedLabel, content, headerStyle}: Props) => {
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <TouchableOpacity onPress={() => setCollapsed((prev) => !prev)}>
         <View style={headerStyle}>{buttonLabel}</View>
       </TouchableOpacity>
@@ -36,6 +37,9 @@ const CollapsibleView = ({label, openedLabel, content, headerStyle}: Props) => {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+  },
   content: {
     marginTop: Layout.space.base,
     width: '100%',

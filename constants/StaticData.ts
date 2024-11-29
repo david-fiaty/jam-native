@@ -1,6 +1,16 @@
 import i18n from "@/translation/i18n";
 
 const StaticData = {
+  languages: [
+    {
+      label: i18n.t('French'),
+      value: 'fr',
+    },
+    {
+      label: i18n.t('English'),
+      value: 'en',
+    },
+  ],
   profileTypes: [
     {
       id: null,
