@@ -43,6 +43,10 @@ const SectorsList = () => {
   };
 
   const renderItem = (row: any) => {
+    //let pair = [item.id, subItem.id];
+    //let isSelected = selectedSectors.find((item: any) => JSON.stringify(item) === JSON.stringify(pair))
+    let isSelected = true;
+
     return (
       <BoxView style={styles.listItemCollapsible}>
         <CollapsibleView
@@ -63,6 +67,8 @@ const SectorsList = () => {
                         <TextView key={subItem?.id} style={styles.listSubItem}>
                           {subItem?.name}
                         </TextView>
+                        
+                        { isSelected && <IconView name="checkmark" theme="clear" size={14} /> }
                       </BoxView>
                     </TouchableOpacity>
                   );
@@ -83,6 +89,8 @@ const SectorsList = () => {
   //}
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(selectedSectors);
 
   return (
     <BoxView
