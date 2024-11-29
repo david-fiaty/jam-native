@@ -1,33 +1,24 @@
-import { useState, useEffect } from 'react';
 import { useRouter } from 'expo-router';
+import { useDispatch } from 'react-redux';
+import { setLanguage } from '@/redux/slices/AppSlice';
 import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
+import i18next from 'i18next';
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
-import InputTextField from '../field/InputTextField';
-import SpinnerView from '../view/SpinnerView';
 import SelectListBase from '../base/SelectListBase';
-
-const data = [
-  {
-    label: i18n.t('French'),
-    value: 'fr',
-  },
-  {
-    label: i18n.t('English'),
-    value: 'en',
-  },
-];
+import StaticData from '@/constants/StaticData';
+import UserManager from '@/manager/UserManager';
 
 const LanguageForm = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
-  const [isLoaded, setIsLoaded] = useState(false);
+  const data = StaticData.languages;
 
-  useEffect(() => {
-    setTimeout(() => setIsLoaded(true), Layout.animation.duration);
-  });
-
-  if (!isLoaded) return <SpinnerView />;
+  const changeLanguage = (language: any) => {
+    dispatch(setLanguage(language.value));
+    i18next.changeLanguage(language.value);
+  };
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
@@ -35,7 +26,12 @@ const LanguageForm = () => {
         title={i18n.t('Language')}
         onPress={() => router.back()}
       />
-      <SelectListBase data={data} placeholder={i18n.t('English')} />
+      <SelectListBase
+        value={UserManager.getLanguage()}
+        data={data} 
+        placeholder={i18n.t('English')} 
+        onChangeValue={((option: any) => changeLanguage(option))}
+      />
     </BoxView>
   );
 };

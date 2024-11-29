@@ -12,23 +12,23 @@ type ItemProps = {
   path: string,
 };
 
-const data: ItemProps[] = [
-  {
-    label: 'Account information',
-    path: '/account',
-  },
-  {
-    label: 'Change password',
-    path: '/password',
-  },
-  {
-    label: 'Language',
-    path: '/language',
-  },
-];
-
 const SettingsMenu = () => {
   const router = useRouter();
+  
+  const data: ItemProps[] = [
+    {
+      label: i18n.t('Account information'),
+      path: '/account',
+    },
+    {
+      label: i18n.t('Change password'),
+      path: '/password',
+    },
+    {
+      label: i18n.t('Language'),
+      path: '/language',
+    },
+  ];
   
   const renderItem = (row: any) => (
     <TouchableOpacity onPress={() => router.push(row.item.path)}>

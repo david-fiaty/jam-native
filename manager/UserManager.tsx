@@ -51,7 +51,7 @@ class UserManager {
   }
 
   getLanguage() {
-    return DeviceManager.getLanguage();
+    return Store.getState().app.language || DeviceManager.getLanguage();
   }
 
   isLoggedIn() {
