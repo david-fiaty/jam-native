@@ -39,21 +39,7 @@ const SectorsList = () => {
         sectorsList = sectorsList.filter((item: any) => item);
         setSelectedSectors(sectorsList);
       } 
-
     }
-
-    /*
-    if (!selectedSectors.includes(pair)) {
-      selectedSectors.push(pair);
-      setSelectedSectors(selectedSectors);
-    }
-    else {
-      let index = selectedSectors.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
-
-      console.log(index);
-      //setSelectedSectors(selectedSectors);
-    }
-      */
   };
 
   const renderItem = (row: any) => {
@@ -97,8 +83,6 @@ const SectorsList = () => {
   //}
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(selectedSectors);
 
   return (
     <BoxView
