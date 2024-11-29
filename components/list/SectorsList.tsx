@@ -124,11 +124,9 @@ const styles = StyleSheet.create({
   listItemCollapsible: {
     paddingHorizontal: Layout.space.base/2,
     paddingVertical: Layout.space.base/1.2,
-    width: '100%',
   },
   listItemDetails: {
     gap: Layout.space.base,
-    width: '100%',
   },
   listSubItem: {
     marginLeft: 0,
