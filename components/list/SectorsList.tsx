@@ -74,7 +74,9 @@ const SectorsList = () => {
 
 const styles = StyleSheet.create({
   listItemCollapsible: {
-    padding: Layout.space.base,
+    paddingHorizontal: Layout.space.base/2,
+    paddingVertical: Layout.space.base/1.2,
+    
   },
   listItemDetails: {
     gap: Layout.space.base,
