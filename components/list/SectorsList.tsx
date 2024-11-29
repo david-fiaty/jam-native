@@ -22,23 +22,41 @@ const SectorsList = () => {
   const [sectorsData, setSectorsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const renderItem = (row: any) => (
-    <BoxView style={styles.listItemCollapsible}>
-      <CollapsibleView
-        label={row?.item?.name}
-        openedLabel={row?.item?.name}
-        content={
-          <BoxView
-            direction="column"
-            align="flex-start"
-            style={styles.listItemDetails}
-          >
-            <TextView>{'Subindustries'}</TextView>
-          </BoxView>
-        }
-      />
-    </BoxView>
-  );
+  const renderItem = (row: any) => {
+    //console.log(row?.item);
+
+    return (
+      <BoxView style={styles.listItemCollapsible}>
+        <CollapsibleView
+          label={row?.item?.name}
+          openedLabel={row?.item?.name}
+          content={
+            <BoxView
+              direction="column"
+              align="flex-start"
+              style={styles.listItemDetails}
+            >
+              {row?.item?.sub_sectors?.length > 0 &&
+                row?.item?.sub_sectors?.map((subItem: any) => {
+                  return (
+                    <TouchableOpacity onPress={() => console.log(subItem?.name) } >
+                      <TextView 
+                        key={subItem?.id}
+                        style={styles.subItem}
+                      >
+                        {subItem?.name}
+                      </TextView>
+                    </TouchableOpacity>
+                  );
+                })
+              }
+              
+            </BoxView>
+          }
+        />
+      </BoxView>
+    );
+  };
 
   //if (!sectorsData) {
     EntityManager.getSectors().then((data: any) => {
@@ -74,18 +92,22 @@ const SectorsList = () => {
 
 const styles = StyleSheet.create({
   listItemCollapsible: {
-    padding: Layout.space.base,
+    paddingHorizontal: Layout.space.base/2,
+    paddingVertical: Layout.space.base/1.2,
   },
   listItemDetails: {
     gap: Layout.space.base,
-    width: "100%",
+    width: '100%',
   },
   listItemDetail: {
-    width: "100%",
+    width: '100%',
     gap: 0,
     backgroundColor: Colors.secondary,
-    padding: Layout.space.base / 6,
+    padding: Layout.space.base/6,
     borderRadius: Layout.radius.round,
+  },
+  subItem: {
+    marginLeft: Layout.space.base*2,
   },
 });
 
