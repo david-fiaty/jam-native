@@ -61,12 +61,12 @@ const SectorsList = () => {
       />
 
       <View style={Layout.borderedListContainer}>
-        {sectorsData?.length > 0 && (
+        {sectorsData?.length > 0 && 
           <ListView
             data={sectorsData}
             renderItem={(row: any) => renderItem(row)}
           />
-        )}
+        }
       </View>
     </BoxView>
   );
@@ -76,7 +76,6 @@ const styles = StyleSheet.create({
   listItemCollapsible: {
     paddingHorizontal: Layout.space.base/2,
     paddingVertical: Layout.space.base/1.2,
-    
   },
   listItemDetails: {
     gap: Layout.space.base,
