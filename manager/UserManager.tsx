@@ -4,7 +4,6 @@ import Store from '@/redux/Store';
 import DataManager from './DataManager';
 import DeviceManager from './DeviceManager';
 
-
 class UserManager {
   async login(data: any) {
     let response = await DataManager.post('login', data);
