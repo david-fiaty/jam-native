@@ -24,12 +24,39 @@ const SectorsList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const toggleSelection = (item: any, subItem: any) => {
-    //console.log(item, subItem);
+    let pair = [item.id, subItem.id];
+    let found = selectedSectors.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
+    let sectorsList = [...selectedSectors];
+
+    if (!found) {
+      sectorsList.push(pair);
+      setSelectedSectors(sectorsList);
+    }
+    else {
+      let index = selectedSectors.findIndex((item: any) => JSON.stringify(item) === JSON.stringify(pair));
+      if (index !== -1) {
+        delete sectorsList[index];
+        sectorsList = sectorsList.filter((item: any) => item);
+        setSelectedSectors(sectorsList);
+      } 
+
+    }
+
+    /*
+    if (!selectedSectors.includes(pair)) {
+      selectedSectors.push(pair);
+      setSelectedSectors(selectedSectors);
+    }
+    else {
+      let index = selectedSectors.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
+
+      console.log(index);
+      //setSelectedSectors(selectedSectors);
+    }
+      */
   };
 
   const renderItem = (row: any) => {
-    //console.log(row?.item);
-
     return (
       <BoxView style={styles.listItemCollapsible}>
         <CollapsibleView
@@ -45,12 +72,12 @@ const SectorsList = () => {
                 row?.item?.sub_sectors?.map((subItem: any) => {
                   return (
                     <TouchableOpacity onPress={() => toggleSelection(row.item, subItem)} >
-                      <TextView 
-                        key={subItem?.id}
-                        style={styles.listSubItem}
-                      >
-                        {subItem?.name}
-                      </TextView>
+                      <BoxView direction="row" align="center" justify="space-around">
+                        <IconView name="return" theme="clear" />
+                        <TextView key={subItem?.id} style={styles.listSubItem}>
+                          {subItem?.name}
+                        </TextView>
+                      </BoxView>
                     </TouchableOpacity>
                   );
                 })
@@ -70,6 +97,8 @@ const SectorsList = () => {
   //}
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(selectedSectors);
 
   return (
     <BoxView
@@ -104,7 +133,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   listSubItem: {
-    marginLeft: Layout.space.base*1.8,
+    marginLeft: 0,
     paddingVertical: Layout.space.base/2.2,
   },
 });
