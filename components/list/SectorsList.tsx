@@ -17,8 +17,8 @@ import InputTextField from "../field/InputTextField";
 import CollapsibleView from "../view/CollapsibleView";
 
 const SectorsList = () => {
-  const dispatch = useDispatch();
-  const jamData = useSelector((state: any) => state.addJam);
+  //const dispatch = useDispatch();
+  //const jamData = useSelector((state: any) => state.addJam);
   const [sectorsData, setSectorsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
