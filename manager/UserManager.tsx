@@ -57,10 +57,9 @@ class UserManager {
   }
 
   async setLanguage(languageCode: string) {
+    // Todo - Implement asyncstorage language storage
     console.log('Set language', languageCode);
-
   }
-
 
   isLoggedIn() {
     return Store.getState().user.isLoggedIn === true;
