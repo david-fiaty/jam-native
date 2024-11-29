@@ -39,21 +39,25 @@ const SectorsList = () => {
         sectorsList = sectorsList.filter((item: any) => item);
         setSelectedSectors(sectorsList);
       } 
-
     }
+  };
 
-    /*
-    if (!selectedSectors.includes(pair)) {
-      selectedSectors.push(pair);
-      setSelectedSectors(selectedSectors);
-    }
-    else {
-      let index = selectedSectors.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
+  const renderSubItem = (item: any, subItem: any) => {
+    let pair = [item.id, subItem.id];
+    let isSelected = selectedSectors.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
 
-      console.log(index);
-      //setSelectedSectors(selectedSectors);
-    }
-      */
+    return (
+      <TouchableOpacity onPress={() => toggleSelection(item, subItem)} >
+        <BoxView direction="row" align="center" justify="space-around">
+          <IconView name="return" theme="clear" />
+          <TextView key={subItem?.id} style={styles.listSubItem}>
+            {subItem?.name}
+          </TextView>
+          
+          {isSelected && <IconView name="checkmark" theme="clear" size={14} /> }
+        </BoxView>
+      </TouchableOpacity>
+    );
   };
 
   const renderItem = (row: any) => {
@@ -69,18 +73,7 @@ const SectorsList = () => {
               style={styles.listItemDetails}
             >
               {row?.item?.sub_sectors?.length > 0 &&
-                row?.item?.sub_sectors?.map((subItem: any) => {
-                  return (
-                    <TouchableOpacity onPress={() => toggleSelection(row.item, subItem)} >
-                      <BoxView direction="row" align="center" justify="space-around">
-                        <IconView name="return" theme="clear" />
-                        <TextView key={subItem?.id} style={styles.listSubItem}>
-                          {subItem?.name}
-                        </TextView>
-                      </BoxView>
-                    </TouchableOpacity>
-                  );
-                })
+                row?.item?.sub_sectors?.map((subItem: any) => renderSubItem(row?.item, subItem))
               }
             </BoxView>
           }
@@ -97,8 +90,6 @@ const SectorsList = () => {
   //}
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(selectedSectors);
 
   return (
     <BoxView
