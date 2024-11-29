@@ -42,8 +42,21 @@ const SectorsList = () => {
     }
   };
 
-  const isItemSelected = (item: any, subItem: any) => {
-    return false;
+  const renderSubItem = (item: any, subItem: any) => {
+    let isSelected = true;
+
+    return (
+      <TouchableOpacity onPress={() => toggleSelection(row.item, subItem)} >
+        <BoxView direction="row" align="center" justify="space-around">
+          <IconView name="return" theme="clear" />
+          <TextView key={subItem?.id} style={styles.listSubItem}>
+            {subItem?.name}
+          </TextView>
+          
+          {isSelected && <IconView name="checkmark" theme="clear" size={14} /> }
+        </BoxView>
+      </TouchableOpacity>
+    );
   };
 
   const renderItem = (row: any) => {
@@ -63,20 +76,7 @@ const SectorsList = () => {
               style={styles.listItemDetails}
             >
               {row?.item?.sub_sectors?.length > 0 &&
-                row?.item?.sub_sectors?.map((subItem: any) => {
-                  return (
-                    <TouchableOpacity onPress={() => toggleSelection(row.item, subItem)} >
-                      <BoxView direction="row" align="center" justify="space-around">
-                        <IconView name="return" theme="clear" />
-                        <TextView key={subItem?.id} style={styles.listSubItem}>
-                          {subItem?.name}
-                        </TextView>
-                        
-                        { isItemSelected(row?.item, subItem) && <IconView name="checkmark" theme="clear" size={14} /> }
-                      </BoxView>
-                    </TouchableOpacity>
-                  );
-                })
+                row?.item?.sub_sectors?.map((subItem: any) => renderSubItem(row?.item, subItem))
               }
             </BoxView>
           }
