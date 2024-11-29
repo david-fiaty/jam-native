@@ -16,6 +16,8 @@ const LanguageForm = () => {
   const router = useRouter();
   const data = StaticData.languages;
 
+  console.log(appState.language);
+
   const changeLanguage = (language: any) => {
     dispatch(setLanguage(language.value));
     i18next.changeLanguage(language.value);
