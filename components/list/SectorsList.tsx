@@ -42,10 +42,14 @@ const SectorsList = () => {
     }
   };
 
+  const isItemSelected = (item: any, subItem: any) => {
+    return false;
+  };
+
   const renderItem = (row: any) => {
     //let pair = [item.id, subItem.id];
     //let isSelected = selectedSectors.find((item: any) => JSON.stringify(item) === JSON.stringify(pair))
-    let isSelected = true;
+
 
     return (
       <BoxView style={styles.listItemCollapsible}>
@@ -68,7 +72,7 @@ const SectorsList = () => {
                           {subItem?.name}
                         </TextView>
                         
-                        { isSelected && <IconView name="checkmark" theme="clear" size={14} /> }
+                        { isItemSelected(row?.item, subItem) && <IconView name="checkmark" theme="clear" size={14} /> }
                       </BoxView>
                     </TouchableOpacity>
                   );
