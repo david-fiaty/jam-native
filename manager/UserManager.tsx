@@ -1,7 +1,9 @@
 import { setTokenData, setIsLoggedIn } from '@/redux/slices/UserSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Store from '@/redux/Store';
 import DataManager from './DataManager';
 import DeviceManager from './DeviceManager';
+
 
 class UserManager {
   async login(data: any) {
@@ -51,7 +53,12 @@ class UserManager {
   }
 
   getLanguage() {
-    return Store.getState().app.language || DeviceManager.getLanguage();
+    return DeviceManager.getLanguage();
+  }
+
+  async setLanguage(languageCode: string) {
+    // Todo - Implement asyncstorage language storage
+    console.log('Set language', languageCode);
   }
 
   isLoggedIn() {
