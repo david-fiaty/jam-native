@@ -7,12 +7,20 @@ import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
 import SelectListBase from '../base/SelectListBase';
 import StaticData from '@/constants/StaticData';
+import { setLanguage } from '@/redux/slices/AppSlice';
 
 const LanguageForm = () => {
   const dispatch = useDispatch();
+  const appState = useSelector((state: any) => state.app);
   const router = useRouter();
   const data = StaticData.languages;
   const [currentLanguage, setCurrentLanguage] = useState<string>('en');
+
+  const changeLanguage = (targetLanguage: any) => {
+    dispatch(setLanguage(targetLanguage.value));
+  };
+
+console.log(appState);
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
@@ -23,7 +31,7 @@ const LanguageForm = () => {
       <SelectListBase 
         data={data} 
         placeholder={i18n.t('English')} 
-        onChangeValue={((option: any) => console.log(option))}
+        onChangeValue={((option: any) => changeLanguage(option))}
       />
     </BoxView>
   );
