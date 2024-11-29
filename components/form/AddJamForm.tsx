@@ -153,20 +153,7 @@ const AddJamForm = () => {
         }
       />
 
-      {/*
-        <SectorsField
-          value={jamData?.sectors_ids}
-          onChangeListValue={(option: any) => {
-            updateField('sectors_ids', [option.value]);
-          }}
-          onChangeSublistValue={(option: any) => {
-            let sectorsIds = [...(jamData?.sectors_ids || [])];
-            sectorsIds[1] = option.value;
-            updateField('sectors_ids', sectorsIds);
-          }}
-        />
-      */}
-
+      <DividerView />
       <SectorsField
         onPressEvent={() => ScreenManager.toggleModal('SectorsList')}
       />

@@ -14,15 +14,15 @@ type ItemProps = {
 
 const data: ItemProps[] = [
   {
-    label: 'Account information',
+    label: i18n.t('Account information'),
     path: '/account',
   },
   {
-    label: 'Change password',
+    label: i18n.t('Change password'),
     path: '/password',
   },
   {
-    label: 'Language',
+    label: i18n.t('Language'),
     path: '/language',
   },
 ];
