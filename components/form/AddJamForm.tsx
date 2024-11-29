@@ -168,7 +168,7 @@ const AddJamForm = () => {
       */}
 
       <SectorsField
-        onPressEvent={() => ScreenManager.toggleModal('CollaboratorsList')}
+        onPressEvent={() => ScreenManager.toggleModal('SectorsList')}
       />
 
       <MediaPickerBase
