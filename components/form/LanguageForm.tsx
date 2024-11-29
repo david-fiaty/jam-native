@@ -14,13 +14,10 @@ const LanguageForm = () => {
   const appState = useSelector((state: any) => state.app);
   const router = useRouter();
   const data = StaticData.languages;
-  const [currentLanguage, setCurrentLanguage] = useState<string>('en');
 
   const changeLanguage = (targetLanguage: any) => {
     dispatch(setLanguage(targetLanguage.value));
   };
-
-console.log(appState);
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
