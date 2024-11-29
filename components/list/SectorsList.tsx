@@ -47,7 +47,10 @@ const SectorsList = () => {
     let isSelected = selectedSectors.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
 
     return (
-      <TouchableOpacity onPress={() => toggleSelection(item, subItem)} >
+      <TouchableOpacity 
+        key={subItem?.id}
+        onPress={() => toggleSelection(item, subItem)} 
+      >
         <BoxView direction="row" align="center" justify="space-around">
           <IconView name="return" theme="clear" />
           <TextView key={subItem?.id} style={styles.listSubItem}>
