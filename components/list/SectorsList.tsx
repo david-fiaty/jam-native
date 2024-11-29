@@ -20,7 +20,12 @@ const SectorsList = () => {
   //const dispatch = useDispatch();
   //const jamData = useSelector((state: any) => state.addJam);
   const [sectorsData, setSectorsData] = useState<any>(null);
+  const [selectedSectors, setSelectedSectors] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
+  const toggleSelection = (item: any, subItem: any) => {
+    //console.log(item, subItem);
+  };
 
   const renderItem = (row: any) => {
     //console.log(row?.item);
@@ -39,10 +44,10 @@ const SectorsList = () => {
               {row?.item?.sub_sectors?.length > 0 &&
                 row?.item?.sub_sectors?.map((subItem: any) => {
                   return (
-                    <TouchableOpacity onPress={() => console.log(subItem?.name) } >
+                    <TouchableOpacity onPress={() => toggleSelection(row.item, subItem)} >
                       <TextView 
                         key={subItem?.id}
-                        style={styles.subItem}
+                        style={styles.listSubItem}
                       >
                         {subItem?.name}
                       </TextView>
@@ -50,7 +55,6 @@ const SectorsList = () => {
                   );
                 })
               }
-              
             </BoxView>
           }
         />
@@ -99,15 +103,9 @@ const styles = StyleSheet.create({
     gap: Layout.space.base,
     width: '100%',
   },
-  listItemDetail: {
-    width: '100%',
-    gap: 0,
-    backgroundColor: Colors.secondary,
-    padding: Layout.space.base/6,
-    borderRadius: Layout.radius.round,
-  },
-  subItem: {
-    marginLeft: Layout.space.base*2,
+  listSubItem: {
+    marginLeft: Layout.space.base*1.8,
+    paddingVertical: Layout.space.base/2.2,
   },
 });
 
