@@ -25,28 +25,27 @@ const SectorsList = () => {
   const renderItem = (row: any) => (
     <BoxView style={styles.listItemCollapsible}>
       <CollapsibleView
-        label={i18n.t("View more.")}
-        openedLabel={i18n.t("View less.")}
+        label={row?.item?.name}
+        openedLabel={row?.item?.name}
         content={
           <BoxView
             direction="column"
             align="flex-start"
             style={styles.listItemDetails}
           >
-            <TextView>{row?.item?.name}</TextView>
+            <TextView>{'Subindustries'}</TextView>
           </BoxView>
         }
       />
     </BoxView>
   );
 
-  if (!sectorsData) {
+  //if (!sectorsData) {
     EntityManager.getSectors().then((data: any) => {
-      console.log(data);
-      //setSectorsData(data);
+      setSectorsData(data);
       setIsLoaded(true);
     });
-  }
+  //}
 
   if (!isLoaded) return <SpinnerView />;
 
