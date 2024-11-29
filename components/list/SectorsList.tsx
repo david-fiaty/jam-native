@@ -17,37 +17,37 @@ import InputTextField from "../field/InputTextField";
 import CollapsibleView from "../view/CollapsibleView";
 
 const SectorsList = () => {
-  const dispatch = useDispatch();
-  const jamData = useSelector((state: any) => state.addJam);
-  const [sectorsData, setSectorsData] = useState<any>([]);
+  //const dispatch = useDispatch();
+  //const jamData = useSelector((state: any) => state.addJam);
+  const [sectorsData, setSectorsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-
-  //if (!sectorsData?.length > 0) {
-    EntityManager.getSectors().then((data: any) => {
-      console.log(data);
-      setSectorsData(data);
-    });
-  //}
 
   const renderItem = (row: any) => (
     <BoxView style={styles.listItemCollapsible}>
       <CollapsibleView
-        label={i18n.t("View more.")}
-        openedLabel={i18n.t("View less.")}
+        label={row?.item?.name}
+        openedLabel={row?.item?.name}
         content={
           <BoxView
             direction="column"
             align="flex-start"
             style={styles.listItemDetails}
           >
-            <TextView>{row?.item?.name}</TextView>
+            <TextView>{'Subindustries'}</TextView>
           </BoxView>
         }
       />
     </BoxView>
   );
 
-  if (!sectorsData?.length > 0) return <SpinnerView />;
+  //if (!sectorsData) {
+    EntityManager.getSectors().then((data: any) => {
+      setSectorsData(data);
+      setIsLoaded(true);
+    });
+  //}
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView
