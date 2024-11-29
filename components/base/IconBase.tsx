@@ -46,6 +46,7 @@ const icons = {
   stack: ({iconStyle, size}: IconProps) => <Ionicons name="albums-outline" size={size} style={iconStyle} />,
   arrow: ({iconStyle, size}: IconProps) => <Ionicons name="caret-forward-outline" size={size} style={iconStyle} />,
   checkmark: ({iconStyle, size}: IconProps) => <Ionicons name="checkmark" size={size} style={iconStyle} />,
+  return: ({iconStyle, size}: IconProps) => <Ionicons name="return-down-forward-sharp" size={size} style={iconStyle} />,
 };
 
 const IconBase = ({name, size, containerStyle, iconStyle}: Props) => {

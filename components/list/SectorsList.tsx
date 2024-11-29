@@ -20,11 +20,47 @@ const SectorsList = () => {
   //const dispatch = useDispatch();
   //const jamData = useSelector((state: any) => state.addJam);
   const [sectorsData, setSectorsData] = useState<any>(null);
+  const [selectedSectors, setSelectedSectors] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const renderItem = (row: any) => {
-    //console.log(row?.item);
+  const toggleSelection = (item: any, subItem: any) => {
+    let pair = [item.id, subItem.id];
+    let found = selectedSectors.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
+    let sectorsList = [...selectedSectors];
 
+    if (!found) {
+      sectorsList.push(pair);
+      setSelectedSectors(sectorsList);
+    }
+    else {
+      let index = selectedSectors.findIndex((item: any) => JSON.stringify(item) === JSON.stringify(pair));
+      if (index !== -1) {
+        delete sectorsList[index];
+        sectorsList = sectorsList.filter((item: any) => item);
+        setSelectedSectors(sectorsList);
+      } 
+    }
+  };
+
+  const renderSubItem = (item: any, subItem: any) => {
+    let pair = [item.id, subItem.id];
+    let isSelected = selectedSectors.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
+
+    return (
+      <TouchableOpacity onPress={() => toggleSelection(item, subItem)} >
+        <BoxView direction="row" align="center" justify="space-around">
+          <IconView name="return" theme="clear" />
+          <TextView key={subItem?.id} style={styles.listSubItem}>
+            {subItem?.name}
+          </TextView>
+          
+          {isSelected && <IconView name="checkmark" theme="clear" size={14} /> }
+        </BoxView>
+      </TouchableOpacity>
+    );
+  };
+
+  const renderItem = (row: any) => {
     return (
       <BoxView style={styles.listItemCollapsible}>
         <CollapsibleView
@@ -37,20 +73,8 @@ const SectorsList = () => {
               style={styles.listItemDetails}
             >
               {row?.item?.sub_sectors?.length > 0 &&
-                row?.item?.sub_sectors?.map((subItem: any) => {
-                  return (
-                    <TouchableOpacity onPress={() => console.log(subItem?.name) } >
-                      <TextView 
-                        key={subItem?.id}
-                        style={styles.subItem}
-                      >
-                        {subItem?.name}
-                      </TextView>
-                    </TouchableOpacity>
-                  );
-                })
+                row?.item?.sub_sectors?.map((subItem: any) => renderSubItem(row?.item, subItem))
               }
-              
             </BoxView>
           }
         />
@@ -99,15 +123,9 @@ const styles = StyleSheet.create({
     gap: Layout.space.base,
     width: '100%',
   },
-  listItemDetail: {
-    width: '100%',
-    gap: 0,
-    backgroundColor: Colors.secondary,
-    padding: Layout.space.base/6,
-    borderRadius: Layout.radius.round,
-  },
-  subItem: {
-    marginLeft: Layout.space.base*2,
+  listSubItem: {
+    marginLeft: 0,
+    paddingVertical: Layout.space.base/2.2,
   },
 });
 
