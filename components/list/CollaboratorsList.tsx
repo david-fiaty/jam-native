@@ -101,7 +101,7 @@ const CollaboratorsList = () => {
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Add collaborators')}
-        onPress={() => ScreenManager.toggleModal('CollaboratorsList')}
+        onPress={() => ScreenManager.toggleModal('AddJamForm')}
       />
       
       <InputTextField 

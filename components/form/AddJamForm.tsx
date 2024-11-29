@@ -153,7 +153,7 @@ const AddJamForm = () => {
         }
       />
 
-      {
+      {/*
         <SectorsField
           value={jamData?.sectors_ids}
           onChangeListValue={(option: any) => {
@@ -165,9 +165,12 @@ const AddJamForm = () => {
             updateField('sectors_ids', sectorsIds);
           }}
         />
-      }
+      */}
 
-      <DividerView />
+      <SectorsField
+        onPressEvent={() => ScreenManager.toggleModal('CollaboratorsList')}
+      />
+
       <MediaPickerBase
         value={jamData?.upload_medias}
         label={
