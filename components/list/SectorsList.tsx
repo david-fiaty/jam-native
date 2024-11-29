@@ -36,6 +36,7 @@ const SectorsList = () => {
       let index = selectedSectors.findIndex((item: any) => JSON.stringify(item) === JSON.stringify(pair));
       if (index !== -1) {
         delete sectorsList[index];
+        sectorsList = sectorsList.filter((item: any) => item);
         setSelectedSectors(sectorsList);
       } 
 
