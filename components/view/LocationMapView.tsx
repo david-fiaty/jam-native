@@ -26,8 +26,8 @@ const LocationMapView = ({ style, children }: BaseProps) => {
       let deviceLocation: any = await DeviceManager.getLocation();
       if (deviceLocation && !selectedLocation) {
         let coords: any = {
-          latitude: currentLocation?.coords?.latitude,
-          longitude: currentLocation?.coords?.longitude,
+          latitude: deviceLocation?.coords?.latitude,
+          longitude: deviceLocation?.coords?.longitude,
         };
         
         setCurrentLocation(coords);
@@ -40,7 +40,7 @@ const LocationMapView = ({ style, children }: BaseProps) => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(selectedLocation);
+  console.log(currentLocation);
   
   return (
     <BoxView 
