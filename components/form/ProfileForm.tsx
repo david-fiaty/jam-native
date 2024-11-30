@@ -130,6 +130,20 @@ const ProfileForm = () => {
         longitude={profileData?.geolocation_longitude}
       />
 
+      <InputTextField
+        placeholder={i18n.t('Region')}
+        value={profileData?.region}
+        onChangeText={(value: string) => updateField('region', value)}
+      />
+
+
+      <InputTextField
+        placeholder={i18n.t('City')}
+        value={profileData?.town_or_locality}
+        onChangeText={(value: string) => updateField('city', value)}
+      />
+
+
       <CountryField value={profileData?.country} />
 
       <DividerView theme="secondary" />
