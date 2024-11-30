@@ -59,8 +59,11 @@ class UserManager {
     }
   }
 
-  getLanguage() {
-    return DeviceManager.getLanguage();
+  async getLanguage() {
+    let storedLanguage = await AsyncStorage.getItem('userLanguage');
+    let deviceLanguage = DeviceManager.getLanguage();
+
+    return storedLanguage || deviceLanguage;
   }
 
   isLoggedIn() {
