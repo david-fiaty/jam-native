@@ -160,6 +160,7 @@ const AddJamForm = () => {
       />
 
       <MediaPickerBase
+        preview={true}
         value={jamData?.upload_medias}
         label={
           <BoxView direction="row" align="center">
