@@ -14,7 +14,7 @@ const Store = configureStore({
     user: UserReducer,
     message: MessageReducer,
     app: AppReducer,
-    addJam: JamFormReducer, 
+    jamForm: JamFormReducer, 
     profileForm: ProfileFormReducer,
   },
   middleware: getDefaultMiddleware =>
