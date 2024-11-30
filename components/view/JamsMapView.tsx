@@ -3,6 +3,7 @@ import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { Marker } from "react-native-maps";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
+import { Colors } from "@/constants/Colors";
 import RNMapView from "react-native-maps";
 import SpinnerView from "./SpinnerView";
 import DeviceManager from "@/manager/DeviceManager";
@@ -10,7 +11,7 @@ import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
 
 const JamsMapView = ({ style, children }: BaseProps) => {
-  const [deviceLocation, setDeviceLocation] = useState(null);
+  const [currentLocation, setCurrentLocation] = useState(null);
   const [jamsData, setJamsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
@@ -33,12 +34,23 @@ const JamsMapView = ({ style, children }: BaseProps) => {
     });
   }
 
+  DeviceManager.getLocation().then((data: any) => {
+    setCurrentLocation(data);
+  });
+
+  /*
   useEffect(() => {
+    DeviceManager.getLocation().then((data: any) => {
+
+    });
+
     (async () => {
       let currentLocation: any = await DeviceManager.getLocation();
-      if (currentLocation) setDeviceLocation(currentLocation);
+      if (!currentLocation) {
+        setCurrentLocation(currentLocation);
     })();
   }, []);
+*/
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -55,13 +67,14 @@ const JamsMapView = ({ style, children }: BaseProps) => {
             longitudeDelta: 3,
           }}
         >
-          {deviceLocation && (
+          {currentLocation && (
             <Marker
+              pinColor={Colors.secondary}
               title={i18n.t("Your Location")}
               description={i18n.t("This is where you are currently")}
               coordinate={{
-                latitude: parseFloat(deviceLocation?.coords?.latitude),
-                longitude: parseFloat(deviceLocation?.coords?.latitude),
+                latitude: parseFloat(currentLocation?.coords?.latitude),
+                longitude: parseFloat(currentLocation?.coords?.longitude),
               }}
             />
           )}

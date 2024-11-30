@@ -25,6 +25,7 @@ import MoreJamView from "@/components/view/MoreJamView";
 import AddedJamAction from "../action/AddedJamAction";
 import CollaboratorsList from "../list/CollaboratorsList";
 import SectorsList from "../list/SectorsList";
+import LocationMapView from "../view/LocationMapView";
 
 const screenComponents: any = {
   JamsList: <JamsList />,
@@ -37,6 +38,7 @@ const screenComponents: any = {
   JammersList: <JammersList />,
   CollaboratorsList: <CollaboratorsList />,
   SectorsList: <SectorsList />,
+  LocationMapView: <LocationMapView />,
   HostsList: <HostsList />,
   SavedJamAction: <SavedJamAction />,
   LikedJamAction: <LikedJamAction />,
