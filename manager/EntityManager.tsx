@@ -15,7 +15,7 @@ class EntityManager {
     return !!response;
   }
 
-  async getProfiles(options?: any) {
+  async listProfiles(options?: any) {
     let profileId = await UserManager.getProfileId();
     let defaults = {
       profile_id: profileId,
@@ -39,7 +39,7 @@ class EntityManager {
     return await DataManager.get('listJams', {...defaults, ...options}); 
   }
 
-  async getProjects(options?: any) {
+  async listProjects(options?: any) {
     let profileId = await UserManager.getProfileId();
     let defaults = {
       profile_id: profileId,
