@@ -6,6 +6,7 @@ import BackButton from "../button/BackButton";
 import LocationPickerField from "../field/LocationPickerField";
 import SectorsField from "../field/SectorsField";
 import DividerView from "../view/DividerView";
+import TextView from "../view/TextView";
 import InputTextField from "../field/InputTextField";
 import CountryField from "../field/CountryField";
 import UserJamsList from "../list/UserJamsList";
@@ -79,7 +80,10 @@ const ProfileForm = () => {
         longitude={profileData?.geolocation_longitude} 
       />
 
-      {/* <SectorsField value={profileData?.sectors} /> */}
+      <SectorsField
+        label={<TextView>{i18n.t('Add industries')}</TextView>}
+        onPressEvent={() => ScreenManager.toggleModal('SectorsList')}
+      />
 
       <CountryField value={profileData?.country} />
 
