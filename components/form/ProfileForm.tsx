@@ -118,9 +118,7 @@ const ProfileForm = () => {
         <InputTextareaField
           placeholder={i18n.t("Description")}
           value={profileData?.profile_description}
-          onChangeText={(value: string) =>
-            updateField("profile_description", value)
-          }
+          onChangeText={(value: string) => updateField("profile_description", value)}
         />
 
         <LocationPickerField
