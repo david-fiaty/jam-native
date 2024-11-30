@@ -5,13 +5,17 @@ const AppSlice = createSlice({
   name: 'app',
   initialState: {
     isStarted: false,
+    language: 'en',
   },
   reducers: {
     setIsStarted: (state, action) => {
       state.isStarted = action.payload;
     },
+    setLanguage: (state, action) => {
+      state.language = action.payload;
+    },
   },
 });
 
-export const { setIsStarted } = AppSlice.actions;
+export const { setIsStarted, setLanguage } = AppSlice.actions;
 export default AppSlice.reducer;
