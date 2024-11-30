@@ -1,88 +1,96 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
-import { Marker } from "react-native-maps";
+import RNMapView, { Marker, MapPressEvent } from "react-native-maps";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
-import RNMapView from "react-native-maps";
+import { Colors } from "@/constants/Colors";
+import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
 import DeviceManager from "@/manager/DeviceManager";
-import EntityManager from "@/manager/EntityManager";
+import ScreenManager from "@/manager/ScreenManager";
 import i18n from "@/translation/i18n";
+import BackButton from "../button/BackButton";
+import BoxView from "./BoxView";
 
 const LocationMapView = ({ style, children }: BaseProps) => {
-  const [deviceLocation, setDeviceLocation] = useState(null);
-  const [jamsData, setJamsData] = useState<any>(null);
+  const [currentLocation, setCurrentLocation] = useState<any>(null);
+  const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const renderMarker = (item: any) => (
-    <Marker
-      key={item.id}
-      title={item?.caption?.substring(0, 20) + "..."}
-      description={item?.caption}
-      coordinate={{
-        latitude: parseFloat(item?.geolocation_latitude),
-        longitude: parseFloat(item?.geolocation_longitude),
-      }}
-    />
-  );
-
-  if (!jamsData?.length) {
-    EntityManager.listJams().then((data: any) => {
-      setJamsData(data);
-      setIsLoaded(true);
-    });
-  }
+  const onMapPress = (event: MapPressEvent) => {
+    setSelectedLocation(event.nativeEvent.coordinate);
+  };
 
   useEffect(() => {
     (async () => {
-      let currentLocation: any = await DeviceManager.getLocation();
-      if (currentLocation) setDeviceLocation(currentLocation);
+      let deviceLocation: any = await DeviceManager.getLocation();
+      if (deviceLocation && !selectedLocation) {
+        let coords: any = {
+          latitude: deviceLocation?.coords?.latitude,
+          longitude: deviceLocation?.coords?.longitude,
+        };
+        
+        setCurrentLocation(coords);
+        setSelectedLocation(coords);
+      }
+
+      setIsLoaded(true);
     })();
   }, []);
 
   if (!isLoaded) return <SpinnerView />;
-
+  
   return (
-    <TouchableWithoutFeedback>
-      <View style={[Layout.screenContent, styles.container]}>
-        <RNMapView
-          style={styles.map}
-          provider="google"
-          initialRegion={{
-            latitude: 8.6195,
-            longitude: 0.8248,
-            latitudeDelta: 3,
-            longitudeDelta: 3,
-          }}
-        >
-          {deviceLocation && (
-            <Marker
-              title={i18n.t("Your Location")}
-              description={i18n.t("This is where you are currently")}
-              coordinate={{
-                latitude: parseFloat(deviceLocation?.coords?.latitude),
-                longitude: parseFloat(deviceLocation?.coords?.latitude),
-              }}
-            />
-          )}
-
-          {jamsData?.map((item: any) => {
-            if (item?.geolocation_longitude && item?.geolocation_latitude) {
-              return renderMarker(item);
-            }
-
-            return null;
-          })}
-        </RNMapView>
-      </View>
-    </TouchableWithoutFeedback>
+    <BoxView 
+      direction="column" 
+      align="flex-start" 
+      justify="flex-start" 
+      style={[Layout.screenContent, styles.screenContent]}
+    >
+      <BackButton
+        title={i18n.t("Add location")}
+        onPress={() => ScreenManager.toggleModal("ProfileForm")}
+      />
+      <TouchableWithoutFeedback>
+        <View style={styles.container}>
+          <RNMapView
+            style={styles.map}
+            provider="google"
+            initialRegion={{
+              latitude: currentLocation?.latitude || Config.defaultLocation.latitude,
+              longitude: currentLocation?.longitude || Config.defaultLocation.longitude,
+              latitudeDelta: 2,
+              longitudeDelta: 2,
+            }}
+            onPress={onMapPress}
+          >
+            {selectedLocation && (
+              <Marker
+                pinColor={Colors.secondary}
+                title={i18n.t("Your Location")}
+                description={i18n.t("This is where you are currently")}
+                coordinate={{
+                  latitude: parseFloat(selectedLocation?.latitude),
+                  longitude: parseFloat(selectedLocation?.longitude),
+                }}
+              />
+            )}
+          </RNMapView>
+        </View>
+      </TouchableWithoutFeedback>
+    </BoxView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  screenContent: {
     padding: 0,
-    paddingTop: Layout.space.base * 2,
+    paddingTop: Layout.space.base*1.5,
+  },
+  container: {
+    width: '100%',
+    height: '100%',
+    flexGrow: 1,
   },
   map: {
     flex: 1,

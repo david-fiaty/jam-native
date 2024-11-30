@@ -2,6 +2,7 @@ import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
 import { Layout } from '@/constants/Layout';
 import { Config } from '@/constants/Config';
+import { Colors } from '@/constants/Colors';
 import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 import ImageView from '../view/ImageView';
@@ -56,8 +57,6 @@ const UserJamsList = ({data} : Props) => {
           renderItem={(row: any) => renderItem(row)}   
         />
       }
-
-      {!userJams?.length && <TextView>{i18n.t('Create a new Jam')}</TextView> } 
     </View>
   );
 }
@@ -78,6 +77,12 @@ const styles = StyleSheet.create({
     borderRadius: Layout.space.base,
     width: 96.7,
     height: 96.7,
+  },
+  linkText: {
+    borderBottomWidth: Layout.borderWidth.base,
+    borderBottomColor: Colors.primary,
+    marginBottom: Layout.space.base,
+    paddingBottom: Layout.space.base/2,
   },
 });
 

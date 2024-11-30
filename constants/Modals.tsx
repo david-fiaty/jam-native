@@ -56,6 +56,14 @@ export const Modals = [
     entityId: 0,
   },
   {
+    name: 'LocationMapView', 
+    effect: 'slide',
+    active: false,
+    headerNavigation: true,
+    footerNavigation: true,
+    entityId: 0,
+  },
+  {
     name: 'JammersList', 
     effect: 'slide',
     active: false,

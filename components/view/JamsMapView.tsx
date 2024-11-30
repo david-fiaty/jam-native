@@ -3,6 +3,8 @@ import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { Marker } from "react-native-maps";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
+import { Colors } from "@/constants/Colors";
+import { Config } from "@/constants/Config";
 import RNMapView from "react-native-maps";
 import SpinnerView from "./SpinnerView";
 import DeviceManager from "@/manager/DeviceManager";
@@ -10,7 +12,7 @@ import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
 
 const JamsMapView = ({ style, children }: BaseProps) => {
-  const [deviceLocation, setDeviceLocation] = useState(null);
+  const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [jamsData, setJamsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
@@ -33,12 +35,9 @@ const JamsMapView = ({ style, children }: BaseProps) => {
     });
   }
 
-  useEffect(() => {
-    (async () => {
-      let currentLocation: any = await DeviceManager.getLocation();
-      if (currentLocation) setDeviceLocation(currentLocation);
-    })();
-  }, []);
+  DeviceManager.getLocation().then((data: any) => {
+    setCurrentLocation(data);
+  });
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -49,19 +48,20 @@ const JamsMapView = ({ style, children }: BaseProps) => {
           style={styles.map}
           provider="google"
           initialRegion={{
-            latitude: 8.6195,
-            longitude: 0.8248,
-            latitudeDelta: 3,
-            longitudeDelta: 3,
+            latitude: currentLocation?.coords?.latitude || Config.defaultLocation.latitude,
+            longitude: currentLocation?.coords?.longitude || Config.defaultLocation.longitude,
+            latitudeDelta: 2,
+            longitudeDelta: 2,
           }}
         >
-          {deviceLocation && (
+          {currentLocation && (
             <Marker
+              pinColor={Colors.secondary}
               title={i18n.t("Your Location")}
               description={i18n.t("This is where you are currently")}
               coordinate={{
-                latitude: parseFloat(deviceLocation?.coords?.latitude),
-                longitude: parseFloat(deviceLocation?.coords?.latitude),
+                latitude: parseFloat(currentLocation?.coords?.latitude),
+                longitude: parseFloat(currentLocation?.coords?.longitude),
               }}
             />
           )}

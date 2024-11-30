@@ -10,7 +10,7 @@ type Props = BaseProps & {
 };
 
 const SectorsField = ({label, onPressEvent}: Props) => {
-  const jamData = useSelector((state: any) => state.addJam);
+  const jamData = useSelector((state: any) => state.jamForm);
 
   return (
     <BoxView
