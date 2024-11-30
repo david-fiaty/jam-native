@@ -60,7 +60,7 @@ const ProfileForm = () => {
             align="center"
             style={styles.profileImageContainer}
           >
-            {profileData?.profile_picture?.url?.length && (
+            {!profileData?.profile_picture?.url?.length && (
               <BoxView direction="row" align="center" justify="space-between">
                 <IconView
                   name="user"
@@ -69,13 +69,13 @@ const ProfileForm = () => {
                   radius="circle"
                 />
                 <TextView>
-                  {i18n.t("Change your Jammer user profile image.")}
+                  {i18n.t("Add a profile image.")}
                 </TextView>
                 <IconView name="next" theme="clear" size={60} />
               </BoxView>
             )}
 
-            {!profileData?.profile_picture?.url?.length && (
+            {profileData?.profile_picture?.url?.length > 0 && (
               <BoxView
                 direction="row"
                 align="center"
@@ -89,7 +89,7 @@ const ProfileForm = () => {
                   resizeMode="cover"
                 />
                 <TextView>
-                  {i18n.t("Upload your Jammer user profile image.")}
+                  {i18n.t("Change your profile image.")}
                 </TextView>
                 <IconView name="next" theme="clear" size={60} />
               </BoxView>
