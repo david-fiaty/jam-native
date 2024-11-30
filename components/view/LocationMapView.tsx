@@ -9,39 +9,28 @@ import DeviceManager from "@/manager/DeviceManager";
 import i18n from "@/translation/i18n";
 
 const LocationMapView = ({ style, children }: BaseProps) => {
-  const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-
-  const renderMarker = (item: any) => (
-    <Marker
-      key={item.id}
-      title={item?.caption?.substring(0, 20) + "..."}
-      description={item?.caption}
-      coordinate={{
-        latitude: parseFloat(item?.geolocation_latitude),
-        longitude: parseFloat(item?.geolocation_longitude),
-      }}
-    />
-  );
 
   const onMapPress = (event: MapPressEvent) => {
     setSelectedLocation(event.nativeEvent.coordinate);
   };
 
-
   useEffect(() => {
     (async () => {
       let currentLocation: any = await DeviceManager.getLocation();
-      if (currentLocation) setCurrentLocation(currentLocation);
+      if (currentLocation && !selectedLocation) {
+        setSelectedLocation({
+          latitude: currentLocation?.coords?.latitude,
+          longitude: currentLocation?.coords?.longitude,
+        })
+      }
 
       setIsLoaded(true);
     })();
   }, []);
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(selectedLocation);
 
   return (
     <TouchableWithoutFeedback>
