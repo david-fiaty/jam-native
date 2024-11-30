@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Layout } from "@/constants/Layout";
-import { Config } from "@/constants/Config";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
@@ -18,9 +17,7 @@ import SpinnerView from "../view/SpinnerView";
 import InputTextareaField from "../field/InputTextareaField";
 import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
-import MediaPickerBase from "../base/MediaPickerBase";
-import ImageView from "../view/ImageView";
-import IconView from "../view/IconView";
+import ProfileImageField from "../field/ProfileImageField";
 
 const ProfileForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -53,48 +50,8 @@ const ProfileForm = () => {
       />
 
       <View style={styles.formContainer}>
-        <MediaPickerBase
-          label={
-            <BoxView
-              direction="row"
-              align="center"
-              style={styles.profileImageContainer}
-            >
-              {!profileData?.profile_picture?.url?.length && (
-                <BoxView direction="row" align="center" justify="space-between">
-                  <IconView
-                    name="user"
-                    theme="primary"
-                    size={60}
-                    radius="circle"
-                  />
-                  <TextView>{i18n.t("Add a profile image.")}</TextView>
-                  <IconView name="next" theme="clear" size={60} />
-                </BoxView>
-              )}
-
-              {profileData?.profile_picture?.url?.length > 0 && (
-                <BoxView
-                  direction="row"
-                  align="center"
-                  justify="space-between"
-                  style={styles.profileImageContainer}
-                >
-                  <ImageView
-                    uri={Config.imageUrl + profileData?.profile_picture?.url}
-                    width={96.7}
-                    height={96.7}
-                    resizeMode="cover"
-                  />
-                  <TextView>{i18n.t("Change your profile image.")}</TextView>
-                </BoxView>
-              )}
-              <View>
-                <IconView name="next" theme="clear" size={20} />
-              </View>
-            </BoxView>
-          }
-        />
+        <ProfileImageField />
+        <DividerView theme="secondary" />
 
         <InputTextField
           placeholder={i18n.t("Email address")}
