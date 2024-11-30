@@ -112,15 +112,11 @@ const ProfileForm = () => {
         onChangeText={(value: string) => updateField("profile_name", value)}
       />
 
-      <InputTextField
-        placeholder={i18n.t("Phone number")}
-        value={profileData?.phone_number}
-        onChangeText={(value: string) => updateField("phone_number", value)}
-      />
-
       <ProfileTypeField
         value={profileData?.profile_type}
-        onChangeValue={(option: any) => updateField("profile_type", option.value)}
+        onChangeValue={(option: any) =>
+          updateField("profile_type", option.value)
+        }
       />
 
       <InputTextareaField
@@ -160,6 +156,38 @@ const ProfileForm = () => {
       <SectorsField
         label={<TextView>{i18n.t("Industries")}</TextView>}
         onPressEvent={() => ScreenManager.toggleModal("SectorsList")}
+      />
+
+      <DividerView theme="secondary" />
+
+      <InputTextField
+        placeholder={i18n.t("Phone number")}
+        value={profileData?.phone_number}
+        onChangeText={(value: string) => updateField("phone_number", value)}
+      />
+
+      <InputTextField
+        placeholder={i18n.t("Whatsapp number")}
+        value={profileData?.whatsapp_number}
+        onChangeText={(value: string) => updateField("whatsapp_number", value)}
+      />
+
+      <InputTextField
+        placeholder={i18n.t("Website link")}
+        value={profileData?.website_link}
+        onChangeText={(value: string) => updateField("website_link", value)}
+      />
+
+      <InputTextField
+        placeholder={i18n.t("Instagram ID")}
+        value={profileData?.instagram_id}
+        onChangeText={(value: string) => updateField("instagram_id", value)}
+      />
+
+      <InputTextField
+        placeholder={i18n.t("Facebook ID")}
+        value={profileData?.linkedin_id}
+        onChangeText={(value: string) => updateField("linkedin_id", value)}
       />
 
       <DividerView theme="secondary" />

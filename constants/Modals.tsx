@@ -8,7 +8,7 @@ export const Modals = [
     entityId: 0,
   },
   {
-    name: 'MapView', 
+    name: 'JamsMapView', 
     effect: 'fade',
     active: false,
     headerNavigation: true,

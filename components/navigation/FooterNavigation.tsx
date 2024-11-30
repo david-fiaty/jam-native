@@ -17,8 +17,8 @@ const FooterNavigation = () => {
       <IconView
         name="location"
         radius="round"
-        theme={activeScreen?.name == 'MapView' ? 'secondary' : 'clear'}
-        onPress={() => ScreenManager.toggleModal('MapView')}
+        theme={activeScreen?.name == 'JamsMapView' ? 'secondary' : 'clear'}
+        onPress={() => ScreenManager.toggleModal('JamsMapView')}
       />
       <IconView
         name="plus"
