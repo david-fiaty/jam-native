@@ -10,7 +10,7 @@ type Props = BaseProps & {
 };
 
 const CollaboratorsField = ({onPressEvent}: Props) => {
-  const jamData = useSelector((state: any) => state.addJam);
+  const jamData = useSelector((state: any) => state.jamForm);
   const selectedProfiles = jamData?.collaborators_ids || [];
 
   return (
