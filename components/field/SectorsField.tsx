@@ -11,7 +11,6 @@ type Props = BaseProps & {
 
 const SectorsField = ({label, onPressEvent}: Props) => {
   const jamData = useSelector((state: any) => state.addJam);
-  const selectedProfiles = jamData?.collaborators_ids || [];
 
   return (
     <BoxView
