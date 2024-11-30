@@ -89,6 +89,7 @@ const ProfileForm = () => {
       <DividerView />
       <UserJamsList data={userData?.jams} /> 
 
+      <DividerView />
     </BoxView>
   );
 };
