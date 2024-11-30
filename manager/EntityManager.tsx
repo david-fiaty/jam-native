@@ -24,7 +24,7 @@ class EntityManager {
       nbr_items_to_return: Config.maxApiResults,
     };
 
-    return await DataManager.get('profiles', {...defaults, ...options}); 
+    return await DataManager.get('listProfiles', {...defaults, ...options}); 
   }
 
   async listJams(options?: any) {
@@ -47,7 +47,7 @@ class EntityManager {
       nbr_items_to_return: Config.maxApiResults,
     };
 
-    return await DataManager.get('projects', {...defaults, ...options}); 
+    return await DataManager.get('listProjects', {...defaults, ...options}); 
   }
 
   async getSectors() {
