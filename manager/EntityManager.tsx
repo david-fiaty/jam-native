@@ -15,7 +15,7 @@ class EntityManager {
     return !!response;
   }
 
-  async getProfiles(options?: any) {
+  async listProfiles(options?: any) {
     let profileId = await UserManager.getProfileId();
     let defaults = {
       profile_id: profileId,
@@ -24,10 +24,16 @@ class EntityManager {
       nbr_items_to_return: Config.maxApiResults,
     };
 
-    return await DataManager.get('profiles', {...defaults, ...options}); 
+    return await DataManager.get('listProfiles', {...defaults, ...options}); 
   }
 
-  async getJams(options?: any) {
+  async getProfiles(options?: any) {
+    let defaults = {};
+
+    return DataManager.get('getProfiles', {...defaults, ...options}); 
+  }
+
+  async listJams(options?: any) {
     let profileId = await UserManager.getProfileId();
     let defaults = {
       profile_id: profileId,
@@ -36,10 +42,16 @@ class EntityManager {
       nbr_items_to_return: Config.maxApiResults,
     };
 
-    return await DataManager.get('jams', {...defaults, ...options}); 
+    return await DataManager.get('listJams', {...defaults, ...options}); 
   }
 
-  async getProjects(options?: any) {
+  async getJams(options?: any) {
+    let defaults = {};
+
+    return DataManager.get('getJams', {...defaults, ...options}); 
+  }
+
+  async listProjects(options?: any) {
     let profileId = await UserManager.getProfileId();
     let defaults = {
       profile_id: profileId,
@@ -47,7 +59,13 @@ class EntityManager {
       nbr_items_to_return: Config.maxApiResults,
     };
 
-    return await DataManager.get('projects', {...defaults, ...options}); 
+    return await DataManager.get('listProjects', {...defaults, ...options}); 
+  }
+
+  async getProjects(options?: any) {
+    let defaults = {};
+
+    return DataManager.get('getProjects', {...defaults, ...options}); 
   }
 
   async getSectors() {
@@ -86,7 +104,7 @@ class EntityManager {
   }
 
   async findJam(entityId: any) {
-    return await DataManager.find('jams', 'id', entityId);
+    return await DataManager.find('listJams', 'id', entityId);
   }
 
   async saveJam(entityId: any) {

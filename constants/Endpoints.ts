@@ -1,23 +1,41 @@
 import Store from '@/redux/Store';
 
 const Endpoints = {
-  jams: {
+  listJams: {
     path: '/jams/feed/',
     cacheable: true,
     searcheable: true,
     dataKey: 'new_jams_to_display', 
   },
-  projects: {
+  listProjects: {
     path: '/projects/feed/',
     cacheable: true,
     searcheable: true,
     dataKey: 'new_projects_to_display',
   },
-  profiles: {
+  listProfiles: {
     path: '/profiles/feed/',
     cacheable: true,
     searcheable: true,
     dataKey: 'new_profiles_to_display',
+  },
+  getJams: {
+    path: '/jams/',
+    cacheable: false,
+    searcheable: false,
+    dataKey: null, 
+  },
+  getProfiles: {
+    path: '/profiles/',
+    cacheable: false,
+    searcheable: false,
+    dataKey: null, 
+  },
+  getProjects: {
+    path: '/projects/',
+    cacheable: false,
+    searcheable: false,
+    dataKey: null, 
   },
   sectors: {
     path: '/sectors/',

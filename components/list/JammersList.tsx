@@ -23,7 +23,7 @@ const JammersList = () => {
   }
 
   if (!profiles) {
-    EntityManager.getProfiles().then((items: any) => {
+    EntityManager.listProfiles().then((items: any) => {
       setProfiles(items);
     });
   }

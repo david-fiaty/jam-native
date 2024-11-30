@@ -31,8 +31,8 @@ class UserManager {
 
   async getUserData() {
     let userAccount: any = await DataManager.get('currentUser');
-    let userJams: any = await DataManager.get('jams');
-    let userProjects: any = await DataManager.get('projects');
+    let userJams: any = await DataManager.get('listJams'); // Todo - Remove for better perf
+    let userProjects: any = await DataManager.get('listProjects');
 
     return {
       account: userAccount?.user,
