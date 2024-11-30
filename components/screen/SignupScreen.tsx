@@ -82,7 +82,8 @@ const SignupScreen = () => {
           onChangeText={(value: string) => updateField("password", value)}
         />
 
-        <DividerView />
+        <DividerView theme="secondary" />
+
         <InputTextField
           containerStyle={styles.inputTextFieldContainer}
           placeholder={i18n.t("Profile name")}
@@ -153,11 +154,13 @@ const SignupScreen = () => {
           }
         />
 
+        <DividerView theme="secondary" />
+
         <SectorsField
           onPressEvent={() => ScreenManager.toggleModal("SectorsList")}
         />
 
-        <DividerView />
+        <DividerView theme="secondary" />
 
         <ButtonView
           label={i18n.t("Continue")}
