@@ -1,4 +1,5 @@
 import { setTokenData, setIsLoggedIn } from '@/redux/slices/UserSlice';
+import { setLanguage } from '@/redux/slices/AppSlice';
 import Store from '@/redux/Store';
 import DataManager from './DataManager';
 import DeviceManager from './DeviceManager';
@@ -50,8 +51,8 @@ class UserManager {
     return profileId;
   }
 
-  async setLanguage(languageCode: string) {
-    // Todo - Implement language or remove
+  setLanguage(languageCode: string) {
+    Store.dispatch(setLanguage(languageCode));
   }
 
   getLanguage() {
