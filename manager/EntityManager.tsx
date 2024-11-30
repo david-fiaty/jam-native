@@ -27,6 +27,12 @@ class EntityManager {
     return await DataManager.get('listProfiles', {...defaults, ...options}); 
   }
 
+  async getProfiles(options?: any) {
+    let defaults = {};
+
+    return DataManager.get('getProfiles', {...defaults, ...options}); 
+  }
+
   async listJams(options?: any) {
     let profileId = await UserManager.getProfileId();
     let defaults = {
@@ -42,7 +48,7 @@ class EntityManager {
   async getJams(options?: any) {
     let defaults = {};
 
-    return DataManager.get('listProfiles', {...defaults, ...options}); 
+    return DataManager.get('getJams', {...defaults, ...options}); 
   }
 
   async listProjects(options?: any) {
@@ -54,6 +60,12 @@ class EntityManager {
     };
 
     return await DataManager.get('listProjects', {...defaults, ...options}); 
+  }
+
+  async getProjects(options?: any) {
+    let defaults = {};
+
+    return DataManager.get('getProjects', {...defaults, ...options}); 
   }
 
   async getSectors() {
