@@ -7,6 +7,7 @@ import RNMapView from "react-native-maps";
 import SpinnerView from "./SpinnerView";
 import DeviceManager from "@/manager/DeviceManager";
 import DataManager from "@/manager/DataManager";
+import i18n from "@/translation/i18n";
 
 const MapView = ({ style, children }: BaseProps) => {
   const [deviceLocation, setDeviceLocation] = useState(null);
@@ -28,7 +29,7 @@ const MapView = ({ style, children }: BaseProps) => {
   };
 
   if (!jamsData) {
-    DataManager.get("jams").then((data: any) => {
+    DataManager.get('jams').then((data: any) => {
       setJamsData(data);
       setIsLoaded(true);
     });
@@ -58,16 +59,16 @@ const MapView = ({ style, children }: BaseProps) => {
         >
           {deviceLocation && (
             <Marker
-              title="Your Location"
-              description="This is where you are currently."
+              title={i18n.t('Your Location')}
+              description={i18n.t('This is where you are currently')}
               coordinate={{
-                latitude: parseFloat(deviceLocation.coords.latitude),
-                longitude: parseFloat(deviceLocation.coords.latitude),
+                latitude: parseFloat(deviceLocation?.coords?.latitude),
+                longitude: parseFloat(deviceLocation?.coords?.latitude),
               }}
             />
           )}
 
-          {jamsData.map((item: any) => {
+          {jamsData?.map((item: any) => {
             if (item?.geolocation_longitude && item?.geolocation_latitude) {
               return renderMarker(item);
             }
