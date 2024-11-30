@@ -36,7 +36,7 @@ class EntityManager {
       nbr_items_to_return: Config.maxApiResults,
     };
 
-    return await DataManager.get('jams', {...defaults, ...options}); 
+    return await DataManager.get('listJams', {...defaults, ...options}); 
   }
 
   async getProjects(options?: any) {
@@ -86,7 +86,7 @@ class EntityManager {
   }
 
   async findJam(entityId: any) {
-    return await DataManager.find('jams', 'id', entityId);
+    return await DataManager.find('listJams', 'id', entityId);
   }
 
   async saveJam(entityId: any) {
