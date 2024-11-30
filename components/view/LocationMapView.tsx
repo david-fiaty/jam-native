@@ -6,30 +6,28 @@ import { Layout } from "@/constants/Layout";
 import RNMapView from "react-native-maps";
 import SpinnerView from "./SpinnerView";
 import DeviceManager from "@/manager/DeviceManager";
-import DataManager from "@/manager/DataManager";
+import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
 
-const MapView = ({ style, children }: BaseProps) => {
+const LocationMapView = ({ style, children }: BaseProps) => {
   const [deviceLocation, setDeviceLocation] = useState(null);
   const [jamsData, setJamsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const renderMarker = (item: any) => {
-    return (
-      <Marker
-        key={item.id}
-        title={item?.caption?.substring(0, 20) + "..."}
-        description={item?.caption}
-        coordinate={{
-          latitude: parseFloat(item?.geolocation_latitude),
-          longitude: parseFloat(item?.geolocation_longitude),
-        }}
-      />
-    );
-  };
+  const renderMarker = (item: any) => (
+    <Marker
+      key={item.id}
+      title={item?.caption?.substring(0, 20) + "..."}
+      description={item?.caption}
+      coordinate={{
+        latitude: parseFloat(item?.geolocation_latitude),
+        longitude: parseFloat(item?.geolocation_longitude),
+      }}
+    />
+  );
 
-  if (!jamsData) {
-    DataManager.get('jams').then((data: any) => {
+  if (!jamsData?.length) {
+    EntityManager.listJams().then((data: any) => {
       setJamsData(data);
       setIsLoaded(true);
     });
@@ -59,8 +57,8 @@ const MapView = ({ style, children }: BaseProps) => {
         >
           {deviceLocation && (
             <Marker
-              title={i18n.t('Your Location')}
-              description={i18n.t('This is where you are currently')}
+              title={i18n.t("Your Location")}
+              description={i18n.t("This is where you are currently")}
               coordinate={{
                 latitude: parseFloat(deviceLocation?.coords?.latitude),
                 longitude: parseFloat(deviceLocation?.coords?.latitude),
@@ -91,4 +89,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MapView;
+export default LocationMapView;

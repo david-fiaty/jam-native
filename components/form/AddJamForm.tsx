@@ -155,10 +155,12 @@ const AddJamForm = () => {
 
       <DividerView />
       <SectorsField
+        label={<TextView>{i18n.t('Add industries')}</TextView>}
         onPressEvent={() => ScreenManager.toggleModal('SectorsList')}
       />
 
       <MediaPickerBase
+        preview={true}
         value={jamData?.upload_medias}
         label={
           <BoxView direction="row" align="center">

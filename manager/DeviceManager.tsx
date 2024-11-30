@@ -4,7 +4,6 @@ import { useLocales } from 'expo-localization';
 import * as Location from 'expo-location';
 import * as Device from "expo-device";
 
-
 class DeviceManager {
   screen: ScaledSize;
   window: ScaledSize;
