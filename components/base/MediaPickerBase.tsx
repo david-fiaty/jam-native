@@ -12,11 +12,12 @@ import { Colors } from '@/constants/Colors';
 type Props = BaseProps & {
   label?: JSX.Element, 
   value?: any,
+  preview?: boolean
   onSelectItem?: (data: any) => void,
   onDeleteItem?: (data: any) => void,
 };
 
-const MediaPickerBase = ({label, value, onSelectItem, onDeleteItem}: Props) => {  
+const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
 
@@ -104,7 +105,7 @@ const MediaPickerBase = ({label, value, onSelectItem, onDeleteItem}: Props) => {
         <TextView>{label}</TextView>
       </TouchableOpacity>
 
-      { selectedMedia?.length > 0 &&
+      { selectedMedia?.length > 0 && preview &&
         <BoxView direction="row" align="flex-start" justify="left" style={styles.previewContainer}>
           { selectedMedia.map((data: any) => renderImagePreview(data) )}
         </BoxView>
