@@ -9,4 +9,8 @@ export const Config = {
   appNamespace: 'jam-native',
   logoImageSize: 512,
   maxApiResults: 50,
+  defaultLocation: {
+    latitude: 8.6195,
+    longitude: 0.8248,
+  },
 };
