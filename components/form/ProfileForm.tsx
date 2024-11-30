@@ -11,6 +11,7 @@ import DividerView from "../view/DividerView";
 import TextView from "../view/TextView";
 import InputTextField from "../field/InputTextField";
 import CountryField from "../field/CountryField";
+import ProfileTypeField from "../field/ProfileTypeField";
 import UserJamsList from "../list/UserJamsList";
 import UserProjectsList from "../list/UserProjectsList";
 import SpinnerView from "../view/SpinnerView";
@@ -115,6 +116,11 @@ const ProfileForm = () => {
         placeholder={i18n.t("Phone number")}
         value={profileData?.phone_number}
         onChangeText={(value: string) => updateField("phone_number", value)}
+      />
+
+      <ProfileTypeField
+        value={profileData?.profile_type}
+        onChangeValue={(option: any) => updateField("profile_type", option.value)}
       />
 
       <InputTextareaField
