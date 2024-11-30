@@ -51,33 +51,38 @@ class EntityManager {
   }
 
   async getSectors() {
-    return await DataManager.get('sectors', {
-      lang: UserManager.getLanguage(),
-    }); 
+    let language = await UserManager.getLanguage();
+    let options = { lang: language };
+
+    return await DataManager.get('sectors', options); 
   }
 
   async getProfessions() {
-    return await DataManager.get('professions', {
-      lang: UserManager.getLanguage(),
-    }); 
+    let language = await UserManager.getLanguage();
+    let options = { lang: language };
+
+    return await DataManager.get('professions', options); 
   }
 
   async getVenueTypes() {
-    return await DataManager.get('venueTypes', {
-      lang: UserManager.getLanguage(),
-    }); 
+    let language = await UserManager.getLanguage();
+    let options = { lang: language };
+
+    return await DataManager.get('venueTypes', options); 
   }
 
   async getOrganizationTypes() {
-    return await DataManager.get('organizationTypes', {
-      lang: UserManager.getLanguage(),
-    }); 
+    let language = await UserManager.getLanguage();
+    let options = { lang: language };
+
+    return await DataManager.get('organizationTypes', options); 
   }
 
   async getCulturalActivities() {
-    return await DataManager.get('culturalActivities', {
-      lang: UserManager.getLanguage(),
-    }); 
+    let language = await UserManager.getLanguage();
+    let options = { lang: language };
+
+    return await DataManager.get('culturalActivities', options); 
   }
 
   async findJam(entityId: any) {
