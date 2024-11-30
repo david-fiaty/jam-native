@@ -29,7 +29,7 @@ const CollaboratorsList = () => {
 
   const clearSearch = () => {
     setIsSearching(true);
-    EntityManager.getProfiles().then((items: any) => {
+    EntityManager.listProfiles().then((items: any) => {
       setProfiles(items);
       setIsSearching(false);
       setSearchValue('');
@@ -55,7 +55,7 @@ const CollaboratorsList = () => {
     setIsSearching(true);
     let options = searchValue.length ? { query_text: searchValue } : {};
 
-    EntityManager.getProfiles(options).then((items: any) => {
+    EntityManager.listProfiles(options).then((items: any) => {
       setIsSearching(false);
       setProfiles(items);
     });
@@ -75,7 +75,7 @@ const CollaboratorsList = () => {
   };
 
   if (!profiles) {
-    EntityManager.getProfiles().then((items: any) => {
+    EntityManager.listProfiles().then((items: any) => {
       setProfiles(items);
     });
   }
