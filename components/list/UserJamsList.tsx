@@ -6,6 +6,7 @@ import i18n from '@/translation/i18n';
 import ImageView from '../view/ImageView';
 import ScreenManager from '@/manager/ScreenManager';
 import ListView from '../view/ListView';
+import EntityManager from '@/manager/EntityManager';
 
 type Props = {
   data?: any,
@@ -13,6 +14,12 @@ type Props = {
 
 const UserJamsList = ({data} : Props) => {  
   const numColumns = 3;
+
+  if (true) {
+    EntityManager.getJams([20, 54]).then((data: any) => {
+      console.log(data);
+    });
+  }
 
   const renderItem = (row: any) => (
     <TouchableOpacity>
