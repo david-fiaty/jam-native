@@ -56,7 +56,10 @@ class UserManager {
   }
 
   getLanguage() {
-    return DeviceManager.getLanguage();
+    let userLanguage: string = Store.getState().app.language;
+    let deviceLanguage: any = DeviceManager.getLanguage();
+
+    return userLanguage || deviceLanguage;
   }
 
   isLoggedIn() {
