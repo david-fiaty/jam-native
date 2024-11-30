@@ -28,14 +28,13 @@ const ProfileForm = () => {
   const [profileData, setProfileData] = useState<any>(null);
 
   const updateField = (key: string, value: any) => {
-    setProfileData({ ...profileData, ...{ [key]: value } });
+    let data = { ...profileData, ...{ [key]: value } };
+    setProfileData(data);
   };
 
   UserManager.getUserData().then((data: any) => {
     if (!userData) setUserData(Object.assign({}, data));
-    if (!profileData)
-      setProfileData(Object.assign({}, data?.account?.profiles?.[0]));
-
+    if (!profileData) setProfileData(Object.assign({}, data?.account?.profiles?.[0]));
     setIsLoaded(true);
   });
 
@@ -119,9 +118,7 @@ const ProfileForm = () => {
         <InputTextareaField
           placeholder={i18n.t("Description")}
           value={profileData?.profile_description}
-          onChangeText={(value: string) =>
-            updateField("profile_description", value)
-          }
+          onChangeText={(value: string) => updateField("profile_description", value)}
         />
 
         <LocationPickerField
