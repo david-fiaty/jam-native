@@ -58,18 +58,6 @@ class UserManager {
       console.log(error);
     }
   }
-
-  async getLanguage() {
-    try {
-      const storedLanguage = await AsyncStorage.getItem('userLanguage');
-      const deviceLanguage = DeviceManager.getLanguage();
-  
-      return storedLanguage || deviceLanguage;
-    } catch (error) {
-      console.error('Error fetching stored language:', error);
-      return DeviceManager.getLanguage();
-    }
-  }
   
   isLoggedIn() {
     return Store.getState().user.isLoggedIn === true;
