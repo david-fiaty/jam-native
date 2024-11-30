@@ -86,10 +86,11 @@ https://docs.google.com/spreadsheets/d/1sodzaVigD26XOopcXfLRykl51wPM5pKecS0i1QED
 
 # New release:
   - Ameliorations generales UI
-  - Amelioration performance jams list
-  - Add jam form: add media, add collaborators
-  - Integration notifications feature
-  - upload profile image
+  - Amelioration gestion switch langues
+  - Amelioration upload profile image
+  - Ajout champ user location (Add jam form et profile form)
+  - Ajout user location dans Jams Map
+  
 
 # Todo 
 - Implement image cache : https://github.com/echowaves/expo-cached-image

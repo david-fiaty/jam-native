@@ -4,6 +4,7 @@ import { Marker } from "react-native-maps";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
+import { Config } from "@/constants/Config";
 import RNMapView from "react-native-maps";
 import SpinnerView from "./SpinnerView";
 import DeviceManager from "@/manager/DeviceManager";
@@ -11,7 +12,7 @@ import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
 
 const JamsMapView = ({ style, children }: BaseProps) => {
-  const [currentLocation, setCurrentLocation] = useState(null);
+  const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [jamsData, setJamsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
@@ -38,20 +39,6 @@ const JamsMapView = ({ style, children }: BaseProps) => {
     setCurrentLocation(data);
   });
 
-  /*
-  useEffect(() => {
-    DeviceManager.getLocation().then((data: any) => {
-
-    });
-
-    (async () => {
-      let currentLocation: any = await DeviceManager.getLocation();
-      if (!currentLocation) {
-        setCurrentLocation(currentLocation);
-    })();
-  }, []);
-*/
-
   if (!isLoaded) return <SpinnerView />;
 
   return (
@@ -61,10 +48,10 @@ const JamsMapView = ({ style, children }: BaseProps) => {
           style={styles.map}
           provider="google"
           initialRegion={{
-            latitude: 8.6195,
-            longitude: 0.8248,
-            latitudeDelta: 3,
-            longitudeDelta: 3,
+            latitude: currentLocation?.coords?.latitude || Config.defaultLocation.latitude,
+            longitude: currentLocation?.coords?.longitude || Config.defaultLocation.longitude,
+            latitudeDelta: 2,
+            longitudeDelta: 2,
           }}
         >
           {currentLocation && (
