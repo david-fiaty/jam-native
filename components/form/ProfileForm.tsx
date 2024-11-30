@@ -51,7 +51,8 @@ const ProfileForm = () => {
 
       <View style={styles.formContainer}>
         <ProfileImageField 
-        onChangeValue={()=> console.log('changed')}
+          path={profileData?.profile_picture?.url}
+          onChangeValue={()=> console.log('changed')}
         />
         <DividerView theme="secondary" />
 
