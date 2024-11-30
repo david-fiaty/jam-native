@@ -1,17 +1,15 @@
 import { useSelector } from 'react-redux';
 import { StyleSheet } from 'react-native';
 import { BaseProps } from "@/constants/Types";
-import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
-import TextView from "../view/TextView";
 import IconView from "../view/IconView";
-import { Layout } from '@/constants/Layout';
 
 type Props = BaseProps & {
+  label?: any,
   onPressEvent?: () => void;
 };
 
-const SectorsField = ({onPressEvent}: Props) => {
+const SectorsField = ({label, onPressEvent}: Props) => {
   const jamData = useSelector((state: any) => state.addJam);
   const selectedProfiles = jamData?.collaborators_ids || [];
 
@@ -23,7 +21,7 @@ const SectorsField = ({onPressEvent}: Props) => {
       style={styles.container}
     >
       <IconView name="plus" theme="secondary" radius="round" />
-      <TextView>{i18n.t('Add industries')}</TextView>
+      {label}      
     </BoxView>
   );
 };
