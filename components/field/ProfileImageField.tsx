@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { StyleSheet, View } from "react-native";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
@@ -17,9 +18,14 @@ type Props = BaseProps & {
 
 const ProfileImageField = ({value, storage, onChangeValue }: Props) => {
   let profileData: any = [];
-  const uri = value ? Config.imageUrl + value : '';
+  const [uri, setUri] = useState<any>('');
 
+  if (!uri && value?.length > 0) {
+    setUri(Config.imageUrl + value);
+  }
+  
   const onSelectItem = (mediaList: any) => {
+    setUri(mediaList[0]?.uri);
     if (onChangeValue) onChangeValue(mediaList);
   };
 
@@ -27,14 +33,14 @@ const ProfileImageField = ({value, storage, onChangeValue }: Props) => {
     <MediaPickerBase
       label={
         <BoxView direction="row" align="center" style={styles.container}>
-          {!value?.length && (
+          {!uri?.length && (
             <BoxView direction="row" align="center" justify="space-between">
               <IconView name="user" theme="primary" size={60} radius="circle" />
               <TextView>{i18n.t("Add a profile image.")}</TextView>
             </BoxView>
           )}
 
-          {value?.length > 0 && (
+          {uri?.length > 0 && (
             <BoxView
               direction="row"
               align="center"
