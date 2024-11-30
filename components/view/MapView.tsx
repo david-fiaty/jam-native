@@ -9,7 +9,7 @@ import DeviceManager from "@/manager/DeviceManager";
 import DataManager from "@/manager/DataManager";
 import i18n from "@/translation/i18n";
 
-const MapView = ({ style, children }: BaseProps) => {
+const JamsMap = ({ style, children }: BaseProps) => {
   const [deviceLocation, setDeviceLocation] = useState(null);
   const [jamsData, setJamsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -91,4 +91,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MapView;
+export default JamsMap;
