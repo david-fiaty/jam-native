@@ -9,7 +9,7 @@ import DeviceManager from "@/manager/DeviceManager";
 import i18n from "@/translation/i18n";
 
 const LocationMapView = ({ style, children }: BaseProps) => {
-  const [deviceLocation, setDeviceLocation] = useState<any>(null);
+  const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
@@ -26,7 +26,6 @@ const LocationMapView = ({ style, children }: BaseProps) => {
   );
 
   const onMapPress = (event: MapPressEvent) => {
-    //const { latitude, longitude } = event.nativeEvent.coordinate;
     setSelectedLocation(event.nativeEvent.coordinate);
   };
 
@@ -34,7 +33,7 @@ const LocationMapView = ({ style, children }: BaseProps) => {
   useEffect(() => {
     (async () => {
       let currentLocation: any = await DeviceManager.getLocation();
-      if (currentLocation) setDeviceLocation(currentLocation);
+      if (currentLocation) setCurrentLocation(currentLocation);
 
       setIsLoaded(true);
     })();
