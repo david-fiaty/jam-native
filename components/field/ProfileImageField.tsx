@@ -49,9 +49,10 @@ const ProfileImageField = ({value, storage, onChangeValue }: Props) => {
             >
               <ImageView
                 uri={uri}
-                width={96.7}
-                height={96.7}
+                width={80}
+                height={80}
                 resizeMode="cover"
+                style={styles.imagePreview}
               />
               <TextView>{i18n.t("Change your profile image.")}</TextView>
             </BoxView>
@@ -68,8 +69,11 @@ const ProfileImageField = ({value, storage, onChangeValue }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: Layout.space.base,
+    //paddingHorizontal: Layout.space.base,
   },
+  imagePreview: {
+    borderRadius: Layout.radius.round,
+  }
 });
 
 export default ProfileImageField;
