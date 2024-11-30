@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import i18n from "@/translation/i18n";
@@ -53,159 +53,162 @@ const ProfileForm = () => {
         onPress={() => ScreenManager.toggleModal("ProfileForm")}
       />
 
-      <MediaPickerBase
-        label={
-          <BoxView
-            direction="row"
-            align="center"
-            style={styles.profileImageContainer}
-          >
-            {!profileData?.profile_picture?.url?.length && (
-              <BoxView direction="row" align="center" justify="space-between">
-                <IconView
-                  name="user"
-                  theme="primary"
-                  size={60}
-                  radius="circle"
-                />
-                <TextView>
-                  {i18n.t("Change your Jammer user profile image.")}
-                </TextView>
-                <IconView name="next" theme="clear" size={60} />
-              </BoxView>
-            )}
+      <View style={styles.formContainer}>
+        <MediaPickerBase
+          label={
+            <BoxView
+              direction="row"
+              align="center"
+              style={styles.profileImageContainer}
+            >
+              {!profileData?.profile_picture?.url?.length && (
+                <BoxView direction="row" align="center" justify="space-between">
+                  <IconView
+                    name="user"
+                    theme="primary"
+                    size={60}
+                    radius="circle"
+                  />
+                  <TextView>{i18n.t("Add a profile image.")}</TextView>
+                  <IconView name="next" theme="clear" size={60} />
+                </BoxView>
+              )}
 
-            {profileData?.profile_picture?.url?.length > 0 && (
-              <BoxView
-                direction="row"
-                align="center"
-                justify="space-between"
-                style={styles.profileImageContainer}
-              >
-                <ImageView
-                  uri={Config.imageUrl + profileData?.profile_picture?.url}
-                  width={96.7}
-                  height={96.7}
-                  resizeMode="cover"
-                />
-                <TextView>
-                  {i18n.t("Upload your Jammer user profile image.")}
-                </TextView>
-                <IconView name="next" theme="clear" size={60} />
-              </BoxView>
-            )}
-          </BoxView>
-        }
-      />
+              {profileData?.profile_picture?.url?.length > 0 && (
+                <BoxView
+                  direction="row"
+                  align="center"
+                  justify="space-between"
+                  style={styles.profileImageContainer}
+                >
+                  <ImageView
+                    uri={Config.imageUrl + profileData?.profile_picture?.url}
+                    width={96.7}
+                    height={96.7}
+                    resizeMode="cover"
+                  />
+                  <TextView>{i18n.t("Change your profile image.")}</TextView>
+                </BoxView>
+              )}
+              <View>
+                <IconView name="next" theme="clear" size={20} />
+              </View>
+            </BoxView>
+          }
+        />
 
-      <DividerView />
+        <InputTextField
+          placeholder={i18n.t("Email address")}
+          value={profileData?.email}
+          onChangeText={(value: string) => updateField("email", value)}
+        />
 
-      <InputTextField
-        placeholder={i18n.t("Email address")}
-        value={profileData?.email}
-        onChangeText={(value: string) => updateField("email", value)}
-      />
+        <InputTextField
+          placeholder={i18n.t("Profile name")}
+          value={profileData?.profile_name}
+          onChangeText={(value: string) => updateField("profile_name", value)}
+        />
 
-      <InputTextField
-        placeholder={i18n.t("Profile name")}
-        value={profileData?.profile_name}
-        onChangeText={(value: string) => updateField("profile_name", value)}
-      />
+        <ProfileTypeField
+          value={profileData?.profile_type}
+          onChangeValue={(option: any) =>
+            updateField("profile_type", option.value)
+          }
+        />
 
-      <ProfileTypeField
-        value={profileData?.profile_type}
-        onChangeValue={(option: any) =>
-          updateField("profile_type", option.value)
-        }
-      />
+        <InputTextareaField
+          placeholder={i18n.t("Description")}
+          value={profileData?.profile_description}
+          onChangeText={(value: string) =>
+            updateField("profile_description", value)
+          }
+        />
 
-      <InputTextareaField
-        placeholder={i18n.t("Description")}
-        value={profileData?.profile_description}
-        onChangeText={(value: string) =>
-          updateField("profile_description", value)
-        }
-      />
+        <LocationPickerField
+          latitude={profileData?.geolocation_latitude}
+          longitude={profileData?.geolocation_longitude}
+        />
 
-      <LocationPickerField
-        latitude={profileData?.geolocation_latitude}
-        longitude={profileData?.geolocation_longitude}
-      />
+        <InputTextField
+          placeholder={i18n.t("Address")}
+          value={profileData?.address}
+          onChangeText={(value: string) => updateField("address", value)}
+        />
 
-      <InputTextField
-        placeholder={i18n.t("Address")}
-        value={profileData?.address}
-        onChangeText={(value: string) => updateField("address", value)}
-      />
+        <InputTextField
+          placeholder={i18n.t("City")}
+          value={profileData?.town_or_locality}
+          onChangeText={(value: string) => updateField("city", value)}
+        />
 
-      <InputTextField
-        placeholder={i18n.t("City")}
-        value={profileData?.town_or_locality}
-        onChangeText={(value: string) => updateField("city", value)}
-      />
+        <InputTextField
+          placeholder={i18n.t("Region")}
+          value={profileData?.region}
+          onChangeText={(value: string) => updateField("region", value)}
+        />
 
-      <InputTextField
-        placeholder={i18n.t("Region")}
-        value={profileData?.region}
-        onChangeText={(value: string) => updateField("region", value)}
-      />
+        <CountryField value={profileData?.country} />
 
-      <CountryField value={profileData?.country} />
+        <DividerView theme="secondary" />
+        <SectorsField
+          label={<TextView>{i18n.t("Industries")}</TextView>}
+          onPressEvent={() => ScreenManager.toggleModal("SectorsList")}
+        />
 
-      <DividerView theme="secondary" />
-      <SectorsField
-        label={<TextView>{i18n.t("Industries")}</TextView>}
-        onPressEvent={() => ScreenManager.toggleModal("SectorsList")}
-      />
+        <DividerView theme="secondary" />
 
-      <DividerView theme="secondary" />
+        <InputTextField
+          placeholder={i18n.t("Phone number")}
+          value={profileData?.phone_number}
+          onChangeText={(value: string) => updateField("phone_number", value)}
+        />
 
-      <InputTextField
-        placeholder={i18n.t("Phone number")}
-        value={profileData?.phone_number}
-        onChangeText={(value: string) => updateField("phone_number", value)}
-      />
+        <InputTextField
+          placeholder={i18n.t("Whatsapp number")}
+          value={profileData?.whatsapp_number}
+          onChangeText={(value: string) =>
+            updateField("whatsapp_number", value)
+          }
+        />
 
-      <InputTextField
-        placeholder={i18n.t("Whatsapp number")}
-        value={profileData?.whatsapp_number}
-        onChangeText={(value: string) => updateField("whatsapp_number", value)}
-      />
+        <InputTextField
+          placeholder={i18n.t("Website link")}
+          value={profileData?.website_link}
+          onChangeText={(value: string) => updateField("website_link", value)}
+        />
 
-      <InputTextField
-        placeholder={i18n.t("Website link")}
-        value={profileData?.website_link}
-        onChangeText={(value: string) => updateField("website_link", value)}
-      />
+        <InputTextField
+          placeholder={i18n.t("Instagram ID")}
+          value={profileData?.instagram_id}
+          onChangeText={(value: string) => updateField("instagram_id", value)}
+        />
 
-      <InputTextField
-        placeholder={i18n.t("Instagram ID")}
-        value={profileData?.instagram_id}
-        onChangeText={(value: string) => updateField("instagram_id", value)}
-      />
+        <InputTextField
+          placeholder={i18n.t("Facebook ID")}
+          value={profileData?.linkedin_id}
+          onChangeText={(value: string) => updateField("linkedin_id", value)}
+        />
 
-      <InputTextField
-        placeholder={i18n.t("Facebook ID")}
-        value={profileData?.linkedin_id}
-        onChangeText={(value: string) => updateField("linkedin_id", value)}
-      />
+        <DividerView theme="secondary" />
 
-      <DividerView theme="secondary" />
+        <UserProjectsList data={userData?.projects} />
 
-      <UserProjectsList data={userData?.projects} />
+        <DividerView />
+        <UserJamsList data={userData?.jams} />
 
-      <DividerView />
-      <UserJamsList data={userData?.jams} />
-
-      <DividerView />
+        <DividerView />
+      </View>
     </BoxView>
   );
 };
 
 const styles = StyleSheet.create({
+  formContainer: {
+    width: "100%",
+    gap: Layout.space.base,
+  },
   profileImageContainer: {
     paddingHorizontal: Layout.space.base,
-    width: 200,
   },
 });
 
