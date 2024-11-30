@@ -3,7 +3,7 @@ import { useRouter } from "expo-router";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Colors } from "@/constants/Colors";
-import { setJamData } from "@/redux/slices/AddJamSlice";
+import { setJamData } from "@/redux/slices/JamFormSlice";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";

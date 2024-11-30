@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
-import { setJamData } from '@/redux/slices/AddJamSlice';
+import { setJamData } from '@/redux/slices/JamFormSlice';
 import { Layout } from "@/constants/Layout";
 import { Colors } from '@/constants/Colors';
 import TextView from "../view/TextView";
