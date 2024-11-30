@@ -5,6 +5,7 @@ import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
 import IconView from "../view/IconView";
+import { Layout } from '@/constants/Layout';
 
 type Props = BaseProps & {
   onPressEvent?: () => void;
@@ -30,7 +31,6 @@ const SectorsField = ({onPressEvent}: Props) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    backgroundColor: 'red',
   },
 });
 
