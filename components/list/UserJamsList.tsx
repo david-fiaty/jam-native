@@ -1,4 +1,5 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { useState } from 'react';
 import { Layout } from '@/constants/Layout';
 import { Config } from '@/constants/Config';
 import TextView from '../view/TextView';
@@ -7,6 +8,7 @@ import ImageView from '../view/ImageView';
 import ScreenManager from '@/manager/ScreenManager';
 import ListView from '../view/ListView';
 import EntityManager from '@/manager/EntityManager';
+import SpinnerView from '../view/SpinnerView';
 
 type Props = {
   data?: any,
@@ -14,13 +16,18 @@ type Props = {
 
 const UserJamsList = ({data} : Props) => {  
   const numColumns = 3;
+  const [userJams, setUserJams] = useState<any>([]);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  if (true) {
+  if (!userJams?.length) {
     EntityManager.getJams([20, 54]).then((data: any) => {
-      console.log(data);
+      setUserJams(data);
+      setIsLoaded(true);
     });
   }
 
+  if (!isLoaded) return <SpinnerView />
+  
   const renderItem = (row: any) => (
     <TouchableOpacity>
       <View style={styles.item}>
@@ -39,9 +46,9 @@ const UserJamsList = ({data} : Props) => {
     <View style={styles.container}>
       <TextView style={styles.title}>{i18n.t('Your Jams')}</TextView>
 
-      { data?.length > 0 && 
+      { userJams?.length > 0 && 
         <ListView
-          data={data} 
+          data={userJams} 
           numColumns={numColumns}
           contentContainerStyle={{gap: Layout.space.base}}
           columnWrapperStyle={{gap: Layout.space.base}}
@@ -50,7 +57,7 @@ const UserJamsList = ({data} : Props) => {
         />
       }
 
-      {!data?.length && <TextView>{i18n.t('Create a new Jam')}</TextView> } 
+      {!userJams?.length && <TextView>{i18n.t('Create a new Jam')}</TextView> } 
     </View>
   );
 }
