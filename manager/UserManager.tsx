@@ -52,12 +52,18 @@ class UserManager {
   }
 
   async setLanguage(languageCode: string) {
-    // Todo - Implement asyncstorage language storage
-    console.log('Set language', languageCode);
+    try {
+      await AsyncStorage.setItem('userLanguage', languageCode);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  getLanguage() {
-    return DeviceManager.getLanguage();
+  async getLanguage() {
+    let storedLanguage = await AsyncStorage.getItem('userLanguage');
+    let deviceLanguage = DeviceManager.getLanguage();
+
+    return storedLanguage || deviceLanguage;
   }
 
   isLoggedIn() {

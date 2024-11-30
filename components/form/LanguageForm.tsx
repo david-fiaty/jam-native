@@ -12,7 +12,6 @@ import UserManager from '@/manager/UserManager';
 const LanguageForm = () => {
   const router = useRouter();
   const data = StaticData.languages;
-  const [currentLanguage, setCurrentLanguage] = useState('');
 
   const changeLanguage = (language: any) => {
     i18next.changeLanguage(language.value);
