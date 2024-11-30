@@ -20,6 +20,7 @@ import DividerView from '../view/DividerView';
 import SectorsField from '../field/SectorsField';
 import ProfileTypeField from '../field/ProfileTypeField';
 import CountryField from '../field/CountryField';
+import { View } from 'react-native';
 
 const SignupScreen = () => {
   const router = useRouter();
@@ -113,19 +114,12 @@ const SignupScreen = () => {
         onChangeValue={(option: any) => updateField('profile', {...signupData?.profile || {}, ...{ scope_country_code: option.value }}) } 
       />
 
-      <SectorsField 
-        value={signupData?.profile?.sectors_ids}
-        onChangeListValue={(option: any) => {
-          let sectorsIds = [option.value];
-          updateField('profile', {...signupData?.profile || {}, ...{ sectors_ids: sectorsIds }});
-        }}
-        onChangeSublistValue={(option: any) => {
-          let sectorsIds = [...signupData?.profile?.sectors_ids || []];
-          sectorsIds[1] = option.value;
-          updateField('profile', {...signupData?.profile || {}, ...{ sectors_ids: sectorsIds }});
-        }}
+      <View style={{width: '100%'}}>
+      <SectorsField
+        onPressEvent={() => ScreenManager.toggleModal('SectorsList')}
       />
-
+      </View>
+      
       <DividerView />
 
       <ButtonView 
