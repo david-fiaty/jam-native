@@ -17,7 +17,7 @@ import CollapsibleView from "../view/CollapsibleView";
 
 const SectorsList = () => {
   const dispatch = useDispatch();
-  const jamData = useSelector((state: any) => state.addJam);
+  const jamData = useSelector((state: any) => state.jamForm);
   const [sectorsData, setSectorsData] = useState<any>(null);
   const [selectedSectors, setSelectedSectors] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);

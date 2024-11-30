@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const JamFormSlice = createSlice({
-  name: 'addJam',
+  name: 'jamForm',
   initialState: {},
   reducers: {
     setJamData: (state: any, action: any) => {

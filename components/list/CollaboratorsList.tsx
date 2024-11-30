@@ -17,7 +17,7 @@ import InputTextField from '../field/InputTextField';
 
 const CollaboratorsList = () => {
   const dispatch = useDispatch();
-  const jamData = useSelector((state: any) => state.addJam);
+  const jamData = useSelector((state: any) => state.jamForm);
   const [profiles, setProfiles] = useState<any>(null);
   const [selectedProfiles, setSelectedProfiles] = useState<any>([]);
   const [searchValue, setSearchValue] = useState<string>('');

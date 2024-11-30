@@ -30,7 +30,7 @@ import CollaboratorsField from "../field/CollaboratorsField";
 
 const AddJamForm = () => {
   const dispatch = useDispatch();
-  const jamData = useSelector((state: any) => state.addJam);
+  const jamData = useSelector((state: any) => state.jamForm);
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
