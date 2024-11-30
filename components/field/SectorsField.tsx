@@ -1,5 +1,6 @@
-import { BaseProps } from "@/constants/Types";
 import { useSelector } from 'react-redux';
+import { StyleSheet } from 'react-native';
+import { BaseProps } from "@/constants/Types";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
@@ -18,11 +19,20 @@ const SectorsField = ({onPressEvent}: Props) => {
       direction="row"
       align="center"
       onPress={onPressEvent}
+      style={styles.container}
     >
       <IconView name="plus" theme="secondary" radius="round" />
       <TextView>{i18n.t('Add industries')}</TextView>
     </BoxView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    backgroundColor: 'red',
+  },
+});
+
 
 export default SectorsField;
