@@ -52,8 +52,11 @@ class UserManager {
   }
 
   async setLanguage(languageCode: string) {
-    // Todo - Implement asyncstorage language storage
-    console.log('Set language', languageCode);
+    try {
+      await AsyncStorage.setItem('userLanguage', languageCode);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   getLanguage() {
