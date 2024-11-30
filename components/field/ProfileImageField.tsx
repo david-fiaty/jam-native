@@ -68,9 +68,7 @@ const ProfileImageField = ({value, storage, onChangeValue }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    //paddingHorizontal: Layout.space.base,
-  },
+  container: {},
   imagePreview: {
     borderRadius: Layout.radius.round,
   }
