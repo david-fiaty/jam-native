@@ -35,6 +35,7 @@ const LocationMapView = ({ style, children }: BaseProps) => {
 
   if (!isLoaded) return <SpinnerView />;
 
+  console.log(selectedLocation);
   return (
     <BoxView 
       direction="column" 
