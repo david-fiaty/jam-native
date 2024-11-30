@@ -10,26 +10,31 @@ import ImageView from "../view/ImageView";
 import IconView from "../view/IconView";
 
 type Props = BaseProps & {
-  path?: any;
+  value?: any;
   storage?: any,
-  onChangeValue?: (option: any) => void;
+  onChangeValue?: (data: any) => void;
 };
 
-const ProfileImageField = ({path, storage, onChangeValue }: Props) => {
+const ProfileImageField = ({value, storage, onChangeValue }: Props) => {
   let profileData: any = [];
+  const uri = value ? Config.imageUrl + value : '';
+
+  const onSelectItem = (mediaList: any) => {
+    if (onChangeValue) onChangeValue(mediaList);
+  };
 
   return (
     <MediaPickerBase
       label={
         <BoxView direction="row" align="center" style={styles.container}>
-          {!path?.length && (
+          {!value?.length && (
             <BoxView direction="row" align="center" justify="space-between">
               <IconView name="user" theme="primary" size={60} radius="circle" />
               <TextView>{i18n.t("Add a profile image.")}</TextView>
             </BoxView>
           )}
 
-          {path?.length > 0 && (
+          {value?.length > 0 && (
             <BoxView
               direction="row"
               align="center"
@@ -37,7 +42,7 @@ const ProfileImageField = ({path, storage, onChangeValue }: Props) => {
               style={styles.container}
             >
               <ImageView
-                uri={Config.imageUrl + path}
+                uri={uri}
                 width={96.7}
                 height={96.7}
                 resizeMode="cover"
@@ -50,9 +55,7 @@ const ProfileImageField = ({path, storage, onChangeValue }: Props) => {
           </View>
         </BoxView>
       }
-      onSelectItem={(mediaList: any) => {
-        console.log(mediaList);
-      }}
+      onSelectItem={onSelectItem}
     />
   );
 };
@@ -62,4 +65,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: Layout.space.base,
   },
 });
+
 export default ProfileImageField;
