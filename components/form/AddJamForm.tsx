@@ -3,7 +3,7 @@ import { useRouter } from "expo-router";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Colors } from "@/constants/Colors";
-import { setJamData } from "@/redux/slices/AddJamSlice";
+import { setJamData } from "@/redux/slices/JamFormSlice";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
@@ -30,7 +30,7 @@ import CollaboratorsField from "../field/CollaboratorsField";
 
 const AddJamForm = () => {
   const dispatch = useDispatch();
-  const jamData = useSelector((state: any) => state.addJam);
+  const jamData = useSelector((state: any) => state.jamForm);
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);

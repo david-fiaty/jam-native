@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const AddJamSlice = createSlice({
-  name: 'addJam',
+const JamFormSlice = createSlice({
+  name: 'jamForm',
   initialState: {},
   reducers: {
     setJamData: (state: any, action: any) => {
@@ -10,5 +10,5 @@ const AddJamSlice = createSlice({
   },
 });
 
-export const { setJamData } = AddJamSlice.actions;
-export default AddJamSlice.reducer;
+export const { setJamData } = JamFormSlice.actions;
+export default JamFormSlice.reducer;

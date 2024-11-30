@@ -4,7 +4,8 @@ import SearchReducer from './slices/SearchSlice';
 import UserReducer from './slices/UserSlice';
 import MessageReducer from './slices/MessageSlice';
 import AppReducer from './slices/AppSlice';
-import AddJamReducer from './slices/AddJamSlice';
+import JamFormReducer from './slices/JamFormSlice';
+import ProfileFormReducer from './slices/ProfileFormSlice';
 
 const Store = configureStore({
   reducer: {
@@ -13,7 +14,8 @@ const Store = configureStore({
     user: UserReducer,
     message: MessageReducer,
     app: AppReducer,
-    addJam: AddJamReducer, 
+    jamForm: JamFormReducer, 
+    profileForm: ProfileFormReducer,
   },
   middleware: getDefaultMiddleware =>
     process.env.NODE_ENV === 'production' ? getDefaultMiddleware() : getDefaultMiddleware({
