@@ -4,13 +4,13 @@ import RNMapView, { Marker, MapPressEvent } from "react-native-maps";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
+import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
 import DeviceManager from "@/manager/DeviceManager";
 import ScreenManager from "@/manager/ScreenManager";
 import i18n from "@/translation/i18n";
 import BackButton from "../button/BackButton";
 import BoxView from "./BoxView";
-import { Config } from "@/constants/Config";
 
 const LocationMapView = ({ style, children }: BaseProps) => {
   const [currentLocation, setCurrentLocation] = useState<any>(null);
@@ -39,8 +39,6 @@ const LocationMapView = ({ style, children }: BaseProps) => {
   }, []);
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(currentLocation);
   
   return (
     <BoxView 
