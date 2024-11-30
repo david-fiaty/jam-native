@@ -1,17 +1,15 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
-import { Marker } from "react-native-maps";
+import RNMapView, { Marker, MapPressEvent } from 'react-native-maps';
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
-import RNMapView from "react-native-maps";
 import SpinnerView from "./SpinnerView";
 import DeviceManager from "@/manager/DeviceManager";
-import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
 
 const LocationMapView = ({ style, children }: BaseProps) => {
-  const [deviceLocation, setDeviceLocation] = useState(null);
-  const [jamsData, setJamsData] = useState<any>(null);
+  const [deviceLocation, setDeviceLocation] = useState<any>(null);
+  const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const renderMarker = (item: any) => (
@@ -26,21 +24,24 @@ const LocationMapView = ({ style, children }: BaseProps) => {
     />
   );
 
-  if (!jamsData?.length) {
-    EntityManager.listJams().then((data: any) => {
-      setJamsData(data);
-      setIsLoaded(true);
-    });
-  }
+  const onMapPress = (event: MapPressEvent) => {
+    //const { latitude, longitude } = event.nativeEvent.coordinate;
+    setSelectedLocation(event.nativeEvent.coordinate);
+  };
+
 
   useEffect(() => {
     (async () => {
       let currentLocation: any = await DeviceManager.getLocation();
       if (currentLocation) setDeviceLocation(currentLocation);
+
+      setIsLoaded(true);
     })();
   }, []);
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(selectedLocation);
 
   return (
     <TouchableWithoutFeedback>
@@ -54,25 +55,18 @@ const LocationMapView = ({ style, children }: BaseProps) => {
             latitudeDelta: 3,
             longitudeDelta: 3,
           }}
+          onPress={onMapPress}
         >
-          {deviceLocation && (
+          {selectedLocation && (
             <Marker
               title={i18n.t("Your Location")}
               description={i18n.t("This is where you are currently")}
               coordinate={{
-                latitude: parseFloat(deviceLocation?.coords?.latitude),
-                longitude: parseFloat(deviceLocation?.coords?.latitude),
+                latitude: parseFloat(selectedLocation?.latitude),
+                longitude: parseFloat(selectedLocation?.longitude),
               }}
             />
           )}
-
-          {jamsData?.map((item: any) => {
-            if (item?.geolocation_longitude && item?.geolocation_latitude) {
-              return renderMarker(item);
-            }
-
-            return null;
-          })}
         </RNMapView>
       </View>
     </TouchableWithoutFeedback>
