@@ -10,26 +10,26 @@ import ImageView from "../view/ImageView";
 import IconView from "../view/IconView";
 
 type Props = BaseProps & {
-  value?: any;
+  path?: any;
   storage?: any,
   onChangeValue?: (option: any) => void;
 };
 
-const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
+const ProfileImageField = ({path, storage, onChangeValue }: Props) => {
   let profileData: any = [];
 
   return (
     <MediaPickerBase
       label={
         <BoxView direction="row" align="center" style={styles.container}>
-          {!profileData?.profile_picture?.url?.length && (
+          {!path?.length && (
             <BoxView direction="row" align="center" justify="space-between">
               <IconView name="user" theme="primary" size={60} radius="circle" />
               <TextView>{i18n.t("Add a profile image.")}</TextView>
             </BoxView>
           )}
 
-          {profileData?.profile_picture?.url?.length > 0 && (
+          {path?.length > 0 && (
             <BoxView
               direction="row"
               align="center"
@@ -37,7 +37,7 @@ const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
               style={styles.container}
             >
               <ImageView
-                uri={Config.imageUrl + profileData?.profile_picture?.url}
+                uri={Config.imageUrl + path}
                 width={96.7}
                 height={96.7}
                 resizeMode="cover"
