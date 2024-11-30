@@ -14,7 +14,7 @@ import ScreenManager from "@/manager/ScreenManager";
 import SettingsMenu from "@/components/menu/SettingsMenu";
 import NotificationsMenu from "@/components/menu/NotificationsMenu";
 import SearchView from "@/components/view/SearchView";
-import JamsMap from "@/components/view/MapView";
+import JamsMapView from "@/components/view/JamsMapView";
 import AddJamForm from "@/components/form/AddJamForm";
 import ProfileForm from "@/components/form/ProfileForm";
 import JammersList from "@/components/list/JammersList";
@@ -28,7 +28,7 @@ import SectorsList from "../list/SectorsList";
 
 const screenComponents: any = {
   JamsList: <JamsList />,
-  JamsMap: <JamsMap />,
+  JamsMapView: <JamsMapView />,
   AddJamForm: <AddJamForm />,
   ProfileForm: <ProfileForm />,
   SettingsMenu: <SettingsMenu />,
