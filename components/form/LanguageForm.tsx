@@ -1,5 +1,4 @@
 import { useRouter } from 'expo-router';
-import { useState } from 'react';
 import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
 import i18next from 'i18next';
