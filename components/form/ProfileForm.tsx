@@ -50,7 +50,10 @@ const ProfileForm = () => {
       />
 
       <View style={styles.formContainer}>
-        <ProfileImageField />
+        <ProfileImageField 
+          path={profileData?.profile_picture?.url}
+          onChangeValue={()=> console.log('changed')}
+        />
         <DividerView theme="secondary" />
 
         <InputTextField
