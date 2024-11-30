@@ -58,7 +58,11 @@ class UserManager {
       console.log(error);
     }
   }
-  
+
+  getLanguage() {
+    return DeviceManager.getLanguage();
+  }
+
   isLoggedIn() {
     return Store.getState().user.isLoggedIn === true;
   }
