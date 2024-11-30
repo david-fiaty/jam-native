@@ -28,9 +28,6 @@ const JamsMapView = ({ style, children }: BaseProps) => {
 
   if (!jamsData?.length) {
     EntityManager.getJams().then((data: any) => {
-
-        console.log(data);
-
       setJamsData(data);
       setIsLoaded(true);
     });
