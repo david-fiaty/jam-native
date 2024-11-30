@@ -5,7 +5,7 @@ const AppSlice = createSlice({
   name: 'app',
   initialState: {
     isStarted: false,
-    language: 'en',
+    language: Config.defaultLanguage,
   },
   reducers: {
     setIsStarted: (state, action) => {
