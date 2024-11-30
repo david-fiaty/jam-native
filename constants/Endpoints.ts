@@ -1,11 +1,17 @@
 import Store from '@/redux/Store';
 
 const Endpoints = {
-  jams: {
+  listJams: {
     path: '/jams/feed/',
     cacheable: true,
     searcheable: true,
     dataKey: 'new_jams_to_display', 
+  },
+  getJams: {
+    path: '/jams/',
+    cacheable: false,
+    searcheable: false,
+    dataKey: null, 
   },
   projects: {
     path: '/projects/feed/',
