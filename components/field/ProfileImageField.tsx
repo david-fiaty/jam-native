@@ -11,10 +11,11 @@ import IconView from "../view/IconView";
 
 type Props = BaseProps & {
   value?: any;
+  storage?: any,
   onChangeValue?: (option: any) => void;
 };
 
-const ProfileImageField = ({ value, onChangeValue }: Props) => {
+const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
   let profileData: any = [];
 
   return (
@@ -49,6 +50,9 @@ const ProfileImageField = ({ value, onChangeValue }: Props) => {
           </View>
         </BoxView>
       }
+      onSelectItem={(mediaList: any) => {
+        console.log(mediaList);
+      }}
     />
   );
 };
