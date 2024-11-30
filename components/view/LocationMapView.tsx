@@ -3,6 +3,7 @@ import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import RNMapView, { Marker, MapPressEvent } from 'react-native-maps';
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
+import { Colors } from "@/constants/Colors";
 import SpinnerView from "./SpinnerView";
 import DeviceManager from "@/manager/DeviceManager";
 import i18n from "@/translation/i18n";
@@ -59,6 +60,7 @@ const LocationMapView = ({ style, children }: BaseProps) => {
         >
           {selectedLocation && (
             <Marker
+              pinColor={Colors.secondary}
               title={i18n.t("Your Location")}
               description={i18n.t("This is where you are currently")}
               coordinate={{
