@@ -60,7 +60,7 @@ const ProfileForm = () => {
             align="center"
             style={styles.profileImageContainer}
           >
-            {!profileData?.profile_picture?.url?.length && (
+            {profileData?.profile_picture?.url?.length && (
               <BoxView direction="row" align="center" justify="space-between">
                 <IconView
                   name="user"
@@ -75,7 +75,7 @@ const ProfileForm = () => {
               </BoxView>
             )}
 
-            {profileData?.profile_picture?.url?.length > 0 && (
+            {!profileData?.profile_picture?.url?.length && (
               <BoxView
                 direction="row"
                 align="center"
