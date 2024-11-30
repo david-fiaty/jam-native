@@ -12,7 +12,7 @@ import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
 
 const JamsMapView = ({ style, children }: BaseProps) => {
-  const [currentLocation, setCurrentLocation] = useState(null);
+  const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [jamsData, setJamsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
@@ -41,8 +41,6 @@ const JamsMapView = ({ style, children }: BaseProps) => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(currentLocation);
-
   return (
     <TouchableWithoutFeedback>
       <View style={[Layout.screenContent, styles.container]}>
@@ -50,8 +48,8 @@ const JamsMapView = ({ style, children }: BaseProps) => {
           style={styles.map}
           provider="google"
           initialRegion={{
-            latitude: currentLocation?.latitude || Config.defaultLocation.latitude,
-            longitude: currentLocation?.longitude || Config.defaultLocation.longitude,
+            latitude: currentLocation?.coords?.latitude || Config.defaultLocation.latitude,
+            longitude: currentLocation?.coords?.longitude || Config.defaultLocation.longitude,
             latitudeDelta: 2,
             longitudeDelta: 2,
           }}
