@@ -10,8 +10,10 @@ import ScreenManager from "@/manager/ScreenManager";
 import i18n from "@/translation/i18n";
 import BackButton from "../button/BackButton";
 import BoxView from "./BoxView";
+import { Config } from "@/constants/Config";
 
 const LocationMapView = ({ style, children }: BaseProps) => {
+  const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
@@ -21,12 +23,15 @@ const LocationMapView = ({ style, children }: BaseProps) => {
 
   useEffect(() => {
     (async () => {
-      let currentLocation: any = await DeviceManager.getLocation();
-      if (currentLocation && !selectedLocation) {
-        setSelectedLocation({
+      let deviceLocation: any = await DeviceManager.getLocation();
+      if (deviceLocation && !selectedLocation) {
+        let coords: any = {
           latitude: currentLocation?.coords?.latitude,
           longitude: currentLocation?.coords?.longitude,
-        });
+        };
+        
+        setCurrentLocation(coords);
+        setSelectedLocation(coords);
       }
 
       setIsLoaded(true);
@@ -36,6 +41,7 @@ const LocationMapView = ({ style, children }: BaseProps) => {
   if (!isLoaded) return <SpinnerView />;
 
   console.log(selectedLocation);
+  
   return (
     <BoxView 
       direction="column" 
@@ -53,10 +59,10 @@ const LocationMapView = ({ style, children }: BaseProps) => {
             style={styles.map}
             provider="google"
             initialRegion={{
-              latitude: 8.6195,
-              longitude: 0.8248,
-              latitudeDelta: 3,
-              longitudeDelta: 3,
+              latitude: currentLocation?.latitude || Config.defaultLocation.latitude,
+              longitude: currentLocation?.longitude || Config.defaultLocation.longitude,
+              latitudeDelta: 2,
+              longitudeDelta: 2,
             }}
             onPress={onMapPress}
           >
