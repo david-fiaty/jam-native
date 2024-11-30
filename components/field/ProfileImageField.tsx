@@ -20,7 +20,9 @@ const ProfileImageField = ({value, storage, onChangeValue }: Props) => {
   let profileData: any = [];
   const [uri, setUri] = useState<any>('');
 
-  //const uri = value ? Config.imageUrl + value : '';
+  if (!uri && value?.length > 0) {
+    setUri(Config.imageUrl + value);
+  }
   
   const onSelectItem = (mediaList: any) => {
     setUri(mediaList[0]?.uri);
