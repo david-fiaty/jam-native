@@ -49,8 +49,8 @@ const ProfileImageField = ({value, storage, onChangeValue }: Props) => {
             >
               <ImageView
                 uri={uri}
-                width={80}
-                height={80}
+                width={132}
+                height={132}
                 resizeMode="cover"
                 style={styles.imagePreview}
               />
