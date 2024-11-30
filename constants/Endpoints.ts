@@ -7,23 +7,35 @@ const Endpoints = {
     searcheable: true,
     dataKey: 'new_jams_to_display', 
   },
+  listProjects: {
+    path: '/projects/feed/',
+    cacheable: true,
+    searcheable: true,
+    dataKey: 'new_projects_to_display',
+  },
+  listProfiles: {
+    path: '/profiles/feed/',
+    cacheable: true,
+    searcheable: true,
+    dataKey: 'new_profiles_to_display',
+  },
   getJams: {
     path: '/jams/',
     cacheable: false,
     searcheable: false,
     dataKey: null, 
   },
-  projects: {
-    path: '/projects/feed/',
-    cacheable: true,
-    searcheable: true,
-    dataKey: 'new_projects_to_display',
+  getProfiles: {
+    path: '/profiles/',
+    cacheable: false,
+    searcheable: false,
+    dataKey: null, 
   },
-  profiles: {
-    path: '/profiles/feed/',
-    cacheable: true,
-    searcheable: true,
-    dataKey: 'new_profiles_to_display',
+  getProjects: {
+    path: '/projects/',
+    cacheable: false,
+    searcheable: false,
+    dataKey: null, 
   },
   sectors: {
     path: '/sectors/',
