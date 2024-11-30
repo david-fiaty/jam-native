@@ -1,8 +1,7 @@
-import { TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { BaseProps } from "@/constants/Types";
 import i18n from "@/translation/i18n";
 import InputTextField from "../field/InputTextField";
-import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
 import ScreenManager from "@/manager/ScreenManager";
 
@@ -13,18 +12,23 @@ type Props = BaseProps & {
 
 const LocationPickerField = ({ latitude, longitude }: Props) => {
   return (
-    <BoxView direction="row" align="space-between">
-      <TouchableOpacity
-        onPress={() => ScreenManager.toggleModal("LocationMapView")}
-      >
-        <InputTextField
-          disabled={true}
-          placeholder={i18n.t("Location")}
-          rightIcon={<IconView name="location" theme="transparent" />}
-        />
-      </TouchableOpacity>
-    </BoxView>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => ScreenManager.toggleModal("LocationMapView")}
+    >
+      <InputTextField
+        disabled={true}
+        placeholder={i18n.t("Location")}
+        rightIcon={<IconView name="location" theme="transparent" />}
+      />
+    </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    width: "100%",
+  },
+});
 
 export default LocationPickerField;
