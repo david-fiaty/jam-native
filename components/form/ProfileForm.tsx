@@ -90,7 +90,9 @@ const ProfileForm = () => {
                   <TextView>{i18n.t("Change your profile image.")}</TextView>
                 </BoxView>
               )}
-              <IconView name="next" theme="clear" size={20} />
+              <View>
+                <IconView name="next" theme="clear" size={20} />
+              </View>
             </BoxView>
           }
         />
