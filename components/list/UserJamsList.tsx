@@ -36,7 +36,7 @@ const UserJamsList = ({ data }: Props) => {
       return (
         <View style={styles.addItem}>
           <View>
-            <IconView name="plus" theme="seondary" />
+            <IconView name="plus" theme="secondary" size={20} />
           </View>
         </View>
       );
