@@ -49,8 +49,8 @@ const ProfileImageField = ({value, storage, onChangeValue }: Props) => {
             >
               <ImageView
                 uri={uri}
-                width={80}
-                height={80}
+                width={132}
+                height={132}
                 resizeMode="cover"
                 style={styles.imagePreview}
               />
@@ -68,9 +68,7 @@ const ProfileImageField = ({value, storage, onChangeValue }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    //paddingHorizontal: Layout.space.base,
-  },
+  container: {},
   imagePreview: {
     borderRadius: Layout.radius.round,
   }
