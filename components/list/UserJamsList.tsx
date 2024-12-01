@@ -34,11 +34,13 @@ const UserJamsList = ({ data }: Props) => {
   const renderItem = (row: any) => {
     if (row?.item?.id == "addItem") {
       return (
-        <View style={styles.addItem}>
-          <View>
-            <IconView name="plus" theme="secondary" size={20} />
+        <TouchableOpacity key={row?.item?.id}>
+          <View style={styles.addItem}>
+            <View>
+              <IconView name="plus" theme="secondary" size={20} />
+            </View>
           </View>
-        </View>
+        </TouchableOpacity>
       );
     }
 
@@ -97,9 +99,9 @@ const styles = StyleSheet.create({
     borderRadius: Layout.space.base,
     width: 96.7,
     height: 96.7,
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });
 
 export default UserJamsList;
