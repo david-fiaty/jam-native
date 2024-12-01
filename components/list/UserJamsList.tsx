@@ -30,7 +30,7 @@ const UserJamsList = ({data} : Props) => {
   if (!isLoaded) return <SpinnerView />
   
   const renderItem = (row: any) => (
-    <TouchableOpacity>
+    <TouchableOpacity key={row?.item?.id}>
       <View style={styles.item}>
         <ImageView 
           uri={Config.imageUrl + row?.item?.medias?.[0]?.url} 
