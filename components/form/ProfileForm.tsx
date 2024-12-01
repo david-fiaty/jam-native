@@ -123,9 +123,7 @@ const ProfileForm = () => {
         <InputTextField
           placeholder={i18n.t("Whatsapp number")}
           value={profileData?.whatsapp_number}
-          onChangeText={(value: string) =>
-            updateField("whatsapp_number", value)
-          }
+          onChangeText={(value: string) => updateField("whatsapp_number", value)}
         />
 
         <InputTextField
