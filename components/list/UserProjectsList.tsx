@@ -16,7 +16,7 @@ const UserProjectsList = ({data}: Props) => {
   const numColumns = 4;
 
   const renderItem = (row: any) => (
-    <TouchableOpacity>
+    <TouchableOpacity key={row?.item?.id}>
       <View style={styles.item}>
         <ImageView 
           uri={Config.imageUrl + row?.item?.url} 
