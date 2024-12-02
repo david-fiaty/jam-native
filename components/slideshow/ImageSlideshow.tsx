@@ -44,7 +44,7 @@ const ImageSlideshow = ({ data }: Props) => {
 
   return (
     <NoImageView
-      imageSize={132}
+      imageSize={120}
       containerStyle={{
         width: '100%',
         height: height,
