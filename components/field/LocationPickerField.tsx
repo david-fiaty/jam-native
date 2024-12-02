@@ -11,6 +11,7 @@ type Props = BaseProps & {
 };
 
 const LocationPickerField = ({ latitude, longitude }: Props) => {
+  // Todo - Convert coordinates to address
   const value = latitude && longitude ? `${latitude},${longitude}` : '';
 
   return (
