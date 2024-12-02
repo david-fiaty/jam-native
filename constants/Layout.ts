@@ -40,8 +40,7 @@ const header = {
 };
 
 const logo = {
-  width: 48,
-  height: 48,
+  size: 48,
 };
 
 const footer = {

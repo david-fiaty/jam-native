@@ -5,13 +5,13 @@ import ImageView from './ImageView';
 
 type Props = BaseProps & {
   size: any,
-  style?: object,
+  style?: any,
 };
 
-// Todo - Move image size to config
-const path: any = require('@/assets/images/logo-512.png'); 
+const NoImageView = ({size, style}: Props) => {
+  // Todo - Move image size to config
+  const path: any =require('@/assets/images/logo-mono-1200.jpg');
 
-const LogoView = ({size, style}: Props) => {
   return (
     <ImageView 
       path={path} 
@@ -31,4 +31,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LogoView;
+export default NoImageView;
