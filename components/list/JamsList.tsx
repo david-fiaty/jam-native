@@ -234,7 +234,7 @@ const JamsList = () => {
 
       <ListView
         data={jamsData}
-        ref={jamsListRef}
+        //ref={jamsListRef}
         initialNumToRender={10}
         initialScrollIndex={5}
         contentContainerStyle={Layout.listContainer}

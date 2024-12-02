@@ -33,7 +33,7 @@ const ListView = ({
   return (
     <FlatList
       data={data || []}
-      ref={ref}
+      //ref={ref}
       numColumns={numColumns || 1}
       initialNumToRender={initialNumToRender}
       //initialScrollIndex={initialScrollIndex}
