@@ -22,17 +22,18 @@ const LocationMapView = ({ style, children }: BaseProps) => {
     setSelectedLocation(coords);
 
     // Todo - Implement reverse geocoding
+    /*
     let url = `${Config.geocodeUrl}?latlng=${coords.latitude},${coords.longitude}&key=${Config.mapApiKey}`;
 
     try {
       let response: any = await fetch(url);
       let address = response?.results;
-
       console.log(address);
     }
     catch (error) {
       console.log(error);
     }
+      */
   };
 
   useEffect(() => {
