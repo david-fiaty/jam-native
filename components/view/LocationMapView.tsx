@@ -18,7 +18,13 @@ const LocationMapView = ({ style, children }: BaseProps) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const onMapPress = (event: MapPressEvent) => {
-    setSelectedLocation(event.nativeEvent.coordinate);
+    let coords = event.nativeEvent.coordinate;
+    setSelectedLocation(coords);
+
+    console.log(coords);
+    //let url = Config.geocodeUrl + '?latlng='
+
+    //let response: any = await fetch(url)
   };
 
   useEffect(() => {
