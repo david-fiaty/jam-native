@@ -69,9 +69,9 @@ const JamsList = () => {
     </BoxView>
   );
 
-  const renderItemImages = (row: any) => (
-    <ImageSlideshow data={row?.item.medias} />
-  );
+  const renderItemImages = (row: any) => {
+    return <ImageSlideshow data={row?.item.medias} />
+  };
 
   const renderItemToolbar = (row: any) => (
     <BoxView
