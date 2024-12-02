@@ -37,12 +37,7 @@ const UserProjectsList = ({ data }: Props) => {
 
   const renderItem = (row: any) => {
     if (row?.item?.id == "addItem") {
-      return (
-        <AddItemButton
-          key={row?.item?.id}
-          onPress={() => ScreenManager.toggleModal("AddJamForm")}
-        />
-      );
+      return <AddItemButton onPress={() => ScreenManager.toggleModal("AddJamForm")} />;
     }
 
     return (
