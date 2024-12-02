@@ -11,7 +11,7 @@ type Props = BaseProps & {
 
 const NoImageView = ({size}: Props) => {
   // Todo - Move image size to config
-  const path: any = require('@/assets/images/logo-mono-1200.png');
+  const path: any = require('@/assets/images/logo-mono-512.png');
 
   return (
     <BoxView align="center" justify="center" style={styles.container}>
