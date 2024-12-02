@@ -7,7 +7,7 @@ import { Colors } from '@/constants/Colors';
 
 type Props = BaseProps & {
   imageSize: any,
-  containerStyle: any,
+  containerStyle?: any,
 };
 
 const NoImageView = ({imageSize, containerStyle}: Props) => {
