@@ -46,7 +46,10 @@ const UserJamsList = ({ data }: Props) => {
     }
 
     return (
-      <TouchableOpacity key={row?.item?.id}>
+      <TouchableOpacity 
+        key={row?.item?.id} 
+        onPress={() => ScreenManager.toggleModal('JamsList')}
+      >
         <View style={styles.item}>{renderItemImage(row?.item?.medias?.[0]?.url)}</View>
       </TouchableOpacity>
     );
