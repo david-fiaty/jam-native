@@ -11,13 +11,16 @@ type Props = BaseProps & {
 };
 
 const LocationPickerField = ({ latitude, longitude }: Props) => {
+  const value = latitude && longitude ? `${latitude},${longitude}` : '';
+
   return (
     <TouchableOpacity
       style={styles.container}
       onPress={() => ScreenManager.toggleModal("LocationMapView")}
     >
       <InputTextField
-        disabled={true}
+        value={value}
+        readOnly={true}
         placeholder={i18n.t("Location")}
         rightIcon={<IconView name="location" theme="transparent" />}
       />
