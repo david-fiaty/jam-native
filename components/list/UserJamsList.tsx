@@ -22,7 +22,7 @@ const UserJamsList = ({ data }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const renderItemImage = (url: any) => {
-    if (!url) return <NoImageView size={96.7} />;
+    if (!url) return <NoImageView size={38} />;
 
     return (
       <ImageView

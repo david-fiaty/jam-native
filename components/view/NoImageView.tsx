@@ -1,33 +1,39 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import { BaseProps } from '@/constants/Types';
 import ImageView from './ImageView';
+import BoxView from './BoxView';
+import { Colors } from '@/constants/Colors';
 
 type Props = BaseProps & {
   size: any,
-  style?: any,
 };
 
-const NoImageView = ({size, style}: Props) => {
+const NoImageView = ({size}: Props) => {
   // Todo - Move image size to config
-  const path: any =require('@/assets/images/logo-mono-1200.jpg');
+  const path: any = require('@/assets/images/logo-mono-1200.png');
 
   return (
-    <ImageView 
-      path={path} 
-      width={size} 
-      height={size} 
-      style={style}
-    />   
+    <BoxView align="center" justify="center" style={styles.container}>
+      <ImageView 
+        path={path} 
+        width={size} 
+        height={size} 
+        style={styles.image}
+      />   
+    </BoxView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: Layout.space.base,
+    backgroundColor: Colors.secondary,
+    borderRadius: Layout.radius.round,
+    width: 96.7,
+    height: 96.7,
+  },
+  image: {
+    opacity: 0.5,
   },
 });
 
