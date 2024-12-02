@@ -5,6 +5,7 @@ import DeviceManager from '@/manager/DeviceManager';
 type Props = BaseProps & {
   data: object,
   ref?: object,
+  initialNumToRender?: number,
   numColumns?: number,
   scrollEnabled?: boolean,
   horizontal?: boolean,
@@ -14,17 +15,17 @@ type Props = BaseProps & {
   renderItem: object, 
 };
 
-const ListView = ({data, ref, numColumns, scrollEnabled, horizontal, contentContainerStyle, columnWrapperStyle, keyExtractor, renderItem, style}: Props) => {
+const ListView = ({data, ref, initialNumToRender, numColumns, scrollEnabled, horizontal, contentContainerStyle, columnWrapperStyle, keyExtractor, renderItem, style}: Props) => {
   return (
     <FlatList 
       data={data || []} 
       ref={ref} 
       numColumns={numColumns || 1}
+      initialNumToRender={initialNumToRender}
       scrollEnabled={scrollEnabled === false ? false : true}
       horizontal={horizontal === true ? horizontal : false}  
       contentContainerStyle={[styles.container, contentContainerStyle]}
       columnWrapperStyle={columnWrapperStyle}
-      initialNumToRender={10}
       maxToRenderPerBatch={5}
       removeClippedSubviews={true}
       windowSize={5}
