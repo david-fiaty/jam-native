@@ -1,4 +1,5 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
@@ -18,6 +19,7 @@ type Props = {
 
 const UserJamsList = ({ data }: Props) => {
   const numColumns = 3;
+  const router = useRouter();
   const [userJams, setUserJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
@@ -46,7 +48,10 @@ const UserJamsList = ({ data }: Props) => {
     }
 
     return (
-      <TouchableOpacity key={row?.item?.id}>
+      <TouchableOpacity 
+        key={row?.item?.id} 
+        onPress={() => router.push('/jams')}
+      >
         <View style={styles.item}>{renderItemImage(row?.item?.medias?.[0]?.url)}</View>
       </TouchableOpacity>
     );
