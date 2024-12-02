@@ -20,13 +20,15 @@ const LocationMapView = ({ style, children }: BaseProps) => {
   const onMapPress = async (event: MapPressEvent) => {
     let coords = event.nativeEvent.coordinate;
     setSelectedLocation(coords);
+
+    // Todo - Implement reverse geocoding
     let url = `${Config.geocodeUrl}?latlng=${coords.latitude},${coords.longitude}&key=${Config.mapApiKey}`;
 
     try {
-    let response: any = await fetch(url);
-    let address = response?.results;
+      let response: any = await fetch(url);
+      let address = response?.results;
 
-    console.log(address);
+      console.log(address);
     }
     catch (error) {
       console.log(error);
