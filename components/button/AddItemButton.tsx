@@ -6,13 +6,12 @@ import TextView from "../view/TextView";
 import IconView from "../view/IconView";
 
 type Props = {
-  key?: any,
   onPress?: () => void;
 };
 
-const AddItemButton = ({ key, onPress }: Props) => {
+const AddItemButton = ({ onPress }: Props) => {
   return (
-    <TouchableOpacity key={key} onPress={onPress}>
+    <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
         <View>
           <IconView name="plus" theme="secondary" size={16} />
