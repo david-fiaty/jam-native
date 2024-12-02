@@ -16,7 +16,6 @@ import ImageSlideshow from "../slideshow/ImageSlideshow";
 import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from "@/manager/EntityManager";
-import NoImageView from "../view/NoImageView";
 
 const JamsList = () => {
   const router = useRouter();
@@ -71,12 +70,7 @@ const JamsList = () => {
   );
 
   const renderItemImages = (row: any) => {
-    if (row?.item.medias?.length > 0) {
-      return <ImageSlideshow data={row?.item.medias} />
-    }
-    else {
-      return <NoImageView imageSize={200} containerStyle={{width: 200, height: 200}}/>;
-    }
+    return <ImageSlideshow data={row?.item.medias} />
   };
 
   const renderItemToolbar = (row: any) => (
