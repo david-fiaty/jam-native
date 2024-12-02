@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { useState, useEffect, useRef } from "react";
+import { StyleSheet, View, TouchableOpacity, FlatList } from "react-native";
 import { useRouter } from "expo-router";
 import moment from "moment";
 import { Colors } from "@/constants/Colors";
@@ -19,9 +19,18 @@ import EntityManager from "@/manager/EntityManager";
 
 const JamsList = () => {
   const router = useRouter();
+  const jamsListRef = useRef<FlatList>(null);
   const [jamsData, setJamsData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const isLoggedIn = UserManager.isLoggedIn();
+
+  const scrollToIndex = (index: number) => {
+    try {
+      jamsListRef.current?.scrollToIndex({ index, animated: false });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const renderItemHeader = (row: any) => (
     <BoxView
@@ -32,10 +41,14 @@ const JamsList = () => {
     >
       <BoxView>
         <TouchableOpacity
-          onPress={() => isLoggedIn ? ScreenManager.toggleModal('HostsList', row?.item?.id) : router.push('/login')}
+          onPress={() =>
+            isLoggedIn
+              ? ScreenManager.toggleModal("HostsList", row?.item?.id)
+              : router.push("/login")
+          }
         >
           <TextView>
-            @{i18n.t('host')} +{parseInt(row?.item?.collaborators?.length)}
+            @{i18n.t("host")} +{parseInt(row?.item?.collaborators?.length)}
           </TextView>
         </TouchableOpacity>
       </BoxView>
@@ -46,7 +59,11 @@ const JamsList = () => {
         <IconView
           name="actions"
           theme="clear"
-          onPress={() => isLoggedIn ? ScreenManager.toggleModal('MoreJamView', row?.item?.id) : router.push('/login')}
+          onPress={() =>
+            isLoggedIn
+              ? ScreenManager.toggleModal("MoreJamView", row?.item?.id)
+              : router.push("/login")
+          }
         />
       </BoxView>
     </BoxView>
@@ -67,11 +84,15 @@ const JamsList = () => {
       <BoxView
         direction="row"
         align="center"
-        onPress={() => isLoggedIn ? ScreenManager.toggleModal('JammersList', row?.item?.id) : router.push('/login')}
+        onPress={() =>
+          isLoggedIn
+            ? ScreenManager.toggleModal("JammersList", row?.item?.id)
+            : router.push("/login")
+        }
       >
         <IconView name="users" theme="tertiary" />
         <TextView>
-          {parseInt(row?.item?.jammers?.length)} {i18n.t('jammers')}
+          {parseInt(row?.item?.jammers?.length)} {i18n.t("jammers")}
         </TextView>
       </BoxView>
 
@@ -80,7 +101,11 @@ const JamsList = () => {
         <IconView
           name="save"
           theme="tertiary"
-          onPress={() => isLoggedIn ? ScreenManager.toggleModal('SavedJamAction', row?.item?.id) : router.push('/login')}
+          onPress={() =>
+            isLoggedIn
+              ? ScreenManager.toggleModal("SavedJamAction", row?.item?.id)
+              : router.push("/login")
+          }
         />
 
         {/* Share button */}
@@ -90,7 +115,7 @@ const JamsList = () => {
           onPress={() =>
             isLoggedIn
               ? EntityManager.shareJam(row?.item?.id)
-              : router.push('/login')
+              : router.push("/login")
           }
         />
       </BoxView>
@@ -106,8 +131,8 @@ const JamsList = () => {
   const renderItemCollapsible = (row: any) => (
     <BoxView style={styles.listItemCollapsible}>
       <CollapsibleView
-        label={<TextView>{i18n.t('View more.')}</TextView>}
-        openedLabel={<TextView>{i18n.t('View less.')}</TextView>}
+        label={<TextView>{i18n.t("View more.")}</TextView>}
+        openedLabel={<TextView>{i18n.t("View less.")}</TextView>}
         content={
           <BoxView
             direction="column"
@@ -122,7 +147,7 @@ const JamsList = () => {
             >
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
-                {i18n.t('Location')}: {row?.item?.location_type}
+                {i18n.t("Location")}: {row?.item?.location_type}
               </TextView>
             </BoxView>
             <BoxView
@@ -133,7 +158,10 @@ const JamsList = () => {
             >
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
-                {i18n.t('Start')}:{' '}{moment(row?.item?.period?.start_datetime).format('MMM Do YYYY')}
+                {i18n.t("Start")}:{" "}
+                {moment(row?.item?.period?.start_datetime).format(
+                  "MMM Do YYYY"
+                )}
               </TextView>
             </BoxView>
             <BoxView
@@ -144,7 +172,8 @@ const JamsList = () => {
             >
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
-              {i18n.t('End')}:{' '}{moment(row?.item?.period?.end_datetime).format('MMM Do YYYY')}
+                {i18n.t("End")}:{" "}
+                {moment(row?.item?.period?.end_datetime).format("MMM Do YYYY")}
               </TextView>
             </BoxView>
             <BoxView
@@ -155,7 +184,7 @@ const JamsList = () => {
             >
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
-                {i18n.t('Industry')}: {row?.item?.sectors?.[0]?.name}
+                {i18n.t("Industry")}: {row?.item?.sectors?.[0]?.name}
               </TextView>
             </BoxView>
             <BoxView
@@ -166,7 +195,7 @@ const JamsList = () => {
             >
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
-                {i18n.t('Sector')}: {row?.item?.sectors?.[0]?.name}
+                {i18n.t("Sector")}: {row?.item?.sectors?.[0]?.name}
               </TextView>
             </BoxView>
           </BoxView>
@@ -196,10 +225,21 @@ const JamsList = () => {
 
   return (
     <BoxView direction="column" style={Layout.screenContent}>
+      {/*
+        Todo - Remove this test
+        <TouchableOpacity onPress={() => scrollToIndex(5)}>
+          <TextView>Go to Item </TextView>
+        </TouchableOpacity>
+      */}
+
       <ListView
         data={jamsData}
+        ref={jamsListRef}
+        initialNumToRender={10}
+        initialScrollIndex={5}
         contentContainerStyle={Layout.listContainer}
         renderItem={(row: any) => renderItem(row)}
+        keyExtractor={(item: any, index: number) => index.toString()}
       />
     </BoxView>
   );
