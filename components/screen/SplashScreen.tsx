@@ -10,7 +10,7 @@ const SplashScreen = () => {
     <ThemeProvider theme={BaseTheme}>
       <ScreenView>
         <BoxView direction="column" align="center" justify="center" style={styles.container}>
-          <LogoView size={{ width: 110, height: 110 }} />    
+          <LogoView size={110} />    
         </BoxView> 
       </ScreenView>
     </ThemeProvider>
