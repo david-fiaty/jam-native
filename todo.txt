@@ -90,6 +90,7 @@ https://docs.google.com/spreadsheets/d/1sodzaVigD26XOopcXfLRykl51wPM5pKecS0i1QED
   - Amelioration upload profile image
   - Ajout champ user location (Add jam form et profile form)
   - Ajout user location dans Jams Map
+  - Amaliorations profile jams list (Add new, no image)
   
 
 # Todo 
