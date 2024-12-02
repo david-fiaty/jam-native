@@ -10,7 +10,6 @@ import ScreenManager from "@/manager/ScreenManager";
 import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
-import IconView from "../view/IconView";
 import AddItemButton from "../button/AddItemButton";
 
 type Props = {
@@ -21,10 +20,6 @@ const UserJamsList = ({ data }: Props) => {
   const numColumns = 3;
   const [userJams, setUserJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-
-  const addItem = () => {
-    console.log('addItem');
-  } 
 
   if (!userJams?.length) {
     EntityManager.getJams([20, 54]).then((data: any) => {
@@ -38,7 +33,7 @@ const UserJamsList = ({ data }: Props) => {
 
   const renderItem = (row: any) => {
     if (row?.item?.id == "addItem") 
-      return <AddItemButton key={row?.item?.id} onPress={addItem} />;
+      return <AddItemButton key={row?.item?.id} onPress={() => ScreenManager.toggleModal("AddJamForm")} />;
 
     return (
       <TouchableOpacity key={row?.item?.id}>
