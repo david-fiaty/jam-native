@@ -50,7 +50,7 @@ const SignupScreen = () => {
       scroll={true}
       style={Layout.screenContent}
     >
-      <LogoView size={{ width: 80, height: 80 }} />
+      <LogoView size={80} />
       <TextView style={styles.wecomeMessage}>
         {i18n.t("Create an account")}
       </TextView>

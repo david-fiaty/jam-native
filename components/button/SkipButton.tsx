@@ -5,7 +5,7 @@ import i18n from '@/translation/i18n';
 import TextView from '../view/TextView';
 
 type Props = {
-  onPress: () => {},
+  onPress: any,
 };
 
 const SkipButton = ({onPress}: Props) => {

@@ -1,75 +1,102 @@
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { Layout } from '@/constants/Layout';
-import { Config } from '@/constants/Config';
-import { Colors } from '@/constants/Colors';
-import TextView from '../view/TextView';
-import i18n from '@/translation/i18n';
-import ImageView from '../view/ImageView';
-import ScreenManager from '@/manager/ScreenManager';
-import ListView from '../view/ListView';
+import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { useState } from "react";
+import { Layout } from "@/constants/Layout";
+import { Config } from "@/constants/Config";
+import TextView from "../view/TextView";
+import i18n from "@/translation/i18n";
+import ImageView from "../view/ImageView";
+import ScreenManager from "@/manager/ScreenManager";
+import ListView from "../view/ListView";
+import EntityManager from "@/manager/EntityManager";
+import SpinnerView from "../view/SpinnerView";
+import AddItemButton from "../button/AddItemButton";
+import NoImageView from "../view/NoImageView";
 
 type Props = {
-  data?: any,
+  data?: any;
 };
 
-const UserProjectsList = ({data}: Props) => {  
-  const numColumns = 4;
+const UserProjectsList = ({ data }: Props) => {
+  const numColumns = 3;
+  const [userJams, setUserJams] = useState<any>([]);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const renderItem = (row: any) => (
-    <TouchableOpacity key={row?.item?.id}>
-      <View style={styles.item}>
-        <ImageView 
-          uri={Config.imageUrl + row?.item?.url} 
-          width={96.7}
-          height={96.7}
-          resizeMode="cover"
-          style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
+  const renderItemImage = (url: any) => {
+    if (!url) return <NoImageView size={38} />;
+
+    return (
+      <ImageView
+        uri={Config.imageUrl + url}
+        width={96.7}
+        height={96.7}
+        resizeMode="cover"
+        style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
+      />
+    );
+  };
+
+  const renderItem = (row: any) => {
+    if (row?.item?.id == "addItem") {
+      return (
+        <AddItemButton
+          key={row?.item?.id}
+          onPress={() => ScreenManager.toggleModal("AddJamForm")}
         />
-      </View>
-    </TouchableOpacity>
-  );
+      );
+    }
+
+    return (
+      <TouchableOpacity key={row?.item?.id}>
+        <View style={styles.item}>{renderItemImage(row?.item?.medias?.[0]?.url)}</View>
+      </TouchableOpacity>
+    );
+  };
+
+  if (!userJams?.length) {
+    // Todo - Needs profile jams by id
+    EntityManager.getJams([20, 54]).then((data: any) => {
+      data.push({ id: "addItem" });
+      setUserJams(data);
+      setIsLoaded(true);
+    });
+  }
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <View style={styles.container}>
-      <TextView style={styles.title}>{i18n.t('Your Projects')}</TextView>
+      <TextView style={styles.title}>{i18n.t("Your Projects")}</TextView>
 
-      { data?.length > 0 && 
+      {userJams?.length > 0 && (
         <ListView
-          data={data} 
+          data={userJams}
           numColumns={numColumns}
-          contentContainerStyle={{gap: Layout.space.base}}
-          columnWrapperStyle={{gap: Layout.space.base}}
+          contentContainerStyle={{ gap: Layout.space.base }}
+          columnWrapperStyle={{ gap: Layout.space.base }}
           scrollEnabled={false}
-          renderItem={(row: any) => renderItem(row)}   
+          renderItem={(row: any) => renderItem(row)}
         />
-      }
- 
+      )}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: "100%",
   },
   title: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: Layout.space.base,
   },
   item: {
-    flexDirection: 'column',
+    flexDirection: "column",
     gap: Layout.space.small,
   },
   image: {
     borderRadius: Layout.space.base,
     width: 96.7,
     height: 96.7,
-  },
-  linkText: {
-    borderBottomWidth: Layout.borderWidth.base,
-    borderBottomColor: Colors.primary,
-    marginBottom: Layout.space.base,
-    paddingBottom: Layout.space.base/2,
   },
 });
 

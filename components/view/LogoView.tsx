@@ -1,11 +1,10 @@
 import { StyleSheet } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import { BaseProps } from '@/constants/Types';
-import { Config } from '@/constants/Config';
 import ImageView from './ImageView';
 
 type Props = BaseProps & {
-  size: object,
+  size: any,
   style?: object,
 };
 
@@ -16,8 +15,8 @@ const LogoView = ({size, style}: Props) => {
   return (
     <ImageView 
       path={path} 
-      width={size.width} 
-      height={size.height} 
+      width={size} 
+      height={size} 
       style={style}
     />   
   );

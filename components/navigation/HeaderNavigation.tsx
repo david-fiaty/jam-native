@@ -19,7 +19,7 @@ const HeaderNavigation = () => {
       <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
         <BoxView direction="row" align="center" style={Layout.headerRight}>
           <TouchableOpacity onPress={() => ScreenManager.toggleModal('JamsList')}>
-            <LogoView size={Layout.logo} />
+            <LogoView size={Layout.logo.size} />
           </TouchableOpacity>
         </BoxView>
         { (route.name == 'jams' || activeScreen?.headerNavigation) &&
