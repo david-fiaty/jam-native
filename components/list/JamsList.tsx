@@ -26,7 +26,7 @@ const JamsList = () => {
 
   const scrollToItem = (index: number) => {
     try {
-      jamsListRef.current?.scrollToIndex({ index, animated: true });
+      jamsListRef.current?.scrollToIndex({ index, animated: false });
     } catch (error) {
       console.log(error);
     }
@@ -205,10 +205,6 @@ const JamsList = () => {
 
   return (
     <BoxView direction="column" style={Layout.screenContent}>
-    <TouchableOpacity onPress={() => scrollToItem(49)}>
-        <TextView>Go to Item </TextView>
-      </TouchableOpacity>
-
       <ListView
         data={jamsData}
         ref={jamsListRef}
