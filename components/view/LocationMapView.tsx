@@ -17,14 +17,20 @@ const LocationMapView = ({ style, children }: BaseProps) => {
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const onMapPress = (event: MapPressEvent) => {
+  const onMapPress = async (event: MapPressEvent) => {
     let coords = event.nativeEvent.coordinate;
     setSelectedLocation(coords);
+    let url = `${Config.geocodeUrl}?latlng=${coords.latitude},${coords.longitude}&key=${Config.mapApiKey}`;
 
-    console.log(coords);
-    //let url = Config.geocodeUrl + '?latlng='
+    try {
+    let response: any = await fetch(url);
+    let address = response?.results;
 
-    //let response: any = await fetch(url)
+    console.log(address);
+    }
+    catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
