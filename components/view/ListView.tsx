@@ -1,35 +1,51 @@
-import { StyleSheet, FlatList } from 'react-native';
-import { BaseProps } from '@/constants/Types';
-import DeviceManager from '@/manager/DeviceManager';
+import { StyleSheet, FlatList } from "react-native";
+import { BaseProps } from "@/constants/Types";
+import DeviceManager from "@/manager/DeviceManager";
 
 type Props = BaseProps & {
-  data: object,
-  ref?: object,
-  numColumns?: number,
-  scrollEnabled?: boolean,
-  horizontal?: boolean,
-  contentContainerStyle?: object,
-  columnWrapperStyle?: object,
-  keyExtractor?: object, 
-  renderItem: object, 
+  data: object;
+  ref?: object;
+  initialNumToRender?: number;
+  initialScrollIndex?: number;
+  numColumns?: number;
+  scrollEnabled?: boolean;
+  horizontal?: boolean;
+  contentContainerStyle?: object;
+  columnWrapperStyle?: object;
+  keyExtractor?: object;
+  renderItem: object;
 };
 
-const ListView = ({data, ref, numColumns, scrollEnabled, horizontal, contentContainerStyle, columnWrapperStyle, keyExtractor, renderItem, style}: Props) => {
+const ListView = ({
+  data,
+  ref,
+  initialNumToRender,
+  initialScrollIndex,
+  numColumns,
+  scrollEnabled,
+  horizontal,
+  contentContainerStyle,
+  columnWrapperStyle,
+  keyExtractor,
+  renderItem,
+  style,
+}: Props) => {
   return (
-    <FlatList 
-      data={data || []} 
-      ref={ref} 
+    <FlatList
+      data={data || []}
+      ref={ref}
       numColumns={numColumns || 1}
+      initialNumToRender={initialNumToRender}
+      //initialScrollIndex={initialScrollIndex}
       scrollEnabled={scrollEnabled === false ? false : true}
-      horizontal={horizontal === true ? horizontal : false}  
+      horizontal={horizontal === true ? horizontal : false}
       contentContainerStyle={[styles.container, contentContainerStyle]}
       columnWrapperStyle={columnWrapperStyle}
-      initialNumToRender={10}
       maxToRenderPerBatch={5}
       removeClippedSubviews={true}
       windowSize={5}
       keyExtractor={keyExtractor}
-      renderItem={renderItem} 
+      renderItem={renderItem}
     />
   );
 };
