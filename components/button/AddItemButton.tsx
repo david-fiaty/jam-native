@@ -1,5 +1,4 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import i18n from "@/translation/i18n";
@@ -18,6 +17,7 @@ const AddItemButton = ({ key, onPress }: Props) => {
         <View>
           <IconView name="plus" theme="secondary" size={16} />
         </View>
+        <TextView>Add</TextView>
       </View>
     </TouchableOpacity>
   );
