@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { useState, useEffect, useRef } from "react";
+import { StyleSheet, View, TouchableOpacity, FlatList } from "react-native";
 import { useRouter } from "expo-router";
 import moment from "moment";
 import { Colors } from "@/constants/Colors";
@@ -19,9 +19,14 @@ import EntityManager from "@/manager/EntityManager";
 
 const JamsList = () => {
   const router = useRouter();
+  const jamsListRef = useRef<FlatList>(null);
   const [jamsData, setJamsData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const isLoggedIn = UserManager.isLoggedIn();
+
+  const scrollToItem = (index: number) => {
+    jamsListRef.current?.scrollToIndex({ index, animated: true });
+  };
 
   const renderItemHeader = (row: any) => (
     <BoxView
@@ -196,10 +201,16 @@ const JamsList = () => {
 
   return (
     <BoxView direction="column" style={Layout.screenContent}>
+    <TouchableOpacity onPress={() => scrollToId(49)}>
+        <TextView>Go to Item </TextView>
+      </TouchableOpacity>
+
       <ListView
+        ref={jamsListRef}
         data={jamsData}
         contentContainerStyle={Layout.listContainer}
         renderItem={(row: any) => renderItem(row)}
+        keyExtractor={(item: any) => console.log(item?.id)}
       />
     </BoxView>
   );
