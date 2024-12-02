@@ -69,9 +69,9 @@ const JamsList = () => {
     </BoxView>
   );
 
-  const renderItemImages = (row: any) => (
-    <ImageSlideshow data={row?.item.medias} />
-  );
+  const renderItemImages = (row: any) => {
+    return <ImageSlideshow data={row?.item.medias} />
+  };
 
   const renderItemToolbar = (row: any) => (
     <BoxView
@@ -234,7 +234,7 @@ const JamsList = () => {
 
       <ListView
         data={jamsData}
-        ref={jamsListRef}
+        //ref={jamsListRef}
         initialNumToRender={10}
         initialScrollIndex={5}
         contentContainerStyle={Layout.listContainer}

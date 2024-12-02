@@ -6,19 +6,20 @@ import BoxView from './BoxView';
 import { Colors } from '@/constants/Colors';
 
 type Props = BaseProps & {
-  size: any,
+  imageSize: any,
+  containerStyle?: any,
 };
 
-const NoImageView = ({size}: Props) => {
+const NoImageView = ({imageSize, containerStyle}: Props) => {
   // Todo - Move image size to config
   const path: any = require('@/assets/images/logo-mono-512.png');
 
   return (
-    <BoxView align="center" justify="center" style={styles.container}>
+    <BoxView align="center" justify="center" style={[styles.container, containerStyle]}>
       <ImageView 
         path={path} 
-        width={size} 
-        height={size} 
+        width={imageSize} 
+        height={imageSize} 
         style={styles.image}
       />   
     </BoxView>

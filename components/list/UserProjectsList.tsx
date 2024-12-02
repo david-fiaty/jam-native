@@ -22,7 +22,7 @@ const UserProjectsList = ({ data }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const renderItemImage = (url: any) => {
-    if (!url) return <NoImageView size={38} />;
+    if (!url) return <NoImageView imageSize={48} />;
 
     return (
       <ImageView
@@ -37,12 +37,7 @@ const UserProjectsList = ({ data }: Props) => {
 
   const renderItem = (row: any) => {
     if (row?.item?.id == "addItem") {
-      return (
-        <AddItemButton
-          key={row?.item?.id}
-          onPress={() => ScreenManager.toggleModal("AddJamForm")}
-        />
-      );
+      return <AddItemButton onPress={() => ScreenManager.toggleModal("AddJamForm")} />;
     }
 
     return (
