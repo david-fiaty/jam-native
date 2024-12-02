@@ -17,8 +17,23 @@ const LocationMapView = ({ style, children }: BaseProps) => {
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const onMapPress = (event: MapPressEvent) => {
-    setSelectedLocation(event.nativeEvent.coordinate);
+  const onMapPress = async (event: MapPressEvent) => {
+    let coords = event.nativeEvent.coordinate;
+    setSelectedLocation(coords);
+
+    // Todo - Implement reverse geocoding
+    /*
+    let url = `${Config.geocodeUrl}?latlng=${coords.latitude},${coords.longitude}&key=${Config.mapApiKey}`;
+
+    try {
+      let response: any = await fetch(url);
+      let address = response?.results;
+      console.log(address);
+    }
+    catch (error) {
+      console.log(error);
+    }
+      */
   };
 
   useEffect(() => {
