@@ -25,7 +25,11 @@ const JamsList = () => {
   const isLoggedIn = UserManager.isLoggedIn();
 
   const scrollToItem = (index: number) => {
-    jamsListRef.current?.scrollToIndex({ index, animated: true });
+    try {
+      jamsListRef.current?.scrollToIndex({ index, animated: true });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const renderItemHeader = (row: any) => (
@@ -208,6 +212,7 @@ const JamsList = () => {
       <ListView
         data={jamsData}
         ref={jamsListRef}
+        initialNumToRender={10}
         contentContainerStyle={Layout.listContainer}
         renderItem={(row: any) => renderItem(row)}
         keyExtractor={(item: any, index: number) => index.toString()}
