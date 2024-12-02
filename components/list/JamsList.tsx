@@ -201,16 +201,16 @@ const JamsList = () => {
 
   return (
     <BoxView direction="column" style={Layout.screenContent}>
-    <TouchableOpacity onPress={() => scrollToId(49)}>
+    <TouchableOpacity onPress={() => scrollToItem(49)}>
         <TextView>Go to Item </TextView>
       </TouchableOpacity>
 
       <ListView
-        ref={jamsListRef}
         data={jamsData}
+        ref={jamsListRef}
         contentContainerStyle={Layout.listContainer}
         renderItem={(row: any) => renderItem(row)}
-        keyExtractor={(item: any) => console.log(item?.id)}
+        keyExtractor={(item: any, index: number) => index.toString()}
       />
     </BoxView>
   );
