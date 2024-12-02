@@ -11,6 +11,10 @@ eas build -p android --clear-cache --profile preview
 # Run
 npm start --tunnel
 
+# Google maps
+AIzaSyB91uv-OuWw6iNMjVZmuHJsRVDHP9baCq0
+
+
 # Modal action confirm
 https://reactnative.dev/docs/alert
 https://github.com/jeremybarbet/react-native-modalize
@@ -112,6 +116,8 @@ Twilio => SMS
 
 console.log(JSON.stringify(obj, 0, 2));
 
+# reverse geocode
+const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
 
 
     let mediaList = [...selectedMediaPreview];
