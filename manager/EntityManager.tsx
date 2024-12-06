@@ -24,13 +24,13 @@ class EntityManager {
       //nbr_items_to_return: Config.maxApiResults,
     };
 
-    return await DataManager.list('listProfiles', {...defaults, ...options}); 
+    return await DataManager.get('listProfiles', {...defaults, ...options}); 
   }
 
   async getProfiles(options?: any) {
     let defaults = {};
 
-    return DataManager.list('getProfiles', {...defaults, ...options}); 
+    return DataManager.get('getProfiles', {...defaults, ...options}); 
   }
 
   async listJams(options?: any) {
@@ -42,13 +42,13 @@ class EntityManager {
       //nbr_items_to_return: Config.maxApiResults,
     };
 
-    return await DataManager.list('listJams', {...defaults, ...options}); 
+    return await DataManager.get('listJams', {...defaults, ...options}); 
   }
 
-  async getJams(idArray: any, options?: any) {
+  async getJams(options?: any) {
     let defaults = {};
 
-    return DataManager.get('getJams', idArray, {...defaults, ...options}); 
+    return DataManager.get('getJams', {...defaults, ...options}); 
   }
 
   async listProjects(options?: any) {
@@ -59,48 +59,48 @@ class EntityManager {
       //nbr_items_to_return: Config.maxApiResults,
     };
 
-    return await DataManager.list('listProjects', {...defaults, ...options}); 
+    return await DataManager.get('listProjects', {...defaults, ...options}); 
   }
 
   async getProjects(options?: any) {
     let defaults = {};
 
-    return DataManager.list('getProjects', {...defaults, ...options}); 
+    return DataManager.get('getProjects', {...defaults, ...options}); 
   }
 
   async getSectors() {
     let language = await UserManager.getLanguage();
     let options = { lang: language };
 
-    return await DataManager.list('sectors', options); 
+    return await DataManager.get('sectors', options); 
   }
 
   async getProfessions() {
     let language = await UserManager.getLanguage();
     let options = { lang: language };
 
-    return await DataManager.list('professions', options); 
+    return await DataManager.get('professions', options); 
   }
 
   async getVenueTypes() {
     let language = await UserManager.getLanguage();
     let options = { lang: language };
 
-    return await DataManager.list('venueTypes', options); 
+    return await DataManager.get('venueTypes', options); 
   }
 
   async getOrganizationTypes() {
     let language = await UserManager.getLanguage();
     let options = { lang: language };
 
-    return await DataManager.list('organizationTypes', options); 
+    return await DataManager.get('organizationTypes', options); 
   }
 
   async getCulturalActivities() {
     let language = await UserManager.getLanguage();
     let options = { lang: language };
 
-    return await DataManager.list('culturalActivities', options); 
+    return await DataManager.get('culturalActivities', options); 
   }
 
   async findJam(entityId: any) {
