@@ -84,6 +84,8 @@ class ApiManager {
   }
 
   async sendRequest(url: string, method: string, data?: any) {
+    console.log(url);
+
     try {
       let response: any = await fetch(url, {
         ...{

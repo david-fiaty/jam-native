@@ -150,9 +150,44 @@ Content-Type: application/json
 GET http://0.0.0.0:8000/api/v1/projects/
 Content-Type: application/json
 
+### Get specific list of projects
+GET http://0.0.0.0:8000/api/v1/projects/?items_ids=1,2
+Content-Type: application/json
+
 ### Get specific project
 GET http://0.0.0.0:8000/api/v1/projects/1/
 Content-Type: application/json
+
+### Add jams to project
+
+PUT http://0.0.0.0:8000/api/v1/projects/1/jams/add/
+Content-Type: application/json
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5NDE0MDEyLCJpYXQiOjE3Mjg1NTAwMTIsImp0aSI6Ijc0ZGY2MTRjZThhODRjZTA4N2JlODY1MjkyZTFjYmI3IiwidXNlcl9pZCI6MX0.wpA4K1tSQu6ev63WMd_t7iKE3F3zihZxyzqEkR5t6bc
+
+{
+    "profile_id": 1,
+    "items_ids": [3, 4]
+}
+
+### Save projects
+POST http://0.0.0.0:8000/api/v1/projects/save/
+Content-Type: application/json
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5NDE0MDEyLCJpYXQiOjE3Mjg1NTAwMTIsImp0aSI6Ijc0ZGY2MTRjZThhODRjZTA4N2JlODY1MjkyZTFjYmI3IiwidXNlcl9pZCI6MX0.wpA4K1tSQu6ev63WMd_t7iKE3F3zihZxyzqEkR5t6bc
+
+{
+    "profile_id": 1,
+    "save_items_ids": [1, 2]
+}
+
+### Unsave projects
+POST http://0.0.0.0:8000/api/v1/projects/save/
+Content-Type: application/json
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5NDE0MDEyLCJpYXQiOjE3Mjg1NTAwMTIsImp0aSI6Ijc0ZGY2MTRjZThhODRjZTA4N2JlODY1MjkyZTFjYmI3IiwidXNlcl9pZCI6MX0.wpA4K1tSQu6ev63WMd_t7iKE3F3zihZxyzqEkR5t6bc
+
+{
+    "profile_id": 1,
+    "unsave_items_ids": [1, 2]
+}
 
 ### Like project
 POST http://0.0.0.0:8000/api/v1/projects/like/
@@ -207,15 +242,19 @@ Content-Type: application/json
 GET http://0.0.0.0:8000/api/v1/profiles/
 Content-Type: application/json
 
+### Get specific list of profiles
+GET http://0.0.0.0:8000/api/v1/profiles/?items_ids=1,2
+Content-Type: application/json
+
+### Get specific profile
+GET http://0.0.0.0:8000/api/v1/profiles/1/
+Content-Type: application/json
+
 ### Create new profile
 POST http://0.0.0.0:8000/api/v1/profiles/
 Content-Type: application/json
 
 {}
-
-### Get specific profile
-GET http://0.0.0.0:8000/api/v1/profiles/1/
-Content-Type: application/json
 
 ### Update specific profile
 PUT http://0.0.0.0:8000/api/v1/profiles/1/
@@ -224,6 +263,18 @@ Content-Type: application/json
 {"profile_name":"abc", "sectors_ids": [1, 12], "scope_country_code": "tg", "geolocation_latitude": "9.8080", "geolocation_longitude": "2.80", "profile_type":"venue", "profile_venue":{"venue_name":"Hello ab"}}
 
 #{"profile_name":"test", "scope_country_code": "gh", "geolocation_latitude": "9,80", "geolocation_longitude": "2,80", "profile_type":"personal", "profile_personal":{"first_name":"Hello", "last_name":"World"}}
+
+### Delete profile
+DELETE http://0.0.0.0:8000/api/v1/profiles/1/
+Content-Type: application/json
+
+{"action": "delete"}
+
+### Undelete profile
+DELETE http://0.0.0.0:8000/api/v1/profiles/1/
+Content-Type: application/json
+
+{"action": "undelete"}
 
 ### Delete bulk import profiles
 DELETE http://0.0.0.0:8000/api/v1/delete-bulk-import-profiles/
@@ -245,6 +296,20 @@ Content-Type: application/json
 
 ### Get all sectors with language en
 GET http://0.0.0.0:8000/api/v1/sectors/?lang=en
+Content-Type: application/json
+
+##### COUNTRY #####
+
+### Get all countries
+GET http://0.0.0.0:8000/api/v1/countries/
+Content-Type: application/json
+
+### Get all countries with language fr
+GET http://0.0.0.0:8000/api/v1/countries/?lang=fr
+Content-Type: application/json
+
+### Get all countries with language en
+GET http://0.0.0.0:8000/api/v1/countries/?lang=en
 Content-Type: application/json
 
 ##### PROFESSION #####
@@ -305,17 +370,47 @@ Content-Type: application/json
 
 ##### FEED #####
 
+### Get jams feed MOBILE
+GET http://0.0.0.0:8000/api/v1/jams/mobile-feed/?profile_id=1&jam_type=all&pagination_size=10
+
+### Get jams feed MOBILE with prev_cursor
+GET http://0.0.0.0:8000/api/v1/jams/mobile-feed/?profile_id=1&jam_type=all&pagination_size=10&prev_cursor=12
+
+### Get jams feed MOBILE with next_cursor
+GET http://0.0.0.0:8000/api/v1/jams/mobile-feed/?profile_id=1&jam_type=all&pagination_size=10&next_cursor=12
+
 ### Get jams feed
 GET http://0.0.0.0:8000/api/v1/jams/feed/?profile_id=1&jam_type=all&displayed_items_ids=1,2&nbr_items_to_return=10
 
 ### Get jams feed with search text and sectors selection
-GET http://0.0.0.0:8000/api/v1/jams/feed/?profile_id=1&jam_type=all&displayed_items_ids=1,2&nbr_items_to_return=10&query_countries_codes=tg
+GET http://0.0.0.0:8000/api/v1/jams/feed/?profile_id=1&jam_type=all&displayed_items_ids=1,2&nbr_items_to_return=1&query_text=JAM
+#&query_countries_codes=tg
+
+
+### Get projects feed MOBILE
+GET http://0.0.0.0:8000/api/v1/projects/mobile-feed/?profile_id=1&pagination_size=10
+
+### Get projects feed MOBILE with prev_cursor
+GET http://0.0.0.0:8000/api/v1/projects/mobile-feed/?profile_id=1&pagination_size=10&prev_cursor=18
+
+### Get projects feed MOBILE with next_cursor
+GET http://0.0.0.0:8000/api/v1/projects/mobile-feed/?profile_id=1&pagination_size=10&next_cursor=12
 
 ### Get projects feed
 GET http://0.0.0.0:8000/api/v1/projects/feed/?profile_id=1&displayed_items_ids=1,2&nbr_items_to_return=10
 
 ### Get projects feed with search text
 GET http://0.0.0.0:8000/api/v1/projects/feed/?profile_id=1&displayed_items_ids=1,2&nbr_items_to_return=10&query_countries_codes=tg&query_text=Project
+
+
+### Get profiles feed MOBILE
+GET http://0.0.0.0:8000/api/v1/profiles/mobile-feed/?profile_id=1&profile_type=all&pagination_size=10
+
+### Get profiles feed MOBILE with prev_cursor
+GET http://0.0.0.0:8000/api/v1/profiles/mobile-feed/?profile_id=1&profile_type=all&pagination_size=10&prev_cursor=3000
+
+### Get profiles feed MOBILE with next_cursor
+GET http://0.0.0.0:8000/api/v1/profiles/mobile-feed/?profile_id=1&profile_type=all&pagination_size=10&next_cursor=100
 
 ### Get profiles feed
 GET http://0.0.0.0:8000/api/v1/profiles/feed/?profile_id=1&profile_type=all&displayed_items_ids=1,2&nbr_items_to_return=10
@@ -464,7 +559,7 @@ POST http://0.0.0.0:8000/api/v1/register/
 Content-Type: application/json
 
 {"profile":{"sectors_ids":[1, 3], "profile_name":"1234", "scope_country_code": "gh", "geolocation_latitude": "9.80", "geolocation_longitude": "2.80", "profile_type":"personal", "profile_personal":{"first_name":"ABCD", "last_name":"DEF"}},
-"email":"abcdefghijklmnopqrst@test.com", "password":"abcdef", "username":"abc", "session":"b9f2f805a3324c5eb23520132c3dede3"}
+"email":"abcdefghijklmnopqrstuvw@test.com", "password":"abcdef", "username":"abc", "session":"b9f2f805a3324c5eb23520132c3dede3"}
 
 ###
 POST http://0.0.0.0:8000/api/v1/send-registration-verification/
@@ -520,3 +615,19 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5NDQwODgwLCJpYXQiOjE3Mjg1NzY4ODAsImp0aSI6IjkwZDVkZjkxYzUwYzRkMTk5ODg2ZWUzNWZiN2JiN2EwIiwidXNlcl9pZCI6MX0.Nb6BOh3EDoLJNR7Znxi3FmG8CtuBOPmgoV4dFt7FHpU
 
 {"profile_name": "1234", "scope_country_code": "gh", "geolocation_latitude": "9,80", "geolocation_longitude": "2,80", "profile_type":"personal","profile_personal":{"first_name":"ABC", "last_name":"DEFGHI"}}
+
+
+### Change password
+PUT http://0.0.0.0:8000/api/v1/change-password/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM0MTAxNDcwLCJpYXQiOjE3MzMyMzc0NzAsImp0aSI6ImNhN2I2MjA2ZDBiNzRjMThhMGEzODllYjllYTdiMzI3IiwidXNlcl9pZCI6MTd9.mGaK30NPP-_3jC8QvscxgsxHh5rX-JiZc-arc2A2zCI
+
+{"old_password": "abcdef", "new_password": "abcdefgh888"}
+
+
+### Change username
+PUT http://0.0.0.0:8000/api/v1/change-username/4327/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM0MTA1ODQ4LCJpYXQiOjE3MzMyNDE4NDgsImp0aSI6ImIxYWMxMDY4MzIwODRmZGFhYzA5Njg0MzY4NGU3ZDkxIiwidXNlcl9pZCI6MTl9.yWaeBeFvuFdBjTVUds1nuTVVGgdO2YTeI9JvaEbn7Nc
+
+{"new_username": "abcdefgh8887"}
