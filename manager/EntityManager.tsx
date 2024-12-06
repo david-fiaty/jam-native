@@ -48,7 +48,7 @@ class EntityManager {
   async getJams(idArray: any, options?: any) {
     let defaults = {};
 
-    return DataManager.list('getJams', idArray, {...defaults, ...options}); 
+    return DataManager.get('getJams', idArray, {...defaults, ...options}); 
   }
 
   async listProjects(options?: any) {
