@@ -11,7 +11,7 @@ const Endpoints = {
     path: '/projects/mobile-feed/',
     cacheable: true,
     searcheable: true,
-    dataKey: 'new_projects_to_display',
+    dataKey: 'new_items_to_display',
   },
   listProfiles: {
     path: '/profiles/mobile-feed/',
