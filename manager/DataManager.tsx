@@ -42,10 +42,6 @@ class DataManager {
     return results;
   }
 
-  async get(key: keyof typeof Endpoints, idArray: any , options?: any) {
-    return await ApiManager.get(key, idArray, options);
-  }
-
   async post(key: keyof typeof Endpoints, data: any, options?: any) {
     return await ApiManager.post(key, data);
   }
