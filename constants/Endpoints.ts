@@ -8,7 +8,7 @@ const Endpoints = {
     dataKey: 'new_items_to_display', 
   },
   listProjects: {
-    path: '/projects/feed/',
+    path: '/projects/mobile-feed/',
     cacheable: true,
     searcheable: true,
     dataKey: 'new_projects_to_display',
