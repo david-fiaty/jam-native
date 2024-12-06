@@ -5,7 +5,7 @@ const Endpoints = {
     path: '/jams/mobile-feed/',
     cacheable: true,
     searcheable: true,
-    dataKey: 'new_jams_to_display', 
+    dataKey: 'new_items_to_display', 
   },
   listProjects: {
     path: '/projects/feed/',
