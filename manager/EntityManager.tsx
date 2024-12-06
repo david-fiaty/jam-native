@@ -38,8 +38,8 @@ class EntityManager {
     let defaults = {
       profile_id: profileId,
       jam_type: 'all',
-      displayed_items_ids: '1,2',
-      nbr_items_to_return: Config.maxApiResults,
+      pagination_size: 10,
+      //nbr_items_to_return: Config.maxApiResults,
     };
 
     return await DataManager.get('listJams', {...defaults, ...options}); 
