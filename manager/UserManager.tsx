@@ -30,9 +30,9 @@ class UserManager {
   }
 
   async getUserData() {
-    let userAccount: any = await DataManager.list('currentUser');
-    let userJams: any = await DataManager.list('listJams'); // Todo - Remove for better perf
-    let userProjects: any = await DataManager.list('listProjects');
+    let userAccount: any = await DataManager.get('currentUser');
+    let userJams: any = await DataManager.get('listJams'); // Todo - Remove for better perf
+    let userProjects: any = await DataManager.get('listProjects');
 
     return {
       account: userAccount?.user,
@@ -44,7 +44,7 @@ class UserManager {
   async getProfileId() {
     let profileId: number = Store.getState().user.profileId;
     if (profileId === 0) {
-      let userAccount: any = await DataManager.list('currentUser');
+      let userAccount: any = await DataManager.get('currentUser');
       profileId = parseInt(userAccount?.user?.profiles?.[0]?.id || 0);
     }
 
