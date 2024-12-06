@@ -32,7 +32,7 @@ class ApiManager {
     return data;
   }
 
-  async get(key: keyof typeof Endpoints, options?: any) {
+  async get(key: keyof typeof Endpoints, idArray: any, options?: any) {
     let data: any = [];
     let url: string = this.getUrl(key, options);
 
