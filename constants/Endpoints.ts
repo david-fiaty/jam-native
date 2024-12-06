@@ -2,7 +2,7 @@ import Store from '@/redux/Store';
 
 const Endpoints = {
   listJams: {
-    path: '/jams/feed/',
+    path: '/jams/mobile-feed/',
     cacheable: true,
     searcheable: true,
     dataKey: 'new_jams_to_display', 
