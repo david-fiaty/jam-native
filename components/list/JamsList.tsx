@@ -216,8 +216,6 @@ const JamsList = () => {
 
   if (!jamsData?.length) {
     EntityManager.listJams().then((data: any) => {
-
-      console.log(data);
       setJamsData(data);
       setIsLoaded(true);
     });

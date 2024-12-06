@@ -14,7 +14,25 @@ const cache = new Cache({
 });
 
 class ApiManager {
-  async get(key: keyof typeof Endpoints, options?: any) {
+  async list(key: keyof typeof Endpoints, options?: any) {
+    let data: any = [];
+    let url: string = this.getUrl(key, options);
+
+    if (Config.dataCacheEnabled === true && Endpoints[key].cacheable === true) {
+      data = await this.getCacheItem(key);
+    }
+    
+    if (!data?.length) {
+      data = await this.sendRequest(url, 'GET');
+      if (Config.dataCacheEnabled === true && data?.length > 0) {
+        await cache.set(key, data);
+      }
+    }
+
+    return data;
+  }
+
+  async get(key: keyof typeof Endpoints, idArray: any, options?: any) {
     let data: any = [];
     let url: string = this.getUrl(key, options);
 
@@ -84,8 +102,6 @@ class ApiManager {
   }
 
   async sendRequest(url: string, method: string, data?: any) {
-    console.log(url);
-
     try {
       let response: any = await fetch(url, {
         ...{
