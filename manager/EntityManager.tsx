@@ -55,8 +55,8 @@ class EntityManager {
     let profileId = await UserManager.getProfileId();
     let defaults = {
       profile_id: profileId,
-      displayed_items_ids: '1,2',
-      nbr_items_to_return: Config.maxApiResults,
+      pagination_size: 10,
+      //nbr_items_to_return: Config.maxApiResults,
     };
 
     return await DataManager.get('listProjects', {...defaults, ...options}); 
