@@ -21,6 +21,7 @@ const JamsList = () => {
   const router = useRouter();
   const jamsListRef = useRef<FlatList>(null);
   const [jamsData, setJamsData] = useState<any>([]);
+  const [sectorsData, setSectorsData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const isLoggedIn = UserManager.isLoggedIn();
 
@@ -217,6 +218,13 @@ const JamsList = () => {
   if (!jamsData?.length) {
     EntityManager.listJams().then((data: any) => {
       setJamsData(data);
+      setIsLoaded(true);
+    });
+  }
+
+  if (!sectorsData?.length) { 
+    EntityManager.getSectors().then((data: any) => {
+      setSectorsData(data);
       setIsLoaded(true);
     });
   }
