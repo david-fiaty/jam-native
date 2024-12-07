@@ -134,12 +134,26 @@ class EntityManager {
   }
 
   async shareJam(entityId: any) {
-    console.log(entityId);
+    let entity = await this.getJams({items_ids: [entityId]});
+    let message: string = '';
+
+    if (entity?.title?.length) {
+      message += entity.title;
+    }
+
+    if (entity?.title?.length && entity?.caption?.length) {
+      message += ' | ';
+    }
+
+    if (entity?.caption?.length) {
+      message += entity.caption;
+    }
+
     try {
       const result = await Share.share({
-        // Todo - Link content to jam
-        message: 'React Native | A framework for building native apps using React',
+        message: message,
       });
+      
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
           // shared with activity type of result.activityType
