@@ -3,6 +3,7 @@ import { setLanguage } from '@/redux/slices/AppSlice';
 import Store from '@/redux/Store';
 import DataManager from './DataManager';
 import DeviceManager from './DeviceManager';
+import { Config } from '@/constants/Config';
 
 class UserManager {
   async login(data: any) {
@@ -49,6 +50,22 @@ class UserManager {
     }
 
     return profileId;
+  }
+
+  async getNotifications(options?: any) {
+    options = options || {};
+    let profileId: number = Store.getState().user.profileId;
+    let userNotifications: any = [];
+    let defaults = {
+      displayed_items_ids: '64,65', // Todo - What is this required param
+      nbr_items_to_return: Config.paginationSize,
+    };
+
+    if (profileId > 0) {
+      userNotifications = await DataManager.get('notifications', {...defaults, ...options});
+    }
+
+    return userNotifications || [];
   }
 
   setLanguage(languageCode: string) {
