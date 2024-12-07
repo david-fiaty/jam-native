@@ -16,7 +16,7 @@ const MoreJamView = () => {
   const entityId = ScreenManager.getActiveScreen()?.entityId;
 
   if (!entity) {
-    EntityManager.findJam(entityId).then((item: any) => {
+    EntityManager.getJams({items_ids: [entityId]}).then((item: any) => {
       setEntity(item);
     });
   }
