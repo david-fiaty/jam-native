@@ -15,6 +15,11 @@ npm start --tunnel
 AIzaSyB91uv-OuWw6iNMjVZmuHJsRVDHP9baCq0
 
 
+Test users:
+Id: 62 / test888@yopmail.com / Test@12345678
+id: 3 / mitsiomotu@yopmail.com / Password1234
+
+
 # Flatlist scrollto
 https://gist.github.com/voratham/de4ef03472d9e1f03a7c26c7619d126f
 
@@ -92,10 +97,11 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 https://docs.google.com/spreadsheets/d/1sodzaVigD26XOopcXfLRykl51wPM5pKecS0i1QEDWMc/edit?hl=fr&gid=0#gid=0
 
 # New release:
-  - Ajout no image pour Jams list
+  - Ajout no image et titre pour Jams lists
+  - Ajout profile notifications vue/detail
 
-
-
+  
+  
   - Ameliorations generales UI
   - Amelioration gestion switch langues
   - Amelioration upload profile image

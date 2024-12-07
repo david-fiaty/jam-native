@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableOpacity, FlatList } from "react-native";
 import { useRouter } from "expo-router";
-import moment from "moment";
 import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
+import { Config } from "@/constants/Config";
+import moment from "moment";
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
@@ -16,11 +17,13 @@ import ImageSlideshow from "../slideshow/ImageSlideshow";
 import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from "@/manager/EntityManager";
+import StaticData from "@/constants/StaticData";
 
 const JamsList = () => {
   const router = useRouter();
   const jamsListRef = useRef<FlatList>(null);
   const [jamsData, setJamsData] = useState<any>([]);
+  const [sectorsData, setSectorsData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const isLoggedIn = UserManager.isLoggedIn();
 
@@ -122,6 +125,13 @@ const JamsList = () => {
     </BoxView>
   );
 
+  const renderItemTitle = (row: any) => (
+    row?.item?.title?.length > 0 &&
+    <BoxView style={styles.listItemTitle}>
+      <TextView style={styles.listItemTitleText}>{row?.item?.title}</TextView>
+    </BoxView>
+  );
+
   const renderItemDescription = (row: any) => (
     <BoxView style={styles.listItemDescription}>
       <TextView>{row?.item?.caption}</TextView>
@@ -147,7 +157,7 @@ const JamsList = () => {
             >
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
-                {i18n.t("Location")}: {row?.item?.location_type}
+                {i18n.t("Location")}: { StaticData.locationTypes.find((o: any) => o.id == row?.item?.location_type)?.label || i18n.t('Unavailable') }
               </TextView>
             </BoxView>
             <BoxView
@@ -159,9 +169,7 @@ const JamsList = () => {
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
                 {i18n.t("Start")}:{" "}
-                {moment(row?.item?.period?.start_datetime).format(
-                  "MMM Do YYYY"
-                )}
+                {moment(row?.item?.period?.start_datetime).format(Config.dateFormat) || i18n.t('Unavailable')}
               </TextView>
             </BoxView>
             <BoxView
@@ -173,7 +181,7 @@ const JamsList = () => {
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
                 {i18n.t("End")}:{" "}
-                {moment(row?.item?.period?.end_datetime).format("MMM Do YYYY")}
+                {moment(row?.item?.period?.end_datetime).format(Config.dateFormat) || i18n.t('Unavailable')}
               </TextView>
             </BoxView>
             <BoxView
@@ -184,7 +192,7 @@ const JamsList = () => {
             >
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
-                {i18n.t("Industry")}: {row?.item?.sectors?.[0]?.name}
+                {i18n.t("Industry")}: { sectorsData.find((o: any) => o.id == row?.item?.sectors?.[0])?.name || i18n.t('Unavailable')}
               </TextView>
             </BoxView>
             <BoxView
@@ -195,7 +203,7 @@ const JamsList = () => {
             >
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
-                {i18n.t("Sector")}: {row?.item?.sectors?.[0]?.name}
+                {i18n.t("Sector")}: {row?.item?.sectors?.[0]?.name || i18n.t('Unavailable')}
               </TextView>
             </BoxView>
           </BoxView>
@@ -209,6 +217,7 @@ const JamsList = () => {
       {renderItemHeader(row)}
       {renderItemImages(row)}
       {renderItemToolbar(row)}
+      {renderItemTitle(row)}
       {renderItemDescription(row)}
       {renderItemCollapsible(row)}
     </View>
@@ -217,6 +226,13 @@ const JamsList = () => {
   if (!jamsData?.length) {
     EntityManager.listJams().then((data: any) => {
       setJamsData(data);
+      setIsLoaded(true);
+    });
+  }
+
+  if (!sectorsData?.length) { 
+    EntityManager.getSectors().then((data: any) => {
+      setSectorsData(data);
       setIsLoaded(true);
     });
   }
@@ -259,11 +275,18 @@ const styles = StyleSheet.create({
   listItemToolbar: {
     padding: Layout.space.base,
   },
+  listItemTitle: {
+    padding: Layout.space.base,
+    paddingBottom: 0,
+  },
   listItemDescription: {
     padding: Layout.space.base,
   },
   listItemCollapsible: {
     padding: Layout.space.base,
+  },
+  listItemTitleText: {
+    fontSize: 16,
   },
   listItemImage: {
     height: 300,

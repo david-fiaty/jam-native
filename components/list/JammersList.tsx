@@ -14,6 +14,7 @@ import EntityManager from '@/manager/EntityManager';
 const JammersList = () => {
   const [profiles, setProfiles] = useState<any>(null);
   const [entity, setEntity] = useState<any>(null);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const entityId = ScreenManager.getActiveScreen()?.entityId;
 
   if (!entity) {
@@ -22,9 +23,10 @@ const JammersList = () => {
     });
   }
 
-  if (!profiles) {
+  if (entity && !profiles) {
     EntityManager.getProfiles({items_ids: entity?.[0]?.jammers}).then((items: any) => {
       setProfiles(items);
+      setIsLoaded(true);
     });
   }
 
@@ -54,7 +56,7 @@ const JammersList = () => {
           />
         }
 
-        {entity?.length > 0 && !profiles?.length && 
+        {isLoaded && !profiles?.length && 
           <TextView>{i18n.t('No jammers available for this Jam.')}</TextView>
         }
       </View>
