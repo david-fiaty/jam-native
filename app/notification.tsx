@@ -5,12 +5,12 @@ import BaseTheme from "@/constants/BaseTheme";
 import NotificationScreen from '@/components/screen/NotificationScreen';
 
 export default () => {
-  const item = useLocalSearchParams();
+  const entityId = useLocalSearchParams();
 
   return ( 
     <ThemeProvider theme={BaseTheme}>
       <ScreenView>
-        <NotificationScreen item={item} />
+        <NotificationScreen entityId={entityId} />
       </ScreenView>
     </ThemeProvider>
   );
