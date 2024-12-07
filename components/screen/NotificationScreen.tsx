@@ -6,6 +6,7 @@ import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
 import SpinnerView from '../view/SpinnerView';
 import TextView from '../view/TextView';
+import UserManager from "@/manager/UserManager";
 
 type Props = BaseProps & {
   entityId?: any,
@@ -14,12 +15,25 @@ type Props = BaseProps & {
 const NotificationScreen = ({entityId}: Props) => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [notificationsData, setNotificationsData] = useState<any>([]);
 
-  console.log(entityId);
+  if (!isLoaded) { 
+    UserManager.getNotifications().then((data: any) => {
+      setNotificationsData(data);
+      setIsLoaded(true);
+    });
+  }
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), Layout.animation.duration);
   });
+
+  
+  console.log(notificationsData);
+  console.log(entityId);
+
+
+  return <SpinnerView />;
 
   if (!isLoaded) return <SpinnerView />;
 
