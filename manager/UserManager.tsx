@@ -62,11 +62,12 @@ class UserManager {
       nbr_items_to_return: Config.paginationSize,
     };
 
-    let variables: any = {
-      
-    };
 
     if (profileId > 0) {
+      let variables: any = {
+        'profile_id': profileId,
+      };
+      
       userNotifications = await DataManager.get('notifications', {...defaults, ...options}, variables);
     }
 
