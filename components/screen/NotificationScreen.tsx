@@ -49,11 +49,11 @@ const NotificationScreen = ({entityId}: Props) => {
       </TextView>      
       
       <TextView>
-        {i18n.t('Message')}:
+        {i18n.t('Title')}: {entity?.content?.content_data?.title}
       </TextView>
 
       <TextView>
-        {entity?.content?.content_data?.caption}
+      {i18n.t('Description')}: {entity?.content?.content_data?.caption}
       </TextView>
     </BoxView>
   );
