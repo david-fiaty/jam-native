@@ -11,6 +11,7 @@ export const Config = {
   appNamespace: 'jam-native',
   logoImageSize: 512,
   paginationSize: 50,
+  dateFormat: 'MMM Do YYYY',
   defaultLocation: {
     latitude: 8.6195,
     longitude: 0.8248,
