@@ -64,11 +64,11 @@ class UserManager {
 
 
     if (profileId > 0) {
-      let variables: any = {
-        'profile_id': profileId,
-      };
-      
-      userNotifications = await DataManager.get('notifications', {...defaults, ...options}, variables);
+      userNotifications = await DataManager.get(
+        'notifications', 
+        {...defaults, ...options}, 
+        {'[profile_id]': profileId},
+      );
     }
 
     return userNotifications || [];
