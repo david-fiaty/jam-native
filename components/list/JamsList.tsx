@@ -223,6 +223,8 @@ const JamsList = () => {
 
   if (!sectorsData?.length) { 
     EntityManager.getSectors().then((data: any) => {
+      console.log(data);
+
       setSectorsData(data);
       setIsLoaded(true);
     });
