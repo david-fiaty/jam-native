@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
     padding: Layout.space.base,
   },
   listItemTitleText: {
-    fontSize: 20,
+    fontSize: 16,
   },
   listItemImage: {
     height: 300,
