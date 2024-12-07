@@ -10,44 +10,6 @@ import ScreenManager from '@/manager/ScreenManager';
 import UserManager from "@/manager/UserManager";
 import SpinnerView from "../view/SpinnerView";
 
-const data = [
-  {
-    label: 'Lorem ipsum dolor sit amet',
-    path: '/notifications',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-  },
-  {
-    label: 'Consectetur adipiscing elit',
-    path: '/notifications',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-  },
-  {
-    label: 'Sed do eiusmod tempor',
-    path: '/notifications',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-  },
-  {
-    label: 'Incididunt ut labore et dolore magna aliqua',
-    path: '/notifications',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-  },
-  {
-    label: 'Ut enim ad minim veniam, quis nostrud',
-    path: '/notifications',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-  },
-  {
-    label: 'Exercitation ullamco laboris nisi',
-    path: '/notifications',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-  },
-  {
-    label: 'Excepteur sint occaecat cupidatat',
-    path: '/notifications',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-  },  
-];
-
 const NotificationsMenu = () => {
   const router = useRouter();
   const [notificationsData, setNotificationsData] = useState<any>([]);
@@ -68,12 +30,12 @@ const NotificationsMenu = () => {
   );
 
 
-  if (!notificationsData) { 
+  if (!isLoaded) { 
     UserManager.getNotifications().then((data: any) => {
+      console.log(data);
+
       setNotificationsData(data);
       setIsLoaded(true);
-
-      console.log(data);
     });
   }
 
@@ -86,7 +48,7 @@ const NotificationsMenu = () => {
         onPress={() => ScreenManager.toggleModal('NotificationsMenu')}
       />
       <ListView 
-        data={data} 
+        data={notificationsData} 
         renderItem={(row: any) => renderItem(row)}   
       />
     </View>
