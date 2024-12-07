@@ -14,9 +14,14 @@ const cache = new Cache({
 });
 
 class ApiManager {
-  async get(key: keyof typeof Endpoints, options?: any) {
+  async get(key: keyof typeof Endpoints, options?: any, variables?: any) {
     let data: any = [];
-    let url: string = this.getUrl(key, options);
+    let url: string = this.getUrl(key, options, variables);
+
+    if (key == 'notifications') {
+      console.log(key);
+      console.log(url);
+    }
 
     if (Config.dataCacheEnabled === true && Endpoints[key].cacheable === true) {
       data = await this.getCacheItem(key);
@@ -32,9 +37,15 @@ class ApiManager {
     return data;
   }
 
-  getUrl(key: keyof typeof Endpoints, options?: any) {
+  getUrl(key: keyof typeof Endpoints, options?: any, variables?: any) {
     let path: string = Endpoints[key].path;
     let url: string = Config.apiUrl + path;
+
+    if (variables) {
+      for (const [key, value] of Object.entries(variables)) {
+        url = url.replace(key, value);
+      }
+    }
 
     if (options) {
       url += '?' + (new URLSearchParams(options).toString());
