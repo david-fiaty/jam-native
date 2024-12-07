@@ -127,8 +127,8 @@ const JamsList = () => {
 
   const renderItemTitle = (row: any) => (
     row?.item?.title?.length > 0 &&
-    <BoxView style={styles.listItemDescription}>
-      <TextView style={styles.listItemTitle}>{row?.item?.title}</TextView>
+    <BoxView style={styles.listItemTitle}>
+      <TextView style={styles.listItemTitleText}>{row?.item?.title}</TextView>
     </BoxView>
   );
 
@@ -276,13 +276,17 @@ const styles = StyleSheet.create({
     padding: Layout.space.base,
   },
   listItemTitle: {
-    fontSize: 20,
+    padding: Layout.space.base,
+    paddingBottom: 0,
   },
   listItemDescription: {
     padding: Layout.space.base,
   },
   listItemCollapsible: {
     padding: Layout.space.base,
+  },
+  listItemTitleText: {
+    fontSize: 20,
   },
   listItemImage: {
     height: 300,
