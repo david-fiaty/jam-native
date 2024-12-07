@@ -38,7 +38,7 @@ class EntityManager {
     let defaults = {
       profile_id: profileId,
       jam_type: 'all',
-      pagination_size: 10,
+      pagination_size: 20,
       //nbr_items_to_return: Config.maxApiResults,
     };
 
