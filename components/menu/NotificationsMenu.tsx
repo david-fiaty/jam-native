@@ -34,8 +34,6 @@ const NotificationsMenu = () => {
 
   if (!isLoaded) { 
     UserManager.getNotifications().then((data: any) => {
-      console.log(data);
-
       setNotificationsData(data);
       setIsLoaded(true);
     });
