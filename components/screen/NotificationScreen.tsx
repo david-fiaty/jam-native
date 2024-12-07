@@ -8,12 +8,14 @@ import SpinnerView from '../view/SpinnerView';
 import TextView from '../view/TextView';
 
 type Props = BaseProps & {
-  item?: any,
+  entityId?: any,
 };
 
-const NotificationScreen = ({item}: Props) => {
+const NotificationScreen = ({entityId}: Props) => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState(false);
+
+  console.log(entityId);
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), Layout.animation.duration);
