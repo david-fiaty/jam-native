@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { View, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
@@ -6,6 +7,8 @@ import TextView from '../view/TextView';
 import BackButton from '../button/BackButton';
 import i18n from '@/translation/i18n';
 import ScreenManager from '@/manager/ScreenManager';
+import UserManager from "@/manager/UserManager";
+import SpinnerView from "../view/SpinnerView";
 
 const data = [
   {
@@ -47,6 +50,8 @@ const data = [
 
 const NotificationsMenu = () => {
   const router = useRouter();
+  const [notificationsData, setNotificationsData] = useState<any>([]);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const renderItem = (row: any) => (
     <TouchableOpacity 
@@ -61,6 +66,18 @@ const NotificationsMenu = () => {
       </View>
     </TouchableOpacity>
   );
+
+
+  if (!notificationsData) { 
+    UserManager.getNotifications().then((data: any) => {
+      setNotificationsData(data);
+      setIsLoaded(true);
+
+      console.log(data);
+    });
+  }
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <View style={Layout.menuContainer}>
