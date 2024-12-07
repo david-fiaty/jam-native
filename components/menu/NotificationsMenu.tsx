@@ -26,7 +26,8 @@ const NotificationsMenu = () => {
     >
       <View style={Layout.menuItem}>
         <TextView>
-          {StaticData.notificationTypes.find((o: any) => o.id == row.item?.content?.notification_type)?.label }
+          { /*StaticData.notificationTypes.find((o: any) => o.id == row.item?.content?.notification_type)?.label */}
+          {row.item?.content?.content_data?.title} ({row.item?.content?.notification_type})
         </TextView>
       </View>
     </TouchableOpacity>
@@ -34,8 +35,6 @@ const NotificationsMenu = () => {
 
   if (!isLoaded) { 
     UserManager.getNotifications().then((data: any) => {
-      console.log(data);
-
       setNotificationsData(data);
       setIsLoaded(true);
     });
