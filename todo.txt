@@ -100,6 +100,9 @@ https://docs.google.com/spreadsheets/d/1sodzaVigD26XOopcXfLRykl51wPM5pKecS0i1QED
   - Ajout no image pour Jams lists
   - Ajout profile notifications vue/detail
 
+
+  
+  
   - Ameliorations generales UI
   - Amelioration gestion switch langues
   - Amelioration upload profile image
