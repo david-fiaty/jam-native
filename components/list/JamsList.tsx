@@ -184,7 +184,7 @@ const JamsList = () => {
             >
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
-                {i18n.t("Industry")}: {row?.item?.sectors?.[0]?.name}
+                {i18n.t("Industry")}: { sectorsData.find((o: any) => o.id == row?.item?.sectors?.[0])?.name}
               </TextView>
             </BoxView>
             <BoxView
@@ -223,8 +223,6 @@ const JamsList = () => {
 
   if (!sectorsData?.length) { 
     EntityManager.getSectors().then((data: any) => {
-      console.log(data);
-
       setSectorsData(data);
       setIsLoaded(true);
     });
