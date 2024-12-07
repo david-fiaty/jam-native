@@ -18,11 +18,6 @@ class ApiManager {
     let data: any = [];
     let url: string = this.getUrl(key, options, variables);
 
-    if (key == 'notifications') {
-      console.log(key);
-      console.log(url);
-    }
-
     if (Config.dataCacheEnabled === true && Endpoints[key].cacheable === true) {
       data = await this.getCacheItem(key);
     }
