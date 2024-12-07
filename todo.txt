@@ -98,9 +98,7 @@ https://docs.google.com/spreadsheets/d/1sodzaVigD26XOopcXfLRykl51wPM5pKecS0i1QED
 
 # New release:
   - Ajout no image pour Jams lists
-  - Connection notifications endpoint
-
-
+  - Ajout profile notifications vue/detail
 
   - Ameliorations generales UI
   - Amelioration gestion switch langues
