@@ -71,7 +71,7 @@ const Endpoints = {
     path: '/profiles/' + Store.getState().user.profileId + '/notifications/',
     cacheable: false,
     searcheable: false,
-    dataKey: null,
+    dataKey: 'new_notifications_to_display',
   },
   login: {
     path: '/login/',
