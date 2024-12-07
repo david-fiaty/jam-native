@@ -19,9 +19,8 @@ class EntityManager {
     let profileId = await UserManager.getProfileId();
     let defaults = {
       profile_id: profileId,
+      pagination_size: Config.paginationSize,
       profile_type: 'all',
-      displayed_items_ids: '1,2',
-      nbr_items_to_return: Config.maxApiResults,
     };
 
     return await DataManager.get('listProfiles', {...defaults, ...options}); 
@@ -37,9 +36,8 @@ class EntityManager {
     let profileId = await UserManager.getProfileId();
     let defaults = {
       profile_id: profileId,
+      pagination_size: Config.paginationSize,
       jam_type: 'all',
-      displayed_items_ids: '1,2',
-      nbr_items_to_return: Config.maxApiResults,
     };
 
     return await DataManager.get('listJams', {...defaults, ...options}); 
@@ -55,8 +53,7 @@ class EntityManager {
     let profileId = await UserManager.getProfileId();
     let defaults = {
       profile_id: profileId,
-      displayed_items_ids: '1,2',
-      nbr_items_to_return: Config.maxApiResults,
+      pagination_size: Config.paginationSize,
     };
 
     return await DataManager.get('listProjects', {...defaults, ...options}); 

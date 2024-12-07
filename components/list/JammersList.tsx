@@ -17,18 +17,18 @@ const JammersList = () => {
   const entityId = ScreenManager.getActiveScreen()?.entityId;
 
   if (!entity) {
-    EntityManager.findJam(entityId).then((item: any) => {
+    EntityManager.getJams({items_ids: [entityId]}).then((item: any) => {
       setEntity(item);
     });
   }
 
   if (!profiles) {
-    EntityManager.listProfiles().then((items: any) => {
+    EntityManager.getProfiles({items_ids: entity?.[0]?.jammers}).then((items: any) => {
       setProfiles(items);
     });
   }
 
-  if (!entity || !profiles) return <SpinnerView />;
+  if (!entity) return <SpinnerView />;
 
   const renderItem = (row: any) => (
     <TouchableOpacity onPress={() => console.log('clicked')}>
@@ -54,7 +54,7 @@ const JammersList = () => {
           />
         }
 
-        {!profiles?.length && 
+        {entity?.length > 0 && !profiles?.length && 
           <TextView>{i18n.t('No jammers available for this Jam.')}</TextView>
         }
       </View>
