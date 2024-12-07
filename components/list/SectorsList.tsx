@@ -85,12 +85,12 @@ const SectorsList = () => {
     );
   };
 
-  //if (!sectorsData) {
+  if (!sectorsData) {
     EntityManager.getSectors().then((data: any) => {
       setSectorsData(data);
       setIsLoaded(true);
     });
-  //}
+  }
 
   if (!isLoaded) return <SpinnerView />;
 
