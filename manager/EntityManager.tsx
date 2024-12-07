@@ -134,6 +134,7 @@ class EntityManager {
   }
 
   async shareJam(entityId: any) {
+    console.log(entityId);
     try {
       const result = await Share.share({
         // Todo - Link content to jam
