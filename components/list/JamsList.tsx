@@ -125,6 +125,13 @@ const JamsList = () => {
     </BoxView>
   );
 
+  const renderItemTitle = (row: any) => (
+    row?.item?.title?.length > 0 &&
+    <BoxView style={styles.listItemTitle}>
+      <TextView style={styles.listItemTitleText}>{row?.item?.title}</TextView>
+    </BoxView>
+  );
+
   const renderItemDescription = (row: any) => (
     <BoxView style={styles.listItemDescription}>
       <TextView>{row?.item?.caption}</TextView>
@@ -210,6 +217,7 @@ const JamsList = () => {
       {renderItemHeader(row)}
       {renderItemImages(row)}
       {renderItemToolbar(row)}
+      {renderItemTitle(row)}
       {renderItemDescription(row)}
       {renderItemCollapsible(row)}
     </View>
@@ -267,11 +275,18 @@ const styles = StyleSheet.create({
   listItemToolbar: {
     padding: Layout.space.base,
   },
+  listItemTitle: {
+    padding: Layout.space.base,
+    paddingBottom: 0,
+  },
   listItemDescription: {
     padding: Layout.space.base,
   },
   listItemCollapsible: {
     padding: Layout.space.base,
+  },
+  listItemTitleText: {
+    fontSize: 16,
   },
   listItemImage: {
     height: 300,
