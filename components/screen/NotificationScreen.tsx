@@ -38,10 +38,13 @@ const NotificationScreen = ({entityId}: Props) => {
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
-        title={i18n.t('Notification')}
+        title={i18n.t('Notification') + ' - ' + entity?.content?.content_data?.title}
         onPress={() => router.back()}
       />
+    
+      <TextView>{entity?.content?.content_data?.caption}</TextView>
 
+      <DividerView theme="secondary" />
       <TextView>
         {i18n.t('Type')}: {entity?.content?.notification_type}
       </TextView>      
@@ -50,10 +53,6 @@ const NotificationScreen = ({entityId}: Props) => {
         {i18n.t('Content type')}: {entity?.content?.content_type}
       </TextView>      
 
-      <DividerView theme="secondary" />
-    
-      <TextView style={styles.title}>{entity?.content?.content_data?.title}</TextView>
-      <TextView>{entity?.content?.content_data?.caption}</TextView>
 
     </BoxView>
   );
