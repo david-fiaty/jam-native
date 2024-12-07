@@ -32,7 +32,6 @@ const NotificationsMenu = () => {
     </TouchableOpacity>
   );
 
-
   if (!isLoaded) { 
     UserManager.getNotifications().then((data: any) => {
       console.log(data);
