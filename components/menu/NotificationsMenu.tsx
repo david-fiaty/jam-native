@@ -26,7 +26,8 @@ const NotificationsMenu = () => {
     >
       <View style={Layout.menuItem}>
         <TextView>
-          {StaticData.notificationTypes.find((o: any) => o.id == row.item?.content?.notification_type)?.label }
+          { /*StaticData.notificationTypes.find((o: any) => o.id == row.item?.content?.notification_type)?.label */}
+          {row.item?.content?.content_data?.title} ({row.item?.content?.notification_type})
         </TextView>
       </View>
     </TouchableOpacity>
