@@ -150,7 +150,7 @@ const JamsList = () => {
             >
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
-                {i18n.t("Location")}: { StaticData.locationTypes.find((o: any) => o.id == row?.item?.location_type)?.label }
+                {i18n.t("Location")}: { StaticData.locationTypes.find((o: any) => o.id == row?.item?.location_type)?.label || i18n.t('Unavailable') }
               </TextView>
             </BoxView>
             <BoxView
@@ -162,7 +162,7 @@ const JamsList = () => {
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
                 {i18n.t("Start")}:{" "}
-                {moment(row?.item?.period?.start_datetime).format(Config.dateFormat)}
+                {moment(row?.item?.period?.start_datetime).format(Config.dateFormat) || i18n.t('Unavailable')}
               </TextView>
             </BoxView>
             <BoxView
@@ -174,7 +174,7 @@ const JamsList = () => {
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
                 {i18n.t("End")}:{" "}
-                {moment(row?.item?.period?.end_datetime).format(Config.dateFormat)}
+                {moment(row?.item?.period?.end_datetime).format(Config.dateFormat) || i18n.t('Unavailable')}
               </TextView>
             </BoxView>
             <BoxView
@@ -185,7 +185,7 @@ const JamsList = () => {
             >
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
-                {i18n.t("Industry")}: { sectorsData.find((o: any) => o.id == row?.item?.sectors?.[0])?.name}
+                {i18n.t("Industry")}: { sectorsData.find((o: any) => o.id == row?.item?.sectors?.[0])?.name || i18n.t('Unavailable')}
               </TextView>
             </BoxView>
             <BoxView
@@ -196,7 +196,7 @@ const JamsList = () => {
             >
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
-                {i18n.t("Sector")}: {row?.item?.sectors?.[0]?.name}
+                {i18n.t("Sector")}: {row?.item?.sectors?.[0]?.name || i18n.t('Unavailable')}
               </TextView>
             </BoxView>
           </BoxView>
