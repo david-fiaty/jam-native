@@ -10,7 +10,8 @@ export const Config = {
   fallbackLanguage: 'en',
   appNamespace: 'jam-native',
   logoImageSize: 512,
-  paginationSize: 50,
+  paginationSize: 10,
+  dateFormat: 'MMM Do YYYY',
   defaultLocation: {
     latitude: 8.6195,
     longitude: 0.8248,
