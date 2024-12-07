@@ -57,13 +57,17 @@ class UserManager {
     let userNotifications: any = [];
     let profileId: number = await this.getProfileId();
 
-    let defaults = {
+    let defaults: any = {
       displayed_items_ids: [64, 65], // Todo - What is this required param
       nbr_items_to_return: Config.paginationSize,
     };
 
+    let variables: any = {
+      
+    };
+
     if (profileId > 0) {
-      userNotifications = await DataManager.get('notifications', {...defaults, ...options});
+      userNotifications = await DataManager.get('notifications', {...defaults, ...options}, variables);
     }
 
     return userNotifications || [];
