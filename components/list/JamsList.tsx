@@ -16,6 +16,7 @@ import ImageSlideshow from "../slideshow/ImageSlideshow";
 import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from "@/manager/EntityManager";
+import { Config } from "@/constants/Config";
 
 const JamsList = () => {
   const router = useRouter();
@@ -160,9 +161,7 @@ const JamsList = () => {
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
                 {i18n.t("Start")}:{" "}
-                {moment(row?.item?.period?.start_datetime).format(
-                  "MMM Do YYYY"
-                )}
+                {moment(row?.item?.period?.start_datetime).format(Config.dateFormat)}
               </TextView>
             </BoxView>
             <BoxView
@@ -174,7 +173,7 @@ const JamsList = () => {
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
                 {i18n.t("End")}:{" "}
-                {moment(row?.item?.period?.end_datetime).format("MMM Do YYYY")}
+                {moment(row?.item?.period?.end_datetime).format(Config.dateFormat)}
               </TextView>
             </BoxView>
             <BoxView
