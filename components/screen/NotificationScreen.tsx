@@ -7,6 +7,7 @@ import BackButton from "../button/BackButton";
 import SpinnerView from '../view/SpinnerView';
 import TextView from '../view/TextView';
 import UserManager from "@/manager/UserManager";
+import i18n from '@/translation/i18n';
 
 type Props = BaseProps & {
   entityId?: any,
@@ -35,10 +36,22 @@ const NotificationScreen = ({entityId}: Props) => {
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
-        title={entity?.content?.notification_type}
+        title={i18n.t('Notification')}
         onPress={() => router.back()}
       />
+
+      <TextView>
+        {i18n.t('Type')}: {entity?.content?.notification_type}
+      </TextView>      
       
+      <TextView>
+        {i18n.t('Content type')}: {entity?.content?.content_type}
+      </TextView>      
+      
+      <TextView>
+        {i18n.t('Message')}:
+      </TextView>
+
       <TextView>
         {entity?.content?.content_data?.caption}
       </TextView>
