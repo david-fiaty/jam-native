@@ -16,10 +16,12 @@ const NotificationScreen = ({entityId}: Props) => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState(false);
   const [notificationsData, setNotificationsData] = useState<any>([]);
+  const [entity, setEntity] = useState<any>(null);
 
   if (!isLoaded) { 
     UserManager.getNotifications().then((data: any) => {
       setNotificationsData(data);
+      setEntity(data.find((o: any) => o.id == entityId));
       setIsLoaded(true);
     });
   }
@@ -28,24 +30,17 @@ const NotificationScreen = ({entityId}: Props) => {
     setTimeout(() => setIsLoaded(true), Layout.animation.duration);
   });
 
-  
-  console.log(notificationsData);
-  console.log(entityId);
-
-
-  return <SpinnerView />;
-
   if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
-        title={item.label}
+        title={entity?.content?.notification_type}
         onPress={() => router.back()}
       />
       
       <TextView>
-        {item.content}
+        {entity?.content?.content_data?.caption}
       </TextView>
     </BoxView>
   );
