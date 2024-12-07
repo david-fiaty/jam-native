@@ -9,6 +9,7 @@ import i18n from '@/translation/i18n';
 import ScreenManager from '@/manager/ScreenManager';
 import UserManager from "@/manager/UserManager";
 import SpinnerView from "../view/SpinnerView";
+import StaticData from "@/constants/StaticData";
 
 const NotificationsMenu = () => {
   const router = useRouter();
@@ -24,7 +25,7 @@ const NotificationsMenu = () => {
       })}
     >
       <View style={Layout.menuItem}>
-        <TextView>{row.item.label}</TextView>
+        <TextView>{row.item?.content?.notification_type}</TextView>
       </View>
     </TouchableOpacity>
   );
