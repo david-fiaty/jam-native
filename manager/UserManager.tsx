@@ -62,7 +62,6 @@ class UserManager {
       nbr_items_to_return: Config.paginationSize,
     };
 
-
     if (profileId > 0) {
       userNotifications = await DataManager.get(
         'notifications', 
