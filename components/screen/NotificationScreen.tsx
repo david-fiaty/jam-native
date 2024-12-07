@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import { BaseProps } from '@/constants/Types';
@@ -8,6 +9,7 @@ import SpinnerView from '../view/SpinnerView';
 import TextView from '../view/TextView';
 import UserManager from "@/manager/UserManager";
 import i18n from '@/translation/i18n';
+import DividerView from '../view/DividerView';
 
 type Props = BaseProps & {
   entityId?: any,
@@ -47,16 +49,20 @@ const NotificationScreen = ({entityId}: Props) => {
       <TextView>
         {i18n.t('Content type')}: {entity?.content?.content_type}
       </TextView>      
-      
-      <TextView>
-        {i18n.t('Title')}: {entity?.content?.content_data?.title}
-      </TextView>
 
-      <TextView>
-      {i18n.t('Description')}: {entity?.content?.content_data?.caption}
-      </TextView>
+      <DividerView theme="secondary" />
+    
+      <TextView style={styles.title}>{entity?.content?.content_data?.title}</TextView>
+      <TextView>{entity?.content?.content_data?.caption}</TextView>
+
     </BoxView>
   );
 };
+
+const styles = StyleSheet.create({
+  title: {
+    fontSize: 16,
+  },
+});
 
 export default NotificationScreen;
