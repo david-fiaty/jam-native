@@ -1,6 +1,7 @@
 import { StyleSheet, FlatList } from "react-native";
 import { BaseProps } from "@/constants/Types";
 import DeviceManager from "@/manager/DeviceManager";
+import { Config } from "@/constants/Config";
 
 type Props = BaseProps & {
   data: object;
@@ -35,13 +36,13 @@ const ListView = ({
       data={data || []}
       //ref={ref}
       numColumns={numColumns || 1}
-      initialNumToRender={initialNumToRender}
+      initialNumToRender={initialNumToRender || Config.paginationSize}
       //initialScrollIndex={initialScrollIndex}
       scrollEnabled={scrollEnabled === false ? false : true}
       horizontal={horizontal === true ? horizontal : false}
       contentContainerStyle={[styles.container, contentContainerStyle]}
       columnWrapperStyle={columnWrapperStyle}
-      maxToRenderPerBatch={5}
+      maxToRenderPerBatch={Config.paginationSize}
       removeClippedSubviews={true}
       windowSize={5}
       keyExtractor={keyExtractor}

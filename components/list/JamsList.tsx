@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableOpacity, FlatList } from "react-native";
 import { useRouter } from "expo-router";
-import moment from "moment";
 import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
+import { Config } from "@/constants/Config";
+import moment from "moment";
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
@@ -16,6 +17,7 @@ import ImageSlideshow from "../slideshow/ImageSlideshow";
 import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from "@/manager/EntityManager";
+import StaticData from "@/constants/StaticData";
 
 const JamsList = () => {
   const router = useRouter();
@@ -148,7 +150,7 @@ const JamsList = () => {
             >
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
-                {i18n.t("Location")}: {row?.item?.location_type}
+                {i18n.t("Location")}: { StaticData.locationTypes.find((o: any) => o.id == row?.item?.location_type)?.label }
               </TextView>
             </BoxView>
             <BoxView
@@ -160,9 +162,7 @@ const JamsList = () => {
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
                 {i18n.t("Start")}:{" "}
-                {moment(row?.item?.period?.start_datetime).format(
-                  "MMM Do YYYY"
-                )}
+                {moment(row?.item?.period?.start_datetime).format(Config.dateFormat)}
               </TextView>
             </BoxView>
             <BoxView
@@ -174,7 +174,7 @@ const JamsList = () => {
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
                 {i18n.t("End")}:{" "}
-                {moment(row?.item?.period?.end_datetime).format("MMM Do YYYY")}
+                {moment(row?.item?.period?.end_datetime).format(Config.dateFormat)}
               </TextView>
             </BoxView>
             <BoxView
@@ -185,7 +185,7 @@ const JamsList = () => {
             >
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
-                {i18n.t("Industry")}: {row?.item?.sectors?.[0]?.name}
+                {i18n.t("Industry")}: { sectorsData.find((o: any) => o.id == row?.item?.sectors?.[0])?.name}
               </TextView>
             </BoxView>
             <BoxView
