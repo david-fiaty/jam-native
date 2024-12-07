@@ -42,7 +42,9 @@ class ApiManager {
     let url: string = Config.apiUrl + path;
 
     if (variables) {
-      
+      for (const [key, value] of Object.entries(variables)) {
+        url = url.replace(key, value);
+      }
     }
 
     if (options) {
