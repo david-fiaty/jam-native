@@ -43,6 +43,12 @@ const StaticData = {
       label: i18n.t('Online/Physical'),
     },
   ],
+  notificationTypes: [
+    {
+      id: 'like-jam',
+      label: i18n.t('Liked Jam'),
+    },
+  ],
   jamCategories: [
     {
       id: 'call',

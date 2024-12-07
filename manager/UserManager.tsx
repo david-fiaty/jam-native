@@ -54,17 +54,20 @@ class UserManager {
 
   async getNotifications(options?: any) {
     options = options || {};
-    let profileId: number = Store.getState().user.profileId;
     let userNotifications: any = [];
-    let defaults = {
+    let profileId: number = await this.getProfileId();
+
+    let defaults: any = {
       displayed_items_ids: [64, 65], // Todo - What is this required param
       nbr_items_to_return: Config.paginationSize,
     };
 
-    console.log(profileId);
-    
     if (profileId > 0) {
-      userNotifications = await DataManager.get('notifications', {...defaults, ...options});
+      userNotifications = await DataManager.get(
+        'notifications', 
+        {...defaults, ...options}, 
+        {'[profile_id]': profileId},
+      );
     }
 
     return userNotifications || [];

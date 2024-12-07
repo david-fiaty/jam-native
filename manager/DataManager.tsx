@@ -3,9 +3,9 @@ import Endpoints from '@/constants/Endpoints';
 import ApiManager from './ApiManager';
 
 class DataManager {
-  async get(key: keyof typeof Endpoints, options?: any) {
+  async get(key: keyof typeof Endpoints, options?: any, variables?: any) {
     // Variables
-    let data: any = await ApiManager.get(key, options);
+    let data: any = await ApiManager.get(key, options, variables);
     let results: any = [];
 
     // Extract data with key
