@@ -9,7 +9,6 @@ import i18n from '@/translation/i18n';
 import ScreenManager from '@/manager/ScreenManager';
 import UserManager from "@/manager/UserManager";
 import SpinnerView from "../view/SpinnerView";
-import StaticData from "@/constants/StaticData";
 
 const NotificationsMenu = () => {
   const router = useRouter();
@@ -26,8 +25,7 @@ const NotificationsMenu = () => {
     >
       <View style={Layout.menuItem}>
         <TextView>
-          { /*StaticData.notificationTypes.find((o: any) => o.id == row.item?.content?.notification_type)?.label */}
-          {row.item?.content?.content_data?.title} ({row.item?.content?.notification_type})
+          {row.item?.content?.content_data?.title}
         </TextView>
       </View>
     </TouchableOpacity>
