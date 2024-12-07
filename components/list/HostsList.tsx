@@ -14,6 +14,7 @@ import EntityManager from '@/manager/EntityManager';
 const HostsList = () => {
   const [profiles, setProfiles] = useState<any>(null);
   const [entity, setEntity] = useState<any>(null);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const entityId = ScreenManager.getActiveScreen()?.entityId;
 
   if (!entity) {
@@ -22,13 +23,14 @@ const HostsList = () => {
     });
   }
 
-  if (!profiles) {
+  if (entity && !profiles) {
     EntityManager.getProfiles({items_ids: entity?.[0]?.jammers}).then((items: any) => {
       setProfiles(items);
+      setIsLoaded(true);
     });
   }
 
-  if (!entity || !profiles) return <SpinnerView />;
+  if (!entity) return <SpinnerView />;
 
   const renderItem = (row: any) => (
     <TouchableOpacity onPress={() => console.log('clicked')}>
@@ -53,7 +55,7 @@ const HostsList = () => {
           />
         }
 
-        {!profiles?.length && 
+        {isLoaded && !profiles?.length && 
           <TextView>{i18n.t('No hosts available for this Jam.')}</TextView>
         }
       </View>
