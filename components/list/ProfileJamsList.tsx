@@ -39,8 +39,8 @@ const ProfileJamsList = ({ idArray }: Props) => {
 
   const renderItemImage = (url: any) => {
     if (!url) return <NoImageView imageSize={48} />;
-
     let imageSize = getImageSize();
+    
     return (
       <ImageView
         uri={Config.imageUrl + url}
