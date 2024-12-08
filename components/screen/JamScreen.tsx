@@ -6,7 +6,6 @@ import { BaseProps } from '@/constants/Types';
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
 import SpinnerView from '../view/SpinnerView';
-import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 import EntityManager from '@/manager/EntityManager';
 import JamsList from '../list/JamsList';

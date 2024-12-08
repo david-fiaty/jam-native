@@ -14,7 +14,7 @@ import AddItemButton from "../button/AddItemButton";
 import NoImageView from "../view/NoImageView";
 
 type Props = {
-  idArray?: any;
+  idArray?: any,
 };
 
 const ProfileJamsList = ({ idArray }: Props) => {
