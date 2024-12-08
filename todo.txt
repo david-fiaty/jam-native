@@ -101,17 +101,14 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 https://docs.google.com/spreadsheets/d/1sodzaVigD26XOopcXfLRykl51wPM5pKecS0i1QEDWMc/edit?hl=fr&gid=0#gid=0
 
 # New release:
-  - Ajout no image et titre pour Jams lists
-  - Ajout profile notifications vue/detail
+  - Integration endpoint countries
 
   
-  
-  - Ameliorations generales UI
-  - Amelioration gestion switch langues
-  - Amelioration upload profile image
-  - Ajout champ user location (Add jam form et profile form)
-  - Ajout user location dans Jams Map
-  - Amaliorations profile jams list (Add new, no image)
+
+  - Ajout no image et titre pour Jams lists
+  - Ajout profile notifications vue/detail
+  - Ajout profile jams vue/detail
+  - Connexion nouveaux endpoints /mobile-feed pour jams, projets, profiles
 
 # Todo 
 - Implement image cache : https://github.com/echowaves/expo-cached-image
