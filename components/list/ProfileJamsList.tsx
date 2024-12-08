@@ -109,7 +109,7 @@ const ProfileJamsList = ({ idArray }: Props) => {
         <ListView
           data={profileJams}
           numColumns={numColumns}
-          contentContainerStyle={{ gap: Layout.space.base, backgroundColor: 'red' }}
+          contentContainerStyle={{ gap: Layout.space.base }}
           columnWrapperStyle={{ gap: Layout.space.base }}
           scrollEnabled={false}
           renderItem={(row: any) => renderItem(row)}
