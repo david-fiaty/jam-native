@@ -230,10 +230,18 @@ const JamsList = ({idArray, showSpinner}: Props) => {
   );
 
   if (!jamsData?.length) {
-    EntityManager.listJams().then((data: any) => {
-      setJamsData(data);
-      setIsLoaded(true);
-    });
+    if (!idArray?.length) {
+      EntityManager.listJams().then((data: any) => {
+        setJamsData(data);
+        setIsLoaded(true);
+      });
+    }
+    else {
+      EntityManager.getJams({items_ids: idArray}).then((data: any) => {
+        setJamsData(data);
+        setIsLoaded(true);
+      });
+    }
   }
 
   if (!sectorsData?.length) { 
