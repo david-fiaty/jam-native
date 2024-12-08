@@ -74,6 +74,15 @@ class EntityManager {
     return await DataManager.get('sectors', options); 
   }
 
+  async getCountries() {
+    //let language = await UserManager.getLanguage();
+    // Todo - Fix creates error in components
+    let language = 'en';
+    let options = { lang: language };
+
+    return await DataManager.get('countries', options); 
+  }
+
   async getProfessions() {
     let language = await UserManager.getLanguage();
     let options = { lang: language };

@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { StyleSheet } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
 import SelectListBase from '../base/SelectListBase';
 import StaticData from '@/constants/StaticData';
+import EntityManager from "@/manager/EntityManager";
 
 type Props = BaseProps & {
   value?: any,
@@ -11,7 +13,13 @@ type Props = BaseProps & {
 };
 
 const CountryField = ({value, onChangeValue}: Props) => {
-  const countriesData: any = StaticData.countries;
+  const [countriesData, setCountriesData] = useState<any>(null);
+
+  if (!countriesData) {
+    EntityManager.getCountries().then((data: any) => {
+      console.log(data);
+    });
+  }
 
   const buildOptions = (optionsData: any) => {
     return optionsData.map((item: any) => {

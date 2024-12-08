@@ -29,7 +29,7 @@ const ProfileForm = () => {
   };
 
   UserManager.getUserData().then((data: any) => {
-    if (!userData) setUserData(data);
+     setUserData(data);
   });
 
   UserManager.getProfileData().then((data: any) => {
