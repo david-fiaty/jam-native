@@ -11,8 +11,8 @@ import TextView from "../view/TextView";
 import InputTextField from "../field/InputTextField";
 import CountryField from "../field/CountryField";
 import ProfileTypeField from "../field/ProfileTypeField";
-import UserJamsList from "../list/UserJamsList";
-import UserProjectsList from "../list/UserProjectsList";
+import ProfileJamsList from "../list/ProfileJamsList";
+import ProfileProjectsList from "../list/ProfileProjectsList";
 import SpinnerView from "../view/SpinnerView";
 import InputTextareaField from "../field/InputTextareaField";
 import UserManager from "@/manager/UserManager";
@@ -147,10 +147,10 @@ const ProfileForm = () => {
 
         <DividerView theme="secondary" />
 
-        <UserProjectsList data={userData?.projects} />
+        <ProfileProjectsList idArray={profileData?.saved_projects} />
 
         <DividerView />
-        <UserJamsList data={userData?.jams} />
+        <ProfileJamsList idArray={profileData?.saved_jams} />
 
         <DividerView />
       </View>
