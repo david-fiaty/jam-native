@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { StyleSheet } from "react-native";
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import { BaseProps } from '@/constants/Types';
@@ -33,7 +34,7 @@ const JamScreen = ({entityId}: Props) => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView align="flex-start" justify="flex-start" scroll={false} style={Layout.screenContent}>
+    <BoxView align="flex-start" justify="flex-start" scroll={false} style={[Layout.screenContent, styles.container]}>
       <BackButton
         title={i18n.t('Saved Jams')}
         onPress={() => router.back()}
@@ -44,5 +45,12 @@ const JamScreen = ({entityId}: Props) => {
     </BoxView>
   );
 };
+
+
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 0,
+  },
+});
 
 export default JamScreen;
