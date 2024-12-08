@@ -48,7 +48,7 @@ const ProfileProjectsList = ({ idArray }: Props) => {
   };
 
   if (!profileProjects?.length && idArray?.length) {
-    EntityManager.getJams([20, 54]).then((data: any) => {
+    EntityManager.getProjects({items_ids: idArray}).then((data: any) => {
       data.push({ id: "addItem" });
       setProfileProjects(data);
       setIsLoaded(true);
