@@ -53,12 +53,17 @@ class UserManager {
   }
 
   async getProfileData(options?: any) {
-    let profileId = this.getProfileId();
+    let profileId: number = await this.getProfileId();
     let defaults = {};
+    let profileData = [];
 
-    return await DataManager.get('notifications', {...defaults, ...options}, 
-      {'[profile_id]': profileId},
-    );
+    if (profileId > 0) {
+      profileData = await DataManager.get('getProfile', {...defaults, ...options}, 
+        {'[profile_id]': profileId},
+      );
+    }
+
+    return profileData || {};
   }
 
   async getNotifications(options?: any) {
