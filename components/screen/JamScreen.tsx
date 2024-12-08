@@ -34,7 +34,7 @@ const JamScreen = ({entityId}: Props) => {
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
-        title={i18n.t('Saved Jam')}
+        title={i18n.t('Your Jams')}
         onPress={() => router.back()}
       />
     
