@@ -1,5 +1,6 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useState } from "react";
+import { useRouter } from 'expo-router';
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import TextView from "../view/TextView";
@@ -18,6 +19,7 @@ type Props = {
 
 const ProfileJamsList = ({ idArray }: Props) => {
   const numColumns = 3;
+  const router = useRouter();
   const [profileJams, setProfileJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
@@ -37,21 +39,32 @@ const ProfileJamsList = ({ idArray }: Props) => {
 
   const renderItem = (row: any) => {
     if (row?.item?.id == "addItem") {
-      return <AddItemButton onPress={() => ScreenManager.toggleModal("AddJamForm")} />;
+      return (
+        <AddItemButton
+          onPress={() => ScreenManager.toggleModal("AddJamForm")}
+        />
+      );
     }
 
     return (
-      <TouchableOpacity 
-        key={row?.item?.id} 
-        onPress={() => ScreenManager.toggleModal('JamsList')}
+      <TouchableOpacity
+        key={row.item.id}
+        onPress={() =>
+          router.push({
+            pathname: "/notification",
+            params: { entityId: row.item.id },
+          })
+        }
       >
-        <View style={styles.item}>{renderItemImage(row?.item?.medias?.[0]?.url)}</View>
+        <View style={styles.item}>
+          {renderItemImage(row?.item?.medias?.[0]?.url)}
+        </View>
       </TouchableOpacity>
     );
   };
 
   if (!profileJams?.length && idArray?.length) {
-    EntityManager.getJams({items_ids: idArray}).then((data: any) => {
+    EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
       data.push({ id: "addItem" });
       setProfileJams(data);
       setIsLoaded(true);
