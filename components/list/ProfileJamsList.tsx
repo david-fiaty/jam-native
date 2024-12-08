@@ -13,10 +13,10 @@ import AddItemButton from "../button/AddItemButton";
 import NoImageView from "../view/NoImageView";
 
 type Props = {
-  data?: any;
+  idArray?: any;
 };
 
-const UserJamsList = ({ data }: Props) => {
+const ProfileJamsList = ({ idArray }: Props) => {
   const numColumns = 3;
   const [userJams, setUserJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -98,4 +98,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default UserJamsList;
+export default ProfileJamsList;
