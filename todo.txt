@@ -70,6 +70,10 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Notifications count: show total or less than total?
 
 # Issues
+
+
+
+
   - Jam Search: 
     > Aucun parametre de recherche fourni en exemple, suppose query_text
     > Je cree un jam avec title = "Jam - Native Test 2"

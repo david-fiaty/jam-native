@@ -20,7 +20,6 @@ import ScreenManager from "@/manager/ScreenManager";
 import ProfileImageField from "../field/ProfileImageField";
 
 const ProfileForm = () => {
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [userData, setUserData] = useState<any>(null);
   const [profileData, setProfileData] = useState<any>(null);
 
@@ -30,12 +29,14 @@ const ProfileForm = () => {
   };
 
   UserManager.getUserData().then((data: any) => {
-    if (!userData) setUserData(Object.assign({}, data));
-    if (!profileData) setProfileData(Object.assign({}, data?.account?.profiles?.[0]));
-    setIsLoaded(true);
+    if (!userData) setUserData(data);
   });
 
-  if (!isLoaded) return <SpinnerView />;
+  UserManager.getProfileData().then((data: any) => {
+    if (!profileData) setProfileData(data);
+  });
+
+  if (!userData || !profileData) return <SpinnerView />;
 
   return (
     <BoxView
