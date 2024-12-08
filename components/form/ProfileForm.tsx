@@ -30,14 +30,16 @@ const ProfileForm = () => {
   };
 
   UserManager.getUserData().then((data: any) => {
-    if (!userData) setUserData(Object.assign({}, data));
-    if (!profileData) setProfileData(Object.assign({}, data?.account?.profiles?.[0]));
+    if (!userData) setUserData(data);
+  });
+
+  UserManager.getProfileData().then((data: any) => {
+    if (!profileData) setProfileData(data);
     setIsLoaded(true);
   });
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(profileData?.liked_jams);
   return (
     <BoxView
       align="flex-start"
