@@ -6,9 +6,7 @@ import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
 import SpinnerView from '../view/SpinnerView';
 import TextView from '../view/TextView';
-import UserManager from "@/manager/UserManager";
 import i18n from '@/translation/i18n';
-import DividerView from '../view/DividerView';
 import EntityManager from '@/manager/EntityManager';
 
 type Props = BaseProps & {
@@ -18,7 +16,6 @@ type Props = BaseProps & {
 const JamScreen = ({entityId}: Props) => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [notificationsData, setNotificationsData] = useState<any>([]);
   const [entity, setEntity] = useState<any>(null);
 
   if (!entity) { 
