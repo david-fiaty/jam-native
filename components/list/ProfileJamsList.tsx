@@ -13,6 +13,7 @@ import SpinnerView from "../view/SpinnerView";
 import AddItemButton from "../button/AddItemButton";
 import NoImageView from "../view/NoImageView";
 import BoxView from "../view/BoxView";
+import { Colors } from "@/constants/Colors";
 
 type Props = {
   idArray?: any,
@@ -78,7 +79,7 @@ const ProfileJamsList = ({ idArray }: Props) => {
     <View style={styles.container}>
       <BoxView direction="row" align="center" justify="space-between">
         <TextView style={styles.title}>{i18n.t("Saved Jams")}</TextView>
-        <TextView>{i18n.t("View all")}</TextView>
+        <TextView style={styles.link}>{i18n.t("View all")}</TextView>
       </BoxView>
 
       {profileJams?.length > 0 && (
@@ -103,6 +104,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: Layout.space.base,
     flex: 1,
+  },
+  link: {
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.primary,
   },
   item: {
     flexDirection: "column",
