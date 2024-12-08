@@ -229,12 +229,22 @@ const JamsList = ({idArray, showSpinner}: Props) => {
     </View>
   );
 
-  if (!jamsData?.length) {
-    EntityManager.listJams().then((data: any) => {
-      setJamsData(data);
-      setIsLoaded(true);
-    });
-  }
+  const loadData = () => {
+    if (!idArray?.length) {
+      EntityManager.listJams().then((data: any) => {
+        setJamsData(data);
+        setIsLoaded(true);
+      });
+    }
+    else {
+      EntityManager.getJams({items_ids: idArray}).then((data: any) => {
+        setJamsData(data);
+        setIsLoaded(true);
+      });
+    }
+  };
+
+  if (!jamsData?.length) loadData();
 
   if (!sectorsData?.length) { 
     EntityManager.getSectors().then((data: any) => {
