@@ -51,7 +51,7 @@ const ProfileJamsList = ({ idArray }: Props) => {
   };
 
   if (!profileJams?.length && idArray?.length) {
-    EntityManager.getJams(idArray).then((data: any) => {
+    EntityManager.getJams({items_ids: idArray}).then((data: any) => {
       data.push({ id: "addItem" });
       setProfileJams(data);
       setIsLoaded(true);
