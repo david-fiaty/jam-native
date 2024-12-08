@@ -51,7 +51,7 @@ const ProfileJamsList = ({ idArray }: Props) => {
         key={row.item.id}
         onPress={() =>
           router.push({
-            pathname: "/notification",
+            pathname: "/jam",
             params: { entityId: row.item.id },
           })
         }
