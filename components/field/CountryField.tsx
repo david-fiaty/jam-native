@@ -4,7 +4,6 @@ import { BaseProps } from '@/constants/Types';
 import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
 import SelectListBase from '../base/SelectListBase';
-import StaticData from '@/constants/StaticData';
 import EntityManager from "@/manager/EntityManager";
 
 type Props = BaseProps & {
@@ -13,16 +12,16 @@ type Props = BaseProps & {
 };
 
 const CountryField = ({value, onChangeValue}: Props) => {
-  const [countriesData, setCountriesData] = useState<any>(null);
+  const [countriesData, setCountriesData] = useState<any>([]);
 
-  if (!countriesData) {
+  if (!countriesData?.length) {
     EntityManager.getCountries().then((data: any) => {
-      console.log(data);
+      setCountriesData(data);
     });
   }
 
   const buildOptions = (optionsData: any) => {
-    return optionsData.map((item: any) => {
+    return optionsData?.map((item: any) => {
       return {
         value: item?.code?.toLowerCase(),
         label: item?.name,
