@@ -147,7 +147,7 @@ const ProfileForm = () => {
 
         <DividerView theme="secondary" />
 
-        <ProfileProjectsList idArray={profileData?.saved_projects} />
+        {/*<ProfileProjectsList idArray={profileData?.saved_projects} />*/}
 
         <DividerView />
         <ProfileJamsList idArray={profileData?.saved_jams} />
