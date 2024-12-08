@@ -101,7 +101,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 https://docs.google.com/spreadsheets/d/1sodzaVigD26XOopcXfLRykl51wPM5pKecS0i1QEDWMc/edit?hl=fr&gid=0#gid=0
 
 # New release:
-  - Ameliorations UI
+  - Ameliorations UI et bug fixes
   - Integration endpoint countries
 
   
