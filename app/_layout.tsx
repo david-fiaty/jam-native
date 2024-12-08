@@ -129,6 +129,15 @@ const RootLayout = () => {
         },
       },
     },
+    {
+      name: 'jam',
+      options: {
+        ...headerVisibleOptions,
+        ...{
+          animation: 'default',
+        },
+      },
+    },
   ];
 
   useEffect(() => {
