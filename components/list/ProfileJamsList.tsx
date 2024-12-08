@@ -14,10 +14,12 @@ import AddItemButton from "../button/AddItemButton";
 import NoImageView from "../view/NoImageView";
 import BoxView from "../view/BoxView";
 import { Colors } from "@/constants/Colors";
+import DeviceManager from "@/manager/DeviceManager";
 
 type Props = {
   idArray?: any;
 };
+
 
 const ProfileJamsList = ({ idArray }: Props) => {
   const numColumns = 3;
@@ -25,14 +27,25 @@ const ProfileJamsList = ({ idArray }: Props) => {
   const [profileJams, setProfileJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
+  const getImageSize = () => {
+    let windowWidth: any = DeviceManager.window.width;
+    let imageDim: number = (windowWidth/3) - Layout.space.base*1.7;
+
+    return {
+      width: imageDim,
+      height: imageDim,
+    };
+  };
+
   const renderItemImage = (url: any) => {
     if (!url) return <NoImageView imageSize={48} />;
 
+    let imageSize = getImageSize();
     return (
       <ImageView
         uri={Config.imageUrl + url}
-        width={96.7}
-        height={96.7}
+        width={imageSize.width}
+        height={imageSize.height}
         resizeMode="cover"
         style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
       />
