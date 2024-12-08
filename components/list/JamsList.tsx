@@ -229,7 +229,7 @@ const JamsList = ({idArray, showSpinner}: Props) => {
     </View>
   );
 
-  if (!jamsData?.length) {
+  const loadData = () => {
     if (!idArray?.length) {
       EntityManager.listJams().then((data: any) => {
         setJamsData(data);
@@ -242,7 +242,9 @@ const JamsList = ({idArray, showSpinner}: Props) => {
         setIsLoaded(true);
       });
     }
-  }
+  };
+
+  if (!jamsData?.length) loadData();
 
   if (!sectorsData?.length) { 
     EntityManager.getSectors().then((data: any) => {
