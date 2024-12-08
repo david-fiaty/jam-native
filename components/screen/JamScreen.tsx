@@ -8,6 +8,7 @@ import SpinnerView from '../view/SpinnerView';
 import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 import EntityManager from '@/manager/EntityManager';
+import JamsList from '../list/JamsList';
 
 type Props = BaseProps & {
   entityId?: any,
@@ -32,13 +33,13 @@ const JamScreen = ({entityId}: Props) => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
+    <BoxView align="flex-start" justify="flex-start" scroll={false} style={Layout.screenContent}>
       <BackButton
-        title={i18n.t('Your Jams')}
+        title={i18n.t('Saved Jams')}
         onPress={() => router.back()}
       />
     
-      <TextView>{entity?.id}</TextView>
+      <JamsList />
 
     </BoxView>
   );
