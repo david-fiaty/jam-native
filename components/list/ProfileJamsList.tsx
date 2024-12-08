@@ -18,7 +18,7 @@ type Props = {
 
 const ProfileJamsList = ({ idArray }: Props) => {
   const numColumns = 3;
-  const [userJams, setUserJams] = useState<any>([]);
+  const [profileJams, setProfileJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const renderItemImage = (url: any) => {
@@ -50,11 +50,11 @@ const ProfileJamsList = ({ idArray }: Props) => {
     );
   };
 
-  if (!userJams?.length) {
+  if (!profileJams?.length) {
     // Todo - Needs profile jams by id
     EntityManager.getJams([20, 54]).then((data: any) => {
       data.push({ id: "addItem" });
-      setUserJams(data);
+      setProfileJams(data);
       setIsLoaded(true);
     });
   }
@@ -65,9 +65,9 @@ const ProfileJamsList = ({ idArray }: Props) => {
     <View style={styles.container}>
       <TextView style={styles.title}>{i18n.t("Your Jams")}</TextView>
 
-      {userJams?.length > 0 && (
+      {profileJams?.length > 0 && (
         <ListView
-          data={userJams}
+          data={profileJams}
           numColumns={numColumns}
           contentContainerStyle={{ gap: Layout.space.base }}
           columnWrapperStyle={{ gap: Layout.space.base }}
