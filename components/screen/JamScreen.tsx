@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
+import { StyleSheet } from "react-native";
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import { BaseProps } from '@/constants/Types';
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
 import SpinnerView from '../view/SpinnerView';
-import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 import EntityManager from '@/manager/EntityManager';
+import JamsList from '../list/JamsList';
 
 type Props = BaseProps & {
   entityId?: any,
@@ -32,16 +33,23 @@ const JamScreen = ({entityId}: Props) => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
+    <BoxView align="flex-start" justify="flex-start" scroll={false} style={[Layout.screenContent, styles.container]}>
       <BackButton
-        title={i18n.t('Saved Jam')}
+        title={i18n.t('Saved Jams')}
         onPress={() => router.back()}
       />
     
-      <TextView>{entity?.id}</TextView>
+      <JamsList />
 
     </BoxView>
   );
 };
+
+
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 0,
+  },
+});
 
 export default JamScreen;
