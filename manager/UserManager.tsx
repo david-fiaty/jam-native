@@ -32,14 +32,8 @@ class UserManager {
 
   async getUserData() {
     let userAccount: any = await DataManager.get('currentUser');
-    let userJams: any = await DataManager.get('listJams'); // Todo - Remove for better perf
-    let userProjects: any = await DataManager.get('listProjects');
-
-    return {
-      account: userAccount?.user,
-      jams: userJams,
-      projects: userProjects,
-    };
+   
+    return userAccount?.user;
   }
 
   async getProfileId() {
@@ -50,6 +44,20 @@ class UserManager {
     }
 
     return profileId;
+  }
+
+  async getProfileData(options?: any) {
+    let profileId: number = await this.getProfileId();
+    let defaults = {};
+    let profileData = [];
+
+    if (profileId > 0) {
+      profileData = await DataManager.get('getProfile', {...defaults, ...options}, 
+        {'[profile_id]': profileId},
+      );
+    }
+
+    return profileData || {};
   }
 
   async getNotifications(options?: any) {
@@ -63,9 +71,7 @@ class UserManager {
     };
 
     if (profileId > 0) {
-      userNotifications = await DataManager.get(
-        'notifications', 
-        {...defaults, ...options}, 
+      userNotifications = await DataManager.get('notifications', {...defaults, ...options}, 
         {'[profile_id]': profileId},
       );
     }

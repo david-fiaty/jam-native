@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import { BaseProps } from '@/constants/Types';
@@ -57,11 +56,5 @@ const NotificationScreen = ({entityId}: Props) => {
     </BoxView>
   );
 };
-
-const styles = StyleSheet.create({
-  title: {
-    fontSize: 16,
-  },
-});
 
 export default NotificationScreen;

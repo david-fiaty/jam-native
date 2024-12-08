@@ -29,6 +29,12 @@ const Endpoints = {
     searcheable: false,
     dataKey: null, 
   },
+  getProfile: {
+    path: '/profiles/[profile_id]/',
+    cacheable: false,
+    searcheable: false,
+    dataKey: null, 
+  },
   getProjects: {
     path: '/projects/',
     cacheable: false,

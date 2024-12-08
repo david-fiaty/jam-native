@@ -11,8 +11,8 @@ import TextView from "../view/TextView";
 import InputTextField from "../field/InputTextField";
 import CountryField from "../field/CountryField";
 import ProfileTypeField from "../field/ProfileTypeField";
-import UserJamsList from "../list/UserJamsList";
-import UserProjectsList from "../list/UserProjectsList";
+import ProfileJamsList from "../list/ProfileJamsList";
+import ProfileProjectsList from "../list/ProfileProjectsList";
 import SpinnerView from "../view/SpinnerView";
 import InputTextareaField from "../field/InputTextareaField";
 import UserManager from "@/manager/UserManager";
@@ -20,7 +20,6 @@ import ScreenManager from "@/manager/ScreenManager";
 import ProfileImageField from "../field/ProfileImageField";
 
 const ProfileForm = () => {
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [userData, setUserData] = useState<any>(null);
   const [profileData, setProfileData] = useState<any>(null);
 
@@ -30,12 +29,14 @@ const ProfileForm = () => {
   };
 
   UserManager.getUserData().then((data: any) => {
-    if (!userData) setUserData(Object.assign({}, data));
-    if (!profileData) setProfileData(Object.assign({}, data?.account?.profiles?.[0]));
-    setIsLoaded(true);
+    if (!userData) setUserData(data);
   });
 
-  if (!isLoaded) return <SpinnerView />;
+  UserManager.getProfileData().then((data: any) => {
+    if (!profileData) setProfileData(data);
+  });
+
+  if (!userData || !profileData) return <SpinnerView />;
 
   return (
     <BoxView
@@ -146,10 +147,10 @@ const ProfileForm = () => {
 
         <DividerView theme="secondary" />
 
-        <UserProjectsList data={userData?.projects} />
+        {/*<ProfileProjectsList idArray={profileData?.saved_projects} />*/}
 
         <DividerView />
-        <UserJamsList data={userData?.jams} />
+        <ProfileJamsList idArray={profileData?.saved_jams} />
 
         <DividerView />
       </View>

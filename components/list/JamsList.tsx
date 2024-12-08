@@ -4,6 +4,7 @@ import { useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
+import { BaseProps } from "@/constants/Types";
 import moment from "moment";
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
@@ -19,7 +20,12 @@ import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from "@/manager/EntityManager";
 import StaticData from "@/constants/StaticData";
 
-const JamsList = () => {
+type Props = BaseProps & {
+  idArray?: any,
+  showSpinner?: boolean,
+};
+
+const JamsList = ({idArray, showSpinner}: Props) => {
   const router = useRouter();
   const jamsListRef = useRef<FlatList>(null);
   const [jamsData, setJamsData] = useState<any>([]);
@@ -223,12 +229,22 @@ const JamsList = () => {
     </View>
   );
 
-  if (!jamsData?.length) {
-    EntityManager.listJams().then((data: any) => {
-      setJamsData(data);
-      setIsLoaded(true);
-    });
-  }
+  const loadData = () => {
+    if (!idArray?.length) {
+      EntityManager.listJams().then((data: any) => {
+        setJamsData(data);
+        setIsLoaded(true);
+      });
+    }
+    else {
+      EntityManager.getJams({items_ids: idArray}).then((data: any) => {
+        setJamsData(data);
+        setIsLoaded(true);
+      });
+    }
+  };
+
+  if (!jamsData?.length) loadData();
 
   if (!sectorsData?.length) { 
     EntityManager.getSectors().then((data: any) => {
@@ -237,7 +253,7 @@ const JamsList = () => {
     });
   }
 
-  if (!isLoaded) return <SpinnerView />;
+  if (!isLoaded && showSpinner) return <SpinnerView />;
 
   return (
     <BoxView direction="column" style={Layout.screenContent}>
