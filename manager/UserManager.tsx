@@ -52,6 +52,15 @@ class UserManager {
     return profileId;
   }
 
+  async getProfileData(options?: any) {
+    let profileId = this.getProfileId();
+    let defaults = {};
+
+    return await DataManager.get('notifications', {...defaults, ...options}, 
+      {'[profile_id]': profileId},
+    );
+  }
+
   async getNotifications(options?: any) {
     options = options || {};
     let userNotifications: any = [];
@@ -63,9 +72,7 @@ class UserManager {
     };
 
     if (profileId > 0) {
-      userNotifications = await DataManager.get(
-        'notifications', 
-        {...defaults, ...options}, 
+      userNotifications = await DataManager.get('notifications', {...defaults, ...options}, 
         {'[profile_id]': profileId},
       );
     }

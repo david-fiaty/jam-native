@@ -37,6 +37,7 @@ const ProfileForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
+  console.log(profileData?.liked_jams);
   return (
     <BoxView
       align="flex-start"
