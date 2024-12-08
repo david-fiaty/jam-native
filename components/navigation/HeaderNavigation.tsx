@@ -1,18 +1,26 @@
+import { useState } from "react";
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { Layout } from '@/constants/Layout';
+import { Colors } from '@/constants/Colors';
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 import LogoView from '../view/LogoView';
 import SearchField from '../field/SearchField';
 import ScreenManager from "@/manager/ScreenManager";
 import UserManager from '@/manager/UserManager';
-import { Colors } from '@/constants/Colors';
 
 const HeaderNavigation = () => {
   const route = useRoute();
+  const [notificationsCount, setNotificationsCount] = useState<number>(0);
   const activeScreen = ScreenManager.getActiveScreen();
   const isLoggedIn = UserManager.isLoggedIn();
+
+  if (!notificationsCount) {
+    UserManager.getNotifications().then((data: any) => {
+      setNotificationsCount(data.length);
+    });
+  }
 
   return (
     <View style={styles.container}>
@@ -35,7 +43,7 @@ const HeaderNavigation = () => {
 
               { isLoggedIn &&
                 <IconView 
-                  label="15+" 
+                  label={`${notificationsCount}+`} 
                   theme="secondary" 
                   size={11.5} 
                   onPress={() => ScreenManager.toggleModal('NotificationsMenu')} 
