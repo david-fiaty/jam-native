@@ -39,7 +39,7 @@ const JamScreen = ({entityId}: Props) => {
         onPress={() => router.back()}
       />
     
-      <JamsList />
+      <JamsList idArray={[entityId]}/>
 
     </BoxView>
   );
