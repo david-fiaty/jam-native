@@ -50,9 +50,8 @@ const ProfileJamsList = ({ idArray }: Props) => {
     );
   };
 
-  if (!profileJams?.length) {
-    // Todo - Needs profile jams by id
-    EntityManager.getJams([20, 54]).then((data: any) => {
+  if (!profileJams?.length && idArray?.length) {
+    EntityManager.getJams(idArray).then((data: any) => {
       data.push({ id: "addItem" });
       setProfileJams(data);
       setIsLoaded(true);
