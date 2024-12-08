@@ -1,6 +1,6 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useState } from "react";
-import { useRouter } from 'expo-router';
+import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import TextView from "../view/TextView";
@@ -16,7 +16,7 @@ import BoxView from "../view/BoxView";
 import { Colors } from "@/constants/Colors";
 
 type Props = {
-  idArray?: any,
+  idArray?: any;
 };
 
 const ProfileJamsList = ({ idArray }: Props) => {
@@ -79,7 +79,17 @@ const ProfileJamsList = ({ idArray }: Props) => {
     <View style={styles.container}>
       <BoxView direction="row" align="center" justify="space-between">
         <TextView style={styles.title}>{i18n.t("Saved Jams")}</TextView>
-        <TextView style={styles.link}>{i18n.t("View all")}</TextView>
+
+        <TouchableOpacity
+          onPress={() =>
+            router.push({
+              pathname: "/jam",
+              params: { entityId: 18 },
+            })
+          }
+        >
+          <TextView style={styles.link}>{i18n.t("View all")}</TextView>
+        </TouchableOpacity>
       </BoxView>
 
       {profileJams?.length > 0 && (
