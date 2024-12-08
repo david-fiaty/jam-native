@@ -9,6 +9,7 @@ import TextView from '../view/TextView';
 import UserManager from "@/manager/UserManager";
 import i18n from '@/translation/i18n';
 import DividerView from '../view/DividerView';
+import EntityManager from '@/manager/EntityManager';
 
 type Props = BaseProps & {
   entityId?: any,
@@ -20,11 +21,10 @@ const JamScreen = ({entityId}: Props) => {
   const [notificationsData, setNotificationsData] = useState<any>([]);
   const [entity, setEntity] = useState<any>(null);
 
-  if (!isLoaded) { 
-    UserManager.getNotifications().then((data: any) => {
-      setNotificationsData(data);
-      setEntity(data.find((o: any) => o.id == entityId));
-      setIsLoaded(true);
+  if (!entity) { 
+    EntityManager.getJams({items_ids: [entityId]}).then((item: any) => {
+      setEntity(item[0]);
+      setIsLoaded(true)
     });
   }
 
@@ -37,21 +37,11 @@ const JamScreen = ({entityId}: Props) => {
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
-        title={i18n.t('Notification') + ' - ' + entity?.content?.content_data?.title}
+        title={i18n.t('Saved Jam')}
         onPress={() => router.back()}
       />
     
-      <TextView>{entity?.content?.content_data?.caption}</TextView>
-
-      <DividerView theme="secondary" />
-      <TextView>
-        {i18n.t('Type')}: {entity?.content?.notification_type}
-      </TextView>      
-      
-      <TextView>
-        {i18n.t('Content type')}: {entity?.content?.content_type}
-      </TextView>      
-
+      <TextView>{entity?.id}</TextView>
 
     </BoxView>
   );
