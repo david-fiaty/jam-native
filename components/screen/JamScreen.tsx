@@ -38,17 +38,17 @@ const JamScreen = ({entityId}: Props) => {
         title={i18n.t('Saved Jams')}
         onPress={() => router.back()}
       />
-    
-      <JamsList idArray={[entityId]}/>
-
+      <BoxView style={Layout.mainContent}>
+        <JamsList idArray={[entityId]}/>
+      </BoxView>
     </BoxView>
   );
 };
 
-
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 0,
+    flex: 1,
   },
 });
 
