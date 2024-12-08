@@ -75,7 +75,7 @@ const ProfileJamsList = ({ idArray }: Props) => {
 
   return (
     <View style={styles.container}>
-      <TextView style={styles.title}>{i18n.t("Your Jams")}</TextView>
+      <TextView style={styles.title}>{i18n.t("Saved Jams")}</TextView>
 
       {profileJams?.length > 0 && (
         <ListView
