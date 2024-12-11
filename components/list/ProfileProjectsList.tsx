@@ -29,8 +29,9 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
   const [projectImages, addProjectImage] = useState<any>({});
 
   const renderItem = (row: any) => {
-    let imageSize = MediaManager.getThumbnailSize();
-    let output = <></>;
+    let imageSize: any = MediaManager.getThumbnailSize();
+    let output: any = <></>;
+    let uri: string = projectImages?.[row?.item?.id];
 
     if (row?.item?.id == "addItem") {
       output = <AddItemButton
@@ -39,7 +40,7 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
         onPress={() => ScreenManager.toggleModal("AddJamForm")}
       />;
     }
-    else if (!row?.item?.medias?.[0]?.url) {
+    else if (!uri) {
       output = <NoImageView 
         width={imageSize.width} 
         height={imageSize.height} 
@@ -49,7 +50,7 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
     else {
       output = <View style={styles.item}>
         <ImageView
-          uri={MediaManager.getImageUrl(row.item.medias[0].url)}
+          uri={uri}
           width={imageSize.width}
           height={imageSize.height}
           resizeMode="cover"
@@ -92,8 +93,6 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
   }
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(projectImages);
 
   return (
     <View style={styles.container}>
