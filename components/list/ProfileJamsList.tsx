@@ -42,18 +42,18 @@ const ProfileJamsList = ({ title, idArray, addButton }: Props) => {
     let imageSize = getImageSize();
     let output = <></>;
 
-    if (!row?.item?.medias?.[0]?.url) output = <NoImageView 
-      width={imageSize.width} 
-      height={imageSize.height} 
-    />;
-
-    else if (row?.item?.id == "addItem") {
+    if (row?.item?.id == "addItem") {
       output = <AddItemButton
         width={imageSize.width}
         height={imageSize.height}
         onPress={() => ScreenManager.toggleModal("AddJamForm")}
       />;
     }
+
+    else if (!row?.item?.medias?.[0]?.url) output = <NoImageView 
+      width={imageSize.width} 
+      height={imageSize.height} 
+    />;
   
     else {
       output = <TouchableOpacity
