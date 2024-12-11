@@ -49,22 +49,12 @@ const ProfileJamsList = ({ title, idArray, addButton }: Props) => {
         onPress={() => ScreenManager.toggleModal("AddJamForm")}
       />;
     }
-
     else if (!row?.item?.medias?.[0]?.url) output = <NoImageView 
       width={imageSize.width} 
       height={imageSize.height} 
     />;
-  
     else {
-      output = <TouchableOpacity
-        key={row.item.id}
-        onPress={() =>
-          router.push({
-            pathname: "/jam",
-            params: { idArray: [row.item.id] },
-          })
-        }
-      >
+      output = 
         <View style={styles.item}>
           <ImageView
             uri={Config.imageUrl + row.item.medias[0].url}
@@ -74,8 +64,23 @@ const ProfileJamsList = ({ title, idArray, addButton }: Props) => {
             style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
           />
         </View>
+    }
+
+    if (parseInt(row?.item?.id) > 0) {
+      output = <TouchableOpacity
+        key={row.item.id}
+        onPress={() =>
+          router.push({
+            pathname: "/jam",
+            params: { idArray: [row.item.id] },
+          })
+        }
+      >
+        {output}
       </TouchableOpacity>
     }
+
+
 
     return output;
   }
