@@ -57,16 +57,15 @@ const ProfileJamsList = ({ title, idArray, addButton }: Props) => {
       />;
     }
     else {
-      output = 
-        <View style={styles.item}>
-          <ImageView
-            uri={Config.imageUrl + row.item.medias[0].url}
-            width={imageSize.width}
-            height={imageSize.height}
-            resizeMode="cover"
-            style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
-          />
-        </View>
+      output = <View style={styles.item}>
+        <ImageView
+          uri={Config.imageUrl + row.item.medias[0].url}
+          width={imageSize.width}
+          height={imageSize.height}
+          resizeMode="cover"
+          style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
+        />
+      </View>
     }
 
     if (parseInt(row?.item?.id) > 0) {
