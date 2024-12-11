@@ -148,7 +148,7 @@ const ProfileForm = () => {
         <DividerView theme="secondary" />
         <ProfileProjectsList
           title={i18n.t("Saved Projects")} 
-          //addButton={true}
+          addButton={true}
           //idArray={profileData?.saved_projects}
           idArray={[14, 16, 17]}
         />
