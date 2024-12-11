@@ -83,11 +83,14 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
   }
 
   if (profileProjects?.length > 0 ) {
-    EntityManager.getProjectImageUrl(profileProjects[1]).then((value: any) => {
-      if (value) {
-        console.log(value);
-      }
-    });
+    profileProjects.map((item:any) => {
+      EntityManager.getProjectImageUrl(profileProjects[1]).then((value: any) => {
+        if (value) {
+          
+        }
+      });
+    });  
+
   }
 
   if (!isLoaded) return <SpinnerView />;
