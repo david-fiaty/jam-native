@@ -28,8 +28,14 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const renderItem = (row: any) => {
-    let imageSize = MediaManager.getThumbnailSize();;
+    let imageSize = MediaManager.getThumbnailSize();
     let output = <></>;
+    
+    EntityManager.getProjectImageUrl(row?.item).then((value: any) => {
+      console.log(value);
+    });
+
+    //console.log(url);
 
     if (row?.item?.id == "addItem") {
       output = <AddItemButton
@@ -76,7 +82,6 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
 
   if (!profileProjects?.length && idArray?.length) {
     EntityManager.getProjects({ items_ids: idArray }).then((data: any) => {
-      console.log(data);
       //if (addButton === true) data.push({ id: "addItem" });
       setProfileProjects(data);
       setIsLoaded(true);
