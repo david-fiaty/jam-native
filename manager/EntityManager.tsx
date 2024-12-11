@@ -66,7 +66,7 @@ class EntityManager {
     return DataManager.get('getProjects', {...defaults, ...options}); 
   }
 
-  async getProjectImageUri(entity: any) {
+  async getProjectImageUrl(entity: any) {
     let projectJams = await this.getJams({items_ids: entity?.jams});
     let projectImages = projectJams.map((item: any) => item?.medias?.[0]?.url).filter((value: any) => (value));
 
