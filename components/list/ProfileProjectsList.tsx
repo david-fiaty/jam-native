@@ -86,10 +86,7 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
   if (profileProjects?.length > 0 ) {
     profileProjects.map((item: any) => {
       EntityManager.getProjectImageUrl(item).then((value: any) => {
-        if (value) {
-          //console.log(value);
-          addProjectImage({ ...projectImages, ...{[item?.id]: value} });
-        }
+        if (value) addProjectImage({ ...projectImages, ...{[item?.id]: value} });
       });
     });  
   }
