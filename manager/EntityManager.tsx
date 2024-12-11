@@ -61,8 +61,9 @@ class EntityManager {
   }
 
   async getProjects(options?: any) {
+    options = options || {};
     let defaults = {};
-
+    
     return DataManager.get('getProjects', {...defaults, ...options}); 
   }
 
@@ -76,7 +77,6 @@ class EntityManager {
 
     return null;
   }
-
 
   async getSectors() {
     //let language = await UserManager.getLanguage();
