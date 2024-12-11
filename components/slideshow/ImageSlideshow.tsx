@@ -44,9 +44,9 @@ const ImageSlideshow = ({ data }: Props) => {
 
   return (
     <NoImageView
-      imageSize={120}
+      width={width}
+      height={height}
       containerStyle={{
-        width: '100%',
         height: height,
         borderRadius: 0,
       }}
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   pagination: {
-    bottom: -Layout.space.base,
+    bottom: - Layout.space.base,
     left: 0,
     right: 0,
     height: Layout.space.base,
