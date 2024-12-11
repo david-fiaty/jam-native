@@ -27,11 +27,10 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
   const [profileProjects, setProfileProjects] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const renderItem = (row: any) => {
+  const renderItem = async (row: any) => {
     let imageSize = MediaManager.getThumbnailSize();
     let output = <></>;
-
-    console.log(row?.item?.jams);
+    let uri = await EntityManager.getProjectImageUri(row?.item);
 
     if (row?.item?.id == "addItem") {
       output = <AddItemButton
@@ -40,7 +39,7 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
         onPress={() => ScreenManager.toggleModal("AddJamForm")}
       />;
     }
-    else if (!row?.item?.medias?.[0]?.url) {
+    else if (!uri) {
       output = <NoImageView 
         width={imageSize.width} 
         height={imageSize.height} 
@@ -50,7 +49,7 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
     else {
       output = <View style={styles.item}>
         <ImageView
-          uri={MediaManager.getImageUrl(row.item.medias[0].url)}
+          uri={uri}
           width={imageSize.width}
           height={imageSize.height}
           resizeMode="cover"
@@ -78,7 +77,6 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
 
   if (!profileProjects?.length && idArray?.length) {
     EntityManager.getProjects({ items_ids: idArray }).then((data: any) => {
-      console.log(data);
       //if (addButton === true) data.push({ id: "addItem" });
       setProfileProjects(data);
       setIsLoaded(true);
