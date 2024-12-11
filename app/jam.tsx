@@ -5,12 +5,12 @@ import BaseTheme from "@/constants/BaseTheme";
 import JamScreen from "@/components/screen/JamScreen";
 
 export default () => {
-  const { entityId } = useLocalSearchParams();
+  const { idArray } = useLocalSearchParams();
 
   return ( 
     <ThemeProvider theme={BaseTheme}>
       <ScreenView>
-        <JamScreen entityId={entityId} />
+        <JamScreen idArray={idArray} />
       </ScreenView>
     </ThemeProvider>
   );
