@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
+import { Colors } from "@/constants/Colors";
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
 import ImageView from "../view/ImageView";
@@ -13,8 +14,7 @@ import SpinnerView from "../view/SpinnerView";
 import AddItemButton from "../button/AddItemButton";
 import NoImageView from "../view/NoImageView";
 import BoxView from "../view/BoxView";
-import { Colors } from "@/constants/Colors";
-import DeviceManager from "@/manager/DeviceManager";
+import MediaManager from "@/manager/MediaManager";
 
 type Props = {
   title?: any;
@@ -28,18 +28,8 @@ const ProfileJamsList = ({ title, idArray, addButton }: Props) => {
   const [profileJams, setProfileJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const getImageSize = () => {
-    let windowWidth: any = DeviceManager.window.width;
-    let imageDim: number = windowWidth / 3 - Layout.space.base * 1.7;
-
-    return {
-      width: imageDim,
-      height: imageDim,
-    };
-  };
-
   const renderItem = (row: any) => {
-    let imageSize = getImageSize();
+    let imageSize = MediaManager.getThumbnailSize();
     let output = <></>;
 
     if (row?.item?.id == "addItem") {
@@ -57,16 +47,15 @@ const ProfileJamsList = ({ title, idArray, addButton }: Props) => {
       />;
     }
     else {
-      output = 
-        <View style={styles.item}>
-          <ImageView
-            uri={Config.imageUrl + row.item.medias[0].url}
-            width={imageSize.width}
-            height={imageSize.height}
-            resizeMode="cover"
-            style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
-          />
-        </View>
+      output = <View style={styles.item}>
+        <ImageView
+          uri={Config.imageUrl + row.item.medias[0].url}
+          width={imageSize.width}
+          height={imageSize.height}
+          resizeMode="cover"
+          style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
+        />
+      </View>
     }
 
     if (parseInt(row?.item?.id) > 0) {
@@ -146,8 +135,6 @@ const styles = StyleSheet.create({
   },
   image: {
     borderRadius: Layout.space.base,
-    width: 96.7,
-    height: 96.7,
   },
 });
 

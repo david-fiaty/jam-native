@@ -150,6 +150,13 @@ const ProfileForm = () => {
         {/*<ProfileProjectsList idArray={profileData?.saved_projects} />*/}
 
         <DividerView />
+        <ProfileProjectsList
+          title={i18n.t("Saved Projects")} 
+          idArray={[14, 16, 17]}
+          addButton={true}
+        />
+        
+        <DividerView />
         <ProfileJamsList 
           title={i18n.t("Saved Jams")} 
           idArray={profileData?.saved_jams} 
