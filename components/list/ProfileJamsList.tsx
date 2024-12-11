@@ -49,10 +49,13 @@ const ProfileJamsList = ({ title, idArray, addButton }: Props) => {
         onPress={() => ScreenManager.toggleModal("AddJamForm")}
       />;
     }
-    else if (!row?.item?.medias?.[0]?.url) output = <NoImageView 
-      width={imageSize.width} 
-      height={imageSize.height} 
-    />;
+    else if (!row?.item?.medias?.[0]?.url) {
+      output = <NoImageView 
+        width={imageSize.width} 
+        height={imageSize.height} 
+        rounded={true}
+      />;
+    }
     else {
       output = 
         <View style={styles.item}>
