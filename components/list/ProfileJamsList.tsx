@@ -17,10 +17,12 @@ import { Colors } from "@/constants/Colors";
 import DeviceManager from "@/manager/DeviceManager";
 
 type Props = {
+  title?: any,
   idArray?: any;
+  addButton?: boolean,
 };
 
-const ProfileJamsList = ({ idArray }: Props) => {
+const ProfileJamsList = ({ title, idArray, addButton }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const [profileJams, setProfileJams] = useState<any>([]);
@@ -79,7 +81,7 @@ const ProfileJamsList = ({ idArray }: Props) => {
 
   if (!profileJams?.length && idArray?.length) {
     EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
-      data.push({ id: "addItem" });
+      if (addButton) data.push({ id: "addItem" });
       setProfileJams(data);
       setIsLoaded(true);
     });
@@ -90,7 +92,7 @@ const ProfileJamsList = ({ idArray }: Props) => {
   return (
     <View style={styles.container}>
       <BoxView direction="row" align="center" justify="space-between">
-        <TextView style={styles.title}>{i18n.t("Saved Jams")}</TextView>
+        <TextView style={styles.title}>{title}</TextView>
 
         <TouchableOpacity
           onPress={() =>
