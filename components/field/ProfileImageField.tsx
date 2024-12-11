@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { StyleSheet, View } from "react-native";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
-import { Config } from "@/constants/Config";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
 import MediaPickerBase from "../base/MediaPickerBase";
 import ImageView from "../view/ImageView";
 import IconView from "../view/IconView";
+import MediaManager from '@/manager/MediaManager';
 
 type Props = BaseProps & {
   value?: any;
@@ -21,7 +21,7 @@ const ProfileImageField = ({value, storage, onChangeValue }: Props) => {
   const [uri, setUri] = useState<any>('');
 
   if (!uri && value?.length > 0) {
-    setUri(Config.imageUrl + value);
+    setUri(MediaManager.getImageUrl(value));
   }
   
   const onSelectItem = (mediaList: any) => {
