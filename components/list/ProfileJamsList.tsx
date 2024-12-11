@@ -17,9 +17,9 @@ import { Colors } from "@/constants/Colors";
 import DeviceManager from "@/manager/DeviceManager";
 
 type Props = {
-  title?: any,
+  title?: any;
   idArray?: any;
-  addButton?: boolean,
+  addButton?: boolean;
 };
 
 const ProfileJamsList = ({ title, idArray, addButton }: Props) => {
@@ -30,7 +30,7 @@ const ProfileJamsList = ({ title, idArray, addButton }: Props) => {
 
   const getImageSize = () => {
     let windowWidth: any = DeviceManager.window.width;
-    let imageDim: number = (windowWidth/3) - Layout.space.base*1.7;
+    let imageDim: number = windowWidth / 3 - Layout.space.base * 1.7;
 
     return {
       width: imageDim,
@@ -38,50 +38,46 @@ const ProfileJamsList = ({ title, idArray, addButton }: Props) => {
     };
   };
 
-  const renderItemImage = (url: any) => {
-    if (!url) return <NoImageView imageSize={48} />;
-    let imageSize = getImageSize();
-    
-    return (
-      <ImageView
-        uri={Config.imageUrl + url}
-        width={imageSize.width}
-        height={imageSize.height}
-        resizeMode="cover"
-        style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
-      />
-    );
-  };
-
   const renderItem = (row: any) => {
+    let imageSize = getImageSize();
+    if (!row?.item?.medias?.[0]?.url) return <NoImageView width={imageSize.width} height={imageSize.height} />;
+
     if (row?.item?.id == "addItem") {
       return (
         <AddItemButton
+          width={imageSize.width}
+          height={imageSize.height}
           onPress={() => ScreenManager.toggleModal("AddJamForm")}
         />
       );
+    } else {
+      return (
+        <TouchableOpacity
+          key={row.item.id}
+          onPress={() =>
+            router.push({
+              pathname: "/jam",
+              params: { idArray: [row.item.id] },
+            })
+          }
+        >
+          <View style={styles.item}>
+            <ImageView
+              uri={Config.imageUrl + row.item.medias[0].url}
+              width={imageSize.width}
+              height={imageSize.height}
+              resizeMode="cover"
+              style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
+            />
+          </View>
+        </TouchableOpacity>
+      );
     }
-
-    return (
-      <TouchableOpacity
-        key={row.item.id}
-        onPress={() =>
-          router.push({
-            pathname: "/jam",
-            params: { idArray: [row.item.id] },
-          })
-        }
-      >
-        <View style={styles.item}>
-          {renderItemImage(row?.item?.medias?.[0]?.url)}
-        </View>
-      </TouchableOpacity>
-    );
   };
 
   if (!profileJams?.length && idArray?.length) {
     EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
-      if (addButton) data.push({ id: "addItem" });
+      if (addButton === true) data.push({ id: "addItem" });
       setProfileJams(data);
       setIsLoaded(true);
     });
