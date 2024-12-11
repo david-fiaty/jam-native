@@ -96,7 +96,7 @@ const ProfileJamsList = ({ idArray }: Props) => {
           onPress={() =>
             router.push({
               pathname: "/jam",
-              params: { idArray: [18, 19, 20] },
+              params: { idArray: idArray },
             })
           }
         >
