@@ -40,20 +40,23 @@ const ProfileJamsList = ({ title, idArray, addButton }: Props) => {
 
   const renderItem = (row: any) => {
     let imageSize = getImageSize();
-    if (!row?.item?.medias?.[0]?.url) return <NoImageView width={imageSize.width} height={imageSize.height} />;
+    let output = <></>;
 
-    if (row?.id == "addItem") {
-      return (
-        <AddItemButton
-          width={imageSize.width}
-          height={imageSize.height}
-          onPress={() => ScreenManager.toggleModal("AddJamForm")}
-        />
-      );
+    if (!row?.item?.medias?.[0]?.url) output = <NoImageView 
+      width={imageSize.width} 
+      height={imageSize.height} 
+    />;
+
+    else if (row?.item?.id == "addItem") {
+      output = <AddItemButton
+        width={imageSize.width}
+        height={imageSize.height}
+        onPress={() => ScreenManager.toggleModal("AddJamForm")}
+      />;
     }
   
-    return (
-      <TouchableOpacity
+    else {
+      output = <TouchableOpacity
         key={row.item.id}
         onPress={() =>
           router.push({
@@ -72,14 +75,14 @@ const ProfileJamsList = ({ title, idArray, addButton }: Props) => {
           />
         </View>
       </TouchableOpacity>
-    );
+    }
+
+    return output;
   }
 
   if (!profileJams?.length && idArray?.length) {
     EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
       if (addButton === true) data.push({ id: "addItem" });
-
-      ///console.log(data);
       setProfileJams(data);
       setIsLoaded(true);
     });
