@@ -11,17 +11,17 @@ import EntityManager from '@/manager/EntityManager';
 import JamsList from '../list/JamsList';
 
 type Props = BaseProps & {
-  entityId?: any,
+  idArray?: any,
 };
 
-const JamScreen = ({entityId}: Props) => {
+const JamScreen = ({ idArray }: Props) => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [entity, setEntity] = useState<any>(null);
+  const [entityIds, setEntityIds] = useState<any>(null);
 
-  if (!entity) { 
-    EntityManager.getJams({items_ids: [entityId]}).then((item: any) => {
-      setEntity(item[0]);
+  if (!entityIds) { 
+    EntityManager.getJams({items_ids: idArray.split(',')}).then((item: any) => {
+      setEntityIds(item[0]);
       setIsLoaded(true)
     });
   }
@@ -39,7 +39,7 @@ const JamScreen = ({entityId}: Props) => {
         onPress={() => router.back()}
       />
       <BoxView style={Layout.mainContent}>
-        <JamsList idArray={[entityId]}/>
+        <JamsList idArray={entityIds}/>
       </BoxView>
     </BoxView>
   );
