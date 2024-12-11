@@ -16,12 +16,13 @@ import BoxView from "../view/BoxView";
 import MediaManager from "@/manager/MediaManager";
 
 type Props = {
-  title?: any;
-  idArray?: any;
-  addButton?: boolean;
+  title?: any,
+  idArray?: any,
+  addButton?: boolean,
+  allButton?: boolean,
 };
 
-const ProfileJamsList = ({ title, idArray, addButton }: Props) => {
+const ProfileJamsList = ({ title, idArray, addButton, allButton }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const [profileJams, setProfileJams] = useState<any>([]);
@@ -89,7 +90,7 @@ const ProfileJamsList = ({ title, idArray, addButton }: Props) => {
       <BoxView direction="row" align="center" justify="space-between">
         <TextView style={styles.title}>{title}</TextView>
 
-        <TouchableOpacity
+        { allButton && <TouchableOpacity
           onPress={() =>
             router.push({
               pathname: "/jam",
@@ -98,7 +99,7 @@ const ProfileJamsList = ({ title, idArray, addButton }: Props) => {
           }
         >
           <TextView style={styles.link}>{i18n.t("View all")}</TextView>
-        </TouchableOpacity>
+        </TouchableOpacity> }
       </BoxView>
 
       {profileJams?.length > 0 && (
