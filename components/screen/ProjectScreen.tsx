@@ -5,6 +5,7 @@ import { BaseProps } from '@/constants/Types';
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
 import JamsList from '../list/JamsList';
+import TextView from "../view/TextView";
 
 type Props = BaseProps & {
   idArray?: any,
@@ -21,7 +22,7 @@ const ProjectScreen = ({ idArray, title }: Props) => {
         onPress={() => router.back()}
       />
       <BoxView style={Layout.mainContent}>
-        <JamsList idArray={idArray} showSpinner={true} />
+        <TextView>PROJECTS LIST</TextView>
       </BoxView>
     </BoxView>
   );
