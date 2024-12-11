@@ -41,6 +41,12 @@ const Endpoints = {
     searcheable: false,
     dataKey: null, 
   },
+  countries: {
+    path: '/countries/',
+    cacheable: true,
+    searcheable: false,
+    dataKey: null,
+  },
   sectors: {
     path: '/sectors/',
     cacheable: true,

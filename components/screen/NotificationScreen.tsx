@@ -16,23 +16,17 @@ type Props = BaseProps & {
 
 const NotificationScreen = ({entityId}: Props) => {
   const router = useRouter();
-  const [isLoaded, setIsLoaded] = useState(false);
   const [notificationsData, setNotificationsData] = useState<any>([]);
   const [entity, setEntity] = useState<any>(null);
 
-  if (!isLoaded) { 
+  if (!notificationsData?.length) { 
     UserManager.getNotifications().then((data: any) => {
       setNotificationsData(data);
       setEntity(data.find((o: any) => o.id == entityId));
-      setIsLoaded(true);
     });
   }
 
-  useEffect(() => {
-    setTimeout(() => setIsLoaded(true), Layout.animation.duration);
-  });
-
-  if (!isLoaded) return <SpinnerView />;
+  if (!notificationsData?.length) return <SpinnerView />;
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>

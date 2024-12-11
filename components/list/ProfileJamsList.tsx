@@ -1,6 +1,6 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useState } from "react";
-import { useRouter } from 'expo-router';
+import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import TextView from "../view/TextView";
@@ -12,25 +12,41 @@ import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
 import AddItemButton from "../button/AddItemButton";
 import NoImageView from "../view/NoImageView";
+import BoxView from "../view/BoxView";
+import { Colors } from "@/constants/Colors";
+import DeviceManager from "@/manager/DeviceManager";
 
 type Props = {
-  idArray?: any,
+  title?: any,
+  idArray?: any;
+  addButton?: boolean,
 };
 
-const ProfileJamsList = ({ idArray }: Props) => {
+const ProfileJamsList = ({ title, idArray, addButton }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const [profileJams, setProfileJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
+  const getImageSize = () => {
+    let windowWidth: any = DeviceManager.window.width;
+    let imageDim: number = (windowWidth/3) - Layout.space.base*1.7;
+
+    return {
+      width: imageDim,
+      height: imageDim,
+    };
+  };
+
   const renderItemImage = (url: any) => {
     if (!url) return <NoImageView imageSize={48} />;
-
+    let imageSize = getImageSize();
+    
     return (
       <ImageView
         uri={Config.imageUrl + url}
-        width={96.7}
-        height={96.7}
+        width={imageSize.width}
+        height={imageSize.height}
         resizeMode="cover"
         style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
       />
@@ -52,7 +68,7 @@ const ProfileJamsList = ({ idArray }: Props) => {
         onPress={() =>
           router.push({
             pathname: "/jam",
-            params: { entityId: row.item.id },
+            params: { idArray: [row.item.id] },
           })
         }
       >
@@ -65,7 +81,7 @@ const ProfileJamsList = ({ idArray }: Props) => {
 
   if (!profileJams?.length && idArray?.length) {
     EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
-      data.push({ id: "addItem" });
+      if (addButton) data.push({ id: "addItem" });
       setProfileJams(data);
       setIsLoaded(true);
     });
@@ -75,7 +91,20 @@ const ProfileJamsList = ({ idArray }: Props) => {
 
   return (
     <View style={styles.container}>
-      <TextView style={styles.title}>{i18n.t("Saved Jams")}</TextView>
+      <BoxView direction="row" align="center" justify="space-between">
+        <TextView style={styles.title}>{title}</TextView>
+
+        <TouchableOpacity
+          onPress={() =>
+            router.push({
+              pathname: "/jam",
+              params: { idArray: idArray },
+            })
+          }
+        >
+          <TextView style={styles.link}>{i18n.t("View all")}</TextView>
+        </TouchableOpacity>
+      </BoxView>
 
       {profileJams?.length > 0 && (
         <ListView
@@ -98,6 +127,11 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "bold",
     marginBottom: Layout.space.base,
+    flex: 1,
+  },
+  link: {
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.primary,
   },
   item: {
     flexDirection: "column",
