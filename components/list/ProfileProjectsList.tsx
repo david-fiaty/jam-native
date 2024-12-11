@@ -64,8 +64,8 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
         key={row.item.id}
         onPress={() =>
           router.push({
-            pathname: "/jam",
-            params: { idArray: [row.item.id] },
+            pathname: "/project",
+            params: { idArray: [row.item.id], title: title },
           })
         }
       >
@@ -102,8 +102,8 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
         <TouchableOpacity
           onPress={() =>
             router.push({
-              pathname: "/jam",
-              params: { idArray: idArray },
+              pathname: "/project",
+              params: { idArray: idArray, title: title },
             })
           }
         >
