@@ -3,16 +3,16 @@ import { View, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchFilter } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
+import { Colors } from "@/constants/Colors";
 import ImageView from "./ImageView";
 import BoxView from "./BoxView";
 import TextView from "./TextView";
 import ScreenManager from '@/manager/ScreenManager';
 import i18n from "@/translation/i18n";
-import { Colors } from "@/constants/Colors";
 import ListView from "./ListView";
 import DataManager from "@/manager/DataManager";
-import { Config } from '@/constants/Config';
 import SpinnerView from './SpinnerView';
+import MediaManager from '@/manager/MediaManager';
 
 const tabs = [
   {
@@ -110,7 +110,7 @@ const SearchView = () => {
             <TouchableOpacity>
               <View style={styles.item}>
                 <ImageView 
-                  uri={Config.imageUrl + row.item?.medias?.[0]?.url} 
+                  uri={MediaManager.getImageUrl(row.item?.medias?.[0]?.url)} 
                   width={96.7}
                   height={96.7}
                   resizeMode="cover"

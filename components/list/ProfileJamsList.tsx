@@ -2,7 +2,6 @@ import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useState } from "react";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
-import { Config } from "@/constants/Config";
 import { Colors } from "@/constants/Colors";
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
@@ -49,7 +48,7 @@ const ProfileJamsList = ({ title, idArray, addButton }: Props) => {
     else {
       output = <View style={styles.item}>
         <ImageView
-          uri={Config.imageUrl + row.item.medias[0].url}
+          uri={MediaManager.getImageUrl(row.item.medias[0].url)}
           width={imageSize.width}
           height={imageSize.height}
           resizeMode="cover"

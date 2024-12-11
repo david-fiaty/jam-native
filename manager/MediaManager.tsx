@@ -1,4 +1,5 @@
 import { Layout } from '@/constants/Layout';
+import { Config } from '@/constants/Config';
 import * as FileSystem from 'expo-file-system';
 import DeviceManager from "@/manager/DeviceManager";
 
@@ -27,6 +28,10 @@ class MediaManager {
       width: imageDim,
       height: imageDim,
     };
+  }
+
+  getImageUrl (path: any) {
+    return Config.imageUrl + path;
   }
 }
 
