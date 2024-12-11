@@ -163,12 +163,14 @@ const ProfileForm = () => {
         <DividerView />
         <ProfileJamsList 
           title={i18n.t("Saved Jams")} 
+          allButton={true}
           idArray={profileData?.saved_jams} 
         />
 
         <DividerView />
         <ProfileJamsList 
           title={i18n.t("Liked Jams")} 
+          allButton={true}
           idArray={profileData?.liked_jams} 
         />
 
