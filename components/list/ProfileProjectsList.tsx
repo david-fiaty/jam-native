@@ -30,7 +30,9 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
   const renderItem = async (row: any) => {
     let imageSize = MediaManager.getThumbnailSize();
     let output = <></>;
-    let uri = await EntityManager.getProjectImageUri(row?.item);
+    let url = await EntityManager.getProjectImageUrl(row?.item);
+
+    console.log(url);
 
     if (row?.item?.id == "addItem") {
       output = <AddItemButton
@@ -39,7 +41,7 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
         onPress={() => ScreenManager.toggleModal("AddJamForm")}
       />;
     }
-    else if (!uri) {
+    else if (!row?.item?.medias?.[0]?.url) {
       output = <NoImageView 
         width={imageSize.width} 
         height={imageSize.height} 
@@ -49,7 +51,7 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
     else {
       output = <View style={styles.item}>
         <ImageView
-          uri={uri}
+          uri={MediaManager.getImageUrl(row.item.medias[0].url)}
           width={imageSize.width}
           height={imageSize.height}
           resizeMode="cover"
