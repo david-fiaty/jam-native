@@ -30,9 +30,9 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
   const renderItem = (row: any) => {
     let imageSize = MediaManager.getThumbnailSize();
     let output = <></>;
-
-    EntityManager.getProjectImageUrl(row?.item).then((url: any) => {
-      console.log(url);
+    
+    EntityManager.getProjectImageUrl(row?.item).then((value: any) => {
+      console.log(value);
     });
 
     //console.log(url);
