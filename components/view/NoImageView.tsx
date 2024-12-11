@@ -8,17 +8,19 @@ import { Colors } from '@/constants/Colors';
 type Props = BaseProps & {
   width?: any,
   height?: any,
+  rounded?: boolean,
   containerStyle?: any,
 };
 
-const NoImageView = ({width, height, containerStyle}: Props) => {
+const NoImageView = ({width, height, rounded, containerStyle}: Props) => {
   const path: any = require('@/assets/images/logo-mono-512.png');
+  const boxStyles = rounded == true ? {width: width, height: height} : {};  
 
   return (
     <BoxView 
       align="center" 
       justify="center" 
-      style={[styles.container, containerStyle, {width: width, height: height}]}
+      style={[styles.container, containerStyle, boxStyles]}
     >
       <ImageView 
         path={path} 
