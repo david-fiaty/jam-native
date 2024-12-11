@@ -30,12 +30,6 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
   const renderItem = (row: any) => {
     let imageSize = MediaManager.getThumbnailSize();
     let output = <></>;
-    
-    EntityManager.getProjectImageUrl(row?.item).then((value: any) => {
-      console.log(value);
-    });
-
-    //console.log(url);
 
     if (row?.item?.id == "addItem") {
       output = <AddItemButton
@@ -86,6 +80,17 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
       setProfileProjects(data);
       setIsLoaded(true);
     });
+  }
+
+  if (profileProjects?.length > 0 ) {
+    profileProjects.map((item:any) => {
+      EntityManager.getProjectImageUrl(profileProjects[1]).then((value: any) => {
+        if (value) {
+          
+        }
+      });
+    });  
+
   }
 
   if (!isLoaded) return <SpinnerView />;
