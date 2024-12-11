@@ -1,11 +1,11 @@
 import { StyleSheet, View } from "react-native";
-import { Config } from "@/constants/Config";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import Slick from "react-native-slick";
 import ImageView from "../view/ImageView";
 import DeviceManager from "@/manager/DeviceManager";
 import NoImageView from "../view/NoImageView";
+import MediaManager from "@/manager/MediaManager";
 
 type Props = {
   data?: any;
@@ -18,7 +18,7 @@ const ImageSlideshow = ({ data }: Props) => {
   const renderItem = (item: any, index: number) => (
     <View style={styles.item} key={`dot-${index}`}>
       <ImageView
-        uri={Config.imageUrl + item?.url}
+        uri={MediaManager.getImageUrl(item?.url)}
         resizeMode="cover"
         width={width}
         height={height}
