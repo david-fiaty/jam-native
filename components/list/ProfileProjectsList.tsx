@@ -28,8 +28,9 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const renderItem = (row: any) => {
-    let imageSize = MediaManager.getThumbnailSize();;
+    let imageSize = MediaManager.getThumbnailSize();
     let output = <></>;
+
 
     if (row?.item?.id == "addItem") {
       output = <AddItemButton
