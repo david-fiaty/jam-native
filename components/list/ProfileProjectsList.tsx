@@ -27,12 +27,15 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
   const [profileProjects, setProfileProjects] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const renderItem = async (row: any) => {
+  const renderItem = (row: any) => {
     let imageSize = MediaManager.getThumbnailSize();
     let output = <></>;
-    let url = await EntityManager.getProjectImageUrl(row?.item);
 
-    console.log(url);
+    EntityManager.getProjectImageUrl(row?.item).then((url: any) => {
+      console.log(url);
+    });
+
+    //console.log(url);
 
     if (row?.item?.id == "addItem") {
       output = <AddItemButton
