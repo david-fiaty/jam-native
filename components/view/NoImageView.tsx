@@ -6,20 +6,26 @@ import BoxView from './BoxView';
 import { Colors } from '@/constants/Colors';
 
 type Props = BaseProps & {
-  imageSize: any,
+  width?: any,
+  height?: any,
+  rounded?: boolean,
   containerStyle?: any,
 };
 
-const NoImageView = ({imageSize, containerStyle}: Props) => {
-  // Todo - Move image size to config
+const NoImageView = ({width, height, rounded, containerStyle}: Props) => {
   const path: any = require('@/assets/images/logo-mono-512.png');
+  const boxStyles = rounded == true ? {width: width, height: height} : {};  
 
   return (
-    <BoxView align="center" justify="center" style={[styles.container, containerStyle]}>
+    <BoxView 
+      align="center" 
+      justify="center" 
+      style={[styles.container, containerStyle, boxStyles]}
+    >
       <ImageView 
         path={path} 
-        width={imageSize} 
-        height={imageSize} 
+        width={width/2} 
+        height={height/2} 
         style={styles.image}
       />   
     </BoxView>
@@ -30,8 +36,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.secondary,
     borderRadius: Layout.radius.round,
-    width: 96.7,
-    height: 96.7,
   },
   image: {
     opacity: 0.5,
