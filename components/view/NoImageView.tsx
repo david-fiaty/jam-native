@@ -34,8 +34,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.secondary,
     borderRadius: Layout.radius.round,
-    width: 96.7,
-    height: 96.7,
   },
   image: {
     opacity: 0.5,

@@ -80,8 +80,6 @@ const ProfileJamsList = ({ title, idArray, addButton }: Props) => {
       </TouchableOpacity>
     }
 
-
-
     return output;
   }
 
