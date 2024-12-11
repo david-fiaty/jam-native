@@ -1,5 +1,6 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useState } from "react";
+import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import TextView from "../view/TextView";
@@ -11,45 +12,82 @@ import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
 import AddItemButton from "../button/AddItemButton";
 import NoImageView from "../view/NoImageView";
+import BoxView from "../view/BoxView";
+import { Colors } from "@/constants/Colors";
+import DeviceManager from "@/manager/DeviceManager";
 
 type Props = {
+  title?: any;
   idArray?: any;
+  addButton?: boolean;
 };
 
-const ProfileProjectsList = ({ idArray }: Props) => {
+const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
   const numColumns = 3;
+  const router = useRouter();
   const [profileProjects, setProfileProjects] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const renderItemImage = (url: any) => {
-    if (!url) return <NoImageView imageSize={48} />;
+  const getImageSize = () => {
+    let windowWidth: any = DeviceManager.window.width;
+    let imageDim: number = windowWidth / 3 - Layout.space.base * 1.7;
 
-    return (
-      <ImageView
-        uri={Config.imageUrl + url}
-        width={96.7}
-        height={96.7}
-        resizeMode="cover"
-        style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
-      />
-    );
+    return {
+      width: imageDim,
+      height: imageDim,
+    };
   };
 
   const renderItem = (row: any) => {
+    let imageSize = getImageSize();
+    let output = <></>;
+
     if (row?.item?.id == "addItem") {
-      return <AddItemButton onPress={() => ScreenManager.toggleModal("AddJamForm")} />;
+      output = <AddItemButton
+        width={imageSize.width}
+        height={imageSize.height}
+        onPress={() => ScreenManager.toggleModal("AddJamForm")}
+      />;
+    }
+    else if (!row?.item?.medias?.[0]?.url) {
+      output = <NoImageView 
+        width={imageSize.width} 
+        height={imageSize.height} 
+        rounded={true}
+      />;
+    }
+    else {
+      output = <View style={styles.item}>
+        <ImageView
+          uri={Config.imageUrl + row.item.medias[0].url}
+          width={imageSize.width}
+          height={imageSize.height}
+          resizeMode="cover"
+          style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
+        />
+      </View>
     }
 
-    return (
-      <TouchableOpacity key={row?.item?.id}>
-        <View style={styles.item}>{renderItemImage(row?.item?.medias?.[0]?.url)}</View>
+    if (parseInt(row?.item?.id) > 0) {
+      output = <TouchableOpacity
+        key={row.item.id}
+        onPress={() =>
+          router.push({
+            pathname: "/jam",
+            params: { idArray: [row.item.id] },
+          })
+        }
+      >
+        {output}
       </TouchableOpacity>
-    );
-  };
+    }
+
+    return output;
+  }
 
   if (!profileProjects?.length && idArray?.length) {
-    EntityManager.getProjects({items_ids: idArray}).then((data: any) => {
-      data.push({ id: "addItem" });
+    EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
+      if (addButton === true) data.push({ id: "addItem" });
       setProfileProjects(data);
       setIsLoaded(true);
     });
@@ -59,7 +97,20 @@ const ProfileProjectsList = ({ idArray }: Props) => {
 
   return (
     <View style={styles.container}>
-      <TextView style={styles.title}>{i18n.t("Your Projects")}</TextView>
+      <BoxView direction="row" align="center" justify="space-between">
+        <TextView style={styles.title}>{title}</TextView>
+
+        <TouchableOpacity
+          onPress={() =>
+            router.push({
+              pathname: "/jam",
+              params: { idArray: idArray },
+            })
+          }
+        >
+          <TextView style={styles.link}>{i18n.t("View all")}</TextView>
+        </TouchableOpacity>
+      </BoxView>
 
       {profileProjects?.length > 0 && (
         <ListView
@@ -82,6 +133,11 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "bold",
     marginBottom: Layout.space.base,
+    flex: 1,
+  },
+  link: {
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.primary,
   },
   item: {
     flexDirection: "column",
@@ -89,8 +145,6 @@ const styles = StyleSheet.create({
   },
   image: {
     borderRadius: Layout.space.base,
-    width: 96.7,
-    height: 96.7,
   },
 });
 
