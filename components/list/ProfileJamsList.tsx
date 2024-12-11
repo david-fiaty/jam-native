@@ -20,7 +20,6 @@ type Props = {
   idArray?: any;
 };
 
-
 const ProfileJamsList = ({ idArray }: Props) => {
   const numColumns = 3;
   const router = useRouter();
@@ -67,7 +66,7 @@ const ProfileJamsList = ({ idArray }: Props) => {
         onPress={() =>
           router.push({
             pathname: "/jam",
-            params: { entityId: row.item.id },
+            params: { idArray: [row.item.id] },
           })
         }
       >
@@ -97,7 +96,7 @@ const ProfileJamsList = ({ idArray }: Props) => {
           onPress={() =>
             router.push({
               pathname: "/jam",
-              params: { entityId: 18 },
+              params: { idArray: [18, 19, 20] },
             })
           }
         >
