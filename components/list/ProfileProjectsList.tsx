@@ -64,8 +64,8 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
         key={row.item.id}
         onPress={() =>
           router.push({
-            pathname: "/jam",
-            params: { idArray: [row.item.id] },
+            pathname: "/project",
+            params: { idArray: [row.item.id], title: title },
           })
         }
       >
@@ -78,7 +78,7 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
 
   if (!profileProjects?.length && idArray?.length) {
     EntityManager.getProjects({ items_ids: idArray }).then((data: any) => {
-      //if (addButton === true) data.push({ id: "addItem" });
+      if (addButton === true) data.push({ id: "addItem" });
       setProfileProjects(data);
       setIsLoaded(true);
     });
@@ -87,7 +87,7 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
   if (profileProjects?.length > 0 ) {
     profileProjects.map((item: any) => {
       EntityManager.getProjectImageUrl(item).then((value: any) => {
-        if (value) addProjectImage({ ...projectImages, ...{[item?.id]: value} });
+        if (value && !projectImages?.[item?.id]) addProjectImage({ ...projectImages, ...{[item?.id]: value} });
       });
     });  
   }
@@ -102,8 +102,8 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
         <TouchableOpacity
           onPress={() =>
             router.push({
-              pathname: "/jam",
-              params: { idArray: idArray },
+              pathname: "/project",
+              params: { idArray: idArray, title: title },
             })
           }
         >

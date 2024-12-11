@@ -138,6 +138,15 @@ const RootLayout = () => {
         },
       },
     },
+    {
+      name: 'project',
+      options: {
+        ...headerVisibleOptions,
+        ...{
+          animation: 'default',
+        },
+      },
+    },
   ];
 
   useEffect(() => {
