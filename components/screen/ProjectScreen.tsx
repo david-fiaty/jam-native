@@ -4,7 +4,6 @@ import { Layout } from '@/constants/Layout';
 import { BaseProps } from '@/constants/Types';
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
-import JamsList from '../list/JamsList';
 import TextView from "../view/TextView";
 
 type Props = BaseProps & {
