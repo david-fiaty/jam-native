@@ -31,6 +31,7 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
     let imageSize = MediaManager.getThumbnailSize();
     let output = <></>;
 
+    console.log(row?.item?.jams);
 
     if (row?.item?.id == "addItem") {
       output = <AddItemButton
