@@ -6,12 +6,14 @@ import TextView from "../view/TextView";
 import IconView from "../view/IconView";
 
 type Props = {
-  onPress?: () => void;
+  width?: any,
+  height?: any,
+  onPress?: () => void,
 };
 
-const AddItemButton = ({ onPress }: Props) => {
+const AddItemButton = ({ width, height, onPress }: Props) => {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity onPress={onPress} style={{width: width, height: height}}>
       <View style={styles.container}>
         <View>
           <IconView name="plus" theme="secondary" size={16} />
@@ -26,10 +28,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.secondary,
     borderRadius: Layout.space.base,
-    width: 96.7,
-    height: 96.7,
     alignItems: "center",
     justifyContent: "center",
+    width: '100%',
+    height: '100%',
   },
 });
 
