@@ -40,40 +40,45 @@ const ProfileJamsList = ({ title, idArray, addButton }: Props) => {
 
   const renderItem = (row: any) => {
     let imageSize = getImageSize();
-    if (!row?.item?.medias?.[0]?.url) return <NoImageView width={imageSize.width} height={imageSize.height} />;
+    let output = <></>;
 
-    if (row?.item?.id == "addItem") {
-      return (
-        <AddItemButton
-          width={imageSize.width}
-          height={imageSize.height}
-          onPress={() => ScreenManager.toggleModal("AddJamForm")}
-        />
-      );
-    } else {
-      return (
-        <TouchableOpacity
-          key={row.item.id}
-          onPress={() =>
-            router.push({
-              pathname: "/jam",
-              params: { idArray: [row.item.id] },
-            })
-          }
-        >
-          <View style={styles.item}>
-            <ImageView
-              uri={Config.imageUrl + row.item.medias[0].url}
-              width={imageSize.width}
-              height={imageSize.height}
-              resizeMode="cover"
-              style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
-            />
-          </View>
-        </TouchableOpacity>
-      );
+    if (!row?.item?.medias?.[0]?.url) output = <NoImageView 
+      width={imageSize.width} 
+      height={imageSize.height} 
+    />;
+
+    else if (row?.item?.id == "addItem") {
+      output = <AddItemButton
+        width={imageSize.width}
+        height={imageSize.height}
+        onPress={() => ScreenManager.toggleModal("AddJamForm")}
+      />;
     }
-  };
+  
+    else {
+      output = <TouchableOpacity
+        key={row.item.id}
+        onPress={() =>
+          router.push({
+            pathname: "/jam",
+            params: { idArray: [row.item.id] },
+          })
+        }
+      >
+        <View style={styles.item}>
+          <ImageView
+            uri={Config.imageUrl + row.item.medias[0].url}
+            width={imageSize.width}
+            height={imageSize.height}
+            resizeMode="cover"
+            style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
+          />
+        </View>
+      </TouchableOpacity>
+    }
+
+    return output;
+  }
 
   if (!profileJams?.length && idArray?.length) {
     EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
