@@ -2,7 +2,7 @@ import { useLocalSearchParams } from "expo-router";
 import { ThemeProvider } from '@rneui/themed';
 import ScreenView from '@/components/view/ScreenView';
 import BaseTheme from "@/constants/BaseTheme";
-import JamScreen from "@/components/screen/JamScreen";
+import ProjectScreen from "@/components/screen/ProjectScreen";
 
 export default () => {
   const { idArray, title } = useLocalSearchParams();
@@ -10,7 +10,7 @@ export default () => {
   return ( 
     <ThemeProvider theme={BaseTheme}>
       <ScreenView>
-        <JamScreen idArray={idArray} title={title} />
+        <ProjectScreen idArray={idArray} title={title} />
       </ScreenView>
     </ThemeProvider>
   );

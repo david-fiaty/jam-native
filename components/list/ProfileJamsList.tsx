@@ -63,7 +63,7 @@ const ProfileJamsList = ({ title, idArray, addButton }: Props) => {
         onPress={() =>
           router.push({
             pathname: "/jam",
-            params: { idArray: [row.item.id] },
+            params: { idArray: [row.item.id], title: title },
           })
         }
       >
@@ -93,7 +93,7 @@ const ProfileJamsList = ({ title, idArray, addButton }: Props) => {
           onPress={() =>
             router.push({
               pathname: "/jam",
-              params: { idArray: idArray },
+              params: { idArray: idArray, title: title },
             })
           }
         >

@@ -4,14 +4,14 @@ import { Layout } from '@/constants/Layout';
 import { BaseProps } from '@/constants/Types';
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
-import JamsList from '../list/JamsList';
+import TextView from "../view/TextView";
 
 type Props = BaseProps & {
   idArray?: any,
   title?: any,
 };
 
-const JamScreen = ({ idArray, title }: Props) => {
+const ProjectScreen = ({ idArray, title }: Props) => {
   const router = useRouter();
 
   return (
@@ -21,7 +21,7 @@ const JamScreen = ({ idArray, title }: Props) => {
         onPress={() => router.back()}
       />
       <BoxView style={Layout.mainContent}>
-        <JamsList idArray={idArray} showSpinner={true} />
+        <TextView>PROJECTS LIST</TextView>
       </BoxView>
     </BoxView>
   );
@@ -34,4 +34,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default JamScreen;
+export default ProjectScreen;
