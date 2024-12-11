@@ -42,7 +42,7 @@ const ProfileJamsList = ({ title, idArray, addButton }: Props) => {
     let imageSize = getImageSize();
     if (!row?.item?.medias?.[0]?.url) return <NoImageView width={imageSize.width} height={imageSize.height} />;
 
-    if (row?.item?.id == "addItem") {
+    if (row?.id == "addItem") {
       return (
         <AddItemButton
           width={imageSize.width}
@@ -78,6 +78,8 @@ const ProfileJamsList = ({ title, idArray, addButton }: Props) => {
   if (!profileJams?.length && idArray?.length) {
     EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
       if (addButton === true) data.push({ id: "addItem" });
+
+      ///console.log(data);
       setProfileJams(data);
       setIsLoaded(true);
     });
