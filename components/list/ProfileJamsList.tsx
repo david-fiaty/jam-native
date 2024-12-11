@@ -50,30 +50,30 @@ const ProfileJamsList = ({ title, idArray, addButton }: Props) => {
           onPress={() => ScreenManager.toggleModal("AddJamForm")}
         />
       );
-    } else {
-      return (
-        <TouchableOpacity
-          key={row.item.id}
-          onPress={() =>
-            router.push({
-              pathname: "/jam",
-              params: { idArray: [row.item.id] },
-            })
-          }
-        >
-          <View style={styles.item}>
-            <ImageView
-              uri={Config.imageUrl + row.item.medias[0].url}
-              width={imageSize.width}
-              height={imageSize.height}
-              resizeMode="cover"
-              style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
-            />
-          </View>
-        </TouchableOpacity>
-      );
     }
-  };
+  
+    return (
+      <TouchableOpacity
+        key={row.item.id}
+        onPress={() =>
+          router.push({
+            pathname: "/jam",
+            params: { idArray: [row.item.id] },
+          })
+        }
+      >
+        <View style={styles.item}>
+          <ImageView
+            uri={Config.imageUrl + row.item.medias[0].url}
+            width={imageSize.width}
+            height={imageSize.height}
+            resizeMode="cover"
+            style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
+          />
+        </View>
+      </TouchableOpacity>
+    );
+  }
 
   if (!profileJams?.length && idArray?.length) {
     EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
