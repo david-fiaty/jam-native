@@ -29,6 +29,8 @@ const SelectJamsForm = ({ title, idArray, addButton, allButton }: Props) => {
   const [profileJams, setProfileJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
+  idArray = [20, 46, 39, 49];
+
   const renderItem = (row: any) => {
     let imageSize = MediaManager.getThumbnailSize();
     let output = null;
