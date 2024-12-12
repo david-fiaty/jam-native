@@ -2,30 +2,19 @@ import { useState } from "react";
 import { useRouter } from "expo-router";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { Colors } from "@/constants/Colors";
 import { setJamData } from "@/redux/slices/JamFormSlice";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
-import MediaPickerBase from "../base/MediaPickerBase";
-import LocationPickerField from "../field/LocationPickerField";
-import CountryField from "../field/CountryField";
-import SectorsField from "../field/SectorsField";
 import DividerView from "../view/DividerView";
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import ButtonView from "../view/ButtonView";
-import IconView from "../view/IconView";
 import TextView from "../view/TextView";
-import ListView from "../view/ListView";
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
 import UserManager from "@/manager/UserManager";
-import DatePickerField from "../field/DatePickerField";
-import LocationTypeField from "../field/LocationTypeField";
-import EntityManager from "@/manager/EntityManager";
-import CollaboratorsField from "../field/CollaboratorsField";
 import AddItemButton from "../button/AddItemButton";
 import ProjectJamsList from "../list/ProjectJamsList";
 
@@ -79,20 +68,19 @@ const AddProjectForm = () => {
 
       <View style={Layout.formContainer}>
         <InputTextField
-          placeholder={i18n.t('Title')}
+          placeholder={i18n.t('Name')}
           value={projectData?.title}
-          onChangeText={(value: string) => updateField('title', value)}
+          onChangeText={(value: string) => updateField('name', value)}
         />
 
         <InputTextareaField
           placeholder={i18n.t('Description')}
           value={projectData?.caption}
-          onChangeText={(value: string) => updateField('caption', value)}
+          onChangeText={(value: string) => updateField('description', value)}
         />
 
         <DividerView />
         <BoxView direction="column" align="center" justify="center">
-          
           { !projectData?.jams_ids?.length && 
             <TextView>{i18n.t('There are no Jams in this project')}</TextView>
           }
