@@ -40,7 +40,7 @@ const ProfileProjectsList = ({ title, idArray, addButton, allButton, onAddButton
         label={i18n.t('Add')}
         width={imageSize.width}
         height={imageSize.height}
-        onPress={() => onAddButtonPress}
+        onPress={onAddButtonPress}
       />;
     }
     else if (!uri) {
