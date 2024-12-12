@@ -31,14 +31,14 @@ const ProfileProjectsList = ({ title, idArray, addButton, allButton }: Props) =>
 
   const renderItem = (row: any) => {
     let imageSize: any = MediaManager.getThumbnailSize();
-    let output: any = <></>;
+    let output: any = null;
     let uri: string = projectImages?.[row?.item?.id];
 
     if (row?.item?.id == "addItem") {
       output = <AddItemButton
         width={imageSize.width}
         height={imageSize.height}
-        onPress={() => ScreenManager.toggleModal("AddJamForm")}
+        onPress={() => ScreenManager.toggleModal("AddProjectForm")}
       />;
     }
     else if (!uri) {
