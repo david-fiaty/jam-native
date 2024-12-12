@@ -32,12 +32,8 @@ const SelectJamsForm = () => {
     let selectedJamsList = [...selectedJams];
     let index: number = selectedJamsList.findIndex((id: any) => id == row.item.id);
 
-    if (index === -1) {
-      selectedJamsList.push(row.item.id);
-    }  
-    else {
-      delete selectedJamsList[index];
-    }
+    if (index === -1) selectedJamsList.push(row.item.id);
+    else delete selectedJamsList[index];
 
     setSelectedJams(selectedJamsList.filter(n => n));
   };
