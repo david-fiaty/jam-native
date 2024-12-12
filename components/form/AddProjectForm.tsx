@@ -30,7 +30,7 @@ import CollaboratorsField from "../field/CollaboratorsField";
 
 const AddProjectForm = () => {
   const dispatch = useDispatch();
-  const jamData = useSelector((state: any) => state.jamForm);
+  const projectData = useSelector((state: any) => state.projectForm);
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
@@ -42,7 +42,7 @@ const AddProjectForm = () => {
   };
 
   const submitForm = async () => {
-    EntityManager.addJam(jamData).then((success: boolean) => {
+    EntityManager.addJam(projectData).then((success: boolean) => {
       setIsProcessing(false);
       //success === true
       false
@@ -59,7 +59,7 @@ const AddProjectForm = () => {
         <View
           style={[
             styles.categoryItem,
-            jamData?.type == row.item.id ? styles.categoryItemSelected : {},
+            projectData?.type == row.item.id ? styles.categoryItemSelected : {},
           ]}
         >
           <IconView name={row.item.icon} theme="secondary" />
@@ -69,10 +69,12 @@ const AddProjectForm = () => {
     </TouchableOpacity>
   );
 
-  UserManager.getProfileId().then((id: number) => {
-    if (!profileId) setProfileId(id);
-    setIsLoaded(true);
-  });
+  if (!profileId) {
+    UserManager.getProfileId().then((id: number) => {
+      setProfileId(id);
+      setIsLoaded(true);
+    });
+  }
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -85,7 +87,7 @@ const AddProjectForm = () => {
     >
       <BackButton
         title={i18n.t('Create a project')}
-        onPress={() => ScreenManager.toggleModal('AddProjectForm')}
+        onPress={() => ScreenManager.toggleModal('ProfileForm')}
       />
 
       <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
@@ -103,18 +105,18 @@ const AddProjectForm = () => {
       <DividerView />
       <InputTextField
         placeholder={i18n.t('Title')}
-        value={jamData?.title}
+        value={projectData?.title}
         onChangeText={(value: string) => updateField('title', value)}
       />
 
       <InputTextareaField
         placeholder={i18n.t('Description')}
-        value={jamData?.caption}
+        value={projectData?.caption}
         onChangeText={(value: string) => updateField('caption', value)}
       />
 
       <LocationTypeField
-        value={jamData?.location_type}
+        value={projectData?.location_type}
         onChangeValue={(option: any) =>
           updateField('location_type', option.value)
         }
@@ -125,7 +127,7 @@ const AddProjectForm = () => {
         placeholder={i18n.t('Start date')}
         onChangeValue={(value: any) =>
           updateField('period', {
-            ...(jamData?.period || {}),
+            ...(projectData?.period || {}),
             ...{ start_datetime: value },
           })
         }
@@ -136,7 +138,7 @@ const AddProjectForm = () => {
         placeholder={i18n.t('End date')}
         onChangeValue={(value: any) =>
           updateField('period', {
-            ...(jamData?.period || {}),
+            ...(projectData?.period || {}),
             ...{ end_datetime: value },
           })
         }
@@ -145,7 +147,7 @@ const AddProjectForm = () => {
       {/* <LocationPickerField /> */}
 
       <CountryField
-        value={jamData?.scope_countries_codes}
+        value={projectData?.scope_countries_codes}
         onChangeValue={(option: any) =>
           updateField('scope_countries_codes', [option.value])
         }
@@ -159,7 +161,7 @@ const AddProjectForm = () => {
 
       <MediaPickerBase
         preview={true}
-        value={jamData?.upload_medias}
+        value={projectData?.upload_medias}
         label={
           <BoxView direction="row" align="center">
             <IconView name="plus" theme="secondary" radius="round" />

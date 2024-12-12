@@ -30,7 +30,7 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton }: Props) => {
 
   const renderItem = (row: any) => {
     let imageSize = MediaManager.getThumbnailSize();
-    let output = <></>;
+    let output = null;
 
     if (row?.item?.id == "addItem") {
       output = <AddItemButton
