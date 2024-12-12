@@ -31,10 +31,6 @@ const toggleItemsForm = () => {
   // Todo - Connect to profile jams
   const idArray = [20, 46, 39, 49, 18, 33, 50];
 
-  const updateField = (key: string, value: any) => {
-    dispatch(setProjectData<any>({ key: key, value: value, profile_id: profileId }));
-  };
-
   const findItemIndex = (row: any) => {
     return selectedJams.findIndex((id: any) => id == row.item.id);
   };
@@ -46,7 +42,15 @@ const toggleItemsForm = () => {
     if (index === -1) selectedJamsList.push(row.item.id);
     else delete selectedJamsList[index];
 
-    setSelectedJams(selectedJamsList.filter((n) => n));
+    selectedJamsList = selectedJamsList.filter((n) => n);
+
+    setSelectedJams(selectedJamsList);
+
+    dispatch(setProjectData<any>({ 
+      key: 'jams_ids', 
+      value: selectedJamsList, 
+      profile_id: profileId 
+    }));
   };
 
   const deleteItem = (row: any) => {
@@ -115,8 +119,6 @@ const toggleItemsForm = () => {
   if (!profileData?.length) {
     UserManager.getProfileData().then((data: any) => {
       if (!profileData) setProfileData(data);
-
-      console.log(profileData);
     });
   }
 
