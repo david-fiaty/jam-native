@@ -118,7 +118,7 @@ const toggleItemsForm = () => {
 
   if (!profileData?.length) {
     UserManager.getProfileData().then((data: any) => {
-      if (!profileData) setProfileData(data);
+      setProfileData(data);
     });
   }
 
