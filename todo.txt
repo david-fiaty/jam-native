@@ -64,6 +64,8 @@ https://docs.google.com/spreadsheets/d/1sodzaVigD26XOopcXfLRykl51wPM5pKecS0i1QED
 # New release:
   - Ameliorations UI et bug fixes
   - Integration endpoint countries
+  - Ajout liked, saved et created jams/projects dans profile form
+  - Feature add project depuis profile form
 
 # Questions
   - What are the notification types a user can get

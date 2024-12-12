@@ -20,9 +20,10 @@ type Props = {
   idArray?: any,
   addButton?: boolean,
   allButton?: boolean,
+  onAddButtonPress?: () => void,
 };
 
-const ProfileProjectsList = ({ title, idArray, addButton, allButton }: Props) => {
+const ProfileProjectsList = ({ title, idArray, addButton, allButton, onAddButtonPress }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const [profileProjects, setProfileProjects] = useState<any>([]);
@@ -39,7 +40,7 @@ const ProfileProjectsList = ({ title, idArray, addButton, allButton }: Props) =>
         label={i18n.t('Add')}
         width={imageSize.width}
         height={imageSize.height}
-        onPress={() => ScreenManager.toggleModal("AddProjectForm")}
+        onPress={() => onAddButtonPress}
       />;
     }
     else if (!uri) {
