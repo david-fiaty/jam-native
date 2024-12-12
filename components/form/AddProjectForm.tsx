@@ -22,7 +22,6 @@ import ListView from "../view/ListView";
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
 import UserManager from "@/manager/UserManager";
-import StaticData from "@/constants/StaticData";
 import DatePickerField from "../field/DatePickerField";
 import LocationTypeField from "../field/LocationTypeField";
 import EntityManager from "@/manager/EntityManager";
@@ -35,39 +34,25 @@ const AddProjectForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
-  const jamCategoriesData = StaticData.jamCategories;
 
   const updateField = (key: string, value: any) => {
     dispatch(setJamData<any>({ key: key, value: value, profile_id: profileId }));
   };
 
   const submitForm = async () => {
-    EntityManager.addJam(projectData).then((success: boolean) => {
+    /*
+    EntityManager.addProject(projectData).then((success: boolean) => {
       setIsProcessing(false);
       //success === true
       false
         ? router.replace('/jams')
         : ScreenManager.showMessage(
-            i18n.t('The Jam data is invalid. Please check and trya gain.')
+            i18n.t('The project data is invalid. Please check and trya gain.')
           );
     });
-  };
 
-  const renderJamCategory = (row: any) => (
-    <TouchableOpacity onPress={() => updateField('type', row.item.id)}>
-      <View style={styles.categoryContainer}>
-        <View
-          style={[
-            styles.categoryItem,
-            projectData?.type == row.item.id ? styles.categoryItemSelected : {},
-          ]}
-        >
-          <IconView name={row.item.icon} theme="secondary" />
-        </View>
-        <TextView>{row.item.label}</TextView>
-      </View>
-    </TouchableOpacity>
-  );
+    */
+  };
 
   if (!profileId) {
     UserManager.getProfileId().then((id: number) => {
@@ -91,16 +76,6 @@ const AddProjectForm = () => {
       />
 
       <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
-
-      <ListView
-        data={jamCategoriesData}
-        numColumns={4}
-        horizontal={false}
-        scrollEnabled={false}
-        contentContainerStyle={Layout.listContainer}
-        columnWrapperStyle={Layout.listColumnWrapper}
-        renderItem={(row: any) => renderJamCategory(row)}
-      />
 
       <DividerView />
       <InputTextField
