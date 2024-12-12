@@ -27,7 +27,9 @@ const AddProjectForm = () => {
   const [profileId, setProfileId] = useState<number>(0);
 
   const updateField = (key: string, value: any) => {
-    dispatch(setJamData<any>({ key: key, value: value, profile_id: profileId }));
+    dispatch(
+      setJamData<any>({ key: key, value: value, profile_id: profileId })
+    );
   };
 
   const submitForm = async () => {
@@ -62,44 +64,46 @@ const AddProjectForm = () => {
       style={Layout.screenContent}
     >
       <BackButton
-        title={i18n.t('Create a project')}
-        onPress={() => ScreenManager.toggleModal('ProfileForm')}
+        title={i18n.t("Create a project")}
+        onPress={() => ScreenManager.toggleModal("ProfileForm")}
       />
 
       <View style={Layout.formContainer}>
         <InputTextField
-          placeholder={i18n.t('Name')}
+          placeholder={i18n.t("Name")}
           value={projectData?.title}
-          onChangeText={(value: string) => updateField('name', value)}
+          onChangeText={(value: string) => updateField("name", value)}
         />
 
         <InputTextareaField
-          placeholder={i18n.t('Description')}
+          placeholder={i18n.t("Description")}
           value={projectData?.caption}
-          onChangeText={(value: string) => updateField('description', value)}
+          onChangeText={(value: string) => updateField("description", value)}
         />
 
         <DividerView />
-        <BoxView direction="column" align="center" justify="center">
-          { !projectData?.jams_ids?.length && 
-            <TextView>{i18n.t('There are no Jams in this project')}</TextView>
-          }
-        
-          { !projectData?.jams_ids?.length && 
-          <AddItemButton
-            label={i18n.t('Add')}
-            onPress={() => ScreenManager.toggleModal("SelectJamsForm")}
-          /> }
 
-          { projectData?.jams_ids?.length &&
-            <ProjectJamsList idArray={projectData.jams_ids} /> 
-          }
-          
-        </BoxView>
+        {!projectData?.jams_ids?.length && (
+          <BoxView direction="column" align="center" justify="center">
+            <TextView>{i18n.t("There are no Jams in this project")}</TextView>
+            <AddItemButton
+              label={i18n.t("Add")}
+              onPress={() => ScreenManager.toggleModal("SelectJamsForm")}
+            />
+          </BoxView>
+        )}
+
+        {projectData?.jams_ids?.length && (
+          <BoxView direction="column" align="flex-start" justify="flex-start">
+            <TextView style={styles.title}>{i18n.t("Selected Jams")}</TextView>
+            <ProjectJamsList idArray={projectData.jams_ids} />
+          </BoxView>
+        )}
+
         <DividerView />
 
         <ButtonView
-          label={i18n.t('Post')}
+          label={i18n.t("Post")}
           isProcessing={isProcessing}
           onPress={() => {
             setIsProcessing(true);
@@ -114,7 +118,9 @@ const AddProjectForm = () => {
 };
 
 const styles = StyleSheet.create({
-
+  title: {
+    fontWeight: 'bold',
+  }
 });
 
 export default AddProjectForm;
