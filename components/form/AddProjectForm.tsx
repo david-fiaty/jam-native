@@ -99,7 +99,7 @@ const AddProjectForm = () => {
             <ProjectJamsList 
               idArray={projectData.jams_ids} 
               addButton={true} 
-              onAddButtonPress={() => ScreenManager.toggleModal("AddProjectForm")}
+              onAddButtonPress={() => ScreenManager.toggleModal("SelectJamsForm")}
             />
           </BoxView>
         )}
