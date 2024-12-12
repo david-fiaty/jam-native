@@ -42,16 +42,19 @@ const toggleItemsForm = () => {
   };
 
   const deleteItem = (row: any) => {
-    console.log('delete pressed');
+    let selectedJamsList = [...selectedJams];
+    let index: number = findItemIndex(row);
+    if (index !== -1) delete selectedJamsList[index];
+
+    setSelectedJams(selectedJamsList.filter((n) => n));
   };
 
   const renderItem = (row: any) => {
     let imageSize: any = MediaManager.getThumbnailSize();
     let output: any = null;
-    let isSelected: boolean = true;
+    let isSelected: boolean = findItemIndex(row) !== -1;
 
     let imageStyle = {
-      ...styles.selectedItem,
       ...(isSelected ? styles.selectedItem : {}),
     };
 
