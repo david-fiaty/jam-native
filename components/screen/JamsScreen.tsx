@@ -27,12 +27,14 @@ import AddedJamAction from "../action/AddedJamAction";
 import CollaboratorsList from "../list/CollaboratorsList";
 import SectorsList from "../list/SectorsList";
 import LocationMapView from "../view/LocationMapView";
+import SelectJamsForm from "../form/SelectJamsForm";
 
 const screenComponents: any = {
   JamsList: <JamsList />,
   JamsMapView: <JamsMapView />,
   AddJamForm: <AddJamForm />,
   AddProjectForm: <AddProjectForm />,
+  SelectJamsForm: <SelectJamsForm />,
   ProfileForm: <ProfileForm />,
   SettingsMenu: <SettingsMenu />,
   NotificationsMenu: <NotificationsMenu />,
