@@ -1,6 +1,7 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useState } from "react";
-import { useRouter } from "expo-router";
+import { useDispatch, useSelector } from "react-redux";
+import { setProjectData } from "@/redux/slices/ProjectFormSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import i18n from "@/translation/i18n";
@@ -19,10 +20,12 @@ import TextView from "../view/TextView";
 
 const toggleItemsForm = () => {
   const numColumns = 3;
-  const router = useRouter();
+  const dispatch = useDispatch();
+  const projectData = useSelector((state: any) => state.projectForm);
   const [profileData, setProfileData] = useState<any>([]);
   const [profileJams, setProfileJams] = useState<any>([]);
   const [selectedJams, setSelectedJams] = useState<any>([]);
+  const [profileId, setProfileId] = useState<number>(0);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   // Todo - Connect to profile jams
@@ -39,7 +42,15 @@ const toggleItemsForm = () => {
     if (index === -1) selectedJamsList.push(row.item.id);
     else delete selectedJamsList[index];
 
-    setSelectedJams(selectedJamsList.filter((n) => n));
+    selectedJamsList = selectedJamsList.filter((n) => n);
+
+    setSelectedJams(selectedJamsList);
+
+    dispatch(setProjectData<any>({ 
+      key: 'jams_ids', 
+      value: selectedJamsList, 
+      profile_id: profileId 
+    }));
   };
 
   const deleteItem = (row: any) => {
@@ -105,9 +116,9 @@ const toggleItemsForm = () => {
     return output;
   };
 
-  if (profileData) {
+  if (!profileData?.length) {
     UserManager.getProfileData().then((data: any) => {
-      if (!profileData) setProfileData(data);
+      setProfileData(data);
     });
   }
 
@@ -145,7 +156,7 @@ const toggleItemsForm = () => {
                 {i18n.t("Add selected")} ({selectedJams.length})
               </TextView>
             </View>
-          </TouchableOpacity>
+          </TouchableOpacity> 
         )}
       </BoxView>
 

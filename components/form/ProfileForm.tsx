@@ -150,6 +150,7 @@ const ProfileForm = () => {
         <ProfileProjectsList
           title={i18n.t("Your Projects")} 
           addButton={true}
+          onAddButtonPress={() => ScreenManager.toggleModal("AddProjectForm")}
           //idArray={profileData?.saved_projects}
           idArray={[14, 16, 17]}
         />
@@ -176,6 +177,7 @@ const ProfileForm = () => {
           allButton={true}
           addButton={true}
           idArray={profileData?.saved_jams} 
+          onAddButtonPress={() => ScreenManager.toggleModal("AddJamForm")}
         />
 
         <DividerView />

@@ -20,9 +20,10 @@ type Props = {
   idArray?: any,
   addButton?: boolean,
   allButton?: boolean,
+  onAddButtonPress?: () => void,
 };
 
-const ProfileJamsList = ({ title, idArray, addButton, allButton }: Props) => {
+const ProfileJamsList = ({ title, idArray, addButton, allButton, onAddButtonPress }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const [profileJams, setProfileJams] = useState<any>([]);
@@ -37,7 +38,7 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton }: Props) => {
         label={i18n.t('Add')}
         width={imageSize.width}
         height={imageSize.height}
-        onPress={() => ScreenManager.toggleModal("AddJamForm")}
+        onPress={onAddButtonPress}
       />;
     }
     else if (!row?.item?.medias?.[0]?.url) {
