@@ -26,6 +26,7 @@ import DatePickerField from "../field/DatePickerField";
 import LocationTypeField from "../field/LocationTypeField";
 import EntityManager from "@/manager/EntityManager";
 import CollaboratorsField from "../field/CollaboratorsField";
+import AddItemButton from "../button/AddItemButton";
 
 const AddProjectForm = () => {
   const dispatch = useDispatch();
@@ -75,121 +76,47 @@ const AddProjectForm = () => {
         onPress={() => ScreenManager.toggleModal('ProfileForm')}
       />
 
-      <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
+      <View style={Layout.formContainer}>
+        <InputTextField
+          placeholder={i18n.t('Title')}
+          value={projectData?.title}
+          onChangeText={(value: string) => updateField('title', value)}
+        />
 
-      <DividerView />
-      <InputTextField
-        placeholder={i18n.t('Title')}
-        value={projectData?.title}
-        onChangeText={(value: string) => updateField('title', value)}
-      />
+        <InputTextareaField
+          placeholder={i18n.t('Description')}
+          value={projectData?.caption}
+          onChangeText={(value: string) => updateField('caption', value)}
+        />
 
-      <InputTextareaField
-        placeholder={i18n.t('Description')}
-        value={projectData?.caption}
-        onChangeText={(value: string) => updateField('caption', value)}
-      />
+        <DividerView />
+        <BoxView direction="column" align="center" justify="center">
+          <TextView>{i18n.t('There are no Jams in this project')}</TextView>
+        
+          <AddItemButton
+            label={i18n.t('Add')}
+            onPress={() => ScreenManager.toggleModal("AddJamForm")}
+          />
+        </BoxView>
+        <DividerView />
 
-      <LocationTypeField
-        value={projectData?.location_type}
-        onChangeValue={(option: any) =>
-          updateField('location_type', option.value)
-        }
-      />
+        <ButtonView
+          label={i18n.t('Post')}
+          isProcessing={isProcessing}
+          onPress={() => {
+            setIsProcessing(true);
+            submitForm();
+          }}
+        />
 
-      <DatePickerField
-        value={'start value'}
-        placeholder={i18n.t('Start date')}
-        onChangeValue={(value: any) =>
-          updateField('period', {
-            ...(projectData?.period || {}),
-            ...{ start_datetime: value },
-          })
-        }
-      />
-
-      <DatePickerField
-        value={"end value"}
-        placeholder={i18n.t('End date')}
-        onChangeValue={(value: any) =>
-          updateField('period', {
-            ...(projectData?.period || {}),
-            ...{ end_datetime: value },
-          })
-        }
-      />
-
-      {/* <LocationPickerField /> */}
-
-      <CountryField
-        value={projectData?.scope_countries_codes}
-        onChangeValue={(option: any) =>
-          updateField('scope_countries_codes', [option.value])
-        }
-      />
-
-      <DividerView />
-      <SectorsField
-        label={<TextView>{i18n.t('Add industries')}</TextView>}
-        onPressEvent={() => ScreenManager.toggleModal('SectorsList')}
-      />
-
-      <MediaPickerBase
-        preview={true}
-        value={projectData?.upload_medias}
-        label={
-          <BoxView direction="row" align="center">
-            <IconView name="plus" theme="secondary" radius="round" />
-            <TextView>{i18n.t('Add media')}</TextView>
-          </BoxView>
-        }
-        onSelectItem={(mediaList: any) =>
-          updateField('upload_medias', mediaList)
-        }
-        onDeleteItem={(mediaList: any) =>
-          updateField('upload_medias', mediaList)
-        }
-      />
-
-      <CollaboratorsField
-        onPressEvent={() => ScreenManager.toggleModal('CollaboratorsList')}
-      />
-
-      <DividerView />
-      <ButtonView
-        label={i18n.t('Save')}
-        isProcessing={isProcessing}
-        onPress={() => {
-          setIsProcessing(true);
-          submitForm();
-        }}
-      />
-
-      <DividerView />
+        <DividerView />
+      </View>
     </BoxView>
   );
 };
 
 const styles = StyleSheet.create({
-  categoryContainer: {
-    flexDirection: 'column',
-    gap: Layout.space.small,
-  },
-  categoryItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: Colors.secondary,
-    padding: Layout.space.base,
-    borderWidth: 1,
-    borderRadius: Layout.radius.round,
-    borderColor: Colors.secondary,
-    width: Layout.space.base*7,
-    height: Layout.space.base*7,
-  },
-  categoryItemSelected: {
-    borderColor: Colors.primary,
-  },
+
 });
 
 export default AddProjectForm;
