@@ -161,5 +161,9 @@ export const Layout = {
   listItem: {
     padding: space.small,
   },
+  textLink: {
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.primary,
+  },
 };
 
