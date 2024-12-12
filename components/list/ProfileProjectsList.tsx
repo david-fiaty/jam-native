@@ -38,7 +38,7 @@ const ProfileProjectsList = ({ title, idArray, addButton, allButton }: Props) =>
       output = <AddItemButton
         width={imageSize.width}
         height={imageSize.height}
-        onPress={() => ScreenManager.toggleModal("AddJamForm")}
+        onPress={() => ScreenManager.toggleModal("AddProjectForm")}
       />;
     }
     else if (!uri) {
