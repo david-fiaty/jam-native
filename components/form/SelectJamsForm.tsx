@@ -17,10 +17,10 @@ import MediaManager from "@/manager/MediaManager";
 import BackButton from "../button/BackButton";
 
 type Props = {
-  title?: any,
-  idArray?: any,
-  addButton?: boolean,
-  allButton?: boolean,
+  title?: any;
+  idArray?: any;
+  addButton?: boolean;
+  allButton?: boolean;
 };
 
 const SelectJamsForm = ({ title, idArray, addButton, allButton }: Props) => {
@@ -36,48 +36,54 @@ const SelectJamsForm = ({ title, idArray, addButton, allButton }: Props) => {
     let output = null;
 
     if (row?.item?.id == "addItem") {
-      output = <AddItemButton
-        label={i18n.t('Add')}
-        width={imageSize.width}
-        height={imageSize.height}
-        onPress={() => ScreenManager.toggleModal("AddJamForm")}
-      />;
-    }
-    else if (!row?.item?.medias?.[0]?.url) {
-      output = <NoImageView 
-        width={imageSize.width} 
-        height={imageSize.height} 
-        rounded={true}
-      />;
-    }
-    else {
-      output = <View style={styles.item}>
-        <ImageView
-          uri={MediaManager.getImageUrl(row.item.medias[0].url)}
+      output = (
+        <AddItemButton
+          label={i18n.t("Add")}
           width={imageSize.width}
           height={imageSize.height}
-          resizeMode="cover"
-          style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
+          onPress={() => ScreenManager.toggleModal("AddJamForm")}
         />
-      </View>
+      );
+    } else if (!row?.item?.medias?.[0]?.url) {
+      output = (
+        <NoImageView
+          width={imageSize.width}
+          height={imageSize.height}
+          rounded={true}
+        />
+      );
+    } else {
+      output = (
+        <View style={styles.item}>
+          <ImageView
+            uri={MediaManager.getImageUrl(row.item.medias[0].url)}
+            width={imageSize.width}
+            height={imageSize.height}
+            resizeMode="cover"
+            style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
+          />
+        </View>
+      );
     }
 
     if (parseInt(row?.item?.id) > 0) {
-      output = <TouchableOpacity
-        key={row.item.id}
-        onPress={() =>
-          router.push({
-            pathname: "/jam",
-            params: { idArray: [row.item.id], title: title },
-          })
-        }
-      >
-        {output}
-      </TouchableOpacity>
+      output = (
+        <TouchableOpacity
+          key={row.item.id}
+          onPress={() =>
+            router.push({
+              pathname: "/jam",
+              params: { idArray: [row.item.id], title: title },
+            })
+          }
+        >
+          {output}
+        </TouchableOpacity>
+      );
     }
 
     return output;
-  }
+  };
 
   if (!profileJams?.length && idArray?.length) {
     EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
@@ -90,24 +96,16 @@ const SelectJamsForm = ({ title, idArray, addButton, allButton }: Props) => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <View style={styles.container}>
-      <BoxView direction="row" align="center" justify="space-between">
-        <BackButton
-          title={i18n.t('Select from my Jams')}
-          onPress={() => ScreenManager.toggleModal('AddProjectForm')}
-        />
-
-        { allButton && <TouchableOpacity
-          onPress={() =>
-            router.push({
-              pathname: "/jam",
-              params: { idArray: idArray, title: title },
-            })
-          }
-        >
-          <TextView style={styles.link}>{i18n.t("View all")}</TextView>
-        </TouchableOpacity> }
-      </BoxView>
+    <BoxView
+      align="flex-start"
+      justify="flex-start"
+      scroll={true}
+      style={Layout.screenContent}
+    >
+      <BackButton
+        title={i18n.t("Select from my Jams")}
+        onPress={() => ScreenManager.toggleModal("AddProjectForm")}
+      />
 
       {profileJams?.length > 0 && (
         <ListView
@@ -119,7 +117,7 @@ const SelectJamsForm = ({ title, idArray, addButton, allButton }: Props) => {
           renderItem={(row: any) => renderItem(row)}
         />
       )}
-    </View>
+    </BoxView>
   );
 };
 
