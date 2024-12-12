@@ -96,7 +96,7 @@ const AddProjectForm = () => {
         {projectData?.jams_ids?.length && (
           <BoxView direction="column" align="flex-start" justify="flex-start">
             <TextView style={styles.title}>{i18n.t("Selected Jams")}</TextView>
-            <ProjectJamsList idArray={projectData.jams_ids} />
+            <ProjectJamsList idArray={projectData.jams_ids} addButton={true} />
           </BoxView>
         )}
 
