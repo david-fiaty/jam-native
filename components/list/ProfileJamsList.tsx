@@ -34,6 +34,7 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton }: Props) => {
 
     if (row?.item?.id == "addItem") {
       output = <AddItemButton
+        label={i18n.t('Add')}
         width={imageSize.width}
         height={imageSize.height}
         onPress={() => ScreenManager.toggleModal("AddJamForm")}

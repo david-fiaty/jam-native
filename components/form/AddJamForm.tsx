@@ -180,7 +180,7 @@ const AddJamForm = () => {
 
       <DividerView />
       <ButtonView
-        label={i18n.t('Save')}
+        label={i18n.t('Post')}
         isProcessing={isProcessing}
         onPress={() => {
           setIsProcessing(true);

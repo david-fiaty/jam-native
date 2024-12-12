@@ -26,6 +26,7 @@ import DatePickerField from "../field/DatePickerField";
 import LocationTypeField from "../field/LocationTypeField";
 import EntityManager from "@/manager/EntityManager";
 import CollaboratorsField from "../field/CollaboratorsField";
+import AddItemButton from "../button/AddItemButton";
 
 const AddProjectForm = () => {
   const dispatch = useDispatch();
@@ -75,8 +76,6 @@ const AddProjectForm = () => {
         onPress={() => ScreenManager.toggleModal('ProfileForm')}
       />
 
-      <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
-
       <DividerView />
       <InputTextField
         placeholder={i18n.t('Title')}
@@ -90,74 +89,19 @@ const AddProjectForm = () => {
         onChangeText={(value: string) => updateField('caption', value)}
       />
 
-      <LocationTypeField
-        value={projectData?.location_type}
-        onChangeValue={(option: any) =>
-          updateField('location_type', option.value)
-        }
-      />
-
-      <DatePickerField
-        value={'start value'}
-        placeholder={i18n.t('Start date')}
-        onChangeValue={(value: any) =>
-          updateField('period', {
-            ...(projectData?.period || {}),
-            ...{ start_datetime: value },
-          })
-        }
-      />
-
-      <DatePickerField
-        value={"end value"}
-        placeholder={i18n.t('End date')}
-        onChangeValue={(value: any) =>
-          updateField('period', {
-            ...(projectData?.period || {}),
-            ...{ end_datetime: value },
-          })
-        }
-      />
-
-      {/* <LocationPickerField /> */}
-
-      <CountryField
-        value={projectData?.scope_countries_codes}
-        onChangeValue={(option: any) =>
-          updateField('scope_countries_codes', [option.value])
-        }
-      />
-
       <DividerView />
-      <SectorsField
-        label={<TextView>{i18n.t('Add industries')}</TextView>}
-        onPressEvent={() => ScreenManager.toggleModal('SectorsList')}
-      />
-
-      <MediaPickerBase
-        preview={true}
-        value={projectData?.upload_medias}
-        label={
-          <BoxView direction="row" align="center">
-            <IconView name="plus" theme="secondary" radius="round" />
-            <TextView>{i18n.t('Add media')}</TextView>
-          </BoxView>
-        }
-        onSelectItem={(mediaList: any) =>
-          updateField('upload_medias', mediaList)
-        }
-        onDeleteItem={(mediaList: any) =>
-          updateField('upload_medias', mediaList)
-        }
-      />
-
-      <CollaboratorsField
-        onPressEvent={() => ScreenManager.toggleModal('CollaboratorsList')}
-      />
-
+      <BoxView direction="column" align="center" justify="center">
+        <TextView>{i18n.t('There are no Jams in this project')}</TextView>
+      
+        <AddItemButton
+          label={i18n.t('Add Jams')}
+          onPress={() => ScreenManager.toggleModal("AddJamForm")}
+        />
+      </BoxView>
       <DividerView />
+
       <ButtonView
-        label={i18n.t('Save')}
+        label={i18n.t('Post')}
         isProcessing={isProcessing}
         onPress={() => {
           setIsProcessing(true);
