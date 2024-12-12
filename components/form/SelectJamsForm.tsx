@@ -15,71 +15,77 @@ import NoImageView from "../view/NoImageView";
 import BoxView from "../view/BoxView";
 import MediaManager from "@/manager/MediaManager";
 import BackButton from "../button/BackButton";
+import UserManager from "@/manager/UserManager";
 
-type Props = {
-  title?: any,
-  idArray?: any,
-  addButton?: boolean,
-  allButton?: boolean,
-};
-
-const SelectJamsForm = ({ title, idArray, addButton, allButton }: Props) => {
+const SelectJamsForm = () => {
   const numColumns = 3;
   const router = useRouter();
+  const [profileData, setProfileData] = useState<any>([]);
   const [profileJams, setProfileJams] = useState<any>([]);
+  const [selectedJams, setSelectedJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
+  // Todo - Connect to profile jams
+  const idArray = [20, 46, 39, 49, 18, 33, 50];
+
+  const selectJam = (row: any) => {
+    let selectedJamsList = [...selectedJams];
+    let index: number = selectedJamsList.findIndex((id: any) => id == row.item.id);
+
+    if (index === -1) selectedJamsList.push(row.item.id);
+    else delete selectedJamsList[index];
+
+    setSelectedJams(selectedJamsList.filter(n => n));
+  };
 
   const renderItem = (row: any) => {
     let imageSize = MediaManager.getThumbnailSize();
     let output = null;
 
-    if (row?.item?.id == "addItem") {
-      output = <AddItemButton
-        label={i18n.t('Add')}
-        width={imageSize.width}
-        height={imageSize.height}
-        onPress={() => ScreenManager.toggleModal("AddJamForm")}
-      />;
-    }
-    else if (!row?.item?.medias?.[0]?.url) {
-      output = <NoImageView 
-        width={imageSize.width} 
-        height={imageSize.height} 
-        rounded={true}
-      />;
-    }
-    else {
-      output = <View style={styles.item}>
-        <ImageView
-          uri={MediaManager.getImageUrl(row.item.medias[0].url)}
+    if (!row?.item?.medias?.[0]?.url) {
+      output = (
+        <NoImageView
           width={imageSize.width}
           height={imageSize.height}
-          resizeMode="cover"
-          style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
+          rounded={true}
         />
-      </View>
+      );
+    } else {
+      output = (
+        <View style={styles.item}>
+          <ImageView
+            uri={MediaManager.getImageUrl(row.item.medias[0].url)}
+            width={imageSize.width}
+            height={imageSize.height}
+            resizeMode="cover"
+            style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
+          />
+        </View>
+      );
     }
 
     if (parseInt(row?.item?.id) > 0) {
-      output = <TouchableOpacity
-        key={row.item.id}
-        onPress={() =>
-          router.push({
-            pathname: "/jam",
-            params: { idArray: [row.item.id], title: title },
-          })
-        }
-      >
-        {output}
-      </TouchableOpacity>
+      output = (
+        <TouchableOpacity
+          key={row.item.id}
+          onPress={() => selectJam(row)}
+        >
+          {output}
+        </TouchableOpacity>
+      );
     }
 
     return output;
+  };
+
+  if (profileData) {
+    UserManager.getProfileData().then((data: any) => {
+      if (!profileData) setProfileData(data);
+    });
   }
 
-  if (!profileJams?.length && idArray?.length) {
+  if (profileData && !profileJams?.length) {
     EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
-      if (addButton === true) data.push({ id: "addItem" });
       setProfileJams(data);
       setIsLoaded(true);
     });
@@ -87,25 +93,20 @@ const SelectJamsForm = ({ title, idArray, addButton, allButton }: Props) => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  return (
-    <View style={styles.container}>
-      <BoxView direction="row" align="center" justify="space-between">
-        <BackButton
-          title={i18n.t('Select from my Jams')}
-          onPress={() => ScreenManager.toggleModal('AddProjectForm')}
-        />
 
-        { allButton && <TouchableOpacity
-          onPress={() =>
-            router.push({
-              pathname: "/jam",
-              params: { idArray: idArray, title: title },
-            })
-          }
-        >
-          <TextView style={styles.link}>{i18n.t("View all")}</TextView>
-        </TouchableOpacity> }
-      </BoxView>
+  console.log(selectedJams);
+
+  return (
+    <BoxView
+      align="flex-start"
+      justify="flex-start"
+      scroll={true}
+      style={Layout.screenContent}
+    >
+      <BackButton
+        title={i18n.t("Select from my Jams")}
+        onPress={() => ScreenManager.toggleModal("AddProjectForm")}
+      />
 
       {profileJams?.length > 0 && (
         <ListView
@@ -117,7 +118,7 @@ const SelectJamsForm = ({ title, idArray, addButton, allButton }: Props) => {
           renderItem={(row: any) => renderItem(row)}
         />
       )}
-    </View>
+    </BoxView>
   );
 };
 
