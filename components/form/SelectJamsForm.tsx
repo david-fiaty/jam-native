@@ -14,6 +14,7 @@ import AddItemButton from "../button/AddItemButton";
 import NoImageView from "../view/NoImageView";
 import BoxView from "../view/BoxView";
 import MediaManager from "@/manager/MediaManager";
+import BackButton from "../button/BackButton";
 
 type Props = {
   title?: any,
@@ -89,7 +90,10 @@ const SelectJamsForm = ({ title, idArray, addButton, allButton }: Props) => {
   return (
     <View style={styles.container}>
       <BoxView direction="row" align="center" justify="space-between">
-        <TextView style={styles.title}>{title}</TextView>
+        <BackButton
+          title={i18n.t('Select from my Jams')}
+          onPress={() => ScreenManager.toggleModal('AddProjectForm')}
+        />
 
         { allButton && <TouchableOpacity
           onPress={() =>
