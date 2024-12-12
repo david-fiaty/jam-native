@@ -16,20 +16,13 @@ import BoxView from "../view/BoxView";
 import MediaManager from "@/manager/MediaManager";
 import BackButton from "../button/BackButton";
 
-type Props = {
-  title?: any;
-  idArray?: any;
-  addButton?: boolean;
-  allButton?: boolean;
-};
-
-const SelectJamsForm = ({ title, idArray, addButton, allButton }: Props) => {
+const SelectJamsForm = () => {
   const numColumns = 3;
   const router = useRouter();
   const [profileJams, setProfileJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  idArray = [20, 46, 39, 49];
+  const idArray = [20, 46, 39, 49];
 
   const renderItem = (row: any) => {
     let imageSize = MediaManager.getThumbnailSize();
@@ -87,7 +80,6 @@ const SelectJamsForm = ({ title, idArray, addButton, allButton }: Props) => {
 
   if (!profileJams?.length && idArray?.length) {
     EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
-      if (addButton === true) data.push({ id: "addItem" });
       setProfileJams(data);
       setIsLoaded(true);
     });
