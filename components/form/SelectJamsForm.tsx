@@ -29,9 +29,17 @@ const SelectJamsForm = () => {
   const idArray = [20, 46, 39, 49, 18, 33, 50];
 
   const selectJam = (row: any) => {
+    let selectedJamsList = [...selectedJams];
+    let index: number = selectedJamsList.findIndex((id: any) => id == row.item.id);
 
-      console.log(row?.item?.id);
+    if (index === -1) {
+      selectedJamsList.push(row.item.id);
+    }  
+    else {
+      delete selectedJamsList[index];
+    }
 
+    setSelectedJams(selectedJamsList.filter(n => n));
   };
 
   const renderItem = (row: any) => {
@@ -88,6 +96,9 @@ const SelectJamsForm = () => {
   }
 
   if (!isLoaded) return <SpinnerView />;
+
+
+  console.log(selectedJams);
 
   return (
     <BoxView
