@@ -92,17 +92,20 @@ const AddProjectForm = () => {
 
         <DividerView />
         <BoxView direction="column" align="center" justify="center">
-          <TextView>{i18n.t('There are no Jams in this project')}</TextView>
+          
+          { !projectData?.jams_ids?.length && 
+            <TextView>{i18n.t('There are no Jams in this project')}</TextView>
+          }
         
+          { !projectData?.jams_ids?.length && 
           <AddItemButton
             label={i18n.t('Add')}
             onPress={() => ScreenManager.toggleModal("SelectJamsForm")}
-          />
+          /> }
 
-          {/*
-          <ProjectJamsList 
-            idArray={[20, 46, 39, 49]}
-          /> */}
+          { projectData?.jams_ids?.length &&
+            <ProjectJamsList idArray={projectData.jams_ids} /> 
+          }
           
         </BoxView>
         <DividerView />
