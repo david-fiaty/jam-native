@@ -76,63 +76,49 @@ const AddProjectForm = () => {
         onPress={() => ScreenManager.toggleModal('ProfileForm')}
       />
 
-      <DividerView />
-      <InputTextField
-        placeholder={i18n.t('Title')}
-        value={projectData?.title}
-        onChangeText={(value: string) => updateField('title', value)}
-      />
-
-      <InputTextareaField
-        placeholder={i18n.t('Description')}
-        value={projectData?.caption}
-        onChangeText={(value: string) => updateField('caption', value)}
-      />
-
-      <DividerView />
-      <BoxView direction="column" align="center" justify="center">
-        <TextView>{i18n.t('There are no Jams in this project')}</TextView>
-      
-        <AddItemButton
-          label={i18n.t('Add Jams')}
-          onPress={() => ScreenManager.toggleModal("AddJamForm")}
+      <View style={styles.formContainer}>
+        <InputTextField
+          placeholder={i18n.t('Title')}
+          value={projectData?.title}
+          onChangeText={(value: string) => updateField('title', value)}
         />
-      </BoxView>
-      <DividerView />
 
-      <ButtonView
-        label={i18n.t('Post')}
-        isProcessing={isProcessing}
-        onPress={() => {
-          setIsProcessing(true);
-          submitForm();
-        }}
-      />
+        <InputTextareaField
+          placeholder={i18n.t('Description')}
+          value={projectData?.caption}
+          onChangeText={(value: string) => updateField('caption', value)}
+        />
 
-      <DividerView />
+        <DividerView />
+        <BoxView direction="column" align="center" justify="center">
+          <TextView>{i18n.t('There are no Jams in this project')}</TextView>
+        
+          <AddItemButton
+            label={i18n.t('Add')}
+            onPress={() => ScreenManager.toggleModal("AddJamForm")}
+          />
+        </BoxView>
+        <DividerView />
+
+        <ButtonView
+          label={i18n.t('Post')}
+          isProcessing={isProcessing}
+          onPress={() => {
+            setIsProcessing(true);
+            submitForm();
+          }}
+        />
+
+        <DividerView />
+      </View>
     </BoxView>
   );
 };
 
 const styles = StyleSheet.create({
-  categoryContainer: {
-    flexDirection: 'column',
-    gap: Layout.space.small,
-  },
-  categoryItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: Colors.secondary,
-    padding: Layout.space.base,
-    borderWidth: 1,
-    borderRadius: Layout.radius.round,
-    borderColor: Colors.secondary,
-    width: Layout.space.base*7,
-    height: Layout.space.base*7,
-  },
-  categoryItemSelected: {
-    borderColor: Colors.primary,
+  formContainer: {
+    width: "100%",
+    gap: Layout.space.base,
   },
 });
 
