@@ -15,29 +15,30 @@ import NoImageView from "../view/NoImageView";
 import BoxView from "../view/BoxView";
 import MediaManager from "@/manager/MediaManager";
 import BackButton from "../button/BackButton";
+import UserManager from "@/manager/UserManager";
 
 const SelectJamsForm = () => {
   const numColumns = 3;
   const router = useRouter();
+  const [profileData, setProfileData] = useState<any>([]);
   const [profileJams, setProfileJams] = useState<any>([]);
+  const [selectedJams, setSelectedJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const idArray = [20, 46, 39, 49];
+  // Todo - Connect to profile jams
+  const idArray = [20, 46, 39, 49, 18, 33, 50];
+
+  const selectJam = (row: any) => {
+
+      console.log(row?.item?.id);
+
+  };
 
   const renderItem = (row: any) => {
     let imageSize = MediaManager.getThumbnailSize();
     let output = null;
 
-    if (row?.item?.id == "addItem") {
-      output = (
-        <AddItemButton
-          label={i18n.t("Add")}
-          width={imageSize.width}
-          height={imageSize.height}
-          onPress={() => ScreenManager.toggleModal("AddJamForm")}
-        />
-      );
-    } else if (!row?.item?.medias?.[0]?.url) {
+    if (!row?.item?.medias?.[0]?.url) {
       output = (
         <NoImageView
           width={imageSize.width}
@@ -63,12 +64,7 @@ const SelectJamsForm = () => {
       output = (
         <TouchableOpacity
           key={row.item.id}
-          onPress={() =>
-            router.push({
-              pathname: "/jam",
-              params: { idArray: [row.item.id], title: title },
-            })
-          }
+          onPress={() => selectJam(row)}
         >
           {output}
         </TouchableOpacity>
@@ -78,7 +74,13 @@ const SelectJamsForm = () => {
     return output;
   };
 
-  if (!profileJams?.length && idArray?.length) {
+  if (profileData) {
+    UserManager.getProfileData().then((data: any) => {
+      if (!profileData) setProfileData(data);
+    });
+  }
+
+  if (profileData && !profileJams?.length) {
     EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
       setProfileJams(data);
       setIsLoaded(true);
