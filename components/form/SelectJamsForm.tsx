@@ -138,9 +138,13 @@ const toggleItemsForm = () => {
           onPress={() => ScreenManager.toggleModal("AddProjectForm")}
         />
 
-        <View>
-          <TextView style={Layout.textLink}>{i18n.t('Add selected')}</TextView>
-        </View>
+        {selectedJams?.length > 0 && (
+          <View>
+            <TextView style={Layout.textLink}>
+              {i18n.t("Add selected")} ({selectedJams.length})
+            </TextView>
+          </View>
+        )}
       </BoxView>
 
       {profileJams?.length > 0 && (
