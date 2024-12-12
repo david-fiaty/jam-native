@@ -27,6 +27,7 @@ import LocationTypeField from "../field/LocationTypeField";
 import EntityManager from "@/manager/EntityManager";
 import CollaboratorsField from "../field/CollaboratorsField";
 import AddItemButton from "../button/AddItemButton";
+import ProjectJamsList from "../list/ProjectJamsList";
 
 const AddProjectForm = () => {
   const dispatch = useDispatch();
@@ -96,6 +97,10 @@ const AddProjectForm = () => {
           <AddItemButton
             label={i18n.t('Add')}
             onPress={() => ScreenManager.toggleModal("AddJamForm")}
+          />
+
+          <ProjectJamsList 
+            idArray={[20, 46, 39, 49]}
           />
         </BoxView>
         <DividerView />
