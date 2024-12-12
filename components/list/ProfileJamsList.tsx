@@ -99,7 +99,7 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton }: Props) => {
             })
           }
         >
-          <TextView style={styles.link}>{i18n.t("View all")}</TextView>
+          <TextView style={Layout.textLink}>{i18n.t("View all")}</TextView>
         </TouchableOpacity> }
       </BoxView>
 
@@ -125,10 +125,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: Layout.space.base,
     flex: 1,
-  },
-  link: {
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.primary,
   },
   item: {
     flexDirection: "column",

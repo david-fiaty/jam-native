@@ -15,6 +15,7 @@ import MediaManager from "@/manager/MediaManager";
 import BackButton from "../button/BackButton";
 import UserManager from "@/manager/UserManager";
 import IconView from "../view/IconView";
+import TextView from "../view/TextView";
 
 const toggleItemsForm = () => {
   const numColumns = 3;
@@ -126,10 +127,21 @@ const toggleItemsForm = () => {
       scroll={true}
       style={Layout.screenContent}
     >
-      <BackButton
-        title={i18n.t("Select from my Jams")}
-        onPress={() => ScreenManager.toggleModal("AddProjectForm")}
-      />
+      <BoxView
+        align="center"
+        justify="space-between"
+        direction="row"
+        style={styles.titleContainer}
+      >
+        <BackButton
+          title={i18n.t("Select Jams")}
+          onPress={() => ScreenManager.toggleModal("AddProjectForm")}
+        />
+
+        <View>
+          <TextView style={Layout.textLink}>{i18n.t('Add selected')}</TextView>
+        </View>
+      </BoxView>
 
       {profileJams?.length > 0 && (
         <ListView
@@ -149,10 +161,8 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
   },
-  title: {
-    fontWeight: "bold",
-    marginBottom: Layout.space.base,
-    flex: 1,
+  titleContainer: {
+    width: "100%",
   },
   item: {
     flexDirection: "column",
