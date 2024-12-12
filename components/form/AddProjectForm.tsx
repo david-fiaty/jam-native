@@ -96,7 +96,7 @@ const AddProjectForm = () => {
         
           <AddItemButton
             label={i18n.t('Add')}
-            onPress={() => ScreenManager.toggleModal("AddJamForm")}
+            onPress={() => ScreenManager.toggleModal("SelectJamsForm")}
           />
 
           <ProjectJamsList 
