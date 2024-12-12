@@ -99,9 +99,11 @@ const AddProjectForm = () => {
             onPress={() => ScreenManager.toggleModal("SelectJamsForm")}
           />
 
+          {/*
           <ProjectJamsList 
             idArray={[20, 46, 39, 49]}
-          />
+          /> */}
+          
         </BoxView>
         <DividerView />
 
