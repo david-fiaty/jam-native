@@ -16,6 +16,7 @@ import NotificationsMenu from "@/components/menu/NotificationsMenu";
 import SearchView from "@/components/view/SearchView";
 import JamsMapView from "@/components/view/JamsMapView";
 import AddJamForm from "@/components/form/AddJamForm";
+import AddProjectForm from "../form/AddProjectForm";
 import ProfileForm from "@/components/form/ProfileForm";
 import JammersList from "@/components/list/JammersList";
 import HostsList from "@/components/list/HostsList";
@@ -26,11 +27,14 @@ import AddedJamAction from "../action/AddedJamAction";
 import CollaboratorsList from "../list/CollaboratorsList";
 import SectorsList from "../list/SectorsList";
 import LocationMapView from "../view/LocationMapView";
+import SelectJamsForm from "../form/SelectJamsForm";
 
 const screenComponents: any = {
   JamsList: <JamsList />,
   JamsMapView: <JamsMapView />,
   AddJamForm: <AddJamForm />,
+  AddProjectForm: <AddProjectForm />,
+  SelectJamsForm: <SelectJamsForm />,
   ProfileForm: <ProfileForm />,
   SettingsMenu: <SettingsMenu />,
   NotificationsMenu: <NotificationsMenu />,

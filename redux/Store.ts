@@ -5,6 +5,7 @@ import UserReducer from './slices/UserSlice';
 import MessageReducer from './slices/MessageSlice';
 import AppReducer from './slices/AppSlice';
 import JamFormReducer from './slices/JamFormSlice';
+import ProjectFormReducer from './slices/ProjectFormSlice';
 import ProfileFormReducer from './slices/ProfileFormSlice';
 
 const Store = configureStore({
@@ -15,6 +16,7 @@ const Store = configureStore({
     message: MessageReducer,
     app: AppReducer,
     jamForm: JamFormReducer, 
+    projectForm: ProjectFormReducer, 
     profileForm: ProfileFormReducer,
   },
   middleware: getDefaultMiddleware =>

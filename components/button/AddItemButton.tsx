@@ -1,24 +1,30 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
-import i18n from "@/translation/i18n";
 import TextView from "../view/TextView";
 import IconView from "../view/IconView";
+import MediaManager from "@/manager/MediaManager";
 
 type Props = {
+  label?: any,
   width?: any,
   height?: any,
   onPress?: () => void,
 };
 
-const AddItemButton = ({ width, height, onPress }: Props) => {
+const AddItemButton = ({ label, width, height, onPress }: Props) => {
+  let imageSize = MediaManager.getThumbnailSize();
+  width = width ? width : imageSize.width;
+  height = height ? height : imageSize.height;
+
   return (
     <TouchableOpacity onPress={onPress} style={{width: width, height: height}}>
       <View style={styles.container}>
         <View>
           <IconView name="plus" theme="secondary" size={16} />
         </View>
-        <TextView>Add</TextView>
+
+        { label?.length > 0 && <TextView>{label}</TextView> }
       </View>
     </TouchableOpacity>
   );

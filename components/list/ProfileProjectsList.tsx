@@ -16,12 +16,13 @@ import BoxView from "../view/BoxView";
 import MediaManager from "@/manager/MediaManager";
 
 type Props = {
-  title?: any;
-  idArray?: any;
-  addButton?: boolean;
+  title?: any,
+  idArray?: any,
+  addButton?: boolean,
+  allButton?: boolean,
 };
 
-const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
+const ProfileProjectsList = ({ title, idArray, addButton, allButton }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const [profileProjects, setProfileProjects] = useState<any>([]);
@@ -30,14 +31,15 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
 
   const renderItem = (row: any) => {
     let imageSize: any = MediaManager.getThumbnailSize();
-    let output: any = <></>;
+    let output: any = null;
     let uri: string = projectImages?.[row?.item?.id];
 
     if (row?.item?.id == "addItem") {
       output = <AddItemButton
+        label={i18n.t('Add')}
         width={imageSize.width}
         height={imageSize.height}
-        onPress={() => ScreenManager.toggleModal("AddJamForm")}
+        onPress={() => ScreenManager.toggleModal("AddProjectForm")}
       />;
     }
     else if (!uri) {
@@ -99,7 +101,7 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
       <BoxView direction="row" align="center" justify="space-between">
         <TextView style={styles.title}>{title}</TextView>
 
-        <TouchableOpacity
+        { allButton && <TouchableOpacity
           onPress={() =>
             router.push({
               pathname: "/project",
@@ -108,7 +110,7 @@ const ProfileProjectsList = ({ title, idArray, addButton }: Props) => {
           }
         >
           <TextView style={styles.link}>{i18n.t("View all")}</TextView>
-        </TouchableOpacity>
+        </TouchableOpacity> }
       </BoxView>
 
       {profileProjects?.length > 0 && (

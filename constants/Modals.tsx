@@ -24,6 +24,22 @@ export const Modals = [
     entityId: 0,
   },
   {
+    name: 'AddProjectForm', 
+    effect: 'fade',
+    active: false,
+    headerNavigation: true,
+    footerNavigation: true,
+    entityId: 0,
+  },
+  {
+    name: 'SelectJamsForm', 
+    effect: 'fade',
+    active: false,
+    headerNavigation: true,
+    footerNavigation: true,
+    entityId: 0,
+  },
+  {
     name: 'ProfileForm', 
     effect: 'fade',
     active: false,

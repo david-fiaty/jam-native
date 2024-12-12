@@ -22,7 +22,7 @@ type Props = {
   allButton?: boolean,
 };
 
-const ProfileJamsList = ({ title, idArray, addButton, allButton }: Props) => {
+const ProjectJamsList = ({ title, idArray, addButton, allButton }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const [profileJams, setProfileJams] = useState<any>([]);
@@ -139,4 +139,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileJamsList;
+export default ProjectJamsList;

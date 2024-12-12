@@ -130,6 +130,10 @@ export const Layout = {
     height: modal.height, 
     backgroundColor: Colors.white,
   },
+  formContainer: {
+    width: "100%",
+    gap: space.base,
+  },
   formField: {
     backgroundColor: Colors.secondary,
     borderWidth: 1, 
