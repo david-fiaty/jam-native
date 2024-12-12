@@ -76,7 +76,7 @@ const AddProjectForm = () => {
         onPress={() => ScreenManager.toggleModal('ProfileForm')}
       />
 
-      <View style={styles.formContainer}>
+      <View style={Layout.formContainer}>
         <InputTextField
           placeholder={i18n.t('Title')}
           value={projectData?.title}
@@ -116,10 +116,7 @@ const AddProjectForm = () => {
 };
 
 const styles = StyleSheet.create({
-  formContainer: {
-    width: "100%",
-    gap: Layout.space.base,
-  },
+
 });
 
 export default AddProjectForm;

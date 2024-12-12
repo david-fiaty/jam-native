@@ -50,7 +50,7 @@ const ProfileForm = () => {
         onPress={() => ScreenManager.toggleModal("ProfileForm")}
       />
 
-      <View style={styles.formContainer}>
+      <View style={Layout.formContainer}>
         <ProfileImageField 
           value={profileData?.profile_picture?.url}
           onChangeValue={(mediaList: any) => updateField("profile_picture", {url: mediaList[0]?.uri})}
@@ -199,10 +199,6 @@ const ProfileForm = () => {
 };
 
 const styles = StyleSheet.create({
-  formContainer: {
-    width: "100%",
-    gap: Layout.space.base,
-  },
   profileImageContainer: {
     paddingHorizontal: Layout.space.base,
   },
