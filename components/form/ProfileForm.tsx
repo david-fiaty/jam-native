@@ -146,8 +146,9 @@ const ProfileForm = () => {
         />
 
         <DividerView theme="secondary" />
+
         <ProfileProjectsList
-          title={i18n.t("Saved Projects")} 
+          title={i18n.t("Your Projects")} 
           addButton={true}
           //idArray={profileData?.saved_projects}
           idArray={[14, 16, 17]}
@@ -155,11 +156,28 @@ const ProfileForm = () => {
 
         <DividerView />
         <ProfileProjectsList
-          title={i18n.t("Liked Projects")} 
-          //idArray={profileData?.liked_projects}
+          title={i18n.t("Saved Projects")} 
+          //idArray={profileData?.saved_projects}
+          allButton={true}
           idArray={[14, 16, 17]}
         />
-        
+
+        <DividerView />
+        <ProfileProjectsList
+          title={i18n.t("Liked Projects")} 
+          //idArray={profileData?.liked_projects}
+          allButton={true}
+          idArray={[14, 16, 17]}
+        />
+
+        <DividerView />
+        <ProfileJamsList 
+          title={i18n.t("Your Jams")} 
+          allButton={true}
+          addButton={true}
+          idArray={profileData?.saved_jams} 
+        />
+
         <DividerView />
         <ProfileJamsList 
           title={i18n.t("Saved Jams")} 
