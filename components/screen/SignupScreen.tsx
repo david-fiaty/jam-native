@@ -57,7 +57,7 @@ const SignupScreen = () => {
 
       <DividerView />
 
-      <View style={styles.formContainer}>
+      <View style={Layout.formContainer}>
         <InputTextField
           containerStyle={styles.inputTextFieldContainer}
           placeholder={i18n.t("User name")}
@@ -196,10 +196,6 @@ const SignupScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  formContainer: {
-    width: "100%",
-    gap: Layout.space.base,
-  },
   inputTextFieldContainer: {
     backgroundColor: Colors.white,
     borderWidth: Layout.borderWidth.base,
