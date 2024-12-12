@@ -231,20 +231,29 @@ const JamsList = ({idArray, showSpinner}: Props) => {
 
   const loadData = () => {
     if (!idArray?.length) {
-      EntityManager.listJams().then((data: any) => setJamsData(data));
+      EntityManager.listJams().then((data: any) => {
+        setJamsData(data);
+        setIsLoaded(true);
+      });
     }
     else {
-      EntityManager.getJams({items_ids: idArray}).then((data: any) => setJamsData(data));
+      EntityManager.getJams({items_ids: idArray}).then((data: any) => {
+        setJamsData(data);
+        setIsLoaded(true);
+      });
     }
+  };
 
+  if (!jamsData?.length) loadData();
+
+  if (!sectorsData?.length) { 
     EntityManager.getSectors().then((data: any) => {
       setSectorsData(data);
       setIsLoaded(true);
     });
-  };
+  }
 
-  if (!jamsData?.length) loadData();
-  else if (!isLoaded && showSpinner) return <SpinnerView />;
+  if (!isLoaded && showSpinner) return <SpinnerView />;
 
   return (
     <BoxView direction="column" style={Layout.screenContent}>
