@@ -56,23 +56,16 @@ const ProjectJamsList = ({
   };
 
   const deleteItem = (row: any) => {
-    let selectedJamsList = [...selectedJams];
-    let index: number = findItemIndex(row);
+    let projectJamsList: any = [...projectData?.jams_ids || []];
+    let index: number = projectJamsList?.jams_ids?.findIndex((id: any) => id == row.item.id);
+    
+    if (index !== -1) delete projectJamsList[index];
 
-    if (index !== -1) delete selectedJamsList[index];
-    selectedJamsList = selectedJamsList.filter((n) => n);
-
-    setSelectedJams(selectedJamsList);
-
-    console.log(selectedJams);
-    /*
     dispatch(setProjectData<any>({ 
       key: 'jams_ids', 
-      value: selectedJamsList, 
+      value: projectJamsList, 
       profile_id: profileId,
     }));
-
-    */
   };
 
   const renderItem = (row: any) => {
