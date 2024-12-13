@@ -39,6 +39,7 @@ const ProjectJamsList = ({
   const [selectedJams, setSelectedJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
+  const projectData = useSelector((state: any) => state.projectForm);
   const numColumns = 3;
 
   const findItemIndex = (row: any) => selectedJams.findIndex((id: any) => id == row.item.id);
@@ -59,14 +60,19 @@ const ProjectJamsList = ({
     let index: number = findItemIndex(row);
 
     if (index !== -1) delete selectedJamsList[index];
-
     selectedJamsList = selectedJamsList.filter((n) => n);
+
     setSelectedJams(selectedJamsList);
+
+    console.log(selectedJams);
+    /*
     dispatch(setProjectData<any>({ 
       key: 'jams_ids', 
       value: selectedJamsList, 
       profile_id: profileId,
     }));
+
+    */
   };
 
   const renderItem = (row: any) => {
