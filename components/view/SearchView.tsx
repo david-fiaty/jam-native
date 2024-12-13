@@ -29,19 +29,17 @@ const SearchView = () => {
     setActiveTab(row.item.id);
   };
 
-  const renderTab = (row: any) => (
-    <TouchableOpacity onPress={() => toggleTab(row)}>
-      <View style={styles.tabItem}>
-        <TextView
-          style={
-            searchState.filter == row.item.id ? { fontWeight: "bold" } : {}
-          }
-        >
-          {row.item.label}
-        </TextView>
-      </View>
-    </TouchableOpacity>
-  );
+  const renderTab = (row: any) => {
+    const tabStyle: any = row.item.id == activeTab ? { fontWeight: "bold" } : {};
+
+    return (
+      <TouchableOpacity onPress={() => toggleTab(row)}>
+        <View style={styles.tabItem}>
+          <TextView style={tabStyle}>{row.item.label}</TextView>
+        </View>
+      </TouchableOpacity>
+    );
+  };
 
   if (!jamsData?.length) {
     EntityManager.listJams().then((data: any) => {
@@ -71,7 +69,6 @@ const SearchView = () => {
 
       {/* Tabs content */}
       <SearchJamsList idArray={[20, 46, 39, 49, 18, 33, 50]} />
-
     </BoxView>
   );
 };
