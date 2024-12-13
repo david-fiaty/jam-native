@@ -29,7 +29,7 @@ const SearchView = () => {
   };
 
   const updateSearchData = (key: string, data: any) => {
-    let searchDataArray: any = [...searchData];
+    let searchDataArray: any = {...searchData};
     searchDataArray[key] = data;
     setSearchData(searchDataArray);
   };
@@ -55,6 +55,7 @@ const SearchView = () => {
 
   console.log(activeTab);
   console.log(searchData);
+  console.log('----');
 
   return (
     <BoxView
