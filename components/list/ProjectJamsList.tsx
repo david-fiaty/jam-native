@@ -42,7 +42,7 @@ const ProjectJamsList = ({
   const projectData = useSelector((state: any) => state.projectForm);
   const numColumns = 3;
 
-  const findItemIndex = (row: any) => projectData?.jams_ids?.findIndex((id: any) => id == row.item.id);
+  const findItemIndex = (row: any) => selectedJams.findIndex((id: any) => id == row.item.id);
 
   const toggleItem = (row: any) => {
     let selectedJamsList: any = [...selectedJams];
@@ -56,8 +56,8 @@ const ProjectJamsList = ({
   };
 
   const deleteItem = (row: any) => {
-    let projectJamsList: any = projectData?.jams_ids || [];
-    let index: number = findItemIndex(row);
+    let projectJamsList: any = [...projectData?.jams_ids || []];
+    let index: number = projectJamsList?.jams_ids?.findIndex((id: any) => id == row.item.id);
     
     if (index !== -1) delete projectJamsList[index];
 
