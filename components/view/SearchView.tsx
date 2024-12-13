@@ -49,7 +49,7 @@ const SearchView = () => {
   if (!Object.keys(searchData?.jam || [])?.length) {
     EntityManager.listJams().then((data: any) => {
       updateSearchData('jam', data);
-      //updateSearchData('calls', data.filter((o: any) => o?.type == 'calls'));
+      updateSearchData('call', data.filter((o: any) => o?.type == 'call'));
     });
   }
 
@@ -76,7 +76,7 @@ const SearchView = () => {
 
       {/* Search calls */}
       {['all', 'call'].includes(activeTab) && 
-        <SearchJamsList idArray={searchData?.jam?.map((o: any) => o?.id)} />
+        <SearchJamsList idArray={searchData?.call?.map((o: any) => o?.id)} />
       }
     </BoxView>
   );
