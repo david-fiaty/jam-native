@@ -67,7 +67,7 @@ const SearchView = () => {
       />
 
       {/* Tabs content */}
-      <SearchJamsList idArray={[20, 46, 39, 49, 18, 33, 50]} />
+      <SearchJamsList idArray={searchData?.jams?.map((o: any) => o?.id)} />
     </BoxView>
   );
 };
