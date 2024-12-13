@@ -31,12 +31,10 @@ const toggleItemsForm = () => {
   // Todo - Connect to profile jams
   const idArray = [20, 46, 39, 49, 18, 33, 50];
 
-  const findItemIndex = (row: any) => {
-    return selectedJams.findIndex((id: any) => id == row.item.id);
-  };
+  const findItemIndex = (row: any) => selectedJams.findIndex((id: any) => id == row.item.id);
 
   const toggleItem = (row: any) => {
-    let selectedJamsList = [...projectData?.jams_ids];
+    let selectedJamsList = [...projectData?.jams_ids || []];
     let index: number = findItemIndex(row);
 
     if (index === -1) selectedJamsList.push(row.item.id);
