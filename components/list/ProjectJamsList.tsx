@@ -42,7 +42,7 @@ const ProjectJamsList = ({
   const projectData = useSelector((state: any) => state.projectForm);
   const numColumns = 3;
 
-  const findItemIndex = (row: any) => selectedJams.findIndex((id: any) => id == row.item.id);
+  const findItemIndex = (row: any) => projectData?.jams_ids?.findIndex((id: any) => id == row.item.id);
 
   const toggleItem = (row: any) => {
     let selectedJamsList: any = [...selectedJams];
