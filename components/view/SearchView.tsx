@@ -4,10 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSearchFilter } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
+import ImageView from "./ImageView";
 import BoxView from "./BoxView";
 import TextView from "./TextView";
+import ScreenManager from "@/manager/ScreenManager";
+import i18n from "@/translation/i18n";
 import ListView from "./ListView";
+import DataManager from "@/manager/DataManager";
 import SpinnerView from "./SpinnerView";
+import MediaManager from "@/manager/MediaManager";
 import StaticData from "@/constants/StaticData";
 import EntityManager from "@/manager/EntityManager";
 import SearchJamsList from "../list/SearchJamsList";
@@ -23,8 +28,9 @@ const SearchView = () => {
     setActiveTab(row.item.id);
   };
 
-  const updateSearchData = (data: any) => {
-    let searchDataArray: any = {...searchData, ...data};
+  const updateSearchData = (key: string, data: any) => {
+    let searchDataArray: any = {...searchData};
+    searchDataArray[key] = data;
     setSearchData(searchDataArray);
   };
 
@@ -42,10 +48,8 @@ const SearchView = () => {
 
   if (!Object.keys(searchData?.jams || [])?.length) {
     EntityManager.listJams().then((data: any) => {
-      updateSearchData({
-        'jam': data,
-        'call': data.filter((o: any) => o?.type == 'call'),
-      });
+      updateSearchData('jams', data);
+      //updateSearchData('calls', data.filter((o: any) => o?.type == 'calls'));
     });
   }
 
@@ -66,13 +70,13 @@ const SearchView = () => {
       />
 
       {/* Search jams */}
-      {['all', 'jam'].includes(activeTab) && 
+      {['all', 'jams'].includes(activeTab) && 
         <SearchJamsList idArray={searchData?.jams?.map((o: any) => o?.id)} />
       }
 
       {/* Search calls */}
       {['all', 'call'].includes(activeTab) && 
-        <SearchJamsList idArray={searchData?.calls?.map((o: any) => o?.id)} />
+        <SearchJamsList idArray={searchData?.jams?.map((o: any) => o?.id)} />
       }
     </BoxView>
   );
