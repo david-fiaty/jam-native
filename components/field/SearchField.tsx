@@ -5,6 +5,7 @@ import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
 import ScreenManager from "@/manager/ScreenManager";
 import i18n from '@/translation/i18n';
+import BoxView from '../view/BoxView';
 
 const SearchField = () => {
   const dispatch = useDispatch();
@@ -55,9 +56,9 @@ const SearchField = () => {
   );
 
   return (
-    <View direction="row" align="center" justify="space-between" style={styles.container}>
+    <BoxView direction="row" align="center" justify="space-between" style={styles.container}>
       { isExpanded ? inputField : toggleButton }
-    </View>
+    </BoxView>
   );
 };
 
