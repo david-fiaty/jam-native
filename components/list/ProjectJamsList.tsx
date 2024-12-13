@@ -1,6 +1,8 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useState } from "react";
 import { useRouter } from "expo-router";
+import { useDispatch, useSelector } from "react-redux";
+import { setProjectData } from "@/redux/slices/ProjectFormSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import TextView from "../view/TextView";
@@ -31,11 +33,13 @@ const ProjectJamsList = ({
   allButton,
   onAddButtonPress,
 }: Props) => {
-  const numColumns = 3;
+  const dispatch = useDispatch();
   const router = useRouter();
   const [profileJams, setProfileJams] = useState<any>([]);
   const [selectedJams, setSelectedJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [profileId, setProfileId] = useState<number>(0);
+  const numColumns = 3;
 
   const findItemIndex = (row: any) => selectedJams.findIndex((id: any) => id == row.item.id);
 
@@ -53,9 +57,16 @@ const ProjectJamsList = ({
   const deleteItem = (row: any) => {
     let selectedJamsList = [...selectedJams];
     let index: number = findItemIndex(row);
+
     if (index !== -1) delete selectedJamsList[index];
 
-    setSelectedJams(selectedJamsList.filter((n) => n));
+    selectedJamsList = selectedJamsList.filter((n) => n);
+    setSelectedJams(selectedJamsList);
+    dispatch(setProjectData<any>({ 
+      key: 'jams_ids', 
+      value: selectedJamsList, 
+      profile_id: profileId,
+    }));
   };
 
   const renderItem = (row: any) => {
@@ -173,6 +184,11 @@ const styles = StyleSheet.create({
   item: {
     flexDirection: "column",
     gap: Layout.space.small,
+  },
+  deleteItem: {
+    position: "absolute",
+    top: 5,
+    right: 5,
   },
   image: {
     borderRadius: Layout.space.base,
