@@ -50,6 +50,7 @@ const SearchView = () => {
       updateSearchData({
         jam: data,
         call: data.filter((o: any) => o?.type == 'call'),
+        event: data.filter((o: any) => o?.type == 'event'),
       });
     });
   }
@@ -78,6 +79,11 @@ const SearchView = () => {
       {/* Search calls */}
       {['all', 'call'].includes(activeTab) && 
         <SearchJamsList idArray={searchData?.call?.map((o: any) => o?.id)} />
+      }
+
+      {/* Search events */}
+      {['all', 'event'].includes(activeTab) && 
+        <SearchJamsList idArray={searchData?.event?.map((o: any) => o?.id)} />
       }
     </BoxView>
   );
