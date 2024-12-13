@@ -14,6 +14,7 @@ import AddItemButton from "../button/AddItemButton";
 import NoImageView from "../view/NoImageView";
 import BoxView from "../view/BoxView";
 import MediaManager from "@/manager/MediaManager";
+import IconView from "../view/IconView";
 
 type Props = {
   title?: any;
@@ -36,8 +37,7 @@ const ProjectJamsList = ({
   const [selectedJams, setSelectedJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const findItemIndex = (row: any) =>
-    selectedJams.findIndex((id: any) => id == row.item.id);
+  const findItemIndex = (row: any) => selectedJams.findIndex((id: any) => id == row.item.id);
 
   const toggleItem = (row: any) => {
     let selectedJamsList: any = [...selectedJams];
@@ -60,6 +60,7 @@ const ProjectJamsList = ({
 
   const renderItem = (row: any) => {
     let imageSize = MediaManager.getThumbnailSize();
+    let isSelected: boolean = findItemIndex(row) !== -1;
     let output = null;
 
     if (row?.item?.id == "addItem") {
@@ -89,6 +90,15 @@ const ProjectJamsList = ({
             resizeMode="cover"
             style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
           />
+
+          {isSelected && (
+            <TouchableOpacity
+              style={styles.deleteItem}
+              onPress={() => deleteItem(row)}
+            >
+              <IconView name="delete" theme="primary" size={8} />
+            </TouchableOpacity>
+          )}
         </View>
       );
     }
