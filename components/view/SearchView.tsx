@@ -58,7 +58,7 @@ const SearchView = () => {
       scroll={true}
       style={Layout.screenContent}
     >
-      {/* Tabs */}
+      {/* Tabs headers */}
       <ListView
         data={StaticData.searchTabs}
         horizontal={true}
@@ -66,7 +66,7 @@ const SearchView = () => {
         renderItem={(row: any) => renderTab(row)}
       />
 
-      {/* Tabs content */}
+      {/* Tabs contents */}
       <SearchJamsList idArray={searchData?.jams?.map((o: any) => o?.id)} />
     </BoxView>
   );
