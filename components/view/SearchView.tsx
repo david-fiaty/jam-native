@@ -67,7 +67,9 @@ const SearchView = () => {
       />
 
       {/* Tabs contents */}
-      <SearchJamsList idArray={searchData?.jams?.map((o: any) => o?.id)} />
+      {['all', 'jams'].includes(activeTab) && 
+        <SearchJamsList idArray={searchData?.jams?.map((o: any) => o?.id)} />
+      }
     </BoxView>
   );
 };
