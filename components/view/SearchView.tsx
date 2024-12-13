@@ -28,9 +28,8 @@ const SearchView = () => {
     setActiveTab(row.item.id);
   };
 
-  const updateSearchData = (key: string, data: any) => {
-    let searchDataArray: any = {...searchData};
-    searchDataArray[key] = data;
+  const updateSearchData = (data: any) => {
+    let searchDataArray: any = {...searchData, ...data};
     setSearchData(searchDataArray);
   };
 
@@ -48,8 +47,10 @@ const SearchView = () => {
 
   if (!Object.keys(searchData?.jam || [])?.length) {
     EntityManager.listJams().then((data: any) => {
-      updateSearchData('jam', data);
-      updateSearchData('call', data.filter((o: any) => o?.type == 'call'));
+      updateSearchData({
+        jam: data,
+        call: data.filter((o: any) => o?.type == 'call'),
+      });
     });
   }
 
