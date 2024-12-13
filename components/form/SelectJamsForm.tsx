@@ -19,24 +19,22 @@ import IconView from "../view/IconView";
 import TextView from "../view/TextView";
 
 const toggleItemsForm = () => {
-  const numColumns = 3;
   const dispatch = useDispatch();
-  const projectData = useSelector((state: any) => state.projectForm);
   const [profileData, setProfileData] = useState<any>([]);
   const [profileJams, setProfileJams] = useState<any>([]);
   const [selectedJams, setSelectedJams] = useState<any>([]);
   const [profileId, setProfileId] = useState<number>(0);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const projectData = useSelector((state: any) => state.projectForm);
+  const numColumns = 3;
 
   // Todo - Connect to profile jams
   const idArray = [20, 46, 39, 49, 18, 33, 50];
 
-  const findItemIndex = (row: any) => {
-    return selectedJams.findIndex((id: any) => id == row.item.id);
-  };
+  const findItemIndex = (row: any) => selectedJams.findIndex((id: any) => id == row.item.id);
 
   const toggleItem = (row: any) => {
-    let selectedJamsList = [...selectedJams];
+    let selectedJamsList = [...projectData?.jams_ids || []];
     let index: number = findItemIndex(row);
 
     if (index === -1) selectedJamsList.push(row.item.id);

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useRouter } from "expo-router";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setJamData } from "@/redux/slices/JamFormSlice";
@@ -20,11 +19,10 @@ import ProjectJamsList from "../list/ProjectJamsList";
 
 const AddProjectForm = () => {
   const dispatch = useDispatch();
-  const projectData = useSelector((state: any) => state.projectForm);
-  const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
+  const projectData = useSelector((state: any) => state.projectForm);
 
   const updateField = (key: string, value: any) => {
     dispatch(
