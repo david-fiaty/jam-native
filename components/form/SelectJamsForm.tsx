@@ -42,7 +42,6 @@ const toggleItemsForm = () => {
 
     selectedJamsList = selectedJamsList.filter((n: any) => n);
     setSelectedJams(selectedJamsList);
-
     dispatch(setProjectData<any>({ 
       key: 'jams_ids', 
       value: selectedJamsList, 
