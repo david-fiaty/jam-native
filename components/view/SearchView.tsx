@@ -20,11 +20,17 @@ import SearchJamsList from "../list/SearchJamsList";
 const SearchView = () => {
   const dispatch = useDispatch();
   const searchState = useSelector((state: any) => state.search);
-  const [jamsData, setJamsData] = useState([]);
-  const numColumns = 3;
+  const [activeTab, setActiveTab] = useState<any>(null);
+  const [jamsData, setJamsData] = useState<any>([]);
+  const [searchData, setSearchData] = useState<any>(null);
+
+  const toggleTab = (row: any) => {
+    //dispatch(setSearchFilter(row.item.id))
+    setActiveTab(row.item.id);
+  };
 
   const renderTab = (row: any) => (
-    <TouchableOpacity onPress={() => dispatch(setSearchFilter(row.item.id))}>
+    <TouchableOpacity onPress={() => toggleTab(row)}>
       <View style={styles.tabItem}>
         <TextView
           style={
@@ -45,8 +51,7 @@ const SearchView = () => {
     });
   }
 
-
-  console.log("search");
+  console.log(activeTab);
 
   return (
     <BoxView
@@ -64,41 +69,9 @@ const SearchView = () => {
         renderItem={(row: any) => renderTab(row)}
       />
 
-      {/* Results */}
+      {/* Tabs content */}
       <SearchJamsList idArray={[20, 46, 39, 49, 18, 33, 50]} />
 
-      <ListView
-        data={jamsData}
-        numColumns={numColumns}
-        contentContainerStyle={{ gap: Layout.space.base }}
-        columnWrapperStyle={{ gap: Layout.space.base }}
-        scrollEnabled={false}
-        renderItem={(row: any) => console.log(row)}
-      />
-
-      {/*
-      <ListView
-        data={data} 
-        numColumns={numColumns}
-        contentContainerStyle={{gap: Layout.space.base}}
-        columnWrapperStyle={{gap: Layout.space.base}}
-        scrollEnabled={false}
-        renderItem={(row: any) => (
-            <TouchableOpacity>
-              <View style={styles.item}>
-                <ImageView 
-                  uri={MediaManager.getImageUrl(row.item?.medias?.[0]?.url)} 
-                  width={96.7}
-                  height={96.7}
-                  resizeMode="cover"
-                  style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
-                />
-              </View>
-            </TouchableOpacity>
-          )
-        }
-      />
-      */}
     </BoxView>
   );
 };
