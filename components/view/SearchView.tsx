@@ -58,7 +58,7 @@ const SearchView = () => {
       scroll={true}
       style={Layout.screenContent}
     >
-      {/* Tabs headers */}
+      {/* Search filters */}
       <ListView
         data={StaticData.searchTabs}
         horizontal={true}
@@ -66,7 +66,7 @@ const SearchView = () => {
         renderItem={(row: any) => renderTab(row)}
       />
 
-      {/* Tabs contents */}
+      {/* Search jams */}
       {['all', 'jams'].includes(activeTab) && 
         <SearchJamsList idArray={searchData?.jams?.map((o: any) => o?.id)} />
       }
