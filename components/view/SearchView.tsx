@@ -13,51 +13,13 @@ import ListView from "./ListView";
 import DataManager from "@/manager/DataManager";
 import SpinnerView from './SpinnerView';
 import MediaManager from '@/manager/MediaManager';
-
-const tabs = [
-  {
-    id: 'all',
-    label: i18n.t('All'),
-    numColumns: 2,
-  },
-  {
-    id: 'calls',
-    label: i18n.t('Calls'),
-    numColumns: 2,
-  },
-  {
-    id: 'jammers',
-    label: i18n.t('Jammers'),
-    numColumns: 1,
-  },
-  {
-    id: 'jams',
-    label: i18n.t('Jams'),
-    numColumns: 2,
-  },
-  {
-    id: 'projects',
-    label: i18n.t('Projects'),
-    numColumns: 2,
-  },
-  {
-    id: 'events',
-    label: i18n.t('Events'),
-    numColumns: 2,
-  },
-  {
-    id: 'venues',
-    label: i18n.t('Venues'),
-    numColumns: 2,
-  },
-];
-
-const numColumns = 3;
+import StaticData from '@/constants/StaticData';
 
 const SearchView = () => {
   const dispatch = useDispatch();
   const searchState = useSelector((state: any) => state.search);
   const [data, setData] = useState([]);
+  const numColumns = 3;
 
   const renderTab = (row: any) => (
     <TouchableOpacity onPress={() => dispatch(setSearchFilter(row.item.id))}>
@@ -72,6 +34,8 @@ const SearchView = () => {
   useEffect(() => {
     (async () => {
       const listData: any = await DataManager.get(searchState.filter);
+
+      console.log(listData);
 
       if (listData) {
         setTimeout(() => {
@@ -93,13 +57,14 @@ const SearchView = () => {
     >
       {/* Tabs */}
       <ListView
-        data={tabs}
+        data={StaticData.searchTabs}
         horizontal={true}
         contentContainerStyle={styles.tabContainer}
         renderItem={(row: any) => renderTab(row)}
       />
 
       {/* Results */}
+      {/*
       <ListView
         data={data} 
         numColumns={numColumns}
@@ -121,7 +86,9 @@ const SearchView = () => {
           )
         }
       />
+      */}
     </BoxView>
+    
   );
 };
 
