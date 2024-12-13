@@ -40,14 +40,12 @@ const toggleItemsForm = () => {
     if (index === -1) selectedJamsList.push(row.item.id);
     else delete selectedJamsList[index];
 
-    selectedJamsList = selectedJamsList.filter((n) => n);
-
+    selectedJamsList = selectedJamsList.filter((n: any) => n);
     setSelectedJams(selectedJamsList);
-
     dispatch(setProjectData<any>({ 
       key: 'jams_ids', 
       value: selectedJamsList, 
-      profile_id: profileId 
+      profile_id: profileId,
     }));
   };
 
