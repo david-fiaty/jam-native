@@ -21,7 +21,6 @@ const SearchView = () => {
   const dispatch = useDispatch();
   const searchState = useSelector((state: any) => state.search);
   const [activeTab, setActiveTab] = useState<any>(null);
-  const [jamsData, setJamsData] = useState<any>([]);
   const [searchData, setSearchData] = useState<any>(null);
 
   const toggleTab = (row: any) => {
@@ -47,7 +46,7 @@ const SearchView = () => {
     );
   };
 
-  if (!jamsData?.length) {
+  if (!searchData?.jams?.length) {
     EntityManager.listJams().then((data: any) => {
       updateSearchData('jams', data);
     });
