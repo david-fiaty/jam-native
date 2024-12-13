@@ -31,21 +31,9 @@ const SearchView = () => {
     </TouchableOpacity>
   );
 
-  useEffect(() => {
-    (async () => {
-      const listData: any = await DataManager.get(searchState.filter);
-
-      console.log(listData);
-
-      if (listData) {
-        setTimeout(() => {
-          setData(listData);
-        }, Layout.animation.duration);
-      }
-    })();
-  });
-
   if (!data) return <SpinnerView />
+
+  console.log('search');
 
   return (
     <BoxView
