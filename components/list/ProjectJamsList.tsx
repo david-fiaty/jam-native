@@ -56,8 +56,8 @@ const ProjectJamsList = ({
   };
 
   const deleteItem = (row: any) => {
-    let projectJamsList: any = projectData?.jams_ids || [];
-    let index: number = findItemIndex(row);
+    let projectJamsList: any = [...projectData?.jams_ids || []];
+    let index: number = projectJamsList?.jams_ids?.findIndex((id: any) => id == row.item.id);
     
     if (index !== -1) delete projectJamsList[index];
 
