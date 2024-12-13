@@ -15,6 +15,7 @@ import SpinnerView from "./SpinnerView";
 import MediaManager from "@/manager/MediaManager";
 import StaticData from "@/constants/StaticData";
 import EntityManager from "@/manager/EntityManager";
+import SearchJamsList from "../list/SearchJamsList";
 
 const SearchView = () => {
   const dispatch = useDispatch();
@@ -64,6 +65,8 @@ const SearchView = () => {
       />
 
       {/* Results */}
+      <SearchJamsList idArray={[20, 46, 39, 49, 18, 33, 50]} />
+
       <ListView
         data={jamsData}
         numColumns={numColumns}
