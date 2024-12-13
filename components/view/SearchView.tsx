@@ -20,7 +20,7 @@ import SearchJamsList from "../list/SearchJamsList";
 const SearchView = () => {
   const dispatch = useDispatch();
   const searchState = useSelector((state: any) => state.search);
-  const [activeTab, setActiveTab] = useState<any>(null);
+  const [activeTab, setActiveTab] = useState<any>('all');
   const [searchData, setSearchData] = useState<any>({});
 
   const toggleTab = (row: any) => {
@@ -82,15 +82,6 @@ const styles = {
     padding: Layout.space.base,
     borderBottomWidth: 1,
     borderBottomColor: Colors.primary,
-  },
-  item: {
-    flexDirection: "column",
-    gap: Layout.space.small,
-  },
-  image: {
-    borderRadius: Layout.space.base,
-    //width: 96.7,
-    //height: 96.7,
   },
 };
 
