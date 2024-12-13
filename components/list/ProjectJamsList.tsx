@@ -62,6 +62,7 @@ const ProjectJamsList = ({
     if (index !== -1) delete projectJamsList[index];
     projectJamsList = projectJamsList.filter((n: any) => n);
 
+    // Todo - Fix delete
     dispatch(setProjectData<any>({ 
       key: 'jams_ids', 
       value: projectJamsList, 
