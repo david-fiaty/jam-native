@@ -64,7 +64,6 @@ https://docs.google.com/spreadsheets/d/1sodzaVigD26XOopcXfLRykl51wPM5pKecS0i1QED
 # New release:
   - Amelioration selection Jams dans add project form 
 
-
 # Questions
   - What are the notification types a user can get
 
