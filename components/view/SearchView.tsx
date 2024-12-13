@@ -46,16 +46,9 @@ const SearchView = () => {
     );
   };
 
-  if (!Object.keys(searchData)?.length) {
-    EntityManager.listJams().then((data: any) => {
-      //console.log(data)
-      updateSearchData('jams', data);
-    });
+  if (!Object.keys(searchData?.jams || [])?.length) {
+    EntityManager.listJams().then((data: any) => updateSearchData('jams', data));
   }
-
-  console.log(activeTab);
-  console.log(searchData);
-  console.log('----');
 
   return (
     <BoxView
