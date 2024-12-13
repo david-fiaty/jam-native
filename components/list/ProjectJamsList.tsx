@@ -60,6 +60,7 @@ const ProjectJamsList = ({
     let index: number = projectJamsList?.findIndex((id: any) => id == row?.item?.id);
     
     if (index !== -1) delete projectJamsList[index];
+    projectJamsList = projectJamsList.filter((n: any) => n);
 
     dispatch(setProjectData<any>({ 
       key: 'jams_ids', 
