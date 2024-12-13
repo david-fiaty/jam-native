@@ -47,7 +47,7 @@ const toggleItemsForm = () => {
     dispatch(setProjectData<any>({ 
       key: 'jams_ids', 
       value: selectedJamsList, 
-      profile_id: profileId 
+      profile_id: profileId,
     }));
   };
 
