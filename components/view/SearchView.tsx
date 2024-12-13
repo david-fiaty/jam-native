@@ -35,7 +35,7 @@ const SearchView = () => {
   };
 
   const renderTab = (row: any) => {
-    const tabStyle: any = row.item.id == activeTab ? { fontWeight: "bold" } : {};
+    const tabStyle: any = row.item.id == activeTab ? styles.activeTab : {};
 
     return (
       <TouchableOpacity onPress={() => toggleTab(row)}>
@@ -48,7 +48,7 @@ const SearchView = () => {
 
   if (!Object.keys(searchData?.jams || [])?.length) {
     EntityManager.listJams().then((data: any) => {
-      updateSearchData('jams', data);
+      updateSearchData('jam', data);
       //updateSearchData('calls', data.filter((o: any) => o?.type == 'calls'));
     });
   }
@@ -70,7 +70,7 @@ const SearchView = () => {
       />
 
       {/* Search jams */}
-      {['all', 'jams'].includes(activeTab) && 
+      {['all', 'jam'].includes(activeTab) && 
         <SearchJamsList idArray={searchData?.jams?.map((o: any) => o?.id)} />
       }
 
@@ -90,6 +90,9 @@ const styles = {
     padding: Layout.space.base,
     borderBottomWidth: 1,
     borderBottomColor: Colors.primary,
+  },
+  activeTab: { 
+    fontWeight: "bold",
   },
 };
 
