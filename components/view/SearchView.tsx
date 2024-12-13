@@ -29,6 +29,12 @@ const SearchView = () => {
     setActiveTab(row.item.id);
   };
 
+  const updateSearchData = (key: string, data: any) => {
+    let searchDataArray: any = [...searchData];
+    searchDataArray[key] = data;
+    setSearchData(searchDataArray);
+  };
+
   const renderTab = (row: any) => {
     const tabStyle: any = row.item.id == activeTab ? { fontWeight: "bold" } : {};
 
@@ -43,13 +49,12 @@ const SearchView = () => {
 
   if (!jamsData?.length) {
     EntityManager.listJams().then((data: any) => {
-      setJamsData(data);
-
-      console.log(jamsData?.length);
+      updateSearchData('jams', data);
     });
   }
 
   console.log(activeTab);
+  console.log(searchData);
 
   return (
     <BoxView
