@@ -11,6 +11,43 @@ const StaticData = {
       value: 'en',
     },
   ],
+  searchTabs: [
+    {
+      id: 'all',
+      label: i18n.t('All'),
+      numColumns: 2,
+    },
+    {
+      id: 'calls',
+      label: i18n.t('Calls'),
+      numColumns: 2,
+    },
+    {
+      id: 'jammers',
+      label: i18n.t('Jammers'),
+      numColumns: 1,
+    },
+    {
+      id: 'jams',
+      label: i18n.t('Jams'),
+      numColumns: 2,
+    },
+    {
+      id: 'projects',
+      label: i18n.t('Projects'),
+      numColumns: 2,
+    },
+    {
+      id: 'events',
+      label: i18n.t('Events'),
+      numColumns: 2,
+    },
+    {
+      id: 'venues',
+      label: i18n.t('Venues'),
+      numColumns: 2,
+    },
+  ],
   profileTypes: [
     {
       id: null,
