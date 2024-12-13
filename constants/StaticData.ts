@@ -18,32 +18,32 @@ const StaticData = {
       numColumns: 2,
     },
     {
-      id: 'calls',
+      id: 'call',
       label: i18n.t('Calls'),
       numColumns: 2,
     },
     {
-      id: 'jammers',
+      id: 'jammer',
       label: i18n.t('Jammers'),
       numColumns: 1,
     },
     {
-      id: 'jams',
+      id: 'jam',
       label: i18n.t('Jams'),
       numColumns: 2,
     },
     {
-      id: 'projects',
+      id: 'project',
       label: i18n.t('Projects'),
       numColumns: 2,
     },
     {
-      id: 'events',
+      id: 'event',
       label: i18n.t('Events'),
       numColumns: 2,
     },
     {
-      id: 'venues',
+      id: 'venue',
       label: i18n.t('Venues'),
       numColumns: 2,
     },
