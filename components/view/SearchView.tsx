@@ -20,7 +20,7 @@ import SearchJamsList from "../list/SearchJamsList";
 const SearchView = () => {
   const dispatch = useDispatch();
   const searchState = useSelector((state: any) => state.search);
-  const [activeTab, setActiveTab] = useState<any>(null);
+  const [activeTab, setActiveTab] = useState<any>('all');
   const [searchData, setSearchData] = useState<any>({});
 
   const toggleTab = (row: any) => {
@@ -35,7 +35,7 @@ const SearchView = () => {
   };
 
   const renderTab = (row: any) => {
-    const tabStyle: any = row.item.id == activeTab ? { fontWeight: "bold" } : {};
+    const tabStyle: any = row.item.id == activeTab ? styles.activeTab : {};
 
     return (
       <TouchableOpacity onPress={() => toggleTab(row)}>
@@ -46,8 +46,11 @@ const SearchView = () => {
     );
   };
 
-  if (!Object.keys(searchData?.jams || [])?.length) {
-    EntityManager.listJams().then((data: any) => updateSearchData('jams', data));
+  if (!Object.keys(searchData?.jam || [])?.length) {
+    EntityManager.listJams().then((data: any) => {
+      updateSearchData('jam', data);
+      //updateSearchData('calls', data.filter((o: any) => o?.type == 'calls'));
+    });
   }
 
   return (
@@ -67,8 +70,13 @@ const SearchView = () => {
       />
 
       {/* Search jams */}
-      {['all', 'jams'].includes(activeTab) && 
-        <SearchJamsList idArray={searchData?.jams?.map((o: any) => o?.id)} />
+      {['all', 'jam'].includes(activeTab) && 
+        <SearchJamsList idArray={searchData?.jam?.map((o: any) => o?.id)} />
+      }
+
+      {/* Search calls */}
+      {['all', 'call'].includes(activeTab) && 
+        <SearchJamsList idArray={searchData?.jam?.map((o: any) => o?.id)} />
       }
     </BoxView>
   );
@@ -83,14 +91,8 @@ const styles = {
     borderBottomWidth: 1,
     borderBottomColor: Colors.primary,
   },
-  item: {
-    flexDirection: "column",
-    gap: Layout.space.small,
-  },
-  image: {
-    borderRadius: Layout.space.base,
-    //width: 96.7,
-    //height: 96.7,
+  activeTab: { 
+    fontWeight: "bold",
   },
 };
 
