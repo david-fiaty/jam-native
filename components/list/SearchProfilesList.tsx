@@ -52,16 +52,12 @@ const SearchProfilesList = ({
 
   if (!profilesData?.length) {
     EntityManager.listProfiles().then((data: any) => {
-      console.log(data?.length);
-
       setProfilesData(data);
       setIsLoaded(true);
     });
   }
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log("profiles");
 
   return (
     <View style={styles.container}>
