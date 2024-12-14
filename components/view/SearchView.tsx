@@ -16,6 +16,7 @@ import MediaManager from "@/manager/MediaManager";
 import StaticData from "@/constants/StaticData";
 import EntityManager from "@/manager/EntityManager";
 import SearchJamsList from "../list/SearchJamsList";
+import SearchProfilesList from "../list/SearchProfilesList";
 
 const SearchView = () => {
   const dispatch = useDispatch();
@@ -79,6 +80,11 @@ const SearchView = () => {
       {/* Search calls */}
       {['all', 'call'].includes(activeTab) && 
         <SearchJamsList idArray={searchData?.call?.map((o: any) => o?.id)} />
+      }
+
+      {/* Search profiles */}
+      {['all', 'jammer'].includes(activeTab) && 
+        <SearchProfilesList idArray={searchData?.jam?.map((o: any) => o?.id)} />
       }
 
       {/* Search events */}
