@@ -14,84 +14,62 @@ import AddItemButton from "../button/AddItemButton";
 import NoImageView from "../view/NoImageView";
 import BoxView from "../view/BoxView";
 import MediaManager from "@/manager/MediaManager";
+import IconView from "../view/IconView";
 
 type Props = {
-  title?: any,
-  idArray?: any,
-  addButton?: boolean,
-  allButton?: boolean,
-  onAddButtonPress?: () => void,
+  title?: any;
+  idArray?: any;
+  addButton?: boolean;
+  allButton?: boolean;
+  onAddButtonPress?: () => void;
 };
 
-const SearchProfilesList = ({ title, idArray, addButton, allButton, onAddButtonPress }: Props) => {
+const SearchProfilesList = ({
+  title,
+  idArray,
+  addButton,
+  allButton,
+  onAddButtonPress,
+}: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const [profilesData, setProfilesData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const renderItem = (row: any) => {
-    let imageSize = MediaManager.getThumbnailSize();
-    let output = null;
-
-    if (!row?.item?.medias?.[0]?.url) {
-      output = <NoImageView 
-        width={imageSize.width} 
-        height={imageSize.height} 
-        rounded={true}
-      />;
-    }
-    else {
-      output = <View style={styles.item}>
-        <ImageView
-          uri={MediaManager.getImageUrl(row.item.medias[0].url)}
-          width={imageSize.width}
-          height={imageSize.height}
-          resizeMode="cover"
-          style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
-        />
-      </View>
-    }
-
-    if (parseInt(row?.item?.id) > 0) {
-      output = <TouchableOpacity
-        key={row.item.id}
-        onPress={() =>
-          router.push({
-            pathname: "/jam",
-            params: { idArray: [row.item.id], title: title },
-          })
-        }
+  const renderItem = (row: any) => (
+    <TouchableOpacity onPress={() => console.log("clicked")}>
+      <BoxView
+        direction="row"
+        align="center"
+        justify="flex-start"
+        style={Layout.listItem}
       >
-        {output}
-      </TouchableOpacity>
-    }
-
-    return output;
-  }
+        <IconView name="user" theme="tertiary" />
+        <TextView>{row.item.profile_name}</TextView>
+      </BoxView>
+    </TouchableOpacity>
+  );
 
   if (!profilesData?.length) {
     EntityManager.listProfiles().then((data: any) => {
-
       console.log(data?.length);
 
       setProfilesData(data);
-      //setIsLoaded(true);
+      setIsLoaded(true);
     });
   }
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log('profiles');
+  console.log("profiles");
+
   return (
     <View style={styles.container}>
       {profilesData?.length > 0 && (
         <ListView
           data={profilesData}
-          numColumns={numColumns}
-          contentContainerStyle={{ gap: Layout.space.base }}
-          columnWrapperStyle={{ gap: Layout.space.base }}
-          scrollEnabled={false}
           renderItem={(row: any) => renderItem(row)}
+          scrollEnabled={false}
         />
       )}
     </View>
