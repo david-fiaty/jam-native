@@ -1,21 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { View, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearchFilter } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
-import ImageView from "./ImageView";
 import BoxView from "./BoxView";
 import TextView from "./TextView";
-import ScreenManager from "@/manager/ScreenManager";
-import i18n from "@/translation/i18n";
 import ListView from "./ListView";
-import DataManager from "@/manager/DataManager";
-import SpinnerView from "./SpinnerView";
-import MediaManager from "@/manager/MediaManager";
 import StaticData from "@/constants/StaticData";
 import EntityManager from "@/manager/EntityManager";
 import SearchJamsList from "../list/SearchJamsList";
+import SearchProfilesList from "../list/SearchProfilesList";
 
 const SearchView = () => {
   const dispatch = useDispatch();
@@ -79,6 +73,11 @@ const SearchView = () => {
       {/* Search calls */}
       {['all', 'call'].includes(activeTab) && 
         <SearchJamsList idArray={searchData?.call?.map((o: any) => o?.id)} />
+      }
+
+      {/* Search profiles */}
+      {['all', 'jammer'].includes(activeTab) && 
+        <SearchProfilesList idArray={searchData?.jam?.map((o: any) => o?.id)} />
       }
 
       {/* Search events */}
