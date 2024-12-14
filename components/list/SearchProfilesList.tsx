@@ -26,7 +26,7 @@ type Props = {
 const SearchProfilesList = ({ title, idArray, addButton, allButton, onAddButtonPress }: Props) => {
   const numColumns = 3;
   const router = useRouter();
-  const [profileJams, setProfileJams] = useState<any>([]);
+  const [profilesData, setProfilesData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const renderItem = (row: any) => {
@@ -69,21 +69,24 @@ const SearchProfilesList = ({ title, idArray, addButton, allButton, onAddButtonP
     return output;
   }
 
-  if (!profileJams?.length && idArray?.length) {
-    EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
-      if (addButton === true) data.push({ id: "addItem" });
-      setProfileJams(data);
-      setIsLoaded(true);
+  if (!profilesData?.length) {
+    EntityManager.listProfiles().then((data: any) => {
+
+      console.log(data?.length);
+
+      setProfilesData(data);
+      //setIsLoaded(true);
     });
   }
 
   if (!isLoaded) return <SpinnerView />;
 
+  console.log('profiles');
   return (
     <View style={styles.container}>
-      {profileJams?.length > 0 && (
+      {profilesData?.length > 0 && (
         <ListView
-          data={profileJams}
+          data={profilesData}
           numColumns={numColumns}
           contentContainerStyle={{ gap: Layout.space.base }}
           columnWrapperStyle={{ gap: Layout.space.base }}
