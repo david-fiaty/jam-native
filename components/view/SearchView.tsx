@@ -59,7 +59,6 @@ const SearchView = () => {
   if (!Object.keys(searchData?.jammer || [])?.length || searchState.value.length) {
     console.log(buildSearchQuery())
     EntityManager.listProfiles(buildSearchQuery()).then((data: any) => {
-      console.log(data);
       updateSearchData({
         jammer: data,
         venue: data,
