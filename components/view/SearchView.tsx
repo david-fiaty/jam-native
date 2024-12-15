@@ -23,6 +23,7 @@ const SearchView = () => {
 
   const canSearch = () => {
     if (searchState.value.length) {
+      console.log(searchState.run);
       return true;
     }
 
