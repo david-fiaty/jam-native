@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { View, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -16,7 +16,6 @@ const SearchView = () => {
   const searchState = useSelector((state: any) => state.search);
   const [activeTab, setActiveTab] = useState<any>('all');
   const [searchData, setSearchData] = useState<any>({});
-  const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
 
   const toggleTab = (row: any) => {
     setActiveTab(row.item.id);
@@ -80,12 +79,6 @@ const SearchView = () => {
       });
     });
   }
-
-  useEffect(() => {
-    setCurrentSearchValue(searchState.value);
-  }, []);
-
-  console.log(currentSearchValue);
 
   return (
     <BoxView
