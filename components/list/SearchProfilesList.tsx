@@ -4,21 +4,15 @@ import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
 import ListView from "../view/ListView";
-import EntityManager from "@/manager/EntityManager";
-import SpinnerView from "../view/SpinnerView";
 import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
 
 type Props = {
-  title?: any,
-  idArray?: any,
+  data?: any,
 };
 
-const SearchProfilesList = ({ title, idArray }: Props) => {
-  const numColumns = 3;
+const SearchProfilesList = ({ data }: Props) => {
   const router = useRouter();
-  const [profilesData, setProfilesData] = useState<any>([]);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const renderItem = (row: any) => (
     <TouchableOpacity onPress={() => console.log("clicked")}>
@@ -34,20 +28,11 @@ const SearchProfilesList = ({ title, idArray }: Props) => {
     </TouchableOpacity>
   );
 
-  if (!profilesData?.length) {
-    EntityManager.getProfiles({ items_ids: idArray }).then((data: any) => {
-      setProfilesData(data);
-      setIsLoaded(true);
-    });
-  }
-
-  if (!isLoaded) return <SpinnerView />;
-
   return (
     <View style={styles.container}>
-      {profilesData?.length > 0 && (
+      {data?.length > 0 && (
         <ListView
-          data={profilesData}
+          data={data}
           renderItem={(row: any) => renderItem(row)}
           scrollEnabled={false}
         />
