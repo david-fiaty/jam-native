@@ -11,6 +11,7 @@ import EntityManager from "@/manager/EntityManager";
 import SearchJamsList from "../list/SearchJamsList";
 import SearchProfilesList from "../list/SearchProfilesList";
 import SearchProjectsList from "../list/SearchProjectsList";
+import SpinnerView from "./SpinnerView";
 
 const SearchView = () => {
   const searchState = useSelector((state: any) => state.search);
@@ -21,13 +22,20 @@ const SearchView = () => {
     setActiveTab(row.item.id);
   };
 
+  const canSearch = () => {
+    if (searchState.value.length) {
+      return true;
+    }
+
+    return false;
+  };
+
   const updateSearchData = (data: any) => {
-    let searchDataArray: any = {...searchData, ...data};
-    setSearchData(searchDataArray);
+    setSearchData({...searchData, ...data});
   };
 
   const buildSearchQuery = () => {
-    if (searchState.value.length) {
+    if (searchState.value?.length) {
       return { query_text: searchState.value };
     }
     
@@ -46,7 +54,7 @@ const SearchView = () => {
     );
   };
 
-  if (!Object.keys(searchData?.jam || [])?.length || searchState.value.length) {
+  if (!Object.keys(searchData?.jam || [])?.length || canSearch()) {
     EntityManager.listJams(buildSearchQuery()).then((data: any) => {
       updateSearchData({
         jam: data,
@@ -56,8 +64,7 @@ const SearchView = () => {
     });
   }
 
-  if (!Object.keys(searchData?.jammer || [])?.length || searchState.value.length) {
-    console.log(buildSearchQuery())
+  if (!Object.keys(searchData?.jammer || [])?.length || canSearch()) {
     EntityManager.listProfiles(buildSearchQuery()).then((data: any) => {
       updateSearchData({
         jammer: data,
@@ -66,7 +73,7 @@ const SearchView = () => {
     });
   }
 
-  if (!Object.keys(searchData?.project || [])?.length || searchState.value.length) {
+  if (!Object.keys(searchData?.project || [])?.length || canSearch()) {
     EntityManager.listProjects(buildSearchQuery()).then((data: any) => {
       updateSearchData({
         project: data,
@@ -74,10 +81,7 @@ const SearchView = () => {
     });
   }
 
-  if (searchState.value.length) {
-    // Todo - Implement search data filtering or api filtering
-    //console.log('----', searchState.value);
-  }
+  if (!searchData?.jam?.length || !searchData?.jammer?.length || !searchData?.project?.length) return <SpinnerView />;
 
   return (
     <BoxView
