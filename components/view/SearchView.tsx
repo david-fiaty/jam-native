@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { View, TouchableOpacity } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
+import { setRunSearch } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import BoxView from "./BoxView";
@@ -13,6 +14,7 @@ import SearchProfilesList from "../list/SearchProfilesList";
 import SearchProjectsList from "../list/SearchProjectsList";
 
 const SearchView = () => {
+  const dispatch = useDispatch();
   const searchState = useSelector((state: any) => state.search);
   const [activeTab, setActiveTab] = useState<any>('all');
   const [searchData, setSearchData] = useState<any>({});
@@ -22,8 +24,8 @@ const SearchView = () => {
   };
 
   const canSearch = () => {
-    if (searchState.value.length) {
-      console.log(searchState.run);
+    if (searchState.value.length && searchState.run === true) {
+      dispatch(setRunSearch(false));
       return true;
     }
 
