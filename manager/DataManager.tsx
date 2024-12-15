@@ -3,10 +3,8 @@ import ApiManager from './ApiManager';
 
 class DataManager {
   async get(key: keyof typeof Endpoints, options?: any, variables?: any) {
-    // Variables
     let data: any = await ApiManager.get(key, options, variables);
 
-    // Extract data with key
     if (Endpoints[key].dataKey !== null) {
       return data[Endpoints[key].dataKey];
     }
