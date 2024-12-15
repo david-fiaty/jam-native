@@ -1,5 +1,4 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { useState } from "react";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
