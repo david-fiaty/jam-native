@@ -23,8 +23,7 @@ const SearchView = () => {
   };
 
   const canSearch = () => {
-    if (searchState.value.length && searchState.value != currentSearchValue) {
-      setCurrentSearchValue(searchState.value);
+    if (searchState.value.length) {
       return true;
     }
 
