@@ -30,8 +30,7 @@ const SearchView = () => {
   };
 
   const updateSearchData = (data: any) => {
-    let searchDataArray: any = {...searchData, ...data};
-    setSearchData(searchDataArray);
+    setSearchData({...searchData, ...data});
   };
 
   const buildSearchQuery = () => {
