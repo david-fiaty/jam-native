@@ -13,15 +13,12 @@ import MediaManager from "@/manager/MediaManager";
 type Props = {
   title?: any,
   idArray?: any,
-  addButton?: boolean,
-  allButton?: boolean,
-  onAddButtonPress?: () => void,
 };
 
-const SearchProjectsList = ({ title, idArray, addButton, allButton, onAddButtonPress }: Props) => {
+const SearchProjectsList = ({ title, idArray }: Props) => {
   const numColumns = 3;
   const router = useRouter();
-  const [profilesData, setProfilesData] = useState<any>([]);
+  const [projectsData, setProjectsData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const renderItem = (row: any) => {
@@ -64,10 +61,9 @@ const SearchProjectsList = ({ title, idArray, addButton, allButton, onAddButtonP
     return output;
   }
 
-  if (!profilesData?.length && idArray?.length) {
-    EntityManager.listProjects({ items_ids: idArray }).then((data: any) => {
-      if (addButton === true) data.push({ id: "addItem" });
-      setProfilesData(data);
+  if (!projectsData?.length && idArray?.length) {
+    EntityManager.listProjects().then((data: any) => {
+      setProjectsData(data);
       setIsLoaded(true);
     });
   }
@@ -76,9 +72,9 @@ const SearchProjectsList = ({ title, idArray, addButton, allButton, onAddButtonP
 
   return (
     <View style={styles.container}>
-      {profilesData?.length > 0 && (
+      {projectsData?.length > 0 && (
         <ListView
-          data={profilesData}
+          data={projectsData}
           numColumns={numColumns}
           contentContainerStyle={{ gap: Layout.space.base }}
           columnWrapperStyle={{ gap: Layout.space.base }}
