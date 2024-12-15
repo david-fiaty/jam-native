@@ -13,15 +13,13 @@ import MediaManager from "@/manager/MediaManager";
 type Props = {
   title?: any,
   idArray?: any,
-  addButton?: boolean,
-  allButton?: boolean,
   onAddButtonPress?: () => void,
 };
 
-const SearchJamsList = ({ title, idArray, addButton, allButton, onAddButtonPress }: Props) => {
+const SearchJamsList = ({ title, idArray }: Props) => {
   const numColumns = 3;
   const router = useRouter();
-  const [profileJams, setProfileJams] = useState<any>([]);
+  const [jamsData, setJamsData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const renderItem = (row: any) => {
@@ -64,10 +62,9 @@ const SearchJamsList = ({ title, idArray, addButton, allButton, onAddButtonPress
     return output;
   }
 
-  if (!profileJams?.length && idArray?.length) {
+  if (!jamsData?.length && idArray?.length) {
     EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
-      if (addButton === true) data.push({ id: "addItem" });
-      setProfileJams(data);
+      setJamsData(data);
       setIsLoaded(true);
     });
   }
@@ -76,9 +73,9 @@ const SearchJamsList = ({ title, idArray, addButton, allButton, onAddButtonPress
 
   return (
     <View style={styles.container}>
-      {profileJams?.length > 0 && (
+      {jamsData?.length > 0 && (
         <ListView
-          data={profileJams}
+          data={jamsData}
           numColumns={numColumns}
           contentContainerStyle={{ gap: Layout.space.base }}
           columnWrapperStyle={{ gap: Layout.space.base }}
