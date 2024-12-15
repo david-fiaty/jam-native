@@ -2,17 +2,12 @@ import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useState } from "react";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
-import { Colors } from "@/constants/Colors";
-import TextView from "../view/TextView";
-import i18n from "@/translation/i18n";
 import ImageView from "../view/ImageView";
 import ScreenManager from "@/manager/ScreenManager";
 import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
-import AddItemButton from "../button/AddItemButton";
 import NoImageView from "../view/NoImageView";
-import BoxView from "../view/BoxView";
 import MediaManager from "@/manager/MediaManager";
 
 type Props = {
