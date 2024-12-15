@@ -83,13 +83,19 @@ const SearchView = () => {
 
       {/* Search projects */}
       {['all', 'project'].includes(activeTab) && 
-        <SearchProjectsList idArray={searchData?.jam?.map((o: any) => o?.id)} />
+        <SearchProjectsList idArray={searchData?.project?.map((o: any) => o?.id)} />
       }
 
       {/* Search events */}
       {['all', 'event'].includes(activeTab) && 
         <SearchJamsList idArray={searchData?.event?.map((o: any) => o?.id)} />
       }
+
+      {/* Search venues */}
+      {['all', 'venue'].includes(activeTab) && 
+        <SearchProfilesList idArray={searchData?.venue?.map((o: any) => o?.id)} />
+      }
+
     </BoxView>
   );
 };
