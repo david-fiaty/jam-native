@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchValue, toggleSearchField } from "@/redux/slices/SearchSlice";
@@ -10,6 +11,7 @@ import BoxView from '../view/BoxView';
 const SearchField = () => {
   const dispatch = useDispatch();
   const searchState = useSelector((state: any) => state.search);
+  const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
   const activeScreen = ScreenManager.getActiveScreen();
   const isExpanded = searchState.expanded === true;
 
@@ -28,10 +30,11 @@ const SearchField = () => {
 
   const inputField = (
     <InputTextField 
-      value={searchState.value}
+      value={currentSearchValue}
       placeholder={i18n.t('Search...')}
       containerStyle={styles.inputContainer} 
-      onChangeText={(text: string) => dispatch(setSearchValue(text))}
+      onChangeText={(text: string) => setCurrentSearchValue(text)}
+      onSubmitEditing={() => dispatch(setSearchValue(currentSearchValue))}
       rightIcon={  
         <IconView 
           name="delete" 
