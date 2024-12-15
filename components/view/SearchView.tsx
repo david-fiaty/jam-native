@@ -26,6 +26,14 @@ const SearchView = () => {
     setSearchData(searchDataArray);
   };
 
+  const buildSearchQuery = () => {
+    if (searchState.value.length) {
+      return { query_text: searchState.value };
+    }
+    
+    return {};
+  };
+
   const renderTab = (row: any) => {
     const tabStyle: any = row.item.id == activeTab ? styles.activeTab : {};
 
@@ -38,8 +46,8 @@ const SearchView = () => {
     );
   };
 
-  if (!Object.keys(searchData?.jam || [])?.length) {
-    EntityManager.listJams().then((data: any) => {
+  if (!Object.keys(searchData?.jam || [])?.length || searchState.value.length) {
+    EntityManager.listJams(buildSearchQuery()).then((data: any) => {
       updateSearchData({
         jam: data,
         call: data.filter((o: any) => o?.type == 'call'),
@@ -48,8 +56,9 @@ const SearchView = () => {
     });
   }
 
-  if (!Object.keys(searchData?.jammer || [])?.length) {
-    EntityManager.listProfiles().then((data: any) => {
+  if (!Object.keys(searchData?.jammer || [])?.length || searchState.value.length) {
+    console.log(buildSearchQuery())
+    EntityManager.listProfiles(buildSearchQuery()).then((data: any) => {
       updateSearchData({
         jammer: data,
         venue: data,
@@ -57,8 +66,8 @@ const SearchView = () => {
     });
   }
 
-  if (!Object.keys(searchData?.project || [])?.length) {
-    EntityManager.listProjects().then((data: any) => {
+  if (!Object.keys(searchData?.project || [])?.length || searchState.value.length) {
+    EntityManager.listProjects(buildSearchQuery()).then((data: any) => {
       updateSearchData({
         project: data,
       });
@@ -67,7 +76,7 @@ const SearchView = () => {
 
   if (searchState.value.length) {
     // Todo - Implement search data filtering or api filtering
-    console.log('----', searchState.value);
+    //console.log('----', searchState.value);
   }
 
   return (
