@@ -13,7 +13,7 @@ import SearchProfilesList from "../list/SearchProfilesList";
 import SearchProjectsList from "../list/SearchProjectsList";
 
 const SearchView = () => {
-  const searchState = useSelector((state: any) => state.search);
+  const searchValue = useSelector((state: any) => state.search.value);
   const [activeTab, setActiveTab] = useState<any>('all');
   const [searchData, setSearchData] = useState<any>({});
 
@@ -38,7 +38,7 @@ const SearchView = () => {
     );
   };
 
-  if (!Object.keys(searchData?.jam || [])?.length) {
+  if (!Object.keys(searchData?.jam || [])?.length || searchValue.length) {
     EntityManager.listJams().then((data: any) => {
       updateSearchData({
         jam: data,
@@ -48,7 +48,7 @@ const SearchView = () => {
     });
   }
 
-  if (!Object.keys(searchData?.jammer || [])?.length) {
+  if (!Object.keys(searchData?.jammer || [])?.length || searchValue.length) {
     EntityManager.listProfiles().then((data: any) => {
       updateSearchData({
         jammer: data,
@@ -57,7 +57,7 @@ const SearchView = () => {
     });
   }
 
-  if (!Object.keys(searchData?.project || [])?.length) {
+  if (!Object.keys(searchData?.project || [])?.length || searchValue) {
     EntityManager.listProjects().then((data: any) => {
       updateSearchData({
         project: data,
@@ -67,7 +67,7 @@ const SearchView = () => {
 
   if (searchState.value.length) {
     // Todo - Implement search data filtering or api filtering
-    console.log('----', searchState.value);
+    console.log('----', searchValue);
   }
 
   return (
