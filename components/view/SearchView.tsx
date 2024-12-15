@@ -50,6 +50,15 @@ const SearchView = () => {
     });
   }
 
+  if (!Object.keys(searchData?.jammer || [])?.length) {
+    EntityManager.listProfiles().then((data: any) => {
+      updateSearchData({
+        jammer: data,
+        venue: data,
+      });
+    });
+  }
+
   return (
     <BoxView
       direction="column"
@@ -76,9 +85,9 @@ const SearchView = () => {
         <SearchJamsList idArray={searchData?.call?.map((o: any) => o?.id)} />
       }
 
-      {/* Search profiles */}
+      {/* Search jammers */}
       {['all', 'jammer'].includes(activeTab) && 
-        <SearchProfilesList idArray={searchData?.jam?.map((o: any) => o?.id)} />
+        <SearchProfilesList idArray={searchData?.jammer?.map((o: any) => o?.id)} />
       }
 
       {/* Search projects */}

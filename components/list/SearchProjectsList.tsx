@@ -63,7 +63,7 @@ const SearchProjectsList = ({ title, idArray }: Props) => {
     return output;
   }
 
-  if (!projectsData?.length && idArray?.length) {
+  if (!projectsData?.length) {
     EntityManager.listProjects().then((data: any) => {
       setProjectsData(data);
       setIsLoaded(true);
