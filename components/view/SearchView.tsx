@@ -57,7 +57,6 @@ const SearchView = () => {
   }
 
   if (!Object.keys(searchData?.jammer || [])?.length || searchState.value.length) {
-    console.log(buildSearchQuery())
     EntityManager.listProfiles(buildSearchQuery()).then((data: any) => {
       updateSearchData({
         jammer: data,
@@ -72,11 +71,6 @@ const SearchView = () => {
         project: data,
       });
     });
-  }
-
-  if (searchState.value.length) {
-    // Todo - Implement search data filtering or api filtering
-    //console.log('----', searchState.value);
   }
 
   return (
