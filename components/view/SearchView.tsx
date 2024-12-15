@@ -65,7 +65,7 @@ const SearchView = () => {
     });
   }
 
-  if (searchState.value.length) {
+  if (searchValue.length) {
     // Todo - Implement search data filtering or api filtering
     console.log('----', searchValue);
   }
