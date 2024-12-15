@@ -1,4 +1,3 @@
-import Store from '@/redux/Store';
 import Endpoints from '@/constants/Endpoints';
 import ApiManager from './ApiManager';
 
