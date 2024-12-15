@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { View, TouchableOpacity } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import BoxView from "./BoxView";
@@ -13,7 +13,6 @@ import SearchProfilesList from "../list/SearchProfilesList";
 import SearchProjectsList from "../list/SearchProjectsList";
 
 const SearchView = () => {
-  const dispatch = useDispatch();
   const searchState = useSelector((state: any) => state.search);
   const [activeTab, setActiveTab] = useState<any>('all');
   const [searchData, setSearchData] = useState<any>({});
@@ -64,6 +63,10 @@ const SearchView = () => {
         project: data,
       });
     });
+  }
+
+  if (searchState.value.length) {
+    console.log(searchState.value);
   }
 
   return (
