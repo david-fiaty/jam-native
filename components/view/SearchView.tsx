@@ -16,9 +16,19 @@ const SearchView = () => {
   const searchState = useSelector((state: any) => state.search);
   const [activeTab, setActiveTab] = useState<any>('all');
   const [searchData, setSearchData] = useState<any>({});
+  const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
 
   const toggleTab = (row: any) => {
     setActiveTab(row.item.id);
+  };
+
+  const canSearch = () => {
+    if (searchState.value.length && searchState.value != currentSearchValue) {
+      setCurrentSearchValue(searchState.value);
+      return true;
+    }
+
+    return false;
   };
 
   const updateSearchData = (data: any) => {
@@ -46,7 +56,7 @@ const SearchView = () => {
     );
   };
 
-  if (!Object.keys(searchData?.jam || [])?.length || searchState.value.length) {
+  if (!Object.keys(searchData?.jam || [])?.length || canSearch()) {
     EntityManager.listJams(buildSearchQuery()).then((data: any) => {
       updateSearchData({
         jam: data,
@@ -56,7 +66,7 @@ const SearchView = () => {
     });
   }
 
-  if (!Object.keys(searchData?.jammer || [])?.length || searchState.value.length) {
+  if (!Object.keys(searchData?.jammer || [])?.length || canSearch()) {
     EntityManager.listProfiles(buildSearchQuery()).then((data: any) => {
       updateSearchData({
         jammer: data,
@@ -65,7 +75,7 @@ const SearchView = () => {
     });
   }
 
-  if (!Object.keys(searchData?.project || [])?.length || searchState.value.length) {
+  if (!Object.keys(searchData?.project || [])?.length || canSearch()) {
     EntityManager.listProjects(buildSearchQuery()).then((data: any) => {
       updateSearchData({
         project: data,
