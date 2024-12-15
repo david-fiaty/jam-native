@@ -19,13 +19,15 @@ const SearchProjectsList = ({ title, idArray }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const [projectsData, setProjectsData] = useState<any>([]);
+  const [projectImages, addProjectImage] = useState<any>({});
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const renderItem = (row: any) => {
-    let imageSize = MediaManager.getThumbnailSize();
-    let output = null;
+    let imageSize: any = MediaManager.getThumbnailSize();
+    let output: any = null;
+    let uri: string = projectImages?.[row?.item?.id];
 
-    if (!row?.item?.medias?.[0]?.url) {
+    if (!uri) {
       output = <NoImageView 
         width={imageSize.width} 
         height={imageSize.height} 
@@ -35,7 +37,7 @@ const SearchProjectsList = ({ title, idArray }: Props) => {
     else {
       output = <View style={styles.item}>
         <ImageView
-          uri={MediaManager.getImageUrl(row.item.medias[0].url)}
+          uri={uri}
           width={imageSize.width}
           height={imageSize.height}
           resizeMode="cover"
@@ -49,7 +51,7 @@ const SearchProjectsList = ({ title, idArray }: Props) => {
         key={row.item.id}
         onPress={() =>
           router.push({
-            pathname: "/jam",
+            pathname: "/project",
             params: { idArray: [row.item.id], title: title },
           })
         }
@@ -66,6 +68,14 @@ const SearchProjectsList = ({ title, idArray }: Props) => {
       setProjectsData(data);
       setIsLoaded(true);
     });
+  }
+
+  if (projectsData?.length > 0 ) {
+    projectsData.map((item: any) => {
+      EntityManager.getProjectImageUrl(item).then((value: any) => {
+        if (value && !projectImages?.[item?.id]) addProjectImage({ ...projectImages, ...{[item?.id]: value} });
+      });
+    });  
   }
 
   if (!isLoaded) return <SpinnerView />;
