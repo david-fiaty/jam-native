@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchValue, toggleSearchField } from "@/redux/slices/SearchSlice";
 import IconView from "../view/IconView";
