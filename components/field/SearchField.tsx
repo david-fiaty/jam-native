@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchValue, setRunSearch, toggleSearchField } from "@/redux/slices/SearchSlice";
+import { setSearchValue, toggleSearchField } from "@/redux/slices/SearchSlice";
 import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
 import ScreenManager from "@/manager/ScreenManager";
@@ -17,7 +17,6 @@ const SearchField = () => {
 
   const onSubmitEditing = () => {
     dispatch(setSearchValue(currentSearchValue));
-    dispatch(setRunSearch(true));
   };
 
   const toggleButton = (
