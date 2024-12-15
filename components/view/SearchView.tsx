@@ -1,21 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { View, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearchFilter } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
-import ImageView from "./ImageView";
 import BoxView from "./BoxView";
 import TextView from "./TextView";
-import ScreenManager from "@/manager/ScreenManager";
-import i18n from "@/translation/i18n";
 import ListView from "./ListView";
-import DataManager from "@/manager/DataManager";
-import SpinnerView from "./SpinnerView";
-import MediaManager from "@/manager/MediaManager";
 import StaticData from "@/constants/StaticData";
 import EntityManager from "@/manager/EntityManager";
 import SearchJamsList from "../list/SearchJamsList";
+import SearchProfilesList from "../list/SearchProfilesList";
+import SearchProjectsList from "../list/SearchProjectsList";
 
 const SearchView = () => {
   const dispatch = useDispatch();
@@ -55,6 +50,23 @@ const SearchView = () => {
     });
   }
 
+  if (!Object.keys(searchData?.jammer || [])?.length) {
+    EntityManager.listProfiles().then((data: any) => {
+      updateSearchData({
+        jammer: data,
+        venue: data,
+      });
+    });
+  }
+
+  if (!Object.keys(searchData?.project || [])?.length) {
+    EntityManager.listProjects().then((data: any) => {
+      updateSearchData({
+        project: data,
+      });
+    });
+  }
+
   return (
     <BoxView
       direction="column"
@@ -73,18 +85,34 @@ const SearchView = () => {
 
       {/* Search jams */}
       {['all', 'jam'].includes(activeTab) && 
-        <SearchJamsList idArray={searchData?.jam?.map((o: any) => o?.id)} />
+        <SearchJamsList data={searchData?.jam} />
       }
 
       {/* Search calls */}
       {['all', 'call'].includes(activeTab) && 
-        <SearchJamsList idArray={searchData?.call?.map((o: any) => o?.id)} />
+        <SearchJamsList data={searchData?.call} />
+      }
+
+      {/* Search jammers */}
+      {['all', 'jammer'].includes(activeTab) && 
+        <SearchProfilesList data={searchData?.jammer} />
+      }
+
+      {/* Search projects */}
+      {['all', 'project'].includes(activeTab) && 
+        <SearchProjectsList data={searchData?.project} />
       }
 
       {/* Search events */}
       {['all', 'event'].includes(activeTab) && 
-        <SearchJamsList idArray={searchData?.event?.map((o: any) => o?.id)} />
+        <SearchJamsList data={searchData?.event} />
       }
+
+      {/* Search venues */}
+      {['all', 'venue'].includes(activeTab) && 
+        <SearchProfilesList data={searchData?.venue} />
+      }
+
     </BoxView>
   );
 };

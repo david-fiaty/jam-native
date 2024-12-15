@@ -1,9 +1,11 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { useState } from "react";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import ImageView from "../view/ImageView";
 import ScreenManager from "@/manager/ScreenManager";
 import ListView from "../view/ListView";
+import EntityManager from "@/manager/EntityManager";
 import NoImageView from "../view/NoImageView";
 import MediaManager from "@/manager/MediaManager";
 
@@ -11,15 +13,17 @@ type Props = {
   data?: any,
 };
 
-const SearchJamsList = ({ data }: Props) => {
+const SearchProjectsList = ({ data }: Props) => {
   const numColumns = 3;
   const router = useRouter();
+  const [projectImages, addProjectImage] = useState<any>({});
 
   const renderItem = (row: any) => {
-    let imageSize = MediaManager.getThumbnailSize();
-    let output = null;
+    let imageSize: any = MediaManager.getThumbnailSize();
+    let output: any = null;
+    let uri: string = projectImages?.[row?.item?.id];
 
-    if (!row?.item?.medias?.[0]?.url) {
+    if (!uri) {
       output = <NoImageView 
         width={imageSize.width} 
         height={imageSize.height} 
@@ -29,7 +33,7 @@ const SearchJamsList = ({ data }: Props) => {
     else {
       output = <View style={styles.item}>
         <ImageView
-          uri={MediaManager.getImageUrl(row.item.medias[0].url)}
+          uri={uri}
           width={imageSize.width}
           height={imageSize.height}
           resizeMode="cover"
@@ -43,8 +47,8 @@ const SearchJamsList = ({ data }: Props) => {
         key={row.item.id}
         onPress={() =>
           router.push({
-            pathname: "/jam",
-            params: { idArray: [row.item.id], title: row.item.title },
+            pathname: "/project",
+            params: { idArray: [row.item.id], title: title },
           })
         }
       >
@@ -53,6 +57,14 @@ const SearchJamsList = ({ data }: Props) => {
     }
 
     return output;
+  }
+
+  if (data?.length > 0 ) {
+    data.map((item: any) => {
+      EntityManager.getProjectImageUrl(item).then((value: any) => {
+        if (value && !projectImages?.[item?.id]) addProjectImage({ ...projectImages, ...{[item?.id]: value} });
+      });
+    });  
   }
 
   return (
@@ -89,4 +101,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SearchJamsList;
+export default SearchProjectsList;
