@@ -10,6 +10,7 @@ import StaticData from "@/constants/StaticData";
 import EntityManager from "@/manager/EntityManager";
 import SearchJamsList from "../list/SearchJamsList";
 import SearchProfilesList from "../list/SearchProfilesList";
+import SearchProjectsList from "../list/SearchProjectsList";
 
 const SearchView = () => {
   const dispatch = useDispatch();
@@ -78,6 +79,11 @@ const SearchView = () => {
       {/* Search profiles */}
       {['all', 'jammer'].includes(activeTab) && 
         <SearchProfilesList idArray={searchData?.jam?.map((o: any) => o?.id)} />
+      }
+
+      {/* Search projects */}
+      {['all', 'project'].includes(activeTab) && 
+        <SearchProjectsList idArray={searchData?.jam?.map((o: any) => o?.id)} />
       }
 
       {/* Search events */}

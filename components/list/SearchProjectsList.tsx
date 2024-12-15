@@ -13,20 +13,21 @@ import MediaManager from "@/manager/MediaManager";
 type Props = {
   title?: any,
   idArray?: any,
-  onAddButtonPress?: () => void,
 };
 
-const SearchJamsList = ({ title, idArray }: Props) => {
+const SearchProjectsList = ({ title, idArray }: Props) => {
   const numColumns = 3;
   const router = useRouter();
-  const [jamsData, setJamsData] = useState<any>([]);
+  const [projectsData, setProjectsData] = useState<any>([]);
+  const [projectImages, addProjectImage] = useState<any>({});
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const renderItem = (row: any) => {
-    let imageSize = MediaManager.getThumbnailSize();
-    let output = null;
+    let imageSize: any = MediaManager.getThumbnailSize();
+    let output: any = null;
+    let uri: string = projectImages?.[row?.item?.id];
 
-    if (!row?.item?.medias?.[0]?.url) {
+    if (!uri) {
       output = <NoImageView 
         width={imageSize.width} 
         height={imageSize.height} 
@@ -36,7 +37,7 @@ const SearchJamsList = ({ title, idArray }: Props) => {
     else {
       output = <View style={styles.item}>
         <ImageView
-          uri={MediaManager.getImageUrl(row.item.medias[0].url)}
+          uri={uri}
           width={imageSize.width}
           height={imageSize.height}
           resizeMode="cover"
@@ -50,7 +51,7 @@ const SearchJamsList = ({ title, idArray }: Props) => {
         key={row.item.id}
         onPress={() =>
           router.push({
-            pathname: "/jam",
+            pathname: "/project",
             params: { idArray: [row.item.id], title: title },
           })
         }
@@ -62,20 +63,28 @@ const SearchJamsList = ({ title, idArray }: Props) => {
     return output;
   }
 
-  if (!jamsData?.length && idArray?.length) {
-    EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
-      setJamsData(data);
+  if (!projectsData?.length && idArray?.length) {
+    EntityManager.listProjects().then((data: any) => {
+      setProjectsData(data);
       setIsLoaded(true);
     });
+  }
+
+  if (projectsData?.length > 0 ) {
+    projectsData.map((item: any) => {
+      EntityManager.getProjectImageUrl(item).then((value: any) => {
+        if (value && !projectImages?.[item?.id]) addProjectImage({ ...projectImages, ...{[item?.id]: value} });
+      });
+    });  
   }
 
   if (!isLoaded) return <SpinnerView />;
 
   return (
     <View style={styles.container}>
-      {jamsData?.length > 0 && (
+      {projectsData?.length > 0 && (
         <ListView
-          data={jamsData}
+          data={projectsData}
           numColumns={numColumns}
           contentContainerStyle={{ gap: Layout.space.base }}
           columnWrapperStyle={{ gap: Layout.space.base }}
@@ -105,4 +114,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SearchJamsList;
+export default SearchProjectsList;
