@@ -37,8 +37,8 @@ const SearchView = () => {
   };
 
   const buildSearchQuery = () => {
-    if (searchState.value.length) {
-      return { query_text: searchState.value };
+    if (currentSearchValue?.length) {
+      return { query_text: currentSearchValue };
     }
     
     return {};
