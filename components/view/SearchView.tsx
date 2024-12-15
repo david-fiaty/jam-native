@@ -16,7 +16,6 @@ const SearchView = () => {
   const searchState = useSelector((state: any) => state.search);
   const [activeTab, setActiveTab] = useState<any>('all');
   const [searchData, setSearchData] = useState<any>({});
-  const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
 
   const toggleTab = (row: any) => {
     setActiveTab(row.item.id);
