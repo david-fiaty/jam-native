@@ -35,7 +35,7 @@ const SearchProfilesList = ({ title, idArray }: Props) => {
   );
 
   if (!profilesData?.length) {
-    EntityManager.listProfiles().then((data: any) => {
+    EntityManager.getProfiles({ items_ids: idArray }).then((data: any) => {
       setProfilesData(data);
       setIsLoaded(true);
     });

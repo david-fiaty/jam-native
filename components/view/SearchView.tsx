@@ -59,6 +59,15 @@ const SearchView = () => {
     });
   }
 
+
+  if (!Object.keys(searchData?.project || [])?.length) {
+    EntityManager.listProjects().then((data: any) => {
+      updateSearchData({
+        project: data,
+      });
+    });
+  }
+
   return (
     <BoxView
       direction="column"
