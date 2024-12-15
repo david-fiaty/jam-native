@@ -1,26 +1,19 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { useState } from "react";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import ImageView from "../view/ImageView";
 import ScreenManager from "@/manager/ScreenManager";
 import ListView from "../view/ListView";
-import EntityManager from "@/manager/EntityManager";
-import SpinnerView from "../view/SpinnerView";
 import NoImageView from "../view/NoImageView";
 import MediaManager from "@/manager/MediaManager";
 
 type Props = {
-  title?: any,
-  idArray?: any,
-  onAddButtonPress?: () => void,
+  data?: any,
 };
 
-const SearchJamsList = ({ title, idArray }: Props) => {
+const SearchJamsList = ({ data }: Props) => {
   const numColumns = 3;
   const router = useRouter();
-  const [jamsData, setJamsData] = useState<any>([]);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const renderItem = (row: any) => {
     let imageSize = MediaManager.getThumbnailSize();
@@ -51,7 +44,7 @@ const SearchJamsList = ({ title, idArray }: Props) => {
         onPress={() =>
           router.push({
             pathname: "/jam",
-            params: { idArray: [row.item.id], title: title },
+            params: { idArray: [row.item.id], title: row.item.title },
           })
         }
       >
@@ -62,20 +55,11 @@ const SearchJamsList = ({ title, idArray }: Props) => {
     return output;
   }
 
-  if (!jamsData?.length && idArray?.length) {
-    EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
-      setJamsData(data);
-      setIsLoaded(true);
-    });
-  }
-
-  if (!isLoaded) return <SpinnerView />;
-
   return (
     <View style={styles.container}>
-      {jamsData?.length > 0 && (
+      {data?.length > 0 && (
         <ListView
-          data={jamsData}
+          data={data}
           numColumns={numColumns}
           contentContainerStyle={{ gap: Layout.space.base }}
           columnWrapperStyle={{ gap: Layout.space.base }}

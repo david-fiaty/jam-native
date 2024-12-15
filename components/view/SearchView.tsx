@@ -59,6 +59,14 @@ const SearchView = () => {
     });
   }
 
+  if (!Object.keys(searchData?.project || [])?.length) {
+    EntityManager.listProjects().then((data: any) => {
+      updateSearchData({
+        project: data,
+      });
+    });
+  }
+
   return (
     <BoxView
       direction="column"
@@ -77,32 +85,32 @@ const SearchView = () => {
 
       {/* Search jams */}
       {['all', 'jam'].includes(activeTab) && 
-        <SearchJamsList idArray={searchData?.jam?.map((o: any) => o?.id)} />
+        <SearchJamsList data={searchData?.jam} />
       }
 
       {/* Search calls */}
       {['all', 'call'].includes(activeTab) && 
-        <SearchJamsList idArray={searchData?.call?.map((o: any) => o?.id)} />
+        <SearchJamsList data={searchData?.call} />
       }
 
       {/* Search jammers */}
       {['all', 'jammer'].includes(activeTab) && 
-        <SearchProfilesList idArray={searchData?.jammer?.map((o: any) => o?.id)} />
+        <SearchProfilesList data={searchData?.jammer} />
       }
 
       {/* Search projects */}
       {['all', 'project'].includes(activeTab) && 
-        <SearchProjectsList idArray={searchData?.project?.map((o: any) => o?.id)} />
+        <SearchProjectsList data={searchData?.project} />
       }
 
       {/* Search events */}
       {['all', 'event'].includes(activeTab) && 
-        <SearchJamsList idArray={searchData?.event?.map((o: any) => o?.id)} />
+        <SearchJamsList data={searchData?.event} />
       }
 
       {/* Search venues */}
       {['all', 'venue'].includes(activeTab) && 
-        <SearchProfilesList idArray={searchData?.venue?.map((o: any) => o?.id)} />
+        <SearchProfilesList data={searchData?.venue} />
       }
 
     </BoxView>
