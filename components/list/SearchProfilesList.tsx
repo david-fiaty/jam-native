@@ -2,35 +2,19 @@ import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useState } from "react";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
-import { Colors } from "@/constants/Colors";
 import TextView from "../view/TextView";
-import i18n from "@/translation/i18n";
-import ImageView from "../view/ImageView";
-import ScreenManager from "@/manager/ScreenManager";
 import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
-import AddItemButton from "../button/AddItemButton";
-import NoImageView from "../view/NoImageView";
 import BoxView from "../view/BoxView";
-import MediaManager from "@/manager/MediaManager";
 import IconView from "../view/IconView";
 
 type Props = {
-  title?: any;
-  idArray?: any;
-  addButton?: boolean;
-  allButton?: boolean;
-  onAddButtonPress?: () => void;
+  title?: any,
+  idArray?: any,
 };
 
-const SearchProfilesList = ({
-  title,
-  idArray,
-  addButton,
-  allButton,
-  onAddButtonPress,
-}: Props) => {
+const SearchProfilesList = ({ title, idArray }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const [profilesData, setProfilesData] = useState<any>([]);
