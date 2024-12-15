@@ -19,7 +19,6 @@ const SearchView = () => {
   const [searchData, setSearchData] = useState<any>({});
 
   const toggleTab = (row: any) => {
-    //dispatch(setSearchFilter(row.item.id))
     setActiveTab(row.item.id);
   };
 
