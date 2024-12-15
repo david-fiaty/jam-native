@@ -11,6 +11,7 @@ import EntityManager from "@/manager/EntityManager";
 import SearchJamsList from "../list/SearchJamsList";
 import SearchProfilesList from "../list/SearchProfilesList";
 import SearchProjectsList from "../list/SearchProjectsList";
+import SpinnerView from "./SpinnerView";
 
 const SearchView = () => {
   const searchState = useSelector((state: any) => state.search);
@@ -79,6 +80,8 @@ const SearchView = () => {
       });
     });
   }
+
+  if (!searchData?.jam?.length || !searchData?.jammer?.length || !searchData?.project?.length) return <SpinnerView />;
 
   return (
     <BoxView
