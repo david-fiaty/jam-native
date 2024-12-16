@@ -28,7 +28,7 @@ const ProfileProjectsList = ({ title, idArray, addButton, allButton, onAddButton
   const router = useRouter();
   const [profileProjects, setProfileProjects] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [projectImages, addProjectImages] = useState<any>({});
+  const [projectImages, setProjectImages] = useState<any>({});
 
   const renderItem = (row: any) => {
     let imageSize: any = MediaManager.getThumbnailSize();
@@ -93,7 +93,7 @@ const ProfileProjectsList = ({ title, idArray, addButton, allButton, onAddButton
           }
         });  
 
-        addProjectImages(projectImagesList);
+        setProjectImages(projectImagesList);
         setProfileProjects(data);
         setIsLoaded(true);
       });
