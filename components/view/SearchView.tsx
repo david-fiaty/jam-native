@@ -38,6 +38,10 @@ const SearchView = () => {
     );
   };
 
+  const getIdArray = (key: string) => {
+    return searchData[key];
+  };
+
   useEffect(() => {
     if (searchState.value?.length && searchState.value !== previousSearchValue.current) {
       setCanSearch(true);
@@ -80,32 +84,32 @@ const SearchView = () => {
 
       {/* Search jams */}
       {['all', 'jam'].includes(activeTab) && 
-        <SearchJamsList data={searchData?.jam} />
+        <SearchJamsList data={getIdArray('jam')} />
       }
 
       {/* Search calls */}
       {['all', 'call'].includes(activeTab) && 
-        <SearchJamsList data={searchData?.call} />
+        <SearchJamsList data={getIdArray('call')} />
       }
 
       {/* Search jammers */}
       {['all', 'jammer'].includes(activeTab) && 
-        <SearchProfilesList data={searchData?.jammer} />
+        <SearchProfilesList data={getIdArray('jammer')} />
       }
 
       {/* Search projects */}
       {['all', 'project'].includes(activeTab) && 
-        <SearchProjectsList data={searchData?.project} />
+        <SearchProjectsList data={getIdArray('project')} />
       }
 
       {/* Search events */}
       {['all', 'event'].includes(activeTab) && 
-        <SearchJamsList data={searchData?.event} />
+        <SearchJamsList data={getIdArray('event')} />
       }
 
       {/* Search venues */}
       {['all', 'venue'].includes(activeTab) && 
-        <SearchProfilesList data={searchData?.venue} />
+        <SearchProfilesList data={getIdArray('venue')} />
       }
 
     </BoxView>
