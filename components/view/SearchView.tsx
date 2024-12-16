@@ -7,7 +7,6 @@ import BoxView from "./BoxView";
 import TextView from "./TextView";
 import ListView from "./ListView";
 import StaticData from "@/constants/StaticData";
-import EntityManager from "@/manager/EntityManager";
 import SearchJamsList from "../list/SearchJamsList";
 import SearchProfilesList from "../list/SearchProfilesList";
 import SearchProjectsList from "../list/SearchProjectsList";
@@ -18,7 +17,6 @@ const SearchView = () => {
   const searchState = useSelector((state: any) => state.search);
   const [activeTab, setActiveTab] = useState<any>('all');
   const [searchData, setSearchData] = useState<any>({});
-  const [canSearch, setCanSearch] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const previousSearchValue = useRef();
 

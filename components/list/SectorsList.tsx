@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import TextView from "../view/TextView";
