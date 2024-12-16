@@ -28,15 +28,17 @@ const JamsMapView = ({ style, children }: BaseProps) => {
     />
   );
 
-  if (!jamsData?.length) {
-    EntityManager.listJams().then((data: any) => {
-      setJamsData(data);
-      setIsLoaded(true);
-    });
-  }
 
   DeviceManager.getLocation().then((data: any) => {
     setCurrentLocation(data);
+  });
+
+  useEffect(() => {
+    (async () => {
+      if (!jamsData?.length) setJamsData(await EntityManager.listJams());
+      setCurrentLocation(await DeviceManager.getLocation());
+      setIsLoaded(true);
+    })();
   });
 
   if (!isLoaded) return <SpinnerView />;
