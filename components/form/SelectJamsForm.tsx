@@ -1,5 +1,5 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setProjectData } from "@/redux/slices/ProjectFormSlice";
 import { Layout } from "@/constants/Layout";
@@ -112,18 +112,13 @@ const toggleItemsForm = () => {
     return output;
   };
 
-  if (!profileData?.length) {
-    UserManager.getProfileData().then((data: any) => {
-      setProfileData(data);
-    });
-  }
-
-  if (profileData && !profileJams?.length) {
-    EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
-      setProfileJams(data);
+  useEffect(() => {
+    (async () => {
+      if (!profileData?.length) setProfileData(await UserManager.getProfileData());
+      if (profileData && !profileJams?.length) setProfileJams(EntityManager.getJams({ items_ids: idArray }));
       setIsLoaded(true);
-    });
-  }
+    })();
+  });
 
   if (!isLoaded) return <SpinnerView />;
 
