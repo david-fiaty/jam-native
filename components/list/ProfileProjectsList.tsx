@@ -80,23 +80,21 @@ const ProfileProjectsList = ({ title, idArray, addButton, allButton, onAddButton
   }
 
   useEffect(() => {
-    if (!profileProjects?.length && idArray?.length) {
-      EntityManager.getProjects({ items_ids: idArray }).then((data: any) => {
-        if (addButton === true) data.push({ id: "addItem" });
-        setProfileProjects(data);
-        setIsLoaded(true);
-      });
-    }
-  
-    if (profileProjects?.length > 0 ) {
-      profileProjects.map((item: any) => {
-        if (!Object.keys(projectImages).includes(item.id)) {
-          EntityManager.getProjectImageUrl(item).then((value: any) => {
-            if (value) addProjectImage({ ...projectImages, ...{[item?.id]: value} });
-          });
-        }
-      });  
-    }
+    (async () => {
+      if (!profileProjects?.length && idArray?.length) setProfileProjects(await EntityManager.getProjects({ items_ids: idArray }));
+      if (profileProjects?.length && addButton === true) setProfileProjects({...profileProjects, ...{ id: "addItem" }});
+      if (profileProjects?.length) {
+        profileProjects.map((item: any) => {
+          if (!Object.keys(projectImages).includes(item.id)) {
+            EntityManager.getProjectImageUrl(item).then((value: any) => {
+              if (value) addProjectImage({ ...projectImages, ...{[item?.id]: value} });
+            });
+          }
+        });  
+      }
+
+      setIsLoaded(true);
+    })();
   });
 
   if (!isLoaded) return <SpinnerView />;
