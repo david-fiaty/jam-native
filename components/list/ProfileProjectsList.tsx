@@ -83,7 +83,6 @@ const ProfileProjectsList = ({ title, idArray, addButton, allButton, onAddButton
     if (!profileProjects?.length && idArray?.length) {
       EntityManager.getProjects({ items_ids: idArray }).then((data: any) => {
         if (addButton === true) data.push({ id: "addItem" });
-        setProfileProjects(data);
 
         data.map((item: any) => {
           if (!Object.keys(projectImages).includes(item.id)) {
@@ -93,6 +92,7 @@ const ProfileProjectsList = ({ title, idArray, addButton, allButton, onAddButton
           }
         });  
 
+        setProfileProjects(data);
         setIsLoaded(true);
       });
     }
