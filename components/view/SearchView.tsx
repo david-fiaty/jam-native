@@ -42,15 +42,13 @@ const SearchView = () => {
     (async () => {
       if (!searchState.value?.length) {
         setSearchData(await SearchManager.getData());
+        setIsLoaded(true);
       } 
-      else if (searchState.value?.length && searchState.value !== previousSearchValue.current) {
-        setIsLoaded(false);
+      else {
         setSearchData(await SearchManager.getResult(searchState.value));
         previousSearchValue.current = searchState.value;
         setIsLoaded(true);
       }
-      
-      setIsLoaded(true);
     })();
   });
 
