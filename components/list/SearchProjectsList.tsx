@@ -16,7 +16,7 @@ type Props = {
 const SearchProjectsList = ({ data }: Props) => {
   const numColumns = 3;
   const router = useRouter();
-  const [projectImages, addProjectImage] = useState<any>({});
+  const [projectImages, setProjectImages] = useState<any>({});
 
   const renderItem = (row: any) => {
     let imageSize: any = MediaManager.getThumbnailSize();
@@ -61,13 +61,16 @@ const SearchProjectsList = ({ data }: Props) => {
 
   useEffect(() => {
     if (data?.length > 0 ) {
+      let projectImagesList: any = {...projectImages};
       data.map((item: any) => {
         if (!Object.keys(projectImages).includes(item.id)) {
           EntityManager.getProjectImageUrl(item).then((value: any) => {
-            if (value) addProjectImage({ ...projectImages, ...{[item.id]: value} });
+            if (value) projectImagesList[item.id] = value;
           });
         }
       });  
+
+      setProjectImages(projectImagesList);
     }
   });
 

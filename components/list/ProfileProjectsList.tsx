@@ -28,7 +28,7 @@ const ProfileProjectsList = ({ title, idArray, addButton, allButton, onAddButton
   const router = useRouter();
   const [profileProjects, setProfileProjects] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [projectImages, addProjectImage] = useState<any>({});
+  const [projectImages, setProjectImages] = useState<any>({});
 
   const renderItem = (row: any) => {
     let imageSize: any = MediaManager.getThumbnailSize();
@@ -80,21 +80,24 @@ const ProfileProjectsList = ({ title, idArray, addButton, allButton, onAddButton
   }
 
   useEffect(() => {
-    (async () => {
-      if (!profileProjects?.length && idArray?.length) setProfileProjects(await EntityManager.getProjects({ items_ids: idArray }));
-      if (profileProjects?.length && addButton === true) setProfileProjects({...profileProjects, ...{ id: "addItem" }});
-      if (profileProjects?.length) {
-        profileProjects.map((item: any) => {
+    if (!profileProjects?.length && idArray?.length) {
+      EntityManager.getProjects({ items_ids: idArray }).then((data: any) => {
+        if (addButton === true) data.push({ id: "addItem" });
+
+        let projectImagesList: any = {...projectImages};
+        data.map((item: any) => {
           if (!Object.keys(projectImages).includes(item.id)) {
             EntityManager.getProjectImageUrl(item).then((value: any) => {
-              if (value) addProjectImage({ ...projectImages, ...{[item?.id]: value} });
+              if (value) projectImagesList[item.id] = value;
             });
           }
         });  
-      }
 
-      setIsLoaded(true);
-    })();
+        setProjectImages(projectImagesList);
+        setProfileProjects(data);
+        setIsLoaded(true);
+      });
+    }
   });
 
   if (!isLoaded) return <SpinnerView />;
