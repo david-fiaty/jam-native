@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
 import SelectListBase from '../base/SelectListBase';
 import EntityManager from "@/manager/EntityManager";
+import SpinnerView from "../view/SpinnerView";
 
 type Props = BaseProps & {
   value?: any,
@@ -12,13 +13,7 @@ type Props = BaseProps & {
 };
 
 const CountryField = ({value, onChangeValue}: Props) => {
-  const [countriesData, setCountriesData] = useState<any>([]);
-
-  if (!countriesData?.length) {
-    EntityManager.getCountries().then((data: any) => {
-      setCountriesData(data);
-    });
-  }
+  const [countriesData, setCountriesData] = useState<any>(null);
 
   const buildOptions = (optionsData: any) => {
     return optionsData?.map((item: any) => {
@@ -28,6 +23,14 @@ const CountryField = ({value, onChangeValue}: Props) => {
       }
     });
   };
+
+  useEffect(() => {
+    (async () => {
+      if (!countriesData) setCountriesData(await EntityManager.getCountries());
+    })();
+  });
+
+  if (!countriesData) return <SpinnerView size="small" />
 
   return (
     <BoxView direction="row" align="space-between" style={styles.container}>
