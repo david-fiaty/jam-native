@@ -46,6 +46,7 @@ const SearchField = () => {
           size={10}
           onPress={() => {
             if (searchState.value.length && activeScreen?.name == 'SearchView') {
+              setCurrentSearchValue('');
               dispatch(setSearchValue(''));
             }
             else if (activeScreen?.name != 'SearchView') {
