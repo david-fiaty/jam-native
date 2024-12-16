@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { View, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -11,23 +11,16 @@ import EntityManager from "@/manager/EntityManager";
 import SearchJamsList from "../list/SearchJamsList";
 import SearchProfilesList from "../list/SearchProfilesList";
 import SearchProjectsList from "../list/SearchProjectsList";
-import SpinnerView from "./SpinnerView";
 
 const SearchView = () => {
   const searchState = useSelector((state: any) => state.search);
   const [activeTab, setActiveTab] = useState<any>('all');
   const [searchData, setSearchData] = useState<any>({});
+  const [canSearch, setCanSearch] = useState<boolean>(false);
+  const previousSearchValue = useRef();
 
   const toggleTab = (row: any) => {
     setActiveTab(row.item.id);
-  };
-
-  const canSearch = () => {
-    if (searchState.value.length) {
-      return true;
-    }
-
-    return false;
   };
 
   const updateSearchData = (data: any) => {
@@ -54,7 +47,7 @@ const SearchView = () => {
     );
   };
 
-  if (!Object.keys(searchData?.jam || [])?.length || canSearch()) {
+  if (!Object.keys(searchData?.jam || [])?.length || canSearch) {
     EntityManager.listJams(buildSearchQuery()).then((data: any) => {
       updateSearchData({
         jam: data,
@@ -64,7 +57,7 @@ const SearchView = () => {
     });
   }
 
-  if (!Object.keys(searchData?.jammer || [])?.length || canSearch()) {
+  if (!Object.keys(searchData?.jammer || [])?.length || canSearch) {
     EntityManager.listProfiles(buildSearchQuery()).then((data: any) => {
       updateSearchData({
         jammer: data,
@@ -73,7 +66,7 @@ const SearchView = () => {
     });
   }
 
-  if (!Object.keys(searchData?.project || [])?.length || canSearch()) {
+  if (!Object.keys(searchData?.project || [])?.length || canSearch) {
     EntityManager.listProjects(buildSearchQuery()).then((data: any) => {
       updateSearchData({
         project: data,
@@ -81,7 +74,15 @@ const SearchView = () => {
     });
   }
 
-  if (!searchData?.jam?.length || !searchData?.jammer?.length || !searchData?.project?.length) return <SpinnerView />;
+  useEffect(() => {
+    if (searchState.value?.length && searchState.value !== previousSearchValue.current) {
+      setCanSearch(true);
+      previousSearchValue.current = searchState.value;
+    }
+    else {
+      setCanSearch(false);
+    }
+  });
 
   return (
     <BoxView

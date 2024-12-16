@@ -15,6 +15,10 @@ const SearchField = () => {
   const activeScreen = ScreenManager.getActiveScreen();
   const isExpanded = searchState.expanded === true;
 
+  const onSubmitEditing = () => {
+    dispatch(setSearchValue(currentSearchValue));
+  };
+
   const toggleButton = (
     <IconView 
       name="search" 
@@ -34,7 +38,7 @@ const SearchField = () => {
       placeholder={i18n.t('Search...')}
       containerStyle={styles.inputContainer} 
       onChangeText={(text: string) => setCurrentSearchValue(text)}
-      onSubmitEditing={() => dispatch(setSearchValue(currentSearchValue))}
+      onSubmitEditing={onSubmitEditing}
       rightIcon={  
         <IconView 
           name="delete" 
