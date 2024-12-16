@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
@@ -69,9 +69,11 @@ const AddJamForm = () => {
     </TouchableOpacity>
   );
 
-  UserManager.getProfileId().then((id: number) => {
-    if (!profileId) setProfileId(id);
-    setIsLoaded(true);
+  useEffect(() => {
+    (async () => {
+      if (!profileId) setProfileId(await UserManager.getProfileId());
+      setIsLoaded(true);
+    })();
   });
 
   if (!isLoaded) return <SpinnerView />;

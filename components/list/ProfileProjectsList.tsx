@@ -1,5 +1,5 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
@@ -79,21 +79,23 @@ const ProfileProjectsList = ({ title, idArray, addButton, allButton, onAddButton
     return output;
   }
 
-  if (!profileProjects?.length && idArray?.length) {
-    EntityManager.getProjects({ items_ids: idArray }).then((data: any) => {
-      if (addButton === true) data.push({ id: "addItem" });
-      setProfileProjects(data);
-      setIsLoaded(true);
-    });
-  }
-
-  if (profileProjects?.length > 0 ) {
-    profileProjects.map((item: any) => {
-      EntityManager.getProjectImageUrl(item).then((value: any) => {
-        if (value && !projectImages?.[item?.id]) addProjectImage({ ...projectImages, ...{[item?.id]: value} });
+  useEffect(() => {
+    if (!profileProjects?.length && idArray?.length) {
+      EntityManager.getProjects({ items_ids: idArray }).then((data: any) => {
+        if (addButton === true) data.push({ id: "addItem" });
+        setProfileProjects(data);
+        setIsLoaded(true);
       });
-    });  
-  }
+    }
+  
+    if (profileProjects?.length > 0 ) {
+      profileProjects.map((item: any) => {
+        EntityManager.getProjectImageUrl(item).then((value: any) => {
+          if (value && !projectImages?.[item?.id]) addProjectImage({ ...projectImages, ...{[item?.id]: value} });
+        });
+      });  
+    }
+  });
 
   if (!isLoaded) return <SpinnerView />;
 

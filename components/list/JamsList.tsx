@@ -229,29 +229,14 @@ const JamsList = ({idArray, showSpinner}: Props) => {
     </View>
   );
 
-  const loadData = () => {
-    if (!idArray?.length) {
-      EntityManager.listJams().then((data: any) => {
-        setJamsData(data);
-        setIsLoaded(true);
-      });
-    }
-    else {
-      EntityManager.getJams({items_ids: idArray}).then((data: any) => {
-        setJamsData(data);
-        setIsLoaded(true);
-      });
-    }
-  };
-
-  if (!jamsData?.length) loadData();
-
-  if (!sectorsData?.length) { 
-    EntityManager.getSectors().then((data: any) => {
-      setSectorsData(data);
+  useEffect(() => {
+    (async () => {
+      if (!sectorsData?.length) setSectorsData(await EntityManager.getSectors());
+      if (!jamsData?.length && idArray?.length) setJamsData(await EntityManager.getJams({items_ids: idArray}));
+      if (!jamsData?.length && !idArray?.length) setJamsData(await EntityManager.listJams());
       setIsLoaded(true);
-    });
-  }
+    })();
+  });
 
   if (!isLoaded && showSpinner) return <SpinnerView />;
 

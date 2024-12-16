@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Layout } from "@/constants/Layout";
 import BackButton from "../button/BackButton";
@@ -15,17 +15,12 @@ const AddedJamAction = () => {
   const [isSaved, setIsSaved] = useState<boolean>(false);
   const entityId = ScreenManager.getActiveScreen()?.entityId;
 
-  if (!entity) {
-    EntityManager.getJams({items_ids: [entityId]}).then((item: any) => {
-      setEntity(item);
-    });
-  }
-
-  if (!isSaved) {
-    EntityManager.saveJam(entityId).then((success: boolean) => {
-      setIsSaved(success);
-    });
-  }
+  useEffect(() => {
+    (async () => {
+      if (!entity) setEntity(await EntityManager.getJams({items_ids: [entityId]}));
+      if (!isSaved) setIsSaved(await EntityManager.saveJam(entityId));
+    })();
+  });
 
   if (!entity) return <SpinnerView />;
 

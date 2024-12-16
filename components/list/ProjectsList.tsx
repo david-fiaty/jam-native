@@ -244,14 +244,12 @@ const ProjectsList = ({idArray, showSpinner}: Props) => {
     }
   };
 
-  if (!jamsData?.length) loadData();
-
-  if (!sectorsData?.length) { 
-    EntityManager.getSectors().then((data: any) => {
-      setSectorsData(data);
-      setIsLoaded(true);
-    });
-  }
+  useEffect(() => {
+    (async () => {
+      if (!sectorsData?.length) setSectorsData(await EntityManager.getSectors());
+      if (!jamsData?.length) loadData();
+    })();
+  });
 
   if (!isLoaded && showSpinner) return <SpinnerView />;
 
