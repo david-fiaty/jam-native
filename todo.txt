@@ -80,6 +80,17 @@ console.log(JSON.stringify(obj, 0, 2));
 const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
 
 
+
+  useEffect(() => {
+    (async () => {
+     
+    })();
+  });
+
+
+
+
+
     let mediaList = [...selectedMediaPreview];
     if (!selectedMediaPreview.includes(data.fileName)) {
       mediaList.push(data.fileName);

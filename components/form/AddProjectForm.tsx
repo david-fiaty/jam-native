@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { useState, useEffect } from "react";
+import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setJamData } from "@/redux/slices/JamFormSlice";
 import { Layout } from "@/constants/Layout";
@@ -45,12 +45,12 @@ const AddProjectForm = () => {
     */
   };
 
-  if (!profileId) {
-    UserManager.getProfileId().then((id: number) => {
-      setProfileId(id);
+  useEffect(() => {
+    (async () => {
+      if (!profileId) setProfileId(await UserManager.getProfileId());
       setIsLoaded(true);
-    });
-  }
+    })();
+  });
 
   if (!isLoaded) return <SpinnerView />;
 

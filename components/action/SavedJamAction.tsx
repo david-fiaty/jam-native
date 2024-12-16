@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Layout } from "@/constants/Layout";
 import BackButton from "../button/BackButton";
@@ -15,28 +15,25 @@ const SavedJamAction = () => {
   const [isSaved, setIsSaved] = useState<boolean>(false);
   const entityId = ScreenManager.getActiveScreen()?.entityId;
 
-  if (!entity) {
-    EntityManager.getJams({items_ids: [entityId]}).then((item: any) => {
-      setEntity(item);
-    });
+  const getTitle = () => { 
+    return (entity && isSaved) 
+      ? i18n.t('Jam is now saved to your jams') 
+      : i18n.t('Saving Jam failed, please try again'); 
   }
 
-  if (!isSaved) {
-    EntityManager.saveJam(entityId).then((success: boolean) => {
-      setIsSaved(success);
-    });
-  }
+  useEffect(() => {
+    (async () => {
+      if (!entity) setEntity(await EntityManager.getJams({items_ids: [entityId]}));
+      if (!isSaved) setIsSaved(await EntityManager.saveJam(entityId));
+    })();
+  });
 
   if (!entity) return <SpinnerView />;
-
-  const title = (entity && isSaved) 
-    ? i18n.t('Jam is now saved to your jams') 
-    : i18n.t('Saving Jam failed, please try again'); 
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
-        title={title}
+        title={getTitle()}
         onPress={() => ScreenManager.toggleModal('SavedJamAction')}
       />
       
