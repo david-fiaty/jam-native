@@ -233,6 +233,7 @@ const JamsList = ({idArray, showSpinner}: Props) => {
     (async () => {
       if (!sectorsData?.length) setSectorsData(await EntityManager.getSectors());
       if (!jamsData?.length && !idArray?.length) setJamsData(await EntityManager.getJams({items_ids: idArray}));
+      setIsLoaded(true);
     })();
   });
 
