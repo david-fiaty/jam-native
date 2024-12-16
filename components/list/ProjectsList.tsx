@@ -229,25 +229,11 @@ const ProjectsList = ({idArray, showSpinner}: Props) => {
     </View>
   );
 
-  const loadData = () => {
-    if (!idArray?.length) {
-      EntityManager.listJams().then((data: any) => {
-        setJamsData(data);
-        setIsLoaded(true);
-      });
-    }
-    else {
-      EntityManager.getJams({items_ids: idArray}).then((data: any) => {
-        setJamsData(data);
-        setIsLoaded(true);
-      });
-    }
-  };
-
   useEffect(() => {
     (async () => {
       if (!sectorsData?.length) setSectorsData(await EntityManager.getSectors());
-      if (!jamsData?.length) loadData();
+      if (!jamsData?.length && !idArray?.length) setJamsData(await EntityManager.listJams());
+      if (!jamsData?.length && idArray?.length) setJamsData(await EntityManager.getJams({items_ids: idArray}));
     })();
   });
 
