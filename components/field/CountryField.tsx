@@ -14,6 +14,7 @@ type Props = BaseProps & {
 
 const CountryField = ({value, onChangeValue}: Props) => {
   const [countriesData, setCountriesData] = useState<any>(null);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const buildOptions = (optionsData: any) => {
     return optionsData?.map((item: any) => {
@@ -27,10 +28,11 @@ const CountryField = ({value, onChangeValue}: Props) => {
   useEffect(() => {
     (async () => {
       if (!countriesData) setCountriesData(await EntityManager.getCountries());
+      setIsLoaded(true);
     })();
   });
 
-  if (!countriesData) return <SpinnerView size="small" />
+  if (!isLoaded) return <SpinnerView size="small" />
 
   return (
     <BoxView direction="row" align="space-between" style={styles.container}>
