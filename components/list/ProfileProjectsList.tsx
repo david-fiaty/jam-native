@@ -28,7 +28,7 @@ const ProfileProjectsList = ({ title, idArray, addButton, allButton, onAddButton
   const router = useRouter();
   const [profileProjects, setProfileProjects] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [projectImages, addProjectImage] = useState<any>({});
+  const [projectImages, addProjectImages] = useState<any>({});
 
   const renderItem = (row: any) => {
     let imageSize: any = MediaManager.getThumbnailSize();
@@ -84,14 +84,16 @@ const ProfileProjectsList = ({ title, idArray, addButton, allButton, onAddButton
       EntityManager.getProjects({ items_ids: idArray }).then((data: any) => {
         if (addButton === true) data.push({ id: "addItem" });
 
+        let projectImagesList: any = {...projectImages};
         data.map((item: any) => {
           if (!Object.keys(projectImages).includes(item.id)) {
             EntityManager.getProjectImageUrl(item).then((value: any) => {
-              if (value) addProjectImage({ ...projectImages, ...{[item.id]: value} });
+              if (value) projectImagesList[item.id] = value;
             });
           }
         });  
 
+        addProjectImages(projectImagesList);
         setProfileProjects(data);
         setIsLoaded(true);
       });
