@@ -62,11 +62,11 @@ const SearchProjectsList = ({ data }: Props) => {
   useEffect(() => {
     if (data?.length > 0 ) {
       data.map((item: any) => {
-        EntityManager.getProjectImageUrl(item).then((value: any) => {
-          if (value && !Object.keys(projectImages).includes(item.id)) {
-            addProjectImage({ ...projectImages, ...{[item.id]: value} });
-          }
-        });
+        if (!Object.keys(projectImages).includes(item.id)) {
+          EntityManager.getProjectImageUrl(item).then((value: any) => {
+            if (value) addProjectImage({ ...projectImages, ...{[item.id]: value} });
+          });
+        }
       });  
     }
   });
