@@ -11,28 +11,19 @@ import EntityManager from "@/manager/EntityManager";
 import SearchJamsList from "../list/SearchJamsList";
 import SearchProfilesList from "../list/SearchProfilesList";
 import SearchProjectsList from "../list/SearchProjectsList";
+import SearchManager from "@/manager/SearchManager";
+import SpinnerView from "./SpinnerView";
 
 const SearchView = () => {
   const searchState = useSelector((state: any) => state.search);
   const [activeTab, setActiveTab] = useState<any>('all');
   const [searchData, setSearchData] = useState<any>({});
   const [canSearch, setCanSearch] = useState<boolean>(false);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const previousSearchValue = useRef();
 
   const toggleTab = (row: any) => {
     setActiveTab(row.item.id);
-  };
-
-  const updateSearchData = (data: any) => {
-    setSearchData({...searchData, ...data});
-  };
-
-  const buildSearchQuery = () => {
-    if (searchState.value?.length) {
-      return { query_text: searchState.value };
-    }
-    
-    return {};
   };
 
   const renderTab = (row: any) => {
@@ -47,34 +38,18 @@ const SearchView = () => {
     );
   };
 
-  if (!Object.keys(searchData?.jam || [])?.length || canSearch) {
-    EntityManager.listJams(buildSearchQuery()).then((data: any) => {
-      updateSearchData({
-        jam: data,
-        call: data.filter((o: any) => o?.type == 'call'),
-        event: data.filter((o: any) => o?.type == 'event'),
-      });
-    });
-  }
-
-  if (!Object.keys(searchData?.jammer || [])?.length || canSearch) {
-    EntityManager.listProfiles(buildSearchQuery()).then((data: any) => {
-      updateSearchData({
-        jammer: data,
-        venue: data,
-      });
-    });
-  }
-
-  if (!Object.keys(searchData?.project || [])?.length || canSearch) {
-    EntityManager.listProjects(buildSearchQuery()).then((data: any) => {
-      updateSearchData({
-        project: data,
-      });
-    });
-  }
-
   useEffect(() => {
+    if (searchState.value?.length && searchState.value !== previousSearchValue.current) {
+      setCanSearch(true);
+      previousSearchValue.current = searchState.value;
+    }
+
+    (async () => {
+      setSearchData(await SearchManager.getData());
+      setIsLoaded(true);
+    })();
+
+    /*
     if (searchState.value?.length && searchState.value !== previousSearchValue.current) {
       setCanSearch(true);
       previousSearchValue.current = searchState.value;
@@ -82,7 +57,10 @@ const SearchView = () => {
     else {
       setCanSearch(false);
     }
+      */
   });
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView
