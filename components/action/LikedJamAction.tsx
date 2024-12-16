@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Layout } from "@/constants/Layout";
 import BackButton from "../button/BackButton";
@@ -15,28 +15,25 @@ const LikedJamAction = () => {
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const entityId = ScreenManager.getActiveScreen()?.entityId;
 
-  if (!entity) {
-    EntityManager.getJams({items_ids: [entityId]}).then((item: any) => {
-      setEntity(item);
-    });
+  const getTitle = () => {
+    return (entity && isLiked) 
+      ? i18n.t('Jam is now liked') 
+      : i18n.t('Liking Jam failed, please try again'); 
   }
 
-  if (!isLiked) {
-    EntityManager.likeJam(entityId).then((success: boolean) => {
-      setIsLiked(success);
-    });
-  }
+  useEffect(() => {
+    (async () => {
+      if (!entity) setEntity(await EntityManager.getJams({items_ids: [entityId]}));
+      if (!isLiked) setIsLiked(await EntityManager.likeJam(entityId));
+    })();
+  });
 
   if (!entity) return <SpinnerView />;
-
-  const title = (entity && isLiked) 
-    ? i18n.t('Jam is now liked') 
-    : i18n.t('Liking Jam failed, please try again'); 
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
-        title={title}
+        title={getTitle()}
         onPress={() => ScreenManager.toggleModal('LikedJamAction')}
       />
 
