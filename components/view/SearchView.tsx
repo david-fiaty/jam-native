@@ -61,16 +61,6 @@ const SearchView = () => {
       
       setIsLoaded(true);
     })();
-
-    /*
-    if (searchState.value?.length && searchState.value !== previousSearchValue.current) {
-      setCanSearch(true);
-      previousSearchValue.current = searchState.value;
-    }
-    else {
-      setCanSearch(false);
-    }
-      */
   });
 
   if (!isLoaded) return <SpinnerView />;
