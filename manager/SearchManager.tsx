@@ -1,6 +1,24 @@
 import EntityManager from "./EntityManager";
 
 class SearchManager {
+  data?: any;
+  result?: any;
+
+  async getData() {
+    if (!this.data?.length) {
+      this.data = await this.loadData();
+    }
+
+    return this.data;
+  }
+
+  async getResult(searchValue: string) {
+    if (!this.result?.length) {
+      this.result = await this.loadResult(searchValue);
+    }
+
+    return this.result;
+  }
 
   async loadData() {
     const [jams, profiles, projects] = await this.sendRequest();
@@ -12,7 +30,7 @@ class SearchManager {
     });
   }
 
-  async searchData(searchValue: string) {
+  async loadResult(searchValue: string) {
     const options = searchValue?.length ? { query_text: searchValue } : {};
     const [jams, profiles, projects] = await this.sendRequest(options);
 
