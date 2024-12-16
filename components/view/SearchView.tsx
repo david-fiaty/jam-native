@@ -38,39 +38,18 @@ const SearchView = () => {
     );
   };
 
-  const getIdArray = (key: string) => {
-    return searchData[key];
-  };
-
   useEffect(() => {
-
-    /*
-    if (searchState.value?.length && searchState.value !== previousSearchValue.current) {
-      setCanSearch(true);
-      previousSearchValue.current = searchState.value;
-    }
-      */
-
     (async () => {
-      if (searchState.value?.length) {
-        setSearchData(await SearchManager.getResult(searchState.value));
-      }
-      else {
+      if (!searchState.value?.length) {
         setSearchData(await SearchManager.getData());
+        setIsLoaded(true);
+      } 
+      else {
+        setSearchData(await SearchManager.getResult(searchState.value));
+        previousSearchValue.current = searchState.value;
+        setIsLoaded(true);
       }
-      
-      setIsLoaded(true);
     })();
-
-    /*
-    if (searchState.value?.length && searchState.value !== previousSearchValue.current) {
-      setCanSearch(true);
-      previousSearchValue.current = searchState.value;
-    }
-    else {
-      setCanSearch(false);
-    }
-      */
   });
 
   if (!isLoaded) return <SpinnerView />;
@@ -93,32 +72,32 @@ const SearchView = () => {
 
       {/* Search jams */}
       {['all', 'jam'].includes(activeTab) && 
-        <SearchJamsList data={getIdArray('jam')} />
+        <SearchJamsList data={searchData?.jam} />
       }
 
       {/* Search calls */}
       {['all', 'call'].includes(activeTab) && 
-        <SearchJamsList data={getIdArray('call')} />
+        <SearchJamsList data={searchData?.call} />
       }
 
       {/* Search jammers */}
       {['all', 'jammer'].includes(activeTab) && 
-        <SearchProfilesList data={getIdArray('jammer')} />
+        <SearchProfilesList data={searchData?.jammer} />
       }
 
       {/* Search projects */}
       {['all', 'project'].includes(activeTab) && 
-        <SearchProjectsList data={getIdArray('project')} />
+        <SearchProjectsList data={searchData?.project} />
       }
 
       {/* Search events */}
       {['all', 'event'].includes(activeTab) && 
-        <SearchJamsList data={getIdArray('event')} />
+        <SearchJamsList data={searchData?.event} />
       }
 
       {/* Search venues */}
       {['all', 'venue'].includes(activeTab) && 
-        <SearchProfilesList data={getIdArray('venue')} />
+        <SearchProfilesList data={searchData?.venue} />
       }
 
     </BoxView>
