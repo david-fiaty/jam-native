@@ -55,8 +55,8 @@ class SearchManager {
       jammer: data.profiles,
       venue: data.profiles,
       project: data.projects,
-      call: data.profiles.filter((o: any) => o?.type == 'call'),
-      event: data.profiles.filter((o: any) => o?.type == 'event'),
+      call: data.jams.filter((o: any) => o?.type == 'call'),
+      event: data.jams.filter((o: any) => o?.type == 'event'),
     };
   }
 };
