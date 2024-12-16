@@ -49,10 +49,6 @@ const SearchField = () => {
               setCurrentSearchValue('');
               dispatch(setSearchValue(''));
             }
-            else if (activeScreen?.name != 'SearchView') {
-              dispatch(setSearchValue(''));
-              ScreenManager.toggleModal('SearchView');
-            }
             else if (!searchState.value.length && activeScreen?.name == 'SearchView') {
               dispatch(toggleSearchField(false));
               ScreenManager.toggleModal('SearchView');
