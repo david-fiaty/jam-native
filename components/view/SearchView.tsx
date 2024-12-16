@@ -43,13 +43,22 @@ const SearchView = () => {
   };
 
   useEffect(() => {
+
+    /*
     if (searchState.value?.length && searchState.value !== previousSearchValue.current) {
       setCanSearch(true);
       previousSearchValue.current = searchState.value;
     }
+      */
 
     (async () => {
-      setSearchData(await SearchManager.getData());
+      if (searchState.value?.length) {
+        setSearchData(await SearchManager.getResult(searchState.value));
+      }
+      else {
+        setSearchData(await SearchManager.getData());
+      }
+      
       setIsLoaded(true);
     })();
 
