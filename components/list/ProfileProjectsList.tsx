@@ -92,6 +92,8 @@ const ProfileProjectsList = ({ title, idArray, addButton, allButton, onAddButton
             });
           }
         });  
+
+        setIsLoaded(true);
       });
     }
   });
