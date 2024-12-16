@@ -91,7 +91,9 @@ const ProfileProjectsList = ({ title, idArray, addButton, allButton, onAddButton
     if (profileProjects?.length > 0 ) {
       profileProjects.map((item: any) => {
         EntityManager.getProjectImageUrl(item).then((value: any) => {
-          if (value && !projectImages?.[item?.id]) addProjectImage({ ...projectImages, ...{[item?.id]: value} });
+          if (value && !Object.keys(projectImages).includes(item.id)) {
+            addProjectImage({ ...projectImages, ...{[item?.id]: value} });
+          }
         });
       });  
     }
