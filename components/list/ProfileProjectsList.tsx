@@ -84,18 +84,15 @@ const ProfileProjectsList = ({ title, idArray, addButton, allButton, onAddButton
       EntityManager.getProjects({ items_ids: idArray }).then((data: any) => {
         if (addButton === true) data.push({ id: "addItem" });
         setProfileProjects(data);
-        setIsLoaded(true);
-      });
-    }
 
-    if (profileProjects?.length > 0 ) {
-      profileProjects.map((item: any) => {
-        if (!Object.keys(projectImages).includes(item.id)) {
-          EntityManager.getProjectImageUrl(item).then((value: any) => {
-            if (value) addProjectImage({ ...projectImages, ...{[item.id]: value} });
-          });
-        }
-      });  
+        data.map((item: any) => {
+          if (!Object.keys(projectImages).includes(item.id)) {
+            EntityManager.getProjectImageUrl(item).then((value: any) => {
+              if (value) addProjectImage({ ...projectImages, ...{[item.id]: value} });
+            });
+          }
+        });  
+      });
     }
   });
 
