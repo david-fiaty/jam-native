@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { setJamData } from "@/redux/slices/JamFormSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import TextView from "../view/TextView";
@@ -17,7 +16,6 @@ import CollapsibleView from "../view/CollapsibleView";
 
 const SectorsList = () => {
   const dispatch = useDispatch();
-  const jamData = useSelector((state: any) => state.jamForm);
   const [sectorsData, setSectorsData] = useState<any>(null);
   const [selectedSectors, setSelectedSectors] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -85,12 +83,12 @@ const SectorsList = () => {
     );
   };
 
-  if (!sectorsData) {
-    EntityManager.getSectors().then((data: any) => {
-      setSectorsData(data);
+  useEffect(() => {
+    (async () => {
+      if (!sectorsData) setSectorsData(await EntityManager.getSectors());
       setIsLoaded(true);
-   });
-  }
+    })();
+  });
 
   if (!isLoaded) return <SpinnerView />;
 
