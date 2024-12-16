@@ -1,5 +1,5 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import ImageView from "../view/ImageView";
@@ -59,13 +59,15 @@ const SearchProjectsList = ({ data }: Props) => {
     return output;
   }
 
-  if (data?.length > 0 ) {
-    data.map((item: any) => {
-      EntityManager.getProjectImageUrl(item).then((value: any) => {
-        if (value && !projectImages?.[item?.id]) addProjectImage({ ...projectImages, ...{[item?.id]: value} });
-      });
-    });  
-  }
+  useEffect(() => {
+    if (data?.length > 0 ) {
+      data.map((item: any) => {
+        EntityManager.getProjectImageUrl(item).then((value: any) => {
+          if (value && !projectImages?.[item?.id]) addProjectImage({ ...projectImages, ...{[item?.id]: value} });
+        });
+      });  
+    }
+  });
 
   return (
     <View style={styles.container}>
