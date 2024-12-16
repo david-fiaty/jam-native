@@ -1,4 +1,5 @@
-import { StyleSheet, View } from 'react-native';
+import { useState } from 'react';
+import { StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchValue, toggleSearchField } from "@/redux/slices/SearchSlice";
 import IconView from "../view/IconView";
@@ -10,8 +11,13 @@ import BoxView from '../view/BoxView';
 const SearchField = () => {
   const dispatch = useDispatch();
   const searchState = useSelector((state: any) => state.search);
+  const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
   const activeScreen = ScreenManager.getActiveScreen();
   const isExpanded = searchState.expanded === true;
+
+  const onSubmitEditing = () => {
+    dispatch(setSearchValue(currentSearchValue));
+  };
 
   const toggleButton = (
     <IconView 
@@ -28,10 +34,11 @@ const SearchField = () => {
 
   const inputField = (
     <InputTextField 
-      value={searchState.value}
+      value={currentSearchValue}
       placeholder={i18n.t('Search...')}
       containerStyle={styles.inputContainer} 
-      onChangeText={(text: string) => dispatch(setSearchValue(text))}
+      onChangeText={(text: string) => setCurrentSearchValue(text)}
+      onSubmitEditing={onSubmitEditing}
       rightIcon={  
         <IconView 
           name="delete" 
@@ -39,11 +46,8 @@ const SearchField = () => {
           size={10}
           onPress={() => {
             if (searchState.value.length && activeScreen?.name == 'SearchView') {
+              setCurrentSearchValue('');
               dispatch(setSearchValue(''));
-            }
-            else if (activeScreen?.name != 'SearchView') {
-              dispatch(setSearchValue(''));
-              ScreenManager.toggleModal('SearchView');
             }
             else if (!searchState.value.length && activeScreen?.name == 'SearchView') {
               dispatch(toggleSearchField(false));

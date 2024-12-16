@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { View, TouchableOpacity } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import BoxView from "./BoxView";
@@ -11,21 +11,19 @@ import EntityManager from "@/manager/EntityManager";
 import SearchJamsList from "../list/SearchJamsList";
 import SearchProfilesList from "../list/SearchProfilesList";
 import SearchProjectsList from "../list/SearchProjectsList";
+import SearchManager from "@/manager/SearchManager";
+import SpinnerView from "./SpinnerView";
 
 const SearchView = () => {
-  const dispatch = useDispatch();
   const searchState = useSelector((state: any) => state.search);
   const [activeTab, setActiveTab] = useState<any>('all');
   const [searchData, setSearchData] = useState<any>({});
+  const [canSearch, setCanSearch] = useState<boolean>(false);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const previousSearchValue = useRef();
 
   const toggleTab = (row: any) => {
-    //dispatch(setSearchFilter(row.item.id))
     setActiveTab(row.item.id);
-  };
-
-  const updateSearchData = (data: any) => {
-    let searchDataArray: any = {...searchData, ...data};
-    setSearchData(searchDataArray);
   };
 
   const renderTab = (row: any) => {
@@ -40,32 +38,21 @@ const SearchView = () => {
     );
   };
 
-  if (!Object.keys(searchData?.jam || [])?.length) {
-    EntityManager.listJams().then((data: any) => {
-      updateSearchData({
-        jam: data,
-        call: data.filter((o: any) => o?.type == 'call'),
-        event: data.filter((o: any) => o?.type == 'event'),
-      });
-    });
-  }
+  useEffect(() => {
+    (async () => {
+      if (!searchState.value?.length) {
+        setSearchData(await SearchManager.getData());
+        setIsLoaded(true);
+      } 
+      else {
+        setSearchData(await SearchManager.getResult(searchState.value));
+        previousSearchValue.current = searchState.value;
+        setIsLoaded(true);
+      }
+    })();
+  });
 
-  if (!Object.keys(searchData?.jammer || [])?.length) {
-    EntityManager.listProfiles().then((data: any) => {
-      updateSearchData({
-        jammer: data,
-        venue: data,
-      });
-    });
-  }
-
-  if (!Object.keys(searchData?.project || [])?.length) {
-    EntityManager.listProjects().then((data: any) => {
-      updateSearchData({
-        project: data,
-      });
-    });
-  }
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView
