@@ -40,11 +40,14 @@ const SearchView = () => {
 
   useEffect(() => {
     (async () => {
-      if (searchState.value?.length) {
-        setSearchData(await SearchManager.getResult(searchState.value));
-      }
-      else {
+      if (!searchState.value?.length) {
         setSearchData(await SearchManager.getData());
+      } 
+      else if (searchState.value?.length && searchState.value !== previousSearchValue.current) {
+        setIsLoaded(false);
+        setSearchData(await SearchManager.getResult(searchState.value));
+        previousSearchValue.current = searchState.value;
+        setIsLoaded(true);
       }
       
       setIsLoaded(true);
