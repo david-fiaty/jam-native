@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { useRouter } from 'expo-router';
 import { Layout } from "@/constants/Layout";
@@ -15,11 +15,11 @@ const MoreJamView = () => {
   const [entity, setEntity] = useState<any>(null);
   const entityId = ScreenManager.getActiveScreen()?.entityId;
 
-  if (!entity) {
-    EntityManager.getJams({items_ids: [entityId]}).then((item: any) => {
-      setEntity(item);
-    });
-  }
+  useEffect(() => {
+    (async () => {
+      if (!entity) setEntity(EntityManager.getJams({items_ids: [entityId]}));
+    })();
+  });
 
   if (!entity) return <SpinnerView />;
 

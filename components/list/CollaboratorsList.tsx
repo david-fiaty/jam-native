@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { setJamData } from '@/redux/slices/JamFormSlice';
@@ -62,7 +62,7 @@ const CollaboratorsList = () => {
     });
   };
 
-  const toogleProfile = (entityId: number) => {
+  const toggleProfile = (entityId: number) => {
     let profileList = [...selectedProfiles];
     if (profileList.includes(entityId)) {
       profileList = profileList.filter((value: number) => value !== entityId);
@@ -75,18 +75,19 @@ const CollaboratorsList = () => {
     dispatch(setJamData<any>({ key: 'collaborators_ids', value: profileList}));
   };
 
-  if (!profiles) {
-    EntityManager.listProfiles().then((items: any) => {
-      setProfiles(items);
-    });
-  }
+  useEffect(() => {
+    (async () => {
+      if (!profiles) setProfiles(await EntityManager.listProfiles());
+    })();
+  });
+
 
   if (!profiles) return <SpinnerView />;
 
   const renderItem = (row: any) => (
     <TouchableOpacity 
       key={row.item.id}
-      onPress={() => toogleProfile(row.item.id)}
+      onPress={() => toggleProfile(row.item.id)}
     >
       <BoxView direction="row" align="center" justify="flex-start" style={Layout.listItem}>
         <IconView name="user" theme="tertiary" />

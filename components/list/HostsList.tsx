@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { View, TouchableOpacity } from "react-native";
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
@@ -17,18 +17,13 @@ const HostsList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const entityId = ScreenManager.getActiveScreen()?.entityId;
 
-  if (!entity) {
-    EntityManager.getJams({items_ids: [entityId]}).then((item: any) => {
-      setEntity(item);
-    });
-  }
-
-  if (entity && !profiles) {
-    EntityManager.getProfiles({items_ids: entity?.[0]?.jammers}).then((items: any) => {
-      setProfiles(items);
+  useEffect(() => {
+    (async () => {
+      if (!entity) setEntity(await EntityManager.getJams({items_ids: [entityId]}));
+      if (entity && !profiles) setProfiles(await EntityManager.getProfiles({items_ids: entity?.[0]?.jammers}));
       setIsLoaded(true);
-    });
-  }
+    })();
+  });
 
   if (!entity) return <SpinnerView />;
 

@@ -1,5 +1,5 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
@@ -77,13 +77,15 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, onAddButtonPres
     return output;
   }
 
-  if (!profileJams?.length && idArray?.length) {
-    EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
-      if (addButton === true) data.push({ id: "addItem" });
-      setProfileJams(data);
-      setIsLoaded(true);
-    });
-  }
+  useEffect(() => {
+    if (!profileJams?.length && idArray?.length) {
+      EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
+        if (addButton === true) data.push({ id: "addItem" });
+        setProfileJams(data);
+        setIsLoaded(true);
+      });
+    }
+  });
 
   if (!isLoaded) return <SpinnerView />;
 
