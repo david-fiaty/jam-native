@@ -66,6 +66,9 @@ https://docs.google.com/spreadsheets/d/1sodzaVigD26XOopcXfLRykl51wPM5pKecS0i1QED
 
 # Questions
   - What are the notification types a user can get
+  - What are the jam types a user can get
+  - How to display jams and projects with title
+  - Where are project list and project detail view
 
 # Todo 
 - Implement image cache : https://github.com/echowaves/expo-cached-image
