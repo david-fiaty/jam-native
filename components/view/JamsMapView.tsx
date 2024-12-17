@@ -17,13 +17,14 @@ const JamsMapView = ({ style, children }: BaseProps) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const getInitialRegion = () => {
+    let latitude = currentLocation?.coords?.latitude || Config.defaultLocation.latitude;
+    let longitude = currentLocation?.coords?.longitude || Config.defaultLocation.longitude;
+
     return {
-      latitude:
-        currentLocation?.coords?.latitude || Config.defaultLocation.latitude,
-      longitude:
-        currentLocation?.coords?.longitude || Config.defaultLocation.longitude,
-      latitudeDelta: 1,
-      longitudeDelta: 1,
+      latitude: latitude,
+      longitude: longitude,
+      latitudeDelta: 5,
+      longitudeDelta: 5,
     };
   };
 
