@@ -18,8 +18,10 @@ const JamsMapView = ({ style, children }: BaseProps) => {
 
   const getInitialRegion = () => {
     return {
-      latitude: currentLocation?.coords?.latitude || Config.defaultLocation.latitude,
-      longitude: currentLocation?.coords?.longitude || Config.defaultLocation.longitude,
+      latitude:
+        currentLocation?.coords?.latitude || Config.defaultLocation.latitude,
+      longitude:
+        currentLocation?.coords?.longitude || Config.defaultLocation.longitude,
       latitudeDelta: 1,
       longitudeDelta: 1,
     };
@@ -37,17 +39,23 @@ const JamsMapView = ({ style, children }: BaseProps) => {
     return {
       latitude: parseFloat(item?.geolocation_latitude),
       longitude: parseFloat(item?.geolocation_longitude),
-    }
+    };
   };
 
-  const renderMarker = (item: any) => (
-    <Marker
-      key={item.id}
-      title={getMarkerTitle(item)}
-      description={item?.caption}
-      coordinate={getMarkerCoordinate(item)}
-    />
-  );
+  const renderMarker = (item: any) => {
+    if (item?.geolocation_longitude && item?.geolocation_latitude) {
+      return (
+        <Marker
+          key={item.id}
+          title={getMarkerTitle(item)}
+          description={item?.caption}
+          coordinate={getMarkerCoordinate(item)}
+        />
+      );
+    }
+
+    return null;
+  };
 
   DeviceManager.getLocation().then((data: any) => {
     setCurrentLocation(data);
@@ -83,13 +91,7 @@ const JamsMapView = ({ style, children }: BaseProps) => {
             />
           )}
 
-          {jamsData?.map((item: any) => {
-            if (item?.geolocation_longitude && item?.geolocation_latitude) {
-              return renderMarker(item);
-            }
-
-            return null;
-          })}
+          {jamsData?.map((item: any) => renderMarker(item))}
         </RNMapView>
       </View>
     </TouchableWithoutFeedback>
