@@ -18,7 +18,7 @@ const JamsMapView = ({ style, children }: BaseProps) => {
 
   const getMarkerTitle = (item: any) => {
     if (!item?.title?.length) {
-      return item?.caption?.substring(0, 30) + "...";
+      return item?.caption?.substring(0, 45) + "...";
     }
 
     return item.title;
