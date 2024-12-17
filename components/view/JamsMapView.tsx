@@ -16,6 +16,15 @@ const JamsMapView = ({ style, children }: BaseProps) => {
   const [jamsData, setJamsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
+  const getInitialRegion = () => {
+    return {
+      latitude: currentLocation?.coords?.latitude || Config.defaultLocation.latitude,
+      longitude: currentLocation?.coords?.longitude || Config.defaultLocation.longitude,
+      latitudeDelta: 1,
+      longitudeDelta: 1,
+    };
+  };
+
   const getMarkerTitle = (item: any) => {
     if (!item?.title?.length) {
       return item?.caption?.substring(0, 45) + "...";
@@ -60,16 +69,7 @@ const JamsMapView = ({ style, children }: BaseProps) => {
         <RNMapView
           style={styles.map}
           provider="google"
-          initialRegion={{
-            latitude:
-              currentLocation?.coords?.latitude ||
-              Config.defaultLocation.latitude,
-            longitude:
-              currentLocation?.coords?.longitude ||
-              Config.defaultLocation.longitude,
-            latitudeDelta: 4,
-            longitudeDelta: 4,
-          }}
+          initialRegion={getInitialRegion()}
         >
           {currentLocation && (
             <Marker
