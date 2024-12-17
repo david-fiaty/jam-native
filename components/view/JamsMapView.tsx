@@ -16,10 +16,18 @@ const JamsMapView = ({ style, children }: BaseProps) => {
   const [jamsData, setJamsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
+  const getMarkerTitle = (item: any) => {
+    if (!item?.title?.length) {
+      return item?.caption?.substring(0, 30) + "...";
+    }
+
+    return item.title;
+  };
+
   const renderMarker = (item: any) => (
     <Marker
       key={item.id}
-      title={item?.title?.substring(0, 20) + "..."}
+      title={getMarkerTitle(item)}
       description={item?.caption}
       coordinate={{
         latitude: parseFloat(item?.geolocation_latitude),
@@ -27,7 +35,6 @@ const JamsMapView = ({ style, children }: BaseProps) => {
       }}
     />
   );
-
 
   DeviceManager.getLocation().then((data: any) => {
     setCurrentLocation(data);
@@ -41,7 +48,6 @@ const JamsMapView = ({ style, children }: BaseProps) => {
     })();
   });
 
-
   if (!isLoaded) return <SpinnerView />;
 
   return (
@@ -51,8 +57,12 @@ const JamsMapView = ({ style, children }: BaseProps) => {
           style={styles.map}
           provider="google"
           initialRegion={{
-            latitude: currentLocation?.coords?.latitude || Config.defaultLocation.latitude,
-            longitude: currentLocation?.coords?.longitude || Config.defaultLocation.longitude,
+            latitude:
+              currentLocation?.coords?.latitude ||
+              Config.defaultLocation.latitude,
+            longitude:
+              currentLocation?.coords?.longitude ||
+              Config.defaultLocation.longitude,
             latitudeDelta: 2,
             longitudeDelta: 2,
           }}
