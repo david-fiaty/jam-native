@@ -17,7 +17,6 @@ const SearchView = () => {
   const searchState = useSelector((state: any) => state.search);
   const [activeTab, setActiveTab] = useState<any>('all');
   const [searchData, setSearchData] = useState<any>({});
-  const [canSearch, setCanSearch] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const previousSearchValue = useRef();
 
