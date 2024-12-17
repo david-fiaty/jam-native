@@ -11,9 +11,10 @@ import TextView from "../view/TextView";
 
 type Props = {
   data?: any;
+  noResultMessage?: boolean,
 };
 
-const SearchJamsList = ({ data }: Props) => {
+const SearchJamsList = ({ data, noResultMessage }: Props) => {
   const numColumns = 3;
   const router = useRouter();
 
@@ -77,7 +78,7 @@ const SearchJamsList = ({ data }: Props) => {
         </View>
       )}
 
-      {!data?.length && (
+      {!data?.length && noResultMessage && (
         <View style={Layout.borderedListContainer}>
           <TextView>{i18n.t("No results found for this search.")}</TextView>
         </View>
