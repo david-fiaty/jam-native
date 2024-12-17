@@ -16,18 +16,38 @@ const JamsMapView = ({ style, children }: BaseProps) => {
   const [jamsData, setJamsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
+  const getInitialRegion = () => {
+    return {
+      latitude: currentLocation?.coords?.latitude || Config.defaultLocation.latitude,
+      longitude: currentLocation?.coords?.longitude || Config.defaultLocation.longitude,
+      latitudeDelta: 1,
+      longitudeDelta: 1,
+    };
+  };
+
+  const getMarkerTitle = (item: any) => {
+    if (!item?.title?.length) {
+      return item?.caption?.substring(0, 45) + "...";
+    }
+
+    return item.title;
+  };
+
+  const getMarkerCoordinate = (item: any) => {
+    return {
+      latitude: parseFloat(item?.geolocation_latitude),
+      longitude: parseFloat(item?.geolocation_longitude),
+    }
+  };
+
   const renderMarker = (item: any) => (
     <Marker
       key={item.id}
-      title={item?.caption?.substring(0, 20) + "..."}
+      title={getMarkerTitle(item)}
       description={item?.caption}
-      coordinate={{
-        latitude: parseFloat(item?.geolocation_latitude),
-        longitude: parseFloat(item?.geolocation_longitude),
-      }}
+      coordinate={getMarkerCoordinate(item)}
     />
   );
-
 
   DeviceManager.getLocation().then((data: any) => {
     setCurrentLocation(data);
@@ -49,12 +69,7 @@ const JamsMapView = ({ style, children }: BaseProps) => {
         <RNMapView
           style={styles.map}
           provider="google"
-          initialRegion={{
-            latitude: currentLocation?.coords?.latitude || Config.defaultLocation.latitude,
-            longitude: currentLocation?.coords?.longitude || Config.defaultLocation.longitude,
-            latitudeDelta: 2,
-            longitudeDelta: 2,
-          }}
+          initialRegion={getInitialRegion()}
         >
           {currentLocation && (
             <Marker
