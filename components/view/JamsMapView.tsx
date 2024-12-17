@@ -24,15 +24,19 @@ const JamsMapView = ({ style, children }: BaseProps) => {
     return item.title;
   };
 
+  const getMarkerCoordinate = (item: any) => {
+    return {
+      latitude: parseFloat(item?.geolocation_latitude),
+      longitude: parseFloat(item?.geolocation_longitude),
+    }
+  };
+
   const renderMarker = (item: any) => (
     <Marker
       key={item.id}
       title={getMarkerTitle(item)}
       description={item?.caption}
-      coordinate={{
-        latitude: parseFloat(item?.geolocation_latitude),
-        longitude: parseFloat(item?.geolocation_longitude),
-      }}
+      coordinate={getMarkerCoordinate(item)}
     />
   );
 
