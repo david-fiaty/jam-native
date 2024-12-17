@@ -40,14 +40,18 @@ const JamsMapView = ({ style, children }: BaseProps) => {
     }
   };
 
-  const renderMarker = (item: any) => (
-    <Marker
-      key={item.id}
-      title={getMarkerTitle(item)}
-      description={item?.caption}
-      coordinate={getMarkerCoordinate(item)}
-    />
-  );
+  const renderMarker = (item: any) => {
+    if (item?.geolocation_longitude && item?.geolocation_latitude) {
+      <Marker
+        key={item.id}
+        title={getMarkerTitle(item)}
+        description={item?.caption}
+        coordinate={getMarkerCoordinate(item)}
+      />
+    }
+
+    return null;
+  };
 
   DeviceManager.getLocation().then((data: any) => {
     setCurrentLocation(data);
@@ -83,13 +87,8 @@ const JamsMapView = ({ style, children }: BaseProps) => {
             />
           )}
 
-          {jamsData?.map((item: any) => {
-            if (item?.geolocation_longitude && item?.geolocation_latitude) {
-              return renderMarker(item);
-            }
-
-            return null;
-          })}
+          { jamsData?.map((item: any) => renderMarker(item)) }
+          
         </RNMapView>
       </View>
     </TouchableWithoutFeedback>
