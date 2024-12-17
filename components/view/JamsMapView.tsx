@@ -19,7 +19,7 @@ const JamsMapView = ({ style, children }: BaseProps) => {
   const renderMarker = (item: any) => (
     <Marker
       key={item.id}
-      title={item?.caption?.substring(0, 20) + "..."}
+      title={item?.title?.substring(0, 20) + "..."}
       description={item?.caption}
       coordinate={{
         latitude: parseFloat(item?.geolocation_latitude),
@@ -40,6 +40,7 @@ const JamsMapView = ({ style, children }: BaseProps) => {
       setIsLoaded(true);
     })();
   });
+
 
   if (!isLoaded) return <SpinnerView />;
 
