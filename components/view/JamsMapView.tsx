@@ -67,8 +67,8 @@ const JamsMapView = ({ style, children }: BaseProps) => {
             longitude:
               currentLocation?.coords?.longitude ||
               Config.defaultLocation.longitude,
-            latitudeDelta: 2,
-            longitudeDelta: 2,
+            latitudeDelta: 4,
+            longitudeDelta: 4,
           }}
         >
           {currentLocation && (
