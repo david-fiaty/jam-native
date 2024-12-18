@@ -66,7 +66,7 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, onAddButtonPres
         onPress={() =>
           router.push({
             pathname: "/jam",
-            params: { idArray: [row.item.id], title: title },
+            params: { idArray: [row.item.id], title: row.item.title },
           })
         }
       >
