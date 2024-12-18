@@ -50,7 +50,7 @@ const ProfileProjectsList = ({
           onPress={onAddButtonPress}
         />
       );
-    } else if (!uri?.length) {
+    } else if (uri) {
       output = (
         <NoImageView
           width={imageSize.width}
@@ -72,7 +72,7 @@ const ProfileProjectsList = ({
       );
     }
 
-    if (parseInt(row?.item?.id) > 0) {
+    if (row?.item?.id == "addItem") {
       output = (
         <TouchableOpacity
           key={row.item.id}
