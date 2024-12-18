@@ -52,14 +52,6 @@ const ProfileProjectsList = ({
       );
     } else if (uri) {
       output = (
-        <NoImageView
-          width={imageSize.width}
-          height={imageSize.height}
-          rounded={true}
-        />
-      );
-    } else {
-      output = (
         <View style={styles.item}>
           <ImageView
             uri={uri}
@@ -69,6 +61,14 @@ const ProfileProjectsList = ({
             style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
           />
         </View>
+      );
+    } else {
+      output = (
+        <NoImageView
+          width={imageSize.width}
+          height={imageSize.height}
+          rounded={true}
+        />
       );
     }
 
