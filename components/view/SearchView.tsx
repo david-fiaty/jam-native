@@ -61,7 +61,7 @@ const SearchView = () => {
       align="flex-start"
       justify="space-between"
       scroll={true}
-      style={[Layout.screenContent, styles.container]}
+      style={Layout.screenContent}
     >
       {/* Search filters */}
       <ListView
@@ -106,16 +106,11 @@ const SearchView = () => {
 };
 
 const styles = {
-  container: {
-    width: '100%',
-  },
   tabContainer: {
     backgroundColor: Colors.white,
-    width: '100%',
   },
   tabItem: {
-    paddingVertical: Layout.space.base,
-    paddingHorizontal: Layout.space.base,
+    padding: Layout.space.base,
     borderBottomWidth: 1,
     borderBottomColor: Colors.primary,
   },
