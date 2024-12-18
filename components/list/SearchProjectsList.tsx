@@ -67,9 +67,8 @@ const SearchProjectsList = ({ data }: Props) => {
   };
 
   useEffect(() => {
+    let projectImagesList: any = {};
     if (data?.length > 0) {
-      let projectImagesList: any = {};
-      
       data.map((item: any) => {
         EntityManager.getProjectImageUrl(item).then((value: any) => {
           if (value && !projectImages?.[item?.id])
@@ -77,9 +76,9 @@ const SearchProjectsList = ({ data }: Props) => {
             projectImagesList[item.id] = value;
         });
       });
-
-      setProjectImages(projectImagesList);
     }
+
+    setProjectImages(projectImagesList);
   });
 
   return (
