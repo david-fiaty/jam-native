@@ -13,10 +13,9 @@ import TextView from "../view/TextView";
 
 type Props = {
   data?: any,
-  noResultMessage?: boolean,
 };
 
-const SearchProjectsList = ({ data, noResultMessage }: Props) => {
+const SearchProjectsList = ({ data }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const [projectImages, addProjectImage] = useState<any>({});
@@ -93,7 +92,7 @@ const SearchProjectsList = ({ data, noResultMessage }: Props) => {
         </View>
       )}
 
-      {!data?.length && noResultMessage && (
+      {!data?.length && (
         <View style={Layout.borderedListContainer}>
           <TextView>{i18n.t("No results found for this search.")}</TextView>
         </View>

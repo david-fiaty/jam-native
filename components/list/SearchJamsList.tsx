@@ -10,11 +10,10 @@ import i18n from "@/translation/i18n";
 import TextView from "../view/TextView";
 
 type Props = {
-  data?: any;
-  noResultMessage?: boolean,
+  data?: any,
 };
 
-const SearchJamsList = ({ data, noResultMessage }: Props) => {
+const SearchJamsList = ({ data }: Props) => {
   const numColumns = 3;
   const router = useRouter();
 
@@ -78,7 +77,7 @@ const SearchJamsList = ({ data, noResultMessage }: Props) => {
         </View>
       )}
 
-      {!data?.length && noResultMessage && (
+      {!data?.length && (
         <View style={Layout.borderedListContainer}>
           <TextView>{i18n.t("No results found for this search.")}</TextView>
         </View>
