@@ -34,7 +34,7 @@ const ProfileProjectsList = ({
   const router = useRouter();
   const [profileProjects, setProfileProjects] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [projectImages, addProjectImage] = useState<any>({});
+  const [projectImages, setProjectImages] = useState<any>({});
 
   const renderItem = (row: any) => {
     let imageSize: any = MediaManager.getThumbnailSize();
@@ -95,22 +95,22 @@ const ProfileProjectsList = ({
     if (!profileProjects?.length && idArray?.length) {
       EntityManager.getProjects({ items_ids: idArray }).then((data: any) => {
         if (addButton === true) data.push({ id: "addItem" });
-
-        setProfileProjects(data);
         
         if (data?.length > 0) {
           data.map((item: any) => {
             EntityManager.getProjectImageUrl(item).then((value: any) => {
               if (value && !projectImages?.[item?.id])
-                addProjectImage({ ...projectImages, ...{ [item?.id]: value } });
+                setProjectImages({ ...projectImages, ...{ [item?.id]: value } });
             });
           });
         }
 
+        setProfileProjects(data);
+
         setIsLoaded(true);
       });
     }
-  });
+  }, [profileProjects, projectImages, idArray, addButton]);
 
   if (!isLoaded) return <SpinnerView />;
 
