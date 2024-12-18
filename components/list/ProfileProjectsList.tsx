@@ -96,21 +96,24 @@ const ProfileProjectsList = ({
       EntityManager.getProjects({ items_ids: idArray }).then((data: any) => {
         if (addButton === true) data.push({ id: "addItem" });
         
+        let projectImagesList: any = {};
         if (data?.length > 0) {
           data.map((item: any) => {
             EntityManager.getProjectImageUrl(item).then((value: any) => {
-              if (value && !projectImages?.[item?.id])
-                setProjectImages({ ...projectImages, ...{ [item?.id]: value } });
+              if (value && !projectImages?.[item?.id]) {
+                projectImagesList[item.id] = value;
+              }
             });
           });
         }
 
+        setProjectImages(projectImagesList);
         setProfileProjects(data);
 
         setIsLoaded(true);
       });
     }
-  }, [profileProjects, projectImages, idArray, addButton]);
+  });
 
   if (!isLoaded) return <SpinnerView />;
 
