@@ -97,6 +97,7 @@ const ProfileProjectsList = ({
         if (addButton === true) data.push({ id: "addItem" });
         
         let projectImagesList: any = {};
+        
         if (data?.length > 0) {
           data.map((item: any) => {
             EntityManager.getProjectImageUrl(item).then((value: any) => {
