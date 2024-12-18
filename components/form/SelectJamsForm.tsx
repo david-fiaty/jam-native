@@ -115,7 +115,7 @@ const toggleItemsForm = () => {
   useEffect(() => {
     (async () => {
       if (!profileData?.length) setProfileData(await UserManager.getProfileData());
-      if (profileData && !profileJams?.length) setProfileJams(EntityManager.getJams({ items_ids: idArray }));
+      if (profileData && !profileJams?.length) setProfileJams(await EntityManager.getJams({ items_ids: idArray }));
       setIsLoaded(true);
     })();
   });
