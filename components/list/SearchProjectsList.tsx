@@ -54,7 +54,7 @@ const SearchProjectsList = ({ data }: Props) => {
           onPress={() =>
             router.push({
               pathname: "/project",
-              params: { idArray: [row.item.id], title: title },
+              params: { idArray: [row.item.id], title: row.item.title },
             })
           }
         >
