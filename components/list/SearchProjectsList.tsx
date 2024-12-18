@@ -25,7 +25,7 @@ const SearchProjectsList = ({ data }: Props) => {
     let output: any = null;
     let uri: string = projectImages?.[row?.item?.id];
 
-    if (!uri) {
+    if (!uri?.length) {
       output = (
         <NoImageView
           width={imageSize.width}
