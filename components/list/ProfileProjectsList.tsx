@@ -50,7 +50,7 @@ const ProfileProjectsList = ({
           onPress={onAddButtonPress}
         />
       );
-    } else if (!uri) {
+    } else if (!uri?.length) {
       output = (
         <NoImageView
           width={imageSize.width}
@@ -96,6 +96,8 @@ const ProfileProjectsList = ({
       EntityManager.getProjects({ items_ids: idArray }).then((data: any) => {
         if (addButton === true) data.push({ id: "addItem" });
 
+        setProfileProjects(data);
+        
         if (data?.length > 0) {
           data.map((item: any) => {
             EntityManager.getProjectImageUrl(item).then((value: any) => {
@@ -105,7 +107,6 @@ const ProfileProjectsList = ({
           });
         }
 
-        setProfileProjects(data);
         setIsLoaded(true);
       });
     }
