@@ -17,7 +17,7 @@ const MoreJamView = () => {
 
   useEffect(() => {
     (async () => {
-      if (!entity) setEntity(EntityManager.getJams({items_ids: [entityId]}));
+      if (!entity) setEntity(await EntityManager.getJams({items_ids: [entityId]}));
     })();
   });
 

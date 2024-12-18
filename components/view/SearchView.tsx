@@ -29,8 +29,8 @@ const SearchView = () => {
     const tabStyle: any = row.item.id == activeTab ? styles.activeTab : {};
 
     return (
-      <TouchableOpacity onPress={() => toggleTab(row)}>
-        <View style={styles.tabItem}>
+      <TouchableOpacity onPress={() => toggleTab(row)} style={styles.tabItem}>
+        <View>
           <TextView style={tabStyle}>{row.item.label}</TextView>
         </View>
       </TouchableOpacity>
