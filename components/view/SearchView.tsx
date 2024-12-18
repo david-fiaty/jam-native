@@ -14,8 +14,9 @@ import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "./SpinnerView";
 
 const SearchView = () => {
+  const defaultTab = ''
   const searchState = useSelector((state: any) => state.search);
-  const [activeTab, setActiveTab] = useState<any>('all');
+  const [activeTab, setActiveTab] = useState<any>(null);
   const [searchData, setSearchData] = useState<any>({});
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const previousSearchValue = useRef();
@@ -37,6 +38,8 @@ const SearchView = () => {
   };
 
   useEffect(() => {
+    if (!activeTab) setActiveTab(StaticData.searchTabs[0].id);
+
     (async () => {
       if (!searchState.value?.length) {
         setSearchData(await SearchManager.getData());
