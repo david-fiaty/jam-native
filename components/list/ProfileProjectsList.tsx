@@ -34,7 +34,7 @@ const ProfileProjectsList = ({
   const router = useRouter();
   const [profileProjects, setProfileProjects] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [projectImages, addProjectImage] = useState<any>({});
+  const [projectImages, setProjectImages] = useState<any>({});
 
   const renderItem = (row: any) => {
     let imageSize: any = MediaManager.getThumbnailSize();
@@ -50,15 +50,7 @@ const ProfileProjectsList = ({
           onPress={onAddButtonPress}
         />
       );
-    } else if (!uri) {
-      output = (
-        <NoImageView
-          width={imageSize.width}
-          height={imageSize.height}
-          rounded={true}
-        />
-      );
-    } else {
+    } else if (uri) {
       output = (
         <View style={styles.item}>
           <ImageView
@@ -70,9 +62,17 @@ const ProfileProjectsList = ({
           />
         </View>
       );
+    } else {
+      output = (
+        <NoImageView
+          width={imageSize.width}
+          height={imageSize.height}
+          rounded={true}
+        />
+      );
     }
 
-    if (parseInt(row?.item?.id) > 0) {
+    if (row?.item?.id == "addItem") {
       output = (
         <TouchableOpacity
           key={row.item.id}
@@ -95,21 +95,22 @@ const ProfileProjectsList = ({
     if (!profileProjects?.length && idArray?.length) {
       EntityManager.getProjects({ items_ids: idArray }).then((data: any) => {
         if (addButton === true) data.push({ id: "addItem" });
-
+        
         if (data?.length > 0) {
           data.map((item: any) => {
             EntityManager.getProjectImageUrl(item).then((value: any) => {
               if (value && !projectImages?.[item?.id])
-                addProjectImage({ ...projectImages, ...{ [item?.id]: value } });
+                setProjectImages({ ...projectImages, ...{ [item?.id]: value } });
             });
           });
         }
 
         setProfileProjects(data);
+
         setIsLoaded(true);
       });
     }
-  });
+  }, [profileProjects, projectImages, idArray, addButton]);
 
   if (!isLoaded) return <SpinnerView />;
 
