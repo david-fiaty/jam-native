@@ -100,9 +100,7 @@ const ProfileProjectsList = ({
         if (data?.length > 0) {
           data.map((item: any) => {
             EntityManager.getProjectImageUrl(item).then((value: any) => {
-              if (value && !projectImages?.[item?.id]) {
-                projectImagesList[item.id] = value;
-              }
+              if (value && !projectImages?.[item?.id]) projectImagesList[item.id] = value;
             });
           });
         }
