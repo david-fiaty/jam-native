@@ -9,10 +9,9 @@ import i18n from "@/translation/i18n";
 
 type Props = {
   data?: any,
-  noResultMessage?: boolean,
 };
 
-const SearchProfilesList = ({ data, noResultMessage }: Props) => {
+const SearchProfilesList = ({ data }: Props) => {
   const router = useRouter();
 
   const renderItem = (row: any) => (
@@ -41,7 +40,7 @@ const SearchProfilesList = ({ data, noResultMessage }: Props) => {
         </View>
       )}
 
-      {!data?.length && noResultMessage && (
+      {!data?.length && (
         <View style={Layout.borderedListContainer}>
           <TextView>{i18n.t("No results found for this search.")}</TextView>
         </View>
