@@ -13,11 +13,6 @@ const StaticData = {
   ],
   searchTabs: [
     {
-      id: 'all',
-      label: i18n.t('All'),
-      numColumns: 2,
-    },
-    {
       id: 'call',
       label: i18n.t('Calls'),
       numColumns: 2,

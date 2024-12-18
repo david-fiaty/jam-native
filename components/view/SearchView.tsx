@@ -17,7 +17,6 @@ const SearchView = () => {
   const searchState = useSelector((state: any) => state.search);
   const [activeTab, setActiveTab] = useState<any>('all');
   const [searchData, setSearchData] = useState<any>({});
-  const [canSearch, setCanSearch] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const previousSearchValue = useRef();
 
@@ -70,32 +69,32 @@ const SearchView = () => {
       />
 
       {/* Search jams */}
-      {['all', 'jam'].includes(activeTab) && 
+      {['jam'].includes(activeTab) && 
         <SearchJamsList data={searchData?.jam} />
       }
 
       {/* Search calls */}
-      {['all', 'call'].includes(activeTab) && 
+      {['call'].includes(activeTab) && 
         <SearchJamsList data={searchData?.call} />
       }
 
       {/* Search jammers */}
-      {['all', 'jammer'].includes(activeTab) && 
+      {['jammer'].includes(activeTab) && 
         <SearchProfilesList data={searchData?.jammer} />
       }
 
       {/* Search projects */}
-      {['all', 'project'].includes(activeTab) && 
+      {['project'].includes(activeTab) && 
         <SearchProjectsList data={searchData?.project} />
       }
 
       {/* Search events */}
-      {['all', 'event'].includes(activeTab) && 
+      {['event'].includes(activeTab) && 
         <SearchJamsList data={searchData?.event} />
       }
 
       {/* Search venues */}
-      {['all', 'venue'].includes(activeTab) && 
+      {['venue'].includes(activeTab) && 
         <SearchProfilesList data={searchData?.venue} />
       }
 
