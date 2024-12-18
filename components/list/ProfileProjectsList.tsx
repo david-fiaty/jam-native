@@ -96,12 +96,14 @@ const ProfileProjectsList = ({
       EntityManager.getProjects({ items_ids: idArray }).then((data: any) => {
         if (addButton === true) data.push({ id: "addItem" });
 
-        data.map((item: any) => {
-          EntityManager.getProjectImageUrl(item).then((value: any) => {
-            if (value && !projectImages?.[item?.id])
-              addProjectImage({ ...projectImages, ...{ [item?.id]: value } });
+        if (data?.length > 0) {
+          data.map((item: any) => {
+            EntityManager.getProjectImageUrl(item).then((value: any) => {
+              if (value && !projectImages?.[item?.id])
+                addProjectImage({ ...projectImages, ...{ [item?.id]: value } });
+            });
           });
-        });
+        }
 
         setProfileProjects(data);
         setIsLoaded(true);
