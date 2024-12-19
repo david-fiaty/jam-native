@@ -5,6 +5,7 @@ import { BaseProps } from '@/constants/Types';
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
 import JamsList from '../list/JamsList';
+import i18n from "@/translation/i18n";
 
 type Props = BaseProps & {
   idArray?: any,
@@ -13,11 +14,12 @@ type Props = BaseProps & {
 
 const JamScreen = ({ idArray, title }: Props) => {
   const router = useRouter();
+  const screenTitle = title?.length ? title : i18n.t('No title available');
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={false} style={[Layout.screenContent, styles.container]}>
       <BackButton
-        title={title}
+        title={screenTitle}
         onPress={() => router.back()}
       />
       <BoxView style={Layout.mainContent}>
