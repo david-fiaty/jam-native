@@ -26,10 +26,12 @@ const AddProjectForm = () => {
 
   const deleteJam = (row: any) => {
     let selectedJams: any = [...projectData.jams_ids];
-    let index: number = selectedJams.find((id: number) => id == row.item.id);
+    let index: number = selectedJams.findIndex((id: number) => id == row.item.id);
 
-    console.log(index);
-    //updateField("jams_ids", value);
+    if (index !== -1) delete selectedJams[index]; 
+    selectedJams = selectedJams.filter((n: any) => n);
+
+    updateField("jams_ids", selectedJams);
   };
 
   const updateField = (key: string, value: any) => {
