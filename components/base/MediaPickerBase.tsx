@@ -125,8 +125,6 @@ const styles = StyleSheet.create({
   },
   selectedPreview: {
     opacity: 0.7,
-    borderWidth: 1,
-    borderColor: Colors.primary,
   },
   deleteMedia: {
     position: 'absolute',
