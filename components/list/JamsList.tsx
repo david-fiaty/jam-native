@@ -36,7 +36,7 @@ const JamsList = ({idArray, showSpinner}: Props) => {
         data={jamsData}
         initialNumToRender={jamsData?.length}
         contentContainerStyle={Layout.listContainer}
-        renderItem={(row: any) => <ListItem row={row} />}
+        renderItem={(row: any) => <ListItem row={row} sectorsData={sectorsData} />}
         keyExtractor={(item: any, index: number) => index.toString()}
       />
     </BoxView>
