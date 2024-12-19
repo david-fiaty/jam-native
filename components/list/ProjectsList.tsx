@@ -20,8 +20,8 @@ const ProjectsList = ({idArray, showSpinner}: Props) => {
 
   useEffect(() => {
     (async () => {
-      if (!projectsData?.length && idArray?.length) setProjectsData(await EntityManager.getJams({items_ids: idArray}));
-      if (!projectsData?.length && !idArray?.length) setProjectsData(await EntityManager.listJams());
+      if (!projectsData?.length && idArray?.length) setProjectsData(await EntityManager.getProjects({items_ids: idArray}));
+      if (!projectsData?.length && !idArray?.length) setProjectsData(await EntityManager.listProjects());
       setIsLoaded(true);
     })();
   });
