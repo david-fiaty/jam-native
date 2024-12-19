@@ -16,12 +16,14 @@ type Props = BaseProps & {
 
 const ProjectsList = ({idArray, showSpinner}: Props) => {
   const [projectsData, setProjectsData] = useState<any>([]);
+  const [sectorsData, setSectorsData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
-      if (!projectsData?.length && idArray?.length) setProjectsData(await EntityManager.getJams({items_ids: idArray}));
-      if (!projectsData?.length && !idArray?.length) setProjectsData(await EntityManager.listJams());
+      if (!sectorsData?.length) setSectorsData(await EntityManager.getSectors());
+      if (!projectsData?.length && idArray?.length) setProjectsData(await EntityManager.getProjects({items_ids: idArray}));
+      if (!projectsData?.length && !idArray?.length) setProjectsData(await EntityManager.listProjects());
       setIsLoaded(true);
     })();
   });
@@ -34,7 +36,7 @@ const ProjectsList = ({idArray, showSpinner}: Props) => {
         data={projectsData}
         initialNumToRender={projectsData?.length}
         contentContainerStyle={Layout.listContainer}
-        renderItem={(row: any) => <ListItem row={row} />}
+        renderItem={(row: any) => <ListItem row={row} sectorsData={sectorsData} />}
         keyExtractor={(item: any, index: number) => index.toString()}
       />
     </BoxView>
