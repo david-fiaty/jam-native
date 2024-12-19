@@ -19,6 +19,7 @@ import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from "@/manager/EntityManager";
 import StaticData from "@/constants/StaticData";
+import ListItem from "./JamsList/ListItem";
 
 type Props = BaseProps & {
   idArray?: any,
@@ -238,7 +239,7 @@ const JamsList = ({idArray, showSpinner}: Props) => {
         initialNumToRender={jamsData?.length}
         initialScrollIndex={0}
         contentContainerStyle={Layout.listContainer}
-        renderItem={(row: any) => renderItem(row)}
+        renderItem={(row: any) => <ListItem row={row} />}
         keyExtractor={(item: any, index: number) => index.toString()}
       />
     </BoxView>
