@@ -3,6 +3,7 @@ import { BaseProps } from "@/constants/Types";
 import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
 import ListItemHeader from "./ListItemHeader";
+import ListItemImage from "./ListItemImage";
 
 type Props = BaseProps & {
   row?: any,
@@ -12,7 +13,7 @@ const ListItem = ({ row }: Props) => {
   return (
     <View style={styles.container}>
       <ListItemHeader row={row} />
-      {renderItemImages(row)}
+      <ListItemImage row={row} />
       {renderItemToolbar(row)}
       {renderItemTitle(row)}
       {renderItemDescription(row)}
