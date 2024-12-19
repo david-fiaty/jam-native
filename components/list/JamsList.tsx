@@ -235,7 +235,6 @@ const JamsList = ({idArray, showSpinner}: Props) => {
     <BoxView direction="column" style={Layout.screenContent}>
       <ListView
         data={jamsData}
-        //ref={jamsListRef}
         initialNumToRender={jamsData?.length}
         initialScrollIndex={0}
         contentContainerStyle={Layout.listContainer}
