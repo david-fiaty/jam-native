@@ -30,6 +30,7 @@ const AddProjectForm = () => {
     );
   };
 
+  // Todo - Fix delete project jam
   const deleteJam = (row: any) => {
     let selectedJams: any = [...projectData.jams];
     let index: number = selectedJams.findIndex((id: number) => id == row.item.id);
