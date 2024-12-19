@@ -28,8 +28,8 @@ const toggleItemsForm = () => {
   const projectData = useSelector((state: any) => state.projectForm);
   const numColumns = 3;
 
-  // Todo - Connect to profile jams
-  const idArray = [20, 46, 39, 49, 18, 33, 50];
+
+  const idArray = profileData?.profile_jams;
 
   const findItemIndex = (row: any) => selectedJams.findIndex((id: any) => id == row.item.id);
 
