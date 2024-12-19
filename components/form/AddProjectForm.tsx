@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { setJamData } from "@/redux/slices/JamFormSlice";
+import { setProjectData } from "@/redux/slices/ProjectFormSlice";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
@@ -24,20 +24,19 @@ const AddProjectForm = () => {
   const [profileId, setProfileId] = useState<number>(0);
   const projectData = useSelector((state: any) => state.projectForm);
 
+  const updateField = (key: string, value: any) => {
+    dispatch(
+      setProjectData<any>({ key: key, value: value, profile_id: profileId })
+    );
+  };
+
+  // Todo - Fix delete project jam
   const deleteJam = (row: any) => {
     let selectedJams: any = [...projectData.jams];
     let index: number = selectedJams.findIndex((id: number) => id == row.item.id);
-
     if (index !== -1) delete selectedJams[index]; 
     selectedJams = selectedJams.filter((n: any) => n);
-
     updateField("jams", selectedJams);
-  };
-
-  const updateField = (key: string, value: any) => {
-    dispatch(
-      setJamData<any>({ key: key, value: value, profile_id: profileId })
-    );
   };
 
   const submitForm = async () => {

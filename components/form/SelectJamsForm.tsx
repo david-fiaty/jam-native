@@ -61,10 +61,7 @@ const toggleItemsForm = () => {
     let imageSize: any = MediaManager.getThumbnailSize();
     let output: any = null;
     let isSelected: boolean = findItemIndex(row) !== -1;
-
-    let imageStyle = {
-      ...(isSelected ? styles.selectedItem : {}),
-    };
+    let imageStyle = (isSelected ? styles.selectedItem : {});
 
     if (!row?.item?.medias?.[0]?.url) {
       output = (
