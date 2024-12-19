@@ -237,7 +237,6 @@ const JamsList = ({idArray, showSpinner}: Props) => {
       <ListView
         data={jamsData}
         initialNumToRender={jamsData?.length}
-        initialScrollIndex={0}
         contentContainerStyle={Layout.listContainer}
         renderItem={(row: any) => <ListItem row={row} />}
         keyExtractor={(item: any, index: number) => index.toString()}
