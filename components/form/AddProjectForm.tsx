@@ -24,22 +24,20 @@ const AddProjectForm = () => {
   const [profileId, setProfileId] = useState<number>(0);
   const projectData = useSelector((state: any) => state.projectForm);
 
-  const deleteJam = (row: any) => {
-    let selectedJams: any = [...projectData.jams];
-    let index: number = selectedJams.findIndex((id: number) => id == row.item.id);
-
-    if (index !== -1) delete selectedJams[index]; 
-    selectedJams = selectedJams.filter((n: any) => n);
-
-    updateField("jams", selectedJams);
-  };
-
   const updateField = (key: string, value: any) => {
     dispatch(
       setJamData<any>({ key: key, value: value, profile_id: profileId })
     );
   };
 
+  const deleteJam = (row: any) => {
+    let selectedJams: any = [...projectData.jams];
+    let index: number = selectedJams.findIndex((id: number) => id == row.item.id);
+    if (index !== -1) delete selectedJams[index]; 
+    selectedJams = selectedJams.filter((n: any) => n);
+    updateField("jams", selectedJams);
+  };
+  
   const submitForm = async () => {
     /*
     EntityManager.addProject(projectData).then((success: boolean) => {
