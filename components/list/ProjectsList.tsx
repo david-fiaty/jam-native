@@ -7,7 +7,7 @@ import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
-import ListItem from "./JamsList/ListItem";
+import ListItem from "./ProjectsList/ListItem";
 
 type Props = BaseProps & {
   idArray?: any,
