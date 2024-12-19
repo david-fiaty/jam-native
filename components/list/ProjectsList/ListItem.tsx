@@ -7,12 +7,14 @@ import ListItemImage from "./ListItemImage";
 import ListItemToolbar from "./ListItemToolbar";
 import ListItemTitle from "./ListItemTitle";
 import ListItemDescription from "./ListItemDescription";
+import ListItemCollapsible from "./ListItemCollapsible";
 
 type Props = BaseProps & {
   row?: any,
+  sectorsData?: any,
 };
 
-const ListItem = ({ row }: Props) => {
+const ListItem = ({ row, sectorsData }: Props) => {
   return (
     <View style={styles.container}>
       <ListItemHeader row={row} />
@@ -20,6 +22,7 @@ const ListItem = ({ row }: Props) => {
       <ListItemToolbar row={row} />
       <ListItemTitle row={row} />
       <ListItemDescription row={row} />
+      <ListItemCollapsible row={row} sectorsData={sectorsData} />
     </View>
   );
 };
