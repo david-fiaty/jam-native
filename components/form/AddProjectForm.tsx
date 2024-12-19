@@ -97,7 +97,8 @@ const AddProjectForm = () => {
             <ProjectJamsList 
               idArray={projectData.jams_ids} 
               addButton={true} 
-              onAddButtonPress={() => ScreenManager.toggleModal("SelectJamsForm")}
+              onAddEvent={() => ScreenManager.toggleModal("SelectJamsForm")}
+              onDeleteEvent={() => console.log('delete')}
             />
           </BoxView>
         )}
