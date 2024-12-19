@@ -60,25 +60,6 @@ const ProjectJamsList = ({
 
   const deleteItem = (row: any) => {
     if (onDeleteEvent) onDeleteEvent(row);
-    /*
-    let projectJamsList: any = [...(projectData?.jams_ids || [])];
-    let index: number = projectJamsList?.findIndex(
-      (id: any) => id == row?.item?.id
-    );
-
-    if (index !== -1) delete projectJamsList[index];
-    projectJamsList = projectJamsList.filter((n: any) => n);
-
-    // Todo - Fix delete
-
-    dispatch(
-      setProjectData<any>({
-        key: "jams_ids",
-        value: projectJamsList,
-        profile_id: profileId,
-      })
-    );
-    */
   };
 
   const renderItem = (row: any) => {
