@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { setJamData } from "@/redux/slices/JamFormSlice";
+import { setProjectData } from "@/redux/slices/ProjectFormSlice";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
@@ -26,7 +26,7 @@ const AddProjectForm = () => {
 
   const updateField = (key: string, value: any) => {
     dispatch(
-      setJamData<any>({ key: key, value: value, profile_id: profileId })
+      setProjectData<any>({ key: key, value: value, profile_id: profileId })
     );
   };
 
@@ -37,7 +37,7 @@ const AddProjectForm = () => {
     selectedJams = selectedJams.filter((n: any) => n);
     updateField("jams", selectedJams);
   };
-  
+
   const submitForm = async () => {
     /*
     EntityManager.addProject(projectData).then((success: boolean) => {
