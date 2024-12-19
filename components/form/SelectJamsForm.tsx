@@ -34,7 +34,7 @@ const toggleItemsForm = () => {
   const findItemIndex = (row: any) => selectedJams.findIndex((id: any) => id == row.item.id);
 
   const toggleItem = (row: any) => {
-    let selectedJamsList = [...projectData?.jams_ids || []];
+    let selectedJamsList = [...projectData?.jams || []];
     let index: number = findItemIndex(row);
 
     if (index === -1) selectedJamsList.push(row.item.id);
@@ -43,7 +43,7 @@ const toggleItemsForm = () => {
     selectedJamsList = selectedJamsList.filter((n: any) => n);
     setSelectedJams(selectedJamsList);
     dispatch(setProjectData<any>({ 
-      key: 'jams_ids', 
+      key: 'jams', 
       value: selectedJamsList, 
       profile_id: profileId,
     }));
@@ -61,10 +61,7 @@ const toggleItemsForm = () => {
     let imageSize: any = MediaManager.getThumbnailSize();
     let output: any = null;
     let isSelected: boolean = findItemIndex(row) !== -1;
-
-    let imageStyle = {
-      ...(isSelected ? styles.selectedItem : {}),
-    };
+    let imageStyle = (isSelected ? styles.selectedItem : {});
 
     if (!row?.item?.medias?.[0]?.url) {
       output = (
