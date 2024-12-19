@@ -23,7 +23,8 @@ type Props = {
   idArray?: any;
   addButton?: boolean;
   allButton?: boolean;
-  onAddButtonPress?: () => void;
+  onAddEvent?: () => void;
+  onDeleteEvent?: (row: any) => void;
 };
 
 const ProjectJamsList = ({
@@ -31,7 +32,8 @@ const ProjectJamsList = ({
   idArray,
   addButton,
   allButton,
-  onAddButtonPress,
+  onAddEvent,
+  onDeleteEvent,
 }: Props) => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -42,7 +44,8 @@ const ProjectJamsList = ({
   const projectData = useSelector((state: any) => state.projectForm);
   const numColumns = 3;
 
-  const findItemIndex = (row: any) => selectedJams.findIndex((id: any) => id == row.item.id);
+  const findItemIndex = (row: any) =>
+    selectedJams.findIndex((id: any) => id == row.item.id);
 
   const toggleItem = (row: any) => {
     let selectedJamsList: any = [...selectedJams];
@@ -56,18 +59,26 @@ const ProjectJamsList = ({
   };
 
   const deleteItem = (row: any) => {
-    let projectJamsList: any = [...projectData?.jams_ids || []];
-    let index: number = projectJamsList?.findIndex((id: any) => id == row?.item?.id);
-    
+    if (onDeleteEvent) onDeleteEvent(row);
+    /*
+    let projectJamsList: any = [...(projectData?.jams_ids || [])];
+    let index: number = projectJamsList?.findIndex(
+      (id: any) => id == row?.item?.id
+    );
+
     if (index !== -1) delete projectJamsList[index];
     projectJamsList = projectJamsList.filter((n: any) => n);
 
     // Todo - Fix delete
-    dispatch(setProjectData<any>({ 
-      key: 'jams_ids', 
-      value: projectJamsList, 
-      profile_id: profileId,
-    }));
+
+    dispatch(
+      setProjectData<any>({
+        key: "jams_ids",
+        value: projectJamsList,
+        profile_id: profileId,
+      })
+    );
+    */
   };
 
   const renderItem = (row: any) => {
@@ -81,7 +92,7 @@ const ProjectJamsList = ({
           label={i18n.t("Add")}
           width={imageSize.width}
           height={imageSize.height}
-          onPress={onAddButtonPress}
+          onPress={onAddEvent}
         />
       );
     } else if (!row?.item?.medias?.[0]?.url) {
@@ -133,7 +144,7 @@ const ProjectJamsList = ({
         setProfileJams(data);
         setIsLoaded(true);
       });
-    }  
+    }
   });
 
   if (!isLoaded) return <SpinnerView />;
