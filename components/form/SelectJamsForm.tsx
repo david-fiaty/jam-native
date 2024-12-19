@@ -90,11 +90,8 @@ const toggleItemsForm = () => {
           />
 
           {isSelected && (
-            <TouchableOpacity
-              style={styles.deleteItem}
-              onPress={() => deleteItem(row)}
-            >
-              <IconView name="delete" theme="primary" size={8} />
+            <TouchableOpacity style={styles.checkItem}>
+              <IconView name="checkmark" theme="primary" size={8} />
             </TouchableOpacity>
           )}
         </View>
@@ -178,10 +175,8 @@ const styles = StyleSheet.create({
   },
   selectedItem: {
     opacity: 0.7,
-    borderWidth: 1,
-    borderColor: Colors.primary,
   },
-  deleteItem: {
+  checkItem: {
     position: "absolute",
     top: 5,
     right: 5,
