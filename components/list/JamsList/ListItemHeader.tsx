@@ -1,15 +1,30 @@
-import { StyleSheet, Text } from "react-native";
+import { useRouter } from "expo-router";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { BaseProps } from "@/constants/Types";
 import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
+import BoxView from "@/components/view/BoxView";
+import TextView from "@/components/view/TextView";
+import IconView from "@/components/view/IconView";
+import ScreenManager from "@/manager/ScreenManager";
+import UserManager from "@/manager/UserManager";
+import i18n from "@/translation/i18n";
+import JamStatusButton from "@/components/button/JamStatusButton";
 
-const ItemHeader = ({ style, children }: BaseProps) => {
+type Props = BaseProps & {
+  row?: any,
+};
+
+const ListItemHeader = ({ row }: Props) => {
+  const router = useRouter();
+  const isLoggedIn = UserManager.isLoggedIn();
+
   return (
     <BoxView
       direction="row"
       align="center"
       justify="space-between"
-      style={styles.listItemHeader}
+      style={styles.container}
     >
       <BoxView>
         <TouchableOpacity
@@ -43,10 +58,10 @@ const ItemHeader = ({ style, children }: BaseProps) => {
 };
 
 const styles = StyleSheet.create({
-  content: {
-    color: Colors.primary,
-    fontSize: Layout.fontSize.base,
+  container: {
+    paddingHorizontal: Layout.space.base,
+    paddingVertical: Layout.space.base/2,
   },
 });
 
-export default ItemHeader;
+export default ListItemHeader;
