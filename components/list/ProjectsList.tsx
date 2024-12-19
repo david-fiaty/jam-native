@@ -16,12 +16,10 @@ type Props = BaseProps & {
 
 const ProjectsList = ({idArray, showSpinner}: Props) => {
   const [projectsData, setProjectsData] = useState<any>([]);
-  const [sectorsData, setSectorsData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
-      if (!sectorsData?.length) setSectorsData(await EntityManager.getSectors());
       if (!projectsData?.length && idArray?.length) setProjectsData(await EntityManager.getJams({items_ids: idArray}));
       if (!projectsData?.length && !idArray?.length) setProjectsData(await EntityManager.listJams());
       setIsLoaded(true);
