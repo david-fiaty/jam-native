@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
-import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
 import { BaseProps } from "@/constants/Types";
 import BoxView from "../view/BoxView";
@@ -42,45 +40,5 @@ const ProjectsList = ({idArray, showSpinner}: Props) => {
     </BoxView>
   );
 };
-
-const styles = StyleSheet.create({
-  listItem: {
-    borderWidth: 1,
-    borderRadius: Layout.radius.round,
-    marginBottom: Layout.space.base * 1.5,
-    borderColor: Colors.primary,
-  },
-  listItemHeader: {
-    paddingHorizontal: Layout.space.base,
-    paddingVertical: Layout.space.base / 2,
-  },
-  listItemToolbar: {
-    padding: Layout.space.base,
-  },
-  listItemTitle: {
-    padding: Layout.space.base,
-    paddingBottom: 0,
-  },
-  listItemDescription: {
-    padding: Layout.space.base,
-  },
-  listItemCollapsible: {
-    padding: Layout.space.base,
-  },
-  listItemTitleText: {
-    fontSize: 16,
-  },
-  listItemDetails: {
-    gap: Layout.space.base,
-    width: "100%",
-  },
-  listItemDetail: {
-    width: "100%",
-    gap: 0,
-    backgroundColor: Colors.secondary,
-    padding: Layout.space.base / 6,
-    borderRadius: Layout.radius.round,
-  },
-});
 
 export default ProjectsList;
