@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import { StyleSheet, View, TouchableOpacity, FlatList } from "react-native";
+import { useState, useEffect } from "react";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
@@ -27,19 +27,10 @@ type Props = BaseProps & {
 
 const JamsList = ({idArray, showSpinner}: Props) => {
   const router = useRouter();
-  const jamsListRef = useRef<FlatList>(null);
   const [jamsData, setJamsData] = useState<any>([]);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const isLoggedIn = UserManager.isLoggedIn();
-
-  const scrollToIndex = (index: number) => {
-    try {
-      jamsListRef.current?.scrollToIndex({ index, animated: false });
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const renderItemHeader = (row: any) => (
     <BoxView
@@ -242,13 +233,6 @@ const JamsList = ({idArray, showSpinner}: Props) => {
 
   return (
     <BoxView direction="column" style={Layout.screenContent}>
-      {/*
-        Todo - Remove this test
-        <TouchableOpacity onPress={() => scrollToIndex(5)}>
-          <TextView>Go to Item </TextView>
-        </TouchableOpacity>
-      */}
-
       <ListView
         data={jamsData}
         //ref={jamsListRef}
