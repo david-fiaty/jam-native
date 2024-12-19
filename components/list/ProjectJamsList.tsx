@@ -24,7 +24,7 @@ type Props = {
   addButton?: boolean;
   allButton?: boolean;
   onAddEvent?: () => void;
-  onDeleteEvent?: () => void;
+  onDeleteEvent?: (row: any) => void;
 };
 
 const ProjectJamsList = ({
@@ -59,7 +59,7 @@ const ProjectJamsList = ({
   };
 
   const deleteItem = (row: any) => {
-    if (onDeleteEvent) onDeleteEvent();
+    if (onDeleteEvent) onDeleteEvent(row);
     /*
     let projectJamsList: any = [...(projectData?.jams_ids || [])];
     let index: number = projectJamsList?.findIndex(
