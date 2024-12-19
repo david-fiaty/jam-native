@@ -25,13 +25,13 @@ const AddProjectForm = () => {
   const projectData = useSelector((state: any) => state.projectForm);
 
   const deleteJam = (row: any) => {
-    let selectedJams: any = [...projectData.jams_ids];
+    let selectedJams: any = [...projectData.jams];
     let index: number = selectedJams.findIndex((id: number) => id == row.item.id);
 
     if (index !== -1) delete selectedJams[index]; 
     selectedJams = selectedJams.filter((n: any) => n);
 
-    updateField("jams_ids", selectedJams);
+    updateField("jams", selectedJams);
   };
 
   const updateField = (key: string, value: any) => {
@@ -91,7 +91,7 @@ const AddProjectForm = () => {
 
         <DividerView />
 
-        {!projectData?.jams_ids?.length && (
+        {!projectData?.jams?.length && (
           <BoxView direction="column" align="center" justify="center">
             <TextView>{i18n.t("There are no Jams in this project")}</TextView>
             <AddItemButton
@@ -101,11 +101,11 @@ const AddProjectForm = () => {
           </BoxView>
         )}
 
-        {projectData?.jams_ids?.length && (
+        {projectData?.jams?.length && (
           <BoxView direction="column" align="flex-start" justify="flex-start">
             <TextView style={styles.title}>{i18n.t("Selected Jams")}</TextView>
             <ProjectJamsList 
-              idArray={projectData.jams_ids} 
+              idArray={projectData.jams} 
               addButton={true} 
               onAddEvent={() => ScreenManager.toggleModal("SelectJamsForm")}
               onDeleteEvent={(row) => deleteJam(row)}
