@@ -24,6 +24,14 @@ const AddProjectForm = () => {
   const [profileId, setProfileId] = useState<number>(0);
   const projectData = useSelector((state: any) => state.projectForm);
 
+  const deleteJam = (row: any) => {
+    let selectedJams: any = [...projectData.jams_ids];
+    let index: number = selectedJams.find((id: number) => id == row.item.id);
+
+    console.log(index);
+    //updateField("jams_ids", value);
+  };
+
   const updateField = (key: string, value: any) => {
     dispatch(
       setJamData<any>({ key: key, value: value, profile_id: profileId })
@@ -98,7 +106,7 @@ const AddProjectForm = () => {
               idArray={projectData.jams_ids} 
               addButton={true} 
               onAddEvent={() => ScreenManager.toggleModal("SelectJamsForm")}
-              onDeleteEvent={(row) => console.log(row.item.id)}
+              onDeleteEvent={(row) => deleteJam(row)}
             />
           </BoxView>
         )}
