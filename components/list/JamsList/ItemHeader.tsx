@@ -1,13 +1,44 @@
-import { StyleSheet, Text } from 'react-native';
-import { BaseProps } from '@/constants/Types';
-import { Colors } from '@/constants/Colors';
-import { Layout } from '@/constants/Layout';
+import { StyleSheet, Text } from "react-native";
+import { BaseProps } from "@/constants/Types";
+import { Colors } from "@/constants/Colors";
+import { Layout } from "@/constants/Layout";
 
-const ItemHeader = ({style, children}: BaseProps) => {
+const ItemHeader = ({ style, children }: BaseProps) => {
   return (
-    <Text style={[styles.content, style]}>
-      {children}
-    </Text>
+    <BoxView
+      direction="row"
+      align="center"
+      justify="space-between"
+      style={styles.listItemHeader}
+    >
+      <BoxView>
+        <TouchableOpacity
+          onPress={() =>
+            isLoggedIn
+              ? ScreenManager.toggleModal("HostsList", row?.item?.id)
+              : router.push("/login")
+          }
+        >
+          <TextView>
+            @{i18n.t("host")} +{parseInt(row?.item?.collaborators?.length)}
+          </TextView>
+        </TouchableOpacity>
+      </BoxView>
+      <BoxView>
+        <JamStatusButton active={row?.item?.is_active} />
+      </BoxView>
+      <BoxView>
+        <IconView
+          name="actions"
+          theme="clear"
+          onPress={() =>
+            isLoggedIn
+              ? ScreenManager.toggleModal("MoreJamView", row?.item?.id)
+              : router.push("/login")
+          }
+        />
+      </BoxView>
+    </BoxView>
   );
 };
 
