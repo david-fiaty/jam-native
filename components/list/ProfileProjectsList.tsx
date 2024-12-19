@@ -94,7 +94,7 @@ const ProfileProjectsList = ({
         onPress={() =>
           router.push({
             pathname: "/project",
-            params: { idArray: [row.item.id], title: row.item.title },
+            params: { idArray: [row.item.id], title: row.item.name },
           })
         }
       >
