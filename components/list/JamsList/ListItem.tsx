@@ -5,6 +5,8 @@ import { Layout } from "@/constants/Layout";
 import ListItemHeader from "./ListItemHeader";
 import ListItemImage from "./ListItemImage";
 import ListItemToolbar from "./ListItemToolbar";
+import ListItemTitle from "./ListItemTitle";
+import ListItemDescription from "./ListItemDescription";
 
 type Props = BaseProps & {
   row?: any,
@@ -16,9 +18,9 @@ const ListItem = ({ row }: Props) => {
       <ListItemHeader row={row} />
       <ListItemImage row={row} />
       <ListItemToolbar row={row} />
+      <ListItemTitle row={row} />
+      <ListItemDescription row={row} />
       
-      {renderItemTitle(row)}
-      {renderItemDescription(row)}
       {renderItemCollapsible(row)}
     </View>
   );
