@@ -244,6 +244,8 @@ const ProjectsList = ({idArray, showSpinner}: Props) => {
 
   if (!isLoaded && showSpinner) return <SpinnerView />;
 
+  //console.log(idArray);
+
   return (
     <BoxView direction="column" style={Layout.screenContent}>
       <ListView
