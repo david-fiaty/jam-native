@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import { StyleSheet, View, TouchableOpacity, FlatList } from "react-native";
+import { useState, useEffect } from "react";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
@@ -27,19 +27,10 @@ type Props = BaseProps & {
 
 const ProjectsList = ({idArray, showSpinner}: Props) => {
   const router = useRouter();
-  const jamsListRef = useRef<FlatList>(null);
-  const [jamsData, setJamsData] = useState<any>([]);
+  const [projectsData, setProjectsData] = useState<any>([]);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const isLoggedIn = UserManager.isLoggedIn();
-
-  const scrollToIndex = (index: number) => {
-    try {
-      jamsListRef.current?.scrollToIndex({ index, animated: false });
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const renderItemHeader = (row: any) => (
     <BoxView
@@ -232,13 +223,13 @@ const ProjectsList = ({idArray, showSpinner}: Props) => {
   const loadData = () => {
     if (!idArray?.length) {
       EntityManager.listJams().then((data: any) => {
-        setJamsData(data);
+        setProjectsData(data);
         setIsLoaded(true);
       });
     }
     else {
       EntityManager.getJams({items_ids: idArray}).then((data: any) => {
-        setJamsData(data);
+        setProjectsData(data);
         setIsLoaded(true);
       });
     }
@@ -247,25 +238,19 @@ const ProjectsList = ({idArray, showSpinner}: Props) => {
   useEffect(() => {
     (async () => {
       if (!sectorsData?.length) setSectorsData(await EntityManager.getSectors());
-      if (!jamsData?.length) loadData();
+      if (!projectsData?.length) loadData();
     })();
   });
 
   if (!isLoaded && showSpinner) return <SpinnerView />;
 
+  //console.log(idArray);
+
   return (
     <BoxView direction="column" style={Layout.screenContent}>
-      {/*
-        Todo - Remove this test
-        <TouchableOpacity onPress={() => scrollToIndex(5)}>
-          <TextView>Go to Item </TextView>
-        </TouchableOpacity>
-      */}
-
       <ListView
-        data={jamsData}
-        //ref={jamsListRef}
-        initialNumToRender={jamsData?.length}
+        data={projectsData}
+        initialNumToRender={projectsData?.length}
         initialScrollIndex={0}
         contentContainerStyle={Layout.listContainer}
         renderItem={(row: any) => renderItem(row)}

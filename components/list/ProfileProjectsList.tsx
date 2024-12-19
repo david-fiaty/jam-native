@@ -88,6 +88,20 @@ const ProfileProjectsList = ({
       );
     }
 
+    if (parseInt(row?.item?.id) > 0) {
+      output = <TouchableOpacity
+        key={row.item.id}
+        onPress={() =>
+          router.push({
+            pathname: "/project",
+            params: { idArray: [row.item.id], title: row.item.title },
+          })
+        }
+      >
+        {output}
+      </TouchableOpacity>
+    }
+
     return output;
   };
 
