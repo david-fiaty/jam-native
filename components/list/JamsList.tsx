@@ -272,10 +272,6 @@ const styles = StyleSheet.create({
   listItemTitleText: {
     fontSize: 16,
   },
-  listItemImage: {
-    height: 300,
-    backgroundColor: Colors.secondary,
-  },
   listItemDetails: {
     gap: Layout.space.base,
     width: "100%",
