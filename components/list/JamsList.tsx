@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { useRouter } from "expo-router";
+import { StyleSheet } from "react-native";
 import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
 import { BaseProps } from "@/constants/Types";
 import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
-import UserManager from "@/manager/UserManager";
 import EntityManager from "@/manager/EntityManager";
 import ListItem from "./JamsList/ListItem";
 
@@ -17,11 +15,9 @@ type Props = BaseProps & {
 };
 
 const JamsList = ({idArray, showSpinner}: Props) => {
-  const router = useRouter();
   const [jamsData, setJamsData] = useState<any>([]);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const isLoggedIn = UserManager.isLoggedIn();
 
   useEffect(() => {
     (async () => {
@@ -40,7 +36,7 @@ const JamsList = ({idArray, showSpinner}: Props) => {
         data={jamsData}
         initialNumToRender={jamsData?.length}
         contentContainerStyle={Layout.listContainer}
-        renderItem={(row: any) => <ListItem row={row} />}
+        renderItem={(row: any) => <ListItem row={row} sectorsData={sectorsData} />}
         keyExtractor={(item: any, index: number) => index.toString()}
       />
     </BoxView>
