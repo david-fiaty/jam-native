@@ -15,15 +15,15 @@ type Props = BaseProps & {
 };
 
 const ProjectsList = ({idArray, showSpinner}: Props) => {
-  const [jamsData, setJamsData] = useState<any>([]);
+  const [projectsData, setProjectsData] = useState<any>([]);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
       if (!sectorsData?.length) setSectorsData(await EntityManager.getSectors());
-      if (!jamsData?.length && idArray?.length) setJamsData(await EntityManager.getJams({items_ids: idArray}));
-      if (!jamsData?.length && !idArray?.length) setJamsData(await EntityManager.listJams());
+      if (!projectsData?.length && idArray?.length) setProjectsData(await EntityManager.getJams({items_ids: idArray}));
+      if (!projectsData?.length && !idArray?.length) setProjectsData(await EntityManager.listJams());
       setIsLoaded(true);
     })();
   });
@@ -33,8 +33,8 @@ const ProjectsList = ({idArray, showSpinner}: Props) => {
   return (
     <BoxView direction="column" style={Layout.screenContent}>
       <ListView
-        data={jamsData}
-        initialNumToRender={jamsData?.length}
+        data={projectsData}
+        initialNumToRender={projectsData?.length}
         contentContainerStyle={Layout.listContainer}
         renderItem={(row: any) => <ListItem row={row} />}
         keyExtractor={(item: any, index: number) => index.toString()}
