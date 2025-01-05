@@ -21,26 +21,18 @@ const SectorsList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const updateSelection = (itemId: any, subItemId: any) => {
-    //let pair = [item.id, subItem.id];
-    //let found = selectedIds.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
-    let idArray: any = [...selectedIds];
+    let idArray: any[] = [...selectedIds];
+    let itemIndex: number = idArray.findIndex((value: any) => value == itemId);
+    let subItemIndex: number = idArray.findIndex((value: any) => value == subItemId);
 
-    console.log(itemId, subItemId);
-/*
-    if (!found) {
-      sectorsList.push(pair);
-      setSelectedIds(sectorsList);
-    }
-    else {
-      let index = selectedIds.findIndex((item: any) => JSON.stringify(item) === JSON.stringify(pair));
-      if (index !== -1) {
-        delete sectorsList[index];
-        sectorsList = sectorsList.filter((item: any) => item);
-        setSelectedIds(sectorsList);
-      } 
-    }
+    if (itemIndex === -1) idArray.push(itemId)
+    else delete idArray[itemIndex]
 
-    */
+    if (subItemIndex === -1) idArray.push(subItemId)
+      else delete idArray[subItemIndex]
+  
+
+    setSelectedIds(idArray.filter((o: any) => o));
   };
 
   const renderSubItem = (item: any, subItem: any) => {
@@ -95,6 +87,8 @@ const SectorsList = () => {
   });
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(selectedIds);
 
   return (
     <BoxView
