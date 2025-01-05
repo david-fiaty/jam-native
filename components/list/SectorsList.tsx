@@ -36,15 +36,16 @@ const SectorsList = () => {
       delete selection[subItemIndex];
     }
 
-    // Remove empty
+    // Remove parents without sub selection
+    let itemChildIds: any = item?.sub_sectors?.map((o: any) => o?.id);
+    let deleteItem: boolean = !selection.some((id: any) => itemChildIds.includes(id));
     selection = selection.filter((o: any) => o);
 
-    // Remove parents without sub selection
-    let itemChildIds: any = item?.sub_sectors?.map((o: any) => o.id);
+    if (deleteItem) {
+      let index: number = selection.findIndex((id: any) => id == item.id);
 
-    let deleteItem: boolean = !selection.some((id: any) => itemChildIds.includes(id));
-
-    console.log(deleteItem);
+      console.log(index);
+    }
     //console.log(selection);
 
     // Update state
