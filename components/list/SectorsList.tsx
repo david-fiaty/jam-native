@@ -25,11 +25,20 @@ const SectorsList = () => {
     let itemIndex: number = selection.findIndex((id: any) => id == item.id);
     let subItemIndex: number = selection.findIndex((id: any) => id == subItem.id);
 
+    // Update ID pairs
     if (itemIndex === -1 && subItemIndex === -1) {
       selection.push(itemIndex, subItemIndex);
     }
     else if (itemIndex !== -1 && subItemIndex === -1) {
       selection.push(subItemIndex);
+    }
+    else if (itemIndex !== -1 && subItemIndex !== -1) {
+      delete selection[subItemIndex];
+    }
+
+    // Remove parents without children
+    for (const subItemId in item?.sub_sectors || []) {
+
     }
 
 
