@@ -109,6 +109,7 @@ const ProfileForm = () => {
 
         <DividerView theme="secondary" />
         <SectorsField
+          slice="profileForm"
           label={<TextView>{i18n.t("Industries")}</TextView>}
           onPressEvent={() => ScreenManager.toggleModal("SectorsList")}
         />

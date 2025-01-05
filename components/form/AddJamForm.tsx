@@ -159,6 +159,7 @@ const AddJamForm = () => {
 
       <DividerView />
       <SectorsField
+        slice="jamForm"
         label={<TextView>{i18n.t('Add industries')}</TextView>}
         onPressEvent={() => ScreenManager.toggleModal('SectorsList')}
       />
