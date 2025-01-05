@@ -4,38 +4,51 @@
 POST http://0.0.0.0:8000/api/v1/jams/
 Content-Type: application/json
 
-{	"title": "test title",
+{
+    "type": "call",
+    "title": "test title",
     "caption": "jam name",
+    "link": "https://google.fr",
+
 	"upload_medias" : [],
-    "profile_id": 4318,
-    "callaborators_ids" : [1, 4318],
-    "period": {"start_datetime":"2018-11-20T15:58:44-06:00", "end_datetime":"2018-11-20T15:58:44-06:01" },
     "sectors_ids": [13, 25],
+
 	"location_type": "online_physical",
-    "geolocation_latitude": "9",
-    "geolocation_longitude": "2",
     "geographical_scope": "specific",
     "scope_countries_codes": ["ng"],
-    "type": "call",
+    "geolocation_latitude": "9",
+    "geolocation_longitude": "2",
+
+    "profile_id": 4318,
+    "callaborators_ids": [1, 4318],
+    "period": {"start_datetime":"2018-11-20T15:58:44-06:00", "end_datetime":"2018-11-20T15:58:44-06:01" },
     "projects": [1, 2]
 }
 
 ###  Update Jam
-PUT http://0.0.0.0:8000/api/v1/jams/1/
+PUT http://0.0.0.0:8000/api/v1/jams/78/
 Content-Type: application/json
 
-{	"caption": "jam name",
-	"upload_medias" : [],
-    "profile_id": 1,
-    "callaborators_ids" : [8],
-    "period": {"start_datetime":"2018-11-20T15:57:44-06:00", "end_datetime":"2018-11-20T15:58:44-06:01" },
-    "sectors_ids": [],
-	"location_type": "online_physical",
-    "geolocation_latitude": 89.2,
-    "geolocation_longitude": 189.2,
-    "geographical_scope": "specific",
-    "scope_countries_codes": ["gh", "fr"],
+{
     "type": "call",
+    "title": "test title bis",
+    "caption": "jam name",
+    "link": "https://google.fr",
+
+	"upload_medias" : [],
+    "sectors_ids": [13, 25],
+
+	"location_type": "online_physical",
+    "geographical_scope": "specific",
+    
+    "geolocation_latitude": "9",
+    "geolocation_longitude": "2",
+    "scope_countries_codes": ["ng"],
+    "profile_id": 4318,
+    "callaborators_ids" : [1, 4318],
+    "period": {"start_datetime":"2018-11-20T15:58:44-06:00", "end_datetime":"2018-11-20T15:58:44-06:01" },
+    "projects": [1, 2],
+
     "remove_medias_ids": [],
     "remove_collaborators_ids": [],
     "remove_sectors_ids": [],
@@ -112,38 +125,55 @@ GET http://0.0.0.0:8000/api/v1/profiles/1/jams/
 Content-Type: application/json
 #Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5NDE0MDEyLCJpYXQiOjE3Mjg1NTAwMTIsImp0aSI6Ijc0ZGY2MTRjZThhODRjZTA4N2JlODY1MjkyZTFjYmI3IiwidXNlcl9pZCI6MX0.wpA4K1tSQu6ev63WMd_t7iKE3F3zihZxyzqEkR5t6bc
 
+### Delete jams
+DELETE http://0.0.0.0:8000/api/v1/jams/
+Content-Type: application/json
+
+{
+    "profile_id": 1,
+    "items_ids": [1]
+}
 
 ##### PROJECT #####
 
 ###  Post Project
+# /!\ ask Ghislain to set up upload_project_picture /!\
 POST http://0.0.0.0:8000/api/v1/projects/
 Content-Type: application/json
 
 {
     "name": "Project Name",
 	"description": "Project Name",
-	"profile_id": 1,
+    "upload_project_picture": null,
     "jams_ids": [1, 2],
     "sectors_ids": [1, 3],
     "scope_countries_codes" : ["gh", "tg"],
+	
+    "profile_id": 1,
+
     "privacy_status": "public",
     "period": {"start_datetime":"2018-11-20T15:58:44-06:00", "end_datetime":"2018-11-20T15:58:44-06:01" }
 }
 
 ###  Update Project
+# /!\ ask Ghislain to set up upload_project_picture /!\
 PUT http://0.0.0.0:8000/api/v1/projects/1/
 Content-Type: application/json
 
 {
     "name": "Project Name",
 	"description": "Project Name",
-	"profile_id": 1,
+    "upload_project_picture": null,
     "jams_ids": [1, 2],
-    "sectors_ids": [1, 2],
-    "scope_countries_codes" : ["gh"],
-    "remove_jams_ids": [3, 23],
+    "sectors_ids": [1, 3],
+    "scope_countries_codes" : ["gh", "tg"],
+	
+    "profile_id": 1,
+
     "privacy_status": "public",
-    "period": {"start_datetime":"2018-11-20T15:56:44-06:00", "end_datetime":"2018-11-20T15:58:44-06:01" }
+    "period": {"start_datetime":"2018-11-20T15:58:44-06:00", "end_datetime":"2018-11-20T15:58:44-06:01" },
+
+    "remove_jams_ids": [1, 8]
 }
 
 ### Get list of all projects
@@ -228,6 +258,15 @@ GET http://0.0.0.0:8000/api/v1/profiles/1/projects/
 Content-Type: application/json
 #Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5NDE0MDEyLCJpYXQiOjE3Mjg1NTAwMTIsImp0aSI6Ijc0ZGY2MTRjZThhODRjZTA4N2JlODY1MjkyZTFjYmI3IiwidXNlcl9pZCI6MX0.wpA4K1tSQu6ev63WMd_t7iKE3F3zihZxyzqEkR5t6bc
 
+### Delete projects
+DELETE http://0.0.0.0:8000/api/v1/projects/
+Content-Type: application/json
+
+{
+    "profile_id": 1,
+    "items_ids": [1, 2]
+}
+
 ##### COMMENT #####
 
 ### Update specific comment
@@ -247,7 +286,7 @@ GET http://0.0.0.0:8000/api/v1/profiles/?items_ids=1,2
 Content-Type: application/json
 
 ### Get specific profile
-GET http://0.0.0.0:8000/api/v1/profiles/1/
+GET http://0.0.0.0:8000/api/v1/profiles/4329/
 Content-Type: application/json
 
 ### Create new profile
@@ -256,11 +295,141 @@ Content-Type: application/json
 
 {}
 
-### Update specific profile
-PUT http://0.0.0.0:8000/api/v1/profiles/1/
+### Update specific profile (PERSONAL type)
+# /!\ first_name and last_name are required /!\
+# /!\ possible values for the field experience_in_field: less_than_1_year | 1_to_3_years | 3_to_5_years | 5_to_10_years | more_than_10_years /!\
+# /!\ ask Ghislain to set up upload_profile_picture, and upload_other_docs /!\
+PUT http://0.0.0.0:8000/api/v1/profiles/4341/
 Content-Type: application/json
 
-{"profile_name":"abc", "sectors_ids": [1, 12], "scope_country_code": "tg", "geolocation_latitude": "9.8080", "geolocation_longitude": "2.80", "profile_type":"venue", "profile_venue":{"venue_name":"Hello ab"}}
+{
+    "profile_name":"abcd",
+    "profile_description": "description here",
+    "upload_profile_picture": null,
+    "upload_other_docs": null,
+    "sectors_ids": [1, 12],
+    "scope_country_code": "tg",
+    "region": 2,
+    "town_or_locality": 2,
+    "other_town_or_locality": "test",
+    "address": "près de l'église",
+    "geolocation_latitude": "9.80801",
+    "geolocation_longitude": "2.80",
+    "email": "test@test.com",
+    "whatsapp_number": "+22824242424",
+    "phone_number": "+22824242424",
+    "website_link": "https://www.google.fr",
+    "instagram_id": "1234",
+    "facebook_link": "https://wwww.facebook.com",
+    "linkedin_link": "https://wwww.linkedin.com",
+    "profile_type": "personal",
+    "profile_personal": {
+        "first_name": "Hello abcdefgh",
+        "last_name": "ABC",
+        "experience_in_field": "less_than_1_year",
+        "main_creative_works": [1, 2],
+        "other_creative_works": "creating arts works",
+        "main_cultural_activities": [7, 8, 9],       
+        "other_cultural_activities": "promoting culture"
+    }
+}
+
+### Update specific profile (ORGANIZATION type)
+# /!\ organization_name is required /!\
+# /!\ ask Ghislain to set up upload_profile_picture, and upload_other_docs /!\
+PUT http://0.0.0.0:8000/api/v1/profiles/4341/
+Content-Type: application/json
+
+{
+    "profile_name":"abcd",
+    "profile_description": "description here",
+    "upload_profile_picture": null,
+    "upload_other_docs": null,
+    "sectors_ids": [1, 12],
+    "scope_country_code": "tg",
+    "region": 2,
+    "town_or_locality": 2,
+    "other_town_or_locality": "test",
+    "address": "près de l'église",
+    "geolocation_latitude": "9.80801",
+    "geolocation_longitude": "2.80",
+    "email": "test@test.com",
+    "whatsapp_number": "+22824242424",
+    "phone_number": "+22824242424",
+    "website_link": "https://www.google.fr",
+    "instagram_id": "1234",
+    "facebook_link": "https://wwww.facebook.com",
+    "linkedin_link": "https://wwww.linkedin.com",
+    "profile_type": "organization",
+    "profile_organization": {
+        "organization_name": "Hello abc",
+        "organization_types": [1, 2],
+        "other_organization_types": "abc",
+        "creation_year": 1999,
+        "type_of_management": "good one",
+        "main_cultural_activities": [7, 8, 9],       
+        "other_cultural_activities": "promoting culture"
+    }
+}
+
+### Update specific profile (VENUE type)
+# /!\ venue_name is required /!\
+# /!\ possible values for the field indoor_or_outdoor: indoor | outdoor | indoor_outdoor /!\
+# /!\ ask Ghislain to set up upload_indoor_images, upload_outdoor_images, and upload_technical_sheet /!\
+# /!\ ask Ghislain to set up upload_profile_picture, and upload_other_docs /!\
+PUT http://0.0.0.0:8000/api/v1/profiles/4341/
+Content-Type: application/json
+
+{
+    "profile_name":"abcd",
+    "profile_description": "description here",
+    "upload_profile_picture": null,
+    "upload_other_docs": null,
+    "sectors_ids": [1, 12],
+    "scope_country_code": "tg",
+    "region": 2,
+    "town_or_locality": 2,
+    "other_town_or_locality": "test",
+    "address": "près de l'église",
+    "geolocation_latitude": "9.80801",
+    "geolocation_longitude": "2.80",
+    "email": "test@test.com",
+    "whatsapp_number": "+22824242424",
+    "phone_number": "+22824242424",
+    "website_link": "https://www.google.fr",
+    "instagram_id": "1234",
+    "facebook_link": "https://wwww.facebook.com",
+    "linkedin_link": "https://wwww.linkedin.com",
+    "profile_type": "venue",
+    "profile_venue": {
+        "venue_name": "Hello abc",
+        "venue_types": [1, 2],
+        "other_venue_types": "dance",
+        "creation_year": 1999,
+        "opening_days": "monday, tuesday, wednesday",
+        "is_open_24h": true,
+        "is_by_appointment_only": false,
+        "opening_hour_weekdays": "12:20",
+        "closing_hour_weekdays": "12:40",
+        "opening_hour_weekend": "11:00",
+        "closing_hour_weekend": "12:00",
+        "type_of_management": "test",
+        "organization_name_that_manages_venue": "abcd",
+        "manager_name": "Michael",
+        "manager_role": "manager",
+        "manager_phone": "1234",
+        "manager_email": "test@test.com",
+        "main_cultural_activities": [2, 3],
+        "other_cultural_activities": "movie screening",
+        "indoor_or_outdoor": "indoor_outdoor",
+        "upload_indoor_images": null,
+        "upload_outdoor_images": null,
+        "has_creation_space": true,
+        "has_diffusion_space": false,
+        "total_creation_or_rehearsal_rooms": 5,
+        "upload_technical_sheet": null
+    }
+}
 
 #{"profile_name":"test", "scope_country_code": "gh", "geolocation_latitude": "9,80", "geolocation_longitude": "2,80", "profile_type":"personal", "profile_personal":{"first_name":"Hello", "last_name":"World"}}
 
@@ -555,11 +724,25 @@ Content-Type: application/json
 ##### REGISTRATION AND LOGIN #####
 
 ### Registration
+# Check full fields available (see profile update above)
 POST http://0.0.0.0:8000/api/v1/register/
 Content-Type: application/json
 
-{"profile":{"sectors_ids":[1, 3], "profile_name":"1234", "scope_country_code": "gh", "geolocation_latitude": "9.80", "geolocation_longitude": "2.80", "profile_type":"personal", "profile_personal":{"first_name":"ABCD", "last_name":"DEF"}},
-"email":"abcdefghijklmnopqrstuvw@test.com", "password":"abcdef", "username":"abc", "session":"b9f2f805a3324c5eb23520132c3dede3"}
+{
+    "profile": {
+        "sectors_ids": [1, 3],
+        "profile_name": "1234",
+        "scope_country_code": "gh",
+        "geolocation_latitude": "9.80",
+        "geolocation_longitude": "2.80",
+        "profile_type": "venue",
+        "profile_venue": {"venue_name":"ABCD"}
+    },
+    "email": "aaaabcde@test.com",
+    "password": "abcdef",
+    "username": "abc",
+    "session": "b9f2f805a3324c5eb23520132c3dede3"
+}
 
 ###
 POST http://0.0.0.0:8000/api/v1/send-registration-verification/
