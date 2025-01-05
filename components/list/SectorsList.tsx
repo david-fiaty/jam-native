@@ -20,6 +20,9 @@ const SectorsList = () => {
   const [selectedIds, setSelectedIds] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formState: any = ScreenManager.getScreenFormState();
+
+
+  console.log(formState);
   
   const updateSelection = (item: any, subItem: any) => {
     let selection: any[] = [...selectedIds];
