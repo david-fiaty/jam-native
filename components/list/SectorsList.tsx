@@ -44,26 +44,6 @@ const SectorsList = () => {
 
     // Update state
     setSelectedIds(selection);
-
-
-    /*
-    let pair = [item.id, subItem.id];
-    let found = selectedIds.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
-    let sectorsList = [...selectedIds];
-
-    if (!found) {
-      sectorsList.push(pair);
-      setSelectedIds(sectorsList);
-    }
-    else {
-      let index = selectedIds.findIndex((item: any) => JSON.stringify(item) === JSON.stringify(pair));
-      if (index !== -1) {
-        delete sectorsList[index];
-        sectorsList = sectorsList.filter((item: any) => item);
-        setSelectedIds(sectorsList);
-      } 
-    }
-      */
   };
 
   const renderSubItem = (item: any, subItem: any) => {
