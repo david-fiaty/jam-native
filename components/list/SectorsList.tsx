@@ -46,7 +46,8 @@ const SectorsList = () => {
     }
 
     // Update selection state
-    setSelectedIds(selection.filter((o: any) => o));
+    selection = selection.filter((o: any) => o);
+    setSelectedIds(selection);
   };
 
   const renderSubItem = (item: any, subItem: any) => {
