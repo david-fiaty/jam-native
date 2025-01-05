@@ -19,10 +19,7 @@ const SectorsList = () => {
   const [sectorsData, setSectorsData] = useState<any>(null);
   const [selectedIds, setSelectedIds] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const activeScreen: any = ScreenManager.getActiveScreen();
-  const stateData = useSelector((state: any) => state[activeScreen.params.reducer]);
-  
-  console.log(stateData);
+  const formData = useSelector((state: any) => state[ScreenManager.getActiveScreen().params.reducer]);
   
   const updateSelection = (item: any, subItem: any) => {
     let selection: any[] = [...selectedIds];
