@@ -17,32 +17,46 @@ import CollapsibleView from "../view/CollapsibleView";
 const SectorsList = () => {
   const dispatch = useDispatch();
   const [sectorsData, setSectorsData] = useState<any>(null);
-  const [selectedIds, setSelectedIds] = useState<any>([]);
+  const [selectedSectors, setSelectedSectors] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const updateSelection = (itemId: any, subItemId: any) => {
-    let idArray: any[] = [...selectedIds];
-    let itemIndex: number = idArray.findIndex((value: any) => value == itemId);
-    let subItemIndex: number = idArray.findIndex((value: any) => value == subItemId);
+  const updateSelection = (item: any, subItem: any) => {
+    let selection: any[] = [...selectedSectors];
 
-    if (itemIndex === -1) idArray.push(itemId)
-    else delete idArray[itemIndex]
 
-    if (subItemIndex === -1) idArray.push(subItemId)
-      else delete idArray[subItemIndex]
-  
+    
+    //let itemIndex: number = idArray.findIndex((value: any) => value == itemId);
+    //let subItemIndex: number = idArray.findIndex((value: any) => value == subItemId);
 
-    setSelectedIds(idArray.filter((o: any) => o));
+
+    /*
+    let pair = [item.id, subItem.id];
+    let found = selectedSectors.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
+    let sectorsList = [...selectedSectors];
+
+    if (!found) {
+      sectorsList.push(pair);
+      setSelectedSectors(sectorsList);
+    }
+    else {
+      let index = selectedSectors.findIndex((item: any) => JSON.stringify(item) === JSON.stringify(pair));
+      if (index !== -1) {
+        delete sectorsList[index];
+        sectorsList = sectorsList.filter((item: any) => item);
+        setSelectedSectors(sectorsList);
+      } 
+    }
+      */
   };
 
   const renderSubItem = (item: any, subItem: any) => {
     let pair = [item.id, subItem.id];
-    let isSelected = selectedIds.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
+    let isSelected = selectedSectors.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
 
     return (
       <TouchableOpacity 
         key={subItem?.id}
-        onPress={() => updateSelection(item?.id, subItem?.id)} 
+        onPress={() => updateSelection(item, subItem)} 
       >
         <BoxView direction="row" align="center" justify="space-around">
           <IconView name="arrow" theme="clear" />
@@ -87,8 +101,6 @@ const SectorsList = () => {
   });
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(selectedIds);
 
   return (
     <BoxView
