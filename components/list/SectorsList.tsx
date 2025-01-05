@@ -19,7 +19,8 @@ const SectorsList = () => {
   const [sectorsData, setSectorsData] = useState<any>(null);
   const [selectedIds, setSelectedIds] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-
+  const formState: any = ScreenManager.getScreenFormState();
+  
   const updateSelection = (item: any, subItem: any) => {
     let selection: any[] = [...selectedIds];
     let itemIndex: number = selection.findIndex((id: any) => id == item.id);
@@ -45,7 +46,8 @@ const SectorsList = () => {
     }
 
     // Update selection state
-    setSelectedIds(selection.filter((o: any) => o));
+    selection = selection.filter((o: any) => o);
+    setSelectedIds(selection);
   };
 
   const renderSubItem = (item: any, subItem: any) => {

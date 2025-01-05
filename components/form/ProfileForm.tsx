@@ -110,7 +110,9 @@ const ProfileForm = () => {
         <DividerView theme="secondary" />
         <SectorsField
           label={<TextView>{i18n.t("Industries")}</TextView>}
-          onPressEvent={() => ScreenManager.toggleModal("SectorsList")}
+          onPressEvent={() => ScreenManager.toggleModal("SectorsList", {
+            reducer: 'profileForm',
+          })}
         />
 
         <DividerView theme="secondary" />

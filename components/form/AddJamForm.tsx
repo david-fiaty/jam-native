@@ -160,7 +160,9 @@ const AddJamForm = () => {
       <DividerView />
       <SectorsField
         label={<TextView>{i18n.t('Add industries')}</TextView>}
-        onPressEvent={() => ScreenManager.toggleModal('SectorsList')}
+        onPressEvent={() => ScreenManager.toggleModal('SectorsList', {
+          reducer: 'jamForm',
+        })}
       />
 
       <MediaPickerBase
