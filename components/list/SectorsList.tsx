@@ -3,6 +3,7 @@ import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
+import { BaseProps } from "@/constants/Types";
 import TextView from "../view/TextView";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
@@ -14,11 +15,16 @@ import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from "@/manager/EntityManager";
 import CollapsibleView from "../view/CollapsibleView";
 
-const SectorsList = () => {
+type Props = BaseProps & {
+  slice: string;
+};
+
+const SectorsList = ({ slice }: Props) => {
   const dispatch = useDispatch();
   const [sectorsData, setSectorsData] = useState<any>(null);
   const [selectedIds, setSelectedIds] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const stateData = useSelector((state: any) => state[slice]);
 
   const updateSelection = (item: any, subItem: any) => {
     let selection: any[] = [...selectedIds];
