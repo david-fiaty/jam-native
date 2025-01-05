@@ -18,7 +18,7 @@ class ScreenManager {
     };
   }
 
-  getActiveScreenId(): any {
+  getScreenEntityId(): any {
     return this.getActiveScreen()?.entityId;
   }
 

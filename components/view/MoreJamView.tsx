@@ -13,7 +13,7 @@ import EntityManager from '@/manager/EntityManager';
 
 const MoreJamView = () => {
   const [entity, setEntity] = useState<any>(null);
-  const entityId = ScreenManager.getActiveScreen()?.entityId;
+  const entityId = ScreenManagergetScreenEntityId();
 
   useEffect(() => {
     (async () => {
