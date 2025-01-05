@@ -22,9 +22,17 @@ class ScreenManager {
     return this.getActiveScreen()?.params?.entityId;
   }
 
+  getScreenFormState() {
+    let reducer: any = this.getActiveScreen().params.reducer;
+    let storeState: any = Store.getState(); 
+    
+    return storeState[reducer];
+  }
+
   getActiveScreen(): any {
     return Store.getState().screen.find(item => item.active === true);
   }
+  
 
   toggleModal(name: string, params?: any) {
     if (name != 'SearchView' && SearchManager.isExpanded()) {
