@@ -39,7 +39,7 @@ const SectorsList = () => {
     // Remove empty
     selection = selection.filter((o: any) => o);
 
-    // Remove parents without children
+    // Remove parents without sub selection
     console.log(selection);
 
     // Update state
