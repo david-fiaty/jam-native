@@ -162,6 +162,7 @@ const AddJamForm = () => {
         label={<TextView>{i18n.t('Add industries')}</TextView>}
         onPressEvent={() => ScreenManager.toggleModal('SectorsList', {
           reducer: 'jamForm',
+          field: 'sectors',
         })}
       />
 
