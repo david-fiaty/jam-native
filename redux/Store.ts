@@ -7,6 +7,7 @@ import AppReducer from './slices/AppSlice';
 import JamFormReducer from './slices/JamFormSlice';
 import ProjectFormReducer from './slices/ProjectFormSlice';
 import ProfileFormReducer from './slices/ProfileFormSlice';
+import SignupFormReducer from './slices/SignupFormSlice';
 
 const Store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ const Store = configureStore({
     jamForm: JamFormReducer, 
     projectForm: ProjectFormReducer, 
     profileForm: ProfileFormReducer,
+    signupForm: SignupFormReducer,
   },
   middleware: getDefaultMiddleware =>
     process.env.NODE_ENV === 'production' ? getDefaultMiddleware() : getDefaultMiddleware({
