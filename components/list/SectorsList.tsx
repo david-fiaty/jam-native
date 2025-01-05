@@ -22,9 +22,11 @@ const SectorsList = () => {
 
   const updateSelection = (item: any, subItem: any) => {
     let selection: any[] = [...selectedSectors];
+    let itemIndex: number = selection.findIndex((o: any) => o.id == item.id);
+    let subItemIndex: number = selection.findIndex((o: any) => o.id == subItem.id);
 
 
-    
+
     //let itemIndex: number = idArray.findIndex((value: any) => value == itemId);
     //let subItemIndex: number = idArray.findIndex((value: any) => value == subItemId);
 
