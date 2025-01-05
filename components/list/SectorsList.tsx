@@ -40,7 +40,10 @@ const SectorsList = () => {
     selection = selection.filter((o: any) => o);
 
     // Remove parents without sub selection
-    console.log(selection);
+    let itemChildIds: any = item?.sub_sectors?.map((o: any) => o.id);
+
+    console.log(itemChildIds);
+    //console.log(selection);
 
     // Update state
     setSelectedIds(selection);
