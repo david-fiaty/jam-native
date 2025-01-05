@@ -25,10 +25,9 @@ const SectorsList = () => {
     let itemIndex: number = selection.findIndex((id: any) => id == item.id);
     let subItemIndex: number = selection.findIndex((id: any) => id == subItem.id);
 
-
-
-    //let itemIndex: number = idArray.findIndex((value: any) => value == itemId);
-    //let subItemIndex: number = idArray.findIndex((value: any) => value == subItemId);
+    if (itemIndex === -1) {
+      selection.push(itemIndex, subItemIndex);
+    }
 
 
     /*
