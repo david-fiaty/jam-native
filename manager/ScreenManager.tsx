@@ -19,7 +19,7 @@ class ScreenManager {
   }
 
   getScreenEntityId(): any {
-    return this.getActiveScreen()?.entityId;
+    return this.getActiveScreen()?.params?.entityId;
   }
 
   getActiveScreen(): any {
