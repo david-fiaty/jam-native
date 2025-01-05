@@ -13,7 +13,7 @@ import EntityManager from '@/manager/EntityManager';
 const LikedJamAction = () => {
   const [entity, setEntity] = useState<any>(null);
   const [isLiked, setIsLiked] = useState<boolean>(false);
-  const entityId = ScreenManagergetScreenEntityId();
+  const entityId = ScreenManager.getScreenEntityId();
 
   const getTitle = () => {
     return (entity && isLiked) 

@@ -13,7 +13,7 @@ import EntityManager from '@/manager/EntityManager';
 const SavedJamAction = () => {
   const [entity, setEntity] = useState<any>(null);
   const [isSaved, setIsSaved] = useState<boolean>(false);
-  const entityId = ScreenManagergetScreenEntityId();
+  const entityId = ScreenManager.getScreenEntityId();
 
   const getTitle = () => { 
     return (entity && isSaved) 
