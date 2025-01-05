@@ -91,7 +91,6 @@ const AddJamForm = () => {
       />
 
       <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
-
       <ListView
         data={jamCategoriesData}
         numColumns={4}
