@@ -8,6 +8,8 @@ import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import NoImageView from "../view/NoImageView";
 import MediaManager from "@/manager/MediaManager";
+import i18n from "@/translation/i18n";
+import TextView from "../view/TextView";
 
 type Props = {
   data?: any,
@@ -16,70 +18,84 @@ type Props = {
 const SearchProjectsList = ({ data }: Props) => {
   const numColumns = 3;
   const router = useRouter();
-  const [projectImages, addProjectImage] = useState<any>({});
+  const [projectImages, setProjectImages] = useState<any>({});
 
   const renderItem = (row: any) => {
     let imageSize: any = MediaManager.getThumbnailSize();
     let output: any = null;
     let uri: string = projectImages?.[row?.item?.id];
 
-    if (!uri) {
-      output = <NoImageView 
-        width={imageSize.width} 
-        height={imageSize.height} 
-        rounded={true}
-      />;
-    }
-    else {
-      output = <View style={styles.item}>
-        <ImageView
-          uri={uri}
+    if (uri) {
+      output = (
+        <NoImageView
           width={imageSize.width}
           height={imageSize.height}
-          resizeMode="cover"
-          style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
+          rounded={true}
         />
-      </View>
+      );
+    } else {
+      output = (
+        <View style={styles.item}>
+          <ImageView
+            uri={uri}
+            width={imageSize.width}
+            height={imageSize.height}
+            resizeMode="cover"
+            style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
+          />
+        </View>
+      );
     }
 
     if (parseInt(row?.item?.id) > 0) {
-      output = <TouchableOpacity
-        key={row.item.id}
-        onPress={() =>
-          router.push({
-            pathname: "/project",
-            params: { idArray: [row.item.id], title: title },
-          })
-        }
-      >
-        {output}
-      </TouchableOpacity>
+      output = (
+        <TouchableOpacity
+          key={row.item.id}
+          onPress={() =>
+            router.push({
+              pathname: "/project",
+              params: { idArray: [row.item.id], title: row.item.title },
+            })
+          }
+        >
+          {output}
+        </TouchableOpacity>
+      );
     }
 
     return output;
-  }
+  };
 
   useEffect(() => {
-    if (data?.length > 0 ) {
+    if (data?.length > 0) {
       data.map((item: any) => {
         EntityManager.getProjectImageUrl(item).then((value: any) => {
-          if (value && !projectImages?.[item?.id]) addProjectImage({ ...projectImages, ...{[item?.id]: value} });
+          if (value && !projectImages?.[item?.id])
+            setProjectImages({ ...projectImages, ...{ [item?.id]: value } });
         });
-      });  
+      });
     }
   });
 
   return (
-    <View style={styles.container}>
+    <View>
       {data?.length > 0 && (
-        <ListView
-          data={data}
-          numColumns={numColumns}
-          contentContainerStyle={{ gap: Layout.space.base }}
-          columnWrapperStyle={{ gap: Layout.space.base }}
-          scrollEnabled={false}
-          renderItem={(row: any) => renderItem(row)}
-        />
+        <View style={styles.container}>
+          <ListView
+            data={data}
+            numColumns={numColumns}
+            contentContainerStyle={{ gap: Layout.space.base }}
+            columnWrapperStyle={{ gap: Layout.space.base }}
+            scrollEnabled={false}
+            renderItem={(row: any) => renderItem(row)}
+          />
+        </View>
+      )}
+
+      {!data?.length && (
+        <View style={Layout.borderedListContainer}>
+          <TextView>{i18n.t("No results found for this search.")}</TextView>
+        </View>
       )}
     </View>
   );

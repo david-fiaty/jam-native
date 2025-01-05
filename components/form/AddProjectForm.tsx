@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { setJamData } from "@/redux/slices/JamFormSlice";
+import { setProjectData } from "@/redux/slices/ProjectFormSlice";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
@@ -26,8 +26,17 @@ const AddProjectForm = () => {
 
   const updateField = (key: string, value: any) => {
     dispatch(
-      setJamData<any>({ key: key, value: value, profile_id: profileId })
+      setProjectData<any>({ key: key, value: value, profile_id: profileId })
     );
+  };
+
+  // Todo - Fix delete project jam
+  const deleteJam = (row: any) => {
+    let selectedJams: any = [...projectData.jams];
+    let index: number = selectedJams.findIndex((id: number) => id == row.item.id);
+    if (index !== -1) delete selectedJams[index]; 
+    selectedJams = selectedJams.filter((n: any) => n);
+    updateField("jams", selectedJams);
   };
 
   const submitForm = async () => {
@@ -81,7 +90,7 @@ const AddProjectForm = () => {
 
         <DividerView />
 
-        {!projectData?.jams_ids?.length && (
+        {!projectData?.jams?.length && (
           <BoxView direction="column" align="center" justify="center">
             <TextView>{i18n.t("There are no Jams in this project")}</TextView>
             <AddItemButton
@@ -91,13 +100,14 @@ const AddProjectForm = () => {
           </BoxView>
         )}
 
-        {projectData?.jams_ids?.length && (
+        {projectData?.jams?.length && (
           <BoxView direction="column" align="flex-start" justify="flex-start">
             <TextView style={styles.title}>{i18n.t("Selected Jams")}</TextView>
             <ProjectJamsList 
-              idArray={projectData.jams_ids} 
+              idArray={projectData.jams} 
               addButton={true} 
-              onAddButtonPress={() => ScreenManager.toggleModal("SelectJamsForm")}
+              onAddEvent={() => ScreenManager.toggleModal("SelectJamsForm")}
+              onDeleteEvent={(row) => deleteJam(row)}
             />
           </BoxView>
         )}

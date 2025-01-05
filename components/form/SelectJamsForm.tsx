@@ -28,13 +28,13 @@ const toggleItemsForm = () => {
   const projectData = useSelector((state: any) => state.projectForm);
   const numColumns = 3;
 
-  // Todo - Connect to profile jams
-  const idArray = [20, 46, 39, 49, 18, 33, 50];
+
+  const idArray = profileData?.profile_jams;
 
   const findItemIndex = (row: any) => selectedJams.findIndex((id: any) => id == row.item.id);
 
   const toggleItem = (row: any) => {
-    let selectedJamsList = [...projectData?.jams_ids || []];
+    let selectedJamsList = [...projectData?.jams || []];
     let index: number = findItemIndex(row);
 
     if (index === -1) selectedJamsList.push(row.item.id);
@@ -43,7 +43,7 @@ const toggleItemsForm = () => {
     selectedJamsList = selectedJamsList.filter((n: any) => n);
     setSelectedJams(selectedJamsList);
     dispatch(setProjectData<any>({ 
-      key: 'jams_ids', 
+      key: 'jams', 
       value: selectedJamsList, 
       profile_id: profileId,
     }));
@@ -61,10 +61,7 @@ const toggleItemsForm = () => {
     let imageSize: any = MediaManager.getThumbnailSize();
     let output: any = null;
     let isSelected: boolean = findItemIndex(row) !== -1;
-
-    let imageStyle = {
-      ...(isSelected ? styles.selectedItem : {}),
-    };
+    let imageStyle = (isSelected ? styles.selectedItem : {});
 
     if (!row?.item?.medias?.[0]?.url) {
       output = (
@@ -90,11 +87,8 @@ const toggleItemsForm = () => {
           />
 
           {isSelected && (
-            <TouchableOpacity
-              style={styles.deleteItem}
-              onPress={() => deleteItem(row)}
-            >
-              <IconView name="delete" theme="primary" size={8} />
+            <TouchableOpacity style={styles.checkItem}>
+              <IconView name="checkmark" theme="primary" size={8} />
             </TouchableOpacity>
           )}
         </View>
@@ -115,7 +109,7 @@ const toggleItemsForm = () => {
   useEffect(() => {
     (async () => {
       if (!profileData?.length) setProfileData(await UserManager.getProfileData());
-      if (profileData && !profileJams?.length) setProfileJams(EntityManager.getJams({ items_ids: idArray }));
+      if (profileData && !profileJams?.length) setProfileJams(await EntityManager.getJams({ items_ids: idArray }));
       setIsLoaded(true);
     })();
   });
@@ -178,10 +172,8 @@ const styles = StyleSheet.create({
   },
   selectedItem: {
     opacity: 0.7,
-    borderWidth: 1,
-    borderColor: Colors.primary,
   },
-  deleteItem: {
+  checkItem: {
     position: "absolute",
     top: 5,
     right: 5,

@@ -5,6 +5,7 @@ import TextView from "../view/TextView";
 import ListView from "../view/ListView";
 import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
+import i18n from "@/translation/i18n";
 
 type Props = {
   data?: any,
@@ -28,13 +29,21 @@ const SearchProfilesList = ({ data }: Props) => {
   );
 
   return (
-    <View style={styles.container}>
+    <View>
       {data?.length > 0 && (
-        <ListView
-          data={data}
-          renderItem={(row: any) => renderItem(row)}
-          scrollEnabled={false}
-        />
+        <View style={styles.container}>
+          <ListView
+            data={data}
+            renderItem={(row: any) => renderItem(row)}
+            scrollEnabled={false}
+          />
+        </View>
+      )}
+
+      {!data?.length && (
+        <View style={Layout.borderedListContainer}>
+          <TextView>{i18n.t("No results found for this search.")}</TextView>
+        </View>
       )}
     </View>
   );

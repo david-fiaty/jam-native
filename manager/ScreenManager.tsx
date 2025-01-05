@@ -1,8 +1,10 @@
 import { Layout } from '@/constants/Layout';
 import { setMessage } from '@/redux/slices/MessageSlice';
 import { setActiveScreen } from '@/redux/slices/ScreenSlice';
+import { toggleSearchField } from '@/redux/slices/SearchSlice';
 import Store from '@/redux/Store';
 import DeviceManager from './DeviceManager';
+import SearchManager from './SearchManager';
 
 class ScreenManager {
   messageTimeout?: any;
@@ -21,6 +23,10 @@ class ScreenManager {
   }
 
   toggleModal(name: string, entityId?: number) {
+    if (name != 'SearchView' && SearchManager.isExpanded()) {
+      Store.dispatch(toggleSearchField(false));
+    }
+  
     Store.dispatch(setActiveScreen({
       name: name,
       entityId: entityId,

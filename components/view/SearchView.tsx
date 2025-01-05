@@ -7,7 +7,6 @@ import BoxView from "./BoxView";
 import TextView from "./TextView";
 import ListView from "./ListView";
 import StaticData from "@/constants/StaticData";
-import EntityManager from "@/manager/EntityManager";
 import SearchJamsList from "../list/SearchJamsList";
 import SearchProfilesList from "../list/SearchProfilesList";
 import SearchProjectsList from "../list/SearchProjectsList";
@@ -15,10 +14,10 @@ import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "./SpinnerView";
 
 const SearchView = () => {
+  const defaultTab = ''
   const searchState = useSelector((state: any) => state.search);
-  const [activeTab, setActiveTab] = useState<any>('all');
+  const [activeTab, setActiveTab] = useState<any>(null);
   const [searchData, setSearchData] = useState<any>({});
-  const [canSearch, setCanSearch] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const previousSearchValue = useRef();
 
@@ -30,8 +29,8 @@ const SearchView = () => {
     const tabStyle: any = row.item.id == activeTab ? styles.activeTab : {};
 
     return (
-      <TouchableOpacity onPress={() => toggleTab(row)}>
-        <View style={styles.tabItem}>
+      <TouchableOpacity onPress={() => toggleTab(row)} style={styles.tabItem}>
+        <View>
           <TextView style={tabStyle}>{row.item.label}</TextView>
         </View>
       </TouchableOpacity>
@@ -39,6 +38,8 @@ const SearchView = () => {
   };
 
   useEffect(() => {
+    if (!activeTab) setActiveTab(StaticData.searchTabs[0].id);
+
     (async () => {
       if (!searchState.value?.length) {
         setSearchData(await SearchManager.getData());
@@ -71,32 +72,32 @@ const SearchView = () => {
       />
 
       {/* Search jams */}
-      {['all', 'jam'].includes(activeTab) && 
+      {['jam'].includes(activeTab) && 
         <SearchJamsList data={searchData?.jam} />
       }
 
       {/* Search calls */}
-      {['all', 'call'].includes(activeTab) && 
+      {['call'].includes(activeTab) && 
         <SearchJamsList data={searchData?.call} />
       }
 
       {/* Search jammers */}
-      {['all', 'jammer'].includes(activeTab) && 
+      {['jammer'].includes(activeTab) && 
         <SearchProfilesList data={searchData?.jammer} />
       }
 
       {/* Search projects */}
-      {['all', 'project'].includes(activeTab) && 
+      {['project'].includes(activeTab) && 
         <SearchProjectsList data={searchData?.project} />
       }
 
       {/* Search events */}
-      {['all', 'event'].includes(activeTab) && 
+      {['event'].includes(activeTab) && 
         <SearchJamsList data={searchData?.event} />
       }
 
       {/* Search venues */}
-      {['all', 'venue'].includes(activeTab) && 
+      {['venue'].includes(activeTab) && 
         <SearchProfilesList data={searchData?.venue} />
       }
 

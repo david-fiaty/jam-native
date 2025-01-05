@@ -1,4 +1,5 @@
 import EntityManager from "./EntityManager";
+import Store from '@/redux/Store';
 
 class SearchManager {
   data?: any;
@@ -58,6 +59,10 @@ class SearchManager {
       call: data.jams.filter((o: any) => o?.type == 'call'),
       event: data.jams.filter((o: any) => o?.type == 'event'),
     };
+  }
+
+  isExpanded() {
+    return Store.getState().search.expanded === true;
   }
 };
 
