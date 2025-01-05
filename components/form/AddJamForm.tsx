@@ -78,6 +78,8 @@ const AddJamForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
+  console.log('--->', jamData);
+
   return (
     <BoxView
       align="flex-start"
@@ -129,7 +131,7 @@ const AddJamForm = () => {
         onChangeValue={(value: any) =>
           updateField('period', {
             ...(jamData?.period || {}),
-            ...{ start_datetime: value },
+            ...{ start_datetime: value.toISOString() },
           })
         }
       />
@@ -140,7 +142,7 @@ const AddJamForm = () => {
         onChangeValue={(value: any) =>
           updateField('period', {
             ...(jamData?.period || {}),
-            ...{ end_datetime: value },
+            ...{ end_datetime: value.toISOString() },
           })
         }
       />
@@ -149,9 +151,9 @@ const AddJamForm = () => {
 
       <TextView>{i18n.t('Country')}</TextView>
       <CountryField
-        value={jamData?.scope_countries_codes}
+        value={jamData?.countries}
         onChangeValue={(option: any) =>
-          updateField('scope_countries_codes', [option.value])
+          updateField('countries', [option.value])
         }
       />
 
