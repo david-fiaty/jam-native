@@ -36,10 +36,15 @@ const SectorsList = () => {
       delete selection[subItemIndex];
     }
 
-    // Remove parents without children
-    for (const subItemId in item?.sub_sectors || []) {
+    // Remove empty
+    selection = selection.filter((o: any) => o);
 
-    }
+
+    // Remove parents without children
+    console.log(selection);
+
+    // Update state
+    setSelectedIds(selection);
 
 
     /*
