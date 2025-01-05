@@ -103,18 +103,20 @@ const AddJamForm = () => {
       />
 
       <DividerView />
+
+      <TextView>{i18n.t('Title')}</TextView>
       <InputTextField
-        placeholder={i18n.t('Title')}
         value={jamData?.title}
         onChangeText={(value: string) => updateField('title', value)}
       />
 
+      <TextView>{i18n.t('Description')}</TextView>
       <InputTextareaField
-        placeholder={i18n.t('Description')}
         value={jamData?.caption}
         onChangeText={(value: string) => updateField('caption', value)}
       />
 
+      <TextView>{i18n.t('Location type')}</TextView>
       <LocationTypeField
         value={jamData?.location_type}
         onChangeValue={(option: any) =>
@@ -122,9 +124,9 @@ const AddJamForm = () => {
         }
       />
 
+      <TextView>{i18n.t('Start date')}</TextView>
       <DatePickerField
         value={'start value'}
-        placeholder={i18n.t('Start date')}
         onChangeValue={(value: any) =>
           updateField('period', {
             ...(jamData?.period || {}),
@@ -133,9 +135,9 @@ const AddJamForm = () => {
         }
       />
 
+      <TextView>{i18n.t('End date')}</TextView>
       <DatePickerField
         value={"end value"}
-        placeholder={i18n.t('End date')}
         onChangeValue={(value: any) =>
           updateField('period', {
             ...(jamData?.period || {}),
@@ -146,6 +148,7 @@ const AddJamForm = () => {
 
       {/* <LocationPickerField /> */}
 
+      <TextView>{i18n.t('Country')}</TextView>
       <CountryField
         value={jamData?.scope_countries_codes}
         onChangeValue={(option: any) =>
