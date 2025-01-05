@@ -15,7 +15,7 @@ const JammersList = () => {
   const [profiles, setProfiles] = useState<any>(null);
   const [entity, setEntity] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const entityId = ScreenManager.getActiveScreen()?.entityId;
+  const entityId = ScreenManager.getScreenEntityId();
 
   useEffect(() => {
     (async () => {

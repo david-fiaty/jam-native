@@ -17,36 +17,42 @@ import CollapsibleView from "../view/CollapsibleView";
 const SectorsList = () => {
   const dispatch = useDispatch();
   const [sectorsData, setSectorsData] = useState<any>(null);
-  const [selectedSectors, setSelectedSectors] = useState<any>([]);
+  const [selectedIds, setSelectedIds] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const toggleSelection = (item: any, subItem: any) => {
-    let pair = [item.id, subItem.id];
-    let found = selectedSectors.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
-    let sectorsList = [...selectedSectors];
+  const updateSelection = (item: any, subItem: any) => {
+    let selection: any[] = [...selectedIds];
+    let itemIndex: number = selection.findIndex((id: any) => id == item.id);
+    let subItemIndex: number = selection.findIndex((id: any) => id == subItem.id);
 
-    if (!found) {
-      sectorsList.push(pair);
-      setSelectedSectors(sectorsList);
+    // Update ID pairs
+    if (itemIndex === -1 && subItemIndex === -1) {
+      selection.push(item.id, subItem.id);
     }
-    else {
-      let index = selectedSectors.findIndex((item: any) => JSON.stringify(item) === JSON.stringify(pair));
-      if (index !== -1) {
-        delete sectorsList[index];
-        sectorsList = sectorsList.filter((item: any) => item);
-        setSelectedSectors(sectorsList);
-      } 
+    else if (itemIndex !== -1 && subItemIndex === -1) {
+      selection.push(subItem.id);
     }
+    else if (itemIndex !== -1 && subItemIndex !== -1) {
+      delete selection[subItemIndex];
+    }
+
+    // Remove empty
+    selection = selection.filter((o: any) => o);
+
+    // Remove parents without sub selection
+    console.log(selection);
+
+    // Update state
+    setSelectedIds(selection);
   };
 
   const renderSubItem = (item: any, subItem: any) => {
-    let pair = [item.id, subItem.id];
-    let isSelected = selectedSectors.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
+    let isSelected = selectedIds.find((id: any) => id == subItem.id);
 
     return (
       <TouchableOpacity 
         key={subItem?.id}
-        onPress={() => toggleSelection(item, subItem)} 
+        onPress={() => updateSelection(item, subItem)} 
       >
         <BoxView direction="row" align="center" justify="space-around">
           <IconView name="arrow" theme="clear" />
