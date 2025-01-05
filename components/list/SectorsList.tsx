@@ -20,11 +20,13 @@ const SectorsList = () => {
   const [selectedSectors, setSelectedSectors] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const updateSelection = (item: any, subItem: any) => {
-    let pair = [item.id, subItem.id];
-    let found = selectedSectors.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
+  const updateSelection = (itemId: any, subItemId: any) => {
+    //let pair = [item.id, subItem.id];
+    //let found = selectedSectors.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
     let sectorsList = [...selectedSectors];
 
+    console.log(itemId, subItemId);
+/*
     if (!found) {
       sectorsList.push(pair);
       setSelectedSectors(sectorsList);
@@ -37,6 +39,8 @@ const SectorsList = () => {
         setSelectedSectors(sectorsList);
       } 
     }
+
+    */
   };
 
   const renderSubItem = (item: any, subItem: any) => {
@@ -46,7 +50,7 @@ const SectorsList = () => {
     return (
       <TouchableOpacity 
         key={subItem?.id}
-        onPress={() => updateSelection(item, subItem)} 
+        onPress={() => updateSelection(item?.id, subItem?.id)} 
       >
         <BoxView direction="row" align="center" justify="space-around">
           <IconView name="arrow" theme="clear" />
