@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
+import { setJamData } from "@/redux/slices/JamFormSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import TextView from "../view/TextView";
@@ -19,8 +20,7 @@ const SectorsList = () => {
   const [sectorsData, setSectorsData] = useState<any>(null);
   const [selectedIds, setSelectedIds] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const formState: any = ScreenManager.getScreenFormState();
-  
+
   const updateSelection = (item: any, subItem: any) => {
     let selection: any[] = [...selectedIds];
     let itemIndex: number = selection.findIndex((id: any) => id == item.id);
@@ -48,6 +48,8 @@ const SectorsList = () => {
     // Update selection state
     selection = selection.filter((o: any) => o);
     setSelectedIds(selection);
+    
+    dispatch(setJamData<any>({ key: 'sectors', value: selection}));
   };
 
   const renderSubItem = (item: any, subItem: any) => {
