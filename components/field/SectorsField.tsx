@@ -5,12 +5,11 @@ import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
 
 type Props = BaseProps & {
-  slice: string;
   label?: any;
   onPressEvent?: () => void;
 };
 
-const SectorsField = ({ slice, label, onPressEvent}: Props) => {
+const SectorsField = ({ label, onPressEvent}: Props) => {
   const jamData = useSelector((state: any) => state.jamForm);
 
   return (
