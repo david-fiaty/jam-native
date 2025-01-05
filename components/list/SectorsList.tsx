@@ -20,7 +20,7 @@ const SectorsList = () => {
   const [selectedSectors, setSelectedSectors] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const toggleSelection = (item: any, subItem: any) => {
+  const updateSelection = (item: any, subItem: any) => {
     let pair = [item.id, subItem.id];
     let found = selectedSectors.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
     let sectorsList = [...selectedSectors];
@@ -46,7 +46,7 @@ const SectorsList = () => {
     return (
       <TouchableOpacity 
         key={subItem?.id}
-        onPress={() => toggleSelection(item, subItem)} 
+        onPress={() => updateSelection(item, subItem)} 
       >
         <BoxView direction="row" align="center" justify="space-around">
           <IconView name="arrow" theme="clear" />
