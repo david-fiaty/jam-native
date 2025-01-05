@@ -27,10 +27,10 @@ const SectorsList = () => {
 
     // Update ID pairs
     if (itemIndex === -1 && subItemIndex === -1) {
-      selection.push(itemIndex, subItemIndex);
+      selection.push(item.id, subItem.id);
     }
     else if (itemIndex !== -1 && subItemIndex === -1) {
-      selection.push(subItemIndex);
+      selection.push(subItem.id);
     }
     else if (itemIndex !== -1 && subItemIndex !== -1) {
       delete selection[subItemIndex];
