@@ -20,6 +20,8 @@ const SectorsList = () => {
   const [sectorsData, setSectorsData] = useState<any>(null);
   const [selectedIds, setSelectedIds] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const activeScreen: any = ScreenManager.getActiveScreen();
+  const formState: any = ScreenManager.getScreenFormState();
 
   const updateSelection = (item: any, subItem: any) => {
     let selection: any[] = [...selectedIds];
@@ -48,7 +50,8 @@ const SectorsList = () => {
     // Update selection state
     selection = selection.filter((o: any) => o);
     setSelectedIds(selection);
-    
+
+    // Todo - Get field from activeScreen data
     dispatch(setJamData<any>({ key: 'sectors', value: selection}));
   };
 
