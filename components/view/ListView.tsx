@@ -13,8 +13,8 @@ type Props = BaseProps & {
   horizontal?: boolean;
   contentContainerStyle?: object;
   columnWrapperStyle?: object;
-  keyExtractor?: object;
-  renderItem: object;
+  keyExtractor?: ((row: any) => string);
+  renderItem: ((item: any) => JSX.Element);
 };
 
 const ListView = ({
