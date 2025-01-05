@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux';
 import { StyleSheet } from 'react-native';
 import { BaseProps } from "@/constants/Types";
 import BoxView from "../view/BoxView";
@@ -10,8 +9,6 @@ type Props = BaseProps & {
 };
 
 const SectorsField = ({ label, onPressEvent}: Props) => {
-  const jamData = useSelector((state: any) => state.jamForm);
-
   return (
     <BoxView
       direction="row"
