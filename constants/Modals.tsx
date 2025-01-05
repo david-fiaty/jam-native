@@ -5,7 +5,7 @@ export const Modals = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
-    entityId: 0,
+    params: {},
   },
   {
     name: 'JamsMapView', 
@@ -13,7 +13,7 @@ export const Modals = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
-    entityId: 0,
+    params: {},
   },
   {
     name: 'AddJamForm', 
@@ -21,7 +21,7 @@ export const Modals = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
-    entityId: 0,
+    params: {},
   },
   {
     name: 'AddProjectForm', 
@@ -29,7 +29,7 @@ export const Modals = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
-    entityId: 0,
+    params: {},
   },
   {
     name: 'SelectJamsForm', 
@@ -37,7 +37,7 @@ export const Modals = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
-    entityId: 0,
+    params: {},
   },
   {
     name: 'ProfileForm', 
@@ -45,7 +45,7 @@ export const Modals = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
-    entityId: 0,
+    params: {},
   },
   {
     name: 'SettingsMenu', 
@@ -53,7 +53,7 @@ export const Modals = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
-    entityId: 0,
+    params: {},
   },
   {
     name: 'NotificationsMenu', 
@@ -61,7 +61,7 @@ export const Modals = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
-    entityId: 0,
+    params: {},
   },
   {
     name: 'SearchView', 
@@ -69,7 +69,7 @@ export const Modals = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
-    entityId: 0,
+    params: {},
   },
   {
     name: 'LocationMapView', 
@@ -77,7 +77,7 @@ export const Modals = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
-    entityId: 0,
+    params: {},
   },
   {
     name: 'JammersList', 
@@ -85,7 +85,7 @@ export const Modals = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
-    entityId: 0,
+    params: {},
   },
   {
     name: 'CollaboratorsList', 
@@ -93,7 +93,7 @@ export const Modals = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
-    entityId: 0,
+    params: {},
   },
   {
     name: 'SectorsList', 
@@ -101,7 +101,7 @@ export const Modals = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
-    entityId: 0,
+    params: {},
   },
   {
     name: 'HostsList', 
@@ -109,7 +109,7 @@ export const Modals = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
-    entityId: 0,
+    params: {},
   },
   {
     name: 'SavedJamAction', 
@@ -117,7 +117,7 @@ export const Modals = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
-    entityId: 0,
+    params: {},
   },
   {
     name: 'LikedJamAction', 
@@ -125,7 +125,7 @@ export const Modals = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
-    entityId: 0,
+    params: {},
   },
   {
     name: 'AddedJamAction', 
@@ -133,7 +133,7 @@ export const Modals = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
-    entityId: 0,
+    params: {},
   },
   {
     name: 'MoreJamView', 
@@ -141,6 +141,6 @@ export const Modals = [
     active: false,
     headerNavigation: true,
     footerNavigation: true,
-    entityId: 0,
+    params: {},
   },
 ];
