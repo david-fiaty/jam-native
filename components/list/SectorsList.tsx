@@ -17,13 +17,13 @@ import CollapsibleView from "../view/CollapsibleView";
 const SectorsList = () => {
   const dispatch = useDispatch();
   const [sectorsData, setSectorsData] = useState<any>(null);
-  const [selectedSectors, setSelectedSectors] = useState<any>([]);
+  const [selectedIds, setSelectedIds] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const updateSelection = (item: any, subItem: any) => {
-    let selection: any[] = [...selectedSectors];
-    let itemIndex: number = selection.findIndex((o: any) => o.id == item.id);
-    let subItemIndex: number = selection.findIndex((o: any) => o.id == subItem.id);
+    let selection: any[] = [...selectedIds];
+    let itemIndex: number = selection.findIndex((id: any) => id == item.id);
+    let subItemIndex: number = selection.findIndex((id: any) => id == subItem.id);
 
 
 
@@ -33,19 +33,19 @@ const SectorsList = () => {
 
     /*
     let pair = [item.id, subItem.id];
-    let found = selectedSectors.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
-    let sectorsList = [...selectedSectors];
+    let found = selectedIds.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
+    let sectorsList = [...selectedIds];
 
     if (!found) {
       sectorsList.push(pair);
-      setSelectedSectors(sectorsList);
+      setSelectedIds(sectorsList);
     }
     else {
-      let index = selectedSectors.findIndex((item: any) => JSON.stringify(item) === JSON.stringify(pair));
+      let index = selectedIds.findIndex((item: any) => JSON.stringify(item) === JSON.stringify(pair));
       if (index !== -1) {
         delete sectorsList[index];
         sectorsList = sectorsList.filter((item: any) => item);
-        setSelectedSectors(sectorsList);
+        setSelectedIds(sectorsList);
       } 
     }
       */
@@ -53,7 +53,7 @@ const SectorsList = () => {
 
   const renderSubItem = (item: any, subItem: any) => {
     let pair = [item.id, subItem.id];
-    let isSelected = selectedSectors.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
+    let isSelected = selectedIds.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
 
     return (
       <TouchableOpacity 
