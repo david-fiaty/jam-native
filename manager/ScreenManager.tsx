@@ -18,7 +18,11 @@ class ScreenManager {
     };
   }
 
-  getActiveScreen() {
+  getActiveScreenId(): any {
+    return this.getActiveScreen()?.entityId;
+  }
+
+  getActiveScreen(): any {
     return Store.getState().screen.find(item => item.active === true);
   }
 
