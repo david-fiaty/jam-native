@@ -67,8 +67,7 @@ const SectorsList = () => {
   };
 
   const renderSubItem = (item: any, subItem: any) => {
-    let pair = [item.id, subItem.id];
-    let isSelected = selectedIds.find((item: any) => JSON.stringify(item) === JSON.stringify(pair));
+    let isSelected = selectedIds.find((id: any) => id == subItem.id);
 
     return (
       <TouchableOpacity 
