@@ -13,7 +13,7 @@ import EntityManager from '@/manager/EntityManager';
 const AddedJamAction = () => {
   const [entity, setEntity] = useState<any>(null);
   const [isSaved, setIsSaved] = useState<boolean>(false);
-  const entityId = ScreenManager.getActiveScreen()?.entityId;
+  const entityId = ScreenManager.getScreenEntityId();
 
   useEffect(() => {
     (async () => {
@@ -50,7 +50,7 @@ const AddedJamAction = () => {
         {/* View user Jams */}
         <TouchableOpacity 
           style={styles.listItem}
-          onPress={() => ScreenManager.toggleModal('AddedJamAction', entityId)} 
+          onPress={() => ScreenManager.toggleModal('AddedJamAction', { entityId: entityId })} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
             <IconView name="share" theme="tertiary" />

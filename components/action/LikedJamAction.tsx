@@ -13,7 +13,7 @@ import EntityManager from '@/manager/EntityManager';
 const LikedJamAction = () => {
   const [entity, setEntity] = useState<any>(null);
   const [isLiked, setIsLiked] = useState<boolean>(false);
-  const entityId = ScreenManager.getActiveScreen()?.entityId;
+  const entityId = ScreenManager.getScreenEntityId();
 
   const getTitle = () => {
     return (entity && isLiked) 
@@ -52,7 +52,7 @@ const LikedJamAction = () => {
         {/* View user Jams */}
         <TouchableOpacity 
           style={styles.listItem}
-          onPress={() => ScreenManager.toggleModal('LikedJamAction', entityId)} 
+          onPress={() => ScreenManager.toggleModal('LikedJamAction', { entityId: entityId })} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
             <IconView name="share" theme="tertiary" />
