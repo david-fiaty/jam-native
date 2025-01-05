@@ -52,7 +52,7 @@ const SavedJamAction = () => {
         {/* View user Jams */}
         <TouchableOpacity 
           style={styles.listItem}
-          onPress={() => ScreenManager.toggleModal('SavedJamAction', entityId)} 
+          onPress={() => ScreenManager.toggleModal('SavedJamAction', { entityId: entityId })} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
             <IconView name="share" theme="tertiary" />

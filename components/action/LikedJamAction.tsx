@@ -52,7 +52,7 @@ const LikedJamAction = () => {
         {/* View user Jams */}
         <TouchableOpacity 
           style={styles.listItem}
-          onPress={() => ScreenManager.toggleModal('LikedJamAction', entityId)} 
+          onPress={() => ScreenManager.toggleModal('LikedJamAction', { entityId: entityId })} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
             <IconView name="share" theme="tertiary" />

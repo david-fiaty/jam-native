@@ -29,7 +29,7 @@ const ListItemHeader = ({ row }: Props) => {
         <TouchableOpacity
           onPress={() =>
             isLoggedIn
-              ? ScreenManager.toggleModal("HostsList", row?.item?.id)
+              ? ScreenManager.toggleModal("HostsList", { entityId: row?.item?.id })
               : router.push("/login")
           }
         >
@@ -47,7 +47,7 @@ const ListItemHeader = ({ row }: Props) => {
           theme="clear"
           onPress={() =>
             isLoggedIn
-              ? ScreenManager.toggleModal("MoreJamView", row?.item?.id)
+              ? ScreenManager.toggleModal("MoreJamView", { entityId: row?.item?.id })
               : router.push("/login")
           }
         />

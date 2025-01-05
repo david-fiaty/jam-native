@@ -12,7 +12,7 @@ const ScreenSlice = createSlice({
         }
         else if (item.name == action.payload.name && !item.active) {
           item.active = true;
-          item.entityId = action.payload.entityId;
+          item.params = action.payload.params;
         }
         else {
           item.active = false;
