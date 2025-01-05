@@ -42,7 +42,9 @@ const SectorsList = () => {
     // Remove parents without sub selection
     let itemChildIds: any = item?.sub_sectors?.map((o: any) => o.id);
 
-    console.log(itemChildIds);
+    let deleteItem: boolean = !selection.some((id: any) => itemChildIds.includes(id));
+
+    console.log(deleteItem);
     //console.log(selection);
 
     // Update state
