@@ -11,7 +11,6 @@ type Props = BaseProps & {
 };
 
 const LocationPickerField = ({ latitude, longitude }: Props) => {
-  // Todo - Convert coordinates to address
   const value = latitude && longitude ? `${latitude},${longitude}` : '';
 
   return (
@@ -22,7 +21,6 @@ const LocationPickerField = ({ latitude, longitude }: Props) => {
       <InputTextField
         value={value}
         readOnly={true}
-        placeholder={i18n.t("Location")}
         rightIcon={<IconView name="location" theme="transparent" />}
       />
     </TouchableOpacity>

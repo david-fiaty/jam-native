@@ -152,7 +152,10 @@ const AddJamForm = () => {
       />
 
       <TextView>{i18n.t('Location')}</TextView>
-      <LocationPickerField />
+      <LocationPickerField 
+        latitude={formData?.geolocation_latitude}
+        longitude={formData?.geolocation_longitude}
+      />
 
       <TextView>{i18n.t('Country')}</TextView>
       <CountryField

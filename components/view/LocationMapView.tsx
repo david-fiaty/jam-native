@@ -12,28 +12,18 @@ import i18n from "@/translation/i18n";
 import BackButton from "../button/BackButton";
 import BoxView from "./BoxView";
 
-const LocationMapView = ({ style, children }: BaseProps) => {
+const LocationMapView = () => {
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const onMapPress = async (event: MapPressEvent) => {
-    let coords = event.nativeEvent.coordinate;
+    let coords: any = event.nativeEvent.coordinate;
     setSelectedLocation(coords);
 
-    // Todo - Implement reverse geocoding
-    /*
-    let url = `${Config.geocodeUrl}?latlng=${coords.latitude},${coords.longitude}&key=${Config.mapApiKey}`;
 
-    try {
-      let response: any = await fetch(url);
-      let address = response?.results;
-      console.log(address);
-    }
-    catch (error) {
-      console.log(error);
-    }
-      */
+    console.log(coords);
+
   };
 
   useEffect(() => {
