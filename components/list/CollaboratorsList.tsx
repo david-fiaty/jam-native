@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
-import { setJamData } from '@/redux/slices/JamFormSlice';
+import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from '@/constants/Colors';
 import TextView from "../view/TextView";
@@ -18,15 +18,15 @@ import InputTextField from '../field/InputTextField';
 
 const CollaboratorsList = () => {
   const dispatch = useDispatch();
-  const jamData = useSelector((state: any) => state.jamForm);
   const [profiles, setProfiles] = useState<any>(null);
   const [selectedProfiles, setSelectedProfiles] = useState<any>([]);
   const [searchValue, setSearchValue] = useState<string>('');
   const [isSearching, setIsSearching] = useState<boolean>(false);
-
-  if (jamData?.collaborators_ids?.length && !selectedProfiles.length) {
-    setSelectedProfiles(jamData.collaborators_ids);
-  }
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const activeScreen: any = ScreenManager.getActiveScreen();
+  const resource: string = activeScreen.params.resource;
+  const fieldName: string = activeScreen.params.field;
+  const formData: any = useSelector((state: any) => state[resource]);
 
   const clearSearch = () => {
     setIsSearching(true);
@@ -72,15 +72,25 @@ const CollaboratorsList = () => {
     }
     
     setSelectedProfiles(profileList);
-    dispatch(setJamData<any>({ key: 'collaborators_ids', value: profileList}));
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: fieldName, 
+      value: profileList,
+    }));
   };
 
   useEffect(() => {
     (async () => {
-      if (!profiles) setProfiles(await EntityManager.listProfiles());
-    })();
-  });
+      if (!isLoaded) { 
+        if (!profiles) setProfiles(await EntityManager.listProfiles());
+        if (formData?.[fieldName]?.length && !selectedProfiles.length) {
+          setSelectedProfiles(formData[fieldName]);
+        }
 
+        setIsLoaded(true);
+      }
+    })();
+  }, [profiles, formData, fieldName, activeScreen, selectedProfiles]);
 
   if (!profiles) return <SpinnerView />;
 
@@ -112,7 +122,7 @@ const CollaboratorsList = () => {
         placeholder={i18n.t('Search...')} 
         onChangeText={(text: string) => setSearchValue(text)}
         onSubmitEditing={onSubmitEditing}
-        rightIcon={renderSearchIcon}
+        rightIcon={renderSearchIcon()}
       />
 
       <View style={Layout.borderedListContainer}>
