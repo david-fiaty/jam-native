@@ -164,14 +164,12 @@ const ProfileForm = () => {
           title={i18n.t("Saved Projects")} 
           allButton={true}
           idArray={profileData?.saved_projects}
-          //idArray={[14, 16, 17]}
         />
 
         <DividerView />
         <ProfileProjectsList
           title={i18n.t("Liked Projects")} 
           idArray={profileData?.liked_projects}
-          //idArray={[14, 16, 17]}
           allButton={true}
         />
 
