@@ -21,6 +21,8 @@ const SectorsList = () => {
   const [selectedIds, setSelectedIds] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
+  const resource: string = activeScreen.params.resource;
+  const fieldName: string = activeScreen.params.field;
 
   const updateSelection = (item: any, subItem: any) => {
     let selection: any[] = [...selectedIds];
@@ -50,8 +52,8 @@ const SectorsList = () => {
     selection = selection.filter((o: any) => o);
     setSelectedIds(selection);
     dispatch(setFormData<any>({ 
-      resource: activeScreen.params.resource,
-      key: activeScreen.params.field, 
+      resource: resource,
+      key: fieldName, 
       value: selection
     }));
   };
