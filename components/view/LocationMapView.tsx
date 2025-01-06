@@ -86,7 +86,7 @@ const LocationMapView = () => {
               <Marker
                 pinColor={Colors.secondary}
                 title={i18n.t("Your Location")}
-                description={i18n.t("This is your current location")}
+                description={i18n.t("This is your current location.")}
                 coordinate={{
                   latitude: parseFloat(selectedLocation?.latitude),
                   longitude: parseFloat(selectedLocation?.longitude),
