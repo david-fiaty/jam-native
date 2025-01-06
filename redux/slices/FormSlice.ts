@@ -5,7 +5,7 @@ const FormSlice = createSlice({
   initialState: {},
   reducers: {
     setFormData: (state: any, action: any) => {
-      state[action.payload.key] = action.payload.value;
+      state[action.payload.resource][action.payload.key] = action.payload.value;
     },
   },
 });
