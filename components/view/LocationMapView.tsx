@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
+import { useDispatch, useSelector } from 'react-redux';
+import { setFormData } from "@/redux/slices/FormSlice";
 import RNMapView, { Marker, MapPressEvent } from "react-native-maps";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
@@ -13,33 +15,34 @@ import BackButton from "../button/BackButton";
 import BoxView from "./BoxView";
 
 const LocationMapView = ({ style, children }: BaseProps) => {
+  const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const activeScreen: any = ScreenManager.getActiveScreen();
+  const resource: string = activeScreen.params.resource;
+  const fieldNames: any = (activeScreen.params?.fields || []).map((o: any) => o.name);
+  const formData: any = useSelector((state: any) => state[resource]);
 
   const onMapPress = async (event: MapPressEvent) => {
-    let coords = event.nativeEvent.coordinate;
+    let coords: any = event.nativeEvent.coordinate;
+
     setSelectedLocation(coords);
 
-    // Todo - Implement reverse geocoding
-    /*
-    let url = `${Config.geocodeUrl}?latlng=${coords.latitude},${coords.longitude}&key=${Config.mapApiKey}`;
-
-    try {
-      let response: any = await fetch(url);
-      let address = response?.results;
-      console.log(address);
-    }
-    catch (error) {
-      console.log(error);
-    }
-      */
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: null, 
+      value: {
+        [fieldNames.latitude]: coords.latitude,
+        [fieldNames.longitude]: coords.longitude,
+      }, 
+    }));
   };
 
   useEffect(() => {
     (async () => {
-      let deviceLocation: any = await DeviceManager.getLocation();
-      if (deviceLocation && !selectedLocation) {
+      if (!selectedLocation) {
+        let deviceLocation: any = await DeviceManager.getLocation();
         let coords: any = {
           latitude: deviceLocation?.coords?.latitude,
           longitude: deviceLocation?.coords?.longitude,
