@@ -57,7 +57,7 @@ const LocationMapView = () => {
   }, [selectedLocation]);
 
   if (!isLoaded) return <SpinnerView />;
-  console.log()
+  console.log(activeScreen?.params?.fields)
   
   return (
     <BoxView 
