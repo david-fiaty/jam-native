@@ -3,7 +3,7 @@ import { useRouter } from "expo-router";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Colors } from "@/constants/Colors";
-import { setJamData } from "@/redux/slices/JamFormSlice";
+import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
@@ -28,21 +28,28 @@ import LocationTypeField from "../field/LocationTypeField";
 import EntityManager from "@/manager/EntityManager";
 import CollaboratorsField from "../field/CollaboratorsField";
 
+const resource: string = 'jam';
+
 const AddJamForm = () => {
-  const dispatch = useDispatch();
-  const jamData = useSelector((state: any) => state.jamForm);
   const router = useRouter();
+  const dispatch = useDispatch();
+  const formData = useSelector((state: any) => state.form[resource]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
   const jamCategoriesData = StaticData.jamCategories;
 
   const updateField = (key: string, value: any) => {
-    dispatch(setJamData<any>({ key: key, value: value, profile_id: profileId }));
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: key, 
+      value: value, 
+      profile_id: profileId,
+    }));
   };
 
   const submitForm = async () => {
-    EntityManager.addJam(jamData).then((success: boolean) => {
+    EntityManager.addJam(formData).then((success: boolean) => {
       setIsProcessing(false);
       //success === true
       false
@@ -59,7 +66,7 @@ const AddJamForm = () => {
         <View
           style={[
             styles.categoryItem,
-            jamData?.type == row.item.id ? styles.categoryItemSelected : {},
+            formData?.type == row.item.id ? styles.categoryItemSelected : {},
           ]}
         >
           <IconView name={row.item.icon} theme="secondary" />
@@ -78,7 +85,7 @@ const AddJamForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log('--->', jamData);
+  console.log('--->', formData);
 
   return (
     <BoxView
@@ -107,19 +114,19 @@ const AddJamForm = () => {
 
       <TextView>{i18n.t('Title')}</TextView>
       <InputTextField
-        value={jamData?.title}
+        value={formData?.title}
         onChangeText={(value: string) => updateField('title', value)}
       />
 
       <TextView>{i18n.t('Description')}</TextView>
       <InputTextareaField
-        value={jamData?.caption}
+        value={formData?.caption}
         onChangeText={(value: string) => updateField('caption', value)}
       />
 
       <TextView>{i18n.t('Location type')}</TextView>
       <LocationTypeField
-        value={jamData?.location_type}
+        value={formData?.location_type}
         onChangeValue={(option: any) =>
           updateField('location_type', option.value)
         }
@@ -130,7 +137,7 @@ const AddJamForm = () => {
         value={'start value'}
         onChangeValue={(value: any) =>
           updateField('period', {
-            ...(jamData?.period || {}),
+            ...(formData?.period || {}),
             ...{ start_datetime: value.toISOString() },
           })
         }
@@ -141,7 +148,7 @@ const AddJamForm = () => {
         value={"end value"}
         onChangeValue={(value: any) =>
           updateField('period', {
-            ...(jamData?.period || {}),
+            ...(formData?.period || {}),
             ...{ end_datetime: value.toISOString() },
           })
         }
@@ -151,7 +158,7 @@ const AddJamForm = () => {
 
       <TextView>{i18n.t('Country')}</TextView>
       <CountryField
-        value={jamData?.countries}
+        value={formData?.countries}
         onChangeValue={(option: any) =>
           updateField('countries', [option.value])
         }
@@ -168,7 +175,7 @@ const AddJamForm = () => {
 
       <MediaPickerBase
         preview={true}
-        value={jamData?.upload_medias}
+        value={formData?.upload_medias}
         label={
           <BoxView direction="row" align="center">
             <IconView name="plus" theme="secondary" radius="round" />
