@@ -21,11 +21,6 @@ const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Pr
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
 
-  if (value?.length && !selectedMedia.length) {
-    //setSelectedMedia(value);
-    //setSelectedPreview(value.map((item: any) => item.fileName));
-  }
-
   const deleteMedia = (data: any) => {
     let mediaList = [...selectedMedia];  
     mediaList = mediaList.filter((item: any) => item.fileName !== data.fileName);
