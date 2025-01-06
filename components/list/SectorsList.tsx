@@ -49,7 +49,11 @@ const SectorsList = () => {
     // Update selection state
     selection = selection.filter((o: any) => o);
     setSelectedIds(selection);
-    dispatch(setFormData<any>({ key: activeScreen.params.field, value: selection}));
+    dispatch(setFormData<any>({ 
+      resource: activeScreen.params.resource,
+      key: activeScreen.params.field, 
+      value: selection
+    }));
   };
 
   const renderSubItem = (item: any, subItem: any) => {
