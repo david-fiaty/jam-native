@@ -1,5 +1,4 @@
 import { BaseProps } from "@/constants/Types";
-import { useSelector } from 'react-redux';
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
@@ -10,9 +9,6 @@ type Props = BaseProps & {
 };
 
 const CollaboratorsField = ({onPressEvent}: Props) => {
-  const jamData = useSelector((state: any) => state.jamForm);
-  const selectedProfiles = jamData?.collaborators_ids || [];
-
   return (
     <BoxView
       direction="row"
