@@ -28,16 +28,14 @@ import LocationTypeField from "../field/LocationTypeField";
 import EntityManager from "@/manager/EntityManager";
 import CollaboratorsField from "../field/CollaboratorsField";
 
-
-
 const AddJamForm = () => {
   const resource: string = 'jam';
   const router = useRouter();
   const dispatch = useDispatch();
-  const formData = useSelector((state: any) => state.form[resource]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
+  const formData = useSelector((state: any) => state.form[resource]);
   const jamCategoriesData = StaticData.jamCategories;
 
   const updateField = (key: string, value: any) => {
@@ -159,7 +157,7 @@ const AddJamForm = () => {
       <CountryField
         value={formData?.countries}
         onChangeValue={(option: any) =>
-          updateField('countries', [option.value])
+          updateField('country', option.value)
         }
       />
 
@@ -168,7 +166,7 @@ const AddJamForm = () => {
         label={<TextView>{i18n.t('Add industries')}</TextView>}
         onPressEvent={() => ScreenManager.toggleModal('SectorsList', {
           resource: resource,
-          field: 'sectors_ids',
+          field: 'sectors',
         })}
       />
 
