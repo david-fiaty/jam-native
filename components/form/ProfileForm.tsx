@@ -37,7 +37,7 @@ const ProfileForm = () => {
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, profileData, userData]);
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
 
