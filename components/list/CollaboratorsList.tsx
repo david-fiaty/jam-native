@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
-import { setJamData } from '@/redux/slices/JamFormSlice';
+import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from '@/constants/Colors';
 import TextView from "../view/TextView";
@@ -18,15 +18,13 @@ import InputTextField from '../field/InputTextField';
 
 const CollaboratorsList = () => {
   const dispatch = useDispatch();
-  const jamData = useSelector((state: any) => state.jamForm);
   const [profiles, setProfiles] = useState<any>(null);
   const [selectedProfiles, setSelectedProfiles] = useState<any>([]);
   const [searchValue, setSearchValue] = useState<string>('');
   const [isSearching, setIsSearching] = useState<boolean>(false);
-
-  if (jamData?.collaborators_ids?.length && !selectedProfiles.length) {
-    setSelectedProfiles(jamData.collaborators_ids);
-  }
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const activeScreen: any = ScreenManager.getActiveScreen();
+  const formData = useSelector((state: any) => state[activeScreen.params.resource]);
 
   const clearSearch = () => {
     setIsSearching(true);
@@ -72,15 +70,25 @@ const CollaboratorsList = () => {
     }
     
     setSelectedProfiles(profileList);
-    dispatch(setJamData<any>({ key: 'collaborators_ids', value: profileList}));
+    dispatch(setFormData<any>({ 
+      resource: activeScreen.params.resource,
+      key: activeScreen.params.field, 
+      value: profileList,
+    }));
   };
 
   useEffect(() => {
     (async () => {
-      if (!profiles) setProfiles(await EntityManager.listProfiles());
-    })();
-  });
+      if (!isLoaded) { 
+        if (!profiles) setProfiles(await EntityManager.listProfiles());
+        if (formData?.[activeScreen.params.field]?.length && !selectedProfiles.length) {
+          setSelectedProfiles(formData[activeScreen.params.field]);
+        }
 
+        setIsLoaded(true);
+      }
+    })();
+  }, [profiles, formData, activeScreen, selectedProfiles]);
 
   if (!profiles) return <SpinnerView />;
 
