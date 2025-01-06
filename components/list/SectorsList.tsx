@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { setJamData } from "@/redux/slices/JamFormSlice";
+import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import TextView from "../view/TextView";
@@ -49,7 +49,7 @@ const SectorsList = () => {
     // Update selection state
     selection = selection.filter((o: any) => o);
     setSelectedIds(selection);
-    dispatch(setJamData<any>({ key: activeScreen.params.field, value: selection}));
+    dispatch(setFormData<any>({ key: activeScreen.params.field, value: selection}));
   };
 
   const renderSubItem = (item: any, subItem: any) => {
