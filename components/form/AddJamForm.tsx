@@ -28,9 +28,10 @@ import LocationTypeField from "../field/LocationTypeField";
 import EntityManager from "@/manager/EntityManager";
 import CollaboratorsField from "../field/CollaboratorsField";
 
-const resource: string = 'jam';
+
 
 const AddJamForm = () => {
+  const resource: string = 'jam';
   const router = useRouter();
   const dispatch = useDispatch();
   const formData = useSelector((state: any) => state.form[resource]);
