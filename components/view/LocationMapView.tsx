@@ -41,18 +41,15 @@ const LocationMapView = ({ style, children }: BaseProps) => {
 
   useEffect(() => {
     (async () => {
-      if (!selectedLocation) {
         let deviceLocation: any = await DeviceManager.getLocation();
-        let coords: any = {
+        let coords: any = selectedLocation || {
           latitude: deviceLocation?.coords?.latitude,
           longitude: deviceLocation?.coords?.longitude,
         };
         
         setCurrentLocation(coords);
         setSelectedLocation(coords);
-      }
-
-      setIsLoaded(true);
+        setIsLoaded(true);
     })();
   }, []);
 
