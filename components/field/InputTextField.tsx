@@ -15,7 +15,7 @@ type Props = BaseProps & {
   autoCapitalize?: boolean;
   spellCheck?: boolean;
   readOnly?: boolean,
-  onChangeText?: () => void;
+  onChangeText?: (value: string) => void;
   onSubmitEditing?: () => void;
 };
 

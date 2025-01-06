@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
@@ -20,24 +22,34 @@ import ScreenManager from "@/manager/ScreenManager";
 import ProfileImageField from "../field/ProfileImageField";
 
 const ProfileForm = () => {
+  const resource: string = 'profile';
+  const dispatch = useDispatch();
   const [userData, setUserData] = useState<any>(null);
-  const [profileData, setProfileData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const formData = useSelector((state: any) => state.form[resource]);
 
   const updateField = (key: string, value: any) => {
-    let data = { ...profileData, ...{ [key]: value } };
-    setProfileData(data);
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: key, 
+      value: value, 
+    }));
   };
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
         setUserData(await UserManager.getUserData());
-        setProfileData(await UserManager.getProfileData());
+        dispatch(setFormData<any>({ 
+          resource: resource,
+          key: null, 
+          value: await UserManager.getProfileData(), 
+        }));
+
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, profileData, userData]);
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -55,25 +67,25 @@ const ProfileForm = () => {
 
       <View style={Layout.formContainer}>
         <ProfileImageField 
-          value={profileData?.profile_picture?.url}
+          value={formData?.profile_picture?.url}
           onChangeValue={(mediaList: any) => updateField("profile_picture", {url: mediaList[0]?.uri})}
         />
         <DividerView theme="secondary" />
 
         <InputTextField
           placeholder={i18n.t("Email address")}
-          value={profileData?.email}
+          value={formData?.email}
           onChangeText={(value: string) => updateField("email", value)}
         />
 
         <InputTextField
           placeholder={i18n.t("Profile name")}
-          value={profileData?.profile_name}
+          value={formData?.profile_name}
           onChangeText={(value: string) => updateField("profile_name", value)}
         />
 
         <ProfileTypeField
-          value={profileData?.profile_type}
+          value={formData?.profile_type}
           onChangeValue={(option: any) =>
             updateField("profile_type", option.value)
           }
@@ -81,40 +93,41 @@ const ProfileForm = () => {
 
         <InputTextareaField
           placeholder={i18n.t("Description")}
-          value={profileData?.profile_description}
+          value={formData?.profile_description}
           onChangeText={(value: string) => updateField("profile_description", value)}
         />
 
         <LocationPickerField
-          latitude={profileData?.geolocation_latitude}
-          longitude={profileData?.geolocation_longitude}
+          latitude={formData?.geolocation_latitude}
+          longitude={formData?.geolocation_longitude}
         />
 
         <InputTextField
           placeholder={i18n.t("Address")}
-          value={profileData?.address}
+          value={formData?.address}
           onChangeText={(value: string) => updateField("address", value)}
         />
 
         <InputTextField
           placeholder={i18n.t("City")}
-          value={profileData?.town_or_locality}
+          value={formData?.town_or_locality}
           onChangeText={(value: string) => updateField("city", value)}
         />
 
         <InputTextField
           placeholder={i18n.t("Region")}
-          value={profileData?.region}
+          value={formData?.region}
           onChangeText={(value: string) => updateField("region", value)}
         />
 
-        <CountryField value={profileData?.country} />
+        <CountryField value={formData?.country} />
 
         <DividerView theme="secondary" />
         <SectorsField
           label={<TextView>{i18n.t("Industries")}</TextView>}
           onPressEvent={() => ScreenManager.toggleModal("SectorsList", {
-            reducer: 'profileForm',
+            resource: 'profile',
+            field: 'sectors_ids',
           })}
         />
 
@@ -122,31 +135,31 @@ const ProfileForm = () => {
 
         <InputTextField
           placeholder={i18n.t("Phone number")}
-          value={profileData?.phone_number}
+          value={formData?.phone_number}
           onChangeText={(value: string) => updateField("phone_number", value)}
         />
 
         <InputTextField
           placeholder={i18n.t("Whatsapp number")}
-          value={profileData?.whatsapp_number}
+          value={formData?.whatsapp_number}
           onChangeText={(value: string) => updateField("whatsapp_number", value)}
         />
 
         <InputTextField
           placeholder={i18n.t("Website link")}
-          value={profileData?.website_link}
+          value={formData?.website_link}
           onChangeText={(value: string) => updateField("website_link", value)}
         />
 
         <InputTextField
           placeholder={i18n.t("Instagram ID")}
-          value={profileData?.instagram_id}
+          value={formData?.instagram_id}
           onChangeText={(value: string) => updateField("instagram_id", value)}
         />
 
         <InputTextField
           placeholder={i18n.t("Facebook ID")}
-          value={profileData?.linkedin_id}
+          value={formData?.linkedin_id}
           onChangeText={(value: string) => updateField("linkedin_id", value)}
         />
 
@@ -155,7 +168,7 @@ const ProfileForm = () => {
         <ProfileProjectsList
           title={i18n.t("Your Projects")} 
           addButton={true}
-          idArray={profileData?.profile_projects}
+          idArray={formData?.profile_projects}
           onAddButtonPress={() => ScreenManager.toggleModal("AddProjectForm")}
         />
 
@@ -163,15 +176,13 @@ const ProfileForm = () => {
         <ProfileProjectsList
           title={i18n.t("Saved Projects")} 
           allButton={true}
-          //idArray={profileData?.saved_projects}
-          idArray={[14, 16, 17]}
+          idArray={formData?.saved_projects}
         />
 
         <DividerView />
         <ProfileProjectsList
           title={i18n.t("Liked Projects")} 
-          //idArray={profileData?.liked_projects}
-          idArray={[14, 16, 17]}
+          idArray={formData?.liked_projects}
           allButton={true}
         />
 
@@ -180,7 +191,7 @@ const ProfileForm = () => {
           title={i18n.t("Your Jams")} 
           allButton={true}
           addButton={true}
-          idArray={profileData?.profile_jams} 
+          idArray={formData?.profile_jams} 
           onAddButtonPress={() => ScreenManager.toggleModal("AddJamForm")}
         />
 
@@ -188,14 +199,14 @@ const ProfileForm = () => {
         <ProfileJamsList 
           title={i18n.t("Saved Jams")} 
           allButton={true}
-          idArray={profileData?.saved_jams} 
+          idArray={formData?.saved_jams} 
         />
 
         <DividerView />
         <ProfileJamsList 
           title={i18n.t("Liked Jams")} 
           allButton={true}
-          idArray={profileData?.liked_jams} 
+          idArray={formData?.liked_jams} 
         />
 
         <DividerView />

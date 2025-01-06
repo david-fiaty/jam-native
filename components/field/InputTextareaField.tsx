@@ -10,7 +10,7 @@ type Props = BaseProps & {
   placeholder?: string,
   containerStyle?: object,
   disabled?: boolean, 
-  onChangeText?: () => void;
+  onChangeText?: (value: any) => void;
 };
 
 const InputTextareaField = ({value, placeholder, containerStyle, disabled, onChangeText}: Props) => {
