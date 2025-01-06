@@ -74,13 +74,13 @@ const LocationMapView = () => {
           <RNMapView
             style={styles.map}
             provider="google"
+            onPress={onMapPress}
             initialRegion={{
               latitude: deviceLocation?.latitude || Config.defaultLocation.latitude,
               longitude: deviceLocation?.longitude || Config.defaultLocation.longitude,
               latitudeDelta: 2,
               longitudeDelta: 2,
             }}
-            onPress={onMapPress}
           >
             {selectedLocation && (
               <Marker
