@@ -55,6 +55,8 @@ const LocationMapView = () => {
   }, []);
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(formData);
   
   return (
     <BoxView 
