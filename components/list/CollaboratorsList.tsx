@@ -122,7 +122,7 @@ const CollaboratorsList = () => {
         placeholder={i18n.t('Search...')} 
         onChangeText={(text: string) => setSearchValue(text)}
         onSubmitEditing={onSubmitEditing}
-        rightIcon={renderSearchIcon}
+        rightIcon={renderSearchIcon()}
       />
 
       <View style={Layout.borderedListContainer}>
