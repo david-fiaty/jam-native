@@ -7,7 +7,6 @@ import ImageView from '../view/ImageView';
 import TextView from '../view/TextView';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
-import { Colors } from '@/constants/Colors';
 
 type Props = BaseProps & {
   label?: JSX.Element, 
