@@ -1,9 +1,7 @@
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { BaseProps } from "@/constants/Types";
-import i18n from "@/translation/i18n";
 import InputTextField from "../field/InputTextField";
 import IconView from "../view/IconView";
-import ScreenManager from "@/manager/ScreenManager";
 
 type Props = BaseProps & {
   latitude?: any;
