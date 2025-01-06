@@ -21,7 +21,7 @@ const LocationMapView = ({ style, children }: BaseProps) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
   const resource: string = activeScreen.params.resource;
-  const fieldNames: any = activeScreen.params.fields.map((o: any) => o.name);
+  const fieldNames: any = activeScreen.params?.fields?.map((o: any) => o.name);
   const formData: any = useSelector((state: any) => state[resource]);
 
   const onMapPress = async (event: MapPressEvent) => {
