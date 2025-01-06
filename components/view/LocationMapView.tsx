@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import RNMapView, { Marker, MapPressEvent } from "react-native-maps";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
@@ -15,15 +15,16 @@ import BoxView from "./BoxView";
 
 const LocationMapView = () => {
   const dispatch = useDispatch();
-  const [deviceLocation, setDeviceLocation] = useState<any>(null);
+  const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
   const resource: string = activeScreen.params.resource;
   const fieldNames: any = activeScreen.params.fields;
-  const formData: any = useSelector((state: any) => state[resource]);
 
-  const updateLocation = (coords: any) => {
+  const onMapPress = async (event: MapPressEvent) => {
+    let coords: any = event.nativeEvent.coordinate;
+
     dispatch(setFormData<any>({ 
       resource: resource,
       key: fieldNames.latitude, 
@@ -37,28 +38,21 @@ const LocationMapView = () => {
     }));
   };
 
-  const onMapPress = async (event: MapPressEvent) => {
-    updateLocation(event.nativeEvent.coordinate);
-  };
-
-  const isLocationSet = () => {
-    return !isLoaded && formData?.[fieldNames.latitude] && formData?.[fieldNames.longitude];
-  };
-
   useEffect(() => {
     (async () => {
-      if (!isLocationSet()) {
-        updateLocation((await DeviceManager.getLocation())?.coords);
-        setIsLoaded(true);
+      let deviceLocation: any = await DeviceManager.getLocation();
+      if (deviceLocation && !selectedLocation) {
+        let coords: any = deviceLocation?.coords;        
+        setCurrentLocation(coords);
+        setSelectedLocation(coords);
       }
+
+      setIsLoaded(true);
     })();
   }, []);
 
   if (!isLoaded) return <SpinnerView />;
   
-console.log(formData?.[fieldNames.latitude], formData?.[fieldNames.longitude]);
-            
-
   return (
     <BoxView 
       direction="column" 
@@ -75,21 +69,19 @@ console.log(formData?.[fieldNames.latitude], formData?.[fieldNames.longitude]);
           <RNMapView
             style={styles.map}
             provider="google"
-            onPress={onMapPress}
             initialRegion={{
-              latitude: deviceLocation?.latitude || Config.defaultLocation.latitude,
-              longitude: deviceLocation?.longitude || Config.defaultLocation.longitude,
-              //latitude: formData?.[fieldNames.latitude],
-              //longitude: formData?.[fieldNames.longitude],
+              latitude: currentLocation?.latitude || Config.defaultLocation.latitude,
+              longitude: currentLocation?.longitude || Config.defaultLocation.longitude,
               latitudeDelta: 2,
               longitudeDelta: 2,
             }}
+            onPress={onMapPress}
           >
             {selectedLocation && (
               <Marker
                 pinColor={Colors.secondary}
                 title={i18n.t("Your Location")}
-                description={i18n.t("This is your current location.")}
+                description={i18n.t("This is where you are currently")}
                 coordinate={{
                   latitude: parseFloat(selectedLocation?.latitude),
                   longitude: parseFloat(selectedLocation?.longitude),
