@@ -84,8 +84,6 @@ const AddJamForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(formData);
-
   return (
     <BoxView
       align="flex-start"
@@ -155,14 +153,18 @@ const AddJamForm = () => {
 
       <TextView>{i18n.t('Location')}</TextView>
       <LocationPickerField 
-        latitude={formData?.geolocation_latitude}
-        longitude={formData?.geolocation_longitude}
         onPressEvent={() => ScreenManager.toggleModal('LocationMapView', {
           resource: resource,
-          fields: {
-            latitude: 'geolocation_latitude',
-            longitude: 'geolocation_longitude', 
-          },
+          fields: [
+            {
+              name: 'geolocation_latitude',
+              value: formData?.geolocation_latitude,
+            },
+            {
+              name: 'geolocation_longitude',
+              value: formData?.geolocation_longitude,
+            }
+          ],
         })}
       />
 
