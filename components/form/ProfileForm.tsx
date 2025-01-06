@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
+import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
@@ -22,21 +23,29 @@ import ProfileImageField from "../field/ProfileImageField";
 
 const ProfileForm = () => {
   const resource: string = 'profile';
+  const dispatch = useDispatch();
   const [userData, setUserData] = useState<any>(null);
-  const [profileData, setProfileData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData = useSelector((state: any) => state.form[resource]);
 
   const updateField = (key: string, value: any) => {
-    let data = { ...profileData, ...{ [key]: value } };
-    setProfileData(data);
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: key, 
+      value: value, 
+    }));
   };
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
         setUserData(await UserManager.getUserData());
-        setProfileData(await UserManager.getProfileData());
+        dispatch(setFormData<any>({ 
+          resource: resource,
+          key: null, 
+          value: await UserManager.getProfileData(), 
+        }));
+
         setIsLoaded(true);
       }
     })();
