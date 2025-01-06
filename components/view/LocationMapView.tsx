@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
-import RNMapView, { Marker, MapPressEvent } from "react-native-maps";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
+import RNMapView, { Marker, MapPressEvent } from "react-native-maps";
+import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import { Config } from "@/constants/Config";
@@ -13,7 +14,7 @@ import i18n from "@/translation/i18n";
 import BackButton from "../button/BackButton";
 import BoxView from "./BoxView";
 
-const LocationMapView = () => {
+const LocationMapView = ({ style, children }: BaseProps) => {
   const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
@@ -21,20 +22,21 @@ const LocationMapView = () => {
   const activeScreen: any = ScreenManager.getActiveScreen();
   const resource: string = activeScreen.params.resource;
   const fieldNames: any = activeScreen.params.fields;
+  const formData: any = useSelector((state: any) => state[resource]);
+
 
   const onMapPress = async (event: MapPressEvent) => {
     let coords: any = event.nativeEvent.coordinate;
 
-    dispatch(setFormData<any>({ 
-      resource: resource,
-      key: fieldNames.latitude, 
-      value: coords.latitude, 
-    }));
+    setSelectedLocation(coords);
 
     dispatch(setFormData<any>({ 
       resource: resource,
-      key: fieldNames.longitude, 
-      value: coords.longitude, 
+      key: null, 
+      value: {
+        [fieldNames.latitude]: coords.latitude,
+        [fieldNames.longitude]: coords.longitude,
+      }, 
     }));
   };
 
@@ -42,7 +44,11 @@ const LocationMapView = () => {
     (async () => {
       let deviceLocation: any = await DeviceManager.getLocation();
       if (deviceLocation && !selectedLocation) {
-        let coords: any = deviceLocation?.coords;        
+        let coords: any = {
+          latitude: deviceLocation?.coords?.latitude,
+          longitude: deviceLocation?.coords?.longitude,
+        };
+        
         setCurrentLocation(coords);
         setSelectedLocation(coords);
       }
