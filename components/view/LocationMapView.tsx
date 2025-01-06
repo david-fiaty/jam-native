@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import RNMapView, { Marker, MapPressEvent } from "react-native-maps";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
@@ -15,31 +15,33 @@ import BoxView from "./BoxView";
 
 const LocationMapView = () => {
   const dispatch = useDispatch();
-  const [currentLocation, setCurrentLocation] = useState<any>(null);
+  const [deviceLocation, setDeviceLocation] = useState<any>(null);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
   const resource: string = activeScreen.params.resource;
-  const fieldNames: string = activeScreen.params.fields;
+  const fieldNames: any = activeScreen.params.fields;
+  const formData: any = useSelector((state: any) => state[resource]);
 
   const onMapPress = async (event: MapPressEvent) => {
     let coords: any = event.nativeEvent.coordinate;
-    setSelectedLocation(coords);
 
-    console.log(fieldNames);
-    console.log(coords);
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: fieldNames.latitude, 
+      value: coords.latitude, 
+    }));
 
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: fieldNames.longitude, 
+      value: coords.longitude, 
+    }));
   };
 
   useEffect(() => {
     (async () => {
-      let deviceLocation: any = await DeviceManager.getLocation();
-      if (deviceLocation && !selectedLocation) {
-        let coords: any = deviceLocation?.coords;        
-        setCurrentLocation(coords);
-        setSelectedLocation(coords);
-      }
-
+      if (!selectedLocation) setSelectedLocation((await DeviceManager.getLocation())?.coords);
       setIsLoaded(true);
     })();
   }, []);
@@ -63,8 +65,8 @@ const LocationMapView = () => {
             style={styles.map}
             provider="google"
             initialRegion={{
-              latitude: currentLocation?.latitude || Config.defaultLocation.latitude,
-              longitude: currentLocation?.longitude || Config.defaultLocation.longitude,
+              latitude: deviceLocation?.latitude || Config.defaultLocation.latitude,
+              longitude: deviceLocation?.longitude || Config.defaultLocation.longitude,
               latitudeDelta: 2,
               longitudeDelta: 2,
             }}
