@@ -76,8 +76,8 @@ const LocationMapView = () => {
             initialRegion={{
               //latitude: deviceLocation?.latitude || Config.defaultLocation.latitude,
               //longitude: deviceLocation?.longitude || Config.defaultLocation.longitude,
-              latitude: formData[fieldNames.latitude],
-              longitude: formData[fieldNames.longitude],
+              latitude: formData?.[fieldNames.latitude],
+              longitude: formData?.[fieldNames.longitude],
               latitudeDelta: 2,
               longitudeDelta: 2,
             }}
