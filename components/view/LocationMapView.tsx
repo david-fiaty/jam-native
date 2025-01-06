@@ -21,9 +21,8 @@ const LocationMapView = ({ style, children }: BaseProps) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
   const resource: string = activeScreen.params.resource;
-  const fieldNames: any = activeScreen.params.fields;
+  const fieldNames: any = activeScreen.params.fields.map((o: any) => o.name);
   const formData: any = useSelector((state: any) => state[resource]);
-
 
   const onMapPress = async (event: MapPressEvent) => {
     let coords: any = event.nativeEvent.coordinate;
@@ -42,8 +41,8 @@ const LocationMapView = ({ style, children }: BaseProps) => {
 
   useEffect(() => {
     (async () => {
-      let deviceLocation: any = await DeviceManager.getLocation();
-      if (deviceLocation && !selectedLocation) {
+      if (!selectedLocation) {
+        let deviceLocation: any = await DeviceManager.getLocation();
         let coords: any = {
           latitude: deviceLocation?.coords?.latitude,
           longitude: deviceLocation?.coords?.longitude,
@@ -58,6 +57,8 @@ const LocationMapView = ({ style, children }: BaseProps) => {
   }, []);
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(fieldNames);
   
   return (
     <BoxView 
