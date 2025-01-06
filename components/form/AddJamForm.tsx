@@ -183,12 +183,8 @@ const AddJamForm = () => {
             <TextView>{i18n.t('Add media')}</TextView>
           </BoxView>
         }
-        onSelectItem={(mediaList: any) =>
-          updateField('upload_medias', mediaList)
-        }
-        onDeleteItem={(mediaList: any) =>
-          updateField('upload_medias', mediaList)
-        }
+        onSelectItem={(mediaList: any) => updateField('upload_medias', mediaList)}
+        onDeleteItem={(mediaList: any) => updateField('upload_medias', mediaList)}
       />
 
       <CollaboratorsField
