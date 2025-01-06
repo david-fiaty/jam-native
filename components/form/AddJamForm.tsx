@@ -192,7 +192,10 @@ const AddJamForm = () => {
       />
 
       <CollaboratorsField
-        onPressEvent={() => ScreenManager.toggleModal('CollaboratorsList')}
+        onPressEvent={() => ScreenManager.toggleModal('CollaboratorsList', {
+          resource: resource,
+          field: 'collaborators_ids',
+        })}
       />
 
       <DividerView />
