@@ -56,6 +56,9 @@ const LocationMapView = () => {
 
   if (!isLoaded) return <SpinnerView />;
   
+console.log(formData?.[fieldNames.latitude], formData?.[fieldNames.longitude]);
+            
+
   return (
     <BoxView 
       direction="column" 
@@ -74,10 +77,10 @@ const LocationMapView = () => {
             provider="google"
             onPress={onMapPress}
             initialRegion={{
-              //latitude: deviceLocation?.latitude || Config.defaultLocation.latitude,
-              //longitude: deviceLocation?.longitude || Config.defaultLocation.longitude,
-              latitude: formData?.[fieldNames.latitude],
-              longitude: formData?.[fieldNames.longitude],
+              latitude: deviceLocation?.latitude || Config.defaultLocation.latitude,
+              longitude: deviceLocation?.longitude || Config.defaultLocation.longitude,
+              //latitude: formData?.[fieldNames.latitude],
+              //longitude: formData?.[fieldNames.longitude],
               latitudeDelta: 2,
               longitudeDelta: 2,
             }}
