@@ -57,8 +57,6 @@ const LocationMapView = ({ style, children }: BaseProps) => {
   }, []);
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(fieldNames);
   
   return (
     <BoxView 
