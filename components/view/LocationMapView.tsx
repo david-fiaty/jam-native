@@ -59,16 +59,6 @@ const LocationMapView = ({ style, children }: BaseProps) => {
       
         setCurrentLocation(coords);
         setSelectedLocation(coords);
-
-        dispatch(setFormData<any>({ 
-          resource: resource,
-          key: null, 
-          value: {
-            [fieldNames.latitude]: coords.latitude,
-            [fieldNames.longitude]: coords.longitude,
-          }, 
-        }));
-
         setIsLoaded(true);
     })();
   }, [selectedLocation, fieldNames, activeScreen]);
