@@ -155,6 +155,10 @@ const AddJamForm = () => {
       <LocationPickerField 
         latitude={formData?.geolocation_latitude}
         longitude={formData?.geolocation_longitude}
+        onPressEvent={() => ScreenManager.toggleModal('LocationMapView', {
+          resource: resource,
+          field: 'sectors',
+        })}
       />
 
       <TextView>{i18n.t('Country')}</TextView>

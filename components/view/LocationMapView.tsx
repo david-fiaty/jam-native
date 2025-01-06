@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import RNMapView, { Marker, MapPressEvent } from "react-native-maps";
-import { BaseProps } from "@/constants/Types";
+import { useDispatch } from "react-redux";
+import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import { Config } from "@/constants/Config";
@@ -13,9 +14,13 @@ import BackButton from "../button/BackButton";
 import BoxView from "./BoxView";
 
 const LocationMapView = () => {
+  const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const activeScreen: any = ScreenManager.getActiveScreen();
+  const resource: string = activeScreen.params.resource;
+  const fieldName: string = activeScreen.params.field;
 
   const onMapPress = async (event: MapPressEvent) => {
     let coords: any = event.nativeEvent.coordinate;

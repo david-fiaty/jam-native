@@ -8,15 +8,16 @@ import ScreenManager from "@/manager/ScreenManager";
 type Props = BaseProps & {
   latitude?: any;
   longitude?: any;
+  onPressEvent: () => void,
 };
 
-const LocationPickerField = ({ latitude, longitude }: Props) => {
+const LocationPickerField = ({ latitude, longitude, onPressEvent }: Props) => {
   const value = latitude && longitude ? `${latitude},${longitude}` : '';
 
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => ScreenManager.toggleModal("LocationMapView")}
+      onPress={onPressEvent}
     >
       <InputTextField
         value={value}
