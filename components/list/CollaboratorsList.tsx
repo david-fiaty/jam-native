@@ -24,7 +24,9 @@ const CollaboratorsList = () => {
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
-  const formData = useSelector((state: any) => state[activeScreen.params.resource]);
+  const resource: string = activeScreen.params.resource;
+  const fieldName: string = activeScreen.params.field;
+  const formData: any = useSelector((state: any) => state[resource]);
 
   const clearSearch = () => {
     setIsSearching(true);
@@ -71,8 +73,8 @@ const CollaboratorsList = () => {
     
     setSelectedProfiles(profileList);
     dispatch(setFormData<any>({ 
-      resource: activeScreen.params.resource,
-      key: activeScreen.params.field, 
+      resource: resource,
+      key: fieldName, 
       value: profileList,
     }));
   };
@@ -81,14 +83,14 @@ const CollaboratorsList = () => {
     (async () => {
       if (!isLoaded) { 
         if (!profiles) setProfiles(await EntityManager.listProfiles());
-        if (formData?.[activeScreen.params.field]?.length && !selectedProfiles.length) {
-          setSelectedProfiles(formData[activeScreen.params.field]);
+        if (formData?.[fieldName]?.length && !selectedProfiles.length) {
+          setSelectedProfiles(formData[fieldName]);
         }
 
         setIsLoaded(true);
       }
     })();
-  }, [profiles, formData, activeScreen, selectedProfiles]);
+  }, [profiles, formData, fieldName, activeScreen, selectedProfiles]);
 
   if (!profiles) return <SpinnerView />;
 
