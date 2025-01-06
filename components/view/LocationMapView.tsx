@@ -20,13 +20,13 @@ const LocationMapView = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
   const resource: string = activeScreen.params.resource;
-  const fieldName: string = activeScreen.params.field;
+  const fieldNames: string = activeScreen.params.fields;
 
   const onMapPress = async (event: MapPressEvent) => {
     let coords: any = event.nativeEvent.coordinate;
     setSelectedLocation(coords);
 
-
+    console.log(fieldNames);
     console.log(coords);
 
   };
@@ -35,11 +35,7 @@ const LocationMapView = () => {
     (async () => {
       let deviceLocation: any = await DeviceManager.getLocation();
       if (deviceLocation && !selectedLocation) {
-        let coords: any = {
-          latitude: deviceLocation?.coords?.latitude,
-          longitude: deviceLocation?.coords?.longitude,
-        };
-        
+        let coords: any = deviceLocation?.coords;        
         setCurrentLocation(coords);
         setSelectedLocation(coords);
       }
