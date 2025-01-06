@@ -114,7 +114,8 @@ const ProfileForm = () => {
         <SectorsField
           label={<TextView>{i18n.t("Industries")}</TextView>}
           onPressEvent={() => ScreenManager.toggleModal("SectorsList", {
-            reducer: 'profileForm',
+            resource: 'profile',
+            field: 'sectors_ids',
           })}
         />
 
