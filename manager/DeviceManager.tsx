@@ -3,6 +3,7 @@ import { Config } from '@/constants/Config';
 import { useLocales } from 'expo-localization';
 import * as Location from 'expo-location';
 import * as Device from "expo-device";
+import i18n from '@/translation/i18n';
 
 class DeviceManager {
   screen: ScaledSize;
@@ -24,18 +25,27 @@ class DeviceManager {
 
   async getLocation() {
     if (Platform.OS === "android" && !Device.isDevice) {
-      console.log("Location features are not available for virtual devices");
+      console.log(i18n.t("Location features are not available for virtual devices"));
       return null;
     }
 
     const { status } = await Location.requestForegroundPermissionsAsync();
 
     if (status !== 'granted') {
+      // Todo - Handle location permission error display
       return null;
     }
-    
 
-    return await Location.getCurrentPositionAsync({});
+    let location: any = await Location.getCurrentPositionAsync({});
+    
+    if (!location) {
+      location = {
+        latitude: Config.defaultLocation.latitude,
+        longitude: Config.defaultLocation.longitude,
+      };
+    }
+
+    return location;
   }
 
   getLanguage() {
