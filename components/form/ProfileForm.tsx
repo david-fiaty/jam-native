@@ -37,7 +37,7 @@ const ProfileForm = () => {
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, profileData, userData]);
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -163,15 +163,13 @@ const ProfileForm = () => {
         <ProfileProjectsList
           title={i18n.t("Saved Projects")} 
           allButton={true}
-          //idArray={profileData?.saved_projects}
-          idArray={[14, 16, 17]}
+          idArray={profileData?.saved_projects}
         />
 
         <DividerView />
         <ProfileProjectsList
           title={i18n.t("Liked Projects")} 
-          //idArray={profileData?.liked_projects}
-          idArray={[14, 16, 17]}
+          idArray={profileData?.liked_projects}
           allButton={true}
         />
 
