@@ -42,16 +42,36 @@ const LocationMapView = ({ style, children }: BaseProps) => {
   useEffect(() => {
     (async () => {
         let deviceLocation: any = await DeviceManager.getLocation();
-        let coords: any = selectedLocation || {
+        let coords: any = {
           latitude: deviceLocation?.coords?.latitude,
           longitude: deviceLocation?.coords?.longitude,
         };
         
+        if (selectedLocation) {
+          coords = selectedLocation;
+        }
+        else if (activeScreen?.params?.fields) {
+          coords = {
+            latitude: activeScreen.params.fields['geolocation_latitude'].value,
+            longitude: activeScreen.params.fields['geolocation_longitude'].value,
+          };
+        }
+      
         setCurrentLocation(coords);
         setSelectedLocation(coords);
+
+        dispatch(setFormData<any>({ 
+          resource: resource,
+          key: null, 
+          value: {
+            [fieldNames.latitude]: coords.latitude,
+            [fieldNames.longitude]: coords.longitude,
+          }, 
+        }));
+
         setIsLoaded(true);
     })();
-  }, []);
+  }, [selectedLocation, fieldNames, activeScreen]);
 
   if (!isLoaded) return <SpinnerView />;
   
