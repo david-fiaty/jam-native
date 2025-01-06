@@ -54,12 +54,12 @@ const SectorsList = () => {
     dispatch(setFormData<any>({ 
       resource: resource,
       key: fieldName, 
-      value: selection
+      value: selection,
     }));
   };
 
   const renderSubItem = (item: any, subItem: any) => {
-    let isSelected = selectedIds.find((id: any) => id == subItem.id);
+    let isSelected: boolean = selectedIds.find((id: any) => id == subItem.id);
 
     return (
       <TouchableOpacity 

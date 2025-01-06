@@ -86,8 +86,6 @@ const AddJamForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log('--->', formData);
-
   return (
     <BoxView
       align="flex-start"
@@ -170,7 +168,7 @@ const AddJamForm = () => {
         label={<TextView>{i18n.t('Add industries')}</TextView>}
         onPressEvent={() => ScreenManager.toggleModal('SectorsList', {
           resource: resource,
-          field: 'sectors',
+          field: 'sectors_ids',
         })}
       />
 
@@ -183,12 +181,8 @@ const AddJamForm = () => {
             <TextView>{i18n.t('Add media')}</TextView>
           </BoxView>
         }
-        onSelectItem={(mediaList: any) =>
-          updateField('upload_medias', mediaList)
-        }
-        onDeleteItem={(mediaList: any) =>
-          updateField('upload_medias', mediaList)
-        }
+        onSelectItem={(mediaList: any) => updateField('upload_medias', mediaList)}
+        onDeleteItem={(mediaList: any) => updateField('upload_medias', mediaList)}
       />
 
       <CollaboratorsField

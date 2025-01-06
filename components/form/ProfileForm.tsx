@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
@@ -22,21 +22,24 @@ import ProfileImageField from "../field/ProfileImageField";
 const ProfileForm = () => {
   const [userData, setUserData] = useState<any>(null);
   const [profileData, setProfileData] = useState<any>(null);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const updateField = (key: string, value: any) => {
     let data = { ...profileData, ...{ [key]: value } };
     setProfileData(data);
   };
 
-  UserManager.getUserData().then((data: any) => {
-     setUserData(data);
-  });
+  useEffect(() => {
+    (async () => {
+      if (!isLoaded) {
+        setUserData(await UserManager.getUserData());
+        setProfileData(await UserManager.getProfileData());
+        setIsLoaded(true);
+      }
+    })();
+  }, [isLoaded, profileData, userData]);
 
-  UserManager.getProfileData().then((data: any) => {
-    if (!profileData) setProfileData(data);
-  });
-
-  if (!userData || !profileData) return <SpinnerView />;
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView
