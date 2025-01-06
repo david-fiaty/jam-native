@@ -14,7 +14,7 @@ import i18n from "@/translation/i18n";
 import BackButton from "../button/BackButton";
 import BoxView from "./BoxView";
 
-const LocationMapView = ({ style, children }: BaseProps) => {
+const LocationMapView = () => {
   const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
@@ -54,9 +54,10 @@ const LocationMapView = ({ style, children }: BaseProps) => {
 
       setIsLoaded(true);
     })();
-  }, []);
+  }, [selectedLocation]);
 
   if (!isLoaded) return <SpinnerView />;
+  console.log()
   
   return (
     <BoxView 
