@@ -157,7 +157,10 @@ const AddJamForm = () => {
         longitude={formData?.geolocation_longitude}
         onPressEvent={() => ScreenManager.toggleModal('LocationMapView', {
           resource: resource,
-          field: 'sectors',
+          fields: {
+            latitude: 'geolocation_latitude',
+            longitude: 'geolocation_longitude', 
+          },
         })}
       />
 
