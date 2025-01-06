@@ -23,9 +23,7 @@ const LocationMapView = () => {
   const fieldNames: any = activeScreen.params.fields;
   const formData: any = useSelector((state: any) => state[resource]);
 
-  const onMapPress = async (event: MapPressEvent) => {
-    let coords: any = event.nativeEvent.coordinate;
-
+  const updateLocation = (coords: any) => {
     dispatch(setFormData<any>({ 
       resource: resource,
       key: fieldNames.latitude, 
@@ -39,10 +37,20 @@ const LocationMapView = () => {
     }));
   };
 
+  const onMapPress = async (event: MapPressEvent) => {
+    updateLocation(event.nativeEvent.coordinate);
+  };
+
+  const isLocationSet = () => {
+    return !isLoaded && formData?.[fieldNames.latitude] && formData?.[fieldNames.longitude];
+  };
+
   useEffect(() => {
     (async () => {
-      if (!selectedLocation) setSelectedLocation((await DeviceManager.getLocation())?.coords);
-      setIsLoaded(true);
+      if (!isLocationSet()) {
+        updateLocation((await DeviceManager.getLocation())?.coords);
+        setIsLoaded(true);
+      }
     })();
   }, []);
 
