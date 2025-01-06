@@ -151,7 +151,8 @@ const AddJamForm = () => {
         }
       />
 
-      {/* <LocationPickerField /> */}
+      <TextView>{i18n.t('Location')}</TextView>
+      <LocationPickerField />
 
       <TextView>{i18n.t('Country')}</TextView>
       <CountryField
