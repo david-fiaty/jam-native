@@ -15,7 +15,7 @@ import BoxView from "./BoxView";
 
 const LocationMapView = () => {
   const dispatch = useDispatch();
-  const [currentLocation, setCurrentLocation] = useState<any>(null);
+  const [regionLocation, setRegionLocation] = useState<any>(null);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
@@ -48,6 +48,22 @@ const LocationMapView = () => {
     return null;
   };
 
+  const getDeviceLocation = async () => {
+    let deviceLocation: any = await DeviceManager.getLocation();
+
+    if (deviceLocation?.coords?.latitude && deviceLocation?.coords?.longitude) {
+      return {
+        latitude: deviceLocation?.coords?.latitude,
+        longitude: deviceLocation?.coords?.longitude,
+      };
+    }
+
+    return {
+      latitude: Config.defaultLocation.latitude,
+      longitude: Config.defaultLocation.longitude,
+    }
+  };
+
   useEffect(() => {
     (async () => {
       if (!selectedLocation) {
@@ -65,10 +81,13 @@ const LocationMapView = () => {
           };
         }
     
-        //updateLocation(coords, storedLocation);
+        setSelectedLocation(coords);
       }
 
-      setIsLoaded(true);
+      if (!isLoaded) {
+        setRegionLocation(getDeviceLocation());
+        setIsLoaded(true);
+      }
     })();
   }, [selectedLocation]);
 
@@ -92,8 +111,8 @@ const LocationMapView = () => {
             provider="google"
             onPress={onMapPress}
             initialRegion={{
-              latitude: currentLocation?.latitude || Config.defaultLocation.latitude,
-              longitude: currentLocation?.longitude || Config.defaultLocation.longitude,
+              latitude: parseFloat(regionLocation.latitude),
+              longitude: parseFloat(regionLocation.longitude),
               latitudeDelta: 2,
               longitudeDelta: 2,
             }}
