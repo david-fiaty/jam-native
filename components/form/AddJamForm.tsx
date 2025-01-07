@@ -84,6 +84,8 @@ const AddJamForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
+  console.log(formData?.upload_medias)
+
   return (
     <BoxView
       align="flex-start"
