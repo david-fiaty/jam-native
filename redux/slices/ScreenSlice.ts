@@ -6,30 +6,18 @@ const ScreenSlice = createSlice({
   initialState: [],
   reducers: {
     setActiveScreen: (state, action) => {
-      if (state.length) {
-        
-      }
+      let screens: any = [...state];
+      let index: any = screens.findIndex((o: any) => o.name == action.payload.name);
       
-      //let currentScreen: any = Modals.find((o: any) => o.name == action.payload.name);
+      if (index === -1) {
+        screens.push(Modals.find((o: any) => o.name == action.payload.name));
+      }
+      else {
+        delete screens[index];
+        screens = screens.filter((o: any) => o);
+      }
 
-    
-      /*
-    
-      state.map(item => {
-        if (item.name == action.payload.name && item.active) {
-          item.active = false;
-        }
-        else if (item.name == action.payload.name && !item.active) {
-          item.active = true;
-          item.params = action.payload.params;
-        }
-        else {
-          item.active = false;
-        }
-      });
-
-
-      */
+      state = screens;
     },
   },
 });
