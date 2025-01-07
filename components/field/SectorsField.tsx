@@ -16,7 +16,6 @@ const SectorsField = ({ label, onPressEvent}: Props) => {
       onPress={onPressEvent}
       style={styles.container}
     >
-      <IconView name="plus" theme="secondary" radius="round" />
       {label}      
     </BoxView>
   );

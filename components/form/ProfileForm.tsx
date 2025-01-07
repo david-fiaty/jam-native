@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
@@ -20,6 +20,7 @@ import InputTextareaField from "../field/InputTextareaField";
 import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
 import ProfileImageField from "../field/ProfileImageField";
+import IconView from "../view/IconView";
 
 const ProfileForm = () => {
   const resource: string = 'profile';
@@ -138,8 +139,8 @@ const ProfileForm = () => {
         <DividerView theme="secondary" />
         <SectorsField
           label={<TextView>{i18n.t("Industries")}</TextView>}
-          onPressEvent={() => ScreenManager.toggleScreen("SectorsList", {
-            resource: 'profile',
+          onPressEvent={() => ScreenManager.toggleScreen('SectorsList', {
+            resource: resource,
             field: 'sectors_ids',
           })}
         />
