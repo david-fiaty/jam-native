@@ -137,8 +137,6 @@ const ProfileProjectsList = ({
   return (
     <View style={styles.container}>
       <BoxView direction="row" align="center" justify="space-between">
-        <TextView style={styles.title}>{title}</TextView>
-
         {allButton && (
           <TouchableOpacity
             onPress={() =>
@@ -170,11 +168,6 @@ const ProfileProjectsList = ({
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-  },
-  title: {
-    fontWeight: "bold",
-    marginBottom: Layout.space.base,
-    flex: 1,
   },
   link: {
     borderBottomWidth: 1,
