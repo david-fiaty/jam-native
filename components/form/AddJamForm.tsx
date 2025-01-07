@@ -84,8 +84,6 @@ const AddJamForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(formData?.upload_medias)
-
   return (
     <BoxView
       align="flex-start"
@@ -159,6 +157,7 @@ const AddJamForm = () => {
         longitude={formData?.geolocation_longitude}
         onPressEvent={() => ScreenManager.toggleModal('LocationMapView', {
           resource: resource,
+          back: 'AddJamForm',
           latitude: {
             key: 'geolocation_latitude',
             value: formData?.geolocation_latitude,
