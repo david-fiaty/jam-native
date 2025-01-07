@@ -24,8 +24,6 @@ const LocationMapView = () => {
   const formData: any = useSelector((state: any) => state[resource]);
 
   const updateLocation = (coords: any) => {
-    setCurrentLocation(coords);
-    setSelectedLocation(coords);
     dispatch(setFormData<any>({ 
       resource: resource,
       key: null, 
@@ -34,6 +32,9 @@ const LocationMapView = () => {
         [activeScreen.params.longitude.key]: coords.longitude,
       }, 
     }));
+
+    setCurrentLocation(coords);
+    setSelectedLocation(coords);
   };
 
   const onMapPress = async (event: MapPressEvent) => {
@@ -97,13 +98,13 @@ const LocationMapView = () => {
           <RNMapView
             style={styles.map}
             provider="google"
+            onPress={onMapPress}
             initialRegion={{
               latitude: currentLocation?.latitude || Config.defaultLocation.latitude,
               longitude: currentLocation?.longitude || Config.defaultLocation.longitude,
               latitudeDelta: 2,
               longitudeDelta: 2,
             }}
-            onPress={onMapPress}
           >
             {selectedLocation && (
               <Marker
