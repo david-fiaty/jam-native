@@ -131,11 +131,11 @@ const toggleItemsForm = () => {
       >
         <BackButton
           title={i18n.t("Select Jams")}
-          onPress={() => ScreenManager.toggleScreen("AddProjectForm")}
+          onPress={() => ScreenManager.toggleModal("AddProjectForm")}
         />
 
         {selectedJams?.length > 0 && (
-          <TouchableOpacity onPress={() => ScreenManager.toggleScreen("AddProjectForm")}>
+          <TouchableOpacity onPress={() => ScreenManager.toggleModal("AddProjectForm")}>
             <View>
               <TextView style={Layout.textLink}>
                 {i18n.t("Add selected")} ({selectedJams.length})
