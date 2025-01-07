@@ -65,6 +65,7 @@ const LocationMapView = () => {
 
   useEffect(() => {
     (async () => {
+      if (!selectedLocation) {
         let coords: any = {};
         let storedLocation: any = getStoredLocation();
 
@@ -73,8 +74,9 @@ const LocationMapView = () => {
     
         setSelectedLocation(coords);
         setIsLoaded(true);
+      }
     })();
-  }, []);
+  }, [selectedLocation]);
 
   if (!isLoaded) return <SpinnerView />;
   
