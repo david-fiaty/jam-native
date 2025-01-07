@@ -98,7 +98,9 @@ const AddProjectForm = () => {
           <BoxView direction="column" align="center" justify="center">
             <AddItemButton
               label={i18n.t("Add Jams")}
-              onPress={() => ScreenManager.toggleScreen("SelectJamsForm")}
+              onPress={() => ScreenManager.toggleScreen("SelectJamsForm", {
+                resource: resource,
+              })}
             />
           </BoxView>
         )}
