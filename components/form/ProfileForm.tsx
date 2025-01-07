@@ -41,12 +41,16 @@ const ProfileForm = () => {
     (async () => {
       if (!isLoaded) {
         let profileData: any = await UserManager.getProfileData();
+        profileData = {...profileData, ...formData};
+
+        // Todo - Remove this test
+        profileData['jams'] = [18, 20, 32, 33];
 
         setUserData(await UserManager.getUserData());
         dispatch(setFormData<any>({ 
           resource: resource,
           key: null, 
-          value: {...profileData, ...formData}, 
+          value: profileData, 
         }));
 
         setIsLoaded(true);
@@ -182,8 +186,7 @@ const ProfileForm = () => {
         <ProfileProjectsList
           title={i18n.t("Your Projects")} 
           addButton={true}
-          //idArray={formData?.profile_projects}
-          idArray={[14, 20]}
+          idArray={formData?.profile_projects}
           onAddButtonPress={() => ScreenManager.toggleScreen("AddProjectForm")}
         />
 
