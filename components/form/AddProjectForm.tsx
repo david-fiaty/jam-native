@@ -100,6 +100,7 @@ const AddProjectForm = () => {
               label={i18n.t("Add Jams")}
               onPress={() => ScreenManager.toggleScreen("SelectJamsForm", {
                 resource: resource,
+                profileId: profileId,
               })}
             />
           </BoxView>
