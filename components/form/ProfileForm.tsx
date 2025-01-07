@@ -182,7 +182,8 @@ const ProfileForm = () => {
         <ProfileProjectsList
           title={i18n.t("Your Projects")} 
           addButton={true}
-          idArray={formData?.profile_projects}
+          //idArray={formData?.profile_projects}
+          idArray={[14, 20]}
           onAddButtonPress={() => ScreenManager.toggleScreen("AddProjectForm")}
         />
 
