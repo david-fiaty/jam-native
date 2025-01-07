@@ -2,7 +2,6 @@ export const Modals = [
   {
     name: 'JamsList', 
     effect: 'fade',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     params: {},
@@ -10,7 +9,6 @@ export const Modals = [
   {
     name: 'JamsMapView', 
     effect: 'fade',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     params: {},
@@ -18,7 +16,6 @@ export const Modals = [
   {
     name: 'AddJamForm', 
     effect: 'fade',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     params: {},
@@ -26,7 +23,6 @@ export const Modals = [
   {
     name: 'AddProjectForm', 
     effect: 'fade',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     params: {},
@@ -34,7 +30,6 @@ export const Modals = [
   {
     name: 'SelectJamsForm', 
     effect: 'fade',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     params: {},
@@ -42,7 +37,6 @@ export const Modals = [
   {
     name: 'ProfileForm', 
     effect: 'fade',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     params: {},
@@ -50,7 +44,6 @@ export const Modals = [
   {
     name: 'SettingsMenu', 
     effect: 'fade',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     params: {},
@@ -58,7 +51,6 @@ export const Modals = [
   {
     name: 'NotificationsMenu', 
     effect: 'fade',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     params: {},
@@ -66,7 +58,6 @@ export const Modals = [
   {
     name: 'SearchView', 
     effect: 'fade',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     params: {},
@@ -74,7 +65,6 @@ export const Modals = [
   {
     name: 'LocationMapView', 
     effect: 'slide',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     params: {},
@@ -82,7 +72,6 @@ export const Modals = [
   {
     name: 'JammersList', 
     effect: 'slide',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     params: {},
@@ -90,7 +79,6 @@ export const Modals = [
   {
     name: 'CollaboratorsList', 
     effect: 'slide',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     params: {},
@@ -98,7 +86,6 @@ export const Modals = [
   {
     name: 'SectorsList', 
     effect: 'slide',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     params: {},
@@ -106,7 +93,6 @@ export const Modals = [
   {
     name: 'HostsList', 
     effect: 'slide',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     params: {},
@@ -114,7 +100,6 @@ export const Modals = [
   {
     name: 'SavedJamAction', 
     effect: 'slide',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     params: {},
@@ -122,7 +107,6 @@ export const Modals = [
   {
     name: 'LikedJamAction', 
     effect: 'slide',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     params: {},
@@ -130,7 +114,6 @@ export const Modals = [
   {
     name: 'AddedJamAction', 
     effect: 'slide',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     params: {},
@@ -138,7 +121,6 @@ export const Modals = [
   {
     name: 'MoreJamView', 
     effect: 'slide',
-    active: false,
     headerNavigation: true,
     footerNavigation: true,
     params: {},
