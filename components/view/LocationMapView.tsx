@@ -21,7 +21,6 @@ const LocationMapView = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
   const resource: string = activeScreen.params.resource;
-  const fieldNames: any = (activeScreen.params?.fields || []).map((o: any) => o.name);
   const formData: any = useSelector((state: any) => state[resource]);
 
   const onMapPress = async (event: MapPressEvent) => {
@@ -33,21 +32,43 @@ const LocationMapView = () => {
       resource: resource,
       key: null, 
       value: {
-        [fieldNames.latitude]: coords.latitude,
-        [fieldNames.longitude]: coords.longitude,
+        [activeScreen.params.latitude.key]: coords.latitude,
+        [activeScreen.params.longitude.key]: coords.longitude,
       }, 
     }));
+  };
+
+  const getStoredLocation = () => {
+    let latitude: any = activeScreen.params.latitude.value;
+    let longitude: any = activeScreen.params.longitude.value;
+
+    if (latitude && longitude) {
+      return {
+        latitude: latitude,
+        longitude: longitude,
+      };
+    } 
+
+    return null;
   };
 
   useEffect(() => {
     (async () => {
       if (!selectedLocation) {
-        let deviceLocation: any = await DeviceManager.getLocation();
-        let coords: any = {
-          latitude: deviceLocation?.coords?.latitude,
-          longitude: deviceLocation?.coords?.longitude,
-        };
-        
+        let coords: any = {};
+        let storedLocation: any = getStoredLocation();
+
+        if (storedLocation) {
+          coords = storedLocation;
+        }
+        else {
+          let deviceLocation: any = await DeviceManager.getLocation();
+          coords = {
+            latitude: deviceLocation?.coords?.latitude,
+            longitude: deviceLocation?.coords?.longitude,
+          };
+        }
+    
         setCurrentLocation(coords);
         setSelectedLocation(coords);
       }
@@ -57,7 +78,6 @@ const LocationMapView = () => {
   }, [selectedLocation]);
 
   if (!isLoaded) return <SpinnerView />;
-  console.log(activeScreen?.params?.fields)
   
   return (
     <BoxView 
