@@ -68,7 +68,8 @@ const LocationMapView = () => {
           };
         }
     
-        updateLocation(coords);
+        console.log(coords);
+        //updateLocation(coords);
       }
 
       setIsLoaded(true);
