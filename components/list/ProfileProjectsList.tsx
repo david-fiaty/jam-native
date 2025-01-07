@@ -126,7 +126,7 @@ const ProfileProjectsList = ({
     }
 
     setIsLoaded(true);
-  }, [addButton, profileProjects, projectImages]);
+  });
 
   if (!isLoaded) return <SpinnerView />;
 
