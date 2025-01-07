@@ -179,9 +179,8 @@ const ProfileForm = () => {
         />
 
         <DividerView theme="secondary" />
-
+        <TextView style={styles.title}>{i18n.t("Your Projects")}</TextView>
         <ProfileProjectsList
-          title={i18n.t("Your Projects")} 
           addButton={true}
           idArray={formData?.profile_projects}
           onAddButtonPress={() => ScreenManager.toggleScreen("AddProjectForm")}
@@ -190,8 +189,8 @@ const ProfileForm = () => {
         {formData?.saved_projects?.length > 0 && (
           <>
             <DividerView />
+            <TextView style={styles.title}>{i18n.t("Saved Projects")}</TextView>
             <ProfileProjectsList
-              title={i18n.t("Saved Projects")} 
               allButton={true}
               idArray={formData?.saved_projects}
             />
@@ -201,8 +200,8 @@ const ProfileForm = () => {
         {formData?.like_projects?.length > 0 && (
           <>
             <DividerView />
+            <TextView style={styles.title}>{i18n.t("Liked Projects")}</TextView>
             <ProfileProjectsList
-              title={i18n.t("Liked Projects")} 
               idArray={formData?.liked_projects}
               allButton={true}
             />
@@ -212,8 +211,8 @@ const ProfileForm = () => {
         {formData?.like_projects?.length > 0 && (
           <>
             <DividerView />
+            <TextView style={styles.title}>{i18n.t("Your Jams")}</TextView>
             <ProfileJamsList 
-              title={i18n.t("Your Jams")} 
               allButton={true}
               addButton={true}
               idArray={formData?.profile_jams} 
@@ -225,8 +224,8 @@ const ProfileForm = () => {
         {formData?.saved_jams?.length > 0 && (
           <>
             <DividerView />
+            <TextView style={styles.title}>{i18n.t("Saved Jams")}</TextView>
             <ProfileJamsList 
-              title={i18n.t("Saved Jams")} 
               allButton={true}
               idArray={formData?.saved_jams} 
             />
@@ -236,8 +235,8 @@ const ProfileForm = () => {
         {formData?.liked_jams?.length > 0 && (
           <>
             <DividerView />
+            <TextView style={styles.title}>{i18n.t("Liked Jams")}</TextView>
             <ProfileJamsList 
-              title={i18n.t("Liked Jams")} 
               allButton={true}
               idArray={formData?.liked_jams} 
             />
@@ -249,5 +248,14 @@ const ProfileForm = () => {
     </BoxView>
   );
 };
+
+const styles = StyleSheet.create({
+  title: {
+    fontWeight: "bold",
+    marginBottom: Layout.space.base,
+    flex: 1,
+  },
+});
+
 
 export default ProfileForm;
