@@ -76,6 +76,7 @@ const ProfileForm = () => {
         />
         <DividerView theme="secondary" />
 
+        <TextView style={styles.title}>{i18n.t('Details')}</TextView>
         <InputTextField
           placeholder={i18n.t("Email address")}
           value={formData?.email}
@@ -101,6 +102,21 @@ const ProfileForm = () => {
           onChangeText={(value: string) => updateField("profile_description", value)}
         />
 
+        <TextView style={styles.title}>{i18n.t('Activity')}</TextView>
+        <SectorsField
+          label={
+            <>
+              <IconView name="plus" theme="secondary" radius="round" />
+              <TextView>{i18n.t('Add industries')}</TextView>
+            </>
+          }
+          onPressEvent={() => ScreenManager.toggleScreen('SectorsList', {
+            resource: resource,
+            field: 'sectors_ids',
+          })}
+        />
+
+        <TextView style={styles.title}>{i18n.t('Address')}</TextView>
         <LocationPickerField 
           latitude={formData?.geolocation_latitude}
           longitude={formData?.geolocation_longitude}
@@ -138,16 +154,7 @@ const ProfileForm = () => {
         <CountryField value={formData?.country} />
 
         <DividerView theme="secondary" />
-        <SectorsField
-          label={<TextView>{i18n.t("Industries")}</TextView>}
-          onPressEvent={() => ScreenManager.toggleScreen('SectorsList', {
-            resource: resource,
-            field: 'sectors_ids',
-          })}
-        />
-
-        <DividerView theme="secondary" />
-
+        <TextView style={styles.title}>{i18n.t('Social')}</TextView>
         <InputTextField
           placeholder={i18n.t("Phone number")}
           value={formData?.phone_number}
@@ -249,5 +256,16 @@ const ProfileForm = () => {
     </BoxView>
   );
 };
+
+
+const styles = StyleSheet.create({
+  title: {
+    fontWeight: "bold",
+    marginTop: Layout.space.base,
+    marginBottom: Layout.space.base/2,
+    flex: 1,
+  },
+});
+
 
 export default ProfileForm;
