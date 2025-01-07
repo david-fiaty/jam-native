@@ -21,7 +21,11 @@ const LocationMapView = () => {
   const activeScreen: any = ScreenManager.getActiveScreen();
   const resource: string = activeScreen.params.resource;
 
-  const updateLocation = (coords: any) => {
+  const onMapPress = async (event: MapPressEvent) => {
+    let coords: any = event.nativeEvent.coordinate;
+
+    setSelectedLocation(coords);
+
     dispatch(setFormData<any>({ 
       resource: resource,
       key: null, 
@@ -30,11 +34,6 @@ const LocationMapView = () => {
         [activeScreen.params.longitude.key]: coords.longitude,
       }, 
     }));
-  };
-
-  const onMapPress = async (event: MapPressEvent) => {
-    let coords: any = event.nativeEvent.coordinate;
-    updateLocation(coords);
   };
 
   const getStoredLocation = () => {
@@ -66,30 +65,16 @@ const LocationMapView = () => {
 
   useEffect(() => {
     (async () => {
-      if (!selectedLocation) {
         let coords: any = {};
         let storedLocation: any = getStoredLocation();
 
-        if (storedLocation) {
-          coords = storedLocation;
-        }
-        else {
-          let deviceLocation: any = await DeviceManager.getLocation();
-          coords = {
-            latitude: deviceLocation?.coords?.latitude,
-            longitude: deviceLocation?.coords?.longitude,
-          };
-        }
+        if (storedLocation) coords = storedLocation
+        else coords = await getDeviceLocation()
     
         setSelectedLocation(coords);
-      }
-
-      if (!isLoaded) {
-        setRegionLocation(getDeviceLocation());
         setIsLoaded(true);
-      }
     })();
-  }, [selectedLocation]);
+  }, []);
 
   if (!isLoaded) return <SpinnerView />;
   
@@ -111,8 +96,8 @@ const LocationMapView = () => {
             provider="google"
             onPress={onMapPress}
             initialRegion={{
-              latitude: parseFloat(regionLocation.latitude),
-              longitude: parseFloat(regionLocation.longitude),
+              latitude: parseFloat(selectedLocation.latitude),
+              longitude: parseFloat(selectedLocation.longitude),
               latitudeDelta: 2,
               longitudeDelta: 2,
             }}
