@@ -6,7 +6,11 @@ const ScreenSlice = createSlice({
   initialState: [],
   reducers: {
     setActiveScreen: (state, action) => {
-      let currentScreen: any = Modals.find((o: any) => o.name == action.payload.name);
+      if (state.length) {
+        
+      }
+      
+      //let currentScreen: any = Modals.find((o: any) => o.name == action.payload.name);
 
     
       /*
