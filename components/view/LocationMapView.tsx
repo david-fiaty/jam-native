@@ -70,7 +70,7 @@ const LocationMapView = () => {
           };
         }
     
-        updateLocation(coords, !storedLocation);
+        //updateLocation(coords, storedLocation);
       }
 
       setIsLoaded(true);
