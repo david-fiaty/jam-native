@@ -52,6 +52,11 @@ const LocationMapView = () => {
     return null;
   };
 
+  const updateLocation = (coords: any) => {
+    setCurrentLocation(coords);
+    setSelectedLocation(coords);
+  };
+
   useEffect(() => {
     (async () => {
       if (!selectedLocation) {
@@ -69,8 +74,7 @@ const LocationMapView = () => {
           };
         }
     
-        setCurrentLocation(coords);
-        setSelectedLocation(coords);
+        updateLocation(coords);
       }
 
       setIsLoaded(true);
