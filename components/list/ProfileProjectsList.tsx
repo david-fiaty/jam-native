@@ -137,8 +137,6 @@ const ProfileProjectsList = ({
   return (
     <View style={styles.container}>
       <BoxView direction="row" align="center" justify="space-between">
-        <TextView style={styles.title}>{title}</TextView>
-
         {allButton && (
           <TouchableOpacity
             onPress={() =>
