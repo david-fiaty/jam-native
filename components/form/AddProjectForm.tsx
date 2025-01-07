@@ -23,7 +23,8 @@ const AddProjectForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
-  const formData = useSelector((state: any) => state.form[resource]);
+  const activeScreen: any = ScreenManager.getActiveScreen();
+  const formData = useSelector((state: any) => state.form[activeScreen.params.resource]);
 
   const updateField = (key: string, value: any) => {
     dispatch(setFormData<any>({ 
@@ -101,6 +102,7 @@ const AddProjectForm = () => {
               onPress={() => ScreenManager.toggleScreen("SelectJamsForm", {
                 resource: resource,
                 profileId: profileId,
+                profileJams: [], // Todo - Retrieve profile jams here 
               })}
             />
           </BoxView>
