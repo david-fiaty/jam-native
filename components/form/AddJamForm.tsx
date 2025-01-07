@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
@@ -178,7 +178,12 @@ const AddJamForm = () => {
 
       <DividerView />
       <SectorsField
-        label={<TextView>{i18n.t('Add industries')}</TextView>}
+        label={
+          <>
+            <IconView name="plus" theme="secondary" radius="round" />
+            <TextView>{i18n.t('Add industries')}</TextView>
+          </>
+        }
         onPressEvent={() => ScreenManager.toggleScreen('SectorsList', {
           resource: resource,
           field: 'sectors',
