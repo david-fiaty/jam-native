@@ -62,7 +62,7 @@ const ProfileForm = () => {
     >
       <BackButton
         title={i18n.t("Your profile")}
-        onPress={() => ScreenManager.toggleModal("ProfileForm")}
+        onPress={() => ScreenManager.toggleScreen("ProfileForm")}
       />
 
       <View style={Layout.formContainer}>
@@ -125,7 +125,7 @@ const ProfileForm = () => {
         <DividerView theme="secondary" />
         <SectorsField
           label={<TextView>{i18n.t("Industries")}</TextView>}
-          onPressEvent={() => ScreenManager.toggleModal("SectorsList", {
+          onPressEvent={() => ScreenManager.toggleScreen("SectorsList", {
             resource: 'profile',
             field: 'sectors_ids',
           })}
@@ -169,7 +169,7 @@ const ProfileForm = () => {
           title={i18n.t("Your Projects")} 
           addButton={true}
           idArray={formData?.profile_projects}
-          onAddButtonPress={() => ScreenManager.toggleModal("AddProjectForm")}
+          onAddButtonPress={() => ScreenManager.toggleScreen("AddProjectForm")}
         />
 
         <DividerView />
@@ -192,7 +192,7 @@ const ProfileForm = () => {
           allButton={true}
           addButton={true}
           idArray={formData?.profile_jams} 
-          onAddButtonPress={() => ScreenManager.toggleModal("AddJamForm")}
+          onAddButtonPress={() => ScreenManager.toggleScreen("AddJamForm")}
         />
 
         <DividerView />

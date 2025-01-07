@@ -40,7 +40,7 @@ const HostsList = () => {
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Jam hosts')}
-        onPress={() => ScreenManager.toggleModal('HostsList')}
+        onPress={() => ScreenManager.toggleScreen('HostsList')}
       />
       <View style={Layout.borderedListContainer}>
         {profiles?.length > 0 &&
