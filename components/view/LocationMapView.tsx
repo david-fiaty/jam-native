@@ -41,13 +41,10 @@ const LocationMapView = () => {
   };
 
   const getStoredLocation = () => {
-    let latitude: any = activeScreen.params.latitude.value;
-    let longitude: any = activeScreen.params.longitude.value;
-
-    if (latitude && longitude) {
+    if (activeScreen.params.latitude.value && activeScreen.params.longitude.value) {
       return {
-        latitude: latitude,
-        longitude: longitude,
+        latitude: activeScreen.params.latitude.value,
+        longitude: activeScreen.params.longitude.value,
       };
     } 
 
