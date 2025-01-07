@@ -22,16 +22,13 @@ const LocationMapView = () => {
   const resource: string = activeScreen.params.resource;
 
   const onMapPress = async (event: MapPressEvent) => {
-    let coords: any = event.nativeEvent.coordinate;
-
-    setSelectedLocation(coords);
-
+    setSelectedLocation(event.nativeEvent.coordinate);
     dispatch(setFormData<any>({ 
       resource: resource,
       key: null, 
       value: {
-        [activeScreen.params.latitude.key]: coords.latitude,
-        [activeScreen.params.longitude.key]: coords.longitude,
+        [activeScreen.params.latitude.key]: event.nativeEvent.coordinate.latitude,
+        [activeScreen.params.longitude.key]: event.nativeEvent.coordinate.longitude,
       }, 
     }));
   };
