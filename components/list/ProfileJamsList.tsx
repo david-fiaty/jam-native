@@ -78,14 +78,23 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, onAddButtonPres
   }
 
   useEffect(() => {
-    if (!profileJams?.length && idArray?.length) {
-      EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
-        if (addButton === true) data.push({ id: "addItem" });
-        setProfileJams(data);
+    (async () => {
+      if (!isLoaded) {
+        let jams: any = [];
+
+        if (idArray.length) {
+          jams = await EntityManager.getJams({ items_ids: idArray });
+        }
+
+        if (addButton === true) {
+          jams.push({ id: "addItem" });
+        }
+
+        setProfileJams(jams);
         setIsLoaded(true);
-      });
-    }
-  });
+      }
+    })();
+  }, [isLoaded, idArray, addButton]);
 
   if (!isLoaded) return <SpinnerView />;
 

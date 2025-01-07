@@ -41,12 +41,13 @@ const ProfileForm = () => {
     (async () => {
       if (!isLoaded) {
         let profileData: any = await UserManager.getProfileData();
+        profileData = {...profileData, ...formData};
 
         setUserData(await UserManager.getUserData());
         dispatch(setFormData<any>({ 
           resource: resource,
           key: null, 
-          value: {...profileData, ...formData}, 
+          value: profileData, 
         }));
 
         setIsLoaded(true);

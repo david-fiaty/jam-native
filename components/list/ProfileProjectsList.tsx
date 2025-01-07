@@ -34,12 +34,12 @@ const ProfileProjectsList = ({
   const router = useRouter();
   const [profileProjects, setProfileProjects] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [projectImages, setProjectImages] = useState<any>({});
+  const [projectsImages, setProjectsImages] = useState<any>({});
 
   const renderItem = (row: any) => {
     let imageSize: any = MediaManager.getThumbnailSize();
     let output: any = null;
-    let uri: string = projectImages?.[row?.item?.id];
+    let uri: string = projectsImages?.[row?.item?.id];
 
     if (row?.item?.id == "addItem") {
       output = (
@@ -106,27 +106,31 @@ const ProfileProjectsList = ({
   };
 
   useEffect(() => {
-    if (!profileProjects?.length && idArray?.length) {
-      EntityManager.getProjects({ items_ids: idArray }).then((data: any) => {
-        if (addButton === true) data.push({ id: "addItem" });
-        
-        let projectImagesList: any = {};
-        
-        if (data?.length > 0) {
-          data.map((item: any) => {
-            EntityManager.getProjectImageUrl(item).then((value: any) => {
-              if (value && !projectImages?.[item?.id]) projectImagesList[item.id] = value;
-            });
-          });
+    (async () => {
+      if (!isLoaded) {
+        let projects: any = [];
+        let images: any = {};
+
+        if (idArray.length) {
+          projects = await EntityManager.getProjects({ items_ids: idArray });
         }
 
-        setProjectImages(projectImagesList);
-        setProfileProjects(data);
+        (projects || []).map((item: any) => {
+          EntityManager.getProjectImageUrl(item).then((value: any) => {
+            if (value && !projectsImages?.[item?.id]) images[item.id] = value;
+          });
+        });
 
+        if (addButton === true) {
+          projects.push({ id: "addItem" });
+        }
+    
+        setProfileProjects(projects);
+        setProjectsImages(images);
         setIsLoaded(true);
-      });
-    }
-  });
+      }
+    })();
+  }, [isLoaded, idArray, addButton, projectsImages]);
 
   if (!isLoaded) return <SpinnerView />;
 
