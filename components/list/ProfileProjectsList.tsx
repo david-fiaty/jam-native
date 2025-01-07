@@ -106,6 +106,38 @@ const ProfileProjectsList = ({
   };
 
   useEffect(() => {
+
+    (async () => {
+      if (!isLoaded) {
+        let projects: any = await EntityManager.getProjects({ items_ids: idArray });
+        let imagesList: any = {...projectImages};
+
+        imagesList = projectImages.map((item: any) => {
+          EntityManager.getProjectImageUrl(item).then((value: any) => {
+            if (value && !projectImages?.[item?.id]) imagesList[item.id] = value;
+          });
+        });
+
+        console.log(imagesList);
+
+        /*
+        let images: any = projectImages.map((item: any) => {
+          EntityManager.getProjectImageUrl(item).then((value: any) => {
+            if (value && !projectImages?.[item?.id]) projectImagesList[item.id] = value;
+          });
+        });
+        */
+        //setProfileProjects(projects);
+        //setProjectImages(projectImagesList);
+        
+        setIsLoaded(true);
+      }
+    })();
+
+
+
+
+/*
     if (!profileProjects?.length && idArray?.length) {
       EntityManager.getProjects({ items_ids: idArray }).then((data: any) => {
         if (addButton === true) data.push({ id: "addItem" });
@@ -124,9 +156,10 @@ const ProfileProjectsList = ({
         setProfileProjects(data);
       });
     }
+*/
 
     setIsLoaded(true);
-  });
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
 
