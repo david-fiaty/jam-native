@@ -122,10 +122,10 @@ const ProfileProjectsList = ({
 
         setProjectImages(projectImagesList);
         setProfileProjects(data);
-
-        setIsLoaded(true);
       });
     }
+
+    setIsLoaded(true);
   });
 
   if (!isLoaded) return <SpinnerView />;
