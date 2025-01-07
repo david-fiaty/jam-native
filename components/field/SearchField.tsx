@@ -27,7 +27,7 @@ const SearchField = () => {
       style={styles.iconContainer}
       onPress={() => {
         dispatch(toggleSearchField(true));
-        ScreenManager.toggleModal('SearchView');
+        ScreenManager.toggleScreen('SearchView');
       }}
     />
   );
@@ -51,7 +51,7 @@ const SearchField = () => {
             }
             else if (!searchState.value.length && activeScreen?.name == 'SearchView') {
               dispatch(toggleSearchField(false));
-              ScreenManager.toggleModal('SearchView');
+              ScreenManager.toggleScreen('SearchView');
             }
           }}
         />

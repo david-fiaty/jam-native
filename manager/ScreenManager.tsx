@@ -37,7 +37,7 @@ class ScreenManager {
     return screens[index];
   }
   
-  toggleModal(name: string, params?: any) {
+  toggleScreen(name: string, params?: any) {
     if (name != 'SearchView' && SearchManager.isExpanded()) {
       Store.dispatch(toggleSearchField(false));
     }

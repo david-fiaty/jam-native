@@ -72,7 +72,7 @@ const AddProjectForm = () => {
     >
       <BackButton
         title={i18n.t("Create a project")}
-        onPress={() => ScreenManager.toggleModal("ProfileForm")}
+        onPress={() => ScreenManager.toggleScreen("ProfileForm")}
       />
 
       <View style={Layout.formContainer}>
@@ -95,7 +95,7 @@ const AddProjectForm = () => {
             <TextView>{i18n.t("There are no Jams in this project")}</TextView>
             <AddItemButton
               label={i18n.t("Add")}
-              onPress={() => ScreenManager.toggleModal("SelectJamsForm")}
+              onPress={() => ScreenManager.toggleScreen("SelectJamsForm")}
             />
           </BoxView>
         )}
@@ -106,7 +106,7 @@ const AddProjectForm = () => {
             <ProjectJamsList 
               idArray={projectData.jams} 
               addButton={true} 
-              onAddEvent={() => ScreenManager.toggleModal("SelectJamsForm")}
+              onAddEvent={() => ScreenManager.toggleScreen("SelectJamsForm")}
               onDeleteEvent={(row) => deleteJam(row)}
             />
           </BoxView>
