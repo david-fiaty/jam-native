@@ -92,9 +92,8 @@ const AddProjectForm = () => {
 
         {!projectData?.jams?.length && (
           <BoxView direction="column" align="center" justify="center">
-            <TextView>{i18n.t("There are no Jams in this project")}</TextView>
             <AddItemButton
-              label={i18n.t("Add")}
+              label={i18n.t("Add Jams")}
               onPress={() => ScreenManager.toggleScreen("SelectJamsForm")}
             />
           </BoxView>
