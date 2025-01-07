@@ -97,9 +97,20 @@ const ProfileForm = () => {
           onChangeText={(value: string) => updateField("profile_description", value)}
         />
 
-        <LocationPickerField
+        <LocationPickerField 
           latitude={formData?.geolocation_latitude}
           longitude={formData?.geolocation_longitude}
+          onPressEvent={() => ScreenManager.toggleScreen('LocationMapView', {
+            resource: resource,
+            latitude: {
+              key: 'geolocation_latitude',
+              value: formData?.geolocation_latitude,
+            },
+            longitude: {
+              key: 'geolocation_longitude',
+              value: formData?.geolocation_longitude,
+            },
+          })}
         />
 
         <InputTextField
