@@ -187,42 +187,62 @@ const ProfileForm = () => {
           onAddButtonPress={() => ScreenManager.toggleScreen("AddProjectForm")}
         />
 
-        <DividerView />
-        <ProfileProjectsList
-          title={i18n.t("Saved Projects")} 
-          allButton={true}
-          idArray={formData?.saved_projects}
-        />
+        {formData?.saved_projects?.length > 0 && (
+          <>
+            <DividerView />
+            <ProfileProjectsList
+              title={i18n.t("Saved Projects")} 
+              allButton={true}
+              idArray={formData?.saved_projects}
+            />
+          </>
+        )}
 
-        <DividerView />
-        <ProfileProjectsList
-          title={i18n.t("Liked Projects")} 
-          idArray={formData?.liked_projects}
-          allButton={true}
-        />
+        {formData?.like_projects?.length > 0 && (
+          <>
+            <DividerView />
+            <ProfileProjectsList
+              title={i18n.t("Liked Projects")} 
+              idArray={formData?.liked_projects}
+              allButton={true}
+            />
+          </>
+        )}
 
-        <DividerView />
-        <ProfileJamsList 
-          title={i18n.t("Your Jams")} 
-          allButton={true}
-          addButton={true}
-          idArray={formData?.profile_jams} 
-          onAddButtonPress={() => ScreenManager.toggleScreen("AddJamForm")}
-        />
+        {formData?.like_projects?.length > 0 && (
+          <>
+            <DividerView />
+            <ProfileJamsList 
+              title={i18n.t("Your Jams")} 
+              allButton={true}
+              addButton={true}
+              idArray={formData?.profile_jams} 
+              onAddButtonPress={() => ScreenManager.toggleScreen("AddJamForm")}
+            />
+          </>
+        )}
 
-        <DividerView />
-        <ProfileJamsList 
-          title={i18n.t("Saved Jams")} 
-          allButton={true}
-          idArray={formData?.saved_jams} 
-        />
+        {formData?.saved_jams?.length > 0 && (
+          <>
+            <DividerView />
+            <ProfileJamsList 
+              title={i18n.t("Saved Jams")} 
+              allButton={true}
+              idArray={formData?.saved_jams} 
+            />
+          </>
+        )}
 
-        <DividerView />
-        <ProfileJamsList 
-          title={i18n.t("Liked Jams")} 
-          allButton={true}
-          idArray={formData?.liked_jams} 
-        />
+        {formData?.liked_jams?.length > 0 && (
+          <>
+            <DividerView />
+            <ProfileJamsList 
+              title={i18n.t("Liked Jams")} 
+              allButton={true}
+              idArray={formData?.liked_jams} 
+            />
+          </>
+        )}
 
         <DividerView />
       </View>
