@@ -8,16 +8,17 @@ const ScreenSlice = createSlice({
     setActiveScreen: (state, action) => {
       let screens: any = [...state];
       let index: any = screens.findIndex((o: any) => o.name == action.payload.name);
-      
+
       if (index === -1) {
-        screens.push(Modals.find((o: any) => o.name == action.payload.name));
+        let screen = Modals.find((o: any) => o.name == action.payload.name);
+        screens.push({ ...screen, ...{ params: action.payload.params }});
       }
       else {
         delete screens[index];
         screens = screens.filter((o: any) => o);
       }
 
-      state = screens;
+      return screens;
     },
   },
 });
