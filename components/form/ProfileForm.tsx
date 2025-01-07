@@ -39,11 +39,13 @@ const ProfileForm = () => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
+        let profileData: any = await UserManager.getProfileData();
+
         setUserData(await UserManager.getUserData());
         dispatch(setFormData<any>({ 
           resource: resource,
           key: null, 
-          value: await UserManager.getProfileData(), 
+          value: {...profileData, ...formData}, 
         }));
 
         setIsLoaded(true);
