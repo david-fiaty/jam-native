@@ -16,7 +16,6 @@ import BoxView from "../view/BoxView";
 import MediaManager from "@/manager/MediaManager";
 
 type Props = {
-  title?: any;
   idArray?: any;
   addButton?: boolean;
   allButton?: boolean;
@@ -24,7 +23,6 @@ type Props = {
 };
 
 const ProfileProjectsList = ({
-  title,
   idArray,
   addButton,
   allButton,
@@ -142,7 +140,7 @@ const ProfileProjectsList = ({
             onPress={() =>
               router.push({
                 pathname: "/project",
-                params: { idArray: idArray, title: title },
+                params: { idArray: idArray, title: i18n.t('Your projects') },
               })
             }
           >
