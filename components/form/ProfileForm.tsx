@@ -250,10 +250,4 @@ const ProfileForm = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  profileImageContainer: {
-    paddingHorizontal: Layout.space.base,
-  },
-});
-
 export default ProfileForm;
