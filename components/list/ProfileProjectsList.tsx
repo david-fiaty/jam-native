@@ -106,17 +106,6 @@ const ProfileProjectsList = ({
   };
 
   useEffect(() => {
-    (async () => {
-      if (!isLoaded) {
-        let projects: any = [];
-        if (idArray.length) projects = await EntityManager.getProjects({ items_ids: idArray })
-
-        setIsLoaded(true);
-      }
-    })();
-  }, [isLoaded, idArray]);
-
-/*
     if (!profileProjects?.length && idArray?.length) {
       EntityManager.getProjects({ items_ids: idArray }).then((data: any) => {
         if (addButton === true) data.push({ id: "addItem" });
@@ -135,7 +124,9 @@ const ProfileProjectsList = ({
         setProfileProjects(data);
       });
     }
-  */
+
+    setIsLoaded(true);
+  });
 
   if (!isLoaded) return <SpinnerView />;
 
