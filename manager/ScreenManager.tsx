@@ -30,7 +30,11 @@ class ScreenManager {
   }
 
   getActiveScreen(): any {
-    return Store.getState().screen.find(item => item.active === true);
+    let screens: any = Store.getState().screen;
+    let length: number = screens.length;
+    let index: number = length > 0 ? length - 1 : 0; 
+
+    return screens[index];
   }
   
   toggleModal(name: string, params?: any) {
