@@ -141,31 +141,6 @@ const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude
 <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
 
 
-      <TouchableOpacity onPress={() => {
-        dispatch(setActiveScreen('SearchView'));
-        setTimeout(() => {
-          setIsExpanded(!isExpanded);
-        }, 0);
-      }}>
-
-
-
-
-    <Input 
-          inputContainerStyle={styles.inputContainerStyle}
-          inputStyle={styles.inputStyle}
-          rightIconContainerStyle={styles.rightIconContainerStyle}
-          onChangeText={(text) => dispatch(setSearchValue(text))}
-          rightIcon={{
-            type: 'ionicons', 
-            name: 'search',
-            color: Colors.primary,
-          }}
-        />
-
-
-
-
 
 
 

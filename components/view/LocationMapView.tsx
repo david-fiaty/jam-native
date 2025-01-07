@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
 import RNMapView, { Marker, MapPressEvent } from "react-native-maps";
-import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import { Config } from "@/constants/Config";
@@ -21,7 +20,6 @@ const LocationMapView = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
   const resource: string = activeScreen.params.resource;
-  const formData: any = useSelector((state: any) => state[resource]);
 
   const updateLocation = (coords: any) => {
     dispatch(setFormData<any>({ 
@@ -43,13 +41,10 @@ const LocationMapView = () => {
   };
 
   const getStoredLocation = () => {
-    let latitude: any = activeScreen.params.latitude.value;
-    let longitude: any = activeScreen.params.longitude.value;
-
-    if (latitude && longitude) {
+    if (activeScreen.params.latitude.value && activeScreen.params.longitude.value) {
       return {
-        latitude: latitude,
-        longitude: longitude,
+        latitude: activeScreen.params.latitude.value,
+        longitude: activeScreen.params.longitude.value,
       };
     } 
 
@@ -91,7 +86,7 @@ const LocationMapView = () => {
     >
       <BackButton
         title={i18n.t("Add location")}
-        onPress={() => ScreenManager.toggleModal("ProfileForm")}
+        onPress={() => ScreenManager.toggleModal("LocationMapView")}
       />
       <TouchableWithoutFeedback>
         <View style={styles.container}>
