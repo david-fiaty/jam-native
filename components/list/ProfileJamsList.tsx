@@ -86,7 +86,7 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, onAddButtonPres
     }
 
     setIsLoaded(true);
-  });
+  }, [profileJams, addButton]);
 
   if (!isLoaded) return <SpinnerView />;
 
