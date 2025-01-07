@@ -16,13 +16,14 @@ import BoxView from "../view/BoxView";
 import MediaManager from "@/manager/MediaManager";
 
 type Props = {
+  title?: any,
   idArray?: any,
   addButton?: boolean,
   allButton?: boolean,
   onAddButtonPress?: () => void,
 };
 
-const ProfileJamsList = ({ idArray, addButton, allButton, onAddButtonPress }: Props) => {
+const ProfileJamsList = ({ title, idArray, addButton, allButton, onAddButtonPress }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const [profileJams, setProfileJams] = useState<any>([]);
@@ -100,11 +101,13 @@ const ProfileJamsList = ({ idArray, addButton, allButton, onAddButtonPress }: Pr
   return (
     <View style={styles.container}>
       <BoxView direction="row" align="center" justify="space-between">
+        <TextView style={styles.title}>{title}</TextView>
+
         { allButton && <TouchableOpacity
           onPress={() =>
             router.push({
               pathname: "/jam",
-              params: { idArray: idArray, title: i18n.t('Your projects') },
+              params: { idArray: idArray, title: title },
             })
           }
         >
@@ -129,6 +132,11 @@ const ProfileJamsList = ({ idArray, addButton, allButton, onAddButtonPress }: Pr
 const styles = StyleSheet.create({
   container: {
     width: "100%",
+  },
+  title: {
+    fontWeight: "bold",
+    marginBottom: Layout.space.base,
+    flex: 1,
   },
   item: {
     flexDirection: "column",
