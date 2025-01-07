@@ -15,29 +15,22 @@ import BoxView from "./BoxView";
 
 const LocationMapView = () => {
   const dispatch = useDispatch();
-  const [currentLocation, setCurrentLocation] = useState<any>(null);
+  const [regionLocation, setRegionLocation] = useState<any>(null);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
   const resource: string = activeScreen.params.resource;
 
-  const updateLocation = (coords: any) => {
+  const onMapPress = async (event: MapPressEvent) => {
+    setSelectedLocation(event.nativeEvent.coordinate);
     dispatch(setFormData<any>({ 
       resource: resource,
       key: null, 
       value: {
-        [activeScreen.params.latitude.key]: coords.latitude,
-        [activeScreen.params.longitude.key]: coords.longitude,
+        [activeScreen.params.latitude.key]: event.nativeEvent.coordinate.latitude,
+        [activeScreen.params.longitude.key]: event.nativeEvent.coordinate.longitude,
       }, 
     }));
-
-    setCurrentLocation(coords);
-    setSelectedLocation(coords);
-  };
-
-  const onMapPress = async (event: MapPressEvent) => {
-    let coords: any = event.nativeEvent.coordinate;
-    updateLocation(coords);
   };
 
   const getStoredLocation = () => {
@@ -51,27 +44,34 @@ const LocationMapView = () => {
     return null;
   };
 
+  const getDeviceLocation = async () => {
+    let deviceLocation: any = await DeviceManager.getLocation();
+
+    if (deviceLocation?.coords?.latitude && deviceLocation?.coords?.longitude) {
+      return {
+        latitude: deviceLocation?.coords?.latitude,
+        longitude: deviceLocation?.coords?.longitude,
+      };
+    }
+
+    return {
+      latitude: Config.defaultLocation.latitude,
+      longitude: Config.defaultLocation.longitude,
+    }
+  };
+
   useEffect(() => {
     (async () => {
       if (!selectedLocation) {
         let coords: any = {};
         let storedLocation: any = getStoredLocation();
 
-        if (storedLocation) {
-          coords = storedLocation;
-        }
-        else {
-          let deviceLocation: any = await DeviceManager.getLocation();
-          coords = {
-            latitude: deviceLocation?.coords?.latitude,
-            longitude: deviceLocation?.coords?.longitude,
-          };
-        }
+        if (storedLocation) coords = storedLocation
+        else coords = await getDeviceLocation()
     
-        updateLocation(coords);
+        setSelectedLocation(coords);
+        setIsLoaded(true);
       }
-
-      setIsLoaded(true);
     })();
   }, [selectedLocation]);
 
@@ -86,7 +86,7 @@ const LocationMapView = () => {
     >
       <BackButton
         title={i18n.t("Add location")}
-        onPress={() => ScreenManager.toggleModal("LocationMapView")}
+        onPress={() => ScreenManager.toggleScreen("LocationMapView")}
       />
       <TouchableWithoutFeedback>
         <View style={styles.container}>
@@ -95,8 +95,8 @@ const LocationMapView = () => {
             provider="google"
             onPress={onMapPress}
             initialRegion={{
-              latitude: currentLocation?.latitude || Config.defaultLocation.latitude,
-              longitude: currentLocation?.longitude || Config.defaultLocation.longitude,
+              latitude: parseFloat(selectedLocation.latitude),
+              longitude: parseFloat(selectedLocation.longitude),
               latitudeDelta: 2,
               longitudeDelta: 2,
             }}

@@ -34,7 +34,7 @@ const LikedJamAction = () => {
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={getTitle()}
-        onPress={() => ScreenManager.toggleModal('LikedJamAction')}
+        onPress={() => ScreenManager.toggleScreen('LikedJamAction')}
       />
 
       <View style={styles.listContainer}>
@@ -52,7 +52,7 @@ const LikedJamAction = () => {
         {/* View user Jams */}
         <TouchableOpacity 
           style={styles.listItem}
-          onPress={() => ScreenManager.toggleModal('LikedJamAction', { entityId: entityId })} 
+          onPress={() => ScreenManager.toggleScreen('LikedJamAction', { entityId: entityId })} 
         >
           <BoxView direction="row" align="center" justify="flex-start">
             <IconView name="share" theme="tertiary" />

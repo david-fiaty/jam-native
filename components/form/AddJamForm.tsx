@@ -93,7 +93,7 @@ const AddJamForm = () => {
     >
       <BackButton
         title={i18n.t('Create a Jam')}
-        onPress={() => ScreenManager.toggleModal('AddJamForm')}
+        onPress={() => ScreenManager.toggleScreen('AddJamForm')}
       />
 
       <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
@@ -155,9 +155,8 @@ const AddJamForm = () => {
       <LocationPickerField 
         latitude={formData?.geolocation_latitude}
         longitude={formData?.geolocation_longitude}
-        onPressEvent={() => ScreenManager.toggleModal('LocationMapView', {
+        onPressEvent={() => ScreenManager.toggleScreen('LocationMapView', {
           resource: resource,
-          back: 'AddJamForm',
           latitude: {
             key: 'geolocation_latitude',
             value: formData?.geolocation_latitude,
@@ -180,7 +179,7 @@ const AddJamForm = () => {
       <DividerView />
       <SectorsField
         label={<TextView>{i18n.t('Add industries')}</TextView>}
-        onPressEvent={() => ScreenManager.toggleModal('SectorsList', {
+        onPressEvent={() => ScreenManager.toggleScreen('SectorsList', {
           resource: resource,
           field: 'sectors',
         })}
@@ -200,7 +199,7 @@ const AddJamForm = () => {
       />
 
       <CollaboratorsField
-        onPressEvent={() => ScreenManager.toggleModal('CollaboratorsList', {
+        onPressEvent={() => ScreenManager.toggleScreen('CollaboratorsList', {
           resource: resource,
           field: 'collaborators_ids',
         })}

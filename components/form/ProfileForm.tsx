@@ -39,11 +39,13 @@ const ProfileForm = () => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
+        let profileData: any = await UserManager.getProfileData();
+
         setUserData(await UserManager.getUserData());
         dispatch(setFormData<any>({ 
           resource: resource,
           key: null, 
-          value: await UserManager.getProfileData(), 
+          value: {...profileData, ...formData}, 
         }));
 
         setIsLoaded(true);
@@ -62,7 +64,7 @@ const ProfileForm = () => {
     >
       <BackButton
         title={i18n.t("Your profile")}
-        onPress={() => ScreenManager.toggleModal("ProfileForm")}
+        onPress={() => ScreenManager.toggleScreen("ProfileForm")}
       />
 
       <View style={Layout.formContainer}>
@@ -97,9 +99,20 @@ const ProfileForm = () => {
           onChangeText={(value: string) => updateField("profile_description", value)}
         />
 
-        <LocationPickerField
+        <LocationPickerField 
           latitude={formData?.geolocation_latitude}
           longitude={formData?.geolocation_longitude}
+          onPressEvent={() => ScreenManager.toggleScreen('LocationMapView', {
+            resource: resource,
+            latitude: {
+              key: 'geolocation_latitude',
+              value: formData?.geolocation_latitude,
+            },
+            longitude: {
+              key: 'geolocation_longitude',
+              value: formData?.geolocation_longitude,
+            },
+          })}
         />
 
         <InputTextField
@@ -125,7 +138,7 @@ const ProfileForm = () => {
         <DividerView theme="secondary" />
         <SectorsField
           label={<TextView>{i18n.t("Industries")}</TextView>}
-          onPressEvent={() => ScreenManager.toggleModal("SectorsList", {
+          onPressEvent={() => ScreenManager.toggleScreen("SectorsList", {
             resource: 'profile',
             field: 'sectors_ids',
           })}
@@ -169,7 +182,7 @@ const ProfileForm = () => {
           title={i18n.t("Your Projects")} 
           addButton={true}
           idArray={formData?.profile_projects}
-          onAddButtonPress={() => ScreenManager.toggleModal("AddProjectForm")}
+          onAddButtonPress={() => ScreenManager.toggleScreen("AddProjectForm")}
         />
 
         <DividerView />
@@ -192,7 +205,7 @@ const ProfileForm = () => {
           allButton={true}
           addButton={true}
           idArray={formData?.profile_jams} 
-          onAddButtonPress={() => ScreenManager.toggleModal("AddJamForm")}
+          onAddButtonPress={() => ScreenManager.toggleScreen("AddJamForm")}
         />
 
         <DividerView />
