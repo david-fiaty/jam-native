@@ -86,7 +86,7 @@ const LocationMapView = () => {
     >
       <BackButton
         title={i18n.t("Add location")}
-        onPress={() => ScreenManager.toggleModal("LocationMapView")}
+        onPress={() => ScreenManager.toggleScreen("LocationMapView")}
       />
       <TouchableWithoutFeedback>
         <View style={styles.container}>

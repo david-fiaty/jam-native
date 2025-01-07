@@ -26,7 +26,7 @@ const HeaderNavigation = () => {
     <View style={styles.container}>
       <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
         <BoxView direction="row" align="center" style={Layout.headerRight}>
-          <TouchableOpacity onPress={() => ScreenManager.toggleModal('JamsList')}>
+          <TouchableOpacity onPress={() => ScreenManager.toggleScreen('JamsList')}>
             <LogoView size={Layout.logo.size} />
           </TouchableOpacity>
         </BoxView>
@@ -37,7 +37,7 @@ const HeaderNavigation = () => {
                 <IconView 
                   name="menu" 
                   theme="secondary" 
-                  onPress={() => ScreenManager.toggleModal('SettingsMenu')} 
+                  onPress={() => ScreenManager.toggleScreen('SettingsMenu')} 
                 />
               }
 
@@ -46,7 +46,7 @@ const HeaderNavigation = () => {
                   label={`${notificationsCount}+`} 
                   theme="secondary" 
                   size={11.5} 
-                  onPress={() => ScreenManager.toggleModal('NotificationsMenu')} 
+                  onPress={() => ScreenManager.toggleScreen('NotificationsMenu')} 
                 />
               }
                 

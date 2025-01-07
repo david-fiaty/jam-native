@@ -157,7 +157,7 @@ const SignupScreen = () => {
         <DividerView theme="secondary" />
 
         <SectorsField
-          onPressEvent={() => ScreenManager.toggleModal("SectorsList", {
+          onPressEvent={() => ScreenManager.toggleScreen("SectorsList", {
             reducer: 'signupForm',
           })}
         />
