@@ -39,11 +39,13 @@ const ProfileForm = () => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
+        let profileData: any = await UserManager.getProfileData();
+
         setUserData(await UserManager.getUserData());
         dispatch(setFormData<any>({ 
           resource: resource,
           key: null, 
-          value: await UserManager.getProfileData(), 
+          value: {...profileData, ...formData}, 
         }));
 
         setIsLoaded(true);
@@ -97,9 +99,20 @@ const ProfileForm = () => {
           onChangeText={(value: string) => updateField("profile_description", value)}
         />
 
-        <LocationPickerField
+        <LocationPickerField 
           latitude={formData?.geolocation_latitude}
           longitude={formData?.geolocation_longitude}
+          onPressEvent={() => ScreenManager.toggleScreen('LocationMapView', {
+            resource: resource,
+            latitude: {
+              key: 'geolocation_latitude',
+              value: formData?.geolocation_latitude,
+            },
+            longitude: {
+              key: 'geolocation_longitude',
+              value: formData?.geolocation_longitude,
+            },
+          })}
         />
 
         <InputTextField
