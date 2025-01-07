@@ -43,9 +43,6 @@ const ProfileForm = () => {
         let profileData: any = await UserManager.getProfileData();
         profileData = {...profileData, ...formData};
 
-        // Todo - Remove this test
-        profileData['jams'] = [18, 20, 32, 33];
-
         setUserData(await UserManager.getUserData());
         dispatch(setFormData<any>({ 
           resource: resource,
