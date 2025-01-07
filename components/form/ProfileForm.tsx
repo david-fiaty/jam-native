@@ -102,7 +102,7 @@ const ProfileForm = () => {
           onChangeText={(value: string) => updateField("profile_description", value)}
         />
 
-        <TextView style={styles.title}>{i18n.t('Activity')}</TextView>
+        <TextView style={styles.title}>{i18n.t('Activities')}</TextView>
         <SectorsField
           label={
             <>
