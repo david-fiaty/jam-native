@@ -23,11 +23,9 @@ const LocationMapView = () => {
   const resource: string = activeScreen.params.resource;
   const formData: any = useSelector((state: any) => state[resource]);
 
-  const onMapPress = async (event: MapPressEvent) => {
-    let coords: any = event.nativeEvent.coordinate;
-
+  const updateLocation = (coords: any) => {
+    setCurrentLocation(coords);
     setSelectedLocation(coords);
-
     dispatch(setFormData<any>({ 
       resource: resource,
       key: null, 
@@ -36,6 +34,11 @@ const LocationMapView = () => {
         [activeScreen.params.longitude.key]: coords.longitude,
       }, 
     }));
+  };
+
+  const onMapPress = async (event: MapPressEvent) => {
+    let coords: any = event.nativeEvent.coordinate;
+    updateLocation(coords);
   };
 
   const getStoredLocation = () => {
@@ -50,11 +53,6 @@ const LocationMapView = () => {
     } 
 
     return null;
-  };
-
-  const updateLocation = (coords: any) => {
-    setCurrentLocation(coords);
-    setSelectedLocation(coords);
   };
 
   useEffect(() => {
