@@ -82,9 +82,10 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, onAddButtonPres
       EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
         if (addButton === true) data.push({ id: "addItem" });
         setProfileJams(data);
-        setIsLoaded(true);
       });
     }
+
+    setIsLoaded(true);
   });
 
   if (!isLoaded) return <SpinnerView />;
