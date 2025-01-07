@@ -28,16 +28,14 @@ import LocationTypeField from "../field/LocationTypeField";
 import EntityManager from "@/manager/EntityManager";
 import CollaboratorsField from "../field/CollaboratorsField";
 
-
-
 const AddJamForm = () => {
   const resource: string = 'jam';
   const router = useRouter();
   const dispatch = useDispatch();
-  const formData = useSelector((state: any) => state.form[resource]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
+  const formData = useSelector((state: any) => state.form[resource]);
   const jamCategoriesData = StaticData.jamCategories;
 
   const updateField = (key: string, value: any) => {
@@ -85,8 +83,6 @@ const AddJamForm = () => {
   });
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log('--->', formData);
 
   return (
     <BoxView
@@ -155,13 +151,28 @@ const AddJamForm = () => {
         }
       />
 
-      {/* <LocationPickerField /> */}
+      <TextView>{i18n.t('Location')}</TextView>
+      <LocationPickerField 
+        latitude={formData?.geolocation_latitude}
+        longitude={formData?.geolocation_longitude}
+        onPressEvent={() => ScreenManager.toggleModal('LocationMapView', {
+          resource: resource,
+          latitude: {
+            key: 'geolocation_latitude',
+            value: formData?.geolocation_latitude,
+          },
+          longitude: {
+            key: 'geolocation_longitude',
+            value: formData?.geolocation_longitude,
+          },
+        })}
+      />
 
       <TextView>{i18n.t('Country')}</TextView>
       <CountryField
         value={formData?.countries}
         onChangeValue={(option: any) =>
-          updateField('countries', [option.value])
+          updateField('country', option.value)
         }
       />
 
@@ -183,12 +194,8 @@ const AddJamForm = () => {
             <TextView>{i18n.t('Add media')}</TextView>
           </BoxView>
         }
-        onSelectItem={(mediaList: any) =>
-          updateField('upload_medias', mediaList)
-        }
-        onDeleteItem={(mediaList: any) =>
-          updateField('upload_medias', mediaList)
-        }
+        onSelectItem={(mediaList: any) => updateField('upload_medias', mediaList)}
+        onDeleteItem={(mediaList: any) => updateField('upload_medias', mediaList)}
       />
 
       <CollaboratorsField

@@ -4,7 +4,6 @@ import SearchReducer from './slices/SearchSlice';
 import UserReducer from './slices/UserSlice';
 import MessageReducer from './slices/MessageSlice';
 import AppReducer from './slices/AppSlice';
-import JamFormReducer from './slices/JamFormSlice';
 import ProjectFormReducer from './slices/ProjectFormSlice';
 import ProfileFormReducer from './slices/ProfileFormSlice';
 import SignupFormReducer from './slices/SignupFormSlice';
@@ -18,7 +17,6 @@ const Store = configureStore({
     message: MessageReducer,
     app: AppReducer,
     form: FormReducer,
-    jamForm: JamFormReducer, 
     projectForm: ProjectFormReducer, 
     profileForm: ProfileFormReducer,
     signupForm: SignupFormReducer,

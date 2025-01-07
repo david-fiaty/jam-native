@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
+import { useDispatch, useSelector } from 'react-redux';
+import { setFormData } from "@/redux/slices/FormSlice";
 import RNMapView, { Marker, MapPressEvent } from "react-native-maps";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
@@ -12,46 +14,71 @@ import i18n from "@/translation/i18n";
 import BackButton from "../button/BackButton";
 import BoxView from "./BoxView";
 
-const LocationMapView = ({ style, children }: BaseProps) => {
+const LocationMapView = () => {
+  const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const activeScreen: any = ScreenManager.getActiveScreen();
+  const resource: string = activeScreen.params.resource;
+  const formData: any = useSelector((state: any) => state[resource]);
+
+  const updateLocation = (coords: any) => {
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: null, 
+      value: {
+        [activeScreen.params.latitude.key]: coords.latitude,
+        [activeScreen.params.longitude.key]: coords.longitude,
+      }, 
+    }));
+
+    setCurrentLocation(coords);
+    setSelectedLocation(coords);
+  };
 
   const onMapPress = async (event: MapPressEvent) => {
-    let coords = event.nativeEvent.coordinate;
-    setSelectedLocation(coords);
+    let coords: any = event.nativeEvent.coordinate;
+    updateLocation(coords);
+  };
 
-    // Todo - Implement reverse geocoding
-    /*
-    let url = `${Config.geocodeUrl}?latlng=${coords.latitude},${coords.longitude}&key=${Config.mapApiKey}`;
+  const getStoredLocation = () => {
+    let latitude: any = activeScreen.params.latitude.value;
+    let longitude: any = activeScreen.params.longitude.value;
 
-    try {
-      let response: any = await fetch(url);
-      let address = response?.results;
-      console.log(address);
-    }
-    catch (error) {
-      console.log(error);
-    }
-      */
+    if (latitude && longitude) {
+      return {
+        latitude: latitude,
+        longitude: longitude,
+      };
+    } 
+
+    return null;
   };
 
   useEffect(() => {
     (async () => {
-      let deviceLocation: any = await DeviceManager.getLocation();
-      if (deviceLocation && !selectedLocation) {
-        let coords: any = {
-          latitude: deviceLocation?.coords?.latitude,
-          longitude: deviceLocation?.coords?.longitude,
-        };
-        
-        setCurrentLocation(coords);
-        setSelectedLocation(coords);
+      if (!selectedLocation) {
+        let coords: any = {};
+        let storedLocation: any = getStoredLocation();
+
+        if (storedLocation) {
+          coords = storedLocation;
+        }
+        else {
+          let deviceLocation: any = await DeviceManager.getLocation();
+          coords = {
+            latitude: deviceLocation?.coords?.latitude,
+            longitude: deviceLocation?.coords?.longitude,
+          };
+        }
+    
+        updateLocation(coords);
       }
 
       setIsLoaded(true);
     })();
-  }, []);
+  }, [selectedLocation]);
 
   if (!isLoaded) return <SpinnerView />;
   
@@ -71,13 +98,13 @@ const LocationMapView = ({ style, children }: BaseProps) => {
           <RNMapView
             style={styles.map}
             provider="google"
+            onPress={onMapPress}
             initialRegion={{
               latitude: currentLocation?.latitude || Config.defaultLocation.latitude,
               longitude: currentLocation?.longitude || Config.defaultLocation.longitude,
               latitudeDelta: 2,
               longitudeDelta: 2,
             }}
-            onPress={onMapPress}
           >
             {selectedLocation && (
               <Marker

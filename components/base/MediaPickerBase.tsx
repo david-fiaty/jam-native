@@ -7,7 +7,6 @@ import ImageView from '../view/ImageView';
 import TextView from '../view/TextView';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
-import { Colors } from '@/constants/Colors';
 
 type Props = BaseProps & {
   label?: JSX.Element, 
@@ -20,11 +19,6 @@ type Props = BaseProps & {
 const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
-
-  if (value?.length && !selectedMedia.length) {
-    //setSelectedMedia(value);
-    //setSelectedPreview(value.map((item: any) => item.fileName));
-  }
 
   const deleteMedia = (data: any) => {
     let mediaList = [...selectedMedia];  

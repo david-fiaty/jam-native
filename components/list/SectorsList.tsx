@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
@@ -54,12 +54,12 @@ const SectorsList = () => {
     dispatch(setFormData<any>({ 
       resource: resource,
       key: fieldName, 
-      value: selection
+      value: selection,
     }));
   };
 
   const renderSubItem = (item: any, subItem: any) => {
-    let isSelected = selectedIds.find((id: any) => id == subItem.id);
+    let isSelected: boolean = selectedIds.find((id: any) => id == subItem.id);
 
     return (
       <TouchableOpacity 

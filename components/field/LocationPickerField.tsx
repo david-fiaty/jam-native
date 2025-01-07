@@ -1,28 +1,25 @@
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { BaseProps } from "@/constants/Types";
-import i18n from "@/translation/i18n";
 import InputTextField from "../field/InputTextField";
 import IconView from "../view/IconView";
-import ScreenManager from "@/manager/ScreenManager";
 
 type Props = BaseProps & {
   latitude?: any;
   longitude?: any;
+  onPressEvent: () => void,
 };
 
-const LocationPickerField = ({ latitude, longitude }: Props) => {
-  // Todo - Convert coordinates to address
+const LocationPickerField = ({ latitude, longitude, onPressEvent }: Props) => {
   const value = latitude && longitude ? `${latitude},${longitude}` : '';
 
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => ScreenManager.toggleModal("LocationMapView")}
+      onPress={onPressEvent}
     >
       <InputTextField
         value={value}
         readOnly={true}
-        placeholder={i18n.t("Location")}
         rightIcon={<IconView name="location" theme="transparent" />}
       />
     </TouchableOpacity>
