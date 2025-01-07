@@ -25,7 +25,6 @@ import IconView from "../view/IconView";
 const ProfileForm = () => {
   const resource: string = 'profile';
   const dispatch = useDispatch();
-  const [userData, setUserData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData = useSelector((state: any) => state.form[resource]);
 
@@ -43,7 +42,6 @@ const ProfileForm = () => {
         let profileData: any = await UserManager.getProfileData();
         profileData = {...profileData, ...formData};
 
-        setUserData(await UserManager.getUserData());
         dispatch(setFormData<any>({ 
           resource: resource,
           key: null, 
