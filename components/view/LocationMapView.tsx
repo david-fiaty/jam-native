@@ -39,10 +39,21 @@ const LocationMapView = () => {
     }));
   };
 
+  const getStoredLocation = () => {
+    let fields: any = activeScreen?.params?.fields || [];
+    //let latitude: any = fields.filter
+
+    console.log('field names ---->', fieldNames);
+    
+    console.log('params ----> ', activeScreen?.params?.fields);
+  };
+
   useEffect(() => {
     (async () => {
       if (!selectedLocation) {
         let deviceLocation: any = await DeviceManager.getLocation();
+        let storedLocation: any = getStoredLocation();
+
         let coords: any = {
           latitude: deviceLocation?.coords?.latitude,
           longitude: deviceLocation?.coords?.longitude,
@@ -57,7 +68,6 @@ const LocationMapView = () => {
   }, [selectedLocation]);
 
   if (!isLoaded) return <SpinnerView />;
-  console.log(activeScreen?.params?.fields)
   
   return (
     <BoxView 
