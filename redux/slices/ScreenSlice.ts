@@ -3,9 +3,14 @@ import { Modals } from '@/constants/Modals';
 
 const ScreenSlice = createSlice({
   name: 'screen',
-  initialState: Modals,
+  initialState: [],
   reducers: {
     setActiveScreen: (state, action) => {
+      let currentScreen: any = Modals.find((o: any) => o.name == action.payload.name);
+
+    
+      /*
+    
       state.map(item => {
         if (item.name == action.payload.name && item.active) {
           item.active = false;
@@ -18,6 +23,9 @@ const ScreenSlice = createSlice({
           item.active = false;
         }
       });
+
+
+      */
     },
   },
 });
