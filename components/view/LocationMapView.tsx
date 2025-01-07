@@ -21,15 +21,17 @@ const LocationMapView = () => {
   const activeScreen: any = ScreenManager.getActiveScreen();
   const resource: string = activeScreen.params.resource;
 
-  const updateLocation = (coords: any) => {
-    dispatch(setFormData<any>({ 
-      resource: resource,
-      key: null, 
-      value: {
-        [activeScreen.params.latitude.key]: coords.latitude,
-        [activeScreen.params.longitude.key]: coords.longitude,
-      }, 
-    }));
+  const updateLocation = (coords: any, canDispatch: boolean = true) => {
+    if (canDispatch) {
+      dispatch(setFormData<any>({ 
+        resource: resource,
+        key: null, 
+        value: {
+          [activeScreen.params.latitude.key]: coords.latitude,
+          [activeScreen.params.longitude.key]: coords.longitude,
+        }, 
+      }));
+    }
 
     setCurrentLocation(coords);
     setSelectedLocation(coords);
@@ -68,8 +70,7 @@ const LocationMapView = () => {
           };
         }
     
-        console.log(coords);
-        //updateLocation(coords);
+        updateLocation(coords, !storedLocation);
       }
 
       setIsLoaded(true);
