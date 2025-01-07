@@ -118,7 +118,7 @@ const SectorsList = () => {
     >
       <BackButton
         title={i18n.t('Add industries')}
-        onPress={() => ScreenManager.toggleScreen('AddJamForm')}
+        onPress={() => ScreenManager.toggleScreen('SectorsList')}
       />
 
       <View style={styles.container}>
