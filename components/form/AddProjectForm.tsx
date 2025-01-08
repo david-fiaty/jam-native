@@ -119,7 +119,7 @@ const AddProjectForm = () => {
           <BoxView direction="column" align="flex-start" justify="flex-start">
             <TextView style={styles.title}>{i18n.t("Selected Jams")}</TextView>
             <ProjectJamsList 
-              idArray={[18, 20, 32, 33, 34]}
+              idArray={formData?.jams_ids}
               addButton={true} 
               onAddEvent={() => ScreenManager.toggleScreen("SelectJamsForm", {
                 resource: resource,
