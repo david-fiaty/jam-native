@@ -65,7 +65,7 @@ const AddProjectForm = () => {
         setIsLoaded(true);
       }
     })();
-  });
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
 
