@@ -74,8 +74,6 @@ const AddProjectForm = () => {
   }, [isLoaded, resource, profileId]);
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log('fffformData -->>', formData);
   
   return (
     <BoxView
@@ -117,11 +115,10 @@ const AddProjectForm = () => {
           </BoxView>
         )}
 
-        {/* formData?.jams?.length && (
+        { formData?.jams_ids?.length && (
           <BoxView direction="column" align="flex-start" justify="flex-start">
             <TextView style={styles.title}>{i18n.t("Selected Jams")}</TextView>
             <ProjectJamsList 
-              //idArray={formData.jams} 
               idArray={[18, 20, 32, 33, 34]}
               addButton={true} 
               onAddEvent={() => ScreenManager.toggleScreen("SelectJamsForm", {
@@ -133,7 +130,7 @@ const AddProjectForm = () => {
               onDeleteEvent={(row) => deleteJam(row)}
             />
           </BoxView>
-        ) */}
+        ) }
 
         <DividerView />
 
