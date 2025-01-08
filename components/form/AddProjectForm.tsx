@@ -22,8 +22,9 @@ const AddProjectForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
-  const formData: any = useSelector((state: any) => state.form[activeScreen.params.resource]);
-  const profileId: any = activeScreen.params.profileId; 
+  const formData: any = useSelector((state: any) => state.form[activeScreen.params?.resource]);
+  const profileId: any = activeScreen.params?.profileId; 
+  const profileJams: any = activeScreen.params?.profileJams; 
 
   const updateField = (key: string, value: any) => {
     dispatch(setFormData<any>({ 
@@ -100,27 +101,32 @@ const AddProjectForm = () => {
           <BoxView direction="column" align="center" justify="center">
             <AddItemButton
               label={i18n.t("Add Jams")}
-              onPress={() => ScreenManager.toggleScreen("SelectJamsForm")}
+              onPress={() => ScreenManager.toggleScreen("SelectJamsForm", {
+                resource: resource,
+                profileId: profileId,
+                profileJams: profileJams,
+              })}
             />
           </BoxView>
         )}
 
-        {formData?.jams?.length && (
+        {/* formData?.jams?.length && (
           <BoxView direction="column" align="flex-start" justify="flex-start">
             <TextView style={styles.title}>{i18n.t("Selected Jams")}</TextView>
             <ProjectJamsList 
-              idArray={formData.jams} 
+              //idArray={formData.jams} 
+              idArray={[18, 20, 32, 33, 34]}
               addButton={true} 
               onAddEvent={() => ScreenManager.toggleScreen("SelectJamsForm", {
                 resource: resource,
                 profileId: formData?.id,
-                profileJams: formData?.profile_jams, // Todo - Enable this
+                //profileJams: formData?.profile_jams, // Todo - Enable this
                 profileJams: [18, 20, 32, 33, 34],
               })}
               onDeleteEvent={(row) => deleteJam(row)}
             />
           </BoxView>
-        )}
+        ) */}
 
         <DividerView />
 
