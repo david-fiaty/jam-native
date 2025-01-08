@@ -22,9 +22,9 @@ const AddProjectForm = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const [profileId, setProfileId] = useState<number>(0);
   const activeScreen: any = ScreenManager.getActiveScreen();
-  const formData = useSelector((state: any) => state.form[activeScreen.params.resource]);
+  const formData: any = useSelector((state: any) => state.form[activeScreen.params.resource]);
+  const profileId: any = activeScreen.params.profileId; 
 
   const updateField = (key: string, value: any) => {
     dispatch(setFormData<any>({ 
@@ -61,12 +61,15 @@ const AddProjectForm = () => {
 
   useEffect(() => {
     (async () => {
-      if (!profileId) setProfileId(await UserManager.getProfileId());
-      setIsLoaded(true);
+      if (!isLoaded) {
+        setIsLoaded(true);
+      }
     })();
   });
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(activeScreen.params);
 
   return (
     <BoxView
