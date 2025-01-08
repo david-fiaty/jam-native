@@ -188,6 +188,7 @@ const ProfileForm = () => {
           onAddButtonPress={() => ScreenManager.toggleScreen("AddProjectForm", {
             resource: resource,
             profileId: formData?.id,
+            jamIds: formData?.profile_jams,
           })}
         />
 
