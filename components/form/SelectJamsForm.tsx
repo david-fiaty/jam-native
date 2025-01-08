@@ -111,24 +111,11 @@ const toggleItemsForm = () => {
 
   useEffect(() => {
     (async () => {
-      if (!isLoaded) {
-        let jams: any = await EntityManager.getJams({ items_ids: profileJams });
-
-        console.log(jams);
-        setIsLoaded(true);
-      }
-    })();
-  });
-
-  /*
-  useEffect(() => {
-    (async () => {
       if (!profileData?.length) setProfileData(await UserManager.getProfileData());
       if (profileData && !profileJams?.length) setProfileJams(await EntityManager.getJams({ items_ids: idArray }));
       setIsLoaded(true);
     })();
   });
-  */
 
   if (!isLoaded) return <SpinnerView />;
 
