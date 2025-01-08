@@ -119,8 +119,6 @@ const toggleItemsForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log('ppp---->', profileJams);
-
   return (
     <BoxView
       align="flex-start"
