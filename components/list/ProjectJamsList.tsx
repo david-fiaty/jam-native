@@ -20,20 +20,18 @@ import IconView from "../view/IconView";
 
 type Props = {
   title?: any;
-  idArray?: any;
+  selectedIds?: any;
   addButton?: boolean;
   allButton?: boolean;
   onAddEvent?: () => void;
-  onDeleteEvent?: (row: any) => void;
 };
 
 const ProjectJamsList = ({
   title,
-  idArray,
+  selectedIds,
   addButton,
   allButton,
   onAddEvent,
-  onDeleteEvent,
 }: Props) => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -56,10 +54,23 @@ const ProjectJamsList = ({
 
     selectedJamsList = selectedJamsList.filter((n: any) => n);
     setSelectedJams(selectedJamsList);
+
+    // Todo - Implement toggle
+    console.log('toggle');
   };
 
   const deleteItem = (row: any) => {
-    if (onDeleteEvent) onDeleteEvent(row);
+    let selectedJamsList: any = [...selectedJams];
+    let index: number = findItemIndex(row);
+
+    if (index === -1) selectedJamsList.push(row.item.id);
+    else delete selectedJamsList[index];
+
+    selectedJamsList = selectedJamsList.filter((n: any) => n);
+    setSelectedJams(selectedJamsList);
+
+    // Todo - Implement delete
+    console.log('delete');
   };
 
   const renderItem = (row: any) => {
@@ -119,8 +130,8 @@ const ProjectJamsList = ({
   };
 
   useEffect(() => {
-    if (!profileJams?.length && idArray?.length) {
-      EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
+    if (!profileJams?.length && selectedIds?.length) {
+      EntityManager.getJams({ items_ids: selectedIds }).then((data: any) => {
         if (addButton === true) data.push({ id: "addItem" });
         setProfileJams(data);
         setIsLoaded(true);
@@ -140,7 +151,7 @@ const ProjectJamsList = ({
             onPress={() =>
               router.push({
                 pathname: "/jam",
-                params: { idArray: idArray, title: title },
+                params: { selectedIds: selectedIds, title: title },
               })
             }
           >

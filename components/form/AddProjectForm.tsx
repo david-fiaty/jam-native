@@ -22,7 +22,7 @@ const AddProjectForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
-  const formData: any = useSelector((state: any) => state.form[activeScreen.params?.resource]);
+  const formData: any = useSelector((state: any) => state.form[resource]);
   const profileId: any = activeScreen.params?.profileId; 
   const profileJams: any = activeScreen.params?.profileJams; 
 
@@ -31,17 +31,7 @@ const AddProjectForm = () => {
       resource: resource,
       key: key, 
       value: value, 
-      profile_id: profileId,
     }));
-  };
-
-  // Todo - Fix delete project jam
-  const deleteJam = (row: any) => {
-    let selectedJams: any = [...formData.jams];
-    let index: number = selectedJams.findIndex((id: number) => id == row.item.id);
-    if (index !== -1) delete selectedJams[index]; 
-    selectedJams = selectedJams.filter((n: any) => n);
-    updateField("jams", selectedJams);
   };
 
   const submitForm = async () => {
@@ -62,14 +52,22 @@ const AddProjectForm = () => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        
+        dispatch(setFormData<any>({ 
+          resource: resource,
+          key: null, 
+          value: {
+            ...formData,
+            ...{ profile_id: profileId },
+          }, 
+        }));
+
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded]);
+  }, [isLoaded, resource, profileId]);
 
   if (!isLoaded) return <SpinnerView />;
-
+  
   return (
     <BoxView
       align="flex-start"
@@ -97,7 +95,7 @@ const AddProjectForm = () => {
 
         <DividerView />
 
-        {!formData?.jams?.length && (
+        {!formData?.jams_ids?.length && (
           <BoxView direction="column" align="center" justify="center">
             <AddItemButton
               label={i18n.t("Add Jams")}
@@ -110,12 +108,11 @@ const AddProjectForm = () => {
           </BoxView>
         )}
 
-        {/* formData?.jams?.length && (
+        { formData?.jams_ids?.length && (
           <BoxView direction="column" align="flex-start" justify="flex-start">
-            <TextView style={styles.title}>{i18n.t("Selected Jams")}</TextView>
             <ProjectJamsList 
-              //idArray={formData.jams} 
-              idArray={[18, 20, 32, 33, 34]}
+              title={i18n.t("Selected Jams")}
+              selectedIds={formData?.jams_ids}
               addButton={true} 
               onAddEvent={() => ScreenManager.toggleScreen("SelectJamsForm", {
                 resource: resource,
@@ -123,10 +120,9 @@ const AddProjectForm = () => {
                 //profileJams: formData?.profile_jams, // Todo - Enable this
                 profileJams: [18, 20, 32, 33, 34],
               })}
-              onDeleteEvent={(row) => deleteJam(row)}
             />
           </BoxView>
-        ) */}
+        ) }
 
         <DividerView />
 
