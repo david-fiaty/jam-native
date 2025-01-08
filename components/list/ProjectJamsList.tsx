@@ -20,7 +20,7 @@ import IconView from "../view/IconView";
 
 type Props = {
   title?: any;
-  idArray?: any;
+  selectedIds?: any;
   addButton?: boolean;
   allButton?: boolean;
   onAddEvent?: () => void;
@@ -29,7 +29,7 @@ type Props = {
 
 const ProjectJamsList = ({
   title,
-  idArray,
+  selectedIds,
   addButton,
   allButton,
   onAddEvent,
@@ -119,8 +119,8 @@ const ProjectJamsList = ({
   };
 
   useEffect(() => {
-    if (!profileJams?.length && idArray?.length) {
-      EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
+    if (!profileJams?.length && selectedIds?.length) {
+      EntityManager.getJams({ items_ids: selectedIds }).then((data: any) => {
         if (addButton === true) data.push({ id: "addItem" });
         setProfileJams(data);
         setIsLoaded(true);
@@ -140,7 +140,7 @@ const ProjectJamsList = ({
             onPress={() =>
               router.push({
                 pathname: "/jam",
-                params: { idArray: idArray, title: title },
+                params: { selectedIds: selectedIds, title: title },
               })
             }
           >
