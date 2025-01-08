@@ -13,7 +13,6 @@ import ButtonView from "../view/ButtonView";
 import TextView from "../view/TextView";
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
-import UserManager from "@/manager/UserManager";
 import AddItemButton from "../button/AddItemButton";
 import ProjectJamsList from "../list/ProjectJamsList";
 
@@ -22,8 +21,10 @@ const AddProjectForm = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const [profileId, setProfileId] = useState<number>(0);
-  const formData = useSelector((state: any) => state.form[resource]);
+  const activeScreen: any = ScreenManager.getActiveScreen();
+  const formData: any = useSelector((state: any) => state.form[activeScreen.params.resource]);
+  const profileId: any = activeScreen.params.profileId; 
+  const profileJams: any = activeScreen.params.profileJams; 
 
   const updateField = (key: string, value: any) => {
     dispatch(setFormData<any>({ 
@@ -60,12 +61,16 @@ const AddProjectForm = () => {
 
   useEffect(() => {
     (async () => {
-      if (!profileId) setProfileId(await UserManager.getProfileId());
-      setIsLoaded(true);
+      if (!isLoaded) {
+        
+        setIsLoaded(true);
+      }
     })();
   });
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(activeScreen.params);
 
   return (
     <BoxView
@@ -98,7 +103,11 @@ const AddProjectForm = () => {
           <BoxView direction="column" align="center" justify="center">
             <AddItemButton
               label={i18n.t("Add Jams")}
-              onPress={() => ScreenManager.toggleScreen("SelectJamsForm")}
+              onPress={() => ScreenManager.toggleScreen("SelectJamsForm", {
+                resource: resource,
+                profileId: profileId,
+                profileJams: [], // Todo - Retrieve profile jams here 
+              })}
             />
           </BoxView>
         )}
