@@ -24,7 +24,6 @@ const AddProjectForm = () => {
   const activeScreen: any = ScreenManager.getActiveScreen();
   const formData: any = useSelector((state: any) => state.form[activeScreen.params.resource]);
   const profileId: any = activeScreen.params.profileId; 
-  const profileJams: any = activeScreen.params.profileJams; 
 
   const updateField = (key: string, value: any) => {
     dispatch(setFormData<any>({ 
@@ -66,11 +65,9 @@ const AddProjectForm = () => {
         setIsLoaded(true);
       }
     })();
-  });
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(activeScreen.params);
 
   return (
     <BoxView
@@ -103,11 +100,7 @@ const AddProjectForm = () => {
           <BoxView direction="column" align="center" justify="center">
             <AddItemButton
               label={i18n.t("Add Jams")}
-              onPress={() => ScreenManager.toggleScreen("SelectJamsForm", {
-                resource: resource,
-                profileId: profileId,
-                profileJams: [], // Todo - Retrieve profile jams here 
-              })}
+              onPress={() => ScreenManager.toggleScreen("SelectJamsForm")}
             />
           </BoxView>
         )}
@@ -118,7 +111,12 @@ const AddProjectForm = () => {
             <ProjectJamsList 
               idArray={formData.jams} 
               addButton={true} 
-              onAddEvent={() => ScreenManager.toggleScreen("SelectJamsForm")}
+              onAddEvent={() => ScreenManager.toggleScreen("SelectJamsForm", {
+                resource: resource,
+                profileId: formData?.id,
+                profileJams: formData?.profile_jams, // Todo - Enable this
+                profileJams: [18, 20, 32, 33, 34],
+              })}
               onDeleteEvent={(row) => deleteJam(row)}
             />
           </BoxView>
