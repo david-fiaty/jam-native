@@ -17,7 +17,7 @@ import UserManager from "@/manager/UserManager";
 import IconView from "../view/IconView";
 import TextView from "../view/TextView";
 
-const toggleItemsForm = () => {
+const updateSelectionsForm = () => {
   const dispatch = useDispatch();
   const [profileData, setProfileData] = useState<any>([]);
   const [profileJams, setProfileJams] = useState<any>([]);
@@ -31,8 +31,8 @@ const toggleItemsForm = () => {
 
   const findItemIndex = (row: any) => selectedJams.findIndex((id: any) => id == row.item.id);
 
-  const toggleItem = (row: any) => {
-    let selectedJamsList = [...formData?.jams || []];
+  const updateSelection = (row: any) => {
+    let selectedJamsList = [...selectedJams];
     let index: number = findItemIndex(row);
 
     if (index === -1) selectedJamsList.push(row.item.id);
@@ -88,9 +88,9 @@ const toggleItemsForm = () => {
           />
 
           {isSelected && (
-            <TouchableOpacity style={styles.checkItem}>
+            <View style={styles.checkItem}>
               <IconView name="checkmark" theme="primary" size={8} />
-            </TouchableOpacity>
+            </View>
           )}
         </View>
       );
@@ -98,7 +98,7 @@ const toggleItemsForm = () => {
 
     if (parseInt(row?.item?.id) > 0) {
       output = (
-        <TouchableOpacity key={row.item.id} onPress={() => toggleItem(row)}>
+        <TouchableOpacity key={row.item.id} onPress={() => updateSelection(row)}>
           {output}
         </TouchableOpacity>
       );
@@ -112,7 +112,6 @@ const toggleItemsForm = () => {
       if (!isLoaded) {
         setProfileJams(await EntityManager.getJams({ items_ids: idArray }))
         setIsLoaded(true);
-        console.log(activeScreen);
       }
     })();
   }, [isLoaded, activeScreen, idArray]);
@@ -186,4 +185,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default toggleItemsForm;
+export default updateSelectionsForm;
