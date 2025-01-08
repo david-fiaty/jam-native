@@ -189,7 +189,6 @@ const ProfileForm = () => {
           addButton={true}
           idArray={formData?.profile_projects}
           onAddButtonPress={() => ScreenManager.toggleScreen("AddProjectForm", {
-            resource: resource,
             profileId: profileId,
             //profileJams: formData?.profile_jams, // Todo - Enable this
             profileJams: [18, 20, 32, 33, 34],

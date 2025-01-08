@@ -22,7 +22,7 @@ const AddProjectForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
-  const formData: any = useSelector((state: any) => state.form[activeScreen.params?.resource]);
+  const formData: any = useSelector((state: any) => state.form[resource]);
   const profileId: any = activeScreen.params?.profileId; 
   const profileJams: any = activeScreen.params?.profileJams; 
 
@@ -41,7 +41,7 @@ const AddProjectForm = () => {
     let index: number = selectedJams.findIndex((id: number) => id == row.item.id);
     if (index !== -1) delete selectedJams[index]; 
     selectedJams = selectedJams.filter((n: any) => n);
-    updateField("jams", selectedJams);
+    updateField("jams_ids", selectedJams);
   };
 
   const submitForm = async () => {
@@ -69,6 +69,9 @@ const AddProjectForm = () => {
   }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log('fffformData -->>', formData);
+  
 
   return (
     <BoxView
