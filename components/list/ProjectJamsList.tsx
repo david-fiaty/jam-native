@@ -55,6 +55,7 @@ const ProjectJamsList = ({
     selectedJamsList = selectedJamsList.filter((n: any) => n);
     setSelectedJams(selectedJamsList);
 
+    // Todo - Implement toggle
     console.log('toggle');
   };
 
@@ -68,6 +69,7 @@ const ProjectJamsList = ({
     selectedJamsList = selectedJamsList.filter((n: any) => n);
     setSelectedJams(selectedJamsList);
 
+    // Todo - Implement delete
     console.log('delete');
   };
 
