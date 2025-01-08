@@ -49,7 +49,6 @@ const updateSelectionsForm = () => {
       resource: resource,
       key: 'jams_ids', 
       value: selectedJamsList, 
-      profile_id: profileId,
     }));
   };
 
