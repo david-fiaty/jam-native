@@ -1,9 +1,8 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setProjectData } from "@/redux/slices/ProjectFormSlice";
+import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
-import { Colors } from "@/constants/Colors";
 import i18n from "@/translation/i18n";
 import ImageView from "../view/ImageView";
 import ScreenManager from "@/manager/ScreenManager";
@@ -25,16 +24,16 @@ const toggleItemsForm = () => {
   const [selectedJams, setSelectedJams] = useState<any>([]);
   const [profileId, setProfileId] = useState<number>(0);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const projectData = useSelector((state: any) => state.projectForm);
+  const activeScreen: any = ScreenManager.getActiveScreen();
+  //const formData = useSelector((state: any) => state.form[activeScreen.params.resource]);
   const numColumns = 3;
-
 
   const idArray = profileData?.profile_jams;
 
   const findItemIndex = (row: any) => selectedJams.findIndex((id: any) => id == row.item.id);
 
   const toggleItem = (row: any) => {
-    let selectedJamsList = [...projectData?.jams || []];
+    let selectedJamsList = [...formData?.jams || []];
     let index: number = findItemIndex(row);
 
     if (index === -1) selectedJamsList.push(row.item.id);
@@ -42,11 +41,14 @@ const toggleItemsForm = () => {
 
     selectedJamsList = selectedJamsList.filter((n: any) => n);
     setSelectedJams(selectedJamsList);
-    dispatch(setProjectData<any>({ 
+
+    /*
+    dispatch(setFormData<any>({ 
       key: 'jams', 
       value: selectedJamsList, 
       profile_id: profileId,
     }));
+    */
   };
 
   const deleteItem = (row: any) => {
@@ -108,13 +110,20 @@ const toggleItemsForm = () => {
 
   useEffect(() => {
     (async () => {
+      /*
       if (!profileData?.length) setProfileData(await UserManager.getProfileData());
       if (profileData && !profileJams?.length) setProfileJams(await EntityManager.getJams({ items_ids: idArray }));
-      setIsLoaded(true);
+
+      */
+      if (!isLoaded) {
+        setIsLoaded(true);
+        console.log(activeScreen);
+      }
     })();
-  });
+  }, [isLoaded, activeScreen]);
 
   if (!isLoaded) return <SpinnerView />;
+
 
   return (
     <BoxView

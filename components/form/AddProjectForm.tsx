@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { setProjectData } from "@/redux/slices/ProjectFormSlice";
+import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
@@ -13,26 +13,31 @@ import ButtonView from "../view/ButtonView";
 import TextView from "../view/TextView";
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
-import UserManager from "@/manager/UserManager";
 import AddItemButton from "../button/AddItemButton";
 import ProjectJamsList from "../list/ProjectJamsList";
 
 const AddProjectForm = () => {
+  const resource: string = 'project';
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const [profileId, setProfileId] = useState<number>(0);
-  const projectData = useSelector((state: any) => state.projectForm);
+  const activeScreen: any = ScreenManager.getActiveScreen();
+  const formData: any = useSelector((state: any) => state.form[activeScreen.params?.resource]);
+  const profileId: any = activeScreen.params?.profileId; 
+  const profileJams: any = activeScreen.params?.profileJams; 
 
   const updateField = (key: string, value: any) => {
-    dispatch(
-      setProjectData<any>({ key: key, value: value, profile_id: profileId })
-    );
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: key, 
+      value: value, 
+      profile_id: profileId,
+    }));
   };
 
   // Todo - Fix delete project jam
   const deleteJam = (row: any) => {
-    let selectedJams: any = [...projectData.jams];
+    let selectedJams: any = [...formData.jams];
     let index: number = selectedJams.findIndex((id: number) => id == row.item.id);
     if (index !== -1) delete selectedJams[index]; 
     selectedJams = selectedJams.filter((n: any) => n);
@@ -41,7 +46,7 @@ const AddProjectForm = () => {
 
   const submitForm = async () => {
     /*
-    EntityManager.addProject(projectData).then((success: boolean) => {
+    EntityManager.addProject(formData).then((success: boolean) => {
       setIsProcessing(false);
       //success === true
       false
@@ -56,10 +61,12 @@ const AddProjectForm = () => {
 
   useEffect(() => {
     (async () => {
-      if (!profileId) setProfileId(await UserManager.getProfileId());
-      setIsLoaded(true);
+      if (!isLoaded) {
+        
+        setIsLoaded(true);
+      }
     })();
-  });
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -78,39 +85,48 @@ const AddProjectForm = () => {
       <View style={Layout.formContainer}>
         <InputTextField
           placeholder={i18n.t("Name")}
-          value={projectData?.title}
+          value={formData?.title}
           onChangeText={(value: string) => updateField("name", value)}
         />
 
         <InputTextareaField
           placeholder={i18n.t("Description")}
-          value={projectData?.caption}
+          value={formData?.caption}
           onChangeText={(value: string) => updateField("description", value)}
         />
 
         <DividerView />
 
-        {!projectData?.jams?.length && (
+        {!formData?.jams?.length && (
           <BoxView direction="column" align="center" justify="center">
-            <TextView>{i18n.t("There are no Jams in this project")}</TextView>
             <AddItemButton
-              label={i18n.t("Add")}
-              onPress={() => ScreenManager.toggleScreen("SelectJamsForm")}
+              label={i18n.t("Add Jams")}
+              onPress={() => ScreenManager.toggleScreen("SelectJamsForm", {
+                resource: resource,
+                profileId: profileId,
+                profileJams: profileJams,
+              })}
             />
           </BoxView>
         )}
 
-        {projectData?.jams?.length && (
+        {/* formData?.jams?.length && (
           <BoxView direction="column" align="flex-start" justify="flex-start">
             <TextView style={styles.title}>{i18n.t("Selected Jams")}</TextView>
             <ProjectJamsList 
-              idArray={projectData.jams} 
+              //idArray={formData.jams} 
+              idArray={[18, 20, 32, 33, 34]}
               addButton={true} 
-              onAddEvent={() => ScreenManager.toggleScreen("SelectJamsForm")}
+              onAddEvent={() => ScreenManager.toggleScreen("SelectJamsForm", {
+                resource: resource,
+                profileId: formData?.id,
+                //profileJams: formData?.profile_jams, // Todo - Enable this
+                profileJams: [18, 20, 32, 33, 34],
+              })}
               onDeleteEvent={(row) => deleteJam(row)}
             />
           </BoxView>
-        )}
+        ) */}
 
         <DividerView />
 

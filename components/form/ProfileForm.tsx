@@ -25,8 +25,8 @@ import IconView from "../view/IconView";
 const ProfileForm = () => {
   const resource: string = 'profile';
   const dispatch = useDispatch();
-  const [userData, setUserData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [profileId, setProfileId] = useState<number>(0);
   const formData = useSelector((state: any) => state.form[resource]);
 
   const updateField = (key: string, value: any) => {
@@ -40,20 +40,17 @@ const ProfileForm = () => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        let profileData: any = await UserManager.getProfileData();
-        profileData = {...profileData, ...formData};
+        setProfileId(await UserManager.getProfileId());
 
-        setUserData(await UserManager.getUserData());
         dispatch(setFormData<any>({ 
           resource: resource,
           key: null, 
-          value: profileData, 
+          value: { ...(await UserManager.getProfileData()), ...formData }, 
         }));
-
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded]);
+  }, [isLoaded, formData, resource]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -102,7 +99,7 @@ const ProfileForm = () => {
           onChangeText={(value: string) => updateField("profile_description", value)}
         />
 
-        <TextView style={styles.title}>{i18n.t('Activity')}</TextView>
+        <TextView style={styles.title}>{i18n.t('Activities')}</TextView>
         <SectorsField
           label={
             <>
@@ -191,7 +188,12 @@ const ProfileForm = () => {
           title={i18n.t("Your Projects")} 
           addButton={true}
           idArray={formData?.profile_projects}
-          onAddButtonPress={() => ScreenManager.toggleScreen("AddProjectForm")}
+          onAddButtonPress={() => ScreenManager.toggleScreen("AddProjectForm", {
+            resource: resource,
+            profileId: profileId,
+            //profileJams: formData?.profile_jams, // Todo - Enable this
+            profileJams: [18, 20, 32, 33, 34],
+          })}
         />
 
         {formData?.saved_projects?.length > 0 && (
