@@ -43,6 +43,8 @@ const updateSelectionsForm = () => {
     selectedJamsList = selectedJamsList.filter((n: any) => n);
     setSelectedJams(selectedJamsList);
 
+    console.log(resource);
+
     dispatch(setFormData<any>({ 
       resource: resource,
       key: 'jams_ids', 
