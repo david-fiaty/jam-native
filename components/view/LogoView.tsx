@@ -8,7 +8,6 @@ type Props = BaseProps & {
   style?: object,
 };
 
-// Todo - Move image size to config
 const path: any = require('@/assets/images/logo-512.png'); 
 
 const LogoView = ({size, style}: Props) => {
