@@ -185,7 +185,9 @@ const ProfileForm = () => {
           title={i18n.t("Your Projects")} 
           addButton={true}
           idArray={formData?.profile_projects}
-          onAddButtonPress={() => ScreenManager.toggleScreen("AddProjectForm")}
+          onAddButtonPress={() => ScreenManager.toggleScreen("AddProjectForm", {
+            resource: resource,
+          })}
         />
 
         {formData?.saved_projects?.length > 0 && (
