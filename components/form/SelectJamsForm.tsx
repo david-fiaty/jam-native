@@ -109,11 +109,11 @@ const toggleItemsForm = () => {
 
   useEffect(() => {
     (async () => {
-      //if (!isLoaded) {
+      if (!isLoaded) {
         setProfileJams(await EntityManager.getJams({ items_ids: idArray }))
         setIsLoaded(true);
         console.log(activeScreen);
-      //}
+      }
     })();
   }, [isLoaded, activeScreen, idArray]);
 
