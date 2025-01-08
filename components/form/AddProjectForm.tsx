@@ -31,18 +31,7 @@ const AddProjectForm = () => {
       resource: resource,
       key: key, 
       value: value, 
-      profile_id: profileId,
     }));
-  };
-
-  // Todo - Fix delete project jam
-  const deleteJam = (row: any) => {
-    let selectedJams: any = [...formData.jams_ids];
-    let index: number = selectedJams.findIndex((id: number) => id == row.item.id);
-    delete selectedJams[index];
-
-    updateField("jams_ids", selectedJams.filter((o: any) => o));
-
   };
 
   const submitForm = async () => {
@@ -125,7 +114,6 @@ const AddProjectForm = () => {
               title={i18n.t("Selected Jams")}
               selectedIds={formData?.jams_ids}
               addButton={true} 
-              onDeleteEvent={(row) => deleteJam(row)}
               onAddEvent={() => ScreenManager.toggleScreen("SelectJamsForm", {
                 resource: resource,
                 profileId: formData?.id,
