@@ -62,11 +62,16 @@ const AddProjectForm = () => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        
+        dispatch(setFormData<any>({ 
+          resource: resource,
+          key: 'profile_id', 
+          value: profileId, 
+        }));
+
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded]);
+  }, [isLoaded, resource, profileId]);
 
   if (!isLoaded) return <SpinnerView />;
 
