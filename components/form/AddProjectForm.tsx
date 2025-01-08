@@ -31,17 +31,7 @@ const AddProjectForm = () => {
       resource: resource,
       key: key, 
       value: value, 
-      profile_id: profileId,
     }));
-  };
-
-  // Todo - Fix delete project jam
-  const deleteJam = (row: any) => {
-    let selectedJams: any = [...formData.jams];
-    let index: number = selectedJams.findIndex((id: number) => id == row.item.id);
-    if (index !== -1) delete selectedJams[index]; 
-    selectedJams = selectedJams.filter((n: any) => n);
-    updateField("jams_ids", selectedJams);
   };
 
   const submitForm = async () => {
@@ -64,8 +54,11 @@ const AddProjectForm = () => {
       if (!isLoaded) {
         dispatch(setFormData<any>({ 
           resource: resource,
-          key: 'profile_id', 
-          value: profileId, 
+          key: null, 
+          value: {
+            ...formData,
+            ...{ profile_id: profileId },
+          }, 
         }));
 
         setIsLoaded(true);
@@ -127,7 +120,6 @@ const AddProjectForm = () => {
                 //profileJams: formData?.profile_jams, // Todo - Enable this
                 profileJams: [18, 20, 32, 33, 34],
               })}
-              onDeleteEvent={(row) => deleteJam(row)}
             />
           </BoxView>
         ) }

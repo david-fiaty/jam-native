@@ -24,7 +24,6 @@ type Props = {
   addButton?: boolean;
   allButton?: boolean;
   onAddEvent?: () => void;
-  onDeleteEvent?: (row: any) => void;
 };
 
 const ProjectJamsList = ({
@@ -33,7 +32,6 @@ const ProjectJamsList = ({
   addButton,
   allButton,
   onAddEvent,
-  onDeleteEvent,
 }: Props) => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -56,10 +54,23 @@ const ProjectJamsList = ({
 
     selectedJamsList = selectedJamsList.filter((n: any) => n);
     setSelectedJams(selectedJamsList);
+
+    // Todo - Implement toggle
+    console.log('toggle');
   };
 
   const deleteItem = (row: any) => {
-    if (onDeleteEvent) onDeleteEvent(row);
+    let selectedJamsList: any = [...selectedJams];
+    let index: number = findItemIndex(row);
+
+    if (index === -1) selectedJamsList.push(row.item.id);
+    else delete selectedJamsList[index];
+
+    selectedJamsList = selectedJamsList.filter((n: any) => n);
+    setSelectedJams(selectedJamsList);
+
+    // Todo - Implement delete
+    console.log('delete');
   };
 
   const renderItem = (row: any) => {
