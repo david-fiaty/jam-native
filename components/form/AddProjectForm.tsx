@@ -79,7 +79,7 @@ const AddProjectForm = () => {
     >
       <BackButton
         title={i18n.t("Create a project")}
-        onPress={() => ScreenManager.toggleScreen("ProfileForm")}
+        onPress={() => ScreenManager.toggleScreen("AddProjectForm")}
       />
 
       <View style={Layout.formContainer}>
