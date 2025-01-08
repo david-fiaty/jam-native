@@ -13,7 +13,6 @@ import ButtonView from "../view/ButtonView";
 import TextView from "../view/TextView";
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
-import UserManager from "@/manager/UserManager";
 import AddItemButton from "../button/AddItemButton";
 import ProjectJamsList from "../list/ProjectJamsList";
 
@@ -25,6 +24,7 @@ const AddProjectForm = () => {
   const activeScreen: any = ScreenManager.getActiveScreen();
   const formData: any = useSelector((state: any) => state.form[activeScreen.params.resource]);
   const profileId: any = activeScreen.params.profileId; 
+  const profileJams: any = activeScreen.params.profileJams; 
 
   const updateField = (key: string, value: any) => {
     dispatch(setFormData<any>({ 
@@ -62,6 +62,7 @@ const AddProjectForm = () => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
+        
         setIsLoaded(true);
       }
     })();
