@@ -39,16 +39,15 @@ const ProfileForm = () => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        let profileData: any = {...(await UserManager.getProfileData()), ...formData};
         dispatch(setFormData<any>({ 
           resource: resource,
           key: null, 
-          value: profileData, 
+          value: { ...(await UserManager.getProfileData()), ...formData }, 
         }));
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded]);
+  }, [isLoaded, formData, resource]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -186,7 +185,12 @@ const ProfileForm = () => {
           title={i18n.t("Your Projects")} 
           addButton={true}
           idArray={formData?.profile_projects}
-          onAddButtonPress={() => ScreenManager.toggleScreen("AddProjectForm")}
+          onAddButtonPress={() => ScreenManager.toggleScreen("AddProjectForm", {
+            resource: resource,
+            profileId: formData?.id,
+            //profileJams: formData?.profile_jams, // Todo - Enable this
+            profileJams: [18, 20, 32, 33, 34],
+          })}
         />
 
         {formData?.saved_projects?.length > 0 && (
