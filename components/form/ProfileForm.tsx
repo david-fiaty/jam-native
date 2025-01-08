@@ -26,6 +26,7 @@ const ProfileForm = () => {
   const resource: string = 'profile';
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [profileId, setProfileId] = useState<number>(0);
   const formData = useSelector((state: any) => state.form[resource]);
 
   const updateField = (key: string, value: any) => {
@@ -39,6 +40,8 @@ const ProfileForm = () => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
+        setProfileId(await UserManager.getProfileId());
+
         dispatch(setFormData<any>({ 
           resource: resource,
           key: null, 
@@ -187,7 +190,7 @@ const ProfileForm = () => {
           idArray={formData?.profile_projects}
           onAddButtonPress={() => ScreenManager.toggleScreen("AddProjectForm", {
             resource: resource,
-            profileId: formData?.id,
+            profileId: profileId,
             //profileJams: formData?.profile_jams, // Todo - Enable this
             profileJams: [18, 20, 32, 33, 34],
           })}

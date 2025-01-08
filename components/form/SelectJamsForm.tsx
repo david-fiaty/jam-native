@@ -25,9 +25,8 @@ const toggleItemsForm = () => {
   const [profileId, setProfileId] = useState<number>(0);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
-  const formData = useSelector((state: any) => state.form[activeScreen.params.resource]);
+  //const formData = useSelector((state: any) => state.form[activeScreen.params.resource]);
   const numColumns = 3;
-
 
   const idArray = profileData?.profile_jams;
 
@@ -111,26 +110,20 @@ const toggleItemsForm = () => {
 
   useEffect(() => {
     (async () => {
-      if (!isLoaded) {
-        let jams: any = await EntityManager.getJams({ items_ids: profileJams });
-
-        console.log(jams);
-        setIsLoaded(true);
-      }
-    })();
-  });
-
-  /*
-  useEffect(() => {
-    (async () => {
+      /*
       if (!profileData?.length) setProfileData(await UserManager.getProfileData());
       if (profileData && !profileJams?.length) setProfileJams(await EntityManager.getJams({ items_ids: idArray }));
-      setIsLoaded(true);
+
+      */
+      if (!isLoaded) {
+        setIsLoaded(true);
+        console.log(activeScreen);
+      }
     })();
-  });
-  */
+  }, [isLoaded, activeScreen]);
 
   if (!isLoaded) return <SpinnerView />;
+
 
   return (
     <BoxView
@@ -147,11 +140,11 @@ const toggleItemsForm = () => {
       >
         <BackButton
           title={i18n.t("Select Jams")}
-          onPress={() => ScreenManager.toggleModal("AddProjectForm")}
+          onPress={() => ScreenManager.toggleScreen("AddProjectForm")}
         />
 
         {selectedJams?.length > 0 && (
-          <TouchableOpacity onPress={() => ScreenManager.toggleModal("AddProjectForm")}>
+          <TouchableOpacity onPress={() => ScreenManager.toggleScreen("AddProjectForm")}>
             <View>
               <TextView style={Layout.textLink}>
                 {i18n.t("Add selected")} ({selectedJams.length})
