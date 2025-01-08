@@ -77,7 +77,6 @@ const AddProjectForm = () => {
 
   console.log('fffformData -->>', formData);
   
-
   return (
     <BoxView
       align="flex-start"
