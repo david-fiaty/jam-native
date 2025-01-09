@@ -21,12 +21,14 @@ import IconView from "../view/IconView";
 type Props = {
   title?: any;
   selectedIds?: any;
+  resource?: string;
   onAddEvent?: () => void;
 };
 
 const ProjectJamsList = ({
   title,
   selectedIds,
+  resource,
   onAddEvent,
 }: Props) => {
   const dispatch = useDispatch();
@@ -34,7 +36,6 @@ const ProjectJamsList = ({
   const [selectedJams, setSelectedJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
-  const resource: string = activeScreen.params?.resource;
   const profileId: any = activeScreen.params?.profileId; 
   const [profileJams, setProfileJams] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
@@ -150,7 +151,7 @@ const ProjectJamsList = ({
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log('-->');
+   console.log('-->', resource, activeScreen?.params);
 
   return (
     <View style={styles.container}>
