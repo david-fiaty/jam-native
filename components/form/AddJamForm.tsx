@@ -77,12 +77,16 @@ const AddJamForm = () => {
 
   useEffect(() => {
     (async () => {
-      if (!profileId) setProfileId(await UserManager.getProfileId());
-      setIsLoaded(true);
+      if (!isLoaded) {
+        if (!profileId) setProfileId(await UserManager.getProfileId());
+        setIsLoaded(true);
+      }
     })();
-  });
+  }, [isLoaded, profileId]);
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log('addJamForm', formData);
 
   return (
     <BoxView
