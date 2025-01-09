@@ -22,6 +22,7 @@ type Props = {
   selectedIds?: any;
   resource?: any;
   onAddButtonPress?: () => void;
+  onDeleteButtonPress?: (row: any) => void;
 };
 
 const ProjectJamsList = ({
@@ -29,6 +30,7 @@ const ProjectJamsList = ({
   selectedIds,
   resource,
   onAddButtonPress,
+  onDeleteButtonPress
 }: Props) => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -36,7 +38,7 @@ const ProjectJamsList = ({
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
   const profileId: any = activeScreen.params?.profileId; 
-  const [profileJams, setProfileJams] = useState<any>([]);
+  const [projectJams, setProjectJams] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
   const numColumns = 3;
 
@@ -56,20 +58,6 @@ const ProjectJamsList = ({
 
     // Todo - Implement toggle
     console.log('toggle');
-  };
-
-  const deleteItem = (row: any) => {
-    let selectedJamsList: any = [...selectedJams];
-    let index: number = findItemIndex(row);
-
-    if (index === -1) selectedJamsList.push(row.item.id);
-    else delete selectedJamsList[index];
-
-    selectedJamsList = selectedJamsList.filter((n: any) => n);
-    setSelectedJams(selectedJamsList);
-
-    // Todo - Implement delete
-    console.log('delete');
   };
 
   const renderItem = (row: any) => {
@@ -108,7 +96,7 @@ const ProjectJamsList = ({
           {isSelected && (
             <TouchableOpacity
               style={styles.deleteItem}
-              onPress={() => deleteItem(row)}
+              onPress={() => onDeleteButtonPress(row)}
             >
               <IconView name="delete" theme="primary" size={8} />
             </TouchableOpacity>
@@ -132,7 +120,7 @@ const ProjectJamsList = ({
     if (selectedIds?.length) {
       EntityManager.getJams({ items_ids: selectedIds }).then((data: any) => {
         data.push({ id: "addItem" });
-        setProfileJams(data);
+        setProjectJams(data);
         setIsLoaded(true);
       });
     }
@@ -140,17 +128,15 @@ const ProjectJamsList = ({
 
   if (!isLoaded) return <SpinnerView />;
 
-   //console.log('-->', resource, activeScreen?.params);
-
   return (
     <View style={styles.container}>
       <BoxView direction="row" align="center" justify="space-between">
         <TextView style={styles.title}>{title}</TextView>
       </BoxView>
 
-      {profileJams?.length > 0 && (
+      {projectJams?.length > 0 && (
         <ListView
-          data={profileJams}
+          data={projectJams}
           numColumns={numColumns}
           contentContainerStyle={{ gap: Layout.space.base }}
           columnWrapperStyle={{ gap: Layout.space.base }}

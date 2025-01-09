@@ -119,6 +119,13 @@ const AddProjectForm = () => {
                 //profileJams: formData?.profile_jams, // Todo - Enable this
                 profileJams: [18, 20, 32, 33, 34],
               })}
+              onDeleteButtonPress={(row: any) => {
+                let selectedIds: any = [...formData?.jams_ids];
+                let index: number = selectedIds.findIndex((id: any) => id == row?.item?.id);
+                delete selectedIds[index];
+                selectedIds = selectedIds.filter((o: any) => o);
+                updateField("jams_ids", selectedIds);
+              }}
             />
           </BoxView>
         ) }
