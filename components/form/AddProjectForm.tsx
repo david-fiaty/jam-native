@@ -63,7 +63,7 @@ const AddProjectForm = () => {
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, resource, profileId]);
+  }, [isLoaded, resource, profileId, formData]);
 
   if (!isLoaded) return <SpinnerView />;
   
