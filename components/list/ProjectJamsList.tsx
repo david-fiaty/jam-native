@@ -36,7 +36,7 @@ const ProjectJamsList = ({
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
   const profileId: any = activeScreen.params?.profileId; 
-  const [profileJams, setProfileJams] = useState<any>([]);
+  const [projectJams, setProjectJams] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
   const numColumns = 3;
 
@@ -132,7 +132,7 @@ const ProjectJamsList = ({
     if (selectedIds?.length) {
       EntityManager.getJams({ items_ids: selectedIds }).then((data: any) => {
         data.push({ id: "addItem" });
-        setProfileJams(data);
+        setProjectJams(data);
         setIsLoaded(true);
       });
     }
@@ -141,7 +141,8 @@ const ProjectJamsList = ({
   if (!isLoaded) return <SpinnerView />;
 
    //console.log('-->', resource, activeScreen?.params);
-   console.log(formData?.jams_ids);
+   //console.log(formData?.jams_ids);
+  //console.log(projectJams);
 
   return (
     <View style={styles.container}>
@@ -149,9 +150,9 @@ const ProjectJamsList = ({
         <TextView style={styles.title}>{title}</TextView>
       </BoxView>
 
-      {profileJams?.length > 0 && (
+      {projectJams?.length > 0 && (
         <ListView
-          data={profileJams}
+          data={projectJams}
           numColumns={numColumns}
           contentContainerStyle={{ gap: Layout.space.base }}
           columnWrapperStyle={{ gap: Layout.space.base }}
