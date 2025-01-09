@@ -28,8 +28,6 @@ const updateSelectionsForm = () => {
   const formData: any = useSelector((state: any) => state.form[resource]);
   const numColumns = 3;
 
-  console.log('-> ooo', formData?.jams_ids);
-
   const findItemIndex = (row: any) => {
     return selectedJams.findIndex((id: any) => id == row.item.id);
   };
@@ -46,19 +44,12 @@ const updateSelectionsForm = () => {
 
   };
 
-  const addSelection = () => {
-    let selectedJamsList = [...selectedJams];
-
-    console.log(selectedJamsList);
-    
-    /*
+  const addSelection = () => {    
     dispatch(setFormData<any>({ 
       resource: resource,
       key: 'jams_ids', 
-      value: selectedJamsList, 
+      value: [...(formData?.jams_ids || []), ...selectedJams], 
     }));
-
-    */
 
     ScreenManager.toggleScreen("SelectJamsForm");
   };
