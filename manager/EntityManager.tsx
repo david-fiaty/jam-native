@@ -30,7 +30,7 @@ class EntityManager {
   async getProfiles(options?: any) {
     let defaults = {};
 
-    return DataManager.get('getProfiles', {...defaults, ...options}); 
+    return await DataManager.get('getProfiles', {...defaults, ...options}); 
   }
 
   async listJams(options?: any) {
@@ -47,7 +47,7 @@ class EntityManager {
   async getJams(options?: any) {
     let defaults = {};
 
-    return DataManager.get('getJams', {...defaults, ...options}); 
+    return await DataManager.get('getJams', {...defaults, ...options}); 
   }
 
   async listProjects(options?: any) {
@@ -64,7 +64,7 @@ class EntityManager {
     options = options || {};
     let defaults = {};
     
-    return DataManager.get('getProjects', {...defaults, ...options}); 
+    return await DataManager.get('getProjects', {...defaults, ...options}); 
   }
 
   async getProjectImageUrl(entity: any) {
@@ -78,13 +78,20 @@ class EntityManager {
     return null;
   }
 
-  async getSectors() {
+  async getSectors(options: any) {
     //let language = await UserManager.getLanguage();
     // Todo - Fix creates error in components
+    /*
     let language = 'en';
     let options = { lang: language };
 
     return await DataManager.get('sectors', options); 
+    */
+
+    options = options || {};
+    let defaults = {};
+    
+    return await DataManager.get('sectors', {...defaults, ...options}); 
   }
 
   async getCountries() {
