@@ -10,7 +10,6 @@ import DividerView from "../view/DividerView";
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import ButtonView from "../view/ButtonView";
-import TextView from "../view/TextView";
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
 import AddItemButton from "../button/AddItemButton";
@@ -113,7 +112,6 @@ const AddProjectForm = () => {
             <ProjectJamsList 
               title={i18n.t("Selected Jams")}
               selectedIds={formData?.jams_ids}
-              addButton={true} 
               onAddEvent={() => ScreenManager.toggleScreen("SelectJamsForm", {
                 resource: resource,
                 profileId: formData?.id,
@@ -140,11 +138,5 @@ const AddProjectForm = () => {
     </BoxView>
   );
 };
-
-const styles = StyleSheet.create({
-  title: {
-    fontWeight: 'bold',
-  }
-});
 
 export default AddProjectForm;

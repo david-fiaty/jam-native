@@ -21,26 +21,26 @@ import IconView from "../view/IconView";
 type Props = {
   title?: any;
   selectedIds?: any;
-  addButton?: boolean;
-  allButton?: boolean;
   onAddEvent?: () => void;
 };
 
 const ProjectJamsList = ({
   title,
   selectedIds,
-  addButton,
-  allButton,
   onAddEvent,
 }: Props) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const [profileJams, setProfileJams] = useState<any>([]);
   const [selectedJams, setSelectedJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [profileId, setProfileId] = useState<number>(0);
-  const projectData = useSelector((state: any) => state.projectForm);
+  const activeScreen: any = ScreenManager.getActiveScreen();
+  const resource: string = activeScreen.params?.resource;
+  const profileId: any = activeScreen.params?.profileId; 
+  const [profileJams, setProfileJams] = useState<any>([]);
+  const formData: any = useSelector((state: any) => state.form[resource]);
   const numColumns = 3;
+
+  // const profileJams: any = activeScreen.params?.profileJams;
 
   const findItemIndex = (row: any) =>
     selectedJams.findIndex((id: any) => id == row.item.id);
@@ -129,10 +129,19 @@ const ProjectJamsList = ({
     return output;
   };
 
+  const onAddButtonPress = () => {
+    ScreenManager.toggleScreen("SelectJamsForm", {
+      resource: resource,
+      profileId: formData?.id,
+      //profileJams: formData?.profile_jams, // Todo - Enable this
+      profileJams: [18, 20, 32, 33, 34],
+    });
+  };
+
   useEffect(() => {
-    if (!profileJams?.length && selectedIds?.length) {
+    if (selectedIds?.length) {
       EntityManager.getJams({ items_ids: selectedIds }).then((data: any) => {
-        if (addButton === true) data.push({ id: "addItem" });
+        data.push({ id: "addItem" });
         setProfileJams(data);
         setIsLoaded(true);
       });
@@ -141,23 +150,12 @@ const ProjectJamsList = ({
 
   if (!isLoaded) return <SpinnerView />;
 
+  console.log('-->');
+
   return (
     <View style={styles.container}>
       <BoxView direction="row" align="center" justify="space-between">
         <TextView style={styles.title}>{title}</TextView>
-
-        {allButton && (
-          <TouchableOpacity
-            onPress={() =>
-              router.push({
-                pathname: "/jam",
-                params: { selectedIds: selectedIds, title: title },
-              })
-            }
-          >
-            <TextView style={styles.link}>{i18n.t("View all")}</TextView>
-          </TouchableOpacity>
-        )}
       </BoxView>
 
       {profileJams?.length > 0 && (
