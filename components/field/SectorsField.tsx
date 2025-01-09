@@ -19,7 +19,10 @@ const SectorsField = ({ label, selectedIds, onPressEvent }: Props) => {
 
   const getSelectedSectors = async () => {
     if (selectedIds?.length) {
-      return await EntityManager.getSectors({items_ids: selectedIds});
+      let sectors: any = await EntityManager.getSectors({items_ids: selectedIds});
+
+      
+      return sectors;
     }
 
     return [];
