@@ -19,19 +19,29 @@ const SectorsField = ({ label, selectedIds, onPressEvent }: Props) => {
 
   const getSelectedSectors = async () => {
     if (selectedIds?.length) {
-      let sectors: any = await EntityManager.getSectors({items_ids: selectedIds});
-
-      
-      return sectors;
+      return await EntityManager.getSectors({items_ids: selectedIds});
     }
 
     return [];
   };
 
+  const getSelectedSubsectors = async () => {
+    let sectors: any = await getSelectedSectors();
+    let subsectors: any = [];
+
+    for (const item of (sectors?.[0]?.sub_sectors || [])) {
+      if (selectedIds?.includes(item.id)) {
+        subsectors.push(item);
+      }
+    }
+
+    return subsectors;
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) { 
-        setSelectedSectors(await getSelectedSectors());
+        setSelectedSectors(await getSelectedSubsectors());
         setIsLoaded(true);
       }
     })();
