@@ -134,7 +134,7 @@ const CollaboratorsList = () => {
         }
 
         {!profiles?.length && 
-          <TextView>{i18n.t('No collaborators found for this query.')}</TextView>
+          <TextView>{i18n.t('No collaborators found.')}</TextView>
         }
       </View>
     </BoxView>
