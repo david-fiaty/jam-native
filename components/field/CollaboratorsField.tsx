@@ -30,8 +30,6 @@ const CollaboratorsField = ({ selectedIds, onPressEvent }: Props) => {
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
-  console.log(selectedProfiles);
-
   return (
     <View style={styles.container}>
       <BoxView
@@ -62,6 +60,9 @@ const CollaboratorsField = ({ selectedIds, onPressEvent }: Props) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+
+  },
   preview: {
     paddingTop: Layout.space.base,
   },
