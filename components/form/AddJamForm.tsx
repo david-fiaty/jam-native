@@ -192,6 +192,7 @@ const AddJamForm = () => {
 
       <DividerView />
       <SectorsField
+        selectedIds={formData?.sectors_ids}
         label={
           <>
             <IconView name="plus" theme="secondary" radius="round" />
@@ -200,7 +201,7 @@ const AddJamForm = () => {
         }
         onPressEvent={() => ScreenManager.toggleScreen('SectorsList', {
           resource: resource,
-          field: 'sectors',
+          field: 'sectors_ids',
         })}
       />
 
