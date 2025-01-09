@@ -92,8 +92,8 @@ class EntityManager {
     let defaults = {};
     let data: any = await DataManager.get('sectors', {...defaults, ...options}); 
 
-    if (options?.sectors_ids?.length) {
-      data = data.filter((o: any) => options.sectors_ids.includes(o.id));
+    if (options?.items_ids?.length) {
+      data = data.filter((o: any) => options.items_ids.includes(o.id));
     }
     
     return data; 
