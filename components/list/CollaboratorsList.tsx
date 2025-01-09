@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from '@/constants/Colors';
+import { BaseProps } from '@/constants/Types';
 import TextView from "../view/TextView";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
@@ -16,7 +17,12 @@ import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from '../field/InputTextField';
 
-const CollaboratorsList = () => {
+type Props = BaseProps & {
+  onSelectItem?: (data: any) => void,
+  onDeleteItem?: (data: any) => void,
+};
+
+const CollaboratorsList = ({ onSelectItem, onDeleteItem }: Props) => {
   const dispatch = useDispatch();
   const [profiles, setProfiles] = useState<any>(null);
   const [selectedProfiles, setSelectedProfiles] = useState<any>([]);
