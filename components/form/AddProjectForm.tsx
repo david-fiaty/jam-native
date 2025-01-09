@@ -140,10 +140,4 @@ const AddProjectForm = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  title: {
-    fontWeight: 'bold',
-  }
-});
-
 export default AddProjectForm;
