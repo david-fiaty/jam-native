@@ -21,7 +21,7 @@ import IconView from "../view/IconView";
 type Props = {
   title?: any;
   selectedIds?: any;
-  resource?: string;
+  resource?: any;
   onAddEvent?: () => void;
 };
 
