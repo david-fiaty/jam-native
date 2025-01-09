@@ -17,7 +17,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.secondary,
     borderRadius: Layout.radius.round,
-    padding: Layout.space.base,
+    paddingVertical: Layout.space.base/2,
+    paddingHorizontal: Layout.space.base/1.2,
     alignSelf: 'flex-start',
   },
   content: {
