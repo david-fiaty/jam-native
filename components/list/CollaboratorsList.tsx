@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
