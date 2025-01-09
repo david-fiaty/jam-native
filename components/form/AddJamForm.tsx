@@ -218,6 +218,7 @@ const AddJamForm = () => {
       />
 
       <CollaboratorsField
+        selectedIds={formData?.collaborators_ids}
         onPressEvent={() => ScreenManager.toggleScreen('CollaboratorsList', {
           resource: resource,
           field: 'collaborators_ids',
