@@ -110,6 +110,7 @@ const AddProjectForm = () => {
         { formData?.jams_ids?.length && (
           <BoxView direction="column" align="flex-start" justify="flex-start">
             <ProjectJamsList 
+              resource={resource}
               title={i18n.t("Selected Jams")}
               selectedIds={formData?.jams_ids}
               onAddEvent={() => ScreenManager.toggleScreen("SelectJamsForm", {
