@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
