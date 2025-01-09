@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { BaseProps } from "@/constants/Types";
+import { Colors } from '@/constants/Colors';
+import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
@@ -27,7 +29,7 @@ const [isLoaded, setIsLoaded] = useState<boolean>(false);
   if (!isLoaded) return <SpinnerView size="small" />;
 
   return (
-    <View>
+    <View style={styles.preview}>
       <BoxView
         direction="row"
         align="center"
@@ -41,5 +43,11 @@ const [isLoaded, setIsLoaded] = useState<boolean>(false);
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  preview: {
+
+  },
+});
 
 export default CollaboratorsField;
