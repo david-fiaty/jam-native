@@ -47,6 +47,7 @@ const ProfileForm = () => {
           key: null, 
           value: { ...(await UserManager.getProfileData()), ...formData }, 
         }));
+        
         setIsLoaded(true);
       }
     })();
@@ -187,13 +188,9 @@ const ProfileForm = () => {
         <ProfileProjectsList
           title={i18n.t("Your Projects")} 
           addButton={true}
+          profileId={profileId}
           allButton={formData?.profile_projects?.length > 0}
           idArray={formData?.profile_projects}
-          onAddButtonPress={() => ScreenManager.toggleScreen("AddProjectForm", {
-            profileId: profileId,
-            //profileJams: formData?.profile_jams, // Todo - Enable this
-            profileJams: [18, 20, 32, 33, 34],
-          })}
         />
 
         {formData?.saved_projects?.length > 0 && (
