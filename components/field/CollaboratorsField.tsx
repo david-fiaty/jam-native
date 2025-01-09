@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { BaseProps } from "@/constants/Types";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
 import IconView from "../view/IconView";
 import SpinnerView from '../view/SpinnerView';
+import TagView from '../view/TagView';
 
 type Props = BaseProps & {
   selectedIds?: any;
@@ -25,14 +27,18 @@ const [isLoaded, setIsLoaded] = useState<boolean>(false);
   if (!isLoaded) return <SpinnerView size="small" />;
 
   return (
-    <BoxView
-      direction="row"
-      align="center"
-      onPress={onPressEvent}
-    >
-      <IconView name="plus" theme="secondary" radius="round" />
-      <TextView>{i18n.t('Add collaborators')}</TextView>
-    </BoxView>
+    <View>
+      <BoxView
+        direction="row"
+        align="center"
+        onPress={onPressEvent}
+      >
+        <IconView name="plus" theme="secondary" radius="round" />
+        <TextView>{i18n.t('Add collaborators')}</TextView>
+      </BoxView>
+
+      <TagView>Some tag</TagView>
+    </View>
   );
 };
 
