@@ -13,7 +13,6 @@ import NoImageView from "../view/NoImageView";
 import BoxView from "../view/BoxView";
 import MediaManager from "@/manager/MediaManager";
 import BackButton from "../button/BackButton";
-import UserManager from "@/manager/UserManager";
 import IconView from "../view/IconView";
 import TextView from "../view/TextView";
 
