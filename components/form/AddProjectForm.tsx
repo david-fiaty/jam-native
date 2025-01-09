@@ -112,7 +112,6 @@ const AddProjectForm = () => {
             <ProjectJamsList 
               title={i18n.t("Selected Jams")}
               selectedIds={formData?.jams_ids}
-              addButton={true} 
               onAddEvent={() => ScreenManager.toggleScreen("SelectJamsForm", {
                 resource: resource,
                 profileId: formData?.id,
