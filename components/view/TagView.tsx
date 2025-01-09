@@ -5,17 +5,15 @@ import { Layout } from '@/constants/Layout';
 import IconView from './IconView';
 import BoxView from './BoxView';
 import TextView from './TextView';
+import { Chip } from '@rneui/themed';
 
 const TagView = ({style, children}: BaseProps) => {
   return (
-    <BoxView direction="horizontal" align="start" justify="between" style={styles.container}>
-      <TextView>
-        {children}
-      </TextView>
-      <View style={styles.delete}>
-        <IconView name="delete" theme="secondary" size={10} />
-      </View>
-    </BoxView>
+    <Chip
+      title="Outlined & Disabled"
+      type="outline"
+      containerStyle={{ marginVertical: 15 }}
+    />
   );
 };
 
