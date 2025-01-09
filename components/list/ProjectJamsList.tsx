@@ -41,8 +41,6 @@ const ProjectJamsList = ({
   const formData: any = useSelector((state: any) => state.form[resource]);
   const numColumns = 3;
 
-  // const profileJams: any = activeScreen.params?.profileJams;
-
   const findItemIndex = (row: any) => {
     return selectedJams.findIndex((id: any) => id == row.item.id);
   };
@@ -138,6 +136,8 @@ const ProjectJamsList = ({
       //profileJams: formData?.profile_jams, // Todo - Enable this
       profileJams: [18, 20, 32, 33, 34],
     });
+
+    // const profileJams: any = activeScreen.params?.profileJams;
   };
 
   useEffect(() => {
