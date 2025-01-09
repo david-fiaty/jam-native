@@ -37,7 +37,6 @@ const ProjectJamsList = ({
   const [selectedJams, setSelectedJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
-  const profileId: any = activeScreen.params?.profileId; 
   const [projectJams, setProjectJams] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
   const numColumns = 3;
