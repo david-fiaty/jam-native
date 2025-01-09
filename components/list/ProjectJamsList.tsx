@@ -22,6 +22,7 @@ type Props = {
   selectedIds?: any;
   resource?: any;
   onAddButtonPress?: () => void;
+  onDeleteButtonPress?: (row: any) => void;
 };
 
 const ProjectJamsList = ({
@@ -29,6 +30,7 @@ const ProjectJamsList = ({
   selectedIds,
   resource,
   onAddButtonPress,
+  onDeleteButtonPress
 }: Props) => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -56,20 +58,6 @@ const ProjectJamsList = ({
 
     // Todo - Implement toggle
     console.log('toggle');
-  };
-
-  const deleteItem = (row: any) => {
-    /*
-    let selectedJamsList: any = [...selectedJams];
-    let index: number = findItemIndex(row);
-
-    delete selectedJamsList[index];
-    selectedJamsList = selectedJamsList.filter((o: any) => o);
-    setSelectedJams(selectedJamsList);
-
-
-    console.log(selectedJams);
-    */
   };
 
   const renderItem = (row: any) => {
@@ -108,7 +96,7 @@ const ProjectJamsList = ({
           {isSelected && (
             <TouchableOpacity
               style={styles.deleteItem}
-              onPress={() => deleteItem(row)}
+              onPress={() => onDeleteButtonPress(row)}
             >
               <IconView name="delete" theme="primary" size={8} />
             </TouchableOpacity>
