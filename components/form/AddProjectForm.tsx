@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
@@ -59,11 +59,11 @@ const AddProjectForm = () => {
             ...{ profile_id: profileId },
           }, 
         }));
-
+        
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, resource, profileId]);
+  }, [isLoaded, resource, profileId, formData]);
 
   if (!isLoaded) return <SpinnerView />;
   
@@ -116,15 +116,13 @@ const AddProjectForm = () => {
               onAddButtonPress={() => ScreenManager.toggleScreen("SelectJamsForm", {
                 resource: resource,
                 profileId: formData?.id,
-                //profileJams: formData?.profile_jams, // Todo - Enable this
-                profileJams: [18, 20, 32, 33, 34],
+                profileJams: [18, 20, 32, 33, 34], // Todo - Enable this
               })}
               onDeleteButtonPress={(row: any) => {
                 let selectedIds: any = [...formData?.jams_ids];
                 let index: number = selectedIds.findIndex((id: any) => id == row?.item?.id);
                 delete selectedIds[index];
-                selectedIds = selectedIds.filter((o: any) => o);
-                updateField("jams_ids", selectedIds);
+                updateField("jams_ids", selectedIds.filter((o: any) => o));
               }}
             />
           </BoxView>
