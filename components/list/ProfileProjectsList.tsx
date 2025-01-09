@@ -33,7 +33,6 @@ const ProfileProjectsList = ({
   const numColumns = 3;
   const router = useRouter();
   const [profileProjects, setProfileProjects] = useState<any>([]);
-
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [projectsImages, setProjectsImages] = useState<any>({});
 
@@ -42,7 +41,7 @@ const ProfileProjectsList = ({
       profileId: profileId,
       //profileJams: formData?.profile_jams, // Todo - Enable this
       profileJams: [18, 20, 32, 33, 34],
-    })
+    });
   };
 
   const renderItem = (row: any) => {
