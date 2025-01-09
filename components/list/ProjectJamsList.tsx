@@ -128,10 +128,6 @@ const ProjectJamsList = ({
 
   if (!isLoaded) return <SpinnerView />;
 
-   //console.log('-->', resource, activeScreen?.params);
-   //console.log(formData?.jams_ids);
-  //console.log(projectJams);
-
   return (
     <View style={styles.container}>
       <BoxView direction="row" align="center" justify="space-between">
