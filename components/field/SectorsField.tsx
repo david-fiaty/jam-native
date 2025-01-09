@@ -5,10 +5,11 @@ import IconView from "../view/IconView";
 
 type Props = BaseProps & {
   label?: any;
+  selectedIds?: any;
   onPressEvent?: () => void;
 };
 
-const SectorsField = ({ label, onPressEvent}: Props) => {
+const SectorsField = ({ label, selectedIds, onPressEvent }: Props) => {
   return (
     <BoxView
       direction="row"

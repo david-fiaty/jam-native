@@ -207,17 +207,18 @@ const AddJamForm = () => {
       <MediaPickerBase
         preview={true}
         value={formData?.upload_medias}
+        onSelectItem={(data: any) => updateField('upload_medias', data)}
+        onDeleteItem={(data: any) => updateField('upload_medias', data)}
         label={
           <BoxView direction="row" align="center">
             <IconView name="plus" theme="secondary" radius="round" />
             <TextView>{i18n.t('Add media')}</TextView>
           </BoxView>
         }
-        onSelectItem={(mediaList: any) => updateField('upload_medias', mediaList)}
-        onDeleteItem={(mediaList: any) => updateField('upload_medias', mediaList)}
       />
 
       <CollaboratorsField
+        selectedIds={formData?.collaborators_ids}
         onPressEvent={() => ScreenManager.toggleScreen('CollaboratorsList', {
           resource: resource,
           field: 'collaborators_ids',
