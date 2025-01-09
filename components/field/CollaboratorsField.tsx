@@ -47,7 +47,7 @@ const CollaboratorsField = ({ selectedIds, onPressEvent }: Props) => {
             return (
               <TagView
                 key={item.id}
-                onDeleteButtonPress={() => console.log('delete tag', item.id)}  
+                onDeleteButtonPress={() => console.log('delete collaborator tag', item.id)}  
               >
                 {item?.profile_name}
               </TagView>
