@@ -29,7 +29,7 @@ const [isLoaded, setIsLoaded] = useState<boolean>(false);
   if (!isLoaded) return <SpinnerView size="small" />;
 
   return (
-    <View style={styles.preview}>
+    <View style={styles.container}>
       <BoxView
         direction="row"
         align="center"
@@ -39,14 +39,19 @@ const [isLoaded, setIsLoaded] = useState<boolean>(false);
         <TextView>{i18n.t('Add collaborators')}</TextView>
       </BoxView>
 
-      <TagView>Some tag</TagView>
+      <View style={styles.preview}>
+        <TagView>Some tag</TagView>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    
+  },
   preview: {
-
+    paddingTop: Layout.space.base,
   },
 });
 
