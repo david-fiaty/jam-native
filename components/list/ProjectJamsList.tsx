@@ -152,7 +152,7 @@ const ProjectJamsList = ({
 
   if (!isLoaded) return <SpinnerView />;
 
-   //console.log('-->', resource, activeScreen?.params);
+   console.log('-->', resource, activeScreen?.params);
 
   return (
     <View style={styles.container}>
