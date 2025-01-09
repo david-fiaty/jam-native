@@ -20,7 +20,7 @@ type Props = {
   idArray?: any;
   addButton?: boolean;
   allButton?: boolean;
-  onAddButtonPress?: () => void;
+  profileId?: number;
 };
 
 const ProfileProjectsList = ({
@@ -28,13 +28,22 @@ const ProfileProjectsList = ({
   idArray,
   addButton,
   allButton,
-  onAddButtonPress,
+  profileId
 }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const [profileProjects, setProfileProjects] = useState<any>([]);
+
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [projectsImages, setProjectsImages] = useState<any>({});
+
+  const onAddButtonPress = () => {
+    ScreenManager.toggleScreen("AddProjectForm", {
+      profileId: profileId,
+      //profileJams: formData?.profile_jams, // Todo - Enable this
+      profileJams: [18, 20, 32, 33, 34],
+    })
+  };
 
   const renderItem = (row: any) => {
     let imageSize: any = MediaManager.getThumbnailSize();
