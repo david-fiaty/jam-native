@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
+import IconView from './IconView';
 
 const TagView = ({style, children}: BaseProps) => {
   return (
@@ -9,6 +10,7 @@ const TagView = ({style, children}: BaseProps) => {
       <Text style={[styles.content, style]}>
         {children}
       </Text>
+      <IconView name="delete" theme="secondary" />
     </View>
   );
 };
