@@ -43,8 +43,9 @@ const ProjectJamsList = ({
 
   // const profileJams: any = activeScreen.params?.profileJams;
 
-  const findItemIndex = (row: any) =>
-    selectedJams.findIndex((id: any) => id == row.item.id);
+  const findItemIndex = (row: any) => {
+    return selectedJams.findIndex((id: any) => id == row.item.id);
+  };
 
   const toggleItem = (row: any) => {
     let selectedJamsList: any = [...selectedJams];
@@ -151,7 +152,7 @@ const ProjectJamsList = ({
 
   if (!isLoaded) return <SpinnerView />;
 
-   console.log('-->', resource, activeScreen?.params);
+   //console.log('-->', resource, activeScreen?.params);
 
   return (
     <View style={styles.container}>
