@@ -39,14 +39,28 @@ const updateSelectionsForm = () => {
     let index: number = findItemIndex(row);
 
     if (index === -1) selectedJamsList.push(row.item.id);
-    selectedJamsList = [...(formData?.jams_ids || []), ...selectedJamsList];
+    else delete selectedJamsList[index];
 
+    selectedJamsList = selectedJamsList.filter((n: any) => n);
     setSelectedJams(selectedJamsList);
+
+  };
+
+  const addSelection = () => {
+    let selectedJamsList = [...selectedJams];
+
+    console.log(selectedJamsList);
+    
+    /*
     dispatch(setFormData<any>({ 
       resource: resource,
       key: 'jams_ids', 
       value: selectedJamsList, 
     }));
+
+    */
+
+    ScreenManager.toggleScreen("SelectJamsForm");
   };
 
   const renderItem = (row: any) => {
@@ -128,7 +142,7 @@ const updateSelectionsForm = () => {
         />
 
         {selectedJams?.length > 0 && (
-          <TouchableOpacity onPress={() => ScreenManager.toggleScreen("SelectJamsForm")}>
+          <TouchableOpacity onPress={addSelection}>
             <View>
               <TextView style={Layout.textLink}>
                 {i18n.t("Add selected")} ({selectedJams.length})
