@@ -94,7 +94,7 @@ const AddProjectForm = () => {
 
         <DividerView />
 
-        {!formData?.jams_ids?.length && (
+        { !formData?.jams_ids?.length && (
           <BoxView direction="column" align="center" justify="center">
             <AddItemButton
               label={i18n.t("Add Jams")}
@@ -107,7 +107,7 @@ const AddProjectForm = () => {
           </BoxView>
         )}
 
-        { formData?.jams_ids?.length && (
+        { formData?.jams_ids?.length > 0 && (
           <BoxView direction="column" align="flex-start" justify="flex-start">
             <ProjectJamsList 
               resource={resource}
