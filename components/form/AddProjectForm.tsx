@@ -59,7 +59,7 @@ const AddProjectForm = () => {
             ...{ profile_id: profileId },
           }, 
         }));
-
+        
         setIsLoaded(true);
       }
     })();
