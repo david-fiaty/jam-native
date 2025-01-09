@@ -59,17 +59,17 @@ const ProjectJamsList = ({
   };
 
   const deleteItem = (row: any) => {
+    /*
     let selectedJamsList: any = [...selectedJams];
     let index: number = findItemIndex(row);
 
-    if (index === -1) selectedJamsList.push(row.item.id);
-    else delete selectedJamsList[index];
-
-    selectedJamsList = selectedJamsList.filter((n: any) => n);
+    delete selectedJamsList[index];
+    selectedJamsList = selectedJamsList.filter((o: any) => o);
     setSelectedJams(selectedJamsList);
 
-    // Todo - Implement delete
-    console.log('delete');
+
+    console.log(selectedJams);
+    */
   };
 
   const renderItem = (row: any) => {
@@ -141,6 +141,7 @@ const ProjectJamsList = ({
   if (!isLoaded) return <SpinnerView />;
 
    //console.log('-->', resource, activeScreen?.params);
+   console.log(formData?.jams_ids);
 
   return (
     <View style={styles.container}>
