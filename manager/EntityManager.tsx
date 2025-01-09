@@ -90,8 +90,11 @@ class EntityManager {
 
     options = options || {};
     let defaults = {};
+    let data: any = await DataManager.get('sectors', {...defaults, ...options}); 
+
+    console.log(options);
     
-    return await DataManager.get('sectors', {...defaults, ...options}); 
+    return data; 
   }
 
   async getCountries() {
