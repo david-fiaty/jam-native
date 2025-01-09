@@ -3,15 +3,19 @@ import { BaseProps } from '@/constants/Types';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 import IconView from './IconView';
+import BoxView from './BoxView';
+import TextView from './TextView';
 
 const TagView = ({style, children}: BaseProps) => {
   return (
-    <View style={styles.container}>
-      <Text style={[styles.content, style]}>
+    <BoxView direction="horizontal" align="start" justify="between" style={styles.container}>
+      <TextView>
         {children}
-      </Text>
-      <IconView name="delete" theme="secondary" />
-    </View>
+      </TextView>
+      <View style={styles.delete}>
+        <IconView name="delete" theme="secondary" size={10} />
+      </View>
+    </BoxView>
   );
 };
 
@@ -23,9 +27,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: Layout.space.base/1.2,
     alignSelf: 'flex-start',
   },
-  content: {
-    color: Colors.primary,
-    fontSize: Layout.fontSize.base,
+  delete: {
+    position: 'absolute',
+    right: 0,
   },
 });
 
