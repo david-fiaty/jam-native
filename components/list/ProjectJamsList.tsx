@@ -21,29 +21,29 @@ import IconView from "../view/IconView";
 type Props = {
   title?: any;
   selectedIds?: any;
-  onAddEvent?: () => void;
+  resource?: any;
+  onAddButtonPress?: () => void;
 };
 
 const ProjectJamsList = ({
   title,
   selectedIds,
-  onAddEvent,
+  resource,
+  onAddButtonPress,
 }: Props) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [selectedJams, setSelectedJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
-  const resource: string = activeScreen.params?.resource;
   const profileId: any = activeScreen.params?.profileId; 
   const [profileJams, setProfileJams] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
   const numColumns = 3;
 
-  // const profileJams: any = activeScreen.params?.profileJams;
-
-  const findItemIndex = (row: any) =>
-    selectedJams.findIndex((id: any) => id == row.item.id);
+  const findItemIndex = (row: any) => {
+    return selectedJams.findIndex((id: any) => id == row.item.id);
+  };
 
   const toggleItem = (row: any) => {
     let selectedJamsList: any = [...selectedJams];
@@ -84,7 +84,7 @@ const ProjectJamsList = ({
           label={i18n.t("Add")}
           width={imageSize.width}
           height={imageSize.height}
-          onPress={onAddEvent}
+          onPress={onAddButtonPress}
         />
       );
     } else if (!row?.item?.medias?.[0]?.url) {
@@ -129,15 +129,6 @@ const ProjectJamsList = ({
     return output;
   };
 
-  const onAddButtonPress = () => {
-    ScreenManager.toggleScreen("SelectJamsForm", {
-      resource: resource,
-      profileId: formData?.id,
-      //profileJams: formData?.profile_jams, // Todo - Enable this
-      profileJams: [18, 20, 32, 33, 34],
-    });
-  };
-
   useEffect(() => {
     if (selectedIds?.length) {
       EntityManager.getJams({ items_ids: selectedIds }).then((data: any) => {
@@ -150,7 +141,7 @@ const ProjectJamsList = ({
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log('-->');
+   //console.log('-->', resource, activeScreen?.params);
 
   return (
     <View style={styles.container}>
