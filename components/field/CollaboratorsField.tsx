@@ -41,30 +41,35 @@ const CollaboratorsField = ({ selectedIds, onPressEvent }: Props) => {
         <TextView>{i18n.t('Add collaborators')}</TextView>
       </BoxView>
 
-      <View style={styles.preview}>
         { selectedProfiles?.length > 0 && (
-          selectedProfiles.map((item: any) => {
-            return (
-              <TagView
-                key={item.id}
-                onDeleteButtonPress={() => console.log('delete collaborator tag', item.id)}  
-              >
-                {item?.profile_name}
-              </TagView>
-            );
-          })
+          <View style={styles.preview}> 
+            { selectedProfiles.map((item: any) => {
+              return (
+                <TagView
+                  key={item.id}
+                  onDeleteButtonPress={() => console.log('delete collaborator tag', item.id)}  
+                >
+                  {item?.profile_name}
+                </TagView>
+              );
+            }) }
+          </View>
         )}
-      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-
+    width: '100%',
   },
   preview: {
-    paddingTop: Layout.space.base,
+    width: '100%',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: Layout.space.base,
+    marginTop: Layout.space.base,
+    marginBottom: Layout.space.base,
   },
 });
 
