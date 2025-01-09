@@ -37,7 +37,7 @@ const updateSelectionsForm = () => {
   const updateSelection = (row: any) => {
     let selectedJamsList = [...selectedJams];
     let index: number = findItemIndex(row);
-    
+
     if (index === -1) selectedJamsList.push(row.item.id);
     selectedJamsList = [...(formData?.jams_ids || []), ...selectedJamsList];
 
@@ -47,14 +47,6 @@ const updateSelectionsForm = () => {
       key: 'jams_ids', 
       value: selectedJamsList, 
     }));
-  };
-
-  const deleteItem = (row: any) => {
-    let selectedJamsList = [...selectedJams];
-    let index: number = findItemIndex(row);
-    if (index !== -1) delete selectedJamsList[index];
-
-    setSelectedJams(selectedJamsList.filter((n) => n));
   };
 
   const renderItem = (row: any) => {
