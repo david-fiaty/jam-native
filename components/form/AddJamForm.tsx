@@ -218,8 +218,6 @@ const AddJamForm = () => {
       />
 
       <CollaboratorsField
-        onSelectItem={(data: any) => updateField('collaborators_ids', data)}
-        onDeleteItem={(data: any) => updateField('collaborators_ids', data)}
         onPressEvent={() => ScreenManager.toggleScreen('CollaboratorsList', {
           resource: resource,
           field: 'collaborators_ids',
