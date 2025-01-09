@@ -1,7 +1,7 @@
+import { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { BaseProps } from "@/constants/Types";
 import BoxView from "../view/BoxView";
-import IconView from "../view/IconView";
 
 type Props = BaseProps & {
   label?: any;
@@ -10,6 +10,16 @@ type Props = BaseProps & {
 };
 
 const SectorsField = ({ label, selectedIds, onPressEvent }: Props) => {
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
+  useEffect(() => {
+    (async () => {
+      if (!isLoaded) { 
+        setIsLoaded(true);
+      }
+    })();
+  }, [isLoaded]);
+
   return (
     <BoxView
       direction="row"
