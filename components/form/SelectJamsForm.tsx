@@ -19,15 +19,16 @@ import TextView from "../view/TextView";
 
 const updateSelectionsForm = () => {
   const dispatch = useDispatch();
-  const [profileData, setProfileData] = useState<any>([]);
   const [profileJams, setProfileJams] = useState<any>([]);
   const [selectedJams, setSelectedJams] = useState<any>([]);
-  const [profileId, setProfileId] = useState<number>(0);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
   const idArray: any = activeScreen?.params?.profileJams;
   const resource: string = activeScreen.params.resource;
+  const formData: any = useSelector((state: any) => state.form[resource]);
   const numColumns = 3;
+
+  console.log('-> ooo', formData?.jams_ids);
 
   const findItemIndex = (row: any) => {
     return selectedJams.findIndex((id: any) => id == row.item.id);
@@ -38,24 +39,14 @@ const updateSelectionsForm = () => {
     let index: number = findItemIndex(row);
 
     if (index === -1) selectedJamsList.push(row.item.id);
-    else delete selectedJamsList[index];
+    selectedJamsList = [...(formData?.jams_ids || []), ...selectedJamsList];
 
-    selectedJamsList = selectedJamsList.filter((n: any) => n);
     setSelectedJams(selectedJamsList);
-
     dispatch(setFormData<any>({ 
       resource: resource,
       key: 'jams_ids', 
       value: selectedJamsList, 
     }));
-  };
-
-  const deleteItem = (row: any) => {
-    let selectedJamsList = [...selectedJams];
-    let index: number = findItemIndex(row);
-    if (index !== -1) delete selectedJamsList[index];
-
-    setSelectedJams(selectedJamsList.filter((n) => n));
   };
 
   const renderItem = (row: any) => {
