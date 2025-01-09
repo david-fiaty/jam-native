@@ -40,10 +40,11 @@ const ProjectJamsList = ({
   const activeScreen: any = ScreenManager.getActiveScreen();
   const resource: string = activeScreen.params?.resource;
   const profileId: any = activeScreen.params?.profileId; 
-  //const profileJams: any = activeScreen.params?.profileJams;
   const [profileJams, setProfileJams] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
   const numColumns = 3;
+
+  // const profileJams: any = activeScreen.params?.profileJams;
 
   const findItemIndex = (row: any) =>
     selectedJams.findIndex((id: any) => id == row.item.id);
@@ -142,7 +143,7 @@ const ProjectJamsList = ({
   };
 
   useEffect(() => {
-    if (!profileJams?.length && selectedIds?.length) {
+    if (selectedIds?.length) {
       EntityManager.getJams({ items_ids: selectedIds }).then((data: any) => {
         if (addButton === true) data.push({ id: "addItem" });
         setProfileJams(data);
