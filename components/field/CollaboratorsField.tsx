@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { BaseProps } from "@/constants/Types";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
@@ -10,9 +11,15 @@ type Props = BaseProps & {
 };
 
 const CollaboratorsField = ({ selectedIds, onPressEvent }: Props) => {
+const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-
-  console.log('selectedIds', selectedIds);
+  useEffect(() => {
+    (async () => {
+      if (!isLoaded) { 
+        setIsLoaded(true);
+      }
+    })();
+  }, [isLoaded]);
 
   return (
     <BoxView
