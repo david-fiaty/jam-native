@@ -1,19 +1,26 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 import IconView from './IconView';
 import BoxView from './BoxView';
 import TextView from './TextView';
-import { Chip } from '@rneui/themed';
 
-const TagView = ({style, children}: BaseProps) => {
+type Props = BaseProps & {
+  onDeleteButtonPress?: () => void;
+  children?: any;
+};
+
+const TagView = ({ onDeleteButtonPress, children}: Props) => {
   return (
-    <Chip
-      title="Outlined & Disabled"
-      type="outline"
-      containerStyle={{ marginVertical: 15 }}
-    />
+    <BoxView direction="row" align="start" justify="between" style={styles.container}>
+      <TextView>
+        {children}
+      </TextView>
+      <TouchableOpacity style={styles.delete} onPress={onDeleteButtonPress}>
+        <IconView name="delete" theme="secondary" size={12} />
+      </TouchableOpacity>
+    </BoxView>
   );
 };
 
@@ -26,8 +33,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
   delete: {
-    position: 'absolute',
-    right: 0,
+
   },
 });
 
