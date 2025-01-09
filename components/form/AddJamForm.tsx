@@ -190,7 +190,7 @@ const AddJamForm = () => {
         }
       />
 
-      <DividerView />
+      <DividerView theme="secondary" />
       <SectorsField
         selectedIds={formData?.sectors_ids}
         label={
@@ -204,7 +204,17 @@ const AddJamForm = () => {
           field: 'sectors_ids',
         })}
       />
+      
+      <DividerView theme="secondary" />
+      <CollaboratorsField
+        selectedIds={formData?.collaborators_ids}
+        onPressEvent={() => ScreenManager.toggleScreen('CollaboratorsList', {
+          resource: resource,
+          field: 'collaborators_ids',
+        })}
+      />
 
+      <DividerView theme="secondary" />
       <MediaPickerBase
         preview={true}
         value={formData?.upload_medias}
@@ -217,14 +227,8 @@ const AddJamForm = () => {
           </BoxView>
         }
       />
-
-      <CollaboratorsField
-        selectedIds={formData?.collaborators_ids}
-        onPressEvent={() => ScreenManager.toggleScreen('CollaboratorsList', {
-          resource: resource,
-          field: 'collaborators_ids',
-        })}
-      />
+      
+      <DividerView theme="secondary" />
 
       <DividerView />
       <ButtonView
