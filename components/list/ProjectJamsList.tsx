@@ -35,11 +35,14 @@ const ProjectJamsList = ({
 }: Props) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const [profileJams, setProfileJams] = useState<any>([]);
   const [selectedJams, setSelectedJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [profileId, setProfileId] = useState<number>(0);
-  const projectData = useSelector((state: any) => state.projectForm);
+  const activeScreen: any = ScreenManager.getActiveScreen();
+  const resource: string = activeScreen.params?.resource;
+  const profileId: any = activeScreen.params?.profileId; 
+  //const profileJams: any = activeScreen.params?.profileJams;
+  const [profileJams, setProfileJams] = useState<any>([]);
+  const formData: any = useSelector((state: any) => state.form[resource]);
   const numColumns = 3;
 
   const findItemIndex = (row: any) =>
@@ -129,6 +132,15 @@ const ProjectJamsList = ({
     return output;
   };
 
+  const onAddButtonPress = () => {
+    ScreenManager.toggleScreen("SelectJamsForm", {
+      resource: resource,
+      profileId: formData?.id,
+      //profileJams: formData?.profile_jams, // Todo - Enable this
+      profileJams: [18, 20, 32, 33, 34],
+    });
+  };
+
   useEffect(() => {
     if (!profileJams?.length && selectedIds?.length) {
       EntityManager.getJams({ items_ids: selectedIds }).then((data: any) => {
@@ -140,6 +152,8 @@ const ProjectJamsList = ({
   });
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log('-->');
 
   return (
     <View style={styles.container}>
