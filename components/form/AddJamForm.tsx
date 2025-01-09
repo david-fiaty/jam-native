@@ -77,12 +77,26 @@ const AddJamForm = () => {
 
   useEffect(() => {
     (async () => {
-      if (!profileId) setProfileId(await UserManager.getProfileId());
-      setIsLoaded(true);
+      if (!isLoaded) {
+        let profileId: number =  await UserManager.getProfileId();
+        setProfileId(profileId);
+        dispatch(setFormData<any>({ 
+          resource: resource,
+          key: null, 
+          value: {
+            ...formData,
+            ...{ profile_id: profileId },
+          }, 
+        }));
+
+        setIsLoaded(true);
+      }
     })();
-  });
+  }, [isLoaded, profileId]);
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log('addJamForm', formData);
 
   return (
     <BoxView
@@ -193,17 +207,18 @@ const AddJamForm = () => {
       <MediaPickerBase
         preview={true}
         value={formData?.upload_medias}
+        onSelectItem={(data: any) => updateField('upload_medias', data)}
+        onDeleteItem={(data: any) => updateField('upload_medias', data)}
         label={
           <BoxView direction="row" align="center">
             <IconView name="plus" theme="secondary" radius="round" />
             <TextView>{i18n.t('Add media')}</TextView>
           </BoxView>
         }
-        onSelectItem={(mediaList: any) => updateField('upload_medias', mediaList)}
-        onDeleteItem={(mediaList: any) => updateField('upload_medias', mediaList)}
       />
 
       <CollaboratorsField
+        selectedIds={formData?.collaborators_ids}
         onPressEvent={() => ScreenManager.toggleScreen('CollaboratorsList', {
           resource: resource,
           field: 'collaborators_ids',

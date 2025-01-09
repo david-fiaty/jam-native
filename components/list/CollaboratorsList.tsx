@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
@@ -134,7 +133,7 @@ const CollaboratorsList = () => {
         }
 
         {!profiles?.length && 
-          <TextView>{i18n.t('No collaborators found for this query.')}</TextView>
+          <TextView>{i18n.t('No collaborators found.')}</TextView>
         }
       </View>
     </BoxView>
