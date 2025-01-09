@@ -228,6 +228,8 @@ const AddJamForm = () => {
         }
       />
       
+      <DividerView theme="secondary" />
+
       <DividerView />
       <ButtonView
         label={i18n.t('Post')}
