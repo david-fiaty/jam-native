@@ -22,14 +22,14 @@ type Props = {
   title?: any;
   selectedIds?: any;
   resource?: any;
-  onAddEvent?: () => void;
+  onAddButtonPress?: () => void;
 };
 
 const ProjectJamsList = ({
   title,
   selectedIds,
   resource,
-  onAddEvent,
+  onAddButtonPress,
 }: Props) => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -84,7 +84,7 @@ const ProjectJamsList = ({
           label={i18n.t("Add")}
           width={imageSize.width}
           height={imageSize.height}
-          onPress={onAddEvent}
+          onPress={onAddButtonPress}
         />
       );
     } else if (!row?.item?.medias?.[0]?.url) {
@@ -129,17 +129,6 @@ const ProjectJamsList = ({
     return output;
   };
 
-  const onAddButtonPress = () => {
-    ScreenManager.toggleScreen("SelectJamsForm", {
-      resource: resource,
-      profileId: formData?.id,
-      //profileJams: formData?.profile_jams, // Todo - Enable this
-      profileJams: [18, 20, 32, 33, 34],
-    });
-
-    // const profileJams: any = activeScreen.params?.profileJams;
-  };
-
   useEffect(() => {
     if (selectedIds?.length) {
       EntityManager.getJams({ items_ids: selectedIds }).then((data: any) => {
@@ -152,7 +141,7 @@ const ProjectJamsList = ({
 
   if (!isLoaded) return <SpinnerView />;
 
-   console.log('-->', resource, activeScreen?.params);
+   //console.log('-->', resource, activeScreen?.params);
 
   return (
     <View style={styles.container}>
