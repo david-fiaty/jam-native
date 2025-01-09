@@ -5,10 +5,15 @@ import TextView from "../view/TextView";
 import IconView from "../view/IconView";
 
 type Props = BaseProps & {
+  selectedIds?: any;
   onPressEvent?: () => void;
 };
 
-const CollaboratorsField = ({onPressEvent}: Props) => {
+const CollaboratorsField = ({ selectedIds, onPressEvent }: Props) => {
+
+
+  console.log('selectedIds', selectedIds);
+
   return (
     <BoxView
       direction="row"
