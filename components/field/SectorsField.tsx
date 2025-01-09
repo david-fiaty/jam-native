@@ -17,14 +17,22 @@ const SectorsField = ({ label, selectedIds, onPressEvent }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedSectors, setSelectedSectors] = useState<any>([]);
 
+  const getSelectedSectors = async () => {
+    if (selectedIds?.length) {
+      return await EntityManager.getSectors({items_ids: selectedIds});
+    }
+
+    return [];
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) { 
-        if (selectedIds?.length) setSelectedSectors(await EntityManager.getSectors({items_ids: selectedIds}));
+        setSelectedSectors(await getSelectedSectors());
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, selectedIds]);
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
