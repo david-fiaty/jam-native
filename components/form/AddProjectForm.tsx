@@ -122,7 +122,9 @@ const AddProjectForm = () => {
               onDeleteButtonPress={(row: any) => {
                 let selectedIds: any = [...formData?.jams_ids];
                 let index: number = selectedIds.findIndex((id: any) => id == row?.item?.id);
-                console.log(row.item.id, index, formData?.jams_ids);
+                delete selectedIds[index];
+                selectedIds = selectedIds.filter((o: any) => o);
+                updateField("jams_ids", selectedIds);
               }}
             />
           </BoxView>
