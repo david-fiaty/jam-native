@@ -14,6 +14,8 @@ npm start --tunnel
 # Google maps
 AIzaSyB91uv-OuWw6iNMjVZmuHJsRVDHP9baCq0
 
+https://docs.google.com/spreadsheets/d/1sodzaVigD26XOopcXfLRykl51wPM5pKecS0i1QEDWMc/edit?hl=fr&gid=0#gid=0
+https://www.notion.so/mitsio-motu/6be2f5f83e9c4128bca022a247c71604?v=83a79228da8e4016ac17d79fcaf0316d&p=111198dd221a8093a3f2ce6ce2a04b59&pm=s
 
 Test users:
 Id: 62 / test888@yopmail.com / Test@12345678
@@ -58,8 +60,6 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 # Issues  
   - Copy Jam link cannot be implemented (missing URL in payload, maybe irrelevant on native)
   - Errors with jam images having double extension .jpg.png or .png.png => error handling is additional performance load
-
-https://docs.google.com/spreadsheets/d/1sodzaVigD26XOopcXfLRykl51wPM5pKecS0i1QEDWMc/edit?hl=fr&gid=0#gid=0
 
 # New release:
   - Amelioration selection Jams dans add project form 

@@ -2,7 +2,6 @@ import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import { useDispatch, useSelector } from "react-redux";
-import { setProjectData } from "@/redux/slices/ProjectFormSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import TextView from "../view/TextView";
@@ -21,29 +20,31 @@ import IconView from "../view/IconView";
 type Props = {
   title?: any;
   selectedIds?: any;
-  addButton?: boolean;
-  allButton?: boolean;
-  onAddEvent?: () => void;
+  resource?: any;
+  onAddButtonPress?: () => void;
+  onDeleteButtonPress?: (row: any) => void;
 };
 
 const ProjectJamsList = ({
   title,
   selectedIds,
-  addButton,
-  allButton,
-  onAddEvent,
+  resource,
+  onAddButtonPress,
+  onDeleteButtonPress
 }: Props) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const [profileJams, setProfileJams] = useState<any>([]);
   const [selectedJams, setSelectedJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [profileId, setProfileId] = useState<number>(0);
-  const projectData = useSelector((state: any) => state.projectForm);
+  const activeScreen: any = ScreenManager.getActiveScreen();
+  const profileId: any = activeScreen.params?.profileId; 
+  const [projectJams, setProjectJams] = useState<any>([]);
+  const formData: any = useSelector((state: any) => state.form[resource]);
   const numColumns = 3;
 
-  const findItemIndex = (row: any) =>
-    selectedJams.findIndex((id: any) => id == row.item.id);
+  const findItemIndex = (row: any) => {
+    return selectedJams.findIndex((id: any) => id == row.item.id);
+  };
 
   const toggleItem = (row: any) => {
     let selectedJamsList: any = [...selectedJams];
@@ -59,20 +60,6 @@ const ProjectJamsList = ({
     console.log('toggle');
   };
 
-  const deleteItem = (row: any) => {
-    let selectedJamsList: any = [...selectedJams];
-    let index: number = findItemIndex(row);
-
-    if (index === -1) selectedJamsList.push(row.item.id);
-    else delete selectedJamsList[index];
-
-    selectedJamsList = selectedJamsList.filter((n: any) => n);
-    setSelectedJams(selectedJamsList);
-
-    // Todo - Implement delete
-    console.log('delete');
-  };
-
   const renderItem = (row: any) => {
     let imageSize = MediaManager.getThumbnailSize();
     let isSelected: boolean = findItemIndex(row) !== -1;
@@ -84,7 +71,7 @@ const ProjectJamsList = ({
           label={i18n.t("Add")}
           width={imageSize.width}
           height={imageSize.height}
-          onPress={onAddEvent}
+          onPress={onAddButtonPress}
         />
       );
     } else if (!row?.item?.medias?.[0]?.url) {
@@ -109,7 +96,7 @@ const ProjectJamsList = ({
           {isSelected && (
             <TouchableOpacity
               style={styles.deleteItem}
-              onPress={() => deleteItem(row)}
+              onPress={() => onDeleteButtonPress(row)}
             >
               <IconView name="delete" theme="primary" size={8} />
             </TouchableOpacity>
@@ -130,10 +117,10 @@ const ProjectJamsList = ({
   };
 
   useEffect(() => {
-    if (!profileJams?.length && selectedIds?.length) {
+    if (selectedIds?.length) {
       EntityManager.getJams({ items_ids: selectedIds }).then((data: any) => {
-        if (addButton === true) data.push({ id: "addItem" });
-        setProfileJams(data);
+        data.push({ id: "addItem" });
+        setProjectJams(data);
         setIsLoaded(true);
       });
     }
@@ -145,24 +132,11 @@ const ProjectJamsList = ({
     <View style={styles.container}>
       <BoxView direction="row" align="center" justify="space-between">
         <TextView style={styles.title}>{title}</TextView>
-
-        {allButton && (
-          <TouchableOpacity
-            onPress={() =>
-              router.push({
-                pathname: "/jam",
-                params: { selectedIds: selectedIds, title: title },
-              })
-            }
-          >
-            <TextView style={styles.link}>{i18n.t("View all")}</TextView>
-          </TouchableOpacity>
-        )}
       </BoxView>
 
-      {profileJams?.length > 0 && (
+      {projectJams?.length > 0 && (
         <ListView
-          data={profileJams}
+          data={projectJams}
           numColumns={numColumns}
           contentContainerStyle={{ gap: Layout.space.base }}
           columnWrapperStyle={{ gap: Layout.space.base }}

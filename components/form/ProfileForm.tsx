@@ -47,6 +47,7 @@ const ProfileForm = () => {
           key: null, 
           value: { ...(await UserManager.getProfileData()), ...formData }, 
         }));
+        
         setIsLoaded(true);
       }
     })();
@@ -187,12 +188,9 @@ const ProfileForm = () => {
         <ProfileProjectsList
           title={i18n.t("Your Projects")} 
           addButton={true}
+          profileId={profileId}
+          allButton={formData?.profile_projects?.length > 0}
           idArray={formData?.profile_projects}
-          onAddButtonPress={() => ScreenManager.toggleScreen("AddProjectForm", {
-            profileId: profileId,
-            //profileJams: formData?.profile_jams, // Todo - Enable this
-            profileJams: [18, 20, 32, 33, 34],
-          })}
         />
 
         {formData?.saved_projects?.length > 0 && (
@@ -200,42 +198,38 @@ const ProfileForm = () => {
             <DividerView />
             <ProfileProjectsList
               title={i18n.t("Saved Projects")} 
-              allButton={true}
+              allButton={formData?.saved_projects?.length > 0}
               idArray={formData?.saved_projects}
             />
           </>
         )}
 
-        {formData?.like_projects?.length > 0 && (
+        {formData?.liked_projects?.length > 0 && (
           <>
             <DividerView />
             <ProfileProjectsList
               title={i18n.t("Liked Projects")} 
+              allButton={formData?.liked_projects?.length > 0}
               idArray={formData?.liked_projects}
-              allButton={true}
             />
           </>
         )}
 
-        {formData?.like_projects?.length > 0 && (
-          <>
-            <DividerView />
-            <ProfileJamsList 
-              title={i18n.t("Your Jams")} 
-              allButton={true}
-              addButton={true}
-              idArray={formData?.profile_jams} 
-              onAddButtonPress={() => ScreenManager.toggleScreen("AddJamForm")}
-            />
-          </>
-        )}
+        <DividerView />
+        <ProfileJamsList 
+          title={i18n.t("Your Jams")} 
+          allButton={formData?.profile_jams?.length > 0}
+          addButton={true}
+          idArray={formData?.profile_jams} 
+          onAddButtonPress={() => ScreenManager.toggleScreen("AddJamForm")}
+        />   
 
         {formData?.saved_jams?.length > 0 && (
           <>
             <DividerView />
             <ProfileJamsList 
               title={i18n.t("Saved Jams")} 
-              allButton={true}
+              allButton={formData?.saved_jams?.length > 0}
               idArray={formData?.saved_jams} 
             />
           </>
@@ -246,7 +240,7 @@ const ProfileForm = () => {
             <DividerView />
             <ProfileJamsList 
               title={i18n.t("Liked Jams")} 
-              allButton={true}
+              allButton={formData?.liked_jams?.length > 0}
               idArray={formData?.liked_jams} 
             />
           </>

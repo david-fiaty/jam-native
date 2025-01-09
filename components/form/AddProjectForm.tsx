@@ -10,7 +10,6 @@ import DividerView from "../view/DividerView";
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import ButtonView from "../view/ButtonView";
-import TextView from "../view/TextView";
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
 import AddItemButton from "../button/AddItemButton";
@@ -111,15 +110,22 @@ const AddProjectForm = () => {
         { formData?.jams_ids?.length && (
           <BoxView direction="column" align="flex-start" justify="flex-start">
             <ProjectJamsList 
+              resource={resource}
               title={i18n.t("Selected Jams")}
               selectedIds={formData?.jams_ids}
-              addButton={true} 
-              onAddEvent={() => ScreenManager.toggleScreen("SelectJamsForm", {
+              onAddButtonPress={() => ScreenManager.toggleScreen("SelectJamsForm", {
                 resource: resource,
                 profileId: formData?.id,
                 //profileJams: formData?.profile_jams, // Todo - Enable this
                 profileJams: [18, 20, 32, 33, 34],
               })}
+              onDeleteButtonPress={(row: any) => {
+                let selectedIds: any = [...formData?.jams_ids];
+                let index: number = selectedIds.findIndex((id: any) => id == row?.item?.id);
+                delete selectedIds[index];
+                selectedIds = selectedIds.filter((o: any) => o);
+                updateField("jams_ids", selectedIds);
+              }}
             />
           </BoxView>
         ) }
@@ -140,11 +146,5 @@ const AddProjectForm = () => {
     </BoxView>
   );
 };
-
-const styles = StyleSheet.create({
-  title: {
-    fontWeight: 'bold',
-  }
-});
 
 export default AddProjectForm;
