@@ -40,7 +40,11 @@ const [isLoaded, setIsLoaded] = useState<boolean>(false);
       </BoxView>
 
       <View style={styles.preview}>
-        <TagView>Some tag</TagView>
+        <TagView
+          onDeleteButtonPress={() => console.log('delete tag')}  
+        >
+          Some tag
+        </TagView>
       </View>
     </View>
   );
@@ -48,7 +52,7 @@ const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
 const styles = StyleSheet.create({
   container: {
-    
+
   },
   preview: {
     paddingTop: Layout.space.base,
