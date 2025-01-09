@@ -17,7 +17,7 @@ const DividerView = ({theme, style}: Props) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles: any = StyleSheet.create({
   container: {
     width: '100%',
     marginVertical: Layout.space.base/4,
