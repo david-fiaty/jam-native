@@ -21,16 +21,12 @@ import IconView from "../view/IconView";
 type Props = {
   title?: any;
   selectedIds?: any;
-  addButton?: boolean;
-  allButton?: boolean;
   onAddEvent?: () => void;
 };
 
 const ProjectJamsList = ({
   title,
   selectedIds,
-  addButton,
-  allButton,
   onAddEvent,
 }: Props) => {
   const dispatch = useDispatch();
@@ -145,7 +141,7 @@ const ProjectJamsList = ({
   useEffect(() => {
     if (selectedIds?.length) {
       EntityManager.getJams({ items_ids: selectedIds }).then((data: any) => {
-        if (addButton === true) data.push({ id: "addItem" });
+        data.push({ id: "addItem" });
         setProfileJams(data);
         setIsLoaded(true);
       });
@@ -160,19 +156,6 @@ const ProjectJamsList = ({
     <View style={styles.container}>
       <BoxView direction="row" align="center" justify="space-between">
         <TextView style={styles.title}>{title}</TextView>
-
-        {allButton && (
-          <TouchableOpacity
-            onPress={() =>
-              router.push({
-                pathname: "/jam",
-                params: { selectedIds: selectedIds, title: title },
-              })
-            }
-          >
-            <TextView style={styles.link}>{i18n.t("View all")}</TextView>
-          </TouchableOpacity>
-        )}
       </BoxView>
 
       {profileJams?.length > 0 && (
