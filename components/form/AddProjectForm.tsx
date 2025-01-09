@@ -113,7 +113,7 @@ const AddProjectForm = () => {
               resource={resource}
               title={i18n.t("Selected Jams")}
               selectedIds={formData?.jams_ids}
-              onAddEvent={() => ScreenManager.toggleScreen("SelectJamsForm", {
+              onAddButtonPress={() => ScreenManager.toggleScreen("SelectJamsForm", {
                 resource: resource,
                 profileId: formData?.id,
                 //profileJams: formData?.profile_jams, // Todo - Enable this
