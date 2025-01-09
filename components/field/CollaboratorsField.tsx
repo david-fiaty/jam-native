@@ -4,6 +4,7 @@ import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
 import IconView from "../view/IconView";
+import SpinnerView from '../view/SpinnerView';
 
 type Props = BaseProps & {
   selectedIds?: any;
@@ -20,6 +21,8 @@ const [isLoaded, setIsLoaded] = useState<boolean>(false);
       }
     })();
   }, [isLoaded]);
+
+  if (!isLoaded) return <SpinnerView size="small" />;
 
   return (
     <BoxView
