@@ -54,9 +54,6 @@ const ProjectJamsList = ({
 
     selectedJamsList = selectedJamsList.filter((n: any) => n);
     setSelectedJams(selectedJamsList);
-
-    // Todo - Implement toggle
-    console.log('toggle');
   };
 
   const renderItem = (row: any) => {
