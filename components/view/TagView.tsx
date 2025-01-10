@@ -13,7 +13,7 @@ type Props = BaseProps & {
 
 const TagView = ({ onDeleteButtonPress, children}: Props) => {
   return (
-    <BoxView direction="row" align="start" justify="between" style={styles.container}>
+    <BoxView direction="row" align="center" justify="between" style={styles.container}>
       <TextView>
         {children}
       </TextView>
