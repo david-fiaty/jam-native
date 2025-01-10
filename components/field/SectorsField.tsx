@@ -11,9 +11,10 @@ type Props = BaseProps & {
   label?: any;
   selectedIds?: any;
   onPressEvent?: () => void;
+  onDeleteButtonPress?: (id: number) => void;
 };
 
-const SectorsField = ({ label, selectedIds, onPressEvent }: Props) => {
+const SectorsField = ({ label, selectedIds, onPressEvent, onDeleteButtonPress }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedSectors, setSelectedSectors] = useState<any>([]);
 
@@ -66,7 +67,7 @@ const SectorsField = ({ label, selectedIds, onPressEvent }: Props) => {
             return (
               <TagView
                 key={item.id}
-                onDeleteButtonPress={() => console.log('delete sector tag', item.id)}  
+                onDeleteButtonPress={() => onDeleteButtonPress(item.id)}  
               >
                 {item?.name}
               </TagView>
