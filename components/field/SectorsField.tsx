@@ -11,10 +11,9 @@ type Props = BaseProps & {
   label?: any;
   selectedIds?: any;
   onPressEvent?: () => void;
-  onDeleteButtonPress?: (id: any) => void;
 };
 
-const SectorsField = ({ label, selectedIds, onPressEvent, onDeleteButtonPress }: Props) => {
+const SectorsField = ({ label, selectedIds, onPressEvent }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedSectors, setSelectedSectors] = useState<any>([]);
 
@@ -37,6 +36,21 @@ const SectorsField = ({ label, selectedIds, onPressEvent, onDeleteButtonPress }:
     }
 
     return subsectors;
+  };
+
+  const deleteItem = (item: any) => {
+
+    console.log('---> zzzz', item.id);
+
+    /*
+
+              let sectorsIds: any = [...formData?.sectors_ids || []];
+          let index: number = sectorsIds.findIndex((v: any) => v == id);
+          delete sectorsIds[index];
+          updateField('sectors_ids', sectorsIds.filter((o: any) => o));
+
+    */
+
   };
 
   useEffect(() => {
@@ -67,7 +81,7 @@ const SectorsField = ({ label, selectedIds, onPressEvent, onDeleteButtonPress }:
             return (
               <TagView
                 key={item.id}
-                onDeleteButtonPress={() => onDeleteButtonPress(item.id)}  
+                onDeleteButtonPress={() => deleteItem(item)}  
               >
                 {item?.name}
               </TagView>
