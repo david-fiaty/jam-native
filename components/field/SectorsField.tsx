@@ -1,25 +1,29 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { useDispatch, useSelector } from "react-redux";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from '@/constants/Layout';
 import BoxView from "../view/BoxView";
 import SpinnerView from '../view/SpinnerView';
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
+import ScreenManager from '@/manager/ScreenManager';
 
 type Props = BaseProps & {
+  resource: string;
   label?: any;
-  selectedIds?: any;
   onPressEvent?: () => void;
 };
 
-const SectorsField = ({ label, selectedIds, onPressEvent }: Props) => {
+const SectorsField = ({ resource, label, onPressEvent }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedSectors, setSelectedSectors] = useState<any>([]);
+  const activeScreen: any = ScreenManager.getActiveScreen();
+  const formData: any = useSelector((state: any) => state.form[resource]);
 
   const getSelectedSectors = async () => {
-    if (selectedIds?.length) {
-      return await EntityManager.getSectors({items_ids: selectedIds});
+    if (formData?.sectors_ids?.length) {
+      return await EntityManager.getSectors({items_ids: formData.sectors_ids});
     }
 
     return [];
@@ -30,7 +34,7 @@ const SectorsField = ({ label, selectedIds, onPressEvent }: Props) => {
     let subsectors: any = [];
 
     for (const item of (sectors?.[0]?.sub_sectors || [])) {
-      if (selectedIds?.includes(item.id)) {
+      if (formData.sectors_ids?.includes(item.id)) {
         subsectors.push(item);
       }
     }
@@ -63,6 +67,8 @@ const SectorsField = ({ label, selectedIds, onPressEvent }: Props) => {
   }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView size="small" />;
+
+  console.log('qqq ->>>', formData?.sectors_ids);
 
   return (
     <View style={styles.container}>
