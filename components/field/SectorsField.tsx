@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from "react-redux";
+import { setFormData } from "@/redux/slices/FormSlice";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from '@/constants/Layout';
 import BoxView from "../view/BoxView";
@@ -16,6 +17,7 @@ type Props = BaseProps & {
 };
 
 const SectorsField = ({ resource, label, onPressEvent }: Props) => {
+  const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedSectors, setSelectedSectors] = useState<any>([]);
   const activeScreen: any = ScreenManager.getActiveScreen();
@@ -43,18 +45,16 @@ const SectorsField = ({ resource, label, onPressEvent }: Props) => {
   };
 
   const deleteItem = (item: any) => {
-
-    console.log('---> zzzz', item.id);
-
-    /*
-
-              let sectorsIds: any = [...formData?.sectors_ids || []];
-          let index: number = sectorsIds.findIndex((v: any) => v == id);
-          delete sectorsIds[index];
-          updateField('sectors_ids', sectorsIds.filter((o: any) => o));
-
-    */
-
+    let sectorsIds: any = [...formData?.sectors_ids || []];
+    let index: number = sectorsIds.findIndex((v: any) => v == item.id);
+    delete sectorsIds[index];
+    sectorsIds = sectorsIds.filter((o: any) => o);
+    
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: 'sectors_ids', 
+      value: sectorsIds, 
+    }));
   };
 
   useEffect(() => {
