@@ -44,17 +44,19 @@ const SectorsField = ({ resource, label, onPressEvent }: Props) => {
     return subsectors;
   };
 
-  const deleteItem = (item: any) => {
+  const deleteItem = async (item: any) => {
     let sectorsIds: any = [...formData?.sectors_ids || []];
     let index: number = sectorsIds.findIndex((v: any) => v == item.id);
     delete sectorsIds[index];
     sectorsIds = sectorsIds.filter((o: any) => o);
-    
+
     dispatch(setFormData<any>({ 
       resource: resource,
       key: 'sectors_ids', 
       value: sectorsIds, 
     }));
+
+    setSelectedSectors(await getSelectedSubsectors());
   };
 
   useEffect(() => {
