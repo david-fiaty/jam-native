@@ -96,8 +96,6 @@ const AddJamForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log('addJamForm', formData);
-
   return (
     <BoxView
       align="flex-start"
