@@ -24,7 +24,7 @@ const MoreJamActionsView = () => {
     },
     {
       label: i18n.t('Like Jam'),
-      icon: 'heart-circle-outline',
+      icon: 'share',
       onPress: () => ScreenManager.toggleScreen('LikedJamAction', { entityId: entityId }),
     },
     {
