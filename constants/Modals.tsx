@@ -119,7 +119,7 @@ export const Modals = [
     params: {},
   },
   {
-    name: 'MoreJamView', 
+    name: 'MoreJamActionsView', 
     effect: 'slide',
     headerNavigation: true,
     footerNavigation: true,
