@@ -38,8 +38,8 @@ const ListItemToolbar = ({ row }: Props) => {
         <IconView 
           name="users" 
           theme="tertiary" 
-          size={14}
-          padding={5}
+          size={13}
+          padding={6}
         />
         <TextView>
           {parseInt(row?.item?.jammers?.length)} {i18n.t("jammers")}
@@ -51,8 +51,8 @@ const ListItemToolbar = ({ row }: Props) => {
         <IconView
           name="save"
           theme="tertiary"
-          size={14}
-          padding={5}
+          size={13}
+          padding={6}
           onPress={() =>
             isLoggedIn
               ? ScreenManager.toggleScreen("SavedJamAction", { entityId: row?.item?.id })
@@ -64,8 +64,8 @@ const ListItemToolbar = ({ row }: Props) => {
         <IconView
           name="share"
           theme="tertiary"
-          size={14}
-          padding={5}
+          size={13}
+          padding={6}
           onPress={() =>
             isLoggedIn
               ? EntityManager.shareJam(row?.item?.id)

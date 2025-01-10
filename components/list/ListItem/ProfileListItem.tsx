@@ -1,4 +1,4 @@
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, StyleSheet } from "react-native";
 import { Layout } from "@/constants/Layout";
 import { BaseProps } from "@/constants/Types";
 import TextView from '@/components/view/TextView';
@@ -12,12 +12,27 @@ type Props = BaseProps & {
 const ProfileListItem = ({ item }: Props) => {
   return (
     <TouchableOpacity onPress={() => console.log('clicked')}>
-      <BoxView direction="row" align="center" justify="flex-start" style={Layout.listItem}>
-        <IconView name="user" theme="tertiary" />
+      <BoxView direction="row" align="center" justify="flex-start" style={styles.container}>
+        <IconView 
+          name="user" 
+          theme="tertiary" 
+          size={16}
+          padding={6}
+        />
         <TextView>{item.profile_name}</TextView>
       </BoxView>
     </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    ...Layout.listItem,
+    ...{
+      padding: Layout.space.base/1.3,
+    },
+  },
+});
+
 
 export default ProfileListItem;
