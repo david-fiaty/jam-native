@@ -1,41 +1,23 @@
-import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { useRouter } from "expo-router";
+import { StyleSheet, View } from "react-native";
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
 import ListView from "../view/ListView";
-import BoxView from "../view/BoxView";
-import IconView from "../view/IconView";
 import i18n from "@/translation/i18n";
+import ProfileListItem from "./ListItem/ProfileListItem";
 
 type Props = {
   data?: any,
 };
 
 const SearchProfilesList = ({ data }: Props) => {
-  const router = useRouter();
-
-  const renderItem = (row: any) => (
-    <TouchableOpacity onPress={() => console.log("clicked")}>
-      <BoxView
-        direction="row"
-        align="center"
-        justify="flex-start"
-        style={Layout.listItem}
-      >
-        <IconView name="user" theme="tertiary" />
-        <TextView>{row.item.profile_name}</TextView>
-      </BoxView>
-    </TouchableOpacity>
-  );
-
   return (
     <View>
       {data?.length > 0 && (
         <View style={styles.container}>
           <ListView
             data={data}
-            renderItem={(row: any) => renderItem(row)}
             scrollEnabled={false}
+            renderItem={(row: any) => <ProfileListItem item={row.item} />}
           />
         </View>
       )}
