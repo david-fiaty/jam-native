@@ -60,21 +60,20 @@ const SectorsField = ({ label, selectedIds, onPressEvent }: Props) => {
         {label}      
       </BoxView>
 
-      
-        { selectedSectors?.length > 0 && (
-          <View style={styles.preview}>
-            { selectedSectors.map((item: any) => {
-              return (
-                <TagView
-                  key={item.id}
-                  onDeleteButtonPress={() => console.log('delete sector tag', item.id)}  
-                >
-                  {item?.name}
-                </TagView>
-              );
-            }) }
-          </View>
-        )}
+      { selectedSectors?.length > 0 && (
+        <View style={styles.preview}>
+          { selectedSectors.map((item: any) => {
+            return (
+              <TagView
+                key={item.id}
+                onDeleteButtonPress={() => console.log('delete sector tag', item.id)}  
+              >
+                {item?.name}
+              </TagView>
+            );
+          }) }
+        </View>
+      )}
     </View>
   );
 };
@@ -92,6 +91,5 @@ const styles = StyleSheet.create({
     marginBottom: Layout.space.base,
   },
 });
-
 
 export default SectorsField;
