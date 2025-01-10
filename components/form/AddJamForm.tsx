@@ -192,7 +192,7 @@ const AddJamForm = () => {
 
       <DividerView theme="secondary" />
       <SectorsField
-        selectedIds={formData?.sectors_ids}
+        resource={resource}
         label={
           <>
             <IconView name="plus" theme="secondary" radius="round" />

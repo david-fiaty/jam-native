@@ -17,12 +17,14 @@ const FooterNavigation = () => {
       <IconView
         name="location"
         radius="round"
+        size={18}
         theme={activeScreen?.name == 'JamsMapView' ? 'secondary' : 'clear'}
         onPress={() => ScreenManager.toggleScreen('JamsMapView')}
       />
       <IconView
         name="plus"
         radius="round"
+        size={18}
         theme={activeScreen?.name == 'AddJamForm' ? 'secondary' : 'clear'}
         style={activeScreen?.name == 'AddJamForm' ? styles.active : {}}
         onPress={() => ScreenManager.toggleScreen('AddJamForm')}
@@ -30,6 +32,7 @@ const FooterNavigation = () => {
       <IconView
         name="user"
         radius="round"
+        size={18}
         theme={activeScreen?.name == 'ProfileForm' ? 'secondary' : 'clear'}
         onPress={() => isLoggedIn ? ScreenManager.toggleScreen('ProfileForm') : router.push('/login')}
         style={activeScreen?.name == 'ProfileForm' ? styles.active : {}}

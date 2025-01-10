@@ -13,11 +13,11 @@ type Props = BaseProps & {
 
 const TagView = ({ onDeleteButtonPress, children}: Props) => {
   return (
-    <BoxView direction="row" align="start" justify="between" style={styles.container}>
+    <BoxView direction="row" align="center" justify="between" style={styles.container}>
       <TextView>
         {children}
       </TextView>
-      <TouchableOpacity style={styles.delete} onPress={onDeleteButtonPress}>
+      <TouchableOpacity onPress={onDeleteButtonPress}>
         <IconView name="delete" theme="secondary" size={12} />
       </TouchableOpacity>
     </BoxView>
@@ -31,9 +31,6 @@ const styles = StyleSheet.create({
     paddingVertical: Layout.space.base/2,
     paddingHorizontal: Layout.space.base/1.2,
     alignSelf: 'flex-start',
-  },
-  delete: {
-
   },
 });
 
