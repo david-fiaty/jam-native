@@ -20,7 +20,7 @@ const ListItemDescription = ({ row }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: Layout.space.base,
+    paddingHorizontal: Layout.space.base,
   },
 });
 
