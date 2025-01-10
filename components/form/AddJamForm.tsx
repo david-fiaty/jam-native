@@ -96,8 +96,6 @@ const AddJamForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log('addJamForm', formData);
-
   return (
     <BoxView
       align="flex-start"
@@ -203,6 +201,13 @@ const AddJamForm = () => {
           resource: resource,
           field: 'sectors_ids',
         })}
+        onDeleteButtonPress={(item: any) => {
+          let sectorsIds: any = [...formData?.sectors_ids || []];
+          let index: number = sectorsIds.findIndex((v: any) => v == item.id);
+          delete sectorsIds[index];
+          sectorsIds = sectorsIds.filter((o: any) => o);      
+          updateField('sectors_ids', sectorsIds.filter((o: any) => o));
+        }}
       />
       
       <DividerView theme="secondary" />
