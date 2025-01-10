@@ -17,7 +17,11 @@ type Props = BaseProps & {
 };
 
 const IconView = ({name, size, label, theme, radius = 'circle', iconStyle, containerStyle, onPress}: Props) => {
-  const themeIconStyle = [styles.iconStyle, styles[theme], {borderRadius: Layout.radius[radius]}];
+  const themeIconStyle = [
+    styles.iconStyle, 
+    styles[theme], 
+    { borderRadius: Layout.radius[radius]}
+  ];
 
   const imageIcon = (
     <IconBase 
@@ -49,7 +53,7 @@ const IconView = ({name, size, label, theme, radius = 'circle', iconStyle, conta
   return output;
 };
 
-const styles = StyleSheet.create({
+const styles: any = StyleSheet.create({
   containerStyle: {
     flexDirection: 'row',
     alignItems: 'center',
