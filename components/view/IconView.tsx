@@ -53,13 +53,12 @@ const styles = StyleSheet.create({
   containerStyle: {
     flexDirection: 'row',
     alignItems: 'center',
-    alignSelf: 'flex-start',
+    alignSelf: 'center',
     justifyContent: 'center',
   },
   iconStyle: {
     color: Colors.white,
     backgroundColor: Colors.primary,
-    padding: Layout.space.base*0.72,
     borderRadius: Layout.radius.circle,
   },
   primary: {
