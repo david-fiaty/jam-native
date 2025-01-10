@@ -68,8 +68,6 @@ const SectorsField = ({ resource, label, onPressEvent }: Props) => {
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
-  console.log('qqq ->>>', formData?.sectors_ids);
-
   return (
     <View style={styles.container}>
       <BoxView
