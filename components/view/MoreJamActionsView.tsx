@@ -35,22 +35,22 @@ const MoreJamActionsView = () => {
     {
       label: i18n.t('Add Jam to project'),
       icon: 'plus',
-      onPress: () => ScreenManager.toggleScreen('SavedJamAction', { entityId: entityId }), // Todo - Implement logic
+      onPress: () => console.log('action clicked') , // Todo - Implement logic
     },
     {
       label: i18n.t('Edit Jam'),
       icon: 'edit',
-      onPress: () => ScreenManager.toggleScreen('SavedJamAction', { entityId: entityId }), // Todo - Implement logic
+      onPress: () => console.log('action clicked') , // Todo - Implement logic
     },
     {
       label: i18n.t('Report Jam'),
       icon: 'report',
-      onPress: () => ScreenManager.toggleScreen('SavedJamAction', { entityId: entityId }), // Todo - Implement logic
+      onPress: () => console.log('action clicked') , // Todo - Implement logic
     },
     {
       label: i18n.t('Delete Jam'),
       icon: 'delete',
-      onPress: () => ScreenManager.toggleScreen('SavedJamAction', { entityId: entityId }), // Todo - Implement logic
+      onPress: () => console.log('action clicked') , // Todo - Implement logic
     },
   ];
 
