@@ -35,7 +35,12 @@ const ListItemToolbar = ({ row }: Props) => {
             : router.push("/login")
         }
       >
-        <IconView name="users" theme="tertiary" />
+        <IconView 
+          name="users" 
+          theme="tertiary" 
+          size={14}
+          padding={5}
+        />
         <TextView>
           {parseInt(row?.item?.jammers?.length)} {i18n.t("jammers")}
         </TextView>
@@ -46,6 +51,8 @@ const ListItemToolbar = ({ row }: Props) => {
         <IconView
           name="save"
           theme="tertiary"
+          size={14}
+          padding={5}
           onPress={() =>
             isLoggedIn
               ? ScreenManager.toggleScreen("SavedJamAction", { entityId: row?.item?.id })
@@ -57,6 +64,8 @@ const ListItemToolbar = ({ row }: Props) => {
         <IconView
           name="share"
           theme="tertiary"
+          size={14}
+          padding={5}
           onPress={() =>
             isLoggedIn
               ? EntityManager.shareJam(row?.item?.id)
