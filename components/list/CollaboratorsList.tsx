@@ -14,6 +14,7 @@ import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from '../field/InputTextField';
+import ProfileListItem from './ListItem/ProfileListItem';
 
 const CollaboratorsList = () => {
   const dispatch = useDispatch();
@@ -78,21 +79,7 @@ const CollaboratorsList = () => {
     }));
   };
 
-  useEffect(() => {
-    (async () => {
-      if (!isLoaded) { 
-        if (!profiles) setProfiles(await EntityManager.listProfiles());
-        if (formData?.[fieldName]?.length && !selectedProfiles.length) {
-          setSelectedProfiles(formData[fieldName]);
-        }
-
-        setIsLoaded(true);
-      }
-    })();
-  }, [profiles, formData, fieldName, activeScreen, selectedProfiles]);
-
-  if (!profiles) return <SpinnerView />;
-
+  
   const renderItem = (row: any) => (
     <TouchableOpacity 
       key={row.item.id}
@@ -107,6 +94,22 @@ const CollaboratorsList = () => {
       </BoxView>
     </TouchableOpacity>
   );
+
+
+  useEffect(() => {
+    (async () => {
+      if (!isLoaded) { 
+        if (!profiles) setProfiles(await EntityManager.listProfiles());
+        if (formData?.[fieldName]?.length && !selectedProfiles.length) {
+          setSelectedProfiles(formData[fieldName]);
+        }
+
+        setIsLoaded(true);
+      }
+    })();
+  }, [profiles, formData, fieldName, activeScreen, selectedProfiles]);
+
+  if (!profiles) return <SpinnerView />;
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
@@ -128,7 +131,13 @@ const CollaboratorsList = () => {
         {profiles?.length > 0 &&
           <ListView
             data={profiles}
-            renderItem={(row: any) => renderItem(row)}
+            renderItem={(row: any) => (
+              <ProfileListItem 
+                item={row.item}
+                selected={selectedProfiles.includes(row.item.id)}
+                onPress={() => toggleProfile(row.item.id)}
+              />
+            )}
           />
         }
 
