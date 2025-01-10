@@ -10,6 +10,7 @@ import TextView from '../view/TextView';
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
+import ActionListItem from '../list/ListItem/ActionListItem';
 
 const MoreJamActionsView = () => {
   const [entity, setEntity] = useState<any>(null);
@@ -69,7 +70,9 @@ const MoreJamActionsView = () => {
       />
       
       <View style={styles.listContainer}>
-        
+        { actions.map((item: any) => {
+          return <ActionListItem item={item} />;
+        }) }
       </View>
     </BoxView>
   );
