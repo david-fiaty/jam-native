@@ -7,11 +7,13 @@ import IconView from '@/components/view/IconView';
 
 type Props = BaseProps & {
   item?: any;
+  selected?: boolean;
+  onPress?: () => void;
 };
 
-const ProfileListItem = ({ item }: Props) => {
+const ProfileListItem = ({ item, selected, onPress }: Props) => {
   return (
-    <TouchableOpacity onPress={() => console.log('clicked')}>
+    <TouchableOpacity key={item?.id} onPress={onPress}>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.container}>
         <IconView 
           name="user" 
@@ -19,7 +21,14 @@ const ProfileListItem = ({ item }: Props) => {
           size={16}
           padding={6}
         />
-        <TextView>{item.profile_name}</TextView>
+        <TextView>{item?.profile_name}</TextView>
+        { selected &&
+          <IconView 
+            name="checkmark" 
+            theme="clear" 
+            size={14} 
+          />
+        }
       </BoxView>
     </TouchableOpacity>
   );
