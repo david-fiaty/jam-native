@@ -6,21 +6,27 @@ import TextView from '../view/TextView';
 import { BaseProps } from '@/constants/Types';
 
 type Props = BaseProps & {
-  name?: string,
-  size?: number, 
-  label?: string,
-  theme: string,
-  radius?: string, 
-  iconStyle?: object,
-  containerStyle?: object,
-  onPress?: () => void,
+  name?: string;
+  size?: number; 
+  padding?: number;
+  label?: string;
+  theme: string;
+  radius?: string; 
+  iconStyle?: object;
+  containerStyle?: object;
+  onPress?: () => void;
 };
 
-const IconView = ({name, size, label, theme, radius = 'circle', iconStyle, containerStyle, onPress}: Props) => {
+const IconView = ({name, size, padding, label, theme, radius = 'circle', iconStyle, containerStyle, onPress}: Props) => {
+  const defaultPadding = 2;
+
   const themeIconStyle = [
     styles.iconStyle, 
     styles[theme], 
-    { borderRadius: Layout.radius[radius]}
+    { 
+      borderRadius: Layout.radius[radius],
+      padding: padding ? padding : defaultPadding,
+    },
   ];
 
   const imageIcon = (
