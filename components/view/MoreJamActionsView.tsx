@@ -15,6 +15,44 @@ const MoreJamActionsView = () => {
   const [entity, setEntity] = useState<any>(null);
   const entityId = ScreenManager.getScreenEntityId();
 
+  const actions: any = [
+    {
+      label: i18n.t('Save Jam'),
+      icon: 'save',
+      onPress: () => ScreenManager.toggleScreen('SavedJamAction', { entityId: entityId }),
+    },
+    {
+      label: i18n.t('Like Jam'),
+      icon: 'heart-circle-outline',
+      onPress: () => ScreenManager.toggleScreen('LikedJamAction', { entityId: entityId }),
+    },
+    {
+      label: i18n.t('Share Jam'),
+      icon: 'share',
+      onPress: () => EntityManager.shareJam(entityId),
+    },
+    {
+      label: i18n.t('Add Jam to project'),
+      icon: 'plus',
+      onPress: () => ScreenManager.toggleScreen('SavedJamAction', { entityId: entityId }), // Todo - Implement logic
+    },
+    {
+      label: i18n.t('Edit Jam'),
+      icon: 'edit',
+      onPress: () => ScreenManager.toggleScreen('SavedJamAction', { entityId: entityId }), // Todo - Implement logic
+    },
+    {
+      label: i18n.t('Report Jam'),
+      icon: 'report',
+      onPress: () => ScreenManager.toggleScreen('SavedJamAction', { entityId: entityId }), // Todo - Implement logic
+    },
+    {
+      label: i18n.t('Delete Jam'),
+      icon: 'delete',
+      onPress: () => ScreenManager.toggleScreen('SavedJamAction', { entityId: entityId }), // Todo - Implement logic
+    },
+  ];
+
   useEffect(() => {
     (async () => {
       if (!entity) setEntity(await EntityManager.getJams({items_ids: [entityId]}));
