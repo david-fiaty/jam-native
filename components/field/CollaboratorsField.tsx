@@ -13,9 +13,10 @@ import EntityManager from '@/manager/EntityManager';
 type Props = BaseProps & {
   selectedIds?: any;
   onPressEvent?: () => void;
+  onDeleteButtonPress?: (item: any) => void;
 };
 
-const CollaboratorsField = ({ selectedIds, onPressEvent }: Props) => {
+const CollaboratorsField = ({ selectedIds, onPressEvent, onDeleteButtonPress }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedProfiles, setSelectedProfiles] = useState<any>([]);
 
@@ -47,7 +48,7 @@ const CollaboratorsField = ({ selectedIds, onPressEvent }: Props) => {
               return (
                 <TagView
                   key={item.id}
-                  onDeleteButtonPress={() => console.log('delete collaborator tag', item.id)}  
+                  onDeleteButtonPress={() => onDeleteButtonPress(item)}  
                 >
                   {item?.profile_name}
                 </TagView>
