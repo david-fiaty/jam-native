@@ -78,7 +78,7 @@ class EntityManager {
     return null;
   }
 
-  async getSectors(options: any) {
+  async getSectors(options?: any) {
     //let language = await UserManager.getLanguage();
     // Todo - Fix creates error in components
     /*

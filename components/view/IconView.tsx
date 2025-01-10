@@ -6,18 +6,28 @@ import TextView from '../view/TextView';
 import { BaseProps } from '@/constants/Types';
 
 type Props = BaseProps & {
-  name?: string,
-  size?: number, 
-  label?: string,
-  theme: string,
-  radius?: string, 
-  iconStyle?: object,
-  containerStyle?: object,
-  onPress?: () => void,
+  name?: string;
+  size?: number; 
+  padding?: number;
+  label?: string;
+  theme: string;
+  radius?: string; 
+  iconStyle?: object;
+  containerStyle?: object;
+  onPress?: () => void;
 };
 
-const IconView = ({name, size, label, theme, radius = 'circle', iconStyle, containerStyle, onPress}: Props) => {
-  const themeIconStyle = [styles.iconStyle, styles[theme], {borderRadius: Layout.radius[radius]}];
+const IconView = ({name, size, padding, label, theme, radius = 'circle', iconStyle, containerStyle, onPress}: Props) => {
+  const defaultPadding = 2;
+
+  const themeIconStyle = [
+    styles.iconStyle, 
+    styles[theme], 
+    { 
+      borderRadius: Layout.radius[radius],
+      padding: padding ? padding : defaultPadding,
+    },
+  ];
 
   const imageIcon = (
     <IconBase 
@@ -49,17 +59,16 @@ const IconView = ({name, size, label, theme, radius = 'circle', iconStyle, conta
   return output;
 };
 
-const styles = StyleSheet.create({
+const styles: any = StyleSheet.create({
   containerStyle: {
     flexDirection: 'row',
     alignItems: 'center',
-    alignSelf: 'flex-start',
+    alignSelf: 'center',
     justifyContent: 'center',
   },
   iconStyle: {
     color: Colors.white,
     backgroundColor: Colors.primary,
-    padding: Layout.space.base*0.72,
     borderRadius: Layout.radius.circle,
   },
   primary: {
