@@ -7,20 +7,19 @@ import IconView from '@/components/view/IconView';
 
 type Props = BaseProps & {
   item?: any;
-  onPress?: () => void;
 };
 
-const ActionListItem = ({ item, onPress }: Props) => {
+const ActionListItem = ({ item }: Props) => {
   return (
-    <TouchableOpacity key={item?.id} onPress={onPress}>
+    <TouchableOpacity key={item?.icon} onPress={item?.onPress}>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.container}>
         <IconView 
-          name="user" 
+          name={item?.icon} 
           theme="tertiary" 
           size={16}
           padding={6}
         />
-        <TextView>{item?.profile_name}</TextView>
+        <TextView>{item?.label}</TextView>
       </BoxView>
     </TouchableOpacity>
   );
