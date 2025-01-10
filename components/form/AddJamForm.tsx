@@ -212,11 +212,14 @@ const AddJamForm = () => {
       
       <DividerView theme="secondary" />
       <CollaboratorsField
-        selectedIds={formData?.collaborators_ids}
+        resource={resource}
         onPressEvent={() => ScreenManager.toggleScreen('CollaboratorsList', {
           resource: resource,
           field: 'collaborators_ids',
         })}
+        onDeleteButtonPress={(item: any) => {
+          console.log('--> item id', item.id);
+        }}
       />
 
       <DividerView theme="secondary" />
