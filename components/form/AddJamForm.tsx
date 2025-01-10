@@ -218,7 +218,11 @@ const AddJamForm = () => {
           field: 'collaborators_ids',
         })}
         onDeleteButtonPress={(item: any) => {
-          console.log('--> item id', item.id);
+          let collaboratorsIds: any = [...formData?.collaborators_ids || []];
+          let index: number = collaboratorsIds.findIndex((v: any) => v == item.id);
+          delete collaboratorsIds[index];
+          collaboratorsIds = collaboratorsIds.filter((o: any) => o);      
+          updateField('collaborators_ids', collaboratorsIds.filter((o: any) => o));
         }}
       />
 
