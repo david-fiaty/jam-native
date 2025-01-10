@@ -27,10 +27,10 @@ const LoginScreen = () => {
   const submitForm = async () => {
     // Todo - Connect username and password
     let loginData = {
-      //email: email,
-      //password: password,
-      email: 'mitsiomotu@yopmail.com',
-      password: 'Password1234',
+      email: email,
+      password: password,
+      //email: 'mitsiomotu@yopmail.com',
+      //password: 'Password1234',
     }
 
     UserManager.login(loginData).then((success: boolean) => {
