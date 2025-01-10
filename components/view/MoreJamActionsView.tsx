@@ -10,10 +10,49 @@ import TextView from '../view/TextView';
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
+import ActionListItem from '../list/ListItem/ActionListItem';
 
 const MoreJamActionsView = () => {
   const [entity, setEntity] = useState<any>(null);
   const entityId = ScreenManager.getScreenEntityId();
+
+  const actions: any = [
+    {
+      label: i18n.t('Save Jam'),
+      icon: 'save',
+      onPress: () => ScreenManager.toggleScreen('SavedJamAction', { entityId: entityId }),
+    },
+    {
+      label: i18n.t('Like Jam'),
+      icon: 'like',
+      onPress: () => ScreenManager.toggleScreen('LikedJamAction', { entityId: entityId }),
+    },
+    {
+      label: i18n.t('Share Jam'),
+      icon: 'share',
+      onPress: () => EntityManager.shareJam(entityId),
+    },
+    {
+      label: i18n.t('Add Jam to project'),
+      icon: 'plus',
+      onPress: () => ScreenManager.toggleScreen('SavedJamAction', { entityId: entityId }), // Todo - Implement logic
+    },
+    {
+      label: i18n.t('Edit Jam'),
+      icon: 'edit',
+      onPress: () => ScreenManager.toggleScreen('SavedJamAction', { entityId: entityId }), // Todo - Implement logic
+    },
+    {
+      label: i18n.t('Report Jam'),
+      icon: 'report',
+      onPress: () => ScreenManager.toggleScreen('SavedJamAction', { entityId: entityId }), // Todo - Implement logic
+    },
+    {
+      label: i18n.t('Delete Jam'),
+      icon: 'delete',
+      onPress: () => ScreenManager.toggleScreen('SavedJamAction', { entityId: entityId }), // Todo - Implement logic
+    },
+  ];
 
   useEffect(() => {
     (async () => {
@@ -31,83 +70,9 @@ const MoreJamActionsView = () => {
       />
       
       <View style={styles.listContainer}>
-        {/* Save jam */}
-        <TouchableOpacity 
-          style={styles.listItem}
-          onPress={() => ScreenManager.toggleScreen('SavedJamAction', { entityId: entityId })} 
-        >
-          <BoxView direction="row" align="center" justify="flex-start">
-            <IconView name="save" theme="tertiary" />
-            <TextView>{i18n.t('Save Jam')}</TextView>
-          </BoxView>
-        </TouchableOpacity>
-
-        {/* Like jam */}
-        <TouchableOpacity 
-          style={styles.listItem}
-          onPress={() => ScreenManager.toggleScreen('LikedJamAction', { entityId: entityId })} 
-        >
-          <BoxView direction="row" align="center" justify="flex-start">
-            <IconView name="share" theme="tertiary" />
-            <TextView>{i18n.t('Like Jam')}</TextView>
-          </BoxView>
-        </TouchableOpacity>
-
-        {/* Share jam */}
-        <TouchableOpacity 
-          style={styles.listItem}
-          onPress={() => EntityManager.shareJam(entityId)} 
-        >
-          <BoxView direction="row" align="center" justify="flex-start">
-            <IconView name="share" theme="tertiary" />
-            <TextView>{i18n.t('Share Jam')}</TextView>
-          </BoxView>
-        </TouchableOpacity>
-
-        {/* Add jam to project */}
-        <TouchableOpacity 
-          style={styles.listItem}
-          onPress={() => ScreenManager.toggleScreen('SavedJamAction', { entityId: entityId })} 
-        >
-          <BoxView direction="row" align="center" justify="flex-start">
-            <IconView name="plus" theme="tertiary" />
-            <TextView>{i18n.t('Add Jam to project')}</TextView>
-          </BoxView>
-        </TouchableOpacity>
-
-        {/* Edit jam */}
-        <TouchableOpacity 
-          style={styles.listItem}
-          onPress={() => ScreenManager.toggleScreen('SavedJamAction', { entityId: entityId })} 
-        >
-          <BoxView direction="row" align="center" justify="flex-start">
-            <IconView name="edit" theme="tertiary" />
-            <TextView>{i18n.t('Edit Jam')}</TextView>
-          </BoxView>
-        </TouchableOpacity>
-
-        {/* Report jam */}
-        <TouchableOpacity 
-          style={styles.listItem}
-          onPress={() => ScreenManager.toggleScreen('SavedJamAction', { entityId: entityId })} 
-        >
-          <BoxView direction="row" align="center" justify="flex-start">
-            <IconView name="report" theme="tertiary" />
-            <TextView>{i18n.t('Report Jam')}</TextView>
-          </BoxView>
-        </TouchableOpacity>
-
-        {/* Delete jam */}
-        <TouchableOpacity 
-          style={styles.listItem}
-          onPress={() => ScreenManager.toggleScreen('SavedJamAction', { entityId: entityId })} 
-        >
-          <BoxView direction="row" align="center" justify="flex-start">
-            <IconView name="delete" theme="tertiary" />
-            <TextView>{i18n.t('Delete Jam')}</TextView>
-          </BoxView>
-        </TouchableOpacity>
-
+        { actions.map((item: any) => {
+          return <ActionListItem item={item} />;
+        }) }
       </View>
     </BoxView>
   );
