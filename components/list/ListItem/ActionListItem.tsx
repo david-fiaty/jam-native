@@ -12,15 +12,15 @@ type Props = BaseProps & {
 
 const ActionListItem = ({ item, onPress }: Props) => {
   return (
-    <TouchableOpacity key={item?.id} onPress={onPress}>
+    <TouchableOpacity key={item?.icon} onPress={onPress}>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.container}>
         <IconView 
-          name="user" 
+          name={item?.icon} 
           theme="tertiary" 
           size={16}
           padding={6}
         />
-        <TextView>{item?.profile_name}</TextView>
+        <TextView>{item?.label}</TextView>
       </BoxView>
     </TouchableOpacity>
   );
