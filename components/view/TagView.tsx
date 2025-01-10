@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
   delete: {
-
+    padding: Layout.space.base/4,
   },
 });
 
