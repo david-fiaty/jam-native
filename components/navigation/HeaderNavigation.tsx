@@ -36,7 +36,9 @@ const HeaderNavigation = () => {
               { isLoggedIn &&
                 <IconView 
                   name="menu" 
-                  theme="secondary" 
+                  theme="secondary"
+                  size={13}
+                  padding={4} 
                   onPress={() => ScreenManager.toggleScreen('SettingsMenu')} 
                 />
               }
@@ -45,7 +47,8 @@ const HeaderNavigation = () => {
                 <IconView 
                   label={`${notificationsCount}+`} 
                   theme="secondary" 
-                  size={11.5} 
+                  size={13}
+                  padding={4} 
                   onPress={() => ScreenManager.toggleScreen('NotificationsMenu')} 
                 />
               }
