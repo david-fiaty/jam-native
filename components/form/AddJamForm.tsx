@@ -203,12 +203,6 @@ const AddJamForm = () => {
           resource: resource,
           field: 'sectors_ids',
         })}
-        onDeleteButtonPress={(id: any) => {
-          let sectorsIds: any = [...formData?.sectors_ids || []];
-          let index: number = sectorsIds.findIndex((v: any) => v == id);
-          delete sectorsIds[index];
-          updateField('sectors_ids', sectorsIds.filter((o: any) => o));
-        }}
       />
       
       <DividerView theme="secondary" />
