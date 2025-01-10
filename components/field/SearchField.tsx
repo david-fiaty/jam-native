@@ -24,7 +24,7 @@ const SearchField = () => {
       name="search" 
       theme="clear" 
       size={18}
-      padding={0}
+      padding={1}
       style={styles.iconContainer}
       onPress={() => {
         dispatch(toggleSearchField(true));
@@ -44,7 +44,7 @@ const SearchField = () => {
         <IconView 
           name="delete" 
           theme="primary" 
-          size={10}
+          size={13}
           onPress={() => {
             if (searchState.value.length && activeScreen?.name == 'SearchView') {
               setCurrentSearchValue('');
