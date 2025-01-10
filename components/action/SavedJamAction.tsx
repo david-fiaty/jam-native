@@ -9,11 +9,25 @@ import TextView from '../view/TextView';
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
+import ActionListItem from '../list/ListItem/ActionListItem';
 
 const SavedJamAction = () => {
   const [entity, setEntity] = useState<any>(null);
   const [isSaved, setIsSaved] = useState<boolean>(false);
   const entityId = ScreenManager.getScreenEntityId();
+
+  const actions: any = [
+    {
+      label: i18n.t('Share Jam'),
+      icon: 'share',
+      onPress: () => EntityManager.shareJam(entityId),
+    },
+    {
+      label: i18n.t('View my Jams'),
+      icon: 'plus',
+      onPress: () => console.log('action clicked') , // Todo - Implement logic
+    },
+  ];
 
   const getTitle = () => { 
     return (entity && isSaved) 
@@ -38,28 +52,9 @@ const SavedJamAction = () => {
       />
       
       <View style={styles.listContainer}>
-        {/* Share jam */}
-        <TouchableOpacity 
-          style={styles.listItem}
-          onPress={() => EntityManager.shareJam(entityId)} 
-        >
-          <BoxView direction="row" align="center" justify="flex-start">
-            <IconView name="share" theme="tertiary" />
-            <TextView>{i18n.t('Share Jam')}</TextView>
-          </BoxView>
-        </TouchableOpacity>
-
-        {/* View user Jams */}
-        <TouchableOpacity 
-          style={styles.listItem}
-          onPress={() => ScreenManager.toggleScreen('SavedJamAction', { entityId: entityId })} 
-        >
-          <BoxView direction="row" align="center" justify="flex-start">
-            <IconView name="share" theme="tertiary" />
-            <TextView>{i18n.t('View my Jams')}</TextView>
-          </BoxView>
-        </TouchableOpacity>
-
+        { actions.map((item: any) => {
+          return <ActionListItem item={item} />;
+        }) }
       </View>
     </BoxView>
   );
