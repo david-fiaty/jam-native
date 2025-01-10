@@ -11,7 +11,7 @@ type Props = BaseProps & {
   label?: any;
   selectedIds?: any;
   onPressEvent?: () => void;
-  onDeleteButtonPress?: (id: number) => void;
+  onDeleteButtonPress?: (id: any) => void;
 };
 
 const SectorsField = ({ label, selectedIds, onPressEvent, onDeleteButtonPress }: Props) => {
