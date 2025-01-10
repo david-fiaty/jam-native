@@ -22,7 +22,7 @@ import JammersList from "@/components/list/JammersList";
 import HostsList from "@/components/list/HostsList";
 import SavedJamAction from "@/components/action/SavedJamAction";
 import LikedJamAction from "../action/LikedJamAction";
-import MoreJamView from "@/components/view/MoreJamView";
+import MoreJamActionsView from "@/components/view/MoreJamActionsView";
 import AddedJamAction from "../action/AddedJamAction";
 import CollaboratorsList from "../list/CollaboratorsList";
 import SectorsList from "../list/SectorsList";
@@ -47,7 +47,7 @@ const screenComponents: any = {
   SavedJamAction: <SavedJamAction />,
   LikedJamAction: <LikedJamAction />,
   AddedJamAction: <AddedJamAction />,
-  MoreJamView: <MoreJamView />,
+  MoreJamActionsView: <MoreJamActionsView />,
 };
 
 const JamsScreen = () => {
