@@ -75,7 +75,7 @@ export const Layout = {
   },
   headerRight: {
     flexDirection: 'row',
-    gap: space.base,
+    gap: space.base*1.1,
   },
   headerLogo: {
     width: 48,

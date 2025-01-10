@@ -8,7 +8,7 @@ import { BaseProps } from '@/constants/Types';
 type Props = BaseProps & {
   name?: string;
   size?: number; 
-  padding?: number;
+  padding?: any;
   label?: string;
   theme: string;
   radius?: string; 
@@ -25,7 +25,7 @@ const IconView = ({name, size, padding, label, theme, radius = 'circle', iconSty
     styles[theme], 
     { 
       borderRadius: Layout.radius[radius],
-      padding: padding ? padding : defaultPadding,
+      padding: padding >= 0 ? padding : defaultPadding,
     },
   ];
 
