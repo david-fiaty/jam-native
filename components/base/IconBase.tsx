@@ -3,7 +3,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { BaseProps } from '@/constants/Types';
 
 type Props = BaseProps & {
-  name: string,
+  name: any,
   size?: number,
   containerStyle?: object,
   iconStyle?: object,

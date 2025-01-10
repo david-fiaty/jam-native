@@ -2,36 +2,36 @@ import { StatusBar } from 'react-native';
 import { Colors } from './Colors';
 import DeviceManager from '@/manager/DeviceManager';
 
-const space = {
+const space: any = {
   small: 5,
   base: 10,
   big: 20,
 };
 
-const radius = {
+const radius: any = {
   round: 8,
   circle: 40,
 };
 
-const iconSize = {
+const iconSize: any = {
   small: 11,
   base: 14,
   big: 44,
 };
 
-const fontSize = {
+const fontSize: any = {
   small: 12,
   base: 13,
   big: 24,
 };
 
-const borderWidth = {
+const borderWidth: any = {
   small: 0.1,
   base: 0.5,
   big: 1,
 };
 
-const header = {
+const header: any = {
   height: 48,
   width: DeviceManager.window.width,
   marginTop: StatusBar.currentHeight,
@@ -39,11 +39,11 @@ const header = {
   backgroundColor: Colors.white,
 };
 
-const logo = {
+const logo: any = {
   size: 48,
 };
 
-const footer = {
+const footer: any = {
   position: 'absolute',
   bottom: 50 + space.base*2,
   height: 50,
@@ -53,7 +53,7 @@ const footer = {
   backgroundColor: Colors.white,
 };
 
-const modal = {
+const modal: any = {
   width: DeviceManager.window.width,
   height: DeviceManager.window.height - DeviceManager.statusBar.height - header.height - footer.height,
 };
@@ -75,7 +75,7 @@ export const Layout = {
   },
   headerRight: {
     flexDirection: 'row',
-    gap: space.base,
+    gap: space.base*1.1,
   },
   headerLogo: {
     width: 48,

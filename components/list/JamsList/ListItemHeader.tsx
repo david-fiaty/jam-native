@@ -47,7 +47,7 @@ const ListItemHeader = ({ row }: Props) => {
           theme="clear"
           onPress={() =>
             isLoggedIn
-              ? ScreenManager.toggleScreen("MoreJamView", { entityId: row?.item?.id })
+              ? ScreenManager.toggleScreen("MoreJamActionsView", { entityId: row?.item?.id })
               : router.push("/login")
           }
         />

@@ -1,25 +1,31 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { useDispatch, useSelector } from "react-redux";
+import { setFormData } from "@/redux/slices/FormSlice";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from '@/constants/Layout';
 import BoxView from "../view/BoxView";
 import SpinnerView from '../view/SpinnerView';
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
+import ScreenManager from '@/manager/ScreenManager';
 
 type Props = BaseProps & {
+  resource: string;
   label?: any;
-  selectedIds?: any;
   onPressEvent?: () => void;
 };
 
-const SectorsField = ({ label, selectedIds, onPressEvent }: Props) => {
+const SectorsField = ({ resource, label, onPressEvent }: Props) => {
+  const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedSectors, setSelectedSectors] = useState<any>([]);
+  const activeScreen: any = ScreenManager.getActiveScreen();
+  const formData: any = useSelector((state: any) => state.form[resource]);
 
   const getSelectedSectors = async () => {
-    if (selectedIds?.length) {
-      return await EntityManager.getSectors({items_ids: selectedIds});
+    if (formData?.sectors_ids?.length) {
+      return await EntityManager.getSectors({items_ids: formData.sectors_ids});
     }
 
     return [];
@@ -30,12 +36,27 @@ const SectorsField = ({ label, selectedIds, onPressEvent }: Props) => {
     let subsectors: any = [];
 
     for (const item of (sectors?.[0]?.sub_sectors || [])) {
-      if (selectedIds?.includes(item.id)) {
+      if (formData.sectors_ids?.includes(item.id)) {
         subsectors.push(item);
       }
     }
 
     return subsectors;
+  };
+
+  const deleteItem = async (item: any) => {
+    let sectorsIds: any = [...formData?.sectors_ids || []];
+    let index: number = sectorsIds.findIndex((v: any) => v == item.id);
+    delete sectorsIds[index];
+    sectorsIds = sectorsIds.filter((o: any) => o);
+
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: 'sectors_ids', 
+      value: sectorsIds, 
+    }));
+
+    setSelectedSectors(await getSelectedSubsectors());
   };
 
   useEffect(() => {
@@ -60,21 +81,20 @@ const SectorsField = ({ label, selectedIds, onPressEvent }: Props) => {
         {label}      
       </BoxView>
 
-      
-        { selectedSectors?.length > 0 && (
-          <View style={styles.preview}>
-            { selectedSectors.map((item: any) => {
-              return (
-                <TagView
-                  key={item.id}
-                  onDeleteButtonPress={() => console.log('delete sector tag', item.id)}  
-                >
-                  {item?.name}
-                </TagView>
-              );
-            }) }
-          </View>
-        )}
+      { selectedSectors?.length > 0 && (
+        <View style={styles.preview}>
+          { selectedSectors.map((item: any) => {
+            return (
+              <TagView
+                key={item.id}
+                onDeleteButtonPress={() => deleteItem(item)}  
+              >
+                {item?.name}
+              </TagView>
+            );
+          }) }
+        </View>
+      )}
     </View>
   );
 };
@@ -92,6 +112,5 @@ const styles = StyleSheet.create({
     marginBottom: Layout.space.base,
   },
 });
-
 
 export default SectorsField;
