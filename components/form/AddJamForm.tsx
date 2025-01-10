@@ -203,6 +203,7 @@ const AddJamForm = () => {
           resource: resource,
           field: 'sectors_ids',
         })}
+        onDeleteButtonPress={(id: number) => console.log('-->', id)}
       />
       
       <DividerView theme="secondary" />
