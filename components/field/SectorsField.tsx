@@ -7,7 +7,6 @@ import BoxView from "../view/BoxView";
 import SpinnerView from '../view/SpinnerView';
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
-import ScreenManager from '@/manager/ScreenManager';
 
 type Props = BaseProps & {
   resource: string;
