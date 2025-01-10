@@ -23,7 +23,8 @@ const SearchField = () => {
     <IconView 
       name="search" 
       theme="clear" 
-      size={20}
+      size={18}
+      padding={0}
       style={styles.iconContainer}
       onPress={() => {
         dispatch(toggleSearchField(true));
