@@ -40,24 +40,15 @@ const ProfileForm = () => {
     }));
   };
 
-
   const submitForm = async () => {
     let result: any = await EntityManager.addJam(formData);
-    result.error = true;
+    let message: any = {
+      title: i18n.t('Update profile'),
+      content: i18n.t('The profile data was successfully updated.'),
+    };
 
-    if (result?.error) {
-      ScreenManager.showMessage({
-        title: i18n.t('Update profile'),
-        content: i18n.t(result.error),
-      });
-    }
-    else {
-      ScreenManager.showMessage({
-        title: i18n.t('Update profile'),
-        content: i18n.t('The profile data was successfully updated.'),
-      });
-    }
-
+    if (result?.error) message.content = i18n.t(result.error);
+    ScreenManager.showMessage(message);
     setIsProcessing(false);
   };
 
