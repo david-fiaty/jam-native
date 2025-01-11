@@ -34,7 +34,7 @@ class UserManager {
     let profileId: number = Store.getState().user.profileId;
     if (profileId === 0) {
       let userAccount: any = await DataManager.get('currentUser');
-      profileId = parseInt(userAccount?.user?.profiles?.[0]?.id || 0);
+      profileId = parseInt(userAccount?.profiles?.[0]?.id || 0);
     }
 
     return profileId;
