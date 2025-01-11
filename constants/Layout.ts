@@ -146,10 +146,10 @@ export const Layout = {
   },
   borderedListContainer: {
     width: '100%',
-    borderWidth: 1,
+    borderWidth: borderWidth.base,
     borderRadius: radius.round,
     borderColor: Colors.primary,
-    padding: space.base,
+    padding: space.base/2,
   },
   listContainer: {
     width: '100%',
