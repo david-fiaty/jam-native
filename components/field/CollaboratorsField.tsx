@@ -13,18 +13,20 @@ import EntityManager from '@/manager/EntityManager';
 
 type Props = BaseProps & {
   resource: string;
+  field: string;
   onPressEvent?: () => void;
   onDeleteEvent: (item: any) => void;
 };
 
-const CollaboratorsField = ({ resource, onPressEvent, onDeleteEvent }: Props) => {
+const CollaboratorsField = ({ resource, field, onPressEvent, onDeleteEvent }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedProfiles, setSelectedProfiles] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
+  const fieldName: string = field;
 
   useEffect(() => {
     (async () => {
-        if (formData?.collaborators_ids?.length) setSelectedProfiles(await EntityManager.getProfiles({items_ids: formData.collaborators_ids}));
+        if (formData?.[fieldName]?.length) setSelectedProfiles(await EntityManager.getProfiles({ items_ids: formData[fieldName] }));
         setIsLoaded(true);
     })();
   }, [isLoaded, formData]);
