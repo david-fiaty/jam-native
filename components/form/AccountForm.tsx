@@ -14,15 +14,21 @@ const AccountForm = () => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
-  const userData = UserManager.getUserData();
+  const [formData, setFormData] = useState<any>({});
 
   const submitForm = async () => {
-    setTimeout(() => setIsProcessing(false), 3000);
+    // Todo - Implement submit
+    
   }  
 
   useEffect(() => {
-    setTimeout(() => setIsLoaded(true), Layout.animation.duration);
-  });
+    (async () => {
+      if (!isLoaded) {
+        setFormData(await UserManager.getUserData());
+        setIsLoaded(true);
+      } 
+    })();
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -35,15 +41,15 @@ const AccountForm = () => {
     
       <InputTextField 
         placeholder={i18n.t('User name')} 
-        value={userData?.username}
+        value={formData?.username}
       />
       <InputTextField 
         placeholder={i18n.t('Email address')} 
-        value={userData?.email}  
+        value={formData?.email}  
       />
       <InputTextField 
         placeholder={i18n.t('Phone number')} 
-        value={userData?.phone}
+        value={formData?.phone}
       />
 
     <DividerView />
