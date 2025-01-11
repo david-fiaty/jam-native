@@ -26,7 +26,7 @@ const LoginScreen = () => {
   const [isProcessing, setIsProcessing] = useState(false);
 
   const getLoginData = () => {
-    return Config.forceLogin.enabled === true ? Config.forceLogin :  {
+    return Config.forceLogin.enabled === true ? Config.forceLogin.credentials :  {
       email: email,
       password: password,
     };
@@ -60,6 +60,7 @@ const LoginScreen = () => {
         placeholder={i18n.t('Email address')} 
         onChangeText={(text: string) => setEmail(text)}
       />
+
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Password')} 
