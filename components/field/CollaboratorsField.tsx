@@ -14,20 +14,18 @@ import EntityManager from '@/manager/EntityManager';
 type Props = BaseProps & {
   resource: string;
   onPressEvent?: () => void;
-  onDeleteButtonPress?: (item: any) => void;
+  onDeleteEvent: (item: any) => void;
 };
 
-const CollaboratorsField = ({ resource, onPressEvent, onDeleteButtonPress }: Props) => {
+const CollaboratorsField = ({ resource, onPressEvent, onDeleteEvent }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedProfiles, setSelectedProfiles] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   useEffect(() => {
     (async () => {
-      if (!isLoaded) { 
         if (formData?.collaborators_ids?.length) setSelectedProfiles(await EntityManager.getProfiles({items_ids: formData.collaborators_ids}));
         setIsLoaded(true);
-      }
     })();
   }, [isLoaded, formData]);
 
@@ -50,7 +48,7 @@ const CollaboratorsField = ({ resource, onPressEvent, onDeleteButtonPress }: Pro
               return (
                 <TagView
                   key={item.id}
-                  onDeleteButtonPress={() => onDeleteButtonPress(item)}  
+                  onDeleteButtonPress={() => onDeleteEvent(item)}  
                 >
                   {item?.profile_name}
                 </TagView>

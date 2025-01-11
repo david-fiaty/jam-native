@@ -201,7 +201,7 @@ const AddJamForm = () => {
           resource: resource,
           field: 'sectors_ids',
         })}
-        onDeleteButtonPress={(item: any) => {
+        onDeleteEvent={(item: any) => {
           let sectorsIds: any = [...formData?.sectors_ids || []];
           let index: number = sectorsIds.findIndex((v: any) => v == item.id);
           delete sectorsIds[index];
@@ -217,7 +217,7 @@ const AddJamForm = () => {
           resource: resource,
           field: 'collaborators_ids',
         })}
-        onDeleteButtonPress={(item: any) => {
+        onDeleteEvent={(item: any) => {
           let collaboratorsIds: any = [...formData?.collaborators_ids || []];
           let index: number = collaboratorsIds.findIndex((v: any) => v == item.id);
           delete collaboratorsIds[index];
