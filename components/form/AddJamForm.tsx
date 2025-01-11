@@ -50,9 +50,9 @@ const AddJamForm = () => {
   const submitForm = async () => {
     setIsProcessing(false);
     
-    let result: any = EntityManager.addJam(formData);
+    let result: any = await EntityManager.addJam(formData);
 
-    console.log('xxxxx --->', JSON.parse(result));
+    console.log('xxxxx --->', result);
     /*
 
     if (result?.error) {
