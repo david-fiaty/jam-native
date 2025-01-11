@@ -46,6 +46,8 @@ const LoginScreen = () => {
 
     ScreenManager.showMessage(message);
     setIsProcessing(false);
+
+    if (result) router.replace('/jams');
   }  
 
   return (
