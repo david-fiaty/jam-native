@@ -53,7 +53,7 @@ const SavedJamAction = () => {
       
       <View style={styles.listContainer}>
         { actions.map((item: any) => {
-          return <ActionListItem key={item.icon} item={item} />;
+          return <ActionListItem item={item} />;
         }) }
       </View>
     </BoxView>
