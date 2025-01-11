@@ -23,16 +23,14 @@ const AccountForm = () => {
 
   useEffect(() => {
     (async () => {
-    if (!isLoaded) {
-      setFormData(await UserManager.getUserData());
-      setIsLoaded(true);
-    } 
+      if (!isLoaded) {
+        setFormData(await UserManager.getUserData());
+        setIsLoaded(true);
+      } 
     })();
   }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(formData);
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
