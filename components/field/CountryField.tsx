@@ -27,10 +27,12 @@ const CountryField = ({value, onChangeValue}: Props) => {
 
   useEffect(() => {
     (async () => {
-      if (!countriesData) setCountriesData(await EntityManager.getCountries());
-      setIsLoaded(true);
+      if (!isLoaded) {
+        setCountriesData(await EntityManager.getCountries());
+        setIsLoaded(true);
+      }
     })();
-  });
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView size="small" />
 
