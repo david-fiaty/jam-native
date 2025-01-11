@@ -8,8 +8,8 @@ import { Config } from '@/constants/Config';
 class UserManager {
   async login(data: any) {
     let response = await DataManager.post('login', data);
-    if (response?.success == true && response?.payload.tokens?.access_token?.length) {
-      Store.dispatch(setTokenData(JSON.stringify(response.payload.tokens)));
+    if (response?.tokens?.access_token?.length) {
+      Store.dispatch(setTokenData(JSON.stringify(response.tokens)));
       Store.dispatch(setIsLoggedIn(true));
 
       return true;
@@ -20,8 +20,8 @@ class UserManager {
 
   async register(data: any) {
     let response = await DataManager.post('register', data);
-    if (response?.success == true && response?.payload?.tokens?.access_token?.length) {
-      Store.dispatch(setTokenData(JSON.stringify(response.payload.tokens)));
+    if (response?.tokens?.access_token?.length) {
+      Store.dispatch(setTokenData(JSON.stringify(response.tokens)));
       Store.dispatch(setIsLoggedIn(true));
 
       return true;
