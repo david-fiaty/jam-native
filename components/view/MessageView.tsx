@@ -28,7 +28,7 @@ const MessageView = () => {
         style={styles.closeIcon}
         onPress={() => dispatch(setMessage('')) } 
       >
-        <IconView name="delete" theme="primary" size={18} padding={7} />
+        <IconView name="delete" theme="primary" size={18} padding={10} />
       </TouchableOpacity>
     </View>
   );
