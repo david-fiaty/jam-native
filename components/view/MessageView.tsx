@@ -18,7 +18,7 @@ const MessageView = ({ title }: Props) => {
   const dispatch = useDispatch();
   const messageState = useSelector((state: any) => state.message);
 
-  if (!messageState?.text.length) return <></>;
+  if (!Object.keys(messageState).length) return <></>;
 
   return (
     <View style={styles.container}>
