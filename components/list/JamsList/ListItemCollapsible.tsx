@@ -17,6 +17,98 @@ type Props = BaseProps & {
 };
 
 const ListItemCollapsible = ({ row, sectorsData }: Props) => {
+  const renderLocation = () => {
+    return (
+      <BoxView
+        direction="row"
+        align="center"
+        justify="flex-start"
+        style={styles.detail}
+      >
+        <IconView name="arrow" size={14} theme="transparent" />
+        <TextView>
+          {i18n.t("Location")}:{" "}
+          {StaticData.locationTypes.find(
+            (o: any) => o.id == row?.item?.location_type
+          )?.label || i18n.t("Unavailable")}
+        </TextView>
+      </BoxView>
+    );
+  };
+
+  const renderStart = () => {
+    return (
+      <BoxView
+        direction="row"
+        align="center"
+        justify="flex-start"
+        style={styles.detail}
+      >
+        <IconView name="arrow" size={14} theme="transparent" />
+        <TextView>
+          {i18n.t("Start")}:{" "}
+          {moment(row?.item?.period?.start_datetime).format(
+            Config.dateFormat
+          ) || i18n.t("Unavailable")}
+        </TextView>
+      </BoxView>      
+    );
+  };
+
+  const renderEnd = () => {
+    return (
+      <BoxView
+        direction="row"
+        align="center"
+        justify="flex-start"
+        style={styles.detail}
+      >
+        <IconView name="arrow" size={14} theme="transparent" />
+        <TextView>
+          {i18n.t("End")}:{" "}
+          {moment(row?.item?.period?.end_datetime).format(
+            Config.dateFormat
+          ) || i18n.t("Unavailable")}
+        </TextView>
+      </BoxView>
+    );
+  };
+
+  const renderSector = () => {
+    return (
+      <BoxView
+        direction="row"
+        align="center"
+        justify="flex-start"
+        style={styles.detail}
+      >
+        <IconView name="arrow" size={14} theme="transparent" />
+        <TextView>
+          {i18n.t("Industry")}:{" "}
+          {sectorsData?.find((o: any) => o.id == row?.item?.sectors?.[0])
+            ?.name || i18n.t("Unavailable")}
+        </TextView>
+      </BoxView>
+    );
+  };
+
+  const renderSubsector = () => {
+    return (
+      <BoxView
+        direction="row"
+        align="center"
+        justify="flex-start"
+        style={styles.detail}
+      >
+        <IconView name="arrow" size={14} theme="transparent" />
+        <TextView>
+          {i18n.t("Sector")}:{" "}
+          {row?.item?.sectors?.[0]?.name || i18n.t("Unavailable")}
+        </TextView>
+      </BoxView>
+    );
+  };
+
   return (
     <BoxView style={styles.container}>
       <CollapsibleView
@@ -28,73 +120,11 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
             align="flex-start"
             style={styles.detailsContainer}
           >
-            <BoxView
-              direction="row"
-              align="center"
-              justify="flex-start"
-              style={styles.detail}
-            >
-              <IconView name="arrow" size={14} theme="transparent" />
-              <TextView>
-                {i18n.t("Location")}:{" "}
-                {StaticData.locationTypes.find(
-                  (o: any) => o.id == row?.item?.location_type
-                )?.label || i18n.t("Unavailable")}
-              </TextView>
-            </BoxView>
-            <BoxView
-              direction="row"
-              align="center"
-              justify="flex-start"
-              style={styles.detail}
-            >
-              <IconView name="arrow" size={14} theme="transparent" />
-              <TextView>
-                {i18n.t("Start")}:{" "}
-                {moment(row?.item?.period?.start_datetime).format(
-                  Config.dateFormat
-                ) || i18n.t("Unavailable")}
-              </TextView>
-            </BoxView>
-            <BoxView
-              direction="row"
-              align="center"
-              justify="flex-start"
-              style={styles.detail}
-            >
-              <IconView name="arrow" size={14} theme="transparent" />
-              <TextView>
-                {i18n.t("End")}:{" "}
-                {moment(row?.item?.period?.end_datetime).format(
-                  Config.dateFormat
-                ) || i18n.t("Unavailable")}
-              </TextView>
-            </BoxView>
-            <BoxView
-              direction="row"
-              align="center"
-              justify="flex-start"
-              style={styles.detail}
-            >
-              <IconView name="arrow" size={14} theme="transparent" />
-              <TextView>
-                {i18n.t("Industry")}:{" "}
-                {sectorsData?.find((o: any) => o.id == row?.item?.sectors?.[0])
-                  ?.name || i18n.t("Unavailable")}
-              </TextView>
-            </BoxView>
-            <BoxView
-              direction="row"
-              align="center"
-              justify="flex-start"
-              style={styles.detail}
-            >
-              <IconView name="arrow" size={14} theme="transparent" />
-              <TextView>
-                {i18n.t("Sector")}:{" "}
-                {row?.item?.sectors?.[0]?.name || i18n.t("Unavailable")}
-              </TextView>
-            </BoxView>
+            {renderLocation()}
+            {renderStart()}
+            {renderEnd()}
+            {renderSector()}
+            {renderSubsector()}
           </BoxView>
         }
       />
