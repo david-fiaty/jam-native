@@ -18,6 +18,40 @@ const ListItemHeader = ({ row }: Props) => {
   const router = useRouter();
   const isLoggedIn = UserManager.isLoggedIn();
 
+  const renderHosts = () => {
+    return (
+      <TouchableOpacity
+        onPress={() =>
+          isLoggedIn
+            ? ScreenManager.toggleScreen("HostsList", { entityId: row?.item?.id })
+            : router.push("/login")
+        }
+      >
+      <TextView>
+        @{i18n.t("host")} +{parseInt(row?.item?.collaborators?.length)}
+      </TextView>
+      </TouchableOpacity>
+    );
+  };
+
+  const renderStatus = () => {
+    return <JamStatusButton active={row?.item?.is_active} />;
+  };
+
+  const renderActions = () => {
+    return (
+      <IconView
+        name="actions"
+        theme="clear"
+        onPress={() =>
+          isLoggedIn
+            ? ScreenManager.toggleScreen("MoreJamActionsView", { entityId: row?.item?.id })
+            : router.push("/login")
+        }
+      />
+    );
+  };
+
   return (
     <BoxView
       direction="row"
@@ -26,31 +60,13 @@ const ListItemHeader = ({ row }: Props) => {
       style={styles.container}
     >
       <BoxView>
-        <TouchableOpacity
-          onPress={() =>
-            isLoggedIn
-              ? ScreenManager.toggleScreen("HostsList", { entityId: row?.item?.id })
-              : router.push("/login")
-          }
-        >
-          <TextView>
-            @{i18n.t("host")} +{parseInt(row?.item?.collaborators?.length)}
-          </TextView>
-        </TouchableOpacity>
+        {renderHosts()}
       </BoxView>
       <BoxView>
-        <JamStatusButton active={row?.item?.is_active} />
+        {renderStatus()}
       </BoxView>
       <BoxView>
-        <IconView
-          name="actions"
-          theme="clear"
-          onPress={() =>
-            isLoggedIn
-              ? ScreenManager.toggleScreen("MoreJamActionsView", { entityId: row?.item?.id })
-              : router.push("/login")
-          }
-        />
+        {renderActions()}
       </BoxView>
     </BoxView>
   );

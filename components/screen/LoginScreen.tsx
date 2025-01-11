@@ -40,15 +40,11 @@ const LoginScreen = () => {
       content: i18n.t('You are connected to your account.'),
     };
 
-    if (!result) {
-      // Todo - Return API error response
-      message.content = i18n.t('Invalid email or password provided. Please check your data and try again.');
-    }
-
+    if (result?.error) message.content = result.error;
     ScreenManager.showMessage(message);
     setIsProcessing(false);
 
-    if (result) router.replace('/jams');
+    if (!result?.error) router.replace('/jams');
   }  
 
   return (

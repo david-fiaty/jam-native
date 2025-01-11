@@ -18,14 +18,8 @@ const ListItemToolbar = ({ row }: Props) => {
   const router = useRouter();
   const isLoggedIn = UserManager.isLoggedIn();
 
-  return (
-    <BoxView
-      direction="row"
-      align="center"
-      justify="space-between"
-      style={styles.container}
-    >
-      {/* Jammers button */}
+  const renderJammers = () => {
+    return (
       <BoxView
         direction="row"
         align="center"
@@ -45,33 +39,53 @@ const ListItemToolbar = ({ row }: Props) => {
           {parseInt(row?.item?.jammers?.length)} {i18n.t("jammers")}
         </TextView>
       </BoxView>
+    );
+  };
+
+  const renderSave = () => {
+    return (
+      <IconView
+        name="save"
+        theme="tertiary"
+        size={12}
+        padding={6.5}
+        onPress={() =>
+          isLoggedIn
+            ? ScreenManager.toggleScreen("SavedJamAction", { entityId: row?.item?.id })
+            : router.push("/login")
+        }
+      />
+    );
+  };
+
+  const renderShare = () => {
+    return (
+      <IconView
+        name="share"
+        theme="tertiary"
+        size={12}
+        padding={6.5}
+        onPress={() =>
+          isLoggedIn
+            ? EntityManager.shareJam(row?.item?.id)
+            : router.push("/login")
+        }
+      />
+    );
+  };
+
+  return (
+    <BoxView
+      direction="row"
+      align="center"
+      justify="space-between"
+      style={styles.container}
+    >
+      {renderJammers()}
 
       <BoxView direction="row" align="center">
-        {/* Save button */}
-        <IconView
-          name="save"
-          theme="tertiary"
-          size={12}
-          padding={6.5}
-          onPress={() =>
-            isLoggedIn
-              ? ScreenManager.toggleScreen("SavedJamAction", { entityId: row?.item?.id })
-              : router.push("/login")
-          }
-        />
-
-        {/* Share button */}
-        <IconView
-          name="share"
-          theme="tertiary"
-          size={12}
-          padding={6.5}
-          onPress={() =>
-            isLoggedIn
-              ? EntityManager.shareJam(row?.item?.id)
-              : router.push("/login")
-          }
-        />
+        {renderSave()}
+        {renderShare()}
       </BoxView>
     </BoxView>
   );

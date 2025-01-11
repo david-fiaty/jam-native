@@ -11,11 +11,9 @@ class UserManager {
     if (response?.tokens?.access_token?.length) {
       Store.dispatch(setTokenData(JSON.stringify(response.tokens)));
       Store.dispatch(setIsLoggedIn(true));
-
-      return true;
     }
     
-    return false;
+    return response;
   }
 
   async register(data: any) {
@@ -23,17 +21,13 @@ class UserManager {
     if (response?.tokens?.access_token?.length) {
       Store.dispatch(setTokenData(JSON.stringify(response.tokens)));
       Store.dispatch(setIsLoggedIn(true));
-
-      return true;
     }
     
-    return false;
+    return response;
   }
 
-  async getUserData() {
-    let userAccount: any = await DataManager.get('currentUser');
-   
-    return userAccount?.user;
+  async getUserData() { 
+    return await DataManager.get('currentUser');
   }
 
   async getProfileId() {

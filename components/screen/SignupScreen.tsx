@@ -32,22 +32,17 @@ const SignupScreen = () => {
   };
 
   const submitForm = async () => {
-    let data: any = {}; // Todo - Get registration data
-    let result: any = await UserManager.register(data);
+    let result: any = await UserManager.register(signupData);
     let message: any = {
       title: i18n.t('Profile registration'),
       content: i18n.t('You are connected to your account.'),
     };
 
-    if (!result) {
-      // Todo - Return API error response
-      message.content = i18n.t('Invalid registration data provided. Please check the values provided and try again.');
-    }
-
+    if (result?.error) message.content = result.error;
     ScreenManager.showMessage(message);
     setIsProcessing(false);
 
-    if (result) router.replace('/jams');
+    if (!result?.error) router.replace('/jams');
   }  
 
   return (
