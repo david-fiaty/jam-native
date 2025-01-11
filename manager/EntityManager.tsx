@@ -151,9 +151,7 @@ class EntityManager {
   }
 
   async addJam(entityData: any) {
-    let response = await DataManager.post('addJam', entityData);
-
-    return !!response;
+    return await DataManager.post('addJam', entityData);
   }
 
   async likeJam(entityId: any) {

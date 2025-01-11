@@ -48,24 +48,15 @@ const AddJamForm = () => {
   };
 
   const submitForm = async () => {
-    setIsProcessing(false);
-    ScreenManager.showMessage({
+    let result: any = await EntityManager.addJam(formData);
+    let message: any = {
       title: i18n.t('Create Jam'),
-      content: i18n.t('The Jam data is invalid. Please check and try again.'),
-    });
+      content: i18n.t('The Jam was successfully created.'),
+    };
 
-    /*
-    EntityManager.addJam(formData).then((success: boolean) => {
-      setIsProcessing(false);
-      //success === true
-      false
-        ? router.replace('/jams')
-        : ScreenManager.showMessage(
-            i18n.t('The Jam data is invalid. Please check and trya gain.')
-          );
-    });
-
-    */
+    if (result?.error) message.content = i18n.t(result.error);
+    ScreenManager.showMessage(message);
+    setIsProcessing(false);
   };
 
   const renderJamCategory = (row: any) => (

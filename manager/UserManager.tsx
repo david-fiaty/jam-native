@@ -1,9 +1,9 @@
 import { setTokenData, setIsLoggedIn } from '@/redux/slices/UserSlice';
 import { setLanguage } from '@/redux/slices/AppSlice';
+import { Config } from '@/constants/Config';
 import Store from '@/redux/Store';
 import DataManager from './DataManager';
 import DeviceManager from './DeviceManager';
-import { Config } from '@/constants/Config';
 
 class UserManager {
   async login(data: any) {
