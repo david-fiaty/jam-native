@@ -48,7 +48,6 @@ const AddJamForm = () => {
   };
 
   const submitForm = async () => {
-    setIsProcessing(false);
     let result: any = await EntityManager.addJam(formData);
 
     if (result?.error) {
@@ -63,6 +62,8 @@ const AddJamForm = () => {
         content: i18n.t('The Jam was successfully created.'),
       });
     }
+
+    setIsProcessing(false);
   };
 
   const renderJamCategory = (row: any) => (
