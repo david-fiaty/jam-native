@@ -31,7 +31,6 @@ const SignupScreen = () => {
     setSignupData({ ...signupData, ...{ [key]: value } });
   };
 
-
   const submitForm = async () => {
     /*
     let loginData: any = getLoginData();
