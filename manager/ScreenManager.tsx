@@ -49,14 +49,14 @@ class ScreenManager {
     }));
   }
 
-  showMessage(text: string): void {
+  showMessage(payload: any): void {
     if (this.messageTimeout) clearTimeout(this.messageTimeout);
     
-    Store.dispatch(setMessage(''));
-    Store.dispatch(setMessage(text));
+    Store.dispatch(setMessage({}));
+    Store.dispatch(setMessage(payload));
 
     this.messageTimeout = setTimeout(() => {
-      Store.dispatch(setMessage(''));
+      Store.dispatch(setMessage({}));
     }, Config.messageDisplayDuration);
   }
 };
