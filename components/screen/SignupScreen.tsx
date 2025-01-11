@@ -156,6 +156,7 @@ const SignupScreen = () => {
 
         <DividerView theme="secondary" />
 
+{ /*
         <SectorsField
           onPressEvent={() => ScreenManager.toggleScreen("SectorsList", {
             reducer: 'signupForm',
@@ -163,6 +164,8 @@ const SignupScreen = () => {
         />
 
         <DividerView theme="secondary" />
+        */ }
+
 
         <ButtonView
           label={i18n.t("Continue")}
