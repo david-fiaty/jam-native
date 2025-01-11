@@ -33,14 +33,15 @@ const LoginScreen = () => {
   };
 
   const submitForm = async () => {
-    let loginData: any = getLoginData();
-    let result: any = await UserManager.login(loginData);
+    let data: any = getLoginData();
+    let result: any = await UserManager.login(data);
     let message: any = {
-      title: i18n.t('Account login'),
+      title: i18n.t('Profile login'),
       content: i18n.t('You are connected to your account.'),
     };
 
     if (!result) {
+      // Todo - Return API error response
       message.content = i18n.t('Invalid email or password provided. Please check your data and try again.');
     }
 
