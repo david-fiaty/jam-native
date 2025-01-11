@@ -205,6 +205,8 @@ const AddJamForm = () => {
           const sectorsIds = [...formData?.sectors_ids || []];
           const index = sectorsIds.findIndex((v) => v === item.id);
           if (index !== -1) sectorsIds.splice(index, 1);
+
+          console.log(sectorsIds);
           updateField('sectors_ids', sectorsIds.filter(Boolean));
         }}
       />
