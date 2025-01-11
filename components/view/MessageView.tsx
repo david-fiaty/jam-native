@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
@@ -17,7 +17,10 @@ const MessageView = () => {
   if (!messageState?.text.length) return <></>;
 
   return (
-    <BoxView direction="row" align="center" justify="space-between" style={styles.container}>
+    <View style={styles.container}>
+      <Text style={styles.title}>
+        Message title
+      </Text>
       <Text style={styles.content}>
         {messageState.text}
       </Text>
@@ -27,7 +30,7 @@ const MessageView = () => {
       >
         <IconView name="delete" theme="primary" size={18} padding={7} />
       </TouchableOpacity>
-    </BoxView>
+    </View>
   );
 };
 
@@ -40,7 +43,7 @@ const styles = StyleSheet.create({
     zIndex: 10,
     backgroundColor: Colors.primary,
     color: Colors.white,
-    padding: Layout.space.base,
+    padding: Layout.space.base*1.6,
     marginTop: Layout.space.base + statusBarHeight,
     marginHorizontal: Layout.space.base*1.5,
     borderRadius: Layout.radius.round,
@@ -49,6 +52,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     right: 0,
+  },
+  title: {
+    color: 'white',
+    fontWeight: 'bold',
+    marginBottom: Layout.space.base/2,
   },
   content: {
     color: 'white',
