@@ -107,7 +107,15 @@ class ApiManager {
   }
 
   async processResponse(response: any) {
-    return await response.json();
+    let payload: any = await response.json();
+    if (payload?.error && Config.showApiErrors) {
+      return {
+        success: false,
+        error: payload.error,
+      }
+    }
+
+    return { success: true };
   }
 
   getHeaders() {
