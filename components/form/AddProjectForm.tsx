@@ -34,6 +34,8 @@ const AddProjectForm = () => {
   };
 
   const submitForm = async () => {
+
+    // Todo - Build submit form
     /*
     EntityManager.addProject(formData).then((success: boolean) => {
       setIsProcessing(false);
