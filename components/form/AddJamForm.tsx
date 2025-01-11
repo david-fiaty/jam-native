@@ -202,11 +202,10 @@ const AddJamForm = () => {
           field: 'sectors_ids',
         })}
         onDeleteEvent={(item: any) => {
-          let sectorsIds: any = [...formData?.sectors_ids || []];
-          let index: number = sectorsIds.findIndex((v: any) => v == item.id);
-          delete sectorsIds[index];
-          sectorsIds = sectorsIds.filter((o: any) => o);      
-          updateField('sectors_ids', sectorsIds.filter((o: any) => o));
+          const sectorsIds = [...formData?.sectors_ids || []];
+          const index = sectorsIds.findIndex((v) => v === item.id);
+          if (index !== -1) sectorsIds.splice(index, 1);
+          updateField('sectors_ids', sectorsIds.filter(Boolean));
         }}
       />
       
@@ -218,11 +217,10 @@ const AddJamForm = () => {
           field: 'collaborators_ids',
         })}
         onDeleteEvent={(item: any) => {
-          let collaboratorsIds: any = [...formData?.collaborators_ids || []];
-          let index: number = collaboratorsIds.findIndex((v: any) => v == item.id);
-          delete collaboratorsIds[index];
-          collaboratorsIds = collaboratorsIds.filter((o: any) => o);      
-          updateField('collaborators_ids', collaboratorsIds.filter((o: any) => o));
+          const collaboratorsIds = [...formData?.collaborators_ids || []];
+          const index = collaboratorsIds.findIndex((v) => v === item.id);
+          if (index !== -1) collaboratorsIds.splice(index, 1);
+          updateField('collaborators_ids', collaboratorsIds.filter(Boolean));
         }}
       />
 
