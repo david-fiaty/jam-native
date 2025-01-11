@@ -87,7 +87,7 @@ const Endpoints = {
   currentUser: {
     path: '/get-current-user-info/',
     cacheable: false,
-    dataKey: null,
+    dataKey: 'user',
   },
   likeJam: {
     path: '/jams/like/',

@@ -27,7 +27,7 @@ class UserManager {
   }
 
   async getUserData() { 
-    return (await DataManager.get('currentUser'))?.user;
+    return await DataManager.get('currentUser');
   }
 
   async getProfileId() {
