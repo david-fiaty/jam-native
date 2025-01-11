@@ -26,10 +26,8 @@ class UserManager {
     return response;
   }
 
-  async getUserData() {
-    let userAccount: any = await DataManager.get('currentUser');
-   
-    return userAccount?.user;
+  async getUserData() { 
+    return (await DataManager.get('currentUser'))?.user;
   }
 
   async getProfileId() {
