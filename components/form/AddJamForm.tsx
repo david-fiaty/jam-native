@@ -48,15 +48,15 @@ const AddJamForm = () => {
   };
 
   const submitForm = async () => {
-    EntityManager.addJam(formData).then((success: boolean) => {
-      setIsProcessing(false);
-      //success === true
-      false
-        ? router.replace('/jams')
-        : ScreenManager.showMessage(
-            i18n.t('The Jam data is invalid. Please check and trya gain.')
-          );
-    });
+    let result: any = await EntityManager.addJam(formData);
+    let message: any = {
+      title: i18n.t('Create Jam'),
+      content: i18n.t('The Jam was successfully created.'),
+    };
+
+    if (result?.error) message.content = i18n.t(result.error);
+    ScreenManager.showMessage(message);
+    setIsProcessing(false);
   };
 
   const renderJamCategory = (row: any) => (
@@ -191,6 +191,7 @@ const AddJamForm = () => {
       <DividerView theme="secondary" />
       <SectorsField
         resource={resource}
+        field="sectors_ids"
         label={
           <>
             <IconView name="plus" theme="secondary" radius="round" />
@@ -212,6 +213,7 @@ const AddJamForm = () => {
       <DividerView theme="secondary" />
       <CollaboratorsField
         resource={resource}
+        field="collaborators_ids"
         onPressEvent={() => ScreenManager.toggleScreen('CollaboratorsList', {
           resource: resource,
           field: 'collaborators_ids',

@@ -6,13 +6,12 @@ import BoxView from '@/components/view/BoxView';
 import IconView from '@/components/view/IconView';
 
 type Props = BaseProps & {
-  key?: any;
   item?: any;
 };
 
-const ActionListItem = ({ key, item }: Props) => {
+const ActionListItem = ({ item }: Props) => {
   return (
-    <TouchableOpacity key={key} onPress={item?.onPress}>
+    <TouchableOpacity onPress={item?.onPress}>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.container}>
         <IconView 
           name={item?.icon} 

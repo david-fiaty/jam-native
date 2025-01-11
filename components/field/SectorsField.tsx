@@ -10,19 +10,21 @@ import EntityManager from '@/manager/EntityManager';
 
 type Props = BaseProps & {
   resource: string;
+  field: string;
   label?: any;
   onPressEvent?: () => void;
   onDeleteEvent: (item: any) => void;
 };
 
-const SectorsField = ({ resource, label, onPressEvent, onDeleteEvent }: Props) => {
+const SectorsField = ({ resource, field, label, onPressEvent, onDeleteEvent }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [selectedSectors, setSelectedSectors] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
+  const fieldName: string = field;
 
   const getSelectedSectors = (sectorsIds?: any) => {
-    let selectedIds: any[] = sectorsIds || formData?.sectors_ids || [];
+    let selectedIds: any[] = sectorsIds || formData?.[fieldName] || [];
     let result: any[] = [];
 
     for (const item of sectorsData) {
@@ -38,9 +40,8 @@ const SectorsField = ({ resource, label, onPressEvent, onDeleteEvent }: Props) =
     return result;
   };
 
-
   const deleteItem = (item: any) => {
-    let selectedIds: any[] = [...(formData?.sectors_ids || [])];
+    let selectedIds: any[] = [...(formData?.[fieldName] || [])];
     let deleteIndex: number = selectedIds.findIndex((id: any) => id == item.id);
 
     if (deleteIndex !== -1) delete selectedIds[deleteIndex];

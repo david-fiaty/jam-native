@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
+import { Config } from '@/constants/Config';
 import LogoView from '../view/LogoView';
 import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
@@ -24,21 +25,30 @@ const LoginScreen = () => {
   const [password, setPassword] = useState<string>('');
   const [isProcessing, setIsProcessing] = useState(false);
 
+  const getLoginData = () => {
+    return Config.forceLogin.enabled === true ? Config.forceLogin.credentials :  {
+      email: email,
+      password: password,
+    };
+  };
+
   const submitForm = async () => {
-    // Todo - Connect username and password
-    let loginData = {
-      //email: email,
-      //password: password,
-      email: 'mitsiomotu@yopmail.com',
-      password: 'Password1234',
+    let data: any = getLoginData();
+    let result: any = await UserManager.login(data);
+    let message: any = {
+      title: i18n.t('Profile login'),
+      content: i18n.t('You are connected to your account.'),
+    };
+
+    if (!result) {
+      // Todo - Return API error response
+      message.content = i18n.t('Invalid email or password provided. Please check your data and try again.');
     }
 
-    UserManager.login(loginData).then((success: boolean) => {
-      setIsProcessing(false);
-      success === true 
-        ? router.replace('/jams') 
-        : ScreenManager.showMessage(i18n.t('Invalid user name or password.'));
-    });
+    ScreenManager.showMessage(message);
+    setIsProcessing(false);
+
+    if (result) router.replace('/jams');
   }  
 
   return (
@@ -53,6 +63,7 @@ const LoginScreen = () => {
         placeholder={i18n.t('Email address')} 
         onChangeText={(text: string) => setEmail(text)}
       />
+
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Password')} 

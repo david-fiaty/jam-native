@@ -1,16 +1,14 @@
 import { useState, useEffect } from 'react';
-import { View, TouchableOpacity, StyleSheet } from "react-native";
-import { useRouter } from 'expo-router';
+import { View, StyleSheet } from "react-native";
 import { Layout } from "@/constants/Layout";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
-import IconView from '../view/IconView';
 import BoxView from '../view/BoxView';
-import TextView from '../view/TextView';
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
 import ActionListItem from '../list/ListItem/ActionListItem';
+import DataManager from '@/manager/DataManager';
 
 const MoreJamActionsView = () => {
   const [entity, setEntity] = useState<any>(null);
@@ -70,9 +68,7 @@ const MoreJamActionsView = () => {
       />
       
       <View style={styles.listContainer}>
-        { actions.map((item: any) => {
-          return <ActionListItem key={item.icon} item={item} />;
-        }) }
+        { actions.map((item: any) => <ActionListItem key={DataManager.createUuid()} item={item} />)}
       </View>
     </BoxView>
   );

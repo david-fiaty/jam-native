@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     width: "100%",
     gap: 0,
     backgroundColor: Colors.secondary,
-    padding: Layout.space.base / 6,
+    padding: Layout.space.base/2,
     borderRadius: Layout.radius.round,
   },
 });

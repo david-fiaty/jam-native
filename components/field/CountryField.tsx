@@ -17,7 +17,7 @@ const CountryField = ({value, onChangeValue}: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const buildOptions = (optionsData: any) => {
-    return optionsData?.map((item: any) => {
+    return (optionsData || []).map((item: any) => {
       return {
         value: item?.code?.toLowerCase(),
         label: item?.name,
@@ -27,10 +27,12 @@ const CountryField = ({value, onChangeValue}: Props) => {
 
   useEffect(() => {
     (async () => {
-      if (!countriesData) setCountriesData(await EntityManager.getCountries());
-      setIsLoaded(true);
+      if (!isLoaded) {
+        setCountriesData(await EntityManager.getCountries());
+        setIsLoaded(true);
+      }
     })();
-  });
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView size="small" />
 
