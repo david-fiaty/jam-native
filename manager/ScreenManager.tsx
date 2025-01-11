@@ -54,7 +54,7 @@ class ScreenManager {
     Store.dispatch(setMessage(''));
     Store.dispatch(setMessage(text));
 
-    this.messageTimeout = setTimeout(() => Store.dispatch(setMessage('')), 5000);
+    this.messageTimeout = setTimeout(() => Store.dispatch(setMessage('')), 100000000);
   }
 };
 
