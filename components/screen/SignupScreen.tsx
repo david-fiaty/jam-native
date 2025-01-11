@@ -31,16 +31,26 @@ const SignupScreen = () => {
     setSignupData({ ...signupData, ...{ [key]: value } });
   };
 
+
   const submitForm = async () => {
-    UserManager.register(signupData).then((success: boolean) => {
-      setIsProcessing(false);
-      success === true
-        ? router.replace("/jams")
-        : ScreenManager.showMessage(
-            i18n.t("The data is invalid. Please check and try again.")
-          );
-    });
-  };
+    /*
+    let loginData: any = getLoginData();
+    let result: any = await UserManager.login(loginData);
+    let message: any = {
+      title: i18n.t('Account login'),
+      content: i18n.t('You are connected to your account.'),
+    };
+
+    if (!result) {
+      message.content = i18n.t('Invalid email or password provided. Please check your data and try again.');
+    }
+
+    ScreenManager.showMessage(message);
+    setIsProcessing(false);
+
+    if (result) router.replace('/jams');
+    */
+  }  
 
   return (
     <BoxView
