@@ -12,10 +12,10 @@ type Props = BaseProps & {
   resource: string;
   label?: any;
   onPressEvent?: () => void;
-  onDeleteButtonPress?: (item: any) => void;
+  onDeleteEvent: (item: any) => void;
 };
 
-const SectorsField = ({ resource, label, onPressEvent, onDeleteButtonPress }: Props) => {
+const SectorsField = ({ resource, label, onPressEvent, onDeleteEvent }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedSectors, setSelectedSectors] = useState<any>([]);
@@ -44,10 +44,8 @@ const SectorsField = ({ resource, label, onPressEvent, onDeleteButtonPress }: Pr
 
   useEffect(() => {
     (async () => {
-      if (!isLoaded) { 
-        setSelectedSectors(await getSelectedSubsectors());
-        setIsLoaded(true);
-      }
+      setSelectedSectors(await getSelectedSubsectors());
+      setIsLoaded(true);
     })();
   }, [isLoaded]);
 
@@ -70,7 +68,7 @@ const SectorsField = ({ resource, label, onPressEvent, onDeleteButtonPress }: Pr
             return (
               <TagView
                 key={item.id}
-                onDeleteButtonPress={() => onDeleteButtonPress(item)}  
+                onDeleteButtonPress={() => onDeleteEvent(item)}  
               >
                 {item?.name}
               </TagView>
