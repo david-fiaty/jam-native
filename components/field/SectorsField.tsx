@@ -61,8 +61,6 @@ const SectorsField = ({ resource, label, onPressEvent, onDeleteEvent }: Props) =
       }
     }
 
-    console.log('----> ', selectedIds);
-
     setSelectedSectors(getSelectedSectors(selectedIds));
     if (onDeleteEvent) onDeleteEvent(item);
   }
