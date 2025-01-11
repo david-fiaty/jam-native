@@ -1,29 +1,40 @@
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 import { setMessage } from '@/redux/slices/MessageSlice';
+import { BaseProps } from '@/constants/Types';
 import DeviceManager from '@/manager/DeviceManager';
 import IconView from './IconView';
-import BoxView from './BoxView';
+
+type Props = BaseProps & {
+  title: string;
+};
 
 const statusBarHeight: any = DeviceManager.getStatusBarSize().height;
 
-const MessageView = () => {
+const MessageView = ({ title }: Props) => {
   const dispatch = useDispatch();
   const messageState = useSelector((state: any) => state.message);
 
-  if (!messageState?.text.length) return <></>;
+  if (!Object.keys(messageState).length) return <></>;
 
   return (
-    <BoxView direction="row" align="center" justify="space-between" style={styles.container}>
-      <Text style={styles.content}>
-        {messageState.text}
+    <View style={styles.container}>
+      <Text style={styles.title}>
+        {messageState?.title}
       </Text>
-      <TouchableOpacity onPress={() => dispatch(setMessage('')) } >
-        <IconView name="delete" theme="primary" style={styles.closeIcon}/>
+      <Text style={styles.content}>
+        {messageState?.content}
+      </Text>
+      <TouchableOpacity 
+        style={styles.closeIcon}
+        onPress={() => dispatch(setMessage({})) } 
+      >
+        <IconView name="delete" theme="primary" size={18} padding={10} />
       </TouchableOpacity>
-    </BoxView>
+    </View>
   );
 };
 
@@ -36,13 +47,20 @@ const styles = StyleSheet.create({
     zIndex: 10,
     backgroundColor: Colors.primary,
     color: Colors.white,
-    padding: Layout.space.base,
-    marginTop: Layout.space.base + statusBarHeight,
+    padding: Layout.space.base*1.6,
+    marginTop: statusBarHeight,
     marginHorizontal: Layout.space.base*1.5,
     borderRadius: Layout.radius.round,
   },
   closeIcon: {
-    width: '100%',
+    position: 'absolute',
+    top: 0,
+    right: 0,
+  },
+  title: {
+    color: 'white',
+    fontWeight: 'bold',
+    marginBottom: Layout.space.base/2,
   },
   content: {
     color: 'white',

@@ -48,6 +48,13 @@ const AddJamForm = () => {
   };
 
   const submitForm = async () => {
+    setIsProcessing(false);
+    ScreenManager.showMessage({
+      title: i18n.t('Create Jam'),
+      content: i18n.t('The Jam data is invalid. Please check and try again.'),
+    });
+
+    /*
     EntityManager.addJam(formData).then((success: boolean) => {
       setIsProcessing(false);
       //success === true
@@ -57,6 +64,8 @@ const AddJamForm = () => {
             i18n.t('The Jam data is invalid. Please check and trya gain.')
           );
     });
+
+    */
   };
 
   const renderJamCategory = (row: any) => (

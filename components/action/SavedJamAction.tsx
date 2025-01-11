@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react';
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Layout } from "@/constants/Layout";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
-import IconView from '../view/IconView';
-import TextView from '../view/TextView';
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
 import ActionListItem from '../list/ListItem/ActionListItem';
+import DataManager from '@/manager/DataManager';
 
 const SavedJamAction = () => {
   const [entity, setEntity] = useState<any>(null);
@@ -53,7 +52,7 @@ const SavedJamAction = () => {
       
       <View style={styles.listContainer}>
         { actions.map((item: any) => {
-          return <ActionListItem item={item} />;
+          return <ActionListItem key={DataManager.createUuid()} item={item} />;
         }) }
       </View>
     </BoxView>
