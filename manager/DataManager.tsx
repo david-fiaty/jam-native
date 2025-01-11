@@ -3,13 +3,13 @@ import ApiManager from './ApiManager';
 
 class DataManager {
   async get(key: keyof typeof Endpoints, options?: any, variables?: any) {
-    let data: any = await ApiManager.get(key, options, variables);
+    let response: any = await ApiManager.get(key, options, variables);
 
-    if (Endpoints[key].dataKey !== null) {
-      return data[Endpoints[key].dataKey];
+    if (response.success && Endpoints[key].dataKey !== null) {
+      response.payload = response.payload[Endpoints[key].dataKey];
     }
 
-    return data;
+    return response;
   }
 
   async post(key: keyof typeof Endpoints, data: any, options?: any) {
@@ -18,11 +18,14 @@ class DataManager {
 
   async find(key: keyof typeof Endpoints, idField: string, idValues: any) {
     idValues = Array.isArray(idValues) ? idValues : [idValues];
-    let data: any = await ApiManager.get(key);
-    let haystack: any = data?.[Endpoints[key].dataKey];
-    let result: any = haystack.find((item: any) => idValues.includes(item[idField]));
+    let response: any = await ApiManager.get(key);
 
-    return result || {};
+    if (response.success === true) {
+      let haystack: any = response.payload?.[Endpoints[key].dataKey];
+      return haystack.find((item: any) => idValues.includes(item[idField]));  
+    }
+
+    return [];
   }
 
   createUuid() { 
