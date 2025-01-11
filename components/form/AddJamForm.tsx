@@ -49,20 +49,13 @@ const AddJamForm = () => {
 
   const submitForm = async () => {
     let result: any = await EntityManager.addJam(formData);
+    let message: any = {
+      title: i18n.t('Create Jam'),
+      content: i18n.t('The Jam was successfully created.'),
+    };
 
-    if (result?.error) {
-      ScreenManager.showMessage({
-        title: i18n.t('Create Jam'),
-        content: i18n.t(result.error),
-      });
-    }
-    else {
-      ScreenManager.showMessage({
-        title: i18n.t('Create Jam'),
-        content: i18n.t('The Jam was successfully created.'),
-      });
-    }
-
+    if (result?.error) message.content = i18n.t(result.error);
+    ScreenManager.showMessage(message);
     setIsProcessing(false);
   };
 
