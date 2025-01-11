@@ -96,8 +96,6 @@ const AddJamForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log('addJamForm', formData);
-
   return (
     <BoxView
       align="flex-start"
@@ -203,15 +201,29 @@ const AddJamForm = () => {
           resource: resource,
           field: 'sectors_ids',
         })}
+        onDeleteEvent={(item: any) => {
+          let sectorsIds: any = [...formData?.sectors_ids || []];
+          let index: number = sectorsIds.findIndex((v: any) => v == item.id);
+          delete sectorsIds[index];
+          sectorsIds = sectorsIds.filter((o: any) => o);      
+          updateField('sectors_ids', sectorsIds.filter((o: any) => o));
+        }}
       />
       
       <DividerView theme="secondary" />
       <CollaboratorsField
-        selectedIds={formData?.collaborators_ids}
+        resource={resource}
         onPressEvent={() => ScreenManager.toggleScreen('CollaboratorsList', {
           resource: resource,
           field: 'collaborators_ids',
         })}
+        onDeleteEvent={(item: any) => {
+          let collaboratorsIds: any = [...formData?.collaborators_ids || []];
+          let index: number = collaboratorsIds.findIndex((v: any) => v == item.id);
+          delete collaboratorsIds[index];
+          collaboratorsIds = collaboratorsIds.filter((o: any) => o);      
+          updateField('collaborators_ids', collaboratorsIds.filter((o: any) => o));
+        }}
       />
 
       <DividerView theme="secondary" />

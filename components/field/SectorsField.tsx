@@ -1,26 +1,24 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from "react-redux";
-import { setFormData } from "@/redux/slices/FormSlice";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from '@/constants/Layout';
 import BoxView from "../view/BoxView";
 import SpinnerView from '../view/SpinnerView';
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
-import ScreenManager from '@/manager/ScreenManager';
 
 type Props = BaseProps & {
   resource: string;
   label?: any;
   onPressEvent?: () => void;
+  onDeleteEvent: (item: any) => void;
 };
 
-const SectorsField = ({ resource, label, onPressEvent }: Props) => {
+const SectorsField = ({ resource, label, onPressEvent, onDeleteEvent }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedSectors, setSelectedSectors] = useState<any>([]);
-  const activeScreen: any = ScreenManager.getActiveScreen();
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const getSelectedSectors = async () => {
@@ -44,27 +42,10 @@ const SectorsField = ({ resource, label, onPressEvent }: Props) => {
     return subsectors;
   };
 
-  const deleteItem = async (item: any) => {
-    let sectorsIds: any = [...formData?.sectors_ids || []];
-    let index: number = sectorsIds.findIndex((v: any) => v == item.id);
-    delete sectorsIds[index];
-    sectorsIds = sectorsIds.filter((o: any) => o);
-
-    dispatch(setFormData<any>({ 
-      resource: resource,
-      key: 'sectors_ids', 
-      value: sectorsIds, 
-    }));
-
-    setSelectedSectors(await getSelectedSubsectors());
-  };
-
   useEffect(() => {
     (async () => {
-      if (!isLoaded) { 
-        setSelectedSectors(await getSelectedSubsectors());
-        setIsLoaded(true);
-      }
+      setSelectedSectors(await getSelectedSubsectors());
+      setIsLoaded(true);
     })();
   }, [isLoaded]);
 
@@ -87,7 +68,7 @@ const SectorsField = ({ resource, label, onPressEvent }: Props) => {
             return (
               <TagView
                 key={item.id}
-                onDeleteButtonPress={() => deleteItem(item)}  
+                onDeleteButtonPress={() => onDeleteEvent(item)}  
               >
                 {item?.name}
               </TagView>

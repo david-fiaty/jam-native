@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { useDispatch, useSelector } from "react-redux";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
@@ -11,22 +12,22 @@ import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
 
 type Props = BaseProps & {
-  selectedIds?: any;
+  resource: string;
   onPressEvent?: () => void;
+  onDeleteEvent: (item: any) => void;
 };
 
-const CollaboratorsField = ({ selectedIds, onPressEvent }: Props) => {
+const CollaboratorsField = ({ resource, onPressEvent, onDeleteEvent }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedProfiles, setSelectedProfiles] = useState<any>([]);
+  const formData: any = useSelector((state: any) => state.form[resource]);
 
   useEffect(() => {
     (async () => {
-      if (!isLoaded) { 
-        if (selectedIds?.length) setSelectedProfiles(await EntityManager.getProfiles({items_ids: selectedIds}));
+        if (formData?.collaborators_ids?.length) setSelectedProfiles(await EntityManager.getProfiles({items_ids: formData.collaborators_ids}));
         setIsLoaded(true);
-      }
     })();
-  }, [isLoaded, selectedIds]);
+  }, [isLoaded, formData]);
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
@@ -47,7 +48,7 @@ const CollaboratorsField = ({ selectedIds, onPressEvent }: Props) => {
               return (
                 <TagView
                   key={item.id}
-                  onDeleteButtonPress={() => console.log('delete collaborator tag', item.id)}  
+                  onDeleteButtonPress={() => onDeleteEvent(item)}  
                 >
                   {item?.profile_name}
                 </TagView>
