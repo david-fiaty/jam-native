@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useRouter } from "expo-router";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Colors } from "@/constants/Colors";
@@ -30,7 +29,6 @@ import CollaboratorsField from "../field/CollaboratorsField";
 
 const AddJamForm = () => {
   const resource: string = 'jam';
-  const router = useRouter();
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
