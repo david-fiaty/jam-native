@@ -12,6 +12,8 @@ export const Config = {
   logoImageSize: 512,
   paginationSize: 10,
   dateFormat: 'MMM Do YYYY',
+  messageDisplayDuration: 5000,
+  showApiErrors: true,
   defaultLocation: {
     latitude: 8.6195,
     longitude: 0.8248,

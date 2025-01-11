@@ -4,29 +4,33 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 import { setMessage } from '@/redux/slices/MessageSlice';
+import { BaseProps } from '@/constants/Types';
 import DeviceManager from '@/manager/DeviceManager';
 import IconView from './IconView';
-import BoxView from './BoxView';
+
+type Props = BaseProps & {
+  title: string;
+};
 
 const statusBarHeight: any = DeviceManager.getStatusBarSize().height;
 
-const MessageView = () => {
+const MessageView = ({ title }: Props) => {
   const dispatch = useDispatch();
   const messageState = useSelector((state: any) => state.message);
 
-  if (!messageState?.text.length) return <></>;
+  if (!Object.keys(messageState).length) return <></>;
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
-        Message title
+        {messageState?.title}
       </Text>
       <Text style={styles.content}>
-        {messageState.text}
+        {messageState?.content}
       </Text>
       <TouchableOpacity 
         style={styles.closeIcon}
-        onPress={() => dispatch(setMessage('')) } 
+        onPress={() => dispatch(setMessage({})) } 
       >
         <IconView name="delete" theme="primary" size={18} padding={10} />
       </TouchableOpacity>
