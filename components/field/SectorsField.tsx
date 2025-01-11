@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from '@/constants/Layout';
 import BoxView from "../view/BoxView";
@@ -16,7 +16,6 @@ type Props = BaseProps & {
 };
 
 const SectorsField = ({ resource, label, onPressEvent, onDeleteEvent }: Props) => {
-  const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [selectedSectors, setSelectedSectors] = useState<any>([]);
