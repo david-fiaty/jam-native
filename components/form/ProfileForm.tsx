@@ -21,11 +21,14 @@ import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
 import ProfileImageField from "../field/ProfileImageField";
 import IconView from "../view/IconView";
+import ButtonView from "../view/ButtonView";
+import EntityManager from "@/manager/EntityManager";
 
 const ProfileForm = () => {
   const resource: string = 'profile';
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
   const formData = useSelector((state: any) => state.form[resource]);
 
@@ -37,17 +40,27 @@ const ProfileForm = () => {
     }));
   };
 
+  const submitForm = async () => {
+    let result: any = await EntityManager.addJam(formData);
+    let message: any = {
+      title: i18n.t('Update profile'),
+      content: i18n.t('The profile data was successfully updated.'),
+    };
+
+    if (result?.error) message.content = i18n.t(result.error);
+    ScreenManager.showMessage(message);
+    setIsProcessing(false);
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
         setProfileId(await UserManager.getProfileId());
-
         dispatch(setFormData<any>({ 
           resource: resource,
           key: null, 
           value: { ...(await UserManager.getProfileData()), ...formData }, 
         }));
-        
         setIsLoaded(true);
       }
     })();
@@ -191,6 +204,15 @@ const ProfileForm = () => {
           onChangeText={(value: string) => updateField("linkedin_id", value)}
         />
 
+        <DividerView />
+        <ButtonView
+          label={i18n.t('Update')}
+          isProcessing={isProcessing}
+          onPress={() => {
+            setIsProcessing(true);
+            submitForm();
+          }}
+        />
         <DividerView theme="secondary" />
 
         <ProfileProjectsList
