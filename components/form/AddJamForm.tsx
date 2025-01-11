@@ -51,7 +51,7 @@ const AddJamForm = () => {
     setIsProcessing(false);
     ScreenManager.showMessage({
       title: i18n.t('Create Jam'),
-      content: i18n.t('The Jam data is invalid. Please check and try again.'),
+      content: i18n.t('The Jam data is invalid. Please check the values provided and try again.'),
     });
 
     /*
