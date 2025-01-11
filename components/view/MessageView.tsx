@@ -21,8 +21,11 @@ const MessageView = () => {
       <Text style={styles.content}>
         {messageState.text}
       </Text>
-      <TouchableOpacity onPress={() => dispatch(setMessage('')) } >
-        <IconView name="delete" theme="primary" style={styles.closeIcon}/>
+      <TouchableOpacity 
+        style={styles.closeIcon}
+        onPress={() => dispatch(setMessage('')) } 
+      >
+        <IconView name="delete" theme="primary" size={18} padding={7} />
       </TouchableOpacity>
     </BoxView>
   );
@@ -43,7 +46,9 @@ const styles = StyleSheet.create({
     borderRadius: Layout.radius.round,
   },
   closeIcon: {
-    width: '100%',
+    position: 'absolute',
+    top: 0,
+    right: 0,
   },
   content: {
     color: 'white',
