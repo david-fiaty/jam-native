@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
@@ -18,14 +18,14 @@ import CollapsibleView from "../view/CollapsibleView";
 const SectorsList = () => {
   const dispatch = useDispatch();
   const [sectorsData, setSectorsData] = useState<any>(null);
-  const [selectedIds, setSelectedIds] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
   const resource: string = activeScreen.params.resource;
   const fieldName: string = activeScreen.params.field;
+  const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateSelection = (item: any, subItem: any) => {
-    let selection: any[] = [...selectedIds];
+    let selection: any[] = [...formData?.[fieldName] || []];
     let itemIndex: number = selection.findIndex((id: any) => id == item.id);
     let subItemIndex: number = selection.findIndex((id: any) => id == subItem.id);
 
@@ -49,17 +49,15 @@ const SectorsList = () => {
     }
 
     // Update selection state
-    selection = selection.filter((o: any) => o);
-    setSelectedIds(selection);
     dispatch(setFormData<any>({ 
       resource: resource,
       key: fieldName, 
-      value: selection,
+      value: selection.filter((o: any) => o),
     }));
   };
 
   const renderSubItem = (item: any, subItem: any) => {
-    let isSelected: boolean = selectedIds.find((id: any) => id == subItem.id);
+    let isSelected: boolean = formData?.[fieldName]?.includes(subItem.id);
 
     return (
       <TouchableOpacity 
