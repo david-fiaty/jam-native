@@ -5,6 +5,7 @@ import { toggleSearchField } from '@/redux/slices/SearchSlice';
 import Store from '@/redux/Store';
 import DeviceManager from './DeviceManager';
 import SearchManager from './SearchManager';
+import { Config } from '@/constants/Config';
 
 class ScreenManager {
   messageTimeout?: any;
@@ -54,7 +55,9 @@ class ScreenManager {
     Store.dispatch(setMessage(''));
     Store.dispatch(setMessage(text));
 
-    this.messageTimeout = setTimeout(() => Store.dispatch(setMessage('')), 3500);
+    this.messageTimeout = setTimeout(() => {
+      Store.dispatch(setMessage(''));
+    }, Config.messageDisplayDuration);
   }
 };
 
