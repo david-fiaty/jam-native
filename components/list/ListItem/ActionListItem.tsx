@@ -4,7 +4,6 @@ import { BaseProps } from "@/constants/Types";
 import TextView from '@/components/view/TextView';
 import BoxView from '@/components/view/BoxView';
 import IconView from '@/components/view/IconView';
-import DataManager from "@/manager/DataManager";
 
 type Props = BaseProps & {
   item?: any;
@@ -12,7 +11,7 @@ type Props = BaseProps & {
 
 const ActionListItem = ({ item }: Props) => {
   return (
-    <TouchableOpacity key={DataManager.createUuid()} onPress={item?.onPress}>
+    <TouchableOpacity onPress={item?.onPress}>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.container}>
         <IconView 
           name={item?.icon} 

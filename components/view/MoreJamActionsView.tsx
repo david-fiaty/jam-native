@@ -8,6 +8,7 @@ import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
 import ActionListItem from '../list/ListItem/ActionListItem';
+import DataManager from '@/manager/DataManager';
 
 const MoreJamActionsView = () => {
   const [entity, setEntity] = useState<any>(null);
@@ -67,7 +68,7 @@ const MoreJamActionsView = () => {
       />
       
       <View style={styles.listContainer}>
-        { actions.map((item: any) => <ActionListItem item={item} />)}
+        { actions.map((item: any) => <ActionListItem key={DataManager.createUuid()} item={item} />)}
       </View>
     </BoxView>
   );
