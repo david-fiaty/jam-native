@@ -202,11 +202,10 @@ const AddJamForm = () => {
           field: 'sectors_ids',
         })}
         onDeleteEvent={(item: any) => {
-          let sectorsIds: any = [...formData?.sectors_ids || []];
-          let index: number = sectorsIds.findIndex((v: any) => v == item.id);
-          delete sectorsIds[index];
-          sectorsIds = sectorsIds.filter((o: any) => o);      
-          updateField('sectors_ids', sectorsIds.filter((o: any) => o));
+          const sectorsIds = [...formData?.sectors_ids || []];
+          const index = sectorsIds.findIndex((v) => v === item.id);
+          if (index !== -1) sectorsIds.splice(index, 1);
+          updateField('sectors_ids', sectorsIds.filter(Boolean));
         }}
       />
       
