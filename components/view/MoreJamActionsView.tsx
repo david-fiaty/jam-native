@@ -67,9 +67,7 @@ const MoreJamActionsView = () => {
       />
       
       <View style={styles.listContainer}>
-        { actions.map((item: any) => {
-          return <ActionListItem item={item} />;
-        }) }
+        { actions.map((item: any) => <ActionListItem item={item} />)}
       </View>
     </BoxView>
   );
