@@ -102,6 +102,8 @@ const ProfileForm = () => {
 
         <TextView style={styles.title}>{i18n.t('Activities')}</TextView>
         <SectorsField
+          resource={resource}
+          field="sectors_ids"
           label={
             <>
               <IconView name="plus" theme="secondary" radius="round" />
@@ -112,6 +114,12 @@ const ProfileForm = () => {
             resource: resource,
             field: 'sectors_ids',
           })}
+          onDeleteEvent={(item: any) => {
+            const sectorsIds = [...formData?.sectors_ids || []];
+            const index = sectorsIds.findIndex((v) => v === item.id);
+            if (index !== -1) sectorsIds.splice(index, 1);
+            updateField('sectors_ids', sectorsIds.filter(Boolean));
+          }}
         />
 
         <TextView style={styles.title}>{i18n.t('Address')}</TextView>
