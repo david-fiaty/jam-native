@@ -55,7 +55,9 @@ const SectorsField = ({ resource, label, onPressEvent, onDeleteEvent }: Props) =
         let deleteItem: boolean = !selectedIds.some((v: any) => childIds.includes(v));
 
         if (deleteItem) {
-          selectedIds = selectedIds.filter((v: any) => v == id);
+          let index = selectedIds.findIndex((v: any) => v == id);
+          delete selectedIds[index];
+          selectedIds = selectedIds.filter(Boolean);
         }
       }
     }
