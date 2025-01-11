@@ -18,4 +18,11 @@ export const Config = {
     latitude: 8.6195,
     longitude: 0.8248,
   },
+  forceLogin: {
+    enabled: false,
+    credentials: {
+      email: 'mitsiomotu@yopmail.com',
+      password: 'Password1234',
+    },
+  },
 };
