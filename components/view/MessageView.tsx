@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary,
     color: Colors.white,
     padding: Layout.space.base*1.6,
-    marginTop: Layout.space.base + statusBarHeight,
+    marginTop: statusBarHeight,
     marginHorizontal: Layout.space.base*1.5,
     borderRadius: Layout.radius.round,
   },
