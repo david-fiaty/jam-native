@@ -18,34 +18,43 @@ type Props = BaseProps & {
 const SectorsField = ({ resource, label, onPressEvent, onDeleteEvent }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [sectorsData, setSectorsData] = useState<any>([]);
   const [selectedSectors, setSelectedSectors] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
-  const getSelectedSectors = async () => {
-    if (formData?.sectors_ids?.length) {
-      return await EntityManager.getSectors({items_ids: formData.sectors_ids});
-    }
+  const getSelectedSectors = () => {
+    let selectedIds: any[] = formData?.sectors_ids || [];
+    let result: any[] = [];
 
-    return [];
-  };
-
-  const getSelectedSubsectors = async () => {
-    let sectors: any = await getSelectedSectors();
-    let subsectors: any = [];
-
-    for (const item of (sectors?.[0]?.sub_sectors || [])) {
-      if (formData.sectors_ids?.includes(item.id)) {
-        subsectors.push(item);
+    for (const item of sectorsData) {
+      if (selectedIds.includes(item.id)) {
+        for (const subitem of item?.sub_sectors || []) {
+          if (selectedIds.includes(subitem.id)) {
+            result.push(subitem);
+          }
+        }
       }
     }
 
-    return subsectors;
+    return result;
   };
+
+
+  const deleteItem = (item: any) => {
+    //setSelectedSectors(await getSelectedSectors());
+      console.log('---> delete item', item.id);
+    //onDeleteEvent(item);
+  }
 
   useEffect(() => {
     (async () => {
-      setSelectedSectors(await getSelectedSubsectors());
-      setIsLoaded(true);
+      if (!isLoaded) {
+        setSectorsData(await EntityManager.getSectors());
+        setIsLoaded(true);
+      }
+      
+      setSelectedSectors(getSelectedSectors());
+      
     })();
   }, [isLoaded]);
 
@@ -68,7 +77,7 @@ const SectorsField = ({ resource, label, onPressEvent, onDeleteEvent }: Props) =
             return (
               <TagView
                 key={item.id}
-                onDeleteButtonPress={() => onDeleteEvent(item)}  
+                onDeleteButtonPress={() => deleteItem(item)}  
               >
                 {item?.name}
               </TagView>
