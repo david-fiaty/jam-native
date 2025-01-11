@@ -26,26 +26,29 @@ const LoginScreen = () => {
   const [isProcessing, setIsProcessing] = useState(false);
 
   const getLoginData = () => {
-    return Config.forceLogin.enabled === true ? Config.forceLogin :  {
+    return Config.forceLogin.enabled === true ? Config.forceLogin.credentials :  {
       email: email,
       password: password,
     };
   };
 
   const submitForm = async () => {
-    let loginData: any = getLoginData();
-    let result: any = await UserManager.login(loginData);
+    let data: any = getLoginData();
+    let result: any = await UserManager.login(data);
     let message: any = {
-      title: i18n.t('Account login'),
+      title: i18n.t('Profile login'),
       content: i18n.t('You are connected to your account.'),
     };
 
     if (!result) {
+      // Todo - Return API error response
       message.content = i18n.t('Invalid email or password provided. Please check your data and try again.');
     }
 
     ScreenManager.showMessage(message);
     setIsProcessing(false);
+
+    if (result) router.replace('/jams');
   }  
 
   return (
@@ -60,6 +63,7 @@ const LoginScreen = () => {
         placeholder={i18n.t('Email address')} 
         onChangeText={(text: string) => setEmail(text)}
       />
+
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Password')} 
