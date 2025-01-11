@@ -11,11 +11,9 @@ class UserManager {
     if (response?.tokens?.access_token?.length) {
       Store.dispatch(setTokenData(JSON.stringify(response.tokens)));
       Store.dispatch(setIsLoggedIn(true));
-
-      return true;
     }
     
-    return false;
+    return response;
   }
 
   async register(data: any) {
@@ -23,11 +21,9 @@ class UserManager {
     if (response?.tokens?.access_token?.length) {
       Store.dispatch(setTokenData(JSON.stringify(response.tokens)));
       Store.dispatch(setIsLoggedIn(true));
-
-      return true;
     }
     
-    return false;
+    return response;
   }
 
   async getUserData() {
