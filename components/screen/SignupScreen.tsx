@@ -32,15 +32,23 @@ const SignupScreen = () => {
   };
 
   const submitForm = async () => {
-    UserManager.register(signupData).then((success: boolean) => {
-      setIsProcessing(false);
-      success === true
-        ? router.replace("/jams")
-        : ScreenManager.showMessage(
-            i18n.t("The data is invalid. Please check and try again.")
-          );
-    });
-  };
+    let data: any = {}; // Todo - Get registration data
+    let result: any = await UserManager.register(data);
+    let message: any = {
+      title: i18n.t('Profile registration'),
+      content: i18n.t('You are connected to your account.'),
+    };
+
+    if (!result) {
+      // Todo - Return API error response
+      message.content = i18n.t('Invalid registration data provided. Please check the values provided and try again.');
+    }
+
+    ScreenManager.showMessage(message);
+    setIsProcessing(false);
+
+    if (result) router.replace('/jams');
+  }  
 
   return (
     <BoxView
@@ -156,6 +164,7 @@ const SignupScreen = () => {
 
         <DividerView theme="secondary" />
 
+{ /*
         <SectorsField
           onPressEvent={() => ScreenManager.toggleScreen("SectorsList", {
             reducer: 'signupForm',
@@ -163,6 +172,8 @@ const SignupScreen = () => {
         />
 
         <DividerView theme="secondary" />
+        */ }
+
 
         <ButtonView
           label={i18n.t("Continue")}
