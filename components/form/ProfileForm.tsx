@@ -41,6 +41,7 @@ const ProfileForm = () => {
   };
 
   const submitForm = async () => {
+    setIsProcessing(true);
     let result: any = await EntityManager.addJam(formData);
     let message: any = {
       title: i18n.t('Update profile'),
@@ -208,10 +209,7 @@ const ProfileForm = () => {
         <ButtonView
           label={i18n.t('Update')}
           isProcessing={isProcessing}
-          onPress={() => {
-            setIsProcessing(true);
-            submitForm();
-          }}
+          onPress={submitForm}
         />
         <DividerView theme="secondary" />
 

@@ -37,8 +37,9 @@ const AccountForm = () => {
     setTimeout(() => {
       setIsProcessing(false);
     }, 3000);
-    
-  }  
+
+    // Todo - Implement submit
+  };  
 
   useEffect(() => {
     (async () => {

@@ -46,6 +46,7 @@ const AddJamForm = () => {
   };
 
   const submitForm = async () => {
+    setIsProcessing(true);
     let result: any = await EntityManager.addJam(formData);
     let message: any = {
       title: i18n.t('Create Jam'),
@@ -244,10 +245,7 @@ const AddJamForm = () => {
       <ButtonView
         label={i18n.t('Post')}
         isProcessing={isProcessing}
-        onPress={() => {
-          setIsProcessing(true);
-          submitForm();
-        }}
+        onPress={submitForm}
       />
 
       <DividerView />
