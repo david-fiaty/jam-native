@@ -146,7 +146,7 @@ const AddProjectForm = () => {
               <TextView>{i18n.t('Add countries')}</TextView>
             </>
           }
-          onPressEvent={() => ScreenManager.toggleScreen('SectorsList', {
+          onPressEvent={() => ScreenManager.toggleScreen('CountriesList', {
             resource: resource,
             field: 'scope_countries_codes',
           })}
