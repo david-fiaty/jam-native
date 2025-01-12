@@ -6,6 +6,7 @@ import TextView from '../view/TextView';
 import BackButton from '../button/BackButton';
 import i18n from '@/translation/i18n';
 import ScreenManager from '@/manager/ScreenManager';
+import UserManager from '@/manager/UserManager';
 
 const SettingsMenu = () => {
   const router = useRouter();
@@ -36,6 +37,7 @@ const SettingsMenu = () => {
       label: i18n.t('Logout'),
       path: null,
       onPress: (row: any) => {
+        UserManager.logout();
         router.replace('/welcome');
       },
     },
