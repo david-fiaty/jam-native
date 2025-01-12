@@ -151,10 +151,10 @@ const AddProjectForm = () => {
             field: 'scope_countries_codes',
           })}
           onDeleteEvent={(item: any) => {
-            const countriesIds = [...formData?.scope_countries_codes || []];
-            const index = countriesIds.findIndex((v) => v === item.id);
-            if (index !== -1) countriesIds.splice(index, 1);
-            updateField('scope_countries_codes', countriesIds.filter(Boolean));
+            const countriesCodes = [...formData?.scope_countries_codes || []];
+            const index = countriesCodes.findIndex((v) => v === item.code);
+            if (index !== -1) countriesCodes.splice(index, 1);
+            updateField('scope_countries_codes', countriesCodes.filter(Boolean));
           }}
         />
 

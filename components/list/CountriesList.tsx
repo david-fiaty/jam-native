@@ -25,26 +25,30 @@ const CountriesList = () => {
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateSelection = (item: any) => {
-/*
+    let selection: any[] = [...formData?.[fieldName] || []];
+    let index: number = selection.findIndex((v: any) => v == item.code);
+
+    if (index === -1) selection.push(item.code)
+    else delete selection[index];
+
     dispatch(setFormData<any>({ 
       resource: resource,
       key: fieldName, 
-      value: selection.filter((o: any) => o),
+      value: selection.filter(Boolean),
     }));
-  */
   };
 
   const renderItem = (item: any) => {
-    let isSelected: boolean = formData?.[fieldName]?.includes(item.id);
+    let isSelected: boolean = formData?.[fieldName]?.includes(item.code);
 
     return (
       <TouchableOpacity 
         key={item?.id}
         onPress={() => updateSelection(item)} 
       >
-        <BoxView direction="row" align="center" justify="space-around">
+        <BoxView direction="row" align="center" justify="flex-start" style={styles.listItem}>
           <IconView name="arrow" theme="clear" />
-          <TextView key={item?.id} style={styles.listSubItem}>
+          <TextView key={item?.id}>
             {item?.name}
           </TextView>
           
@@ -59,7 +63,7 @@ const CountriesList = () => {
       if (!countriesData) setCountriesData(await EntityManager.getCountries());
       setIsLoaded(true);
     })();
-  });
+  }, [countriesData]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -90,24 +94,9 @@ const styles = StyleSheet.create({
   container: {
     width: '100%'
   },
-  listItemCollapsible: {
-    paddingHorizontal: Layout.space.base/2,
-    paddingVertical: Layout.space.base/1.2,
-  },
-  listItemDetails: {
-    gap: Layout.space.base,
-  },
-  listSubItem: {
+  listItem: {
     marginLeft: 0,
-    paddingVertical: Layout.space.base/2.2,
-  },
-  itemHeader: {
-    backgroundColor: Colors.secondary,
-    padding: Layout.space.base,
-    borderRadius: Layout.radius.round,
-  },
-  itemHeaderOpened: {
-    backgroundColor: Colors.secondary,
+    paddingVertical: Layout.space.base,
   },
 });
 
