@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
@@ -16,6 +16,8 @@ import AddItemButton from "../button/AddItemButton";
 import ProjectJamsList from "../list/ProjectJamsList";
 import TextView from "../view/TextView";
 import EntityManager from "@/manager/EntityManager";
+import SectorsField from "../field/SectorsField";
+import IconView from "../view/IconView";
 
 const AddProjectForm = () => {
   const resource: string = 'project';
@@ -93,6 +95,29 @@ const AddProjectForm = () => {
           onChangeText={(value: string) => updateField("description", value)}
         />
 
+        <DividerView theme="secondary" />
+        <SectorsField
+          resource={resource}
+          field="sectors_ids"
+          label={
+            <>
+              <IconView name="plus" theme="secondary" radius="round" />
+              <TextView>{i18n.t('Add industries')}</TextView>
+            </>
+          }
+          onPressEvent={() => ScreenManager.toggleScreen('SectorsList', {
+            resource: resource,
+            field: 'sectors_ids',
+          })}
+          onDeleteEvent={(item: any) => {
+            const sectorsIds = [...formData?.sectors_ids || []];
+            const index = sectorsIds.findIndex((v) => v === item.id);
+            if (index !== -1) sectorsIds.splice(index, 1);
+            updateField('sectors_ids', sectorsIds.filter(Boolean));
+          }}
+        />
+
+        <DividerView theme="secondary" />
         { !formData?.jams_ids?.length && (
           <BoxView direction="column" align="center" justify="center">
             <AddItemButton
