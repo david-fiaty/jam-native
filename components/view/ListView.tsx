@@ -37,7 +37,6 @@ const ListView = ({
       //ref={ref}
       numColumns={numColumns || 1}
       initialNumToRender={initialNumToRender || Config.paginationSize}
-      //initialScrollIndex={initialScrollIndex}
       scrollEnabled={scrollEnabled === false ? false : true}
       horizontal={horizontal === true ? horizontal : false}
       contentContainerStyle={[styles.container, contentContainerStyle]}
