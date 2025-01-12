@@ -21,6 +21,7 @@ import IconView from "../view/IconView";
 import CountryField from "../field/CountryField";
 import PrivacyStatusField from "../field/PrivacyStatusField";
 import DatePickerField from "../field/DatePickerField";
+import CountriesField from "../field/CountriesField";
 
 const AddProjectForm = () => {
   const resource: string = 'project';
@@ -136,9 +137,9 @@ const AddProjectForm = () => {
         />
 
         <DividerView theme="secondary" />
-        <SectorsField
+        <CountriesField
           resource={resource}
-          field="sectors_ids"
+          field="scope_countries_codes"
           label={
             <>
               <IconView name="plus" theme="secondary" radius="round" />
@@ -147,13 +148,13 @@ const AddProjectForm = () => {
           }
           onPressEvent={() => ScreenManager.toggleScreen('SectorsList', {
             resource: resource,
-            field: 'sectors_ids',
+            field: 'scope_countries_codes',
           })}
           onDeleteEvent={(item: any) => {
-            const sectorsIds = [...formData?.sectors_ids || []];
-            const index = sectorsIds.findIndex((v) => v === item.id);
-            if (index !== -1) sectorsIds.splice(index, 1);
-            updateField('sectors_ids', sectorsIds.filter(Boolean));
+            const countriesIds = [...formData?.scope_countries_codes || []];
+            const index = countriesIds.findIndex((v) => v === item.id);
+            if (index !== -1) countriesIds.splice(index, 1);
+            updateField('scope_countries_codes', countriesIds.filter(Boolean));
           }}
         />
 
