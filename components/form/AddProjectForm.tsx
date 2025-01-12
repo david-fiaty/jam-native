@@ -35,20 +35,10 @@ const AddProjectForm = () => {
   };
 
   const submitForm = async () => {
+    setIsProcessing(true);
 
-    // Todo - Build submit form
-    /*
-    EntityManager.addProject(formData).then((success: boolean) => {
-      setIsProcessing(false);
-      //success === true
-      false
-        ? router.replace('/jams')
-        : ScreenManager.showMessage(
-            i18n.t('The project data is invalid. Please check and trya gain.')
-          );
-    });
 
-    */
+    setIsProcessing(false);
   };
 
   useEffect(() => {
@@ -70,6 +60,7 @@ const AddProjectForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
   
+  console.log(formData);
   return (
     <BoxView
       align="flex-start"
@@ -132,12 +123,9 @@ const AddProjectForm = () => {
         <DividerView />
 
         <ButtonView
-          label={i18n.t("Post")}
+          label={i18n.t("Submit")}
           isProcessing={isProcessing}
-          onPress={() => {
-            setIsProcessing(true);
-            submitForm();
-          }}
+          onPress={submitForm}
         />
 
         <DividerView />
