@@ -44,7 +44,7 @@ const CountriesList = () => {
       >
         <BoxView direction="row" align="center" justify="space-around">
           <IconView name="arrow" theme="clear" />
-          <TextView key={item?.id} style={styles.listSubItem}>
+          <TextView key={item?.id} style={styles.listItem}>
             {item?.name}
           </TextView>
           
@@ -90,24 +90,9 @@ const styles = StyleSheet.create({
   container: {
     width: '100%'
   },
-  listItemCollapsible: {
-    paddingHorizontal: Layout.space.base/2,
-    paddingVertical: Layout.space.base/1.2,
-  },
-  listItemDetails: {
-    gap: Layout.space.base,
-  },
-  listSubItem: {
+  listItem: {
     marginLeft: 0,
     paddingVertical: Layout.space.base/2.2,
-  },
-  itemHeader: {
-    backgroundColor: Colors.secondary,
-    padding: Layout.space.base,
-    borderRadius: Layout.radius.round,
-  },
-  itemHeaderOpened: {
-    backgroundColor: Colors.secondary,
   },
 });
 
