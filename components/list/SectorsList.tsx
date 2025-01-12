@@ -104,7 +104,7 @@ const SectorsList = () => {
       if (!sectorsData) setSectorsData(await EntityManager.getSectors());
       setIsLoaded(true);
     })();
-  });
+  }, [sectorsData]);
 
   if (!isLoaded) return <SpinnerView />;
 
