@@ -14,6 +14,7 @@ import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
 import AddItemButton from "../button/AddItemButton";
 import ProjectJamsList from "../list/ProjectJamsList";
+import TextView from "../view/TextView";
 
 const AddProjectForm = () => {
   const resource: string = 'project';
@@ -82,14 +83,14 @@ const AddProjectForm = () => {
       />
 
       <View style={Layout.formContainer}>
+        <TextView>{i18n.t("Name")}</TextView>
         <InputTextField
-          placeholder={i18n.t("Name")}
           value={formData?.title}
           onChangeText={(value: string) => updateField("name", value)}
         />
 
+        <TextView>{i18n.t("Description")}</TextView>
         <InputTextareaField
-          placeholder={i18n.t("Description")}
           value={formData?.caption}
           onChangeText={(value: string) => updateField("description", value)}
         />
