@@ -74,7 +74,6 @@ const SectorsField = ({ resource, field, label, onPressEvent, onDeleteEvent }: P
       }
       
       setSelectedSectors(getSelectedSectors());
-      
     })();
   }, [isLoaded]);
 
