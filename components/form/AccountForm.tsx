@@ -11,6 +11,7 @@ import SpinnerView from '../view/SpinnerView';
 import ButtonView from '../view/ButtonView';
 import DividerView from '../view/DividerView';
 import UserManager from '@/manager/UserManager';
+import DataManager from '@/manager/DataManager';
 
 const AccountForm = () => {
   const resource: string = 'account';
@@ -39,7 +40,7 @@ const AccountForm = () => {
     (async () => {
       if (!isLoaded) {
         let profileId: number = await UserManager.getProfileId();
-        let userData: any = await UserManager.getUserData();
+        let userData: any = DataManager.extract(['username', 'email', 'phone'], await UserManager.getUserData());
 
         setProfileId(profileId);
         dispatch(setFormData<any>({ 
@@ -47,6 +48,7 @@ const AccountForm = () => {
           key: null, 
           value: userData, 
         }));
+        
         setIsLoaded(true);
       } 
     })();
