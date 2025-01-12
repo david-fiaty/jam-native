@@ -73,6 +73,11 @@ class UserManager {
     return userNotifications || [];
   }
 
+  logout() {
+    Store.dispatch(setTokenData('{}'));
+    Store.dispatch(setIsLoggedIn(false));
+  }
+
   setLanguage(languageCode: string) {
     Store.dispatch(setLanguage(languageCode));
   }
