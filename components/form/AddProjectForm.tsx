@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
@@ -16,6 +16,11 @@ import AddItemButton from "../button/AddItemButton";
 import ProjectJamsList from "../list/ProjectJamsList";
 import TextView from "../view/TextView";
 import EntityManager from "@/manager/EntityManager";
+import SectorsField from "../field/SectorsField";
+import IconView from "../view/IconView";
+import CountryField from "../field/CountryField";
+import PrivacyStatusField from "../field/PrivacyStatusField";
+import DatePickerField from "../field/DatePickerField";
 
 const AddProjectForm = () => {
   const resource: string = 'project';
@@ -93,6 +98,67 @@ const AddProjectForm = () => {
           onChangeText={(value: string) => updateField("description", value)}
         />
 
+        <TextView>{i18n.t("Privacy status")}</TextView>
+        <PrivacyStatusField
+          value={formData?.privacy_status}
+          onChangeValue={(option: any) =>
+            updateField("privacy_status", option.value)
+          }
+        />
+
+        <TextView>{i18n.t('Countries')}</TextView>
+        <CountryField
+          value={formData?.scope_countries_codes}
+          onChangeValue={(option: any) =>
+            updateField('scope_countries_codes', option.value)
+          }
+        />
+
+        <TextView>{i18n.t('Start date')}</TextView>
+        <DatePickerField
+          value={'start value'}
+          onChangeValue={(value: any) =>
+            updateField('period', {
+              ...(formData?.period || {}),
+              ...{ start_datetime: value.toISOString() },
+            })
+          }
+        />
+
+        <TextView>{i18n.t('End date')}</TextView>
+        <DatePickerField
+          value={"end value"}
+          onChangeValue={(value: any) =>
+            updateField('period', {
+              ...(formData?.period || {}),
+              ...{ end_datetime: value.toISOString() },
+            })
+          }
+        />
+
+        <DividerView theme="secondary" />
+        <SectorsField
+          resource={resource}
+          field="sectors_ids"
+          label={
+            <>
+              <IconView name="plus" theme="secondary" radius="round" />
+              <TextView>{i18n.t('Add industries')}</TextView>
+            </>
+          }
+          onPressEvent={() => ScreenManager.toggleScreen('SectorsList', {
+            resource: resource,
+            field: 'sectors_ids',
+          })}
+          onDeleteEvent={(item: any) => {
+            const sectorsIds = [...formData?.sectors_ids || []];
+            const index = sectorsIds.findIndex((v) => v === item.id);
+            if (index !== -1) sectorsIds.splice(index, 1);
+            updateField('sectors_ids', sectorsIds.filter(Boolean));
+          }}
+        />
+
+        <DividerView theme="secondary" />
         { !formData?.jams_ids?.length && (
           <BoxView direction="column" align="center" justify="center">
             <AddItemButton

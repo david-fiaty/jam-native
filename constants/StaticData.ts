@@ -45,10 +45,6 @@ const StaticData = {
   ],
   profileTypes: [
     {
-      id: null,
-      label: i18n.t('Profile type'),
-    },
-    {
       id: 'personal',
       label: i18n.t('Personal'),
     },
@@ -101,6 +97,16 @@ const StaticData = {
       id: 'random',
       label: i18n.t('Random'),
       icon: 'infinite',
+    },
+  ],
+  privacyStatus: [
+    {
+      id: 'private',
+      label: i18n.t('Private'),
+    },
+    {
+      id: 'public',
+      label: i18n.t('Public'),
     },
   ],
 };
