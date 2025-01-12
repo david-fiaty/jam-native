@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
+import { useDispatch, useSelector } from "react-redux";
+import { setFormData } from "@/redux/slices/FormSlice";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
@@ -11,10 +13,22 @@ import DividerView from '../view/DividerView';
 import UserManager from '@/manager/UserManager';
 
 const AccountForm = () => {
+  const resource: string = 'account';
+  const dispatch = useDispatch();
   const router = useRouter();
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [formData, setFormData] = useState<any>({});
+  const [profileId, setProfileId] = useState<number>(0);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const formData = useSelector((state: any) => state.form[resource]);
+
+  const updateField = (key: string, value: any) => {
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: key, 
+      value: value, 
+      profile_id: profileId,
+    }));
+  };
 
   const submitForm = async () => {
     // Todo - Implement submit
@@ -24,11 +38,19 @@ const AccountForm = () => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setFormData(await UserManager.getUserData());
+        let profileId: number = await UserManager.getProfileId();
+        let userData: any = await UserManager.getUserData();
+
+        setProfileId(profileId);
+        dispatch(setFormData<any>({ 
+          resource: resource,
+          key: null, 
+          value: userData, 
+        }));
         setIsLoaded(true);
       } 
     })();
-  }, [isLoaded]);
+  }, [isLoaded, resource]);
 
   if (!isLoaded) return <SpinnerView />;
 
