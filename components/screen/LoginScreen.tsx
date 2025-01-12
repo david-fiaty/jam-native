@@ -35,16 +35,15 @@ const LoginScreen = () => {
   const submitForm = async () => {
     let data: any = getLoginData();
     let result: any = await UserManager.login(data);
-    let message: any = {
-      title: i18n.t('Profile login'),
-      content: i18n.t('You are connected to your account.'),
-    };
-
-    if (result?.error) message.content = result.error;
-    ScreenManager.showMessage(message);
-    setIsProcessing(false);
-
-    if (!result?.error) router.replace('/jams');
+    
+    if (result?.error) {
+      ScreenManager.showMessage({
+        title: i18n.t('Profile login'),
+        content: result.error,
+      });
+      setIsProcessing(false);
+      if (!result?.error) router.replace('/jams');
+    }
   }  
 
   return (
