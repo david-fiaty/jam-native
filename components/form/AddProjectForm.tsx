@@ -32,7 +32,7 @@ const AddProjectForm = () => {
   const profileId: any = activeScreen.params?.profileId; 
   const profileJams: any = activeScreen.params?.profileJams; 
 
-  const updateField = (key: string, value: any) => {
+  const updateField = (key: any, value: any) => {
     dispatch(setFormData<any>({ 
       resource: resource,
       key: key, 
@@ -48,7 +48,9 @@ const AddProjectForm = () => {
       content: i18n.t('The project was successfully created.'),
     };
 
-    if (result?.error) message.content = i18n.t(result.error);
+    if (result?.error) message.content = i18n.t(result.error)
+    else updateField(null, null)
+
     ScreenManager.showMessage(message);
     setIsProcessing(false);
   };
