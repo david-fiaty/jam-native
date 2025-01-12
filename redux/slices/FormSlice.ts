@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const FormSlice = createSlice({
   name: 'form',
   initialState: {
-    jam: {},
+    jam: {}, 
     profile: {},
     project: {},
     signup: {},
