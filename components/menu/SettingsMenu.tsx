@@ -36,7 +36,7 @@ const SettingsMenu = () => {
       label: i18n.t('Logout'),
       path: null,
       onPress: (row: any) => {
-        console.log('logoooout');
+        router.replace('/welcome');
       },
     },
   ];
