@@ -8,6 +8,7 @@ import ListItemToolbar from "./ListItemToolbar";
 import ListItemTitle from "./ListItemTitle";
 import ListItemDescription from "./ListItemDescription";
 import ListItemCollapsible from "./ListItemCollapsible";
+import TextView from "@/components/view/TextView";
 
 type Props = BaseProps & {
   row?: any,
@@ -17,12 +18,7 @@ type Props = BaseProps & {
 const ListItem = ({ row, sectorsData }: Props) => {
   return (
     <View style={styles.container}>
-      <ListItemHeader row={row} />
-      <ListItemImage row={row} />
-      <ListItemToolbar row={row} />
-      <ListItemTitle row={row} />
-      <ListItemDescription row={row} />
-      <ListItemCollapsible row={row} sectorsData={sectorsData} />
+      <TextView>NO DESIGN AVAILABLE FOR PROJECT DETAILS</TextView>
     </View>
   );
 };
@@ -33,6 +29,7 @@ const styles = StyleSheet.create({
     borderRadius: Layout.radius.round,
     marginBottom: Layout.space.base * 1.5,
     borderColor: Colors.primary,
+    padding: Layout.space.base,
   },
 });
 
