@@ -18,7 +18,6 @@ import MediaManager from "@/manager/MediaManager";
 import IconView from "../view/IconView";
 
 type Props = {
-  title?: any;
   selectedIds?: any;
   resource?: any;
   onAddButtonPress?: () => void;
@@ -26,7 +25,6 @@ type Props = {
 };
 
 const ProjectJamsList = ({
-  title,
   selectedIds,
   resource,
   onAddButtonPress,
@@ -126,10 +124,6 @@ const ProjectJamsList = ({
 
   return (
     <View style={styles.container}>
-      <BoxView direction="row" align="center" justify="space-between">
-        <TextView style={styles.title}>{title}</TextView>
-      </BoxView>
-
       {projectJams?.length > 0 && (
         <ListView
           data={projectJams}
