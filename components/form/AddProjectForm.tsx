@@ -142,6 +142,28 @@ const AddProjectForm = () => {
           label={
             <>
               <IconView name="plus" theme="secondary" radius="round" />
+              <TextView>{i18n.t('Add countries')}</TextView>
+            </>
+          }
+          onPressEvent={() => ScreenManager.toggleScreen('SectorsList', {
+            resource: resource,
+            field: 'sectors_ids',
+          })}
+          onDeleteEvent={(item: any) => {
+            const sectorsIds = [...formData?.sectors_ids || []];
+            const index = sectorsIds.findIndex((v) => v === item.id);
+            if (index !== -1) sectorsIds.splice(index, 1);
+            updateField('sectors_ids', sectorsIds.filter(Boolean));
+          }}
+        />
+
+        <DividerView theme="secondary" />
+        <SectorsField
+          resource={resource}
+          field="sectors_ids"
+          label={
+            <>
+              <IconView name="plus" theme="secondary" radius="round" />
               <TextView>{i18n.t('Add industries')}</TextView>
             </>
           }
