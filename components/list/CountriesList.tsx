@@ -26,8 +26,6 @@ const CountriesList = () => {
 
   const updateSelection = (item: any) => {
     let selection: any[] = [...formData?.[fieldName] || []];
-
-    console.log(selection);
     let index: number = selection.findIndex((v: any) => v == item.code);
 
     if (index === -1) selection.push(item.code)
@@ -36,7 +34,7 @@ const CountriesList = () => {
     dispatch(setFormData<any>({ 
       resource: resource,
       key: fieldName, 
-      value: selection.filter((o: any) => o),
+      value: selection.filter(Boolean),
     }));
   };
 

@@ -24,45 +24,24 @@ const CountriesField = ({ resource, field, label, onPressEvent, onDeleteEvent }:
   const fieldName: string = field;
 
   const getSelectedCountries = (countriesIds?: any) => {
-    let selectedIds: any[] = countriesIds || formData?.[fieldName] || [];
+    let selectedCodes: any[] = countriesIds || formData?.[fieldName] || [];
     let result: any[] = [];
 
     for (const item of countriesData) {
-      if (selectedIds.includes(item.id)) {
-        for (const subitem of item?.sub_sectors || []) {
-          if (selectedIds.includes(subitem.id)) {
-            result.push(subitem);
-          }
-        }
-      }
+      if (selectedCodes.includes(item.code)) result.push(item);
     }
 
     return result;
   };
 
   const deleteItem = (item: any) => {
-    let selectedIds: any[] = [...(formData?.[fieldName] || [])];
-    let deleteIndex: number = selectedIds.findIndex((id: any) => id == item.id);
+    let selectedCodes: any[] = [...(formData?.[fieldName] || [])];
+    let index: number = selectedCodes.findIndex((v: any) => v == item.code);
 
-    if (deleteIndex !== -1) delete selectedIds[deleteIndex];
-    selectedIds = selectedIds.filter(Boolean);
+    if (index !== -1) delete selectedCodes[index];
+    selectedCodes = selectedCodes.filter(Boolean);
 
-    let parentIds: any = countriesData.map((o: any) => o.id);
-    for (const id of selectedIds) {
-      if (parentIds.includes(id)) {
-        let parentItem: any = countriesData.find((o: any) => o.id == id);
-        let childIds: any = (parentItem?.sub_sectors || []).map((o: any) => o.id);
-        let deleteItem: boolean = !selectedIds.some((v: any) => childIds.includes(v));
-
-        if (deleteItem) {
-          let index = selectedIds.findIndex((v: any) => v == id);
-          delete selectedIds[index];
-          selectedIds = selectedIds.filter(Boolean);
-        }
-      }
-    }
-
-    setSelectedCountries(getSelectedCountries(selectedIds));
+    setSelectedCountries(getSelectedCountries(selectedCodes));
     if (onDeleteEvent) onDeleteEvent(item);
   }
 
