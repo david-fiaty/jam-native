@@ -40,7 +40,6 @@ const updateSelectionsForm = () => {
 
     selectedJamsList = selectedJamsList.filter((n: any) => n);
     setSelectedJams(selectedJamsList);
-
   };
 
   const addSelection = () => {    
