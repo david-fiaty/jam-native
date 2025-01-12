@@ -25,26 +25,30 @@ const CountriesList = () => {
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateSelection = (item: any) => {
-/*
+    let selection: any[] = [...formData?.[fieldName] || []];
+    let index: number = selection.findIndex((o: any) => o.code == item.code);
+
+    if (index === -1) selection.push(item.code)
+    else delete selection[index];
+
     dispatch(setFormData<any>({ 
       resource: resource,
       key: fieldName, 
       value: selection.filter((o: any) => o),
     }));
-  */
   };
 
   const renderItem = (item: any) => {
-    let isSelected: boolean = formData?.[fieldName]?.includes(item.id);
+    let isSelected: boolean = formData?.[fieldName]?.includes(item.code);
 
     return (
       <TouchableOpacity 
         key={item?.id}
         onPress={() => updateSelection(item)} 
       >
-        <BoxView direction="row" align="center" justify="space-around">
+        <BoxView direction="row" align="center" justify="flex-start" style={styles.listItem}>
           <IconView name="arrow" theme="clear" />
-          <TextView key={item?.id} style={styles.listItem}>
+          <TextView key={item?.id}>
             {item?.name}
           </TextView>
           
@@ -59,7 +63,7 @@ const CountriesList = () => {
       if (!countriesData) setCountriesData(await EntityManager.getCountries());
       setIsLoaded(true);
     })();
-  });
+  }, [countriesData]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -92,7 +96,7 @@ const styles = StyleSheet.create({
   },
   listItem: {
     marginLeft: 0,
-    paddingVertical: Layout.space.base/2.2,
+    paddingVertical: Layout.space.base,
   },
 });
 
