@@ -33,16 +33,19 @@ const LoginScreen = () => {
   };
 
   const submitForm = async () => {
+    setIsProcessing(true);
     let data: any = getLoginData();
     let result: any = await UserManager.login(data);
-    
+    setIsProcessing(false);
+
     if (result?.error) {
       ScreenManager.showMessage({
         title: i18n.t('Profile login'),
         content: result.error,
       });
-      setIsProcessing(false);
-      if (!result?.error) router.replace('/jams');
+    }
+    else {
+      router.replace('/jams');
     }
   }  
 
