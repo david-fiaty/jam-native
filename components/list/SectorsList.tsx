@@ -70,7 +70,7 @@ const SectorsList = () => {
             {subItem?.name}
           </TextView>
           
-          {isSelected && <IconView name="checkmark" theme="clear" size={14} /> }
+          {isSelected && <IconView name="checkmark" theme="clear" size={15} /> }
         </BoxView>
       </TouchableOpacity>
     );
