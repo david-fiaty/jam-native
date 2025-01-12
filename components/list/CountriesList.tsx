@@ -34,7 +34,7 @@ const CountriesList = () => {
     dispatch(setFormData<any>({ 
       resource: resource,
       key: fieldName, 
-      value: selection.filter((o: any) => o),
+      value: selection.filter(Boolean),
     }));
   };
 
