@@ -196,7 +196,7 @@ const AddProjectForm = () => {
               onAddButtonPress={() => ScreenManager.toggleScreen("SelectJamsForm", {
                 resource: resource,
                 profileId: formData?.id,
-                profileJams: [18, 20, 32, 33, 34], // Todo - Enable this
+                profileJams: profileJams,
               })}
               onDeleteButtonPress={(row: any) => {
                 let selectedIds: any = [...formData?.jams_ids];

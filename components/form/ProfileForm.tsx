@@ -219,6 +219,12 @@ const ProfileForm = () => {
           profileId={profileId}
           allButton={formData?.profile_projects?.length > 0}
           idArray={formData?.profile_projects}
+          onAddButtonPress={() => {
+            ScreenManager.toggleScreen("AddProjectForm", {
+              profileId: profileId,
+              profileJams: formData?.profile_jams || [],
+            });
+          }}
         />
 
         {formData?.saved_projects?.length > 0 && (
