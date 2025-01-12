@@ -84,7 +84,7 @@ const updateSelectionsForm = () => {
 
           {isSelected && (
             <View style={styles.checkItem}>
-              <IconView name="checkmark" theme="primary" size={8} />
+              <IconView name="checkmark" theme="primary" size={12} padding={4} />
             </View>
           )}
         </View>
