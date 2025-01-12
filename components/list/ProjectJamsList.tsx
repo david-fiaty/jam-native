@@ -22,7 +22,7 @@ type Props = {
   selectedIds?: any;
   resource?: any;
   onAddButtonPress?: () => void;
-  onDeleteButtonPress?: (row: any) => void;
+  onDeleteButtonPress: (row: any) => void;
 };
 
 const ProjectJamsList = ({
@@ -39,6 +39,7 @@ const ProjectJamsList = ({
   const activeScreen: any = ScreenManager.getActiveScreen();
   const [projectJams, setProjectJams] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
+  const imageSize = MediaManager.getThumbnailSize();
   const numColumns = 3;
 
   const findItemIndex = (row: any) => {
@@ -57,7 +58,6 @@ const ProjectJamsList = ({
   };
 
   const renderItem = (row: any) => {
-    let imageSize = MediaManager.getThumbnailSize();
     let isSelected: boolean = findItemIndex(row) !== -1;
     let output = null;
 
@@ -94,7 +94,7 @@ const ProjectJamsList = ({
               style={styles.deleteItem}
               onPress={() => onDeleteButtonPress(row)}
             >
-              <IconView name="delete" theme="primary" size={8} />
+              <IconView name="delete" theme="primary" size={12} padding={3.5} />
             </TouchableOpacity>
           )}
         </View>
