@@ -19,6 +19,7 @@ import EntityManager from "@/manager/EntityManager";
 import SectorsField from "../field/SectorsField";
 import IconView from "../view/IconView";
 import CountryField from "../field/CountryField";
+import PrivacyStatusField from "../field/PrivacyStatusField";
 
 const AddProjectForm = () => {
   const resource: string = 'project';
@@ -96,6 +97,22 @@ const AddProjectForm = () => {
           onChangeText={(value: string) => updateField("description", value)}
         />
 
+        <TextView>{i18n.t("Privacy status")}</TextView>
+        <PrivacyStatusField
+          value={formData?.privacy_status}
+          onChangeValue={(option: any) =>
+            updateField("privacy_status", option.value)
+          }
+        />
+
+        <TextView>{i18n.t('Countries')}</TextView>
+        <CountryField
+          value={formData?.scope_countries_codes}
+          onChangeValue={(option: any) =>
+            updateField('scope_countries_codes', option.value)
+          }
+        />
+
         <DividerView theme="secondary" />
         <SectorsField
           resource={resource}
@@ -117,14 +134,6 @@ const AddProjectForm = () => {
             updateField('sectors_ids', sectorsIds.filter(Boolean));
           }}
         />
-
-      <TextView>{i18n.t('Countries')}</TextView>
-      <CountryField
-        value={formData?.scope_countries_codes}
-        onChangeValue={(option: any) =>
-          updateField('scope_countries_codes', option.value)
-        }
-      />
 
         <DividerView theme="secondary" />
         { !formData?.jams_ids?.length && (
