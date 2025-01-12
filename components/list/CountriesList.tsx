@@ -47,7 +47,7 @@ const CountriesList = () => {
         onPress={() => updateSelection(item)} 
       >
         <BoxView direction="row" align="center" justify="flex-start" style={styles.listItem}>
-          <IconView name="arrow" theme="clear" />
+          <IconView name="arrow" theme="clear" size={10} />
           <TextView key={item?.id}>
             {item?.name}
           </TextView>
