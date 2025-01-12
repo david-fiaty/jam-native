@@ -35,7 +35,7 @@ const ProjectsList = ({idArray, showSpinner}: Props) => {
         initialNumToRender={projectsData?.length}
         contentContainerStyle={Layout.listContainer}
         renderItem={(row: any) => <ListItem row={row} sectorsData={sectorsData} />}
-        keyExtractor={(item: any, index: number) => index.toString()}
+        keyExtractor={(item: any) => item.id.toString()}
       />
     </BoxView>
   );
