@@ -15,6 +15,7 @@ import InputTextareaField from "../field/InputTextareaField";
 import AddItemButton from "../button/AddItemButton";
 import ProjectJamsList from "../list/ProjectJamsList";
 import TextView from "../view/TextView";
+import EntityManager from "@/manager/EntityManager";
 
 const AddProjectForm = () => {
   const resource: string = 'project';
@@ -35,20 +36,16 @@ const AddProjectForm = () => {
   };
 
   const submitForm = async () => {
+    setIsProcessing(true);
+    let result: any = await EntityManager.addProject(formData);
+    let message: any = {
+      title: i18n.t('Create project'),
+      content: i18n.t('The project was successfully created.'),
+    };
 
-    // Todo - Build submit form
-    /*
-    EntityManager.addProject(formData).then((success: boolean) => {
-      setIsProcessing(false);
-      //success === true
-      false
-        ? router.replace('/jams')
-        : ScreenManager.showMessage(
-            i18n.t('The project data is invalid. Please check and trya gain.')
-          );
-    });
-
-    */
+    if (result?.error) message.content = i18n.t(result.error);
+    ScreenManager.showMessage(message);
+    setIsProcessing(false);
   };
 
   useEffect(() => {
@@ -70,6 +67,7 @@ const AddProjectForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
   
+  console.log(formData);
   return (
     <BoxView
       align="flex-start"
@@ -132,12 +130,9 @@ const AddProjectForm = () => {
         <DividerView />
 
         <ButtonView
-          label={i18n.t("Post")}
+          label={i18n.t("Submit")}
           isProcessing={isProcessing}
-          onPress={() => {
-            setIsProcessing(true);
-            submitForm();
-          }}
+          onPress={submitForm}
         />
 
         <DividerView />
