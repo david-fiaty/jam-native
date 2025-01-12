@@ -76,6 +76,8 @@ class UserManager {
   logout() {
     Store.dispatch(setTokenData('{}'));
     Store.dispatch(setIsLoggedIn(false));
+
+    // Todo - Also reset active screen to avoid redirect on relogin
   }
 
   setLanguage(languageCode: string) {
