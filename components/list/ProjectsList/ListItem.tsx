@@ -18,7 +18,7 @@ type Props = BaseProps & {
 const ListItem = ({ row, sectorsData }: Props) => {
   return (
     <View style={styles.container}>
-      <TextView>NO DESIGN AVAILABLE</TextView>
+      <TextView>NO DESIGN AVAILABLE FOR PROJECT DETAILS</TextView>
     </View>
   );
 };
