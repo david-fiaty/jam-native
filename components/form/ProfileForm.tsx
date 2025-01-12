@@ -219,6 +219,13 @@ const ProfileForm = () => {
           profileId={profileId}
           allButton={formData?.profile_projects?.length > 0}
           idArray={formData?.profile_projects}
+          onAddButtonPress={() => {
+            ScreenManager.toggleScreen("AddProjectForm", {
+              profileId: profileId,
+              profileJams: [18, 20, 32, 33, 34],
+              //profileJams: formData?.profile_jams, // Todo - Enable this
+            });
+          }}
         />
 
         {formData?.saved_projects?.length > 0 && (
@@ -228,11 +235,6 @@ const ProfileForm = () => {
               title={i18n.t("Saved Projects")} 
               allButton={formData?.saved_projects?.length > 0}
               idArray={formData?.saved_projects}
-              onAddButtonPress={() => ScreenManager.toggleScreen("AddProjectForm", {
-                profileId: profileId,
-                profileJams: [18, 20, 32, 33, 34],
-                //profileJams: formData?.profile_jams, // Todo - Enable this
-              })}
             />
           </>
         )}
