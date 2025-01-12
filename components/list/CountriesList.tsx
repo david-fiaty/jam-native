@@ -17,57 +17,35 @@ import CollapsibleView from "../view/CollapsibleView";
 
 const CountriesList = () => {
   const dispatch = useDispatch();
-  const [sectorsData, setSectorsData] = useState<any>(null);
+  const [countriesData, setCountriesData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
   const resource: string = activeScreen.params.resource;
   const fieldName: string = activeScreen.params.field;
   const formData: any = useSelector((state: any) => state.form[resource]);
 
-  const updateSelection = (item: any, subItem: any) => {
-    let selection: any[] = [...formData?.[fieldName] || []];
-    let itemIndex: number = selection.findIndex((id: any) => id == item.id);
-    let subItemIndex: number = selection.findIndex((id: any) => id == subItem.id);
-
-    // Update ID pairs
-    if (itemIndex === -1 && subItemIndex === -1) {
-      selection.push(item.id, subItem.id);
-    }
-    else if (itemIndex !== -1 && subItemIndex === -1) {
-      selection.push(subItem.id);
-    }
-    else if (itemIndex !== -1 && subItemIndex !== -1) {
-      delete selection[subItemIndex];
-    }
-
-    // Remove parents without sub selection
-    let itemChildIds: any = item?.sub_sectors?.map((o: any) => o?.id);
-    let deleteItem: boolean = !selection.some((id: any) => itemChildIds.includes(id));
-    if (deleteItem) {
-      let index: number = selection.findIndex((id: any) => id == item.id);
-      delete selection[index];
-    }
-
-    // Update selection state
+  const updateSelection = (item: any) => {
+/*
     dispatch(setFormData<any>({ 
       resource: resource,
       key: fieldName, 
       value: selection.filter((o: any) => o),
     }));
+  */
   };
 
-  const renderSubItem = (item: any, subItem: any) => {
-    let isSelected: boolean = formData?.[fieldName]?.includes(subItem.id);
+  const renderItem = (item: any) => {
+    let isSelected: boolean = formData?.[fieldName]?.includes(item.id);
 
     return (
       <TouchableOpacity 
-        key={subItem?.id}
-        onPress={() => updateSelection(item, subItem)} 
+        key={item?.id}
+        onPress={() => updateSelection(item)} 
       >
         <BoxView direction="row" align="center" justify="space-around">
           <IconView name="arrow" theme="clear" />
-          <TextView key={subItem?.id} style={styles.listSubItem}>
-            {subItem?.name}
+          <TextView key={item?.id} style={styles.listSubItem}>
+            {item?.name}
           </TextView>
           
           {isSelected && <IconView name="checkmark" theme="clear" size={14} /> }
@@ -76,32 +54,9 @@ const CountriesList = () => {
     );
   };
 
-  const renderItem = (row: any) => {
-    return (
-      <BoxView style={styles.listItemCollapsible}>
-        <CollapsibleView
-          label={<TextView>{row?.item?.name}</TextView>}
-          openedLabel={<TextView>{row?.item?.name}</TextView>}
-          headerStyle={styles.itemHeader}
-          content={
-            <BoxView
-              direction="column"
-              align="flex-start"
-              style={styles.listItemDetails}
-            >
-              {row?.item?.sub_sectors?.length > 0 &&
-                row?.item?.sub_sectors?.map((subItem: any) => renderSubItem(row?.item, subItem))
-              }
-            </BoxView>
-          }
-        />
-      </BoxView>
-    );
-  };
-
   useEffect(() => {
     (async () => {
-      if (!sectorsData) setSectorsData(await EntityManager.getSectors());
+      if (!countriesData) setCountriesData(await EntityManager.getCountries());
       setIsLoaded(true);
     })();
   });
@@ -120,10 +75,10 @@ const CountriesList = () => {
       />
 
       <View style={styles.container}>
-        {sectorsData?.length > 0 && (
+        {countriesData?.length > 0 && (
           <ListView
-            data={sectorsData}
-            renderItem={(row: any) => renderItem(row)}
+            data={countriesData}
+            renderItem={(row: any) => renderItem(row.item)}
           />
         )}
       </View>
