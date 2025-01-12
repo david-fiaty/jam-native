@@ -65,7 +65,7 @@ const SectorsList = () => {
         onPress={() => updateSelection(item, subItem)} 
       >
         <BoxView direction="row" align="center" justify="space-around">
-          <IconView name="arrow" theme="clear" />
+          <IconView name="arrow" theme="clear" size={10} />
           <TextView key={subItem?.id} style={styles.listSubItem}>
             {subItem?.name}
           </TextView>
