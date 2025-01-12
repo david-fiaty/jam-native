@@ -33,16 +33,15 @@ const SignupScreen = () => {
 
   const submitForm = async () => {
     let result: any = await UserManager.register(signupData);
-    let message: any = {
-      title: i18n.t('Profile registration'),
-      content: i18n.t('You are connected to your account.'),
-    };
 
-    if (result?.error) message.content = result.error;
-    ScreenManager.showMessage(message);
-    setIsProcessing(false);
-
-    if (!result?.error) router.replace('/jams');
+    if (result?.error) {
+      ScreenManager.showMessage({
+        title: i18n.t('Profile registration'),
+        content: result.error,
+      });
+      setIsProcessing(false);
+      if (!result?.error) router.replace('/jams');
+    }
   }  
 
   return (
