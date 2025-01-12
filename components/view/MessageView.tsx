@@ -9,7 +9,7 @@ import DeviceManager from '@/manager/DeviceManager';
 import IconView from './IconView';
 
 type Props = BaseProps & {
-  title: string;
+  title?: string;
 };
 
 const statusBarHeight: any = DeviceManager.getStatusBarSize().height;
