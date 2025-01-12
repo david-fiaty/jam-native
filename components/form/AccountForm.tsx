@@ -12,7 +12,6 @@ import ButtonView from '../view/ButtonView';
 import DividerView from '../view/DividerView';
 import UserManager from '@/manager/UserManager';
 import DataManager from '@/manager/DataManager';
-import FormManager from '@/manager/FormManager';
 
 const AccountForm = () => {
   const resource: string = 'account';
@@ -44,7 +43,12 @@ const AccountForm = () => {
         let userData: any = DataManager.extract(['username', 'email', 'phone'], await UserManager.getUserData());
 
         setProfileId(profileId);
-        FormManager.setData(resource, null, userData);    
+        dispatch(setFormData<any>({ 
+          resource: resource,
+          key: null, 
+          value: userData, 
+        }));
+        
         setIsLoaded(true);
       } 
     })();
