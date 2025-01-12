@@ -28,6 +28,10 @@ const SettingsMenu = () => {
       label: i18n.t('Language'),
       path: '/language',
     },
+    {
+      label: i18n.t('Logout'),
+      path: '/logout',
+    },
   ];
   
   const renderItem = (row: any) => (
