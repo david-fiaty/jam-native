@@ -49,7 +49,7 @@ class ScreenManager {
     }));
   }
 
-  showMessage(payload: any): void {
+  showMessage(payload: any, duration?: number): void {
     if (this.messageTimeout) clearTimeout(this.messageTimeout);
     
     Store.dispatch(setMessage({}));
@@ -57,7 +57,7 @@ class ScreenManager {
 
     this.messageTimeout = setTimeout(() => {
       Store.dispatch(setMessage({}));
-    }, Config.messageDisplayDuration);
+    }, duration || Config.messageDisplayDuration);
   }
 };
 
