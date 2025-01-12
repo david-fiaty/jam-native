@@ -95,8 +95,6 @@ const AddProjectForm = () => {
           onChangeText={(value: string) => updateField("description", value)}
         />
 
-        <DividerView />
-
         { !formData?.jams_ids?.length && (
           <BoxView direction="column" align="center" justify="center">
             <AddItemButton
@@ -112,9 +110,9 @@ const AddProjectForm = () => {
 
         { formData?.jams_ids?.length > 0 && (
           <BoxView direction="column" align="flex-start" justify="flex-start">
+            <TextView>{i18n.t('Selected Jams')}</TextView>
             <ProjectJamsList 
               resource={resource}
-              title={i18n.t("Selected Jams")}
               selectedIds={formData?.jams_ids}
               onAddButtonPress={() => ScreenManager.toggleScreen("SelectJamsForm", {
                 resource: resource,
