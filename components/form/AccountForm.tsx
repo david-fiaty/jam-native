@@ -31,8 +31,12 @@ const AccountForm = () => {
     }));
   };
 
-  const submitForm = async () => {
-    // Todo - Implement submit
+  const submitForm = () => {
+    setIsProcessing(true);
+
+    setTimeout(() => {
+      setIsProcessing(false);
+    }, 3000);
     
   }  
 
@@ -80,10 +84,7 @@ const AccountForm = () => {
     <ButtonView 
       label={i18n.t('Save')} 
       isProcessing={isProcessing} 
-      onPress={() => {
-        setIsProcessing(true);
-        submitForm();
-      }} 
+      onPress={submitForm} 
     />
 
     </BoxView>
