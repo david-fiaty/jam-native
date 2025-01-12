@@ -7,35 +7,42 @@ import BackButton from '../button/BackButton';
 import i18n from '@/translation/i18n';
 import ScreenManager from '@/manager/ScreenManager';
 
-type ItemProps = {
-  label: string,
-  path: string,
-};
-
 const SettingsMenu = () => {
   const router = useRouter();
   
-  const data: ItemProps[] = [
+  const data: any[] = [
     {
       label: i18n.t('Account information'),
       path: '/account',
+      onPress: (row: any) => {
+        router.push(row.item.path);
+      },
     },
     {
       label: i18n.t('Change password'),
       path: '/password',
+      onPress: (row: any) => {
+        router.push(row.item.path);
+      },
     },
     {
       label: i18n.t('Language'),
       path: '/language',
+      onPress: (row: any) => {
+        router.push(row.item.path);
+      },
     },
     {
       label: i18n.t('Logout'),
-      path: '/logout',
+      path: null,
+      onPress: (row: any) => {
+        console.log('logoooout');
+      },
     },
   ];
   
   const renderItem = (row: any) => (
-    <TouchableOpacity onPress={() => router.push(row.item.path)}>
+    <TouchableOpacity onPress={() => row.item.onPress(row)}>
       <View style={Layout.menuItem}>
         <TextView>{row.item.label}</TextView>
       </View>
