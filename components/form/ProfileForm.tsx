@@ -60,7 +60,7 @@ const ProfileForm = () => {
         dispatch(setFormData<any>({ 
           resource: resource,
           key: null, 
-          value: { ...(await UserManager.getProfileData()), ...formData }, 
+          value: await UserManager.getProfileData(), 
         }));
         setIsLoaded(true);
       }
