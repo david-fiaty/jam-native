@@ -20,6 +20,7 @@ import SectorsField from "../field/SectorsField";
 import IconView from "../view/IconView";
 import CountryField from "../field/CountryField";
 import PrivacyStatusField from "../field/PrivacyStatusField";
+import DatePickerField from "../field/DatePickerField";
 
 const AddProjectForm = () => {
   const resource: string = 'project';
@@ -110,6 +111,28 @@ const AddProjectForm = () => {
           value={formData?.scope_countries_codes}
           onChangeValue={(option: any) =>
             updateField('scope_countries_codes', option.value)
+          }
+        />
+
+        <TextView>{i18n.t('Start date')}</TextView>
+        <DatePickerField
+          value={'start value'}
+          onChangeValue={(value: any) =>
+            updateField('period', {
+              ...(formData?.period || {}),
+              ...{ start_datetime: value.toISOString() },
+            })
+          }
+        />
+
+        <TextView>{i18n.t('End date')}</TextView>
+        <DatePickerField
+          value={"end value"}
+          onChangeValue={(value: any) =>
+            updateField('period', {
+              ...(formData?.period || {}),
+              ...{ end_datetime: value.toISOString() },
+            })
           }
         />
 
