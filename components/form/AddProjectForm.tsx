@@ -18,6 +18,7 @@ import TextView from "../view/TextView";
 import EntityManager from "@/manager/EntityManager";
 import SectorsField from "../field/SectorsField";
 import IconView from "../view/IconView";
+import CountryField from "../field/CountryField";
 
 const AddProjectForm = () => {
   const resource: string = 'project';
@@ -116,6 +117,14 @@ const AddProjectForm = () => {
             updateField('sectors_ids', sectorsIds.filter(Boolean));
           }}
         />
+
+      <TextView>{i18n.t('Countries')}</TextView>
+      <CountryField
+        value={formData?.scope_countries_codes}
+        onChangeValue={(option: any) =>
+          updateField('scope_countries_codes', option.value)
+        }
+      />
 
         <DividerView theme="secondary" />
         { !formData?.jams_ids?.length && (
