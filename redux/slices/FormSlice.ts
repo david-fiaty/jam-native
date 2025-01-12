@@ -3,10 +3,11 @@ import { createSlice } from '@reduxjs/toolkit';
 const FormSlice = createSlice({
   name: 'form',
   initialState: {
-    jam: {},
+    jam: {}, 
     profile: {},
     project: {},
     signup: {},
+    account: {},
   },
   reducers: {
     setFormData: (state: any, action: any) => {
