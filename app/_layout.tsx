@@ -49,6 +49,15 @@ const RootLayout = () => {
       },
     },
     {
+      name: 'welcome',
+      options: {
+        ...headerHiddenOptions,
+        ...{
+          animation: 'default',
+        },
+      },
+    },
+    {
       name: 'login',
       options: {
         ...headerHiddenOptions,
