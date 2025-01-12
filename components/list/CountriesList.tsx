@@ -26,7 +26,9 @@ const CountriesList = () => {
 
   const updateSelection = (item: any) => {
     let selection: any[] = [...formData?.[fieldName] || []];
-    let index: number = selection.findIndex((o: any) => o.code == item.code);
+
+    console.log(selection);
+    let index: number = selection.findIndex((v: any) => v == item.code);
 
     if (index === -1) selection.push(item.code)
     else delete selection[index];
