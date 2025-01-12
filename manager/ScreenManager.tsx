@@ -2,10 +2,10 @@ import { Layout } from '@/constants/Layout';
 import { setMessage } from '@/redux/slices/MessageSlice';
 import { setActiveScreen } from '@/redux/slices/ScreenSlice';
 import { toggleSearchField } from '@/redux/slices/SearchSlice';
+import { Config } from '@/constants/Config';
 import Store from '@/redux/Store';
 import DeviceManager from './DeviceManager';
 import SearchManager from './SearchManager';
-import { Config } from '@/constants/Config';
 
 class ScreenManager {
   messageTimeout?: any;
@@ -49,7 +49,7 @@ class ScreenManager {
     }));
   }
 
-  showMessage(payload: any): void {
+  showMessage(payload: any, duration?: number): void {
     if (this.messageTimeout) clearTimeout(this.messageTimeout);
     
     Store.dispatch(setMessage({}));
@@ -57,7 +57,7 @@ class ScreenManager {
 
     this.messageTimeout = setTimeout(() => {
       Store.dispatch(setMessage({}));
-    }, Config.messageDisplayDuration);
+    }, duration || Config.messageDisplayDuration);
   }
 };
 

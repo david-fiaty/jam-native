@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
@@ -14,6 +14,13 @@ import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
 import AddItemButton from "../button/AddItemButton";
 import ProjectJamsList from "../list/ProjectJamsList";
+import TextView from "../view/TextView";
+import EntityManager from "@/manager/EntityManager";
+import SectorsField from "../field/SectorsField";
+import IconView from "../view/IconView";
+import CountryField from "../field/CountryField";
+import PrivacyStatusField from "../field/PrivacyStatusField";
+import DatePickerField from "../field/DatePickerField";
 
 const AddProjectForm = () => {
   const resource: string = 'project';
@@ -34,18 +41,16 @@ const AddProjectForm = () => {
   };
 
   const submitForm = async () => {
-    /*
-    EntityManager.addProject(formData).then((success: boolean) => {
-      setIsProcessing(false);
-      //success === true
-      false
-        ? router.replace('/jams')
-        : ScreenManager.showMessage(
-            i18n.t('The project data is invalid. Please check and trya gain.')
-          );
-    });
+    setIsProcessing(true);
+    let result: any = await EntityManager.addProject(formData);
+    let message: any = {
+      title: i18n.t('Create project'),
+      content: i18n.t('The project was successfully created.'),
+    };
 
-    */
+    if (result?.error) message.content = i18n.t(result.error);
+    ScreenManager.showMessage(message);
+    setIsProcessing(false);
   };
 
   useEffect(() => {
@@ -67,6 +72,7 @@ const AddProjectForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
   
+  console.log(formData);
   return (
     <BoxView
       align="flex-start"
@@ -80,20 +86,79 @@ const AddProjectForm = () => {
       />
 
       <View style={Layout.formContainer}>
+        <TextView>{i18n.t("Name")}</TextView>
         <InputTextField
-          placeholder={i18n.t("Name")}
           value={formData?.title}
           onChangeText={(value: string) => updateField("name", value)}
         />
 
+        <TextView>{i18n.t("Description")}</TextView>
         <InputTextareaField
-          placeholder={i18n.t("Description")}
           value={formData?.caption}
           onChangeText={(value: string) => updateField("description", value)}
         />
 
-        <DividerView />
+        <TextView>{i18n.t("Privacy status")}</TextView>
+        <PrivacyStatusField
+          value={formData?.privacy_status}
+          onChangeValue={(option: any) =>
+            updateField("privacy_status", option.value)
+          }
+        />
 
+        <TextView>{i18n.t('Countries')}</TextView>
+        <CountryField
+          value={formData?.scope_countries_codes}
+          onChangeValue={(option: any) =>
+            updateField('scope_countries_codes', option.value)
+          }
+        />
+
+        <TextView>{i18n.t('Start date')}</TextView>
+        <DatePickerField
+          value={'start value'}
+          onChangeValue={(value: any) =>
+            updateField('period', {
+              ...(formData?.period || {}),
+              ...{ start_datetime: value.toISOString() },
+            })
+          }
+        />
+
+        <TextView>{i18n.t('End date')}</TextView>
+        <DatePickerField
+          value={"end value"}
+          onChangeValue={(value: any) =>
+            updateField('period', {
+              ...(formData?.period || {}),
+              ...{ end_datetime: value.toISOString() },
+            })
+          }
+        />
+
+        <DividerView theme="secondary" />
+        <SectorsField
+          resource={resource}
+          field="sectors_ids"
+          label={
+            <>
+              <IconView name="plus" theme="secondary" radius="round" />
+              <TextView>{i18n.t('Add industries')}</TextView>
+            </>
+          }
+          onPressEvent={() => ScreenManager.toggleScreen('SectorsList', {
+            resource: resource,
+            field: 'sectors_ids',
+          })}
+          onDeleteEvent={(item: any) => {
+            const sectorsIds = [...formData?.sectors_ids || []];
+            const index = sectorsIds.findIndex((v) => v === item.id);
+            if (index !== -1) sectorsIds.splice(index, 1);
+            updateField('sectors_ids', sectorsIds.filter(Boolean));
+          }}
+        />
+
+        <DividerView theme="secondary" />
         { !formData?.jams_ids?.length && (
           <BoxView direction="column" align="center" justify="center">
             <AddItemButton
@@ -109,9 +174,9 @@ const AddProjectForm = () => {
 
         { formData?.jams_ids?.length > 0 && (
           <BoxView direction="column" align="flex-start" justify="flex-start">
+            <TextView>{i18n.t('Selected Jams')}</TextView>
             <ProjectJamsList 
               resource={resource}
-              title={i18n.t("Selected Jams")}
               selectedIds={formData?.jams_ids}
               onAddButtonPress={() => ScreenManager.toggleScreen("SelectJamsForm", {
                 resource: resource,
@@ -131,12 +196,9 @@ const AddProjectForm = () => {
         <DividerView />
 
         <ButtonView
-          label={i18n.t("Post")}
+          label={i18n.t("Submit")}
           isProcessing={isProcessing}
-          onPress={() => {
-            setIsProcessing(true);
-            submitForm();
-          }}
+          onPress={submitForm}
         />
 
         <DividerView />

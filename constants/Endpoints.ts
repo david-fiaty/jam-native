@@ -104,6 +104,11 @@ const Endpoints = {
     cacheable: false,
     dataKey: null,
   },
+  addProject: {
+    path: '/projects/',
+    cacheable: false,
+    dataKey: null,
+  },
 };
 
 export default Endpoints;

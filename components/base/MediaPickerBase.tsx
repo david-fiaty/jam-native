@@ -7,6 +7,7 @@ import ImageView from '../view/ImageView';
 import TextView from '../view/TextView';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
+import MediaManager from '@/manager/MediaManager';
 
 type Props = BaseProps & {
   label?: JSX.Element, 
@@ -19,6 +20,7 @@ type Props = BaseProps & {
 const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
+  const imageSize: any = MediaManager.getThumbnailSize();
 
   const deleteMedia = (data: any) => {
     let mediaList = [...selectedMedia];  
@@ -53,8 +55,8 @@ const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Pr
       >
         <ImageView 
           uri={data.uri} 
-          width={80} 
-          height={80} 
+          width={imageSize.width} 
+          height={imageSize.height} 
           resizeMode="cover" 
           style={imageStyle}
         />
@@ -64,7 +66,7 @@ const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Pr
             style={styles.deleteMedia}
             onPress={() => deleteMedia(data)}
           >
-            <IconView name="delete" theme="primary" size={8} />
+            <IconView name="delete" theme="primary" size={12} padding={3.5} />
           </TouchableOpacity>
         } 
       </TouchableOpacity>
