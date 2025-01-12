@@ -72,7 +72,6 @@ const AddProjectForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
   
-  console.log(formData);
   return (
     <BoxView
       align="flex-start"
