@@ -25,7 +25,7 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
         justify="flex-start"
         style={styles.detail}
       >
-        <IconView name="arrow" size={14} theme="transparent" />
+        <IconView name="arrow" size={12} theme="transparent" />
         <TextView>
           {i18n.t("Location")}:{" "}
           {StaticData.locationTypes.find(
@@ -44,7 +44,7 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
         justify="flex-start"
         style={styles.detail}
       >
-        <IconView name="arrow" size={14} theme="transparent" />
+        <IconView name="arrow" size={12} theme="transparent" />
         <TextView>
           {i18n.t("Start")}:{" "}
           {moment(row?.item?.period?.start_datetime).format(
@@ -63,7 +63,7 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
         justify="flex-start"
         style={styles.detail}
       >
-        <IconView name="arrow" size={14} theme="transparent" />
+        <IconView name="arrow" size={12} theme="transparent" />
         <TextView>
           {i18n.t("End")}:{" "}
           {moment(row?.item?.period?.end_datetime).format(
@@ -82,7 +82,7 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
         justify="flex-start"
         style={styles.detail}
       >
-        <IconView name="arrow" size={14} theme="transparent" />
+        <IconView name="arrow" size={12} theme="transparent" />
         <TextView>
           {i18n.t("Industry")}:{" "}
           {sectorsData?.find((o: any) => o.id == row?.item?.sectors?.[0])
@@ -100,7 +100,7 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
         justify="flex-start"
         style={styles.detail}
       >
-        <IconView name="arrow" size={14} theme="transparent" />
+        <IconView name="arrow" size={12} theme="transparent" />
         <TextView>
           {i18n.t("Sector")}:{" "}
           {row?.item?.sectors?.[0]?.name || i18n.t("Unavailable")}

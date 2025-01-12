@@ -18,7 +18,6 @@ import TextView from "../view/TextView";
 import EntityManager from "@/manager/EntityManager";
 import SectorsField from "../field/SectorsField";
 import IconView from "../view/IconView";
-import CountryField from "../field/CountryField";
 import PrivacyStatusField from "../field/PrivacyStatusField";
 import DatePickerField from "../field/DatePickerField";
 import CountriesField from "../field/CountriesField";
@@ -106,14 +105,6 @@ const AddProjectForm = () => {
           }
         />
 
-        <TextView>{i18n.t('Countries')}</TextView>
-        <CountryField
-          value={formData?.scope_countries_codes}
-          onChangeValue={(option: any) =>
-            updateField('scope_countries_codes', option.value)
-          }
-        />
-
         <TextView>{i18n.t('Start date')}</TextView>
         <DatePickerField
           value={'start value'}
@@ -151,10 +142,10 @@ const AddProjectForm = () => {
             field: 'scope_countries_codes',
           })}
           onDeleteEvent={(item: any) => {
-            const countriesIds = [...formData?.scope_countries_codes || []];
-            const index = countriesIds.findIndex((v) => v === item.id);
-            if (index !== -1) countriesIds.splice(index, 1);
-            updateField('scope_countries_codes', countriesIds.filter(Boolean));
+            const countriesCodes = [...formData?.scope_countries_codes || []];
+            const index = countriesCodes.findIndex((v) => v === item.code);
+            if (index !== -1) countriesCodes.splice(index, 1);
+            updateField('scope_countries_codes', countriesCodes.filter(Boolean));
           }}
         />
 

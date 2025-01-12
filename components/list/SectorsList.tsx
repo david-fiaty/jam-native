@@ -65,12 +65,12 @@ const SectorsList = () => {
         onPress={() => updateSelection(item, subItem)} 
       >
         <BoxView direction="row" align="center" justify="space-around">
-          <IconView name="arrow" theme="clear" />
+          <IconView name="arrow" theme="clear" size={10} />
           <TextView key={subItem?.id} style={styles.listSubItem}>
             {subItem?.name}
           </TextView>
           
-          {isSelected && <IconView name="checkmark" theme="clear" size={14} /> }
+          {isSelected && <IconView name="checkmark" theme="clear" size={15} /> }
         </BoxView>
       </TouchableOpacity>
     );
@@ -104,7 +104,7 @@ const SectorsList = () => {
       if (!sectorsData) setSectorsData(await EntityManager.getSectors());
       setIsLoaded(true);
     })();
-  });
+  }, [sectorsData]);
 
   if (!isLoaded) return <SpinnerView />;
 

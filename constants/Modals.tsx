@@ -91,6 +91,13 @@ export const Modals = [
     params: {},
   },
   {
+    name: 'CountriesList', 
+    effect: 'slide',
+    headerNavigation: true,
+    footerNavigation: true,
+    params: {},
+  },
+  {
     name: 'HostsList', 
     effect: 'slide',
     headerNavigation: true,
