@@ -21,6 +21,7 @@ import IconView from "../view/IconView";
 import CountryField from "../field/CountryField";
 import PrivacyStatusField from "../field/PrivacyStatusField";
 import DatePickerField from "../field/DatePickerField";
+import CountriesField from "../field/CountriesField";
 
 const AddProjectForm = () => {
   const resource: string = 'project';
@@ -72,7 +73,6 @@ const AddProjectForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
   
-  console.log(formData);
   return (
     <BoxView
       align="flex-start"
@@ -134,6 +134,28 @@ const AddProjectForm = () => {
               ...{ end_datetime: value.toISOString() },
             })
           }
+        />
+
+        <DividerView theme="secondary" />
+        <CountriesField
+          resource={resource}
+          field="scope_countries_codes"
+          label={
+            <>
+              <IconView name="plus" theme="secondary" radius="round" />
+              <TextView>{i18n.t('Add countries')}</TextView>
+            </>
+          }
+          onPressEvent={() => ScreenManager.toggleScreen('CountriesList', {
+            resource: resource,
+            field: 'scope_countries_codes',
+          })}
+          onDeleteEvent={(item: any) => {
+            const countriesIds = [...formData?.scope_countries_codes || []];
+            const index = countriesIds.findIndex((v) => v === item.id);
+            if (index !== -1) countriesIds.splice(index, 1);
+            updateField('scope_countries_codes', countriesIds.filter(Boolean));
+          }}
         />
 
         <DividerView theme="secondary" />

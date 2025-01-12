@@ -16,18 +16,18 @@ type Props = BaseProps & {
   onDeleteEvent: (item: any) => void;
 };
 
-const SectorsField = ({ resource, field, label, onPressEvent, onDeleteEvent }: Props) => {
+const CountriesField = ({ resource, field, label, onPressEvent, onDeleteEvent }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [sectorsData, setSectorsData] = useState<any>([]);
-  const [selectedSectors, setSelectedSectors] = useState<any>([]);
+  const [countriesData, setCountriesData] = useState<any>([]);
+  const [selectedCountries, setSelectedCountries] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
   const fieldName: string = field;
 
-  const getSelectedSectors = (sectorsIds?: any) => {
-    let selectedIds: any[] = sectorsIds || formData?.[fieldName] || [];
+  const getSelectedCountries = (countriesIds?: any) => {
+    let selectedIds: any[] = countriesIds || formData?.[fieldName] || [];
     let result: any[] = [];
 
-    for (const item of sectorsData) {
+    for (const item of countriesData) {
       if (selectedIds.includes(item.id)) {
         for (const subitem of item?.sub_sectors || []) {
           if (selectedIds.includes(subitem.id)) {
@@ -47,10 +47,10 @@ const SectorsField = ({ resource, field, label, onPressEvent, onDeleteEvent }: P
     if (deleteIndex !== -1) delete selectedIds[deleteIndex];
     selectedIds = selectedIds.filter(Boolean);
 
-    let parentIds: any = sectorsData.map((o: any) => o.id);
+    let parentIds: any = countriesData.map((o: any) => o.id);
     for (const id of selectedIds) {
       if (parentIds.includes(id)) {
-        let parentItem: any = sectorsData.find((o: any) => o.id == id);
+        let parentItem: any = countriesData.find((o: any) => o.id == id);
         let childIds: any = (parentItem?.sub_sectors || []).map((o: any) => o.id);
         let deleteItem: boolean = !selectedIds.some((v: any) => childIds.includes(v));
 
@@ -62,18 +62,18 @@ const SectorsField = ({ resource, field, label, onPressEvent, onDeleteEvent }: P
       }
     }
 
-    setSelectedSectors(getSelectedSectors(selectedIds));
+    setSelectedCountries(getSelectedCountries(selectedIds));
     if (onDeleteEvent) onDeleteEvent(item);
   }
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setSectorsData(await EntityManager.getSectors());
+        setCountriesData(await EntityManager.getCountries());
         setIsLoaded(true);
       }
       
-      setSelectedSectors(getSelectedSectors());
+      setSelectedCountries(getSelectedCountries());
     })();
   }, [isLoaded]);
 
@@ -90,9 +90,9 @@ const SectorsField = ({ resource, field, label, onPressEvent, onDeleteEvent }: P
         {label}      
       </BoxView>
 
-      { selectedSectors?.length > 0 && (
+      { selectedCountries?.length > 0 && (
         <View style={styles.preview}>
-          { selectedSectors.map((item: any) => {
+          { selectedCountries.map((item: any) => {
             return (
               <TagView
                 key={item.id}
@@ -122,4 +122,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SectorsField;
+export default CountriesField;
