@@ -15,6 +15,7 @@ import InputTextareaField from "../field/InputTextareaField";
 import AddItemButton from "../button/AddItemButton";
 import ProjectJamsList from "../list/ProjectJamsList";
 import TextView from "../view/TextView";
+import EntityManager from "@/manager/EntityManager";
 
 const AddProjectForm = () => {
   const resource: string = 'project';
@@ -36,8 +37,14 @@ const AddProjectForm = () => {
 
   const submitForm = async () => {
     setIsProcessing(true);
+    let result: any = await EntityManager.addProject(formData);
+    let message: any = {
+      title: i18n.t('Create project'),
+      content: i18n.t('The project was successfully created.'),
+    };
 
-
+    if (result?.error) message.content = i18n.t(result.error);
+    ScreenManager.showMessage(message);
     setIsProcessing(false);
   };
 
