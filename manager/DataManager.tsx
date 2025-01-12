@@ -42,6 +42,12 @@ class DataManager {
         return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
     });
   }
+
+  extract(properties: any[], obj: any) {
+    return Object.fromEntries(
+      Object.entries(obj).filter(([key]) => properties.includes(key))
+    );
+  }
 };
 
 export default (new DataManager());
