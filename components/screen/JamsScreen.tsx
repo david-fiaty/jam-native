@@ -28,6 +28,7 @@ import CollaboratorsList from "../list/CollaboratorsList";
 import SectorsList from "../list/SectorsList";
 import LocationMapView from "../view/LocationMapView";
 import SelectJamsForm from "../form/SelectJamsForm";
+import CountriesList from "../list/CountriesList";
 
 const screenComponents: any = {
   JamsList: <JamsList />,
@@ -42,6 +43,7 @@ const screenComponents: any = {
   JammersList: <JammersList />,
   CollaboratorsList: <CollaboratorsList />,
   SectorsList: <SectorsList />,
+  CountriesList: <CountriesList />,
   LocationMapView: <LocationMapView />,
   HostsList: <HostsList />,
   SavedJamAction: <SavedJamAction />,
