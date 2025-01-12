@@ -36,7 +36,7 @@ const AddJamForm = () => {
   const formData = useSelector((state: any) => state.form[resource]);
   const jamCategoriesData = StaticData.jamCategories;
 
-  const updateField = (key: string, value: any) => {
+  const updateField = (key: any, value: any) => {
     dispatch(setFormData<any>({ 
       resource: resource,
       key: key, 
@@ -53,7 +53,9 @@ const AddJamForm = () => {
       content: i18n.t('The Jam was successfully created.'),
     };
 
-    if (result?.error) message.content = i18n.t(result.error);
+    if (result?.error) message.content = i18n.t(result.error)
+    else updateField(null, null)
+
     ScreenManager.showMessage(message);
     setIsProcessing(false);
   };
