@@ -18,7 +18,6 @@ import TextView from "../view/TextView";
 import EntityManager from "@/manager/EntityManager";
 import SectorsField from "../field/SectorsField";
 import IconView from "../view/IconView";
-import CountryField from "../field/CountryField";
 import PrivacyStatusField from "../field/PrivacyStatusField";
 import DatePickerField from "../field/DatePickerField";
 import CountriesField from "../field/CountriesField";
@@ -103,14 +102,6 @@ const AddProjectForm = () => {
           value={formData?.privacy_status}
           onChangeValue={(option: any) =>
             updateField("privacy_status", option.value)
-          }
-        />
-
-        <TextView>{i18n.t('Countries')}</TextView>
-        <CountryField
-          value={formData?.scope_countries_codes}
-          onChangeValue={(option: any) =>
-            updateField('scope_countries_codes', option.value)
           }
         />
 
