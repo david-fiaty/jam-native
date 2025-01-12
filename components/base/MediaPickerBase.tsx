@@ -66,7 +66,7 @@ const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Pr
             style={styles.deleteMedia}
             onPress={() => deleteMedia(data)}
           >
-            <IconView name="delete" theme="primary" size={12} padding={4} />
+            <IconView name="delete" theme="primary" size={12} padding={3.5} />
           </TouchableOpacity>
         } 
       </TouchableOpacity>
