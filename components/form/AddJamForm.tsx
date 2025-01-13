@@ -26,6 +26,7 @@ import DatePickerField from "../field/DatePickerField";
 import LocationTypeField from "../field/LocationTypeField";
 import EntityManager from "@/manager/EntityManager";
 import CollaboratorsField from "../field/CollaboratorsField";
+import DataManager from "@/manager/DataManager";
 
 const AddJamForm = () => {
   const resource: string = 'jam';
@@ -144,22 +145,22 @@ const AddJamForm = () => {
 
       <TextView>{i18n.t('Start date')}</TextView>
       <DatePickerField
-        value={'start value'}
+        value={formData?.period?.start_datetime}
         onChangeValue={(value: any) =>
           updateField('period', {
             ...(formData?.period || {}),
-            ...{ start_datetime: value.toISOString() },
+            ...{ start_datetime: DataManager.formatDate(value) },
           })
         }
       />
 
       <TextView>{i18n.t('End date')}</TextView>
       <DatePickerField
-        value={"end value"}
+        value={formData?.period?.end_datetime}
         onChangeValue={(value: any) =>
           updateField('period', {
             ...(formData?.period || {}),
-            ...{ end_datetime: value.toISOString() },
+            ...{ end_datetime: DataManager.formatDate(value) },
           })
         }
       />
