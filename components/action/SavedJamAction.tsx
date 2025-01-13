@@ -35,11 +35,25 @@ const SavedJamAction = () => {
       : i18n.t('Saving Jam failed, please try again'); 
   }
 
+  const saveJam = async () => {
+    let result: any = await EntityManager.saveJam(entityId);
+    if (result?.error) {
+      ScreenManager.showMessage({
+        title: i18n.t('Save Jam'),
+        content: result.error,
+      });
+
+      return false;
+    }
+
+    return true;
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
         setEntity(await EntityManager.getJams({items_ids: [entityId]}));
-        setIsSaved(await EntityManager.saveJam(entityId));
+        setIsSaved(await saveJam());
       }
 
       setIsLoaded(true);
