@@ -27,7 +27,6 @@ const AccountForm = () => {
       resource: resource,
       key: key, 
       value: value, 
-      profile_id: profileId,
     }));
   };
 
@@ -71,14 +70,17 @@ const AccountForm = () => {
       <InputTextField 
         placeholder={i18n.t('User name')} 
         value={formData?.username}
+        onChangeText={(value: string) => updateField("username", value)}
       />
       <InputTextField 
         placeholder={i18n.t('Email address')} 
         value={formData?.email}  
+        onChangeText={(value: string) => updateField("email", value)}
       />
       <InputTextField 
         placeholder={i18n.t('Phone number')} 
         value={formData?.phone}
+        onChangeText={(value: string) => updateField("phone", value)}
       />
 
     <DividerView />
