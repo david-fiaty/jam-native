@@ -52,7 +52,7 @@ const SavedJamAction = () => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setEntity(await EntityManager.getJams({items_ids: [entityId]}));
+        setEntity(await EntityManager.getJams({ items_ids: [entityId] }));
         setIsSaved(await saveJam());
       }
 
