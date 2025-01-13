@@ -109,7 +109,7 @@ const AddProjectForm = () => {
 
         <TextView>{i18n.t('Start date')}</TextView>
         <DatePickerField
-          value={'start value'}
+          value={formData?.period?.start_datetime}
           onChangeValue={(value: any) =>
             updateField('period', {
               ...(formData?.period || {}),
@@ -120,7 +120,7 @@ const AddProjectForm = () => {
 
         <TextView>{i18n.t('End date')}</TextView>
         <DatePickerField
-          value={"end value"}
+          value={formData?.period?.end_datetime}
           onChangeValue={(value: any) =>
             updateField('period', {
               ...(formData?.period || {}),
