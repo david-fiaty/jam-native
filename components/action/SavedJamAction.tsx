@@ -32,7 +32,7 @@ const SavedJamAction = () => {
   const getTitle = () => { 
     return (entity && isSaved) 
       ? i18n.t('Jam is now saved to your jams') 
-      : i18n.t('Saving Jam failed, please try again'); 
+      : i18n.t('Save action failed, please try again'); 
   }
 
   const saveJam = async () => {
