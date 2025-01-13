@@ -115,7 +115,7 @@ const Endpoints = {
     dataKey: null,
   },
   updateProfile: {
-    path: '/profiles/{profile_id}/',
+    path: '/profiles/[profile_id]/',
     cacheable: false,
     dataKey: null,
   },
