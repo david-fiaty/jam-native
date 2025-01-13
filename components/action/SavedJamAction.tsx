@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import { Layout } from "@/constants/Layout";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
@@ -13,6 +13,7 @@ import DataManager from '@/manager/DataManager';
 const SavedJamAction = () => {
   const [entity, setEntity] = useState<any>(null);
   const [isSaved, setIsSaved] = useState<boolean>(false);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const entityId = ScreenManager.getScreenEntityId();
 
   const actions: any = [
@@ -24,24 +25,42 @@ const SavedJamAction = () => {
     {
       label: i18n.t('View my Jams'),
       icon: 'plus',
-      onPress: () => console.log('action clicked') , // Todo - Implement logic
+      onPress: () => ScreenManager.toggleScreen("ProfileForm"),
     },
   ];
 
   const getTitle = () => { 
     return (entity && isSaved) 
       ? i18n.t('Jam is now saved to your jams') 
-      : i18n.t('Saving Jam failed, please try again'); 
+      : i18n.t('Save action failed, please try again'); 
   }
+
+  const saveJam = async () => {
+    let result: any = await EntityManager.saveJam(entityId);
+    if (result?.error) {
+      ScreenManager.showMessage({
+        title: i18n.t('Save Jam'),
+        content: result.error,
+      });
+
+      return false;
+    }
+
+    return true;
+  };
 
   useEffect(() => {
     (async () => {
-      if (!entity) setEntity(await EntityManager.getJams({items_ids: [entityId]}));
-      if (!isSaved) setIsSaved(await EntityManager.saveJam(entityId));
-    })();
-  });
+      if (!isLoaded) {
+        setEntity(await EntityManager.getJams({ items_ids: [entityId] }));
+        setIsSaved(await saveJam());
+      }
 
-  if (!entity) return <SpinnerView />;
+      setIsLoaded(true);
+    })();
+  }, [isLoaded, entityId]);
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
@@ -50,7 +69,7 @@ const SavedJamAction = () => {
         onPress={() => ScreenManager.toggleScreen('SavedJamAction')}
       />
       
-      <View style={styles.listContainer}>
+      <View style={Layout.borderedListContainer}>
         { actions.map((item: any) => {
           return <ActionListItem key={DataManager.createUuid()} item={item} />;
         }) }
@@ -58,12 +77,5 @@ const SavedJamAction = () => {
     </BoxView>
   );
 };
-
-const styles = StyleSheet.create({
-  listContainer: Layout.borderedListContainer,
-  listItem: {
-    marginBottom: Layout.space.base,
-  }, 
-});
 
 export default SavedJamAction;

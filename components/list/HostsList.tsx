@@ -14,19 +14,20 @@ import ProfileListItem from './ListItem/ProfileListItem';
 
 const HostsList = () => {
   const [profiles, setProfiles] = useState<any>(null);
-  const [entity, setEntity] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const entityId = ScreenManager.getScreenEntityId();
 
   useEffect(() => {
     (async () => {
-      if (!entity) setEntity(await EntityManager.getJams({items_ids: [entityId]}));
-      if (entity && !profiles) setProfiles(await EntityManager.getProfiles({items_ids: entity?.[0]?.jammers}));
-      setIsLoaded(true);
+      if (!isLoaded) {
+        let data: any = await EntityManager.getJams({items_ids: [entityId]});
+        setProfiles(await EntityManager.getProfiles({items_ids: data?.[0]?.collaborators}));
+        setIsLoaded(true);
+      }
     })();
-  });
+  }, [isLoaded, entityId]);
 
-  if (!entity) return <SpinnerView />;
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
@@ -42,7 +43,7 @@ const HostsList = () => {
           />
         }
 
-        {isLoaded && !profiles?.length && 
+        {!profiles?.length && 
           <TextView>{i18n.t('No hosts available for this Jam.')}</TextView>
         }
       </View>

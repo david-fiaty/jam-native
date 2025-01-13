@@ -147,7 +147,7 @@ class EntityManager {
       save_items_ids: [entityId],
     });
 
-    return !!response;
+    return response;
   }
 
   async addJam(entityData: any) {
@@ -166,7 +166,7 @@ class EntityManager {
       like_action: 'like',
     });
 
-    return !!response;
+    return response;
   }
 
   async shareJam(entityId: any) {
