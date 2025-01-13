@@ -14,12 +14,16 @@ class DataManager {
     return data;
   }
 
-  async post(key: keyof typeof Endpoints, data: any, options?: any) {
-    return await ApiManager.post(key, data);
+  async post(key: keyof typeof Endpoints, data: any, variables?: any) {
+    return await ApiManager.post(key, data, variables);
   }
 
-  async delete(key: keyof typeof Endpoints, data: any, options?: any) {
-    return await ApiManager.delete(key, data);
+  async delete(key: keyof typeof Endpoints, data: any, variables?: any) {
+    return await ApiManager.delete(key, data, variables);
+  }
+
+  async put(key: keyof typeof Endpoints, data: any, variables?: any) {
+    return await ApiManager.put(key, data, variables);
   }
 
   async find(key: keyof typeof Endpoints, idField: string, idValues: any) {
