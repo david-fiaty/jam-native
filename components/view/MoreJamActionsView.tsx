@@ -55,7 +55,15 @@ const MoreJamActionsView = () => {
             },
             {
               text: i18n.t('Yes'),
-              onPress: () => { EntityManager.reportItem('jam', entityId) }
+              onPress: async () => { 
+                let result: any = await EntityManager.reportItem('jam', entityId);
+                if (result?.error) {
+                  ScreenManager.showMessage({
+                    title: i18n.t('Report'),
+                    content: i18n.t('Report action failed. Please try again.'),
+                  });
+                }
+              },
             },
           ]
         );
@@ -76,7 +84,15 @@ const MoreJamActionsView = () => {
             },
             {
               text: i18n.t('Yes'),
-              onPress: () => { EntityManager.deleteJam(entityId) }
+              onPress: () => { 
+                let result: any = EntityManager.deleteJam(entityId); 
+                if (result?.error) {
+                  ScreenManager.showMessage({
+                    title: i18n.t('Delete'),
+                    content: i18n.t('Delete action failed. Please try again.'),
+                  });
+                }
+              },
             },
           ]
         );
