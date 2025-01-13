@@ -34,19 +34,16 @@ const AccountForm = () => {
     setIsProcessing(true);
     let profileData: any = await UserManager.getProfileData();
 
+    // Todo - Implement submit
     /*
     profileData.username = formData.username;
     profileData.email = formData.email;
     profileData.phone = formData.phone;
     */
 
-    console.log(profileData);
-
     setTimeout(() => {
       setIsProcessing(false);
     }, 3000);
-
-    // Todo - Implement submit
   };  
 
   useEffect(() => {
