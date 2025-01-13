@@ -13,6 +13,7 @@ import DataManager from '@/manager/DataManager';
 const SavedJamAction = () => {
   const [entity, setEntity] = useState<any>(null);
   const [isSaved, setIsSaved] = useState<boolean>(false);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const entityId = ScreenManager.getScreenEntityId();
 
   const actions: any = [
@@ -34,14 +35,32 @@ const SavedJamAction = () => {
       : i18n.t('Saving Jam failed, please try again'); 
   }
 
+  const saveJam = async () => {
+    let result: any = await EntityManager.saveJam(entityId);
+    if (result?.error) {
+      ScreenManager.showMessage({
+        title: i18n.t('Save Jam'),
+        content: result.error,
+      });
+
+      return false;
+    }
+
+    return true;
+  };
+
   useEffect(() => {
     (async () => {
-      if (!entity) setEntity(await EntityManager.getJams({items_ids: [entityId]}));
-      if (!isSaved) setIsSaved(await EntityManager.saveJam(entityId));
-    })();
-  });
+      if (!isLoaded) {
+        setEntity(await EntityManager.getJams({items_ids: [entityId]}));
+        setIsSaved(await saveJam());
+      }
 
-  if (!entity) return <SpinnerView />;
+      setIsLoaded(true);
+    })();
+  }, [isLoaded, entityId]);
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
