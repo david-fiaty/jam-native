@@ -13,10 +13,25 @@ const PasswordForm = () => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [formData, setFormData] = useState({});
 
   const submitForm = async () => {
-    setTimeout(() => setIsProcessing(false), 3000);
+    setIsProcessing(true);
+
+    console.log(formData);
+    // {"old_password": "abcdef", "new_password": "abcdefgh888"}
+  
+
+    setIsProcessing(false);
+    
   }  
+
+  const updateField = (key: string, value: any) => {
+    setFormData({
+      ...formData,
+      ...{ [key]: value },
+    });
+  };
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), Layout.animation.duration);
@@ -31,20 +46,26 @@ const PasswordForm = () => {
         onPress={() => router.back()}
       />
       
-      <InputTextField placeholder={i18n.t('Old password')} />
+      <InputTextField 
+        placeholder={i18n.t('Old password')} 
+        onChangeText={(value: string) => updateField("old_password", value)}
+      />
 
       <DividerView theme="secondary" />
-      <InputTextField placeholder={i18n.t('New password')} />
-      <InputTextField placeholder={i18n.t('Confirm new password')} />
+      <InputTextField 
+        placeholder={i18n.t('New password')} 
+        onChangeText={(value: string) => updateField("new_password", value)}
+      />
+
+      <InputTextField 
+        placeholder={i18n.t('Confirm new password')} 
+      />
 
       <DividerView />
       <ButtonView 
         label={i18n.t('Save')} 
         isProcessing={isProcessing} 
-        onPress={() => {
-          setIsProcessing(true);
-          submitForm();
-        }} 
+        onPress={submitForm} 
       />
     </BoxView>
   );
