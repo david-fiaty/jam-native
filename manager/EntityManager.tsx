@@ -27,11 +27,10 @@ class EntityManager {
   async updateProfile(options: any) {
     let defaults: any = {};
     let profileId: number = await UserManager.getProfileId();
-    let response: any = await DataManager.put('updateProfile', {...defaults, ...options}); 
+    let variables: any = { profile_id: profileId };
 
-    return response;
+    return await DataManager.put('updateProfile', {...defaults, ...options}, variables); 
   }
-
 
   async listJams(options?: any) {
     let profileId = await UserManager.getProfileId();
