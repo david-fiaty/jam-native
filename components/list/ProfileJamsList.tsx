@@ -14,6 +14,7 @@ import AddItemButton from "../button/AddItemButton";
 import NoImageView from "../view/NoImageView";
 import BoxView from "../view/BoxView";
 import MediaManager from "@/manager/MediaManager";
+import JamListItem from "./ListItem/JamListItem";
 
 type Props = {
   title?: any,
@@ -28,54 +29,6 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, onAddButtonPres
   const router = useRouter();
   const [profileJams, setProfileJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-
-  const renderItem = (row: any) => {
-    let imageSize = MediaManager.getThumbnailSize();
-    let output = null;
-
-    if (row?.item?.id == "addItem") {
-      output = <AddItemButton
-        label={i18n.t('Add')}
-        width={imageSize.width}
-        height={imageSize.height}
-        onPress={onAddButtonPress}
-      />;
-    }
-    else if (!row?.item?.medias?.[0]?.url) {
-      output = <NoImageView 
-        width={imageSize.width} 
-        height={imageSize.height} 
-        rounded={true}
-      />;
-    }
-    else {
-      output = <View style={styles.item}>
-        <ImageView
-          uri={MediaManager.getImageUrl(row.item.medias[0].url)}
-          width={imageSize.width}
-          height={imageSize.height}
-          resizeMode="cover"
-          style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
-        />
-      </View>
-    }
-
-    if (parseInt(row?.item?.id) > 0) {
-      output = <TouchableOpacity
-        key={row.item.id}
-        onPress={() =>
-          router.push({
-            pathname: "/jam",
-            params: { idArray: [row.item.id], title: row.item.title },
-          })
-        }
-      >
-        {output}
-      </TouchableOpacity>
-    }
-
-    return output;
-  }
 
   useEffect(() => {
     (async () => {
@@ -122,7 +75,7 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, onAddButtonPres
           contentContainerStyle={{ gap: Layout.space.base }}
           columnWrapperStyle={{ gap: Layout.space.base }}
           scrollEnabled={false}
-          renderItem={(row: any) => renderItem(row)}
+          renderItem={(row: any) => <JamListItem row={row} onAddButtonPress={onAddButtonPress} />}
         />
       )}
     </View>
