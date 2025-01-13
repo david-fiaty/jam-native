@@ -30,8 +30,17 @@ const AccountForm = () => {
     }));
   };
 
-  const submitForm = () => {
+  const submitForm = async () => {
     setIsProcessing(true);
+    let profileData: any = await UserManager.getProfileData();
+
+    /*
+    profileData.username = formData.username;
+    profileData.email = formData.email;
+    profileData.phone = formData.phone;
+    */
+
+    console.log(profileData);
 
     setTimeout(() => {
       setIsProcessing(false);
