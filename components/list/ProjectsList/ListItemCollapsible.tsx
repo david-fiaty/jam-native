@@ -1,7 +1,6 @@
 import { StyleSheet } from "react-native";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
-import { Config } from "@/constants/Config";
 import { Colors } from "@/constants/Colors";
 import BoxView from "@/components/view/BoxView";
 import TextView from "@/components/view/TextView";
@@ -9,7 +8,7 @@ import CollapsibleView from "@/components/view/CollapsibleView";
 import IconView from "@/components/view/IconView";
 import StaticData from "@/constants/StaticData";
 import i18n from "@/translation/i18n";
-import moment from "moment";
+import DataManager from "@/manager/DataManager";
 
 type Props = BaseProps & {
   row?: any,
@@ -51,9 +50,7 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
                 {i18n.t("Start")}:{" "}
-                {moment(row?.item?.period?.start_datetime).format(
-                  Config.dateFormat
-                ) || i18n.t("Unavailable")}
+                {DataManager.formatDate(row?.item?.period?.start_datetime) || i18n.t("Unavailable")}
               </TextView>
             </BoxView>
             <BoxView
@@ -65,9 +62,7 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
               <IconView name="arrow" size={14} theme="transparent" />
               <TextView>
                 {i18n.t("End")}:{" "}
-                {moment(row?.item?.period?.end_datetime).format(
-                  Config.dateFormat
-                ) || i18n.t("Unavailable")}
+                {DataManager.formatDate(row?.item?.period?.end_datetime) || i18n.t("Unavailable")}
               </TextView>
             </BoxView>
             <BoxView

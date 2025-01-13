@@ -21,6 +21,7 @@ import IconView from "../view/IconView";
 import PrivacyStatusField from "../field/PrivacyStatusField";
 import DatePickerField from "../field/DatePickerField";
 import CountriesField from "../field/CountriesField";
+import DataManager from "@/manager/DataManager";
 
 const AddProjectForm = () => {
   const resource: string = 'project';
@@ -109,22 +110,22 @@ const AddProjectForm = () => {
 
         <TextView>{i18n.t('Start date')}</TextView>
         <DatePickerField
-          value={'start value'}
+          value={formData?.period?.start_datetime}
           onChangeValue={(value: any) =>
             updateField('period', {
               ...(formData?.period || {}),
-              ...{ start_datetime: value.toISOString() },
+              ...{ start_datetime: DataManager.formatDate(value) },
             })
           }
         />
 
         <TextView>{i18n.t('End date')}</TextView>
         <DatePickerField
-          value={"end value"}
+          value={formData?.period?.end_datetime}
           onChangeValue={(value: any) =>
             updateField('period', {
               ...(formData?.period || {}),
-              ...{ end_datetime: value.toISOString() },
+              ...{ end_datetime: DataManager.formatDate(value) },
             })
           }
         />
