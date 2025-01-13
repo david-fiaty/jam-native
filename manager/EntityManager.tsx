@@ -22,6 +22,14 @@ class EntityManager {
     return await DataManager.get('getProfiles', {...defaults, ...options}); 
   }
 
+
+  async saveProfile(entityId: any) {
+    let profileId = await UserManager.getProfileId();
+
+    
+  }
+
+
   async listJams(options?: any) {
     let profileId = await UserManager.getProfileId();
     let defaults = {
