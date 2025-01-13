@@ -77,7 +77,7 @@ class ApiManager {
       }
     }
 
-    if (Object.keys(options).length > 0) {
+    if (options && Object.keys(options).length > 0) {
       url += '?' + (new URLSearchParams(options).toString());
     }
 
