@@ -25,7 +25,7 @@ const SavedJamAction = () => {
     {
       label: i18n.t('View my Jams'),
       icon: 'plus',
-      onPress: () => console.log('action clicked') , // Todo - Implement logic
+      onPress: () => ScreenManager.toggleScreen("ProfileForm"),
     },
   ];
 
