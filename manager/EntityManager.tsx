@@ -169,6 +169,16 @@ class EntityManager {
     return response;
   }
 
+  async deleteJam(entityId: any) {
+    let profileId = await UserManager.getProfileId();
+    let response = await DataManager.delete('deleteJam', {
+      profile_id: profileId,
+      items_ids: [entityId],
+    });
+
+    return response;
+  }
+
   async shareJam(entityId: any) {
     let entity = await this.getJams({items_ids: [entityId]});
     let message: string = '';
@@ -202,6 +212,22 @@ class EntityManager {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  async reportItem(type: string, entityId: any) {
+    let profileId: number = await UserManager.getProfileId();
+    let isAnonymous: boolean = profileId > 0;
+
+    let response = await DataManager.post('report', {
+      reporting_person_is_anonymous: isAnonymous,
+      reporting_profile_id: profileId,
+      reporting_content_type: type,
+      reporting_content_id: entityId,
+      reporting_cause: '',
+      reporting_comment: '',  
+    });
+
+    return response;
   }
 };
 

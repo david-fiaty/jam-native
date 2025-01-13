@@ -50,12 +50,12 @@ const MoreJamActionsView = () => {
           [
             {
               text: i18n.t('No'),
-              onPress: () => console.log('No Pressed'),
+              onPress: () => {},
               style: 'cancel',
             },
             {
               text: i18n.t('Yes'),
-              onPress: () => console.log('Yes Pressed')
+              onPress: () => { EntityManager.reportItem('jam', entityId) }
             },
           ]
         );
@@ -71,12 +71,12 @@ const MoreJamActionsView = () => {
           [
             {
               text: i18n.t('No'),
-              onPress: () => console.log('No Pressed'),
+              onPress: () => {},
               style: 'cancel',
             },
             {
               text: i18n.t('Yes'),
-              onPress: () => console.log('Yes Pressed')
+              onPress: () => { EntityManager.deleteJam(entityId) }
             },
           ]
         );
