@@ -15,14 +15,13 @@ type Props = BaseProps & {
 const DatePickerField = ({placeholder, value, onChangeValue}: Props) => {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
+  const display = Platform.OS === 'ios' ? 'spinner' : 'default';
 
   const onChange = (event: any, value: any) => {
     setShow(false); 
     if (value) setDate(value);
     if (onChangeValue) onChangeValue(value);
   };
-
-  const display = Platform.OS === 'ios' ? 'spinner' : 'default';
 
   return (
       <BoxView direction="row" align="space-between">
@@ -31,7 +30,8 @@ const DatePickerField = ({placeholder, value, onChangeValue}: Props) => {
             readOnly={true}
             placeholder={placeholder} 
             rightIcon={<IconView name="calendar" theme="transparent" />}
-            value={date.toLocaleDateString()}
+            //value={date.toLocaleDateString()}
+            value={value}
           />
         </TouchableOpacity>
 
