@@ -21,6 +21,7 @@ import IconView from "../view/IconView";
 import PrivacyStatusField from "../field/PrivacyStatusField";
 import DatePickerField from "../field/DatePickerField";
 import CountriesField from "../field/CountriesField";
+import DataManager from "@/manager/DataManager";
 
 const AddProjectForm = () => {
   const resource: string = 'project';
@@ -113,7 +114,7 @@ const AddProjectForm = () => {
           onChangeValue={(value: any) =>
             updateField('period', {
               ...(formData?.period || {}),
-              ...{ start_datetime: value.toISOString() },
+              ...{ start_datetime: DataManager.formatDate(value) },
             })
           }
         />
@@ -124,7 +125,7 @@ const AddProjectForm = () => {
           onChangeValue={(value: any) =>
             updateField('period', {
               ...(formData?.period || {}),
-              ...{ end_datetime: value.toISOString() },
+              ...{ end_datetime: DataManager.formatDate(value) },
             })
           }
         />

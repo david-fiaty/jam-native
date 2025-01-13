@@ -1,5 +1,7 @@
 import Endpoints from '@/constants/Endpoints';
 import ApiManager from './ApiManager';
+import moment from "moment";
+import { Config } from '@/constants/Config';
 
 class DataManager {
   async get(key: keyof typeof Endpoints, options?: any, variables?: any) {
@@ -47,6 +49,14 @@ class DataManager {
     return Object.fromEntries(
       Object.entries(obj).filter(([key]) => properties.includes(key))
     );
+  }
+
+  formatDate(value: string) {
+    if (value) {
+      return moment(value).format(Config.dateFormat);
+    }
+
+    return value;
   }
 };
 
