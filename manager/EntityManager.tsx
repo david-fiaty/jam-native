@@ -147,7 +147,7 @@ class EntityManager {
       save_items_ids: [entityId],
     });
 
-    return !!response;
+    return response;
   }
 
   async addJam(entityData: any) {
