@@ -18,6 +18,10 @@ class DataManager {
     return await ApiManager.post(key, data);
   }
 
+  async delete(key: keyof typeof Endpoints, data: any, options?: any) {
+    return await ApiManager.delete(key, data);
+  }
+
   async find(key: keyof typeof Endpoints, idField: string, idValues: any) {
     idValues = Array.isArray(idValues) ? idValues : [idValues];
     let data: any = await ApiManager.get(key);
