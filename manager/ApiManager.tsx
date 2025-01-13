@@ -73,16 +73,12 @@ class ApiManager {
 
     if (variables) {
       for (const [key, value] of Object.entries(variables)) {
-        url = url.replace(`[${key}]`, value);
+        url = url.replace(key, value);
       }
     }
 
     if (options && Object.keys(options).length > 0) {
       url += '?' + (new URLSearchParams(options).toString());
-    }
-
-    if (key == 'updateProfile') {
-      //console.log(url);
     }
 
     return url;
