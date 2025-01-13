@@ -177,7 +177,6 @@ const ProfileForm = () => {
         <CountryField value={formData?.country} />
 
         <DividerView theme="secondary" />
-        <TextView style={styles.title}>{i18n.t('Social')}</TextView>
 
         <TextView>{i18n.t('Phone number')}</TextView>
         <InputTextField
