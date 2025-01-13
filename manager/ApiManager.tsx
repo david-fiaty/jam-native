@@ -32,6 +32,41 @@ class ApiManager {
     return data;
   }
 
+  async post(key: keyof typeof Endpoints, data: any, variables?: any) {
+    let url: string = this.getUrl(key, {}, variables);
+
+    try {
+
+      return await this.sendRequest(url, 'POST', data);
+    } 
+    catch (error) {
+      console.log(error);
+    }
+  }
+
+  async put(key: keyof typeof Endpoints, data: any, variables?: any) {
+    let url: string = this.getUrl(key, {}, variables);
+
+    try {
+
+      return await this.sendRequest(url, 'PUT', data);
+    } 
+    catch (error) {
+      console.log(error);
+    }
+  }
+
+  async delete(key: keyof typeof Endpoints, data: any, variables?: any) {
+    let url: string = this.getUrl(key, {}, variables);
+
+    try {
+      return await this.sendRequest(url, 'DELETE', data);
+    } 
+    catch (error) {
+      console.log(error);
+    }
+  }
+
   getUrl(key: keyof typeof Endpoints, options?: any, variables?: any) {
     let path: string = Endpoints[key].path;
     let url: string = Config.apiUrl + path;
@@ -59,39 +94,6 @@ class ApiManager {
     }
 
     return null;
-  }
-
-  async post(key: keyof typeof Endpoints, data: any, variables?: any) {
-    try {
-
-      return await this.sendRequest(this.getUrl(key), 'POST', data);
-    } 
-    catch (error) {
-      console.log(error);
-    }
-  }
-
-  async put(key: keyof typeof Endpoints, data: any, variables?: any) {
-    if (key == 'updateProfile') {
-      console.log(key);
-      return {error: 'test'};
-    }
-
-    try {
-      return await this.sendRequest(this.getUrl(key), 'PUT', data);
-    } 
-    catch (error) {
-      console.log(error);
-    }
-  }
-
-  async delete(key: keyof typeof Endpoints, data: any, variables?: any) {
-    try {
-      return await this.sendRequest(this.getUrl(key), 'DELETE', data);
-    } 
-    catch (error) {
-      console.log(error);
-    }
   }
 
   async sendRequest(url: string, method: string, data?: any) {
