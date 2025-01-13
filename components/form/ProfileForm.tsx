@@ -88,19 +88,19 @@ const ProfileForm = () => {
         />
         <DividerView theme="secondary" />
 
-        <TextView style={styles.title}>{i18n.t('Details')}</TextView>
+        <TextView>{i18n.t('Email address')}</TextView>
         <InputTextField
-          placeholder={i18n.t("Email address")}
           value={formData?.email}
           onChangeText={(value: string) => updateField("email", value)}
         />
 
+        <TextView>{i18n.t('Profile name')}</TextView>
         <InputTextField
-          placeholder={i18n.t("Profile name")}
           value={formData?.profile_name}
           onChangeText={(value: string) => updateField("profile_name", value)}
         />
 
+        <TextView>{i18n.t('Profile type')}</TextView>
         <ProfileTypeField
           value={formData?.profile_type}
           onChangeValue={(option: any) =>
@@ -108,13 +108,13 @@ const ProfileForm = () => {
           }
         />
 
+        <TextView>{i18n.t('Description')}</TextView>
         <InputTextareaField
-          placeholder={i18n.t("Description")}
           value={formData?.profile_description}
           onChangeText={(value: string) => updateField("profile_description", value)}
         />
 
-        <TextView style={styles.title}>{i18n.t('Activities')}</TextView>
+        <DividerView theme="secondary" />
         <SectorsField
           resource={resource}
           field="sectors_ids"
@@ -136,7 +136,9 @@ const ProfileForm = () => {
           }}
         />
 
-        <TextView style={styles.title}>{i18n.t('Address')}</TextView>
+        <DividerView theme="secondary" />
+        
+        <TextView>{i18n.t('Location')}</TextView>
         <LocationPickerField 
           latitude={formData?.geolocation_latitude}
           longitude={formData?.geolocation_longitude}
@@ -153,54 +155,56 @@ const ProfileForm = () => {
           })}
         />
 
+        <TextView>{i18n.t('Address')}</TextView>
         <InputTextField
-          placeholder={i18n.t("Address")}
           value={formData?.address}
           onChangeText={(value: string) => updateField("address", value)}
         />
 
+        <TextView>{i18n.t('City')}</TextView>
         <InputTextField
-          placeholder={i18n.t("City")}
           value={formData?.town_or_locality}
           onChangeText={(value: string) => updateField("city", value)}
         />
 
+        <TextView>{i18n.t('Region')}</TextView>
         <InputTextField
-          placeholder={i18n.t("Region")}
           value={formData?.region}
           onChangeText={(value: string) => updateField("region", value)}
         />
 
+        <TextView>{i18n.t('Country')}</TextView>
         <CountryField value={formData?.country} />
 
         <DividerView theme="secondary" />
         <TextView style={styles.title}>{i18n.t('Social')}</TextView>
+
+        <TextView>{i18n.t('Phone number')}</TextView>
         <InputTextField
-          placeholder={i18n.t("Phone number")}
           value={formData?.phone_number}
           onChangeText={(value: string) => updateField("phone_number", value)}
         />
 
+        <TextView>{i18n.t('Whatsapp number')}</TextView>
         <InputTextField
-          placeholder={i18n.t("Whatsapp number")}
           value={formData?.whatsapp_number}
           onChangeText={(value: string) => updateField("whatsapp_number", value)}
         />
 
+        <TextView>{i18n.t('Website link')}</TextView>
         <InputTextField
-          placeholder={i18n.t("Website link")}
           value={formData?.website_link}
           onChangeText={(value: string) => updateField("website_link", value)}
         />
 
+        <TextView>{i18n.t('Instagram ID')}</TextView>
         <InputTextField
-          placeholder={i18n.t("Instagram ID")}
           value={formData?.instagram_id}
           onChangeText={(value: string) => updateField("instagram_id", value)}
         />
 
+        <TextView>{i18n.t('Facebook ID')}</TextView>
         <InputTextField
-          placeholder={i18n.t("Facebook ID")}
           value={formData?.linkedin_id}
           onChangeText={(value: string) => updateField("linkedin_id", value)}
         />
