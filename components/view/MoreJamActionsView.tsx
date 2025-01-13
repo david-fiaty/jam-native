@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View, StyleSheet } from "react-native";
+import { View, Alert } from "react-native";
 import { Layout } from "@/constants/Layout";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
@@ -43,12 +43,44 @@ const MoreJamActionsView = () => {
     {
       label: i18n.t('Report Jam'),
       icon: 'report',
-      onPress: () => console.log('action clicked') , // Todo - Implement logic
+      onPress: () => {
+        Alert.alert(
+          i18n.t('Report'), 
+          i18n.t('This item will be reported. Would you like to proceed?'), 
+          [
+            {
+              text: i18n.t('No'),
+              onPress: () => console.log('No Pressed'),
+              style: 'cancel',
+            },
+            {
+              text: i18n.t('Yes'),
+              onPress: () => console.log('Yes Pressed')
+            },
+          ]
+        );
+      }, 
     },
     {
       label: i18n.t('Delete Jam'),
       icon: 'delete',
-      onPress: () => console.log('action clicked') , // Todo - Implement logic
+      onPress: () => {
+        Alert.alert(
+          i18n.t('Report'), 
+          i18n.t('This item will be deleted. Would you like to proceed?'), 
+          [
+            {
+              text: i18n.t('No'),
+              onPress: () => console.log('No Pressed'),
+              style: 'cancel',
+            },
+            {
+              text: i18n.t('Yes'),
+              onPress: () => console.log('Yes Pressed')
+            },
+          ]
+        );
+      },
     },
   ];
 
@@ -67,18 +99,11 @@ const MoreJamActionsView = () => {
         onPress={() => ScreenManager.toggleScreen('MoreJamActionsView')}
       />
       
-      <View style={styles.listContainer}>
+      <View style={Layout.borderedListContainer}>
         { actions.map((item: any) => <ActionListItem key={DataManager.createUuid()} item={item} />)}
       </View>
     </BoxView>
   );
 };
-
-const styles = StyleSheet.create({
-  listContainer: Layout.borderedListContainer,
-  listItem: {
-    marginBottom: Layout.space.base,
-  }, 
-});
 
 export default MoreJamActionsView;
