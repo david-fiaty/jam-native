@@ -12,11 +12,24 @@ import MediaManager from "@/manager/MediaManager";
 type Props = BaseProps & {
   row?: any;
   onAddButtonPress?: () => void;
+  onListItemPress?: (row: any) => void;
 };
 
-const JamListItem = ({ row, onAddButtonPress }: Props) => {
+const JamListItem = ({ row, onListItemPress, onAddButtonPress }: Props) => {
   const numColumns = 3;
   const router = useRouter();
+
+  const onItemPress = (row: any) => {
+    if (onListItemPress) {
+      onListItemPress(row);
+    }
+    else {
+      router.push({
+        pathname: "/jam",
+        params: { idArray: [row.item.id], title: row.item.title },
+      });
+    } 
+  };
 
   const renderItem = (row: any) => {
     let imageSize = MediaManager.getThumbnailSize();
@@ -50,15 +63,7 @@ const JamListItem = ({ row, onAddButtonPress }: Props) => {
     }
 
     if (parseInt(row?.item?.id) > 0) {
-      output = <TouchableOpacity
-        key={row.item.id}
-        onPress={() =>
-          router.push({
-            pathname: "/jam",
-            params: { idArray: [row.item.id], title: row.item.title },
-          })
-        }
-      >
+      output = <TouchableOpacity key={row.item.id} onPress={() => onItemPress(row)}>
         {output}
       </TouchableOpacity>
     }
