@@ -166,7 +166,7 @@ class EntityManager {
       like_action: 'like',
     });
 
-    return !!response;
+    return response;
   }
 
   async shareJam(entityId: any) {
