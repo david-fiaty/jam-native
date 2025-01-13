@@ -44,11 +44,10 @@ class UserManager {
     let profileId: number = await this.getProfileId();
     let defaults = {};
     let profileData = [];
+    let variables: any = { '[profile_id]': profileId };
 
     if (profileId > 0) {
-      profileData = await DataManager.get('getProfile', {...defaults, ...options}, 
-        {'[profile_id]': profileId},
-      );
+      profileData = await DataManager.get('getProfile', {...defaults, ...options}, variables);
     }
 
     return profileData || {};
