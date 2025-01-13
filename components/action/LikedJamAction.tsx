@@ -31,15 +31,15 @@ const LikedJamAction = () => {
 
   const getTitle = () => { 
     return (entity && isSaved) 
-      ? i18n.t('Jam is now saved to your jams') 
-      : i18n.t('Saving Jam failed, please try again'); 
+      ? i18n.t('Jam is now liked') 
+      : i18n.t('Like action failed, please try again'); 
   }
 
-  const saveJam = async () => {
-    let result: any = await EntityManager.saveJam(entityId);
+  const likeJam = async () => {
+    let result: any = await EntityManager.likeJam(entityId);
     if (result?.error) {
       ScreenManager.showMessage({
-        title: i18n.t('Save Jam'),
+        title: i18n.t('Like Jam'),
         content: result.error,
       });
 
@@ -53,7 +53,7 @@ const LikedJamAction = () => {
     (async () => {
       if (!isLoaded) {
         setEntity(await EntityManager.getJams({items_ids: [entityId]}));
-        setIsSaved(await saveJam());
+        setIsSaved(await likeJam());
       }
 
       setIsLoaded(true);
