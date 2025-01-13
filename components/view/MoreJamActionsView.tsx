@@ -60,7 +60,7 @@ const MoreJamActionsView = () => {
                 if (result?.error) {
                   ScreenManager.showMessage({
                     title: i18n.t('Report'),
-                    content: i18n.t('Report action failed. Please try again.'),
+                    content: i18n.t('Report action failed, please try again.'),
                   });
                 }
               },
@@ -89,7 +89,7 @@ const MoreJamActionsView = () => {
                 if (result?.error) {
                   ScreenManager.showMessage({
                     title: i18n.t('Delete'),
-                    content: i18n.t('Delete action failed. Please try again.'),
+                    content: i18n.t('Delete action failed, please try again.'),
                   });
                 }
               },

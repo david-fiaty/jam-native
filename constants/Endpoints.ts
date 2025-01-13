@@ -114,6 +114,11 @@ const Endpoints = {
     cacheable: false,
     dataKey: null,
   },
+  updateProfile: {
+    path: '/profiles/[profile_id]/',
+    cacheable: false,
+    dataKey: null,
+  },
 };
 
 export default Endpoints;
