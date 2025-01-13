@@ -27,7 +27,7 @@ class EntityManager {
   async updateProfile(options: any) {
     let defaults: any = {};
     let profileId: number = await UserManager.getProfileId();
-    let variables: any = { profile_id: profileId };
+    let variables: any = { '[profile_id]': profileId };
 
     return await DataManager.put('updateProfile', {...defaults, ...options}, variables); 
   }
