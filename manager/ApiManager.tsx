@@ -61,7 +61,7 @@ class ApiManager {
     return null;
   }
 
-  async post(key: keyof typeof Endpoints, data: any) {
+  async post(key: keyof typeof Endpoints, data: any, variables?: any) {
     try {
 
       return await this.sendRequest(this.getUrl(key), 'POST', data);
@@ -71,7 +71,7 @@ class ApiManager {
     }
   }
 
-  async put(key: keyof typeof Endpoints, data: any) {
+  async put(key: keyof typeof Endpoints, data: any, variables?: any) {
     try {
       return await this.sendRequest(this.getUrl(key), 'PUT', data);
     } 
@@ -80,7 +80,7 @@ class ApiManager {
     }
   }
 
-  async delete(key: keyof typeof Endpoints, data: any) {
+  async delete(key: keyof typeof Endpoints, data: any, variables?: any) {
     try {
       return await this.sendRequest(this.getUrl(key), 'DELETE', data);
     } 
