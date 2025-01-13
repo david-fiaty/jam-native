@@ -32,35 +32,27 @@ class ApiManager {
     return data;
   }
 
-  async post(key: keyof typeof Endpoints, data: any, variables?: any) {
-    let url: string = this.getUrl(key, {}, variables);
-
+  async post(key: keyof typeof Endpoints, data: any) {
     try {
-
-      return await this.sendRequest(url, 'POST', data);
+      return await this.sendRequest(this.getUrl(key), 'POST', data);
     } 
     catch (error) {
       console.log(error);
     }
   }
 
-  async put(key: keyof typeof Endpoints, data: any, variables?: any) {
-    let url: string = this.getUrl(key, {}, variables);
-
+  async put(key: keyof typeof Endpoints, data: any) {
     try {
-
-      return await this.sendRequest(url, 'PUT', data);
+      return await this.sendRequest(this.getUrl(key), 'PUT', data);
     } 
     catch (error) {
       console.log(error);
     }
   }
 
-  async delete(key: keyof typeof Endpoints, data: any, variables?: any) {
-    let url: string = this.getUrl(key, {}, variables);
-
+  async delete(key: keyof typeof Endpoints, data: any) {
     try {
-      return await this.sendRequest(url, 'DELETE', data);
+      return await this.sendRequest(this.getUrl(key), 'DELETE', data);
     } 
     catch (error) {
       console.log(error);
@@ -73,31 +65,15 @@ class ApiManager {
 
     if (variables) {
       for (const [key, value] of Object.entries(variables)) {
-        url = url.replace(`{${key}}`, value);
+        url = url.replace(key, value);
       }
     }
 
-    if (options && Object.keys(options).length > 0) {
+    if (options) {
       url += '?' + (new URLSearchParams(options).toString());
     }
 
-    if (key == 'updateProfile') {
-      console.log(url);
-    }
-
     return url;
-  }
-
-  async getCacheItem(key: keyof typeof Endpoints) {
-    try {
-      return await cache.get(key);
-    } 
-    catch (error) {
-      console.log(error);
-      await cache.remove(key);
-    }
-
-    return null;
   }
 
   async sendRequest(url: string, method: string, data?: any) {
@@ -136,6 +112,18 @@ class ApiManager {
     }
     
     return headers;
+  }
+
+  async getCacheItem(key: keyof typeof Endpoints) {
+    try {
+      return await cache.get(key);
+    } 
+    catch (error) {
+      console.log(error);
+      await cache.remove(key);
+    }
+
+    return null;
   }
 };
 
