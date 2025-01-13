@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
@@ -8,36 +8,37 @@ import InputTextField from '../field/InputTextField';
 import SpinnerView from '../view/SpinnerView';
 import ButtonView from '../view/ButtonView';
 import DividerView from '../view/DividerView';
+import UserManager from '@/manager/UserManager';
+import ScreenManager from '@/manager/ScreenManager';
 
 const PasswordForm = () => {
   const router = useRouter();
-  const [isLoaded, setIsLoaded] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [formData, setFormData] = useState({});
 
   const submitForm = async () => {
     setIsProcessing(true);
+    let result: any = await UserManager.changePassword(formData);
+    let message: any = {
+      title: i18n.t('Change password'),
+      content: i18n.t('The password was successfully updated.'),
+    };
 
-    console.log(formData);
-    // {"old_password": "abcdef", "new_password": "abcdefgh888"}
-  
+    if (result?.error) message.content = i18n.t(result.error)
+    else updateField(null, null)
 
+    ScreenManager.showMessage(message);
     setIsProcessing(false);
-    
+  
+    setIsProcessing(false);
   }  
 
-  const updateField = (key: string, value: any) => {
+  const updateField = (key?: any, value?: any) => {
     setFormData({
       ...formData,
       ...{ [key]: value },
     });
   };
-
-  useEffect(() => {
-    setTimeout(() => setIsLoaded(true), Layout.animation.duration);
-  });
-
-  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
