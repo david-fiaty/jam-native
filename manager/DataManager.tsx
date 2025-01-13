@@ -23,7 +23,7 @@ class DataManager {
   }
 
   async put(key: keyof typeof Endpoints, data: any, variables?: any) {
-    return await ApiManager.delete(key, data, variables);
+    return await ApiManager.put(key, data, variables);
   }
 
   async find(key: keyof typeof Endpoints, idField: string, idValues: any) {

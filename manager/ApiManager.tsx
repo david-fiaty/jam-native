@@ -72,6 +72,11 @@ class ApiManager {
   }
 
   async put(key: keyof typeof Endpoints, data: any, variables?: any) {
+    if (key == 'updateProfile') {
+      console.log(key);
+      return {error: 'test'};
+    }
+
     try {
       return await this.sendRequest(this.getUrl(key), 'PUT', data);
     } 
