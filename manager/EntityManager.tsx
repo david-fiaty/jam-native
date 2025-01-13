@@ -5,17 +5,6 @@ import UserManager from './UserManager';
 import MediaManager from './MediaManager';
 
 class EntityManager {
-  async report(entityId: any) {
-    let profileId = await UserManager.getProfileId();
-    let response = await DataManager.post('report', {
-      profile_id: profileId,
-      item_id: entityId,
-      like_action: 'like',
-    });
-
-    return !!response;
-  }
-
   async listProfiles(options?: any) {
     let profileId = await UserManager.getProfileId();
     let defaults = {
