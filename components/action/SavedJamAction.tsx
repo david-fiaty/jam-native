@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import { Layout } from "@/constants/Layout";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
@@ -25,7 +25,7 @@ const SavedJamAction = () => {
     {
       label: i18n.t('View my Jams'),
       icon: 'plus',
-      onPress: () => console.log('action clicked') , // Todo - Implement logic
+      onPress: () => ScreenManager.toggleScreen("ProfileForm"),
     },
   ];
 
@@ -69,7 +69,7 @@ const SavedJamAction = () => {
         onPress={() => ScreenManager.toggleScreen('SavedJamAction')}
       />
       
-      <View style={styles.listContainer}>
+      <View style={Layout.borderedListContainer}>
         { actions.map((item: any) => {
           return <ActionListItem key={DataManager.createUuid()} item={item} />;
         }) }
@@ -77,12 +77,5 @@ const SavedJamAction = () => {
     </BoxView>
   );
 };
-
-const styles = StyleSheet.create({
-  listContainer: Layout.borderedListContainer,
-  listItem: {
-    marginBottom: Layout.space.base,
-  }, 
-});
 
 export default SavedJamAction;
