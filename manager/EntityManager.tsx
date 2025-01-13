@@ -17,16 +17,20 @@ class EntityManager {
   }
 
   async getProfiles(options?: any) {
-    let defaults = {};
+    let defaults: any = {};
+    let response: any = await DataManager.get('getProfiles', {...defaults, ...options}); 
 
-    return await DataManager.get('getProfiles', {...defaults, ...options}); 
+    return response;
   }
 
 
-  async saveProfile(entityId: any) {
-    let profileId = await UserManager.getProfileId();
+  async updateProfile(options: any) {
+    let defaults: any = {};
+    let profileId: number = await UserManager.getProfileId();
 
-    
+    let response: any = await DataManager.put('updateProfile', {...defaults, ...options}); 
+
+    return response;
   }
 
 
