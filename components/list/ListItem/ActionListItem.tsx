@@ -16,8 +16,8 @@ const ActionListItem = ({ item }: Props) => {
         <IconView 
           name={item?.icon} 
           theme="tertiary" 
-          size={16}
-          padding={6}
+          size={12}
+          padding={6.5}
         />
         <TextView>{item?.label}</TextView>
       </BoxView>
