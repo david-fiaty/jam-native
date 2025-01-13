@@ -17,6 +17,7 @@ const PasswordForm = () => {
   const [formData, setFormData] = useState({});
 
   const submitForm = async () => {
+    // Todo - Implement password confirmation
     setIsProcessing(true);
     let result: any = await UserManager.changePassword(formData);
     let message: any = {
