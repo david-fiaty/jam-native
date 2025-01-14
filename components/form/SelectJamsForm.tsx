@@ -4,16 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
-import ImageView from "../view/ImageView";
 import ScreenManager from "@/manager/ScreenManager";
 import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
-import NoImageView from "../view/NoImageView";
 import BoxView from "../view/BoxView";
-import MediaManager from "@/manager/MediaManager";
 import BackButton from "../button/BackButton";
-import IconView from "../view/IconView";
 import TextView from "../view/TextView";
 import JamListItem from "../list/ListItem/JamListItem";
 
@@ -113,26 +109,8 @@ const SelectJamsForm = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-  },
   titleContainer: {
     width: "100%",
-  },
-  item: {
-    flexDirection: "column",
-    gap: Layout.space.small,
-  },
-  selectedItem: {
-    opacity: 0.7,
-  },
-  checkIcon: {
-    position: "absolute",
-    top: 5,
-    right: 5,
-  },
-  image: {
-    borderRadius: Layout.space.base,
   },
 });
 
