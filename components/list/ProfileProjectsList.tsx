@@ -30,7 +30,6 @@ const ProfileProjectsList = ({
   const router = useRouter();
   const [profileProjects, setProfileProjects] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [formData, setFormData] = useState<any>({});
   const [projectsImages, setProjectsImages] = useState<any>({});
 
   const updateSelection = (row: any) => {
