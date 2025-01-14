@@ -83,19 +83,14 @@ const JamForm = () => {
     (async () => {
       if (!isLoaded) {
         let profileId: number =  await UserManager.getProfileId();
-        let jamData: any = {};
-
-        if (entityId > 0) {
-          jamData = await EntityManager.getJams({ items_ids: [entityId] });
-          console.log(jamData);
-        }
+        let jamData: any = entityId == 0 ? formData : await EntityManager.getJams({ items_ids: [entityId] });
 
         setProfileId(profileId);
         dispatch(setFormData<any>({ 
           resource: resource,
           key: null, 
           value: {
-            ...formData,
+            ...(entityId > 0 ? jamData?.[0] : formData),
             ...{ profile_id: profileId },
           }, 
         }));
