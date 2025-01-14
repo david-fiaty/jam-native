@@ -50,10 +50,14 @@ const JamForm = () => {
 
   const submitForm = async () => {
     setIsProcessing(true);
-    let result: any = await EntityManager.addJam(formData);
+
+    let result: any = entityId > 0 
+      ? await EntityManager.updateJam(entityId, formData) 
+      : await EntityManager.addJam(formData);
+
     let message: any = {
-      title: i18n.t('Create Jam'),
-      content: i18n.t('The Jam was successfully created.'),
+      title: entityId > 0 ? i18n.t('Update Jam') : i18n.t('Create Jam'),
+      content: i18n.t('The Jam data was successfully submitted.'),
     };
 
     if (result?.error) message.content = i18n.t(result.error)

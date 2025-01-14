@@ -109,6 +109,11 @@ const Endpoints = {
     cacheable: false,
     dataKey: null,
   },
+  updateJam: {
+    path: '/jams/',
+    cacheable: false,
+    dataKey: null,
+  },
   deleteJam: {
     path: '/jams/',
     cacheable: false,
@@ -119,6 +124,11 @@ const Endpoints = {
     cacheable: false,
     dataKey: null,
   },
+  addJamToProject: {
+    path: '/projects/[project_id]/jams/add/',
+    cacheable: false,
+    dataKey: null,
+  }, 
   updateProfile: {
     path: '/profiles/[profile_id]/',
     cacheable: false,

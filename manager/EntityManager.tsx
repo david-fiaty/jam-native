@@ -23,6 +23,12 @@ class EntityManager {
     return response;
   }
 
+  async updateJam(entityId: number, options: any) {
+    let defaults: any = {};
+    let variables: any = { '[entity_id]': entityId };
+
+    return await DataManager.put('updateJam', {...defaults, ...options}, variables); 
+  }
 
   async updateProfile(options: any) {
     let defaults: any = {};
@@ -64,6 +70,13 @@ class EntityManager {
     let defaults = {};
     
     return await DataManager.get('getProjects', {...defaults, ...options}); 
+  }
+
+  async addJamToProject(projectId: number, options?: any) {
+    let defaults: any = {};
+    let variables: any = { '[project_id]': projectId };
+
+    return await DataManager.put('addJamToProject', {...defaults, ...options}, variables); 
   }
 
   async getProjectImageUrl(entity: any) {
