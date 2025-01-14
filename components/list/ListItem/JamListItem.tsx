@@ -42,9 +42,21 @@ const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddBut
     if (onListItemPress) {
       onListItemPress(row);
     }
+
+    if (canAddItem) {
+
+    }
+    else if (canDeleteItem) {
+
+    }
+
+  
     else if (true) {
       console.log('item cliked', row.item.id);
     }
+
+
+
     else {
       router.push({
         pathname: "/jam",
