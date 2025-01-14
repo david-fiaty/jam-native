@@ -4,6 +4,9 @@ import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 import ScreenManager from '@/manager/ScreenManager';
 import SpinnerView from '../view/SpinnerView';
+import BackButton from '../button/BackButton';
+import BoxView from '../view/BoxView';
+import i18n from '@/translation/i18n';
 
 const AddJamToProjectForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -22,12 +25,21 @@ const AddJamToProjectForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(entityId);
-
   return (
-    <Text>
-      ADD JAM TO PROJECT
-    </Text>
+    <BoxView
+      align="flex-start"
+      justify="flex-start"
+      scroll={true}
+      style={Layout.screenContent}
+    >
+      <BackButton
+        title={i18n.t('Add Jam to project')}
+        onPress={() => ScreenManager.toggleScreen('AddJamToProjectForm')}
+      />
+        <Text>
+          ADD JAM TO PROJECT
+        </Text>
+    </BoxView>
   );
 };
 
