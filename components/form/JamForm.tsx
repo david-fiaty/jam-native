@@ -48,10 +48,15 @@ const JamForm = () => {
     }));
   };
 
+  const processMedia = (data: any) => {
+    return data.map((item: any) => {
+      return DataManager.extract(['base64'], item);
+    }); 
+  };
+
   const submitForm = async () => {
     setIsProcessing(true);
-
-    console.log(formData?.upload_medias); // Todo - Process upload images
+    let media: any = processMedia(formData?.upload_medias);
 
     let result: any = entityId > 0 
       ? await EntityManager.updateJam(entityId, formData) 
