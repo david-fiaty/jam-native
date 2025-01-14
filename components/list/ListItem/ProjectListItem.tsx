@@ -10,19 +10,22 @@ import AddItemButton from "@/components/button/AddItemButton";
 import NoImageView from "@/components/view/NoImageView";
 import MediaManager from "@/manager/MediaManager";
 import IconView from "@/components/view/IconView";
+import TextView from "@/components/view/TextView";
 
 type Props = BaseProps & {
   row?: any;
+  images?: any;
   canAddItem?: boolean;
   canDeleteItem?: boolean;
   onAddButtonPress?: () => void;
   onListItemPress?: (row: any) => void;
 };
 
-const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddButtonPress }: Props) => {
+const ProjectListItem = ({ row, images, canAddItem, canDeleteItem, onListItemPress, onAddButtonPress }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const [selectedIds, setSelectedIds] = useState<any>([]);
+  const imageSize = MediaManager.getThumbnailSize();
 
   const findItemIndex = (row: any) => {
     return selectedIds.findIndex((id: any) => id == row.item.id);
@@ -47,14 +50,13 @@ const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddBut
     }
     else {
       router.push({
-        pathname: "/jam",
+        pathname: "/project",
         params: { idArray: [row.item.id], title: row.item.title },
       });
     } 
   };
 
-  const renderItem = (row: any) => {
-    let imageSize = MediaManager.getThumbnailSize();
+  const renderItem = (row: any, imageUrl?: any) => {
     let output = null;
     let isSelected: boolean = findItemIndex(row) !== -1;
     let imageStyle = (isSelected ? styles.selectedItem : {}); // Todo - Is this needed?
@@ -67,7 +69,7 @@ const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddBut
         onPress={onAddButtonPress}
       />;
     }
-    else if (!row?.item?.medias?.[0]?.url || row?.item?.medias?.[0]?.url == 'undefined') {
+    else if (!imageUrl || imageUrl == 'undefined') {
       output = (
         <View style={styles.item}>
           <NoImageView 
@@ -82,7 +84,7 @@ const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddBut
       output = (
         <View style={styles.item}>
           <ImageView
-            uri={MediaManager.getImageUrl(row.item.medias[0].url)}
+            uri={MediaManager.getImageUrl(imageUrl)}
             width={imageSize.width}
             height={imageSize.height}
             resizeMode="cover"
@@ -115,7 +117,7 @@ const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddBut
     return output;
   }
 
-  return renderItem(row);
+  return renderItem(row, images?.[row?.item?.id]);
 };
 
 const styles = StyleSheet.create({
@@ -144,4 +146,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default JamListItem;
+export default ProjectListItem;

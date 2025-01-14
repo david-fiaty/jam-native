@@ -14,6 +14,7 @@ import AddItemButton from "../button/AddItemButton";
 import NoImageView from "../view/NoImageView";
 import BoxView from "../view/BoxView";
 import MediaManager from "@/manager/MediaManager";
+import ProjectListItem from "./ListItem/ProjectListItem";
 
 type Props = {
   title?: any;
@@ -165,7 +166,12 @@ const ProfileProjectsList = ({
           contentContainerStyle={{ gap: Layout.space.base }}
           columnWrapperStyle={{ gap: Layout.space.base }}
           scrollEnabled={false}
-          renderItem={(row: any) => renderItem(row)}
+          renderItem={(row: any) => (
+            <ProjectListItem 
+              row={row}
+              images={projectsImages}
+            />
+          )}
         />
       )}
     </View>
