@@ -10,7 +10,6 @@ import AddItemButton from "@/components/button/AddItemButton";
 import NoImageView from "@/components/view/NoImageView";
 import MediaManager from "@/manager/MediaManager";
 import IconView from "@/components/view/IconView";
-import TextView from "@/components/view/TextView";
 
 type Props = BaseProps & {
   row?: any;
@@ -84,7 +83,7 @@ const ProjectListItem = ({ row, images, canAddItem, canDeleteItem, onListItemPre
       output = (
         <View style={styles.item}>
           <ImageView
-            uri={MediaManager.getImageUrl(imageUrl)}
+            uri={imageUrl}
             width={imageSize.width}
             height={imageSize.height}
             resizeMode="cover"
