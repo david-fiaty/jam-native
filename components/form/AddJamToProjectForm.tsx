@@ -50,10 +50,9 @@ const AddJamToProjectForm = () => {
         title={i18n.t('Add Jam to project')}
         onPress={() => ScreenManager.toggleScreen('AddJamToProjectForm')}
       />
-        <TextView>{i18n.t('Select a project from your profile projects')}</TextView>
+        <TextView>{i18n.t('Select a target project from your profile projects:')}</TextView>
 
         <ProfileProjectsList
-          title={i18n.t("Your Projects")} 
           idArray={[14, 18, 19]}
           //idArray={formData?.profile_projects}
         />
