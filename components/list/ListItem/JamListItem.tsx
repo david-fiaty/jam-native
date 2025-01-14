@@ -40,11 +40,18 @@ const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddBut
   };
 
   const onItemPress = (row: any) => {
+    if (canAddItem || canDeleteItem) updateSelection(row);
+
     if (onListItemPress) {
       onListItemPress(row);
     }
+    else {
+      router.push({
+        pathname: "/jam",
+        params: { idArray: [row.item.id], title: row.item.title },
+      });
+    } 
 
-    if (canAddItem || canDeleteItem) updateSelection(row);
 
       /*
   
@@ -55,12 +62,6 @@ const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddBut
 
 
 
-    else {
-      router.push({
-        pathname: "/jam",
-        params: { idArray: [row.item.id], title: row.item.title },
-      });
-    } 
   };
 
   const renderItem = (row: any) => {
