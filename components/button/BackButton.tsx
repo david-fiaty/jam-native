@@ -12,7 +12,12 @@ const BackButton = ({title, onPress}: Props) => {
   const ButtonView = () => {
     return (        
       <BoxView direction="row" align="center">
-        <IconView name="previous" theme="clear" onPress={onPress} />
+        <IconView 
+          name="previous" 
+          theme="clear" 
+          padding={0} 
+          onPress={onPress} 
+        />
         <TextView style={styles.text}>{title}</TextView>
       </BoxView>
     );

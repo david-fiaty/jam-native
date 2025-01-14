@@ -42,6 +42,13 @@ export const Modals = [
     params: {},
   },
   {
+    name: 'AddJamToProjectForm', 
+    effect: 'fade',
+    headerNavigation: true,
+    footerNavigation: true,
+    params: {},
+  },
+  {
     name: 'SettingsMenu', 
     effect: 'fade',
     headerNavigation: true,
