@@ -51,13 +51,15 @@ const JamForm = () => {
   const submitForm = async () => {
     setIsProcessing(true);
 
+    console.log(formData?.upload_medias); // Todo - Process upload images
+
     let result: any = entityId > 0 
       ? await EntityManager.updateJam(entityId, formData) 
       : await EntityManager.addJam(formData);
 
     let message: any = {
       title: entityId > 0 ? i18n.t('Update Jam') : i18n.t('Create Jam'),
-      content: i18n.t('The Jam data was successfully submitted.'),
+      content: i18n.t('Jam data successfully submitted.'),
     };
 
     if (result?.error) message.content = i18n.t(result.error)
