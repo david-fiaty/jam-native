@@ -57,7 +57,7 @@ const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddBut
     let imageSize = MediaManager.getThumbnailSize();
     let output = null;
     let isSelected: boolean = findItemIndex(row) !== -1;
-    let imageStyle = (isSelected ? styles.selectedItem : {});
+    let imageStyle = (isSelected ? styles.selectedItem : {}); // Todo - Is this needed?
 
     if (row?.item?.id == "addItem") {
       output = <AddItemButton
