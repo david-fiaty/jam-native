@@ -5,23 +5,19 @@ import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
-import ImageView from "../view/ImageView";
-import ScreenManager from "@/manager/ScreenManager";
 import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
-import AddItemButton from "../button/AddItemButton";
-import NoImageView from "../view/NoImageView";
 import BoxView from "../view/BoxView";
-import MediaManager from "@/manager/MediaManager";
+import ProjectListItem from "./ListItem/ProjectListItem";
 
 type Props = {
   title?: any;
   idArray?: any;
   addButton?: boolean;
   allButton?: boolean;
-  profileId?: number;
   onAddButtonPress?: () => void;
+  onListItemPress?: (row: any) => void;
 };
 
 const ProfileProjectsList = ({
@@ -29,8 +25,8 @@ const ProfileProjectsList = ({
   idArray,
   addButton,
   allButton,
-  profileId,
-  onAddButtonPress
+  onAddButtonPress,
+  onListItemPress
 }: Props) => {
   const numColumns = 3;
   const router = useRouter();
@@ -38,76 +34,16 @@ const ProfileProjectsList = ({
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [projectsImages, setProjectsImages] = useState<any>({});
 
-  //const formData: any = useSelector((state: any) => state.form[resource]);
-  
-
-  const renderItem = (row: any) => {
-    let imageSize: any = MediaManager.getThumbnailSize();
-    let output: any = null;
-    let uri: string = projectsImages?.[row?.item?.id];
-
-    if (row?.item?.id == "addItem") {
-      output = (
-        <AddItemButton
-          label={i18n.t("Add")}
-          width={imageSize.width}
-          height={imageSize.height}
-          onPress={onAddButtonPress}
-        />
-      );
-    } else if (uri) {
-      output = (
-        <View style={styles.item}>
-          <ImageView
-            uri={uri}
-            width={imageSize.width}
-            height={imageSize.height}
-            resizeMode="cover"
-            style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
-          />
-        </View>
-      );
-    } else {
-      output = (
-        <NoImageView
-          width={imageSize.width}
-          height={imageSize.height}
-          rounded={true}
-        />
-      );
+  const onItemPress = (row: any) => {
+    if (onListItemPress) {
+      onListItemPress(row);
     }
-
-    if (row?.item?.id == "addItem") {
-      output = (
-        <TouchableOpacity
-          key={row.item.id}
-          onPress={() =>
-            router.push({
-              pathname: "/project",
-              params: { idArray: [row.item.id], title: row.item.title },
-            })
-          }
-        >
-          {output}
-        </TouchableOpacity>
-      );
+    else {
+      router.push({
+        pathname: "/project",
+        params: { idArray: [row.item.id], title: row.item.title },
+      });
     }
-
-    if (parseInt(row?.item?.id) > 0) {
-      output = <TouchableOpacity
-        key={row.item.id}
-        onPress={() =>
-          router.push({
-            pathname: "/project",
-            params: { idArray: [row.item.id], title: row.item.name },
-          })
-        }
-      >
-        {output}
-      </TouchableOpacity>
-    }
-
-    return output;
   };
 
   useEffect(() => {
@@ -142,7 +78,7 @@ const ProfileProjectsList = ({
   return (
     <View style={styles.container}>
       <BoxView direction="row" align="center" justify="space-between">
-        <TextView style={styles.title}>{title}</TextView>
+        { title && <TextView style={styles.title}>{title}</TextView> }
 
         {allButton && (
           <TouchableOpacity
@@ -165,7 +101,15 @@ const ProfileProjectsList = ({
           contentContainerStyle={{ gap: Layout.space.base }}
           columnWrapperStyle={{ gap: Layout.space.base }}
           scrollEnabled={false}
-          renderItem={(row: any) => renderItem(row)}
+          renderItem={(row: any) => (
+            <ProjectListItem 
+              row={row}
+              images={projectsImages}
+              canAddItem={true}
+              onAddButtonPress={onAddButtonPress}
+              onListItemPress={(row: any) => onItemPress(row)}
+            />
+          )}
         />
       )}
     </View>
