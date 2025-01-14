@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
@@ -18,6 +19,21 @@ type Props = BaseProps & {
 const JamListItem = ({ row, onListItemPress, onAddButtonPress }: Props) => {
   const numColumns = 3;
   const router = useRouter();
+  const [selectedIds, setSelectedIds] = useState<any>([]);
+
+  const findItemIndex = (row: any) => {
+    return selectedIds.findIndex((id: any) => id == row.item.id);
+  };
+
+  const updateSelection = (row: any) => {
+    let selectedIdsList = [...selectedIds];
+    let index: number = findItemIndex(row);
+
+    if (index === -1) selectedIdsList.push(row.item.id);
+    else delete selectedIdsList[index];
+
+    setSelectedIds(selectedIdsList.filter(Boolean));
+  };
 
   const onItemPress = (row: any) => {
     if (onListItemPress) {

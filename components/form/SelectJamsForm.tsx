@@ -38,8 +38,7 @@ const updateSelectionsForm = () => {
     if (index === -1) selectedJamsList.push(row.item.id);
     else delete selectedJamsList[index];
 
-    selectedJamsList = selectedJamsList.filter((n: any) => n);
-    setSelectedJams(selectedJamsList);
+    setSelectedJams(selectedJamsList.filter(Boolean));
   };
 
   const addSelection = () => {    
