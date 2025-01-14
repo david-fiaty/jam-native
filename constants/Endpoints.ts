@@ -109,6 +109,11 @@ const Endpoints = {
     cacheable: false,
     dataKey: null,
   },
+  updateJam: {
+    path: '/jams/',
+    cacheable: false,
+    dataKey: null,
+  },
   deleteJam: {
     path: '/jams/',
     cacheable: false,
