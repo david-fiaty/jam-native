@@ -7,6 +7,7 @@ import SpinnerView from '../view/SpinnerView';
 import BackButton from '../button/BackButton';
 import BoxView from '../view/BoxView';
 import i18n from '@/translation/i18n';
+import TextView from '../view/TextView';
 
 const AddJamToProjectForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -36,9 +37,7 @@ const AddJamToProjectForm = () => {
         title={i18n.t('Add Jam to project')}
         onPress={() => ScreenManager.toggleScreen('AddJamToProjectForm')}
       />
-        <Text>
-          ADD JAM TO PROJECT
-        </Text>
+        <TextView>{i18n.t('Select projects from your profile')}</TextView>
     </BoxView>
   );
 };
