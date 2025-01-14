@@ -54,6 +54,7 @@ const AddJamToProjectForm = () => {
 
         <ProfileProjectsList
           idArray={[14, 18, 19]}
+          onListItemPress={(row: any) => console.log('item press -->>', row.item.id)}
           //idArray={formData?.profile_projects}
         />
     </BoxView>
