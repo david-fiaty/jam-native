@@ -53,7 +53,7 @@ const AddJamToProjectForm = () => {
         <TextView>{i18n.t('Select a target project from your profile projects:')}</TextView>
 
         <ProfileProjectsList
-          idArray={[14, 18, 19]}
+          idArray={[14, 18, 19]} // Todo - Remove test
           onListItemPress={(row: any) => console.log('item press -->>', row.item.id)}
           //idArray={formData?.profile_projects}
         />
