@@ -29,7 +29,6 @@ const AddJamToProjectForm = () => {
   const submitForm = async () => {
     setIsProcessing(true);
     let projectId: number = formData?.project_id || 0;
-    
     let result: any = await EntityManager.addJamToProject(projectId, { 
       profile_id: profileId,
       items_ids: [entityId], 
