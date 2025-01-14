@@ -15,6 +15,7 @@ import MediaManager from "@/manager/MediaManager";
 import BackButton from "../button/BackButton";
 import IconView from "../view/IconView";
 import TextView from "../view/TextView";
+import JamListItem from "../list/ListItem/JamListItem";
 
 const SelectJamsForm = () => {
   const dispatch = useDispatch();
@@ -147,7 +148,13 @@ const SelectJamsForm = () => {
           contentContainerStyle={{ gap: Layout.space.base }}
           columnWrapperStyle={{ gap: Layout.space.base }}
           scrollEnabled={false}
-          renderItem={(row: any) => renderItem(row)}
+          renderItem={(row: any) => (
+            <JamListItem
+              row={row}
+              canAddItem={true}
+              onListItemPress={(row: any) => updateSelection(row)}
+            />
+          )}
         />
       )}
     </BoxView>

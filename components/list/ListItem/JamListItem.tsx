@@ -51,17 +51,6 @@ const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddBut
         params: { idArray: [row.item.id], title: row.item.title },
       });
     } 
-
-
-      /*
-  
-    else if (true) {
-      console.log('item cliked', row.item.id);
-    }
-      */
-
-
-
   };
 
   const renderItem = (row: any) => {
