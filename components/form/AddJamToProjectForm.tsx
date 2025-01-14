@@ -8,9 +8,12 @@ import BackButton from '../button/BackButton';
 import BoxView from '../view/BoxView';
 import i18n from '@/translation/i18n';
 import TextView from '../view/TextView';
+import ProfileProjectsList from '../list/ProfileProjectsList';
+import UserManager from '@/manager/UserManager';
 
 const AddJamToProjectForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [profileId, setProfileId] = useState<number>(0);
   const activeScreen: any = ScreenManager.getActiveScreen();
   const entityId: number = activeScreen.params.entityId;
 
@@ -27,7 +30,7 @@ const AddJamToProjectForm = () => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-
+        setProfileId(await UserManager.getProfileId());
         setIsLoaded(true);
       }
       
@@ -47,7 +50,24 @@ const AddJamToProjectForm = () => {
         title={i18n.t('Add Jam to project')}
         onPress={() => ScreenManager.toggleScreen('AddJamToProjectForm')}
       />
-        <TextView>{i18n.t('Select projects from your profile')}</TextView>
+        <TextView>{i18n.t('Select a project from your profile projects')}</TextView>
+
+        <ProfileProjectsList
+          title={i18n.t("Your Projects")} 
+          //addButton={true}
+          profileId={profileId}
+          idArray={[14, 18, 19]}
+          //allButton={formData?.profile_projects?.length > 0}
+          //idArray={formData?.profile_projects}
+          /*
+          onAddButtonPress={() => {
+            ScreenManager.toggleScreen("AddProjectForm", {
+              profileId: profileId,
+              profileJams: formData?.profile_jams || [],
+            });
+          }}
+            */
+        />
     </BoxView>
   );
 };
