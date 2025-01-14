@@ -43,17 +43,14 @@ const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddBut
       onListItemPress(row);
     }
 
-    if (canAddItem) {
+    if (canAddItem || canDeleteItem) updateSelection(row);
 
-    }
-    else if (canDeleteItem) {
-
-    }
-
+      /*
   
     else if (true) {
       console.log('item cliked', row.item.id);
     }
+      */
 
 
 
