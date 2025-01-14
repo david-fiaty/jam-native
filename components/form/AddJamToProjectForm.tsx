@@ -54,10 +54,7 @@ const AddJamToProjectForm = () => {
 
         <ProfileProjectsList
           title={i18n.t("Your Projects")} 
-          //addButton={true}
-          profileId={profileId}
           idArray={[14, 18, 19]}
-          //allButton={formData?.profile_projects?.length > 0}
           //idArray={formData?.profile_projects}
           /*
           onAddButtonPress={() => {
