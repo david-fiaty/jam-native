@@ -81,7 +81,7 @@ const updateSelectionsForm = () => {
           />
 
           {isSelected && (
-            <View style={styles.checkItem}>
+            <View style={styles.checkIcon}>
               <IconView name="checkmark" theme="primary" size={12} padding={3.5} />
             </View>
           )}
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
   selectedItem: {
     opacity: 0.7,
   },
-  checkItem: {
+  checkIcon: {
     position: "absolute",
     top: 5,
     right: 5,
