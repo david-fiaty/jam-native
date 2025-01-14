@@ -9,6 +9,7 @@ import ScreenManager from "@/manager/ScreenManager";
 import AddItemButton from "@/components/button/AddItemButton";
 import NoImageView from "@/components/view/NoImageView";
 import MediaManager from "@/manager/MediaManager";
+import IconView from "@/components/view/IconView";
 
 type Props = BaseProps & {
   row?: any;
@@ -50,6 +51,8 @@ const JamListItem = ({ row, onListItemPress, onAddButtonPress }: Props) => {
   const renderItem = (row: any) => {
     let imageSize = MediaManager.getThumbnailSize();
     let output = null;
+    let isSelected: boolean = findItemIndex(row) !== -1;
+    let imageStyle = (isSelected ? styles.selectedItem : {});
 
     if (row?.item?.id == "addItem") {
       output = <AddItemButton
@@ -60,28 +63,42 @@ const JamListItem = ({ row, onListItemPress, onAddButtonPress }: Props) => {
       />;
     }
     else if (!row?.item?.medias?.[0]?.url) {
-      output = <NoImageView 
-        width={imageSize.width} 
-        height={imageSize.height} 
-        rounded={true}
-      />;
+      output = (
+        <View style={styles.item}>
+          <NoImageView 
+            width={imageSize.width} 
+            height={imageSize.height} 
+            rounded={true}
+          />
+        </View>
+      );
     }
     else {
-      output = <View style={styles.item}>
-        <ImageView
-          uri={MediaManager.getImageUrl(row.item.medias[0].url)}
-          width={imageSize.width}
-          height={imageSize.height}
-          resizeMode="cover"
-          style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
-        />
-      </View>
+      output = (
+        <View style={styles.item}>
+          <ImageView
+            uri={MediaManager.getImageUrl(row.item.medias[0].url)}
+            width={imageSize.width}
+            height={imageSize.height}
+            resizeMode="cover"
+            style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
+          />
+        </View>
+      );
     }
 
     if (parseInt(row?.item?.id) > 0) {
-      output = <TouchableOpacity key={row.item.id} onPress={() => onItemPress(row)}>
-        {output}
-      </TouchableOpacity>
+      output = (
+        <TouchableOpacity key={row.item.id} onPress={() => onItemPress(row)}>
+          {output}
+
+          {isSelected && (
+            <View style={styles.checkIcon}>
+              <IconView name="checkmark" theme="primary" size={12} padding={3.5} />
+            </View>
+          )}
+        </TouchableOpacity>
+      );
     }
 
     return output;
@@ -105,6 +122,14 @@ const styles = StyleSheet.create({
   },
   image: {
     borderRadius: Layout.space.base,
+  },
+  checkIcon: {
+    position: "absolute",
+    top: 5,
+    right: 5,
+  },
+  selectedItem: {
+    opacity: 0.7,
   },
 });
 
