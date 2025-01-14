@@ -35,15 +35,23 @@ const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddBut
     if (index === -1) selectedIdsList.push(row.item.id);
     else delete selectedIdsList[index];
 
-    setSelectedIds(selectedIdsList.filter(Boolean));
+    selectedIdsList = selectedIdsList.filter(Boolean);
+    setSelectedIds(selectedIdsList);
   };
 
   const onItemPress = (row: any) => {
+    if (canAddItem || canDeleteItem) updateSelection(row);
+
     if (onListItemPress) {
       onListItemPress(row);
     }
+    else {
+      router.push({
+        pathname: "/jam",
+        params: { idArray: [row.item.id], title: row.item.title },
+      });
+    } 
 
-    if (canAddItem || canDeleteItem) updateSelection(row);
 
       /*
   
@@ -54,12 +62,6 @@ const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddBut
 
 
 
-    else {
-      router.push({
-        pathname: "/jam",
-        params: { idArray: [row.item.id], title: row.item.title },
-      });
-    } 
   };
 
   const renderItem = (row: any) => {
@@ -106,9 +108,15 @@ const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddBut
         <TouchableOpacity key={row.item.id} onPress={() => onItemPress(row)}>
           {output}
 
-          {isSelected && (
+          {canAddItem && isSelected && (
             <View style={styles.checkIcon}>
               <IconView name="checkmark" theme="primary" size={12} padding={3.5} />
+            </View>
+          )}
+
+          {canDeleteItem && isSelected && (
+            <View style={styles.checkIcon}>
+              <IconView name="delete" theme="primary" size={12} padding={3.5} />
             </View>
           )}
         </TouchableOpacity>
