@@ -32,10 +32,6 @@ const ProfileProjectsList = ({
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [projectsImages, setProjectsImages] = useState<any>({});
 
-  const updateSelection = (row: any) => {
-    console.log(row.item.id);
-  };
-
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
@@ -97,7 +93,7 @@ const ProfileProjectsList = ({
               images={projectsImages}
               canAddItem={true}
               onAddButtonPress={onAddButtonPress}
-              onListItemPress={(row: any) => updateSelection(row)}
+              onListItemPress={(row: any) => {}}
             />
           )}
         />
