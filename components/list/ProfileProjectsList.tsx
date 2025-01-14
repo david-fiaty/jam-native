@@ -5,15 +5,10 @@ import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
-import ImageView from "../view/ImageView";
-import ScreenManager from "@/manager/ScreenManager";
 import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
-import AddItemButton from "../button/AddItemButton";
-import NoImageView from "../view/NoImageView";
 import BoxView from "../view/BoxView";
-import MediaManager from "@/manager/MediaManager";
 import ProjectListItem from "./ListItem/ProjectListItem";
 
 type Props = {
@@ -21,7 +16,6 @@ type Props = {
   idArray?: any;
   addButton?: boolean;
   allButton?: boolean;
-  profileId?: number;
   onAddButtonPress?: () => void;
 };
 
@@ -30,7 +24,6 @@ const ProfileProjectsList = ({
   idArray,
   addButton,
   allButton,
-  profileId,
   onAddButtonPress
 }: Props) => {
   const numColumns = 3;
@@ -38,78 +31,6 @@ const ProfileProjectsList = ({
   const [profileProjects, setProfileProjects] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [projectsImages, setProjectsImages] = useState<any>({});
-
-  //const formData: any = useSelector((state: any) => state.form[resource]);
-  
-
-  const renderItem = (row: any) => {
-    let imageSize: any = MediaManager.getThumbnailSize();
-    let output: any = null;
-    let uri: string = projectsImages?.[row?.item?.id];
-
-    if (row?.item?.id == "addItem") {
-      output = (
-        <AddItemButton
-          label={i18n.t("Add")}
-          width={imageSize.width}
-          height={imageSize.height}
-          onPress={onAddButtonPress}
-        />
-      );
-    } else if (uri) {
-      output = (
-        <View style={styles.item}>
-          <ImageView
-            uri={uri}
-            width={imageSize.width}
-            height={imageSize.height}
-            resizeMode="cover"
-            style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
-          />
-        </View>
-      );
-    } else {
-      output = (
-        <NoImageView
-          width={imageSize.width}
-          height={imageSize.height}
-          rounded={true}
-        />
-      );
-    }
-
-    if (row?.item?.id == "addItem") {
-      output = (
-        <TouchableOpacity
-          key={row.item.id}
-          onPress={() =>
-            router.push({
-              pathname: "/project",
-              params: { idArray: [row.item.id], title: row.item.title },
-            })
-          }
-        >
-          {output}
-        </TouchableOpacity>
-      );
-    }
-
-    if (parseInt(row?.item?.id) > 0) {
-      output = <TouchableOpacity
-        key={row.item.id}
-        onPress={() =>
-          router.push({
-            pathname: "/project",
-            params: { idArray: [row.item.id], title: row.item.name },
-          })
-        }
-      >
-        {output}
-      </TouchableOpacity>
-    }
-
-    return output;
-  };
 
   useEffect(() => {
     (async () => {
@@ -170,6 +91,9 @@ const ProfileProjectsList = ({
             <ProjectListItem 
               row={row}
               images={projectsImages}
+              canAddItem={true}
+              onAddButtonPress={onAddButtonPress}
+              onListItemPress={(row: any) => {}}
             />
           )}
         />
