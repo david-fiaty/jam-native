@@ -10,6 +10,7 @@ import AddItemButton from "@/components/button/AddItemButton";
 import NoImageView from "@/components/view/NoImageView";
 import MediaManager from "@/manager/MediaManager";
 import IconView from "@/components/view/IconView";
+import TextView from "@/components/view/TextView";
 
 type Props = BaseProps & {
   row?: any;
@@ -24,6 +25,7 @@ const ProjectListItem = ({ row, images, canAddItem, canDeleteItem, onListItemPre
   const numColumns = 3;
   const router = useRouter();
   const [selectedIds, setSelectedIds] = useState<any>([]);
+  const imageSize = MediaManager.getThumbnailSize();
 
   const findItemIndex = (row: any) => {
     return selectedIds.findIndex((id: any) => id == row.item.id);
@@ -48,14 +50,13 @@ const ProjectListItem = ({ row, images, canAddItem, canDeleteItem, onListItemPre
     }
     else {
       router.push({
-        pathname: "/jam",
+        pathname: "/project",
         params: { idArray: [row.item.id], title: row.item.title },
       });
     } 
   };
 
-  const renderItem = (row: any, imageUrl?: string) => {
-    let imageSize = MediaManager.getThumbnailSize();
+  const renderItem = (row: any, imageUrl?: any) => {
     let output = null;
     let isSelected: boolean = findItemIndex(row) !== -1;
     let imageStyle = (isSelected ? styles.selectedItem : {}); // Todo - Is this needed?
@@ -68,7 +69,7 @@ const ProjectListItem = ({ row, images, canAddItem, canDeleteItem, onListItemPre
         onPress={onAddButtonPress}
       />;
     }
-    else if (!imageUrl) {
+    else if (!imageUrl || imageUrl == 'undefined') {
       output = (
         <View style={styles.item}>
           <NoImageView 
