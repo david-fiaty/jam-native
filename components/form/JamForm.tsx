@@ -28,14 +28,16 @@ import EntityManager from "@/manager/EntityManager";
 import CollaboratorsField from "../field/CollaboratorsField";
 import DataManager from "@/manager/DataManager";
 
-const AddJamForm = () => {
+const JamForm = () => {
   const resource: string = 'jam';
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
   const formData = useSelector((state: any) => state.form[resource]);
+  const activeScreen = ScreenManager.getActiveScreen();
   const jamCategoriesData = StaticData.jamCategories;
+  const entityId = activeScreen?.params?.entityId || 0;
 
   const updateField = (key: any, value: any) => {
     dispatch(setFormData<any>({ 
@@ -81,12 +83,14 @@ const AddJamForm = () => {
     (async () => {
       if (!isLoaded) {
         let profileId: number =  await UserManager.getProfileId();
+        let jamData: any = entityId == 0 ? formData : await EntityManager.getJams({ items_ids: [entityId] });
+
         setProfileId(profileId);
         dispatch(setFormData<any>({ 
           resource: resource,
           key: null, 
           value: {
-            ...formData,
+            ...(entityId > 0 ? jamData?.[0] : formData),
             ...{ profile_id: profileId },
           }, 
         }));
@@ -94,9 +98,11 @@ const AddJamForm = () => {
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, profileId]);
+  }, [isLoaded, profileId, resource, formData]);
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(entityId);
 
   return (
     <BoxView
@@ -107,7 +113,7 @@ const AddJamForm = () => {
     >
       <BackButton
         title={i18n.t('Create a Jam')}
-        onPress={() => ScreenManager.toggleScreen('AddJamForm')}
+        onPress={() => ScreenManager.toggleScreen('JamForm')}
       />
 
       <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
@@ -278,4 +284,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddJamForm;
+export default JamForm;

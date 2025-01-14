@@ -42,7 +42,7 @@ const ProfileForm = () => {
 
   const submitForm = async () => {
     setIsProcessing(true);
-    let result: any = await EntityManager.addJam(formData);
+    let result: any = await EntityManager.updateProfile(formData);
     let message: any = {
       title: i18n.t('Update profile'),
       content: i18n.t('The profile data was successfully updated.'),
@@ -258,7 +258,7 @@ const ProfileForm = () => {
           allButton={formData?.profile_jams?.length > 0}
           addButton={true}
           idArray={formData?.profile_jams} 
-          onAddButtonPress={() => ScreenManager.toggleScreen("AddJamForm")}
+          onAddButtonPress={() => ScreenManager.toggleScreen("JamForm")}
         />   
 
         {formData?.saved_jams?.length > 0 && (

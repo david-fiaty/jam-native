@@ -12,7 +12,7 @@ export const Config = {
   logoImageSize: 512,
   paginationSize: 10,
   dateFormat: 'MMM Do YYYY',
-  messageDisplayDuration: 50000,
+  messageDisplayDuration: 3500,
   defaultLocation: {
     latitude: 8.6195,
     longitude: 0.8248,

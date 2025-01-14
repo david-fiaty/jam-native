@@ -89,6 +89,11 @@ const Endpoints = {
     cacheable: false,
     dataKey: 'user',
   },
+  changePassword: {
+    path: '/change-password/',
+    cacheable: false,
+    dataKey: null,
+  },
   likeJam: {
     path: '/jams/like/',
     cacheable: false,
@@ -104,8 +109,18 @@ const Endpoints = {
     cacheable: false,
     dataKey: null,
   },
+  deleteJam: {
+    path: '/jams/',
+    cacheable: false,
+    dataKey: null,
+  },
   addProject: {
     path: '/projects/',
+    cacheable: false,
+    dataKey: null,
+  },
+  updateProfile: {
+    path: '/profiles/[profile_id]/',
     cacheable: false,
     dataKey: null,
   },

@@ -27,9 +27,9 @@ const FooterNavigation = () => {
         radius="round"
         size={14}
         padding={4}
-        theme={activeScreen?.name == 'AddJamForm' ? 'secondary' : 'clear'}
-        style={activeScreen?.name == 'AddJamForm' ? styles.active : {}}
-        onPress={() => ScreenManager.toggleScreen('AddJamForm')}
+        theme={activeScreen?.name == 'JamForm' ? 'secondary' : 'clear'}
+        style={activeScreen?.name == 'JamForm' ? styles.active : {}}
+        onPress={() => ScreenManager.toggleScreen('JamForm')}
       />
       <IconView
         name="user"

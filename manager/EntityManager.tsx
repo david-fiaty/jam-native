@@ -5,17 +5,6 @@ import UserManager from './UserManager';
 import MediaManager from './MediaManager';
 
 class EntityManager {
-  async report(entityId: any) {
-    let profileId = await UserManager.getProfileId();
-    let response = await DataManager.post('report', {
-      profile_id: profileId,
-      item_id: entityId,
-      like_action: 'like',
-    });
-
-    return !!response;
-  }
-
   async listProfiles(options?: any) {
     let profileId = await UserManager.getProfileId();
     let defaults = {
@@ -28,9 +17,19 @@ class EntityManager {
   }
 
   async getProfiles(options?: any) {
-    let defaults = {};
+    let defaults: any = {};
+    let response: any = await DataManager.get('getProfiles', {...defaults, ...options}); 
 
-    return await DataManager.get('getProfiles', {...defaults, ...options}); 
+    return response;
+  }
+
+
+  async updateProfile(options: any) {
+    let defaults: any = {};
+    let profileId: number = await UserManager.getProfileId();
+    let variables: any = { '[profile_id]': profileId };
+
+    return await DataManager.put('updateProfile', {...defaults, ...options}, variables); 
   }
 
   async listJams(options?: any) {
@@ -169,6 +168,16 @@ class EntityManager {
     return response;
   }
 
+  async deleteJam(entityId: any) {
+    let profileId = await UserManager.getProfileId();
+    let response = await DataManager.delete('deleteJam', {
+      profile_id: profileId,
+      items_ids: [entityId],
+    });
+
+    return response;
+  }
+
   async shareJam(entityId: any) {
     let entity = await this.getJams({items_ids: [entityId]});
     let message: string = '';
@@ -202,6 +211,22 @@ class EntityManager {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  async reportItem(type: string, entityId: any) {
+    let profileId: number = await UserManager.getProfileId();
+    let isAnonymous: boolean = profileId > 0;
+
+    let response = await DataManager.post('report', {
+      reporting_person_is_anonymous: isAnonymous,
+      reporting_profile_id: profileId,
+      reporting_content_type: type,
+      reporting_content_id: entityId,
+      reporting_cause: '',
+      reporting_comment: '',  
+    });
+
+    return response;
   }
 };
 
