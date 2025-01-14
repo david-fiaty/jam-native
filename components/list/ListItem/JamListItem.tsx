@@ -35,7 +35,8 @@ const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddBut
     if (index === -1) selectedIdsList.push(row.item.id);
     else delete selectedIdsList[index];
 
-    setSelectedIds(selectedIdsList.filter(Boolean));
+    selectedIdsList = selectedIdsList.filter(Boolean);
+    setSelectedIds(selectedIdsList);
   };
 
   const onItemPress = (row: any) => {
@@ -111,7 +112,7 @@ const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddBut
               <IconView name="checkmark" theme="primary" size={12} padding={3.5} />
             </View>
           )}
-          
+
           {canDeleteItem && isSelected && (
             <View style={styles.checkIcon}>
               <IconView name="delete" theme="primary" size={12} padding={3.5} />
