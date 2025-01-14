@@ -106,9 +106,14 @@ const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddBut
         <TouchableOpacity key={row.item.id} onPress={() => onItemPress(row)}>
           {output}
 
-          {isSelected && (
+          {canAddItem && isSelected && (
             <View style={styles.checkIcon}>
               <IconView name="checkmark" theme="primary" size={12} padding={3.5} />
+            </View>
+          )}
+          {canDeleteItem && isSelected && (
+            <View style={styles.checkIcon}>
+              <IconView name="delete" theme="primary" size={12} padding={3.5} />
             </View>
           )}
         </TouchableOpacity>
