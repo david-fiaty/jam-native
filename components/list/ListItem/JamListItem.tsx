@@ -111,6 +111,7 @@ const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddBut
               <IconView name="checkmark" theme="primary" size={12} padding={3.5} />
             </View>
           )}
+          
           {canDeleteItem && isSelected && (
             <View style={styles.checkIcon}>
               <IconView name="delete" theme="primary" size={12} padding={3.5} />
