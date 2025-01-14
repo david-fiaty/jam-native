@@ -56,14 +56,6 @@ const AddJamToProjectForm = () => {
           title={i18n.t("Your Projects")} 
           idArray={[14, 18, 19]}
           //idArray={formData?.profile_projects}
-          /*
-          onAddButtonPress={() => {
-            ScreenManager.toggleScreen("AddProjectForm", {
-              profileId: profileId,
-              profileJams: formData?.profile_jams || [],
-            });
-          }}
-            */
         />
     </BoxView>
   );

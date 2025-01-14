@@ -91,7 +91,9 @@ const ProfileProjectsList = ({
             <ProjectListItem 
               row={row}
               images={projectsImages}
+              canAddItem={true}
               onAddButtonPress={onAddButtonPress}
+              onListItemPress={(row: any) => {}}
             />
           )}
         />
