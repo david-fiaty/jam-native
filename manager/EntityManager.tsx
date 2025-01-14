@@ -23,6 +23,12 @@ class EntityManager {
     return response;
   }
 
+  async updateJam(entityId: number, options: any) {
+    let defaults: any = {};
+    let variables: any = { '[entity_id]': entityId };
+
+    return await DataManager.put('updateJam', {...defaults, ...options}, variables); 
+  }
 
   async updateProfile(options: any) {
     let defaults: any = {};
