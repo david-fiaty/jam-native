@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import { BaseProps } from "@/constants/Types";
 import i18n from "@/translation/i18n";
@@ -22,7 +21,6 @@ type Props = BaseProps & {
 
 const ProjectListItem = ({ row, images, canAddItem, canDeleteItem, onListItemPress, onAddButtonPress }: Props) => {
   const numColumns = 3;
-  const router = useRouter();
   const [selectedIds, setSelectedIds] = useState<any>([]);
   const imageSize = MediaManager.getThumbnailSize();
 
@@ -47,12 +45,6 @@ const ProjectListItem = ({ row, images, canAddItem, canDeleteItem, onListItemPre
     if (onListItemPress) {
       onListItemPress(row);
     }
-    else {
-      router.push({
-        pathname: "/project",
-        params: { idArray: [row.item.id], title: row.item.title },
-      });
-    } 
   };
 
   const renderItem = (row: any, imageUrl?: any) => {

@@ -35,7 +35,15 @@ const ProfileProjectsList = ({
   const [projectsImages, setProjectsImages] = useState<any>({});
 
   const onItemPress = (row: any) => {
-    if (onListItemPress) onListItemPress(row);
+    if (onListItemPress) {
+      onListItemPress(row);
+    }
+    else {
+      router.push({
+        pathname: "/project",
+        params: { idArray: [row.item.id], title: row.item.title },
+      });
+    }
   };
 
   useEffect(() => {
