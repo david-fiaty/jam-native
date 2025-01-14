@@ -67,7 +67,7 @@ const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddBut
         onPress={onAddButtonPress}
       />;
     }
-    else if (!row?.item?.medias?.[0]?.url) {
+    else if (!row?.item?.medias?.[0]?.url || row?.item?.medias?.[0]?.url == 'undefined') {
       output = (
         <View style={styles.item}>
           <NoImageView 
