@@ -30,7 +30,12 @@ const ProfileProjectsList = ({
   const router = useRouter();
   const [profileProjects, setProfileProjects] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [formData, setFormData] = useState<any>({});
   const [projectsImages, setProjectsImages] = useState<any>({});
+
+  const updateSelection = (row: any) => {
+    console.log(row.item.id);
+  };
 
   useEffect(() => {
     (async () => {
@@ -91,7 +96,9 @@ const ProfileProjectsList = ({
             <ProjectListItem 
               row={row}
               images={projectsImages}
+              canAddItem={true}
               onAddButtonPress={onAddButtonPress}
+              onListItemPress={(row: any) => updateSelection(row)}
             />
           )}
         />
