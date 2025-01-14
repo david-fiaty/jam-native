@@ -16,7 +16,7 @@ import BackButton from "../button/BackButton";
 import IconView from "../view/IconView";
 import TextView from "../view/TextView";
 
-const updateSelectionsForm = () => {
+const SelectJamsForm = () => {
   const dispatch = useDispatch();
   const [profileJams, setProfileJams] = useState<any>([]);
   const [selectedJams, setSelectedJams] = useState<any>([]);
@@ -178,4 +178,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default updateSelectionsForm;
+export default SelectJamsForm;
