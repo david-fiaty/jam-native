@@ -10,28 +10,37 @@ import i18n from '@/translation/i18n';
 import TextView from '../view/TextView';
 import ProfileProjectsList from '../list/ProfileProjectsList';
 import UserManager from '@/manager/UserManager';
+import EntityManager from '@/manager/EntityManager';
 
 const AddJamToProjectForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
   const [formData, setFormData] = useState<any>({});
   const activeScreen: any = ScreenManager.getActiveScreen();
   const entityId: number = activeScreen.params.entityId;
 
   const updateSelection = (row: any) => {
-    //setFormData({...formData, ...{[key]: value}});
-
-    console.log(row.item.id);
+    setFormData({...formData, ...{ project_id: row.item.id }});
   };
 
-  const submitForm = () => {
-    // Todo - Implement submit form
-    /*
-    {
-      "profile_id": 1,
-      "items_ids": [3, 4]
-    }
-    */
+  const submitForm = async () => {
+    setIsProcessing(true);
+    let projectId: number = formData?.project_id || 0;
+    
+    let result: any = await EntityManager.addJamToProject(projectId, { 
+      profile_id: profileId,
+      items_ids: [entityId], 
+    });
+
+    let message: any = {
+      title: i18n.t('Add Jam to project'),
+      content: i18n.t('Jam successfully added to project.'),
+    };
+
+    if (result?.error) message.content = i18n.t(result.error);
+    ScreenManager.showMessage(message);
+    setIsProcessing(false);
   };
 
   useEffect(() => {
@@ -45,6 +54,8 @@ const AddJamToProjectForm = () => {
   }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(formData);
 
   return (
     <BoxView
