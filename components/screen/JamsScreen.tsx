@@ -15,7 +15,7 @@ import SettingsMenu from "@/components/menu/SettingsMenu";
 import NotificationsMenu from "@/components/menu/NotificationsMenu";
 import SearchView from "@/components/view/SearchView";
 import JamsMapView from "@/components/view/JamsMapView";
-import AddJamForm from "@/components/form/AddJamForm";
+import JamForm from "@/components/form/JamForm";
 import AddProjectForm from "../form/AddProjectForm";
 import ProfileForm from "@/components/form/ProfileForm";
 import JammersList from "@/components/list/JammersList";
@@ -33,7 +33,7 @@ import CountriesList from "../list/CountriesList";
 const screenComponents: any = {
   JamsList: <JamsList />,
   JamsMapView: <JamsMapView />,
-  AddJamForm: <AddJamForm />,
+  JamForm: <JamForm />,
   AddProjectForm: <AddProjectForm />,
   SelectJamsForm: <SelectJamsForm />,
   ProfileForm: <ProfileForm />,

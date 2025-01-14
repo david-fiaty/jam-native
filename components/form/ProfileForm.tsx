@@ -258,7 +258,7 @@ const ProfileForm = () => {
           allButton={formData?.profile_jams?.length > 0}
           addButton={true}
           idArray={formData?.profile_jams} 
-          onAddButtonPress={() => ScreenManager.toggleScreen("AddJamForm")}
+          onAddButtonPress={() => ScreenManager.toggleScreen("JamForm")}
         />   
 
         {formData?.saved_jams?.length > 0 && (

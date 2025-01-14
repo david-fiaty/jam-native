@@ -28,7 +28,7 @@ import EntityManager from "@/manager/EntityManager";
 import CollaboratorsField from "../field/CollaboratorsField";
 import DataManager from "@/manager/DataManager";
 
-const AddJamForm = () => {
+const JamForm = () => {
   const resource: string = 'jam';
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -107,7 +107,7 @@ const AddJamForm = () => {
     >
       <BackButton
         title={i18n.t('Create a Jam')}
-        onPress={() => ScreenManager.toggleScreen('AddJamForm')}
+        onPress={() => ScreenManager.toggleScreen('JamForm')}
       />
 
       <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
@@ -278,4 +278,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddJamForm;
+export default JamForm;
