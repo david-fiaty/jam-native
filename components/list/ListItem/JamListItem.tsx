@@ -13,11 +13,13 @@ import IconView from "@/components/view/IconView";
 
 type Props = BaseProps & {
   row?: any;
+  canAddItem?: boolean;
+  canDeleteItem?: boolean;
   onAddButtonPress?: () => void;
   onListItemPress?: (row: any) => void;
 };
 
-const JamListItem = ({ row, onListItemPress, onAddButtonPress }: Props) => {
+const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddButtonPress }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const [selectedIds, setSelectedIds] = useState<any>([]);
@@ -40,6 +42,18 @@ const JamListItem = ({ row, onListItemPress, onAddButtonPress }: Props) => {
     if (onListItemPress) {
       onListItemPress(row);
     }
+
+    if (canAddItem || canDeleteItem) updateSelection(row);
+
+      /*
+  
+    else if (true) {
+      console.log('item cliked', row.item.id);
+    }
+      */
+
+
+
     else {
       router.push({
         pathname: "/jam",
