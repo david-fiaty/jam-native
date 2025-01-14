@@ -14,8 +14,15 @@ import UserManager from '@/manager/UserManager';
 const AddJamToProjectForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
+  const [formData, setFormData] = useState<any>({});
   const activeScreen: any = ScreenManager.getActiveScreen();
   const entityId: number = activeScreen.params.entityId;
+
+  const updateSelection = (row: any) => {
+    //setFormData({...formData, ...{[key]: value}});
+
+    console.log(row.item.id);
+  };
 
   const submitForm = () => {
     // Todo - Implement submit form
@@ -54,7 +61,7 @@ const AddJamToProjectForm = () => {
 
         <ProfileProjectsList
           idArray={[14, 18, 19]} // Todo - Remove test
-          onListItemPress={(row: any) => console.log('item press -->>', row.item.id)}
+          onListItemPress={(row: any) => updateSelection(row)}
           //idArray={formData?.profile_projects}
         />
     </BoxView>
