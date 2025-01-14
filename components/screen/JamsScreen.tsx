@@ -29,6 +29,7 @@ import SectorsList from "../list/SectorsList";
 import LocationMapView from "../view/LocationMapView";
 import SelectJamsForm from "../form/SelectJamsForm";
 import CountriesList from "../list/CountriesList";
+import AddJamToProjectForm from "../form/AddJamToProjectForm";
 
 const screenComponents: any = {
   JamsList: <JamsList />,
@@ -37,6 +38,7 @@ const screenComponents: any = {
   AddProjectForm: <AddProjectForm />,
   SelectJamsForm: <SelectJamsForm />,
   ProfileForm: <ProfileForm />,
+  AddJamToProjectForm: <AddJamToProjectForm />,
   SettingsMenu: <SettingsMenu />,
   NotificationsMenu: <NotificationsMenu />,
   SearchView: <SearchView />,

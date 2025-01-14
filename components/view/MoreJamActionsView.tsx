@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { View, Alert } from "react-native";
 import { Layout } from "@/constants/Layout";
-import { useRouter } from "expo-router";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
 import BoxView from '../view/BoxView';
@@ -12,7 +11,6 @@ import ActionListItem from '../list/ListItem/ActionListItem';
 import DataManager from '@/manager/DataManager';
 
 const MoreJamActionsView = () => {
-  const router = useRouter();
   const [entity, setEntity] = useState<any>(null);
   const entityId = ScreenManager.getScreenEntityId();
 
@@ -35,7 +33,7 @@ const MoreJamActionsView = () => {
     {
       label: i18n.t('Add Jam to project'),
       icon: 'plus',
-      onPress: () => console.log('action clicked') , // Todo - Implement logic
+      onPress: () => ScreenManager.toggleScreen('AddJamToProjectForm', { entityId: entityId })
     },
     {
       label: i18n.t('Edit Jam'),

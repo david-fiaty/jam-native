@@ -72,6 +72,13 @@ class EntityManager {
     return await DataManager.get('getProjects', {...defaults, ...options}); 
   }
 
+  async addJamToProject(projectId: number, options?: any) {
+    let defaults: any = {};
+    let variables: any = { '[project_id]': projectId };
+
+    return await DataManager.put('addJamToProject', {...defaults, ...options}, variables); 
+  }
+
   async getProjectImageUrl(entity: any) {
     let projectJams = await this.getJams({items_ids: entity?.jams});
     let projectImages = projectJams.map((item: any) => item?.medias?.[0]?.url).filter((value: any) => (value));
