@@ -40,7 +40,7 @@ const MoreJamActionsView = () => {
     {
       label: i18n.t('Edit Jam'),
       icon: 'edit',
-      onPress: () => router.push('/edit-jam'),
+      onPress: () => ScreenManager.toggleScreen('JamForm', { entityId: entityId }),
     },
     {
       label: i18n.t('Report Jam'),
