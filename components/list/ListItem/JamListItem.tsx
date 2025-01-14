@@ -40,6 +40,9 @@ const JamListItem = ({ row, onListItemPress, onAddButtonPress }: Props) => {
     if (onListItemPress) {
       onListItemPress(row);
     }
+    else if (true) {
+      console.log('item cliked', row.item.id);
+    }
     else {
       router.push({
         pathname: "/jam",
