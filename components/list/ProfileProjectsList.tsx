@@ -17,6 +17,7 @@ type Props = {
   addButton?: boolean;
   allButton?: boolean;
   onAddButtonPress?: () => void;
+  onListItemPress?: (row: any) => void;
 };
 
 const ProfileProjectsList = ({
@@ -24,13 +25,26 @@ const ProfileProjectsList = ({
   idArray,
   addButton,
   allButton,
-  onAddButtonPress
+  onAddButtonPress,
+  onListItemPress
 }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const [profileProjects, setProfileProjects] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [projectsImages, setProjectsImages] = useState<any>({});
+
+  const onItemPress = (row: any) => {
+    if (onListItemPress) {
+      onListItemPress(row);
+    }
+    else {
+      router.push({
+        pathname: "/project",
+        params: { idArray: [row.item.id], title: row.item.title },
+      });
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -64,7 +78,7 @@ const ProfileProjectsList = ({
   return (
     <View style={styles.container}>
       <BoxView direction="row" align="center" justify="space-between">
-        <TextView style={styles.title}>{title}</TextView>
+        { title && <TextView style={styles.title}>{title}</TextView> }
 
         {allButton && (
           <TouchableOpacity
@@ -93,7 +107,7 @@ const ProfileProjectsList = ({
               images={projectsImages}
               canAddItem={true}
               onAddButtonPress={onAddButtonPress}
-              onListItemPress={(row: any) => {}}
+              onListItemPress={(row: any) => onItemPress(row)}
             />
           )}
         />
