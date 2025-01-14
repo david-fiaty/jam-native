@@ -69,7 +69,14 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, onAddButtonPres
           contentContainerStyle={{ gap: Layout.space.base }}
           columnWrapperStyle={{ gap: Layout.space.base }}
           scrollEnabled={false}
-          renderItem={(row: any) => <JamListItem row={row} onAddButtonPress={onAddButtonPress} />}
+          renderItem={(row: any) => (
+            <JamListItem 
+              row={row} 
+              onAddButtonPress={onAddButtonPress} 
+              //canAddItem={true}
+              //onListItemPress={}
+            />
+          )}
         />
       )}
     </View>
