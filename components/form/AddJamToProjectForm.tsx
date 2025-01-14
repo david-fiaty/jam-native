@@ -14,6 +14,15 @@ const AddJamToProjectForm = () => {
   const activeScreen: any = ScreenManager.getActiveScreen();
   const entityId: number = activeScreen.params.entityId;
 
+  /*
+
+  {
+    "profile_id": 1,
+    "items_ids": [3, 4]
+}
+
+  */
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
