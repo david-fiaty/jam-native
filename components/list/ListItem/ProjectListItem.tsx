@@ -13,13 +13,14 @@ import IconView from "@/components/view/IconView";
 
 type Props = BaseProps & {
   row?: any;
+  images?: any;
   canAddItem?: boolean;
   canDeleteItem?: boolean;
   onAddButtonPress?: () => void;
   onListItemPress?: (row: any) => void;
 };
 
-const ProjectListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddButtonPress }: Props) => {
+const ProjectListItem = ({ row, images, canAddItem, canDeleteItem, onListItemPress, onAddButtonPress }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const [selectedIds, setSelectedIds] = useState<any>([]);
@@ -53,7 +54,7 @@ const ProjectListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAd
     } 
   };
 
-  const renderItem = (row: any) => {
+  const renderItem = (row: any, imageUrl?: string) => {
     let imageSize = MediaManager.getThumbnailSize();
     let output = null;
     let isSelected: boolean = findItemIndex(row) !== -1;
@@ -67,7 +68,7 @@ const ProjectListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAd
         onPress={onAddButtonPress}
       />;
     }
-    else if (!row?.item?.medias?.[0]?.url) {
+    else if (!imageUrl) {
       output = (
         <View style={styles.item}>
           <NoImageView 
@@ -82,7 +83,7 @@ const ProjectListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAd
       output = (
         <View style={styles.item}>
           <ImageView
-            uri={MediaManager.getImageUrl(row.item.medias[0].url)}
+            uri={MediaManager.getImageUrl(imageUrl)}
             width={imageSize.width}
             height={imageSize.height}
             resizeMode="cover"
@@ -115,7 +116,7 @@ const ProjectListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAd
     return output;
   }
 
-  return renderItem(row);
+  return renderItem(row, images?.[row?.item?.id]);
 };
 
 const styles = StyleSheet.create({
