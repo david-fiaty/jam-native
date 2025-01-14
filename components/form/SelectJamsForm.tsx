@@ -15,8 +15,9 @@ import MediaManager from "@/manager/MediaManager";
 import BackButton from "../button/BackButton";
 import IconView from "../view/IconView";
 import TextView from "../view/TextView";
+import JamListItem from "../list/ListItem/JamListItem";
 
-const updateSelectionsForm = () => {
+const SelectJamsForm = () => {
   const dispatch = useDispatch();
   const [profileJams, setProfileJams] = useState<any>([]);
   const [selectedJams, setSelectedJams] = useState<any>([]);
@@ -38,8 +39,7 @@ const updateSelectionsForm = () => {
     if (index === -1) selectedJamsList.push(row.item.id);
     else delete selectedJamsList[index];
 
-    selectedJamsList = selectedJamsList.filter((n: any) => n);
-    setSelectedJams(selectedJamsList);
+    setSelectedJams(selectedJamsList.filter(Boolean));
   };
 
   const addSelection = () => {    
@@ -82,7 +82,7 @@ const updateSelectionsForm = () => {
           />
 
           {isSelected && (
-            <View style={styles.checkItem}>
+            <View style={styles.checkIcon}>
               <IconView name="checkmark" theme="primary" size={12} padding={3.5} />
             </View>
           )}
@@ -148,7 +148,13 @@ const updateSelectionsForm = () => {
           contentContainerStyle={{ gap: Layout.space.base }}
           columnWrapperStyle={{ gap: Layout.space.base }}
           scrollEnabled={false}
-          renderItem={(row: any) => renderItem(row)}
+          renderItem={(row: any) => (
+            <JamListItem
+              row={row}
+              canAddItem={true}
+              onListItemPress={(row: any) => updateSelection(row)}
+            />
+          )}
         />
       )}
     </BoxView>
@@ -169,7 +175,7 @@ const styles = StyleSheet.create({
   selectedItem: {
     opacity: 0.7,
   },
-  checkItem: {
+  checkIcon: {
     position: "absolute",
     top: 5,
     right: 5,
@@ -179,4 +185,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default updateSelectionsForm;
+export default SelectJamsForm;
