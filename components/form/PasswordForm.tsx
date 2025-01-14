@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
@@ -8,21 +8,38 @@ import InputTextField from '../field/InputTextField';
 import SpinnerView from '../view/SpinnerView';
 import ButtonView from '../view/ButtonView';
 import DividerView from '../view/DividerView';
+import UserManager from '@/manager/UserManager';
+import ScreenManager from '@/manager/ScreenManager';
 
 const PasswordForm = () => {
   const router = useRouter();
-  const [isLoaded, setIsLoaded] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [formData, setFormData] = useState({});
 
   const submitForm = async () => {
-    setTimeout(() => setIsProcessing(false), 3000);
+    // Todo - Implement password confirmation
+    setIsProcessing(true);
+    let result: any = await UserManager.changePassword(formData);
+    let message: any = {
+      title: i18n.t('Change password'),
+      content: i18n.t('The password was successfully updated.'),
+    };
+
+    if (result?.error) message.content = i18n.t(result.error)
+    else updateField(null, null)
+
+    ScreenManager.showMessage(message);
+    setIsProcessing(false);
+  
+    setIsProcessing(false);
   }  
 
-  useEffect(() => {
-    setTimeout(() => setIsLoaded(true), Layout.animation.duration);
-  });
-
-  if (!isLoaded) return <SpinnerView />;
+  const updateField = (key?: any, value?: any) => {
+    setFormData({
+      ...formData,
+      ...{ [key]: value },
+    });
+  };
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
@@ -31,20 +48,26 @@ const PasswordForm = () => {
         onPress={() => router.back()}
       />
       
-      <InputTextField placeholder={i18n.t('Old password')} />
+      <InputTextField 
+        placeholder={i18n.t('Old password')} 
+        onChangeText={(value: string) => updateField("old_password", value)}
+      />
 
       <DividerView theme="secondary" />
-      <InputTextField placeholder={i18n.t('New password')} />
-      <InputTextField placeholder={i18n.t('Confirm new password')} />
+      <InputTextField 
+        placeholder={i18n.t('New password')} 
+        onChangeText={(value: string) => updateField("new_password", value)}
+      />
+
+      <InputTextField 
+        placeholder={i18n.t('Confirm new password')} 
+      />
 
       <DividerView />
       <ButtonView 
         label={i18n.t('Save')} 
         isProcessing={isProcessing} 
-        onPress={() => {
-          setIsProcessing(true);
-          submitForm();
-        }} 
+        onPress={submitForm} 
       />
     </BoxView>
   );

@@ -27,18 +27,23 @@ const AccountForm = () => {
       resource: resource,
       key: key, 
       value: value, 
-      profile_id: profileId,
     }));
   };
 
-  const submitForm = () => {
+  const submitForm = async () => {
     setIsProcessing(true);
+    let profileData: any = await UserManager.getProfileData();
+
+    // Todo - Implement submit
+    /*
+    profileData.username = formData.username;
+    profileData.email = formData.email;
+    profileData.phone = formData.phone;
+    */
 
     setTimeout(() => {
       setIsProcessing(false);
     }, 3000);
-
-    // Todo - Implement submit
   };  
 
   useEffect(() => {
@@ -71,14 +76,17 @@ const AccountForm = () => {
       <InputTextField 
         placeholder={i18n.t('User name')} 
         value={formData?.username}
+        onChangeText={(value: string) => updateField("username", value)}
       />
       <InputTextField 
         placeholder={i18n.t('Email address')} 
         value={formData?.email}  
+        onChangeText={(value: string) => updateField("email", value)}
       />
       <InputTextField 
         placeholder={i18n.t('Phone number')} 
         value={formData?.phone}
+        onChangeText={(value: string) => updateField("phone", value)}
       />
 
     <DividerView />
