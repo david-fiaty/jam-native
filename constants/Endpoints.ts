@@ -89,6 +89,11 @@ const Endpoints = {
     cacheable: false,
     dataKey: 'user',
   },
+  changePassword: {
+    path: '/change-password/',
+    cacheable: false,
+    dataKey: null,
+  },
   likeJam: {
     path: '/jams/like/',
     cacheable: false,

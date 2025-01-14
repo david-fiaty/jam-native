@@ -30,6 +30,10 @@ class UserManager {
     return await DataManager.get('currentUser');
   }
 
+  async changePassword(data: any) { 
+    return await DataManager.put('changePassword', data);
+  }
+
   async getProfileId() {
     let profileId: number = Store.getState().user.profileId;
     if (profileId === 0) {
