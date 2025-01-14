@@ -51,24 +51,13 @@ const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddBut
         params: { idArray: [row.item.id], title: row.item.title },
       });
     } 
-
-
-      /*
-  
-    else if (true) {
-      console.log('item cliked', row.item.id);
-    }
-      */
-
-
-
   };
 
   const renderItem = (row: any) => {
     let imageSize = MediaManager.getThumbnailSize();
     let output = null;
     let isSelected: boolean = findItemIndex(row) !== -1;
-    let imageStyle = (isSelected ? styles.selectedItem : {});
+    let imageStyle = (isSelected ? styles.selectedItem : {}); // Todo - Is this needed?
 
     if (row?.item?.id == "addItem") {
       output = <AddItemButton

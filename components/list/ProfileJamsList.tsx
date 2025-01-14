@@ -72,10 +72,7 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, onAddButtonPres
           renderItem={(row: any) => (
             <JamListItem 
               row={row} 
-              onAddButtonPress={onAddButtonPress} 
-              //canDeleteItem={true}
-              canAddItem={true}
-              //onListItemPress={}
+              onAddButtonPress={onAddButtonPress}
             />
           )}
         />
