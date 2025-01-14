@@ -52,55 +52,6 @@ const SelectJamsForm = () => {
     ScreenManager.toggleScreen("SelectJamsForm");
   };
 
-  const renderItem = (row: any) => {
-    let imageSize: any = MediaManager.getThumbnailSize();
-    let output: any = null;
-    let isSelected: boolean = findItemIndex(row) !== -1;
-    let imageStyle = (isSelected ? styles.selectedItem : {});
-
-    if (!row?.item?.medias?.[0]?.url) {
-      output = (
-        <NoImageView
-          width={imageSize.width}
-          height={imageSize.height}
-          rounded={true}
-        />
-      );
-    } else {
-      output = (
-        <View style={styles.item}>
-          <ImageView
-            uri={MediaManager.getImageUrl(row.item.medias[0].url)}
-            width={imageSize.width}
-            height={imageSize.height}
-            resizeMode="cover"
-            style={[
-              styles.image,
-              ScreenManager.getGridCellSize(numColumns),
-              imageStyle,
-            ]}
-          />
-
-          {isSelected && (
-            <View style={styles.checkIcon}>
-              <IconView name="checkmark" theme="primary" size={12} padding={3.5} />
-            </View>
-          )}
-        </View>
-      );
-    }
-
-    if (parseInt(row?.item?.id) > 0) {
-      output = (
-        <TouchableOpacity key={row.item.id} onPress={() => updateSelection(row)}>
-          {output}
-        </TouchableOpacity>
-      );
-    }
-
-    return output;
-  };
-
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
