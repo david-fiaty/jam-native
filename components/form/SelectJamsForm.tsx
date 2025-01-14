@@ -4,16 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
-import ImageView from "../view/ImageView";
 import ScreenManager from "@/manager/ScreenManager";
 import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
-import NoImageView from "../view/NoImageView";
 import BoxView from "../view/BoxView";
-import MediaManager from "@/manager/MediaManager";
 import BackButton from "../button/BackButton";
-import IconView from "../view/IconView";
 import TextView from "../view/TextView";
 import JamListItem from "../list/ListItem/JamListItem";
 
@@ -50,55 +46,6 @@ const SelectJamsForm = () => {
     }));
 
     ScreenManager.toggleScreen("SelectJamsForm");
-  };
-
-  const renderItem = (row: any) => {
-    let imageSize: any = MediaManager.getThumbnailSize();
-    let output: any = null;
-    let isSelected: boolean = findItemIndex(row) !== -1;
-    let imageStyle = (isSelected ? styles.selectedItem : {});
-
-    if (!row?.item?.medias?.[0]?.url) {
-      output = (
-        <NoImageView
-          width={imageSize.width}
-          height={imageSize.height}
-          rounded={true}
-        />
-      );
-    } else {
-      output = (
-        <View style={styles.item}>
-          <ImageView
-            uri={MediaManager.getImageUrl(row.item.medias[0].url)}
-            width={imageSize.width}
-            height={imageSize.height}
-            resizeMode="cover"
-            style={[
-              styles.image,
-              ScreenManager.getGridCellSize(numColumns),
-              imageStyle,
-            ]}
-          />
-
-          {isSelected && (
-            <View style={styles.checkIcon}>
-              <IconView name="checkmark" theme="primary" size={12} padding={3.5} />
-            </View>
-          )}
-        </View>
-      );
-    }
-
-    if (parseInt(row?.item?.id) > 0) {
-      output = (
-        <TouchableOpacity key={row.item.id} onPress={() => updateSelection(row)}>
-          {output}
-        </TouchableOpacity>
-      );
-    }
-
-    return output;
   };
 
   useEffect(() => {
@@ -162,26 +109,8 @@ const SelectJamsForm = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-  },
   titleContainer: {
     width: "100%",
-  },
-  item: {
-    flexDirection: "column",
-    gap: Layout.space.small,
-  },
-  selectedItem: {
-    opacity: 0.7,
-  },
-  checkIcon: {
-    position: "absolute",
-    top: 5,
-    right: 5,
-  },
-  image: {
-    borderRadius: Layout.space.base,
   },
 });
 
