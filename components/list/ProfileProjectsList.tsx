@@ -17,6 +17,7 @@ type Props = {
   addButton?: boolean;
   allButton?: boolean;
   onAddButtonPress?: () => void;
+  onListItemPress?: (row: any) => void;
 };
 
 const ProfileProjectsList = ({
@@ -24,13 +25,18 @@ const ProfileProjectsList = ({
   idArray,
   addButton,
   allButton,
-  onAddButtonPress
+  onAddButtonPress,
+  onListItemPress
 }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const [profileProjects, setProfileProjects] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [projectsImages, setProjectsImages] = useState<any>({});
+
+  const onItemPress = (row: any) => {
+    if (onListItemPress) onListItemPress(row);
+  };
 
   useEffect(() => {
     (async () => {
@@ -93,7 +99,7 @@ const ProfileProjectsList = ({
               images={projectsImages}
               canAddItem={true}
               onAddButtonPress={onAddButtonPress}
-              onListItemPress={(row: any) => {}}
+              onListItemPress={(row: any) => onItemPress(row)}
             />
           )}
         />
