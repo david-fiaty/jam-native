@@ -16,13 +16,26 @@ type Props = {
   addButton?: boolean,
   allButton?: boolean,
   onAddButtonPress?: () => void,
+  onListItemPress?: (row: any) => void;
 };
 
-const ProfileJamsList = ({ title, idArray, addButton, allButton, onAddButtonPress }: Props) => {
+const ProfileJamsList = ({ title, idArray, addButton, allButton, onAddButtonPress, onListItemPress }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const [profileJams, setProfileJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
+  const onItemPress = (row: any) => {
+    if (onListItemPress) {
+      onListItemPress(row);
+    }
+    else {
+      router.push({
+        pathname: "/jam",
+        params: { idArray: [row.item.id], title: row.item.title },
+      });
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -73,6 +86,7 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, onAddButtonPres
             <JamListItem 
               row={row} 
               onAddButtonPress={onAddButtonPress}
+              onListItemPress={(row: any) => onItemPress(row)}
             />
           )}
         />

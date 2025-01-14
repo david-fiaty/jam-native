@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import { BaseProps } from "@/constants/Types";
 import i18n from "@/translation/i18n";
@@ -21,7 +20,6 @@ type Props = BaseProps & {
 
 const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddButtonPress }: Props) => {
   const numColumns = 3;
-  const router = useRouter();
   const [selectedIds, setSelectedIds] = useState<any>([]);
 
   const findItemIndex = (row: any) => {
@@ -45,12 +43,6 @@ const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddBut
     if (onListItemPress) {
       onListItemPress(row);
     }
-    else {
-      router.push({
-        pathname: "/jam",
-        params: { idArray: [row.item.id], title: row.item.title },
-      });
-    } 
   };
 
   const renderItem = (row: any) => {
