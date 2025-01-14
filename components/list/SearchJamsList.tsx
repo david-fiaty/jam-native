@@ -8,6 +8,7 @@ import NoImageView from "../view/NoImageView";
 import MediaManager from "@/manager/MediaManager";
 import i18n from "@/translation/i18n";
 import TextView from "../view/TextView";
+import JamListItem from "./ListItem/JamListItem";
 
 type Props = {
   data?: any,
@@ -15,52 +16,6 @@ type Props = {
 
 const SearchJamsList = ({ data }: Props) => {
   const numColumns = 3;
-  const router = useRouter();
-
-  const renderItem = (row: any) => {
-    let imageSize = MediaManager.getThumbnailSize();
-    let output = null;
-
-    if (!row?.item?.medias?.[0]?.url) {
-      output = (
-        <NoImageView
-          width={imageSize.width}
-          height={imageSize.height}
-          rounded={true}
-        />
-      );
-    } else {
-      output = (
-        <View style={styles.item}>
-          <ImageView
-            uri={MediaManager.getImageUrl(row.item.medias[0].url)}
-            width={imageSize.width}
-            height={imageSize.height}
-            resizeMode="cover"
-            style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
-          />
-        </View>
-      );
-    }
-
-    if (parseInt(row?.item?.id) > 0) {
-      output = (
-        <TouchableOpacity
-          key={row.item.id}
-          onPress={() =>
-            router.push({
-              pathname: "/jam",
-              params: { idArray: [row.item.id], title: row.item.title },
-            })
-          }
-        >
-          {output}
-        </TouchableOpacity>
-      );
-    }
-
-    return output;
-  };
 
   return (
     <View>
@@ -72,7 +27,11 @@ const SearchJamsList = ({ data }: Props) => {
             contentContainerStyle={{ gap: Layout.space.base }}
             columnWrapperStyle={{ gap: Layout.space.base }}
             scrollEnabled={false}
-            renderItem={(row: any) => renderItem(row)}
+            renderItem={(row: any) => (
+              <JamListItem 
+                row={row}
+              />
+            )}
           />
         </View>
       )}
