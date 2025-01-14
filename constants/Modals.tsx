@@ -14,7 +14,7 @@ export const Modals = [
     params: {},
   },
   {
-    name: 'AddJamForm', 
+    name: 'JamForm', 
     effect: 'fade',
     headerNavigation: true,
     footerNavigation: true,
