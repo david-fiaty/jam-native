@@ -73,8 +73,8 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, onAddButtonPres
             <JamListItem 
               row={row} 
               onAddButtonPress={onAddButtonPress} 
-              canDeleteItem={true}
-              //canAddItem={true}
+              //canDeleteItem={true}
+              canAddItem={true}
               //onListItemPress={}
             />
           )}
