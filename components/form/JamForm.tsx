@@ -35,7 +35,9 @@ const JamForm = () => {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
   const formData = useSelector((state: any) => state.form[resource]);
+  const activeScreen = ScreenManager.getActiveScreen();
   const jamCategoriesData = StaticData.jamCategories;
+  const entityId = activeScreen?.params?.entityId || 0;
 
   const updateField = (key: any, value: any) => {
     dispatch(setFormData<any>({ 
@@ -81,12 +83,14 @@ const JamForm = () => {
     (async () => {
       if (!isLoaded) {
         let profileId: number =  await UserManager.getProfileId();
+        let jamData: any = entityId == 0 ? formData : await EntityManager.getJams({ items_ids: [entityId] });
+
         setProfileId(profileId);
         dispatch(setFormData<any>({ 
           resource: resource,
           key: null, 
           value: {
-            ...formData,
+            ...(entityId > 0 ? jamData?.[0] : formData),
             ...{ profile_id: profileId },
           }, 
         }));
@@ -94,9 +98,11 @@ const JamForm = () => {
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, profileId]);
+  }, [isLoaded, profileId, resource, formData]);
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(entityId);
 
   return (
     <BoxView

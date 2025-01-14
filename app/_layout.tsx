@@ -148,15 +148,6 @@ const RootLayout = () => {
       },
     },
     {
-      name: 'edit-jam',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-    {
       name: 'project',
       options: {
         ...headerVisibleOptions,
