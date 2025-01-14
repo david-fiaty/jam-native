@@ -219,7 +219,6 @@ const ProfileForm = () => {
         <ProfileProjectsList
           title={i18n.t("Your Projects")} 
           addButton={true}
-          profileId={profileId}
           allButton={formData?.profile_projects?.length > 0}
           idArray={formData?.profile_projects}
           onAddButtonPress={() => {
