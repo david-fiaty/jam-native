@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useFonts } from 'expo-font';
 import { Stack, useSegments } from 'expo-router';
+import { useFonts } from 'expo-font';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@rneui/themed';
 import { Colors } from '@/constants/Colors';
@@ -33,10 +33,9 @@ ExpoSplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
   const segments = useSegments(); 
-  const [isLoaded] = useFonts({
+  const [isLoaded, isError] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
-
 
   const routes = [
     {
@@ -159,16 +158,12 @@ const RootLayout = () => {
   ];
 
   useEffect(() => {
-    (async () => {
-      try {
-        await new Promise(resolve => setTimeout(resolve, 7000));
-      } catch (e) {
-        console.warn(e);
-      }
-    })();
-  }, [isLoaded]);
+    if (isLoaded || isError) {
+      ExpoSplashScreen.hideAsync();
+    }
+  }, [isLoaded, isError]);
 
-  if (!isLoaded) return null; 
+  if (!isLoaded && !isError) return null; 
 
   return (
     <Provider store={Store}>
