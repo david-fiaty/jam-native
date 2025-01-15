@@ -60,8 +60,9 @@ const JamsScreen = () => {
   const route = useRoute();
   const windowWidth = DeviceManager.window.width;
   const windowHeight = DeviceManager.window.height;
-  const [currentScreen, setCurrentScreen] = useState(null);
-  const [animatedStyle, setAnimatedStyle] = useState(null);
+  const [currentScreen, setCurrentScreen] = useState<any>(null);
+  const [animatedStyle, setAnimatedStyle] = useState<any>(null);
+  const [searchResultsIds, setSearchResultsIds] = useState<any[]>([]);
   const screenState = useSelector((state: any) => state.screen);
 
   // Animation references
@@ -125,6 +126,15 @@ const JamsScreen = () => {
     return activeModal;
   };
 
+  // Get the current search results IDs
+  const getSearchResultsIds = async () => {
+    const searchResults: any = await SearchManager.getResult('jazz');
+    const jamResultsIds: any = (searchResults?.jam || []).map((o: any) => o.id);
+    
+    return jamResultsIds;
+  };
+
+
   // Display
   useEffect(() => {
     (async () => {
@@ -133,7 +143,7 @@ const JamsScreen = () => {
       const searchResults: any = await SearchManager.getResult('jazz');
       const jamResultsIds: any = (searchResults?.jam || []).map((o: any) => o.id);
       
-      console.log(jamResultsIds);
+      console.log('-->', await getSearchResultsIds());
 
       if (activeModal) {
         setCurrentScreen(activeModal);
@@ -159,7 +169,7 @@ const JamsScreen = () => {
           <BoxView style={Layout.mainContent}>
             <JamsList 
               showSpinner={true} 
-              idArray={[20]} // Todo - Apply search results
+              idArray={[]} // Todo - Apply search results
             />
           </BoxView>
         )}
