@@ -89,7 +89,6 @@ class UserManager {
 
     return profileJams.includes(entityId);
   }
-
   
   async isProjectOwner(entityId: number) {
     let profileData: any = await this.getProfileData();
