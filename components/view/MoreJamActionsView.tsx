@@ -13,8 +13,9 @@ import UserManager from '@/manager/UserManager';
 
 const MoreJamActionsView = () => {
   const [entity, setEntity] = useState<any>(null);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [isEntityOwner, setIsEntityOwner] = useState<boolean>(false);
   const entityId: number = ScreenManager.getScreenEntityId();
-  const isOwner: boolean = UserManager.isJamOwner(entityId);
   
   const actions: any = [
     {
@@ -104,9 +105,13 @@ const MoreJamActionsView = () => {
 
   useEffect(() => {
     (async () => {
-      if (!entity) setEntity(await EntityManager.getJams({items_ids: [entityId]}));
+      if (!isLoaded) {
+        setEntity(await EntityManager.getJams({items_ids: [entityId]}));
+        setIsEntityOwner(await UserManager.isJamOwner(entityId));
+        setIsLoaded(true);
+      }
     })();
-  });
+  }, [isLoaded, entityId]);
 
   if (!entity) return <SpinnerView />;
 
