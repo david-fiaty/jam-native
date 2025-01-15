@@ -66,6 +66,19 @@ class DataManager {
 
     return value;
   }
+
+  isUrl(value: string) {
+    let url;
+    
+    try {
+      url = new URL(value);
+    } catch (error) {
+      console.log(error);
+      return false;  
+    }
+  
+    return url.protocol === "http:" || url.protocol === "https:";
+  }
 };
 
 export default (new DataManager());
