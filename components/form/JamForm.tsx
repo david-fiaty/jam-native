@@ -121,7 +121,7 @@ const JamForm = () => {
       style={Layout.screenContent}
     >
       <BackButton
-        title={i18n.t('Create a Jam')}
+        title={entityId == 0 ? i18n.t('Create a Jam') : i18n.t('Edit Jam')}
         onPress={() => ScreenManager.toggleScreen('JamForm')}
       />
 
