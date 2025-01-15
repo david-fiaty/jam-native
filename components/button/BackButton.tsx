@@ -2,6 +2,7 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import IconView from '../view/IconView';
 import TextView from '../view/TextView';
 import BoxView from '../view/BoxView';
+import { Layout } from '@/constants/Layout';
 
 type Props = {
   title: string,
@@ -11,7 +12,7 @@ type Props = {
 const BackButton = ({title, onPress}: Props) => {
   const ButtonView = () => {
     return (        
-      <BoxView direction="row" align="center">
+      <BoxView direction="row" align="center" style={styles.container}>
         <IconView 
           name="previous" 
           theme="clear" 
@@ -35,6 +36,9 @@ const BackButton = ({title, onPress}: Props) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    marginBottom: Layout.space.base,
+  },
   text: {
     fontWeight: 'bold',
   },
