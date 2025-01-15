@@ -126,20 +126,23 @@ const JamsScreen = () => {
 
   // Display
   useEffect(() => {
-    const activeModal: any = getActiveModal(screenState);
+    (async () => {
+      const activeModal: any = getActiveModal(screenState);
 
-    if (activeModal) {
-      setCurrentScreen(activeModal);
-      setAnimatedStyle(animationStyles[activeModal.effect]);
-      animationEffects[activeModal.effect](true);
-    } else if (currentScreen) {
-      animationEffects[currentScreen.effect](false);
-      setTimeout(() => {
-        setCurrentScreen(null);
-        setAnimatedStyle(animationStyles[currentScreen.effect]);
-      }, Layout.animation.duration);
-    }
-  }, [screenState]);
+      if (activeModal) {
+        setCurrentScreen(activeModal);
+        setAnimatedStyle(animationStyles[activeModal.effect]);
+        animationEffects[activeModal.effect](true);
+      } else if (currentScreen) {
+        animationEffects[currentScreen.effect](false);
+        setTimeout(() => {
+          setCurrentScreen(null);
+          setAnimatedStyle(animationStyles[currentScreen.effect]);
+        }, Layout.animation.duration);
+      }  
+    })();
+
+  }, [screenState, animationStyles, animationEffects, currentScreen]);
 
   // Render
   return (
@@ -150,7 +153,7 @@ const JamsScreen = () => {
           <BoxView style={Layout.mainContent}>
             <JamsList 
               showSpinner={true} 
-              idArray={[20]} 
+              idArray={[20]} // Todo - Apply search results
             />
           </BoxView>
         )}
