@@ -101,7 +101,7 @@ const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Pr
     // Todo - Get selected media
     let url: string = MediaManager.getImageUrl(value?.[0].url);
     if (DataManager.isUrl(url)) {
-      
+      console.log(MediaManager.urlToBase64(url));
     }
     
 
