@@ -27,6 +27,7 @@ import LocationTypeField from "../field/LocationTypeField";
 import EntityManager from "@/manager/EntityManager";
 import CollaboratorsField from "../field/CollaboratorsField";
 import DataManager from "@/manager/DataManager";
+import MediaManager from "@/manager/MediaManager";
 
 const JamForm = () => {
   const resource: string = 'jam';
@@ -52,15 +53,10 @@ const JamForm = () => {
     }));
   };
 
-  const processMedia = (data: any) => {
-    return data.map((item: any) => {
-      return DataManager.extract(['base64'], item);
-    }); 
-  };
-
   const submitForm = async () => {
     setIsProcessing(true);
-    let media: any = processMedia(formData?.[mediasFieldName]);
+    // Todo - Add media to form
+    let media: any = MediaManager.prepareUpload(formData?.[mediasFieldName]);
 
     let result: any = entityId > 0 
       ? await EntityManager.updateJam(entityId, formData) 
