@@ -131,7 +131,7 @@ const JamsScreen = () => {
     const searchResults: any = await SearchManager.getResult('jazz');
     const jamResultsIds: any = (searchResults?.jam || []).map((o: any) => o.id);
     
-    return jamResultsIds;
+    return jamResultsIds ?? [];
   };
 
 
@@ -156,8 +156,6 @@ const JamsScreen = () => {
 
   }, [screenState, animationStyles, animationEffects, currentScreen]);
 
-  console.log(searchResultsIds)
-
   // Render
   return (
     <ScreenView>
@@ -167,7 +165,7 @@ const JamsScreen = () => {
           <BoxView style={Layout.mainContent}>
             <JamsList 
               showSpinner={true} 
-              idArray={[]} // Todo - Apply search results
+              idArray={searchResultsIds}
             />
           </BoxView>
         )}
