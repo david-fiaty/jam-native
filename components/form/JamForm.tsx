@@ -39,6 +39,10 @@ const JamForm = () => {
   const jamCategoriesData = StaticData.jamCategories;
   const entityId = activeScreen?.params?.entityId || 0;
 
+  const sectorsFieldName: string = entityId == 0 ? 'sectors_ids' : 'sectors';
+  const collaboratorsFieldName: string = entityId == 0 ? 'collaborators_ids' : 'collaborators';
+  const mediasFieldName: string = entityId == 0 ? 'upload_medias' : 'medias';
+
   const updateField = (key: any, value: any) => {
     dispatch(setFormData<any>({ 
       resource: resource,
@@ -56,7 +60,7 @@ const JamForm = () => {
 
   const submitForm = async () => {
     setIsProcessing(true);
-    let media: any = processMedia(formData?.upload_medias);
+    let media: any = processMedia(formData?.[mediasFieldName]);
 
     let result: any = entityId > 0 
       ? await EntityManager.updateJam(entityId, formData) 
@@ -121,7 +125,7 @@ const JamForm = () => {
       style={Layout.screenContent}
     >
       <BackButton
-        title={i18n.t('Create a Jam')}
+        title={entityId == 0 ? i18n.t('Create a Jam') : i18n.t('Edit Jam')}
         onPress={() => ScreenManager.toggleScreen('JamForm')}
       />
 
@@ -208,7 +212,7 @@ const JamForm = () => {
       <DividerView theme="secondary" />
       <SectorsField
         resource={resource}
-        field="sectors_ids"
+        field={sectorsFieldName}
         label={
           <>
             <IconView name="plus" theme="secondary" radius="round" />
@@ -217,38 +221,38 @@ const JamForm = () => {
         }
         onPressEvent={() => ScreenManager.toggleScreen('SectorsList', {
           resource: resource,
-          field: 'sectors_ids',
+          field: sectorsFieldName,
         })}
         onDeleteEvent={(item: any) => {
-          const sectorsIds = [...formData?.sectors_ids || []];
+          const sectorsIds = [...formData?.[sectorsFieldName] || []];
           const index = sectorsIds.findIndex((v) => v === item.id);
           if (index !== -1) sectorsIds.splice(index, 1);
-          updateField('sectors_ids', sectorsIds.filter(Boolean));
+          updateField(sectorsFieldName, sectorsIds.filter(Boolean));
         }}
       />
       
       <DividerView theme="secondary" />
       <CollaboratorsField
         resource={resource}
-        field="collaborators_ids"
+        field={collaboratorsFieldName}
         onPressEvent={() => ScreenManager.toggleScreen('CollaboratorsList', {
           resource: resource,
-          field: 'collaborators_ids',
+          field: collaboratorsFieldName,
         })}
         onDeleteEvent={(item: any) => {
-          const collaboratorsIds = [...formData?.collaborators_ids || []];
+          const collaboratorsIds = [...formData?.[collaboratorsFieldName] || []];
           const index = collaboratorsIds.findIndex((v) => v === item.id);
           if (index !== -1) collaboratorsIds.splice(index, 1);
-          updateField('collaborators_ids', collaboratorsIds.filter(Boolean));
+          updateField(collaboratorsFieldName, collaboratorsIds.filter(Boolean));
         }}
       />
 
       <DividerView theme="secondary" />
       <MediaPickerBase
         preview={true}
-        value={formData?.upload_medias}
-        onSelectItem={(data: any) => updateField('upload_medias', data)}
-        onDeleteItem={(data: any) => updateField('upload_medias', data)}
+        value={formData?.[mediasFieldName]}
+        onSelectItem={(data: any) => updateField(mediasFieldName, data)}
+        onDeleteItem={(data: any) => updateField(mediasFieldName, data)}
         label={
           <BoxView direction="row" align="center">
             <IconView name="plus" theme="secondary" radius="round" />

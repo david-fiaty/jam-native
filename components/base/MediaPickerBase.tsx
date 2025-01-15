@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import { Layout } from '@/constants/Layout';
@@ -8,6 +8,7 @@ import TextView from '../view/TextView';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
 import MediaManager from '@/manager/MediaManager';
+import DataManager from "@/manager/DataManager";
 
 type Props = BaseProps & {
   label?: JSX.Element, 
@@ -20,6 +21,7 @@ type Props = BaseProps & {
 const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const imageSize: any = MediaManager.getThumbnailSize();
 
   const deleteMedia = (data: any) => {
@@ -94,6 +96,29 @@ const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Pr
       if (onSelectItem) onSelectItem(mediaList);
     }
   };
+
+  const getSelectedMedia = () => {
+    // Todo - Get selected media
+    let url: string = MediaManager.getImageUrl(value?.[0].url);
+    if (DataManager.isUrl(url)) {
+      //console.log(MediaManager.urlToBase64(url));
+    }
+    
+
+    console.log('getSelectedMedia', url);
+
+    return [];
+  }; 
+
+  useEffect(() => {
+    (async () => {
+      if (!isLoaded) {
+        setSelectedMedia(getSelectedMedia());
+        setIsLoaded(true);
+      }
+    })();
+  }, [isLoaded, selectedMedia, value]);
+
 
   return (
     <View style={styles.container}>

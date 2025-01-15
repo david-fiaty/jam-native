@@ -9,40 +9,50 @@ import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
 import ActionListItem from '../list/ListItem/ActionListItem';
 import DataManager from '@/manager/DataManager';
+import UserManager from '@/manager/UserManager';
 
 const MoreJamActionsView = () => {
   const [entity, setEntity] = useState<any>(null);
-  const entityId = ScreenManager.getScreenEntityId();
-
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [isEntityOwner, setIsEntityOwner] = useState<boolean>(false);
+  const entityId: number = ScreenManager.getScreenEntityId();
+  
   const actions: any = [
     {
       label: i18n.t('Save Jam'),
       icon: 'save',
+      canDisplay: () => true,
       onPress: () => ScreenManager.toggleScreen('SavedJamAction', { entityId: entityId }),
     },
     {
       label: i18n.t('Like Jam'),
       icon: 'like',
+      canDisplay: () => true,
       onPress: () => ScreenManager.toggleScreen('LikedJamAction', { entityId: entityId }),
     },
     {
       label: i18n.t('Share Jam'),
       icon: 'share',
+      canDisplay: () => true,
       onPress: () => EntityManager.shareJam(entityId),
     },
     {
       label: i18n.t('Add Jam to project'),
       icon: 'plus',
-      onPress: () => ScreenManager.toggleScreen('AddJamToProjectForm', { entityId: entityId })
+      canDisplay: () => true,
+      onPress: () => ScreenManager.toggleScreen('AddJamToProjectForm', { entityId: entityId }),
     },
     {
       label: i18n.t('Edit Jam'),
       icon: 'edit',
+      canDisplay: () => true,
+      //canDisplay: () => isEntityOwner, // Todo - Enable this
       onPress: () => ScreenManager.toggleScreen('JamForm', { entityId: entityId }),
     },
     {
       label: i18n.t('Report Jam'),
       icon: 'report',
+      canDisplay: () => !isEntityOwner,
       onPress: () => {
         Alert.alert(
           i18n.t('Report'), 
@@ -72,6 +82,7 @@ const MoreJamActionsView = () => {
     {
       label: i18n.t('Delete Jam'),
       icon: 'delete',
+      canDisplay: () => isEntityOwner,
       onPress: () => {
         Alert.alert(
           i18n.t('Report'), 
@@ -102,9 +113,13 @@ const MoreJamActionsView = () => {
 
   useEffect(() => {
     (async () => {
-      if (!entity) setEntity(await EntityManager.getJams({items_ids: [entityId]}));
+      if (!isLoaded) {
+        setEntity(await EntityManager.getJams({items_ids: [entityId]}));
+        setIsEntityOwner(await UserManager.isJamOwner(entityId));
+        setIsLoaded(true);
+      }
     })();
-  });
+  }, [isLoaded, entityId]);
 
   if (!entity) return <SpinnerView />;
 
@@ -116,7 +131,11 @@ const MoreJamActionsView = () => {
       />
       
       <View style={Layout.borderedListContainer}>
-        { actions.map((item: any) => <ActionListItem key={DataManager.createUuid()} item={item} />)}
+        { actions.map((item: any) => {
+          if (item.canDisplay() === true) {
+            return <ActionListItem key={DataManager.createUuid()} item={item} />
+          }
+        })}
       </View>
     </BoxView>
   );
