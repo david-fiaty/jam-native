@@ -140,7 +140,6 @@ const JamsScreen = () => {
     return jamResultsIds;
   };
 
-
   // Display
   useEffect(() => {
     (async () => {
