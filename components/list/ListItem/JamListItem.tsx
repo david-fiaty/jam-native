@@ -12,13 +12,13 @@ import IconView from "@/components/view/IconView";
 
 type Props = BaseProps & {
   row?: any;
-  canAddItem?: boolean;
-  canDeleteItem?: boolean;
+  isAddable?: boolean;
+  isDeletable?: boolean;
   onAddButtonPress?: () => void;
   onListItemPress?: (row: any) => void;
 };
 
-const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddButtonPress }: Props) => {
+const JamListItem = ({ row, isAddable, isDeletable, onListItemPress, onAddButtonPress }: Props) => {
   const numColumns = 3;
   const [selectedIds, setSelectedIds] = useState<any>([]);
 
@@ -38,7 +38,7 @@ const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddBut
   };
 
   const onItemPress = (row: any) => {
-    if (canAddItem || canDeleteItem) updateSelection(row);
+    if (isAddable || isDeletable) updateSelection(row);
 
     if (onListItemPress) {
       onListItemPress(row);
@@ -89,13 +89,13 @@ const JamListItem = ({ row, canAddItem, canDeleteItem, onListItemPress, onAddBut
         <TouchableOpacity key={row.item.id} onPress={() => onItemPress(row)}>
           {output}
 
-          {canAddItem && isSelected && (
+          {isAddable && isSelected && (
             <View style={styles.checkIcon}>
               <IconView name="checkmark" theme="primary" size={12} padding={3.5} />
             </View>
           )}
 
-          {canDeleteItem && isSelected && (
+          {isDeletable && isSelected && (
             <View style={styles.checkIcon}>
               <IconView name="delete" theme="primary" size={12} padding={3.5} />
             </View>

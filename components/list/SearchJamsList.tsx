@@ -1,11 +1,7 @@
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
-import ImageView from "../view/ImageView";
-import ScreenManager from "@/manager/ScreenManager";
 import ListView from "../view/ListView";
-import NoImageView from "../view/NoImageView";
-import MediaManager from "@/manager/MediaManager";
 import i18n from "@/translation/i18n";
 import TextView from "../view/TextView";
 import JamListItem from "./ListItem/JamListItem";
@@ -16,6 +12,14 @@ type Props = {
 
 const SearchJamsList = ({ data }: Props) => {
   const numColumns = 3;
+  const router = useRouter();
+
+  const onItemPress = (row: any) => {
+    router.push({
+      pathname: "/jam",
+      params: { idArray: [row.item.id], title: row.item.title },
+    });
+  };
 
   return (
     <View>
@@ -30,6 +34,7 @@ const SearchJamsList = ({ data }: Props) => {
             renderItem={(row: any) => (
               <JamListItem 
                 row={row}
+                onListItemPress={(row: any) => onItemPress(row)}
               />
             )}
           />
