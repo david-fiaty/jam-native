@@ -4,7 +4,7 @@
     "slug": "jam-native",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/logo-512.png",
     "scheme": "jam-native",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -33,15 +33,6 @@
     },
     "plugins": [
       "expo-router",
-      [
-        "expo-splash-screen",
-        {
-          "image": "./assets/images/logo-512.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
-        }
-      ],
       [
         "expo-location",
         {
