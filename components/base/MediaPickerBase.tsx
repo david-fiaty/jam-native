@@ -96,17 +96,23 @@ const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Pr
     }
   };
 
+  const getSelectedMedia = () => {
+    // Todo - Get selected media
+
+    console.log('getSelectedMedia', value);
+
+    return [];
+  }; 
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        console.log(selectedMedia);
+        setSelectedMedia(getSelectedMedia());
         setIsLoaded(true);
       }
     })();
   }, [isLoaded, selectedMedia, value]);
 
-
-  console.log(value);
 
   return (
     <View style={styles.container}>
