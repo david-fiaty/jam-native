@@ -66,6 +66,29 @@ class DataManager {
 
     return value;
   }
+
+  isUrl(value: string) {
+    let url;
+    
+    try {
+      url = new URL(value);
+    } catch (error) {
+      console.log(error);
+      return false;  
+    }
+  
+    return url.protocol === "http:" || url.protocol === "https:";
+  }
+
+  isBase64(value: string) {
+    if (!value || value == 'undefined' || value === '' || value.trim() === '')  return false; 
+
+    try {
+        return btoa(atob(value)) == value;
+    } catch (err) {
+        return false;
+    }
+  }
 };
 
 export default (new DataManager());
