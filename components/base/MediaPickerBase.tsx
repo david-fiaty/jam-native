@@ -103,7 +103,10 @@ const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Pr
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, selectedMedia]);
+  }, [isLoaded, selectedMedia, value]);
+
+
+  console.log(value);
 
   return (
     <View style={styles.container}>
