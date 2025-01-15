@@ -30,6 +30,7 @@ import LocationMapView from "../view/LocationMapView";
 import SelectJamsForm from "../form/SelectJamsForm";
 import CountriesList from "../list/CountriesList";
 import AddJamToProjectForm from "../form/AddJamToProjectForm";
+import SearchManager from "@/manager/SearchManager";
 
 const screenComponents: any = {
   JamsList: <JamsList />,
@@ -59,10 +60,12 @@ const JamsScreen = () => {
   const route = useRoute();
   const windowWidth = DeviceManager.window.width;
   const windowHeight = DeviceManager.window.height;
-  const [currentScreen, setCurrentScreen] = useState(null);
-  const [animatedStyle, setAnimatedStyle] = useState(null);
+  const [currentScreen, setCurrentScreen] = useState<any>(null);
+  const [animatedStyle, setAnimatedStyle] = useState<any>(null);
+  const [searchResultsIds, setSearchResultsIds] = useState<any[]>([]);
   const screenState = useSelector((state: any) => state.screen);
-
+  const searchState = useSelector((state: any) => state.search);
+  
   // Animation references
   const fadeEffectReference = useRef(new Animated.Value(0)).current;
   const slideEffectReference = useRef(new Animated.Value(windowHeight)).current;
@@ -124,22 +127,39 @@ const JamsScreen = () => {
     return activeModal;
   };
 
+  // Get the current search results IDs
+  const getSearchResultsIds = async () => {
+    let jamResultsIds: any = [];
+    let searchValue: string = searchState.value || '';
+
+    if (searchValue.length > 0) {
+      let searchResults: any = await SearchManager.getResult(searchValue); 
+      jamResultsIds = (searchResults?.jam || []).map((o: any) => o.id);
+    }
+
+    return jamResultsIds;
+  };
+
   // Display
   useEffect(() => {
-    const activeModal: any = getActiveModal(screenState);
+    (async () => {
+      const activeModal: any = getActiveModal(screenState);
+      setSearchResultsIds(await getSearchResultsIds());
 
-    if (activeModal) {
-      setCurrentScreen(activeModal);
-      setAnimatedStyle(animationStyles[activeModal.effect]);
-      animationEffects[activeModal.effect](true);
-    } else if (currentScreen) {
-      animationEffects[currentScreen.effect](false);
-      setTimeout(() => {
-        setCurrentScreen(null);
-        setAnimatedStyle(animationStyles[currentScreen.effect]);
-      }, Layout.animation.duration);
-    }
-  }, [screenState]);
+      if (activeModal) {
+        setCurrentScreen(activeModal);
+        setAnimatedStyle(animationStyles[activeModal.effect]);
+        animationEffects[activeModal.effect](true);
+      } else if (currentScreen) {
+        animationEffects[currentScreen.effect](false);
+        setTimeout(() => {
+          setCurrentScreen(null);
+          setAnimatedStyle(animationStyles[currentScreen.effect]);
+        }, Layout.animation.duration);
+      }  
+    })();
+
+  }, [screenState, animationStyles, animationEffects, currentScreen]);
 
   // Render
   return (
@@ -148,7 +168,10 @@ const JamsScreen = () => {
         {/* Main content */}
         {!currentScreen && (
           <BoxView style={Layout.mainContent}>
-            <JamsList showSpinner={true} />
+            <JamsList 
+              showSpinner={true} 
+              idArray={searchResultsIds}
+            />
           </BoxView>
         )}
 

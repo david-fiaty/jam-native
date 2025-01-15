@@ -51,7 +51,7 @@ const SearchView = () => {
         setIsLoaded(true);
       }
     })();
-  });
+  }, [isLoaded, searchState, previousSearchValue]);
 
   if (!isLoaded) return <SpinnerView />;
 
