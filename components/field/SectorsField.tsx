@@ -24,7 +24,7 @@ const SectorsField = ({ resource, field, label, onPressEvent, onDeleteEvent }: P
   const fieldName: string = field;
 
   const getSelectedSectors = (sectorsIds?: any) => {
-    let selectedIds: any[] = sectorsIds || formData?.[fieldName] || [];
+    let selectedIds: any[] = sectorsIds?.length > 0 || formData?.[fieldName] || [];
     let result: any[] = [];
 
     for (const item of sectorsData) {
