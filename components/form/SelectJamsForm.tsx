@@ -98,7 +98,7 @@ const SelectJamsForm = () => {
           renderItem={(row: any) => (
             <JamListItem
               row={row}
-              canAddItem={true}
+              isAddable={true}
               onListItemPress={(row: any) => updateSelection(row)}
             />
           )}

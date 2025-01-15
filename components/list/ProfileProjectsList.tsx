@@ -16,6 +16,8 @@ type Props = {
   idArray?: any;
   addButton?: boolean;
   allButton?: boolean;
+  isAddable?: boolean;
+  isDeletable?: boolean;
   onAddButtonPress?: () => void;
   onListItemPress?: (row: any) => void;
 };
@@ -25,8 +27,10 @@ const ProfileProjectsList = ({
   idArray,
   addButton,
   allButton,
+  isAddable,
+  isDeletable,
   onAddButtonPress,
-  onListItemPress
+  onListItemPress,
 }: Props) => {
   const numColumns = 3;
   const router = useRouter();
@@ -105,7 +109,8 @@ const ProfileProjectsList = ({
             <ProjectListItem 
               row={row}
               images={projectsImages}
-              canAddItem={true}
+              isAddable={isAddable}
+              isDeletable={isDeletable}
               onAddButtonPress={onAddButtonPress}
               onListItemPress={(row: any) => onItemPress(row)}
             />
