@@ -64,7 +64,8 @@ const JamsScreen = () => {
   const [animatedStyle, setAnimatedStyle] = useState<any>(null);
   const [searchResultsIds, setSearchResultsIds] = useState<any[]>([]);
   const screenState = useSelector((state: any) => state.screen);
-
+  const searchState = useSelector((state: any) => state.search);
+  
   // Animation references
   const fadeEffectReference = useRef(new Animated.Value(0)).current;
   const slideEffectReference = useRef(new Animated.Value(windowHeight)).current;
@@ -128,7 +129,7 @@ const JamsScreen = () => {
 
   // Get the current search results IDs
   const getSearchResultsIds = async () => {
-    const searchResults: any = await SearchManager.getResult('jazz');
+    const searchResults: any = await SearchManager.getResult('jazz'); // Todo - Apply search value
     const jamResultsIds: any = (searchResults?.jam || []).map((o: any) => o.id);
     
     return jamResultsIds ?? [];
