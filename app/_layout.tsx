@@ -8,7 +8,6 @@ import * as ExpoSplashScreen from 'expo-splash-screen';
 import BaseTheme from "@/constants/BaseTheme";
 import Store from "@/redux/Store";
 import HeaderNavigation from '@/components/navigation/HeaderNavigation';
-import SplashScreen from '@/components/screen/SplashScreen';
 import MessageView from '@/components/view/MessageView';
 
 const headerHiddenOptions: object = { 
@@ -34,7 +33,7 @@ ExpoSplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
   const segments = useSegments(); 
-  const [isLoaded] = useFonts({
+  const [isLoaded, isError] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
 
@@ -159,12 +158,12 @@ const RootLayout = () => {
   ];
 
   useEffect(() => {
-    if (isLoaded) {
+    if (isLoaded || isError) {
       ExpoSplashScreen.hideAsync();
     }
-  }, [isLoaded]);
+  }, [isLoaded, isError]);
 
-  if (!isLoaded) return <SplashScreen /> 
+  if (!isLoaded && !isError) return null; 
 
   return (
     <Provider store={Store}>
