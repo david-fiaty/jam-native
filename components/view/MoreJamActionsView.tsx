@@ -21,31 +21,37 @@ const MoreJamActionsView = () => {
     {
       label: i18n.t('Save Jam'),
       icon: 'save',
+      canDisplay: () => true,
       onPress: () => ScreenManager.toggleScreen('SavedJamAction', { entityId: entityId }),
     },
     {
       label: i18n.t('Like Jam'),
       icon: 'like',
+      canDisplay: () => true,
       onPress: () => ScreenManager.toggleScreen('LikedJamAction', { entityId: entityId }),
     },
     {
       label: i18n.t('Share Jam'),
       icon: 'share',
+      canDisplay: () => true,
       onPress: () => EntityManager.shareJam(entityId),
     },
     {
       label: i18n.t('Add Jam to project'),
       icon: 'plus',
-      onPress: () => ScreenManager.toggleScreen('AddJamToProjectForm', { entityId: entityId })
+      canDisplay: () => true,
+      onPress: () => ScreenManager.toggleScreen('AddJamToProjectForm', { entityId: entityId }),
     },
     {
       label: i18n.t('Edit Jam'),
       icon: 'edit',
+      canDisplay: () => isEntityOwner,
       onPress: () => ScreenManager.toggleScreen('JamForm', { entityId: entityId }),
     },
     {
       label: i18n.t('Report Jam'),
       icon: 'report',
+      canDisplay: () => true,
       onPress: () => {
         Alert.alert(
           i18n.t('Report'), 
@@ -75,6 +81,7 @@ const MoreJamActionsView = () => {
     {
       label: i18n.t('Delete Jam'),
       icon: 'delete',
+      canDisplay: () => isEntityOwner,
       onPress: () => {
         Alert.alert(
           i18n.t('Report'), 
@@ -123,7 +130,11 @@ const MoreJamActionsView = () => {
       />
       
       <View style={Layout.borderedListContainer}>
-        { actions.map((item: any) => <ActionListItem key={DataManager.createUuid()} item={item} />)}
+        { actions.map((item: any) => {
+          if (item.canDisplay() === true) {
+            return <ActionListItem key={DataManager.createUuid()} item={item} />
+          }
+        })}
       </View>
     </BoxView>
   );
