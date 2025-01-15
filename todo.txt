@@ -59,12 +59,15 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 
 # Finish
 - Add jam to project => select a single project or loop on all selected projects
-- Account form endpoint submit
-- Extract languages and translate
 - Set media, collaborators, sectors preview values on entity edit
 - Design project view
 - Media upload submit process
-- Apply search state to main jams list
+- Apply search state to main jams list (missing live refresh)
+- Extract languages and translate
+
+# Await 
+  - Account form endpoint submit
+  - Display form validation errors
 
 # Issues  
   - Copy Jam link cannot be implemented (missing URL in payload, maybe irrelevant on native)
