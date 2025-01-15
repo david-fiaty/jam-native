@@ -24,7 +24,6 @@ const SearchProjectsList = ({ data }: Props) => {
     });
   };
 
-
   useEffect(() => {
     if (data?.length > 0) {
       data.map((item: any) => {

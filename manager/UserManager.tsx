@@ -16,6 +16,13 @@ class UserManager {
     return response;
   }
 
+  logout() {
+    Store.dispatch(setTokenData('{}'));
+    Store.dispatch(setIsLoggedIn(false));
+
+    // Todo - Also reset active screen to avoid redirect on relogin
+  }
+
   async register(data: any) {
     let response = await DataManager.post('register', data);
     if (response?.tokens?.access_token?.length) {
@@ -76,11 +83,18 @@ class UserManager {
     return userNotifications || [];
   }
 
-  logout() {
-    Store.dispatch(setTokenData('{}'));
-    Store.dispatch(setIsLoggedIn(false));
+  async isJamOwner(entityId: number) {
+    let profileData: any = await this.getProfileData();
+    let profileJams: any = profileData?.profile_jams || [];
 
-    // Todo - Also reset active screen to avoid redirect on relogin
+    return profileJams.includes(entityId);
+  }
+  
+  async isProjectOwner(entityId: number) {
+    let profileData: any = await this.getProfileData();
+    let profileProjects: any = profileData?.profile_projects || [];
+
+    return profileProjects.includes(entityId);
   }
 
   setLanguage(languageCode: string) {
