@@ -8,7 +8,6 @@ import * as ExpoSplashScreen from 'expo-splash-screen';
 import BaseTheme from "@/constants/BaseTheme";
 import Store from "@/redux/Store";
 import HeaderNavigation from '@/components/navigation/HeaderNavigation';
-import SplashScreen from '@/components/screen/SplashScreen';
 import MessageView from '@/components/view/MessageView';
 
 const headerHiddenOptions: object = { 
