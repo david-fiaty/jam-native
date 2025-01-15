@@ -8,6 +8,7 @@ import TextView from '../view/TextView';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
 import MediaManager from '@/manager/MediaManager';
+import DataManager from "@/manager/DataManager";
 
 type Props = BaseProps & {
   label?: JSX.Element, 
@@ -96,17 +97,28 @@ const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Pr
     }
   };
 
+  const getSelectedMedia = () => {
+    // Todo - Get selected media
+    let url: string = MediaManager.getImageUrl(value?.[0].url);
+    if (DataManager.isUrl(url)) {
+      //console.log(MediaManager.urlToBase64(url));
+    }
+    
+
+    console.log('getSelectedMedia', url);
+
+    return [];
+  }; 
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        console.log(selectedMedia);
+        setSelectedMedia(getSelectedMedia());
         setIsLoaded(true);
       }
     })();
   }, [isLoaded, selectedMedia, value]);
 
-
-  console.log(value);
 
   return (
     <View style={styles.container}>

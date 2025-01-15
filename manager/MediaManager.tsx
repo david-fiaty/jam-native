@@ -33,6 +33,10 @@ class MediaManager {
   getImageUrl (path: any) {
     return Config.imageUrl + path;
   }
+
+  urlToBase64 (url: string) {
+    
+  } 
 }
 
 export default new MediaManager();
