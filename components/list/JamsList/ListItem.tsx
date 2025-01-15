@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   container: {
     borderWidth: 1,
     borderRadius: Layout.radius.round,
-    marginBottom: Layout.space.base * 1.5,
+    marginBottom: Layout.space.base*1.5,
     borderColor: Colors.primary,
   },
 });

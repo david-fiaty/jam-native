@@ -93,7 +93,7 @@ const ListItemToolbar = ({ row }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: Layout.space.base,
+    padding: Layout.space.base*1.2,
   },
 });
 
