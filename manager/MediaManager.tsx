@@ -2,6 +2,7 @@ import { Layout } from '@/constants/Layout';
 import { Config } from '@/constants/Config';
 import * as FileSystem from 'expo-file-system';
 import DeviceManager from "@/manager/DeviceManager";
+import DataManager from './DataManager';
 
 class MediaManager {
   async getBase64Data(uri: string) {
@@ -34,6 +35,12 @@ class MediaManager {
     return Config.imageUrl + path;
   }
 
+  prepareUpload = (data: any) => {
+    return data.map((item: any) => {
+      return DataManager.extract(['base64'], item);
+    }); 
+  };
+  
   urlToBase64 (url: string) {
     
   } 
