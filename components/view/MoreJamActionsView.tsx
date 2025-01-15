@@ -51,7 +51,7 @@ const MoreJamActionsView = () => {
     {
       label: i18n.t('Report Jam'),
       icon: 'report',
-      canDisplay: () => true,
+      canDisplay: () => !isEntityOwner,
       onPress: () => {
         Alert.alert(
           i18n.t('Report'), 
