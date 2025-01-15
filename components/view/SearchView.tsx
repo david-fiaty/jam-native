@@ -14,7 +14,6 @@ import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "./SpinnerView";
 
 const SearchView = () => {
-  const defaultTab = ''
   const searchState = useSelector((state: any) => state.search);
   const [activeTab, setActiveTab] = useState<any>(null);
   const [searchData, setSearchData] = useState<any>({});
