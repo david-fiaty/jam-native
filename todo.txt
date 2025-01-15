@@ -64,6 +64,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Extract languages and translate
 - Set media, collaborators, sectors preview values on entity edit
 - Design project view
+- Media upload submit process
 
 
 
