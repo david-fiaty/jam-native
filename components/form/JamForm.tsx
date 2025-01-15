@@ -113,8 +113,6 @@ const JamForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(entityId);
-
   return (
     <BoxView
       align="flex-start"
