@@ -40,6 +40,7 @@ const JamForm = () => {
   const entityId = activeScreen?.params?.entityId || 0;
 
   const sectorsFieldName: string = entityId == 0 ? 'sectors_ids' : 'sectors';
+  const collaboratorsFieldName: string = entityId == 0 ? 'collaborators_ids' : 'collaborators';
 
   const updateField = (key: any, value: any) => {
     dispatch(setFormData<any>({ 
@@ -232,16 +233,16 @@ const JamForm = () => {
       <DividerView theme="secondary" />
       <CollaboratorsField
         resource={resource}
-        field="collaborators_ids"
+        field={collaboratorsFieldName}
         onPressEvent={() => ScreenManager.toggleScreen('CollaboratorsList', {
           resource: resource,
-          field: 'collaborators_ids',
+          field: collaboratorsFieldName,
         })}
         onDeleteEvent={(item: any) => {
-          const collaboratorsIds = [...formData?.collaborators_ids || []];
+          const collaboratorsIds = [...formData?.[collaboratorsFieldName] || []];
           const index = collaboratorsIds.findIndex((v) => v === item.id);
           if (index !== -1) collaboratorsIds.splice(index, 1);
-          updateField('collaborators_ids', collaboratorsIds.filter(Boolean));
+          updateField(collaboratorsFieldName, collaboratorsIds.filter(Boolean));
         }}
       />
 
