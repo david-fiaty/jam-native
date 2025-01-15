@@ -15,11 +15,13 @@ type Props = {
   idArray?: any,
   addButton?: boolean,
   allButton?: boolean,
+  isAddable?: boolean;
+  isDeletable?: boolean;
   onAddButtonPress?: () => void,
   onListItemPress?: (row: any) => void;
 };
 
-const ProfileJamsList = ({ title, idArray, addButton, allButton, onAddButtonPress, onListItemPress }: Props) => {
+const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDeletable, onAddButtonPress, onListItemPress }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const [profileJams, setProfileJams] = useState<any>([]);
@@ -85,6 +87,8 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, onAddButtonPres
           renderItem={(row: any) => (
             <JamListItem 
               row={row} 
+              isAddable={isAddable}
+              isDeletable={isDeletable}
               onAddButtonPress={onAddButtonPress}
               onListItemPress={(row: any) => onItemPress(row)}
             />

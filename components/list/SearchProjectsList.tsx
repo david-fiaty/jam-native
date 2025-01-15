@@ -1,5 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import { useState, useEffect } from "react";
+import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
@@ -13,7 +14,16 @@ type Props = {
 
 const SearchProjectsList = ({ data }: Props) => {
   const numColumns = 3;
+  const router = useRouter();
   const [projectsImages, setProjectsImages] = useState<any>({});
+
+  const onItemPress = (row: any) => {
+    router.push({
+      pathname: "/project",
+      params: { idArray: [row.item.id], title: row.item.title },
+    });
+  };
+
 
   useEffect(() => {
     if (data?.length > 0) {
@@ -40,6 +50,7 @@ const SearchProjectsList = ({ data }: Props) => {
               <ProjectListItem 
                 row={row}
                 images={projectsImages}
+                onListItemPress={(row: any) => onItemPress(row)}
               />
             )}
           />
