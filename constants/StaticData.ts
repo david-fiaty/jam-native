@@ -55,10 +55,6 @@ const StaticData = {
   ],
   locationTypes: [
     {
-      id: null,
-      label: i18n.t('Location type'),
-    },
-    {
       id: 'online',
       label: i18n.t('Online'),
     },

@@ -48,8 +48,15 @@ const JamForm = () => {
     }));
   };
 
+  const processMedia = (data: any) => {
+    return data.map((item: any) => {
+      return DataManager.extract(['base64'], item);
+    }); 
+  };
+
   const submitForm = async () => {
     setIsProcessing(true);
+    let media: any = processMedia(formData?.upload_medias);
 
     let result: any = entityId > 0 
       ? await EntityManager.updateJam(entityId, formData) 
@@ -57,7 +64,7 @@ const JamForm = () => {
 
     let message: any = {
       title: entityId > 0 ? i18n.t('Update Jam') : i18n.t('Create Jam'),
-      content: i18n.t('The Jam data was successfully submitted.'),
+      content: i18n.t('Jam data successfully submitted.'),
     };
 
     if (result?.error) message.content = i18n.t(result.error)
@@ -105,8 +112,6 @@ const JamForm = () => {
   }, [isLoaded, profileId, resource, formData]);
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(entityId);
 
   return (
     <BoxView

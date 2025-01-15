@@ -100,7 +100,6 @@ class UserManager {
 
   isAccessTokenValid() {
     // Todo - Validate token duration
-    console.log('---oooppp---');
   }
 }
 
