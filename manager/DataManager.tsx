@@ -79,6 +79,16 @@ class DataManager {
   
     return url.protocol === "http:" || url.protocol === "https:";
   }
+
+  isBase64(value: string) {
+    if (!value || value == 'undefined' || value === '' || value.trim() === '')  return false; 
+
+    try {
+        return btoa(atob(value)) == value;
+    } catch (err) {
+        return false;
+    }
+  }
 };
 
 export default (new DataManager());
