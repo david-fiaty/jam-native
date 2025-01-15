@@ -13,6 +13,8 @@ export const Config = {
   paginationSize: 10,
   dateFormat: 'MMM Do YYYY',
   messageDisplayDuration: 3500,
+  maxSlieshowImages: 10,
+  maxNotificationsDisplay: 14,
   defaultLocation: {
     latitude: 8.6195,
     longitude: 0.8248,
