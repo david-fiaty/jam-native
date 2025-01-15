@@ -84,19 +84,18 @@ class UserManager {
   }
 
   async isJamOwner(entityId: number) {
-    let profileData: any = this.getProfileData();
-    //let profileJams: any = profileData?.profile_jams
+    let profileData: any = await this.getProfileData();
+    let profileJams: any = profileData?.profile_jams || [];
 
-    console.log('isJamOwner', profileData);
+    return profileJams.includes(entityId);
   }
 
   
   async isProjectOwner(entityId: number) {
+    let profileData: any = await this.getProfileData();
+    let profileProjects: any = profileData?.profile_projects || [];
 
-  }
-
-  async isProfileOwner(entityId: number) {
-
+    return profileProjects.includes(entityId);
   }
 
   setLanguage(languageCode: string) {
