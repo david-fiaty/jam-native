@@ -30,6 +30,7 @@ import LocationMapView from "../view/LocationMapView";
 import SelectJamsForm from "../form/SelectJamsForm";
 import CountriesList from "../list/CountriesList";
 import AddJamToProjectForm from "../form/AddJamToProjectForm";
+import SearchManager from "@/manager/SearchManager";
 
 const screenComponents: any = {
   JamsList: <JamsList />,
@@ -128,6 +129,11 @@ const JamsScreen = () => {
   useEffect(() => {
     (async () => {
       const activeModal: any = getActiveModal(screenState);
+
+      const searchResults: any = await SearchManager.getResult('jazz');
+      const jamResultsIds: any = (searchResults?.jam || []).map((o: any) => o.id);
+      
+      console.log(jamResultsIds);
 
       if (activeModal) {
         setCurrentScreen(activeModal);
