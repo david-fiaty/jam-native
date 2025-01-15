@@ -67,10 +67,6 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Apply search state to main jams list (missing live refresh)
 - Extract languages and translate
 
-# Await 
-  - Account form endpoint submit
-  - Display form validation errors
-
 # Issues  
   - Copy Jam link cannot be implemented (missing URL in payload, maybe irrelevant on native)
   - Errors with jam images having double extension .jpg.png or .png.png => error handling is additional performance load
