@@ -58,6 +58,8 @@ https://withfra.me/react-native-tutorials/how-to-use-svg-in-react-native
 https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-7948f1a6f949
 
 # Finish
+- Slpash screen
+- Static images @2x..
 - Add jam to project => select a single project or loop on all selected projects
 - Set media, collaborators, sectors preview values on entity edit
 - Design project view
