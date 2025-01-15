@@ -164,7 +164,7 @@ const RootLayout = () => {
     }
   }, [isLoaded]);
 
-  if (!isLoaded) return <SplashScreen /> 
+  if (!isLoaded) return null; 
 
   return (
     <Provider store={Store}>
