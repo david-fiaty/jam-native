@@ -41,7 +41,7 @@ const JamForm = () => {
 
   const sectorsFieldName: string = entityId == 0 ? 'sectors_ids' : 'sectors';
   const collaboratorsFieldName: string = entityId == 0 ? 'collaborators_ids' : 'collaborators';
-  const mediasFieldName: string = entityId == 0 ? 'upload_medias' : 'mediias';
+  const mediasFieldName: string = entityId == 0 ? 'upload_medias' : 'medias';
 
   const updateField = (key: any, value: any) => {
     dispatch(setFormData<any>({ 
