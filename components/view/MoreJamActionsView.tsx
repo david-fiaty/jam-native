@@ -9,11 +9,13 @@ import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
 import ActionListItem from '../list/ListItem/ActionListItem';
 import DataManager from '@/manager/DataManager';
+import UserManager from '@/manager/UserManager';
 
 const MoreJamActionsView = () => {
   const [entity, setEntity] = useState<any>(null);
-  const entityId = ScreenManager.getScreenEntityId();
-
+  const entityId: number = ScreenManager.getScreenEntityId();
+  const isOwner: boolean = UserManager.isJamOwner(entityId);
+  
   const actions: any = [
     {
       label: i18n.t('Save Jam'),
