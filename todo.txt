@@ -57,6 +57,16 @@ https://withfra.me/react-native-tutorials/how-to-use-svg-in-react-native
 # Grid layout
 https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-7948f1a6f949
 
+# Finish
+- Fix search navigation
+- Add jam to project => select a single project or loop on all selected projects
+- Account form endpoint submit
+- Extract languages and translate
+- Set media, collaborators, sectors preview values on entity edit
+- Design project view
+
+
+
 # Issues  
   - Copy Jam link cannot be implemented (missing URL in payload, maybe irrelevant on native)
   - Errors with jam images having double extension .jpg.png or .png.png => error handling is additional performance load
