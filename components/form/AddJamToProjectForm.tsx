@@ -71,10 +71,10 @@ const AddJamToProjectForm = () => {
         <DividerView theme="secondary" />
 
         <ProfileProjectsList
-          idArray={[14, 18, 19]} // Todo - Remove test
+          //idArray={[14, 18, 19]} // Todo - Remove test
           onListItemPress={(row: any) => updateSelection(row)}
           isAddable={true}
-          //idArray={formData?.profile_projects}
+          idArray={formData?.profile_projects}
         />
 
         <DividerView theme="secondary" />
