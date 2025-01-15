@@ -139,11 +139,7 @@ const JamsScreen = () => {
   useEffect(() => {
     (async () => {
       const activeModal: any = getActiveModal(screenState);
-
-      const searchResults: any = await SearchManager.getResult('jazz');
-      const jamResultsIds: any = (searchResults?.jam || []).map((o: any) => o.id);
-      
-      console.log('-->', await getSearchResultsIds());
+      setSearchResultsIds(await getSearchResultsIds());
 
       if (activeModal) {
         setCurrentScreen(activeModal);
@@ -159,6 +155,8 @@ const JamsScreen = () => {
     })();
 
   }, [screenState, animationStyles, animationEffects, currentScreen]);
+
+  console.log(searchResultsIds)
 
   // Render
   return (
