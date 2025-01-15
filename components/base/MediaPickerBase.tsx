@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import { Layout } from '@/constants/Layout';
@@ -20,6 +20,7 @@ type Props = BaseProps & {
 const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const imageSize: any = MediaManager.getThumbnailSize();
 
   const deleteMedia = (data: any) => {
@@ -94,6 +95,15 @@ const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Pr
       if (onSelectItem) onSelectItem(mediaList);
     }
   };
+
+  useEffect(() => {
+    (async () => {
+      if (!isLoaded) {
+        console.log(selectedMedia);
+        setIsLoaded(true);
+      }
+    })();
+  }, [isLoaded, selectedMedia]);
 
   return (
     <View style={styles.container}>
