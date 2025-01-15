@@ -129,12 +129,11 @@ const JamsScreen = () => {
 
   // Get the current search results IDs
   const getSearchResultsIds = async () => {
-    console.log(searchState.value)
     let jamResultsIds: any = [];
     let searchValue: string = searchState.value || '';
 
     if (searchValue.length > 0) {
-      let searchResults: any = await SearchManager.getResult(searchState.value); 
+      let searchResults: any = await SearchManager.getResult(searchValue); 
       jamResultsIds = (searchResults?.jam || []).map((o: any) => o.id);
     }
 
