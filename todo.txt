@@ -64,6 +64,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Set media, collaborators, sectors preview values on entity edit
 - Design project view
 - Media upload submit process
+- Profile image upload bug?
 - Apply search state to main jams list (missing live refresh)
 - Extract languages and translate
 

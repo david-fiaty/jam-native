@@ -23,6 +23,7 @@ import ProfileImageField from "../field/ProfileImageField";
 import IconView from "../view/IconView";
 import ButtonView from "../view/ButtonView";
 import EntityManager from "@/manager/EntityManager";
+import MediaManager from "@/manager/MediaManager";
 
 const ProfileForm = () => {
   const resource: string = 'profile';
@@ -42,6 +43,10 @@ const ProfileForm = () => {
 
   const submitForm = async () => {
     setIsProcessing(true);
+
+    //let media: any = MediaManager.prepareUpload(formData?.[mediasFieldName]);
+    // Todo - Find profile media field
+
     let result: any = await EntityManager.updateProfile(formData);
     let message: any = {
       title: i18n.t('Update profile'),

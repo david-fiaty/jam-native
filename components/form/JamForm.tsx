@@ -55,11 +55,10 @@ const JamForm = () => {
 
   const submitForm = async () => {
     setIsProcessing(true);
-    // Todo - Add media to form
     let media: any = MediaManager.prepareUpload(formData?.[mediasFieldName]);
 
     let result: any = entityId > 0 
-      ? await EntityManager.updateJam(entityId, formData) 
+      ? await EntityManager.updateJam(entityId, {...formData, ...{ [mediasFieldName]: media}}) 
       : await EntityManager.addJam(formData);
 
     let message: any = {
