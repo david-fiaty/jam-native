@@ -61,9 +61,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Add jam to project => select a single project or loop on all selected projects
 - Account form endpoint submit
 - Extract languages and translate
-- Set media preview values on entity edit
-- Set collaborators preview values on entity edit
-- Set sectors preview values on entity edit
+- Set media, collaborators, sectors preview values on entity edit
 - Design project view
 - Media upload submit process
 - Apply search state to main jams list
