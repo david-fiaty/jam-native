@@ -6,6 +6,7 @@ import ImageView from "../view/ImageView";
 import DeviceManager from "@/manager/DeviceManager";
 import NoImageView from "../view/NoImageView";
 import MediaManager from "@/manager/MediaManager";
+import { Config } from "@/constants/Config";
 
 type Props = {
   data?: any;
@@ -15,6 +16,10 @@ const width = DeviceManager.window.width - Layout.space.base * 2;
 const height = 346;
 
 const ImageSlideshow = ({ data }: Props) => {
+  if (data?.length > Config.maxSlieshowImages) {
+    data = data.slice(Config.maxSlieshowImages - 1);
+  } 
+  
   const renderItem = (item: any, index: number) => (
     <View style={styles.item} key={`dot-${index}`}>
       <ImageView
