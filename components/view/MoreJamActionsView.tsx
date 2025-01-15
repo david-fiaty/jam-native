@@ -45,13 +45,14 @@ const MoreJamActionsView = () => {
     {
       label: i18n.t('Edit Jam'),
       icon: 'edit',
-      canDisplay: () => isEntityOwner,
+      canDisplay: () => true,
+      //canDisplay: () => isEntityOwner, // Todo - Enable this
       onPress: () => ScreenManager.toggleScreen('JamForm', { entityId: entityId }),
     },
     {
       label: i18n.t('Report Jam'),
       icon: 'report',
-      canDisplay: () => true,
+      canDisplay: () => !isEntityOwner,
       onPress: () => {
         Alert.alert(
           i18n.t('Report'), 
