@@ -39,6 +39,8 @@ const JamForm = () => {
   const jamCategoriesData = StaticData.jamCategories;
   const entityId = activeScreen?.params?.entityId || 0;
 
+  const sectorsFieldName: string = entityId == 0 ? 'sectors_ids' : 'sectors';
+
   const updateField = (key: any, value: any) => {
     dispatch(setFormData<any>({ 
       resource: resource,
@@ -208,7 +210,7 @@ const JamForm = () => {
       <DividerView theme="secondary" />
       <SectorsField
         resource={resource}
-        field="sectors_ids"
+        field={sectorsFieldName}
         label={
           <>
             <IconView name="plus" theme="secondary" radius="round" />
@@ -217,13 +219,13 @@ const JamForm = () => {
         }
         onPressEvent={() => ScreenManager.toggleScreen('SectorsList', {
           resource: resource,
-          field: 'sectors_ids',
+          field: sectorsFieldName,
         })}
         onDeleteEvent={(item: any) => {
-          const sectorsIds = [...formData?.sectors_ids || []];
+          const sectorsIds = [...formData?.[sectorsFieldName] || []];
           const index = sectorsIds.findIndex((v) => v === item.id);
           if (index !== -1) sectorsIds.splice(index, 1);
-          updateField('sectors_ids', sectorsIds.filter(Boolean));
+          updateField(sectorsFieldName, sectorsIds.filter(Boolean));
         }}
       />
       
