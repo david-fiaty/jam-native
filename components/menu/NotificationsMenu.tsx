@@ -9,6 +9,7 @@ import i18n from '@/translation/i18n';
 import ScreenManager from '@/manager/ScreenManager';
 import UserManager from "@/manager/UserManager";
 import SpinnerView from "../view/SpinnerView";
+import { Config } from "@/constants/Config";
 
 const NotificationsMenu = () => {
   const router = useRouter();
@@ -33,6 +34,10 @@ const NotificationsMenu = () => {
 
   if (!isLoaded) { 
     UserManager.getNotifications().then((data: any) => {
+      if (data?.length > Config.maxNotificationsDisplay) {
+        data = data.slice(Config.maxNotificationsDisplay - 1);
+      } 
+    
       setNotificationsData(data);
       setIsLoaded(true);
     });
