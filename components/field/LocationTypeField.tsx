@@ -27,7 +27,6 @@ const LocationTypeField = ({value, onChangeValue}: Props) => {
       <SelectListBase 
         value={value}
         data={buildOptions(locationTypes)} 
-        placeholder={i18n.t('Location type')} 
         onChangeValue={onChangeValue}
       />
     </BoxView>

@@ -41,7 +41,6 @@ const CountryField = ({value, onChangeValue}: Props) => {
       <SelectListBase 
         value={value}
         data={buildOptions(countriesData)} 
-        placeholder={i18n.t('Country')} 
         onChangeValue={onChangeValue}
       />
     </BoxView>
