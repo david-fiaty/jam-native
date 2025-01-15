@@ -129,10 +129,16 @@ const JamsScreen = () => {
 
   // Get the current search results IDs
   const getSearchResultsIds = async () => {
-    const searchResults: any = await SearchManager.getResult('jazz'); // Todo - Apply search value
-    const jamResultsIds: any = (searchResults?.jam || []).map((o: any) => o.id);
-    
-    return jamResultsIds ?? [];
+    console.log(searchState.value)
+    let jamResultsIds: any = [];
+    let searchValue: string = searchState.value || '';
+
+    if (searchValue.length > 0) {
+      let searchResults: any = await SearchManager.getResult(searchState.value); 
+      jamResultsIds = (searchResults?.jam || []).map((o: any) => o.id);
+    }
+
+    return jamResultsIds;
   };
 
 
