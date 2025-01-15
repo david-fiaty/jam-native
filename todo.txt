@@ -65,7 +65,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Set collaborators preview values on entity edit
 - Set sectors preview values on entity edit
 - Design project view
-- Media upload submit process
+- Media upload submit process on all forms
 - Apply search state to main jams list
 
 # Issues  
