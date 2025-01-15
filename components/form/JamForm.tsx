@@ -41,6 +41,7 @@ const JamForm = () => {
 
   const sectorsFieldName: string = entityId == 0 ? 'sectors_ids' : 'sectors';
   const collaboratorsFieldName: string = entityId == 0 ? 'collaborators_ids' : 'collaborators';
+  const mediasFieldName: string = entityId == 0 ? 'upload_medias' : 'mediias';
 
   const updateField = (key: any, value: any) => {
     dispatch(setFormData<any>({ 
@@ -59,7 +60,7 @@ const JamForm = () => {
 
   const submitForm = async () => {
     setIsProcessing(true);
-    let media: any = processMedia(formData?.upload_medias);
+    let media: any = processMedia(formData?.[mediasFieldName]);
 
     let result: any = entityId > 0 
       ? await EntityManager.updateJam(entityId, formData) 
@@ -249,9 +250,9 @@ const JamForm = () => {
       <DividerView theme="secondary" />
       <MediaPickerBase
         preview={true}
-        value={formData?.upload_medias}
-        onSelectItem={(data: any) => updateField('upload_medias', data)}
-        onDeleteItem={(data: any) => updateField('upload_medias', data)}
+        value={formData?.[mediasFieldName]}
+        onSelectItem={(data: any) => updateField(mediasFieldName, data)}
+        onDeleteItem={(data: any) => updateField(mediasFieldName, data)}
         label={
           <BoxView direction="row" align="center">
             <IconView name="plus" theme="secondary" radius="round" />
