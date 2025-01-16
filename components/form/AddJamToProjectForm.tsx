@@ -23,12 +23,15 @@ const AddJamToProjectForm = () => {
   const entityId: number = activeScreen.params.entityId;
 
   const updateSelection = (row: any) => {
+    console.log(row);
     setFormData({...formData, ...{ project_id: row.item.id }});
   };
 
   const submitForm = async () => {
     setIsProcessing(true);
-    let projectId: number = formData?.project_id || 0;
+    let projectId: number = formData?.project_id;
+    let requests: any = [];
+
     let result: any = await EntityManager.addJamToProject(projectId, { 
       profile_id: profileId,
       items_ids: [entityId], 
@@ -56,6 +59,8 @@ const AddJamToProjectForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
+  console.log(formData);
+
   return (
     <BoxView
       align="flex-start"
@@ -67,7 +72,7 @@ const AddJamToProjectForm = () => {
         title={i18n.t('Add Jam to project')}
         onPress={() => ScreenManager.toggleScreen('AddJamToProjectForm')}
       />
-        <TextView>{i18n.t('Select a target project from your profile projects:')}</TextView>
+        <TextView>{i18n.t('Select items from your profile projects:')}</TextView>
         <DividerView theme="secondary" />
 
         <ProfileProjectsList
