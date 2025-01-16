@@ -105,9 +105,9 @@ const JamForm = () => {
           }, 
         }));
       }
-    })();
 
-    setIsLoaded(true);
+      setIsLoaded(true);
+    })();
   }, [isLoaded, profileId, resource, formData]);
 
   if (!isLoaded) return <SpinnerView />;
