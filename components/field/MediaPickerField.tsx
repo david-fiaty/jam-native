@@ -81,7 +81,7 @@ const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: P
       allowsEditing: false,
       aspect: [4, 3],
       quality: 1,
-      //base64: true,
+      base64: true,
     });
   };
 
@@ -107,8 +107,8 @@ const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: P
 
     return {
       assetId: media?.id,
-      fileName: media?.url,
-      uri: media?.url,
+      fileName: mediaUrl,
+      uri: mediaUrl,
       fileSize: null,
       height: 0,
       width: 0,
