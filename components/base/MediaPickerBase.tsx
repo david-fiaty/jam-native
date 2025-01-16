@@ -75,14 +75,18 @@ const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Pr
     );    
   };
 
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
+  const launchBrowser = async () => {
+    return await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ['images'],
       allowsEditing: false,
       aspect: [4, 3],
       quality: 1,
       base64: true,
     });
+  };
+
+  const pickImage = async () => {
+    let result: any = await launchBrowser();
 
     if (!result.canceled && result?.assets?.length) {
       let mediaList: any = [...selectedMedia];
