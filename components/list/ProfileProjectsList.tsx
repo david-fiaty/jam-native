@@ -38,10 +38,33 @@ const ProfileProjectsList = ({
   const router = useRouter();
   const [profileProjects, setProfileProjects] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [selectedIds, setSelectedIds] = useState<any>([]);
   const [projectsImages, setProjectsImages] = useState<any>({});
+
+  const findItemIndex = (row: any) => {
+    return selectedIds.findIndex((id: any) => id == row.item.id);
+  };
+
+  const updateSelection = (row: any) => {
+    if (multiSelect === true) {
+      let selectedIdsList = [...selectedIds];
+      let index: number = findItemIndex(row);
+
+      if (index === -1) selectedIdsList.push(row.item.id);
+      else delete selectedIdsList[index];
+
+      selectedIdsList = selectedIdsList.filter(Boolean);
+      setSelectedIds(selectedIdsList);
+    }
+    else {
+      setSelectedIds([row.item.id]);
+    }
+  };
+
 
   const onItemPress = (row: any) => {
     if (onListItemPress) {
+      updateSelection(row);
       onListItemPress(row);
     }
     else {
@@ -116,6 +139,7 @@ const ProfileProjectsList = ({
               multiSelect={multiSelect}
               onAddButtonPress={onAddButtonPress}
               onListItemPress={(row: any) => onItemPress(row)}
+              isSelected={(selectedIds.findIndex((id: any) => id == row.item.id)) !== -1}
             />
           )}
         />
