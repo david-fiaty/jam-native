@@ -15,14 +15,16 @@ type Props = BaseProps & {
   images?: any;
   isAddable?: boolean;
   isDeletable?: boolean;
+  multiSelect?: boolean;
   onAddButtonPress?: () => void;
   onListItemPress?: (row: any) => void;
 };
 
-const ProjectListItem = ({ row, images, isAddable, isDeletable, onListItemPress, onAddButtonPress }: Props) => {
+const ProjectListItem = ({ row, images, isAddable, isDeletable, multiSelect, onListItemPress, onAddButtonPress }: Props) => {
   const numColumns = 3;
   const [selectedIds, setSelectedIds] = useState<any>([]);
   const imageSize = MediaManager.getThumbnailSize();
+  multiSelect = typeof multiSelect == 'boolean' ? multiSelect : true;
 
   const findItemIndex = (row: any) => {
     return selectedIds.findIndex((id: any) => id == row.item.id);
