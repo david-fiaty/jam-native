@@ -23,27 +23,21 @@ const AddJamToProjectForm = () => {
   const entityId: number = activeScreen.params.entityId;
 
   const updateSelection = (row: any) => {
-    let selectedProjectsIds = [...selectedIds];
-    let index: number = selectedProjectsIds.findIndex((v: any) => v == row.item.id);
-
-    if (index === -1) selectedProjectsIds.push(row.item.id);
-    else delete selectedProjectsIds[index];
-
-    setSelectedIds(selectedProjectsIds.filter(Boolean));
+    setSelectedIds([row.item.id]);
   };
 
   const submitForm = async () => {
     setIsProcessing(true);
-    let requests: any = [];
-    let result: any = [];
 
-    /*
-    let result: any = await EntityManager.addJamToProject(projectId, { 
+    let requests: any = selectedIds.map((id: number) => EntityManager.addJamToProject(id, { 
       profile_id: profileId,
       items_ids: [entityId], 
-    });
-*/
+    }));
 
+    let results: any = await Promise.all(requests);
+
+
+    /*
     let message: any = {
       title: i18n.t('Add Jam to project'),
       content: i18n.t('Jam successfully added to project.'),
@@ -51,6 +45,8 @@ const AddJamToProjectForm = () => {
 
     if (result?.error) message.content = i18n.t(result.error);
     ScreenManager.showMessage(message);
+    */
+
     setIsProcessing(false);
   };
 
@@ -64,8 +60,6 @@ const AddJamToProjectForm = () => {
   }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(selectedIds);
 
   return (
     <BoxView
@@ -85,6 +79,7 @@ const AddJamToProjectForm = () => {
           idArray={[14, 18, 19]} // Todo - Remove test
           onListItemPress={(row: any) => updateSelection(row)}
           isAddable={true}
+          multiSelect={false}
           //idArray={formData?.profile_projects}
         />
 
