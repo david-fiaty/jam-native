@@ -23,13 +23,7 @@ const AddJamToProjectForm = () => {
   const entityId: number = activeScreen.params.entityId;
 
   const updateSelection = (row: any) => {
-    let selectedProjectsIds = [...selectedIds];
-    let index: number = selectedProjectsIds.findIndex((id: number) => id == row.item.id);
-
-    if (index === -1) selectedProjectsIds.push(row.item.id);
-    else delete selectedProjectsIds[index];
-
-    setSelectedIds(selectedProjectsIds.filter(Boolean));
+    setSelectedIds([row.item.id]);
   };
 
   const submitForm = async () => {
@@ -66,8 +60,6 @@ const AddJamToProjectForm = () => {
   }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(selectedIds);
 
   return (
     <BoxView
