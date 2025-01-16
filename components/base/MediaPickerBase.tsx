@@ -91,7 +91,6 @@ const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Pr
         if (!mediaExists) mediaList.push(row);
       }
 
-      console.log(mediaList);
       setSelectedMedia(mediaList);
       setSelectedPreview([]);
       if (onSelectItem) onSelectItem(mediaList);
