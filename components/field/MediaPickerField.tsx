@@ -116,19 +116,19 @@ const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: P
       mimeType: null,
       rotation: null,
       type: 'image',
-      base64: base64,
+      //base64: base64,
       duration: null,
       exif: null,
     };
   }
 
-  const getSelectedMedia = () => {
+  const getSelectedMedia = async () => {
     let mediaList: any = [...selectedMedia || []];
 
     for (const item of (value || [])) {
       let url: string = MediaManager.getImageUrl(item?.url);
       if (DataManager.isUrl(url)) {
-        mediaList.push(createMediaObject(item));
+        mediaList.push(await createMediaObject(item));
       }
     }
 
@@ -138,9 +138,11 @@ const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: P
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setIsLoaded(true);
-        setSelectedMedia(getSelectedMedia());
+        setSelectedMedia(await getSelectedMedia());
+
       }
+
+      setIsLoaded(true);
     })();
   }, [isLoaded]);
   
@@ -153,7 +155,10 @@ const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: P
 
       { selectedMedia?.length > 0 && preview &&
         <BoxView direction="row" align="flex-start" justify="left" style={styles.previewContainer}>
-          { selectedMedia.map((data: any) => renderImagePreview(data) )}
+          { selectedMedia.map((data: any) => {
+            console.log(data);
+            if (data?.uri) return renderImagePreview(data);
+          })}
         </BoxView>
       }
     </View>
