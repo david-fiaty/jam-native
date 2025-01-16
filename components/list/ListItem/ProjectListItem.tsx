@@ -31,14 +31,20 @@ const ProjectListItem = ({ row, images, isAddable, isDeletable, multiSelect, onL
   };
 
   const updateSelection = (row: any) => {
-    let selectedIdsList = [...selectedIds];
-    let index: number = findItemIndex(row);
+    if (multiSelect === true) {
+      let selectedIdsList = [...selectedIds];
+      let index: number = findItemIndex(row);
 
-    if (index === -1) selectedIdsList.push(row.item.id);
-    else delete selectedIdsList[index];
+      if (index === -1) selectedIdsList.push(row.item.id);
+      else delete selectedIdsList[index];
 
-    selectedIdsList = selectedIdsList.filter(Boolean);
-    setSelectedIds(selectedIdsList);
+      selectedIdsList = selectedIdsList.filter(Boolean);
+      setSelectedIds(selectedIdsList);
+    }
+    else {
+      // Todo - Single select update
+      console.log(row.item.id);
+    }
   };
 
   const onItemPress = (row: any) => {

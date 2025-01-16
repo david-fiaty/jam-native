@@ -18,6 +18,7 @@ type Props = {
   allButton?: boolean;
   isAddable?: boolean;
   isDeletable?: boolean;
+  multiSelect?: boolean;
   onAddButtonPress?: () => void;
   onListItemPress?: (row: any) => void;
 };
@@ -29,6 +30,7 @@ const ProfileProjectsList = ({
   allButton,
   isAddable,
   isDeletable,
+  multiSelect,
   onAddButtonPress,
   onListItemPress,
 }: Props) => {
@@ -111,6 +113,7 @@ const ProfileProjectsList = ({
               images={projectsImages}
               isAddable={isAddable}
               isDeletable={isDeletable}
+              multiSelect={multiSelect}
               onAddButtonPress={onAddButtonPress}
               onListItemPress={(row: any) => onItemPress(row)}
             />

@@ -87,6 +87,7 @@ const AddJamToProjectForm = () => {
           idArray={[14, 18, 19]} // Todo - Remove test
           onListItemPress={(row: any) => updateSelection(row)}
           isAddable={true}
+          multiSelect={false}
           //idArray={formData?.profile_projects}
         />
 
