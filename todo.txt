@@ -121,146 +121,34 @@ const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude
 
 
 
-    let mediaList = [...selectedMediaPreview];
-    if (!selectedMediaPreview.includes(data.fileName)) {
-      mediaList.push(data.fileName);
-      setSelectedMediaPreview(mediaList);
+  const getSelectedMedia = () => {
+    // Todo - Get selected media
+    let mediaList: any = [...selectedMedia || []];
+
+    console.log(mediaList);
+
+    /*
+    for (const url of (value || [])) {
+      console.log(url);
     }
-    else {
-      mediaList = mediaList.filter((item: any) => item.fileName == data.fileName);
-      setSelectedMediaPreview(mediaList);
+*/
+    /*
+    let url: string = MediaManager.getImageUrl(value?.[0].url);
+
+    if (DataManager.isUrl(url)) {
+      MediaManager.getImageBase64(url)
+      .then((data: any) => {
+        return data;
+      })
+      .catch(error => {
+        console.error(error);
+        return [];
+      });
     }
-
-
-
-
-
-
-
-  buildEntity(key: string, data: object) {
-    let entity = {}; 
-    let definition = Entities.find(item => item.type == key);
-
-    for (const [sourceField, targetField] of Object.entries(definition.fields)) {
-      if (data?.[targetField]) {
-        entity[sourceField] = data?.[targetField];       
-      }
-    }
-
-    return entity;
-  }
-
-
-<TouchableOpacity activeOpacity={0.5} onPress={onPress}>
-
-
-
-
-
-
-        onLayout={event => {
-          console.log(event.nativeEvent.layout);
-        }}
-
-
-
-
-          header: (props) => (
-            <View style={{ 
-              display: 'flex',
-              flexGrow: 1,
-              flexDirection: 'row',
-              alignItems: 'center',
-              backgroundColor: 'gray', 
-              justifyContent: 'center',
-              marginTop: StatusBar.currentHeight,
-            }}>
-              <Button
-                onPress={() => alert('This is a button!')}
-                title="Left"
-                color="#000"
-              />
-              <View style={{ 
-                backgroundColor: 'orange',
-                flexGrow: 1,
-              }}>
-                <Text>Custom Header</Text>
-              </View>
-              <Button
-                onPress={() => alert('This is a button!')}
-                title="Right"
-                color="#000"
-              />
-            </View>
-          ),     
-           
-
-
-          headerTitle: () => (
-            <View style={{
-              backgroundColor: 'white',
-            }}><Text>Header title</Text></View>
-          ),  
-
-        
-          headerLeft: () => (
-            <Button
-              onPress={() => alert('This is a button!')}
-              title="Left"
-              color="#000"
-            />
-          ),
+*/
     
-          headerRight: () => (
-            <Button
-              onPress={() => alert('This is a button!')}
-              title="Right"
-              color="#000"
-            />
-          ),
+  }; 
 
-
-  const renderItem = ({ item }) => (
-    <View style={styles.item}>
-      ...
-    </View>
-  );
-
-
-  
-  {data.map((item, index) => {
-    return (
-      <View style={styles.item} key={index}>
-        ...
-      </View>
-    );
-  })}
-
-
-          <TabElement 
-          label={<ClearIcon name="location" size={GlobalStyles.footer.icon.size} />} 
-          content={<AddJamScreen />} 
-        />
-        <TabElement 
-          label={<ClearIcon name="plus" size={GlobalStyles.footer.icon.size} />} 
-          content={<AddJamScreen />} 
-        />
-        <TabElement 
-          label={<ClearIcon name="user" size={GlobalStyles.footer.icon.size} />} 
-          content={<AddJamScreen />} 
-        />
-
-
-const screenOptions = { 
-  header: (props: object) => <HeaderView />,    
-  headerShown: true,
-  statusBarColor: Colors.white,
-  statusBarStyle: 'dark',
-  headerTintColor: Colors.white,    
-  headerStyle: {
-    backgroundColor: Colors.white, 
-  },
-};
 
 
 
