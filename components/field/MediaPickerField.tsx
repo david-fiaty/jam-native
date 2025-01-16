@@ -101,15 +101,54 @@ const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: P
     }
   };
 
+  const createMediaObject = (media: any) => {
+    MediaManager.getImageBase64(media.url)
+    .then((data: any) => {
+      return {
+        assetId: media?.id,
+        fileName: media?.url,
+        uri: media?.url,
+        fileSize: null,
+        height: 0,
+        width: 0,
+        mimeType: null,
+        rotation: null,
+        type: 'image',
+        base64: '',
+        duration: null,
+        exif: null,
+      };
+    })
+    .catch(error => {
+      console.error(error);
+      return null;
+    });
+  }
+
+  const getSelectedMedia = () => {
+    // Todo - Get selected media
+    let mediaList: any = [...selectedMedia || []];
+
+    for (const item of (value || [])) {
+      let url: string = MediaManager.getImageUrl(item?.url);
+      if (DataManager.isUrl(url)) {
+        mediaList.push(createMediaObject(item));
+      }
+    }
+
+    return mediaList;
+  }; 
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
         setIsLoaded(true);
+
+
+        console.log('-->', getSelectedMedia());
       }
     })();
   }, [isLoaded]);
-
-  console.log('-->', selectedMedia);
 
   return (
     <View style={styles.container}>
