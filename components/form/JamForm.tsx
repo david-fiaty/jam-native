@@ -102,6 +102,7 @@ const JamForm = () => {
           value: {
             ...(entityId > 0 ? jamData?.[0] : formData),
             ...{ profile_id: profileId },
+            ...{ collaborators: [3]}
           }, 
         }));
       }
