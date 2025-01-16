@@ -63,9 +63,12 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Media upload submit process
 - Profile image upload bug?
 - Apply search state to main jams list (missing live refresh)
+- Add no result messages in lists that need it
+
 - Extract languages and translate
 - Static images @2x..
-- Add no result messages in lists that need it
+- Check internet connexion available
+
 
 # Issues  
   - Copy Jam link cannot be implemented (missing URL in payload, maybe irrelevant on native)

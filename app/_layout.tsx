@@ -29,6 +29,12 @@ const headerVisibleOptions: object = {
   ),    
 };
 
+const statusBarVisibleOptions: object = { 
+  statusBarStyle: 'dark',
+  headerShown: false,
+  statusBarBackgroundColor: Colors.white,
+};
+
 ExpoSplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
@@ -41,7 +47,7 @@ const RootLayout = () => {
     {
       name: 'index',
       options: {
-        ...headerHiddenOptions,
+        ...statusBarVisibleOptions,
         ...{
           animation: 'default',
         },
@@ -50,7 +56,7 @@ const RootLayout = () => {
     {
       name: 'welcome',
       options: {
-        ...headerHiddenOptions,
+        ...statusBarVisibleOptions,
         ...{
           animation: 'default',
         },
