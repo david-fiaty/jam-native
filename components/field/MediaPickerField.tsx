@@ -103,40 +103,25 @@ const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: P
 
   const createMediaObject = async (media: any) => {
     let mediaUrl: any = MediaManager.getImageUrl(media?.url); 
-    let data = await MediaManager.getImageBase64(mediaUrl);
+    let base64 = await MediaManager.getImageBase64(mediaUrl);
 
-    console.log(data);
-  
-
-    /*
-    MediaManager.getImageBase64(mediaUrl)
-    .then((data: any) => {
-
-      return {
-        assetId: media?.id,
-        fileName: media?.url,
-        uri: media?.url,
-        fileSize: null,
-        height: 0,
-        width: 0,
-        mimeType: null,
-        rotation: null,
-        type: 'image',
-        //base64: data,
-        duration: null,
-        exif: null,
-      };
-    })
-    .catch(error => {
-      console.error(error);
-      return null;
-    });
-
-    */
+    return {
+      assetId: media?.id,
+      fileName: media?.url,
+      uri: media?.url,
+      fileSize: null,
+      height: 0,
+      width: 0,
+      mimeType: null,
+      rotation: null,
+      type: 'image',
+      base64: base64,
+      duration: null,
+      exif: null,
+    };
   }
 
   const getSelectedMedia = () => {
-    // Todo - Get selected media
     let mediaList: any = [...selectedMedia || []];
 
     for (const item of (value || [])) {
@@ -153,12 +138,11 @@ const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: P
     (async () => {
       if (!isLoaded) {
         setIsLoaded(true);
-
-
-        getSelectedMedia();
+        setSelectedMedia(getSelectedMedia());
       }
     })();
   }, [isLoaded]);
+  
 
   return (
     <View style={styles.container}>
