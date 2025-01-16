@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, Text } from 'react-native';
-import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 import ScreenManager from '@/manager/ScreenManager';
 import SpinnerView from '../view/SpinnerView';
@@ -28,24 +26,18 @@ const AddJamToProjectForm = () => {
 
   const submitForm = async () => {
     setIsProcessing(true);
-
-    let requests: any = selectedIds.map((id: number) => EntityManager.addJamToProject(id, { 
+    let result: any = await EntityManager.addJamToProject(selectedIds[0], { 
       profile_id: profileId,
       items_ids: [entityId], 
-    }));
+    });
 
-    let results: any = await Promise.all(requests);
-
-
-    /*
     let message: any = {
       title: i18n.t('Add Jam to project'),
-      content: i18n.t('Jam successfully added to project.'),
+      content: i18n.t('Jam successfully added to your project.'),
     };
 
     if (result?.error) message.content = i18n.t(result.error);
     ScreenManager.showMessage(message);
-    */
 
     setIsProcessing(false);
   };
@@ -93,12 +85,5 @@ const AddJamToProjectForm = () => {
     </BoxView>
   );
 };
-
-const styles = StyleSheet.create({
-  content: {
-    color: Colors.primary,
-    fontSize: Layout.fontSize.base,
-  },
-});
 
 export default AddJamToProjectForm;
