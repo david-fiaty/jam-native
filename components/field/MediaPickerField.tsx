@@ -81,7 +81,7 @@ const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: P
       allowsEditing: false,
       aspect: [4, 3],
       quality: 1,
-      base64: true,
+      //base64: true,
     });
   };
 
@@ -108,6 +108,8 @@ const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: P
       }
     })();
   }, [isLoaded]);
+
+  console.log('-->', selectedMedia);
 
   return (
     <View style={styles.container}>
