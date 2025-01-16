@@ -58,7 +58,7 @@ https://withfra.me/react-native-tutorials/how-to-use-svg-in-react-native
 https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-7948f1a6f949
 
 # Finish
-- Set collaborators, sectors preview values on entity edit
+- Set sectors preview values on entity edit
 - Design project view
 - Media upload submit process
 - Profile image upload bug?
