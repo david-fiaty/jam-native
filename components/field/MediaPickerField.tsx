@@ -56,6 +56,7 @@ const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: P
         onPress={() => updatePreviewSelection(data)}
       >
         <ImageView 
+          key={data.uri} 
           uri={data.uri} 
           width={imageSize.width} 
           height={imageSize.height} 
