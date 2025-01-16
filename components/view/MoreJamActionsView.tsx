@@ -121,8 +121,8 @@ const MoreJamActionsView = () => {
     })();
   }, [isLoaded, entityId]);
 
-  if (!entity) return <SpinnerView />;
-
+  if (!isLoaded) return <SpinnerView />;
+  
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
