@@ -1,4 +1,5 @@
 import { Dimensions, ScaledSize, StatusBar, Platform } from 'react-native';
+import NetInfo from "@react-native-community/netinfo";
 import { Config } from '@/constants/Config';
 import { useLocales } from 'expo-localization';
 import * as Location from 'expo-location';
