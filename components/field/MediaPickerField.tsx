@@ -18,7 +18,7 @@ type Props = BaseProps & {
   onDeleteItem?: (data: any) => void,
 };
 
-const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Props) => {  
+const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -143,4 +143,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MediaPickerBase;
+export default MediaPickerField;

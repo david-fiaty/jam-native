@@ -5,7 +5,7 @@ import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
-import MediaPickerBase from "../base/MediaPickerBase";
+import MediaPickerField from './MediaPickerField';
 import ImageView from "../view/ImageView";
 import IconView from "../view/IconView";
 import MediaManager from '@/manager/MediaManager';
@@ -30,7 +30,7 @@ const ProfileImageField = ({value, storage, onChangeValue }: Props) => {
   };
 
   return (
-    <MediaPickerBase
+    <MediaPickerField
       label={
         <BoxView direction="row" align="center" style={styles.container}>
           {!uri?.length && (
