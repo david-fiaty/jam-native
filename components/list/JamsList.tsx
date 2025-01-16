@@ -29,7 +29,7 @@ const JamsList = ({idArray, showSpinner}: Props) => {
     })();
   });
 
-  if (!isLoaded && showSpinner) return <SpinnerView />;
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView direction="column" style={Layout.screenContent}>
