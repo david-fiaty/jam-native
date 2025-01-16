@@ -115,9 +115,10 @@ const MoreJamActionsView = () => {
     (async () => {
       if (!isLoaded) {
         setIsEntityOwner(await UserManager.isJamOwner(entityId));
-        setIsLoaded(true);
       }
     })();
+
+    setIsLoaded(true);
   }, [isLoaded, entityId]);
 
   if (!isLoaded) return <SpinnerView />;
@@ -134,7 +135,7 @@ const MoreJamActionsView = () => {
           if (item.canDisplay() === true) {
             return <ActionListItem key={DataManager.createUuid()} item={item} />
           }
-        })}
+        }) }
       </View>
     </BoxView>
   );
