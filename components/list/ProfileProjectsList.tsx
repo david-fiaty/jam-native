@@ -61,7 +61,6 @@ const ProfileProjectsList = ({
     }
   };
 
-
   const onItemPress = (row: any) => {
     if (onListItemPress) {
       updateSelection(row);
