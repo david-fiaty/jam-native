@@ -85,9 +85,9 @@ const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Pr
     });
 
     if (!result.canceled && result?.assets?.length) {
-      let mediaList = [...selectedMedia];
+      let mediaList: any = [...selectedMedia];
       for (const row of result?.assets) {
-        let mediaExists = mediaList.some(item => item.fileName === row.fileName);
+        let mediaExists: boolean = mediaList.some((item: any) => item.fileName === row.fileName);
         if (!mediaExists) mediaList.push(row);
       }
 
@@ -99,16 +99,27 @@ const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Pr
 
   const getSelectedMedia = () => {
     // Todo - Get selected media
-    let url: string = MediaManager.getImageUrl(value?.[0].url);
-    if (DataManager.isUrl(url)) {
-      MediaManager.getImageBase64(url).then((data: any) => {
+    let mediaList = [...selectedMedia];
 
-        console.log(data);
+    for (const url of (value || [])) {
+      console.log(url);
+    }
+
+    /*
+    let url: string = MediaManager.getImageUrl(value?.[0].url);
+
+    if (DataManager.isUrl(url)) {
+      MediaManager.getImageBase64(url)
+      .then((data: any) => {
+        return data;
+      })
+      .catch(error => {
+        console.error(error);
+        return [];
       });
     }
-  
 
-    return [];
+    */
   }; 
 
   useEffect(() => {
