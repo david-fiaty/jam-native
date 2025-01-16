@@ -42,8 +42,7 @@ const ProjectListItem = ({ row, images, isAddable, isDeletable, multiSelect, onL
       setSelectedIds(selectedIdsList);
     }
     else {
-      // Todo - Single select update
-      console.log(row.item.id);
+      setSelectedIds([row.item.id]);
     }
   };
 
