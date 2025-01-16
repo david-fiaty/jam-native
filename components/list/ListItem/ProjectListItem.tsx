@@ -15,33 +15,18 @@ type Props = BaseProps & {
   images?: any;
   isAddable?: boolean;
   isDeletable?: boolean;
+  isSelected?: boolean;
+  multiSelect?: boolean;
   onAddButtonPress?: () => void;
   onListItemPress?: (row: any) => void;
 };
 
-const ProjectListItem = ({ row, images, isAddable, isDeletable, onListItemPress, onAddButtonPress }: Props) => {
+const ProjectListItem = ({ row, images, isAddable, isDeletable, isSelected, multiSelect, onListItemPress, onAddButtonPress }: Props) => {
   const numColumns = 3;
-  const [selectedIds, setSelectedIds] = useState<any>([]);
   const imageSize = MediaManager.getThumbnailSize();
-
-  const findItemIndex = (row: any) => {
-    return selectedIds.findIndex((id: any) => id == row.item.id);
-  };
-
-  const updateSelection = (row: any) => {
-    let selectedIdsList = [...selectedIds];
-    let index: number = findItemIndex(row);
-
-    if (index === -1) selectedIdsList.push(row.item.id);
-    else delete selectedIdsList[index];
-
-    selectedIdsList = selectedIdsList.filter(Boolean);
-    setSelectedIds(selectedIdsList);
-  };
+  multiSelect = typeof multiSelect == 'boolean' ? multiSelect : true;
 
   const onItemPress = (row: any) => {
-    if (isAddable || isDeletable) updateSelection(row);
-
     if (onListItemPress) {
       onListItemPress(row);
     }
@@ -49,7 +34,6 @@ const ProjectListItem = ({ row, images, isAddable, isDeletable, onListItemPress,
 
   const renderItem = (row: any, imageUrl?: any) => {
     let output = null;
-    let isSelected: boolean = findItemIndex(row) !== -1;
     let imageStyle = (isSelected ? styles.selectedItem : {}); // Todo - Is this needed?
 
     if (row?.item?.id == "addItem") {
