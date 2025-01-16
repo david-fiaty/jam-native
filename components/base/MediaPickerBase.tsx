@@ -101,6 +101,11 @@ const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Pr
     // Todo - Get selected media
     let mediaList = [...selectedMedia];
 
+    for (const url of (value || [])) {
+      console.log(url);
+    }
+
+    /*
     let url: string = MediaManager.getImageUrl(value?.[0].url);
 
     if (DataManager.isUrl(url)) {
@@ -113,6 +118,8 @@ const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Pr
         return [];
       });
     }
+
+    */
   }; 
 
   useEffect(() => {
