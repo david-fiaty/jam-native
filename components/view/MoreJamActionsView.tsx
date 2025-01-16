@@ -12,7 +12,6 @@ import DataManager from '@/manager/DataManager';
 import UserManager from '@/manager/UserManager';
 
 const MoreJamActionsView = () => {
-  const [entity, setEntity] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isEntityOwner, setIsEntityOwner] = useState<boolean>(false);
   const entityId: number = ScreenManager.getScreenEntityId();
@@ -114,7 +113,6 @@ const MoreJamActionsView = () => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setEntity(await EntityManager.getJams({items_ids: [entityId]}));
         setIsEntityOwner(await UserManager.isJamOwner(entityId));
         setIsLoaded(true);
       }
