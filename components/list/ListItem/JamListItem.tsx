@@ -40,7 +40,7 @@ const JamListItem = ({ row, isAddable, isDeletable, multiSelect, onListItemPress
       setSelectedIds(selectedIdsList);
     }
     else {
-      // Todo - Single select update
+      setSelectedIds([row.item.id]);
     }
   };
 
