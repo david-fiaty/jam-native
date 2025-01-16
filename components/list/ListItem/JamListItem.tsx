@@ -14,39 +14,17 @@ type Props = BaseProps & {
   row?: any;
   isAddable?: boolean;
   isDeletable?: boolean;
+  isSelected?: boolean;
   multiSelect?: boolean;
   onAddButtonPress?: () => void;
   onListItemPress?: (row: any) => void;
 };
 
-const JamListItem = ({ row, isAddable, isDeletable, multiSelect, onListItemPress, onAddButtonPress }: Props) => {
+const JamListItem = ({ row, isAddable, isDeletable, isSelected, multiSelect, onListItemPress, onAddButtonPress }: Props) => {
   const numColumns = 3;
-  const [selectedIds, setSelectedIds] = useState<any>([]);
   multiSelect = typeof multiSelect == 'boolean' ? multiSelect : true;
 
-  const findItemIndex = (row: any) => {
-    return selectedIds.findIndex((id: any) => id == row.item.id);
-  };
-
-  const updateSelection = (row: any) => {
-    if (multiSelect === true) {
-      let selectedIdsList = [...selectedIds];
-      let index: number = findItemIndex(row);
-
-      if (index === -1) selectedIdsList.push(row.item.id);
-      else delete selectedIdsList[index];
-
-      selectedIdsList = selectedIdsList.filter(Boolean);
-      setSelectedIds(selectedIdsList);
-    }
-    else {
-      setSelectedIds([row.item.id]);
-    }
-  };
-
   const onItemPress = (row: any) => {
-    if (isAddable || isDeletable) updateSelection(row);
-
     if (onListItemPress) {
       onListItemPress(row);
     }
@@ -55,7 +33,6 @@ const JamListItem = ({ row, isAddable, isDeletable, multiSelect, onListItemPress
   const renderItem = (row: any) => {
     let imageSize = MediaManager.getThumbnailSize();
     let output = null;
-    let isSelected: boolean = findItemIndex(row) !== -1;
     let imageStyle = (isSelected ? styles.selectedItem : {}); // Todo - Is this needed?
 
     if (row?.item?.id == "addItem") {

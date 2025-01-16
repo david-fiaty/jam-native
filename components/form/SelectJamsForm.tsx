@@ -16,7 +16,7 @@ import JamListItem from "../list/ListItem/JamListItem";
 const SelectJamsForm = () => {
   const dispatch = useDispatch();
   const [profileJams, setProfileJams] = useState<any>([]);
-  const [selectedJams, setSelectedJams] = useState<any>([]);
+  const [selectedIds, setSelectedIds] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
   const idArray: any = activeScreen?.params?.profileJams;
@@ -25,24 +25,24 @@ const SelectJamsForm = () => {
   const numColumns = 3;
 
   const findItemIndex = (row: any) => {
-    return selectedJams.findIndex((id: any) => id == row.item.id);
+    return selectedIds.findIndex((id: any) => id == row.item.id);
   };
 
   const updateSelection = (row: any) => {
-    let selectedJamsList = [...selectedJams];
+    let selectedIdsList = [...selectedIds];
     let index: number = findItemIndex(row);
 
-    if (index === -1) selectedJamsList.push(row.item.id);
-    else delete selectedJamsList[index];
+    if (index === -1) selectedIdsList.push(row.item.id);
+    else delete selectedIdsList[index];
 
-    setSelectedJams(selectedJamsList.filter(Boolean));
+    setSelectedIds(selectedIdsList.filter(Boolean));
   };
 
   const addSelection = () => {    
     dispatch(setFormData<any>({ 
       resource: resource,
       key: 'jams_ids', 
-      value: [...(formData?.jams_ids || []), ...selectedJams], 
+      value: [...(formData?.jams_ids || []), ...selectedIds], 
     }));
 
     ScreenManager.toggleScreen("SelectJamsForm");
@@ -77,11 +77,11 @@ const SelectJamsForm = () => {
           onPress={() => ScreenManager.toggleScreen("SelectJamsForm")}
         />
 
-        {selectedJams?.length > 0 && (
+        {selectedIds?.length > 0 && (
           <TouchableOpacity onPress={addSelection}>
             <View>
               <TextView style={Layout.textLink}>
-                {i18n.t("Add selected")} ({selectedJams.length})
+                {i18n.t("Add selected")} ({selectedIds.length})
               </TextView>
             </View>
           </TouchableOpacity> 
@@ -100,6 +100,7 @@ const SelectJamsForm = () => {
               row={row}
               isAddable={true}
               onListItemPress={(row: any) => updateSelection(row)}
+              isSelected={(selectedIds.findIndex((id: any) => id == row.item.id)) !== -1}
             />
           )}
         />
