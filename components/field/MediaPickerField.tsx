@@ -154,7 +154,6 @@ const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: P
       { selectedMedia?.length > 0 && preview &&
         <BoxView direction="row" align="flex-start" justify="left" style={styles.previewContainer}>
           { selectedMedia.map((data: any) => {
-            console.log(data);
             if (data?.uri) return renderImagePreview(data);
           })}
         </BoxView>
