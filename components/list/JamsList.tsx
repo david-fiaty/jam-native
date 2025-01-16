@@ -23,10 +23,10 @@ const JamsList = ({idArray, showSpinner}: Props) => {
         setSectorsData(await EntityManager.getSectors());
         if (idArray?.length) setJamsData(await EntityManager.getJams({items_ids: idArray}))
         else setJamsData(await EntityManager.listJams())
+
+        setIsLoaded(true);
       }
     })();
-
-    setIsLoaded(true);
   });
 
   if (!isLoaded && showSpinner) return <SpinnerView />;
