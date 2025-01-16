@@ -67,6 +67,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 
 - Extract languages and translate
 - Static images @2x..
+- Check internet connexion available
 
 
 # Issues  
