@@ -64,14 +64,14 @@ const AddJamToProjectForm = () => {
         title={i18n.t('Add Jam to project')}
         onPress={() => ScreenManager.toggleScreen('AddJamToProjectForm')}
       />
-        <TextView>{i18n.t('Select items from your profile projects:')}</TextView>
+        <TextView>{i18n.t('Select a project from your profile:')}</TextView>
         <DividerView theme="secondary" />
 
         <ProfileProjectsList
-          idArray={[14, 18, 19]} // Todo - Remove test
           onListItemPress={(row: any) => updateSelection(row)}
           isAddable={true}
           multiSelect={false}
+          idArray={[14, 18, 19]} // Todo - Remove test
           //idArray={formData?.profile_projects}
         />
 

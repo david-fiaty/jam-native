@@ -101,10 +101,11 @@ const SectorsList = () => {
 
   useEffect(() => {
     (async () => {
-      if (!sectorsData) setSectorsData(await EntityManager.getSectors());
+      if (!isLoaded) setSectorsData(await EntityManager.getSectors());
       setIsLoaded(true);
     })();
-  }, [sectorsData]);
+    
+  }, [isLoaded, sectorsData]);
 
   if (!isLoaded) return <SpinnerView />;
 

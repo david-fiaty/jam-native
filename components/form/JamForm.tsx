@@ -7,7 +7,7 @@ import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
-import MediaPickerBase from "../base/MediaPickerBase";
+import MediaPickerField from "../field/MediaPickerField";
 import LocationPickerField from "../field/LocationPickerField";
 import CountryField from "../field/CountryField";
 import SectorsField from "../field/SectorsField";
@@ -104,9 +104,9 @@ const JamForm = () => {
             ...{ profile_id: profileId },
           }, 
         }));
-
-        setIsLoaded(true);
       }
+
+      setIsLoaded(true);
     })();
   }, [isLoaded, profileId, resource, formData]);
 
@@ -243,7 +243,7 @@ const JamForm = () => {
       />
 
       <DividerView theme="secondary" />
-      <MediaPickerBase
+      <MediaPickerField
         preview={true}
         value={formData?.[mediasFieldName]}
         onSelectItem={(data: any) => updateField(mediasFieldName, data)}

@@ -29,9 +29,10 @@ const CountryField = ({value, onChangeValue}: Props) => {
     (async () => {
       if (!isLoaded) {
         setCountriesData(await EntityManager.getCountries());
-        setIsLoaded(true);
       }
     })();
+
+    setIsLoaded(true);
   }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView size="small" />

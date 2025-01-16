@@ -18,7 +18,7 @@ type Props = BaseProps & {
   onDeleteItem?: (data: any) => void,
 };
 
-const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Props) => {  
+const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -56,6 +56,7 @@ const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Pr
         onPress={() => updatePreviewSelection(data)}
       >
         <ImageView 
+          key={data.uri} 
           uri={data.uri} 
           width={imageSize.width} 
           height={imageSize.height} 
@@ -75,19 +76,23 @@ const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Pr
     );    
   };
 
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
+  const launchBrowser = async () => {
+    return await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ['images'],
       allowsEditing: false,
       aspect: [4, 3],
       quality: 1,
       base64: true,
     });
+  };
+
+  const pickImage = async () => {
+    let result: any = await launchBrowser();
 
     if (!result.canceled && result?.assets?.length) {
-      let mediaList = [...selectedMedia];
+      let mediaList: any = [...selectedMedia];
       for (const row of result?.assets) {
-        let mediaExists = mediaList.some(item => item.fileName === row.fileName);
+        let mediaExists: boolean = mediaList.some((item: any) => item.fileName === row.fileName);
         if (!mediaExists) mediaList.push(row);
       }
 
@@ -97,28 +102,49 @@ const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Pr
     }
   };
 
-  const getSelectedMedia = () => {
-    // Todo - Get selected media
-    let url: string = MediaManager.getImageUrl(value?.[0].url);
-    if (DataManager.isUrl(url)) {
-      //console.log(MediaManager.urlToBase64(url));
+  const createMediaObject = async (media: any) => {
+    let mediaUrl: any = MediaManager.getImageUrl(media?.url); 
+    let base64 = await MediaManager.getImageBase64(mediaUrl);
+
+    return {
+      assetId: media?.id,
+      fileName: mediaUrl,
+      uri: mediaUrl,
+      fileSize: null,
+      height: imageSize.height,
+      width: imageSize.width,
+      mimeType: null,
+      rotation: null,
+      type: 'image',
+      //base64: base64,
+      duration: null,
+      exif: null,
+    };
+  }
+
+  const getSelectedMedia = async () => {
+    let mediaList: any = [...selectedMedia || []];
+
+    for (const item of (value || [])) {
+      let url: string = MediaManager.getImageUrl(item?.url);
+      if (DataManager.isUrl(url)) {
+        mediaList.push(await createMediaObject(item));
+      }
     }
-    
 
-    console.log('getSelectedMedia', url);
-
-    return [];
+    return mediaList;
   }; 
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setSelectedMedia(getSelectedMedia());
-        setIsLoaded(true);
+        setSelectedMedia(await getSelectedMedia());
       }
-    })();
-  }, [isLoaded, selectedMedia, value]);
 
+      setIsLoaded(true);
+    })();
+  }, [isLoaded]);
+  
 
   return (
     <View style={styles.container}>
@@ -128,7 +154,9 @@ const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Pr
 
       { selectedMedia?.length > 0 && preview &&
         <BoxView direction="row" align="flex-start" justify="left" style={styles.previewContainer}>
-          { selectedMedia.map((data: any) => renderImagePreview(data) )}
+          { selectedMedia.map((data: any) => {
+            if (data?.uri) return renderImagePreview(data);
+          })}
         </BoxView>
       }
     </View>
@@ -154,4 +182,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MediaPickerBase;
+export default MediaPickerField;
