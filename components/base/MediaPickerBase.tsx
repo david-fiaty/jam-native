@@ -99,7 +99,7 @@ const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Pr
 
   const getSelectedMedia = () => {
     // Todo - Get selected media
-    let mediaList = [...selectedMedia];
+    let mediaList: any = [...selectedMedia];
 
     for (const url of (value || [])) {
       console.log(url);
