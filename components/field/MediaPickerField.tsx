@@ -101,9 +101,17 @@ const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: P
     }
   };
 
-  const createMediaObject = (media: any) => {
-    MediaManager.getImageBase64(media.url)
+  const createMediaObject = async (media: any) => {
+    let mediaUrl: any = MediaManager.getImageUrl(media?.url); 
+    let data = await MediaManager.getImageBase64(mediaUrl);
+
+    console.log(data);
+  
+
+    /*
+    MediaManager.getImageBase64(mediaUrl)
     .then((data: any) => {
+
       return {
         assetId: media?.id,
         fileName: media?.url,
@@ -114,7 +122,7 @@ const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: P
         mimeType: null,
         rotation: null,
         type: 'image',
-        base64: '',
+        //base64: data,
         duration: null,
         exif: null,
       };
@@ -123,6 +131,8 @@ const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: P
       console.error(error);
       return null;
     });
+
+    */
   }
 
   const getSelectedMedia = () => {
@@ -145,7 +155,7 @@ const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: P
         setIsLoaded(true);
 
 
-        console.log('-->', getSelectedMedia());
+        getSelectedMedia();
       }
     })();
   }, [isLoaded]);
