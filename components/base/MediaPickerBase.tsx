@@ -99,12 +99,15 @@ const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Pr
 
   const getSelectedMedia = () => {
     // Todo - Get selected media
-    let mediaList = [...selectedMedia];
+    let mediaList: any = [...selectedMedia || []];
 
+    console.log(mediaList);
+
+    /*
     for (const url of (value || [])) {
       console.log(url);
     }
-
+*/
     /*
     let url: string = MediaManager.getImageUrl(value?.[0].url);
 
@@ -118,19 +121,19 @@ const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Pr
         return [];
       });
     }
-
-    */
+*/
+    
   }; 
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setSelectedMedia(getSelectedMedia());
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, selectedMedia, value]);
 
+    //setSelectedMedia(getSelectedMedia());
+  }, [isLoaded, selectedMedia, value]);
 
   return (
     <View style={styles.container}>

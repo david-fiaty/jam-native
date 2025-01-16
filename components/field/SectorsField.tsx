@@ -70,11 +70,12 @@ const SectorsField = ({ resource, field, label, onPressEvent, onDeleteEvent }: P
     (async () => {
       if (!isLoaded) {
         setSectorsData(await EntityManager.getSectors());
-        setIsLoaded(true);
       }
       
       setSelectedSectors(getSelectedSectors());
     })();
+
+    setIsLoaded(true);
   }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView size="small" />;

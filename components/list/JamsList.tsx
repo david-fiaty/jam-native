@@ -19,14 +19,17 @@ const JamsList = ({idArray, showSpinner}: Props) => {
 
   useEffect(() => {
     (async () => {
-      if (!sectorsData?.length) setSectorsData(await EntityManager.getSectors());
-      if (!jamsData?.length && idArray?.length) setJamsData(await EntityManager.getJams({items_ids: idArray}));
-      if (!jamsData?.length && !idArray?.length) setJamsData(await EntityManager.listJams());
-      setIsLoaded(true);
+      if (!isLoaded) {
+        setSectorsData(await EntityManager.getSectors());
+        if (idArray?.length) setJamsData(await EntityManager.getJams({items_ids: idArray}))
+        else setJamsData(await EntityManager.listJams())
+
+        setIsLoaded(true);
+      }
     })();
   });
 
-  if (!isLoaded && showSpinner) return <SpinnerView />;
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView direction="column" style={Layout.screenContent}>

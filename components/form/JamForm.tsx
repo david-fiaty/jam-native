@@ -104,10 +104,10 @@ const JamForm = () => {
             ...{ profile_id: profileId },
           }, 
         }));
-
-        setIsLoaded(true);
       }
     })();
+
+    setIsLoaded(true);
   }, [isLoaded, profileId, resource, formData]);
 
   if (!isLoaded) return <SpinnerView />;
