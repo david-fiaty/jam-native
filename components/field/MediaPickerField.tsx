@@ -18,7 +18,7 @@ type Props = BaseProps & {
   onDeleteItem?: (data: any) => void,
 };
 
-const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Props) => {  
+const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -75,14 +75,18 @@ const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Pr
     );    
   };
 
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
+  const launchBrowser = async () => {
+    return await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ['images'],
       allowsEditing: false,
       aspect: [4, 3],
       quality: 1,
       base64: true,
     });
+  };
+
+  const pickImage = async () => {
+    let result: any = await launchBrowser();
 
     if (!result.canceled && result?.assets?.length) {
       let mediaList: any = [...selectedMedia];
@@ -97,43 +101,13 @@ const MediaPickerBase = ({label, value, preview, onSelectItem, onDeleteItem}: Pr
     }
   };
 
-  const getSelectedMedia = () => {
-    // Todo - Get selected media
-    let mediaList: any = [...selectedMedia || []];
-
-    console.log(mediaList);
-
-    /*
-    for (const url of (value || [])) {
-      console.log(url);
-    }
-*/
-    /*
-    let url: string = MediaManager.getImageUrl(value?.[0].url);
-
-    if (DataManager.isUrl(url)) {
-      MediaManager.getImageBase64(url)
-      .then((data: any) => {
-        return data;
-      })
-      .catch(error => {
-        console.error(error);
-        return [];
-      });
-    }
-*/
-    
-  }; 
-
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
         setIsLoaded(true);
       }
     })();
-
-    //setSelectedMedia(getSelectedMedia());
-  }, [isLoaded, selectedMedia, value]);
+  }, [isLoaded]);
 
   return (
     <View style={styles.container}>
@@ -169,4 +143,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MediaPickerBase;
+export default MediaPickerField;
