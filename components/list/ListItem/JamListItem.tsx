@@ -14,13 +14,15 @@ type Props = BaseProps & {
   row?: any;
   isAddable?: boolean;
   isDeletable?: boolean;
+  multiSelect?: boolean;
   onAddButtonPress?: () => void;
   onListItemPress?: (row: any) => void;
 };
 
-const JamListItem = ({ row, isAddable, isDeletable, onListItemPress, onAddButtonPress }: Props) => {
+const JamListItem = ({ row, isAddable, isDeletable, multiSelect, onListItemPress, onAddButtonPress }: Props) => {
   const numColumns = 3;
   const [selectedIds, setSelectedIds] = useState<any>([]);
+  multiSelect = typeof multiSelect == 'boolean' ? multiSelect : true;
 
   const findItemIndex = (row: any) => {
     return selectedIds.findIndex((id: any) => id == row.item.id);
