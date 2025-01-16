@@ -65,7 +65,7 @@ const RootLayout = () => {
     {
       name: 'login',
       options: {
-        ...headerHiddenOptions,
+        ...statusBarVisibleOptions,
         ...{
           animation: !segments.length ? 'default' : 'fade',
         },
@@ -74,7 +74,7 @@ const RootLayout = () => {
     {
       name: 'signup',
       options: {
-        ...headerHiddenOptions,
+        ...statusBarVisibleOptions,
         ...{
           animation: !segments.length ? 'default' : 'fade',
         },
