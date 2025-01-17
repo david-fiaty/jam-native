@@ -35,10 +35,14 @@ class SearchManager {
 
   getSearchResult(key?: string) {
     let searchState = Store.getState().search;
-    let searchResult: any = searchState.result || '{}';
+    let searchResult: any = searchState.result?.length > 0 ? searchState.result : '{}';
     let data: any = JSON.parse(searchResult);
 
-    return key ? data[key] : data;
+    if (key && key?.length > 0 && Object.keys(data).length > 0) {
+      return data[key];
+    }
+
+    return data;
   }
 
   isExpanded() {
