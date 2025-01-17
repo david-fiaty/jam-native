@@ -144,7 +144,7 @@ const JamsScreen = () => {
   useEffect(() => {
     (async () => {
       const activeModal: any = getActiveModal(screenState);
-      setSearchResultsIds(await getSearchResultsIds());
+      //setSearchResultsIds(await getSearchResultsIds());
 
       if (activeModal) {
         setCurrentScreen(activeModal);
@@ -170,7 +170,7 @@ const JamsScreen = () => {
           <BoxView style={Layout.mainContent}>
             <JamsList 
               showSpinner={true} 
-              idArray={searchResultsIds}
+              //idArray={searchResultsIds}
             />
           </BoxView>
         )}
