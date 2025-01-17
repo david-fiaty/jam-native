@@ -18,13 +18,23 @@ const JamsList = ({idArray, showSpinner}: Props) => {
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
+  const getJamsData = async () => {
+    if (idArray?.length > 0) {
+      return await EntityManager.getJams({items_ids: idArray});
+    }
+    else {
+      let searchResult: any = SearchManager.getSearchResult('jam');
+      if (searchResult?.length > 0) return searchResult;
+
+      return await EntityManager.listJams();
+    }
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
         setSectorsData(await EntityManager.getSectors());
-        if (idArray?.length > 0) setJamsData(await EntityManager.getJams({items_ids: idArray}))
-        else setJamsData(await EntityManager.listJams())
-
+        setJamsData(await getJamsData());
         setIsLoaded(true);
       }
     })();
