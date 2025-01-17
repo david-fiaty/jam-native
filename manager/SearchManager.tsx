@@ -46,26 +46,6 @@ class SearchManager {
     return response;
   }
 
-  /*
-  async loadData(searchValue?: string) {
-    if (!searchValue || !searchValue?.length) {
-      searchValue = Store.getState().search.value;
-    }
-
-    const options = searchValue?.length ? { query_text: searchValue } : {};
-    const [jams, profiles, projects] = await this.sendRequest(options);
-    const response = this.buildResponse({
-      jams: jams, 
-      profiles: profiles, 
-      projects: projects
-    });
-
-    this.setSearchResult(response);
-
-    return response;
-  }
-*/
-
   setSearchResult (response: any) {
     let results: any = {};
     for (const [key, data] of Object.entries(response)) {
