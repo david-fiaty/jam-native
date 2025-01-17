@@ -19,9 +19,30 @@ class SearchManager {
       projects: projects
     });
 
-    Store.dispatch(setSearchResult(JSON.stringify(response)));
+    this.setSearchResult(response);
 
     return response;
+  }
+
+  setSearchResult (response: any) {
+    let results: any = {};
+    for (const [key, data] of Object.entries(response)) {
+      results[key] = (data || []).map((o: any) => o.id);
+    }
+
+    Store.dispatch(setSearchResult(JSON.stringify(results)));
+  }
+
+  getSearchResult(key?: string) {
+    let searchState = Store.getState().search;
+    let searchResult: any = searchState.result || '{}';
+    let data: any = JSON.parse(searchResult);
+
+    return key ? data[key] : data;
+  }
+
+  isExpanded() {
+    return Store.getState().search.expanded === true;
   }
 
   async sendRequest(options?: any) {
@@ -41,10 +62,6 @@ class SearchManager {
       call: data.jams.filter((o: any) => o?.type == 'call'),
       event: data.jams.filter((o: any) => o?.type == 'event'),
     };
-  }
-
-  isExpanded() {
-    return Store.getState().search.expanded === true;
   }
 };
 

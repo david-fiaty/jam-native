@@ -44,6 +44,8 @@ const SearchView = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
+  console.log(SearchManager.getSearchResult('jam'));
+  
   return (
     <BoxView
       direction="column"
