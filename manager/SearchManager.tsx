@@ -24,6 +24,21 @@ class SearchManager {
     return response;
   }
 
+  /*
+  getSearchResultsIds = async () => {
+    let jamResultsIds: any = [];
+    let searchValue: string = searchState.value || '';
+
+    if (searchValue.length > 0) {
+      let searchResults: any = await SearchManager.loadData(searchValue); 
+      jamResultsIds = (searchResults?.jam || []).map((o: any) => o.id);
+    }
+
+    return jamResultsIds;
+  };
+  */
+
+
   async sendRequest(options?: any) {
     return await Promise.all([
       EntityManager.listJams(options), 
