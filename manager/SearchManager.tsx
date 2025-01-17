@@ -6,6 +6,44 @@ class SearchManager {
   data?: any;
   result?: any;
 
+  async getData() {
+    if (!this.data?.length) {
+      this.data = await this.loadData();
+    }
+
+    return this.data;
+  }
+
+  async getResult(searchValue: string) {
+    if (!this.result?.length) {
+      this.result = await this.loadResult(searchValue);
+    }
+
+    return this.result;
+  }
+
+  async loadData() {
+    const [jams, profiles, projects] = await this.sendRequest();
+    
+    return this.buildResponse({
+      jams: jams, 
+      profiles: profiles, 
+      projects: projects
+    });
+  }
+
+  async loadResult(searchValue: string) {
+    const options = searchValue?.length ? { query_text: searchValue } : {};
+    const [jams, profiles, projects] = await this.sendRequest(options);
+
+    return this.buildResponse({
+      jams: jams, 
+      profiles: profiles, 
+      projects: projects
+    });
+  }
+
+  /*
   async loadData(searchValue?: string) {
     if (!searchValue || !searchValue?.length) {
       searchValue = Store.getState().search.value;
@@ -23,6 +61,7 @@ class SearchManager {
 
     return response;
   }
+*/
 
   setSearchResult (response: any) {
     let results: any = {};
