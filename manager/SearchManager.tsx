@@ -35,12 +35,15 @@ class SearchManager {
   async loadResult(searchValue: string) {
     const options = searchValue?.length ? { query_text: searchValue } : {};
     const [jams, profiles, projects] = await this.sendRequest(options);
-
-    return this.buildResponse({
+    const response = this.buildResponse({
       jams: jams, 
       profiles: profiles, 
       projects: projects
     });
+
+    this.setSearchResult(response);
+
+    return response;
   }
 
   /*
