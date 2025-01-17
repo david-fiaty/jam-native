@@ -14,11 +14,10 @@ import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "./SpinnerView";
 
 const SearchView = () => {
-  const searchState = useSelector((state: any) => state.search);
   const [activeTab, setActiveTab] = useState<any>(null);
   const [searchData, setSearchData] = useState<any>({});
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const previousSearchValue = useRef();
+  const searchState = useSelector((state: any) => state.search);
 
   const renderTab = (row: any) => {
     const tabStyle: any = row.item.id == activeTab ? styles.activeTab : {};
@@ -42,11 +41,10 @@ const SearchView = () => {
       } 
       else {
         setSearchData(await SearchManager.getResult(searchState.value));
-        previousSearchValue.current = searchState.value;
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, searchState, previousSearchValue]);
+  }, [isLoaded, searchState]);
 
   if (!isLoaded) return <SpinnerView />;
 
