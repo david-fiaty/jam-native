@@ -23,11 +23,11 @@ const JamsList = ({idArray, showSpinner}: Props) => {
       if (!isLoaded) {
         setSectorsData(await EntityManager.getSectors());
         if (idArray?.length > 0) {
-          setJamsData(await EntityManager.getJams({items_ids: idArray}));
+          setJamsData(await EntityManager.getJams({ items_ids: idArray }));
         }
         else {
           idArray = SearchManager.getSearchResult('jam');
-          if (idArray?.length > 0) setJamsData(await EntityManager.getJams({items_ids: idArray})); 
+          if (idArray?.length > 0) setJamsData(await EntityManager.getJams({ items_ids: idArray })); 
           else setJamsData(await EntityManager.listJams());
         }
     
