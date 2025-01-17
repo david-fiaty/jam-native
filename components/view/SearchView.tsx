@@ -44,6 +44,8 @@ const SearchView = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
+  console.log(searchState);
+  
   return (
     <BoxView
       direction="column"
