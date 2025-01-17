@@ -30,6 +30,7 @@ import LocationMapView from "../view/LocationMapView";
 import SelectJamsForm from "../form/SelectJamsForm";
 import CountriesList from "../list/CountriesList";
 import AddJamToProjectForm from "../form/AddJamToProjectForm";
+import SearchManager from "@/manager/SearchManager";
 
 const screenComponents: any = {
   JamsList: <JamsList />,
@@ -61,8 +62,9 @@ const JamsScreen = () => {
   const windowHeight = DeviceManager.window.height;
   const [currentScreen, setCurrentScreen] = useState<any>(null);
   const [animatedStyle, setAnimatedStyle] = useState<any>(null);
+  const [searchResultsIds, setSearchResultsIds] = useState<any[]>([]);
   const screenState = useSelector((state: any) => state.screen);
-  
+  const searchState = useSelector((state: any) => state.search);
   
   // Animation references
   const fadeEffectReference = useRef(new Animated.Value(0)).current;
@@ -125,11 +127,24 @@ const JamsScreen = () => {
     return activeModal;
   };
 
+  // Get the current search results IDs
+  const getSearchResultsIds = async () => {
+    let jamResultsIds: any = [];
+    let searchValue: string = searchState.value || '';
+
+    if (searchValue.length > 0) {
+      let searchResults: any = await SearchManager.getResult(searchValue); 
+      jamResultsIds = (searchResults?.jam || []).map((o: any) => o.id);
+    }
+
+    return jamResultsIds;
+  };
+
   // Display
   useEffect(() => {
     (async () => {
       const activeModal: any = getActiveModal(screenState);
-      
+      setSearchResultsIds(await getSearchResultsIds());
 
       if (activeModal) {
         setCurrentScreen(activeModal);
@@ -153,7 +168,10 @@ const JamsScreen = () => {
         {/* Main content */}
         {!currentScreen && (
           <BoxView style={Layout.mainContent}>
-            <JamsList showSpinner={true} />
+            <JamsList 
+              showSpinner={true} 
+              idArray={searchResultsIds}
+            />
           </BoxView>
         )}
 
