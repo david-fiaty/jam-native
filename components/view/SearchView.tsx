@@ -31,14 +31,17 @@ const SearchView = () => {
     );
   };
 
+  const getSearchData = async () => {
+    if (!isLoaded) {
+      return  await SearchManager.loadData();
+    }
+  };
+
   useEffect(() => {
     if (!activeTab) setActiveTab(StaticData.searchTabs[0].id);
 
     (async () => {
-      if (!isLoaded) {
-        setSearchData(await SearchManager.loadData());
-      }
-
+      setSearchData(await getSearchData());
       setIsLoaded(true);
     })();
   }, [isLoaded, activeTab]);
