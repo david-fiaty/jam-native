@@ -12,7 +12,7 @@ const SearchSlice = createSlice({
       state.value = action.payload;
     },
     setSearchResult: (state, action) => {
-      state.value = action.payload;
+      state.result = action.payload;
     },
     toggleSearchField: (state, action) => {
       state.expanded = action.payload;
