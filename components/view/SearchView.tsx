@@ -38,7 +38,7 @@ const SearchView = () => {
       if (!isLoaded) {
         setSearchData(await SearchManager.loadData());
       }
-      
+
       setIsLoaded(true);
     })();
   }, [isLoaded, activeTab]);
