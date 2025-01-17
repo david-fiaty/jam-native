@@ -6,6 +6,7 @@ import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import ListItem from "./JamsList/ListItem";
+import SearchManager from "@/manager/SearchManager";
 
 type Props = BaseProps & {
   idArray?: any,
@@ -30,6 +31,8 @@ const JamsList = ({idArray, showSpinner}: Props) => {
   }, [isLoaded, idArray]);
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(SearchManager.getSearchResult('jam'));
 
   return (
     <BoxView direction="column" style={Layout.screenContent}>
