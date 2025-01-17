@@ -38,13 +38,14 @@ const SearchView = () => {
       if (!isLoaded) {
         setSearchData(await SearchManager.loadData());
       }
+      
       setIsLoaded(true);
     })();
   }, [isLoaded, activeTab]);
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(SearchManager.getSearchResult('jam'));
+  //console.log(SearchManager.getSearchResult('jam'));
   
   return (
     <BoxView
