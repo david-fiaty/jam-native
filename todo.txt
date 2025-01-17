@@ -118,9 +118,6 @@ const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude
   });
 
 
-
-
-
   const getSelectedMedia = () => {
     // Todo - Get selected media
     let mediaList: any = [...selectedMedia || []];

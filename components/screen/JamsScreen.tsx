@@ -61,7 +61,6 @@ const JamsScreen = () => {
   const windowHeight = DeviceManager.window.height;
   const [currentScreen, setCurrentScreen] = useState<any>(null);
   const [animatedStyle, setAnimatedStyle] = useState<any>(null);
-  const [searchResultsIds, setSearchResultsIds] = useState<any[]>([]);
   const screenState = useSelector((state: any) => state.screen);
   
   // Animation references
@@ -143,7 +142,7 @@ const JamsScreen = () => {
       }  
     })();
 
-  }, [screenState, animationStyles, animationEffects, currentScreen]);
+  }, [screenState, currentScreen]);
 
   // Render
   return (

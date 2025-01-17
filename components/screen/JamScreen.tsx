@@ -23,7 +23,7 @@ const JamScreen = ({ idArray, title }: Props) => {
         onPress={() => router.back()}
       />
       <BoxView style={Layout.mainContent}>
-        <JamsList displayIds={idArray} showSpinner={true} />
+        <JamsList idArray={idArray} showSpinner={true} />
       </BoxView>
     </BoxView>
   );
