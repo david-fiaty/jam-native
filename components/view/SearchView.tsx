@@ -35,17 +35,18 @@ const SearchView = () => {
     if (!activeTab) setActiveTab(StaticData.searchTabs[0].id);
 
     (async () => {
-      if (!isLoaded) {
-        setSearchData(await SearchManager.loadData());
+      if (!searchState.value?.length) {
+        setSearchData(await SearchManager.getDefaultData());
+        setIsLoaded(true);
+      } 
+      else {
+        setSearchData(await SearchManager.getResult(searchState.value));
+        setIsLoaded(true);
       }
-
-      setIsLoaded(true);
     })();
-  }, [isLoaded, activeTab]);
+  }, [isLoaded, activeTab, searchState]);
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log('---->', SearchManager.getSearchResult());
   
   return (
     <BoxView
