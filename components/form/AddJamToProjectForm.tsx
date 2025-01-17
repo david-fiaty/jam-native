@@ -17,6 +17,7 @@ const AddJamToProjectForm = () => {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
   const [selectedIds, setSelectedIds] = useState<any>([]);
+  const [profileData, setProfileData] = useState<any>({});
   const activeScreen: any = ScreenManager.getActiveScreen();
   const entityId: number = activeScreen.params.entityId;
 
@@ -46,6 +47,7 @@ const AddJamToProjectForm = () => {
     (async () => {
       if (!isLoaded) {
         setProfileId(await UserManager.getProfileId());
+        setProfileData(await UserManager.getProfileData());
         setIsLoaded(true);
       }
     })();
@@ -71,8 +73,8 @@ const AddJamToProjectForm = () => {
           onListItemPress={(row: any) => updateSelection(row)}
           isAddable={true}
           multiSelect={false}
-          idArray={[14, 18, 19]} // Todo - Remove test
-          //idArray={formData?.profile_projects}
+          //idArray={[14, 18, 19]} // Todo - Remove test
+          idArray={profileData?.profile_projects}
         />
 
         <DividerView theme="secondary" />
