@@ -14,21 +14,16 @@ import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "./SpinnerView";
 
 const SearchView = () => {
-  const searchState = useSelector((state: any) => state.search);
   const [activeTab, setActiveTab] = useState<any>(null);
   const [searchData, setSearchData] = useState<any>({});
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const previousSearchValue = useRef();
-
-  const toggleTab = (row: any) => {
-    setActiveTab(row.item.id);
-  };
-
+  const searchState = useSelector((state: any) => state.search);
+  
   const renderTab = (row: any) => {
     const tabStyle: any = row.item.id == activeTab ? styles.activeTab : {};
 
     return (
-      <TouchableOpacity onPress={() => toggleTab(row)} style={styles.tabItem}>
+      <TouchableOpacity onPress={() => setActiveTab(row.item.id)} style={styles.tabItem}>
         <View>
           <TextView style={tabStyle}>{row.item.label}</TextView>
         </View>
@@ -40,20 +35,18 @@ const SearchView = () => {
     if (!activeTab) setActiveTab(StaticData.searchTabs[0].id);
 
     (async () => {
-      if (!searchState.value?.length) {
-        setSearchData(await SearchManager.getData());
-        setIsLoaded(true);
-      } 
-      else {
-        setSearchData(await SearchManager.getResult(searchState.value));
-        previousSearchValue.current = searchState.value;
-        setIsLoaded(true);
+      if (!isLoaded) {
+        setSearchData(await SearchManager.loadData());
       }
+
+      setIsLoaded(true);
     })();
-  }, [isLoaded, searchState, previousSearchValue]);
+  }, [isLoaded, activeTab]);
 
   if (!isLoaded) return <SpinnerView />;
 
+  console.log('---->', SearchManager.getSearchResult());
+  
   return (
     <BoxView
       direction="column"

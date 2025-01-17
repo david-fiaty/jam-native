@@ -7,6 +7,7 @@ import InputTextField from "../field/InputTextField";
 import ScreenManager from "@/manager/ScreenManager";
 import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
+import SearchManager from '@/manager/SearchManager';
 
 const SearchField = () => {
   const dispatch = useDispatch();
@@ -15,8 +16,9 @@ const SearchField = () => {
   const activeScreen = ScreenManager.getActiveScreen();
   const isExpanded = searchState.expanded === true;
 
-  const onSubmitEditing = () => {
+  const onSubmitEditing = async () => {
     dispatch(setSearchValue(currentSearchValue));
+    await SearchManager.loadData(currentSearchValue);
   };
 
   const toggleButton = (

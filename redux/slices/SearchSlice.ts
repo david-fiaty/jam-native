@@ -4,11 +4,15 @@ const SearchSlice = createSlice({
   name: 'search',
   initialState: {
     value: '',
+    result: '',
     expanded: false,
   },
   reducers: {
     setSearchValue: (state, action) => {
       state.value = action.payload;
+    },
+    setSearchResult: (state, action) => {
+      state.result = action.payload;
     },
     toggleSearchField: (state, action) => {
       state.expanded = action.payload;
@@ -16,5 +20,5 @@ const SearchSlice = createSlice({
   },
 });
 
-export const { setSearchValue, toggleSearchField } = SearchSlice.actions;
+export const { setSearchValue, setSearchResult, toggleSearchField } = SearchSlice.actions;
 export default SearchSlice.reducer;
