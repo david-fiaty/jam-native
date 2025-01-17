@@ -17,7 +17,8 @@ const SearchView = () => {
   const [activeTab, setActiveTab] = useState<any>(null);
   const [searchData, setSearchData] = useState<any>({});
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-
+  const searchState = useSelector((state: any) => state.search);
+  
   const renderTab = (row: any) => {
     const tabStyle: any = row.item.id == activeTab ? styles.activeTab : {};
 
