@@ -38,15 +38,15 @@ const MoreJamActionsView = () => {
     {
       label: i18n.t('Add Jam to project'),
       icon: 'plus',
-      canDisplay: () => true,
-      //canDisplay: () => isEntityOwner, // Todo - Enable this
+      //canDisplay: () => true,
+      canDisplay: () => isEntityOwner, // Todo - Enable this
       onPress: () => ScreenManager.toggleScreen('AddJamToProjectForm', { entityId: entityId }),
     },
     {
       label: i18n.t('Edit Jam'),
       icon: 'edit',
-      canDisplay: () => true,
-      //canDisplay: () => isEntityOwner, // Todo - Enable this
+      //canDisplay: () => true,
+      canDisplay: () => isEntityOwner, // Todo - Enable this
       onPress: () => ScreenManager.toggleScreen('JamForm', { entityId: entityId }),
     },
     {
