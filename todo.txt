@@ -118,24 +118,6 @@ const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude
   });
 
 
-
-
-  // Get the current search results IDs
-  const getSearchResultsIds = async () => {
-    let jamResultsIds: any = [];
-    let searchValue: string = searchState.value || '';
-
-    if (searchValue.length > 0) {
-      let searchResults: any = await SearchManager.loadData(searchValue); 
-      jamResultsIds = (searchResults?.jam || []).map((o: any) => o.id);
-    }
-
-    return jamResultsIds;
-  };
-
-
-
-
   const getSelectedMedia = () => {
     // Todo - Get selected media
     let mediaList: any = [...selectedMedia || []];
