@@ -17,6 +17,7 @@ const SearchView = () => {
   const [activeTab, setActiveTab] = useState<any>(null);
   const [searchData, setSearchData] = useState<any>({});
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const previousSearchValue = useRef();
   const searchState = useSelector((state: any) => state.search);
 
   const renderTab = (row: any) => {
@@ -44,7 +45,7 @@ const SearchView = () => {
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, searchState]);
+  }, [isLoaded, searchState, previousSearchValue]);
 
   if (!isLoaded) return <SpinnerView />;
 
