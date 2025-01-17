@@ -170,7 +170,7 @@ const JamsScreen = () => {
           <BoxView style={Layout.mainContent}>
             <JamsList 
               showSpinner={true} 
-              idArray={searchResultsIds}
+              //idArray={searchResultsIds}
             />
           </BoxView>
         )}
