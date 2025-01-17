@@ -32,7 +32,7 @@ const JamsList = ({idArray, showSpinner}: Props) => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(SearchManager.getSearchResult('jam'));
+  console.log(SearchManager.getSearchResult());
 
   return (
     <BoxView direction="column" style={Layout.screenContent}>
