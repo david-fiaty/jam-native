@@ -159,7 +159,7 @@ const JamsScreen = () => {
       }  
     })();
 
-  }, [screenState, animationStyles, animationEffects, currentScreen]);
+  }, [screenState, animationEffects, currentScreen]);
 
   // Render
   return (
