@@ -133,7 +133,7 @@ const JamsScreen = () => {
     let searchValue: string = searchState.value || '';
 
     if (searchValue.length > 0) {
-      let searchResults: any = await SearchManager.getResult(searchValue); 
+      let searchResults: any = await SearchManager.loadData(searchValue); 
       jamResultsIds = (searchResults?.jam || []).map((o: any) => o.id);
     }
 
