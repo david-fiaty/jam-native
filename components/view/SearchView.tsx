@@ -44,8 +44,6 @@ const SearchView = () => {
   }, [isLoaded, activeTab]);
 
   if (!isLoaded) return <SpinnerView />;
-
-  //console.log(SearchManager.getSearchResult('jam'));
   
   return (
     <BoxView
