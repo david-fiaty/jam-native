@@ -22,17 +22,21 @@ const JamsList = ({idArray, showSpinner}: Props) => {
     (async () => {
       if (!isLoaded) {
         setSectorsData(await EntityManager.getSectors());
-        if (idArray?.length > 0) setJamsData(await EntityManager.getJams({items_ids: idArray}))
-        else setJamsData(await EntityManager.listJams())
-
+        if (idArray?.length > 0) {
+          setJamsData(await EntityManager.getJams({ items_ids: idArray }));
+        }
+        else {
+          idArray = SearchManager.getSearchResult('jam');
+          if (idArray?.length > 0) setJamsData(await EntityManager.getJams({ items_ids: idArray })); 
+          else setJamsData(await EntityManager.listJams());
+        }
+    
         setIsLoaded(true);
       }
     })();
   }, [isLoaded, idArray]);
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(SearchManager.getSearchResult('jam'));
 
   return (
     <BoxView direction="column" style={Layout.screenContent}>
