@@ -33,15 +33,11 @@ class SearchManager {
     Store.dispatch(setSearchResult(JSON.stringify(results)));
   }
 
-  getSearchResult(key?: string) {
+  getSearchResult() {
     let searchState = Store.getState().search;
     let searchResult: any = searchState.result || '{}';
     let data: any = JSON.parse(searchResult);
 
-    if (key && key?.length > 0 && Object.keys(data)?.length > 0) {
-      return data[key];  
-    }
-    
     return data;
   }
 
