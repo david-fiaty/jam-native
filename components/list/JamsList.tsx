@@ -22,27 +22,31 @@ const JamsList = ({idArray, showSpinner}: Props) => {
   const searchState = useSelector((state: any) => state.search);
 
   const getSearchResultsIds = async () => {
-    let jamResultsIds: any = [];
-    let searchValue: string = searchState.value || '';
+    let resultsIds: any = [];
+    let searchResults: any = await SearchManager.getResult(searchState.value); 
+    resultsIds = (searchResults?.jam || []).map((o: any) => o.id);
 
-    if (searchValue.length > 0) {
-      let searchResults: any = await SearchManager.getResult(searchValue); 
-      jamResultsIds = (searchResults?.jam || []).map((o: any) => o.id);
+    return resultsIds;
+  };
+
+  const getJamsData = async () => {
+    if (idArray?.length) {
+      return await EntityManager.getJams({items_ids: idArray});
     }
-
-    return jamResultsIds;
+    else if (searchState.value?.length) {
+      return await getSearchResultsIds();
+    }
+    else {
+      return await EntityManager.listJams();
+    }
   };
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
         setSectorsData(await EntityManager.getSectors());
-        //if (idArray?.length) setJamsData(await EntityManager.getJams({items_ids: idArray}))
-        setJamsData(await EntityManager.listJams())
-
+        setJamsData(await getJamsData());
         setIsLoaded(true);
-
-        //setSearchResultsIds(await getSearchResultsIds());
       }
     })();
   }, [idArray]);
