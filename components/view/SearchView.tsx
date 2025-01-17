@@ -20,15 +20,11 @@ const SearchView = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const previousSearchValue = useRef();
 
-  const toggleTab = (row: any) => {
-    setActiveTab(row.item.id);
-  };
-
   const renderTab = (row: any) => {
     const tabStyle: any = row.item.id == activeTab ? styles.activeTab : {};
 
     return (
-      <TouchableOpacity onPress={() => toggleTab(row)} style={styles.tabItem}>
+      <TouchableOpacity onPress={() => setActiveTab(row.item.id)} style={styles.tabItem}>
         <View>
           <TextView style={tabStyle}>{row.item.label}</TextView>
         </View>
