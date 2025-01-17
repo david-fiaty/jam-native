@@ -18,7 +18,7 @@ const SearchView = () => {
   const [searchData, setSearchData] = useState<any>({});
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const searchState = useSelector((state: any) => state.search);
-
+  
   const renderTab = (row: any) => {
     const tabStyle: any = row.item.id == activeTab ? styles.activeTab : {};
 
@@ -35,16 +35,12 @@ const SearchView = () => {
     if (!activeTab) setActiveTab(StaticData.searchTabs[0].id);
 
     (async () => {
-      if (!searchState.value?.length) {
-        setSearchData(await SearchManager.getData());
-        setIsLoaded(true);
-      } 
-      else {
-        setSearchData(await SearchManager.getResult(searchState.value));
-        setIsLoaded(true);
+      if (!isLoaded) {
+        setSearchData(await SearchManager.loadData());
       }
+      setIsLoaded(true);
     })();
-  }, [isLoaded, searchState]);
+  }, [isLoaded, activeTab]);
 
   if (!isLoaded) return <SpinnerView />;
 
