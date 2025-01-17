@@ -6,7 +6,7 @@ class SearchManager {
   data?: any;
   result?: any;
 
-  async getData() {
+  async getDefaultData() {
     if (!this.data?.length) {
       this.data = await this.loadData();
     }
