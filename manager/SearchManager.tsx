@@ -1,3 +1,4 @@
+import { setSearchResult } from "@/redux/slices/SearchSlice";
 import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 
@@ -12,12 +13,15 @@ class SearchManager {
 
     const options = searchValue?.length ? { query_text: searchValue } : {};
     const [jams, profiles, projects] = await this.sendRequest(options);
-
-    return this.buildResponse({
+    const response = this.buildResponse({
       jams: jams, 
       profiles: profiles, 
       projects: projects
     });
+
+    Store.dispatch(setSearchResult(JSON.stringify(response)));
+
+    return response;
   }
 
   async sendRequest(options?: any) {
