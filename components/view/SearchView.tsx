@@ -38,9 +38,6 @@ const SearchView = () => {
       if (!isLoaded) {
         setSearchData(await SearchManager.loadData());
       }
-      else {
-        
-      }
 
       setIsLoaded(true);
     })();
@@ -48,6 +45,8 @@ const SearchView = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
+  console.log('---->', SearchManager.getSearchResult());
+  
   return (
     <BoxView
       direction="column"
