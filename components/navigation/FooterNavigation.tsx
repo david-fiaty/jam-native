@@ -29,7 +29,7 @@ const FooterNavigation = () => {
         padding={4}
         theme={activeScreen?.name == 'JamForm' ? 'secondary' : 'clear'}
         style={activeScreen?.name == 'JamForm' ? styles.active : {}}
-        onPress={() => ScreenManager.toggleScreen('JamForm')}
+        onPress={() => isLoggedIn ? ScreenManager.toggleScreen('JamForm') : router.push('/login')}
       />
       <IconView
         name="user"
