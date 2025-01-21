@@ -30,7 +30,6 @@ const DatePickerField = ({placeholder, value, onChangeValue}: Props) => {
             readOnly={true}
             placeholder={placeholder} 
             rightIcon={<IconView name="calendar" theme="transparent" />}
-            //value={date.toLocaleDateString()}
             value={value}
           />
         </TouchableOpacity>
@@ -38,7 +37,7 @@ const DatePickerField = ({placeholder, value, onChangeValue}: Props) => {
         {show && (
           <DateTimePicker
             value={date} 
-            mode="date"
+            mode="time"
             display={display} 
             onChange={onChange}
           />
