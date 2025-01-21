@@ -33,6 +33,19 @@ const HeaderNavigation = () => {
         { (route.name == 'jams' || activeScreen?.headerNavigation) &&
           <BoxView direction="row" align="center" justify="space-between">
             <BoxView direction="row" align="center" style={Layout.headerRight}> 
+
+              <SearchField />
+
+              { isLoggedIn &&
+                <IconView 
+                  label={notificationsCount > 0 ? ` ${notificationsCount}+` : ` 0 `} 
+                  theme="secondary" 
+                  size={13}
+                  padding={4.5} 
+                  onPress={() => ScreenManager.toggleScreen('NotificationsMenu')} 
+                />
+              }
+              
               { isLoggedIn &&
                 <IconView 
                   name="menu" 
@@ -43,18 +56,6 @@ const HeaderNavigation = () => {
                 />
               }
 
-              { notificationsCount > 0 && isLoggedIn &&
-                <IconView 
-                  label={` ${notificationsCount}+`} 
-                  theme="secondary" 
-                  size={13}
-                  padding={4.5} 
-                  onPress={() => ScreenManager.toggleScreen('NotificationsMenu')} 
-                />
-              }
-                
-              <SearchField />
-              
             </BoxView>
           </BoxView>
         }

@@ -1,7 +1,7 @@
 import { StyleSheet, FlatList } from "react-native";
 import { BaseProps } from "@/constants/Types";
-import DeviceManager from "@/manager/DeviceManager";
 import { Config } from "@/constants/Config";
+import DeviceManager from "@/manager/DeviceManager";
 
 type Props = BaseProps & {
   data: object;
@@ -13,6 +13,7 @@ type Props = BaseProps & {
   horizontal?: boolean;
   contentContainerStyle?: object;
   columnWrapperStyle?: object;
+  emptyMessage?: any;
   keyExtractor?: ((row: any) => string);
   renderItem: ((item: any) => JSX.Element);
 };
@@ -27,6 +28,7 @@ const ListView = ({
   horizontal,
   contentContainerStyle,
   columnWrapperStyle,
+  emptyMessage,
   keyExtractor,
   renderItem,
   style,
@@ -46,6 +48,7 @@ const ListView = ({
       windowSize={5}
       keyExtractor={keyExtractor}
       renderItem={renderItem}
+      ListEmptyComponent={emptyMessage}
     />
   );
 };
