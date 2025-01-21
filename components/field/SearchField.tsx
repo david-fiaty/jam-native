@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchValue, toggleSearchField } from "@/redux/slices/SearchSlice";
 import IconView from "../view/IconView";
@@ -25,8 +25,8 @@ const SearchField = () => {
     <IconView 
       name="search" 
       theme="clear" 
-      size={18}
-      padding={1}
+      size={22}
+      padding={0}
       style={styles.iconContainer}
       onPress={() => {
         dispatch(toggleSearchField(true));
@@ -36,33 +36,34 @@ const SearchField = () => {
   );
 
   const inputField = (
-    <InputTextField 
-      value={currentSearchValue}
-      placeholder={i18n.t('Search...')}
-      containerStyle={styles.inputContainer} 
-      onChangeText={(text: string) => setCurrentSearchValue(text)}
-      onSubmitEditing={onSubmitEditing}
-      rightIcon={  
-        <IconView 
-          name="delete" 
-          theme="primary" 
-          size={13}
-          onPress={() => {
-            if (searchState.value.length && activeScreen?.name == 'SearchView') {
-              setCurrentSearchValue('');
-              dispatch(setSearchValue(''));
-            }
-            else if (!searchState.value.length && activeScreen?.name == 'SearchView') {
-              dispatch(toggleSearchField(false));
-              ScreenManager.toggleScreen('SearchView');
-            }
-            else if (!searchState.value.length && activeScreen?.name != 'SearchView') {
-              dispatch(toggleSearchField(false));
-            }
-          }}
-        />
-      }
-    /> 
+    <View style={styles.inputContainer}>
+      <InputTextField 
+        value={currentSearchValue}
+        placeholder={i18n.t('Search...')}
+        onChangeText={(text: string) => setCurrentSearchValue(text)}
+        onSubmitEditing={onSubmitEditing}
+        rightIcon={  
+          <IconView 
+            name="delete" 
+            theme="primary" 
+            size={13}
+            onPress={() => {
+              if (searchState.value.length && activeScreen?.name == 'SearchView') {
+                setCurrentSearchValue('');
+                dispatch(setSearchValue(''));
+              }
+              else if (!searchState.value.length && activeScreen?.name == 'SearchView') {
+                dispatch(toggleSearchField(false));
+                ScreenManager.toggleScreen('SearchView');
+              }
+              else if (!searchState.value.length && activeScreen?.name != 'SearchView') {
+                dispatch(toggleSearchField(false));
+              }
+            }}
+          />
+        }
+      /> 
+    </View>
   );
 
   return (
@@ -76,15 +77,16 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    //backgroundColor: 'red',
   },
   inputContainer: {
     minWidth: 140,
     maxWidth: 188,
   },
   iconContainer: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
+    //position: 'absolute',
+    //top: 0,
+    //right: 50,
   },
 });
 
