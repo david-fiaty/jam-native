@@ -43,9 +43,9 @@ const HeaderNavigation = () => {
                 />
               }
 
-              { notificationsCount > 0 && isLoggedIn &&
+              { isLoggedIn &&
                 <IconView 
-                  label={` ${notificationsCount}+`} 
+                  label={notificationsCount > 0 ? ` ${notificationsCount}+` : ` 0 `} 
                   theme="secondary" 
                   size={13}
                   padding={4.5} 
