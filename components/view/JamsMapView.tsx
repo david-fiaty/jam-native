@@ -16,6 +16,44 @@ const JamsMapView = ({ style, children }: BaseProps) => {
   const [jamsData, setJamsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
+  const mapStyle = [
+    {
+      "elementType": "geometry",
+      "stylers": [
+        {
+          "color": "#ebe3cd"
+        }
+      ]
+    },
+    {
+      "featureType": "water",
+      "elementType": "geometry.fill",
+      "stylers": [
+        {
+          "color": "#blue"
+        }
+      ]
+    },
+    {
+      "featureType": "road",
+      "elementType": "geometry.fill",
+      "stylers": [
+        {
+          "color": "#ffffff"
+        }
+      ]
+    },
+    {
+      "featureType": "road",
+      "elementType": "geometry.stroke",
+      "stylers": [
+        {
+          "color": "#000000"
+        }
+      ]
+    }
+  ];
+  
   const getInitialRegion = () => {
     let latitude = currentLocation?.coords?.latitude || Config.defaultLocation.latitude;
     let longitude = currentLocation?.coords?.longitude || Config.defaultLocation.longitude;
@@ -79,6 +117,7 @@ const JamsMapView = ({ style, children }: BaseProps) => {
           style={styles.map}
           provider="google"
           initialRegion={getInitialRegion()}
+          customMapStyle={mapStyle}
         >
           {currentLocation && (
             <Marker

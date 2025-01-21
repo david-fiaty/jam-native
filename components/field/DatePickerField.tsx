@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Platform, TouchableOpacity } from 'react-native';
 import { BaseProps } from '@/constants/Types';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import InputTextField from '../field/InputTextField';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
@@ -17,30 +17,39 @@ const DatePickerField = ({placeholder, value, onChangeValue}: Props) => {
   const [show, setShow] = useState(false);
   const display = Platform.OS === 'ios' ? 'spinner' : 'default';
 
-  const onChange = (event: any, value: any) => {
-    setShow(false); 
-    if (value) setDate(value);
-    if (onChangeValue) onChangeValue(value);
+  const showDatePicker = () => {
+    setShow(true);
+  };
+
+  const hideDatePicker = () => {
+    setShow(false);
+  };
+
+  const handleConfirm = (date: any) => {
+    if (date) setDate(date);
+    if (onChangeValue) onChangeValue(date);
+    hideDatePicker();
   };
 
   return (
       <BoxView direction="row" align="space-between">
-        <TouchableOpacity onPress={() => setShow(true)} style={styles.fieldContainer}>
+        <TouchableOpacity onPress={showDatePicker} style={styles.fieldContainer}>
           <InputTextField 
             readOnly={true}
             placeholder={placeholder} 
             rightIcon={<IconView name="calendar" theme="transparent" />}
-            //value={date.toLocaleDateString()}
             value={value}
           />
         </TouchableOpacity>
 
         {show && (
-          <DateTimePicker
-            value={date} 
-            mode="date"
+          <DateTimePickerModal
+            date={date} 
+            isVisible={show}
+            mode="datetime"
+            onConfirm={handleConfirm}
+            onCancel={hideDatePicker}
             display={display} 
-            onChange={onChange}
           />
         )}
       </BoxView>
