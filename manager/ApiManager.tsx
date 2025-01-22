@@ -1,31 +1,23 @@
 import { Config } from '@/constants/Config';
-import { Cache } from "react-native-cache";
 import Store from '@/redux/Store';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Endpoints from '@/constants/Endpoints';
-
-const cache = new Cache({
-  namespace: Config.appNamespace,
-  backend: AsyncStorage,
-  policy: {
-    maxEntries: 50000,
-    stdTTL: 0,
-  },
-});
 
 class ApiManager {
   async get(key: keyof typeof Endpoints, options?: any, variables?: any) {
     let data: any = [];
     let url: string = this.getUrl(key, options, variables);
 
+    // Todo - Implement cache or remove
     if (Config.dataCacheEnabled === true && Endpoints[key].cacheable === true) {
-      data = await this.getCacheItem(key);
+      //data = await this.getCacheItem(key); /
     }
     
+    // Todo - Implement cache or remove
     if (!data?.length) {
       data = await this.sendRequest(url, 'GET');
       if (Config.dataCacheEnabled === true && data?.length > 0) {
-        await cache.set(key, data);
+        //await cache.set(key, data);
       }
     }
 
