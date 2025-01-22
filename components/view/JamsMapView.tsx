@@ -10,6 +10,7 @@ import SpinnerView from "./SpinnerView";
 import DeviceManager from "@/manager/DeviceManager";
 import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
+import SearchManager from "@/manager/SearchManager";
 
 type Props = BaseProps & {
   idArray?: any;
@@ -127,8 +128,17 @@ const JamsMapView = ({ idArray }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) { 
-        setJamsData(await EntityManager.listJams());
         setCurrentLocation(await DeviceManager.getLocation());
+        
+        if (idArray?.length > 0) {
+          setJamsData(await EntityManager.getJams({ items_ids: idArray }));
+        }
+        else {
+          idArray = SearchManager.getSearchResult('jam');
+          if (idArray?.length > 0) setJamsData(await EntityManager.getJams({ items_ids: idArray })); 
+          else setJamsData(await EntityManager.listJams());
+        }
+        
         setIsLoaded(true);
       }
     })();
