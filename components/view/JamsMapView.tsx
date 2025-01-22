@@ -82,7 +82,7 @@ const JamsMapView = ({ style, children }: BaseProps) => {
     };
   };
 
-  const renderMarker = (item: any) => {
+  const renderJamMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
       return (
         <Marker
@@ -96,6 +96,20 @@ const JamsMapView = ({ style, children }: BaseProps) => {
     }
 
     return null;
+  };
+
+  const renderUserMarker = () => {
+    return (
+      <Marker
+        pinColor={Colors.secondary}
+        title={i18n.t("Your Location")}
+        description={i18n.t("This is where you are currently")}
+        coordinate={{
+          latitude: parseFloat(currentLocation?.coords?.latitude),
+          longitude: parseFloat(currentLocation?.coords?.longitude),
+        }}
+      />
+    );
   };
 
   DeviceManager.getLocation().then((data: any) => {
@@ -121,19 +135,9 @@ const JamsMapView = ({ style, children }: BaseProps) => {
           initialRegion={getInitialRegion()}
           customMapStyle={mapStyle}
         >
-          {currentLocation && (
-            <Marker
-              pinColor={Colors.secondary}
-              title={i18n.t("Your Location")}
-              description={i18n.t("This is where you are currently")}
-              coordinate={{
-                latitude: parseFloat(currentLocation?.coords?.latitude),
-                longitude: parseFloat(currentLocation?.coords?.longitude),
-              }}
-            />
-          )}
+          {currentLocation && renderUserMarker()}
 
-          {jamsData?.map((item: any) => renderMarker(item))}
+          {jamsData?.map((item: any) => renderJamMarker(item))}
         </RNMapView>
       </View>
     </TouchableWithoutFeedback>
