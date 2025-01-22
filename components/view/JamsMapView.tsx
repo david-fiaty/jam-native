@@ -21,7 +21,7 @@ const JamsMapView = ({ style, children }: BaseProps) => {
       "elementType": "geometry",
       "stylers": [
         {
-          "color": "#ebe3cd"
+          "color": Colors.white,
         }
       ]
     },
@@ -30,7 +30,7 @@ const JamsMapView = ({ style, children }: BaseProps) => {
       "elementType": "geometry.fill",
       "stylers": [
         {
-          "color": "#blue"
+          "color": Colors.secondary,
         }
       ]
     },
@@ -39,7 +39,7 @@ const JamsMapView = ({ style, children }: BaseProps) => {
       "elementType": "geometry.fill",
       "stylers": [
         {
-          "color": "#ffffff"
+          "color": Colors.gray,
         }
       ]
     },
@@ -48,7 +48,7 @@ const JamsMapView = ({ style, children }: BaseProps) => {
       "elementType": "geometry.stroke",
       "stylers": [
         {
-          "color": "#000000"
+          "color": Colors.gray,
         }
       ]
     }
