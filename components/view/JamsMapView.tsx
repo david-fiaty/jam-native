@@ -82,13 +82,17 @@ const JamsMapView = ({ style, children }: BaseProps) => {
     };
   };
 
+  const getMarkerDescription = (item: any) => {
+    return item?.caption;
+  };
+
   const renderJamMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
       return (
         <Marker
           key={item.id}
           title={getMarkerTitle(item)}
-          description={item?.caption}
+          description={getMarkerDescription(item)}
           coordinate={getMarkerCoordinate(item)}
           icon={markerImage} 
         />
@@ -101,7 +105,7 @@ const JamsMapView = ({ style, children }: BaseProps) => {
   const renderUserMarker = () => {
     return (
       <Marker
-        pinColor={Colors.secondary}
+        pinColor={Colors.tertiary}
         title={i18n.t("Your Location")}
         description={i18n.t("This is where you are currently")}
         coordinate={{
