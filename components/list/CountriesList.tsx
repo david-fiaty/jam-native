@@ -74,7 +74,7 @@ const CountriesList = () => {
       style={Layout.screenContent}
     >
       <BackButton
-        title={i18n.t('Add industries')}
+        title={i18n.t('Add countries')}
         onPress={() => ScreenManager.toggleScreen('CountriesList')}
       />
 
