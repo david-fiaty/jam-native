@@ -12,6 +12,9 @@ import SearchProfilesList from "../list/SearchProfilesList";
 import SearchProjectsList from "../list/SearchProjectsList";
 import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "./SpinnerView";
+import BackButton from "../button/BackButton";
+import i18n from "@/translation/i18n";
+import ScreenManager from "@/manager/ScreenManager";
 
 const SearchView = () => {
   const [activeTab, setActiveTab] = useState<any>(null);
@@ -56,6 +59,11 @@ const SearchView = () => {
       scroll={true}
       style={Layout.screenContent}
     >
+      <BackButton
+        title={i18n.t('Back')}
+        onPress={() => ScreenManager.toggleScreen('SearchView')}
+      />
+
       {/* Search filters */}
       <ListView
         data={StaticData.searchTabs}
