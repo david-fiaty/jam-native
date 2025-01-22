@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
-import { Marker } from "react-native-maps";
+import { Marker, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from "react-native-maps";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
@@ -129,7 +129,7 @@ const JamsMapView = ({ idArray }: Props) => {
     (async () => {
       if (!isLoaded) { 
         setCurrentLocation(await DeviceManager.getLocation());
-        
+
         if (idArray?.length > 0) {
           setJamsData(await EntityManager.getJams({ items_ids: idArray }));
         }
@@ -151,11 +151,12 @@ const JamsMapView = ({ idArray }: Props) => {
       <View style={[Layout.screenContent, styles.container]}>
         <RNMapView
           style={styles.map}
-          provider="google"
+          provider={PROVIDER_GOOGLE} // Todo - Handle provider IOS
           initialRegion={getInitialRegion()}
           customMapStyle={mapStyle}
+          showsUserLocation={true}
         >
-          {currentLocation && renderUserMarker()}
+          {/*currentLocation && renderUserMarker()*/}
 
           {jamsData?.map((item: any) => renderJamMarker(item))}
         </RNMapView>
