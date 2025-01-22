@@ -155,6 +155,7 @@ const JamsMapView = ({ idArray }: Props) => {
           initialRegion={getInitialRegion()}
           customMapStyle={mapStyle}
           showsUserLocation={true}
+          showsMyLocationButton={true}
         >
           {/*currentLocation && renderUserMarker()*/}
 
