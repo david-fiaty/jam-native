@@ -10,18 +10,24 @@ import SpinnerView from "./SpinnerView";
 import DeviceManager from "@/manager/DeviceManager";
 import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
+import SearchManager from "@/manager/SearchManager";
 
-const JamsMapView = ({ style, children }: BaseProps) => {
+type Props = BaseProps & {
+  idArray?: any;
+};
+
+const JamsMapView = ({ idArray }: Props) => {
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [jamsData, setJamsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const markerImage = require('@/assets/images/logo-55.png');
 
   const mapStyle = [
     {
       "elementType": "geometry",
       "stylers": [
         {
-          "color": "#ebe3cd"
+          "color": Colors.white,
         }
       ]
     },
@@ -30,7 +36,7 @@ const JamsMapView = ({ style, children }: BaseProps) => {
       "elementType": "geometry.fill",
       "stylers": [
         {
-          "color": "#blue"
+          "color": Colors.secondary,
         }
       ]
     },
@@ -39,7 +45,7 @@ const JamsMapView = ({ style, children }: BaseProps) => {
       "elementType": "geometry.fill",
       "stylers": [
         {
-          "color": "#ffffff"
+          "color": Colors.gray,
         }
       ]
     },
@@ -48,7 +54,7 @@ const JamsMapView = ({ style, children }: BaseProps) => {
       "elementType": "geometry.stroke",
       "stylers": [
         {
-          "color": "#000000"
+          "color": Colors.gray,
         }
       ]
     }
@@ -81,19 +87,38 @@ const JamsMapView = ({ style, children }: BaseProps) => {
     };
   };
 
-  const renderMarker = (item: any) => {
+  const getMarkerDescription = (item: any) => {
+    return item?.caption;
+  };
+
+  const renderJamMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
       return (
         <Marker
           key={item.id}
           title={getMarkerTitle(item)}
-          description={item?.caption}
+          description={getMarkerDescription(item)}
           coordinate={getMarkerCoordinate(item)}
+          icon={markerImage} 
         />
       );
     }
 
     return null;
+  };
+
+  const renderUserMarker = () => {
+    return (
+      <Marker
+        pinColor={Colors.tertiary}
+        title={i18n.t("Your Location")}
+        description={i18n.t("This is where you are currently")}
+        coordinate={{
+          latitude: parseFloat(currentLocation?.coords?.latitude),
+          longitude: parseFloat(currentLocation?.coords?.longitude),
+        }}
+      />
+    );
   };
 
   DeviceManager.getLocation().then((data: any) => {
@@ -102,11 +127,22 @@ const JamsMapView = ({ style, children }: BaseProps) => {
 
   useEffect(() => {
     (async () => {
-      if (!jamsData?.length) setJamsData(await EntityManager.listJams());
-      setCurrentLocation(await DeviceManager.getLocation());
-      setIsLoaded(true);
+      if (!isLoaded) { 
+        setCurrentLocation(await DeviceManager.getLocation());
+        
+        if (idArray?.length > 0) {
+          setJamsData(await EntityManager.getJams({ items_ids: idArray }));
+        }
+        else {
+          idArray = SearchManager.getSearchResult('jam');
+          if (idArray?.length > 0) setJamsData(await EntityManager.getJams({ items_ids: idArray })); 
+          else setJamsData(await EntityManager.listJams());
+        }
+        
+        setIsLoaded(true);
+      }
     })();
-  });
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -119,19 +155,9 @@ const JamsMapView = ({ style, children }: BaseProps) => {
           initialRegion={getInitialRegion()}
           customMapStyle={mapStyle}
         >
-          {currentLocation && (
-            <Marker
-              pinColor={Colors.secondary}
-              title={i18n.t("Your Location")}
-              description={i18n.t("This is where you are currently")}
-              coordinate={{
-                latitude: parseFloat(currentLocation?.coords?.latitude),
-                longitude: parseFloat(currentLocation?.coords?.longitude),
-              }}
-            />
-          )}
+          {currentLocation && renderUserMarker()}
 
-          {jamsData?.map((item: any) => renderMarker(item))}
+          {jamsData?.map((item: any) => renderJamMarker(item))}
         </RNMapView>
       </View>
     </TouchableWithoutFeedback>

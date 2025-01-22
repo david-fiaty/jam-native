@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchValue, toggleSearchField } from "@/redux/slices/SearchSlice";
@@ -21,6 +21,31 @@ const SearchField = () => {
     await SearchManager.loadData(currentSearchValue);
   };
 
+  const onChangeText = (value: string) => {
+    setCurrentSearchValue(value);
+    dispatch(setSearchValue(value));
+  };
+
+  const clearSearch = () => {
+    setCurrentSearchValue('');
+    dispatch(setSearchValue(''));
+  };
+
+  const renderRightIcon = () => {
+    if (searchState.value.length > 0) {
+      return (
+        <IconView 
+          name="delete" 
+          theme="primary" 
+          size={13}
+          onPress={clearSearch}
+        />
+      );
+    }
+
+    return <></>;
+  };
+
   const toggleButton = (
     <IconView 
       name="search" 
@@ -35,40 +60,23 @@ const SearchField = () => {
     />
   );
 
+
   const inputField = (
     <View style={styles.inputContainer}>
       <InputTextField 
         value={currentSearchValue}
         placeholder={i18n.t('Search...')}
-        onChangeText={(text: string) => setCurrentSearchValue(text)}
+        onChangeText={onChangeText}
         onSubmitEditing={onSubmitEditing}
-        rightIcon={  
-          <IconView 
-            name="delete" 
-            theme="primary" 
-            size={13}
-            onPress={() => {
-              if (searchState.value.length && activeScreen?.name == 'SearchView') {
-                setCurrentSearchValue('');
-                dispatch(setSearchValue(''));
-              }
-              else if (!searchState.value.length && activeScreen?.name == 'SearchView') {
-                dispatch(toggleSearchField(false));
-                ScreenManager.toggleScreen('SearchView');
-              }
-              else if (!searchState.value.length && activeScreen?.name != 'SearchView') {
-                dispatch(toggleSearchField(false));
-              }
-            }}
-          />
-        }
+        rightIcon={renderRightIcon()}
       /> 
     </View>
   );
 
   return (
     <BoxView direction="row" align="center" justify="space-between" style={styles.container}>
-      { isExpanded ? inputField : toggleButton }
+      { isExpanded && inputField}
+      { !isExpanded && toggleButton}
     </BoxView>
   );
 };

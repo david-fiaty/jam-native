@@ -4,5 +4,6 @@ export const Colors = {
   tertiary: '#FAA000',
   white: '#FFFFFF',
   black: '#000000',
+  gray: '#dedede',
 };
 
