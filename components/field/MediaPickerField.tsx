@@ -116,7 +116,7 @@ const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: P
       mimeType: null,
       rotation: null,
       type: 'image',
-      //base64: base64,
+      base64: base64,
       duration: null,
       exif: null,
     };
