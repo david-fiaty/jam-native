@@ -151,7 +151,7 @@ const JamsScreen = () => {
         {/* Main content */}
         {!currentScreen && (
           <BoxView style={Layout.mainContent}>
-            <JamsList showSpinner={true} />
+            <JamsList />
           </BoxView>
         )}
 
