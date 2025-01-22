@@ -154,6 +154,7 @@ const JamsMapView = ({ idArray }: Props) => {
           provider={PROVIDER_GOOGLE} // Todo - Handle provider IOS
           initialRegion={getInitialRegion()}
           customMapStyle={mapStyle}
+          showsUserLocation={true}
         >
           {/*currentLocation && renderUserMarker()*/}
 
