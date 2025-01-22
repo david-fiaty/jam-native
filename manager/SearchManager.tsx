@@ -22,7 +22,7 @@ class SearchManager {
     return this.result;
   }
 
-  // Todo - Why search value not used, since passed as argument from onSubmitEditing in SearchField component
+  // Todo - Why searchValue not used, since passed as argument from onSubmitEditing in SearchField component
   async loadData(searchValue?: any) {
     const [jams, profiles, projects] = await this.sendRequest();
     
