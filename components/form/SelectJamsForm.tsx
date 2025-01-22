@@ -48,6 +48,20 @@ const SelectJamsForm = () => {
     ScreenManager.toggleScreen("SelectJamsForm");
   };
 
+  const getEmptyMessage = () => {    
+    return (
+      <View>
+        <TextView>{i18n.t('No Jams available in your profile.')}</TextView>
+        <TouchableOpacity 
+          style={styles.textLink} 
+          onPress={() => ScreenManager.toggleScreen('JamForm')}
+        >
+          <TextView>{i18n.t('Create a jam')}</TextView>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
@@ -87,24 +101,23 @@ const SelectJamsForm = () => {
           </TouchableOpacity> 
         )}
       </BoxView>
-
-      {profileJams?.length > 0 && (
-        <ListView
-          data={profileJams}
-          numColumns={numColumns}
-          contentContainerStyle={{ gap: Layout.space.base }}
-          columnWrapperStyle={{ gap: Layout.space.base }}
-          scrollEnabled={false}
-          renderItem={(row: any) => (
-            <JamListItem
-              row={row}
-              isAddable={true}
-              onListItemPress={(row: any) => updateSelection(row)}
-              isSelected={(selectedIds.findIndex((id: any) => id == row.item.id)) !== -1}
-            />
-          )}
-        />
-      )}
+      
+      <ListView
+        data={profileJams}
+        numColumns={numColumns}
+        contentContainerStyle={{ gap: Layout.space.base }}
+        columnWrapperStyle={{ gap: Layout.space.base }}
+        scrollEnabled={false}
+        emptyMessage={getEmptyMessage}
+        renderItem={(row: any) => (
+          <JamListItem
+            row={row}
+            isAddable={true}
+            onListItemPress={(row: any) => updateSelection(row)}
+            isSelected={(selectedIds.findIndex((id: any) => id == row.item.id)) !== -1}
+          />
+        )}
+      />
     </BoxView>
   );
 };
@@ -112,6 +125,13 @@ const SelectJamsForm = () => {
 const styles = StyleSheet.create({
   titleContainer: {
     width: "100%",
+  },
+  textLink: {
+    ...Layout.textLink,
+    ...{ 
+      alignSelf: 'flex-start',
+      marginTop: Layout.space.base,
+    },
   },
 });
 
