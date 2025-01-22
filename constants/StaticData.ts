@@ -22,11 +22,7 @@ const StaticData = {
       label: i18n.t('Jammers'),
       numColumns: 1,
     },
-    {
-      id: 'jam',
-      label: i18n.t('Jams'),
-      numColumns: 2,
-    },
+
     {
       id: 'project',
       label: i18n.t('Projects'),
