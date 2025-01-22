@@ -58,7 +58,6 @@
     "react-i18next": "^15.1.1",
     "react-native": "^0.76.6",
     "react-native-animatable": "^1.4.0",
-    "react-native-cache": "^2.0.3",
     "react-native-collapsible": "^1.6.2",
     "react-native-element-dropdown": "^2.12.2",
     "react-native-gesture-handler": "~2.20.2",
