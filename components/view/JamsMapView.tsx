@@ -10,6 +10,7 @@ import SpinnerView from "./SpinnerView";
 import DeviceManager from "@/manager/DeviceManager";
 import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
+import TextView from "./TextView";
 
 const JamsMapView = ({ style, children }: BaseProps) => {
   const [currentLocation, setCurrentLocation] = useState<any>(null);
@@ -70,7 +71,10 @@ const JamsMapView = ({ style, children }: BaseProps) => {
   const renderJamMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
       let title: any = item?.title?.length > 0 ? item.title : item?.caption?.substring(0, 45) + "...";
-      let description: any = item?.caption;
+      
+      //let description: any = item?.caption;
+      let description: any = <TextView>hello</TextView>;
+      
       let coordinate: any = {
         latitude: parseFloat(item?.geolocation_latitude),
         longitude: parseFloat(item?.geolocation_longitude),
