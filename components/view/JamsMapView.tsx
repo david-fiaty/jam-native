@@ -63,9 +63,8 @@ const JamsMapView = ({ idArray }: Props) => {
   const getInitialRegion = () => {
     let latitude = currentLocation?.coords?.latitude || Config.defaultLocation.latitude;
     let longitude = currentLocation?.coords?.longitude || Config.defaultLocation.longitude;
-
-    let latitudeDelta = 0.28;
-    let longitudeDelta = latitudeDelta * ( DeviceManager.window.width/ DeviceManager.window.height);
+    let latitudeDelta = 0.16;
+    let longitudeDelta = latitudeDelta * (DeviceManager.window.width/DeviceManager.window.height);
 
     return {
       latitude: latitude,
