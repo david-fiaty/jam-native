@@ -21,6 +21,11 @@ const SearchField = () => {
     await SearchManager.loadData(currentSearchValue);
   };
 
+  const onChangeText = (value: string) => {
+    setCurrentSearchValue(value);
+    dispatch(setSearchValue(value));
+  };
+
   const toggleButton = (
     <IconView 
       name="search" 
@@ -40,7 +45,7 @@ const SearchField = () => {
       <InputTextField 
         value={currentSearchValue}
         placeholder={i18n.t('Search...')}
-        onChangeText={(text: string) => setCurrentSearchValue(text)}
+        onChangeText={onChangeText}
         onSubmitEditing={onSubmitEditing}
         rightIcon={  
           <IconView 
