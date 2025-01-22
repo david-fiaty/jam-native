@@ -10,7 +10,6 @@ import SpinnerView from "./SpinnerView";
 import DeviceManager from "@/manager/DeviceManager";
 import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
-import TextView from "./TextView";
 
 const JamsMapView = ({ style, children }: BaseProps) => {
   const [currentLocation, setCurrentLocation] = useState<any>(null);
@@ -68,24 +67,33 @@ const JamsMapView = ({ style, children }: BaseProps) => {
     };
   };
 
+  const getMarkerTitle = (item: any) => {
+    if (!item?.title?.length) {
+      return item?.caption?.substring(0, 45) + "...";
+    }
+
+    return item.title;
+  };
+
+  const getMarkerCoordinate = (item: any) => {
+    return {
+      latitude: parseFloat(item?.geolocation_latitude),
+      longitude: parseFloat(item?.geolocation_longitude),
+    };
+  };
+
+  const getMarkerDescription = (item: any) => {
+    return item?.caption;
+  };
+
   const renderJamMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
-      let title: any = item?.title?.length > 0 ? item.title : item?.caption?.substring(0, 45) + "...";
-      
-      //let description: any = item?.caption;
-      let description: any = <TextView>hello</TextView>;
-      
-      let coordinate: any = {
-        latitude: parseFloat(item?.geolocation_latitude),
-        longitude: parseFloat(item?.geolocation_longitude),
-      };
-
       return (
         <Marker
           key={item.id}
-          title={title}
-          description={description}
-          coordinate={coordinate}
+          title={getMarkerTitle(item)}
+          description={getMarkerDescription(item)}
+          coordinate={getMarkerCoordinate(item)}
           icon={markerImage} 
         />
       );
