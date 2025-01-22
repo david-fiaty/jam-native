@@ -101,7 +101,7 @@ const JamsMapView = ({ style, children }: BaseProps) => {
   const renderUserMarker = () => {
     return (
       <Marker
-        pinColor={Colors.secondary}
+        pinColor={Colors.tertiary}
         title={i18n.t("Your Location")}
         description={i18n.t("This is where you are currently")}
         coordinate={{
