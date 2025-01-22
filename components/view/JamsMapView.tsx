@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
-import { Marker, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from "react-native-maps";
+import { Marker, PROVIDER_GOOGLE, PROVIDER_DEFAULT, Callout } from "react-native-maps";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
@@ -160,6 +160,7 @@ const JamsMapView = ({ idArray }: Props) => {
           {/*currentLocation && renderUserMarker()*/}
 
           {jamsData?.map((item: any) => renderJamMarker(item))}
+        
         </RNMapView>
       </View>
     </TouchableWithoutFeedback>
@@ -174,6 +175,9 @@ const styles = StyleSheet.create({
   map: {
     flex: 1,
   },
+  callout: {
+    padding: 20,
+  }
 });
 
 export default JamsMapView;
