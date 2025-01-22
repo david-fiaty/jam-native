@@ -15,6 +15,7 @@ const JamsMapView = ({ style, children }: BaseProps) => {
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [jamsData, setJamsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const markerImage = require('@/assets/images/logo-55.png');
 
   const mapStyle = [
     {
@@ -89,6 +90,7 @@ const JamsMapView = ({ style, children }: BaseProps) => {
           title={getMarkerTitle(item)}
           description={item?.caption}
           coordinate={getMarkerCoordinate(item)}
+          icon={markerImage} 
         />
       );
     }
