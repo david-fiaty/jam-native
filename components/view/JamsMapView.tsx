@@ -11,7 +11,11 @@ import DeviceManager from "@/manager/DeviceManager";
 import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
 
-const JamsMapView = ({ style, children }: BaseProps) => {
+type Props = BaseProps & {
+  idArray?: any;
+};
+
+const JamsMapView = ({ idArray }: Props) => {
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [jamsData, setJamsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -122,11 +126,13 @@ const JamsMapView = ({ style, children }: BaseProps) => {
 
   useEffect(() => {
     (async () => {
-      if (!jamsData?.length) setJamsData(await EntityManager.listJams());
-      setCurrentLocation(await DeviceManager.getLocation());
-      setIsLoaded(true);
+      if (!isLoaded) { 
+        setJamsData(await EntityManager.listJams());
+        setCurrentLocation(await DeviceManager.getLocation());
+        setIsLoaded(true);
+      }
     })();
-  });
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
 
