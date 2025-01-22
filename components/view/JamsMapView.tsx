@@ -72,14 +72,6 @@ const JamsMapView = ({ idArray }: Props) => {
     };
   };
 
-  const getMarkerTitle = (item: any) => {
-    if (!item?.title?.length) {
-      return item?.caption?.substring(0, 45) + "...";
-    }
-
-    return item.title;
-  };
-
   const getMarkerCoordinate = (item: any) => {
     return {
       latitude: parseFloat(item?.geolocation_latitude),
@@ -87,8 +79,12 @@ const JamsMapView = ({ idArray }: Props) => {
     };
   };
 
+  const getMarkerTitle = (item: any) => {
+    return item?.title || i18n.t('No title available');
+  };
+
   const getMarkerDescription = (item: any) => {
-    return item?.caption;
+    return item?.caption || '';
   };
 
   const renderJamMarker = (item: any) => {
