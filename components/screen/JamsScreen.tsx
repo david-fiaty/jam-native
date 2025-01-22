@@ -156,7 +156,7 @@ const JamsScreen = () => {
         )}
 
         {/* Modal content */}
-        {
+        {currentScreen && (
           <BoxView style={Layout.modalContainer}>
             <Animated.View style={[Layout.animatedView, animatedStyle]}>
               <BoxView style={Layout.modalContent}>
@@ -164,7 +164,7 @@ const JamsScreen = () => {
               </BoxView>
             </Animated.View>
           </BoxView>
-        }
+        )}
 
         {/* Footer navigation */}
         {(route.name == "jams" || currentScreen?.footerNavigation) && (

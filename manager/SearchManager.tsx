@@ -82,9 +82,11 @@ class SearchManager {
   buildResponse(data?: any) {
     return {
       jam: data.jams,
-      jammer: data.profiles,
-      venue: data.profiles,
       project: data.projects,
+      jammer: data.profiles,
+      venue: data.profiles.filter((o: any) => o?.profile_type == 'venue'),
+      //personal: data.profiles.filter((o: any) => o?.profile_type == 'personal'),
+      //organization: data.profiles.filter((o: any) => o?.profile_type == 'organization'),
       call: data.jams.filter((o: any) => o?.type == 'call'),
       event: data.jams.filter((o: any) => o?.type == 'event'),
     };
