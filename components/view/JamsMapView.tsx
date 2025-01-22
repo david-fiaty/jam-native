@@ -67,29 +67,21 @@ const JamsMapView = ({ style, children }: BaseProps) => {
     };
   };
 
-  const getMarkerTitle = (item: any) => {
-    if (!item?.title?.length) {
-      return item?.caption?.substring(0, 45) + "...";
-    }
-
-    return item.title;
-  };
-
-  const getMarkerCoordinate = (item: any) => {
-    return {
-      latitude: parseFloat(item?.geolocation_latitude),
-      longitude: parseFloat(item?.geolocation_longitude),
-    };
-  };
-
   const renderJamMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
+      let title: any = item?.title?.length > 0 ? item.title : item?.caption?.substring(0, 45) + "...";
+      let description: any = item?.caption;
+      let coordinate: any = {
+        latitude: parseFloat(item?.geolocation_latitude),
+        longitude: parseFloat(item?.geolocation_longitude),
+      };
+
       return (
         <Marker
           key={item.id}
-          title={getMarkerTitle(item)}
-          description={item?.caption}
-          coordinate={getMarkerCoordinate(item)}
+          title={title}
+          description={description}
+          coordinate={coordinate}
           icon={markerImage} 
         />
       );
