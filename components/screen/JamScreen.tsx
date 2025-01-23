@@ -18,10 +18,12 @@ const JamScreen = ({ idArray, title }: Props) => {
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={false} style={[Layout.screenContent, styles.container]}>
-      <BackButton
-        title={screenTitle}
-        onPress={() => router.back()}
-      />
+      <BoxView direction="column" align="center" style={Layout.backButtonContainer}>
+        <BackButton
+          title={screenTitle}
+          onPress={() => router.back()}
+        />
+      </BoxView>
       <BoxView style={Layout.mainContent}>
         <JamsList idArray={idArray} showSpinner={true} />
       </BoxView>
