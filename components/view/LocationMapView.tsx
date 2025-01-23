@@ -93,6 +93,7 @@ const LocationMapView = () => {
             style={styles.map}
             provider={PROVIDER_GOOGLE} // Todo - Handle provider IOS
             customMapStyle={Layout.mapStyle}
+            showsUserLocation={true}
             onPress={onMapPress}
             initialRegion={{
               latitude: parseFloat(selectedLocation.latitude),
@@ -103,9 +104,9 @@ const LocationMapView = () => {
           >
             {selectedLocation && (
               <Marker
-                pinColor={Colors.secondary}
-                title={i18n.t("Your Location")}
-                description={i18n.t("This is where you are currently")}
+                pinColor={Colors.tertiary}
+                title={i18n.t("Selected location")}
+                description={i18n.t("This is the selected location")} // Todo - Reverse geocoding
                 coordinate={{
                   latitude: parseFloat(selectedLocation?.latitude),
                   longitude: parseFloat(selectedLocation?.longitude),
