@@ -18,7 +18,7 @@ const JamScreen = ({ idArray, title }: Props) => {
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={false} style={[Layout.screenContent, styles.container]}>
-      <BoxView direction="column" align="center" style={styles.backButtonContainer}>
+      <BoxView direction="column" align="center" style={Layout.backButtonContainer}>
         <BackButton
           title={screenTitle}
           onPress={() => router.back()}
@@ -35,9 +35,6 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 0,
     flex: 1,
-  },
-  backButtonContainer: {
-    marginLeft: Layout.space.base*1.5,
   },
 });
 
