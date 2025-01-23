@@ -58,6 +58,44 @@ const modal: any = {
   height: DeviceManager.window.height - DeviceManager.statusBar.height - header.height - footer.height,
 };
 
+const mapStyle: any = [
+  {
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": Colors.white,
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": Colors.secondary,
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": Colors.gray,
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": Colors.gray,
+      }
+    ]
+  }
+];
+
 export const Layout = {
   space: space,
   radius: radius,
@@ -67,6 +105,7 @@ export const Layout = {
   header: header,
   logo: logo,
   footer: footer,
+  mapStyle: mapStyle,
   animation: {
     duration: 300,
   },
@@ -164,6 +203,9 @@ export const Layout = {
   textLink: {
     borderBottomWidth: 1,
     borderBottomColor: Colors.primary,
+  },
+  backButtonContainer: {
+    marginLeft: space.base*1.5,
   },
 };
 

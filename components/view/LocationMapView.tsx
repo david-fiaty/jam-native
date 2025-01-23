@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
-import RNMapView, { Marker, MapPressEvent } from "react-native-maps";
+import RNMapView, { Marker, MapPressEvent, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from "react-native-maps";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import { Config } from "@/constants/Config";
@@ -15,7 +15,6 @@ import BoxView from "./BoxView";
 
 const LocationMapView = () => {
   const dispatch = useDispatch();
-  const [regionLocation, setRegionLocation] = useState<any>(null);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
@@ -84,15 +83,20 @@ const LocationMapView = () => {
       justify="flex-start" 
       style={[Layout.screenContent, styles.screenContent]}
     >
-      <BackButton
-        title={i18n.t("Add location")}
-        onPress={() => ScreenManager.toggleScreen("LocationMapView")}
-      />
+      <BoxView direction="column" align="center" style={Layout.backButtonContainer}>
+        <BackButton
+          title={i18n.t("Add location")}
+          onPress={() => ScreenManager.toggleScreen("LocationMapView")}
+        />
+      </BoxView>
+
       <TouchableWithoutFeedback>
         <View style={styles.container}>
           <RNMapView
             style={styles.map}
-            provider="google"
+            provider={PROVIDER_GOOGLE} // Todo - Handle provider IOS
+            customMapStyle={Layout.mapStyle}
+            showsUserLocation={true}
             onPress={onMapPress}
             initialRegion={{
               latitude: parseFloat(selectedLocation.latitude),
@@ -103,9 +107,9 @@ const LocationMapView = () => {
           >
             {selectedLocation && (
               <Marker
-                pinColor={Colors.secondary}
-                title={i18n.t("Your Location")}
-                description={i18n.t("This is where you are currently")}
+                pinColor={Colors.tertiary}
+                title={i18n.t("Selected location")}
+                description={i18n.t("This is the selected location")} // Todo - Reverse geocoding
                 coordinate={{
                   latitude: parseFloat(selectedLocation?.latitude),
                   longitude: parseFloat(selectedLocation?.longitude),

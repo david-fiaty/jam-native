@@ -40,12 +40,12 @@ const SearchView = () => {
     (async () => {
       if (!searchState.value?.length) {
         setSearchData(await SearchManager.getDefaultData());
-        setIsLoaded(true);
       } 
       else {
         setSearchData(await SearchManager.getResult(searchState.value));
-        setIsLoaded(true);
       }
+
+      setIsLoaded(true);
     })();
   }, [isLoaded, activeTab, searchState]);
 
