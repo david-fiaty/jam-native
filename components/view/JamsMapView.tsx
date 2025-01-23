@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE, PROVIDER_DEFAULT, Callout } from "react-native-maps";
 import { BaseProps } from "@/constants/Types";
@@ -56,8 +57,9 @@ const mapStyle = [
 
 const JamsMapView = ({ idArray }: Props) => {
   const [currentLocation, setCurrentLocation] = useState<any>(null);
-  const [jamsData, setJamsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [searchData, setSearchData] = useState<any>({});
+  const searchState = useSelector((state: any) => state.search);
 
   const mapRef = useRef<any>();
   const markerImage = require('@/assets/images/logo-55.png');
@@ -107,40 +109,18 @@ const JamsMapView = ({ idArray }: Props) => {
     return null;
   };
 
-  const renderUserMarker = () => {
-    return (
-      <Marker
-        pinColor={Colors.tertiary}
-        title={i18n.t("Your Location")}
-        description={i18n.t("This is where you are currently")}
-        coordinate={{
-          latitude: parseFloat(currentLocation?.coords?.latitude),
-          longitude: parseFloat(currentLocation?.coords?.longitude),
-        }}
-      />
-    );
-  };
-
-  DeviceManager.getLocation().then((data: any) => {
-    setCurrentLocation(data);
-  });
-
   useEffect(() => {
     (async () => {
-      if (!isLoaded) { 
-        setCurrentLocation(await DeviceManager.getLocation());
+      setCurrentLocation(await DeviceManager.getLocation());
 
-        if (idArray?.length > 0) {
-          setJamsData(await EntityManager.getJams({ items_ids: idArray }));
-        }
-        else {
-          idArray = SearchManager.getSearchResult('jam');
-          if (idArray?.length > 0) setJamsData(await EntityManager.getJams({ items_ids: idArray })); 
-          else setJamsData(await EntityManager.listJams());
-        }
-        
-        setIsLoaded(true);
+      if (!searchState.value?.length) {
+        setSearchData(await SearchManager.getDefaultData());
+      } 
+      else {
+        setSearchData(await SearchManager.getResult(searchState.value));
       }
+
+      setIsLoaded(true);
     })();
   }, [isLoaded]);
 
@@ -158,10 +138,7 @@ const JamsMapView = ({ idArray }: Props) => {
           showsUserLocation={true}
           showsMyLocationButton={true}
         >
-          {/*currentLocation && renderUserMarker()*/}
-
-          {jamsData?.map((item: any) => renderJamMarker(item))}
-        
+          {searchData?.jam?.map((item: any) => renderJamMarker(item))}
         </RNMapView>
       </View>
     </TouchableWithoutFeedback>
