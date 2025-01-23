@@ -83,10 +83,13 @@ const LocationMapView = () => {
       justify="flex-start" 
       style={[Layout.screenContent, styles.screenContent]}
     >
-      <BackButton
-        title={i18n.t("Add location")}
-        onPress={() => ScreenManager.toggleScreen("LocationMapView")}
-      />
+      <BoxView direction="column" align="center" style={styles.backButtonContainer}>
+        <BackButton
+          title={i18n.t("Add location")}
+          onPress={() => ScreenManager.toggleScreen("LocationMapView")}
+        />
+      </BoxView>
+
       <TouchableWithoutFeedback>
         <View style={styles.container}>
           <RNMapView
@@ -132,6 +135,9 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1,
+  },
+  backButtonContainer: {
+    marginLeft: Layout.space.base*1.5,
   },
 });
 
