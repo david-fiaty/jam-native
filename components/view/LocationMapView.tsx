@@ -83,7 +83,7 @@ const LocationMapView = () => {
       justify="flex-start" 
       style={[Layout.screenContent, styles.screenContent]}
     >
-      <BoxView direction="column" align="center" style={styles.backButtonContainer}>
+      <BoxView direction="column" align="center" style={Layout.backButtonContainer}>
         <BackButton
           title={i18n.t("Add location")}
           onPress={() => ScreenManager.toggleScreen("LocationMapView")}
@@ -135,9 +135,6 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1,
-  },
-  backButtonContainer: {
-    marginLeft: Layout.space.base*1.5,
   },
 });
 

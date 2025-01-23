@@ -204,5 +204,8 @@ export const Layout = {
     borderBottomWidth: 1,
     borderBottomColor: Colors.primary,
   },
+  backButtonContainer: {
+    marginLeft: space.base*1.5,
+  },
 };
 
