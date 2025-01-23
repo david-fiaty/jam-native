@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
-import { Marker, PROVIDER_GOOGLE, PROVIDER_DEFAULT, Callout } from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE, PROVIDER_DEFAULT, Callout } from "react-native-maps";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
@@ -16,49 +16,51 @@ type Props = BaseProps & {
   idArray?: any;
 };
 
+const mapStyle = [
+  {
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": Colors.white,
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": Colors.secondary,
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": Colors.gray,
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": Colors.gray,
+      }
+    ]
+  }
+];
+
 const JamsMapView = ({ idArray }: Props) => {
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [jamsData, setJamsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const markerImage = require('@/assets/images/logo-55.png');
 
-  const mapStyle = [
-    {
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "color": Colors.white,
-        }
-      ]
-    },
-    {
-      "featureType": "water",
-      "elementType": "geometry.fill",
-      "stylers": [
-        {
-          "color": Colors.secondary,
-        }
-      ]
-    },
-    {
-      "featureType": "road",
-      "elementType": "geometry.fill",
-      "stylers": [
-        {
-          "color": Colors.gray,
-        }
-      ]
-    },
-    {
-      "featureType": "road",
-      "elementType": "geometry.stroke",
-      "stylers": [
-        {
-          "color": Colors.gray,
-        }
-      ]
-    }
-  ];
+  const mapRef = useRef<any>();
+  const markerImage = require('@/assets/images/logo-55.png');
   
   const getInitialRegion = () => {
     let latitude = currentLocation?.coords?.latitude || Config.defaultLocation.latitude;
@@ -148,6 +150,7 @@ const JamsMapView = ({ idArray }: Props) => {
     <TouchableWithoutFeedback>
       <View style={[Layout.screenContent, styles.container]}>
         <RNMapView
+          ref={mapRef}
           style={styles.map}
           provider={PROVIDER_GOOGLE} // Todo - Handle provider IOS
           initialRegion={getInitialRegion()}
