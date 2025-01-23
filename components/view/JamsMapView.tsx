@@ -1,59 +1,18 @@
 import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
-import MapView, { Marker, PROVIDER_GOOGLE, PROVIDER_DEFAULT, Callout } from "react-native-maps";
+import RNMapView , { Marker, PROVIDER_GOOGLE, PROVIDER_DEFAULT, Callout } from "react-native-maps";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
-import { Colors } from "@/constants/Colors";
 import { Config } from "@/constants/Config";
-import RNMapView from "react-native-maps";
 import SpinnerView from "./SpinnerView";
 import DeviceManager from "@/manager/DeviceManager";
-import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
 import SearchManager from "@/manager/SearchManager";
 
 type Props = BaseProps & {
   idArray?: any;
 };
-
-const mapStyle = [
-  {
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": Colors.white,
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "color": Colors.secondary,
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "color": Colors.gray,
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      {
-        "color": Colors.gray,
-      }
-    ]
-  }
-];
 
 const JamsMapView = ({ idArray }: Props) => {
   const [currentLocation, setCurrentLocation] = useState<any>(null);
@@ -134,7 +93,7 @@ const JamsMapView = ({ idArray }: Props) => {
           style={styles.map}
           provider={PROVIDER_GOOGLE} // Todo - Handle provider IOS
           initialRegion={getInitialRegion()}
-          customMapStyle={mapStyle}
+          customMapStyle={Layout.mapStyle}
           showsUserLocation={true}
           showsMyLocationButton={true}
         >

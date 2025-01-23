@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
-import RNMapView, { Marker, MapPressEvent } from "react-native-maps";
+import RNMapView, { Marker, MapPressEvent, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from "react-native-maps";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import { Config } from "@/constants/Config";
@@ -15,7 +15,6 @@ import BoxView from "./BoxView";
 
 const LocationMapView = () => {
   const dispatch = useDispatch();
-  const [regionLocation, setRegionLocation] = useState<any>(null);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeScreen: any = ScreenManager.getActiveScreen();
@@ -92,7 +91,8 @@ const LocationMapView = () => {
         <View style={styles.container}>
           <RNMapView
             style={styles.map}
-            provider="google"
+            provider={PROVIDER_GOOGLE} // Todo - Handle provider IOS
+            customMapStyle={Layout.mapStyle}
             onPress={onMapPress}
             initialRegion={{
               latitude: parseFloat(selectedLocation.latitude),
