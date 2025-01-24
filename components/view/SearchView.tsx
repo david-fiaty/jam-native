@@ -38,7 +38,7 @@ const SearchView = () => {
     if (!activeTab) setActiveTab(StaticData.searchTabs[0].id);
 
     (async () => {
-      setSearchData(await SearchManager.getResult(searchState.value));
+      if (searchState.value) setSearchData(await SearchManager.getResult(searchState.value));
       setIsLoaded(true);
     })();
   }, [isLoaded, activeTab, searchState]);
