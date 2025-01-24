@@ -65,6 +65,7 @@ const JamsScreen = React.memo(() => {
   const windowHeight = DeviceManager.window.height;
   const [currentScreen, setCurrentScreen] = useState<any>(null);
   const [animatedStyle, setAnimatedStyle] = useState<any>(null);
+  const activeScreen = ScreenManager.getActiveScreen();
   const screenState = useSelector((state: any) => state.screen);
   
   // Animation references
@@ -146,6 +147,8 @@ const JamsScreen = React.memo(() => {
     })();
 
   }, [screenState, currentScreen]);
+
+  console.log(activeScreen);
 
   // Render
   return (
