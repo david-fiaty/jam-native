@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import { BaseProps } from '@/constants/Types';
 import BoxView from "../view/BoxView";
@@ -14,11 +13,10 @@ type Props = BaseProps & {
 };
 
 const JamScreen = ({ idArray, title }: Props) => {
-  const router = useRouter();
   const screenTitle = title?.length ? title : i18n.t('Back');
   const activeScreen: any = ScreenManager.getActiveScreen();
-
-  console.log(activeScreen)
+  
+  idArray = idArray?.length ? idArray : activeScreen?.params?.idArray;
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={false} style={[Layout.screenContent, styles.container]}>
