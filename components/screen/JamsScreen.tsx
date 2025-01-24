@@ -131,6 +131,7 @@ const JamsScreen = () => {
   // Display
   useEffect(() => {
     (async () => {
+      
       const activeModal: any = getActiveModal(screenState);
 
       if (activeModal) {
@@ -139,10 +140,8 @@ const JamsScreen = () => {
         animationEffects[activeModal.effect](true);
       } else if (currentScreen) {
         animationEffects[currentScreen.effect](false);
-        setTimeout(() => {
-          setCurrentScreen(null);
-          setAnimatedStyle(animationStyles[currentScreen.effect]);
-        }, Layout.animation.duration);
+        setCurrentScreen(null);
+        setAnimatedStyle(animationStyles[currentScreen.effect]);
       }  
     })();
 
