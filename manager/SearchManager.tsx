@@ -15,7 +15,11 @@ class SearchManager {
   }
 
   async getResult(searchValue: string) {
-    if (!this.result?.length) {
+    
+    if (!searchValue?.length) {
+      this.result = await this.getDefaultData();
+    } 
+    else {
       this.result = await this.loadResult(searchValue);
     }
 
