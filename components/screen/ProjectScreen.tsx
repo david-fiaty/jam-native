@@ -14,7 +14,7 @@ type Props = BaseProps & {
 
 const ProjectScreen = ({ idArray, title }: Props) => {
   const router = useRouter();
-  const screenTitle = title?.length ? title : i18n.t('No title available');
+  const screenTitle = title?.length ? title : i18n.t('Back');
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={false} style={[Layout.screenContent, styles.container]}>
