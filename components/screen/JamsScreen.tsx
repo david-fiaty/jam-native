@@ -32,6 +32,7 @@ import CountriesList from "../list/CountriesList";
 import AddJamToProjectForm from "../form/AddJamToProjectForm";
 import JamScreen from "./JamScreen";
 import ProjectScreen from "./ProjectScreen";
+import ModalView from "../view/ModalView";
 
 const screenComponents: any = {
   JamsList: <JamsList />,
@@ -123,6 +124,9 @@ const JamsScreen = React.memo(() => {
   return (
     <ScreenView>
       <View style={styles.container}>
+        
+<ModalView visible={true}/>
+        
         {/* Main content */}
         {!activeScreen && (
           <BoxView style={Layout.mainContent}>
