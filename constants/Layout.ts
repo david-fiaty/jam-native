@@ -147,6 +147,7 @@ export const Layout = {
     width: '100%',
     height: modal.height,
     backgroundColor: Colors.white,
+    zIndex: 0,
   },
   modalContainer: {
     backgroundColor: Colors.white,
@@ -168,6 +169,7 @@ export const Layout = {
     width: '100%',
     height: modal.height, 
     backgroundColor: Colors.white,
+    zIndex: 100,
   },
   formContainer: {
     width: "100%",
