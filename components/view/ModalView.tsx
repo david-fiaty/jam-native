@@ -4,9 +4,10 @@ import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 type Props = {
   visible: boolean;
+  content: any;
 };
 
-const ModalView = ({ visible }: Props) => {
+const ModalView = ({ visible, content }: Props) => {
   const [modalVisible, setModalVisible] = useState(visible);
   
   return (
@@ -22,7 +23,9 @@ const ModalView = ({ visible }: Props) => {
           }}>
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text style={styles.modalText}>Hello World!</Text>
+              
+              {content}
+
               <Pressable
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => setModalVisible(!modalVisible)}>
