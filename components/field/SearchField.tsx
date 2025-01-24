@@ -46,7 +46,7 @@ const SearchField = () => {
         />
       );
     }
-    else if (activeScreen.name != 'SearchView') {
+    else if (activeScreen?.name != 'SearchView') {
       return (
         <IconView 
           name="search" 
