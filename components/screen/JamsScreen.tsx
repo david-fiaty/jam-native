@@ -124,10 +124,12 @@ const JamsScreen = React.memo(() => {
     <ScreenView>
       <View style={styles.container}>
         {/* Main content */}
-        <BoxView style={Layout.mainContent}>
-          <JamsList />
-        </BoxView>
-      
+        {!activeScreen && (
+          <BoxView style={Layout.mainContent}>
+            <JamsList />
+          </BoxView>
+        )}
+
         {/* Modal content */}
         {activeScreen && (
           <BoxView style={Layout.modalContainer}>
