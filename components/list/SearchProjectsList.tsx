@@ -6,6 +6,7 @@ import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
 import ProjectListItem from "./ListItem/ProjectListItem";
+import TextView from "../view/TextView";
 
 type Props = {
   data?: any,
@@ -44,7 +45,7 @@ const SearchProjectsList = ({ data }: Props) => {
             contentContainerStyle={{ gap: Layout.space.base }}
             columnWrapperStyle={{ gap: Layout.space.base }}
             scrollEnabled={false}
-            emptyMessage={i18n.t("No results found for this search.")}
+            emptyMessage={<TextView>{i18n.t("No results found for this search.")}</TextView>}
             renderItem={(row: any) => (
               <ProjectListItem 
                 row={row}

@@ -4,14 +4,9 @@ import Store from '@/redux/Store';
 
 class SearchManager {
   data?: any;
-  result?: any;
 
   async getDefaultData() {
-    if (!this.data?.length) {
-      this.data = await this.loadData();
-    }
-
-    return this.data;
+    return await this.loadData();
   }
 
   async getResult(searchValue: string) {

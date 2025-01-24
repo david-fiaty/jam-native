@@ -46,7 +46,7 @@ const ListView = ({
       windowSize={5}
       keyExtractor={keyExtractor}
       renderItem={renderItem}
-      ListEmptyComponent={emptyMessage}
+      ListEmptyComponent={() => emptyMessage}
     />
   );
 };
