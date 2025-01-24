@@ -31,10 +31,10 @@ import SelectJamsForm from "../form/SelectJamsForm";
 import CountriesList from "../list/CountriesList";
 import AddJamToProjectForm from "../form/AddJamToProjectForm";
 import JamScreen from "./JamScreen";
+import ProjectScreen from "./ProjectScreen";
 
 const screenComponents: any = {
   JamsList: <JamsList />,
-  JamScreen: <JamScreen />,
   JamsMapView: <JamsMapView />,
   JamForm: <JamForm />,
   AddProjectForm: <AddProjectForm />,
@@ -54,6 +54,8 @@ const screenComponents: any = {
   LikedJamAction: <LikedJamAction />,
   AddedJamAction: <AddedJamAction />,
   MoreJamActionsView: <MoreJamActionsView />,
+  JamScreen: <JamScreen />,
+  ProjectScreen: <ProjectScreen />,
 };
 
 const JamsScreen = () => {
