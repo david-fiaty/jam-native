@@ -6,6 +6,7 @@ import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
 import JamsList from '../list/JamsList';
 import i18n from "@/translation/i18n";
+import ScreenManager from "@/manager/ScreenManager";
 
 type Props = BaseProps & {
   idArray?: any,
@@ -15,13 +16,16 @@ type Props = BaseProps & {
 const JamScreen = ({ idArray, title }: Props) => {
   const router = useRouter();
   const screenTitle = title?.length ? title : i18n.t('Back');
+  const activeScreen: any = ScreenManager.getActiveScreen();
+
+  console.log(activeScreen)
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={false} style={[Layout.screenContent, styles.container]}>
       <BoxView direction="column" align="center" style={Layout.backButtonContainer}>
         <BackButton
           title={screenTitle}
-          onPress={() => router.back()}
+          onPress={() => ScreenManager.toggleScreen('JamScreen')}
         />
       </BoxView>
       <BoxView style={Layout.mainContent}>

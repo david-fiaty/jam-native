@@ -9,6 +9,7 @@ import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
 import BoxView from "../view/BoxView";
 import JamListItem from "./ListItem/JamListItem";
+import ScreenManager from "@/manager/ScreenManager";
 
 type Props = {
   title?: any,
@@ -55,10 +56,16 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
       onListItemPress(row);
     }
     else {
+      ScreenManager.toggleScreen('JamScreen', {
+        idArray: [row.item.id],
+      });
+/*
       router.push({
         pathname: "/jam",
         params: { idArray: [row.item.id], title: row.item.title },
       });
+
+      */
     }
   };
 
