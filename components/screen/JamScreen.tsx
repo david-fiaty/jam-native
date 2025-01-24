@@ -25,7 +25,7 @@ const JamScreen = ({ idArray, title }: Props) => {
         />
       </BoxView>
       <BoxView style={Layout.mainContent}>
-        <JamsList idArray={idArray} showSpinner={true} />
+        <JamsList idArray={idArray} />
       </BoxView>
     </BoxView>
   );
