@@ -9,11 +9,10 @@ import ListItem from "./JamsList/ListItem";
 import SearchManager from "@/manager/SearchManager";
 
 type Props = BaseProps & {
-  idArray?: any,
-  showSpinner?: boolean,
+  idArray?: any;
 };
 
-const JamsList = ({idArray, showSpinner}: Props) => {
+const JamsList = ({ idArray }: Props) => {
   const [jamsData, setJamsData] = useState<any>([]);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
