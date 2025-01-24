@@ -31,6 +31,10 @@ const SearchField = () => {
     dispatch(setSearchValue(''));
   };
 
+  const openSearch = () => {
+    ScreenManager.toggleScreen('SearchView');
+  };
+
   const renderRightIcon = () => {
     if (searchState.value.length > 0) {
       return (
@@ -39,6 +43,17 @@ const SearchField = () => {
           theme="primary" 
           size={13}
           onPress={clearSearch}
+        />
+      );
+    }
+    else if (activeScreen.name != 'SearchView') {
+      return (
+        <IconView 
+          name="search" 
+          theme="secondary" 
+          size={18}
+          padding={0}
+          onPress={openSearch}
         />
       );
     }
@@ -52,14 +67,12 @@ const SearchField = () => {
       theme="clear" 
       size={22}
       padding={0}
-      style={styles.iconContainer}
       onPress={() => {
         dispatch(toggleSearchField(true));
-        ScreenManager.toggleScreen('SearchView');
+        openSearch();
       }}
     />
   );
-
 
   const inputField = (
     <View style={styles.inputContainer}>
@@ -90,11 +103,6 @@ const styles = StyleSheet.create({
   inputContainer: {
     minWidth: 140,
     maxWidth: 188,
-  },
-  iconContainer: {
-    //position: 'absolute',
-    //top: 0,
-    //right: 50,
   },
 });
 
