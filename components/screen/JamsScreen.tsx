@@ -129,44 +129,23 @@ const JamsScreen = React.memo(() => {
     return activeModal;
   };
 
-  // Display
-  useEffect(() => {
-    (async () => {
-      
-      const activeModal: any = getActiveModal(screenState);
-
-      if (activeModal) {
-        setCurrentScreen(activeModal);
-        setAnimatedStyle(animationStyles[activeModal.effect]);
-        animationEffects[activeModal.effect](true);
-      } else if (currentScreen) {
-        animationEffects[currentScreen.effect](false);
-        setCurrentScreen(null);
-        setAnimatedStyle(animationStyles[currentScreen.effect]);
-      }  
-    })();
-
-  }, [screenState, currentScreen]);
-
-  console.log(activeScreen);
-
   // Render
   return (
     <ScreenView>
       <View style={styles.container}>
         {/* Main content */}
-        {!currentScreen && (
+        {!activeScreen && (
           <BoxView style={Layout.mainContent}>
             <JamsList />
           </BoxView>
         )}
 
         {/* Modal content */}
-        {currentScreen && (
+        {activeScreen && (
           <BoxView style={Layout.modalContainer}>
             <Animated.View style={[Layout.animatedView, animatedStyle]}>
               <BoxView style={Layout.modalContent}>
-                {screenComponents?.[currentScreen?.name]}
+                {screenComponents?.[activeScreen.name]}
               </BoxView>
             </Animated.View>
           </BoxView>
