@@ -19,10 +19,12 @@ const ProjectScreen = ({ idArray, title }: Props) => {
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={false} style={[Layout.screenContent, styles.container]}>
-      <BackButton
-        title={screenTitle}
-        onPress={() => ScreenManager.toggleScreen('ProjectScreen')}
-      />
+      <BoxView direction="column" align="center" style={Layout.backButtonContainer}>
+        <BackButton
+          title={screenTitle}
+          onPress={() => ScreenManager.toggleScreen('ProjectScreen')}
+        />
+      </BoxView>
       <BoxView style={Layout.mainContent}>
         <ProjectsList idArray={idArray} />
       </BoxView>
