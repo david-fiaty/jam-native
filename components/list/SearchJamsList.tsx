@@ -3,7 +3,6 @@ import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import ListView from "../view/ListView";
 import i18n from "@/translation/i18n";
-import TextView from "../view/TextView";
 import JamListItem from "./ListItem/JamListItem";
 
 type Props = {
@@ -31,6 +30,7 @@ const SearchJamsList = ({ data }: Props) => {
             contentContainerStyle={{ gap: Layout.space.base }}
             columnWrapperStyle={{ gap: Layout.space.base }}
             scrollEnabled={false}
+            emptyMessage={i18n.t("No results found for this search.")}
             renderItem={(row: any) => (
               <JamListItem 
                 row={row}
@@ -38,12 +38,6 @@ const SearchJamsList = ({ data }: Props) => {
               />
             )}
           />
-        </View>
-      )}
-
-      {!data?.length && (
-        <View style={Layout.borderedListContainer}>
-          <TextView>{i18n.t("No results found for this search.")}</TextView>
         </View>
       )}
     </View>
