@@ -16,13 +16,11 @@ class SearchManager {
 
   async getResult(searchValue: string) {
     if (!searchValue?.length) {
-      this.result = await this.getDefaultData();
+      return await this.getDefaultData();
     } 
     else {
-      this.result = await this.loadResult(searchValue);
+      return await this.loadResult(searchValue);
     }
-
-    return this.result;
   }
 
   // Todo - Why searchValue not used, since passed as argument from onSubmitEditing in SearchField component
