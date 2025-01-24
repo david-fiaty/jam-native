@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { StyleSheet, View, Animated } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { useSelector } from "react-redux";
@@ -58,7 +58,7 @@ const screenComponents: any = {
   ProjectScreen: <ProjectScreen />,
 };
 
-const JamsScreen = () => {
+const JamsScreen = React.memo(() => {
   // Parameters
   const route = useRoute();
   const windowWidth = DeviceManager.window.width;
@@ -176,7 +176,7 @@ const JamsScreen = () => {
       </View>
     </ScreenView>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {
