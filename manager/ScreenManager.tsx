@@ -33,7 +33,7 @@ class ScreenManager {
     let length: number = screens.length;
     let index: number = length > 0 ? length - 1 : 0; 
 
-    return screens[index];
+    return screens?.[index] || null;
   }
   
   toggleScreen(name: string, params?: any) {
