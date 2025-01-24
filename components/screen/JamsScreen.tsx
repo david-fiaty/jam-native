@@ -125,7 +125,7 @@ const JamsScreen = React.memo(() => {
     <ScreenView>
       <View style={styles.container}>
         
-<ModalView visible={true}/>
+<ModalView visible={activeScreen != null} content={screenComponents?.[activeScreen?.name]} />
         
         {/* Main content */}
         {!activeScreen && (
