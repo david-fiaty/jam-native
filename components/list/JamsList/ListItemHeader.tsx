@@ -42,6 +42,7 @@ const ListItemHeader = ({ row }: Props) => {
   const renderActions = () => {
     return (
       <ModalView 
+        visible={false}
         button={
           <IconView
             name="actions"
