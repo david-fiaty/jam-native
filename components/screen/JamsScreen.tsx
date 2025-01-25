@@ -122,6 +122,8 @@ const JamsScreen = React.memo(() => {
     },
   };
 
+  console.log(activeScreen);
+
   // Render
   return (
     <ScreenView>
@@ -129,8 +131,8 @@ const JamsScreen = React.memo(() => {
                 
         <ModalView 
           button={<TextView>{i18n.t('Click here')}</TextView>}
-          visible={activeScreen} 
-          content={screenComponents?.[activeScreen?.name]} 
+          visible={activeScreen !== null} 
+          //content={activeScreen.component} 
         />
                 
         {/* Main content */}
