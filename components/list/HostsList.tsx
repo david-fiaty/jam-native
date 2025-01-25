@@ -1,20 +1,22 @@
 import { useState, useEffect } from 'react';
-import { View, TouchableOpacity } from "react-native";
+import { View } from "react-native";
 import { Layout } from "@/constants/Layout";
+import { BaseProps } from '@/constants/Types';
 import TextView from "../view/TextView";
-import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
-import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
 import ProfileListItem from './ListItem/ProfileListItem';
 
-const HostsList = () => {
+type Props = BaseProps & {
+  entityId?: any;
+};
+
+const HostsList = ({ entityId }: Props) => {
   const [profiles, setProfiles] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const entityId = ScreenManager.getModalEntityId();
 
   useEffect(() => {
     (async () => {
