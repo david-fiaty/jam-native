@@ -31,7 +31,7 @@ const ListItemToolbar = ({ row }: Props) => {
         align="center"
         onPress={() =>
           isLoggedIn
-            ? ScreenManager.toggleScreen("JammersList", { entityId: row?.item?.id })
+            ? ScreenManager.toggleModal("JammersList", { entityId: row?.item?.id })
             : router.push("/login")
         }
       >
@@ -48,7 +48,7 @@ const ListItemToolbar = ({ row }: Props) => {
           theme="tertiary"
           onPress={() =>
             isLoggedIn
-              ? ScreenManager.toggleScreen("SavedJamAction", { entityId: row?.item?.id })
+              ? ScreenManager.toggleModal("SavedJamAction", { entityId: row?.item?.id })
               : router.push("/login")
           }
         />

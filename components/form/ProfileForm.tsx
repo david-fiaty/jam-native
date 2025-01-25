@@ -83,7 +83,7 @@ const ProfileForm = () => {
     >
       <BackButton
         title={i18n.t("Your profile")}
-        onPress={() => ScreenManager.toggleScreen("ProfileForm")}
+        onPress={() => ScreenManager.toggleModal("ProfileForm")}
       />
 
       <View style={Layout.formContainer}>
@@ -129,7 +129,7 @@ const ProfileForm = () => {
               <TextView>{i18n.t('Add industries')}</TextView>
             </>
           }
-          onPressEvent={() => ScreenManager.toggleScreen('SectorsList', {
+          onPressEvent={() => ScreenManager.toggleModal('SectorsList', {
             resource: resource,
             field: 'sectors_ids',
           })}
@@ -147,7 +147,7 @@ const ProfileForm = () => {
         <LocationPickerField 
           latitude={formData?.geolocation_latitude}
           longitude={formData?.geolocation_longitude}
-          onPressEvent={() => ScreenManager.toggleScreen('LocationMapView', {
+          onPressEvent={() => ScreenManager.toggleModal('LocationMapView', {
             resource: resource,
             latitude: {
               key: 'geolocation_latitude',
@@ -227,7 +227,7 @@ const ProfileForm = () => {
           allButton={formData?.profile_projects?.length > 0}
           idArray={formData?.profile_projects}
           onAddButtonPress={() => {
-            ScreenManager.toggleScreen("AddProjectForm", {
+            ScreenManager.toggleModal("AddProjectForm", {
               profileId: profileId,
               profileJams: formData?.profile_jams || [],
             });
@@ -262,7 +262,7 @@ const ProfileForm = () => {
           allButton={formData?.profile_jams?.length > 0}
           addButton={true}
           idArray={formData?.profile_jams} 
-          onAddButtonPress={() => ScreenManager.toggleScreen("JamForm")}
+          onAddButtonPress={() => ScreenManager.toggleModal("JamForm")}
         />   
 
         {formData?.saved_jams?.length > 0 && (

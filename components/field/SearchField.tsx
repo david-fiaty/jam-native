@@ -13,7 +13,7 @@ const SearchField = () => {
   const dispatch = useDispatch();
   const searchState = useSelector((state: any) => state.search);
   const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
-  const activeScreen = ScreenManager.getActiveScreen();
+  const activeModal = ScreenManager.getActiveModal();
   const isExpanded = searchState.expanded === true;
 
   const onSubmitEditing = async () => {
@@ -33,7 +33,7 @@ const SearchField = () => {
   };
 
   const openSearch = () => {
-    ScreenManager.toggleScreen('SearchView');
+    ScreenManager.toggleModal('SearchView');
   };
 
   const renderRightIcon = () => {
@@ -47,7 +47,7 @@ const SearchField = () => {
         />
       );
     }
-    else if (activeScreen?.name != 'SearchView') {
+    else if (activeModal?.name != 'SearchView') {
       return (
         <IconView 
           name="search" 

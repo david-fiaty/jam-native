@@ -15,7 +15,7 @@ import ProfileListItem from './ListItem/ProfileListItem';
 const HostsList = () => {
   const [profiles, setProfiles] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const entityId = ScreenManager.getScreenEntityId();
+  const entityId = ScreenManager.getModalEntityId();
 
   useEffect(() => {
     (async () => {
@@ -33,7 +33,7 @@ const HostsList = () => {
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Jam hosts')}
-        onPress={() => ScreenManager.toggleScreen('HostsList')}
+        onPress={() => ScreenManager.toggleModal('HostsList')}
       />
       <View style={Layout.borderedListContainer}>
         {profiles?.length > 0 &&

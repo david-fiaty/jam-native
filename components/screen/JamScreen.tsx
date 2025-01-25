@@ -14,15 +14,15 @@ type Props = BaseProps & {
 
 const JamScreen = ({ idArray, title }: Props) => {
   const screenTitle = title?.length ? title : i18n.t('Back');
-  const activeScreen: any = ScreenManager.getActiveScreen();
-  idArray = idArray?.length ? idArray : activeScreen?.params?.idArray;
+  const activeModal: any = ScreenManager.getActiveModal();
+  idArray = idArray?.length ? idArray : activeModal?.params?.idArray;
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={false} style={[Layout.screenContent, styles.container]}>
       <BoxView direction="column" align="center" style={Layout.backButtonContainer}>
         <BackButton
           title={screenTitle}
-          onPress={() => ScreenManager.toggleScreen('JamScreen')}
+          onPress={() => ScreenManager.toggleModal('JamScreen')}
         />
       </BoxView>
       <BoxView style={Layout.mainContent}>

@@ -28,10 +28,10 @@ const AddProjectForm = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const activeScreen: any = ScreenManager.getActiveScreen();
+  const activeModal: any = ScreenManager.getActiveModal();
   const formData: any = useSelector((state: any) => state.form[resource]);
-  const profileId: any = activeScreen.params?.profileId; 
-  const profileJams: any = activeScreen.params?.profileJams; 
+  const profileId: any = activeModal.params?.profileId; 
+  const profileJams: any = activeModal.params?.profileJams; 
 
   const updateField = (key: any, value: any) => {
     dispatch(setFormData<any>({ 
@@ -84,7 +84,7 @@ const AddProjectForm = () => {
     >
       <BackButton
         title={i18n.t("Create a project")}
-        onPress={() => ScreenManager.toggleScreen("AddProjectForm")}
+        onPress={() => ScreenManager.toggleModal("AddProjectForm")}
       />
 
       <View style={Layout.formContainer}>
@@ -140,7 +140,7 @@ const AddProjectForm = () => {
               <TextView>{i18n.t('Add countries')}</TextView>
             </>
           }
-          onPressEvent={() => ScreenManager.toggleScreen('CountriesList', {
+          onPressEvent={() => ScreenManager.toggleModal('CountriesList', {
             resource: resource,
             field: 'scope_countries_codes',
           })}
@@ -162,7 +162,7 @@ const AddProjectForm = () => {
               <TextView>{i18n.t('Add industries')}</TextView>
             </>
           }
-          onPressEvent={() => ScreenManager.toggleScreen('SectorsList', {
+          onPressEvent={() => ScreenManager.toggleModal('SectorsList', {
             resource: resource,
             field: 'sectors_ids',
           })}
@@ -179,7 +179,7 @@ const AddProjectForm = () => {
           <BoxView direction="column" align="center" justify="center">
             <AddItemButton
               label={i18n.t("Add Jams")}
-              onPress={() => ScreenManager.toggleScreen("SelectJamsForm", {
+              onPress={() => ScreenManager.toggleModal("SelectJamsForm", {
                 resource: resource,
                 profileId: profileId,
                 profileJams: profileJams,
@@ -194,7 +194,7 @@ const AddProjectForm = () => {
             <ProjectJamsList 
               resource={resource}
               selectedIds={formData?.jams_ids}
-              onAddButtonPress={() => ScreenManager.toggleScreen("SelectJamsForm", {
+              onAddButtonPress={() => ScreenManager.toggleModal("SelectJamsForm", {
                 resource: resource,
                 profileId: formData?.id,
                 profileJams: profileJams,

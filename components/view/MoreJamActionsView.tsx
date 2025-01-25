@@ -14,20 +14,20 @@ import UserManager from '@/manager/UserManager';
 const MoreJamActionsView = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isEntityOwner, setIsEntityOwner] = useState<boolean>(false);
-  const entityId: number = ScreenManager.getScreenEntityId();
+  const entityId: number = ScreenManager.getModalEntityId();
   
   const actions: any = [
     {
       label: i18n.t('Save Jam'),
       icon: 'save',
       canDisplay: () => true,
-      onPress: () => ScreenManager.toggleScreen('SavedJamAction', { entityId: entityId }),
+      onPress: () => ScreenManager.toggleModal('SavedJamAction', { entityId: entityId }),
     },
     {
       label: i18n.t('Like Jam'),
       icon: 'like',
       canDisplay: () => true,
-      onPress: () => ScreenManager.toggleScreen('LikedJamAction', { entityId: entityId }),
+      onPress: () => ScreenManager.toggleModal('LikedJamAction', { entityId: entityId }),
     },
     {
       label: i18n.t('Share Jam'),
@@ -40,14 +40,14 @@ const MoreJamActionsView = () => {
       icon: 'plus',
       //canDisplay: () => true,
       canDisplay: () => isEntityOwner, // Todo - Enable this
-      onPress: () => ScreenManager.toggleScreen('AddJamToProjectForm', { entityId: entityId }),
+      onPress: () => ScreenManager.toggleModal('AddJamToProjectForm', { entityId: entityId }),
     },
     {
       label: i18n.t('Edit Jam'),
       icon: 'edit',
       //canDisplay: () => true,
       canDisplay: () => isEntityOwner, // Todo - Enable this
-      onPress: () => ScreenManager.toggleScreen('JamForm', { entityId: entityId }),
+      onPress: () => ScreenManager.toggleModal('JamForm', { entityId: entityId }),
     },
     {
       label: i18n.t('Report Jam'),
@@ -127,7 +127,7 @@ const MoreJamActionsView = () => {
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={i18n.t('More actions')}
-        onPress={() => ScreenManager.toggleScreen('MoreJamActionsView')}
+        onPress={() => ScreenManager.toggleModal('MoreJamActionsView')}
       />
       
       <View style={Layout.borderedListContainer}>

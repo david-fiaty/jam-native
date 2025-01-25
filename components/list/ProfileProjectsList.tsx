@@ -68,7 +68,7 @@ const ProfileProjectsList = ({
       onListItemPress(row);
     }
     else {
-      ScreenManager.toggleScreen('ProjectScreen', {
+      ScreenManager.toggleModal('ProjectScreen', {
         idArray: [row.item.id],
         title: row?.item?.title
       });

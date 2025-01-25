@@ -55,7 +55,7 @@ const SettingsMenu = () => {
     <View style={Layout.menuContainer}>
       <BackButton
         title={i18n.t('Settings')}
-        onPress={() => ScreenManager.toggleScreen('SettingsMenu')}
+        onPress={() => ScreenManager.toggleModal('SettingsMenu')}
       />
       <ListView 
         data={data} 
