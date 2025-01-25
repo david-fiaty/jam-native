@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, act } from "react";
 import { StyleSheet, View, Animated } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { useDispatch } from 'react-redux';
@@ -33,8 +33,11 @@ import CountriesList from "../list/CountriesList";
 import AddJamToProjectForm from "../form/AddJamToProjectForm";
 import JamScreen from "./JamScreen";
 import ProjectScreen from "./ProjectScreen";
+import ModalView from "../view/ModalView";
+import TextView from "../view/TextView";
+import i18n from "@/translation/i18n";
 
-const screenComponents: any = {
+const modalComponents: any = {
   JamsList: <JamsList />,
   JamsMapView: <JamsMapView />,
   JamForm: <JamForm />,
@@ -63,32 +66,28 @@ const JamsScreen = React.memo(() => {
   // Parameters
   const route = useRoute();
   const dispatch = useDispatch();
-  const [currentScreen, setCurrentScreen] = useState<any>(null);
-  const [animatedStyle, setAnimatedStyle] = useState<any>(null);
   const activeModal = ScreenManager.getActiveModal();
 
-  const loadModalConfig = () => {
-    dispatch(setModalConfig(Modals.map(({component, ...rest}) => ({...rest}))));
-  }
   
+  const getModalContent = (modalName: string) => {
+    return modalComponents[modalName];
+  };
+
   useEffect(() => {
-    loadModalConfig();
-  });
+    dispatch(setModalConfig(Modals));
+  }, [Modals]);
 
   // Render
   return (
     <ScreenView>
       <View style={styles.container}>
                 
-                { /*
         <ModalView 
           button={<TextView>{i18n.t('Click here')}</TextView>}
           visible={!!activeModal} 
-          //content={activeModal.component} 
+          content={getModalContent(activeModal?.name)} 
         />
 
-        */}
-                
         {/* Main content */}
         {!activeModal && (
           <BoxView style={Layout.mainContent}>
@@ -99,16 +98,16 @@ const JamsScreen = React.memo(() => {
         {/* Modal content */}
         {activeModal && (
           <BoxView style={Layout.modalContainer}>
-            <Animated.View style={[Layout.animatedView, animatedStyle]}>
+            <Animated.View style={[Layout.animatedView, {}]}>
               <BoxView style={Layout.modalContent}>
-                {ScreenManager.getModalContent(activeModal.name)}
+                {modalComponents[activeModal.name]}
               </BoxView>
             </Animated.View>
           </BoxView>
         )}
 
         {/* Footer navigation */}
-        {(route.name == "jams" || currentScreen?.footerNavigation) && (
+        {(route.name == "jams" || activeModal?.footerNavigation) && (
           <FooterNavigation />
         )}
       </View>
