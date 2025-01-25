@@ -1,14 +1,10 @@
-import JamsList from "@/components/list/JamsList";
-import JamsMapView from "@/components/view/JamsMapView";
-
-export const Modals: any = [
+export const ModalConfig: any = [
   {
     name: 'JamsList', 
     effect: 'fade',
     headerNavigation: true,
     footerNavigation: true,
     params: {},
-    component: <JamsList />,
   },
   {
     name: 'JamsMapView', 
@@ -16,7 +12,6 @@ export const Modals: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
-    component: <JamsMapView />,
   },
   {
     name: 'JamForm', 

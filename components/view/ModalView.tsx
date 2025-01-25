@@ -1,21 +1,23 @@
-import React, {useState} from 'react';
-import {Alert, Modal, StyleSheet, Text, Pressable, View, TouchableOpacity} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
+import React, { useState } from 'react';
+import { Modal, StyleSheet, Text, Pressable, View, TouchableOpacity } from 'react-native';
+import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 
 type Props = {
-  visible: boolean;
+  visible?: boolean;
+  animation?: string;
   button?: any;
   content?: any;
 };
 
-const ModalView = ({ visible, button, content }: Props) => {
+const ModalView = ({ visible, animation, button, content }: Props) => {
   const [modalVisible, setModalVisible] = useState(visible);
+  const animationType: any = animation || 'slide';
   
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.centeredView}>
         <Modal
-          animationType="slide"
+          animationType={animationType}
           transparent={true}
           visible={modalVisible}
         >

@@ -4,7 +4,6 @@ import { setActiveModal } from '@/redux/slices/ModalSlice';
 import { Config } from '@/constants/Config';
 import Store from '@/redux/Store';
 import DeviceManager from './DeviceManager';
-import { Modals } from '@/constants/Modals';
 
 class ScreenManager {
   messageTimeout?: any;
@@ -42,10 +41,6 @@ class ScreenManager {
       name: name,
       params: params,
     }));
-  }
-
-  getModalContent(modalName: string) {
-    return (Modals.find((o: any) => o.name == modalName)).component;
   }
 
   showMessage(payload: any, duration?: number): void {
