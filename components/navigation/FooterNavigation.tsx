@@ -18,10 +18,16 @@ const FooterNavigation = () => {
   const isLoggedIn = UserManager.isLoggedIn();
 
   return (
-    <BoxView direction="row" align="center" justify="space-around" style={Layout.footer}>
+    <BoxView 
+      direction="row" 
+      align="center" 
+      justify="center" 
+      style={[Layout.footer, styles.container]}
+    >
       <ModalView 
         login={false}
         content={<JamsMapView />}
+        backTitle={i18n.t('Jam locations')}
         trigger={
           <IconView
             name="location"
@@ -70,6 +76,9 @@ const FooterNavigation = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'blue',
+  },
   active: {
     backgroundColor: Colors.secondary,
   },
