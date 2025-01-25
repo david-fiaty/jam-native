@@ -57,6 +57,7 @@ const ModalView = ({ visible, login, animation, trigger, content, backTitle }: P
             title={backTitle}
             onPress={() => toggleModal(false)}
           />
+          
           <BoxView direction="column" style={styles.modalContent}>
             {content}
           </BoxView>
@@ -76,6 +77,7 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     width: '100%',
+    height: Layout.modal.height,
   },
 });
 
