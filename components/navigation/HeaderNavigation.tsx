@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { Layout } from '@/constants/Layout';
@@ -21,11 +21,68 @@ const HeaderNavigation = () => {
   const activeModal = ScreenManager.getActiveModal();
   const isLoggedIn = UserManager.isLoggedIn();
 
-  if (!notificationsCount) {
-    UserManager.getNotifications().then((data: any) => {
-      setNotificationsCount(data.length);
-    });
-  }
+  const renderSearchButton = () => {
+      return (
+        <ModalView 
+          login={false}
+          content={<SearchView />}
+          backTitle={i18n.t('Search')}
+          triggerAlignSelf="flex-end"
+          trigger={    
+            <IconView 
+              name="search" 
+              theme="clear" 
+              size={22}
+              padding={0}
+            />
+          }
+        />
+      );
+  };
+
+  const renderNotificationsButton = () => {
+    return (
+      <ModalView 
+        login={true}
+        content={<NotificationsMenu />}
+        backTitle={i18n.t('Notifications')}
+        triggerAlignSelf="flex-end"
+        trigger={    
+          <IconView 
+            label={notificationsCount > 0 ? ` ${notificationsCount}+` : ` 0 `} 
+            theme="secondary" 
+            size={13}
+            padding={4.5}  
+          />
+        }
+      />
+    );
+  };
+
+  const renderSettingsButton = () => {
+    return (
+      <ModalView 
+        login={true}
+        content={<SettingsMenu />}
+        backTitle={i18n.t('Settings')}
+        triggerAlignSelf="flex-end"
+        trigger={
+          <IconView 
+            name="menu" 
+            theme="secondary"
+            size={14}
+            padding={6} 
+          />
+        }
+      />
+    );
+  };
+
+  useEffect(() => {
+    (async () => {
+      setNotificationsCount(await UserManager.getNotifications());
+    })();
+  });
 
   return (
       <BoxView 
@@ -42,55 +99,12 @@ const HeaderNavigation = () => {
 
         { (route.name == 'jams' || activeModal?.headerNavigation) &&
           <BoxView direction="row" align="center" justify="space-around" style={styles.headerRight}>
-          
-            <ModalView 
-              login={false}
-              content={<SearchView />}
-              backTitle={i18n.t('Search')}
-              triggerAlignSelf="flex-end"
-              trigger={    
-                <IconView 
-                  name="search" 
-                  theme="clear" 
-                  size={22}
-                  padding={0}
-                />
-              }
-            />
 
-            { isLoggedIn &&
-              <ModalView 
-                login={true}
-                content={<NotificationsMenu />}
-                backTitle={i18n.t('Notifications')}
-                triggerAlignSelf="flex-end"
-                trigger={    
-                  <IconView 
-                    label={notificationsCount > 0 ? ` ${notificationsCount}+` : ` 0 `} 
-                    theme="secondary" 
-                    size={13}
-                    padding={4.5}  
-                  />
-                }
-              />
-            }
+            {renderSearchButton()}
+
+            { isLoggedIn && renderNotificationsButton()}
             
-            { isLoggedIn &&
-              <ModalView 
-                login={true}
-                content={<SettingsMenu />}
-                backTitle={i18n.t('Settings')}
-                triggerAlignSelf="flex-end"
-                trigger={
-                  <IconView 
-                    name="menu" 
-                    theme="secondary"
-                    size={14}
-                    padding={6} 
-                  />
-                }
-              />
-            }
+            { isLoggedIn && renderSettingsButton()}
 
           </BoxView>
         }
