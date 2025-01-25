@@ -1,27 +1,4 @@
-import AddedJamAction from "@/components/action/AddedJamAction";
-import LikedJamAction from "@/components/action/LikedJamAction";
-import SavedJamAction from "@/components/action/SavedJamAction";
-import AddJamToProjectForm from "@/components/form/AddJamToProjectForm";
-import AddProjectForm from "@/components/form/AddProjectForm";
-import JamForm from "@/components/form/JamForm";
-import ProfileForm from "@/components/form/ProfileForm";
-import SelectJamsForm from "@/components/form/SelectJamsForm";
-import CollaboratorsList from "@/components/list/CollaboratorsList";
-import CountriesList from "@/components/list/CountriesList";
-import HostsList from "@/components/list/HostsList";
-import JammersList from "@/components/list/JammersList";
-import JamsList from "@/components/list/JamsList";
-import SectorsList from "@/components/list/SectorsList";
-import NotificationsMenu from "@/components/menu/NotificationsMenu";
-import SettingsMenu from "@/components/menu/SettingsMenu";
-import JamsScreen from "@/components/screen/JamsScreen";
-import ProjectScreen from "@/components/screen/ProjectScreen";
-import JamsMapView from "@/components/view/JamsMapView";
-import LocationMapView from "@/components/view/LocationMapView";
-import MoreJamActionsView from "@/components/view/MoreJamActionsView";
-import SearchView from "@/components/view/SearchView";
-
-export const Modals: any = [
+export const ModalConfig: any = [
   {
     name: 'JamsList', 
     effect: 'fade',

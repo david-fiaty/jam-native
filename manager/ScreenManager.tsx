@@ -4,7 +4,6 @@ import { setActiveModal } from '@/redux/slices/ModalSlice';
 import { Config } from '@/constants/Config';
 import Store from '@/redux/Store';
 import DeviceManager from './DeviceManager';
-import { Modals } from '@/constants/Modals';
 
 class ScreenManager {
   messageTimeout?: any;
