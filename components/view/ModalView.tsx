@@ -12,9 +12,10 @@ type Props = {
   animation?: string;
   trigger?: any;
   content?: any;
+  backTitle?: any;
 };
 
-const ModalView = ({ visible, login, animation, trigger, content }: Props) => {
+const ModalView = ({ visible, login, animation, trigger, content, backTitle }: Props) => {
   const router = useRouter();
   const [modalVisible, setModalVisible] = useState(visible || false);
   const animationType: any = animation || 'slide';
@@ -49,7 +50,7 @@ const ModalView = ({ visible, login, animation, trigger, content }: Props) => {
             <View style={styles.modalView}>
               
               <BackButton
-                title={i18n.t('More actions')}
+                title={backTitle}
                 onPress={() => toggleModal(false)}
               />
 
