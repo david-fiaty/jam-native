@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { useRouter } from "expo-router";
-import { Modal, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+import { Modal, StyleSheet, TouchableOpacity } from 'react-native';
+import { Colors } from '@/constants/Colors';
 import UserManager from '@/manager/UserManager';
 import BackButton from '../button/BackButton';
-import i18n from '@/translation/i18n';
 import ScreenView from './ScreenView';
 import BoxView from './BoxView';
-import { Colors } from '@/constants/Colors';
 
 type Props = {
   visible?: boolean;
