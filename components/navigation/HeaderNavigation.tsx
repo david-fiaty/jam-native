@@ -28,73 +28,84 @@ const HeaderNavigation = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
-        <BoxView direction="row" align="center" style={Layout.headerRight}>
+      <BoxView 
+        direction="row" 
+        align="center" 
+        justify="space-between"
+        style={[Layout.header, styles.container]}
+      >
+        <BoxView direction="row" align="center" style={styles.headerLeft}>
           <TouchableOpacity onPress={() => ScreenManager.toggleModal('JamsList')}>
             <LogoView size={Layout.logo.size} />
           </TouchableOpacity>
         </BoxView>
+
         { (route.name == 'jams' || activeModal?.headerNavigation) &&
-          <BoxView direction="row" align="center" justify="space-between">
-            <BoxView direction="row" align="center" style={Layout.headerRight}> 
+          <BoxView direction="row" align="center" justify="space-around" style={styles.headerRight}>
+          
+            <ModalView 
+              login={false}
+              content={<SearchView />}
+              backTitle={i18n.t('Search')}
+              trigger={    
+                <IconView 
+                  name="search" 
+                  theme="clear" 
+                  size={22}
+                  padding={0}
+                />
+              }
+            />
+
+            { isLoggedIn &&
               <ModalView 
-                login={false}
-                content={<SearchView />}
-                backTitle={i18n.t('Search')}
+                login={true}
+                content={<NotificationsMenu />}
+                backTitle={i18n.t('Notifications')}
                 trigger={    
                   <IconView 
-                    name="search" 
-                    theme="clear" 
-                    size={22}
-                    padding={0}
+                    label={notificationsCount > 0 ? ` ${notificationsCount}+` : ` 0 `} 
+                    theme="secondary" 
+                    size={13}
+                    padding={4.5}  
                   />
                 }
               />
+            }
+            
+            { isLoggedIn &&
+              <ModalView 
+                login={true}
+                content={<SettingsMenu />}
+                backTitle={i18n.t('Settings')}
+                trigger={
+                  <IconView 
+                    name="menu" 
+                    theme="secondary"
+                    size={14}
+                    padding={6} 
+                  />
+                }
+              />
+            }
 
-              { isLoggedIn &&
-                <ModalView 
-                  login={true}
-                  content={<NotificationsMenu />}
-                  backTitle={i18n.t('Notifications')}
-                  trigger={    
-                    <IconView 
-                      label={notificationsCount > 0 ? ` ${notificationsCount}+` : ` 0 `} 
-                      theme="secondary" 
-                      size={13}
-                      padding={4.5}  
-                    />
-                  }
-                />
-              }
-              
-              { isLoggedIn &&
-                <ModalView 
-                  login={true}
-                  content={<SettingsMenu />}
-                  backTitle={i18n.t('Settings')}
-                  trigger={
-                    <IconView 
-                      name="menu" 
-                      theme="secondary"
-                      size={14}
-                      padding={6} 
-                    />
-                  }
-                />
-              }
-
-            </BoxView>
           </BoxView>
         }
       </BoxView>
-    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.white,
+    //backgroundColor: Colors.white,
+    backgroundColor: 'green',
+  },
+  headerLeft: {
+    gap: Layout.space.base,
+  },
+  headerRight: {
+    flexDirection: 'row',
+    gap: Layout.space.base*1.1,
   },
 });
 
