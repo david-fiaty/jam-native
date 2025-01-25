@@ -9,7 +9,7 @@ import UserManager from '@/manager/UserManager';
 
 const FooterNavigation = () => {
   const router = useRouter();
-  const activeScreen = ScreenManager.getActiveScreen();
+  const activeModal = ScreenManager.getActiveModal();
   const isLoggedIn = UserManager.isLoggedIn();
 
   return (
@@ -19,26 +19,26 @@ const FooterNavigation = () => {
         radius="round"
         size={14}
         padding={4}
-        theme={activeScreen?.name == 'JamsMapView' ? 'secondary' : 'clear'}
-        onPress={() => ScreenManager.toggleScreen('JamsMapView')}
+        theme={activeModal?.name == 'JamsMapView' ? 'secondary' : 'clear'}
+        onPress={() => ScreenManager.toggleModal('JamsMapView')}
       />
       <IconView
         name="plus"
         radius="round"
         size={14}
         padding={4}
-        theme={activeScreen?.name == 'JamForm' ? 'secondary' : 'clear'}
-        style={activeScreen?.name == 'JamForm' ? styles.active : {}}
-        onPress={() => isLoggedIn ? ScreenManager.toggleScreen('JamForm') : router.push('/login')}
+        theme={activeModal?.name == 'JamForm' ? 'secondary' : 'clear'}
+        style={activeModal?.name == 'JamForm' ? styles.active : {}}
+        onPress={() => isLoggedIn ? ScreenManager.toggleModal('JamForm') : router.push('/login')}
       />
       <IconView
         name="user"
         radius="round"
         size={14}
         padding={4}
-        theme={activeScreen?.name == 'ProfileForm' ? 'secondary' : 'clear'}
-        onPress={() => isLoggedIn ? ScreenManager.toggleScreen('ProfileForm') : router.push('/login')}
-        style={activeScreen?.name == 'ProfileForm' ? styles.active : {}}
+        theme={activeModal?.name == 'ProfileForm' ? 'secondary' : 'clear'}
+        onPress={() => isLoggedIn ? ScreenManager.toggleModal('ProfileForm') : router.push('/login')}
+        style={activeModal?.name == 'ProfileForm' ? styles.active : {}}
       />
     </BoxView>
   );

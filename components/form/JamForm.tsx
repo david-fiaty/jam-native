@@ -36,9 +36,9 @@ const JamForm = () => {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
   const formData = useSelector((state: any) => state.form[resource]);
-  const activeScreen = ScreenManager.getActiveScreen();
+  const activeModal = ScreenManager.getActiveModal();
   const jamCategoriesData = StaticData.jamCategories;
-  const entityId = activeScreen?.params?.entityId || 0;
+  const entityId = activeModal?.params?.entityId || 0;
 
   const sectorsFieldName: string = entityId == 0 ? 'sectors_ids' : 'sectors';
   const collaboratorsFieldName: string = entityId == 0 ? 'collaborators_ids' : 'collaborators';
@@ -122,7 +122,7 @@ const JamForm = () => {
     >
       <BackButton
         title={entityId == 0 ? i18n.t('Create a Jam') : i18n.t('Edit Jam')}
-        onPress={() => ScreenManager.toggleScreen('JamForm')}
+        onPress={() => ScreenManager.toggleModal('JamForm')}
       />
 
       <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
@@ -184,7 +184,7 @@ const JamForm = () => {
       <LocationPickerField 
         latitude={formData?.geolocation_latitude}
         longitude={formData?.geolocation_longitude}
-        onPressEvent={() => ScreenManager.toggleScreen('LocationMapView', {
+        onPressEvent={() => ScreenManager.toggleModal('LocationMapView', {
           resource: resource,
           latitude: {
             key: 'geolocation_latitude',
@@ -215,7 +215,7 @@ const JamForm = () => {
             <TextView>{i18n.t('Add industries')}</TextView>
           </>
         }
-        onPressEvent={() => ScreenManager.toggleScreen('SectorsList', {
+        onPressEvent={() => ScreenManager.toggleModal('SectorsList', {
           resource: resource,
           field: sectorsFieldName,
         })}
@@ -231,7 +231,7 @@ const JamForm = () => {
       <CollaboratorsField
         resource={resource}
         field={collaboratorsFieldName}
-        onPressEvent={() => ScreenManager.toggleScreen('CollaboratorsList', {
+        onPressEvent={() => ScreenManager.toggleModal('CollaboratorsList', {
           resource: resource,
           field: collaboratorsFieldName,
         })}

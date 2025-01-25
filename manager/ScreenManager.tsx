@@ -1,6 +1,6 @@
 import { Layout } from '@/constants/Layout';
 import { setMessage } from '@/redux/slices/MessageSlice';
-import { setActiveScreen } from '@/redux/slices/ScreenSlice';
+import { setActiveModal } from '@/redux/slices/ModalSlice';
 import { Config } from '@/constants/Config';
 import Store from '@/redux/Store';
 import DeviceManager from './DeviceManager';
@@ -17,27 +17,27 @@ class ScreenManager {
     };
   }
 
-  getScreenEntityId(): any {
-    return this.getActiveScreen()?.params?.entityId;
+  getModalEntityId(): any {
+    return this.getActiveModal()?.params?.entityId;
   }
 
-  getScreenFormState() {
-    let reducer: any = this.getActiveScreen().params.reducer;
+  getModalFormState() {
+    let reducer: any = this.getActiveModal().params.reducer;
     let storeState: any = Store.getState(); 
     
     return storeState[reducer];
   }
 
-  getActiveScreen(): any {
-    let screens: any = Store.getState().screen;
+  getActiveModal(): any {
+    let screens: any = Store.getState().modal;
     let length: number = screens.length;
     let index: number = length > 0 ? length - 1 : 0; 
 
     return screens?.[index] || null;
   }
   
-  toggleScreen(name: string, params?: any) {
-    Store.dispatch(setActiveScreen({
+  toggleModal(name: string, params?: any) {
+    Store.dispatch(setActiveModal({
       name: name,
       params: params,
     }));

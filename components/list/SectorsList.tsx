@@ -19,9 +19,9 @@ const SectorsList = () => {
   const dispatch = useDispatch();
   const [sectorsData, setSectorsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const activeScreen: any = ScreenManager.getActiveScreen();
-  const resource: string = activeScreen.params.resource;
-  const fieldName: string = activeScreen.params.field;
+  const activeModal: any = ScreenManager.getActiveModal();
+  const resource: string = activeModal.params.resource;
+  const fieldName: string = activeModal.params.field;
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateSelection = (item: any, subItem: any) => {
@@ -117,7 +117,7 @@ const SectorsList = () => {
     >
       <BackButton
         title={i18n.t('Add industries')}
-        onPress={() => ScreenManager.toggleScreen('SectorsList')}
+        onPress={() => ScreenManager.toggleModal('SectorsList')}
       />
 
       <View style={styles.container}>

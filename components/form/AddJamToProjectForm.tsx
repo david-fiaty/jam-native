@@ -18,8 +18,8 @@ const AddJamToProjectForm = () => {
   const [profileId, setProfileId] = useState<number>(0);
   const [selectedIds, setSelectedIds] = useState<any>([]);
   const [profileData, setProfileData] = useState<any>({});
-  const activeScreen: any = ScreenManager.getActiveScreen();
-  const entityId: number = activeScreen.params.entityId;
+  const activeModal: any = ScreenManager.getActiveModal();
+  const entityId: number = activeModal.params.entityId;
 
   const updateSelection = (row: any) => {
     setSelectedIds([row.item.id]);
@@ -64,7 +64,7 @@ const AddJamToProjectForm = () => {
     >
       <BackButton
         title={i18n.t('Add Jam to project')}
-        onPress={() => ScreenManager.toggleScreen('AddJamToProjectForm')}
+        onPress={() => ScreenManager.toggleModal('AddJamToProjectForm')}
       />
         <TextView>{i18n.t('Select a project from your profile:')}</TextView>
         <DividerView theme="secondary" />

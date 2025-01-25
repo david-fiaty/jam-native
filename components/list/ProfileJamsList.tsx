@@ -56,7 +56,7 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
       onListItemPress(row);
     }
     else {
-      ScreenManager.toggleScreen('JamScreen', {
+      ScreenManager.toggleModal('JamScreen', {
         idArray: [row.item.id],
         title: row?.item?.title
       });

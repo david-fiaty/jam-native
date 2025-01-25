@@ -14,7 +14,7 @@ import ProfileListItem from './ListItem/ProfileListItem';
 const JammersList = () => {
   const [profiles, setProfiles] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const entityId = ScreenManager.getScreenEntityId();
+  const entityId = ScreenManager.getModalEntityId();
 
   useEffect(() => {
     (async () => {
@@ -32,7 +32,7 @@ const JammersList = () => {
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Jammers')}
-        onPress={() => ScreenManager.toggleScreen('JammersList')}
+        onPress={() => ScreenManager.toggleModal('JammersList')}
       />
       
       <View style={Layout.borderedListContainer}>

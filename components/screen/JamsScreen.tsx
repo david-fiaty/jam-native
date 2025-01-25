@@ -68,8 +68,8 @@ const JamsScreen = React.memo(() => {
   const windowHeight = DeviceManager.window.height;
   const [currentScreen, setCurrentScreen] = useState<any>(null);
   const [animatedStyle, setAnimatedStyle] = useState<any>(null);
-  const activeScreen = ScreenManager.getActiveScreen();
-  const screenState = useSelector((state: any) => state.screen);
+  const activeModal = ScreenManager.getActiveModal();
+  const screenState = useSelector((state: any) => state.modal);
   
   // Animation references
   const fadeEffectReference = useRef(new Animated.Value(0)).current;
@@ -122,6 +122,8 @@ const JamsScreen = React.memo(() => {
     },
   };
 
+  console.log(activeModal);
+
   // Render
   return (
     <ScreenView>
@@ -129,23 +131,23 @@ const JamsScreen = React.memo(() => {
                 
         <ModalView 
           button={<TextView>{i18n.t('Click here')}</TextView>}
-          visible={activeScreen} 
-          content={screenComponents?.[activeScreen?.name]} 
+          visible={!!activeModal} 
+          //content={activeModal.component} 
         />
                 
         {/* Main content */}
-        {!activeScreen && (
+        {!activeModal && (
           <BoxView style={Layout.mainContent}>
             <JamsList />
           </BoxView>
         )}
 
         {/* Modal content */}
-        {activeScreen && (
+        {activeModal && (
           <BoxView style={Layout.modalContainer}>
             <Animated.View style={[Layout.animatedView, animatedStyle]}>
               <BoxView style={Layout.modalContent}>
-                {screenComponents?.[activeScreen.name]}
+                {screenComponents?.[activeModal.name]}
               </BoxView>
             </Animated.View>
           </BoxView>
