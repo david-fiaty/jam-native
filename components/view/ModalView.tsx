@@ -82,7 +82,6 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     width: '100%',
-    //height: Layout.modal.height-150,
     flex: 1,
   },
 });
