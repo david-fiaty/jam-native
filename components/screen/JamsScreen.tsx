@@ -67,7 +67,6 @@ const JamsScreen = React.memo(() => {
   const route = useRoute();
   const dispatch = useDispatch();
   const activeModal = ScreenManager.getActiveModal();
-
   
   const getModalContent = (modalName: string) => {
     return modalComponents[modalName];
@@ -81,21 +80,25 @@ const JamsScreen = React.memo(() => {
     <ScreenView>
       <View style={styles.container}>
                 
-        <ModalView 
+        { /*<ModalView 
           button={<TextView>{i18n.t('Click here')}</TextView>}
           visible={!!activeModal} 
           content={getModalContent(activeModal?.name)} 
-        />
+        /> */ }
+
+        <BoxView style={Layout.mainContent}>
+          <JamsList />
+        </BoxView>
 
         {/* Main content */}
-        {!activeModal && (
+        { /*!activeModal && (
           <BoxView style={Layout.mainContent}>
             <JamsList />
           </BoxView>
-        )}
+        ) */}
 
         {/* Modal content */}
-        {activeModal && (
+        { /*activeModal && (
           <BoxView style={Layout.modalContainer}>
             <Animated.View style={[Layout.animatedView, {}]}>
               <BoxView style={Layout.modalContent}>
@@ -103,7 +106,7 @@ const JamsScreen = React.memo(() => {
               </BoxView>
             </Animated.View>
           </BoxView>
-        )}
+        ) */}
 
         {/* Footer navigation */}
         {(route.name == "jams" || activeModal?.footerNavigation) && (
