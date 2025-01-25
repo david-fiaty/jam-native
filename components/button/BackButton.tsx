@@ -5,14 +5,15 @@ import BoxView from '../view/BoxView';
 import { Layout } from '@/constants/Layout';
 
 type Props = {
-  title: string,
-  onPress?: () => void,
+  title: string;
+  containerStyle: any;
+  onPress?: () => void;
 };
 
-const BackButton = ({title, onPress}: Props) => {
+const BackButton = ({title, containerStyle, onPress}: Props) => {
   const ButtonView = () => {
     return (        
-      <BoxView direction="row" align="center" style={styles.container}>
+      <BoxView direction="row" align="center" style={[styles.container, containerStyle]}>
         <IconView 
           name="previous" 
           theme="clear" 
