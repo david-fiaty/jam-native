@@ -5,7 +5,6 @@ import TextView from "../view/TextView";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
-import IconView from "../view/IconView";
 import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
@@ -31,10 +30,6 @@ const HostsList = () => {
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
-      <BackButton
-        title={i18n.t('Jam hosts')}
-        onPress={() => ScreenManager.toggleModal('HostsList')}
-      />
       <View style={Layout.borderedListContainer}>
         {profiles?.length > 0 &&
           <ListView
