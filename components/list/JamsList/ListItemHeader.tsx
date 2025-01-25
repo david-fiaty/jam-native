@@ -10,6 +10,7 @@ import UserManager from "@/manager/UserManager";
 import i18n from "@/translation/i18n";
 import JamStatusButton from "@/components/button/JamStatusButton";
 import ModalView from "@/components/view/ModalView";
+import MoreJamActionsView from "@/components/view/MoreJamActionsView";
 
 type Props = BaseProps & {
   row?: any,
@@ -43,6 +44,7 @@ const ListItemHeader = ({ row }: Props) => {
     return (
       <ModalView 
         visible={false}
+        content={<MoreJamActionsView />}
         button={
           <IconView
             name="actions"
@@ -56,7 +58,6 @@ const ListItemHeader = ({ row }: Props) => {
             */
           />
         }
-        content={<TextView>hellooooo brooo</TextView>}
       />
     );
   };
