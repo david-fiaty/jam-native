@@ -33,6 +33,8 @@ import AddJamToProjectForm from "../form/AddJamToProjectForm";
 import JamScreen from "./JamScreen";
 import ProjectScreen from "./ProjectScreen";
 import ModalView from "../view/ModalView";
+import TextView from "../view/TextView";
+import i18n from "@/translation/i18n";
 
 const screenComponents: any = {
   JamsList: <JamsList />,
@@ -126,6 +128,7 @@ const JamsScreen = React.memo(() => {
       <View style={styles.container}>
                 
         <ModalView 
+          button={<TextView>{i18n.t('Click here')}</TextView>}
           visible={activeScreen} 
           content={screenComponents?.[activeScreen?.name]} 
         />
