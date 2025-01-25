@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: Layout.radius.circle,
     width: Layout.space.base*2.5,
-    //height: Layout.space.base*2.5,
   },
   dot: {
     backgroundColor: Colors.primary,
