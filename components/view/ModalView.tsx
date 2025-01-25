@@ -78,7 +78,7 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
 
 const styles = StyleSheet.create({
   container: {
-
+    
   },
   modalContainer: {
     width: '100%',

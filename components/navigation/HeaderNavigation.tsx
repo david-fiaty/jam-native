@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { Layout } from '@/constants/Layout';
@@ -18,96 +18,107 @@ import SearchView from "../view/SearchView";
 const HeaderNavigation = () => {
   const route = useRoute();
   const [notificationsCount, setNotificationsCount] = useState<number>(0);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeModal = ScreenManager.getActiveModal();
   const isLoggedIn = UserManager.isLoggedIn();
 
-  if (!notificationsCount) {
-    UserManager.getNotifications().then((data: any) => {
-      setNotificationsCount(data.length);
-    });
-  }
+  const renderSearchButton = () => {
+      return (
+        <ModalView 
+          login={false}
+          content={<SearchView />}
+          backTitle={i18n.t('Search')}
+          triggerAlignSelf="flex-end"
+          trigger={    
+            <IconView 
+              name="search" 
+              theme="clear" 
+              size={22}
+              padding={0}
+            />
+          }
+        />
+      );
+  };
+
+  const renderNotificationsButton = () => {
+    return (
+      <ModalView 
+        login={true}
+        content={<NotificationsMenu />}
+        backTitle={i18n.t('Notifications')}
+        triggerAlignSelf="flex-end"
+        trigger={    
+          <IconView 
+            label={notificationsCount > 0 ? ` ${notificationsCount}+` : ` 0 `} 
+            theme="secondary" 
+            size={13}
+            padding={4.5}  
+          />
+        }
+      />
+    );
+  };
+
+  const renderSettingsButton = () => {
+    return (
+      <ModalView 
+        login={true}
+        content={<SettingsMenu />}
+        backTitle={i18n.t('Settings')}
+        triggerAlignSelf="flex-end"
+        trigger={
+          <IconView 
+            name="menu" 
+            theme="secondary"
+            size={14}
+            padding={6} 
+          />
+        }
+      />
+    );
+  };
+
+  useEffect(() => {
+    (async () => {
+      setNotificationsCount(await UserManager.getNotifications());
+      setIsLoaded(true);
+    })();
+  }, [isLoaded]);
 
   return (
-      <BoxView 
-        direction="row" 
-        align="center" 
-        justify="space-between"
-        style={[Layout.header, styles.container]}
-      >
-        <BoxView direction="row" align="center" style={styles.headerLeft}>
-          <TouchableOpacity onPress={() => ScreenManager.toggleModal('JamsList')}>
-            <LogoView size={Layout.logo.size} />
-          </TouchableOpacity>
-        </BoxView>
-
-        { (route.name == 'jams' || activeModal?.headerNavigation) &&
-          <BoxView direction="row" align="center" justify="space-around" style={styles.headerRight}>
-          
-            <ModalView 
-              login={false}
-              content={<SearchView />}
-              backTitle={i18n.t('Search')}
-              triggerAlignSelf="flex-end"
-              trigger={    
-                <IconView 
-                  name="search" 
-                  theme="clear" 
-                  size={22}
-                  padding={0}
-                />
-              }
-            />
-
-            { isLoggedIn &&
-              <ModalView 
-                login={true}
-                content={<NotificationsMenu />}
-                backTitle={i18n.t('Notifications')}
-                triggerAlignSelf="flex-end"
-                trigger={    
-                  <IconView 
-                    label={notificationsCount > 0 ? ` ${notificationsCount}+` : ` 0 `} 
-                    theme="secondary" 
-                    size={13}
-                    padding={4.5}  
-                  />
-                }
-              />
-            }
-            
-            { isLoggedIn &&
-              <ModalView 
-                login={true}
-                content={<SettingsMenu />}
-                backTitle={i18n.t('Settings')}
-                triggerAlignSelf="flex-end"
-                trigger={
-                  <IconView 
-                    name="menu" 
-                    theme="secondary"
-                    size={14}
-                    padding={6} 
-                  />
-                }
-              />
-            }
-
-          </BoxView>
-        }
+    <BoxView 
+      direction="row" 
+      align="center" 
+      justify="space-between"
+      style={[Layout.header, styles.container]}
+    >
+      <BoxView direction="row" align="center" style={styles.headerLeft}>
+        <TouchableOpacity onPress={() => ScreenManager.toggleModal('JamsList')}>
+          <LogoView size={Layout.logo.size} />
+        </TouchableOpacity>
       </BoxView>
+
+      { (route.name == 'jams' || activeModal?.headerNavigation) &&
+        <BoxView direction="row" align="center" justify="space-around" style={styles.headerRight}>
+          {renderSearchButton()}
+          {isLoggedIn && renderNotificationsButton()}
+          {isLoggedIn && renderSettingsButton()}
+        </BoxView>
+      }
+    </BoxView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    //backgroundColor: Colors.white,
-    backgroundColor: 'green',
+    backgroundColor: Colors.white,
   },
   headerLeft: {
     flex: 1,
   },
   headerRight: {
-    flex: 1,
+    maxWidth: 110,
   },
 });
 
