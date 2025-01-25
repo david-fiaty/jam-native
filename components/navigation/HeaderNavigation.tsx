@@ -12,6 +12,7 @@ import UserManager from '@/manager/UserManager';
 import ModalView from "../view/ModalView";
 import i18n from "@/translation/i18n";
 import SettingsMenu from "../menu/SettingsMenu";
+import NotificationsMenu from "../menu/NotificationsMenu";
 
 const HeaderNavigation = () => {
   const route = useRoute();
@@ -40,12 +41,18 @@ const HeaderNavigation = () => {
               <SearchField />
 
               { isLoggedIn &&
-                <IconView 
-                  label={notificationsCount > 0 ? ` ${notificationsCount}+` : ` 0 `} 
-                  theme="secondary" 
-                  size={13}
-                  padding={4.5} 
-                  onPress={() => ScreenManager.toggleModal('NotificationsMenu')} 
+                <ModalView 
+                  login={true}
+                  content={<NotificationsMenu />}
+                  backTitle={i18n.t('Notifications')}
+                  trigger={    
+                    <IconView 
+                      label={notificationsCount > 0 ? ` ${notificationsCount}+` : ` 0 `} 
+                      theme="secondary" 
+                      size={13}
+                      padding={4.5}  
+                    />
+                  }
                 />
               }
               
