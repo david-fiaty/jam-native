@@ -5,8 +5,8 @@ import BoxView from '../view/BoxView';
 import { Layout } from '@/constants/Layout';
 
 type Props = {
-  title: string;
-  containerStyle: any;
+  title?: string;
+  containerStyle?: any;
   onPress?: () => void;
 };
 
