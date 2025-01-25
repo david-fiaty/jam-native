@@ -16,11 +16,11 @@ const ModalSlice = createSlice({
       let activeModalIndex: any = activeModals.findIndex((o: any) => o.name == action.payload.name);
       if (activeModalIndex === -1)  {
         activeModals.push(action.payload);
-        return activeModals;
+        state.active = activeModals; 
       }
       else {
         delete activeModals[activeModalIndex];
-        return activeModals.filter(Boolean);
+        state.active = activeModals.filter(Boolean);
       }
     },
   },
