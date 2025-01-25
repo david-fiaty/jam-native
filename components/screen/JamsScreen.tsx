@@ -1,5 +1,5 @@
-import React, { useState, useEffect, act } from "react";
-import { StyleSheet, View, Animated } from "react-native";
+import React, { useEffect } from "react";
+import { StyleSheet, View } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { useDispatch } from 'react-redux';
 import { setModalConfig } from "@/redux/slices/ModalSlice";
@@ -33,9 +33,6 @@ import CountriesList from "../list/CountriesList";
 import AddJamToProjectForm from "../form/AddJamToProjectForm";
 import JamScreen from "./JamScreen";
 import ProjectScreen from "./ProjectScreen";
-import ModalView from "../view/ModalView";
-import TextView from "../view/TextView";
-import i18n from "@/translation/i18n";
 
 const modalComponents: any = {
   JamsList: <JamsList />,
@@ -63,15 +60,10 @@ const modalComponents: any = {
 };
 
 const JamsScreen = React.memo(() => {
-  // Parameters
   const route = useRoute();
   const dispatch = useDispatch();
   const activeModal = ScreenManager.getActiveModal();
   
-  const getModalContent = (modalName: string) => {
-    return modalComponents[modalName];
-  };
-
   useEffect(() => {
     dispatch(setModalConfig(Modals));
   }, [Modals]);
@@ -79,36 +71,10 @@ const JamsScreen = React.memo(() => {
   return (
     <ScreenView>
       <View style={styles.container}>
-                
-        { /*<ModalView 
-          button={<TextView>{i18n.t('Click here')}</TextView>}
-          visible={!!activeModal} 
-          content={getModalContent(activeModal?.name)} 
-        /> */ }
-
         <BoxView style={Layout.mainContent}>
           <JamsList />
         </BoxView>
-
-        {/* Main content */}
-        { /*!activeModal && (
-          <BoxView style={Layout.mainContent}>
-            <JamsList />
-          </BoxView>
-        ) */}
-
-        {/* Modal content */}
-        { /*activeModal && (
-          <BoxView style={Layout.modalContainer}>
-            <Animated.View style={[Layout.animatedView, {}]}>
-              <BoxView style={Layout.modalContent}>
-                {modalComponents[activeModal.name]}
-              </BoxView>
-            </Animated.View>
-          </BoxView>
-        ) */}
-
-        {/* Footer navigation */}
+        
         {(route.name == "jams" || activeModal?.footerNavigation) && (
           <FooterNavigation />
         )}
