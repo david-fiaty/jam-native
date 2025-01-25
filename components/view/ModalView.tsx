@@ -16,7 +16,7 @@ type Props = {
 
 const ModalView = ({ visible, login, animation, trigger, content }: Props) => {
   const router = useRouter();
-  const [modalVisible, setModalVisible] = useState(visible);
+  const [modalVisible, setModalVisible] = useState(visible || false);
   const animationType: any = animation || 'slide';
   const isLoggedIn: boolean = UserManager.isLoggedIn();
 
