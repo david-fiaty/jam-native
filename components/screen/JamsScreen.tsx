@@ -73,57 +73,6 @@ const JamsScreen = React.memo(() => {
   const activeModal = ScreenManager.getActiveModal();
   const modalState = useSelector((state: any) => state.modal);
   
-  // Animation references
-  const fadeEffectReference = useRef(new Animated.Value(0)).current;
-  const slideEffectReference = useRef(new Animated.Value(windowHeight)).current;
-  const pushEffectReference = useRef(new Animated.Value(windowWidth)).current;
-
-  // Animation effects
-  const animationEffects: any = {
-    slide: (show?: boolean) => {
-      Animated.timing(slideEffectReference, {
-        toValue: show ? 0 : windowHeight,
-        duration: Layout.animation.duration,
-        useNativeDriver: true,
-      }).start();
-    },
-    fade: (show?: boolean) => {
-      Animated.timing(fadeEffectReference, {
-        toValue: show ? 1 : 0,
-        duration: Layout.animation.duration,
-        useNativeDriver: true,
-      }).start();
-    },
-    push: (show?: boolean) => {
-      Animated.timing(pushEffectReference, {
-        toValue: show ? 0 : windowWidth,
-        duration: Layout.animation.duration,
-        useNativeDriver: true,
-      }).start();
-    },
-  };
-
-  // Animation styles
-  const animationStyles: any = {
-    fade: {
-      opacity: fadeEffectReference,
-    },
-    slide: {
-      transform: [
-        {
-          translateY: slideEffectReference,
-        },
-      ],
-    },
-    push: {
-      transform: [
-        {
-          translateX: pushEffectReference,
-        },
-      ],
-    },
-  };
-
   useEffect(() => {
     dispatch(setModalConfig(Modals.map(({component, ...rest}) => ({...rest}))));
   }, [Modals]);
