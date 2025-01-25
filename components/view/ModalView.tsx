@@ -19,8 +19,12 @@ const ModalView = ({ visible, login, animation, trigger, content }: Props) => {
   const isLoggedIn: boolean = UserManager.isLoggedIn();
 
   const toggleModal = (active: boolean) => {
-    if (login && !isLoggedIn) router.push("/login")
-    else setModalVisible(active)    
+    if (login && !isLoggedIn) {
+      router.push("/login");
+    }
+    else {
+      setModalVisible(active);
+    }
   };
   
   return (
