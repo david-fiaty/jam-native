@@ -9,6 +9,9 @@ import LogoView from '../view/LogoView';
 import SearchField from '../field/SearchField';
 import ScreenManager from "@/manager/ScreenManager";
 import UserManager from '@/manager/UserManager';
+import ModalView from "../view/ModalView";
+import i18n from "@/translation/i18n";
+import SettingsMenu from "../menu/SettingsMenu";
 
 const HeaderNavigation = () => {
   const route = useRoute();
@@ -47,12 +50,18 @@ const HeaderNavigation = () => {
               }
               
               { isLoggedIn &&
-                <IconView 
-                  name="menu" 
-                  theme="secondary"
-                  size={14}
-                  padding={6} 
-                  onPress={() => ScreenManager.toggleModal('SettingsMenu')} 
+                <ModalView 
+                  login={true}
+                  content={<SettingsMenu />}
+                  backTitle={i18n.t('Settings')}
+                  trigger={
+                    <IconView 
+                      name="menu" 
+                      theme="secondary"
+                      size={14}
+                      padding={6} 
+                    />
+                  }
                 />
               }
 
