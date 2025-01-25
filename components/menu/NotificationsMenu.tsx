@@ -4,9 +4,7 @@ import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import ListView from '../view/ListView';
 import TextView from '../view/TextView';
-import BackButton from '../button/BackButton';
 import i18n from '@/translation/i18n';
-import ScreenManager from '@/manager/ScreenManager';
 import UserManager from "@/manager/UserManager";
 import SpinnerView from "../view/SpinnerView";
 import { Config } from "@/constants/Config";
@@ -47,10 +45,6 @@ const NotificationsMenu = () => {
 
   return (
     <View style={Layout.menuContainer}>
-      <BackButton
-        title={i18n.t('Notifications')}
-        onPress={() => ScreenManager.toggleModal('NotificationsMenu')}
-      />
       <ListView 
         data={notificationsData} 
         renderItem={(row: any) => renderItem(row)}   
