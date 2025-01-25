@@ -29,11 +29,11 @@ class ScreenManager {
   }
 
   getActiveModal(): any {
-    let screens: any = Store.getState().modal;
-    let length: number = screens.length;
+    let activeModals: any = Store.getState().modal.active;
+    let length: number = activeModals.length;
     let index: number = length > 0 ? length - 1 : 0; 
 
-    return screens?.[index] || null;
+    return activeModals?.[index] || null;
   }
   
   toggleModal(name: string, params?: any) {
