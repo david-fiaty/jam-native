@@ -21,7 +21,7 @@ class ScreenManager {
     return this.getActiveModal()?.params?.entityId;
   }
 
-  getScreenFormState() {
+  getModalFormState() {
     let reducer: any = this.getActiveModal().params.reducer;
     let storeState: any = Store.getState(); 
     
