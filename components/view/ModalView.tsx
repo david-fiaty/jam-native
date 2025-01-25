@@ -38,6 +38,7 @@ const ModalView = ({ visible, login, animation, trigger, content, backTitle }: P
     <ScreenView>  
       <TouchableOpacity
         onPress={() => toggleModal(true)}
+        style={styles.triggerButton}
       >
         {trigger}
       </TouchableOpacity>
@@ -87,6 +88,9 @@ const styles = StyleSheet.create({
   backButton: {
     marginLeft: Layout.space.base*1.5,
   },
+  triggerButton: {
+    alignSelf: 'flex-start',
+  }
 });
 
 export default ModalView;
