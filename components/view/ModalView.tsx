@@ -78,11 +78,12 @@ const styles = StyleSheet.create({
     marginTop: modalPosition.y,
     //backgroundColor: Colors.white,
     backgroundColor: 'red',
-    paddingVertical: Layout.space.base*2,
+    paddingTop: Layout.space.base*2,
   },
   modalContent: {
     width: '100%',
-    height: Layout.modal.height-150,
+    //height: Layout.modal.height-150,
+    flex: 1,
   },
 });
 
