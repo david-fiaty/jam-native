@@ -77,7 +77,6 @@ const FooterNavigation = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'blue',
   },
   active: {
     backgroundColor: Colors.secondary,
