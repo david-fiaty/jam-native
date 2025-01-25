@@ -13,6 +13,7 @@ import ModalView from "../view/ModalView";
 import i18n from "@/translation/i18n";
 import SettingsMenu from "../menu/SettingsMenu";
 import NotificationsMenu from "../menu/NotificationsMenu";
+import SearchView from "../view/SearchView";
 
 const HeaderNavigation = () => {
   const route = useRoute();
@@ -38,7 +39,19 @@ const HeaderNavigation = () => {
           <BoxView direction="row" align="center" justify="space-between">
             <BoxView direction="row" align="center" style={Layout.headerRight}> 
 
-              <SearchField />
+              <ModalView 
+                login={false}
+                content={<SearchView />}
+                backTitle={i18n.t('Search')}
+                trigger={    
+                  <IconView 
+                    name="search" 
+                    theme="clear" 
+                    size={22}
+                    padding={0}
+                  />
+                }
+              />
 
               { isLoggedIn &&
                 <ModalView 
