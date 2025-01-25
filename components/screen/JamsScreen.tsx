@@ -77,7 +77,6 @@ const JamsScreen = React.memo(() => {
     dispatch(setModalConfig(Modals));
   }, [Modals]);
 
-  // Render
   return (
     <ScreenView>
       <View style={styles.container}>
