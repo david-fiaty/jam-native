@@ -9,6 +9,8 @@ import ScreenManager from "@/manager/ScreenManager";
 import UserManager from "@/manager/UserManager";
 import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
+import ModalView from "@/components/view/ModalView";
+import JammersList from "../JammersList";
 
 type Props = BaseProps & {
   row?: any,
@@ -18,31 +20,33 @@ const ListItemToolbar = ({ row }: Props) => {
   const router = useRouter();
   const isLoggedIn = UserManager.isLoggedIn();
 
-  const renderJammers = () => {
+  const renderJammersButton = () => {
     return (
-      <BoxView
-        direction="row"
-        align="center"
-        onPress={() =>
-          isLoggedIn
-            ? ScreenManager.toggleModal("JammersList", { entityId: row?.item?.id })
-            : router.push("/login")
+      <ModalView 
+        login={true}
+        content={<JammersList entityId={row.item.id} />}
+        backTitle={i18n.t('Jammers')}
+        trigger={
+          <BoxView
+            direction="row"
+            align="center"
+          >
+            <IconView 
+              name="users" 
+              theme="tertiary" 
+              size={12}
+              padding={6.5}
+            />
+            <TextView>
+              {parseInt(row?.item?.jammers?.length)} {i18n.t("jammers")}
+            </TextView>
+          </BoxView>
         }
-      >
-        <IconView 
-          name="users" 
-          theme="tertiary" 
-          size={12}
-          padding={6.5}
-        />
-        <TextView>
-          {parseInt(row?.item?.jammers?.length)} {i18n.t("jammers")}
-        </TextView>
-      </BoxView>
+      />
     );
   };
 
-  const renderSave = () => {
+  const renderSaveButton = () => {
     return (
       <IconView
         name="save"
@@ -58,7 +62,7 @@ const ListItemToolbar = ({ row }: Props) => {
     );
   };
 
-  const renderShare = () => {
+  const renderShareButton = () => {
     return (
       <IconView
         name="share"
@@ -81,11 +85,11 @@ const ListItemToolbar = ({ row }: Props) => {
       justify="space-between"
       style={styles.container}
     >
-      {renderJammers()}
+      {renderJammersButton()}
 
       <BoxView direction="row" align="center">
-        {renderSave()}
-        {renderShare()}
+        {renderSaveButton()}
+        {renderShareButton()}
       </BoxView>
     </BoxView>
   );

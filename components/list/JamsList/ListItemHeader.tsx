@@ -38,7 +38,7 @@ const ListItemHeader = ({ row }: Props) => {
     return (
       <ModalView 
         login={true}
-        content={<MoreJamActionsView />}
+        content={<MoreJamActionsView entityId={row.item.id} />}
         backTitle={i18n.t('More actions')}
         trigger={
           <IconView
