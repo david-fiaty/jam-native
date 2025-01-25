@@ -1,38 +1,32 @@
-import { useRouter } from "expo-router";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet } from "react-native";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
 import TextView from "@/components/view/TextView";
 import IconView from "@/components/view/IconView";
-import ScreenManager from "@/manager/ScreenManager";
-import UserManager from "@/manager/UserManager";
 import i18n from "@/translation/i18n";
 import JamStatusButton from "@/components/button/JamStatusButton";
 import ModalView from "@/components/view/ModalView";
 import MoreJamActionsView from "@/components/view/MoreJamActionsView";
+import HostsList from "../HostsList";
 
 type Props = BaseProps & {
   row?: any,
 };
 
 const ListItemHeader = ({ row }: Props) => {
-  const router = useRouter();
-  const isLoggedIn = UserManager.isLoggedIn();
-
   const renderHosts = () => {
     return (
-      <TouchableOpacity
-        onPress={() =>
-          isLoggedIn
-            ? ScreenManager.toggleModal("HostsList", { entityId: row?.item?.id })
-            : router.push("/login")
+      <ModalView 
+        login={true}
+        content={<HostsList />}
+        backTitle={i18n.t('Jam hosts')}
+        trigger={
+          <TextView>
+            @{i18n.t("host")} +{parseInt(row?.item?.collaborators?.length)}
+          </TextView>
         }
-      >
-      <TextView>
-        @{i18n.t("host")} +{parseInt(row?.item?.collaborators?.length)}
-      </TextView>
-      </TouchableOpacity>
+      />
     );
   };
 
@@ -45,6 +39,7 @@ const ListItemHeader = ({ row }: Props) => {
       <ModalView 
         login={true}
         content={<MoreJamActionsView />}
+        backTitle={i18n.t('More actions')}
         trigger={
           <IconView
             name="actions"
