@@ -5,17 +5,31 @@ import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 type Props = {
   visible?: boolean;
   animation?: string;
-  button?: any;
+  trigger?: any;
   content?: any;
+  onTriggerPress?: () => void;
 };
 
-const ModalView = ({ visible, animation, button, content }: Props) => {
+const ModalView = ({ visible, animation, trigger, content, onTriggerPress }: Props) => {
   const [modalVisible, setModalVisible] = useState(visible);
   const animationType: any = animation || 'slide';
+
+  const toggleModal = (active: boolean) => {
+    setModalVisible(active);
+    if (onTriggerPress) onTriggerPress();
+  };
   
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.centeredView}>
+
+        <TouchableOpacity
+          style={[styles.button, styles.buttonOpen]}
+          onPress={() => toggleModal(true)}
+        >
+          {trigger}
+        </TouchableOpacity>
+
         <Modal
           animationType={animationType}
           transparent={true}
@@ -23,23 +37,18 @@ const ModalView = ({ visible, animation, button, content }: Props) => {
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              
               {content}
 
-              <Pressable
+              <TouchableOpacity
                 style={[styles.button, styles.buttonClose]}
-                onPress={() => setModalVisible(!modalVisible)}>
+                onPress={() => toggleModal(!modalVisible)}
+              >
                 <Text style={styles.textStyle}>Hide Modal</Text>
-              </Pressable>
+              </TouchableOpacity>
             </View>
           </View>
         </Modal>
-        <TouchableOpacity
-          style={[styles.button, styles.buttonOpen]}
-          onPress={() => setModalVisible(true)}
-        >
-          {button}
-        </TouchableOpacity>
+
       </SafeAreaView>
     </SafeAreaProvider>
   );
