@@ -43,6 +43,13 @@ class ScreenManager {
     }));
   }
 
+  getModalPosition() {
+    return {
+      x: 0, 
+      y: Layout.header.height + Layout.space.base*2,
+    }
+  }
+
   showMessage(payload: any, duration?: number): void {
     if (this.messageTimeout) clearTimeout(this.messageTimeout);
     
