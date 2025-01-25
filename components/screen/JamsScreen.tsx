@@ -12,52 +12,6 @@ import DeviceManager from "@/manager/DeviceManager";
 import FooterNavigation from "../navigation/FooterNavigation";
 import JamsList from "../list/JamsList";
 import ScreenManager from "@/manager/ScreenManager";
-import SettingsMenu from "@/components/menu/SettingsMenu";
-import NotificationsMenu from "@/components/menu/NotificationsMenu";
-import SearchView from "@/components/view/SearchView";
-import JamsMapView from "@/components/view/JamsMapView";
-import JamForm from "@/components/form/JamForm";
-import AddProjectForm from "../form/AddProjectForm";
-import ProfileForm from "@/components/form/ProfileForm";
-import JammersList from "@/components/list/JammersList";
-import HostsList from "@/components/list/HostsList";
-import SavedJamAction from "@/components/action/SavedJamAction";
-import LikedJamAction from "../action/LikedJamAction";
-import MoreJamActionsView from "@/components/view/MoreJamActionsView";
-import AddedJamAction from "../action/AddedJamAction";
-import CollaboratorsList from "../list/CollaboratorsList";
-import SectorsList from "../list/SectorsList";
-import LocationMapView from "../view/LocationMapView";
-import SelectJamsForm from "../form/SelectJamsForm";
-import CountriesList from "../list/CountriesList";
-import AddJamToProjectForm from "../form/AddJamToProjectForm";
-import JamScreen from "./JamScreen";
-import ProjectScreen from "./ProjectScreen";
-
-const screenComponents: any = {
-  JamsList: <JamsList />,
-  JamsMapView: <JamsMapView />,
-  JamForm: <JamForm />,
-  AddProjectForm: <AddProjectForm />,
-  SelectJamsForm: <SelectJamsForm />,
-  ProfileForm: <ProfileForm />,
-  AddJamToProjectForm: <AddJamToProjectForm />,
-  SettingsMenu: <SettingsMenu />,
-  NotificationsMenu: <NotificationsMenu />,
-  SearchView: <SearchView />,
-  JammersList: <JammersList />,
-  CollaboratorsList: <CollaboratorsList />,
-  SectorsList: <SectorsList />,
-  CountriesList: <CountriesList />,
-  LocationMapView: <LocationMapView />,
-  HostsList: <HostsList />,
-  SavedJamAction: <SavedJamAction />,
-  LikedJamAction: <LikedJamAction />,
-  AddedJamAction: <AddedJamAction />,
-  MoreJamActionsView: <MoreJamActionsView />,
-  JamScreen: <JamScreen />,
-  ProjectScreen: <ProjectScreen />,
-};
 
 const JamsScreen = React.memo(() => {
   // Parameters
