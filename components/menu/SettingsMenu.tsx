@@ -3,9 +3,7 @@ import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import ListView from '../view/ListView';
 import TextView from '../view/TextView';
-import BackButton from '../button/BackButton';
 import i18n from '@/translation/i18n';
-import ScreenManager from '@/manager/ScreenManager';
 import UserManager from '@/manager/UserManager';
 
 const SettingsMenu = () => {
@@ -53,10 +51,6 @@ const SettingsMenu = () => {
 
   return (
     <View style={Layout.menuContainer}>
-      <BackButton
-        title={i18n.t('Settings')}
-        onPress={() => ScreenManager.toggleModal('SettingsMenu')}
-      />
       <ListView 
         data={data} 
         renderItem={(row: any) => renderItem(row)}   
