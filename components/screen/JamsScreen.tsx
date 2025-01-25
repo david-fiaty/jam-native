@@ -131,7 +131,7 @@ const JamsScreen = React.memo(() => {
                 
         <ModalView 
           button={<TextView>{i18n.t('Click here')}</TextView>}
-          visible={activeScreen !== null} 
+          visible={!!activeScreen} 
           //content={activeScreen.component} 
         />
                 
