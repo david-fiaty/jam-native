@@ -6,6 +6,7 @@ import UserManager from '@/manager/UserManager';
 import BackButton from '../button/BackButton';
 import ScreenView from './ScreenView';
 import BoxView from './BoxView';
+import { Layout } from '@/constants/Layout';
 
 type Props = {
   visible?: boolean;
@@ -59,6 +60,9 @@ const ModalView = ({ visible, login, animation, trigger, content, backTitle }: P
 const styles = StyleSheet.create({
   modalView: {
     backgroundColor: Colors.white,
+    width: Layout.modal.width,
+    height: Layout.modal.height,
+    //marginTop: Layout.footer.height,
   },
 });
 
