@@ -34,7 +34,7 @@ const borderWidth: any = {
 const header: any = {
   height: 48,
   width: DeviceManager.window.width,
-  marginTop: StatusBar.currentHeight,
+  paddingTop: space.base,
   paddingHorizontal: space.base*1.5,
   backgroundColor: Colors.white,
 };
