@@ -5,7 +5,6 @@ import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
-import BackButton from "../button/BackButton";
 import LocationPickerField from "../field/LocationPickerField";
 import SectorsField from "../field/SectorsField";
 import DividerView from "../view/DividerView";
@@ -81,11 +80,6 @@ const ProfileForm = () => {
       scroll={true}
       style={Layout.screenContent}
     >
-      <BackButton
-        title={i18n.t("Your profile")}
-        onPress={() => ScreenManager.toggleModal("ProfileForm")}
-      />
-
       <View style={Layout.formContainer}>
         <ProfileImageField 
           value={formData?.profile_picture?.url}

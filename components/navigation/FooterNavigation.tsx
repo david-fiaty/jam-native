@@ -6,6 +6,11 @@ import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 import ScreenManager from '@/manager/ScreenManager';
 import UserManager from '@/manager/UserManager';
+import ModalView from "../view/ModalView";
+import JamsMapView from "../view/JamsMapView";
+import i18n from "@/translation/i18n";
+import JamForm from "../form/JamForm";
+import ProfileForm from "../form/ProfileForm";
 
 const FooterNavigation = () => {
   const router = useRouter();
@@ -14,32 +19,52 @@ const FooterNavigation = () => {
 
   return (
     <BoxView direction="row" align="center" justify="space-around" style={Layout.footer}>
-      <IconView
-        name="location"
-        radius="round"
-        size={14}
-        padding={4}
-        theme={activeModal?.name == 'JamsMapView' ? 'secondary' : 'clear'}
-        onPress={() => ScreenManager.toggleModal('JamsMapView')}
+      <ModalView 
+        login={false}
+        content={<JamsMapView />}
+        trigger={
+          <IconView
+            name="location"
+            radius="round"
+            size={14}
+            padding={4}
+            theme={activeModal?.name == 'JamsMapView' ? 'secondary' : 'clear'}
+          />
+        }
       />
-      <IconView
-        name="plus"
-        radius="round"
-        size={14}
-        padding={4}
-        theme={activeModal?.name == 'JamForm' ? 'secondary' : 'clear'}
-        style={activeModal?.name == 'JamForm' ? styles.active : {}}
-        onPress={() => isLoggedIn ? ScreenManager.toggleModal('JamForm') : router.push('/login')}
+
+      <ModalView 
+        login={true}
+        content={<JamForm />}
+        backTitle={i18n.t('Create a Jam')}
+        trigger={
+          <IconView
+            name="plus"
+            radius="round"
+            size={14}
+            padding={4}
+            theme={activeModal?.name == 'JamForm' ? 'secondary' : 'clear'}
+            style={activeModal?.name == 'JamForm' ? styles.active : {}}
+          />
+        }
       />
-      <IconView
-        name="user"
-        radius="round"
-        size={14}
-        padding={4}
-        theme={activeModal?.name == 'ProfileForm' ? 'secondary' : 'clear'}
-        onPress={() => isLoggedIn ? ScreenManager.toggleModal('ProfileForm') : router.push('/login')}
-        style={activeModal?.name == 'ProfileForm' ? styles.active : {}}
+
+      <ModalView 
+        login={true}
+        content={<ProfileForm />}
+        backTitle={i18n.t('Your profile')}
+        trigger={
+          <IconView
+            name="user"
+            radius="round"
+            size={14}
+            padding={4}
+            theme={activeModal?.name == 'ProfileForm' ? 'secondary' : 'clear'}
+            style={activeModal?.name == 'ProfileForm' ? styles.active : {}}
+          />
+        }
       />
+
     </BoxView>
   );
 };

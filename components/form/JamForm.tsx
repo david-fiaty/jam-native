@@ -6,7 +6,6 @@ import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
-import BackButton from "../button/BackButton";
 import MediaPickerField from "../field/MediaPickerField";
 import LocationPickerField from "../field/LocationPickerField";
 import CountryField from "../field/CountryField";
@@ -120,11 +119,6 @@ const JamForm = () => {
       scroll={true}
       style={Layout.screenContent}
     >
-      <BackButton
-        title={entityId == 0 ? i18n.t('Create a Jam') : i18n.t('Edit Jam')}
-        onPress={() => ScreenManager.toggleModal('JamForm')}
-      />
-
       <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
       <ListView
         data={jamCategoriesData}

@@ -38,7 +38,6 @@ const HeaderNavigation = () => {
         { (route.name == 'jams' || activeModal?.headerNavigation) &&
           <BoxView direction="row" align="center" justify="space-between">
             <BoxView direction="row" align="center" style={Layout.headerRight}> 
-
               <ModalView 
                 login={false}
                 content={<SearchView />}
