@@ -106,6 +106,7 @@ export const Layout = {
   logo: logo,
   footer: footer,
   mapStyle: mapStyle,
+  modal: modal,
   animation: {
     duration: 300,
   },
@@ -148,18 +149,6 @@ export const Layout = {
     height: modal.height,
     backgroundColor: Colors.white,
     zIndex: 0,
-  },
-  modalContainer: {
-    backgroundColor: Colors.white,
-    flexGrow: 1,
-  },
-  modalContent: {
-    top: 0,
-    left: 0,
-    position: 'absolute',
-    width: '100%',
-    height: modal.height,
-    backgroundColor: Colors.white,
   },
   formContainer: {
     width: "100%",
