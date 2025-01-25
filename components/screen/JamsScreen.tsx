@@ -21,7 +21,7 @@ const JamsScreen = React.memo(() => {
   const activeModal = ScreenManager.getActiveModal();
 
   const loadModalConfig = () => {
-    dispatch(setModalConfig(Modals.map(({component, ...rest}) => ({...rest}))));
+    dispatch(setModalConfig(Modals.map(({ component, ...rest }) => ({ ...rest }))));
   }
   
   useEffect(() => {
