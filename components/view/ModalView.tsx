@@ -33,13 +33,15 @@ const ModalView = ({ visible, login, animation, trigger, content, backTitle }: P
   };
   
   return (
-    <ScreenView>
-      <TouchableOpacity
+    <ScreenView>  
+      <BoxView 
+        direction="row" 
+        align="center" 
         onPress={() => toggleModal(true)}
       >
         {trigger}
-      </TouchableOpacity>
-
+      </BoxView>
+    
       <Modal
         animationType={animationType}
         transparent={true}
@@ -55,6 +57,7 @@ const ModalView = ({ visible, login, animation, trigger, content, backTitle }: P
             title={backTitle}
             onPress={() => toggleModal(false)}
           />
+          
           <BoxView direction="column" style={styles.modalContent}>
             {content}
           </BoxView>
@@ -74,6 +77,7 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     width: '100%',
+    height: Layout.modal.height,
   },
 });
 
