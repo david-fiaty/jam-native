@@ -110,13 +110,6 @@ export const Layout = {
   animation: {
     duration: 300,
   },
-  headerLeft: {
-    gap: space.base,
-  },
-  headerRight: {
-    flexDirection: 'row',
-    gap: space.base*1.1,
-  },
   headerLogo: {
     width: 48,
     height: 48,
