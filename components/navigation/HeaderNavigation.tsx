@@ -18,6 +18,7 @@ import SearchView from "../view/SearchView";
 const HeaderNavigation = () => {
   const route = useRoute();
   const [notificationsCount, setNotificationsCount] = useState<number>(0);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeModal = ScreenManager.getActiveModal();
   const isLoggedIn = UserManager.isLoggedIn();
 
@@ -81,34 +82,31 @@ const HeaderNavigation = () => {
   useEffect(() => {
     (async () => {
       setNotificationsCount(await UserManager.getNotifications());
+      setIsLoaded(true);
     })();
-  });
+  }, [isLoaded]);
 
   return (
-      <BoxView 
-        direction="row" 
-        align="center" 
-        justify="space-between"
-        style={[Layout.header, styles.container]}
-      >
-        <BoxView direction="row" align="center" style={styles.headerLeft}>
-          <TouchableOpacity onPress={() => ScreenManager.toggleModal('JamsList')}>
-            <LogoView size={Layout.logo.size} />
-          </TouchableOpacity>
-        </BoxView>
-
-        { (route.name == 'jams' || activeModal?.headerNavigation) &&
-          <BoxView direction="row" align="center" justify="space-around" style={styles.headerRight}>
-
-            {renderSearchButton()}
-
-            { isLoggedIn && renderNotificationsButton()}
-            
-            { isLoggedIn && renderSettingsButton()}
-
-          </BoxView>
-        }
+    <BoxView 
+      direction="row" 
+      align="center" 
+      justify="space-between"
+      style={[Layout.header, styles.container]}
+    >
+      <BoxView direction="row" align="center" style={styles.headerLeft}>
+        <TouchableOpacity onPress={() => ScreenManager.toggleModal('JamsList')}>
+          <LogoView size={Layout.logo.size} />
+        </TouchableOpacity>
       </BoxView>
+
+      { (route.name == 'jams' || activeModal?.headerNavigation) &&
+        <BoxView direction="row" align="center" justify="space-around" style={styles.headerRight}>
+          {renderSearchButton()}
+          {isLoggedIn && renderNotificationsButton()}
+          {isLoggedIn && renderSettingsButton()}
+        </BoxView>
+      }
+    </BoxView>
   );
 };
 
