@@ -5,6 +5,9 @@ import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import UserManager from '@/manager/UserManager';
 import BackButton from '../button/BackButton';
 import i18n from '@/translation/i18n';
+import ScreenView from './ScreenView';
+import BoxView from './BoxView';
+import { Colors } from '@/constants/Colors';
 
 type Props = {
   visible?: boolean;
@@ -31,80 +34,33 @@ const ModalView = ({ visible, login, animation, trigger, content, backTitle }: P
   };
   
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.centeredView}>
+    <ScreenView>
+      <TouchableOpacity
+        onPress={() => toggleModal(true)}
+      >
+        {trigger}
+      </TouchableOpacity>
 
-        <TouchableOpacity
-          style={[styles.button, styles.buttonOpen]}
-          onPress={() => toggleModal(true)}
-        >
-          {trigger}
-        </TouchableOpacity>
-
-        <Modal
-          animationType={animationType}
-          transparent={true}
-          visible={modalVisible}
-        >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              
-              <BackButton
-                title={backTitle}
-                onPress={() => toggleModal(false)}
-              />
-
-              {content}
-
-            </View>
-          </View>
-        </Modal>
-
-      </SafeAreaView>
-    </SafeAreaProvider>
+      <Modal
+        animationType={animationType}
+        transparent={true}
+        visible={modalVisible}
+      >
+        <BoxView direction="column" align="flex-start" justify="flex-start" style={styles.modalView}>
+          <BackButton
+            title={backTitle}
+            onPress={() => toggleModal(false)}
+          />
+          {content}
+        </BoxView>
+      </Modal>
+    </ScreenView>
   );
 };
 
 const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   modalView: {
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  buttonOpen: {
-    backgroundColor: '#F194FF',
-  },
-  buttonClose: {
-    backgroundColor: '#2196F3',
-  },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: 'center',
+    backgroundColor: Colors.white,
   },
 });
 
