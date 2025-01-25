@@ -33,13 +33,15 @@ const ModalView = ({ visible, login, animation, trigger, content, backTitle }: P
   };
   
   return (
-    <ScreenView>
-      <TouchableOpacity
+    <ScreenView>  
+      <BoxView 
+        direction="row" 
+        align="center" 
         onPress={() => toggleModal(true)}
       >
         {trigger}
-      </TouchableOpacity>
-
+      </BoxView>
+    
       <Modal
         animationType={animationType}
         transparent={true}
