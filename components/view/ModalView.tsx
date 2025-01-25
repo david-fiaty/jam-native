@@ -25,8 +25,6 @@ const ModalView = ({ visible, login, animation, trigger, content, backTitle }: P
   const animationType: any = animation || 'slide';
   const isLoggedIn: boolean = UserManager.isLoggedIn();
 
-  console.log(modalPosition);
-
   const toggleModal = (active: boolean) => {
     if (login && !isLoggedIn) {
       router.push("/login");
@@ -60,6 +58,7 @@ const ModalView = ({ visible, login, animation, trigger, content, backTitle }: P
           <BackButton
             title={backTitle}
             onPress={() => toggleModal(false)}
+            containerStyle={styles.backButton}
           />
           
           <BoxView direction="column" style={styles.modalContent}>
@@ -83,6 +82,10 @@ const styles = StyleSheet.create({
   modalContent: {
     width: '100%',
     flex: 1,
+    backgroundColor: 'yellow',
+  },
+  backButton: {
+
   },
 });
 
