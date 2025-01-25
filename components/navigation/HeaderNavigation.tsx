@@ -112,8 +112,7 @@ const HeaderNavigation = () => {
 
 const styles = StyleSheet.create({
   container: {
-    //backgroundColor: Colors.white,
-    backgroundColor: 'green',
+    backgroundColor: Colors.white,
   },
   headerLeft: {
     flex: 1,
