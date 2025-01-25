@@ -128,20 +128,19 @@ const JamsScreen = React.memo(() => {
     dispatch(setModalConfig(Modals.map(({component, ...rest}) => ({...rest}))));
   }, [Modals]);
 
-
-
-  console.log(activeModal);
-
   // Render
   return (
     <ScreenView>
       <View style={styles.container}>
                 
+                { /*
         <ModalView 
           button={<TextView>{i18n.t('Click here')}</TextView>}
           visible={!!activeModal} 
           //content={activeModal.component} 
         />
+
+        */}
                 
         {/* Main content */}
         {!activeModal && (
