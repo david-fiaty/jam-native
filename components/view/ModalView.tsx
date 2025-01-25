@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
-import { Modal, StyleSheet, Text, Pressable, View, TouchableOpacity } from 'react-native';
+import { useRouter } from "expo-router";
+import { Modal, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+import UserManager from '@/manager/UserManager';
 
 type Props = {
   visible?: boolean;
+  login?: boolean;
   animation?: string;
   trigger?: any;
   content?: any;
-  onTriggerPress?: () => void;
 };
 
-const ModalView = ({ visible, animation, trigger, content, onTriggerPress }: Props) => {
+const ModalView = ({ visible, login, animation, trigger, content }: Props) => {
+  const router = useRouter();
   const [modalVisible, setModalVisible] = useState(visible);
   const animationType: any = animation || 'slide';
+  const isLoggedIn: boolean = UserManager.isLoggedIn();
 
   const toggleModal = (active: boolean) => {
-    setModalVisible(active);
-    if (onTriggerPress) onTriggerPress();
+    if (login && !isLoggedIn) router.push("/login")
+    else setModalVisible(active)    
   };
   
   return (
