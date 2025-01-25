@@ -36,6 +36,7 @@ const FooterNavigation = () => {
       <ModalView 
         login={true}
         content={<JamForm />}
+        backTitle={i18n.t('Create a Jam')}
         trigger={
           <IconView
             name="plus"
@@ -51,6 +52,7 @@ const FooterNavigation = () => {
       <ModalView 
         login={true}
         content={<ProfileForm />}
+        backTitle={i18n.t('Your profile')}
         trigger={
           <IconView
             name="user"
