@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useRouter } from "expo-router";
-import { Modal, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+import { Modal, StyleSheet, TouchableOpacity } from 'react-native';
+import { Colors } from '@/constants/Colors';
 import UserManager from '@/manager/UserManager';
 import BackButton from '../button/BackButton';
-import i18n from '@/translation/i18n';
 import ScreenView from './ScreenView';
 import BoxView from './BoxView';
-import { Colors } from '@/constants/Colors';
+import { Layout } from '@/constants/Layout';
 
 type Props = {
   visible?: boolean;
@@ -34,24 +33,34 @@ const ModalView = ({ visible, login, animation, trigger, content, backTitle }: P
   };
   
   return (
-    <ScreenView>
-      <TouchableOpacity
+    <ScreenView>  
+      <BoxView 
+        direction="row" 
+        align="center" 
         onPress={() => toggleModal(true)}
       >
         {trigger}
-      </TouchableOpacity>
-
+      </BoxView>
+    
       <Modal
         animationType={animationType}
         transparent={true}
         visible={modalVisible}
       >
-        <BoxView direction="column" align="flex-start" justify="flex-start" style={styles.modalView}>
+        <BoxView 
+          direction="column" 
+          align="flex-start" 
+          justify="flex-start" 
+          style={styles.modalContainer}
+        >
           <BackButton
             title={backTitle}
             onPress={() => toggleModal(false)}
           />
-          {content}
+          
+          <BoxView direction="column" style={styles.modalContent}>
+            {content}
+          </BoxView>
         </BoxView>
       </Modal>
     </ScreenView>
@@ -59,8 +68,16 @@ const ModalView = ({ visible, login, animation, trigger, content, backTitle }: P
 };
 
 const styles = StyleSheet.create({
-  modalView: {
-    backgroundColor: Colors.white,
+  modalContainer: {
+    width: '100%',
+    height: Layout.modal.height,
+    //marginTop: Layout.footer.height,
+    //backgroundColor: Colors.white,
+    backgroundColor: 'red',
+  },
+  modalContent: {
+    width: '100%',
+    height: Layout.modal.height,
   },
 });
 
