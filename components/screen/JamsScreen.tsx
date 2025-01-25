@@ -1,7 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Animated } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setModalConfig } from "@/redux/slices/ModalSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import { Modals } from "@/constants/Modals";
@@ -32,10 +33,6 @@ import CountriesList from "../list/CountriesList";
 import AddJamToProjectForm from "../form/AddJamToProjectForm";
 import JamScreen from "./JamScreen";
 import ProjectScreen from "./ProjectScreen";
-import ModalView from "../view/ModalView";
-import TextView from "../view/TextView";
-import i18n from "@/translation/i18n";
-import { setModalConfig } from "@/redux/slices/ModalSlice";
 
 const screenComponents: any = {
   JamsList: <JamsList />,
