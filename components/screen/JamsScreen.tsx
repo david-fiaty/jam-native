@@ -126,7 +126,7 @@ const JamsScreen = React.memo(() => {
 
   useEffect(() => {
     dispatch(setModalConfig(Modals.map(({component, ...rest}) => ({...rest}))));
-  }, []);
+  }, [Modals]);
 
 
 
