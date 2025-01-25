@@ -30,14 +30,14 @@ const HeaderNavigation = () => {
   return (
     <View style={styles.container}>
       <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
-        <BoxView direction="row" align="center" style={Layout.headerRight}>
+        <BoxView direction="row" align="center" style={styles.headerRight}>
           <TouchableOpacity onPress={() => ScreenManager.toggleModal('JamsList')}>
             <LogoView size={Layout.logo.size} />
           </TouchableOpacity>
         </BoxView>
         { (route.name == 'jams' || activeModal?.headerNavigation) &&
           <BoxView direction="row" align="center" justify="space-between">
-            <BoxView direction="row" align="center" style={Layout.headerRight}> 
+            <BoxView direction="row" align="center" style={styles.headerRight}> 
               <ModalView 
                 login={false}
                 content={<SearchView />}
@@ -95,6 +95,13 @@ const HeaderNavigation = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.white,
+  },
+  headerLeft: {
+    gap: Layout.space.base,
+  },
+  headerRight: {
+    flexDirection: 'row',
+    gap: Layout.space.base*1.1,
   },
 });
 
