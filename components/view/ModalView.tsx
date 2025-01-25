@@ -1,5 +1,3 @@
-import ModalRegistry from '@/constants/ModalRegistry';
-import ScreenManager from '@/manager/ScreenManager';
 import React, { useState } from 'react';
 import { Modal, StyleSheet, Text, Pressable, View, TouchableOpacity } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
@@ -14,7 +12,6 @@ type Props = {
 const ModalView = ({ visible, animation, button, content }: Props) => {
   const [modalVisible, setModalVisible] = useState(visible);
   const animationType: any = animation || 'slide';
-  const activeModal = ScreenManager.getActiveModal();
   
   return (
     <SafeAreaProvider>
@@ -27,7 +24,7 @@ const ModalView = ({ visible, animation, button, content }: Props) => {
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               
-              {ModalRegistry[activeModal.name]()}
+              {content}
 
               <Pressable
                 style={[styles.button, styles.buttonClose]}
