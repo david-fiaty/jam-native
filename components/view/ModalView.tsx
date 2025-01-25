@@ -71,13 +71,13 @@ const styles = StyleSheet.create({
   modalContainer: {
     width: '100%',
     height: Layout.modal.height,
-    //marginTop: Layout.footer.height,
+    //marginTop: Layout.header.height,
     //backgroundColor: Colors.white,
     backgroundColor: 'red',
   },
   modalContent: {
     width: '100%',
-    height: Layout.modal.height,
+    height: Layout.modal.height-150,
   },
 });
 
