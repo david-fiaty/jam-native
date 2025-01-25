@@ -14,7 +14,6 @@ import JamsList from "../list/JamsList";
 import ScreenManager from "@/manager/ScreenManager";
 
 const JamsScreen = React.memo(() => {
-  // Parameters
   const route = useRoute();
   const dispatch = useDispatch();
   const [currentScreen, setCurrentScreen] = useState<any>(null);
