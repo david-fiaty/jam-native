@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { View, Alert } from "react-native";
 import { Layout } from "@/constants/Layout";
-import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
 import BoxView from '../view/BoxView';
 import SpinnerView from "../view/SpinnerView";
@@ -125,11 +124,6 @@ const MoreJamActionsView = () => {
   
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
-      <BackButton
-        title={i18n.t('More actions')}
-        onPress={() => ScreenManager.toggleModal('MoreJamActionsView')}
-      />
-      
       <View style={Layout.borderedListContainer}>
         { actions.map((item: any) => {
           if (item.canDisplay() === true) {
