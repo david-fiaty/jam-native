@@ -47,6 +47,7 @@ const HeaderNavigation = () => {
               login={false}
               content={<SearchView />}
               backTitle={i18n.t('Search')}
+              triggerAlignSelf="flex-end"
               trigger={    
                 <IconView 
                   name="search" 
@@ -62,6 +63,7 @@ const HeaderNavigation = () => {
                 login={true}
                 content={<NotificationsMenu />}
                 backTitle={i18n.t('Notifications')}
+                triggerAlignSelf="flex-end"
                 trigger={    
                   <IconView 
                     label={notificationsCount > 0 ? ` ${notificationsCount}+` : ` 0 `} 
@@ -78,6 +80,7 @@ const HeaderNavigation = () => {
                 login={true}
                 content={<SettingsMenu />}
                 backTitle={i18n.t('Settings')}
+                triggerAlignSelf="flex-end"
                 trigger={
                   <IconView 
                     name="menu" 
@@ -101,11 +104,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'green',
   },
   headerLeft: {
-    gap: Layout.space.base,
+    flex: 1,
   },
   headerRight: {
-    flexDirection: 'row',
-    gap: Layout.space.base*1.1,
+    flex: 1,
   },
 });
 
