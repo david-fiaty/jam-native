@@ -1,24 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Modals } from '@/constants/Modals';
 
+const getModals = () => {
+  return Modals.map(({component, ...rest}) => ({...rest}));
+};
+
 const ModalSlice = createSlice({
   name: 'modal',
   initialState: [],
   reducers: {
     setActiveModal: (state, action) => {
-      let screens: any = [...state];
-      let index: any = screens.findIndex((o: any) => o.name == action.payload.name);
+      let modals: any = getModals();
+      let modalState: any = [...state];
+      let index: any = modalState.findIndex((o: any) => o.name == action.payload.name);
 
       if (index === -1) {
-        let screen = Modals.find((o: any) => o.name == action.payload.name);
-        screens.push({ ...screen, ...{ params: action.payload.params }});
+        let screen = modals.find((o: any) => o.name == action.payload.name);
+        modalState.push({ ...screen, ...{ params: action.payload.params }});
       }
       else {
-        delete screens[index];
-        screens = screens.filter((o: any) => o);
+        delete modalState[index];
+        modalState = modalState.filter((o: any) => o);
       }
 
-      return screens;
+      return modalState;
     },
   },
 });
