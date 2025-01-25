@@ -66,16 +66,17 @@ const JamsScreen = React.memo(() => {
   // Parameters
   const route = useRoute();
   const dispatch = useDispatch();
-  const windowWidth = DeviceManager.window.width;
-  const windowHeight = DeviceManager.window.height;
   const [currentScreen, setCurrentScreen] = useState<any>(null);
   const [animatedStyle, setAnimatedStyle] = useState<any>(null);
   const activeModal = ScreenManager.getActiveModal();
-  const modalState = useSelector((state: any) => state.modal);
+
+  const loadModalConfig = () => {
+    dispatch(setModalConfig(Modals.map(({component, ...rest}) => ({...rest}))));
+  }
   
   useEffect(() => {
-    dispatch(setModalConfig(Modals.map(({component, ...rest}) => ({...rest}))));
-  }, [Modals]);
+    loadModalConfig();
+  });
 
   // Render
   return (
