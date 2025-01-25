@@ -10,7 +10,6 @@ const ModalSlice = createSlice({
   reducers: {
     setModalConfig: (state, action) => {
       state.config = action.payload;
-      //return action.payload;
     },
     setActiveModal: (state, action) => {
       let activeModals: any = [...state.active || []];
