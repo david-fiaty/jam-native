@@ -21,9 +21,10 @@ const SearchField = () => {
     await SearchManager.loadData(currentSearchValue);
   };
 
-  const onChangeText = (value: string) => {
+  const onChangeText = async (value: string) => {
     setCurrentSearchValue(value);
     dispatch(setSearchValue(value));
+    await SearchManager.loadData(value);
   };
 
   const clearSearch = () => {

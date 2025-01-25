@@ -7,7 +7,6 @@ type Props = BaseProps & {
   data: object;
   ref?: object;
   initialNumToRender?: number;
-  initialScrollIndex?: number;
   numColumns?: number;
   scrollEnabled?: boolean;
   horizontal?: boolean;
@@ -22,7 +21,6 @@ const ListView = ({
   data,
   ref,
   initialNumToRender,
-  initialScrollIndex,
   numColumns,
   scrollEnabled,
   horizontal,
@@ -48,7 +46,7 @@ const ListView = ({
       windowSize={5}
       keyExtractor={keyExtractor}
       renderItem={renderItem}
-      ListEmptyComponent={emptyMessage}
+      ListEmptyComponent={() => emptyMessage}
     />
   );
 };

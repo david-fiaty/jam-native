@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { StyleSheet, View, Animated } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { useSelector } from "react-redux";
@@ -30,6 +30,11 @@ import LocationMapView from "../view/LocationMapView";
 import SelectJamsForm from "../form/SelectJamsForm";
 import CountriesList from "../list/CountriesList";
 import AddJamToProjectForm from "../form/AddJamToProjectForm";
+import JamScreen from "./JamScreen";
+import ProjectScreen from "./ProjectScreen";
+import ModalView from "../view/ModalView";
+import TextView from "../view/TextView";
+import i18n from "@/translation/i18n";
 
 const screenComponents: any = {
   JamsList: <JamsList />,
@@ -52,15 +57,18 @@ const screenComponents: any = {
   LikedJamAction: <LikedJamAction />,
   AddedJamAction: <AddedJamAction />,
   MoreJamActionsView: <MoreJamActionsView />,
+  JamScreen: <JamScreen />,
+  ProjectScreen: <ProjectScreen />,
 };
 
-const JamsScreen = () => {
+const JamsScreen = React.memo(() => {
   // Parameters
   const route = useRoute();
   const windowWidth = DeviceManager.window.width;
   const windowHeight = DeviceManager.window.height;
   const [currentScreen, setCurrentScreen] = useState<any>(null);
   const [animatedStyle, setAnimatedStyle] = useState<any>(null);
+  const activeScreen = ScreenManager.getActiveScreen();
   const screenState = useSelector((state: any) => state.screen);
   
   // Animation references
@@ -114,53 +122,30 @@ const JamsScreen = () => {
     },
   };
 
-  // Get the active modal window
-  const getActiveModal = (state: object) => {
-    let screen = ScreenManager.getActiveScreen();
-    let activeModal = screen
-      ? Modals.find((item) => item.name == screen.name)
-      : null;
-
-    return activeModal;
-  };
-
-  // Display
-  useEffect(() => {
-    (async () => {
-      const activeModal: any = getActiveModal(screenState);
-
-      if (activeModal) {
-        setCurrentScreen(activeModal);
-        setAnimatedStyle(animationStyles[activeModal.effect]);
-        animationEffects[activeModal.effect](true);
-      } else if (currentScreen) {
-        animationEffects[currentScreen.effect](false);
-        setTimeout(() => {
-          setCurrentScreen(null);
-          setAnimatedStyle(animationStyles[currentScreen.effect]);
-        }, Layout.animation.duration);
-      }  
-    })();
-
-  }, [screenState, currentScreen]);
-
   // Render
   return (
     <ScreenView>
       <View style={styles.container}>
+                
+        <ModalView 
+          button={<TextView>{i18n.t('Click here')}</TextView>}
+          visible={activeScreen} 
+          content={screenComponents?.[activeScreen?.name]} 
+        />
+                
         {/* Main content */}
-        {!currentScreen && (
+        {!activeScreen && (
           <BoxView style={Layout.mainContent}>
             <JamsList />
           </BoxView>
         )}
 
         {/* Modal content */}
-        {currentScreen && (
+        {activeScreen && (
           <BoxView style={Layout.modalContainer}>
             <Animated.View style={[Layout.animatedView, animatedStyle]}>
               <BoxView style={Layout.modalContent}>
-                {screenComponents?.[currentScreen?.name]}
+                {screenComponents?.[activeScreen.name]}
               </BoxView>
             </Animated.View>
           </BoxView>
@@ -173,7 +158,7 @@ const JamsScreen = () => {
       </View>
     </ScreenView>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {

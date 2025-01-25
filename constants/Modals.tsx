@@ -139,4 +139,18 @@ export const Modals = [
     footerNavigation: true,
     params: {},
   },
+  {
+    name: 'JamScreen', 
+    effect: 'fade',
+    headerNavigation: true,
+    footerNavigation: true,
+    params: {},
+  },
+  {
+    name: 'ProjectScreen', 
+    effect: 'fade',
+    headerNavigation: true,
+    footerNavigation: true,
+    params: {},
+  },
 ];

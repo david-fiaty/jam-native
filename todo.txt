@@ -118,6 +118,38 @@ const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude
   });
 
 
+  useEffect(() => {
+    (async () => {
+      
+      const activeModal: any = getActiveModal(screenState);
+
+      if (activeModal) {
+        setCurrentScreen(activeModal);
+        setAnimatedStyle(animationStyles[activeModal.effect]);
+        animationEffects[activeModal.effect](true);
+      } else if (currentScreen) {
+        animationEffects[currentScreen.effect](false);
+        setCurrentScreen(null);
+        setAnimatedStyle(animationStyles[currentScreen.effect]);
+      }  
+    })();
+
+  }, [screenState, currentScreen]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const getSelectedMedia = () => {
     let mediaList: any = [...selectedMedia || []];
 
