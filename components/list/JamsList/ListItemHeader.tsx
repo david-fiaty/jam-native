@@ -44,6 +44,7 @@ const ListItemHeader = ({ row }: Props) => {
     return (
       <ModalView 
         visible={false}
+        login={true}
         content={<MoreJamActionsView />}
         trigger={
           <IconView
