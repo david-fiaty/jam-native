@@ -19,7 +19,7 @@ const ListItemHeader = ({ row }: Props) => {
     return (
       <ModalView 
         login={true}
-        content={<HostsList />}
+        content={<HostsList entityId={row.item.id} />}
         backTitle={i18n.t('Jam hosts')}
         trigger={
           <TextView>
