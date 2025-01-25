@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from "expo-router";
-import { Modal, StyleSheet } from 'react-native';
+import { Modal, StyleSheet, TouchableOpacity } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import UserManager from '@/manager/UserManager';
 import BackButton from '../button/BackButton';
@@ -36,13 +36,11 @@ const ModalView = ({ visible, login, animation, trigger, content, backTitle }: P
   
   return (
     <ScreenView>  
-      <BoxView 
-        direction="row" 
-        align="center" 
+      <TouchableOpacity
         onPress={() => toggleModal(true)}
       >
         {trigger}
-      </BoxView>
+      </TouchableOpacity>
     
       <Modal
         animationType={animationType}
