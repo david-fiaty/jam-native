@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useRouter } from "expo-router";
-import { Modal, StyleSheet, TouchableOpacity } from 'react-native';
-import { Colors } from '@/constants/Colors';
+import { Modal, StyleSheet } from 'react-native';
+import { Layout } from '@/constants/Layout';
 import UserManager from '@/manager/UserManager';
 import BackButton from '../button/BackButton';
 import ScreenView from './ScreenView';
 import BoxView from './BoxView';
-import { Layout } from '@/constants/Layout';
+import ScreenManager from '@/manager/ScreenManager';
 
 type Props = {
   visible?: boolean;
@@ -16,6 +16,8 @@ type Props = {
   content?: any;
   backTitle?: any;
 };
+
+const modalPosition: any = ScreenManager.getModalPosition();
 
 const ModalView = ({ visible, login, animation, trigger, content, backTitle }: Props) => {
   const router = useRouter();
@@ -56,6 +58,7 @@ const ModalView = ({ visible, login, animation, trigger, content, backTitle }: P
           <BackButton
             title={backTitle}
             onPress={() => toggleModal(false)}
+            containerStyle={styles.backButton}
           />
           
           <BoxView direction="column" style={styles.modalContent}>
@@ -71,13 +74,18 @@ const styles = StyleSheet.create({
   modalContainer: {
     width: '100%',
     height: Layout.modal.height,
-    //marginTop: Layout.footer.height,
+    marginTop: modalPosition.y,
     //backgroundColor: Colors.white,
     backgroundColor: 'red',
+    paddingTop: Layout.space.base*2,
   },
   modalContent: {
     width: '100%',
-    height: Layout.modal.height,
+    flex: 1,
+    backgroundColor: 'yellow',
+  },
+  backButton: {
+    marginLeft: Layout.space.base*1.5,
   },
 });
 
