@@ -161,16 +161,6 @@ export const Layout = {
     height: modal.height,
     backgroundColor: Colors.white,
   },
-  animatedView: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: footer.height,
-    width: '100%',
-    height: modal.height, 
-    backgroundColor: Colors.white,
-    zIndex: 100,
-  },
   formContainer: {
     width: "100%",
     gap: space.base,
