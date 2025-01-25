@@ -1,7 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Animated } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setModalConfig } from "@/redux/slices/ModalSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import { Modals } from "@/constants/Modals";
@@ -32,10 +33,6 @@ import CountriesList from "../list/CountriesList";
 import AddJamToProjectForm from "../form/AddJamToProjectForm";
 import JamScreen from "./JamScreen";
 import ProjectScreen from "./ProjectScreen";
-import ModalView from "../view/ModalView";
-import TextView from "../view/TextView";
-import i18n from "@/translation/i18n";
-import { setModalConfig } from "@/redux/slices/ModalSlice";
 
 const screenComponents: any = {
   JamsList: <JamsList />,
@@ -66,67 +63,17 @@ const JamsScreen = React.memo(() => {
   // Parameters
   const route = useRoute();
   const dispatch = useDispatch();
-  const windowWidth = DeviceManager.window.width;
-  const windowHeight = DeviceManager.window.height;
   const [currentScreen, setCurrentScreen] = useState<any>(null);
   const [animatedStyle, setAnimatedStyle] = useState<any>(null);
   const activeModal = ScreenManager.getActiveModal();
-  const modalState = useSelector((state: any) => state.modal);
-  
-  // Animation references
-  const fadeEffectReference = useRef(new Animated.Value(0)).current;
-  const slideEffectReference = useRef(new Animated.Value(windowHeight)).current;
-  const pushEffectReference = useRef(new Animated.Value(windowWidth)).current;
 
-  // Animation effects
-  const animationEffects: any = {
-    slide: (show?: boolean) => {
-      Animated.timing(slideEffectReference, {
-        toValue: show ? 0 : windowHeight,
-        duration: Layout.animation.duration,
-        useNativeDriver: true,
-      }).start();
-    },
-    fade: (show?: boolean) => {
-      Animated.timing(fadeEffectReference, {
-        toValue: show ? 1 : 0,
-        duration: Layout.animation.duration,
-        useNativeDriver: true,
-      }).start();
-    },
-    push: (show?: boolean) => {
-      Animated.timing(pushEffectReference, {
-        toValue: show ? 0 : windowWidth,
-        duration: Layout.animation.duration,
-        useNativeDriver: true,
-      }).start();
-    },
-  };
-
-  // Animation styles
-  const animationStyles: any = {
-    fade: {
-      opacity: fadeEffectReference,
-    },
-    slide: {
-      transform: [
-        {
-          translateY: slideEffectReference,
-        },
-      ],
-    },
-    push: {
-      transform: [
-        {
-          translateX: pushEffectReference,
-        },
-      ],
-    },
-  };
-
-  useEffect(() => {
+  const loadModalConfig = () => {
     dispatch(setModalConfig(Modals.map(({component, ...rest}) => ({...rest}))));
-  }, [Modals]);
+  }
+  
+  useEffect(() => {
+    loadModalConfig();
+  });
 
   // Render
   return (
@@ -154,7 +101,7 @@ const JamsScreen = React.memo(() => {
           <BoxView style={Layout.modalContainer}>
             <Animated.View style={[Layout.animatedView, animatedStyle]}>
               <BoxView style={Layout.modalContent}>
-                {screenComponents?.[activeModal.name]}
+                {ScreenManager.getModalContent(activeModal.name)}
               </BoxView>
             </Animated.View>
           </BoxView>
