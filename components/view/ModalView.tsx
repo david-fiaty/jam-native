@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     marginTop: modalPosition.y,
     //backgroundColor: Colors.white,
     backgroundColor: 'red',
+    paddingVertical: Layout.space.base*2,
   },
   modalContent: {
     width: '100%',
