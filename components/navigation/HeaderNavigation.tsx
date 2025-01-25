@@ -42,51 +42,54 @@ const HeaderNavigation = () => {
 
         { (route.name == 'jams' || activeModal?.headerNavigation) &&
           <BoxView direction="row" align="center" justify="space-around" style={styles.headerRight}>
-            <ModalView 
-              login={false}
-              content={<SearchView />}
-              backTitle={i18n.t('Search')}
-              trigger={    
-                <IconView 
-                  name="search" 
-                  theme="clear" 
-                  size={22}
-                  padding={0}
-                />
-              }
-            />
-
-            { isLoggedIn &&
+            <BoxView direction="row" align="center" > 
               <ModalView 
-                login={true}
-                content={<NotificationsMenu />}
-                backTitle={i18n.t('Notifications')}
+                login={false}
+                content={<SearchView />}
+                backTitle={i18n.t('Search')}
                 trigger={    
                   <IconView 
-                    label={notificationsCount > 0 ? ` ${notificationsCount}+` : ` 0 `} 
-                    theme="secondary" 
-                    size={13}
-                    padding={4.5}  
+                    name="search" 
+                    theme="clear" 
+                    size={22}
+                    padding={0}
                   />
                 }
               />
-            }
-            
-            { isLoggedIn &&
-              <ModalView 
-                login={true}
-                content={<SettingsMenu />}
-                backTitle={i18n.t('Settings')}
-                trigger={
-                  <IconView 
-                    name="menu" 
-                    theme="secondary"
-                    size={14}
-                    padding={6} 
-                  />
-                }
-              />
-            }
+
+              { isLoggedIn &&
+                <ModalView 
+                  login={true}
+                  content={<NotificationsMenu />}
+                  backTitle={i18n.t('Notifications')}
+                  trigger={    
+                    <IconView 
+                      label={notificationsCount > 0 ? ` ${notificationsCount}+` : ` 0 `} 
+                      theme="secondary" 
+                      size={13}
+                      padding={4.5}  
+                    />
+                  }
+                />
+              }
+              
+              { isLoggedIn &&
+                <ModalView 
+                  login={true}
+                  content={<SettingsMenu />}
+                  backTitle={i18n.t('Settings')}
+                  trigger={
+                    <IconView 
+                      name="menu" 
+                      theme="secondary"
+                      size={14}
+                      padding={6} 
+                    />
+                  }
+                />
+              }
+
+            </BoxView>
           </BoxView>
         }
       </BoxView>
