@@ -55,7 +55,7 @@ const SearchView = () => {
     >
       <BackButton
         title={i18n.t('Back')}
-        onPress={() => ScreenManager.toggleScreen('SearchView')}
+        onPress={() => ScreenManager.toggleModal('SearchView')}
       />
 
       {/* Search filters */}

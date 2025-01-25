@@ -13,7 +13,7 @@ import UserManager from '@/manager/UserManager';
 const HeaderNavigation = () => {
   const route = useRoute();
   const [notificationsCount, setNotificationsCount] = useState<number>(0);
-  const activeScreen = ScreenManager.getActiveScreen();
+  const activeModal = ScreenManager.getActiveModal();
   const isLoggedIn = UserManager.isLoggedIn();
 
   if (!notificationsCount) {
@@ -26,11 +26,11 @@ const HeaderNavigation = () => {
     <View style={styles.container}>
       <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
         <BoxView direction="row" align="center" style={Layout.headerRight}>
-          <TouchableOpacity onPress={() => ScreenManager.toggleScreen('JamsList')}>
+          <TouchableOpacity onPress={() => ScreenManager.toggleModal('JamsList')}>
             <LogoView size={Layout.logo.size} />
           </TouchableOpacity>
         </BoxView>
-        { (route.name == 'jams' || activeScreen?.headerNavigation) &&
+        { (route.name == 'jams' || activeModal?.headerNavigation) &&
           <BoxView direction="row" align="center" justify="space-between">
             <BoxView direction="row" align="center" style={Layout.headerRight}> 
 
@@ -42,7 +42,7 @@ const HeaderNavigation = () => {
                   theme="secondary" 
                   size={13}
                   padding={4.5} 
-                  onPress={() => ScreenManager.toggleScreen('NotificationsMenu')} 
+                  onPress={() => ScreenManager.toggleModal('NotificationsMenu')} 
                 />
               }
               
@@ -52,7 +52,7 @@ const HeaderNavigation = () => {
                   theme="secondary"
                   size={14}
                   padding={6} 
-                  onPress={() => ScreenManager.toggleScreen('SettingsMenu')} 
+                  onPress={() => ScreenManager.toggleModal('SettingsMenu')} 
                 />
               }
 

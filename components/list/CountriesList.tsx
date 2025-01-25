@@ -19,9 +19,9 @@ const CountriesList = () => {
   const dispatch = useDispatch();
   const [countriesData, setCountriesData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const activeScreen: any = ScreenManager.getActiveScreen();
-  const resource: string = activeScreen.params.resource;
-  const fieldName: string = activeScreen.params.field;
+  const activeModal: any = ScreenManager.getActiveModal();
+  const resource: string = activeModal.params.resource;
+  const fieldName: string = activeModal.params.field;
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateSelection = (item: any) => {
@@ -75,7 +75,7 @@ const CountriesList = () => {
     >
       <BackButton
         title={i18n.t('Add countries')}
-        onPress={() => ScreenManager.toggleScreen('CountriesList')}
+        onPress={() => ScreenManager.toggleModal('CountriesList')}
       />
 
       <View style={styles.container}>

@@ -14,7 +14,7 @@ const LikedJamAction = () => {
   const [entity, setEntity] = useState<any>(null);
   const [isSaved, setIsSaved] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const entityId = ScreenManager.getScreenEntityId();
+  const entityId = ScreenManager.getModalEntityId();
 
   const actions: any = [
     {
@@ -25,7 +25,7 @@ const LikedJamAction = () => {
     {
       label: i18n.t('View my Jams'),
       icon: 'plus',
-      onPress: () => ScreenManager.toggleScreen("ProfileForm"),
+      onPress: () => ScreenManager.toggleModal("ProfileForm"),
     },
   ];
 
@@ -66,7 +66,7 @@ const LikedJamAction = () => {
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={getTitle()}
-        onPress={() => ScreenManager.toggleScreen('LikedJamAction')}
+        onPress={() => ScreenManager.toggleModal('LikedJamAction')}
       />
       
       <View style={Layout.borderedListContainer}>

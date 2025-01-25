@@ -163,7 +163,7 @@ const SignupScreen = () => {
 
 { /*
         <SectorsField
-          onPressEvent={() => ScreenManager.toggleScreen("SectorsList", {
+          onPressEvent={() => ScreenManager.toggleModal("SectorsList", {
             reducer: 'signupForm',
           })}
         />
