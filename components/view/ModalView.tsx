@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useRouter } from "expo-router";
-import { Modal, StyleSheet, TouchableOpacity } from 'react-native';
-import { Colors } from '@/constants/Colors';
+import { Modal, StyleSheet } from 'react-native';
+import { Layout } from '@/constants/Layout';
 import UserManager from '@/manager/UserManager';
 import BackButton from '../button/BackButton';
 import ScreenView from './ScreenView';
 import BoxView from './BoxView';
-import { Layout } from '@/constants/Layout';
+import ScreenManager from '@/manager/ScreenManager';
 
 type Props = {
   visible?: boolean;
@@ -16,6 +16,8 @@ type Props = {
   content?: any;
   backTitle?: any;
 };
+
+const modalPosition: any = ScreenManager.getModalPosition();
 
 const ModalView = ({ visible, login, animation, trigger, content, backTitle }: Props) => {
   const router = useRouter();
@@ -71,7 +73,7 @@ const styles = StyleSheet.create({
   modalContainer: {
     width: '100%',
     height: Layout.modal.height,
-    //marginTop: Layout.header.height,
+    marginTop: modalPosition.height,
     //backgroundColor: Colors.white,
     backgroundColor: 'red',
   },
