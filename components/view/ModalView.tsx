@@ -1,21 +1,43 @@
 import React, { useState } from 'react';
-import { Modal, StyleSheet, Text, Pressable, View, TouchableOpacity } from 'react-native';
+import { useRouter } from "expo-router";
+import { Modal, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+import UserManager from '@/manager/UserManager';
 
 type Props = {
   visible?: boolean;
+  login?: boolean;
   animation?: string;
-  button?: any;
+  trigger?: any;
   content?: any;
 };
 
-const ModalView = ({ visible, animation, button, content }: Props) => {
+const ModalView = ({ visible, login, animation, trigger, content }: Props) => {
+  const router = useRouter();
   const [modalVisible, setModalVisible] = useState(visible);
   const animationType: any = animation || 'slide';
+  const isLoggedIn: boolean = UserManager.isLoggedIn();
+
+  const toggleModal = (active: boolean) => {
+    if (login && !isLoggedIn) {
+      router.push("/login");
+    }
+    else {
+      setModalVisible(active);
+    }
+  };
   
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.centeredView}>
+
+        <TouchableOpacity
+          style={[styles.button, styles.buttonOpen]}
+          onPress={() => toggleModal(true)}
+        >
+          {trigger}
+        </TouchableOpacity>
+
         <Modal
           animationType={animationType}
           transparent={true}
@@ -23,23 +45,18 @@ const ModalView = ({ visible, animation, button, content }: Props) => {
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              
               {content}
 
-              <Pressable
+              <TouchableOpacity
                 style={[styles.button, styles.buttonClose]}
-                onPress={() => setModalVisible(!modalVisible)}>
+                onPress={() => toggleModal(!modalVisible)}
+              >
                 <Text style={styles.textStyle}>Hide Modal</Text>
-              </Pressable>
+              </TouchableOpacity>
             </View>
           </View>
         </Modal>
-        <TouchableOpacity
-          style={[styles.button, styles.buttonOpen]}
-          onPress={() => setModalVisible(true)}
-        >
-          {button}
-        </TouchableOpacity>
+
       </SafeAreaView>
     </SafeAreaProvider>
   );
