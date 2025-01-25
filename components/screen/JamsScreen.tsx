@@ -130,7 +130,7 @@ const JamsScreen = React.memo(() => {
 
 
 
-  console.log(modalState);
+  console.log(activeModal);
 
   // Render
   return (
