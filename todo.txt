@@ -118,6 +118,11 @@ const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude
   });
 
 
+const getModals = () => {
+  return Modals.map(({component, ...rest}) => ({...rest}));
+};
+
+
   useEffect(() => {
     (async () => {
       

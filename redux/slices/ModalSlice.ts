@@ -3,25 +3,31 @@ import { Modals } from '@/constants/Modals';
 
 const ModalSlice = createSlice({
   name: 'modal',
-  initialState: [],
+  initialState: {
+    config: [],
+    active: [],
+  },
   reducers: {
+    setModalConfig: (state, action) => {
+      return action.payload;
+    },
     setActiveModal: (state, action) => {
-      let screens: any = [...state];
-      let index: any = screens.findIndex((o: any) => o.name == action.payload.name);
+      let activeModals: any = [...state.active];
+      let index: any = activeModals.findIndex((o: any) => o.name == action.payload.name);
 
       if (index === -1) {
         let screen = Modals.find((o: any) => o.name == action.payload.name);
-        screens.push({ ...screen, ...{ params: action.payload.params }});
+        activeModals.push({ ...screen, ...{ params: action.payload.params }});
       }
       else {
-        delete screens[index];
-        screens = screens.filter((o: any) => o);
+        delete activeModals[index];
+        activeModals = activeModals.filter(Boolean);
       }
 
-      return screens;
+      return activeModals;
     },
   },
 });
 
-export const { setActiveModal } = ModalSlice.actions;
+export const { setModalConfig, setActiveModal } = ModalSlice.actions;
 export default ModalSlice.reducer;

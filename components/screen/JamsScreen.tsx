@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { StyleSheet, View, Animated } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import { Modals } from "@/constants/Modals";
@@ -35,6 +35,7 @@ import ProjectScreen from "./ProjectScreen";
 import ModalView from "../view/ModalView";
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
+import { setModalConfig } from "@/redux/slices/ModalSlice";
 
 const screenComponents: any = {
   JamsList: <JamsList />,
@@ -64,12 +65,13 @@ const screenComponents: any = {
 const JamsScreen = React.memo(() => {
   // Parameters
   const route = useRoute();
+  const dispatch = useDispatch();
   const windowWidth = DeviceManager.window.width;
   const windowHeight = DeviceManager.window.height;
   const [currentScreen, setCurrentScreen] = useState<any>(null);
   const [animatedStyle, setAnimatedStyle] = useState<any>(null);
   const activeModal = ScreenManager.getActiveModal();
-  const screenState = useSelector((state: any) => state.modal);
+  const modalState = useSelector((state: any) => state.modal);
   
   // Animation references
   const fadeEffectReference = useRef(new Animated.Value(0)).current;
@@ -122,7 +124,13 @@ const JamsScreen = React.memo(() => {
     },
   };
 
-  console.log(activeModal);
+  useEffect(() => {
+    dispatch(setModalConfig(Modals.map(({component, ...rest}) => ({...rest}))));
+  }, [Modals]);
+
+
+
+  console.log(modalState);
 
   // Render
   return (
