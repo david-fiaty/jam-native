@@ -25,6 +25,8 @@ const ModalView = ({ visible, login, animation, trigger, content, backTitle }: P
   const animationType: any = animation || 'slide';
   const isLoggedIn: boolean = UserManager.isLoggedIn();
 
+  console.log(modalPosition);
+
   const toggleModal = (active: boolean) => {
     if (login && !isLoggedIn) {
       router.push("/login");
@@ -73,7 +75,7 @@ const styles = StyleSheet.create({
   modalContainer: {
     width: '100%',
     height: Layout.modal.height,
-    marginTop: modalPosition.height,
+    marginTop: modalPosition.y,
     //backgroundColor: Colors.white,
     backgroundColor: 'red',
   },
