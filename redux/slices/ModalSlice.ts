@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Modals } from '@/constants/Modals';
 
 const ModalSlice = createSlice({
   name: 'modal',
@@ -9,22 +8,19 @@ const ModalSlice = createSlice({
   },
   reducers: {
     setModalConfig: (state, action) => {
-      return action.payload;
+      state.config = action.payload;
     },
     setActiveModal: (state, action) => {
-      let activeModals: any = [...state.active];
-      let index: any = activeModals.findIndex((o: any) => o.name == action.payload.name);
-
-      if (index === -1) {
-        let screen = Modals.find((o: any) => o.name == action.payload.name);
-        activeModals.push({ ...screen, ...{ params: action.payload.params }});
+      let activeModals: any = [...state.active || []];
+      let activeModalIndex: any = activeModals.findIndex((o: any) => o.name == action.payload.name);
+      if (activeModalIndex === -1)  {
+        activeModals.push(action.payload);
+        state.active = activeModals; 
       }
       else {
-        delete activeModals[index];
-        activeModals = activeModals.filter(Boolean);
+        delete activeModals[activeModalIndex];
+        state.active = activeModals.filter(Boolean);
       }
-
-      return activeModals;
     },
   },
 });
