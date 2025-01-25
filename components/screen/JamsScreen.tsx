@@ -154,7 +154,7 @@ const JamsScreen = React.memo(() => {
           <BoxView style={Layout.modalContainer}>
             <Animated.View style={[Layout.animatedView, animatedStyle]}>
               <BoxView style={Layout.modalContent}>
-                {screenComponents?.[activeModal.name]}
+                {ScreenManager.getModalContent(activeModal.name)}
               </BoxView>
             </Animated.View>
           </BoxView>
