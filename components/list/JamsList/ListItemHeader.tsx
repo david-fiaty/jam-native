@@ -9,6 +9,7 @@ import ScreenManager from "@/manager/ScreenManager";
 import UserManager from "@/manager/UserManager";
 import i18n from "@/translation/i18n";
 import JamStatusButton from "@/components/button/JamStatusButton";
+import ModalView from "@/components/view/ModalView";
 
 type Props = BaseProps & {
   row?: any,
@@ -40,14 +41,21 @@ const ListItemHeader = ({ row }: Props) => {
 
   const renderActions = () => {
     return (
-      <IconView
-        name="actions"
-        theme="clear"
-        onPress={() =>
-          isLoggedIn
-            ? ScreenManager.toggleModal("MoreJamActionsView", { entityId: row?.item?.id })
-            : router.push("/login")
+      <ModalView 
+        button={
+          <IconView
+            name="actions"
+            theme="clear"
+            /*
+            onPress={() =>
+              isLoggedIn
+                ? ScreenManager.toggleModal("MoreJamActionsView", { entityId: row?.item?.id })
+                : router.push("/login")
+            }
+            */
+          />
         }
+        content={<TextView>hellooooo brooo</TextView>}
       />
     );
   };
