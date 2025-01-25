@@ -60,8 +60,8 @@ const modalComponents: any = {
 };
 
 const JamsScreen = React.memo(() => {
-  const route = useRoute();
   const dispatch = useDispatch();
+  const route = useRoute();
   const activeModal = ScreenManager.getActiveModal();
   
   useEffect(() => {
