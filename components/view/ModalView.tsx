@@ -13,17 +13,22 @@ type Props = {
   login?: boolean;
   animation?: string;
   trigger?: any;
+  triggerAlignSelf?: string;
   content?: any;
   backTitle?: any;
 };
 
 const modalPosition: any = ScreenManager.getModalPosition();
 
-const ModalView = ({ visible, login, animation, trigger, content, backTitle }: Props) => {
+const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, content, backTitle }: Props) => {
   const router = useRouter();
   const [modalVisible, setModalVisible] = useState(visible || false);
   const animationType: any = animation || 'slide';
   const isLoggedIn: boolean = UserManager.isLoggedIn();
+
+  const triggerStyle: any = {
+    alignSelf: triggerAlignSelf || 'flex-start',
+  }
 
   const toggleModal = (active: boolean) => {
     if (login && !isLoggedIn) {
@@ -35,10 +40,10 @@ const ModalView = ({ visible, login, animation, trigger, content, backTitle }: P
   };
   
   return (
-    <ScreenView>  
+    <ScreenView style={styles.container}>  
       <TouchableOpacity
         onPress={() => toggleModal(true)}
-        style={styles.triggerButton}
+        style={[styles.triggerButton, triggerStyle]}
       >
         {trigger}
       </TouchableOpacity>
@@ -72,6 +77,9 @@ const ModalView = ({ visible, login, animation, trigger, content, backTitle }: P
 };
 
 const styles = StyleSheet.create({
+  container: {
+
+  },
   modalContainer: {
     width: '100%',
     height: Layout.modal.height,
