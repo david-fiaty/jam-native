@@ -3,7 +3,7 @@ import {Alert, Modal, StyleSheet, Text, Pressable, View, TouchableOpacity} from 
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 type Props = {
-  visible: boolean;
+  visible?: boolean;
   animation?: string;
   button?: any;
   content?: any;
