@@ -12,6 +12,7 @@ import DeviceManager from "@/manager/DeviceManager";
 import FooterNavigation from "../navigation/FooterNavigation";
 import JamsList from "../list/JamsList";
 import ScreenManager from "@/manager/ScreenManager";
+import HeaderNavigation from "../navigation/HeaderNavigation";
 
 const JamsScreen = React.memo(() => {
   const dispatch = useDispatch();
@@ -25,13 +26,13 @@ const JamsScreen = React.memo(() => {
   return (
     <ScreenView>
       <View style={styles.container}>
+        {(route.name == "jams" || activeModal?.headerNavigation) && <HeaderNavigation />}
+
         <BoxView style={Layout.mainContent}>
           <JamsList />
         </BoxView>
         
-        {(route.name == "jams" || activeModal?.footerNavigation) && (
-          <FooterNavigation />
-        )}
+        {(route.name == "jams" || activeModal?.footerNavigation) && <FooterNavigation />}
       </View>
     </ScreenView>
   );

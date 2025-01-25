@@ -14,6 +14,16 @@ const headerHiddenOptions: object = {
   headerShown: false,
 };
 
+const headerOptions: object = { 
+  statusBarStyle: 'dark',
+  headerShown: false,
+  statusBarBackgroundColor: Colors.white,
+  headerTintColor: Colors.white,    
+  headerStyle: {
+    backgroundColor: Colors.white, 
+  },
+};
+
 const headerVisibleOptions: object = { 
   statusBarStyle: 'dark',
   headerShown: true,
@@ -179,7 +189,8 @@ const RootLayout = () => {
           <Stack.Screen 
             key={item.name}
             name={item.name} 
-            options={item.options} 
+            //options={item.options} 
+            options={headerOptions}
           />
         ))}
       </Stack>
