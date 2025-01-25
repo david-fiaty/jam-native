@@ -3,6 +3,8 @@ import { useRouter } from "expo-router";
 import { Modal, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import UserManager from '@/manager/UserManager';
+import BackButton from '../button/BackButton';
+import i18n from '@/translation/i18n';
 
 type Props = {
   visible?: boolean;
@@ -45,14 +47,14 @@ const ModalView = ({ visible, login, animation, trigger, content }: Props) => {
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
+              
+              <BackButton
+                title={i18n.t('More actions')}
+                onPress={() => toggleModal(false)}
+              />
+
               {content}
 
-              <TouchableOpacity
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => toggleModal(!modalVisible)}
-              >
-                <Text style={styles.textStyle}>Hide Modal</Text>
-              </TouchableOpacity>
             </View>
           </View>
         </Modal>
