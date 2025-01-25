@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'yellow',
   },
   backButton: {
-
+    marginLeft: Layout.space.base*1.5,
   },
 });
 
