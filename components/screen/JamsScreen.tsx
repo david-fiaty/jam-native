@@ -25,7 +25,7 @@ const JamsScreen = React.memo(() => {
 
   return (
     <ScreenView>
-      <View style={styles.container}>
+      <BoxView direction="column" align="flex-start" style={styles.container}>
         {(route.name == "jams" || activeModal?.headerNavigation) && <HeaderNavigation />}
 
         <BoxView style={Layout.mainContent}>
@@ -33,16 +33,14 @@ const JamsScreen = React.memo(() => {
         </BoxView>
         
         {(route.name == "jams" || activeModal?.footerNavigation) && <FooterNavigation />}
-      </View>
+      </BoxView>
     </ScreenView>
   );
 });
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "column",
-    justifyContent: "space-between",
-    height: DeviceManager.window.height,
+    flex: 1,
     backgroundColor: Colors.white,
   },
 });
