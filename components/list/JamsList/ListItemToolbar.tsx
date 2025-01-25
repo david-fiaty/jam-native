@@ -20,7 +20,7 @@ const ListItemToolbar = ({ row }: Props) => {
   const router = useRouter();
   const isLoggedIn = UserManager.isLoggedIn();
 
-  const renderJammers = () => {
+  const renderJammersButton = () => {
     return (
       <ModalView 
         login={true}
@@ -46,7 +46,7 @@ const ListItemToolbar = ({ row }: Props) => {
     );
   };
 
-  const renderSave = () => {
+  const renderSaveButton = () => {
     return (
       <IconView
         name="save"
@@ -62,7 +62,7 @@ const ListItemToolbar = ({ row }: Props) => {
     );
   };
 
-  const renderShare = () => {
+  const renderShareButton = () => {
     return (
       <IconView
         name="share"
@@ -85,11 +85,11 @@ const ListItemToolbar = ({ row }: Props) => {
       justify="space-between"
       style={styles.container}
     >
-      {renderJammers()}
+      {renderJammersButton()}
 
       <BoxView direction="row" align="center">
-        {renderSave()}
-        {renderShare()}
+        {renderSaveButton()}
+        {renderShareButton()}
       </BoxView>
     </BoxView>
   );
