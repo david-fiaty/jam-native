@@ -28,6 +28,7 @@ const FooterNavigation = () => {
         login={false}
         content={<JamsMapView />}
         backTitle={i18n.t('Jam locations')}
+        triggerAlignSelf="center"
         trigger={
           <IconView
             name="location"
@@ -43,6 +44,7 @@ const FooterNavigation = () => {
         login={true}
         content={<JamForm />}
         backTitle={i18n.t('Create a Jam')}
+        triggerAlignSelf="center"
         trigger={
           <IconView
             name="plus"
@@ -59,6 +61,7 @@ const FooterNavigation = () => {
         login={true}
         content={<ProfileForm />}
         backTitle={i18n.t('Your profile')}
+        triggerAlignSelf="center"
         trigger={
           <IconView
             name="user"
