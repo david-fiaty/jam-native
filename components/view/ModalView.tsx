@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
-import {Alert, Modal, StyleSheet, Text, Pressable, View} from 'react-native';
+import {Alert, Modal, StyleSheet, Text, Pressable, View, TouchableOpacity} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 type Props = {
   visible: boolean;
-  content: any;
+  button?: any;
+  content?: any;
 };
 
-const ModalView = ({ visible, content }: Props) => {
+const ModalView = ({ visible, button, content }: Props) => {
   const [modalVisible, setModalVisible] = useState(visible);
   
   return (
@@ -17,10 +18,7 @@ const ModalView = ({ visible, content }: Props) => {
           animationType="slide"
           transparent={true}
           visible={modalVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-            setModalVisible(!modalVisible);
-          }}>
+        >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               
@@ -34,11 +32,12 @@ const ModalView = ({ visible, content }: Props) => {
             </View>
           </View>
         </Modal>
-        <Pressable
+        <TouchableOpacity
           style={[styles.button, styles.buttonOpen]}
-          onPress={() => setModalVisible(true)}>
-          <Text style={styles.textStyle}>Show Modal</Text>
-        </Pressable>
+          onPress={() => setModalVisible(true)}
+        >
+          {button}
+        </TouchableOpacity>
       </SafeAreaView>
     </SafeAreaProvider>
   );
