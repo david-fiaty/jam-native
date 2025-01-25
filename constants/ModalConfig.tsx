@@ -1,4 +1,4 @@
-export const Modals = [
+export const ModalConfig: any = [
   {
     name: 'JamsList', 
     effect: 'fade',
