@@ -45,12 +45,19 @@ const ModalView = ({ visible, login, animation, trigger, content, backTitle }: P
         transparent={true}
         visible={modalVisible}
       >
-        <BoxView direction="column" align="flex-start" justify="flex-start" style={styles.modalView}>
+        <BoxView 
+          direction="column" 
+          align="flex-start" 
+          justify="flex-start" 
+          style={styles.modalContainer}
+        >
           <BackButton
             title={backTitle}
             onPress={() => toggleModal(false)}
           />
-          {content}
+          <BoxView direction="column" style={styles.modalContent}>
+            {content}
+          </BoxView>
         </BoxView>
       </Modal>
     </ScreenView>
@@ -58,11 +65,15 @@ const ModalView = ({ visible, login, animation, trigger, content, backTitle }: P
 };
 
 const styles = StyleSheet.create({
-  modalView: {
-    backgroundColor: Colors.white,
-    width: Layout.modal.width,
+  modalContainer: {
+    width: '100%',
     height: Layout.modal.height,
     //marginTop: Layout.footer.height,
+    //backgroundColor: Colors.white,
+    backgroundColor: 'red',
+  },
+  modalContent: {
+    width: '100%',
   },
 });
 
