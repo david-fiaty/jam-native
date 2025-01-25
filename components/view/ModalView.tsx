@@ -55,11 +55,13 @@ const ModalView = ({ visible, login, animation, trigger, content, backTitle }: P
           justify="flex-start" 
           style={styles.modalContainer}
         >
-          <BackButton
-            title={backTitle}
-            onPress={() => toggleModal(false)}
-            containerStyle={styles.backButton}
-          />
+          {backTitle && 
+            <BackButton
+              title={backTitle}
+              onPress={() => toggleModal(false)}
+              containerStyle={styles.backButton}
+            />
+          }
           
           <BoxView direction="column" style={styles.modalContent}>
             {content}
