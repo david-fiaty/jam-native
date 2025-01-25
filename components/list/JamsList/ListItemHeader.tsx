@@ -44,18 +44,12 @@ const ListItemHeader = ({ row }: Props) => {
     return (
       <ModalView 
         visible={false}
+        login={true}
         content={<MoreJamActionsView />}
-        button={
+        trigger={
           <IconView
             name="actions"
             theme="clear"
-            /*
-            onPress={() =>
-              isLoggedIn
-                ? ScreenManager.toggleModal("MoreJamActionsView", { entityId: row?.item?.id })
-                : router.push("/login")
-            }
-            */
           />
         }
       />
