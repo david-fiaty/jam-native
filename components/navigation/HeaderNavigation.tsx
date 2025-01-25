@@ -28,8 +28,12 @@ const HeaderNavigation = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <BoxView direction="row" align="center" justify="space-between" style={Layout.header}>
+      <BoxView 
+        direction="row" 
+        align="center" 
+        justify="space-between"
+        style={[Layout.header, styles.container]}
+      >
         <BoxView direction="row" align="center" style={styles.headerRight}>
           <TouchableOpacity onPress={() => ScreenManager.toggleModal('JamsList')}>
             <LogoView size={Layout.logo.size} />
@@ -88,13 +92,13 @@ const HeaderNavigation = () => {
           </BoxView>
         }
       </BoxView>
-    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.white,
+    //backgroundColor: Colors.white,
+    backgroundColor: 'green',
   },
   headerLeft: {
     gap: Layout.space.base,
