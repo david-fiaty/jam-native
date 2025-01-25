@@ -44,10 +44,6 @@ class ScreenManager {
     }));
   }
 
-  getModalContent(modalName: string) {
-    return (Modals.find((o: any) => o.name == modalName)).component;
-  }
-
   showMessage(payload: any, duration?: number): void {
     if (this.messageTimeout) clearTimeout(this.messageTimeout);
     
