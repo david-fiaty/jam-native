@@ -50,13 +50,6 @@ class ScreenManager {
     };
   }
 
-  getModalSize() {
-    return {
-      width: DeviceManager.window.width,
-      height: DeviceManager.window.height - this.getHeaderSize().height - this.getFooterSize().height,
-    };
-  }
-
   getHeaderSize() {
     return {
       width: DeviceManager.window.width,
@@ -68,6 +61,13 @@ class ScreenManager {
     return {
       width: DeviceManager.window.width,
       height: DeviceManager.window.height/8,
+    };
+  }
+
+  getModalSize() {
+    return {
+      width: DeviceManager.window.width,
+      height: DeviceManager.window.height - this.getHeaderSize().height - this.getFooterSize().height,
     };
   }
 
