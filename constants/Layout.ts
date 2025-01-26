@@ -82,10 +82,6 @@ export const Layout = {
     minHeight: 52,
     maxHeight: 60,
   },
-  headerLogo: {
-    width: 48,
-    height: 48,
-  },
   menuContainer: {
     padding: space.base*1.5,
   },
