@@ -13,6 +13,7 @@ import SearchProjectsList from "../list/SearchProjectsList";
 import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "./SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
+import SearchField from "../field/SearchField";
 
 const modalSize: any = ScreenManager.getModalSize();
 
@@ -52,6 +53,12 @@ const SearchView = () => {
       scroll={true}
       style={[Layout.screenContent, styles.container]}
     >
+
+      {/* Search field */}
+      <BoxView direction="row" align="center" justify="flex-start">
+        <SearchField />
+      </BoxView>
+
       {/* Search filters */}
       <BoxView direction="row" align="center" justify="flex-start">
         <ListView

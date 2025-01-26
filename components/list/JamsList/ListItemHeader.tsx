@@ -59,13 +59,13 @@ const ListItemHeader = ({ row }: Props) => {
       justify="space-between"
       style={styles.container}
     >
-      <BoxView>
+      <BoxView align="center">
         {renderHosts()}
       </BoxView>
-      <BoxView>
+      <BoxView align="center">
         {renderStatus()}
       </BoxView>
-      <BoxView>
+      <BoxView align="center">
         {renderActions()}
       </BoxView>
     </BoxView>
