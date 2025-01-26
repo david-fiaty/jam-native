@@ -50,6 +50,27 @@ class ScreenManager {
     };
   }
 
+  getModalSize() {
+    return {
+      width: DeviceManager.window.width,
+      height: DeviceManager.window.height - this.getHeaderSize().height - this.getFooterSize().height,
+    };
+  }
+
+  getHeaderSize() {
+    return {
+      width: DeviceManager.window.width,
+      height: DeviceManager.window.height/7,
+    };
+  }
+
+  getFooterSize() {
+    return {
+      width: DeviceManager.window.width,
+      height: DeviceManager.window.height/7,
+    };
+  }
+
   showMessage(payload: any, duration?: number): void {
     if (this.messageTimeout) clearTimeout(this.messageTimeout);
     
