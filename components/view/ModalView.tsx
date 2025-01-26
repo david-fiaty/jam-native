@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   },
   triggerButton: {
     alignSelf: 'flex-start',
-  }
+  },
 });
 
 export default ModalView;
