@@ -57,12 +57,13 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
         isVisible={isVisible}
         backdropColor={Colors.white}
         backdropOpacity={0.8}
+        style={styles.container}
       >
         <BoxView 
           direction="column" 
           align="flex-start" 
           justify="flex-start" 
-          style={styles.modalContainer}
+          style={styles.wrapper}
         >
           {backTitle && 
             <BackButton
@@ -72,7 +73,7 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
             />
           }
           
-          <BoxView direction="column" style={styles.modalContent}>
+          <BoxView direction="column" style={styles.content}>
             {content}
           </BoxView>
         </BoxView>
@@ -83,9 +84,10 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
 
 const styles = StyleSheet.create({
   container: {
-    
+    margin: 0, 
+    padding: 0,
   },
-  modalContainer: {
+  wrapper: {
     width: '100%',
     //height: modalSize.height,
     //marginTop: modalPosition.y,
@@ -94,7 +96,7 @@ const styles = StyleSheet.create({
     paddingTop: Layout.space.base*2,
     flex: 1,
   },
-  modalContent: {
+  content: {
     width: '100%',
     flex: 1,
   },
