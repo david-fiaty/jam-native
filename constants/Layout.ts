@@ -44,8 +44,6 @@ const logo: any = {
 };
 
 const footer: any = {
-  position: 'absolute',
-  bottom: 50 + space.base*2,
   height: 50,
   width: '100%',
   borderTopWidth: 0.3,

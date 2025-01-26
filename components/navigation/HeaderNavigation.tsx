@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 import LogoView from '../view/LogoView';
-import SearchField from '../field/SearchField';
 import ScreenManager from "@/manager/ScreenManager";
 import UserManager from '@/manager/UserManager';
 import ModalView from "../view/ModalView";
