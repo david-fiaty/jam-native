@@ -53,7 +53,7 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
         animationType={animationType}
         transparent={true}
         visible={modalVisible}
-        hardwareAccelerated={true}
+        //hardwareAccelerated={true} // Todo - Evaluate impact of enabling this
       >
         <BoxView 
           direction="column" 
