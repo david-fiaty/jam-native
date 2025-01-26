@@ -19,6 +19,7 @@ type Props = {
 };
 
 const modalPosition: any = ScreenManager.getModalPosition();
+const modalSize: any = ScreenManager.getModalSize();
 
 const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, content, backTitle }: Props) => {
   const router = useRouter();
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     width: '100%',
-    height: Layout.modal.height,
+    height: modalSize.height,
     marginTop: modalPosition.y,
     //backgroundColor: Colors.white,
     backgroundColor: 'red',
@@ -91,7 +92,6 @@ const styles = StyleSheet.create({
   modalContent: {
     width: '100%',
     flex: 1,
-    backgroundColor: 'yellow',
   },
   backButton: {
     marginLeft: Layout.space.base*1.5,
