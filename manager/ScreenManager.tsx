@@ -43,13 +43,6 @@ class ScreenManager {
     }));
   }
 
-  getModalPosition() {
-    return {
-      x: 0, 
-      y: this.getHeaderSize().height,
-    };
-  }
-
   getHeaderSize() {
     return {
       width: DeviceManager.window.width,
@@ -68,6 +61,20 @@ class ScreenManager {
     return {
       width: DeviceManager.window.width,
       height: DeviceManager.window.height - this.getHeaderSize().height - this.getFooterSize().height,
+    };
+  }
+
+  getModalPosition() {
+    return {
+      x: 0, 
+      y: this.getHeaderSize().height,
+    };
+  }
+
+  getFooterPosition() {
+    return {
+      x: 0, 
+      y: DeviceManager.window.height - this.getFooterSize().height,
     };
   }
 
