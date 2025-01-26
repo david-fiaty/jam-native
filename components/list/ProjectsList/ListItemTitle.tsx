@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
   },
   text: {
-    fontSize: 16,
+    fontSize: Layout.fontSize.big,
   },
 });
 
