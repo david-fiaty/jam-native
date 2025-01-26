@@ -60,14 +60,14 @@ class ScreenManager {
   getHeaderSize() {
     return {
       width: DeviceManager.window.width,
-      height: DeviceManager.window.height/7,
+      height: DeviceManager.window.height/8,
     };
   }
 
   getFooterSize() {
     return {
       width: DeviceManager.window.width,
-      height: DeviceManager.window.height/7,
+      height: DeviceManager.window.height/8,
     };
   }
 
