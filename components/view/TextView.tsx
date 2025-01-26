@@ -25,10 +25,10 @@ const styles = StyleSheet.create({
   container: {
     color: Colors.primary,
     fontSize: Layout.fontSize.base,
-    lineHeight: 17,
+    lineHeight: Layout.lineHeight,
   },
   underline: {
-    borderBottomWidth: 1,
+    borderBottomWidth: Layout.borderWidth.base,
     borderBottomColor: Colors.primary,
   },
 });

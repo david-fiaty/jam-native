@@ -25,9 +25,9 @@ const ListItem = ({ row, sectorsData }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 1,
+    borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
-    marginBottom: Layout.space.base * 1.5,
+    marginBottom: Layout.space.base*1.5,
     borderColor: Colors.primary,
     padding: Layout.space.base,
   },

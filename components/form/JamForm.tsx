@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: Colors.secondary,
     padding: Layout.space.base,
-    borderWidth: 1,
+    borderWidth: Layout.borderWidth.big,
     borderRadius: Layout.radius.round,
     borderColor: Colors.secondary,
     width: Layout.space.base*7,

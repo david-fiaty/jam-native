@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   link: {
-    borderBottomWidth: 1,
+    borderBottomWidth: Layout.borderWidth.base,
     borderBottomColor: Colors.primary,
   },
   item: {

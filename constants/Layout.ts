@@ -15,13 +15,13 @@ const radius: any = {
 
 const fontSize: any = {
   small: 12,
-  base: 13,
-  big: 24,
+  base: 14,
+  big: 16,
 };
 
 const borderWidth: any = {
   small: 0.1,
-  base: 0.5,
+  base: 0.7,
   big: 1,
 };
 
@@ -72,6 +72,7 @@ export const Layout = {
   radius: radius,
   fontSize: fontSize,
   borderWidth: borderWidth,
+  lineHeight: 17,
   logo: logo,
   mapStyle: mapStyle,
   header: {
@@ -82,10 +83,6 @@ export const Layout = {
     minHeight: 52,
     maxHeight: 60,
   },
-  headerLogo: {
-    width: 48,
-    height: 48,
-  },
   menuContainer: {
     padding: space.base*1.5,
   },
@@ -94,7 +91,7 @@ export const Layout = {
     alignItems: 'center',
     justifyContent: 'flex-start',
     padding: space.base,
-    borderBottomWidth: 0.76,
+    borderBottomWidth: borderWidth.base,
     borderBottomColor: Colors.primary,
   },
   menuItemLabel: {
@@ -120,7 +117,7 @@ export const Layout = {
   },
   formField: {
     backgroundColor: Colors.secondary,
-    borderWidth: 1, 
+    borderWidth: borderWidth.base, 
     borderColor: Colors.secondary, 
     borderRadius: radius.round,
     flexDirection: 'row',

@@ -1,5 +1,7 @@
+import React, { useState } from 'react';
 import { StyleSheet } from "react-native";
 import { Colors } from "@/constants/Colors";
+import { Layout } from "@/constants/Layout";
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 import ScreenManager from '@/manager/ScreenManager';
@@ -14,6 +16,12 @@ const containerPosition = ScreenManager.getFooterPosition();
 const activeModal = ScreenManager.getActiveModal();
 
 const FooterNavigation = () => {
+const [isActive, setIsActive] = useState<boolean>(false);
+
+  const onTriggerPress = (active: boolean) => {
+    console.log('-->', active);
+  };
+
   return (
     <BoxView 
       direction="row" 
@@ -26,6 +34,7 @@ const FooterNavigation = () => {
         content={<JamsMapView />}
         backTitle={i18n.t('Jam locations')}
         triggerAlignSelf="center"
+        onTriggerPress={onTriggerPress}
         trigger={
           <IconView
             name="location"
@@ -42,6 +51,7 @@ const FooterNavigation = () => {
         content={<JamForm />}
         backTitle={i18n.t('Create a Jam')}
         triggerAlignSelf="center"
+        onTriggerPress={onTriggerPress}
         trigger={
           <IconView
             name="plus"
@@ -59,6 +69,7 @@ const FooterNavigation = () => {
         content={<ProfileForm />}
         backTitle={i18n.t('Your profile')}
         triggerAlignSelf="center"
+        onTriggerPress={onTriggerPress}
         trigger={
           <IconView
             name="user"
@@ -78,11 +89,9 @@ const FooterNavigation = () => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    borderTopWidth: 0.3,
+    borderTopWidth: Layout.borderWidth.base,
     borderTopColor: Colors.primary,
-    //backgroundColor: Colors.white,
-    backgroundColor: 'yellow',
-    //height: '100%',
+    backgroundColor: Colors.white,
     position: 'absolute',
     top: containerPosition.y,
   },

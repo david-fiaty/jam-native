@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
   },
   wecomeMessage: {
     textTransform: 'uppercase',
-    fontSize: Layout.fontSize.base*1.1,
+    fontSize: Layout.fontSize.base,
   }
 });
 
