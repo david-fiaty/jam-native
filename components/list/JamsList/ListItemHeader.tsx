@@ -44,7 +44,8 @@ const ListItemHeader = ({ row }: Props) => {
           <IconView
             name="actions"
             theme="clear"
-            size={14}
+            size={16}
+            padding={0}
           />
         }
       />
@@ -74,7 +75,7 @@ const ListItemHeader = ({ row }: Props) => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: Layout.space.base*1.2,
-    paddingVertical: Layout.space.base/2,
+    paddingVertical: Layout.space.base,
   },
 });
 
