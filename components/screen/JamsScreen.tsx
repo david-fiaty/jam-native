@@ -4,6 +4,7 @@ import { useRoute } from "@react-navigation/native";
 import { useDispatch } from 'react-redux';
 import { setModalConfig } from "@/redux/slices/ModalSlice";
 import { ModalConfig } from "@/constants/ModalConfig";
+import { Colors } from "@/constants/Colors";
 import BoxView from "../view/BoxView";
 import FooterNavigation from "../navigation/FooterNavigation";
 import JamsList from "../list/JamsList";
@@ -35,8 +36,7 @@ const JamsScreen = React.memo(() => {
 
 const styles = StyleSheet.create({
   container: {
-    //backgroundColor: Colors.white,
-    backgroundColor: 'green',
+    backgroundColor: Colors.white,
   },
   mainContent: {
     width: '100%',

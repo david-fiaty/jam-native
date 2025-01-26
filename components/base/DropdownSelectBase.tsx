@@ -72,13 +72,13 @@ const styles = StyleSheet.create({
     top: 8,
     zIndex: 10,
     paddingHorizontal: 8,
-    fontSize: 14,
+    fontSize: Layout.fontSize.base,
   },
   placeholderStyle: {
-    fontSize: 16,
+    fontSize: Layout.fontSize.big,
   },
   selectedTextStyle: {
-    fontSize: 16,
+    fontSize: Layout.fontSize.big,
   },
   iconStyle: {
     width: 20,
@@ -86,6 +86,6 @@ const styles = StyleSheet.create({
   },
   inputSearchStyle: {
     height: 40,
-    fontSize: 16,
+    fontSize: Layout.fontSize.big,
   },
 });

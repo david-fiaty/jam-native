@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useRouter } from "expo-router";
-import { Modal, StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import Modal from "react-native-modal";
 import { Layout } from '@/constants/Layout';
 import UserManager from '@/manager/UserManager';
 import BackButton from '../button/BackButton';
 import ScreenView from './ScreenView';
 import BoxView from './BoxView';
 import ScreenManager from '@/manager/ScreenManager';
+import { Colors } from '@/constants/Colors';
 
 type Props = {
   visible?: boolean;
@@ -16,14 +18,15 @@ type Props = {
   triggerAlignSelf?: string;
   content?: any;
   backTitle?: any;
+  onTriggerPress?: (active: boolean) => void;
 };
 
 const modalPosition: any = ScreenManager.getModalPosition();
 const modalSize: any = ScreenManager.getModalSize();
 
-const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, content, backTitle }: Props) => {
+const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, content, backTitle, onTriggerPress }: Props) => {
   const router = useRouter();
-  const [modalVisible, setModalVisible] = useState(visible || false);
+  const [isVisible, setIsVisible] = useState(visible || false);
   const animationType: any = animation || 'slide';
   const isLoggedIn: boolean = UserManager.isLoggedIn();
 
@@ -31,35 +34,36 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
     alignSelf: triggerAlignSelf || 'flex-start',
   }
 
-  const toggleModal = (active: boolean) => {
+  const toggleModal = (isActive: boolean) => {
     if (login && !isLoggedIn) {
       router.push("/login");
     }
     else {
-      setModalVisible(active);
+      setIsVisible(isActive);
+      if (onTriggerPress) onTriggerPress(isActive);
     }
   };
   
   return (
-    <ScreenView style={styles.container}>  
+    <ScreenView>  
       <TouchableOpacity
-        onPress={() => toggleModal(true)}
+        onPress={() => toggleModal(!isVisible)}
         style={[styles.triggerButton, triggerStyle]}
       >
         {trigger}
       </TouchableOpacity>
     
       <Modal
-        animationType={animationType}
-        transparent={true}
-        visible={modalVisible}
-        //hardwareAccelerated={true} // Todo - Evaluate impact of enabling this
+        isVisible={isVisible}
+        backdropColor={styles.backdrop.color}
+        backdropOpacity={styles.backdrop.opacity}
+        style={styles.container}
       >
         <BoxView 
           direction="column" 
           align="flex-start" 
           justify="flex-start" 
-          style={styles.modalContainer}
+          style={styles.wrapper}
         >
           {backTitle && 
             <BackButton
@@ -69,7 +73,7 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
             />
           }
           
-          <BoxView direction="column" style={styles.modalContent}>
+          <BoxView direction="column" style={styles.content}>
             {content}
           </BoxView>
         </BoxView>
@@ -79,18 +83,23 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
 };
 
 const styles = StyleSheet.create({
+  backdrop: {
+    color: Colors.white,
+    opacity: 0.7,
+    marginTop: 50,
+  },
   container: {
-    
+    marginTop: modalPosition.y, 
+    marginHorizontal: 0,
   },
-  modalContainer: {
+  wrapper: {
     width: '100%',
-    height: modalSize.height,
-    marginTop: modalPosition.y,
-    //backgroundColor: Colors.white,
-    backgroundColor: 'red',
+    marginTop: 0,
+    backgroundColor: Colors.white,
     paddingTop: Layout.space.base*2,
+    height: modalSize.height,
   },
-  modalContent: {
+  content: {
     width: '100%',
     flex: 1,
   },
