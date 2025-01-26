@@ -50,6 +50,14 @@ class ScreenManager {
     };
   }
 
+  getHeaderSize() {
+
+  }
+
+  getFooterSize() {
+    
+  }
+
   showMessage(payload: any, duration?: number): void {
     if (this.messageTimeout) clearTimeout(this.messageTimeout);
     
