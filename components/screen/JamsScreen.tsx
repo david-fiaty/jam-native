@@ -27,7 +27,7 @@ const JamsScreen = React.memo(() => {
     <BoxView direction="column" align="flex-start" style={styles.container}>
       {(route.name == "jams" || activeModal?.headerNavigation) && <HeaderNavigation />}
 
-      <BoxView style={Layout.mainContent}>
+      <BoxView style={Layout.mainContent} direction="column" align="flex-start">
         <JamsList />
       </BoxView>
       
@@ -39,7 +39,7 @@ const JamsScreen = React.memo(() => {
 const styles = StyleSheet.create({
   container: {
     //backgroundColor: Colors.white,
-    backgroundColor: 'green'
+    backgroundColor: 'green',
   },
 });
 
