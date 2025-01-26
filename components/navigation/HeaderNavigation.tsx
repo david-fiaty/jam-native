@@ -93,7 +93,7 @@ const HeaderNavigation = () => {
       direction="row" 
       align="center" 
       justify="space-between"
-      style={[Layout.header, styles.container, containerStyle]}
+      style={[styles.container, containerStyle]}
     >
       <BoxView direction="row" align="center" style={styles.headerLeft}>
         <TouchableOpacity onPress={() => ScreenManager.toggleModal('JamsList')}>
@@ -115,6 +115,9 @@ const HeaderNavigation = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.white,
+    width: '100%',
+    paddingVertical: Layout.space.base,
+    paddingHorizontal: Layout.space.base*1.5,
   },
   headerLeft: {
     flex: 1,
