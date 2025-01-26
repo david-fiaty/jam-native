@@ -8,6 +8,7 @@ import BackButton from '../button/BackButton';
 import ScreenView from './ScreenView';
 import BoxView from './BoxView';
 import ScreenManager from '@/manager/ScreenManager';
+import { Colors } from '@/constants/Colors';
 
 type Props = {
   visible?: boolean;
@@ -53,11 +54,9 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
       </TouchableOpacity>
     
       <Modal
-        //animationType={animationType}
-        //transparent={true}
         isVisible={isVisible}
-      
-        //hardwareAccelerated={true} // Todo - Evaluate impact of enabling this
+        backdropColor={Colors.white}
+        backdropOpacity={0.8}
       >
         <BoxView 
           direction="column" 
