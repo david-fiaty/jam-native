@@ -49,17 +49,18 @@ const SearchView = () => {
     <BoxView
       direction="column"
       align="flex-start"
-      justify="space-between"
       scroll={true}
       style={[Layout.screenContent, styles.container]}
     >
       {/* Search filters */}
-      <ListView
-        data={StaticData.searchTabs}
-        horizontal={true}
-        contentContainerStyle={styles.tabContainer}
-        renderItem={(row: any) => renderTab(row)}
-      />
+      <BoxView direction="row" align="center" justify="flex-start">
+        <ListView
+          data={StaticData.searchTabs}
+          horizontal={true}
+          contentContainerStyle={styles.tabContainer}
+          renderItem={(row: any) => renderTab(row)}
+        />
+      </BoxView>
 
       {/* Search jams */}
       {['jam'].includes(activeTab) && 

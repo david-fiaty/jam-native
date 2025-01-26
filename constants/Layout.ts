@@ -72,6 +72,7 @@ export const Layout = {
   radius: radius,
   fontSize: fontSize,
   borderWidth: borderWidth,
+  lineHeight: 17,
   logo: logo,
   mapStyle: mapStyle,
   header: {
