@@ -7,6 +7,7 @@ import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 import BackButton from '../button/BackButton';
 import BottomLinks from '../navigation/BottomLinks';
+import HeaderNavigation from '../navigation/HeaderNavigation';
 
 const data = {
   title: 'About',
@@ -23,6 +24,8 @@ const AboutScreen = () => {
 
   return (
     <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.screenContent}>
+      <HeaderNavigation />
+      
       <BackButton
         title={i18n.t('About')}
         onPress={() => router.back()}

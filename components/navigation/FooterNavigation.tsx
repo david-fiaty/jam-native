@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import { Layout } from '@/constants/Layout';
 import { Colors } from "@/constants/Colors";
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
@@ -18,7 +17,7 @@ const FooterNavigation = () => {
       direction="row" 
       align="center" 
       justify="center" 
-      style={[Layout.footer, styles.container]}
+      style={[styles.container]}
     >
       <ModalView 
         login={false}
@@ -76,6 +75,12 @@ const FooterNavigation = () => {
 
 const styles = StyleSheet.create({
   container: {
+    width: '100%',
+    borderTopWidth: 0.3,
+    borderTopColor: Colors.primary,
+    //backgroundColor: Colors.white,
+    backgroundColor: 'yellow',
+    //height: '100%',
   },
   active: {
     backgroundColor: Colors.secondary,
