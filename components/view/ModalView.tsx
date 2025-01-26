@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from "expo-router";
-import { Modal, StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import Modal from "react-native-modal";
 import { Layout } from '@/constants/Layout';
 import UserManager from '@/manager/UserManager';
 import BackButton from '../button/BackButton';
@@ -24,7 +25,7 @@ const modalSize: any = ScreenManager.getModalSize();
 
 const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, content, backTitle, onTriggerPress }: Props) => {
   const router = useRouter();
-  const [modalVisible, setModalVisible] = useState(visible || false);
+  const [isVisible, setIsVisible] = useState(visible || false);
   const animationType: any = animation || 'slide';
   const isLoggedIn: boolean = UserManager.isLoggedIn();
 
@@ -37,7 +38,7 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
       router.push("/login");
     }
     else {
-      setModalVisible(isActive);
+      setIsVisible(isActive);
       if (onTriggerPress) onTriggerPress(isActive);
     }
   };
@@ -45,16 +46,16 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
   return (
     <ScreenView style={styles.container}>  
       <TouchableOpacity
-        onPress={() => toggleModal(!modalVisible)}
+        onPress={() => toggleModal(!isVisible)}
         style={[styles.triggerButton, triggerStyle]}
       >
         {trigger}
       </TouchableOpacity>
     
       <Modal
-        animationType={animationType}
+        //animationType={animationType}
         //transparent={true}
-        visible={modalVisible}
+        isVisible={isVisible}
       
         //hardwareAccelerated={true} // Todo - Evaluate impact of enabling this
       >
@@ -83,6 +84,7 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
 
 const styles = StyleSheet.create({
   container: {
+    
   },
   modalContainer: {
     width: '100%',
