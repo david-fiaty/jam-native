@@ -93,10 +93,8 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     width: '100%',
-    //height: modalSize.height,
     marginTop: 0,
-    //backgroundColor: Colors.white,
-    backgroundColor: 'red',
+    backgroundColor: Colors.white,
     paddingTop: Layout.space.base*2,
     height: modalSize.height,
   },
