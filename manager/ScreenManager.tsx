@@ -60,7 +60,7 @@ class ScreenManager {
   }
 
   getFooterSize() {
-    let height: number = DeviceManager.window.height/14;
+    let height: number = DeviceManager.window.height/16;
 
     if (height < Layout.footer.minHeight) {
       height = Layout.footer.minHeight;
