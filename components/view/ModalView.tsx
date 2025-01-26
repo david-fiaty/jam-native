@@ -55,8 +55,8 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
     
       <Modal
         isVisible={isVisible}
-        backdropColor={Colors.white}
-        backdropOpacity={0.8}
+        backdropColor={styles.backdrop.color}
+        backdropOpacity={styles.backdrop.opacity}
         style={styles.container}
       >
         <BoxView 
@@ -83,19 +83,22 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
 };
 
 const styles = StyleSheet.create({
+  backdrop: {
+    color: Colors.white,
+    opacity: 0.8,
+  },
   container: {
     marginTop: modalPosition.y, 
     marginHorizontal: 0,
-    height: modalSize.height,
   },
   wrapper: {
     width: '100%',
     //height: modalSize.height,
-    //marginTop: modalPosition.y,
+    marginTop: 0,
     //backgroundColor: Colors.white,
     backgroundColor: 'red',
     paddingTop: Layout.space.base*2,
-    flex: 1,
+    height: modalSize.height,
   },
   content: {
     width: '100%',
