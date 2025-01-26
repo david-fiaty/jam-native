@@ -8,7 +8,6 @@ import JamsMapView from "../view/JamsMapView";
 import i18n from "@/translation/i18n";
 import JamForm from "../form/JamForm";
 import ProfileForm from "../form/ProfileForm";
-import DeviceManager from "@/manager/DeviceManager";
 
 const containerStyle = ScreenManager.getFooterSize();
 const containerPosition = ScreenManager.getFooterPosition();
@@ -31,7 +30,7 @@ const FooterNavigation = () => {
           <IconView
             name="location"
             radius="round"
-            size={14}
+            size={16}
             padding={4}
             theme={activeModal?.name == 'JamsMapView' ? 'secondary' : 'clear'}
           />
@@ -47,7 +46,7 @@ const FooterNavigation = () => {
           <IconView
             name="plus"
             radius="round"
-            size={14}
+            size={16}
             padding={4}
             theme={activeModal?.name == 'JamForm' ? 'secondary' : 'clear'}
             style={activeModal?.name == 'JamForm' ? styles.active : {}}
@@ -64,7 +63,7 @@ const FooterNavigation = () => {
           <IconView
             name="user"
             radius="round"
-            size={14}
+            size={16}
             padding={4}
             theme={activeModal?.name == 'ProfileForm' ? 'secondary' : 'clear'}
             style={activeModal?.name == 'ProfileForm' ? styles.active : {}}
