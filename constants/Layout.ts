@@ -81,8 +81,13 @@ export const Layout = {
   borderWidth: borderWidth,
   logo: logo,
   mapStyle: mapStyle,
-  animation: {
-    duration: 300,
+  header: {
+    minHeight: 72,
+    maxHeight: 80,
+  },
+  footer: {
+    minHeight: 52,
+    maxHeight: 60,
   },
   headerLogo: {
     width: 48,
