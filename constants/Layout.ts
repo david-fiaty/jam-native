@@ -82,12 +82,12 @@ export const Layout = {
   logo: logo,
   mapStyle: mapStyle,
   header: {
-    minHeight: 50,
-    maxHeight: 54,
+    minHeight: 72,
+    maxHeight: 80,
   },
   footer: {
-    minHeight: 50,
-    maxHeight: 54,
+    minHeight: 52,
+    maxHeight: 60,
   },
   headerLogo: {
     width: 48,
