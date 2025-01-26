@@ -44,6 +44,7 @@ const ListItemHeader = ({ row }: Props) => {
           <IconView
             name="actions"
             theme="clear"
+            size={14}
           />
         }
       />
