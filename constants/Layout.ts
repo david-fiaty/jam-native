@@ -32,9 +32,9 @@ const borderWidth: any = {
 };
 
 const header: any = {
-  height: 48,
-  width: DeviceManager.window.width,
-  paddingTop: space.base,
+  height: 60, // Todo - Find a way to remove this, modal and footer positions currently depend on it
+  width: '100%',
+  paddingVertical: space.base,
   paddingHorizontal: space.base*1.5,
   backgroundColor: Colors.white,
 };
