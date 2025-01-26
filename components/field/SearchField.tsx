@@ -102,8 +102,7 @@ const styles = StyleSheet.create({
     //backgroundColor: 'red',
   },
   inputContainer: {
-    minWidth: 140,
-    maxWidth: 188,
+    width: '100%',
   },
 });
 

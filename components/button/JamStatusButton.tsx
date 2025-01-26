@@ -39,13 +39,14 @@ const styles = StyleSheet.create({
   label: {
     width: '100%',
     height: '100%',
-    minWidth: 56,
+    minWidth: 50,
     textAlign: 'center',
-    verticalAlign: 'middle',
     borderRadius: Layout.radius.round,
     color: Colors.white,
     fontSize: Layout.fontSize.small,
     backgroundColor: Colors.primary,
+    paddingTop: Layout.space.base/6,
+    paddingBottom: Layout.space.base/4,
   },
   active: {
     backgroundColor: Colors.primary,
