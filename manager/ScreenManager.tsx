@@ -44,16 +44,34 @@ class ScreenManager {
   }
 
   getHeaderSize() {
+    let height: number = DeviceManager.window.height/10;
+
+    if (height < Layout.footer.minHeight) {
+      height = Layout.footer.minHeight;
+    }
+    else if (height > Layout.footer.maxHeight) {
+      height = Layout.footer.maxHeight;
+    }
+
     return {
       width: DeviceManager.window.width,
-      height: DeviceManager.window.height/10,
+      height: height,
     };
   }
 
   getFooterSize() {
+    let height: number = DeviceManager.window.height/14;
+
+    if (height < Layout.footer.minHeight) {
+      height = Layout.footer.minHeight;
+    }
+    else if (height > Layout.footer.maxHeight) {
+      height = Layout.footer.maxHeight;
+    }
+
     return {
       width: DeviceManager.window.width,
-      height: DeviceManager.window.height/10,
+      height: height,
     };
   }
 
