@@ -45,7 +45,7 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
   };
   
   return (
-    <ScreenView style={isVisible ? styles.container : 0}>  
+    <ScreenView>  
       <TouchableOpacity
         onPress={() => toggleModal(!isVisible)}
         style={[styles.triggerButton, triggerStyle]}
@@ -85,7 +85,7 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
 const styles = StyleSheet.create({
   backdrop: {
     color: Colors.white,
-    opacity: 0.8,
+    opacity: 0.7,
   },
   container: {
     marginTop: modalPosition.y, 
