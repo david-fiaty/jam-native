@@ -82,6 +82,8 @@ const styles = StyleSheet.create({
     //backgroundColor: Colors.white,
     backgroundColor: 'yellow',
     //height: '100%',
+    position: 'absolute',
+    top: '95%',
   },
   active: {
     backgroundColor: Colors.secondary,
