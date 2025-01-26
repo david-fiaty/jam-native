@@ -23,22 +23,22 @@ const styles: any = StyleSheet.create({
     marginVertical: Layout.space.base/4,
   },
   primary: {
-    borderWidth: 0.1,
+    borderWidth: Layout.borderWidth.base,
     borderColor: Colors.primary,
     backgroundColor: Colors.primary,
   },
   secondary: {
-    borderWidth: 0.1,
+    borderWidth: Layout.borderWidth.base,
     borderColor: Colors.secondary,
     backgroundColor: Colors.secondary,
   },
   tertiary: {
-    borderWidth: 0.1,
+    borderWidth: Layout.borderWidth.base,
     borderColor: Colors.tertiary,
     backgroundColor: Colors.tertiary,
   },
   white: {
-    borderWidth: 0.1,
+    borderWidth: Layout.borderWidth.base,
     borderColor: Colors.white,
     backgroundColor: Colors.white,
   }
