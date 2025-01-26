@@ -97,7 +97,7 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
             })
           }
         >
-          <TextView style={Layout.textLink}>{i18n.t("View all")}</TextView>
+          <TextView underline={true}>{i18n.t("View all")}</TextView>
         </TouchableOpacity> }
       </BoxView>
 
