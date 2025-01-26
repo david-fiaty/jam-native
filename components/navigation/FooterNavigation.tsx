@@ -8,11 +8,13 @@ import JamsMapView from "../view/JamsMapView";
 import i18n from "@/translation/i18n";
 import JamForm from "../form/JamForm";
 import ProfileForm from "../form/ProfileForm";
+import DeviceManager from "@/manager/DeviceManager";
+
+const containerStyle = ScreenManager.getFooterSize();
+const containerPosition = ScreenManager.getFooterPosition();
+const activeModal = ScreenManager.getActiveModal();
 
 const FooterNavigation = () => {
-  const activeModal = ScreenManager.getActiveModal();
-  const containerStyle = ScreenManager.getFooterSize();
-
   return (
     <BoxView 
       direction="row" 
@@ -82,6 +84,8 @@ const styles = StyleSheet.create({
     //backgroundColor: Colors.white,
     backgroundColor: 'yellow',
     //height: '100%',
+    position: 'absolute',
+    top: containerPosition.y,
   },
   active: {
     backgroundColor: Colors.secondary,
