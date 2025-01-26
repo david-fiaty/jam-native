@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     lineHeight: 17,
   },
   underline: {
-    borderBottomWidth: 1,
+    borderBottomWidth: Layout.borderWidth.base,
     borderBottomColor: Colors.primary,
   },
 });

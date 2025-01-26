@@ -105,7 +105,7 @@ const styles = {
   },
   tabItem: {
     padding: Layout.space.base,
-    borderBottomWidth: 1,
+    borderBottomWidth: Layout.borderWidth.base,
     borderBottomColor: Colors.primary,
   },
   activeTab: { 

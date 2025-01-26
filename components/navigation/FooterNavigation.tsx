@@ -8,6 +8,7 @@ import JamsMapView from "../view/JamsMapView";
 import i18n from "@/translation/i18n";
 import JamForm from "../form/JamForm";
 import ProfileForm from "../form/ProfileForm";
+import { Layout } from "@/constants/Layout";
 
 const containerStyle = ScreenManager.getFooterSize();
 const containerPosition = ScreenManager.getFooterPosition();
@@ -78,7 +79,7 @@ const FooterNavigation = () => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    borderTopWidth: 0.3,
+    borderTopWidth: Layout.borderWidth.base,
     borderTopColor: Colors.primary,
     backgroundColor: Colors.white,
     position: 'absolute',
