@@ -80,7 +80,7 @@ export const Layout = {
     maxHeight: 80,
   },
   footer: {
-    minHeight: 52,
+    minHeight: 48,
     maxHeight: 60,
   },
   menuContainer: {
