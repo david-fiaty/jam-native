@@ -3,19 +3,33 @@ import { BaseProps } from '@/constants/Types';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 
-const TextView = ({style, children}: BaseProps) => {
+type Props = BaseProps & {
+  underline?: boolean;
+  style?: any;
+  children?: any;
+};
+
+const TextView = ({underline, style, children}: Props) => {
+  const containerStyle: any = {
+    ...(underline ? styles.underline : {}),
+  };
+
   return (
-    <Text style={[styles.content, style]}>
+    <Text style={[styles.container, style, containerStyle]}>
       {children}
     </Text>
   );
 };
 
 const styles = StyleSheet.create({
-  content: {
+  container: {
     color: Colors.primary,
     fontSize: Layout.fontSize.base,
     lineHeight: 17,
+  },
+  underline: {
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.primary,
   },
 });
 
