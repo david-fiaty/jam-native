@@ -12,6 +12,9 @@ import SearchProfilesList from "../list/SearchProfilesList";
 import SearchProjectsList from "../list/SearchProjectsList";
 import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "./SpinnerView";
+import ScreenManager from "@/manager/ScreenManager";
+
+const modalSize: any = ScreenManager.getModalSize();
 
 const SearchView = () => {
   const [activeTab, setActiveTab] = useState<any>(null);
@@ -48,7 +51,7 @@ const SearchView = () => {
       align="flex-start"
       justify="space-between"
       scroll={true}
-      style={Layout.screenContent}
+      style={[Layout.screenContent, styles.container]}
     >
       {/* Search filters */}
       <ListView
@@ -93,6 +96,10 @@ const SearchView = () => {
 };
 
 const styles = {
+  container: {
+    width: '100%',
+    height: modalSize.height,
+  },
   tabContainer: {
     backgroundColor: Colors.white,
   },

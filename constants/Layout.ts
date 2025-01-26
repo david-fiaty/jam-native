@@ -31,29 +31,8 @@ const borderWidth: any = {
   big: 1,
 };
 
-const header: any = {
-  height: 60, // Todo - Find a way to remove this, modal and footer positions currently depend on it
-  width: '100%',
-  paddingVertical: space.base,
-  paddingHorizontal: space.base*1.5,
-  backgroundColor: Colors.white,
-};
-
 const logo: any = {
   size: 48,
-};
-
-const footer: any = {
-  height: 50,
-  width: '100%',
-  borderTopWidth: 0.3,
-  borderTopColor: Colors.primary,
-  backgroundColor: Colors.white,
-};
-
-const modal: any = {
-  width: DeviceManager.window.width,
-  height: DeviceManager.window.height - DeviceManager.statusBar.height - header.height - footer.height,
 };
 
 const mapStyle: any = [
@@ -100,11 +79,8 @@ export const Layout = {
   iconSize: iconSize,
   fontSize: fontSize,
   borderWidth: borderWidth,
-  header: header,
   logo: logo,
-  footer: footer,
   mapStyle: mapStyle,
-  modal: modal,
   animation: {
     duration: 300,
   },
@@ -137,7 +113,6 @@ export const Layout = {
   },
   mainContent: {
     width: '100%',
-    height: modal.height,
     backgroundColor: Colors.white,
     zIndex: 0,
   },
