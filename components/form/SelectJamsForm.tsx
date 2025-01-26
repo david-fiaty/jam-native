@@ -53,10 +53,9 @@ const SelectJamsForm = () => {
       <View>
         <TextView>{i18n.t('No Jams available in your profile.')}</TextView>
         <TouchableOpacity 
-          style={styles.textLink} 
           onPress={() => ScreenManager.toggleModal('JamForm')}
         >
-          <TextView>{i18n.t('Create a jam')}</TextView>
+          <TextView underline={true}>{i18n.t('Create a jam')}</TextView>
         </TouchableOpacity>
       </View>
     );
@@ -94,7 +93,7 @@ const SelectJamsForm = () => {
         {selectedIds?.length > 0 && (
           <TouchableOpacity onPress={addSelection}>
             <View>
-              <TextView style={Layout.textLink}>
+              <TextView underline={true}>
                 {i18n.t("Add selected")} ({selectedIds.length})
               </TextView>
             </View>
@@ -125,13 +124,6 @@ const SelectJamsForm = () => {
 const styles = StyleSheet.create({
   titleContainer: {
     width: "100%",
-  },
-  textLink: {
-    ...Layout.textLink,
-    ...{ 
-      alignSelf: 'flex-start',
-      marginTop: Layout.space.base,
-    },
   },
 });
 

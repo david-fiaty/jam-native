@@ -13,12 +13,6 @@ const radius: any = {
   circle: 40,
 };
 
-const iconSize: any = {
-  small: 11,
-  base: 14,
-  big: 44,
-};
-
 const fontSize: any = {
   small: 12,
   base: 13,
@@ -76,7 +70,6 @@ const mapStyle: any = [
 export const Layout = {
   space: space,
   radius: radius,
-  iconSize: iconSize,
   fontSize: fontSize,
   borderWidth: borderWidth,
   logo: logo,
@@ -151,10 +144,6 @@ export const Layout = {
   },
   listItem: {
     padding: space.small,
-  },
-  textLink: {
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.primary,
   },
   backButtonContainer: {
     marginLeft: space.base*1.5,
