@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { StyleSheet } from 'react-native';
 import { Layout } from "@/constants/Layout";
 import { BaseProps } from "@/constants/Types";
 import BoxView from "../view/BoxView";
@@ -38,7 +39,10 @@ const JamsList = ({ idArray }: Props) => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView direction="column" style={Layout.screenContent}>
+    <BoxView 
+      direction="column" 
+      style={styles.container}
+    >
       <ListView
         data={jamsData}
         initialNumToRender={jamsData?.length}
@@ -49,5 +53,16 @@ const JamsList = ({ idArray }: Props) => {
     </BoxView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: Layout.space.base*1.5,
+    paddingBottom: 0,
+    width: '100%',
+    height: '100%',
+    flexGrow: 1,
+  },
+});
+
 
 export default JamsList;
