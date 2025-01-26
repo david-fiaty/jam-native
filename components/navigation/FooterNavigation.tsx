@@ -1,11 +1,9 @@
 import { StyleSheet } from "react-native";
-import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import { Colors } from "@/constants/Colors";
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 import ScreenManager from '@/manager/ScreenManager';
-import UserManager from '@/manager/UserManager';
 import ModalView from "../view/ModalView";
 import JamsMapView from "../view/JamsMapView";
 import i18n from "@/translation/i18n";
@@ -13,9 +11,7 @@ import JamForm from "../form/JamForm";
 import ProfileForm from "../form/ProfileForm";
 
 const FooterNavigation = () => {
-  const router = useRouter();
   const activeModal = ScreenManager.getActiveModal();
-  const isLoggedIn = UserManager.isLoggedIn();
 
   return (
     <BoxView 

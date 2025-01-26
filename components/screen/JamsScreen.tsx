@@ -23,27 +23,23 @@ const JamsScreen = React.memo(() => {
     dispatch(setModalConfig(ModalConfig));
   }, [ModalConfig]);
 
-  return (
-    <ScreenView>
-      <View style={styles.container}>
-        {(route.name == "jams" || activeModal?.headerNavigation) && <HeaderNavigation />}
+  return (  
+    <BoxView direction="column" align="flex-start" style={styles.container}>
+      {(route.name == "jams" || activeModal?.headerNavigation) && <HeaderNavigation />}
 
-        <BoxView style={Layout.mainContent}>
-          <JamsList />
-        </BoxView>
-        
-        {(route.name == "jams" || activeModal?.footerNavigation) && <FooterNavigation />}
-      </View>
-    </ScreenView>
+      <BoxView style={Layout.mainContent}>
+        <JamsList />
+      </BoxView>
+      
+      {(route.name == "jams" || activeModal?.footerNavigation) && <FooterNavigation />}
+    </BoxView>
   );
 });
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "column",
-    justifyContent: "space-between",
-    height: DeviceManager.window.height,
-    backgroundColor: Colors.white,
+    //backgroundColor: Colors.white,
+    backgroundColor: 'green'
   },
 });
 
