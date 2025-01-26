@@ -1,14 +1,10 @@
 import React, { useEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { useDispatch } from 'react-redux';
 import { setModalConfig } from "@/redux/slices/ModalSlice";
-import { Layout } from "@/constants/Layout";
-import { Colors } from "@/constants/Colors";
 import { ModalConfig } from "@/constants/ModalConfig";
-import ScreenView from "../view/ScreenView";
 import BoxView from "../view/BoxView";
-import DeviceManager from "@/manager/DeviceManager";
 import FooterNavigation from "../navigation/FooterNavigation";
 import JamsList from "../list/JamsList";
 import ScreenManager from "@/manager/ScreenManager";
@@ -18,6 +14,7 @@ const JamsScreen = React.memo(() => {
   const dispatch = useDispatch();
   const route = useRoute();
   const activeModal = ScreenManager.getActiveModal();
+  const containerStyle = ScreenManager.getModalSize();
   
   useEffect(() => {
     dispatch(setModalConfig(ModalConfig));
@@ -27,7 +24,7 @@ const JamsScreen = React.memo(() => {
     <BoxView direction="column" align="flex-start" style={styles.container}>
       {(route.name == "jams" || activeModal?.headerNavigation) && <HeaderNavigation />}
 
-      <BoxView style={styles.mainContent} direction="column" align="flex-start">
+      <BoxView style={[styles.mainContent, containerStyle]} direction="column" align="flex-start">
         <JamsList />
       </BoxView>
       
@@ -43,7 +40,6 @@ const styles = StyleSheet.create({
   },
   mainContent: {
     width: '100%',
-    height: Layout.modal.height,
     zIndex: 0,
   },
 });

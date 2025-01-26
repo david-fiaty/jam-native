@@ -11,13 +11,14 @@ import ProfileForm from "../form/ProfileForm";
 
 const FooterNavigation = () => {
   const activeModal = ScreenManager.getActiveModal();
+  const containerStyle = ScreenManager.getFooterSize();
 
   return (
     <BoxView 
       direction="row" 
       align="center" 
       justify="center" 
-      style={[styles.container]}
+      style={[styles.container, containerStyle]}
     >
       <ModalView 
         login={false}

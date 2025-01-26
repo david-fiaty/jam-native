@@ -20,6 +20,7 @@ const HeaderNavigation = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeModal = ScreenManager.getActiveModal();
   const isLoggedIn = UserManager.isLoggedIn();
+  const containerStyle = ScreenManager.getHeaderSize();
 
   const renderSearchButton = () => {
       return (
@@ -85,12 +86,14 @@ const HeaderNavigation = () => {
     })();
   }, [isLoaded]);
 
+  ScreenManager.getHeaderSize();
+
   return (
     <BoxView 
       direction="row" 
       align="center" 
       justify="space-between"
-      style={[Layout.header, styles.container]}
+      style={[Layout.header, styles.container, containerStyle]}
     >
       <BoxView direction="row" align="center" style={styles.headerLeft}>
         <TouchableOpacity onPress={() => ScreenManager.toggleModal('JamsList')}>
