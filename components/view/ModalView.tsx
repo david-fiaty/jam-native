@@ -84,7 +84,7 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
 
 const styles = StyleSheet.create({
   backdrop: {
-    color: Colors.primary,
+    color: Colors.white,
     opacity: 0.7,
     marginTop: 50,
   },
