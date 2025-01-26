@@ -46,7 +46,7 @@ class ScreenManager {
   getModalPosition() {
     return {
       x: 0, 
-      y: Layout.header.height,
+      y: this.getHeaderSize().height,
     };
   }
 
