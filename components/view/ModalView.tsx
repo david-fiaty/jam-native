@@ -16,12 +16,13 @@ type Props = {
   triggerAlignSelf?: string;
   content?: any;
   backTitle?: any;
+  onTriggerPress?: (active: boolean) => void;
 };
 
 const modalPosition: any = ScreenManager.getModalPosition();
 const modalSize: any = ScreenManager.getModalSize();
 
-const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, content, backTitle }: Props) => {
+const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, content, backTitle, onTriggerPress }: Props) => {
   const router = useRouter();
   const [modalVisible, setModalVisible] = useState(visible || false);
   const animationType: any = animation || 'slide';
@@ -31,19 +32,20 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
     alignSelf: triggerAlignSelf || 'flex-start',
   }
 
-  const toggleModal = (active: boolean) => {
+  const toggleModal = (isActive: boolean) => {
     if (login && !isLoggedIn) {
       router.push("/login");
     }
     else {
-      setModalVisible(active);
+      setModalVisible(isActive);
+      if (onTriggerPress) onTriggerPress(isActive);
     }
   };
   
   return (
     <ScreenView style={styles.container}>  
       <TouchableOpacity
-        onPress={() => toggleModal(true)}
+        onPress={() => toggleModal(!modalVisible)}
         style={[styles.triggerButton, triggerStyle]}
       >
         {trigger}
@@ -51,8 +53,9 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
     
       <Modal
         animationType={animationType}
-        transparent={true}
+        //transparent={true}
         visible={modalVisible}
+      
         //hardwareAccelerated={true} // Todo - Evaluate impact of enabling this
       >
         <BoxView 
@@ -80,7 +83,6 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
 
 const styles = StyleSheet.create({
   container: {
-    
   },
   modalContainer: {
     width: '100%',
