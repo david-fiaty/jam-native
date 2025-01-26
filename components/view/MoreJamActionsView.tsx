@@ -136,6 +136,7 @@ const MoreJamActionsView = ({ entityId }: Props) => {
         }) }
       </View>
     </BoxView>
+    
   );
 };
 
