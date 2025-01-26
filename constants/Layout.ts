@@ -15,8 +15,8 @@ const radius: any = {
 
 const fontSize: any = {
   small: 12,
-  base: 13,
-  big: 24,
+  base: 14,
+  big: 16,
 };
 
 const borderWidth: any = {
