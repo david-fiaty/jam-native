@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchValue } from "@/redux/slices/SearchSlice";
 import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
-import ScreenManager from "@/manager/ScreenManager";
 import i18n from '@/translation/i18n';
 import SearchManager from '@/manager/SearchManager';
+import DeviceManager from '@/manager/DeviceManager';
+import { Layout } from '@/constants/Layout';
 
 const SearchField = () => {
   const dispatch = useDispatch();
@@ -28,10 +30,6 @@ const SearchField = () => {
     dispatch(setSearchValue(''));
   };
 
-  const openSearch = () => {
-    ScreenManager.toggleModal('SearchView');
-  };
-
   const renderRightIcon = () => {
     if (searchState.value.length > 0) {
       return (
@@ -48,14 +46,23 @@ const SearchField = () => {
   };
 
   return (
-    <InputTextField 
-      value={currentSearchValue}
-      placeholder={i18n.t('Search...')}
-      onChangeText={onChangeText}
-      onSubmitEditing={onSubmitEditing}
-      rightIcon={renderRightIcon()}
-    /> 
+    <View style={styles.container}>
+      <InputTextField 
+        value={currentSearchValue}
+        placeholder={i18n.t('Search...')}
+        onChangeText={onChangeText}
+        onSubmitEditing={onSubmitEditing}
+        rightIcon={renderRightIcon()}
+      /> 
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    width: DeviceManager.window.width - Layout.space.base*5.5, // Todo - Improve field width caclulation
+  },
+});
+
 
 export default SearchField;
