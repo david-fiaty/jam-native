@@ -1,4 +1,4 @@
-import { setSearchResult } from "@/redux/slices/SearchSlice";
+import { storeSearchResult } from "@/redux/slices/SearchSlice";
 import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 
@@ -7,33 +7,21 @@ class SearchManager {
     return await this.loadData();
   }
 
-  getSearchResult(key?: string, searchValue?: string) {
+  getSearchResult(key?: any, searchValue?: string) {
     let searchState = Store.getState().search;
-    let searchResult: any = searchState.result?.length > 0 ? searchState.result : '{}';
-    let data: any = JSON.parse(searchResult);
+    let searchResult: any = searchState.result?.length ? JSON.parse(searchState.result) : this.loadData(searchValue);
 
-    if (key && key?.length > 0 && Object.keys(data).length > 0) {
-      return data[key];
+    if (key && key?.length > 0 && Object.keys(searchResult).length > 0) {
+      return searchResult[key];
     }
-    else if (!Object.keys(data).length) {
+    else if (!Object.keys(searchResult).length) {
       return this.getDefaultData();
     }
 
-    return data;
+    return searchResult;
   }
 
-  // Todo - Why searchValue not used, since passed as argument from onSubmitEditing in SearchField component
-  async loadData(searchValue?: any) {
-    const [jams, profiles, projects] = await this.sendRequest();
-    
-    return this.buildResponse({
-      jams: jams, 
-      profiles: profiles, 
-      projects: projects
-    });
-  }
-
-  async loadResult(searchValue: string) {
+  async loadData(searchValue?: string) {
     const options = searchValue?.length ? { query_text: searchValue } : {};
     const [jams, profiles, projects] = await this.sendRequest(options);
     const response = this.buildResponse({
@@ -42,22 +30,18 @@ class SearchManager {
       projects: projects
     });
 
-    this.setSearchResult(response);
-
-    return response;
+    return this.storeSearchResult(response);
   }
 
-  setSearchResult (response: any) {
+  storeSearchResult (response: any) {
     let results: any = {};
     for (const [key, data] of Object.entries(response)) {
       results[key] = (data || []).map((o: any) => o.id);
     }
 
-    Store.dispatch(setSearchResult(JSON.stringify(results)));
-  }
+    Store.dispatch(storeSearchResult(JSON.stringify(results)));
 
-  isExpanded() {
-    return Store.getState().search.expanded === true;
+    return response;
   }
 
   async sendRequest(options?: any) {
