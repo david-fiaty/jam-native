@@ -50,8 +50,6 @@ const SearchView = ({ searchResult }: Props) => {
   }, [isLoaded, activeTab, searchState]);
 
 
-  console.log(searchResult);
-
   if (!isLoaded) return <SpinnerView />;
   
   return (
