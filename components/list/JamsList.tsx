@@ -19,7 +19,7 @@ const JamsList = ({ data }: Props) => {
 
   useEffect(() => {
     (async () => {
-      setSectorsData(await EntityManager.getSectors());
+      if (!sectorsData.length) setSectorsData(await EntityManager.getSectors());
     })();
 
     setIsLoaded(true);
