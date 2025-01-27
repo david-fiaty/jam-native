@@ -14,23 +14,15 @@ type Props = BaseProps & {
 };
 
 const JamsList = ({ idArray }: Props) => {
-  const [jamsData, setJamsData] = useState<any>([]);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-
+  const [jamsData, setJamsData] = useState<any>([]);
+  
   useEffect(() => {
     (async () => {
-      if (!isLoaded) {
+      if (idArray?.length > 0) {
         setSectorsData(await EntityManager.getSectors());
-        if (idArray?.length > 0) {
-          setJamsData(await EntityManager.getJams({ items_ids: idArray }));
-        }
-        else {
-          idArray = SearchManager.getSearchResult('jam');
-          if (idArray?.length > 0) setJamsData(await EntityManager.getJams({ items_ids: idArray })); 
-          else setJamsData(await EntityManager.listJams());
-        }
-    
+        setJamsData(await EntityManager.getJams({ items_ids: idArray })); 
         setIsLoaded(true);
       }
     })();
