@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchValue } from "@/redux/slices/SearchSlice";
 import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
-import ScreenManager from "@/manager/ScreenManager";
 import i18n from '@/translation/i18n';
 import SearchManager from '@/manager/SearchManager';
 
@@ -28,10 +28,6 @@ const SearchField = () => {
     dispatch(setSearchValue(''));
   };
 
-  const openSearch = () => {
-    ScreenManager.toggleModal('SearchView');
-  };
-
   const renderRightIcon = () => {
     if (searchState.value.length > 0) {
       return (
@@ -48,6 +44,7 @@ const SearchField = () => {
   };
 
   return (
+    <View style={styles.container}>
     <InputTextField 
       value={currentSearchValue}
       placeholder={i18n.t('Search...')}
@@ -55,7 +52,15 @@ const SearchField = () => {
       onSubmitEditing={onSubmitEditing}
       rightIcon={renderRightIcon()}
     /> 
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+  },
+});
+
 
 export default SearchField;

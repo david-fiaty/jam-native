@@ -66,7 +66,7 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
           style={styles.wrapper}
         >
           {backTitle && 
-            <BoxView direction="row" style={{width: '280'}}>
+            <BoxView direction="row" style={styles.backButtonContainer}>
               <BackButton
                 title={backTitle}
                 onPress={() => toggleModal(false)}
@@ -105,6 +105,9 @@ const styles = StyleSheet.create({
   content: {
     width: '100%',
     flex: 1,
+  },
+  backButtonContainer: {
+    width: '100%',
   },
   backButton: {
     marginLeft: Layout.space.base*1.5,
