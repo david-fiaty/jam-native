@@ -8,11 +8,10 @@ import { BaseProps } from '@/constants/Types';
 import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
 import i18n from '@/translation/i18n';
-import SearchManager from '@/manager/SearchManager';
 import DeviceManager from '@/manager/DeviceManager';
 
 type Props = BaseProps & {
-  onSearchSubmit?: () => void;
+  onSearchSubmit?: (value: any) => void;
 };
 
 const SearchField = ({ onSearchSubmit }: Props) => {
@@ -20,19 +19,17 @@ const SearchField = ({ onSearchSubmit }: Props) => {
   const searchState = useSelector((state: any) => state.search);
   const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
 
-  const submitSearch = async (value?: string) => {
-    dispatch(setSearchValue(value));
-    await SearchManager.getSearchResult(null, value);
-    if (onSearchSubmit) onSearchSubmit();
+  const submitSearch = (value?: string) => {
+    if (onSearchSubmit) onSearchSubmit(value);
   };
 
-  const onSubmitEditing = async () => {
-    await submitSearch(currentSearchValue);
+  const onSubmitEditing = () => {
+    submitSearch(currentSearchValue);
   };
 
-  const onChangeText = async (value: string) => {
+  const onChangeText = (value: string) => {
     setCurrentSearchValue(value);
-    await submitSearch(value);
+    submitSearch(value);
   };
 
   const clearSearch = () => {
