@@ -12,17 +12,26 @@ import HeaderNavigation from "../navigation/HeaderNavigation";
 import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "../view/SpinnerView";
 
-const JamsScreen = React.memo(() => {
+const JamsScreen = () => {
   const dispatch = useDispatch();
-  const [jamsData, setJamsData] = useState<any>([]);
+  const [searchResult, setSearchResult] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const contentStyle = ScreenManager.getModalSize();
   
+  const loadJamsData = async () => {
+    setSearchResult(await SearchManager.getSearchResult());
+  };
+
+  const onSearchComplete = async () => {
+    await loadJamsData();
+    console.log('search complete');
+  };
+
   useEffect(() => {
     dispatch(setModalConfig(ModalConfig));
 
     (async () => {
-      setJamsData(await SearchManager.loadJamsData());
+      await loadJamsData();
       setIsLoaded(true);
     })();
   }, [isLoaded, ModalConfig]);
@@ -32,17 +41,20 @@ const JamsScreen = React.memo(() => {
   return (  
     <BoxView direction="column" align="flex-start" style={styles.container}>
 
-      <HeaderNavigation searchResult={jamsData} />
+      <HeaderNavigation 
+        searchResult={searchResult} 
+        onSearchComplete={async () => await onSearchComplete()} 
+      />
 
       <BoxView style={[styles.content, contentStyle]} direction="column" align="center">
-        <JamsList searchResult={jamsData} />
+        <JamsList searchResult={searchResult?.jam} />
       </BoxView>
       
-      <FooterNavigation searchResult={jamsData} />
+      <FooterNavigation searchResult={searchResult} />
       
     </BoxView>
   );
-});
+};
 
 const styles = StyleSheet.create({
   container: {

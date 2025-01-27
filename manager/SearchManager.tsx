@@ -3,27 +3,23 @@ import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 
 class SearchManager {
-  loadJamsData = async () => {
-    let idArray: any = this.getSearchResult('jam');
-    
-    if (idArray?.length > 0) {
-      return await EntityManager.getJams({ items_ids: idArray });
-    }
-    
-    return await EntityManager.listJams();
-  };
-
   async getDefaultData() {
     return await this.loadData();
   }
 
-  async getResult(searchValue: string) {
-    if (!searchValue?.length) {
-      return await this.getDefaultData();
-    } 
-    else {
-      return await this.loadResult(searchValue);
+  getSearchResult(key?: string, searchValue?: string) {
+    let searchState = Store.getState().search;
+    let searchResult: any = searchState.result?.length > 0 ? searchState.result : '{}';
+    let data: any = JSON.parse(searchResult);
+
+    if (key && key?.length > 0 && Object.keys(data).length > 0) {
+      return data[key];
     }
+    else if (!Object.keys(data).length) {
+      return this.getDefaultData();
+    }
+
+    return data;
   }
 
   // Todo - Why searchValue not used, since passed as argument from onSubmitEditing in SearchField component
@@ -58,18 +54,6 @@ class SearchManager {
     }
 
     Store.dispatch(setSearchResult(JSON.stringify(results)));
-  }
-
-  getSearchResult(key?: string) {
-    let searchState = Store.getState().search;
-    let searchResult: any = searchState.result?.length > 0 ? searchState.result : '{}';
-    let data: any = JSON.parse(searchResult);
-
-    if (key && key?.length > 0 && Object.keys(data).length > 0) {
-      return data[key];
-    }
-
-    return data;
   }
 
   isExpanded() {
