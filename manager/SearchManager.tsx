@@ -30,9 +30,7 @@ class SearchManager {
       projects: projects
     });
 
-    this.setSearchResult(response);
-
-    return response;
+    return this.setSearchResult(response);
   }
 
   setSearchResult (response: any) {
@@ -42,6 +40,8 @@ class SearchManager {
     }
 
     Store.dispatch(setSearchResult(JSON.stringify(results)));
+
+    return response;
   }
 
   isExpanded() {
