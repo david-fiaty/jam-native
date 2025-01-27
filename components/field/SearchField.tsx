@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchValue, toggleSearchField } from "@/redux/slices/SearchSlice";
+import { setSearchValue } from "@/redux/slices/SearchSlice";
 import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
 import ScreenManager from "@/manager/ScreenManager";
@@ -14,7 +14,6 @@ const SearchField = () => {
   const searchState = useSelector((state: any) => state.search);
   const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
   const activeModal = ScreenManager.getActiveModal();
-  const isExpanded = searchState.expanded === true;
 
   const onSubmitEditing = async () => {
     dispatch(setSearchValue(currentSearchValue));
@@ -62,19 +61,6 @@ const SearchField = () => {
     return <></>;
   };
 
-  const toggleButton = (
-    <IconView 
-      name="search" 
-      theme="clear" 
-      size={22}
-      padding={0}
-      onPress={() => {
-        dispatch(toggleSearchField(true));
-        openSearch();
-      }}
-    />
-  );
-
   const inputField = (
     <View style={styles.inputContainer}>
       <InputTextField 
@@ -89,8 +75,7 @@ const SearchField = () => {
 
   return (
     <BoxView direction="row" align="center" justify="space-between" style={styles.container}>
-      { isExpanded && inputField}
-      { !isExpanded && toggleButton}
+      { inputField }
     </BoxView>
   );
 };
@@ -98,11 +83,10 @@ const SearchField = () => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    alignItems: 'center',
-    //backgroundColor: 'red',
+    width: '100%',
   },
   inputContainer: {
-    width: '100%',
+    //width: '100%',
   },
 });
 
