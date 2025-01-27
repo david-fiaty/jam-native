@@ -3,6 +3,7 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
+import { BaseProps } from '@/constants/Types';
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 import LogoView from '../view/LogoView';
@@ -15,7 +16,11 @@ import NotificationsMenu from "../menu/NotificationsMenu";
 import SearchView from "../view/SearchView";
 import SearchField from "../field/SearchField";
 
-const HeaderNavigation = () => {
+type Props = BaseProps & {
+  searchResult?: any;
+};
+
+const HeaderNavigation = ({ searchResult }: Props) => {
   const route = useRoute();
   const [notificationsCount, setNotificationsCount] = useState<number>(0);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -24,22 +29,22 @@ const HeaderNavigation = () => {
   const containerStyle = ScreenManager.getHeaderSize();
 
   const renderSearchButton = () => {
-      return (
-        <ModalView 
-          login={false}
-          content={<SearchView />}
-          backTitle={<SearchField />}
-          triggerAlignSelf="flex-end"
-          trigger={    
-            <IconView 
-              name="search" 
-              theme="clear" 
-              size={22}
-              padding={0}
-            />
-          }
-        />
-      );
+    return (
+      <ModalView 
+        login={false}
+        content={<SearchView />}
+        backTitle={<SearchField />}
+        triggerAlignSelf="flex-end"
+        trigger={    
+          <IconView 
+            name="search" 
+            theme="clear" 
+            size={22}
+            padding={0}
+          />
+        }
+      />
+    );
   };
 
   const renderNotificationsButton = () => {
