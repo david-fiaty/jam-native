@@ -18,7 +18,7 @@ import SearchField from "../field/SearchField";
 
 type Props = BaseProps & {
   searchResult?: any;
-  onSearchSubmit?: () => void;
+  onSearchSubmit?: (value: any) => void;
 };
 
 const HeaderNavigation = ({ searchResult, onSearchSubmit }: Props) => {
