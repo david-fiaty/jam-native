@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   backButtonContainer: {
-    backgroundColor: 'black',
+    width: '100%',
   },
   backButton: {
     marginLeft: Layout.space.base*1.5,
