@@ -37,7 +37,11 @@ const JamsScreen = React.memo(() => {
     <BoxView direction="column" align="flex-start" style={styles.container}>
       <HeaderNavigation />
 
-      <BoxView style={[styles.content, contentStyle]} direction="column" align="center">
+      <BoxView 
+        direction="column" 
+        align="center"
+        style={[styles.content, contentStyle]}
+      >
         <JamsList idArray={jamsIds}/>
       </BoxView>
       
