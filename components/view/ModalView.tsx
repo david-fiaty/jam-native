@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
   container: {
     marginTop: modalPosition.y, 
     marginHorizontal: 0,
+    width: '100%',
   },
   wrapper: {
     width: '100%',
