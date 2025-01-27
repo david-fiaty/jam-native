@@ -26,11 +26,11 @@ const JamsList = ({ data }: Props) => {
     })();
 
     setIsLoaded(true);
-  }, [isLoaded]);
+  }, [isLoaded, data]);
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(jamsData);
+  console.log(data);
 
   return (
     <BoxView 
@@ -38,8 +38,8 @@ const JamsList = ({ data }: Props) => {
       style={styles.container}
     >
       <ListView
-        data={jamsData}
-        initialNumToRender={jamsData?.length}
+        data={data}
+        initialNumToRender={data?.length || 0}
         contentContainerStyle={Layout.listContainer}
         renderItem={(row: any) => <ListItem row={row} sectorsData={sectorsData} />}
         keyExtractor={(item: any) => item.id.toString()}
