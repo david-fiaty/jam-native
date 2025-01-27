@@ -43,7 +43,7 @@ const JamsScreen = () => {
 
       <HeaderNavigation 
         searchResult={searchResult} 
-        onSearchSubmit={async () => await onSearchSubmit()} 
+        onSearchSubmit={async (value: any) => await onSearchSubmit(value)} 
       />
 
       <BoxView style={[styles.content, contentStyle]} direction="column" align="center">
