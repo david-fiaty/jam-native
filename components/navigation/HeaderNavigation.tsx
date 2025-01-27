@@ -33,7 +33,7 @@ const HeaderNavigation = ({ searchResult, onSearchComplete }: Props) => {
     return (
       <ModalView 
         login={false}
-        content={<SearchView />}
+        content={<SearchView searchResult={searchResult} />}
         backTitle={<SearchField onSearchComplete={onSearchComplete} />}
         triggerAlignSelf="flex-end"
         trigger={    
