@@ -14,12 +14,12 @@ import SpinnerView from "../view/SpinnerView";
 
 const JamsScreen = () => {
   const dispatch = useDispatch();
-  const [jamsData, setJamsData] = useState<any>([]);
+  const [searchResult, setSearchResult] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const contentStyle = ScreenManager.getModalSize();
   
   const loadJamsData = async () => {
-    setJamsData(await SearchManager.getSearchResult());
+    setSearchResult(await SearchManager.getSearchResult());
   };
 
   const onSearchComplete = async () => {
@@ -42,15 +42,15 @@ const JamsScreen = () => {
     <BoxView direction="column" align="flex-start" style={styles.container}>
 
       <HeaderNavigation 
-        searchResult={jamsData} 
+        searchResult={searchResult} 
         onSearchComplete={async () => await onSearchComplete()} 
       />
 
       <BoxView style={[styles.content, contentStyle]} direction="column" align="center">
-        <JamsList searchResult={jamsData} />
+        <JamsList searchResult={searchResult} />
       </BoxView>
       
-      <FooterNavigation searchResult={jamsData} />
+      <FooterNavigation searchResult={searchResult} />
       
     </BoxView>
   );
