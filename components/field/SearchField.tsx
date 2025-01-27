@@ -2,27 +2,38 @@ import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchValue } from "@/redux/slices/SearchSlice";
+import { Layout } from '@/constants/Layout';
+import { BaseProps } from '@/constants/Types';
+
 import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
 import i18n from '@/translation/i18n';
 import SearchManager from '@/manager/SearchManager';
 import DeviceManager from '@/manager/DeviceManager';
-import { Layout } from '@/constants/Layout';
 
-const SearchField = () => {
+type Props = BaseProps & {
+  onSearchSubmit?: () => void;
+};
+
+const SearchField = ({ onSearchSubmit }: Props) => {
   const dispatch = useDispatch();
   const searchState = useSelector((state: any) => state.search);
   const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
 
+  const submitSearch = async (value?: string) => {
+    dispatch(setSearchValue(value));
+    await SearchManager.loadData(value);
+
+    if (onSearchSubmit) onSearchSubmit();
+  };
+
   const onSubmitEditing = async () => {
-    dispatch(setSearchValue(currentSearchValue));
-    await SearchManager.loadData(currentSearchValue);
+    await submitSearch(currentSearchValue);
   };
 
   const onChangeText = async (value: string) => {
     setCurrentSearchValue(value);
-    dispatch(setSearchValue(value));
-    await SearchManager.loadData(value);
+    await submitSearch(value);
   };
 
   const clearSearch = () => {
