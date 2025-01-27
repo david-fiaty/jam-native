@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { useDispatch } from 'react-redux';
 import { setModalConfig } from "@/redux/slices/ModalSlice";
-import { setSearchValue } from "@/redux/slices/SearchSlice";
 import { ModalConfig } from "@/constants/ModalConfig";
 import { Colors } from "@/constants/Colors";
 import BoxView from "../view/BoxView";
@@ -20,17 +19,15 @@ const JamsScreen = () => {
   const contentStyle = ScreenManager.getModalSize();
   
   const loadSearchResult = async (value?: any) => {
-    setSearchResult(await SearchManager.getSearchResult(value));
+    await SearchManager.getSearchResult(value);
   };
 
   const onSearchSubmit = async (value: any) => {
-    dispatch(setSearchValue(value));
     await loadSearchResult(value);
   };
 
   const onSearchClear = async () => {
-    SearchManager.clearSearchValue();
-    await loadSearchResult();
+    await loadSearchResult(null);
   };
 
   useEffect(() => {
