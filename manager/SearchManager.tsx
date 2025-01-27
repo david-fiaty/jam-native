@@ -21,15 +21,18 @@ class SearchManager {
     return searchResult;
   }
 
-  // Todo - Why searchValue not used, since passed as argument from onSubmitEditing in SearchField component
-  async loadData(searchValue?: any) {
-    const [jams, profiles, projects] = await this.sendRequest();
-    
-    return this.buildResponse({
+  async loadData(searchValue?: string) {
+    const options = searchValue?.length ? { query_text: searchValue } : {};
+    const [jams, profiles, projects] = await this.sendRequest(options);
+    const response = this.buildResponse({
       jams: jams, 
       profiles: profiles, 
       projects: projects
     });
+
+    this.setSearchResult(response);
+
+    return response;
   }
 
   setSearchResult (response: any) {
