@@ -23,9 +23,8 @@ const JamsScreen = React.memo(() => {
 
     (async () => {
       setJamsData(await SearchManager.loadJamsData());
+      setIsLoaded(true);
     })();
-
-    setIsLoaded(true);
   }, [isLoaded, ModalConfig]);
 
   if (!isLoaded) return <SpinnerView />;
