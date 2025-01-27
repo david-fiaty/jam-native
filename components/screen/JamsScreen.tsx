@@ -20,7 +20,12 @@ const JamsScreen = React.memo(() => {
 
   useEffect(() => {
     dispatch(setModalConfig(ModalConfig));
-    setJamsIds(SearchManager.getSearchResult('jam'));
+
+    (async () => {
+      setJamsIds(await SearchManager.getSearchResult('jam'));
+      setIsLoaded(true);
+    })();
+    
     setIsLoaded(true);
   }, [isLoaded, ModalConfig]);
 
