@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { StyleSheet } from "react-native";
-import { useRoute } from "@react-navigation/native";
 import { useDispatch } from 'react-redux';
 import { setModalConfig } from "@/redux/slices/ModalSlice";
 import { ModalConfig } from "@/constants/ModalConfig";
@@ -13,8 +12,6 @@ import HeaderNavigation from "../navigation/HeaderNavigation";
 
 const JamsScreen = React.memo(() => {
   const dispatch = useDispatch();
-  const route = useRoute();
-  const activeModal = ScreenManager.getActiveModal();
   const containerStyle = ScreenManager.getModalSize();
   
   useEffect(() => {
