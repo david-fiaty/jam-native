@@ -12,7 +12,7 @@ import HeaderNavigation from "../navigation/HeaderNavigation";
 
 const JamsScreen = React.memo(() => {
   const dispatch = useDispatch();
-  const containerStyle = ScreenManager.getModalSize();
+  const contentStyle = ScreenManager.getModalSize();
   
   useEffect(() => {
     dispatch(setModalConfig(ModalConfig));
@@ -22,7 +22,7 @@ const JamsScreen = React.memo(() => {
     <BoxView direction="column" align="flex-start" style={styles.container}>
       <HeaderNavigation />
 
-      <BoxView style={[styles.mainContent, containerStyle]} direction="column" align="center">
+      <BoxView style={[styles.content, contentStyle]} direction="column" align="center">
         <JamsList />
       </BoxView>
       
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.white,
   },
-  mainContent: {
+  content: {
     width: '100%',
     zIndex: 0,
   },
