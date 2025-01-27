@@ -12,12 +12,10 @@ class SearchManager {
     let searchResult: any = searchState.result?.length ? JSON.parse(searchState.result) : this.loadData(searchValue);
 
     if (Object.keys(searchResult).length > 0) {
-      return this.getDefaultData();
-      //return await EntityManager.getJams({ items_ids: searchResult[key] });
+      return searchResult;
     }
-    else if (!Object.keys(searchResult).length) {
-      return this.getDefaultData();
-    }
+    
+    return this.getDefaultData();
   }
 
   async loadData(searchValue?: string) {
