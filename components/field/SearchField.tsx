@@ -11,7 +11,6 @@ const SearchField = () => {
   const dispatch = useDispatch();
   const searchState = useSelector((state: any) => state.search);
   const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
-  const activeModal = ScreenManager.getActiveModal();
 
   const onSubmitEditing = async () => {
     dispatch(setSearchValue(currentSearchValue));
