@@ -22,7 +22,7 @@ const JamsList = ({ searchResult }: Props) => {
     })();
 
     setIsLoaded(true);
-  }, [isLoaded, searchResult]);
+  }, [isLoaded, sectors]);
 
   if (!isLoaded) return <SpinnerView />;
 
