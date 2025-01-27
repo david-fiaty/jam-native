@@ -31,6 +31,8 @@ const JamsScreen = React.memo(() => {
 
   if (!isLoaded) return <SpinnerView />;
 
+  console.log(jamsIds);
+
   return (  
     <BoxView direction="column" align="flex-start" style={styles.container}>
       <HeaderNavigation />
