@@ -32,7 +32,7 @@ const JamsScreen = React.memo(() => {
   return (  
     <BoxView direction="column" align="flex-start" style={styles.container}>
 
-      <HeaderNavigation />
+      <HeaderNavigation searchResult={jamsData} />
 
       <BoxView style={[styles.content, contentStyle]} direction="column" align="center">
         <JamsList searchResult={jamsData} />
