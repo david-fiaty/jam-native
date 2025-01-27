@@ -23,7 +23,8 @@ const JamsScreen = () => {
   };
 
   const onSearchComplete = async () => {
-    loadJamsData();
+    await loadJamsData();
+    console.log('search complete');
   };
 
   useEffect(() => {
@@ -40,7 +41,7 @@ const JamsScreen = () => {
   return (  
     <BoxView direction="column" align="flex-start" style={styles.container}>
 
-      <HeaderNavigation searchResult={jamsData} onSearchComplete={() => onSearchComplete()} />
+      <HeaderNavigation searchResult={jamsData} onSearchComplete={async () => await onSearchComplete()} />
 
       <BoxView style={[styles.content, contentStyle]} direction="column" align="center">
         <JamsList searchResult={jamsData} />
