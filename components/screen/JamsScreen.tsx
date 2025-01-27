@@ -10,11 +10,12 @@ import JamsList from "../list/JamsList";
 import ScreenManager from "@/manager/ScreenManager";
 import HeaderNavigation from "../navigation/HeaderNavigation";
 import SearchManager from "@/manager/SearchManager";
-import EntityManager from "@/manager/EntityManager";
+import SpinnerView from "../view/SpinnerView";
 
 const JamsScreen = React.memo(() => {
   const dispatch = useDispatch();
   const [jamsData, setJamsData] = useState<any>([]);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const contentStyle = ScreenManager.getModalSize();
   
   useEffect(() => {
@@ -22,9 +23,12 @@ const JamsScreen = React.memo(() => {
 
     (async () => {
       setJamsData(await SearchManager.loadJamsData());
+      setIsLoaded(true);
     })();
 
-  }, [ModalConfig]);
+  }, [isLoaded, ModalConfig]);
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (  
     <BoxView direction="column" align="flex-start" style={styles.container}>
