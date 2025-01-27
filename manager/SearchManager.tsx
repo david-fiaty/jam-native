@@ -1,4 +1,4 @@
-import { setSearchResult } from "@/redux/slices/SearchSlice";
+import { setSearchResult, setSearchValue } from "@/redux/slices/SearchSlice";
 import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 
@@ -12,12 +12,13 @@ class SearchManager {
     let searchResult: any = searchState.result?.length ? JSON.parse(searchState.result) : this.loadData(searchValue);
 
     if (Object.keys(searchResult).length > 0) {
-      return this.getDefaultData();
-      //return await EntityManager.getJams({ items_ids: searchResult[key] });
+
+      console.log('--->', searchValue, searchResult?.jam?.length);
+
+      return searchResult;
     }
-    else if (!Object.keys(searchResult).length) {
-      return this.getDefaultData();
-    }
+    
+    return await this.getDefaultData();
   }
 
   async loadData(searchValue?: string) {
@@ -29,18 +30,21 @@ class SearchManager {
       projects: projects
     });
 
-    return this.storeSearchResult(response);
+    this.storeSearchResult(response);
+
+    return response;
+  }
+
+  clearSearchValue () {
+    Store.dispatch(setSearchValue(''));
+  }
+
+  storeSearchValue (value: any) {
+    Store.dispatch(setSearchValue(value));
   }
 
   storeSearchResult (response: any) {
-    let results: any = {};
-    for (const [key, data] of Object.entries(response)) {
-      results[key] = (data || []).map((o: any) => o.id);
-    }
-
-    Store.dispatch(setSearchResult(JSON.stringify(results)));
-
-    return response;
+    Store.dispatch(setSearchResult(JSON.stringify(response)));
   }
 
   async sendRequest(options?: any) {
