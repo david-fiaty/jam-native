@@ -14,12 +14,18 @@ import EntityManager from "@/manager/EntityManager";
 
 const JamsScreen = React.memo(() => {
   const dispatch = useDispatch();
-  const [jamsIds, setJamsIds] = useState<any>([]);
+  const [jamsData, setJamsData] = useState<any>([]);
   const contentStyle = ScreenManager.getModalSize();
   
-  const getJamsIds = async () => {
+  const getJamsData = async () => {
     let idArray: any = SearchManager.getSearchResult('jam');
-
+    
+    if (idArray?.length > 0) {
+      return await EntityManager.getJams({ items_ids: idArray });
+    }
+    else {
+      return console.log(await EntityManager.listJams());
+    }
   };
 
   useEffect(() => {
@@ -27,8 +33,8 @@ const JamsScreen = React.memo(() => {
     dispatch(setModalConfig(ModalConfig));
 
     (async () => {
-      setJamsIds(await getJamsIds());
-    });
+      setJamsData(await getJamsData());
+    })();
 
   }, [ModalConfig]);
 
@@ -37,7 +43,7 @@ const JamsScreen = React.memo(() => {
       <HeaderNavigation />
 
       <BoxView style={[styles.content, contentStyle]} direction="column" align="center">
-        <JamsList />
+        <JamsList data={jamsData} />
       </BoxView>
       
       <FooterNavigation />
