@@ -83,6 +83,10 @@ export const Layout = {
     minHeight: 48,
     maxHeight: 60,
   },
+  title: {
+    fontWeight: 'bold',
+    fontSize: fontSize.big,
+  },
   menuContainer: {
     padding: space.base*1.5,
   },
