@@ -87,8 +87,6 @@ const HeaderNavigation = () => {
     })();
   }, [isLoaded]);
 
-  ScreenManager.getHeaderSize();
-
   return (
     <BoxView 
       direction="row" 
