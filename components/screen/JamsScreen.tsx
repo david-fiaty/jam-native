@@ -18,13 +18,13 @@ const JamsScreen = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const contentStyle = ScreenManager.getModalSize();
   
-  const loadJamsData = async () => {
-    setSearchResult(await SearchManager.getSearchResult());
+  const loadJamsData = async (value?: any) => {
+    setSearchResult(await SearchManager.getSearchResult(value));
   };
 
-  const onSearchSubmit = async () => {
-    await loadJamsData();
-    console.log('search complete');
+  const onSearchSubmit = async (value: any) => {
+    await loadJamsData(value);
+    console.log('search submit', value);
   };
 
   useEffect(() => {
