@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet } from "react-native";
 import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
+import { BaseProps } from '@/constants/Types';
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 import ScreenManager from '@/manager/ScreenManager';
@@ -11,12 +12,16 @@ import i18n from "@/translation/i18n";
 import JamForm from "../form/JamForm";
 import ProfileForm from "../form/ProfileForm";
 
+type Props = BaseProps & {
+  searchResult?: any;
+};
+
 const containerStyle = ScreenManager.getFooterSize();
 const containerPosition = ScreenManager.getFooterPosition();
 const activeModal = ScreenManager.getActiveModal();
 
-const FooterNavigation = () => {
-const [isActive, setIsActive] = useState<boolean>(false);
+const FooterNavigation = ({ searchResult }: Props) => {
+  const [isActive, setIsActive] = useState<boolean>(false);
 
   const onTriggerPress = (active: boolean) => {
     console.log('-->', active); // Todo - Hilight items
@@ -31,7 +36,7 @@ const [isActive, setIsActive] = useState<boolean>(false);
     >
       <ModalView 
         login={false}
-        content={<JamsMapView />}
+        content={<JamsMapView searchResult={searchResult} />}
         backTitle={i18n.t('Jam locations')}
         triggerAlignSelf="center"
         onTriggerPress={onTriggerPress}

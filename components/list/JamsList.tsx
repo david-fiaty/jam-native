@@ -9,10 +9,10 @@ import EntityManager from "@/manager/EntityManager";
 import ListItem from "./JamsList/ListItem";
 
 type Props = BaseProps & {
-  data?: any;
+  searchResult?: any;
 };
 
-const JamsList = ({ data }: Props) => {
+const JamsList = ({ searchResult }: Props) => {
   const [sectors, setSectors] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
@@ -22,7 +22,7 @@ const JamsList = ({ data }: Props) => {
     })();
 
     setIsLoaded(true);
-  }, [isLoaded, data]);
+  }, [isLoaded, sectors]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -32,8 +32,8 @@ const JamsList = ({ data }: Props) => {
       style={styles.container}
     >
       <ListView
-        data={data}
-        initialNumToRender={data?.length || 0}
+        data={searchResult}
+        initialNumToRender={searchResult?.length || 0}
         contentContainerStyle={Layout.listContainer}
         renderItem={(row: any) => <ListItem row={row} sectorsData={sectors} />}
         keyExtractor={(item: any) => item.id.toString()}
@@ -51,6 +51,5 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 });
-
 
 export default JamsList;

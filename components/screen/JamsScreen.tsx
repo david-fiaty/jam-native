@@ -10,41 +10,36 @@ import JamsList from "../list/JamsList";
 import ScreenManager from "@/manager/ScreenManager";
 import HeaderNavigation from "../navigation/HeaderNavigation";
 import SearchManager from "@/manager/SearchManager";
-import EntityManager from "@/manager/EntityManager";
+import SpinnerView from "../view/SpinnerView";
 
 const JamsScreen = React.memo(() => {
   const dispatch = useDispatch();
   const [jamsData, setJamsData] = useState<any>([]);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const contentStyle = ScreenManager.getModalSize();
   
-  const getJamsData = async () => {
-    let idArray: any = SearchManager.getSearchResult('jam');
-    
-    if (idArray?.length > 0) {
-      return await EntityManager.getJams({ items_ids: idArray });
-    }
-    
-    return await EntityManager.listJams();
-  };
-
   useEffect(() => {
     dispatch(setModalConfig(ModalConfig));
 
     (async () => {
-      setJamsData(await getJamsData());
+      setJamsData(await SearchManager.loadJamsData());
+      setIsLoaded(true);
     })();
+  }, [isLoaded, ModalConfig]);
 
-  }, [ModalConfig]);
+  if (!isLoaded) return <SpinnerView />;
 
   return (  
     <BoxView direction="column" align="flex-start" style={styles.container}>
-      <HeaderNavigation />
+
+      <HeaderNavigation searchResult={jamsData} />
 
       <BoxView style={[styles.content, contentStyle]} direction="column" align="center">
-        <JamsList data={jamsData} />
+        <JamsList searchResult={jamsData} />
       </BoxView>
       
-      <FooterNavigation />
+      <FooterNavigation searchResult={jamsData} />
+      
     </BoxView>
   );
 });
