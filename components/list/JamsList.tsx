@@ -7,23 +7,34 @@ import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import ListItem from "./JamsList/ListItem";
+import SearchManager from "@/manager/SearchManager";
 
 type Props = BaseProps & {
-  data?: any;
+  idArray?: any;
 };
 
-const JamsList = ({ data }: Props) => {
-  const [sectors, setSectors] = useState<any>([]);
+const JamsList = ({ idArray }: Props) => {
+  const [jamsData, setJamsData] = useState<any>([]);
+  const [sectorsData, setSectorsData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  
+
   useEffect(() => {
     (async () => {
-      if (data?.length > 0) {
-        setSectors(await EntityManager.getSectors());
+      if (!isLoaded) {
+        setSectorsData(await EntityManager.getSectors());
+        if (idArray?.length > 0) {
+          setJamsData(await EntityManager.getJams({ items_ids: idArray }));
+        }
+        else {
+          idArray = SearchManager.getSearchResult('jam');
+          if (idArray?.length > 0) setJamsData(await EntityManager.getJams({ items_ids: idArray })); 
+          else setJamsData(await EntityManager.listJams());
+        }
+    
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, data]);
+  }, [isLoaded, idArray]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -33,10 +44,10 @@ const JamsList = ({ data }: Props) => {
       style={styles.container}
     >
       <ListView
-        data={data}
-        initialNumToRender={data?.length}
+        data={jamsData}
+        initialNumToRender={jamsData?.length}
         contentContainerStyle={Layout.listContainer}
-        renderItem={(row: any) => <ListItem row={row} sectorsData={sectors} />}
+        renderItem={(row: any) => <ListItem row={row} sectorsData={sectorsData} />}
         keyExtractor={(item: any) => item.id.toString()}
       />
     </BoxView>
