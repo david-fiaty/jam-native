@@ -28,7 +28,6 @@ const SearchView = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const searchState = useSelector((state: any) => state.search);
   const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
-  const activeModal = ScreenManager.getActiveModal();
   //const isExpanded = searchState.expanded === true;
 
   const onSubmitEditing = async () => {
