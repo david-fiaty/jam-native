@@ -46,10 +46,6 @@ const SearchView = () => {
     dispatch(setSearchValue(''));
   };
 
-  const openSearch = () => {
-    ScreenManager.toggleModal('SearchView');
-  };
-
   const renderRightIcon = () => {
     if (searchState.value.length > 0) {
       return (
@@ -99,7 +95,7 @@ const SearchView = () => {
       {/* Search field */}
       <BoxView direction="row" align="center" justify="flex-start">
         <InputTextField 
-          //value={currentSearchValue}
+          value={currentSearchValue}
           placeholder={ i18n.t('Search...')}
           onChangeText={onChangeText}
           onSubmitEditing={onSubmitEditing}
