@@ -66,11 +66,13 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
           style={styles.wrapper}
         >
           {backTitle && 
-            <BackButton
-              title={backTitle}
-              onPress={() => toggleModal(false)}
-              containerStyle={styles.backButton}
-            />
+            <BoxView direction="row" style={{width: '280'}}>
+              <BackButton
+                title={backTitle}
+                onPress={() => toggleModal(false)}
+                containerStyle={styles.backButton}
+              />
+            </BoxView>
           }
           
           <BoxView direction="column" style={styles.content}>
