@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { useDispatch } from 'react-redux';
 import { setModalConfig } from "@/redux/slices/ModalSlice";
+import { setSearchValue } from "@/redux/slices/SearchSlice";
 import { ModalConfig } from "@/constants/ModalConfig";
 import { Colors } from "@/constants/Colors";
 import BoxView from "../view/BoxView";
@@ -23,8 +24,13 @@ const JamsScreen = () => {
   };
 
   const onSearchSubmit = async (value: any) => {
+    dispatch(setSearchValue(value));
     await loadSearchResult(value);
-    console.log('search submit', value);
+  };
+
+  const onSearchClear = async () => {
+    dispatch(setSearchValue(''));
+    await loadSearchResult();
   };
 
   useEffect(() => {
@@ -44,6 +50,7 @@ const JamsScreen = () => {
       <HeaderNavigation 
         searchResult={searchResult} 
         onSearchSubmit={async (value: any) => await onSearchSubmit(value)} 
+        onSearchClear={async () => onSearchClear() }
       />
 
       <BoxView style={[styles.content, contentStyle]} direction="column" align="center">
