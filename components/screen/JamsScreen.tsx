@@ -29,7 +29,7 @@ const JamsScreen = () => {
   };
 
   const onSearchClear = async () => {
-    dispatch(setSearchValue(''));
+    SearchManager.clearSearchValue();
     await loadSearchResult();
   };
 
@@ -43,8 +43,6 @@ const JamsScreen = () => {
   }, [isLoaded, ModalConfig]);
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(searchResult?.jam?.length);
 
   return (  
     <BoxView direction="column" align="flex-start" style={styles.container}>
