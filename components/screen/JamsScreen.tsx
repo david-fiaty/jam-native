@@ -17,21 +17,11 @@ const JamsScreen = React.memo(() => {
   const [jamsData, setJamsData] = useState<any>([]);
   const contentStyle = ScreenManager.getModalSize();
   
-  const getJamsData = async () => {
-    let idArray: any = SearchManager.getSearchResult('jam');
-    
-    if (idArray?.length > 0) {
-      return await EntityManager.getJams({ items_ids: idArray });
-    }
-    
-    return await EntityManager.listJams();
-  };
-
   useEffect(() => {
     dispatch(setModalConfig(ModalConfig));
 
     (async () => {
-      setJamsData(await getJamsData());
+      setJamsData(await SearchManager.loadJamsData());
     })();
 
   }, [ModalConfig]);
