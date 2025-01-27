@@ -71,9 +71,10 @@ const JamsMapView = ({ idArray }: Props) => {
   useEffect(() => {
     (async () => {
       setCurrentLocation(await DeviceManager.getLocation());
-      setSearchData(await SearchManager.getResult(searchState.value));
-      setIsLoaded(true);
+      setSearchData(await SearchManager.getSearchResult(searchState.value));
     })();
+
+    setIsLoaded(true);
   }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;

@@ -6,6 +6,8 @@ import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
 import i18n from '@/translation/i18n';
 import SearchManager from '@/manager/SearchManager';
+import DeviceManager from '@/manager/DeviceManager';
+import { Layout } from '@/constants/Layout';
 
 const SearchField = () => {
   const dispatch = useDispatch();
@@ -45,20 +47,20 @@ const SearchField = () => {
 
   return (
     <View style={styles.container}>
-    <InputTextField 
-      value={currentSearchValue}
-      placeholder={i18n.t('Search...')}
-      onChangeText={onChangeText}
-      onSubmitEditing={onSubmitEditing}
-      rightIcon={renderRightIcon()}
-    /> 
+      <InputTextField 
+        value={currentSearchValue}
+        placeholder={i18n.t('Search...')}
+        onChangeText={onChangeText}
+        onSubmitEditing={onSubmitEditing}
+        rightIcon={renderRightIcon()}
+      /> 
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: DeviceManager.window.width - Layout.space.base*5.5, // Todo - Improve field width caclulation
   },
 });
 
