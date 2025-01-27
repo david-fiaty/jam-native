@@ -44,17 +44,6 @@ const SearchField = () => {
         />
       );
     }
-    else if (activeModal?.name != 'SearchView') {
-      return (
-        <IconView 
-          name="search" 
-          theme="secondary" 
-          size={18}
-          padding={0}
-          onPress={openSearch}
-        />
-      );
-    }
 
     return <></>;
   };
