@@ -38,7 +38,7 @@ const JamsScreen = React.memo(() => {
         <JamsList searchResult={jamsData} />
       </BoxView>
       
-      <FooterNavigation />
+      <FooterNavigation searchResult={jamsData} />
       
     </BoxView>
   );
