@@ -10,31 +10,20 @@ import ListItem from "./JamsList/ListItem";
 import SearchManager from "@/manager/SearchManager";
 
 type Props = BaseProps & {
-  idArray?: any;
+  data?: any;
 };
 
-const JamsList = ({ idArray }: Props) => {
-  const [jamsData, setJamsData] = useState<any>([]);
+const JamsList = ({ data }: Props) => {
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
-      if (!isLoaded) {
-        setSectorsData(await EntityManager.getSectors());
-        if (idArray?.length > 0) {
-          setJamsData(await EntityManager.getJams({ items_ids: idArray }));
-        }
-        else {
-          idArray = SearchManager.getSearchResult('jam');
-          if (idArray?.length > 0) setJamsData(await EntityManager.getJams({ items_ids: idArray })); 
-          else setJamsData(await EntityManager.listJams());
-        }
-    
-        setIsLoaded(true);
-      }
+      setSectorsData(await EntityManager.getSectors());
     })();
-  }, [isLoaded, idArray]);
+
+    setIsLoaded(true);
+  }, [isLoaded, data]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -44,8 +33,8 @@ const JamsList = ({ idArray }: Props) => {
       style={styles.container}
     >
       <ListView
-        data={jamsData}
-        initialNumToRender={jamsData?.length}
+        data={data}
+        initialNumToRender={data?.length || 0}
         contentContainerStyle={Layout.listContainer}
         renderItem={(row: any) => <ListItem row={row} sectorsData={sectorsData} />}
         keyExtractor={(item: any) => item.id.toString()}
