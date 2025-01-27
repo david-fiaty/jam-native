@@ -52,6 +52,8 @@ const BackButton = ({title, containerStyle, onPress}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
+    width: '100%',
+    backgroundColor: 'red',
   },
   text: {
     fontWeight: 'bold',
