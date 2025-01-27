@@ -36,7 +36,7 @@ const FooterNavigation = ({ searchResult }: Props) => {
     >
       <ModalView 
         login={false}
-        content={<JamsMapView />}
+        content={<JamsMapView searchResult={searchResult} />}
         backTitle={i18n.t('Jam locations')}
         triggerAlignSelf="center"
         onTriggerPress={onTriggerPress}
