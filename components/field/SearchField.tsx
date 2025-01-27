@@ -11,7 +11,6 @@ const SearchField = () => {
   const dispatch = useDispatch();
   const searchState = useSelector((state: any) => state.search);
   const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
-  const activeModal = ScreenManager.getActiveModal();
 
   const onSubmitEditing = async () => {
     dispatch(setSearchValue(currentSearchValue));
@@ -41,17 +40,6 @@ const SearchField = () => {
           theme="primary" 
           size={13}
           onPress={clearSearch}
-        />
-      );
-    }
-    else if (activeModal?.name != 'SearchView') {
-      return (
-        <IconView 
-          name="search" 
-          theme="secondary" 
-          size={18}
-          padding={0}
-          onPress={openSearch}
         />
       );
     }
