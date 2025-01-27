@@ -22,7 +22,7 @@ const SearchField = ({ onSearchComplete }: Props) => {
 
   const submitSearch = async (value?: string) => {
     dispatch(setSearchValue(value));
-    await SearchManager.loadData(value);
+    await SearchManager.getSearchResult(value);
     if (onSearchComplete) onSearchComplete();
   };
 
