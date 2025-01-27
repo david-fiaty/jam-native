@@ -27,7 +27,7 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
 
   const onChangeText = (value: string) => {
     setCurrentSearchValue(value);
-    submitSearch(value);
+    //submitSearch(value); // Todo - Fix keyboard disappearing or remove
   };
 
   const clearSearch = () => {
