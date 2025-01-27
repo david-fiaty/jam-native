@@ -41,7 +41,10 @@ const JamsScreen = () => {
   return (  
     <BoxView direction="column" align="flex-start" style={styles.container}>
 
-      <HeaderNavigation searchResult={jamsData} onSearchComplete={async () => await onSearchComplete()} />
+      <HeaderNavigation 
+        searchResult={jamsData} 
+        onSearchComplete={async () => await onSearchComplete()} 
+      />
 
       <BoxView style={[styles.content, contentStyle]} direction="column" align="center">
         <JamsList searchResult={jamsData} />
