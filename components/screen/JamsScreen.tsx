@@ -18,12 +18,12 @@ const JamsScreen = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const contentStyle = ScreenManager.getModalSize();
   
-  const loadJamsData = async (value?: any) => {
+  const loadSearchResult = async (value?: any) => {
     setSearchResult(await SearchManager.getSearchResult(value));
   };
 
   const onSearchSubmit = async (value: any) => {
-    await loadJamsData(value);
+    await loadSearchResult(value);
     console.log('search submit', value);
   };
 
@@ -31,7 +31,7 @@ const JamsScreen = () => {
     dispatch(setModalConfig(ModalConfig));
 
     (async () => {
-      await loadJamsData();
+      await loadSearchResult();
       setIsLoaded(true);
     })();
   }, [isLoaded, ModalConfig]);
