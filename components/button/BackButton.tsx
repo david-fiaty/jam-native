@@ -2,7 +2,6 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import IconView from '../view/IconView';
 import TextView from '../view/TextView';
 import BoxView from '../view/BoxView';
-import DeviceManager from '@/manager/DeviceManager';
 
 type Props = {
   title?: string;
@@ -53,7 +52,7 @@ const BackButton = ({title, containerStyle, onPress}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    //width: DeviceManager.window.width,
+    flexGrow: 1,
     backgroundColor: 'blue',
   },
   text: {
