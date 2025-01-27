@@ -44,12 +44,7 @@ const JamsScreen = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  let x: any = [];
-  for (const [key, data] of Object.entries(searchResult)) {
-    x[key] = (data || []).map((o: any) => o.id);
-  }
-
-  console.log(x);
+  console.log(searchResult?.jam?.length);
 
   return (  
     <BoxView direction="column" align="flex-start" style={styles.container}>
