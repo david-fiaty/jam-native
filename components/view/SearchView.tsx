@@ -39,7 +39,7 @@ const SearchView = () => {
     if (!activeTab) setActiveTab(StaticData.searchTabs[0].id);
 
     (async () => {
-      setSearchData(await SearchManager.getResult(searchState.value));
+      setSearchData(await SearchManager.getSearchResult(searchState.value));
       setIsLoaded(true);
     })();
   }, [isLoaded, activeTab, searchState]);
@@ -53,11 +53,6 @@ const SearchView = () => {
       scroll={true}
       style={[Layout.screenContent, styles.container]}
     >
-
-      {/* Search field */}
-      <BoxView direction="row" align="center" justify="flex-start">
-        <SearchField />
-      </BoxView>
 
       {/* Search filters */}
       <BoxView direction="row" align="center" justify="flex-start">

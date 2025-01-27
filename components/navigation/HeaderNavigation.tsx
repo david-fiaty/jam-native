@@ -13,6 +13,7 @@ import i18n from "@/translation/i18n";
 import SettingsMenu from "../menu/SettingsMenu";
 import NotificationsMenu from "../menu/NotificationsMenu";
 import SearchView from "../view/SearchView";
+import SearchField from "../field/SearchField";
 
 const HeaderNavigation = () => {
   const route = useRoute();
@@ -27,7 +28,7 @@ const HeaderNavigation = () => {
         <ModalView 
           login={false}
           content={<SearchView />}
-          backTitle={i18n.t('Search')}
+          backTitle={<SearchField />}
           triggerAlignSelf="flex-end"
           trigger={    
             <IconView 
@@ -85,8 +86,6 @@ const HeaderNavigation = () => {
       setIsLoaded(true);
     })();
   }, [isLoaded]);
-
-  ScreenManager.getHeaderSize();
 
   return (
     <BoxView 

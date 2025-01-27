@@ -47,7 +47,7 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
   return (
     <ScreenView>  
       <TouchableOpacity
-        onPress={() => toggleModal(!isVisible)}
+        onPress={() => toggleModal(true)}
         style={[styles.triggerButton, triggerStyle]}
       >
         {trigger}
@@ -66,11 +66,13 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
           style={styles.wrapper}
         >
           {backTitle && 
-            <BackButton
-              title={backTitle}
-              onPress={() => toggleModal(false)}
-              containerStyle={styles.backButton}
-            />
+            <BoxView direction="row" style={styles.backButtonContainer}>
+              <BackButton
+                title={backTitle}
+                onPress={() => toggleModal(false)}
+                containerStyle={styles.backButton}
+              />
+            </BoxView>
           }
           
           <BoxView direction="column" style={styles.content}>
@@ -85,12 +87,13 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
 const styles = StyleSheet.create({
   backdrop: {
     color: Colors.white,
-    opacity: 0.5,
+    opacity: 0.6,
     marginTop: 50,
   },
   container: {
     marginTop: modalPosition.y, 
     marginHorizontal: 0,
+    width: '100%',
   },
   wrapper: {
     width: '100%',
@@ -102,6 +105,9 @@ const styles = StyleSheet.create({
   content: {
     width: '100%',
     flex: 1,
+  },
+  backButtonContainer: {
+    width: '100%',
   },
   backButton: {
     marginLeft: Layout.space.base*1.5,
