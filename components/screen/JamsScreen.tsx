@@ -38,6 +38,7 @@ const JamsScreen = React.memo(() => {
 
   return (  
     <BoxView direction="column" align="flex-start" style={styles.container}>
+
       <HeaderNavigation />
 
       <BoxView style={[styles.content, contentStyle]} direction="column" align="center">
@@ -45,6 +46,7 @@ const JamsScreen = React.memo(() => {
       </BoxView>
       
       <FooterNavigation />
+      
     </BoxView>
   );
 });
