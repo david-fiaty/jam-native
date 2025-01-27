@@ -9,23 +9,21 @@ import EntityManager from "@/manager/EntityManager";
 import ListItem from "./JamsList/ListItem";
 
 type Props = BaseProps & {
-  idArray?: any;
+  data?: any;
 };
 
-const JamsList = ({ idArray }: Props) => {
+const JamsList = ({ data }: Props) => {
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [jamsData, setJamsData] = useState<any>([]);
   
   useEffect(() => {
     (async () => {
-      if (idArray?.length > 0) {
+      if (data?.length > 0) {
         setSectorsData(await EntityManager.getSectors());
-        setJamsData(await EntityManager.getJams({ items_ids: idArray })); 
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, idArray]);
+  }, [isLoaded, data]);
 
   if (!isLoaded) return <SpinnerView />;
 
