@@ -14,13 +14,10 @@ type Props = BaseProps & {
 };
 
 const JamsList = ({ data }: Props) => {
-  const [jamsData, setJamsData] = useState<any>([]);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
-    setJamsData(data);
-
     (async () => {
       setSectorsData(await EntityManager.getSectors());
     })();
@@ -29,8 +26,6 @@ const JamsList = ({ data }: Props) => {
   }, [isLoaded, data]);
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(data);
 
   return (
     <BoxView 
