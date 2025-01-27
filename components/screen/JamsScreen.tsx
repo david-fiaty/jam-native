@@ -47,7 +47,7 @@ const JamsScreen = () => {
       />
 
       <BoxView style={[styles.content, contentStyle]} direction="column" align="center">
-        <JamsList searchResult={searchResult} />
+        <JamsList searchResult={searchResult?.jam} />
       </BoxView>
       
       <FooterNavigation searchResult={searchResult} />
