@@ -18,9 +18,10 @@ import SearchField from "../field/SearchField";
 
 type Props = BaseProps & {
   searchResult?: any;
+  onSearchSubmit?: () => void;
 };
 
-const HeaderNavigation = ({ searchResult }: Props) => {
+const HeaderNavigation = ({ searchResult, onSearchSubmit }: Props) => {
   const route = useRoute();
   const [notificationsCount, setNotificationsCount] = useState<number>(0);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -33,7 +34,7 @@ const HeaderNavigation = ({ searchResult }: Props) => {
       <ModalView 
         login={false}
         content={<SearchView />}
-        backTitle={<SearchField />}
+        backTitle={<SearchField onSearchSubmit={onSearchSubmit} />}
         triggerAlignSelf="flex-end"
         trigger={    
           <IconView 
