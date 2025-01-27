@@ -17,7 +17,6 @@ type Props = BaseProps & {
 const JamsMapView = ({ searchResult }: Props) => {
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [searchData, setSearchData] = useState<any>({});
   const searchState = useSelector((state: any) => state.search);
 
   const mapRef = useRef<any>();
@@ -91,7 +90,7 @@ const JamsMapView = ({ searchResult }: Props) => {
           showsUserLocation={true}
           showsMyLocationButton={true}
         >
-          {searchData?.jam?.map((item: any) => renderJamMarker(item))}
+          {searchResult?.map((item: any) => renderJamMarker(item))}
         </RNMapView>
       </View>
     </TouchableWithoutFeedback>
