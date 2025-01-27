@@ -24,12 +24,11 @@ const JamsScreen = React.memo(() => {
       return await EntityManager.getJams({ items_ids: idArray });
     }
     else {
-      return console.log(await EntityManager.listJams());
+      return await EntityManager.listJams();
     }
   };
 
   useEffect(() => {
-    
     dispatch(setModalConfig(ModalConfig));
 
     (async () => {
