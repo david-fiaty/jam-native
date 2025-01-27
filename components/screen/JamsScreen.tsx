@@ -23,9 +23,8 @@ const JamsScreen = React.memo(() => {
     if (idArray?.length > 0) {
       return await EntityManager.getJams({ items_ids: idArray });
     }
-    else {
-      return await EntityManager.listJams();
-    }
+    
+    return await EntityManager.listJams();
   };
 
   useEffect(() => {
