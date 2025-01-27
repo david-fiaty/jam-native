@@ -12,10 +12,10 @@ import SearchManager from '@/manager/SearchManager';
 import DeviceManager from '@/manager/DeviceManager';
 
 type Props = BaseProps & {
-  onSearchSubmit?: () => void;
+  onSearchComplete?: () => void;
 };
 
-const SearchField = ({ onSearchSubmit }: Props) => {
+const SearchField = ({ onSearchComplete }: Props) => {
   const dispatch = useDispatch();
   const searchState = useSelector((state: any) => state.search);
   const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
@@ -24,7 +24,7 @@ const SearchField = ({ onSearchSubmit }: Props) => {
     dispatch(setSearchValue(value));
     await SearchManager.loadData(value);
 
-    if (onSearchSubmit) onSearchSubmit();
+    if (onSearchComplete) onSearchComplete();
   };
 
   const onSubmitEditing = async () => {

@@ -22,7 +22,7 @@ const JamsScreen = () => {
     setJamsData(await SearchManager.loadJamsData());
   };
 
-  const onSearchSubmit = async () => {
+  const onSearchComplete = async () => {
     loadJamsData();
   };
 
@@ -40,7 +40,7 @@ const JamsScreen = () => {
   return (  
     <BoxView direction="column" align="flex-start" style={styles.container}>
 
-      <HeaderNavigation searchResult={jamsData} onSearchSubmit={() => onSearchSubmit()} />
+      <HeaderNavigation searchResult={jamsData} onSearchComplete={() => onSearchComplete()} />
 
       <BoxView style={[styles.content, contentStyle]} direction="column" align="center">
         <JamsList searchResult={jamsData} />
