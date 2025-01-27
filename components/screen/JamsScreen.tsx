@@ -15,14 +15,14 @@ import SearchManager from "@/manager/SearchManager";
 const JamsScreen = React.memo(() => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [jamsIds, setJamsIds] = useState<any>([]);
+  const [jamsData, setJamsData] = useState<any>([]);
   const contentStyle = ScreenManager.getModalSize();
 
   useEffect(() => {
     dispatch(setModalConfig(ModalConfig));
 
     (async () => {
-      setJamsIds(await SearchManager.getSearchResult('jam'));
+      setJamsData(await SearchManager.getSearchResult('jam'));
       setIsLoaded(true);
     })();
     
@@ -30,8 +30,6 @@ const JamsScreen = React.memo(() => {
   }, [isLoaded, ModalConfig]);
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(jamsIds);
 
   return (  
     <BoxView direction="column" align="flex-start" style={styles.container}>
@@ -42,7 +40,7 @@ const JamsScreen = React.memo(() => {
         align="center"
         style={[styles.content, contentStyle]}
       >
-        <JamsList idArray={jamsIds}/>
+        <JamsList data={jamsData}/>
       </BoxView>
       
       <FooterNavigation />
