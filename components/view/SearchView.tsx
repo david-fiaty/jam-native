@@ -3,6 +3,7 @@ import { View, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
+import { BaseProps } from "@/constants/Types";
 import BoxView from "./BoxView";
 import TextView from "./TextView";
 import ListView from "./ListView";
@@ -13,11 +14,15 @@ import SearchProjectsList from "../list/SearchProjectsList";
 import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "./SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
-import SearchField from "../field/SearchField";
+
+
+type Props = BaseProps & {
+  searchResult?: any;
+};
 
 const modalSize: any = ScreenManager.getModalSize();
 
-const SearchView = () => {
+const SearchView = ({ searchResult }: Props) => {
   const [activeTab, setActiveTab] = useState<any>(null);
   const [searchData, setSearchData] = useState<any>({});
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -43,6 +48,9 @@ const SearchView = () => {
       setIsLoaded(true);
     })();
   }, [isLoaded, activeTab, searchState]);
+
+
+  console.log(searchResult);
 
   if (!isLoaded) return <SpinnerView />;
   
