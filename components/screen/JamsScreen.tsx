@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { useDispatch } from 'react-redux';
 import { setModalConfig } from "@/redux/slices/ModalSlice";
@@ -9,38 +9,21 @@ import FooterNavigation from "../navigation/FooterNavigation";
 import JamsList from "../list/JamsList";
 import ScreenManager from "@/manager/ScreenManager";
 import HeaderNavigation from "../navigation/HeaderNavigation";
-import SpinnerView from "../view/SpinnerView";
-import SearchManager from "@/manager/SearchManager";
 
 const JamsScreen = React.memo(() => {
   const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [jamsData, setJamsData] = useState<any>([]);
   const contentStyle = ScreenManager.getModalSize();
-
+  
   useEffect(() => {
     dispatch(setModalConfig(ModalConfig));
-
-    (async () => {
-      setJamsData(await SearchManager.getSearchResult('jam'));
-      setIsLoaded(true);
-    })();
-    
-    setIsLoaded(true);
-  }, [isLoaded, ModalConfig]);
-
-  if (!isLoaded) return <SpinnerView />;
+  }, [ModalConfig]);
 
   return (  
     <BoxView direction="column" align="flex-start" style={styles.container}>
       <HeaderNavigation />
 
-      <BoxView 
-        direction="column" 
-        align="center"
-        style={[styles.content, contentStyle]}
-      >
-        <JamsList data={jamsData}/>
+      <BoxView style={[styles.content, contentStyle]} direction="column" align="center">
+        <JamsList />
       </BoxView>
       
       <FooterNavigation />
