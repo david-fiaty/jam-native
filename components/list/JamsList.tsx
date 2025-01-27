@@ -7,19 +7,18 @@ import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import ListItem from "./JamsList/ListItem";
-import SearchManager from "@/manager/SearchManager";
 
 type Props = BaseProps & {
   data?: any;
 };
 
 const JamsList = ({ data }: Props) => {
-  const [sectorsData, setSectorsData] = useState<any>([]);
+  const [sectors, setSectors] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
-      if (!sectorsData.length) setSectorsData(await EntityManager.getSectors());
+      if (!sectors.length) setSectors(await EntityManager.getSectors());
     })();
 
     setIsLoaded(true);
@@ -36,7 +35,7 @@ const JamsList = ({ data }: Props) => {
         data={data}
         initialNumToRender={data?.length || 0}
         contentContainerStyle={Layout.listContainer}
-        renderItem={(row: any) => <ListItem row={row} sectorsData={sectorsData} />}
+        renderItem={(row: any) => <ListItem row={row} sectorsData={sectors} />}
         keyExtractor={(item: any) => item.id.toString()}
       />
     </BoxView>
