@@ -18,11 +18,15 @@ const JamsScreen = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const contentStyle = ScreenManager.getModalSize();
   
+  const loadJamsData = async () => {
+    setJamsData(await SearchManager.loadJamsData());
+  };
+
   useEffect(() => {
     dispatch(setModalConfig(ModalConfig));
 
     (async () => {
-      setJamsData(await SearchManager.loadJamsData());
+      await loadJamsData();
       setIsLoaded(true);
     })();
   }, [isLoaded, ModalConfig]);
