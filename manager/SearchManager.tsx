@@ -5,17 +5,17 @@ import Store from '@/redux/Store';
 class SearchManager {
   data?: any;
 
-  async getSearchResult(searchValue?: string) {
+  async getDefaultData() {
+    return await this.loadData();
+  }
+
+  async getResult(searchValue: string) {
     if (!searchValue?.length) {
       return await this.getDefaultData();
     } 
     else {
       return await this.loadResult(searchValue);
     }
-  }
-
-  async getDefaultData() {
-    return await this.loadData();
   }
 
   // Todo - Why searchValue not used, since passed as argument from onSubmitEditing in SearchField component
@@ -50,6 +50,18 @@ class SearchManager {
     }
 
     Store.dispatch(setSearchResult(JSON.stringify(results)));
+  }
+
+  getSearchResult(key?: string) {
+    let searchState = Store.getState().search;
+    let searchResult: any = searchState.result?.length > 0 ? searchState.result : '{}';
+    let data: any = JSON.parse(searchResult);
+
+    if (key && key?.length > 0 && Object.keys(data).length > 0) {
+      return data[key];
+    }
+
+    return data;
   }
 
   isExpanded() {
