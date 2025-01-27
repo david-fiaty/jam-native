@@ -12,7 +12,7 @@ import HeaderNavigation from "../navigation/HeaderNavigation";
 import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "../view/SpinnerView";
 
-const JamsScreen = React.memo(() => {
+const JamsScreen = () => {
   const dispatch = useDispatch();
   const [jamsData, setJamsData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -42,7 +42,7 @@ const JamsScreen = React.memo(() => {
       
     </BoxView>
   );
-});
+};
 
 const styles = StyleSheet.create({
   container: {
