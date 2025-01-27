@@ -7,9 +7,9 @@ class SearchManager {
     return await this.loadData();
   }
 
-  getSearchResult(key?: string, searchValue?: string) {
+  getSearchResult(key?: any, searchValue?: string) {
     let searchState = Store.getState().search;
-    let searchResult: any = searchState.result?.length > 0 ? searchState.result : '{}';
+    let searchResult: any = searchState.result?.length > 0 ? searchState.result : this.loadData(searchValue);
     let data: any = JSON.parse(searchResult);
 
     if (key && key?.length > 0 && Object.keys(data).length > 0) {
@@ -31,20 +31,6 @@ class SearchManager {
       profiles: profiles, 
       projects: projects
     });
-  }
-
-  async loadResult(searchValue: string) {
-    const options = searchValue?.length ? { query_text: searchValue } : {};
-    const [jams, profiles, projects] = await this.sendRequest(options);
-    const response = this.buildResponse({
-      jams: jams, 
-      profiles: profiles, 
-      projects: projects
-    });
-
-    this.setSearchResult(response);
-
-    return response;
   }
 
   setSearchResult (response: any) {
