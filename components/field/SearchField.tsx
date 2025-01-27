@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchValue, toggleSearchField } from "@/redux/slices/SearchSlice";
+import { setSearchValue } from "@/redux/slices/SearchSlice";
 import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
 import ScreenManager from "@/manager/ScreenManager";
 import i18n from '@/translation/i18n';
-import BoxView from '../view/BoxView';
 import SearchManager from '@/manager/SearchManager';
 
 const SearchField = () => {
@@ -14,7 +12,6 @@ const SearchField = () => {
   const searchState = useSelector((state: any) => state.search);
   const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
   const activeModal = ScreenManager.getActiveModal();
-  const isExpanded = searchState.expanded === true;
 
   const onSubmitEditing = async () => {
     dispatch(setSearchValue(currentSearchValue));
@@ -62,48 +59,15 @@ const SearchField = () => {
     return <></>;
   };
 
-  const toggleButton = (
-    <IconView 
-      name="search" 
-      theme="clear" 
-      size={22}
-      padding={0}
-      onPress={() => {
-        dispatch(toggleSearchField(true));
-        openSearch();
-      }}
-    />
-  );
-
-  const inputField = (
-    <View style={styles.inputContainer}>
-      <InputTextField 
-        value={currentSearchValue}
-        placeholder={i18n.t('Search...')}
-        onChangeText={onChangeText}
-        onSubmitEditing={onSubmitEditing}
-        rightIcon={renderRightIcon()}
-      /> 
-    </View>
-  );
-
   return (
-    <BoxView direction="row" align="center" justify="space-between" style={styles.container}>
-      { isExpanded && inputField}
-      { !isExpanded && toggleButton}
-    </BoxView>
+    <InputTextField 
+      value={currentSearchValue}
+      placeholder={i18n.t('Search...')}
+      onChangeText={onChangeText}
+      onSubmitEditing={onSubmitEditing}
+      rightIcon={renderRightIcon()}
+    /> 
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    //backgroundColor: 'red',
-  },
-  inputContainer: {
-    width: '100%',
-  },
-});
 
 export default SearchField;
