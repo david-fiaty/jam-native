@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSearchValue } from "@/redux/slices/SearchSlice";
 import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
-import ScreenManager from "@/manager/ScreenManager";
 import i18n from '@/translation/i18n';
 import SearchManager from '@/manager/SearchManager';
 
@@ -26,10 +25,6 @@ const SearchField = () => {
   const clearSearch = () => {
     setCurrentSearchValue('');
     dispatch(setSearchValue(''));
-  };
-
-  const openSearch = () => {
-    ScreenManager.toggleModal('SearchView');
   };
 
   const renderRightIcon = () => {
