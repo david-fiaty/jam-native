@@ -3,7 +3,15 @@ import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 
 class SearchManager {
-  data?: any;
+  loadJamsData = async () => {
+    let idArray: any = this.getSearchResult('jam');
+    
+    if (idArray?.length > 0) {
+      return await EntityManager.getJams({ items_ids: idArray });
+    }
+    
+    return await EntityManager.listJams();
+  };
 
   async getDefaultData() {
     return await this.loadData();
