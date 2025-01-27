@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { useDispatch } from 'react-redux';
 import { setModalConfig } from "@/redux/slices/ModalSlice";
@@ -9,14 +9,19 @@ import FooterNavigation from "../navigation/FooterNavigation";
 import JamsList from "../list/JamsList";
 import ScreenManager from "@/manager/ScreenManager";
 import HeaderNavigation from "../navigation/HeaderNavigation";
+import SpinnerView from "../view/SpinnerView";
 
 const JamsScreen = React.memo(() => {
   const dispatch = useDispatch();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const contentStyle = ScreenManager.getModalSize();
   
   useEffect(() => {
     dispatch(setModalConfig(ModalConfig));
-  }, [ModalConfig]);
+    setIsLoaded(true);
+  }, [isLoaded, ModalConfig]);
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (  
     <BoxView direction="column" align="flex-start" style={styles.container}>
