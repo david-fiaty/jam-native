@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { setSearchValue } from "@/redux/slices/SearchSlice";
+import { useSelector } from 'react-redux';
 import { Layout } from '@/constants/Layout';
 import { BaseProps } from '@/constants/Types';
-
 import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
 import i18n from '@/translation/i18n';
@@ -12,10 +10,10 @@ import DeviceManager from '@/manager/DeviceManager';
 
 type Props = BaseProps & {
   onSearchSubmit?: (value: any) => void;
+  onSearchClear?: () => void;
 };
 
-const SearchField = ({ onSearchSubmit }: Props) => {
-  const dispatch = useDispatch();
+const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
   const searchState = useSelector((state: any) => state.search);
   const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
 
@@ -33,8 +31,7 @@ const SearchField = ({ onSearchSubmit }: Props) => {
   };
 
   const clearSearch = () => {
-    setCurrentSearchValue('');
-    dispatch(setSearchValue(''));
+    if (onSearchClear) onSearchClear();
   };
 
   const renderRightIcon = () => {
