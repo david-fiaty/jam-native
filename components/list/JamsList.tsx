@@ -13,13 +13,13 @@ type Props = BaseProps & {
 };
 
 const JamsList = ({ data }: Props) => {
-  const [sectorsData, setSectorsData] = useState<any>([]);
+  const [sectors, setSectors] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   
   useEffect(() => {
     (async () => {
       if (data?.length > 0) {
-        setSectorsData(await EntityManager.getSectors());
+        setSectors(await EntityManager.getSectors());
         setIsLoaded(true);
       }
     })();
@@ -33,10 +33,10 @@ const JamsList = ({ data }: Props) => {
       style={styles.container}
     >
       <ListView
-        data={jamsData}
-        initialNumToRender={jamsData?.length}
+        data={data}
+        initialNumToRender={data?.length}
         contentContainerStyle={Layout.listContainer}
-        renderItem={(row: any) => <ListItem row={row} sectorsData={sectorsData} />}
+        renderItem={(row: any) => <ListItem row={row} sectorsData={sectors} />}
         keyExtractor={(item: any) => item.id.toString()}
       />
     </BoxView>
