@@ -7,17 +7,20 @@ class SearchManager {
     return await this.loadData();
   }
 
-  getSearchResult(key?: any, searchValue?: string) {
+  async getSearchResult(key?: any, searchValue?: string) {
     let searchState = Store.getState().search;
     let searchResult: any = searchState.result?.length ? JSON.parse(searchState.result) : this.loadData(searchValue);
 
+    console.log(searchResult?.jam);
+
     if (key && key?.length > 0 && Object.keys(searchResult).length > 0) {
-      return searchResult[key];
+      return await EntityManager.getJams({ items_ids: searchResult[key] });
     }
     else if (!Object.keys(searchResult).length) {
       return this.getDefaultData();
     }
 
+    return [];
     return searchResult;
   }
 
