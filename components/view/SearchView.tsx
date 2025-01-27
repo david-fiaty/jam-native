@@ -15,7 +15,6 @@ import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "./SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 
-
 type Props = BaseProps & {
   searchResult?: any;
 };
