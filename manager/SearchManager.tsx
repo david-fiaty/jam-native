@@ -1,4 +1,4 @@
-import { storeSearchResult } from "@/redux/slices/SearchSlice";
+import { setSearchResult } from "@/redux/slices/SearchSlice";
 import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 
@@ -39,7 +39,7 @@ class SearchManager {
       results[key] = (data || []).map((o: any) => o.id);
     }
 
-    Store.dispatch(storeSearchResult(JSON.stringify(results)));
+    Store.dispatch(setSearchResult(JSON.stringify(results)));
 
     return response;
   }
