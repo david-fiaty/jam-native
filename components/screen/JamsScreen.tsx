@@ -23,13 +23,13 @@ const JamsScreen = React.memo(() => {
 
   return (  
     <BoxView direction="column" align="flex-start" style={styles.container}>
-      {(route.name == "jams" || activeModal?.headerNavigation) && <HeaderNavigation />}
+      <HeaderNavigation />
 
       <BoxView style={[styles.mainContent, containerStyle]} direction="column" align="center">
         <JamsList />
       </BoxView>
       
-      {(route.name == "jams" || activeModal?.footerNavigation) && <FooterNavigation />}
+      <FooterNavigation />
     </BoxView>
   );
 });
