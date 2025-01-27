@@ -22,6 +22,10 @@ const JamsScreen = () => {
     setJamsData(await SearchManager.loadJamsData());
   };
 
+  const onSearchSubmit = async () => {
+    loadJamsData();
+  };
+
   useEffect(() => {
     dispatch(setModalConfig(ModalConfig));
 
@@ -36,7 +40,7 @@ const JamsScreen = () => {
   return (  
     <BoxView direction="column" align="flex-start" style={styles.container}>
 
-      <HeaderNavigation searchResult={jamsData} />
+      <HeaderNavigation searchResult={jamsData} onSearchSubmit={() => onSearchSubmit()} />
 
       <BoxView style={[styles.content, contentStyle]} direction="column" align="center">
         <JamsList searchResult={jamsData} />
