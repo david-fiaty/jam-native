@@ -11,10 +11,10 @@ import i18n from "@/translation/i18n";
 import SearchManager from "@/manager/SearchManager";
 
 type Props = BaseProps & {
-  idArray?: any;
+  searchResult?: any;
 };
 
-const JamsMapView = ({ idArray }: Props) => {
+const JamsMapView = ({ searchResult }: Props) => {
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [searchData, setSearchData] = useState<any>({});
