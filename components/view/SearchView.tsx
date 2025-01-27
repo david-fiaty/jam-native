@@ -3,6 +3,7 @@ import { View, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
+import { BaseProps } from "@/constants/Types";
 import BoxView from "./BoxView";
 import TextView from "./TextView";
 import ListView from "./ListView";
@@ -13,15 +14,17 @@ import SearchProjectsList from "../list/SearchProjectsList";
 import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "./SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
-import SearchField from "../field/SearchField";
+
+
+type Props = BaseProps & {
+  searchResult?: any;
+};
 
 const modalSize: any = ScreenManager.getModalSize();
 
-const SearchView = () => {
+const SearchView = ({ searchResult }: Props) => {
   const [activeTab, setActiveTab] = useState<any>(null);
-  const [searchData, setSearchData] = useState<any>({});
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const searchState = useSelector((state: any) => state.search);
   
   const renderTab = (row: any) => {
     const tabStyle: any = row.item.id == activeTab ? styles.activeTab : {};
@@ -37,12 +40,9 @@ const SearchView = () => {
 
   useEffect(() => {
     if (!activeTab) setActiveTab(StaticData.searchTabs[0].id);
-
-    (async () => {
-      setSearchData(await SearchManager.getSearchResult(searchState.value));
       setIsLoaded(true);
-    })();
-  }, [isLoaded, activeTab, searchState]);
+  }, [isLoaded, activeTab]);
+
 
   if (!isLoaded) return <SpinnerView />;
   
@@ -66,32 +66,32 @@ const SearchView = () => {
 
       {/* Search jams */}
       {['jam'].includes(activeTab) && 
-        <SearchJamsList data={searchData?.jam} />
+        <SearchJamsList data={searchResult?.jam} />
       }
 
       {/* Search calls */}
       {['call'].includes(activeTab) && 
-        <SearchJamsList data={searchData?.call} />
+        <SearchJamsList data={searchResult?.call} />
       }
 
       {/* Search jammers */}
       {['jammer'].includes(activeTab) && 
-        <SearchProfilesList data={searchData?.jammer} />
+        <SearchProfilesList data={searchResult?.jammer} />
       }
 
       {/* Search projects */}
       {['project'].includes(activeTab) && 
-        <SearchProjectsList data={searchData?.project} />
+        <SearchProjectsList data={searchResult?.project} />
       }
 
       {/* Search events */}
       {['event'].includes(activeTab) && 
-        <SearchJamsList data={searchData?.event} />
+        <SearchJamsList data={searchResult?.event} />
       }
 
       {/* Search venues */}
       {['venue'].includes(activeTab) && 
-        <SearchProfilesList data={searchData?.venue} />
+        <SearchProfilesList data={searchResult?.venue} />
       }
 
     </BoxView>
