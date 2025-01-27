@@ -23,9 +23,9 @@ const JamsScreen = React.memo(() => {
 
     (async () => {
       setJamsData(await SearchManager.loadJamsData());
-      setIsLoaded(true);
     })();
 
+    setIsLoaded(true);
   }, [isLoaded, ModalConfig]);
 
   if (!isLoaded) return <SpinnerView />;
@@ -36,7 +36,7 @@ const JamsScreen = React.memo(() => {
       <HeaderNavigation />
 
       <BoxView style={[styles.content, contentStyle]} direction="column" align="center">
-        <JamsList data={jamsData} />
+        <JamsList searchResult={jamsData} />
       </BoxView>
       
       <FooterNavigation />
