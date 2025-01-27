@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import RNMapView , { Marker, PROVIDER_GOOGLE, PROVIDER_DEFAULT, Callout } from "react-native-maps";
 import { BaseProps } from "@/constants/Types";
@@ -8,7 +7,6 @@ import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
 import DeviceManager from "@/manager/DeviceManager";
 import i18n from "@/translation/i18n";
-import SearchManager from "@/manager/SearchManager";
 
 type Props = BaseProps & {
   searchResult?: any;
@@ -17,8 +15,6 @@ type Props = BaseProps & {
 const JamsMapView = ({ searchResult }: Props) => {
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const searchState = useSelector((state: any) => state.search);
-
   const mapRef = useRef<any>();
   const markerImage = require('@/assets/images/logo-55.png');
   
@@ -70,7 +66,6 @@ const JamsMapView = ({ searchResult }: Props) => {
   useEffect(() => {
     (async () => {
       setCurrentLocation(await DeviceManager.getLocation());
-      setSearchData(await SearchManager.getSearchResult(searchState.value));
     })();
 
     setIsLoaded(true);
