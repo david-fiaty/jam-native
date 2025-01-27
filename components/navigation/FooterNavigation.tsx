@@ -12,13 +12,13 @@ import i18n from "@/translation/i18n";
 import JamForm from "../form/JamForm";
 import ProfileForm from "../form/ProfileForm";
 
-const containerStyle = ScreenManager.getFooterSize();
-const containerPosition = ScreenManager.getFooterPosition();
-const activeModal = ScreenManager.getActiveModal();
-
 type Props = BaseProps & {
   searchResult?: any;
 };
+
+const containerStyle = ScreenManager.getFooterSize();
+const containerPosition = ScreenManager.getFooterPosition();
+const activeModal = ScreenManager.getActiveModal();
 
 const FooterNavigation = ({ searchResult }: Props) => {
   const [isActive, setIsActive] = useState<boolean>(false);
