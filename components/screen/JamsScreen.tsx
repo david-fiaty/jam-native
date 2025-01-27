@@ -18,20 +18,20 @@ const JamsScreen = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const contentStyle = ScreenManager.getModalSize();
   
-  const loadJamsData = async () => {
-    setSearchResult(await SearchManager.getSearchResult());
+  const loadSearchResult = async (value?: any) => {
+    setSearchResult(await SearchManager.getSearchResult(value));
   };
 
-  const onSearchComplete = async () => {
-    await loadJamsData();
-    console.log('search complete');
+  const onSearchSubmit = async (value: any) => {
+    await loadSearchResult(value);
+    console.log('search submit', value);
   };
 
   useEffect(() => {
     dispatch(setModalConfig(ModalConfig));
 
     (async () => {
-      await loadJamsData();
+      await loadSearchResult();
       setIsLoaded(true);
     })();
   }, [isLoaded, ModalConfig]);
@@ -43,7 +43,7 @@ const JamsScreen = () => {
 
       <HeaderNavigation 
         searchResult={searchResult} 
-        onSearchComplete={async () => await onSearchComplete()} 
+        onSearchSubmit={async (value: any) => await onSearchSubmit(value)} 
       />
 
       <BoxView style={[styles.content, contentStyle]} direction="column" align="center">

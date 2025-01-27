@@ -1,4 +1,4 @@
-import { storeSearchResult } from "@/redux/slices/SearchSlice";
+import { setSearchResult } from "@/redux/slices/SearchSlice";
 import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 
@@ -7,18 +7,17 @@ class SearchManager {
     return await this.loadData();
   }
 
-  getSearchResult(key?: any, searchValue?: string) {
+  async getSearchResult(searchValue?: string) {
     let searchState = Store.getState().search;
     let searchResult: any = searchState.result?.length ? JSON.parse(searchState.result) : this.loadData(searchValue);
 
-    if (key && key?.length > 0 && Object.keys(searchResult).length > 0) {
-      return searchResult[key];
+    if (Object.keys(searchResult).length > 0) {
+      return this.getDefaultData();
+      //return await EntityManager.getJams({ items_ids: searchResult[key] });
     }
     else if (!Object.keys(searchResult).length) {
       return this.getDefaultData();
     }
-
-    return searchResult;
   }
 
   async loadData(searchValue?: string) {
@@ -39,7 +38,7 @@ class SearchManager {
       results[key] = (data || []).map((o: any) => o.id);
     }
 
-    Store.dispatch(storeSearchResult(JSON.stringify(results)));
+    Store.dispatch(setSearchResult(JSON.stringify(results)));
 
     return response;
   }
