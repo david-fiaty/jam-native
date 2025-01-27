@@ -9,17 +9,16 @@ class SearchManager {
 
   getSearchResult(key?: any, searchValue?: string) {
     let searchState = Store.getState().search;
-    let searchResult: any = searchState.result?.length > 0 ? searchState.result : this.loadData(searchValue);
-    let data: any = JSON.parse(searchResult);
+    let searchResult: any = searchState.result?.length ? JSON.parse(searchState.result) : this.loadData(searchValue);
 
-    if (key && key?.length > 0 && Object.keys(data).length > 0) {
-      return data[key];
+    if (key && key?.length > 0 && Object.keys(searchResult).length > 0) {
+      return searchResult[key];
     }
-    else if (!Object.keys(data).length) {
+    else if (!Object.keys(searchResult).length) {
       return this.getDefaultData();
     }
 
-    return data;
+    return searchResult;
   }
 
   // Todo - Why searchValue not used, since passed as argument from onSubmitEditing in SearchField component
