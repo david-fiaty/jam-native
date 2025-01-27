@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchValue } from "@/redux/slices/SearchSlice";
 import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
 import ScreenManager from "@/manager/ScreenManager";
 import i18n from '@/translation/i18n';
-import BoxView from '../view/BoxView';
 import SearchManager from '@/manager/SearchManager';
 
 const SearchField = () => {
@@ -61,33 +59,15 @@ const SearchField = () => {
     return <></>;
   };
 
-  const inputField = (
-    <View style={styles.inputContainer}>
-      <InputTextField 
-        value={currentSearchValue}
-        placeholder={i18n.t('Search...')}
-        onChangeText={onChangeText}
-        onSubmitEditing={onSubmitEditing}
-        rightIcon={renderRightIcon()}
-      /> 
-    </View>
-  );
-
   return (
-    <BoxView direction="row" align="center" justify="space-between" style={styles.container}>
-      { inputField }
-    </BoxView>
+    <InputTextField 
+      value={currentSearchValue}
+      placeholder={i18n.t('Search...')}
+      onChangeText={onChangeText}
+      onSubmitEditing={onSubmitEditing}
+      rightIcon={renderRightIcon()}
+    /> 
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    width: '100%',
-  },
-  inputContainer: {
-    //width: '100%',
-  },
-});
 
 export default SearchField;
