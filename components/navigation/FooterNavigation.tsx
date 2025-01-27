@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet } from "react-native";
 import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
+import { BaseProps } from '@/constants/Types';
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 import ScreenManager from '@/manager/ScreenManager';
@@ -15,8 +16,12 @@ const containerStyle = ScreenManager.getFooterSize();
 const containerPosition = ScreenManager.getFooterPosition();
 const activeModal = ScreenManager.getActiveModal();
 
-const FooterNavigation = () => {
-const [isActive, setIsActive] = useState<boolean>(false);
+type Props = BaseProps & {
+  searchResult?: any;
+};
+
+const FooterNavigation = ({ searchResult }: Props) => {
+  const [isActive, setIsActive] = useState<boolean>(false);
 
   const onTriggerPress = (active: boolean) => {
     console.log('-->', active); // Todo - Hilight items
