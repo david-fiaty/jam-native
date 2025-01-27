@@ -34,8 +34,13 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
       <ModalView 
         login={false}
         content={<SearchView />}
-        backTitle={<SearchField onSearchSubmit={onSearchSubmit} onSearchClear={onSearchClear} />}
         triggerAlignSelf="flex-end"
+        backTitle={
+          <SearchField 
+            onSearchSubmit={onSearchSubmit} 
+            onSearchClear={onSearchClear} 
+          />
+        }
         trigger={    
           <IconView 
             name="search" 
