@@ -44,10 +44,6 @@ class SearchManager {
     return response;
   }
 
-  isExpanded() {
-    return Store.getState().search.expanded === true;
-  }
-
   async sendRequest(options?: any) {
     return await Promise.all([
       EntityManager.listJams(options), 
