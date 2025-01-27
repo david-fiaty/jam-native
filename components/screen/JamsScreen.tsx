@@ -22,7 +22,7 @@ const JamsScreen = () => {
     setSearchResult(await SearchManager.getSearchResult());
   };
 
-  const onSearchComplete = async () => {
+  const onSearchSubmit = async () => {
     await loadJamsData();
     console.log('search complete');
   };
@@ -43,7 +43,7 @@ const JamsScreen = () => {
 
       <HeaderNavigation 
         searchResult={searchResult} 
-        onSearchComplete={async () => await onSearchComplete()} 
+        onSearchSubmit={async () => await onSearchSubmit()} 
       />
 
       <BoxView style={[styles.content, contentStyle]} direction="column" align="center">
