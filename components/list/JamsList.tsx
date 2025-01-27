@@ -10,33 +10,27 @@ import ListItem from "./JamsList/ListItem";
 import SearchManager from "@/manager/SearchManager";
 
 type Props = BaseProps & {
-  idArray?: any;
+  data?: any;
 };
 
-const JamsList = ({ idArray }: Props) => {
+const JamsList = ({ data }: Props) => {
   const [jamsData, setJamsData] = useState<any>([]);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
+    setJamsData(data);
+
     (async () => {
-      if (!isLoaded) {
-        setSectorsData(await EntityManager.getSectors());
-        if (idArray?.length > 0) {
-          setJamsData(await EntityManager.getJams({ items_ids: idArray }));
-        }
-        else {
-          idArray = SearchManager.getSearchResult('jam');
-          if (idArray?.length > 0) setJamsData(await EntityManager.getJams({ items_ids: idArray })); 
-          else setJamsData(await EntityManager.listJams());
-        }
-    
-        setIsLoaded(true);
-      }
+      setSectorsData(await EntityManager.getSectors());
     })();
-  }, [isLoaded, idArray]);
+
+    setIsLoaded(true);
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(jamsData);
 
   return (
     <BoxView 
