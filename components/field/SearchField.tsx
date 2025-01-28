@@ -36,9 +36,12 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
   };
 
   const toggleSearch = () => {
-    setIsExpanded(!isExpanded);
-
-    //searchState.value.length > 0 ? clearSearch : 
+    if (searchState.value.length > 0) {
+      clearSearch();
+    }
+    else {
+      setIsExpanded(false);
+    }
   };
 
   const renderRightIcon = () => {
