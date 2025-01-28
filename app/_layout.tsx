@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Stack, useSegments } from 'expo-router';
 import { useFonts } from 'expo-font';
 import { Provider } from 'react-redux';
@@ -188,7 +188,7 @@ const RootLayout = () => {
     }
   }, [isLoaded, isError]);
 
-  if (!isLoaded && !isError) return null; 
+  if (!isLoaded && !isError) return <></>; 
 
   return (
     <Provider store={Store}>
@@ -198,7 +198,7 @@ const RootLayout = () => {
           <Stack.Screen 
             key={item.name}
             name={item.name} 
-            //options={item.options} 
+            //options={item.options} // Todo - Apply or remove
             options={headerOptions}
           />
         ))}
