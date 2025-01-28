@@ -87,7 +87,7 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
     <BoxView 
       direction="row" 
       align="center" 
-      justify="flex-start"
+      justify="space-between"
       style={[styles.container, containerStyle]}
     >
       <BoxView direction="row" align="center" style={styles.headerLeft}>
@@ -130,9 +130,6 @@ const styles = StyleSheet.create({
     maxWidth: 68,
     backgroundColor: 'blue',
     //flex: 1,
-    position: 'absolute',
-    right: Layout.space.base*1.5,
-    top: '50%',
   },
 });
 
