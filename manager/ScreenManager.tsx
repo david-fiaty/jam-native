@@ -84,8 +84,8 @@ class ScreenManager {
 
   getModalPosition() {
     return {
-      x: 0, 
-      y: this.getHeaderSize().height - DeviceManager.statusBar.height,
+      x: 0,
+      y: this.getHeaderSize().height + DeviceManager.statusBar.height - DeviceManager.window.height,
     };
   }
 

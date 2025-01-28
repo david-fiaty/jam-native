@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import { useRouter } from "expo-router";
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import Modal from "react-native-modal";
 import { Layout } from '@/constants/Layout';
+import { Colors } from '@/constants/Colors';
+import Modal from "react-native-modal";
 import UserManager from '@/manager/UserManager';
 import BackButton from '../button/BackButton';
-import ScreenView from './ScreenView';
 import BoxView from './BoxView';
 import ScreenManager from '@/manager/ScreenManager';
-import { Colors } from '@/constants/Colors';
+import ScreenView from './ScreenView';
 
 type Props = {
   visible?: boolean;
   login?: boolean;
-  animation?: string;
   trigger?: any;
   triggerAlignSelf?: string;
   content?: any;
@@ -24,10 +23,9 @@ type Props = {
 const modalPosition: any = ScreenManager.getModalPosition();
 const modalSize: any = ScreenManager.getModalSize();
 
-const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, content, backTitle, onTriggerPress }: Props) => {
+const ModalView = ({ visible, login, trigger, triggerAlignSelf, content, backTitle, onTriggerPress }: Props) => {
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(visible || false);
-  const animationType: any = animation || 'slide';
   const isLoggedIn: boolean = UserManager.isLoggedIn();
 
   const triggerStyle: any = {
@@ -45,18 +43,20 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
   };
   
   return (
-    <ScreenView>  
-      <TouchableOpacity
-        onPress={() => toggleModal(true)}
-        style={[styles.triggerButton, triggerStyle]}
-      >
-        {trigger}
-      </TouchableOpacity>
+    <>  
+      <ScreenView>
+        <TouchableOpacity
+          onPress={() => toggleModal(true)}
+          style={[styles.triggerButton, triggerStyle]}
+        >
+          {trigger}
+        </TouchableOpacity>
+      </ScreenView>
     
       <Modal
         isVisible={isVisible}
-        backdropColor={styles.backdrop.color}
-        backdropOpacity={styles.backdrop.opacity}
+        coverScreen={false}
+        hasBackdrop={false}
         style={styles.container}
       >
         <BoxView 
@@ -80,20 +80,16 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
           </BoxView>
         </BoxView>
       </Modal>
-    </ScreenView>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  backdrop: {
-    color: Colors.white,
-    opacity: 0.6,
-    marginTop: 50,
-  },
   container: {
-    marginTop: modalPosition.y, 
-    marginHorizontal: 0,
-    width: '100%',
+    position: 'absolute',
+    top: modalPosition.y,
+    left: modalPosition.x,
+    width: modalSize.width,
   },
   wrapper: {
     width: '100%',
