@@ -16,6 +16,7 @@ type Props = BaseProps & {
 const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
   const searchState = useSelector((state: any) => state.search);
   const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   const submitSearch = (value?: string) => {
     if (onSearchSubmit) onSearchSubmit(value);
@@ -34,21 +35,20 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
     if (onSearchClear) onSearchClear();
   };
 
-  const renderRightIcon = () => {
-    if (searchState.value.length > 0) {
-      return (
-        <IconView 
-          name="delete" 
-          theme="primary" 
-          size={13}
-          onPress={clearSearch}
-        />
-      );
-    }
-
-    return <></>;
+  const toggleSearch = () => {
+    setIsExpanded(!isExpanded);
   };
 
+  const renderRightIcon = () => {
+    return (
+      <IconView 
+        name="delete" 
+        theme="primary" 
+        size={13}
+        onPress={searchState.value.length > 0 ? clearSearch : toggleSearch}
+      />
+    );
+  };
 
   console.log('stateValue', searchState.value);
 
