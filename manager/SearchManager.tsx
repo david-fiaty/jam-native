@@ -4,21 +4,14 @@ import Store from '@/redux/Store';
 
 class SearchManager {
   async getSearchResult(searchValue?: string) {
-    let searchState = Store.getState().search;
-    let currentResult: any = JSON.parse(searchState.current);
-
     if (!searchValue?.length) {
       return await this.getDefaultResult();
     } 
-    else if (searchValue == searchState.value) {
-      return currentResult;
+    else if (searchValue == this.getCurrentValue()) {
+      return this.getCurrentResult();
     }
 
     return await this.loadData(searchValue);
-  }
-
-  async getDefaultResult() {
-    return await this.loadData();
   }
 
   async loadData(searchValue?: string) {
@@ -33,6 +26,18 @@ class SearchManager {
     this.setSearchResult(response);
 
     return response;
+  }
+
+  getCurrentValue() {
+    return Store.getState().search.value;
+  }
+
+  getCurrentResult() {
+    return JSON.parse(Store.getState().search.current);
+  }
+
+  async getDefaultResult() {
+    return await this.loadData();
   }
 
   setSearchValue (value: any) {
