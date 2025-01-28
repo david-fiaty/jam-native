@@ -129,7 +129,10 @@ const styles = StyleSheet.create({
   headerRight: {
     maxWidth: 68,
     backgroundColor: 'blue',
-    flex: 1,
+    //flex: 1,
+    position: 'absolute',
+    right: Layout.space.base*1.5,
+    top: '50%',
   },
 });
 
