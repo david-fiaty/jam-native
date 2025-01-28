@@ -121,12 +121,14 @@ const styles = StyleSheet.create({
     //width: '12%',
   },
   headerCenter: {
-    //width: '55%',
+    maxWidth: '55%',
     backgroundColor: 'yellow',
+    flexGrow: 1,
   },
   headerRight: {
-    //maxWidth: 68,
+    maxWidth: 68,
     backgroundColor: 'blue',
+    flex: 1,
     //width: '85%',
     //paddingRight: Layout.space.base*2.3,
   },
