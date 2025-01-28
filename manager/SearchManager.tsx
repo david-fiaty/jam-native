@@ -9,12 +9,15 @@ class SearchManager {
 
   async getSearchResult(searchValue?: string) {
     let searchState = Store.getState().search;
-    let searchResult: any = searchState.result?.length ? JSON.parse(searchState.result) : this.loadData(searchValue);
+    let searchResult: any = JSON.parse(searchState.result);
+
+    this.loadData(searchValue)
+
 
     if (Object.keys(searchResult).length > 0) {
 
       console.log('--->', searchValue, searchResult?.jam?.length);
-
+      
       return searchResult;
     }
     
@@ -30,20 +33,16 @@ class SearchManager {
       projects: projects
     });
 
-    this.storeSearchResult(response);
+    this.setSearchResult(response);
 
     return response;
   }
 
-  clearSearchValue () {
-    Store.dispatch(setSearchValue(''));
-  }
-
-  storeSearchValue (value: any) {
+  setSearchValue (value: any) {
     Store.dispatch(setSearchValue(value));
   }
 
-  storeSearchResult (response: any) {
+  setSearchResult (response: any) {
     Store.dispatch(setSearchResult(JSON.stringify(response)));
   }
 
