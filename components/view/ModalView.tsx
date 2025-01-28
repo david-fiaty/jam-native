@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { useRouter } from "expo-router";
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import Modal from "react-native-modal";
 import { Layout } from '@/constants/Layout';
+import { Colors } from '@/constants/Colors';
+import Modal from "react-native-modal";
 import UserManager from '@/manager/UserManager';
 import BackButton from '../button/BackButton';
 import ScreenView from './ScreenView';
 import BoxView from './BoxView';
 import ScreenManager from '@/manager/ScreenManager';
-import { Colors } from '@/constants/Colors';
+import DeviceManager from '@/manager/DeviceManager';
 
 type Props = {
   visible?: boolean;
@@ -55,8 +56,10 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
     
       <Modal
         isVisible={isVisible}
-        backdropColor={styles.backdrop.color}
-        backdropOpacity={styles.backdrop.opacity}
+        coverScreen={false}
+        //backdropColor={styles.backdrop.color}
+        //backdropOpacity={styles.backdrop.opacity}
+        hasBackdrop={false}
         style={styles.container}
       >
         <BoxView 
@@ -86,13 +89,17 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
 
 const styles = StyleSheet.create({
   backdrop: {
-    color: Colors.white,
+    //color: Colors.white,
+    //color: 'blue',
     opacity: 0.6,
     marginTop: 50,
   },
   container: {
-    marginTop: modalPosition.y, 
-    marginHorizontal: 0,
+    //marginTop: modalPosition.y, 
+    position: 'absolute',
+    top: - DeviceManager.window.height,
+    //marginTop: 0,
+    //marginHorizontal: 0,
     width: '100%',
   },
   wrapper: {
