@@ -9,7 +9,6 @@ import BackButton from '../button/BackButton';
 import ScreenView from './ScreenView';
 import BoxView from './BoxView';
 import ScreenManager from '@/manager/ScreenManager';
-import DeviceManager from '@/manager/DeviceManager';
 
 type Props = {
   visible?: boolean;
@@ -90,8 +89,7 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: - DeviceManager.window.height,
-    //top: modalPosition.y,
+    top: modalPosition.y,
     width: '100%',
   },
   wrapper: {
