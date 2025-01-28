@@ -10,8 +10,11 @@ class SearchManager {
     else if (searchValue == this.getCurrentValue()) {
       return this.getCurrentResult();
     }
-
-    return await this.loadData(searchValue);
+    else {
+      let searchResult: any = await this.loadData(searchValue);
+      this.setCurrentResult(searchResult);
+      return searchResult;
+    }
   }
 
   async getDefaultResult() {
@@ -36,8 +39,6 @@ class SearchManager {
       profiles: profiles, 
       projects: projects
     });
-
-    this.setCurrentResult(response);
 
     return response;
   }
