@@ -42,7 +42,6 @@ const JamsScreen = () => {
 
   return (  
     <BoxView direction="column" align="flex-start" style={styles.container}>
-
       <HeaderNavigation 
         onSearchSubmit={async (value: any) => await onSearchSubmit(value)} 
         onSearchClear={async () => await onSearchClear()}
@@ -57,7 +56,6 @@ const JamsScreen = () => {
       </BoxView>
       
       <FooterNavigation />
-      
     </BoxView>
   );
 };
