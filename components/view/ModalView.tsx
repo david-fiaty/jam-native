@@ -8,6 +8,7 @@ import UserManager from '@/manager/UserManager';
 import BackButton from '../button/BackButton';
 import BoxView from './BoxView';
 import ScreenManager from '@/manager/ScreenManager';
+import ScreenView from './ScreenView';
 
 type Props = {
   visible?: boolean;
@@ -43,12 +44,14 @@ const ModalView = ({ visible, login, trigger, triggerAlignSelf, content, backTit
   
   return (
     <>  
-      <TouchableOpacity
-        onPress={() => toggleModal(true)}
-        style={[styles.triggerButton, triggerStyle]}
-      >
-        {trigger}
-      </TouchableOpacity>
+      <ScreenView>
+        <TouchableOpacity
+          onPress={() => toggleModal(true)}
+          style={[styles.triggerButton, triggerStyle]}
+        >
+          {trigger}
+        </TouchableOpacity>
+      </ScreenView>
     
       <Modal
         isVisible={isVisible}
