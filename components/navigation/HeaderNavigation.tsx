@@ -118,10 +118,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: Layout.space.base*1.5,
   },
   headerLeft: {
-    //width: '12%',
+    width: '12%',
   },
   headerCenter: {
-    maxWidth: '55%',
+    maxWidth: '60%',
     backgroundColor: 'yellow',
     flexGrow: 1,
   },
