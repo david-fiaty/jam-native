@@ -11,6 +11,13 @@ const SettingsMenu = () => {
   
   const data: any[] = [
     {
+      label: i18n.t('Your profile'),
+      path: '/profile',
+      onPress: (row: any) => {
+        router.push(row.item.path);
+      },
+    },
+    {
       label: i18n.t('Account information'),
       path: '/account',
       onPress: (row: any) => {
