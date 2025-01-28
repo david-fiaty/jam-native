@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { Layout } from '@/constants/Layout';
-import { Colors } from '@/constants/Colors';
 import { BaseProps } from '@/constants/Types';
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
@@ -13,7 +12,6 @@ import ModalView from "../view/ModalView";
 import i18n from "@/translation/i18n";
 import SettingsMenu from "../menu/SettingsMenu";
 import NotificationsMenu from "../menu/NotificationsMenu";
-import SearchView from "../view/SearchView";
 import SearchField from "../field/SearchField";
 
 type Props = BaseProps & {
