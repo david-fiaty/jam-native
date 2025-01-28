@@ -198,7 +198,7 @@ const RootLayout = () => {
           <Stack.Screen 
             key={item.name}
             name={item.name} 
-            //options={item.options} 
+            //options={item.options} // Todo - Apply or remove
             options={headerOptions}
           />
         ))}
