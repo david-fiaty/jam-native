@@ -126,7 +126,6 @@ const styles = StyleSheet.create({
   },
   headerRight: {
     maxWidth: 68,
-    backgroundColor: 'blue',
   },
 });
 
