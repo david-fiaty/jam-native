@@ -50,9 +50,9 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
     );
   };
 
-  console.log('stateValue', searchState.value);
+  //console.log('stateValue', searchState.value);
 
-  console.log('currentSearchValue', currentSearchValue);
+  //console.log('currentSearchValue', currentSearchValue);
 
   return (
     <View style={styles.container}>
@@ -69,7 +69,7 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: DeviceManager.window.width - Layout.space.base*5.5, // Todo - Improve field width caclulation
+    width: '100%',
   },
 });
 
