@@ -12,7 +12,7 @@ const JamsMapView = () => {
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const mapRef = useRef<any>();
-  const searchResult = useSelector((state: any) => JSON.parse(state.search.result));
+  const searchResult = useSelector((state: any) => JSON.parse(state.search.current));
   const markerImage = require('@/assets/images/logo-55.png');
   
   const getInitialRegion = () => {
