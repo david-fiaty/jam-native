@@ -118,11 +118,12 @@ const styles = StyleSheet.create({
     gap: Layout.space.base,
   },
   headerLeft: {
-    width: '12%',
+    
   },
   headerCenter: {
     maxWidth: '50%',
     backgroundColor: 'yellow',
+    marginRight: Layout.space.base,
     //flexGrow: 1,
   },
   headerRight: {
