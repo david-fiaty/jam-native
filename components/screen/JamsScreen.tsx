@@ -18,7 +18,6 @@ const JamsScreen = () => {
   const contentStyle = ScreenManager.getModalSize();
   
   const loadSearchResult = async (value?: any) => {
-    console.log(await SearchManager.getSearchResult(value));
     await SearchManager.getSearchResult(value);
   };
 
