@@ -54,6 +54,7 @@ class SearchManager {
       projects: projects
     });
 
+    this.setCurrentValue(searchValue);
     this.setDefaultResult(result);
     this.setCurrentResult(result);
     
