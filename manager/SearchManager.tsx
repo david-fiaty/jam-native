@@ -31,6 +31,34 @@ class SearchManager {
     return defaultResult;
   }
 
+  setDefaultResult(result: any) {
+    Store.dispatch(setDefaultResult(JSON.stringify(result)));
+  }
+
+  getCurrentValue() {
+    return Store.getState().search.value;
+  }
+
+  setCurrentValue(value: any) {
+    Store.dispatch(setSearchValue(value));
+  }
+
+  getCurrentResult() {
+    return JSON.parse(Store.getState().search.current);
+  }
+
+  setCurrentResult(result: any) {
+    Store.dispatch(setCurrentResult(JSON.stringify(result)));
+  }
+
+  packResult(result: any) {
+
+  }
+
+  unpackResult(result: any) {
+    
+  }
+
   async loadData(searchValue?: string) {
     const options = searchValue?.length ? { query_text: searchValue } : {};
     const [jams, profiles, projects] = await this.sendRequest(options);
@@ -41,26 +69,6 @@ class SearchManager {
     });
 
     return response;
-  }
-
-  getCurrentValue() {
-    return Store.getState().search.value;
-  }
-
-  getCurrentResult() {
-    return JSON.parse(Store.getState().search.current);
-  }
-
-  setCurrentValue(value: any) {
-    Store.dispatch(setSearchValue(value));
-  }
-
-  setCurrentResult(result: any) {
-    Store.dispatch(setCurrentResult(JSON.stringify(result)));
-  }
-
-  setDefaultResult(result: any) {
-    Store.dispatch(setDefaultResult(JSON.stringify(result)));
   }
 
   async sendRequest(options?: any) {
