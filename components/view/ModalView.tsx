@@ -88,18 +88,10 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
 };
 
 const styles = StyleSheet.create({
-  backdrop: {
-    //color: Colors.white,
-    //color: 'blue',
-    opacity: 0.6,
-    marginTop: 50,
-  },
   container: {
-    //marginTop: modalPosition.y, 
     position: 'absolute',
     top: - DeviceManager.window.height,
-    //marginTop: 0,
-    //marginHorizontal: 0,
+    //top: modalPosition.y,
     width: '100%',
   },
   wrapper: {
