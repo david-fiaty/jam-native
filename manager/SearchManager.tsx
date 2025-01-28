@@ -18,10 +18,10 @@ class SearchManager {
   }
 
   async getDefaultResult() {
-    let defaultResult: any = this.unpackResult(Store.getState().search.default);
+    let defaultResult: any = (Store.getState().search.default);
 
     if (Object.keys(defaultResult)?.length > 0) {
-      return defaultResult;
+      return this.unpackResult(defaultResult);
     }
     else {
       defaultResult = await this.loadData();
