@@ -4,7 +4,7 @@ import Store from '@/redux/Store';
 
 class SearchManager {
   async getSearchResult(searchValue?: string) {
-    if (searchValue?.length == 0) {
+    if (!searchValue?.length) {
       return await this.getDefaultResult();
     } 
     else if (searchValue == this.getCurrentValue()) {
@@ -21,13 +21,8 @@ class SearchManager {
     if (Object.keys(defaultResult)?.length > 0) {
       return defaultResult;
     }
-    else {
-      defaultResult = await this.loadData();
-      this.setDefaultResult(defaultResult);
-      this.setCurrentResult(defaultResult);
-    }
 
-    return defaultResult;
+    return await this.loadData();
   }
 
   setDefaultResult(result: any) {
@@ -69,8 +64,9 @@ class SearchManager {
       projects: projects
     });
 
+    this.setDefaultResult(result);
     this.setCurrentResult(result);
-
+    
     return result;
   }
 
