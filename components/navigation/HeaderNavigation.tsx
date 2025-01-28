@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     
   },
   headerRight: {
-    maxWidth: 102,
+    width: 102,
   },
 });
 
