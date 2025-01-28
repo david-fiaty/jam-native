@@ -98,7 +98,7 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
 
 
       { (route.name == 'jams' || activeModal?.headerNavigation) &&
-        <BoxView direction="row" align="center" style={styles.headerRight}>
+        <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>
           {renderSearchField()}
           {isLoggedIn && renderNotificationsButton()}
           {isLoggedIn && renderSettingsButton()}
