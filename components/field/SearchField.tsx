@@ -49,10 +49,15 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
     return <></>;
   };
 
+
+  console.log('stateValue', searchState.value);
+
+  console.log('currentSearchValue', currentSearchValue);
+
   return (
     <View style={styles.container}>
       <InputTextField 
-        value={currentSearchValue}
+        value={currentSearchValue || searchState.value}
         placeholder={i18n.t('Search...')}
         onChangeText={onChangeText}
         onSubmitEditing={onSubmitEditing}
