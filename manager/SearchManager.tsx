@@ -11,9 +11,7 @@ class SearchManager {
       return this.getCurrentResult();
     }
     else {
-      let searchResult: any = await this.loadData(searchValue);
-      this.setCurrentResult(searchResult);
-      return searchResult;
+      return await this.loadData(searchValue);
     }
   }
 
@@ -26,6 +24,7 @@ class SearchManager {
     else {
       defaultResult = await this.loadData();
       this.setDefaultResult(defaultResult);
+      this.setCurrentResult(defaultResult);
     }
 
     return defaultResult;
@@ -64,13 +63,15 @@ class SearchManager {
   async loadData(searchValue?: string) {
     const options = searchValue?.length ? { query_text: searchValue } : {};
     const [jams, profiles, projects] = await this.sendRequest(options);
-    const response = this.buildResponse({
+    const result = this.buildResponse({
       jams: jams, 
       profiles: profiles, 
       projects: projects
     });
 
-    return response;
+    this.setCurrentResult(result);
+
+    return result;
   }
 
   async sendRequest(options?: any) {
