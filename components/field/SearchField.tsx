@@ -72,8 +72,8 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
         <View style={styles.expanded}>
           <IconView 
             name="search" 
-            theme="secondary" 
-            size={18}
+            theme="clear" 
+            size={22}
             padding={0}
             onPress={toggleSearch}
           />
