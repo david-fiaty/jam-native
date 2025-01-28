@@ -37,7 +37,6 @@ const SearchView = () => {
       setIsLoaded(true);
   }, [isLoaded, activeTab]);
 
-
   if (!isLoaded) return <SpinnerView />;
   
   return (
