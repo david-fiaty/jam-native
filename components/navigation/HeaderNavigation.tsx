@@ -94,7 +94,6 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
         </TouchableOpacity>
       </BoxView>
 
-
       { (route.name == 'jams' || activeModal?.headerNavigation) &&
         <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>
           {renderSearchField()}
@@ -116,7 +115,7 @@ const styles = StyleSheet.create({
     
   },
   headerRight: {
-    width: 102,
+    width: 200,
   },
 });
 
