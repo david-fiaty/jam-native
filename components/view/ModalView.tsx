@@ -6,14 +6,12 @@ import { Colors } from '@/constants/Colors';
 import Modal from "react-native-modal";
 import UserManager from '@/manager/UserManager';
 import BackButton from '../button/BackButton';
-import ScreenView from './ScreenView';
 import BoxView from './BoxView';
 import ScreenManager from '@/manager/ScreenManager';
 
 type Props = {
   visible?: boolean;
   login?: boolean;
-  animation?: string;
   trigger?: any;
   triggerAlignSelf?: string;
   content?: any;
@@ -24,10 +22,9 @@ type Props = {
 const modalPosition: any = ScreenManager.getModalPosition();
 const modalSize: any = ScreenManager.getModalSize();
 
-const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, content, backTitle, onTriggerPress }: Props) => {
+const ModalView = ({ visible, login, trigger, triggerAlignSelf, content, backTitle, onTriggerPress }: Props) => {
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(visible || false);
-  const animationType: any = animation || 'slide';
   const isLoggedIn: boolean = UserManager.isLoggedIn();
 
   const triggerStyle: any = {
