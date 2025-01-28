@@ -18,7 +18,7 @@ class SearchManager {
   }
 
   async getDefaultResult() {
-    let defaultResult: any = JSON.parse(Store.getState().search.default);
+    let defaultResult: any = this.unpackResult(Store.getState().search.default);
 
     if (Object.keys(defaultResult)?.length > 0) {
       return defaultResult;
@@ -32,7 +32,7 @@ class SearchManager {
   }
 
   setDefaultResult(result: any) {
-    Store.dispatch(setDefaultResult(JSON.stringify(result)));
+    Store.dispatch(setDefaultResult(this.packResult(result)));
   }
 
   getCurrentValue() {
@@ -44,19 +44,19 @@ class SearchManager {
   }
 
   getCurrentResult() {
-    return JSON.parse(Store.getState().search.current);
+    return this.unpackResult(Store.getState().search.current);
   }
 
   setCurrentResult(result: any) {
-    Store.dispatch(setCurrentResult(JSON.stringify(result)));
+    Store.dispatch(setCurrentResult(this.packResult(result)));
   }
 
   packResult(result: any) {
-
+    return JSON.stringify(result);
   }
 
   unpackResult(result: any) {
-    
+    return JSON.parse(result);
   }
 
   async loadData(searchValue?: string) {
