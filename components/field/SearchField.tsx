@@ -37,6 +37,8 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
 
   const toggleSearch = () => {
     setIsExpanded(!isExpanded);
+
+    //searchState.value.length > 0 ? clearSearch : 
   };
 
   const renderRightIcon = () => {
@@ -45,14 +47,10 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
         name="delete" 
         theme="primary" 
         size={13}
-        onPress={searchState.value.length > 0 ? clearSearch : toggleSearch}
+        onPress={toggleSearch}
       />
     );
   };
-
-  //console.log('stateValue', searchState.value);
-
-  //console.log('currentSearchValue', currentSearchValue);
 
   return (
     <>
