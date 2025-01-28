@@ -3,25 +3,22 @@ import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 
 class SearchManager {
-  async getDefaultData() {
-    return await this.loadData();
-  }
-
   async getSearchResult(searchValue?: string) {
     let searchState = Store.getState().search;
     let searchResult: any = JSON.parse(searchState.result);
 
-    this.loadData(searchValue)
-
-
-    if (Object.keys(searchResult).length > 0) {
-
-      console.log('--->', searchValue, searchResult?.jam?.length);
-      
+    if (!searchValue?.length) {
+      return await this.getDefaultResult();
+    } 
+    else if (searchValue == searchState.value) {
       return searchResult;
     }
-    
-    return await this.getDefaultData();
+
+    return await this.loadData(searchValue);
+  }
+
+  async getDefaultResult() {
+    return await this.loadData();
   }
 
   async loadData(searchValue?: string) {
