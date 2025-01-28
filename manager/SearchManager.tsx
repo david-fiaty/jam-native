@@ -52,11 +52,17 @@ class SearchManager {
   }
 
   packResult(result: any) {
-    return JSON.stringify(result);
+    let obj: any = {};
+  
+    for (const key in result) {
+      obj[key] = result[key].map((item: any) => item.id);
+    }
+  
+    return JSON.stringify(obj);
   }
 
   unpackResult(result: any) {
-    return JSON.parse(result);
+    let obj: any = JSON.parse(result);
   }
 
   async loadData(searchValue?: string) {
