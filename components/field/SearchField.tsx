@@ -36,6 +36,9 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
   };
 
   const toggleSearch = () => {
+
+    console.log(searchState.value);
+
     if (isExpanded && searchState.value.length) {
       clearSearch();
     }
