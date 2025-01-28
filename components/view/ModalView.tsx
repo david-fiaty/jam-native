@@ -56,8 +56,6 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
       <Modal
         isVisible={isVisible}
         coverScreen={false}
-        //backdropColor={styles.backdrop.color}
-        //backdropOpacity={styles.backdrop.opacity}
         hasBackdrop={false}
         style={styles.container}
       >
