@@ -10,6 +10,7 @@ import JamsMapView from "../view/JamsMapView";
 import i18n from "@/translation/i18n";
 import JamForm from "../form/JamForm";
 import ProfileForm from "../form/ProfileForm";
+import SearchView from '../view/SearchView';
 
 const containerStyle = ScreenManager.getFooterSize();
 const containerPosition = ScreenManager.getFooterPosition();
@@ -66,18 +67,18 @@ const FooterNavigation = () => {
 
       <ModalView 
         login={true}
-        content={<ProfileForm />}
-        backTitle={i18n.t('Your profile')}
+        content={<SearchView />}
+        backTitle={i18n.t('Search')}
         triggerAlignSelf="center"
         onTriggerPress={onTriggerPress}
         trigger={
           <IconView
-            name="user"
+            name="search"
             radius="round"
             size={16}
             padding={4}
-            theme={activeModal?.name == 'ProfileForm' ? 'secondary' : 'clear'}
-            style={activeModal?.name == 'ProfileForm' ? styles.active : {}}
+            theme={activeModal?.name == 'SearchView' ? 'secondary' : 'clear'}
+            style={activeModal?.name == 'SearchView' ? styles.active : {}}
           />
         }
       />
