@@ -37,14 +37,20 @@ class SearchManager {
   }
 
   async getDefaultResult() {
+    let defaultResult: any = JSON.parse(Store.getState().search.default);
+
+    if (Object.keys(defaultResult)?.length) {
+      return defaultResult;
+    }
+    
     return await this.loadData();
   }
 
-  setSearchValue (value: any) {
+  setSearchValue(value: any) {
     Store.dispatch(setSearchValue(value));
   }
 
-  setSearchResult (response: any) {
+  setSearchResult(response: any) {
     Store.dispatch(setCurrentResult(JSON.stringify(response)));
   }
 
