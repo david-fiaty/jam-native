@@ -53,7 +53,7 @@ const JamsScreen = () => {
         align="center"
         style={[styles.content, contentStyle]}
       >
-        { /*<JamsList />*/ }
+        <JamsList />
       </BoxView>
       
       <FooterNavigation />
