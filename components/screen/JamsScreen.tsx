@@ -26,7 +26,7 @@ const JamsScreen = () => {
   };
 
   const onSearchClear = async () => {
-    await loadSearchResult(null);
+    SearchManager.setSearchValue('');
   };
 
   useEffect(() => {
