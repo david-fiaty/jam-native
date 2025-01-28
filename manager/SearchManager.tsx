@@ -47,7 +47,7 @@ class SearchManager {
 
   clearSearch() {
     this.setCurrentValue('');
-    this.setCurrentResult(Store.getState().search.default);
+    this.loadData();
   }
 
   async loadData(searchValue?: string) {
