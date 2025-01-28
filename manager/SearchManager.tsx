@@ -45,6 +45,11 @@ class SearchManager {
     Store.dispatch(setSearchValue(value));
   }
 
+  clearSearch() {
+    this.setCurrentValue('');
+    this.setCurrentResult(Store.getState().search.default);
+  }
+
   async loadData(searchValue?: string) {
     const options = searchValue?.length ? { query_text: searchValue } : {};
     const [jams, profiles, projects] = await this.sendRequest(options);
@@ -54,6 +59,7 @@ class SearchManager {
       projects: projects
     });
 
+    this.setCurrentValue(searchValue);
     this.setDefaultResult(result);
     this.setCurrentResult(result);
     

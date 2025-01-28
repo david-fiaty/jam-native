@@ -28,7 +28,7 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
 
   const onChangeText = (value: string) => {
     setCurrentSearchValue(value);
-    //submitSearch(value); // Todo - Fix keyboard disappearing or remove
+    submitSearch(value); 
   };
 
   const clearSearch = () => {
@@ -36,7 +36,16 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
   };
 
   const toggleSearch = () => {
-    setIsExpanded(!isExpanded);
+    if (isExpanded && searchState.value?.length) {
+      setCurrentSearchValue('');
+      clearSearch();
+    }
+    else if (isExpanded && !searchState.value?.length) {
+      setIsExpanded(true);
+    }
+    else if (!isExpanded) {
+      setIsExpanded(true);
+    }
   };
 
   const renderRightIcon = () => {
@@ -45,21 +54,17 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
         name="delete" 
         theme="primary" 
         size={13}
-        onPress={searchState.value.length > 0 ? clearSearch : toggleSearch}
+        onPress={toggleSearch}
       />
     );
   };
-
-  //console.log('stateValue', searchState.value);
-
-  //console.log('currentSearchValue', currentSearchValue);
 
   return (
     <>
       { isExpanded &&
         <View style={styles.expanded}>
           <InputTextField 
-            value={currentSearchValue || searchState.value}
+            value={currentSearchValue}
             placeholder={i18n.t('Search...')}
             onChangeText={onChangeText}
             onSubmitEditing={onSubmitEditing}
@@ -69,11 +74,11 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
       }
 
       { !isExpanded &&
-        <View style={styles.expanded}>
+        <View style={styles.collapsed}>
           <IconView 
             name="search" 
-            theme="secondary" 
-            size={18}
+            theme="clear" 
+            size={22}
             padding={0}
             onPress={toggleSearch}
           />
@@ -85,10 +90,10 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
 
 const styles = StyleSheet.create({
   expanded: {
-    //width: '100%',
+    
   },
   collapsed: {
-    //width: '100%',
+
   },
 });
 
