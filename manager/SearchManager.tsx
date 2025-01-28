@@ -8,7 +8,7 @@ class SearchManager {
       return await this.getDefaultResult();
     } 
     else if (searchValue == this.getCurrentValue()) {
-      return this.getCurrentResult();
+      return await this.getCurrentResult();
     }
     else {
       let searchResult: any = await this.loadData(searchValue);
@@ -21,7 +21,7 @@ class SearchManager {
     let defaultResult: any = (Store.getState().search.default);
 
     if (Object.keys(defaultResult)?.length > 0) {
-      return this.unpackResult(defaultResult);
+      return await this.unpackResult(defaultResult);
     }
     else {
       defaultResult = await this.loadData();
@@ -43,8 +43,8 @@ class SearchManager {
     Store.dispatch(setSearchValue(value));
   }
 
-  getCurrentResult() {
-    return this.unpackResult(Store.getState().search.current);
+  async getCurrentResult() {
+    return await this.unpackResult(Store.getState().search.current);
   }
 
   setCurrentResult(result: any) {
