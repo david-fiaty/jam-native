@@ -1,24 +1,31 @@
-import { setSearchResult, setSearchValue } from "@/redux/slices/SearchSlice";
+import { setSearchValue, setDefaultResult, setCurrentResult } from "@/redux/slices/SearchSlice";
 import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 
 class SearchManager {
-  async getDefaultData() {
-    return await this.loadData();
+  async getSearchResult(searchValue?: string) {
+    if (!searchValue?.length) {
+      return await this.getDefaultResult();
+    } 
+    else if (searchValue == this.getCurrentValue()) {
+      return this.getCurrentResult();
+    }
+
+    return await this.loadData(searchValue);
   }
 
-  async getSearchResult(searchValue?: string) {
-    let searchState = Store.getState().search;
-    let searchResult: any = searchState.result?.length ? JSON.parse(searchState.result) : this.loadData(searchValue);
+  async getDefaultResult() {
+    let defaultResult: any = JSON.parse(Store.getState().search.default);
 
-    if (Object.keys(searchResult).length > 0) {
-
-      console.log('--->', searchValue, searchResult?.jam?.length);
-
-      return searchResult;
+    if (Object.keys(defaultResult)?.length) {
+      return defaultResult;
     }
-    
-    return await this.getDefaultData();
+    else {
+      defaultResult = await this.loadData();
+      this.setDefaultResult(defaultResult);
+    }
+
+    return defaultResult;
   }
 
   async loadData(searchValue?: string) {
@@ -30,21 +37,29 @@ class SearchManager {
       projects: projects
     });
 
-    this.storeSearchResult(response);
+    this.setCurrentResult(response);
 
     return response;
   }
 
-  clearSearchValue () {
-    Store.dispatch(setSearchValue(''));
+  getCurrentValue() {
+    return Store.getState().search.value;
   }
 
-  storeSearchValue (value: any) {
+  getCurrentResult() {
+    return JSON.parse(Store.getState().search.current);
+  }
+
+  setCurrentValue(value: any) {
     Store.dispatch(setSearchValue(value));
   }
 
-  storeSearchResult (response: any) {
-    Store.dispatch(setSearchResult(JSON.stringify(response)));
+  setCurrentResult(result: any) {
+    Store.dispatch(setCurrentResult(JSON.stringify(result)));
+  }
+
+  setDefaultResult(result: any) {
+    Store.dispatch(setDefaultResult(JSON.stringify(result)));
   }
 
   async sendRequest(options?: any) {

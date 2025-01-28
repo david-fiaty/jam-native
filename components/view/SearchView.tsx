@@ -3,7 +3,6 @@ import { View, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
-import { BaseProps } from "@/constants/Types";
 import BoxView from "./BoxView";
 import TextView from "./TextView";
 import ListView from "./ListView";
@@ -11,19 +10,15 @@ import StaticData from "@/constants/StaticData";
 import SearchJamsList from "../list/SearchJamsList";
 import SearchProfilesList from "../list/SearchProfilesList";
 import SearchProjectsList from "../list/SearchProjectsList";
-import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "./SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 
-type Props = BaseProps & {
-  searchResult?: any;
-};
-
 const modalSize: any = ScreenManager.getModalSize();
 
-const SearchView = ({ searchResult }: Props) => {
+const SearchView = () => {
   const [activeTab, setActiveTab] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const searchResult = useSelector((state: any) => JSON.parse(state.search.result));
   
   const renderTab = (row: any) => {
     const tabStyle: any = row.item.id == activeTab ? styles.activeTab : {};

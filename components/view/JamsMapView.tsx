@@ -1,21 +1,18 @@
 import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
+import { useSelector } from "react-redux";
 import RNMapView , { Marker, PROVIDER_GOOGLE, PROVIDER_DEFAULT, Callout } from "react-native-maps";
-import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
 import DeviceManager from "@/manager/DeviceManager";
 import i18n from "@/translation/i18n";
 
-type Props = BaseProps & {
-  searchResult?: any;
-};
-
-const JamsMapView = ({ searchResult }: Props) => {
+const JamsMapView = () => {
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const mapRef = useRef<any>();
+  const searchResult = useSelector((state: any) => JSON.parse(state.search.result));
   const markerImage = require('@/assets/images/logo-55.png');
   
   const getInitialRegion = () => {
