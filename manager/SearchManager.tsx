@@ -63,6 +63,8 @@ class SearchManager {
 
   unpackResult(result: any) {
     let obj: any = JSON.parse(result);
+
+    
   }
 
   async loadData(searchValue?: string) {
