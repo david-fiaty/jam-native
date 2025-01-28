@@ -14,6 +14,20 @@ class SearchManager {
     return await this.loadData(searchValue);
   }
 
+  async getDefaultResult() {
+    let defaultResult: any = JSON.parse(Store.getState().search.default);
+
+    if (Object.keys(defaultResult)?.length) {
+      return defaultResult;
+    }
+    else {
+      defaultResult = await this.loadData();
+      this.setDefaultResult(defaultResult);
+    }
+
+    return defaultResult;
+  }
+
   async loadData(searchValue?: string) {
     const options = searchValue?.length ? { query_text: searchValue } : {};
     const [jams, profiles, projects] = await this.sendRequest(options);
@@ -28,16 +42,6 @@ class SearchManager {
     return response;
   }
 
-  async getDefaultResult() {
-    let defaultResult: any = JSON.parse(Store.getState().search.default);
-
-    if (Object.keys(defaultResult)?.length) {
-      return defaultResult;
-    }
-
-    return await this.loadData();
-  }
-
   getCurrentValue() {
     return Store.getState().search.value;
   }
@@ -50,8 +54,12 @@ class SearchManager {
     Store.dispatch(setSearchValue(value));
   }
 
-  setCurrentResult(response: any) {
-    Store.dispatch(setCurrentResult(JSON.stringify(response)));
+  setCurrentResult(result: any) {
+    Store.dispatch(setCurrentResult(JSON.stringify(result)));
+  }
+
+  setDefaultResult(result: any) {
+    Store.dispatch(setDefaultResult(JSON.stringify(result)));
   }
 
   async sendRequest(options?: any) {
