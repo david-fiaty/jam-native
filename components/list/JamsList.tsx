@@ -11,8 +11,8 @@ import ListItem from "./JamsList/ListItem";
 const JamsList = () => {
   const [sectors, setSectors] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const searchResult = useSelector((state: any) => JSON.parse(state.search.result));
-  
+  const searchResult = useSelector((state: any) => JSON.parse(state.search.current));
+
   useEffect(() => {
     (async () => {
       if (!sectors.length) setSectors(await EntityManager.getSectors());
@@ -29,8 +29,8 @@ const JamsList = () => {
       style={styles.container}
     >
       <ListView
-        data={searchResult}
-        initialNumToRender={searchResult?.length || 0}
+        data={searchResult?.jam}
+        initialNumToRender={searchResult?.jam?.length || 0}
         contentContainerStyle={Layout.listContainer}
         renderItem={(row: any) => <ListItem row={row} sectorsData={sectors} />}
         keyExtractor={(item: any) => item.id.toString()}

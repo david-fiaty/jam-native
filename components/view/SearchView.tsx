@@ -18,7 +18,7 @@ const modalSize: any = ScreenManager.getModalSize();
 const SearchView = () => {
   const [activeTab, setActiveTab] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const searchResult = useSelector((state: any) => JSON.parse(state.search.result));
+  const searchResult = useSelector((state: any) => JSON.parse(state.search.current));
   
   const renderTab = (row: any) => {
     const tabStyle: any = row.item.id == activeTab ? styles.activeTab : {};
