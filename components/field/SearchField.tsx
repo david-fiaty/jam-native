@@ -69,7 +69,7 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
       }
 
       { !isExpanded &&
-        <View style={styles.expanded}>
+        <View style={styles.collapsed}>
           <IconView 
             name="search" 
             theme="clear" 
@@ -85,10 +85,10 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
 
 const styles = StyleSheet.create({
   expanded: {
-    //width: '100%',
+    
   },
   collapsed: {
-    //width: '100%',
+
   },
 });
 
