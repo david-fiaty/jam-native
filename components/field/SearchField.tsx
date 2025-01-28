@@ -55,20 +55,39 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
   //console.log('currentSearchValue', currentSearchValue);
 
   return (
-    <View style={styles.container}>
-      <InputTextField 
-        value={currentSearchValue || searchState.value}
-        placeholder={i18n.t('Search...')}
-        onChangeText={onChangeText}
-        onSubmitEditing={onSubmitEditing}
-        rightIcon={renderRightIcon()}
-      /> 
-    </View>
+    <>
+      { isExpanded &&
+        <View style={styles.expanded}>
+          <InputTextField 
+            value={currentSearchValue || searchState.value}
+            placeholder={i18n.t('Search...')}
+            onChangeText={onChangeText}
+            onSubmitEditing={onSubmitEditing}
+            rightIcon={renderRightIcon()}
+          /> 
+        </View>
+      }
+
+      { !isExpanded &&
+        <View style={styles.expanded}>
+          <IconView 
+            name="search" 
+            theme="secondary" 
+            size={18}
+            padding={0}
+            onPress={toggleSearch}
+          />
+        </View>
+      }
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  expanded: {
+    //width: '100%',
+  },
+  collapsed: {
     //width: '100%',
   },
 });
