@@ -61,10 +61,11 @@ class SearchManager {
     return JSON.stringify(obj);
   }
 
-  unpackResult(result: any) {
-    let obj: any = JSON.parse(result);
+  unpackResult(str: any) {
+    let result: any = JSON.parse(str);    
 
-    
+
+    //await EntityManager.getProfiles({ items_ids: formData[fieldName] })
   }
 
   async loadData(searchValue?: string) {
