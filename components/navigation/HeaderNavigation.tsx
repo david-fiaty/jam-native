@@ -87,7 +87,7 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
     <BoxView 
       direction="row" 
       align="center" 
-      justify="space-between"
+      justify="flex-start"
       style={[styles.container, containerStyle]}
     >
       <BoxView direction="row" align="center" style={styles.headerLeft}>
@@ -101,7 +101,7 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
       </BoxView>
 
       { (route.name == 'jams' || activeModal?.headerNavigation) &&
-        <BoxView direction="row" align="center" justify="flex-start" style={styles.headerRight}>
+        <BoxView direction="row" align="center" style={styles.headerRight}>
           {isLoggedIn && renderNotificationsButton()}
           {isLoggedIn && renderSettingsButton()}
         </BoxView>
@@ -118,13 +118,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: Layout.space.base*1.5,
   },
   headerLeft: {
-    width: '12%',
+    //width: '12%',
   },
   headerCenter: {
-    width: '55%',
+    //width: '55%',
+    backgroundColor: 'yellow',
   },
   headerRight: {
-    maxWidth: 68,
+    //maxWidth: 68,
+    backgroundColor: 'blue',
     //width: '85%',
     //paddingRight: Layout.space.base*2.3,
   },
