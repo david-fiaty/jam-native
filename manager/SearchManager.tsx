@@ -23,9 +23,19 @@ class SearchManager {
       projects: projects
     });
 
-    this.setSearchResult(response);
+    this.setCurrentResult(response);
 
     return response;
+  }
+
+  async getDefaultResult() {
+    let defaultResult: any = JSON.parse(Store.getState().search.default);
+
+    if (Object.keys(defaultResult)?.length) {
+      return defaultResult;
+    }
+
+    return await this.loadData();
   }
 
   getCurrentValue() {
@@ -36,21 +46,11 @@ class SearchManager {
     return JSON.parse(Store.getState().search.current);
   }
 
-  async getDefaultResult() {
-    let defaultResult: any = JSON.parse(Store.getState().search.default);
-
-    if (Object.keys(defaultResult)?.length) {
-      return defaultResult;
-    }
-    
-    return await this.loadData();
-  }
-
-  setSearchValue(value: any) {
+  setCurrentValue(value: any) {
     Store.dispatch(setSearchValue(value));
   }
 
-  setSearchResult(response: any) {
+  setCurrentResult(response: any) {
     Store.dispatch(setCurrentResult(JSON.stringify(response)));
   }
 
