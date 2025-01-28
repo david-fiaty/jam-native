@@ -26,7 +26,7 @@ const JamsScreen = () => {
   };
 
   const onSearchClear = async () => {
-    SearchManager.setSearchValue('');
+    SearchManager.setCurrentValue('');
   };
 
   useEffect(() => {
@@ -48,8 +48,12 @@ const JamsScreen = () => {
         onSearchClear={async () => onSearchClear() }
       />
 
-      <BoxView style={[styles.content, contentStyle]} direction="column" align="center">
-        <JamsList />
+      <BoxView 
+        direction="column" 
+        align="center"
+        style={[styles.content, contentStyle]}
+      >
+        { <JamsList /> }
       </BoxView>
       
       <FooterNavigation />
