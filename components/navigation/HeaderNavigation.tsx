@@ -113,24 +113,22 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.white,
-    width: '100%',
     paddingVertical: Layout.space.base,
     paddingHorizontal: Layout.space.base*1.5,
+    gap: Layout.space.base,
   },
   headerLeft: {
     width: '12%',
   },
   headerCenter: {
-    maxWidth: '60%',
+    maxWidth: '50%',
     backgroundColor: 'yellow',
-    flexGrow: 1,
+    //flexGrow: 1,
   },
   headerRight: {
     maxWidth: 68,
     backgroundColor: 'blue',
     flex: 1,
-    //width: '85%',
-    //paddingRight: Layout.space.base*2.3,
   },
 });
 
