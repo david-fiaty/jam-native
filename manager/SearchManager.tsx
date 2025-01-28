@@ -61,24 +61,35 @@ class SearchManager {
     return JSON.stringify(obj);
   }
 
-  unpackResult(str: any) {
+  async unpackResult(str: any) {
     let result: any = JSON.parse(str);    
+    let request: any = [];
 
     for (const key in result) {
       switch (key) {
         case 'jam':
+          request.push(EntityManager.getJams({ items_ids: result[key] }));
           break;
 
+        case 'profile':
+          request.push(EntityManager.getProfiles({ items_ids: result[key] }));
+          break;
+
+        case 'project':
+          request.push(EntityManager.getProjects({ items_ids: result[key] }));
+          break;
       }
     }
 
-    //await EntityManager.getProfiles({ items_ids: formData[fieldName] })
+    const [jam, profile, project] = await Promise.all(request);
+
+    return {jam, profile, project};
   }
 
   async loadData(searchValue?: string) {
     const options = searchValue?.length ? { query_text: searchValue } : {};
     const [jams, profiles, projects] = await this.sendSearchRequest(options);
-    const response = this.buildResponse({
+    const response = this.buildSearchResponse({
       jams: jams, 
       profiles: profiles, 
       projects: projects
@@ -95,7 +106,7 @@ class SearchManager {
     ]);
   }
 
-  buildResponse(data?: any) {
+  buildSearchResponse(data?: any) {
     return {
       jam: data.jams,
       project: data.projects,
