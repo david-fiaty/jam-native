@@ -18,14 +18,15 @@ const JamsScreen = () => {
   const contentStyle = ScreenManager.getModalSize();
   
   const loadSearchResult = async (value?: any) => {
-    let result: any = await SearchManager.getSearchResult(value);
+    await SearchManager.getSearchResult(value);
   };
 
   const onSearchSubmit = async (value: any) => {
     await loadSearchResult(value);
   };
 
-  const onSearchClear = async () => {
+  const onSearchClear = () => {
+    console.log('clear search called');
     SearchManager.setCurrentValue('');
   };
 
@@ -45,7 +46,7 @@ const JamsScreen = () => {
 
       <HeaderNavigation 
         onSearchSubmit={async (value: any) => await onSearchSubmit(value)} 
-        onSearchClear={async () => onSearchClear() }
+        onSearchClear={onSearchClear}
       />
 
       <BoxView 
