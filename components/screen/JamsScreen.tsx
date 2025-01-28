@@ -31,7 +31,11 @@ const JamsScreen = () => {
 
   useEffect(() => {
     dispatch(setModalConfig(ModalConfig));
-    setIsLoaded(true);
+
+    (async () => {
+      await loadSearchResult();
+      setIsLoaded(true);
+    })();
   }, [isLoaded, ModalConfig]);
 
   if (!isLoaded) return <SpinnerView />;
@@ -49,7 +53,7 @@ const JamsScreen = () => {
         align="center"
         style={[styles.content, contentStyle]}
       >
-        {/*<JamsList />*/}
+        <JamsList />
       </BoxView>
       
       <FooterNavigation />
