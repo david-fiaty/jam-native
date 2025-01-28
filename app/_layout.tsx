@@ -127,6 +127,15 @@ const RootLayout = () => {
       },
     },
     {
+      name: 'profile',
+      options: {
+        ...headerVisibleOptions,
+        ...{
+          animation: 'default',
+        },
+      },
+    },
+    {
       name: 'password',
       options: {
         ...headerVisibleOptions,
