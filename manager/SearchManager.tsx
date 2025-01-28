@@ -1,24 +1,31 @@
-import { storeSearchResult } from "@/redux/slices/SearchSlice";
+import { setSearchValue, setDefaultResult, setCurrentResult } from "@/redux/slices/SearchSlice";
 import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 
 class SearchManager {
-  async getDefaultData() {
-    return await this.loadData();
+  async getSearchResult(searchValue?: string) {
+    if (!searchValue?.length) {
+      return await this.getDefaultResult();
+    } 
+    else if (searchValue == this.getCurrentValue()) {
+      return this.getCurrentResult();
+    }
+
+    return await this.loadData(searchValue);
   }
 
-  getSearchResult(key?: any, searchValue?: string) {
-    let searchState = Store.getState().search;
-    let searchResult: any = searchState.result?.length ? JSON.parse(searchState.result) : this.loadData(searchValue);
+  async getDefaultResult() {
+    let defaultResult: any = JSON.parse(Store.getState().search.default);
 
-    if (key && key?.length > 0 && Object.keys(searchResult).length > 0) {
-      return searchResult[key];
+    if (Object.keys(defaultResult)?.length) {
+      return defaultResult;
     }
-    else if (!Object.keys(searchResult).length) {
-      return this.getDefaultData();
+    else {
+      defaultResult = await this.loadData();
+      this.setDefaultResult(defaultResult);
     }
 
-    return searchResult;
+    return defaultResult;
   }
 
   async loadData(searchValue?: string) {
@@ -30,18 +37,29 @@ class SearchManager {
       projects: projects
     });
 
-    return this.storeSearchResult(response);
-  }
-
-  storeSearchResult (response: any) {
-    let results: any = {};
-    for (const [key, data] of Object.entries(response)) {
-      results[key] = (data || []).map((o: any) => o.id);
-    }
-
-    Store.dispatch(storeSearchResult(JSON.stringify(results)));
+    this.setCurrentResult(response);
 
     return response;
+  }
+
+  getCurrentValue() {
+    return Store.getState().search.value;
+  }
+
+  getCurrentResult() {
+    return JSON.parse(Store.getState().search.current);
+  }
+
+  setCurrentValue(value: any) {
+    Store.dispatch(setSearchValue(value));
+  }
+
+  setCurrentResult(result: any) {
+    Store.dispatch(setCurrentResult(JSON.stringify(result)));
+  }
+
+  setDefaultResult(result: any) {
+    Store.dispatch(setDefaultResult(JSON.stringify(result)));
   }
 
   async sendRequest(options?: any) {

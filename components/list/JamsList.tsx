@@ -1,21 +1,18 @@
 import { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
+import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
-import { BaseProps } from "@/constants/Types";
 import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import ListItem from "./JamsList/ListItem";
 
-type Props = BaseProps & {
-  searchResult?: any;
-};
-
-const JamsList = ({ searchResult }: Props) => {
+const JamsList = () => {
   const [sectors, setSectors] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-
+  const searchResult = useSelector((state: any) => JSON.parse(state.search.result));
+  
   useEffect(() => {
     (async () => {
       if (!sectors.length) setSectors(await EntityManager.getSectors());

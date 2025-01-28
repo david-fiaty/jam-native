@@ -1,43 +1,37 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { setSearchValue } from "@/redux/slices/SearchSlice";
+import { useSelector } from 'react-redux';
 import { Layout } from '@/constants/Layout';
 import { BaseProps } from '@/constants/Types';
-
 import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
 import i18n from '@/translation/i18n';
-import SearchManager from '@/manager/SearchManager';
 import DeviceManager from '@/manager/DeviceManager';
 
 type Props = BaseProps & {
-  onSearchComplete?: () => void;
+  onSearchSubmit?: (value: any) => void;
+  onSearchClear?: () => void;
 };
 
-const SearchField = ({ onSearchComplete }: Props) => {
-  const dispatch = useDispatch();
+const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
   const searchState = useSelector((state: any) => state.search);
   const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
 
-  const submitSearch = async (value?: string) => {
-    dispatch(setSearchValue(value));
-    await SearchManager.getSearchResult(null, value);
-    if (onSearchComplete) onSearchComplete();
+  const submitSearch = (value?: string) => {
+    if (onSearchSubmit) onSearchSubmit(value);
   };
 
-  const onSubmitEditing = async () => {
-    await submitSearch(currentSearchValue);
+  const onSubmitEditing = () => {
+    submitSearch(currentSearchValue);
   };
 
-  const onChangeText = async (value: string) => {
+  const onChangeText = (value: string) => {
     setCurrentSearchValue(value);
-    await submitSearch(value);
+    //submitSearch(value); // Todo - Fix keyboard disappearing or remove
   };
 
   const clearSearch = () => {
-    setCurrentSearchValue('');
-    dispatch(setSearchValue(''));
+    if (onSearchClear) onSearchClear();
   };
 
   const renderRightIcon = () => {

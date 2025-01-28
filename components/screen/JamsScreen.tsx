@@ -14,24 +14,26 @@ import SpinnerView from "../view/SpinnerView";
 
 const JamsScreen = () => {
   const dispatch = useDispatch();
-  const [searchResult, setSearchResult] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const contentStyle = ScreenManager.getModalSize();
   
-  const loadJamsData = async () => {
-    setSearchResult(await SearchManager.getSearchResult());
+  const loadSearchResult = async (value?: any) => {
+    await SearchManager.getSearchResult(value);
   };
 
-  const onSearchComplete = async () => {
-    await loadJamsData();
-    console.log('search complete');
+  const onSearchSubmit = async (value: any) => {
+    await loadSearchResult(value);
+  };
+
+  const onSearchClear = async () => {
+    SearchManager.setSearchValue('');
   };
 
   useEffect(() => {
     dispatch(setModalConfig(ModalConfig));
 
     (async () => {
-      await loadJamsData();
+      await loadSearchResult();
       setIsLoaded(true);
     })();
   }, [isLoaded, ModalConfig]);
@@ -42,15 +44,15 @@ const JamsScreen = () => {
     <BoxView direction="column" align="flex-start" style={styles.container}>
 
       <HeaderNavigation 
-        searchResult={searchResult} 
-        onSearchComplete={async () => await onSearchComplete()} 
+        onSearchSubmit={async (value: any) => await onSearchSubmit(value)} 
+        onSearchClear={async () => onSearchClear() }
       />
 
       <BoxView style={[styles.content, contentStyle]} direction="column" align="center">
-        <JamsList searchResult={searchResult?.jam} />
+        <JamsList />
       </BoxView>
       
-      <FooterNavigation searchResult={searchResult} />
+      <FooterNavigation />
       
     </BoxView>
   );
