@@ -32,11 +32,7 @@ const JamsScreen = () => {
 
   useEffect(() => {
     dispatch(setModalConfig(ModalConfig));
-
-    (async () => {
-      await loadSearchResult();
-      setIsLoaded(true);
-    })();
+    setIsLoaded(true);
   }, [isLoaded, ModalConfig]);
 
   if (!isLoaded) return <SpinnerView />;
