@@ -41,7 +41,7 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
       clearSearch();
     }
     else if (isExpanded && !searchState.value?.length) {
-      setIsExpanded(true);
+      setIsExpanded(false);
     }
     else if (!isExpanded) {
       setIsExpanded(true);
