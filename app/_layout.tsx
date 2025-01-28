@@ -198,7 +198,6 @@ const RootLayout = () => {
           <Stack.Screen 
             key={item.name}
             name={item.name} 
-            //options={item.options} 
             options={headerOptions}
           />
         ))}
