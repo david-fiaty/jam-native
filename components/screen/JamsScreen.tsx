@@ -33,7 +33,7 @@ const JamsScreen = () => {
     dispatch(setModalConfig(ModalConfig));
 
     (async () => {
-      await loadSearchResult();
+      //await loadSearchResult();
       setIsLoaded(true);
     })();
   }, [isLoaded, ModalConfig]);
