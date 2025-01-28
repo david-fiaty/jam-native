@@ -28,7 +28,7 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
 
   const onChangeText = (value: string) => {
     setCurrentSearchValue(value);
-    //submitSearch(value); // Todo - Fix keyboard disappearing or remove
+    submitSearch(value); 
   };
 
   const clearSearch = () => {
@@ -36,11 +36,14 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
   };
 
   const toggleSearch = () => {
-    if (searchState.value.length > 0) {
+    if (isExpanded && searchState.value.length) {
       clearSearch();
     }
-    else {
-      setIsExpanded(false);
+    else if (isExpanded && !searchState.value.length) {
+      setIsExpanded(true);
+    }
+    else if (!isExpanded) {
+      setIsExpanded(true);
     }
   };
 
