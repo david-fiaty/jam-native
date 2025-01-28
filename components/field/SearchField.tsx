@@ -36,13 +36,11 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
   };
 
   const toggleSearch = () => {
-
-    console.log(searchState.value);
-
-    if (isExpanded && searchState.value.length) {
+    if (isExpanded && searchState.value?.length) {
+      setCurrentSearchValue('');
       clearSearch();
     }
-    else if (isExpanded && !searchState.value.length) {
+    else if (isExpanded && !searchState.value?.length) {
       setIsExpanded(true);
     }
     else if (!isExpanded) {
@@ -66,7 +64,7 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
       { isExpanded &&
         <View style={styles.expanded}>
           <InputTextField 
-            value={currentSearchValue || searchState.value}
+            value={currentSearchValue}
             placeholder={i18n.t('Search...')}
             onChangeText={onChangeText}
             onSubmitEditing={onSubmitEditing}

@@ -26,8 +26,7 @@ const JamsScreen = () => {
   };
 
   const onSearchClear = () => {
-    console.log('clear search called');
-    SearchManager.setCurrentValue('');
+    SearchManager.clearSearch();
   };
 
   useEffect(() => {
