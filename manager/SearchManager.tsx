@@ -64,13 +64,20 @@ class SearchManager {
   unpackResult(str: any) {
     let result: any = JSON.parse(str);    
 
+    for (const key in result) {
+      switch (key) {
+        case 'jam':
+          break;
+
+      }
+    }
 
     //await EntityManager.getProfiles({ items_ids: formData[fieldName] })
   }
 
   async loadData(searchValue?: string) {
     const options = searchValue?.length ? { query_text: searchValue } : {};
-    const [jams, profiles, projects] = await this.sendRequest(options);
+    const [jams, profiles, projects] = await this.sendSearchRequest(options);
     const response = this.buildResponse({
       jams: jams, 
       profiles: profiles, 
@@ -80,7 +87,7 @@ class SearchManager {
     return response;
   }
 
-  async sendRequest(options?: any) {
+  async sendSearchRequest(options?: any) {
     return await Promise.all([
       EntityManager.listJams(options), 
       EntityManager.listProfiles(options),
