@@ -21,11 +21,8 @@ class SearchManager {
     if (Object.keys(defaultResult)?.length > 0) {
       return defaultResult;
     }
-    else {
-      return await this.loadData();
-    }
 
-    return defaultResult;
+    return await this.loadData();
   }
 
   setDefaultResult(result: any) {
