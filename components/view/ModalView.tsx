@@ -45,7 +45,7 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
   };
   
   return (
-    <ScreenView>  
+    <>  
       <TouchableOpacity
         onPress={() => toggleModal(true)}
         style={[styles.triggerButton, triggerStyle]}
@@ -82,7 +82,7 @@ const ModalView = ({ visible, login, animation, trigger, triggerAlignSelf, conte
           </BoxView>
         </BoxView>
       </Modal>
-    </ScreenView>
+    </>
   );
 };
 
