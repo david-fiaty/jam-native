@@ -45,16 +45,6 @@ class SearchManager {
     Store.dispatch(setSearchValue(value));
   }
 
-  packResult(result: any) {
-    let obj: any = {};
-  
-    for (const key in result) {
-      obj[key] = result[key].map((item: any) => item.id);
-    }
-  
-    return JSON.stringify(obj);
-  }
-
   async loadData(searchValue?: string) {
     const options = searchValue?.length ? { query_text: searchValue } : {};
     const [jams, profiles, projects] = await this.sendRequest(options);
