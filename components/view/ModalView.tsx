@@ -90,7 +90,8 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     top: modalPosition.y,
-    width: '100%',
+    left: modalPosition.x,
+    width: modalSize.width,
   },
   wrapper: {
     width: '100%',
