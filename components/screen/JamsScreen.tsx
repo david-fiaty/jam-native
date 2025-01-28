@@ -18,15 +18,15 @@ const JamsScreen = () => {
   const contentStyle = ScreenManager.getModalSize();
   
   const loadSearchResult = async (value?: any) => {
-    await SearchManager.getSearchResult(value);
+    //await SearchManager.getSearchResult(value);
   };
 
   const onSearchSubmit = async (value: any) => {
-    await loadSearchResult(value);
+    //await loadSearchResult(value);
   };
 
   const onSearchClear = async () => {
-    SearchManager.setSearchValue('');
+    //SearchManager.setCurrentValue('');
   };
 
   useEffect(() => {
