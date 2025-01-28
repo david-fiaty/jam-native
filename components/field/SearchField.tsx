@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useSelector } from 'react-redux';
-import { Layout } from '@/constants/Layout';
 import { BaseProps } from '@/constants/Types';
 import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
 import i18n from '@/translation/i18n';
-import DeviceManager from '@/manager/DeviceManager';
 
 type Props = BaseProps & {
   onSearchSubmit?: (value: any) => void;
@@ -34,7 +32,6 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
     setCurrentSearchValue('');
     if (onSearchClear) onSearchClear();
   };
-
 
   const renderRightIcon = () => {
     if (searchState.value?.length) {
