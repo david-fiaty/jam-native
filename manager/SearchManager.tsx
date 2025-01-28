@@ -1,79 +1,63 @@
-import { setSearchResult } from "@/redux/slices/SearchSlice";
+import { setSearchValue, setDefaultResult, setCurrentResult } from "@/redux/slices/SearchSlice";
 import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 
 class SearchManager {
-  loadJamsData = async () => {
-    let idArray: any = this.getSearchResult('jam');
-    
-    if (idArray?.length > 0) {
-      return await EntityManager.getJams({ items_ids: idArray });
+  async getSearchResult(searchValue?: string) {
+    if (!searchValue?.length) {
+      return await this.getDefaultResult();
+    } 
+    else if (searchValue == this.getCurrentValue()) {
+      return this.getCurrentResult();
     }
-    
-    return await EntityManager.listJams();
-  };
+    else {
+      return await this.loadData(searchValue);
+    }
+  }
 
-  async getDefaultData() {
+  async getDefaultResult() {
+    let defaultResult: any = JSON.parse(Store.getState().search.default);
+
+    if (Object.keys(defaultResult)?.length > 0) {
+      return defaultResult;
+    }
+
     return await this.loadData();
   }
 
-  async getResult(searchValue: string) {
-    if (!searchValue?.length) {
-      return await this.getDefaultData();
-    } 
-    else {
-      return await this.loadResult(searchValue);
-    }
+  setDefaultResult(result: any) {
+    Store.dispatch(setDefaultResult(JSON.stringify(result)));
   }
 
-  // Todo - Why searchValue not used, since passed as argument from onSubmitEditing in SearchField component
-  async loadData(searchValue?: any) {
-    const [jams, profiles, projects] = await this.sendRequest();
-    
-    return this.buildResponse({
-      jams: jams, 
-      profiles: profiles, 
-      projects: projects
-    });
+  getCurrentResult() {
+    return JSON.parse(Store.getState().search.current);
   }
 
-  async loadResult(searchValue: string) {
+  setCurrentResult(result: any) {
+    Store.dispatch(setCurrentResult(JSON.stringify(result)));
+  }
+
+  getCurrentValue() {
+    return Store.getState().search.value;
+  }
+
+  setCurrentValue(value: any) {
+    Store.dispatch(setSearchValue(value));
+  }
+
+  async loadData(searchValue?: string) {
     const options = searchValue?.length ? { query_text: searchValue } : {};
     const [jams, profiles, projects] = await this.sendRequest(options);
-    const response = this.buildResponse({
+    const result = this.buildResponse({
       jams: jams, 
       profiles: profiles, 
       projects: projects
     });
 
-    this.setSearchResult(response);
-
-    return response;
-  }
-
-  setSearchResult (response: any) {
-    let results: any = {};
-    for (const [key, data] of Object.entries(response)) {
-      results[key] = (data || []).map((o: any) => o.id);
-    }
-
-    Store.dispatch(setSearchResult(JSON.stringify(results)));
-  }
-
-  getSearchResult(key?: string) {
-    let searchState = Store.getState().search;
-    let searchResult: any = searchState.result?.length > 0 ? searchState.result : '{}';
-    let data: any = JSON.parse(searchResult);
-
-    if (key && key?.length > 0 && Object.keys(data).length > 0) {
-      return data[key];
-    }
-
-    return data;
-  }
-
-  isExpanded() {
-    return Store.getState().search.expanded === true;
+    this.setDefaultResult(result);
+    this.setCurrentResult(result);
+    
+    return result;
   }
 
   async sendRequest(options?: any) {

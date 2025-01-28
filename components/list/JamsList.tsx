@@ -1,20 +1,17 @@
 import { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
+import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
-import { BaseProps } from "@/constants/Types";
 import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import ListItem from "./JamsList/ListItem";
 
-type Props = BaseProps & {
-  searchResult?: any;
-};
-
-const JamsList = ({ searchResult }: Props) => {
+const JamsList = () => {
   const [sectors, setSectors] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const searchResult = JSON.parse(useSelector((state: any) => state.search.current));
 
   useEffect(() => {
     (async () => {
@@ -32,8 +29,8 @@ const JamsList = ({ searchResult }: Props) => {
       style={styles.container}
     >
       <ListView
-        data={searchResult}
-        initialNumToRender={searchResult?.length || 0}
+        data={searchResult?.jam}
+        initialNumToRender={searchResult?.jam?.length || 0}
         contentContainerStyle={Layout.listContainer}
         renderItem={(row: any) => <ListItem row={row} sectorsData={sectors} />}
         keyExtractor={(item: any) => item.id.toString()}
