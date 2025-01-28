@@ -25,8 +25,8 @@ const JamsScreen = () => {
     await loadSearchResult(value);
   };
 
-  const onSearchClear = () => {
-    SearchManager.clearSearch();
+  const onSearchClear = async () => {
+    await SearchManager.clearSearch();
   };
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const JamsScreen = () => {
 
       <HeaderNavigation 
         onSearchSubmit={async (value: any) => await onSearchSubmit(value)} 
-        onSearchClear={onSearchClear}
+        onSearchClear={async () => await onSearchClear()}
       />
 
       <BoxView 
