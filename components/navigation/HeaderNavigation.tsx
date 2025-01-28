@@ -29,26 +29,11 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
   const isLoggedIn = UserManager.isLoggedIn();
   const containerStyle = ScreenManager.getHeaderSize();
 
-  const renderSearchButton = () => {
+  const renderSearchField = () => {
     return (
-      <ModalView 
-        login={false}
-        content={<SearchView />}
-        triggerAlignSelf="flex-end"
-        backTitle={
-          <SearchField 
-            onSearchSubmit={onSearchSubmit} 
-            onSearchClear={onSearchClear} 
-          />
-        }
-        trigger={    
-          <IconView 
-            name="search" 
-            theme="clear" 
-            size={22}
-            padding={0}
-          />
-        }
+      <SearchField 
+        onSearchSubmit={onSearchSubmit} 
+        onSearchClear={onSearchClear} 
       />
     );
   };
@@ -113,7 +98,7 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
 
       { (route.name == 'jams' || activeModal?.headerNavigation) &&
         <BoxView direction="row" align="center" justify="space-around" style={styles.headerRight}>
-          {renderSearchButton()}
+          {renderSearchField()}
           {isLoggedIn && renderNotificationsButton()}
           {isLoggedIn && renderSettingsButton()}
         </BoxView>
