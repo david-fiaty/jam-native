@@ -3,6 +3,7 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { Layout } from '@/constants/Layout';
 import { BaseProps } from '@/constants/Types';
+import { Colors } from "@/constants/Colors";
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 import LogoView from '../view/LogoView';
@@ -107,8 +108,7 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    //backgroundColor: Colors.white,
-    backgroundColor: 'gray',
+    backgroundColor: Colors.white,
     paddingHorizontal: Layout.space.base*1.5,
   },
   headerLeft: {
