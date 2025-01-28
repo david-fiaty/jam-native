@@ -48,7 +48,11 @@ const JamsScreen = () => {
         onSearchClear={async () => onSearchClear() }
       />
 
-      <BoxView style={[styles.content, contentStyle]} direction="column" align="center">
+      <BoxView 
+        direction="column" 
+        align="center"
+        style={[styles.content, contentStyle]}
+      >
         { /*<JamsList />*/}
       </BoxView>
       

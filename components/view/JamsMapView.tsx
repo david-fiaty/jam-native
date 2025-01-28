@@ -82,7 +82,7 @@ const JamsMapView = () => {
           showsUserLocation={true}
           showsMyLocationButton={true}
         >
-          {searchResult?.map((item: any) => renderJamMarker(item))}
+          {searchResult?.jam?.map((item: any) => renderJamMarker(item))}
         </RNMapView>
       </View>
     </TouchableWithoutFeedback>

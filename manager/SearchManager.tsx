@@ -4,7 +4,7 @@ import Store from '@/redux/Store';
 
 class SearchManager {
   async getSearchResult(searchValue?: string) {
-    if (!searchValue?.length) {
+    if (searchValue?.length == 0) {
       return await this.getDefaultResult();
     } 
     else if (searchValue == this.getCurrentValue()) {
@@ -17,7 +17,7 @@ class SearchManager {
   async getDefaultResult() {
     let defaultResult: any = JSON.parse(Store.getState().search.default);
 
-    if (Object.keys(defaultResult)?.length) {
+    if (Object.keys(defaultResult)?.length > 0) {
       return defaultResult;
     }
     else {
