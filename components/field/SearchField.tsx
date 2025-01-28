@@ -16,6 +16,7 @@ type Props = BaseProps & {
 const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
   const searchState = useSelector((state: any) => state.search);
   const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   const submitSearch = (value?: string) => {
     if (onSearchSubmit) onSearchSubmit(value);
@@ -34,44 +35,61 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
     if (onSearchClear) onSearchClear();
   };
 
-  const renderRightIcon = () => {
-    if (searchState.value.length > 0) {
-      return (
-        <IconView 
-          name="delete" 
-          theme="primary" 
-          size={13}
-          onPress={clearSearch}
-        />
-      );
-    }
-
-    return <></>;
+  const toggleSearch = () => {
+    setIsExpanded(!isExpanded);
   };
 
+  const renderRightIcon = () => {
+    return (
+      <IconView 
+        name="delete" 
+        theme="primary" 
+        size={13}
+        onPress={searchState.value.length > 0 ? clearSearch : toggleSearch}
+      />
+    );
+  };
 
-  console.log('stateValue', searchState.value);
+  //console.log('stateValue', searchState.value);
 
-  console.log('currentSearchValue', currentSearchValue);
+  //console.log('currentSearchValue', currentSearchValue);
 
   return (
-    <View style={styles.container}>
-      <InputTextField 
-        value={currentSearchValue || searchState.value}
-        placeholder={i18n.t('Search...')}
-        onChangeText={onChangeText}
-        onSubmitEditing={onSubmitEditing}
-        rightIcon={renderRightIcon()}
-      /> 
-    </View>
+    <>
+      { isExpanded &&
+        <View style={styles.expanded}>
+          <InputTextField 
+            value={currentSearchValue || searchState.value}
+            placeholder={i18n.t('Search...')}
+            onChangeText={onChangeText}
+            onSubmitEditing={onSubmitEditing}
+            rightIcon={renderRightIcon()}
+          /> 
+        </View>
+      }
+
+      { !isExpanded &&
+        <View style={styles.expanded}>
+          <IconView 
+            name="search" 
+            theme="secondary" 
+            size={18}
+            padding={0}
+            onPress={toggleSearch}
+          />
+        </View>
+      }
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: DeviceManager.window.width - Layout.space.base*5.5, // Todo - Improve field width caclulation
+  expanded: {
+    //width: '100%',
+  },
+  collapsed: {
+    //width: '100%',
   },
 });
-
 
 export default SearchField;
