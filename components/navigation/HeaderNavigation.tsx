@@ -96,12 +96,10 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
         </TouchableOpacity>
       </BoxView>
 
-      <BoxView direction="row" align="center" justify="flex-end" style={styles.headerCenter}>
-        {renderSearchField()}
-      </BoxView>
 
       { (route.name == 'jams' || activeModal?.headerNavigation) &&
         <BoxView direction="row" align="center" style={styles.headerRight}>
+          {renderSearchField()}
           {isLoggedIn && renderNotificationsButton()}
           {isLoggedIn && renderSettingsButton()}
         </BoxView>
@@ -112,18 +110,15 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.white,
+    //backgroundColor: Colors.white,
+    backgroundColor: 'gray',
     paddingHorizontal: Layout.space.base*1.5,
   },
   headerLeft: {
     
   },
-  headerCenter: {
-    maxWidth: '50%',
-    //backgroundColor: 'gray',
-  },
   headerRight: {
-    maxWidth: 68,
+    maxWidth: 102,
   },
 });
 
