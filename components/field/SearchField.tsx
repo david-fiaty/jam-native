@@ -16,6 +16,7 @@ type Props = BaseProps & {
 const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
   const searchState = useSelector((state: any) => state.search);
   const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   const submitSearch = (value?: string) => {
     if (onSearchSubmit) onSearchSubmit(value);
@@ -27,51 +28,73 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
 
   const onChangeText = (value: string) => {
     setCurrentSearchValue(value);
-    //submitSearch(value); // Todo - Fix keyboard disappearing or remove
+    submitSearch(value); 
   };
 
   const clearSearch = () => {
     if (onSearchClear) onSearchClear();
   };
 
-  const renderRightIcon = () => {
-    if (searchState.value.length > 0) {
-      return (
-        <IconView 
-          name="delete" 
-          theme="primary" 
-          size={13}
-          onPress={clearSearch}
-        />
-      );
+  const toggleSearch = () => {
+    if (isExpanded && searchState.value?.length) {
+      setCurrentSearchValue('');
+      clearSearch();
     }
-
-    return <></>;
+    else if (isExpanded && !searchState.value?.length) {
+      setIsExpanded(true);
+    }
+    else if (!isExpanded) {
+      setIsExpanded(true);
+    }
   };
 
-
-  console.log('stateValue', searchState.value);
-
-  console.log('currentSearchValue', currentSearchValue);
+  const renderRightIcon = () => {
+    return (
+      <IconView 
+        name="delete" 
+        theme="primary" 
+        size={13}
+        onPress={toggleSearch}
+      />
+    );
+  };
 
   return (
-    <View style={styles.container}>
-      <InputTextField 
-        value={currentSearchValue || searchState.value}
-        placeholder={i18n.t('Search...')}
-        onChangeText={onChangeText}
-        onSubmitEditing={onSubmitEditing}
-        rightIcon={renderRightIcon()}
-      /> 
-    </View>
+    <>
+      { isExpanded &&
+        <View style={styles.expanded}>
+          <InputTextField 
+            value={currentSearchValue}
+            placeholder={i18n.t('Search...')}
+            onChangeText={onChangeText}
+            onSubmitEditing={onSubmitEditing}
+            rightIcon={renderRightIcon()}
+          /> 
+        </View>
+      }
+
+      { !isExpanded &&
+        <View style={styles.collapsed}>
+          <IconView 
+            name="search" 
+            theme="clear" 
+            size={22}
+            padding={0}
+            onPress={toggleSearch}
+          />
+        </View>
+      }
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: DeviceManager.window.width - Layout.space.base*5.5, // Todo - Improve field width caclulation
+  expanded: {
+    
+  },
+  collapsed: {
+
   },
 });
-
 
 export default SearchField;
