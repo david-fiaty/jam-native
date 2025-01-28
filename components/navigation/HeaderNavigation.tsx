@@ -29,26 +29,11 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
   const isLoggedIn = UserManager.isLoggedIn();
   const containerStyle = ScreenManager.getHeaderSize();
 
-  const renderSearchButton = () => {
+  const renderSearchField = () => {
     return (
-      <ModalView 
-        login={false}
-        content={<SearchView />}
-        triggerAlignSelf="flex-end"
-        backTitle={
-          <SearchField 
-            onSearchSubmit={onSearchSubmit} 
-            onSearchClear={onSearchClear} 
-          />
-        }
-        trigger={    
-          <IconView 
-            name="search" 
-            theme="clear" 
-            size={22}
-            padding={0}
-          />
-        }
+      <SearchField 
+        onSearchSubmit={onSearchSubmit} 
+        onSearchClear={onSearchClear} 
       />
     );
   };
@@ -111,9 +96,12 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
         </TouchableOpacity>
       </BoxView>
 
+      <BoxView direction="row" align="center" style={styles.headerCenter}>
+        {renderSearchField()}
+      </BoxView>
+
       { (route.name == 'jams' || activeModal?.headerNavigation) &&
-        <BoxView direction="row" align="center" justify="space-around" style={styles.headerRight}>
-          {renderSearchButton()}
+        <BoxView direction="row" align="center" justify="flex-start" style={styles.headerRight}>
           {isLoggedIn && renderNotificationsButton()}
           {isLoggedIn && renderSettingsButton()}
         </BoxView>
@@ -130,10 +118,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: Layout.space.base*1.5,
   },
   headerLeft: {
-    flex: 1,
+    width: '12%',
+  },
+  headerCenter: {
+    width: '55%',
   },
   headerRight: {
-    maxWidth: 110,
+    maxWidth: 68,
+    //width: '85%',
+    //paddingRight: Layout.space.base*2.3,
   },
 });
 
