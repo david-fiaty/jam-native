@@ -12,16 +12,16 @@ type Props = {
   visible?: boolean;
   login?: boolean;
   trigger?: any;
-  triggerAlignSelf?: string;
+  triggerAlign?: string;
   onTriggerPress?: (active: boolean) => void;
 };
 
-const ModalView = ({ name, backTitle, entityId, login, trigger, triggerAlignSelf, onTriggerPress }: Props) => {
+const ModalView = ({ name, backTitle, entityId, login, trigger, triggerAlign, onTriggerPress }: Props) => {
   const router = useRouter();
   const isLoggedIn: boolean = UserManager.isLoggedIn();
 
   const triggerStyle: any = {
-    alignSelf: triggerAlignSelf || 'center',
+    alignSelf: triggerAlign || 'center',
   }
 
   const toggleModal = (isActive: boolean) => {
