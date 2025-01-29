@@ -7,16 +7,15 @@ import ScreenView from './ScreenView';
 
 type Props = {
   name?: any;
+  backTitle?: any;
   visible?: boolean;
   login?: boolean;
   trigger?: any;
   triggerAlignSelf?: string;
-  content?: any;
-  backTitle?: any;
   onTriggerPress?: (active: boolean) => void;
 };
 
-const ModalView = ({ name, login, trigger, triggerAlignSelf, onTriggerPress }: Props) => {
+const ModalView = ({ name, backTitle, login, trigger, triggerAlignSelf, onTriggerPress }: Props) => {
   const router = useRouter();
   const isLoggedIn: boolean = UserManager.isLoggedIn();
 
@@ -29,7 +28,7 @@ const ModalView = ({ name, login, trigger, triggerAlignSelf, onTriggerPress }: P
       router.push("/login");
     }
     else {
-      ScreenManager.toggleModal(name);
+      ScreenManager.toggleModal(name, { backTitle: backTitle });
       if (onTriggerPress) onTriggerPress(isActive);
     }
   };

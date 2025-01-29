@@ -12,6 +12,7 @@ import ScreenManager from "@/manager/ScreenManager";
 import HeaderNavigation from "../navigation/HeaderNavigation";
 import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "../view/SpinnerView";
+import BackButton from "../button/BackButton";
 
 const JamsScreen = () => {
   const dispatch = useDispatch();
@@ -52,6 +53,22 @@ const JamsScreen = () => {
 
   const renderModalContent = () => {
     return ModalConfig.find((o: any) => o.name == ScreenManager.getActiveModal()?.name)?.component;
+  };
+
+  const renderModalTitle = () => {
+    if (isModalVisible()) {
+      return (
+        <BoxView direction="row">
+          <BackButton
+            title={'My super modal opened title'}
+            //onPress={() => toggleModal(false)}
+            //containerStyle={styles.backButton}
+          />
+        </BoxView>
+      );
+    }
+    
+    return <></>;
   };
 
   const isModalVisible = () => {
@@ -104,6 +121,7 @@ const JamsScreen = () => {
         hasBackdrop={false}
         style={getModalContainerStyle()}
       >
+        {renderModalTitle()}
         {renderModalContent()}
       </Modal>
     </BoxView>
