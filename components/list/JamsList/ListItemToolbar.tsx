@@ -5,7 +5,6 @@ import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
 import IconView from "@/components/view/IconView";
 import TextView from "@/components/view/TextView";
-import ScreenManager from "@/manager/ScreenManager";
 import UserManager from "@/manager/UserManager";
 import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
