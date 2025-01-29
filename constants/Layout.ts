@@ -85,7 +85,7 @@ export const Layout = {
   },
   title: {
     fontWeight: 'bold',
-    fontSize: fontSize.big,
+    fontSize: fontSize.base,
   },
   menuContainer: {
     padding: space.base*1.5,

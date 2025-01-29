@@ -8,6 +8,7 @@ import ScreenView from './ScreenView';
 type Props = {
   name?: any;
   backTitle?: any;
+  entityId?: any;
   visible?: boolean;
   login?: boolean;
   trigger?: any;
@@ -15,12 +16,12 @@ type Props = {
   onTriggerPress?: (active: boolean) => void;
 };
 
-const ModalView = ({ name, backTitle, login, trigger, triggerAlignSelf, onTriggerPress }: Props) => {
+const ModalView = ({ name, backTitle, entityId, login, trigger, triggerAlignSelf, onTriggerPress }: Props) => {
   const router = useRouter();
   const isLoggedIn: boolean = UserManager.isLoggedIn();
 
   const triggerStyle: any = {
-    alignSelf: triggerAlignSelf || 'flex-start',
+    alignSelf: triggerAlignSelf || 'center',
   }
 
   const toggleModal = (isActive: boolean) => {
@@ -28,9 +29,16 @@ const ModalView = ({ name, backTitle, login, trigger, triggerAlignSelf, onTrigge
       router.push("/login");
     }
     else {
-      ScreenManager.toggleModal(name, { backTitle: backTitle });
+      ScreenManager.toggleModal(name, getModalParams());
       if (onTriggerPress) onTriggerPress(isActive);
     }
+  };
+
+  const getModalParams = () => {
+    return { 
+      backTitle: backTitle,
+      entityId: entityId,
+    };
   };
   
   return (  
