@@ -13,6 +13,10 @@ const containerPosition = ScreenManager.getFooterPosition();
 const FooterNavigation = () => {
   const activeModal = ScreenManager.getActiveModal();
 
+  const getIconTheme = (screenName: string) => {
+    return activeModal?.name == screenName ? 'secondary' : 'clear';
+  };
+
   return (
     <BoxView 
       direction="row" 
@@ -29,7 +33,7 @@ const FooterNavigation = () => {
             radius="round"
             size={16}
             padding={4}
-            theme={activeModal?.name == 'JamsMapView' ? 'secondary' : 'clear'}
+            theme={getIconTheme("JamsMapView")}
           />
         }
       />
@@ -44,7 +48,7 @@ const FooterNavigation = () => {
             radius="round"
             size={16}
             padding={4}
-            theme={activeModal?.name == 'JamForm' ? 'secondary' : 'clear'}
+            theme={getIconTheme("JamForm")}
           />
         }
       />
@@ -58,7 +62,7 @@ const FooterNavigation = () => {
             radius="round"
             size={16}
             padding={4}
-            theme={activeModal?.name == 'SearchView' ? 'secondary' : 'clear'}
+            theme={getIconTheme("SearchView")}
           />
         }
       />

@@ -97,11 +97,18 @@ const ListItemToolbar = ({ row }: Props) => {
       justify="space-between"
       style={styles.container}
     >
-      {renderJammersButton()}
+      <BoxView align="center">
+        {renderJammersButton()}
+      </BoxView>
 
       <BoxView direction="row" align="center">
-        {renderSaveButton()}
-        {renderShareButton()}
+        <BoxView align="center">
+          {renderSaveButton()}
+        </BoxView>
+
+        <BoxView align="center">
+          {renderShareButton()}
+        </BoxView>
       </BoxView>
     </BoxView>
   );
