@@ -1,6 +1,5 @@
 import { useRouter } from "expo-router";
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { Layout } from '@/constants/Layout';
 import UserManager from '@/manager/UserManager';
 import ScreenManager from '@/manager/ScreenManager';
 import ScreenView from './ScreenView';
