@@ -29,6 +29,7 @@ const JamsScreen = () => {
   };
 
   const renderModalContent = () => {
+    return <TextView>Ttiub aepinpoeve spm</TextView>
     return ModalConfig.find((o: any) => o.name == 'JamsList').component;
   };
 
