@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setModalConfig } from "@/redux/slices/ModalSlice";
 import { ModalConfig } from "@/constants/ModalConfig";
 import { Colors } from "@/constants/Colors";
@@ -16,6 +16,7 @@ import SpinnerView from "../view/SpinnerView";
 const JamsScreen = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const modalState = useSelector((state: any) => state.modal);
 
   const getModalContainerStyle = (): any => {
     if (ScreenManager.isModalActive()) {
@@ -50,12 +51,10 @@ const JamsScreen = () => {
   };
 
   const renderModalContent = () => {
-    return ModalConfig.find((o: any) => o.name == 'JamForm')?.component;
-    //return ModalConfig.find((o: any) => o.name == ScreenManager.getActiveModal()?.name)?.component;
+    return ModalConfig.find((o: any) => o.name == ScreenManager.getActiveModal()?.name)?.component;
   };
 
   const isModalVisible = () => {
-    return true;
     return ScreenManager.isModalActive();    
   };
 
@@ -73,6 +72,8 @@ const JamsScreen = () => {
 
   useEffect(() => {
     loadModalConfig();
+
+    console.log('--.', modalState.active);
 
     (async () => {
       await loadSearchResult();
