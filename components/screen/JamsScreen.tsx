@@ -13,14 +13,30 @@ import HeaderNavigation from "../navigation/HeaderNavigation";
 import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "../view/SpinnerView";
 
-const modalPosition: any = ScreenManager.getModalPosition();
-const modalSize: any = ScreenManager.getModalSize();
-
 const JamsScreen = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const contentStyle = ScreenManager.getModalSize();
+
+  const getModalContainerStyle = (): any => {
+    if (ScreenManager.isModalActive()) {
+      let modalPosition: any = ScreenManager.getModalPosition();
+      let modalSize: any = ScreenManager.getModalSize();
+
+      return {
+        position: 'absolute',
+        top: modalPosition.y,
+        left: modalPosition.x,
+        width: modalSize.width,
+        height: modalSize.height,
+        backgroundColor: Colors.white,
+        margin: 0,
+      };
+    }
   
+    return {};
+  };
+
   const loadModalConfig = () => {
     dispatch(setModalConfig(ScreenManager.getModalConfig()));
   };
@@ -77,7 +93,7 @@ const JamsScreen = () => {
         isVisible={isModalVisible()}
         coverScreen={false}
         hasBackdrop={false}
-        style={styles.modalContainer}
+        style={getModalContainerStyle()}
       >
         {isModalVisible() && renderModalContent()}
       </Modal>
@@ -92,15 +108,6 @@ const styles = StyleSheet.create({
   content: {
     width: '100%',
     zIndex: 0,
-  },
-  modalContainer: {
-    position: 'absolute',
-    top: modalPosition.y,
-    left: modalPosition.x,
-    width: modalSize.width,
-    height: modalSize.height,
-    backgroundColor: Colors.white,
-    margin: 0,
   },
   modalWrapper: {
     /*
