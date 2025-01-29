@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setModalConfig } from "@/redux/slices/ModalSlice";
 import { ModalConfig } from "@/constants/ModalConfig";
 import { Colors } from "@/constants/Colors";
+import { Layout } from "@/constants/Layout";
 import Modal from "react-native-modal";
 import BoxView from "../view/BoxView";
 import FooterNavigation from "../navigation/FooterNavigation";
@@ -12,6 +13,7 @@ import ScreenManager from "@/manager/ScreenManager";
 import HeaderNavigation from "../navigation/HeaderNavigation";
 import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "../view/SpinnerView";
+import BackButton from "../button/BackButton";
 
 const JamsScreen = () => {
   const dispatch = useDispatch();
@@ -52,6 +54,26 @@ const JamsScreen = () => {
 
   const renderModalContent = () => {
     return ModalConfig.find((o: any) => o.name == ScreenManager.getActiveModal()?.name)?.component;
+  };
+
+  const renderModalTitle = () => {
+    if (isModalVisible() && ScreenManager.getActiveModal()?.params?.backTitle) {
+      let activeModal: any = ScreenManager.getActiveModal();
+      let modalName: string = ScreenManager.getActiveModal()?.name;
+      let modalTitle: string = activeModal?.params?.backTitle;
+
+      return (
+        <BoxView direction="row">
+          <BackButton
+            title={modalTitle}
+            onPress={() => ScreenManager.toggleModal(modalName)}
+            containerStyle={styles.modalTitle}
+          />
+        </BoxView>
+      );
+    }
+    
+    return <></>;
   };
 
   const isModalVisible = () => {
@@ -104,6 +126,7 @@ const JamsScreen = () => {
         hasBackdrop={false}
         style={getModalContainerStyle()}
       >
+        {renderModalTitle()}
         {renderModalContent()}
       </Modal>
     </BoxView>
@@ -118,20 +141,8 @@ const styles = StyleSheet.create({
     width: '100%',
     zIndex: 0,
   },
-  modalWrapper: {
-    /*
-    width: '100%',
-    marginTop: 0,
-    backgroundColor: Colors.white,
-    paddingTop: Layout.space.base*2,
-    height: modalSize.height,
-    */
-  },
-  modalContent: {
-    /*
-    width: '100%',
-    flex: 1,
-    */
+  modalTitle: {
+    marginLeft: Layout.space.base*1.5,
   },
 });
 

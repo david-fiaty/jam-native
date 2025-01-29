@@ -1,35 +1,27 @@
-import React, { useState } from 'react';
 import { useRouter } from "expo-router";
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import { Colors } from '@/constants/Colors';
-import Modal from "react-native-modal";
 import UserManager from '@/manager/UserManager';
-import BackButton from '../button/BackButton';
-import BoxView from './BoxView';
 import ScreenManager from '@/manager/ScreenManager';
 import ScreenView from './ScreenView';
 
 type Props = {
   name?: any;
+  backTitle?: any;
+  entityId?: any;
   visible?: boolean;
   login?: boolean;
   trigger?: any;
   triggerAlignSelf?: string;
-  content?: any;
-  backTitle?: any;
   onTriggerPress?: (active: boolean) => void;
 };
 
-const modalPosition: any = ScreenManager.getModalPosition();
-const modalSize: any = ScreenManager.getModalSize();
-
-const ModalView = ({ name, visible, login, trigger, triggerAlignSelf, content, backTitle, onTriggerPress }: Props) => {
+const ModalView = ({ name, backTitle, entityId, login, trigger, triggerAlignSelf, onTriggerPress }: Props) => {
   const router = useRouter();
   const isLoggedIn: boolean = UserManager.isLoggedIn();
 
   const triggerStyle: any = {
-    alignSelf: triggerAlignSelf || 'flex-start',
+    alignSelf: triggerAlignSelf || 'center',
   }
 
   const toggleModal = (isActive: boolean) => {
@@ -37,9 +29,16 @@ const ModalView = ({ name, visible, login, trigger, triggerAlignSelf, content, b
       router.push("/login");
     }
     else {
-      ScreenManager.toggleModal(name);
+      ScreenManager.toggleModal(name, getModalParams());
       if (onTriggerPress) onTriggerPress(isActive);
     }
+  };
+
+  const getModalParams = () => {
+    return { 
+      backTitle: backTitle,
+      entityId: entityId,
+    };
   };
   
   return (  
@@ -55,28 +54,8 @@ const ModalView = ({ name, visible, login, trigger, triggerAlignSelf, content, b
 };
 
 const styles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    top: modalPosition.y,
-    left: modalPosition.x,
-    width: modalSize.width,
-  },
-  wrapper: {
-    width: '100%',
-    marginTop: 0,
-    backgroundColor: Colors.white,
-    paddingTop: Layout.space.base*2,
-    height: modalSize.height,
-  },
-  content: {
-    width: '100%',
-    flex: 1,
-  },
   backButtonContainer: {
     width: '100%',
-  },
-  backButton: {
-    marginLeft: Layout.space.base*1.5,
   },
   triggerButton: {
     alignSelf: 'flex-start',

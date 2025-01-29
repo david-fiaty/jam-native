@@ -1,16 +1,14 @@
 import { useRouter } from "expo-router";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
 import IconView from "@/components/view/IconView";
 import TextView from "@/components/view/TextView";
-import ScreenManager from "@/manager/ScreenManager";
 import UserManager from "@/manager/UserManager";
 import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
 import ModalView from "@/components/view/ModalView";
-import JammersList from "../JammersList";
 
 type Props = BaseProps & {
   row?: any,
@@ -24,7 +22,8 @@ const ListItemToolbar = ({ row }: Props) => {
     return (
       <ModalView 
         login={true}
-        content={<JammersList entityId={row.item.id} />}
+        name="JammersList"
+        entityId={row.item.id}
         backTitle={i18n.t('Jammers')}
         trigger={
           <BoxView
@@ -48,15 +47,23 @@ const ListItemToolbar = ({ row }: Props) => {
 
   const renderSaveButton = () => {
     return (
-      <IconView
-        name="save"
-        theme="tertiary"
-        size={12}
-        padding={6.5}
-        onPress={() =>
-          isLoggedIn
-            ? ScreenManager.toggleModal("SavedJamAction", { entityId: row?.item?.id })
-            : router.push("/login")
+      <ModalView 
+        login={true}
+        name="SavedJamAction"
+        entityId={row.item.id}
+        backTitle={i18n.t('Save Jam')}
+        trigger={
+          <BoxView
+            direction="row"
+            align="center"
+          >
+            <IconView 
+              name="save"
+              theme="tertiary"
+              size={12}
+              padding={6.5}
+            />
+          </BoxView>
         }
       />
     );
@@ -64,17 +71,22 @@ const ListItemToolbar = ({ row }: Props) => {
 
   const renderShareButton = () => {
     return (
-      <IconView
-        name="share"
-        theme="tertiary"
-        size={12}
-        padding={6.5}
-        onPress={() =>
-          isLoggedIn
-            ? EntityManager.shareJam(row?.item?.id)
-            : router.push("/login")
-        }
-      />
+      <BoxView
+        direction="row"
+        align="center"
+      >
+        <IconView
+          name="share"
+          theme="tertiary"
+          size={12}
+          padding={6.5}
+          onPress={() =>
+            isLoggedIn
+              ? EntityManager.shareJam(row?.item?.id)
+              : router.push("/login")
+          }
+        />
+      </BoxView>
     );
   };
 
