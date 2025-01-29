@@ -126,8 +126,8 @@ const JamsScreen = () => {
       <Modal
         coverScreen={false}
         hasBackdrop={false}
-        animationIn="slideInRight"
-        animationOut="slideOutRight"
+        animationIn="slideInUp"
+        animationOut="slideInUp"
         isVisible={isModalVisible()}
         style={getModalContainerStyle()}
       >
