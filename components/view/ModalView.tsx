@@ -49,9 +49,6 @@ const styles = StyleSheet.create({
   backButtonContainer: {
     width: '100%',
   },
-  backButton: {
-    marginLeft: Layout.space.base*1.5,
-  },
   triggerButton: {
     alignSelf: 'flex-start',
   },

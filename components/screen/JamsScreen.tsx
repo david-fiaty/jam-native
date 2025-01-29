@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setModalConfig } from "@/redux/slices/ModalSlice";
 import { ModalConfig } from "@/constants/ModalConfig";
 import { Colors } from "@/constants/Colors";
+import { Layout } from "@/constants/Layout";
 import Modal from "react-native-modal";
 import BoxView from "../view/BoxView";
 import FooterNavigation from "../navigation/FooterNavigation";
@@ -56,13 +57,17 @@ const JamsScreen = () => {
   };
 
   const renderModalTitle = () => {
-    if (isModalVisible()) {
+    if (isModalVisible() && ScreenManager.getActiveModal()?.params?.backTitle) {
+      let activeModal: any = ScreenManager.getActiveModal();
+      let modalName: string = ScreenManager.getActiveModal()?.name;
+      let modalTitle: string = activeModal?.params?.backTitle;
+
       return (
         <BoxView direction="row">
           <BackButton
-            title={'My super modal opened title'}
-            //onPress={() => toggleModal(false)}
-            //containerStyle={styles.backButton}
+            title={modalTitle}
+            onPress={() => ScreenManager.toggleModal(modalName)}
+            containerStyle={styles.modalTitle}
           />
         </BoxView>
       );
@@ -135,6 +140,9 @@ const styles = StyleSheet.create({
   content: {
     width: '100%',
     zIndex: 0,
+  },
+  modalTitle: {
+    marginLeft: Layout.space.base*1.5,
   },
 });
 
