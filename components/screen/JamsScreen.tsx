@@ -143,6 +143,7 @@ const styles = StyleSheet.create({
   },
   modalTitle: {
     marginLeft: Layout.space.base*1.5,
+    width: '100%',
   },
 });
 

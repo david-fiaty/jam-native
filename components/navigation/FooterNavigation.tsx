@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { StyleSheet } from "react-native";
 import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
@@ -10,14 +9,9 @@ import i18n from '@/translation/i18n';
 
 const containerStyle = ScreenManager.getFooterSize();
 const containerPosition = ScreenManager.getFooterPosition();
-const activeModal = ScreenManager.getActiveModal();
 
 const FooterNavigation = () => {
-  const [isActive, setIsActive] = useState<boolean>(false);
-
-  const onTriggerPress = (active: boolean) => {
-    //console.log('-->', active); // Todo - Hilight items
-  };
+  const activeModal = ScreenManager.getActiveModal();
 
   return (
     <BoxView 
@@ -29,8 +23,6 @@ const FooterNavigation = () => {
       <ModalView 
         login={false}
         name="JamsMapView"
-        backTitle={i18n.t('Jam locations')}
-        onTriggerPress={onTriggerPress}
         trigger={
           <IconView
             name="location"
@@ -46,7 +38,6 @@ const FooterNavigation = () => {
         login={true}
         name="JamForm"
         backTitle={i18n.t('Create a Jam')}
-        onTriggerPress={onTriggerPress}
         trigger={
           <IconView
             name="plus"
@@ -62,8 +53,6 @@ const FooterNavigation = () => {
       <ModalView 
         login={true}
         name="SearchView"
-        backTitle={i18n.t('Search')}
-        onTriggerPress={onTriggerPress}
         trigger={
           <IconView
             name="search"
