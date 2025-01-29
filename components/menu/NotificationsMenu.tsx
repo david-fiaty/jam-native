@@ -53,7 +53,7 @@ const NotificationsMenu = () => {
       <ListView 
         data={notificationsData} 
         renderItem={(row: any) => renderItem(row)}   
-        emptyMessage={<TextView>{i18n.t('The are currently no notifications available.')}</TextView>}
+        emptyMessage={<TextView>{i18n.t('No notifications available.')}</TextView>}
       />
     </BoxView>
   );
