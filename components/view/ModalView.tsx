@@ -24,13 +24,6 @@ const ModalView = ({ name, backTitle, entityId, login, trigger, triggerAlignSelf
     alignSelf: triggerAlignSelf || 'flex-start',
   }
 
-  const getModalParams = () => {
-    return { 
-      backTitle: backTitle,
-      entityId: entityId,
-    };
-  };
-
   const toggleModal = (isActive: boolean) => {
     if (login && !isLoggedIn) {
       router.push("/login");
@@ -39,6 +32,13 @@ const ModalView = ({ name, backTitle, entityId, login, trigger, triggerAlignSelf
       ScreenManager.toggleModal(name, getModalParams());
       if (onTriggerPress) onTriggerPress(isActive);
     }
+  };
+
+  const getModalParams = () => {
+    return { 
+      backTitle: backTitle,
+      entityId: entityId,
+    };
   };
   
   return (  
