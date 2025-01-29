@@ -31,7 +31,7 @@ const JamsScreen = () => {
   };
 
   const getModalVisible = () => {
-    return true;
+    ScreenManager.isModalActive();    
   };
 
   const loadSearchResult = async (value?: any) => {
