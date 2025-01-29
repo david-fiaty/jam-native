@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setModalConfig } from "@/redux/slices/ModalSlice";
 import { ModalConfig } from "@/constants/ModalConfig";
 import { Colors } from "@/constants/Colors";
+import Modal from "react-native-modal";
 import BoxView from "../view/BoxView";
 import FooterNavigation from "../navigation/FooterNavigation";
 import JamsList from "../list/JamsList";
@@ -15,8 +16,48 @@ import SpinnerView from "../view/SpinnerView";
 const JamsScreen = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const contentStyle = ScreenManager.getModalSize();
+  const modalState = useSelector((state: any) => state.modal);
+
+  const getModalContainerStyle = (): any => {
+    if (isModalVisible()) {
+      let modalPosition: any = ScreenManager.getModalPosition();
+      let modalSize: any = ScreenManager.getModalSize();
+
+      return {
+        position: 'absolute',
+        top: modalPosition.y,
+        left: modalPosition.x,
+        width: modalSize.width,
+        height: modalSize.height,
+        backgroundColor: Colors.white,
+        margin: 0,
+      };
+    }
   
+    return {};
+  };
+
+  const getModalContentStyle = (): any => {
+    if (isModalVisible()) {
+      return ScreenManager.getModalSize();
+    }
+
+    return {};
+  };
+
+  const loadModalConfig = () => {
+    let config: any = ModalConfig.map(({ component, ...rest }) => ({ ...rest }));
+    dispatch(setModalConfig(config));
+  };
+
+  const renderModalContent = () => {
+    return ModalConfig.find((o: any) => o.name == ScreenManager.getActiveModal()?.name)?.component;
+  };
+
+  const isModalVisible = () => {
+    return modalState.active.length > 0;    
+  };
+
   const loadSearchResult = async (value?: any) => {
     await SearchManager.getSearchResult(value);
   };
@@ -30,7 +71,7 @@ const JamsScreen = () => {
   };
 
   useEffect(() => {
-    dispatch(setModalConfig(ModalConfig));
+    loadModalConfig();
 
     (async () => {
       await loadSearchResult();
@@ -50,12 +91,21 @@ const JamsScreen = () => {
       <BoxView 
         direction="column" 
         align="center"
-        style={[styles.content, contentStyle]}
+        style={[styles.content, getModalContentStyle()]}
       >
         <JamsList />
       </BoxView>
       
       <FooterNavigation />
+
+      <Modal
+        isVisible={isModalVisible()}
+        coverScreen={false}
+        hasBackdrop={false}
+        style={getModalContainerStyle()}
+      >
+        {renderModalContent()}
+      </Modal>
     </BoxView>
   );
 };
@@ -67,6 +117,21 @@ const styles = StyleSheet.create({
   content: {
     width: '100%',
     zIndex: 0,
+  },
+  modalWrapper: {
+    /*
+    width: '100%',
+    marginTop: 0,
+    backgroundColor: Colors.white,
+    paddingTop: Layout.space.base*2,
+    height: modalSize.height,
+    */
+  },
+  modalContent: {
+    /*
+    width: '100%',
+    flex: 1,
+    */
   },
 });
 

@@ -35,7 +35,7 @@ class ScreenManager {
 
     return activeModals?.[index] || null;
   }
-  
+
   toggleModal(name: string, params?: any) {
     Store.dispatch(setActiveModal({
       name: name,
@@ -46,11 +46,11 @@ class ScreenManager {
   getHeaderSize() {
     let height: number = DeviceManager.window.height/10;
 
-    if (height < Layout.footer.minHeight) {
-      height = Layout.footer.minHeight;
+    if (height < Layout.header.minHeight) {
+      height = Layout.header.minHeight;
     }
-    else if (height > Layout.footer.maxHeight) {
-      height = Layout.footer.maxHeight;
+    else if (height > Layout.header.maxHeight) {
+      height = Layout.header.maxHeight;
     }
 
     return {
@@ -78,14 +78,14 @@ class ScreenManager {
   getModalSize() {
     return {
       width: DeviceManager.window.width,
-      height: DeviceManager.window.height - this.getHeaderSize().height - this.getFooterSize().height,
+      height: DeviceManager.window.height - this.getHeaderSize().height - this.getFooterSize().height - Layout.space.base,
     };
   }
 
   getModalPosition() {
     return {
       x: 0,
-      y: this.getHeaderSize().height + DeviceManager.statusBar.height - DeviceManager.window.height,
+      y: this.getHeaderSize().height + Layout.space.base,
     };
   }
 
