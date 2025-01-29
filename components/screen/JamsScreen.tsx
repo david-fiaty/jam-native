@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 import { setModalConfig } from "@/redux/slices/ModalSlice";
 import { ModalConfig } from "@/constants/ModalConfig";
 import { Colors } from "@/constants/Colors";
+import { Layout } from '@/constants/Layout';
+import Modal from "react-native-modal";
 import BoxView from "../view/BoxView";
 import FooterNavigation from "../navigation/FooterNavigation";
 import JamsList from "../list/JamsList";
@@ -11,12 +13,25 @@ import ScreenManager from "@/manager/ScreenManager";
 import HeaderNavigation from "../navigation/HeaderNavigation";
 import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "../view/SpinnerView";
+import TextView from "../view/TextView";
+
+const modalPosition: any = ScreenManager.getModalPosition();
+const modalSize: any = ScreenManager.getModalSize();
 
 const JamsScreen = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const contentStyle = ScreenManager.getModalSize();
   
+  const loadModalConfig = () => {
+    let config: any = ModalConfig.map(({ component, ...rest }) => ({ ...rest }));
+    dispatch(setModalConfig(config));
+  };
+
+  const renderModalContent = () => {
+    return ModalConfig.find((o: any) => o.name == 'JamsList').component;
+  };
+
   const loadSearchResult = async (value?: any) => {
     await SearchManager.getSearchResult(value);
   };
@@ -30,7 +45,7 @@ const JamsScreen = () => {
   };
 
   useEffect(() => {
-    dispatch(setModalConfig(ModalConfig));
+    loadModalConfig();
 
     (async () => {
       await loadSearchResult();
@@ -56,6 +71,16 @@ const JamsScreen = () => {
       </BoxView>
       
       <FooterNavigation />
+
+    
+      <Modal
+        isVisible={true}
+        coverScreen={false}
+        hasBackdrop={false}
+        style={styles.modalContainer}
+      >
+        {renderModalContent()}
+      </Modal>
     </BoxView>
   );
 };
@@ -67,6 +92,30 @@ const styles = StyleSheet.create({
   content: {
     width: '100%',
     zIndex: 0,
+  },
+  modalContainer: {
+    backgroundColor: Colors.white,
+    /*
+    position: 'absolute',
+    top: modalPosition.y,
+    left: modalPosition.x,
+    width: modalSize.width,
+    */
+  },
+  modalWrapper: {
+    /*
+    width: '100%',
+    marginTop: 0,
+    backgroundColor: Colors.white,
+    paddingTop: Layout.space.base*2,
+    height: modalSize.height,
+    */
+  },
+  modalContent: {
+    /*
+    width: '100%',
+    flex: 1,
+    */
   },
 });
 
