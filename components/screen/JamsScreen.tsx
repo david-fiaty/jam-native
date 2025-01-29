@@ -29,12 +29,11 @@ const JamsScreen = () => {
   };
 
   const renderModalContent = () => {
-    return <TextView>Ttiub aepinpoeve spm</TextView>
     return ModalConfig.find((o: any) => o.name == 'JamsList').component;
   };
 
   const getModalVisible = () => {
-    return false;
+    return true;
   };
 
   const loadSearchResult = async (value?: any) => {
@@ -98,13 +97,13 @@ const styles = StyleSheet.create({
     zIndex: 0,
   },
   modalContainer: {
-    backgroundColor: Colors.white,
-    /*
     position: 'absolute',
     top: modalPosition.y,
     left: modalPosition.x,
     width: modalSize.width,
-    */
+    height: modalSize.height,
+    backgroundColor: Colors.white,
+    margin: 0,
   },
   modalWrapper: {
     /*
