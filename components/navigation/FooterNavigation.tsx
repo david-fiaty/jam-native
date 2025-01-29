@@ -33,8 +33,8 @@ const FooterNavigation = () => {
       <ModalView 
         login={false}
         name="JamsMapView"
-        content={<JamsMapView />}
-        backTitle={i18n.t('Jam locations')}
+        //content={<JamsMapView />}
+        //backTitle={i18n.t('Jam locations')}
         triggerAlignSelf="center"
         onTriggerPress={onTriggerPress}
         trigger={
@@ -51,8 +51,8 @@ const FooterNavigation = () => {
       <ModalView 
         login={true}
         name="JamForm"
-        content={<JamForm />}
-        backTitle={i18n.t('Create a Jam')}
+        //content={<JamForm />}
+        //backTitle={i18n.t('Create a Jam')}
         triggerAlignSelf="center"
         onTriggerPress={onTriggerPress}
         trigger={
@@ -70,8 +70,8 @@ const FooterNavigation = () => {
       <ModalView 
         login={true}
         name="SearchView"
-        content={<SearchView />}
-        backTitle={i18n.t('Search')}
+        //content={<SearchView />}
+        //backTitle={i18n.t('Search')}
         triggerAlignSelf="center"
         onTriggerPress={onTriggerPress}
         trigger={
