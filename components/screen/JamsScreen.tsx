@@ -13,25 +13,48 @@ import HeaderNavigation from "../navigation/HeaderNavigation";
 import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "../view/SpinnerView";
 
-const modalPosition: any = ScreenManager.getModalPosition();
-const modalSize: any = ScreenManager.getModalSize();
-
 const JamsScreen = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const contentStyle = ScreenManager.getModalSize();
+
+  const getModalContainerStyle = (): any => {
+    if (ScreenManager.isModalActive()) {
+      let modalPosition: any = ScreenManager.getModalPosition();
+      let modalSize: any = ScreenManager.getModalSize();
+
+      return {
+        position: 'absolute',
+        top: modalPosition.y,
+        left: modalPosition.x,
+        width: modalSize.width,
+        height: modalSize.height,
+        backgroundColor: Colors.white,
+        margin: 0,
+      };
+    }
   
+    return {};
+  };
+
+  const getModalContentStyle = (): any => {
+    if (ScreenManager.isModalActive()) {
+      return ScreenManager.getModalSize();
+    }
+
+    return {};
+  };
+
   const loadModalConfig = () => {
     let config: any = ModalConfig.map(({ component, ...rest }) => ({ ...rest }));
     dispatch(setModalConfig(config));
   };
 
   const renderModalContent = () => {
-    return ModalConfig.find((o: any) => o.name == 'JamsList').component;
+    return ModalConfig.find((o: any) => o.name == ScreenManager.getActiveModal()?.name)?.component;
   };
 
-  const getModalVisible = () => {
-    return true;
+  const isModalVisible = () => {
+    return ScreenManager.isModalActive();    
   };
 
   const loadSearchResult = async (value?: any) => {
@@ -67,7 +90,7 @@ const JamsScreen = () => {
       <BoxView 
         direction="column" 
         align="center"
-        style={[styles.content, contentStyle]}
+        style={[styles.content, getModalContentStyle()]}
       >
         <JamsList />
       </BoxView>
@@ -75,12 +98,12 @@ const JamsScreen = () => {
       <FooterNavigation />
 
       <Modal
-        isVisible={getModalVisible()}
+        isVisible={isModalVisible()}
         coverScreen={false}
         hasBackdrop={false}
-        style={styles.modalContainer}
+        style={getModalContainerStyle()}
       >
-        {renderModalContent()}
+        {isModalVisible() && renderModalContent()}
       </Modal>
     </BoxView>
   );
@@ -93,15 +116,6 @@ const styles = StyleSheet.create({
   content: {
     width: '100%',
     zIndex: 0,
-  },
-  modalContainer: {
-    position: 'absolute',
-    top: modalPosition.y,
-    left: modalPosition.x,
-    width: modalSize.width,
-    height: modalSize.height,
-    backgroundColor: Colors.white,
-    margin: 0,
   },
   modalWrapper: {
     /*
