@@ -21,17 +21,14 @@ const ListItemToolbar = ({ row }: Props) => {
 
   const saveJam = async () => {
     let result: any = await EntityManager.saveJam(row.item.id);
+    
+    let message: any = {
+      title: i18n.t('Save Jam'),
+      content: i18n.t('Jam successfully saved to your profile.'),
+    };
 
-    if (result?.error) {
-      ScreenManager.showMessage({
-        title: i18n.t('Save Jam'),
-        content: result.error,
-      });
-
-      return false;
-    }
-
-    return true;
+    if (result?.error) message.content = i18n.t(result.error)
+    ScreenManager.showMessage(message);
   };
 
   const shareJam = async () => {

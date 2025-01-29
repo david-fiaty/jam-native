@@ -8,7 +8,6 @@ import * as ExpoSplashScreen from 'expo-splash-screen';
 import BaseTheme from "@/constants/BaseTheme";
 import Store from "@/redux/Store";
 import HeaderNavigation from '@/components/navigation/HeaderNavigation';
-import MessageView from '@/components/view/MessageView';
 
 const headerHiddenOptions: object = { 
   headerShown: false,
@@ -192,7 +191,6 @@ const RootLayout = () => {
 
   return (
     <Provider store={Store}>
-      <MessageView />
       <Stack>
         {routes.map((item: any) => (
           <Stack.Screen 
