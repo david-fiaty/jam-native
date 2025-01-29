@@ -46,11 +46,11 @@ class ScreenManager {
   getHeaderSize() {
     let height: number = DeviceManager.window.height/10;
 
-    if (height < Layout.footer.minHeight) {
-      height = Layout.footer.minHeight;
+    if (height < Layout.header.minHeight) {
+      height = Layout.header.minHeight;
     }
-    else if (height > Layout.footer.maxHeight) {
-      height = Layout.footer.maxHeight;
+    else if (height > Layout.header.maxHeight) {
+      height = Layout.header.maxHeight;
     }
 
     return {
