@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
@@ -10,7 +10,6 @@ import UserManager from "@/manager/UserManager";
 import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
 import ModalView from "@/components/view/ModalView";
-import JammersList from "../JammersList";
 
 type Props = BaseProps & {
   row?: any,
@@ -24,7 +23,8 @@ const ListItemToolbar = ({ row }: Props) => {
     return (
       <ModalView 
         login={true}
-        content={<JammersList entityId={row.item.id} />}
+        name="JammersList"
+        entityId={row.item.id}
         backTitle={i18n.t('Jammers')}
         trigger={
           <BoxView
