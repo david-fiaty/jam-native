@@ -16,7 +16,6 @@ import SpinnerView from "../view/SpinnerView";
 const JamsScreen = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const contentStyle = ScreenManager.getModalSize();
 
   const getModalContainerStyle = (): any => {
     if (ScreenManager.isModalActive()) {
@@ -34,6 +33,14 @@ const JamsScreen = () => {
       };
     }
   
+    return {};
+  };
+
+  const getModalContentStyle = (): any => {
+    if (ScreenManager.isModalActive()) {
+      return ScreenManager.getModalSize();
+    }
+
     return {};
   };
 
@@ -82,7 +89,7 @@ const JamsScreen = () => {
       <BoxView 
         direction="column" 
         align="center"
-        style={[styles.content, contentStyle]}
+        style={[styles.content, getModalContentStyle()]}
       >
         <JamsList />
       </BoxView>
