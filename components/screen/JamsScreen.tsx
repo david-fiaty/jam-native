@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setModalConfig } from "@/redux/slices/ModalSlice";
 import { ModalConfig } from "@/constants/ModalConfig";
 import { Colors } from "@/constants/Colors";
@@ -16,9 +16,10 @@ import SpinnerView from "../view/SpinnerView";
 const JamsScreen = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const modalState = useSelector((state: any) => state.modal);
 
   const getModalContainerStyle = (): any => {
-    if (ScreenManager.isModalActive()) {
+    if (isModalVisible()) {
       let modalPosition: any = ScreenManager.getModalPosition();
       let modalSize: any = ScreenManager.getModalSize();
 
@@ -37,7 +38,7 @@ const JamsScreen = () => {
   };
 
   const getModalContentStyle = (): any => {
-    if (ScreenManager.isModalActive()) {
+    if (isModalVisible()) {
       return ScreenManager.getModalSize();
     }
 
@@ -54,7 +55,7 @@ const JamsScreen = () => {
   };
 
   const isModalVisible = () => {
-    return ScreenManager.isModalActive();    
+    return modalState.active.length > 0;    
   };
 
   const loadSearchResult = async (value?: any) => {
@@ -103,7 +104,7 @@ const JamsScreen = () => {
         hasBackdrop={false}
         style={getModalContainerStyle()}
       >
-        {isModalVisible() && renderModalContent()}
+        {renderModalContent()}
       </Modal>
     </BoxView>
   );
