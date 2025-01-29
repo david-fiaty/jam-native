@@ -118,21 +118,6 @@ const styles = StyleSheet.create({
     width: '100%',
     zIndex: 0,
   },
-  modalWrapper: {
-    /*
-    width: '100%',
-    marginTop: 0,
-    backgroundColor: Colors.white,
-    paddingTop: Layout.space.base*2,
-    height: modalSize.height,
-    */
-  },
-  modalContent: {
-    /*
-    width: '100%',
-    flex: 1,
-    */
-  },
 });
 
 export default JamsScreen;
