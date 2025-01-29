@@ -34,7 +34,7 @@ const JamsScreen = () => {
   };
 
   const getModalVisible = () => {
-    return true;
+    return false;
   };
 
   const loadSearchResult = async (value?: any) => {
