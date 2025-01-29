@@ -36,7 +36,7 @@ class ScreenManager {
     return activeModals?.[index] || null;
   }
 
-  isModalActive(): boolean {
+  isModalActive(): boolean {  
     return Store.getState().modal.active?.length > 0;
   }
   
