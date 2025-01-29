@@ -24,7 +24,19 @@ const ListItemToolbar = ({ row }: Props) => {
     
     let message: any = {
       title: i18n.t('Save Jam'),
-      content: i18n.t('Jam successfully saved to your profile.'),
+      content: i18n.t('Jam successfully save.'),
+    };
+
+    if (result?.error) message.content = i18n.t(result.error)
+    ScreenManager.showMessage(message);
+  };
+
+  const likeJam = async () => {
+    let result: any = await EntityManager.likeJam(row.item.id);
+    
+    let message: any = {
+      title: i18n.t('Like Jam'),
+      content: i18n.t('Jam successfully liked.'),
     };
 
     if (result?.error) message.content = i18n.t(result.error)
@@ -81,6 +93,23 @@ const ListItemToolbar = ({ row }: Props) => {
     );
   };
 
+  const renderLikeButton = () => {
+    return (
+      <BoxView
+        direction="row"
+        align="center"
+      >
+        <IconView 
+          name="like"
+          theme="tertiary"
+          size={12}
+          padding={6.5}
+          onPress={likeJam}
+        />
+      </BoxView>
+    );
+  };
+
   const renderShareButton = () => {
     return (
       <BoxView
@@ -112,6 +141,10 @@ const ListItemToolbar = ({ row }: Props) => {
       <BoxView direction="row" align="center">
         <BoxView align="center">
           {renderSaveButton()}
+        </BoxView>
+
+        <BoxView align="center">
+          {renderLikeButton()}
         </BoxView>
 
         <BoxView align="center">
