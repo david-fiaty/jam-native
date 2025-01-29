@@ -11,7 +11,7 @@ import ScreenManager from '@/manager/ScreenManager';
 import ScreenView from './ScreenView';
 
 type Props = {
-  name?: string;
+  name?: any;
   visible?: boolean;
   login?: boolean;
   trigger?: any;
@@ -26,7 +26,6 @@ const modalSize: any = ScreenManager.getModalSize();
 
 const ModalView = ({ name, visible, login, trigger, triggerAlignSelf, content, backTitle, onTriggerPress }: Props) => {
   const router = useRouter();
-  const [isVisible, setIsVisible] = useState(visible || false);
   const isLoggedIn: boolean = UserManager.isLoggedIn();
 
   const triggerStyle: any = {
@@ -38,50 +37,20 @@ const ModalView = ({ name, visible, login, trigger, triggerAlignSelf, content, b
       router.push("/login");
     }
     else {
-      setIsVisible(isActive);
+      ScreenManager.toggleModal(name);
       if (onTriggerPress) onTriggerPress(isActive);
     }
   };
   
-  return (
-    <>  
-      <ScreenView>
-        <TouchableOpacity
-          onPress={() => toggleModal(true)}
-          style={[styles.triggerButton, triggerStyle]}
-        >
-          {trigger}
-        </TouchableOpacity>
-      </ScreenView>
-    
-      <Modal
-        isVisible={isVisible}
-        coverScreen={false}
-        hasBackdrop={false}
-        style={styles.container}
+  return (  
+    <ScreenView>
+      <TouchableOpacity
+        onPress={() => toggleModal(true)}
+        style={[styles.triggerButton, triggerStyle]}
       >
-        <BoxView 
-          direction="column" 
-          align="flex-start" 
-          justify="flex-start" 
-          style={styles.wrapper}
-        >
-          {backTitle && 
-            <BoxView direction="row" style={styles.backButtonContainer}>
-              <BackButton
-                title={backTitle}
-                onPress={() => toggleModal(false)}
-                containerStyle={styles.backButton}
-              />
-            </BoxView>
-          }
-          
-          <BoxView direction="column" style={styles.content}>
-            {content}
-          </BoxView>
-        </BoxView>
-      </Modal>
-    </>
+        {trigger}
+      </TouchableOpacity>
+    </ScreenView>
   );
 };
 
