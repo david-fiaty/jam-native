@@ -80,8 +80,8 @@ export const Layout = {
     maxHeight: 68,
   },
   footer: {
-    minHeight: 48,
-    maxHeight: 48,
+    minHeight: 50,
+    maxHeight: 50,
   },
   title: {
     fontWeight: 'bold',
