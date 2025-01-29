@@ -5,6 +5,7 @@ import ListView from '../view/ListView';
 import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 import UserManager from '@/manager/UserManager';
+import BoxView from '../view/BoxView';
 
 const SettingsMenu = () => {
   const router = useRouter();
@@ -57,12 +58,12 @@ const SettingsMenu = () => {
   );
 
   return (
-    <View style={Layout.menuContainer}>
+    <BoxView direction="column" align="flex-start" style={Layout.menuContainer}>
       <ListView 
         data={data} 
         renderItem={(row: any) => renderItem(row)}   
       />
-    </View>
+    </BoxView>
   );
 };
 
