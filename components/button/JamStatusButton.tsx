@@ -12,7 +12,7 @@ type Props = {
 
 const JamStatusButton = ({active}: Props) => {
   const [labelVisible, setLabelVisible] = useState(false);
-  const buttonLabel = active ? i18n.t('Active') : i18n.t('Inactive');
+  const buttonLabel = active ? i18n.t('active') : i18n.t('inactive');
   const statusStyle = active ? styles.active : styles.inactive;
 
   return (       
