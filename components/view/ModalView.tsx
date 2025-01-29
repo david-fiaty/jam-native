@@ -11,6 +11,7 @@ import ScreenManager from '@/manager/ScreenManager';
 import ScreenView from './ScreenView';
 
 type Props = {
+  name?: string;
   visible?: boolean;
   login?: boolean;
   trigger?: any;
@@ -23,7 +24,7 @@ type Props = {
 const modalPosition: any = ScreenManager.getModalPosition();
 const modalSize: any = ScreenManager.getModalSize();
 
-const ModalView = ({ visible, login, trigger, triggerAlignSelf, content, backTitle, onTriggerPress }: Props) => {
+const ModalView = ({ name, visible, login, trigger, triggerAlignSelf, content, backTitle, onTriggerPress }: Props) => {
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(visible || false);
   const isLoggedIn: boolean = UserManager.isLoggedIn();
