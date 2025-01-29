@@ -24,7 +24,7 @@ const JamsScreen = () => {
   const contentStyle = ScreenManager.getModalSize();
   
   const loadModalConfig = () => {
-    let config: any = ModalConfig.map(({component, ...rest}) => ({...rest}));
+    let config: any = ModalConfig.map(({ component, ...rest }) => ({ ...rest }));
     dispatch(setModalConfig(config));
   };
 
