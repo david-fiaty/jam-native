@@ -45,7 +45,6 @@ export const ModalConfig: any = [
     footerNavigation: true,
     params: {},
     component: <JamForm />,
-    activeIconTheme: 'secondary',
   },
   {
     name: 'AddProjectForm', 
