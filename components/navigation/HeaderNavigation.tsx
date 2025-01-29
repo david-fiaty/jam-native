@@ -39,8 +39,8 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
     return (
       <ModalView 
         login={true}
+        name="NotificationsMenu"
         backTitle={i18n.t('Notifications')}
-        triggerAlignSelf="flex-end"
         trigger={    
           <IconView 
             label={notificationsCount > 0 ? ` ${notificationsCount}+` : ` 0 `} 
@@ -57,8 +57,8 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
     return (
       <ModalView 
         login={true}
+        name="SettingsMenu"
         backTitle={i18n.t('Settings')}
-        triggerAlignSelf="flex-end"
         trigger={
           <IconView 
             name="menu" 

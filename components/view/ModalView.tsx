@@ -21,7 +21,7 @@ const ModalView = ({ name, backTitle, entityId, login, trigger, triggerAlignSelf
   const isLoggedIn: boolean = UserManager.isLoggedIn();
 
   const triggerStyle: any = {
-    alignSelf: triggerAlignSelf || 'flex-start',
+    alignSelf: triggerAlignSelf || 'center',
   }
 
   const toggleModal = (isActive: boolean) => {
