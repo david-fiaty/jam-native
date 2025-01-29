@@ -45,7 +45,6 @@ const FooterNavigation = () => {
             size={16}
             padding={4}
             theme={activeModal?.name == 'JamForm' ? 'secondary' : 'clear'}
-            style={activeModal?.name == 'JamForm' ? styles.active : {}}
           />
         }
       />
@@ -60,7 +59,6 @@ const FooterNavigation = () => {
             size={16}
             padding={4}
             theme={activeModal?.name == 'SearchView' ? 'secondary' : 'clear'}
-            style={activeModal?.name == 'SearchView' ? styles.active : {}}
           />
         }
       />
@@ -77,9 +75,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     position: 'absolute',
     top: containerPosition.y,
-  },
-  active: {
-    backgroundColor: Colors.secondary,
   },
 });
 
