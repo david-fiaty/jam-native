@@ -2,12 +2,13 @@ import { useState } from "react";
 import { View, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
+import { Config } from "@/constants/Config";
 import ListView from '../view/ListView';
 import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 import UserManager from "@/manager/UserManager";
 import SpinnerView from "../view/SpinnerView";
-import { Config } from "@/constants/Config";
+import BoxView from "../view/BoxView";
 
 const NotificationsMenu = () => {
   const router = useRouter();
@@ -44,13 +45,17 @@ const NotificationsMenu = () => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <View style={Layout.menuContainer}>
+    <BoxView 
+      align="flex-start"
+      justify="flex-start"
+      style={Layout.menuContainer}
+    >
       <ListView 
         data={notificationsData} 
         renderItem={(row: any) => renderItem(row)}   
         emptyMessage={<TextView>{i18n.t('The are currently no notifications available.')}</TextView>}
       />
-    </View>
+    </BoxView>
   );
 };
 
