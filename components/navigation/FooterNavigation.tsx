@@ -13,10 +13,6 @@ const containerPosition = ScreenManager.getFooterPosition();
 
 const FooterNavigation = () => {
   const activeModal = ScreenManager.getActiveModal();
-  
-  const onTriggerPress = (active: boolean) => {
-    //console.log('-->', active); // Todo - Hilight items
-  };
 
   return (
     <BoxView 
@@ -28,7 +24,6 @@ const FooterNavigation = () => {
       <ModalView 
         login={false}
         name="JamsMapView"
-        onTriggerPress={onTriggerPress}
         trigger={
           <IconView
             name="location"
@@ -44,7 +39,6 @@ const FooterNavigation = () => {
         login={true}
         name="JamForm"
         backTitle={i18n.t('Create a Jam')}
-        onTriggerPress={onTriggerPress}
         trigger={
           <IconView
             name="plus"
@@ -60,7 +54,6 @@ const FooterNavigation = () => {
       <ModalView 
         login={true}
         name="SearchView"
-        onTriggerPress={onTriggerPress}
         trigger={
           <IconView
             name="search"
