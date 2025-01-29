@@ -10,11 +10,10 @@ import i18n from '@/translation/i18n';
 
 const containerStyle = ScreenManager.getFooterSize();
 const containerPosition = ScreenManager.getFooterPosition();
-const activeModal = ScreenManager.getActiveModal();
 
 const FooterNavigation = () => {
-  const [isActive, setIsActive] = useState<boolean>(false);
-
+  const activeModal = ScreenManager.getActiveModal();
+  
   const onTriggerPress = (active: boolean) => {
     //console.log('-->', active); // Todo - Hilight items
   };
