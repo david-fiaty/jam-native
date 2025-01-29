@@ -21,17 +21,26 @@ const ListItemToolbar = ({ row }: Props) => {
 
   const saveJam = async () => {
     let result: any = await EntityManager.saveJam(row.item.id);
+    
+    let message: any = {
+      title: i18n.t('Save Jam'),
+      content: i18n.t('Jam successfully save.'),
+    };
 
-    if (result?.error) {
-      ScreenManager.showMessage({
-        title: i18n.t('Save Jam'),
-        content: result.error,
-      });
+    if (result?.error) message.content = i18n.t(result.error)
+    ScreenManager.showMessage(message);
+  };
 
-      return false;
-    }
+  const likeJam = async () => {
+    let result: any = await EntityManager.likeJam(row.item.id);
+    
+    let message: any = {
+      title: i18n.t('Like Jam'),
+      content: i18n.t('Jam successfully liked.'),
+    };
 
-    return true;
+    if (result?.error) message.content = i18n.t(result.error)
+    ScreenManager.showMessage(message);
   };
 
   const shareJam = async () => {
@@ -84,6 +93,23 @@ const ListItemToolbar = ({ row }: Props) => {
     );
   };
 
+  const renderLikeButton = () => {
+    return (
+      <BoxView
+        direction="row"
+        align="center"
+      >
+        <IconView 
+          name="like"
+          theme="tertiary"
+          size={12}
+          padding={6.5}
+          onPress={likeJam}
+        />
+      </BoxView>
+    );
+  };
+
   const renderShareButton = () => {
     return (
       <BoxView
@@ -115,6 +141,10 @@ const ListItemToolbar = ({ row }: Props) => {
       <BoxView direction="row" align="center">
         <BoxView align="center">
           {renderSaveButton()}
+        </BoxView>
+
+        <BoxView align="center">
+          {renderLikeButton()}
         </BoxView>
 
         <BoxView align="center">

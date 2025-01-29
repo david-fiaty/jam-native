@@ -14,6 +14,7 @@ import HeaderNavigation from "../navigation/HeaderNavigation";
 import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "../view/SpinnerView";
 import BackButton from "../button/BackButton";
+import MessageView from "../view/MessageView";
 
 const JamsScreen = () => {
   const dispatch = useDispatch();
@@ -104,6 +105,8 @@ const JamsScreen = () => {
 
   return (  
     <BoxView direction="column" align="flex-start" style={styles.container}>
+      <MessageView />
+      
       <HeaderNavigation 
         onSearchSubmit={async (value: any) => await onSearchSubmit(value)} 
         onSearchClear={async () => await onSearchClear()}
