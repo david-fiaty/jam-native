@@ -1,32 +1,22 @@
-import React, { useState } from 'react';
 import { useRouter } from "expo-router";
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import { Colors } from '@/constants/Colors';
-import Modal from "react-native-modal";
 import UserManager from '@/manager/UserManager';
-import BackButton from '../button/BackButton';
-import BoxView from './BoxView';
 import ScreenManager from '@/manager/ScreenManager';
 import ScreenView from './ScreenView';
 
 type Props = {
-  name?: string,
+  name?: any;
+  backTitle?: any;
   visible?: boolean;
   login?: boolean;
   trigger?: any;
   triggerAlignSelf?: string;
-  content?: any;
-  backTitle?: any;
   onTriggerPress?: (active: boolean) => void;
 };
 
-const modalPosition: any = ScreenManager.getModalPosition();
-const modalSize: any = ScreenManager.getModalSize();
-
-const ModalView = ({ visible, login, trigger, triggerAlignSelf, content, backTitle, onTriggerPress }: Props) => {
+const ModalView = ({ name, backTitle, login, trigger, triggerAlignSelf, onTriggerPress }: Props) => {
   const router = useRouter();
-  const [isVisible, setIsVisible] = useState(visible || false);
   const isLoggedIn: boolean = UserManager.isLoggedIn();
 
   const triggerStyle: any = {
@@ -38,71 +28,24 @@ const ModalView = ({ visible, login, trigger, triggerAlignSelf, content, backTit
       router.push("/login");
     }
     else {
-      setIsVisible(isActive);
+      ScreenManager.toggleModal(name, { backTitle: backTitle });
       if (onTriggerPress) onTriggerPress(isActive);
     }
   };
   
-  return (
-    <>  
-      <ScreenView>
-        <TouchableOpacity
-          onPress={() => toggleModal(true)}
-          style={[styles.triggerButton, triggerStyle]}
-        >
-          {trigger}
-        </TouchableOpacity>
-      </ScreenView>
-    
-      <Modal
-        isVisible={isVisible}
-        coverScreen={false}
-        hasBackdrop={false}
-        style={styles.container}
+  return (  
+    <ScreenView>
+      <TouchableOpacity
+        onPress={() => toggleModal(true)}
+        style={[styles.triggerButton, triggerStyle]}
       >
-        <BoxView 
-          direction="column" 
-          align="flex-start" 
-          justify="flex-start" 
-          style={styles.wrapper}
-        >
-          {backTitle && 
-            <BoxView direction="row" style={styles.backButtonContainer}>
-              <BackButton
-                title={backTitle}
-                onPress={() => toggleModal(false)}
-                containerStyle={styles.backButton}
-              />
-            </BoxView>
-          }
-          
-          <BoxView direction="column" style={styles.content}>
-            {content}
-          </BoxView>
-        </BoxView>
-      </Modal>
-    </>
+        {trigger}
+      </TouchableOpacity>
+    </ScreenView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    top: modalPosition.y,
-    left: modalPosition.x,
-    width: modalSize.width,
-  },
-  wrapper: {
-    width: '100%',
-    marginTop: 0,
-    backgroundColor: Colors.white,
-    paddingTop: Layout.space.base*2,
-    height: modalSize.height,
-  },
-  content: {
-    width: '100%',
-    flex: 1,
-  },
   backButtonContainer: {
     width: '100%',
   },
