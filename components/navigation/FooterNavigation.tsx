@@ -11,7 +11,7 @@ const containerStyle = ScreenManager.getFooterSize();
 const containerPosition = ScreenManager.getFooterPosition();
 
 const FooterNavigation = () => {
-  const activeModal = ScreenManager.getActiveModal();
+  const activeModal: any = ScreenManager.getActiveModal();
 
   const getIconTheme = (screenName: string) => {
     return activeModal?.name == screenName ? 'secondary' : 'clear';
