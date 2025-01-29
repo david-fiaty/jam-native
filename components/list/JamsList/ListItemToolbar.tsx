@@ -9,6 +9,7 @@ import UserManager from "@/manager/UserManager";
 import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
 import ModalView from "@/components/view/ModalView";
+import ScreenManager from "@/manager/ScreenManager";
 
 type Props = BaseProps & {
   row?: any,
@@ -16,7 +17,28 @@ type Props = BaseProps & {
 
 const ListItemToolbar = ({ row }: Props) => {
   const router = useRouter();
-  const isLoggedIn = UserManager.isLoggedIn();
+  const isLoggedIn: boolean = UserManager.isLoggedIn();
+
+  const saveJam = async () => {
+    let result: any = await EntityManager.saveJam(row.item.id);
+
+    if (result?.error) {
+      ScreenManager.showMessage({
+        title: i18n.t('Save Jam'),
+        content: result.error,
+      });
+
+      return false;
+    }
+
+    return true;
+  };
+
+  const shareJam = async () => {
+    isLoggedIn
+    ? await EntityManager.shareJam(row?.item?.id)
+    : router.push("/login");
+  };
 
   const renderJammersButton = () => {
     return (
@@ -47,25 +69,18 @@ const ListItemToolbar = ({ row }: Props) => {
 
   const renderSaveButton = () => {
     return (
-      <ModalView 
-        login={true}
-        name="SavedJamAction"
-        entityId={row.item.id}
-        backTitle={i18n.t('Save Jam')}
-        trigger={
-          <BoxView
-            direction="row"
-            align="center"
-          >
-            <IconView 
-              name="save"
-              theme="tertiary"
-              size={12}
-              padding={6.5}
-            />
-          </BoxView>
-        }
-      />
+      <BoxView
+        direction="row"
+        align="center"
+      >
+        <IconView 
+          name="save"
+          theme="tertiary"
+          size={12}
+          padding={6.5}
+          onPress={saveJam}
+        />
+      </BoxView>
     );
   };
 
@@ -80,11 +95,7 @@ const ListItemToolbar = ({ row }: Props) => {
           theme="tertiary"
           size={12}
           padding={6.5}
-          onPress={() =>
-            isLoggedIn
-              ? EntityManager.shareJam(row?.item?.id)
-              : router.push("/login")
-          }
+          onPress={shareJam}
         />
       </BoxView>
     );
