@@ -52,8 +52,8 @@ class ScreenManager {
     return ModalConfig.map(({ component, ...rest }) => ({ ...rest }));
   }
 
-  getModalContent(modalName: string) {
-    return ModalConfig.find((o: any) => o.name == modalName).component;
+  getModalContent() {
+    return ModalConfig.find((o: any) => o.name == this.getActiveModal()?.name).component;
   }
 
   getHeaderSize() {
