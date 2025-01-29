@@ -26,6 +26,10 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
   const isLoggedIn = UserManager.isLoggedIn();
   const containerStyle = ScreenManager.getHeaderSize();
 
+  const getIconTheme = (screenName: string) => {
+    return activeModal?.name == screenName ? 'primary' : 'secondary';
+  };
+
   const renderSearchField = () => {
     return (
       <SearchField 
@@ -44,9 +48,9 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
         trigger={    
           <IconView 
             label={notificationsCount > 0 ? ` ${notificationsCount}+` : ` 0 `} 
-            theme="secondary" 
             size={13}
             padding={4.5}  
+            theme={getIconTheme('NotificationsMenu')} 
           />
         }
       />
@@ -61,10 +65,10 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
         backTitle={i18n.t('Settings')}
         trigger={
           <IconView 
-            name="menu" 
-            theme="secondary"
+            name="menu"
             size={14}
             padding={6} 
+            theme={getIconTheme('SettingsMenu')} 
           />
         }
       />
