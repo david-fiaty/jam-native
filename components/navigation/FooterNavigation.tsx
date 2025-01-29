@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { StyleSheet } from "react-native";
 import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
