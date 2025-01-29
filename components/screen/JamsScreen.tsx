@@ -23,6 +23,11 @@ const JamsScreen = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const contentStyle = ScreenManager.getModalSize();
   
+  const loadModalConfig = () => {
+    let config: any = ModalConfig.map(({component, ...rest}) => ({...rest}));
+    dispatch(setModalConfig(config));
+  };
+
   const loadSearchResult = async (value?: any) => {
     await SearchManager.getSearchResult(value);
   };
@@ -33,11 +38,6 @@ const JamsScreen = () => {
 
   const onSearchClear = async () => {
     await SearchManager.clearSearch();
-  };
-
-  const loadModalConfig = () => {
-    let config: any = ModalConfig.map(({component, ...rest}) => ({...rest}));
-    dispatch(setModalConfig(config));
   };
 
   useEffect(() => {
