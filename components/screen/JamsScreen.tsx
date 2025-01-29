@@ -35,8 +35,13 @@ const JamsScreen = () => {
     await SearchManager.clearSearch();
   };
 
+  const loadModalConfig = () => {
+    let config: any = ModalConfig.map(({component, ...rest}) => ({...rest}));
+    dispatch(setModalConfig(config));
+  };
+
   useEffect(() => {
-    dispatch(setModalConfig(ModalConfig));
+    loadModalConfig();
 
     (async () => {
       await loadSearchResult();
