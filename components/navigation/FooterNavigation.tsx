@@ -20,7 +20,7 @@ const FooterNavigation = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
 
   const onTriggerPress = (active: boolean) => {
-    console.log('-->', active); // Todo - Hilight items
+    //console.log('-->', active); // Todo - Hilight items
   };
 
   return (
