@@ -22,16 +22,15 @@ const JamsScreen = () => {
   const contentStyle = ScreenManager.getModalSize();
   
   const loadModalConfig = () => {
-    let config: any = ModalConfig.map(({ component, ...rest }) => ({ ...rest }));
-    dispatch(setModalConfig(config));
+    dispatch(setModalConfig(ScreenManager.getModalConfig()));
   };
 
   const renderModalContent = () => {
-    return ModalConfig.find((o: any) => o.name == 'JamsList').component;
+    return ScreenManager.getModalContent('JamsList');
   };
 
-  const getModalVisible = () => {
-    ScreenManager.isModalActive();    
+  const isModalVisible = () => {
+    return ScreenManager.isModalActive();    
   };
 
   const loadSearchResult = async (value?: any) => {
@@ -75,7 +74,7 @@ const JamsScreen = () => {
       <FooterNavigation />
 
       <Modal
-        isVisible={getModalVisible()}
+        isVisible={isModalVisible()}
         coverScreen={false}
         hasBackdrop={false}
         style={styles.modalContainer}
