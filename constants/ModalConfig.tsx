@@ -1,4 +1,25 @@
+import AddedJamAction from "@/components/action/AddedJamAction";
+import LikedJamAction from "@/components/action/LikedJamAction";
+import SavedJamAction from "@/components/action/SavedJamAction";
+import AddJamToProjectForm from "@/components/form/AddJamToProjectForm";
+import AddProjectForm from "@/components/form/AddProjectForm";
+import JamForm from "@/components/form/JamForm";
+import ProfileForm from "@/components/form/ProfileForm";
+import SelectJamsForm from "@/components/form/SelectJamsForm";
+import CollaboratorsList from "@/components/list/CollaboratorsList";
+import CountriesList from "@/components/list/CountriesList";
+import HostsList from "@/components/list/HostsList";
+import JammersList from "@/components/list/JammersList";
 import JamsList from "@/components/list/JamsList";
+import SectorsList from "@/components/list/SectorsList";
+import NotificationsMenu from "@/components/menu/NotificationsMenu";
+import SettingsMenu from "@/components/menu/SettingsMenu";
+import JamScreen from "@/components/screen/JamScreen";
+import ProjectScreen from "@/components/screen/ProjectScreen";
+import JamsMapView from "@/components/view/JamsMapView";
+import LocationMapView from "@/components/view/LocationMapView";
+import MoreJamActionsView from "@/components/view/MoreJamActionsView";
+import SearchView from "@/components/view/SearchView";
 
 export const ModalConfig: any = [
   {
@@ -15,7 +36,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
-    component: '',
+    component: <JamsMapView />,
   },
   {
     name: 'JamForm', 
@@ -23,7 +44,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
-    component: '',
+    component: <JamForm />,
   },
   {
     name: 'AddProjectForm', 
@@ -31,7 +52,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
-    component: '',
+    component: <AddProjectForm />,
   },
   {
     name: 'SelectJamsForm', 
@@ -39,7 +60,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
-    component: '',
+    component: <SelectJamsForm />,
   },
   {
     name: 'ProfileForm', 
@@ -47,7 +68,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
-    component: '',
+    component: <ProfileForm />,
   },
   {
     name: 'AddJamToProjectForm', 
@@ -55,7 +76,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
-    component: '',
+    component: <AddJamToProjectForm />,
   },
   {
     name: 'SettingsMenu', 
@@ -63,7 +84,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
-    component: '',
+    component: <SettingsMenu />,
   },
   {
     name: 'NotificationsMenu', 
@@ -71,7 +92,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
-    component: '',
+    component: <NotificationsMenu />,
   },
   {
     name: 'SearchView', 
@@ -79,7 +100,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
-    component: '',
+    component: <SearchView />,
   },
   {
     name: 'LocationMapView', 
@@ -87,7 +108,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
-    component: '',
+    component: <LocationMapView />,
   },
   {
     name: 'JammersList', 
@@ -95,7 +116,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
-    component: '',
+    component: <JammersList />,
   },
   {
     name: 'CollaboratorsList', 
@@ -103,7 +124,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
-    component: '',
+    component: <CollaboratorsList />,
   },
   {
     name: 'SectorsList', 
@@ -111,7 +132,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
-    component: '',
+    component: <SectorsList />,
   },
   {
     name: 'CountriesList', 
@@ -119,7 +140,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
-    component: '',
+    component: <CountriesList />,
   },
   {
     name: 'HostsList', 
@@ -127,7 +148,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
-    component: '',
+    component: <HostsList />,
   },
   {
     name: 'SavedJamAction', 
@@ -135,7 +156,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
-    component: '',
+    component: <SavedJamAction />,
   },
   {
     name: 'LikedJamAction', 
@@ -143,7 +164,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
-    component: '',
+    component: <LikedJamAction />,
   },
   {
     name: 'AddedJamAction', 
@@ -151,7 +172,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
-    component: '',
+    component: <AddedJamAction />,
   },
   {
     name: 'MoreJamActionsView', 
@@ -159,7 +180,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
-    component: '',
+    component: <MoreJamActionsView />,
   },
   {
     name: 'JamScreen', 
@@ -167,7 +188,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
-    component: '',
+    component: <JamScreen />,
   },
   {
     name: 'ProjectScreen', 
@@ -175,6 +196,6 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
-    component: '',
+    component: <ProjectScreen />,
   },
 ];
