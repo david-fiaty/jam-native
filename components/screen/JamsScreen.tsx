@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { setModalConfig } from "@/redux/slices/ModalSlice";
 import { ModalConfig } from "@/constants/ModalConfig";
 import { Colors } from "@/constants/Colors";
-import { Layout } from '@/constants/Layout';
 import Modal from "react-native-modal";
 import BoxView from "../view/BoxView";
 import FooterNavigation from "../navigation/FooterNavigation";
@@ -13,7 +12,6 @@ import ScreenManager from "@/manager/ScreenManager";
 import HeaderNavigation from "../navigation/HeaderNavigation";
 import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "../view/SpinnerView";
-import TextView from "../view/TextView";
 
 const modalPosition: any = ScreenManager.getModalPosition();
 const modalSize: any = ScreenManager.getModalSize();
