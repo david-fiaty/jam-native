@@ -79,7 +79,7 @@ const JamsScreen = () => {
         hasBackdrop={false}
         style={styles.modalContainer}
       >
-        {renderModalContent()}
+        {isModalVisible() && renderModalContent()}
       </Modal>
     </BoxView>
   );
