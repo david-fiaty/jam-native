@@ -41,7 +41,7 @@ const JamsList = () => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: Layout.space.base,
+    paddingHorizontal: Layout.space.base*1.5,
     paddingBottom: 0,
     width: '100%',
     height: '100%',
