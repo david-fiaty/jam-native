@@ -7,11 +7,9 @@ import IconView from "@/components/view/IconView";
 import i18n from "@/translation/i18n";
 import JamStatusButton from "@/components/button/JamStatusButton";
 import ModalView from "@/components/view/ModalView";
-import MoreJamActionsView from "@/components/view/MoreJamActionsView";
-import HostsList from "../HostsList";
 
 type Props = BaseProps & {
-  row?: any,
+  row?: any;
 };
 
 const ListItemHeader = ({ row }: Props) => {
@@ -19,7 +17,8 @@ const ListItemHeader = ({ row }: Props) => {
     return (
       <ModalView 
         login={true}
-        content={<HostsList entityId={row.item.id} />}
+        name="HostsList"
+        entityId={row.item.id}
         backTitle={i18n.t('Jam hosts')}
         trigger={
           <TextView>
