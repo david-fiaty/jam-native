@@ -43,10 +43,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderRadius: Layout.radius.round,
     color: Colors.white,
-    fontSize: Layout.fontSize.small,
+    fontSize: 11,
     backgroundColor: Colors.primary,
-    paddingTop: Layout.space.base/6,
-    paddingBottom: Layout.space.base/4,
+    paddingTop: 0,
+    paddingBottom: 2,
   },
   active: {
     backgroundColor: Colors.primary,
