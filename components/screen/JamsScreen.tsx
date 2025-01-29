@@ -50,10 +50,12 @@ const JamsScreen = () => {
   };
 
   const renderModalContent = () => {
-    return ModalConfig.find((o: any) => o.name == ScreenManager.getActiveModal()?.name)?.component;
+    return ModalConfig.find((o: any) => o.name == 'JamForm')?.component;
+    //return ModalConfig.find((o: any) => o.name == ScreenManager.getActiveModal()?.name)?.component;
   };
 
   const isModalVisible = () => {
+    return true;
     return ScreenManager.isModalActive();    
   };
 
@@ -98,7 +100,7 @@ const JamsScreen = () => {
       <FooterNavigation />
 
       <Modal
-        isVisible={isModalVisible()}
+        isVisible={true}
         coverScreen={false}
         hasBackdrop={false}
         style={getModalContainerStyle()}
