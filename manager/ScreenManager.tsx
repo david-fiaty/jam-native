@@ -78,7 +78,7 @@ class ScreenManager {
   getModalSize() {
     return {
       width: DeviceManager.window.width,
-      height: DeviceManager.window.height - this.getHeaderSize().height - this.getFooterSize().height,
+      height: DeviceManager.window.height - this.getHeaderSize().height - this.getFooterSize().height - Layout.space.base,
     };
   }
 
