@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { setModalConfig } from "@/redux/slices/ModalSlice";
 import { ModalConfig } from "@/constants/ModalConfig";
 import { Colors } from "@/constants/Colors";
-import { Layout } from '@/constants/Layout';
 import Modal from "react-native-modal";
 import BoxView from "../view/BoxView";
 import FooterNavigation from "../navigation/FooterNavigation";
@@ -13,7 +12,6 @@ import ScreenManager from "@/manager/ScreenManager";
 import HeaderNavigation from "../navigation/HeaderNavigation";
 import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "../view/SpinnerView";
-import TextView from "../view/TextView";
 
 const modalPosition: any = ScreenManager.getModalPosition();
 const modalSize: any = ScreenManager.getModalSize();
@@ -32,7 +30,7 @@ const JamsScreen = () => {
     return ModalConfig.find((o: any) => o.name == 'JamsList').component;
   };
 
-  const isModalVisible = () => {
+  const getModalVisible = () => {
     return true;
   };
 
@@ -77,7 +75,7 @@ const JamsScreen = () => {
       <FooterNavigation />
 
       <Modal
-        isVisible={isModalVisible()}
+        isVisible={getModalVisible()}
         coverScreen={false}
         hasBackdrop={false}
         style={styles.modalContainer}
@@ -97,13 +95,13 @@ const styles = StyleSheet.create({
     zIndex: 0,
   },
   modalContainer: {
-    backgroundColor: Colors.white,
-    /*
     position: 'absolute',
     top: modalPosition.y,
     left: modalPosition.x,
     width: modalSize.width,
-    */
+    height: modalSize.height,
+    backgroundColor: Colors.white,
+    margin: 0,
   },
   modalWrapper: {
     /*
