@@ -32,7 +32,7 @@ const JamsScreen = () => {
     return ModalConfig.find((o: any) => o.name == 'JamsList').component;
   };
 
-  const isModalVisible = () => {
+  const getModalVisible = () => {
     return true;
   };
 
@@ -77,7 +77,7 @@ const JamsScreen = () => {
       <FooterNavigation />
 
       <Modal
-        isVisible={isModalVisible()}
+        isVisible={getModalVisible()}
         coverScreen={false}
         hasBackdrop={false}
         style={styles.modalContainer}
