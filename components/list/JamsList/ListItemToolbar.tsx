@@ -48,15 +48,23 @@ const ListItemToolbar = ({ row }: Props) => {
 
   const renderSaveButton = () => {
     return (
-      <IconView
-        name="save"
-        theme="tertiary"
-        size={12}
-        padding={6.5}
-        onPress={() =>
-          isLoggedIn
-            ? ScreenManager.toggleModal("SavedJamAction", { entityId: row?.item?.id })
-            : router.push("/login")
+      <ModalView 
+        login={true}
+        name="SavedJamAction"
+        entityId={row.item.id}
+        backTitle={i18n.t('Save Jam')}
+        trigger={
+          <BoxView
+            direction="row"
+            align="center"
+          >
+            <IconView 
+              name="save"
+              theme="tertiary"
+              size={12}
+              padding={6.5}
+            />
+          </BoxView>
         }
       />
     );
@@ -64,17 +72,22 @@ const ListItemToolbar = ({ row }: Props) => {
 
   const renderShareButton = () => {
     return (
-      <IconView
-        name="share"
-        theme="tertiary"
-        size={12}
-        padding={6.5}
-        onPress={() =>
-          isLoggedIn
-            ? EntityManager.shareJam(row?.item?.id)
-            : router.push("/login")
-        }
-      />
+      <BoxView
+        direction="row"
+        align="center"
+      >
+        <IconView
+          name="share"
+          theme="tertiary"
+          size={12}
+          padding={6.5}
+          onPress={() =>
+            isLoggedIn
+              ? EntityManager.shareJam(row?.item?.id)
+              : router.push("/login")
+          }
+        />
+      </BoxView>
     );
   };
 
