@@ -1,6 +1,5 @@
 import { useRouter } from "expo-router";
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { Layout } from '@/constants/Layout';
 import UserManager from '@/manager/UserManager';
 import ScreenManager from '@/manager/ScreenManager';
 import ScreenView from './ScreenView';
@@ -54,9 +53,6 @@ const ModalView = ({ name, backTitle, entityId, login, trigger, triggerAlign, on
 };
 
 const styles = StyleSheet.create({
-  backButtonContainer: {
-    width: '100%',
-  },
   triggerButton: {
     alignSelf: 'flex-start',
   },
