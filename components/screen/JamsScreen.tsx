@@ -26,7 +26,7 @@ const JamsScreen = () => {
   };
 
   const renderModalContent = () => {
-    return ScreenManager.getModalContent('JamsList');
+    return ScreenManager.getModalContent();
   };
 
   const isModalVisible = () => {
