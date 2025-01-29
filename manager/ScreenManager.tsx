@@ -2,6 +2,7 @@ import { Layout } from '@/constants/Layout';
 import { setMessage } from '@/redux/slices/MessageSlice';
 import { setActiveModal } from '@/redux/slices/ModalSlice';
 import { Config } from '@/constants/Config';
+import { ModalConfig } from '@/constants/ModalConfig';
 import Store from '@/redux/Store';
 import DeviceManager from './DeviceManager';
 
@@ -45,6 +46,14 @@ class ScreenManager {
       name: name,
       params: params,
     }));
+  }
+
+  getModalConfig() {
+    return ModalConfig.map(({ component, ...rest }) => ({ ...rest }));
+  }
+
+  getModalContent(modalName: string) {
+    return ModalConfig.find((o: any) => o.name == modalName).component;
   }
 
   getHeaderSize() {
