@@ -29,7 +29,6 @@ const FooterNavigation = () => {
       <ModalView 
         login={false}
         name="JamsMapView"
-        backTitle={i18n.t('Jam locations')}
         onTriggerPress={onTriggerPress}
         trigger={
           <IconView
@@ -62,7 +61,6 @@ const FooterNavigation = () => {
       <ModalView 
         login={true}
         name="SearchView"
-        backTitle={i18n.t('Search')}
         onTriggerPress={onTriggerPress}
         trigger={
           <IconView
