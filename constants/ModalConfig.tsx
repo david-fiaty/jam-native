@@ -5,6 +5,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
+    component: '',
   },
   {
     name: 'JamsMapView', 
@@ -12,6 +13,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
+    component: '',
   },
   {
     name: 'JamForm', 
@@ -19,6 +21,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
+    component: '',
   },
   {
     name: 'AddProjectForm', 
@@ -26,6 +29,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
+    component: '',
   },
   {
     name: 'SelectJamsForm', 
@@ -33,6 +37,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
+    component: '',
   },
   {
     name: 'ProfileForm', 
@@ -40,6 +45,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
+    component: '',
   },
   {
     name: 'AddJamToProjectForm', 
@@ -47,6 +53,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
+    component: '',
   },
   {
     name: 'SettingsMenu', 
@@ -54,6 +61,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
+    component: '',
   },
   {
     name: 'NotificationsMenu', 
@@ -61,6 +69,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
+    component: '',
   },
   {
     name: 'SearchView', 
@@ -68,6 +77,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
+    component: '',
   },
   {
     name: 'LocationMapView', 
@@ -75,6 +85,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
+    component: '',
   },
   {
     name: 'JammersList', 
@@ -82,6 +93,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
+    component: '',
   },
   {
     name: 'CollaboratorsList', 
@@ -89,6 +101,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
+    component: '',
   },
   {
     name: 'SectorsList', 
@@ -96,6 +109,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
+    component: '',
   },
   {
     name: 'CountriesList', 
@@ -103,6 +117,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
+    component: '',
   },
   {
     name: 'HostsList', 
@@ -110,6 +125,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
+    component: '',
   },
   {
     name: 'SavedJamAction', 
@@ -117,6 +133,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
+    component: '',
   },
   {
     name: 'LikedJamAction', 
@@ -124,6 +141,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
+    component: '',
   },
   {
     name: 'AddedJamAction', 
@@ -131,6 +149,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
+    component: '',
   },
   {
     name: 'MoreJamActionsView', 
@@ -138,6 +157,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
+    component: '',
   },
   {
     name: 'JamScreen', 
@@ -145,6 +165,7 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
+    component: '',
   },
   {
     name: 'ProjectScreen', 
@@ -152,5 +173,6 @@ export const ModalConfig: any = [
     headerNavigation: true,
     footerNavigation: true,
     params: {},
+    component: '',
   },
 ];
