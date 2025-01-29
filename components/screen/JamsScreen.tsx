@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { StyleSheet } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { setModalConfig } from "@/redux/slices/ModalSlice";
@@ -39,18 +39,17 @@ const JamsScreen = () => {
     return {};
   };
 
-  const getModalContentStyle = (): any => {
+  const getModalContentStyle = useCallback((): any => {
     if (isModalVisible()) {
       return ScreenManager.getModalSize();
     }
 
     return {};
-  };
+  }, []);
 
-  const loadModalConfig = () => {
-    let config: any = ModalConfig.map(({ component, ...rest }) => ({ ...rest }));
-    dispatch(setModalConfig(config));
-  };
+  const loadModalConfig = useCallback(() => {
+    dispatch(setModalConfig(ModalConfig.map(({ component, ...rest }) => ({ ...rest }))));
+  }, []);
 
   const renderModalContent = () => {
     return ModalConfig.find((o: any) => o.name == ScreenManager.getActiveModal()?.name)?.component;
@@ -113,6 +112,7 @@ const JamsScreen = () => {
       <BoxView 
         direction="column" 
         align="center"
+        justify="center"
         style={[styles.content, getModalContentStyle()]}
       >
         <JamsList />
