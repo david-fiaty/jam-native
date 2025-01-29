@@ -48,13 +48,12 @@ const JamsScreen = () => {
   }, []);
 
   const loadModalConfig = useCallback(() => {
-    let config: any = ModalConfig.map(({ component, ...rest }) => ({ ...rest }));
-    dispatch(setModalConfig(config));
+    dispatch(setModalConfig(ModalConfig.map(({ component, ...rest }) => ({ ...rest }))));
   }, []);
 
-  const renderModalContent = useCallback(() => {
+  const renderModalContent = () => {
     return ModalConfig.find((o: any) => o.name == ScreenManager.getActiveModal()?.name)?.component;
-  }, []);
+  };
 
   const renderModalTitle = () => {
     if (isModalVisible() && ScreenManager.getActiveModal()?.params?.backTitle) {
