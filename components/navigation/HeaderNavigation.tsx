@@ -11,8 +11,6 @@ import ScreenManager from "@/manager/ScreenManager";
 import UserManager from '@/manager/UserManager';
 import ModalView from "../view/ModalView";
 import i18n from "@/translation/i18n";
-import SettingsMenu from "../menu/SettingsMenu";
-import NotificationsMenu from "../menu/NotificationsMenu";
 import SearchField from "../field/SearchField";
 
 type Props = BaseProps & {
@@ -41,7 +39,6 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
     return (
       <ModalView 
         login={true}
-        content={<NotificationsMenu />}
         backTitle={i18n.t('Notifications')}
         triggerAlignSelf="flex-end"
         trigger={    
@@ -60,7 +57,6 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
     return (
       <ModalView 
         login={true}
-        content={<SettingsMenu />}
         backTitle={i18n.t('Settings')}
         triggerAlignSelf="flex-end"
         trigger={
