@@ -22,9 +22,9 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
   const route = useRoute();
   const [notificationsCount, setNotificationsCount] = useState<number>(0);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const activeModal = ScreenManager.getActiveModal();
-  const isLoggedIn = UserManager.isLoggedIn();
-  const containerStyle = ScreenManager.getHeaderSize();
+  const activeModal: any = ScreenManager.getActiveModal();
+  const isLoggedIn: boolean = UserManager.isLoggedIn();
+  const containerStyle: any = ScreenManager.getHeaderSize();
 
   const getIconTheme = (screenName: string) => {
     return activeModal?.name == screenName ? 'primary' : 'secondary';
