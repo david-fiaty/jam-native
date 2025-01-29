@@ -9,14 +9,12 @@ import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import EntityManager from '@/manager/EntityManager';
 import ProfileListItem from './ListItem/ProfileListItem';
+import ScreenManager from '@/manager/ScreenManager';
 
-type Props = BaseProps & {
-  entityId?: any;
-};
-
-const HostsList = ({ entityId }: Props) => {
+const HostsList = () => {
   const [profiles, setProfiles] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const entityId: number = ScreenManager.getModalEntityId();
 
   useEffect(() => {
     (async () => {
