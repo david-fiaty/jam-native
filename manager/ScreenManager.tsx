@@ -53,7 +53,7 @@ class ScreenManager {
   }
 
   getModalContent() {
-    return ModalConfig.find((o: any) => o.name == this.getActiveModal()?.name).component;
+    return ModalConfig.find((o: any) => o.name == this.getActiveModal()?.name)?.component;
   }
 
   getHeaderSize() {
