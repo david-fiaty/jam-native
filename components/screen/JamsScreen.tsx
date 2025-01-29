@@ -106,7 +106,7 @@ const JamsScreen = () => {
   return (  
     <BoxView direction="column" align="flex-start" style={styles.container}>
       <MessageView />
-      
+
       <HeaderNavigation 
         onSearchSubmit={async (value: any) => await onSearchSubmit(value)} 
         onSearchClear={async () => await onSearchClear()}
@@ -124,9 +124,11 @@ const JamsScreen = () => {
       <FooterNavigation />
 
       <Modal
-        isVisible={isModalVisible()}
         coverScreen={false}
         hasBackdrop={false}
+        animationIn="slideInUp"
+        animationOut="slideOutDown"
+        isVisible={isModalVisible()}
         style={getModalContainerStyle()}
       >
         {renderModalTitle()}
