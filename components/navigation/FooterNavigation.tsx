@@ -6,11 +6,7 @@ import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 import ScreenManager from '@/manager/ScreenManager';
 import ModalView from "../view/ModalView";
-import JamsMapView from "../view/JamsMapView";
-import i18n from "@/translation/i18n";
-import JamForm from "../form/JamForm";
-import ProfileForm from "../form/ProfileForm";
-import SearchView from '../view/SearchView';
+import i18n from '@/translation/i18n';
 
 const containerStyle = ScreenManager.getFooterSize();
 const containerPosition = ScreenManager.getFooterPosition();
@@ -33,7 +29,6 @@ const FooterNavigation = () => {
       <ModalView 
         login={false}
         name="JamsMapView"
-        content={<JamsMapView />}
         backTitle={i18n.t('Jam locations')}
         triggerAlignSelf="center"
         onTriggerPress={onTriggerPress}
@@ -51,7 +46,6 @@ const FooterNavigation = () => {
       <ModalView 
         login={true}
         name="JamForm"
-        content={<JamForm />}
         backTitle={i18n.t('Create a Jam')}
         triggerAlignSelf="center"
         onTriggerPress={onTriggerPress}
@@ -70,7 +64,6 @@ const FooterNavigation = () => {
       <ModalView 
         login={true}
         name="SearchView"
-        content={<SearchView />}
         backTitle={i18n.t('Search')}
         triggerAlignSelf="center"
         onTriggerPress={onTriggerPress}
