@@ -89,6 +89,8 @@ export const Layout = {
   },
   menuContainer: {
     padding: space.base*1.5,
+    height: '100%',
+    flexGrow: 1,
   },
   menuItem: {
     flexDirection: 'row',
