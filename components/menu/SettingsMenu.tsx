@@ -58,7 +58,11 @@ const SettingsMenu = () => {
   );
 
   return (
-    <BoxView direction="column" align="flex-start" style={Layout.menuContainer}>
+    <BoxView 
+      align="flex-start"
+      justify="flex-start"
+      style={Layout.menuContainer}
+    >
       <ListView 
         data={data} 
         renderItem={(row: any) => renderItem(row)}   

@@ -45,7 +45,11 @@ const NotificationsMenu = () => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView direction="column" align="flex-start" style={Layout.menuContainer}>
+    <BoxView 
+      align="flex-start"
+      justify="flex-start"
+      style={Layout.menuContainer}
+    >
       <ListView 
         data={notificationsData} 
         renderItem={(row: any) => renderItem(row)}   
