@@ -29,7 +29,7 @@ const JamsScreen = () => {
   };
 
   const renderModalContent = () => {
-    return <TextView>he yoooy</TextView>;
+    return ModalConfig.find((o: any) => o.name == 'JamsList').component;
   };
 
   const loadSearchResult = async (value?: any) => {
