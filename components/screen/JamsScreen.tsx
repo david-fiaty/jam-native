@@ -45,11 +45,12 @@ const JamsScreen = () => {
   };
 
   const loadModalConfig = () => {
-    dispatch(setModalConfig(ScreenManager.getModalConfig()));
+    let config: any = ModalConfig.map(({ component, ...rest }) => ({ ...rest }));
+    dispatch(setModalConfig(config));
   };
 
   const renderModalContent = () => {
-    return ScreenManager.getModalContent();
+    return ModalConfig.find((o: any) => o.name == ScreenManager.getActiveModal()?.name)?.component;
   };
 
   const isModalVisible = () => {
