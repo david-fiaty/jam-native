@@ -54,9 +54,6 @@ const ModalView = ({ name, backTitle, entityId, login, trigger, triggerAlign, on
 };
 
 const styles = StyleSheet.create({
-  backButtonContainer: {
-    width: '100%',
-  },
   triggerButton: {
     alignSelf: 'flex-start',
   },
