@@ -1,6 +1,3 @@
-import AddedJamAction from "@/components/action/AddedJamAction";
-import LikedJamAction from "@/components/action/LikedJamAction";
-import SavedJamAction from "@/components/action/SavedJamAction";
 import AddJamToProjectForm from "@/components/form/AddJamToProjectForm";
 import AddProjectForm from "@/components/form/AddProjectForm";
 import JamForm from "@/components/form/JamForm";
@@ -149,30 +146,6 @@ export const ModalConfig: any = [
     footerNavigation: true,
     params: {},
     component: <HostsList />,
-  },
-  {
-    name: 'SavedJamAction', 
-    effect: 'slide',
-    headerNavigation: true,
-    footerNavigation: true,
-    params: {},
-    component: <SavedJamAction />,
-  },
-  {
-    name: 'LikedJamAction', 
-    effect: 'slide',
-    headerNavigation: true,
-    footerNavigation: true,
-    params: {},
-    component: <LikedJamAction />,
-  },
-  {
-    name: 'AddedJamAction', 
-    effect: 'slide',
-    headerNavigation: true,
-    footerNavigation: true,
-    params: {},
-    component: <AddedJamAction />,
   },
   {
     name: 'MoreJamActionsView', 
