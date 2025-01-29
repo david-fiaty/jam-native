@@ -28,6 +28,10 @@ const JamsScreen = () => {
     dispatch(setModalConfig(config));
   };
 
+  const renderModalContent = () => {
+    return <TextView>he yoooy</TextView>;
+  };
+
   const loadSearchResult = async (value?: any) => {
     await SearchManager.getSearchResult(value);
   };
@@ -75,7 +79,7 @@ const JamsScreen = () => {
         hasBackdrop={false}
         style={styles.modalContainer}
       >
-        <TextView>hey</TextView>
+        {renderModalContent()}
       </Modal>
     </BoxView>
   );
