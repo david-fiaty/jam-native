@@ -15,6 +15,8 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
   const searchState = useSelector((state: any) => state.search);
   const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
 
+  console.log(searchState.searching);
+
   const submitSearch = (value?: string) => {
     if (onSearchSubmit) onSearchSubmit(value);
   };
