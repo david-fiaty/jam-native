@@ -21,15 +21,17 @@ type Props = BaseProps & {
   onSearchClear?: () => void;
 };
 
+const headerSize: any = ScreenManager.getHeaderSize();
+
 const HeaderNavigation = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => {
   const route = useRoute();
   const [notificationsCount, setNotificationsCount] = useState<number>(0);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeModal: any = ScreenManager.getActiveModal();
   const isLoggedIn: boolean = UserManager.isLoggedIn();
-  const containerStyle: any = ScreenManager.getHeaderSize();
   const currentRouteConfig: any = RouteConfig.getRoutes().find((o: any) => o.name == route.name);
   const currentModalConfig: any = ModalConfig.build().find((o: any) => o.name == activeModal?.name);
+  const containerStyle: any = ScreenManager.getHeaderSize();
 
   const getIconTheme = (screenName: string) => {
     return activeModal?.name == screenName ? 'primary' : 'secondary';
@@ -37,14 +39,20 @@ const HeaderNavigation = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props
 
   const canShowHeader = () => {
     return RouteConfig.isMainRoute(route.name)
-    || currentModalConfig.showHeader == true
-    || currentRouteConfig.showHeader == true;
+    || currentModalConfig?.showHeader == true
+    || currentRouteConfig?.showHeader == true;
   };
 
   const canShowButtons = () => {
     return RouteConfig.isMainRoute(route.name)
-    || currentModalConfig.showButtons == true
-    || currentRouteConfig.showButtons == true;
+    || currentModalConfig?.showHeaderButtons == true
+    || currentRouteConfig?.showHeaderButtons == true;
+  };
+
+  const canShowSearch = () => {
+    return RouteConfig.isMainRoute(route.name)
+    || currentModalConfig?.showHeaderSearch == true
+    || currentRouteConfig?.showHeaderSearch == true;
   };
 
   const renderSearchField = () => {
@@ -123,7 +131,7 @@ const HeaderNavigation = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props
 
       { canShowButtons() &&
         <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>
-          {renderSearchField()}
+          {canShowSearch() && renderSearchField()}
           {isLoggedIn && renderNotificationsButton()}
           {isLoggedIn && renderSettingsButton()}
         </BoxView>
@@ -135,10 +143,11 @@ const HeaderNavigation = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.white,
+    width: headerSize.width,
     paddingHorizontal: Layout.space.base*1.5,
   },
   headerLeft: {
-    
+    width: '12%',
   },
   headerRight: {
     width: 200,
