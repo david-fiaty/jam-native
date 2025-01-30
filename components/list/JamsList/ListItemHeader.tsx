@@ -6,7 +6,7 @@ import TextView from "@/components/view/TextView";
 import IconView from "@/components/view/IconView";
 import i18n from "@/translation/i18n";
 import JamStatusButton from "@/components/button/JamStatusButton";
-import ModalView from "@/components/view/ModalView";
+import ModalButton from "@/components/button/ModalButton";
 
 type Props = BaseProps & {
   row?: any;
@@ -15,7 +15,7 @@ type Props = BaseProps & {
 const ListItemHeader = ({ row }: Props) => {
   const renderHosts = () => {
     return (
-      <ModalView 
+      <ModalButton 
         login={true}
         name="HostsList"
         entityId={row.item.id}
@@ -35,7 +35,7 @@ const ListItemHeader = ({ row }: Props) => {
 
   const renderActions = () => {
     return (
-      <ModalView 
+      <ModalButton 
         login={true}
         name="MoreJamActionsView"
         entityId={row.item.id}
