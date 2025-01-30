@@ -2,7 +2,6 @@ import React, { useEffect, useState, useCallback } from "react";
 import { StyleSheet } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { setModalConfig } from "@/redux/slices/ModalSlice";
-import { ModalConfig } from "@/constants/ModalConfig";
 import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
 import Modal from "react-native-modal";
@@ -15,12 +14,14 @@ import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "../view/SpinnerView";
 import BackButton from "../button/BackButton";
 import MessageView from "../view/MessageView";
+import ModalConfig from "@/constants/ModalConfig";
 
 const JamsScreen = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const modalState = useSelector((state: any) => state.modal);
   const activeModal: any = ScreenManager.getActiveModal();
+  const modalConfig: any = ModalConfig.build();
 
   const getModalContainerStyle = (): any => {
     if (isModalVisible()) {
@@ -50,22 +51,23 @@ const JamsScreen = () => {
   }, []);
 
   const loadModalConfig = useCallback(() => {
-    dispatch(setModalConfig(ModalConfig.map(({ component, ...rest }) => ({ ...rest }))));
+    dispatch(setModalConfig(modalConfig.map(({ component, ...rest }) => ({ ...rest }))));
   }, []);
 
   const renderModalContent = () => {
-    return ModalConfig.find((o: any) => o.name == ScreenManager.getActiveModal()?.name)?.component;
+    return modalConfig.find((o: any) => o.name == ScreenManager.getActiveModal()?.name)?.component;
   };
 
   const getModalAnimation = () => {
-    let effect: any = ModalConfig.find((o: any) => o.name == activeModal?.name)?.effect;
+    let effect: any = modalConfig.find((o: any) => o.name == activeModal?.name)?.effect;
     let animation: any = {
       in: effect,
       out: effect,
     }
 
-    console.log(animation);
-    return animation;
+    console.log(modalConfig);
+    //console.log(animation);
+    //return animation;
   };
 
   const renderModalTitle = () => {
@@ -140,7 +142,7 @@ const JamsScreen = () => {
         coverScreen={false}
         hasBackdrop={false}
         animationIn="slideInUp"
-        animationOut="slideInUp"
+        animationOut="slideOutDown"
         isVisible={isModalVisible()}
         style={getModalContainerStyle()}
         hideModalContentWhileAnimating={true}
