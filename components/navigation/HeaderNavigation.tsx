@@ -37,14 +37,14 @@ const HeaderNavigation = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props
 
   const canShowHeader = () => {
     return RouteConfig.isMainRoute(route.name)
-    || currentModalConfig.showHeader == true
-    || currentRouteConfig.showHeader == true;
+    || currentModalConfig?.showHeader == true
+    || currentRouteConfig?.showHeader == true;
   };
 
   const canShowButtons = () => {
     return RouteConfig.isMainRoute(route.name)
-    || currentModalConfig.showButtons == true
-    || currentRouteConfig.showButtons == true;
+    || currentModalConfig?.showButtons == true
+    || currentRouteConfig?.showButtons == true;
   };
 
   const renderSearchField = () => {
