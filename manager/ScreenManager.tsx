@@ -36,7 +36,7 @@ class ScreenManager {
     return activeModals?.[index] || null;
   }
 
-  toggleModal(name: string, params?: any) {
+  toggleModal(name: any, params?: any) {
     Store.dispatch(setActiveModal({
       name: name,
       params: params,
