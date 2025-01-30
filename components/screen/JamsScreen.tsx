@@ -109,7 +109,7 @@ const JamsScreen = () => {
   if (!isLoaded) return <SpinnerView />;
 
   return (  
-    <BoxView direction="column" align="flex-start" style={styles.container}>
+    <BoxView direction="column" align="center" style={styles.container}>
       <MessageView />
 
       <HeaderNavigation 
