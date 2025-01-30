@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import { Divider } from '@rneui/base';
@@ -21,21 +22,25 @@ const data = {
 const LegalScreen = () => {
   const router = useRouter();
 
-  return (
-    <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.screenContent}>
-      <HeaderNavigation />
+  const renderComponent = useCallback(() => {
+    return (
+      <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.screenContent}>
+        <HeaderNavigation />
+  
+        <BackButton
+          title={i18n.t('Legal')}
+          onPress={() => router.back()}
+        />
+        
+        <TextView>{data.text}</TextView> 
+        <Divider />
+        
+        <BottomLinks />
+      </BoxView>
+    );
+  }, [router, data]);
 
-      <BackButton
-        title={i18n.t('Legal')}
-        onPress={() => router.back()}
-      />
-      
-      <TextView>{data.text}</TextView> 
-      <Divider />
-      
-      <BottomLinks />
-    </BoxView>
-  );
+  return renderComponent();
 };
 
 export default LegalScreen;
