@@ -32,6 +32,10 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
     return activeModal?.name == screenName ? 'primary' : 'secondary';
   };
 
+  const canShowButtons = () => {
+    return RouteConfig.isMainRoute(route.name) || activeModal?.headerNavigation;
+  };
+
   const renderSearchField = () => {
     return (
       <SearchField 
@@ -103,7 +107,7 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
         {renderLogo()}
       </BoxView>
 
-      { (RouteConfig.isMainRoute(route.name) || activeModal?.headerNavigation) &&
+      { canShowButtons() &&
         <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>
           {renderSearchField()}
           {isLoggedIn && renderNotificationsButton()}
