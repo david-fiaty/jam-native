@@ -65,7 +65,7 @@ const JamsScreen = () => {
     }
 
     console.log(animation);
-    return animation;
+    //return animation;
   };
 
   const renderModalTitle = () => {
@@ -140,7 +140,7 @@ const JamsScreen = () => {
         coverScreen={false}
         hasBackdrop={false}
         animationIn="slideInUp"
-        animationOut="slideInUp"
+        animationOut="slideOutDown"
         isVisible={isModalVisible()}
         style={getModalContainerStyle()}
         hideModalContentWhileAnimating={true}
