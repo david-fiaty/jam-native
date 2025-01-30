@@ -53,7 +53,7 @@ const BackButton = ({title, containerStyle, onPress}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
+    height: 40,
   },
 });
 
