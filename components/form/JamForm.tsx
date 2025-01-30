@@ -119,148 +119,150 @@ const JamForm = () => {
       scroll={true}
       style={Layout.screenContent}
     >
-      <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
-      <ListView
-        data={jamCategoriesData}
-        numColumns={4}
-        horizontal={false}
-        scrollEnabled={false}
-        contentContainerStyle={Layout.listContainer}
-        columnWrapperStyle={Layout.listColumnWrapper}
-        renderItem={(row: any) => renderJamCategory(row)}
-      />
+      <View style={Layout.formContainer}>
+        <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
+        <ListView
+          data={jamCategoriesData}
+          numColumns={4}
+          horizontal={false}
+          scrollEnabled={false}
+          contentContainerStyle={Layout.listContainer}
+          columnWrapperStyle={Layout.listColumnWrapper}
+          renderItem={(row: any) => renderJamCategory(row)}
+        />
 
-      <DividerView />
+        <DividerView />
 
-      <TextView>{i18n.t('Title')}</TextView>
-      <InputTextField
-        value={formData?.title}
-        onChangeText={(value: string) => updateField('title', value)}
-      />
+        <TextView>{i18n.t('Title')}</TextView>
+        <InputTextField
+          value={formData?.title}
+          onChangeText={(value: string) => updateField('title', value)}
+        />
 
-      <TextView>{i18n.t('Description')}</TextView>
-      <InputTextareaField
-        value={formData?.caption}
-        onChangeText={(value: string) => updateField('caption', value)}
-      />
+        <TextView>{i18n.t('Description')}</TextView>
+        <InputTextareaField
+          value={formData?.caption}
+          onChangeText={(value: string) => updateField('caption', value)}
+        />
 
-      <TextView>{i18n.t('Location type')}</TextView>
-      <LocationTypeField
-        value={formData?.location_type}
-        onChangeValue={(option: any) =>
-          updateField('location_type', option.value)
-        }
-      />
+        <TextView>{i18n.t('Location type')}</TextView>
+        <LocationTypeField
+          value={formData?.location_type}
+          onChangeValue={(option: any) =>
+            updateField('location_type', option.value)
+          }
+        />
 
-      <TextView>{i18n.t('Start date')}</TextView>
-      <DatePickerField
-        value={formData?.period?.start_datetime}
-        onChangeValue={(value: any) =>
-          updateField('period', {
-            ...(formData?.period || {}),
-            ...{ start_datetime: DataManager.formatDate(value) },
-          })
-        }
-      />
+        <TextView>{i18n.t('Start date')}</TextView>
+        <DatePickerField
+          value={formData?.period?.start_datetime}
+          onChangeValue={(value: any) =>
+            updateField('period', {
+              ...(formData?.period || {}),
+              ...{ start_datetime: DataManager.formatDate(value) },
+            })
+          }
+        />
 
-      <TextView>{i18n.t('End date')}</TextView>
-      <DatePickerField
-        value={formData?.period?.end_datetime}
-        onChangeValue={(value: any) =>
-          updateField('period', {
-            ...(formData?.period || {}),
-            ...{ end_datetime: DataManager.formatDate(value) },
-          })
-        }
-      />
+        <TextView>{i18n.t('End date')}</TextView>
+        <DatePickerField
+          value={formData?.period?.end_datetime}
+          onChangeValue={(value: any) =>
+            updateField('period', {
+              ...(formData?.period || {}),
+              ...{ end_datetime: DataManager.formatDate(value) },
+            })
+          }
+        />
 
-      <TextView>{i18n.t('Location')}</TextView>
-      <LocationPickerField 
-        latitude={formData?.geolocation_latitude}
-        longitude={formData?.geolocation_longitude}
-        onPressEvent={() => ScreenManager.toggleModal('LocationMapView', {
-          resource: resource,
-          latitude: {
-            key: 'geolocation_latitude',
-            value: formData?.geolocation_latitude,
-          },
-          longitude: {
-            key: 'geolocation_longitude',
-            value: formData?.geolocation_longitude,
-          },
-        })}
-      />
+        <TextView>{i18n.t('Location')}</TextView>
+        <LocationPickerField 
+          latitude={formData?.geolocation_latitude}
+          longitude={formData?.geolocation_longitude}
+          onPressEvent={() => ScreenManager.toggleModal('LocationMapView', {
+            resource: resource,
+            latitude: {
+              key: 'geolocation_latitude',
+              value: formData?.geolocation_latitude,
+            },
+            longitude: {
+              key: 'geolocation_longitude',
+              value: formData?.geolocation_longitude,
+            },
+          })}
+        />
 
-      <TextView>{i18n.t('Country')}</TextView>
-      <CountryField
-        value={formData?.countries}
-        onChangeValue={(option: any) =>
-          updateField('country', option.value)
-        }
-      />
+        <TextView>{i18n.t('Country')}</TextView>
+        <CountryField
+          value={formData?.countries}
+          onChangeValue={(option: any) =>
+            updateField('country', option.value)
+          }
+        />
 
-      <DividerView theme="secondary" />
-      <SectorsField
-        resource={resource}
-        field={sectorsFieldName}
-        label={
-          <>
-            <IconView name="plus" theme="secondary" radius="round" />
-            <TextView>{i18n.t('Add industries')}</TextView>
-          </>
-        }
-        onPressEvent={() => ScreenManager.toggleModal('SectorsList', {
-          resource: resource,
-          field: sectorsFieldName,
-        })}
-        onDeleteEvent={(item: any) => {
-          const sectorsIds = [...formData?.[sectorsFieldName] || []];
-          const index = sectorsIds.findIndex((v) => v === item.id);
-          if (index !== -1) sectorsIds.splice(index, 1);
-          updateField(sectorsFieldName, sectorsIds.filter(Boolean));
-        }}
-      />
-      
-      <DividerView theme="secondary" />
-      <CollaboratorsField
-        resource={resource}
-        field={collaboratorsFieldName}
-        onPressEvent={() => ScreenManager.toggleModal('CollaboratorsList', {
-          resource: resource,
-          field: collaboratorsFieldName,
-        })}
-        onDeleteEvent={(item: any) => {
-          const collaboratorsIds = [...formData?.[collaboratorsFieldName] || []];
-          const index = collaboratorsIds.findIndex((v) => v === item.id);
-          if (index !== -1) collaboratorsIds.splice(index, 1);
-          updateField(collaboratorsFieldName, collaboratorsIds.filter(Boolean));
-        }}
-      />
+        <DividerView theme="secondary" />
+        <SectorsField
+          resource={resource}
+          field={sectorsFieldName}
+          label={
+            <>
+              <IconView name="plus" theme="secondary" radius="round" />
+              <TextView>{i18n.t('Add industries')}</TextView>
+            </>
+          }
+          onPressEvent={() => ScreenManager.toggleModal('SectorsList', {
+            resource: resource,
+            field: sectorsFieldName,
+          })}
+          onDeleteEvent={(item: any) => {
+            const sectorsIds = [...formData?.[sectorsFieldName] || []];
+            const index = sectorsIds.findIndex((v) => v === item.id);
+            if (index !== -1) sectorsIds.splice(index, 1);
+            updateField(sectorsFieldName, sectorsIds.filter(Boolean));
+          }}
+        />
+        
+        <DividerView theme="secondary" />
+        <CollaboratorsField
+          resource={resource}
+          field={collaboratorsFieldName}
+          onPressEvent={() => ScreenManager.toggleModal('CollaboratorsList', {
+            resource: resource,
+            field: collaboratorsFieldName,
+          })}
+          onDeleteEvent={(item: any) => {
+            const collaboratorsIds = [...formData?.[collaboratorsFieldName] || []];
+            const index = collaboratorsIds.findIndex((v) => v === item.id);
+            if (index !== -1) collaboratorsIds.splice(index, 1);
+            updateField(collaboratorsFieldName, collaboratorsIds.filter(Boolean));
+          }}
+        />
 
-      <DividerView theme="secondary" />
-      <MediaPickerField
-        preview={true}
-        value={formData?.[mediasFieldName]}
-        onSelectItem={(data: any) => updateField(mediasFieldName, data)}
-        onDeleteItem={(data: any) => updateField(mediasFieldName, data)}
-        label={
-          <BoxView direction="row" align="center">
-            <IconView name="plus" theme="secondary" radius="round" />
-            <TextView>{i18n.t('Add media')}</TextView>
-          </BoxView>
-        }
-      />
-      
-      <DividerView theme="secondary" />
+        <DividerView theme="secondary" />
+        <MediaPickerField
+          preview={true}
+          value={formData?.[mediasFieldName]}
+          onSelectItem={(data: any) => updateField(mediasFieldName, data)}
+          onDeleteItem={(data: any) => updateField(mediasFieldName, data)}
+          label={
+            <BoxView direction="row" align="center">
+              <IconView name="plus" theme="secondary" radius="round" />
+              <TextView>{i18n.t('Add media')}</TextView>
+            </BoxView>
+          }
+        />
+        
+        <DividerView theme="secondary" />
 
-      <DividerView />
-      <ButtonView
-        label={i18n.t('Post')}
-        isProcessing={isProcessing}
-        onPress={submitForm}
-      />
+        <DividerView />
+        <ButtonView
+          label={i18n.t('Post')}
+          isProcessing={isProcessing}
+          onPress={submitForm}
+        />
 
-      <DividerView />
+        <DividerView />
+      </View>
     </BoxView>
   );
 };

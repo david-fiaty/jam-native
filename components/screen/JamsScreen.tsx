@@ -2,7 +2,6 @@ import React, { useEffect, useState, useCallback } from "react";
 import { StyleSheet } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { setModalConfig } from "@/redux/slices/ModalSlice";
-import { ModalConfig } from "@/constants/ModalConfig";
 import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
 import Modal from "react-native-modal";
@@ -15,11 +14,14 @@ import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "../view/SpinnerView";
 import BackButton from "../button/BackButton";
 import MessageView from "../view/MessageView";
+import ModalConfig from "@/constants/ModalConfig";
 
 const JamsScreen = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const modalState = useSelector((state: any) => state.modal);
+  const activeModal: any = ScreenManager.getActiveModal();
+  const modalConfig: any = ModalConfig.build();
 
   const getModalContainerStyle = (): any => {
     if (isModalVisible()) {
@@ -49,17 +51,20 @@ const JamsScreen = () => {
   }, []);
 
   const loadModalConfig = useCallback(() => {
-    dispatch(setModalConfig(ModalConfig.map(({ component, ...rest }) => ({ ...rest }))));
+    dispatch(setModalConfig(modalConfig.map(({ component, ...rest }) => ({ ...rest }))));
   }, []);
 
   const renderModalContent = () => {
-    return ModalConfig.find((o: any) => o.name == ScreenManager.getActiveModal()?.name)?.component;
+    return modalConfig.find((o: any) => o.name == ScreenManager.getActiveModal()?.name)?.component;
+  };
+
+  const getModalEffects = () => {
+    return modalConfig.find((o: any) => o.name == activeModal?.name)?.effects;
   };
 
   const renderModalTitle = () => {
     if (isModalVisible() && ScreenManager.getActiveModal()?.params?.backTitle) {
-      let activeModal: any = ScreenManager.getActiveModal();
-      let modalName: string = ScreenManager.getActiveModal()?.name;
+      let modalName: string = activeModal?.name;
       let modalTitle: string = activeModal?.params?.backTitle;
 
       return (
@@ -106,7 +111,7 @@ const JamsScreen = () => {
   return (  
     <BoxView direction="column" align="flex-start" style={styles.container}>
       <MessageView />
-      
+
       <HeaderNavigation 
         onSearchSubmit={async (value: any) => await onSearchSubmit(value)} 
         onSearchClear={async () => await onSearchClear()}
@@ -124,10 +129,13 @@ const JamsScreen = () => {
       <FooterNavigation />
 
       <Modal
-        isVisible={isModalVisible()}
         coverScreen={false}
         hasBackdrop={false}
+        animationIn={getModalEffects()?.in}
+        animationOut={getModalEffects()?.out}
+        isVisible={isModalVisible()}
         style={getModalContainerStyle()}
+        hideModalContentWhileAnimating={true}
       >
         {renderModalTitle()}
         {renderModalContent()}
