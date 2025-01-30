@@ -75,6 +75,14 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
     );
   };
 
+  const renderLogo = () => {
+    return (
+      <TouchableOpacity onPress={() => ScreenManager.toggleModal('JamsList')}>
+        <LogoView size={Layout.logo.size} />
+      </TouchableOpacity>
+    );
+  };
+
   useEffect(() => {
     (async () => {
       setNotificationsCount(await UserManager.getNotifications());
@@ -90,9 +98,7 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
       style={[styles.container, containerStyle]}
     >
       <BoxView direction="row" align="center" style={styles.headerLeft}>
-        <TouchableOpacity onPress={() => ScreenManager.toggleModal('JamsList')}>
-          <LogoView size={Layout.logo.size} />
-        </TouchableOpacity>
+        {renderLogo()}
       </BoxView>
 
       { (route.name == 'jams' || activeModal?.headerNavigation) &&
