@@ -10,7 +10,7 @@ ExpoSplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
   const segments = useSegments(); 
-  const routes: any = RouteConfig.build(segments);
+  const headerOptions: any = RouteConfig.getHeaderOptions(segments);
   
   const [isLoaded, isError] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
@@ -27,7 +27,7 @@ const RootLayout = () => {
   return (
     <Provider store={Store}>
       <Stack>
-        {routes.map((o: any) => (
+        {headerOptions.map((o: any) => (
           <Stack.Screen 
             key={o.name}
             name={o.name} 
