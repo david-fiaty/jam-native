@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: Layout.space.base*1.2,
     paddingVertical: Layout.space.base,
+    height: 39,
   },
 });
 
