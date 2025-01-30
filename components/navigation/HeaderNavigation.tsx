@@ -102,7 +102,7 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
         {renderLogo()}
       </BoxView>
 
-      { (route.name == Config.mainRoute || activeModal?.headerNavigation) &&
+      { (route.name == Config.mainRoute.replace('/', '') || activeModal?.headerNavigation) &&
         <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>
           {renderSearchField()}
           {isLoggedIn && renderNotificationsButton()}
