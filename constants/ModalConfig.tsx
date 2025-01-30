@@ -18,7 +18,7 @@ import LocationMapView from "@/components/view/LocationMapView";
 import MoreJamActionsView from "@/components/view/MoreJamActionsView";
 import SearchView from "@/components/view/SearchView";
 
-const config: any = [
+const modals: any = [
   {
     name: 'JamsList', 
     component: <JamsList />,
@@ -109,7 +109,7 @@ const defaults: any = {
 
 class ModalConfig {
   build() {
-    return config.map((item: any) => ({...defaults, ...item}));
+    return modals.map((o: any) => ({...defaults, ...o}));
   }
 };
 
