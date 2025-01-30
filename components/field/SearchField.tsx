@@ -5,13 +5,15 @@ import { BaseProps } from '@/constants/Types';
 import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
 import i18n from '@/translation/i18n';
+import SpinnerView from '../view/SpinnerView';
 
 type Props = BaseProps & {
+  onSearchEdit?: (value: any) => void;
   onSearchSubmit?: (value: any) => void;
   onSearchClear?: () => void;
 };
 
-const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
+const SearchField = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => {
   const searchState = useSelector((state: any) => state.search);
   const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
 
@@ -20,7 +22,7 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
   };
 
   const onSubmitEditing = () => {
-    submitSearch(currentSearchValue);
+    if (onSearchEdit) onSearchEdit(currentSearchValue);
   };
 
   const onChangeText = (value: string) => {
@@ -34,7 +36,10 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
   };
 
   const renderRightIcon = () => {
-    if (searchState.value?.length) {
+    if (searchState.searching == true) {
+      return <SpinnerView size="small" style={styles.spinner} />;
+    }
+    else if (searchState.value?.length) {
       return (
         <IconView 
           name="delete" 
@@ -64,6 +69,9 @@ const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+  },
+  spinner: {
+    padding: 0,
   },
 });
 
