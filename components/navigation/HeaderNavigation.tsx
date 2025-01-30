@@ -16,20 +16,27 @@ import RouteConfig from "@/constants/RouteConfig";
 import ModalConfig from "@/constants/ModalConfig";
 
 type Props = BaseProps & {
+  compact?: boolean;
   onSearchEdit?: (value: any) => void;
   onSearchSubmit?: (value: any) => void;
   onSearchClear?: () => void;
 };
 
-const HeaderNavigation = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => {
+const headerSize: any = ScreenManager.getHeaderSize();
+
+const HeaderNavigation = ({ compact, onSearchEdit, onSearchSubmit, onSearchClear }: Props) => {
   const route = useRoute();
   const [notificationsCount, setNotificationsCount] = useState<number>(0);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeModal: any = ScreenManager.getActiveModal();
   const isLoggedIn: boolean = UserManager.isLoggedIn();
-  const containerStyle: any = ScreenManager.getHeaderSize();
   const currentRouteConfig: any = RouteConfig.getRoutes().find((o: any) => o.name == route.name);
   const currentModalConfig: any = ModalConfig.build().find((o: any) => o.name == activeModal?.name);
+
+  const containerStyle: any = {
+    ...ScreenManager.getHeaderSize(),
+    ...(compact === true ? styles.compact : {}),
+  };
 
   const getIconTheme = (screenName: string) => {
     return activeModal?.name == screenName ? 'primary' : 'secondary';
@@ -141,10 +148,13 @@ const HeaderNavigation = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.white,
+    width: headerSize.width,
+  },
+  compact: {
     paddingHorizontal: Layout.space.base*1.5,
   },
   headerLeft: {
-    
+    width: '12%',
   },
   headerRight: {
     width: 200,
