@@ -122,7 +122,6 @@ const MainScreen = () => {
       <MessageView />
 
       <HeaderNavigation 
-        compact={true}
         onSearchEdit={async (value: any) => await onSearchEdit(value)} 
         onSearchSubmit={async (value: any) => await onSearchSubmit(value)} 
         onSearchClear={async () => await onSearchClear()}

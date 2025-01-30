@@ -24,7 +24,7 @@ const AboutScreen = () => {
 
   const renderComponent = useCallback(() => {
     return (
-      <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.screenContent}>
+      <BoxView direction="column" align="center" justify="flex-start" style={Layout.screenContent}>
         <HeaderNavigation />
         
         <BackButton
