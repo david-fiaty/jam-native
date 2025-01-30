@@ -2,184 +2,19 @@ import React, { useEffect } from 'react';
 import { Stack, useSegments } from 'expo-router';
 import { useFonts } from 'expo-font';
 import { Provider } from 'react-redux';
-import { ThemeProvider } from '@rneui/themed';
-import { Colors } from '@/constants/Colors';
 import * as ExpoSplashScreen from 'expo-splash-screen';
-import BaseTheme from "@/constants/BaseTheme";
 import Store from "@/redux/Store";
-import HeaderNavigation from '@/components/navigation/HeaderNavigation';
-
-const headerHiddenOptions: object = { 
-  headerShown: false,
-};
-
-const headerOptions: object = { 
-  statusBarStyle: 'dark',
-  headerShown: false,
-  statusBarBackgroundColor: Colors.white,
-  headerTintColor: Colors.white,    
-  headerStyle: {
-    backgroundColor: Colors.white, 
-  },
-};
-
-const headerVisibleOptions: object = { 
-  statusBarStyle: 'dark',
-  headerShown: true,
-  statusBarBackgroundColor: Colors.white,
-  headerTintColor: Colors.white,    
-  headerStyle: {
-    backgroundColor: Colors.white, 
-  },
-  header: (props: object) => (
-    <ThemeProvider theme={BaseTheme}>
-      <HeaderNavigation />
-    </ThemeProvider>
-  ),    
-};
-
-const statusBarVisibleOptions: object = { 
-  statusBarStyle: 'dark',
-  headerShown: false,
-  statusBarBackgroundColor: Colors.white,
-};
+import RouteConfig from '@/constants/RouteConfig';
 
 ExpoSplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
   const segments = useSegments(); 
+  const routes: any = RouteConfig.build(segments);
+  
   const [isLoaded, isError] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
-
-  const routes = [
-    {
-      name: 'index',
-      options: {
-        ...statusBarVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-    {
-      name: 'welcome',
-      options: {
-        ...statusBarVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-    {
-      name: 'login',
-      options: {
-        ...statusBarVisibleOptions,
-        ...{
-          animation: !segments.length ? 'default' : 'fade',
-        },
-      },
-    },
-    {
-      name: 'signup',
-      options: {
-        ...statusBarVisibleOptions,
-        ...{
-          animation: !segments.length ? 'default' : 'fade',
-        },
-      },
-    },
-    {
-      name: 'about',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: !segments.length ? 'default' : 'fade',
-        },
-      },
-    },
-    {
-      name: 'legal',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: !segments.length ? 'default' : 'fade',
-        },
-      },
-    },
-    {
-      name: 'jams',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: 'fade',
-        },
-      },
-    },
-    {
-      name: 'account',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-    {
-      name: 'profile',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-    {
-      name: 'password',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-    {
-      name: 'language',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-    {
-      name: 'notification',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-    {
-      name: 'jam',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-    {
-      name: 'project',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-  ];
 
   useEffect(() => {
     if (isLoaded || isError) {
@@ -192,12 +27,11 @@ const RootLayout = () => {
   return (
     <Provider store={Store}>
       <Stack>
-        {routes.map((item: any) => (
+        {routes.map((o: any) => (
           <Stack.Screen 
-            key={item.name}
-            name={item.name} 
-            //options={item.options} // Todo - Apply or remove
-            options={headerOptions}
+            key={o.name}
+            name={o.name} 
+            options={o}
           />
         ))}
       </Stack>

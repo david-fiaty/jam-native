@@ -1,4 +1,4 @@
-
+import { useCallback } from 'react';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import { Divider } from '@rneui/base';
@@ -22,20 +22,24 @@ const data = {
 const AboutScreen = () => {
   const router = useRouter();
 
-  return (
-    <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.screenContent}>
-      <HeaderNavigation />
-      
-      <BackButton
-        title={i18n.t('About')}
-        onPress={() => router.back()}
-      />
-      <TextView>{data.text}</TextView> 
-      <Divider />
+  const renderComponent = useCallback(() => {
+    return (
+      <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.screenContent}>
+        <HeaderNavigation />
+        
+        <BackButton
+          title={i18n.t('About')}
+          onPress={() => router.back()}
+        />
+        <TextView>{data.text}</TextView> 
+        <Divider />
+  
+        <BottomLinks />
+      </BoxView>
+    );
+  }, [router, data]);
 
-      <BottomLinks />
-    </BoxView>
-  );
+  return renderComponent();
 };
 
 export default AboutScreen;
