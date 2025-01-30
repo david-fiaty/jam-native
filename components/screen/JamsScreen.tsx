@@ -20,6 +20,7 @@ const JamsScreen = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const modalState = useSelector((state: any) => state.modal);
+  const activeModal: any = ScreenManager.getActiveModal();
 
   const getModalContainerStyle = (): any => {
     if (isModalVisible()) {
@@ -56,10 +57,20 @@ const JamsScreen = () => {
     return ModalConfig.find((o: any) => o.name == ScreenManager.getActiveModal()?.name)?.component;
   };
 
+  const getModalAnimation = () => {
+    let effect: any = ModalConfig.find((o: any) => o.name == activeModal?.name)?.effect;
+    let animation: any = {
+      in: effect,
+      out: effect,
+    }
+
+    console.log(animation);
+    return animation;
+  };
+
   const renderModalTitle = () => {
     if (isModalVisible() && ScreenManager.getActiveModal()?.params?.backTitle) {
-      let activeModal: any = ScreenManager.getActiveModal();
-      let modalName: string = ScreenManager.getActiveModal()?.name;
+      let modalName: string = activeModal?.name;
       let modalTitle: string = activeModal?.params?.backTitle;
 
       return (
@@ -101,6 +112,8 @@ const JamsScreen = () => {
     })();
   }, [isLoaded, ModalConfig]);
 
+  getModalAnimation();
+
   if (!isLoaded) return <SpinnerView />;
 
   return (  
@@ -130,6 +143,7 @@ const JamsScreen = () => {
         animationOut="slideInUp"
         isVisible={isModalVisible()}
         style={getModalContainerStyle()}
+        hideModalContentWhileAnimating={true}
       >
         {renderModalTitle()}
         {renderModalContent()}
