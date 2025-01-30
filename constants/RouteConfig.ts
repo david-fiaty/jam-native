@@ -1,6 +1,10 @@
 import { Colors } from "./Colors";
+import { Config } from "./Config";
 
 const config: any = [
+  {
+    name: Config.mainRoute.replace('/', ''),
+  },
   {
     name: 'index',
   },
@@ -18,9 +22,6 @@ const config: any = [
   },
   {
     name: 'legal',
-  },
-  {
-    name: 'jams',
   },
   {
     name: 'account',
