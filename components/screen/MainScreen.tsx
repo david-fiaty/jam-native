@@ -90,6 +90,10 @@ const MainScreen = () => {
     await SearchManager.getSearchResult(value);
   };
 
+  const onSearchEdit = async (value: any) => {
+    await loadSearchResult(value);
+  };
+
   const onSearchSubmit = async (value: any) => {
     dispatch(setIsSearching(true));
     await loadSearchResult(value);
@@ -116,6 +120,7 @@ const MainScreen = () => {
       <MessageView />
 
       <HeaderNavigation 
+        onSearchEdit={async (value: any) => await onSearchEdit(value)} 
         onSearchSubmit={async (value: any) => await onSearchSubmit(value)} 
         onSearchClear={async () => await onSearchClear()}
       />

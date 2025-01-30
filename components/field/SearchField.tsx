@@ -7,22 +7,21 @@ import InputTextField from "../field/InputTextField";
 import i18n from '@/translation/i18n';
 
 type Props = BaseProps & {
+  onSearchEdit?: (value: any) => void;
   onSearchSubmit?: (value: any) => void;
   onSearchClear?: () => void;
 };
 
-const SearchField = ({ onSearchSubmit, onSearchClear }: Props) => {
+const SearchField = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => {
   const searchState = useSelector((state: any) => state.search);
   const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
-
-  console.log(searchState.searching);
 
   const submitSearch = (value?: string) => {
     if (onSearchSubmit) onSearchSubmit(value);
   };
 
   const onSubmitEditing = () => {
-    submitSearch(currentSearchValue);
+    if (onSearchEdit) onSearchEdit(currentSearchValue);
   };
 
   const onChangeText = (value: string) => {
