@@ -18,157 +18,96 @@ import LocationMapView from "@/components/view/LocationMapView";
 import MoreJamActionsView from "@/components/view/MoreJamActionsView";
 import SearchView from "@/components/view/SearchView";
 
-export const ModalConfig: any = [
+const config: any = [
   {
     name: 'JamsList', 
-    effect: 'fade',
-    headerNavigation: true,
-    footerNavigation: true,
-    params: {},
     component: <JamsList />,
   },
   {
     name: 'JamsMapView', 
-    effect: 'fade',
-    headerNavigation: true,
-    footerNavigation: true,
-    params: {},
     component: <JamsMapView />,
   },
   {
     name: 'JamForm', 
-    effect: 'fade',
-    headerNavigation: true,
-    footerNavigation: true,
-    params: {},
     component: <JamForm />,
   },
   {
     name: 'AddProjectForm', 
-    effect: 'fade',
-    headerNavigation: true,
-    footerNavigation: true,
-    params: {},
     component: <AddProjectForm />,
   },
   {
     name: 'SelectJamsForm', 
-    effect: 'fade',
-    headerNavigation: true,
-    footerNavigation: true,
-    params: {},
     component: <SelectJamsForm />,
   },
   {
     name: 'ProfileForm', 
-    effect: 'fade',
-    headerNavigation: true,
-    footerNavigation: true,
-    params: {},
     component: <ProfileForm />,
   },
   {
     name: 'AddJamToProjectForm', 
-    effect: 'fade',
-    headerNavigation: true,
-    footerNavigation: true,
-    params: {},
     component: <AddJamToProjectForm />,
   },
   {
     name: 'SettingsMenu', 
-    effect: 'fade',
-    headerNavigation: true,
-    footerNavigation: true,
-    params: {},
     component: <SettingsMenu />,
   },
   {
     name: 'NotificationsMenu', 
-    effect: 'fade',
-    headerNavigation: true,
-    footerNavigation: true,
-    params: {},
     component: <NotificationsMenu />,
   },
   {
     name: 'SearchView', 
-    effect: 'fade',
-    headerNavigation: true,
-    footerNavigation: true,
-    params: {},
     component: <SearchView />,
   },
   {
     name: 'LocationMapView', 
-    effect: 'slide',
-    headerNavigation: true,
-    footerNavigation: true,
-    params: {},
     component: <LocationMapView />,
   },
   {
-    name: 'JammersList', 
-    effect: 'slide',
-    headerNavigation: true,
-    footerNavigation: true,
-    params: {},
+    name: 'JammersList',
     component: <JammersList />,
   },
   {
     name: 'CollaboratorsList', 
-    effect: 'slide',
-    headerNavigation: true,
-    footerNavigation: true,
-    params: {},
     component: <CollaboratorsList />,
   },
   {
     name: 'SectorsList', 
-    effect: 'slide',
-    headerNavigation: true,
-    footerNavigation: true,
-    params: {},
     component: <SectorsList />,
   },
   {
     name: 'CountriesList', 
-    effect: 'slide',
-    headerNavigation: true,
-    footerNavigation: true,
-    params: {},
     component: <CountriesList />,
   },
   {
     name: 'HostsList', 
-    effect: 'slide',
-    headerNavigation: true,
-    footerNavigation: true,
-    params: {},
     component: <HostsList />,
   },
   {
     name: 'MoreJamActionsView', 
-    effect: 'slide',
-    headerNavigation: true,
-    footerNavigation: true,
-    params: {},
     component: <MoreJamActionsView />,
   },
   {
     name: 'JamScreen', 
-    effect: 'fade',
-    headerNavigation: true,
-    footerNavigation: true,
-    params: {},
     component: <JamScreen />,
   },
   {
     name: 'ProjectScreen', 
-    effect: 'fade',
-    headerNavigation: true,
-    footerNavigation: true,
-    params: {},
     component: <ProjectScreen />,
   },
 ];
+
+const defaults: any = {
+  params: {},
+  headerNavigation: true,
+  footerNavigation: true,
+  effects: ['slideInUp', 'slideOutDown'],
+};
+
+class ModalConfig {
+  build() {
+    return config.map((item: any) => ({...defaults, ...item}));
+  }
+};
+
+export default (new ModalConfig());
