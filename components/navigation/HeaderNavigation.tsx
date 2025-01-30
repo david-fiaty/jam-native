@@ -9,7 +9,7 @@ import BoxView from "../view/BoxView";
 import LogoView from '../view/LogoView';
 import ScreenManager from "@/manager/ScreenManager";
 import UserManager from '@/manager/UserManager';
-import ModalView from "../view/ModalView";
+import ModalButton from "../button/ModalButton";
 import i18n from "@/translation/i18n";
 import SearchField from "../field/SearchField";
 import RouteConfig from "@/constants/RouteConfig";
@@ -67,7 +67,7 @@ const HeaderNavigation = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props
 
   const renderNotificationsButton = () => {
     return (
-      <ModalView 
+      <ModalButton 
         login={true}
         name="NotificationsMenu"
         backTitle={i18n.t('Notifications')}
@@ -85,7 +85,7 @@ const HeaderNavigation = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props
 
   const renderSettingsButton = () => {
     return (
-      <ModalView 
+      <ModalButton 
         login={true}
         name="SettingsMenu"
         backTitle={i18n.t('Settings')}

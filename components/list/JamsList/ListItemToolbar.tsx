@@ -8,7 +8,7 @@ import TextView from "@/components/view/TextView";
 import UserManager from "@/manager/UserManager";
 import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
-import ModalView from "@/components/view/ModalView";
+import ModalButton from "@/components/button/ModalButton";
 import ScreenManager from "@/manager/ScreenManager";
 
 type Props = BaseProps & {
@@ -51,7 +51,7 @@ const ListItemToolbar = ({ row }: Props) => {
 
   const renderJammersButton = () => {
     return (
-      <ModalView 
+      <ModalButton 
         login={true}
         name="JammersList"
         entityId={row.item.id}

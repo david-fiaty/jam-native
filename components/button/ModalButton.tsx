@@ -2,7 +2,7 @@ import { useRouter } from "expo-router";
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import UserManager from '@/manager/UserManager';
 import ScreenManager from '@/manager/ScreenManager';
-import ScreenView from './ScreenView';
+import ScreenView from "../view/ScreenView";
 
 type Props = {
   name?: any;
@@ -15,7 +15,7 @@ type Props = {
   onTriggerPress?: (active: boolean) => void;
 };
 
-const ModalView = ({ name, backTitle, entityId, login, trigger, triggerAlign, onTriggerPress }: Props) => {
+const ModalButton = ({ name, backTitle, entityId, login, trigger, triggerAlign, onTriggerPress }: Props) => {
   const router = useRouter();
   const isLoggedIn: boolean = UserManager.isLoggedIn();
 
@@ -58,4 +58,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ModalView;
+export default ModalButton;
