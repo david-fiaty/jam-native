@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { StyleSheet } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { setModalConfig } from "@/redux/slices/ModalSlice";
+import { setIsSearching } from "@/redux/slices/SearchSlice";
 import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
 import Modal from "react-native-modal";
@@ -90,7 +91,9 @@ const MainScreen = () => {
   };
 
   const onSearchSubmit = async (value: any) => {
+    dispatch(setIsSearching(true));
     await loadSearchResult(value);
+    dispatch(setIsSearching(false));
   };
 
   const onSearchClear = async () => {
