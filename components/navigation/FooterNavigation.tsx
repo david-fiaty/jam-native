@@ -4,7 +4,7 @@ import { Layout } from "@/constants/Layout";
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 import ScreenManager from '@/manager/ScreenManager';
-import ModalView from "../view/ModalView";
+import ModalButton from "../button/ModalButton";
 import i18n from '@/translation/i18n';
 
 const containerStyle = ScreenManager.getFooterSize();
@@ -24,7 +24,7 @@ const FooterNavigation = () => {
       justify="center" 
       style={[styles.container, containerStyle]}
     >
-      <ModalView 
+      <ModalButton 
         login={false}
         name="JamsMapView"
         trigger={
@@ -38,7 +38,7 @@ const FooterNavigation = () => {
         }
       />
 
-      <ModalView 
+      <ModalButton 
         login={true}
         name="JamForm"
         backTitle={i18n.t('Create a Jam')}
@@ -53,7 +53,7 @@ const FooterNavigation = () => {
         }
       />
 
-      <ModalView 
+      <ModalButton 
         login={true}
         name="SearchView"
         trigger={
