@@ -58,16 +58,8 @@ const JamsScreen = () => {
     return modalConfig.find((o: any) => o.name == ScreenManager.getActiveModal()?.name)?.component;
   };
 
-  const getModalAnimation = () => {
-    let effect: any = modalConfig.find((o: any) => o.name == activeModal?.name)?.effect;
-    let animation: any = {
-      in: effect,
-      out: effect,
-    }
-
-    console.log(modalConfig);
-    //console.log(animation);
-    //return animation;
+  const getModalEffects = () => {
+    return modalConfig.find((o: any) => o.name == activeModal?.name)?.effects;
   };
 
   const renderModalTitle = () => {
@@ -114,8 +106,6 @@ const JamsScreen = () => {
     })();
   }, [isLoaded, ModalConfig]);
 
-  getModalAnimation();
-
   if (!isLoaded) return <SpinnerView />;
 
   return (  
@@ -141,8 +131,8 @@ const JamsScreen = () => {
       <Modal
         coverScreen={false}
         hasBackdrop={false}
-        animationIn="slideInUp"
-        animationOut="slideOutDown"
+        animationIn={getModalEffects()?.in}
+        animationOut={getModalEffects()?.out}
         isVisible={isModalVisible()}
         style={getModalContainerStyle()}
         hideModalContentWhileAnimating={true}
