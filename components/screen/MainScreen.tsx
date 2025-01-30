@@ -16,7 +16,7 @@ import BackButton from "../button/BackButton";
 import MessageView from "../view/MessageView";
 import ModalConfig from "@/constants/ModalConfig";
 
-const JamsScreen = () => {
+const MainScreen = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const modalState = useSelector((state: any) => state.modal);
@@ -158,4 +158,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default JamsScreen;
+export default MainScreen;

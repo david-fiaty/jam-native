@@ -21,6 +21,7 @@ import SectorsField from "../field/SectorsField";
 import ProfileTypeField from "../field/ProfileTypeField";
 import CountryField from "../field/CountryField";
 import { View } from "react-native";
+import { Config } from "@/constants/Config";
 
 const SignupScreen = () => {
   const router = useRouter();
@@ -43,7 +44,7 @@ const SignupScreen = () => {
       });
     }
     else {
-      router.replace('/jams');
+      router.replace(Config.mainRoute);
     }
   }  
 
@@ -193,7 +194,7 @@ const SignupScreen = () => {
               {i18n.t("Sign in")}
             </LinkView>
           </BoxView>
-          <SkipButton onPress={async () => router.replace("/jams")} />
+          <SkipButton onPress={async () => router.replace(Config.mainRoute)} />
         </BoxView>
 
         <DividerView />

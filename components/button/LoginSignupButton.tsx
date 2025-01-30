@@ -6,6 +6,7 @@ import SkipButton from '../button/SkipButton';
 import BoxView from '../view/BoxView';
 import i18n from '@/translation/i18n';
 import TextView from '../view/TextView';
+import { Config } from '@/constants/Config';
 
 const LoginSignupButton = () => {
   const router = useRouter();
@@ -19,7 +20,7 @@ const LoginSignupButton = () => {
           </TextView>
         </View>
       </TouchableOpacity>
-      <SkipButton onPress={ async () => router.push('/jams')} />
+      <SkipButton onPress={ async () => router.push(Config.mainRoute)} />
     </BoxView>
   );
 };
