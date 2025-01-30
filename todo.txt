@@ -288,3 +288,19 @@ const getModals = () => {
       ],
     },
   };
+
+
+const headerVisibleOptions: object = { 
+  statusBarStyle: 'dark',
+  headerShown: true,
+  statusBarBackgroundColor: Colors.white,
+  headerTintColor: Colors.white,    
+  headerStyle: {
+    backgroundColor: Colors.white, 
+  },
+  header: (props: object) => (
+    <ThemeProvider theme={BaseTheme}>
+      <HeaderNavigation />
+    </ThemeProvider>
+  ),    
+};
