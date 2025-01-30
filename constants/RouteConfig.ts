@@ -61,10 +61,17 @@ const defaults: any = {
   },
 };
 
+const navigation: any = {
+  showHeader: true,
+  showFooter: true,
+  settingsButton: true,
+  notificationsButton: true, 
+};
+
 class RouteConfig {
   getRoutes(segments?: any) {
     return routes.map((o: any) => {
-      let options: any = { ...defaults, ...o };
+      let options: any = { ...defaults, ...navigation, ...o };
 
       if (['login', 'signup', 'about', 'legal'].includes(o.name)) {
         o.animation = !segments?.length ? o.animation :'fade';
