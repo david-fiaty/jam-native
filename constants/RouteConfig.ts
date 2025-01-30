@@ -1,9 +1,13 @@
 import { Colors } from "./Colors";
 import { Config } from "./Config";
 
+const mainRoute = () => {
+  return Config.mainRoute.replace('/', '');
+};
+
 const config: any = [
   {
-    name: Config.mainRoute.replace('/', ''),
+    name: mainRoute(),
   },
   {
     name: 'index',
@@ -68,6 +72,14 @@ class RouteConfig {
 
       return options;
     });
+  }
+
+  isMainRoute(routeName: string) {
+    return routeName == mainRoute();
+  }
+
+  getMainRoute() {
+    return mainRoute();
   }
 };
 
