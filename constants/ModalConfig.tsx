@@ -99,17 +99,21 @@ const modals: any = [
 
 const defaults: any = {
   params: {},
-  headerNavigation: true,
-  footerNavigation: true,
   effects: {
     in: 'slideInUp', 
     out: 'slideOutDown',
   },
 };
 
+const navigation: any = {
+  showHeader: true,
+  showFooter: true,
+  showButtons: true,
+};
+
 class ModalConfig {
   build() {
-    return modals.map((o: any) => ({...defaults, ...o}));
+    return modals.map((o: any) => ({...defaults, ...navigation, ...o}));
   }
 };
 
