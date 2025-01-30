@@ -45,7 +45,7 @@ const LoginScreen = () => {
       });
     }
     else {
-      router.replace('/jams');
+      router.replace(Config.mainRoute);
     }
   }  
 
@@ -87,7 +87,7 @@ const LoginScreen = () => {
             {i18n.t('Sign up')}
           </LinkView>
         </BoxView>
-        <SkipButton onPress={async () => router.replace('/jams')} />
+        <SkipButton onPress={async () => router.replace(Config.mainRoute)} />
       </BoxView>
 
       <DividerView />

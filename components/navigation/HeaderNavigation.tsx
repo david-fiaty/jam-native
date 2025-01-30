@@ -12,6 +12,8 @@ import UserManager from '@/manager/UserManager';
 import ModalView from "../view/ModalView";
 import i18n from "@/translation/i18n";
 import SearchField from "../field/SearchField";
+import { Config } from "@/constants/Config";
+import RouteConfig from "@/constants/RouteConfig";
 
 type Props = BaseProps & {
   onSearchSubmit?: (value: any) => void;
@@ -28,6 +30,10 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
 
   const getIconTheme = (screenName: string) => {
     return activeModal?.name == screenName ? 'primary' : 'secondary';
+  };
+
+  const canShowButtons = () => {
+    return RouteConfig.isMainRoute(route.name) || activeModal?.headerNavigation;
   };
 
   const renderSearchField = () => {
@@ -75,6 +81,14 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
     );
   };
 
+  const renderLogo = () => {
+    return (
+      <TouchableOpacity onPress={() => ScreenManager.toggleModal(null)}>
+        <LogoView size={Layout.logo.size} />
+      </TouchableOpacity>
+    );
+  };
+
   useEffect(() => {
     (async () => {
       setNotificationsCount(await UserManager.getNotifications());
@@ -90,12 +104,10 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
       style={[styles.container, containerStyle]}
     >
       <BoxView direction="row" align="center" style={styles.headerLeft}>
-        <TouchableOpacity onPress={() => ScreenManager.toggleModal('JamsList')}>
-          <LogoView size={Layout.logo.size} />
-        </TouchableOpacity>
+        {renderLogo()}
       </BoxView>
 
-      { (route.name == 'jams' || activeModal?.headerNavigation) &&
+      { canShowButtons() &&
         <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>
           {renderSearchField()}
           {isLoggedIn && renderNotificationsButton()}

@@ -1,4 +1,4 @@
-export const Config = {
+export const Config: any = {
   dataCacheEnabled: false,
   imageCacheEnabled: false,
   apiEnabled: false,
@@ -15,6 +15,7 @@ export const Config = {
   messageDisplayDuration: 3500,
   maxSlieshowImages: 10,
   maxNotificationsDisplay: 14,
+  mainRoute: '/main',
   defaultLocation: {
     latitude: 8.6195,
     longitude: 0.8248,
