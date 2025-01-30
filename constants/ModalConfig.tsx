@@ -18,14 +18,14 @@ import LocationMapView from "@/components/view/LocationMapView";
 import MoreJamActionsView from "@/components/view/MoreJamActionsView";
 import SearchView from "@/components/view/SearchView";
 
-export const ModalConfig: any = [
+const config: any = [
   {
     name: 'JamsList', 
-    effect: 'fade',
     headerNavigation: true,
     footerNavigation: true,
     params: {},
     component: <JamsList />,
+    effect: ['slideInUp', 'slideOutDown'],
   },
   {
     name: 'JamsMapView', 
@@ -172,3 +172,11 @@ export const ModalConfig: any = [
     component: <ProjectScreen />,
   },
 ];
+
+class ModalConfig {
+  build() {
+    return config;
+  }
+};
+
+export default (new ModalConfig());
