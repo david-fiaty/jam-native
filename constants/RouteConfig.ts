@@ -5,7 +5,7 @@ const mainRoute = () => {
   return Config.mainRoute.replace('/', '');
 };
 
-const config: any = [
+const routes: any = [
   {
     name: mainRoute(),
   },
@@ -61,10 +61,16 @@ const defaults: any = {
   },
 };
 
+const navigation: any = {
+  showHeader: true,
+  showFooter: true,
+  showButtons: true,
+};
+
 class RouteConfig {
-  build(segments?: any) {
-    return config.map((o: any) => {
-      let options: any = { ...defaults, ...o };
+  getRoutes(segments?: any) {
+    return routes.map((o: any) => {
+      let options: any = { ...defaults, ...navigation, ...o };
 
       if (['login', 'signup', 'about', 'legal'].includes(o.name)) {
         o.animation = !segments?.length ? o.animation :'fade';
