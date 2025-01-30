@@ -65,7 +65,8 @@ const JamsScreen = () => {
       out: effect,
     }
 
-    console.log(animation);
+    console.log(modalConfig);
+    //console.log(animation);
     //return animation;
   };
 
