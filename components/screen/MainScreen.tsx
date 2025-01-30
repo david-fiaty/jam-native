@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { StyleSheet } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { setModalConfig } from "@/redux/slices/ModalSlice";
+import { setIsSearching } from "@/redux/slices/SearchSlice";
 import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
 import Modal from "react-native-modal";
@@ -89,12 +90,20 @@ const MainScreen = () => {
     await SearchManager.getSearchResult(value);
   };
 
-  const onSearchSubmit = async (value: any) => {
+  const onSearchEdit = async (value: any) => {
     await loadSearchResult(value);
   };
 
+  const onSearchSubmit = async (value: any) => {
+    dispatch(setIsSearching(true));
+    await loadSearchResult(value);
+    dispatch(setIsSearching(false));
+  };
+
   const onSearchClear = async () => {
+    dispatch(setIsSearching(true));
     await SearchManager.clearSearch();
+    dispatch(setIsSearching(false));
   };
 
   useEffect(() => {
@@ -113,6 +122,7 @@ const MainScreen = () => {
       <MessageView />
 
       <HeaderNavigation 
+        onSearchEdit={async (value: any) => await onSearchEdit(value)} 
         onSearchSubmit={async (value: any) => await onSearchSubmit(value)} 
         onSearchClear={async () => await onSearchClear()}
       />

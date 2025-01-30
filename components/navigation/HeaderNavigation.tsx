@@ -16,11 +16,12 @@ import RouteConfig from "@/constants/RouteConfig";
 import ModalConfig from "@/constants/ModalConfig";
 
 type Props = BaseProps & {
+  onSearchEdit?: (value: any) => void;
   onSearchSubmit?: (value: any) => void;
   onSearchClear?: () => void;
 };
 
-const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
+const HeaderNavigation = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => {
   const route = useRoute();
   const [notificationsCount, setNotificationsCount] = useState<number>(0);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -49,6 +50,7 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
   const renderSearchField = () => {
     return (
       <SearchField 
+        onSearchEdit={onSearchEdit}
         onSearchSubmit={onSearchSubmit} 
         onSearchClear={onSearchClear} 
       />

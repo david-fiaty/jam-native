@@ -87,6 +87,9 @@ export const Layout = {
     fontWeight: 'bold',
     fontSize: fontSize.base,
   },
+  titleContainer: {
+    height: 40,
+  },
   menuContainer: {
     padding: space.base*1.5,
     height: '100%',
