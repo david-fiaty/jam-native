@@ -33,10 +33,12 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
   };
 
   const canShowButtons = () => {
+
+    console.log(activeModal);
+    
     return true;
     
-
-    
+    return RouteConfig.isMainRoute(route.name) || activeModal?.headerNavigation;
   };
 
   const renderSearchField = () => {
