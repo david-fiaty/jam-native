@@ -47,6 +47,12 @@ const HeaderNavigation = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props
     || currentRouteConfig?.showHeaderButtons == true;
   };
 
+  const canShowSearch = () => {
+    return RouteConfig.isMainRoute(route.name)
+    || currentModalConfig?.showSearch == true
+    || currentRouteConfig?.showSearch == true;
+  };
+
   const renderSearchField = () => {
     return (
       <SearchField 
@@ -123,7 +129,7 @@ const HeaderNavigation = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props
 
       { canShowButtons() &&
         <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>
-          {renderSearchField()}
+          {canShowSearch() && renderSearchField()}
           {isLoggedIn && renderNotificationsButton()}
           {isLoggedIn && renderSettingsButton()}
         </BoxView>
