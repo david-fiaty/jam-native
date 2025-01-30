@@ -77,7 +77,7 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
 
   const renderLogo = () => {
     return (
-      <TouchableOpacity onPress={() => ScreenManager.toggleModal('JamsList')}>
+      <TouchableOpacity onPress={() => ScreenManager.toggleModal(null)}>
         <LogoView size={Layout.logo.size} />
       </TouchableOpacity>
     );
