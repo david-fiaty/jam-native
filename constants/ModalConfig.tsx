@@ -108,7 +108,7 @@ const defaults: any = {
 const navigation: any = {
   showHeader: true,
   showFooter: true,
-  showButtons: true,
+  showHeaderButtons: true,
 };
 
 class ModalConfig {
