@@ -101,7 +101,10 @@ const defaults: any = {
   params: {},
   headerNavigation: true,
   footerNavigation: true,
-  effects: ['slideInUp', 'slideOutDown'],
+  effects: {
+    in: 'slideInUp', 
+    out: 'slideOutDown',
+  },
 };
 
 class ModalConfig {
