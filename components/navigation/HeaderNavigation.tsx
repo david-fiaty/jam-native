@@ -13,6 +13,7 @@ import ModalView from "../view/ModalView";
 import i18n from "@/translation/i18n";
 import SearchField from "../field/SearchField";
 import { Config } from "@/constants/Config";
+import RouteConfig from "@/constants/RouteConfig";
 
 type Props = BaseProps & {
   onSearchSubmit?: (value: any) => void;
@@ -102,7 +103,7 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
         {renderLogo()}
       </BoxView>
 
-      { (route.name == Config.mainRoute.replace('/', '') || activeModal?.headerNavigation) &&
+      { (RouteConfig.isMainRoute(route.name) || activeModal?.headerNavigation) &&
         <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>
           {renderSearchField()}
           {isLoggedIn && renderNotificationsButton()}
