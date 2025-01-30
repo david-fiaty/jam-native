@@ -59,7 +59,7 @@ const defaults: any = {
 class RouteConfig {
   build(segments?: any) {
     return config.map((o: any) => {
-      let options: any = {...defaults, ...o};
+      let options: any = { ...defaults, ...o };
 
       if (['login', 'signup', 'about', 'legal'].includes(o.name)) {
         o.animation = !segments?.length ? o.animation :'fade';
