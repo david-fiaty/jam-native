@@ -17,7 +17,10 @@ const SpinnerView = ({ size, color, compact, style}: Props) => {
 
   return (
     <View style={[styles.container, style, containerStyle]}>
-      <ActivityIndicator size={spinnerSize} color={spinnerColor} />
+      <ActivityIndicator 
+        size={spinnerSize} 
+        color={spinnerColor} 
+      />
     </View>
   );
 };
