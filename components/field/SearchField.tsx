@@ -36,8 +36,8 @@ const SearchField = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => 
   };
 
   const renderRightIcon = () => {
-    if (searchState.searching) {
-      return <SpinnerView size="small" />;
+    if (searchState.searching == true) {
+      return <SpinnerView size="small" style={styles.spinner} />;
     }
     else if (searchState.value?.length) {
       return (
@@ -69,6 +69,9 @@ const SearchField = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => 
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+  },
+  spinner: {
+    padding: 0,
   },
 });
 
