@@ -49,8 +49,8 @@ const HeaderNavigation = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props
 
   const canShowSearch = () => {
     return RouteConfig.isMainRoute(route.name)
-    || currentModalConfig?.showSearch == true
-    || currentRouteConfig?.showSearch == true;
+    || currentModalConfig?.showHeaderSearch == true
+    || currentRouteConfig?.showHeaderSearch == true;
   };
 
   const renderSearchField = () => {
