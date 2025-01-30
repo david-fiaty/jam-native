@@ -8,6 +8,7 @@ import * as ExpoSplashScreen from 'expo-splash-screen';
 import BaseTheme from "@/constants/BaseTheme";
 import Store from "@/redux/Store";
 import HeaderNavigation from '@/components/navigation/HeaderNavigation';
+import RouteConfig from '@/constants/RouteConfig';
 
 const headerHiddenOptions: object = { 
   headerShown: false,
@@ -52,134 +53,7 @@ const RootLayout = () => {
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
 
-  const routes = [
-    {
-      name: 'index',
-      options: {
-        ...statusBarVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-    {
-      name: 'welcome',
-      options: {
-        ...statusBarVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-    {
-      name: 'login',
-      options: {
-        ...statusBarVisibleOptions,
-        ...{
-          animation: !segments.length ? 'default' : 'fade',
-        },
-      },
-    },
-    {
-      name: 'signup',
-      options: {
-        ...statusBarVisibleOptions,
-        ...{
-          animation: !segments.length ? 'default' : 'fade',
-        },
-      },
-    },
-    {
-      name: 'about',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: !segments.length ? 'default' : 'fade',
-        },
-      },
-    },
-    {
-      name: 'legal',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: !segments.length ? 'default' : 'fade',
-        },
-      },
-    },
-    {
-      name: 'jams',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: 'fade',
-        },
-      },
-    },
-    {
-      name: 'account',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-    {
-      name: 'profile',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-    {
-      name: 'password',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-    {
-      name: 'language',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-    {
-      name: 'notification',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-    {
-      name: 'jam',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-    {
-      name: 'project',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-  ];
+  const routes = RouteConfig.build(segments);
 
   useEffect(() => {
     if (isLoaded || isError) {
