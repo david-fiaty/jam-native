@@ -62,7 +62,7 @@ const defaults: any = {
 };
 
 class RouteConfig {
-  getHeaderOptions(segments?: any) {
+  getRoutes(segments?: any) {
     return routes.map((o: any) => {
       let options: any = { ...defaults, ...o };
 
