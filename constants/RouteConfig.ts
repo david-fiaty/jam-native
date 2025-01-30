@@ -64,8 +64,7 @@ const defaults: any = {
 const navigation: any = {
   showHeader: true,
   showFooter: true,
-  settingsButton: true,
-  notificationsButton: true, 
+  showButtons: true,
 };
 
 class RouteConfig {
