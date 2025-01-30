@@ -101,7 +101,9 @@ const MainScreen = () => {
   };
 
   const onSearchClear = async () => {
+    dispatch(setIsSearching(true));
     await SearchManager.clearSearch();
+    dispatch(setIsSearching(false));
   };
 
   useEffect(() => {
