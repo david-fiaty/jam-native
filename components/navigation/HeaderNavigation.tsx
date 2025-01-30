@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { Layout } from '@/constants/Layout';
@@ -12,8 +12,8 @@ import UserManager from '@/manager/UserManager';
 import ModalView from "../view/ModalView";
 import i18n from "@/translation/i18n";
 import SearchField from "../field/SearchField";
-import { Config } from "@/constants/Config";
 import RouteConfig from "@/constants/RouteConfig";
+import ModalConfig from "@/constants/ModalConfig";
 
 type Props = BaseProps & {
   onSearchSubmit?: (value: any) => void;
@@ -27,13 +27,23 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
   const activeModal: any = ScreenManager.getActiveModal();
   const isLoggedIn: boolean = UserManager.isLoggedIn();
   const containerStyle: any = ScreenManager.getHeaderSize();
+  const currentRouteConfig: any = RouteConfig.getRoutes().find((o: any) => o.name == route.name);
+  const currentModalConfig: any = ModalConfig.build().find((o: any) => o.name == activeModal?.name);
 
   const getIconTheme = (screenName: string) => {
     return activeModal?.name == screenName ? 'primary' : 'secondary';
   };
 
+  const canShowHeader = () => {
+    return RouteConfig.isMainRoute(route.name)
+    || currentModalConfig.showHeader == true
+    || currentRouteConfig.showHeader == true;
+  };
+
   const canShowButtons = () => {
-    return RouteConfig.isMainRoute(route.name) || activeModal?.headerNavigation;
+    return RouteConfig.isMainRoute(route.name)
+    || currentModalConfig.showButtons == true
+    || currentRouteConfig.showButtons == true;
   };
 
   const renderSearchField = () => {
@@ -95,6 +105,8 @@ const HeaderNavigation = ({ onSearchSubmit, onSearchClear }: Props) => {
       setIsLoaded(true);
     })();
   }, [isLoaded]);
+
+  if (!canShowHeader()) return <></>;
 
   return (
     <BoxView 
