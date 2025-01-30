@@ -5,7 +5,7 @@ const mainRoute = () => {
   return Config.mainRoute.replace('/', '');
 };
 
-const config: any = [
+const routes: any = [
   {
     name: mainRoute(),
   },
@@ -62,8 +62,8 @@ const defaults: any = {
 };
 
 class RouteConfig {
-  build(segments?: any) {
-    return config.map((o: any) => {
+  getHeaderOptions(segments?: any) {
+    return routes.map((o: any) => {
       let options: any = { ...defaults, ...o };
 
       if (['login', 'signup', 'about', 'legal'].includes(o.name)) {

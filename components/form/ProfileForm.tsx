@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useRouter } from 'expo-router';
 import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
@@ -23,10 +24,12 @@ import IconView from "../view/IconView";
 import ButtonView from "../view/ButtonView";
 import EntityManager from "@/manager/EntityManager";
 import MediaManager from "@/manager/MediaManager";
+import BackButton from "../button/BackButton";
 
 const ProfileForm = () => {
-  const resource: string = 'profile';
   const dispatch = useDispatch();
+  const router = useRouter();
+  const resource: string = 'profile';
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
@@ -80,6 +83,11 @@ const ProfileForm = () => {
       scroll={true}
       style={Layout.screenContent}
     >
+      <BackButton
+        title={i18n.t('Your profile')}
+        onPress={() => router.back()}
+      />
+
       <View style={Layout.formContainer}>
         <ProfileImageField 
           value={formData?.profile_picture?.url}
