@@ -47,6 +47,7 @@ const config: any = [
 
 const defaults: any = { 
   statusBarStyle: 'dark',
+  animation: 'fade',
   headerShown: false,
   statusBarBackgroundColor: Colors.white,
   headerTintColor: Colors.white,    
