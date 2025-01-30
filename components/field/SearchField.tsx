@@ -5,6 +5,7 @@ import { BaseProps } from '@/constants/Types';
 import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
 import i18n from '@/translation/i18n';
+import SpinnerView from '../view/SpinnerView';
 
 type Props = BaseProps & {
   onSearchEdit?: (value: any) => void;
@@ -35,7 +36,10 @@ const SearchField = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => 
   };
 
   const renderRightIcon = () => {
-    if (searchState.value?.length) {
+    if (searchState.searching) {
+      return <SpinnerView size="small" />;
+    }
+    else if (searchState.value?.length) {
       return (
         <IconView 
           name="delete" 
