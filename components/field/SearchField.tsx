@@ -6,6 +6,7 @@ import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
 import i18n from '@/translation/i18n';
 import SpinnerView from '../view/SpinnerView';
+import BoxView from '../view/BoxView';
 
 type Props = BaseProps & {
   onSearchEdit?: (value: any) => void;
@@ -67,7 +68,12 @@ const SearchField = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => 
   };
 
   return (
-    <View style={styles.container}>
+    <BoxView 
+      direction="row" 
+      align="center" 
+      justify="flex-end" 
+      style={styles.container}
+    >
       {!isExpanded && 
         <IconView 
           name="search" 
@@ -87,7 +93,7 @@ const SearchField = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => 
           rightIcon={renderRightIcon()}
         /> 
       }
-    </View>
+    </BoxView>
   );
 };
 
