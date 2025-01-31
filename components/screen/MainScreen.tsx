@@ -21,8 +21,6 @@ const MainScreen = () => {
 
   return (  
     <BoxView direction="column" align="center" style={styles.container}>
-      <HeaderNavigation />
-
       <BoxView 
         direction="column" 
         align="center"
@@ -31,8 +29,6 @@ const MainScreen = () => {
       >
         <JamsList />
       </BoxView>
-      
-      <FooterNavigation />
     </BoxView>
   );
 };
