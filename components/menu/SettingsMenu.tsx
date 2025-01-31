@@ -6,6 +6,7 @@ import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 import UserManager from '@/manager/UserManager';
 import BoxView from '../view/BoxView';
+import ScreenManager from '@/manager/ScreenManager';
 
 const SettingsMenu = () => {
   const router = useRouter();
@@ -15,28 +16,28 @@ const SettingsMenu = () => {
       label: i18n.t('Your profile'),
       path: '/profile',
       onPress: (row: any) => {
-        router.push(row.item.path);
+        ScreenManager.pushScreen(router, row.item.path);
       },
     },
     {
       label: i18n.t('Account information'),
       path: '/account',
       onPress: (row: any) => {
-        router.push(row.item.path);
+        ScreenManager.pushScreen(router, row.item.path);
       },
     },
     {
       label: i18n.t('Change password'),
       path: '/password',
       onPress: (row: any) => {
-        router.push(row.item.path);
+        ScreenManager.pushScreen(router, row.item.path);
       },
     },
     {
       label: i18n.t('Language'),
       path: '/language',
       onPress: (row: any) => {
-        router.push(row.item.path);
+        ScreenManager.pushScreen(router, row.item.path);
       },
     },
     {
@@ -44,7 +45,7 @@ const SettingsMenu = () => {
       path: null,
       onPress: (row: any) => {
         UserManager.logout();
-        router.replace('/');
+        ScreenManager.replaceScreen(router, '/');
       },
     },
   ];
