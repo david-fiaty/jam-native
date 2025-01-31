@@ -7,7 +7,6 @@ import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
-import DeviceManager from "@/manager/DeviceManager";
 import ScreenManager from "@/manager/ScreenManager";
 import i18n from "@/translation/i18n";
 import BackButton from "../button/BackButton";
@@ -44,7 +43,7 @@ const LocationMapView = () => {
   };
 
   const getDeviceLocation = async () => {
-    let deviceLocation: any = await DeviceManager.getLocation();
+    let deviceLocation: any = await ScreenManager.getLocation();
 
     if (deviceLocation?.coords?.latitude && deviceLocation?.coords?.longitude) {
       return {

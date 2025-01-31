@@ -3,7 +3,6 @@ import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
-import { Colors } from "@/constants/Colors";
 import TextView from "../view/TextView";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
@@ -13,7 +12,6 @@ import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from "@/manager/EntityManager";
-import CollapsibleView from "../view/CollapsibleView";
 
 const CountriesList = () => {
   const dispatch = useDispatch();
