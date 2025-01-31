@@ -23,7 +23,6 @@ const RootLayout = () => {
     Store.dispatch(setModalConfig(modalConfig.map(({ component, ...rest }) => ({ ...rest }))));
   }, [modalConfig]);
 
-
   useEffect(() => {
     loadModalConfig();
 
