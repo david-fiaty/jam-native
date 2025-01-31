@@ -85,20 +85,19 @@ const SearchField = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => 
         /> 
       }
 
-    
-        <Animatable.View 
-          style={[styles.animated, (isExpanded ? styles.expanded : {})]}
-          transition="width"
-          duration={300}
-        >
-          <InputTextField 
-            value={currentSearchValue}
-            placeholder={i18n.t('Search...')}
-            onChangeText={onChangeText}
-            onSubmitEditing={onSubmitEditing}
-            rightIcon={renderRightIcon()}
-          /> 
-        </Animatable.View>
+      <Animatable.View 
+        style={[styles.animated, (isExpanded ? styles.expanded : {})]}
+        transition="width"
+        duration={300}
+      >
+        <InputTextField 
+          value={currentSearchValue}
+          placeholder={i18n.t('Search...')}
+          onChangeText={onChangeText}
+          onSubmitEditing={onSubmitEditing}
+          rightIcon={renderRightIcon()}
+        /> 
+      </Animatable.View>
 
     </BoxView>
   );
