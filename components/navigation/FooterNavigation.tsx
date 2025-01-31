@@ -33,7 +33,7 @@ const FooterNavigation = () => {
     <BoxView 
       direction="row" 
       align="center" 
-      justify="center" 
+      justify="space-between" 
       style={[styles.container, containerStyle]}
     >
       <ModalButton 
@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     position: 'absolute',
     top: containerPosition.y,
+    paddingHorizontal: Layout.space.base*6,
   },
 });
 
