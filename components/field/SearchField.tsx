@@ -16,6 +16,7 @@ type Props = BaseProps & {
 const SearchField = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => {
   const searchState = useSelector((state: any) => state.search);
   const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   const submitSearch = (value?: string) => {
     if (onSearchSubmit) onSearchSubmit(value);
@@ -35,6 +36,10 @@ const SearchField = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => 
     if (onSearchClear) onSearchClear();
   };
 
+  const toggleSearch = () => {
+    setIsExpanded(!isExpanded);
+  };
+
   const renderRightIcon = () => {
     if (searchState.searching == true) {
       return <SpinnerView size="small" compact={true} />;
@@ -49,19 +54,41 @@ const SearchField = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => 
         />
       );
     }
+    else {
+      return (
+        <IconView 
+          name="exit" 
+          theme="primary" 
+          size={13}
+          onPress={toggleSearch}
+        />
+      );
+    }
 
     return <></>;
   };
 
   return (
     <View style={styles.container}>
-      <InputTextField 
-        value={currentSearchValue}
-        placeholder={i18n.t('Search...')}
-        onChangeText={onChangeText}
-        onSubmitEditing={onSubmitEditing}
-        rightIcon={renderRightIcon()}
-      /> 
+      {!isExpanded && 
+        <IconView 
+          name="search" 
+          theme="clear" 
+          size={22}
+          padding={0}
+          onPress={toggleSearch}
+        /> 
+      }
+
+      {isExpanded && 
+        <InputTextField 
+          value={currentSearchValue}
+          placeholder={i18n.t('Search...')}
+          onChangeText={onChangeText}
+          onSubmitEditing={onSubmitEditing}
+          rightIcon={renderRightIcon()}
+        /> 
+      }
     </View>
   );
 };
