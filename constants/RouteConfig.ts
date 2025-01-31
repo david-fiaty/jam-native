@@ -16,17 +16,25 @@ const routes: any = [
   },
   {
     name: 'login',
+    showHeader: false,
+    showFooter: false,
   },
   {
     name: 'signup',
+    showHeader: false,
+    showFooter: false,
   },
   {
     name: 'about',
     showHeaderSearch: false,
+    showHeader: true,
+    showHeaderButtons: true,
+    showFooter: false,
   },
   {
     name: 'legal',
     showHeaderSearch: false,
+    showFooter: false,
   },
   {
     name: 'account',
