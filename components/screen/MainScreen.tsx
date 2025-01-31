@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
-import { useDispatch, useSelector } from 'react-redux';
-import { setModalConfig } from "@/redux/slices/ModalSlice";
+import { useDispatch } from 'react-redux';
 import { setIsSearching } from "@/redux/slices/SearchSlice";
 import { Colors } from "@/constants/Colors";
 import BoxView from "../view/BoxView";
@@ -12,15 +11,11 @@ import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "../view/SpinnerView";
 import MessageView from "../view/MessageView";
 import ModalConfig from "@/constants/ModalConfig";
+import ModalView from "../view/ModalView";
 
 const MainScreen = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const modalConfig: any = ModalConfig.build();
-
-  const loadModalConfig = useCallback(() => {
-    dispatch(setModalConfig(modalConfig.map(({ component, ...rest }) => ({ ...rest }))));
-  }, []);
 
   const loadSearchResult = async (value?: any) => {
     await SearchManager.getSearchResult(value);
@@ -43,8 +38,6 @@ const MainScreen = () => {
   };
 
   useEffect(() => {
-    loadModalConfig();
-
     (async () => {
       await loadSearchResult();
       setIsLoaded(true);
@@ -67,13 +60,14 @@ const MainScreen = () => {
         direction="column" 
         align="center"
         justify="center"
-        style={[styles.content]}
+        style={styles.content}
       >
         <JamsList />
       </BoxView>
       
       <FooterNavigation />
 
+      <ModalView />
     </BoxView>
   );
 };
