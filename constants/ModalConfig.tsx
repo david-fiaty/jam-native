@@ -1,7 +1,6 @@
 import AddJamToProjectForm from "@/components/form/AddJamToProjectForm";
 import AddProjectForm from "@/components/form/AddProjectForm";
 import JamForm from "@/components/form/JamForm";
-import ProfileForm from "@/components/form/ProfileForm";
 import SelectJamsForm from "@/components/form/SelectJamsForm";
 import CollaboratorsList from "@/components/list/CollaboratorsList";
 import CountriesList from "@/components/list/CountriesList";
@@ -38,10 +37,6 @@ const modals: any = [
   {
     name: 'SelectJamsForm', 
     component: <SelectJamsForm />,
-  },
-  {
-    name: 'ProfileForm', 
-    component: <ProfileForm />,
   },
   {
     name: 'AddJamToProjectForm', 
