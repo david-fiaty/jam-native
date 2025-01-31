@@ -7,6 +7,7 @@ import BackButton from "../button/BackButton";
 import SelectListBase from '../base/SelectListBase';
 import StaticData from '@/constants/StaticData';
 import UserManager from '@/manager/UserManager';
+import ScreenManager from '@/manager/ScreenManager';
 
 const LanguageForm = () => {
   const router = useRouter();
@@ -21,7 +22,7 @@ const LanguageForm = () => {
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Language')}
-        onPress={() => router.back()}
+        onPress={() => ScreenManager.popScreen(router)}
       />
       <SelectListBase
         value={UserManager.getLanguage()}

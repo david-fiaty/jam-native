@@ -9,6 +9,7 @@ import i18n from '@/translation/i18n';
 import UserManager from "@/manager/UserManager";
 import SpinnerView from "../view/SpinnerView";
 import BoxView from "../view/BoxView";
+import ScreenManager from "@/manager/ScreenManager";
 
 const NotificationsMenu = () => {
   const router = useRouter();
@@ -18,10 +19,7 @@ const NotificationsMenu = () => {
   const renderItem = (row: any) => (
     <TouchableOpacity 
       key={row.item.id} 
-      onPress={() => router.push({ 
-        pathname: '/notification', 
-        params: {entityId: row.item.id}, 
-      })}
+      onPress={() => ScreenManager.pushScreen(router, '/notification', { entityId: row.item.id })}
     >
       <View style={Layout.menuItem}>
         <TextView>
