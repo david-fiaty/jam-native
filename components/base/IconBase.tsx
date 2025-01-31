@@ -49,6 +49,9 @@ const icons = {
   return: ({iconStyle, size}: IconProps) => <Ionicons name="return-down-forward-sharp" size={size} style={iconStyle} />,
   like: ({iconStyle, size}: IconProps) => <Ionicons name="heart-outline" size={size} style={iconStyle} />,
   unlike: ({iconStyle, size}: IconProps) => <Ionicons name="heart-dislike-outline" size={size} style={iconStyle} />,
+  filter: ({iconStyle, size}: IconProps) => <Ionicons name="filter-outline" size={size} style={iconStyle} />,
+  exit: ({iconStyle, size}: IconProps) => <Ionicons name="exit-outline" size={size} style={iconStyle} />,
+  refresh: ({iconStyle, size}: IconProps) => <Ionicons name="refresh-outline" size={size} style={iconStyle} />,
 };
 
 const IconBase = ({name, size, containerStyle, iconStyle}: Props) => {
