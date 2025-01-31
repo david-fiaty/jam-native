@@ -23,7 +23,6 @@ import ProfileImageField from "../field/ProfileImageField";
 import IconView from "../view/IconView";
 import ButtonView from "../view/ButtonView";
 import EntityManager from "@/manager/EntityManager";
-import MediaManager from "@/manager/MediaManager";
 import BackButton from "../button/BackButton";
 
 const ProfileForm = () => {

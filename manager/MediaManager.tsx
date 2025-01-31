@@ -1,7 +1,7 @@
 import { Layout } from '@/constants/Layout';
 import { Config } from '@/constants/Config';
 import * as FileSystem from 'expo-file-system';
-import DeviceManager from "@/manager/DeviceManager";
+import ScreenManager from "@/manager/ScreenManager";
 import DataManager from './DataManager';
 
 class MediaManager {
@@ -22,7 +22,7 @@ class MediaManager {
   }
 
   getThumbnailSize () {
-    let windowWidth: any = DeviceManager.window.width;
+    let windowWidth: any = ScreenManager.window.width;
     let imageDim: number = windowWidth / 3 - Layout.space.base * 1.7;
 
     return {

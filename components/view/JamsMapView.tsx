@@ -5,7 +5,7 @@ import RNMapView , { Marker, PROVIDER_GOOGLE, PROVIDER_DEFAULT, Callout } from "
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
-import DeviceManager from "@/manager/DeviceManager";
+import ScreenManager from "@/manager/ScreenManager";
 import i18n from "@/translation/i18n";
 
 const JamsMapView = () => {
@@ -19,7 +19,7 @@ const JamsMapView = () => {
     let latitude = currentLocation?.coords?.latitude || Config.defaultLocation.latitude;
     let longitude = currentLocation?.coords?.longitude || Config.defaultLocation.longitude;
     let latitudeDelta = 0.16;
-    let longitudeDelta = latitudeDelta * (DeviceManager.window.width/DeviceManager.window.height);
+    let longitudeDelta = latitudeDelta * (ScreenManager.window.width/ScreenManager.window.height);
 
     return {
       latitude: latitude,
@@ -62,7 +62,7 @@ const JamsMapView = () => {
 
   useEffect(() => {
     (async () => {
-      setCurrentLocation(await DeviceManager.getLocation());
+      setCurrentLocation(await ScreenManager.getLocation());
     })();
 
     setIsLoaded(true);

@@ -3,6 +3,8 @@ import { StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
+import { View } from "react-native";
+import { Config } from "@/constants/Config";
 import LogoView from "../view/LogoView";
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
@@ -17,11 +19,8 @@ import LinkView from "../view/LinkView";
 import ButtonView from "../view/ButtonView";
 import ScreenManager from "@/manager/ScreenManager";
 import DividerView from "../view/DividerView";
-import SectorsField from "../field/SectorsField";
 import ProfileTypeField from "../field/ProfileTypeField";
 import CountryField from "../field/CountryField";
-import { View } from "react-native";
-import { Config } from "@/constants/Config";
 
 const SignupScreen = () => {
   const router = useRouter();
