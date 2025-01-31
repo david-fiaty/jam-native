@@ -44,7 +44,7 @@ const routes: any = [
   },
   {
     name: 'profile',
-    animation: 'slide',
+    animation: 'default',
     showHeaderSearch: false,
   },
   {
