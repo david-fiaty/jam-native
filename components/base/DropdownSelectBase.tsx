@@ -5,6 +5,7 @@ import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
 import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
+import ScreenManager from "@/manager/ScreenManager";
 
 type Props = {
   data?: {}, 
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     left: 22,
     top: 8,
-    zIndex: 10,
+    zIndex: ScreenManager.getModalIndex(),
     paddingHorizontal: 8,
     fontSize: Layout.fontSize.base,
   },
