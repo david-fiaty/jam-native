@@ -53,6 +53,11 @@ class ScreenManager {
     return activeModals?.[index] || null;
   }
 
+  getModalIndex(): any {
+    return Store.getState().modal.active.length + 1;
+  }
+
+
   toggleModal(name: any, params?: any) {
     Store.dispatch(setActiveModal({
       name: name,
