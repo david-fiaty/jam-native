@@ -1,4 +1,5 @@
-import { StyleSheet } from "react-native";
+import React, { StyleSheet } from "react-native";
+import { useRoute } from '@react-navigation/native';
 import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
 import IconView from "../view/IconView";
@@ -6,16 +7,27 @@ import BoxView from "../view/BoxView";
 import ScreenManager from '@/manager/ScreenManager';
 import ModalButton from "../button/ModalButton";
 import i18n from '@/translation/i18n';
+import ModalConfig from "@/constants/ModalConfig";
+import RouteConfig from "@/constants/RouteConfig";
 
 const containerStyle = ScreenManager.getFooterSize();
 const containerPosition = ScreenManager.getFooterPosition();
 
 const FooterNavigation = () => {
+  const route = useRoute();
   const activeModal: any = ScreenManager.getActiveModal();
+  const currentRouteConfig: any = RouteConfig.getRoutes().find((o: any) => o.name == route.name);
+  const currentModalConfig: any = ModalConfig.build().find((o: any) => o.name == activeModal?.name);
 
   const getIconTheme = (screenName: string) => {
     return activeModal?.name == screenName ? 'secondary' : 'clear';
   };
+
+  const canShowFooter = () => {
+    return currentModalConfig?.showFooter === true || currentRouteConfig?.showFooter === true;
+  };
+
+  if (!canShowFooter()) return <></>;
 
   return (
     <BoxView 

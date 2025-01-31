@@ -11,38 +11,52 @@ const routes: any = [
   },
   {
     name: 'index',
-  },
-  {
-    name: 'welcome',
+    showHeader: false,
+    showFooter: false,
   },
   {
     name: 'login',
+    showHeader: false,
+    showFooter: false,
   },
   {
     name: 'signup',
+    showHeader: false,
+    showFooter: false,
   },
   {
     name: 'about',
+    showHeader: true,
+    showFooter: false,
     showHeaderSearch: false,
+    showHeaderButtons: true,
   },
   {
     name: 'legal',
+    showHeader: true,
+    showFooter: false,
     showHeaderSearch: false,
+    showHeaderButtons: true,
   },
   {
     name: 'account',
+    showHeaderSearch: false,
   },
   {
     name: 'profile',
+    showHeaderSearch: false,
   },
   {
     name: 'password',
+    showHeaderSearch: false,
   },
   {
     name: 'language',
+    showHeaderSearch: false,
   },
   {
     name: 'notification',
+    showHeaderSearch: false,
   },
   {
     name: 'jam',

@@ -35,21 +35,15 @@ const HeaderNavigation = () => {
   };
 
   const canShowHeader = () => {
-    return RouteConfig.isMainRoute(route.name)
-    || currentModalConfig?.showHeader == true
-    || currentRouteConfig?.showHeader == true;
-  };
-
-  const canShowButtons = () => {
-    return RouteConfig.isMainRoute(route.name)
-    || currentModalConfig?.showHeaderButtons == true
-    || currentRouteConfig?.showHeaderButtons == true;
+    return currentModalConfig?.showHeader === true || currentRouteConfig?.showHeader === true;
   };
 
   const canShowSearch = () => {
-    return RouteConfig.isMainRoute(route.name)
-    || currentModalConfig?.showHeaderSearch == true
-    || currentRouteConfig?.showHeaderSearch == true;
+    return currentModalConfig?.showHeaderSearch === true || currentRouteConfig?.showHeaderSearch == true;
+  };
+
+  const canShowButtons = () => {
+    return isLoggedIn && (currentModalConfig?.showHeaderButtons === true || currentRouteConfig?.showHeaderButtons === true);
   };
 
   const renderNotificationsButton = () => {
@@ -150,9 +144,9 @@ const HeaderNavigation = () => {
 
       { canShowButtons() &&
         <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>
-          {renderSearchField()}
-          {isLoggedIn && renderNotificationsButton()}
-          {isLoggedIn && renderSettingsButton()}
+          {canShowSearch() && renderSearchField()}
+          {canShowButtons() && renderNotificationsButton()}
+          {canShowButtons() && renderSettingsButton()}
         </BoxView>
       }
     </BoxView>
