@@ -6,6 +6,7 @@ import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 import UserManager from '@/manager/UserManager';
 import BoxView from '../view/BoxView';
+import ScreenManager from '@/manager/ScreenManager';
 
 const SettingsMenu = () => {
   const router = useRouter();
@@ -15,6 +16,7 @@ const SettingsMenu = () => {
       label: i18n.t('Your profile'),
       path: '/profile',
       onPress: (row: any) => {
+        ScreenManager.toggleModal(null);
         router.push(row.item.path);
       },
     },

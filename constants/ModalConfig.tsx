@@ -1,28 +1,20 @@
 import AddJamToProjectForm from "@/components/form/AddJamToProjectForm";
 import AddProjectForm from "@/components/form/AddProjectForm";
 import JamForm from "@/components/form/JamForm";
-import ProfileForm from "@/components/form/ProfileForm";
 import SelectJamsForm from "@/components/form/SelectJamsForm";
 import CollaboratorsList from "@/components/list/CollaboratorsList";
 import CountriesList from "@/components/list/CountriesList";
 import HostsList from "@/components/list/HostsList";
 import JammersList from "@/components/list/JammersList";
-import JamsList from "@/components/list/JamsList";
 import SectorsList from "@/components/list/SectorsList";
 import NotificationsMenu from "@/components/menu/NotificationsMenu";
 import SettingsMenu from "@/components/menu/SettingsMenu";
-import JamScreen from "@/components/screen/JamScreen";
-import ProjectScreen from "@/components/screen/ProjectScreen";
 import JamsMapView from "@/components/view/JamsMapView";
 import LocationMapView from "@/components/view/LocationMapView";
 import MoreJamActionsView from "@/components/view/MoreJamActionsView";
 import SearchView from "@/components/view/SearchView";
 
 const modals: any = [
-  {
-    name: 'JamsList', 
-    component: <JamsList />,
-  },
   {
     name: 'JamsMapView', 
     component: <JamsMapView />,
@@ -38,10 +30,6 @@ const modals: any = [
   {
     name: 'SelectJamsForm', 
     component: <SelectJamsForm />,
-  },
-  {
-    name: 'ProfileForm', 
-    component: <ProfileForm />,
   },
   {
     name: 'AddJamToProjectForm', 
@@ -86,14 +74,6 @@ const modals: any = [
   {
     name: 'MoreJamActionsView', 
     component: <MoreJamActionsView />,
-  },
-  {
-    name: 'JamScreen', 
-    component: <JamScreen />,
-  },
-  {
-    name: 'ProjectScreen', 
-    component: <ProjectScreen />,
   },
 ];
 
