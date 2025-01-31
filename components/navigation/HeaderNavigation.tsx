@@ -24,7 +24,7 @@ const HeaderNavigation = () => {
   const dispatch = useDispatch();
   const [notificationsCount, setNotificationsCount] = useState<number>(0);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const modalState = useSelector((state: any) => state.modal);
+  const modalState = useSelector((state: any) => state.modal); 
   const activeModal: any = ScreenManager.getActiveModal();
   const isLoggedIn: boolean = UserManager.isLoggedIn();
   const currentRouteConfig: any = RouteConfig.getRoutes().find((o: any) => o.name == route.name);
