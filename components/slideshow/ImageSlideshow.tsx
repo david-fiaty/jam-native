@@ -1,18 +1,18 @@
 import { StyleSheet, View } from "react-native";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
+import { Config } from "@/constants/Config";
 import Slick from "react-native-slick";
 import ImageView from "../view/ImageView";
-import DeviceManager from "@/manager/DeviceManager";
+import ScreenManager from "@/manager/ScreenManager";
 import NoImageView from "../view/NoImageView";
 import MediaManager from "@/manager/MediaManager";
-import { Config } from "@/constants/Config";
 
 type Props = {
   data?: any;
 };
 
-const width = DeviceManager.window.width - Layout.space.base * 2;
+const width = ScreenManager.window.width - Layout.space.base * 2;
 const height = 346;
 
 const ImageSlideshow = ({ data }: Props) => {
