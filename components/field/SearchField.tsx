@@ -64,8 +64,6 @@ const SearchField = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => 
         />
       );
     }
-
-    return <></>;
   };
 
   return (
