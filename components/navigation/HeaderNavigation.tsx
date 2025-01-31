@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
 import { Layout } from '@/constants/Layout';
-import { BaseProps } from '@/constants/Types';
 import { Colors } from "@/constants/Colors";
+import { setIsSearching } from "@/redux/slices/SearchSlice";
+import SearchManager from "@/manager/SearchManager";
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 import LogoView from '../view/LogoView';
@@ -15,16 +17,11 @@ import SearchField from "../field/SearchField";
 import RouteConfig from "@/constants/RouteConfig";
 import ModalConfig from "@/constants/ModalConfig";
 
-type Props = BaseProps & {
-  onSearchEdit?: (value: any) => void;
-  onSearchSubmit?: (value: any) => void;
-  onSearchClear?: () => void;
-};
-
 const headerSize: any = ScreenManager.getHeaderSize();
 
-const HeaderNavigation = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => {
+const HeaderNavigation = () => {
   const route = useRoute();
+  const dispatch = useDispatch();
   const [notificationsCount, setNotificationsCount] = useState<number>(0);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeModal: any = ScreenManager.getActiveModal();
@@ -53,16 +50,6 @@ const HeaderNavigation = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props
     return RouteConfig.isMainRoute(route.name)
     || currentModalConfig?.showHeaderSearch == true
     || currentRouteConfig?.showHeaderSearch == true;
-  };
-
-  const renderSearchField = () => {
-    return (
-      <SearchField 
-        onSearchEdit={onSearchEdit}
-        onSearchSubmit={onSearchSubmit} 
-        onSearchClear={onSearchClear} 
-      />
-    );
   };
 
   const renderNotificationsButton = () => {
@@ -109,8 +96,39 @@ const HeaderNavigation = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props
     );
   };
 
+  const renderSearchField = () => {
+    return (
+      <SearchField 
+        onSearchEdit={onSearchEdit}
+        onSearchSubmit={onSearchSubmit} 
+        onSearchClear={onSearchClear} 
+      />
+    );
+  };
+
+  const loadSearchResult = async (value?: any) => {
+    await SearchManager.getSearchResult(value);
+  };
+
+  const onSearchEdit = async (value: any) => {
+    await loadSearchResult(value);
+  };
+
+  const onSearchSubmit = async (value: any) => {
+    dispatch(setIsSearching(true));
+    await loadSearchResult(value);
+    dispatch(setIsSearching(false));
+  };
+
+  const onSearchClear = async () => {
+    dispatch(setIsSearching(true));
+    await SearchManager.clearSearch();
+    dispatch(setIsSearching(false));
+  };
+
   useEffect(() => {
     (async () => {
+      await loadSearchResult();
       setNotificationsCount(await UserManager.getNotifications());
       setIsLoaded(true);
     })();
