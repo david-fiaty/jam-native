@@ -44,7 +44,7 @@ const SettingsMenu = () => {
       path: null,
       onPress: (row: any) => {
         UserManager.logout();
-        router.replace('/welcome');
+        router.replace('/');
       },
     },
   ];
