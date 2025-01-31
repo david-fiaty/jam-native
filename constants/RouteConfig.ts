@@ -23,9 +23,11 @@ const routes: any = [
   },
   {
     name: 'about',
+    showHeaderSearch: false,
   },
   {
     name: 'legal',
+    showHeaderSearch: false,
   },
   {
     name: 'account',

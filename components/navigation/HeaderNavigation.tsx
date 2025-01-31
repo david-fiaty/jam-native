@@ -99,6 +99,7 @@ const HeaderNavigation = () => {
   const renderSearchField = () => {
     return (
       <SearchField 
+        canShow={canShowSearch()}
         onSearchEdit={onSearchEdit}
         onSearchSubmit={onSearchSubmit} 
         onSearchClear={onSearchClear} 
@@ -149,7 +150,7 @@ const HeaderNavigation = () => {
 
       { canShowButtons() &&
         <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>
-          {canShowSearch() && renderSearchField()}
+          {renderSearchField()}
           {isLoggedIn && renderNotificationsButton()}
           {isLoggedIn && renderSettingsButton()}
         </BoxView>
