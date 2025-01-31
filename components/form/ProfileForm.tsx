@@ -84,7 +84,7 @@ const ProfileForm = () => {
     >
       <BackButton
         title={i18n.t('Your profile')}
-        onPress={() => router.back()}
+        onPress={() => ScreenManager.popScreen(router)}
       />
 
       <View style={Layout.formContainer}>

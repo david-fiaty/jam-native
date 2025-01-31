@@ -44,10 +44,6 @@ const ModalView = ({ children }: Props) => {
     return {};
   };
 
-  const renderModalContent = () => {
-    return modalConfig.find((o: any) => o.name == ScreenManager.getActiveModal()?.name)?.component;
-  };
-
   const isModalVisible = () => {
     return modalState.active.length > 0;    
   };
@@ -69,6 +65,10 @@ const ModalView = ({ children }: Props) => {
     }
     
     return <></>;
+  };
+
+  const renderModalContent = () => {
+    return modalConfig.find((o: any) => o.name == ScreenManager.getActiveModal()?.name)?.component;
   };
 
   return (

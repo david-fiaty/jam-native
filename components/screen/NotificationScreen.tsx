@@ -9,12 +9,13 @@ import TextView from '../view/TextView';
 import UserManager from "@/manager/UserManager";
 import i18n from '@/translation/i18n';
 import DividerView from '../view/DividerView';
+import ScreenManager from '@/manager/ScreenManager';
 
 type Props = BaseProps & {
   entityId?: any,
 };
 
-const NotificationScreen = ({entityId}: Props) => {
+const NotificationScreen = ({ entityId }: Props) => {
   const router = useRouter();
   const [notificationsData, setNotificationsData] = useState<any>([]);
   const [entity, setEntity] = useState<any>(null);
@@ -32,7 +33,7 @@ const NotificationScreen = ({entityId}: Props) => {
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Notification') + ' - ' + entity?.content?.content_data?.title}
-        onPress={() => router.back()}
+        onPress={() => ScreenManager.popScreen(router)}
       />
     
       <TextView>{entity?.content?.content_data?.caption}</TextView>
