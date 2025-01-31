@@ -41,6 +41,7 @@ const routes: any = [
   {
     name: 'account',
     showHeaderSearch: false,
+    animation: 'default',
   },
   {
     name: 'profile',
@@ -50,20 +51,25 @@ const routes: any = [
   {
     name: 'password',
     showHeaderSearch: false,
+    animation: 'default',
   },
   {
     name: 'language',
     showHeaderSearch: false,
+    animation: 'default',
   },
   {
     name: 'notification',
     showHeaderSearch: false,
+    animation: 'default',
   },
   {
     name: 'jam',
+    animation: 'default',
   },
   {
     name: 'project',
+    animation: 'default',
   },
 ];
 
