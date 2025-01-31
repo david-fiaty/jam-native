@@ -4,7 +4,6 @@ import { useRouter } from "expo-router";
 import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
-import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
 import ImageView from "../view/ImageView";
 import ScreenManager from "@/manager/ScreenManager";
@@ -13,7 +12,6 @@ import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
 import AddItemButton from "../button/AddItemButton";
 import NoImageView from "../view/NoImageView";
-import BoxView from "../view/BoxView";
 import MediaManager from "@/manager/MediaManager";
 import IconView from "../view/IconView";
 

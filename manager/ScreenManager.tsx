@@ -1,15 +1,32 @@
+import { Dimensions, ScaledSize, StatusBar } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import { setMessage } from '@/redux/slices/MessageSlice';
 import { setActiveModal } from '@/redux/slices/ModalSlice';
 import { Config } from '@/constants/Config';
 import Store from '@/redux/Store';
-import DeviceManager from './DeviceManager';
+
 
 class ScreenManager {
   messageTimeout?: any;
+  screen: ScaledSize;
+  window: ScaledSize;
+  statusBar: object;
+
+  constructor() {
+    this.screen = Dimensions.get('screen');
+    this.window = Dimensions.get('window');
+    this.statusBar = this.getStatusBarSize();
+  }
+
+  getStatusBarSize() {
+    return {
+      height: StatusBar.currentHeight,
+      width: this.window.width,
+    };
+  }
 
   getGridCellSize(numColumns: number) {
-    let value = (DeviceManager.window.width - Layout.space.base*(numColumns + 2))/numColumns; 
+    let value = (this.window.width - Layout.space.base*(numColumns + 2))/numColumns; 
 
     return {
       width: value,
@@ -36,6 +53,10 @@ class ScreenManager {
     return activeModals?.[index] || null;
   }
 
+  getModalIndex(): any {
+    return Store.getState().modal.active.length + 1;
+  }
+
   toggleModal(name: any, params?: any) {
     Store.dispatch(setActiveModal({
       name: name,
@@ -44,7 +65,7 @@ class ScreenManager {
   }
 
   getHeaderSize() {
-    let height: number = DeviceManager.window.height/10;
+    let height: number = this.window.height/10;
 
     if (height < Layout.header.minHeight) {
       height = Layout.header.minHeight;
@@ -54,13 +75,13 @@ class ScreenManager {
     }
 
     return {
-      width: DeviceManager.window.width,
+      width: this.window.width,
       height: height,
     };
   }
 
   getFooterSize() {
-    let height: number = DeviceManager.window.height/16;
+    let height: number = this.window.height/16;
 
     if (height < Layout.footer.minHeight) {
       height = Layout.footer.minHeight;
@@ -70,15 +91,15 @@ class ScreenManager {
     }
 
     return {
-      width: DeviceManager.window.width,
+      width: this.window.width,
       height: height,
     };
   }
 
   getModalSize() {
     return {
-      width: DeviceManager.window.width,
-      height: DeviceManager.window.height - this.getHeaderSize().height - this.getFooterSize().height,
+      width: this.window.width,
+      height: this.window.height - this.getHeaderSize().height - this.getFooterSize().height,
     };
   }
 
@@ -92,7 +113,7 @@ class ScreenManager {
   getFooterPosition() {
     return {
       x: 0, 
-      y: DeviceManager.window.height - this.getFooterSize().height,
+      y: this.window.height - this.getFooterSize().height,
     };
   }
 

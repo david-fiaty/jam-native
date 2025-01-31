@@ -1,9 +1,13 @@
+import { Platform } from 'react-native';
+import { useLocales } from 'expo-localization';
 import { setTokenData, setIsLoggedIn } from '@/redux/slices/UserSlice';
 import { setLanguage } from '@/redux/slices/AppSlice';
 import { Config } from '@/constants/Config';
 import Store from '@/redux/Store';
 import DataManager from './DataManager';
-import DeviceManager from './DeviceManager';
+import * as Location from 'expo-location';
+import * as Device from "expo-device";
+import i18n from '@/translation/i18n';
 
 class UserManager {
   async login(data: any) {
@@ -101,13 +105,6 @@ class UserManager {
     Store.dispatch(setLanguage(languageCode));
   }
 
-  getLanguage() {
-    let userLanguage: string = Store.getState().app.language;
-    let deviceLanguage: any = DeviceManager.getLanguage();
-
-    return userLanguage || deviceLanguage;
-  }
-
   isLoggedIn() {
     return Store.getState().user.isLoggedIn === true;
   }
@@ -115,6 +112,43 @@ class UserManager {
   isAccessTokenValid() {
     // Todo - Validate token duration
   }
+
+  async getLocation() {
+    if (Platform.OS === "android" && !Device.isDevice) {
+      console.log(i18n.t("Location features are not available for virtual devices"));
+      return null;
+    }
+
+    const { status } = await Location.requestForegroundPermissionsAsync();
+
+    if (status !== 'granted') {
+      // Todo - Handle location permission error display
+      return null;
+    }
+
+    let location: any = await Location.getCurrentPositionAsync({});
+    
+    if (!location) {
+      location = {
+        latitude: Config.defaultLocation.latitude,
+        longitude: Config.defaultLocation.longitude,
+      };
+    }
+
+    return location;
+  }
+
+  getLanguage() {
+    let userLanguage: string = Store.getState().app.language;
+    let locales = useLocales();
+
+    if (Array.isArray(locales) && locales.length > 0) {
+      return locales[0].languageCode; 
+    }
+  
+    return userLanguage || Config.fallbackLanguage;
+  };
+
 }
 
 export default (new UserManager());

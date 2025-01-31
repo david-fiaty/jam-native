@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { View } from "react-native";
 import { Layout } from "@/constants/Layout";
-import { BaseProps } from '@/constants/Types';
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";

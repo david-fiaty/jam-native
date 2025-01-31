@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Layout } from '@/constants/Layout';
 import { Colors } from "@/constants/Colors";
 import { setIsSearching } from "@/redux/slices/SearchSlice";
@@ -24,6 +24,7 @@ const HeaderNavigation = () => {
   const dispatch = useDispatch();
   const [notificationsCount, setNotificationsCount] = useState<number>(0);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const modalState = useSelector((state: any) => state.modal);
   const activeModal: any = ScreenManager.getActiveModal();
   const isLoggedIn: boolean = UserManager.isLoggedIn();
   const currentRouteConfig: any = RouteConfig.getRoutes().find((o: any) => o.name == route.name);

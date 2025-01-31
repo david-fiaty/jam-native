@@ -25,16 +25,18 @@ const ModalView = ({ children }: Props) => {
 
   const getModalContainerStyle = (): any => {
     if (isModalVisible()) {
-      let modalPosition: any = ScreenManager.getModalPosition();
-      let modalSize: any = ScreenManager.getModalSize();
+      let position: any = ScreenManager.getModalPosition();
+      let size: any = ScreenManager.getModalSize();
+      let zIndex: number = ScreenManager.getModalIndex();
 
       return {
         position: 'absolute',
-        top: modalPosition.y,
-        left: modalPosition.x,
-        width: modalSize.width,
-        height: modalSize.height,
+        top: position.y,
+        left: position.x,
+        width: size.width,
+        height: size.height,
         backgroundColor: Colors.white,
+        zIndex: zIndex,
         margin: 0,
       };
     }

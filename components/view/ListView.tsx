@@ -1,7 +1,7 @@
 import { StyleSheet, FlatList } from "react-native";
 import { BaseProps } from "@/constants/Types";
 import { Config } from "@/constants/Config";
-import DeviceManager from "@/manager/DeviceManager";
+import ScreenManager from "@/manager/ScreenManager";
 
 type Props = BaseProps & {
   data: any;
@@ -50,7 +50,7 @@ const ListView = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: DeviceManager.window.width,
+    width: ScreenManager.window.width,
   },
 });
 
