@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useCallback } from "react";
 import { StyleSheet } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { BaseProps } from '@/constants/Types';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
@@ -18,6 +18,10 @@ const ModalView = ({ children }: Props) => {
   const modalState = useSelector((state: any) => state.modal);
   const activeModal: any = ScreenManager.getActiveModal();
   const modalConfig: any = ModalConfig.build();
+
+  const getModalEffects = useCallback(() => {
+    return modalConfig.find((o: any) => o.name == activeModal?.name)?.effects;
+  }, [modalConfig, activeModal]);
 
   const getModalContainerStyle = (): any => {
     if (isModalVisible()) {
@@ -38,20 +42,8 @@ const ModalView = ({ children }: Props) => {
     return {};
   };
 
-  const getModalContentStyle = useCallback((): any => {
-    if (isModalVisible()) {
-      return ScreenManager.getModalSize();
-    }
-
-    return {};
-  }, []);
-
   const renderModalContent = () => {
     return modalConfig.find((o: any) => o.name == ScreenManager.getActiveModal()?.name)?.component;
-  };
-
-  const getModalEffects = () => {
-    return modalConfig.find((o: any) => o.name == activeModal?.name)?.effects;
   };
 
   const isModalVisible = () => {
@@ -87,8 +79,8 @@ const ModalView = ({ children }: Props) => {
       style={getModalContainerStyle()}
       hideModalContentWhileAnimating={true}
     >
-      { !children?.length && renderModalTitle()}
-      { !children?.length && renderModalContent()}
+      {!children?.length && renderModalTitle()}
+      {!children?.length && renderModalContent()}
         
       {children}
     </Modal>
