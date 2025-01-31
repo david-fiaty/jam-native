@@ -26,30 +26,37 @@ const routes: any = [
   },
   {
     name: 'about',
-    showHeaderSearch: false,
     showHeader: true,
-    showHeaderButtons: true,
     showFooter: false,
+    showHeaderSearch: false,
+    showHeaderButtons: true,
   },
   {
     name: 'legal',
-    showHeaderSearch: false,
+    showHeader: true,
     showFooter: false,
+    showHeaderSearch: false,
+    showHeaderButtons: true,
   },
   {
     name: 'account',
+    showHeaderSearch: false,
   },
   {
     name: 'profile',
+    showHeaderSearch: false,
   },
   {
     name: 'password',
+    showHeaderSearch: false,
   },
   {
     name: 'language',
+    showHeaderSearch: false,
   },
   {
     name: 'notification',
+    showHeaderSearch: false,
   },
   {
     name: 'jam',
