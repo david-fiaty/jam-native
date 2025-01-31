@@ -11,9 +11,12 @@ const routes: any = [
   },
   {
     name: 'index',
+    showHeader: false,
+    showFooter: false,
   },
   {
     name: 'welcome',
+    showHeader: false,
   },
   {
     name: 'login',
