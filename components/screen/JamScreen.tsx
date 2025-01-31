@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import { BaseProps } from '@/constants/Types';
 import BoxView from "../view/BoxView";
@@ -13,6 +14,7 @@ type Props = BaseProps & {
 };
 
 const JamScreen = ({ idArray, title }: Props) => {
+  const router = useRouter();
   const screenTitle = title?.length ? title : i18n.t('Back');
   const activeModal: any = ScreenManager.getActiveModal();
   idArray = idArray?.length ? idArray : activeModal?.params?.idArray;
@@ -22,7 +24,7 @@ const JamScreen = ({ idArray, title }: Props) => {
       <BoxView direction="column" align="center" style={Layout.backButtonContainer}>
         <BackButton
           title={screenTitle}
-          onPress={() => ScreenManager.toggleModal('JamScreen')}
+          onPress={() => ScreenManager.popScreen(router)}
         />
       </BoxView>
       <BoxView style={Layout.mainContent}>

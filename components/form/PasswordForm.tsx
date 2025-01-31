@@ -44,7 +44,7 @@ const PasswordForm = () => {
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Change password')}
-        onPress={() => router.back()}
+        onPress={() => ScreenManager.popScreen(router)}
       />
       
       <InputTextField 
