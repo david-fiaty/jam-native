@@ -43,7 +43,7 @@ const HeaderNavigation = () => {
   };
 
   const canShowSearch = () => {
-    return currentModalConfig?.showHeaderSearch === true || currentRouteConfig?.showHeaderSearch === true;
+    return currentModalConfig?.showHeaderSearch === true || currentRouteConfig?.showHeaderSearch == true;
   };
 
   const renderNotificationsButton = () => {
