@@ -18,14 +18,20 @@ class ScreenManager {
     this.statusBar = this.getStatusBarSize();
   }
 
-  pushScreen(router: any, path: string) {
+  pushScreen(router: any, path: string, params?: any) {
     this.toggleModal(null);
-    router.push(path);
+    router.push({
+      pathname: path,
+      params: params,
+    });
   }
 
-  replaceScreen(router: any, path: string) {
+  replaceScreen(router: any, path: string, params?: any) {
     this.toggleModal(null);
-    router.replace(path);
+    router.replace({
+      pathname: path,
+      params: params,
+    });
   }
 
   getStatusBarSize() {
