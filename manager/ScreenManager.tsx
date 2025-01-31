@@ -26,6 +26,10 @@ class ScreenManager {
     });
   }
 
+  popScreen(router: any) {
+    router.back();
+  }
+
   replaceScreen(router: any, path: string, params?: any) {
     this.toggleModal(null);
     router.replace({
