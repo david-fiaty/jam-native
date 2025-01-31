@@ -78,14 +78,14 @@ class ScreenManager {
   getModalSize() {
     return {
       width: DeviceManager.window.width,
-      height: DeviceManager.window.height - this.getHeaderSize().height - this.getFooterSize().height - Layout.space.base,
+      height: DeviceManager.window.height - this.getHeaderSize().height - this.getFooterSize().height,
     };
   }
 
   getModalPosition() {
     return {
       x: 0,
-      y: this.getHeaderSize().height + Layout.space.base,
+      y: this.getHeaderSize().height,
     };
   }
 
