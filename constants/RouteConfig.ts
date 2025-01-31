@@ -15,10 +15,6 @@ const routes: any = [
     showFooter: false,
   },
   {
-    name: 'welcome',
-    showHeader: false,
-  },
-  {
     name: 'login',
   },
   {
