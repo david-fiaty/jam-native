@@ -25,6 +25,8 @@ const AboutScreen = () => {
   const renderComponent = useCallback(() => {
     return (
       <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.screenContent}>
+        <HeaderNavigation />
+        
         <BackButton
           title={i18n.t('About')}
           onPress={() => router.back()}

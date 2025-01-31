@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Colors } from "@/constants/Colors";
 import BoxView from "../view/BoxView";
+import FooterNavigation from "../navigation/FooterNavigation";
 import JamsList from "../list/JamsList";
+import HeaderNavigation from "../navigation/HeaderNavigation";
 import SpinnerView from "../view/SpinnerView";
 import ModalConfig from "@/constants/ModalConfig";
 
@@ -19,6 +21,8 @@ const MainScreen = () => {
 
   return (  
     <BoxView direction="column" align="center" style={styles.container}>
+      <HeaderNavigation />
+
       <BoxView 
         direction="column" 
         align="center"
@@ -27,6 +31,8 @@ const MainScreen = () => {
       >
         <JamsList />
       </BoxView>
+      
+      <FooterNavigation />
     </BoxView>
   );
 };
