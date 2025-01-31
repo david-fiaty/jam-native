@@ -7,6 +7,8 @@ import * as ExpoSplashScreen from 'expo-splash-screen';
 import Store from "@/redux/Store";
 import RouteConfig from '@/constants/RouteConfig';
 import ModalConfig from '@/constants/ModalConfig';
+import ModalView from '@/components/view/ModalView';
+import MessageView from '@/components/view/MessageView';
 
 ExpoSplashScreen.preventAutoHideAsync();
 
@@ -35,6 +37,8 @@ const RootLayout = () => {
 
   return (
     <Provider store={Store}>
+      <MessageView />
+
       <Stack>
         {routes.map((o: any) => (
           <Stack.Screen 
@@ -44,6 +48,8 @@ const RootLayout = () => {
           />
         ))}
       </Stack>
+
+      <ModalView />
     </Provider>
   );
 }
