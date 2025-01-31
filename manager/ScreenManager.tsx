@@ -18,6 +18,16 @@ class ScreenManager {
     this.statusBar = this.getStatusBarSize();
   }
 
+  pushScreen(router: any, path: string) {
+    this.toggleModal(null);
+    router.push(path);
+  }
+
+  replaceScreen(router: any, path: string) {
+    this.toggleModal(null);
+    router.replace(path);
+  }
+
   getStatusBarSize() {
     return {
       height: StatusBar.currentHeight,
