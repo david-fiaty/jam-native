@@ -38,12 +38,12 @@ const HeaderNavigation = () => {
     return currentModalConfig?.showHeader === true || currentRouteConfig?.showHeader === true;
   };
 
-  const canShowButtons = () => {
-    return currentModalConfig?.showHeaderButtons === true || currentRouteConfig?.showHeaderButtons === true;
-  };
-
   const canShowSearch = () => {
     return currentModalConfig?.showHeaderSearch === true || currentRouteConfig?.showHeaderSearch == true;
+  };
+
+  const canShowButtons = () => {
+    return isLoggedIn && (currentModalConfig?.showHeaderButtons === true || currentRouteConfig?.showHeaderButtons === true);
   };
 
   const renderNotificationsButton = () => {
@@ -144,9 +144,9 @@ const HeaderNavigation = () => {
 
       { canShowButtons() &&
         <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>
-          {renderSearchField()}
-          {isLoggedIn && renderNotificationsButton()}
-          {isLoggedIn && renderSettingsButton()}
+          {canShowSearch() && renderSearchField()}
+          {canShowButtons() && renderNotificationsButton()}
+          {canShowButtons() && renderSettingsButton()}
         </BoxView>
       }
     </BoxView>
