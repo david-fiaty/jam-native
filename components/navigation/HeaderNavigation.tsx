@@ -35,15 +35,15 @@ const HeaderNavigation = () => {
   };
 
   const canShowHeader = () => {
-    return currentModalConfig?.showHeader == true || currentRouteConfig?.showHeader == true;
+    return currentModalConfig?.showHeader === true || currentRouteConfig?.showHeader === true;
   };
 
   const canShowButtons = () => {
-    return currentModalConfig?.showHeaderButtons == true || currentRouteConfig?.showHeaderButtons == true;
+    return currentModalConfig?.showHeaderButtons === true || currentRouteConfig?.showHeaderButtons === true;
   };
 
   const canShowSearch = () => {
-    return currentModalConfig?.showHeaderSearch == true || currentRouteConfig?.showHeaderSearch == true;
+    return currentModalConfig?.showHeaderSearch === true || currentRouteConfig?.showHeaderSearch === true;
   };
 
   const renderNotificationsButton = () => {
