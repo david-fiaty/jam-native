@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import React, { StyleSheet } from "react-native";
 import { useRoute } from '@react-navigation/native';
 import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
@@ -26,6 +26,8 @@ const FooterNavigation = () => {
   const canShowFooter = () => {
     return currentModalConfig?.showFooter === true || currentRouteConfig?.showFooter === true;
   };
+
+  if (!canShowFooter()) return <></>;
 
   return (
     <BoxView 
