@@ -2,7 +2,6 @@ import { useRouter } from "expo-router";
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import UserManager from '@/manager/UserManager';
 import ScreenManager from '@/manager/ScreenManager';
-import ScreenView from "../view/ScreenView";
 
 type Props = {
   name?: any;
@@ -41,14 +40,12 @@ const ModalButton = ({ name, backTitle, entityId, login, trigger, triggerAlign, 
   };
   
   return (  
-    <ScreenView>
-      <TouchableOpacity
-        onPress={() => toggleModal(true)}
-        style={[styles.triggerButton, triggerStyle]}
-      >
-        {trigger}
-      </TouchableOpacity>
-    </ScreenView>
+    <TouchableOpacity
+      onPress={() => toggleModal(true)}
+      style={[styles.triggerButton, triggerStyle]}
+    >
+      {trigger}
+    </TouchableOpacity>
   );
 };
 
