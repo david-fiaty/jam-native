@@ -6,22 +6,15 @@ import CollaboratorsList from "@/components/list/CollaboratorsList";
 import CountriesList from "@/components/list/CountriesList";
 import HostsList from "@/components/list/HostsList";
 import JammersList from "@/components/list/JammersList";
-import JamsList from "@/components/list/JamsList";
 import SectorsList from "@/components/list/SectorsList";
 import NotificationsMenu from "@/components/menu/NotificationsMenu";
 import SettingsMenu from "@/components/menu/SettingsMenu";
-import JamScreen from "@/components/screen/JamScreen";
-import ProjectScreen from "@/components/screen/ProjectScreen";
 import JamsMapView from "@/components/view/JamsMapView";
 import LocationMapView from "@/components/view/LocationMapView";
 import MoreJamActionsView from "@/components/view/MoreJamActionsView";
 import SearchView from "@/components/view/SearchView";
 
 const modals: any = [
-  {
-    name: 'JamsList', 
-    component: <JamsList />,
-  },
   {
     name: 'JamsMapView', 
     component: <JamsMapView />,
@@ -81,14 +74,6 @@ const modals: any = [
   {
     name: 'MoreJamActionsView', 
     component: <MoreJamActionsView />,
-  },
-  {
-    name: 'JamScreen', 
-    component: <JamScreen />,
-  },
-  {
-    name: 'ProjectScreen', 
-    component: <ProjectScreen />,
   },
 ];
 
