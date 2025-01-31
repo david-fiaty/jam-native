@@ -9,9 +9,7 @@ import JamsList from "../list/JamsList";
 import HeaderNavigation from "../navigation/HeaderNavigation";
 import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "../view/SpinnerView";
-import MessageView from "../view/MessageView";
 import ModalConfig from "@/constants/ModalConfig";
-import ModalView from "../view/ModalView";
 
 const MainScreen = () => {
   const dispatch = useDispatch();
@@ -48,8 +46,6 @@ const MainScreen = () => {
 
   return (  
     <BoxView direction="column" align="center" style={styles.container}>
-      <MessageView />
-
       <HeaderNavigation 
         onSearchEdit={async (value: any) => await onSearchEdit(value)} 
         onSearchSubmit={async (value: any) => await onSearchSubmit(value)} 
@@ -66,8 +62,6 @@ const MainScreen = () => {
       </BoxView>
       
       <FooterNavigation />
-
-      <ModalView />
     </BoxView>
   );
 };
