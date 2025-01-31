@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { BaseProps } from '@/constants/Types';
+import * as Animatable from 'react-native-animatable';
 import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
 import i18n from '@/translation/i18n';
@@ -84,21 +85,34 @@ const SearchField = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => 
         /> 
       }
 
-      {isExpanded && 
-        <InputTextField 
-          value={currentSearchValue}
-          placeholder={i18n.t('Search...')}
-          onChangeText={onChangeText}
-          onSubmitEditing={onSubmitEditing}
-          rightIcon={renderRightIcon()}
-        /> 
-      }
+    
+        <Animatable.View 
+          style={[styles.animated, (isExpanded ? styles.expanded : {})]}
+          transition="width"
+          duration={300}
+        >
+          <InputTextField 
+            value={currentSearchValue}
+            placeholder={i18n.t('Search...')}
+            onChangeText={onChangeText}
+            onSubmitEditing={onSubmitEditing}
+            rightIcon={renderRightIcon()}
+          /> 
+        </Animatable.View>
+
     </BoxView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    width: '100%',
+  },
+  animated: {
+    overflow: 'hidden',
+    width: '0%',
+  },
+  expanded: {
     width: '100%',
   },
 });
