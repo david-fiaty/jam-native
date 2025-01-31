@@ -15,18 +15,43 @@ const MoreJamActionsView = () => {
   const [isEntityOwner, setIsEntityOwner] = useState<boolean>(false);
   const entityId: number = ScreenManager.getModalEntityId();
   
+
+  const saveJam = async () => {
+    let result: any = await EntityManager.saveJam(entityId);
+    
+    let message: any = {
+      title: i18n.t('Save Jam'),
+      content: i18n.t('Jam successfully save.'),
+    };
+
+    if (result?.error) message.content = i18n.t(result.error)
+    ScreenManager.showMessage(message);
+  };
+
+  const likeJam = async () => {
+    let result: any = await EntityManager.likeJam(entityId);
+    
+    let message: any = {
+      title: i18n.t('Like Jam'),
+      content: i18n.t('Jam successfully liked.'),
+    };
+
+    if (result?.error) message.content = i18n.t(result.error)
+    ScreenManager.showMessage(message);
+  };
+
   const actions: any = [
     {
       label: i18n.t('Save Jam'),
       icon: 'save',
       canDisplay: () => true,
-      onPress: () => ScreenManager.toggleModal('SavedJamAction', { entityId: entityId }),
+      onPress: () => saveJam(),
     },
     {
       label: i18n.t('Like Jam'),
       icon: 'like',
       canDisplay: () => true,
-      onPress: () => ScreenManager.toggleModal('LikedJamAction', { entityId: entityId }),
+      onPress: () => likeJam(),
     },
     {
       label: i18n.t('Share Jam'),
