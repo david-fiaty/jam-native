@@ -4,13 +4,17 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { BaseProps } from '@/constants/Types';
 import HeaderNavigation from '../navigation/HeaderNavigation';
 import FooterNavigation from '../navigation/FooterNavigation';
+import ModalView from '@/components/view/ModalView';
+import MessageView from '@/components/view/MessageView';
 
 const ScreenView = ({style, children}: BaseProps) => {
   return (
     <SafeAreaView style={[styles.container, style]}>
+      <MessageView />
       <HeaderNavigation />
       {children}
       <FooterNavigation />
+      <ModalView />
     </SafeAreaView>
   );
 };
