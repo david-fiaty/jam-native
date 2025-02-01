@@ -32,11 +32,7 @@ const HeaderNavigation = () => {
   const containerStyle: any = ScreenManager.getHeaderSize();
 
   const getIconTheme = (screenName: string) => {
-    if (activeModal?.name == screenName && activeModal?.visible === true) {
-      return 'primary';
-    }
-
-    return 'secondary';
+    return activeModal?.name == screenName ? 'primary' : 'secondary';
   };
 
   const canShowHeader = () => {
