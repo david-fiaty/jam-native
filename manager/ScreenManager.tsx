@@ -2,7 +2,6 @@ import { Dimensions, ScaledSize, StatusBar } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import { setMessage } from '@/redux/slices/MessageSlice';
 import { setActiveModal } from '@/redux/slices/ModalSlice';
-import { setActiveRoute } from '@/redux/slices/RouteSlice';
 import { Config } from '@/constants/Config';
 import Store from '@/redux/Store';
 
@@ -27,10 +26,6 @@ class ScreenManager {
     }
 
     Store.dispatch(setActiveModal(activeModals));
-    Store.dispatch(setActiveRoute([{
-      path: path,
-      params: params,
-    }]));
 
     router.push({
       pathname: path,
