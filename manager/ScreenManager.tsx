@@ -39,11 +39,39 @@ class ScreenManager {
   }
 
   toggleModal(name: any, params?: any) {
+    let activeModals: any = {...Store.getState().modal.active};
+    let modalIndex: any = activeModals.findIndex((o: any) => o.name == name);
+
+    if (!name) {
+      activeModals = [];
+    }
+    else if (modalIndex === -1)  {
+      activeModals.push({
+        name: name,
+        params: params,
+        visible: true,
+      });
+    }
+    else if (activeModals[modalIndex]?.visible === true) {
+      activeModals[modalIndex].visible = false;
+    }
+    else if (activeModals[modalIndex]?.visible === false) {
+
+    }
+
+    Store.dispatch(setActiveModal(activeModals));
+  }
+
+  /*
+
+    toggleModal(name: any, params?: any) {
     Store.dispatch(setActiveModal({
       name: name,
       params: params,
     }));
   }
+
+  */
 
   getActiveModal(): any {
     let activeModals: any = Store.getState().modal.active;
