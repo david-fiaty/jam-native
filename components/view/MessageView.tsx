@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     top: 0,      
     left: 0, 
     right: 0,
-    zIndex: ScreenManager.getModalIndex(),
+    zIndex: ScreenManager.getModalZIndex(),
     backgroundColor: Colors.primary,
     color: Colors.white,
     padding: Layout.space.base*1.6,

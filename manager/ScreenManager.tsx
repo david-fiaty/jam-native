@@ -38,6 +38,76 @@ class ScreenManager {
     });
   }
 
+  toggleModal(name: any, params?: any) {
+    let activeModals: any = [...Store.getState().modal.active];
+    let modalIndex: any = activeModals.findIndex((o: any) => o.name == name);
+
+    if (!name) {
+      activeModals = [];
+    }
+    else if (modalIndex === -1)  {
+      activeModals.push({
+        name: name,
+        params: params,
+        visible: true,
+      });
+    }
+    else if (activeModals[modalIndex]?.visible === true) {
+      activeModals[modalIndex] = {...activeModals[modalIndex], ...{ visible: false }};
+    }
+    else if (activeModals[modalIndex]?.visible === false) {
+      activeModals[modalIndex] = {...activeModals[modalIndex], ...{ visible: true }};
+    }
+    else {
+      activeModals.splice(modalIndex, 1);
+    }
+
+    Store.dispatch(setActiveModal(activeModals));
+  }
+
+  getActiveModal(): any {
+    let activeModals: any[] = Store.getState().modal.active;
+    let visibleModals: any[] = activeModals.filter((o: any) => o?.visible === true);
+    
+    if (visibleModals.length > 0) {
+      return visibleModals[visibleModals.length - 1];
+    }
+    else if (activeModals.length > 0) {
+      return activeModals[activeModals.length -1];
+    }
+    
+    return null;
+  }
+
+  getModalZIndex(): any {
+    return Store.getState().modal.active.length + 1;
+  }
+
+  getModalEntityId(): any {
+    return this.getActiveModal()?.params?.entityId;
+  }
+
+  getModalFormState() {
+    let reducer: any = this.getActiveModal().params.reducer;
+    let storeState: any = Store.getState(); 
+    
+    return storeState[reducer];
+  }
+
+  getModalSize() {
+    return {
+      width: this.window.width,
+      height: this.window.height - this.getHeaderSize().height - this.getFooterSize().height,
+    };
+  }
+
+  getModalPosition() {
+    return {
+      x: 0,
+      y: this.getHeaderSize().height,
+    };
+  }
+
   getStatusBarSize() {
     return {
       height: StatusBar.currentHeight,
@@ -52,36 +122,6 @@ class ScreenManager {
       width: value,
       height: value,
     };
-  }
-
-  getModalEntityId(): any {
-    return this.getActiveModal()?.params?.entityId;
-  }
-
-  getModalFormState() {
-    let reducer: any = this.getActiveModal().params.reducer;
-    let storeState: any = Store.getState(); 
-    
-    return storeState[reducer];
-  }
-
-  getActiveModal(): any {
-    let activeModals: any = Store.getState().modal.active;
-    let length: number = activeModals?.length;
-    let index: number = length > 0 ? length - 1 : 0; 
-
-    return activeModals?.[index] || null;
-  }
-
-  getModalIndex(): any {
-    return Store.getState().modal.active.length + 1;
-  }
-
-  toggleModal(name: any, params?: any) {
-    Store.dispatch(setActiveModal({
-      name: name,
-      params: params,
-    }));
   }
 
   getHeaderSize() {
@@ -113,20 +153,6 @@ class ScreenManager {
     return {
       width: this.window.width,
       height: height,
-    };
-  }
-
-  getModalSize() {
-    return {
-      width: this.window.width,
-      height: this.window.height - this.getHeaderSize().height - this.getFooterSize().height,
-    };
-  }
-
-  getModalPosition() {
-    return {
-      x: 0,
-      y: this.getHeaderSize().height,
     };
   }
 

@@ -33,9 +33,9 @@ const SelectJamsForm = () => {
     let index: number = findItemIndex(row);
 
     if (index === -1) selectedIdsList.push(row.item.id);
-    else delete selectedIdsList[index];
+    else selectedIdsList.splice(index, 1);
 
-    setSelectedIds(selectedIdsList.filter(Boolean));
+    setSelectedIds(selectedIdsList);
   };
 
   const addSelection = () => {    

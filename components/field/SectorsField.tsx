@@ -44,8 +44,7 @@ const SectorsField = ({ resource, field, label, onPressEvent, onDeleteEvent }: P
     let selectedIds: any[] = [...(formData?.[fieldName] || [])];
     let deleteIndex: number = selectedIds.findIndex((id: any) => id == item.id);
 
-    if (deleteIndex !== -1) delete selectedIds[deleteIndex];
-    selectedIds = selectedIds.filter(Boolean);
+    if (deleteIndex !== -1) selectedIds.splice(deleteIndex, 1);
 
     let parentIds: any = sectorsData.map((o: any) => o.id);
     for (const id of selectedIds) {
@@ -56,8 +55,7 @@ const SectorsField = ({ resource, field, label, onPressEvent, onDeleteEvent }: P
 
         if (deleteItem) {
           let index = selectedIds.findIndex((v: any) => v == id);
-          delete selectedIds[index];
-          selectedIds = selectedIds.filter(Boolean);
+          selectedIds.splice(index, 1);
         }
       }
     }

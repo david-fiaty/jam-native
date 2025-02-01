@@ -27,7 +27,7 @@ const ModalView = ({ children }: Props) => {
     if (isModalVisible()) {
       let position: any = ScreenManager.getModalPosition();
       let size: any = ScreenManager.getModalSize();
-      let zIndex: number = ScreenManager.getModalIndex();
+      let zIndex: number = ScreenManager.getModalZIndex();
 
       return {
         position: 'absolute',
@@ -45,7 +45,10 @@ const ModalView = ({ children }: Props) => {
   };
 
   const isModalVisible = () => {
-    return modalState.active.length > 0;    
+    let activeModals: any = modalState.active;
+    let activeCount: number = activeModals.length;
+
+    return activeCount > 0 && activeModals[activeCount - 1]?.visible === true;    
   };
 
   const renderModalTitle = () => {
