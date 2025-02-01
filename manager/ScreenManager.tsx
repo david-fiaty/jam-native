@@ -38,31 +38,11 @@ class ScreenManager {
     });
   }
 
-  getStatusBarSize() {
-    return {
-      height: StatusBar.currentHeight,
-      width: this.window.width,
-    };
-  }
-
-  getGridCellSize(numColumns: number) {
-    let value = (this.window.width - Layout.space.base*(numColumns + 2))/numColumns; 
-
-    return {
-      width: value,
-      height: value,
-    };
-  }
-
-  getModalEntityId(): any {
-    return this.getActiveModal()?.params?.entityId;
-  }
-
-  getModalFormState() {
-    let reducer: any = this.getActiveModal().params.reducer;
-    let storeState: any = Store.getState(); 
-    
-    return storeState[reducer];
+  toggleModal(name: any, params?: any) {
+    Store.dispatch(setActiveModal({
+      name: name,
+      params: params,
+    }));
   }
 
   getActiveModal(): any {
@@ -77,11 +57,45 @@ class ScreenManager {
     return Store.getState().modal.active.length + 1;
   }
 
-  toggleModal(name: any, params?: any) {
-    Store.dispatch(setActiveModal({
-      name: name,
-      params: params,
-    }));
+  getModalEntityId(): any {
+    return this.getActiveModal()?.params?.entityId;
+  }
+
+  getModalFormState() {
+    let reducer: any = this.getActiveModal().params.reducer;
+    let storeState: any = Store.getState(); 
+    
+    return storeState[reducer];
+  }
+
+  getModalSize() {
+    return {
+      width: this.window.width,
+      height: this.window.height - this.getHeaderSize().height - this.getFooterSize().height,
+    };
+  }
+
+  getModalPosition() {
+    return {
+      x: 0,
+      y: this.getHeaderSize().height,
+    };
+  }
+
+  getStatusBarSize() {
+    return {
+      height: StatusBar.currentHeight,
+      width: this.window.width,
+    };
+  }
+
+  getGridCellSize(numColumns: number) {
+    let value = (this.window.width - Layout.space.base*(numColumns + 2))/numColumns; 
+
+    return {
+      width: value,
+      height: value,
+    };
   }
 
   getHeaderSize() {
@@ -113,20 +127,6 @@ class ScreenManager {
     return {
       width: this.window.width,
       height: height,
-    };
-  }
-
-  getModalSize() {
-    return {
-      width: this.window.width,
-      height: this.window.height - this.getHeaderSize().height - this.getFooterSize().height,
-    };
-  }
-
-  getModalPosition() {
-    return {
-      x: 0,
-      y: this.getHeaderSize().height,
     };
   }
 
