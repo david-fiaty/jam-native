@@ -19,7 +19,12 @@ class ScreenManager {
   }
 
   pushScreen(router: any, path: string, params?: any) {
-    let visibleModal: any = this.getLastVisibleModal();
+    let activeModals: any = [...Store.getState().modal.active];
+    let lastVisibleIndex = activeModals.map((o: any) => o?.visible).lastIndexOf(true);
+
+    if (lastVisibleIndex !== -1) {
+      activeModals[lastVisibleIndex] = {...activeModals[lastVisibleIndex], ...{visible: false}};
+    }
 
     router.push({
       pathname: path,
@@ -28,6 +33,13 @@ class ScreenManager {
   }
 
   popScreen(router: any) {
+    let activeModals: any = [...Store.getState().modal.active];
+    let lastVisibleIndex = activeModals.map((o: any) => o?.visible).lastIndexOf(true);
+
+    if (lastVisibleIndex !== -1) {
+      activeModals[lastVisibleIndex] = {...activeModals[lastVisibleIndex], ...{visible: true}};
+    }
+
     router.back();
   }
 
@@ -37,13 +49,6 @@ class ScreenManager {
       pathname: path,
       params: params,
     });
-  }
-
-  getLastVisibleModal() {
-    let activeModals: any[] = [...Store.getState().modal.active];
-    let lastVisible: any = activeModals.slice().reverse().find((o: any) => o?.visible === true);
-
-    return lastVisible || null;
   }
 
   toggleModal(name: any, params?: any) {
