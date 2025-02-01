@@ -45,7 +45,10 @@ const ModalView = ({ children }: Props) => {
   };
 
   const isModalVisible = () => {
-    return modalState.active.length > 0;    
+    let activeModals: any = modalState.active;
+    let activeCount: number = activeModals.length;
+
+    return activeCount > 0 && activeModals[activeCount - 1]?.visible === true;    
   };
 
   const renderModalTitle = () => {
