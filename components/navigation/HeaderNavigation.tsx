@@ -40,8 +40,6 @@ const HeaderNavigation = () => {
   };
 
   const canShowHeader = () => {
-    console.log(currentRouteConfig);
-    
     return currentModalConfig?.showHeader === true || currentRouteConfig?.showHeader === true;
   };
 
