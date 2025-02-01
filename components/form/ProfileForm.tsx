@@ -138,7 +138,7 @@ const ProfileForm = () => {
             const sectorsIds = [...formData?.sectors_ids || []];
             const index = sectorsIds.findIndex((v) => v === item.id);
             if (index !== -1) sectorsIds.splice(index, 1);
-            updateField('sectors_ids', sectorsIds.filter(Boolean));
+            updateField('sectors_ids', sectorsIds);
           }}
         />
 

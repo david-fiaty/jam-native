@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     left: 22,
     top: 8,
-    zIndex: ScreenManager.getModalIndex(),
+    zIndex: ScreenManager.getModalZIndex(),
     paddingHorizontal: 8,
     fontSize: Layout.fontSize.base,
   },

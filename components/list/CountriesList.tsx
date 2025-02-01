@@ -27,12 +27,12 @@ const CountriesList = () => {
     let index: number = selection.findIndex((v: any) => v == item.code);
 
     if (index === -1) selection.push(item.code)
-    else delete selection[index];
+    else selection.splice(index, 1);
 
     dispatch(setFormData<any>({ 
       resource: resource,
       key: fieldName, 
-      value: selection.filter(Boolean),
+      value: selection,
     }));
   };
 

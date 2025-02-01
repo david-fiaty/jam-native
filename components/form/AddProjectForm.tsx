@@ -148,7 +148,7 @@ const AddProjectForm = () => {
             const countriesCodes = [...formData?.scope_countries_codes || []];
             const index = countriesCodes.findIndex((v) => v === item.code);
             if (index !== -1) countriesCodes.splice(index, 1);
-            updateField('scope_countries_codes', countriesCodes.filter(Boolean));
+            updateField('scope_countries_codes', countriesCodes);
           }}
         />
 
@@ -170,7 +170,7 @@ const AddProjectForm = () => {
             const sectorsIds = [...formData?.sectors_ids || []];
             const index = sectorsIds.findIndex((v) => v === item.id);
             if (index !== -1) sectorsIds.splice(index, 1);
-            updateField('sectors_ids', sectorsIds.filter(Boolean));
+            updateField('sectors_ids', sectorsIds);
           }}
         />
 
@@ -202,8 +202,8 @@ const AddProjectForm = () => {
               onDeleteButtonPress={(row: any) => {
                 let selectedIds: any = [...formData?.jams_ids];
                 let index: number = selectedIds.findIndex((id: any) => id == row?.item?.id);
-                delete selectedIds[index];
-                updateField("jams_ids", selectedIds.filter((o: any) => o));
+                selectedIds.splice(index, 1);
+                updateField("jams_ids", selectedIds);
               }}
             />
           </BoxView>
