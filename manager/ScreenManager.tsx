@@ -26,6 +26,8 @@ class ScreenManager {
       activeModals[lastVisibleIndex] = {...activeModals[lastVisibleIndex], ...{visible: false}};
     }
 
+    Store.dispatch(setActiveModal(activeModals));
+
     router.push({
       pathname: path,
       params: params,
@@ -34,11 +36,13 @@ class ScreenManager {
 
   popScreen(router: any) {
     let activeModals: any = [...Store.getState().modal.active];
-    let lastVisibleIndex = activeModals.map((o: any) => o?.visible).lastIndexOf(true);
+    let lastHiddenIndex = activeModals.map((o: any) => o?.visible).lastIndexOf(false);
 
-    if (lastVisibleIndex !== -1) {
-      activeModals[lastVisibleIndex] = {...activeModals[lastVisibleIndex], ...{visible: true}};
+    if (lastHiddenIndex !== -1) {
+      activeModals[lastHiddenIndex] = {...activeModals[lastHiddenIndex], ...{visible: true}};
     }
+
+    Store.dispatch(setActiveModal(activeModals));
 
     router.back();
   }
