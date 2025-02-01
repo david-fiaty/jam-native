@@ -23,6 +23,8 @@ const RootLayout = () => {
 
   const backAction = () => {
       console.log('back pressed');
+      // Todo - Implement back action logic + reset active modal stack
+
       return true;
   };
 
