@@ -3,11 +3,11 @@ import { Stack, useSegments } from 'expo-router';
 import { useFonts } from 'expo-font';
 import { Provider } from 'react-redux';
 import { setModalConfig } from "@/redux/slices/ModalSlice";
+import { setRouteConfig } from '@/redux/slices/RouteSlice';
 import * as ExpoSplashScreen from 'expo-splash-screen';
 import Store from "@/redux/Store";
 import RouteConfig from '@/constants/RouteConfig';
 import ModalConfig from '@/constants/ModalConfig';
-import { setRouteConfig } from '@/redux/slices/RouteSlice';
 
 ExpoSplashScreen.preventAutoHideAsync();
 

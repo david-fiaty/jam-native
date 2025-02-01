@@ -20,10 +20,6 @@ const ModalView = ({ children }: Props) => {
   const modalConfig: any = ModalConfig.build();
   const [modalEffects, setModalEffects] = useState<any>({});
 
-  const getModalEffects = () => {
-
-  };
-
   const getModalContainerStyle = (): any => {
     if (isModalVisible()) {
       let position: any = ScreenManager.getModalPosition();
