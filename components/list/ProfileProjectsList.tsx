@@ -67,9 +67,12 @@ const ProfileProjectsList = ({
       onListItemPress(row);
     }
     else {
-      ScreenManager.toggleModal('ProjectScreen', {
-        idArray: [row.item.id],
-        title: row?.item?.title
+      router.push({
+        pathname: '/project',
+        params: {
+          idArray: [row.item.id],
+          title: row?.item?.title
+        },
       });
     }
   };
