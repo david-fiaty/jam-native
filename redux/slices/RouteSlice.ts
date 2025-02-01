@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const RouteSlice = createSlice({
-  name: 'modal',
+  name: 'route',
   initialState: {
     config: [],
     active: [],
