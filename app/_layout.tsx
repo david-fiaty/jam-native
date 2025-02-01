@@ -7,12 +7,13 @@ import * as ExpoSplashScreen from 'expo-splash-screen';
 import Store from "@/redux/Store";
 import RouteConfig from '@/constants/RouteConfig';
 import ModalConfig from '@/constants/ModalConfig';
+import { setRouteConfig } from '@/redux/slices/RouteSlice';
 
 ExpoSplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
   const segments = useSegments(); 
-  const routes: any = RouteConfig.getRoutes(segments);
+  const routeConfig: any = RouteConfig.getRoutes(segments);
   const modalConfig: any = ModalConfig.build();
 
   const [isLoaded, isError] = useFonts({
@@ -21,6 +22,7 @@ const RootLayout = () => {
 
   const loadModalConfig = useCallback(() => {
     Store.dispatch(setModalConfig(modalConfig.map(({ component, ...rest }) => ({ ...rest }))));
+    Store.dispatch(setRouteConfig(routeConfig));
   }, [modalConfig]);
 
   useEffect(() => {
@@ -36,7 +38,7 @@ const RootLayout = () => {
   return (
     <Provider store={Store}>
       <Stack>
-        {routes.map((o: any) => (
+        {routeConfig.map((o: any) => (
           <Stack.Screen 
             key={o.name}
             name={o.name} 
