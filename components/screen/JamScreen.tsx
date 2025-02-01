@@ -18,7 +18,7 @@ const JamScreen = ({ idArray, title }: Props) => {
   const screenTitle = title?.length ? title : i18n.t('Back');
   const activeModal: any = ScreenManager.getActiveModal();
   idArray = idArray?.length ? idArray : activeModal?.params?.idArray;
-  
+
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={false} style={[Layout.screenContent, styles.container]}>
       <BoxView direction="column" align="center" style={Layout.backButtonContainer}>
