@@ -38,8 +38,7 @@ const CountriesField = ({ resource, field, label, onPressEvent, onDeleteEvent }:
     let selectedCodes: any[] = [...(formData?.[fieldName] || [])];
     let index: number = selectedCodes.findIndex((v: any) => v == item.code);
 
-    if (index !== -1) delete selectedCodes[index];
-    selectedCodes = selectedCodes.filter(Boolean);
+    if (index !== -1) selectedCodes.splice(index);
 
     setSelectedCountries(getSelectedCountries(selectedCodes));
     if (onDeleteEvent) onDeleteEvent(item);

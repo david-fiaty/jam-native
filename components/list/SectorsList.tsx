@@ -37,7 +37,7 @@ const SectorsList = () => {
       selection.push(subItem.id);
     }
     else if (itemIndex !== -1 && subItemIndex !== -1) {
-      delete selection[subItemIndex];
+      selection.splice(subItemIndex);
     }
 
     // Remove parents without sub selection
@@ -45,14 +45,14 @@ const SectorsList = () => {
     let deleteItem: boolean = !selection.some((id: any) => itemChildIds.includes(id));
     if (deleteItem) {
       let index: number = selection.findIndex((id: any) => id == item.id);
-      delete selection[index];
+      selection.splice(index);
     }
 
     // Update selection state
     dispatch(setFormData<any>({ 
       resource: resource,
       key: fieldName, 
-      value: selection.filter((o: any) => o),
+      value: selection,
     }));
   };
 

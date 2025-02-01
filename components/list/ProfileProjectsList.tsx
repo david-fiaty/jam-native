@@ -52,9 +52,8 @@ const ProfileProjectsList = ({
       let index: number = findItemIndex(row);
 
       if (index === -1) selectedIdsList.push(row.item.id);
-      else delete selectedIdsList[index];
+      else selectedIdsList.splice(index);
 
-      selectedIdsList = selectedIdsList.filter(Boolean);
       setSelectedIds(selectedIdsList);
     }
     else {

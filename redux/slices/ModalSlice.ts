@@ -22,8 +22,7 @@ const ModalSlice = createSlice({
         state.active = activeModals; 
       }
       else {
-        delete activeModals[activeModalIndex];
-        state.active = activeModals.filter(Boolean);
+        activeModals.splice(activeModalIndex);
       }
     },
   },
