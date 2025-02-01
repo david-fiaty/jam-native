@@ -9,7 +9,6 @@ import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
 import BoxView from "../view/BoxView";
 import JamListItem from "./ListItem/JamListItem";
-import ScreenManager from "@/manager/ScreenManager";
 
 type Props = {
   title?: any,
@@ -55,9 +54,12 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
       onListItemPress(row);
     }
     else {
-      ScreenManager.toggleModal('JamScreen', {
-        idArray: [row.item.id],
-        title: row?.item?.title
+      router.push({
+        pathname: '/jam',
+        params: {
+          idArray: [row.item.id],
+          title: row?.item?.title
+        },
       });
     }
   };
@@ -90,7 +92,15 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
 
         { allButton && (
           <TouchableOpacity
-            onPress={() => ScreenManager.pushScreen(router, '/jam', { idArray: idArray, title: title })}
+            onPress={() => 
+              router.push({
+                pathname: '/jam',
+                params: {
+                  idArray: idArray,
+                  title: title,
+                },
+              })
+            }
           >
             <TextView underline={true}>{i18n.t("View all")}</TextView>
           </TouchableOpacity> 
