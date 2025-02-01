@@ -8,11 +8,10 @@ import EntityManager from "@/manager/EntityManager";
 import ListItem from "./ProjectsList/ListItem";
 
 type Props = BaseProps & {
-  idArray?: any,
-  showSpinner?: boolean,
+  idArray?: any;
 };
 
-const ProjectsList = ({idArray, showSpinner}: Props) => {
+const ProjectsList = ({ idArray }: Props) => {
   const [projectsData, setProjectsData] = useState<any>([]);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -26,7 +25,7 @@ const ProjectsList = ({idArray, showSpinner}: Props) => {
     })();
   });
 
-  if (!isLoaded && showSpinner) return <SpinnerView />;
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView direction="column" style={Layout.screenContent}>
