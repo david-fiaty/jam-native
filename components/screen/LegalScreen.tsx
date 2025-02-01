@@ -7,6 +7,7 @@ import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 import BackButton from '../button/BackButton';
 import BottomLinks from '../navigation/BottomLinks';
+import ScreenManager from '@/manager/ScreenManager';
 
 const data = {
   title: 'About',
@@ -27,7 +28,7 @@ const LegalScreen = () => {
   
         <BackButton
           title={i18n.t('Legal')}
-          onPress={() => router.back()}
+          onPress={() => ScreenManager.popScreen(router)}
         />
         
         <TextView>{data.text}</TextView> 

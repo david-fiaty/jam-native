@@ -88,16 +88,13 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
       <BoxView direction="row" align="center" justify="space-between">
         { title && <TextView style={styles.title}>{title}</TextView> }
 
-        { allButton && <TouchableOpacity
-          onPress={() =>
-            router.push({
-              pathname: "/jam",
-              params: { idArray: idArray, title: title },
-            })
-          }
-        >
-          <TextView underline={true}>{i18n.t("View all")}</TextView>
-        </TouchableOpacity> }
+        { allButton && (
+          <TouchableOpacity
+            onPress={() => ScreenManager.pushScreen(router, '/jam', { idArray: idArray, title: title })}
+          >
+            <TextView underline={true}>{i18n.t("View all")}</TextView>
+          </TouchableOpacity> 
+        )}
       </BoxView>
 
       {profileJams?.length > 0 && (
