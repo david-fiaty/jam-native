@@ -55,9 +55,12 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
       onListItemPress(row);
     }
     else {
-      ScreenManager.toggleModal('JamScreen', {
-        idArray: [row.item.id],
-        title: row?.item?.title
+      router.push({
+        pathname: '/jam',
+        params: {
+          idArray: [row.item.id],
+          title: row?.item?.title
+        },
       });
     }
   };
