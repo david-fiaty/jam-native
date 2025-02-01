@@ -39,7 +39,7 @@ class ScreenManager {
   }
 
   toggleModal(name: any, params?: any) {
-    let activeModals: any = {...Store.getState().modal.active};
+    let activeModals: any = [...Store.getState().modal.active];
     let modalIndex: any = activeModals.findIndex((o: any) => o.name == name);
 
     if (!name) {
@@ -53,7 +53,7 @@ class ScreenManager {
       });
     }
     else if (activeModals[modalIndex]?.visible === true) {
-      activeModals[modalIndex].visible = false;
+      activeModals[modalIndex] = {...activeModals[modalIndex], ...{ visible: false}};
     }
     else if (activeModals[modalIndex]?.visible === false) {
       activeModals.splice(modalIndex);
