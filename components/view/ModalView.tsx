@@ -27,7 +27,7 @@ const ModalView = ({ children }: Props) => {
     if (isModalVisible()) {
       let position: any = ScreenManager.getModalPosition();
       let size: any = ScreenManager.getModalSize();
-      let zIndex: number = ScreenManager.getModalIndex();
+      let zIndex: number = ScreenManager.getModalZIndex();
 
       return {
         position: 'absolute',
