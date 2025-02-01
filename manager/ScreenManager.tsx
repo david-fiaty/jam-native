@@ -49,6 +49,7 @@ class ScreenManager {
 
   replaceScreen(router: any, path: string, params?: any) {
     this.toggleModal(null);
+    
     router.replace({
       pathname: path,
       params: params,
@@ -83,7 +84,7 @@ class ScreenManager {
   }
 
   getActiveModal(): any {
-    let activeModals: any[] = Store.getState().modal.active;
+    let activeModals: any[] = [...Store.getState().modal.active];
     let visibleModals: any[] = activeModals.filter((o: any) => o?.visible === true);
     
     if (visibleModals.length > 0) {
