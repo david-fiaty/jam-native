@@ -13,16 +13,19 @@ const routes: any = [
     name: 'index',
     showHeader: false,
     showFooter: false,
+    isRoot: true,
   },
   {
     name: 'login',
     showHeader: false,
     showFooter: false,
+    isRoot: true,
   },
   {
     name: 'signup',
     showHeader: false,
     showFooter: false,
+    isRoot: true,
   },
   {
     name: 'about',
@@ -30,6 +33,7 @@ const routes: any = [
     showFooter: false,
     showHeaderSearch: false,
     showHeaderButtons: true,
+    isRoot: true,
   },
   {
     name: 'legal',
@@ -37,6 +41,7 @@ const routes: any = [
     showFooter: false,
     showHeaderSearch: false,
     showHeaderButtons: true,
+    isRoot: true,
   },
   {
     name: 'account',
@@ -89,6 +94,7 @@ const navigation: any = {
   showFooter: true,
   showHeaderButtons: true,
   showHeaderSearch: true,
+  isRoot: false,
 };
 
 class RouteConfig {
