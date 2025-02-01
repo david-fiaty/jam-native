@@ -30,7 +30,7 @@ const ListItemHeader = ({ row }: Props) => {
           onPress={() =>
             isLoggedIn
               ? ScreenManager.toggleModal("HostsList", { entityId: row?.item?.id })
-              : router.push("/login")
+              : ScreenManager.pushScreen(router, '/login')
           }
         >
           <TextView>
@@ -48,7 +48,7 @@ const ListItemHeader = ({ row }: Props) => {
           onPress={() =>
             isLoggedIn
               ? ScreenManager.toggleModal("MoreJamActionsView", { entityId: row?.item?.id })
-              : router.push("/login")
+              : ScreenManager.pushScreen(router, '/login')
           }
         />
       </BoxView>
