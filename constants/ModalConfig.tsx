@@ -9,7 +9,6 @@ import JammersList from "@/components/list/JammersList";
 import SectorsList from "@/components/list/SectorsList";
 import NotificationsMenu from "@/components/menu/NotificationsMenu";
 import SettingsMenu from "@/components/menu/SettingsMenu";
-import JamScreen from "@/components/screen/JamScreen";
 import JamsMapView from "@/components/view/JamsMapView";
 import LocationMapView from "@/components/view/LocationMapView";
 import MoreJamActionsView from "@/components/view/MoreJamActionsView";
@@ -75,10 +74,6 @@ const modals: any = [
   {
     name: 'MoreJamActionsView', 
     component: <MoreJamActionsView />,
-  },
-  {
-    name: 'JamScreen', 
-    component: <JamScreen />,
   },
 ];
 
