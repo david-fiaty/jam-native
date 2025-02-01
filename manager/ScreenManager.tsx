@@ -53,9 +53,12 @@ class ScreenManager {
       });
     }
     else if (activeModals[modalIndex]?.visible === true) {
-      activeModals[modalIndex] = {...activeModals[modalIndex], ...{ visible: false}};
+      activeModals[modalIndex] = {...activeModals[modalIndex], ...{ visible: false }};
     }
     else if (activeModals[modalIndex]?.visible === false) {
+      activeModals[modalIndex] = {...activeModals[modalIndex], ...{ visible: true }};
+    }
+    else {
       activeModals.splice(modalIndex, 1);
     }
 
@@ -63,11 +66,17 @@ class ScreenManager {
   }
 
   getActiveModal(): any {
-    let activeModals: any = Store.getState().modal.active;
-    let length: number = activeModals?.length;
-    let index: number = length > 0 ? length - 1 : 0; 
-
-    return activeModals?.[index] || null;
+    let activeModals: any[] = Store.getState().modal.active;
+    let visibleModals: any[] = activeModals.filter((o: any) => o?.visible === true);
+    
+    if (visibleModals.length > 0) {
+      return visibleModals[visibleModals.length - 1];
+    }
+    else if (activeModals.length > 0) {
+      return activeModals[activeModals.length -1];
+    }
+    
+    return null;
   }
 
   getModalZIndex(): any {
