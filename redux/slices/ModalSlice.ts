@@ -11,19 +11,7 @@ const ModalSlice = createSlice({
       state.config = action.payload;
     },
     setActiveModal: (state, action) => {
-      let activeModals: any = [...state.active || []];
-      let activeModalIndex: any = activeModals.findIndex((o: any) => o.name == action.payload.name);
-
-      if (!action.payload.name) {
-        state.active = [];
-      }
-      else if (activeModalIndex === -1)  {
-        activeModals.push(action.payload);
-        state.active = activeModals; 
-      }
-      else {
-        activeModals.splice(activeModalIndex);
-      }
+      state.active = action.payload;
     },
   },
 });
