@@ -7,7 +7,6 @@ import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
 import ProjectListItem from "./ListItem/ProjectListItem";
 import TextView from "../view/TextView";
-import ScreenManager from "@/manager/ScreenManager";
 
 type Props = {
   data?: any,
@@ -19,7 +18,10 @@ const SearchProjectsList = ({ data }: Props) => {
   const [projectsImages, setProjectsImages] = useState<any>({});
 
   const onItemPress = (row: any) => {
-    ScreenManager.pushScreen(router, '/project', { idArray: [row.item.id], title: row.item.title });
+    router.push({
+      pathname: "/project",
+      params: { idArray: [row.item.id], title: row.item.title },
+    });
   };
 
   useEffect(() => {

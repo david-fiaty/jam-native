@@ -24,7 +24,7 @@ const ModalButton = ({ name, backTitle, entityId, login, trigger, triggerAlign, 
 
   const toggleModal = (isActive: boolean) => {
     if (login && !isLoggedIn) {
-      ScreenManager.pushScreen(router, '/login');
+      router.push("/login");
     }
     else {
       ScreenManager.toggleModal(name, getModalParams());

@@ -46,7 +46,7 @@ const ListItemToolbar = ({ row }: Props) => {
   const shareJam = async () => {
     isLoggedIn
     ? await EntityManager.shareJam(row?.item?.id)
-    : ScreenManager.pushScreen(router, '/login');
+    : router.push("/login");
   };
 
   const renderJammersButton = () => {
