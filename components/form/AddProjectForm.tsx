@@ -202,8 +202,8 @@ const AddProjectForm = () => {
               onDeleteButtonPress={(row: any) => {
                 let selectedIds: any = [...formData?.jams_ids];
                 let index: number = selectedIds.findIndex((id: any) => id == row?.item?.id);
-                selectedIds.splice(index);
-                updateField("jams_ids", selectedIds.filter((o: any) => o));
+                selectedIds.splice(index, 1);
+                updateField("jams_ids", selectedIds);
               }}
             />
           </BoxView>

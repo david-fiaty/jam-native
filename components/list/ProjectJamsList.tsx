@@ -47,7 +47,7 @@ const ProjectJamsList = ({
     let index: number = findItemIndex(row);
 
     if (index === -1) selectedJamsList.push(row.item.id);
-    else selectedJamsList.splice(index);
+    else selectedJamsList.splice(index, 1);
 
     selectedJamsList = selectedJamsList.filter((n: any) => n);
     setSelectedJams(selectedJamsList);

@@ -40,7 +40,7 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
       let index: number = findItemIndex(row);
 
       if (index === -1) selectedIdsList.push(row.item.id);
-      else selectedIdsList.splice(index);
+      else selectedIdsList.splice(index, 1);
 
       setSelectedIds(selectedIdsList);
     }
