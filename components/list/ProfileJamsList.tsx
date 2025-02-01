@@ -90,7 +90,8 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
 
         { allButton && (
           <TouchableOpacity
-            onPress={() => ScreenManager.pushScreen(router, '/jam', { idArray: idArray, title: title })}
+          onPress={() => ScreenManager.toggleModal('JamScreen', { idArray: idArray, title: title })}
+            //onPress={() => ScreenManager.pushScreen(router, '/jam', { idArray: idArray, title: title })}
           >
             <TextView underline={true}>{i18n.t("View all")}</TextView>
           </TouchableOpacity> 
