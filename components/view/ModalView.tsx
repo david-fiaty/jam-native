@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
 import { BaseProps } from '@/constants/Types';
@@ -18,10 +18,7 @@ const ModalView = ({ children }: Props) => {
   const modalState = useSelector((state: any) => state.modal);
   const activeModal: any = ScreenManager.getActiveModal();
   const modalConfig: any = ModalConfig.build();
-
-  const getModalEffects = useCallback(() => {
-    return modalConfig.find((o: any) => o.name == activeModal?.name)?.effects;
-  }, [modalConfig, activeModal]);
+  const [modalEffects, setModalEffects] = useState<any>({});
 
   const getModalContainerStyle = (): any => {
     if (isModalVisible()) {
@@ -51,6 +48,13 @@ const ModalView = ({ children }: Props) => {
     return activeCount > 0 && activeModals[activeCount - 1]?.visible === true;    
   };
 
+  const isModalHidden = () => {
+    let activeModals: any = modalState.active;
+    let activeCount: number = activeModals.length;
+
+    return activeCount > 0 && activeModals[activeCount - 1]?.visible === false;    
+  };
+
   const renderModalTitle = () => {
     if (isModalVisible() && ScreenManager.getActiveModal()?.params?.backTitle) {
       let modalName: string = activeModal?.name;
@@ -74,12 +78,21 @@ const ModalView = ({ children }: Props) => {
     return modalConfig.find((o: any) => o.name == ScreenManager.getActiveModal()?.name)?.component;
   };
 
+  useEffect(() => {
+    if (isModalHidden()) {
+      setModalEffects({ in: 'fadeIn', out: 'fadeOut' });
+    }
+    else {
+      setModalEffects(modalConfig.find((o: any) => o.name == activeModal?.name)?.effects);
+    }
+  }, []);
+
   return (
     <Modal
       coverScreen={false}
       hasBackdrop={false}
-      animationIn={getModalEffects()?.in}
-      animationOut={getModalEffects()?.out}
+      animationIn={modalEffects?.in}
+      animationOut={modalEffects?.out}
       isVisible={isModalVisible()}
       style={getModalContainerStyle()}
       hideModalContentWhileAnimating={true}

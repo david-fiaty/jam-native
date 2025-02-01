@@ -2,7 +2,6 @@ import { Dimensions, ScaledSize, StatusBar } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import { setMessage } from '@/redux/slices/MessageSlice';
 import { setActiveModal } from '@/redux/slices/ModalSlice';
-import { setActiveRoute } from '@/redux/slices/RouteSlice';
 import { Config } from '@/constants/Config';
 import Store from '@/redux/Store';
 
@@ -49,6 +48,7 @@ class ScreenManager {
 
   replaceScreen(router: any, path: string, params?: any) {
     this.toggleModal(null);
+    
     router.replace({
       pathname: path,
       params: params,
@@ -83,7 +83,7 @@ class ScreenManager {
   }
 
   getActiveModal(): any {
-    let activeModals: any[] = Store.getState().modal.active;
+    let activeModals: any[] = [...Store.getState().modal.active];
     let visibleModals: any[] = activeModals.filter((o: any) => o?.visible === true);
     
     if (visibleModals.length > 0) {
