@@ -51,8 +51,6 @@ const RootLayout = () => {
 
   if (!isLoaded && !isError) return <></>; 
 
-  console.log(segments);
-
   return (
     <Provider store={Store}>
       <Stack>
