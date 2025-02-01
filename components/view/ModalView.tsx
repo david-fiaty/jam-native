@@ -19,9 +19,13 @@ const ModalView = ({ children }: Props) => {
   const activeModal: any = ScreenManager.getActiveModal();
   const modalConfig: any = ModalConfig.build();
 
-  const getModalEffects = useCallback(() => {
+  const getModalEffects = () => {
+    if (isModalHidden()) {
+      return { in: 'fadeIn', out: 'fadeOut' };
+    }
+
     return modalConfig.find((o: any) => o.name == activeModal?.name)?.effects;
-  }, [modalConfig, activeModal]);
+  };
 
   const getModalContainerStyle = (): any => {
     if (isModalVisible()) {
@@ -49,6 +53,13 @@ const ModalView = ({ children }: Props) => {
     let activeCount: number = activeModals.length;
 
     return activeCount > 0 && activeModals[activeCount - 1]?.visible === true;    
+  };
+
+  const isModalHidden = () => {
+    let activeModals: any = modalState.active;
+    let activeCount: number = activeModals.length;
+
+    return activeCount > 0 && activeModals[activeCount - 1]?.visible === false;    
   };
 
   const renderModalTitle = () => {
