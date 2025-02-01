@@ -16,13 +16,20 @@ type Props = BaseProps & {
 const JamsList = ({ idArray }: Props) => {
   const [sectors, setSectors] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [jamData, setJamData] = useState<any[]>([]);
   const searchResult = JSON.parse(useSelector((state: any) => state.search.current));
 
   useEffect(() => {
-    console.log('jams list', idArray); // Todo - Load if available
 
     (async () => {
       if (!sectors.length) setSectors(await EntityManager.getSectors());
+
+      if (idArray?.length > 0) {
+        setJamData(await EntityManager.getJams({ items_ids: idArray }))
+      }
+      else {
+        setJamData(searchResult?.jam);
+      }
     })();
 
     setIsLoaded(true);
@@ -36,8 +43,8 @@ const JamsList = ({ idArray }: Props) => {
       style={styles.container}
     >
       <ListView
-        data={searchResult?.jam}
-        initialNumToRender={searchResult?.jam?.length || 0}
+        data={jamData}
+        initialNumToRender={jamData.length}
         contentContainerStyle={Layout.listContainer}
         renderItem={(row: any) => <ListItem row={row} sectorsData={sectors} />}
         keyExtractor={(item: any) => item.id.toString()}
