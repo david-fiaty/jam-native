@@ -218,7 +218,7 @@ const JamForm = () => {
             const sectorsIds = [...formData?.[sectorsFieldName] || []];
             const index = sectorsIds.findIndex((v) => v === item.id);
             if (index !== -1) sectorsIds.splice(index, 1);
-            updateField(sectorsFieldName, sectorsIds.filter(Boolean));
+            updateField(sectorsFieldName, sectorsIds);
           }}
         />
         
@@ -234,7 +234,7 @@ const JamForm = () => {
             const collaboratorsIds = [...formData?.[collaboratorsFieldName] || []];
             const index = collaboratorsIds.findIndex((v) => v === item.id);
             if (index !== -1) collaboratorsIds.splice(index, 1);
-            updateField(collaboratorsFieldName, collaboratorsIds.filter(Boolean));
+            updateField(collaboratorsFieldName, collaboratorsIds);
           }}
         />
 
