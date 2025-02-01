@@ -1,4 +1,5 @@
 import React, { useEffect, useCallback } from 'react';
+import { BackHandler } from 'react-native';
 import { Stack, useSegments } from 'expo-router';
 import { useFonts } from 'expo-font';
 import { Provider } from 'react-redux';
@@ -20,6 +21,11 @@ const RootLayout = () => {
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
 
+  const backAction = () => {
+      console.log('back pressed');
+      return true;
+  };
+
   const loadModalConfig = useCallback(() => {
     Store.dispatch(setModalConfig(modalConfig.map(({ component, ...rest }) => ({ ...rest }))));
     Store.dispatch(setRouteConfig(routeConfig));
@@ -31,6 +37,14 @@ const RootLayout = () => {
     if (isLoaded || isError) {
       ExpoSplashScreen.hideAsync();
     }
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove();
+
   }, [isLoaded, isError]);
 
   if (!isLoaded && !isError) return <></>; 
