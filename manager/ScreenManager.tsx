@@ -56,7 +56,7 @@ class ScreenManager {
       activeModals[modalIndex].visible = false;
     }
     else if (activeModals[modalIndex]?.visible === false) {
-      activeModals.splice(modalIndex, 1);
+      activeModals.splice(modalIndex);
     }
 
     Store.dispatch(setActiveModal(activeModals));
