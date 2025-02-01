@@ -62,17 +62,6 @@ class ScreenManager {
     Store.dispatch(setActiveModal(activeModals));
   }
 
-  /*
-
-    toggleModal(name: any, params?: any) {
-    Store.dispatch(setActiveModal({
-      name: name,
-      params: params,
-    }));
-  }
-
-  */
-
   getActiveModal(): any {
     let activeModals: any = Store.getState().modal.active;
     let length: number = activeModals?.length;
