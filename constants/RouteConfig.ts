@@ -69,10 +69,6 @@ const routes: any = [
     animation: 'default',
   },
   {
-    name: 'jam',
-    animation: 'default',
-  },
-  {
     name: 'project',
     animation: 'default',
   },
