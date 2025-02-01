@@ -20,7 +20,6 @@ const JamsList = ({ idArray }: Props) => {
   const searchResult = JSON.parse(useSelector((state: any) => state.search.current));
 
   useEffect(() => {
-
     (async () => {
       if (!sectors.length) setSectors(await EntityManager.getSectors());
 
