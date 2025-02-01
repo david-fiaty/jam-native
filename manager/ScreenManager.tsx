@@ -2,9 +2,9 @@ import { Dimensions, ScaledSize, StatusBar } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import { setMessage } from '@/redux/slices/MessageSlice';
 import { setActiveModal } from '@/redux/slices/ModalSlice';
+import { setActiveRoute } from '@/redux/slices/RouteSlice';
 import { Config } from '@/constants/Config';
 import Store from '@/redux/Store';
-
 
 class ScreenManager {
   messageTimeout?: any;
@@ -19,7 +19,15 @@ class ScreenManager {
   }
 
   pushScreen(router: any, path: string, params?: any) {
-    this.toggleModal(null);
+    let activeModals: any = [...Store.getState().modal.active];
+    let lastVisibleIndex = activeModals.map((o: any) => o?.visible).lastIndexOf(true);
+
+    if (lastVisibleIndex !== -1) {
+      activeModals[lastVisibleIndex] = {...activeModals[lastVisibleIndex], ...{visible: false}};
+    }
+
+    Store.dispatch(setActiveModal(activeModals));
+
     router.push({
       pathname: path,
       params: params,
@@ -27,6 +35,15 @@ class ScreenManager {
   }
 
   popScreen(router: any) {
+    let activeModals: any = [...Store.getState().modal.active];
+    let lastHiddenIndex = activeModals.map((o: any) => o?.visible).lastIndexOf(false);
+
+    if (lastHiddenIndex !== -1) {
+      activeModals[lastHiddenIndex] = {...activeModals[lastHiddenIndex], ...{visible: true}};
+    }
+
+    Store.dispatch(setActiveModal(activeModals));
+
     router.back();
   }
 

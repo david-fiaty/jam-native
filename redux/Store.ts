@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import ModalReducer from './slices/ModalSlice';
+import RouteReducer from './slices/RouteSlice';
 import SearchReducer from './slices/SearchSlice';
 import UserReducer from './slices/UserSlice';
 import MessageReducer from './slices/MessageSlice';
@@ -9,6 +10,7 @@ import FormReducer from './slices/FormSlice';
 const Store = configureStore({
   reducer: {
     modal: ModalReducer,
+    route: RouteReducer,
     search: SearchReducer,
     user: UserReducer,
     message: MessageReducer,
