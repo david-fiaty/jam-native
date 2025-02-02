@@ -68,7 +68,7 @@ class ScreenManager {
       Store.dispatch(setActiveRoute([...activeRoutes, path]));
     }
     else if (activeRoutes.length > 0) {
-      activeRoutes.pop();
+      Store.dispatch(setActiveRoute(activeRoutes.pop()));
     }
   }
 
