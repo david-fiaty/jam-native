@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { BackHandler } from 'react-native';
-import { Stack, useSegments } from 'expo-router';
+import { Stack, useSegments, useRouter } from 'expo-router';
 import { useFonts } from 'expo-font';
 import { Provider } from 'react-redux';
 import { setModalConfig } from "@/redux/slices/ModalSlice";
@@ -9,10 +9,12 @@ import * as ExpoSplashScreen from 'expo-splash-screen';
 import Store from "@/redux/Store";
 import RouteConfig from '@/constants/RouteConfig';
 import ModalConfig from '@/constants/ModalConfig';
+import ScreenManager from '@/manager/ScreenManager';
 
 ExpoSplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
+  const router = useRouter();
   const segments = useSegments(); 
   const routeConfig: any = RouteConfig.getRoutes(segments);
   const modalConfig: any = ModalConfig.build();
@@ -22,10 +24,27 @@ const RootLayout = () => {
   });
 
   const backAction = () => {
-      console.log('back pressed');
-      // Todo - Implement back action logic + reset active modal stack
-
+      ScreenManager.toggleModal(null);
+      router.dismissTo('/');
+      
       return true;
+
+      // Todo - Fix route stack and handle back logic
+      /*
+      let activeRoutes: any = [...Store.getState().route.active];
+
+      console.log(activeRoutes);
+      
+      if (activeRoutes.length > 0) {
+        activeRoutes.pop();
+      } 
+
+
+      if (activeRoutes.length > 0) {
+        router.dismissTo(activeRoutes[activeRoutes.length - 1]);
+      }
+    */
+
   };
 
   const loadModalConfig = useCallback(() => {
