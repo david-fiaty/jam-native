@@ -20,17 +20,16 @@ class ScreenManager {
 
   pushScreen(router: any, path: string, params?: any) {
     let activeModals: any = [...Store.getState().modal.active];
-    let activeRoutes: any = [...Store.getState().route.active];
+    //let activeRoutes: any = [...Store.getState().route.active];
     let lastVisibleIndex = activeModals.map((o: any) => o?.visible).lastIndexOf(true);
-
-    console.log(activeRoutes);
 
     if (lastVisibleIndex !== -1) {
       activeModals[lastVisibleIndex] = {...activeModals[lastVisibleIndex], ...{visible: false}};
     }
 
     Store.dispatch(setActiveModal(activeModals));
-    Store.dispatch(setActiveRoute([...activeRoutes, path]));
+    //Store.dispatch(setActiveRoute([...activeRoutes, path]));
+    // Todo - Handle active routes
 
     router.push({
       pathname: path,
