@@ -23,28 +23,26 @@ const RootLayout = () => {
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
 
-  const backAction = () => {
-      ScreenManager.toggleModal(null);
-      router.dismissTo('/');
-      
-      return true;
+  const backAction = () => {  
+    router.replace('/');
 
-      // Todo - Fix route stack and handle back logic
-      /*
-      let activeRoutes: any = [...Store.getState().route.active];
-
-      console.log(activeRoutes);
-      
-      if (activeRoutes.length > 0) {
-        activeRoutes.pop();
-      } 
-
-
-      if (activeRoutes.length > 0) {
-        router.dismissTo(activeRoutes[activeRoutes.length - 1]);
-      }
+    // Todo - Set new active route to fix bug
+    /*
+    let activeRoutes: any = [...Store.getState().route.active].pop();
+    ScreenManager.toggleModal(null);
+    
+    if (Array.isArray(activeRoutes) && activeRoutes.length > 0) {
+      router.dismissTo(activeRoutes[activeRoutes.length - 1]);
+    }
+    else if (activeRoutes.length > 0) {
+      router.replace(activeRoutes);
+    }
+    else {
+      router.replace('/');
+    }
     */
 
+    return true;
   };
 
   const loadModalConfig = useCallback(() => {

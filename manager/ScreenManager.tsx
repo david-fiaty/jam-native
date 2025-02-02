@@ -61,8 +61,10 @@ class ScreenManager {
 
   setCurrentRoute(path?: any) {
     let activeRoutes: any = [...Store.getState().route.active];
+    let routeConfig: any[] = Store.getState().route.config;
+    let currentRoute: any = routeConfig.find((o: any) => o.name == path.replace('/', ''));
 
-    if (path) {
+    if (path && currentRoute) {
       Store.dispatch(setActiveRoute([...activeRoutes, path]));
     }
     else if (activeRoutes.length > 0) {
