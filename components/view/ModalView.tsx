@@ -62,13 +62,11 @@ const ModalView = ({ children }: Props) => {
       let modalTitle: string = activeModal?.params?.backTitle;
 
       return (
-        <BoxView direction="row" style={styles.container}>
-          <BackButton
-            title={modalTitle}
-            onPress={() => ScreenManager.toggleModal(modalName)}
-            containerStyle={styles.modalTitle}
-          />
-        </BoxView>
+        <BackButton
+          title={modalTitle}
+          onPress={() => ScreenManager.toggleModal(modalName)}
+          containerStyle={styles.modalTitle}
+        />
       );
     }
     
@@ -107,9 +105,6 @@ const ModalView = ({ children }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    paddingTop: Layout.space.base*4,
-  },
   modalTitle: {
     marginLeft: Layout.space.base*1.5,
     width: '100%',
