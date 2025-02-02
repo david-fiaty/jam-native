@@ -20,6 +20,7 @@ class ScreenManager {
 
   pushScreen(router: any, path: string, params?: any) {
     let activeModals: any = [...Store.getState().modal.active];
+    let activeRoutes: any = [...Store.getState().route.active];
     let lastVisibleIndex = activeModals.map((o: any) => o?.visible).lastIndexOf(true);
 
     if (lastVisibleIndex !== -1) {
@@ -27,7 +28,7 @@ class ScreenManager {
     }
 
     Store.dispatch(setActiveModal(activeModals));
-    Store.dispatch(setActiveRoute(path));
+    Store.dispatch(setActiveRoute([...activeRoutes, path]));
 
     router.push({
       pathname: path,
@@ -37,6 +38,7 @@ class ScreenManager {
 
   popScreen(router: any) {
     let activeModals: any = [...Store.getState().modal.active];
+    let activeRoutes: any = [...Store.getState().route.active];
     let lastHiddenIndex = activeModals.map((o: any) => o?.visible).lastIndexOf(false);
 
     if (lastHiddenIndex !== -1) {
@@ -44,6 +46,7 @@ class ScreenManager {
     }
 
     Store.dispatch(setActiveModal(activeModals));
+    Store.dispatch(setActiveRoute(activeRoutes.pop()));
 
     router.back();
   }
