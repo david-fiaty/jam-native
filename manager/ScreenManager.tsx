@@ -30,7 +30,7 @@ class ScreenManager {
     }
 
     Store.dispatch(setActiveModal(activeModals));
-    Store.dispatch(setActiveRoute([...activeRoutes, ...path]));
+    Store.dispatch(setActiveRoute([...activeRoutes, path]));
 
     router.push({
       pathname: path,
