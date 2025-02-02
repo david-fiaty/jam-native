@@ -110,15 +110,12 @@ const ProfileProjectsList = ({
 
         {allButton && (
           <TouchableOpacity
-          onPress={() => 
-            router.push({
-              pathname: '/project',
-              params: {
+            onPress={() => 
+              ScreenManager.pushScreen(router, '/project', {
                 idArray: idArray,
                 title: title,
-              },
-            })
-          }
+              })
+            }
           >
             <TextView style={styles.link}>{i18n.t("View all")}</TextView>
           </TouchableOpacity>
