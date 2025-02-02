@@ -24,6 +24,7 @@ const RootLayout = () => {
   });
 
   const backAction = () => {  
+    ScreenManager.toggleModal(null);
     router.replace('/');
 
     // Todo - Set new active route in to fix bug
