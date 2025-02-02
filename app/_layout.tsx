@@ -24,8 +24,10 @@ const RootLayout = () => {
   });
 
   const backAction = () => {
-      ScreenManager.toggleModal(null);
-      router.dismissTo('/');
+      //ScreenManager.toggleModal(null);
+      //router.dismissTo('/');
+
+      console.log(Store.getState().route.active);
       
       return true;
 
