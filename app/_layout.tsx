@@ -26,7 +26,13 @@ const RootLayout = () => {
   const backAction = () => {  
     let activeRoutes: any = [...Store.getState().route.active].pop();
     ScreenManager.toggleModal(null);
-    router.dismissTo(activeRoutes?.[activeRoutes.length - 1] || '/');
+    
+    if (activeRoutes.length > 0) {
+      router.dismissTo(activeRoutes[activeRoutes.length - 1]);
+    }
+    else {
+      router.replace('/');
+    }
 
     return true;
   };
