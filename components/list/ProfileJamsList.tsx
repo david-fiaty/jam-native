@@ -91,12 +91,9 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
         { allButton && (
           <TouchableOpacity
             onPress={() => 
-              router.push({
-                pathname: '/jam',
-                params: {
-                  idArray: idArray,
-                  title: title,
-                },
+              ScreenManager.pushScreen(router, '/jam', {
+                idArray: idArray,
+                title: title,
               })
             }
           >
