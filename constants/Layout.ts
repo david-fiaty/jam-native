@@ -86,12 +86,14 @@ export const Layout = {
     fontSize: fontSize.base,
   },
   titleContainer: {
+    marginBottom: space.base*1.5,
     height: 40,
   },
-  modalTitle: {
+  modalTitleContainer: {
     marginLeft: space.base*1.5,
     marginBottom: space.base*1.5,
     width: '100%',
+    height: 40,
   },
   menuContainer: {
     padding: space.base*1.5,
