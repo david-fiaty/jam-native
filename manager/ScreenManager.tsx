@@ -23,12 +23,14 @@ class ScreenManager {
     let activeRoutes: any = [...Store.getState().route.active];
     let lastVisibleIndex = activeModals.map((o: any) => o?.visible).lastIndexOf(true);
 
+    console.log(activeRoutes);
+
     if (lastVisibleIndex !== -1) {
       activeModals[lastVisibleIndex] = {...activeModals[lastVisibleIndex], ...{visible: false}};
     }
 
     Store.dispatch(setActiveModal(activeModals));
-    Store.dispatch(setActiveRoute([...activeRoutes, path]));
+    Store.dispatch(setActiveRoute([...activeRoutes, ...path]));
 
     router.push({
       pathname: path,
