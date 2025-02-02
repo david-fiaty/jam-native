@@ -40,9 +40,8 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
       let index: number = findItemIndex(row);
 
       if (index === -1) selectedIdsList.push(row.item.id);
-      else delete selectedIdsList[index];
+      else selectedIdsList.splice(index, 1);
 
-      selectedIdsList = selectedIdsList.filter(Boolean);
       setSelectedIds(selectedIdsList);
     }
     else {
@@ -56,9 +55,9 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
       onListItemPress(row);
     }
     else {
-      ScreenManager.toggleScreen('JamScreen', {
+      ScreenManager.pushScreen(router, '/jam', {
         idArray: [row.item.id],
-        title: row?.item?.title
+        title: row?.item?.title,
       });
     }
   };
@@ -89,16 +88,18 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
       <BoxView direction="row" align="center" justify="space-between">
         { title && <TextView style={styles.title}>{title}</TextView> }
 
-        { allButton && <TouchableOpacity
-          onPress={() =>
-            router.push({
-              pathname: "/jam",
-              params: { idArray: idArray, title: title },
-            })
-          }
-        >
-          <TextView style={Layout.textLink}>{i18n.t("View all")}</TextView>
-        </TouchableOpacity> }
+        { allButton && (
+          <TouchableOpacity
+            onPress={() => 
+              ScreenManager.pushScreen(router, '/jam', {
+                idArray: idArray,
+                title: title,
+              })
+            }
+          >
+            <TextView underline={true}>{i18n.t("View all")}</TextView>
+          </TouchableOpacity> 
+        )}
       </BoxView>
 
       {profileJams?.length > 0 && (

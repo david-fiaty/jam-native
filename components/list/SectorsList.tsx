@@ -19,9 +19,9 @@ const SectorsList = () => {
   const dispatch = useDispatch();
   const [sectorsData, setSectorsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const activeScreen: any = ScreenManager.getActiveScreen();
-  const resource: string = activeScreen.params.resource;
-  const fieldName: string = activeScreen.params.field;
+  const activeModal: any = ScreenManager.getActiveModal();
+  const resource: string = activeModal.params.resource;
+  const fieldName: string = activeModal.params.field;
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateSelection = (item: any, subItem: any) => {
@@ -37,7 +37,7 @@ const SectorsList = () => {
       selection.push(subItem.id);
     }
     else if (itemIndex !== -1 && subItemIndex !== -1) {
-      delete selection[subItemIndex];
+      selection.splice(subItemIndex, 1);
     }
 
     // Remove parents without sub selection
@@ -45,14 +45,14 @@ const SectorsList = () => {
     let deleteItem: boolean = !selection.some((id: any) => itemChildIds.includes(id));
     if (deleteItem) {
       let index: number = selection.findIndex((id: any) => id == item.id);
-      delete selection[index];
+      selection.splice(index, 1);
     }
 
     // Update selection state
     dispatch(setFormData<any>({ 
       resource: resource,
       key: fieldName, 
-      value: selection.filter((o: any) => o),
+      value: selection,
     }));
   };
 
@@ -117,7 +117,7 @@ const SectorsList = () => {
     >
       <BackButton
         title={i18n.t('Add industries')}
-        onPress={() => ScreenManager.toggleScreen('SectorsList')}
+        onPress={() => ScreenManager.toggleModal('SectorsList')}
       />
 
       <View style={styles.container}>

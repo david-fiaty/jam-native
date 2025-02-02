@@ -18,9 +18,9 @@ const SelectJamsForm = () => {
   const [profileJams, setProfileJams] = useState<any>([]);
   const [selectedIds, setSelectedIds] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const activeScreen: any = ScreenManager.getActiveScreen();
-  const idArray: any = activeScreen?.params?.profileJams;
-  const resource: string = activeScreen.params.resource;
+  const activeModal: any = ScreenManager.getActiveModal();
+  const idArray: any = activeModal?.params?.profileJams;
+  const resource: string = activeModal.params.resource;
   const formData: any = useSelector((state: any) => state.form[resource]);
   const numColumns = 3;
 
@@ -33,9 +33,9 @@ const SelectJamsForm = () => {
     let index: number = findItemIndex(row);
 
     if (index === -1) selectedIdsList.push(row.item.id);
-    else delete selectedIdsList[index];
+    else selectedIdsList.splice(index, 1);
 
-    setSelectedIds(selectedIdsList.filter(Boolean));
+    setSelectedIds(selectedIdsList);
   };
 
   const addSelection = () => {    
@@ -45,7 +45,7 @@ const SelectJamsForm = () => {
       value: [...(formData?.jams_ids || []), ...selectedIds], 
     }));
 
-    ScreenManager.toggleScreen("SelectJamsForm");
+    ScreenManager.toggleModal("SelectJamsForm");
   };
 
   const getEmptyMessage = () => {    
@@ -53,10 +53,9 @@ const SelectJamsForm = () => {
       <View>
         <TextView>{i18n.t('No Jams available in your profile.')}</TextView>
         <TouchableOpacity 
-          style={styles.textLink} 
-          onPress={() => ScreenManager.toggleScreen('JamForm')}
+          onPress={() => ScreenManager.toggleModal('JamForm')}
         >
-          <TextView>{i18n.t('Create a jam')}</TextView>
+          <TextView underline={true}>{i18n.t('Create a jam')}</TextView>
         </TouchableOpacity>
       </View>
     );
@@ -69,7 +68,7 @@ const SelectJamsForm = () => {
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, activeScreen, idArray]);
+  }, [isLoaded, activeModal, idArray]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -88,13 +87,13 @@ const SelectJamsForm = () => {
       >
         <BackButton
           title={i18n.t("Select Jams")}
-          onPress={() => ScreenManager.toggleScreen("SelectJamsForm")}
+          onPress={() => ScreenManager.toggleModal("SelectJamsForm")}
         />
 
         {selectedIds?.length > 0 && (
           <TouchableOpacity onPress={addSelection}>
             <View>
-              <TextView style={Layout.textLink}>
+              <TextView underline={true}>
                 {i18n.t("Add selected")} ({selectedIds.length})
               </TextView>
             </View>
@@ -125,13 +124,6 @@ const SelectJamsForm = () => {
 const styles = StyleSheet.create({
   titleContainer: {
     width: "100%",
-  },
-  textLink: {
-    ...Layout.textLink,
-    ...{ 
-      alignSelf: 'flex-start',
-      marginTop: Layout.space.base,
-    },
   },
 });
 

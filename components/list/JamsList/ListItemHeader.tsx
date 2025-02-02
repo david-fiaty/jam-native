@@ -1,36 +1,31 @@
-import { useRouter } from "expo-router";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet } from "react-native";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
 import TextView from "@/components/view/TextView";
 import IconView from "@/components/view/IconView";
-import ScreenManager from "@/manager/ScreenManager";
-import UserManager from "@/manager/UserManager";
 import i18n from "@/translation/i18n";
 import JamStatusButton from "@/components/button/JamStatusButton";
+import ModalButton from "@/components/button/ModalButton";
 
 type Props = BaseProps & {
-  row?: any,
+  row?: any;
 };
 
 const ListItemHeader = ({ row }: Props) => {
-  const router = useRouter();
-  const isLoggedIn = UserManager.isLoggedIn();
-
   const renderHosts = () => {
     return (
-      <TouchableOpacity
-        onPress={() =>
-          isLoggedIn
-            ? ScreenManager.toggleScreen("HostsList", { entityId: row?.item?.id })
-            : router.push("/login")
+      <ModalButton 
+        login={true}
+        name="HostsList"
+        entityId={row.item.id}
+        backTitle={i18n.t('Jam hosts')}
+        trigger={
+          <TextView>
+            @{i18n.t("host")} +{parseInt(row?.item?.collaborators?.length)}
+          </TextView>
         }
-      >
-      <TextView>
-        @{i18n.t("host")} +{parseInt(row?.item?.collaborators?.length)}
-      </TextView>
-      </TouchableOpacity>
+      />
     );
   };
 
@@ -40,13 +35,18 @@ const ListItemHeader = ({ row }: Props) => {
 
   const renderActions = () => {
     return (
-      <IconView
-        name="actions"
-        theme="clear"
-        onPress={() =>
-          isLoggedIn
-            ? ScreenManager.toggleScreen("MoreJamActionsView", { entityId: row?.item?.id })
-            : router.push("/login")
+      <ModalButton 
+        login={true}
+        name="MoreJamActionsView"
+        entityId={row.item.id}
+        backTitle={i18n.t('More actions')}
+        trigger={
+          <IconView
+            name="actions"
+            theme="clear"
+            size={16}
+            padding={0}
+          />
         }
       />
     );
@@ -59,13 +59,13 @@ const ListItemHeader = ({ row }: Props) => {
       justify="space-between"
       style={styles.container}
     >
-      <BoxView>
+      <BoxView align="center">
         {renderHosts()}
       </BoxView>
-      <BoxView>
+      <BoxView align="center">
         {renderStatus()}
       </BoxView>
-      <BoxView>
+      <BoxView align="center">
         {renderActions()}
       </BoxView>
     </BoxView>
@@ -75,7 +75,8 @@ const ListItemHeader = ({ row }: Props) => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: Layout.space.base*1.2,
-    paddingVertical: Layout.space.base/2,
+    paddingVertical: Layout.space.base,
+    height: 39,
   },
 });
 

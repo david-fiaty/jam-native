@@ -7,7 +7,6 @@ import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
-import DeviceManager from "@/manager/DeviceManager";
 import ScreenManager from "@/manager/ScreenManager";
 import i18n from "@/translation/i18n";
 import BackButton from "../button/BackButton";
@@ -17,8 +16,8 @@ const LocationMapView = () => {
   const dispatch = useDispatch();
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const activeScreen: any = ScreenManager.getActiveScreen();
-  const resource: string = activeScreen.params.resource;
+  const activeModal: any = ScreenManager.getActiveModal();
+  const resource: string = activeModal.params.resource;
 
   const onMapPress = async (event: MapPressEvent) => {
     setSelectedLocation(event.nativeEvent.coordinate);
@@ -26,17 +25,17 @@ const LocationMapView = () => {
       resource: resource,
       key: null, 
       value: {
-        [activeScreen.params.latitude.key]: event.nativeEvent.coordinate.latitude,
-        [activeScreen.params.longitude.key]: event.nativeEvent.coordinate.longitude,
+        [activeModal.params.latitude.key]: event.nativeEvent.coordinate.latitude,
+        [activeModal.params.longitude.key]: event.nativeEvent.coordinate.longitude,
       }, 
     }));
   };
 
   const getStoredLocation = () => {
-    if (activeScreen.params.latitude.value && activeScreen.params.longitude.value) {
+    if (activeModal.params.latitude.value && activeModal.params.longitude.value) {
       return {
-        latitude: activeScreen.params.latitude.value,
-        longitude: activeScreen.params.longitude.value,
+        latitude: activeModal.params.latitude.value,
+        longitude: activeModal.params.longitude.value,
       };
     } 
 
@@ -44,7 +43,7 @@ const LocationMapView = () => {
   };
 
   const getDeviceLocation = async () => {
-    let deviceLocation: any = await DeviceManager.getLocation();
+    let deviceLocation: any = await ScreenManager.getLocation();
 
     if (deviceLocation?.coords?.latitude && deviceLocation?.coords?.longitude) {
       return {
@@ -86,7 +85,7 @@ const LocationMapView = () => {
       <BoxView direction="column" align="center" style={Layout.backButtonContainer}>
         <BackButton
           title={i18n.t("Add location")}
-          onPress={() => ScreenManager.toggleScreen("LocationMapView")}
+          onPress={() => ScreenManager.toggleModal("LocationMapView")}
         />
       </BoxView>
 

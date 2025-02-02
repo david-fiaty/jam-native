@@ -4,7 +4,6 @@ import { useRouter } from "expo-router";
 import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
-import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
 import ImageView from "../view/ImageView";
 import ScreenManager from "@/manager/ScreenManager";
@@ -13,7 +12,6 @@ import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
 import AddItemButton from "../button/AddItemButton";
 import NoImageView from "../view/NoImageView";
-import BoxView from "../view/BoxView";
 import MediaManager from "@/manager/MediaManager";
 import IconView from "../view/IconView";
 
@@ -34,7 +32,7 @@ const ProjectJamsList = ({
   const router = useRouter();
   const [selectedJams, setSelectedJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const activeScreen: any = ScreenManager.getActiveScreen();
+  const activeModal: any = ScreenManager.getActiveModal();
   const [projectJams, setProjectJams] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
   const imageSize = MediaManager.getThumbnailSize();
@@ -49,7 +47,7 @@ const ProjectJamsList = ({
     let index: number = findItemIndex(row);
 
     if (index === -1) selectedJamsList.push(row.item.id);
-    else delete selectedJamsList[index];
+    else selectedJamsList.splice(index, 1);
 
     selectedJamsList = selectedJamsList.filter((n: any) => n);
     setSelectedJams(selectedJamsList);
@@ -148,7 +146,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   link: {
-    borderBottomWidth: 1,
+    borderBottomWidth: Layout.borderWidth.base,
     borderBottomColor: Colors.primary,
   },
   item: {

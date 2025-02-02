@@ -52,9 +52,8 @@ const ProfileProjectsList = ({
       let index: number = findItemIndex(row);
 
       if (index === -1) selectedIdsList.push(row.item.id);
-      else delete selectedIdsList[index];
+      else selectedIdsList.splice(index, 1);
 
-      selectedIdsList = selectedIdsList.filter(Boolean);
       setSelectedIds(selectedIdsList);
     }
     else {
@@ -68,9 +67,9 @@ const ProfileProjectsList = ({
       onListItemPress(row);
     }
     else {
-      ScreenManager.toggleScreen('ProjectScreen', {
+      ScreenManager.pushScreen(router, '/project', {
         idArray: [row.item.id],
-        title: row?.item?.title
+        title: row?.item?.title,
       });
     }
   };
@@ -111,10 +110,10 @@ const ProfileProjectsList = ({
 
         {allButton && (
           <TouchableOpacity
-            onPress={() =>
-              router.push({
-                pathname: "/project",
-                params: { idArray: idArray, title: title },
+            onPress={() => 
+              ScreenManager.pushScreen(router, '/project', {
+                idArray: idArray,
+                title: title,
               })
             }
           >
@@ -158,7 +157,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   link: {
-    borderBottomWidth: 1,
+    borderBottomWidth: Layout.borderWidth.base,
     borderBottomColor: Colors.primary,
   },
   item: {

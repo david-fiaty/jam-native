@@ -1,21 +1,19 @@
 import { useState, useEffect } from 'react';
-import { View, TouchableOpacity } from "react-native";
+import { View } from "react-native";
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
-import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
-import IconView from "../view/IconView";
 import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
-import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
 import ProfileListItem from './ListItem/ProfileListItem';
+import ScreenManager from '@/manager/ScreenManager';
 
 const HostsList = () => {
   const [profiles, setProfiles] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const entityId = ScreenManager.getScreenEntityId();
+  const entityId: number = ScreenManager.getModalEntityId();
 
   useEffect(() => {
     (async () => {
@@ -31,10 +29,6 @@ const HostsList = () => {
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
-      <BackButton
-        title={i18n.t('Jam hosts')}
-        onPress={() => ScreenManager.toggleScreen('HostsList')}
-      />
       <View style={Layout.borderedListContainer}>
         {profiles?.length > 0 &&
           <ListView

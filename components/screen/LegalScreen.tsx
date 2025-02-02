@@ -1,11 +1,13 @@
+import { useCallback } from 'react';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
+import { Divider } from '@rneui/base';
 import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
-import { Divider } from '@rneui/base';
 import BackButton from '../button/BackButton';
 import BottomLinks from '../navigation/BottomLinks';
+import ScreenManager from '@/manager/ScreenManager';
 
 const data = {
   title: 'About',
@@ -20,18 +22,24 @@ const data = {
 const LegalScreen = () => {
   const router = useRouter();
 
-  return (
-    <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.screenContent}>
-      <BackButton
-        title={i18n.t('Legal')}
-        onPress={() => router.back()}
-      />
-      <TextView>{data.text}</TextView> 
-      <Divider />
-      
-      <BottomLinks />
-    </BoxView>
-  );
+  const renderComponent = useCallback(() => {
+    return (
+      <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.screenContent}>
+  
+        <BackButton
+          title={i18n.t('Legal')}
+          onPress={() => ScreenManager.popScreen(router)}
+        />
+        
+        <TextView>{data.text}</TextView> 
+        <Divider />
+        
+        <BottomLinks />
+      </BoxView>
+    );
+  }, [router, data]);
+
+  return renderComponent();
 };
 
 export default LegalScreen;

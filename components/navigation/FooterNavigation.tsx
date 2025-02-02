@@ -1,52 +1,97 @@
-import { StyleSheet } from "react-native";
-import { useRouter } from 'expo-router';
-import { Layout } from '@/constants/Layout';
+import React, { StyleSheet } from "react-native";
+import { useRoute } from '@react-navigation/native';
 import { Colors } from "@/constants/Colors";
+import { Layout } from "@/constants/Layout";
 import IconView from "../view/IconView";
 import BoxView from "../view/BoxView";
 import ScreenManager from '@/manager/ScreenManager';
-import UserManager from '@/manager/UserManager';
+import ModalButton from "../button/ModalButton";
+import i18n from '@/translation/i18n';
+import ModalConfig from "@/constants/ModalConfig";
+import RouteConfig from "@/constants/RouteConfig";
+
+const containerStyle = ScreenManager.getFooterSize();
+const containerPosition = ScreenManager.getFooterPosition();
 
 const FooterNavigation = () => {
-  const router = useRouter();
-  const activeScreen = ScreenManager.getActiveScreen();
-  const isLoggedIn = UserManager.isLoggedIn();
+  const route = useRoute();
+  const activeModal: any = ScreenManager.getActiveModal();
+  const currentRouteConfig: any = RouteConfig.getRoutes().find((o: any) => o.name == route.name);
+  const currentModalConfig: any = ModalConfig.build().find((o: any) => o.name == activeModal?.name);
+
+  const getIconTheme = (screenName: string) => {
+    return activeModal?.name == screenName ? 'secondary' : 'clear';
+  };
+
+  const canShowFooter = () => {
+    return currentModalConfig?.showFooter === true || currentRouteConfig?.showFooter === true;
+  };
+
+  if (!canShowFooter()) return <></>;
 
   return (
-    <BoxView direction="row" align="center" justify="space-around" style={Layout.footer}>
-      <IconView
-        name="location"
-        radius="round"
-        size={14}
-        padding={4}
-        theme={activeScreen?.name == 'JamsMapView' ? 'secondary' : 'clear'}
-        onPress={() => ScreenManager.toggleScreen('JamsMapView')}
+    <BoxView 
+      direction="row" 
+      align="center" 
+      justify="space-between" 
+      style={[styles.container, containerStyle]}
+    >
+      <ModalButton 
+        login={false}
+        name="JamsMapView"
+        trigger={
+          <IconView
+            name="location"
+            radius="round"
+            size={16}
+            padding={4}
+            theme={getIconTheme("JamsMapView")}
+          />
+        }
       />
-      <IconView
-        name="plus"
-        radius="round"
-        size={14}
-        padding={4}
-        theme={activeScreen?.name == 'JamForm' ? 'secondary' : 'clear'}
-        style={activeScreen?.name == 'JamForm' ? styles.active : {}}
-        onPress={() => isLoggedIn ? ScreenManager.toggleScreen('JamForm') : router.push('/login')}
+
+      <ModalButton 
+        login={true}
+        name="JamForm"
+        backTitle={i18n.t('Create a Jam')}
+        trigger={
+          <IconView
+            name="plus"
+            radius="round"
+            size={16}
+            padding={4}
+            theme={getIconTheme("JamForm")}
+          />
+        }
       />
-      <IconView
-        name="user"
-        radius="round"
-        size={14}
-        padding={4}
-        theme={activeScreen?.name == 'ProfileForm' ? 'secondary' : 'clear'}
-        onPress={() => isLoggedIn ? ScreenManager.toggleScreen('ProfileForm') : router.push('/login')}
-        style={activeScreen?.name == 'ProfileForm' ? styles.active : {}}
+
+      <ModalButton 
+        login={true}
+        name="SearchView"
+        trigger={
+          <IconView
+            name="search"
+            radius="round"
+            size={16}
+            padding={4}
+            theme={getIconTheme("SearchView")}
+          />
+        }
       />
+
     </BoxView>
   );
 };
 
 const styles = StyleSheet.create({
-  active: {
-    backgroundColor: Colors.secondary,
+  container: {
+    width: '100%',
+    borderTopWidth: Layout.borderWidth.base,
+    borderTopColor: Colors.primary,
+    backgroundColor: Colors.white,
+    position: 'absolute',
+    top: containerPosition.y,
+    paddingHorizontal: Layout.space.base*6,
   },
 });
 

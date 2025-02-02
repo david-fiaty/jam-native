@@ -28,10 +28,10 @@ const AddProjectForm = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const activeScreen: any = ScreenManager.getActiveScreen();
+  const activeModal: any = ScreenManager.getActiveModal();
   const formData: any = useSelector((state: any) => state.form[resource]);
-  const profileId: any = activeScreen.params?.profileId; 
-  const profileJams: any = activeScreen.params?.profileJams; 
+  const profileId: any = activeModal.params?.profileId; 
+  const profileJams: any = activeModal.params?.profileJams; 
 
   const updateField = (key: any, value: any) => {
     dispatch(setFormData<any>({ 
@@ -84,7 +84,7 @@ const AddProjectForm = () => {
     >
       <BackButton
         title={i18n.t("Create a project")}
-        onPress={() => ScreenManager.toggleScreen("AddProjectForm")}
+        onPress={() => ScreenManager.toggleModal("AddProjectForm")}
       />
 
       <View style={Layout.formContainer}>
@@ -140,7 +140,7 @@ const AddProjectForm = () => {
               <TextView>{i18n.t('Add countries')}</TextView>
             </>
           }
-          onPressEvent={() => ScreenManager.toggleScreen('CountriesList', {
+          onPressEvent={() => ScreenManager.toggleModal('CountriesList', {
             resource: resource,
             field: 'scope_countries_codes',
           })}
@@ -148,7 +148,7 @@ const AddProjectForm = () => {
             const countriesCodes = [...formData?.scope_countries_codes || []];
             const index = countriesCodes.findIndex((v) => v === item.code);
             if (index !== -1) countriesCodes.splice(index, 1);
-            updateField('scope_countries_codes', countriesCodes.filter(Boolean));
+            updateField('scope_countries_codes', countriesCodes);
           }}
         />
 
@@ -162,7 +162,7 @@ const AddProjectForm = () => {
               <TextView>{i18n.t('Add industries')}</TextView>
             </>
           }
-          onPressEvent={() => ScreenManager.toggleScreen('SectorsList', {
+          onPressEvent={() => ScreenManager.toggleModal('SectorsList', {
             resource: resource,
             field: 'sectors_ids',
           })}
@@ -170,7 +170,7 @@ const AddProjectForm = () => {
             const sectorsIds = [...formData?.sectors_ids || []];
             const index = sectorsIds.findIndex((v) => v === item.id);
             if (index !== -1) sectorsIds.splice(index, 1);
-            updateField('sectors_ids', sectorsIds.filter(Boolean));
+            updateField('sectors_ids', sectorsIds);
           }}
         />
 
@@ -179,7 +179,7 @@ const AddProjectForm = () => {
           <BoxView direction="column" align="center" justify="center">
             <AddItemButton
               label={i18n.t("Add Jams")}
-              onPress={() => ScreenManager.toggleScreen("SelectJamsForm", {
+              onPress={() => ScreenManager.toggleModal("SelectJamsForm", {
                 resource: resource,
                 profileId: profileId,
                 profileJams: profileJams,
@@ -194,7 +194,7 @@ const AddProjectForm = () => {
             <ProjectJamsList 
               resource={resource}
               selectedIds={formData?.jams_ids}
-              onAddButtonPress={() => ScreenManager.toggleScreen("SelectJamsForm", {
+              onAddButtonPress={() => ScreenManager.toggleModal("SelectJamsForm", {
                 resource: resource,
                 profileId: formData?.id,
                 profileJams: profileJams,
@@ -202,8 +202,8 @@ const AddProjectForm = () => {
               onDeleteButtonPress={(row: any) => {
                 let selectedIds: any = [...formData?.jams_ids];
                 let index: number = selectedIds.findIndex((id: any) => id == row?.item?.id);
-                delete selectedIds[index];
-                updateField("jams_ids", selectedIds.filter((o: any) => o));
+                selectedIds.splice(index, 1);
+                updateField("jams_ids", selectedIds);
               }}
             />
           </BoxView>

@@ -3,34 +3,41 @@ import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import ListView from '../view/ListView';
 import TextView from '../view/TextView';
-import BackButton from '../button/BackButton';
 import i18n from '@/translation/i18n';
-import ScreenManager from '@/manager/ScreenManager';
 import UserManager from '@/manager/UserManager';
+import BoxView from '../view/BoxView';
+import ScreenManager from '@/manager/ScreenManager';
 
 const SettingsMenu = () => {
   const router = useRouter();
   
   const data: any[] = [
     {
+      label: i18n.t('Your profile'),
+      path: '/profile',
+      onPress: (row: any) => {
+        ScreenManager.pushScreen(router, row.item.path);
+      },
+    },
+    {
       label: i18n.t('Account information'),
       path: '/account',
       onPress: (row: any) => {
-        router.push(row.item.path);
+        ScreenManager.pushScreen(router, row.item.path);
       },
     },
     {
       label: i18n.t('Change password'),
       path: '/password',
       onPress: (row: any) => {
-        router.push(row.item.path);
+        ScreenManager.pushScreen(router, row.item.path);
       },
     },
     {
       label: i18n.t('Language'),
       path: '/language',
       onPress: (row: any) => {
-        router.push(row.item.path);
+        ScreenManager.pushScreen(router, row.item.path);
       },
     },
     {
@@ -38,7 +45,7 @@ const SettingsMenu = () => {
       path: null,
       onPress: (row: any) => {
         UserManager.logout();
-        router.replace('/welcome');
+        ScreenManager.replaceScreen(router, '/');
       },
     },
   ];
@@ -52,16 +59,16 @@ const SettingsMenu = () => {
   );
 
   return (
-    <View style={Layout.menuContainer}>
-      <BackButton
-        title={i18n.t('Settings')}
-        onPress={() => ScreenManager.toggleScreen('SettingsMenu')}
-      />
+    <BoxView 
+      align="flex-start"
+      justify="flex-start"
+      style={Layout.menuContainer}
+    >
       <ListView 
         data={data} 
         renderItem={(row: any) => renderItem(row)}   
       />
-    </View>
+    </BoxView>
   );
 };
 

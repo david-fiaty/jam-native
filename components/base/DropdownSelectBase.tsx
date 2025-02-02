@@ -5,6 +5,7 @@ import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
 import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
+import ScreenManager from "@/manager/ScreenManager";
 
 type Props = {
   data?: {}, 
@@ -70,15 +71,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     left: 22,
     top: 8,
-    zIndex: 10,
+    zIndex: ScreenManager.getModalZIndex(),
     paddingHorizontal: 8,
-    fontSize: 14,
+    fontSize: Layout.fontSize.base,
   },
   placeholderStyle: {
-    fontSize: 16,
+    fontSize: Layout.fontSize.big,
   },
   selectedTextStyle: {
-    fontSize: 16,
+    fontSize: Layout.fontSize.big,
   },
   iconStyle: {
     width: 20,
@@ -86,6 +87,6 @@ const styles = StyleSheet.create({
   },
   inputSearchStyle: {
     height: 40,
-    fontSize: 16,
+    fontSize: Layout.fontSize.big,
   },
 });

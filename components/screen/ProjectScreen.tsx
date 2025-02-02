@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import { BaseProps } from '@/constants/Types';
 import BoxView from "../view/BoxView";
@@ -13,16 +14,17 @@ type Props = BaseProps & {
 };
 
 const ProjectScreen = ({ idArray, title }: Props) => {
+  const router = useRouter();
   const screenTitle = title?.length ? title : i18n.t('Back');
-  const activeScreen: any = ScreenManager.getActiveScreen();
-  idArray = idArray?.length ? idArray : activeScreen?.params?.idArray;
+  const activeModal: any = ScreenManager.getActiveModal();
+  idArray = idArray?.length ? idArray : activeModal?.params?.idArray;
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={false} style={[Layout.screenContent, styles.container]}>
       <BoxView direction="column" align="center" style={Layout.backButtonContainer}>
         <BackButton
           title={screenTitle}
-          onPress={() => ScreenManager.toggleScreen('ProjectScreen')}
+          onPress={() => ScreenManager.popScreen(router)}
         />
       </BoxView>
       <BoxView style={Layout.mainContent}>

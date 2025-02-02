@@ -5,7 +5,6 @@ import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
 import InputTextField from '../field/InputTextField';
-import SpinnerView from '../view/SpinnerView';
 import ButtonView from '../view/ButtonView';
 import DividerView from '../view/DividerView';
 import UserManager from '@/manager/UserManager';
@@ -45,7 +44,7 @@ const PasswordForm = () => {
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Change password')}
-        onPress={() => router.back()}
+        onPress={() => ScreenManager.popScreen(router)}
       />
       
       <InputTextField 

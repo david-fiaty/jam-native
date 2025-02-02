@@ -3,7 +3,6 @@ import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
-import { Colors } from "@/constants/Colors";
 import TextView from "../view/TextView";
 import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
@@ -13,15 +12,14 @@ import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from "@/manager/EntityManager";
-import CollapsibleView from "../view/CollapsibleView";
 
 const CountriesList = () => {
   const dispatch = useDispatch();
   const [countriesData, setCountriesData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const activeScreen: any = ScreenManager.getActiveScreen();
-  const resource: string = activeScreen.params.resource;
-  const fieldName: string = activeScreen.params.field;
+  const activeModal: any = ScreenManager.getActiveModal();
+  const resource: string = activeModal.params.resource;
+  const fieldName: string = activeModal.params.field;
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateSelection = (item: any) => {
@@ -29,12 +27,12 @@ const CountriesList = () => {
     let index: number = selection.findIndex((v: any) => v == item.code);
 
     if (index === -1) selection.push(item.code)
-    else delete selection[index];
+    else selection.splice(index, 1);
 
     dispatch(setFormData<any>({ 
       resource: resource,
       key: fieldName, 
-      value: selection.filter(Boolean),
+      value: selection,
     }));
   };
 
@@ -75,7 +73,7 @@ const CountriesList = () => {
     >
       <BackButton
         title={i18n.t('Add countries')}
-        onPress={() => ScreenManager.toggleScreen('CountriesList')}
+        onPress={() => ScreenManager.toggleModal('CountriesList')}
       />
 
       <View style={styles.container}>

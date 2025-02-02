@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useRouter } from 'expo-router';
 import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
-import BackButton from "../button/BackButton";
 import LocationPickerField from "../field/LocationPickerField";
 import SectorsField from "../field/SectorsField";
 import DividerView from "../view/DividerView";
@@ -23,11 +23,12 @@ import ProfileImageField from "../field/ProfileImageField";
 import IconView from "../view/IconView";
 import ButtonView from "../view/ButtonView";
 import EntityManager from "@/manager/EntityManager";
-import MediaManager from "@/manager/MediaManager";
+import BackButton from "../button/BackButton";
 
 const ProfileForm = () => {
-  const resource: string = 'profile';
   const dispatch = useDispatch();
+  const router = useRouter();
+  const resource: string = 'profile';
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
@@ -82,8 +83,8 @@ const ProfileForm = () => {
       style={Layout.screenContent}
     >
       <BackButton
-        title={i18n.t("Your profile")}
-        onPress={() => ScreenManager.toggleScreen("ProfileForm")}
+        title={i18n.t('Your profile')}
+        onPress={() => ScreenManager.popScreen(router)}
       />
 
       <View style={Layout.formContainer}>
@@ -129,7 +130,7 @@ const ProfileForm = () => {
               <TextView>{i18n.t('Add industries')}</TextView>
             </>
           }
-          onPressEvent={() => ScreenManager.toggleScreen('SectorsList', {
+          onPressEvent={() => ScreenManager.toggleModal('SectorsList', {
             resource: resource,
             field: 'sectors_ids',
           })}
@@ -137,7 +138,7 @@ const ProfileForm = () => {
             const sectorsIds = [...formData?.sectors_ids || []];
             const index = sectorsIds.findIndex((v) => v === item.id);
             if (index !== -1) sectorsIds.splice(index, 1);
-            updateField('sectors_ids', sectorsIds.filter(Boolean));
+            updateField('sectors_ids', sectorsIds);
           }}
         />
 
@@ -147,7 +148,7 @@ const ProfileForm = () => {
         <LocationPickerField 
           latitude={formData?.geolocation_latitude}
           longitude={formData?.geolocation_longitude}
-          onPressEvent={() => ScreenManager.toggleScreen('LocationMapView', {
+          onPressEvent={() => ScreenManager.toggleModal('LocationMapView', {
             resource: resource,
             latitude: {
               key: 'geolocation_latitude',
@@ -227,7 +228,7 @@ const ProfileForm = () => {
           allButton={formData?.profile_projects?.length > 0}
           idArray={formData?.profile_projects}
           onAddButtonPress={() => {
-            ScreenManager.toggleScreen("AddProjectForm", {
+            ScreenManager.toggleModal("AddProjectForm", {
               profileId: profileId,
               profileJams: formData?.profile_jams || [],
             });
@@ -262,7 +263,7 @@ const ProfileForm = () => {
           allButton={formData?.profile_jams?.length > 0}
           addButton={true}
           idArray={formData?.profile_jams} 
-          onAddButtonPress={() => ScreenManager.toggleScreen("JamForm")}
+          onAddButtonPress={() => ScreenManager.toggleModal("JamForm")}
         />   
 
         {formData?.saved_jams?.length > 0 && (

@@ -1,11 +1,10 @@
 import { StyleSheet, FlatList } from "react-native";
 import { BaseProps } from "@/constants/Types";
 import { Config } from "@/constants/Config";
-import DeviceManager from "@/manager/DeviceManager";
+import ScreenManager from "@/manager/ScreenManager";
 
 type Props = BaseProps & {
-  data: object;
-  ref?: object;
+  data: any;
   initialNumToRender?: number;
   numColumns?: number;
   scrollEnabled?: boolean;
@@ -19,7 +18,6 @@ type Props = BaseProps & {
 
 const ListView = ({
   data,
-  ref,
   initialNumToRender,
   numColumns,
   scrollEnabled,
@@ -34,7 +32,6 @@ const ListView = ({
   return (
     <FlatList
       data={data || []}
-      //ref={ref}
       numColumns={numColumns || 1}
       initialNumToRender={initialNumToRender || Config.paginationSize}
       scrollEnabled={scrollEnabled === false ? false : true}
@@ -53,7 +50,7 @@ const ListView = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: DeviceManager.window.width,
+    width: ScreenManager.window.width,
   },
 });
 

@@ -1,25 +1,41 @@
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import IconView from '../view/IconView';
 import TextView from '../view/TextView';
 import BoxView from '../view/BoxView';
 import { Layout } from '@/constants/Layout';
 
 type Props = {
-  title: string,
-  onPress?: () => void,
+  title?: string;
+  containerStyle?: any;
+  onPress?: () => void;
 };
 
-const BackButton = ({title, onPress}: Props) => {
+const BackButton = ({title, containerStyle, onPress}: Props) => {
+
+  const renderTitle = () => {
+    if (typeof title == 'string') {
+      return <TextView style={Layout.title}>{title}</TextView>;
+    } 
+
+    return title;
+  };
+
   const ButtonView = () => {
     return (        
-      <BoxView direction="row" align="center" style={styles.container}>
+      <BoxView 
+        direction="row" 
+        align="center" 
+        style={[Layout.title, containerStyle]}
+      >
         <IconView 
           name="previous" 
           theme="clear" 
           padding={0} 
           onPress={onPress} 
         />
-        <TextView style={styles.text}>{title}</TextView>
+
+        
+        {renderTitle()}
       </BoxView>
     );
   };
@@ -34,14 +50,5 @@ const BackButton = ({title, onPress}: Props) => {
 
   return <ButtonView />;
 };
-
-const styles = StyleSheet.create({
-  container: {
-    marginBottom: Layout.space.base,
-  },
-  text: {
-    fontWeight: 'bold',
-  },
-});
 
 export default BackButton;

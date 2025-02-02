@@ -1,43 +1,53 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { setSearchValue, toggleSearchField } from "@/redux/slices/SearchSlice";
+import { useSelector } from 'react-redux';
+import { BaseProps } from '@/constants/Types';
+import * as Animatable from 'react-native-animatable';
 import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
-import ScreenManager from "@/manager/ScreenManager";
 import i18n from '@/translation/i18n';
+import SpinnerView from '../view/SpinnerView';
 import BoxView from '../view/BoxView';
-import SearchManager from '@/manager/SearchManager';
 
-const SearchField = () => {
-  const dispatch = useDispatch();
+type Props = BaseProps & {
+  canShow?: boolean;
+  onSearchEdit?: (value: any) => void;
+  onSearchSubmit?: (value: any) => void;
+  onSearchClear?: () => void;
+};
+
+const SearchField = ({ canShow, onSearchEdit, onSearchSubmit, onSearchClear }: Props) => {
   const searchState = useSelector((state: any) => state.search);
   const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
-  const activeScreen = ScreenManager.getActiveScreen();
-  const isExpanded = searchState.expanded === true;
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
-  const onSubmitEditing = async () => {
-    dispatch(setSearchValue(currentSearchValue));
-    await SearchManager.loadData(currentSearchValue);
+  const submitSearch = (value?: string) => {
+    if (onSearchSubmit) onSearchSubmit(value);
   };
 
-  const onChangeText = async (value: string) => {
+  const onSubmitEditing = () => {
+    if (onSearchEdit) onSearchEdit(currentSearchValue);
+  };
+
+  const onChangeText = (value: string) => {
     setCurrentSearchValue(value);
-    dispatch(setSearchValue(value));
-    await SearchManager.loadData(value);
+    submitSearch(value); 
   };
 
   const clearSearch = () => {
     setCurrentSearchValue('');
-    dispatch(setSearchValue(''));
+    if (onSearchClear) onSearchClear();
   };
 
-  const openSearch = () => {
-    ScreenManager.toggleScreen('SearchView');
+  const toggleSearch = () => {
+    setIsExpanded(!isExpanded);
   };
 
   const renderRightIcon = () => {
-    if (searchState.value.length > 0) {
+    if (searchState.searching == true) {
+      return <SpinnerView size="small" compact={true} />;
+    }
+    else if (searchState.value?.length) {
       return (
         <IconView 
           name="delete" 
@@ -47,63 +57,63 @@ const SearchField = () => {
         />
       );
     }
-    else if (activeScreen?.name != 'SearchView') {
+    else {
       return (
         <IconView 
-          name="search" 
-          theme="secondary" 
-          size={18}
-          padding={0}
-          onPress={openSearch}
+          name="exit" 
+          theme="primary" 
+          size={13}
+          onPress={toggleSearch}
         />
       );
     }
-
-    return <></>;
   };
 
-  const toggleButton = (
-    <IconView 
-      name="search" 
-      theme="clear" 
-      size={22}
-      padding={0}
-      onPress={() => {
-        dispatch(toggleSearchField(true));
-        openSearch();
-      }}
-    />
-  );
-
-  const inputField = (
-    <View style={styles.inputContainer}>
-      <InputTextField 
-        value={currentSearchValue}
-        placeholder={i18n.t('Search...')}
-        onChangeText={onChangeText}
-        onSubmitEditing={onSubmitEditing}
-        rightIcon={renderRightIcon()}
-      /> 
-    </View>
-  );
-
   return (
-    <BoxView direction="row" align="center" justify="space-between" style={styles.container}>
-      { isExpanded && inputField}
-      { !isExpanded && toggleButton}
+    <BoxView 
+      direction="row" 
+      align="center" 
+      justify="flex-end" 
+      style={styles.container}
+    >
+      {!isExpanded && canShow &&
+        <IconView 
+          name="search" 
+          theme="clear" 
+          size={22}
+          padding={0}
+          onPress={toggleSearch}
+        /> 
+      }
+
+      <Animatable.View 
+        style={[styles.animated, (isExpanded ? styles.expanded : {})]}
+        transition="width"
+        duration={300}
+      >
+        <InputTextField 
+          value={currentSearchValue}
+          placeholder={i18n.t('Search...')}
+          onChangeText={onChangeText}
+          onSubmitEditing={onSubmitEditing}
+          rightIcon={renderRightIcon()}
+        /> 
+      </Animatable.View>
+
     </BoxView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    //backgroundColor: 'red',
+    width: '100%',
   },
-  inputContainer: {
-    minWidth: 140,
-    maxWidth: 188,
+  animated: {
+    overflow: 'hidden',
+    width: '0%',
+  },
+  expanded: {
+    width: '100%',
   },
 });
 

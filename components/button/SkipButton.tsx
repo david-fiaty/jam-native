@@ -3,6 +3,7 @@ import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/Colors';
 import i18n from '@/translation/i18n';
 import TextView from '../view/TextView';
+import { Config } from '@/constants/Config';
 
 type Props = {
   onPress: any,
@@ -10,7 +11,7 @@ type Props = {
 
 const SkipButton = ({onPress}: Props) => {
   const router = useRouter();
-  onPress = onPress ? onPress : router.push('/jams');
+  onPress = onPress ? onPress : router.push(Config.mainRoute);
 
   return (
     <TouchableOpacity onPress={onPress}>

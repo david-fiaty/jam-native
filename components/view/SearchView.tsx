@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { View, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -10,17 +10,15 @@ import StaticData from "@/constants/StaticData";
 import SearchJamsList from "../list/SearchJamsList";
 import SearchProfilesList from "../list/SearchProfilesList";
 import SearchProjectsList from "../list/SearchProjectsList";
-import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "./SpinnerView";
-import BackButton from "../button/BackButton";
-import i18n from "@/translation/i18n";
 import ScreenManager from "@/manager/ScreenManager";
+
+const modalSize: any = ScreenManager.getModalSize();
 
 const SearchView = () => {
   const [activeTab, setActiveTab] = useState<any>(null);
-  const [searchData, setSearchData] = useState<any>({});
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const searchState = useSelector((state: any) => state.search);
+  const searchResult = JSON.parse(useSelector((state: any) => state.search.current));
   
   const renderTab = (row: any) => {
     const tabStyle: any = row.item.id == activeTab ? styles.activeTab : {};
@@ -36,12 +34,8 @@ const SearchView = () => {
 
   useEffect(() => {
     if (!activeTab) setActiveTab(StaticData.searchTabs[0].id);
-
-    (async () => {
-      if (searchState.value) setSearchData(await SearchManager.getResult(searchState.value));
       setIsLoaded(true);
-    })();
-  }, [isLoaded, activeTab, searchState]);
+  }, [isLoaded, activeTab]);
 
   if (!isLoaded) return <SpinnerView />;
   
@@ -49,51 +43,48 @@ const SearchView = () => {
     <BoxView
       direction="column"
       align="flex-start"
-      justify="space-between"
       scroll={true}
-      style={Layout.screenContent}
+      style={[Layout.screenContent, styles.container]}
     >
-      <BackButton
-        title={i18n.t('Back')}
-        onPress={() => ScreenManager.toggleScreen('SearchView')}
-      />
 
       {/* Search filters */}
-      <ListView
-        data={StaticData.searchTabs}
-        horizontal={true}
-        contentContainerStyle={styles.tabContainer}
-        renderItem={(row: any) => renderTab(row)}
-      />
+      <BoxView direction="row" align="center" justify="flex-start">
+        <ListView
+          data={StaticData.searchTabs}
+          horizontal={true}
+          contentContainerStyle={styles.tabContainer}
+          renderItem={(row: any) => renderTab(row)}
+        />
+      </BoxView>
 
       {/* Search jams */}
       {['jam'].includes(activeTab) && 
-        <SearchJamsList data={searchData?.jam} />
+        <SearchJamsList data={searchResult?.jam} />
       }
 
       {/* Search calls */}
       {['call'].includes(activeTab) && 
-        <SearchJamsList data={searchData?.call} />
+        <SearchJamsList data={searchResult?.call} />
       }
 
       {/* Search jammers */}
       {['jammer'].includes(activeTab) && 
-        <SearchProfilesList data={searchData?.jammer} />
+        <SearchProfilesList data={searchResult?.jammer} />
       }
 
       {/* Search projects */}
       {['project'].includes(activeTab) && 
-        <SearchProjectsList data={searchData?.project} />
+        <SearchProjectsList data={searchResult?.project} />
       }
 
       {/* Search events */}
       {['event'].includes(activeTab) && 
-        <SearchJamsList data={searchData?.event} />
+        <SearchJamsList data={searchResult?.event} />
       }
 
       {/* Search venues */}
       {['venue'].includes(activeTab) && 
-        <SearchProfilesList data={searchData?.venue} />
+        <SearchProfilesList data={searchResult?.venue} />
       }
 
     </BoxView>
@@ -101,12 +92,16 @@ const SearchView = () => {
 };
 
 const styles = {
+  container: {
+    width: '100%',
+    height: modalSize.height,
+  },
   tabContainer: {
     backgroundColor: Colors.white,
   },
   tabItem: {
     padding: Layout.space.base,
-    borderBottomWidth: 1,
+    borderBottomWidth: Layout.borderWidth.base,
     borderBottomColor: Colors.primary,
   },
   activeTab: { 

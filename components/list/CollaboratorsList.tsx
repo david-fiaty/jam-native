@@ -23,9 +23,9 @@ const CollaboratorsList = () => {
   const [searchValue, setSearchValue] = useState<string>('');
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const activeScreen: any = ScreenManager.getActiveScreen();
-  const resource: string = activeScreen.params.resource;
-  const fieldName: string = activeScreen.params.field;
+  const activeModal: any = ScreenManager.getActiveModal();
+  const resource: string = activeModal.params.resource;
+  const fieldName: string = activeModal.params.field;
   const formData: any = useSelector((state: any) => state[resource]);
 
   const clearSearch = () => {
@@ -90,7 +90,7 @@ const CollaboratorsList = () => {
     })();
 
     setIsLoaded(true);
-  }, [profiles, formData, fieldName, activeScreen, selectedProfiles]);
+  }, [profiles, formData, fieldName, activeModal, selectedProfiles]);
 
   if (!profiles) return <SpinnerView />;
 
@@ -98,7 +98,7 @@ const CollaboratorsList = () => {
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Add collaborators')}
-        onPress={() => ScreenManager.toggleScreen('CollaboratorsList')}
+        onPress={() => ScreenManager.toggleModal('CollaboratorsList')}
       />
       
       <InputTextField 
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
   },
   wecomeMessage: {
     textTransform: 'uppercase',
-    fontSize: Layout.fontSize.base*1.1,
+    fontSize: Layout.fontSize.base,
   }
 });
 

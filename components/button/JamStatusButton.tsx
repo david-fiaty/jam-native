@@ -12,7 +12,7 @@ type Props = {
 
 const JamStatusButton = ({active}: Props) => {
   const [labelVisible, setLabelVisible] = useState(false);
-  const buttonLabel = active ? i18n.t('Active') : i18n.t('Inactive');
+  const buttonLabel = active ? i18n.t('active') : i18n.t('inactive');
   const statusStyle = active ? styles.active : styles.inactive;
 
   return (       
@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: Layout.radius.circle,
     width: Layout.space.base*2.5,
-    height: Layout.space.base*2.5,
   },
   dot: {
     backgroundColor: Colors.primary,
@@ -40,13 +39,14 @@ const styles = StyleSheet.create({
   label: {
     width: '100%',
     height: '100%',
-    minWidth: 56,
+    minWidth: 50,
     textAlign: 'center',
-    verticalAlign: 'middle',
     borderRadius: Layout.radius.round,
     color: Colors.white,
-    fontSize: Layout.fontSize.small,
+    fontSize: 11,
     backgroundColor: Colors.primary,
+    paddingTop: 0,
+    paddingBottom: 2,
   },
   active: {
     backgroundColor: Colors.primary,

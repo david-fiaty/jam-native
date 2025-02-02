@@ -3,6 +3,8 @@ import { StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
+import { View } from "react-native";
+import { Config } from "@/constants/Config";
 import LogoView from "../view/LogoView";
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
@@ -17,10 +19,8 @@ import LinkView from "../view/LinkView";
 import ButtonView from "../view/ButtonView";
 import ScreenManager from "@/manager/ScreenManager";
 import DividerView from "../view/DividerView";
-import SectorsField from "../field/SectorsField";
 import ProfileTypeField from "../field/ProfileTypeField";
 import CountryField from "../field/CountryField";
-import { View } from "react-native";
 
 const SignupScreen = () => {
   const router = useRouter();
@@ -43,7 +43,7 @@ const SignupScreen = () => {
       });
     }
     else {
-      router.replace('/jams');
+      router.replace(Config.mainRoute);
     }
   }  
 
@@ -163,7 +163,7 @@ const SignupScreen = () => {
 
 { /*
         <SectorsField
-          onPressEvent={() => ScreenManager.toggleScreen("SectorsList", {
+          onPressEvent={() => ScreenManager.toggleModal("SectorsList", {
             reducer: 'signupForm',
           })}
         />
@@ -193,7 +193,7 @@ const SignupScreen = () => {
               {i18n.t("Sign in")}
             </LinkView>
           </BoxView>
-          <SkipButton onPress={async () => router.replace("/jams")} />
+          <SkipButton onPress={async () => router.replace(Config.mainRoute)} />
         </BoxView>
 
         <DividerView />
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
   },
   wecomeMessage: {
     textTransform: "uppercase",
-    fontSize: Layout.fontSize.base * 1.1,
+    fontSize: Layout.fontSize.base,
   },
 });
 

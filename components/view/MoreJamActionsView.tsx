@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { View, Alert } from "react-native";
 import { Layout } from "@/constants/Layout";
-import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
 import BoxView from '../view/BoxView';
 import SpinnerView from "../view/SpinnerView";
@@ -14,20 +13,45 @@ import UserManager from '@/manager/UserManager';
 const MoreJamActionsView = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isEntityOwner, setIsEntityOwner] = useState<boolean>(false);
-  const entityId: number = ScreenManager.getScreenEntityId();
+  const entityId: number = ScreenManager.getModalEntityId();
   
+
+  const saveJam = async () => {
+    let result: any = await EntityManager.saveJam(entityId);
+    
+    let message: any = {
+      title: i18n.t('Save Jam'),
+      content: i18n.t('Jam successfully save.'),
+    };
+
+    if (result?.error) message.content = i18n.t(result.error)
+    ScreenManager.showMessage(message);
+  };
+
+  const likeJam = async () => {
+    let result: any = await EntityManager.likeJam(entityId);
+    
+    let message: any = {
+      title: i18n.t('Like Jam'),
+      content: i18n.t('Jam successfully liked.'),
+    };
+
+    if (result?.error) message.content = i18n.t(result.error)
+    ScreenManager.showMessage(message);
+  };
+
   const actions: any = [
     {
       label: i18n.t('Save Jam'),
       icon: 'save',
       canDisplay: () => true,
-      onPress: () => ScreenManager.toggleScreen('SavedJamAction', { entityId: entityId }),
+      onPress: () => saveJam(),
     },
     {
       label: i18n.t('Like Jam'),
       icon: 'like',
       canDisplay: () => true,
-      onPress: () => ScreenManager.toggleScreen('LikedJamAction', { entityId: entityId }),
+      onPress: () => likeJam(),
     },
     {
       label: i18n.t('Share Jam'),
@@ -40,14 +64,14 @@ const MoreJamActionsView = () => {
       icon: 'plus',
       //canDisplay: () => true,
       canDisplay: () => isEntityOwner, // Todo - Enable this
-      onPress: () => ScreenManager.toggleScreen('AddJamToProjectForm', { entityId: entityId }),
+      onPress: () => ScreenManager.toggleModal('AddJamToProjectForm', { entityId: entityId }),
     },
     {
       label: i18n.t('Edit Jam'),
       icon: 'edit',
       //canDisplay: () => true,
       canDisplay: () => isEntityOwner, // Todo - Enable this
-      onPress: () => ScreenManager.toggleScreen('JamForm', { entityId: entityId }),
+      onPress: () => ScreenManager.toggleModal('JamForm', { entityId: entityId }),
     },
     {
       label: i18n.t('Report Jam'),
@@ -125,11 +149,6 @@ const MoreJamActionsView = () => {
   
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
-      <BackButton
-        title={i18n.t('More actions')}
-        onPress={() => ScreenManager.toggleScreen('MoreJamActionsView')}
-      />
-      
       <View style={Layout.borderedListContainer}>
         { actions.map((item: any) => {
           if (item.canDisplay() === true) {
@@ -138,6 +157,7 @@ const MoreJamActionsView = () => {
         }) }
       </View>
     </BoxView>
+    
   );
 };
 

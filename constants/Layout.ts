@@ -1,6 +1,4 @@
-import { StatusBar } from 'react-native';
 import { Colors } from './Colors';
-import DeviceManager from '@/manager/DeviceManager';
 
 const space: any = {
   small: 5,
@@ -13,49 +11,20 @@ const radius: any = {
   circle: 40,
 };
 
-const iconSize: any = {
-  small: 11,
-  base: 14,
-  big: 44,
-};
-
 const fontSize: any = {
   small: 12,
-  base: 13,
-  big: 24,
+  base: 14,
+  big: 16,
 };
 
 const borderWidth: any = {
   small: 0.1,
-  base: 0.5,
+  base: 0.7,
   big: 1,
-};
-
-const header: any = {
-  height: 48,
-  width: DeviceManager.window.width,
-  marginTop: StatusBar.currentHeight,
-  paddingHorizontal: space.base*1.5,
-  backgroundColor: Colors.white,
 };
 
 const logo: any = {
   size: 48,
-};
-
-const footer: any = {
-  position: 'absolute',
-  bottom: 50 + space.base*2,
-  height: 50,
-  width: '100%',
-  borderTopWidth: 0.3,
-  borderTopColor: Colors.primary,
-  backgroundColor: Colors.white,
-};
-
-const modal: any = {
-  width: DeviceManager.window.width,
-  height: DeviceManager.window.height - DeviceManager.statusBar.height - header.height - footer.height,
 };
 
 const mapStyle: any = [
@@ -99,36 +68,37 @@ const mapStyle: any = [
 export const Layout = {
   space: space,
   radius: radius,
-  iconSize: iconSize,
   fontSize: fontSize,
   borderWidth: borderWidth,
-  header: header,
+  lineHeight: 17,
   logo: logo,
-  footer: footer,
   mapStyle: mapStyle,
-  animation: {
-    duration: 300,
+  header: {
+    minHeight: 68,
+    maxHeight: 68,
   },
-  headerLeft: {
-    gap: space.base,
+  footer: {
+    minHeight: 50,
+    maxHeight: 50,
   },
-  headerRight: {
-    flexDirection: 'row',
-    gap: space.base*1.1,
+  title: {
+    fontWeight: 'bold',
+    fontSize: fontSize.base,
   },
-  headerLogo: {
-    width: 48,
-    height: 48,
+  titleContainer: {
+    height: 40,
   },
   menuContainer: {
     padding: space.base*1.5,
+    height: '100%',
+    flexGrow: 1,
   },
   menuItem: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
     padding: space.base,
-    borderBottomWidth: 0.76,
+    borderBottomWidth: borderWidth.base,
     borderBottomColor: Colors.primary,
   },
   menuItemLabel: {
@@ -145,31 +115,8 @@ export const Layout = {
   },
   mainContent: {
     width: '100%',
-    height: modal.height,
     backgroundColor: Colors.white,
     zIndex: 0,
-  },
-  modalContainer: {
-    backgroundColor: Colors.white,
-    flexGrow: 1,
-  },
-  modalContent: {
-    top: 0,
-    left: 0,
-    position: 'absolute',
-    width: '100%',
-    height: modal.height,
-    backgroundColor: Colors.white,
-  },
-  animatedView: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: footer.height,
-    width: '100%',
-    height: modal.height, 
-    backgroundColor: Colors.white,
-    zIndex: 100,
   },
   formContainer: {
     width: "100%",
@@ -177,7 +124,7 @@ export const Layout = {
   },
   formField: {
     backgroundColor: Colors.secondary,
-    borderWidth: 1, 
+    borderWidth: borderWidth.base, 
     borderColor: Colors.secondary, 
     borderRadius: radius.round,
     flexDirection: 'row',
@@ -201,10 +148,6 @@ export const Layout = {
   },
   listItem: {
     padding: space.small,
-  },
-  textLink: {
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.primary,
   },
   backButtonContainer: {
     marginLeft: space.base*1.5,

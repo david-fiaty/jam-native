@@ -12,6 +12,7 @@ import ButtonView from '../view/ButtonView';
 import DividerView from '../view/DividerView';
 import UserManager from '@/manager/UserManager';
 import DataManager from '@/manager/DataManager';
+import ScreenManager from '@/manager/ScreenManager';
 
 const AccountForm = () => {
   const resource: string = 'account';
@@ -70,7 +71,7 @@ const AccountForm = () => {
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
       <BackButton
         title={i18n.t('Account information')}
-        onPress={() => router.back()}
+        onPress={() => ScreenManager.popScreen(router)}
       />
     
       <InputTextField 

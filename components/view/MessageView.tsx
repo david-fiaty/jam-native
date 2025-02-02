@@ -5,14 +5,14 @@ import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 import { setMessage } from '@/redux/slices/MessageSlice';
 import { BaseProps } from '@/constants/Types';
-import DeviceManager from '@/manager/DeviceManager';
+import ScreenManager from '@/manager/ScreenManager';
 import IconView from './IconView';
 
 type Props = BaseProps & {
   title?: string;
 };
 
-const statusBarHeight: any = DeviceManager.getStatusBarSize().height;
+const statusBarHeight: any = ScreenManager.getStatusBarSize().height;
 
 const MessageView = ({ title }: Props) => {
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     top: 0,      
     left: 0, 
     right: 0,
-    zIndex: 10,
+    zIndex: ScreenManager.getModalZIndex(),
     backgroundColor: Colors.primary,
     color: Colors.white,
     padding: Layout.space.base*1.6,

@@ -31,8 +31,8 @@ const ListItemToolbar = ({ row }: Props) => {
         align="center"
         onPress={() =>
           isLoggedIn
-            ? ScreenManager.toggleScreen("JammersList", { entityId: row?.item?.id })
-            : router.push("/login")
+            ? ScreenManager.toggleModal("JammersList", { entityId: row?.item?.id })
+            : ScreenManager.pushScreen(router, '/login')
         }
       >
         <IconView name="users" theme="tertiary" />
@@ -48,8 +48,8 @@ const ListItemToolbar = ({ row }: Props) => {
           theme="tertiary"
           onPress={() =>
             isLoggedIn
-              ? ScreenManager.toggleScreen("SavedJamAction", { entityId: row?.item?.id })
-              : router.push("/login")
+              ? ScreenManager.toggleModal("SavedJamAction", { entityId: row?.item?.id })
+              : ScreenManager.pushScreen(router, '/login')
           }
         />
 
@@ -60,7 +60,7 @@ const ListItemToolbar = ({ row }: Props) => {
           onPress={() =>
             isLoggedIn
               ? EntityManager.shareJam(row?.item?.id)
-              : router.push("/login")
+              : ScreenManager.pushScreen(router, '/login')
           }
         />
       </BoxView>

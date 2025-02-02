@@ -1,185 +1,81 @@
-import { useEffect } from 'react';
-import { Stack, useSegments } from 'expo-router';
+import React, { useEffect, useCallback } from 'react';
+import { BackHandler } from 'react-native';
+import { Stack, useSegments, useRouter } from 'expo-router';
 import { useFonts } from 'expo-font';
 import { Provider } from 'react-redux';
-import { ThemeProvider } from '@rneui/themed';
-import { Colors } from '@/constants/Colors';
+import { setModalConfig } from "@/redux/slices/ModalSlice";
+import { setRouteConfig } from '@/redux/slices/RouteSlice';
 import * as ExpoSplashScreen from 'expo-splash-screen';
-import BaseTheme from "@/constants/BaseTheme";
 import Store from "@/redux/Store";
-import HeaderNavigation from '@/components/navigation/HeaderNavigation';
-import MessageView from '@/components/view/MessageView';
-
-const headerHiddenOptions: object = { 
-  headerShown: false,
-};
-
-const headerVisibleOptions: object = { 
-  statusBarStyle: 'dark',
-  headerShown: true,
-  statusBarBackgroundColor: Colors.white,
-  headerTintColor: Colors.white,    
-  headerStyle: {
-    backgroundColor: Colors.white, 
-  },
-  header: (props: object) => (
-    <ThemeProvider theme={BaseTheme}>
-      <HeaderNavigation />
-    </ThemeProvider>
-  ),    
-};
-
-const statusBarVisibleOptions: object = { 
-  statusBarStyle: 'dark',
-  headerShown: false,
-  statusBarBackgroundColor: Colors.white,
-};
+import RouteConfig from '@/constants/RouteConfig';
+import ModalConfig from '@/constants/ModalConfig';
+import ScreenManager from '@/manager/ScreenManager';
 
 ExpoSplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
+  const router = useRouter();
   const segments = useSegments(); 
+  const routeConfig: any = RouteConfig.getRoutes(segments);
+  const modalConfig: any = ModalConfig.build();
+
   const [isLoaded, isError] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
 
-  const routes = [
-    {
-      name: 'index',
-      options: {
-        ...statusBarVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-    {
-      name: 'welcome',
-      options: {
-        ...statusBarVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-    {
-      name: 'login',
-      options: {
-        ...statusBarVisibleOptions,
-        ...{
-          animation: !segments.length ? 'default' : 'fade',
-        },
-      },
-    },
-    {
-      name: 'signup',
-      options: {
-        ...statusBarVisibleOptions,
-        ...{
-          animation: !segments.length ? 'default' : 'fade',
-        },
-      },
-    },
-    {
-      name: 'about',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: !segments.length ? 'default' : 'fade',
-        },
-      },
-    },
-    {
-      name: 'legal',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: !segments.length ? 'default' : 'fade',
-        },
-      },
-    },
-    {
-      name: 'jams',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: 'fade',
-        },
-      },
-    },
-    {
-      name: 'account',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-    {
-      name: 'password',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-    {
-      name: 'language',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-    {
-      name: 'notification',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-    {
-      name: 'jam',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-    {
-      name: 'project',
-      options: {
-        ...headerVisibleOptions,
-        ...{
-          animation: 'default',
-        },
-      },
-    },
-  ];
+  const backAction = () => {  
+    router.replace('/');
+
+    // Todo - Set new active route to fix bug
+    /*
+    let activeRoutes: any = [...Store.getState().route.active].pop();
+    ScreenManager.toggleModal(null);
+    
+    if (Array.isArray(activeRoutes) && activeRoutes.length > 0) {
+      router.dismissTo(activeRoutes[activeRoutes.length - 1]);
+    }
+    else if (activeRoutes.length > 0) {
+      router.replace(activeRoutes);
+    }
+    else {
+      router.replace('/');
+    }
+    */
+
+    return true;
+  };
+
+  const loadModalConfig = useCallback(() => {
+    Store.dispatch(setModalConfig(modalConfig.map(({ component, ...rest }) => ({ ...rest }))));
+    Store.dispatch(setRouteConfig(routeConfig));
+  }, [modalConfig]);
 
   useEffect(() => {
+    loadModalConfig();
+
     if (isLoaded || isError) {
       ExpoSplashScreen.hideAsync();
     }
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove();
+
   }, [isLoaded, isError]);
 
-  if (!isLoaded && !isError) return null; 
+  if (!isLoaded && !isError) return <></>; 
 
   return (
     <Provider store={Store}>
-      <MessageView />
       <Stack>
-        {routes.map((item: any) => (
+        {routeConfig.map((o: any) => (
           <Stack.Screen 
-            key={item.name}
-            name={item.name} 
-            options={item.options} 
+            key={o.name}
+            name={o.name} 
+            options={o}
           />
         ))}
       </Stack>

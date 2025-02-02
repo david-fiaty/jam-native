@@ -1,15 +1,158 @@
+import { Dimensions, ScaledSize, StatusBar } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import { setMessage } from '@/redux/slices/MessageSlice';
-import { setActiveScreen } from '@/redux/slices/ScreenSlice';
+import { setActiveModal } from '@/redux/slices/ModalSlice';
+import { setActiveRoute } from '@/redux/slices/RouteSlice';
 import { Config } from '@/constants/Config';
 import Store from '@/redux/Store';
-import DeviceManager from './DeviceManager';
 
 class ScreenManager {
   messageTimeout?: any;
+  screen: ScaledSize;
+  window: ScaledSize;
+  statusBar: object;
+
+  constructor() {
+    this.screen = Dimensions.get('screen');
+    this.window = Dimensions.get('window');
+    this.statusBar = this.getStatusBarSize();
+  }
+
+  pushScreen(router: any, path: string, params?: any) {
+    let activeModals: any = [...Store.getState().modal.active];
+    let lastVisibleIndex = activeModals.map((o: any) => o?.visible).lastIndexOf(true);
+
+    if (lastVisibleIndex !== -1) {
+      activeModals[lastVisibleIndex] = {...activeModals[lastVisibleIndex], ...{visible: false}};
+    }
+
+    Store.dispatch(setActiveModal(activeModals));
+    this.setCurrentRoute(path);
+
+    router.push({
+      pathname: path,
+      params: params,
+    });
+  }
+
+  popScreen(router: any) {
+    let activeModals: any = [...Store.getState().modal.active];
+    let activeRoutes: any = [...Store.getState().route.active];
+    let lastHiddenIndex = activeModals.map((o: any) => o?.visible).lastIndexOf(false);
+
+    if (lastHiddenIndex !== -1 && activeRoutes.length < 2) {
+      activeModals[lastHiddenIndex] = {...activeModals[lastHiddenIndex], ...{visible: true}};
+    }
+
+    Store.dispatch(setActiveModal(activeModals));
+    this.setCurrentRoute(null);
+
+    router.back();
+  }
+
+  replaceScreen(router: any, path: string, params?: any) {
+    this.toggleModal(null); // Todo - Double check this
+    
+    router.replace({
+      pathname: path,
+      params: params,
+    });
+  }
+
+  setCurrentRoute(path?: any) {
+    let activeRoutes: any = [...Store.getState().route.active];
+    let routeConfig: any[] = Store.getState().route.config;
+    let currentRoute: any = routeConfig.find((o: any) => o.name == path?.replace('/', ''));
+
+    if (path && currentRoute) {
+      Store.dispatch(setActiveRoute([...activeRoutes, path]));
+    }
+    else if (activeRoutes.length > 0) {
+      Store.dispatch(setActiveRoute(activeRoutes.pop()));
+    }
+  }
+
+  toggleModal(name: any, params?: any) {
+    let activeModals: any = [...Store.getState().modal.active];
+    let modalIndex: any = activeModals.findIndex((o: any) => o.name == name);
+
+    if (!name) {
+      activeModals = [];
+    }
+    else if (modalIndex === -1)  {
+      activeModals.push({
+        name: name,
+        params: params,
+        visible: true,
+      });
+    }
+    else if (activeModals[modalIndex]?.visible === true) {
+      activeModals[modalIndex] = {...activeModals[modalIndex], ...{ visible: false }};
+      if (activeModals.length > 1) activeModals[modalIndex - 1] = {...activeModals[modalIndex - 1], ...{ visible: true }};
+    }
+    else if (activeModals[modalIndex]?.visible === false) {
+      activeModals[modalIndex] = {...activeModals[modalIndex], ...{ visible: true }};
+      if (activeModals.length > 1) activeModals[modalIndex - 1] = {...activeModals[modalIndex - 1], ...{ visible: false }};
+    }
+    else {
+      activeModals.splice(modalIndex, 1);
+    }
+
+    Store.dispatch(setActiveModal(activeModals));
+  }
+
+  getActiveModal(): any {
+    let activeModals: any[] = [...Store.getState().modal.active];
+    let visibleModals: any[] = activeModals.filter((o: any) => o?.visible === true);
+    
+    if (visibleModals.length > 0) {
+      return visibleModals[visibleModals.length - 1];
+    }
+    else if (activeModals.length > 0) {
+      return activeModals[activeModals.length -1];
+    }
+    
+    return null;
+  }
+
+  getModalZIndex(): any {
+    return Store.getState().modal.active.length + 1;
+  }
+
+  getModalEntityId(): any {
+    return this.getActiveModal()?.params?.entityId;
+  }
+
+  getModalFormState() {
+    let reducer: any = this.getActiveModal().params.reducer;
+    let storeState: any = Store.getState(); 
+    
+    return storeState[reducer];
+  }
+
+  getModalSize() {
+    return {
+      width: this.window.width,
+      height: this.window.height - this.getHeaderSize().height - this.getFooterSize().height,
+    };
+  }
+
+  getModalPosition() {
+    return {
+      x: 0,
+      y: this.getHeaderSize().height,
+    };
+  }
+
+  getStatusBarSize() {
+    return {
+      height: StatusBar.currentHeight,
+      width: this.window.width,
+    };
+  }
 
   getGridCellSize(numColumns: number) {
-    let value = (DeviceManager.window.width - Layout.space.base*(numColumns + 2))/numColumns; 
+    let value = (this.window.width - Layout.space.base*(numColumns + 2))/numColumns; 
 
     return {
       width: value,
@@ -17,30 +160,43 @@ class ScreenManager {
     };
   }
 
-  getScreenEntityId(): any {
-    return this.getActiveScreen()?.params?.entityId;
+  getHeaderSize() {
+    let height: number = this.window.height/10;
+
+    if (height < Layout.header.minHeight) {
+      height = Layout.header.minHeight;
+    }
+    else if (height > Layout.header.maxHeight) {
+      height = Layout.header.maxHeight;
+    }
+
+    return {
+      width: this.window.width,
+      height: height,
+    };
   }
 
-  getScreenFormState() {
-    let reducer: any = this.getActiveScreen().params.reducer;
-    let storeState: any = Store.getState(); 
-    
-    return storeState[reducer];
+  getFooterSize() {
+    let height: number = this.window.height/16;
+
+    if (height < Layout.footer.minHeight) {
+      height = Layout.footer.minHeight;
+    }
+    else if (height > Layout.footer.maxHeight) {
+      height = Layout.footer.maxHeight;
+    }
+
+    return {
+      width: this.window.width,
+      height: height,
+    };
   }
 
-  getActiveScreen(): any {
-    let screens: any = Store.getState().screen;
-    let length: number = screens.length;
-    let index: number = length > 0 ? length - 1 : 0; 
-
-    return screens?.[index] || null;
-  }
-  
-  toggleScreen(name: string, params?: any) {
-    Store.dispatch(setActiveScreen({
-      name: name,
-      params: params,
-    }));
+  getFooterPosition() {
+    return {
+      x: 0, 
+      y: this.window.height - this.getFooterSize().height,
+    };
   }
 
   showMessage(payload: any, duration?: number): void {
