@@ -88,6 +88,11 @@ export const Layout = {
   titleContainer: {
     height: 40,
   },
+  modalTitle: {
+    marginLeft: space.base*1.5,
+    marginBottom: space.base*1.5,
+    width: '100%',
+  },
   menuContainer: {
     padding: space.base*1.5,
     height: '100%',
