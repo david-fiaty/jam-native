@@ -67,7 +67,7 @@ const ModalView = ({ children }: Props) => {
         <BackButton
           title={modalTitle}
           onPress={() => ScreenManager.toggleModal(modalName)}
-          containerStyle={styles.modalTitle}
+          containerStyle={Layout.modalTitle}
         />
       );
     }
@@ -105,13 +105,5 @@ const ModalView = ({ children }: Props) => {
     </Modal>
   );
 };
-
-const styles = StyleSheet.create({
-  modalTitle: {
-    marginLeft: Layout.space.base*1.5,
-    marginBottom: Layout.space.base*1.5,
-    width: '100%',
-  },
-});
 
 export default ModalView;
