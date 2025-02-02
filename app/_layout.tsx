@@ -31,11 +31,13 @@ const RootLayout = () => {
       router.dismissTo(activeRoutes[activeRoutes.length - 1]);
     }
     else if (activeRoutes.length > 0) {
-      router.dismissTo(activeRoutes);
+      router.replace(activeRoutes);
     }
     else {
       router.replace('/');
     }
+
+    // Todo - Set new active route to fix bug
 
     return true;
   };
