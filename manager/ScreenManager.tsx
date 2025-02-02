@@ -29,7 +29,7 @@ class ScreenManager {
 
     Store.dispatch(setActiveModal(activeModals));
     //Store.dispatch(setActiveRoute([...activeRoutes, path]));
-    // Todo - Handle active routes
+    // Todo - Handle active routes or remove
 
     router.push({
       pathname: path,
