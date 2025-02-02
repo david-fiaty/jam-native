@@ -71,9 +71,11 @@ class ScreenManager {
     }
     else if (activeModals[modalIndex]?.visible === true) {
       activeModals[modalIndex] = {...activeModals[modalIndex], ...{ visible: false }};
+      if (activeModals.length > 1) activeModals[modalIndex - 1] = {...activeModals[modalIndex - 1], ...{ visible: true }};
     }
     else if (activeModals[modalIndex]?.visible === false) {
       activeModals[modalIndex] = {...activeModals[modalIndex], ...{ visible: true }};
+      if (activeModals.length > 1) activeModals[modalIndex - 1] = {...activeModals[modalIndex - 1], ...{ visible: false }};
     }
     else {
       activeModals.splice(modalIndex, 1);
