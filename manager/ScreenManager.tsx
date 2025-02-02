@@ -41,7 +41,7 @@ class ScreenManager {
     let activeRoutes: any = [...Store.getState().route.active];
     let lastHiddenIndex = activeModals.map((o: any) => o?.visible).lastIndexOf(false);
 
-    if (lastHiddenIndex !== -1) {
+    if (lastHiddenIndex !== -1 && activeRoutes.length < 2) {
       activeModals[lastHiddenIndex] = {...activeModals[lastHiddenIndex], ...{visible: true}};
     }
 
