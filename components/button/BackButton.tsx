@@ -11,7 +11,6 @@ type Props = {
 };
 
 const BackButton = ({title, containerStyle, onPress}: Props) => {
-
   const renderTitle = () => {
     if (typeof title == 'string') {
       return <TextView style={Layout.title}>{title}</TextView>;
