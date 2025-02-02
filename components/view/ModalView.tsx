@@ -67,7 +67,7 @@ const ModalView = ({ children }: Props) => {
         <BackButton
           title={modalTitle}
           onPress={() => ScreenManager.toggleModal(modalName)}
-          containerStyle={Layout.modalTitle}
+          containerStyle={Layout.modalTitleContainer}
         />
       );
     }
