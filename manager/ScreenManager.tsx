@@ -20,7 +20,6 @@ class ScreenManager {
 
   pushScreen(router: any, path: string, params?: any) {
     let activeModals: any = [...Store.getState().modal.active];
-    let activeRoutes: any = [...Store.getState().route.active];
     let lastVisibleIndex = activeModals.map((o: any) => o?.visible).lastIndexOf(true);
 
     if (lastVisibleIndex !== -1) {
@@ -28,7 +27,7 @@ class ScreenManager {
     }
 
     Store.dispatch(setActiveModal(activeModals));
-    Store.dispatch(setActiveRoute([...activeRoutes, path]));
+    this.setCurrentRoute(path);
 
     router.push({
       pathname: path,
@@ -46,18 +45,29 @@ class ScreenManager {
     }
 
     Store.dispatch(setActiveModal(activeModals));
-    Store.dispatch(setActiveRoute(activeRoutes.pop()));
+    this.setCurrentRoute(null);
 
     router.back();
   }
 
   replaceScreen(router: any, path: string, params?: any) {
-    this.toggleModal(null);
+    this.toggleModal(null); // Todo - Double check this
     
     router.replace({
       pathname: path,
       params: params,
     });
+  }
+
+  setCurrentRoute(path?: any) {
+    let activeRoutes: any = [...Store.getState().route.active];
+
+    if (path) {
+      Store.dispatch(setActiveRoute([...activeRoutes, path]));
+    }
+    else if (activeRoutes.length > 0) {
+      activeRoutes.pop();
+    }
   }
 
   toggleModal(name: any, params?: any) {
