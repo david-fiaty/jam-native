@@ -27,8 +27,11 @@ const RootLayout = () => {
     let activeRoutes: any = [...Store.getState().route.active].pop();
     ScreenManager.toggleModal(null);
     
-    if (activeRoutes.length > 0) {
+    if (Array.isArray(activeRoutes) && activeRoutes.length > 0) {
       router.dismissTo(activeRoutes[activeRoutes.length - 1]);
+    }
+    else if (activeRoutes.length > 0) {
+      router.dismissTo(activeRoutes);
     }
     else {
       router.replace('/');
