@@ -24,6 +24,10 @@ const RootLayout = () => {
   });
 
   const backAction = () => {  
+    router.replace('/');
+
+    // Todo - Set new active route to fix bug
+    /*
     let activeRoutes: any = [...Store.getState().route.active].pop();
     ScreenManager.toggleModal(null);
     
@@ -36,8 +40,7 @@ const RootLayout = () => {
     else {
       router.replace('/');
     }
-
-    // Todo - Set new active route to fix bug
+    */
 
     return true;
   };
