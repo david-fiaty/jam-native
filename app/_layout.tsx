@@ -23,30 +23,12 @@ const RootLayout = () => {
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
 
-  const backAction = () => {
-      //ScreenManager.toggleModal(null);
-      //router.dismissTo('/');
+  const backAction = () => {  
+    let activeRoutes: any = [...Store.getState().route.active].pop();
+    ScreenManager.toggleModal(null);
+    router.dismissTo(activeRoutes?.[activeRoutes.length - 1] || '/');
 
-      console.log(Store.getState().route.active);
-      
-      return true;
-
-      // Todo - Fix route stack and handle back logic
-      /*
-      let activeRoutes: any = [...Store.getState().route.active];
-
-      console.log(activeRoutes);
-      
-      if (activeRoutes.length > 0) {
-        activeRoutes.pop();
-      } 
-
-
-      if (activeRoutes.length > 0) {
-        router.dismissTo(activeRoutes[activeRoutes.length - 1]);
-      }
-    */
-
+    return true;
   };
 
   const loadModalConfig = useCallback(() => {
