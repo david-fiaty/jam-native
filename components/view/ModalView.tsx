@@ -32,14 +32,16 @@ const ModalView = ({ children }: Props) => {
         left: position.x,
         width: size.width,
         height: size.height,
-        //backgroundColor: Colors.white,
-        backgroundColor: 'red',
+        backgroundColor: Colors.white,
+        paddingTop: Layout.space.base,
         zIndex: zIndex,
         margin: 0,
       };
     }
   
-    return {};
+    return {
+      backgroundColor: Colors.white,
+    };
   };
 
   const isModalVisible = () => {
