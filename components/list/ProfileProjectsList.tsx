@@ -10,6 +10,7 @@ import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
 import BoxView from "../view/BoxView";
 import ProjectListItem from "./ListItem/ProjectListItem";
+import ScreenManager from "@/manager/ScreenManager";
 
 type Props = {
   title?: any;
@@ -66,12 +67,9 @@ const ProfileProjectsList = ({
       onListItemPress(row);
     }
     else {
-      router.push({
-        pathname: '/project',
-        params: {
-          idArray: [row.item.id],
-          title: row?.item?.title
-        },
+      ScreenManager.pushScreen(router, '/project', {
+        idArray: [row.item.id],
+        title: row?.item?.title,
       });
     }
   };
