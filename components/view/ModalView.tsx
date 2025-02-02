@@ -39,7 +39,9 @@ const ModalView = ({ children }: Props) => {
       };
     }
   
-    return {};
+    return {
+      backgroundColor: Colors.white,
+    };
   };
 
   const isModalVisible = () => {
