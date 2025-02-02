@@ -109,6 +109,7 @@ const ModalView = ({ children }: Props) => {
 const styles = StyleSheet.create({
   modalTitle: {
     marginLeft: Layout.space.base*1.5,
+    marginBottom: Layout.space.base*1.5,
     width: '100%',
   },
 });
