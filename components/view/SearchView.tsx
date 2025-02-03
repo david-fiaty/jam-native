@@ -100,7 +100,8 @@ const styles = {
     backgroundColor: Colors.white,
   },
   tabItem: {
-    padding: Layout.space.base,
+    paddingHorizontal: Layout.space.base,
+    paddingBottom: Layout.space.base,
     borderBottomWidth: Layout.borderWidth.base,
     borderBottomColor: Colors.primary,
   },
