@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useCallback } from "react";
 import { StyleSheet } from "react-native";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
@@ -14,7 +14,8 @@ type Props = BaseProps & {
 };
 
 const ListItemHeader = ({ row }: Props) => {
-  const renderHosts = () => {
+
+  const renderHosts = useCallback(() => {
     return (
       <ModalButton 
         login={true}
@@ -28,13 +29,13 @@ const ListItemHeader = ({ row }: Props) => {
         }
       />
     );
-  };
+  }, [row]);
 
-  const renderStatus = () => {
+  const renderStatus = useCallback(() => {
     return <JamStatusButton active={row?.item?.is_active} />;
-  };
+  }, [row]);
 
-  const renderActions = () => {
+  const renderActions = useCallback(() => {
     return (
       <ModalButton 
         login={true}
@@ -51,26 +52,30 @@ const ListItemHeader = ({ row }: Props) => {
         }
       />
     );
-  };
+  }, [row]);
 
-  return (
-    <BoxView
-      direction="row"
-      align="center"
-      justify="space-between"
-      style={styles.container}
-    >
-      <BoxView align="center">
-        {renderHosts()}
+  const renderComponent = useCallback(() => {
+    return (
+      <BoxView
+        direction="row"
+        align="center"
+        justify="space-between"
+        style={styles.container}
+      >
+        <BoxView align="center">
+          {renderHosts()}
+        </BoxView>
+        <BoxView align="center">
+          {renderStatus()}
+        </BoxView>
+        <BoxView align="center">
+          {renderActions()}
+        </BoxView>
       </BoxView>
-      <BoxView align="center">
-        {renderStatus()}
-      </BoxView>
-      <BoxView align="center">
-        {renderActions()}
-      </BoxView>
-    </BoxView>
-  );
+    );  
+  }, []);
+
+  return renderComponent();
 };
 
 const styles = StyleSheet.create({
