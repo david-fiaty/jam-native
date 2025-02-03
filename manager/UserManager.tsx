@@ -127,8 +127,14 @@ class UserManager {
     }
 
     let location: any = await Location.getCurrentPositionAsync({});
-    
-    if (!location) {
+
+    if (location) {
+      location = {
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      };
+    }
+    else {
       location = {
         latitude: Config.defaultLocation.latitude,
         longitude: Config.defaultLocation.longitude,
