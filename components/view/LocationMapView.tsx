@@ -46,10 +46,10 @@ const LocationMapView = () => {
   const getDeviceLocation = async () => {
     let deviceLocation: any = await UserManager.getLocation();
 
-    if (deviceLocation?.coords?.latitude && deviceLocation?.coords?.longitude) {
+    if (deviceLocation?.latitude && deviceLocation?.longitude) {
       return {
-        latitude: deviceLocation?.coords?.latitude,
-        longitude: deviceLocation?.coords?.longitude,
+        latitude: deviceLocation?.latitude,
+        longitude: deviceLocation?.longitude,
       };
     }
 
