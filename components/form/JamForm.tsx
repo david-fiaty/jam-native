@@ -119,7 +119,7 @@ const JamForm = () => {
       scroll={true}
       style={Layout.screenContent}
     >
-      <View style={Layout.formContainer}>
+      <BoxView direction="column" style={Layout.formContainer}>
         <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
         <ListView
           data={jamCategoriesData}
@@ -262,7 +262,7 @@ const JamForm = () => {
         />
 
         <DividerView />
-      </View>
+      </BoxView>
     </BoxView>
   );
 };

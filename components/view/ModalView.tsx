@@ -33,7 +33,7 @@ const ModalView = ({ children }: Props) => {
         width: size.width,
         height: size.height,
         backgroundColor: Colors.white,
-        paddingTop: Layout.space.base,
+        paddingTop: Layout.space.base*3,
         zIndex: zIndex,
         margin: 0,
       };
