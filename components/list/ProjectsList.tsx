@@ -31,7 +31,6 @@ const ProjectsList = ({ idArray }: Props) => {
     <BoxView direction="column" style={Layout.screenContent}>
       <ListView
         data={projectsData}
-        initialNumToRender={projectsData?.length}
         contentContainerStyle={Layout.listContainer}
         renderItem={(row: any) => <ListItem row={row} sectorsData={sectorsData} />}
         keyExtractor={(item: any) => item.id.toString()}

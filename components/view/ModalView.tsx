@@ -32,14 +32,16 @@ const ModalView = ({ children }: Props) => {
         left: position.x,
         width: size.width,
         height: size.height,
-        //backgroundColor: Colors.white,
-        backgroundColor: 'red',
+        backgroundColor: Colors.white,
+        paddingTop: Layout.space.base,
         zIndex: zIndex,
         margin: 0,
       };
     }
   
-    return {};
+    return {
+      backgroundColor: Colors.white,
+    };
   };
 
   const isModalVisible = () => {
@@ -65,7 +67,7 @@ const ModalView = ({ children }: Props) => {
         <BackButton
           title={modalTitle}
           onPress={() => ScreenManager.toggleModal(modalName)}
-          containerStyle={styles.modalTitle}
+          containerStyle={Layout.modalTitleContainer}
         />
       );
     }
@@ -103,12 +105,5 @@ const ModalView = ({ children }: Props) => {
     </Modal>
   );
 };
-
-const styles = StyleSheet.create({
-  modalTitle: {
-    marginLeft: Layout.space.base*1.5,
-    width: '100%',
-  },
-});
 
 export default ModalView;

@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { StyleSheet, FlatList } from "react-native";
 import { BaseProps } from "@/constants/Types";
 import { Config } from "@/constants/Config";
@@ -5,7 +6,6 @@ import ScreenManager from "@/manager/ScreenManager";
 
 type Props = BaseProps & {
   data: any;
-  initialNumToRender?: number;
   numColumns?: number;
   scrollEnabled?: boolean;
   horizontal?: boolean;
@@ -18,7 +18,6 @@ type Props = BaseProps & {
 
 const ListView = ({
   data,
-  initialNumToRender,
   numColumns,
   scrollEnabled,
   horizontal,
@@ -29,11 +28,15 @@ const ListView = ({
   renderItem,
   style,
 }: Props) => {
+
+  const ref = useRef();
+
   return (
     <FlatList
+      ref={ref}
       data={data || []}
       numColumns={numColumns || 1}
-      initialNumToRender={initialNumToRender || Config.paginationSize}
+      initialNumToRender={data?.length || Config.paginationSize}
       scrollEnabled={scrollEnabled === false ? false : true}
       horizontal={horizontal === true ? horizontal : false}
       contentContainerStyle={[styles.container, contentContainerStyle]}

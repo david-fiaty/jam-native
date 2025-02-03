@@ -1,3 +1,4 @@
+import { memo, useCallback } from "react";
 import { useRouter } from "expo-router";
 import { StyleSheet } from "react-native";
 import { BaseProps } from "@/constants/Types";
@@ -12,7 +13,7 @@ import ModalButton from "@/components/button/ModalButton";
 import ScreenManager from "@/manager/ScreenManager";
 
 type Props = BaseProps & {
-  row?: any,
+  row?: any;
 };
 
 const ListItemToolbar = ({ row }: Props) => {
@@ -49,7 +50,7 @@ const ListItemToolbar = ({ row }: Props) => {
     : ScreenManager.pushScreen(router, '/login');
   };
 
-  const renderJammersButton = () => {
+  const renderJammersButton = useCallback(() => {
     return (
       <ModalButton 
         login={true}
@@ -74,9 +75,9 @@ const ListItemToolbar = ({ row }: Props) => {
         }
       />
     );
-  };
+  }, [row]);
 
-  const renderSaveButton = () => {
+  const renderSaveButton = useCallback(() => {
     return (
       <BoxView
         direction="row"
@@ -91,9 +92,9 @@ const ListItemToolbar = ({ row }: Props) => {
         />
       </BoxView>
     );
-  };
+  }, []);
 
-  const renderLikeButton = () => {
+  const renderLikeButton = useCallback(() => {
     return (
       <BoxView
         direction="row"
@@ -108,9 +109,9 @@ const ListItemToolbar = ({ row }: Props) => {
         />
       </BoxView>
     );
-  };
+  }, []);
 
-  const renderShareButton = () => {
+  const renderShareButton = useCallback(() => {
     return (
       <BoxView
         direction="row"
@@ -125,34 +126,38 @@ const ListItemToolbar = ({ row }: Props) => {
         />
       </BoxView>
     );
-  };
+  }, []);
 
-  return (
-    <BoxView
-      direction="row"
-      align="center"
-      justify="space-between"
-      style={styles.container}
-    >
-      <BoxView align="center">
-        {renderJammersButton()}
+  const renderComponent = useCallback(() => {
+    return (
+      <BoxView
+        direction="row"
+        align="center"
+        justify="space-between"
+        style={styles.container}
+      >
+        <BoxView align="center">
+          {renderJammersButton()}
+        </BoxView>
+  
+        <BoxView direction="row" align="center">
+          <BoxView align="center">
+            {renderSaveButton()}
+          </BoxView>
+  
+          <BoxView align="center">
+            {renderLikeButton()}
+          </BoxView>
+  
+          <BoxView align="center">
+            {renderShareButton()}
+          </BoxView>
+        </BoxView>
       </BoxView>
+    );  
+  }, []);
 
-      <BoxView direction="row" align="center">
-        <BoxView align="center">
-          {renderSaveButton()}
-        </BoxView>
-
-        <BoxView align="center">
-          {renderLikeButton()}
-        </BoxView>
-
-        <BoxView align="center">
-          {renderShareButton()}
-        </BoxView>
-      </BoxView>
-    </BoxView>
-  );
+  return renderComponent();
 };
 
 const styles = StyleSheet.create({
@@ -161,4 +166,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ListItemToolbar;
+export default memo(ListItemToolbar);
