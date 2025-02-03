@@ -79,7 +79,7 @@ const SearchField = ({ canShow, onSearchEdit, onSearchSubmit, onSearchClear }: P
       style={styles.container}
     >
       <Animatable.View 
-        style={[styles.fieldAnimate, (isExpanded ? styles.fieldExpanded : {})]}
+        style={[styles.fieldInput, styles.fieldAnimate, (isExpanded ? styles.fieldExpanded : {})]}
         transition="width"
         duration={300}
       >
@@ -104,6 +104,7 @@ const SearchField = ({ canShow, onSearchEdit, onSearchSubmit, onSearchClear }: P
           padding={0}
           onPress={toggleSearch}
         /> 
+
       </Animatable.View>
 
     </BoxView>
@@ -113,6 +114,10 @@ const SearchField = ({ canShow, onSearchEdit, onSearchSubmit, onSearchClear }: P
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+  },
+  fieldInput: {
+    position: 'absolute',
+    right: 0,
   },
   fieldAnimate: {
     overflow: 'hidden',
