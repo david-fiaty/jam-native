@@ -58,6 +58,7 @@ class SearchManager {
 
     let data: any = [];
 
+    // Todo - Implement storage with a search value as cache key
     if (Config.dataCacheEnabled === true) {
       data = await AsyncStorage.getItem(cacheKey);
       if (data === null) {
