@@ -154,7 +154,7 @@ const ListItemToolbar = ({ row }: Props) => {
           {renderJammersButton()}
         </BoxView>
   
-        <BoxView direction="row" align="center">
+        <BoxView direction="row" align="center" justify="flex-end">
           <BoxView align="center">
             {renderSaveButton()}
           </BoxView>
