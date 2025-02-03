@@ -92,17 +92,19 @@ const SearchField = ({ canShow, onSearchEdit, onSearchSubmit, onSearchClear }: P
         /> 
       </Animatable.View>
 
-      {!isExpanded && canShow &&
-        <View style={styles.searchIcon}>
-          <IconView 
-            name="search" 
-            theme="clear" 
-            size={22}
-            padding={0}
-            onPress={toggleSearch}
-          /> 
-        </View>
-      }
+      <Animatable.View 
+        style={[styles.searchIcon, styles.searchIconAnimate, (!isExpanded ? styles.searchIconVisible : {})]}
+        transition="opacity"
+        duration={300}
+      >      
+        <IconView 
+          name="search" 
+          theme="clear" 
+          size={22}
+          padding={0}
+          onPress={toggleSearch}
+        /> 
+      </Animatable.View>
 
     </BoxView>
   );
@@ -122,6 +124,12 @@ const styles = StyleSheet.create({
   searchIcon: {
     position: 'absolute',
     right: 0,
+  },
+  searchIconAnimate: {
+    opacity: 0,
+  },
+  searchIconVisible: {
+    opacity: 1,
   },
 });
 
