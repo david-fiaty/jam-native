@@ -104,7 +104,6 @@ const SearchField = ({ canShow, onSearchEdit, onSearchSubmit, onSearchClear }: P
           padding={0}
           onPress={toggleSearch}
         /> 
-
       </Animatable.View>
 
     </BoxView>
