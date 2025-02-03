@@ -17,9 +17,9 @@ const JamsMapView = () => {
   const markerImage = require('@/assets/images/logo-55.png');
   
   const getInitialRegion = () => {
-    let latitude = currentLocation?.coords?.latitude || Config.defaultLocation.latitude;
-    let longitude = currentLocation?.coords?.longitude || Config.defaultLocation.longitude;
-    let latitudeDelta = 0.16;
+    let latitude = currentLocation?.latitude || Config.defaultLocation.latitude;
+    let longitude = currentLocation?.longitude || Config.defaultLocation.longitude;
+    let latitudeDelta = 0.10;
     let longitudeDelta = latitudeDelta * (ScreenManager.window.width/ScreenManager.window.height);
 
     return {
