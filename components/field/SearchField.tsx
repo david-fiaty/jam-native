@@ -51,8 +51,9 @@ const SearchField = ({ canShow, onSearchEdit, onSearchSubmit, onSearchClear }: P
       return (
         <IconView 
           name="delete" 
-          theme="primary" 
-          size={13}
+          theme="secondary" 
+          size={18}
+          padding={0}
           onPress={clearSearch}
         />
       );
@@ -61,8 +62,9 @@ const SearchField = ({ canShow, onSearchEdit, onSearchSubmit, onSearchClear }: P
       return (
         <IconView 
           name="exit" 
-          theme="primary" 
-          size={13}
+          theme="secondary" 
+          size={18}
+          padding={0}
           onPress={toggleSearch}
         />
       );
@@ -77,7 +79,7 @@ const SearchField = ({ canShow, onSearchEdit, onSearchSubmit, onSearchClear }: P
       style={styles.container}
     >
       <Animatable.View 
-        style={[styles.animated, (isExpanded ? styles.expanded : {})]}
+        style={[styles.fieldAnimate, (isExpanded ? styles.fieldExpanded : {})]}
         transition="width"
         duration={300}
       >
@@ -90,17 +92,19 @@ const SearchField = ({ canShow, onSearchEdit, onSearchSubmit, onSearchClear }: P
         /> 
       </Animatable.View>
 
-      {!isExpanded && canShow &&
-        <View style={styles.searchIcon}>
-          <IconView 
-            name="search" 
-            theme="clear" 
-            size={22}
-            padding={0}
-            onPress={toggleSearch}
-          /> 
-        </View>
-      }
+      <Animatable.View 
+        style={[styles.searchIcon, styles.searchIconAnimate, (!isExpanded ? styles.searchIconVisible : {})]}
+        transition="opacity"
+        duration={300}
+      >      
+        <IconView 
+          name="search" 
+          theme="clear" 
+          size={22}
+          padding={0}
+          onPress={toggleSearch}
+        /> 
+      </Animatable.View>
 
     </BoxView>
   );
@@ -110,16 +114,22 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
   },
-  animated: {
+  fieldAnimate: {
     overflow: 'hidden',
     width: '0%',
   },
-  expanded: {
+  fieldExpanded: {
     width: '100%',
   },
   searchIcon: {
     position: 'absolute',
     right: 0,
+  },
+  searchIconAnimate: {
+    opacity: 0,
+  },
+  searchIconVisible: {
+    opacity: 1,
   },
 });
 
