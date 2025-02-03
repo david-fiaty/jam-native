@@ -13,7 +13,7 @@ import ModalButton from "@/components/button/ModalButton";
 import ScreenManager from "@/manager/ScreenManager";
 
 type Props = BaseProps & {
-  row?: any,
+  row?: any;
 };
 
 const ListItemToolbar = ({ row }: Props) => {
