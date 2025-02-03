@@ -11,6 +11,7 @@ import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
 import ModalButton from "@/components/button/ModalButton";
 import ScreenManager from "@/manager/ScreenManager";
+import SpinnerView from "@/components/view/SpinnerView";
 
 type Props = BaseProps & {
   row?: any;
@@ -85,6 +86,8 @@ const ListItemToolbar = ({ row }: Props) => {
   };
 
   const renderSaveButton = () => {
+    if (isSaveProcessing) return <SpinnerView size="small" />;
+
     return (
       <BoxView
         direction="row"
@@ -102,6 +105,8 @@ const ListItemToolbar = ({ row }: Props) => {
   };
 
   const renderLikeButton = () => {
+    if (isLikeProcessing) return <SpinnerView size="small" />;
+
     return (
       <BoxView
         direction="row"
@@ -119,6 +124,8 @@ const ListItemToolbar = ({ row }: Props) => {
   };
 
   const renderShareButton = () => {
+    if (isShareProcessing) return <SpinnerView size="small" />;
+    
     return (
       <BoxView
         direction="row"
