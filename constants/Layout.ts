@@ -126,6 +126,7 @@ export const Layout = {
   formContainer: {
     width: "100%",
     gap: space.base,
+    backgroundColor: Colors.white,
   },
   formField: {
     backgroundColor: Colors.secondary,
