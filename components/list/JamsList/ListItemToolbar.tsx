@@ -142,7 +142,7 @@ const ListItemToolbar = ({ row }: Props) => {
     );
   };
 
-  const renderComponent = useCallback(() => {
+  const renderComponent = () => {
     return (
       <BoxView
         direction="row"
@@ -169,7 +169,7 @@ const ListItemToolbar = ({ row }: Props) => {
         </BoxView>
       </BoxView>
     );  
-  }, []);
+  };
 
   return renderComponent();
 };
