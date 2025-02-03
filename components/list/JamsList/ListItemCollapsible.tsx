@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useCallback } from "react";
 import { StyleSheet } from "react-native";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
@@ -17,7 +17,8 @@ type Props = BaseProps & {
 };
 
 const ListItemCollapsible = ({ row, sectorsData }: Props) => {
-  const renderLocation = () => {
+
+  const renderLocation = useCallback(() => {
     return (
       <BoxView
         direction="row"
@@ -34,9 +35,9 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
         </TextView>
       </BoxView>
     );
-  };
+  }, [row]);
 
-  const renderStart = () => {
+  const renderStart = useCallback(() => {
     return (
       <BoxView
         direction="row"
@@ -51,9 +52,9 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
         </TextView>
       </BoxView>      
     );
-  };
+  }, [row]);
 
-  const renderEnd = () => {
+  const renderEnd = useCallback(() => {
     return (
       <BoxView
         direction="row"
@@ -68,9 +69,9 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
         </TextView>
       </BoxView>
     );
-  };
+  }, [row]);
 
-  const renderSector = () => {
+  const renderSector = useCallback(() => {
     return (
       <BoxView
         direction="row"
@@ -86,9 +87,9 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
         </TextView>
       </BoxView>
     );
-  };
+  }, [sectorsData, row]);
 
-  const renderSubsector = () => {
+  const renderSubsector = useCallback(() => {
     return (
       <BoxView
         direction="row"
@@ -103,29 +104,33 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
         </TextView>
       </BoxView>
     );
-  };
+  }, [row]);
 
-  return (
-    <BoxView style={styles.container}>
-      <CollapsibleView
-        label={<TextView>{i18n.t("View more.")}</TextView>}
-        openedLabel={<TextView>{i18n.t("View less.")}</TextView>}
-        content={
-          <BoxView
-            direction="column"
-            align="flex-start"
-            style={styles.detailsContainer}
-          >
-            {renderLocation()}
-            {renderStart()}
-            {renderEnd()}
-            {renderSector()}
-            {renderSubsector()}
-          </BoxView>
-        }
-      />
-    </BoxView>
-  );
+  const renderComponent = useCallback(() => {
+    return (
+      <BoxView style={styles.container}>
+        <CollapsibleView
+          label={<TextView>{i18n.t("View more.")}</TextView>}
+          openedLabel={<TextView>{i18n.t("View less.")}</TextView>}
+          content={
+            <BoxView
+              direction="column"
+              align="flex-start"
+              style={styles.detailsContainer}
+            >
+              {renderLocation()}
+              {renderStart()}
+              {renderEnd()}
+              {renderSector()}
+              {renderSubsector()}
+            </BoxView>
+          }
+        />
+      </BoxView>
+    );  
+  }, []);
+
+  return renderComponent();
 };
 
 const styles = StyleSheet.create({
