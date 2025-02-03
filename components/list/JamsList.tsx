@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { StyleSheet } from 'react-native';
 import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -18,6 +18,10 @@ const JamsList = ({ idArray }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [jamData, setJamData] = useState<any[]>([]);
   const searchResult = JSON.parse(useSelector((state: any) => state.search.current));
+
+  const renderItem = useCallback((row: any) => {
+    return <ListItem row={row} sectorsData={sectors} />;
+  }, [sectors]);
 
   useEffect(() => {
     (async () => {
@@ -43,9 +47,8 @@ const JamsList = ({ idArray }: Props) => {
     >
       <ListView
         data={jamData}
-        initialNumToRender={jamData?.length || 0}
         contentContainerStyle={Layout.listContainer}
-        renderItem={(row: any) => <ListItem row={row} sectorsData={sectors} />}
+        renderItem={renderItem}
         keyExtractor={(item: any) => item.id.toString()}
       />
     </BoxView>
