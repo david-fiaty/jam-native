@@ -163,6 +163,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     width: headerSize.width,
     paddingHorizontal: Layout.space.base*1.5,
+    marginBottom: Layout.space.base,
   },
   headerLeft: {
     width: '12%',

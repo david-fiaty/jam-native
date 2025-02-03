@@ -79,9 +79,9 @@ const SearchField = ({ canShow, onSearchEdit, onSearchSubmit, onSearchClear }: P
       style={styles.container}
     >
       <Animatable.View 
-        style={[styles.fieldAnimate, (isExpanded ? styles.fieldExpanded : {})]}
+        style={[styles.fieldInput, styles.fieldAnimate, (isExpanded ? styles.fieldExpanded : {})]}
         transition="width"
-        duration={300}
+        duration={isExpanded ? 300 : 600}
       >
         <InputTextField 
           value={currentSearchValue}
@@ -95,7 +95,7 @@ const SearchField = ({ canShow, onSearchEdit, onSearchSubmit, onSearchClear }: P
       <Animatable.View 
         style={[styles.searchIcon, styles.searchIconAnimate, (!isExpanded ? styles.searchIconVisible : {})]}
         transition="opacity"
-        duration={300}
+        duration={isExpanded ? 100: 1000}
       >      
         <IconView 
           name="search" 
@@ -113,6 +113,10 @@ const SearchField = ({ canShow, onSearchEdit, onSearchSubmit, onSearchClear }: P
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+  },
+  fieldInput: {
+    position: 'absolute',
+    right: 0,
   },
   fieldAnimate: {
     overflow: 'hidden',
