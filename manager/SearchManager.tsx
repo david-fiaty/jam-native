@@ -54,13 +54,12 @@ class SearchManager {
 
   async loadData(searchValue?: string) {
     const options = searchValue?.length ? { query_text: searchValue } : {};
-    const cacheKey = 'searchResult';
-
     let data: any = [];
 
-    // Todo - Implement storage with a search value as cache key
-    if (Config.dataCacheEnabled === true) {
+    if (Config.dataCacheEnabled === true && searchValue?.length) {
+      let cacheKey = this.getCacheKey(searchValue);
       data = await AsyncStorage.getItem(cacheKey);
+
       if (data === null) {
         data = await this.sendRequest(options);
         await AsyncStorage.setItem(cacheKey, JSON.stringify(data));
@@ -108,6 +107,10 @@ class SearchManager {
       call: data.jams.filter((o: any) => o?.type == 'call'),
       event: data.jams.filter((o: any) => o?.type == 'event'),
     };
+  }
+
+  getCacheKey(searchValue: string) {
+    return searchValue.replace(/\W/g, '');
   }
 };
 
