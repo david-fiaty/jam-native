@@ -43,7 +43,7 @@ const JamsList = ({ idArray }: Props) => {
     >
       <ListView
         data={jamData}
-        initialNumToRender={jamData.length}
+        initialNumToRender={jamData?.length || 0}
         contentContainerStyle={Layout.listContainer}
         renderItem={(row: any) => <ListItem row={row} sectorsData={sectors} />}
         keyExtractor={(item: any) => item.id.toString()}
