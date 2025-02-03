@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { StyleSheet } from "react-native";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
@@ -80,4 +81,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ListItemHeader;
+export default memo(ListItemHeader);
