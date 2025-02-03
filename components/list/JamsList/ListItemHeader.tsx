@@ -1,4 +1,3 @@
-import { memo, useCallback } from "react";
 import { StyleSheet } from "react-native";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
@@ -15,7 +14,7 @@ type Props = BaseProps & {
 
 const ListItemHeader = ({ row }: Props) => {
 
-  const renderHosts = useCallback(() => {
+  const renderHosts = () => {
     return (
       <ModalButton 
         login={true}
@@ -29,13 +28,13 @@ const ListItemHeader = ({ row }: Props) => {
         }
       />
     );
-  }, [row]);
+  };
 
-  const renderStatus = useCallback(() => {
+  const renderStatus = () => {
     return <JamStatusButton active={row?.item?.is_active} />;
-  }, [row]);
+  };
 
-  const renderActions = useCallback(() => {
+  const renderActions = () => {
     return (
       <ModalButton 
         login={true}
@@ -52,9 +51,9 @@ const ListItemHeader = ({ row }: Props) => {
         }
       />
     );
-  }, [row]);
+  };
 
-  const renderComponent = useCallback(() => {
+  const renderComponent = () => {
     return (
       <BoxView
         direction="row"
@@ -73,7 +72,7 @@ const ListItemHeader = ({ row }: Props) => {
         </BoxView>
       </BoxView>
     );  
-  }, []);
+  };
 
   return renderComponent();
 };
@@ -86,4 +85,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(ListItemHeader);
+export default ListItemHeader;
