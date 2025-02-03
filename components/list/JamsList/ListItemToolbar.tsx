@@ -86,7 +86,7 @@ const ListItemToolbar = ({ row }: Props) => {
   };
 
   const renderSaveButton = () => {
-    if (isSaveProcessing) return <SpinnerView size="small" />;
+    if (isSaveProcessing) return <SpinnerView size="small" compact={true} />;
 
     return (
       <BoxView
@@ -105,7 +105,7 @@ const ListItemToolbar = ({ row }: Props) => {
   };
 
   const renderLikeButton = () => {
-    if (isLikeProcessing) return <SpinnerView size="small" />;
+    if (isLikeProcessing) return <SpinnerView size="small" compact={true} />;
 
     return (
       <BoxView
@@ -124,7 +124,7 @@ const ListItemToolbar = ({ row }: Props) => {
   };
 
   const renderShareButton = () => {
-    if (isShareProcessing) return <SpinnerView size="small" />;
+    if (isShareProcessing) return <SpinnerView size="small" compact={true} />;
     
     return (
       <BoxView
