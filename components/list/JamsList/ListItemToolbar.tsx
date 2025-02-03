@@ -1,4 +1,4 @@
-import { memo, useCallback } from "react";
+import { memo, useCallback, useState } from "react";
 import { useRouter } from "expo-router";
 import { StyleSheet } from "react-native";
 import { BaseProps } from "@/constants/Types";
@@ -18,9 +18,13 @@ type Props = BaseProps & {
 
 const ListItemToolbar = ({ row }: Props) => {
   const router = useRouter();
+  const [isLikeProcessing, setIsLikeProcessing] = useState<boolean>(false);
+  const [isSaveProcessing, setIsSaveProcessing] = useState<boolean>(false);
+  const [isShareProcessing, setIsShareProcessing] = useState<boolean>(false);
   const isLoggedIn: boolean = UserManager.isLoggedIn();
 
   const saveJam = async () => {
+    setIsSaveProcessing(true);
     let result: any = await EntityManager.saveJam(row.item.id);
     
     let message: any = {
@@ -30,9 +34,11 @@ const ListItemToolbar = ({ row }: Props) => {
 
     if (result?.error) message.content = i18n.t(result.error)
     ScreenManager.showMessage(message);
+    setIsSaveProcessing(false);
   };
 
   const likeJam = async () => {
+    setIsLikeProcessing(true);
     let result: any = await EntityManager.likeJam(row.item.id);
     
     let message: any = {
@@ -42,15 +48,16 @@ const ListItemToolbar = ({ row }: Props) => {
 
     if (result?.error) message.content = i18n.t(result.error)
     ScreenManager.showMessage(message);
+    setIsLikeProcessing(false);
   };
 
   const shareJam = async () => {
-    isLoggedIn
-    ? await EntityManager.shareJam(row?.item?.id)
-    : ScreenManager.pushScreen(router, '/login');
+    setIsShareProcessing(true);
+    isLoggedIn ? await EntityManager.shareJam(row?.item?.id) : ScreenManager.pushScreen(router, '/login');
+    setIsShareProcessing(false);
   };
 
-  const renderJammersButton = useCallback(() => {
+  const renderJammersButton = () => {
     return (
       <ModalButton 
         login={true}
@@ -75,9 +82,9 @@ const ListItemToolbar = ({ row }: Props) => {
         }
       />
     );
-  }, [row]);
+  };
 
-  const renderSaveButton = useCallback(() => {
+  const renderSaveButton = () => {
     return (
       <BoxView
         direction="row"
@@ -92,9 +99,9 @@ const ListItemToolbar = ({ row }: Props) => {
         />
       </BoxView>
     );
-  }, []);
+  };
 
-  const renderLikeButton = useCallback(() => {
+  const renderLikeButton = () => {
     return (
       <BoxView
         direction="row"
@@ -109,9 +116,9 @@ const ListItemToolbar = ({ row }: Props) => {
         />
       </BoxView>
     );
-  }, []);
+  };
 
-  const renderShareButton = useCallback(() => {
+  const renderShareButton = () => {
     return (
       <BoxView
         direction="row"
@@ -126,7 +133,7 @@ const ListItemToolbar = ({ row }: Props) => {
         />
       </BoxView>
     );
-  }, []);
+  };
 
   const renderComponent = useCallback(() => {
     return (
