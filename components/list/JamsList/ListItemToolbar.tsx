@@ -1,4 +1,4 @@
-import { memo, useCallback } from "react";
+import { memo, useCallback, useState } from "react";
 import { useRouter } from "expo-router";
 import { StyleSheet } from "react-native";
 import { BaseProps } from "@/constants/Types";
@@ -11,6 +11,7 @@ import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
 import ModalButton from "@/components/button/ModalButton";
 import ScreenManager from "@/manager/ScreenManager";
+import SpinnerView from "@/components/view/SpinnerView";
 
 type Props = BaseProps & {
   row?: any;
@@ -18,9 +19,13 @@ type Props = BaseProps & {
 
 const ListItemToolbar = ({ row }: Props) => {
   const router = useRouter();
+  const [isLikeProcessing, setIsLikeProcessing] = useState<boolean>(false);
+  const [isSaveProcessing, setIsSaveProcessing] = useState<boolean>(false);
+  const [isShareProcessing, setIsShareProcessing] = useState<boolean>(false);
   const isLoggedIn: boolean = UserManager.isLoggedIn();
 
   const saveJam = async () => {
+    setIsSaveProcessing(true);
     let result: any = await EntityManager.saveJam(row.item.id);
     
     let message: any = {
@@ -30,9 +35,11 @@ const ListItemToolbar = ({ row }: Props) => {
 
     if (result?.error) message.content = i18n.t(result.error)
     ScreenManager.showMessage(message);
+    setIsSaveProcessing(false);
   };
 
   const likeJam = async () => {
+    setIsLikeProcessing(true);
     let result: any = await EntityManager.likeJam(row.item.id);
     
     let message: any = {
@@ -42,15 +49,16 @@ const ListItemToolbar = ({ row }: Props) => {
 
     if (result?.error) message.content = i18n.t(result.error)
     ScreenManager.showMessage(message);
+    setIsLikeProcessing(false);
   };
 
   const shareJam = async () => {
-    isLoggedIn
-    ? await EntityManager.shareJam(row?.item?.id)
-    : ScreenManager.pushScreen(router, '/login');
+    setIsShareProcessing(true);
+    isLoggedIn ? await EntityManager.shareJam(row?.item?.id) : ScreenManager.pushScreen(router, '/login');
+    setIsShareProcessing(false);
   };
 
-  const renderJammersButton = useCallback(() => {
+  const renderJammersButton = () => {
     return (
       <ModalButton 
         login={true}
@@ -75,9 +83,11 @@ const ListItemToolbar = ({ row }: Props) => {
         }
       />
     );
-  }, [row]);
+  };
 
-  const renderSaveButton = useCallback(() => {
+  const renderSaveButton = () => {
+    if (isSaveProcessing) return <SpinnerView size="small" />;
+
     return (
       <BoxView
         direction="row"
@@ -92,9 +102,11 @@ const ListItemToolbar = ({ row }: Props) => {
         />
       </BoxView>
     );
-  }, []);
+  };
 
-  const renderLikeButton = useCallback(() => {
+  const renderLikeButton = () => {
+    if (isLikeProcessing) return <SpinnerView size="small" />;
+
     return (
       <BoxView
         direction="row"
@@ -109,9 +121,11 @@ const ListItemToolbar = ({ row }: Props) => {
         />
       </BoxView>
     );
-  }, []);
+  };
 
-  const renderShareButton = useCallback(() => {
+  const renderShareButton = () => {
+    if (isShareProcessing) return <SpinnerView size="small" />;
+    
     return (
       <BoxView
         direction="row"
@@ -126,9 +140,9 @@ const ListItemToolbar = ({ row }: Props) => {
         />
       </BoxView>
     );
-  }, []);
+  };
 
-  const renderComponent = useCallback(() => {
+  const renderComponent = () => {
     return (
       <BoxView
         direction="row"
@@ -155,7 +169,7 @@ const ListItemToolbar = ({ row }: Props) => {
         </BoxView>
       </BoxView>
     );  
-  }, []);
+  };
 
   return renderComponent();
 };
