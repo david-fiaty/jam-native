@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "expo-router";
 import { StyleSheet } from "react-native";
 import { BaseProps } from "@/constants/Types";
@@ -180,4 +180,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(ListItemToolbar);
+export default ListItemToolbar;
