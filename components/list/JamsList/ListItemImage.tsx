@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { BaseProps } from "@/constants/Types";
 import ImageSlideshow from "@/components/slideshow/ImageSlideshow";
 
@@ -9,4 +10,4 @@ const ListItemImage = ({ row }: Props) => {
   return <ImageSlideshow data={row?.item.medias} />;
 };
 
-export default ListItemImage;
+export default memo(ListItemImage);

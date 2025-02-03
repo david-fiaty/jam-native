@@ -33,12 +33,15 @@ const ModalView = ({ children }: Props) => {
         width: size.width,
         height: size.height,
         backgroundColor: Colors.white,
+        paddingTop: Layout.space.base,
         zIndex: zIndex,
         margin: 0,
       };
     }
   
-    return {};
+    return {
+      backgroundColor: Colors.white,
+    };
   };
 
   const isModalVisible = () => {
@@ -61,13 +64,11 @@ const ModalView = ({ children }: Props) => {
       let modalTitle: string = activeModal?.params?.backTitle;
 
       return (
-        <BoxView direction="row">
-          <BackButton
-            title={modalTitle}
-            onPress={() => ScreenManager.toggleModal(modalName)}
-            containerStyle={styles.modalTitle}
-          />
-        </BoxView>
+        <BackButton
+          title={modalTitle}
+          onPress={() => ScreenManager.toggleModal(modalName)}
+          containerStyle={Layout.modalTitleContainer}
+        />
       );
     }
     
@@ -104,12 +105,5 @@ const ModalView = ({ children }: Props) => {
     </Modal>
   );
 };
-
-const styles = StyleSheet.create({
-  modalTitle: {
-    marginLeft: Layout.space.base*1.5,
-    width: '100%',
-  },
-});
 
 export default ModalView;
