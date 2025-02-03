@@ -16,6 +16,7 @@ import i18n from "@/translation/i18n";
 import SearchField from "../field/SearchField";
 import RouteConfig from "@/constants/RouteConfig";
 import ModalConfig from "@/constants/ModalConfig";
+import SpinnerView from "../view/SpinnerView";
 
 const headerSize: any = ScreenManager.getHeaderSize();
 
@@ -135,6 +136,7 @@ const HeaderNavigation = () => {
   }, [isLoaded]);
 
   if (!canShowHeader()) return <></>;
+  else if (!isLoaded) return <SpinnerView style="small" compact={true} />;
 
   return (
     <BoxView 
