@@ -86,6 +86,8 @@ const ListItemToolbar = ({ row }: Props) => {
   };
 
   const renderLikeButton = () => {
+    let iconTheme: string = userState.likedJams.includes(row.item.id) ? "primary" : "tertiary";
+
     return (
       <BoxView
         direction="row"
@@ -100,7 +102,7 @@ const ListItemToolbar = ({ row }: Props) => {
         {!isLikeProcessing && (
           <IconView 
             name="like"
-            theme="tertiary"
+            theme={iconTheme}
             size={12}
             padding={6.5}
             onPress={likeJam}
@@ -134,6 +136,8 @@ const ListItemToolbar = ({ row }: Props) => {
   const renderSaveButton = () => {
     if (isSaveProcessing) return <SpinnerView size="small" />;
 
+    let iconTheme: string = userState.savedJams.includes(row.item.id) ? "primary" : "tertiary";
+
     return (
       <BoxView
         direction="row"
@@ -141,7 +145,7 @@ const ListItemToolbar = ({ row }: Props) => {
       >
         <IconView 
           name="save"
-          theme="tertiary"
+          theme={iconTheme}
           size={12}
           padding={6.5}
           onPress={saveJam}
@@ -176,12 +180,12 @@ const ListItemToolbar = ({ row }: Props) => {
   };
 
 
-  const isJamLiked = () => {
-    return userState.likedJams.includes(row.item.id);
+  const getLikeIconTheme = () => {
+    return userState.likedJams.includes(row.item.id) ? "primary" : "tertiary";
   };
 
-  const isJamSaved = () => {
-    return userState.savedJams.includes(row.item.id);
+  const getSaveIconTheme = () => {
+    return userState.savedJams.includes(row.item.id) ? "primary" : "tertiary";
   };
 
   const renderComponent = () => {
