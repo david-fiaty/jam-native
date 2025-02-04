@@ -27,18 +27,45 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
   const isLoggedIn: boolean = UserManager.isLoggedIn();
   const userState: any = useSelector((state: any) => state.user);
 
+  const isJamLiked = () => {
+    return userState.likedJams.includes(row.item.id) || profileData?.liked_jams.includes(row.item.id);
+  };
+
+  const isJamSaved = () => {
+    return userState.savedJams.includes(row.item.id) || profileData?.saved_jams.includes(row.item.id)
+  };
+
+  const getLikeIconTheme = () => {
+    return isJamLiked() ? "primary" : "tertiary";
+  };
+
+  const getSaveIconTheme = () => {
+    return isJamSaved() ? "primary" : "tertiary";
+  };
+
   const saveJam = async () => {
     if (!isLoggedIn) {
       ScreenManager.pushScreen(router, '/login');
     }
     else {
       setIsSaveProcessing(true);
-      let result: any = await EntityManager.saveJam(row.item.id);
-      
-      let message: any = {
-        title: i18n.t('Save Jam'),
-        content: i18n.t('Jam successfully saved.'),
-      };
+      let result: any = {};
+      let message: any = {};
+
+      if (isJamSaved()) {
+        result = await EntityManager.unsaveJam(row.item.id);
+        message = {
+          title: i18n.t('Unsave Jam'),
+          content: i18n.t('The Jam was unsaved.'),
+        };
+      }
+      else {
+        result = await EntityManager.saveJam(row.item.id);
+        message = {
+          title: i18n.t('Save Jam'),
+          content: i18n.t('The Jam was saved.'),
+        };
+      }
 
       if (result?.error) {
         message.content = i18n.t(result.error);
@@ -57,12 +84,23 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
     }
     else {
       setIsLikeProcessing(true);
-      let result: any = await EntityManager.likeJam(row.item.id);
-      
-      let message: any = {
-        title: i18n.t('Like Jam'),
-        content: i18n.t('Jam successfully liked.'),
-      };
+      let result: any = {};
+      let message: any = {};
+
+      if (isJamLiked()) {
+        result = await EntityManager.unlikeJam(row.item.id);
+        message = {
+          title: i18n.t('Unlike Jam'),
+          content: i18n.t('The Jam was unliked.'),
+        };
+      }
+      else {
+        result = await EntityManager.likeJam(row.item.id);
+        message = {
+          title: i18n.t('Like Jam'),
+          content: i18n.t('The Jam was liked.'),
+        };
+      }
 
       if (result?.error) {
         message.content = i18n.t(result.error);
@@ -87,10 +125,6 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
   };
 
   const renderLikeButton = () => {
-    let iconTheme: string = (userState.likedJams.includes(row.item.id) || profileData?.liked_jams.includes(row.item.id))
-      ? "primary" 
-      : "tertiary";
-
     return (
       <BoxView
         direction="row"
@@ -105,7 +139,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
         {!isLikeProcessing && (
           <IconView 
             name="like"
-            theme={iconTheme}
+            theme={getLikeIconTheme()}
             size={12}
             padding={6.5}
             onPress={likeJam}
@@ -139,10 +173,6 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
   const renderSaveButton = () => {
     if (isSaveProcessing) return <SpinnerView size="small" />;
 
-    let iconTheme: string = (userState.savedJams.includes(row.item.id) || profileData?.saved_jams.includes(row.item.id))
-      ? "primary" 
-      : "tertiary";
-
     return (
       <BoxView
         direction="row"
@@ -150,7 +180,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
       >
         <IconView 
           name="save"
-          theme={iconTheme}
+          theme={getSaveIconTheme()}
           size={12}
           padding={6.5}
           onPress={saveJam}
@@ -182,15 +212,6 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
         )}
       </BoxView>
     );
-  };
-
-
-  const getLikeIconTheme = () => {
-    return userState.likedJams.includes(row.item.id) ? "primary" : "tertiary";
-  };
-
-  const getSaveIconTheme = () => {
-    return userState.savedJams.includes(row.item.id) ? "primary" : "tertiary";
   };
 
   const renderComponent = () => {
