@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "expo-router";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { useSelector } from "react-redux";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
@@ -23,6 +24,11 @@ const ListItemToolbar = ({ row }: Props) => {
   const [isSaveProcessing, setIsSaveProcessing] = useState<boolean>(false);
   const [isShareProcessing, setIsShareProcessing] = useState<boolean>(false);
   const isLoggedIn: boolean = UserManager.isLoggedIn();
+  const likedJams: any[] = useSelector((state: any) => state.likedJams);
+  const savedJams: any[] = useSelector((state: any) => state.savedJamsJams);
+
+
+  console.log(likedJams, savedJams);
 
   const saveJam = async () => {
     if (!isLoggedIn) {
@@ -42,7 +48,7 @@ const ListItemToolbar = ({ row }: Props) => {
       }
       else {
         ScreenManager.showMessage(message);
-        UserManager.updateSavedJams(row.item.id);
+        await UserManager.updateSavedJams(row.item.id);
         setIsSaveProcessing(false);
       }
     }
@@ -66,7 +72,7 @@ const ListItemToolbar = ({ row }: Props) => {
       }
       else {
         setIsLikeProcessing(false);
-        UserManager.updateLikedJams(row.item.id);
+        await UserManager.updateLikedJams(row.item.id);
         ScreenManager.showMessage(message);
       }
     }
