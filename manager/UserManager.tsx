@@ -1,7 +1,7 @@
 import { Platform } from 'react-native';
 import { useLocales } from 'expo-localization';
 import { setTokenData, setIsLoggedIn } from '@/redux/slices/UserSlice';
-import { setLikedJams, setSavedJams, setLikedProjects, setSavedProjects } from '@/redux/slices/UserSlice';
+import { setLikedJam, setSavedJam, setLikedProject, setSavedProject } from '@/redux/slices/UserSlice';
 import { setLanguage } from '@/redux/slices/AppSlice';
 import { Config } from '@/constants/Config';
 import Store from '@/redux/Store';
@@ -157,19 +157,19 @@ class UserManager {
   };
 
   addLikedJam(entityId: number) {
-    let likedJams: any = [...Store.getState().user.likedJams];
+    Store.dispatch(setLikedJam(entityId));
   }
 
   addSavedJam(entityId: number) {
-    let savedJams: any = [...Store.getState().user.savedJams];
+    Store.dispatch(setSavedJam(entityId));
   }
 
   addLikedProject(entityId: number) {
-    let likedProjects: any = [...Store.getState().user.likedProjects];
+    Store.dispatch(setLikedProject(entityId));
   }
 
   addSavedProject(entityId: number) {
-    let savedProjects: any = [...Store.getState().user.savedProjects];
+    Store.dispatch(setSavedProject(entityId));
   }
 }
 
