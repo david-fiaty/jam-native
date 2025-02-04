@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "expo-router";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
@@ -62,53 +62,25 @@ const ListItemToolbar = ({ row }: Props) => {
     if (isSaveProcessing) return <SpinnerView size="small" compact={true} />;
 
     return (
-      <BoxView
-        direction="row"
-        align="center"
-      >
-        <IconView 
-          name="users" 
-          theme="tertiary" 
-          size={12}
-          padding={6.5}
-          onPress={likeJam}
-        />
-        <TextView>
-          {parseInt(row?.item?.jammers?.length)} {i18n.t("jammers")}
-        </TextView>
-      </BoxView>
+      <TouchableOpacity onPress={likeJam}>
+        <BoxView
+          direction="row"
+          align="center"
+        >
+          <IconView 
+            name="users" 
+            theme="tertiary" 
+            size={12}
+            padding={6.5}
+          />
+          <TextView>
+            {parseInt(row?.item?.jammers?.length)} {i18n.t("jammers")}
+          </TextView>
+        </BoxView>
+      </TouchableOpacity>
     );
   };
 
-/*
-  const renderJammersButton = () => {
-    return (
-      <ModalButton 
-        login={true}
-        name="JammersList"
-        entityId={row.item.id}
-        title={i18n.t('Jammers')}
-        trigger={
-          <BoxView
-            direction="row"
-            align="center"
-          >
-            <IconView 
-              name="users" 
-              theme="tertiary" 
-              size={12}
-              padding={6.5}
-            />
-            <TextView>
-              {parseInt(row?.item?.jammers?.length)} {i18n.t("jammers")}
-            </TextView>
-          </BoxView>
-        }
-      />
-    );
-  };
-
-  */
   const renderSaveButton = () => {
     if (isSaveProcessing) return <SpinnerView size="small" compact={true} />;
 
