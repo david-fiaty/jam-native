@@ -166,7 +166,7 @@ const ListItemToolbar = ({ row }: Props) => {
         justify="space-between"
         style={styles.container}
       >
-        <BoxView align="center">
+        <BoxView direction="row" align="center" justify="flex-start">
           {renderLikeButton()}
           {renderJammersButton()}
         </BoxView>
