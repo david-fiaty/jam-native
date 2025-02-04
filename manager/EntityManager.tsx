@@ -162,6 +162,16 @@ class EntityManager {
     return response;
   }
 
+  async unsaveJam(entityId: any) {
+    let profileId = await UserManager.getProfileId();
+    let response = await DataManager.post('unsaveJam', {
+      profile_id: profileId,
+      unsave_items_ids: [entityId],
+    });
+
+    return response;
+  }
+
   async addJam(entityData: any) {
     return await DataManager.post('addJam', entityData);
   }
@@ -213,6 +223,18 @@ class EntityManager {
 
     return response;
   }
+
+
+  async unsaveProject(entityId: any) {
+    let profileId = await UserManager.getProfileId();
+    let response = await DataManager.post('unsaveProject', {
+      profile_id: profileId,
+      unsave_items_ids: [entityId],
+    });
+
+    return response;
+  }
+
 
   async deleteJam(entityId: any) {
     let profileId = await UserManager.getProfileId();

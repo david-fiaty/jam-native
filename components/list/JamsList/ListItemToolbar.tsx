@@ -27,6 +27,22 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
   const isLoggedIn: boolean = UserManager.isLoggedIn();
   const userState: any = useSelector((state: any) => state.user);
 
+  const isJamLiked = () => {
+    return userState.likedJams.includes(row.item.id) || profileData?.liked_jams.includes(row.item.id);
+  };
+
+  const isJamSaved = () => {
+    return userState.savedJams.includes(row.item.id) || profileData?.saved_jams.includes(row.item.id)
+  };
+
+  const getLikeIconTheme = () => {
+    return isJamLiked() ? "primary" : "tertiary";
+  };
+
+  const getSaveIconTheme = () => {
+    return isJamSaved() ? "primary" : "tertiary";
+  };
+
   const saveJam = async () => {
     if (!isLoggedIn) {
       ScreenManager.pushScreen(router, '/login');
@@ -37,7 +53,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
       
       let message: any = {
         title: i18n.t('Save Jam'),
-        content: i18n.t('Jam was saved.'),
+        content: i18n.t('The Jam was saved.'),
       };
 
       if (result?.error) {
@@ -61,7 +77,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
       
       let message: any = {
         title: i18n.t('Like Jam'),
-        content: i18n.t('Jam was liked.'),
+        content: i18n.t('The Jam was liked.'),
       };
 
       if (result?.error) {
@@ -174,18 +190,6 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
         )}
       </BoxView>
     );
-  };
-
-  const getLikeIconTheme = () => {
-    return (userState.likedJams.includes(row.item.id) || profileData?.liked_jams.includes(row.item.id))
-      ? "primary" 
-      : "tertiary";
-  };
-
-  const getSaveIconTheme = () => {
-    return (userState.savedJams.includes(row.item.id) || profileData?.saved_jams.includes(row.item.id))
-      ? "primary" 
-      : "tertiary";
   };
 
   const renderComponent = () => {
