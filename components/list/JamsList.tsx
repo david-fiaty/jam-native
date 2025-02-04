@@ -8,6 +8,7 @@ import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import ListItem from "./JamsList/ListItem";
+import UserManager from "@/manager/UserManager";
 
 type Props = BaseProps & {
   idArray?: any;
@@ -17,6 +18,7 @@ const JamsList = ({ idArray }: Props) => {
   const [sectors, setSectors] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [jamData, setJamData] = useState<any[]>([]);
+  const [profileData, setProfileData] = useState<any>(null);
   const searchResult = JSON.parse(useSelector((state: any) => state.search.current));
 
   const renderItem = useCallback((row: any) => {
@@ -26,6 +28,7 @@ const JamsList = ({ idArray }: Props) => {
   useEffect(() => {
     (async () => {
       if (!sectors.length) setSectors(await EntityManager.getSectors());
+      if (!profileData) setProfileData(await UserManager.getProfileData());
 
       if (idArray?.length > 0) {
         setJamData(await EntityManager.getJams({ items_ids: idArray }))

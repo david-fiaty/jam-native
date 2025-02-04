@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { useSelector } from "react-redux";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
@@ -15,14 +16,16 @@ import ModalButton from "@/components/button/ModalButton";
 
 type Props = BaseProps & {
   row?: any;
+  profileData?: any
 };
 
-const ListItemToolbar = ({ row }: Props) => {
+const ListItemToolbar = ({ row, profileData }: Props) => {
   const router = useRouter();
   const [isLikeProcessing, setIsLikeProcessing] = useState<boolean>(false);
   const [isSaveProcessing, setIsSaveProcessing] = useState<boolean>(false);
   const [isShareProcessing, setIsShareProcessing] = useState<boolean>(false);
   const isLoggedIn: boolean = UserManager.isLoggedIn();
+  const userState: any = useSelector((state: any) => state.user);
 
   const saveJam = async () => {
     if (!isLoggedIn) {
@@ -34,12 +37,17 @@ const ListItemToolbar = ({ row }: Props) => {
       
       let message: any = {
         title: i18n.t('Save Jam'),
-        content: i18n.t('Jam successfully save.'),
+        content: i18n.t('Jam successfully saved.'),
       };
 
-      if (result?.error) message.content = i18n.t(result.error)
-      ScreenManager.showMessage(message);
-      setIsSaveProcessing(false);
+      if (result?.error) {
+        message.content = i18n.t(result.error);
+      }
+      else {
+        setIsSaveProcessing(false);
+        ScreenManager.showMessage(message);
+        UserManager.updateSavedJams(row.item.id);
+      }
     }
   };
 
@@ -56,9 +64,14 @@ const ListItemToolbar = ({ row }: Props) => {
         content: i18n.t('Jam successfully liked.'),
       };
 
-      if (result?.error) message.content = i18n.t(result.error)
-      setIsLikeProcessing(false);
-      ScreenManager.showMessage(message);
+      if (result?.error) {
+        message.content = i18n.t(result.error);
+      }
+      else {
+        setIsLikeProcessing(false);
+        UserManager.updateLikedJams(row.item.id);
+        ScreenManager.showMessage(message);
+      }
     }
   };
 
@@ -74,6 +87,10 @@ const ListItemToolbar = ({ row }: Props) => {
   };
 
   const renderLikeButton = () => {
+    let iconTheme: string = (userState.likedJams.includes(row.item.id) || profileData?.liked_jams.includes(row.item.id))
+      ? "primary" 
+      : "tertiary";
+
     return (
       <BoxView
         direction="row"
@@ -88,7 +105,7 @@ const ListItemToolbar = ({ row }: Props) => {
         {!isLikeProcessing && (
           <IconView 
             name="like"
-            theme="tertiary"
+            theme={iconTheme}
             size={12}
             padding={6.5}
             onPress={likeJam}
@@ -122,6 +139,10 @@ const ListItemToolbar = ({ row }: Props) => {
   const renderSaveButton = () => {
     if (isSaveProcessing) return <SpinnerView size="small" />;
 
+    let iconTheme: string = (userState.savedJams.includes(row.item.id) || profileData?.saved_jams.includes(row.item.id))
+      ? "primary" 
+      : "tertiary";
+
     return (
       <BoxView
         direction="row"
@@ -129,7 +150,7 @@ const ListItemToolbar = ({ row }: Props) => {
       >
         <IconView 
           name="save"
-          theme="tertiary"
+          theme={iconTheme}
           size={12}
           padding={6.5}
           onPress={saveJam}
@@ -161,6 +182,15 @@ const ListItemToolbar = ({ row }: Props) => {
         )}
       </BoxView>
     );
+  };
+
+
+  const getLikeIconTheme = () => {
+    return userState.likedJams.includes(row.item.id) ? "primary" : "tertiary";
+  };
+
+  const getSaveIconTheme = () => {
+    return userState.savedJams.includes(row.item.id) ? "primary" : "tertiary";
   };
 
   const renderComponent = () => {

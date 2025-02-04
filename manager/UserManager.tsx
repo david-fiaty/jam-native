@@ -1,6 +1,7 @@
 import { Platform } from 'react-native';
 import { useLocales } from 'expo-localization';
 import { setTokenData, setIsLoggedIn } from '@/redux/slices/UserSlice';
+import { setLikedJams, setSavedJams, setLikedProjects, setSavedProjects } from '@/redux/slices/UserSlice';
 import { setLanguage } from '@/redux/slices/AppSlice';
 import { Config } from '@/constants/Config';
 import Store from '@/redux/Store';
@@ -155,6 +156,41 @@ class UserManager {
     return userLanguage || Config.fallbackLanguage;
   };
 
+  updateLikedJams(entityId: number) {
+    let likedJams: any[] = [...Store.getState().user.likedJams];
+    
+    if (likedJams.includes(entityId)) likedJams = likedJams.filter((v: any) => v !== entityId)
+    else likedJams.push(entityId);
+
+    Store.dispatch(setLikedJams(likedJams));
+  }
+
+  updateSavedJams(entityId: number) {
+    let savedJams: any[] = [...Store.getState().user.savedJams];
+    
+    if (savedJams.includes(entityId)) savedJams = savedJams.filter((v: any) => v !== entityId)
+    else savedJams.push(entityId);
+
+    Store.dispatch(setSavedJams(savedJams));
+  }
+
+  updateLikedProjects(entityId: number) {
+    let likedProjects: any[] = [...Store.getState().user.likedProjects];
+    
+    if (likedProjects.includes(entityId)) likedProjects = likedProjects.filter((v: any) => v !== entityId)
+    else likedProjects.push(entityId);
+
+    Store.dispatch(setLikedProjects(likedProjects));
+  }
+
+  updateSavedProjects(entityId: number) {
+    let savedProjects: any[] = [...Store.getState().user.savedProjects];
+    
+    if (savedProjects.includes(entityId)) savedProjects = savedProjects.filter((v: any) => v !== entityId)
+    else savedProjects.push(entityId);
+
+    Store.dispatch(setSavedProjects(savedProjects));
+  }
 }
 
 export default (new UserManager());
