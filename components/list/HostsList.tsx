@@ -17,12 +17,11 @@ const HostsList = () => {
 
   useEffect(() => {
     (async () => {
-      if (!isLoaded) {
-        let data: any = await EntityManager.getJams({items_ids: [entityId]});
-        setProfiles(await EntityManager.getProfiles({items_ids: data?.[0]?.collaborators}));
-        setIsLoaded(true);
-      }
+      let data: any = await EntityManager.getJams({items_ids: [entityId]});
+      setProfiles(await EntityManager.getProfiles({items_ids: data?.[0]?.collaborators}));
+      setIsLoaded(true);
     })();
+
   }, [isLoaded, entityId]);
 
   if (!isLoaded) return <SpinnerView />;
