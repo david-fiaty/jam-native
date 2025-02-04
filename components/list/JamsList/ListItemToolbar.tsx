@@ -29,11 +29,11 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
   const userState: any = useSelector((state: any) => state.user);
 
   const isJamLiked = () => {
-    return profileData?.liked_jams?.includes(row.item.id) || DataManager.intersect(userState.likedJams, profileData?.liked_jams).includes(row.item.id);
+    return profileData?.liked_jams?.includes(row.item.id) || userState.likedJams.includes(row.item.id);
   };
 
   const isJamSaved = () => {
-    return profileData?.saved_jams?.includes(row.item.id) || DataManager.intersect(userState.savedJams, profileData?.saved_jams).includes(row.item.id);
+    return profileData?.saved_jams?.includes(row.item.id) || userState.savedJams.includes(row.item.id);
   };
 
   const getLikeIconTheme = () => {
