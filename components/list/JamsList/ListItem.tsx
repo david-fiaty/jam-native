@@ -10,16 +10,17 @@ import ListItemDescription from "./ListItemDescription";
 import ListItemCollapsible from "./ListItemCollapsible";
 
 type Props = BaseProps & {
-  row?: any,
-  sectorsData?: any,
+  row?: any;
+  sectorsData?: any;
+  profileData?: any;
 };
 
-const ListItem = ({ row, sectorsData }: Props) => {
+const ListItem = ({ row, sectorsData, profileData }: Props) => {
   return (
     <View style={styles.container}>
       <ListItemHeader row={row} />
       <ListItemImage row={row} />
-      <ListItemToolbar row={row} />
+      <ListItemToolbar row={row} profileData={profileData} />
       <ListItemTitle row={row} />
       <ListItemDescription row={row} />
       <ListItemCollapsible row={row} sectorsData={sectorsData} />
