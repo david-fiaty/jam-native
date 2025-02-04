@@ -89,6 +89,11 @@ class DataManager {
         return false;
     }
   }
+
+  intersect(array1: any[], array2: any[]) {
+    const set2 = new Set(array2 || []);
+    return (array1 || []).filter((o: any) => set2.has(o));
+  }
 };
 
 export default (new DataManager());
