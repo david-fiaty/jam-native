@@ -156,20 +156,20 @@ class UserManager {
     return userLanguage || Config.fallbackLanguage;
   };
 
-  addLikedJam() {
-
+  addLikedJam(entityId: number) {
+    let likedJams: any = [...Store.getState().user.likedJams];
   }
 
-  addSavedJam() {
-
+  addSavedJam(entityId: number) {
+    let savedJams: any = [...Store.getState().user.savedJams];
   }
 
-  addLikedProject() {
-
+  addLikedProject(entityId: number) {
+    let likedProjects: any = [...Store.getState().user.likedProjects];
   }
 
-  addSavedProject() {
-
+  addSavedProject(entityId: number) {
+    let savedProjects: any = [...Store.getState().user.savedProjects];
   }
 }
 
