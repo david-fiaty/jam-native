@@ -11,6 +11,7 @@ import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
 import ScreenManager from "@/manager/ScreenManager";
 import SpinnerView from "@/components/view/SpinnerView";
+import ModalButton from "@/components/button/ModalButton";
 
 type Props = BaseProps & {
   row?: any;
@@ -73,33 +74,43 @@ const ListItemToolbar = ({ row }: Props) => {
     }
   };
 
+  const renderLikeButton = () => {
+    if (isLikeProcessing) return <SpinnerView size="small" />;
+
+    return (
+      <BoxView
+        direction="row"
+        align="center"
+      >
+        <IconView 
+          name="like"
+          theme="tertiary"
+          size={12}
+          padding={6.5}
+          onPress={likeJam}
+        />
+      </BoxView>
+    );
+  };
+
   const renderJammersButton = () => {
     return (
-      <TouchableOpacity onPress={likeJam}>
-        <BoxView
-          direction="row"
-          align="center"
-        >
-          {isLikeProcessing && (
-            <View style={styles.likeSpinner}>
-              <SpinnerView size="small" />
-            </View>
-          )}
-  
-          {!isLikeProcessing && (
-            <IconView 
-              name="users" 
-              theme="tertiary" 
-              size={12}
-              padding={6.5}
-            />
-          )}
-
-          <TextView>
-            {parseInt(row?.item?.jammers?.length)} {i18n.t("jammers")}
-          </TextView>
-        </BoxView>
-      </TouchableOpacity>
+      <ModalButton 
+        login={true}
+        name="JammersList"
+        entityId={row.item.id}
+        title={i18n.t('Jammers')}
+        trigger={
+          <BoxView
+            direction="row"
+            align="center"
+          >
+            <TextView>
+              {parseInt(row?.item?.jammers?.length)} {i18n.t("jammers")}
+            </TextView>
+          </BoxView>
+        }
+      />
     );
   };
 
@@ -129,7 +140,7 @@ const ListItemToolbar = ({ row }: Props) => {
         align="center"
       >
         {isShareProcessing && (
-          <View style={styles.shareSpinner}>
+          <View style={styles.spinnerContainer}>
             <SpinnerView size="small" />
           </View>
         )}
@@ -156,6 +167,7 @@ const ListItemToolbar = ({ row }: Props) => {
         style={styles.container}
       >
         <BoxView align="center">
+          {renderLikeButton()}
           {renderJammersButton()}
         </BoxView>
   
@@ -179,10 +191,7 @@ const styles = StyleSheet.create({
   container: {
     padding: Layout.space.base*1.2,
   },
-  likeSpinner: {
-    marginLeft: 5,
-  },
-  shareSpinner: {
+  spinnerContainer: {
     marginLeft: 5,
   },
 });
