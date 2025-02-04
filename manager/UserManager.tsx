@@ -1,6 +1,7 @@
 import { Platform } from 'react-native';
 import { useLocales } from 'expo-localization';
 import { setTokenData, setIsLoggedIn } from '@/redux/slices/UserSlice';
+import { setLikedJams, setSavedJams, setLikedProjects, setSavedProjects } from '@/redux/slices/UserSlice';
 import { setLanguage } from '@/redux/slices/AppSlice';
 import { Config } from '@/constants/Config';
 import Store from '@/redux/Store';
@@ -155,6 +156,21 @@ class UserManager {
     return userLanguage || Config.fallbackLanguage;
   };
 
+  addLikedJam() {
+
+  }
+
+  addSavedJam() {
+
+  }
+
+  addLikedProject() {
+
+  }
+
+  addSavedProject() {
+
+  }
 }
 
 export default (new UserManager());
