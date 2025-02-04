@@ -1,16 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+interface UserState {
+  isLoggedIn: boolean;
+  tokenData: any;
+  profileId: number;
+  likedJams: any[];
+  savedJams: any[];
+  likedProjects: any[]
+  savedProjects: any[],
+};
+
+const initialState: UserState = {
+  isLoggedIn: false,
+  tokenData: {},
+  profileId: 0,
+  likedJams: [],
+  savedJams: [],
+  likedProjects: [],
+  savedProjects: [],
+};
+
 const UserSlice = createSlice({
   name: 'user',
-  initialState: {
-    isLoggedIn: false,
-    tokenData: {},
-    profileId: 0,
-    likedJams: [],
-    savedJams: [],
-    likedProjects: [],
-    savedProjects: [],
-  },
+  initialState: initialState,
   reducers: {
     setIsLoggedIn: (state, action) => {
       state.isLoggedIn = action.payload;
@@ -22,16 +34,24 @@ const UserSlice = createSlice({
       state.profileId = parseInt(action.payload || 0);
     },
     setLikedJams: (state, action) => {
-      state.likedJams = action.payload;
+      if (!state.likedJams.includes(action.payload)) {
+        state.likedJams.push(action.payload);
+      }
     },
     setSavedJams: (state, action) => {
-      state.savedJams = action.payload;
+      if (!state.savedJams.includes(action.payload)) {
+        state.savedJams.push(action.payload);
+      }
     },
     setLikedProjects: (state, action) => {
-      state.likedProjects = action.payload;
+      if (!state.likedProjects.includes(action.payload)) {
+        state.likedProjects.push(action.payload);
+      }
     },
     setSavedProjects: (state, action) => {
-      state.savedProjects = action.payload;
+      if (!state.savedProjects.includes(action.payload)) {
+        state.savedProjects.push(action.payload);
+      }
     },
   },
 });
