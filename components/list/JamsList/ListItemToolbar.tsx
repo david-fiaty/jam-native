@@ -16,9 +16,10 @@ import ModalButton from "@/components/button/ModalButton";
 
 type Props = BaseProps & {
   row?: any;
+  profileData?: any
 };
 
-const ListItemToolbar = ({ row }: Props) => {
+const ListItemToolbar = ({ row, profileData }: Props) => {
   const router = useRouter();
   const [isLikeProcessing, setIsLikeProcessing] = useState<boolean>(false);
   const [isSaveProcessing, setIsSaveProcessing] = useState<boolean>(false);
@@ -86,7 +87,9 @@ const ListItemToolbar = ({ row }: Props) => {
   };
 
   const renderLikeButton = () => {
-    let iconTheme: string = userState.likedJams.includes(row.item.id) ? "primary" : "tertiary";
+    let iconTheme: string = (userState.likedJams.includes(row.item.id) || profileData?.liked_jams.includes(row.item.id))
+      ? "primary" 
+      : "tertiary";
 
     return (
       <BoxView
@@ -136,7 +139,9 @@ const ListItemToolbar = ({ row }: Props) => {
   const renderSaveButton = () => {
     if (isSaveProcessing) return <SpinnerView size="small" />;
 
-    let iconTheme: string = userState.savedJams.includes(row.item.id) ? "primary" : "tertiary";
+    let iconTheme: string = (userState.savedJams.includes(row.item.id) || profileData?.saved_jams.includes(row.item.id))
+      ? "primary" 
+      : "tertiary";
 
     return (
       <BoxView
