@@ -49,12 +49,23 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
     }
     else {
       setIsSaveProcessing(true);
-      let result: any = await EntityManager.saveJam(row.item.id);
-      
-      let message: any = {
-        title: i18n.t('Save Jam'),
-        content: i18n.t('The Jam was saved.'),
-      };
+      let result: any = {};
+      let message: any = {};
+
+      if (isJamSaved()) {
+        result = await EntityManager.unsaveJam(row.item.id);
+        message = {
+          title: i18n.t('Unsave Jam'),
+          content: i18n.t('The Jam was unsaved.'),
+        };
+      }
+      else {
+        result = await EntityManager.saveJam(row.item.id);
+        message = {
+          title: i18n.t('Save Jam'),
+          content: i18n.t('The Jam was saved.'),
+        };
+      }
 
       if (result?.error) {
         message.content = i18n.t(result.error);
@@ -73,12 +84,23 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
     }
     else {
       setIsLikeProcessing(true);
-      let result: any = await EntityManager.likeJam(row.item.id);
-      
-      let message: any = {
-        title: i18n.t('Like Jam'),
-        content: i18n.t('The Jam was liked.'),
-      };
+      let result: any = {};
+      let message: any = {};
+
+      if (isJamLiked()) {
+        result = await EntityManager.unlikeJam(row.item.id);
+        message = {
+          title: i18n.t('Unlike Jam'),
+          content: i18n.t('The Jam was unliked.'),
+        };
+      }
+      else {
+        result = await EntityManager.likeJam(row.item.id);
+        message = {
+          title: i18n.t('Like Jam'),
+          content: i18n.t('The Jam was liked.'),
+        };
+      }
 
       if (result?.error) {
         message.content = i18n.t(result.error);
