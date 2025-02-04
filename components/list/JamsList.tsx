@@ -43,8 +43,6 @@ const JamsList = ({ idArray }: Props) => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(profileData?.liked_jams)
-
   return (
     <BoxView 
       direction="column" 
