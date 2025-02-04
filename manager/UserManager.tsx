@@ -156,7 +156,7 @@ class UserManager {
     return userLanguage || Config.fallbackLanguage;
   };
 
-  updateLikedJams(entityId: number) {
+  async updateLikedJams(entityId: number) {
     let likedJams: any[] = [...Store.getState().user.likedJams];
     
     if (likedJams.includes(entityId)) likedJams = likedJams.filter((v: any) => v !== entityId)
@@ -165,7 +165,7 @@ class UserManager {
     Store.dispatch(setLikedJams(likedJams));
   }
 
-  updateSavedJams(entityId: number) {
+  async updateSavedJams(entityId: number) {
     let savedJams: any[] = [...Store.getState().user.savedJams];
     
     if (savedJams.includes(entityId)) savedJams = savedJams.filter((v: any) => v !== entityId)
