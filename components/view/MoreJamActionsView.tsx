@@ -21,7 +21,7 @@ const MoreJamActionsView = () => {
     
     let message: any = {
       title: i18n.t('Save Jam'),
-      content: i18n.t('Jam successfully save.'),
+      content: i18n.t('Jam successfully saved.'),
     };
 
     if (result?.error) message.content = i18n.t(result.error)
