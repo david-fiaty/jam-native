@@ -59,20 +59,23 @@ const ListItemToolbar = ({ row }: Props) => {
   };
 
   const renderJammersButton = () => {
-    if (isSaveProcessing) return <SpinnerView size="small" compact={true} />;
-
     return (
       <TouchableOpacity onPress={likeJam}>
         <BoxView
           direction="row"
           align="center"
         >
-          <IconView 
-            name="users" 
-            theme="tertiary" 
-            size={12}
-            padding={6.5}
-          />
+          {isLikeProcessing && <SpinnerView size="small" />}
+  
+          {!isLikeProcessing && (
+            <IconView 
+              name="users" 
+              theme="tertiary" 
+              size={12}
+              padding={6.5}
+            />
+          )}
+
           <TextView>
             {parseInt(row?.item?.jammers?.length)} {i18n.t("jammers")}
           </TextView>
@@ -82,7 +85,7 @@ const ListItemToolbar = ({ row }: Props) => {
   };
 
   const renderSaveButton = () => {
-    if (isSaveProcessing) return <SpinnerView size="small" compact={true} />;
+    if (isSaveProcessing) return <SpinnerView size="small" />;
 
     return (
       <BoxView
@@ -100,27 +103,8 @@ const ListItemToolbar = ({ row }: Props) => {
     );
   };
 
-  const renderLikeButton = () => {
-    if (isLikeProcessing) return <SpinnerView size="small" compact={true} />;
-
-    return (
-      <BoxView
-        direction="row"
-        align="center"
-      >
-        <IconView 
-          name="like"
-          theme="tertiary"
-          size={12}
-          padding={6.5}
-          onPress={likeJam}
-        />
-      </BoxView>
-    );
-  };
-
   const renderShareButton = () => {
-    if (isShareProcessing) return <SpinnerView size="small" compact={true} />;
+    if (isShareProcessing) return <SpinnerView size="small" />;
     
     return (
       <BoxView
@@ -153,10 +137,6 @@ const ListItemToolbar = ({ row }: Props) => {
         <BoxView direction="row" align="center" justify="flex-end">
           <BoxView align="center">
             {renderSaveButton()}
-          </BoxView>
-  
-          <BoxView align="center">
-            {renderLikeButton()}
           </BoxView>
   
           <BoxView align="center">
