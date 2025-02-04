@@ -20,7 +20,7 @@ const ListItemHeader = ({ row }: Props) => {
         login={true}
         name="HostsList"
         entityId={row.item.id}
-        backTitle={i18n.t('Jam hosts')}
+        title={i18n.t('Jam hosts')}
         trigger={
           <TextView>
             @{i18n.t("host")} +{parseInt(row?.item?.collaborators?.length)}
@@ -40,7 +40,7 @@ const ListItemHeader = ({ row }: Props) => {
         login={true}
         name="MoreJamActionsView"
         entityId={row.item.id}
-        backTitle={i18n.t('More actions')}
+        title={i18n.t('More actions')}
         trigger={
           <IconView
             name="actions"

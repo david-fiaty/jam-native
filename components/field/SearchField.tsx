@@ -45,7 +45,7 @@ const SearchField = ({ canShow, onSearchEdit, onSearchSubmit, onSearchClear }: P
 
   const renderRightIcon = () => {
     if (searchState.searching == true) {
-      return <SpinnerView size="small" compact={true} />;
+      return <SpinnerView size="small" />;
     }
     else if (searchState.value?.length) {
       return (

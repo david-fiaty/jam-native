@@ -57,9 +57,9 @@ const ModalView = ({ children }: Props) => {
   };
 
   const renderModalTitle = () => {
-    if (isModalVisible() && ScreenManager.getActiveModal()?.params?.backTitle) {
+    if (isModalVisible() && ScreenManager.getActiveModal()?.params?.title) {
       let modalName: string = activeModal?.name;
-      let modalTitle: string = activeModal?.params?.backTitle;
+      let modalTitle: string = activeModal?.params?.title;
 
       return (
         <BackButton

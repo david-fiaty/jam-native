@@ -6,17 +6,15 @@ import { Colors } from '@/constants/Colors';
 type Props = {
   size?: string;
   color?: string;
-  compact?: boolean;
   style?: any,
 };
 
-const SpinnerView = ({ size, color, compact, style}: Props) => {
+const SpinnerView = ({ size, color, style}: Props) => {
   const spinnerSize: any = size || 'large';
   const spinnerColor: any = color ? Colors[color] : Colors['primary'];
-  const containerStyle: any = compact ? styles.compact : {};
 
   return (
-    <View style={[styles.container, style, containerStyle]}>
+    <View style={[styles.container, style]}>
       <ActivityIndicator 
         size={spinnerSize} 
         color={spinnerColor} 
@@ -30,10 +28,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    padding: Layout.space.base,
-  },
-  compact: {
-    padding: 0,
   },
 });
 
