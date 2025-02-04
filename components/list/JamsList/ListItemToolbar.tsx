@@ -13,6 +13,7 @@ import i18n from "@/translation/i18n";
 import ScreenManager from "@/manager/ScreenManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import ModalButton from "@/components/button/ModalButton";
+import DataManager from "@/manager/DataManager";
 
 type Props = BaseProps & {
   row?: any;
@@ -28,11 +29,11 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
   const userState: any = useSelector((state: any) => state.user);
 
   const isJamLiked = () => {
-    return userState.likedJams.includes(row.item.id) || profileData?.liked_jams.includes(row.item.id);
+    return profileData?.liked_jams?.includes(row.item.id) || userState.likedJams.includes(row.item.id);
   };
 
   const isJamSaved = () => {
-    return userState.savedJams.includes(row.item.id) || profileData?.saved_jams.includes(row.item.id)
+    return profileData?.saved_jams?.includes(row.item.id) || userState.savedJams.includes(row.item.id);
   };
 
   const getLikeIconTheme = () => {
@@ -141,7 +142,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
             name="like"
             theme={getLikeIconTheme()}
             size={12}
-            padding={6.5}
+            padding={6}
             onPress={likeJam}
           />
         )}
@@ -182,7 +183,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
           name="save"
           theme={getSaveIconTheme()}
           size={12}
-          padding={6.5}
+          padding={6}
           onPress={saveJam}
         />
       </BoxView>
@@ -206,7 +207,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
             name="share"
             theme="tertiary"
             size={12}
-            padding={6.5}
+            padding={6}
             onPress={shareJam}
           />
         )}

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
 import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -21,9 +21,9 @@ const JamsList = ({ idArray }: Props) => {
   const [profileData, setProfileData] = useState<any>(null);
   const searchResult = JSON.parse(useSelector((state: any) => state.search.current));
 
-  const renderItem = useCallback((row: any) => {
-    return <ListItem row={row} sectorsData={sectors} />;
-  }, [sectors]);
+  const renderItem = (row: any) => {
+    return <ListItem row={row} sectorsData={sectors} profileData={profileData} />;
+  };
 
   useEffect(() => {
     (async () => {
@@ -61,7 +61,7 @@ const JamsList = ({ idArray }: Props) => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: Layout.space.base*1.5,
-    paddingBottom: 0,
+    //paddingBottom: 250, // Todo - Fix, this should not be needed
     width: '100%',
     height: '100%',
     flexGrow: 1,

@@ -15,7 +15,6 @@ const MoreJamActionsView = () => {
   const [isEntityOwner, setIsEntityOwner] = useState<boolean>(false);
   const entityId: number = ScreenManager.getModalEntityId();
   
-
   const saveJam = async () => {
     let result: any = await EntityManager.saveJam(entityId);
     
