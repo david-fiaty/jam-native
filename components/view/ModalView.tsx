@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
 import { BaseProps } from '@/constants/Types';
 import { Colors } from '@/constants/Colors';
@@ -7,7 +6,6 @@ import { Layout } from '@/constants/Layout';
 import Modal from "react-native-modal";
 import ScreenManager from '@/manager/ScreenManager';
 import BackButton from "../button/BackButton";
-import BoxView from "./BoxView";
 import ModalConfig from "@/constants/ModalConfig";
 
 type Props = BaseProps & {

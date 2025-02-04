@@ -1,4 +1,3 @@
-import { memo, useCallback } from "react";
 import { StyleSheet, View } from "react-native";
 import { BaseProps } from "@/constants/Types";
 import { Colors } from "@/constants/Colors";
@@ -16,21 +15,16 @@ type Props = BaseProps & {
 };
 
 const ListItem = ({ row, sectorsData }: Props) => {
-
-  const renderComponent = useCallback(() => {
-    return (
-      <View style={styles.container}>
-        <ListItemHeader row={row} />
-        <ListItemImage row={row} />
-        <ListItemToolbar row={row} />
-        <ListItemTitle row={row} />
-        <ListItemDescription row={row} />
-        <ListItemCollapsible row={row} sectorsData={sectorsData} />
-      </View>
-    );  
-  }, [row, sectorsData]);
-
-  return renderComponent();
+  return (
+    <View style={styles.container}>
+      <ListItemHeader row={row} />
+      <ListItemImage row={row} />
+      <ListItemToolbar row={row} />
+      <ListItemTitle row={row} />
+      <ListItemDescription row={row} />
+      <ListItemCollapsible row={row} sectorsData={sectorsData} />
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -42,4 +36,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(ListItem);
+export default ListItem;

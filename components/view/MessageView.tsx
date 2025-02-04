@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
     marginTop: statusBarHeight,
     marginHorizontal: Layout.space.base*1.5,
     borderRadius: Layout.radius.round,
+    zIndex: 1000,
   },
   closeIcon: {
     position: 'absolute',

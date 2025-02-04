@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "expo-router";
 import { StyleSheet } from "react-native";
 import { BaseProps } from "@/constants/Types";
@@ -9,7 +9,6 @@ import TextView from "@/components/view/TextView";
 import UserManager from "@/manager/UserManager";
 import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
-import ModalButton from "@/components/button/ModalButton";
 import ScreenManager from "@/manager/ScreenManager";
 import SpinnerView from "@/components/view/SpinnerView";
 
@@ -50,6 +49,7 @@ const ListItemToolbar = ({ row }: Props) => {
     if (result?.error) message.content = i18n.t(result.error)
     ScreenManager.showMessage(message);
     setIsLikeProcessing(false);
+    ScreenManager.toggleModal('JammersList', { backTitle: i18n.t('Jammers') });
   };
 
   const shareJam = async () => {
@@ -58,6 +58,29 @@ const ListItemToolbar = ({ row }: Props) => {
     setIsShareProcessing(false);
   };
 
+  const renderJammersButton = () => {
+    if (isSaveProcessing) return <SpinnerView size="small" compact={true} />;
+
+    return (
+      <BoxView
+        direction="row"
+        align="center"
+      >
+        <IconView 
+          name="users" 
+          theme="tertiary" 
+          size={12}
+          padding={6.5}
+          onPress={likeJam}
+        />
+        <TextView>
+          {parseInt(row?.item?.jammers?.length)} {i18n.t("jammers")}
+        </TextView>
+      </BoxView>
+    );
+  };
+
+/*
   const renderJammersButton = () => {
     return (
       <ModalButton 
@@ -85,6 +108,7 @@ const ListItemToolbar = ({ row }: Props) => {
     );
   };
 
+  */
   const renderSaveButton = () => {
     if (isSaveProcessing) return <SpinnerView size="small" compact={true} />;
 
@@ -154,7 +178,7 @@ const ListItemToolbar = ({ row }: Props) => {
           {renderJammersButton()}
         </BoxView>
   
-        <BoxView direction="row" align="center">
+        <BoxView direction="row" align="center" justify="flex-end">
           <BoxView align="center">
             {renderSaveButton()}
           </BoxView>
@@ -180,4 +204,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(ListItemToolbar);
+export default ListItemToolbar;
