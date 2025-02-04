@@ -58,7 +58,6 @@ const ListItemToolbar = ({ row }: Props) => {
 
       if (result?.error) message.content = i18n.t(result.error)
       setIsLikeProcessing(false);
-      ScreenManager.toggleModal('JammersList', { title: i18n.t('Jammers') });
       ScreenManager.showMessage(message);
     }
   };
@@ -75,20 +74,26 @@ const ListItemToolbar = ({ row }: Props) => {
   };
 
   const renderLikeButton = () => {
-    if (isLikeProcessing) return <SpinnerView size="small" />;
-
     return (
       <BoxView
         direction="row"
         align="center"
       >
-        <IconView 
-          name="like"
-          theme="tertiary"
-          size={12}
-          padding={6.5}
-          onPress={likeJam}
-        />
+        {isLikeProcessing && (
+          <View style={styles.spinnerContainer}>
+            <SpinnerView size="small" />
+          </View>
+        )}
+
+        {!isLikeProcessing && (
+          <IconView 
+            name="like"
+            theme="tertiary"
+            size={12}
+            padding={6.5}
+            onPress={likeJam}
+          />
+        )}
       </BoxView>
     );
   };
