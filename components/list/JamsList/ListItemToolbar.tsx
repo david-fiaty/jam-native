@@ -13,6 +13,7 @@ import i18n from "@/translation/i18n";
 import ScreenManager from "@/manager/ScreenManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import ModalButton from "@/components/button/ModalButton";
+import DataManager from "@/manager/DataManager";
 
 type Props = BaseProps & {
   row?: any;
@@ -28,11 +29,11 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
   const userState: any = useSelector((state: any) => state.user);
 
   const isJamLiked = () => {
-    return userState.likedJams.includes(row.item.id) || profileData?.liked_jams.includes(row.item.id);
+    return profileData?.liked_jams?.includes(row.item.id) || DataManager.intersect(userState.likedJams, profileData?.liked_jams).includes(row.item.id);
   };
 
   const isJamSaved = () => {
-    return userState.savedJams.includes(row.item.id) || profileData?.saved_jams.includes(row.item.id)
+    return profileData?.saved_jams?.includes(row.item.id) || DataManager.intersect(userState.savedJams, profileData?.saved_jams).includes(row.item.id);
   };
 
   const getLikeIconTheme = () => {
