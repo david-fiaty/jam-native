@@ -24,8 +24,7 @@ const ListItemToolbar = ({ row }: Props) => {
   const [isSaveProcessing, setIsSaveProcessing] = useState<boolean>(false);
   const [isShareProcessing, setIsShareProcessing] = useState<boolean>(false);
   const isLoggedIn: boolean = UserManager.isLoggedIn();
-  const likedJams: any[] = useSelector((state: any) => state.likedJams);
-  const savedJams: any[] = useSelector((state: any) => state.savedJamsJams);
+  const userState: any = useSelector((state: any) => state.user);
 
   const saveJam = async () => {
     if (!isLoggedIn) {
@@ -46,7 +45,7 @@ const ListItemToolbar = ({ row }: Props) => {
       else {
         setIsSaveProcessing(false);
         ScreenManager.showMessage(message);
-        await UserManager.updateSavedJams(row.item.id);
+        UserManager.updateSavedJams(row.item.id);
       }
     }
   };
@@ -69,7 +68,7 @@ const ListItemToolbar = ({ row }: Props) => {
       }
       else {
         setIsLikeProcessing(false);
-        await UserManager.updateLikedJams(row.item.id);
+        UserManager.updateLikedJams(row.item.id);
         ScreenManager.showMessage(message);
       }
     }
@@ -212,9 +211,9 @@ const ListItemToolbar = ({ row }: Props) => {
 
   useEffect(() => {
 
-    console.log(likedJams, savedJams);
+    console.log(userState.likedJams, userState.savedJams);
 
-  }, [likedJams, savedJams]);
+  }, [userState]);
 
   return renderComponent();
 };

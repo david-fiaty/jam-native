@@ -1,28 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface UserState {
-  isLoggedIn: boolean;
-  tokenData: any;
-  profileId: number;
-  likedJams: any[];
-  savedJams: any[];
-  likedProjects: any[]
-  savedProjects: any[],
-};
-
-const initialState: UserState = {
-  isLoggedIn: false,
-  tokenData: {},
-  profileId: 0,
-  likedJams: [],
-  savedJams: [],
-  likedProjects: [],
-  savedProjects: [],
-};
-
 const UserSlice = createSlice({
   name: 'user',
-  initialState: initialState,
+  initialState: {
+    isLoggedIn: false,
+    tokenData: {},
+    profileId: 0,
+    likedJams: [],
+    savedJams: [],
+    likedProjects: [],
+    savedProjects: [],
+  },
   reducers: {
     setIsLoggedIn: (state, action) => {
       state.isLoggedIn = action.payload;
@@ -33,20 +21,20 @@ const UserSlice = createSlice({
     setProfileId: (state, action) => {
       state.profileId = parseInt(action.payload || 0);
     },
-    setLikedJam: (state, action) => {
+    setLikedJams: (state, action) => {
       state.likedJams = action.payload;
     },
-    setSavedJam: (state, action) => {
+    setSavedJams: (state, action) => {
       state.savedJams = action.payload;
     },
-    setLikedProject: (state, action) => {
+    setLikedProjects: (state, action) => {
       state.likedProjects = action.payload;
     },
-    setSavedProject: (state, action) => {
-      state.savedProjects = action.payload;
+    setSavedProjects: (state, action) => {
+      state.savedJams = action.payload;
     },
   },
 });
 
-export const { setIsLoggedIn, setTokenData, setProfileId, setLikedJam, setSavedJam, setLikedProject, setSavedProject } = UserSlice.actions;
+export const { setIsLoggedIn, setTokenData, setProfileId, setLikedJams, setSavedJams, setLikedProjects, setSavedProjects } = UserSlice.actions;
 export default UserSlice.reducer;
