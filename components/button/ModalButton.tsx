@@ -5,7 +5,7 @@ import ScreenManager from '@/manager/ScreenManager';
 
 type Props = {
   name?: any;
-  backTitle?: any;
+  title?: any;
   entityId?: any;
   visible?: boolean;
   login?: boolean;
@@ -14,7 +14,7 @@ type Props = {
   onTriggerPress?: (active: boolean) => void;
 };
 
-const ModalButton = ({ name, backTitle, entityId, login, trigger, triggerAlign, onTriggerPress }: Props) => {
+const ModalButton = ({ name, title, entityId, login, trigger, triggerAlign, onTriggerPress }: Props) => {
   const router = useRouter();
   const isLoggedIn: boolean = UserManager.isLoggedIn();
 
@@ -34,7 +34,7 @@ const ModalButton = ({ name, backTitle, entityId, login, trigger, triggerAlign, 
 
   const getModalParams = () => {
     return { 
-      backTitle: backTitle,
+      title: title,
       entityId: entityId,
     };
   };

@@ -49,7 +49,7 @@ const ListItemToolbar = ({ row }: Props) => {
     if (result?.error) message.content = i18n.t(result.error)
     ScreenManager.showMessage(message);
     setIsLikeProcessing(false);
-    ScreenManager.toggleModal('JammersList', { backTitle: i18n.t('Jammers') });
+    ScreenManager.toggleModal('JammersList', { title: i18n.t('Jammers') });
   };
 
   const shareJam = async () => {
@@ -87,7 +87,7 @@ const ListItemToolbar = ({ row }: Props) => {
         login={true}
         name="JammersList"
         entityId={row.item.id}
-        backTitle={i18n.t('Jammers')}
+        title={i18n.t('Jammers')}
         trigger={
           <BoxView
             direction="row"
