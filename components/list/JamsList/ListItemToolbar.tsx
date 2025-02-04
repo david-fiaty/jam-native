@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "expo-router";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
@@ -65,7 +65,11 @@ const ListItemToolbar = ({ row }: Props) => {
           direction="row"
           align="center"
         >
-          {isLikeProcessing && <SpinnerView size="small" />}
+          {isLikeProcessing && (
+            <View style={styles.likeSpinner}>
+              <SpinnerView size="small" />
+            </View>
+          )}
   
           {!isLikeProcessing && (
             <IconView 
@@ -153,6 +157,9 @@ const ListItemToolbar = ({ row }: Props) => {
 const styles = StyleSheet.create({
   container: {
     padding: Layout.space.base*1.2,
+  },
+  likeSpinner: {
+    marginLeft: 5,
   },
 });
 
