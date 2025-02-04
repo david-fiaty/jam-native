@@ -37,7 +37,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
       
       let message: any = {
         title: i18n.t('Save Jam'),
-        content: i18n.t('Jam successfully saved.'),
+        content: i18n.t('Jam was saved.'),
       };
 
       if (result?.error) {
@@ -61,7 +61,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
       
       let message: any = {
         title: i18n.t('Like Jam'),
-        content: i18n.t('Jam successfully liked.'),
+        content: i18n.t('Jam was liked.'),
       };
 
       if (result?.error) {
@@ -87,10 +87,6 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
   };
 
   const renderLikeButton = () => {
-    let iconTheme: string = (userState.likedJams.includes(row.item.id) || profileData?.liked_jams.includes(row.item.id))
-      ? "primary" 
-      : "tertiary";
-
     return (
       <BoxView
         direction="row"
@@ -105,7 +101,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
         {!isLikeProcessing && (
           <IconView 
             name="like"
-            theme={iconTheme}
+            theme={getLikeIconTheme()}
             size={12}
             padding={6.5}
             onPress={likeJam}
@@ -139,10 +135,6 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
   const renderSaveButton = () => {
     if (isSaveProcessing) return <SpinnerView size="small" />;
 
-    let iconTheme: string = (userState.savedJams.includes(row.item.id) || profileData?.saved_jams.includes(row.item.id))
-      ? "primary" 
-      : "tertiary";
-
     return (
       <BoxView
         direction="row"
@@ -150,7 +142,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
       >
         <IconView 
           name="save"
-          theme={iconTheme}
+          theme={getSaveIconTheme()}
           size={12}
           padding={6.5}
           onPress={saveJam}
@@ -184,13 +176,16 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
     );
   };
 
-
   const getLikeIconTheme = () => {
-    return userState.likedJams.includes(row.item.id) ? "primary" : "tertiary";
+    return (userState.likedJams.includes(row.item.id) || profileData?.liked_jams.includes(row.item.id))
+      ? "primary" 
+      : "tertiary";
   };
 
   const getSaveIconTheme = () => {
-    return userState.savedJams.includes(row.item.id) ? "primary" : "tertiary";
+    return (userState.savedJams.includes(row.item.id) || profileData?.saved_jams.includes(row.item.id))
+      ? "primary" 
+      : "tertiary";
   };
 
   const renderComponent = () => {
