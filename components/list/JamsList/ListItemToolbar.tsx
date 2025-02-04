@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { useSelector } from "react-redux";
@@ -27,9 +27,6 @@ const ListItemToolbar = ({ row }: Props) => {
   const likedJams: any[] = useSelector((state: any) => state.likedJams);
   const savedJams: any[] = useSelector((state: any) => state.savedJamsJams);
 
-
-  console.log(likedJams, savedJams);
-
   const saveJam = async () => {
     if (!isLoggedIn) {
       ScreenManager.pushScreen(router, '/login');
@@ -40,16 +37,16 @@ const ListItemToolbar = ({ row }: Props) => {
       
       let message: any = {
         title: i18n.t('Save Jam'),
-        content: i18n.t('Jam successfully save.'),
+        content: i18n.t('Jam successfully saved.'),
       };
 
       if (result?.error) {
         message.content = i18n.t(result.error);
       }
       else {
+        setIsSaveProcessing(false);
         ScreenManager.showMessage(message);
         await UserManager.updateSavedJams(row.item.id);
-        setIsSaveProcessing(false);
       }
     }
   };
@@ -212,6 +209,12 @@ const ListItemToolbar = ({ row }: Props) => {
       </BoxView>
     );  
   };
+
+  useEffect(() => {
+
+    console.log(likedJams, savedJams);
+
+  }, [likedJams, savedJams]);
 
   return renderComponent();
 };
