@@ -42,6 +42,7 @@ const ListItemToolbar = ({ row }: Props) => {
       }
       else {
         ScreenManager.showMessage(message);
+        UserManager.updateSavedJams(row.item.id);
         setIsSaveProcessing(false);
       }
     }
@@ -65,6 +66,7 @@ const ListItemToolbar = ({ row }: Props) => {
       }
       else {
         setIsLikeProcessing(false);
+        UserManager.updateLikedJams(row.item.id);
         ScreenManager.showMessage(message);
       }
     }
