@@ -171,7 +171,7 @@ class UserManager {
     if (savedJams.includes(entityId)) savedJams = savedJams.filter((v: any) => v !== entityId)
     else savedJams.push(entityId);
 
-    Store.dispatch(setSavedJams(['a', 'b']));
+    Store.dispatch(setSavedJams(savedJams));
   }
 
   updateLikedProjects(entityId: number) {
