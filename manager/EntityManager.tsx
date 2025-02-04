@@ -181,6 +181,39 @@ class EntityManager {
     return response;
   }
 
+  async likeProject(entityId: any) {
+    let profileId = await UserManager.getProfileId();
+    let response = await DataManager.post('likeProject', {
+      profile_id: profileId,
+      item_id: entityId,
+      like_action: 'like',
+    });
+
+    return response;
+  }
+
+  async unlikeJam(entityId: any) {
+    let profileId = await UserManager.getProfileId();
+    let response = await DataManager.post('likeJam', {
+      profile_id: profileId,
+      item_id: entityId,
+      like_action: 'unlike',
+    });
+
+    return response;
+  }
+
+  async unlikeProject(entityId: any) {
+    let profileId = await UserManager.getProfileId();
+    let response = await DataManager.post('likeProject', {
+      profile_id: profileId,
+      item_id: entityId,
+      like_action: 'unlike',
+    });
+
+    return response;
+  }
+
   async deleteJam(entityId: any) {
     let profileId = await UserManager.getProfileId();
     let response = await DataManager.delete('deleteJam', {

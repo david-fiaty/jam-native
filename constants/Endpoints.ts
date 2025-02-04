@@ -94,6 +94,11 @@ const Endpoints = {
     cacheable: false,
     dataKey: null,
   },
+  likeProject: {
+    path: '/projects/like/',
+    cacheable: false,
+    dataKey: null,
+  },
   likeJam: {
     path: '/jams/like/',
     cacheable: false,
