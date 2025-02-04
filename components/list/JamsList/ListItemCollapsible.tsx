@@ -1,4 +1,3 @@
-import { memo, useCallback } from "react";
 import { StyleSheet } from "react-native";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
@@ -17,8 +16,7 @@ type Props = BaseProps & {
 };
 
 const ListItemCollapsible = ({ row, sectorsData }: Props) => {
-
-  const renderLocation = useCallback(() => {
+  const renderLocation = () => {
     return (
       <BoxView
         direction="row"
@@ -35,9 +33,9 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
         </TextView>
       </BoxView>
     );
-  }, [row]);
+  };
 
-  const renderStart = useCallback(() => {
+  const renderStart = () => {
     return (
       <BoxView
         direction="row"
@@ -52,9 +50,9 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
         </TextView>
       </BoxView>      
     );
-  }, [row]);
+  };
 
-  const renderEnd = useCallback(() => {
+  const renderEnd = () => {
     return (
       <BoxView
         direction="row"
@@ -69,9 +67,9 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
         </TextView>
       </BoxView>
     );
-  }, [row]);
+  };
 
-  const renderSector = useCallback(() => {
+  const renderSector = () => {
     return (
       <BoxView
         direction="row"
@@ -87,9 +85,9 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
         </TextView>
       </BoxView>
     );
-  }, [sectorsData, row]);
+  };
 
-  const renderSubsector = useCallback(() => {
+  const renderSubsector = () => {
     return (
       <BoxView
         direction="row"
@@ -104,33 +102,29 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
         </TextView>
       </BoxView>
     );
-  }, [row]);
+  };
 
-  const renderComponent = useCallback(() => {
-    return (
-      <BoxView style={styles.container}>
-        <CollapsibleView
-          label={<TextView>{i18n.t("View more.")}</TextView>}
-          openedLabel={<TextView>{i18n.t("View less.")}</TextView>}
-          content={
-            <BoxView
-              direction="column"
-              align="flex-start"
-              style={styles.detailsContainer}
-            >
-              {renderLocation()}
-              {renderStart()}
-              {renderEnd()}
-              {renderSector()}
-              {renderSubsector()}
-            </BoxView>
-          }
-        />
-      </BoxView>
-    );  
-  }, []);
-
-  return renderComponent();
+  return (
+    <BoxView style={styles.container}>
+      <CollapsibleView
+        label={<TextView>{i18n.t("View more.")}</TextView>}
+        openedLabel={<TextView>{i18n.t("View less.")}</TextView>}
+        content={
+          <BoxView
+            direction="column"
+            align="flex-start"
+            style={styles.detailsContainer}
+          >
+            {renderLocation()}
+            {renderStart()}
+            {renderEnd()}
+            {renderSector()}
+            {renderSubsector()}
+          </BoxView>
+        }
+      />
+    </BoxView>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -150,4 +144,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(ListItemCollapsible);
+export default ListItemCollapsible;

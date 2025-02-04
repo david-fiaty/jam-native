@@ -304,3 +304,32 @@ const headerVisibleOptions: object = {
     </ThemeProvider>
   ),    
 };
+
+
+
+  const renderJammersButton = () => {
+    return (
+      <ModalButton 
+        login={true}
+        name="JammersList"
+        entityId={row.item.id}
+        title={i18n.t('Jammers')}
+        trigger={
+          <BoxView
+            direction="row"
+            align="center"
+          >
+            <IconView 
+              name="users" 
+              theme="tertiary" 
+              size={12}
+              padding={6.5}
+            />
+            <TextView>
+              {parseInt(row?.item?.jammers?.length)} {i18n.t("jammers")}
+            </TextView>
+          </BoxView>
+        }
+      />
+    );
+  };

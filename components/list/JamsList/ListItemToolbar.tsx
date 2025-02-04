@@ -1,6 +1,6 @@
-import { memo, useCallback, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "expo-router";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
@@ -9,9 +9,9 @@ import TextView from "@/components/view/TextView";
 import UserManager from "@/manager/UserManager";
 import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
-import ModalButton from "@/components/button/ModalButton";
 import ScreenManager from "@/manager/ScreenManager";
 import SpinnerView from "@/components/view/SpinnerView";
+import ModalButton from "@/components/button/ModalButton";
 
 type Props = BaseProps & {
   row?: any;
@@ -25,37 +25,77 @@ const ListItemToolbar = ({ row }: Props) => {
   const isLoggedIn: boolean = UserManager.isLoggedIn();
 
   const saveJam = async () => {
-    setIsSaveProcessing(true);
-    let result: any = await EntityManager.saveJam(row.item.id);
-    
-    let message: any = {
-      title: i18n.t('Save Jam'),
-      content: i18n.t('Jam successfully save.'),
-    };
+    if (!isLoggedIn) {
+      ScreenManager.pushScreen(router, '/login');
+    }
+    else {
+      setIsSaveProcessing(true);
+      let result: any = await EntityManager.saveJam(row.item.id);
+      
+      let message: any = {
+        title: i18n.t('Save Jam'),
+        content: i18n.t('Jam successfully save.'),
+      };
 
-    if (result?.error) message.content = i18n.t(result.error)
-    ScreenManager.showMessage(message);
-    setIsSaveProcessing(false);
+      if (result?.error) message.content = i18n.t(result.error)
+      ScreenManager.showMessage(message);
+      setIsSaveProcessing(false);
+    }
   };
 
   const likeJam = async () => {
-    setIsLikeProcessing(true);
-    let result: any = await EntityManager.likeJam(row.item.id);
-    
-    let message: any = {
-      title: i18n.t('Like Jam'),
-      content: i18n.t('Jam successfully liked.'),
-    };
+    if (!isLoggedIn) {
+      ScreenManager.pushScreen(router, '/login');
+    }
+    else {
+      setIsLikeProcessing(true);
+      let result: any = await EntityManager.likeJam(row.item.id);
+      
+      let message: any = {
+        title: i18n.t('Like Jam'),
+        content: i18n.t('Jam successfully liked.'),
+      };
 
-    if (result?.error) message.content = i18n.t(result.error)
-    ScreenManager.showMessage(message);
-    setIsLikeProcessing(false);
+      if (result?.error) message.content = i18n.t(result.error)
+      setIsLikeProcessing(false);
+      ScreenManager.showMessage(message);
+    }
   };
 
   const shareJam = async () => {
-    setIsShareProcessing(true);
-    isLoggedIn ? await EntityManager.shareJam(row?.item?.id) : ScreenManager.pushScreen(router, '/login');
-    setIsShareProcessing(false);
+    if (!isLoggedIn) {
+      ScreenManager.pushScreen(router, '/login');
+    }
+    else {
+      setIsShareProcessing(true);
+      await EntityManager.shareJam(row?.item?.id);
+      setIsShareProcessing(false);
+    }
+  };
+
+  const renderLikeButton = () => {
+    return (
+      <BoxView
+        direction="row"
+        align="center"
+      >
+        {isLikeProcessing && (
+          <View style={styles.spinnerContainer}>
+            <SpinnerView size="small" />
+          </View>
+        )}
+
+        {!isLikeProcessing && (
+          <IconView 
+            name="like"
+            theme="tertiary"
+            size={12}
+            padding={6.5}
+            onPress={likeJam}
+          />
+        )}
+      </BoxView>
+    );
   };
 
   const renderJammersButton = () => {
@@ -64,18 +104,12 @@ const ListItemToolbar = ({ row }: Props) => {
         login={true}
         name="JammersList"
         entityId={row.item.id}
-        backTitle={i18n.t('Jammers')}
+        title={i18n.t('Jammers')}
         trigger={
           <BoxView
             direction="row"
             align="center"
           >
-            <IconView 
-              name="users" 
-              theme="tertiary" 
-              size={12}
-              padding={6.5}
-            />
             <TextView>
               {parseInt(row?.item?.jammers?.length)} {i18n.t("jammers")}
             </TextView>
@@ -104,40 +138,27 @@ const ListItemToolbar = ({ row }: Props) => {
     );
   };
 
-  const renderLikeButton = () => {
-    if (isLikeProcessing) return <SpinnerView size="small" />;
-
-    return (
-      <BoxView
-        direction="row"
-        align="center"
-      >
-        <IconView 
-          name="like"
-          theme="tertiary"
-          size={12}
-          padding={6.5}
-          onPress={likeJam}
-        />
-      </BoxView>
-    );
-  };
-
   const renderShareButton = () => {
-    if (isShareProcessing) return <SpinnerView size="small" />;
-    
     return (
       <BoxView
         direction="row"
         align="center"
       >
-        <IconView
-          name="share"
-          theme="tertiary"
-          size={12}
-          padding={6.5}
-          onPress={shareJam}
-        />
+        {isShareProcessing && (
+          <View style={styles.spinnerContainer}>
+            <SpinnerView size="small" />
+          </View>
+        )}
+
+        {!isShareProcessing && (
+          <IconView
+            name="share"
+            theme="tertiary"
+            size={12}
+            padding={6.5}
+            onPress={shareJam}
+          />
+        )}
       </BoxView>
     );
   };
@@ -150,17 +171,14 @@ const ListItemToolbar = ({ row }: Props) => {
         justify="space-between"
         style={styles.container}
       >
-        <BoxView align="center">
+        <BoxView direction="row" align="center" justify="flex-start">
+          {renderLikeButton()}
           {renderJammersButton()}
         </BoxView>
   
-        <BoxView direction="row" align="center">
+        <BoxView direction="row" align="center" justify="flex-end">
           <BoxView align="center">
             {renderSaveButton()}
-          </BoxView>
-  
-          <BoxView align="center">
-            {renderLikeButton()}
           </BoxView>
   
           <BoxView align="center">
@@ -178,6 +196,9 @@ const styles = StyleSheet.create({
   container: {
     padding: Layout.space.base*1.2,
   },
+  spinnerContainer: {
+    marginLeft: 5,
+  },
 });
 
-export default memo(ListItemToolbar);
+export default ListItemToolbar;
