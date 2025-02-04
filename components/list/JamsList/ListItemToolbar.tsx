@@ -37,9 +37,13 @@ const ListItemToolbar = ({ row }: Props) => {
         content: i18n.t('Jam successfully save.'),
       };
 
-      if (result?.error) message.content = i18n.t(result.error)
-      ScreenManager.showMessage(message);
-      setIsSaveProcessing(false);
+      if (result?.error) {
+        message.content = i18n.t(result.error);
+      }
+      else {
+        ScreenManager.showMessage(message);
+        setIsSaveProcessing(false);
+      }
     }
   };
 
@@ -56,9 +60,13 @@ const ListItemToolbar = ({ row }: Props) => {
         content: i18n.t('Jam successfully liked.'),
       };
 
-      if (result?.error) message.content = i18n.t(result.error)
-      setIsLikeProcessing(false);
-      ScreenManager.showMessage(message);
+      if (result?.error) {
+        message.content = i18n.t(result.error);
+      }
+      else {
+        setIsLikeProcessing(false);
+        ScreenManager.showMessage(message);
+      }
     }
   };
 
