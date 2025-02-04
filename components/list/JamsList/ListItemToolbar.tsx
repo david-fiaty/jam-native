@@ -24,38 +24,53 @@ const ListItemToolbar = ({ row }: Props) => {
   const isLoggedIn: boolean = UserManager.isLoggedIn();
 
   const saveJam = async () => {
-    setIsSaveProcessing(true);
-    let result: any = await EntityManager.saveJam(row.item.id);
-    
-    let message: any = {
-      title: i18n.t('Save Jam'),
-      content: i18n.t('Jam successfully save.'),
-    };
+    if (!isLoggedIn) {
+      ScreenManager.pushScreen(router, '/login');
+    }
+    else {
+      setIsSaveProcessing(true);
+      let result: any = await EntityManager.saveJam(row.item.id);
+      
+      let message: any = {
+        title: i18n.t('Save Jam'),
+        content: i18n.t('Jam successfully save.'),
+      };
 
-    if (result?.error) message.content = i18n.t(result.error)
-    ScreenManager.showMessage(message);
-    setIsSaveProcessing(false);
+      if (result?.error) message.content = i18n.t(result.error)
+      ScreenManager.showMessage(message);
+      setIsSaveProcessing(false);
+    }
   };
 
   const likeJam = async () => {
-    setIsLikeProcessing(true);
-    let result: any = await EntityManager.likeJam(row.item.id);
-    
-    let message: any = {
-      title: i18n.t('Like Jam'),
-      content: i18n.t('Jam successfully liked.'),
-    };
+    if (!isLoggedIn) {
+      ScreenManager.pushScreen(router, '/login');
+    }
+    else {
+      setIsLikeProcessing(true);
+      let result: any = await EntityManager.likeJam(row.item.id);
+      
+      let message: any = {
+        title: i18n.t('Like Jam'),
+        content: i18n.t('Jam successfully liked.'),
+      };
 
-    if (result?.error) message.content = i18n.t(result.error)
-    setIsLikeProcessing(false);
-    ScreenManager.toggleModal('JammersList', { title: i18n.t('Jammers') });
-    ScreenManager.showMessage(message);
+      if (result?.error) message.content = i18n.t(result.error)
+      setIsLikeProcessing(false);
+      ScreenManager.toggleModal('JammersList', { title: i18n.t('Jammers') });
+      ScreenManager.showMessage(message);
+    }
   };
 
   const shareJam = async () => {
-    setIsShareProcessing(true);
-    isLoggedIn ? await EntityManager.shareJam(row?.item?.id) : ScreenManager.pushScreen(router, '/login');
-    setIsShareProcessing(false);
+    if (!isLoggedIn) {
+      ScreenManager.pushScreen(router, '/login');
+    }
+    else {
+      setIsShareProcessing(true);
+      await EntityManager.shareJam(row?.item?.id);
+      setIsShareProcessing(false);
+    }
   };
 
   const renderJammersButton = () => {
