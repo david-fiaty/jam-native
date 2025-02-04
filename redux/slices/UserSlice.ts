@@ -34,24 +34,16 @@ const UserSlice = createSlice({
       state.profileId = parseInt(action.payload || 0);
     },
     setLikedJam: (state, action) => {
-      if (!state.likedJams.includes(action.payload)) {
-        state.likedJams.push(action.payload);
-      }
+      state.likedJams = action.payload;
     },
     setSavedJam: (state, action) => {
-      if (!state.savedJams.includes(action.payload)) {
-        state.savedJams.push(action.payload);
-      }
+      state.savedJams = action.payload;
     },
     setLikedProject: (state, action) => {
-      if (!state.likedProjects.includes(action.payload)) {
-        state.likedProjects.push(action.payload);
-      }
+      state.likedProjects = action.payload;
     },
     setSavedProject: (state, action) => {
-      if (!state.savedProjects.includes(action.payload)) {
-        state.savedProjects.push(action.payload);
-      }
+      state.savedProjects = action.payload;
     },
   },
 });
