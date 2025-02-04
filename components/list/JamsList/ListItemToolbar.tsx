@@ -142,7 +142,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
             name="like"
             theme={getLikeIconTheme()}
             size={12}
-            padding={6.5}
+            padding={6}
             onPress={likeJam}
           />
         )}
@@ -183,7 +183,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
           name="save"
           theme={getSaveIconTheme()}
           size={12}
-          padding={6.5}
+          padding={6}
           onPress={saveJam}
         />
       </BoxView>
@@ -207,7 +207,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
             name="share"
             theme="tertiary"
             size={12}
-            padding={6.5}
+            padding={6}
             onPress={shareJam}
           />
         )}

@@ -61,7 +61,7 @@ const JamsList = ({ idArray }: Props) => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: Layout.space.base*1.5,
-    paddingBottom: 0,
+    //paddingBottom: 250, // Todo - Fix, this should not be needed
     width: '100%',
     height: '100%',
     flexGrow: 1,
