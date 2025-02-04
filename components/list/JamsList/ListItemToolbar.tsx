@@ -123,20 +123,26 @@ const ListItemToolbar = ({ row }: Props) => {
   };
 
   const renderShareButton = () => {
-    if (isShareProcessing) return <SpinnerView size="small" />;
-    
     return (
       <BoxView
         direction="row"
         align="center"
       >
-        <IconView
-          name="share"
-          theme="tertiary"
-          size={12}
-          padding={6.5}
-          onPress={shareJam}
-        />
+        {isShareProcessing && (
+          <View style={styles.shareSpinner}>
+            <SpinnerView size="small" />
+          </View>
+        )}
+
+        {!isShareProcessing && (
+          <IconView
+            name="share"
+            theme="tertiary"
+            size={12}
+            padding={6.5}
+            onPress={shareJam}
+          />
+        )}
       </BoxView>
     );
   };
@@ -174,6 +180,9 @@ const styles = StyleSheet.create({
     padding: Layout.space.base*1.2,
   },
   likeSpinner: {
+    marginLeft: 5,
+  },
+  shareSpinner: {
     marginLeft: 5,
   },
 });
