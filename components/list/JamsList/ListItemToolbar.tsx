@@ -47,9 +47,9 @@ const ListItemToolbar = ({ row }: Props) => {
     };
 
     if (result?.error) message.content = i18n.t(result.error)
-    ScreenManager.showMessage(message);
     setIsLikeProcessing(false);
     ScreenManager.toggleModal('JammersList', { title: i18n.t('Jammers') });
+    ScreenManager.showMessage(message);
   };
 
   const shareJam = async () => {
