@@ -73,6 +73,14 @@ const ListItemToolbar = ({ row }: Props) => {
     }
   };
 
+  const isJamLiked = () => {
+
+  };
+
+  const isJamSaved = () => {
+
+  };
+
   const renderLikeButton = () => {
     return (
       <BoxView
