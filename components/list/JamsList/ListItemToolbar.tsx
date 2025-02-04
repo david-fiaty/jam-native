@@ -11,6 +11,7 @@ import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
 import ScreenManager from "@/manager/ScreenManager";
 import SpinnerView from "@/components/view/SpinnerView";
+import ModalButton from "@/components/button/ModalButton";
 
 type Props = BaseProps & {
   row?: any;
@@ -57,7 +58,6 @@ const ListItemToolbar = ({ row }: Props) => {
 
       if (result?.error) message.content = i18n.t(result.error)
       setIsLikeProcessing(false);
-      ScreenManager.toggleModal('JammersList', { title: i18n.t('Jammers') });
       ScreenManager.showMessage(message);
     }
   };
@@ -73,33 +73,49 @@ const ListItemToolbar = ({ row }: Props) => {
     }
   };
 
+  const renderLikeButton = () => {
+    return (
+      <BoxView
+        direction="row"
+        align="center"
+      >
+        {isLikeProcessing && (
+          <View style={styles.spinnerContainer}>
+            <SpinnerView size="small" />
+          </View>
+        )}
+
+        {!isLikeProcessing && (
+          <IconView 
+            name="like"
+            theme="tertiary"
+            size={12}
+            padding={6.5}
+            onPress={likeJam}
+          />
+        )}
+      </BoxView>
+    );
+  };
+
   const renderJammersButton = () => {
     return (
-      <TouchableOpacity onPress={likeJam}>
-        <BoxView
-          direction="row"
-          align="center"
-        >
-          {isLikeProcessing && (
-            <View style={styles.likeSpinner}>
-              <SpinnerView size="small" />
-            </View>
-          )}
-  
-          {!isLikeProcessing && (
-            <IconView 
-              name="users" 
-              theme="tertiary" 
-              size={12}
-              padding={6.5}
-            />
-          )}
-
-          <TextView>
-            {parseInt(row?.item?.jammers?.length)} {i18n.t("jammers")}
-          </TextView>
-        </BoxView>
-      </TouchableOpacity>
+      <ModalButton 
+        login={true}
+        name="JammersList"
+        entityId={row.item.id}
+        title={i18n.t('Jammers')}
+        trigger={
+          <BoxView
+            direction="row"
+            align="center"
+          >
+            <TextView>
+              {parseInt(row?.item?.jammers?.length)} {i18n.t("jammers")}
+            </TextView>
+          </BoxView>
+        }
+      />
     );
   };
 
@@ -123,20 +139,26 @@ const ListItemToolbar = ({ row }: Props) => {
   };
 
   const renderShareButton = () => {
-    if (isShareProcessing) return <SpinnerView size="small" />;
-    
     return (
       <BoxView
         direction="row"
         align="center"
       >
-        <IconView
-          name="share"
-          theme="tertiary"
-          size={12}
-          padding={6.5}
-          onPress={shareJam}
-        />
+        {isShareProcessing && (
+          <View style={styles.spinnerContainer}>
+            <SpinnerView size="small" />
+          </View>
+        )}
+
+        {!isShareProcessing && (
+          <IconView
+            name="share"
+            theme="tertiary"
+            size={12}
+            padding={6.5}
+            onPress={shareJam}
+          />
+        )}
       </BoxView>
     );
   };
@@ -149,7 +171,8 @@ const ListItemToolbar = ({ row }: Props) => {
         justify="space-between"
         style={styles.container}
       >
-        <BoxView align="center">
+        <BoxView direction="row" align="center" justify="flex-start">
+          {renderLikeButton()}
           {renderJammersButton()}
         </BoxView>
   
@@ -173,7 +196,7 @@ const styles = StyleSheet.create({
   container: {
     padding: Layout.space.base*1.2,
   },
-  likeSpinner: {
+  spinnerContainer: {
     marginLeft: 5,
   },
 });
