@@ -85,14 +85,6 @@ const ListItemToolbar = ({ row }: Props) => {
     }
   };
 
-  const isJamLiked = () => {
-
-  };
-
-  const isJamSaved = () => {
-
-  };
-
   const renderLikeButton = () => {
     return (
       <BoxView
@@ -183,6 +175,15 @@ const ListItemToolbar = ({ row }: Props) => {
     );
   };
 
+
+  const isJamLiked = () => {
+    return userState.likedJams.includes(row.item.id);
+  };
+
+  const isJamSaved = () => {
+    return userState.savedJams.includes(row.item.id);
+  };
+
   const renderComponent = () => {
     return (
       <BoxView
@@ -208,12 +209,6 @@ const ListItemToolbar = ({ row }: Props) => {
       </BoxView>
     );  
   };
-
-  useEffect(() => {
-
-    console.log(userState.likedJams, userState.savedJams);
-
-  }, [userState]);
 
   return renderComponent();
 };
