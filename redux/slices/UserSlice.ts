@@ -33,22 +33,22 @@ const UserSlice = createSlice({
     setProfileId: (state, action) => {
       state.profileId = parseInt(action.payload || 0);
     },
-    setLikedJams: (state, action) => {
+    setLikedJam: (state, action) => {
       if (!state.likedJams.includes(action.payload)) {
         state.likedJams.push(action.payload);
       }
     },
-    setSavedJams: (state, action) => {
+    setSavedJam: (state, action) => {
       if (!state.savedJams.includes(action.payload)) {
         state.savedJams.push(action.payload);
       }
     },
-    setLikedProjects: (state, action) => {
+    setLikedProject: (state, action) => {
       if (!state.likedProjects.includes(action.payload)) {
         state.likedProjects.push(action.payload);
       }
     },
-    setSavedProjects: (state, action) => {
+    setSavedProject: (state, action) => {
       if (!state.savedProjects.includes(action.payload)) {
         state.savedProjects.push(action.payload);
       }
@@ -56,5 +56,5 @@ const UserSlice = createSlice({
   },
 });
 
-export const { setIsLoggedIn, setTokenData, setProfileId, setLikedJams, setSavedJams, setLikedProjects, setSavedProjects } = UserSlice.actions;
+export const { setIsLoggedIn, setTokenData, setProfileId, setLikedJam, setSavedJam, setLikedProject, setSavedProject } = UserSlice.actions;
 export default UserSlice.reducer;
