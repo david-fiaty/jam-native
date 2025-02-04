@@ -156,20 +156,40 @@ class UserManager {
     return userLanguage || Config.fallbackLanguage;
   };
 
-  addLikedJam(entityId: number) {
-    let likedJams: any = [...Store.getState().user.likedJams];
+  updateLikedJams(entityId: number) {
+    let likedJams: any[] = [...Store.getState().user.likedJams];
+    
+    if (likedJams.includes(entityId)) likedJams = likedJams.filter((v: any) => v !== entityId)
+    else likedJams.push(entityId);
+
+    Store.dispatch(setLikedJams(likedJams));
   }
 
-  addSavedJam(entityId: number) {
-    let savedJams: any = [...Store.getState().user.savedJams];
+  updateSavedJams(entityId: number) {
+    let savedJams: any[] = [...Store.getState().user.savedJams];
+    
+    if (savedJams.includes(entityId)) savedJams = savedJams.filter((v: any) => v !== entityId)
+    else savedJams.push(entityId);
+
+    Store.dispatch(setSavedJams(savedJams));
   }
 
-  addLikedProject(entityId: number) {
-    let likedProjects: any = [...Store.getState().user.likedProjects];
+  updateLikedProjects(entityId: number) {
+    let likedProjects: any[] = [...Store.getState().user.likedProjects];
+    
+    if (likedProjects.includes(entityId)) likedProjects = likedProjects.filter((v: any) => v !== entityId)
+    else likedProjects.push(entityId);
+
+    Store.dispatch(setLikedProjects(likedProjects));
   }
 
-  addSavedProject(entityId: number) {
-    let savedProjects: any = [...Store.getState().user.savedProjects];
+  updateSavedProjects(entityId: number) {
+    let savedProjects: any[] = [...Store.getState().user.savedProjects];
+    
+    if (savedProjects.includes(entityId)) savedProjects = savedProjects.filter((v: any) => v !== entityId)
+    else savedProjects.push(entityId);
+
+    Store.dispatch(setSavedProjects(savedProjects));
   }
 }
 
