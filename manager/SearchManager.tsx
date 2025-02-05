@@ -1,4 +1,6 @@
 import { setSearchValue, setDefaultResult, setCurrentResult } from "@/redux/slices/SearchSlice";
+import { Config } from "@/constants/Config";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 
@@ -52,7 +54,26 @@ class SearchManager {
 
   async loadData(searchValue?: string) {
     const options = searchValue?.length ? { query_text: searchValue } : {};
-    const [jams, profiles, projects] = await this.sendRequest(options);
+    let data: any = [];
+
+    if (Config.dataCacheEnabled === true && searchValue?.length) {
+      let cacheKey = this.getCacheKey(searchValue);
+      data = await AsyncStorage.getItem(cacheKey);
+
+      if (data === null) {
+        data = await this.sendRequest(options);
+        await AsyncStorage.setItem(cacheKey, JSON.stringify(data));
+      }  
+      else {
+        data = JSON.parse(data);
+      }
+    }
+    else {
+      data = await this.sendRequest(options);
+    }
+
+    const [jams, profiles, projects] = data;
+    
     const result = this.buildResponse({
       jams: jams, 
       profiles: profiles, 
@@ -86,6 +107,10 @@ class SearchManager {
       call: data.jams.filter((o: any) => o?.type == 'call'),
       event: data.jams.filter((o: any) => o?.type == 'event'),
     };
+  }
+
+  getCacheKey(searchValue: string) {
+    return searchValue.replace(/\W/g, '');
   }
 };
 

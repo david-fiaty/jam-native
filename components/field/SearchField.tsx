@@ -45,14 +45,15 @@ const SearchField = ({ canShow, onSearchEdit, onSearchSubmit, onSearchClear }: P
 
   const renderRightIcon = () => {
     if (searchState.searching == true) {
-      return <SpinnerView size="small" compact={true} />;
+      return <SpinnerView size="small" />;
     }
     else if (searchState.value?.length) {
       return (
         <IconView 
           name="delete" 
-          theme="primary" 
-          size={13}
+          theme="secondary" 
+          size={18}
+          padding={0}
           onPress={clearSearch}
         />
       );
@@ -61,8 +62,9 @@ const SearchField = ({ canShow, onSearchEdit, onSearchSubmit, onSearchClear }: P
       return (
         <IconView 
           name="exit" 
-          theme="primary" 
-          size={13}
+          theme="secondary" 
+          size={18}
+          padding={0}
           onPress={toggleSearch}
         />
       );
@@ -76,20 +78,10 @@ const SearchField = ({ canShow, onSearchEdit, onSearchSubmit, onSearchClear }: P
       justify="flex-end" 
       style={styles.container}
     >
-      {!isExpanded && canShow &&
-        <IconView 
-          name="search" 
-          theme="clear" 
-          size={22}
-          padding={0}
-          onPress={toggleSearch}
-        /> 
-      }
-
       <Animatable.View 
-        style={[styles.animated, (isExpanded ? styles.expanded : {})]}
+        style={[styles.fieldInput, styles.fieldAnimate, (isExpanded ? styles.fieldExpanded : {})]}
         transition="width"
-        duration={300}
+        duration={isExpanded ? 300 : 600}
       >
         <InputTextField 
           value={currentSearchValue}
@@ -97,6 +89,20 @@ const SearchField = ({ canShow, onSearchEdit, onSearchSubmit, onSearchClear }: P
           onChangeText={onChangeText}
           onSubmitEditing={onSubmitEditing}
           rightIcon={renderRightIcon()}
+        /> 
+      </Animatable.View>
+
+      <Animatable.View 
+        style={[styles.searchIcon, styles.searchIconAnimate, (!isExpanded ? styles.searchIconVisible : {})]}
+        transition="opacity"
+        duration={isExpanded ? 100: 1000}
+      >      
+        <IconView 
+          name="search" 
+          theme="clear" 
+          size={22}
+          padding={0}
+          onPress={toggleSearch}
         /> 
       </Animatable.View>
 
@@ -108,12 +114,26 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
   },
-  animated: {
+  fieldInput: {
+    position: 'absolute',
+    right: 0,
+  },
+  fieldAnimate: {
     overflow: 'hidden',
     width: '0%',
   },
-  expanded: {
+  fieldExpanded: {
     width: '100%',
+  },
+  searchIcon: {
+    position: 'absolute',
+    right: 0,
+  },
+  searchIconAnimate: {
+    opacity: 0,
+  },
+  searchIconVisible: {
+    opacity: 1,
   },
 });
 

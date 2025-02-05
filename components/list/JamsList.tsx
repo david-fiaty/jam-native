@@ -8,6 +8,7 @@ import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import ListItem from "./JamsList/ListItem";
+import UserManager from "@/manager/UserManager";
 
 type Props = BaseProps & {
   idArray?: any;
@@ -17,11 +18,17 @@ const JamsList = ({ idArray }: Props) => {
   const [sectors, setSectors] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [jamData, setJamData] = useState<any[]>([]);
+  const [profileData, setProfileData] = useState<any>(null);
   const searchResult = JSON.parse(useSelector((state: any) => state.search.current));
+
+  const renderItem = (row: any) => {
+    return <ListItem row={row} sectorsData={sectors} profileData={profileData} />;
+  };
 
   useEffect(() => {
     (async () => {
       if (!sectors.length) setSectors(await EntityManager.getSectors());
+      if (!profileData) setProfileData(await UserManager.getProfileData());
 
       if (idArray?.length > 0) {
         setJamData(await EntityManager.getJams({ items_ids: idArray }))
@@ -43,9 +50,8 @@ const JamsList = ({ idArray }: Props) => {
     >
       <ListView
         data={jamData}
-        initialNumToRender={jamData.length}
         contentContainerStyle={Layout.listContainer}
-        renderItem={(row: any) => <ListItem row={row} sectorsData={sectors} />}
+        renderItem={renderItem}
         keyExtractor={(item: any) => item.id.toString()}
       />
     </BoxView>
@@ -55,7 +61,7 @@ const JamsList = ({ idArray }: Props) => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: Layout.space.base*1.5,
-    paddingBottom: 0,
+    //paddingBottom: 250, // Todo - Fix, this should not be needed
     width: '100%',
     height: '100%',
     flexGrow: 1,

@@ -94,12 +94,22 @@ const Endpoints = {
     cacheable: false,
     dataKey: null,
   },
+  likeProject: {
+    path: '/projects/like/',
+    cacheable: false,
+    dataKey: null,
+  },
   likeJam: {
     path: '/jams/like/',
     cacheable: false,
     dataKey: null,
   },
   saveJam: {
+    path: '/jams/save/',
+    cacheable: false,
+    dataKey: null,
+  },
+  unsaveJam: {
     path: '/jams/save/',
     cacheable: false,
     dataKey: null,
@@ -126,6 +136,11 @@ const Endpoints = {
   },
   addJamToProject: {
     path: '/projects/[project_id]/jams/add/',
+    cacheable: false,
+    dataKey: null,
+  },
+  unsaveProject: {
+    path: '/projects/',
     cacheable: false,
     dataKey: null,
   }, 

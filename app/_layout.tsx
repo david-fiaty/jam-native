@@ -24,9 +24,10 @@ const RootLayout = () => {
   });
 
   const backAction = () => {  
+    ScreenManager.toggleModal(null);
     router.replace('/');
 
-    // Todo - Set new active route to fix bug
+    // Todo - Set new active route in to fix bug
     /*
     let activeRoutes: any = [...Store.getState().route.active].pop();
     ScreenManager.toggleModal(null);

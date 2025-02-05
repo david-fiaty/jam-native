@@ -13,13 +13,14 @@ type Props = BaseProps & {
 };
 
 const ListItemHeader = ({ row }: Props) => {
+
   const renderHosts = () => {
     return (
       <ModalButton 
         login={true}
         name="HostsList"
         entityId={row.item.id}
-        backTitle={i18n.t('Jam hosts')}
+        title={i18n.t('Jam hosts')}
         trigger={
           <TextView>
             @{i18n.t("host")} +{parseInt(row?.item?.collaborators?.length)}
@@ -39,7 +40,7 @@ const ListItemHeader = ({ row }: Props) => {
         login={true}
         name="MoreJamActionsView"
         entityId={row.item.id}
-        backTitle={i18n.t('More actions')}
+        title={i18n.t('More actions')}
         trigger={
           <IconView
             name="actions"
@@ -52,24 +53,28 @@ const ListItemHeader = ({ row }: Props) => {
     );
   };
 
-  return (
-    <BoxView
-      direction="row"
-      align="center"
-      justify="space-between"
-      style={styles.container}
-    >
-      <BoxView align="center">
-        {renderHosts()}
+  const renderComponent = () => {
+    return (
+      <BoxView
+        direction="row"
+        align="center"
+        justify="space-between"
+        style={styles.container}
+      >
+        <BoxView align="center">
+          {renderHosts()}
+        </BoxView>
+        <BoxView align="center">
+          {renderStatus()}
+        </BoxView>
+        <BoxView align="center">
+          {renderActions()}
+        </BoxView>
       </BoxView>
-      <BoxView align="center">
-        {renderStatus()}
-      </BoxView>
-      <BoxView align="center">
-        {renderActions()}
-      </BoxView>
-    </BoxView>
-  );
+    );  
+  };
+
+  return renderComponent();
 };
 
 const styles = StyleSheet.create({

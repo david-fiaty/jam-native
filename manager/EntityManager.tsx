@@ -162,6 +162,16 @@ class EntityManager {
     return response;
   }
 
+  async unsaveJam(entityId: any) {
+    let profileId = await UserManager.getProfileId();
+    let response = await DataManager.post('unsaveJam', {
+      profile_id: profileId,
+      unsave_items_ids: [entityId],
+    });
+
+    return response;
+  }
+
   async addJam(entityData: any) {
     return await DataManager.post('addJam', entityData);
   }
@@ -180,6 +190,51 @@ class EntityManager {
 
     return response;
   }
+
+  async likeProject(entityId: any) {
+    let profileId = await UserManager.getProfileId();
+    let response = await DataManager.post('likeProject', {
+      profile_id: profileId,
+      item_id: entityId,
+      like_action: 'like',
+    });
+
+    return response;
+  }
+
+  async unlikeJam(entityId: any) {
+    let profileId = await UserManager.getProfileId();
+    let response = await DataManager.post('likeJam', {
+      profile_id: profileId,
+      item_id: entityId,
+      like_action: 'unlike',
+    });
+
+    return response;
+  }
+
+  async unlikeProject(entityId: any) {
+    let profileId = await UserManager.getProfileId();
+    let response = await DataManager.post('likeProject', {
+      profile_id: profileId,
+      item_id: entityId,
+      like_action: 'unlike',
+    });
+
+    return response;
+  }
+
+
+  async unsaveProject(entityId: any) {
+    let profileId = await UserManager.getProfileId();
+    let response = await DataManager.post('unsaveProject', {
+      profile_id: profileId,
+      unsave_items_ids: [entityId],
+    });
+
+    return response;
+  }
+
 
   async deleteJam(entityId: any) {
     let profileId = await UserManager.getProfileId();

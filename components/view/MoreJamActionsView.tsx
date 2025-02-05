@@ -15,13 +15,12 @@ const MoreJamActionsView = () => {
   const [isEntityOwner, setIsEntityOwner] = useState<boolean>(false);
   const entityId: number = ScreenManager.getModalEntityId();
   
-
   const saveJam = async () => {
     let result: any = await EntityManager.saveJam(entityId);
     
     let message: any = {
       title: i18n.t('Save Jam'),
-      content: i18n.t('Jam successfully save.'),
+      content: i18n.t('Jam successfully saved.'),
     };
 
     if (result?.error) message.content = i18n.t(result.error)

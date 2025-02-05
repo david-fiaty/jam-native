@@ -7,6 +7,7 @@ import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import i18n from "@/translation/i18n";
+import UserManager from "@/manager/UserManager";
 
 const JamsMapView = () => {
   const [currentLocation, setCurrentLocation] = useState<any>(null);
@@ -62,7 +63,7 @@ const JamsMapView = () => {
 
   useEffect(() => {
     (async () => {
-      setCurrentLocation(await ScreenManager.getLocation());
+      setCurrentLocation(await UserManager.getLocation());
     })();
 
     setIsLoaded(true);
@@ -92,7 +93,6 @@ const JamsMapView = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 0,
-    paddingTop: Layout.space.base*2,
   },
   map: {
     flex: 1,

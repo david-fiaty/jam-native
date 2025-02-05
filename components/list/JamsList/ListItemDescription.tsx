@@ -5,7 +5,7 @@ import BoxView from "@/components/view/BoxView";
 import TextView from "@/components/view/TextView";
 
 type Props = BaseProps & {
-  row?: any,
+  row?: any;
 };
 
 const ListItemDescription = ({ row }: Props) => {

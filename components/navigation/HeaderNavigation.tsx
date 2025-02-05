@@ -56,7 +56,7 @@ const HeaderNavigation = () => {
       <ModalButton 
         login={true}
         name="NotificationsMenu"
-        backTitle={i18n.t('Notifications')}
+        title={i18n.t('Notifications')}
         trigger={    
           <IconView 
             label={notificationsCount > 0 ? ` ${notificationsCount}+` : ` 0 `} 
@@ -74,7 +74,7 @@ const HeaderNavigation = () => {
       <ModalButton 
         login={true}
         name="SettingsMenu"
-        backTitle={i18n.t('Settings')}
+        title={i18n.t('Settings')}
         trigger={
           <IconView 
             name="menu"
@@ -163,6 +163,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     width: headerSize.width,
     paddingHorizontal: Layout.space.base*1.5,
+    marginBottom: Layout.space.base,
   },
   headerLeft: {
     width: '12%',

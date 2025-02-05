@@ -86,10 +86,16 @@ export const Layout = {
     fontSize: fontSize.base,
   },
   titleContainer: {
-    height: 40,
+    marginBottom: space.base*1.5,
+  },
+  modalTitleContainer: {
+    marginLeft: space.base*1.5,
+    marginBottom: space.base*1.5,
+    width: '100%',
   },
   menuContainer: {
     padding: space.base*1.5,
+    paddingTop: 0,
     height: '100%',
     flexGrow: 1,
   },
@@ -106,8 +112,8 @@ export const Layout = {
     alignItems: 'center',
   },
   screenContent: {
-    padding: space.base*1.5,
-    paddingBottom: 0,
+    paddingHorizontal: space.base*1.5,
+    paddingVertical: 0,
     width: '100%',
     height: '100%',
     flexGrow: 1,
@@ -121,6 +127,7 @@ export const Layout = {
   formContainer: {
     width: "100%",
     gap: space.base,
+    backgroundColor: Colors.white,
   },
   formField: {
     backgroundColor: Colors.secondary,

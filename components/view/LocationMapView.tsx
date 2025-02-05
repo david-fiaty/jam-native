@@ -11,6 +11,7 @@ import ScreenManager from "@/manager/ScreenManager";
 import i18n from "@/translation/i18n";
 import BackButton from "../button/BackButton";
 import BoxView from "./BoxView";
+import UserManager from "@/manager/UserManager";
 
 const LocationMapView = () => {
   const dispatch = useDispatch();
@@ -43,12 +44,12 @@ const LocationMapView = () => {
   };
 
   const getDeviceLocation = async () => {
-    let deviceLocation: any = await ScreenManager.getLocation();
+    let deviceLocation: any = await UserManager.getLocation();
 
-    if (deviceLocation?.coords?.latitude && deviceLocation?.coords?.longitude) {
+    if (deviceLocation?.latitude && deviceLocation?.longitude) {
       return {
-        latitude: deviceLocation?.coords?.latitude,
-        longitude: deviceLocation?.coords?.longitude,
+        latitude: deviceLocation?.latitude,
+        longitude: deviceLocation?.longitude,
       };
     }
 

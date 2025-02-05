@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { StyleSheet, View } from "react-native";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
@@ -89,4 +90,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ImageSlideshow;
+export default memo(ImageSlideshow);
