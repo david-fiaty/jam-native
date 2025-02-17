@@ -72,6 +72,15 @@ class ApiManager {
         ...(data ? { body: JSON.stringify(data) } : {}),
       });
   
+
+      console.log('-----', {
+        url: url,
+        method: method,
+        data: data,
+        headers: this.getHeaders(),
+        response: response,
+      });
+
       return await this.processResponse(response);
     } 
     catch (error) {
