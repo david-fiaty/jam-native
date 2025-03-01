@@ -1,6 +1,7 @@
 ##### JAM #####
 
 ###  Post Jam
+# To send files in 'upload_medias', you should use formdata and not json payload
 POST http://0.0.0.0:8000/api/v1/jams/
 Content-Type: application/json
 
@@ -26,6 +27,7 @@ Content-Type: application/json
 }
 
 ###  Update Jam
+# To send files in 'upload_medias', you should use formdata and not json payload
 PUT http://0.0.0.0:8000/api/v1/jams/78/
 Content-Type: application/json
 
@@ -40,10 +42,10 @@ Content-Type: application/json
 
 	"location_type": "online_physical",
     "geographical_scope": "specific",
-    
+    "scope_countries_codes": ["ng"],
     "geolocation_latitude": "9",
     "geolocation_longitude": "2",
-    "scope_countries_codes": ["ng"],
+    
     "profile_id": 4318,
     "callaborators_ids" : [1, 4318],
     "period": {"start_datetime":"2018-11-20T15:58:44-06:00", "end_datetime":"2018-11-20T15:58:44-06:01" },
@@ -137,14 +139,16 @@ Content-Type: application/json
 ##### PROJECT #####
 
 ###  Post Project
-# /!\ ask Ghislain to set up upload_project_picture /!\
+# To send a file in 'upload_project_picture', you should use formdata and not json payload
 POST http://0.0.0.0:8000/api/v1/projects/
 Content-Type: application/json
 
 {
     "name": "Project Name",
 	"description": "Project Name",
+
     "upload_project_picture": null,
+
     "jams_ids": [1, 2],
     "sectors_ids": [1, 3],
     "scope_countries_codes" : ["gh", "tg"],
@@ -156,14 +160,17 @@ Content-Type: application/json
 }
 
 ###  Update Project
-# /!\ ask Ghislain to set up upload_project_picture /!\
+# To send a file in 'upload_project_picture', you should use formdata and not json payload
 PUT http://0.0.0.0:8000/api/v1/projects/1/
 Content-Type: application/json
 
 {
     "name": "Project Name",
 	"description": "Project Name",
+
     "upload_project_picture": null,
+    "remove_project_picture_id": 12,
+
     "jams_ids": [1, 2],
     "sectors_ids": [1, 3],
     "scope_countries_codes" : ["gh", "tg"],
@@ -298,7 +305,8 @@ Content-Type: application/json
 ### Update specific profile (PERSONAL type)
 # /!\ first_name and last_name are required /!\
 # /!\ possible values for the field experience_in_field: less_than_1_year | 1_to_3_years | 3_to_5_years | 5_to_10_years | more_than_10_years /!\
-# /!\ ask Ghislain to set up upload_profile_picture, and upload_other_docs /!\
+# To send a file in 'upload_profile_picture', you should use formdata and not json payload
+# To send files in 'upload_other_docs', you should use formdata and not json payload
 PUT http://0.0.0.0:8000/api/v1/profiles/4341/
 Content-Type: application/json
 
@@ -723,7 +731,7 @@ Content-Type: application/json
 
 ##### REGISTRATION AND LOGIN #####
 
-### Registration
+### Registration with email
 # Check full fields available (see profile update above)
 POST http://0.0.0.0:8000/api/v1/register/
 Content-Type: application/json
@@ -738,29 +746,70 @@ Content-Type: application/json
         "profile_type": "venue",
         "profile_venue": {"venue_name":"ABCD"}
     },
-    "email": "aaaabcde@test.com",
+    "email": "aaaabcdefg@test.com",
     "password": "abcdef",
-    "username": "abc",
     "session": "b9f2f805a3324c5eb23520132c3dede3"
 }
 
-###
+### Send registration code (registration with email)
 POST http://0.0.0.0:8000/api/v1/send-registration-verification/
 Content-Type: application/json
 
 {"email":"test1234@yopmail.com"}
 
-###
+### Verify registration code (registration with email)
 POST http://0.0.0.0:8000/api/v1/verify-registration/
 Content-Type: application/json
 
 {"session":"b9f2f805-a332-4c5e-b235-20132c3dede3", "code":"34027"}
 
-### Login
+
+### Registration with phone
+# Check full fields available (see profile update above)
+POST http://0.0.0.0:8000/api/v1/register/
+Content-Type: application/json
+
+{
+    "profile": {
+        "sectors_ids": [1, 3],
+        "profile_name": "1234",
+        "scope_country_code": "gh",
+        "geolocation_latitude": "9.80",
+        "geolocation_longitude": "2.80",
+        "profile_type": "venue",
+        "profile_venue": {"venue_name":"ABCD"}
+    },
+    "phone_without_country_code": "90242798",
+    "country_code": "+228",
+    "password": "abcdef",
+    "session": "b9f2f805a3324c5eb23520132c3dede3"
+}
+
+### Send registration code (registration with phone)
+# For phone service, you can use either sms or whatsapp
+POST http://0.0.0.0:8000/api/v1/send-registration-verification/
+Content-Type: application/json
+
+{"phone_without_country_code":"90242798", "country_code": "+228", "phone_service": "sms"}
+
+### Verify registration code (registration with phone)
+POST http://0.0.0.0:8000/api/v1/verify-registration/
+Content-Type: application/json
+
+{"session":"b9f2f805-a332-4c5e-b235-20132c3dede3", "code":"34027"}
+
+
+### Login (with email)
 POST http://0.0.0.0:8000/api/v1/login/
 Content-Type: application/json
 
 {"email":"abcdefghijklmn@test.com", "password":"abcdef"}
+
+### Login (with phone)
+POST http://0.0.0.0:8000/api/v1/login/
+Content-Type: application/json
+
+{"phone_without_country_code":"90242798", "country_code": "+228", "password":"abcdef"}
 
 
 ### Refresh API token
@@ -776,21 +825,34 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMyODk3NDA3LCJpYXQiOjE3MzIwMzM0MDcsImp0aSI6ImQ3NDYyZGI3MDY4YTQ1YjM5NWM2MTIxMDkxYTk2ZTdiIiwidXNlcl9pZCI6MTB9.6AT3p6HklfUzzgO6jxcxISjfQRypgiOlqrJkO_pcrh4
 
 
-### Get other user info
+### Get other user info (email)
 POST http://0.0.0.0:8000/api/v1/get-other-user-info/
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMyODk3NDA3LCJpYXQiOjE3MzIwMzM0MDcsImp0aSI6ImQ3NDYyZGI3MDY4YTQ1YjM5NWM2MTIxMDkxYTk2ZTdiIiwidXNlcl9pZCI6MTB9.6AT3p6HklfUzzgO6jxcxISjfQRypgiOlqrJkO_pcrh4
 
 {"email":"abcdefghijklmnopqrst@test.com", "password":"abcdef"}
 
+### Get other user info (phone)
+POST http://0.0.0.0:8000/api/v1/get-other-user-info/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMyODk3NDA3LCJpYXQiOjE3MzIwMzM0MDcsImp0aSI6ImQ3NDYyZGI3MDY4YTQ1YjM5NWM2MTIxMDkxYTk2ZTdiIiwidXNlcl9pZCI6MTB9.6AT3p6HklfUzzgO6jxcxISjfQRypgiOlqrJkO_pcrh4
 
-### Add managed profile to user
+{"phone_without_country_code":"70341679", "country_code":"+228", "password":"abcdef"}
+
+
+### Add managed profile to user (email)
 POST http://0.0.0.0:8000/api/v1/add-managed-profile-to-user/
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMxNzYzMDA1LCJpYXQiOjE3MzA4OTkwMDUsImp0aSI6ImZhMmQxYWQ5ODY1MDRiOTU5MTIwOGQyODVmZmI2Njk1IiwidXNlcl9pZCI6MTB9.4rd8BE-kb8f8wMGhMrlnCj1rNu7906PVjHVYRzbjzJI
 
-{"email_other_user":"abcdefghijklm@test.com","password_other_user":"abcdef","profile_type":"personal","profile_id_other_user":"1"}
+{"email_other_user":"abcdefghijklm@test.com", "password_other_user":"abcdef" ,"profile_id_other_user":"1"}
 
+### Add managed profile to user (phone)
+POST http://0.0.0.0:8000/api/v1/add-managed-profile-to-user/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMxNzYzMDA1LCJpYXQiOjE3MzA4OTkwMDUsImp0aSI6ImZhMmQxYWQ5ODY1MDRiOTU5MTIwOGQyODVmZmI2Njk1IiwidXNlcl9pZCI6MTB9.4rd8BE-kb8f8wMGhMrlnCj1rNu7906PVjHVYRzbjzJI
+
+{"phone_without_country_code_other_user":"70563425", "country_code_other_user":"+228", "password_other_user":"abcdef", "profile_id_other_user":"1"}
 
 ### Add owned profile to user
 POST http://0.0.0.0:8000/api/v1/add-owned-profile-to-user/
@@ -814,3 +876,54 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM0MTA1ODQ4LCJpYXQiOjE3MzMyNDE4NDgsImp0aSI6ImIxYWMxMDY4MzIwODRmZGFhYzA5Njg0MzY4NGU3ZDkxIiwidXNlcl9pZCI6MTl9.yWaeBeFvuFdBjTVUds1nuTVVGgdO2YTeI9JvaEbn7Nc
 
 {"new_username": "abcdefgh8887"}
+
+
+##### FORGOT PASSWORD #####
+
+### Forgot password with email
+PUT http://0.0.0.0:8000/api/v1/forgot-password/
+Content-Type: application/json
+
+{
+    "email": "aaaabcdefg@test.com",
+    "new_password": "abcdefghi",
+    "session": "318a4541-b2cf-4695-8743-d6a3188293b5"
+}
+
+### Send forgot password code (forgot password with email)
+POST http://0.0.0.0:8000/api/v1/send-forgot-password-verification/
+Content-Type: application/json
+
+{"email":"aaaabcdef@test.com"}
+
+### Verify forgot password code (forgot password with email)
+POST http://0.0.0.0:8000/api/v1/verify-forgot-password/
+Content-Type: application/json
+
+{"session":"b9f2f805-a332-4c5e-b235-20132c3dede3", "code":"34027"}
+
+
+### Forgot password with phone
+# Check full fields available (see profile update above)
+PUT http://0.0.0.0:8000/api/v1/forgot-password/
+Content-Type: application/json
+
+{
+    "phone_without_country_code": "90127894",
+    "country_code": "+228",
+    "new_password": "abcdef",
+    "session": "b9f2f805a3324c5eb23520132c3dede3"
+}
+
+### Send forgot password code (forgot password with phone)
+# For phone service, you can use either sms or whatsapp
+POST http://0.0.0.0:8000/api/v1/send-forgot-password-verification/
+Content-Type: application/json
+
+{"phone_without_country_code":"90242798", "country_code": "+228", "phone_service": "sms"}
+
+### Verify forgot password code (forgot password with phone)
+POST http://0.0.0.0:8000/api/v1/verify-forgot-password/
+Content-Type: application/json
+
+{"session":"b9f2f805-a332-4c5e-b235-20132c3dede3", "code":"34027"}
