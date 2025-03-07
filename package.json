@@ -48,7 +48,7 @@
     "expo-status-bar": "~2.0.0",
     "expo-symbols": "~0.2.0",
     "expo-system-ui": "~4.0.3",
-    "expo-updates": "~0.26.7",
+    "expo-updates": "~0.27.1",
     "expo-web-browser": "~14.0.1",
     "i18next": "^23.16.5",
     "moment": "^2.30.1",
