@@ -3,7 +3,7 @@ eas init --id "bc105b9c-d776-42e2-bd2e-2ebcff179748"
 
 # Build expo
 eas update --platform android
-eas update --branch dev-features-10 --platform android
+eas update --branch dev-features-12 --platform android
 
 # Build apk
 eas build -p android --clear-cache --profile preview 
@@ -14,6 +14,7 @@ npm start --tunnel
 # Google maps
 AIzaSyB91uv-OuWw6iNMjVZmuHJsRVDHP9baCq0
 
+https://github.com/mitsio-motu/InstitutFrancaisAPI/blob/feature/jam-project/test/test.rest
 https://docs.google.com/spreadsheets/d/1sodzaVigD26XOopcXfLRykl51wPM5pKecS0i1QEDWMc/edit?hl=fr&gid=0#gid=0
 https://www.notion.so/mitsio-motu/6be2f5f83e9c4128bca022a247c71604?v=83a79228da8e4016ac17d79fcaf0316d&p=111198dd221a8093a3f2ce6ce2a04b59&pm=s
 
