@@ -2,16 +2,22 @@ import { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
-import RNMapView, { Marker, MapPressEvent, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from "react-native-maps";
+//import RNMapView, { Marker, MapPressEvent, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from "react-native-maps";
+import { Marker, MapPressEvent, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from "react-native-maps";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import { Config } from "@/constants/Config";
+import { Platform } from 'react-native';
 import SpinnerView from "./SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import i18n from "@/translation/i18n";
 import BackButton from "../button/BackButton";
 import BoxView from "./BoxView";
 import UserManager from "@/manager/UserManager";
+
+const MapView = Platform.OS === 'web' 
+  ? require('react-native-web-maps').default 
+  : require('react-native-maps').default;
 
 const LocationMapView = () => {
   const dispatch = useDispatch();
@@ -92,7 +98,7 @@ const LocationMapView = () => {
 
       <TouchableWithoutFeedback>
         <View style={styles.container}>
-          <RNMapView
+          <MapView
             style={styles.map}
             provider={PROVIDER_GOOGLE} // Todo - Handle provider IOS
             customMapStyle={Layout.mapStyle}
@@ -116,7 +122,7 @@ const LocationMapView = () => {
                 }}
               />
             )}
-          </RNMapView>
+          </MapView>
         </View>
       </TouchableWithoutFeedback>
     </BoxView>
