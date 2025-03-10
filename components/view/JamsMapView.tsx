@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useSelector } from "react-redux";
 //import RNMapView , { Marker, PROVIDER_GOOGLE, PROVIDER_DEFAULT, Callout } from "react-native-maps";
-import { Marker, PROVIDER_GOOGLE, PROVIDER_DEFAULT, Callout } from "react-native-maps";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import { Platform } from 'react-native';
@@ -14,6 +13,10 @@ import UserManager from "@/manager/UserManager";
 const MapView = Platform.OS === 'web' 
   ? require('react-native-web-maps').default 
   : require('react-native-maps').default;
+
+const Marker = Platform.OS === 'web' 
+? require('react-native-web-maps').Marker 
+: require('react-native-maps').Marker;
 
 const JamsMapView = () => {
   const [currentLocation, setCurrentLocation] = useState<any>(null);
@@ -83,7 +86,7 @@ const JamsMapView = () => {
         <MapView
           ref={mapRef}
           style={styles.map}
-          provider={PROVIDER_GOOGLE} // Todo - Handle provider IOS
+          provider="google" // Todo - Handle provider IOS
           initialRegion={getInitialRegion()}
           customMapStyle={Layout.mapStyle}
           showsUserLocation={true}
