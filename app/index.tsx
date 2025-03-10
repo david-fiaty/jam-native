@@ -3,7 +3,7 @@ import BaseTheme from "@/constants/BaseTheme";
 import ScreenView from '@/components/view/ScreenView';
 import WelcomeScreen from '@/components/screen/WelcomeScreen';
 
-if ('serviceWorker' in navigator) {
+if (typeof window !== "undefined" && "serviceWorker" in navigator) {
   navigator.serviceWorker.register('/service-worker.js')
     .then(() => console.log('Service Worker registered'))
     .catch(err => console.log('Service Worker registration failed', err));
