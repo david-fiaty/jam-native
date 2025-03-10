@@ -68,7 +68,6 @@
     "react-native-screens": "~4.4.0",
     "react-native-slick": "^1.6.0",
     "react-native-web": "~0.19.13",
-    "react-native-web-maps": "^0.3.0",
     "react-native-webview": "13.12.5",
     "react-redux": "^9.1.2"
   },
