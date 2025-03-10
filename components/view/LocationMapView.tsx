@@ -3,7 +3,6 @@ import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
 //import RNMapView, { Marker, MapPressEvent, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from "react-native-maps";
-import { Marker, MapPressEvent, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from "react-native-maps";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import { Config } from "@/constants/Config";
@@ -19,6 +18,10 @@ const MapView = Platform.OS === 'web'
   ? require('react-native-web-maps').default 
   : require('react-native-maps').default;
 
+const Marker = Platform.OS === 'web' 
+? require('react-native-web-maps').Marker 
+: require('react-native-maps').Marker;
+  
 const LocationMapView = () => {
   const dispatch = useDispatch();
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
@@ -26,7 +29,7 @@ const LocationMapView = () => {
   const activeModal: any = ScreenManager.getActiveModal();
   const resource: string = activeModal.params.resource;
 
-  const onMapPress = async (event: MapPressEvent) => {
+  const onMapPress = async (event: any) => {
     setSelectedLocation(event.nativeEvent.coordinate);
     dispatch(setFormData<any>({ 
       resource: resource,
@@ -100,7 +103,7 @@ const LocationMapView = () => {
         <View style={styles.container}>
           <MapView
             style={styles.map}
-            provider={PROVIDER_GOOGLE} // Todo - Handle provider IOS
+            provider="google" // Todo - Handle provider IOS
             customMapStyle={Layout.mapStyle}
             showsUserLocation={true}
             onPress={onMapPress}
