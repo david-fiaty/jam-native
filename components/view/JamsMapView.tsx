@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useSelector } from "react-redux";
-import RNMapView , { Marker, PROVIDER_GOOGLE, PROVIDER_DEFAULT, Callout } from "react-native-maps";
+import MapView , { Marker, PROVIDER_GOOGLE, PROVIDER_DEFAULT, Callout } from "react-native-maps";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
@@ -74,7 +74,7 @@ const JamsMapView = () => {
   return (
     <TouchableWithoutFeedback>
       <View style={[Layout.screenContent, styles.container]}>
-        <RNMapView
+        <MapView
           ref={mapRef}
           style={styles.map}
           provider={PROVIDER_GOOGLE} // Todo - Handle provider IOS
@@ -84,7 +84,7 @@ const JamsMapView = () => {
           showsMyLocationButton={true}
         >
           {searchResult?.jam?.map((item: any) => renderJamMarker(item))}
-        </RNMapView>
+        </MapView>
       </View>
     </TouchableWithoutFeedback>
   );
