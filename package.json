@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "npm start --tunnel",
     "start": "npx expo start",
-    "reset-project": "node ./scripts/reset-project.js",
     "android": "npx expo start --android",
     "ios": "npx expo start --ios",
     "web": "npx expo start --web",
