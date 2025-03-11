@@ -22,6 +22,14 @@ Test users:
 Id: 62 / test888@yopmail.com / Test@12345678
 id: 3 / mitsiomotu@yopmail.com / Password1234
 
+# Mobile server
+/home/mitsio/mobile/
+ssh root@207.180.209.247
+exyT6hT64S4i7tjGYF
+Port: 22
+
+
+
 
 # Flatlist scrollto
 https://gist.github.com/voratham/de4ef03472d9e1f03a7c26c7619d126f
