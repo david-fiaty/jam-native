@@ -89,7 +89,7 @@ class ApiManager {
 
     // Todo - Imrpove check
     if (tokenData) {
-      headers['Authorization'] = `Bearer ${tokenData.access_token}`; 
+      headers['Authorization'] = `Bearer ${tokenData?.access_token || ''}`; 
     }
     else {
       // Todo - Fix this
