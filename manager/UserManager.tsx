@@ -1,6 +1,6 @@
-import AsyncStorage, { Platform } from 'react-native';
+import { Platform } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useLocales } from 'expo-localization';
-import { setTokenData } from '@/redux/slices/UserSlice';
 import { setLikedJams, setSavedJams, setLikedProjects, setSavedProjects } from '@/redux/slices/UserSlice';
 import { setLanguage } from '@/redux/slices/AppSlice';
 import { Config } from '@/constants/Config';
@@ -14,7 +14,7 @@ class UserManager {
   async login(data: any) {
     let response = await DataManager.post('login', data);
     if (response?.tokens?.access_token?.length) {
-      Store.dispatch(setTokenData(JSON.stringify(response.tokens)));
+      await this.setTokenData(response.tokens);
     }
     
     return response;
@@ -23,7 +23,7 @@ class UserManager {
   async register(data: any) {
     let response = await DataManager.post('register', data);
     if (response?.tokens?.access_token?.length) {
-      Store.dispatch(setTokenData(JSON.stringify(response.tokens)));
+      await this.setTokenData(response.tokens);
     }
     
     return response;
@@ -36,6 +36,14 @@ class UserManager {
   isLoggedIn() {
     // Todo - Implment check
     return true;
+  }
+
+  async setTokenData(data: any) {
+    try {
+      return await AsyncStorage.setItem('@jam:tokens', JSON.stringify(data));
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   logout() {
