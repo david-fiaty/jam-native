@@ -14,7 +14,6 @@ class ApiManager {
     let url: string = this.getUrl(key, {}, variables);
 
     try {
-
       return await this.sendRequest(url, 'POST', data);
     } 
     catch (error) {
@@ -26,7 +25,6 @@ class ApiManager {
     let url: string = this.getUrl(key, {}, variables);
 
     try {
-
       return await this.sendRequest(url, 'PUT', data);
     } 
     catch (error) {
