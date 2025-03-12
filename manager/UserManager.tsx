@@ -33,8 +33,12 @@ class UserManager {
     return response;
   }
 
-  isTokenValid(timestamp: any) {
-    return timestamp > Date.now(); 
+  async isTokenValid() {
+    let data: any = await this.getTokenData();
+    let exists: boolean = data?.access_token?.length > 0;
+    let valid: boolean = data?.access_token_exp && data.access_token_exp > Date.now();
+
+    return exists && valid;
   }
 
   isLoggedIn() {
