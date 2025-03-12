@@ -3,8 +3,6 @@ import { createSlice } from '@reduxjs/toolkit';
 const UserSlice = createSlice({
   name: 'user',
   initialState: {
-    isLoggedIn: false,
-    tokenData: {},
     profileId: 0,
     likedJams: [],
     savedJams: [],
@@ -12,9 +10,6 @@ const UserSlice = createSlice({
     savedProjects: [],
   },
   reducers: {
-    setTokenData: (state, action) => {
-      state.tokenData = action.payload;
-    },
     setProfileId: (state, action) => {
       state.profileId = parseInt(action.payload || 0);
     },
@@ -33,5 +28,5 @@ const UserSlice = createSlice({
   },
 });
 
-export const { setTokenData, setProfileId, setLikedJams, setSavedJams, setLikedProjects, setSavedProjects } = UserSlice.actions;
+export const { setProfileId, setLikedJams, setSavedJams, setLikedProjects, setSavedProjects } = UserSlice.actions;
 export default UserSlice.reducer;
