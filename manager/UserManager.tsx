@@ -1,24 +1,20 @@
 import { Platform } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useLocales } from 'expo-localization';
 import { setLikedJams, setSavedJams, setLikedProjects, setSavedProjects } from '@/redux/slices/UserSlice';
 import { setLanguage } from '@/redux/slices/AppSlice';
 import { Config } from '@/constants/Config';
 import Store from '@/redux/Store';
+import SessionManager from './SessionManager';
 import DataManager from './DataManager';
 import * as Location from 'expo-location';
 import * as Device from "expo-device";
 import i18n from '@/translation/i18n';
 
 class UserManager {
-  getTokenStorageKey() {
-    return `${Config.storageKey}:tokens`;
-  }
-
   async login(data: any) {
     let response = await DataManager.post('login', data);
     if (response?.tokens?.access_token?.length) {
-      await this.setTokenData(response.tokens);
+      await SessionManager.setTokenData(response.tokens);
     }
     
     return response;
@@ -27,48 +23,18 @@ class UserManager {
   async register(data: any) {
     let response = await DataManager.post('register', data);
     if (response?.tokens?.access_token?.length) {
-      await this.setTokenData(response.tokens);
+      await SessionManager.setTokenData(response.tokens);
     }
     
     return response;
   }
 
-  async isTokenValid() {
-    let data: any = await this.getTokenData();
-    let exists: boolean = data?.access_token?.length > 0;
-    let valid: boolean = data?.access_token_exp && data.access_token_exp > Date.now();
-
-    return exists && valid;
-  }
-
   async isLoggedIn() {
-    return await this.isTokenValid();
-  }
-
-  async setTokenData(data: any) {
-    try {
-      let storageKey: string = this.getTokenStorageKey();
-      let json: string = JSON.stringify(data);
-
-      return await AsyncStorage.setItem(storageKey, json);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async getTokenData() {
-    try {
-      let storageKey: string = this.getTokenStorageKey();
-      let json: any = AsyncStorage.getItem(storageKey) || '{}';
-
-      return await JSON.parse(json); 
-    } catch (error) {
-      console.log(error);
-    }
+    return await SessionManager.isTokenValid();
   }
 
   logout() {
-    this.setTokenData({});
+    SessionManager.setTokenData({});
     // Todo - Also reset active screen to avoid redirect on relogin
   }
 
