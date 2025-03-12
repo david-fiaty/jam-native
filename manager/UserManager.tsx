@@ -42,7 +42,7 @@ class UserManager {
   }
 
   isLoggedIn() {
-    return this.isTokenValid(); // Todo - Is a logged in status value needed?
+    return this.isTokenValid(); // Todo - Make async + Is a logged in status value needed?
   }
 
   async setTokenData(data: any) {
