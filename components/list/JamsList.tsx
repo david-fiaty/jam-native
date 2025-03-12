@@ -27,7 +27,7 @@ const JamsList = ({ idArray }: Props) => {
 
   useEffect(() => {
     (async () => {
-      if (!sectors.length) setSectors(await EntityManager.getSectors());
+      if (!sectors?.length) setSectors(await EntityManager.getSectors());
       if (!profileData) setProfileData(await UserManager.getProfileData());
 
       if (idArray?.length > 0) {

@@ -100,12 +100,12 @@ class SearchManager {
       jam: data.jams,
       project: data.projects,
       jammer: data.profiles,
-      venue: data.profiles.filter((o: any) => o?.profile_type == 'venue'),
+      venue: data.profiles?.filter((o: any) => o?.profile_type == 'venue'),
       // Todo - Add categories
       //personal: data.profiles.filter((o: any) => o?.profile_type == 'personal'),
       //organization: data.profiles.filter((o: any) => o?.profile_type == 'organization'),
-      call: data.jams.filter((o: any) => o?.type == 'call'),
-      event: data.jams.filter((o: any) => o?.type == 'event'),
+      call: data.jams?.filter((o: any) => o?.type == 'call'),
+      event: data.jams?.filter((o: any) => o?.type == 'event'),
     };
   }
 
