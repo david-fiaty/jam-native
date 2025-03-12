@@ -85,16 +85,20 @@ class ApiManager {
 
   getHeaders() {
     const userState: any = Store.getState().user;
-    let tokenData: any = userState.tokenData ? userState.tokenData : {};
-    let isLoggedIn: boolean = userState.isLoggedIn === true;
+    let tokenData: any = userState?.tokenData ? userState.tokenData : {};
 
     let headers: any = {
       'Content-Type': 'application/json',
     };
 
-    if (isLoggedIn && tokenData) {
+    // Todo - Imrpove check
+    if (tokenData) {
       let tokenObject = JSON.parse(tokenData);
       headers['Authorization'] = `Bearer ${tokenObject.access_token}`; 
+    }
+    else {
+      // Todo - Fix this
+      headers['Authorization'] = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5OTg2Mzg4LCJpYXQiOjE3NDEzNDYzODgsImp0aSI6IjViZjU2MGIyM2M4ZTRhOWRiYjk3M2MxM2E4M2Q5MmFlIiwidXNlcl9pZCI6MTJ9.UtdSMClKbnJ7XuiExdz2NxyfolXnc0mjzqF7-ogB1Xo';
     }
     
     return headers;
