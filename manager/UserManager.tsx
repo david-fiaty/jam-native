@@ -53,7 +53,7 @@ class UserManager {
     }
   }
 
-  async getTokenData(data: any) {
+  async getTokenData() {
     try {
       let storageKey: string = this.getTokenStorageKey();
       let json: any = AsyncStorage.getItem(storageKey) || '{}';
@@ -63,8 +63,6 @@ class UserManager {
       console.log(error);
     }
   }
-
-
 
   logout() {
     this.setTokenData({});
