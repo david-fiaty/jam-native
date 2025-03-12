@@ -20,13 +20,6 @@ class UserManager {
     return response;
   }
 
-  logout() {
-    Store.dispatch(setTokenData('{}'));
-  
-
-    // Todo - Also reset active screen to avoid redirect on relogin
-  }
-
   async register(data: any) {
     let response = await DataManager.post('register', data);
     if (response?.tokens?.access_token?.length) {
@@ -38,6 +31,18 @@ class UserManager {
 
   isTokenValid(timestamp: any) {
     return timestamp > Date.now(); 
+  }
+
+  isLoggedIn() {
+    // Todo - Implment check
+    return true;
+  }
+
+  logout() {
+    Store.dispatch(setTokenData('{}'));
+  
+
+    // Todo - Also reset active screen to avoid redirect on relogin
   }
 
   async getUserData() { 
@@ -106,15 +111,6 @@ class UserManager {
 
   setLanguage(languageCode: string) {
     Store.dispatch(setLanguage(languageCode));
-  }
-
-  isLoggedIn() {
-    // Todo - Implment check
-    return true;
-  }
-
-  isAccessTokenValid() {
-    // Todo - Validate token duration
   }
 
   async getLocation() {
