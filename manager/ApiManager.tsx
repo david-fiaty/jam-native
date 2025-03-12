@@ -1,7 +1,6 @@
 import { Config } from '@/constants/Config';
-import Store from '@/redux/Store';
 import Endpoints from '@/constants/Endpoints';
-import UserManager from './UserManager';
+import SessionManager from './SessionManager';
 
 class ApiManager {
   async get(key: keyof typeof Endpoints, options?: any, variables?: any) {
@@ -83,7 +82,7 @@ class ApiManager {
   }
 
   async getHeaders() {
-    let tokenData: any = await UserManager.getTokenData();
+    let tokenData: any = await SessionManager.getTokenData();
     let headers: any = {
       'Content-Type': 'application/json',
     };
