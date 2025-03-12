@@ -1,6 +1,6 @@
 import AsyncStorage, { Platform } from 'react-native';
 import { useLocales } from 'expo-localization';
-import { setTokenData, setIsLoggedIn } from '@/redux/slices/UserSlice';
+import { setTokenData } from '@/redux/slices/UserSlice';
 import { setLikedJams, setSavedJams, setLikedProjects, setSavedProjects } from '@/redux/slices/UserSlice';
 import { setLanguage } from '@/redux/slices/AppSlice';
 import { Config } from '@/constants/Config';
@@ -15,7 +15,6 @@ class UserManager {
     let response = await DataManager.post('login', data);
     if (response?.tokens?.access_token?.length) {
       Store.dispatch(setTokenData(JSON.stringify(response.tokens)));
-      Store.dispatch(setIsLoggedIn(true));
     }
     
     return response;
@@ -23,7 +22,7 @@ class UserManager {
 
   logout() {
     Store.dispatch(setTokenData('{}'));
-    Store.dispatch(setIsLoggedIn(false));
+  
 
     // Todo - Also reset active screen to avoid redirect on relogin
   }
@@ -32,10 +31,13 @@ class UserManager {
     let response = await DataManager.post('register', data);
     if (response?.tokens?.access_token?.length) {
       Store.dispatch(setTokenData(JSON.stringify(response.tokens)));
-      Store.dispatch(setIsLoggedIn(true));
     }
     
     return response;
+  }
+
+  isTokenValid(timestamp: any) {
+    return timestamp > Date.now(); 
   }
 
   async getUserData() { 
@@ -107,7 +109,8 @@ class UserManager {
   }
 
   isLoggedIn() {
-    return Store.getState().user.isLoggedIn === true;
+    // Todo - Implment check
+    return true;
   }
 
   isAccessTokenValid() {
