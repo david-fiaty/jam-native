@@ -1,4 +1,4 @@
-import { Platform } from 'react-native';
+import AsyncStorage, { Platform } from 'react-native';
 import { useLocales } from 'expo-localization';
 import { setTokenData, setIsLoggedIn } from '@/redux/slices/UserSlice';
 import { setLikedJams, setSavedJams, setLikedProjects, setSavedProjects } from '@/redux/slices/UserSlice';
