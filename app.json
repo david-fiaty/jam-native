@@ -29,22 +29,7 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png",
-      "meta": {
-        "themeColor": "#ffffff",
-        "backgroundColor": "#ffffff"
-      },
-      "serviceWorker": {
-        "src": "service-worker.js"
-      },
-      "pwa": {
-        "name": "Jam",
-        "shortName": "Jam",
-        "startUrl": "/",
-        "display": "standalone",
-        "backgroundColor": "#ffffff",
-        "themeColor": "#000000"
-      }
+      "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
       "expo-router",
