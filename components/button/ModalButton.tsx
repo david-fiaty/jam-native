@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useRouter } from "expo-router";
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import UserManager from '@/manager/UserManager';
@@ -16,7 +17,7 @@ type Props = {
 
 const ModalButton = ({ name, title, entityId, login, trigger, triggerAlign, onTriggerPress }: Props) => {
   const router = useRouter();
-  const isLoggedIn: boolean = UserManager.isLoggedIn();
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   const triggerStyle: any = {
     alignSelf: triggerAlign || 'center',
@@ -38,6 +39,12 @@ const ModalButton = ({ name, title, entityId, login, trigger, triggerAlign, onTr
       entityId: entityId,
     };
   };
+
+  useEffect(() => {
+    (async () => {
+      setIsLoggedIn(await UserManager.isLoggedIn());
+    })();
+  });
   
   return (  
     <TouchableOpacity
