@@ -85,8 +85,8 @@ class ApiManager {
 
   getHeaders() {
     const userState: any = Store.getState().user;
-    let tokenData: any = userState.tokenData ? userState.tokenData : {};
-    let isLoggedIn: boolean = userState.isLoggedIn === true;
+    let tokenData: any = userState?.tokenData ? userState.tokenData : {};
+    let isLoggedIn: boolean = userState.isLoggedIn === true; // Todo - Remove this when possible, bad security
 
     let headers: any = {
       'Content-Type': 'application/json',
