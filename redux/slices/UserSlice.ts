@@ -12,9 +12,6 @@ const UserSlice = createSlice({
     savedProjects: [],
   },
   reducers: {
-    setIsLoggedIn: (state, action) => {
-      state.isLoggedIn = action.payload;
-    },
     setTokenData: (state, action) => {
       state.tokenData = action.payload;
     },
@@ -36,5 +33,5 @@ const UserSlice = createSlice({
   },
 });
 
-export const { setIsLoggedIn, setTokenData, setProfileId, setLikedJams, setSavedJams, setLikedProjects, setSavedProjects } = UserSlice.actions;
+export const { setTokenData, setProfileId, setLikedJams, setSavedJams, setLikedProjects, setSavedProjects } = UserSlice.actions;
 export default UserSlice.reducer;
