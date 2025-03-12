@@ -1,6 +1,7 @@
 import { Config } from '@/constants/Config';
 import Store from '@/redux/Store';
 import Endpoints from '@/constants/Endpoints';
+import UserManager from './UserManager';
 
 class ApiManager {
   async get(key: keyof typeof Endpoints, options?: any, variables?: any) {
@@ -14,7 +15,6 @@ class ApiManager {
     let url: string = this.getUrl(key, {}, variables);
 
     try {
-
       return await this.sendRequest(url, 'POST', data);
     } 
     catch (error) {
@@ -26,7 +26,6 @@ class ApiManager {
     let url: string = this.getUrl(key, {}, variables);
 
     try {
-
       return await this.sendRequest(url, 'PUT', data);
     } 
     catch (error) {
@@ -84,8 +83,7 @@ class ApiManager {
   }
 
   getHeaders() {
-    const userState: any = Store.getState().user;
-    let tokenData: any = userState?.tokenData ? userState.tokenData : {};
+    let tokenData: any = UserManager.getTokenData();
 
     let headers: any = {
       'Content-Type': 'application/json',
@@ -93,8 +91,7 @@ class ApiManager {
 
     // Todo - Imrpove check
     if (tokenData) {
-      let tokenObject = JSON.parse(tokenData);
-      headers['Authorization'] = `Bearer ${tokenObject.access_token}`; 
+      headers['Authorization'] = `Bearer ${tokenData.access_token}`; 
     }
     else {
       // Todo - Fix this
