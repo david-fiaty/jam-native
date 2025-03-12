@@ -86,13 +86,13 @@ class ApiManager {
   getHeaders() {
     const userState: any = Store.getState().user;
     let tokenData: any = userState?.tokenData ? userState.tokenData : {};
-    let isLoggedIn: boolean = userState.isLoggedIn === true; // Todo - Remove this when possible, bad security
 
     let headers: any = {
       'Content-Type': 'application/json',
     };
 
-    if (isLoggedIn && tokenData) {
+    // Todo - Imrpove check
+    if (tokenData) {
       let tokenObject = JSON.parse(tokenData);
       headers['Authorization'] = `Bearer ${tokenObject.access_token}`; 
     }
