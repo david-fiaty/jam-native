@@ -1,6 +1,6 @@
-import AsyncStorage, { Platform } from 'react-native';
+import { Platform } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useLocales } from 'expo-localization';
-import { setTokenData } from '@/redux/slices/UserSlice';
 import { setLikedJams, setSavedJams, setLikedProjects, setSavedProjects } from '@/redux/slices/UserSlice';
 import { setLanguage } from '@/redux/slices/AppSlice';
 import { Config } from '@/constants/Config';
@@ -11,33 +11,65 @@ import * as Device from "expo-device";
 import i18n from '@/translation/i18n';
 
 class UserManager {
+  getTokenStorageKey() {
+    return `${Config.storageKey}:tokens`;
+  }
+
   async login(data: any) {
     let response = await DataManager.post('login', data);
     if (response?.tokens?.access_token?.length) {
-      Store.dispatch(setTokenData(JSON.stringify(response.tokens)));
+      await this.setTokenData(response.tokens);
     }
     
     return response;
-  }
-
-  logout() {
-    Store.dispatch(setTokenData('{}'));
-  
-
-    // Todo - Also reset active screen to avoid redirect on relogin
   }
 
   async register(data: any) {
     let response = await DataManager.post('register', data);
     if (response?.tokens?.access_token?.length) {
-      Store.dispatch(setTokenData(JSON.stringify(response.tokens)));
+      await this.setTokenData(response.tokens);
     }
     
     return response;
   }
 
-  isTokenValid(timestamp: any) {
-    return timestamp > Date.now(); 
+  async isTokenValid() {
+    let data: any = await this.getTokenData();
+    let exists: boolean = data?.access_token?.length > 0;
+    let valid: boolean = data?.access_token_exp && data.access_token_exp > Date.now();
+
+    return exists && valid;
+  }
+
+  isLoggedIn() {
+    return this.isTokenValid(); // Todo - Make async + Is a logged in status value needed?
+  }
+
+  async setTokenData(data: any) {
+    try {
+      let storageKey: string = this.getTokenStorageKey();
+      let json: string = JSON.stringify(data);
+
+      return await AsyncStorage.setItem(storageKey, json);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getTokenData() {
+    try {
+      let storageKey: string = this.getTokenStorageKey();
+      let json: any = AsyncStorage.getItem(storageKey) || '{}';
+
+      return await JSON.parse(json); 
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  logout() {
+    this.setTokenData({});
+    // Todo - Also reset active screen to avoid redirect on relogin
   }
 
   async getUserData() { 
@@ -106,15 +138,6 @@ class UserManager {
 
   setLanguage(languageCode: string) {
     Store.dispatch(setLanguage(languageCode));
-  }
-
-  isLoggedIn() {
-    // Todo - Implment check
-    return true;
-  }
-
-  isAccessTokenValid() {
-    // Todo - Validate token duration
   }
 
   async getLocation() {
