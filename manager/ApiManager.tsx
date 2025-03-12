@@ -84,7 +84,7 @@ class ApiManager {
   }
 
   getHeaders() {
-    const userState: any = Store.getState().user;
+    const userState: any = Store.getState()?.user;
     let tokenData: any = userState?.tokenData ? userState.tokenData : {};
 
     let headers: any = {
