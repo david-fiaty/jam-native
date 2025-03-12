@@ -11,6 +11,10 @@ import * as Device from "expo-device";
 import i18n from '@/translation/i18n';
 
 class UserManager {
+  getTokenStorageKey() {
+    return `${Config.storageKey}:tokens`;
+  }
+
   async login(data: any) {
     let response = await DataManager.post('login', data);
     if (response?.tokens?.access_token?.length) {
@@ -40,16 +44,30 @@ class UserManager {
 
   async setTokenData(data: any) {
     try {
-      return await AsyncStorage.setItem('@jam:tokens', JSON.stringify(data));
+      let storageKey: string = this.getTokenStorageKey();
+      let json: string = JSON.stringify(data);
+
+      return await AsyncStorage.setItem(storageKey, json);
     } catch (error) {
       console.log(error);
     }
   }
 
-  logout() {
-    Store.dispatch(setTokenData('{}'));
-  
+  async getTokenData(data: any) {
+    try {
+      let storageKey: string = this.getTokenStorageKey();
+      let json: any = AsyncStorage.getItem(storageKey) || '{}';
 
+      return await JSON.parse(json); 
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+
+  logout() {
+    this.setTokenData({});
     // Todo - Also reset active screen to avoid redirect on relogin
   }
 
