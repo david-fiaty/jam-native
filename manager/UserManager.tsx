@@ -81,6 +81,8 @@ class UserManager {
   }
 
   async getProfileId() {
+    // Todo - Fix this
+    return 0;
     let profileId: number = Store.getState()?.user?.profileId;
     if (profileId === 0) {
       let userAccount: any = await DataManager.get('currentUser');
