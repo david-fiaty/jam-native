@@ -6,6 +6,7 @@ export const Config: any = {
   imageUrl: 'https://dev.jammm.app/backend',
   mapApiKey: 'AIzaSyB91uv-OuWw6iNMjVZmuHJsRVDHP9baCq0',
   geocodeUrl: 'https://maps.googleapis.com/maps/api/geocode/json',
+  storageKey: '@jam',
   defaultLanguage: 'en',
   fallbackLanguage: 'en',
   appNamespace: 'jam-native',
