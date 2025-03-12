@@ -66,7 +66,7 @@ class ApiManager {
       let response: any = await fetch(url, {
         ...{
           method: method,
-          headers: this.getHeaders(),
+          headers: await this.getHeaders(),
         },
         ...(data ? { body: JSON.stringify(data) } : {}),
       });
@@ -82,9 +82,8 @@ class ApiManager {
     return await response.json();
   }
 
-  getHeaders() {
-    let tokenData: any = UserManager.getTokenData();
-
+  async getHeaders() {
+    let tokenData: any = await UserManager.getTokenData();
     let headers: any = {
       'Content-Type': 'application/json',
     };
