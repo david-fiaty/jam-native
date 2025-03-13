@@ -9,10 +9,13 @@ import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import ListItem from "./JamsList/ListItem";
 import UserManager from "@/manager/UserManager";
+import ScreenManager from "@/manager/ScreenManager";
 
 type Props = BaseProps & {
   idArray?: any;
 };
+
+const modalSize: any = ScreenManager.getModalSize();
 
 const JamsList = ({ idArray }: Props) => {
   const [sectors, setSectors] = useState<any>([]);
@@ -62,7 +65,7 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: Layout.space.base*1.5,
     width: '100%',
-    height: 600, // Todo - Improve this
+    height: modalSize.height,  
     flexGrow: 1,
   },
 });
