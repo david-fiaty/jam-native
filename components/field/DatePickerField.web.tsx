@@ -8,6 +8,7 @@ import IconView from '../view/IconView';
 import Datetime from 'react-datetime';
 
 import "react-datetime/css/react-datetime.css";
+import { Config } from '@/constants/Config';
 
 type Props = BaseProps & {
   placeholder?: string,
@@ -34,7 +35,7 @@ const DatePickerField = ({placeholder, value, onChangeValue}: Props) => {
     hideDatePicker();
   };
 
-  return <Datetime />;
+  return <Datetime dateFormat={Config.dateFormat} />;
 
   return (
       <BoxView direction="row" align="space-between">
