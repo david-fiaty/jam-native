@@ -47,7 +47,7 @@ const JamsList = ({ idArray }: Props) => {
   }, [isLoaded, sectors, idArray]);
 
   if (!isLoaded) return <SpinnerView />;
-
+  
   return (
     <BoxView 
       direction="column" 
