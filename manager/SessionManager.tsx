@@ -21,7 +21,7 @@ class SessionManager {
       let storageKey: string = this.getTokenStorageKey();
       let json: string = JSON.stringify(data);
 
-      return await AsyncStorage.setItem(storageKey, json);
+      await AsyncStorage.setItem(storageKey, json);
     } catch (error) {
       console.log(error);
     }
@@ -32,7 +32,7 @@ class SessionManager {
       let storageKey: string = this.getTokenStorageKey();
       let json: any = await AsyncStorage.getItem(storageKey);
 
-      return (json) ? await JSON.parse(json) : {};
+      return (json) ? JSON.parse(json) : {};
     } catch (error) {
       console.log(error);
     }
