@@ -5,6 +5,9 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import InputTextField from '../field/InputTextField';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
+import Datetime from 'react-datetime';
+
+import "react-datetime/css/react-datetime.css";
 
 type Props = BaseProps & {
   placeholder?: string,
@@ -31,7 +34,7 @@ const DatePickerField = ({placeholder, value, onChangeValue}: Props) => {
     hideDatePicker();
   };
 
-  return <Text>ooo</Text>;
+  return <Datetime />;
 
   return (
       <BoxView direction="row" align="space-between">
