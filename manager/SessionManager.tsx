@@ -13,8 +13,6 @@ class SessionManager {
     // Todo - Check expiry date sent by server
     //let valid: boolean = data?.access_token_exp && data.access_token_exp > Date.now();
 
-    console.log(exists, valid, data)
-
     return exists && valid;
   }
 
