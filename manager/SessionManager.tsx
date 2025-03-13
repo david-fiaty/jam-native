@@ -28,9 +28,11 @@ class SessionManager {
   async getTokenData() {
     try {
       let storageKey: string = this.getTokenStorageKey();
-      let json: any = AsyncStorage.getItem(storageKey) || '{}';
+      let json: any = await AsyncStorage.getItem(storageKey);
 
-      return await JSON.parse(json); 
+      if (json) await JSON.parse(json);
+      else return {};
+
     } catch (error) {
       console.log(error);
     }
