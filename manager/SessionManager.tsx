@@ -9,7 +9,11 @@ class SessionManager {
   async isTokenValid() {
     let data: any = await this.getTokenData();
     let exists: boolean = data?.access_token?.length > 0;
-    let valid: boolean = data?.access_token_exp && data.access_token_exp > Date.now();
+    let valid: boolean = true;
+    // Todo - Check expiry date sent by server
+    //let valid: boolean = data?.access_token_exp && data.access_token_exp > Date.now();
+
+    console.log(exists, valid, data)
 
     return exists && valid;
   }
@@ -30,9 +34,7 @@ class SessionManager {
       let storageKey: string = this.getTokenStorageKey();
       let json: any = await AsyncStorage.getItem(storageKey);
 
-      if (json) await JSON.parse(json);
-      else return {};
-
+      return (json) ? await JSON.parse(json) : {};
     } catch (error) {
       console.log(error);
     }
