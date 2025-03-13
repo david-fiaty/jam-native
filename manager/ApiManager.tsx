@@ -1,6 +1,6 @@
 import { Config } from '@/constants/Config';
-import Store from '@/redux/Store';
 import Endpoints from '@/constants/Endpoints';
+import SessionManager from './SessionManager';
 
 class ApiManager {
   async get(key: keyof typeof Endpoints, options?: any, variables?: any) {
@@ -14,7 +14,6 @@ class ApiManager {
     let url: string = this.getUrl(key, {}, variables);
 
     try {
-
       return await this.sendRequest(url, 'POST', data);
     } 
     catch (error) {
@@ -26,7 +25,6 @@ class ApiManager {
     let url: string = this.getUrl(key, {}, variables);
 
     try {
-
       return await this.sendRequest(url, 'PUT', data);
     } 
     catch (error) {
@@ -67,7 +65,7 @@ class ApiManager {
       let response: any = await fetch(url, {
         ...{
           method: method,
-          headers: this.getHeaders(),
+          headers: await this.getHeaders(),
         },
         ...(data ? { body: JSON.stringify(data) } : {}),
       });
@@ -83,21 +81,18 @@ class ApiManager {
     return await response.json();
   }
 
-  getHeaders() {
-    const userState: any = Store.getState().user;
-    let tokenData: any = userState?.tokenData ? userState.tokenData : {};
-
+  async getHeaders() {
+    let tokenData: any = await SessionManager.getTokenData();
     let headers: any = {
       'Content-Type': 'application/json',
     };
 
-    // Todo - Imrpove check
+    // Todo - Fix this
     if (tokenData) {
-      let tokenObject = JSON.parse(tokenData);
-      headers['Authorization'] = `Bearer ${tokenObject.access_token}`; 
+      //headers['Authorization'] = `Bearer ${tokenData?.access_token || ''}`; 
+      headers['Authorization'] = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5OTg2Mzg4LCJpYXQiOjE3NDEzNDYzODgsImp0aSI6IjViZjU2MGIyM2M4ZTRhOWRiYjk3M2MxM2E4M2Q5MmFlIiwidXNlcl9pZCI6MTJ9.UtdSMClKbnJ7XuiExdz2NxyfolXnc0mjzqF7-ogB1Xo';
     }
     else {
-      // Todo - Fix this
       headers['Authorization'] = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5OTg2Mzg4LCJpYXQiOjE3NDEzNDYzODgsImp0aSI6IjViZjU2MGIyM2M4ZTRhOWRiYjk3M2MxM2E4M2Q5MmFlIiwidXNlcl9pZCI6MTJ9.UtdSMClKbnJ7XuiExdz2NxyfolXnc0mjzqF7-ogB1Xo';
     }
     
