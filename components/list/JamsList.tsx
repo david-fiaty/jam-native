@@ -30,18 +30,20 @@ const JamsList = ({ idArray }: Props) => {
 
   useEffect(() => {
     (async () => {
-      if (!sectors?.length) setSectors(await EntityManager.getSectors());
-      if (!profileData) setProfileData(await UserManager.getProfileData());
 
-      if (idArray?.length > 0) {
+      if (Array.isArray(idArray) && idArray?.length > 0) {
         setJamData(await EntityManager.getJams({ items_ids: idArray }))
       }
       else {
         setJamData(searchResult?.jam);
       }
+    
+      if (!isLoaded) {
+        setSectors(await EntityManager.getSectors());
+        setProfileData(await UserManager.getProfileData());
+        setIsLoaded(true);
+      }
     })();
-
-    setIsLoaded(true);
   }, [isLoaded, sectors, idArray]);
 
   if (!isLoaded) return <SpinnerView />;
