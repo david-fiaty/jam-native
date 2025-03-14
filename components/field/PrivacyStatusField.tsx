@@ -28,6 +28,7 @@ const PrivacyStatusField = ({value, onChangeValue}: Props) => {
         value={value}
         data={buildOptions(profileTypes)} 
         onChangeValue={onChangeValue}
+        placeholder=''
       />
     </BoxView>
   );

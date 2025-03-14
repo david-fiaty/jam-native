@@ -52,6 +52,7 @@ const DatePickerField = ({placeholder, value, onChangeValue}: Props) => {
           <Datetime 
             input={false}
             dateFormat={Config.dateFormat} 
+            value={date}
           />
         </View>
       )}
@@ -61,7 +62,7 @@ const DatePickerField = ({placeholder, value, onChangeValue}: Props) => {
 
 const styles = StyleSheet.create({
   fieldContainer: {
-    width: '100%'
+    width: '100%',
   },
   calendarContainer: {
     
