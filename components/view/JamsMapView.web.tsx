@@ -38,7 +38,7 @@ const JamsMapView = () => {
         <GoogleMap 
           mapContainerStyle={styles.map} 
           center={getCenter()} 
-          zoom={10} 
+          zoom={7} 
         />
       </View>
     </LoadScript>
