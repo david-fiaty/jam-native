@@ -137,7 +137,7 @@ export const Layout = {
     flexDirection: 'row',
     alignItems: 'center',
     height: space.base*4,
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-end',
   },
   borderedListContainer: {
     width: '100%',

@@ -26,9 +26,9 @@ const ProfileTypeField = ({value, onChangeValue}: Props) => {
     <BoxView direction="column" align="center" style={styles.container}>
       <SelectListBase 
         value={value}
-        data={buildOptions(profileTypes)} 
-        placeholder={i18n.t('Profile type')} 
+        data={buildOptions(profileTypes)}  
         onChangeValue={onChangeValue}
+        placeholder=''
       />
     </BoxView>
   );

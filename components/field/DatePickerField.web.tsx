@@ -62,7 +62,7 @@ const DatePickerField = ({placeholder, value, onChangeValue}: Props) => {
 
 const styles = StyleSheet.create({
   fieldContainer: {
-    width: '100%'
+    width: '100%',
   },
   calendarContainer: {
     
