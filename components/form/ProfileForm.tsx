@@ -25,6 +25,8 @@ import ButtonView from "../view/ButtonView";
 import EntityManager from "@/manager/EntityManager";
 import BackButton from "../button/BackButton";
 
+const modalSize: any = ScreenManager.getModalSize();
+
 const ProfileForm = () => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -80,7 +82,7 @@ const ProfileForm = () => {
       align="flex-start"
       justify="flex-start"
       scroll={true}
-      style={Layout.screenContent}
+      style={[Layout.screenContent, styles.container]}
     >
       <BackButton
         title={i18n.t('Your profile')}
@@ -296,6 +298,10 @@ const ProfileForm = () => {
 
 
 const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    height: modalSize.height,
+  },
   title: {
     fontWeight: "bold",
     marginTop: Layout.space.base,
