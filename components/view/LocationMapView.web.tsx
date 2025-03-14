@@ -6,7 +6,7 @@ const center = { lat: 37.7749, lng: -122.4194 };
 
 const LocationMapView = () => {
   return (
-    <LoadScript googleMapsApiKey={'AIzaSyB91uv-OuWw6iNMjVZmuHJsRVDHP9baCq0'}>
+    <LoadScript googleMapsApiKey={Config.mapApiKey}>
       <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10} />
     </LoadScript>
   );
