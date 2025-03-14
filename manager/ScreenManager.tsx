@@ -1,4 +1,4 @@
-import { Dimensions, ScaledSize, StatusBar } from 'react-native';
+import { Dimensions, ScaledSize, StatusBar, Platform } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import { Layout } from '@/constants/Layout';
 import { setMessage } from '@/redux/slices/MessageSlice';
@@ -213,6 +213,14 @@ class ScreenManager {
 
   isTablet() {
     return DeviceInfo.isTablet();
+  }
+
+  isDesktop() {
+    return Platform.OS === 'web';
+  }
+
+  isMobile() {
+    return !this.isDesktop() && !this.isTablet(); 
   }
 };
 
