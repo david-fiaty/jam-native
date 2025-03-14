@@ -52,6 +52,7 @@ const DatePickerField = ({placeholder, value, onChangeValue}: Props) => {
           <Datetime 
             input={false}
             dateFormat={Config.dateFormat} 
+            value={date}
           />
         </View>
       )}
