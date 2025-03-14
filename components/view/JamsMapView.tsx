@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useSelector } from "react-redux";
-import MapView , { Marker, PROVIDER_GOOGLE, PROVIDER_DEFAULT, Callout } from "react-native-maps";
+import MapView , { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
@@ -97,9 +97,6 @@ const styles = StyleSheet.create({
   map: {
     flex: 1,
   },
-  callout: {
-    padding: 20,
-  }
 });
 
 export default JamsMapView;
