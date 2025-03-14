@@ -48,10 +48,13 @@ const JamsMapView = () => {
           //description={getMarkerDescription(item)}
           position={getMarkerCoordinate(item)}
           icon={markerImage} 
+
+          /*
           options={{
             styles: Layout.mapStyle,
             disableDefaultUI: true,
           }}
+          */
         />
       );
     }
