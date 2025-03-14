@@ -43,6 +43,7 @@ const CountryField = ({value, onChangeValue}: Props) => {
         value={value}
         data={buildOptions(countriesData)} 
         onChangeValue={onChangeValue}
+        placeholder=''
       />
     </BoxView>
   );
