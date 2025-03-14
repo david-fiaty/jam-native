@@ -1,4 +1,5 @@
 import { Dimensions, ScaledSize, StatusBar } from 'react-native';
+import DeviceInfo from 'react-native-device-info';
 import { Layout } from '@/constants/Layout';
 import { setMessage } from '@/redux/slices/MessageSlice';
 import { setActiveModal } from '@/redux/slices/ModalSlice';
@@ -208,6 +209,10 @@ class ScreenManager {
     this.messageTimeout = setTimeout(() => {
       Store.dispatch(setMessage({}));
     }, duration || Config.messageDisplayDuration);
+  }
+
+  isTablet() {
+    return DeviceInfo.isTablet();
   }
 };
 
