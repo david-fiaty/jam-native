@@ -14,11 +14,9 @@ import BoxView from "../view/BoxView";
 import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import EntityManager from '@/manager/EntityManager';
-import ProfileListItem from './ListItem/ProfileListItem';
 import ScreenManager from '@/manager/ScreenManager';
 
 const ShareOptionsList = () => {
-  const [profiles, setProfiles] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const entityId: number = ScreenManager.getModalEntityId();
   const iconSize: number = 40;
@@ -64,8 +62,6 @@ const ShareOptionsList = () => {
 
   useEffect(() => {
     (async () => {
-      let data: any = await EntityManager.getJams({items_ids: [entityId]});
-      setProfiles(await EntityManager.getProfiles({items_ids: data?.[0]?.collaborators}));
       setIsLoaded(true);
     })();
 
