@@ -75,13 +75,14 @@ const ShareOptionsList = () => {
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
-      <View style={Layout.borderedListContainer}>
-        {profiles?.length > 0 &&
-          <ListView
-            data={profiles}
-            renderItem={(row: any) => <ProfileListItem item={row.item} />}
-          />
-        }
+      <View style={Layout.borderedListContainer}>    
+        <ListView
+          data={shareOptions}
+          renderItem={(row: any) => row.render({
+            url: row.url,
+            quote: 'item title...',
+          })}
+        />
       </View>
     </BoxView>
   );
