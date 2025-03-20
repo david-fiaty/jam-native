@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const ShareView = () => {
+const ShareList = () => {
   return (
     <></>
   );
@@ -10,4 +10,4 @@ const styles = StyleSheet.create({
   container: {},
 });
 
-export default ShareView;
+export default ShareList;
