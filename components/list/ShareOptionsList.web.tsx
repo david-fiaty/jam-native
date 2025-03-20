@@ -10,7 +10,7 @@ import EntityManager from '@/manager/EntityManager';
 import ProfileListItem from './ListItem/ProfileListItem';
 import ScreenManager from '@/manager/ScreenManager';
 
-const ShareList = () => {
+const ShareOptionsList = () => {
   const [profiles, setProfiles] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const entityId: number = ScreenManager.getModalEntityId();
@@ -35,13 +35,9 @@ const ShareList = () => {
             renderItem={(row: any) => <ProfileListItem item={row.item} />}
           />
         }
-
-        {!profiles?.length && 
-          <TextView>{i18n.t('No hosts available for this Jam.')}</TextView>
-        }
       </View>
     </BoxView>
   );
 };
 
-export default ShareList;
+export default ShareOptionsList;
