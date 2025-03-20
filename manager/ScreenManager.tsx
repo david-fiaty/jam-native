@@ -1,5 +1,4 @@
 import { Dimensions, ScaledSize, StatusBar, Platform } from 'react-native';
-import DeviceInfo from 'react-native-device-info';
 import { Layout } from '@/constants/Layout';
 import { setMessage } from '@/redux/slices/MessageSlice';
 import { setActiveModal } from '@/redux/slices/ModalSlice';
@@ -212,7 +211,8 @@ class ScreenManager {
   }
 
   isTablet() {
-    return DeviceInfo.isTablet();
+    // Todo - Implement tablet detection
+    return true;
   }
 
   isDesktop() {
