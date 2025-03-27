@@ -160,6 +160,7 @@ class ScreenManager {
     };
   }
 
+  // Todo - Fix this creating differences on IOS
   getHeaderSize() {
     let height: number = this.window.height/10;
 
