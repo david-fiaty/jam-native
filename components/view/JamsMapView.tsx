@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useSelector } from "react-redux";
-import MapView , { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView , { Marker, PROVIDER_DEFAULT } from "react-native-maps";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
@@ -77,7 +77,7 @@ const JamsMapView = () => {
         <MapView
           ref={mapRef}
           style={styles.map}
-          provider={PROVIDER_GOOGLE} // Todo - Handle provider IOS
+          provider={PROVIDER_DEFAULT} 
           initialRegion={getInitialRegion()}
           customMapStyle={Layout.mapStyle}
           showsUserLocation={true}

@@ -78,6 +78,10 @@ const routes: any = [
   },
 ];
 
+const defaults: any = {
+  headerShown: false,
+};
+/*
 const defaults: any = { 
   statusBarStyle: 'dark',
   animation: 'fade',
@@ -88,6 +92,7 @@ const defaults: any = {
     backgroundColor: Colors.white, 
   },
 };
+*/
 
 const navigation: any = {
   showHeader: true,

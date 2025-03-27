@@ -28,7 +28,6 @@ const LocationTypeField = ({value, onChangeValue}: Props) => {
         value={value}
         data={buildOptions(locationTypes)} 
         onChangeValue={onChangeValue}
-        placeholder=''
       />
     </BoxView>
   );
