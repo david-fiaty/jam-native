@@ -162,14 +162,7 @@ class ScreenManager {
 
   // Todo - Fix this creating differences on IOS
   getHeaderSize() {
-    let height: number = this.window.height/10;
-
-    if (height < Layout.header.minHeight) {
-      height = Layout.header.minHeight;
-    }
-    else if (height > Layout.header.maxHeight) {
-      height = Layout.header.maxHeight;
-    }
+    let height: number = this.window.height/22;
 
     return {
       width: this.window.width,
@@ -179,13 +172,6 @@ class ScreenManager {
 
   getFooterSize() {
     let height: number = this.window.height/16;
-
-    if (height < Layout.footer.minHeight) {
-      height = Layout.footer.minHeight;
-    }
-    else if (height > Layout.footer.maxHeight) {
-      height = Layout.footer.maxHeight;
-    }
 
     return {
       width: this.window.width,
