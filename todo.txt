@@ -34,6 +34,8 @@ https://www.notion.so/mitsio-motu/6be2f5f83e9c4128bca022a247c71604?v=83a79228da8
 Test users:
 Id: 62 / test888@yopmail.com / Test@12345678
 id: 3 / mitsiomotu@yopmail.com / Password1234
+hophoet@gmail.com / Password1234
+
 
 # Mobile server
 /home/mitsio/mobile/
@@ -42,7 +44,8 @@ exyT6hT64S4i7tjGYF
 Port: 22
 
 
-
+"scripts": {
+  "dev": "npm start --tunnel",
 
 # Flatlist scrollto
 https://gist.github.com/voratham/de4ef03472d9e1f03a7c26c7619d126f
