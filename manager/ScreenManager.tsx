@@ -1,4 +1,4 @@
-import { Dimensions, ScaledSize, StatusBar } from 'react-native';
+import { Dimensions, ScaledSize, StatusBar, Platform } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import { setMessage } from '@/redux/slices/MessageSlice';
 import { setActiveModal } from '@/redux/slices/ModalSlice';
@@ -160,15 +160,9 @@ class ScreenManager {
     };
   }
 
+  // Todo - Fix this creating differences on IOS
   getHeaderSize() {
-    let height: number = this.window.height/10;
-
-    if (height < Layout.header.minHeight) {
-      height = Layout.header.minHeight;
-    }
-    else if (height > Layout.header.maxHeight) {
-      height = Layout.header.maxHeight;
-    }
+    let height: number = this.window.height/22;
 
     return {
       width: this.window.width,
@@ -178,13 +172,6 @@ class ScreenManager {
 
   getFooterSize() {
     let height: number = this.window.height/16;
-
-    if (height < Layout.footer.minHeight) {
-      height = Layout.footer.minHeight;
-    }
-    else if (height > Layout.footer.maxHeight) {
-      height = Layout.footer.maxHeight;
-    }
 
     return {
       width: this.window.width,
@@ -208,6 +195,19 @@ class ScreenManager {
     this.messageTimeout = setTimeout(() => {
       Store.dispatch(setMessage({}));
     }, duration || Config.messageDisplayDuration);
+  }
+
+  isTablet() {
+    // Todo - Implement tablet detection
+    return true;
+  }
+
+  isDesktop() {
+    return Platform.OS === 'web';
+  }
+
+  isMobile() {
+    return !this.isDesktop() && !this.isTablet(); 
   }
 };
 

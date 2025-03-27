@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { BaseProps } from "@/constants/Types";
@@ -16,7 +17,13 @@ type Props = BaseProps & {
 
 const ListItemHeader = ({ row }: Props) => {
   const router = useRouter();
-  const isLoggedIn = UserManager.isLoggedIn();
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+
+  useEffect(() => {
+    (async () => {
+      setIsLoggedIn(await UserManager.isLoggedIn());
+    })();
+  });
 
   return (
     <BoxView

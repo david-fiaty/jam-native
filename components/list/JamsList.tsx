@@ -9,10 +9,13 @@ import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import ListItem from "./JamsList/ListItem";
 import UserManager from "@/manager/UserManager";
+import ScreenManager from "@/manager/ScreenManager";
 
 type Props = BaseProps & {
   idArray?: any;
 };
+
+const modalSize: any = ScreenManager.getModalSize();
 
 const JamsList = ({ idArray }: Props) => {
   const [sectors, setSectors] = useState<any>([]);
@@ -27,22 +30,24 @@ const JamsList = ({ idArray }: Props) => {
 
   useEffect(() => {
     (async () => {
-      if (!sectors.length) setSectors(await EntityManager.getSectors());
-      if (!profileData) setProfileData(await UserManager.getProfileData());
 
-      if (idArray?.length > 0) {
+      if (Array.isArray(idArray) && idArray?.length > 0) {
         setJamData(await EntityManager.getJams({ items_ids: idArray }))
       }
       else {
         setJamData(searchResult?.jam);
       }
+    
+      if (!isLoaded) {
+        setSectors(await EntityManager.getSectors());
+        setProfileData(await UserManager.getProfileData());
+        setIsLoaded(true);
+      }
     })();
-
-    setIsLoaded(true);
   }, [isLoaded, sectors, idArray]);
 
   if (!isLoaded) return <SpinnerView />;
-
+  
   return (
     <BoxView 
       direction="column" 
@@ -61,9 +66,8 @@ const JamsList = ({ idArray }: Props) => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: Layout.space.base*1.5,
-    //paddingBottom: 250, // Todo - Fix, this should not be needed
     width: '100%',
-    height: '100%',
+    height: modalSize.height,  
     flexGrow: 1,
   },
 });

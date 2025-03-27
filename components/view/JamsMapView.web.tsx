@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { useSelector } from "react-redux";
 import { Config } from "@/constants/Config";
 import { Layout } from "@/constants/Layout";
 import SpinnerView from "./SpinnerView";
 import UserManager from "@/manager/UserManager";
+import i18n from "@/translation/i18n";
 
-const LocationMapView = () => {
+const JamsMapView = () => {
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const searchResult = JSON.parse(useSelector((state: any) => state.search.current));
+  const markerImage = require('@/assets/images/logo-55.png');
   
   const getCenter = () => {
     let latitude = currentLocation?.coords?.latitude || Config.defaultLocation.latitude;
@@ -18,6 +22,44 @@ const LocationMapView = () => {
       lat: latitude,
       lng: longitude,
     }
+  };
+
+  const getMarkerCoordinate = (item: any) => {
+    return {
+      lat: parseFloat(item?.geolocation_latitude),
+      lng: parseFloat(item?.geolocation_longitude),
+    };
+  };
+
+  const getMarkerTitle = (item: any) => {
+    return item?.title || i18n.t('No title available');
+  };
+
+  const getMarkerDescription = (item: any) => {
+    return item?.caption || '';
+  };
+
+  const renderJamMarker = (item: any) => {
+    if (item?.geolocation_longitude && item?.geolocation_latitude) {
+      return (
+        <Marker
+          key={item.id}
+          title={getMarkerTitle(item)}
+          //description={getMarkerDescription(item)}
+          position={getMarkerCoordinate(item)}
+          icon={markerImage} 
+
+          /*
+          options={{
+            styles: Layout.mapStyle,
+            disableDefaultUI: true,
+          }}
+          */
+        />
+      );
+    }
+
+    return null;
   };
 
   useEffect(() => {
@@ -38,7 +80,8 @@ const LocationMapView = () => {
           center={getCenter()} 
           zoom={7} 
         >
-          <Marker position={getCenter()} />
+            { /*<Marker position={getCenter()} /> */}
+            {searchResult?.jam?.map((item: any) => renderJamMarker(item))}
         </GoogleMap>
       </View>
     </LoadScript>
@@ -54,4 +97,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LocationMapView;
+export default JamsMapView;

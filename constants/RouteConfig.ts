@@ -1,5 +1,6 @@
 import { Colors } from "./Colors";
 import { Config } from "./Config";
+import { Platform } from 'react-native';
 
 const mainRoute = () => {
   return Config.mainRoute.replace('/', '');
@@ -78,7 +79,9 @@ const routes: any = [
   },
 ];
 
-const defaults: any = { 
+const defaults: any = Platform.OS == 'ios' ? {
+  headerShown: false,
+} : { 
   statusBarStyle: 'dark',
   animation: 'fade',
   headerShown: false,

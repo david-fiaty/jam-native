@@ -13,7 +13,6 @@ import i18n from "@/translation/i18n";
 import ScreenManager from "@/manager/ScreenManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import ModalButton from "@/components/button/ModalButton";
-import DataManager from "@/manager/DataManager";
 
 type Props = BaseProps & {
   row?: any;
@@ -25,7 +24,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
   const [isLikeProcessing, setIsLikeProcessing] = useState<boolean>(false);
   const [isSaveProcessing, setIsSaveProcessing] = useState<boolean>(false);
   const [isShareProcessing, setIsShareProcessing] = useState<boolean>(false);
-  const isLoggedIn: boolean = UserManager.isLoggedIn();
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const userState: any = useSelector((state: any) => state.user);
 
   const isJamLiked = () => {
@@ -240,6 +239,12 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
       </BoxView>
     );  
   };
+
+  useEffect(() => {
+    (async () => {
+      setIsLoggedIn(await UserManager.isLoggedIn());
+    })();
+  });
 
   return renderComponent();
 };

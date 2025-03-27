@@ -73,14 +73,6 @@ export const Layout = {
   lineHeight: 17,
   logo: logo,
   mapStyle: mapStyle,
-  header: {
-    minHeight: 68,
-    maxHeight: 68,
-  },
-  footer: {
-    minHeight: 50,
-    maxHeight: 50,
-  },
   title: {
     fontWeight: 'bold',
     fontSize: fontSize.base,

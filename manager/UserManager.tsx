@@ -1,10 +1,10 @@
 import { Platform } from 'react-native';
 import { useLocales } from 'expo-localization';
-import { setTokenData, setIsLoggedIn } from '@/redux/slices/UserSlice';
 import { setLikedJams, setSavedJams, setLikedProjects, setSavedProjects } from '@/redux/slices/UserSlice';
 import { setLanguage } from '@/redux/slices/AppSlice';
 import { Config } from '@/constants/Config';
 import Store from '@/redux/Store';
+import SessionManager from './SessionManager';
 import DataManager from './DataManager';
 import * as Location from 'expo-location';
 import * as Device from "expo-device";
@@ -14,28 +14,28 @@ class UserManager {
   async login(data: any) {
     let response = await DataManager.post('login', data);
     if (response?.tokens?.access_token?.length) {
-      Store.dispatch(setTokenData(JSON.stringify(response.tokens)));
-      Store.dispatch(setIsLoggedIn(true));
+      await SessionManager.setTokenData(response.tokens);
     }
     
     return response;
-  }
-
-  logout() {
-    Store.dispatch(setTokenData('{}'));
-    Store.dispatch(setIsLoggedIn(false));
-
-    // Todo - Also reset active screen to avoid redirect on relogin
   }
 
   async register(data: any) {
     let response = await DataManager.post('register', data);
     if (response?.tokens?.access_token?.length) {
-      Store.dispatch(setTokenData(JSON.stringify(response.tokens)));
-      Store.dispatch(setIsLoggedIn(true));
+      await SessionManager.setTokenData(response.tokens);
     }
     
     return response;
+  }
+
+  async isLoggedIn() {
+    return await SessionManager.isTokenValid();
+  }
+
+  logout() {
+    SessionManager.setTokenData({});
+    // Todo - Also reset active screen to avoid redirect on relogin
   }
 
   async getUserData() { 
@@ -47,7 +47,8 @@ class UserManager {
   }
 
   async getProfileId() {
-    let profileId: number = Store.getState().user.profileId;
+    let profileId: number = Store.getState()?.user?.profileId || 0;
+
     if (profileId === 0) {
       let userAccount: any = await DataManager.get('currentUser');
       profileId = parseInt(userAccount?.profiles?.[0]?.id || 0);
@@ -106,14 +107,6 @@ class UserManager {
     Store.dispatch(setLanguage(languageCode));
   }
 
-  isLoggedIn() {
-    return Store.getState().user.isLoggedIn === true;
-  }
-
-  isAccessTokenValid() {
-    // Todo - Validate token duration
-  }
-
   async getLocation() {
     if (Platform.OS === "android" && !Device.isDevice) {
       console.log(i18n.t("Location features are not available for virtual devices"));
@@ -157,7 +150,7 @@ class UserManager {
   };
 
   async updateLikedJams(entityId: number) {
-    let likedJams: any[] = [...Store.getState().user.likedJams];
+    let likedJams: any[] = [...Store.getState()?.user?.likedJams];
     
     if (likedJams.includes(entityId)) likedJams = likedJams.filter((v: any) => v !== entityId)
     else likedJams.push(entityId);
@@ -166,7 +159,7 @@ class UserManager {
   }
 
   async updateSavedJams(entityId: number) {
-    let savedJams: any[] = [...Store.getState().user.savedJams];
+    let savedJams: any[] = [...Store.getState()?.user?.savedJams];
     
     if (savedJams.includes(entityId)) savedJams = savedJams.filter((v: any) => v !== entityId)
     else savedJams.push(entityId);
@@ -175,7 +168,7 @@ class UserManager {
   }
 
   async updateLikedProjects(entityId: number) {
-    let likedProjects: any[] = [...Store.getState().user.likedProjects];
+    let likedProjects: any[] = [...Store.getState()?.user?.likedProjects];
     
     if (likedProjects.includes(entityId)) likedProjects = likedProjects.filter((v: any) => v !== entityId)
     else likedProjects.push(entityId);
@@ -184,7 +177,7 @@ class UserManager {
   }
 
   async updateSavedProjects(entityId: number) {
-    let savedProjects: any[] = [...Store.getState().user.savedProjects];
+    let savedProjects: any[] = [...Store.getState()?.user?.savedProjects];
     
     if (savedProjects.includes(entityId)) savedProjects = savedProjects.filter((v: any) => v !== entityId)
     else savedProjects.push(entityId);
