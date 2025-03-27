@@ -7,6 +7,7 @@ import CountriesList from "@/components/list/CountriesList";
 import HostsList from "@/components/list/HostsList";
 import JammersList from "@/components/list/JammersList";
 import SectorsList from "@/components/list/SectorsList";
+import ShareOptionsList from "@/components/list/ShareOptionsList";
 import NotificationsMenu from "@/components/menu/NotificationsMenu";
 import SettingsMenu from "@/components/menu/SettingsMenu";
 import JamsMapView from "@/components/view/JamsMapView";
@@ -74,6 +75,10 @@ const modals: any = [
   {
     name: 'MoreJamActionsView', 
     component: <MoreJamActionsView />,
+  },
+  {
+    name: 'ShareOptionsList', 
+    component: <ShareOptionsList />,
   },
 ];
 
