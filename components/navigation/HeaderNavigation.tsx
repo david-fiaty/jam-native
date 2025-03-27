@@ -29,7 +29,6 @@ const HeaderNavigation = () => {
   const activeModal: any = ScreenManager.getActiveModal();
   const currentRouteConfig: any = RouteConfig.getRoutes().find((o: any) => o.name == route.name);
   const currentModalConfig: any = ModalConfig.build().find((o: any) => o.name == activeModal?.name);
-  const containerStyle: any = ScreenManager.getHeaderSize();
 
   const getIconTheme = (screenName: string) => {
     if (activeModal?.name == screenName && activeModal?.visible === true) {
@@ -142,7 +141,7 @@ const HeaderNavigation = () => {
       direction="row" 
       align="center" 
       justify="space-between"
-      style={[styles.container, containerStyle]}
+      style={[styles.container, headerSize]}
     >
       <BoxView direction="row" align="center" style={styles.headerLeft}>
         {renderLogo()}
