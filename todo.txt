@@ -43,6 +43,9 @@ ssh root@207.180.209.247
 exyT6hT64S4i7tjGYF
 Port: 22
 
+# Linux Commands
+- list processes: ps aux | grep node
+
 
 "scripts": {
   "dev": "npm start --tunnel",
