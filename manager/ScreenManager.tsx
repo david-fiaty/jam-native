@@ -161,16 +161,22 @@ class ScreenManager {
   }
 
   getHeaderSize() {
+    let factor: number = 12;
+    let height: number = this.window.height/factor;
+
     return {
       width: this.window.width,
-      height: 75,
+      height: height,
     };
   }
 
   getFooterSize() {
+    let factor: number = 16;
+    let height: number = this.window.height/factor;
+
     return {
       width: this.window.width,
-      height: 56,
+      height: height,
     };
   }
 
