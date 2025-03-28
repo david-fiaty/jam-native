@@ -89,11 +89,11 @@ class ApiManager {
 
     // Todo - Fix this
     if (tokenData) {
-      //headers['Authorization'] = `Bearer ${tokenData?.access_token || ''}`; 
-      headers['Authorization'] = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5OTg2Mzg4LCJpYXQiOjE3NDEzNDYzODgsImp0aSI6IjViZjU2MGIyM2M4ZTRhOWRiYjk3M2MxM2E4M2Q5MmFlIiwidXNlcl9pZCI6MTJ9.UtdSMClKbnJ7XuiExdz2NxyfolXnc0mjzqF7-ogB1Xo';
+      headers['Authorization'] = `Bearer ${tokenData?.access_token || ''}`; 
+      //headers['Authorization'] = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5OTg2Mzg4LCJpYXQiOjE3NDEzNDYzODgsImp0aSI6IjViZjU2MGIyM2M4ZTRhOWRiYjk3M2MxM2E4M2Q5MmFlIiwidXNlcl9pZCI6MTJ9.UtdSMClKbnJ7XuiExdz2NxyfolXnc0mjzqF7-ogB1Xo';
     }
     else {
-      headers['Authorization'] = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5OTg2Mzg4LCJpYXQiOjE3NDEzNDYzODgsImp0aSI6IjViZjU2MGIyM2M4ZTRhOWRiYjk3M2MxM2E4M2Q5MmFlIiwidXNlcl9pZCI6MTJ9.UtdSMClKbnJ7XuiExdz2NxyfolXnc0mjzqF7-ogB1Xo';
+      //headers['Authorization'] = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5OTg2Mzg4LCJpYXQiOjE3NDEzNDYzODgsImp0aSI6IjViZjU2MGIyM2M4ZTRhOWRiYjk3M2MxM2E4M2Q5MmFlIiwidXNlcl9pZCI6MTJ9.UtdSMClKbnJ7XuiExdz2NxyfolXnc0mjzqF7-ogB1Xo';
     }
     
     return headers;

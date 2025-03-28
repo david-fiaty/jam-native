@@ -81,7 +81,6 @@ const SignupScreen = () => {
           containerStyle={styles.inputTextFieldContainer}
           placeholder={i18n.t("Password")}
           secureTextEntry={true}
-          autoCapitalize={false}
           spellCheck={false}
           value={signupData?.password}
           onChangeText={(value: string) => updateField("password", value)}
