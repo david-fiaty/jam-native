@@ -24,7 +24,6 @@ pm2 start "npx expo start --web" --name jam-mobile
 pm2 startup
 pm2 save
 
-
 # Google maps
 AIzaSyB91uv-OuWw6iNMjVZmuHJsRVDHP9baCq0
 
