@@ -162,7 +162,8 @@ class ScreenManager {
 
   // Todo - Fix this creating differences on IOS
   getHeaderSize() {
-    let height: number = this.window.height/22;
+    let factor: number = Platform.OS === 'ios' ? 14 : 12;
+    let height: number = this.window.height/factor;
 
     return {
       width: this.window.width,
@@ -171,7 +172,8 @@ class ScreenManager {
   }
 
   getFooterSize() {
-    let height: number = this.window.height/16;
+    let factor: number = 16;
+    let height: number = this.window.height/factor;
 
     return {
       width: this.window.width,
