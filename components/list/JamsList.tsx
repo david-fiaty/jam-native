@@ -46,15 +46,7 @@ const JamsList = ({ idArray }: Props) => {
     })();
   }, [isLoaded, sectors, idArray]);
 
-  if (!isLoaded) return (
-    <BoxView 
-      direction="column" 
-      align="center"
-      justify="center"
-    >
-    <SpinnerView />
-    </BoxView>
-  );
+  if (!isLoaded) return <SpinnerView />;
   
   return (
     <BoxView 
