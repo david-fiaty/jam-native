@@ -13,6 +13,7 @@ const JamsMapView = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const searchResult = JSON.parse(useSelector((state: any) => state.search.current));
   const markerImage = require('@/assets/images/logo-55.png');
+  const mapStyle: string = Layout.mapStyle;
   
   const getCenter = () => {
     let latitude = currentLocation?.coords?.latitude || Config.defaultLocation.latitude;
@@ -48,13 +49,6 @@ const JamsMapView = () => {
           //description={getMarkerDescription(item)}
           position={getMarkerCoordinate(item)}
           icon={markerImage} 
-
-          /*
-          options={{
-            styles: Layout.mapStyle,
-            disableDefaultUI: true,
-          }}
-          */
         />
       );
     }
@@ -79,6 +73,10 @@ const JamsMapView = () => {
           mapContainerStyle={styles.map} 
           center={getCenter()} 
           zoom={7} 
+          options={{
+            styles: mapStyle,
+            disableDefaultUI: true,
+          }}
         >
             { /*<Marker position={getCenter()} /> */}
             {searchResult?.jam?.map((item: any) => renderJamMarker(item))}
