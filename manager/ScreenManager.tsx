@@ -133,15 +133,19 @@ class ScreenManager {
   getModalSize() {
     return {
       width: this.window.width,
-      height: this.window.height - this.getHeaderSize().height - this.getFooterSize().height,
+      height: this.window.height - this.getHeaderSize().height - this.getFooterSize().height - this.getModalOffsetX(),
     };
   }
 
   getModalPosition() {
     return {
       x: 0,
-      y: this.getHeaderSize().height,
+      y: this.getHeaderSize().height + this.getModalOffsetX(),
     };
+  }
+
+  getModalOffsetX() {
+    return Platform.OS === 'ios' ? Layout.space.base*4 : 0;
   }
 
   getStatusBarSize() {
@@ -160,9 +164,8 @@ class ScreenManager {
     };
   }
 
-  // Todo - Fix this creating differences on IOS
   getHeaderSize() {
-    let factor: number = Platform.OS === 'ios' ? 14 : 12;
+    let factor: number = 12;
     let height: number = this.window.height/factor;
 
     return {
