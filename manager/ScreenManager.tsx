@@ -133,15 +133,19 @@ class ScreenManager {
   getModalSize() {
     return {
       width: this.window.width,
-      height: this.window.height - this.getHeaderSize().height - this.getFooterSize().height,
+      height: this.window.height - this.getHeaderSize().height - this.getFooterSize().height - this.getModalOffsetX(),
     };
   }
 
   getModalPosition() {
     return {
       x: 0,
-      y: this.getHeaderSize().height,
+      y: this.getHeaderSize().height + this.getModalOffsetX(),
     };
+  }
+
+  getModalOffsetX() {
+    return Platform.OS === 'ios' ? Layout.space.base*4 : 0;
   }
 
   getStatusBarSize() {
