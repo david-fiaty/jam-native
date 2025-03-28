@@ -133,15 +133,19 @@ class ScreenManager {
   getModalSize() {
     return {
       width: this.window.width,
-      height: this.window.height - this.getHeaderSize().height - this.getFooterSize().height,
+      height: this.window.height - this.getHeaderSize().height - this.getFooterSize().height - this.getModalOffsetX(),
     };
   }
 
   getModalPosition() {
     return {
       x: 0,
-      y: this.getHeaderSize().height,
+      y: this.getHeaderSize().height + this.getModalOffsetX(),
     };
+  }
+
+  getModalOffsetX() {
+    return Platform.OS === 'ios' ? Layout.space.base*4 : 0;
   }
 
   getStatusBarSize() {
@@ -161,16 +165,22 @@ class ScreenManager {
   }
 
   getHeaderSize() {
+    let factor: number = 12;
+    let height: number = this.window.height/factor;
+
     return {
       width: this.window.width,
-      height: 75,
+      height: height,
     };
   }
 
   getFooterSize() {
+    let factor: number = 16;
+    let height: number = this.window.height/factor;
+
     return {
       width: this.window.width,
-      height: 56,
+      height: height,
     };
   }
 
