@@ -12,7 +12,6 @@ type Props = BaseProps & {
   rightIcon?: JSX.Element;
   disabled?: boolean;
   secureTextEntry?: boolean;
-  autoCapitalize?: boolean;
   spellCheck?: boolean;
   readOnly?: boolean,
   onChangeText?: (value: string) => void;
@@ -27,7 +26,6 @@ const InputTextField = ({
   rightIcon,
   disabled,
   secureTextEntry,
-  autoCapitalize,
   spellCheck,
   readOnly,
   onChangeText,
@@ -46,7 +44,6 @@ const InputTextField = ({
         multiline={false}
         editable={!disabled}
         secureTextEntry={secureTextEntry}
-        //autoCapitalize={autoCapitalize} // Todo - Fix not web compatible
         spellCheck={spellCheck}
         value={value}
         readOnly={readOnly}
