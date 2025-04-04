@@ -4,9 +4,17 @@ import InputTextField from '@/components/field/InputTextField';
 import TextView from '@/components/view/TextView';
 import i18n from '@/translation/i18n';
 
+import BoxView from '@/components/view/BoxView';
+
 class ProfileManager {
   renderFields() {
     return (
+      <BoxView
+      align="flex-start"
+      justify="flex-start"
+      scroll={true}
+      style={[Layout.screenContent]}
+    >
       <View style={Layout.formContainer}>
         {this.getFields().map((item: any) => {
           return (
@@ -19,6 +27,7 @@ class ProfileManager {
           );
         })}
       </View>
+      </BoxView>
     );
   }
 
