@@ -59,7 +59,11 @@ class ProfileManager {
   }
 
   canRenderField(item: any, formData: any) {
-    return item.enabled === true;
+    let group: any = formData?.['profile_type'] || null;
+    let canRender: boolean = item.enabled === true 
+      && (item.groups.includes('all') || item.groups.includes(group));
+
+    return canRender; 
   }
 
   renderField(item: any, formData: any) { 
