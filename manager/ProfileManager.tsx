@@ -4,9 +4,13 @@ class ProfileManager {
   renderFields() {
     return this.getFields().map((item: any) => {
       return item.render(item, {
-        onChange: (value: any) => {},
+        onChange: this.onValueChange(item),
       });
     });
+  }
+
+  onValueChange(item: any) {
+
   }
 
   getFields() {
