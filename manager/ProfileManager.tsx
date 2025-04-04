@@ -18,10 +18,10 @@ class ProfileManager {
     };
   }
 
-  setFormData(key: string, value: any) {
+  setFormData(item: any, value: any) {
     let payload: any =  {
       resource: 'profile',
-      key: key,
+      key: item.key,
       value: value,
     };
 
@@ -80,7 +80,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item.key, value)}
+              onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
         },
@@ -96,7 +96,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <ProfileTypeField
-              onChangeValue={(option: any) => this.setFormData(item.key, option.value)}
+              onChangeValue={(option: any) => this.setFormData(item, option.value)}
             />
           );
         },
@@ -113,7 +113,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item.key, value)}
+              onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
         },
@@ -130,7 +130,7 @@ class ProfileManager {
           return (
             <InputTextareaField
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item.key, value)}
+              onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
         },
@@ -147,7 +147,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item.key, value)}
+              onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
         },
@@ -164,7 +164,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item.key, value)}
+              onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
         },
@@ -181,7 +181,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item.key, value)}
+              onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
         },
@@ -198,7 +198,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item.key, value)}
+              onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
         },
@@ -215,7 +215,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item.key, value)}
+              onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
         },
@@ -232,7 +232,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item.key, value)}
+              onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
         },
@@ -249,7 +249,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item.key, value)}
+              onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
         },
@@ -266,7 +266,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item.key, value)}
+              onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
         },
@@ -283,7 +283,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item.key, value)}
+              onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
         },
@@ -300,7 +300,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item.key, value)}
+              onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
         },
@@ -317,7 +317,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item.key, value)}
+              onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
         },
@@ -334,7 +334,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item.key, value)}
+              onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
         },
@@ -351,7 +351,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item.key, value)}
+              onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
         },
@@ -368,7 +368,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item.key, value)}
+              onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
         },
@@ -385,7 +385,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item.key, value)}
+              onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
         },
@@ -402,7 +402,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item.key, value)}
+              onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
         },
@@ -419,7 +419,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item.key, value)}
+              onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
         },
@@ -436,7 +436,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item.key, value)}
+              onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
         },
@@ -453,7 +453,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item.key, value)}
+              onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
         },
@@ -470,7 +470,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item.key, value)}
+              onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
         },
