@@ -22,6 +22,10 @@ import DividerView from "../view/DividerView";
 import ProfileTypeField from "../field/ProfileTypeField";
 import CountryField from "../field/CountryField";
 
+import PersonSignup from "./signup/PersonSignup";
+import OrganizationSignup from "./signup/OrganizationSignup";
+import VenueSignup from "./signup/VenueSignup";
+
 const SignupScreen = () => {
   const router = useRouter();
   const [signupData, setSignupData] = useState<any>({});
