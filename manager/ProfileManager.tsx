@@ -2,14 +2,9 @@ import i18n from '@/translation/i18n';
 
 class ProfileManager {
   renderFields() {
-    let fields: any = this.getFields();
-    let output: any = [];
-
-    for (const [key, item] of Object.entries(fields)) {
-      output.push(item.render(item));
-    }
-
-    return output;
+    return this.getFields().map((item: any) => {
+      return item.render(item);
+    });
   }
 
   getFields() {
@@ -230,7 +225,7 @@ class ProfileManager {
         label: i18n.t('Password'),
         render: (item: any) => { },
       },
-    };
+    ];
   }
 };
 
