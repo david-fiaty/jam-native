@@ -56,7 +56,7 @@ class ProfileManager {
     return [
       {
         signup: true,
-        profile: true,
+        profile: false,
         enabled: true,
         required: true,
         key: 'profile_type',
