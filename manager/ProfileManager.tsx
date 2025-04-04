@@ -1,20 +1,18 @@
+import InputTextField from '@/components/field/InputTextField';
 import i18n from '@/translation/i18n';
+import { View } from 'react-native';
 
 class ProfileManager {
   renderFields() {
     return this.getFields().map((item: any) => {
-      return item.render(item, {
-        onChange: this.onValueChange(item),
-      });
+      return (
+        <View key={item.key}>
+          {item.render(item, {
+            onChange: this.onValueChange(item),
+          })}
+        </View>
+      );
     });
-  }
-
-  onValueChange(item: any) {
-
-  }
-
-  submitForm() {
-    
   }
 
   getFields() {
@@ -24,219 +22,367 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: true,
-        name: 'profile_name',
+        key: 'profile_name',
         label: i18n.t('Profile name'),
-        render: (item: any, params: any) => { },
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
       },
       {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
-        name: 'profile_description',
+        key: 'profile_description',
         label: i18n.t('About'),
-        render: (item: any, params: any) => { },
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
       },
       {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
-        name: 'upload_profile_picture',
+        key: 'upload_profile_picture',
         label: i18n.t('Profile picture'),
-        render: (item: any, params: any) => { },
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
       },
       {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
-        name: 'upload_other_docs',
+        key: 'upload_other_docs',
         label: i18n.t('Other documents'),
-        render: (item: any, params: any) => { },
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
       },
       {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
-        name: 'sectors_ids',
+        key: 'sectors_ids',
         label: i18n.t('Sectors'),
-        render: (item: any, params: any) => { },
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
       },
       {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
-        name: 'scope_country_code',
+        key: 'scope_country_code',
         label: i18n.t('Country'),
-        render: (item: any, params: any) => { },
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
       },
       {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
-        name: 'region',
+        key: 'region',
         label: i18n.t('Region'),
-        render: (item: any, params: any) => { },
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
       },
       {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
-        name: 'town_or_locality',
+        key: 'town_or_locality',
         label: i18n.t('Locality'),
-        render: (item: any, params: any) => { },
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
       },
       {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
-        name: 'other_town_or_locality',
+        key: 'other_town_or_locality',
         label: i18n.t('Other locality'),
-        render: (item: any, params: any) => { },
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
       },
       {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
-        name: 'address',
+        key: 'address',
         label: i18n.t('Address'),
-        render: (item: any, params: any) => { },
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
       },
       {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
-        name: 'geolocation_latitude',
+        key: 'geolocation_latitude',
         label: i18n.t('Latitude'),
-        render: (item: any, params: any) => { },
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
       },
       {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
-        name: 'geolocation_longitude',
+        key: 'geolocation_longitude',
         label: i18n.t('Longitude'),
-        render: (item: any, params: any) => { },
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
       },
       {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
-        name: 'email',
+        key: 'email',
         label: i18n.t('Email'),
-        render: (item: any, params: any) => { },
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
       },
       {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
-        name: 'whatsapp_number',
+        key: 'whatsapp_number',
         label: i18n.t('Whatsapp number'),
-        render: (item: any, params: any) => { },
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
       },
       {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
-        name: 'phone_number',
+        key: 'phone_number',
         label: i18n.t('Phone number'),
-        render: (item: any, params: any) => { },
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
       },
       {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
-        name: 'website_link',
+        key: 'website_link',
         label: i18n.t('Website link'),
-        render: (item: any, params: any) => { },
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
       },
       {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
-        name: 'instagram_id',
+        key: 'instagram_id',
         label: i18n.t('Instagram ID'),
-        render: (item: any, params: any) => { },
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
       },
       {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
-        name: 'facebook_link',
+        key: 'facebook_link',
         label: i18n.t('Facebook link'),
-        render: (item: any, params: any) => { },
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
       },
       {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
-        name: 'linkedin_link',
+        key: 'linkedin_link',
         label: i18n.t('Linkedin link'),
-        render: (item: any, params: any) => { },
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
       },
       {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
-        name: 'profile_type',
+        key: 'profile_type',
         label: i18n.t('Profile type'),
-        render: (item: any, params: any) => { },
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
       },
       {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
-        name: 'profile_personal',
+        key: 'profile_personal',
         label: i18n.t('Personal profile'),
-        render: (item: any, params: any) => { },
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
       },
       {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
-        name: 'profile_organization',
+        key: 'profile_organization',
         label: i18n.t('Organization profile'),
-        render: (item: any, params: any) => { },
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
       },
       {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
-        name: 'profile_venue',
+        key: 'profile_venue',
         label: i18n.t('Venue profile'),
-        render: (item: any, params: any) => { },
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
       },
       {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
-        name: 'password',
+        key: 'password',
         label: i18n.t('Password'),
-        render: (item: any, params: any) => { },
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
       },
     ];
   }
+
+  onValueChange(item: any) {}
+
+  submitForm() {}
 };
 
 export default (new ProfileManager());
