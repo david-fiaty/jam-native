@@ -22,6 +22,8 @@ import DividerView from "../view/DividerView";
 import ProfileTypeField from "../field/ProfileTypeField";
 import CountryField from "../field/CountryField";
 
+import ProfileManager from "@/manager/ProfileManager";
+
 import PersonSignup from "./signup/PersonSignup";
 import OrganizationSignup from "./signup/OrganizationSignup";
 import VenueSignup from "./signup/VenueSignup";
@@ -68,142 +70,8 @@ const SignupScreen = () => {
       <DividerView />
 
       <View style={Layout.formContainer}>
-        <InputTextField
-          containerStyle={styles.inputTextFieldContainer}
-          placeholder={i18n.t("User name")}
-          value={signupData?.email}
-          onChangeText={(value: string) => updateField("username", value)}
-        />
+        {ProfileManager.renderFields()}
 
-        <InputTextField
-          containerStyle={styles.inputTextFieldContainer}
-          placeholder={i18n.t("Email address")}
-          value={signupData?.email}
-          onChangeText={(value: string) => updateField("email", value)}
-        />
-
-        <InputTextField
-          containerStyle={styles.inputTextFieldContainer}
-          placeholder={i18n.t("Password")}
-          secureTextEntry={true}
-          spellCheck={false}
-          value={signupData?.password}
-          onChangeText={(value: string) => updateField("password", value)}
-        />
-
-        <DividerView theme="secondary" />
-
-        <InputTextField
-          containerStyle={styles.inputTextFieldContainer}
-          placeholder={i18n.t("Profile name")}
-          value={signupData?.profile?.profile_name}
-          onChangeText={(value: string) =>
-            updateField("profile", {
-              ...(signupData?.profile || {}),
-              ...{ profile_name: value },
-            })
-          }
-        />
-
-        <ProfileTypeField
-          value={signupData?.profile?.profile_type}
-          onChangeValue={(option: any) =>
-            updateField("profile", {
-              ...(signupData?.profile || {}),
-              ...{ profile_type: option.value },
-            })
-          }
-        />
-
-        {signupData?.profile?.profile_type == "personal" && (
-          <InputTextField
-            containerStyle={styles.inputTextFieldContainer}
-            placeholder={i18n.t("First name")}
-            value={signupData?.profile?.profile_personal?.first_name}
-            onChangeText={(value: string) => {
-              let profilePersonal = Object.assign(
-                {},
-                signupData?.profile?.profile_personal || {}
-              );
-              profilePersonal["first_name"] = value;
-              updateField("profile", {
-                ...(signupData?.profile || {}),
-                ...{ profile_personal: profilePersonal },
-              });
-            }}
-          />
-        )}
-
-        {signupData?.profile?.profile_type == "personal" && (
-          <InputTextField
-            containerStyle={styles.inputTextFieldContainer}
-            placeholder={i18n.t("Last name")}
-            value={signupData?.profile?.profile_personal?.last_name}
-            onChangeText={(value: string) => {
-              let profilePersonal = Object.assign(
-                {},
-                signupData?.profile?.profile_personal || {}
-              );
-              profilePersonal["last_name"] = value;
-              updateField("profile", {
-                ...(signupData?.profile || {}),
-                ...{ profile_personal: profilePersonal },
-              });
-            }}
-          />
-        )}
-
-        <CountryField
-          value={signupData?.profile?.scope_country_code}
-          onChangeValue={(option: any) =>
-            updateField("profile", {
-              ...(signupData?.profile || {}),
-              ...{ scope_country_code: option.value },
-            })
-          }
-        />
-
-        <DividerView theme="secondary" />
-
-{ /*
-        <SectorsField
-          onPressEvent={() => ScreenManager.toggleModal("SectorsList", {
-            reducer: 'signupForm',
-          })}
-        />
-
-        <DividerView theme="secondary" />
-        */ }
-
-
-        <ButtonView
-          label={i18n.t("Continue")}
-          isProcessing={isProcessing}
-          onPress={() => {
-            setIsProcessing(true);
-            submitForm();
-          }}
-        />
-
-        <BoxView
-          direction="row"
-          align="center"
-          justify="space-between"
-          style={{ width: "100%" }}
-        >
-          <BoxView direction="row" align="center" justify="flex-start">
-            <TextView>{i18n.t("Already have an account?")}</TextView>
-            <LinkView onPress={async () => router.replace("/login")}>
-              {i18n.t("Sign in")}
-            </LinkView>
-          </BoxView>
-          <SkipButton onPress={async () => router.replace(Config.mainRoute)} />
-        </BoxView>
-
-        <DividerView />
-        <GoogleLoginButton />
-        <FacebookLoginButton />
-        <InstagramLoginButton />
       </View>
     </BoxView>
   );
