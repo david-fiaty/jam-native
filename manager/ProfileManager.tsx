@@ -14,6 +14,23 @@ class ProfileManager {
     };
   }
 
+  renderFields() {
+    return (
+      <BoxView
+        align="flex-start"
+        justify="flex-start"
+        scroll={true}
+        style={[Layout.screenContent, this.getContainerStyles()]}
+      >
+        <View style={Layout.formContainer}>
+          {this.getFields().map((item: any) => {
+            return this.renderField(item);
+          })}
+        </View>
+      </BoxView>
+    );
+  }
+
   canRenderField(item: any) {
     return item.enabled === true;
   }
@@ -31,23 +48,6 @@ class ProfileManager {
     }
 
     return <></>;
-  }
-
-  renderFields() {
-    return (
-      <BoxView
-        align="flex-start"
-        justify="flex-start"
-        scroll={true}
-        style={[Layout.screenContent, this.getContainerStyles()]}
-      >
-        <View style={Layout.formContainer}>
-          {this.getFields().map((item: any) => {
-            return this.renderField(item);
-          })}
-        </View>
-      </BoxView>
-    );
   }
 
   getFields() {
