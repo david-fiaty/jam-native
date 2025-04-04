@@ -1,5 +1,7 @@
 import { View } from 'react-native';
 import { Layout } from '@/constants/Layout';
+import { setFormData } from '@/redux/slices/FormSlice';
+import Store from '@/redux/Store';
 import InputTextField from '@/components/field/InputTextField';
 import TextView from '@/components/view/TextView';
 import i18n from '@/translation/i18n';
@@ -14,6 +16,20 @@ class ProfileManager {
       paddingLeft: 0,
       paddingRight: 0,
     };
+  }
+
+  setFormData(key: string, value: any) {
+    let payload: any =  {
+      resource: 'profile',
+      key: key,
+      value: value,
+    };
+
+    Store.dispatch(setFormData(payload));
+  }
+
+  getFormData() {
+    return {...Store.getState().form?.profile};
   }
 
   renderFields() {
@@ -42,9 +58,7 @@ class ProfileManager {
       return (
         <View key={item.key}>
           <TextView>{i18n.t(item.label)} {item?.required === true ? '*' : ''}</TextView>
-            {item.render(item, {
-              onChange: this.onValueChange(item),
-            })}
+            {item.render(item, {})}
         </View>
       );
     }
@@ -66,6 +80,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item.key, value)}
             />
           );
         },
@@ -81,7 +96,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <ProfileTypeField
-
+              onChangeValue={(option: any) => this.setFormData(item.key, option.value)}
             />
           );
         },
@@ -98,6 +113,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item.key, value)}
             />
           );
         },
@@ -114,6 +130,7 @@ class ProfileManager {
           return (
             <InputTextareaField
               placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item.key, value)}
             />
           );
         },
@@ -130,6 +147,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item.key, value)}
             />
           );
         },
@@ -146,6 +164,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item.key, value)}
             />
           );
         },
@@ -162,6 +181,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item.key, value)}
             />
           );
         },
@@ -178,6 +198,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item.key, value)}
             />
           );
         },
@@ -194,6 +215,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item.key, value)}
             />
           );
         },
@@ -210,6 +232,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item.key, value)}
             />
           );
         },
@@ -226,6 +249,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item.key, value)}
             />
           );
         },
@@ -242,6 +266,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item.key, value)}
             />
           );
         },
@@ -258,6 +283,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item.key, value)}
             />
           );
         },
@@ -274,6 +300,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item.key, value)}
             />
           );
         },
@@ -290,6 +317,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item.key, value)}
             />
           );
         },
@@ -306,6 +334,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item.key, value)}
             />
           );
         },
@@ -322,6 +351,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item.key, value)}
             />
           );
         },
@@ -338,6 +368,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item.key, value)}
             />
           );
         },
@@ -354,6 +385,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item.key, value)}
             />
           );
         },
@@ -370,6 +402,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item.key, value)}
             />
           );
         },
@@ -386,6 +419,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item.key, value)}
             />
           );
         },
@@ -402,6 +436,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item.key, value)}
             />
           );
         },
@@ -418,6 +453,7 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item.key, value)}
             />
           );
         },
@@ -434,14 +470,13 @@ class ProfileManager {
           return (
             <InputTextField
               placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item.key, value)}
             />
           );
         },
       },
     ];
   }
-
-  onValueChange(item: any) {}
 
   submitForm() {}
 };
