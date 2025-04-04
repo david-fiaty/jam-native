@@ -59,11 +59,8 @@ class ProfileManager {
   }
 
   canRenderField(item: any, formData: any) {
-    let group: any = formData?.['profile_type'] || null;
-    let canRender: boolean = item.enabled === true 
-      && (item.groups.includes('all') || item.groups.includes(group));
-
-    return canRender; 
+    return item.enabled === true 
+      && (item.group === 'all' || item.group === formData?.['profile_type']);
   }
 
   renderField(item: any, formData: any) { 
@@ -88,7 +85,7 @@ class ProfileManager {
         required: false,
         key: 'upload_profile_picture',
         label: i18n.t('Profile picture'),
-        groups: ['all'],
+        group: 'all',
         render: (item: any, params: any) => {
           return (
             <InputTextField
@@ -106,7 +103,7 @@ class ProfileManager {
         required: true,
         key: 'profile_type',
         label: i18n.t('Profile type'),
-        groups: ['all'], 
+        group: 'all', 
         render: (item: any, params: any) => {
           return (
             <ProfileTypeField
@@ -123,7 +120,7 @@ class ProfileManager {
         required: false,
         key: 'profile_name',
         label: i18n.t('Profile name'),
-        groups: ['all'],
+        group: 'all',
         render: (item: any, params: any) => {
           return (
             <InputTextField
@@ -141,7 +138,7 @@ class ProfileManager {
         required: false,
         key: 'profile_description',
         label: i18n.t('About'),
-        groups: ['all'],
+        group: 'all',
         render: (item: any, params: any) => {
           return (
             <InputTextareaField
@@ -159,7 +156,7 @@ class ProfileManager {
         required: false,
         key: 'upload_other_docs',
         label: i18n.t('Other documents'),
-        groups: ['all'],
+        group: 'all',
         render: (item: any, params: any) => {
           return (
             <InputTextField
@@ -177,7 +174,7 @@ class ProfileManager {
         required: false,
         key: 'sectors_ids',
         label: i18n.t('Sectors'),
-        groups: ['all'],
+        group: 'all',
         render: (item: any, params: any) => {
           return (
             <InputTextField
@@ -195,7 +192,7 @@ class ProfileManager {
         required: true,
         key: 'scope_country_code',
         label: i18n.t('Country'),
-        groups: ['all'],
+        group: 'all',
         render: (item: any, params: any) => {
           return (
             <InputTextField
@@ -213,7 +210,7 @@ class ProfileManager {
         required: false,
         key: 'region',
         label: i18n.t('Region'),
-        groups: ['all'],
+        group: 'all',
         render: (item: any, params: any) => {
           return (
             <InputTextField
@@ -231,7 +228,7 @@ class ProfileManager {
         required: false,
         key: 'town_or_locality',
         label: i18n.t('Locality'),
-        groups: ['all'],
+        group: 'all',
         render: (item: any, params: any) => {
           return (
             <InputTextField
@@ -249,7 +246,7 @@ class ProfileManager {
         required: false,
         key: 'other_town_or_locality',
         label: i18n.t('Other locality'),
-        groups: ['all'],
+        group: 'all',
         render: (item: any, params: any) => {
           return (
             <InputTextField
@@ -267,7 +264,7 @@ class ProfileManager {
         required: false,
         key: 'address',
         label: i18n.t('Address'),
-        groups: ['all'],
+        group: 'all',
         render: (item: any, params: any) => {
           return (
             <InputTextField
@@ -285,7 +282,7 @@ class ProfileManager {
         required: false,
         key: 'geolocation_latitude',
         label: i18n.t('Latitude'),
-        groups: ['all'],
+        group: 'all',
         render: (item: any, params: any) => {
           return (
             <InputTextField
@@ -303,7 +300,7 @@ class ProfileManager {
         required: false,
         key: 'geolocation_longitude',
         label: i18n.t('Longitude'),
-        groups: ['all'],
+        group: 'all',
         render: (item: any, params: any) => {
           return (
             <InputTextField
@@ -321,7 +318,7 @@ class ProfileManager {
         required: true,
         key: 'email',
         label: i18n.t('Email'),
-        groups: ['all'],
+        group: 'all',
         render: (item: any, params: any) => {
           return (
             <InputTextField
@@ -339,7 +336,7 @@ class ProfileManager {
         required: false,
         key: 'whatsapp_number',
         label: i18n.t('Whatsapp number'),
-        groups: ['all'],
+        group: 'all',
         render: (item: any, params: any) => {
           return (
             <InputTextField
@@ -357,7 +354,7 @@ class ProfileManager {
         required: false,
         key: 'phone_number',
         label: i18n.t('Phone number'),
-        groups: ['all'],
+        group: 'all',
         render: (item: any, params: any) => {
           return (
             <InputTextField
@@ -375,7 +372,7 @@ class ProfileManager {
         required: false,
         key: 'website_link',
         label: i18n.t('Website link'),
-        groups: ['all'],
+        group: 'all',
         render: (item: any, params: any) => {
           return (
             <InputTextField
@@ -393,7 +390,7 @@ class ProfileManager {
         required: false,
         key: 'instagram_id',
         label: i18n.t('Instagram ID'),
-        groups: ['all'],
+        group: 'all',
         render: (item: any, params: any) => {
           return (
             <InputTextField
@@ -411,7 +408,7 @@ class ProfileManager {
         required: false,
         key: 'facebook_link',
         label: i18n.t('Facebook link'),
-        groups: ['all'],
+        group: 'all',
         render: (item: any, params: any) => {
           return (
             <InputTextField
@@ -429,7 +426,7 @@ class ProfileManager {
         required: false,
         key: 'linkedin_link',
         label: i18n.t('Linkedin link'),
-        groups: ['all'],
+        group: 'all',
         render: (item: any, params: any) => {
           return (
             <InputTextField
@@ -447,7 +444,7 @@ class ProfileManager {
         required: true,
         key: 'profile_personal',
         label: i18n.t('Personal profile'),
-        groups: ['personal'],
+        group: 'personal',
         render: (item: any, params: any) => {
           return (
             <InputTextField
@@ -465,7 +462,7 @@ class ProfileManager {
         required: true,
         key: 'profile_organization',
         label: i18n.t('Organization profile'),
-        groups: ['organization'],
+        group: 'organization',
         render: (item: any, params: any) => {
           return (
             <InputTextField
@@ -483,7 +480,7 @@ class ProfileManager {
         required: true,
         key: 'profile_venue',
         label: i18n.t('Venue profile'),
-        groups: ['venue'],
+        group: 'venue',
         render: (item: any, params: any) => {
           return (
             <InputTextField
@@ -501,7 +498,7 @@ class ProfileManager {
         required: true,
         key: 'password',
         label: i18n.t('Password'),
-        groups: ['all'],
+        group: 'all',
         render: (item: any, params: any) => {
           return (
             <InputTextField
