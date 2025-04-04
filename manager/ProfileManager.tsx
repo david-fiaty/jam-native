@@ -13,6 +13,10 @@ class ProfileManager {
 
   }
 
+  submitForm() {
+    
+  }
+
   getFields() {
     return [
       {
