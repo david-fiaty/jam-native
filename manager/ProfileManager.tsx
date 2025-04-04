@@ -10,7 +10,7 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: true,
-        label: i18n.t(''),
+        label: i18n.t('Profile name'),
         render: (args: any) => {},
        },
        profile_description: {
@@ -18,7 +18,7 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: true,
-        label: i18n.t(''),
+        label: i18n.t('About'),
         render: (args: any) => {},
        },
        upload_profile_picture: {
@@ -26,7 +26,7 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: true,
-        label: i18n.t(''),
+        label: i18n.t('Profile picture'),
         render: (args: any) => {},
        },
        upload_other_docs: {
@@ -34,7 +34,7 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: true,
-        label: i18n.t(''),
+        label: i18n.t('Other documents'),
         render: (args: any) => {},
        },
        sectors_ids: {
@@ -42,7 +42,7 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: true,
-        label: i18n.t(''),
+        label: i18n.t('Sectors'),
         render: (args: any) => {},
        },
        scope_country_code: {
@@ -50,7 +50,7 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: true,
-        label: i18n.t(''),
+        label: i18n.t('Country'),
         render: (args: any) => {},
        },
        region: {
@@ -58,7 +58,7 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: true,
-        label: i18n.t(''),
+        label: i18n.t('Region'),
         render: (args: any) => {},
        },
        town_or_locality: {
@@ -66,7 +66,7 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: true,
-        label: i18n.t(''),
+        label: i18n.t('Locality'),
         render: (args: any) => {},
        },
        other_town_or_locality: {
@@ -74,7 +74,7 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: true,
-        label: i18n.t(''),
+        label: i18n.t('Other locality'),
         render: (args: any) => {},
        },
        address: {
@@ -82,7 +82,7 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: true,
-        label: i18n.t(''),
+        label: i18n.t('Address'),
         render: (args: any) => {},
        },
        geolocation_latitude: {
@@ -90,7 +90,7 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: true,
-        label: i18n.t(''),
+        label: i18n.t('Latitude'),
         render: (args: any) => {},
        },
        geolocation_longitude: {
@@ -98,7 +98,7 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: true,
-        label: i18n.t(''),
+        label: i18n.t('Longitude'),
         render: (args: any) => {},
        },
        email: {
@@ -106,7 +106,7 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: true,
-        label: i18n.t(''),
+        label: i18n.t('Email'),
         render: (args: any) => {},
        },
        whatsapp_number: {
@@ -114,7 +114,7 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: true,
-        label: i18n.t(''),
+        label: i18n.t('Whatsapp number'),
         render: (args: any) => {},
        },
        phone_number: {
@@ -122,7 +122,7 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: true,
-        label: i18n.t(''),
+        label: i18n.t('Phone number'),
         render: (args: any) => {},
        },
        website_link: {
@@ -130,7 +130,7 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: true,
-        label: i18n.t(''),
+        label: i18n.t('Website link'),
         render: (args: any) => {},
        },
        instagram_id: {
@@ -138,7 +138,7 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: true,
-        label: i18n.t(''),
+        label: i18n.t('Instagram ID'),
         render: (args: any) => {},
        },
        facebook_link: {
@@ -146,7 +146,7 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: true,
-        label: i18n.t(''),
+        label: i18n.t('Facebook link'),
         render: (args: any) => {},
        },
        linkedin_link: {
@@ -154,7 +154,7 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: true,
-        label: i18n.t(''),
+        label: i18n.t('Linkedin link'),
         render: (args: any) => {},
        },
        profile_type: {
@@ -162,7 +162,7 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: true,
-        label: i18n.t(''),
+        label: i18n.t('Profile type'),
         render: (args: any) => {},
        },
        profile_personal: {
@@ -170,7 +170,7 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: true,
-        label: i18n.t(''),
+        label: i18n.t('Personal profile'),
         render: (args: any) => {},
        },
        profile_organization: {
@@ -178,7 +178,7 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: true,
-        label: i18n.t(''),
+        label: i18n.t('Organization profile'),
         render: (args: any) => {},
        },
        profile_venue: {
@@ -186,7 +186,7 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: true,
-        label: i18n.t(''),
+        label: i18n.t('Venue profile'),
         render: (args: any) => {},
        },       
     };
