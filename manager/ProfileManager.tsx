@@ -3,7 +3,6 @@ import { Layout } from '@/constants/Layout';
 import InputTextField from '@/components/field/InputTextField';
 import TextView from '@/components/view/TextView';
 import i18n from '@/translation/i18n';
-
 import BoxView from '@/components/view/BoxView';
 
 class ProfileManager {
@@ -13,6 +12,25 @@ class ProfileManager {
       paddingLeft: 0,
       paddingRight: 0,
     };
+  }
+
+  canRenderField(item: any) {
+    return item.enabled === true;
+  }
+
+  renderField(item: any) { 
+    if (this.canRenderField(item)) {
+      return (
+        <View key={item.key}>
+          <TextView>{i18n.t(item.label)}</TextView>
+            {item.render(item, {
+              onChange: this.onValueChange(item),
+            })}
+        </View>
+      );
+    }
+
+    return <></>;
   }
 
   renderFields() {
@@ -25,14 +43,7 @@ class ProfileManager {
       >
         <View style={Layout.formContainer}>
           {this.getFields().map((item: any) => {
-            return (
-              <View key={item.key}>
-                <TextView>{i18n.t(item.label)}</TextView>
-                {item.render(item, {
-                  onChange: this.onValueChange(item),
-                })}
-              </View>
-            );
+            return this.renderField(item);
           })}
         </View>
       </BoxView>
