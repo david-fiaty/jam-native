@@ -3,7 +3,9 @@ import i18n from '@/translation/i18n';
 class ProfileManager {
   renderFields() {
     return this.getFields().map((item: any) => {
-      return item.render(item);
+      return item.render(item, {
+        onChange: (value: any) => {},
+      });
     });
   }
 
