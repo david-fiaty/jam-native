@@ -7,13 +7,21 @@ import i18n from '@/translation/i18n';
 import BoxView from '@/components/view/BoxView';
 
 class ProfileManager {
+  getContainerStyles() {
+    return {
+      marginBottom: Layout.space.base*4,
+      paddingLeft: 0,
+      paddingRight: 0,
+    };
+  }
+
   renderFields() {
     return (
       <BoxView
         align="flex-start"
         justify="flex-start"
         scroll={true}
-        style={[Layout.screenContent]}
+        style={[Layout.screenContent, this.getContainerStyles()]}
       >
         <View style={Layout.formContainer}>
           {this.getFields().map((item: any) => {
