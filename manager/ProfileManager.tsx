@@ -10,23 +10,23 @@ class ProfileManager {
   renderFields() {
     return (
       <BoxView
-      align="flex-start"
-      justify="flex-start"
-      scroll={true}
-      style={[Layout.screenContent]}
-    >
-      <View style={Layout.formContainer}>
-        {this.getFields().map((item: any) => {
-          return (
-            <View key={item.key}>
-              <TextView>{i18n.t(item.label)}</TextView>
-              {item.render(item, {
-                onChange: this.onValueChange(item),
-              })}
-            </View>
-          );
-        })}
-      </View>
+        align="flex-start"
+        justify="flex-start"
+        scroll={true}
+        style={[Layout.screenContent]}
+      >
+        <View style={Layout.formContainer}>
+          {this.getFields().map((item: any) => {
+            return (
+              <View key={item.key}>
+                <TextView>{i18n.t(item.label)}</TextView>
+                {item.render(item, {
+                  onChange: this.onValueChange(item),
+                })}
+              </View>
+            );
+          })}
+        </View>
       </BoxView>
     );
   }
