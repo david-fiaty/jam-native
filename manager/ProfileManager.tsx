@@ -4,6 +4,7 @@ import InputTextField from '@/components/field/InputTextField';
 import TextView from '@/components/view/TextView';
 import i18n from '@/translation/i18n';
 import BoxView from '@/components/view/BoxView';
+import ProfileTypeField from '@/components/field/ProfileTypeField';
 
 class ProfileManager {
   getContainerStyles() {
@@ -61,8 +62,8 @@ class ProfileManager {
         label: i18n.t('Profile type'),
         render: (item: any, params: any) => {
           return (
-            <InputTextField
-              placeholder={item.label}
+            <ProfileTypeField
+
             />
           );
         },
