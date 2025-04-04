@@ -1,9 +1,12 @@
 
+Desktop 
+https://jammm.app
+
 Web mobile:
 https://mobile.jammm.app
 
-Expo Android:
-https://expo.dev/preview/update?message=Code%20cleanup&updateRuntimeVersion=1.0.0&createdAt=2025-03-20T14%3A31%3A38.153Z&slug=exp&projectId=bc105b9c-d776-42e2-bd2e-2ebcff179748&group=c4e7a020-87a1-4ec0-b310-e89bd5f1062e
+Expo IOS/Android:
+https://expo.dev/preview/update?message=Update%20ApiManager.tsx&updateRuntimeVersion=1.0.0&createdAt=2025-03-28T14%3A52%3A08.516Z&slug=exp&projectId=bc105b9c-d776-42e2-bd2e-2ebcff179748&group=6babe8e8-190d-4539-8abf-e24e88609929
 
 # Commands
 eas init --id "bc105b9c-d776-42e2-bd2e-2ebcff179748"
@@ -23,7 +26,6 @@ npm start --tunnel
 pm2 start "npx expo start --web" --name jam-mobile
 pm2 startup
 pm2 save
-
 
 # Google maps
 AIzaSyB91uv-OuWw6iNMjVZmuHJsRVDHP9baCq0
