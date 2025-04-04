@@ -38,6 +38,21 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: true,
+        key: 'profile_type',
+        label: i18n.t('Profile type'),
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
+      },
+      {
+        signup: true,
+        profile: true,
+        enabled: true,
+        required: true,
         key: 'profile_name',
         label: i18n.t('Profile name'),
         render: (item: any, params: any) => {
@@ -310,21 +325,6 @@ class ProfileManager {
         required: true,
         key: 'linkedin_link',
         label: i18n.t('Linkedin link'),
-        render: (item: any, params: any) => {
-          return (
-            <InputTextField
-              placeholder={item.label}
-            />
-          );
-        },
-      },
-      {
-        signup: true,
-        profile: true,
-        enabled: true,
-        required: true,
-        key: 'profile_type',
-        label: i18n.t('Profile type'),
         render: (item: any, params: any) => {
           return (
             <InputTextField
