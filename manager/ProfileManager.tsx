@@ -1,194 +1,235 @@
-import Endpoints from '@/constants/Endpoints';
-import { Config } from '@/constants/Config';
 import i18n from '@/translation/i18n';
 
 class ProfileManager {
+  renderFields() {
+    let fields: any = this.getFields();
+    let output: any = [];
+
+    for (const [key, item] of Object.entries(fields)) {
+      output.push(item.render(item));
+    }
+
+    return output;
+  }
+
   getFields() {
-    return {
-      profile_name: {
+    return [
+      {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
+        name: 'profile_name',
         label: i18n.t('Profile name'),
-        render: (args: any) => {},
-       },
-       profile_description: {
+        render: (item: any) => { },
+      },
+      {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
+        name: 'profile_description',
         label: i18n.t('About'),
-        render: (args: any) => {},
-       },
-       upload_profile_picture: {
+        render: (item: any) => { },
+      },
+      {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
+        name: 'upload_profile_picture',
         label: i18n.t('Profile picture'),
-        render: (args: any) => {},
-       },
-       upload_other_docs: {
+        render: (item: any) => { },
+      },
+      {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
+        name: 'upload_other_docs',
         label: i18n.t('Other documents'),
-        render: (args: any) => {},
-       },
-       sectors_ids: {
+        render: (item: any) => { },
+      },
+      {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
+        name: 'sectors_ids',
         label: i18n.t('Sectors'),
-        render: (args: any) => {},
-       },
-       scope_country_code: {
+        render: (item: any) => { },
+      },
+      {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
+        name: 'scope_country_code',
         label: i18n.t('Country'),
-        render: (args: any) => {},
-       },
-       region: {
+        render: (item: any) => { },
+      },
+      {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
+        name: 'region',
         label: i18n.t('Region'),
-        render: (args: any) => {},
-       },
-       town_or_locality: {
+        render: (item: any) => { },
+      },
+      {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
+        name: 'town_or_locality',
         label: i18n.t('Locality'),
-        render: (args: any) => {},
-       },
-       other_town_or_locality: {
+        render: (item: any) => { },
+      },
+      {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
+        name: 'other_town_or_locality',
         label: i18n.t('Other locality'),
-        render: (args: any) => {},
-       },
-       address: {
+        render: (item: any) => { },
+      },
+      {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
+        name: 'address',
         label: i18n.t('Address'),
-        render: (args: any) => {},
-       },
-       geolocation_latitude: {
+        render: (item: any) => { },
+      },
+      {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
+        name: 'geolocation_latitude',
         label: i18n.t('Latitude'),
-        render: (args: any) => {},
-       },
-       geolocation_longitude: {
+        render: (item: any) => { },
+      },
+      {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
+        name: 'geolocation_longitude',
         label: i18n.t('Longitude'),
-        render: (args: any) => {},
-       },
-       email: {
+        render: (item: any) => { },
+      },
+      {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
+        name: 'email',
         label: i18n.t('Email'),
-        render: (args: any) => {},
-       },
-       whatsapp_number: {
+        render: (item: any) => { },
+      },
+      {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
+        name: 'whatsapp_number',
         label: i18n.t('Whatsapp number'),
-        render: (args: any) => {},
-       },
-       phone_number: {
+        render: (item: any) => { },
+      },
+      {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
+        name: 'phone_number',
         label: i18n.t('Phone number'),
-        render: (args: any) => {},
-       },
-       website_link: {
+        render: (item: any) => { },
+      },
+      {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
+        name: 'website_link',
         label: i18n.t('Website link'),
-        render: (args: any) => {},
-       },
-       instagram_id: {
+        render: (item: any) => { },
+      },
+      {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
+        name: 'instagram_id',
         label: i18n.t('Instagram ID'),
-        render: (args: any) => {},
-       },
-       facebook_link: {
+        render: (item: any) => { },
+      },
+      {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
+        name: 'facebook_link',
         label: i18n.t('Facebook link'),
-        render: (args: any) => {},
-       },
-       linkedin_link: {
+        render: (item: any) => { },
+      },
+      {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
+        name: 'linkedin_link',
         label: i18n.t('Linkedin link'),
-        render: (args: any) => {},
-       },
-       profile_type: {
+        render: (item: any) => { },
+      },
+      {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
+        name: 'profile_type',
         label: i18n.t('Profile type'),
-        render: (args: any) => {},
-       },
-       profile_personal: {
+        render: (item: any) => { },
+      },
+      {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
+        name: 'profile_personal',
         label: i18n.t('Personal profile'),
-        render: (args: any) => {},
-       },
-       profile_organization: {
+        render: (item: any) => { },
+      },
+      {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
+        name: 'profile_organization',
         label: i18n.t('Organization profile'),
-        render: (args: any) => {},
-       },
-       profile_venue: {
+        render: (item: any) => { },
+      },
+      {
         signup: true,
         profile: true,
         enabled: true,
         required: true,
+        name: 'profile_venue',
         label: i18n.t('Venue profile'),
-        render: (args: any) => {},
-       },       
+        render: (item: any) => { },
+      },
+      {
+        signup: true,
+        profile: true,
+        enabled: true,
+        required: true,
+        name: 'password',
+        label: i18n.t('Password'),
+        render: (item: any) => { },
+      },
     };
   }
 };
