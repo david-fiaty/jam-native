@@ -1,18 +1,25 @@
-import InputTextField from '@/components/field/InputTextField';
-import i18n from '@/translation/i18n';
 import { View } from 'react-native';
+import { Layout } from '@/constants/Layout';
+import InputTextField from '@/components/field/InputTextField';
+import TextView from '@/components/view/TextView';
+import i18n from '@/translation/i18n';
 
 class ProfileManager {
   renderFields() {
-    return this.getFields().map((item: any) => {
-      return (
-        <View key={item.key}>
-          {item.render(item, {
-            onChange: this.onValueChange(item),
-          })}
-        </View>
-      );
-    });
+    return (
+      <View style={Layout.formContainer}>
+        {this.getFields().map((item: any) => {
+          return (
+            <View key={item.key}>
+              <TextView>{i18n.t(item.label)}</TextView>
+              {item.render(item, {
+                onChange: this.onValueChange(item),
+              })}
+            </View>
+          );
+        })}
+      </View>
+    );
   }
 
   getFields() {
