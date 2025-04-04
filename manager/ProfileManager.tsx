@@ -28,6 +28,13 @@ class ProfileManager {
     Store.dispatch(setFormData(payload));
   }
 
+  getFormValue(key: string) {
+    let formData: any = this.getFormData();
+    let formValue: any = formData?.[key] || '';
+
+    return formValue;
+  }
+
   getFormData() {
     return {...Store.getState().form?.profile};
   }
@@ -79,6 +86,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <InputTextField
+              value={this.getFormValue(item.key)}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -96,6 +104,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <ProfileTypeField
+              value={this.getFormValue(item.key)}
               onChangeValue={(option: any) => this.setFormData(item, option.value)}
             />
           );
@@ -112,6 +121,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <InputTextField
+              value={this.getFormValue(item.key)}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -129,6 +139,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <InputTextareaField
+              value={this.getFormValue(item.key)}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -146,6 +157,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <InputTextField
+              value={this.getFormValue(item.key)}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -163,6 +175,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <InputTextField
+              value={this.getFormValue(item.key)}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -180,6 +193,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <InputTextField
+              value={this.getFormValue(item.key)}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -197,6 +211,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <InputTextField
+              value={this.getFormValue(item.key)}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -214,6 +229,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <InputTextField
+              value={this.getFormValue(item.key)}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -231,6 +247,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <InputTextField
+              value={this.getFormValue(item.key)}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -248,6 +265,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <InputTextField
+              value={this.getFormValue(item.key)}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -265,6 +283,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <InputTextField
+              value={this.getFormValue(item.key)}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -282,6 +301,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <InputTextField
+              value={this.getFormValue(item.key)}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -299,6 +319,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <InputTextField
+              value={this.getFormValue(item.key)}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -316,6 +337,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <InputTextField
+              value={this.getFormValue(item.key)}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -333,6 +355,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <InputTextField
+              value={this.getFormValue(item.key)}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -350,6 +373,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <InputTextField
+              value={this.getFormValue(item.key)}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -367,6 +391,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <InputTextField
+              value={this.getFormValue(item.key)}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -384,6 +409,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <InputTextField
+              value={this.getFormValue(item.key)}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -401,6 +427,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <InputTextField
+              value={this.getFormValue(item.key)}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -418,6 +445,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <InputTextField
+              value={this.getFormValue(item.key)}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -435,6 +463,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <InputTextField
+              value={this.getFormValue(item.key)}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -452,6 +481,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <InputTextField
+              value={this.getFormValue(item.key)}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -469,6 +499,7 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <InputTextField
+              value={this.getFormValue(item.key)}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
