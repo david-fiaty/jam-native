@@ -1,4 +1,13 @@
 PERSON
+  first name
+  last name
+  profile name
+  about
+  address
+  activity sectors
+  country 
+  password
+  geolocation
 
 ORGANIZATION
 
