@@ -40,6 +40,8 @@ class ProfileManager {
   }
 
   renderFields() {
+    let formData: any = this.getFormData();
+
     return (
       <BoxView
         align="flex-start"
@@ -49,19 +51,19 @@ class ProfileManager {
       >
         <View style={Layout.formContainer}>
           {this.getFields().map((item: any) => {
-            return this.renderField(item);
+            return this.renderField(item, formData);
           })}
         </View>
       </BoxView>
     );
   }
 
-  canRenderField(item: any) {
+  canRenderField(item: any, formData: any) {
     return item.enabled === true;
   }
 
-  renderField(item: any) { 
-    if (this.canRenderField(item)) {
+  renderField(item: any, formData: any) { 
+    if (this.canRenderField(item, formData)) {
       return (
         <View key={item.key}>
           <TextView>{i18n.t(item.label)} {item?.required === true ? '*' : ''}</TextView>
