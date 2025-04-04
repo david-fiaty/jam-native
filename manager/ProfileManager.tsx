@@ -68,7 +68,7 @@ class ProfileManager {
       return (
         <View key={item.key}>
           <TextView>{i18n.t(item.label)} {item?.required === true ? '*' : ''}</TextView>
-            {item.render(item, {})}
+          {item.render(item, {})}
         </View>
       );
     }
