@@ -56,6 +56,22 @@ class ProfileManager {
     return [
       {
         signup: true,
+        profile: true,
+        enabled: true,
+        required: false,
+        key: 'upload_profile_picture',
+        label: i18n.t('Profile picture'),
+        groups: ['all'],
+        render: (item: any, params: any) => {
+          return (
+            <InputTextField
+              placeholder={item.label}
+            />
+          );
+        },
+      },
+      {
+        signup: true,
         profile: false,
         enabled: true,
         required: true,
@@ -97,22 +113,6 @@ class ProfileManager {
         render: (item: any, params: any) => {
           return (
             <InputTextareaField
-              placeholder={item.label}
-            />
-          );
-        },
-      },
-      {
-        signup: true,
-        profile: true,
-        enabled: true,
-        required: false,
-        key: 'upload_profile_picture',
-        label: i18n.t('Profile picture'),
-        groups: ['all'],
-        render: (item: any, params: any) => {
-          return (
-            <InputTextField
               placeholder={item.label}
             />
           );
