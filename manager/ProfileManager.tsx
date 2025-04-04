@@ -6,12 +6,12 @@ class ProfileManager {
     return {
       profile_name: {},
       profile_description: {},
-      upload_profile_picture: null,
-      upload_other_docs: null,
-      sectors_ids: [1, 12],
+      upload_profile_picture: {},
+      upload_other_docs: {},
+      sectors_ids: {},
       scope_country_code: {},
-      region: 2,
-      town_or_locality: 2,
+      region: {},
+      town_or_locality: {},
       other_town_or_locality: {},
       address: {},
       geolocation_latitude: {},
@@ -26,7 +26,7 @@ class ProfileManager {
       profile_type: {},
       profile_personal: {},
       profile_organization: {},
-      profile_venue: {},      
+      profile_venue: {},
     };
   }
 };
