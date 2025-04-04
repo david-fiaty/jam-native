@@ -1,5 +1,3 @@
-import Endpoints from '@/constants/Endpoints';
-import { Config } from '@/constants/Config';
 import i18n from '@/translation/i18n';
 
 class ProfileManager {
