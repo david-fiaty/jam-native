@@ -1,3 +1,5 @@
+image upload
+
 PERSON
   first name
   last name
@@ -10,6 +12,26 @@ PERSON
   geolocation
 
 ORGANIZATION
+  organization name
+  profile name
+  about
+  address
+  activity sectors
+  country 
+  password
+  geolocation
 
 VENUE
+  venue name
+  venue location
+  about
+  address
+  activity sectors
+  venue types
+  country 
+  password
+  geolocation
+
+
+geolocation
 
