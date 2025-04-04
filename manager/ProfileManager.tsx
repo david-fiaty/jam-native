@@ -3,6 +3,17 @@ import { Config } from '@/constants/Config';
 import i18n from '@/translation/i18n';
 
 class ProfileManager {
+  renderFields() {
+    let fields: any = this.getFields();
+    let output: any = [];
+
+    for (const [key, item] of Object.entries(fields)) {
+      output.push(item.render(item));
+    }
+
+    return output;
+  }
+
   getFields() {
     return {
       profile_name: {
@@ -11,7 +22,7 @@ class ProfileManager {
         enabled: true,
         required: true,
         label: i18n.t('Profile name'),
-        render: (args: any) => {},
+        render: (item: any) => {},
        },
        profile_description: {
         signup: true,
@@ -19,7 +30,7 @@ class ProfileManager {
         enabled: true,
         required: true,
         label: i18n.t('About'),
-        render: (args: any) => {},
+        render: (item: any) => {},
        },
        upload_profile_picture: {
         signup: true,
@@ -27,7 +38,7 @@ class ProfileManager {
         enabled: true,
         required: true,
         label: i18n.t('Profile picture'),
-        render: (args: any) => {},
+        render: (item: any) => {},
        },
        upload_other_docs: {
         signup: true,
@@ -35,7 +46,7 @@ class ProfileManager {
         enabled: true,
         required: true,
         label: i18n.t('Other documents'),
-        render: (args: any) => {},
+        render: (item: any) => {},
        },
        sectors_ids: {
         signup: true,
@@ -43,7 +54,7 @@ class ProfileManager {
         enabled: true,
         required: true,
         label: i18n.t('Sectors'),
-        render: (args: any) => {},
+        render: (item: any) => {},
        },
        scope_country_code: {
         signup: true,
@@ -51,7 +62,7 @@ class ProfileManager {
         enabled: true,
         required: true,
         label: i18n.t('Country'),
-        render: (args: any) => {},
+        render: (item: any) => {},
        },
        region: {
         signup: true,
@@ -59,7 +70,7 @@ class ProfileManager {
         enabled: true,
         required: true,
         label: i18n.t('Region'),
-        render: (args: any) => {},
+        render: (item: any) => {},
        },
        town_or_locality: {
         signup: true,
@@ -67,7 +78,7 @@ class ProfileManager {
         enabled: true,
         required: true,
         label: i18n.t('Locality'),
-        render: (args: any) => {},
+        render: (item: any) => {},
        },
        other_town_or_locality: {
         signup: true,
@@ -75,7 +86,7 @@ class ProfileManager {
         enabled: true,
         required: true,
         label: i18n.t('Other locality'),
-        render: (args: any) => {},
+        render: (item: any) => {},
        },
        address: {
         signup: true,
@@ -83,7 +94,7 @@ class ProfileManager {
         enabled: true,
         required: true,
         label: i18n.t('Address'),
-        render: (args: any) => {},
+        render: (item: any) => {},
        },
        geolocation_latitude: {
         signup: true,
@@ -91,7 +102,7 @@ class ProfileManager {
         enabled: true,
         required: true,
         label: i18n.t('Latitude'),
-        render: (args: any) => {},
+        render: (item: any) => {},
        },
        geolocation_longitude: {
         signup: true,
@@ -99,7 +110,7 @@ class ProfileManager {
         enabled: true,
         required: true,
         label: i18n.t('Longitude'),
-        render: (args: any) => {},
+        render: (item: any) => {},
        },
        email: {
         signup: true,
@@ -107,7 +118,7 @@ class ProfileManager {
         enabled: true,
         required: true,
         label: i18n.t('Email'),
-        render: (args: any) => {},
+        render: (item: any) => {},
        },
        whatsapp_number: {
         signup: true,
@@ -115,7 +126,7 @@ class ProfileManager {
         enabled: true,
         required: true,
         label: i18n.t('Whatsapp number'),
-        render: (args: any) => {},
+        render: (item: any) => {},
        },
        phone_number: {
         signup: true,
@@ -123,7 +134,7 @@ class ProfileManager {
         enabled: true,
         required: true,
         label: i18n.t('Phone number'),
-        render: (args: any) => {},
+        render: (item: any) => {},
        },
        website_link: {
         signup: true,
@@ -131,7 +142,7 @@ class ProfileManager {
         enabled: true,
         required: true,
         label: i18n.t('Website link'),
-        render: (args: any) => {},
+        render: (item: any) => {},
        },
        instagram_id: {
         signup: true,
@@ -139,7 +150,7 @@ class ProfileManager {
         enabled: true,
         required: true,
         label: i18n.t('Instagram ID'),
-        render: (args: any) => {},
+        render: (item: any) => {},
        },
        facebook_link: {
         signup: true,
@@ -147,7 +158,7 @@ class ProfileManager {
         enabled: true,
         required: true,
         label: i18n.t('Facebook link'),
-        render: (args: any) => {},
+        render: (item: any) => {},
        },
        linkedin_link: {
         signup: true,
@@ -155,7 +166,7 @@ class ProfileManager {
         enabled: true,
         required: true,
         label: i18n.t('Linkedin link'),
-        render: (args: any) => {},
+        render: (item: any) => {},
        },
        profile_type: {
         signup: true,
@@ -163,7 +174,7 @@ class ProfileManager {
         enabled: true,
         required: true,
         label: i18n.t('Profile type'),
-        render: (args: any) => {},
+        render: (item: any) => {},
        },
        profile_personal: {
         signup: true,
@@ -171,7 +182,7 @@ class ProfileManager {
         enabled: true,
         required: true,
         label: i18n.t('Personal profile'),
-        render: (args: any) => {},
+        render: (item: any) => {},
        },
        profile_organization: {
         signup: true,
@@ -179,7 +190,7 @@ class ProfileManager {
         enabled: true,
         required: true,
         label: i18n.t('Organization profile'),
-        render: (args: any) => {},
+        render: (item: any) => {},
        },
        profile_venue: {
         signup: true,
@@ -187,7 +198,7 @@ class ProfileManager {
         enabled: true,
         required: true,
         label: i18n.t('Venue profile'),
-        render: (args: any) => {},
+        render: (item: any) => {},
        },       
     };
   }
