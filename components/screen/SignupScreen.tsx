@@ -81,7 +81,7 @@ const SignupScreen = () => {
         >
           <View style={Layout.formContainer}>
             {ProfileManager.getFields().map((item: any) => {
-              return ProfileManager.renderField(item, formData);
+              return ProfileManager.renderField(module, item, formData);
             })}
           </View>
         </BoxView>
