@@ -28,7 +28,9 @@ class ProfileManager {
   }
 
   canRenderField(mode: string, item: any, formData: any) {
-    return item.enabled === true && (item.group === 'all' || item.group === formData?.['profile_type']);
+    return item.enabled === true 
+      && item[mode] === true
+      && (item.group === 'all' || item.group === formData?.['profile_type']);
   }
 
   renderField(mode: string, item: any, formData: any) { 
