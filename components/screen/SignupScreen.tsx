@@ -56,8 +56,6 @@ const SignupScreen = () => {
     }
   }
 
-  console.log(formData);
-
   return (
     <BoxView
       direction="column"
@@ -83,7 +81,7 @@ const SignupScreen = () => {
         >
           <View style={Layout.formContainer}>
             {ProfileManager.getFields().map((item: any) => {
-              return ProfileManager.renderField(item, formData);
+              return ProfileManager.renderField('signup', item, formData);
             })}
           </View>
         </BoxView>
