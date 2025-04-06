@@ -56,6 +56,8 @@ const SignupScreen = () => {
     }
   }
 
+  console.log(formData);
+
   return (
     <BoxView
       direction="column"
@@ -65,6 +67,7 @@ const SignupScreen = () => {
       style={Layout.screenContent}
     >
       <LogoView size={80} />
+
       <TextView style={styles.wecomeMessage}>
         {i18n.t("Create an account")}
       </TextView>
