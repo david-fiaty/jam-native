@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
+import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import { View } from "react-native";
@@ -22,10 +23,18 @@ import DividerView from "../view/DividerView";
 import ProfileTypeField from "../field/ProfileTypeField";
 import CountryField from "../field/CountryField";
 
+import ProfileManager from "@/manager/ProfileManager";
+
+import PersonSignup from "./signup/PersonSignup";
+import OrganizationSignup from "./signup/OrganizationSignup";
+import VenueSignup from "./signup/VenueSignup";
+import ProfileForm from "../form/ProfileForm";
+
 const SignupScreen = () => {
   const router = useRouter();
   const [signupData, setSignupData] = useState<any>({});
   const [isProcessing, setIsProcessing] = useState(false);
+  const formData = useSelector((state: any) => state.form.profile);
 
   const updateField = (key: string, value: any) => {
     setSignupData({ ...signupData, ...{ [key]: value } });
@@ -35,7 +44,7 @@ const SignupScreen = () => {
     setIsProcessing(true);
     let result: any = await UserManager.register(signupData);
     setIsProcessing(false);
-    
+
     if (result?.error) {
       ScreenManager.showMessage({
         title: i18n.t('Profile registration'),
@@ -45,7 +54,7 @@ const SignupScreen = () => {
     else {
       router.replace(Config.mainRoute);
     }
-  }  
+  }
 
   return (
     <BoxView
@@ -56,6 +65,7 @@ const SignupScreen = () => {
       style={Layout.screenContent}
     >
       <LogoView size={80} />
+
       <TextView style={styles.wecomeMessage}>
         {i18n.t("Create an account")}
       </TextView>
@@ -63,143 +73,18 @@ const SignupScreen = () => {
       <DividerView />
 
       <View style={Layout.formContainer}>
-        <InputTextField
-          containerStyle={styles.inputTextFieldContainer}
-          placeholder={i18n.t("User name")}
-          value={signupData?.email}
-          onChangeText={(value: string) => updateField("username", value)}
-        />
-
-        <InputTextField
-          containerStyle={styles.inputTextFieldContainer}
-          placeholder={i18n.t("Email address")}
-          value={signupData?.email}
-          onChangeText={(value: string) => updateField("email", value)}
-        />
-
-        <InputTextField
-          containerStyle={styles.inputTextFieldContainer}
-          placeholder={i18n.t("Password")}
-          secureTextEntry={true}
-          autoCapitalize={false}
-          spellCheck={false}
-          value={signupData?.password}
-          onChangeText={(value: string) => updateField("password", value)}
-        />
-
-        <DividerView theme="secondary" />
-
-        <InputTextField
-          containerStyle={styles.inputTextFieldContainer}
-          placeholder={i18n.t("Profile name")}
-          value={signupData?.profile?.profile_name}
-          onChangeText={(value: string) =>
-            updateField("profile", {
-              ...(signupData?.profile || {}),
-              ...{ profile_name: value },
-            })
-          }
-        />
-
-        <ProfileTypeField
-          value={signupData?.profile?.profile_type}
-          onChangeValue={(option: any) =>
-            updateField("profile", {
-              ...(signupData?.profile || {}),
-              ...{ profile_type: option.value },
-            })
-          }
-        />
-
-        {signupData?.profile?.profile_type == "personal" && (
-          <InputTextField
-            containerStyle={styles.inputTextFieldContainer}
-            placeholder={i18n.t("First name")}
-            value={signupData?.profile?.profile_personal?.first_name}
-            onChangeText={(value: string) => {
-              let profilePersonal = Object.assign(
-                {},
-                signupData?.profile?.profile_personal || {}
-              );
-              profilePersonal["first_name"] = value;
-              updateField("profile", {
-                ...(signupData?.profile || {}),
-                ...{ profile_personal: profilePersonal },
-              });
-            }}
-          />
-        )}
-
-        {signupData?.profile?.profile_type == "personal" && (
-          <InputTextField
-            containerStyle={styles.inputTextFieldContainer}
-            placeholder={i18n.t("Last name")}
-            value={signupData?.profile?.profile_personal?.last_name}
-            onChangeText={(value: string) => {
-              let profilePersonal = Object.assign(
-                {},
-                signupData?.profile?.profile_personal || {}
-              );
-              profilePersonal["last_name"] = value;
-              updateField("profile", {
-                ...(signupData?.profile || {}),
-                ...{ profile_personal: profilePersonal },
-              });
-            }}
-          />
-        )}
-
-        <CountryField
-          value={signupData?.profile?.scope_country_code}
-          onChangeValue={(option: any) =>
-            updateField("profile", {
-              ...(signupData?.profile || {}),
-              ...{ scope_country_code: option.value },
-            })
-          }
-        />
-
-        <DividerView theme="secondary" />
-
-{ /*
-        <SectorsField
-          onPressEvent={() => ScreenManager.toggleModal("SectorsList", {
-            reducer: 'signupForm',
-          })}
-        />
-
-        <DividerView theme="secondary" />
-        */ }
-
-
-        <ButtonView
-          label={i18n.t("Continue")}
-          isProcessing={isProcessing}
-          onPress={() => {
-            setIsProcessing(true);
-            submitForm();
-          }}
-        />
-
         <BoxView
-          direction="row"
-          align="center"
-          justify="space-between"
-          style={{ width: "100%" }}
+          align="flex-start"
+          justify="flex-start"
+          scroll={true}
+          style={[Layout.screenContent, ProfileManager.getContainerStyles()]}
         >
-          <BoxView direction="row" align="center" justify="flex-start">
-            <TextView>{i18n.t("Already have an account?")}</TextView>
-            <LinkView onPress={async () => router.replace("/login")}>
-              {i18n.t("Sign in")}
-            </LinkView>
-          </BoxView>
-          <SkipButton onPress={async () => router.replace(Config.mainRoute)} />
+          <View style={Layout.formContainer}>
+            {ProfileManager.getFields().map((item: any) => {
+              return ProfileManager.renderField('signup', item, formData);
+            })}
+          </View>
         </BoxView>
-
-        <DividerView />
-        <GoogleLoginButton />
-        <FacebookLoginButton />
-        <InstagramLoginButton />
       </View>
     </BoxView>
   );
