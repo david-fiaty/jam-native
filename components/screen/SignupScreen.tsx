@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
+import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import { View } from "react-native";
@@ -33,6 +34,7 @@ const SignupScreen = () => {
   const router = useRouter();
   const [signupData, setSignupData] = useState<any>({});
   const [isProcessing, setIsProcessing] = useState(false);
+  const formData = useSelector((state: any) => state.form.profile);
 
   const updateField = (key: string, value: any) => {
     setSignupData({ ...signupData, ...{ [key]: value } });
@@ -42,7 +44,7 @@ const SignupScreen = () => {
     setIsProcessing(true);
     let result: any = await UserManager.register(signupData);
     setIsProcessing(false);
-    
+
     if (result?.error) {
       ScreenManager.showMessage({
         title: i18n.t('Profile registration'),
@@ -52,7 +54,7 @@ const SignupScreen = () => {
     else {
       router.replace(Config.mainRoute);
     }
-  }  
+  }
 
   return (
     <BoxView
@@ -70,8 +72,18 @@ const SignupScreen = () => {
       <DividerView />
 
       <View style={Layout.formContainer}>
-        {ProfileManager.renderFields()}
-
+        <BoxView
+          align="flex-start"
+          justify="flex-start"
+          scroll={true}
+          style={[Layout.screenContent, ProfileManager.getContainerStyles()]}
+        >
+          <View style={Layout.formContainer}>
+            {ProfileManager.getFields().map((item: any) => {
+              return ProfileManager.renderField(item, formData);
+            })}
+          </View>
+        </BoxView>
       </View>
     </BoxView>
   );
