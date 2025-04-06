@@ -28,8 +28,7 @@ class ProfileManager {
   }
 
   canRenderField(item: any, formData: any) {
-    return item.enabled === true 
-      && (item.group === 'all' || item.group === formData?.['profile_type']);
+    return item.enabled === true && (item.group === 'all' || item.group === formData?.['profile_type']);
   }
 
   renderField(item: any, formData: any) { 
@@ -119,7 +118,7 @@ class ProfileManager {
         },
       },
       {
-        signup: true,
+        signup: false,
         profile: true,
         enabled: true,
         required: false,
@@ -173,7 +172,7 @@ class ProfileManager {
         },
       },
       {
-        signup: true,
+        signup: false,
         profile: true,
         enabled: true,
         required: false,
@@ -191,7 +190,7 @@ class ProfileManager {
         },
       },
       {
-        signup: true,
+        signup: false,
         profile: true,
         enabled: true,
         required: false,
@@ -209,7 +208,7 @@ class ProfileManager {
         },
       },
       {
-        signup: true,
+        signup: false,
         profile: true,
         enabled: true,
         required: false,
@@ -299,7 +298,7 @@ class ProfileManager {
         },
       },
       {
-        signup: true,
+        signup: false,
         profile: true,
         enabled: true,
         required: false,
@@ -317,7 +316,7 @@ class ProfileManager {
         },
       },
       {
-        signup: true,
+        signup: false,
         profile: true,
         enabled: true,
         required: false,
@@ -335,7 +334,7 @@ class ProfileManager {
         },
       },
       {
-        signup: true,
+        signup: false,
         profile: true,
         enabled: true,
         required: false,
@@ -353,7 +352,7 @@ class ProfileManager {
         },
       },
       {
-        signup: true,
+        signup: false,
         profile: true,
         enabled: true,
         required: false,
@@ -371,7 +370,7 @@ class ProfileManager {
         },
       },
       {
-        signup: true,
+        signup: false,
         profile: true,
         enabled: true,
         required: false,
@@ -389,7 +388,7 @@ class ProfileManager {
         },
       },
       {
-        signup: true,
+        signup: false,
         profile: true,
         enabled: true,
         required: false,
