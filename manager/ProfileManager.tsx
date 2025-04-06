@@ -27,12 +27,12 @@ class ProfileManager {
     Store.dispatch(setFormData(payload));
   }
 
-  canRenderField(item: any, formData: any) {
+  canRenderField(mode: string, item: any, formData: any) {
     return item.enabled === true && (item.group === 'all' || item.group === formData?.['profile_type']);
   }
 
-  renderField(item: any, formData: any) { 
-    if (this.canRenderField(item, formData)) {
+  renderField(mode: string, item: any, formData: any) { 
+    if (this.canRenderField(mode, item, formData)) {
       return (
         <View key={item.key}>
           <TextView>{i18n.t(item.label)} {item?.required === true ? '*' : ''}</TextView>
