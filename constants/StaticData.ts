@@ -48,6 +48,10 @@ const StaticData = {
       id: 'organization',
       label: i18n.t('Organization'),
     },
+    {
+      id: 'venue',
+      label: i18n.t('Venue'),
+    },
   ],
   locationTypes: [
     {
