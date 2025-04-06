@@ -779,7 +779,7 @@ Content-Type: application/json
         "profile_type": "venue",
         "profile_venue": {"venue_name":"ABCD"}
     },
-    "phone_without_country_code": "90242798",
+    "phone_without_country_code": "70798762",
     "country_code": "+228",
     "password": "abcdef",
     "session": "b9f2f805a3324c5eb23520132c3dede3"
@@ -790,7 +790,7 @@ Content-Type: application/json
 POST http://0.0.0.0:8000/api/v1/send-registration-verification/
 Content-Type: application/json
 
-{"phone_without_country_code":"90242798", "country_code": "+228", "phone_service": "sms"}
+{"phone_without_country_code":"70798762", "country_code": "+228", "phone_service": "sms"}
 
 ### Verify registration code (registration with phone)
 POST http://0.0.0.0:8000/api/v1/verify-registration/
@@ -818,6 +818,92 @@ Content-Type: application/json
 
 {"refresh":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyNTk4NTUzNiwiaWF0IjoxNzI1ODk5MTM2LCJqdGkiOiI1ZTAzM2VjMjNmMmU0ZTlhOTU4YzJhNDMyN2NkZDM0YyIsInVzZXJfaWQiOjR9.u36yrYQZiD97El95rszUwuIOZuCuUPO-g_oraPJot7w"}
 
+
+### Social login or register first step (instagram)
+POST http://0.0.0.0:8000/api/v1/social-login-or-register-first-step/
+Content-Type: application/json
+
+{
+    "provider": "instagram",
+    "authorization_code": "AQAtHtT7Ne0Z10KMi3uIPama3YK8DLq9L2BWMkGb4rsqXTWx8qjBKBvoQ1ppqcaMD9s5BR-38yq9p8XlCCyB1pTGv92jWEurn_qu-eVyT2ub9dff50Wq0pep5iv4PjcxpWpQqSM9RHWrvKOtX_LVNdTEWBdYXRY4ospqVH4yqLWI9aUk-KKpQAjefjP2psiuC8Is6gjob5Ctz_DkmW43MuxdAOmsRmhRO9pvAMvDv-iouA"
+}
+
+### Social register second step (instagram)
+# Check full fields available (see profile update above)
+POST http://0.0.0.0:8000/api/v1/social-register-second-step/
+Content-Type: application/json
+
+{
+    "profile": {
+        "sectors_ids": [1, 3],
+        "profile_name": "1234",
+        "scope_country_code": "gh",
+        "geolocation_latitude": "9.80",
+        "geolocation_longitude": "2.80",
+        "profile_type": "venue",
+        "profile_venue": {"venue_name":"ABCD"}
+    },
+    "provider": "instagram",
+    "social_account_creation_token": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..bJzTJbeSjbsUyuEj.cxMJfRFPjDO3nPZPbCOtXfItxAYv-dJl-O58ya16v6Z79qooSKoOA7jPA1j9fkIMfoHmr-Tau3rw6ff2qGDYYA23wInLmfeSc-B-lY14lnTpmguKO-PFUvWQ7PjjzPdMX3HNoNxg3EZStbZlgOzKq0mawYrR6v-gThuUSagZWZVDMtotx97_XLl6T12IkbYBNjDgkNXgPjdWO3qR4B71I1U1piaNcS-cOfzrMr9Sm2F_EBYF96bhRQx5TrYhWd-tZAWfLjAwm1uauMH1YVIxCv8Y4wFvFdLwyS-VtZ9HukeT33_c50X2MOEbHGVKYTz46RNZ9BrLCCYF_dTzINQESlT_66W-DsYV2koGjfEqbWML14F6LPmI_H0K2UV8gc7GuVPetJ6z5ydfAzCijVo00HBlAnehK1BaXvtq6nsSWrC_4eyL_PRChh8L2yvpvvotwXqhTdN6qyIGNmwphTv_5elUKWyiFhmpZBuSrUea3_IR7u78zIPANtTW0Z9uu1MqiQRg0cghjosRjYpjBi57VuEUVk4EnPHzgQ.8dPsrvkjLBtYwYO5eKXerQ"
+}
+
+
+### Social login or register first step (facebook)
+POST http://0.0.0.0:8000/api/v1/social-login-or-register-first-step/
+Content-Type: application/json
+
+{
+    "provider": "facebook",
+    "authorization_code": "AQB5N5dfVHaCE546-di5uAl1b_VWd0y091e5gXsPJxL4WY0bcS0ePFFurm_zdPF6GorYWNqrKC5s8WwUcY82_wr-uIjUOSHsMYGmOz3up3lUXu4W7An05-lYASnG5uOXTPJOJgS3WlP8ItENCeHFKMc9tCI9fNQXNFUofR7Ya8ssicm_EP6J3BwdEzCAs-vClyRBm8_pnW6s5LsmHCRn-Q-7b4b_Vz5NBl8RPXKEo70zLFT063UG7002W5b7bGW5MZnb0m-GiqFISP7z-o0a5clLF42UZ0iuIpFEp1khWphWEYbfCSEFETVG9orvVl37DKiQ3bkca0kH4sdeFVGoNJDXAHMco6ckravtjn_QVoAJo29iOvRLxKXeJ0ZPss7H0qZ6IuzuGKIyoQ2Nmp_poTKGKMNUtQfy_sXz9pIRNH0AUg"
+}
+
+### Social register second step (facebook)
+# Check full fields available (see profile update above)
+POST http://0.0.0.0:8000/api/v1/social-register-second-step/
+Content-Type: application/json
+
+{
+    "profile": {
+        "sectors_ids": [1, 3],
+        "profile_name": "1234",
+        "scope_country_code": "gh",
+        "geolocation_latitude": "9.80",
+        "geolocation_longitude": "2.80",
+        "profile_type": "venue",
+        "profile_venue": {"venue_name":"ABCD"}
+    },
+    "provider": "facebook",
+    "social_account_creation_token": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..hRNdqz13QVPfb9aa.EktFGUVUEmI1YbaHINhRPR_bfpuTqryd7E3v-NdRvs9PTMhXDJr8u9PGyeGY2sVFCJqVniQXUaFGFtKG8wMWCOWsY69-2kp4JdUgWSVaLCs_ipQkcPFSNmLXXOE7ibKTNbs4WEeM52DnkKIHHxD1xf-NplsSigQrHycm6mtq0yJ9PbGKfQOZKdvjhfaBwJ6WDC-gww4RJjT7yhpK-iuVzCBdgj8IHQnU4yHtw5ZX11SEeujYrPf2DkoCay2E-77n8OaohNXKIF8XbXMuUo5MZLJF7vAIMFpGoDTnnyPUsPJscgsSyrdE4hW7geo7AwGZiiLimSdsfvn6H3SG-d0wCeyP2DJm4crdef-xWG7b8u5f1Klz_1v31XJS08L3yeiA2hUdLTZcRcQCy2MEeekcGsBu-89xRTfL4jcyPrL6Bn5fWC0lt9CGKraQXaPWQYeiEOptZbDiObHWLoXAU8QZlOqSIAPeYtr5_LDYiNV2rxEzm5dz2v5O0fjRHzmRW-16HrZno_GLpXmc5QYwWJ_7mu04bQYnetAL0t0Z6kFwidNiQSeW_GkjnMw084J4LCfInxK8p-eHhvTn2Ykl3-SSVG0Z_KZEHpQAnb40P-NTwUkLxfpaWuRT7jwfPHdDb9sDY_VgXKomy8NYtbj5gNBmVPxH4S4.lFpfkNFvzI_PWqlPBnEAxg"
+}
+
+
+### Social login or register first step (google)
+POST http://0.0.0.0:8000/api/v1/social-login-or-register-first-step/
+Content-Type: application/json
+
+{
+    "provider": "facebook",
+    "authorization_code": "AQDvlhmWEOysFyWkXsFYb5WzKw-B4p1sY7l-6QxY6vbG0FYePXVYoTvTr-PcmBgDZxPPAWxEe61LJPJ0f6Vn40A4FtyACrJs4-ce6mYKb6m9hP2BfIghno9iSP-U8MwLtKsTafDa-515WCVewp1swQFp9EJImbTr1HVvcPNFYKNMfnfS3sFsc5E76yqkWbJjm3rkScWLGj2qa5H1Re9kpdzGAXVhPtDF4wH4rJTKrgyZCaWqzpSisGy1VsS7rrLL6fGgx1yH0oOepk3Td0c1E99xM9Ofyc8ln0QOf4qgu-UBDJEd7SeKXBMSuD5BvHnCE5QO4lLlGq-hSu4tbhTu2ElHBRRrOYPsQDb3LEeZagMQHP7zQE-xJ1iFO22o21iWqCJvTXkscUQBRe_2JZbBVNWRkuzZmJXHe6lm9pxCJHYO9w"
+}
+
+### Social register second step (google)
+# Check full fields available (see profile update above)
+POST http://0.0.0.0:8000/api/v1/social-register-second-step/
+Content-Type: application/json
+
+{
+    "profile": {
+        "sectors_ids": [1, 3],
+        "profile_name": "1234",
+        "scope_country_code": "gh",
+        "geolocation_latitude": "9.80",
+        "geolocation_longitude": "2.80",
+        "profile_type": "venue",
+        "profile_venue": {"venue_name":"ABCD"}
+    },
+    "provider": "facebook",
+    "social_account_creation_token": "AQDvlhmWEOysFyWkXsFYb5WzKw-B4p1sY7l-6QxY6vbG0FYePXVYoTvTr-PcmBgDZxPPAWxEe61LJPJ0f6Vn40A4FtyACrJs4-ce6mYKb6m9hP2BfIghno9iSP-U8MwLtKsTafDa-515WCVewp1swQFp9EJImbTr1HVvcPNFYKNMfnfS3sFsc5E76yqkWbJjm3rkScWLGj2qa5H1Re9kpdzGAXVhPtDF4wH4rJTKrgyZCaWqzpSisGy1VsS7rrLL6fGgx1yH0oOepk3Td0c1E99xM9Ofyc8ln0QOf4qgu-UBDJEd7SeKXBMSuD5BvHnCE5QO4lLlGq-hSu4tbhTu2ElHBRRrOYPsQDb3LEeZagMQHP7zQE-xJ1iFO22o21iWqCJvTXkscUQBRe_2JZbBVNWRkuzZmJXHe6lm9pxCJHYO9w"
+}
 
 ### Get current user info
 GET http://0.0.0.0:8000/api/v1/get-current-user-info/
@@ -909,7 +995,7 @@ PUT http://0.0.0.0:8000/api/v1/forgot-password/
 Content-Type: application/json
 
 {
-    "phone_without_country_code": "90127894",
+    "phone_without_country_code": "70798762",
     "country_code": "+228",
     "new_password": "abcdef",
     "session": "b9f2f805a3324c5eb23520132c3dede3"
