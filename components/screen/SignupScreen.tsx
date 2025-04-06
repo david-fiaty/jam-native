@@ -56,8 +56,6 @@ const SignupScreen = () => {
     }
   }
 
-  console.log(formData);
-
   return (
     <BoxView
       direction="column"
