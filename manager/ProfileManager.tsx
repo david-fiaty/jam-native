@@ -165,6 +165,7 @@ class ProfileManager {
                 resource: 'profile',
                 field: 'sectors_ids',
               })}
+              onChangeEvent={(value: string) => this.setFormData(item, value)}
               onDeleteEvent={(item: any) => {
                 const sectorsIds: any[] = [...data[item.key] || []];
                 const index: number = sectorsIds.findIndex((v) => v === item.id);
