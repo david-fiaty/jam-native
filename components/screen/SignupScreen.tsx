@@ -1,39 +1,27 @@
 import { useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
-import { View } from "react-native";
 import { Config } from "@/constants/Config";
 import LogoView from "../view/LogoView";
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
-import InputTextField from "../field/InputTextField";
-import SkipButton from "../button/SkipButton";
-import GoogleLoginButton from "../button/GoogleLoginButton";
-import FacebookLoginButton from "../button/FacebookLoginButton";
-import InstagramLoginButton from "../button/InstagramLoginButton";
 import UserManager from "@/manager/UserManager";
-import LinkView from "../view/LinkView";
-import ButtonView from "../view/ButtonView";
 import ScreenManager from "@/manager/ScreenManager";
 import DividerView from "../view/DividerView";
-import ProfileTypeField from "../field/ProfileTypeField";
-import CountryField from "../field/CountryField";
-
 import ProfileManager from "@/manager/ProfileManager";
-
-import PersonSignup from "./signup/PersonSignup";
-import OrganizationSignup from "./signup/OrganizationSignup";
-import VenueSignup from "./signup/VenueSignup";
-import ProfileForm from "../form/ProfileForm";
 
 const SignupScreen = () => {
   const router = useRouter();
   const [signupData, setSignupData] = useState<any>({});
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isEmailStepValid, setIsEmailStepValid] = useState(false);
+  const [isCodeStepValid, setIsCodeStepValid] = useState(false);
+  const profileFields: any = ProfileManager.getFields();
+
   const formData = useSelector((state: any) => state.form.profile);
 
   const updateField = (key: string, value: any) => {
@@ -55,6 +43,10 @@ const SignupScreen = () => {
       router.replace(Config.mainRoute);
     }
   }
+
+  const findField = (key: string) => {
+    return profileFields.find((o: any) => o.key == key);
+  };
 
   return (
     <BoxView
@@ -80,9 +72,16 @@ const SignupScreen = () => {
           style={[Layout.screenContent, ProfileManager.getContainerStyles()]}
         >
           <View style={Layout.formContainer}>
-            {ProfileManager.getFields().map((item: any) => {
+            { !isEmailStepValid && ProfileManager.renderField('signup', findField('email'), formData)}
+
+            { isEmailStepValid && !isCodeStepValid && (
+              <TextView>Registration code form</TextView>
+            )}
+
+            { isEmailStepValid && isCodeStepValid && profileFields.map((item: any) => {
               return ProfileManager.renderField('signup', item, formData);
             })}
+          
           </View>
         </BoxView>
       </View>
