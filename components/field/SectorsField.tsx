@@ -25,7 +25,7 @@ const SectorsField = ({ resource, field, label, value, onPressEvent, onDeleteEve
   const fieldName: string = field;
 
   const getSelectedSectors = (sectorsIds?: any) => {
-    let selectedIds: any[] = value?.length > 0 ? value : [];
+    let selectedIds: any[] = sectorsIds?.length > 0 || value || [];
     let result: any[] = [];
 
     for (const item of sectorsData) {
@@ -41,7 +41,7 @@ const SectorsField = ({ resource, field, label, value, onPressEvent, onDeleteEve
     return result;
   };
 
-  const unselectItem = (item: any) => {
+  const deleteItem = (item: any) => {
     let selectedIds: any[] = [...(formData?.[fieldName] || [])];
     let deleteIndex: number = selectedIds.findIndex((id: any) => id == item.id);
 
@@ -52,9 +52,9 @@ const SectorsField = ({ resource, field, label, value, onPressEvent, onDeleteEve
       if (parentIds.includes(id)) {
         let parentItem: any = sectorsData.find((o: any) => o.id == id);
         let childIds: any = (parentItem?.sub_sectors || []).map((o: any) => o.id);
-        let unselectItem: boolean = !selectedIds.some((v: any) => childIds.includes(v));
+        let deleteItem: boolean = !selectedIds.some((v: any) => childIds.includes(v));
 
-        if (unselectItem) {
+        if (deleteItem) {
           let index = selectedIds.findIndex((v: any) => v == id);
           selectedIds.splice(index, 1);
         }
@@ -96,7 +96,7 @@ const SectorsField = ({ resource, field, label, value, onPressEvent, onDeleteEve
             return (
               <TagView
                 key={item.id}
-                onDeleteButtonPress={() => unselectItem(item)}  
+                onDeleteButtonPress={() => deleteItem(item)}  
               >
                 {item?.name}
               </TagView>
