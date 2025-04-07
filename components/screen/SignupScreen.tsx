@@ -14,6 +14,7 @@ import ScreenManager from "@/manager/ScreenManager";
 import DividerView from "../view/DividerView";
 import ProfileManager from "@/manager/ProfileManager";
 import ButtonView from "../view/ButtonView";
+import InputTextField from "../field/InputTextField";
 
 const SignupScreen = () => {
   const router = useRouter();
@@ -22,10 +23,9 @@ const SignupScreen = () => {
   const [isEmailStepValid, setIsEmailStepValid] = useState(false);
   const [isCodeStepValid, setIsCodeStepValid] = useState(false);
   const formData = useSelector((state: any) => state.form.profile);
-  
+
   const profileFields: any = ProfileManager.getFields();
   
-
   const updateField = (key: string, value: any) => {
     setSignupData({ ...signupData, ...{ [key]: value } });
   };
@@ -77,7 +77,12 @@ const SignupScreen = () => {
             { !isEmailStepValid && ProfileManager.renderField('signup', findField('email'), formData)}
 
             { isEmailStepValid && !isCodeStepValid && (
-              <TextView>Registration code form</TextView>
+              <>
+                <TextView>{i18n.t('Verificatioin code sent, check your mailbox')}</TextView>
+                <InputTextField
+                  value="" 
+                />
+              </>
             )}
 
             { isEmailStepValid && isCodeStepValid && profileFields.map((item: any) => {
