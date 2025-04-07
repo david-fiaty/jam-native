@@ -41,11 +41,7 @@ const SectorsField = ({ resource, field, label, value, onPressEvent, onDeleteEve
     return result;
   };
 
-  const deleteItem = (item: any) => {
-    console.log(item);
-    // Todo - Fix delete issue
-    
-    /*
+  const unselectItem = (item: any) => {
     let selectedIds: any[] = [...(formData?.[fieldName] || [])];
     let deleteIndex: number = selectedIds.findIndex((id: any) => id == item.id);
 
@@ -56,9 +52,9 @@ const SectorsField = ({ resource, field, label, value, onPressEvent, onDeleteEve
       if (parentIds.includes(id)) {
         let parentItem: any = sectorsData.find((o: any) => o.id == id);
         let childIds: any = (parentItem?.sub_sectors || []).map((o: any) => o.id);
-        let deleteItem: boolean = !selectedIds.some((v: any) => childIds.includes(v));
+        let unselectItem: boolean = !selectedIds.some((v: any) => childIds.includes(v));
 
-        if (deleteItem) {
+        if (unselectItem) {
           let index = selectedIds.findIndex((v: any) => v == id);
           selectedIds.splice(index, 1);
         }
@@ -67,7 +63,6 @@ const SectorsField = ({ resource, field, label, value, onPressEvent, onDeleteEve
 
     setSelectedSectors(getSelectedSectors(selectedIds));
     if (onDeleteEvent) onDeleteEvent(item);
-    */
   }
 
   useEffect(() => {
@@ -101,7 +96,7 @@ const SectorsField = ({ resource, field, label, value, onPressEvent, onDeleteEve
             return (
               <TagView
                 key={item.id}
-                onDeleteButtonPress={() => deleteItem(item)}  
+                onDeleteButtonPress={() => unselectItem(item)}  
               >
                 {item?.name}
               </TagView>
