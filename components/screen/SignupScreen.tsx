@@ -21,9 +21,10 @@ const SignupScreen = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isEmailStepValid, setIsEmailStepValid] = useState(false);
   const [isCodeStepValid, setIsCodeStepValid] = useState(false);
-  const profileFields: any = ProfileManager.getFields();
-
   const formData = useSelector((state: any) => state.form.profile);
+  
+  const profileFields: any = ProfileManager.getFields();
+  
 
   const updateField = (key: string, value: any) => {
     setSignupData({ ...signupData, ...{ [key]: value } });
