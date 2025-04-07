@@ -153,7 +153,7 @@ class ProfileManager {
           return (
             <SectorsField
               resource="profile"
-              field="sectors_ids"
+              field={item.key}
               value={data[item.key]}
               label={
                 <>
@@ -163,7 +163,7 @@ class ProfileManager {
               }
               onPressEvent={() => ScreenManager.toggleModal('SectorsList', {
                 resource: 'profile',
-                field: 'sectors_ids',
+                field: item.key,
               })}
               onChangeEvent={(value: string) => this.setFormData(item, value)}
               onDeleteEvent={(item: any) => {
