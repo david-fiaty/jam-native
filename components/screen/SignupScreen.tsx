@@ -13,6 +13,7 @@ import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
 import DividerView from "../view/DividerView";
 import ProfileManager from "@/manager/ProfileManager";
+import ButtonView from "../view/ButtonView";
 
 const SignupScreen = () => {
   const router = useRouter();
@@ -69,7 +70,7 @@ const SignupScreen = () => {
           align="flex-start"
           justify="flex-start"
           scroll={true}
-          style={[Layout.screenContent, ProfileManager.getContainerStyles()]}
+          style={[Layout.screenContent, ProfileManager.getStyles().container]}
         >
           <View style={Layout.formContainer}>
             { !isEmailStepValid && ProfileManager.renderField('signup', findField('email'), formData)}
@@ -81,7 +82,14 @@ const SignupScreen = () => {
             { isEmailStepValid && isCodeStepValid && profileFields.map((item: any) => {
               return ProfileManager.renderField('signup', item, formData);
             })}
-          
+
+            <DividerView />
+
+            <ButtonView
+              label={i18n.t('Continue')}
+              isProcessing={isProcessing}
+              onPress={submitForm}
+            />
           </View>
         </BoxView>
       </View>
