@@ -7,19 +7,16 @@ import BoxView from "../view/BoxView";
 import SpinnerView from '../view/SpinnerView';
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
-import TextView from '../view/TextView';
 
 type Props = BaseProps & {
   resource: string;
   field: string;
   label?: any;
-  value?: any;
   onPressEvent?: () => void;
-  onChangeEvent?: (value: any) => void;
   onDeleteEvent: (item: any) => void;
 };
 
-const SectorsField = ({ resource, field, label, value, onPressEvent, onChangeEvent, onDeleteEvent }: Props) => {
+const SectorsField = ({ resource, field, label, onPressEvent, onDeleteEvent }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [selectedSectors, setSelectedSectors] = useState<any>([]);
@@ -80,8 +77,6 @@ const SectorsField = ({ resource, field, label, value, onPressEvent, onChangeEve
   }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView size="small" />;
-
-  //return <TextView>jg</TextView>
 
   return (
     <View style={styles.container}>
