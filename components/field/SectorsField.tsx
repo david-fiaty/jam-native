@@ -7,6 +7,7 @@ import BoxView from "../view/BoxView";
 import SpinnerView from '../view/SpinnerView';
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
+import TextView from '../view/TextView';
 
 type Props = BaseProps & {
   resource: string;
@@ -77,6 +78,8 @@ const SectorsField = ({ resource, field, label, onPressEvent, onDeleteEvent }: P
   }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView size="small" />;
+
+  return <TextView>jg</TextView>
 
   return (
     <View style={styles.container}>
