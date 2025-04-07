@@ -13,11 +13,16 @@ import IconView from '@/components/view/IconView';
 import ScreenManager from './ScreenManager';
 
 class ProfileManager {
-  getContainerStyles() {
+  getStyles() {
     return {
-      marginBottom: Layout.space.base*4,
-      paddingLeft: 0,
-      paddingRight: 0,
+      container: {
+        marginBottom: Layout.space.base*4,
+        paddingLeft: 0,
+        paddingRight: 0,
+      },
+      label: {
+        marginBottom: Layout.space.base/2,
+      },
     };
   }
 
@@ -41,7 +46,10 @@ class ProfileManager {
     if (this.canRenderField(mode, item, formData)) {
       return (
         <View key={item.key}>
-          <TextView>{i18n.t(item.label)} {item?.required === true ? '*' : ''}</TextView>
+          <TextView style={this.getStyles().label}>
+            {i18n.t(item.label)} {item?.required === true ? '*' : ''}
+          </TextView>
+          
           {item.render(item, formData, {})}
         </View>
       );

@@ -69,7 +69,7 @@ const SignupScreen = () => {
           align="flex-start"
           justify="flex-start"
           scroll={true}
-          style={[Layout.screenContent, ProfileManager.getContainerStyles()]}
+          style={[Layout.screenContent, ProfileManager.getStyles().container]}
         >
           <View style={Layout.formContainer}>
             { !isEmailStepValid && ProfileManager.renderField('signup', findField('email'), formData)}
