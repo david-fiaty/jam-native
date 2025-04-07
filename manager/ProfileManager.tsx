@@ -7,6 +7,7 @@ import TextView from '@/components/view/TextView';
 import i18n from '@/translation/i18n';
 import ProfileTypeField from '@/components/field/ProfileTypeField';
 import InputTextareaField from '@/components/field/InputTextareaField';
+import CountryField from '@/components/field/CountryField';
 
 class ProfileManager {
   getContainerStyles() {
@@ -165,10 +166,9 @@ class ProfileManager {
         profileType: 'all',
         render: (item: any, data: any, params?: any) => {
           return (
-            <InputTextField
+            <CountryField
               value={data[item.key]}
-              placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
+              onChangeValue={(value: string) => this.setFormData(item, value)}
             />
           );
         },
