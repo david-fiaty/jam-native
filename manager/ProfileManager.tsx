@@ -8,6 +8,9 @@ import i18n from '@/translation/i18n';
 import ProfileTypeField from '@/components/field/ProfileTypeField';
 import InputTextareaField from '@/components/field/InputTextareaField';
 import CountryField from '@/components/field/CountryField';
+import SectorsField from '@/components/field/SectorsField';
+import IconView from '@/components/view/IconView';
+import ScreenManager from './ScreenManager';
 
 class ProfileManager {
   getContainerStyles() {
@@ -148,10 +151,25 @@ class ProfileManager {
         profileType: 'all',
         render: (item: any, data: any, params?: any) => {
           return (
-            <InputTextField
-              value={data[item.key]}
-              placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
+            <SectorsField
+              resource="profile"
+              field="sectors_ids"
+              label={
+                <>
+                  <IconView name="plus" theme="secondary" radius="round" />
+                  <TextView>{i18n.t('Add industries')}</TextView>
+                </>
+              }
+              onPressEvent={() => ScreenManager.toggleModal('SectorsList', {
+                resource: 'profile',
+                field: 'sectors_ids',
+              })}
+              onDeleteEvent={(item: any) => {
+                const sectorsIds: any[] = [...data[item.key] || []];
+                const index: number = sectorsIds.findIndex((v) => v === item.id);
+                if (index !== -1) sectorsIds.splice(index, 1);
+                this.setFormData(item.key, sectorsIds);
+              }}
             />
           );
         },
