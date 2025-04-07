@@ -12,11 +12,12 @@ type Props = BaseProps & {
   resource: string;
   field: string;
   label?: any;
+  value?: any;
   onPressEvent?: () => void;
   onDeleteEvent: (item: any) => void;
 };
 
-const SectorsField = ({ resource, field, label, onPressEvent, onDeleteEvent }: Props) => {
+const SectorsField = ({ resource, field, label, value, onPressEvent, onDeleteEvent }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [selectedSectors, setSelectedSectors] = useState<any>([]);
@@ -24,7 +25,7 @@ const SectorsField = ({ resource, field, label, onPressEvent, onDeleteEvent }: P
   const fieldName: string = field;
 
   const getSelectedSectors = (sectorsIds?: any) => {
-    let selectedIds: any[] = sectorsIds?.length > 0 || formData?.[fieldName] || [];
+    let selectedIds: any[] = value?.length > 0 ? value : [];
     let result: any[] = [];
 
     for (const item of sectorsData) {
