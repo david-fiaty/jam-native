@@ -80,6 +80,7 @@ const SignupScreen = () => {
               <>
                 <TextView>{i18n.t('Verificatioin code sent, check your mailbox')}</TextView>
                 <InputTextField
+                  placeholder={i18n.t('Enter verification code')}
                   value="" 
                 />
               </>
