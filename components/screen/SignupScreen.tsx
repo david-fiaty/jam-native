@@ -74,6 +74,10 @@ const SignupScreen = () => {
           <View style={Layout.formContainer}>
             { !isEmailStepValid && ProfileManager.renderField('signup', findField('email'), formData)}
 
+            { isEmailStepValid && !isCodeStepValid && (
+              <TextView>Registration code form</TextView>
+            )}
+
             { isEmailStepValid && isCodeStepValid && profileFields.map((item: any) => {
               return ProfileManager.renderField('signup', item, formData);
             })}
