@@ -13,11 +13,12 @@ type Props = BaseProps & {
   resource: string;
   field: string;
   label?: any;
+  value?: any;
   onPressEvent?: () => void;
   onDeleteEvent: (item: any) => void;
 };
 
-const SectorsField = ({ resource, field, label, onPressEvent, onDeleteEvent }: Props) => {
+const SectorsField = ({ resource, field, label, value, onPressEvent, onDeleteEvent }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [selectedSectors, setSelectedSectors] = useState<any>([]);
