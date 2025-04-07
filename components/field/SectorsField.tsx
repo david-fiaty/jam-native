@@ -81,7 +81,7 @@ const SectorsField = ({ resource, field, label, value, onPressEvent, onChangeEve
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
-  return <TextView>jg</TextView>
+  //return <TextView>jg</TextView>
 
   return (
     <View style={styles.container}>
