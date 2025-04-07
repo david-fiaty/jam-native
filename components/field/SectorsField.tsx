@@ -15,7 +15,7 @@ type Props = BaseProps & {
   label?: any;
   value?: any;
   onPressEvent?: () => void;
-  onChangeEvent?: () => void;
+  onChangeEvent?: (value: any) => void;
   onDeleteEvent: (item: any) => void;
 };
 
