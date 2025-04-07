@@ -154,6 +154,7 @@ class ProfileManager {
             <SectorsField
               resource="profile"
               field={item.key}
+              value={data[item.key]}
               label={
                 <>
                   <IconView name="plus" theme="secondary" radius="round" />
