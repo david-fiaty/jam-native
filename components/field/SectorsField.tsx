@@ -42,6 +42,10 @@ const SectorsField = ({ resource, field, label, value, onPressEvent, onDeleteEve
   };
 
   const deleteItem = (item: any) => {
+    console.log(item);
+    // Todo - Fix delete issue
+    
+    /*
     let selectedIds: any[] = [...(formData?.[fieldName] || [])];
     let deleteIndex: number = selectedIds.findIndex((id: any) => id == item.id);
 
@@ -63,6 +67,7 @@ const SectorsField = ({ resource, field, label, value, onPressEvent, onDeleteEve
 
     setSelectedSectors(getSelectedSectors(selectedIds));
     if (onDeleteEvent) onDeleteEvent(item);
+    */
   }
 
   useEffect(() => {
