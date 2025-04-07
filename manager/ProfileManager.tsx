@@ -154,7 +154,6 @@ class ProfileManager {
             <SectorsField
               resource="profile"
               field={item.key}
-              value={data[item.key]}
               label={
                 <>
                   <IconView name="plus" theme="secondary" radius="round" />
@@ -165,7 +164,6 @@ class ProfileManager {
                 resource: 'profile',
                 field: item.key,
               })}
-              onChangeEvent={(value: string) => this.setFormData(item, value)}
               onDeleteEvent={(item: any) => {
                 const sectorsIds: any[] = [...data[item.key] || []];
                 const index: number = sectorsIds.findIndex((v) => v === item.id);
