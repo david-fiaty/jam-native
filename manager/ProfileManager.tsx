@@ -63,11 +63,11 @@ class ProfileManager {
   getFields() {
     return [
       {
-        signup: true,
+        signup: false,
         profile: true,
         enabled: true,
         required: false,
-        key: 'upload_profile_picture',
+        key: 'upload_profile_picture', 
         label: i18n.t('Profile picture'),
         profileType: 'all',
         render: (item: any, data: any, params?: any) => {
