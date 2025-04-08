@@ -16,6 +16,7 @@ import DividerView from "../view/DividerView";
 import ProfileManager from "@/manager/ProfileManager";
 import ButtonView from "../view/ButtonView";
 import InputTextField from "../field/InputTextField";
+import VerificationCodeField from "../field/VerificationCodeField";
 
 const SignupScreen = () => {
   const router = useRouter();
@@ -42,21 +43,18 @@ const SignupScreen = () => {
     if (!isEmailStepValid) {
       result = await UserManager.sendSignupCode(payload);
       if (result?.session?.length > 0) {
-        payload.session = result.session;
+        updateField('session', result.session);
         setIsEmailStepValid(true);
       }      
     }
     else if (!isCodeStepValid) {
       result = await UserManager.verifySignupCode(payload);
-
-      console.log('verif code response', result);
-      
       if (!result?.error) {
         setIsCodeStepValid(true);
       }
     }
     else {
-
+      // Submit profile data here
     }
     
     setIsProcessing(false);
@@ -77,6 +75,10 @@ const SignupScreen = () => {
 
   const findField = (key: string) => {
     return profileFields.find((o: any) => o.key == key);
+  };
+
+  const isSubmitDisabled = () => {
+    return !formData?.email?.length;
   };
 
   return (
@@ -106,14 +108,11 @@ const SignupScreen = () => {
             { !isEmailStepValid && ProfileManager.renderField('signup', findField('email'), formData)}
 
             { isEmailStepValid && !isCodeStepValid && (
-              <>
-                <TextView>{i18n.t('Verificatioin code sent, check your mailbox')}</TextView>
-                <InputTextField
-                  placeholder={i18n.t('Enter verification code')}
-                  value={formData?.code || ''}
-                  onChangeText={(value: string) => updateField('code', value)}
-                />
-              </>
+              <VerificationCodeField 
+                value={formData?.code || ''}
+                onChangeText={(value: any) => updateField('code', value)}
+                disabled={false}
+              />
             )}
 
             { isEmailStepValid && isCodeStepValid && profileFields.map((item: any) => {
@@ -125,6 +124,7 @@ const SignupScreen = () => {
             <ButtonView
               label={i18n.t('Continue')}
               isProcessing={isProcessing}
+              disabled={isSubmitDisabled()}
               onPress={submitForm}
             />
           </View>

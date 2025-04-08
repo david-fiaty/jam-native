@@ -3,28 +3,26 @@ import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
 import TextView from '../view/TextView';
 import SpinnerView from '../view/SpinnerView';
+import { Button } from '@rneui/themed';
 
 type Props = {
-  label: string,
-  onPress: () => void,
-  isProcessing: boolean,
+  label: string;
+  disabled?: boolean;
+  isProcessing?: boolean;
+  onPress: () => void;
 };
 
-const ButtonView = ({label, onPress, isProcessing}: Props) => {
-  if (isProcessing) {
-    return (
-      <View style={[styles.container, styles.processing]}>
-        <SpinnerView color="white" size="small" />
-      </View>
-    );
-  }
-  else {
-    return (
-      <TouchableOpacity onPress={onPress} style={styles.container}>
-        <TextView style={styles.label}>{label}</TextView>
-      </TouchableOpacity>
-    );
-  }
+const ButtonView = ({label, disabled, isProcessing, onPress }: Props) => {
+  return (
+    <Button
+      title={label}
+      onPress={onPress}
+      buttonStyle={styles.container}
+      containerStyle={styles.container}
+      disabled={disabled}
+      loading={isProcessing}
+    />
+  );
 };
 
 const styles = StyleSheet.create({
