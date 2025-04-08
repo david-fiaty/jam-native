@@ -32,9 +32,30 @@ const SignupScreen = () => {
 
   const submitForm = async () => {
     setIsProcessing(true);
-    let result: any = await UserManager.register(signupData);
+    let payload: any = {...formData};
+    let result: any = null;
+
+    if (!isEmailStepValid) {
+      result = await UserManager.sendSignupCode(payload);
+      if (result?.session?.length > 0) {
+        payload.session = result.session;
+        setIsEmailStepValid(true);
+      }      
+    }
+    else if (!isCodeStepValid) {
+      result = await UserManager.verifySignupCode(payload);
+      if (!result?.error) {
+        setIsCodeStepValid(true);
+      }
+    }
+    else {
+
+    }
+    
     setIsProcessing(false);
 
+    //
+    /*
     if (result?.error) {
       ScreenManager.showMessage({
         title: i18n.t('Profile registration'),
@@ -44,6 +65,7 @@ const SignupScreen = () => {
     else {
       router.replace(Config.mainRoute);
     }
+      */
   }
 
   const findField = (key: string) => {
