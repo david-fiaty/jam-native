@@ -15,7 +15,6 @@ import ScreenManager from "@/manager/ScreenManager";
 import DividerView from "../view/DividerView";
 import ProfileManager from "@/manager/ProfileManager";
 import ButtonView from "../view/ButtonView";
-import InputTextField from "../field/InputTextField";
 import VerificationCodeField from "../field/VerificationCodeField";
 import SkipButton from "../button/SkipButton";
 import LinkView from "../view/LinkView";
