@@ -133,6 +133,8 @@ const SignupScreen = () => {
                   onChangeText={(value: any) => updateField('code', value)}
                   disabled={false}
                 />
+
+                {/* Todo - Resend verif link here */}
               </>
             )}
             
