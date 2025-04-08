@@ -156,6 +156,7 @@ const SignupScreen = () => {
                   onChangeValue={(mediaList: any) => updateField('profile_picture', {url: mediaList[0]?.uri})}
                 />
 
+                <DividerView />
                 <ProfileTypeField
                   value={formData?.profile_type}
                   onChangeValue={(option: any) => updateField('profile_type', option.value)}
