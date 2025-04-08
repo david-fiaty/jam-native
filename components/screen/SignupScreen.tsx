@@ -155,21 +155,22 @@ const SignupScreen = () => {
               onPress={submitForm}
             />
           
-            <BoxView
-              direction="row"
-              align="center"
-              justify="space-between"
-              style={{ width: "100%" }}
-            >
-              <BoxView direction="row" align="center" justify="flex-start">
-                <TextView>{i18n.t("You have an account?")}</TextView>
-                <LinkView onPress={async () => router.replace("/login")}>
-                  {i18n.t("Sign in")}
-                </LinkView>
+            { !isEmailStepValid && (
+              <BoxView
+                direction="row"
+                align="center"
+                justify="space-between"
+                style={{ width: "100%" }}
+              >
+                <BoxView direction="row" align="center" justify="flex-start">
+                  <TextView>{i18n.t("You have an account?")}</TextView>
+                  <LinkView onPress={async () => router.replace("/login")}>
+                    {i18n.t("Sign in")}
+                  </LinkView>
+                </BoxView>
+                <SkipButton onPress={async () => router.replace(Config.mainRoute)} />
               </BoxView>
-              <SkipButton onPress={async () => router.replace(Config.mainRoute)} />
-            </BoxView>
-
+            )}
           </View>
         </BoxView>
       </View>
