@@ -11,6 +11,18 @@ import * as Device from "expo-device";
 import i18n from '@/translation/i18n';
 
 class UserManager {
+  async sendSignupCode(data: any) {
+    let response = await DataManager.post('sendSignupCode', data);
+    
+    return response;
+  }
+
+  async verifySignupCode(data: any) {
+    let response = await DataManager.post('verifySignupCode', data);
+    
+    return response;
+  }
+
   async login(data: any) {
     let response = await DataManager.post('login', data);
     if (response?.tokens?.access_token?.length) {
