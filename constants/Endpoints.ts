@@ -149,6 +149,16 @@ const Endpoints = {
     cacheable: false,
     dataKey: null,
   },
+  sendSignupCode: {
+    path: '/send-registration-verification/',
+    cacheable: false,
+    dataKey: null,
+  },
+  verifySignupCode: {
+    path: '/verify-registration/',
+    cacheable: false,
+    dataKey: null,
+  },
 };
 
 export default Endpoints;

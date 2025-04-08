@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import { Config } from "@/constants/Config";
@@ -13,26 +14,55 @@ import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
 import DividerView from "../view/DividerView";
 import ProfileManager from "@/manager/ProfileManager";
+import ButtonView from "../view/ButtonView";
+import InputTextField from "../field/InputTextField";
 
 const SignupScreen = () => {
   const router = useRouter();
-  const [signupData, setSignupData] = useState<any>({});
+  const dispatch = useDispatch();
   const [isProcessing, setIsProcessing] = useState(false);
   const [isEmailStepValid, setIsEmailStepValid] = useState(false);
   const [isCodeStepValid, setIsCodeStepValid] = useState(false);
-  const profileFields: any = ProfileManager.getFields();
-
   const formData = useSelector((state: any) => state.form.profile);
-
-  const updateField = (key: string, value: any) => {
-    setSignupData({ ...signupData, ...{ [key]: value } });
+  const profileFields: any = ProfileManager.getFields();
+  
+  const updateField = (key: any, value: any) => {
+    dispatch(setFormData<any>({ 
+      resource: 'profile',
+      key: key, 
+      value: value, 
+    }));
   };
 
   const submitForm = async () => {
     setIsProcessing(true);
-    let result: any = await UserManager.register(signupData);
+    let payload: any = {...formData};
+    let result: any = null;
+
+    if (!isEmailStepValid) {
+      result = await UserManager.sendSignupCode(payload);
+      if (result?.session?.length > 0) {
+        payload.session = result.session;
+        setIsEmailStepValid(true);
+      }      
+    }
+    else if (!isCodeStepValid) {
+      result = await UserManager.verifySignupCode(payload);
+
+      console.log('verif code response', result);
+      
+      if (!result?.error) {
+        setIsCodeStepValid(true);
+      }
+    }
+    else {
+
+    }
+    
     setIsProcessing(false);
 
+    //
+    /*
     if (result?.error) {
       ScreenManager.showMessage({
         title: i18n.t('Profile registration'),
@@ -42,6 +72,7 @@ const SignupScreen = () => {
     else {
       router.replace(Config.mainRoute);
     }
+      */
   }
 
   const findField = (key: string) => {
@@ -69,19 +100,33 @@ const SignupScreen = () => {
           align="flex-start"
           justify="flex-start"
           scroll={true}
-          style={[Layout.screenContent, ProfileManager.getContainerStyles()]}
+          style={[Layout.screenContent, ProfileManager.getStyles().container]}
         >
           <View style={Layout.formContainer}>
             { !isEmailStepValid && ProfileManager.renderField('signup', findField('email'), formData)}
 
             { isEmailStepValid && !isCodeStepValid && (
-              <TextView>Registration code form</TextView>
+              <>
+                <TextView>{i18n.t('Verificatioin code sent, check your mailbox')}</TextView>
+                <InputTextField
+                  placeholder={i18n.t('Enter verification code')}
+                  value={formData?.code || ''}
+                  onChangeText={(value: string) => updateField('code', value)}
+                />
+              </>
             )}
 
             { isEmailStepValid && isCodeStepValid && profileFields.map((item: any) => {
               return ProfileManager.renderField('signup', item, formData);
             })}
-          
+
+            <DividerView />
+
+            <ButtonView
+              label={i18n.t('Continue')}
+              isProcessing={isProcessing}
+              onPress={submitForm}
+            />
           </View>
         </BoxView>
       </View>
