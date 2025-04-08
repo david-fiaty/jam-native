@@ -15,8 +15,10 @@ import ScreenManager from "@/manager/ScreenManager";
 import DividerView from "../view/DividerView";
 import ProfileManager from "@/manager/ProfileManager";
 import ButtonView from "../view/ButtonView";
-import InputTextField from "../field/InputTextField";
 import VerificationCodeField from "../field/VerificationCodeField";
+import SkipButton from "../button/SkipButton";
+import LinkView from "../view/LinkView";
+import ProfileTypeField from "../field/ProfileTypeField";
 
 const SignupScreen = () => {
   const router = useRouter();
@@ -123,14 +125,26 @@ const SignupScreen = () => {
             { !isEmailStepValid && ProfileManager.renderField('signup', findField('email'), formData)}
 
             { isEmailStepValid && !isCodeStepValid && (
-              <VerificationCodeField 
-                value={formData?.code || ''}
-                onChangeText={(value: any) => updateField('code', value)}
-                disabled={false}
-              />
-            )}
+              <>
+                { ProfileManager.renderField('signup', findField('email'), formData, {disabled: true}) }
 
-            { isEmailStepValid && isCodeStepValid && profileFields.map((item: any) => {
+                <VerificationCodeField 
+                  value={formData?.code || ''}
+                  onChangeText={(value: any) => updateField('code', value)}
+                  disabled={false}
+                />
+              </>
+            )}
+            
+            { isEmailStepValid && isCodeStepValid && (
+                <ProfileTypeField
+                  value={formData?.profile_type}
+                  onChangeValue={(option: any) => updateField('profile_type', option.value)}
+                />
+              ) 
+            }
+
+            { isEmailStepValid && isCodeStepValid && formData?.profile_type?.length > 0 && profileFields.map((item: any) => {
               return ProfileManager.renderField('signup', item, formData);
             })}
 
@@ -140,6 +154,22 @@ const SignupScreen = () => {
               disabled={isSubmitDisabled()}
               onPress={submitForm}
             />
+          
+            <BoxView
+              direction="row"
+              align="center"
+              justify="space-between"
+              style={{ width: "100%" }}
+            >
+              <BoxView direction="row" align="center" justify="flex-start">
+                <TextView>{i18n.t("You have an account?")}</TextView>
+                <LinkView onPress={async () => router.replace("/login")}>
+                  {i18n.t("Sign in")}
+                </LinkView>
+              </BoxView>
+              <SkipButton onPress={async () => router.replace(Config.mainRoute)} />
+            </BoxView>
+
           </View>
         </BoxView>
       </View>
