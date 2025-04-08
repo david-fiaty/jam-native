@@ -32,18 +32,26 @@ const SignupScreen = () => {
 
   const submitForm = async () => {
     setIsProcessing(true);
+    let payload: any = {...formData};
+    let result: any = null;
+
     if (!isEmailStepValid) {
-      let payload: any = {...formData};
-      let result: any = await UserManager.sendSignupCode(formData);
+      result = await UserManager.sendSignupCode(formData);
       if (result?.session?.length > 0) {
         payload.session = result.session;
+        setIsEmailStepValid(true);
+      }      
+    }
+    else if (!isCodeStepValid) {
+      result = await UserManager.verifySignupCode(formData);
+      if (!result?.error) {
+        setIsCodeStepValid(true);
       }
+    }
+    else {
 
-      console.log(payload);
-      setIsEmailStepValid(true);
     }
     
-    //let result: any = await UserManager.register(signupData);
     setIsProcessing(false);
 
     //
