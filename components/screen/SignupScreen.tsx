@@ -40,6 +40,7 @@ const SignupScreen = () => {
       }
 
       console.log(payload);
+      setIsEmailStepValid(true);
     }
     
     //let result: any = await UserManager.register(signupData);
