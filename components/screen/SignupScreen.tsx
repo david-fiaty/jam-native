@@ -76,6 +76,10 @@ const SignupScreen = () => {
     return profileFields.find((o: any) => o.key == key);
   };
 
+  const isSubmitDisabled = () => {
+    return false;
+  };
+
   return (
     <BoxView
       direction="column"
@@ -122,7 +126,7 @@ const SignupScreen = () => {
             <ButtonView
               label={i18n.t('Continue')}
               isProcessing={isProcessing}
-              //disabled={true}
+              disabled={isSubmitDisabled()}
               onPress={submitForm}
             />
           </View>
