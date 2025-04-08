@@ -20,6 +20,7 @@ import SkipButton from "../button/SkipButton";
 import LinkView from "../view/LinkView";
 import ProfileTypeField from "../field/ProfileTypeField";
 import InputTextField from "../field/InputTextField";
+import ProfileImageField from "../field/ProfileImageField";
 
 const SignupScreen = () => {
   const router = useRouter();
@@ -149,10 +150,18 @@ const SignupScreen = () => {
             )}
 
             {isEmailStepValid && isCodeStepValid && (
-              <ProfileTypeField
-                value={formData?.profile_type}
-                onChangeValue={(option: any) => updateField('profile_type', option.value)}
-              />
+              <>
+                <ProfileImageField 
+                  value={formData?.profile_picture?.url}
+                  onChangeValue={(mediaList: any) => updateField('profile_picture', {url: mediaList[0]?.uri})}
+                />
+
+                
+                <ProfileTypeField
+                  value={formData?.profile_type}
+                  onChangeValue={(option: any) => updateField('profile_type', option.value)}
+                />
+              </>
             )}
 
             {isEmailStepValid && isCodeStepValid && formData?.profile_type?.length > 0 && profileFields.map((item: any) => {
