@@ -124,7 +124,7 @@ const SignupScreen = () => {
 
             { isEmailStepValid && !isCodeStepValid && (
               <>
-                {ProfileManager.renderField('signup', findField('email'), formData, {disabled: true})}
+                { ProfileManager.renderField('signup', findField('email'), formData, {disabled: true}) }
 
                 <VerificationCodeField 
                   value={formData?.code || ''}
