@@ -136,15 +136,18 @@ const SignupScreen = () => {
               </>
             )}
 
+            
             { isEmailStepValid && isCodeStepValid && (
                 <ProfileTypeField
                   value={formData?.profile_type}
                   onChangeValue={(option: any) => updateField('profile_type', option.value)}
                 />
-              ) && profileFields.map((item: any) => {
-                return ProfileManager.renderField('signup', item, formData);
-              })
+              ) 
             }
+
+            { isEmailStepValid && isCodeStepValid && profileFields.map((item: any) => {
+              return ProfileManager.renderField('signup', item, formData);
+            })}
 
             <ButtonView
               label={i18n.t('Continue')}
