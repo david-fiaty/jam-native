@@ -78,7 +78,8 @@ const SignupScreen = () => {
   };
 
   const isSubmitDisabled = () => {
-    return !formData?.email?.length;
+    return !formData?.email?.length
+    || (isEmailStepValid && !formData?.code?.length);
   };
 
   return (
@@ -118,8 +119,6 @@ const SignupScreen = () => {
             { isEmailStepValid && isCodeStepValid && profileFields.map((item: any) => {
               return ProfileManager.renderField('signup', item, formData);
             })}
-
-            <DividerView />
 
             <ButtonView
               label={i18n.t('Continue')}
