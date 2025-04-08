@@ -89,7 +89,8 @@ const SignupScreen = () => {
 
   const isSubmitDisabled = () => {
     return !formData?.email?.length
-      || (isEmailStepValid && !formData?.code?.length);
+      || (isEmailStepValid && !formData?.code?.length)
+      || (isEmailStepValid && isCodeStepValid && !formData?.profile_type);
   };
 
   useEffect(() => {
