@@ -17,6 +17,11 @@ class UserManager {
     return response;
   }
 
+  async verifySignupCode(data: any) {
+    let response = await DataManager.post('verifySignupCode', data);
+    
+    return response;
+  }
 
   async login(data: any) {
     let response = await DataManager.post('login', data);
