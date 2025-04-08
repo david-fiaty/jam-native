@@ -35,8 +35,8 @@ const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
         <BoxView direction="row" align="center" style={styles.container}>
           {!uri?.length && (
             <BoxView direction="column" align="center" justify="center" style={styles.iconContainer}>
-              <IconView name="upload" theme="primary" size={60} radius="circle" />
-              <TextView>{i18n.t("Add a profile ieeemage.")}</TextView>  
+              <TextView>{i18n.t("Add a profile image.")}</TextView>  
+              <IconView name="upload" theme="secondary" size={30} padding={20} radius="circle" />
             </BoxView>
           )}
 
@@ -70,7 +70,6 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     width: '100%',
-    backgroundColor: 'red',
   },
   imagePreview: {
     borderRadius: Layout.radius.round,
