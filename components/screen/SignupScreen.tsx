@@ -36,14 +36,14 @@ const SignupScreen = () => {
     let result: any = null;
 
     if (!isEmailStepValid) {
-      result = await UserManager.sendSignupCode(formData);
+      result = await UserManager.sendSignupCode(payload);
       if (result?.session?.length > 0) {
         payload.session = result.session;
         setIsEmailStepValid(true);
       }      
     }
     else if (!isCodeStepValid) {
-      result = await UserManager.verifySignupCode(formData);
+      result = await UserManager.verifySignupCode(payload);
       if (!result?.error) {
         setIsCodeStepValid(true);
       }
