@@ -6,30 +6,23 @@ import SpinnerView from '../view/SpinnerView';
 import { Button } from '@rneui/themed';
 
 type Props = {
-  label: string,
-  onPress: () => void,
-  isProcessing: boolean,
+  label: string;
+  disabled?: boolean;
+  isProcessing?: boolean;
+  onPress: () => void;
 };
 
-const ButtonView = ({label, onPress, isProcessing}: Props) => {
-  if (isProcessing) {
-    return (
-      <View style={[styles.container, styles.processing]}>
-        <SpinnerView color="white" size="small" />
-      </View>
-    );
-  }
-  else {
-
-    return (
-      <View style={styles.container}>
-        <Button
-          title={label}
-          onPress={onPress}
-        />
-      </View>
-    );
-  }
+const ButtonView = ({label, disabled, isProcessing, onPress }: Props) => {
+  return (
+    <Button
+      title={label}
+      onPress={onPress}
+      buttonStyle={styles.container}
+      containerStyle={styles.container}
+      disabled={disabled}
+      loading={isProcessing}
+    />
+  );
 };
 
 const styles = StyleSheet.create({
@@ -41,6 +34,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: Layout.space.base*4.3,
+  },
+  label: {
+    color: Colors.white,
+    fontWeight: 'bold',
   },
   processing: {
     backgroundColor: Colors.secondary,
