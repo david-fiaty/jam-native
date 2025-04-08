@@ -1,8 +1,8 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { useSelector, useDispatch } from "react-redux";
-import { setFormData } from "@/redux/slices/FormSlice";
+import { setFormData, resetFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import { Config } from "@/constants/Config";
@@ -21,9 +21,10 @@ import VerificationCodeField from "../field/VerificationCodeField";
 const SignupScreen = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [isEmailStepValid, setIsEmailStepValid] = useState(false);
-  const [isCodeStepValid, setIsCodeStepValid] = useState(false);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const [isEmailStepValid, setIsEmailStepValid] = useState<boolean>(false);
+  const [isCodeStepValid, setIsCodeStepValid] = useState<boolean>(false);
   const formData = useSelector((state: any) => state.form.profile);
   const profileFields: any = ProfileManager.getFields();
   
@@ -32,6 +33,12 @@ const SignupScreen = () => {
       resource: 'profile',
       key: key, 
       value: value, 
+    }));
+  };
+
+  const resetForm = () => {
+    dispatch(resetFormData<any>({ 
+      resource: 'profile',
     }));
   };
 
@@ -78,8 +85,16 @@ const SignupScreen = () => {
   };
 
   const isSubmitDisabled = () => {
-    return !formData?.email?.length;
+    return !formData?.email?.length
+    || (isEmailStepValid && !formData?.code?.length);
   };
+
+  useEffect(() => {
+    if (!isLoaded) {
+      resetForm();
+      setIsLoaded(true);
+    }
+  }, [isLoaded]);
 
   return (
     <BoxView
@@ -118,8 +133,6 @@ const SignupScreen = () => {
             { isEmailStepValid && isCodeStepValid && profileFields.map((item: any) => {
               return ProfileManager.renderField('signup', item, formData);
             })}
-
-            <DividerView />
 
             <ButtonView
               label={i18n.t('Continue')}
