@@ -311,7 +311,7 @@ class ProfileManager {
         },
       },
       {
-        signup: true,
+        signup: false,
         profile: true,
         enabled: true,
         required: true,
