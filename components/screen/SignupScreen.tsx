@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import { Config } from "@/constants/Config";
@@ -18,16 +19,19 @@ import InputTextField from "../field/InputTextField";
 
 const SignupScreen = () => {
   const router = useRouter();
-  const [signupData, setSignupData] = useState<any>({});
+  const dispatch = useDispatch();
   const [isProcessing, setIsProcessing] = useState(false);
   const [isEmailStepValid, setIsEmailStepValid] = useState(false);
   const [isCodeStepValid, setIsCodeStepValid] = useState(false);
   const formData = useSelector((state: any) => state.form.profile);
-
   const profileFields: any = ProfileManager.getFields();
   
-  const updateField = (key: string, value: any) => {
-    setSignupData({ ...signupData, ...{ [key]: value } });
+  const updateField = (key: any, value: any) => {
+    dispatch(setFormData<any>({ 
+      resource: 'profile',
+      key: key, 
+      value: value, 
+    }));
   };
 
   const submitForm = async () => {
@@ -44,6 +48,9 @@ const SignupScreen = () => {
     }
     else if (!isCodeStepValid) {
       result = await UserManager.verifySignupCode(payload);
+
+      console.log('verif code response', result);
+      
       if (!result?.error) {
         setIsCodeStepValid(true);
       }
@@ -103,7 +110,8 @@ const SignupScreen = () => {
                 <TextView>{i18n.t('Verificatioin code sent, check your mailbox')}</TextView>
                 <InputTextField
                   placeholder={i18n.t('Enter verification code')}
-                  value="" 
+                  value={formData?.code || ''}
+                  onChangeText={(value: string) => updateField('code', value)}
                 />
               </>
             )}
