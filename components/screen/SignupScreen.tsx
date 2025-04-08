@@ -16,6 +16,7 @@ import DividerView from "../view/DividerView";
 import ProfileManager from "@/manager/ProfileManager";
 import ButtonView from "../view/ButtonView";
 import InputTextField from "../field/InputTextField";
+import VerificationCodeField from "../field/VerificationCodeField";
 
 const SignupScreen = () => {
   const router = useRouter();
@@ -107,14 +108,10 @@ const SignupScreen = () => {
             { !isEmailStepValid && ProfileManager.renderField('signup', findField('email'), formData)}
 
             { isEmailStepValid && !isCodeStepValid && (
-              <>
-                <TextView>{i18n.t('Verification code sent, check your mailbox')}</TextView>
-                <InputTextField
-                  placeholder={i18n.t('Enter verification code')}
-                  value={formData?.code || ''}
-                  onChangeText={(value: string) => updateField('code', value)}
-                />
-              </>
+              <VerificationCodeField 
+                value={formData?.code || ''}
+                onChangeText={(value: any) => updateField('code', value)}
+              />
             )}
 
             { isEmailStepValid && isCodeStepValid && profileFields.map((item: any) => {
