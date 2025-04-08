@@ -321,7 +321,7 @@ class ProfileManager {
           return (
             <InputTextField
               value={data[item.key]}
-              placeholder={item.label}
+              placeholder={i18n.t('Enter your email address')}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
