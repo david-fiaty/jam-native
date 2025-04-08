@@ -123,7 +123,7 @@ const SignupScreen = () => {
           style={[Layout.screenContent, ProfileManager.getStyles().container]}
         >
           <View style={Layout.formContainer}>
-            {!isEmailStepValid || (isEmailStepValid && (
+            {(!isEmailStepValid || !isCodeStepValid) && (
               <>
                 <TextView>{i18n.t('Email')}</TextView>
                 <InputTextField
@@ -133,7 +133,7 @@ const SignupScreen = () => {
                   onChangeText={(value: string) => updateField('email', value)}
                 />
               </>
-            ))}
+            )}
 
             {isEmailStepValid && !isCodeStepValid && (
               <>
