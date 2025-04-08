@@ -31,8 +31,13 @@ const InputTextField = ({
   onChangeText,
   onSubmitEditing,
 }: Props) => {
+
+  const disabledStyle: any = {
+    opacity: disabled ? 0.4: 1,
+  }
+
   return (
-    <BoxView style={styles.container}>
+    <BoxView style={[styles.container, disabledStyle]}>
       <Input
         textAlignVertical="center"
         numberOfLines={1}
