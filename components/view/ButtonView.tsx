@@ -3,6 +3,7 @@ import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
 import TextView from '../view/TextView';
 import SpinnerView from '../view/SpinnerView';
+import { Button } from '@rneui/themed';
 
 type Props = {
   label: string,
@@ -19,10 +20,14 @@ const ButtonView = ({label, onPress, isProcessing}: Props) => {
     );
   }
   else {
+
     return (
-      <TouchableOpacity onPress={onPress} style={styles.container}>
-        <TextView style={styles.label}>{label}</TextView>
-      </TouchableOpacity>
+      <View style={styles.container}>
+        <Button
+          title={label}
+          onPress={onPress}
+        />
+      </View>
     );
   }
 };
@@ -36,10 +41,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: Layout.space.base*4.3,
-  },
-  label: {
-    color: Colors.white,
-    fontWeight: 'bold',
   },
   processing: {
     backgroundColor: Colors.secondary,
