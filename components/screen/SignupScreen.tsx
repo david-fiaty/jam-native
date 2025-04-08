@@ -18,6 +18,7 @@ import ButtonView from "../view/ButtonView";
 import VerificationCodeField from "../field/VerificationCodeField";
 import SkipButton from "../button/SkipButton";
 import LinkView from "../view/LinkView";
+import ProfileTypeField from "../field/ProfileTypeField";
 
 const SignupScreen = () => {
   const router = useRouter();
@@ -135,9 +136,15 @@ const SignupScreen = () => {
               </>
             )}
 
-            { isEmailStepValid && isCodeStepValid && profileFields.map((item: any) => {
-              return ProfileManager.renderField('signup', item, formData);
-            })}
+            { isEmailStepValid && isCodeStepValid && (
+                <ProfileTypeField
+                  value={formData?.profile_type}
+                  onChangeValue={(option: any) => updateField('profile_type', option.value)}
+                />
+              ) && profileFields.map((item: any) => {
+                return ProfileManager.renderField('signup', item, formData);
+              })
+            }
 
             <ButtonView
               label={i18n.t('Continue')}
