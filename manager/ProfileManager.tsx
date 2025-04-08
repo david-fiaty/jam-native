@@ -11,6 +11,7 @@ import CountryField from '@/components/field/CountryField';
 import SectorsField from '@/components/field/SectorsField';
 import IconView from '@/components/view/IconView';
 import ScreenManager from './ScreenManager';
+import ProfileImageField from '@/components/field/ProfileImageField';
 
 class ProfileManager {
   getStyles() {
@@ -62,20 +63,18 @@ class ProfileManager {
   getFields() {
     return [
       {
-        signup: true,
+        signup: false,
         profile: true,
         enabled: true,
         required: false,
-        key: 'upload_profile_picture',
+        key: 'upload_profile_picture', 
         label: i18n.t('Profile picture'),
         profileType: 'all',
         render: (item: any, data: any, params?: any) => {
           return (
-            <InputTextField
-              value={data[item.key]}
-              placeholder={item.label}
-              disabled={params?.disabled}
-              onChangeText={(value: string) => this.setFormData(item, value)}
+            <ProfileImageField 
+              value={data[item.key]?.url}
+              onChangeValue={(mediaList: any) => this.setFormData(item, {url: mediaList[0]?.uri})}
             />
           );
         },

@@ -52,6 +52,7 @@ const icons = {
   filter: ({iconStyle, size}: IconProps) => <Ionicons name="filter-outline" size={size} style={iconStyle} />,
   exit: ({iconStyle, size}: IconProps) => <Ionicons name="exit-outline" size={size} style={iconStyle} />,
   refresh: ({iconStyle, size}: IconProps) => <Ionicons name="refresh-outline" size={size} style={iconStyle} />,
+  upload: ({iconStyle, size}: IconProps) => <Ionicons name="cloud-upload-outline" size={size} style={iconStyle} />,
 };
 
 const IconBase = ({name, size, containerStyle, iconStyle}: Props) => {
