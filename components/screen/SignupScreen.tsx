@@ -42,7 +42,7 @@ const SignupScreen = () => {
     if (!isEmailStepValid) {
       result = await UserManager.sendSignupCode(payload);
       if (result?.session?.length > 0) {
-        payload.session = result.session;
+        updateField('session', result.session);
         setIsEmailStepValid(true);
       }      
     }
@@ -50,7 +50,7 @@ const SignupScreen = () => {
       result = await UserManager.verifySignupCode(payload);
 
       console.log('verif code response', result);
-      
+
       if (!result?.error) {
         setIsCodeStepValid(true);
       }
