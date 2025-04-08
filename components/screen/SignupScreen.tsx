@@ -112,7 +112,7 @@ const SignupScreen = () => {
       <LogoView size={80} />
 
       <TextView style={styles.wecomeMessage}>
-        {i18n.t("Create an account")}
+        {i18n.t("Create a jam account")}
       </TextView>
 
       <DividerView />
