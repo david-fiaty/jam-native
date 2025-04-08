@@ -48,15 +48,12 @@ const SignupScreen = () => {
     }
     else if (!isCodeStepValid) {
       result = await UserManager.verifySignupCode(payload);
-
-      console.log('verif code response', result);
-
       if (!result?.error) {
         setIsCodeStepValid(true);
       }
     }
     else {
-
+      // Submit profile data here
     }
     
     setIsProcessing(false);
