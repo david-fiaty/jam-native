@@ -42,7 +42,7 @@ class ProfileManager {
       && (item.profileType === 'all' || item.profileType === formData?.['profile_type']);
   }
 
-  renderField(mode: string, item: any, formData: any) { 
+  renderField(mode: string, item: any, formData: any, params?: any) { 
     if (this.canRenderField(mode, item, formData)) {
       return (
         <View key={item.key}>
@@ -50,7 +50,7 @@ class ProfileManager {
             {i18n.t(item.label)} {item?.required === true ? '*' : ''}
           </TextView>
           
-          {item.render(item, formData, {})}
+          {item.render(item, formData, params)}
         </View>
       );
     }
@@ -73,6 +73,7 @@ class ProfileManager {
             <InputTextField
               value={data[item.key]}
               placeholder={item.label}
+              disabled={params?.disabled}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
