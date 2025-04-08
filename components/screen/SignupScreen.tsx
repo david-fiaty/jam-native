@@ -135,20 +135,6 @@ const SignupScreen = () => {
                   onChangeText={(value: any) => updateField('code', value)}
                   disabled={false}
                 />
-
-                <BoxView
-                  direction="row"
-                  align="center"
-                  justify="space-between"
-                  style={{ width: "100%" }}
-                >
-                  <BoxView direction="row" align="center" justify="flex-start">
-                    <LinkView onPress={() => router.replace("/signup")}>
-                      {i18n.t("Didn't receive code?")}
-                    </LinkView>
-                  </BoxView>
-                  <SkipButton onPress={async () => router.replace(Config.mainRoute)} />
-                </BoxView>
               </>
             )}
 
@@ -157,8 +143,7 @@ const SignupScreen = () => {
                 value={formData?.profile_type}
                 onChangeValue={(option: any) => updateField('profile_type', option.value)}
               />
-            )
-            }
+            )}
 
             {isEmailStepValid && isCodeStepValid && formData?.profile_type?.length > 0 && profileFields.map((item: any) => {
               return ProfileManager.renderField('signup', item, formData);
@@ -170,6 +155,22 @@ const SignupScreen = () => {
               disabled={isSubmitDisabled()}
               onPress={submitForm}
             />
+
+            {isEmailStepValid && !isCodeStepValid && (
+              <BoxView
+                direction="row"
+                align="center"
+                justify="space-between"
+                style={{ width: "100%" }}
+              >
+                <BoxView direction="row" align="center" justify="flex-start">
+                  <LinkView onPress={() => router.replace("/signup")}>
+                    {i18n.t("Didn't receive code?")}
+                  </LinkView>
+                </BoxView>
+                <SkipButton onPress={async () => router.replace(Config.mainRoute)} />
+              </BoxView>
+            )}
 
             {!isEmailStepValid && (
               <BoxView
