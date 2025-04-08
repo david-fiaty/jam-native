@@ -1,9 +1,10 @@
 import { StyleSheet } from 'react-native';
 import { BaseProps } from '@/constants/Types';
-import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
 import SelectListBase from '../base/SelectListBase';
 import StaticData from '@/constants/StaticData';
+import TextView from '../view/TextView';
+import i18n from '@/translation/i18n';
 
 type Props = BaseProps & {
   value?: any,
@@ -23,7 +24,8 @@ const ProfileTypeField = ({value, onChangeValue}: Props) => {
   };
   
   return (
-    <BoxView direction="column" align="center" style={styles.container}>
+    <BoxView direction="column" align="left" style={styles.container}>
+      <TextView>{i18n.t('Profile type')}</TextView>
       <SelectListBase 
         value={value}
         data={buildOptions(profileTypes)}  
