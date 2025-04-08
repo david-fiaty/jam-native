@@ -123,11 +123,15 @@ const SignupScreen = () => {
             { !isEmailStepValid && ProfileManager.renderField('signup', findField('email'), formData)}
 
             { isEmailStepValid && !isCodeStepValid && (
-              <VerificationCodeField 
-                value={formData?.code || ''}
-                onChangeText={(value: any) => updateField('code', value)}
-                disabled={false}
-              />
+              <>
+                {ProfileManager.renderField('signup', findField('email'), formData, {disabled: true})}
+
+                <VerificationCodeField 
+                  value={formData?.code || ''}
+                  onChangeText={(value: any) => updateField('code', value)}
+                  disabled={false}
+                />
+              </>
             )}
 
             { isEmailStepValid && isCodeStepValid && profileFields.map((item: any) => {
