@@ -122,8 +122,8 @@ const SignupScreen = () => {
             <ButtonView
               label={i18n.t('Continue')}
               isProcessing={isProcessing}
+              //disabled={true}
               onPress={submitForm}
-              disabled={true}
             />
           </View>
         </BoxView>
