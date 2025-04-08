@@ -23,8 +23,11 @@ const FormSlice = createSlice({
         state[action.payload.resource] = {};
       }
     },
+    resetFormData: (state: any, action: any) => {
+      state[action.payload.resource] = {};
+    },
   },
 });
 
-export const { setFormData } = FormSlice.actions;
+export const { setFormData, resetFormData } = FormSlice.actions;
 export default FormSlice.reducer;
