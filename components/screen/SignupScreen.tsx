@@ -123,6 +123,7 @@ const SignupScreen = () => {
               label={i18n.t('Continue')}
               isProcessing={isProcessing}
               onPress={submitForm}
+              disabled={true}
             />
           </View>
         </BoxView>
