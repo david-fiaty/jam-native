@@ -29,24 +29,24 @@ const SignupScreen = () => {
   const [isCodeStepValid, setIsCodeStepValid] = useState<boolean>(false);
   const formData = useSelector((state: any) => state.form.profile);
   const profileFields: any = ProfileManager.getFields();
-  
+
   const updateField = (key: any, value: any) => {
-    dispatch(setFormData<any>({ 
+    dispatch(setFormData<any>({
       resource: 'profile',
-      key: key, 
-      value: value, 
+      key: key,
+      value: value.trim(),
     }));
   };
 
   const resetForm = () => {
-    dispatch(resetFormData<any>({ 
+    dispatch(resetFormData<any>({
       resource: 'profile',
     }));
   };
 
   const submitForm = async () => {
     setIsProcessing(true);
-    let payload: any = {...formData};
+    let payload: any = { ...formData };
     let result: any = null;
 
     if (!isEmailStepValid) {
@@ -54,7 +54,7 @@ const SignupScreen = () => {
       if (result?.session?.length > 0) {
         updateField('session', result.session);
         setIsEmailStepValid(true);
-      }      
+      }
     }
     else if (!isCodeStepValid) {
       result = await UserManager.verifySignupCode(payload);
@@ -65,7 +65,7 @@ const SignupScreen = () => {
     else {
       // Submit profile data here
     }
-    
+
     setIsProcessing(false);
 
     //
@@ -88,7 +88,7 @@ const SignupScreen = () => {
 
   const isSubmitDisabled = () => {
     return !formData?.email?.length
-    || (isEmailStepValid && !formData?.code?.length);
+      || (isEmailStepValid && !formData?.code?.length);
   };
 
   useEffect(() => {
@@ -122,31 +122,43 @@ const SignupScreen = () => {
           style={[Layout.screenContent, ProfileManager.getStyles().container]}
         >
           <View style={Layout.formContainer}>
-            { !isEmailStepValid && ProfileManager.renderField('signup', findField('email'), formData)}
+            {!isEmailStepValid && ProfileManager.renderField('signup', findField('email'), formData)}
 
-            { isEmailStepValid && !isCodeStepValid && (
+            {isEmailStepValid && !isCodeStepValid && (
               <>
-                { ProfileManager.renderField('signup', findField('email'), formData, {disabled: true}) }
+                {ProfileManager.renderField('signup', findField('email'), formData, { disabled: true })}
 
-                <VerificationCodeField 
+                <VerificationCodeField
                   value={formData?.code || ''}
                   onChangeText={(value: any) => updateField('code', value)}
                   disabled={false}
                 />
 
-                {/* Todo - Resend verif link here */}
+                <BoxView
+                  direction="row"
+                  align="center"
+                  justify="space-between"
+                  style={{ width: "100%" }}
+                >
+                  <BoxView direction="row" align="center" justify="flex-start">
+                    <LinkView onPress={() => router.replace("/signup")}>
+                      {i18n.t("Didn't receive code?")}
+                    </LinkView>
+                  </BoxView>
+                  <SkipButton onPress={async () => router.replace(Config.mainRoute)} />
+                </BoxView>
               </>
             )}
-            
-            { isEmailStepValid && isCodeStepValid && (
-                <ProfileTypeField
-                  value={formData?.profile_type}
-                  onChangeValue={(option: any) => updateField('profile_type', option.value)}
-                />
-              ) 
+
+            {isEmailStepValid && isCodeStepValid && (
+              <ProfileTypeField
+                value={formData?.profile_type}
+                onChangeValue={(option: any) => updateField('profile_type', option.value)}
+              />
+            )
             }
 
-            { isEmailStepValid && isCodeStepValid && formData?.profile_type?.length > 0 && profileFields.map((item: any) => {
+            {isEmailStepValid && isCodeStepValid && formData?.profile_type?.length > 0 && profileFields.map((item: any) => {
               return ProfileManager.renderField('signup', item, formData);
             })}
 
@@ -156,8 +168,8 @@ const SignupScreen = () => {
               disabled={isSubmitDisabled()}
               onPress={submitForm}
             />
-          
-            { !isEmailStepValid && (
+
+            {!isEmailStepValid && (
               <BoxView
                 direction="row"
                 align="center"
