@@ -77,7 +77,7 @@ const SignupScreen = () => {
   };
 
   const isSubmitDisabled = () => {
-    return false;
+    return !formData?.email?.length;
   };
 
   return (
@@ -108,7 +108,7 @@ const SignupScreen = () => {
 
             { isEmailStepValid && !isCodeStepValid && (
               <>
-                <TextView>{i18n.t('Verificatioin code sent, check your mailbox')}</TextView>
+                <TextView>{i18n.t('Verification code sent, check your mailbox')}</TextView>
                 <InputTextField
                   placeholder={i18n.t('Enter verification code')}
                   value={formData?.code || ''}
