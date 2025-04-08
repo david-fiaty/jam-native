@@ -16,14 +16,14 @@ type Props = BaseProps & {
   onChangeValue?: (data: any) => void;
 };
 
-const ProfileImageField = ({value, storage, onChangeValue }: Props) => {
+const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
   let profileData: any = [];
   const [uri, setUri] = useState<any>('');
 
   if (!uri && value?.length > 0) {
     setUri(MediaManager.getImageUrl(value));
   }
-  
+
   const onSelectItem = (mediaList: any) => {
     setUri(mediaList[0]?.uri);
     if (onChangeValue) onChangeValue(mediaList);
@@ -34,9 +34,9 @@ const ProfileImageField = ({value, storage, onChangeValue }: Props) => {
       label={
         <BoxView direction="row" align="center" style={styles.container}>
           {!uri?.length && (
-            <BoxView direction="row" align="center" justify="space-between">
-              <IconView name="user" theme="primary" size={60} radius="circle" />
-              <TextView>{i18n.t("Add a profile image.")}</TextView>
+            <BoxView direction="column" align="center" justify="center" style={styles.iconContainer}>
+              <IconView name="upload" theme="primary" size={60} radius="circle" />
+              <TextView>{i18n.t("Add a profile ieeemage.")}</TextView>  
             </BoxView>
           )}
 
@@ -57,9 +57,6 @@ const ProfileImageField = ({value, storage, onChangeValue }: Props) => {
               <TextView>{i18n.t("Change your profile image.")}</TextView>
             </BoxView>
           )}
-          <View>
-            <IconView name="next" theme="clear" size={20} />
-          </View>
         </BoxView>
       }
       onSelectItem={onSelectItem}
@@ -68,7 +65,13 @@ const ProfileImageField = ({value, storage, onChangeValue }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    width: '100%',
+  },
+  iconContainer: {
+    width: '100%',
+    backgroundColor: 'red',
+  },
   imagePreview: {
     borderRadius: Layout.radius.round,
   }
