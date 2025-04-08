@@ -149,12 +149,12 @@ const Endpoints = {
     cacheable: false,
     dataKey: null,
   },
-  sendRegistrationCode: {
+  sendSignupCode: {
     path: '/send-registration-verification/',
     cacheable: false,
     dataKey: null,
   },
-  verifyRegistrationCode: {
+  verifySignupCode: {
     path: '/verify-registration/',
     cacheable: false,
     dataKey: null,
