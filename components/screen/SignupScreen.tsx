@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { useSelector, useDispatch } from "react-redux";
-import { setFormData } from "@/redux/slices/FormSlice";
+import { setFormData, resetFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import { Config } from "@/constants/Config";
@@ -33,6 +33,12 @@ const SignupScreen = () => {
       resource: 'profile',
       key: key, 
       value: value, 
+    }));
+  };
+
+  const resetForm = () => {
+    dispatch(resetFormData<any>({ 
+      resource: 'profile',
     }));
   };
 
@@ -85,7 +91,7 @@ const SignupScreen = () => {
 
   useEffect(() => {
     if (!isLoaded) {
-       
+      resetForm();
       setIsLoaded(true);
     }
   }, [isLoaded]);
