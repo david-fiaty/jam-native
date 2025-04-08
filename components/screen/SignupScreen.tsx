@@ -135,7 +135,6 @@ const SignupScreen = () => {
                 />
               </>
             )}
-
             
             { isEmailStepValid && isCodeStepValid && (
                 <ProfileTypeField
@@ -145,7 +144,7 @@ const SignupScreen = () => {
               ) 
             }
 
-            { isEmailStepValid && isCodeStepValid && profileFields.map((item: any) => {
+            { isEmailStepValid && isCodeStepValid && formData?.profile_type?.length > 0 && profileFields.map((item: any) => {
               return ProfileManager.renderField('signup', item, formData);
             })}
 
