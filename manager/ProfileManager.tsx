@@ -39,7 +39,8 @@ class ProfileManager {
   canRenderField(mode: string, item: any, formData: any) {
     return item.enabled === true 
       && item[mode] === true
-      && (item.profileType === 'all' || item.profileType === formData?.['profile_type']);
+      //&& (formData?.profile_type?.length || item.key === 'profile_type' )
+      && (item.profileType === 'all' || item.profileType === formData?.profile_type);
   }
 
   renderField(mode: string, item: any, formData: any, params?: any) { 
@@ -80,8 +81,8 @@ class ProfileManager {
         },
       },
       {
-        signup: true,
-        profile: false,
+        signup: false,
+        profile: true,
         enabled: true,
         required: true,
         key: 'profile_type',

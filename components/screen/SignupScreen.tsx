@@ -15,10 +15,10 @@ import ScreenManager from "@/manager/ScreenManager";
 import DividerView from "../view/DividerView";
 import ProfileManager from "@/manager/ProfileManager";
 import ButtonView from "../view/ButtonView";
-import InputTextField from "../field/InputTextField";
 import VerificationCodeField from "../field/VerificationCodeField";
 import SkipButton from "../button/SkipButton";
 import LinkView from "../view/LinkView";
+import ProfileTypeField from "../field/ProfileTypeField";
 
 const SignupScreen = () => {
   const router = useRouter();
@@ -135,8 +135,16 @@ const SignupScreen = () => {
                 />
               </>
             )}
+            
+            { isEmailStepValid && isCodeStepValid && (
+                <ProfileTypeField
+                  value={formData?.profile_type}
+                  onChangeValue={(option: any) => updateField('profile_type', option.value)}
+                />
+              ) 
+            }
 
-            { isEmailStepValid && isCodeStepValid && profileFields.map((item: any) => {
+            { isEmailStepValid && isCodeStepValid && formData?.profile_type?.length > 0 && profileFields.map((item: any) => {
               return ProfileManager.renderField('signup', item, formData);
             })}
 
