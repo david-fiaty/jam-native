@@ -19,6 +19,7 @@ import VerificationCodeField from "../field/VerificationCodeField";
 import SkipButton from "../button/SkipButton";
 import LinkView from "../view/LinkView";
 import ProfileTypeField from "../field/ProfileTypeField";
+import InputTextField from "../field/InputTextField";
 
 const SignupScreen = () => {
   const router = useRouter();
@@ -31,13 +32,11 @@ const SignupScreen = () => {
   const profileFields: any = ProfileManager.getFields();
 
   const updateField = (key: any, value: any) => {
-    if (value && value?.length > 0) {
-      dispatch(setFormData<any>({
-        resource: 'profile',
-        key: key,
-        value: value.trim(),
-      }));
-    }
+    dispatch(setFormData<any>({
+      resource: 'profile',
+      key: key,
+      value: value,
+    }));
   };
 
   const resetForm = () => {
@@ -124,7 +123,17 @@ const SignupScreen = () => {
           style={[Layout.screenContent, ProfileManager.getStyles().container]}
         >
           <View style={Layout.formContainer}>
-            {!isEmailStepValid && ProfileManager.renderField('signup', findField('email'), formData)}
+            {!isEmailStepValid || (isEmailStepValid && (
+              <>
+                <TextView>{i18n.t('Email')}</TextView>
+                <InputTextField
+                  value={formData?.email || ''}
+                  disabled={isEmailStepValid}
+                  placeholder={i18n.t('Enter your email address')}
+                  onChangeText={(value: string) => updateField('email', value)}
+                />
+              </>
+            ))}
 
             {isEmailStepValid && !isCodeStepValid && (
               <>
