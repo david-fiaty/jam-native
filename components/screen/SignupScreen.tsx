@@ -31,11 +31,13 @@ const SignupScreen = () => {
   const profileFields: any = ProfileManager.getFields();
 
   const updateField = (key: any, value: any) => {
-    dispatch(setFormData<any>({
-      resource: 'profile',
-      key: key,
-      value: value.trim(),
-    }));
+    if (value && value?.length > 0) {
+      dispatch(setFormData<any>({
+        resource: 'profile',
+        key: key,
+        value: value.trim(),
+      }));
+    }
   };
 
   const resetForm = () => {
