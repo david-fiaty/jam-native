@@ -89,7 +89,8 @@ const SignupScreen = () => {
 
   const isSubmitDisabled = () => {
     return !formData?.email?.length
-      || (isEmailStepValid && !formData?.code?.length);
+      || (isEmailStepValid && !formData?.code?.length)
+      || (isEmailStepValid && isCodeStepValid && !formData?.profile_type);
   };
 
   useEffect(() => {
@@ -123,7 +124,7 @@ const SignupScreen = () => {
           style={[Layout.screenContent, ProfileManager.getStyles().container]}
         >
           <View style={Layout.formContainer}>
-            {!isEmailStepValid || (isEmailStepValid && (
+            {(!isEmailStepValid || !isCodeStepValid) && (
               <>
                 <TextView>{i18n.t('Email')}</TextView>
                 <InputTextField
@@ -133,7 +134,7 @@ const SignupScreen = () => {
                   onChangeText={(value: string) => updateField('email', value)}
                 />
               </>
-            ))}
+            )}
 
             {isEmailStepValid && !isCodeStepValid && (
               <>
