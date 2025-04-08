@@ -17,6 +17,8 @@ import ProfileManager from "@/manager/ProfileManager";
 import ButtonView from "../view/ButtonView";
 import InputTextField from "../field/InputTextField";
 import VerificationCodeField from "../field/VerificationCodeField";
+import SkipButton from "../button/SkipButton";
+import LinkView from "../view/LinkView";
 
 const SignupScreen = () => {
   const router = useRouter();
@@ -144,6 +146,22 @@ const SignupScreen = () => {
               disabled={isSubmitDisabled()}
               onPress={submitForm}
             />
+          
+            <BoxView
+              direction="row"
+              align="center"
+              justify="space-between"
+              style={{ width: "100%" }}
+            >
+              <BoxView direction="row" align="center" justify="flex-start">
+                <TextView>{i18n.t("You have an account?")}</TextView>
+                <LinkView onPress={async () => router.replace("/login")}>
+                  {i18n.t("Sign in")}
+                </LinkView>
+              </BoxView>
+              <SkipButton onPress={async () => router.replace(Config.mainRoute)} />
+            </BoxView>
+
           </View>
         </BoxView>
       </View>
