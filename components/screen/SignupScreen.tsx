@@ -111,6 +111,7 @@ const SignupScreen = () => {
               <VerificationCodeField 
                 value={formData?.code || ''}
                 onChangeText={(value: any) => updateField('code', value)}
+                disabled={false}
               />
             )}
 
