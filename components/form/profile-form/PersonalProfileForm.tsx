@@ -2,10 +2,12 @@ import { StyleSheet } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 
 type Props = BaseProps & {
-
+  item?: any;
+  data?: any;
+  params?: any;
 };
 
-const PersonalProfileForm = ({}: Props) => {
+const PersonalProfileForm = ({item, data, params}: Props) => {
   return (<></>);
 };
 
