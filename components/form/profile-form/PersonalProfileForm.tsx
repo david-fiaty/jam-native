@@ -5,6 +5,7 @@ import { Layout } from '@/constants/Layout';
 import i18n from '@/translation/i18n';
 import InputTextField from '@/components/field/InputTextField';
 import TextView from '@/components/view/TextView';
+import ExperienceLevelField from '@/components/field/ExperienceLevelField';
 
 type Props = BaseProps & {
   resource?: any;
@@ -48,6 +49,22 @@ const PersonalProfileForm = ({ resource, item, data, params, parentKey }: Props)
             value={data?.[parentKey]?.[item.key] || ''}
             placeholder={i18n.t('Enter your last name')}
             onChangeText={(value: string) => { }}
+          />
+        );
+      },
+    },
+    {
+      signup: false,
+      profile: true,
+      enabled: true,
+      required: false,
+      key: 'experience_in_field',
+      label: i18n.t('Experience level'),
+      render: (item: any, data: any, params?: any) => {
+        return (
+          <ExperienceLevelField 
+            value={data?.[parentKey]?.[item.key] || ''}
+            //onChangeValue={(option: any) => this.setFormData(item, option.value)}
           />
         );
       },
