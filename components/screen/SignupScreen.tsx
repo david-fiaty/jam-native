@@ -212,7 +212,7 @@ const SignupScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    //height: ScreenManager.window.height,
+    paddingTop: Layout.space.base*15,
   },
   label: {
     alignSelf: 'flex-start',
