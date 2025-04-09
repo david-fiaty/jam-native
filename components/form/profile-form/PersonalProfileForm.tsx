@@ -10,9 +10,10 @@ type Props = BaseProps & {
   item?: any;
   data?: any;
   params?: any;
+  parentKey?: any;
 };
 
-const PersonalProfileForm = ({resource, item, data, params}: Props) => {
+const PersonalProfileForm = ({resource, item, data, params, parentKey}: Props) => {
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const fields: any = [
@@ -21,9 +22,8 @@ const PersonalProfileForm = ({resource, item, data, params}: Props) => {
       profile: true,
       enabled: true,
       required: false,
-      key: 'profile_name',
-      label: i18n.t('Profile name (with no spaces)'),
-      profileType: 'all',
+      key: 'first_name',
+      label: i18n.t('First name'),
       render: (item: any, data: any, params?: any) => {
         return (
           <InputTextField
