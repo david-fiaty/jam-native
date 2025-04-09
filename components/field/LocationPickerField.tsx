@@ -5,12 +5,13 @@ import IconView from "../view/IconView";
 
 type Props = BaseProps & {
   label?: any;
+  placeholder?: any;
   latitude?: any;
   longitude?: any;
   onPressEvent: () => void;
 };
 
-const LocationPickerField = ({ label, latitude, longitude, onPressEvent }: Props) => {
+const LocationPickerField = ({ label, placeholder, latitude, longitude, onPressEvent }: Props) => {
   const value = latitude && longitude ? `${latitude},${longitude}` : '';
 
   return (
@@ -23,6 +24,7 @@ const LocationPickerField = ({ label, latitude, longitude, onPressEvent }: Props
         <InputTextField
           value={value}
           readOnly={true}
+          placeholder={placeholder}
           rightIcon={<IconView name="location" theme="transparent" />}
         />
       </TouchableOpacity>
