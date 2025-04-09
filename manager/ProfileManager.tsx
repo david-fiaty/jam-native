@@ -12,6 +12,7 @@ import SectorsField from '@/components/field/SectorsField';
 import IconView from '@/components/view/IconView';
 import ScreenManager from './ScreenManager';
 import ProfileImageField from '@/components/field/ProfileImageField';
+import DataManager from './DataManager';
 
 class ProfileManager {
   getStyles() {
@@ -45,18 +46,16 @@ class ProfileManager {
   }
 
   renderField(mode: string, item: any, formData: any, params?: any) { 
-    if (this.canRenderField(mode, item, formData)) {
-      if (item.key !== null) {
-        return (
-          <View key={item.key}>
-            <TextView style={this.getStyles().label}>
-              {i18n.t(item.label)} {item?.required === true ? '*' : ''}
-            </TextView>
-            
-            {item.render(item, formData, params)}
-          </View>
-        );
-      }
+    if (this.canRenderField(mode, item, formData)) {  
+      return (
+        <View key={item?.key || DataManager.createUuid()}>
+          <TextView style={this.getStyles().label}>
+            {i18n.t(item.label)} {item?.required === true ? '*' : ''}
+          </TextView>
+          
+          {item.render(item, formData, params)}
+        </View>
+      );
     }
 
     return <></>;
