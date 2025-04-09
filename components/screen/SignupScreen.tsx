@@ -95,7 +95,7 @@ const SignupScreen = () => {
   };
 
   const containerStyle: any = {
-    paddingTop: (!isEmailStepValid || !isCodeStepValid) ? Layout.space.base*15 : Layout.space.base*2,
+    paddingTop: (!isEmailStepValid || !isCodeStepValid || !formData?.profile_type) ? Layout.space.base*15 : Layout.space.base*4,
   };
 
   useEffect(() => {
@@ -111,7 +111,7 @@ const SignupScreen = () => {
       align="center"
       justify="center"
       scroll={true}
-      style={[Layout.screenContent, containerStyle]}
+      style={[Layout.screenContent, styles.container, containerStyle]}
     >
       <LogoView size={80} />
 
@@ -215,6 +215,9 @@ const SignupScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    paddingBottom: Layout.space.base*2,
+  },
   label: {
     alignSelf: 'flex-start',
   },
