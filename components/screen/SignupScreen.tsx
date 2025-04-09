@@ -95,7 +95,7 @@ const SignupScreen = () => {
   };
 
   const containerStyle: any = {
-    paddingTop: (!isEmailStepValid || !isCodeStepValid) ? Layout.space.base*15 : Layout.space.base*2,
+    paddingTop: (!isEmailStepValid || !isCodeStepValid || !formData?.profile_type) ? Layout.space.base*15 : Layout.space.base*4,
   };
 
   useEffect(() => {
