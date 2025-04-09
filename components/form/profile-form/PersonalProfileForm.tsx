@@ -65,14 +65,12 @@ const PersonalProfileForm = ({ resource, item, data, params, parentKey }: Props)
     );
   };
 
-
   return (
     <View style={styles.container}>
       {fields.map((o: any) => renderField(o))}
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
