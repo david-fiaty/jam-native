@@ -14,6 +14,8 @@ import ProfileImageField from '@/components/field/ProfileImageField';
 import DataManager from './DataManager';
 import LocationPickerField from '@/components/field/LocationPickerField';
 import PersonalProfileForm from '@/components/form/profile-form/PersonalProfileForm';
+import OrganizationProfileForm from '@/components/form/profile-form/OrganizationProfileForm';
+import VenueProfileForm from '@/components/form/profile-form/VenueProfileForm';
 
 class ProfileManager {
   getStyles() {
@@ -130,10 +132,12 @@ class ProfileManager {
         profileType: 'organization',
         render: (item: any, data: any, params?: any) => {
           return (
-            <InputTextField
-              value={data[item.key]}
-              placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
+            <OrganizationProfileForm 
+              resource="profile"
+              item={item} 
+              data={data} 
+              params={params} 
+              parentKey={item.key}
             />
           );
         },
@@ -148,10 +152,12 @@ class ProfileManager {
         profileType: 'venue',
         render: (item: any, data: any, params?: any) => {
           return (
-            <InputTextField
-              value={data[item.key]}
-              placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
+            <VenueProfileForm
+              resource="profile"
+              item={item} 
+              data={data} 
+              params={params} 
+              parentKey={item.key}
             />
           );
         },
