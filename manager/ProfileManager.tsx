@@ -318,7 +318,7 @@ class ProfileManager {
           return (
             <InputTextField
               value={data[item.key]}
-              placeholder={item.label}
+              placeholder={i18n.t('Enter your address')}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
@@ -389,6 +389,7 @@ class ProfileManager {
         render: (item: any, data: any, params?: any) => {
           return (
             <LocationPickerField
+              placeholder={i18n.t('Select your location')}
               latitude={data?.geolocation_latitude}
               longitude={data?.geolocation_longitude}
               onPressEvent={() => ScreenManager.toggleModal('LocationMapView', {
