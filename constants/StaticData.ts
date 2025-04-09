@@ -57,6 +57,16 @@ const StaticData = {
       label: i18n.t('Venue'),
     },
   ],
+  experienceLevels: [
+    {
+      id: null,
+      label: i18n.t('Select a level of experience'),
+    },
+    {
+      id: 'less_than_1_year',
+      label: i18n.t('Less than 1 year'),
+    },
+  ],
   locationTypes: [
     {
       id: 'online',
