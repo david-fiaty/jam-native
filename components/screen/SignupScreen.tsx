@@ -119,7 +119,7 @@ const SignupScreen = () => {
 
       {(!isEmailStepValid || !isCodeStepValid) && (
         <>
-          <TextView>{i18n.t('Email')}</TextView>
+          <TextView style={styles.label}>{i18n.t('Email')}</TextView>
           <InputTextField
             value={formData?.email || ''}
             disabled={isEmailStepValid}
@@ -137,6 +137,11 @@ const SignupScreen = () => {
             value={formData?.code || ''}
             onChangeText={(value: any) => updateField('code', value)}
             disabled={false}
+            label={
+              <TextView style={styles.label}>
+                {i18n.t('Verification code sent, check your mailbox')}
+              </TextView>
+            }
           />
         </>
       )}
@@ -209,6 +214,9 @@ const SignupScreen = () => {
 const styles = StyleSheet.create({
   container: {
     height: ScreenManager.window.height,
+  },
+  label: {
+    alignSelf: 'flex-start',
   },
   inputTextFieldContainer: {
     backgroundColor: Colors.white,
