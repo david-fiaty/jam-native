@@ -166,12 +166,7 @@ class ProfileManager {
               resource="profile"
               field={item.key}
               value={data[item.key]}
-              label={
-                <>
-                  <IconView name="plus" theme="secondary" radius="round" />
-                  <TextView>{i18n.t('Add industries')}</TextView>
-                </>
-              }
+              placeholder={i18n.t('Select your sectors')}
               onPressEvent={() => ScreenManager.toggleModal('SectorsList', {
                 resource: 'profile',
                 field: item.key,
