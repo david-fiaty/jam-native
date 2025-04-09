@@ -14,6 +14,7 @@ import ScreenManager from './ScreenManager';
 import ProfileImageField from '@/components/field/ProfileImageField';
 import DataManager from './DataManager';
 import LocationPickerField from '@/components/field/LocationPickerField';
+import PersonalProfileForm from '@/components/form/profile-form/PersonalProfileForm';
 
 class ProfileManager {
   getStyles() {
@@ -108,11 +109,7 @@ class ProfileManager {
         profileType: 'personal',
         render: (item: any, data: any, params?: any) => {
           return (
-            <InputTextField
-              value={data[item.key]}
-              placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
-            />
+            <PersonalProfileForm item={item} data={data} params={params} />
           );
         },
       },
