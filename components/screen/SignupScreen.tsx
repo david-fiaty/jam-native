@@ -107,7 +107,7 @@ const SignupScreen = () => {
       align="center"
       justify="center"
       scroll={true}
-      style={Layout.screenContent}
+      style={[Layout.screenContent, styles.container]}
     >
       <LogoView size={80} />
 
@@ -199,11 +199,17 @@ const SignupScreen = () => {
           <SkipButton onPress={async () => router.replace(Config.mainRoute)} />
         </BoxView>
       )}
+
+      { /* Todo - Can this be improved */}
+      <DividerView /><DividerView /><DividerView /><DividerView /><DividerView /><DividerView />
     </BoxView>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    height: ScreenManager.window.height,
+  },
   inputTextFieldContainer: {
     backgroundColor: Colors.white,
     borderWidth: Layout.borderWidth.base,
