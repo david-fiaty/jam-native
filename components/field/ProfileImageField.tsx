@@ -36,7 +36,7 @@ const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
           {!uri?.length && (
             <BoxView direction="column" align="center" justify="center" style={styles.iconContainer}>
               <TextView>{i18n.t("Add a profile image")}</TextView>  
-              <IconView name="upload" theme="secondary" size={30} padding={20} radius="circle" />
+              <IconView name="upload" theme="secondary" size={26} padding={18} radius="circle" />
             </BoxView>
           )}
 
