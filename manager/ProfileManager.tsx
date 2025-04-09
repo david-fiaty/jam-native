@@ -276,34 +276,6 @@ class ProfileManager {
         },
       },
       {
-        signup: true,
-        profile: true,
-        enabled: true,
-        required: false,
-        key: null,
-        label: i18n.t('Location'),
-        profileType: 'all',
-        render: (item: any, data: any, params?: any) => {
-          return (
-            <LocationPickerField
-              latitude={data?.geolocation_latitude}
-              longitude={data?.geolocation_longitude}
-              onPressEvent={() => ScreenManager.toggleModal('LocationMapView', {
-                resource: 'profile',
-                latitude: {
-                  key: 'geolocation_latitude',
-                  value: data?.geolocation_latitude,
-                },
-                longitude: {
-                  key: 'geolocation_longitude',
-                  value: data?.geolocation_longitude,
-                },
-              })}
-            />
-          );
-        },
-      },
-      {
         signup: false,
         profile: true,
         enabled: true,
@@ -335,6 +307,106 @@ class ProfileManager {
               value={data[item.key]}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
+            />
+          );
+        },
+      },
+      {
+        signup: true,
+        profile: true,
+        enabled: true,
+        required: true,
+        key: 'profile_personal',
+        label: i18n.t('Personal profile'),
+        profileType: 'personal',
+        render: (item: any, data: any, params?: any) => {
+          return (
+            <InputTextField
+              value={data[item.key]}
+              placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item, value)}
+            />
+          );
+        },
+      },
+      {
+        signup: true,
+        profile: true,
+        enabled: true,
+        required: true,
+        key: 'profile_organization',
+        label: i18n.t('Organization profile'),
+        profileType: 'organization',
+        render: (item: any, data: any, params?: any) => {
+          return (
+            <InputTextField
+              value={data[item.key]}
+              placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item, value)}
+            />
+          );
+        },
+      },
+      {
+        signup: true,
+        profile: true,
+        enabled: true,
+        required: true,
+        key: 'profile_venue',
+        label: i18n.t('Venue profile'),
+        profileType: 'venue',
+        render: (item: any, data: any, params?: any) => {
+          return (
+            <InputTextField
+              value={data[item.key]}
+              placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item, value)}
+            />
+          );
+        },
+      },
+      {
+        signup: true,
+        profile: false,
+        enabled: true,
+        required: true,
+        key: 'password',
+        label: i18n.t('Password'),
+        profileType: 'all',
+        render: (item: any, data: any, params?: any) => {
+          return (
+            <InputTextField
+              value={data[item.key]}
+              placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item, value)}
+            />
+          );
+        },
+      },
+      {
+        signup: true,
+        profile: true,
+        enabled: true,
+        required: false,
+        key: null,
+        label: i18n.t('Location'),
+        profileType: 'all',
+        render: (item: any, data: any, params?: any) => {
+          return (
+            <LocationPickerField
+              latitude={data?.geolocation_latitude}
+              longitude={data?.geolocation_longitude}
+              onPressEvent={() => ScreenManager.toggleModal('LocationMapView', {
+                resource: 'profile',
+                latitude: {
+                  key: 'geolocation_latitude',
+                  value: data?.geolocation_latitude,
+                },
+                longitude: {
+                  key: 'geolocation_longitude',
+                  value: data?.geolocation_longitude,
+                },
+              })}
             />
           );
         },
@@ -418,78 +490,6 @@ class ProfileManager {
         required: false,
         key: 'linkedin_link',
         label: i18n.t('Linkedin link'),
-        profileType: 'all',
-        render: (item: any, data: any, params?: any) => {
-          return (
-            <InputTextField
-              value={data[item.key]}
-              placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
-            />
-          );
-        },
-      },
-      {
-        signup: true,
-        profile: true,
-        enabled: true,
-        required: true,
-        key: 'profile_personal',
-        label: i18n.t('Personal profile'),
-        profileType: 'personal',
-        render: (item: any, data: any, params?: any) => {
-          return (
-            <InputTextField
-              value={data[item.key]}
-              placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
-            />
-          );
-        },
-      },
-      {
-        signup: true,
-        profile: true,
-        enabled: true,
-        required: true,
-        key: 'profile_organization',
-        label: i18n.t('Organization profile'),
-        profileType: 'organization',
-        render: (item: any, data: any, params?: any) => {
-          return (
-            <InputTextField
-              value={data[item.key]}
-              placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
-            />
-          );
-        },
-      },
-      {
-        signup: true,
-        profile: true,
-        enabled: true,
-        required: true,
-        key: 'profile_venue',
-        label: i18n.t('Venue profile'),
-        profileType: 'venue',
-        render: (item: any, data: any, params?: any) => {
-          return (
-            <InputTextField
-              value={data[item.key]}
-              placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
-            />
-          );
-        },
-      },
-      {
-        signup: true,
-        profile: false,
-        enabled: true,
-        required: true,
-        key: 'password',
-        label: i18n.t('Password'),
         profileType: 'all',
         render: (item: any, data: any, params?: any) => {
           return (
