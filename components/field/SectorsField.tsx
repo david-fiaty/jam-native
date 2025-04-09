@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useSelector } from "react-redux";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from '@/constants/Layout';
@@ -7,17 +7,20 @@ import BoxView from "../view/BoxView";
 import SpinnerView from '../view/SpinnerView';
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
+import InputTextField from './InputTextField';
+import IconView from '../view/IconView';
 
 type Props = BaseProps & {
   resource: string;
   field: string;
   label?: any;
   value?: any;
+  placeholder?: any;
   onPressEvent?: () => void;
   onDeleteEvent: (item: any) => void;
 };
 
-const SectorsField = ({ resource, field, label, value, onPressEvent, onDeleteEvent }: Props) => {
+const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent, onDeleteEvent }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [selectedSectors, setSelectedSectors] = useState<any>([]);
@@ -80,15 +83,19 @@ const SectorsField = ({ resource, field, label, value, onPressEvent, onDeleteEve
   if (!isLoaded) return <SpinnerView size="small" />;
 
   return (
-    <View style={styles.container}>
-      <BoxView
-        direction="row"
-        align="center"
-        onPress={onPressEvent}
+    <>
+      {label}
+      <TouchableOpacity
         style={styles.container}
+        onPress={onPressEvent}
       >
-        {label}      
-      </BoxView>
+        <InputTextField
+          value={value}
+          readOnly={true}
+          placeholder={placeholder}
+          rightIcon={<IconView name="plus" theme="transparent" />}
+        />
+      </TouchableOpacity>
 
       { selectedSectors?.length > 0 && (
         <View style={styles.preview}>
@@ -104,14 +111,11 @@ const SectorsField = ({ resource, field, label, value, onPressEvent, onDeleteEve
           }) }
         </View>
       )}
-    </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-  },
   preview: {
     width: '100%',
     flexDirection: 'row',
