@@ -9,7 +9,6 @@ import ProfileTypeField from '@/components/field/ProfileTypeField';
 import InputTextareaField from '@/components/field/InputTextareaField';
 import CountryField from '@/components/field/CountryField';
 import SectorsField from '@/components/field/SectorsField';
-import IconView from '@/components/view/IconView';
 import ScreenManager from './ScreenManager';
 import ProfileImageField from '@/components/field/ProfileImageField';
 import DataManager from './DataManager';
@@ -116,6 +115,7 @@ class ProfileManager {
               item={item} 
               data={data} 
               params={params} 
+              parentKey={item.key}
             />
           );
         },
