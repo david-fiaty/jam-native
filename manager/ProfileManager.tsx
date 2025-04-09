@@ -51,9 +51,11 @@ class ProfileManager {
     if (this.canRenderField(mode, item, formData)) {
       return (
         <View key={item?.key || DataManager.createUuid()}>
-          <TextView style={this.getStyles().label}>
-            {i18n.t(item.label)} {item?.required === true ? '*' : ''}
-          </TextView>
+          {item.label !== null && (
+            <TextView style={this.getStyles().label}>
+              {i18n.t(item.label)} {item?.required === true ? '*' : ''}
+            </TextView>
+          )}
 
           {item.render(item, formData, params)}
         </View>
@@ -105,11 +107,16 @@ class ProfileManager {
         enabled: true,
         required: true,
         key: 'profile_personal',
-        label: i18n.t('Personal profile'),
+        label: null,
         profileType: 'personal',
         render: (item: any, data: any, params?: any) => {
           return (
-            <PersonalProfileForm item={item} data={data} params={params} />
+            <PersonalProfileForm 
+              resource="profile"
+              item={item} 
+              data={data} 
+              params={params} 
+            />
           );
         },
       },
@@ -119,7 +126,7 @@ class ProfileManager {
         enabled: true,
         required: true,
         key: 'profile_organization',
-        label: i18n.t('Organization profile'),
+        label: null,
         profileType: 'organization',
         render: (item: any, data: any, params?: any) => {
           return (
@@ -137,7 +144,7 @@ class ProfileManager {
         enabled: true,
         required: true,
         key: 'profile_venue',
-        label: i18n.t('Venue profile'),
+        label: null,
         profileType: 'venue',
         render: (item: any, data: any, params?: any) => {
           return (
