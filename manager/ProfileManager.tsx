@@ -102,15 +102,69 @@ class ProfileManager {
         signup: true,
         profile: true,
         enabled: true,
-        required: false,
-        key: 'profile_name',
-        label: i18n.t('Profile name'),
-        profileType: 'all',
+        required: true,
+        key: 'profile_personal',
+        label: i18n.t('Personal profile'),
+        profileType: 'personal',
         render: (item: any, data: any, params?: any) => {
           return (
             <InputTextField
               value={data[item.key]}
               placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item, value)}
+            />
+          );
+        },
+      },
+      {
+        signup: true,
+        profile: true,
+        enabled: true,
+        required: true,
+        key: 'profile_organization',
+        label: i18n.t('Organization profile'),
+        profileType: 'organization',
+        render: (item: any, data: any, params?: any) => {
+          return (
+            <InputTextField
+              value={data[item.key]}
+              placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item, value)}
+            />
+          );
+        },
+      },
+      {
+        signup: true,
+        profile: true,
+        enabled: true,
+        required: true,
+        key: 'profile_venue',
+        label: i18n.t('Venue profile'),
+        profileType: 'venue',
+        render: (item: any, data: any, params?: any) => {
+          return (
+            <InputTextField
+              value={data[item.key]}
+              placeholder={item.label}
+              onChangeText={(value: string) => this.setFormData(item, value)}
+            />
+          );
+        },
+      },
+      {
+        signup: true,
+        profile: true,
+        enabled: true,
+        required: false,
+        key: 'profile_name',
+        label: i18n.t('Profile name (with no spaces)'),
+        profileType: 'all',
+        render: (item: any, data: any, params?: any) => {
+          return (
+            <InputTextField
+              value={data[item.key]}
+              placeholder={i18n.t('Profile name')}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
@@ -296,60 +350,6 @@ class ProfileManager {
         key: 'whatsapp_number',
         label: i18n.t('Whatsapp number'),
         profileType: 'all',
-        render: (item: any, data: any, params?: any) => {
-          return (
-            <InputTextField
-              value={data[item.key]}
-              placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
-            />
-          );
-        },
-      },
-      {
-        signup: true,
-        profile: true,
-        enabled: true,
-        required: true,
-        key: 'profile_personal',
-        label: i18n.t('Personal profile'),
-        profileType: 'personal',
-        render: (item: any, data: any, params?: any) => {
-          return (
-            <InputTextField
-              value={data[item.key]}
-              placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
-            />
-          );
-        },
-      },
-      {
-        signup: true,
-        profile: true,
-        enabled: true,
-        required: true,
-        key: 'profile_organization',
-        label: i18n.t('Organization profile'),
-        profileType: 'organization',
-        render: (item: any, data: any, params?: any) => {
-          return (
-            <InputTextField
-              value={data[item.key]}
-              placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
-            />
-          );
-        },
-      },
-      {
-        signup: true,
-        profile: true,
-        enabled: true,
-        required: true,
-        key: 'profile_venue',
-        label: i18n.t('Venue profile'),
-        profileType: 'venue',
         render: (item: any, data: any, params?: any) => {
           return (
             <InputTextField
