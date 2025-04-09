@@ -116,6 +116,7 @@ class ProfileManager {
               item={item} 
               data={data} 
               params={params} 
+              parentKey={item.key}
             />
           );
         },
