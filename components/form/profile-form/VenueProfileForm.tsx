@@ -24,30 +24,13 @@ const VenueProfileForm = ({ resource, item, data, params, parentKey }: Props) =>
       profile: true,
       enabled: true,
       required: false,
-      key: 'first_name',
-      label: i18n.t('First name'),
+      key: 'venue_name',
+      label: i18n.t('Venue name'),
       render: (item: any, data: any, params?: any) => {
         return (
           <InputTextField
             value={data?.[parentKey]?.[item.key] || ''}
-            placeholder={i18n.t('Enter your first name')}
-            onChangeText={(value: string) => { }}
-          />
-        );
-      },
-    },
-    {
-      signup: true,
-      profile: true,
-      enabled: true,
-      required: false,
-      key: 'last_name',
-      label: i18n.t('Last name'),
-      render: (item: any, data: any, params?: any) => {
-        return (
-          <InputTextField
-            value={data?.[parentKey]?.[item.key] || ''}
-            placeholder={i18n.t('Enter your last name')}
+            placeholder={i18n.t('Enter the venue name')}
             onChangeText={(value: string) => { }}
           />
         );
@@ -58,13 +41,14 @@ const VenueProfileForm = ({ resource, item, data, params, parentKey }: Props) =>
       profile: true,
       enabled: true,
       required: false,
-      key: 'experience_in_field',
-      label: i18n.t('Experience level'),
+      key: 'creation_year',
+      label: i18n.t('Creation year'),
       render: (item: any, data: any, params?: any) => {
         return (
-          <ExperienceLevelField 
+          <InputTextField
             value={data?.[parentKey]?.[item.key] || ''}
-            //onChangeValue={(option: any) => this.setFormData(item, option.value)}
+            placeholder={i18n.t('Enter the creation year')}
+            onChangeText={(value: string) => { }}
           />
         );
       },
