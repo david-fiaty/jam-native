@@ -20,6 +20,7 @@ import SkipButton from "../button/SkipButton";
 import LinkView from "../view/LinkView";
 import ProfileTypeField from "../field/ProfileTypeField";
 import InputTextField from "../field/InputTextField";
+import ProfileImageField from "../field/ProfileImageField";
 
 const SignupScreen = () => {
   const router = useRouter();
@@ -93,6 +94,10 @@ const SignupScreen = () => {
       || (isEmailStepValid && isCodeStepValid && !formData?.profile_type);
   };
 
+  const containerStyle: any = {
+    paddingTop: (!isEmailStepValid || !isCodeStepValid || !formData?.profile_type) ? Layout.space.base*15 : Layout.space.base*4,
+  };
+
   useEffect(() => {
     if (!isLoaded) {
       resetForm();
@@ -106,106 +111,116 @@ const SignupScreen = () => {
       align="center"
       justify="center"
       scroll={true}
-      style={Layout.screenContent}
+      style={[Layout.screenContent, styles.container, containerStyle]}
     >
       <LogoView size={80} />
 
       <TextView style={styles.wecomeMessage}>
-        {i18n.t("Create an account")}
+        {i18n.t("Create a jam account")}
       </TextView>
 
       <DividerView />
 
       <View style={Layout.formContainer}>
-        <BoxView
-          align="flex-start"
-          justify="flex-start"
-          scroll={true}
-          style={[Layout.screenContent, ProfileManager.getStyles().container]}
-        >
-          <View style={Layout.formContainer}>
-            {(!isEmailStepValid || !isCodeStepValid) && (
-              <>
-                <TextView>{i18n.t('Email')}</TextView>
-                <InputTextField
-                  value={formData?.email || ''}
-                  disabled={isEmailStepValid}
-                  placeholder={i18n.t('Enter your email address')}
-                  onChangeText={(value: string) => updateField('email', value)}
-                />
-              </>
-            )}
+        {(!isEmailStepValid || !isCodeStepValid) && (
+          <>
+            <TextView style={styles.label}>{i18n.t('Email')}</TextView>
+            <InputTextField
+              value={formData?.email || ''}
+              disabled={isEmailStepValid}
+              placeholder={i18n.t('Enter your email address')}
+              onChangeText={(value: string) => updateField('email', value)}
+            />
+          </>
+        )}
 
-            {isEmailStepValid && !isCodeStepValid && (
-              <>
-                {ProfileManager.renderField('signup', findField('email'), formData, { disabled: true })}
+        {isEmailStepValid && !isCodeStepValid && (
+          <>
+            {ProfileManager.renderField('signup', findField('email'), formData, { disabled: true })}
 
-                <VerificationCodeField
-                  value={formData?.code || ''}
-                  onChangeText={(value: any) => updateField('code', value)}
-                  disabled={false}
-                />
-              </>
-            )}
+            <VerificationCodeField
+              value={formData?.code || ''}
+              onChangeText={(value: any) => updateField('code', value)}
+              disabled={false}
+              label={
+                <TextView style={styles.label}>
+                  {i18n.t('Verification code sent, check your mailbox')}
+                </TextView>
+              }
+            />
+          </>
+        )}
 
-            {isEmailStepValid && isCodeStepValid && (
-              <ProfileTypeField
-                value={formData?.profile_type}
-                onChangeValue={(option: any) => updateField('profile_type', option.value)}
-              />
-            )}
-
-            {isEmailStepValid && isCodeStepValid && formData?.profile_type?.length > 0 && profileFields.map((item: any) => {
-              return ProfileManager.renderField('signup', item, formData);
-            })}
-
-            <ButtonView
-              label={i18n.t('Continue')}
-              isProcessing={isProcessing}
-              disabled={isSubmitDisabled()}
-              onPress={submitForm}
+        {isEmailStepValid && isCodeStepValid && (
+          <>
+            <ProfileImageField
+              value={formData?.profile_picture?.url}
+              onChangeValue={(mediaList: any) => updateField('profile_picture', { url: mediaList[0]?.uri })}
             />
 
-            {isEmailStepValid && !isCodeStepValid && (
-              <BoxView
-                direction="row"
-                align="center"
-                justify="space-between"
-                style={{ width: "100%" }}
-              >
-                <BoxView direction="row" align="center" justify="flex-start">
-                  <LinkView onPress={() => router.replace("/signup")}>
-                    {i18n.t("Didn't receive code?")}
-                  </LinkView>
-                </BoxView>
-                <SkipButton onPress={async () => router.replace(Config.mainRoute)} />
-              </BoxView>
-            )}
+            <DividerView />
+            <ProfileTypeField
+              value={formData?.profile_type}
+              onChangeValue={(option: any) => updateField('profile_type', option.value)}
+            />
+          </>
+        )}
 
-            {!isEmailStepValid && (
-              <BoxView
-                direction="row"
-                align="center"
-                justify="space-between"
-                style={{ width: "100%" }}
-              >
-                <BoxView direction="row" align="center" justify="flex-start">
-                  <TextView>{i18n.t("You have an account?")}</TextView>
-                  <LinkView onPress={async () => router.replace("/login")}>
-                    {i18n.t("Sign in")}
-                  </LinkView>
-                </BoxView>
-                <SkipButton onPress={async () => router.replace(Config.mainRoute)} />
-              </BoxView>
-            )}
-          </View>
-        </BoxView>
+        {isEmailStepValid && isCodeStepValid && formData?.profile_type?.length > 0 && profileFields.map((item: any) => {
+          return ProfileManager.renderField('signup', item, formData);
+        })}
+
+        <ButtonView
+          label={i18n.t('Continue')}
+          isProcessing={isProcessing}
+          disabled={isSubmitDisabled()}
+          onPress={submitForm}
+        />
+
+        {isEmailStepValid && !isCodeStepValid && (
+          <BoxView
+            direction="row"
+            align="center"
+            justify="space-between"
+            style={{ width: "100%" }}
+          >
+            <BoxView direction="row" align="center" justify="flex-start">
+              <LinkView onPress={() => router.replace("/signup")}>
+                {i18n.t("Didn't receive code?")}
+              </LinkView>
+            </BoxView>
+            <SkipButton onPress={async () => router.replace(Config.mainRoute)} />
+          </BoxView>
+        )}
+
+        {!isEmailStepValid && (
+          <BoxView
+            direction="row"
+            align="center"
+            justify="space-between"
+            style={{ width: "100%" }}
+          >
+            <BoxView direction="row" align="center" justify="flex-start">
+              <TextView>{i18n.t("You have an account?")}</TextView>
+              <LinkView onPress={async () => router.replace("/login")}>
+                {i18n.t("Sign in")}
+              </LinkView>
+            </BoxView>
+            <SkipButton onPress={async () => router.replace(Config.mainRoute)} />
+          </BoxView>
+        )}
       </View>
     </BoxView>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    paddingBottom: Layout.space.base*2,
+  },
+  label: {
+    alignSelf: 'flex-start',
+  },
   inputTextFieldContainer: {
     backgroundColor: Colors.white,
     borderWidth: Layout.borderWidth.base,

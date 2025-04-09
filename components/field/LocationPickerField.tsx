@@ -4,25 +4,31 @@ import InputTextField from "../field/InputTextField";
 import IconView from "../view/IconView";
 
 type Props = BaseProps & {
+  label?: any;
+  placeholder?: any;
   latitude?: any;
   longitude?: any;
-  onPressEvent: () => void,
+  onPressEvent: () => void;
 };
 
-const LocationPickerField = ({ latitude, longitude, onPressEvent }: Props) => {
+const LocationPickerField = ({ label, placeholder, latitude, longitude, onPressEvent }: Props) => {
   const value = latitude && longitude ? `${latitude},${longitude}` : '';
 
   return (
-    <TouchableOpacity
-      style={styles.container}
-      onPress={onPressEvent}
-    >
-      <InputTextField
-        value={value}
-        readOnly={true}
-        rightIcon={<IconView name="location" theme="transparent" />}
-      />
-    </TouchableOpacity>
+    <>
+      {label}
+      <TouchableOpacity
+        style={styles.container}
+        onPress={onPressEvent}
+      >
+        <InputTextField
+          value={value}
+          readOnly={true}
+          placeholder={placeholder}
+          rightIcon={<IconView name="location" theme="transparent" />}
+        />
+      </TouchableOpacity>
+    </>
   );
 };
 
