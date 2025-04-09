@@ -7,12 +7,13 @@ import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 
 type Props = BaseProps & {
-  value?: any,
-  onChangeValue?: (option: any) => void,
+  label?: any;
+  value?: any;
+  onChangeValue?: (option: any) => void;
 };
 
-const ExperienceLevelField = ({value, onChangeValue}: Props) => {
-  const profileTypes = StaticData.profileTypes;
+const ExperienceLevelField = ({label, value, onChangeValue}: Props) => {
+  const experienceLevels = StaticData.experienceLevels;
 
   const buildOptions = (optionsData: any) => {    
     return [...(optionsData || [])].map((item: any) => {
@@ -25,11 +26,11 @@ const ExperienceLevelField = ({value, onChangeValue}: Props) => {
   
   return (
     <BoxView direction="column" align="left" style={styles.container}>
-      <TextView>{i18n.t('Experience level')}</TextView>
+      {label}
       <SelectListBase 
         placeholder={i18n.t('Select a level of experience')}
         value={value}
-        data={buildOptions(profileTypes)}  
+        data={buildOptions(experienceLevels)}  
         onChangeValue={onChangeValue}
       />
     </BoxView>
