@@ -46,15 +46,17 @@ class ProfileManager {
 
   renderField(mode: string, item: any, formData: any, params?: any) { 
     if (this.canRenderField(mode, item, formData)) {
-      return (
-        <View key={item.key}>
-          <TextView style={this.getStyles().label}>
-            {i18n.t(item.label)} {item?.required === true ? '*' : ''}
-          </TextView>
-          
-          {item.render(item, formData, params)}
-        </View>
-      );
+      if (item.key !== null) {
+        return (
+          <View key={item.key}>
+            <TextView style={this.getStyles().label}>
+              {i18n.t(item.label)} {item?.required === true ? '*' : ''}
+            </TextView>
+            
+            {item.render(item, formData, params)}
+          </View>
+        );
+      }
     }
 
     return <></>;
