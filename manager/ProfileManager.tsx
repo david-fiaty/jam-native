@@ -13,23 +13,24 @@ import IconView from '@/components/view/IconView';
 import ScreenManager from './ScreenManager';
 import ProfileImageField from '@/components/field/ProfileImageField';
 import DataManager from './DataManager';
+import LocationPickerField from '@/components/field/LocationPickerField';
 
 class ProfileManager {
   getStyles() {
     return {
       container: {
-        marginBottom: Layout.space.base*4,
+        marginBottom: Layout.space.base * 4,
         paddingLeft: 0,
         paddingRight: 0,
       },
       label: {
-        marginBottom: Layout.space.base/2,
+        marginBottom: Layout.space.base / 2,
       },
     };
   }
 
   setFormData(item: any, value: any) {
-    let payload: any =  {
+    let payload: any = {
       resource: 'profile',
       key: item.key,
       value: value,
@@ -39,20 +40,20 @@ class ProfileManager {
   }
 
   canRenderField(mode: string, item: any, formData: any) {
-    return item.enabled === true 
+    return item.enabled === true
       && item[mode] === true
       //&& (formData?.profile_type?.length || item.key === 'profile_type' )
       && (item.profileType === 'all' || item.profileType === formData?.profile_type);
   }
 
-  renderField(mode: string, item: any, formData: any, params?: any) { 
-    if (this.canRenderField(mode, item, formData)) {  
+  renderField(mode: string, item: any, formData: any, params?: any) {
+    if (this.canRenderField(mode, item, formData)) {
       return (
         <View key={item?.key || DataManager.createUuid()}>
           <TextView style={this.getStyles().label}>
             {i18n.t(item.label)} {item?.required === true ? '*' : ''}
           </TextView>
-          
+
           {item.render(item, formData, params)}
         </View>
       );
@@ -68,14 +69,14 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: false,
-        key: 'upload_profile_picture', 
+        key: 'upload_profile_picture',
         label: i18n.t('Profile picture'),
         profileType: 'all',
         render: (item: any, data: any, params?: any) => {
           return (
-            <ProfileImageField 
+            <ProfileImageField
               value={data[item.key]?.url}
-              onChangeValue={(mediaList: any) => this.setFormData(item, {url: mediaList[0]?.uri})}
+              onChangeValue={(mediaList: any) => this.setFormData(item, { url: mediaList[0]?.uri })}
             />
           );
         },
@@ -87,7 +88,7 @@ class ProfileManager {
         required: true,
         key: 'profile_type',
         label: i18n.t('Profile type'),
-        profileType: 'all', 
+        profileType: 'all',
         render: (item: any, data: any, params?: any) => {
           return (
             <ProfileTypeField
@@ -279,33 +280,25 @@ class ProfileManager {
         profile: true,
         enabled: true,
         required: false,
-        key: 'geolocation_latitude',
-        label: i18n.t('Latitude'),
+        key: null,
+        label: i18n.t('Location'),
         profileType: 'all',
         render: (item: any, data: any, params?: any) => {
           return (
-            <InputTextField
-              value={data[item.key]}
-              placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
-            />
-          );
-        },
-      },
-      {
-        signup: true,
-        profile: true,
-        enabled: true,
-        required: false,
-        key: 'geolocation_longitude',
-        label: i18n.t('Longitude'),
-        profileType: 'all',
-        render: (item: any, data: any, params?: any) => {
-          return (
-            <InputTextField
-              value={data[item.key]}
-              placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
+            <LocationPickerField
+              latitude={data?.geolocation_latitude}
+              longitude={data?.geolocation_longitude}
+              onPressEvent={() => ScreenManager.toggleModal('LocationMapView', {
+                resource: 'profile',
+                latitude: {
+                  key: 'geolocation_latitude',
+                  value: data?.geolocation_latitude,
+                },
+                longitude: {
+                  key: 'geolocation_longitude',
+                  value: data?.geolocation_longitude,
+                },
+              })}
             />
           );
         },
@@ -511,7 +504,7 @@ class ProfileManager {
     ];
   }
 
-  submitForm() {}
+  submitForm() { }
 };
 
 export default (new ProfileManager());
