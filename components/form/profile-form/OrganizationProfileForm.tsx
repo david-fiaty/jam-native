@@ -39,7 +39,7 @@ const OrganizationProfileForm = ({ resource, item, data, params, parentKey }: Pr
     {
       signup: false,
       profile: true,
-      enabled: true,
+      enabled: false,
       required: false,
       key: 'creation_year',
       label: i18n.t('Creation year'),
