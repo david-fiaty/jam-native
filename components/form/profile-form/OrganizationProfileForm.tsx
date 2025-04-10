@@ -58,11 +58,16 @@ const OrganizationProfileForm = ({ resource, item, data, params, parentKey }: Pr
   ];
 
   const updateField = (parentKey: any, key: string, value: any) => {
+
+    console.log(parentKey, key, value);
+    
+    /*
     dispatch(setFormData<any>({
       resource: 'profile',
       key: key,
       value: value,
     }));
+    */
   };
 
   const renderField = (item: any) => {
