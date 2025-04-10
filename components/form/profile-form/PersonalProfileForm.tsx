@@ -56,7 +56,7 @@ const PersonalProfileForm = ({ resource, item, data, params, parentKey }: Props)
     {
       signup: false,
       profile: true,
-      enabled: true,
+      enabled: false,
       required: false,
       key: 'experience_in_field',
       label: i18n.t('Experience level'),
@@ -84,7 +84,11 @@ const PersonalProfileForm = ({ resource, item, data, params, parentKey }: Props)
 
   return (
     <View style={styles.container}>
-      {fields.map((o: any) => renderField(o))}
+      {fields.map((o: any) => {
+        if (o?.enabled === true) {
+          return renderField(o);
+        }
+      })}
     </View>
   );
 }
