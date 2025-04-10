@@ -75,11 +75,7 @@ const OrganizationProfileForm = ({ resource, item, data, params, parentKey }: Pr
 
   return (
     <View style={styles.container}>
-      {fields.map((o: any) => {
-        if (o?.enabled === true) {
-          return ProfileManager.renderSubField(o, formData);
-        }
-      })}
+      {fields.map((o: any) => ProfileManager.renderSubField(o, formData))}
     </View>
   );
 }
