@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import { useSelector, useDispatch } from "react-redux";
+import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from '@/constants/Layout';
 import i18n from '@/translation/i18n';
 import InputTextField from '@/components/field/InputTextField';
@@ -16,6 +17,7 @@ type Props = BaseProps & {
 };
 
 const OrganizationProfileForm = ({ resource, item, data, params, parentKey }: Props) => {
+  const dispatch = useDispatch();
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const fields: any = [
@@ -54,6 +56,14 @@ const OrganizationProfileForm = ({ resource, item, data, params, parentKey }: Pr
       },
     },
   ];
+
+  const updateField = (key: any, value: any) => {
+    dispatch(setFormData<any>({
+      resource: 'profile',
+      key: key,
+      value: value,
+    }));
+  };
 
   const renderField = (item: any) => {
     return (
