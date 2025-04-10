@@ -31,7 +31,7 @@ const PersonalProfileForm = ({ resource, mode, item, data, params, parentKey }: 
       key: 'first_name',
       label: i18n.t('First name'),
       profileType: 'personal',
-      render: (item: any, data: any, params?: any) => {
+      render: (mode: string, item: any, data: any, params?: any) => {
         return (
           <InputTextField
             value={data?.[parentKey]?.[item.key] || ''}
@@ -49,7 +49,7 @@ const PersonalProfileForm = ({ resource, mode, item, data, params, parentKey }: 
       key: 'last_name',
       label: i18n.t('Last name'),
       profileType: 'personal',
-      render: (item: any, data: any, params?: any) => {
+      render: (mode: string, item: any, data: any, params?: any) => {
         return (
           <InputTextField
             value={data?.[parentKey]?.[item.key] || ''}
@@ -67,7 +67,7 @@ const PersonalProfileForm = ({ resource, mode, item, data, params, parentKey }: 
       key: 'experience_in_field',
       label: i18n.t('Experience level'),
       profileType: 'personal',
-      render: (item: any, data: any, params?: any) => {
+      render: (mode: string, item: any, data: any, params?: any) => {
         return (
           <ExperienceLevelField 
             value={data?.[parentKey]?.[item.key] || ''}
