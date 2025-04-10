@@ -36,7 +36,7 @@ const PersonalProfileForm = ({ resource, mode, item, data, params, parentKey }: 
           <InputTextField
             value={data?.[parentKey]?.[item.key] || ''}
             placeholder={i18n.t('Enter your first name')}
-            onChangeText={(value: string) => updateField(parentKey, item.key, value)}
+            onChangeText={(value: string) => updateField(item, value)}
           />
         );
       },
@@ -54,7 +54,7 @@ const PersonalProfileForm = ({ resource, mode, item, data, params, parentKey }: 
           <InputTextField
             value={data?.[parentKey]?.[item.key] || ''}
             placeholder={i18n.t('Enter your last name')}
-            onChangeText={(value: string) => updateField(parentKey, item.key, value)}
+            onChangeText={(value: string) => updateField(item, value)}
           />
         );
       },
@@ -78,10 +78,10 @@ const PersonalProfileForm = ({ resource, mode, item, data, params, parentKey }: 
     },
   ];
 
-  const updateField = (parentKey: any, key: string, value: any) => {
+  const updateField = (item: any, value: any) => {
 
-    console.log(parentKey, key, value);
-
+    console.log(parentKey, value);
+    
     /*
     dispatch(setFormData<any>({
       resource: 'profile',
