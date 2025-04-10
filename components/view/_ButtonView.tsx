@@ -3,36 +3,26 @@ import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
 import TextView from '../view/TextView';
 import SpinnerView from '../view/SpinnerView';
+import { Button } from '@rneui/themed';
 
 type Props = {
   label: string;
   disabled?: boolean;
+  isProcessing?: boolean;
   onPress: () => void;
-  isProcessing: boolean;
 };
 
-const ButtonView = ({label, disabled, onPress, isProcessing}: Props) => {
-  if (isProcessing) {
-    return (
-      <View style={[styles.container, styles.processing]}>
-        <SpinnerView color="white" size="small" />
-      </View>
-    );
-  }
-  else if (disabled === true) {
-    return (
-      <View style={[styles.container, styles.disabled]}>
-        <TextView style={styles.label}>{label}</TextView>
-      </View>
-    );
-  }
-  else {
-    return (
-      <TouchableOpacity onPress={onPress} style={styles.container}>
-        <TextView style={styles.label}>{label}</TextView>
-      </TouchableOpacity>
-    );
-  }
+const ButtonView = ({label, disabled, isProcessing, onPress }: Props) => {
+  return (
+    <Button
+      title={label}
+      onPress={onPress}
+      buttonStyle={styles.container}
+      containerStyle={styles.container}
+      disabled={disabled}
+      loading={isProcessing}
+    />
+  );
 };
 
 const styles = StyleSheet.create({
@@ -51,10 +41,7 @@ const styles = StyleSheet.create({
   },
   processing: {
     backgroundColor: Colors.secondary,
-  },
-  disabled: {
-    opacity: 0.5,
-  },
+  }
 });
 
 export default ButtonView;

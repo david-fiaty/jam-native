@@ -45,6 +45,7 @@ const InputTextField = ({
         rightIcon={rightIcon}
         placeholder={placeholder}
         placeholderTextColor={Colors.primary}
+        inputContainerStyle={styles.inputContainerStyle}
         containerStyle={containerStyle ?? {}}
         multiline={false}
         editable={!disabled}
@@ -61,6 +62,9 @@ const InputTextField = ({
 
 const styles = StyleSheet.create({
   container: {
+    width: '100%',
+  },
+  inputContainerStyle: {
     width: '100%',
   },
 });
