@@ -7,6 +7,7 @@ import i18n from '@/translation/i18n';
 import InputTextField from '@/components/field/InputTextField';
 import TextView from '@/components/view/TextView';
 import ExperienceLevelField from '@/components/field/ExperienceLevelField';
+import ProfileManager from '@/manager/ProfileManager';
 
 type Props = BaseProps & {
   resource?: any;
@@ -70,22 +71,11 @@ const OrganizationProfileForm = ({ resource, item, data, params, parentKey }: Pr
     */
   };
 
-  const renderField = (item: any) => {
-    return (
-      <View key={item.key}>
-        <TextView style={styles.label}>
-          {i18n.t(item.label)} {item?.required === true ? '*' : ''}
-        </TextView>
-        {item.render(item, formData, params)}
-      </View>
-    );
-  };
-
   return (
     <View style={styles.container}>
       {fields.map((o: any) => {
         if (o?.enabled === true) {
-          return renderField(o);
+          return ProfileManager.renderSubField(o, formData);
         }
       })}
     </View>
@@ -95,9 +85,6 @@ const OrganizationProfileForm = ({ resource, item, data, params, parentKey }: Pr
 const styles = StyleSheet.create({
   container: {
     gap: Layout.space.base,
-  },
-  label: {
-    marginBottom: Layout.space.base / 2,
   },
 });
 

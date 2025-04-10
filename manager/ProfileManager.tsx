@@ -66,6 +66,17 @@ class ProfileManager {
     return <></>;
   }
 
+  renderSubField = (item: any, formData: any, params?: any) => {
+    return (
+      <View key={item.key}>
+        <TextView style={this.getStyles().label}>
+          {i18n.t(item.label)} {item?.required === true ? '*' : ''}
+        </TextView>
+        {item.render(item, formData, params)}
+      </View>
+    );
+  };
+
   getFields() {
     return [
       {
