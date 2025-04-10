@@ -199,6 +199,24 @@ class ProfileManager {
         },
       },
       {
+        signup: true,
+        profile: true,
+        enabled: true,
+        required: false,
+        key: 'address',
+        label: i18n.t('Address'),
+        profileType: 'all',
+        render: (item: any, data: any, params?: any) => {
+          return (
+            <InputTextField
+              value={data[item.key]}
+              placeholder={i18n.t('Enter your address')}
+              onChangeText={(value: string) => this.setFormData(item, value)}
+            />
+          );
+        },
+      },
+      {
         signup: false,
         profile: true,
         enabled: true,
@@ -311,24 +329,6 @@ class ProfileManager {
             <InputTextField
               value={data[item.key]}
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
-            />
-          );
-        },
-      },
-      {
-        signup: true,
-        profile: true,
-        enabled: true,
-        required: false,
-        key: 'address',
-        label: i18n.t('Address'),
-        profileType: 'all',
-        render: (item: any, data: any, params?: any) => {
-          return (
-            <InputTextField
-              value={data[item.key]}
-              placeholder={i18n.t('Enter your address')}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
           );
