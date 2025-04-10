@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import { useSelector, useDispatch } from "react-redux";
+import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from '@/constants/Layout';
 import i18n from '@/translation/i18n';
 import InputTextField from '@/components/field/InputTextField';
@@ -16,6 +17,7 @@ type Props = BaseProps & {
 };
 
 const VenueProfileForm = ({ resource, item, data, params, parentKey }: Props) => {
+  const dispatch = useDispatch();
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const fields: any = [
@@ -31,7 +33,7 @@ const VenueProfileForm = ({ resource, item, data, params, parentKey }: Props) =>
           <InputTextField
             value={data?.[parentKey]?.[item.key] || ''}
             placeholder={i18n.t('Enter the venue name')}
-            onChangeText={(value: string) => { }}
+            onChangeText={(value: string) => updateField(parentKey, item.key, value)}
           />
         );
       },
@@ -48,12 +50,20 @@ const VenueProfileForm = ({ resource, item, data, params, parentKey }: Props) =>
           <InputTextField
             value={data?.[parentKey]?.[item.key] || ''}
             placeholder={i18n.t('Enter the creation year')}
-            onChangeText={(value: string) => { }}
+            onChangeText={(value: string) => updateField(parentKey, item.key, value)}
           />
         );
       },
     },
   ];
+
+  const updateField = (parentKey: any, key: string, value: any) => {
+    dispatch(setFormData<any>({
+      resource: 'profile',
+      key: key,
+      value: value,
+    }));
+  };
 
   const renderField = (item: any) => {
     return (
