@@ -80,7 +80,7 @@ const PersonalProfileForm = ({ resource, mode, item, data, params, parentKey }: 
 
   const updateField = (item: any, value: any) => {
 
-    console.log(parentKey, value);
+    console.log(item, value);
     
     /*
     dispatch(setFormData<any>({
