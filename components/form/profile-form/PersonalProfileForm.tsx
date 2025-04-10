@@ -29,6 +29,7 @@ const PersonalProfileForm = ({ resource, item, data, params, parentKey }: Props)
       required: false,
       key: 'first_name',
       label: i18n.t('First name'),
+      profileType: 'personal',
       render: (item: any, data: any, params?: any) => {
         return (
           <InputTextField
@@ -46,6 +47,7 @@ const PersonalProfileForm = ({ resource, item, data, params, parentKey }: Props)
       required: false,
       key: 'last_name',
       label: i18n.t('Last name'),
+      profileType: 'personal',
       render: (item: any, data: any, params?: any) => {
         return (
           <InputTextField
@@ -63,6 +65,7 @@ const PersonalProfileForm = ({ resource, item, data, params, parentKey }: Props)
       required: false,
       key: 'experience_in_field',
       label: i18n.t('Experience level'),
+      profileType: 'personal',
       render: (item: any, data: any, params?: any) => {
         return (
           <ExperienceLevelField 
