@@ -29,6 +29,7 @@ const OrganizationProfileForm = ({ resource, item, data, params, parentKey }: Pr
       required: false,
       key: 'organization_name',
       label: i18n.t('Organization name'),
+      profileType: 'organization',
       render: (item: any, data: any, params?: any) => {
         return (
           <InputTextField
@@ -46,6 +47,7 @@ const OrganizationProfileForm = ({ resource, item, data, params, parentKey }: Pr
       required: false,
       key: 'creation_year',
       label: i18n.t('Creation year'),
+      profileType: 'organization',
       render: (item: any, data: any, params?: any) => {
         return (
           <InputTextField
