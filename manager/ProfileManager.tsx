@@ -521,6 +521,12 @@ class ProfileManager {
     ];
   }
 
+  // Todo - Move subform fields here
+  getSubFields() {
+    return [
+    ];
+  }
+
   submitForm() { }
 };
 
