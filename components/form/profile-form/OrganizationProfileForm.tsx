@@ -33,7 +33,7 @@ const OrganizationProfileForm = ({ resource, item, data, params, parentKey }: Pr
           <InputTextField
             value={data?.[parentKey]?.[item.key] || ''}
             placeholder={i18n.t('Enter your organization name')}
-            onChangeText={(value: string) => { }}
+            onChangeText={(value: string) => updateField(parentKey, item.key, value)}
           />
         );
       },
@@ -50,14 +50,14 @@ const OrganizationProfileForm = ({ resource, item, data, params, parentKey }: Pr
           <InputTextField
             value={data?.[parentKey]?.[item.key] || ''}
             placeholder={i18n.t('Enter the creation year')}
-            onChangeText={(value: string) => { }}
+            onChangeText={(value: string) => updateField(parentKey, item.key, value)}
           />
         );
       },
     },
   ];
 
-  const updateField = (key: any, value: any) => {
+  const updateField = (parentKey: any, key: string, value: any) => {
     dispatch(setFormData<any>({
       resource: 'profile',
       key: key,
