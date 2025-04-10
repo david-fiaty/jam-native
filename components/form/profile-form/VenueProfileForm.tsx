@@ -63,7 +63,7 @@ const VenueProfileForm = ({ resource, mode, item, data, params, parentKey }: Pro
 
   const updateField = (item: any, value: any) => {
 
-    console.log(parentKey, value);
+    console.log(item, value);
     
     /*
     dispatch(setFormData<any>({
