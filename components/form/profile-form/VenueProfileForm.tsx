@@ -11,13 +11,14 @@ import ProfileManager from '@/manager/ProfileManager';
 
 type Props = BaseProps & {
   resource?: any;
+  mode?: string;
   item?: any;
   data?: any;
   params?: any;
   parentKey?: any;
 };
 
-const VenueProfileForm = ({ resource, item, data, params, parentKey }: Props) => {
+const VenueProfileForm = ({ resource, mode, item, data, params, parentKey }: Props) => {
   const dispatch = useDispatch();
   const formData: any = useSelector((state: any) => state.form[resource]);
 

@@ -58,7 +58,7 @@ class ProfileManager {
             </TextView>
           )}
 
-          {item.render(item, formData, params)}
+          {item.render(mode, item, formData, params)}
         </View>
       );
     }
@@ -87,7 +87,7 @@ class ProfileManager {
         key: 'upload_profile_picture',
         label: i18n.t('Profile picture'),
         profileType: 'all',
-        render: (item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <ProfileImageField
               value={data[item.key]?.url}
@@ -104,7 +104,7 @@ class ProfileManager {
         key: 'profile_type',
         label: i18n.t('Profile type'),
         profileType: 'all',
-        render: (item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <ProfileTypeField
               value={data[item.key]}
@@ -121,7 +121,7 @@ class ProfileManager {
         key: 'profile_personal',
         label: null,
         profileType: 'personal',
-        render: (item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <PersonalProfileForm 
               resource="profile"
@@ -141,7 +141,7 @@ class ProfileManager {
         key: 'profile_organization',
         label: null,
         profileType: 'organization',
-        render: (item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <OrganizationProfileForm 
               resource="profile"
@@ -161,7 +161,7 @@ class ProfileManager {
         key: 'profile_venue',
         label: null,
         profileType: 'venue',
-        render: (item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <VenueProfileForm
               resource="profile"
@@ -181,7 +181,7 @@ class ProfileManager {
         key: 'profile_name',
         label: i18n.t('Profile name (with no spaces)'),
         profileType: 'all',
-        render: (item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               value={data[item.key]}
@@ -199,7 +199,7 @@ class ProfileManager {
         key: 'profile_description',
         label: i18n.t('About'),
         profileType: 'all',
-        render: (item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextareaField
               value={data[item.key]}
@@ -217,7 +217,7 @@ class ProfileManager {
         key: 'address',
         label: i18n.t('Address'),
         profileType: 'all',
-        render: (item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               value={data[item.key]}
@@ -235,7 +235,7 @@ class ProfileManager {
         key: 'upload_other_docs',
         label: i18n.t('Other documents'),
         profileType: 'all',
-        render: (item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               value={data[item.key]}
@@ -253,7 +253,7 @@ class ProfileManager {
         key: 'sectors_ids',
         label: i18n.t('Sectors'),
         profileType: 'all',
-        render: (item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <SectorsField
               resource="profile"
@@ -282,7 +282,7 @@ class ProfileManager {
         key: 'scope_country_code',
         label: i18n.t('Country'),
         profileType: 'all',
-        render: (item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <CountryField
               value={data[item.key]}
@@ -299,7 +299,7 @@ class ProfileManager {
         key: 'region',
         label: i18n.t('Region'),
         profileType: 'all',
-        render: (item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               value={data[item.key]}
@@ -317,7 +317,7 @@ class ProfileManager {
         key: 'town_or_locality',
         label: i18n.t('Locality'),
         profileType: 'all',
-        render: (item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               value={data[item.key]}
@@ -335,7 +335,7 @@ class ProfileManager {
         key: 'other_town_or_locality',
         label: i18n.t('Other locality'),
         profileType: 'all',
-        render: (item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               value={data[item.key]}
@@ -353,7 +353,7 @@ class ProfileManager {
         key: 'email',
         label: i18n.t('Email'),
         profileType: 'all',
-        render: (item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               value={data[item.key]}
@@ -371,7 +371,7 @@ class ProfileManager {
         key: 'whatsapp_number',
         label: i18n.t('Whatsapp number'),
         profileType: 'all',
-        render: (item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               value={data[item.key]}
@@ -389,7 +389,7 @@ class ProfileManager {
         key: 'password',
         label: i18n.t('Password'),
         profileType: 'all',
-        render: (item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               value={data[item.key]}
@@ -407,7 +407,7 @@ class ProfileManager {
         key: null,
         label: i18n.t('Location'),
         profileType: 'all',
-        render: (item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <LocationPickerField
               placeholder={i18n.t('Select your location')}
@@ -436,7 +436,7 @@ class ProfileManager {
         key: 'phone_number',
         label: i18n.t('Phone number'),
         profileType: 'all',
-        render: (item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               value={data[item.key]}
@@ -454,7 +454,7 @@ class ProfileManager {
         key: 'website_link',
         label: i18n.t('Website link'),
         profileType: 'all',
-        render: (item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               value={data[item.key]}
@@ -472,7 +472,7 @@ class ProfileManager {
         key: 'instagram_id',
         label: i18n.t('Instagram ID'),
         profileType: 'all',
-        render: (item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               value={data[item.key]}
@@ -490,7 +490,7 @@ class ProfileManager {
         key: 'facebook_link',
         label: i18n.t('Facebook link'),
         profileType: 'all',
-        render: (item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               value={data[item.key]}
@@ -508,7 +508,7 @@ class ProfileManager {
         key: 'linkedin_link',
         label: i18n.t('Linkedin link'),
         profileType: 'all',
-        render: (item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               value={data[item.key]}
