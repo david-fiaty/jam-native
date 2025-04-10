@@ -29,6 +29,7 @@ const VenueProfileForm = ({ resource, item, data, params, parentKey }: Props) =>
       required: false,
       key: 'venue_name',
       label: i18n.t('Venue name'),
+      profileType: 'venue',
       render: (item: any, data: any, params?: any) => {
         return (
           <InputTextField
@@ -46,6 +47,7 @@ const VenueProfileForm = ({ resource, item, data, params, parentKey }: Props) =>
       required: false,
       key: 'creation_year',
       label: i18n.t('Creation year'),
+      profileType: 'venue',
       render: (item: any, data: any, params?: any) => {
         return (
           <InputTextField
