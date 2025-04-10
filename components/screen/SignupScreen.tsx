@@ -11,7 +11,6 @@ import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
-import ScreenManager from "@/manager/ScreenManager";
 import DividerView from "../view/DividerView";
 import ProfileManager from "@/manager/ProfileManager";
 import ButtonView from "../view/ButtonView";
