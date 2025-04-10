@@ -76,7 +76,7 @@ const VenueProfileForm = ({ resource, mode, item, data, params, parentKey }: Pro
 
   return (
     <View style={styles.container}>
-      {fields.map((o: any) => ProfileManager.renderSubField(o, formData))}
+      {fields.map((field: any) => ProfileManager.renderSubField(field, formData))}
     </View>
   );
 }
