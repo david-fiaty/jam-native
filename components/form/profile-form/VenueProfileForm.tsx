@@ -36,7 +36,7 @@ const VenueProfileForm = ({ resource, mode, item, data, params, parentKey }: Pro
           <InputTextField
             value={data?.[parentKey]?.[item.key] || ''}
             placeholder={i18n.t('Enter the venue name')}
-            onChangeText={(value: string) => updateField(parentKey, item.key, value)}
+            onChangeText={(value: string) => updateField(item, value)}
           />
         );
       },
@@ -54,16 +54,16 @@ const VenueProfileForm = ({ resource, mode, item, data, params, parentKey }: Pro
           <InputTextField
             value={data?.[parentKey]?.[item.key] || ''}
             placeholder={i18n.t('Enter the creation year')}
-            onChangeText={(value: string) => updateField(parentKey, item.key, value)}
+            onChangeText={(value: string) => updateField(item, value)}
           />
         );
       },
     },
   ];
 
-  const updateField = (parentKey: any, key: string, value: any) => {
+  const updateField = (item: any, value: any) => {
 
-    console.log(parentKey, key, value);
+    console.log(parentKey, value);
     
     /*
     dispatch(setFormData<any>({
