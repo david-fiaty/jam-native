@@ -125,6 +125,7 @@ class ProfileManager {
           return (
             <PersonalProfileForm 
               resource="profile"
+              mode={mode}
               item={item} 
               data={data} 
               params={params} 
@@ -145,6 +146,7 @@ class ProfileManager {
           return (
             <OrganizationProfileForm 
               resource="profile"
+              mode={mode}
               item={item} 
               data={data} 
               params={params} 
@@ -165,6 +167,7 @@ class ProfileManager {
           return (
             <VenueProfileForm
               resource="profile"
+              mode={mode}
               item={item} 
               data={data} 
               params={params} 

@@ -10,8 +10,8 @@ import ExperienceLevelField from '@/components/field/ExperienceLevelField';
 import ProfileManager from '@/manager/ProfileManager';
 
 type Props = BaseProps & {
-  resource?: any;
-  mode?: string;
+  resource: string;
+  mode: string;
   item?: any;
   data?: any;
   params?: any;
@@ -76,7 +76,7 @@ const OrganizationProfileForm = ({ resource, mode, item, data, params, parentKey
 
   return (
     <View style={styles.container}>
-      {fields.map((field: any) => ProfileManager.renderSubField(field, formData))}
+      {fields.map((field: any) => ProfileManager.renderField(mode, field, formData))}
     </View>
   );
 }
