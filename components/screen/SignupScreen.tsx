@@ -12,7 +12,12 @@ import SignupForm from '../form/SignupForm';
 const SignupScreen = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const formData = useSelector((state: any) => state.form?.profile);
   
+  const isContainerScrollable = () => {
+    return formData?.profile_type?.length > 0;
+  };
+
   useEffect(() => {
     if (!isLoaded) {
       dispatch(setValue(null));
@@ -25,7 +30,8 @@ const SignupScreen = () => {
       direction="column" 
       align="center" 
       justify="center" 
-      style={Layout.screenContent}
+      style={[Layout.screenContent, isContainerScrollable() ? styles.scrollableContainer : {}]}
+      scroll={isContainerScrollable()}
     >
       <LogoView size={80} />    
       <TextView style={styles.slogan}>{i18n.t('Create your JAM account')}</TextView> 
@@ -38,7 +44,10 @@ const styles = StyleSheet.create({
   slogan: {
     textTransform: 'uppercase',
     fontSize: Layout.fontSize.base,
-  }
+  },
+  scrollableContainer: {
+    paddingTop: Layout.space.base*4,
+  },
 });
 
 export default SignupScreen;
