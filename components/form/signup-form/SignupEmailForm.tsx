@@ -17,6 +17,9 @@ const SignupEmailForm = () => {
       value: value,
     }));
   };
+
+
+  console.log(formData);
   
   return (
     <>
