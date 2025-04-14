@@ -133,7 +133,7 @@ class ProfileManager {
         signup: true,
         profile: true,
         enabled: true,
-        required: false,
+        required: true,
         key: 'profile_name',
         label: i18n.t('Profile name (with no spaces)'),
         profileType: 'all',
