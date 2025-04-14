@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
 import { setValue } from '@/redux/slices/SignupSlice';
@@ -9,6 +10,7 @@ import ButtonView from '@/components/view/ButtonView';
 
 const SignupEmailForm = () => {
   const dispatch = useDispatch();
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.signup);
 
   const updateData = (key: any, value: any) => {
@@ -18,7 +20,11 @@ const SignupEmailForm = () => {
     }));
   };
 
+  const submitData = () => {
+    
+  };
 
+  
   console.log(formData);
   
   return (
@@ -33,13 +39,8 @@ const SignupEmailForm = () => {
 
       <ButtonView
         label={i18n.t('Continue')}
-        //isProcessing={isProcessing} 
-        /*
-        onPress={() => {
-          setIsProcessing(true);
-          submitForm();
-        }} 
-        */
+        isProcessing={isProcessing} 
+        onPress={submitData} 
       />
     </>
   );
