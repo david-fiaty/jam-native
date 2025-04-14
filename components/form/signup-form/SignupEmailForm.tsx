@@ -39,6 +39,10 @@ const SignupEmailForm = () => {
     return !formData?.email;
   };
 
+  const isEmailFieldDisabled = () => { 
+    return false;
+  };
+  
   return (
     <>
       <TextView style={styles.label}>{i18n.t('Email')}</TextView>
@@ -46,6 +50,7 @@ const SignupEmailForm = () => {
         value={formData?.email || ''}
         placeholder={i18n.t('Enter your email address')}
         onChangeText={(value: string) => updateData('email', value)}
+        disabled={isEmailFieldDisabled()}
       />
 
       <ButtonView
