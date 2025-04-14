@@ -7,6 +7,7 @@ import i18n from "@/translation/i18n";
 import InputTextField from '@/components/field/InputTextField';
 import TextView from '@/components/view/TextView';
 import ButtonView from '@/components/view/ButtonView';
+import UserManager from "@/manager/UserManager";
 
 const SignupCodeForm = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,28 @@ const SignupCodeForm = () => {
     }));
   };
 
+  const submitData = async () => {    
+    setIsProcessing(true);
+
+    let result: any = await UserManager.sendSignupCode({
+      email: formData?.email,
+    });
+
+    if (result?.session?.length > 0) {
+      updateData('session', result.session);
+    }
+
+    setIsProcessing(false);
+  };
+
+  const isSubmitButtonDisabled = () => { 
+    return !formData?.email;
+  };
+
+  const isCodeFieldDisabled = () => { 
+    return false;
+  };
+
   return (
     <>
       <TextView style={styles.label}>{i18n.t('Verification sent, check your email inbox')}</TextView>
@@ -27,18 +50,14 @@ const SignupCodeForm = () => {
         value={formData?.code || ''}
         placeholder={i18n.t('Verification code')}
         onChangeText={(value: string) => updateData('code', value)}
-        //disabled={isEmailStepValid}
+        disabled={isCodeFieldDisabled()}
       />
 
       <ButtonView
         label={i18n.t('Continue')}
-        //isProcessing={isProcessing} 
-        /*
-        onPress={() => {
-          setIsProcessing(true);
-          submitForm();
-        }} 
-        */
+        isProcessing={isProcessing}
+        onPress={submitData}
+        disabled={isSubmitButtonDisabled()}
       />
     </>
   );
