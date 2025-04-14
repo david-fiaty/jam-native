@@ -6,17 +6,17 @@ import { Layout } from '@/constants/Layout';
 import i18n from '@/translation/i18n';
 import InputTextField from '@/components/field/InputTextField';
 import TextView from '@/components/view/TextView';
-import ExperienceLevelField from '@/components/field/ExperienceLevelField';
 
 type Props = BaseProps & {
-  resource?: any;
+  resource: string;
+  mode: string;
   item?: any;
   data?: any;
   params?: any;
   parentKey?: any;
 };
 
-const PersonalProfileForm = ({ resource, item, data, params, parentKey }: Props) => {
+const PersonalProfileForm = ({ resource, mode, item, data, params, parentKey }: Props) => {
   const dispatch = useDispatch();
   const formData: any = useSelector((state: any) => state.form[resource]);
 
@@ -28,12 +28,13 @@ const PersonalProfileForm = ({ resource, item, data, params, parentKey }: Props)
       required: false,
       key: 'first_name',
       label: i18n.t('First name'),
-      render: (item: any, data: any, params?: any) => {
+      profileType: 'personal',
+      render: (mode: string, item: any, data: any, params?: any) => {
         return (
           <InputTextField
             value={data?.[parentKey]?.[item.key] || ''}
             placeholder={i18n.t('Enter your first name')}
-            onChangeText={(value: string) => updateField(parentKey, item.key, value)}
+            onChangeText={(value: string) => updateField(item, value)}
           />
         );
       },
@@ -45,12 +46,13 @@ const PersonalProfileForm = ({ resource, item, data, params, parentKey }: Props)
       required: false,
       key: 'last_name',
       label: i18n.t('Last name'),
-      render: (item: any, data: any, params?: any) => {
+      profileType: 'personal',
+      render: (mode: string, item: any, data: any, params?: any) => {
         return (
           <InputTextField
             value={data?.[parentKey]?.[item.key] || ''}
             placeholder={i18n.t('Enter your last name')}
-            onChangeText={(value: string) => updateField(parentKey, item.key, value)}
+            onChangeText={(value: string) => updateField(item, value)}
           />
         );
       },
@@ -62,29 +64,30 @@ const PersonalProfileForm = ({ resource, item, data, params, parentKey }: Props)
       required: false,
       key: 'experience_in_field',
       label: i18n.t('Experience level'),
-      render: (item: any, data: any, params?: any) => {
-        return (
-          <ExperienceLevelField 
-            value={data?.[parentKey]?.[item.key] || ''}
-            //onChangeValue={(option: any) => this.setFormData(item, option.value)}
-          />
-        );
+      profileType: 'personal',
+      render: (mode: string, item: any, data: any, params?: any) => {
+        return (<></>);
       },
     },
   ];
 
-  const updateField = (parentKey: any, key: string, value: any) => {
+  const updateField = (item: any, value: any) => {
+
+    console.log(item, value);
+    
+    /*
     dispatch(setFormData<any>({
       resource: 'profile',
       key: key,
       value: value,
     }));
+    */
   };
-  
-  const renderField = (item: any) => {
+
+  const renderSubField = (item: any, formData: any, params?: any) => {
     return (
       <View key={item.key}>
-        <TextView style={styles.label}>
+        <TextView style={{marginBottom: Layout.space.base / 2}}>
           {i18n.t(item.label)} {item?.required === true ? '*' : ''}
         </TextView>
         {item.render(item, formData, params)}
@@ -94,11 +97,7 @@ const PersonalProfileForm = ({ resource, item, data, params, parentKey }: Props)
 
   return (
     <View style={styles.container}>
-      {fields.map((o: any) => {
-        if (o?.enabled === true) {
-          return renderField(o);
-        }
-      })}
+      {fields.map((field: any) => renderSubField(field, formData))}
     </View>
   );
 }
@@ -106,9 +105,6 @@ const PersonalProfileForm = ({ resource, item, data, params, parentKey }: Props)
 const styles = StyleSheet.create({
   container: {
     gap: Layout.space.base,
-  },
-  label: {
-    marginBottom: Layout.space.base / 2,
   },
 });
 

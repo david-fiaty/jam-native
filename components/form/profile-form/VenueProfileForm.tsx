@@ -6,17 +6,17 @@ import { Layout } from '@/constants/Layout';
 import i18n from '@/translation/i18n';
 import InputTextField from '@/components/field/InputTextField';
 import TextView from '@/components/view/TextView';
-import ExperienceLevelField from '@/components/field/ExperienceLevelField';
 
 type Props = BaseProps & {
-  resource?: any;
+  resource: string;
+  mode: string;
   item?: any;
   data?: any;
   params?: any;
   parentKey?: any;
 };
 
-const VenueProfileForm = ({ resource, item, data, params, parentKey }: Props) => {
+const VenueProfileForm = ({ resource, mode, item, data, params, parentKey }: Props) => {
   const dispatch = useDispatch();
   const formData: any = useSelector((state: any) => state.form[resource]);
 
@@ -28,12 +28,13 @@ const VenueProfileForm = ({ resource, item, data, params, parentKey }: Props) =>
       required: false,
       key: 'venue_name',
       label: i18n.t('Venue name'),
-      render: (item: any, data: any, params?: any) => {
+      profileType: 'venue',
+      render: (mode: string, item: any, data: any, params?: any) => {
         return (
           <InputTextField
             value={data?.[parentKey]?.[item.key] || ''}
             placeholder={i18n.t('Enter the venue name')}
-            onChangeText={(value: string) => updateField(parentKey, item.key, value)}
+            onChangeText={(value: string) => updateField(item, value)}
           />
         );
       },
@@ -45,30 +46,36 @@ const VenueProfileForm = ({ resource, item, data, params, parentKey }: Props) =>
       required: false,
       key: 'creation_year',
       label: i18n.t('Creation year'),
-      render: (item: any, data: any, params?: any) => {
+      profileType: 'venue',
+      render: (mode: string, item: any, data: any, params?: any) => {
         return (
           <InputTextField
             value={data?.[parentKey]?.[item.key] || ''}
             placeholder={i18n.t('Enter the creation year')}
-            onChangeText={(value: string) => updateField(parentKey, item.key, value)}
+            onChangeText={(value: string) => updateField(item, value)}
           />
         );
       },
     },
   ];
 
-  const updateField = (parentKey: any, key: string, value: any) => {
+  const updateField = (item: any, value: any) => {
+
+    console.log(item, value);
+    
+    /*
     dispatch(setFormData<any>({
       resource: 'profile',
       key: key,
       value: value,
     }));
+    */
   };
 
-  const renderField = (item: any) => {
+  const renderSubField = (item: any, formData: any, params?: any) => {
     return (
       <View key={item.key}>
-        <TextView style={styles.label}>
+        <TextView style={{marginBottom: Layout.space.base / 2}}>
           {i18n.t(item.label)} {item?.required === true ? '*' : ''}
         </TextView>
         {item.render(item, formData, params)}
@@ -78,11 +85,7 @@ const VenueProfileForm = ({ resource, item, data, params, parentKey }: Props) =>
 
   return (
     <View style={styles.container}>
-      {fields.map((o: any) => {
-        if (o?.enabled === true) {
-          return renderField(o);
-        }
-      })}
+      {fields.map((field: any) => renderSubField(field, formData))}
     </View>
   );
 }
@@ -90,9 +93,6 @@ const VenueProfileForm = ({ resource, item, data, params, parentKey }: Props) =>
 const styles = StyleSheet.create({
   container: {
     gap: Layout.space.base,
-  },
-  label: {
-    marginBottom: Layout.space.base / 2,
   },
 });
 
