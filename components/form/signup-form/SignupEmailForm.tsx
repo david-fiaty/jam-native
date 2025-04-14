@@ -35,7 +35,7 @@ const SignupEmailForm = () => {
     setIsProcessing(false);
   };
 
-  const isStepInvalid = () => { 
+  const isSubmitDisabled = () => { 
     return !formData?.email;
   };
   
@@ -52,7 +52,7 @@ const SignupEmailForm = () => {
         label={i18n.t('Continue')}
         isProcessing={isProcessing} 
         onPress={submitData} 
-        disabled={isStepInvalid()}
+        disabled={isSubmitDisabled()}
       />
     </>
   );
