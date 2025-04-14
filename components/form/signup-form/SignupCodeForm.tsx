@@ -18,13 +18,15 @@ const SignupCodeForm = () => {
     }));
   };
 
+  console.log(formData);
+
   return (
     <>
       <TextView style={styles.label}>{i18n.t('Verification sent, check your email inbox')}</TextView>
       <InputTextField
         value={formData?.code || ''}
         placeholder={i18n.t('Verification code')}
-        onChangeText={(value: string) => updateData('email', value)}
+        onChangeText={(value: string) => updateData('code', value)}
         //disabled={isEmailStepValid}
       />
 
