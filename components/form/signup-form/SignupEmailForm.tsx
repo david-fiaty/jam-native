@@ -25,13 +25,18 @@ const SignupEmailForm = () => {
     setIsProcessing(true);
 
     let result: any = await UserManager.sendSignupCode({
-      email: formData.signup?.email,
+      email: formData?.email,
     });
 
-    console.log(result);
-
+    if (result?.session?.length > 0) {
+      updateData('session', result.session);
+    }
 
     setIsProcessing(false);
+  };
+
+  const isStepInvalid = () => { 
+    return !formData?.email;
   };
   
   return (
@@ -41,13 +46,13 @@ const SignupEmailForm = () => {
         value={formData?.email || ''}
         placeholder={i18n.t('Enter your email address')}
         onChangeText={(value: string) => updateData('email', value)}
-        //disabled={isEmailStepValid}
       />
 
       <ButtonView
         label={i18n.t('Continue')}
         isProcessing={isProcessing} 
         onPress={submitData} 
+        disabled={isStepInvalid()}
       />
     </>
   );
