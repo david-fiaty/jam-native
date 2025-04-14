@@ -10,10 +10,7 @@ import TextView from '../view/TextView';
 
 const SignupForm = () => {
   return (
-    <BoxView direction="column" align="center" justify="center" style={Layout.screenContent}>
-      <LogoView size={80} />    
-      <TextView style={styles.slogan}>{i18n.t('Create a jam account')}</TextView> 
-    </BoxView>
+    <TextView>OOO</TextView>
   );
 };
 
