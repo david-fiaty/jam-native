@@ -52,7 +52,7 @@ const LoginScreen = () => {
   return (
     <BoxView direction="column" align="center" justify="center" style={Layout.screenContent}>
       <LogoView size={80} />    
-      <TextView style={styles.wecomeMessage}>{i18n.t('Welcome back')}</TextView> 
+      <TextView style={styles.slogan}>{i18n.t('Welcome back')}</TextView> 
 
       <DividerView />
       
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     borderRadius: Layout.radius.round,
     borderColor: Colors.primary,
   },
-  wecomeMessage: {
+  slogan: {
     textTransform: 'uppercase',
     fontSize: Layout.fontSize.base,
   }
