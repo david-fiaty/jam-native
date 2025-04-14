@@ -4,6 +4,8 @@ import { setFormData } from "@/redux/slices/FormSlice";
 import ProfileManager from "@/manager/ProfileManager";
 import ProfileTypeField from "../field/ProfileTypeField";
 import ProfileImageField from "../field/ProfileImageField";
+import { Layout } from "@/constants/Layout";
+import { View } from "react-native";
 
 const resource: string = 'profile';
 
@@ -21,7 +23,7 @@ const ProfileForm = () => {
   };
   
   return (
-    <>
+    <View style={Layout.formContainer}>
       <ProfileImageField
         value={formData?.profile_picture?.url}
         onChangeValue={(mediaList: any) => updateField('profile_picture', { url: mediaList[0]?.uri })}
@@ -35,7 +37,7 @@ const ProfileForm = () => {
       {formData?.profile_type?.length > 0 && profileFields.map((item: any) => {
         return ProfileManager.renderField('signup', item, formData);
       })}
-    </>
+    </View>
   );
 };
 
