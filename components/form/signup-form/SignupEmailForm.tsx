@@ -35,8 +35,12 @@ const SignupEmailForm = () => {
     setIsProcessing(false);
   };
 
-  const isStepInvalid = () => { 
+  const isSubmitButtonDisabled = () => { 
     return !formData?.email;
+  };
+
+  const isEmailFieldDisabled = () => { 
+    return formData?.email?.length && formData?.session?.length;
   };
   
   return (
@@ -46,14 +50,17 @@ const SignupEmailForm = () => {
         value={formData?.email || ''}
         placeholder={i18n.t('Enter your email address')}
         onChangeText={(value: string) => updateData('email', value)}
+        disabled={isEmailFieldDisabled()}
       />
 
-      <ButtonView
-        label={i18n.t('Continue')}
-        isProcessing={isProcessing} 
-        onPress={submitData} 
-        disabled={isStepInvalid()}
-      />
+      {!isEmailFieldDisabled() && (
+        <ButtonView
+          label={i18n.t('Continue')}
+          isProcessing={isProcessing} 
+          onPress={submitData} 
+          disabled={isSubmitButtonDisabled()}
+        />
+      )}
     </>
   );
 };
