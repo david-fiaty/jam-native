@@ -1,16 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const SignupSlice = createSlice({
-  name: 'signup',
-  initialState: {
+const getInitialState = () => {
+  return {
     email: null,
     session: null,
     code: null,
     success: false,
-  },
+  };
+}
+
+const SignupSlice = createSlice({
+  name: 'signup',
+  initialState: getInitialState(),
   reducers: {
     setValue: (state, action) => {
-      state[action.payload.key] = action.payload.value;
+      if (action.payload?.key) {
+        state[action.payload.key] = action.payload.value;
+      }
+      else {
+        state = getInitialState();
+      }
     },
   },
 });

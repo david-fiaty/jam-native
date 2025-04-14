@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import ProfileManager from "@/manager/ProfileManager";
 import ProfileTypeField from "../field/ProfileTypeField";
+import ProfileImageField from "../field/ProfileImageField";
 
 const resource: string = 'profile';
 
@@ -21,6 +22,11 @@ const ProfileForm = () => {
   
   return (
     <>
+      <ProfileImageField
+        value={formData?.profile_picture?.url}
+        onChangeValue={(mediaList: any) => updateField('profile_picture', { url: mediaList[0]?.uri })}
+      />
+
       <ProfileTypeField
         value={formData?.profile_type}
         onChangeValue={(option: any) => updateField('profile_type', option.value)}
