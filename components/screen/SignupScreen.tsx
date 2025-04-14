@@ -10,7 +10,7 @@ const SignupScreen = () => {
   return (
     <BoxView direction="column" align="center" justify="center" style={Layout.screenContent}>
       <LogoView size={80} />    
-      <TextView style={styles.slogan}>{i18n.t('Create a JAM account')}</TextView> 
+      <TextView style={styles.slogan}>{i18n.t('Create your JAM account')}</TextView> 
       <SignupForm />
     </BoxView>
   );
