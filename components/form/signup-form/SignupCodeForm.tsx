@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
+import { useRouter } from "expo-router";
 import { useSelector, useDispatch } from "react-redux";
 import { setValue } from '@/redux/slices/SignupSlice';
 import { Layout } from '@/constants/Layout';
+import { Config } from "@/constants/Config";
 import i18n from "@/translation/i18n";
 import InputTextField from '@/components/field/InputTextField';
 import TextView from '@/components/view/TextView';
 import ButtonView from '@/components/view/ButtonView';
 import UserManager from "@/manager/UserManager";
+import BoxView from "@/components/view/BoxView";
+import LinkView from "@/components/view/LinkView";
+import SkipButton from "@/components/button/SkipButton";
 
 const SignupCodeForm = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.signup);
 
@@ -21,7 +27,7 @@ const SignupCodeForm = () => {
     }));
   };
 
-  const submitData = async () => {    
+  const submitData = async () => {
     setIsProcessing(true);
 
     let result: any = await UserManager.verifySignupCode({
@@ -36,7 +42,7 @@ const SignupCodeForm = () => {
     setIsProcessing(false);
   };
 
-  const isSubmitButtonDisabled = () => { 
+  const isSubmitButtonDisabled = () => {
     return !formData?.code?.length;
   };
 
@@ -55,6 +61,20 @@ const SignupCodeForm = () => {
         onPress={submitData}
         disabled={isSubmitButtonDisabled()}
       />
+
+      <BoxView
+        direction="row"
+        align="center"
+        justify="space-between"
+        style={{ width: "100%" }}
+      >
+        <BoxView direction="row" align="center" justify="flex-start">
+          <LinkView onPress={() => router.replace("/signup")}>
+            {i18n.t("Didn't receive code?")}
+          </LinkView>
+        </BoxView>
+        <SkipButton onPress={async () => router.replace(Config.mainRoute)} />
+      </BoxView>
     </>
   );
 };
