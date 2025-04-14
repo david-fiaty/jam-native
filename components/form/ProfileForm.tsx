@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
+import { Layout } from "@/constants/Layout";
 import ProfileManager from "@/manager/ProfileManager";
 import ProfileTypeField from "../field/ProfileTypeField";
 import ProfileImageField from "../field/ProfileImageField";
-import { Layout } from "@/constants/Layout";
-import { View } from "react-native";
+import ButtonView from "../view/ButtonView";
+import i18n from "@/translation/i18n";
 
 const resource: string = 'profile';
 
 const ProfileForm = () => {
   const dispatch = useDispatch();
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const formData = useSelector((state: any) => state.form?.[resource]);
   const profileFields: any = ProfileManager.getFields();
 
@@ -37,6 +40,14 @@ const ProfileForm = () => {
       {formData?.profile_type?.length > 0 && profileFields.map((item: any) => {
         return ProfileManager.renderField('signup', item, formData);
       })}
+
+      <ButtonView
+        label={i18n.t('Continue')}
+        isProcessing={isProcessing}
+        //onPress={submitData}
+        //disabled={isSubmitButtonDisabled()}
+      />
+
     </View>
   );
 };
