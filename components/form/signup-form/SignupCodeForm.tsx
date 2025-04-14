@@ -39,6 +39,10 @@ const SignupCodeForm = () => {
     return !formData?.email;
   };
 
+  const isCodeFieldDisabled = () => { 
+    return false;
+  };
+
   return (
     <>
       <TextView style={styles.label}>{i18n.t('Verification sent, check your email inbox')}</TextView>
@@ -46,7 +50,7 @@ const SignupCodeForm = () => {
         value={formData?.code || ''}
         placeholder={i18n.t('Verification code')}
         onChangeText={(value: string) => updateData('code', value)}
-      //disabled={isEmailStepValid}
+        disabled={isCodeFieldDisabled()}
       />
 
       <ButtonView
