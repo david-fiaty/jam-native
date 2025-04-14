@@ -30,7 +30,7 @@ const SignupScreen = () => {
       direction="column" 
       align="center" 
       justify="center" 
-      style={[Layout.screenContent, isContainerScrollable() ? { paddingTop: Layout.space.base*4 } : {}]}
+      style={[Layout.screenContent, isContainerScrollable() ? styles.scrollableContainer : {}]}
       scroll={isContainerScrollable()}
     >
       <LogoView size={80} />    
@@ -44,7 +44,10 @@ const styles = StyleSheet.create({
   slogan: {
     textTransform: 'uppercase',
     fontSize: Layout.fontSize.base,
-  }
+  },
+  scrollableContainer: {
+    paddingTop: Layout.space.base*4,
+  },
 });
 
 export default SignupScreen;
