@@ -57,18 +57,6 @@ const PersonalProfileForm = ({ resource, mode, item, data, params, parentKey }: 
         );
       },
     },
-    {
-      signup: false,
-      profile: true,
-      enabled: false,
-      required: false,
-      key: 'experience_in_field',
-      label: i18n.t('Experience level'),
-      profileType: 'personal',
-      render: (mode: string, item: any, data: any, params?: any) => {
-        return (<></>);
-      },
-    },
   ];
 
   const updateField = (item: any, value: any) => {
