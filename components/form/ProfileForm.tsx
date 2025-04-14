@@ -26,6 +26,7 @@ const ProfileForm = () => {
   };
 
   const submitForm = () => {
+    // Todo - Handle API data submission
     console.log('submitForm', formData);
   };
   
