@@ -24,6 +24,10 @@ const ProfileForm = () => {
       value: value, 
     }));
   };
+
+  const submitForm = () => {
+    console.log('submitForm', formData);
+  };
   
   return (
     <View style={Layout.formContainer}>
@@ -44,8 +48,7 @@ const ProfileForm = () => {
       <ButtonView
         label={i18n.t('Continue')}
         isProcessing={isProcessing}
-        //onPress={submitData}
-        //disabled={isSubmitButtonDisabled()}
+        onPress={submitForm}
       />
 
     </View>
