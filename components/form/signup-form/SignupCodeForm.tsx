@@ -20,8 +20,6 @@ const SignupCodeForm = () => {
     }));
   };
 
-  console.log(formData);
-
   return (
     <>
       <TextView style={styles.label}>{i18n.t('Verification sent, check your email inbox')}</TextView>
