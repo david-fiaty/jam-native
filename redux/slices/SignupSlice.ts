@@ -7,14 +7,11 @@ const SignupSlice = createSlice({
     code: null,
   },
   reducers: {
-    setEmail: (state, action) => {
-      state.email = action.payload;
-    },
-    setCode: (state, action) => {
-      state.code = action.payload;
+    setValue: (state, action) => {
+      state[action.payload.key] = action.payload.value;
     },
   },
 });
 
-export const { setEmail, setCode } = SignupSlice.actions;
+export const { setValue } = SignupSlice.actions;
 export default SignupSlice.reducer;
