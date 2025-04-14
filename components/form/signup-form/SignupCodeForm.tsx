@@ -24,23 +24,24 @@ const SignupCodeForm = () => {
   const submitData = async () => {    
     setIsProcessing(true);
 
-    let result: any = await UserManager.sendSignupCode({
-      email: formData?.email,
+    let result: any = await UserManager.verifySignupCode({
+      session: formData?.session,
+      code: formData?.code,
     });
 
+    console.log(result);
+
+    /*
     if (result?.session?.length > 0) {
       updateData('session', result.session);
     }
+      */
 
     setIsProcessing(false);
   };
 
   const isSubmitButtonDisabled = () => { 
-    return !formData?.email;
-  };
-
-  const isCodeFieldDisabled = () => { 
-    return false;
+    return !formData?.code?.length;
   };
 
   return (
@@ -50,7 +51,6 @@ const SignupCodeForm = () => {
         value={formData?.code || ''}
         placeholder={i18n.t('Verification code')}
         onChangeText={(value: string) => updateData('code', value)}
-        disabled={isCodeFieldDisabled()}
       />
 
       <ButtonView
