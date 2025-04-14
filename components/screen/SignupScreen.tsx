@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
   scrollableContainer: {
     paddingTop: Layout.space.base*4,
-    paddingBottom: Layout.space.base*4,
+    paddingBottom: Layout.space.base*2,
   },
 });
 
