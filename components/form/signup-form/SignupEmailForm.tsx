@@ -40,7 +40,7 @@ const SignupEmailForm = () => {
   };
 
   const isEmailFieldDisabled = () => { 
-    return false;
+    return formData?.email?.length && formData?.session?.length;
   };
   
   return (
@@ -53,12 +53,14 @@ const SignupEmailForm = () => {
         disabled={isEmailFieldDisabled()}
       />
 
-      <ButtonView
-        label={i18n.t('Continue')}
-        isProcessing={isProcessing} 
-        onPress={submitData} 
-        disabled={isSubmitButtonDisabled()}
-      />
+      {!isEmailFieldDisabled() && (
+        <ButtonView
+          label={i18n.t('Continue')}
+          isProcessing={isProcessing} 
+          onPress={submitData} 
+          disabled={isSubmitButtonDisabled()}
+        />
+      )}
     </>
   );
 };
