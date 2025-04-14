@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
 import { setValue } from '@/redux/slices/SignupSlice';
@@ -9,6 +10,7 @@ import ButtonView from '@/components/view/ButtonView';
 
 const SignupCodeForm = () => {
   const dispatch = useDispatch();
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.signup);
 
   const updateData = (key: any, value: any) => {
@@ -17,15 +19,15 @@ const SignupCodeForm = () => {
       value: value,
     }));
   };
-  
+
   return (
     <>
       <TextView style={styles.label}>{i18n.t('Verification sent, check your email inbox')}</TextView>
       <InputTextField
-        //value={formData?.email || ''}
-        //disabled={isEmailStepValid}
+        value={formData?.code || ''}
         placeholder={i18n.t('Verification code')}
-      //onChangeText={(value: string) => updateField('email', value)}
+        onChangeText={(value: string) => updateData('code', value)}
+        //disabled={isEmailStepValid}
       />
 
       <ButtonView

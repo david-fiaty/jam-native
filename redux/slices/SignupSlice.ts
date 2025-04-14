@@ -4,6 +4,7 @@ const SignupSlice = createSlice({
   name: 'signup',
   initialState: {
     email: null,
+    session: null,
     code: null,
   },
   reducers: {
