@@ -7,6 +7,7 @@ import i18n from "@/translation/i18n";
 import InputTextField from '@/components/field/InputTextField';
 import TextView from '@/components/view/TextView';
 import ButtonView from '@/components/view/ButtonView';
+import UserManager from "@/manager/UserManager";
 
 const SignupEmailForm = () => {
   const dispatch = useDispatch();
@@ -20,12 +21,18 @@ const SignupEmailForm = () => {
     }));
   };
 
-  const submitData = () => {
-    
-  };
+  const submitData = async () => {    
+    setIsProcessing(true);
 
-  
-  console.log(formData);
+    let result: any = await UserManager.sendSignupCode({
+      email: formData.signup?.email,
+    });
+
+    console.log(result);
+
+
+    setIsProcessing(false);
+  };
   
   return (
     <>
