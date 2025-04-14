@@ -3,7 +3,7 @@ import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
 import InputTextField from '../field/InputTextField';
 import TextView from '../view/TextView';
-
+import ButtonView from '../view/ButtonView';
 
 const SignupForm = () => {
   return (
@@ -14,6 +14,17 @@ const SignupForm = () => {
         //disabled={isEmailStepValid}
         placeholder={i18n.t('Enter your email address')}
       //onChangeText={(value: string) => updateField('email', value)}
+      />
+
+      <ButtonView
+        label={i18n.t('Continue')}
+        //isProcessing={isProcessing} 
+        /*
+        onPress={() => {
+          setIsProcessing(true);
+          submitForm();
+        }} 
+        */
       />
     </>
   );
