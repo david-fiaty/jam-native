@@ -35,7 +35,7 @@ const SignupCodeForm = () => {
     setIsProcessing(false);
   };
 
-  const isSubmitDisabled = () => { 
+  const isSubmitButtonDisabled = () => { 
     return !formData?.email;
   };
 
@@ -53,7 +53,7 @@ const SignupCodeForm = () => {
         label={i18n.t('Continue')}
         isProcessing={isProcessing}
         onPress={submitData}
-        disabled={isSubmitDisabled()}
+        disabled={isSubmitButtonDisabled()}
       />
     </>
   );
