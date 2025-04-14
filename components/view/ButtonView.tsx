@@ -5,10 +5,10 @@ import TextView from '../view/TextView';
 import SpinnerView from '../view/SpinnerView';
 
 type Props = {
-  label: string;
+  label?: string;
   disabled?: boolean;
-  onPress: () => void;
-  isProcessing: boolean;
+  onPress?: () => void;
+  isProcessing?: boolean;
 };
 
 const ButtonView = ({label, disabled, onPress, isProcessing}: Props) => {
