@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
 import { setValue } from '@/redux/slices/SignupSlice';
@@ -9,6 +10,7 @@ import ButtonView from '@/components/view/ButtonView';
 
 const SignupCodeForm = () => {
   const dispatch = useDispatch();
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.signup);
 
   const updateData = (key: any, value: any) => {
