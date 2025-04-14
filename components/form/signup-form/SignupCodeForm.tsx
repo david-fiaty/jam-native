@@ -36,7 +36,7 @@ const SignupCodeForm = () => {
     });
 
     if (result?.message) {
-
+      updateData('success', true);
     }
 
     setIsProcessing(false);
