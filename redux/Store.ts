@@ -6,6 +6,7 @@ import UserReducer from './slices/UserSlice';
 import MessageReducer from './slices/MessageSlice';
 import AppReducer from './slices/AppSlice';
 import FormReducer from './slices/FormSlice';
+import SignupReducer from './slices/SignupSlice';
 
 const Store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const Store = configureStore({
     message: MessageReducer,
     app: AppReducer,
     form: FormReducer,
+    signup: SignupReducer,
   },
   middleware: getDefaultMiddleware =>
     process.env.NODE_ENV === 'production' ? getDefaultMiddleware() : getDefaultMiddleware({
