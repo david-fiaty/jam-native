@@ -35,10 +35,10 @@ const SignupEmailForm = () => {
     setIsProcessing(false);
   };
 
-  const isSubmitDisabled = () => { 
+  const isSubmitButtonDisabled = () => { 
     return !formData?.email;
   };
-  
+
   return (
     <>
       <TextView style={styles.label}>{i18n.t('Email')}</TextView>
@@ -52,7 +52,7 @@ const SignupEmailForm = () => {
         label={i18n.t('Continue')}
         isProcessing={isProcessing} 
         onPress={submitData} 
-        disabled={isSubmitDisabled()}
+        disabled={isSubmitButtonDisabled()}
       />
     </>
   );
