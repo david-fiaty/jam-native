@@ -36,7 +36,7 @@ const SignupEmailForm = () => {
   };
 
   const isSubmitButtonDisabled = () => { 
-    return !formData?.email;
+    return !formData?.email?.length;
   };
 
   const isEmailFieldDisabled = () => { 
