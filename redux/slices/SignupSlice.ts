@@ -3,13 +3,18 @@ import { createSlice } from '@reduxjs/toolkit';
 const SignupSlice = createSlice({
   name: 'signup',
   initialState: {
+    email: null,
+    code: null,
   },
   reducers: {
-    setValue: (state, action) => {
-      return action.payload;
+    setEmail: (state, action) => {
+      state.email = action.payload;
+    },
+    setCode: (state, action) => {
+      state.code = action.payload;
     },
   },
 });
 
-export const { setValue } = SignupSlice.actions;
+export const { setEmail, setCode } = SignupSlice.actions;
 export default SignupSlice.reducer;
