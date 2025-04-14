@@ -17,15 +17,15 @@ const SignupCodeForm = () => {
       value: value,
     }));
   };
-  
+
   return (
     <>
       <TextView style={styles.label}>{i18n.t('Verification sent, check your email inbox')}</TextView>
       <InputTextField
-        //value={formData?.email || ''}
-        //disabled={isEmailStepValid}
+        value={formData?.code || ''}
         placeholder={i18n.t('Verification code')}
-      //onChangeText={(value: string) => updateField('email', value)}
+        onChangeText={(value: string) => updateData('email', value)}
+        //disabled={isEmailStepValid}
       />
 
       <ButtonView
