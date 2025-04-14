@@ -22,10 +22,10 @@ const SignupEmailForm = () => {
     <>
       <TextView style={styles.label}>{i18n.t('Email')}</TextView>
       <InputTextField
-        //value={formData?.email || ''}
-        //disabled={isEmailStepValid}
+        value={formData?.email || ''}
         placeholder={i18n.t('Enter your email address')}
-      //onChangeText={(value: string) => updateField('email', value)}
+        onChangeText={(value: string) => updateData('email', value)}
+        //disabled={isEmailStepValid}
       />
 
       <ButtonView
