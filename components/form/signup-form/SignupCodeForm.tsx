@@ -8,11 +8,11 @@ import ButtonView from '@/components/view/ButtonView';
 const SignupCodeForm = () => {
   return (
     <>
-      <TextView style={styles.label}>{i18n.t('Email')}</TextView>
+      <TextView style={styles.label}>{i18n.t('Verification sent, check your email inbox')}</TextView>
       <InputTextField
         //value={formData?.email || ''}
         //disabled={isEmailStepValid}
-        placeholder={i18n.t('Enter your email address')}
+        placeholder={i18n.t('Verification code')}
       //onChangeText={(value: string) => updateField('email', value)}
       />
 
