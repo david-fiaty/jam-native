@@ -69,40 +69,6 @@ class ProfileManager {
   getFields() {
     return [
       {
-        signup: false,
-        profile: true,
-        enabled: true,
-        required: false,
-        key: 'upload_profile_picture',
-        label: i18n.t('Profile picture'),
-        profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
-          return (
-            <ProfileImageField
-              value={data[item.key]?.url}
-              onChangeValue={(mediaList: any) => this.setFormData(item, { url: mediaList[0]?.uri })}
-            />
-          );
-        },
-      },
-      {
-        signup: false,
-        profile: true,
-        enabled: true,
-        required: true,
-        key: 'profile_type',
-        label: i18n.t('Profile type'),
-        profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
-          return (
-            <ProfileTypeField
-              value={data[item.key]}
-              onChangeValue={(option: any) => this.setFormData(item, option.value)}
-            />
-          );
-        },
-      },
-      {
         signup: true,
         profile: true,
         enabled: true,
