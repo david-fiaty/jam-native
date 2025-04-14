@@ -49,6 +49,11 @@ Port: 22
 # Linux Commands
 - list processes: ps aux | grep node
 
+# Google Maps Issues
+https://github.com/react-native-maps/react-native-maps/discussions/4741#discussioncomment-12582128
+
+
+
 
 "scripts": {
   "dev": "npm start --tunnel",
