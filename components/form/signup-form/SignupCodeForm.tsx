@@ -29,13 +29,9 @@ const SignupCodeForm = () => {
       code: formData?.code,
     });
 
-    console.log(result);
+    if (result?.message) {
 
-    /*
-    if (result?.session?.length > 0) {
-      updateData('session', result.session);
     }
-      */
 
     setIsProcessing(false);
   };
