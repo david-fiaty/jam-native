@@ -134,7 +134,7 @@ const SectorsList = () => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%'
+    width: '100%',
   },
   listItemCollapsible: {
     paddingHorizontal: Layout.space.base/2,
