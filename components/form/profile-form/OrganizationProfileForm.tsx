@@ -32,6 +32,7 @@ const OrganizationProfileForm = ({ resource, mode, item, data, params, parentKey
       render: (mode: string, item: any, data: any, params?: any) => {
         return (
           <InputTextField
+            key={item.key}
             value={data?.[parentKey]?.[item.key] || ''}
             placeholder={i18n.t('Enter your organization name')}
             onChangeText={(value: string) => updateField(item, value)}
@@ -50,6 +51,7 @@ const OrganizationProfileForm = ({ resource, mode, item, data, params, parentKey
       render: (mode: string, item: any, data: any, params?: any) => {
         return (
           <InputTextField
+            key={item.key}
             value={data?.[parentKey]?.[item.key] || ''}
             placeholder={i18n.t('Enter the creation year')}
             onChangeText={(value: string) => updateField(item, value)}

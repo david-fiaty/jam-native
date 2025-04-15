@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
+import { Layout } from "@/constants/Layout";
 import ProfileManager from "@/manager/ProfileManager";
 import ProfileTypeField from "../field/ProfileTypeField";
 import ProfileImageField from "../field/ProfileImageField";
+import ButtonView from "../view/ButtonView";
+import i18n from "@/translation/i18n";
+import DataManager from "@/manager/DataManager";
 
 const resource: string = 'profile';
 
 const ProfileForm = () => {
   const dispatch = useDispatch();
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const formData = useSelector((state: any) => state.form?.[resource]);
   const profileFields: any = ProfileManager.getFields();
 
@@ -19,9 +25,14 @@ const ProfileForm = () => {
       value: value, 
     }));
   };
+
+  const submitForm = () => {
+    // Todo - Handle API data submission
+    console.log('submitForm', formData);
+  };
   
   return (
-    <>
+    <View style={Layout.formContainer}>
       <ProfileImageField
         value={formData?.profile_picture?.url}
         onChangeValue={(mediaList: any) => updateField('profile_picture', { url: mediaList[0]?.uri })}
@@ -33,9 +44,22 @@ const ProfileForm = () => {
       />
 
       {formData?.profile_type?.length > 0 && profileFields.map((item: any) => {
-        return ProfileManager.renderField('signup', item, formData);
+        if (ProfileManager.canRenderField('signup', item, formData)) {
+          return (
+            <View key={DataManager.createUuid()}>
+              {ProfileManager.renderField('signup', item, formData)}
+            </View>
+          );
+        }
       })}
-    </>
+
+      <ButtonView
+        label={i18n.t('Continue')}
+        isProcessing={isProcessing}
+        onPress={submitForm}
+      />
+
+    </View>
   );
 };
 

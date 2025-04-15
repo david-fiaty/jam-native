@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
-import { useSelector, useDispatch } from "react-redux";
-import { setValue } from "@/redux/slices/SignupSlice";
+import { useSelector } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import LogoView from '../view/LogoView';
 import BoxView from '../view/BoxView';
@@ -10,20 +8,11 @@ import i18n from '@/translation/i18n';
 import SignupForm from '../form/SignupForm';
 
 const SignupScreen = () => {
-  const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData = useSelector((state: any) => state.form?.profile);
   
   const isContainerScrollable = () => {
     return formData?.profile_type?.length > 0;
   };
-
-  useEffect(() => {
-    if (!isLoaded) {
-      dispatch(setValue(null));
-      setIsLoaded(true);
-    }
-  }, [isLoaded]);
 
   return (
     <BoxView 
@@ -47,6 +36,7 @@ const styles = StyleSheet.create({
   },
   scrollableContainer: {
     paddingTop: Layout.space.base*4,
+    paddingBottom: Layout.space.base*2,
   },
 });
 

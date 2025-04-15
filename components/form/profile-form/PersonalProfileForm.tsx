@@ -25,13 +25,14 @@ const PersonalProfileForm = ({ resource, mode, item, data, params, parentKey }: 
       signup: true,
       profile: true,
       enabled: true,
-      required: false,
+      required: true,
       key: 'first_name',
       label: i18n.t('First name'),
       profileType: 'personal',
       render: (mode: string, item: any, data: any, params?: any) => {
         return (
           <InputTextField
+            key={item.key}
             value={data?.[parentKey]?.[item.key] || ''}
             placeholder={i18n.t('Enter your first name')}
             onChangeText={(value: string) => updateField(item, value)}
@@ -43,30 +44,19 @@ const PersonalProfileForm = ({ resource, mode, item, data, params, parentKey }: 
       signup: true,
       profile: true,
       enabled: true,
-      required: false,
+      required: true,
       key: 'last_name',
       label: i18n.t('Last name'),
       profileType: 'personal',
       render: (mode: string, item: any, data: any, params?: any) => {
         return (
           <InputTextField
+            key={item.key}
             value={data?.[parentKey]?.[item.key] || ''}
             placeholder={i18n.t('Enter your last name')}
             onChangeText={(value: string) => updateField(item, value)}
           />
         );
-      },
-    },
-    {
-      signup: false,
-      profile: true,
-      enabled: false,
-      required: false,
-      key: 'experience_in_field',
-      label: i18n.t('Experience level'),
-      profileType: 'personal',
-      render: (mode: string, item: any, data: any, params?: any) => {
-        return (<></>);
       },
     },
   ];
