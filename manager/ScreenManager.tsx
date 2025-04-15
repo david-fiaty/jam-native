@@ -175,12 +175,9 @@ class ScreenManager {
   }
 
   getFooterSize() {
-
-    let activeModals: any = [...Store.getState().modal.active];
-
-    console.log(activeModals);
+    let activeModal: any = this.getActiveModal();
     let factor: number = 16;
-    let height: number = this.window.height/factor;
+    let height: number = activeModal?.footer === true ? this.window.height/factor : 0;
 
     return {
       width: this.window.width,
