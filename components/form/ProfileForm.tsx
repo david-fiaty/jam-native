@@ -44,11 +44,13 @@ const ProfileForm = () => {
       />
 
       {formData?.profile_type?.length > 0 && profileFields.map((item: any) => {
-        return (
-          <View key={DataManager.createUuid()}>
-            {ProfileManager.renderField('signup', item, formData)}
-          </View>
-        )
+        if (ProfileManager.canRenderField('signup', item, formData)) {
+          return (
+            <View key={DataManager.createUuid()}>
+              {ProfileManager.renderField('signup', item, formData)}
+            </View>
+          );
+        }
       })}
 
       <ButtonView
