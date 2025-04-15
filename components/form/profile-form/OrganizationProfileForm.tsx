@@ -29,7 +29,7 @@ const OrganizationProfileForm = ({ resource, mode, item, data, params, parentKey
       key: 'organization_name',
       label: i18n.t('Organization name'),
       profileType: 'organization',
-      render: (mode: string, item: any, data: any, params?: any) => {
+      render: (item: any, data: any, params?: any) => {
         return (
           <InputTextField
             key={item.key}
@@ -48,7 +48,7 @@ const OrganizationProfileForm = ({ resource, mode, item, data, params, parentKey
       key: 'creation_year',
       label: i18n.t('Creation year'),
       profileType: 'organization',
-      render: (mode: string, item: any, data: any, params?: any) => {
+      render: (item: any, data: any, params?: any) => {
         return (
           <InputTextField
             key={item.key}
@@ -62,16 +62,14 @@ const OrganizationProfileForm = ({ resource, mode, item, data, params, parentKey
   ];
 
   const updateField = (item: any, value: any) => {
-
-    console.log(item, value);
-    
-    /*
     dispatch(setFormData<any>({
       resource: 'profile',
-      key: key,
-      value: value,
+      key: parentKey,
+      value: {
+        ...(formData[parentKey] || {}),
+        ...{[item.key]: value},
+      },
     }));
-    */
   };
 
   const renderSubField = (item: any, formData: any, params?: any) => {
