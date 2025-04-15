@@ -43,7 +43,6 @@ const routes: any = [
     showHeaderSearch: false,
     showHeaderButtons: true,
     isRoot: true,
-    animation: 'default',
   },
   {
     name: 'account',
