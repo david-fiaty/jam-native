@@ -29,7 +29,7 @@ const PersonalProfileForm = ({ resource, mode, item, data, params, parentKey }: 
       key: 'first_name',
       label: i18n.t('First name'),
       profileType: 'personal',
-      render: (mode: string, item: any, data: any, params?: any) => {
+      render: (item: any, data: any, params?: any) => {
         return (
           <InputTextField
             key={item.key}
@@ -48,7 +48,7 @@ const PersonalProfileForm = ({ resource, mode, item, data, params, parentKey }: 
       key: 'last_name',
       label: i18n.t('Last name'),
       profileType: 'personal',
-      render: (mode: string, item: any, data: any, params?: any) => {
+      render: (item: any, data: any, params?: any) => {
         return (
           <InputTextField
             key={item.key}
