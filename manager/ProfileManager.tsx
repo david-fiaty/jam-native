@@ -47,21 +47,17 @@ class ProfileManager {
   }
 
   renderField(mode: string, item: any, formData: any, params?: any) {
-    if (this.canRenderField(mode, item, formData)) {
-      return (
-        <View key={DataManager.createUuid()}>
-          {item.label !== null && (
-            <TextView style={this.getStyles().label}>
-              {i18n.t(item.label)} {item?.required === true ? '*' : ''}
-            </TextView>
-          )}
+    return (
+      <>
+        {item.label !== null && (
+          <TextView style={this.getStyles().label}>
+            {i18n.t(item.label)} {item?.required === true ? '*' : ''}
+          </TextView>
+        )}
 
-          {item.render(mode, item, formData, params)}
-        </View>
-      );
-    }
-
-    return <></>;
+        {item.render(mode, item, formData, params)}
+      </>
+    );
   }
 
   getFields() {
