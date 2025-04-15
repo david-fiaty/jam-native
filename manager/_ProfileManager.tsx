@@ -5,10 +5,12 @@ import Store from '@/redux/Store';
 import InputTextField from '@/components/field/InputTextField';
 import TextView from '@/components/view/TextView';
 import i18n from '@/translation/i18n';
+import ProfileTypeField from '@/components/field/ProfileTypeField';
 import InputTextareaField from '@/components/field/InputTextareaField';
 import CountryField from '@/components/field/CountryField';
 import SectorsField from '@/components/field/SectorsField';
 import ScreenManager from './ScreenManager';
+import ProfileImageField from '@/components/field/ProfileImageField';
 import DataManager from './DataManager';
 import LocationPickerField from '@/components/field/LocationPickerField';
 import PersonalProfileForm from '@/components/form/profile-form/PersonalProfileForm';
@@ -47,21 +49,59 @@ class ProfileManager {
   }
 
   renderField(mode: string, item: any, formData: any, params?: any) {
-    return (
-      <>
-        {item.label !== null && (
-          <TextView style={this.getStyles().label}>
-            {i18n.t(item.label)} {item?.required === true ? '*' : ''}
-          </TextView>
-        )}
+    if (this.canRenderField(mode, item, formData)) {
+      return (
+        <View key={item?.key || DataManager.createUuid()}>
+          {item.label !== null && (
+            <TextView style={this.getStyles().label}>
+              {i18n.t(item.label)} {item?.required === true ? '*' : ''}
+            </TextView>
+          )}
 
-        {item.render(mode, item, formData, params)}
-      </>
-    );
+          {item.render(mode, item, formData, params)}
+        </View>
+      );
+    }
+
+    return <></>;
   }
 
   getFields() {
     return [
+      {
+        signup: false,
+        profile: true,
+        enabled: true,
+        required: false,
+        key: 'upload_profile_picture',
+        label: i18n.t('Profile picture'),
+        profileType: 'all',
+        render: (mode: string, item: any, data: any, params?: any) => {
+          return (
+            <ProfileImageField
+              value={data[item.key]?.url}
+              onChangeValue={(mediaList: any) => this.setFormData(item, { url: mediaList[0]?.uri })}
+            />
+          );
+        },
+      },
+      {
+        signup: false,
+        profile: true,
+        enabled: true,
+        required: true,
+        key: 'profile_type',
+        label: i18n.t('Profile type'),
+        profileType: 'all',
+        render: (mode: string, item: any, data: any, params?: any) => {
+          return (
+            <ProfileTypeField
+              value={data[item.key]}
+              onChangeValue={(option: any) => this.setFormData(item, option.value)}
+            />
+          );
+        },
+      },
       {
         signup: true,
         profile: true,
@@ -73,7 +113,6 @@ class ProfileManager {
         render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <PersonalProfileForm 
-              key={item.key}
               resource="profile"
               mode={mode}
               item={item} 
@@ -95,7 +134,6 @@ class ProfileManager {
         render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <OrganizationProfileForm 
-              key={item.key}
               resource="profile"
               mode={mode}
               item={item} 
@@ -117,7 +155,6 @@ class ProfileManager {
         render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <VenueProfileForm
-              key={item.key}
               resource="profile"
               mode={mode}
               item={item} 
@@ -132,14 +169,13 @@ class ProfileManager {
         signup: true,
         profile: true,
         enabled: true,
-        required: true,
+        required: false,
         key: 'profile_name',
         label: i18n.t('Profile name (with no spaces)'),
         profileType: 'all',
         render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
               value={data[item.key]}
               placeholder={i18n.t('Profile name')}
               onChangeText={(value: string) => this.setFormData(item, value)}
@@ -158,7 +194,6 @@ class ProfileManager {
         render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextareaField
-              key={item.key}
               value={data[item.key]}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
@@ -177,7 +212,6 @@ class ProfileManager {
         render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
               value={data[item.key]}
               placeholder={i18n.t('Enter your address')}
               onChangeText={(value: string) => this.setFormData(item, value)}
@@ -196,7 +230,6 @@ class ProfileManager {
         render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
               value={data[item.key]}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
@@ -215,7 +248,6 @@ class ProfileManager {
         render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <SectorsField
-              key={item.key}
               resource="profile"
               field={item.key}
               value={data[item.key]}
@@ -245,7 +277,6 @@ class ProfileManager {
         render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <CountryField
-              key={item.key}
               value={data[item.key]}
               onChangeValue={(value: string) => this.setFormData(item, value)}
             />
@@ -263,7 +294,6 @@ class ProfileManager {
         render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
               value={data[item.key]}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
@@ -282,7 +312,6 @@ class ProfileManager {
         render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
               value={data[item.key]}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
@@ -301,7 +330,6 @@ class ProfileManager {
         render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
               value={data[item.key]}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
@@ -320,7 +348,6 @@ class ProfileManager {
         render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
               value={data[item.key]}
               placeholder={i18n.t('Enter your email address')}
               onChangeText={(value: string) => this.setFormData(item, value)}
@@ -339,7 +366,6 @@ class ProfileManager {
         render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
               value={data[item.key]}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
@@ -358,7 +384,6 @@ class ProfileManager {
         render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
               value={data[item.key]}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
@@ -377,7 +402,6 @@ class ProfileManager {
         render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <LocationPickerField
-              key={item.key}
               placeholder={i18n.t('Select your location')}
               latitude={data?.geolocation_latitude}
               longitude={data?.geolocation_longitude}
@@ -407,7 +431,6 @@ class ProfileManager {
         render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
               value={data[item.key]}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
@@ -426,7 +449,6 @@ class ProfileManager {
         render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
               value={data[item.key]}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
@@ -445,7 +467,6 @@ class ProfileManager {
         render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
               value={data[item.key]}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
@@ -464,7 +485,6 @@ class ProfileManager {
         render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
               value={data[item.key]}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
@@ -483,7 +503,6 @@ class ProfileManager {
         render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
               value={data[item.key]}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}

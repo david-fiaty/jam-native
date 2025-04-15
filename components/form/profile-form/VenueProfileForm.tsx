@@ -32,6 +32,7 @@ const VenueProfileForm = ({ resource, mode, item, data, params, parentKey }: Pro
       render: (mode: string, item: any, data: any, params?: any) => {
         return (
           <InputTextField
+            key={item.key}
             value={data?.[parentKey]?.[item.key] || ''}
             placeholder={i18n.t('Enter the venue name')}
             onChangeText={(value: string) => updateField(item, value)}
@@ -50,6 +51,7 @@ const VenueProfileForm = ({ resource, mode, item, data, params, parentKey }: Pro
       render: (mode: string, item: any, data: any, params?: any) => {
         return (
           <InputTextField
+            key={item.key}
             value={data?.[parentKey]?.[item.key] || ''}
             placeholder={i18n.t('Enter the creation year')}
             onChangeText={(value: string) => updateField(item, value)}
