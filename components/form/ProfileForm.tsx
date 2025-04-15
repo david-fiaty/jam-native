@@ -8,6 +8,7 @@ import ProfileTypeField from "../field/ProfileTypeField";
 import ProfileImageField from "../field/ProfileImageField";
 import ButtonView from "../view/ButtonView";
 import i18n from "@/translation/i18n";
+import DataManager from "@/manager/DataManager";
 
 const resource: string = 'profile';
 
@@ -43,7 +44,11 @@ const ProfileForm = () => {
       />
 
       {formData?.profile_type?.length > 0 && profileFields.map((item: any) => {
-        return ProfileManager.renderField('signup', item, formData);
+        return (
+          <View key={DataManager.createUuid()}>
+            {ProfileManager.renderField('signup', item, formData)}
+          </View>
+        )
       })}
 
       <ButtonView

@@ -49,7 +49,7 @@ class ProfileManager {
   renderField(mode: string, item: any, formData: any, params?: any) {
     if (this.canRenderField(mode, item, formData)) {
       return (
-        <View key={item?.key || DataManager.createUuid()}>
+        <View key={DataManager.createUuid()}>
           {item.label !== null && (
             <TextView style={this.getStyles().label}>
               {i18n.t(item.label)} {item?.required === true ? '*' : ''}
