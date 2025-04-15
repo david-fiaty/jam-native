@@ -101,6 +101,10 @@ const navigation: any = {
 };
 
 class RouteConfig {
+  getRoute(routeName: string) {
+    return routes.find((o: any) => o.name === routeName);
+  }
+
   getRoutes(segments?: any) {
     return routes.map((o: any) => {
       let options: any = { ...defaults, ...navigation, ...o };

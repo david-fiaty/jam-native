@@ -223,6 +223,7 @@ class ProfileManager {
               onPressEvent={() => ScreenManager.toggleModal('SectorsList', {
                 resource: 'profile',
                 field: item.key,
+                footer: false,
               })}
               onDeleteEvent={(item: any) => {
                 const sectorsIds: any[] = [...data[item.key] || []];

@@ -4,7 +4,6 @@ import { Colors } from "@/constants/Colors";
 import BoxView from "../view/BoxView";
 import JamsList from "../list/JamsList";
 import SpinnerView from "../view/SpinnerView";
-import ModalConfig from "@/constants/ModalConfig";
 
 const MainScreen = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -13,7 +12,7 @@ const MainScreen = () => {
     (async () => {
       setIsLoaded(true);
     })();
-  }, [isLoaded, ModalConfig]);
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
 
