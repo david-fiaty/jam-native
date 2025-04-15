@@ -5,7 +5,6 @@ import { setActiveModal } from '@/redux/slices/ModalSlice';
 import { setActiveRoute } from '@/redux/slices/RouteSlice';
 import { Config } from '@/constants/Config';
 import Store from '@/redux/Store';
-import ModalConfig from '@/constants/ModalConfig';
 
 class ScreenManager {
   messageTimeout?: any;
@@ -176,10 +175,12 @@ class ScreenManager {
   }
 
   getFooterSize() {
-    let activeModal: any = this.getActiveModal();
-    let currentModalConfig: any = ModalConfig.build().find((o: any) => o.name == activeModal?.name);
+
+    let activeModals: any = [...Store.getState().modal.active];
+
+    console.log(activeModals);
     let factor: number = 16;
-    let height: number = currentModalConfig?.showFooter === true ? this.window.height/factor : 0;
+    let height: number = this.window.height/factor;
 
     return {
       width: this.window.width,
