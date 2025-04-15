@@ -34,23 +34,24 @@ const ProfileForm = () => {
   return (
     <View style={Layout.formContainer}>
       <ProfileImageField
-        key={DataManager.createUuid()}
         value={formData?.profile_picture?.url}
         onChangeValue={(mediaList: any) => updateField('profile_picture', { url: mediaList[0]?.uri })}
       />
 
       <ProfileTypeField
-        key={DataManager.createUuid()}
         value={formData?.profile_type}
         onChangeValue={(option: any) => updateField('profile_type', option.value)}
       />
 
       {formData?.profile_type?.length > 0 && profileFields.map((item: any) => {
-        return ProfileManager.renderField('signup', item, formData);
+        return (
+          <View key={DataManager.createUuid()}>
+            {ProfileManager.renderField('signup', item, formData)}
+          </View>
+        )
       })}
 
       <ButtonView
-        key={DataManager.createUuid()}
         label={i18n.t('Continue')}
         isProcessing={isProcessing}
         onPress={submitForm}
