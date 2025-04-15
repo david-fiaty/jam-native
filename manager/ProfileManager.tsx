@@ -223,6 +223,7 @@ class ProfileManager {
               onPressEvent={() => ScreenManager.toggleModal('SectorsList', {
                 resource: 'profile',
                 field: item.key,
+                header: (mode == 'profile'),
                 footer: (mode == 'profile'),
               })}
               onDeleteEvent={(item: any) => {
@@ -384,6 +385,7 @@ class ProfileManager {
               longitude={data?.geolocation_longitude}
               onPressEvent={() => ScreenManager.toggleModal('LocationMapView', {
                 resource: 'profile',
+                header: (mode == 'profile'),
                 footer: (mode == 'profile'),
                 latitude: {
                   key: 'geolocation_latitude',
