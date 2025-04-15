@@ -28,7 +28,7 @@ const ButtonView = ({label, disabled, onPress, isProcessing}: Props) => {
   }
   else {
     return (
-      <TouchableOpacity onPress={onPress} style={styles.container}>
+      <TouchableOpacity onPress={() => onPress()} style={styles.container}>
         <TextView style={styles.label}>{label}</TextView>
       </TouchableOpacity>
     );
