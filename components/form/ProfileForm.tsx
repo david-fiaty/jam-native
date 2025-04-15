@@ -8,6 +8,7 @@ import ProfileTypeField from "../field/ProfileTypeField";
 import ProfileImageField from "../field/ProfileImageField";
 import ButtonView from "../view/ButtonView";
 import i18n from "@/translation/i18n";
+import DataManager from "@/manager/DataManager";
 
 const resource: string = 'profile';
 
@@ -33,11 +34,13 @@ const ProfileForm = () => {
   return (
     <View style={Layout.formContainer}>
       <ProfileImageField
+        key={DataManager.createUuid()}
         value={formData?.profile_picture?.url}
         onChangeValue={(mediaList: any) => updateField('profile_picture', { url: mediaList[0]?.uri })}
       />
 
       <ProfileTypeField
+        key={DataManager.createUuid()}
         value={formData?.profile_type}
         onChangeValue={(option: any) => updateField('profile_type', option.value)}
       />
@@ -47,6 +50,7 @@ const ProfileForm = () => {
       })}
 
       <ButtonView
+        key={DataManager.createUuid()}
         label={i18n.t('Continue')}
         isProcessing={isProcessing}
         onPress={submitForm}
