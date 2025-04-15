@@ -62,16 +62,14 @@ const PersonalProfileForm = ({ resource, mode, item, data, params, parentKey }: 
   ];
 
   const updateField = (item: any, value: any) => {
-
-    console.log(item, value);
-    
-    /*
     dispatch(setFormData<any>({
       resource: 'profile',
-      key: key,
-      value: value,
+      key: parentKey,
+      value: {
+        ...(formData[parentKey] || {}),
+        ...{[item.key]: value},
+      },
     }));
-    */
   };
 
   const renderSubField = (item: any, formData: any, params?: any) => {
