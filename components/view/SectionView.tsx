@@ -1,12 +1,13 @@
-import { Colors } from '@/constants/Colors';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Link } from 'expo-router';
+import { Colors } from '@/constants/Colors';
 import { BaseProps } from '@/constants/Types';
 import BoxView from '@/components/view/BoxView';
 import TextView from './TextView';
 
 type Props = {
-  name?: string;
+  name?: any;
   style?: any;
   children?: any;
 };
@@ -16,6 +17,7 @@ const SectionView = ({ name, style, children }: Props) => {
     <SafeAreaView style={[styles.container, style]}>
       <BoxView direction="column" align="center" justify="center" style={styles.container}>
         <TextView>{name}</TextView>
+        <Link href="/about">About</Link>
         {children}
       </BoxView>
     </SafeAreaView>
