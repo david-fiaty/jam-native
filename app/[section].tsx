@@ -11,11 +11,7 @@ type Props = {
 
 export default ({ name }: Props) => {
   return (
-    <SafeAreaView style={styles.container}>
-      <BoxView direction="column" align="center" justify="center" style={styles.container}>
-        <WelcomeSection />
-      </BoxView>
-    </SafeAreaView>
+    <TextView>dynamic section</TextView>
   );
 };
 
