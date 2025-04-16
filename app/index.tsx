@@ -10,15 +10,17 @@ import WelcomeSection from '@/components/section/WelcomeSection';
 export default () => {
   const { section } = useGlobalSearchParams();
 
-  if (section) {
-    return (<SectionView name={section} />); 
-  }
-  
   return (
     <ThemeProvider theme={BaseTheme}>
       <SafeAreaView style={styles.container}>
-        <BoxView direction="column" align="center" justify="center" style={styles.container}>
-          <WelcomeSection />
+        <BoxView 
+          direction="column" 
+          align="center" 
+          justify="center" 
+          style={styles.container}
+        >
+          {!section && <WelcomeSection />}
+          {section && <SectionView name={section} />}
         </BoxView>
       </SafeAreaView>
     </ThemeProvider>
