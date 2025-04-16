@@ -5,12 +5,18 @@ import { Colors } from '@/constants/Colors';
 import { BaseProps } from '@/constants/Types';
 import BoxView from '@/components/view/BoxView';
 import TextView from './TextView';
+import WelcomeSection from '../section/WelcomeSection';
 
 type Props = {
   name?: any;
 };
 
 const SectionView = ({ name }: Props) => {
+
+  if (!name) {
+    return <WelcomeSection />
+  }
+
   return (
     <TextView>SectionView</TextView>
   );
