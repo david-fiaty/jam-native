@@ -1,14 +1,21 @@
+import { StyleSheet } from 'react-native';
+import { useGlobalSearchParams } from 'expo-router';
 import { ThemeProvider } from '@rneui/themed';
 import BaseTheme from "@/constants/BaseTheme";
-import ScreenView from '@/components/view/ScreenView';
-import WelcomeScreen from '@/components/screen/WelcomeScreen';
+import SectionView from '@/components/view/SectionView';
 
 export default () => {
+  const { section } = useGlobalSearchParams();
+
   return ( 
     <ThemeProvider theme={BaseTheme}>
-      <ScreenView>
-        <WelcomeScreen />
-      </ScreenView>
+      <SectionView name="my section" />
     </ThemeProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    height: '100%',
+  },
+});
