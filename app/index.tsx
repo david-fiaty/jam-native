@@ -17,7 +17,7 @@ export default () => {
       <ScreenView>
         <WelcomeScreen />
       
-        <Link href="/test/xooo">Login</Link>
+        <Link href="/test/foo">Login</Link>
         <Button title={'test'} onPress={() => router.push('/test/xooo')} />
       </ScreenView>
     </ThemeProvider>
