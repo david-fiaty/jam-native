@@ -10,6 +10,9 @@ import Store from "@/redux/Store";
 import RouteConfig from '@/constants/RouteConfig';
 import ModalConfig from '@/constants/ModalConfig';
 import ScreenManager from '@/manager/ScreenManager';
+import { Colors } from '@/constants/Colors';
+import { Config } from '@/constants/Config';
+import { Platform } from 'react-native';
 
 ExpoSplashScreen.preventAutoHideAsync();
 
@@ -19,32 +22,30 @@ const RootLayout = () => {
   const routeConfig: any = RouteConfig.getRoutes(segments);
   const modalConfig: any = ModalConfig.build();
 
+  const defaults: any = Platform.OS == 'ios' ? {
+    headerShown: false,
+  } : { 
+    statusBarStyle: 'dark',
+    animation: 'fade',
+    headerShown: false,
+    statusBarBackgroundColor: Colors.white,
+    headerTintColor: Colors.white,    
+    headerStyle: {
+      backgroundColor: Colors.white, 
+    },
+  };
+
+  const navigation: any = {
+    showHeader: true,
+    showFooter: true,
+    showHeaderButtons: true,
+    showHeaderSearch: true,
+    isRoot: false,
+  };
+
   const [isLoaded, isError] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
-
-  const backAction = () => {  
-    ScreenManager.toggleModal(null);
-    router.replace('/');
-
-    // Todo - Set new active route in to fix bug
-    /*
-    let activeRoutes: any = [...Store.getState().route.active].pop();
-    ScreenManager.toggleModal(null);
-    
-    if (Array.isArray(activeRoutes) && activeRoutes.length > 0) {
-      router.dismissTo(activeRoutes[activeRoutes.length - 1]);
-    }
-    else if (activeRoutes.length > 0) {
-      router.replace(activeRoutes);
-    }
-    else {
-      router.replace('/');
-    }
-    */
-
-    return true;
-  };
 
   const loadModalConfig = useCallback(() => {
     Store.dispatch(setModalConfig(modalConfig.map(({ component, ...rest }) => ({ ...rest }))));
@@ -58,13 +59,6 @@ const RootLayout = () => {
       ExpoSplashScreen.hideAsync();
     }
 
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      backAction,
-    );
-
-    return () => backHandler.remove();
-
   }, [isLoaded, isError]);
 
   if (!isLoaded && !isError) return <></>; 
@@ -72,8 +66,8 @@ const RootLayout = () => {
   return (
     <Provider store={Store}>
       <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="[section]" options={{ headerShown: false }} />
+        <Stack.Screen name="index" options={{ ...defaults, ...navigation }} />
+        <Stack.Screen name="[section]" options={{ ...defaults, ...navigation }} />
       </Stack>
     </Provider>
   );
