@@ -72,7 +72,13 @@ const RootLayout = () => {
   return (
     <Provider store={Store}>
       <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
+        {routeConfig.map((o: any) => (
+          <Stack.Screen 
+            key={o.name}
+            name={o.name} 
+            options={o}
+          />
+        ))}
       </Stack>
     </Provider>
   );
