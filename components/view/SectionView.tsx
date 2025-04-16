@@ -8,11 +8,9 @@ import TextView from './TextView';
 
 type Props = {
   name?: any;
-  style?: any;
-  children?: any;
 };
 
-const SectionView = ({ name, style, children }: Props) => {
+const SectionView = ({ name }: Props) => {
   return (
     <TextView>SectionView</TextView>
   );
