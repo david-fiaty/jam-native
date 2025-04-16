@@ -20,7 +20,6 @@ const SectionView = ({ name }: Props) => {
     },
   ];
 
-  
   return sections.find((o: any) => o.name === (name || 'welcome'))?.render();
 };
 
