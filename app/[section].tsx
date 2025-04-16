@@ -1,25 +1,33 @@
 import { StyleSheet } from 'react-native';
+import { useGlobalSearchParams } from 'expo-router';
+import { ThemeProvider } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Colors } from '@/constants/Colors';
+import BaseTheme from "@/constants/BaseTheme";
+import SectionView from '@/components/view/SectionView';
 import BoxView from '@/components/view/BoxView';
-import TextView from '@/components/view/TextView';
-import WelcomeSection from '@/components/section/WelcomeSection';
 
-type Props = {
-  name?: any;
-};
+export default () => {
+  const { section } = useGlobalSearchParams();
 
-export default ({ name }: Props) => {
   return (
-    <TextView>dynamic section</TextView>
+    <ThemeProvider theme={BaseTheme}>
+      <SafeAreaView style={styles.container}>
+        <BoxView 
+          direction="column" 
+          align="center" 
+          justify="center" 
+          style={styles.container}
+        >
+          <SectionView name={section} />
+        </BoxView>
+      </SafeAreaView>
+    </ThemeProvider>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.white,
-    display: 'flex',
-    flexDirection: 'column',
-    flexGrow: 1,
+    height: '100%',
   },
 });
+
