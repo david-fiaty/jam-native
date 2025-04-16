@@ -1,4 +1,3 @@
-import { StyleSheet } from 'react-native';
 import { useGlobalSearchParams } from 'expo-router';
 import { ThemeProvider } from '@rneui/themed';
 import BaseTheme from "@/constants/BaseTheme";
@@ -9,13 +8,7 @@ export default () => {
 
   return ( 
     <ThemeProvider theme={BaseTheme}>
-      <SectionView name="my section" />
+      <SectionView name={section} />
     </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    height: '100%',
-  },
-});
