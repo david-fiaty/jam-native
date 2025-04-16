@@ -2,20 +2,26 @@ import { StyleSheet } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import TextView from './TextView';
 import WelcomeSection from '../section/WelcomeSection';
+import LoginSection from '../section/LoginSection';
 
 type Props = {
   name?: any;
 };
 
 const SectionView = ({ name }: Props) => {
+  const sections: any = [
+    {
+      name: 'welcome',
+      render: () => <WelcomeSection />,
+    },
+    {
+      name: 'login',
+      render: () => <LoginSection />,
+    },
+  ];
 
-  if (!name) {
-    return <WelcomeSection />
-  }
-
-  return (
-    <TextView>SectionView</TextView>
-  );
+  
+  return sections.find((o: any) => o.name === (name || 'welcome'))?.render();
 };
 
 const styles = StyleSheet.create({
