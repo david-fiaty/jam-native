@@ -6,6 +6,7 @@ import BaseTheme from "@/constants/BaseTheme";
 import ScreenView from '@/components/view/ScreenView';
 import TextView from '@/components/view/TextView';
 import BoxView from '@/components/view/BoxView';
+import SectionView from '@/components/view/SectionView';
 
 export default () => {
 
@@ -14,11 +15,9 @@ export default () => {
 
   return ( 
     <ThemeProvider theme={BaseTheme}>
-      <ScreenView>
-        <BoxView direction="column" align="center" justify="center" style={styles.container}>
-          <TextView>home</TextView>
-        </BoxView>
-      </ScreenView>
+      <SectionView>
+        <TextView>section view test</TextView>
+      </SectionView>
     </ThemeProvider>
   );
 }
