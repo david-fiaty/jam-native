@@ -9,7 +9,7 @@ import WelcomeSection from '@/components/section/WelcomeSection';
 
 export default () => {
   const { section } = useGlobalSearchParams();
-
+  
   return (
     <ThemeProvider theme={BaseTheme}>
       <SafeAreaView style={styles.container}>
