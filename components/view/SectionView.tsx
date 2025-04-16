@@ -3,6 +3,7 @@ import { Colors } from '@/constants/Colors';
 import TextView from './TextView';
 import WelcomeSection from '../section/WelcomeSection';
 import LoginSection from '../section/LoginSection';
+import AboutSection from '../section/AboutSection';
 
 type Props = {
   name?: any;
@@ -17,6 +18,10 @@ const SectionView = ({ name }: Props) => {
     {
       name: 'login',
       render: () => <LoginSection />,
+    },
+    {
+      name: 'about',
+      render: () => <AboutSection />,
     },
   ];
 
