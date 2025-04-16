@@ -1,32 +1,22 @@
+import { StyleSheet } from 'react-native';
 import { useGlobalSearchParams } from 'expo-router';
 import { ThemeProvider } from '@rneui/themed';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import BaseTheme from "@/constants/BaseTheme";
 import SectionView from '@/components/view/SectionView';
-import { View, StyleSheet } from 'react-native';
-import BottomLinks from '@/components/navigation/BottomLinks';
-import LoginSignupButton from '@/components/button/LoginSignupButton';
-import LogoView from '@/components/view/LogoView';
 import BoxView from '@/components/view/BoxView';
-import { Divider } from '@rneui/base';
-import TextSlideshow from '@/components/slideshow/TextSlideshow';
-import StaticData from '@/constants/StaticData';
+import WelcomeSection from '@/components/section/WelcomeSection';
 
 export default () => {
   const { section } = useGlobalSearchParams();
 
-  return ( 
+  return (
     <ThemeProvider theme={BaseTheme}>
-      <BoxView direction="column" align="center" justify="center" style={styles.container}>
-        <LogoView size={110} />    
-      
-        <TextSlideshow data={StaticData.welcomeSlideshow} />
-
-        <Divider />
-        <LoginSignupButton />
-        
-        <Divider /><Divider />
-        <BottomLinks />
-      </BoxView>
+      <SafeAreaView style={styles.container}>
+        <BoxView direction="column" align="center" justify="center" style={styles.container}>
+          <WelcomeSection />
+        </BoxView>
+      </SafeAreaView>
     </ThemeProvider>
   );
 }
