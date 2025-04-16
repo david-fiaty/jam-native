@@ -9,6 +9,10 @@ import WelcomeSection from '@/components/section/WelcomeSection';
 
 export default () => {
   const { section } = useGlobalSearchParams();
+
+  if (section) {
+    return (<SectionView name={section} />); 
+  }
   
   return (
     <ThemeProvider theme={BaseTheme}>
