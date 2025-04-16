@@ -1,30 +1,31 @@
-import { View, StyleSheet } from 'react-native';
-import { Stack, useSegments, useRouter, Link } from 'expo-router';
-import { useGlobalSearchParams } from 'expo-router';
-import { ThemeProvider } from '@rneui/themed';
-import BaseTheme from "@/constants/BaseTheme";
-import ScreenView from '@/components/view/ScreenView';
-import TextView from '@/components/view/TextView';
+import { StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Link } from 'expo-router';
+import { Colors } from '@/constants/Colors';
+import { BaseProps } from '@/constants/Types';
 import BoxView from '@/components/view/BoxView';
+import TextView from '@/components/view/TextView';
 
-export default () => {
+type Props = {
+  name?: any;
+};
 
-  const router = useRouter();
-  const { section } = useGlobalSearchParams();
-
-  return ( 
-    <ThemeProvider theme={BaseTheme}>
-      <ScreenView>
-        <BoxView direction="column" align="center" justify="center" style={styles.container}>
-          <TextView>home</TextView>
-        </BoxView>
-      </ScreenView>
-    </ThemeProvider>
+export default ({ name }: Props) => {
+  return (
+    <SafeAreaView style={styles.container}>
+      <BoxView direction="column" align="center" justify="center" style={styles.container}>
+        {name} 
+        <TextView>dynamic section</TextView>
+      </BoxView>
+    </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
+    backgroundColor: Colors.white,
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
   },
 });
