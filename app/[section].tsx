@@ -3,6 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Colors } from '@/constants/Colors';
 import BoxView from '@/components/view/BoxView';
 import TextView from '@/components/view/TextView';
+import WelcomeSection from '@/components/section/WelcomeSection';
 
 type Props = {
   name?: any;
@@ -12,8 +13,7 @@ export default ({ name }: Props) => {
   return (
     <SafeAreaView style={styles.container}>
       <BoxView direction="column" align="center" justify="center" style={styles.container}>
-        {name} 
-        <TextView>dynamic section</TextView>
+        <WelcomeSection />
       </BoxView>
     </SafeAreaView>
   );
