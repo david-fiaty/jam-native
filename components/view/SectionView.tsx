@@ -11,7 +11,7 @@ type Props = {
   children?: any;
 };
 
-const SectionView = ({name, style, children}: Props) => {
+const SectionView = ({ name, style, children }: Props) => {
   return (
     <SafeAreaView style={[styles.container, style]}>
       <BoxView direction="column" align="center" justify="center" style={styles.container}>
