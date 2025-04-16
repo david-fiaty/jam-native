@@ -1,6 +1,23 @@
 import i18n from "@/translation/i18n";
 
 const StaticData = {
+  welcomeSlideshow: [
+    {
+      id: 1,
+      title: i18n.t('Create better, together'),
+      content: i18n.t('Welcome to the Jam app. Jam is a place to explore and experience artists and creatives from different backgrounds in West Africa.'),
+    },
+    {
+      id: 2,
+      title: i18n.t('Everything you need'),
+      content: i18n.t('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'),
+    },
+    {
+      id: 3,
+      title: i18n.t('The place to excel'),
+      content: i18n.t('Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.'),
+    },
+  ],
   languages: [
     {
       label: i18n.t('French'),
