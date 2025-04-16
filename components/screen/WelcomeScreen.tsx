@@ -6,6 +6,9 @@ import BoxView from '../view/BoxView';
 import { Divider } from '@rneui/base';
 import TextSlideshow from '../slideshow/TextSlideshow';
 
+import { Stack, useSegments, useRouter, Link } from 'expo-router';
+import { Button } from '@rneui/base';
+
 const textSlideshowData = [
   {
     id: 1,
@@ -28,6 +31,9 @@ const textSlideshowData = [
 ];
 
 const WelcomeScreen = () => {
+
+  const router = useRouter();
+  
   return (
     <BoxView direction="column" align="center" justify="center" style={styles.container}>
       <LogoView size={110} />    
@@ -39,6 +45,10 @@ const WelcomeScreen = () => {
       
       <Divider /><Divider />
       <BottomLinks />
+
+            
+      <Link href="/test/foo">Login</Link>
+        <Button title={'test'} onPress={() => router.push('/test/xooo')} />
     </BoxView>
   );
 };
