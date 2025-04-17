@@ -19,6 +19,9 @@ eas update --branch dev-features-12 --platform android
 # Build apk
 eas build -p android --clear-cache --profile preview 
 
+# Build web
+npx expo export -p web
+
 # Run
 npm start --tunnel
 
