@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setFormData } from "@/redux/slices/FormSlice";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from '@/constants/Layout';
-import BoxView from "../view/BoxView";
 import SpinnerView from '../view/SpinnerView';
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
@@ -17,10 +17,11 @@ type Props = BaseProps & {
   value?: any;
   placeholder?: any;
   onPressEvent?: () => void;
-  onDeleteEvent: (item: any) => void;
+  onDeleteEvent?: (item: any) => void;
 };
 
 const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent, onDeleteEvent }: Props) => {
+  const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [selectedSectors, setSelectedSectors] = useState<any>([]);
@@ -45,9 +46,29 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
   };
 
   const deleteItem = (item: any) => {
-    let selectedIds: any[] = [...(formData?.[fieldName] || [])];
+    // Variables
+    let selectedIds: any[] = [...(value?.length > 0 ? value : [])];
     let deleteIndex: number = selectedIds.findIndex((id: any) => id == item.id);
+    let parentIds: any = sectorsData.map((o: any) => o.id);
 
+    // Delete target item
+    delete selectedIds[deleteIndex];
+    selectedIds = selectedIds.filter(Boolean);
+
+    // Delete childless parents
+    for (const id of selectedIds) {
+      // Todo - Delete childless parents
+    }
+    
+    setSelectedSectors(getSelectedSectors(selectedIds));
+
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: field, 
+      value: selectedIds, 
+    }));
+
+    /*
     if (deleteIndex !== -1) selectedIds.splice(deleteIndex, 1);
 
     let parentIds: any = sectorsData.map((o: any) => o.id);
@@ -63,9 +84,7 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
         }
       }
     }
-
-    setSelectedSectors(getSelectedSectors(selectedIds));
-    if (onDeleteEvent) onDeleteEvent(item);
+    */
   }
 
   useEffect(() => {
