@@ -13,8 +13,8 @@ eas init --id "bc105b9c-d776-42e2-bd2e-2ebcff179748"
 
 # Build expo
 eas update --branch dev-features-10
-eas update --branch dev-features-12 --platform ios
-eas update --branch dev-features-12 --platform android
+eas update --branch dev-features-10 --platform ios
+eas update --branch dev-features-10 --platform android
 
 # Build apk
 eas build -p android --clear-cache --profile preview 
