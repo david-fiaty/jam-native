@@ -31,6 +31,9 @@ const ProfileForm = () => {
     console.log('submitForm', formData);
   };
   
+
+  console.log(formData);
+
   return (
     <View style={[Layout.formContainer, styles.container]}>
       <ProfileImageField
