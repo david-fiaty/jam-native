@@ -131,15 +131,16 @@ const HeaderNavigation = () => {
     (async () => {
       if (!isLoaded) {
         let userLoggedIn: boolean = await UserManager.isLoggedIn();
-        let userNotifications: any = await UserManager.getNotifications(); 
+        let userNotificationsCount: any = 0; 
 
         if (userLoggedIn) {
           await loadSearchResult();
+          userNotificationsCount = await UserManager.getNotifications();
         }
 
         if (!isCancelled) {
           setIsLoggedIn(userLoggedIn);
-          setNotificationsCount(userNotifications);
+          setNotificationsCount(userNotificationsCount);
           setIsLoaded(true);
         }
       }
