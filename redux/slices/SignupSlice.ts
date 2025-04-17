@@ -14,11 +14,11 @@ const SignupSlice = createSlice({
   initialState: getInitialState(),
   reducers: {
     setValue: (state, action) => {
-      if (action.payload?.key) {
+      if (action.payload) {
         state[action.payload.key] = action.payload.value;
       }
       else {
-        state = getInitialState();
+        return getInitialState();
       }
     },
   },
