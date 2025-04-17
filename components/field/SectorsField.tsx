@@ -45,8 +45,15 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
   };
 
   const deleteItem = (item: any) => {
-    let selectedIds: any[] = [...(formData?.[fieldName] || [])];
+    let selectedIds: any[] =  value?.length > 0 ? value : [];
     let deleteIndex: number = selectedIds.findIndex((id: any) => id == item.id);
+
+
+    console.log('item', item);
+    console.log('selected ids', selectedIds);
+    console.log('delete index', deleteIndex);
+
+    return ;
 
     if (deleteIndex !== -1) selectedIds.splice(deleteIndex, 1);
 
