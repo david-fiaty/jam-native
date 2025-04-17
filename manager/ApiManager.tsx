@@ -87,7 +87,7 @@ class ApiManager {
       'Content-Type': 'application/json',
     };
 
-    if (tokenData) {
+    if (Object.keys(tokenData).length > 0) {
       headers['Authorization'] = `Bearer ${tokenData?.access_token || ''}`; 
     }
     
