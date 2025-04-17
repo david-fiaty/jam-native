@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setFormData } from "@/redux/slices/FormSlice";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from '@/constants/Layout';
-import BoxView from "../view/BoxView";
 import SpinnerView from '../view/SpinnerView';
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
@@ -21,6 +21,7 @@ type Props = BaseProps & {
 };
 
 const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent, onDeleteEvent }: Props) => {
+  const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [selectedSectors, setSelectedSectors] = useState<any>([]);
@@ -58,10 +59,16 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
     for (const id of selectedIds) {
       // Todo - Delete childless parents
     }
-
+    
     setSelectedSectors(getSelectedSectors(selectedIds));
 
-    console.log(selectedIds);
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: field, 
+      value: selectedIds, 
+    }));
+
+    
     //if (onDeleteEvent) onDeleteEvent(item);
 
 
