@@ -54,6 +54,12 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
     console.log('delete index', deleteIndex);
     console.log('parent ids', parentIds);
 
+    for (const id of selectedIds) {
+      if (parentIds.includes(id)) {
+        console.log('---', id)
+      }
+    }
+
     return ;
 
     /*
