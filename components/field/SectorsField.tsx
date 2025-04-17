@@ -45,16 +45,20 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
   };
 
   const deleteItem = (item: any) => {
+    // Variables
     let selectedIds: any[] = [...(value?.length > 0 ? value : [])];
     let deleteIndex: number = selectedIds.findIndex((id: any) => id == item.id);
     let parentIds: any = sectorsData.map((o: any) => o.id);
 
-    console.log('selected ids 1', selectedIds);
+    // Delete target item
     delete selectedIds[deleteIndex];
     selectedIds = selectedIds.filter(Boolean);
 
-    console.log('selected ids 2', selectedIds);
+    // Delete childless parents
 
+
+
+    
     /*
     console.log('item', item);
     console.log('selected ids', selectedIds);
