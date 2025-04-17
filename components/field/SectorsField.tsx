@@ -68,26 +68,6 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
       value: selectedIds, 
     }));
 
-    
-    //if (onDeleteEvent) onDeleteEvent(item);
-
-
-    /*
-    console.log('item', item);
-    console.log('selected ids', selectedIds);
-    console.log('delete index', deleteIndex);
-    console.log('parent ids', parentIds);
-    */
-
-    /*
-    for (const id of selectedIds) {
-      if (parentIds.includes(id)) {
-        console.log('---', id)
-      }
-    }
-      */
-
-
     /*
     if (deleteIndex !== -1) selectedIds.splice(deleteIndex, 1);
 
@@ -104,9 +84,6 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
         }
       }
     }
-
-    setSelectedSectors(getSelectedSectors(selectedIds));
-    if (onDeleteEvent) onDeleteEvent(item);
     */
   }
 
