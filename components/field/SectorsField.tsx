@@ -28,7 +28,7 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
   const fieldName: string = field;
 
   const getSelectedSectors = (sectorsIds?: any) => {
-    let selectedIds: any[] = sectorsIds?.length > 0 || value || [];
+    let selectedIds: any[] = sectorsIds?.length ? sectorsIds : [];
     let result: any[] = [];
 
     for (const item of sectorsData) {
@@ -72,12 +72,12 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
     (async () => {
       if (!isLoaded) {
         setSectorsData(await EntityManager.getSectors());
-        setSelectedSectors(getSelectedSectors(value || []));
       }
     })();
 
+    setSelectedSectors(getSelectedSectors(value));
     setIsLoaded(true);
-  }, [isLoaded]);
+  }, [isLoaded, value]);
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
