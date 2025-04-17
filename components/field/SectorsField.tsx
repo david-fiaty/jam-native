@@ -17,7 +17,7 @@ type Props = BaseProps & {
   value?: any;
   placeholder?: any;
   onPressEvent?: () => void;
-  onDeleteEvent: (item: any) => void;
+  onDeleteEvent?: (item: any) => void;
 };
 
 const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent, onDeleteEvent }: Props) => {
@@ -55,10 +55,14 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
     selectedIds = selectedIds.filter(Boolean);
 
     // Delete childless parents
+    for (const id of selectedIds) {
+      // Todo - Delete childless parents
+    }
+
+    setSelectedSectors(getSelectedSectors(selectedIds));
+    //if (onDeleteEvent) onDeleteEvent(item);
 
 
-
-    
     /*
     console.log('item', item);
     console.log('selected ids', selectedIds);
@@ -74,7 +78,6 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
     }
       */
 
-    return ;
 
     /*
     if (deleteIndex !== -1) selectedIds.splice(deleteIndex, 1);
