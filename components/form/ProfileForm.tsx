@@ -30,9 +30,6 @@ const ProfileForm = () => {
     // Todo - Handle API data submission
     console.log('submitForm', formData);
   };
-  
-
-  console.log(formData);
 
   return (
     <View style={[Layout.formContainer, styles.container]}>
