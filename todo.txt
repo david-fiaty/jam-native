@@ -162,12 +162,6 @@ const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude
 }
 
 
-
-
-
-
-
-
   useEffect(() => {
     (async () => {
      
@@ -197,19 +191,6 @@ const getModals = () => {
     })();
 
   }, [screenState, currentScreen]);
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   const getSelectedMedia = () => {

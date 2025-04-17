@@ -31,6 +31,9 @@ const ProfileForm = () => {
     console.log('submitForm', formData);
   };
   
+
+  console.log(formData);
+
   return (
     <View style={[Layout.formContainer, styles.container]}>
       <ProfileImageField
@@ -65,7 +68,7 @@ const ProfileForm = () => {
 
 const styles = StyleSheet.create({
   container: {
-    //height: '100%',
+    //height: '100%', // Todo - Improve container scroll display
   },
 });
 
