@@ -22,7 +22,7 @@ export const Config: any = {
     longitude: 0.8248,
   },
   forceLogin: {
-    enabled: true,
+    enabled: false,
     credentials: {
       email: 'mitsiomotu@yopmail.com',
       password: 'Password1234',
