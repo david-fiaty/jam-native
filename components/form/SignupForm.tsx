@@ -11,7 +11,6 @@ const SignupForm = () => {
   const formData: any = useSelector((state: any) => state.signup);
 
   const resetForm = () => {
-    console.log('reset form');
     dispatch(setValue(null));
   }
 
@@ -23,8 +22,6 @@ const SignupForm = () => {
         }
     })();
   }, [isLoaded]);
-
-  console.log(formData);
 
   return (
     <>
