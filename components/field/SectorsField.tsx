@@ -60,6 +60,8 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
     }
 
     setSelectedSectors(getSelectedSectors(selectedIds));
+
+    console.log(selectedIds);
     //if (onDeleteEvent) onDeleteEvent(item);
 
 
