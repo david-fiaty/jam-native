@@ -72,7 +72,7 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
     (async () => {
       if (!isLoaded) {
         setSectorsData(await EntityManager.getSectors());
-        setSelectedSectors(getSelectedSectors(value));
+        setSelectedSectors(getSelectedSectors(value || []));
       }
     })();
 
