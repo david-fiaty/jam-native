@@ -5,6 +5,7 @@ import WelcomeSection from '../section/WelcomeSection';
 import LoginSection from '../section/LoginSection';
 import AboutSection from '../section/AboutSection';
 import LegalSection from '../section/LegalSection';
+import JamsSection from '../section/JamsSection';
 
 type Props = {
   name?: any;
@@ -27,6 +28,10 @@ const SectionView = ({ name }: Props) => {
     {
       name: 'legal',
       render: () => <LegalSection />,
+    },
+    {
+      name: 'jams',
+      render: () => <JamsSection />,
     },
   ];
 
