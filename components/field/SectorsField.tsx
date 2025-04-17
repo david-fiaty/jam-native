@@ -47,14 +47,16 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
   const deleteItem = (item: any) => {
     let selectedIds: any[] =  value?.length > 0 ? value : [];
     let deleteIndex: number = selectedIds.findIndex((id: any) => id == item.id);
-
+    let parentIds: any = sectorsData.map((o: any) => o.id);
 
     console.log('item', item);
     console.log('selected ids', selectedIds);
     console.log('delete index', deleteIndex);
+    console.log('parent ids', parentIds);
 
     return ;
 
+    /*
     if (deleteIndex !== -1) selectedIds.splice(deleteIndex, 1);
 
     let parentIds: any = sectorsData.map((o: any) => o.id);
@@ -73,6 +75,7 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
 
     setSelectedSectors(getSelectedSectors(selectedIds));
     if (onDeleteEvent) onDeleteEvent(item);
+    */
   }
 
   useEffect(() => {
