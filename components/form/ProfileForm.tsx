@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
@@ -32,7 +32,7 @@ const ProfileForm = () => {
   };
   
   return (
-    <View style={Layout.formContainer}>
+    <View style={[Layout.formContainer, styles.container]}>
       <ProfileImageField
         value={formData?.profile_picture?.url}
         onChangeValue={(mediaList: any) => updateField('profile_picture', { url: mediaList[0]?.uri })}
@@ -62,5 +62,11 @@ const ProfileForm = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    //height: '100%',
+  },
+});
 
 export default ProfileForm;
