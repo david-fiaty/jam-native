@@ -126,14 +126,29 @@ const HeaderNavigation = () => {
   };
 
   useEffect(() => {
+    let isCancelled = false;
+
     (async () => {
-      await loadSearchResult();
-      setIsLoggedIn(await UserManager.isLoggedIn());
-      setNotificationsCount(await UserManager.getNotifications());
-      setIsLoaded(true);
+      if (!isLoaded) {
+        await loadSearchResult();
+
+        let userLoggedIn: boolean = await UserManager.isLoggedIn();
+        let userNotifications: any = await UserManager.getNotifications(); 
+
+        if (!isCancelled) {
+          setIsLoggedIn(userLoggedIn);
+          setNotificationsCount(userNotifications);
+          setIsLoaded(true);
+        }
+      }
     })();
+
+    return () => {
+      isCancelled = true; 
+    };
   }, [isLoaded]);
 
+  
   if (!canShowHeader()) return <></>;
 
   return (
