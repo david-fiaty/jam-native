@@ -34,7 +34,7 @@ const OrganizationProfileForm = ({ resource, mode, item, data, params, parentKey
             key={item.key}
             value={data?.[parentKey]?.[item.key] || ''}
             placeholder={i18n.t('Enter your organization name')}
-            onChangeText={(value: string) => onChange(item.key, value)}
+            onChangeText={(value: string) => onChange(parentKey, value)}
           />
         );
       },
@@ -53,7 +53,7 @@ const OrganizationProfileForm = ({ resource, mode, item, data, params, parentKey
             key={item.key}
             value={data?.[parentKey]?.[item.key] || ''}
             placeholder={i18n.t('Enter the creation year')}
-            onChangeText={(value: string) => onChange(item.key, value)}
+            onChangeText={(value: string) => onChange(parentKey, value)}
           />
         );
       },
