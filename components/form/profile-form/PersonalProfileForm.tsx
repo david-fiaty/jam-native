@@ -34,7 +34,7 @@ const PersonalProfileForm = ({ resource, mode, item, data, params, parentKey, on
             key={item.key}
             value={data?.[parentKey]?.[item.key] || ''}
             placeholder={i18n.t('Enter your first name')}
-            onChangeText={(value: string) => onChange(item, value)}
+            onChangeText={(value: string) => onChange(item.key, value)}
           />
         );
       },
@@ -53,7 +53,7 @@ const PersonalProfileForm = ({ resource, mode, item, data, params, parentKey, on
             key={item.key}
             value={data?.[parentKey]?.[item.key] || ''}
             placeholder={i18n.t('Enter your last name')}
-            onChangeText={(value: string) => onChange(item, value)}
+            onChangeText={(value: string) => onChange(item.key, value)}
           />
         );
       },
