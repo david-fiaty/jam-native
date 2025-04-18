@@ -63,9 +63,14 @@ const InputTextField = ({
         spellCheck={spellCheck}
         value={value}
         readOnly={readOnly}
-        onChangeText={onChangeText}
-        //onChangeText={(value: any) => setCurrentValue(value)}
-        onSubmitEditing={onSubmitEditing}
+        onChangeText={(value: any) => {
+          if (onChangeText) onChangeText(value)
+          else setCurrentValue(value);
+        }}
+        onSubmitEditing={() => {
+          if (onSubmitEditing) onSubmitEditing()
+          else if (onChangeText) onChangeText(currentValue);
+        }}
       />
     </BoxView>
   );
