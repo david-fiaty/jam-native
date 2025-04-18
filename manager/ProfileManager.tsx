@@ -44,7 +44,7 @@ class ProfileManager {
       && (item.profileType === 'all' || item.profileType === formData?.profile_type);
   }
 
-  renderField(mode: string, item: any, formData: any, params?: any) {
+  renderField(mode: string, item: any, formData: any, onChange?: any, params?: any) {
     return (
       <>
         {item.label !== null && (
@@ -53,7 +53,7 @@ class ProfileManager {
           </TextView>
         )}
 
-        {item.render(mode, item, formData, params)}
+        {item.render(mode, item, formData, onChange, params)}
       </>
     );
   }
@@ -68,7 +68,7 @@ class ProfileManager {
         key: 'profile_personal',
         label: null,
         profileType: 'personal',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, onChange?: any, params?: any) => {
           return (
             <PersonalProfileForm 
               key={item.key}
@@ -90,7 +90,7 @@ class ProfileManager {
         key: 'profile_organization',
         label: null,
         profileType: 'organization',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, onChange?: any, params?: any) => {
           return (
             <OrganizationProfileForm 
               key={item.key}
@@ -112,7 +112,7 @@ class ProfileManager {
         key: 'profile_venue',
         label: null,
         profileType: 'venue',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, onChange?: any, params?: any) => {
           return (
             <VenueProfileForm
               key={item.key}
@@ -134,13 +134,13 @@ class ProfileManager {
         key: 'profile_name',
         label: i18n.t('Profile name (with no spaces)'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, onChange?: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
               value={data[item.key]}
               placeholder={i18n.t('Profile name')}
-              onChangeText={(value: string) => this.setFormData(item, value)}
+              onChangeText={(value: any) => onChange(item.key, value)}
             />
           );
         },
@@ -153,13 +153,13 @@ class ProfileManager {
         key: 'profile_description',
         label: i18n.t('About'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, onChange?: any, params?: any) => {
           return (
             <InputTextareaField
               key={item.key}
               value={data[item.key]}
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
+              onChangeText={(value: any) => onChange(item.key, value)}
             />
           );
         },
@@ -172,13 +172,13 @@ class ProfileManager {
         key: 'address',
         label: i18n.t('Address'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, onChange?: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
               value={data[item.key]}
               placeholder={i18n.t('Enter your address')}
-              onChangeText={(value: string) => this.setFormData(item, value)}
+              onChangeText={(value: any) => onChange(item.key, value)}
             />
           );
         },
@@ -191,13 +191,13 @@ class ProfileManager {
         key: 'upload_other_docs',
         label: i18n.t('Other documents'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, onChange?: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
               value={data[item.key]}
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
+              onChangeText={(value: any) => onChange(item.key, value)}
             />
           );
         },
@@ -210,7 +210,7 @@ class ProfileManager {
         key: 'sectors_ids',
         label: i18n.t('Sectors'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, onChange?: any, params?: any) => {
           return (
             <SectorsField
               key={item.key}
@@ -245,12 +245,12 @@ class ProfileManager {
         key: 'scope_country_code',
         label: i18n.t('Country'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, onChange?: any, params?: any) => {
           return (
             <CountryField
               key={item.key}
               value={data[item.key]}
-              onChangeValue={(value: string) => this.setFormData(item, value)}
+              onChangeValue={(value: any) => onChange(item.key, value)}
             />
           );
         },
@@ -263,13 +263,13 @@ class ProfileManager {
         key: 'region',
         label: i18n.t('Region'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, onChange?: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
               value={data[item.key]}
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
+              onChangeText={(value: any) => onChange(item.key, value)}
             />
           );
         },
@@ -282,13 +282,13 @@ class ProfileManager {
         key: 'town_or_locality',
         label: i18n.t('Locality'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, onChange?: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
               value={data[item.key]}
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
+              onChangeText={(value: any) => onChange(item.key, value)}
             />
           );
         },
@@ -301,13 +301,13 @@ class ProfileManager {
         key: 'other_town_or_locality',
         label: i18n.t('Other locality'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, onChange?: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
               value={data[item.key]}
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
+              onChangeText={(value: any) => onChange(item.key, value)}
             />
           );
         },
@@ -320,13 +320,13 @@ class ProfileManager {
         key: 'email',
         label: i18n.t('Email'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, onChange?: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
               value={data[item.key]}
               placeholder={i18n.t('Enter your email address')}
-              onChangeText={(value: string) => this.setFormData(item, value)}
+              onChangeText={(value: any) => onChange(item.key, value)}
             />
           );
         },
@@ -339,13 +339,13 @@ class ProfileManager {
         key: 'whatsapp_number',
         label: i18n.t('Whatsapp number'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, onChange?: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
               value={data[item.key]}
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
+              onChangeText={(value: any) => onChange(item.key, value)}
             />
           );
         },
@@ -358,13 +358,13 @@ class ProfileManager {
         key: 'password',
         label: i18n.t('Password'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, onChange?: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
               value={data[item.key]}
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
+              onChangeText={(value: any) => onChange(item.key, value)}
             />
           );
         },
@@ -377,7 +377,7 @@ class ProfileManager {
         key: null,
         label: i18n.t('Location'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, onChange?: any, params?: any) => {
           return (
             <LocationPickerField
               key={item.key}
@@ -409,13 +409,13 @@ class ProfileManager {
         key: 'phone_number',
         label: i18n.t('Phone number'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, onChange?: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
               value={data[item.key]}
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
+              onChangeText={(value: any) => onChange(item.key, value)}
             />
           );
         },
@@ -428,13 +428,13 @@ class ProfileManager {
         key: 'website_link',
         label: i18n.t('Website link'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, onChange?: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
               value={data[item.key]}
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
+              onChangeText={(value: any) => onChange(item.key, value)}
             />
           );
         },
@@ -447,13 +447,13 @@ class ProfileManager {
         key: 'instagram_id',
         label: i18n.t('Instagram ID'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, onChange?: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
               value={data[item.key]}
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
+              onChangeText={(value: any) => onChange(item.key, value)}
             />
           );
         },
@@ -466,13 +466,13 @@ class ProfileManager {
         key: 'facebook_link',
         label: i18n.t('Facebook link'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, onChange?: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
               value={data[item.key]}
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
+              onChangeText={(value: any) => onChange(item.key, value)}
             />
           );
         },
@@ -485,13 +485,13 @@ class ProfileManager {
         key: 'linkedin_link',
         label: i18n.t('Linkedin link'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (mode: string, item: any, data: any, onChange?: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
               value={data[item.key]}
               placeholder={item.label}
-              onChangeText={(value: string) => this.setFormData(item, value)}
+              onChangeText={(value: any) => onChange(item.key, value)}
             />
           );
         },
