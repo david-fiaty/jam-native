@@ -66,6 +66,7 @@ class ProfileManager {
               data={data} 
               params={params} 
               parentKey={item.key}
+              onChange={onChange}
             />
           );
         },
@@ -88,6 +89,7 @@ class ProfileManager {
               data={data} 
               params={params} 
               parentKey={item.key}
+              onChange={onChange}
             />
           );
         },
@@ -110,6 +112,7 @@ class ProfileManager {
               data={data} 
               params={params} 
               parentKey={item.key}
+              onChange={onChange}
             />
           );
         },
