@@ -44,7 +44,6 @@ const InputTextField = ({
       setCurrentValue(value);
       setIsLoaded(true);
     }
-    
   }, [isLoaded, value]);
 
   return (
@@ -65,6 +64,7 @@ const InputTextField = ({
         value={value}
         readOnly={readOnly}
         onChangeText={onChangeText}
+        //onChangeText={(value: any) => setCurrentValue(value)}
         onSubmitEditing={onSubmitEditing}
       />
     </BoxView>
