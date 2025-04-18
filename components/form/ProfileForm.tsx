@@ -34,9 +34,10 @@ const ProfileForm = () => {
     //let media: any = MediaManager.prepareUpload(formData?.[mediasFieldName]);
     // Todo - Find profile media field
 
-    let result: any = await UserManager.register(formData);
+    //let result: any = await UserManager.register(formData);
 
-    console.log('register result', result);
+    console.log(formData);
+    //console.log('register result', result);
 
     /*
     let message: any = {
@@ -46,8 +47,8 @@ const ProfileForm = () => {
 
     if (result?.error) message.content = i18n.t(result.error);
     ScreenManager.showMessage(message);
-    setIsProcessing(false);
     */
+    setIsProcessing(false);
   };
 
   return (
