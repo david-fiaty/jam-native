@@ -1,6 +1,4 @@
 import { Layout } from '@/constants/Layout';
-import { setFormData } from '@/redux/slices/FormSlice';
-import Store from '@/redux/Store';
 import InputTextField from '@/components/field/InputTextField';
 import TextView from '@/components/view/TextView';
 import i18n from '@/translation/i18n';
@@ -25,16 +23,6 @@ class ProfileManager {
         marginBottom: Layout.space.base / 2,
       },
     };
-  }
-
-  setFormData(item: any, value: any) {
-    let payload: any = {
-      resource: 'profile',
-      key: item.key,
-      value: value,
-    };
-
-    Store.dispatch(setFormData(payload));
   }
 
   canRenderField(mode: string, item: any, formData: any) {
