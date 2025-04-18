@@ -1,3 +1,4 @@
+import React from "react";
 import { StyleSheet } from "react-native";
 import { Input } from "@rneui/themed";
 import { BaseProps } from "@/constants/Types";
@@ -69,4 +70,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default InputTextField;
+export default React.memo(InputTextField);
