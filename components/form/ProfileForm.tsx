@@ -101,4 +101,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileForm;
+export default React.memo(ProfileForm);
