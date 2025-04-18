@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { Input } from "@rneui/themed";
 import { BaseProps } from "@/constants/Types";
@@ -32,10 +32,20 @@ const InputTextField = ({
   onChangeText,
   onSubmitEditing,
 }: Props) => {
+  const [currentValue, setCurrentValue] = useState<any>('');
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const disabledStyle: any = {
     opacity: disabled ? 0.4: 1,
   }
+
+  useEffect(() => {
+    if (!isLoaded) {
+      setCurrentValue(value);
+      setIsLoaded(true);
+    }
+    
+  }, [isLoaded, value]);
 
   return (
     <BoxView style={[styles.container, disabledStyle]}>
