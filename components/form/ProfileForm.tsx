@@ -61,6 +61,8 @@ const ProfileForm = () => {
     setIsProcessing(false);
   };
 
+  console.log(formData);
+
   return (
     <View style={[Layout.formContainer, styles.container]}>
       <ProfileImageField
@@ -99,4 +101,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileForm;
+export default React.memo(ProfileForm);
