@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
@@ -9,13 +9,12 @@ import ProfileImageField from "../field/ProfileImageField";
 import ButtonView from "../view/ButtonView";
 import i18n from "@/translation/i18n";
 import DataManager from "@/manager/DataManager";
-import ScreenManager from "@/manager/ScreenManager";
-import UserManager from "@/manager/UserManager";
 
 const resource: string = 'profile';
 
 const ProfileForm = () => {
   const dispatch = useDispatch();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const formData = useSelector((state: any) => state.form?.[resource]);
   const signupData: any = useSelector((state: any) => state.signup);
@@ -40,10 +39,15 @@ const ProfileForm = () => {
       },
     };
 
+
+    //console.log('---- data', console.log(JSON.stringify(data, 0, 2)));
+
+    //let result: any = await UserManager.register(data);
+
     //let media: any = MediaManager.prepareUpload(formData?.[mediasFieldName]);
     // Todo - Find profile media field
 
-    //let result: any = await UserManager.register(formData);
+
 
 
 
@@ -60,6 +64,15 @@ const ProfileForm = () => {
     */
     setIsProcessing(false);
   };
+
+  useEffect(() => {
+    if (!isLoaded) {
+      setIsLoaded(true);
+    }
+
+  }, [isLoaded]);
+  
+  console.log(formData);
 
   return (
     <View style={[Layout.formContainer, styles.container]}>
