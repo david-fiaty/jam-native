@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
@@ -9,6 +9,8 @@ import ProfileImageField from "../field/ProfileImageField";
 import ButtonView from "../view/ButtonView";
 import i18n from "@/translation/i18n";
 import DataManager from "@/manager/DataManager";
+import ScreenManager from "@/manager/ScreenManager";
+import UserManager from "@/manager/UserManager";
 
 const resource: string = 'profile';
 
@@ -16,19 +18,47 @@ const ProfileForm = () => {
   const dispatch = useDispatch();
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const formData = useSelector((state: any) => state.form?.[resource]);
+  const signupData: any = useSelector((state: any) => state.signup);
   const profileFields: any = ProfileManager.getFields();
 
   const updateField = (key: string, value: any) => {
-    dispatch(setFormData<any>({ 
+    dispatch(setFormData<any>({
       resource: resource,
-      key: key, 
-      value: value, 
+      key: key,
+      value: value,
     }));
   };
 
-  const submitForm = () => {
-    // Todo - Handle API data submission
-    console.log('submitForm', formData);
+  const submitForm = async () => {
+    setIsProcessing(true);
+
+    let data: any = {
+      ...{ profile: formData },
+      ...{
+        email: signupData.email,
+        session: signupData.session,
+      },
+    };
+
+    //let media: any = MediaManager.prepareUpload(formData?.[mediasFieldName]);
+    // Todo - Find profile media field
+
+    //let result: any = await UserManager.register(formData);
+
+
+
+    //console.log('register result', result);
+
+    /*
+    let message: any = {
+      title: i18n.t('Update profile'),
+      content: i18n.t('The profile data was successfully updated.'),
+    };
+
+    if (result?.error) message.content = i18n.t(result.error);
+    ScreenManager.showMessage(message);
+    */
+    setIsProcessing(false);
   };
 
   return (
