@@ -82,6 +82,22 @@ class UserManager {
     return profileData || {};
   }
 
+  async updateProfile(options: any) {
+    let defaults: any = {};
+    let profileId: number = await this.getProfileId();
+    let variables: any = { '[profile_id]': profileId };
+
+    return await DataManager.put('updateProfile', {...defaults, ...options}, variables); 
+  }
+
+  async createProfile(options: any) {
+    let defaults: any = {};
+    let profileId: number = await this.getProfileId();
+    let variables: any = { '[profile_id]': profileId };
+
+    return await DataManager.put('updateProfile', {...defaults, ...options}, variables); 
+  }
+
   async getNotifications(options?: any) {
     options = options || {};
     let userNotifications: any = [];

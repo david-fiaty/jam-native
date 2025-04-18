@@ -9,6 +9,8 @@ import ProfileImageField from "../field/ProfileImageField";
 import ButtonView from "../view/ButtonView";
 import i18n from "@/translation/i18n";
 import DataManager from "@/manager/DataManager";
+import ScreenManager from "@/manager/ScreenManager";
+import EntityManager from "@/manager/EntityManager";
 
 const resource: string = 'profile';
 
@@ -26,9 +28,21 @@ const ProfileForm = () => {
     }));
   };
 
-  const submitForm = () => {
-    // Todo - Handle API data submission
-    console.log('submitForm', formData);
+  const submitForm = async () => {
+    setIsProcessing(true);
+
+    //let media: any = MediaManager.prepareUpload(formData?.[mediasFieldName]);
+    // Todo - Find profile media field
+
+    let result: any = await EntityManager.updateProfile(formData);
+    let message: any = {
+      title: i18n.t('Update profile'),
+      content: i18n.t('The profile data was successfully updated.'),
+    };
+
+    if (result?.error) message.content = i18n.t(result.error);
+    ScreenManager.showMessage(message);
+    setIsProcessing(false);
   };
 
   return (
