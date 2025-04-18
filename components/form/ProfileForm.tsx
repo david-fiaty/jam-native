@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
@@ -10,7 +10,7 @@ import ButtonView from "../view/ButtonView";
 import i18n from "@/translation/i18n";
 import DataManager from "@/manager/DataManager";
 import ScreenManager from "@/manager/ScreenManager";
-import EntityManager from "@/manager/EntityManager";
+import UserManager from "@/manager/UserManager";
 
 const resource: string = 'profile';
 
@@ -34,7 +34,11 @@ const ProfileForm = () => {
     //let media: any = MediaManager.prepareUpload(formData?.[mediasFieldName]);
     // Todo - Find profile media field
 
-    let result: any = await EntityManager.updateProfile(formData);
+    let result: any = await UserManager.register(formData);
+
+    console.log('register result', result);
+
+    /*
     let message: any = {
       title: i18n.t('Update profile'),
       content: i18n.t('The profile data was successfully updated.'),
@@ -43,6 +47,7 @@ const ProfileForm = () => {
     if (result?.error) message.content = i18n.t(result.error);
     ScreenManager.showMessage(message);
     setIsProcessing(false);
+    */
   };
 
   return (
