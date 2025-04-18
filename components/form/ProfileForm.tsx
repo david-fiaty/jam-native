@@ -18,25 +18,35 @@ const ProfileForm = () => {
   const dispatch = useDispatch();
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const formData = useSelector((state: any) => state.form?.[resource]);
+  const signupData: any = useSelector((state: any) => state.signup);
   const profileFields: any = ProfileManager.getFields();
 
   const updateField = (key: string, value: any) => {
-    dispatch(setFormData<any>({ 
+    dispatch(setFormData<any>({
       resource: resource,
-      key: key, 
-      value: value, 
+      key: key,
+      value: value,
     }));
   };
 
   const submitForm = async () => {
     setIsProcessing(true);
 
+    let data: any = {
+      ...{ profile: formData },
+      ...{
+        email: signupData.email,
+        session: signupData.session,
+      },
+    };
+
     //let media: any = MediaManager.prepareUpload(formData?.[mediasFieldName]);
     // Todo - Find profile media field
 
     //let result: any = await UserManager.register(formData);
 
-    console.log(formData);
+
+
     //console.log('register result', result);
 
     /*
