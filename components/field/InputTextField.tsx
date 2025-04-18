@@ -17,6 +17,7 @@ type Props = BaseProps & {
   readOnly?: boolean,
   onChangeText?: (value: string) => void;
   onSubmitEditing?: () => void;
+  onBlur?: () => void;
 };
 
 const InputTextField = ({
@@ -31,6 +32,7 @@ const InputTextField = ({
   readOnly,
   onChangeText,
   onSubmitEditing,
+  onBlur,
 }: Props) => {
   const [currentValue, setCurrentValue] = useState<any>('');
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -69,6 +71,10 @@ const InputTextField = ({
         }}
         onSubmitEditing={() => {
           if (onSubmitEditing) onSubmitEditing()
+          else if (onChangeText) onChangeText(currentValue);
+        }}
+        onBlur={() => {
+          if (onBlur) onBlur()
           else if (onChangeText) onChangeText(currentValue);
         }}
       />
