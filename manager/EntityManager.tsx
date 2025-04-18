@@ -30,14 +30,6 @@ class EntityManager {
     return await DataManager.put('updateJam', {...defaults, ...options}, variables); 
   }
 
-  async updateProfile(options: any) {
-    let defaults: any = {};
-    let profileId: number = await UserManager.getProfileId();
-    let variables: any = { '[profile_id]': profileId };
-
-    return await DataManager.put('updateProfile', {...defaults, ...options}, variables); 
-  }
-
   async listJams(options?: any) {
     let profileId = await UserManager.getProfileId();
     let defaults = {
@@ -224,7 +216,6 @@ class EntityManager {
     return response;
   }
 
-
   async unsaveProject(entityId: any) {
     let profileId = await UserManager.getProfileId();
     let response = await DataManager.post('unsaveProject', {
@@ -234,7 +225,6 @@ class EntityManager {
 
     return response;
   }
-
 
   async deleteJam(entityId: any) {
     let profileId = await UserManager.getProfileId();
