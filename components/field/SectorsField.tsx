@@ -45,21 +45,35 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
     return result;
   };
 
+  const getSubitemIds = (itemId: number) => {
+    let idArray: any[] = [];
+    let item: any = sectorsData.find((o: any) => o.id == itemId);
+
+    for (const row of item?.sub_sectors || []) {
+      idArray.push(row.id);
+    }
+
+    return idArray;
+  };
+
   const deleteItem = (item: any) => {
-    // Variables
+    // Selected IDs
     let selectedIds: any[] = [...(value?.length > 0 ? value : [])];
-    let deleteIndex: number = selectedIds.findIndex((id: any) => id == item.id);
-    let parentIds: any = sectorsData.map((o: any) => o.id);
 
     // Delete target item
-    delete selectedIds[deleteIndex];
-    selectedIds = selectedIds.filter(Boolean);
+    selectedIds = selectedIds.filter((n: number) => n !== item.id);
 
     // Delete childless parents
     for (const id of selectedIds) {
-      // Todo - Delete childless parents
+      let subitemIds: any[] = getSubitemIds(id);
+      if (subitemIds.length > 0) {
+        let hasSelectedSubitems: boolean = selectedIds.some(n => subitemIds.includes(n));
+        if (!hasSelectedSubitems) {
+          selectedIds = selectedIds.filter((n: number) => n !== id);
+        }
+      }    
     }
-    
+
     setSelectedSectors(getSelectedSectors(selectedIds));
 
     dispatch(setFormData<any>({ 
@@ -67,24 +81,6 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
       key: field, 
       value: selectedIds, 
     }));
-
-    /*
-    if (deleteIndex !== -1) selectedIds.splice(deleteIndex, 1);
-
-    let parentIds: any = sectorsData.map((o: any) => o.id);
-    for (const id of selectedIds) {
-      if (parentIds.includes(id)) {
-        let parentItem: any = sectorsData.find((o: any) => o.id == id);
-        let childIds: any = (parentItem?.sub_sectors || []).map((o: any) => o.id);
-        let deleteItem: boolean = !selectedIds.some((v: any) => childIds.includes(v));
-
-        if (deleteItem) {
-          let index = selectedIds.findIndex((v: any) => v == id);
-          selectedIds.splice(index, 1);
-        }
-      }
-    }
-    */
   }
 
   useEffect(() => {
