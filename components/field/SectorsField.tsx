@@ -92,7 +92,7 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
     })();
 
     setSelectedSectors(getSelectedSectors(value));
-  }, [isLoaded]);
+  }, [isLoaded, value]);
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
