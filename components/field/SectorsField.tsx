@@ -45,6 +45,17 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
     return result;
   };
 
+  const getSubitemIds = (itemId: number) => {
+    let idArray: any[] = [];
+    let item: any = sectorsData.find((o: any) => o.id == itemId);
+
+    for (const row of item?.sub_sectors || []) {
+      idArray.push(row.id);
+    }
+
+    return idArray;
+  };
+
   const deleteItem = (item: any) => {
     // Variables
     let selectedIds: any[] = [...(value?.length > 0 ? value : [])];
@@ -57,9 +68,14 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
 
     // Delete childless parents
     for (const id of selectedIds) {
-      // Todo - Delete childless parents
+      let subitemIds: any = getSubitemIds(item.id);
+
+      console.log('pdpdpdpdpdpdpddpp', subitemIds);
     }
     
+
+    return ;
+
     setSelectedSectors(getSelectedSectors(selectedIds));
 
     dispatch(setFormData<any>({ 
