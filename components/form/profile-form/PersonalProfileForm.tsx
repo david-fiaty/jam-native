@@ -28,7 +28,7 @@ const PersonalProfileForm = ({ resource, mode, item, data, params, parentKey, on
       key: 'first_name',
       label: i18n.t('First name'),
       profileType: 'personal',
-      render: (item: any, data: any, params?: any) => {
+      render: (item: any) => {
         return (
           <InputTextField
             key={item.key}
@@ -47,7 +47,7 @@ const PersonalProfileForm = ({ resource, mode, item, data, params, parentKey, on
       key: 'last_name',
       label: i18n.t('Last name'),
       profileType: 'personal',
-      render: (item: any, data: any, params?: any) => {
+      render: (item: any) => {
         return (
           <InputTextField
             key={item.key}
@@ -60,20 +60,20 @@ const PersonalProfileForm = ({ resource, mode, item, data, params, parentKey, on
     },
   ];
 
-  const renderSubField = (item: any, formData: any, params?: any) => {
+  const renderSubField = (item: any) => {
     return (
       <View key={item.key}>
         <TextView style={{marginBottom: Layout.space.base / 2}}>
           {i18n.t(item.label)} {item?.required === true ? '*' : ''}
         </TextView>
-        {item.render(item, formData, params)}
+        {item.render(item)}
       </View>
     );
   };
 
   return (
     <View style={styles.container}>
-      {fields.map((field: any) => renderSubField(field, formData))}
+      {fields.map((field: any) => renderSubField(field))}
     </View>
   );
 }
