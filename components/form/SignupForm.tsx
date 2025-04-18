@@ -17,7 +17,7 @@ const SignupForm = () => {
   useEffect(() => {
     (async () => {
         if (!isLoaded) {
-          resetForm();
+          //resetForm(); Todo - Enable this and fix reset issue
           setIsLoaded(true);
         }
     })();
