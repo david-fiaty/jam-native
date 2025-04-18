@@ -9,8 +9,6 @@ import ProfileImageField from "../field/ProfileImageField";
 import ButtonView from "../view/ButtonView";
 import i18n from "@/translation/i18n";
 import DataManager from "@/manager/DataManager";
-import ScreenManager from "@/manager/ScreenManager";
-import UserManager from "@/manager/UserManager";
 
 const resource: string = 'profile';
 
