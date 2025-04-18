@@ -85,4 +85,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default React.memo(InputTextField);
+export default InputTextField;
