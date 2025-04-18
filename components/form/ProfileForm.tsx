@@ -16,16 +16,24 @@ const ProfileForm = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const formData = useSelector((state: any) => state.form?.[resource]);
+  const [formData, setFormData] = useState<any>({});
   const signupData: any = useSelector((state: any) => state.signup);
   const profileFields: any = ProfileManager.getFields();
 
   const updateField = (key: string, value: any) => {
+    console.log('xxx');
+    
+    setFormData({
+      ...formData,
+      ...{[key]: value}
+    });
+    /*
     dispatch(setFormData<any>({
       resource: resource,
       key: key,
       value: value,
     }));
+    */
   };
 
   const submitForm = async () => {
@@ -90,7 +98,7 @@ const ProfileForm = () => {
         if (ProfileManager.canRenderField('signup', item, formData)) {
           return (
             <View key={DataManager.createUuid()}>
-              {ProfileManager.renderField('signup', item, formData)}
+              {ProfileManager.renderField('signup', item, formData, updateField)}
             </View>
           );
         }
