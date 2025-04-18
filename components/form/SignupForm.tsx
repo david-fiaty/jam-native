@@ -14,7 +14,6 @@ const SignupForm = () => {
     dispatch(setValue(null));
   }
 
-/*
   useEffect(() => {
     (async () => {
         if (!isLoaded) {
@@ -23,7 +22,6 @@ const SignupForm = () => {
         }
     })();
   }, [isLoaded]);
-*/
 
   return (
     <>
