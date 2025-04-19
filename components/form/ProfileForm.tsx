@@ -33,7 +33,8 @@ const ProfileForm = () => {
 
   const submitForm = async () => {
     setIsProcessing(true);
-    let profileData: any = {password, ...formData};
+
+    let { password, ...profileData } = formData;
 
     let payload: any = {
       ...{ profile: profileData },
