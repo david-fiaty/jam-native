@@ -1,4 +1,5 @@
 import BoxView from '@/components/view/BoxView';
+import { Layout } from '@/constants/Layout';
 import { StyleSheet, Text } from 'react-native';
 
 const SectionFooter = () => {
@@ -12,6 +13,7 @@ const SectionFooter = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'blue',
+    padding: Layout.space.base,
   },
 });
 
