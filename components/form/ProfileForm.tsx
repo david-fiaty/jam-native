@@ -48,8 +48,8 @@ const ProfileForm = () => {
 
     console.log('registration', result);
 
-    
-    if (result?.error) {
+
+    if (result.success === false) {
       ScreenManager.showMessage({
         title: i18n.t('User registration'),
         content: result.error,
