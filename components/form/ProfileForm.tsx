@@ -9,8 +9,6 @@ import ProfileImageField from "../field/ProfileImageField";
 import ButtonView from "../view/ButtonView";
 import i18n from "@/translation/i18n";
 import DataManager from "@/manager/DataManager";
-import ScreenManager from "@/manager/ScreenManager";
-import UserManager from "@/manager/UserManager";
 
 const resource: string = 'profile';
 
@@ -61,6 +59,8 @@ const ProfileForm = () => {
     setIsProcessing(false);
   };
 
+  console.log(formData);
+
   return (
     <View style={[Layout.formContainer, styles.container]}>
       <ProfileImageField
@@ -76,7 +76,7 @@ const ProfileForm = () => {
       {formData?.profile_type?.length > 0 && profileFields.map((item: any) => {
         if (ProfileManager.canRenderField('signup', item, formData)) {
           return (
-            <View key={DataManager.createUuid()}>
+            <View key={item.key}>
               {ProfileManager.renderField('signup', item, formData)}
             </View>
           );
