@@ -45,6 +45,10 @@ const ProfileForm = () => {
     let result: any = await UserManager.register(payload);
     setIsProcessing(false);
       
+
+    console.log('registration', result);
+
+    
     if (result?.error) {
       ScreenManager.showMessage({
         title: i18n.t('User registration'),
@@ -55,8 +59,6 @@ const ProfileForm = () => {
       router.replace(Config.mainRoute);
     }
   };
-
-  //console.log(formData);
 
   return (
     <View style={[Layout.formContainer, styles.container]}>
