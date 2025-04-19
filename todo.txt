@@ -151,6 +151,15 @@ const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude
 
 
 
+
+
+    //let media: any = MediaManager.prepareUpload(formData?.[mediasFieldName]);
+    // Todo - Find profile media field
+
+    //let result: any = await UserManager.register(formData);
+
+
+
 {
     "tokens": {
         "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwNDI3MTkxLCJpYXQiOjE3NDE3ODcxOTEsImp0aSI6IjA3MjVhYjE3NWJjNTQ4NGE4NTJiOWEyMTJiNDM3ZmVhIiwidXNlcl9pZCI6MTJ9.EXoai6Abq3kh9Spq3g0jDVb84SFknJuuJe6kn8h3kqo",

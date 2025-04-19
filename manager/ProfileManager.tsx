@@ -250,7 +250,7 @@ class ProfileManager {
             <CountryField
               key={item.key}
               value={data[item.key]}
-              onChangeValue={(value: string) => this.setFormData(item, value)}
+              onChangeValue={(o: any) => this.setFormData(item, o.value)}
             />
           );
         },
