@@ -7,6 +7,8 @@ import AboutSection from '../section/AboutSection';
 import LegalSection from '../section/LegalSection';
 import JamsSection from '../section/JamsSection';
 import BoxView from './BoxView';
+import SectionHeader from '../section/navigation/SectionHeader';
+import SectionFooter from '../section/navigation/SectionFooter';
 
 type Props = {
   name?: any;
@@ -47,14 +49,18 @@ const SectionView = ({ name }: Props) => {
   ];
 
   return (
-    <BoxView
-      direction="column"
-      align="center"
-      justify="center"
-      style={styles.container}
-    >
-      {sections.find((o: any) => o.name === (name || 'welcome'))?.render()}
-    </BoxView>
+    <>
+      <SectionHeader />
+      <BoxView
+        direction="column"
+        align="center"
+        justify="center"
+        style={styles.container}
+      >
+        {sections.find((o: any) => o.name === (name || 'welcome'))?.render()}
+      </BoxView>
+      <SectionFooter />
+    </>
   );
 };
 
