@@ -12,6 +12,7 @@ import i18n from "@/translation/i18n";
 import DataManager from "@/manager/DataManager";
 import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
+import { Config } from "@/constants/Config";
 
 const resource: string = 'profile';
 
@@ -47,35 +48,13 @@ const ProfileForm = () => {
       
     if (result?.error) {
       ScreenManager.showMessage({
-        title: i18n.t('Profile login'),
+        title: i18n.t('User registration'),
         content: result.error,
       });
     }
     else {
       router.replace(Config.mainRoute);
     }
-
-
-
-    //let media: any = MediaManager.prepareUpload(formData?.[mediasFieldName]);
-    // Todo - Find profile media field
-
-    //let result: any = await UserManager.register(formData);
-
-
-
-    //console.log('register result', result);
-
-    /*
-    let message: any = {
-      title: i18n.t('Update profile'),
-      content: i18n.t('The profile data was successfully updated.'),
-    };
-
-    if (result?.error) message.content = i18n.t(result.error);
-    ScreenManager.showMessage(message);
-    */
-    setIsProcessing(false);
   };
 
   //console.log(formData);
