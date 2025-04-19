@@ -5,8 +5,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Colors } from '@/constants/Colors';
 import BaseTheme from "@/constants/BaseTheme";
 import SectionView from '@/components/view/SectionView';
-import SectionHeader from '@/components/section/navigation/SectionHeader';
-import SectionFooter from '@/components/section/navigation/SectionFooter';
 
 export default () => {
   const { section } = useGlobalSearchParams();
@@ -14,9 +12,7 @@ export default () => {
   return (
     <ThemeProvider theme={BaseTheme}>
       <SafeAreaView style={styles.container}>
-        <SectionHeader />
         <SectionView name={section} />
-        <SectionFooter />
       </SafeAreaView>
     </ThemeProvider>
   );
