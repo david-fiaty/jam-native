@@ -45,18 +45,8 @@ const ProfileForm = () => {
       },
     };
 
-    console.log('----------------------------');
-    console.log('registration request');
-    console.log(JSON.stringify(payload, 0, 2));
-    
-
     let result: any = await UserManager.register(payload);
     setIsProcessing(false);
-      
-
-    console.log('registration response', result);
-    
-
 
     if (result.success === false) {
       ScreenManager.showMessage({
