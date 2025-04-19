@@ -76,7 +76,7 @@ const ProfileForm = () => {
       {formData?.profile_type?.length > 0 && profileFields.map((item: any) => {
         if (ProfileManager.canRenderField('signup', item, formData)) {
           return (
-            <View key={DataManager.createUuid()}>
+            <View key={item.key}>
               {ProfileManager.renderField('signup', item, formData)}
             </View>
           );
