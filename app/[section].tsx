@@ -13,7 +13,9 @@ export default () => {
   return (
     <ThemeProvider theme={BaseTheme}>
       <SafeAreaView style={styles.container}>
+        
         <TextView>header b</TextView>
+
         <BoxView 
           direction="column" 
           align="center" 
@@ -22,7 +24,9 @@ export default () => {
         >
           <SectionView name={section} />
         </BoxView>
+
         <TextView>footer b</TextView>
+
       </SafeAreaView>
     </ThemeProvider>
   );
