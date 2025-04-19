@@ -1,19 +1,23 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
+import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
+import { Config } from "@/constants/Config";
 import ProfileManager from "@/manager/ProfileManager";
 import ProfileTypeField from "../field/ProfileTypeField";
 import ProfileImageField from "../field/ProfileImageField";
 import ButtonView from "../view/ButtonView";
 import i18n from "@/translation/i18n";
-import DataManager from "@/manager/DataManager";
+import UserManager from "@/manager/UserManager";
+import ScreenManager from "@/manager/ScreenManager";
 
 const resource: string = 'profile';
 
 const ProfileForm = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const formData = useSelector((state: any) => state.form?.[resource]);
   const signupData: any = useSelector((state: any) => state.signup);
@@ -30,7 +34,7 @@ const ProfileForm = () => {
   const submitForm = async () => {
     setIsProcessing(true);
 
-    let data: any = {
+    let payload: any = {
       ...{ profile: formData },
       ...{
         email: signupData.email,
@@ -38,28 +42,29 @@ const ProfileForm = () => {
       },
     };
 
-    //let media: any = MediaManager.prepareUpload(formData?.[mediasFieldName]);
-    // Todo - Find profile media field
+    console.log('----------------------------');
+    console.log('registration request');
+    console.log(JSON.stringify(payload, 0, 2));
+    
 
-    //let result: any = await UserManager.register(formData);
-
-
-
-    //console.log('register result', result);
-
-    /*
-    let message: any = {
-      title: i18n.t('Update profile'),
-      content: i18n.t('The profile data was successfully updated.'),
-    };
-
-    if (result?.error) message.content = i18n.t(result.error);
-    ScreenManager.showMessage(message);
-    */
+    let result: any = await UserManager.register(payload);
     setIsProcessing(false);
-  };
+      
 
-  console.log(formData);
+    console.log('registration response', result);
+    
+
+
+    if (result.success === false) {
+      ScreenManager.showMessage({
+        title: i18n.t('User registration'),
+        content: result.error,
+      });
+    }
+    else {
+      router.replace(Config.mainRoute);
+    }
+  };
 
   return (
     <View style={[Layout.formContainer, styles.container]}>
