@@ -2,10 +2,10 @@ import { StyleSheet } from 'react-native';
 import { useGlobalSearchParams } from 'expo-router';
 import { ThemeProvider } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Colors } from '@/constants/Colors';
 import BaseTheme from "@/constants/BaseTheme";
 import SectionView from '@/components/view/SectionView';
 import BoxView from '@/components/view/BoxView';
-import { Colors } from '@/constants/Colors';
 import TextView from '@/components/view/TextView';
 
 export default () => {
