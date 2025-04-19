@@ -38,6 +38,8 @@ const ProfileForm = () => {
       },
     };
 
+    console.log(JSON.stringify(data, 0, 2));
+
     //let media: any = MediaManager.prepareUpload(formData?.[mediasFieldName]);
     // Todo - Find profile media field
 
@@ -59,7 +61,7 @@ const ProfileForm = () => {
     setIsProcessing(false);
   };
 
-  console.log(formData);
+  //console.log(formData);
 
   return (
     <View style={[Layout.formContainer, styles.container]}>
