@@ -15,22 +15,32 @@ const SectionView = ({ name }: Props) => {
   const sections: any = [
     {
       name: 'welcome',
+      header: false,
+      footer: false,
       render: () => <WelcomeSection />,
     },
     {
       name: 'login',
+      header: false,
+      footer: false,
       render: () => <LoginSection />,
     },
     {
       name: 'about',
+      header: true,
+      footer: false,
       render: () => <AboutSection />,
     },
     {
       name: 'legal',
+      header: true,
+      footer: false,
       render: () => <LegalSection />,
     },
     {
       name: 'jams',
+      header: true,
+      footer: true,
       render: () => <JamsSection />,
     },
   ];
