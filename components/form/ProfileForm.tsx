@@ -4,15 +4,14 @@ import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
+import { Config } from "@/constants/Config";
 import ProfileManager from "@/manager/ProfileManager";
 import ProfileTypeField from "../field/ProfileTypeField";
 import ProfileImageField from "../field/ProfileImageField";
 import ButtonView from "../view/ButtonView";
 import i18n from "@/translation/i18n";
-import DataManager from "@/manager/DataManager";
 import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
-import { Config } from "@/constants/Config";
 
 const resource: string = 'profile';
 
