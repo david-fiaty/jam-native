@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import BaseTheme from "@/constants/BaseTheme";
 import SectionView from '@/components/view/SectionView';
 import BoxView from '@/components/view/BoxView';
+import { Colors } from '@/constants/Colors';
 
 export default () => {
   const { section } = useGlobalSearchParams();
@@ -28,6 +29,7 @@ export default () => {
 const styles = StyleSheet.create({
   container: {
     height: '100%',
+    backgroundColor: Colors.white,
   },
 });
 
