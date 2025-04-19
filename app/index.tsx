@@ -6,6 +6,7 @@ import BaseTheme from "@/constants/BaseTheme";
 import SectionView from '@/components/view/SectionView';
 import BoxView from '@/components/view/BoxView';
 import { Colors } from '@/constants/Colors';
+import TextView from '@/components/view/TextView';
 
 export default () => {
   const { section } = useGlobalSearchParams();
@@ -13,6 +14,7 @@ export default () => {
   return (
     <ThemeProvider theme={BaseTheme}>
       <SafeAreaView style={styles.container}>
+        <TextView>header</TextView>
         <BoxView 
           direction="column" 
           align="center" 
@@ -21,6 +23,7 @@ export default () => {
         >
           <SectionView name={section} />
         </BoxView>
+        <TextView>footer</TextView>
       </SafeAreaView>
     </ThemeProvider>
   );
@@ -28,8 +31,9 @@ export default () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
-    backgroundColor: Colors.white,
+    flex: 1,
+    //height: '100%',
+    //backgroundColor: Colors.white,
   },
 });
 
