@@ -6,6 +6,7 @@ import LoginSection from '../section/LoginSection';
 import AboutSection from '../section/AboutSection';
 import LegalSection from '../section/LegalSection';
 import JamsSection from '../section/JamsSection';
+import BoxView from './BoxView';
 
 type Props = {
   name?: any;
@@ -45,15 +46,22 @@ const SectionView = ({ name }: Props) => {
     },
   ];
 
-  return sections.find((o: any) => o.name === (name || 'welcome'))?.render();
+  return (
+    <BoxView
+      direction="column"
+      align="center"
+      justify="center"
+      style={styles.container}
+    >
+      {sections.find((o: any) => o.name === (name || 'welcome'))?.render()}
+    </BoxView>
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: Colors.white,
-    display: 'flex',
-    flexDirection: 'column',
-    flexGrow: 1,
   },
 });
 
