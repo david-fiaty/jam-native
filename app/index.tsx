@@ -5,7 +5,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Colors } from '@/constants/Colors';
 import BaseTheme from "@/constants/BaseTheme";
 import SectionView from '@/components/view/SectionView';
-import BoxView from '@/components/view/BoxView';
 
 export default () => {
   const { section } = useGlobalSearchParams();
