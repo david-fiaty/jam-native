@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
+import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
@@ -9,11 +10,14 @@ import ProfileImageField from "../field/ProfileImageField";
 import ButtonView from "../view/ButtonView";
 import i18n from "@/translation/i18n";
 import DataManager from "@/manager/DataManager";
+import UserManager from "@/manager/UserManager";
+import ScreenManager from "@/manager/ScreenManager";
 
 const resource: string = 'profile';
 
 const ProfileForm = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const formData = useSelector((state: any) => state.form?.[resource]);
   const signupData: any = useSelector((state: any) => state.signup);
@@ -30,7 +34,7 @@ const ProfileForm = () => {
   const submitForm = async () => {
     setIsProcessing(true);
 
-    let data: any = {
+    let payload: any = {
       ...{ profile: formData },
       ...{
         email: signupData.email,
@@ -38,7 +42,20 @@ const ProfileForm = () => {
       },
     };
 
-    console.log(JSON.stringify(data, 0, 2));
+    let result: any = await UserManager.register(payload);
+    setIsProcessing(false);
+      
+    if (result?.error) {
+      ScreenManager.showMessage({
+        title: i18n.t('Profile login'),
+        content: result.error,
+      });
+    }
+    else {
+      router.replace(Config.mainRoute);
+    }
+
+
 
     //let media: any = MediaManager.prepareUpload(formData?.[mediasFieldName]);
     // Todo - Find profile media field
