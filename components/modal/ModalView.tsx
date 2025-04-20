@@ -4,7 +4,7 @@ import TextView from '@/components/view/TextView';
 import Modal from "react-native-modal";
 import ModalManager from '@/manager/ModalManager';
 
-const SectionModal = () => {
+const ModalView = () => {
   const modalState: any = useSelector((state: any) => state.modal);
 
   const isModalVisible = () => {
@@ -34,4 +34,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SectionModal;
+export default ModalView;
