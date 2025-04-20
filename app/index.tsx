@@ -12,7 +12,7 @@ export default () => {
   return (
     <ThemeProvider theme={BaseTheme}>
       <SafeAreaView style={styles.container}>
-        <SectionView name={section} />
+        <SectionView id={section} />
       </SafeAreaView>
     </ThemeProvider>
   );
