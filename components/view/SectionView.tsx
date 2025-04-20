@@ -9,6 +9,7 @@ import JamsSection from '../section/JamsSection';
 import BoxView from './BoxView';
 import SectionHeader from '../section/navigation/SectionHeader';
 import SectionFooter from '../section/navigation/SectionFooter';
+import SectionModal from '../section/modal/SectionModal';
 
 type Props = {
   name?: any;
@@ -58,6 +59,8 @@ const SectionView = ({ name }: Props) => {
         style={styles.container}
       >
         {sections.find((o: any) => o.name === (name || 'welcome'))?.render()}
+
+        <SectionModal />
       </BoxView>
       <SectionFooter />
     </>
