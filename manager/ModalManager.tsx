@@ -19,8 +19,11 @@ import SearchView from "@/components/view/SearchView";
 
 class ModalManager {
   toggleModal(modalId: string) {
-
-  }
+    let activeModalId: string = this.getActiveModalId();
+    
+    if (modalId === activeModalId) Store.dispatch(setModalId(null))
+    else Store.dispatch(setModalId(modalId));
+  } 
 
   setActiveModalId(modalId: string) {
     Store.dispatch(setModalId(modalId));
