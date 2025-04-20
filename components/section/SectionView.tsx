@@ -9,6 +9,7 @@ import ModalView from "../modal/ModalView";
 import SectionManager from "@/manager/SectionManager";
 import TextView from "../view/TextView";
 import IconView from "../view/IconView";
+import { Layout } from "@/constants/Layout";
 
 type Props = {
   sectionId?: any;
@@ -65,7 +66,9 @@ const styles = StyleSheet.create({
   },
   backButtonContainer: {
     backgroundColor: 'red',
-    width: '100%'
+    width: '100%',
+    padding: Layout.space.base,
+    paddingLeft: 0,
   },
 });
 
