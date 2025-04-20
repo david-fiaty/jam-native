@@ -21,8 +21,9 @@ const SectionModal = () => {
       isVisible={getIsVisible()}
       style={styles.container}
     >
-        
-      <TextView>MODAL CONTENT</TextView>
+
+      {<TextView>MODAL CONTENT</TextView>}  
+      {/*ModalManager.getModal(modalState.modalId)?.render()*/}
     </Modal>
   );
 };
