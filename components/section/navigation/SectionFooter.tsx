@@ -1,11 +1,34 @@
-import BoxView from '@/components/view/BoxView';
 import { Layout } from '@/constants/Layout';
 import { StyleSheet, Text } from 'react-native';
+import IconView from '@/components/view/IconView';
+import BoxView from '@/components/view/BoxView';
 
 const SectionFooter = () => {
   return (
-    <BoxView direction="row" style={styles.container}>
-      <Text>Section header</Text>
+    <BoxView direction="row" align="center" justify="space-around" style={styles.container}>
+      <IconView
+        name="location"
+        radius="round"
+        size={16}
+        padding={4}
+        theme="secondary"
+      />
+
+      <IconView
+        name="plus"
+        radius="round"
+        size={16}
+        padding={4}
+        theme="secondary"
+      />
+
+      <IconView
+        name="search"
+        radius="round"
+        size={16}
+        padding={4}
+        theme="secondary"
+      />
     </BoxView>
   );
 };
