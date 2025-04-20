@@ -2,6 +2,7 @@ import { Layout } from '@/constants/Layout';
 import { StyleSheet, Text } from 'react-native';
 import IconView from '@/components/view/IconView';
 import BoxView from '@/components/view/BoxView';
+import ModalManager from '@/manager/ModalManager';
 
 const SectionFooter = () => {
   return (
@@ -28,6 +29,15 @@ const SectionFooter = () => {
         size={16}
         padding={4}
         theme="secondary"
+      />
+
+      <IconView
+        name="user"
+        radius="round"
+        size={16}
+        padding={4}
+        theme="secondary"
+        onPress={() => ModalManager.toggleModal('JamsMapView')}
       />
     </BoxView>
   );
