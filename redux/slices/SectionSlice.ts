@@ -3,11 +3,11 @@ import { createSlice } from '@reduxjs/toolkit';
 const SectionSlice = createSlice({
   name: 'section',
   initialState: {
-    id: null,
+    sectionId: '',
   },
   reducers: {
     setSectionId: (state, action) => {
-      state.id = action.payload;
+      state.sectionId = action.payload;
     },
   },
 });
