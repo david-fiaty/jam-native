@@ -30,32 +30,32 @@ class SectionManager {
     return [
       {
         id: 'welcome',
-        header: true,
-        footer: true,
+        showHeader: true,
+        showFooter: true,
         render: () => <WelcomeSection />,
       },
       {
         id: 'login',
-        header: false,
-        footer: false,
+        showHeader: false,
+        showFooter: false,
         render: () => <LoginSection />,
       },
       {
         id: 'about',
-        header: true,
-        footer: false,
+        showHeader: true,
+        showFooter: false,
         render: () => <AboutSection />,
       },
       {
         id: 'legal',
-        header: true,
-        footer: false,
+        showHeader: true,
+        showFooter: false,
         render: () => <LegalSection />,
       },
       {
         id: 'jams',
-        header: true,
-        footer: true,
+        showHeader: true,
+        showFooter: true,
         render: () => <JamsSection />,
       },
     ];
