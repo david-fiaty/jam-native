@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { StyleSheet } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import WelcomeSection from '../section/WelcomeSection';
@@ -11,37 +12,39 @@ import SectionFooter from '../section/navigation/SectionFooter';
 import SectionModal from '../section/modal/SectionModal';
 
 type Props = {
-  name?: any;
+  id?: any;
 };
 
-const SectionView = ({ name }: Props) => {
+const SectionView = ({ id }: Props) => {
+  const [currentSection, setCurrentSection] = useState(null);  
+
   const sections: any = [
     {
-      name: 'welcome',
+      id: 'welcome',
       header: false,
       footer: false,
       render: () => <WelcomeSection />,
     },
     {
-      name: 'login',
+      id: 'login',
       header: false,
       footer: false,
       render: () => <LoginSection />,
     },
     {
-      name: 'about',
+      id: 'about',
       header: true,
       footer: false,
       render: () => <AboutSection />,
     },
     {
-      name: 'legal',
+      id: 'legal',
       header: true,
       footer: false,
       render: () => <LegalSection />,
     },
     {
-      name: 'jams',
+      id: 'jams',
       header: true,
       footer: true,
       render: () => <JamsSection />,
@@ -57,7 +60,7 @@ const SectionView = ({ name }: Props) => {
         justify="center"
         style={styles.container}
       >
-        {sections.find((o: any) => o.name === (name || 'welcome'))?.render()}
+        {sections.find((o: any) => o.id === (id || 'welcome'))?.render()}
 
         <SectionModal />
       </BoxView>
