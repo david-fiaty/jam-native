@@ -3,18 +3,14 @@ import { createSlice } from '@reduxjs/toolkit';
 const ModalSlice = createSlice({
   name: 'modal',
   initialState: {
-    config: [],
-    active: [],
+    modalId: '',
   },
   reducers: {
-    setModalConfig: (state, action) => {
-      state.config = action.payload;
-    },
-    setActiveModal: (state, action) => {
-      state.active = action.payload;
+    setModalId: (state, action) => {
+      state.modalId = action.payload;
     },
   },
 });
 
-export const { setModalConfig, setActiveModal } = ModalSlice.actions;
+export const { setModalId } = ModalSlice.actions;
 export default ModalSlice.reducer;
