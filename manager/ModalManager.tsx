@@ -18,6 +18,11 @@ import MoreJamActionsView from "@/components/view/MoreJamActionsView";
 import SearchView from "@/components/view/SearchView";
 
 class ModalManager {
+
+  toggleModal(modalId: string) {
+
+  }
+
   setActiveModalId(modalId: string) {
     Store.dispatch(setModalId(modalId));
   }
