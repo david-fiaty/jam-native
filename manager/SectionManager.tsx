@@ -7,12 +7,16 @@ import { setSectionId } from "@/redux/slices/SectionSlice";
 import Store from "@/redux/Store";
 
 class SectionManager {
-  setActiveSection(sectionId: string) {
+  setActiveSectionId(sectionId: string) {
     Store.dispatch(setSectionId(sectionId));
   }
 
-  getActiveSection(sectionName: string) {
-    return Store.getState().section;
+  getActiveSectionId() {
+    return Store.getState().section.id;
+  }
+
+  getSection(sectionId: string) {
+    return this.getSections().find((o: any) => o.id === sectionId);
   }
 
   getSections() {
