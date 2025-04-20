@@ -7,12 +7,12 @@ import BaseTheme from "@/constants/BaseTheme";
 import SectionView from '@/components/section/SectionView';
 
 export default () => {
-  const { section } = useGlobalSearchParams();
+  const { sectionId } = useGlobalSearchParams();
 
   return (
     <ThemeProvider theme={BaseTheme}>
       <SafeAreaView style={styles.container}>
-        <SectionView id={section} />
+        <SectionView sectionId={sectionId} />
       </SafeAreaView>
     </ThemeProvider>
   );
