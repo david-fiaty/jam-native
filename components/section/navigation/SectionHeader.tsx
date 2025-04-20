@@ -1,14 +1,17 @@
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
+import { Layout } from '@/constants/Layout';
 import BoxView from '@/components/view/BoxView';
 import LogoView from '@/components/view/LogoView';
-import { Layout } from '@/constants/Layout';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import ScreenManager from '@/manager/ScreenManager';
 
 const SectionHeader = () => {
+  const router = useRouter();
+
   return (
     <BoxView direction="row" style={styles.container}>
       <BoxView direction="row" style={styles.headerLeft}>
-        <TouchableOpacity onPress={() => ScreenManager.toggleModal(null)}>
+        <TouchableOpacity onPress={() => router.replace('/')}>
           <LogoView size={Layout.logo.size} />
         </TouchableOpacity>
       </BoxView>
