@@ -16,6 +16,7 @@ import JamsMapView from "@/components/view/JamsMapView";
 import LocationMapView from "@/components/view/LocationMapView";
 import MoreJamActionsView from "@/components/view/MoreJamActionsView";
 import SearchView from "@/components/view/SearchView";
+import TestView from "@/components/view/TestView";
 
 class ModalManager {
   toggleModal(modalId: string) {
@@ -46,6 +47,10 @@ class ModalManager {
 
   getModals() {
     return [
+      {
+        name: 'TestView', 
+        render: () => <TestView />,
+      },
       {
         name: 'JamsMapView', 
         render: () => <JamsMapView />,
