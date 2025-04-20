@@ -1,7 +1,15 @@
 import { setModalId } from "@/redux/slices/ModalSlice";
 import Store from "@/redux/Store";
+import TestView from "@/components/view/TestView";
 
 class ModalManager {
+  toggleModal(modalId: string) {
+    let activeModalId: string = this.getActiveModalId();
+    
+    if (modalId === activeModalId) Store.dispatch(setModalId(null))
+    else Store.dispatch(setModalId(modalId));
+  } 
+
   setActiveModalId(modalId: string) {
     Store.dispatch(setModalId(modalId));
   }
@@ -24,34 +32,8 @@ class ModalManager {
   getModals() {
     return [
       {
-        id: 'welcome',
-        header: false,
-        footer: false,
-        render: () => <WelcomeSection />,
-      },
-      {
-        id: 'login',
-        header: false,
-        footer: false,
-        render: () => <LoginSection />,
-      },
-      {
-        id: 'about',
-        header: true,
-        footer: false,
-        render: () => <AboutSection />,
-      },
-      {
-        id: 'legal',
-        header: true,
-        footer: false,
-        render: () => <LegalSection />,
-      },
-      {
-        id: 'jams',
-        header: true,
-        footer: true,
-        render: () => <JamsSection />,
+        name: 'TestView', 
+        render: () => <TestView />,
       },
     ];
   }
