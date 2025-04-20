@@ -1,14 +1,14 @@
 import { StyleSheet } from 'react-native';
 import { Colors } from '@/constants/Colors';
-import TextView from './TextView';
 import WelcomeSection from '../section/WelcomeSection';
 import LoginSection from '../section/LoginSection';
 import AboutSection from '../section/AboutSection';
 import LegalSection from '../section/LegalSection';
 import JamsSection from '../section/JamsSection';
-import BoxView from './BoxView';
+import BoxView from '../view/BoxView';
 import SectionHeader from '../section/navigation/SectionHeader';
 import SectionFooter from '../section/navigation/SectionFooter';
+import SectionModal from '../section/modal/SectionModal';
 
 type Props = {
   name?: any;
@@ -58,6 +58,8 @@ const SectionView = ({ name }: Props) => {
         style={styles.container}
       >
         {sections.find((o: any) => o.name === (name || 'welcome'))?.render()}
+
+        <SectionModal />
       </BoxView>
       <SectionFooter />
     </>
