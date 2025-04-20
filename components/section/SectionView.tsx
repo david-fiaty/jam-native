@@ -19,7 +19,7 @@ const SectionView = ({ sectionId }: Props) => {
 
   return (
     <>
-      {currentSection.header === true && <SectionHeader />}
+      {currentSection.showHeader === true && <SectionHeader />}
 
       <BoxView
         direction="column"
@@ -32,7 +32,7 @@ const SectionView = ({ sectionId }: Props) => {
         <ModalView />
       </BoxView>
       
-      {currentSection.footer === true && <SectionFooter />}
+      {currentSection.showFooter === true && <SectionFooter />}
     </>
   );
 };
