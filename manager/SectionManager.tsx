@@ -1,10 +1,10 @@
+import { setSectionId } from "@/redux/slices/SectionSlice";
+import Store from "@/redux/Store";
 import AboutSection from "@/components/section/AboutSection";
 import JamsSection from "@/components/section/JamsSection";
 import LegalSection from "@/components/section/LegalSection";
 import LoginSection from "@/components/section/LoginSection";
 import WelcomeSection from "@/components/section/WelcomeSection";
-import { setSectionId } from "@/redux/slices/SectionSlice";
-import Store from "@/redux/Store";
 
 class SectionManager {
   setActiveSectionId(sectionId: string) {
@@ -19,7 +19,7 @@ class SectionManager {
   }
 
   getActiveSectionId() {
-    return Store.getState().section.id;
+    return Store.getState().section.sectionId;
   }
 
   getSection(sectionId: string) {
@@ -30,8 +30,8 @@ class SectionManager {
     return [
       {
         id: 'welcome',
-        header: false,
-        footer: false,
+        header: true,
+        footer: true,
         render: () => <WelcomeSection />,
       },
       {
