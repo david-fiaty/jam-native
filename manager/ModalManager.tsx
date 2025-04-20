@@ -32,7 +32,7 @@ class ModalManager {
   getModals() {
     return [
       {
-        name: 'TestView', 
+        id: 'TestView', 
         render: () => <TestView />,
       },
     ];
