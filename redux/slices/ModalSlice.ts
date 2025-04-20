@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const ModalSlice = createSlice({
   name: 'modal',
   initialState: {
-    modalId: '',
+    modalId: null,
   },
   reducers: {
     setModalId: (state, action) => {
