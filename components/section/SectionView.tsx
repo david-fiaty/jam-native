@@ -25,7 +25,7 @@ const SectionView = ({ sectionId }: Props) => {
     <>
       {currentSection.showHeader === true && <SectionHeader />}
 
-      <BoxView 
+      {currentSection.showBackButton === true && <BoxView 
         direction="row" 
         align="center"
         justify="flex-start" 
@@ -38,9 +38,9 @@ const SectionView = ({ sectionId }: Props) => {
           padding={0} 
         />
 
-        <TextView>BackButton</TextView>
+        <TextView>{currentSection.title}</TextView>
         
-      </BoxView>
+      </BoxView>}
 
       <BoxView
         direction="column"
