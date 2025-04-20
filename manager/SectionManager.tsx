@@ -11,6 +11,13 @@ class SectionManager {
     Store.dispatch(setSectionId(sectionId));
   }
 
+  getActiveSection() {
+    let sectionId: any = this.getActiveSectionId();
+    let section: any = this.getSection(sectionId);
+
+    return section;
+  }
+
   getActiveSectionId() {
     return Store.getState().section.id;
   }
