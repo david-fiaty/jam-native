@@ -1,6 +1,6 @@
 import { setModalId } from "@/redux/slices/ModalSlice";
 import Store from "@/redux/Store";
-import TestView from "@/components/view/TestView";
+import TestModal from "@/components/modal/TestModal";
 
 class ModalManager {
   toggleModal(modalId: any) {
@@ -33,7 +33,7 @@ class ModalManager {
     return [
       {
         id: 'TestView', 
-        render: () => <TestView />,
+        render: () => <TestModal />,
       },
     ];
   }
