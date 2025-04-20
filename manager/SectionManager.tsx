@@ -30,8 +30,8 @@ class SectionManager {
     return [
       {
         id: 'welcome',
-        header: false,
-        footer: false,
+        header: true,
+        footer: true,
         render: () => <WelcomeSection />,
       },
       {
