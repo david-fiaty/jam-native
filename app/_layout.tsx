@@ -67,7 +67,7 @@ const RootLayout = () => {
     <Provider store={Store}>
       <Stack>
         <Stack.Screen name="index" options={{ ...defaults, ...navigation }} />
-        <Stack.Screen name="[section]" options={{ ...defaults, ...navigation }} />
+        <Stack.Screen name="[sectionId]" options={{ ...defaults, ...navigation }} />
       </Stack>
     </Provider>
   );
