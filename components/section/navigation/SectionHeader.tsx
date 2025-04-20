@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'red',
     gap: 0,
-    //padding: Layout.space.base,
   },
   headerLeft: {
     backgroundColor: 'yellow',
