@@ -3,14 +3,14 @@ import Store from "@/redux/Store";
 import TestView from "@/components/view/TestView";
 
 class ModalManager {
-  toggleModal(modalId: string) {
-    let activeModalId: string = this.getActiveModalId();
+  toggleModal(modalId: any) {
+    let activeModalId: any = this.getActiveModalId();
+    let currentModalId: any = modalId === activeModalId ? null : modalId;
     
-    if (modalId === activeModalId) Store.dispatch(setModalId(null))
-    else Store.dispatch(setModalId(modalId));
+    this.setActiveModalId(currentModalId);
   } 
 
-  setActiveModalId(modalId: string) {
+  setActiveModalId(modalId: any) {
     Store.dispatch(setModalId(modalId));
   }
 
@@ -25,14 +25,14 @@ class ModalManager {
     return Store.getState().modal.modalId;
   }
 
-  getModal(modalId: string) {
+  getModal(modalId: any) {
     return this.getModals().find((o: any) => o.id === modalId);
   }
 
   getModals() {
     return [
       {
-        name: 'TestView', 
+        id: 'TestView', 
         render: () => <TestView />,
       },
     ];

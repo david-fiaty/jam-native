@@ -7,7 +7,7 @@ import LoginSection from "@/components/section/LoginSection";
 import WelcomeSection from "@/components/section/WelcomeSection";
 
 class SectionManager {
-  setActiveSectionId(sectionId: string) {
+  setActiveSectionId(sectionId: any) {
     Store.dispatch(setSectionId(sectionId));
   }
 
@@ -22,7 +22,7 @@ class SectionManager {
     return Store.getState().section.sectionId;
   }
 
-  getSection(sectionId: string) {
+  getSection(sectionId: any) {
     return this.getSections().find((o: any) => o.id === sectionId);
   }
 
