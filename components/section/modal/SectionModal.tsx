@@ -1,5 +1,5 @@
-import TextView from '@/components/view/TextView';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import TextView from '@/components/view/TextView';
 import Modal from "react-native-modal";
 
 const SectionModal = () => {
@@ -7,7 +7,7 @@ const SectionModal = () => {
     <Modal
       coverScreen={false}
       hasBackdrop={false}
-      isVisible={true}
+      isVisible={false}
       hideModalContentWhileAnimating={true}
       //animationIn={modalEffects?.in}
       //animationOut={modalEffects?.out}

@@ -1,67 +1,38 @@
+import React, { useState } from "react";
 import { StyleSheet } from 'react-native';
 import { Colors } from '@/constants/Colors';
-import WelcomeSection from '../section/WelcomeSection';
-import LoginSection from '../section/LoginSection';
-import AboutSection from '../section/AboutSection';
-import LegalSection from '../section/LegalSection';
-import JamsSection from '../section/JamsSection';
 import BoxView from '../view/BoxView';
 import SectionHeader from '../section/navigation/SectionHeader';
 import SectionFooter from '../section/navigation/SectionFooter';
 import SectionModal from '../section/modal/SectionModal';
+import SectionManager from "@/manager/SectionManager";
 
 type Props = {
-  name?: any;
+  sectionId?: any;
 };
 
-const SectionView = ({ name }: Props) => {
-  const sections: any = [
-    {
-      name: 'welcome',
-      header: false,
-      footer: false,
-      render: () => <WelcomeSection />,
-    },
-    {
-      name: 'login',
-      header: false,
-      footer: false,
-      render: () => <LoginSection />,
-    },
-    {
-      name: 'about',
-      header: true,
-      footer: false,
-      render: () => <AboutSection />,
-    },
-    {
-      name: 'legal',
-      header: true,
-      footer: false,
-      render: () => <LegalSection />,
-    },
-    {
-      name: 'jams',
-      header: true,
-      footer: true,
-      render: () => <JamsSection />,
-    },
-  ];
+const SectionView = ({ sectionId }: Props) => { 
+  sectionId = sectionId || 'welcome';
+  SectionManager.setActiveSectionId(sectionId);
+
+  const currentSection: any = SectionManager.getSection(sectionId);
 
   return (
     <>
-      <SectionHeader />
+      {currentSection.header === true && <SectionHeader />}
+
       <BoxView
         direction="column"
         align="center"
         justify="center"
         style={styles.container}
       >
-        {sections.find((o: any) => o.name === (name || 'welcome'))?.render()}
-
+        {currentSection?.render()}
+  
         <SectionModal />
       </BoxView>
-      <SectionFooter />
+      
+      {currentSection.footer === true && <SectionFooter />}
     </>
   );
 };
