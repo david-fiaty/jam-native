@@ -15,20 +15,24 @@ const SectionView = ({ sectionId }: Props) => {
   sectionId = sectionId || 'welcome';
   SectionManager.setActiveSectionId(sectionId);
 
+  const currentSection: any = SectionManager.getSection(sectionId);
+
   return (
     <>
-      <SectionHeader />
+      {currentSection.header === true && <SectionHeader />}
+
       <BoxView
         direction="column"
         align="center"
         justify="center"
         style={styles.container}
       >
-        {SectionManager.getSection(sectionId)?.render()}
+        {currentSection?.render()}
   
         <SectionModal />
       </BoxView>
-      <SectionFooter />
+      
+      {currentSection.footer === true && <SectionFooter />}
     </>
   );
 };
