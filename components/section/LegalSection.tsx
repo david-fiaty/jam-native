@@ -9,7 +9,6 @@ const LegalSection = () => {
 
   return (
     <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.screenContent}>
-      <TextView>{StaticData.legal.title}</TextView>
       <TextView>{StaticData.legal.content}</TextView>
     </BoxView>
   );
