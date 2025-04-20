@@ -29,7 +29,7 @@ const SectionHeader = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'red',
-    padding: Layout.space.base,
+    //padding: Layout.space.base,
   },
   headerLeft: {
     backgroundColor: 'yellow',
