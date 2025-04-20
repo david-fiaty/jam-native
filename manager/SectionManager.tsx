@@ -35,6 +35,7 @@ class SectionManager {
         showTitle: false,
         showHeader: true,
         showFooter: true,
+        showBackButton: false,
         render: () => <WelcomeSection />,
       },
       {
@@ -43,6 +44,7 @@ class SectionManager {
         showTitle: false,
         showHeader: false,
         showFooter: false,
+        showBackButton: false,
         render: () => <LoginSection />,
       },
       {
@@ -51,6 +53,7 @@ class SectionManager {
         showTitle: true,
         showHeader: true,
         showFooter: false,
+        showBackButton: true,
         render: () => <AboutSection />,
       },
       {
@@ -59,6 +62,7 @@ class SectionManager {
         showTitle: true,
         showHeader: true,
         showFooter: false,
+        showBackButton: true,
         render: () => <LegalSection />,
       },
       {
@@ -67,6 +71,7 @@ class SectionManager {
         showTitle: true,
         showHeader: true,
         showFooter: true,
+        showBackButton: false,
         render: () => <JamsSection />,
       },
     ];
