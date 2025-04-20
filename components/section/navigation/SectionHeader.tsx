@@ -5,6 +5,7 @@ import BoxView from '@/components/view/BoxView';
 import LogoView from '@/components/view/LogoView';
 import ScreenManager from '@/manager/ScreenManager';
 import TextView from '@/components/view/TextView';
+import IconView from '@/components/view/IconView';
 
 const SectionHeader = () => {
   const router = useRouter();
@@ -16,11 +17,30 @@ const SectionHeader = () => {
           <LogoView size={Layout.logo.size} />
         </TouchableOpacity>
       </BoxView>
-  
+
       <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>
-          <TextView>x</TextView>
-          <TextView>x</TextView>
-          <TextView>x</TextView>
+        <IconView
+          name="search"
+          theme="clear"
+          size={22}
+          padding={0}
+          theme="secondary"
+        />
+
+        <IconView
+          name="plus"
+          size={13}
+          padding={4.5}
+          theme="secondary"
+        />
+
+        <IconView
+          name="menu"
+          size={14}
+          padding={6}
+          theme="secondary"
+        />
+
       </BoxView>
     </BoxView>
   );
@@ -29,6 +49,7 @@ const SectionHeader = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'red',
+    gap: 0,
     //padding: Layout.space.base,
   },
   headerLeft: {
