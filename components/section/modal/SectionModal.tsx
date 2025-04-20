@@ -1,13 +1,14 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useSelector } from "react-redux";
 import TextView from '@/components/view/TextView';
 import Modal from "react-native-modal";
 import ModalManager from '@/manager/ModalManager';
 
 const SectionModal = () => {
+  const modalState: any = useSelector((state: any) => state.modal);
 
   const getIsVisible = () => {
-    console.log('---->', ModalManager.getActiveModalId())
-    return ModalManager.getActiveModalId() !== null;
+    return modalState.modalId !== null;
   };
 
   return (
