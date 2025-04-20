@@ -19,7 +19,7 @@ class SectionManager {
   }
 
   getActiveSectionId() {
-    return Store.getState().section.id;
+    return Store.getState().section.sectionId;
   }
 
   getSection(sectionId: string) {
