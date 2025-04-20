@@ -8,13 +8,12 @@ import SectionModal from '../section/modal/SectionModal';
 import SectionManager from "@/manager/SectionManager";
 
 type Props = {
-  id?: any;
+  sectionId?: any;
 };
 
-const SectionView = ({ id }: Props) => {
-  const [currentSection, setCurrentSection] = useState(null);  
-
-  const sections: any = SectionManager.getSections();
+const SectionView = ({ sectionId }: Props) => { 
+  sectionId = sectionId || 'welcome';
+  SectionManager.setActiveSectionId(sectionId);
 
   return (
     <>
@@ -25,8 +24,8 @@ const SectionView = ({ id }: Props) => {
         justify="center"
         style={styles.container}
       >
-        {sections.find((o: any) => o.id === (id || 'welcome'))?.render()}
-
+        {SectionManager.getSection(sectionId)?.render()}
+  
         <SectionModal />
       </BoxView>
       <SectionFooter />
