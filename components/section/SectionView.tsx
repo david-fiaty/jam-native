@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
 import { Colors } from '@/constants/Colors';
-import TextView from '../view/TextView';
 import WelcomeSection from '../section/WelcomeSection';
 import LoginSection from '../section/LoginSection';
 import AboutSection from '../section/AboutSection';
