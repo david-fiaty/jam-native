@@ -6,6 +6,8 @@ import SectionHeader from '../section/navigation/SectionHeader';
 import SectionFooter from '../section/navigation/SectionFooter';
 import ModalView from "../modal/ModalView";
 import SectionManager from "@/manager/SectionManager";
+import TextView from "../view/TextView";
+import IconView from "../view/IconView";
 
 type Props = {
   sectionId?: any;
@@ -20,6 +22,21 @@ const SectionView = ({ sectionId }: Props) => {
   return (
     <>
       {currentSection.showHeader === true && <SectionHeader />}
+
+      <BoxView 
+        direction="row" 
+        align="center"
+        justify="flex-start" 
+      >
+        <IconView 
+          name="previous" 
+          theme="clear" 
+          padding={0} 
+          //onPress={onPress} 
+        />
+
+        <TextView>BackButton</TextView>
+      </BoxView>
 
       <BoxView
         direction="column"
