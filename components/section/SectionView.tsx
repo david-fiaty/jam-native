@@ -4,7 +4,7 @@ import { Colors } from '@/constants/Colors';
 import BoxView from '../view/BoxView';
 import SectionHeader from '../section/navigation/SectionHeader';
 import SectionFooter from '../section/navigation/SectionFooter';
-import SectionModal from '../section/modal/SectionModal';
+import ModalView from "../modal/ModalView";
 import SectionManager from "@/manager/SectionManager";
 
 type Props = {
@@ -29,7 +29,7 @@ const SectionView = ({ sectionId }: Props) => {
       >
         {currentSection?.render()}
   
-        <SectionModal />
+        <ModalView />
       </BoxView>
       
       {currentSection.footer === true && <SectionFooter />}
