@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/Colors';
 import BoxView from '../view/BoxView';
 import SectionHeader from '../section/navigation/SectionHeader';
@@ -17,6 +18,7 @@ const SectionView = ({ sectionId }: Props) => {
   sectionId = sectionId || 'welcome';
   SectionManager.setActiveSectionId(sectionId);
 
+  const router = useRouter();
   const currentSection: any = SectionManager.getSection(sectionId);
 
   return (
@@ -27,15 +29,17 @@ const SectionView = ({ sectionId }: Props) => {
         direction="row" 
         align="center"
         justify="flex-start" 
-      >
+        style={styles.backButtonContainer}
+        onPress={() => router.back()}
+      >        
         <IconView 
           name="previous" 
           theme="clear" 
           padding={0} 
-          //onPress={onPress} 
         />
 
         <TextView>BackButton</TextView>
+        
       </BoxView>
 
       <BoxView
@@ -58,6 +62,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.white,
+  },
+  backButtonContainer: {
+    backgroundColor: 'red',
+    width: '100%'
   },
 });
 
