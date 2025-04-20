@@ -7,7 +7,7 @@ import ModalManager from '@/manager/ModalManager';
 const SectionModal = () => {
   const modalState: any = useSelector((state: any) => state.modal);
 
-  const getIsVisible = () => {
+  const isModalVisible = () => {
     return modalState.modalId !== null;
   };
 
@@ -18,12 +18,10 @@ const SectionModal = () => {
       hideModalContentWhileAnimating={true}
       //animationIn={modalEffects?.in}
       //animationOut={modalEffects?.out}
-      isVisible={getIsVisible()}
+      isVisible={isModalVisible()}
       style={styles.container}
     >
-
-      {<TextView>MODAL CONTENT</TextView>}  
-      {/*ModalManager.getModal(modalState.modalId)?.render()*/}
+      {ModalManager.getModal(modalState.modalId)?.render()}
     </Modal>
   );
 };
