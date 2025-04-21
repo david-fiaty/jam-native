@@ -38,6 +38,10 @@ class ModalManager {
         title: i18n.t('Test view'),
         showTitle: true,
         showBackButton: true,
+        effect: {
+          in: 'slideInUp', 
+          out: 'slideOutDown',
+        },
         render: () => <TestModal />,
       },
       {
@@ -46,6 +50,10 @@ class ModalManager {
         showTitle: true,
         showBackButton: true,
         render: () => <JamForm />,
+        effect: {
+          in: 'slideInUp', 
+          out: 'slideOutDown',
+        },
       },
     ];
   }
