@@ -6,6 +6,7 @@ import Modal from "react-native-modal";
 import ModalManager from '@/manager/ModalManager';
 import IconView from '../view/IconView';
 import BoxView from '../view/BoxView';
+import ModalBackButton from './navigation/ModalBackButton';
 
 const ModalView = () => {
   const modalState: any = useSelector((state: any) => state.modal);
@@ -33,22 +34,7 @@ const ModalView = () => {
       isVisible={isModalVisible()}
       style={styles.container}
     >
-      {currentModal?.showBackButton === true && <BoxView
-        direction="row"
-        align="center"
-        justify="flex-start"
-        style={styles.backButtonContainer}
-        onPress={() => ModalManager.toggleModal(currentModal?.id)}
-      >
-        <IconView
-          name="previous"
-          theme="clear"
-          padding={0}
-        />
-
-        <TextView>{currentModal?.title}</TextView>
-
-      </BoxView>}
+      {currentModal?.showBackButton === true && <ModalBackButton currentModal={currentModal} />}
 
       {renderModal()}
 
@@ -65,12 +51,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-  },
-  backButtonContainer: {
-    backgroundColor: 'red',
-    width: '100%',
-    padding: Layout.space.base,
-    paddingLeft: 0,
   },
 });
 
