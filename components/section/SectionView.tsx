@@ -22,7 +22,9 @@ const SectionView = ({ sectionId }: Props) => {
     <>
       {currentSection.showHeader === true && <SectionHeader />}
 
-      {currentSection.showBackButton === true && <SectionBackButton currentSection={currentSection} />}
+      {currentSection.showTitle === true 
+        && currentSection.showBackButton === true 
+        && <SectionBackButton currentSection={currentSection} />}
 
       <BoxView
         direction="column"

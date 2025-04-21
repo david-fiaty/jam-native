@@ -1,7 +1,8 @@
+import MapView , { Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
 import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useSelector } from "react-redux";
-import MapView , { Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
+import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
@@ -73,7 +74,7 @@ const JamsMapView = () => {
 
   return (
     <TouchableWithoutFeedback>
-      <View style={[Layout.screenContent, styles.container]}>
+      <View style={styles.container}>
         <MapView
           ref={mapRef}
           style={styles.map}
@@ -93,6 +94,9 @@ const JamsMapView = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 0,
+    width: '100%',
+    flexGrow: 1,
+    backgroundColor: Colors.white,
   },
   map: {
     flex: 1,
