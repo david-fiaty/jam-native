@@ -1,10 +1,10 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Layout } from '@/constants/Layout';
 import { useSelector } from "react-redux";
 import TextView from '@/components/view/TextView';
 import Modal from "react-native-modal";
 import ModalManager from '@/manager/ModalManager';
 import IconView from '../view/IconView';
-import { Layout } from '@/constants/Layout';
 import BoxView from '../view/BoxView';
 
 const ModalView = () => {
@@ -38,7 +38,7 @@ const ModalView = () => {
         align="center"
         justify="flex-start"
         style={styles.backButtonContainer}
-        onPress={() => {}}
+        onPress={() => ModalManager.toggleModal(currentModal?.id)}
       >
         <IconView
           name="previous"
@@ -51,6 +51,7 @@ const ModalView = () => {
       </BoxView>}
 
       {renderModal()}
+
     </Modal>
   );
 };
@@ -61,6 +62,9 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 0,
     margin: 0,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
   },
   backButtonContainer: {
     backgroundColor: 'red',
