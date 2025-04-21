@@ -6,6 +6,7 @@ import LegalSection from "@/components/section/LegalSection";
 import LoginSection from "@/components/section/LoginSection";
 import WelcomeSection from "@/components/section/WelcomeSection";
 import i18n from "@/translation/i18n";
+import SignupSection from "@/components/section/SignupSection";
 
 class SectionManager {
   setActiveSectionId(sectionId: any) {
@@ -46,6 +47,15 @@ class SectionManager {
         showFooter: false,
         showBackButton: false,
         render: () => <LoginSection />,
+      },
+      {
+        id: 'signup',
+        title: i18n.t('Signup'),
+        showTitle: false,
+        showHeader: false,
+        showFooter: false,
+        showBackButton: false,
+        render: () => <SignupSection />,
       },
       {
         id: 'about',
