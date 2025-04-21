@@ -36,7 +36,8 @@ const JamsList = ({ idArray }: Props) => {
         setJamData(await EntityManager.getJams({ items_ids: idArray }))
       }
       else {
-        setJamData(searchResult?.jam);
+        //setJamData(searchResult?.jam); // Todo - Connect search
+        setJamData(await EntityManager.listJams());
       }
     
       if (!isLoaded) {
@@ -48,9 +49,6 @@ const JamsList = ({ idArray }: Props) => {
   }, [isLoaded, sectors, idArray]);
 
   if (!isLoaded) return <SpinnerView />;
-  
-  console.log('jamData', jamData);
-  return <TextView>Jams list</TextView>;
 
   return (
     <BoxView 
