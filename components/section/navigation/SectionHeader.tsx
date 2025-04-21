@@ -30,6 +30,7 @@ const SectionHeader = () => {
           size={13}
           padding={4.5}
           theme="secondary"
+          onPress={() => ModalManager.toggleModal('NotificationsMenu')}
         />
 
         <IconView
