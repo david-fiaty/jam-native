@@ -3,6 +3,7 @@ import Store from "@/redux/Store";
 import TestModal from "@/components/modal/TestModal";
 import JamForm from "@/components/form/JamForm";
 import i18n from "@/translation/i18n";
+import JamsMapView from "@/components/view/JamsMapView";
 
 class ModalManager {
   toggleModal(modalId: any) {
@@ -34,20 +35,28 @@ class ModalManager {
   getModals() {
     return [
       {
-        id: 'TestView', 
-        title: i18n.t('Test view'),
-        showTitle: true,
-        showBackButton: true,
-        render: () => <TestModal />,
-      },
-      {
         id: 'JamForm',
         title: i18n.t('Create a jam'),
-        showTitle: true,
-        showBackButton: true,
         render: () => <JamForm />,
       },
-    ];
+      {
+        id: 'JamsMapView',
+        title: i18n.t('Jams map'),
+        render: () => <JamsMapView />,
+      },
+    ].map((o: any) => {
+      return {
+        ...{
+          showTitle: true,
+          showBackButton: true,
+          effect: {
+            in: 'slideInUp', 
+            out: 'slideOutDown',
+          },
+        },
+        ...o,
+      };
+    });
   }
 }
 
