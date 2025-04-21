@@ -51,7 +51,8 @@ const ProfileForm = () => {
     if (result.success === false) {
       ScreenManager.showMessage({
         title: i18n.t('User registration'),
-        content: result.error,
+        //content: result.error, // Todo - Implement field error management
+        content: i18n.t('There was an error with the submission. Please check your data and try again.'),
       });
     }
     else {
@@ -62,8 +63,8 @@ const ProfileForm = () => {
   return (
     <View style={[Layout.formContainer, styles.container]}>
       <ProfileImageField
-        value={formData?.profile_picture?.url}
-        onChangeValue={(mediaList: any) => updateField('profile_picture', { url: mediaList[0]?.uri })}
+        value={formData?.upload_profile_picture?.url}
+        onChangeValue={(mediaList: any) => updateField('upload_profile_picture', { url: mediaList[0]?.uri })}
       />
 
       <ProfileTypeField
