@@ -10,6 +10,7 @@ import EntityManager from "@/manager/EntityManager";
 import ListItem from "./JamsList/ListItem";
 import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
+import TextView from "../view/TextView";
 
 type Props = BaseProps & {
   idArray?: any;
@@ -48,6 +49,9 @@ const JamsList = ({ idArray }: Props) => {
 
   if (!isLoaded) return <SpinnerView />;
   
+  console.log('jamData', jamData);
+  return <TextView>Jams list</TextView>;
+
   return (
     <BoxView 
       direction="column" 
@@ -67,7 +71,7 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: Layout.space.base*1.5,
     width: '100%',
-    //height: modalSize.height,  
+    height: '100%',  
     flexGrow: 1,
   },
 });
