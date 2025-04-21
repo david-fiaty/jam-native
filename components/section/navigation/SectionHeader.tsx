@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
@@ -5,9 +6,19 @@ import BoxView from '@/components/view/BoxView';
 import LogoView from '@/components/view/LogoView';
 import IconView from '@/components/view/IconView';
 import ModalManager from '@/manager/ModalManager';
+import UserManager from "@/manager/UserManager";
 
 const SectionHeader = () => {
   const router = useRouter();
+  const [notificationsCount, setNotificationsCount] = useState<number>(0);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
+  useEffect(() => {
+    (async () => {
+      setNotificationsCount(await UserManager.getNotifications());
+      setIsLoaded(true);
+    })();
+  }, [isLoaded]);
 
   return (
     <BoxView direction="row" style={styles.container}>
@@ -26,7 +37,7 @@ const SectionHeader = () => {
         />
 
         <IconView
-          name="plus"
+          label={notificationsCount > 0 ? ` ${notificationsCount}+` : ` 0 `} 
           size={13}
           padding={4.5}
           theme="secondary"
@@ -57,7 +68,7 @@ const styles = StyleSheet.create({
   },
   headerRight: {
     backgroundColor: 'yellow',
-    width: '50%'
+    width: '50%',
   },
 });
 
