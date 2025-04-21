@@ -29,18 +29,6 @@ import DataManager from "@/manager/DataManager";
 import MediaManager from "@/manager/MediaManager";
 
 const JamForm = () => {
-
-
-  return <></>;
-
-
-
-
-
-
-
-
-
   const resource: string = 'jam';
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
