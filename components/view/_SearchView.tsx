@@ -7,15 +7,18 @@ import BoxView from "./BoxView";
 import TextView from "./TextView";
 import ListView from "./ListView";
 import StaticData from "@/constants/StaticData";
+import SearchJamsList from "../list/SearchJamsList";
+import SearchProfilesList from "../list/SearchProfilesList";
+import SearchProjectsList from "../list/SearchProjectsList";
 import SpinnerView from "./SpinnerView";
+import ScreenManager from "@/manager/ScreenManager";
 
+const modalSize: any = ScreenManager.getModalSize();
 
 const SearchView = () => {
   const [activeTab, setActiveTab] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  //const searchResult = JSON.parse(useSelector((state: any) => state.search.current));
-
-  return <></>;
+  const searchResult = JSON.parse(useSelector((state: any) => state.search.current));
   
   const renderTab = (row: any) => {
     const tabStyle: any = row.item.id == activeTab ? styles.activeTab : {};
@@ -91,6 +94,7 @@ const SearchView = () => {
 const styles = {
   container: {
     width: '100%',
+    height: modalSize.height,
   },
   tabContainer: {
     backgroundColor: Colors.white,

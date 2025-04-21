@@ -30,7 +30,9 @@ const ModalView = () => {
       isVisible={isModalVisible()}
       style={styles.container}
     >
-      {currentModal?.showBackButton === true && <ModalBackButton currentModal={currentModal} />}
+      { currentModal?.showTitle === true
+        && currentModal?.showBackButton === true 
+        && <ModalBackButton currentModal={currentModal} />}
 
       {renderModal()}
 

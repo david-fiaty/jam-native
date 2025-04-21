@@ -4,6 +4,7 @@ import TestModal from "@/components/modal/TestModal";
 import JamForm from "@/components/form/JamForm";
 import i18n from "@/translation/i18n";
 import JamsMapView from "@/components/view/JamsMapView";
+import SearchView from "@/components/view/SearchView";
 
 class ModalManager {
   toggleModal(modalId: any) {
@@ -43,6 +44,11 @@ class ModalManager {
         id: 'JamsMapView',
         title: i18n.t('Jams map'),
         render: () => <JamsMapView />,
+      },
+      {
+        id: 'SearchView',
+        title: i18n.t('Search'),
+        render: () => <SearchView />,
       },
     ].map((o: any) => {
       return {
