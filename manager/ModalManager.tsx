@@ -1,6 +1,8 @@
 import { setModalId } from "@/redux/slices/ModalSlice";
 import Store from "@/redux/Store";
 import TestModal from "@/components/modal/TestModal";
+import JamForm from "@/components/form/JamForm";
+import i18n from "@/translation/i18n";
 
 class ModalManager {
   toggleModal(modalId: any) {
@@ -33,7 +35,17 @@ class ModalManager {
     return [
       {
         id: 'TestView', 
+        title: i18n.t('Test view'),
+        showTitle: true,
+        showBackButton: true,
         render: () => <TestModal />,
+      },
+      {
+        id: 'JamForm',
+        title: i18n.t('Create a jam'),
+        showTitle: true,
+        showBackButton: true,
+        render: () => <JamForm />,
       },
     ];
   }

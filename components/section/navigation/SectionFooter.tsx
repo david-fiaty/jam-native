@@ -21,6 +21,7 @@ const SectionFooter = () => {
         size={16}
         padding={4}
         theme="secondary"
+        onPress={() => ModalManager.toggleModal('JamForm')}
       />
 
       <IconView
