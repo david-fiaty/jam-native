@@ -10,13 +10,12 @@ import EntityManager from "@/manager/EntityManager";
 import ListItem from "./JamsList/ListItem";
 import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
-import TextView from "../view/TextView";
 
 type Props = BaseProps & {
   idArray?: any;
 };
 
-//const modalSize: any = ScreenManager.getModalSize();
+const modalSize: any = ScreenManager.getModalSize();
 
 const JamsList = ({ idArray }: Props) => {
   const [sectors, setSectors] = useState<any>([]);
@@ -36,8 +35,7 @@ const JamsList = ({ idArray }: Props) => {
         setJamData(await EntityManager.getJams({ items_ids: idArray }))
       }
       else {
-        //setJamData(searchResult?.jam); // Todo - Connect search
-        setJamData(await EntityManager.listJams());
+        setJamData(searchResult?.jam);
       }
     
       if (!isLoaded) {
@@ -49,7 +47,7 @@ const JamsList = ({ idArray }: Props) => {
   }, [isLoaded, sectors, idArray]);
 
   if (!isLoaded) return <SpinnerView />;
-
+  
   return (
     <BoxView 
       direction="column" 
@@ -69,7 +67,7 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: Layout.space.base*1.5,
     width: '100%',
-    height: '100%',  
+    height: modalSize.height,  
     flexGrow: 1,
   },
 });
