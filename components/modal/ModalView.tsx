@@ -1,11 +1,7 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Layout } from '@/constants/Layout';
+import { StyleSheet } from 'react-native';
 import { useSelector } from "react-redux";
-import TextView from '@/components/view/TextView';
 import Modal from "react-native-modal";
 import ModalManager from '@/manager/ModalManager';
-import IconView from '../view/IconView';
-import BoxView from '../view/BoxView';
 import ModalBackButton from './navigation/ModalBackButton';
 
 const ModalView = () => {
@@ -29,8 +25,8 @@ const ModalView = () => {
       coverScreen={false}
       hasBackdrop={false}
       hideModalContentWhileAnimating={true}
-      //animationIn={modalEffects?.in}
-      //animationOut={modalEffects?.out}
+      animationIn={currentModal?.effect?.in}
+      animationOut={currentModal?.effect?.out}
       isVisible={isModalVisible()}
       style={styles.container}
     >
