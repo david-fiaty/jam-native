@@ -91,7 +91,6 @@ const SearchView = () => {
 const styles = {
   container: {
     width: '100%',
-    height: modalSize.height,
   },
   tabContainer: {
     backgroundColor: Colors.white,
