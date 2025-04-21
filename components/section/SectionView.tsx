@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/Colors';
 import BoxView from '../view/BoxView';
 import SectionHeader from '../section/navigation/SectionHeader';
 import SectionFooter from '../section/navigation/SectionFooter';
 import ModalView from "../modal/ModalView";
 import SectionManager from "@/manager/SectionManager";
-import TextView from "../view/TextView";
-import IconView from "../view/IconView";
-import { Layout } from "@/constants/Layout";
+import SectionBackButton from "./button/SectionBackButton";
 
 type Props = {
   sectionId?: any;
@@ -19,29 +16,13 @@ const SectionView = ({ sectionId }: Props) => {
   sectionId = sectionId || 'welcome';
   SectionManager.setActiveSectionId(sectionId);
 
-  const router = useRouter();
   const currentSection: any = SectionManager.getSection(sectionId);
 
   return (
     <>
       {currentSection.showHeader === true && <SectionHeader />}
 
-      {currentSection.showBackButton === true && <BoxView 
-        direction="row" 
-        align="center"
-        justify="flex-start" 
-        style={styles.backButtonContainer}
-        onPress={() => router.back()}
-      >        
-        <IconView 
-          name="previous" 
-          theme="clear" 
-          padding={0} 
-        />
-
-        <TextView>{currentSection.title}</TextView>
-        
-      </BoxView>}
+      {currentSection.showBackButton === true && <SectionBackButton currentSection={currentSection} />}
 
       <BoxView
         direction="column"
@@ -63,12 +44,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.white,
-  },
-  backButtonContainer: {
-    backgroundColor: 'red',
-    width: '100%',
-    padding: Layout.space.base,
-    paddingLeft: 0,
   },
 });
 
