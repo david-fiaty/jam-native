@@ -13,6 +13,7 @@ const SectionFooter = () => {
         size={16}
         padding={4}
         theme="secondary"
+        onPress={() => ModalManager.toggleModal('JamsMapView')}
       />
 
       <IconView
@@ -30,15 +31,6 @@ const SectionFooter = () => {
         size={16}
         padding={4}
         theme="secondary"
-      />
-
-      <IconView
-        name="user"
-        radius="round"
-        size={16}
-        padding={4}
-        theme="secondary"
-        onPress={() => ModalManager.toggleModal('TestView')}
       />
     </BoxView>
   );
