@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
   headerRight: {
     backgroundColor: 'yellow',
-    width: '50%'
+    width: '50%',
   },
 });
 
