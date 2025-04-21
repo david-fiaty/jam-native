@@ -1,13 +1,15 @@
 import { StyleSheet } from 'react-native';
 import { useSelector } from "react-redux";
-import { Layout } from '@/constants/Layout';
-import LogoView from '../view/LogoView';
-import BoxView from '../view/BoxView';
-import TextView from '../view/TextView';
-import i18n from '@/translation/i18n';
-import SignupForm from '../form/SignupForm';
+import SignupCodeForm from "../form/signup-form/SignupCodeForm";
+import SignupEmailForm from "../form/signup-form/SignupEmailForm";
+import ProfileForm from "../form/ProfileForm";
+import BoxView from "../view/BoxView";
+import { Layout } from "@/constants/Layout";
+import LogoView from "../view/LogoView";
+import TextView from "../view/TextView";
+import i18n from "@/translation/i18n";
 
-const SignupScreen = () => {
+const SignupSection = () => {
   const formData = useSelector((state: any) => state.form?.profile);
   
   const isContainerScrollable = () => {
@@ -24,7 +26,11 @@ const SignupScreen = () => {
     >
       <LogoView size={80} />    
       <TextView style={styles.slogan}>{i18n.t('Create your JAM account')}</TextView> 
-      <SignupForm />
+      
+      {formData?.success !== true && <SignupEmailForm />}
+      {formData?.success !== true && formData?.session?.length > 0 && <SignupCodeForm />}
+      {formData?.success === true && <ProfileForm />}
+
     </BoxView>
   );
 };
@@ -40,4 +46,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignupScreen;
+export default SignupSection;
