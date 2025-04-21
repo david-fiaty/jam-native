@@ -4,6 +4,7 @@ import { Layout } from '@/constants/Layout';
 import BoxView from '@/components/view/BoxView';
 import LogoView from '@/components/view/LogoView';
 import IconView from '@/components/view/IconView';
+import ModalManager from '@/manager/ModalManager';
 
 const SectionHeader = () => {
   const router = useRouter();
@@ -36,6 +37,7 @@ const SectionHeader = () => {
           size={14}
           padding={6}
           theme="secondary"
+          onPress={() => ModalManager.toggleModal('SettingsMenu')}
         />
 
       </BoxView>
