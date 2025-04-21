@@ -6,7 +6,7 @@ import SectionHeader from '../section/navigation/SectionHeader';
 import SectionFooter from '../section/navigation/SectionFooter';
 import ModalView from "../modal/ModalView";
 import SectionManager from "@/manager/SectionManager";
-import SectionBackButton from "./button/SectionBackButton";
+import SectionBackButton from "./navigation/SectionBackButton";
 
 type Props = {
   sectionId?: any;
