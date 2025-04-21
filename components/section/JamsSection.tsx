@@ -1,11 +1,7 @@
-import TextView from '../view/TextView';
+import JamsList from '../list/JamsList';
 
 const JamsSection = () => {
-  return (
-    <>
-      <TextView>Jams</TextView>
-    </>
-  );
+  return (<JamsList />);
 };
 
 export default JamsSection;
