@@ -10,12 +10,12 @@ const ModalView = () => {
   const modalState: any = useSelector((state: any) => state.modal);
 
   const isModalVisible = () => {
-    return modalState.modalId !== null;
+    return currentModal !== null;
   };
 
   const renderModal = () => {
-    if (modalState.modalId) {
-      return ModalManager.getModal(modalState.modalId)?.render();
+    if (currentModal) {
+      return ModalManager.getModal(modalState.modalId).render();
     }
 
     return <></>;
