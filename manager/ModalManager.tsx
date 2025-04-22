@@ -98,6 +98,7 @@ class ModalManager {
     ].map((o: any) => {
       return {
         ...{
+          visible: false,
           showTitle: true,
           showBackButton: true,
           params: {},
