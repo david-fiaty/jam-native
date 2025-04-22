@@ -23,7 +23,7 @@ const ModalView = () => {
 
   const renderModal = () => {
     if (currentModal) {
-      return ModalManager.getModal(modalState.modalId).render();
+      return ModalManager.getModal(currentModal.id).render();
     }
 
     return <></>;
