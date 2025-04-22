@@ -13,7 +13,7 @@ import JammersList from "@/components/list/JammersList";
 
 class ModalManager {
 
-  setActiveModal(modalId: string, params?: any) {
+  toggleModal(modalId: string, params?: any) {
     let activeModals: any[] = {...Store.getState().modal.active};
 
     if (activeModals.length > 0 && activeModals[activeModals.length - 1].id === modalId) {
@@ -38,19 +38,6 @@ class ModalManager {
 
     return null;
   }
-
-
-
-
-
-
-
-  toggleModal(modalId: any) {
-    let activeModalId: any = this.getActiveModalId();
-    let currentModalId: any = modalId === activeModalId ? null : modalId;
-    
-    this.setActiveModalId(currentModalId);
-  } 
 
   getModal(modalId: any, renderer: boolean = true) {
     return this.getModals(renderer).find((o: any) => o.id === modalId);
