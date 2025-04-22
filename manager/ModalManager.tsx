@@ -29,16 +29,6 @@ class ModalManager {
     Store.dispatch(setActiveModals(activeModals));
   }
 
-  getActiveModal() {
-    let activeModals: any[] = {...Store.getState().modal.active};
-
-    if (activeModals.length > 0) {
-      return activeModals.pop();
-    }
-
-    return null;
-  }
-
   getModal(modalId: any, renderer: boolean = true) {
     return this.getModals(renderer).find((o: any) => o.id === modalId);
   }
