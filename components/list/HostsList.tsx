@@ -13,6 +13,8 @@ import ScreenManager from '@/manager/ScreenManager';
 const HostsList = () => {
   const [profiles, setProfiles] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
+  return <></>;
   const entityId: number = ScreenManager.getModalEntityId();
 
   useEffect(() => {

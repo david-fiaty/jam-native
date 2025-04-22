@@ -13,6 +13,7 @@ import i18n from "@/translation/i18n";
 import ScreenManager from "@/manager/ScreenManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import ModalButton from "@/components/button/ModalButton";
+import ModalManager from "@/manager/ModalManager";
 
 type Props = BaseProps & {
   row?: any;
@@ -151,22 +152,11 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
 
   const renderJammersButton = () => {
     return (
-      <ModalButton 
-        login={true}
-        name="JammersList"
-        entityId={row.item.id}
-        title={i18n.t('Jammers')}
-        trigger={
-          <BoxView
-            direction="row"
-            align="center"
-          >
-            <TextView>
-              {parseInt(row?.item?.jammers?.length)} {i18n.t("jammers")}
-            </TextView>
-          </BoxView>
-        }
-      />
+      <TouchableOpacity onPress={() => ModalManager.toggleModal('JammersList')}>
+        <TextView>
+          {parseInt(row?.item?.jammers?.length)} {i18n.t("jammers")}
+        </TextView>
+      </TouchableOpacity>
     );
   };
 
