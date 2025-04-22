@@ -17,8 +17,6 @@ const JammersList = ({ jamId }: Props) => {
   const [profiles, setProfiles] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  console.log(jamId);
-
   useEffect(() => {
     (async () => {
       let data: any = await EntityManager.getJams({items_ids: [jamId]});

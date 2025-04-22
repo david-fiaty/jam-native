@@ -12,7 +12,6 @@ type Props = {
 };
 
 const ListItemHeader = ({ row }: Props) => {
-
   const renderHosts = () => {
     return (
       <TouchableOpacity onPress={() => ModalManager.toggleModal('HostsList', { jamId: row?.item?.id })}>
