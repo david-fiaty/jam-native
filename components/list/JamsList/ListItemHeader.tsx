@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
@@ -7,6 +7,7 @@ import IconView from "@/components/view/IconView";
 import i18n from "@/translation/i18n";
 import JamStatusButton from "@/components/button/JamStatusButton";
 import ModalButton from "@/components/button/ModalButton";
+import ModalManager from '@/manager/ModalManager';
 
 type Props = BaseProps & {
   row?: any;
@@ -16,17 +17,11 @@ const ListItemHeader = ({ row }: Props) => {
 
   const renderHosts = () => {
     return (
-      <ModalButton 
-        login={true}
-        name="HostsList"
-        entityId={row.item.id}
-        title={i18n.t('Jam hosts')}
-        trigger={
-          <TextView>
-            @{i18n.t("host")} +{parseInt(row?.item?.collaborators?.length)}
-          </TextView>
-        }
-      />
+      <TouchableOpacity onPress={() => ModalManager.toggleModal('HostsList')}>
+        <TextView>
+          @{i18n.t("host")} +{parseInt(row?.item?.collaborators?.length)}
+        </TextView>
+      </TouchableOpacity>
     );
   };
 
@@ -36,7 +31,7 @@ const ListItemHeader = ({ row }: Props) => {
 
   const renderActions = () => {
     return (
-      <ModalButton 
+      <ModalButton
         login={true}
         name="MoreJamActionsView"
         entityId={row.item.id}
@@ -71,7 +66,7 @@ const ListItemHeader = ({ row }: Props) => {
           {renderActions()}
         </BoxView>
       </BoxView>
-    );  
+    );
   };
 
   return renderComponent();
@@ -79,7 +74,7 @@ const ListItemHeader = ({ row }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: Layout.space.base*1.2,
+    paddingHorizontal: Layout.space.base * 1.2,
     paddingVertical: Layout.space.base,
     height: 39,
   },
