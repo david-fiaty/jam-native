@@ -10,10 +10,15 @@ import ActionListItem from '../list/ListItem/ActionListItem';
 import DataManager from '@/manager/DataManager';
 import UserManager from '@/manager/UserManager';
 
-const MoreJamActionsView = () => {
+type Props = {
+  jamId?: any;
+};
+
+const MoreJamActionsView = ({ jamId }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isEntityOwner, setIsEntityOwner] = useState<boolean>(false);
 
+  console.log('more actions jam id', jamId);
 
   return <></>;
   const entityId: number = ScreenManager.getModalEntityId();
