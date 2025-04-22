@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import BoxView from '../view/BoxView';
 import SectionHeader from '../section/navigation/SectionHeader';
@@ -7,16 +7,25 @@ import SectionFooter from '../section/navigation/SectionFooter';
 import ModalView from "../modal/ModalView";
 import SectionManager from "@/manager/SectionManager";
 import SectionBackButton from "./navigation/SectionBackButton";
+import ModalManager from '@/manager/ModalManager';
 
 type Props = {
   sectionId?: any;
 };
 
 const SectionView = ({ sectionId }: Props) => { 
-  sectionId = sectionId || 'welcome';
-  SectionManager.setActiveSectionId(sectionId);
+  const [currentSection, setCurrentSection] = useState<any>(null);
 
-  const currentSection: any = SectionManager.getSection(sectionId);
+  sectionId = sectionId || 'welcome';
+  SectionManager.setActiveSection(sectionId);
+
+  const renderSection = () => {
+    return SectionManager.getSection(sectionId).render();
+  };
+
+  useEffect(() => {
+    setCurrentSection(SectionManager.getActiveSection());
+  });
 
   return (
     <>
@@ -32,7 +41,7 @@ const SectionView = ({ sectionId }: Props) => {
         justify="center"
         style={styles.container}
       >
-        {currentSection?.render()}
+        {renderSection()}
   
         <ModalView />
       </BoxView>
