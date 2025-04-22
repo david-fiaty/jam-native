@@ -13,6 +13,9 @@ import UserManager from '@/manager/UserManager';
 const MoreJamActionsView = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isEntityOwner, setIsEntityOwner] = useState<boolean>(false);
+
+
+  return <></>;
   const entityId: number = ScreenManager.getModalEntityId();
   
   const saveJam = async () => {
