@@ -159,7 +159,6 @@ const MoreJamActionsView = ({ jamId }: Props) => {
         }) }
       </View>
     </BoxView>
-    
   );
 };
 
