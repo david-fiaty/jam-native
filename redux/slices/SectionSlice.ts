@@ -3,14 +3,14 @@ import { createSlice } from '@reduxjs/toolkit';
 const SectionSlice = createSlice({
   name: 'section',
   initialState: {
-    active: [],
+    sectionId: '',
   },
   reducers: {
-    setActiveSections: (state, action) => {
-      state.active = action.payload;
+    setSectionId: (state, action) => {
+      state.sectionId = action.payload;
     },
   },
 });
 
-export const { setActiveSections } = SectionSlice.actions;
+export const { setSectionId } = SectionSlice.actions;
 export default SectionSlice.reducer;
