@@ -1,4 +1,4 @@
-import { setModalId } from "@/redux/slices/ModalSlice";
+import { setActiveModal } from "@/redux/slices/ModalSlice";
 import Store from "@/redux/Store";
 import TestModal from "@/components/modal/TestModal";
 import JamForm from "@/components/form/JamForm";
