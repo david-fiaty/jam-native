@@ -9,8 +9,6 @@ import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import ListItem from "./JamsList/ListItem";
 import UserManager from "@/manager/UserManager";
-import ScreenManager from "@/manager/ScreenManager";
-import TextView from "../view/TextView";
 
 type Props = BaseProps & {
   idArray?: any;
@@ -31,7 +29,6 @@ const JamsList = ({ idArray }: Props) => {
 
   useEffect(() => {
     (async () => {
-
       if (Array.isArray(idArray) && idArray?.length > 0) {
         setJamData(await EntityManager.getJams({ items_ids: idArray }))
       }
