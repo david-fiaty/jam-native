@@ -22,6 +22,7 @@ class ModalManager {
   }
 
   toggleModal(modalId: string, params?: any) {
+    params = params || {};
     let activeModals: any[] = [...Store.getState().modal.active];
 
     if (activeModals.length > 0 && activeModals[activeModals.length - 1].id === modalId) {
@@ -56,42 +57,42 @@ class ModalManager {
       {
         id: 'JamForm',
         title: i18n.t('Create a jam'),
-        render: () => <JamForm />,
+        render: (params: any) => <JamForm {...params} />,
       },
       {
         id: 'JamsMapView',
         title: i18n.t('Jams map'),
-        render: () => <JamsMapView />,
+        render: (params: any) => <JamsMapView {...params} />,
       },
       {
         id: 'SearchView',
         title: i18n.t('Search'),
-        render: () => <SearchView />,
+        render: (params: any) => <SearchView {...params} />,
       },
       {
         id: 'SettingsMenu',
         title: i18n.t('Settings'),
-        render: () => <SettingsMenu />,
+        render: (params: any) => <SettingsMenu {...params} />,
       },
       {
         id: 'NotificationsMenu',
         title: i18n.t('Notifications'),
-        render: () => <NotificationsMenu />,
+        render: (params: any) => <NotificationsMenu {...params} />,
       },
       {
         id: 'HostsList',
         title: i18n.t('Jam hosts'),
-        render: () => <HostsList />,
+        render: (params: any) => <HostsList {...params} />,
       },
       {
         id: 'MoreJamActionsView',
         title: i18n.t('More actions'),
-        render: () => <MoreJamActionsView />,
+        render: (params: any) => <MoreJamActionsView {...params} />,
       },
       {
         id: 'JammersList',
         title: i18n.t('Jammers'),
-        render: () => <JammersList />,
+        render: (params: any) => <JammersList {...params} />,
       },
     ].map((o: any) => {
       return {

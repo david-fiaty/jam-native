@@ -24,11 +24,21 @@ class SectionManager {
     return Store.getState().section.sectionId;
   }
 
-  getSection(sectionId: any) {
-    return this.getSections().find((o: any) => o.id === sectionId);
+  getSection(modalId: any, renderer: boolean = true) {
+    return this.getSections(renderer).find((o: any) => o.id === modalId);
   }
 
-  getSections() {
+  getSections(renderer: boolean = true) {
+    let config: any[] = this.getConfig();
+
+    if (!renderer) {
+      config = config.map(({ render, ...rest }) => rest);
+    }
+
+    return config;
+  }
+
+  getConfig() {
     return [
       {
         id: 'welcome',
