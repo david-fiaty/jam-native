@@ -28,9 +28,13 @@ import CollaboratorsField from "../field/CollaboratorsField";
 import DataManager from "@/manager/DataManager";
 import MediaManager from "@/manager/MediaManager";
 
-const JamForm = () => {
+type Props = {
+  jamId?: any;
+};
 
+const JamForm = ({ jamId } : Props) => {
 
+  console.log('--->', jamId);
   return <></>;
 
 
