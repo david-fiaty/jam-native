@@ -1,4 +1,4 @@
-import { setModalId } from "@/redux/slices/ModalSlice";
+import { setActiveModals } from "@/redux/slices/ModalSlice";
 import Store from "@/redux/Store";
 import JamForm from "@/components/form/JamForm";
 import i18n from "@/translation/i18n";
@@ -11,33 +11,47 @@ import MoreJamActionsView from "@/components/view/MoreJamActionsView";
 import JammersList from "@/components/list/JammersList";
 
 class ModalManager {
-  toggleModal(modalId: any) {
-    let activeModalId: any = this.getActiveModalId();
-    let currentModalId: any = modalId === activeModalId ? null : modalId;
-    
-    this.setActiveModalId(currentModalId);
-  } 
-
-  setActiveModalId(modalId: any) {
-    Store.dispatch(setModalId(modalId));
-  }
-
   getActiveModal() {
-    let modalId: any = this.getActiveModalId();
-    let section: any = this.getModal(modalId);
+    let activeModals: any[] = [...Store.getState().modal.active];
 
-    return section;
+    if (activeModals.length > 0) {
+      return activeModals.pop();
+    }
+
+    return null;
   }
 
-  getActiveModalId() {
-    return Store.getState().modal.modalId;
+  toggleModal(modalId: string, params?: any) {
+    let activeModals: any[] = [...Store.getState().modal.active];
+
+    if (activeModals.length > 0 && activeModals[activeModals.length - 1].id === modalId) {
+      activeModals.pop();
+    } 
+    else {
+      activeModals.push({
+        ...this.getModal(modalId, false), 
+        ...{ params: params },
+      });
+    }
+
+    Store.dispatch(setActiveModals(activeModals));
   }
 
-  getModal(modalId: any) {
-    return this.getModals().find((o: any) => o.id === modalId);
+  getModal(modalId: any, renderer: boolean = true) {
+    return this.getModals(renderer).find((o: any) => o.id === modalId);
   }
 
-  getModals() {
+  getModals(renderer: boolean = true) {
+    let config: any[] = this.getConfig();
+
+    if (!renderer) {
+      config = config.map(({ render, ...rest }) => rest);
+    }
+
+    return config;
+  }
+
+  getConfig() {
     return [
       {
         id: 'JamForm',
@@ -84,6 +98,7 @@ class ModalManager {
         ...{
           showTitle: true,
           showBackButton: true,
+          params: {},
           effect: {
             in: 'slideInUp', 
             out: 'slideOutDown',
