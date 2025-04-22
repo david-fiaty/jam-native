@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useSelector } from "react-redux";
 import Modal from "react-native-modal";
@@ -5,8 +6,8 @@ import ModalManager from '@/manager/ModalManager';
 import ModalBackButton from './navigation/ModalBackButton';
 
 const ModalView = () => {
+  const [currentModal, setCurrentModal] = useState<any>(null);
   const modalState: any = useSelector((state: any) => state.modal);
-  const currentModal: any = ModalManager.getActiveModal();
 
   const isModalVisible = () => {
     return modalState.modalId !== null;
@@ -19,6 +20,10 @@ const ModalView = () => {
 
     return <></>;
   }
+
+  useEffect(() => {
+    setCurrentModal(ModalManager.getActiveModal());
+  });
 
   return (
     <Modal
