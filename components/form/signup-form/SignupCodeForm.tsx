@@ -13,6 +13,7 @@ import UserManager from "@/manager/UserManager";
 import BoxView from "@/components/view/BoxView";
 import LinkView from "@/components/view/LinkView";
 import SkipButton from "@/components/button/SkipButton";
+import SectionManager from "@/manager/SectionManager";
 
 const SignupCodeForm = () => {
   const dispatch = useDispatch();
@@ -69,11 +70,11 @@ const SignupCodeForm = () => {
         style={{ width: "100%" }}
       >
         <BoxView direction="row" align="center" justify="flex-start">
-          <LinkView onPress={() => router.replace("/signup")}>
+          <LinkView onPress={() => SectionManager.replaceSection("signup", router)}>
             {i18n.t("Didn't receive code?")}
           </LinkView>
         </BoxView>
-        <SkipButton onPress={async () => router.replace(Config.mainRoute)} />
+        <SkipButton onPress={async () => SectionManager.replaceSection(Config.mainRoute, router)} />
       </BoxView>
     </>
   );
