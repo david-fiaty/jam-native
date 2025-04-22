@@ -11,6 +11,9 @@ import ProfileListItem from './ListItem/ProfileListItem';
 import ScreenManager from '@/manager/ScreenManager';
 
 const JammersList = () => {
+
+  return <></>;
+  
   const [profiles, setProfiles] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const entityId: number = ScreenManager.getModalEntityId();
