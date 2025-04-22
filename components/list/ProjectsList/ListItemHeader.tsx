@@ -10,9 +10,10 @@ import ScreenManager from "@/manager/ScreenManager";
 import UserManager from "@/manager/UserManager";
 import i18n from "@/translation/i18n";
 import JamStatusButton from "@/components/button/JamStatusButton";
+import ModalManager from "@/manager/ModalManager";
 
 type Props = BaseProps & {
-  row?: any,
+  row?: any;
 };
 
 const ListItemHeader = ({ row }: Props) => {
@@ -36,7 +37,7 @@ const ListItemHeader = ({ row }: Props) => {
         <TouchableOpacity
           onPress={() =>
             isLoggedIn
-              ? ScreenManager.toggleModal("HostsList", { entityId: row?.item?.id })
+              ? ModalManager.toggleModal("HostsList", { jamId: row?.item?.id })
               : ScreenManager.pushScreen(router, '/login')
           }
         >
@@ -54,7 +55,7 @@ const ListItemHeader = ({ row }: Props) => {
           theme="clear"
           onPress={() =>
             isLoggedIn
-              ? ScreenManager.toggleModal("MoreJamActionsView", { entityId: row?.item?.id })
+              ? ModalManager.toggleModal("MoreJamActionsView", { entityId: row?.item?.id })
               : ScreenManager.pushScreen(router, '/login')
           }
         />

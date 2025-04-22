@@ -8,24 +8,23 @@ import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import EntityManager from '@/manager/EntityManager';
 import ProfileListItem from './ListItem/ProfileListItem';
-import ScreenManager from '@/manager/ScreenManager';
 
-const JammersList = () => {
+type Props = {
+  jamId?: any;
+};
 
-  return <></>;
-  
+const JammersList = ({ jamId }: Props) => {
   const [profiles, setProfiles] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const entityId: number = ScreenManager.getModalEntityId();
 
   useEffect(() => {
     (async () => {
-      let data: any = await EntityManager.getJams({items_ids: [entityId]});
+      let data: any = await EntityManager.getJams({items_ids: [jamId]});
       setProfiles(await EntityManager.getProfiles({items_ids: data?.[0]?.jammers}));
       setIsLoaded(true);
     })();
 
-  }, [isLoaded, entityId]);
+  }, [isLoaded, jamId]);
 
   if (!isLoaded) return <SpinnerView />;
 

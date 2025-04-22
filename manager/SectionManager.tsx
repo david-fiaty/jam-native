@@ -7,8 +7,23 @@ import LoginSection from "@/components/section/LoginSection";
 import WelcomeSection from "@/components/section/WelcomeSection";
 import i18n from "@/translation/i18n";
 import SignupSection from "@/components/section/SignupSection";
+import ProfileSection from "@/components/section/ProfileSection";
 
 class SectionManager {
+  pushSection(sectionId: string, router: any, params?: any) {
+    router.push({
+      pathname: `/${sectionId}`,
+      params: params || {},
+    });
+  }
+
+  replaceSection(sectionId: string, router: any, params?: any) {
+    router.replace({
+      pathname: `/${sectionId}`,
+      params: params || {},
+    });
+  }
+
   setActiveSectionId(sectionId: any) {
     Store.dispatch(setSectionId(sectionId));
   }
@@ -24,11 +39,21 @@ class SectionManager {
     return Store.getState().section.sectionId;
   }
 
-  getSection(sectionId: any) {
-    return this.getSections().find((o: any) => o.id === sectionId);
+  getSection(modalId: any, renderer: boolean = true) {
+    return this.getSections(renderer).find((o: any) => o.id === modalId);
   }
 
-  getSections() {
+  getSections(renderer: boolean = true) {
+    let config: any[] = this.getConfig();
+
+    if (!renderer) {
+      config = config.map(({ render, ...rest }) => rest);
+    }
+
+    return config;
+  }
+
+  getConfig() {
     return [
       {
         id: 'welcome',
@@ -83,6 +108,15 @@ class SectionManager {
         showFooter: true,
         showBackButton: false,
         render: () => <JamsSection />,
+      },
+      {
+        id: 'profile',
+        title: i18n.t('Profile'),
+        showTitle: true,
+        showHeader: true,
+        showFooter: true,
+        showBackButton: false,
+        render: () => <ProfileSection />,
       },
     ];
   }

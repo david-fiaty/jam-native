@@ -1,23 +1,20 @@
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
 import TextView from "@/components/view/TextView";
 import IconView from "@/components/view/IconView";
 import i18n from "@/translation/i18n";
 import JamStatusButton from "@/components/button/JamStatusButton";
-import ModalButton from "@/components/button/ModalButton";
 import ModalManager from '@/manager/ModalManager';
 
-type Props = BaseProps & {
+type Props = {
   row?: any;
 };
 
 const ListItemHeader = ({ row }: Props) => {
-
   const renderHosts = () => {
     return (
-      <TouchableOpacity onPress={() => ModalManager.toggleModal('HostsList')}>
+      <TouchableOpacity onPress={() => ModalManager.toggleModal('HostsList', { jamId: row?.item?.id })}>
         <TextView>
           @{i18n.t("host")} +{parseInt(row?.item?.collaborators?.length)}
         </TextView>
@@ -36,7 +33,7 @@ const ListItemHeader = ({ row }: Props) => {
         theme="clear"
         size={16}
         padding={0}
-        onPress={() => ModalManager.toggleModal('MoreJamActionsView')}
+        onPress={() => ModalManager.toggleModal('MoreJamActionsView', { jamId: row?.item?.id })}
       />
     );
   };

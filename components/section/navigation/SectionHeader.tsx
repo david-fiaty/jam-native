@@ -7,6 +7,7 @@ import LogoView from '@/components/view/LogoView';
 import IconView from '@/components/view/IconView';
 import ModalManager from '@/manager/ModalManager';
 import UserManager from "@/manager/UserManager";
+import { Config } from "@/constants/Config";
 
 const SectionHeader = () => {
   const router = useRouter();
@@ -23,7 +24,7 @@ const SectionHeader = () => {
   return (
     <BoxView direction="row" style={styles.container}>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.headerLeft}>
-        <TouchableOpacity onPress={() => router.replace('/')}>
+        <TouchableOpacity onPress={() => router.replace(Config.mainRoute)}>
           <LogoView size={Layout.logo.size} />
         </TouchableOpacity>
       </BoxView>
