@@ -10,21 +10,22 @@ import EntityManager from '@/manager/EntityManager';
 import ProfileListItem from './ListItem/ProfileListItem';
 import ScreenManager from '@/manager/ScreenManager';
 
-const HostsList = () => {
+type Props = {
+  jamId?: any;
+};
+
+const HostsList = ({ jamId }: Props) => {  
   const [profiles, setProfiles] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  return <></>;
-  const entityId: number = ScreenManager.getModalEntityId();
-
   useEffect(() => {
     (async () => {
-      let data: any = await EntityManager.getJams({items_ids: [entityId]});
+      let data: any = await EntityManager.getJams({items_ids: [jamId]});
       setProfiles(await EntityManager.getProfiles({items_ids: data?.[0]?.collaborators}));
       setIsLoaded(true);
     })();
 
-  }, [isLoaded, entityId]);
+  }, [isLoaded, jamId]);
 
   if (!isLoaded) return <SpinnerView />;
 
