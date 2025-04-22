@@ -18,13 +18,8 @@ const MoreJamActionsView = ({ jamId }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isEntityOwner, setIsEntityOwner] = useState<boolean>(false);
 
-  console.log('more actions jam id', jamId);
-
-  return <></>;
-  const entityId: number = ScreenManager.getModalEntityId();
-  
   const saveJam = async () => {
-    let result: any = await EntityManager.saveJam(entityId);
+    let result: any = await EntityManager.saveJam(jamId);
     
     let message: any = {
       title: i18n.t('Save Jam'),
@@ -36,7 +31,7 @@ const MoreJamActionsView = ({ jamId }: Props) => {
   };
 
   const likeJam = async () => {
-    let result: any = await EntityManager.likeJam(entityId);
+    let result: any = await EntityManager.likeJam(jamId);
     
     let message: any = {
       title: i18n.t('Like Jam'),
@@ -64,21 +59,21 @@ const MoreJamActionsView = ({ jamId }: Props) => {
       label: i18n.t('Share Jam'),
       icon: 'share',
       canDisplay: () => true,
-      onPress: () => EntityManager.shareJam(entityId),
+      onPress: () => EntityManager.shareJam(jamId),
     },
     {
       label: i18n.t('Add Jam to project'),
       icon: 'plus',
       //canDisplay: () => true,
       canDisplay: () => isEntityOwner, // Todo - Enable this
-      onPress: () => ScreenManager.toggleModal('AddJamToProjectForm', { entityId: entityId }),
+      onPress: () => ScreenManager.toggleModal('AddJamToProjectForm', { jamId: jamId }),
     },
     {
       label: i18n.t('Edit Jam'),
       icon: 'edit',
       //canDisplay: () => true,
       canDisplay: () => isEntityOwner, // Todo - Enable this
-      onPress: () => ScreenManager.toggleModal('JamForm', { entityId: entityId }),
+      onPress: () => ScreenManager.toggleModal('JamForm', { jamId: jamId }),
     },
     {
       label: i18n.t('Report Jam'),
@@ -97,7 +92,7 @@ const MoreJamActionsView = ({ jamId }: Props) => {
             {
               text: i18n.t('Yes'),
               onPress: async () => { 
-                let result: any = await EntityManager.reportItem('jam', entityId);
+                let result: any = await EntityManager.reportItem('jam', jamId);
                 if (result?.error) {
                   ScreenManager.showMessage({
                     title: i18n.t('Report'),
@@ -127,7 +122,7 @@ const MoreJamActionsView = ({ jamId }: Props) => {
             {
               text: i18n.t('Yes'),
               onPress: () => { 
-                let result: any = EntityManager.deleteJam(entityId); 
+                let result: any = EntityManager.deleteJam(jamId); 
                 if (result?.error) {
                   ScreenManager.showMessage({
                     title: i18n.t('Delete'),
@@ -145,12 +140,12 @@ const MoreJamActionsView = ({ jamId }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setIsEntityOwner(await UserManager.isJamOwner(entityId));
+        setIsEntityOwner(await UserManager.isJamOwner(jamId));
       }
     })();
 
     setIsLoaded(true);
-  }, [isLoaded, entityId]);
+  }, [isLoaded, jamId]);
 
   if (!isLoaded) return <SpinnerView />;
   
