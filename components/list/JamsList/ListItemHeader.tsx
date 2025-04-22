@@ -36,7 +36,7 @@ const ListItemHeader = ({ row }: Props) => {
         theme="clear"
         size={16}
         padding={0}
-        onPress={() => ModalManager.toggleModal('MoreJamActionsView')}
+        onPress={() => ModalManager.toggleModal('MoreJamActionsView', { jamId: row?.item?.id })}
       />
     );
   };
