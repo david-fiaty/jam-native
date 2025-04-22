@@ -1,4 +1,4 @@
-import { setActiveSections } from "@/redux/slices/SectionSlice";
+import { setSectionId } from "@/redux/slices/SectionSlice";
 import Store from "@/redux/Store";
 import AboutSection from "@/components/section/AboutSection";
 import JamsSection from "@/components/section/JamsSection";
@@ -9,22 +9,19 @@ import i18n from "@/translation/i18n";
 import SignupSection from "@/components/section/SignupSection";
 
 class SectionManager {
-
-  setActiveSection(sectionId: string) {
-    let activeSections: any[] = [...Store.getState().section.active];
-    let targetSection: any = this.getSection(sectionId, false);
-
-    activeSections.push(targetSection);
-
-    Store.dispatch(setActiveSections(activeSections));
+  setActiveSectionId(sectionId: any) {
+    Store.dispatch(setSectionId(sectionId));
   }
 
   getActiveSection() {
-    let activeSections: any[] = [...Store.getState().section.active];
+    let sectionId: any = this.getActiveSectionId();
+    let section: any = this.getSection(sectionId);
 
-    if (activeSections.length > 0) {
-      return activeSections.pop();
-    }
+    return section;
+  }
+
+  getActiveSectionId() {
+    return Store.getState().section.sectionId;
   }
 
   getSection(modalId: any, renderer: boolean = true) {
