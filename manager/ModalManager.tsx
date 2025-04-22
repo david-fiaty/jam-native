@@ -12,7 +12,16 @@ import MoreJamActionsView from "@/components/view/MoreJamActionsView";
 import JammersList from "@/components/list/JammersList";
 
 class ModalManager {
+  getActiveModal() {
+    let activeModals: any[] = {...Store.getState().modal.active};
 
+    if (activeModals.length > 0) {
+      return activeModals.pop();
+    }
+
+    return null;
+  }
+  
   toggleModal(modalId: string, params?: any) {
     let activeModals: any[] = {...Store.getState().modal.active};
 
