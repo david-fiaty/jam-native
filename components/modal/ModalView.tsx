@@ -9,13 +9,21 @@ const ModalView = () => {
   const [currentModal, setCurrentModal] = useState<any>(null);
   const modalState: any = useSelector((state: any) => state.modal);
 
-  const isModalVisible = () => {
-    return modalState.modalId !== null;
+  const canShowModal = () => {
+    return currentModal !== null;
   };
 
+  const renderBackButton = () => {
+    if (currentModal?.showTitle === true && currentModal?.showBackButton === true) {
+      return <ModalBackButton currentModal={currentModal} />;
+    }
+
+    return <></>;
+  }
+
   const renderModal = () => {
-    if (modalState.modalId) {
-      return ModalManager.getModal(modalState.modalId)?.render();
+    if (currentModal) {
+      return ModalManager.getModal(currentModal.id).render();
     }
 
     return <></>;
@@ -32,12 +40,10 @@ const ModalView = () => {
       hideModalContentWhileAnimating={true}
       animationIn={currentModal?.effect?.in}
       animationOut={currentModal?.effect?.out}
-      isVisible={isModalVisible()}
+      isVisible={canShowModal()}
       style={styles.container}
     >
-      { currentModal?.showTitle === true
-        && currentModal?.showBackButton === true 
-        && <ModalBackButton currentModal={currentModal} />}
+      {renderBackButton()}
 
       {renderModal()}
 
