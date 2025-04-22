@@ -10,7 +10,14 @@ import EntityManager from '@/manager/EntityManager';
 import ProfileListItem from './ListItem/ProfileListItem';
 import ScreenManager from '@/manager/ScreenManager';
 
-const HostsList = () => {
+type Props = {
+  jamId?: any;
+};
+
+const HostsList = ({ jamId }: Props) => {
+
+  console.log('host list jam id', jamId);
+  
   const [profiles, setProfiles] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
