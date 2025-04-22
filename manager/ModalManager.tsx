@@ -8,6 +8,7 @@ import SearchView from "@/components/view/SearchView";
 import SettingsMenu from "@/components/menu/SettingsMenu";
 import NotificationsMenu from "@/components/menu/NotificationsMenu";
 import HostsList from "@/components/list/HostsList";
+import MoreJamActionsView from "@/components/view/MoreJamActionsView";
 
 class ModalManager {
   toggleModal(modalId: any) {
@@ -65,8 +66,13 @@ class ModalManager {
       },
       {
         id: 'HostsList',
-        title: i18n.t('Collaborators'),
+        title: i18n.t('Jam hosts'),
         render: () => <HostsList />,
+      },
+      {
+        id: 'MoreJamActionsView',
+        title: i18n.t('More actions'),
+        render: () => <MoreJamActionsView />,
       },
     ].map((o: any) => {
       return {
