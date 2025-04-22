@@ -16,7 +16,7 @@ const SettingsMenu = () => {
       label: i18n.t('Your profile'),
       path: '/profile',
       onPress: (row: any) => {
-        ScreenManager.pushScreen(router, row.item.path);
+        router.push('/profile');
       },
     },
     {

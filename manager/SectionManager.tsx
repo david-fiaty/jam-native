@@ -7,8 +7,23 @@ import LoginSection from "@/components/section/LoginSection";
 import WelcomeSection from "@/components/section/WelcomeSection";
 import i18n from "@/translation/i18n";
 import SignupSection from "@/components/section/SignupSection";
+import ProfileSection from "@/components/section/ProfileSection";
 
 class SectionManager {
+  pushSection(router: any, sectionId: string, params?: any) {
+    router.push({
+      pathname: `/${sectionId}`,
+      params: params || {},
+    });
+  }
+
+  replaceSection(router: any, sectionId: string, params?: any) {
+    router.replace({
+      pathname: `/${sectionId}`,
+      params: params || {},
+    });
+  }
+
   setActiveSectionId(sectionId: any) {
     Store.dispatch(setSectionId(sectionId));
   }
@@ -93,6 +108,15 @@ class SectionManager {
         showFooter: true,
         showBackButton: false,
         render: () => <JamsSection />,
+      },
+      {
+        id: 'profile',
+        title: i18n.t('Profile'),
+        showTitle: true,
+        showHeader: true,
+        showFooter: true,
+        showBackButton: false,
+        render: () => <ProfileSection />,
       },
     ];
   }
