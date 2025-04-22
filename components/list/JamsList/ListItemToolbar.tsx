@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { useSelector } from "react-redux";
-import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
 import IconView from "@/components/view/IconView";
@@ -12,10 +11,9 @@ import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
 import ScreenManager from "@/manager/ScreenManager";
 import SpinnerView from "@/components/view/SpinnerView";
-import ModalButton from "@/components/button/ModalButton";
 import ModalManager from "@/manager/ModalManager";
 
-type Props = BaseProps & {
+type Props = {
   row?: any;
   profileData?: any
 };
@@ -152,7 +150,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
 
   const renderJammersButton = () => {
     return (
-      <TouchableOpacity onPress={() => ModalManager.toggleModal('JammersList')}>
+      <TouchableOpacity onPress={() => ModalManager.toggleModal('JammersList', { jamId: row?.item?.id })}>
         <TextView>
           {parseInt(row?.item?.jammers?.length)} {i18n.t("jammers")}
         </TextView>
