@@ -17,7 +17,7 @@ const ListItemHeader = ({ row }: Props) => {
 
   const renderHosts = () => {
     return (
-      <TouchableOpacity onPress={() => ModalManager.toggleModal('HostsList')}>
+      <TouchableOpacity onPress={() => ModalManager.toggleModal('HostsList', { jamId: row?.item?.id })}>
         <TextView>
           @{i18n.t("host")} +{parseInt(row?.item?.collaborators?.length)}
         </TextView>
