@@ -10,9 +10,10 @@ import ScreenManager from "@/manager/ScreenManager";
 import UserManager from "@/manager/UserManager";
 import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
+import ModalManager from "@/manager/ModalManager";
 
 type Props = BaseProps & {
-  row?: any,
+  row?: any;
 };
 
 const ListItemToolbar = ({ row }: Props) => {
@@ -24,6 +25,8 @@ const ListItemToolbar = ({ row }: Props) => {
       setIsLoggedIn(await UserManager.isLoggedIn());
     })();
   });
+
+  console.log(row?.item?.id)
 
   return (
     <BoxView
@@ -38,7 +41,7 @@ const ListItemToolbar = ({ row }: Props) => {
         align="center"
         onPress={() =>
           isLoggedIn
-            ? ScreenManager.toggleModal("JammersList", { entityId: row?.item?.id })
+            ? ModalManager.toggleModal("JammersList", { jamId: row?.item?.id })
             : ScreenManager.pushScreen(router, '/login')
         }
       >
@@ -55,7 +58,7 @@ const ListItemToolbar = ({ row }: Props) => {
           theme="tertiary"
           onPress={() =>
             isLoggedIn
-              ? ScreenManager.toggleModal("SavedJamAction", { entityId: row?.item?.id })
+              ? ModalManager.toggleModal("SavedJamAction", { jamId: row?.item?.id })
               : ScreenManager.pushScreen(router, '/login')
           }
         />
