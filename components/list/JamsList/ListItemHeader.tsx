@@ -31,19 +31,12 @@ const ListItemHeader = ({ row }: Props) => {
 
   const renderActions = () => {
     return (
-      <ModalButton
-        login={true}
-        name="MoreJamActionsView"
-        entityId={row.item.id}
-        title={i18n.t('More actions')}
-        trigger={
-          <IconView
-            name="actions"
-            theme="clear"
-            size={16}
-            padding={0}
-          />
-        }
+      <IconView
+        name="actions"
+        theme="clear"
+        size={16}
+        padding={0}
+        onPress={() => ModalManager.toggleModal('MoreJamActionsView')}
       />
     );
   };
