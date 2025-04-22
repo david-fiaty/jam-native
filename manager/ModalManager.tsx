@@ -38,7 +38,17 @@ class ModalManager {
     return this.getModals().find((o: any) => o.id === modalId);
   }
 
-  getModals() {
+  getModals(withMethods: boolean = true) {
+    let config: any[] = this.getConfig();
+
+    if (!withMethods) {
+      config = config.map(({ render, ...rest }) => rest);
+    }
+
+    return config;
+  }
+
+  getConfig() {
     return [
       {
         id: 'JamForm',
@@ -85,6 +95,7 @@ class ModalManager {
         ...{
           showTitle: true,
           showBackButton: true,
+          params: {},
           effect: {
             in: 'slideInUp', 
             out: 'slideOutDown',
