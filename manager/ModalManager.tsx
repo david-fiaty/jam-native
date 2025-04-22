@@ -7,6 +7,7 @@ import JamsMapView from "@/components/view/JamsMapView";
 import SearchView from "@/components/view/SearchView";
 import SettingsMenu from "@/components/menu/SettingsMenu";
 import NotificationsMenu from "@/components/menu/NotificationsMenu";
+import HostsList from "@/components/list/HostsList";
 
 class ModalManager {
   toggleModal(modalId: any) {
@@ -61,6 +62,11 @@ class ModalManager {
         id: 'NotificationsMenu',
         title: i18n.t('Notifications'),
         render: () => <NotificationsMenu />,
+      },
+      {
+        id: 'HostsList',
+        title: i18n.t('Collaborators'),
+        render: () => <HostsList />,
       },
     ].map((o: any) => {
       return {
