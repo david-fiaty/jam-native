@@ -8,7 +8,6 @@ import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import EntityManager from '@/manager/EntityManager';
 import ProfileListItem from './ListItem/ProfileListItem';
-import ScreenManager from '@/manager/ScreenManager';
 
 type Props = {
   jamId?: any;
