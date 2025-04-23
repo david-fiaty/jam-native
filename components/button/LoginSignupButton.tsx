@@ -7,21 +7,21 @@ import SkipButton from '../button/SkipButton';
 import BoxView from '../view/BoxView';
 import i18n from '@/translation/i18n';
 import TextView from '../view/TextView';
-import SectionManager from '@/manager/SectionManager';
+import AppManager from '@/manager/AppManager';
 
 const LoginSignupButton = () => {
   const router = useRouter();
 
   return (
     <BoxView direction="column" align="center" justify="space-between">
-      <TouchableOpacity onPress={() => SectionManager.pushSection('login', router)}>
+      <TouchableOpacity onPress={() => AppManager.pushSection('login', router)}>
         <View style={styles.containerStyle}>
           <TextView style={[styles.buttonStyle, styles.titleStyle]}>
             {i18n.t('Login') + ' / ' + i18n.t('Signup')}
           </TextView>
         </View>
       </TouchableOpacity>
-      <SkipButton onPress={ async () => SectionManager.pushSection(Config.mainRoute, router)} />
+      <SkipButton onPress={ async () => AppManager.pushSection(Config.mainRoute, router)} />
     </BoxView>
   );
 };

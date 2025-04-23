@@ -2,11 +2,11 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
+import { Colors } from '@/constants/Colors';
 import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
-import { Colors } from '@/constants/Colors';
-import SectionManager from '@/manager/SectionManager';
+import AppManager from '@/manager/AppManager';
 
 const BottomLinks = () => {
   const router = useRouter();
@@ -18,7 +18,7 @@ const BottomLinks = () => {
   if (route.name != 'about') {
     aboutLink = (
       <TouchableOpacity 
-        onPress={() => SectionManager.pushSection('about', router)}
+        onPress={() => AppManager.pushSection('about', router)}
         //onPress={() => route.name == 'legal' ? router.replace('/about') : router.push('/about')}
       >
         {aboutLink}
@@ -29,7 +29,7 @@ const BottomLinks = () => {
   if (route.name != 'legal') {
     legalLink = (
       <TouchableOpacity 
-        onPress={() => SectionManager.pushSection('legal', router)}
+        onPress={() => AppManager.pushSection('legal', router)}
         //onPress={() => route.name == 'about' ? router.replace('/legal') : router.push('/legal')}
       >
         {legalLink}

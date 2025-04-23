@@ -10,20 +10,6 @@ import SignupSection from "@/components/section/SignupSection";
 import ProfileSection from "@/components/section/ProfileSection";
 
 class SectionManager {
-  pushSection(sectionId: string, router: any, params?: any) {
-    router.push({
-      pathname: `/${sectionId}`,
-      params: params || {},
-    });
-  }
-
-  replaceSection(sectionId: string, router: any, params?: any) {
-    router.replace({
-      pathname: `/${sectionId}`,
-      params: params || {},
-    });
-  }
-
   setActiveSectionId(sectionId: any) {
     Store.dispatch(setSectionId(sectionId));
   }
