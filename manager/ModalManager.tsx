@@ -12,16 +12,6 @@ import JammersList from "@/components/list/JammersList";
 import SectorsList from "@/components/list/SectorsList";
 
 class ModalManager {
-  getActiveModal() {
-    let activeModals: any[] = [...Store.getState().modal.active];
-
-    if (activeModals.length > 0) {
-      return activeModals.pop();
-    }
-
-    return null;
-  }
-
   toggleModal(modalId: string, params?: any) {
     params = params || {};
     let activeModals: any[] = [...Store.getState().modal.active];
