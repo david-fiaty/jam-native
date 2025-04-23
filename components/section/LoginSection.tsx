@@ -46,7 +46,7 @@ const LoginSection = () => {
       });
     }
     else {
-      AppManager.replaceSection(Config.mainRoute, router);
+      AppManager.replace(Config.mainRoute, router);
     }
   }  
 
@@ -83,11 +83,11 @@ const LoginSection = () => {
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
         <BoxView direction="row" align="center" justify="flex-start">
           <TextView>{i18n.t('Don\'t have an account?')}</TextView>
-          <LinkView onPress={async () => AppManager.replaceSection('signup', router)}>
+          <LinkView onPress={async () => AppManager.replace('signup', router)}>
             {i18n.t('Sign up')}
           </LinkView>
         </BoxView>
-        <SkipButton onPress={async () => AppManager.replaceSection(Config.mainRoute, router)} />
+        <SkipButton onPress={async () => AppManager.replace(Config.mainRoute, router)} />
       </BoxView>
 
       <DividerView />
