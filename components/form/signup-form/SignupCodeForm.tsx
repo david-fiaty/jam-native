@@ -80,10 +80,6 @@ const SignupCodeForm = () => {
 };
 
 const styles = StyleSheet.create({
-  slogan: {
-    textTransform: 'uppercase',
-    fontSize: Layout.fontSize.base,
-  },
   label: {
     alignSelf: 'flex-start',
   },
