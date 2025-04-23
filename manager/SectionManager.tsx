@@ -8,6 +8,8 @@ import WelcomeSection from "@/components/section/WelcomeSection";
 import i18n from "@/translation/i18n";
 import SignupSection from "@/components/section/SignupSection";
 import ProfileSection from "@/components/section/ProfileSection";
+import AccountForm from "@/components/form/AccountForm";
+import PasswordForm from "@/components/form/PasswordForm";
 
 class SectionManager {
   setActiveSectionId(sectionId: any) {
@@ -90,6 +92,16 @@ class SectionManager {
         id: 'profile',
         title: i18n.t('Profile'),
         render: () => <ProfileSection />,
+      },
+      {
+        id: 'account',
+        title: i18n.t('Account'),
+        render: () => <AccountForm />,
+      },
+      {
+        id: 'password',
+        title: i18n.t('Password'),
+        render: () => <PasswordForm />,
       },
     ].map((o: any) => {
       return {
