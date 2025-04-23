@@ -40,7 +40,8 @@ const SettingsMenu = () => {
       label: i18n.t('Logout'),
       path: null,
       onPress: (row: any) => {
-        UserManager.logout(router);
+        UserManager.logout();
+        AppManager.replace('/', router);
       },
     },
   ];
