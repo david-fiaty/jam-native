@@ -33,6 +33,7 @@ class ModalManager {
       activeModals.push({
         ...this.getModal(modalId, false), 
         ...{ params: params },
+        ...{ visible: true },
       });
     }
 
