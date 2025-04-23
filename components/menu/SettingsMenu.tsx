@@ -6,7 +6,7 @@ import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 import UserManager from '@/manager/UserManager';
 import BoxView from '../view/BoxView';
-import ScreenManager from '@/manager/ScreenManager';
+import AppManager from '@/manager/AppManager';
 
 const SettingsMenu = () => {
   const router = useRouter();
@@ -14,30 +14,26 @@ const SettingsMenu = () => {
   const data: any[] = [
     {
       label: i18n.t('Your profile'),
-      path: '/profile',
       onPress: (row: any) => {
-        router.push('/profile');
+        AppManager.push('profile', router);
       },
     },
     {
       label: i18n.t('Account information'),
-      path: '/account',
       onPress: (row: any) => {
-        ScreenManager.pushScreen(router, row.item.path);
+        AppManager.push('account', router);
       },
     },
     {
       label: i18n.t('Change password'),
-      path: '/password',
       onPress: (row: any) => {
-        ScreenManager.pushScreen(router, row.item.path);
+        AppManager.push('password', router);
       },
     },
     {
       label: i18n.t('Language'),
-      path: '/language',
       onPress: (row: any) => {
-        ScreenManager.pushScreen(router, row.item.path);
+        AppManager.push('language', router);
       },
     },
     {
@@ -45,7 +41,7 @@ const SettingsMenu = () => {
       path: null,
       onPress: (row: any) => {
         UserManager.logout();
-        ScreenManager.replaceScreen(router, '/');
+        AppManager.replace('/', router);
       },
     },
   ];

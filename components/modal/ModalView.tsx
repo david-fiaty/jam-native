@@ -10,7 +10,7 @@ const ModalView = () => {
   const modalState: any = useSelector((state: any) => state.modal);
 
   const canShowModal = () => {
-    return currentModal !== null;
+    return currentModal !== null && currentModal?.visible === true;
   };
 
   const renderBackButton = () => {

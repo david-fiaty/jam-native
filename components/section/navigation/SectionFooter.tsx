@@ -22,6 +22,7 @@ const SectionFooter = () => {
         size={16}
         padding={4}
         theme="secondary"
+        // Todo - Add profile ID
         onPress={() => ModalManager.toggleModal('JamForm', { profileId: 'test profile ID' } )}
       />
 
