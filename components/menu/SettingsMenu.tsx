@@ -17,7 +17,7 @@ const SettingsMenu = () => {
       label: i18n.t('Your profile'),
       path: '/profile',
       onPress: (row: any) => {
-        AppManager.push('/profile', router);
+        AppManager.push('profile', router);
       },
     },
     {
