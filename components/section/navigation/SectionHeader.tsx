@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
+import { Config } from "@/constants/Config";
 import BoxView from '@/components/view/BoxView';
 import LogoView from '@/components/view/LogoView';
 import IconView from '@/components/view/IconView';
 import ModalManager from '@/manager/ModalManager';
 import UserManager from "@/manager/UserManager";
-import { Config } from "@/constants/Config";
 
 type Props = {
   style?: any;
