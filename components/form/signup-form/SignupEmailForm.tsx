@@ -13,14 +13,13 @@ import UserManager from "@/manager/UserManager";
 import BoxView from "@/components/view/BoxView";
 import LinkView from "@/components/view/LinkView";
 import SkipButton from "@/components/button/SkipButton";
-import AppManager from "@/manager/AppManager";
 
 const SignupEmailForm = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.signup);
-
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  
   const updateData = (key: any, value: any) => {
     dispatch(setValue({
       key: key,
@@ -79,11 +78,11 @@ const SignupEmailForm = () => {
           >
             <BoxView direction="row" align="center" justify="flex-start">
               <TextView>{i18n.t("You have an account?")}</TextView>
-              <LinkView onPress={async () => AppManager.replace("login", router)}>
+              <LinkView onPress={async () => router.replace("/login")}>
                 {i18n.t("Sign in")}
               </LinkView>
             </BoxView>
-            <SkipButton onPress={async () => AppManager.replace(Config.mainRoute, router)} />
+            <SkipButton onPress={async () => router.replace(Config.mainRoute)} />
           </BoxView>
         </>
       )}

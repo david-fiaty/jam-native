@@ -6,7 +6,6 @@ import { Colors } from '@/constants/Colors';
 import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
-import AppManager from '@/manager/AppManager';
 
 const BottomLinks = () => {
   const router = useRouter();
@@ -18,7 +17,7 @@ const BottomLinks = () => {
   if (route.name != 'about') {
     aboutLink = (
       <TouchableOpacity 
-        onPress={() => AppManager.push('about', router)}
+        onPress={() => router.push('/about')}
         //onPress={() => route.name == 'legal' ? router.replace('/about') : router.push('/about')}
       >
         {aboutLink}
@@ -29,7 +28,7 @@ const BottomLinks = () => {
   if (route.name != 'legal') {
     legalLink = (
       <TouchableOpacity 
-        onPress={() => AppManager.push('legal', router)}
+        onPress={() => router.push('/legal')}
         //onPress={() => route.name == 'about' ? router.replace('/legal') : router.push('/legal')}
       >
         {legalLink}

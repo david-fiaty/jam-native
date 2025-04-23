@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Input } from "@rneui/themed";
 import { BaseProps } from "@/constants/Types";
@@ -16,6 +17,7 @@ type Props = BaseProps & {
   readOnly?: boolean,
   onChangeText?: (value: string) => void;
   onSubmitEditing?: () => void;
+  onBlur?: () => void;
 };
 
 const InputTextField = ({
@@ -30,7 +32,9 @@ const InputTextField = ({
   readOnly,
   onChangeText,
   onSubmitEditing,
+  onBlur,
 }: Props) => {
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const disabledStyle: any = {
     opacity: disabled ? 0.4: 1,
@@ -55,6 +59,7 @@ const InputTextField = ({
         readOnly={readOnly}
         onChangeText={onChangeText}
         onSubmitEditing={onSubmitEditing}
+        onBlur={onBlur}
       />
     </BoxView>
   );

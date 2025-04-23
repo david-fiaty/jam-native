@@ -18,7 +18,6 @@ import LinkView from '../view/LinkView';
 import ButtonView from '../view/ButtonView';
 import ScreenManager from '@/manager/ScreenManager';
 import DividerView from '../view/DividerView';
-import AppManager from '@/manager/AppManager';
 
 const LoginSection = () => {
   const router = useRouter();
@@ -46,7 +45,7 @@ const LoginSection = () => {
       });
     }
     else {
-      AppManager.replace(Config.mainRoute, router);
+      router.replace(Config.mainRoute);
     }
   }  
 
@@ -83,11 +82,11 @@ const LoginSection = () => {
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
         <BoxView direction="row" align="center" justify="flex-start">
           <TextView>{i18n.t('Don\'t have an account?')}</TextView>
-          <LinkView onPress={async () => AppManager.replace('signup', router)}>
+          <LinkView onPress={async () => router.replace('/signup')}>
             {i18n.t('Sign up')}
           </LinkView>
         </BoxView>
-        <SkipButton onPress={async () => AppManager.replace(Config.mainRoute, router)} />
+        <SkipButton onPress={async () => router.replace(Config.mainRoute)} />
       </BoxView>
 
       <DividerView />
