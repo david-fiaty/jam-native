@@ -7,6 +7,7 @@ import SectionFooter from '../section/navigation/SectionFooter';
 import ModalView from "../modal/ModalView";
 import SectionManager from "@/manager/SectionManager";
 import SectionBackButton from "./navigation/SectionBackButton";
+import { Layout } from "@/constants/Layout";
 
 type Props = {
   sectionId?: any;
@@ -20,7 +21,7 @@ const SectionView = ({ sectionId }: Props) => {
 
   return (
     <>
-      {currentSection.showHeader === true && <SectionHeader />}
+      {currentSection.showHeader === true && <SectionHeader style={styles.header} />}
 
       {currentSection.showTitle === true 
         && currentSection.showBackButton === true 
@@ -37,7 +38,7 @@ const SectionView = ({ sectionId }: Props) => {
         <ModalView />
       </BoxView>
       
-      {currentSection.showFooter === true && <SectionFooter />}
+      {currentSection.showFooter === true && <SectionFooter style={styles.footer} />}
     </>
   );
 };
@@ -46,7 +47,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.white,
+    paddingHorizontal: Layout.space.base*1.5,
   },
+  header: {
+    paddingHorizontal: Layout.space.base*1.5,
+  },
+  footer: {
+
+  }
 });
 
 export default SectionView;
