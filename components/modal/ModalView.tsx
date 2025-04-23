@@ -39,7 +39,7 @@ const ModalView = ({ style }: Props) => {
     setCurrentModal(ModalManager.getActiveModal());
   });
 
-  console.log(currentSection);
+  console.log(currentSection?.id);
   
   return (
     <Modal
