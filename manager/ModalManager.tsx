@@ -1,6 +1,5 @@
 import { setActiveModals } from "@/redux/slices/ModalSlice";
 import Store from "@/redux/Store";
-import TestModal from "@/components/modal/TestModal";
 import JamForm from "@/components/form/JamForm";
 import i18n from "@/translation/i18n";
 import JamsMapView from "@/components/view/JamsMapView";
