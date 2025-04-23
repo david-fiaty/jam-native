@@ -25,6 +25,7 @@ class ModalManager {
   toggleModal(modalId: string, params?: any) {
     params = params || {};
     let activeModals: any[] = [...Store.getState().modal.active];
+    let sectionId: string = Store.getState().section.sectionId;
 
     if (activeModals.length > 0 && activeModals[activeModals.length - 1].id === modalId) {
       activeModals.pop();
@@ -33,7 +34,7 @@ class ModalManager {
       activeModals.push({
         ...this.getModal(modalId, false), 
         ...{ params: params },
-        ...{ visible: true },
+        ...{ sectionId: sectionId },
       });
     }
 
@@ -104,7 +105,6 @@ class ModalManager {
     ].map((o: any) => {
       return {
         ...{
-          visible: false,
           showTitle: true,
           showBackButton: true,
           params: {},
