@@ -64,15 +64,13 @@ const SectionHeader = ({ style } : Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'red',
     gap: 0,
+    marginBottom: Layout.space.base*1.5,
   },
   headerLeft: {
-    backgroundColor: 'yellow',
     width: '50%',
   },
   headerRight: {
-    backgroundColor: 'yellow',
     width: '50%',
   },
 });
