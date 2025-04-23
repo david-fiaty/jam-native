@@ -65,6 +65,7 @@ const SectionHeader = ({ style } : Props) => {
 const styles = StyleSheet.create({
   container: {
     gap: 0,
+    marginTop: Layout.space.base*1.5,
     marginBottom: Layout.space.base*1.5,
   },
   headerLeft: {
