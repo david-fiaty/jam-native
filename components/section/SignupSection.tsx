@@ -31,10 +31,11 @@ const SignupSection = () => {
 
   return (
     <BoxView 
+      direction="column" 
       align="center" 
       justify="center" 
-      scroll={true} 
-      style={[Layout.formContainer, styles.container]}
+      style={Layout.screenContent}
+      scroll={formData?.success === true}
     >    
       <LogoView size={80} />    
       <TextView style={styles.slogan}>{i18n.t('Create your JAM account')}</TextView> 
