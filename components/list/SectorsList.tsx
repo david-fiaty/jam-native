@@ -115,11 +115,6 @@ const SectorsList = () => {
       justify="flex-start"
       style={Layout.screenContent}
     >
-      <BackButton
-        title={i18n.t('Add industries')}
-        onPress={() => ScreenManager.toggleModal('SectorsList')}
-      />
-
       <View style={styles.container}>
         {sectorsData?.length > 0 && (
           <ListView

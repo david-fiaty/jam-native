@@ -10,6 +10,7 @@ import NotificationsMenu from "@/components/menu/NotificationsMenu";
 import HostsList from "@/components/list/HostsList";
 import MoreJamActionsView from "@/components/view/MoreJamActionsView";
 import JammersList from "@/components/list/JammersList";
+import SectorsList from "@/components/list/SectorsList";
 
 class ModalManager {
   getActiveModal() {
@@ -96,6 +97,11 @@ class ModalManager {
         title: i18n.t('Jammers'),
         render: (params: any) => <JammersList {...params} />,
       },
+      {
+        id: 'SectorsList',
+        title: i18n.t('SectorsList'),
+        render: (params: any) => <SectorsList {...params} />,
+      },
     ].map((o: any) => {
       return {
         ...{
@@ -103,6 +109,7 @@ class ModalManager {
           showTitle: true,
           showBackButton: true,
           params: {},
+          currentRoute: null,
           effect: {
             in: 'slideInUp', 
             out: 'slideOutDown',
