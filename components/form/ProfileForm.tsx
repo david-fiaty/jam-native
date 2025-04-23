@@ -11,6 +11,7 @@ import ButtonView from "../view/ButtonView";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
+import { Layout } from "@/constants/Layout";
 
 const resource: string = 'profile';
 
@@ -60,7 +61,7 @@ const ProfileForm = () => {
   };
 
   return (
-    <>
+    <View style={Layout.formContainer}>
       <ProfileImageField
         value={formData?.upload_profile_picture?.url}
         onChangeValue={(mediaList: any) => updateField('upload_profile_picture', { url: mediaList[0]?.uri })}
@@ -86,7 +87,7 @@ const ProfileForm = () => {
         isProcessing={isProcessing}
         onPress={submitForm}
       />
-    </>
+    </View>
   );
 };
 

@@ -100,7 +100,6 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
     <>
       {label}
       <TouchableOpacity
-        style={styles.container}
         onPress={onPressEvent}
       >
         <InputTextField
