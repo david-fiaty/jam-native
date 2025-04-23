@@ -35,7 +35,7 @@ const SectionView = ({ sectionId }: Props) => {
       >
         {currentSection?.render()}
   
-        <ModalView />
+        <ModalView style={styles.modal} />
       </BoxView>
       
       {currentSection.showFooter === true && <SectionFooter style={styles.footer} />}
@@ -49,12 +49,17 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     paddingHorizontal: Layout.space.base*1.5,
   },
+  modal: {
+    paddingHorizontal: Layout.space.base*1.5,
+    backgroundColor: 'white',
+    zIndex: 10,
+  },
   header: {
     paddingHorizontal: Layout.space.base*1.5,
   },
   footer: {
-
-  }
+    zIndex: 20,
+  },
 });
 
 export default SectionView;
