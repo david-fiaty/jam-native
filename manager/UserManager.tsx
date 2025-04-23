@@ -9,6 +9,7 @@ import DataManager from './DataManager';
 import * as Location from 'expo-location';
 import * as Device from "expo-device";
 import i18n from '@/translation/i18n';
+import AppManager from './AppManager';
 
 class UserManager {
   async sendSignupCode(data: any) {
@@ -45,8 +46,9 @@ class UserManager {
     return await SessionManager.isTokenValid();
   }
 
-  logout() {
+  logout(router: any) {
     SessionManager.setTokenData({});
+    AppManager.replace('/', router);
     // Todo - Also reset active screen to avoid redirect on relogin
   }
 
