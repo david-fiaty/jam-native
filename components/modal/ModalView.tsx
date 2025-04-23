@@ -12,10 +12,10 @@ type Props = {
 const ModalView = ({ style }: Props) => {
   const [currentModal, setCurrentModal] = useState<any>(null);
   const modalState: any = useSelector((state: any) => state.modal);
-  const sectionState: any = useSelector((state: any) => state.section);
 
   const canShowModal = () => {
-    return currentModal !== null && currentModal?.sectionId === sectionState.sectionId;
+    return currentModal !== null && currentModal?.visible === true;
+    //return currentModal !== null && currentModal?.sectionId === sectionState.sectionId;
   };
 
   const renderBackButton = () => {
@@ -30,7 +30,7 @@ const ModalView = ({ style }: Props) => {
     let activeModals: any[] = [...modalState.active];
 
     if (activeModals.length > 0) {
-      return activeModals.pop();
+      return activeModals[activeModals.length - 1];
     }
 
     return null;
