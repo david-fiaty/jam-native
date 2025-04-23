@@ -1,3 +1,4 @@
+import Store from "@/redux/Store";
 
 class AppManager {
   pushSection(sectionId: string, router: any, params?: any) {
