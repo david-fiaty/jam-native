@@ -3,7 +3,6 @@ import { StyleSheet, View } from "react-native";
 import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
-import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import ProfileManager from "@/manager/ProfileManager";
 import ProfileTypeField from "../field/ProfileTypeField";
@@ -61,7 +60,7 @@ const ProfileForm = () => {
   };
 
   return (
-    <View style={[Layout.formContainer, styles.container]}>
+    <>
       <ProfileImageField
         value={formData?.upload_profile_picture?.url}
         onChangeValue={(mediaList: any) => updateField('upload_profile_picture', { url: mediaList[0]?.uri })}
@@ -87,15 +86,8 @@ const ProfileForm = () => {
         isProcessing={isProcessing}
         onPress={submitForm}
       />
-
-    </View>
+    </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    //height: '100%', // Todo - Improve container scroll display
-  },
-});
 
 export default ProfileForm;
