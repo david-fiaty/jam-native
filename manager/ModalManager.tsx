@@ -10,23 +10,12 @@ import HostsList from "@/components/list/HostsList";
 import MoreJamActionsView from "@/components/view/MoreJamActionsView";
 import JammersList from "@/components/list/JammersList";
 import SectorsList from "@/components/list/SectorsList";
-import SectionManager from "./SectionManager";
 
 class ModalManager {
-  getActiveModal() {
-    let activeModals: any[] = [...Store.getState().modal.active];
-
-    if (activeModals.length > 0) {
-      return activeModals.pop();
-    }
-
-    return null;
-  }
-
   toggleModal(modalId: string, params?: any) {
     params = params || {};
     let activeModals: any[] = [...Store.getState().modal.active];
-    let sectionId: string = SectionManager.getActiveSection()?.id;
+    //let sectionId: string = Store.getState().section.sectionId;
 
     if (activeModals.length > 0 && activeModals[activeModals.length - 1].id === modalId) {
       activeModals.pop();
@@ -35,7 +24,8 @@ class ModalManager {
       activeModals.push({
         ...this.getModal(modalId, false), 
         ...{ params: params },
-        ...{ sectionId: sectionId },
+        //...{ sectionId: sectionId },
+        ...{ visible: true },
       });
     }
 
@@ -110,6 +100,7 @@ class ModalManager {
           showBackButton: true,
           params: {},
           sectionId: null,
+          visible: false,
           effect: {
             in: 'slideInUp', 
             out: 'slideOutDown',
