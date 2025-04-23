@@ -9,6 +9,7 @@ import ProfileForm from '../form/ProfileForm';
 import LogoView from '../view/LogoView';
 import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
+import BoxView from '../view/BoxView';
 
 const SignupSection = () => {
   const dispatch = useDispatch();
@@ -29,17 +30,26 @@ const SignupSection = () => {
   }, [isLoaded]);
 
   return (
-    <>    
+    <BoxView 
+      align="center" 
+      justify="center" 
+      scroll={true} 
+      style={[Layout.formContainer, styles.container]}
+    >    
       <LogoView size={80} />    
       <TextView style={styles.slogan}>{i18n.t('Create your JAM account')}</TextView> 
+      
       {formData?.success !== true && <SignupEmailForm />}
       {formData?.success !== true && formData?.session?.length > 0 && <SignupCodeForm />}
       {formData?.success === true && <ProfileForm />}
-    </>
+    </BoxView>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    
+  },
   slogan: {
     textTransform: 'uppercase',
     fontSize: Layout.fontSize.base,
