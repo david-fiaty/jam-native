@@ -47,10 +47,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.white,
-    //paddingHorizontal: Layout.space.base*2,
+    paddingHorizontal: Layout.space.base*1.5,
   },
   header: {
-    //paddingHorizontal: Layout.space.base*2,
+    paddingHorizontal: Layout.space.base*1.5,
   },
   footer: {
 
