@@ -34,11 +34,16 @@ class UserManager {
 
   async register(data: any) {
     let response = await DataManager.post('register', data);
-    if (response?.tokens?.access_token?.length) {
+    let success = response?.tokens?.access_token?.length > 0;
+
+    if (success) {
       await SessionManager.setTokenData(response.tokens);
     }
-    
-    return response;
+
+    return {
+      success: success,
+      data: response,
+    }
   }
 
   async isLoggedIn() {

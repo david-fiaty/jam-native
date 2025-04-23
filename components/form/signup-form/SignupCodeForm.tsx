@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { StyleSheet } from 'react-native';
 import { useRouter } from "expo-router";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,7 +13,6 @@ import UserManager from "@/manager/UserManager";
 import BoxView from "@/components/view/BoxView";
 import LinkView from "@/components/view/LinkView";
 import SkipButton from "@/components/button/SkipButton";
-import AppManager from "@/manager/AppManager";
 
 const SignupCodeForm = () => {
   const dispatch = useDispatch();
@@ -70,11 +69,11 @@ const SignupCodeForm = () => {
         style={{ width: "100%" }}
       >
         <BoxView direction="row" align="center" justify="flex-start">
-          <LinkView onPress={() => AppManager.replace("signup", router)}>
+          <LinkView onPress={() => router.replace("/signup")}>
             {i18n.t("Didn't receive code?")}
           </LinkView>
         </BoxView>
-        <SkipButton onPress={async () => AppManager.replace(Config.mainRoute, router)} />
+        <SkipButton onPress={async () => router.replace(Config.mainRoute)} />
       </BoxView>
     </>
   );
