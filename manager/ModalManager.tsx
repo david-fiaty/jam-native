@@ -2,6 +2,7 @@ import { setActiveModals } from "@/redux/slices/ModalSlice";
 import Store from "@/redux/Store";
 import JamForm from "@/components/form/JamForm";
 import i18n from "@/translation/i18n";
+import UserManager from "./UserManager";
 import JamsMapView from "@/components/view/JamsMapView";
 import SearchView from "@/components/view/SearchView";
 import SettingsMenu from "@/components/menu/SettingsMenu";
