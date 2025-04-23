@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
+import { Config } from "@/constants/Config";
 import BoxView from '@/components/view/BoxView';
 import LogoView from '@/components/view/LogoView';
 import IconView from '@/components/view/IconView';
 import ModalManager from '@/manager/ModalManager';
 import UserManager from "@/manager/UserManager";
-import { Config } from "@/constants/Config";
 
-const SectionHeader = () => {
+type Props = {
+  style?: any;
+};
+
+const SectionHeader = ({ style } : Props) => {
   const router = useRouter();
   const [notificationsCount, setNotificationsCount] = useState<number>(0);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -22,7 +26,7 @@ const SectionHeader = () => {
   }, [isLoaded]);
 
   return (
-    <BoxView direction="row" style={styles.container}>
+    <BoxView direction="row" style={[styles.container, style]}>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.headerLeft}>
         <TouchableOpacity onPress={() => router.replace(Config.mainRoute)}>
           <LogoView size={Layout.logo.size} />
