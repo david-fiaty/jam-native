@@ -61,7 +61,6 @@ const ModalView = ({ style }: Props) => {
       {renderBackButton()}
 
       {renderModal()}
-
     </Modal>
   );
 };
