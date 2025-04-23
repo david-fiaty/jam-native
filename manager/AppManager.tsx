@@ -7,8 +7,7 @@ class AppManager {
     });
   }
 
-  replaceSection(sectionId: string, router: any, 
-    params?: any) {
+  replaceSection(sectionId: string, router: any, params?: any) {
     router.replace({
       pathname: `/${sectionId}`,
       params: params || {},
