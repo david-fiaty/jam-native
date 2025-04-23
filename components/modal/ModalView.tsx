@@ -26,6 +26,16 @@ const ModalView = ({ style }: Props) => {
     return <></>;
   }
 
+  const getActiveModal = () => {
+    let activeModals: any[] = [...modalState.active];
+
+    if (activeModals.length > 0) {
+      return activeModals.pop();
+    }
+
+    return null;
+  }
+
   const renderModal = () => {
     if (currentModal) {
       return ModalManager.getModal(currentModal.id).render(currentModal.params);
@@ -35,7 +45,7 @@ const ModalView = ({ style }: Props) => {
   }
 
   useEffect(() => {
-    setCurrentModal(ModalManager.getActiveModal());
+    setCurrentModal(getActiveModal());
   });
   
   return (
