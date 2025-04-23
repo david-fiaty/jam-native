@@ -109,7 +109,7 @@ class ModalManager {
           showTitle: true,
           showBackButton: true,
           params: {},
-          currentRoute: null,
+          section: null,
           effect: {
             in: 'slideInUp', 
             out: 'slideOutDown',
