@@ -4,9 +4,13 @@ import IconView from '@/components/view/IconView';
 import BoxView from '@/components/view/BoxView';
 import ModalManager from '@/manager/ModalManager';
 
-const SectionFooter = () => {
+type Props = {
+  style?: any;
+};
+
+const SectionFooter = ({ style }: Props) => {
   return (
-    <BoxView direction="row" align="center" justify="space-around" style={styles.container}>
+    <BoxView direction="row" align="center" justify="space-around" style={[styles.container, style]}>
       <IconView
         name="location"
         radius="round"

@@ -14,8 +14,6 @@ type Props = BaseProps & {
   idArray?: any;
 };
 
-//const modalSize: any = ScreenManager.getModalSize();
-
 const JamsList = ({ idArray }: Props) => {
   const [sectors, setSectors] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -64,7 +62,7 @@ const JamsList = ({ idArray }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: Layout.space.base*1.5,
+    //paddingHorizontal: Layout.space.base*1.5,
     width: '100%',
     height: '100%',  
     flexGrow: 1,

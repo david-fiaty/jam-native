@@ -104,8 +104,7 @@ export const Layout = {
     alignItems: 'center',
   },
   screenContent: {
-    paddingHorizontal: space.base*1.5,
-    paddingVertical: 0,
+    padding: 0,
     width: '100%',
     height: '100%',
     flexGrow: 1,
