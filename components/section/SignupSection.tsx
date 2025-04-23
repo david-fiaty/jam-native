@@ -32,6 +32,7 @@ const SignupSection = () => {
     <>    
       <LogoView size={80} />    
       <TextView style={styles.slogan}>{i18n.t('Create your JAM account')}</TextView> 
+      
       {formData?.success !== true && <SignupEmailForm />}
       {formData?.success !== true && formData?.session?.length > 0 && <SignupCodeForm />}
       {formData?.success === true && <ProfileForm />}
