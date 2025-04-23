@@ -14,6 +14,7 @@ import LocationPickerField from '@/components/field/LocationPickerField';
 import PersonalProfileForm from '@/components/form/profile-form/PersonalProfileForm';
 import OrganizationProfileForm from '@/components/form/profile-form/OrganizationProfileForm';
 import VenueProfileForm from '@/components/form/profile-form/VenueProfileForm';
+import ModalManager from './ModalManager';
 
 class ProfileManager {
   getStyles() {
@@ -220,7 +221,7 @@ class ProfileManager {
               field={item.key}
               value={data[item.key]}
               placeholder={i18n.t('Select your sectors')}
-              onPressEvent={() => ScreenManager.toggleModal('SectorsList', {
+              onPressEvent={() => ModalManager.toggleModal('SectorsList', {
                 resource: 'profile',
                 field: item.key,
                 header: (mode == 'profile'),
