@@ -7,6 +7,7 @@ import i18n from '@/translation/i18n';
 import UserManager from '@/manager/UserManager';
 import BoxView from '../view/BoxView';
 import ScreenManager from '@/manager/ScreenManager';
+import AppManager from '@/manager/AppManager';
 
 const SettingsMenu = () => {
   const router = useRouter();
@@ -16,7 +17,7 @@ const SettingsMenu = () => {
       label: i18n.t('Your profile'),
       path: '/profile',
       onPress: (row: any) => {
-        router.push('/profile');
+        AppManager.push('/profile', router);
       },
     },
     {
