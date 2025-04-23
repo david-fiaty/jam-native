@@ -1,5 +1,3 @@
-import { setSectionId } from "@/redux/slices/SectionSlice";
-import Store from "@/redux/Store";
 import AboutSection from "@/components/section/AboutSection";
 import JamsSection from "@/components/section/JamsSection";
 import LegalSection from "@/components/section/LegalSection";
@@ -12,23 +10,8 @@ import AccountForm from "@/components/form/AccountForm";
 import PasswordForm from "@/components/form/PasswordForm";
 
 class SectionManager {
-  setActiveSectionId(sectionId: any) {
-    Store.dispatch(setSectionId(sectionId));
-  }
-
-  getActiveSection() {
-    let sectionId: any = this.getActiveSectionId();
-    let section: any = this.getSection(sectionId);
-
-    return section;
-  }
-
-  getActiveSectionId() {
-    return Store.getState().section.sectionId;
-  }
-
-  getSection(modalId: any, renderer: boolean = true) {
-    return this.getSections(renderer).find((o: any) => o.id === modalId);
+  getSection(sectionId: any, renderer: boolean = true) {
+    return this.getSections(renderer).find((o: any) => o.id === sectionId);
   }
 
   getSections(renderer: boolean = true) {
