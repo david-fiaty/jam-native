@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from "react";
+import { StyleSheet } from 'react-native';
 import { Colors } from '@/constants/Colors';
+import { Layout } from "@/constants/Layout";
 import BoxView from '../view/BoxView';
 import SectionHeader from '../section/navigation/SectionHeader';
 import SectionFooter from '../section/navigation/SectionFooter';
 import ModalView from "../modal/ModalView";
-import SectionManager from "@/manager/SectionManager";
 import SectionBackButton from "./navigation/SectionBackButton";
-import { Layout } from "@/constants/Layout";
+import SectionManager from "@/manager/SectionManager";
 
 type Props = {
   sectionId?: any;
@@ -15,16 +15,18 @@ type Props = {
 
 const SectionView = ({ sectionId }: Props) => { 
   sectionId = sectionId || 'welcome';
-  SectionManager.setActiveSectionId(sectionId);
+  const [currentSection, setCurrentSection] = useState<any>(null);
 
-  const currentSection: any = SectionManager.getSection(sectionId);
+  useEffect(() => {
+    setCurrentSection(SectionManager.getSection(sectionId));
+  }, [sectionId]);
 
   return (
     <>
-      {currentSection.showHeader === true && <SectionHeader style={styles.header} />}
+      {currentSection?.showHeader === true && <SectionHeader style={styles.header} />}
 
-      {currentSection.showTitle === true 
-        && currentSection.showBackButton === true 
+      {currentSection?.showTitle === true 
+        && currentSection?.showBackButton === true 
         && <SectionBackButton currentSection={currentSection} />}
 
       <BoxView
@@ -38,7 +40,7 @@ const SectionView = ({ sectionId }: Props) => {
         <ModalView style={styles.modal} />
       </BoxView>
       
-      {currentSection.showFooter === true && <SectionFooter style={styles.footer} />}
+      {currentSection?.showFooter === true && <SectionFooter style={styles.footer} />}
     </>
   );
 };

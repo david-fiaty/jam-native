@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import Modal from "react-native-modal";
 import ModalManager from '@/manager/ModalManager';
 import ModalBackButton from './navigation/ModalBackButton';
-import SectionManager from '@/manager/SectionManager';
 
 type Props = {
   style?: any;
@@ -15,7 +14,8 @@ const ModalView = ({ style }: Props) => {
   const modalState: any = useSelector((state: any) => state.modal);
 
   const canShowModal = () => {
-    return currentModal !== null && currentModal?.sectionId === SectionManager.getActiveSection()?.id;
+    return currentModal !== null && currentModal?.visible === true;
+    //return currentModal !== null && currentModal?.sectionId === sectionState.sectionId;
   };
 
   const renderBackButton = () => {
@@ -24,6 +24,16 @@ const ModalView = ({ style }: Props) => {
     }
 
     return <></>;
+  }
+
+  const getActiveModal = () => {
+    let activeModals: any[] = [...modalState.active];
+
+    if (activeModals.length > 0) {
+      return activeModals[activeModals.length - 1];
+    }
+
+    return null;
   }
 
   const renderModal = () => {
@@ -35,10 +45,8 @@ const ModalView = ({ style }: Props) => {
   }
 
   useEffect(() => {
-    setCurrentModal(ModalManager.getActiveModal());
+    setCurrentModal(getActiveModal());
   });
-
-  console.log(currentModal);
   
   return (
     <Modal
@@ -53,7 +61,6 @@ const ModalView = ({ style }: Props) => {
       {renderBackButton()}
 
       {renderModal()}
-
     </Modal>
   );
 };
