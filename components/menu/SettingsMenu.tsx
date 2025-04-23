@@ -14,28 +14,24 @@ const SettingsMenu = () => {
   const data: any[] = [
     {
       label: i18n.t('Your profile'),
-      path: '/profile',
       onPress: (row: any) => {
         AppManager.push('profile', router);
       },
     },
     {
       label: i18n.t('Account information'),
-      path: '/account',
       onPress: (row: any) => {
         AppManager.push('account', router);
       },
     },
     {
       label: i18n.t('Change password'),
-      path: '/password',
       onPress: (row: any) => {
         AppManager.push('password', router);
       },
     },
     {
       label: i18n.t('Language'),
-      path: '/language',
       onPress: (row: any) => {
         AppManager.push('language', router);
       },
