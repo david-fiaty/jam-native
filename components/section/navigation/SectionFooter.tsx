@@ -1,5 +1,6 @@
 import { Layout } from '@/constants/Layout';
 import { StyleSheet, Text } from 'react-native';
+import { Colors } from '@/constants/Colors';
 import IconView from '@/components/view/IconView';
 import BoxView from '@/components/view/BoxView';
 import ModalManager from '@/manager/ModalManager';
@@ -44,6 +45,8 @@ const SectionFooter = ({ style }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
+    borderTopWidth: Layout.borderWidth.base,
+    borderTopColor: Colors.primary,
     padding: Layout.space.base,
   },
 });
