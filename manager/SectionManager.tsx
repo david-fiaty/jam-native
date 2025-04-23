@@ -8,22 +8,10 @@ import WelcomeSection from "@/components/section/WelcomeSection";
 import i18n from "@/translation/i18n";
 import SignupSection from "@/components/section/SignupSection";
 import ProfileSection from "@/components/section/ProfileSection";
+import AccountForm from "@/components/form/AccountForm";
+import PasswordForm from "@/components/form/PasswordForm";
 
 class SectionManager {
-  pushSection(sectionId: string, router: any, params?: any) {
-    router.push({
-      pathname: `/${sectionId}`,
-      params: params || {},
-    });
-  }
-
-  replaceSection(sectionId: string, router: any, params?: any) {
-    router.replace({
-      pathname: `/${sectionId}`,
-      params: params || {},
-    });
-  }
-
   setActiveSectionId(sectionId: any) {
     Store.dispatch(setSectionId(sectionId));
   }
@@ -59,8 +47,8 @@ class SectionManager {
         id: 'welcome',
         title: i18n.t('Welcome'),
         showTitle: false,
-        showHeader: true,
-        showFooter: true,
+        showHeader: false,
+        showFooter: false,
         showBackButton: false,
         render: () => <WelcomeSection />,
       },
@@ -85,40 +73,47 @@ class SectionManager {
       {
         id: 'about',
         title: i18n.t('About'),
-        showTitle: true,
-        showHeader: true,
         showFooter: false,
-        showBackButton: true,
         render: () => <AboutSection />,
       },
       {
         id: 'legal',
         title: i18n.t('Legal'),
-        showTitle: true,
-        showHeader: true,
         showFooter: false,
-        showBackButton: true,
         render: () => <LegalSection />,
       },
       {
         id: 'jams',
         title: i18n.t('Jams'),
-        showTitle: true,
-        showHeader: true,
-        showFooter: true,
         showBackButton: false,
         render: () => <JamsSection />,
       },
       {
         id: 'profile',
         title: i18n.t('Profile'),
-        showTitle: true,
-        showHeader: true,
-        showFooter: true,
-        showBackButton: false,
         render: () => <ProfileSection />,
       },
-    ];
+      {
+        id: 'account',
+        title: i18n.t('Account'),
+        render: () => <AccountForm />,
+      },
+      {
+        id: 'password',
+        title: i18n.t('Password'),
+        render: () => <PasswordForm />,
+      },
+    ].map((o: any) => {
+      return {
+        ...{
+          showTitle: true,
+          showHeader: true,
+          showFooter: true,
+          showBackButton: true,
+        },
+        ...o,
+      };
+    });
   }
 }
 
