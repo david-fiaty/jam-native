@@ -4,6 +4,7 @@ import { Layout } from '@/constants/Layout';
 import BoxView from '@/components/view/BoxView';
 import IconView from '@/components/view/IconView';
 import TextView from '@/components/view/TextView';
+import AppManager from '@/manager/AppManager';
 
 type Props = {
   currentSection: any;
@@ -18,7 +19,7 @@ const SectionBackButton = ({ currentSection }: Props) => {
       align="center"
       justify="flex-start"
       style={styles.container}
-      onPress={() => router.back()}
+      onPress={() => AppManager.back(router)}
     >
       <IconView
         name="previous"
