@@ -86,8 +86,6 @@ export const Layout = {
     width: '100%',
   },
   menuContainer: {
-    padding: space.base*1.5,
-    paddingTop: 0,
     height: '100%',
     flexGrow: 1,
   },
