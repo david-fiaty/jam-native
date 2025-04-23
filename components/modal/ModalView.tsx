@@ -6,10 +6,11 @@ import ModalManager from '@/manager/ModalManager';
 import ModalBackButton from './navigation/ModalBackButton';
 
 type Props = {
+  currentSection?: any;
   style?: any;
 };
 
-const ModalView = ({ style }: Props) => {
+const ModalView = ({ currentSection, style }: Props) => {
   const [currentModal, setCurrentModal] = useState<any>(null);
   const modalState: any = useSelector((state: any) => state.modal);
 
@@ -48,6 +49,8 @@ const ModalView = ({ style }: Props) => {
     setCurrentModal(getActiveModal());
   });
   
+  console.log(currentSection);
+
   return (
     <Modal
       coverScreen={false}
