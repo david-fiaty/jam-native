@@ -17,9 +17,9 @@ import SkipButton from "@/components/button/SkipButton";
 const SignupEmailForm = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.signup);
-
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  
   const updateData = (key: any, value: any) => {
     dispatch(setValue({
       key: key,
