@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import Modal from "react-native-modal";
 import ModalManager from '@/manager/ModalManager';
 import ModalBackButton from './navigation/ModalBackButton';
+import SectionManager from '@/manager/SectionManager';
 
 type Props = {
   style?: any;
@@ -12,6 +13,7 @@ type Props = {
 const ModalView = ({ style }: Props) => {
   const [currentModal, setCurrentModal] = useState<any>(null);
   const modalState: any = useSelector((state: any) => state.modal);
+  const currentSection: any = SectionManager.getActiveSection();
 
   const canShowModal = () => {
     return currentModal !== null && currentModal?.visible === true;
@@ -37,6 +39,8 @@ const ModalView = ({ style }: Props) => {
     setCurrentModal(ModalManager.getActiveModal());
   });
 
+  console.log(currentSection);
+  
   return (
     <Modal
       coverScreen={false}
