@@ -1,18 +1,22 @@
 import Store from "@/redux/Store";
 
 class AppManager {
-  pushSection(sectionId: string, router: any, params?: any) {
+  push(sectionId: string, router: any, params?: any) {
     router.push({
       pathname: `/${sectionId}`,
       params: params || {},
     });
   }
 
-  replaceSection(sectionId: string, router: any, params?: any) {
+  replace(sectionId: string, router: any, params?: any) {
     router.replace({
       pathname: `/${sectionId}`,
       params: params || {},
     });
+  }
+
+  back(router: any) {
+    router.back();
   }
 }
 

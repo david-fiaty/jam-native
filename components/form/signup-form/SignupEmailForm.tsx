@@ -79,11 +79,11 @@ const SignupEmailForm = () => {
           >
             <BoxView direction="row" align="center" justify="flex-start">
               <TextView>{i18n.t("You have an account?")}</TextView>
-              <LinkView onPress={async () => AppManager.replaceSection("login", router)}>
+              <LinkView onPress={async () => AppManager.replace("login", router)}>
                 {i18n.t("Sign in")}
               </LinkView>
             </BoxView>
-            <SkipButton onPress={async () => AppManager.replaceSection(Config.mainRoute, router)} />
+            <SkipButton onPress={async () => AppManager.replace(Config.mainRoute, router)} />
           </BoxView>
         </>
       )}

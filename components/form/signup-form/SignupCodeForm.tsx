@@ -70,11 +70,11 @@ const SignupCodeForm = () => {
         style={{ width: "100%" }}
       >
         <BoxView direction="row" align="center" justify="flex-start">
-          <LinkView onPress={() => AppManager.replaceSection("signup", router)}>
+          <LinkView onPress={() => AppManager.replace("signup", router)}>
             {i18n.t("Didn't receive code?")}
           </LinkView>
         </BoxView>
-        <SkipButton onPress={async () => AppManager.replaceSection(Config.mainRoute, router)} />
+        <SkipButton onPress={async () => AppManager.replace(Config.mainRoute, router)} />
       </BoxView>
     </>
   );

@@ -14,14 +14,14 @@ const LoginSignupButton = () => {
 
   return (
     <BoxView direction="column" align="center" justify="space-between">
-      <TouchableOpacity onPress={() => AppManager.pushSection('login', router)}>
+      <TouchableOpacity onPress={() => AppManager.push('login', router)}>
         <View style={styles.containerStyle}>
           <TextView style={[styles.buttonStyle, styles.titleStyle]}>
             {i18n.t('Login') + ' / ' + i18n.t('Signup')}
           </TextView>
         </View>
       </TouchableOpacity>
-      <SkipButton onPress={ async () => AppManager.pushSection(Config.mainRoute, router)} />
+      <SkipButton onPress={ async () => AppManager.push(Config.mainRoute, router)} />
     </BoxView>
   );
 };

@@ -18,7 +18,7 @@ const BottomLinks = () => {
   if (route.name != 'about') {
     aboutLink = (
       <TouchableOpacity 
-        onPress={() => AppManager.pushSection('about', router)}
+        onPress={() => AppManager.push('about', router)}
         //onPress={() => route.name == 'legal' ? router.replace('/about') : router.push('/about')}
       >
         {aboutLink}
@@ -29,7 +29,7 @@ const BottomLinks = () => {
   if (route.name != 'legal') {
     legalLink = (
       <TouchableOpacity 
-        onPress={() => AppManager.pushSection('legal', router)}
+        onPress={() => AppManager.push('legal', router)}
         //onPress={() => route.name == 'about' ? router.replace('/legal') : router.push('/legal')}
       >
         {legalLink}
