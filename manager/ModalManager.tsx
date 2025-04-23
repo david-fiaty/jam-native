@@ -35,7 +35,7 @@ class ModalManager {
       activeModals.push({
         ...this.getModal(modalId, false), 
         ...{ params: params },
-        ...{ visible: true },
+        //...{ visible: true },
         ...{ sectionId: sectionId },
       });
     }
@@ -107,7 +107,7 @@ class ModalManager {
     ].map((o: any) => {
       return {
         ...{
-          visible: false,
+          //visible: false,
           showTitle: true,
           showBackButton: true,
           params: {},
