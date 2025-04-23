@@ -34,7 +34,7 @@ const SignupSection = () => {
       direction="column" 
       align="center" 
       justify="center" 
-      style={Layout.screenContent}
+      style={styles.container}
       scroll={formData?.success === true}
     >    
       <LogoView size={80} />    
