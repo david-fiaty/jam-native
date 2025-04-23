@@ -6,7 +6,6 @@ import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 import { Colors } from '@/constants/Colors';
-import SectionManager from '@/manager/SectionManager';
 
 const BottomLinks = () => {
   const router = useRouter();
@@ -17,10 +16,7 @@ const BottomLinks = () => {
 
   if (route.name != 'about') {
     aboutLink = (
-      <TouchableOpacity 
-        onPress={() => SectionManager.pushSection('about', router)}
-        //onPress={() => route.name == 'legal' ? router.replace('/about') : router.push('/about')}
-      >
+      <TouchableOpacity onPress={() => route.name == 'legal' ? router.replace('/about') : router.push('/about')}>
         {aboutLink}
       </TouchableOpacity>
     );
@@ -28,10 +24,7 @@ const BottomLinks = () => {
 
   if (route.name != 'legal') {
     legalLink = (
-      <TouchableOpacity 
-        onPress={() => SectionManager.pushSection('legal', router)}
-        //onPress={() => route.name == 'about' ? router.replace('/legal') : router.push('/legal')}
-      >
+      <TouchableOpacity onPress={() => route.name == 'about' ? router.replace('/legal') : router.push('/legal')}>
         {legalLink}
       </TouchableOpacity>
     );

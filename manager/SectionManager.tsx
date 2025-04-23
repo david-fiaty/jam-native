@@ -10,14 +10,14 @@ import SignupSection from "@/components/section/SignupSection";
 import ProfileSection from "@/components/section/ProfileSection";
 
 class SectionManager {
-  pushSection(sectionId: string, router: any, params?: any) {
+  pushSection(router: any, sectionId: string, params?: any) {
     router.push({
       pathname: `/${sectionId}`,
       params: params || {},
     });
   }
 
-  replaceSection(sectionId: string, router: any, params?: any) {
+  replaceSection(router: any, sectionId: string, params?: any) {
     router.replace({
       pathname: `/${sectionId}`,
       params: params || {},
