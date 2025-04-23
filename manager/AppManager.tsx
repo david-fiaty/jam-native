@@ -3,16 +3,21 @@ import { setActiveModals } from "@/redux/slices/ModalSlice";
 
 class AppManager {
   push(sectionId: string, router: any, params?: any) {
-    let activeModals: any[] = [...Store.getState().modal.active];
+    requestAnimationFrame(() => {
+        
+      let activeModals: any[] = [...Store.getState().modal.active];
 
-    if (activeModals.length > 0) {
-      activeModals[activeModals.length -1].visible = false;
-      setActiveModals(activeModals);
-    }
+      if (activeModals.length > 0) {
+        let currentModal: any = {...activeModals.pop()};
+        currentModal.visible = false;
+        activeModals.push(currentModal);
+        Store.dispatch(setActiveModals(activeModals));
+      }
 
-    router.push({
-      pathname: `/${sectionId}`,
-      params: params || {},
+      router.push({
+        pathname: `/${sectionId}`,
+        params: params || {},
+      });
     });
   }
 
