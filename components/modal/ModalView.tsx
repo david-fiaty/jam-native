@@ -15,7 +15,7 @@ const ModalView = ({ style }: Props) => {
   const sectionState: any = useSelector((state: any) => state.section);
 
   const canShowModal = () => {
-    return currentModal !== null && currentModal?.visible === sectionState.sectionId;
+    return currentModal !== null && currentModal?.sectionId === sectionState.sectionId;
   };
 
   const renderBackButton = () => {
