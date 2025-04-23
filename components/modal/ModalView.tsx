@@ -13,7 +13,6 @@ type Props = {
 const ModalView = ({ style }: Props) => {
   const [currentModal, setCurrentModal] = useState<any>(null);
   const modalState: any = useSelector((state: any) => state.modal);
-  const currentSection: any = SectionManager.getActiveSection();
 
   const canShowModal = () => {
     return currentModal !== null && currentModal?.visible === true;
@@ -39,8 +38,7 @@ const ModalView = ({ style }: Props) => {
     setCurrentModal(ModalManager.getActiveModal());
   });
 
-  console.log('current section ID -->', currentSection?.id);
-  console.log('current modal -->', currentModal);
+  console.log(currentModal);
   
   return (
     <Modal
