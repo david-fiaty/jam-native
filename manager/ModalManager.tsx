@@ -10,7 +10,6 @@ import HostsList from "@/components/list/HostsList";
 import MoreJamActionsView from "@/components/view/MoreJamActionsView";
 import JammersList from "@/components/list/JammersList";
 import SectorsList from "@/components/list/SectorsList";
-import SectionManager from "./SectionManager";
 
 class ModalManager {
   getActiveModal() {
@@ -26,7 +25,6 @@ class ModalManager {
   toggleModal(modalId: string, params?: any) {
     params = params || {};
     let activeModals: any[] = [...Store.getState().modal.active];
-    let sectionId: string = SectionManager.getActiveSection()?.id;
 
     if (activeModals.length > 0 && activeModals[activeModals.length - 1].id === modalId) {
       activeModals.pop();
@@ -35,7 +33,7 @@ class ModalManager {
       activeModals.push({
         ...this.getModal(modalId, false), 
         ...{ params: params },
-        ...{ sectionId: sectionId },
+        ...{ visible: true },
       });
     }
 
@@ -106,6 +104,7 @@ class ModalManager {
     ].map((o: any) => {
       return {
         ...{
+          visible: false,
           showTitle: true,
           showBackButton: true,
           params: {},
