@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Colors } from '@/constants/Colors';
+import { Layout } from "@/constants/Layout";
 import BoxView from '../view/BoxView';
 import SectionHeader from '../section/navigation/SectionHeader';
 import SectionFooter from '../section/navigation/SectionFooter';
 import ModalView from "../modal/ModalView";
 import SectionManager from "@/manager/SectionManager";
 import SectionBackButton from "./navigation/SectionBackButton";
-import { Layout } from "@/constants/Layout";
 
 type Props = {
   sectionId?: any;
