@@ -16,7 +16,12 @@ class ModalManager {
   toggleModal(modalId: string, params?: any) {
     params = params || {};
     let activeModals: any[] = [...Store.getState().modal.active];
-    let sectionId: string = Store.getState().section.sectionId;
+    let activeSections: any[] = [...Store.getState().section.active];
+    let sectionId: any = null;
+
+    if (activeSections.length > 0) {
+      sectionId = activeSections[activeSections.length - 1];
+    }
 
     if (activeModals.length > 0 && activeModals[activeModals.length - 1].id === modalId) {
       activeModals.pop();
