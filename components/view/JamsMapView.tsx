@@ -9,11 +9,13 @@ import SpinnerView from "./SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
+import EntityManager from "@/manager/EntityManager";
 
 const JamsMapView = () => {
+  const mapRef = useRef<any>();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const mapRef = useRef<any>();
+  const [jamData, setJamData] = useState<any[]>([]);
   const searchResult = JSON.parse(useSelector((state: any) => state.search.current));
   const markerImage = require('@/assets/images/logo-55.png');
   
@@ -65,6 +67,9 @@ const JamsMapView = () => {
   useEffect(() => {
     (async () => {
       setCurrentLocation(await UserManager.getLocation());
+
+      //setJamData(searchResult?.jam); // Todo - Connect search
+      setJamData(await EntityManager.listJams());
     })();
 
     setIsLoaded(true);
@@ -84,7 +89,8 @@ const JamsMapView = () => {
           showsUserLocation={true}
           showsMyLocationButton={true}
         >
-          {searchResult?.jam?.map((item: any) => renderJamMarker(item))}
+          {jamData?.map((item: any) => renderJamMarker(item))}
+          {/* searchResult?.jam?.map((item: any) => renderJamMarker(item)) */}
         </MapView>
       </View>
     </TouchableWithoutFeedback>

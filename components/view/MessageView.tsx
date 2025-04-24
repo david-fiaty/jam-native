@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { Colors } from '@/constants/Colors';
@@ -59,12 +58,12 @@ const styles = StyleSheet.create({
     right: 0,
   },
   title: {
-    color: 'white',
+    color: Colors.white,
     fontWeight: 'bold',
     marginBottom: Layout.space.base/2,
   },
   content: {
-    color: 'white',
+    color: Colors.white,
   },
 });
 

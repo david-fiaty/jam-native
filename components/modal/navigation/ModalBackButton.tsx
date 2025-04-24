@@ -4,6 +4,7 @@ import BoxView from '@/components/view/BoxView';
 import IconView from '@/components/view/IconView';
 import TextView from '@/components/view/TextView';
 import ModalManager from '@/manager/ModalManager';
+import { Colors } from '@/constants/Colors';
 
 type Props = {
   currentModal: any;
@@ -24,7 +25,9 @@ const ModalBackButton = ({ currentModal }: Props) => {
         padding={0}
       />
 
-      <TextView>{currentModal?.title}</TextView>
+      <TextView style={styles.title}>
+        {currentModal?.title}
+      </TextView>
 
     </BoxView>
   );
@@ -32,10 +35,13 @@ const ModalBackButton = ({ currentModal }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'red',
+    backgroundColor: Colors.white,
     width: '100%',
     padding: Layout.space.base,
     paddingLeft: 0,
+  },
+  title: {
+    fontWeight: 'bold',
   },
 });
 
