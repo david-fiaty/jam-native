@@ -218,7 +218,7 @@ class ProfileManager {
             <SectorsField
               key={item.key}
               resource="profile"
-              fieldKey={item.key}
+              field={item.key}
               placeholder={i18n.t('Select your sectors')}
               value={data[item.key]}
               onChangeValue={(value: string) => this.setFormData(item, value)}

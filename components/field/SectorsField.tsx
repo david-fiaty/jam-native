@@ -13,7 +13,7 @@ import ModalManager from '@/manager/ModalManager';
 
 type Props = BaseProps & {
   resource: string;
-  fieldKey: string;
+  field: string;
   value?: any;
   placeholder?: any;
   onChangeValue?: (value: any) => void;
@@ -21,7 +21,7 @@ type Props = BaseProps & {
   onDeleteEvent?: (item: any) => void;
 };
 
-const SectorsField = ({ resource, fieldKey, value, placeholder, onChangeValue, onDeleteEvent }: Props) => {
+const SectorsField = ({ resource, field, value, placeholder, onChangeValue, onDeleteEvent }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any>([]);
@@ -78,7 +78,7 @@ const SectorsField = ({ resource, fieldKey, value, placeholder, onChangeValue, o
 
     dispatch(setFormData<any>({ 
       resource: resource,
-      key: fieldKey, 
+      key: field, 
       value: selectedIds, 
     }));
   }
@@ -96,15 +96,13 @@ const SectorsField = ({ resource, fieldKey, value, placeholder, onChangeValue, o
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
-  
-  console.log('formData', formData);
-  console.log('fieldKey', fieldKey);
-
   return (
     <>
       <TouchableOpacity
         onPress={() => ModalManager.toggleModal('SectorsList', {
           resource: 'profile',
+          field: field,
+          value: value,
         })}
       >
         <InputTextField
