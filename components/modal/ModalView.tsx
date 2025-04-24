@@ -48,8 +48,6 @@ const ModalView = ({ currentSection, style }: Props) => {
   useEffect(() => {
     setCurrentModal(getActiveModal());
   });
-  
-  console.log(currentSection);
 
   return (
     <Modal
