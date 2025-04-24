@@ -368,23 +368,16 @@ class ProfileManager {
         render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <LocationPickerField
-              key={item.key}
+              resource="profile"
               placeholder={i18n.t('Select your location')}
-              latitude={data?.geolocation_latitude}
-              longitude={data?.geolocation_longitude}
-              onPressEvent={() => ScreenManager.toggleModal('LocationMapView', {
-                resource: 'profile',
-                header: (mode == 'profile'),
-                footer: (mode == 'profile'),
-                latitude: {
-                  key: 'geolocation_latitude',
-                  value: data?.geolocation_latitude,
-                },
-                longitude: {
-                  key: 'geolocation_longitude',
-                  value: data?.geolocation_longitude,
-                },
-              })}
+              latitude={{
+                field: 'geolocation_latitude',
+                value: data?.geolocation_latitude,
+              }}
+              longitude={{
+                field: 'geolocation_longitude',
+                value: data?.geolocation_longitude,
+              }}
             />
           );
         },
