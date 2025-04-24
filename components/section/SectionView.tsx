@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   },
   modal: {
     paddingHorizontal: Layout.space.base*1.5,
-    backgroundColor: 'white',
+    backgroundColor: Colors.white,
     zIndex: 10,
   },
   header: {

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
-import TextView from "../view/TextView";
-import i18n from "@/translation/i18n";
 import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
+import TextView from "../view/TextView";
+import i18n from "@/translation/i18n";
 import ScreenManager from "@/manager/ScreenManager";
 
 type Props = {
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   },
   label: {
     position: 'absolute',
-    backgroundColor: 'white',
+    backgroundColor: Colors.white,
     left: 22,
     top: 8,
     zIndex: ScreenManager.getModalZIndex(),
