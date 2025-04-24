@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
-import { Stack, useSegments, useRouter } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import { useFonts } from 'expo-font';
 import { Provider } from 'react-redux';
+import { Colors } from '@/constants/Colors';
+import { Platform, BackHandler } from 'react-native';
 import * as ExpoSplashScreen from 'expo-splash-screen';
 import Store from "@/redux/Store";
-import { Colors } from '@/constants/Colors';
-import { Platform } from 'react-native';
+import SectionManager from '@/manager/SectionManager';
 
 ExpoSplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
   const router = useRouter();
-  const segments = useSegments(); 
 
   const defaults: any = Platform.OS == 'ios' ? {
     headerShown: false,
@@ -38,11 +38,22 @@ const RootLayout = () => {
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
 
+  const backAction = () => {  
+    SectionManager.previousSection(router);
+    return true;
+  };
+
   useEffect(() => {
     if (isLoaded || isError) {
       ExpoSplashScreen.hideAsync();
     }
 
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove();
   }, [isLoaded, isError]);
 
   if (!isLoaded && !isError) return <></>; 
