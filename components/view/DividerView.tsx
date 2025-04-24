@@ -10,7 +10,7 @@ type Props = BaseProps & {
 };
 
 const DividerView = ({theme, style}: Props) => {
-  const dividerStyle = theme ? theme : 'white';
+  const dividerStyle = theme ? theme : Colors.white;
 
   return (
     <Divider style={[styles.container, styles[dividerStyle], style]} />

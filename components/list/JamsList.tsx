@@ -62,7 +62,6 @@ const JamsList = ({ idArray }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    //paddingHorizontal: Layout.space.base*1.5,
     width: '100%',
     height: '100%',  
     flexGrow: 1,

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from '@/constants/Colors';
 import TextView from "../view/TextView";
-import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
@@ -16,7 +15,12 @@ import EntityManager from '@/manager/EntityManager';
 import InputTextField from '../field/InputTextField';
 import ProfileListItem from './ListItem/ProfileListItem';
 
-const CollaboratorsList = () => {
+type Props = {
+  resource: string;
+  field?: any;
+};
+
+const CollaboratorsList = ({ resource, field }: Props) => {
   const dispatch = useDispatch();
   const [profiles, setProfiles] = useState<any>(null);
   const [selectedProfiles, setSelectedProfiles] = useState<any>([]);
@@ -24,12 +28,11 @@ const CollaboratorsList = () => {
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeModal: any = ScreenManager.getActiveModal();
-  const resource: string = activeModal.params.resource;
-  const fieldName: string = activeModal.params.field;
   const formData: any = useSelector((state: any) => state[resource]);
 
   const clearSearch = () => {
     setIsSearching(true);
+    
     EntityManager.listProfiles().then((items: any) => {
       setProfiles(items);
       setIsSearching(false);
@@ -39,11 +42,13 @@ const CollaboratorsList = () => {
 
   const renderSearchIcon = () => {
     if (!isSearching && searchValue) {
-      return <IconView 
-        name="delete" 
-        theme="clear" 
-        onPress={clearSearch}
-      />;
+      return (
+        <IconView 
+          name="delete" 
+          theme="clear" 
+          onPress={clearSearch}
+        />
+      );
     }
     else if (isSearching) {
       return <SpinnerView size="small" />;
@@ -72,9 +77,10 @@ const CollaboratorsList = () => {
     }
     
     setSelectedProfiles(profileList);
+
     dispatch(setFormData<any>({ 
       resource: resource,
-      key: fieldName, 
+      key: field, 
       value: profileList,
     }));
   };
@@ -83,24 +89,19 @@ const CollaboratorsList = () => {
     (async () => {
       if (!isLoaded) { 
         if (!profiles) setProfiles(await EntityManager.listProfiles());
-        if (formData?.[fieldName]?.length && !selectedProfiles.length) {
-          setSelectedProfiles(formData[fieldName]);
+        if (formData?.[field]?.length && !selectedProfiles.length) {
+          setSelectedProfiles(formData[field]);
         }
       }
     })();
 
     setIsLoaded(true);
-  }, [profiles, formData, fieldName, activeModal, selectedProfiles]);
+  }, [profiles, formData, field, activeModal, selectedProfiles]);
 
   if (!profiles) return <SpinnerView />;
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
-      <BackButton
-        title={i18n.t('Add collaborators')}
-        onPress={() => ScreenManager.toggleModal('CollaboratorsList')}
-      />
-      
       <InputTextField 
         value={searchValue}
         containerStyle={styles.inputTextFieldContainer}

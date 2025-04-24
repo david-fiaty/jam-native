@@ -1,3 +1,5 @@
+import { setActiveSections } from "@/redux/slices/SectionSlice";
+import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
 import AboutSection from "@/components/section/AboutSection";
 import JamsSection from "@/components/section/JamsSection";
@@ -10,6 +12,21 @@ import AccountForm from "@/components/form/AccountForm";
 import PasswordForm from "@/components/form/PasswordForm";
 
 class SectionManager {
+  previousSection(router: any) {
+    let activeSections: any = [...Store.getState().section.active];
+    let previousSectionIndex: number = 0;
+
+    if (activeSections.length > 1) previousSectionIndex = activeSections.length - 2;
+    else if (activeSections.length > 0) previousSectionIndex = activeSections.length - 1;
+
+    if (activeSections.length > 0) {
+      activeSections.pop();
+      Store.dispatch(setActiveSections(activeSections));
+    }
+      
+    router.dismissTo(`/${activeSections[previousSectionIndex]}`);
+  }
+
   getSection(sectionId: any, renderer: boolean = true) {
     return this.getSections(renderer).find((o: any) => o.id === sectionId);
   }
