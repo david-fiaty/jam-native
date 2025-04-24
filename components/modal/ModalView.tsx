@@ -67,7 +67,6 @@ const ModalView = ({ currentSection, style }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'green',
     width: '100%',
     padding: 0,
     margin: 0,
