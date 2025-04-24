@@ -3,6 +3,7 @@ import { Layout } from '@/constants/Layout';
 import TextView from '../view/TextView';
 import BoxView from '../view/BoxView';
 import StaticData from '@/constants/StaticData';
+import BottomLinks from '../navigation/BottomLinks';
 
 const AboutSection = () => {
   const router = useRouter();
@@ -10,6 +11,7 @@ const AboutSection = () => {
   return (
     <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <TextView>{StaticData.about.content}</TextView>
+      <BottomLinks />
     </BoxView>
   );
 };
