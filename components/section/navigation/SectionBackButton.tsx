@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
+import { Colors } from '@/constants/Colors';
 import BoxView from '@/components/view/BoxView';
 import IconView from '@/components/view/IconView';
 import TextView from '@/components/view/TextView';
 import SectionManager from '@/manager/SectionManager';
-import { Colors } from '@/constants/Colors';
 
 type Props = {
   currentSection: any;
