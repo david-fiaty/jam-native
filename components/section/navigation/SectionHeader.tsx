@@ -10,6 +10,7 @@ import LogoView from '@/components/view/LogoView';
 import IconView from '@/components/view/IconView';
 import ModalManager from '@/manager/ModalManager';
 import UserManager from "@/manager/UserManager";
+import SearchField from "@/components/field/SearchField";
 
 type Props = {
   style?: any;
@@ -44,12 +45,12 @@ const SectionHeader = ({ style } : Props) => {
         </TouchableOpacity>
       </BoxView>
 
-      <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>
-        <IconView
-          name="search"
-          size={22}
-          padding={0}
-          theme="clear"
+      <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>        
+        <SearchField 
+          // Todo - Implement handlers
+          //onSearchEdit={onSearchEdit}
+          //onSearchSubmit={onSearchSubmit} 
+          //onSearchClear={onSearchClear} 
         />
 
         <IconView
