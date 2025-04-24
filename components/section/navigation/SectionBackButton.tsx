@@ -16,8 +16,15 @@ const SectionBackButton = ({ currentSection }: Props) => {
   const router = useRouter();
   const sectionState: any = useSelector((state: any) => state.section);
 
+  const previousSection = () => {
+    let activeSections: any = [...sectionState.active];
+    let previousSectionIndex: number = 0;
 
-  console.log('back button section state ', sectionState);
+    if (activeSections.length > 1) previousSectionIndex = activeSections.length - 2;
+    else if (activeSections.length > 0) previousSectionIndex = activeSections.length - 1;
+      
+    router.dismissTo(`/${activeSections[previousSectionIndex]}`);
+  }; 
   
   return (
     <BoxView
@@ -25,7 +32,7 @@ const SectionBackButton = ({ currentSection }: Props) => {
       align="center"
       justify="flex-start"
       style={styles.container}
-      onPress={() => router.back()}
+      onPress={() => previousSection()}
     >
       <IconView
         name="previous"
