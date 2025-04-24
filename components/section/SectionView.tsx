@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSectionId } from "@/redux/slices/SectionSlice";
+import { setSectionId, setActiveSections } from "@/redux/slices/SectionSlice";
 import { StyleSheet } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import { Layout } from "@/constants/Layout";
+import { Config } from "@/constants/Config";
 import BoxView from '../view/BoxView';
 import SectionHeader from '../section/navigation/SectionHeader';
 import SectionFooter from '../section/navigation/SectionFooter';
@@ -16,7 +17,7 @@ type Props = {
 };
 
 const SectionView = ({ sectionId }: Props) => { 
-  sectionId = sectionId || 'welcome';
+  sectionId = sectionId || Config.defaultSection;
 
   const dispatch = useDispatch();
   const [currentSection, setCurrentSection] = useState<any>(null);
@@ -24,10 +25,8 @@ const SectionView = ({ sectionId }: Props) => {
 
   useEffect(() => {
     setCurrentSection(SectionManager.getSection(sectionId));
-    dispatch(setSectionId(sectionId));
+    dispatch(setActiveSections([...sectionState.active, sectionId]));
   }, [sectionId]);
-
-  console.log(sectionState);
 
   return (
     <>
