@@ -34,7 +34,7 @@ const SignupSection = () => {
       direction="column" 
       align="center" 
       justify="center" 
-      style={Layout.screenContent}
+      style={[Layout.screenContent, styles.container]}
       scroll={formData?.success === true}
     >    
       <LogoView size={80} />    
@@ -48,6 +48,9 @@ const SignupSection = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    paddingTop: Layout.space.base*4,
+  },
   slogan: {
     textTransform: 'uppercase',
     fontSize: Layout.fontSize.base,
