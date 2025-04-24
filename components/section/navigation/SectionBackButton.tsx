@@ -14,6 +14,7 @@ type Props = {
 
 const SectionBackButton = ({ currentSection }: Props) => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const sectionState: any = useSelector((state: any) => state.section);
 
   const previousSection = () => {
