@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import { StyleSheet, Text } from 'react-native';
 import { Colors } from '@/constants/Colors';
@@ -10,6 +11,16 @@ type Props = {
 };
 
 const SectionFooter = ({ style }: Props) => {
+  const modalState: any = useSelector((state: any) => state.modal);
+
+  const getIconTheme = (modalId: string) => {
+    if (modalState.active.length > 0 && modalState.active[modalState.active.length - 1].id == modalId) {
+      return 'secondary';
+    }
+
+    return 'clear';
+  };
+
   return (
     <BoxView direction="row" align="center" justify="space-around" style={[styles.container, style]}>
       <IconView
@@ -17,7 +28,7 @@ const SectionFooter = ({ style }: Props) => {
         radius="round"
         size={16}
         padding={4}
-        theme="secondary"
+        theme={getIconTheme('JamsMapView')}
         onPress={() => ModalManager.toggleModal('JamsMapView')}
       />
 
@@ -26,7 +37,7 @@ const SectionFooter = ({ style }: Props) => {
         radius="round"
         size={16}
         padding={4}
-        theme="secondary"
+        theme={getIconTheme('JamForm')}
         // Todo - Add profile ID
         onPress={() => ModalManager.toggleModal('JamForm', { profileId: 'test profile ID' } )}
       />
@@ -36,7 +47,7 @@ const SectionFooter = ({ style }: Props) => {
         radius="round"
         size={16}
         padding={4}
-        theme="secondary"
+        theme={getIconTheme('SearchView')}
         onPress={() => ModalManager.toggleModal('SearchView')}
       />
     </BoxView>
