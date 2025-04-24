@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setSectionId } from "@/redux/slices/SectionSlice";
 import { StyleSheet } from 'react-native';
 import { Colors } from '@/constants/Colors';
@@ -20,11 +20,14 @@ const SectionView = ({ sectionId }: Props) => {
 
   const dispatch = useDispatch();
   const [currentSection, setCurrentSection] = useState<any>(null);
+  const sectionState: any = useSelector((state: any) => state.section);
 
   useEffect(() => {
     setCurrentSection(SectionManager.getSection(sectionId));
     dispatch(setSectionId(sectionId));
   }, [sectionId]);
+
+  console.log(sectionState);
 
   return (
     <>
