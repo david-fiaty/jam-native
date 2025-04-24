@@ -92,6 +92,9 @@ const ProfileForm = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    paddingTop: Layout.space.base,
+  },
   fieldContainer: {
     maxWidth: '100%', 
     flexShrink: 1,
