@@ -9,24 +9,29 @@ import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from './InputTextField';
 import IconView from '../view/IconView';
+import ModalManager from '@/manager/ModalManager';
 
 type Props = BaseProps & {
-  resource: string;
+  store?: string;
+  onChangeValue?: (value: any) => void;
+
+  resource?: string;
   field: string;
   label?: any;
   value?: any;
   placeholder?: any;
-  onPressEvent?: () => void;
   onDeleteEvent?: (item: any) => void;
 };
 
-const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent, onDeleteEvent }: Props) => {
+const SectorsField = ({ store, onChangeValue, resource, field, label, value, placeholder, onDeleteEvent }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [selectedSectors, setSelectedSectors] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
   const fieldName: string = field;
+
+  console.log('store key -->', store);
 
   const getSelectedSectors = (sectorsIds?: any) => {
     let selectedIds: any[] = sectorsIds?.length ? sectorsIds : [];
@@ -100,7 +105,9 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
     <>
       {label}
       <TouchableOpacity
-        onPress={onPressEvent}
+        onPress={() => ModalManager.toggleModal('SectorsList', {
+          resource: 'profile',
+        })}
       >
         <InputTextField
           value={value}
