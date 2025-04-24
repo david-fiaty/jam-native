@@ -198,7 +198,7 @@ class ProfileManager {
       },
       {
         signup: false,
-        profile: true,
+        profile: false,
         enabled: true,
         required: false,
         key: 'upload_other_docs',
