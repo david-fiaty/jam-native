@@ -61,7 +61,7 @@ const ProfileForm = () => {
   };
 
   return (
-    <View style={Layout.formContainer}>
+    <View style={[Layout.formContainer, styles.container]}>
       <ProfileImageField
         value={formData?.upload_profile_picture?.url}
         onChangeValue={(mediaList: any) => updateField('upload_profile_picture', { url: mediaList[0]?.uri })}
@@ -75,7 +75,7 @@ const ProfileForm = () => {
       {formData?.profile_type?.length > 0 && profileFields.map((item: any) => {
         if (ProfileManager.canRenderField('signup', item, formData)) {
           return (
-            <View key={item.key}>
+            <View key={item.key} style={styles.fieldContainer}>
               {ProfileManager.renderField('signup', item, formData)}
             </View>
           );
@@ -90,5 +90,12 @@ const ProfileForm = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  fieldContainer: {
+    maxWidth: '100%', 
+    flexShrink: 1,
+  },
+});
 
 export default ProfileForm;
