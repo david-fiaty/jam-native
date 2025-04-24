@@ -11,6 +11,7 @@ import LocationPickerField from '@/components/field/LocationPickerField';
 import PersonalProfileForm from '@/components/form/profile-form/PersonalProfileForm';
 import OrganizationProfileForm from '@/components/form/profile-form/OrganizationProfileForm';
 import VenueProfileForm from '@/components/form/profile-form/VenueProfileForm';
+import ProfileImageField from '@/components/field/ProfileImageField';
 
 class ProfileManager {
   getStyles() {
@@ -60,6 +61,23 @@ class ProfileManager {
 
   getFields() {
     return [
+      {
+        signup: false,
+        profile: true,
+        enabled: true,
+        required: false,
+        key: 'upload_profile_image',
+        label: null,
+        profileType: 'all',
+        render: (resource: string, item: any, data: any, params?: any) => {
+          return (
+            <ProfileImageField
+              value={data?.upload_profile_picture?.url}
+              onChangeValue={(mediaList: any) => this.setFormData(item, { url: mediaList[0]?.uri })}
+            />
+          );
+        },
+      },
       {
         signup: true,
         profile: true,
