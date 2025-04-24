@@ -35,10 +35,44 @@ const ProfileForm = ({ resource }: Props) => {
       value: value,
     }));
   };
+ 
+  const canRenderForm = () => {
+    return formData?.profile_type?.length > 0
+      || resource == 'profile';
+  }
+
+  const getSubmitLabel = () => {
+    return resource == 'profile' ? i18n.t('Update') : i18n.t('Continue');
+  };
 
   const submitForm = async () => {
     setIsProcessing(true);
 
+    if (resource == 'signup') await submitSignupForm();
+    else if (resource == 'profile') await submitProfileForm();
+
+    setIsProcessing(false);
+  };
+
+  const submitProfileForm = async () => {
+    let result: any = await UserManager.updateProfile(formData);
+
+    if (result.success === false) {
+      ScreenManager.showMessage({
+        title: i18n.t('Profile update'),
+        //content: result.error, // Todo - Implement field error management
+        content: i18n.t('There was an error with the submission. Please check your data and try again.'),
+      });
+    }
+    else {
+      ScreenManager.showMessage({
+        title: i18n.t('Profile update'),
+        content: i18n.t('The profile data was successfully updated.'),
+      });
+    }
+  };
+
+  const submitSignupForm = async () => {
     let { password, ...profileData } = formData;
 
     let payload: any = {
@@ -51,7 +85,6 @@ const ProfileForm = ({ resource }: Props) => {
     };
 
     let result: any = await UserManager.register(payload);
-    setIsProcessing(false);
 
     if (result.success === false) {
       ScreenManager.showMessage({
@@ -64,15 +97,6 @@ const ProfileForm = ({ resource }: Props) => {
       router.replace(Config.mainRoute);
     }
   };
-
-  const canRenderForm = () => {
-    return formData?.profile_type?.length > 0
-      || resource == 'profile';
-  }
-
-  const getSubmitLabel = () => {
-    return resource == 'profile' ? i18n.t('Update') : i18n.t('Continue');
-  }
 
   useEffect(() => {
     (async () => {
@@ -116,11 +140,13 @@ const ProfileForm = ({ resource }: Props) => {
         }
       })}
 
-      <ButtonView
-        label={getSubmitLabel()}
-        isProcessing={isProcessing}
-        onPress={submitForm}
-      />
+      <View style={styles.submitButtonContainer}>
+        <ButtonView
+          label={getSubmitLabel()}
+          isProcessing={isProcessing}
+          onPress={submitForm}
+        />
+      </View>
     </View>
   );
 };
@@ -129,6 +155,9 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: Layout.space.base,
     paddingBottom: Layout.space.base * 2,
+  },
+  submitButtonContainer: {
+    marginTop: Layout.space.base,
   },
   fieldContainer: {
     maxWidth: '100%',
