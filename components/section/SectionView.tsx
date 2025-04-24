@@ -22,7 +22,7 @@ const SectionView = ({ sectionId }: Props) => {
   const sectionState: any = useSelector((state: any) => state.section);
 
   useEffect(() => {
-    //setCurrentSection(SectionManager.getSection(sectionId));
+    setCurrentSection(SectionManager.getSection(sectionId));
     dispatch(setSectionId(sectionId));
 
   }, [sectionId]);
