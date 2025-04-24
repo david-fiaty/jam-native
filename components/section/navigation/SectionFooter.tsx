@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from "react";
+import { useRouter } from 'expo-router';
 import { useSelector } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import { StyleSheet, Text } from 'react-native';
@@ -5,12 +7,15 @@ import { Colors } from '@/constants/Colors';
 import IconView from '@/components/view/IconView';
 import BoxView from '@/components/view/BoxView';
 import ModalManager from '@/manager/ModalManager';
+import UserManager from "@/manager/UserManager";
 
 type Props = {
   style?: any;
 };
 
 const SectionFooter = ({ style }: Props) => {
+  const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const modalState: any = useSelector((state: any) => state.modal);
 
   const getIconTheme = (modalId: string) => {
@@ -21,6 +26,12 @@ const SectionFooter = ({ style }: Props) => {
     return 'clear';
   };
 
+  useEffect(() => {
+    (async () => {
+      setIsLoggedIn(await UserManager.isLoggedIn());
+    })();
+  }, []);
+
   return (
     <BoxView direction="row" align="center" justify="space-around" style={[styles.container, style]}>
       <IconView
@@ -29,7 +40,7 @@ const SectionFooter = ({ style }: Props) => {
         size={16}
         padding={4}
         theme={getIconTheme('JamsMapView')}
-        onPress={() => ModalManager.toggleModal('JamsMapView')}
+        onPress={() => isLoggedIn ? ModalManager.toggleModal('JamsMapView') : router.push('/login')}
       />
 
       <IconView
@@ -38,9 +49,7 @@ const SectionFooter = ({ style }: Props) => {
         size={16}
         padding={4}
         theme={getIconTheme('JamForm')}
-        onPress={() => ModalManager.toggleModal('JamForm', { 
-          resource: 'jam', 
-        })}
+        onPress={() => isLoggedIn ? ModalManager.toggleModal('JamForm', { resource: 'jam' }) : router.push('/login')}
       />
 
       <IconView
@@ -49,7 +58,7 @@ const SectionFooter = ({ style }: Props) => {
         size={16}
         padding={4}
         theme={getIconTheme('SearchView')}
-        onPress={() => ModalManager.toggleModal('SearchView')}
+        onPress={() => isLoggedIn ? ModalManager.toggleModal('SearchView') : router.push('/login')}
       />
     </BoxView>
   );
