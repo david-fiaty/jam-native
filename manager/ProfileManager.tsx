@@ -1,4 +1,3 @@
-import { View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import { setFormData } from '@/redux/slices/FormSlice';
 import Store from '@/redux/Store';
@@ -8,8 +7,6 @@ import i18n from '@/translation/i18n';
 import InputTextareaField from '@/components/field/InputTextareaField';
 import CountryField from '@/components/field/CountryField';
 import SectorsField from '@/components/field/SectorsField';
-import ScreenManager from './ScreenManager';
-import DataManager from './DataManager';
 import LocationPickerField from '@/components/field/LocationPickerField';
 import PersonalProfileForm from '@/components/form/profile-form/PersonalProfileForm';
 import OrganizationProfileForm from '@/components/form/profile-form/OrganizationProfileForm';
@@ -238,7 +235,7 @@ class ProfileManager {
             <CountryField
               key={item.key}
               value={data[item.key]}
-              onChangeValue={(value: string) => this.setFormData(item, value)}
+              onChangeValue={(o: any) => this.setFormData(item, o.value)}
             />
           );
         },
