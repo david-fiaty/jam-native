@@ -9,24 +9,24 @@ import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from './InputTextField';
 import IconView from '../view/IconView';
+import ModalManager from '@/manager/ModalManager';
 
 type Props = BaseProps & {
   resource: string;
-  field: string;
-  label?: any;
+  fieldKey: string;
   value?: any;
   placeholder?: any;
-  onPressEvent?: () => void;
+  onChangeValue?: (value: any) => void;
+
   onDeleteEvent?: (item: any) => void;
 };
 
-const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent, onDeleteEvent }: Props) => {
+const SectorsField = ({ resource, fieldKey, value, placeholder, onChangeValue, onDeleteEvent }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any>([]);
-  const [selectedSectors, setSelectedSectors] = useState<any>([]);
+  const [currentValue, setCurrentValue] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
-  const fieldName: string = field;
 
   const getSelectedSectors = (sectorsIds?: any) => {
     let selectedIds: any[] = sectorsIds?.length ? sectorsIds : [];
@@ -74,11 +74,11 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
       }    
     }
 
-    setSelectedSectors(getSelectedSectors(selectedIds));
+    setCurrentValue(getSelectedSectors(selectedIds));
 
     dispatch(setFormData<any>({ 
       resource: resource,
-      key: field, 
+      key: fieldKey, 
       value: selectedIds, 
     }));
   }
@@ -91,16 +91,21 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
       }
     })();
 
-    setSelectedSectors(getSelectedSectors(value));
+    setCurrentValue(getSelectedSectors(value));
   }, [isLoaded, value]);
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
+  
+  console.log('formData', formData);
+  console.log('fieldKey', fieldKey);
+
   return (
     <>
-      {label}
       <TouchableOpacity
-        onPress={onPressEvent}
+        onPress={() => ModalManager.toggleModal('SectorsList', {
+          resource: 'profile',
+        })}
       >
         <InputTextField
           value={value}
@@ -110,9 +115,9 @@ const SectorsField = ({ resource, field, label, value, placeholder, onPressEvent
         />
       </TouchableOpacity>
 
-      { selectedSectors?.length > 0 && (
+      { currentValue?.length > 0 && (
         <View style={styles.preview}>
-          { selectedSectors.map((item: any) => {
+          { currentValue.map((item: any) => {
             return (
               <TagView
                 key={item.id}
