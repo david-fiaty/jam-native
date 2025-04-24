@@ -268,6 +268,10 @@ const styles = StyleSheet.create({
   categoryItemSelected: {
     borderColor: Colors.primary,
   },
+  fieldContainer: {
+    maxWidth: '100%',
+    flexShrink: 1,
+  },
 });
 
 export default JamForm;
