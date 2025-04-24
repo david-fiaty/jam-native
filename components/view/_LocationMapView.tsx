@@ -7,35 +7,40 @@ import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
+import ScreenManager from "@/manager/ScreenManager";
 import i18n from "@/translation/i18n";
+import BackButton from "../button/BackButton";
 import BoxView from "./BoxView";
 import UserManager from "@/manager/UserManager";
 
-type Props = {
-  resource: string,
-  latitude?: any;
-  longitude?: any;
-};
-
-const LocationMapView = ({ resource, latitude, longitude }: Props) => {
+const LocationMapView = () => {
   const dispatch = useDispatch();
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const activeModal: any = ScreenManager.getActiveModal();
+  const resource: string = activeModal.params.resource;
 
   const onMapPress = async (event: MapPressEvent) => {
     setSelectedLocation(event.nativeEvent.coordinate);
-
     dispatch(setFormData<any>({ 
       resource: resource,
-      key: latitude.field, 
-      value: event.nativeEvent.coordinate.latitude, 
+      key: null, 
+      value: {
+        [activeModal.params.latitude.key]: event.nativeEvent.coordinate.latitude,
+        [activeModal.params.longitude.key]: event.nativeEvent.coordinate.longitude,
+      }, 
     }));
+  };
 
-    dispatch(setFormData<any>({ 
-      resource: resource,
-      key: longitude.field, 
-      value: event.nativeEvent.coordinate.longitude, 
-    }));
+  const getStoredLocation = () => {
+    if (activeModal.params.latitude.value && activeModal.params.longitude.value) {
+      return {
+        latitude: activeModal.params.latitude.value,
+        longitude: activeModal.params.longitude.value,
+      };
+    } 
+
+    return null;
   };
 
   const getDeviceLocation = async () => {
@@ -54,17 +59,6 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
     }
   };
 
-  const getStoredLocation = () => {
-    if (latitude.value && longitude.value) {
-      return {
-        latitude: latitude.value,
-        longitude: longitude.value,
-      };
-    } 
-
-    return null;
-  };
-
   useEffect(() => {
     (async () => {
       if (!selectedLocation) {
@@ -78,8 +72,8 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
         setIsLoaded(true);
       }
     })();
-  }, [selectedLocation, latitude, longitude]);
-  
+  }, [selectedLocation]);
+
   if (!isLoaded) return <SpinnerView />;
   
   return (
@@ -87,10 +81,17 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
       direction="column" 
       align="flex-start" 
       justify="flex-start" 
-      style={[Layout.screenContent, styles.container]}
+      style={[Layout.screenContent, styles.screenContent]}
     >
+      <BoxView direction="column" align="center" style={Layout.backButtonContainer}>
+        <BackButton
+          title={i18n.t("Add location")}
+          onPress={() => ScreenManager.toggleModal("LocationMapView")}
+        />
+      </BoxView>
+
       <TouchableWithoutFeedback>
-        <View style={styles.mapContainer}>
+        <View style={styles.container}>
           <MapView
             style={styles.map}
             provider={PROVIDER_DEFAULT}
@@ -123,11 +124,11 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  screenContent: {
     padding: 0,
     paddingTop: Layout.space.base*1.5,
   },
-  mapContainer: {
+  container: {
     width: '100%',
     height: '100%',
     flexGrow: 1,
