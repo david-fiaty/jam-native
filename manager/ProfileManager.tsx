@@ -38,10 +38,8 @@ class ProfileManager {
   }
 
   canRenderField(resource: string, item: any, formData: any) {
-    return true
     return item.enabled === true
       && item[resource] === true
-      //&& (formData?.profile_type?.length || item.key === 'profile_type' )
       && (item.profileType === 'all' || item.profileType === formData?.profile_type);
   }
 
