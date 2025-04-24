@@ -12,26 +12,21 @@ import IconView from '../view/IconView';
 import ModalManager from '@/manager/ModalManager';
 
 type Props = BaseProps & {
-  store?: string;
-  onChangeValue?: (value: any) => void;
-
-  resource?: string;
-  field: string;
-  label?: any;
+  resource: string;
+  fieldKey: string;
   value?: any;
   placeholder?: any;
+  onChangeValue?: (value: any) => void;
+
   onDeleteEvent?: (item: any) => void;
 };
 
-const SectorsField = ({ store, onChangeValue, resource, field, label, value, placeholder, onDeleteEvent }: Props) => {
+const SectorsField = ({ resource, fieldKey, value, placeholder, onChangeValue, onDeleteEvent }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any>([]);
-  const [selectedSectors, setSelectedSectors] = useState<any>([]);
+  const [currentValue, setCurrentValue] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
-  const fieldName: string = field;
-
-  console.log('store key -->', store);
 
   const getSelectedSectors = (sectorsIds?: any) => {
     let selectedIds: any[] = sectorsIds?.length ? sectorsIds : [];
@@ -79,11 +74,11 @@ const SectorsField = ({ store, onChangeValue, resource, field, label, value, pla
       }    
     }
 
-    setSelectedSectors(getSelectedSectors(selectedIds));
+    setCurrentValue(getSelectedSectors(selectedIds));
 
     dispatch(setFormData<any>({ 
       resource: resource,
-      key: field, 
+      key: fieldKey, 
       value: selectedIds, 
     }));
   }
@@ -96,14 +91,17 @@ const SectorsField = ({ store, onChangeValue, resource, field, label, value, pla
       }
     })();
 
-    setSelectedSectors(getSelectedSectors(value));
+    setCurrentValue(getSelectedSectors(value));
   }, [isLoaded, value]);
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
+  
+  console.log('formData', formData);
+  console.log('fieldKey', fieldKey);
+
   return (
     <>
-      {label}
       <TouchableOpacity
         onPress={() => ModalManager.toggleModal('SectorsList', {
           resource: 'profile',
@@ -117,9 +115,9 @@ const SectorsField = ({ store, onChangeValue, resource, field, label, value, pla
         />
       </TouchableOpacity>
 
-      { selectedSectors?.length > 0 && (
+      { currentValue?.length > 0 && (
         <View style={styles.preview}>
-          { selectedSectors.map((item: any) => {
+          { currentValue.map((item: any) => {
             return (
               <TagView
                 key={item.id}
