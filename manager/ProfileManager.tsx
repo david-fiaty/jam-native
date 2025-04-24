@@ -368,10 +368,17 @@ class ProfileManager {
         render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <LocationPickerField
+              resource="profile"
               key={item.key}
               placeholder={i18n.t('Select your location')}
-              latitude={data?.geolocation_latitude}
-              longitude={data?.geolocation_longitude}
+              latitude={{
+                field: 'geolocation_latitude',
+                value: data?.geolocation_latitude,
+              }}
+              longitude={{
+                field: 'geolocation_longitude',
+                value: data?.geolocation_longitude,
+              }}
             />
           );
         },
