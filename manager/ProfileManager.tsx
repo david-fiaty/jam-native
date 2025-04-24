@@ -372,19 +372,6 @@ class ProfileManager {
               placeholder={i18n.t('Select your location')}
               latitude={data?.geolocation_latitude}
               longitude={data?.geolocation_longitude}
-              onPressEvent={() => ScreenManager.toggleModal('LocationMapView', {
-                resource: 'profile',
-                header: (mode == 'profile'),
-                footer: (mode == 'profile'),
-                latitude: {
-                  key: 'geolocation_latitude',
-                  value: data?.geolocation_latitude,
-                },
-                longitude: {
-                  key: 'geolocation_longitude',
-                  value: data?.geolocation_longitude,
-                },
-              })}
             />
           );
         },
