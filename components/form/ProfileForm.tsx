@@ -67,6 +67,10 @@ const ProfileForm = ({ resource }: Props) => {
       || resource == 'profile';
   }
 
+  const getSubmitLabel = () => {
+    return resource == 'profile' ? i18n.t('Update') : i18n.t('Continue');
+  }
+
   return (
     <View style={[Layout.formContainer, styles.container]}>
       {resource == 'signup' && (
@@ -94,7 +98,7 @@ const ProfileForm = ({ resource }: Props) => {
       })}
 
       <ButtonView
-        label={i18n.t('Continue')}
+        label={getSubmitLabel()}
         isProcessing={isProcessing}
         onPress={submitForm}
       />
