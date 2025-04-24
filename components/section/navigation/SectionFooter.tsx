@@ -38,8 +38,9 @@ const SectionFooter = ({ style }: Props) => {
         size={16}
         padding={4}
         theme={getIconTheme('JamForm')}
-        // Todo - Add profile ID
-        onPress={() => ModalManager.toggleModal('JamForm', { profileId: 'test profile ID' } )}
+        onPress={() => ModalManager.toggleModal('JamForm', { 
+          resource: 'jam', 
+        })}
       />
 
       <IconView
