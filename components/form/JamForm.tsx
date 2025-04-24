@@ -199,7 +199,6 @@ const JamForm = ({ resource, jamId }: Props) => {
           }
         />
 
-        <DividerView theme="secondary" />
         <SectorsField
           resource={resource}
           field="sectors_ids"
@@ -207,9 +206,11 @@ const JamForm = ({ resource, jamId }: Props) => {
           value={formData?.sectors_ids}
           onPress={() => ModalManager.toggleModal('SectorsList', {
             resource: 'jam',
-            field: "sectors_ids",
+            field: 'sectors_ids',
           })}
         />
+
+        <DividerView theme="secondary" />
 
         <CollaboratorsField
           resource={resource}
@@ -219,6 +220,8 @@ const JamForm = ({ resource, jamId }: Props) => {
             field: "collaborators_ids",
           })}
         />
+
+        <DividerView theme="secondary" />
 
         <MediaPickerField
           preview={true}
@@ -233,7 +236,6 @@ const JamForm = ({ resource, jamId }: Props) => {
           }
         />
 
-        <DividerView />
         <ButtonView
           label={i18n.t('Post')}
           isProcessing={isProcessing}
