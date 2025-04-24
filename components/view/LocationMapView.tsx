@@ -1,15 +1,13 @@
+import MapView, { Marker, MapPressEvent, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from "react-native-maps";
 import { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
-import MapView, { Marker, MapPressEvent, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from "react-native-maps";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
-import ScreenManager from "@/manager/ScreenManager";
 import i18n from "@/translation/i18n";
-import BackButton from "../button/BackButton";
 import BoxView from "./BoxView";
 import UserManager from "@/manager/UserManager";
 
@@ -20,20 +18,112 @@ type Props = {
 };
 
 const LocationMapView = ({ resource, latitude, longitude }: Props) => {
+  const dispatch = useDispatch();
+  const [selectedLocation, setSelectedLocation] = useState<any>(null);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  console.log('resource ->>', resource);
-  console.log('latitude ->>', latitude);
-  console.log('longitude ->>', longitude);
+  const onMapPress = async (event: MapPressEvent) => {
+    setSelectedLocation(event.nativeEvent.coordinate);
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: null, 
+      value: {
+        [latitude.key]: event.nativeEvent.coordinate.latitude,
+        [longitude.key]: event.nativeEvent.coordinate.longitude,
+      }, 
+    }));
+  };
 
-  return <></>;
+  const getDeviceLocation = async () => {
+    let deviceLocation: any = await UserManager.getLocation();
+
+    if (deviceLocation?.latitude && deviceLocation?.longitude) {
+      return {
+        latitude: deviceLocation?.latitude,
+        longitude: deviceLocation?.longitude,
+      };
+    }
+
+    return {
+      latitude: Config.defaultLocation.latitude,
+      longitude: Config.defaultLocation.longitude,
+    }
+  };
+
+  const getStoredLocation = () => {
+    if (latitude.value && longitude.value) {
+      return {
+        latitude: latitude.value,
+        longitude: longitude.value,
+      };
+    } 
+
+    return null;
+  };
+
+  useEffect(() => {
+    (async () => {
+      if (!selectedLocation) {
+        let coords: any = {};
+        let storedLocation: any = getStoredLocation();
+
+        if (storedLocation) coords = storedLocation
+        else coords = await getDeviceLocation()
+    
+        setSelectedLocation(coords);
+        setIsLoaded(true);
+      }
+    })();
+  }, [selectedLocation, latitude, longitude]);
+  
+  if (!isLoaded) return <SpinnerView />;
+  
+  return (
+    <BoxView 
+      direction="column" 
+      align="flex-start" 
+      justify="flex-start" 
+      style={[Layout.screenContent, styles.container]}
+    >
+      <TouchableWithoutFeedback>
+        <View style={styles.mapContainer}>
+          <MapView
+            style={styles.map}
+            provider={PROVIDER_DEFAULT}
+            customMapStyle={Layout.mapStyle}
+            showsUserLocation={true}
+            onPress={onMapPress}
+            initialRegion={{
+              latitude: parseFloat(selectedLocation.latitude),
+              longitude: parseFloat(selectedLocation.longitude),
+              latitudeDelta: 2,
+              longitudeDelta: 2,
+            }}
+          >
+            {selectedLocation && (
+              <Marker
+                pinColor={Colors.tertiary}
+                title={i18n.t("Selected location")}
+                description={i18n.t("This is the selected location")} // Todo - Reverse geocoding
+                coordinate={{
+                  latitude: parseFloat(selectedLocation?.latitude),
+                  longitude: parseFloat(selectedLocation?.longitude),
+                }}
+              />
+            )}
+          </MapView>
+        </View>
+      </TouchableWithoutFeedback>
+    </BoxView>
+  );
 };
 
 const styles = StyleSheet.create({
-  screenContent: {
+  container: {
     padding: 0,
     paddingTop: Layout.space.base*1.5,
   },
-  container: {
+  mapContainer: {
     width: '100%',
     height: '100%',
     flexGrow: 1,
