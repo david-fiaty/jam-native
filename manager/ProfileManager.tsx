@@ -12,6 +12,7 @@ import PersonalProfileForm from '@/components/form/profile-form/PersonalProfileF
 import OrganizationProfileForm from '@/components/form/profile-form/OrganizationProfileForm';
 import VenueProfileForm from '@/components/form/profile-form/VenueProfileForm';
 import ProfileImageField from '@/components/field/ProfileImageField';
+import ModalManager from './ModalManager';
 
 class ProfileManager {
   getStyles() {
@@ -231,6 +232,10 @@ class ProfileManager {
               field={item.key}
               placeholder={i18n.t('Select your sectors')}
               value={data[item.key]}
+              onPress={() => ModalManager.toggleModal('SectorsList', {
+                resource: 'profile',
+                field: 'sectors_ids',
+              })}
             />
           );
         },
