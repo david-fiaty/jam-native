@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
+import Store from "@/redux/Store";
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveSections } from "@/redux/slices/SectionSlice";
 import { useRouter } from 'expo-router';
@@ -23,6 +24,11 @@ const SectionBackButton = ({ currentSection }: Props) => {
 
     if (activeSections.length > 1) previousSectionIndex = activeSections.length - 2;
     else if (activeSections.length > 0) previousSectionIndex = activeSections.length - 1;
+
+    if (activeSections.length > 0) {
+      activeSections.pop();
+      Store.dispatch(setActiveSections(activeSections));
+    }
       
     router.dismissTo(`/${activeSections[previousSectionIndex]}`);
   }; 
