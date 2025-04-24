@@ -56,7 +56,7 @@ const ProfileForm = ({ resource }: Props) => {
 
   const submitProfileForm = async () => {
     let result: any = await UserManager.updateProfile(formData);
-    
+
     if (result.success === false) {
       ScreenManager.showMessage({
         title: i18n.t('Profile update'),
@@ -140,11 +140,13 @@ const ProfileForm = ({ resource }: Props) => {
         }
       })}
 
-      <ButtonView
-        label={getSubmitLabel()}
-        isProcessing={isProcessing}
-        onPress={submitForm}
-      />
+      <View style={styles.submitButtonContainer}>
+        <ButtonView
+          label={getSubmitLabel()}
+          isProcessing={isProcessing}
+          onPress={submitForm}
+        />
+      </View>
     </View>
   );
 };
@@ -153,6 +155,9 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: Layout.space.base,
     paddingBottom: Layout.space.base * 2,
+  },
+  submitButtonContainer: {
+    marginTop: Layout.space.base,
   },
   fieldContainer: {
     maxWidth: '100%',
