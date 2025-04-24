@@ -4,22 +4,19 @@ import InputTextField from "../field/InputTextField";
 import IconView from "../view/IconView";
 
 type Props = BaseProps & {
-  label?: any;
   placeholder?: any;
   latitude?: any;
   longitude?: any;
-  onPressEvent: () => void;
 };
 
-const LocationPickerField = ({ label, placeholder, latitude, longitude, onPressEvent }: Props) => {
+const LocationPickerField = ({ placeholder, latitude, longitude }: Props) => {
   const value = latitude && longitude ? `${latitude},${longitude}` : '';
 
   return (
     <>
-      {label}
       <TouchableOpacity
         style={styles.container}
-        onPress={onPressEvent}
+        onPress={() => {}}
       >
         <InputTextField
           value={value}
