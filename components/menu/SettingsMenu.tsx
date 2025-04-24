@@ -14,7 +14,6 @@ const SettingsMenu = () => {
     {
       label: i18n.t('Your profile'),
       onPress: (row: any) => {
-        console.log('profile button');
         router.push('/profile');
       },
     },
