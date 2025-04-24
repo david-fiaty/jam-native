@@ -17,6 +17,7 @@ export const Config: any = {
   maxSlieshowImages: 10,
   maxNotificationsDisplay: 14,
   mainRoute: 'jams',
+  defaultSection: 'welcome',
   defaultLocation: {
     latitude: 8.6195,
     longitude: 0.8248,
