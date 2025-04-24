@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
+import { Colors } from '@/constants/Colors';
 import BoxView from '@/components/view/BoxView';
 import IconView from '@/components/view/IconView';
 import TextView from '@/components/view/TextView';
@@ -27,7 +28,9 @@ const SectionBackButton = ({ currentSection }: Props) => {
         padding={0}
       />
   
-      <TextView>{currentSection.title}</TextView>
+      <TextView style={styles.title}>
+        {currentSection.title}
+      </TextView>
 
     </BoxView>
   );
@@ -35,10 +38,13 @@ const SectionBackButton = ({ currentSection }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'red',
+    backgroundColor: Colors.white,
     width: '100%',
     padding: Layout.space.base,
-    paddingLeft: 0,
+    paddingLeft: Layout.space.base*1.5,
+  },
+  title: {
+    fontWeight: 'bold',
   },
 });
 
