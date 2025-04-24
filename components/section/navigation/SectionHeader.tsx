@@ -47,13 +47,15 @@ const SectionHeader = ({ style } : Props) => {
         </TouchableOpacity>
       </BoxView>
 
-      <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>        
-        <SearchField 
-          // Todo - Implement handlers
-          //onSearchEdit={onSearchEdit}
-          //onSearchSubmit={onSearchSubmit} 
-          //onSearchClear={onSearchClear} 
-        />
+      <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>      
+        {isLoggedIn && (  
+          <SearchField 
+            // Todo - Implement handlers
+            //onSearchEdit={onSearchEdit}
+            //onSearchSubmit={onSearchSubmit} 
+            //onSearchClear={onSearchClear} 
+          />)
+        }
 
         {isLoggedIn && (
           <IconView
