@@ -24,13 +24,17 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
 
   const onMapPress = async (event: MapPressEvent) => {
     setSelectedLocation(event.nativeEvent.coordinate);
+
     dispatch(setFormData<any>({ 
       resource: resource,
-      key: null, 
-      value: {
-        [latitude.key]: event.nativeEvent.coordinate.latitude,
-        [longitude.key]: event.nativeEvent.coordinate.longitude,
-      }, 
+      key: latitude.field, 
+      value: event.nativeEvent.coordinate.latitude, 
+    }));
+
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: longitude.field, 
+      value: event.nativeEvent.coordinate.longitude, 
     }));
   };
 
