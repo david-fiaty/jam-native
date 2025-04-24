@@ -1,8 +1,8 @@
+import MapView, { Marker, MapPressEvent, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from "react-native-maps";
 import { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
-import MapView, { Marker, MapPressEvent, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from "react-native-maps";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import { Config } from "@/constants/Config";
