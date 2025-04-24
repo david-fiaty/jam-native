@@ -218,15 +218,12 @@ class ProfileManager {
             <SectorsField
               key={item.key}
               resource="profile"
-              field={item.key}
-              value={data[item.key]}
+              fieldKey={item.key}
               placeholder={i18n.t('Select your sectors')}
-              onPressEvent={() => ModalManager.toggleModal('SectorsList', {
-                resource: 'profile',
-                field: item.key,
-                header: (mode == 'profile'),
-                footer: (mode == 'profile'),
-              })}
+              value={data[item.key]}
+              onChangeValue={(value: string) => this.setFormData(item, value)}
+
+            
               onDeleteEvent={(item: any) => {
                 const sectorsIds: any[] = [...data[item.key] || []];
                 const index: number = sectorsIds.findIndex((v) => v === item.id);
