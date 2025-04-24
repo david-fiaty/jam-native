@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from 'react-native';
+import { useSelector } from "react-redux";
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import { Config } from "@/constants/Config";
@@ -18,6 +19,15 @@ const SectionHeader = ({ style } : Props) => {
   const router = useRouter();
   const [notificationsCount, setNotificationsCount] = useState<number>(0);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const modalState: any = useSelector((state: any) => state.modal);
+
+  const getIconTheme = (modalId: string) => {
+    if (modalState.active.length > 0 && modalState.active[modalState.active.length - 1].id == modalId) {
+      return 'primary';
+    }
+
+    return 'secondary';
+  };
 
   useEffect(() => {
     (async () => {
@@ -46,7 +56,7 @@ const SectionHeader = ({ style } : Props) => {
           label={notificationsCount > 0 ? ` ${notificationsCount}+` : ` 0 `} 
           size={13}
           padding={4.5}
-          theme="secondary"
+          theme={getIconTheme('NotificationsMenu')}
           onPress={() => ModalManager.toggleModal('NotificationsMenu')}
         />
 
@@ -54,7 +64,7 @@ const SectionHeader = ({ style } : Props) => {
           name="menu"
           size={14}
           padding={6}
-          theme="secondary"
+          theme={getIconTheme('SettingsMenu')}
           onPress={() => ModalManager.toggleModal('SettingsMenu')}
         />
 
