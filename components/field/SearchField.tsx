@@ -10,13 +10,12 @@ import SpinnerView from '../view/SpinnerView';
 import BoxView from '../view/BoxView';
 
 type Props = BaseProps & {
-  canShow?: boolean;
   onSearchEdit?: (value: any) => void;
   onSearchSubmit?: (value: any) => void;
   onSearchClear?: () => void;
 };
 
-const SearchField = ({ canShow, onSearchEdit, onSearchSubmit, onSearchClear }: Props) => {
+const SearchField = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => {
   const searchState = useSelector((state: any) => state.search);
   const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
@@ -61,7 +60,7 @@ const SearchField = ({ canShow, onSearchEdit, onSearchSubmit, onSearchClear }: P
     else {
       return (
         <IconView 
-          name="exit" 
+          name="next" 
           theme="secondary" 
           size={18}
           padding={0}
