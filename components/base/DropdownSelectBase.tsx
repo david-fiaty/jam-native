@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   },
   label: {
     position: 'absolute',
-    backgroundColor: 'white',
+    backgroundColor: Colors.white,
     left: 22,
     top: 8,
     zIndex: ScreenManager.getModalZIndex(),

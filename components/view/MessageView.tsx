@@ -59,12 +59,12 @@ const styles = StyleSheet.create({
     right: 0,
   },
   title: {
-    color: 'white',
+    color: Colors.white,
     fontWeight: 'bold',
     marginBottom: Layout.space.base/2,
   },
   content: {
-    color: 'white',
+    color: Colors.white,
   },
 });
 
