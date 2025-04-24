@@ -16,12 +16,9 @@ type Props = BaseProps & {
   field: string;
   value?: any;
   placeholder?: any;
-  onChangeValue?: (value: any) => void;
-
-  onDeleteEvent?: (item: any) => void;
 };
 
-const SectorsField = ({ resource, field, value, placeholder, onChangeValue, onDeleteEvent }: Props) => {
+const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any>([]);

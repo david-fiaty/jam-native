@@ -221,15 +221,6 @@ class ProfileManager {
               field={item.key}
               placeholder={i18n.t('Select your sectors')}
               value={data[item.key]}
-              onChangeValue={(value: string) => this.setFormData(item, value)}
-
-            
-              onDeleteEvent={(item: any) => {
-                const sectorsIds: any[] = [...data[item.key] || []];
-                const index: number = sectorsIds.findIndex((v) => v === item.id);
-                if (index !== -1) sectorsIds.splice(index, 1);
-                this.setFormData(item.key, sectorsIds);
-              }}
             />
           );
         },
@@ -377,23 +368,16 @@ class ProfileManager {
         render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <LocationPickerField
-              key={item.key}
+              resource="profile"
               placeholder={i18n.t('Select your location')}
-              latitude={data?.geolocation_latitude}
-              longitude={data?.geolocation_longitude}
-              onPressEvent={() => ScreenManager.toggleModal('LocationMapView', {
-                resource: 'profile',
-                header: (mode == 'profile'),
-                footer: (mode == 'profile'),
-                latitude: {
-                  key: 'geolocation_latitude',
-                  value: data?.geolocation_latitude,
-                },
-                longitude: {
-                  key: 'geolocation_longitude',
-                  value: data?.geolocation_longitude,
-                },
-              })}
+              latitude={{
+                field: 'geolocation_latitude',
+                value: data?.geolocation_latitude,
+              }}
+              longitude={{
+                field: 'geolocation_longitude',
+                value: data?.geolocation_longitude,
+              }}
             />
           );
         },

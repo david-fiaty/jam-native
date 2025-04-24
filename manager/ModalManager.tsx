@@ -10,6 +10,7 @@ import HostsList from "@/components/list/HostsList";
 import MoreJamActionsView from "@/components/view/MoreJamActionsView";
 import JammersList from "@/components/list/JammersList";
 import SectorsList from "@/components/list/SectorsList";
+import LocationMapView from "@/components/view/LocationMapView";
 
 class ModalManager {
   toggleModal(modalId: string, params?: any) {
@@ -91,6 +92,11 @@ class ModalManager {
         id: 'SectorsList',
         title: i18n.t('SectorsList'),
         render: (params: any) => <SectorsList {...params} />,
+      },
+      {
+        id: 'LocationMapView',
+        title: i18n.t('LocationMapView'),
+        render: (params: any) => <LocationMapView {...params} />,
       },
     ].map((o: any) => {
       return {
