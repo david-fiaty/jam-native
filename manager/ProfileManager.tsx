@@ -369,7 +369,6 @@ class ProfileManager {
           return (
             <LocationPickerField
               resource="profile"
-              key={item.key}
               placeholder={i18n.t('Select your location')}
               latitude={{
                 field: 'geolocation_latitude',
