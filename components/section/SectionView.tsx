@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setSectionId } from "@/redux/slices/SectionSlice";
 import { StyleSheet } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import { Layout } from "@/constants/Layout";
@@ -15,10 +17,13 @@ type Props = {
 
 const SectionView = ({ sectionId }: Props) => { 
   sectionId = sectionId || 'welcome';
+
+  const dispatch = useDispatch();
   const [currentSection, setCurrentSection] = useState<any>(null);
 
   useEffect(() => {
     setCurrentSection(SectionManager.getSection(sectionId));
+    dispatch(setSectionId(sectionId));
   }, [sectionId]);
 
   return (
@@ -37,7 +42,7 @@ const SectionView = ({ sectionId }: Props) => {
       >
         {currentSection?.render()}
   
-        <ModalView style={styles.modal} />
+        <ModalView currentSection={currentSection} style={styles.modal} />
       </BoxView>
       
       {currentSection?.showFooter === true && <SectionFooter style={styles.footer} />}
