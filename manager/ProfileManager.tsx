@@ -1,4 +1,3 @@
-import { View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import { setFormData } from '@/redux/slices/FormSlice';
 import Store from '@/redux/Store';
@@ -8,8 +7,6 @@ import i18n from '@/translation/i18n';
 import InputTextareaField from '@/components/field/InputTextareaField';
 import CountryField from '@/components/field/CountryField';
 import SectorsField from '@/components/field/SectorsField';
-import ScreenManager from './ScreenManager';
-import DataManager from './DataManager';
 import LocationPickerField from '@/components/field/LocationPickerField';
 import PersonalProfileForm from '@/components/form/profile-form/PersonalProfileForm';
 import OrganizationProfileForm from '@/components/form/profile-form/OrganizationProfileForm';
@@ -219,20 +216,8 @@ class ProfileManager {
               key={item.key}
               resource="profile"
               field={item.key}
-              value={data[item.key]}
               placeholder={i18n.t('Select your sectors')}
-              onPressEvent={() => ModalManager.toggleModal('SectorsList', {
-                resource: 'profile',
-                field: item.key,
-                header: (mode == 'profile'),
-                footer: (mode == 'profile'),
-              })}
-              onDeleteEvent={(item: any) => {
-                const sectorsIds: any[] = [...data[item.key] || []];
-                const index: number = sectorsIds.findIndex((v) => v === item.id);
-                if (index !== -1) sectorsIds.splice(index, 1);
-                this.setFormData(item.key, sectorsIds);
-              }}
+              value={data[item.key]}
             />
           );
         },
@@ -250,7 +235,7 @@ class ProfileManager {
             <CountryField
               key={item.key}
               value={data[item.key]}
-              onChangeValue={(value: string) => this.setFormData(item, value)}
+              onChangeValue={(o: any) => this.setFormData(item, o.value)}
             />
           );
         },
@@ -380,23 +365,16 @@ class ProfileManager {
         render: (mode: string, item: any, data: any, params?: any) => {
           return (
             <LocationPickerField
-              key={item.key}
+              resource="profile"
               placeholder={i18n.t('Select your location')}
-              latitude={data?.geolocation_latitude}
-              longitude={data?.geolocation_longitude}
-              onPressEvent={() => ScreenManager.toggleModal('LocationMapView', {
-                resource: 'profile',
-                header: (mode == 'profile'),
-                footer: (mode == 'profile'),
-                latitude: {
-                  key: 'geolocation_latitude',
-                  value: data?.geolocation_latitude,
-                },
-                longitude: {
-                  key: 'geolocation_longitude',
-                  value: data?.geolocation_longitude,
-                },
-              })}
+              latitude={{
+                field: 'geolocation_latitude',
+                value: data?.geolocation_latitude,
+              }}
+              longitude={{
+                field: 'geolocation_longitude',
+                value: data?.geolocation_longitude,
+              }}
             />
           );
         },

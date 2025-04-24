@@ -5,27 +5,26 @@ import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import TextView from "../view/TextView";
-import BackButton from "../button/BackButton";
-import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
 import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
-import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from "@/manager/EntityManager";
 import CollapsibleView from "../view/CollapsibleView";
 
-const SectorsList = () => {
+type Props = {
+  resource: string;
+  field?: any;
+};
+
+const SectorsList = ({ resource, field }: Props) => {
   const dispatch = useDispatch();
   const [sectorsData, setSectorsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const activeModal: any = ScreenManager.getActiveModal();
-  const resource: string = activeModal.params.resource;
-  const fieldName: string = activeModal.params.field;
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateSelection = (item: any, subItem: any) => {
-    let selection: any[] = [...formData?.[fieldName] || []];
+    let selection: any[] = [...formData?.[field] || []];
     let itemIndex: number = selection.findIndex((id: any) => id == item.id);
     let subItemIndex: number = selection.findIndex((id: any) => id == subItem.id);
 
@@ -51,13 +50,13 @@ const SectorsList = () => {
     // Update selection state
     dispatch(setFormData<any>({ 
       resource: resource,
-      key: fieldName, 
+      key: field, 
       value: selection,
     }));
   };
 
   const renderSubItem = (item: any, subItem: any) => {
-    let isSelected: boolean = formData?.[fieldName]?.includes(subItem.id);
+    let isSelected: boolean = formData?.[field]?.includes(subItem.id);
 
     return (
       <TouchableOpacity 
@@ -101,8 +100,10 @@ const SectorsList = () => {
 
   useEffect(() => {
     (async () => {
-      if (!isLoaded) setSectorsData(await EntityManager.getSectors());
-      setIsLoaded(true);
+      if (!isLoaded) {
+        setSectorsData(await EntityManager.getSectors());
+        setIsLoaded(true);
+      }
     })();
     
   }, [isLoaded, sectorsData]);

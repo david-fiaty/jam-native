@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
 import { BaseProps } from '@/constants/Types';
-import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
 import SelectListBase from '../base/SelectListBase';
 import EntityManager from "@/manager/EntityManager";
