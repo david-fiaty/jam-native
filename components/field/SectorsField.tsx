@@ -1,29 +1,27 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
-import { BaseProps } from "@/constants/Types";
 import { Layout } from '@/constants/Layout';
 import SpinnerView from '../view/SpinnerView';
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from './InputTextField';
 import IconView from '../view/IconView';
-import ModalManager from '@/manager/ModalManager';
 
-type Props = BaseProps & {
+type Props = {
   resource: string;
   field: string;
   value?: any;
   placeholder?: any;
+  onPress?: () => void;
 };
 
-const SectorsField = ({ resource, field, value, placeholder }: Props) => {
+const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [currentValue, setCurrentValue] = useState<any>([]);
-  const formData: any = useSelector((state: any) => state.form[resource]);
 
   const getSelectedSectors = (sectorsIds?: any) => {
     let selectedIds: any[] = sectorsIds?.length ? sectorsIds : [];
@@ -96,10 +94,7 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   return (
     <>
       <TouchableOpacity
-        onPress={() => ModalManager.toggleModal('SectorsList', {
-          resource: 'profile',
-          field: field,
-        })}
+        onPress={onPress}
       >
         <InputTextField
           value={value}
