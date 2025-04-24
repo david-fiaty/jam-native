@@ -62,6 +62,11 @@ const ProfileForm = ({ resource }: Props) => {
     }
   };
 
+  const canRenderForm = () => {
+    return formData?.profile_type?.length > 0
+      || resource == 'profile';
+  }
+
   return (
     <View style={[Layout.formContainer, styles.container]}>
       {resource == 'signup' && (
@@ -78,7 +83,7 @@ const ProfileForm = ({ resource }: Props) => {
         </>
       )}
 
-      {formData?.profile_type?.length > 0 && profileFields.map((item: any) => {
+      {canRenderForm() === true && profileFields.map((item: any) => {
         if (ProfileManager.canRenderField(resource, item, formData)) {
           return (
             <View key={item.key} style={styles.fieldContainer}>
