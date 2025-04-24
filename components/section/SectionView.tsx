@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSectionId, setActiveSections } from "@/redux/slices/SectionSlice";
+import { setActiveSections } from "@/redux/slices/SectionSlice";
 import { StyleSheet } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import { Layout } from "@/constants/Layout";
@@ -23,16 +23,12 @@ const SectionView = ({ sectionId }: Props) => {
   const [currentSection, setCurrentSection] = useState<any>(null);
   const sectionState: any = useSelector((state: any) => state.section);
 
-  const updateSections = () => {
+  useEffect(() => {
     setCurrentSection(SectionManager.getSection(sectionId));
 
     let activeSections: any = sectionState.active.includes(sectionId) ? sectionState.active : [...sectionState.active, sectionId];
     dispatch(setActiveSections(activeSections));
-  };
-
-  useEffect(() => {
-    updateSections();
-  }, []);
+  }, [sectionId, sectionState]);
 
   return (
     <>

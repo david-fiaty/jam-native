@@ -1,4 +1,7 @@
+import React, { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
+import { useDispatch, useSelector } from "react-redux";
+import { setActiveSections } from "@/redux/slices/SectionSlice";
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import BoxView from '@/components/view/BoxView';
@@ -11,6 +14,10 @@ type Props = {
 
 const SectionBackButton = ({ currentSection }: Props) => {
   const router = useRouter();
+  const sectionState: any = useSelector((state: any) => state.section);
+
+
+  console.log('back button section state ', sectionState);
   
   return (
     <BoxView
