@@ -27,6 +27,7 @@ import EntityManager from "@/manager/EntityManager";
 import CollaboratorsField from "../field/CollaboratorsField";
 import DataManager from "@/manager/DataManager";
 import MediaManager from "@/manager/MediaManager";
+import ModalManager from "@/manager/ModalManager";
 
 type Props = {
   resource: string;
@@ -204,12 +205,33 @@ const JamForm = ({ resource, jamId }: Props) => {
           field="sectors_ids"
           placeholder={i18n.t('Select your sectors')}
           value={formData?.sectors_ids}
+          onPress={() => ModalManager.toggleModal('SectorsList', {
+            resource: 'jam',
+            field: "sectors_ids",
+          })}
         />
 
-        <DividerView theme="secondary" />
+        <CollaboratorsField
+          resource={resource}
+          field="collaborators_ids"
+          onPress={() => ModalManager.toggleModal('CollaboratorsList', {
+            resource: resource,
+            field: "collaborators_ids",
+          })}
+        />
 
-
-        <DividerView theme="secondary" />
+        <MediaPickerField
+          preview={true}
+          value={formData?.upload_medias}
+          onSelectItem={(data: any) => updateField('upload_medias', data)}
+          onDeleteItem={(data: any) => updateField('upload_medias', data)}
+          label={
+            <BoxView direction="row" align="center">
+              <IconView name="plus" theme="secondary" radius="round" />
+              <TextView>{i18n.t('Add media')}</TextView>
+            </BoxView>
+          }
+        />
 
         <DividerView />
         <ButtonView

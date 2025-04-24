@@ -16,12 +16,7 @@ import EntityManager from '@/manager/EntityManager';
 import InputTextField from '../field/InputTextField';
 import ProfileListItem from './ListItem/ProfileListItem';
 
-type Props = {
-  resource: string;
-  field?: any;
-};
-
-const CollaboratorsList = ({ resource, field }: Props) => {
+const CollaboratorsList = () => {
   const dispatch = useDispatch();
   const [profiles, setProfiles] = useState<any>(null);
   const [selectedProfiles, setSelectedProfiles] = useState<any>([]);
@@ -29,11 +24,12 @@ const CollaboratorsList = ({ resource, field }: Props) => {
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeModal: any = ScreenManager.getActiveModal();
+  const resource: string = activeModal.params.resource;
+  const fieldName: string = activeModal.params.field;
   const formData: any = useSelector((state: any) => state[resource]);
 
   const clearSearch = () => {
     setIsSearching(true);
-    
     EntityManager.listProfiles().then((items: any) => {
       setProfiles(items);
       setIsSearching(false);
@@ -43,13 +39,11 @@ const CollaboratorsList = ({ resource, field }: Props) => {
 
   const renderSearchIcon = () => {
     if (!isSearching && searchValue) {
-      return (
-        <IconView 
-          name="delete" 
-          theme="clear" 
-          onPress={clearSearch}
-        />
-      );
+      return <IconView 
+        name="delete" 
+        theme="clear" 
+        onPress={clearSearch}
+      />;
     }
     else if (isSearching) {
       return <SpinnerView size="small" />;
@@ -78,10 +72,9 @@ const CollaboratorsList = ({ resource, field }: Props) => {
     }
     
     setSelectedProfiles(profileList);
-
     dispatch(setFormData<any>({ 
       resource: resource,
-      key: field, 
+      key: fieldName, 
       value: profileList,
     }));
   };
@@ -90,19 +83,24 @@ const CollaboratorsList = ({ resource, field }: Props) => {
     (async () => {
       if (!isLoaded) { 
         if (!profiles) setProfiles(await EntityManager.listProfiles());
-        if (formData?.[field]?.length && !selectedProfiles.length) {
-          setSelectedProfiles(formData[field]);
+        if (formData?.[fieldName]?.length && !selectedProfiles.length) {
+          setSelectedProfiles(formData[fieldName]);
         }
       }
     })();
 
     setIsLoaded(true);
-  }, [profiles, formData, field, activeModal, selectedProfiles]);
+  }, [profiles, formData, fieldName, activeModal, selectedProfiles]);
 
   if (!profiles) return <SpinnerView />;
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
+      <BackButton
+        title={i18n.t('Add collaborators')}
+        onPress={() => ScreenManager.toggleModal('CollaboratorsList')}
+      />
+      
       <InputTextField 
         value={searchValue}
         containerStyle={styles.inputTextFieldContainer}
