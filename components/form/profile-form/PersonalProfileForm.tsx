@@ -9,14 +9,13 @@ import TextView from '@/components/view/TextView';
 
 type Props = BaseProps & {
   resource: string;
-  mode: string;
   item?: any;
   data?: any;
   params?: any;
   parentKey?: any;
 };
 
-const PersonalProfileForm = ({ resource, mode, item, data, params, parentKey }: Props) => {
+const PersonalProfileForm = ({ resource, item, data, params, parentKey }: Props) => {
   const dispatch = useDispatch();
   const formData: any = useSelector((state: any) => state.form[resource]);
 
