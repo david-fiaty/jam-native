@@ -11,7 +11,7 @@ import MoreJamActionsView from "@/components/view/MoreJamActionsView";
 import JammersList from "@/components/list/JammersList";
 import SectorsList from "@/components/list/SectorsList";
 import LocationMapView from "@/components/view/LocationMapView";
-import CollaboratorsList from "@/components/list/_CollaboratorsList";
+import CollaboratorsList from "@/components/list/CollaboratorsList";
 
 class ModalManager {
   toggleModal(modalId: string, params?: any) {
