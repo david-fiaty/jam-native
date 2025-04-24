@@ -18,6 +18,7 @@ type Props = {
 
 const SectionHeader = ({ style } : Props) => {
   const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [notificationsCount, setNotificationsCount] = useState<number>(0);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const modalState: any = useSelector((state: any) => state.modal);
@@ -32,6 +33,7 @@ const SectionHeader = ({ style } : Props) => {
 
   useEffect(() => {
     (async () => {
+      setIsLoggedIn(await UserManager.isLoggedIn());
       setNotificationsCount(await UserManager.getNotifications());
       setIsLoaded(true);
     })();
@@ -53,21 +55,25 @@ const SectionHeader = ({ style } : Props) => {
           //onSearchClear={onSearchClear} 
         />
 
-        <IconView
-          label={notificationsCount > 0 ? ` ${notificationsCount}+` : ` 0 `} 
-          size={13}
-          padding={4.5}
-          theme={getIconTheme('NotificationsMenu')}
-          onPress={() => ModalManager.toggleModal('NotificationsMenu')}
-        />
+        {isLoggedIn && (
+          <IconView
+            label={notificationsCount > 0 ? ` ${notificationsCount}+` : ` 0 `} 
+            size={13}
+            padding={4.5}
+            theme={getIconTheme('NotificationsMenu')}
+            onPress={() => ModalManager.toggleModal('NotificationsMenu')}
+          />
+        )}
 
-        <IconView
-          name="menu"
-          size={14}
-          padding={6}
-          theme={getIconTheme('SettingsMenu')}
-          onPress={() => ModalManager.toggleModal('SettingsMenu')}
-        />
+        {isLoggedIn && (
+          <IconView
+            name="menu"
+            size={14}
+            padding={6}
+            theme={getIconTheme('SettingsMenu')}
+            onPress={() => ModalManager.toggleModal('SettingsMenu')}
+          />
+        )}
 
       </BoxView>
     </BoxView>
