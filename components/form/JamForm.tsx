@@ -199,6 +199,7 @@ const JamForm = ({ resource, jamId }: Props) => {
           }
         />
 
+        <TextView>{i18n.t('Select your sectors')}</TextView>
         <SectorsField
           resource={resource}
           field="sectors_ids"
