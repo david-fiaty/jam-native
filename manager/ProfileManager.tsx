@@ -72,7 +72,6 @@ class ProfileManager {
           return (
             <PersonalProfileForm 
               key={item.key}
-              resource="profile"
               resource={resource}
               item={item} 
               data={data} 
@@ -94,7 +93,6 @@ class ProfileManager {
           return (
             <OrganizationProfileForm 
               key={item.key}
-              resource="profile"
               resource={resource}
               item={item} 
               data={data} 
@@ -116,7 +114,6 @@ class ProfileManager {
           return (
             <VenueProfileForm
               key={item.key}
-              resource="profile"
               resource={resource}
               item={item} 
               data={data} 
