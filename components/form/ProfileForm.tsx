@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +12,7 @@ import ButtonView from "../view/ButtonView";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
+import SpinnerView from "../view/SpinnerView";
 
 type Props = {
   resource?: any;
@@ -20,7 +21,9 @@ type Props = {
 const ProfileForm = ({ resource }: Props) => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const [profileId, setProfileId] = useState<number>(0);
   const formData = useSelector((state: any) => state.form?.[resource]);
   const signupData: any = useSelector((state: any) => state.signup);
   const profileFields: any = ProfileManager.getFields();
@@ -70,6 +73,22 @@ const ProfileForm = ({ resource }: Props) => {
   const getSubmitLabel = () => {
     return resource == 'profile' ? i18n.t('Update') : i18n.t('Continue');
   }
+
+  useEffect(() => {
+    (async () => {
+      if (!isLoaded) {
+        setProfileId(await UserManager.getProfileId());
+        dispatch(setFormData<any>({ 
+          resource: resource,
+          key: null, 
+          value: await UserManager.getProfileData(), 
+        }));
+        setIsLoaded(true);
+      }
+    })();
+  }, [isLoaded, formData, resource]);
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <View style={[Layout.formContainer, styles.container]}>
