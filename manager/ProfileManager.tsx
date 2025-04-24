@@ -11,7 +11,6 @@ import LocationPickerField from '@/components/field/LocationPickerField';
 import PersonalProfileForm from '@/components/form/profile-form/PersonalProfileForm';
 import OrganizationProfileForm from '@/components/form/profile-form/OrganizationProfileForm';
 import VenueProfileForm from '@/components/form/profile-form/VenueProfileForm';
-import ModalManager from './ModalManager';
 
 class ProfileManager {
   getStyles() {
@@ -38,6 +37,7 @@ class ProfileManager {
   }
 
   canRenderField(resource: string, item: any, formData: any) {
+    return true
     return item.enabled === true
       && item[resource] === true
       //&& (formData?.profile_type?.length || item.key === 'profile_type' )
