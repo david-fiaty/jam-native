@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
+import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import ProfileManager from "@/manager/ProfileManager";
 import ProfileTypeField from "../field/ProfileTypeField";
@@ -11,14 +12,18 @@ import ButtonView from "../view/ButtonView";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
-import { Layout } from "@/constants/Layout";
+import SpinnerView from "../view/SpinnerView";
 
-const resource: string = 'profile';
+type Props = {
+  resource?: any;
+};
 
-const ProfileForm = () => {
+const ProfileForm = ({ resource }: Props) => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const [profileId, setProfileId] = useState<number>(0);
   const formData = useSelector((state: any) => state.form?.[resource]);
   const signupData: any = useSelector((state: any) => state.signup);
   const profileFields: any = ProfileManager.getFields();
@@ -60,30 +65,59 @@ const ProfileForm = () => {
     }
   };
 
+  const canRenderForm = () => {
+    return formData?.profile_type?.length > 0
+      || resource == 'profile';
+  }
+
+  const getSubmitLabel = () => {
+    return resource == 'profile' ? i18n.t('Update') : i18n.t('Continue');
+  }
+
+  useEffect(() => {
+    (async () => {
+      if (!isLoaded) {
+        setProfileId(await UserManager.getProfileId());
+        dispatch(setFormData<any>({ 
+          resource: resource,
+          key: null, 
+          value: await UserManager.getProfileData(), 
+        }));
+        setIsLoaded(true);
+      }
+    })();
+  }, [isLoaded, formData, resource]);
+
+  if (!isLoaded) return <SpinnerView />;
+
   return (
     <View style={[Layout.formContainer, styles.container]}>
-      <ProfileImageField
-        value={formData?.upload_profile_picture?.url}
-        onChangeValue={(mediaList: any) => updateField('upload_profile_picture', { url: mediaList[0]?.uri })}
-      />
+      {resource == 'signup' && (
+        <>
+          <ProfileImageField
+            value={formData?.upload_profile_picture?.url}
+            onChangeValue={(mediaList: any) => updateField('upload_profile_picture', { url: mediaList[0]?.uri })}
+          />
 
-      <ProfileTypeField
-        value={formData?.profile_type}
-        onChangeValue={(option: any) => updateField('profile_type', option.value)}
-      />
+          <ProfileTypeField
+            value={formData?.profile_type}
+            onChangeValue={(option: any) => updateField('profile_type', option.value)}
+          />
+        </>
+      )}
 
-      {formData?.profile_type?.length > 0 && profileFields.map((item: any) => {
-        if (ProfileManager.canRenderField('signup', item, formData)) {
+      {canRenderForm() === true && profileFields.map((item: any) => {
+        if (ProfileManager.canRenderField(resource, item, formData)) {
           return (
             <View key={item.key} style={styles.fieldContainer}>
-              {ProfileManager.renderField('signup', item, formData)}
+              {ProfileManager.renderField(resource, item, formData)}
             </View>
           );
         }
       })}
 
       <ButtonView
-        label={i18n.t('Continue')}
+        label={getSubmitLabel()}
         isProcessing={isProcessing}
         onPress={submitForm}
       />
@@ -94,10 +128,10 @@ const ProfileForm = () => {
 const styles = StyleSheet.create({
   container: {
     paddingTop: Layout.space.base,
-    paddingBottom: Layout.space.base*2,
+    paddingBottom: Layout.space.base * 2,
   },
   fieldContainer: {
-    maxWidth: '100%', 
+    maxWidth: '100%',
     flexShrink: 1,
   },
 });
