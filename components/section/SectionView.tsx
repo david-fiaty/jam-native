@@ -23,10 +23,16 @@ const SectionView = ({ sectionId }: Props) => {
   const [currentSection, setCurrentSection] = useState<any>(null);
   const sectionState: any = useSelector((state: any) => state.section);
 
-  useEffect(() => {
+  const updateSections = () => {
     setCurrentSection(SectionManager.getSection(sectionId));
-    dispatch(setActiveSections([...sectionState.active, sectionId]));
-  }, [sectionId]);
+
+    let activeSections: any = sectionState.active.includes(sectionId) ? sectionState.active : [...sectionState.active, sectionId];
+    dispatch(setActiveSections(activeSections));
+  };
+
+  useEffect(() => {
+    updateSections();
+  }, []);
 
   return (
     <>
