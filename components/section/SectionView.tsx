@@ -25,7 +25,6 @@ const SectionView = ({ sectionId }: Props) => {
 
   useEffect(() => {
     setCurrentSection(SectionManager.getSection(sectionId));
-
     let activeSections: any = sectionState.active.includes(sectionId) ? sectionState.active : [...sectionState.active, sectionId];
     dispatch(setActiveSections(activeSections));
   }, [sectionId, sectionState]);
