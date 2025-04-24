@@ -221,15 +221,6 @@ class ProfileManager {
               field={item.key}
               placeholder={i18n.t('Select your sectors')}
               value={data[item.key]}
-              onChangeValue={(value: string) => this.setFormData(item, value)}
-
-            
-              onDeleteEvent={(item: any) => {
-                const sectorsIds: any[] = [...data[item.key] || []];
-                const index: number = sectorsIds.findIndex((v) => v === item.id);
-                if (index !== -1) sectorsIds.splice(index, 1);
-                this.setFormData(item.key, sectorsIds);
-              }}
             />
           );
         },
