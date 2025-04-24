@@ -27,6 +27,7 @@ import EntityManager from "@/manager/EntityManager";
 import CollaboratorsField from "../field/CollaboratorsField";
 import DataManager from "@/manager/DataManager";
 import MediaManager from "@/manager/MediaManager";
+import ModalManager from "@/manager/ModalManager";
 
 type Props = {
   resource: string;
@@ -120,7 +121,7 @@ const JamForm = ({ resource, jamId }: Props) => {
       scroll={true}
       style={Layout.screenContent}
     >
-      <BoxView direction="column" style={Layout.formContainer}>
+      <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
         <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
         <ListView
           data={jamCategories}
@@ -198,25 +199,51 @@ const JamForm = ({ resource, jamId }: Props) => {
           }
         />
 
-        <DividerView theme="secondary" />
+        <TextView>{i18n.t('Select your sectors')}</TextView>
         <SectorsField
           resource={resource}
           field="sectors_ids"
           placeholder={i18n.t('Select your sectors')}
           value={formData?.sectors_ids}
+          onPress={() => ModalManager.toggleModal('SectorsList', {
+            resource: 'jam',
+            field: 'sectors_ids',
+          })}
         />
 
         <DividerView theme="secondary" />
 
+        <CollaboratorsField
+          resource={resource}
+          field="collaborators_ids"
+          onPress={() => ModalManager.toggleModal('CollaboratorsList', {
+            resource: resource,
+            field: "collaborators_ids",
+          })}
+        />
 
         <DividerView theme="secondary" />
 
-        <DividerView />
-        <ButtonView
-          label={i18n.t('Post')}
-          isProcessing={isProcessing}
-          onPress={submitForm}
+        <MediaPickerField
+          preview={true}
+          value={formData?.upload_medias}
+          onSelectItem={(data: any) => updateField('upload_medias', data)}
+          onDeleteItem={(data: any) => updateField('upload_medias', data)}
+          label={
+            <BoxView direction="row" align="center">
+              <IconView name="plus" theme="secondary" radius="round" />
+              <TextView>{i18n.t('Add media')}</TextView>
+            </BoxView>
+          }
         />
+
+        <View style={styles.submitButtonContainer}>
+          <ButtonView
+            label={i18n.t('Post')}
+            isProcessing={isProcessing}
+            onPress={submitForm}
+          />
+        </View>
 
         <DividerView />
       </BoxView>
@@ -225,6 +252,10 @@ const JamForm = ({ resource, jamId }: Props) => {
 };
 
 const styles = StyleSheet.create({
+  formContainer: {
+    maxWidth: '100%',
+    flexShrink: 1,
+  },
   categoryContainer: {
     flexDirection: 'column',
     gap: Layout.space.small,
@@ -243,6 +274,14 @@ const styles = StyleSheet.create({
   },
   categoryItemSelected: {
     borderColor: Colors.primary,
+  },
+  fieldContainer: {
+    maxWidth: '100%',
+    flexShrink: 1,
+  },
+  submitButtonContainer: {
+    marginTop: Layout.space.base,
+    marginBottom: Layout.space.base,
   },
 });
 

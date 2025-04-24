@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from "react-redux";
-import { setFormData } from "@/redux/slices/FormSlice";
+import { BaseProps } from "@/constants/Types";
 import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
@@ -11,40 +11,25 @@ import SpinnerView from '../view/SpinnerView';
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
 
-type Props = {
+type Props = BaseProps & {
   resource: string;
   field: string;
-  value?: any;
-  placeholder?: any;
-  onPress?: () => void;
+  onPressEvent?: () => void;
+  onDeleteEvent: (item: any) => void;
 };
 
-const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Props) => {
-  const dispatch = useDispatch();
+const CollaboratorsField = ({ resource, field, onPressEvent, onDeleteEvent }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [currentValue, setCurrentValue] = useState<any>([]);
+  const [selectedProfiles, setSelectedProfiles] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
-
-  const deleteItem = (item: any) => {
-    const selectedIds = [...formData?.[field] || []];
-    const index = selectedIds.findIndex((v) => v === item.id);
-    if (index !== -1) selectedIds.splice(index, 1);
-
-    setCurrentValue(selectedIds);
-
-    dispatch(setFormData<any>({ 
-      resource: resource,
-      key: field, 
-      value: selectedIds, 
-    }));
-  };
+  const fieldName: string = field;
 
   useEffect(() => {
     (async () => {
-        if (formData?.[field]?.length) setCurrentValue(await EntityManager.getProfiles({ items_ids: formData[field] }));
+        if (formData?.[fieldName]?.length) setSelectedProfiles(await EntityManager.getProfiles({ items_ids: formData[fieldName] }));
         setIsLoaded(true);
     })();
-  }, [isLoaded, formData, field]);
+  }, [isLoaded, formData]);
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
@@ -53,19 +38,19 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Pr
       <BoxView
         direction="row"
         align="center"
-        onPress={onPress}
+        onPress={onPressEvent}
       >
         <IconView name="plus" theme="secondary" radius="round" />
         <TextView>{i18n.t('Add collaborators')}</TextView>
       </BoxView>
 
-        { currentValue?.length > 0 && (
+        { selectedProfiles?.length > 0 && (
           <View style={styles.preview}> 
-            { currentValue.map((item: any) => {
+            { selectedProfiles.map((item: any) => {
               return (
                 <TagView
                   key={item.id}
-                  onDeleteButtonPress={() => deleteItem(item)}  
+                  onDeleteButtonPress={() => onDeleteEvent(item)}  
                 >
                   {item?.profile_name}
                 </TagView>

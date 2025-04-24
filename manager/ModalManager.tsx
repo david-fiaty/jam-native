@@ -11,6 +11,7 @@ import MoreJamActionsView from "@/components/view/MoreJamActionsView";
 import JammersList from "@/components/list/JammersList";
 import SectorsList from "@/components/list/SectorsList";
 import LocationMapView from "@/components/view/LocationMapView";
+import CollaboratorsList from "@/components/list/CollaboratorsList";
 
 class ModalManager {
   toggleModal(modalId: string, params?: any) {
@@ -95,8 +96,13 @@ class ModalManager {
       },
       {
         id: 'SectorsList',
-        title: i18n.t('SectorsList'),
+        title: i18n.t('Sectors'),
         render: (params: any) => <SectorsList {...params} />,
+      },
+      {
+        id: 'CollaboratorsList',
+        title: i18n.t('Collaborators'),
+        render: (params: any) => <CollaboratorsList {...params} />,
       },
       {
         id: 'LocationMapView',
