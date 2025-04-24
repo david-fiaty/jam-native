@@ -45,6 +45,7 @@ const SectionFooter = ({ style }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: Colors.white,
     borderTopWidth: Layout.borderWidth.base,
     borderTopColor: Colors.primary,
     padding: Layout.space.base,

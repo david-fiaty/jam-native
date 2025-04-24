@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
   },
   header: {
     paddingHorizontal: Layout.space.base*1.5,
+    zIndex: 20,
   },
   footer: {
     zIndex: 20,

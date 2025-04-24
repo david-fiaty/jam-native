@@ -11,7 +11,7 @@ import LocationPickerField from '@/components/field/LocationPickerField';
 import PersonalProfileForm from '@/components/form/profile-form/PersonalProfileForm';
 import OrganizationProfileForm from '@/components/form/profile-form/OrganizationProfileForm';
 import VenueProfileForm from '@/components/form/profile-form/VenueProfileForm';
-import ModalManager from './ModalManager';
+import ProfileImageField from '@/components/field/ProfileImageField';
 
 class ProfileManager {
   getStyles() {
@@ -37,14 +37,13 @@ class ProfileManager {
     Store.dispatch(setFormData(payload));
   }
 
-  canRenderField(mode: string, item: any, formData: any) {
+  canRenderField(resource: string, item: any, formData: any) {
     return item.enabled === true
-      && item[mode] === true
-      //&& (formData?.profile_type?.length || item.key === 'profile_type' )
+      && item[resource] === true
       && (item.profileType === 'all' || item.profileType === formData?.profile_type);
   }
 
-  renderField(mode: string, item: any, formData: any, params?: any) {
+  renderField(resource: string, item: any, formData: any, params?: any) {
     return (
       <>
         {item.label !== null && (
@@ -53,13 +52,30 @@ class ProfileManager {
           </TextView>
         )}
 
-        {item.render(mode, item, formData, params)}
+        {item.render(resource, item, formData, params)}
       </>
     );
   }
 
   getFields() {
     return [
+      {
+        signup: false,
+        profile: true,
+        enabled: true,
+        required: false,
+        key: 'upload_profile_image',
+        label: null,
+        profileType: 'all',
+        render: (resource: string, item: any, data: any, params?: any) => {
+          return (
+            <ProfileImageField
+              value={data?.upload_profile_picture?.url}
+              onChangeValue={(mediaList: any) => this.setFormData(item, { url: mediaList[0]?.uri })}
+            />
+          );
+        },
+      },
       {
         signup: true,
         profile: true,
@@ -68,12 +84,11 @@ class ProfileManager {
         key: 'profile_personal',
         label: null,
         profileType: 'personal',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <PersonalProfileForm 
               key={item.key}
-              resource="profile"
-              mode={mode}
+              resource={resource}
               item={item} 
               data={data} 
               params={params} 
@@ -90,12 +105,11 @@ class ProfileManager {
         key: 'profile_organization',
         label: null,
         profileType: 'organization',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <OrganizationProfileForm 
               key={item.key}
-              resource="profile"
-              mode={mode}
+              resource={resource}
               item={item} 
               data={data} 
               params={params} 
@@ -112,12 +126,11 @@ class ProfileManager {
         key: 'profile_venue',
         label: null,
         profileType: 'venue',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <VenueProfileForm
               key={item.key}
-              resource="profile"
-              mode={mode}
+              resource={resource}
               item={item} 
               data={data} 
               params={params} 
@@ -134,7 +147,7 @@ class ProfileManager {
         key: 'profile_name',
         label: i18n.t('Profile name (with no spaces)'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
@@ -153,7 +166,7 @@ class ProfileManager {
         key: 'profile_description',
         label: i18n.t('About'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextareaField
               key={item.key}
@@ -172,7 +185,7 @@ class ProfileManager {
         key: 'address',
         label: i18n.t('Address'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
@@ -191,7 +204,7 @@ class ProfileManager {
         key: 'upload_other_docs',
         label: i18n.t('Other documents'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
@@ -210,7 +223,7 @@ class ProfileManager {
         key: 'sectors_ids',
         label: i18n.t('Sectors'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <SectorsField
               key={item.key}
@@ -230,7 +243,7 @@ class ProfileManager {
         key: 'scope_country_code',
         label: i18n.t('Country'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <CountryField
               key={item.key}
@@ -248,7 +261,7 @@ class ProfileManager {
         key: 'region',
         label: i18n.t('Region'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
@@ -267,7 +280,7 @@ class ProfileManager {
         key: 'town_or_locality',
         label: i18n.t('Locality'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
@@ -286,7 +299,7 @@ class ProfileManager {
         key: 'other_town_or_locality',
         label: i18n.t('Other locality'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
@@ -305,7 +318,7 @@ class ProfileManager {
         key: 'email',
         label: i18n.t('Email'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
@@ -324,7 +337,7 @@ class ProfileManager {
         key: 'whatsapp_number',
         label: i18n.t('Whatsapp number'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
@@ -343,7 +356,7 @@ class ProfileManager {
         key: 'password',
         label: i18n.t('Password'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
@@ -362,7 +375,7 @@ class ProfileManager {
         key: null,
         label: i18n.t('Location'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <LocationPickerField
               resource="profile"
@@ -387,7 +400,7 @@ class ProfileManager {
         key: 'phone_number',
         label: i18n.t('Phone number'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
@@ -406,7 +419,7 @@ class ProfileManager {
         key: 'website_link',
         label: i18n.t('Website link'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
@@ -425,7 +438,7 @@ class ProfileManager {
         key: 'instagram_id',
         label: i18n.t('Instagram ID'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
@@ -444,7 +457,7 @@ class ProfileManager {
         key: 'facebook_link',
         label: i18n.t('Facebook link'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
@@ -463,7 +476,7 @@ class ProfileManager {
         key: 'linkedin_link',
         label: i18n.t('Linkedin link'),
         profileType: 'all',
-        render: (mode: string, item: any, data: any, params?: any) => {
+        render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
               key={item.key}
