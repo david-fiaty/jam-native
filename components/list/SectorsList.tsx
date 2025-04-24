@@ -17,12 +17,18 @@ import CollapsibleView from "../view/CollapsibleView";
 
 type Props = {
   resource: string;
+  field?: any;
+  value?: any;
 };
 
-const SectorsList = ({ resource }: Props) => {
+const SectorsList = ({ resource, field, value }: Props) => {
+  const formData: any = useSelector((state: any) => state.form[resource]);
 
-  console.log('--->', resource);
+  console.log('resource --->', resource);
+  console.log('field --->', field);
+  console.log('value --->', value);
 
+  console.log('formData', formData);
   return (
     <></>
   );
