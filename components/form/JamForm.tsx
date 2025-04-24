@@ -121,7 +121,7 @@ const JamForm = ({ resource, jamId }: Props) => {
       scroll={true}
       style={Layout.screenContent}
     >
-      <BoxView direction="column" style={Layout.formContainer}>
+      <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
         <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
         <ListView
           data={jamCategories}
@@ -236,11 +236,13 @@ const JamForm = ({ resource, jamId }: Props) => {
           }
         />
 
-        <ButtonView
-          label={i18n.t('Post')}
-          isProcessing={isProcessing}
-          onPress={submitForm}
-        />
+        <View style={styles.submitButtonContainer}>
+          <ButtonView
+            label={i18n.t('Post')}
+            isProcessing={isProcessing}
+            onPress={submitForm}
+          />
+        </View>
 
         <DividerView />
       </BoxView>
@@ -249,6 +251,10 @@ const JamForm = ({ resource, jamId }: Props) => {
 };
 
 const styles = StyleSheet.create({
+  formContainer: {
+    maxWidth: '100%',
+    flexShrink: 1,
+  },
   categoryContainer: {
     flexDirection: 'column',
     gap: Layout.space.small,
@@ -271,6 +277,10 @@ const styles = StyleSheet.create({
   fieldContainer: {
     maxWidth: '100%',
     flexShrink: 1,
+  },
+  submitButtonContainer: {
+    marginTop: Layout.space.base,
+    marginBottom: Layout.space.base,
   },
 });
 
