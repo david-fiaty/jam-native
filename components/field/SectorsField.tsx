@@ -102,7 +102,6 @@ const SectorsField = ({ resource, field, value, placeholder, onChangeValue, onDe
         onPress={() => ModalManager.toggleModal('SectorsList', {
           resource: 'profile',
           field: field,
-          value: value,
         })}
       >
         <InputTextField
