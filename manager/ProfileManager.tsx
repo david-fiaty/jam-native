@@ -8,7 +8,6 @@ import InputTextareaField from '@/components/field/InputTextareaField';
 import CountryField from '@/components/field/CountryField';
 import SectorsField from '@/components/field/SectorsField';
 import LocationPickerField from '@/components/field/LocationPickerField';
-import PersonalProfileForm from '@/components/form/profile-form/PersonalProfileForm';
 import OrganizationProfileForm from '@/components/form/profile-form/OrganizationProfileForm';
 import VenueProfileForm from '@/components/form/profile-form/VenueProfileForm';
 import ProfileImageField from '@/components/field/ProfileImageField';
