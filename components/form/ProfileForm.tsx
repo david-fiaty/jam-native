@@ -15,6 +15,7 @@ import ScreenManager from "@/manager/ScreenManager";
 import SpinnerView from "../view/SpinnerView";
 import TextView from "../view/TextView";
 import InputTextField from "../field/InputTextField";
+import InputTextareaField from "../field/InputTextareaField";
 
 type Props = {
   resource?: any;
@@ -234,8 +235,14 @@ const ProfileForm = ({ resource }: Props) => {
         onChangeText={(value: string) => updateField('profile_name', value)}
       />
 
-
-
+      <TextView>
+        {i18n.t('About')}
+      </TextView>
+      <InputTextareaField
+        value={formData?.profile_description}
+        placeholder={i18n.t('Profile description')}
+        onChangeText={(value: string) => updateField('profile_description', value)}
+      />
 
       {/* Submit button */}
       <View style={styles.submitButtonContainer}>
