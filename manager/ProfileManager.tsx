@@ -8,8 +8,6 @@ import InputTextareaField from '@/components/field/InputTextareaField';
 import CountryField from '@/components/field/CountryField';
 import SectorsField from '@/components/field/SectorsField';
 import LocationPickerField from '@/components/field/LocationPickerField';
-import OrganizationProfileForm from '@/components/form/profile-form/OrganizationProfileForm';
-import VenueProfileForm from '@/components/form/profile-form/VenueProfileForm';
 import ProfileImageField from '@/components/field/ProfileImageField';
 import ModalManager from './ModalManager';
 
@@ -22,7 +20,8 @@ class ProfileManager {
         paddingRight: 0,
       },
       label: {
-        marginBottom: Layout.space.base / 2,
+        marginTop: Layout.space.base,
+        marginBottom: Layout.space.base/2,
       },
     };
   }
@@ -87,7 +86,9 @@ class ProfileManager {
         render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <>
-              <TextView style={this.getStyles().label}>{i18n.t('First name')}</TextView>
+              <TextView style={this.getStyles().label}>
+                {i18n.t('First name')}
+              </TextView>
               <InputTextField
                 value={data?.[item.key]?.first_name}
                 placeholder={i18n.t('Enter your first name')}
@@ -97,7 +98,9 @@ class ProfileManager {
                 })}
               />
 
-              <TextView style={this.getStyles().label}>{i18n.t('Last name')}</TextView>
+              <TextView style={this.getStyles().label}>
+                {i18n.t('Last name')}
+              </TextView>
               <InputTextField
                 value={data?.[item.key]?.last_name}
                 placeholder={i18n.t('Enter your last name')}
@@ -120,14 +123,31 @@ class ProfileManager {
         profileType: 'organization',
         render: (resource: string, item: any, data: any, params?: any) => {
           return (
-            <OrganizationProfileForm 
-              key={item?.key}
-              resource={resource}
-              item={item} 
-              data={data} 
-              params={params} 
-              parentKey={item?.key}
-            />
+            <>
+              <TextView style={this.getStyles().label}>
+                {i18n.t('Organization name')}
+              </TextView>
+              <InputTextField
+                value={data?.[item.key]?.organization_name}
+                placeholder={i18n.t('Enter your organization name')}
+                onChangeText={(value: string) => this.setFormData(item, {
+                  ...(data?.[item.key]?.organization_name || {}),
+                  ...{organization_name: value},
+                })}
+              />
+
+              <TextView style={this.getStyles().label}>
+                {i18n.t('Creation year')}
+              </TextView>
+              <InputTextField
+                value={data?.[item.key]?.creation_year}
+                placeholder={i18n.t('Enter the creation year')}
+                onChangeText={(value: string) => this.setFormData(item, {
+                  ...(data?.[item.key]?.creation_year || {}),
+                  ...{creation_year: value},
+                })}
+              />
+            </>
           );
         },
       },
@@ -141,14 +161,31 @@ class ProfileManager {
         profileType: 'venue',
         render: (resource: string, item: any, data: any, params?: any) => {
           return (
-            <VenueProfileForm
-              key={item?.key}
-              resource={resource}
-              item={item} 
-              data={data} 
-              params={params} 
-              parentKey={item?.key}
-            />
+            <>
+              <TextView style={this.getStyles().label}>
+                {i18n.t('Venue name')}
+              </TextView>
+              <InputTextField
+                value={data?.[item.key]?.venue_name}
+                placeholder={i18n.t('Enter the venue name')}
+                onChangeText={(value: string) => this.setFormData(item, {
+                  ...(data?.[item.key]?.venue_name || {}),
+                  ...{venue_name: value},
+                })}
+              />
+
+              <TextView style={this.getStyles().label}>
+                {i18n.t('Creation year')}
+              </TextView>
+              <InputTextField
+                value={data?.[item.key]?.creation_year}
+                placeholder={i18n.t('Enter the creation year')}
+                onChangeText={(value: string) => this.setFormData(item, {
+                  ...(data?.[item.key]?.creation_year || {}),
+                  ...{creation_year: value},
+                })}
+              />
+            </>
           );
         },
       },
