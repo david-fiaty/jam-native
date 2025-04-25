@@ -42,7 +42,7 @@ const SignupSection = () => {
       
       {formData?.success !== true && <SignupEmailForm />}
       {formData?.success !== true && formData?.session?.length > 0 && <SignupCodeForm />}
-      {formData?.success === true && <ProfileForm />}
+      {formData?.success === true && <ProfileForm resource="signup" />}
     </BoxView>
   );
 };
