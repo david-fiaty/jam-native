@@ -29,7 +29,7 @@ const BoxView = ({direction, align, justify, scroll, onPress, onLayout, style, c
 
   if (scroll) {
     output = (
-      <ScrollView nestedScrollEnabled={true}>
+      <ScrollView nestedScrollEnabled={true} style={styles.scrollContainer}>
         <Pressable>{output}</Pressable>
       </ScrollView>      
     );
@@ -49,6 +49,9 @@ const styles = StyleSheet.create({
   container: {
     gap: Layout.space.base,
   },
+  scrollContainer: {
+    width: '100%',
+  }
 });
 
 export default BoxView;

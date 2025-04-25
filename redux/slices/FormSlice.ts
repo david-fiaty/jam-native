@@ -14,7 +14,7 @@ const FormSlice = createSlice({
       if (action.payload.key) {
         state[action.payload.resource][action.payload.key] = action.payload.value;
       }
-      else if (action.payload.value) {
+      else if (Object.keys(action.payload.value).length > 0) {
         for (const [key, value] of Object.entries(action.payload.value)) {
           state[action.payload.resource][key] = value;
         }
