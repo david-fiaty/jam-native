@@ -165,6 +165,62 @@ const ProfileForm = ({ resource }: Props) => {
         </>
       )}
 
+      {formData?.profile_type == 'organization' && (
+        <>
+          <TextView>
+            {i18n.t('Organization name')}
+          </TextView>
+          <InputTextField
+            value={formData?.profile_organization?.organization_name}
+            placeholder={i18n.t('Enter your organization name')}
+            onChangeText={(value: string) => updateField('profile_organization', {
+              ...(formData?.profile_organization || {}),
+              ...{ organization_name: value },
+            })}
+          />
+
+          <TextView>
+            {i18n.t('Creation year')}
+          </TextView>
+          <InputTextField
+            value={formData?.profile_organization?.creation_year}
+            placeholder={i18n.t('Enter the creation year')}
+            onChangeText={(value: string) => updateField('profile_organization', {
+              ...(formData?.profile_organization || {}),
+              ...{ creation_year: value },
+            })}
+          />
+        </>
+      )}
+
+      {formData?.profile_type == 'venue' && (
+        <>
+          <TextView>
+            {i18n.t('Venue name')}
+          </TextView>
+          <InputTextField
+            value={formData?.profile_venue?.venue_name}
+            placeholder={i18n.t('Enter the venue name')}
+            onChangeText={(value: string) => updateField('profile_venue', {
+              ...(formData?.profile_venue || {}),
+              ...{ venue_name: value },
+            })}
+          />
+
+          <TextView>
+            {i18n.t('Creation year')}
+          </TextView>
+          <InputTextField
+            value={formData?.profile_venue?.creation_year}
+            placeholder={i18n.t('Enter the creation year')}
+            onChangeText={(value: string) => updateField('profile_venue', {
+              ...(formData?.profile_venue || {}),
+              ...{ creation_year: value },
+            })}
+          />
+        </>
+      )}
+
       <View style={styles.submitButtonContainer}>
         <ButtonView
           label={getSubmitLabel()}
