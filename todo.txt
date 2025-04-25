@@ -16,6 +16,9 @@ eas update --branch dev-features-12
 eas update --branch dev-features-12 --platform ios
 eas update --branch dev-features-12 --platform android
 
+# Build web
+npx expo export -p web
+
 # Build apk
 eas build -p android --clear-cache --profile preview 
 
@@ -47,7 +50,13 @@ exyT6hT64S4i7tjGYF
 Port: 22
 
 # Linux Commands
-- list processes: ps aux | grep node
+- list processes: 
+ps aux | grep node
+
+- remove all folders except: 
+shopt -s extglob
+rm -rf !("folder_to_keep")
+
 
 # Google Maps Issues
 https://github.com/react-native-maps/react-native-maps/discussions/4741#discussioncomment-12582128

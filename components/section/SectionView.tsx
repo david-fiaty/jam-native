@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { usePathname } from 'expo-router';
 import { setActiveSections } from "@/redux/slices/SectionSlice";
 import { StyleSheet } from 'react-native';
 import { Colors } from '@/constants/Colors';
@@ -12,22 +13,18 @@ import ModalView from "../modal/ModalView";
 import SectionBackButton from "./navigation/SectionBackButton";
 import SectionManager from "@/manager/SectionManager";
 
-type Props = {
-  sectionId?: any;
-};
-
-const SectionView = ({ sectionId }: Props) => { 
-  sectionId = sectionId || Config.defaultSection;
-
+const SectionView = () => { 
+  const path = usePathname();
   const dispatch = useDispatch();
   const [currentSection, setCurrentSection] = useState<any>(null);
   const sectionState: any = useSelector((state: any) => state.section);
 
   useEffect(() => {
-    setCurrentSection(SectionManager.getSection(sectionId));
+    const sectionId = path.split('/').pop();
+    setCurrentSection(SectionManager.getSection(sectionId || Config.defaultSection));
     let activeSections: any = sectionState.active.includes(sectionId) ? sectionState.active : [...sectionState.active, sectionId];
     dispatch(setActiveSections(activeSections));
-  }, [sectionId, sectionState]);
+  }, [path, sectionState]);
 
   return (
     <>
