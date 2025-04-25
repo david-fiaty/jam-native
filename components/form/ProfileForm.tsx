@@ -57,7 +57,7 @@ const ProfileForm = ({ resource }: Props) => {
   const submitProfileForm = async () => {
     let result: any = await UserManager.updateProfile(formData);
 
-    if (result.success === false) {
+    if (result?.error) {
       ScreenManager.showMessage({
         title: i18n.t('Profile update'),
         //content: result.error, // Todo - Implement field error management
