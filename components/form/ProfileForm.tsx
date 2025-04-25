@@ -165,16 +165,6 @@ const ProfileForm = ({ resource }: Props) => {
         </>
       )}
 
-      { /*canRenderForm() === true && profileFields.map((item: any) => {
-        if (ProfileManager.canRenderField(resource, item, formData)) {
-          return (
-            <View key={item.key} style={styles.fieldContainer}>
-              {ProfileManager.renderField(resource, item, formData)}
-            </View>
-          );
-        }
-      }) */}
-
       <View style={styles.submitButtonContainer}>
         <ButtonView
           label={getSubmitLabel()}
