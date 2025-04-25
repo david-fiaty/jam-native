@@ -116,8 +116,6 @@ const ProfileForm = ({ resource }: Props) => {
   }, [isLoaded, formData, resource]);
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(formData);
   
   return (
     <View style={[Layout.formContainer, styles.container]}>
@@ -126,13 +124,6 @@ const ProfileForm = ({ resource }: Props) => {
           <ProfileImageField
             value={formData?.upload_profile_picture?.url}
             onChangeValue={(mediaList: any) => updateField('upload_profile_picture', { url: mediaList[0]?.uri })}
-          />
-
-          <ProfileTypeField
-            value={formData?.profile_type}
-            onChangeValue={(option: any) =>
-              updateField("profile_type", option.value)
-            }
           />
         </>
       )}
