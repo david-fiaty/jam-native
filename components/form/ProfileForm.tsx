@@ -125,6 +125,11 @@ const ProfileForm = ({ resource }: Props) => {
             value={formData?.upload_profile_picture?.url}
             onChangeValue={(mediaList: any) => updateField('upload_profile_picture', { url: mediaList[0]?.uri })}
           />
+
+          <ProfileTypeField
+            value={formData?.profile_type}
+            onChangeValue={(option: any) => updateField('profile_type', option.value)}
+          />
         </>
       )}
 
