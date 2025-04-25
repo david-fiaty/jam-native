@@ -13,6 +13,8 @@ import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
 import SpinnerView from "../view/SpinnerView";
+import TextView from "../view/TextView";
+import InputTextField from "../field/InputTextField";
 
 type Props = {
   resource?: any;
@@ -35,7 +37,7 @@ const ProfileForm = ({ resource }: Props) => {
       value: value,
     }));
   };
- 
+
   const canRenderForm = () => {
     return formData?.profile_type?.length > 0
       || resource == 'profile';
@@ -104,10 +106,10 @@ const ProfileForm = ({ resource }: Props) => {
         setProfileId(await UserManager.getProfileId());
 
         if (resource == 'profile') {
-          dispatch(setFormData<any>({ 
+          dispatch(setFormData<any>({
             resource: resource,
-            key: null, 
-            value: await UserManager.getProfileData(), 
+            key: null,
+            value: await UserManager.getProfileData(),
           }));
         }
         setIsLoaded(true);
@@ -116,7 +118,9 @@ const ProfileForm = ({ resource }: Props) => {
   }, [isLoaded, formData, resource]);
 
   if (!isLoaded) return <SpinnerView />;
-  
+
+  console.log('profile_form', formData);
+
   return (
     <View style={[Layout.formContainer, styles.container]}>
       {resource == 'signup' && (
@@ -125,18 +129,97 @@ const ProfileForm = ({ resource }: Props) => {
             value={formData?.upload_profile_picture?.url}
             onChangeValue={(mediaList: any) => updateField('upload_profile_picture', { url: mediaList[0]?.uri })}
           />
+
+          <ProfileTypeField
+            value={formData?.profile_type}
+            onChangeValue={(option: any) => updateField('profile_type', option.value)}
+          />
         </>
       )}
 
-      {canRenderForm() === true && profileFields.map((item: any) => {
-        if (ProfileManager.canRenderField(resource, item, formData)) {
-          return (
-            <View key={item.key} style={styles.fieldContainer}>
-              {ProfileManager.renderField(resource, item, formData)}
-            </View>
-          );
-        }
-      })}
+      {formData?.profile_type == 'personal' && (
+        <>
+          <TextView>
+            {i18n.t('First name')}
+          </TextView>
+          <InputTextField
+            value={formData?.profile_personal?.first_name}
+            placeholder={i18n.t('Enter your first name')}
+            onChangeText={(value: string) => updateField('profile_personal', {
+              ...(formData?.profile_personal || {}),
+              ...{ first_name: value },
+            })}
+          />
+
+          <TextView>
+            {i18n.t('Last name')}
+          </TextView>
+          <InputTextField
+            value={formData?.profile_personal?.last_name}
+            placeholder={i18n.t('Enter your last name')}
+            onChangeText={(value: string) => updateField('profile_personal', {
+              ...(formData?.profile_personal || {}),
+              ...{ last_name: value },
+            })}
+          />
+        </>
+      )}
+
+      {formData?.profile_type == 'organization' && (
+        <>
+          <TextView>
+            {i18n.t('Organization name')}
+          </TextView>
+          <InputTextField
+            value={formData?.profile_organization?.organization_name}
+            placeholder={i18n.t('Enter your organization name')}
+            onChangeText={(value: string) => updateField('profile_organization', {
+              ...(formData?.profile_organization || {}),
+              ...{ organization_name: value },
+            })}
+          />
+
+          <TextView>
+            {i18n.t('Creation year')}
+          </TextView>
+          <InputTextField
+            value={formData?.profile_organization?.creation_year}
+            placeholder={i18n.t('Enter the creation year')}
+            onChangeText={(value: string) => updateField('profile_organization', {
+              ...(formData?.profile_organization || {}),
+              ...{ creation_year: value },
+            })}
+          />
+        </>
+      )}
+
+      {formData?.profile_type == 'venue' && (
+        <>
+          <TextView>
+            {i18n.t('Venue name')}
+          </TextView>
+          <InputTextField
+            value={formData?.profile_venue?.venue_name}
+            placeholder={i18n.t('Enter the venue name')}
+            onChangeText={(value: string) => updateField('profile_venue', {
+              ...(formData?.profile_venue || {}),
+              ...{ venue_name: value },
+            })}
+          />
+
+          <TextView>
+            {i18n.t('Creation year')}
+          </TextView>
+          <InputTextField
+            value={formData?.profile_venue?.creation_year}
+            placeholder={i18n.t('Enter the creation year')}
+            onChangeText={(value: string) => updateField('profile_venue', {
+              ...(formData?.profile_venue || {}),
+              ...{ creation_year: value },
+            })}
+          />
+        </>
+      )}
 
       <View style={styles.submitButtonContainer}>
         <ButtonView
