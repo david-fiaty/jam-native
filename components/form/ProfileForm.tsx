@@ -57,7 +57,7 @@ const ProfileForm = ({ resource }: Props) => {
   const submitProfileForm = async () => {
     let result: any = await UserManager.updateProfile(formData);
 
-    if (result.success === false) {
+    if (result?.error) {
       ScreenManager.showMessage({
         title: i18n.t('Profile update'),
         //content: result.error, // Todo - Implement field error management
@@ -124,11 +124,6 @@ const ProfileForm = ({ resource }: Props) => {
           <ProfileImageField
             value={formData?.upload_profile_picture?.url}
             onChangeValue={(mediaList: any) => updateField('upload_profile_picture', { url: mediaList[0]?.uri })}
-          />
-
-          <ProfileTypeField
-            value={formData?.profile_type}
-            onChangeValue={(option: any) => updateField('profile_type', option.value)}
           />
         </>
       )}
