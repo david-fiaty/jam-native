@@ -1,0 +1,249 @@
+import { useState, useEffect } from "react";
+import { useRouter } from "expo-router";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { useSelector } from "react-redux";
+import { Layout } from "@/constants/Layout";
+import BoxView from "@/components/view/BoxView";
+import IconView from "@/components/view/IconView";
+import TextView from "@/components/view/TextView";
+import UserManager from "@/manager/UserManager";
+import EntityManager from "@/manager/EntityManager";
+import i18n from "@/translation/i18n";
+import ScreenManager from "@/manager/ScreenManager";
+import SpinnerView from "@/components/view/SpinnerView";
+import ModalManager from "@/manager/ModalManager";
+
+type Props = {
+  row?: any;
+  profileData?: any
+};
+
+const ListItemToolbar = ({ row, profileData }: Props) => {
+  const router = useRouter();
+  const [isLikeProcessing, setIsLikeProcessing] = useState<boolean>(false);
+  const [isSaveProcessing, setIsSaveProcessing] = useState<boolean>(false);
+  const [isShareProcessing, setIsShareProcessing] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const userState: any = useSelector((state: any) => state.user);
+
+  const isJamLiked = () => {
+    return profileData?.liked_jams?.includes(row.item.id) || userState.likedJams.includes(row.item.id);
+  };
+
+  const isJamSaved = () => {
+    return profileData?.saved_jams?.includes(row.item.id) || userState.savedJams.includes(row.item.id);
+  };
+
+  const getLikeIconTheme = () => {
+    return isJamLiked() ? "primary" : "tertiary";
+  };
+
+  const getSaveIconTheme = () => {
+    return isJamSaved() ? "primary" : "tertiary";
+  };
+
+  const saveJam = async () => {
+    if (!isLoggedIn) {
+      ScreenManager.pushScreen(router, '/login');
+    }
+    else {
+      setIsSaveProcessing(true);
+      let result: any = {};
+      let message: any = {};
+
+      if (isJamSaved()) {
+        result = await EntityManager.unsaveJam(row.item.id);
+        message = {
+          title: i18n.t('Unsave Jam'),
+          content: i18n.t('The Jam was unsaved.'),
+        };
+      }
+      else {
+        result = await EntityManager.saveJam(row.item.id);
+        message = {
+          title: i18n.t('Save Jam'),
+          content: i18n.t('The Jam was saved.'),
+        };
+      }
+
+      if (result?.error) {
+        message.content = i18n.t(result.error);
+      }
+      else {
+        setIsSaveProcessing(false);
+        await UserManager.updateSavedJams(row.item.id);
+        ScreenManager.showMessage(message);
+      }
+    }
+  };
+
+  const likeJam = async () => {
+    if (!isLoggedIn) {
+      ScreenManager.pushScreen(router, '/login');
+    }
+    else {
+      setIsLikeProcessing(true);
+      let result: any = {};
+      let message: any = {};
+
+      if (isJamLiked()) {
+        result = await EntityManager.unlikeJam(row.item.id);
+        message = {
+          title: i18n.t('Unlike Jam'),
+          content: i18n.t('The Jam was unliked.'),
+        };
+      }
+      else {
+        result = await EntityManager.likeJam(row.item.id);
+        message = {
+          title: i18n.t('Like Jam'),
+          content: i18n.t('The Jam was liked.'),
+        };
+      }
+
+      if (result?.error) {
+        message.content = i18n.t(result.error);
+      }
+      else {
+        setIsLikeProcessing(false);
+        await UserManager.updateLikedJams(row.item.id);
+        ScreenManager.showMessage(message);
+      }
+    }
+  };
+
+  const shareJam = async () => {
+    if (!isLoggedIn) {
+      ScreenManager.pushScreen(router, '/login');
+    }
+    else {
+      setIsShareProcessing(true);
+      await EntityManager.shareJam(row?.item?.id);
+      setIsShareProcessing(false);
+    }
+  };
+
+  const renderLikeButton = () => {
+    return (
+      <BoxView
+        direction="row"
+        align="center"
+      >
+        {isLikeProcessing && (
+          <View style={styles.spinnerContainer}>
+            <SpinnerView size="small" />
+          </View>
+        )}
+
+        {!isLikeProcessing && (
+          <IconView 
+            name="like"
+            theme={getLikeIconTheme()}
+            size={12}
+            padding={6}
+            onPress={likeJam}
+          />
+        )}
+      </BoxView>
+    );
+  };
+
+  const renderJammersButton = () => {
+    return (
+      <TouchableOpacity onPress={() => ModalManager.toggleModal('JammersList', { jamId: row?.item?.id })}>
+        <TextView>
+          {parseInt(row?.item?.jammers?.length)} {i18n.t("jammers")}
+        </TextView>
+      </TouchableOpacity>
+    );
+  };
+
+  const renderSaveButton = () => {
+    if (isSaveProcessing) return <SpinnerView size="small" />;
+
+    return (
+      <BoxView
+        direction="row"
+        align="center"
+      >
+        <IconView 
+          name="save"
+          theme={getSaveIconTheme()}
+          size={12}
+          padding={6}
+          onPress={saveJam}
+        />
+      </BoxView>
+    );
+  };
+
+  const renderShareButton = () => {
+    return (
+      <BoxView
+        direction="row"
+        align="center"
+      >
+        {isShareProcessing && (
+          <View style={styles.spinnerContainer}>
+            <SpinnerView size="small" />
+          </View>
+        )}
+
+        {!isShareProcessing && (
+          <IconView
+            name="share"
+            theme="tertiary"
+            size={12}
+            padding={6}
+            onPress={shareJam}
+          />
+        )}
+      </BoxView>
+    );
+  };
+
+  const renderComponent = () => {
+    return (
+      <BoxView
+        direction="row"
+        align="center"
+        justify="space-between"
+        style={styles.container}
+      >
+        <BoxView direction="row" align="center" justify="flex-start">
+          {renderLikeButton()}
+          {renderJammersButton()}
+        </BoxView>
+  
+        <BoxView direction="row" align="center" justify="flex-end">
+          <BoxView align="center">
+            {renderSaveButton()}
+          </BoxView>
+  
+          <BoxView align="center">
+            {renderShareButton()}
+          </BoxView>
+        </BoxView>
+      </BoxView>
+    );  
+  };
+
+  useEffect(() => {
+    (async () => {
+      setIsLoggedIn(await UserManager.isLoggedIn());
+    })();
+  });
+
+  return renderComponent();
+};
+
+const styles = StyleSheet.create({
+  container: {
+    padding: Layout.space.base*1.2,
+  },
+  spinnerContainer: {
+    marginLeft: 5,
+  },
+});
+
+export default ListItemToolbar;

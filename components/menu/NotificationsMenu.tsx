@@ -1,0 +1,60 @@
+import { useState } from "react";
+import { View, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
+import { Layout } from '@/constants/Layout';
+import { Config } from "@/constants/Config";
+import ListView from '../view/ListView';
+import TextView from '../view/TextView';
+import i18n from '@/translation/i18n';
+import UserManager from "@/manager/UserManager";
+import SpinnerView from "../view/SpinnerView";
+import BoxView from "../view/BoxView";
+import ScreenManager from "@/manager/ScreenManager";
+
+const NotificationsMenu = () => {
+  const router = useRouter();
+  const [notificationsData, setNotificationsData] = useState<any>([]);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
+  const renderItem = (row: any) => (
+    <TouchableOpacity 
+      key={row.item.id} 
+      onPress={() => ScreenManager.pushScreen(router, '/notification', { entityId: row.item.id })}
+    >
+      <View style={Layout.menuItem}>
+        <TextView>
+          {row.item?.content?.content_data?.title}
+        </TextView>
+      </View>
+    </TouchableOpacity>
+  );
+
+  if (!isLoaded) { 
+    UserManager.getNotifications().then((data: any) => {
+      if (data?.length > Config.maxNotificationsDisplay) {
+        data = data.slice(Config.maxNotificationsDisplay - 1);
+      } 
+    
+      setNotificationsData(data);
+      setIsLoaded(true);
+    });
+  }
+
+  if (!isLoaded) return <SpinnerView />;
+
+  return (
+    <BoxView 
+      align="flex-start"
+      justify="flex-start"
+      style={Layout.menuContainer}
+    >
+      <ListView 
+        data={notificationsData} 
+        renderItem={(row: any) => renderItem(row)}   
+        emptyMessage={<TextView>{i18n.t('No notifications available.')}</TextView>}
+      />
+    </BoxView>
+  );
+};
+
+export default NotificationsMenu;

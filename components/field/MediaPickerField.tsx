@@ -1,0 +1,184 @@
+import { useState, useEffect } from "react";
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { BaseProps } from '@/constants/Types';
+import { Layout } from '@/constants/Layout';
+import * as ImagePicker from 'expo-image-picker';
+import ImageView from '../view/ImageView';
+import TextView from '../view/TextView';
+import BoxView from '../view/BoxView';
+import IconView from '../view/IconView';
+import MediaManager from '@/manager/MediaManager';
+import DataManager from "@/manager/DataManager";
+
+type Props = BaseProps & {
+  label?: JSX.Element, 
+  value?: any,
+  preview?: boolean
+  onSelectItem?: (data: any) => void,
+  onDeleteItem?: (data: any) => void,
+};
+
+const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: Props) => {  
+  const [selectedMedia, setSelectedMedia] = useState<any>([]);
+  const [selectedPreview, setSelectedPreview] = useState<any>([]);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const imageSize: any = MediaManager.getThumbnailSize();
+
+  const deleteMedia = (data: any) => {
+    let mediaList = [...selectedMedia];  
+    mediaList = mediaList.filter((item: any) => item.fileName !== data.fileName);
+    setSelectedMedia(mediaList);
+    if (onDeleteItem) onDeleteItem(mediaList);
+  };
+
+  const updatePreviewSelection = (data: any) => {
+    let mediaList = [...selectedPreview];
+    if (!selectedPreview.includes(data.fileName)) {
+      mediaList.push(data.fileName);
+      setSelectedPreview(mediaList);
+    }
+    else {
+      mediaList = mediaList.filter((item: any) => item.fileName === data.fileName);
+      setSelectedPreview(mediaList);
+    }
+  }; 
+
+  const renderImagePreview = (data: any) => {
+    const isSelected = selectedPreview.includes(data.fileName);
+    const imageStyle = {
+      ...styles.mediaPreview,
+      ...isSelected ? styles.selectedPreview : {},
+    };
+
+    return (
+      <TouchableOpacity 
+        key={data.uri} 
+        onPress={() => updatePreviewSelection(data)}
+      >
+        <ImageView 
+          key={data.uri} 
+          uri={data.uri} 
+          width={imageSize.width} 
+          height={imageSize.height} 
+          resizeMode="cover" 
+          style={imageStyle}
+        />
+
+        { isSelected && 
+          <TouchableOpacity 
+            style={styles.deleteMedia}
+            onPress={() => deleteMedia(data)}
+          >
+            <IconView name="delete" theme="primary" size={12} padding={3.5} />
+          </TouchableOpacity>
+        } 
+      </TouchableOpacity>
+    );    
+  };
+
+  const launchBrowser = async () => {
+    return await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ['images'],
+      allowsEditing: false,
+      aspect: [4, 3],
+      quality: 1,
+      base64: true,
+    });
+  };
+
+  const pickImage = async () => {
+    let result: any = await launchBrowser();
+
+    if (!result.canceled && result?.assets?.length) {
+      let mediaList: any = [...selectedMedia];
+      for (const row of result?.assets) {
+        let mediaExists: boolean = mediaList.some((item: any) => item.fileName === row.fileName);
+        if (!mediaExists) mediaList.push(row);
+      }
+
+      setSelectedMedia(mediaList);
+      setSelectedPreview([]);
+      if (onSelectItem) onSelectItem(mediaList);
+    }
+  };
+
+  const createMediaObject = async (media: any) => {
+    let mediaUrl: any = MediaManager.getImageUrl(media?.url); 
+    let base64 = await MediaManager.getImageBase64(mediaUrl);
+
+    return {
+      assetId: media?.id,
+      fileName: mediaUrl,
+      uri: mediaUrl,
+      fileSize: null,
+      height: imageSize.height,
+      width: imageSize.width,
+      mimeType: null,
+      rotation: null,
+      type: 'image',
+      base64: base64,
+      duration: null,
+      exif: null,
+    };
+  }
+
+  const getSelectedMedia = async () => {
+    let mediaList: any = [...selectedMedia || []];
+
+    for (const item of (value || [])) {
+      let url: string = MediaManager.getImageUrl(item?.url);
+      if (DataManager.isUrl(url)) {
+        mediaList.push(await createMediaObject(item));
+      }
+    }
+
+    return mediaList;
+  }; 
+
+  useEffect(() => {
+    (async () => {
+      if (!isLoaded) {
+        setIsLoaded(true);
+        setSelectedMedia(await getSelectedMedia());
+      }
+    })();
+  }, [isLoaded]);
+  
+
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity onPress={pickImage}>
+        <TextView>{label}</TextView>
+      </TouchableOpacity>
+
+      { selectedMedia?.length > 0 && preview &&
+        <BoxView direction="row" align="flex-start" justify="left" style={styles.previewContainer}>
+          { selectedMedia.map((data: any) => {
+            if (data?.uri) return renderImagePreview(data);
+          })}
+        </BoxView>
+      }
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {},
+  previewContainer: {
+    paddingVertical: Layout.space.base,
+    gap: Layout.space.base*1,
+  },
+  mediaPreview: {
+    borderRadius: Layout.radius.round,
+  },
+  selectedPreview: {
+    opacity: 0.7,
+  },
+  deleteMedia: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+  },
+});
+
+export default MediaPickerField;
