@@ -117,6 +117,8 @@ const ProfileForm = ({ resource }: Props) => {
 
   if (!isLoaded) return <SpinnerView />;
   
+  console.log('profile_form', formData);
+  
   return (
     <View style={[Layout.formContainer, styles.container]}>
       {resource == 'signup' && (
