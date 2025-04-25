@@ -16,6 +16,7 @@ import SpinnerView from "../view/SpinnerView";
 import TextView from "../view/TextView";
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
+import CountryField from "../field/CountryField";
 
 type Props = {
   resource?: any;
@@ -243,6 +244,24 @@ const ProfileForm = ({ resource }: Props) => {
         placeholder={i18n.t('Profile description')}
         onChangeText={(value: string) => updateField('profile_description', value)}
       />
+
+      <TextView>
+        {i18n.t('Address')}
+      </TextView>
+      <InputTextField
+        value={formData?.address}
+        placeholder={i18n.t('Enter your address')}
+        onChangeText={(value: string) => updateField('address', value)}
+      />
+
+      <TextView>
+        {i18n.t('Country')}
+      </TextView>
+      <CountryField
+        value={formData?.scope_country_code}
+        onChangeValue={(o: any) => updateField('scope_country_code', o.value)}
+      />
+
 
       {/* Submit button */}
       <View style={styles.submitButtonContainer}>
