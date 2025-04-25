@@ -102,11 +102,14 @@ const ProfileForm = ({ resource }: Props) => {
     (async () => {
       if (!isLoaded) {
         setProfileId(await UserManager.getProfileId());
-        dispatch(setFormData<any>({ 
-          resource: resource,
-          key: null, 
-          value: await UserManager.getProfileData(), 
-        }));
+
+        if (resource == 'profile') {
+          dispatch(setFormData<any>({ 
+            resource: resource,
+            key: null, 
+            value: await UserManager.getProfileData(), 
+          }));
+        }
         setIsLoaded(true);
       }
     })();
