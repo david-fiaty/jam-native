@@ -90,11 +90,21 @@ class ProfileManager {
             <>
               <TextView style={this.getStyles().label}>{i18n.t('First name')}</TextView>
               <InputTextField
-                value={data?.profile_personal?.first_name}
+                value={data?.[item.key]?.first_name}
                 placeholder={i18n.t('Enter your first name')}
                 onChangeText={(value: string) => this.setFormData(item, {
-                  ...(data?.profile_personal?.first_name || {}),
+                  ...(data?.[item.key]?.first_name || {}),
                   ...{first_name: value},
+                })}
+              />
+
+              <TextView style={this.getStyles().label}>{i18n.t('Last name')}</TextView>
+              <InputTextField
+                value={data?.[item.key]?.last_name}
+                placeholder={i18n.t('Enter your last name')}
+                onChangeText={(value: string) => this.setFormData(item, {
+                  ...(data?.[item.key]?.last_name || {}),
+                  ...{last_name: value},
                 })}
               />
             </>
