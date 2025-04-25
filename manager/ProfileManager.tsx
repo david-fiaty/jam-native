@@ -149,8 +149,6 @@ class ProfileManager {
         label: i18n.t('Profile name (with no spaces)'),
         profileType: 'all',
         render: (resource: string, item: any, data: any, params?: any) => {
-
-          console.log('---------------------------->', item);
           return (
             <InputTextField
               key={item?.key}
