@@ -137,6 +137,7 @@ const ProfileForm = ({ resource }: Props) => {
         </>
       )}
 
+      {/* Personal profile */}
       {formData?.profile_type == 'personal' && (
         <>
           <TextView>
@@ -165,6 +166,7 @@ const ProfileForm = ({ resource }: Props) => {
         </>
       )}
 
+      {/* Organization profile */}
       {formData?.profile_type == 'organization' && (
         <>
           <TextView>
@@ -193,6 +195,7 @@ const ProfileForm = ({ resource }: Props) => {
         </>
       )}
 
+      {/* Venue profile */}
       {formData?.profile_type == 'venue' && (
         <>
           <TextView>
@@ -221,6 +224,20 @@ const ProfileForm = ({ resource }: Props) => {
         </>
       )}
 
+      {/* All profiles */}
+      <TextView>
+        {i18n.t('Profile name (with no spaces)')}
+      </TextView>
+      <InputTextField
+        value={formData?.profile_name}
+        placeholder={i18n.t('Profile name')}
+        onChangeText={(value: string) => updateField('profile_name', value)}
+      />
+
+
+
+
+      {/* Submit button */}
       <View style={styles.submitButtonContainer}>
         <ButtonView
           label={getSubmitLabel()}
