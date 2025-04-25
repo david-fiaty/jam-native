@@ -116,8 +116,6 @@ const ProfileForm = ({ resource }: Props) => {
   }, [isLoaded, formData, resource]);
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(formData);
   
   return (
     <View style={[Layout.formContainer, styles.container]}>
@@ -130,9 +128,7 @@ const ProfileForm = ({ resource }: Props) => {
 
           <ProfileTypeField
             value={formData?.profile_type}
-            onChangeValue={(option: any) =>
-              updateField("profile_type", option.value)
-            }
+            onChangeValue={(option: any) => updateField('profile_type', option.value)}
           />
         </>
       )}
