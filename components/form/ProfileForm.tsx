@@ -158,11 +158,13 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: Layout.space.base,
     paddingBottom: Layout.space.base * 2,
+    width: '100%',
   },
   submitButtonContainer: {
     marginTop: Layout.space.base,
   },
   fieldContainer: {
+    width: '100%',
     maxWidth: '100%',
     flexShrink: 1,
   },
