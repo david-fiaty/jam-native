@@ -34,7 +34,7 @@ const SignupSection = () => {
       direction="column" 
       align="center" 
       justify="center" 
-      style={[Layout.screenContent, styles.container]}
+      style={[styles.container]}
       scroll={formData?.success === true}
     >    
       <LogoView size={80} />    
@@ -42,7 +42,7 @@ const SignupSection = () => {
       
       {formData?.success !== true && <SignupEmailForm />}
       {formData?.success !== true && formData?.session?.length > 0 && <SignupCodeForm />}
-      {formData?.success === true && <ProfileForm />}
+      {formData?.success === true && <ProfileForm resource="signup" />}
     </BoxView>
   );
 };
@@ -50,6 +50,7 @@ const SignupSection = () => {
 const styles = StyleSheet.create({
   container: {
     paddingTop: Layout.space.base*4,
+    width: '100%',
   },
   slogan: {
     textTransform: 'uppercase',

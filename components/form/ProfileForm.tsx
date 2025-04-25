@@ -57,7 +57,7 @@ const ProfileForm = ({ resource }: Props) => {
   const submitProfileForm = async () => {
     let result: any = await UserManager.updateProfile(formData);
 
-    if (result.success === false) {
+    if (result?.error) {
       ScreenManager.showMessage({
         title: i18n.t('Profile update'),
         //content: result.error, // Todo - Implement field error management
@@ -102,18 +102,21 @@ const ProfileForm = ({ resource }: Props) => {
     (async () => {
       if (!isLoaded) {
         setProfileId(await UserManager.getProfileId());
-        dispatch(setFormData<any>({ 
-          resource: resource,
-          key: null, 
-          value: await UserManager.getProfileData(), 
-        }));
+
+        if (resource == 'profile') {
+          dispatch(setFormData<any>({ 
+            resource: resource,
+            key: null, 
+            value: await UserManager.getProfileData(), 
+          }));
+        }
         setIsLoaded(true);
       }
     })();
   }, [isLoaded, formData, resource]);
 
   if (!isLoaded) return <SpinnerView />;
-
+  
   return (
     <View style={[Layout.formContainer, styles.container]}>
       {resource == 'signup' && (
@@ -121,11 +124,6 @@ const ProfileForm = ({ resource }: Props) => {
           <ProfileImageField
             value={formData?.upload_profile_picture?.url}
             onChangeValue={(mediaList: any) => updateField('upload_profile_picture', { url: mediaList[0]?.uri })}
-          />
-
-          <ProfileTypeField
-            value={formData?.profile_type}
-            onChangeValue={(option: any) => updateField('profile_type', option.value)}
           />
         </>
       )}
@@ -155,11 +153,13 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: Layout.space.base,
     paddingBottom: Layout.space.base * 2,
+    width: '100%',
   },
   submitButtonContainer: {
     marginTop: Layout.space.base,
   },
   fieldContainer: {
+    width: '100%',
     maxWidth: '100%',
     flexShrink: 1,
   },

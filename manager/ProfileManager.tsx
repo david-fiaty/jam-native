@@ -31,7 +31,7 @@ class ProfileManager {
   setFormData(item: any, value: any) {
     let payload: any = {
       resource: 'profile',
-      key: item.key,
+      key: item?.key,
       value: value,
     };
 
@@ -88,12 +88,12 @@ class ProfileManager {
         render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <PersonalProfileForm 
-              key={item.key}
+              key={item?.key}
               resource={resource}
               item={item} 
               data={data} 
               params={params} 
-              parentKey={item.key}
+              parentKey={item?.key}
             />
           );
         },
@@ -109,12 +109,12 @@ class ProfileManager {
         render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <OrganizationProfileForm 
-              key={item.key}
+              key={item?.key}
               resource={resource}
               item={item} 
               data={data} 
               params={params} 
-              parentKey={item.key}
+              parentKey={item?.key}
             />
           );
         },
@@ -130,12 +130,12 @@ class ProfileManager {
         render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <VenueProfileForm
-              key={item.key}
+              key={item?.key}
               resource={resource}
               item={item} 
               data={data} 
               params={params} 
-              parentKey={item.key}
+              parentKey={item?.key}
             />
           );
         },
@@ -151,8 +151,8 @@ class ProfileManager {
         render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
-              value={data[item.key]}
+              key={item?.key}
+              value={data?.[item?.key]}
               placeholder={i18n.t('Profile name')}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -170,8 +170,8 @@ class ProfileManager {
         render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextareaField
-              key={item.key}
-              value={data[item.key]}
+              key={item?.key}
+              value={data?.[item?.key]}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -189,8 +189,8 @@ class ProfileManager {
         render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
-              value={data[item.key]}
+              key={item?.key}
+              value={data?.[item?.key]}
               placeholder={i18n.t('Enter your address')}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -208,8 +208,8 @@ class ProfileManager {
         render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
-              value={data[item.key]}
+              key={item?.key}
+              value={data?.[item?.key]}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -227,11 +227,11 @@ class ProfileManager {
         render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <SectorsField
-              key={item.key}
+              key={item?.key}
               resource="profile"
-              field={item.key}
+              field={item?.key}
               placeholder={i18n.t('Select your sectors')}
-              value={data[item.key]}
+              value={data?.[item?.key]}
               onPress={() => ModalManager.toggleModal('SectorsList', {
                 resource: 'profile',
                 field: 'sectors_ids',
@@ -251,8 +251,8 @@ class ProfileManager {
         render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <CountryField
-              key={item.key}
-              value={data[item.key]}
+              key={item?.key}
+              value={data?.[item?.key]}
               onChangeValue={(o: any) => this.setFormData(item, o.value)}
             />
           );
@@ -269,8 +269,8 @@ class ProfileManager {
         render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
-              value={data[item.key]}
+              key={item?.key}
+              value={data?.[item?.key]}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -288,8 +288,8 @@ class ProfileManager {
         render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
-              value={data[item.key]}
+              key={item?.key}
+              value={data?.[item?.key]}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -307,8 +307,8 @@ class ProfileManager {
         render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
-              value={data[item.key]}
+              key={item?.key}
+              value={data?.[item?.key]}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -326,8 +326,8 @@ class ProfileManager {
         render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
-              value={data[item.key]}
+              key={item?.key}
+              value={data?.[item?.key]}
               placeholder={i18n.t('Enter your email address')}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -345,8 +345,8 @@ class ProfileManager {
         render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
-              value={data[item.key]}
+              key={item?.key}
+              value={data?.[item?.key]}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -364,8 +364,8 @@ class ProfileManager {
         render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
-              value={data[item.key]}
+              key={item?.key}
+              value={data?.[item?.key]}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -408,8 +408,8 @@ class ProfileManager {
         render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
-              value={data[item.key]}
+              key={item?.key}
+              value={data?.[item?.key]}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -427,8 +427,8 @@ class ProfileManager {
         render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
-              value={data[item.key]}
+              key={item?.key}
+              value={data?.[item?.key]}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -446,8 +446,8 @@ class ProfileManager {
         render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
-              value={data[item.key]}
+              key={item?.key}
+              value={data?.[item?.key]}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -465,8 +465,8 @@ class ProfileManager {
         render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
-              value={data[item.key]}
+              key={item?.key}
+              value={data?.[item?.key]}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
@@ -484,8 +484,8 @@ class ProfileManager {
         render: (resource: string, item: any, data: any, params?: any) => {
           return (
             <InputTextField
-              key={item.key}
-              value={data[item.key]}
+              key={item?.key}
+              value={data?.[item?.key]}
               placeholder={item.label}
               onChangeText={(value: string) => this.setFormData(item, value)}
             />
