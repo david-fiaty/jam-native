@@ -146,7 +146,7 @@ const ProfileForm = ({ resource }: Props) => {
             value={formData?.profile_personal?.first_name}
             placeholder={i18n.t('Enter your first name')}
             onChangeText={(value: string) => updateField('profile_personal', {
-              ...(formData?.profile_personal?.first_name || {}),
+              ...(formData?.profile_personal || {}),
               ...{ first_name: value },
             })}
           />
@@ -158,7 +158,7 @@ const ProfileForm = ({ resource }: Props) => {
             value={formData?.profile_personal?.last_name}
             placeholder={i18n.t('Enter your last name')}
             onChangeText={(value: string) => updateField('profile_personal', {
-              ...(formData?.profile_personal?.last_name || {}),
+              ...(formData?.profile_personal || {}),
               ...{ last_name: value },
             })}
           />
