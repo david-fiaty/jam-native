@@ -1,9 +1,9 @@
-import BottomLinks from '@/components/navigation/BottomLinks';
+import { Divider } from '@rneui/base';
 import LoginSignupButton from '../button/LoginSignupButton';
 import LogoView from '../view/LogoView';
-import { Divider } from '@rneui/base';
 import TextSlideshow from '../slideshow/TextSlideshow';
 import StaticData from '@/constants/StaticData';
+import BottomLinks from './navigation/BottomLinks';
 
 const WelcomeSection = () => {
   return (

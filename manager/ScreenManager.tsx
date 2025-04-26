@@ -1,8 +1,6 @@
 import { Dimensions, ScaledSize, StatusBar, Platform } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import { setMessage } from '@/redux/slices/MessageSlice';
-import { setActiveModal } from '@/redux/slices/ModalSlice';
-import { setActiveRoute } from '@/redux/slices/RouteSlice';
 import { Config } from '@/constants/Config';
 import Store from '@/redux/Store';
 
@@ -57,19 +55,6 @@ class ScreenManager {
       pathname: path,
       params: params,
     });
-  }
-
-  setCurrentRoute(path?: any) {
-    let activeRoutes: any = [...Store.getState().route.active];
-    let routeConfig: any[] = Store.getState().route.config;
-    let currentRoute: any = routeConfig.find((o: any) => o.name == path?.replace('/', ''));
-
-    if (path && currentRoute) {
-      Store.dispatch(setActiveRoute([...activeRoutes, path]));
-    }
-    else if (activeRoutes.length > 0) {
-      Store.dispatch(setActiveRoute(activeRoutes.pop()));
-    }
   }
 
   toggleModal(name: any, params?: any) {
