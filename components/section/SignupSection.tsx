@@ -10,6 +10,7 @@ import LogoView from '../view/LogoView';
 import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
+import SignupForm from '../form/SignupForm';
 
 const SignupSection = () => {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ const SignupSection = () => {
       
       {formData?.success !== true && <SignupEmailForm />}
       {formData?.success !== true && formData?.session?.length > 0 && <SignupCodeForm />}
-      {formData?.success === true && <ProfileForm resource="signup" />}
+      {formData?.success === true && <SignupForm />}
     </BoxView>
   );
 };

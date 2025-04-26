@@ -21,9 +21,9 @@ import SectorsField from "../field/SectorsField";
 import ModalManager from "@/manager/ModalManager";
 import LocationPickerField from "../field/LocationPickerField";
 
-const resource: string = 'profile';
+const resource: string = 'signup';
 
-const ProfileForm = () => {
+const SignupForm = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -349,4 +349,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileForm;
+export default SignupForm;

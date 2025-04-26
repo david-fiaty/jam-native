@@ -12,7 +12,7 @@ const ProfileSection = () => {
       style={Layout.screenContent}
       scroll={true}
     >
-      <ProfileForm resource="profile" />
+      <ProfileForm />
     </BoxView>
   );
 };
