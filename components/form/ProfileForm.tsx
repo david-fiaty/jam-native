@@ -124,8 +124,6 @@ const ProfileForm = ({ resource }: Props) => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log('profile_form', formData);
-
   return (
     <View style={[Layout.formContainer, styles.container]}>
       {resource == 'signup' && (
@@ -135,6 +133,7 @@ const ProfileForm = ({ resource }: Props) => {
             onChangeValue={(mediaList: any) => updateField('upload_profile_picture', { url: mediaList[0]?.uri })}
           />
 
+          <TextView>{i18n.t('Profile type')}*</TextView>
           <ProfileTypeField
             value={formData?.profile_type}
             onChangeValue={(option: any) => updateField('profile_type', option.value)}
@@ -146,7 +145,7 @@ const ProfileForm = ({ resource }: Props) => {
       {formData?.profile_type == 'personal' && (
         <>
           <TextView>
-            {i18n.t('First name')}
+            {i18n.t('First name')}*
           </TextView>
           <InputTextField
             value={formData?.profile_personal?.first_name}
@@ -175,7 +174,7 @@ const ProfileForm = ({ resource }: Props) => {
       {formData?.profile_type == 'organization' && (
         <>
           <TextView>
-            {i18n.t('Organization name')}
+            {i18n.t('Organization name')}*
           </TextView>
           <InputTextField
             value={formData?.profile_organization?.organization_name}
@@ -204,7 +203,7 @@ const ProfileForm = ({ resource }: Props) => {
       {formData?.profile_type == 'venue' && (
         <>
           <TextView>
-            {i18n.t('Venue name')}
+            {i18n.t('Venue name')}*
           </TextView>
           <InputTextField
             value={formData?.profile_venue?.venue_name}
@@ -283,7 +282,7 @@ const ProfileForm = ({ resource }: Props) => {
           />
 
           <TextView>
-            {i18n.t('Password')}
+            {i18n.t('Password')}*
           </TextView>
           <InputTextField
             value={formData?.password}
