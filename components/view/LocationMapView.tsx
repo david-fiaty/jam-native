@@ -1,136 +1,108 @@
-import MapView, { Marker, MapPressEvent, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from "react-native-maps";
-import { useState, useEffect } from "react";
+import MapView , { Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
+import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
-import { useDispatch } from 'react-redux';
-import { setFormData } from "@/redux/slices/FormSlice";
-import { Layout } from "@/constants/Layout";
+import { useSelector } from "react-redux";
 import { Colors } from "@/constants/Colors";
+import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
+import ScreenManager from "@/manager/ScreenManager";
 import i18n from "@/translation/i18n";
-import BoxView from "./BoxView";
 import UserManager from "@/manager/UserManager";
+import EntityManager from "@/manager/EntityManager";
 
-type Props = {
-  resource: string,
-  latitude?: any;
-  longitude?: any;
-};
-
-const LocationMapView = ({ resource, latitude, longitude }: Props) => {
-  const dispatch = useDispatch();
-  const [selectedLocation, setSelectedLocation] = useState<any>(null);
+const LocationMapView = () => {
+  const mapRef = useRef<any>();
+  const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-
-  const onMapPress = async (event: MapPressEvent) => {
-    setSelectedLocation(event.nativeEvent.coordinate);
-
-    dispatch(setFormData<any>({ 
-      resource: resource,
-      key: latitude.field, 
-      value: event.nativeEvent.coordinate.latitude, 
-    }));
-
-    dispatch(setFormData<any>({ 
-      resource: resource,
-      key: longitude.field, 
-      value: event.nativeEvent.coordinate.longitude, 
-    }));
-  };
-
-  const getDeviceLocation = async () => {
-    let deviceLocation: any = await UserManager.getLocation();
-
-    if (deviceLocation?.latitude && deviceLocation?.longitude) {
-      return {
-        latitude: deviceLocation?.latitude,
-        longitude: deviceLocation?.longitude,
-      };
-    }
+  const [jamData, setJamData] = useState<any[]>([]);
+  const searchResult = JSON.parse(useSelector((state: any) => state.search.current));
+  const markerImage = require('@/assets/images/logo-55.png');
+  
+  const getInitialRegion = () => {
+    let latitude = currentLocation?.coords?.latitude || Config.defaultLocation.latitude;
+    let longitude = currentLocation?.coords?.longitude || Config.defaultLocation.longitude;
+    let latitudeDelta = 0.16;
+    let longitudeDelta = latitudeDelta * (ScreenManager.window.width/ScreenManager.window.height);
 
     return {
-      latitude: Config.defaultLocation.latitude,
-      longitude: Config.defaultLocation.longitude,
-    }
+      latitude: latitude,
+      longitude: longitude,
+      latitudeDelta: latitudeDelta,
+      longitudeDelta: longitudeDelta,
+    };
   };
 
-  const getStoredLocation = () => {
-    if (latitude.value && longitude.value) {
-      return {
-        latitude: latitude.value,
-        longitude: longitude.value,
-      };
-    } 
+  const getMarkerCoordinate = (item: any) => {
+    return {
+      latitude: parseFloat(item?.geolocation_latitude),
+      longitude: parseFloat(item?.geolocation_longitude),
+    };
+  };
+
+  const getMarkerTitle = (item: any) => {
+    return item?.title || i18n.t('No title available');
+  };
+
+  const getMarkerDescription = (item: any) => {
+    return item?.caption || '';
+  };
+
+  const renderJamMarker = (item: any) => {
+    if (item?.geolocation_longitude && item?.geolocation_latitude) {
+      return (
+        <Marker
+          key={item.id}
+          title={getMarkerTitle(item)}
+          description={getMarkerDescription(item)}
+          coordinate={getMarkerCoordinate(item)}
+          icon={markerImage} 
+        />
+      );
+    }
 
     return null;
   };
 
   useEffect(() => {
     (async () => {
-      if (!selectedLocation) {
-        let coords: any = {};
-        let storedLocation: any = getStoredLocation();
+      setCurrentLocation(await UserManager.getLocation());
 
-        if (storedLocation) coords = storedLocation
-        else coords = await getDeviceLocation()
-    
-        setSelectedLocation(coords);
-        setIsLoaded(true);
-      }
+      //setJamData(searchResult?.jam); // Todo - Connect search
+      setJamData(await EntityManager.listJams());
     })();
-  }, [selectedLocation, latitude, longitude]);
-  
+
+    setIsLoaded(true);
+  }, [isLoaded]);
+
   if (!isLoaded) return <SpinnerView />;
-  
+
   return (
-    <BoxView 
-      direction="column" 
-      align="flex-start" 
-      justify="flex-start" 
-      style={[Layout.screenContent, styles.container]}
-    >
-      <TouchableWithoutFeedback>
-        <View style={styles.mapContainer}>
-          <MapView
-            style={styles.map}
-            provider={PROVIDER_DEFAULT}
-            customMapStyle={Layout.mapStyle}
-            showsUserLocation={true}
-            onPress={onMapPress}
-            initialRegion={{
-              latitude: parseFloat(selectedLocation.latitude),
-              longitude: parseFloat(selectedLocation.longitude),
-              latitudeDelta: 2,
-              longitudeDelta: 2,
-            }}
-          >
-            {selectedLocation && (
-              <Marker
-                pinColor={Colors.tertiary}
-                title={i18n.t("Selected location")}
-                description={i18n.t("This is the selected location")} // Todo - Reverse geocoding
-                coordinate={{
-                  latitude: parseFloat(selectedLocation?.latitude),
-                  longitude: parseFloat(selectedLocation?.longitude),
-                }}
-              />
-            )}
-          </MapView>
-        </View>
-      </TouchableWithoutFeedback>
-    </BoxView>
+    <TouchableWithoutFeedback>
+      <View style={styles.container}>
+        <MapView
+          ref={mapRef}
+          style={styles.map}
+          provider={PROVIDER_DEFAULT} 
+          initialRegion={getInitialRegion()}
+          customMapStyle={Layout.mapStyle}
+          showsUserLocation={true}
+          showsMyLocationButton={true}
+        >
+          {jamData?.map((item: any) => renderJamMarker(item))}
+          {/* searchResult?.jam?.map((item: any) => renderJamMarker(item)) */}
+        </MapView>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     padding: 0,
-    paddingTop: Layout.space.base*1.5,
-  },
-  mapContainer: {
     width: '100%',
-    height: '100%',
     flexGrow: 1,
+    backgroundColor: Colors.white,
   },
   map: {
     flex: 1,
