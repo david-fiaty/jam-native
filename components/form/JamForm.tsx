@@ -182,6 +182,7 @@ const JamForm = ({ resource, jamId }: Props) => {
           resource={resource}
           placeholder={i18n.t('Select your location')}
           onChangeValue={(data: any) => {
+            console.log(data)
             updateField('geolocation_latitude', data?.geolocation_latitude);
             updateField('geolocation_longitude', data?.geolocation_longitude);
           }}
