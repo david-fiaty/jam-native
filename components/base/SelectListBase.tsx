@@ -6,15 +6,20 @@ import TextView from "../view/TextView";
 import { Layout } from "@/constants/Layout";
 
 type Props = {
-  value?: any, 
-  data?: object,
-  placeholder?: string,
-  onChangeValue?: (option: any) => void,
+  value?: any;
+  data?: object;
+  placeholder?: string;
+  disabled?: any;
+  onChangeValue?: (option: any) => void;
 };
 
-const SelectListBase = ({value, data, placeholder, onChangeValue}: Props) => {
+const SelectListBase = ({value, data, placeholder, disabled, onChangeValue}: Props) => {
   const [selectedValue, setSelectedValue] = useState<any>(null);
   const [isFocus, setIsFocus] = useState<boolean>(false);
+  const elementStyle: any = {
+    ...styles.element,
+    ...(disabled === true ? styles.disabled : {}),
+  };
 
   if (value && !selectedValue) setSelectedValue(value);
 
@@ -29,12 +34,13 @@ const SelectListBase = ({value, data, placeholder, onChangeValue}: Props) => {
       <Dropdown
         value={selectedValue}
         data={data}
-        style={styles.element}
+        style={elementStyle}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         iconStyle={styles.iconStyle}
         itemTextStyle={styles.itemTextStyle}
         search={false}
+        disable={disabled}
         maxHeight={300}
         labelField="label"
         valueField="value"
@@ -62,6 +68,9 @@ const styles = StyleSheet.create({
   element: {
     ...Layout.formField, 
     ...{ padding: Layout.space.base },
+  },
+  disabled: {
+    opacity: 0.5,
   },
   item: {
     paddingVertical: Layout.space.base,
