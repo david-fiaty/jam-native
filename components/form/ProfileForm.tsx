@@ -300,6 +300,14 @@ const ProfileForm = ({ resource }: Props) => {
             onChangeValue={(data: any) => console.log(data)}
             onPress={() => ModalManager.toggleModal('LocationMapView', {
               resource: 'profile',
+              latitude: {
+                field: 'geolocation_latitude',
+                value: formData?.geolocation_latitude,
+              },
+              longitude: {
+                field: 'geolocation_longitude',
+                value: formData?.geolocation_longitude,
+              },
             })}
             latitude={{
               field: 'geolocation_latitude',
