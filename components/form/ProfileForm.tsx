@@ -297,7 +297,10 @@ const ProfileForm = ({ resource }: Props) => {
           <LocationPickerField
             resource="profile"
             placeholder={i18n.t('Select your location')}
-            onChangeValue={(data: any) => console.log('----', data)}
+            onChangeValue={(data: any) => {
+              updateField('geolocation_latitude', data?.geolocation_latitude);
+              updateField('geolocation_longitude', data?.geolocation_longitude);
+            }}
             onPress={() => ModalManager.toggleModal('LocationMapView', {
               resource: 'profile',
               latitude: {
