@@ -106,7 +106,7 @@ class ModalManager {
       },
       {
         id: 'LocationMapView',
-        title: i18n.t('LocationMapView'),
+        title: i18n.t('Your location'),
         render: (params: any) => <LocationMapView {...params} />,
       },
     ].map((o: any) => {
