@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
-import ProfileTypeField from "../field/ProfileTypeField";
 import ProfileImageField from "../field/ProfileImageField";
 import ButtonView from "../view/ButtonView";
 import i18n from "@/translation/i18n";
@@ -19,6 +18,7 @@ import CountryField from "../field/CountryField";
 import SectorsField from "../field/SectorsField";
 import ModalManager from "@/manager/ModalManager";
 import LocationPickerField from "../field/LocationPickerField";
+import ProfileTypeField from "../field/ProfileTypeField";
 
 const resource: string = 'profile';
 
@@ -39,25 +39,8 @@ const ProfileForm = () => {
     }));
   };
 
-  const canRenderForm = () => {
-    return formData?.profile_type?.length > 0
-      || resource == 'profile';
-  }
-
-  const getSubmitLabel = () => {
-    return resource == 'profile' ? i18n.t('Update') : i18n.t('Continue');
-  };
-
   const submitForm = async () => {
     setIsProcessing(true);
-
-    if (resource == 'signup') await submitSignupForm();
-    else if (resource == 'profile') await submitProfileForm();
-
-    setIsProcessing(false);
-  };
-
-  const submitProfileForm = async () => {
     let result: any = await UserManager.updateProfile(formData);
 
     if (result?.error) {
@@ -73,32 +56,8 @@ const ProfileForm = () => {
         content: i18n.t('The profile data was successfully updated.'),
       });
     }
-  };
 
-  const submitSignupForm = async () => {
-    let { password, ...profileData } = formData;
-
-    let payload: any = {
-      ...{ profile: profileData },
-      ...{
-        email: signupData.email,
-        session: signupData.session,
-        password: password,
-      },
-    };
-
-    let result: any = await UserManager.register(payload);
-
-    if (result.success === false) {
-      ScreenManager.showMessage({
-        title: i18n.t('User registration'),
-        //content: result.error, // Todo - Implement field error management
-        content: i18n.t('There was an error with the submission. Please check your data and try again.'),
-      });
-    }
-    else {
-      router.replace(Config.mainRoute);
-    }
+    setIsProcessing(false);
   };
 
   useEffect(() => {
@@ -106,13 +65,12 @@ const ProfileForm = () => {
       if (!isLoaded) {
         setProfileId(await UserManager.getProfileId());
 
-        if (resource == 'profile') {
-          dispatch(setFormData<any>({
-            resource: resource,
-            key: null,
-            value: await UserManager.getProfileData(),
-          }));
-        }
+        dispatch(setFormData<any>({
+          resource: resource,
+          key: null,
+          value: await UserManager.getProfileData(),
+        }));
+      
         setIsLoaded(true);
       }
     })();
@@ -122,20 +80,17 @@ const ProfileForm = () => {
 
   return (
     <View style={[Layout.formContainer, styles.container]}>
-      {resource == 'signup' && (
-        <>
-          <ProfileImageField
-            value={formData?.upload_profile_picture?.url}
-            onChangeValue={(mediaList: any) => updateField('upload_profile_picture', { url: mediaList[0]?.uri })}
-          />
-
-          <TextView>{i18n.t('Profile type')}*</TextView>
-          <ProfileTypeField
-            value={formData?.profile_type}
-            onChangeValue={(option: any) => updateField('profile_type', option.value)}
-          />
-        </>
-      )}
+      <ProfileImageField
+        value={formData?.upload_profile_picture?.url}
+        onChangeValue={(mediaList: any) => updateField('upload_profile_picture', { url: mediaList[0]?.uri })}
+      />
+      
+      <TextView>{i18n.t('Profile type')}*</TextView>
+      <ProfileTypeField
+        value={formData?.profile_type}
+        onChangeValue={(option: any) => updateField('profile_type', option.value)}
+        disabled={true}
+      />  
 
       {/* Personal profile */}
       {formData?.profile_type == 'personal' && (
@@ -322,7 +277,7 @@ const ProfileForm = () => {
       {/* Submit button */}
       <View style={styles.submitButtonContainer}>
         <ButtonView
-          label={getSubmitLabel()}
+          label={i18n.t('Update')}
           isProcessing={isProcessing}
           onPress={submitForm}
         />
