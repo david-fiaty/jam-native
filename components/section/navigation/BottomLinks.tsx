@@ -1,36 +1,31 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
+import { usePathname } from 'expo-router';
 import { useRoute } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
-import BoxView from '../view/BoxView';
-import TextView from '../view/TextView';
+import BoxView from '@/components/view/BoxView';
+import TextView from '@/components/view/TextView';
 import i18n from '@/translation/i18n';
 
 const BottomLinks = () => {
   const router = useRouter();
-  const route = useRoute();
+  const path = usePathname();
+  const sectionId: any = path.split('/').pop();
+  let aboutLink = <TextView style={sectionId == 'about' ? styles.disabled : {}}>{i18n.t('About')}</TextView>;
+  let legalLink = <TextView style={sectionId == 'legal' ? styles.disabled : {}}>{i18n.t('Legal')}</TextView>;
 
-  let aboutLink = <TextView style={route.name == 'about' ? styles.disabled : {}}>{i18n.t('About')}</TextView>;
-  let legalLink = <TextView style={route.name == 'legal' ? styles.disabled : {}}>{i18n.t('Legal')}</TextView>;
-
-  if (route.name != 'about') {
+  if (sectionId != 'about') {
     aboutLink = (
-      <TouchableOpacity 
-        onPress={() => router.push('/about')}
-        //onPress={() => route.name == 'legal' ? router.replace('/about') : router.push('/about')}
-      >
+      <TouchableOpacity onPress={() => router.push('/about')}>
         {aboutLink}
       </TouchableOpacity>
     );
   }
 
-  if (route.name != 'legal') {
+  if (sectionId != 'legal') {
     legalLink = (
-      <TouchableOpacity 
-        onPress={() => router.push('/legal')}
-        //onPress={() => route.name == 'about' ? router.replace('/legal') : router.push('/legal')}
-      >
+      <TouchableOpacity onPress={() => router.push('/legal')}>
         {legalLink}
       </TouchableOpacity>
     );
