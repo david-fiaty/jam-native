@@ -3,7 +3,7 @@ import { Layout } from '@/constants/Layout';
 import TextView from '../view/TextView';
 import BoxView from '../view/BoxView';
 import StaticData from '@/constants/StaticData';
-import BottomLinks from '../navigation/BottomLinks';
+import BottomLinks from './navigation/BottomLinks';
 
 const LegalSection = () => {
   const router = useRouter();
