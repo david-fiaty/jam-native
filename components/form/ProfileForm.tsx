@@ -230,79 +230,83 @@ const ProfileForm = ({ resource }: Props) => {
       )}
 
       {/* All profiles */}
-      <TextView>
-        {i18n.t('Profile name (with no spaces)')}
-      </TextView>
-      <InputTextField
-        value={formData?.profile_name}
-        placeholder={i18n.t('Profile name')}
-        onChangeText={(value: string) => updateField('profile_name', value)}
-      />
+      {formData?.profile_type?.length && (
+        <>
+          <TextView>
+            {i18n.t('Profile name (with no spaces)')}
+          </TextView>
+          <InputTextField
+            value={formData?.profile_name}
+            placeholder={i18n.t('Profile name')}
+            onChangeText={(value: string) => updateField('profile_name', value)}
+          />
 
-      <TextView>
-        {i18n.t('About')}
-      </TextView>
-      <InputTextareaField
-        value={formData?.profile_description}
-        placeholder={i18n.t('Profile description')}
-        onChangeText={(value: string) => updateField('profile_description', value)}
-      />
+          <TextView>
+            {i18n.t('About')}
+          </TextView>
+          <InputTextareaField
+            value={formData?.profile_description}
+            placeholder={i18n.t('Profile description')}
+            onChangeText={(value: string) => updateField('profile_description', value)}
+          />
 
-      <TextView>
-        {i18n.t('Address')}
-      </TextView>
-      <InputTextField
-        value={formData?.address}
-        placeholder={i18n.t('Enter your address')}
-        onChangeText={(value: string) => updateField('address', value)}
-      />
+          <TextView>
+            {i18n.t('Address')}
+          </TextView>
+          <InputTextField
+            value={formData?.address}
+            placeholder={i18n.t('Enter your address')}
+            onChangeText={(value: string) => updateField('address', value)}
+          />
 
-      <TextView>
-        {i18n.t('Sectors')}
-      </TextView>
-      <SectorsField
-        resource="profile"
-        field="sectors_ids"
-        placeholder={i18n.t('Select your sectors')}
-        value={formData?.sectors_ids}
-        onPress={() => ModalManager.toggleModal('SectorsList', {
-          resource: 'profile',
-          field: 'sectors_ids',
-        })}
-      />
+          <TextView>
+            {i18n.t('Sectors')}
+          </TextView>
+          <SectorsField
+            resource="profile"
+            field="sectors_ids"
+            placeholder={i18n.t('Select your sectors')}
+            value={formData?.sectors_ids}
+            onPress={() => ModalManager.toggleModal('SectorsList', {
+              resource: 'profile',
+              field: 'sectors_ids',
+            })}
+          />
 
-      <TextView>
-        {i18n.t('Country')}
-      </TextView>
-      <CountryField
-        value={formData?.scope_country_code}
-        onChangeValue={(o: any) => updateField('scope_country_code', o.value)}
-      />
+          <TextView>
+            {i18n.t('Country')}
+          </TextView>
+          <CountryField
+            value={formData?.scope_country_code}
+            onChangeValue={(o: any) => updateField('scope_country_code', o.value)}
+          />
 
-      <TextView>
-        {i18n.t('Password')}
-      </TextView>
-      <InputTextField
-        value={formData?.password}
-        placeholder={i18n.t('Password')}
-        onChangeText={(value: string) => updateField('password', value)}
-      />
+          <TextView>
+            {i18n.t('Password')}
+          </TextView>
+          <InputTextField
+            value={formData?.password}
+            placeholder={i18n.t('Password')}
+            onChangeText={(value: string) => updateField('password', value)}
+          />
 
-      <TextView>
-        {i18n.t('Location')}
-      </TextView>
-      <LocationPickerField
-        resource="profile"
-        placeholder={i18n.t('Select your location')}
-        latitude={{
-          field: 'geolocation_latitude',
-          value: formData?.geolocation_latitude,
-        }}
-        longitude={{
-          field: 'geolocation_longitude',
-          value: formData?.geolocation_longitude,
-        }}
-      />
+          <TextView>
+            {i18n.t('Location')}
+          </TextView>
+          <LocationPickerField
+            resource="profile"
+            placeholder={i18n.t('Select your location')}
+            latitude={{
+              field: 'geolocation_latitude',
+              value: formData?.geolocation_latitude,
+            }}
+            longitude={{
+              field: 'geolocation_longitude',
+              value: formData?.geolocation_longitude,
+            }}
+          />
+        </>
+      )}
 
       {/* Submit button */}
       <View style={styles.submitButtonContainer}>
