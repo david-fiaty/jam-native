@@ -46,6 +46,7 @@ const SectorsList = ({ resource, field }: Props) => {
       selection.splice(index, 1);
     }
 
+    console.log(resource, field, selection)
     // Update selection state
     dispatch(setFormData<any>({ 
       resource: resource,
