@@ -16,6 +16,10 @@ type Props = {
 const SelectListBase = ({value, data, placeholder, disabled, onChangeValue}: Props) => {
   const [selectedValue, setSelectedValue] = useState<any>(null);
   const [isFocus, setIsFocus] = useState<boolean>(false);
+  const elementStyle: any = {
+    ...styles.element,
+    ...(disabled === true ? styles.disabled : {}),
+  };
 
   if (value && !selectedValue) setSelectedValue(value);
 
@@ -30,7 +34,7 @@ const SelectListBase = ({value, data, placeholder, disabled, onChangeValue}: Pro
       <Dropdown
         value={selectedValue}
         data={data}
-        style={styles.element}
+        style={elementStyle}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         iconStyle={styles.iconStyle}
@@ -64,6 +68,9 @@ const styles = StyleSheet.create({
   element: {
     ...Layout.formField, 
     ...{ padding: Layout.space.base },
+  },
+  disabled: {
+    opacity: 0.5,
   },
   item: {
     paddingVertical: Layout.space.base,
