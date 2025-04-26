@@ -8,7 +8,6 @@ import TextView from "../view/TextView";
 import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
 import ListView from "../view/ListView";
-import SpinnerView from "../view/SpinnerView";
 import EntityManager from "@/manager/EntityManager";
 import CollapsibleView from "../view/CollapsibleView";
 
@@ -47,6 +46,7 @@ const SectorsList = ({ resource, field }: Props) => {
       selection.splice(index, 1);
     }
 
+    console.log(resource, field, selection)
     // Update selection state
     dispatch(setFormData<any>({ 
       resource: resource,
@@ -107,8 +107,6 @@ const SectorsList = ({ resource, field }: Props) => {
     })();
     
   }, [isLoaded, sectorsData]);
-
-  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView
