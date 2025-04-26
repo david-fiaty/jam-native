@@ -28,6 +28,7 @@ import CollaboratorsField from "../field/CollaboratorsField";
 import DataManager from "@/manager/DataManager";
 import MediaManager from "@/manager/MediaManager";
 //import ModalManager from "@/manager/ModalManager";
+//import ModalManager from "@/manager/ModalManager";
 
 type Props = {
   resource: string;
@@ -92,7 +93,6 @@ const JamForm = ({ resource, jamId }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-
         let profileId: number = await UserManager.getProfileId();
         let jamData: any = jamId == 0 ? formData : await EntityManager.getJams({ items_ids: [jamId] });
 
@@ -111,8 +111,6 @@ const JamForm = ({ resource, jamId }: Props) => {
       setIsLoaded(true);
     })();
   }, [isLoaded, profileId, resource, formData, jamId]);
-
-  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView
@@ -148,6 +146,7 @@ const JamForm = ({ resource, jamId }: Props) => {
         />
 
         <TextView>{i18n.t('Location type')}</TextView>
+        
         <LocationTypeField
           value={formData?.location_type}
           onChangeValue={(option: any) =>
@@ -177,10 +176,26 @@ const JamForm = ({ resource, jamId }: Props) => {
           }
         />
 
+        { /*
         <TextView>{i18n.t('Location')}</TextView>
         <LocationPickerField
           resource={resource}
           placeholder={i18n.t('Select your location')}
+          onChangeValue={(data: any) => {
+            updateField('geolocation_latitude', data?.geolocation_latitude);
+            updateField('geolocation_longitude', data?.geolocation_longitude);
+          }}
+          onPress={() => ModalManager.toggleModal('LocationMapView', {
+            resource: 'profile',
+            latitude: {
+              field: 'geolocation_latitude',
+              value: formData?.geolocation_latitude,
+            },
+            longitude: {
+              field: 'geolocation_longitude',
+              value: formData?.geolocation_longitude,
+            },
+          })}
           latitude={{
             field: 'geolocation_latitude',
             value: formData?.geolocation_latitude,
@@ -190,6 +205,7 @@ const JamForm = ({ resource, jamId }: Props) => {
             value: formData?.geolocation_longitude,
           }}
         />
+        */}
 
         <TextView>{i18n.t('Country')}</TextView>
         <CountryField
@@ -199,32 +215,32 @@ const JamForm = ({ resource, jamId }: Props) => {
           }
         />
 
+        { /*
         <TextView>{i18n.t('Select your sectors')}</TextView>
         <SectorsField
           resource={resource}
           field="sectors_ids"
           placeholder={i18n.t('Select your sectors')}
           value={formData?.sectors_ids}
-          /*
           onPress={() => ModalManager.toggleModal('SectorsList', {
             resource: 'jam',
             field: 'sectors_ids',
           })}
-            */
+    
         />
+        */}
 
-        <DividerView theme="secondary" />
-
+        { /*
         <CollaboratorsField
           resource={resource}
           field="collaborators_ids"
-          /*
+      
           onPress={() => ModalManager.toggleModal('CollaboratorsList', {
             resource: resource,
             field: "collaborators_ids",
-          })}
-            */
+          })
         />
+        */}
 
         <DividerView theme="secondary" />
 
@@ -241,6 +257,8 @@ const JamForm = ({ resource, jamId }: Props) => {
           }
         />
 
+        <DividerView theme="secondary" />
+        
         <View style={styles.submitButtonContainer}>
           <ButtonView
             label={i18n.t('Post')}
