@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { useSelector } from "react-redux";
 import Modal from "react-native-modal";
 import ModalManager from '@/manager/ModalManager';
-import ModalBackButton from './navigation/ModalBackButton';
+import ModalBackButton from './ModalBackButton';
 
 type Props = {
   currentSection?: any;
