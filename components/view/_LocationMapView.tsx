@@ -80,6 +80,8 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
     })();
   }, [selectedLocation, latitude, longitude]);
   
+  if (!isLoaded) return <SpinnerView />;
+  
   return (
     <BoxView 
       direction="column" 
