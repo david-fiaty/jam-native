@@ -27,15 +27,15 @@ import EntityManager from "@/manager/EntityManager";
 import CollaboratorsField from "../field/CollaboratorsField";
 import DataManager from "@/manager/DataManager";
 import MediaManager from "@/manager/MediaManager";
-//import ModalManager from "@/manager/ModalManager";
-//import ModalManager from "@/manager/ModalManager";
+import ModalManager from "@/manager/ModalManager";
 
 type Props = {
-  resource: string;
   jamId?: any;
 };
 
-const JamForm = ({ resource, jamId }: Props) => {
+const resource: string = 'jam';
+
+const JamForm = ({ jamId }: Props) => {
   jamId = jamId || 0;
 
   const dispatch = useDispatch();
@@ -176,7 +176,6 @@ const JamForm = ({ resource, jamId }: Props) => {
           }
         />
 
-        { /*
         <TextView>{i18n.t('Location')}</TextView>
         <LocationPickerField
           resource={resource}
@@ -186,7 +185,7 @@ const JamForm = ({ resource, jamId }: Props) => {
             updateField('geolocation_longitude', data?.geolocation_longitude);
           }}
           onPress={() => ModalManager.toggleModal('LocationMapView', {
-            resource: 'profile',
+            resource: resource,
             latitude: {
               field: 'geolocation_latitude',
               value: formData?.geolocation_latitude,
@@ -205,7 +204,6 @@ const JamForm = ({ resource, jamId }: Props) => {
             value: formData?.geolocation_longitude,
           }}
         />
-        */}
 
         <TextView>{i18n.t('Country')}</TextView>
         <CountryField
@@ -215,20 +213,19 @@ const JamForm = ({ resource, jamId }: Props) => {
           }
         />
 
-        { /*
+    
         <TextView>{i18n.t('Select your sectors')}</TextView>
         <SectorsField
           resource={resource}
           field="sectors_ids"
           placeholder={i18n.t('Select your sectors')}
           value={formData?.sectors_ids}
+          onChangeValue={(value: any) => updateField('sectors_ids', value)}
           onPress={() => ModalManager.toggleModal('SectorsList', {
             resource: 'jam',
             field: 'sectors_ids',
           })}
-    
         />
-        */}
 
         { /*
         <CollaboratorsField

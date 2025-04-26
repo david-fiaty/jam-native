@@ -38,47 +38,33 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
     }));
   };
 
-  const getDeviceLocation = async () => {
+  const getSelectedLocation = async () => {
     let deviceLocation: any = await UserManager.getLocation();
 
-    if (deviceLocation?.latitude && deviceLocation?.longitude) {
-      return {
-        latitude: deviceLocation?.latitude,
-        longitude: deviceLocation?.longitude,
-      };
-    }
-
-    return {
-      latitude: Config.defaultLocation.latitude,
-      longitude: Config.defaultLocation.longitude,
-    }
-  };
-
-  const getStoredLocation = () => {
-    if (latitude.value && longitude.value) {
+    if (latitude?.value && longitude?.value) {
       return {
         latitude: latitude.value,
         longitude: longitude.value,
       };
     } 
-
-    return null;
+    else if (deviceLocation?.latitude && deviceLocation?.longitude) {
+      return deviceLocation;
+    }
+    
+    return {
+      latitude: Config.defaultLocation.latitude,
+      longitude: Config.defaultLocation.longitude,
+    };
   };
 
   useEffect(() => {
     (async () => {
-      if (!selectedLocation) {
-        let coords: any = {};
-        let storedLocation: any = getStoredLocation();
-
-        if (storedLocation) coords = storedLocation
-        else coords = await getDeviceLocation()
-    
-        setSelectedLocation(coords);
+      if (!isLoaded) {
+        setSelectedLocation(await getSelectedLocation());
         setIsLoaded(true);
       }
     })();
-  }, [selectedLocation, latitude, longitude]);
+  }, [isLoaded]);
   
   return (
     <BoxView 
@@ -95,24 +81,16 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
             customMapStyle={Layout.mapStyle}
             showsUserLocation={true}
             onPress={onMapPress}
-            initialRegion={{
-              latitude: parseFloat(selectedLocation.latitude),
-              longitude: parseFloat(selectedLocation.longitude),
-              latitudeDelta: 2,
-              longitudeDelta: 2,
-            }}
           >
-            {selectedLocation && (
-              <Marker
-                pinColor={Colors.tertiary}
-                title={i18n.t("Selected location")}
-                description={i18n.t("This is the selected location")} // Todo - Reverse geocoding
-                coordinate={{
-                  latitude: parseFloat(selectedLocation?.latitude),
-                  longitude: parseFloat(selectedLocation?.longitude),
-                }}
-              />
-            )}
+            <Marker
+              pinColor={Colors.tertiary}
+              title={i18n.t("Selected location")}
+              description={i18n.t("This is the selected location")} // Todo - Reverse geocoding
+              coordinate={{
+                latitude: parseFloat(selectedLocation?.latitude),
+                longitude: parseFloat(selectedLocation?.longitude),
+              }}
+            />
           </MapView>
         </View>
       </TouchableWithoutFeedback>
