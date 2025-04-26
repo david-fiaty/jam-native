@@ -28,15 +28,14 @@ import CollaboratorsField from "../field/CollaboratorsField";
 import DataManager from "@/manager/DataManager";
 import MediaManager from "@/manager/MediaManager";
 import ModalManager from "@/manager/ModalManager";
-//import ModalManager from "@/manager/ModalManager";
-//import ModalManager from "@/manager/ModalManager";
 
 type Props = {
-  resource: string;
   jamId?: any;
 };
 
-const JamForm = ({ resource, jamId }: Props) => {
+const resource: string = 'jam';
+
+const JamForm = ({ jamId }: Props) => {
   jamId = jamId || 0;
 
   const dispatch = useDispatch();
@@ -182,12 +181,11 @@ const JamForm = ({ resource, jamId }: Props) => {
           resource={resource}
           placeholder={i18n.t('Select your location')}
           onChangeValue={(data: any) => {
-            console.log(data)
             updateField('geolocation_latitude', data?.geolocation_latitude);
             updateField('geolocation_longitude', data?.geolocation_longitude);
           }}
           onPress={() => ModalManager.toggleModal('LocationMapView', {
-            resource: 'profile',
+            resource: resource,
             latitude: {
               field: 'geolocation_latitude',
               value: formData?.geolocation_latitude,
