@@ -117,7 +117,6 @@ const JamForm = ({ jamId }: Props) => {
       align="flex-start"
       justify="flex-start"
       scroll={true}
-      style={Layout.screenContent}
     >
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
         <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
@@ -131,7 +130,7 @@ const JamForm = ({ jamId }: Props) => {
           renderItem={(row: any) => renderJamCategory(row)}
         />
 
-        <DividerView />
+        <DividerView theme="white" />
 
         <TextView>{i18n.t('Title')}</TextView>
         <InputTextField
@@ -239,7 +238,7 @@ const JamForm = ({ jamId }: Props) => {
         />
         */}
 
-        <DividerView theme="secondary" />
+        <DividerView theme="white" />
 
         <MediaPickerField
           preview={true}
@@ -254,7 +253,7 @@ const JamForm = ({ jamId }: Props) => {
           }
         />
 
-        <DividerView theme="secondary" />
+        <DividerView theme="white" />
         
         <View style={styles.submitButtonContainer}>
           <ButtonView
@@ -274,6 +273,7 @@ const styles = StyleSheet.create({
   formContainer: {
     maxWidth: '100%',
     flexShrink: 1,
+    paddingTop: Layout.space.base,
   },
   categoryContainer: {
     flexDirection: 'column',
@@ -299,7 +299,6 @@ const styles = StyleSheet.create({
     flexShrink: 1,
   },
   submitButtonContainer: {
-    marginTop: Layout.space.base,
     marginBottom: Layout.space.base,
   },
 });
