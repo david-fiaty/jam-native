@@ -14,10 +14,11 @@ type Props = {
   field: string;
   value?: any;
   placeholder?: any;
-  onPress?: () => void;
+  onPress: () => void;
+  onChange: (value: any) => void;
 };
 
-const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) => {
+const SectorsField = ({ resource, field, value, placeholder, onPress, onChange }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any>([]);
@@ -85,10 +86,12 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
         setSectorsData(await EntityManager.getSectors());
         setIsLoaded(true);
       }
+
+      onChange(formData?.[field]);
     })();
 
     setCurrentValue(getSelectedSectors(value));
-  }, [isLoaded, value]);
+  }, [isLoaded, value, formData, field]);
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
