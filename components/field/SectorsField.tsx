@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from '@/constants/Layout';
 import SpinnerView from '../view/SpinnerView';
@@ -22,7 +22,8 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [currentValue, setCurrentValue] = useState<any>([]);
-
+  const formData: any = useSelector((state: any) => state.form[resource]);
+  
   const getSelectedSectors = (sectorsIds?: any) => {
     let selectedIds: any[] = sectorsIds?.length ? sectorsIds : [];
     let result: any[] = [];
