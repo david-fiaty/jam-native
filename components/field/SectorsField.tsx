@@ -14,10 +14,10 @@ type Props = {
   value?: any;
   placeholder?: any;
   onPress: () => void;
-  onChange: (value: any) => void;
+  onChangeValue: (value: any) => void;
 };
 
-const SectorsField = ({ resource, field, value, placeholder, onPress, onChange }: Props) => {
+const SectorsField = ({ resource, field, value, placeholder, onPress, onChangeValue }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [currentValue, setCurrentValue] = useState<any>([]);
@@ -71,7 +71,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress, onChange }
 
     setCurrentValue(getSelectedSectors(selectedIds));
 
-    onChange(formData?.[field]);
+    onChangeValue(formData?.[field]);
   }
 
   useEffect(() => {
@@ -81,7 +81,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress, onChange }
         setIsLoaded(true);
       }
 
-      onChange(formData?.[field]);
+      onChangeValue(formData?.[field]);
     })();
 
     setCurrentValue(getSelectedSectors(value));
