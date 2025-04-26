@@ -55,10 +55,10 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
   };
 
   const getStoredLocation = () => {
-    if (latitude.value && longitude.value) {
+    if (latitude?.value && longitude?.value) {
       return {
-        latitude: latitude.value,
-        longitude: longitude.value,
+        latitude: latitude?.value,
+        longitude: longitude?.value,
       };
     } 
 
@@ -95,12 +95,6 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
             customMapStyle={Layout.mapStyle}
             showsUserLocation={true}
             onPress={onMapPress}
-            initialRegion={{
-              latitude: parseFloat(selectedLocation.latitude),
-              longitude: parseFloat(selectedLocation.longitude),
-              latitudeDelta: 2,
-              longitudeDelta: 2,
-            }}
           >
             {selectedLocation && (
               <Marker
