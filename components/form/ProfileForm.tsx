@@ -133,6 +133,7 @@ const ProfileForm = ({ resource }: Props) => {
             onChangeValue={(mediaList: any) => updateField('upload_profile_picture', { url: mediaList[0]?.uri })}
           />
 
+          <TextView>{i18n.t('Profile type')}*</TextView>
           <ProfileTypeField
             value={formData?.profile_type}
             onChangeValue={(option: any) => updateField('profile_type', option.value)}
@@ -144,7 +145,7 @@ const ProfileForm = ({ resource }: Props) => {
       {formData?.profile_type == 'personal' && (
         <>
           <TextView>
-            {i18n.t('First name')}
+            {i18n.t('First name')}*
           </TextView>
           <InputTextField
             value={formData?.profile_personal?.first_name}
@@ -281,7 +282,7 @@ const ProfileForm = ({ resource }: Props) => {
           />
 
           <TextView>
-            {i18n.t('Password')}
+            {i18n.t('Password')}*
           </TextView>
           <InputTextField
             value={formData?.password}
