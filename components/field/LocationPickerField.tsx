@@ -21,6 +21,7 @@ const LocationPickerField = ({ resource, placeholder, latitude, longitude, onPre
     onChangeValue(formData);
   }, [formData]);
 
+  console.log('location picker  ----->>  ', formData);
   return (
     <>
       <TouchableOpacity
