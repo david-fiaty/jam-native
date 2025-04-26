@@ -31,7 +31,6 @@ const ProfileForm = () => {
   const [profileId, setProfileId] = useState<number>(0);
   const formData = useSelector((state: any) => state.form?.[resource]);
   const signupData: any = useSelector((state: any) => state.signup);
-  const profileFields: any = ProfileManager.getFields();
 
   const updateField = (key: string, value: any) => {
     dispatch(setFormData<any>({
