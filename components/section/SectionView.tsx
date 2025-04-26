@@ -18,13 +18,13 @@ const SectionView = () => {
   const dispatch = useDispatch();
   const [currentSection, setCurrentSection] = useState<any>(null);
   const sectionState: any = useSelector((state: any) => state.section);
+  const sectionId: any = path.split('/').pop();
+  const activeSections: any = sectionState.active.includes(sectionId) ? sectionState.active : [...sectionState.active, sectionId];
 
   useEffect(() => {
-    const sectionId = path.split('/').pop();
     setCurrentSection(SectionManager.getSection(sectionId || Config.defaultSection));
-    let activeSections: any = sectionState.active.includes(sectionId) ? sectionState.active : [...sectionState.active, sectionId];
     dispatch(setActiveSections(activeSections));
-  }, [path, sectionState]);
+  }, [sectionId, activeSections]);
 
   return (
     <>
