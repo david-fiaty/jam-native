@@ -15,6 +15,11 @@ import ScreenManager from "@/manager/ScreenManager";
 import SpinnerView from "../view/SpinnerView";
 import TextView from "../view/TextView";
 import InputTextField from "../field/InputTextField";
+import InputTextareaField from "../field/InputTextareaField";
+import CountryField from "../field/CountryField";
+import SectorsField from "../field/SectorsField";
+import ModalManager from "@/manager/ModalManager";
+import LocationPickerField from "../field/LocationPickerField";
 
 type Props = {
   resource?: any;
@@ -137,6 +142,7 @@ const ProfileForm = ({ resource }: Props) => {
         </>
       )}
 
+      {/* Personal profile */}
       {formData?.profile_type == 'personal' && (
         <>
           <TextView>
@@ -165,6 +171,7 @@ const ProfileForm = ({ resource }: Props) => {
         </>
       )}
 
+      {/* Organization profile */}
       {formData?.profile_type == 'organization' && (
         <>
           <TextView>
@@ -193,6 +200,7 @@ const ProfileForm = ({ resource }: Props) => {
         </>
       )}
 
+      {/* Venue profile */}
       {formData?.profile_type == 'venue' && (
         <>
           <TextView>
@@ -221,6 +229,82 @@ const ProfileForm = ({ resource }: Props) => {
         </>
       )}
 
+      {/* All profiles */}
+      <TextView>
+        {i18n.t('Profile name (with no spaces)')}
+      </TextView>
+      <InputTextField
+        value={formData?.profile_name}
+        placeholder={i18n.t('Profile name')}
+        onChangeText={(value: string) => updateField('profile_name', value)}
+      />
+
+      <TextView>
+        {i18n.t('About')}
+      </TextView>
+      <InputTextareaField
+        value={formData?.profile_description}
+        placeholder={i18n.t('Profile description')}
+        onChangeText={(value: string) => updateField('profile_description', value)}
+      />
+
+      <TextView>
+        {i18n.t('Address')}
+      </TextView>
+      <InputTextField
+        value={formData?.address}
+        placeholder={i18n.t('Enter your address')}
+        onChangeText={(value: string) => updateField('address', value)}
+      />
+
+      <TextView>
+        {i18n.t('Sectors')}
+      </TextView>
+      <SectorsField
+        resource="profile"
+        field="sectors_ids"
+        placeholder={i18n.t('Select your sectors')}
+        value={formData?.sectors_ids}
+        onPress={() => ModalManager.toggleModal('SectorsList', {
+          resource: 'profile',
+          field: 'sectors_ids',
+        })}
+      />
+
+      <TextView>
+        {i18n.t('Country')}
+      </TextView>
+      <CountryField
+        value={formData?.scope_country_code}
+        onChangeValue={(o: any) => updateField('scope_country_code', o.value)}
+      />
+
+      <TextView>
+        {i18n.t('Password')}
+      </TextView>
+      <InputTextField
+        value={formData?.password}
+        placeholder={i18n.t('Password')}
+        onChangeText={(value: string) => updateField('password', value)}
+      />
+
+      <TextView>
+        {i18n.t('Location')}
+      </TextView>
+      <LocationPickerField
+        resource="profile"
+        placeholder={i18n.t('Select your location')}
+        latitude={{
+          field: 'geolocation_latitude',
+          value: formData?.geolocation_latitude,
+        }}
+        longitude={{
+          field: 'geolocation_longitude',
+          value: formData?.geolocation_longitude,
+        }}
+      />
+
+      {/* Submit button */}
       <View style={styles.submitButtonContainer}>
         <ButtonView
           label={getSubmitLabel()}
