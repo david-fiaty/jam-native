@@ -12,6 +12,7 @@ import SectionFooter from '../section/navigation/SectionFooter';
 import ModalView from "../modal/ModalView";
 import SectionBackButton from "./navigation/SectionBackButton";
 import SectionManager from "@/manager/SectionManager";
+import MessageView from "../view/MessageView";
 
 const SectionView = () => { 
   const path = usePathname();
@@ -28,6 +29,8 @@ const SectionView = () => {
 
   return (
     <>
+      <MessageView />
+      
       {currentSection?.showHeader === true && <SectionHeader style={styles.header} />}
 
       {currentSection?.showTitle === true 
