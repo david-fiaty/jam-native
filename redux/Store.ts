@@ -12,7 +12,6 @@ import SectionReducer from './slices/SectionSlice';
 const Store = configureStore({
   reducer: {
     modal: ModalReducer,
-    route: RouteReducer,
     search: SearchReducer,
     user: UserReducer,
     message: MessageReducer,
