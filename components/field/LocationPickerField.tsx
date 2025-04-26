@@ -17,6 +17,10 @@ const LocationPickerField = ({ resource, placeholder, latitude, longitude, onPre
   const value = latitude?.value && longitude?.value ? `${latitude.value},${longitude.value}` : '';
   const formData: any = useSelector((state: any) => state.form[resource]);
 
+  useEffect(() => {
+    onChangeValue(formData);
+  }, [formData]);
+
   return (
     <>
       <TouchableOpacity
