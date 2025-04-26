@@ -4,8 +4,8 @@ import { useRoute } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
-import BoxView from '../view/BoxView';
-import TextView from '../view/TextView';
+import BoxView from '@/components/view/BoxView';
+import TextView from '@/components/view/TextView';
 import i18n from '@/translation/i18n';
 
 const BottomLinks = () => {
