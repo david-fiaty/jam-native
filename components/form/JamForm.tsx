@@ -226,17 +226,15 @@ const JamForm = ({ jamId }: Props) => {
           })}
         />
 
-        { /*
         <CollaboratorsField
           resource={resource}
           field="collaborators_ids"
-      
+          onChangeValue={(value: any) => updateField('collaborators_ids', value)}
           onPress={() => ModalManager.toggleModal('CollaboratorsList', {
             resource: resource,
             field: "collaborators_ids",
-          })
+          })}
         />
-        */}
 
         <DividerView theme="white" />
 
