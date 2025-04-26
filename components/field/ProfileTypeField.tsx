@@ -3,15 +3,15 @@ import { BaseProps } from '@/constants/Types';
 import BoxView from '../view/BoxView';
 import SelectListBase from '../base/SelectListBase';
 import StaticData from '@/constants/StaticData';
-import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 
 type Props = BaseProps & {
-  value?: any,
-  onChangeValue?: (option: any) => void,
+  value?: any;
+  disabled?: any;
+  onChangeValue?: (option: any) => void;
 };
 
-const ProfileTypeField = ({value, onChangeValue}: Props) => {
+const ProfileTypeField = ({value, disabled, onChangeValue}: Props) => {
   const profileTypes = StaticData.profileTypes;
 
   const buildOptions = (optionsData: any) => {    
@@ -30,6 +30,7 @@ const ProfileTypeField = ({value, onChangeValue}: Props) => {
         value={value}
         data={buildOptions(profileTypes)}  
         onChangeValue={onChangeValue}
+        disabled={disabled}
       />
     </BoxView>
   );
