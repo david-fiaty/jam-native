@@ -17,6 +17,9 @@ import TextView from "../view/TextView";
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
 import CountryField from "../field/CountryField";
+import SectorsField from "../field/SectorsField";
+import ModalManager from "@/manager/ModalManager";
+import LocationPickerField from "../field/LocationPickerField";
 
 type Props = {
   resource?: any;
@@ -255,6 +258,20 @@ const ProfileForm = ({ resource }: Props) => {
       />
 
       <TextView>
+        {i18n.t('Sectors')}
+      </TextView>
+      <SectorsField
+        resource="profile"
+        field="sectors_ids"
+        placeholder={i18n.t('Select your sectors')}
+        value={formData?.sectors_ids}
+        onPress={() => ModalManager.toggleModal('SectorsList', {
+          resource: 'profile',
+          field: 'sectors_ids',
+        })}
+      />
+
+      <TextView>
         {i18n.t('Country')}
       </TextView>
       <CountryField
@@ -262,6 +279,30 @@ const ProfileForm = ({ resource }: Props) => {
         onChangeValue={(o: any) => updateField('scope_country_code', o.value)}
       />
 
+      <TextView>
+        {i18n.t('Password')}
+      </TextView>
+      <InputTextField
+        value={formData?.password}
+        placeholder={i18n.t('Password')}
+        onChangeText={(value: string) => updateField('password', value)}
+      />
+
+      <TextView>
+        {i18n.t('Location')}
+      </TextView>
+      <LocationPickerField
+        resource="profile"
+        placeholder={i18n.t('Select your location')}
+        latitude={{
+          field: 'geolocation_latitude',
+          value: formData?.geolocation_latitude,
+        }}
+        longitude={{
+          field: 'geolocation_longitude',
+          value: formData?.geolocation_longitude,
+        }}
+      />
 
       {/* Submit button */}
       <View style={styles.submitButtonContainer}>
