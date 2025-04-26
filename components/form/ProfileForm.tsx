@@ -267,11 +267,11 @@ const ProfileForm = ({ resource }: Props) => {
             field="sectors_ids"
             placeholder={i18n.t('Select your sectors')}
             value={formData?.sectors_ids}
+            onChangeValue={(value: any) => updateField('sectors_ids', value)}
             onPress={() => ModalManager.toggleModal('SectorsList', {
               resource: 'profile',
               field: 'sectors_ids',
             })}
-            onChange={(value: any) => updateField('sectors_ids', value)}
           />
 
           <TextView>
@@ -297,6 +297,18 @@ const ProfileForm = ({ resource }: Props) => {
           <LocationPickerField
             resource="profile"
             placeholder={i18n.t('Select your location')}
+            onChangeValue={(data: any) => console.log('----', data)}
+            onPress={() => ModalManager.toggleModal('LocationMapView', {
+              resource: 'profile',
+              latitude: {
+                field: 'geolocation_latitude',
+                value: formData?.geolocation_latitude,
+              },
+              longitude: {
+                field: 'geolocation_longitude',
+                value: formData?.geolocation_longitude,
+              },
+            })}
             latitude={{
               field: 'geolocation_latitude',
               value: formData?.geolocation_latitude,
