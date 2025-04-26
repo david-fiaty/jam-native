@@ -1,7 +1,6 @@
 import { StyleSheet, TouchableOpacity } from "react-native";
 import InputTextField from "../field/InputTextField";
 import IconView from "../view/IconView";
-import ModalManager from "@/manager/ModalManager";
 
 type Props = {
   resource: string,
@@ -17,11 +16,13 @@ const LocationPickerField = ({ resource, placeholder, latitude, longitude }: Pro
     <>
       <TouchableOpacity
         style={styles.container}
+        /*
         onPress={() => ModalManager.toggleModal('LocationMapView', { 
           resource: resource,
           latitude: latitude,
           longitude: longitude,
         })}
+          */
       >
         <InputTextField
           value={value}
