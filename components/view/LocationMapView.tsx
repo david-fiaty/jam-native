@@ -38,22 +38,6 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
     }));
   };
 
-  const getDeviceLocation = async () => {
-    let deviceLocation: any = await UserManager.getLocation();
-
-    if (deviceLocation?.latitude && deviceLocation?.longitude) {
-      return {
-        latitude: deviceLocation?.latitude,
-        longitude: deviceLocation?.longitude,
-      };
-    }
-
-    return {
-      latitude: Config.defaultLocation.latitude,
-      longitude: Config.defaultLocation.longitude,
-    }
-  };
-
   const getSelectedLocation = async () => {
     let deviceLocation: any = await UserManager.getLocation();
 
