@@ -18,6 +18,7 @@ import CountryField from "../field/CountryField";
 import SectorsField from "../field/SectorsField";
 import ModalManager from "@/manager/ModalManager";
 import LocationPickerField from "../field/LocationPickerField";
+import ProfileTypeField from "../field/ProfileTypeField";
 
 const resource: string = 'profile';
 
@@ -83,6 +84,13 @@ const ProfileForm = () => {
         value={formData?.upload_profile_picture?.url}
         onChangeValue={(mediaList: any) => updateField('upload_profile_picture', { url: mediaList[0]?.uri })}
       />
+      
+      <TextView>{i18n.t('Profile type')}*</TextView>
+      <ProfileTypeField
+        value={formData?.profile_type}
+        onChangeValue={(option: any) => updateField('profile_type', option.value)}
+        disabled={true}
+      />  
 
       {/* Personal profile */}
       {formData?.profile_type == 'personal' && (
