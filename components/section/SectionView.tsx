@@ -42,7 +42,7 @@ const SectionView = () => {
       >
         {currentSection?.render()}
   
-        <ModalView style={styles.modal} />
+        <ModalView currentSection={currentSection} style={styles.modal} />
       </BoxView>
       
       {currentSection?.showFooter === true && <SectionFooter style={styles.footer} />}
