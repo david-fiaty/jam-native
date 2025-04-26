@@ -55,14 +55,22 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
   };
 
   const getSelectedLocation = async () => {
-    if (latitude?.value?.length && longitude?.value?.length) {
+    let deviceLocation: any = await UserManager.getLocation();
+
+    if (latitude?.value && longitude?.value) {
       return {
         latitude: latitude.value,
         longitude: longitude.value,
       };
     } 
-
-    return null;
+    else if (deviceLocation?.latitude && deviceLocation?.longitude) {
+      return deviceLocation;
+    }
+    
+    return {
+      latitude: Config.defaultLocation.latitude,
+      longitude: Config.defaultLocation.longitude,
+    };
   };
 
   useEffect(() => {
@@ -90,17 +98,15 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
             showsUserLocation={true}
             onPress={onMapPress}
           >
-            {selectedLocation && (
-              <Marker
-                pinColor={Colors.tertiary}
-                title={i18n.t("Selected location")}
-                description={i18n.t("This is the selected location")} // Todo - Reverse geocoding
-                coordinate={{
-                  latitude: parseFloat(selectedLocation?.latitude),
-                  longitude: parseFloat(selectedLocation?.longitude),
-                }}
-              />
-            )}
+            <Marker
+              pinColor={Colors.tertiary}
+              title={i18n.t("Selected location")}
+              description={i18n.t("This is the selected location")} // Todo - Reverse geocoding
+              coordinate={{
+                latitude: parseFloat(selectedLocation?.latitude),
+                longitude: parseFloat(selectedLocation?.longitude),
+              }}
+            />
           </MapView>
         </View>
       </TouchableWithoutFeedback>
