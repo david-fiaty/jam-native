@@ -79,6 +79,11 @@ const ProfileForm = () => {
 
   return (
     <View style={[Layout.formContainer, styles.container]}>
+      <ProfileImageField
+        value={formData?.upload_profile_picture?.url}
+        onChangeValue={(mediaList: any) => updateField('upload_profile_picture', { url: mediaList[0]?.uri })}
+      />
+
       {/* Personal profile */}
       {formData?.profile_type == 'personal' && (
         <>
