@@ -54,11 +54,11 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
     }
   };
 
-  const getStoredLocation = () => {
-    if (latitude?.value && longitude?.value) {
+  const getSelectedLocation = async () => {
+    if (latitude?.value?.length && longitude?.value?.length) {
       return {
-        latitude: latitude?.value,
-        longitude: longitude?.value,
+        latitude: latitude.value,
+        longitude: longitude.value,
       };
     } 
 
@@ -67,18 +67,12 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
 
   useEffect(() => {
     (async () => {
-      if (!selectedLocation) {
-        let coords: any = {};
-        let storedLocation: any = getStoredLocation();
-
-        if (storedLocation) coords = storedLocation
-        else coords = await getDeviceLocation()
-    
-        setSelectedLocation(coords);
+      if (!isLoaded) {
+        setSelectedLocation(await getSelectedLocation());
         setIsLoaded(true);
       }
     })();
-  }, [selectedLocation, latitude, longitude]);
+  }, [isLoaded]);
   
   return (
     <BoxView 
