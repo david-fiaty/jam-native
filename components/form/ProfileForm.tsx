@@ -174,7 +174,7 @@ const ProfileForm = ({ resource }: Props) => {
       {formData?.profile_type == 'organization' && (
         <>
           <TextView>
-            {i18n.t('Organization name')}
+            {i18n.t('Organization name')}*
           </TextView>
           <InputTextField
             value={formData?.profile_organization?.organization_name}
@@ -203,7 +203,7 @@ const ProfileForm = ({ resource }: Props) => {
       {formData?.profile_type == 'venue' && (
         <>
           <TextView>
-            {i18n.t('Venue name')}
+            {i18n.t('Venue name')}*
           </TextView>
           <InputTextField
             value={formData?.profile_venue?.venue_name}
