@@ -271,6 +271,7 @@ const ProfileForm = ({ resource }: Props) => {
               resource: 'profile',
               field: 'sectors_ids',
             })}
+            onChange={(value: any) => updateField('sectors_ids', value)}
           />
 
           <TextView>
