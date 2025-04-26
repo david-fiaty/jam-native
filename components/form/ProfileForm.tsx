@@ -13,6 +13,13 @@ import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
 import SpinnerView from "../view/SpinnerView";
+import TextView from "../view/TextView";
+import InputTextField from "../field/InputTextField";
+import InputTextareaField from "../field/InputTextareaField";
+import CountryField from "../field/CountryField";
+import SectorsField from "../field/SectorsField";
+import ModalManager from "@/manager/ModalManager";
+import LocationPickerField from "../field/LocationPickerField";
 
 type Props = {
   resource?: any;
@@ -35,7 +42,7 @@ const ProfileForm = ({ resource }: Props) => {
       value: value,
     }));
   };
- 
+
   const canRenderForm = () => {
     return formData?.profile_type?.length > 0
       || resource == 'profile';
@@ -104,10 +111,10 @@ const ProfileForm = ({ resource }: Props) => {
         setProfileId(await UserManager.getProfileId());
 
         if (resource == 'profile') {
-          dispatch(setFormData<any>({ 
+          dispatch(setFormData<any>({
             resource: resource,
-            key: null, 
-            value: await UserManager.getProfileData(), 
+            key: null,
+            value: await UserManager.getProfileData(),
           }));
         }
         setIsLoaded(true);
@@ -116,7 +123,9 @@ const ProfileForm = ({ resource }: Props) => {
   }, [isLoaded, formData, resource]);
 
   if (!isLoaded) return <SpinnerView />;
-  
+
+  console.log('profile_form', formData);
+
   return (
     <View style={[Layout.formContainer, styles.container]}>
       {resource == 'signup' && (
@@ -125,19 +134,182 @@ const ProfileForm = ({ resource }: Props) => {
             value={formData?.upload_profile_picture?.url}
             onChangeValue={(mediaList: any) => updateField('upload_profile_picture', { url: mediaList[0]?.uri })}
           />
+
+          <ProfileTypeField
+            value={formData?.profile_type}
+            onChangeValue={(option: any) => updateField('profile_type', option.value)}
+          />
         </>
       )}
 
-      {canRenderForm() === true && profileFields.map((item: any) => {
-        if (ProfileManager.canRenderField(resource, item, formData)) {
-          return (
-            <View key={item.key} style={styles.fieldContainer}>
-              {ProfileManager.renderField(resource, item, formData)}
-            </View>
-          );
-        }
-      })}
+      {/* Personal profile */}
+      {formData?.profile_type == 'personal' && (
+        <>
+          <TextView>
+            {i18n.t('First name')}
+          </TextView>
+          <InputTextField
+            value={formData?.profile_personal?.first_name}
+            placeholder={i18n.t('Enter your first name')}
+            onChangeText={(value: string) => updateField('profile_personal', {
+              ...(formData?.profile_personal || {}),
+              ...{ first_name: value },
+            })}
+          />
 
+          <TextView>
+            {i18n.t('Last name')}
+          </TextView>
+          <InputTextField
+            value={formData?.profile_personal?.last_name}
+            placeholder={i18n.t('Enter your last name')}
+            onChangeText={(value: string) => updateField('profile_personal', {
+              ...(formData?.profile_personal || {}),
+              ...{ last_name: value },
+            })}
+          />
+        </>
+      )}
+
+      {/* Organization profile */}
+      {formData?.profile_type == 'organization' && (
+        <>
+          <TextView>
+            {i18n.t('Organization name')}
+          </TextView>
+          <InputTextField
+            value={formData?.profile_organization?.organization_name}
+            placeholder={i18n.t('Enter your organization name')}
+            onChangeText={(value: string) => updateField('profile_organization', {
+              ...(formData?.profile_organization || {}),
+              ...{ organization_name: value },
+            })}
+          />
+
+          <TextView>
+            {i18n.t('Creation year')}
+          </TextView>
+          <InputTextField
+            value={formData?.profile_organization?.creation_year}
+            placeholder={i18n.t('Enter the creation year')}
+            onChangeText={(value: string) => updateField('profile_organization', {
+              ...(formData?.profile_organization || {}),
+              ...{ creation_year: value },
+            })}
+          />
+        </>
+      )}
+
+      {/* Venue profile */}
+      {formData?.profile_type == 'venue' && (
+        <>
+          <TextView>
+            {i18n.t('Venue name')}
+          </TextView>
+          <InputTextField
+            value={formData?.profile_venue?.venue_name}
+            placeholder={i18n.t('Enter the venue name')}
+            onChangeText={(value: string) => updateField('profile_venue', {
+              ...(formData?.profile_venue || {}),
+              ...{ venue_name: value },
+            })}
+          />
+
+          <TextView>
+            {i18n.t('Creation year')}
+          </TextView>
+          <InputTextField
+            value={formData?.profile_venue?.creation_year}
+            placeholder={i18n.t('Enter the creation year')}
+            onChangeText={(value: string) => updateField('profile_venue', {
+              ...(formData?.profile_venue || {}),
+              ...{ creation_year: value },
+            })}
+          />
+        </>
+      )}
+
+      {/* All profiles */}
+      {formData?.profile_type?.length && (
+        <>
+          <TextView>
+            {i18n.t('Profile name (with no spaces)')}
+          </TextView>
+          <InputTextField
+            value={formData?.profile_name}
+            placeholder={i18n.t('Profile name')}
+            onChangeText={(value: string) => updateField('profile_name', value)}
+          />
+
+          <TextView>
+            {i18n.t('About')}
+          </TextView>
+          <InputTextareaField
+            value={formData?.profile_description}
+            placeholder={i18n.t('Profile description')}
+            onChangeText={(value: string) => updateField('profile_description', value)}
+          />
+
+          <TextView>
+            {i18n.t('Address')}
+          </TextView>
+          <InputTextField
+            value={formData?.address}
+            placeholder={i18n.t('Enter your address')}
+            onChangeText={(value: string) => updateField('address', value)}
+          />
+
+          <TextView>
+            {i18n.t('Sectors')}
+          </TextView>
+          <SectorsField
+            resource="profile"
+            field="sectors_ids"
+            placeholder={i18n.t('Select your sectors')}
+            value={formData?.sectors_ids}
+            onPress={() => ModalManager.toggleModal('SectorsList', {
+              resource: 'profile',
+              field: 'sectors_ids',
+            })}
+            onChange={(value: any) => updateField('sectors_ids', value)}
+          />
+
+          <TextView>
+            {i18n.t('Country')}
+          </TextView>
+          <CountryField
+            value={formData?.scope_country_code}
+            onChangeValue={(o: any) => updateField('scope_country_code', o.value)}
+          />
+
+          <TextView>
+            {i18n.t('Password')}
+          </TextView>
+          <InputTextField
+            value={formData?.password}
+            placeholder={i18n.t('Password')}
+            onChangeText={(value: string) => updateField('password', value)}
+          />
+
+          <TextView>
+            {i18n.t('Location')}
+          </TextView>
+          <LocationPickerField
+            resource="profile"
+            placeholder={i18n.t('Select your location')}
+            latitude={{
+              field: 'geolocation_latitude',
+              value: formData?.geolocation_latitude,
+            }}
+            longitude={{
+              field: 'geolocation_longitude',
+              value: formData?.geolocation_longitude,
+            }}
+          />
+        </>
+      )}
+
+      {/* Submit button */}
       <View style={styles.submitButtonContainer}>
         <ButtonView
           label={getSubmitLabel()}

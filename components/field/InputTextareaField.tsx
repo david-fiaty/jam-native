@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   element: {
+    width: '100%',
     paddingTop: Layout.space.base/2,
     height: Layout.space.base*12,
   },

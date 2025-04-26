@@ -8,7 +8,6 @@ import TextView from "../view/TextView";
 import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
 import ListView from "../view/ListView";
-import SpinnerView from "../view/SpinnerView";
 import EntityManager from "@/manager/EntityManager";
 import CollapsibleView from "../view/CollapsibleView";
 
@@ -107,8 +106,6 @@ const SectorsList = ({ resource, field }: Props) => {
     })();
     
   }, [isLoaded, sectorsData]);
-
-  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView
