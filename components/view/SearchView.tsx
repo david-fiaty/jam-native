@@ -17,18 +17,6 @@ const SearchView = () => {
   const [jamData, setJamData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search);
   
-  useEffect(() => {
-    (async () => {
-      setJamData(await SearchManager.getResults());
-    })();
-
-    if (!isLoaded) {
-      setIsLoaded(true);
-    }
-  }, [isLoaded, searchState]);
-
-  return <SearchJamsList data={jamData} />;
-  
   const renderTab = (row: any) => {
     const tabStyle: any = row.item.id == activeTab ? styles.activeTab : {};
 
@@ -42,61 +30,21 @@ const SearchView = () => {
   };
 
   useEffect(() => {
+    (async () => {
+      setJamData(await SearchManager.getResults());
+    })();
+
     if (!activeTab) setActiveTab(StaticData.searchTabs[0].id);
+
+    if (!isLoaded) {
       setIsLoaded(true);
-  }, [isLoaded, activeTab]);
+    }
+  }, [isLoaded, searchState]);
 
-  if (!isLoaded) return <SpinnerView />;
-  
   return (
-    <BoxView
-      direction="column"
-      align="flex-start"
-      scroll={true}
-      style={[Layout.screenContent, styles.container]}
-    >
-
-      {/* Search filters */}
-      <BoxView direction="row" align="center" justify="flex-start">
-        <ListView
-          data={StaticData.searchTabs}
-          horizontal={true}
-          contentContainerStyle={styles.tabContainer}
-          renderItem={(row: any) => renderTab(row)}
-        />
-      </BoxView>
-
-      {/* Search jams */}
-      {['jam'].includes(activeTab) && 
-        <SearchJamsList data={searchResult?.jam} />
-      }
-
-      {/* Search calls */}
-      {['call'].includes(activeTab) && 
-        <SearchJamsList data={searchResult?.call} />
-      }
-
-      {/* Search jammers */}
-      {['jammer'].includes(activeTab) && 
-        <SearchProfilesList data={searchResult?.jammer} />
-      }
-
-      {/* Search projects */}
-      {['project'].includes(activeTab) && 
-        <SearchProjectsList data={searchResult?.project} />
-      }
-
-      {/* Search events */}
-      {['event'].includes(activeTab) && 
-        <SearchJamsList data={searchResult?.event} />
-      }
-
-      {/* Search venues */}
-      {['venue'].includes(activeTab) && 
-        <SearchProfilesList data={searchResult?.venue} />
-      }
-
-    </BoxView>
+    <>
+      <SearchJamsList data={jamData} />;
+    </>
   );
 };
 
