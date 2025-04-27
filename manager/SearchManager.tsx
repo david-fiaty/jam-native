@@ -45,6 +45,14 @@ class SearchManager {
 
     return results;
   }
+
+  async sendRequest(options?: any) {
+    return await Promise.all([
+      EntityManager.listJams(options), 
+      EntityManager.listProfiles(options),
+      EntityManager.listProjects(options),
+    ]);
+  }
 };
 
 export default (new SearchManager());
