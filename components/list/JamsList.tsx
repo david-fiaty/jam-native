@@ -28,16 +28,8 @@ const JamsList = ({ idArray }: Props) => {
 
   useEffect(() => {
     (async () => {
-      if (Array.isArray(idArray) && idArray?.length > 0) {
-        setJamData(await EntityManager.getJams({ items_ids: idArray }))
-      }
-      else if (searchState.resultIndex.length > 0) {
-        setJamData(await EntityManager.getJams({ items_ids: searchState.resultIndex }))
-      }
-      else {
-        setJamData(await EntityManager.getJams({ items_ids: searchState.defaultIndex }))
-      }
-    
+      setJamData(await SearchManager.getSearchResults(idArray));
+
       if (!isLoaded) {
         setSectors(await EntityManager.getSectors());
         setProfileData(await UserManager.getProfileData());
