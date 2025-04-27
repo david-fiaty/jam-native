@@ -27,7 +27,6 @@ const JamsList = ({ idArray }: Props) => {
   };
 
   useEffect(() => {
-
     (async () => {
       if (Array.isArray(idArray) && idArray?.length > 0) {
         setJamData(await EntityManager.getJams({ items_ids: idArray }))
