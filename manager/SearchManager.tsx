@@ -33,7 +33,7 @@ class SearchManager {
     return await EntityManager.getJams({ items_ids: itemsIds});
   }
 
-  async clearSearch() {
+  async resetSearch() {
     Store.dispatch(setSearchValue(''));
     Store.dispatch(setResultIndex([]));
     await this.loadResults(); 
