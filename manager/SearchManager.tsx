@@ -14,9 +14,9 @@ class SearchManager {
     }
     else if (searchState.searchValue.length && searchState.resultIndex.length && searchState.searchValue != searchValue) {
       results = await EntityManager.listJams({ query_text: searchValue });
+      Store.dispatch(setSearchValue(searchValue));
       Store.dispatch(setResultIndex(results.map((o: any) => o.id)));
     }
-
     else if (!searchState.defaultIndex.length) {
       results = await EntityManager.listJams();
       Store.dispatch(setDefaultIndex(results.map((o: any) => o.id)));
@@ -24,8 +24,6 @@ class SearchManager {
     else if (searchState.defaultIndex.length) {
       results = await EntityManager.getJams({ items_ids: searchState.defaultIndex });
     }
-
-
 
     return results;
   } 
