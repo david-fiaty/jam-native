@@ -1,10 +1,14 @@
-import { setSearchValue, setDefaultResult, setCurrentResult } from "@/redux/slices/SearchSlice";
+import { setSearchValue, setDefaultIndex, setResultIndex } from "@/redux/slices/SearchSlice";
 import { Config } from "@/constants/Config";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 
 class SearchManager {
+  async getSearchResults(searchValue?: string, filter?: string) {
+    return await EntityManager.listJams();
+  } 
+
   async getSearchResult(searchValue?: string) {
     if (!searchValue?.length) {
       return await this.getDefaultResult();
