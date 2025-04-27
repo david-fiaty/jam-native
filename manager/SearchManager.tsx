@@ -3,18 +3,7 @@ import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 
 class SearchManager {
-  async getSearchResults(idArray: any [] = []) {
-    let searchState: any = Store.getState().search;
-    let itemsIds = [];
-
-    if (idArray?.length > 0) itemsIds = idArray
-    else if (searchState.resultIndex.length > 0) itemsIds = searchState.resultIndex
-    else itemsIds = searchState.defaultIndex;
-        
-    return await EntityManager.getJams({ items_ids: itemsIds});
-  }
-
-  async loadSearchResults(searchValue?: string, filter?: string) {
+  async loadResults(searchValue?: string, filter?: string) {
     let searchState: any = Store.getState().search;
     let results: any[] = [];
 
@@ -33,10 +22,21 @@ class SearchManager {
     return results;
   } 
 
+  async getResults(idArray: any [] = []) {
+    let searchState: any = Store.getState().search;
+    let itemsIds = [];
+
+    if (idArray?.length > 0) itemsIds = idArray
+    else if (searchState.resultIndex.length > 0) itemsIds = searchState.resultIndex
+    else itemsIds = searchState.defaultIndex;
+        
+    return await EntityManager.getJams({ items_ids: itemsIds});
+  }
+
   async clearSearch() {
     Store.dispatch(setSearchValue(''));
     Store.dispatch(setResultIndex([]));
-    await this.loadSearchResults(); 
+    await this.loadResults(); 
   }
 
   async getDefaultResults() {
