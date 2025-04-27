@@ -8,14 +8,15 @@ import TextView from "./TextView";
 import ListView from "./ListView";
 import StaticData from "@/constants/StaticData";
 import SpinnerView from "./SpinnerView";
-
+import SearchManager from "@/manager/SearchManager";
+import SearchJamsList from "../list/SearchJamsList";
+import DividerView from "./DividerView";
 
 const SearchView = () => {
   const [activeTab, setActiveTab] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  //const searchResult = JSON.parse(useSelector((state: any) => state.search.current));
-
-  return <></>;
+  const [jamData, setJamData] = useState<any[]>([]);
+  const searchState: any = useSelector((state: any) => state.search);
   
   const renderTab = (row: any) => {
     const tabStyle: any = row.item.id == activeTab ? styles.activeTab : {};
@@ -30,22 +31,21 @@ const SearchView = () => {
   };
 
   useEffect(() => {
+    (async () => {
+      setJamData(await SearchManager.getResults());
+    })();
+
     if (!activeTab) setActiveTab(StaticData.searchTabs[0].id);
+
+    if (!isLoaded) {
       setIsLoaded(true);
-  }, [isLoaded, activeTab]);
+    }
+  }, [isLoaded, searchState]);
 
-  if (!isLoaded) return <SpinnerView />;
-  
   return (
-    <BoxView
-      direction="column"
-      align="flex-start"
-      scroll={true}
-      style={[Layout.screenContent, styles.container]}
-    >
-
+    <>
       {/* Search filters */}
-      <BoxView direction="row" align="center" justify="flex-start">
+      <BoxView direction="row" align="center" justify="flex-start" style={styles.tabContainer}>
         <ListView
           data={StaticData.searchTabs}
           horizontal={true}
@@ -54,37 +54,14 @@ const SearchView = () => {
         />
       </BoxView>
 
-      {/* Search jams */}
-      {['jam'].includes(activeTab) && 
-        <SearchJamsList data={searchResult?.jam} />
-      }
-
-      {/* Search calls */}
-      {['call'].includes(activeTab) && 
-        <SearchJamsList data={searchResult?.call} />
-      }
-
-      {/* Search jammers */}
-      {['jammer'].includes(activeTab) && 
-        <SearchProfilesList data={searchResult?.jammer} />
-      }
-
-      {/* Search projects */}
-      {['project'].includes(activeTab) && 
-        <SearchProjectsList data={searchResult?.project} />
-      }
-
-      {/* Search events */}
-      {['event'].includes(activeTab) && 
-        <SearchJamsList data={searchResult?.event} />
-      }
-
-      {/* Search venues */}
-      {['venue'].includes(activeTab) && 
-        <SearchProfilesList data={searchResult?.venue} />
-      }
-
-    </BoxView>
+      {/* Jams list */}
+      {['call', 'event'].includes(activeTab) && (
+        <SearchJamsList 
+          data={jamData}
+          filter={activeTab} 
+        />
+      )}
+    </>
   );
 };
 
@@ -93,7 +70,7 @@ const styles = {
     width: '100%',
   },
   tabContainer: {
-    backgroundColor: Colors.white,
+    marginBottom: Layout.space.base,
   },
   tabItem: {
     paddingHorizontal: Layout.space.base,
@@ -102,7 +79,7 @@ const styles = {
     borderBottomColor: Colors.primary,
   },
   activeTab: { 
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
 };
 
