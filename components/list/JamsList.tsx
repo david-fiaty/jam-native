@@ -9,6 +9,7 @@ import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import ListItem from "./JamsList/ListItem";
 import UserManager from "@/manager/UserManager";
+import SearchManager from "@/manager/SearchManager";
 
 type Props = BaseProps & {
   idArray?: any;
@@ -19,7 +20,7 @@ const JamsList = ({ idArray }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [jamData, setJamData] = useState<any[]>([]);
   const [profileData, setProfileData] = useState<any>(null);
-  const searchResult = JSON.parse(useSelector((state: any) => state.search.current));
+  const searchState: any = useSelector((state: any) => state.search);
 
   const renderItem = (row: any) => {
     return <ListItem row={row} sectorsData={sectors} profileData={profileData} />;
@@ -30,9 +31,11 @@ const JamsList = ({ idArray }: Props) => {
       if (Array.isArray(idArray) && idArray?.length > 0) {
         setJamData(await EntityManager.getJams({ items_ids: idArray }))
       }
+      else if (searchState.resultIndex.length > 0) {
+        setJamData(await EntityManager.getJams({ items_ids: searchState.resultIndex }))
+      }
       else {
-        //setJamData(searchResult?.jam); // Todo - Connect search
-        setJamData(await EntityManager.listJams());
+        setJamData(await EntityManager.getJams({ items_ids: searchState.defaultIndex }))
       }
     
       if (!isLoaded) {
@@ -41,10 +44,11 @@ const JamsList = ({ idArray }: Props) => {
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, sectors, idArray]);
+
+  }, [isLoaded, sectors, idArray, searchState]);
 
   if (!isLoaded) return <SpinnerView />;
-
+  
   return (
     <BoxView 
       direction="column" 

@@ -48,14 +48,7 @@ const SectionHeader = ({ style } : Props) => {
       </BoxView>
 
       <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>      
-        {isLoggedIn && (  
-          <SearchField 
-            // Todo - Implement handlers
-            //onSearchEdit={onSearchEdit}
-            //onSearchSubmit={onSearchSubmit} 
-            //onSearchClear={onSearchClear} 
-          />)
-        }
+        {isLoggedIn && <SearchField />}
 
         {isLoggedIn && (
           <IconView
