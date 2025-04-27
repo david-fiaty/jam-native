@@ -48,14 +48,7 @@ const SectionHeader = ({ style } : Props) => {
       </BoxView>
 
       <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>      
-        {isLoggedIn && (  
-          <SearchField 
-            // Todo - Implement handlers
-            //onSearchEdit={onSearchEdit}
-            //onSearchSubmit={onSearchSubmit} 
-            //onSearchClear={onSearchClear} 
-          />)
-        }
+        {isLoggedIn && <SearchField />}
 
         {isLoggedIn && (
           <IconView
@@ -90,10 +83,11 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   headerLeft: {
-    width: '50%',
+    width: '42%',
+    maxWidth: 135,
   },
   headerRight: {
-    width: '50%',
+    flex: 1,
   },
 });
 
