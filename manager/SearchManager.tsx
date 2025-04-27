@@ -28,51 +28,8 @@ class SearchManager {
     return results;
   } 
 
-  async getSearchResult(searchValue?: string) {
-    if (!searchValue?.length) {
-      return await this.getDefaultResult();
-    } 
-    else if (searchValue == this.getCurrentValue()) {
-      return this.getCurrentResult();
-    }
-    else {
-      return await this.loadData(searchValue);
-    }
-  }
-
-  async getDefaultResult() {
-    let defaultResult: any = JSON.parse(Store.getState().search.default);
-
-    if (Object.keys(defaultResult)?.length > 0) {
-      return defaultResult;
-    }
-
-    return await this.loadData();
-  }
-
-  setDefaultResult(result: any) {
-    Store.dispatch(setDefaultResult(JSON.stringify(result)));
-  }
-
-  getCurrentResult() {
-    return JSON.parse(Store.getState().search.current);
-  }
-
-  setCurrentResult(result: any) {
-    Store.dispatch(setCurrentResult(JSON.stringify(result)));
-  }
-
-  getCurrentValue() {
-    return Store.getState().search.value;
-  }
-
-  setCurrentValue(value: any) {
-    Store.dispatch(setSearchValue(value));
-  }
-
   async clearSearch() {
-    this.setCurrentValue('');
-    await this.loadData();
+    Store.dispatch(setSearchValue(''));
   }
 
   async loadData(searchValue?: string) {
