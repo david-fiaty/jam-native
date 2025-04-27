@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { BaseProps } from '@/constants/Types';
@@ -18,6 +18,7 @@ type Props = BaseProps & {
 
 const SearchField = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => {
   const searchState = useSelector((state: any) => state.search);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
@@ -31,7 +32,7 @@ const SearchField = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => 
   };
 
   const submitSearch = async (value?: string) => {
-    await SearchManager.getSearchResults(value);
+    await SearchManager.loadSearchResults(value);
   };
 
   const clearSearch = async () => {
@@ -69,6 +70,16 @@ const SearchField = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => 
       );
     }
   };
+
+  useEffect(() => {
+    (async () => {    
+      if (!isLoaded) {
+        await SearchManager.loadSearchResults();
+        setIsLoaded(true);
+      }
+    })();
+
+  }, [isLoaded]);
 
   return (
     <BoxView 
