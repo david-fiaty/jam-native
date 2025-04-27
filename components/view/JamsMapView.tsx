@@ -9,14 +9,14 @@ import SpinnerView from "./SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
-import EntityManager from "@/manager/EntityManager";
+import SearchManager from "@/manager/SearchManager";
 
 const JamsMapView = () => {
   const mapRef = useRef<any>();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [jamData, setJamData] = useState<any[]>([]);
-  const searchResult = JSON.parse(useSelector((state: any) => state.search.current));
+  const searchState: any = useSelector((state: any) => state.search);
   const markerImage = require('@/assets/images/logo-55.png');
   
   const getInitialRegion = () => {
@@ -67,13 +67,13 @@ const JamsMapView = () => {
   useEffect(() => {
     (async () => {
       setCurrentLocation(await UserManager.getLocation());
-
-      //setJamData(searchResult?.jam); // Todo - Connect search
-      setJamData(await EntityManager.listJams());
+      setJamData(await SearchManager.getResults());
     })();
 
-    setIsLoaded(true);
-  }, [isLoaded]);
+    if (!isLoaded) {
+      setIsLoaded(true);
+    }
+  }, [isLoaded, searchState]);
 
   if (!isLoaded) return <SpinnerView />;
 
