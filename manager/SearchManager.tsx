@@ -3,6 +3,10 @@ import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 
 class SearchManager {
+  async getSearchResults(idArray: any []) {
+    return await EntityManager.getJams({ items_ids: idArray});
+  }
+
   async loadSearchResults(searchValue?: string, filter?: string) {
     let searchState: any = Store.getState().search;
     let results: any[] = [];
