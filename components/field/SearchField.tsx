@@ -8,6 +8,7 @@ import InputTextField from "../field/InputTextField";
 import i18n from '@/translation/i18n';
 import SpinnerView from '../view/SpinnerView';
 import BoxView from '../view/BoxView';
+import SearchManager from '@/manager/SearchManager';
 
 type Props = BaseProps & {
   onSearchEdit?: (value: any) => void;
@@ -20,22 +21,21 @@ const SearchField = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => 
   const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
-  const submitSearch = (value?: string) => {
-    if (onSearchSubmit) onSearchSubmit(value);
+  const onChangeText = (value: string) => {
+    setCurrentSearchValue(value);
+    submitSearch(value); 
   };
 
   const onSubmitEditing = () => {
     if (onSearchEdit) onSearchEdit(currentSearchValue);
   };
 
-  const onChangeText = (value: string) => {
-    setCurrentSearchValue(value);
-    submitSearch(value); 
+  const submitSearch = async (value?: string) => {
+    await SearchManager.getSearchResults(value);
   };
 
-  const clearSearch = () => {
-    setCurrentSearchValue('');
-    if (onSearchClear) onSearchClear();
+  const clearSearch = async () => {
+    await SearchManager.clearSearch();
   };
 
   const toggleSearch = () => {
