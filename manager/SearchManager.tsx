@@ -12,7 +12,7 @@ class SearchManager {
 
       //console.log('multirequest ->>>>>', await this.sendRequest({ query_text: searchValue }));
 
-      let x = await this.sendRequest({ query_text: searchValue });
+      let x = await this.sendListRequest(searchValue);
       console.log('multirequest index ->>>>>', this.buildIndex(x));
 
       results = await EntityManager.listJams({ query_text: searchValue });
@@ -63,11 +63,29 @@ class SearchManager {
     return results;
   }
 
-  async sendRequest(options?: any) {
+  async sendListRequest(searchValue: string) {
+    let payload: any = { query_text: searchValue };
+
+    const [jam, profile, project] = await Promise.all([
+      EntityManager.listJams(payload), 
+      EntityManager.listProfiles(payload),
+      EntityManager.listProjects(payload),
+    ]);
+
+    return {
+      jam: jam,
+      profile: profile,
+      project: project,
+    };
+  }
+
+  async sendItemRequest(itemsIds: any[]) {
+    let payload: any = { items_ids: itemsIds };
+
     const [jam, profile, project] =  await Promise.all([
-      EntityManager.listJams(options), 
-      EntityManager.listProfiles(options),
-      EntityManager.listProjects(options),
+      EntityManager.getJams(payload), 
+      EntityManager.getProfiles(payload),
+      EntityManager.getProjects(payload),
     ]);
 
     return {
