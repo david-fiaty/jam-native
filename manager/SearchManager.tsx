@@ -1,55 +1,35 @@
-import { setSearchValue, setDefaultResult, setCurrentResult } from "@/redux/slices/SearchSlice";
+import { setSearchValue, setDefaultIndex, setResultIndex } from "@/redux/slices/SearchSlice";
 import { Config } from "@/constants/Config";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 
 class SearchManager {
-  async getSearchResult(searchValue?: string) {
-    if (!searchValue?.length) {
-      return await this.getDefaultResult();
-    } 
-    else if (searchValue == this.getCurrentValue()) {
-      return this.getCurrentResult();
+  async getSearchResults(searchValue?: string, filter?: string) {
+    let searchState: any = Store.getState().search;
+    let results: any[] = [];
+
+    if (searchState.searchValue.length && searchState.resultIndex.length && searchState.searchValue == searchValue) {
+      results = await EntityManager.getJams({ items_ids: searchState.resultIndex });
     }
-    else {
-      return await this.loadData(searchValue);
+    else if (searchState.searchValue.length && searchState.resultIndex.length && searchState.searchValue != searchValue) {
+      results = await EntityManager.listJams({ query_text: searchValue });
+      Store.dispatch(setSearchValue(searchValue));
+      Store.dispatch(setResultIndex(results.map((o: any) => o.id)));
     }
-  }
-
-  async getDefaultResult() {
-    let defaultResult: any = JSON.parse(Store.getState().search.default);
-
-    if (Object.keys(defaultResult)?.length > 0) {
-      return defaultResult;
+    else if (!searchState.defaultIndex.length) {
+      results = await EntityManager.listJams();
+      Store.dispatch(setDefaultIndex(results.map((o: any) => o.id)));
+    }
+    else if (searchState.defaultIndex.length) {
+      results = await EntityManager.getJams({ items_ids: searchState.defaultIndex });
     }
 
-    return await this.loadData();
-  }
-
-  setDefaultResult(result: any) {
-    Store.dispatch(setDefaultResult(JSON.stringify(result)));
-  }
-
-  getCurrentResult() {
-    return JSON.parse(Store.getState().search.current);
-  }
-
-  setCurrentResult(result: any) {
-    Store.dispatch(setCurrentResult(JSON.stringify(result)));
-  }
-
-  getCurrentValue() {
-    return Store.getState().search.value;
-  }
-
-  setCurrentValue(value: any) {
-    Store.dispatch(setSearchValue(value));
-  }
+    return results;
+  } 
 
   async clearSearch() {
-    this.setCurrentValue('');
-    await this.loadData();
+    Store.dispatch(setSearchValue(''));
   }
 
   async loadData(searchValue?: string) {

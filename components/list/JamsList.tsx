@@ -9,6 +9,7 @@ import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import ListItem from "./JamsList/ListItem";
 import UserManager from "@/manager/UserManager";
+import SearchManager from "@/manager/SearchManager";
 
 type Props = BaseProps & {
   idArray?: any;
@@ -19,7 +20,7 @@ const JamsList = ({ idArray }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [jamData, setJamData] = useState<any[]>([]);
   const [profileData, setProfileData] = useState<any>(null);
-  const searchResult = JSON.parse(useSelector((state: any) => state.search.current));
+  //const searchResult = JSON.parse(useSelector((state: any) => state.search.current));
 
   const renderItem = (row: any) => {
     return <ListItem row={row} sectorsData={sectors} profileData={profileData} />;
@@ -32,7 +33,9 @@ const JamsList = ({ idArray }: Props) => {
       }
       else {
         //setJamData(searchResult?.jam); // Todo - Connect search
-        setJamData(await EntityManager.listJams());
+        //setJamData(await EntityManager.listJams());
+        setJamData(await SearchManager.getSearchResults());
+
       }
     
       if (!isLoaded) {
