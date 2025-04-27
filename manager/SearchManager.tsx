@@ -24,9 +24,8 @@ class SearchManager {
 
   async clearSearch() {
     Store.dispatch(setSearchValue(''));
-    let results: any = await this.getDefaultResults(); 
-
-    return results;
+    Store.dispatch(setResultIndex([]));
+    await this.loadSearchResults(); 
   }
 
   async getDefaultResults() {
@@ -35,7 +34,6 @@ class SearchManager {
 
     return results;
   }
-
 };
 
 export default (new SearchManager());
