@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useSelector } from 'react-redux';
-import { BaseProps } from '@/constants/Types';
 import * as Animatable from 'react-native-animatable';
 import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
@@ -10,33 +9,25 @@ import SpinnerView from '../view/SpinnerView';
 import BoxView from '../view/BoxView';
 import SearchManager from '@/manager/SearchManager';
 
-type Props = BaseProps & {
-  onSearchEdit?: (value: any) => void;
-  onSearchSubmit?: (value: any) => void;
-  onSearchClear?: () => void;
-};
-
-const SearchField = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => {
+const SearchField = () => {
   const searchState = useSelector((state: any) => state.search);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
-  const onChangeText = (value: string) => {
+  const onChangeText = async (value: string) => {
+    setIsProcessing(true);
     setCurrentSearchValue(value);
-    submitSearch(value); 
-  };
-
-  const onSubmitEditing = () => {
-    if (onSearchEdit) onSearchEdit(currentSearchValue);
-  };
-
-  const submitSearch = async (value?: string) => {
     await SearchManager.loadSearchResults(value);
+    setIsProcessing(false);
   };
 
   const clearSearch = async () => {
+    setIsProcessing(true);
+    setCurrentSearchValue('');
     await SearchManager.clearSearch();
+    setIsProcessing(false);
   };
 
   const toggleSearch = () => {
@@ -44,10 +35,10 @@ const SearchField = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => 
   };
 
   const renderRightIcon = () => {
-    if (searchState.searching == true) {
+    if (isProcessing) {
       return <SpinnerView size="small" />;
     }
-    else if (searchState.value?.length) {
+    else if (currentSearchValue?.length > 0) {
       return (
         <IconView 
           name="delete" 
@@ -97,25 +88,26 @@ const SearchField = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => 
           value={currentSearchValue}
           placeholder={i18n.t('Search...')}
           onChangeText={onChangeText}
-          onSubmitEditing={onSubmitEditing}
           rightIcon={renderRightIcon()}
           containerStyle={styles.fieldContainer}
         /> 
       </Animatable.View>
 
-      <Animatable.View 
-        style={[styles.searchIcon, styles.searchIconAnimate, (!isExpanded ? styles.searchIconVisible : {})]}
-        transition="opacity"
-        duration={isExpanded ? 100: 1000}
-      >      
-        <IconView 
-          name="search" 
-          theme="clear" 
-          size={22}
-          padding={0}
-          onPress={toggleSearch}
-        /> 
-      </Animatable.View>
+      {!currentSearchValue?.length && (
+        <Animatable.View 
+          style={[styles.searchIcon, styles.searchIconAnimate, (!isExpanded ? styles.searchIconVisible : {})]}
+          transition="opacity"
+          duration={isExpanded ? 100: 1000}
+        >      
+          <IconView 
+            name="search" 
+            theme="clear" 
+            size={22}
+            padding={0}
+            onPress={toggleSearch}
+          /> 
+        </Animatable.View>
+      )}
 
     </BoxView>
   );
