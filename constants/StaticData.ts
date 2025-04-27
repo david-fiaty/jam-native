@@ -44,6 +44,16 @@ const StaticData = {
   ],
   searchTabs: [
     {
+      id: 'jams',
+      label: i18n.t('Jams'),
+      numColumns: 2,
+    },
+    {
+      id: 'looking',
+      label: i18n.t('Lookings'),
+      numColumns: 2,
+    },
+    {
       id: 'call',
       label: i18n.t('Calls'),
       numColumns: 2,
