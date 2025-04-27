@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
@@ -8,22 +9,30 @@ import TextView from "../view/TextView";
 import ScreenManager from "@/manager/ScreenManager";
 
 type Props = {
-  data?: any,
+  data?: any;
+  filter?: any;
 };
 
-const SearchJamsList = ({ data }: Props) => {
+const SearchJamsList = ({ data, filter }: Props) => {
   const numColumns = 3;
   const router = useRouter();
+  const [currentData, setCurrentData] = useState<any[]>([]);
 
   const onItemPress = (row: any) => {
     ScreenManager.pushScreen(router, '/jam', { idArray: [row.item.id], title: row.item.title });
-  };
+  }
+
+  useEffect(() => {
+    console.log(filter);
+    if (filter) setCurrentData(data.filter((o: any) => o.type == filter))
+    else setCurrentData(data);
+  }, [data, filter]);
 
   return (
     <View>
       <View style={styles.container}>
         <ListView
-          data={data}
+          data={currentData}
           numColumns={numColumns}
           contentContainerStyle={{ gap: Layout.space.base }}
           columnWrapperStyle={{ gap: Layout.space.base }}
