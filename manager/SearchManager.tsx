@@ -8,6 +8,10 @@ class SearchManager {
     let results: any[] = [];
 
     if (searchValue?.length) {
+      //results = await this.sendRequest({ query_text: searchValue });
+
+      console.log('multirequest ->>>>>', await this.sendRequest({ query_text: searchValue }));
+
       results = await EntityManager.listJams({ query_text: searchValue });
       Store.dispatch(setSearchValue(searchValue));
       Store.dispatch(setResultIndex(results.map((o: any) => o.id)));
@@ -47,11 +51,17 @@ class SearchManager {
   }
 
   async sendRequest(options?: any) {
-    return await Promise.all([
+    const [jam, profile, project] =  await Promise.all([
       EntityManager.listJams(options), 
       EntityManager.listProfiles(options),
       EntityManager.listProjects(options),
     ]);
+
+    return {
+      jam: jam,
+      profile: profile,
+      project: project,
+    };
   }
 };
 
