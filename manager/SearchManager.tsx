@@ -3,7 +3,7 @@ import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 
 class SearchManager {
-  async getSearchResults(searchValue?: string, filter?: string) {
+  async loadSearchResults(searchValue?: string, filter?: string) {
     let searchState: any = Store.getState().search;
     let results: any[] = [];
 
