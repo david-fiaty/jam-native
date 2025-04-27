@@ -8,22 +8,22 @@ class SearchManager {
   async getSearchResults(searchValue?: string, filter?: string) {
     let searchState: any = Store.getState().search;
     let results: any[] = [];
-    let defaultIndex: any[] = [];
 
     if (searchState.searchValue.length && searchState.resultIndex.length && searchState.searchValue == searchValue) {
       results = await EntityManager.getJams({ items_ids: searchState.resultIndex });
     }
+    else if (searchState.searchValue.length && searchState.resultIndex.length && searchState.searchValue != searchValue) {
+      results = await EntityManager.listJams({ query_text: searchValue });
+      Store.dispatch(setResultIndex(results.map((o: any) => o.id)));
+    }
 
-    if (!searchState.defaultIndex.length) {
+    else if (!searchState.defaultIndex.length) {
       results = await EntityManager.listJams();
-      defaultIndex = results.map((o: any) => o.id);
-      Store.dispatch(setDefaultIndex(defaultIndex));
+      Store.dispatch(setDefaultIndex(results.map((o: any) => o.id)));
     }
     else if (searchState.defaultIndex.length) {
       results = await EntityManager.getJams({ items_ids: searchState.defaultIndex });
     }
-
-  await EntityManager.getJams({ items_ids: idArray })  
 
 
 
