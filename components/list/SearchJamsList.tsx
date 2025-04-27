@@ -23,8 +23,7 @@ const SearchJamsList = ({ data, filter }: Props) => {
   }
 
   useEffect(() => {
-    console.log(filter);
-    if (filter) setCurrentData(data.filter((o: any) => o.type == filter))
+    if (filter && filter != 'jam') setCurrentData(data.filter((o: any) => o.type == filter))
     else setCurrentData(data);
   }, [data, filter]);
 
