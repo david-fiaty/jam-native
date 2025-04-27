@@ -19,7 +19,7 @@ const SearchField = () => {
   const onChangeText = async (value: string) => {
     setIsProcessing(true);
     setCurrentSearchValue(value);
-    await SearchManager.loadSearchResults(value);
+    await SearchManager.loadResults(value);
     setIsProcessing(false);
   };
 
@@ -65,7 +65,7 @@ const SearchField = () => {
   useEffect(() => {
     (async () => {    
       if (!isLoaded) {
-        await SearchManager.loadSearchResults();
+        await SearchManager.loadResults();
         setIsLoaded(true);
       }
     })();
