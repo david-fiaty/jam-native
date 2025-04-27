@@ -90,10 +90,11 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   headerLeft: {
-    width: '50%',
+    width: '42%',
+    maxWidth: 135,
   },
   headerRight: {
-    width: '50%',
+    flex: 1,
   },
 });
 
