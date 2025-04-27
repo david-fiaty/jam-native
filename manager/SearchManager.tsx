@@ -6,7 +6,28 @@ import Store from '@/redux/Store';
 
 class SearchManager {
   async getSearchResults(searchValue?: string, filter?: string) {
-    return await EntityManager.listJams();
+    let searchState: any = Store.getState().search;
+    let results: any[] = [];
+    let defaultIndex: any[] = [];
+
+    if (searchState.searchValue.length && searchState.resultIndex.length && searchState.searchValue == searchValue) {
+      results = await EntityManager.getJams({ items_ids: searchState.resultIndex });
+    }
+
+    if (!searchState.defaultIndex.length) {
+      results = await EntityManager.listJams();
+      defaultIndex = results.map((o: any) => o.id);
+      Store.dispatch(setDefaultIndex(defaultIndex));
+    }
+    else if (searchState.defaultIndex.length) {
+      results = await EntityManager.getJams({ items_ids: searchState.defaultIndex });
+    }
+
+  await EntityManager.getJams({ items_ids: idArray })  
+
+
+
+    return results;
   } 
 
   async getSearchResult(searchValue?: string) {
