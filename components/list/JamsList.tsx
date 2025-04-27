@@ -28,16 +28,10 @@ const JamsList = ({ idArray }: Props) => {
 
   useEffect(() => {
     (async () => {
-      let entityIds: any [];
-      if (Array.isArray(idArray) && idArray?.length > 0) {
-        entityIds = idArray;
-      }
-      else if (searchState.resultIndex.length > 0) {
-        entityIds = searchState.resultIndex;
-      }
-      else {
-        entityIds = searchState.defaultIndex;
-      }
+      let entityIds: any [] = [];
+      if (Array.isArray(idArray) && idArray?.length > 0) entityIds = idArray
+      else if (searchState.resultIndex.length > 0) searchState.resultIndex
+      else entityIds = searchState.defaultIndex;
     
       setJamData(await SearchManager.getSearchResults(entityIds));
 
