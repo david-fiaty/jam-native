@@ -44,7 +44,7 @@ const StaticData = {
   ],
   searchTabs: [
     {
-      id: 'jams',
+      id: 'jam',
       label: i18n.t('Jams'),
       numColumns: 2,
     },
