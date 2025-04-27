@@ -88,6 +88,7 @@ const SearchField = ({ onSearchEdit, onSearchSubmit, onSearchClear }: Props) => 
           onChangeText={onChangeText}
           onSubmitEditing={onSubmitEditing}
           rightIcon={renderRightIcon()}
+          containerStyle={styles.fieldContainer}
         /> 
       </Animatable.View>
 
@@ -123,6 +124,9 @@ const styles = StyleSheet.create({
   },
   fieldExpanded: {
     width: '100%',
+  },
+  fieldContainer: {
+    height: 35,
   },
   searchIcon: {
     position: 'absolute',
