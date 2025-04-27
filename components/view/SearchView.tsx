@@ -55,7 +55,7 @@ const SearchView = () => {
       </BoxView>
 
       {/* Jams list */}
-      {['call', 'event'].includes(activeTab) && (
+      {['call', 'event', 'venue'].includes(activeTab) && (
         <SearchJamsList 
           data={jamData}
           filter={activeTab} 
