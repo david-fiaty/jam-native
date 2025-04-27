@@ -8,6 +8,13 @@ class SearchManager {
     let results: any[] = [];
 
     if (searchValue?.length) {
+      //results = await this.sendRequest({ query_text: searchValue });
+
+      //console.log('multirequest ->>>>>', await this.sendRequest({ query_text: searchValue }));
+
+      let x = await this.sendRequest({ query_text: searchValue });
+      console.log('multirequest index ->>>>>', this.buildIndex(x));
+
       results = await EntityManager.listJams({ query_text: searchValue });
       Store.dispatch(setSearchValue(searchValue));
       Store.dispatch(setResultIndex(results.map((o: any) => o.id)));
@@ -21,6 +28,16 @@ class SearchManager {
 
     return results;
   } 
+
+  buildIndex (results: any) {
+    let index: any = {};
+
+    for (const [key, data] of Object.entries(results)) {
+      index[key] = (data || []).map((o: any) => o.id);
+    }
+    
+    return index;
+  }
 
   async getResults(idArray?: any) {
     let searchState: any = Store.getState().search;
@@ -44,6 +61,20 @@ class SearchManager {
     Store.dispatch(setDefaultIndex(results.map((o: any) => o.id)));
 
     return results;
+  }
+
+  async sendRequest(options?: any) {
+    const [jam, profile, project] =  await Promise.all([
+      EntityManager.listJams(options), 
+      EntityManager.listProfiles(options),
+      EntityManager.listProjects(options),
+    ]);
+
+    return {
+      jam: jam,
+      profile: profile,
+      project: project,
+    };
   }
 };
 
