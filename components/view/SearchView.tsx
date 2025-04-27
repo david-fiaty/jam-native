@@ -10,6 +10,7 @@ import StaticData from "@/constants/StaticData";
 import SpinnerView from "./SpinnerView";
 import SearchManager from "@/manager/SearchManager";
 import SearchJamsList from "../list/SearchJamsList";
+import DividerView from "./DividerView";
 
 const SearchView = () => {
   const [activeTab, setActiveTab] = useState<any>(null);
@@ -19,7 +20,6 @@ const SearchView = () => {
   
   const renderTab = (row: any) => {
     const tabStyle: any = row.item.id == activeTab ? styles.activeTab : {};
-    console.log(row);
 
     return (
       <TouchableOpacity onPress={() => setActiveTab(row.item.id)} style={styles.tabItem}>
@@ -45,7 +45,7 @@ const SearchView = () => {
   return (
     <>
       {/* Search filters */}
-      <BoxView direction="row" align="center" justify="flex-start">
+      <BoxView direction="row" align="center" justify="flex-start" style={styles.tabContainer}>
         <ListView
           data={StaticData.searchTabs}
           horizontal={true}
@@ -65,7 +65,7 @@ const styles = {
     width: '100%',
   },
   tabContainer: {
-    backgroundColor: Colors.white,
+    marginBottom: Layout.space.base,
   },
   tabItem: {
     paddingHorizontal: Layout.space.base,
