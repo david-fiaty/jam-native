@@ -10,6 +10,7 @@ import ScreenManager from "@/manager/ScreenManager";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import EntityManager from "@/manager/EntityManager";
+import SearchManager from "@/manager/SearchManager";
 
 const JamsMapView = () => {
   const mapRef = useRef<any>();
@@ -67,9 +68,7 @@ const JamsMapView = () => {
   useEffect(() => {
     (async () => {
       setCurrentLocation(await UserManager.getLocation());
-
-      //setJamData(searchResult?.jam); // Todo - Connect search
-      setJamData(await EntityManager.listJams());
+      setJamData(await SearchManager.getResults());
     })();
 
     setIsLoaded(true);
