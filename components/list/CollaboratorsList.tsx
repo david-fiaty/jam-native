@@ -98,8 +98,6 @@ const CollaboratorsList = ({ resource, field }: Props) => {
     setIsLoaded(true);
   }, [profiles, formData, field, activeModal, selectedProfiles]);
 
-  if (!profiles) return <SpinnerView />;
-
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <InputTextField 
