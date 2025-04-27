@@ -8,14 +8,26 @@ import TextView from "./TextView";
 import ListView from "./ListView";
 import StaticData from "@/constants/StaticData";
 import SpinnerView from "./SpinnerView";
-
+import SearchManager from "@/manager/SearchManager";
+import SearchJamsList from "../list/SearchJamsList";
 
 const SearchView = () => {
   const [activeTab, setActiveTab] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  //const searchResult = JSON.parse(useSelector((state: any) => state.search.current));
+  const [jamData, setJamData] = useState<any[]>([]);
+  const searchState: any = useSelector((state: any) => state.search);
+  
+  useEffect(() => {
+    (async () => {
+      setJamData(await SearchManager.getResults());
+    })();
 
-  return <></>;
+    if (!isLoaded) {
+      setIsLoaded(true);
+    }
+  }, [isLoaded, searchState]);
+
+  return <SearchJamsList data={jamData} />;
   
   const renderTab = (row: any) => {
     const tabStyle: any = row.item.id == activeTab ? styles.activeTab : {};
