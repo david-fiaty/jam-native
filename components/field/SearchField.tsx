@@ -26,7 +26,7 @@ const SearchField = () => {
   const clearSearch = async () => {
     setIsProcessing(true);
     setCurrentSearchValue('');
-    await SearchManager.clearSearch();
+    await SearchManager.resetSearch();
     setIsProcessing(false);
   };
 
