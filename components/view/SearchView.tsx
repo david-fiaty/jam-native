@@ -11,6 +11,7 @@ import SpinnerView from "./SpinnerView";
 import SearchManager from "@/manager/SearchManager";
 import SearchJamsList from "../list/SearchJamsList";
 import DividerView from "./DividerView";
+import SearchProfilesList from "../list/SearchProfilesList";
 
 const SearchView = () => {
   const [activeTab, setActiveTab] = useState<any>(null);
@@ -55,12 +56,22 @@ const SearchView = () => {
       </BoxView>
 
       {/* Jams list */}
-      {['call', 'event'].includes(activeTab) && (
+      {['jam', 'looking', 'call', 'event'].includes(activeTab) && (
         <SearchJamsList 
           data={jamData}
           filter={activeTab} 
         />
       )}
+
+      {/* Jammers list */}
+      {['jammer', 'venue', 'organization'].includes(activeTab) && 
+        <TextView>{activeTab}</TextView>
+      }
+
+      {/* Projects list */}
+      {['project'].includes(activeTab) && 
+        <TextView>{activeTab}</TextView>
+      }
     </>
   );
 };
