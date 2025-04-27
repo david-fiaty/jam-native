@@ -7,18 +7,18 @@ class SearchManager {
     let searchState: any = Store.getState().search;
     let results: any[] = [];
 
-    if (searchState.searchValue.length && searchState.resultIndex.length && searchState.searchValue == searchValue) {
-      results = await EntityManager.getJams({ items_ids: searchState.resultIndex });
-    }
-    else if (searchState.searchValue.length && searchState.resultIndex.length && searchState.searchValue != searchValue) {
+    if (searchValue?.length && searchState.searchValue != searchValue) {
       results = await EntityManager.listJams({ query_text: searchValue });
       Store.dispatch(setSearchValue(searchValue));
       Store.dispatch(setResultIndex(results.map((o: any) => o.id)));
     }
+    if (searchValue?.length && searchState.searchValue == searchValue) {
+      results = await EntityManager.getJams({ items_ids: searchState.resultIndex });
+    }
     else if (searchState.defaultIndex.length) {
       results = await EntityManager.getJams({ items_ids: searchState.defaultIndex });
     }
-    else if (!searchState.defaultIndex.length) {
+    else {
       results = await this.getDefaultResults();
     }
 
