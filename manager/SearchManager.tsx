@@ -22,11 +22,11 @@ class SearchManager {
     return results;
   } 
 
-  async getResults(idArray: any [] = []) {
+  async getResults(idArray?: any) {
     let searchState: any = Store.getState().search;
     let itemsIds = [];
 
-    if (idArray?.length > 0) itemsIds = idArray
+    if (idArray && idArray?.length > 0) itemsIds = idArray
     else if (searchState.resultIndex.length > 0) itemsIds = searchState.resultIndex
     else itemsIds = searchState.defaultIndex;
         
