@@ -27,15 +27,15 @@ import EntityManager from "@/manager/EntityManager";
 import CollaboratorsField from "../field/CollaboratorsField";
 import DataManager from "@/manager/DataManager";
 import MediaManager from "@/manager/MediaManager";
-//import ModalManager from "@/manager/ModalManager";
-//import ModalManager from "@/manager/ModalManager";
+import ModalManager from "@/manager/ModalManager";
 
 type Props = {
-  resource: string;
   jamId?: any;
 };
 
-const JamForm = ({ resource, jamId }: Props) => {
+const resource: string = 'jam';
+
+const JamForm = ({ jamId }: Props) => {
   jamId = jamId || 0;
 
   const dispatch = useDispatch();
@@ -117,7 +117,6 @@ const JamForm = ({ resource, jamId }: Props) => {
       align="flex-start"
       justify="flex-start"
       scroll={true}
-      style={Layout.screenContent}
     >
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
         <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
@@ -131,7 +130,7 @@ const JamForm = ({ resource, jamId }: Props) => {
           renderItem={(row: any) => renderJamCategory(row)}
         />
 
-        <DividerView />
+        <DividerView theme="white" />
 
         <TextView>{i18n.t('Title')}</TextView>
         <InputTextField
@@ -176,7 +175,6 @@ const JamForm = ({ resource, jamId }: Props) => {
           }
         />
 
-        { /*
         <TextView>{i18n.t('Location')}</TextView>
         <LocationPickerField
           resource={resource}
@@ -186,7 +184,7 @@ const JamForm = ({ resource, jamId }: Props) => {
             updateField('geolocation_longitude', data?.geolocation_longitude);
           }}
           onPress={() => ModalManager.toggleModal('LocationMapView', {
-            resource: 'profile',
+            resource: resource,
             latitude: {
               field: 'geolocation_latitude',
               value: formData?.geolocation_latitude,
@@ -205,7 +203,6 @@ const JamForm = ({ resource, jamId }: Props) => {
             value: formData?.geolocation_longitude,
           }}
         />
-        */}
 
         <TextView>{i18n.t('Country')}</TextView>
         <CountryField
@@ -215,34 +212,31 @@ const JamForm = ({ resource, jamId }: Props) => {
           }
         />
 
-        { /*
+    
         <TextView>{i18n.t('Select your sectors')}</TextView>
         <SectorsField
           resource={resource}
           field="sectors_ids"
           placeholder={i18n.t('Select your sectors')}
           value={formData?.sectors_ids}
+          onChangeValue={(value: any) => updateField('sectors_ids', value)}
           onPress={() => ModalManager.toggleModal('SectorsList', {
             resource: 'jam',
             field: 'sectors_ids',
           })}
-    
         />
-        */}
 
-        { /*
         <CollaboratorsField
           resource={resource}
           field="collaborators_ids"
-      
+          onChangeValue={(value: any) => updateField('collaborators_ids', value)}
           onPress={() => ModalManager.toggleModal('CollaboratorsList', {
             resource: resource,
             field: "collaborators_ids",
-          })
+          })}
         />
-        */}
 
-        <DividerView theme="secondary" />
+        <DividerView theme="white" />
 
         <MediaPickerField
           preview={true}
@@ -257,7 +251,7 @@ const JamForm = ({ resource, jamId }: Props) => {
           }
         />
 
-        <DividerView theme="secondary" />
+        <DividerView theme="white" />
         
         <View style={styles.submitButtonContainer}>
           <ButtonView
@@ -277,6 +271,7 @@ const styles = StyleSheet.create({
   formContainer: {
     maxWidth: '100%',
     flexShrink: 1,
+    paddingTop: Layout.space.base,
   },
   categoryContainer: {
     flexDirection: 'column',
@@ -302,7 +297,6 @@ const styles = StyleSheet.create({
     flexShrink: 1,
   },
   submitButtonContainer: {
-    marginTop: Layout.space.base,
     marginBottom: Layout.space.base,
   },
 });

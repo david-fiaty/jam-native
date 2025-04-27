@@ -28,7 +28,7 @@ const CollaboratorsList = ({ resource, field }: Props) => {
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeModal: any = ScreenManager.getActiveModal();
-  const formData: any = useSelector((state: any) => state[resource]);
+  const formData: any = useSelector((state: any) => state.form[resource]);
 
   const clearSearch = () => {
     setIsSearching(true);

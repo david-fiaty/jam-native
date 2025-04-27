@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { useDispatch, useSelector } from "react-redux";
-import { setFormData } from "@/redux/slices/FormSlice";
+import { useSelector } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
@@ -17,10 +16,10 @@ type Props = {
   value?: any;
   placeholder?: any;
   onPress?: () => void;
+  onChangeValue: (value: any) => void;
 };
 
-const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Props) => {
-  const dispatch = useDispatch();
+const CollaboratorsField = ({ resource, field, value, placeholder, onPress, onChangeValue }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
@@ -31,22 +30,20 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Pr
     if (index !== -1) selectedIds.splice(index, 1);
 
     setCurrentValue(selectedIds);
-
-    dispatch(setFormData<any>({ 
-      resource: resource,
-      key: field, 
-      value: selectedIds, 
-    }));
+    onChangeValue(selectedIds);
   };
 
   useEffect(() => {
     (async () => {
-        if (formData?.[field]?.length) setCurrentValue(await EntityManager.getProfiles({ items_ids: formData[field] }));
-        setIsLoaded(true);
-    })();
-  }, [isLoaded, formData, field]);
+        if (!isLoaded) {
+          if (formData?.[field]?.length) {
+            setCurrentValue(await EntityManager.getProfiles({ items_ids: formData[field] }));
+          }
 
-  if (!isLoaded) return <SpinnerView size="small" />;
+          setIsLoaded(true);
+        }
+    })();    
+  }, [isLoaded, formData, field]);
 
   return (
     <View style={styles.container}>
