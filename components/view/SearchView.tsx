@@ -74,7 +74,7 @@ const styles = {
     borderBottomColor: Colors.primary,
   },
   activeTab: { 
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
 };
 
