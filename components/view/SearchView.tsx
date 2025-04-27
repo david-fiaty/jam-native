@@ -19,6 +19,7 @@ const SearchView = () => {
   
   const renderTab = (row: any) => {
     const tabStyle: any = row.item.id == activeTab ? styles.activeTab : {};
+    console.log(row);
 
     return (
       <TouchableOpacity onPress={() => setActiveTab(row.item.id)} style={styles.tabItem}>
@@ -43,7 +44,18 @@ const SearchView = () => {
 
   return (
     <>
-      <SearchJamsList data={jamData} />;
+      {/* Search filters */}
+      <BoxView direction="row" align="center" justify="flex-start">
+        <ListView
+          data={StaticData.searchTabs}
+          horizontal={true}
+          contentContainerStyle={styles.tabContainer}
+          renderItem={(row: any) => renderTab(row)}
+        />
+      </BoxView>
+
+      {/* Jams list */}
+      {['call'].includes(activeTab) && <SearchJamsList data={jamData} />}
     </>
   );
 };
