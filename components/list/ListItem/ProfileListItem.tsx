@@ -13,7 +13,12 @@ type Props = BaseProps & {
 
 const ProfileListItem = ({ item, selected, onPress }: Props) => {
   return (
-    <TouchableOpacity key={item?.id} onPress={onPress}>
+    <TouchableOpacity 
+      key={item?.id} 
+
+      // Todo - Implement event
+      //onPress={onPress}
+    >
       <BoxView direction="row" align="center" justify="flex-start" style={styles.container}>
         <IconView 
           name="user" 
