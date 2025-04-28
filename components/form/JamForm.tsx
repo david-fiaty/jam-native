@@ -226,6 +226,8 @@ const JamForm = ({ jamId }: Props) => {
           })}
         />
 
+        <DividerView theme="white" />
+        
         <CollaboratorsField
           resource={resource}
           field="collaborators_ids"
