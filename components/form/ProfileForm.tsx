@@ -140,6 +140,7 @@ const ProfileForm = () => {
             {i18n.t('Creation year')}
           </TextView>
           <InputTextField
+            keyboardType="number-pad"
             value={formData?.profile_organization?.creation_year}
             placeholder={i18n.t('Enter the creation year')}
             onChangeText={(value: string) => updateField('profile_organization', {
@@ -169,6 +170,7 @@ const ProfileForm = () => {
             {i18n.t('Creation year')}
           </TextView>
           <InputTextField
+            keyboardType="number-pad"
             value={formData?.profile_venue?.creation_year}
             placeholder={i18n.t('Enter the creation year')}
             onChangeText={(value: string) => updateField('profile_venue', {
