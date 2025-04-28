@@ -84,7 +84,8 @@ const styles = {
     width: '100%',
   },
   tabContainer: {
-    marginBottom: Layout.space.base,
+    marginTop: Layout.space.base/2,
+    marginBottom: Layout.space.base/2,
   },
   tabItem: {
     paddingHorizontal: Layout.space.base,
