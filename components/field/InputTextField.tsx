@@ -6,6 +6,7 @@ import { Colors } from "@/constants/Colors";
 import BoxView from "../view/BoxView";
 
 type Props = BaseProps & {
+  keyboardType?: any;
   value?: string;
   placeholder?: string;
   containerStyle?: object;
@@ -21,6 +22,7 @@ type Props = BaseProps & {
 };
 
 const InputTextField = ({
+  keyboardType,
   value,
   placeholder,
   containerStyle,
@@ -43,6 +45,7 @@ const InputTextField = ({
   return (
     <BoxView style={[styles.container, disabledStyle]}>
       <Input
+        keyboardType={keyboardType}
         textAlignVertical="center"
         numberOfLines={1}
         leftIcon={leftIcon}
