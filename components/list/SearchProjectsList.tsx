@@ -38,24 +38,22 @@ const SearchProjectsList = ({ data, filter }: Props) => {
   }, [data, filter]);
 
   return (
-    <View>
-      <View style={styles.container}>
-        <ListView
-          data={currentData}
-          numColumns={numColumns}
-          contentContainerStyle={{ gap: Layout.space.base }}
-          columnWrapperStyle={{ gap: Layout.space.base }}
-          scrollEnabled={false}
-          emptyMessage={<TextView>{i18n.t("No results found for this search.")}</TextView>}
-          renderItem={(row: any) => (
-            <ProjectListItem
-              row={row}
-              images={projectsImages}
-              onListItemPress={(row: any) => onItemPress(row)}
-            />
-          )}
-        />
-      </View>
+    <View style={styles.container}>
+      <ListView
+        data={currentData}
+        numColumns={numColumns}
+        contentContainerStyle={{ gap: Layout.space.base }}
+        columnWrapperStyle={{ gap: Layout.space.base }}
+        scrollEnabled={false}
+        emptyMessage={<TextView>{i18n.t("No results found for this search.")}</TextView>}
+        renderItem={(row: any) => (
+          <ProjectListItem
+            row={row}
+            images={projectsImages}
+            onListItemPress={(row: any) => onItemPress(row)}
+          />
+        )}
+      />
     </View>
   );
 };
