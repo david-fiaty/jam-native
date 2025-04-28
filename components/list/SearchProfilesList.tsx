@@ -16,6 +16,12 @@ const SearchProfilesList = ({ data, filter }: Props) => {
   const router = useRouter();
   const [currentData, setCurrentData] = useState<any[]>([]);
 
+  const renderEmptyMessage = () => {
+    if (!currentData?.length) {
+      return <TextView>{i18n.t("No results found for this search.")}</TextView>;
+    }
+  };
+
   useEffect(() => {
     if (filter && filter != 'jammer') setCurrentData(data.filter((o: any) => o.profile_type == filter))
     else setCurrentData(data);
@@ -26,7 +32,7 @@ const SearchProfilesList = ({ data, filter }: Props) => {
       <ListView
         data={currentData}
         scrollEnabled={false}
-        emptyMessage={<TextView>{i18n.t("No results found for this search.")}</TextView>}
+        emptyMessage={renderEmptyMessage()}
         renderItem={(row: any) => <ProfileListItem item={row.item} />}
       />
     </View>
