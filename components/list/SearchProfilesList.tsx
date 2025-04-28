@@ -17,7 +17,7 @@ const SearchProfilesList = ({ data, filter }: Props) => {
   const [currentData, setCurrentData] = useState<any[]>([]);
 
   useEffect(() => {
-    if (filter) setCurrentData(data.filter((o: any) => o.profile_type == filter))
+    if (filter && filter != 'jammer') setCurrentData(data.filter((o: any) => o.profile_type == filter))
     else setCurrentData(data);
   }, [data, filter]);
 
