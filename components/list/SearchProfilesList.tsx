@@ -21,18 +21,14 @@ const SearchProfilesList = ({ data, filter }: Props) => {
     else setCurrentData(data);
   }, [data, filter]);
 
-  return (
-    <View>
-      {data?.length > 0 && (
-        <View style={styles.container}>
-          <ListView
-            data={currentData}
-            scrollEnabled={false}
-            emptyMessage={<TextView>{i18n.t("No results found for this search.")}</TextView>}
-            renderItem={(row: any) => <ProfileListItem item={row.item} />}
-          />
-        </View>
-      )}
+  return (      
+    <View style={styles.container}>
+      <ListView
+        data={currentData}
+        scrollEnabled={false}
+        emptyMessage={<TextView>{i18n.t("No results found for this search.")}</TextView>}
+        renderItem={(row: any) => <ProfileListItem item={row.item} />}
+      />
     </View>
   );
 };
