@@ -5,22 +5,15 @@ import Store from '@/redux/Store';
 class SearchManager {
   async loadResults(searchValue?: string, filter?: string) {
     let searchState: any = Store.getState().search;
-    let results: any[] = [];
+    let results: any = [];
 
     if (searchValue?.length) {
-      //results = await this.sendRequest({ query_text: searchValue });
-
-      //console.log('multirequest ->>>>>', await this.sendRequest({ query_text: searchValue }));
-
-      //let x = await this.sendListRequest(searchValue);
-      //console.log('multirequest index ->>>>>', this.buildIndex(x));
-
-      results = await EntityManager.listJams({ query_text: searchValue });
+      results = await this.sendListRequest(searchValue);
       Store.dispatch(setSearchValue(searchValue));
       Store.dispatch(setResultIndex(this.buildIndex(results)));
     }
     else if (searchState.defaultIndex.length) {
-      results = await EntityManager.getJams({ items_ids: searchState.defaultIndex });
+      results = await this.sendItemRequest(searchState.defaultIndex);
     }
     else {
       results = await this.getDefaultResults();
@@ -39,7 +32,7 @@ class SearchManager {
     return index;
   }
 
-  async getResults(idArray?: any) {
+  async getResults(idArray?: any): any {
     let searchState: any = Store.getState().search;
     let itemsIds = [];
 
@@ -63,7 +56,7 @@ class SearchManager {
     return results;
   }
 
-  async sendListRequest(searchValue: string) {
+  async sendListRequest(searchValue?: string) {
     let payload: any = {};
 
     if (searchValue?.length) payload = { query_text: searchValue };
