@@ -16,35 +16,42 @@ type Props = {
 const SearchJamsList = ({ data, filter }: Props) => {
   const numColumns = 3;
   const router = useRouter();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [currentData, setCurrentData] = useState<any[]>([]);
 
   const onItemPress = (row: any) => {
     ScreenManager.pushScreen(router, '/jam', { idArray: [row.item.id], title: row.item.title });
   }
 
+  const renderEmptyMessage = () => {
+    if (isLoaded && !currentData?.length) {
+      return <TextView>{i18n.t("No results found for this search.")}</TextView>;
+    }
+  };
+
   useEffect(() => {
     if (filter && filter != 'jam') setCurrentData(data.filter((o: any) => o.type == filter))
     else setCurrentData(data);
-  }, [data, filter]);
+
+    if (!isLoaded) setIsLoaded(true);
+  }, [isLoaded, data, filter]);
 
   return (
-    <View>
-      <View style={styles.container}>
-        <ListView
-          data={currentData}
-          numColumns={numColumns}
-          contentContainerStyle={{ gap: Layout.space.base }}
-          columnWrapperStyle={{ gap: Layout.space.base }}
-          scrollEnabled={false}
-          emptyMessage={<TextView>{i18n.t("No results found for this search.")}</TextView>}
-          renderItem={(row: any) => (
-            <JamListItem 
-              row={row}
-              onListItemPress={(row: any) => onItemPress(row)}
-            />
-          )}
-        />
-      </View>
+    <View style={styles.container}>
+      <ListView
+        data={currentData}
+        numColumns={numColumns}
+        contentContainerStyle={{ gap: Layout.space.base }}
+        columnWrapperStyle={{ gap: Layout.space.base }}
+        scrollEnabled={false}
+        emptyMessage={renderEmptyMessage()}
+        renderItem={(row: any) => (
+          <JamListItem 
+            row={row}
+            onListItemPress={(row: any) => onItemPress(row)}
+          />
+        )}
+      />
     </View>
   );
 };
