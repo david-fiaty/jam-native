@@ -138,6 +138,7 @@ const SignupForm = () => {
             {i18n.t('Creation year')}
           </TextView>
           <InputTextField
+            keboardType="number-pad"
             value={formData?.profile_organization?.creation_year}
             placeholder={i18n.t('Enter the creation year')}
             onChangeText={(value: string) => updateField('profile_organization', {
