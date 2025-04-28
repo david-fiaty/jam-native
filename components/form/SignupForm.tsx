@@ -39,7 +39,7 @@ const SignupForm = () => {
   };
 
   const submitForm = async () => {
-    let { password, ...profileData } = formData;
+    let { password, password_confirmation, ...profileData } = formData;
 
     let payload: any = {
       ...{ profile: profileData },
@@ -236,9 +236,20 @@ const SignupForm = () => {
             {i18n.t('Password')}*
           </TextView>
           <InputTextField
+            secureTextEntry={true}
             value={formData?.password}
             placeholder={i18n.t('Password')}
             onChangeText={(value: string) => updateField('password', value)}
+          />
+
+          <TextView>
+            {i18n.t('Password confirmation')}*
+          </TextView>
+          <InputTextField
+            secureTextEntry={true}
+            value={formData?.password_confirmation}
+            placeholder={i18n.t('Password confirmation')}
+            onChangeText={(value: string) => updateField('password_confirmation', value)}
           />
 
           <TextView>
