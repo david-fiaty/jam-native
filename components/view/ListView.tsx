@@ -11,6 +11,7 @@ type Props = BaseProps & {
   horizontal?: boolean;
   contentContainerStyle?: object;
   columnWrapperStyle?: object;
+  showsHorizontalScrollIndicator?: boolean;
   emptyMessage?: any;
   keyExtractor?: ((row: any) => string);
   renderItem: ((item: any) => JSX.Element);
@@ -23,6 +24,7 @@ const ListView = ({
   horizontal,
   contentContainerStyle,
   columnWrapperStyle,
+  showsHorizontalScrollIndicator,
   emptyMessage,
   keyExtractor,
   renderItem,
@@ -39,6 +41,7 @@ const ListView = ({
       initialNumToRender={data?.length || Config.paginationSize}
       scrollEnabled={scrollEnabled === false ? false : true}
       horizontal={horizontal === true ? horizontal : false}
+      showsHorizontalScrollIndicator={showsHorizontalScrollIndicator}
       contentContainerStyle={[styles.container, contentContainerStyle]}
       columnWrapperStyle={columnWrapperStyle}
       maxToRenderPerBatch={Config.paginationSize}
