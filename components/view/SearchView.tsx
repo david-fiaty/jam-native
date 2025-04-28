@@ -24,9 +24,7 @@ const SearchView = () => {
 
     return (
       <TouchableOpacity onPress={() => setActiveTab(row.item.id)} style={styles.tabItem}>
-        <View>
-          <TextView style={tabStyle}>{row.item.label}</TextView>
-        </View>
+        <TextView style={tabStyle}>{row.item.label}</TextView>
       </TouchableOpacity>
     );
   };
@@ -50,6 +48,7 @@ const SearchView = () => {
         <ListView
           data={StaticData.searchTabs}
           horizontal={true}
+          showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.tabContainer}
           renderItem={(row: any) => renderTab(row)}
         />
@@ -84,7 +83,9 @@ const styles = {
     width: '100%',
   },
   tabContainer: {
-    marginBottom: Layout.space.base,
+    marginTop: Layout.space.base/2,
+    marginBottom: Layout.space.base/2,
+    paddingHorizontal: Layout.space.base*0.18,
   },
   tabItem: {
     paddingHorizontal: Layout.space.base,
