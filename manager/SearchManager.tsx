@@ -18,7 +18,7 @@ class SearchManager {
     else {
       results = await this.getDefaultResults();
     }
-
+    
     return results;
   } 
 
@@ -74,13 +74,11 @@ class SearchManager {
     };
   }
 
-  async sendItemRequest(itemsIds: any[]) {
-    let payload: any = { items_ids: itemsIds };
-
-    const [jam, profile, project] =  await Promise.all([
-      EntityManager.getJams(payload), 
-      EntityManager.getProfiles(payload),
-      EntityManager.getProjects(payload),
+  async sendItemRequest(itemsIds: any) {
+    const [jam, profile, project] = await Promise.all([
+      EntityManager.getJams({ items_ids: itemsIds.jam }), 
+      EntityManager.getProfiles({ items_ids: itemsIds.profile }),
+      EntityManager.getProjects({ items_ids: itemsIds.project }),
     ]);
 
     return {
