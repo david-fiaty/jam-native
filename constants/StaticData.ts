@@ -69,7 +69,7 @@ const StaticData = {
       numColumns: 1,
     },
     {
-      id: 'artist',
+      id: 'personal',
       label: i18n.t('Artists'),
       numColumns: 1,
     },
