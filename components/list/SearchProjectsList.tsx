@@ -17,11 +17,18 @@ type Props = {
 const SearchProjectsList = ({ data, filter }: Props) => {
   const numColumns = 3;
   const router = useRouter();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [projectsImages, setProjectsImages] = useState<any>({});
   const [currentData, setCurrentData] = useState<any[]>([]);
 
   const onItemPress = (row: any) => {
     ScreenManager.pushScreen(router, '/project', { idArray: [row.item.id], title: row.item.title });
+  };
+
+  const renderEmptyMessage = () => {
+    if (isLoaded && !currentData?.length) {
+      return <TextView>{i18n.t("No results found for this search.")}</TextView>;
+    }
   };
 
   useEffect(() => {
@@ -35,27 +42,27 @@ const SearchProjectsList = ({ data, filter }: Props) => {
 
       setCurrentData(data);
     }
-  }, [data, filter]);
+
+    if (!isLoaded) setIsLoaded(true);
+  }, [isLoaded, data, filter]);
 
   return (
-    <View>
-      <View style={styles.container}>
-        <ListView
-          data={currentData}
-          numColumns={numColumns}
-          contentContainerStyle={{ gap: Layout.space.base }}
-          columnWrapperStyle={{ gap: Layout.space.base }}
-          scrollEnabled={false}
-          emptyMessage={<TextView>{i18n.t("No results found for this search.")}</TextView>}
-          renderItem={(row: any) => (
-            <ProjectListItem
-              row={row}
-              images={projectsImages}
-              onListItemPress={(row: any) => onItemPress(row)}
-            />
-          )}
-        />
-      </View>
+    <View style={styles.container}>
+      <ListView
+        data={currentData}
+        numColumns={numColumns}
+        contentContainerStyle={{ gap: Layout.space.base }}
+        columnWrapperStyle={{ gap: Layout.space.base }}
+        scrollEnabled={false}
+        emptyMessage={renderEmptyMessage()}
+        renderItem={(row: any) => (
+          <ProjectListItem
+            row={row}
+            images={projectsImages}
+            onListItemPress={(row: any) => onItemPress(row)}
+          />
+        )}
+      />
     </View>
   );
 };
