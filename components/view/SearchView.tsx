@@ -11,6 +11,7 @@ import SpinnerView from "./SpinnerView";
 import SearchManager from "@/manager/SearchManager";
 import SearchJamsList from "../list/SearchJamsList";
 import SearchProfilesList from "../list/SearchProfilesList";
+import SearchProjectsList from "../list/SearchProjectsList";
 
 const SearchView = () => {
   const [activeTab, setActiveTab] = useState<any>(null);
@@ -74,7 +75,10 @@ const SearchView = () => {
 
       {/* Projects list */}
       {['project'].includes(activeTab) && 
-        <TextView>{activeTab}</TextView>
+        <SearchProjectsList
+          data={searchData?.project}
+          filter={activeTab} 
+        />
       }
     </>
   );
