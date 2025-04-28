@@ -48,6 +48,7 @@ const SearchView = () => {
         <ListView
           data={StaticData.searchTabs}
           horizontal={true}
+          showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.tabContainer}
           renderItem={(row: any) => renderTab(row)}
         />
