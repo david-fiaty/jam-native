@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity, ScrollView } from "react-native";
 import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
@@ -10,7 +10,6 @@ import StaticData from "@/constants/StaticData";
 import SpinnerView from "./SpinnerView";
 import SearchManager from "@/manager/SearchManager";
 import SearchJamsList from "../list/SearchJamsList";
-import DividerView from "./DividerView";
 import SearchProfilesList from "../list/SearchProfilesList";
 
 const SearchView = () => {
@@ -20,13 +19,15 @@ const SearchView = () => {
   const searchState: any = useSelector((state: any) => state.search);
   
   const renderTab = (row: any) => {
-    const tabStyle: any = row.item.id == activeTab ? styles.activeTab : {};
+    const tabStyle: any = row.id == activeTab ? styles.activeTab : {};
 
     return (
-      <TouchableOpacity onPress={() => setActiveTab(row.item.id)} style={styles.tabItem}>
-        <View>
-          <TextView style={tabStyle}>{row.item.label}</TextView>
-        </View>
+      <TouchableOpacity 
+        key={row.id}
+        onPress={() => setActiveTab(row.id)} 
+        style={styles.tabItem}
+      >
+        <TextView style={tabStyle}>{row.label}</TextView>
       </TouchableOpacity>
     );
   };
@@ -47,12 +48,12 @@ const SearchView = () => {
     <>
       {/* Search filters */}
       <BoxView direction="row" align="center" justify="flex-start" style={styles.tabContainer}>
-        <ListView
-          data={StaticData.searchTabs}
+        <ScrollView 
           horizontal={true}
-          contentContainerStyle={styles.tabContainer}
-          renderItem={(row: any) => renderTab(row)}
-        />
+          style={styles.tabContainer}
+        >
+          {StaticData.searchTabs.map((o: any) => renderTab(o))}
+        </ScrollView>
       </BoxView>
 
       {/* Jams list */}
@@ -84,6 +85,7 @@ const styles = {
     width: '100%',
   },
   tabContainer: {
+    marginTop: Layout.space.base/2,
     marginBottom: Layout.space.base,
   },
   tabItem: {
