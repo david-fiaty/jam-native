@@ -24,6 +24,12 @@ const SearchProjectsList = ({ data, filter }: Props) => {
     ScreenManager.pushScreen(router, '/project', { idArray: [row.item.id], title: row.item.title });
   };
 
+  const renderEmptyMessage = () => {
+    if (!currentData?.length) {
+      return <TextView>{i18n.t("No results found for this search.")}</TextView>;
+    }
+  };
+
   useEffect(() => {
     if (data?.length > 0) {
       data.map((item: any) => {
@@ -45,7 +51,7 @@ const SearchProjectsList = ({ data, filter }: Props) => {
         contentContainerStyle={{ gap: Layout.space.base }}
         columnWrapperStyle={{ gap: Layout.space.base }}
         scrollEnabled={false}
-        emptyMessage={<TextView>{i18n.t("No results found for this search.")}</TextView>}
+        emptyMessage={renderEmptyMessage()}
         renderItem={(row: any) => (
           <ProjectListItem
             row={row}
