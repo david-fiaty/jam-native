@@ -24,9 +24,14 @@ const JamListItem = ({ row, isAddable, isDeletable, isSelected, multiSelect, onL
   multiSelect = typeof multiSelect == 'boolean' ? multiSelect : true;
 
   const onItemPress = (row: any) => {
+    return;
+
+    // Todo - Implement event
+    /*
     if (onListItemPress) {
       onListItemPress(row);
     }
+    */
   };
 
   const renderItem = (row: any) => {

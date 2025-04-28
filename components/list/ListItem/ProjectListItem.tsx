@@ -26,9 +26,14 @@ const ProjectListItem = ({ row, images, isAddable, isDeletable, isSelected, mult
   multiSelect = typeof multiSelect == 'boolean' ? multiSelect : true;
 
   const onItemPress = (row: any) => {
+    return;
+
+    // Todo - Implement event
+    /*
     if (onListItemPress) {
       onListItemPress(row);
     }
+      */
   };
 
   const renderItem = (row: any, imageUrl?: any) => {
