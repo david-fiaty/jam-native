@@ -18,7 +18,7 @@ type Props = BaseProps & {
 const JamsList = ({ idArray }: Props) => {
   const [sectors, setSectors] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [jamData, setJamData] = useState<any[]>([]);
+  const [searchData, setSearchData] = useState<any[]>([]);
   const [profileData, setProfileData] = useState<any>(null);
   const searchState: any = useSelector((state: any) => state.search);
 
@@ -28,7 +28,7 @@ const JamsList = ({ idArray }: Props) => {
 
   useEffect(() => {
     (async () => {
-      setJamData(await SearchManager.getResults(idArray));
+      setSearchData((await SearchManager.getResults(idArray))?.jam);
 
       if (!isLoaded) {
         setSectors(await EntityManager.getSectors());
@@ -47,7 +47,7 @@ const JamsList = ({ idArray }: Props) => {
       style={styles.container}
     >
       <ListView
-        data={jamData}
+        data={searchData}
         contentContainerStyle={Layout.listContainer}
         renderItem={renderItem}
         keyExtractor={(item: any) => item.id.toString()}
