@@ -86,9 +86,9 @@ const styles = {
   tabContainer: {
     marginTop: Layout.space.base/2,
     marginBottom: Layout.space.base/2,
+    paddingHorizontal: Layout.space.base*0.18,
   },
   tabItem: {
-    paddingHorizontal: Layout.space.base,
     paddingBottom: Layout.space.base,
     borderBottomWidth: Layout.borderWidth.base,
     borderBottomColor: Colors.primary,
