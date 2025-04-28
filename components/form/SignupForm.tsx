@@ -39,7 +39,7 @@ const SignupForm = () => {
   };
 
   const submitForm = async () => {
-    let { password, ...profileData } = formData;
+    let { password, password_confirmation, ...profileData } = formData;
 
     let payload: any = {
       ...{ profile: profileData },
