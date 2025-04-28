@@ -48,7 +48,10 @@ const SearchView = () => {
     <>
       {/* Search filters */}
       <BoxView direction="row" align="center" justify="flex-start" style={styles.tabContainer}>
-        <ScrollView horizontal={true}>
+        <ScrollView 
+          horizontal={true}
+          style={styles.tabContainer}
+        >
           {StaticData.searchTabs.map((o: any) => renderTab(o))}
         </ScrollView>
       </BoxView>
@@ -83,8 +86,7 @@ const styles = {
   },
   tabContainer: {
     marginTop: Layout.space.base/2,
-    marginBottom: Layout.space.base/2,
-    paddingHorizontal: Layout.space.base*0.18,
+    marginBottom: Layout.space.base,
   },
   tabItem: {
     paddingHorizontal: Layout.space.base,
