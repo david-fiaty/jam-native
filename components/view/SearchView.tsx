@@ -24,9 +24,7 @@ const SearchView = () => {
 
     return (
       <TouchableOpacity onPress={() => setActiveTab(row.item.id)} style={styles.tabItem}>
-        <View>
-          <TextView style={tabStyle}>{row.item.label}</TextView>
-        </View>
+        <TextView style={tabStyle}>{row.item.label}</TextView>
       </TouchableOpacity>
     );
   };
@@ -89,6 +87,7 @@ const styles = {
     paddingHorizontal: Layout.space.base*0.18,
   },
   tabItem: {
+    paddingHorizontal: Layout.space.base,
     paddingBottom: Layout.space.base,
     borderBottomWidth: Layout.borderWidth.base,
     borderBottomColor: Colors.primary,
