@@ -17,6 +17,7 @@ type Props = {
 const SearchProjectsList = ({ data, filter }: Props) => {
   const numColumns = 3;
   const router = useRouter();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [projectsImages, setProjectsImages] = useState<any>({});
   const [currentData, setCurrentData] = useState<any[]>([]);
 
@@ -25,7 +26,7 @@ const SearchProjectsList = ({ data, filter }: Props) => {
   };
 
   const renderEmptyMessage = () => {
-    if (!currentData?.length) {
+    if (isLoaded && !currentData?.length) {
       return <TextView>{i18n.t("No results found for this search.")}</TextView>;
     }
   };
@@ -41,7 +42,9 @@ const SearchProjectsList = ({ data, filter }: Props) => {
 
       setCurrentData(data);
     }
-  }, [data, filter]);
+
+    if (!isLoaded) setIsLoaded(true);
+  }, [isLoaded, data, filter]);
 
   return (
     <View style={styles.container}>
