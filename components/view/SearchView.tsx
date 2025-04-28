@@ -64,7 +64,7 @@ const SearchView = () => {
       )}
 
       {/* Jammers list */}
-      {['jammer', 'venue', 'organization'].includes(activeTab) && 
+      {['jammer', 'venue', 'organization', 'project'].includes(activeTab) && 
         <TextView>{activeTab}</TextView>
       }
 
