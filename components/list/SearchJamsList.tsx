@@ -22,6 +22,12 @@ const SearchJamsList = ({ data, filter }: Props) => {
     ScreenManager.pushScreen(router, '/jam', { idArray: [row.item.id], title: row.item.title });
   }
 
+  const renderEmptyMessage = () => {
+    if (!currentData?.length) {
+      return <TextView>{i18n.t("No results found for this search.")}</TextView>;
+    }
+  };
+
   useEffect(() => {
     if (filter && filter != 'jam') setCurrentData(data.filter((o: any) => o.type == filter))
     else setCurrentData(data);
@@ -35,7 +41,7 @@ const SearchJamsList = ({ data, filter }: Props) => {
         contentContainerStyle={{ gap: Layout.space.base }}
         columnWrapperStyle={{ gap: Layout.space.base }}
         scrollEnabled={false}
-        emptyMessage={<TextView>{i18n.t("No results found for this search.")}</TextView>}
+        emptyMessage={renderEmptyMessage()}
         renderItem={(row: any) => (
           <JamListItem 
             row={row}
