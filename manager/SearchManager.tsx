@@ -5,22 +5,15 @@ import Store from '@/redux/Store';
 class SearchManager {
   async loadResults(searchValue?: string, filter?: string) {
     let searchState: any = Store.getState().search;
-    let results: any[] = [];
+    let results: any = [];
 
     if (searchValue?.length) {
-      //results = await this.sendRequest({ query_text: searchValue });
-
-      //console.log('multirequest ->>>>>', await this.sendRequest({ query_text: searchValue }));
-
-      let x = await this.sendRequest({ query_text: searchValue });
-      console.log('multirequest index ->>>>>', this.buildIndex(x));
-
-      results = await EntityManager.listJams({ query_text: searchValue });
+      results = await this.sendListRequest(searchValue);
       Store.dispatch(setSearchValue(searchValue));
-      Store.dispatch(setResultIndex(results.map((o: any) => o.id)));
+      Store.dispatch(setResultIndex(this.buildIndex(results)));
     }
     else if (searchState.defaultIndex.length) {
-      results = await EntityManager.getJams({ items_ids: searchState.defaultIndex });
+      results = await this.sendItemRequest(searchState.defaultIndex);
     }
     else {
       results = await this.getDefaultResults();
@@ -39,7 +32,7 @@ class SearchManager {
     return index;
   }
 
-  async getResults(idArray?: any) {
+  async getResults(idArray?: any): any {
     let searchState: any = Store.getState().search;
     let itemsIds = [];
 
@@ -47,7 +40,7 @@ class SearchManager {
     else if (searchState.resultIndex.length > 0) itemsIds = searchState.resultIndex
     else itemsIds = searchState.defaultIndex;
         
-    return await EntityManager.getJams({ items_ids: itemsIds});
+    return await this.sendItemRequest(itemsIds);
   }
 
   async resetSearch() {
@@ -57,17 +50,37 @@ class SearchManager {
   }
 
   async getDefaultResults() {
-    let results = await EntityManager.listJams();
-    Store.dispatch(setDefaultIndex(results.map((o: any) => o.id)));
+    let results = await this.sendListRequest();
+    Store.dispatch(setDefaultIndex(this.buildIndex(results)));
 
     return results;
   }
 
-  async sendRequest(options?: any) {
+  async sendListRequest(searchValue?: string) {
+    let payload: any = {};
+
+    if (searchValue?.length) payload = { query_text: searchValue };
+
+    const [jam, profile, project] = await Promise.all([
+      EntityManager.listJams(payload), 
+      EntityManager.listProfiles(payload),
+      EntityManager.listProjects(payload),
+    ]);
+
+    return {
+      jam: jam,
+      profile: profile,
+      project: project,
+    };
+  }
+
+  async sendItemRequest(itemsIds: any[]) {
+    let payload: any = { items_ids: itemsIds };
+
     const [jam, profile, project] =  await Promise.all([
-      EntityManager.listJams(options), 
-      EntityManager.listProfiles(options),
-      EntityManager.listProjects(options),
+      EntityManager.getJams(payload), 
+      EntityManager.getProfiles(payload),
+      EntityManager.getProjects(payload),
     ]);
 
     return {

@@ -16,7 +16,7 @@ import SearchProfilesList from "../list/SearchProfilesList";
 const SearchView = () => {
   const [activeTab, setActiveTab] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [jamData, setJamData] = useState<any[]>([]);
+  const [searchData, setSearchData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search);
   
   const renderTab = (row: any) => {
@@ -33,7 +33,7 @@ const SearchView = () => {
 
   useEffect(() => {
     (async () => {
-      setJamData(await SearchManager.getResults());
+      setSearchData(await SearchManager.getResults());
     })();
 
     if (!activeTab) setActiveTab(StaticData.searchTabs[0].id);
@@ -58,13 +58,13 @@ const SearchView = () => {
       {/* Jams list */}
       {['jam', 'looking', 'call', 'event'].includes(activeTab) && (
         <SearchJamsList 
-          data={jamData}
+          data={searchData[activeTab]?.jam}
           filter={activeTab} 
         />
       )}
 
       {/* Jammers list */}
-      {['jammer', 'venue', 'organization'].includes(activeTab) && 
+      {['jammer', 'venue', 'organization', 'project'].includes(activeTab) && 
         <TextView>{activeTab}</TextView>
       }
 
