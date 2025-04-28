@@ -10,10 +10,11 @@ import TextView from "../view/TextView";
 import ScreenManager from "@/manager/ScreenManager";
 
 type Props = {
-  data?: any,
+  data?: any;
+  filter?: any;
 };
 
-const SearchProjectsList = ({ data }: Props) => {
+const SearchProjectsList = ({ data, filter }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const [projectsImages, setProjectsImages] = useState<any>({});
