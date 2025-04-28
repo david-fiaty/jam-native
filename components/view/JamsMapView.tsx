@@ -15,7 +15,7 @@ const JamsMapView = () => {
   const mapRef = useRef<any>();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [jamData, setJamData] = useState<any[]>([]);
+  const [searchData, setSearchData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search);
   const markerImage = require('@/assets/images/logo-55.png');
   
@@ -67,7 +67,7 @@ const JamsMapView = () => {
   useEffect(() => {
     (async () => {
       setCurrentLocation(await UserManager.getLocation());
-      setJamData(await SearchManager.getResults());
+      setSearchData((await SearchManager.getResults())?.jam);
     })();
 
     if (!isLoaded) {
@@ -89,7 +89,7 @@ const JamsMapView = () => {
           showsUserLocation={true}
           showsMyLocationButton={true}
         >
-          {jamData?.map((item: any) => renderJamMarker(item))}
+          {searchData?.map((item: any) => renderJamMarker(item))}
           {/* searchResult?.jam?.map((item: any) => renderJamMarker(item)) */}
         </MapView>
       </View>
