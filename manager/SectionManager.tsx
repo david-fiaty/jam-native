@@ -11,6 +11,7 @@ import ProfileSection from "@/components/section/ProfileSection";
 import AccountForm from "@/components/form/AccountForm";
 import PasswordForm from "@/components/form/PasswordForm";
 import PrivacySection from "@/components/section/PrivacySection";
+import JamItemSection from "@/components/section/JamItemSection";
 
 class SectionManager {
   previousSection(router: any) {
@@ -51,7 +52,7 @@ class SectionManager {
         showHeader: false,
         showFooter: false,
         showBackButton: false,
-        render: () => <WelcomeSection />,
+        render: (params: any) => <WelcomeSection {...params} />,
       },
       {
         id: 'login',
@@ -60,7 +61,7 @@ class SectionManager {
         showHeader: false,
         showFooter: false,
         showBackButton: false,
-        render: () => <LoginSection />,
+        render: (params: any) => <LoginSection {...params} />,
       },
       {
         id: 'signup',
@@ -69,46 +70,52 @@ class SectionManager {
         showHeader: false,
         showFooter: false,
         showBackButton: false,
-        render: () => <SignupSection />,
+        render: (params: any) => <SignupSection {...params} />,
       },
       {
         id: 'about',
         title: i18n.t('About'),
         showFooter: false,
-        render: () => <AboutSection />,
+        render: (params: any) => <AboutSection {...params} />,
       },
       {
         id: 'legal',
         title: i18n.t('Legal'),
         showFooter: false,
-        render: () => <LegalSection />,
+        render: (params: any) => <LegalSection {...params} />,
       },
       {
         id: 'privacy',
         title: i18n.t('Privacy'),
         showFooter: false,
-        render: () => <PrivacySection />,
+        render: (params: any) => <PrivacySection {...params} />,
       },
       {
         id: 'jams',
         title: i18n.t('Jams'),
         showBackButton: false,
-        render: () => <JamsSection />,
+        render: (params: any) => <JamsSection {...params} />,
+      },
+      {
+        id: 'jam',
+        title: i18n.t('Jam'),
+        showBackButton: true,
+        render: (params: any) => <JamItemSection {...params} />,
       },
       {
         id: 'profile',
         title: i18n.t('Profile'),
-        render: () => <ProfileSection />,
+        render: (params: any) => <ProfileSection {...params} />,
       },
       {
         id: 'account',
         title: i18n.t('Account'),
-        render: () => <AccountForm />,
+        render: (params: any) => <AccountForm {...params} />,
       },
       {
         id: 'password',
         title: i18n.t('Password'),
-        render: () => <PasswordForm />,
+        render: (params: any) => <PasswordForm {...params} />,
       },
     ].map((o: any) => {
       return {
