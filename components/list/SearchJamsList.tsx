@@ -44,7 +44,7 @@ const SearchJamsList = ({ data, filter }: Props) => {
         contentContainerStyle={{ gap: Layout.space.base }}
         columnWrapperStyle={{ gap: Layout.space.base }}
         scrollEnabled={false}
-        emptyMessage={renderEmptyMessage()}
+        //emptyMessage={renderEmptyMessage()} // Todo - Implement empty message
         renderItem={(row: any) => (
           <JamListItem 
             row={row}
