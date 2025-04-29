@@ -10,6 +10,7 @@ import SignupSection from "@/components/section/SignupSection";
 import ProfileSection from "@/components/section/ProfileSection";
 import AccountForm from "@/components/form/AccountForm";
 import PasswordForm from "@/components/form/PasswordForm";
+import PrivacySection from "@/components/section/PrivacySection";
 
 class SectionManager {
   previousSection(router: any) {
@@ -81,6 +82,12 @@ class SectionManager {
         title: i18n.t('Legal'),
         showFooter: false,
         render: () => <LegalSection />,
+      },
+      {
+        id: 'privacy',
+        title: i18n.t('Privacy'),
+        showFooter: false,
+        render: () => <PrivacySection />,
       },
       {
         id: 'jams',

@@ -5,7 +5,7 @@ import BoxView from '../view/BoxView';
 import StaticData from '@/constants/StaticData';
 import BottomLinks from './navigation/BottomLinks';
 
-const LegalSection = () => {
+const PrivacySection = () => {
   const router = useRouter();
 
   return (
@@ -16,4 +16,4 @@ const LegalSection = () => {
   );
 };
 
-export default LegalSection;
+export default PrivacySection;
