@@ -28,7 +28,8 @@ const JamsList = ({ idArray }: Props) => {
 
   useEffect(() => {
     (async () => {
-      setSearchData((await SearchManager.getResults(idArray))?.jam);
+      if (idArray && idArray?.length > 0) setSearchData(await EntityManager.getJams({ items_ids: idArray }))
+      else setSearchData((await SearchManager.getResults())?.jam);
 
       if (!isLoaded) {
         setSectors(await EntityManager.getSectors());

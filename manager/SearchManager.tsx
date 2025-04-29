@@ -32,12 +32,11 @@ class SearchManager {
     return index;
   }
 
-  async getResults(idArray?: any): any {
+  async getResults(): any {
     let searchState: any = Store.getState().search;
     let itemsIds = [];
 
-    if (idArray && idArray?.length > 0) itemsIds = idArray
-    else if (searchState.resultIndex.length > 0) itemsIds = searchState.resultIndex
+    if (searchState.resultIndex.length > 0) itemsIds = searchState.resultIndex
     else itemsIds = searchState.defaultIndex;
         
     return await this.sendItemRequest(itemsIds);

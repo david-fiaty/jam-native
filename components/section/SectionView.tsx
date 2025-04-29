@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocalSearchParams } from "expo-router";
 import { useDispatch, useSelector } from "react-redux";
 import { usePathname } from 'expo-router';
 import { setActiveSections } from "@/redux/slices/SectionSlice";
@@ -16,6 +17,7 @@ import MessageView from "../view/MessageView";
 
 const SectionView = () => { 
   const path = usePathname();
+  const params = useLocalSearchParams();
   const dispatch = useDispatch();
   const [currentSection, setCurrentSection] = useState<any>(null);
   const sectionState: any = useSelector((state: any) => state.section);
@@ -43,7 +45,7 @@ const SectionView = () => {
         justify="center"
         style={styles.container}
       >
-        {currentSection?.render()}
+        {currentSection?.render(params)}
   
         <ModalView currentSection={currentSection} style={styles.modal} />
       </BoxView>
