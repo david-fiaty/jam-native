@@ -14,7 +14,7 @@ const JamItemSection = ({ jamId }: Props) => {
     return <></>;
   }
 
-  return (<JamsList idArray={jamId} />);
+  return (<JamsList idArray={[jamId]} />);
 };
 
 const styles = StyleSheet.create({
