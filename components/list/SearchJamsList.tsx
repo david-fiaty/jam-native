@@ -20,8 +20,10 @@ const SearchJamsList = ({ data, filter }: Props) => {
   const [currentData, setCurrentData] = useState<any[]>([]);
 
   const onItemPress = (row: any) => {
-    router.push('/jam');
-    //ScreenManager.pushScreen(router, '/jam', { idArray: [row.item.id], title: row.item.title });
+    router.push({
+      pathname: '/jam',
+      params:  { idArray: [row.item.id], title: row.item.title },
+    });
   }
 
   const renderEmptyMessage = () => {
