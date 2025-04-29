@@ -6,7 +6,6 @@ import ListView from "../view/ListView";
 import i18n from "@/translation/i18n";
 import JamListItem from "./ListItem/JamListItem";
 import TextView from "../view/TextView";
-import ScreenManager from "@/manager/ScreenManager";
 
 type Props = {
   data?: any;
@@ -22,7 +21,7 @@ const SearchJamsList = ({ data, filter }: Props) => {
   const onItemPress = (row: any) => {
     router.push({
       pathname: '/jam',
-      params:  { idArray: [row.item.id], title: row.item.title },
+      params:  { jamId: row.item.id, title: row.item.title },
     });
   }
 
