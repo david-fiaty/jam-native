@@ -12,8 +12,10 @@ const BottomLinks = () => {
   const router = useRouter();
   const path = usePathname();
   const sectionId: any = path.split('/').pop();
+
   let aboutLink = <TextView style={sectionId == 'about' ? styles.disabled : {}}>{i18n.t('About')}</TextView>;
   let legalLink = <TextView style={sectionId == 'legal' ? styles.disabled : {}}>{i18n.t('Legal')}</TextView>;
+  let privacyLink = <TextView style={sectionId == 'privacy' ? styles.disabled : {}}>{i18n.t('Privacy')}</TextView>;
 
   if (sectionId != 'about') {
     aboutLink = (
@@ -31,10 +33,19 @@ const BottomLinks = () => {
     );
   }
 
+  if (sectionId != 'privacy') {
+    privacyLink = (
+      <TouchableOpacity onPress={() => router.push('/privacy')}>
+        {privacyLink}
+      </TouchableOpacity>
+    );
+  }
+
   return (
     <BoxView direction="row" align="center" justify="space-around" style={styles.container}>
       {aboutLink}
       {legalLink}
+      {privacyLink}
     </BoxView>
   );
 };
