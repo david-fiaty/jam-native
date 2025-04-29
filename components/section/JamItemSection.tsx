@@ -8,7 +8,12 @@ type Props = {
 };
 
 const JamItemSection = ({ jamId }: Props) => {
-  return (<JamsList idArray={jamId ? [parseInt(jamId)] : null} />);
+  if (jamId) {
+    return (<JamsList idArray={[parseInt(jamId)]} />);
+  }
+
+  return <TextView>No params</TextView>
+  
 };
 
 const styles = StyleSheet.create({
