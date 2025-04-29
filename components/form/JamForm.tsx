@@ -28,6 +28,7 @@ import CollaboratorsField from "../field/CollaboratorsField";
 import DataManager from "@/manager/DataManager";
 import MediaManager from "@/manager/MediaManager";
 import ModalManager from "@/manager/ModalManager";
+import FormManager from "@/manager/FormManager";
 
 type Props = {
   jamId?: any;
@@ -45,15 +46,6 @@ const JamForm = ({ jamId }: Props) => {
   const formData = useSelector((state: any) => state.form[resource]);
   const jamCategories = StaticData.jamCategories;
 
-  const updateField = (key: any, value: any) => {
-    dispatch(setFormData<any>({
-      resource: resource,
-      key: key,
-      value: value,
-      profile_id: profileId,
-    }));
-  };
-
   const submitForm = async () => {
     setIsProcessing(true);
     let media: any = MediaManager.prepareUpload(formData?.upload_medias);
@@ -68,14 +60,14 @@ const JamForm = ({ jamId }: Props) => {
     };
 
     if (result?.error) message.content = i18n.t(result.error)
-    else updateField(null, null)
+    else FormManager.updateField(resource, null, null);
 
     ScreenManager.showMessage(message);
     setIsProcessing(false);
   };
 
   const renderJamCategory = (row: any) => (
-    <TouchableOpacity onPress={() => updateField('type', row.item.id)}>
+    <TouchableOpacity onPress={() => FormManager.updateField(resource, 'type', row.item.id)}>
       <View style={styles.categoryContainer}>
         <View
           style={[
@@ -97,15 +89,12 @@ const JamForm = ({ jamId }: Props) => {
         let jamData: any = jamId == 0 ? formData : await EntityManager.getJams({ items_ids: [jamId] });
 
         setProfileId(profileId);
-        dispatch(setFormData<any>({
-          resource: resource,
-          key: null,
-          value: {
-            ...(jamId > 0 ? jamData?.[0] : formData),
-            ...{ profile_id: profileId },
-            ...{ collaborators: [3] }
-          },
-        }));
+        
+        FormManager.updateField(resource, null, {
+          ...(jamId > 0 ? jamData?.[0] : formData),
+          ...{ profile_id: profileId },
+          ...{ collaborators: [3] },
+        });
       }
 
       setIsLoaded(true);
@@ -135,47 +124,38 @@ const JamForm = ({ jamId }: Props) => {
         <TextView>{i18n.t('Title')}</TextView>
         <InputTextField
           value={formData?.title}
-          onChangeText={(value: string) => {
-            console.log(value);
-            updateField('title', value);
-          }}
+          onChangeText={(value: string) => FormManager.updateField(resource, 'title', value)}
         />
 
         <TextView>{i18n.t('Description')}</TextView>
         <InputTextareaField
           value={formData?.caption}
-          onChangeText={(value: string) => updateField('caption', value)}
+          onChangeText={(value: string) => FormManager.updateField(resource, 'caption', value)}
         />
 
         <TextView>{i18n.t('Location type')}</TextView>
         
         <LocationTypeField
           value={formData?.location_type}
-          onChangeValue={(option: any) =>
-            updateField('location_type', option.value)
-          }
+          onChangeValue={(option: any) => FormManager.updateField(resource, 'location_type', option.value)}
         />
 
         <TextView>{i18n.t('Start date')}</TextView>
         <DatePickerField
           value={formData?.period?.start_datetime}
-          onChangeValue={(value: any) =>
-            updateField('period', {
-              ...(formData?.period || {}),
-              ...{ start_datetime: DataManager.formatDate(value) },
-            })
-          }
+          onChangeValue={(value: any) => FormManager.updateField(resource, 'period', {
+            ...(formData?.period || {}),
+            ...{ start_datetime: DataManager.formatDate(value) },
+          })}
         />
 
         <TextView>{i18n.t('End date')}</TextView>
         <DatePickerField
           value={formData?.period?.end_datetime}
-          onChangeValue={(value: any) =>
-            updateField('period', {
-              ...(formData?.period || {}),
-              ...{ end_datetime: DataManager.formatDate(value) },
-            })
-          }
+          onChangeValue={(value: any) => FormManager.updateField(resource, 'period', {
+            ...(formData?.period || {}),
+            ...{ end_datetime: DataManager.formatDate(value) },
+          })}
         />
 
         <TextView>{i18n.t('Location')}</TextView>
@@ -183,8 +163,8 @@ const JamForm = ({ jamId }: Props) => {
           resource={resource}
           placeholder={i18n.t('Select your location')}
           onChangeValue={(data: any) => {
-            updateField('geolocation_latitude', data?.geolocation_latitude);
-            updateField('geolocation_longitude', data?.geolocation_longitude);
+            FormManager.updateField(resource, 'geolocation_latitude', data?.geolocation_latitude);
+            FormManager.updateField(resource, 'geolocation_longitude', data?.geolocation_longitude);
           }}
           onPress={() => ModalManager.toggleModal('LocationMapView', {
             resource: resource,
@@ -210,11 +190,8 @@ const JamForm = ({ jamId }: Props) => {
         <TextView>{i18n.t('Country')}</TextView>
         <CountryField
           value={formData?.countries}
-          onChangeValue={(option: any) =>
-            updateField('country', option.value)
-          }
+          onChangeValue={(option: any) => FormManager.updateField(resource, 'country', option.value)}
         />
-
     
         <TextView>{i18n.t('Select your sectors')}</TextView>
         <SectorsField
@@ -222,7 +199,7 @@ const JamForm = ({ jamId }: Props) => {
           field="sectors_ids"
           placeholder={i18n.t('Select your sectors')}
           value={formData?.sectors_ids}
-          onChangeValue={(value: any) => updateField('sectors_ids', value)}
+          onChangeValue={(value: string) => FormManager.updateField(resource, 'sectors_ids', value)}
           onPress={() => ModalManager.toggleModal('SectorsList', {
             resource: 'jam',
             field: 'sectors_ids',
@@ -234,7 +211,7 @@ const JamForm = ({ jamId }: Props) => {
         <CollaboratorsField
           resource={resource}
           field="collaborators_ids"
-          onChangeValue={(value: any) => updateField('collaborators_ids', value)}
+          onChangeValue={(value: string) => FormManager.updateField(resource, 'collaborators_ids', value)}
           onPress={() => ModalManager.toggleModal('CollaboratorsList', {
             resource: resource,
             field: "collaborators_ids",
@@ -246,8 +223,8 @@ const JamForm = ({ jamId }: Props) => {
         <MediaPickerField
           preview={true}
           value={formData?.upload_medias}
-          onSelectItem={(data: any) => updateField('upload_medias', data)}
-          onDeleteItem={(data: any) => updateField('upload_medias', data)}
+          onSelectItem={(data: any) => FormManager.updateField(resource, 'upload_medias', data)}
+          onDeleteItem={(data: any) => FormManager.updateField(resource, 'upload_medias', data)}
           label={
             <BoxView direction="row" align="center">
               <IconView name="plus" theme="secondary" radius="round" />
