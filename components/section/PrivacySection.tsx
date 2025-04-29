@@ -95,6 +95,7 @@ const PrivacySection = () => {
 const styles = StyleSheet.create({
   title: {
     fontWeight: 'bold',
+    marginTop: Layout.space.base,
   },
 });
 
