@@ -1,8 +1,8 @@
+import { StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import TextView from '../view/TextView';
 import BoxView from '../view/BoxView';
-import StaticData from '@/constants/StaticData';
 import BottomLinks from './navigation/BottomLinks';
 
 const PrivacySection = () => {
@@ -15,5 +15,11 @@ const PrivacySection = () => {
     </BoxView>
   );
 };
+
+const styles = StyleSheet.create({
+  title: {
+    fontWeight: 'bold',
+  },
+});
 
 export default PrivacySection;
