@@ -17,6 +17,13 @@ const SearchProfilesList = ({ data, filter }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [currentData, setCurrentData] = useState<any[]>([]);
 
+  const onItemPress = (row: any) => {
+    router.push({
+      pathname: '/profile-item',
+      params:  { profileId: row.item.id, title: row.item.title },
+    });
+  };
+
   const renderEmptyMessage = () => {
     if (isLoaded && !currentData?.length) {
       return <TextView>{i18n.t("No results found for this search.")}</TextView>;
@@ -36,7 +43,12 @@ const SearchProfilesList = ({ data, filter }: Props) => {
         data={currentData}
         scrollEnabled={false}
         //emptyMessage={renderEmptyMessage()} // Todo - Implement empty message
-        renderItem={(row: any) => <ProfileListItem item={row.item} />}
+        renderItem={(row: any) => (
+          <ProfileListItem 
+            item={row.item} 
+            onListItemPress={(row: any) => onItemPress(row)}
+          />
+        )}
       />
     </View>
   );
