@@ -42,7 +42,6 @@ const SearchProfilesList = ({ data, filter }: Props) => {
       <ListView
         data={currentData}
         scrollEnabled={false}
-        //emptyMessage={renderEmptyMessage()} // Todo - Implement empty message
         renderItem={(row: any) => (
           <ProfileListItem 
             item={row.item} 
