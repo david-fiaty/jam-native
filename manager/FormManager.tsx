@@ -1,6 +1,17 @@
+import { setFormData } from "@/redux/slices/FormSlice";
+import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
 
 class FormManager {
+  updateField(resource: string, key: string, value: any) {
+    Store.dispatch(setFormData<any>({
+      resource: resource,
+      key: key,
+      value: value,
+      profile_id: 3,
+    }));
+  };
+
   validateFied(key: string, value: any, rules: any[]) {
     let fieldRules: any = this.getValidationRules();
     let errors: any = [];
