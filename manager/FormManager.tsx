@@ -8,7 +8,6 @@ class FormManager {
       resource: resource,
       key: key,
       value: value,
-      profile_id: 3,
     }));
   };
 
