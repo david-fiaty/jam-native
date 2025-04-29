@@ -22,7 +22,10 @@ const SearchProjectsList = ({ data, filter }: Props) => {
   const [currentData, setCurrentData] = useState<any[]>([]);
 
   const onItemPress = (row: any) => {
-    ScreenManager.pushScreen(router, '/project', { idArray: [row.item.id], title: row.item.title });
+    router.push({
+      pathname: '/project-item',
+      params:  { projectId: row.item.id, title: row.item.title },
+    });
   };
 
   const renderEmptyMessage = () => {
