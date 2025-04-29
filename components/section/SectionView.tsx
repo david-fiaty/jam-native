@@ -21,8 +21,15 @@ const SectionView = () => {
   const dispatch = useDispatch();
   const [currentSection, setCurrentSection] = useState<any>(null);
   const sectionState: any = useSelector((state: any) => state.section);
+  const modalState: any = useSelector((state: any) => state.modal);
   const sectionId: any = path.split('/').pop();
   const activeSections: any = sectionState.active.includes(sectionId) ? sectionState.active : [...sectionState.active, sectionId];
+
+  const showBackButton = () => {
+    return currentSection?.showTitle === true 
+    && currentSection?.showBackButton === true 
+    && !modalState.active.length;
+  };
 
   useEffect(() => {
     setCurrentSection(SectionManager.getSection(sectionId || Config.defaultSection));
@@ -35,9 +42,7 @@ const SectionView = () => {
       
       {currentSection?.showHeader === true && <SectionHeader style={styles.header} />}
 
-      {currentSection?.showTitle === true 
-        && currentSection?.showBackButton === true 
-        && <SectionBackButton currentSection={currentSection} />}
+      {showBackButton() === true && <SectionBackButton currentSection={currentSection} />}
 
       <BoxView
         direction="column"
