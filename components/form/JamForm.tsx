@@ -89,10 +89,11 @@ const JamForm = ({ jamId }: Props) => {
         let jamData: any = jamId == 0 ? formData : await EntityManager.getJams({ items_ids: [jamId] });
 
         setProfileId(profileId);
+        
         FormManager.updateField(resource, null, {
           ...(jamId > 0 ? jamData?.[0] : formData),
           ...{ profile_id: profileId },
-          ...{ collaborators: [3] }
+          ...{ collaborators: [3] },
         });
       }
 
