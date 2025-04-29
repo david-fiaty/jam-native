@@ -28,7 +28,7 @@ const SectionView = () => {
   const showBackButton = () => {
     return currentSection?.showTitle === true 
     && currentSection?.showBackButton === true 
-    && !modalState.active.length;
+    && (!modalState.active.length || (modalState.active.length > 0 && !(modalState[modalState.active.length -1]?.showTitle === false)));
   };
 
   useEffect(() => {
