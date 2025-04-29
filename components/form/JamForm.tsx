@@ -124,7 +124,7 @@ const JamForm = ({ jamId }: Props) => {
         <TextView>{i18n.t('Title')}</TextView>
         <InputTextField
           value={formData?.title}
-          onChangeText={(value: string) => FormManager.updateField(resource, 'title', value)}
+          onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['required'])}
         />
 
         <TextView>{i18n.t('Description')}</TextView>
