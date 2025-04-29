@@ -10,7 +10,7 @@ const AboutSection = () => {
 
   return (
     <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.screenContent}>
-      <TextView>{StaticData.about.content}</TextView>
+      <TextView>xxx</TextView>
       <BottomLinks />
     </BoxView>
   );
