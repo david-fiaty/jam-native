@@ -21,7 +21,7 @@ const SearchJamsList = ({ data, filter }: Props) => {
   const onItemPress = (row: any) => {
     router.push({
       pathname: '/jam-item',
-      params:  { jamId: row.item.id, title: row.item.title },
+      params:  { jamId: row?.item?.id, title: row?.item?.title },
     });
   }
 

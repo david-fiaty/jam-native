@@ -6,13 +6,12 @@ import BoxView from '@/components/view/BoxView';
 import IconView from '@/components/view/IconView';
 
 type Props = BaseProps & {
-  item?: any;
+  row?: any;
   selected?: boolean;
   onListItemPress?: (row: any) => void;
 };
 
-const ProfileListItem = ({ item, selected, onListItemPress }: Props) => {
-
+const ProfileListItem = ({ row, selected, onListItemPress }: Props) => {
   const onItemPress = (row: any) => {
     if (onListItemPress) {
       onListItemPress(row);
@@ -21,7 +20,7 @@ const ProfileListItem = ({ item, selected, onListItemPress }: Props) => {
 
   return (
     <TouchableOpacity 
-      key={item?.id} 
+      key={row?.item?.id} 
       onPress={onItemPress}
     >
       <BoxView direction="row" align="center" justify="flex-start" style={styles.container}>
@@ -31,7 +30,7 @@ const ProfileListItem = ({ item, selected, onListItemPress }: Props) => {
           size={16}
           padding={6}
         />
-        <TextView>{item?.profile_name}</TextView>
+        <TextView>{row?.item?.profile_name}</TextView>
         { selected &&
           <IconView 
             name="checkmark" 

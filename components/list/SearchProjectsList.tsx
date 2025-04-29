@@ -24,7 +24,7 @@ const SearchProjectsList = ({ data, filter }: Props) => {
   const onItemPress = (row: any) => {
     router.push({
       pathname: '/project-item',
-      params:  { projectId: row.item.id, title: row.item.title },
+      params:  { projectId: row?.item?.id, title: row?.item?.title },
     });
   };
 
