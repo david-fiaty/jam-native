@@ -5,8 +5,14 @@ import TextView from '../view/TextView';
 import BoxView from '../view/BoxView';
 import BottomLinks from './navigation/BottomLinks';
 
-const JamItemSection = () => {
+type Props = {
+  idArray: any;
+};
+
+const JamItemSection = ({ idArray }: Props) => {
   const router = useRouter();
+
+  console.log('oooooo -----> ', idArray)
 
   return (
     <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.screenContent}>
