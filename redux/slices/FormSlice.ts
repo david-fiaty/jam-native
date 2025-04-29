@@ -8,6 +8,7 @@ const FormSlice = createSlice({
     project: {},
     signup: {},
     account: {},
+    errors: [],
   },
   reducers: {
     setFormData: (state: any, action: any) => {
@@ -25,6 +26,9 @@ const FormSlice = createSlice({
     },
     resetFormData: (state: any, action: any) => {
       state[action.payload.resource] = {};
+    },
+    setFormErrors: (state: any, action: any) => {
+      state.errors[action.payload.resource] = {[action.payload.key]: action.payload.value};
     },
   },
 });
