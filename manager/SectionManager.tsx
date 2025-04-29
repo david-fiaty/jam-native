@@ -11,6 +11,7 @@ import ProfileSection from "@/components/section/ProfileSection";
 import AccountForm from "@/components/form/AccountForm";
 import PasswordForm from "@/components/form/PasswordForm";
 import PrivacySection from "@/components/section/PrivacySection";
+import JamItemSection from "@/components/section/JamItemSection";
 
 class SectionManager {
   previousSection(router: any) {
@@ -94,6 +95,12 @@ class SectionManager {
         title: i18n.t('Jams'),
         showBackButton: false,
         render: () => <JamsSection />,
+      },
+      {
+        id: 'jam',
+        title: i18n.t('Jam'),
+        showBackButton: true,
+        render: () => <JamItemSection />,
       },
       {
         id: 'profile',
