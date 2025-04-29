@@ -1,19 +1,18 @@
 import { StyleSheet } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import JamsList from '../list/JamsList';
 
 type Props = {
-  jamId: any;
+  profileId: any;
 };
 
-const JamItemSection = ({ jamId }: Props) => {
-  jamId = parseInt(jamId);
+const ProfileItemSection = ({ profileId }: Props) => {
+  profileId = parseInt(profileId);
   
-  if (!jamId || isNaN(jamId)) {
+  if (!profileId || isNaN(profileId)) {
     return <></>;
   }
 
-  return (<JamsList idArray={[jamId]} />);
+  return (<></>);
 };
 
 const styles = StyleSheet.create({
@@ -23,4 +22,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default JamItemSection;
+export default ProfileItemSection;
