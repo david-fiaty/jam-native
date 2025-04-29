@@ -21,7 +21,7 @@ const SearchJamsList = ({ data, filter }: Props) => {
   const onItemPress = (row: any) => {
     router.push({
       pathname: '/jam-item',
-      params:  { jamId: row.item.id, title: row.item.title },
+      params:  { jamId: row?.item?.id, title: row?.item?.title },
     });
   }
 
@@ -46,7 +46,6 @@ const SearchJamsList = ({ data, filter }: Props) => {
         contentContainerStyle={{ gap: Layout.space.base }}
         columnWrapperStyle={{ gap: Layout.space.base }}
         scrollEnabled={false}
-        //emptyMessage={renderEmptyMessage()} // Todo - Implement empty message
         renderItem={(row: any) => (
           <JamListItem 
             row={row}
