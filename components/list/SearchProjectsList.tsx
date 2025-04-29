@@ -24,7 +24,7 @@ const SearchProjectsList = ({ data, filter }: Props) => {
   const onItemPress = (row: any) => {
     router.push({
       pathname: '/project-item',
-      params:  { projectId: row.item.id, title: row.item.title },
+      params:  { projectId: row?.item?.id, title: row?.item?.title },
     });
   };
 
@@ -57,7 +57,6 @@ const SearchProjectsList = ({ data, filter }: Props) => {
         contentContainerStyle={{ gap: Layout.space.base }}
         columnWrapperStyle={{ gap: Layout.space.base }}
         scrollEnabled={false}
-        //emptyMessage={renderEmptyMessage()} // Todo - Implement empty message
         renderItem={(row: any) => (
           <ProjectListItem
             row={row}

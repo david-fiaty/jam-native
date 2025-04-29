@@ -20,7 +20,7 @@ const SearchProfilesList = ({ data, filter }: Props) => {
   const onItemPress = (row: any) => {
     router.push({
       pathname: '/profile-item',
-      params:  { profileId: row.item.id, title: row.item.title },
+      params:  { profileId: row?.item?.id, title: row?.item?.title },
     });
   };
 
@@ -42,10 +42,9 @@ const SearchProfilesList = ({ data, filter }: Props) => {
       <ListView
         data={currentData}
         scrollEnabled={false}
-        //emptyMessage={renderEmptyMessage()} // Todo - Implement empty message
         renderItem={(row: any) => (
           <ProfileListItem 
-            item={row.item} 
+            row={row} 
             onListItemPress={(row: any) => onItemPress(row)}
           />
         )}
