@@ -33,6 +33,7 @@ const LegalSection = () => {
 const styles = StyleSheet.create({
   title: {
     fontWeight: 'bold',
+    marginTop: Layout.space.base,
   },
 });
 
