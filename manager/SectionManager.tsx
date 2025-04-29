@@ -12,6 +12,8 @@ import AccountForm from "@/components/form/AccountForm";
 import PasswordForm from "@/components/form/PasswordForm";
 import PrivacySection from "@/components/section/PrivacySection";
 import JamItemSection from "@/components/section/JamItemSection";
+import ProfileItemSection from "@/components/section/ProfileItemSection";
+import ProjectItemSection from "@/components/section/ProjectItemSection";
 
 class SectionManager {
   previousSection(router: any) {
@@ -97,10 +99,22 @@ class SectionManager {
         render: (params: any) => <JamsSection {...params} />,
       },
       {
-        id: 'jam',
+        id: 'jam-item',
         title: i18n.t('Jam'),
         showBackButton: true,
         render: (params: any) => <JamItemSection {...params} />,
+      },
+      {
+        id: 'profile-item',
+        title: i18n.t('Profile'),
+        showBackButton: true,
+        render: (params: any) => <ProfileItemSection {...params} />,
+      },
+      {
+        id: 'project-item',
+        title: i18n.t('Project'),
+        showBackButton: true,
+        render: (params: any) => <ProjectItemSection {...params} />,
       },
       {
         id: 'profile',
