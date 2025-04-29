@@ -3,7 +3,7 @@ import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
 
 class FormManager {
-  updateField(resource: string, key: any, value: any) {
+  updateField(resource: string, key: any, value: any, rules?: any) {
     Store.dispatch(setFormData<any>({
       resource: resource,
       key: key,
