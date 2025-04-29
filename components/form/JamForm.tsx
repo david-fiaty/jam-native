@@ -46,15 +46,6 @@ const JamForm = ({ jamId }: Props) => {
   const formData = useSelector((state: any) => state.form[resource]);
   const jamCategories = StaticData.jamCategories;
 
-  const updateField = (key: any, value: any) => {
-    dispatch(setFormData<any>({
-      resource: resource,
-      key: key,
-      value: value,
-      profile_id: profileId,
-    }));
-  };
-
   const submitForm = async () => {
     setIsProcessing(true);
     let media: any = MediaManager.prepareUpload(formData?.upload_medias);
@@ -69,14 +60,14 @@ const JamForm = ({ jamId }: Props) => {
     };
 
     if (result?.error) message.content = i18n.t(result.error)
-    else updateField(null, null)
+    else FormManager.updateField(resource, null, null);
 
     ScreenManager.showMessage(message);
     setIsProcessing(false);
   };
 
   const renderJamCategory = (row: any) => (
-    <TouchableOpacity onPress={() => updateField('type', row.item.id)}>
+    <TouchableOpacity onPress={() => FormManager.updateField(resource, 'type', row.item.id)}>
       <View style={styles.categoryContainer}>
         <View
           style={[
@@ -98,15 +89,11 @@ const JamForm = ({ jamId }: Props) => {
         let jamData: any = jamId == 0 ? formData : await EntityManager.getJams({ items_ids: [jamId] });
 
         setProfileId(profileId);
-        dispatch(setFormData<any>({
-          resource: resource,
-          key: null,
-          value: {
-            ...(jamId > 0 ? jamData?.[0] : formData),
-            ...{ profile_id: profileId },
-            ...{ collaborators: [3] }
-          },
-        }));
+        FormManager.updateField(resource, null, {
+          ...(jamId > 0 ? jamData?.[0] : formData),
+          ...{ profile_id: profileId },
+          ...{ collaborators: [3] }
+        });
       }
 
       setIsLoaded(true);
