@@ -8,9 +8,13 @@ type Props = {
 };
 
 const JamItemSection = ({ jamId }: Props) => {
-  if (!jamId) return <></>;
+  jamId = parseInt(jamId);
+  
+  if (!jamId || isNaN(jamId)) {
+    return <></>;
+  }
 
-  return (<JamsList idArray={[parseInt(jamId)]} />);
+  return (<JamsList idArray={jamId} />);
 };
 
 const styles = StyleSheet.create({
