@@ -8,16 +8,21 @@ import IconView from '@/components/view/IconView';
 type Props = BaseProps & {
   item?: any;
   selected?: boolean;
-  onPress?: () => void;
+  onListItemPress?: (row: any) => void;
 };
 
-const ProfileListItem = ({ item, selected, onPress }: Props) => {
+const ProfileListItem = ({ item, selected, onListItemPress }: Props) => {
+
+  const onItemPress = (row: any) => {
+    if (onListItemPress) {
+      onListItemPress(row);
+    }
+  };
+
   return (
     <TouchableOpacity 
       key={item?.id} 
-
-      // Todo - Implement event
-      //onPress={onPress}
+      onPress={onItemPress}
     >
       <BoxView direction="row" align="center" justify="flex-start" style={styles.container}>
         <IconView 

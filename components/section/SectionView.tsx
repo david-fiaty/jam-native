@@ -25,10 +25,14 @@ const SectionView = () => {
   const sectionId: any = path.split('/').pop();
   const activeSections: any = sectionState.active.includes(sectionId) ? sectionState.active : [...sectionState.active, sectionId];
 
+  const isModalTitleVisible = () => {
+    return modalState.active.length > 0 && modalState[modalState.active.length -1]?.showTitle === true;
+  };
+
   const showBackButton = () => {
     return currentSection?.showTitle === true 
     && currentSection?.showBackButton === true 
-    && !modalState.active.length;
+    && (!modalState.active.length || !isModalTitleVisible());
   };
 
   useEffect(() => {
