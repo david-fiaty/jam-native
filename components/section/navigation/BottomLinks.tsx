@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
   container: {
     alignSelf: 'center',
     gap: Layout.space.base*2,
+    marginTop: Layout.space.base,
   },
   disabled: {
     color: Colors.secondary,
