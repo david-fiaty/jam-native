@@ -19,6 +19,7 @@ import CountryField from "../field/CountryField";
 import SectorsField from "../field/SectorsField";
 import ModalManager from "@/manager/ModalManager";
 import LocationPickerField from "../field/LocationPickerField";
+import FormManager from "@/manager/FormManager";
 
 const resource: string = 'signup';
 
@@ -81,7 +82,7 @@ const SignupForm = () => {
       
       <ProfileImageField
         value={formData?.upload_profile_picture?.url}
-        onChangeValue={(mediaList: any) => updateField('upload_profile_picture', { url: mediaList[0]?.uri })}
+        onChangeValue={(mediaList: any) => FormManager.updateField(resource, 'upload_profile_picture', { url: mediaList[0]?.uri })}
       />
 
       <TextView>{i18n.t('Profile type')}*</TextView>
