@@ -1,40 +1,62 @@
-import FIeldErrorView from "@/components/view/FieldErrorView";
+import FieldErrorView from "@/components/view/FieldErrorView";
 import TextView from "@/components/view/TextView";
 import { setFormData, setFormErrors } from "@/redux/slices/FormSlice";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
 
 class FormManager {
-  renderError(key: string) {
-    return <FIeldErrorView fieldKey={key} />;
-  }
-
   updateField(resource: string, key: any, value: any, rules: any[] = []) {
     let errors: any[] = [];
 
-    if (rules.length > 0) errors = this.validateFied(key, value, rules);
+    if (rules.length > 0) {
+      errors = this.validateFied(key, value, rules);
+    }
 
     if (errors.length) {
-      console.log({
-        ...{ resource: resource },
-        ...errors[0],
-      });
-
-      /*
-      Store.dispatch(setFormErrors<any>({
-        ...{ resource: resource },
-        ...errors[0],
-      }));
-      */
+      this.addError(resource, key, value, errors);
     }
     else {
-      Store.dispatch(setFormData<any>({
-        resource: resource,
-        key: key,
-        value: value,
-      }));
+      this.clearError(resource, key);
     }
+
+    this.addValue(resource, key, value);
   };
+
+  addValue(resource: string, key: any, value: any) {
+    Store.dispatch(setFormData<any>({
+      resource: resource,
+      key: key,
+      value: value,
+    }));
+  }
+
+  addError(resource: string, key: any, value: any, errors: any[]) {
+    this.clearError(resource, key);
+    let formErrors: any[] = [...Store.getState().form.errors];
+    
+    Store.dispatch(setFormErrors<any>([...formErrors, {
+      ...{ resource: resource },
+      ...errors[0],
+    }]));
+  }
+
+  clearError(resource: string, key: any) {
+    let formErrors: any[] = [...Store.getState().form.errors];
+    formErrors = formErrors.filter((o: any) => o.resource !== resource && o.key !== key);
+    
+    Store.dispatch(setFormErrors<any>(formErrors));
+  }
+  
+  renderError(key: string) {
+    let formErrors: any[] = [...Store.getState().form.errors];
+    let fieldError: any = formErrors.find((o: any) => o.key === key);
+
+    if (fieldError) {
+      return <FieldErrorView message={fieldError.message} />;
+    }
+
+    return <></>;
+  }
 
   validateFied(key: string, value: any, rules: any[]) {
     let fieldRules: any = this.getValidationRules();
