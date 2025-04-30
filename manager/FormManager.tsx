@@ -1,18 +1,31 @@
+import FIeldErrorView from "@/components/view/FieldErrorView";
+import TextView from "@/components/view/TextView";
 import { setFormData, setFormErrors } from "@/redux/slices/FormSlice";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
 
 class FormManager {
+  renderError(key: string) {
+    return <FIeldErrorView fieldKey={key} />;
+  }
+
   updateField(resource: string, key: any, value: any, rules: any[] = []) {
     let errors: any[] = [];
 
     if (rules.length > 0) errors = this.validateFied(key, value, rules);
 
     if (errors.length) {
+      console.log({
+        ...{ resource: resource },
+        ...errors[0],
+      });
+
+      /*
       Store.dispatch(setFormErrors<any>({
         ...{ resource: resource },
         ...errors[0],
       }));
+      */
     }
     else {
       Store.dispatch(setFormData<any>({
