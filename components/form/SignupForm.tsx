@@ -88,7 +88,7 @@ const SignupForm = () => {
       <TextView>{i18n.t('Profile type')}*</TextView>
       <ProfileTypeField
         value={formData?.profile_type}
-        onChangeValue={(option: any) => updateField('profile_type', option.value)}
+        onChangeValue={(option: any) => FormManager.updateField(resource, 'profile_type', option.value, ['string'])}
       />  
 
       {/* Personal profile */}
@@ -100,10 +100,10 @@ const SignupForm = () => {
           <InputTextField
             value={formData?.profile_personal?.first_name}
             placeholder={i18n.t('Enter your first name')}
-            onChangeText={(value: string) => updateField('profile_personal', {
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal', {
               ...(formData?.profile_personal || {}),
               ...{ first_name: value },
-            })}
+            }, ['string'])}
           />
 
           <TextView>
@@ -112,10 +112,10 @@ const SignupForm = () => {
           <InputTextField
             value={formData?.profile_personal?.last_name}
             placeholder={i18n.t('Enter your last name')}
-            onChangeText={(value: string) => updateField('profile_personal', {
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal', {
               ...(formData?.profile_personal || {}),
               ...{ last_name: value },
-            })}
+            }, ['string'])}
           />
         </>
       )}
@@ -129,10 +129,10 @@ const SignupForm = () => {
           <InputTextField
             value={formData?.profile_organization?.organization_name}
             placeholder={i18n.t('Enter your organization name')}
-            onChangeText={(value: string) => updateField('profile_organization', {
-              ...(formData?.profile_organization || {}),
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
+              ...(formData?.profile_personal || {}),
               ...{ organization_name: value },
-            })}
+            }, ['string'])}
           />
 
           <TextView>
@@ -142,8 +142,8 @@ const SignupForm = () => {
             keyboardType="number-pad"
             value={formData?.profile_organization?.creation_year}
             placeholder={i18n.t('Enter the creation year')}
-            onChangeText={(value: string) => updateField('profile_organization', {
-              ...(formData?.profile_organization || {}),
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
+              ...(formData?.profile_personal || {}),
               ...{ creation_year: value },
             })}
           />
@@ -159,10 +159,10 @@ const SignupForm = () => {
           <InputTextField
             value={formData?.profile_venue?.venue_name}
             placeholder={i18n.t('Enter the venue name')}
-            onChangeText={(value: string) => updateField('profile_venue', {
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
               ...(formData?.profile_venue || {}),
               ...{ venue_name: value },
-            })}
+            }, ['string'])}
           />
 
           <TextView>
@@ -172,10 +172,10 @@ const SignupForm = () => {
             keyboardType="number-pad"
             value={formData?.profile_venue?.creation_year}
             placeholder={i18n.t('Enter the creation year')}
-            onChangeText={(value: string) => updateField('profile_venue', {
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
               ...(formData?.profile_venue || {}),
               ...{ creation_year: value },
-            })}
+            }, ['number'])}
           />
         </>
       )}
@@ -189,7 +189,8 @@ const SignupForm = () => {
           <InputTextField
             value={formData?.profile_name}
             placeholder={i18n.t('Profile name')}
-            onChangeText={(value: string) => updateField('profile_name', value)}
+            // Todo - Add nospace validation
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_name', value, ['string'])}
           />
 
           <TextView>
@@ -230,7 +231,7 @@ const SignupForm = () => {
           </TextView>
           <CountryField
             value={formData?.scope_country_code}
-            onChangeValue={(o: any) => updateField('scope_country_code', o.value)}
+            onChangeValue={(value: string) => FormManager.updateField(resource, 'scope_country_code', o.value, ['string'])}
           />
 
           <TextView>
@@ -240,7 +241,7 @@ const SignupForm = () => {
             secureTextEntry={true}
             value={formData?.password}
             placeholder={i18n.t('Password')}
-            onChangeText={(value: string) => updateField('password', value)}
+            onChangeText={(value: string) => FormManager.updateField(resource, 'password', value, ['string'])}
           />
 
           <TextView>
