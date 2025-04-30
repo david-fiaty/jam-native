@@ -20,7 +20,7 @@ const ProfileItemSection = ({ profileId }: Props) => {
       }
     })();
   }, [isLoaded, profileId]);
-  
+
   if (!profileId || isNaN(profileId)) {
     return <></>;
   }
