@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import EntityManager from "@/manager/EntityManager";
+import ProfileItemView from "../view/ProfileItemView";
 
 type Props = {
   profileId: any;
@@ -25,7 +26,7 @@ const ProfileItemSection = ({ profileId }: Props) => {
     return <></>;
   }
 
-  return <></>;
+  return <ProfileItemView profileId={profileId} />;
 };
 
 const styles = StyleSheet.create({
