@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useRouter } from 'expo-router';
-import { useDispatch, useSelector } from "react-redux";
-import { setFormData } from "@/redux/slices/FormSlice";
+import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import ProfileTypeField from "../field/ProfileTypeField";
@@ -24,20 +23,11 @@ import FormManager from "@/manager/FormManager";
 const resource: string = 'signup';
 
 const SignupForm = () => {
-  const dispatch = useDispatch();
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const formData = useSelector((state: any) => state.form?.[resource]);
   const signupData: any = useSelector((state: any) => state.signup);
-
-  const updateField = (key: string, value: any) => {
-    dispatch(setFormData<any>({
-      resource: resource,
-      key: key,
-      value: value,
-    }));
-  };
 
   const submitForm = async () => {
     let { password, password_confirmation, ...profileData } = formData;
@@ -208,7 +198,7 @@ const SignupForm = () => {
           <InputTextareaField
             value={formData?.profile_description}
             placeholder={i18n.t('Profile description')}
-            onChangeText={(value: string) => updateField('profile_description', value)}
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_description', value)}
           />
           {FormManager.renderError('profile_description')}
 
@@ -218,7 +208,7 @@ const SignupForm = () => {
           <InputTextField
             value={formData?.address}
             placeholder={i18n.t('Enter your address')}
-            onChangeText={(value: string) => updateField('address', value)}
+            onChangeText={(value: string) => FormManager.updateField(resource, 'address', value)}
           />
           {FormManager.renderError('address')}
 
@@ -230,7 +220,7 @@ const SignupForm = () => {
             field="sectors_ids"
             placeholder={i18n.t('Select your sectors')}
             value={formData?.sectors_ids}
-            onChangeValue={(value: any) => updateField('sectors_ids', value)}
+            onChangeValue={(value: any) => FormManager.updateField(resource, 'sectors_ids', value)}
             onPress={() => ModalManager.toggleModal('SectorsList', {
               resource: 'profile',
               field: 'sectors_ids',
@@ -265,7 +255,7 @@ const SignupForm = () => {
             secureTextEntry={true}
             value={formData?.password_confirmation}
             placeholder={i18n.t('Password confirmation')}
-            onChangeText={(value: string) => updateField('password_confirmation', value)}
+            onChangeText={(value: string) => FormManager.updateField(resource, 'password_confirmation', value)}
           />
           {FormManager.renderError('password_confirmation')}
 
@@ -276,8 +266,8 @@ const SignupForm = () => {
             resource="profile"
             placeholder={i18n.t('Select your location')}
             onChangeValue={(data: any) => {
-              updateField('geolocation_latitude', data?.geolocation_latitude);
-              updateField('geolocation_longitude', data?.geolocation_longitude);
+              FormManager.updateField(resource, 'geolocation_latitude', data?.geolocation_latitude);
+              FormManager.updateField(resource, 'geolocation_longitude', data?.geolocation_longitude);
             }}
             onPress={() => ModalManager.toggleModal('LocationMapView', {
               resource: 'profile',
