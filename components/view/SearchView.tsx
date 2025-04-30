@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { View, TouchableOpacity, ScrollView } from "react-native";
+import { TouchableOpacity, ScrollView } from "react-native";
 import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import BoxView from "./BoxView";
 import TextView from "./TextView";
-import ListView from "./ListView";
 import StaticData from "@/constants/StaticData";
 import SpinnerView from "./SpinnerView";
 import SearchManager from "@/manager/SearchManager";

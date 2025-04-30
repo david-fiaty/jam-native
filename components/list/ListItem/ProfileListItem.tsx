@@ -21,7 +21,7 @@ const ProfileListItem = ({ row, selected, onListItemPress }: Props) => {
   return (
     <TouchableOpacity 
       key={row?.item?.id} 
-      onPress={onItemPress}
+      onPress={() => onItemPress(row)}
     >
       <BoxView direction="row" align="center" justify="flex-start" style={styles.container}>
         <IconView 
