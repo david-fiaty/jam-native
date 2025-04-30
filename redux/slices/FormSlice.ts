@@ -28,7 +28,7 @@ const FormSlice = createSlice({
       state[action.payload.resource] = {};
     },
     setFormErrors: (state: any, action: any) => {
-      state.errors[action.payload.resource] = {[action.payload.key]: action.payload.value};
+      state.errors = action.payload;
     },
   },
 });

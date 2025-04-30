@@ -1,4 +1,6 @@
-import { setFormData } from "@/redux/slices/FormSlice";
+import FieldErrorView from "@/components/view/FieldErrorView";
+import TextView from "@/components/view/TextView";
+import { setFormData, setFormErrors } from "@/redux/slices/FormSlice";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
 
@@ -6,19 +8,55 @@ class FormManager {
   updateField(resource: string, key: any, value: any, rules: any[] = []) {
     let errors: any[] = [];
 
-    if (rules.length > 0) { 
+    if (rules.length > 0) {
       errors = this.validateFied(key, value, rules);
-      console.log('field errors -------->', errors);
     }
 
-    if (!errors.length) {
-      Store.dispatch(setFormData<any>({
-        resource: resource,
-        key: key,
-        value: value,
-      }));
+    if (errors.length) {
+      this.addError(resource, key, value, errors);
     }
+    else {
+      this.clearError(resource, key);
+    }
+
+    this.addValue(resource, key, value);
   };
+
+  addValue(resource: string, key: any, value: any) {
+    Store.dispatch(setFormData<any>({
+      resource: resource,
+      key: key,
+      value: value,
+    }));
+  }
+
+  addError(resource: string, key: any, value: any, errors: any[]) {
+    this.clearError(resource, key);
+    let formErrors: any[] = [...Store.getState().form.errors];
+    
+    Store.dispatch(setFormErrors<any>([...formErrors, {
+      ...{ resource: resource },
+      ...errors[0],
+    }]));
+  }
+
+  clearError(resource: string, key: any) {
+    let formErrors: any[] = [...Store.getState().form.errors];
+    formErrors = formErrors.filter((o: any) => o.resource !== resource && o.key !== key);
+    
+    Store.dispatch(setFormErrors<any>(formErrors));
+  }
+  
+  renderError(key: string) {
+    let formErrors: any[] = [...Store.getState().form.errors];
+    let fieldError: any = formErrors.find((o: any) => o.key === key);
+
+    if (fieldError) {
+      return <FieldErrorView message={fieldError.message} />;
+    }
+
+    return <></>;
+  }
 
   validateFied(key: string, value: any, rules: any[]) {
     let fieldRules: any = this.getValidationRules();
@@ -27,7 +65,7 @@ class FormManager {
     for (const rule of rules) {
       if (!fieldRules[rule].run(value)) {
         errors.push({
-          field: key,
+          key: key,
           value: value,
           message: fieldRules[rule].error(),
         });

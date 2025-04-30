@@ -121,17 +121,19 @@ const JamForm = ({ jamId }: Props) => {
 
         <DividerView theme="white" />
 
-        <TextView>{i18n.t('Title')}</TextView>
+        <TextView>{i18n.t('Title')}*</TextView>
         <InputTextField
           value={formData?.title}
           onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['required'])}
         />
+        {FormManager.renderError('title')}
 
         <TextView>{i18n.t('Description')}</TextView>
         <InputTextareaField
           value={formData?.caption}
           onChangeText={(value: string) => FormManager.updateField(resource, 'caption', value)}
         />
+        {FormManager.renderError('caption')}
 
         <TextView>{i18n.t('Location type')}</TextView>
         
