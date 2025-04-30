@@ -1,16 +1,26 @@
 import { StyleSheet } from 'react-native';
 import { Layout } from '@/constants/Layout';
+import { Colors } from '@/constants/Colors';
 import BoxView from '@/components/view/BoxView';
 import IconView from '@/components/view/IconView';
 import TextView from '@/components/view/TextView';
+import { useSelector } from "react-redux";
 import ModalManager from '@/manager/ModalManager';
-import { Colors } from '@/constants/Colors';
 
 type Props = {
   currentModal: any;
 };
 
 const ModalBackButton = ({ currentModal }: Props) => {
+  const modalState: any = useSelector((state: any) => state.modal);
+  const activeModalsCount: number = modalState.active.length;
+  const currentModalIndex: number = modalState.active.findIndex((o: any) => o.id === currentModal?.id);
+
+  // Todo - Handle parent modal hiding
+  if (activeModalsCount === currentModalIndex) {
+    return <></>;
+  }
+
   return (
     <BoxView
       direction="row"
