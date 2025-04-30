@@ -8,7 +8,9 @@ class FormManager {
   updateField(resource: string, key: any, value: any, rules: any[] = []) {
     let errors: any[] = [];
 
-    if (rules.length > 0) errors = this.validateFied(key, value, rules);
+    if (rules.length > 0) {
+      errors = this.validateFied(key, value, rules);
+    }
 
     if (errors.length) this.addError(resource, key, value, errors)
     else this.addValue(resource, key, value);
@@ -23,17 +25,12 @@ class FormManager {
   }
 
   addError(resource: string, key: any, value: any, errors: any[]) {
-    console.log({
+    let formErrors: any[] = [...Store.getState().form.errors];
+    
+    Store.dispatch(setFormErrors<any>([...formErrors, {
       ...{ resource: resource },
       ...errors[0],
-    });
-
-    /*
-    Store.dispatch(setFormErrors<any>({
-      ...{ resource: resource },
-      ...errors[0],
-    }));
-    */
+    }]));
   }
   
   renderError(key: string) {
