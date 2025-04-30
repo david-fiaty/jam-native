@@ -19,6 +19,7 @@ import CountryField from "../field/CountryField";
 import SectorsField from "../field/SectorsField";
 import ModalManager from "@/manager/ModalManager";
 import LocationPickerField from "../field/LocationPickerField";
+import FormManager from "@/manager/FormManager";
 
 const resource: string = 'signup';
 
@@ -81,14 +82,16 @@ const SignupForm = () => {
       
       <ProfileImageField
         value={formData?.upload_profile_picture?.url}
-        onChangeValue={(mediaList: any) => updateField('upload_profile_picture', { url: mediaList[0]?.uri })}
+        onChangeValue={(mediaList: any) => FormManager.updateField(resource, 'upload_profile_picture', { url: mediaList[0]?.uri })}
       />
+      {FormManager.renderError('upload_profile_picture')}
 
       <TextView>{i18n.t('Profile type')}*</TextView>
       <ProfileTypeField
         value={formData?.profile_type}
-        onChangeValue={(option: any) => updateField('profile_type', option.value)}
+        onChangeValue={(option: any) => FormManager.updateField(resource, 'profile_type', option.value, ['string'])}
       />  
+      {FormManager.renderError('profile_type')}
 
       {/* Personal profile */}
       {formData?.profile_type == 'personal' && (
@@ -99,11 +102,12 @@ const SignupForm = () => {
           <InputTextField
             value={formData?.profile_personal?.first_name}
             placeholder={i18n.t('Enter your first name')}
-            onChangeText={(value: string) => updateField('profile_personal', {
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal', {
               ...(formData?.profile_personal || {}),
               ...{ first_name: value },
-            })}
+            }, ['string'])}
           />
+          {FormManager.renderError('profile_personal')}
 
           <TextView>
             {i18n.t('Last name')}
@@ -111,11 +115,12 @@ const SignupForm = () => {
           <InputTextField
             value={formData?.profile_personal?.last_name}
             placeholder={i18n.t('Enter your last name')}
-            onChangeText={(value: string) => updateField('profile_personal', {
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal', {
               ...(formData?.profile_personal || {}),
               ...{ last_name: value },
-            })}
+            }, ['string'])}
           />
+          {FormManager.renderError('profile_personal')}
         </>
       )}
 
@@ -128,11 +133,12 @@ const SignupForm = () => {
           <InputTextField
             value={formData?.profile_organization?.organization_name}
             placeholder={i18n.t('Enter your organization name')}
-            onChangeText={(value: string) => updateField('profile_organization', {
-              ...(formData?.profile_organization || {}),
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
+              ...(formData?.profile_personal || {}),
               ...{ organization_name: value },
-            })}
+            }, ['string'])}
           />
+          {FormManager.renderError('profile_organization')}
 
           <TextView>
             {i18n.t('Creation year')}
@@ -141,11 +147,12 @@ const SignupForm = () => {
             keyboardType="number-pad"
             value={formData?.profile_organization?.creation_year}
             placeholder={i18n.t('Enter the creation year')}
-            onChangeText={(value: string) => updateField('profile_organization', {
-              ...(formData?.profile_organization || {}),
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
+              ...(formData?.profile_personal || {}),
               ...{ creation_year: value },
             })}
           />
+          {FormManager.renderError('profile_organization')}
         </>
       )}
 
@@ -158,11 +165,12 @@ const SignupForm = () => {
           <InputTextField
             value={formData?.profile_venue?.venue_name}
             placeholder={i18n.t('Enter the venue name')}
-            onChangeText={(value: string) => updateField('profile_venue', {
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
               ...(formData?.profile_venue || {}),
               ...{ venue_name: value },
-            })}
+            }, ['string'])}
           />
+          {FormManager.renderError('profile_venue')}
 
           <TextView>
             {i18n.t('Creation year')}
@@ -171,11 +179,12 @@ const SignupForm = () => {
             keyboardType="number-pad"
             value={formData?.profile_venue?.creation_year}
             placeholder={i18n.t('Enter the creation year')}
-            onChangeText={(value: string) => updateField('profile_venue', {
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
               ...(formData?.profile_venue || {}),
               ...{ creation_year: value },
-            })}
+            }, ['number'])}
           />
+          {FormManager.renderError('profile_venue')}
         </>
       )}
 
@@ -188,8 +197,10 @@ const SignupForm = () => {
           <InputTextField
             value={formData?.profile_name}
             placeholder={i18n.t('Profile name')}
-            onChangeText={(value: string) => updateField('profile_name', value)}
+            // Todo - Add nospace validation
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_name', value, ['string'])}
           />
+          {FormManager.renderError('profile_name')}
 
           <TextView>
             {i18n.t('About')}
@@ -199,6 +210,7 @@ const SignupForm = () => {
             placeholder={i18n.t('Profile description')}
             onChangeText={(value: string) => updateField('profile_description', value)}
           />
+          {FormManager.renderError('profile_description')}
 
           <TextView>
             {i18n.t('Address')}
@@ -208,6 +220,7 @@ const SignupForm = () => {
             placeholder={i18n.t('Enter your address')}
             onChangeText={(value: string) => updateField('address', value)}
           />
+          {FormManager.renderError('address')}
 
           <TextView>
             {i18n.t('Sectors')}
@@ -223,14 +236,16 @@ const SignupForm = () => {
               field: 'sectors_ids',
             })}
           />
+          {FormManager.renderError('sectors_ids')}
 
           <TextView>
             {i18n.t('Country')}
           </TextView>
           <CountryField
             value={formData?.scope_country_code}
-            onChangeValue={(o: any) => updateField('scope_country_code', o.value)}
+            onChangeValue={(o: any) => FormManager.updateField(resource, 'scope_country_code', o.value, ['string'])}
           />
+          {FormManager.renderError('scope_country_code')}
 
           <TextView>
             {i18n.t('Password')}*
@@ -239,8 +254,9 @@ const SignupForm = () => {
             secureTextEntry={true}
             value={formData?.password}
             placeholder={i18n.t('Password')}
-            onChangeText={(value: string) => updateField('password', value)}
+            onChangeText={(value: string) => FormManager.updateField(resource, 'password', value, ['string'])}
           />
+          {FormManager.renderError('password')}
 
           <TextView>
             {i18n.t('Password confirmation')}*
@@ -251,6 +267,7 @@ const SignupForm = () => {
             placeholder={i18n.t('Password confirmation')}
             onChangeText={(value: string) => updateField('password_confirmation', value)}
           />
+          {FormManager.renderError('password_confirmation')}
 
           <TextView>
             {i18n.t('Location')}
@@ -291,6 +308,7 @@ const SignupForm = () => {
           label={i18n.t('Continue')}
           isProcessing={isProcessing}
           onPress={submitForm}
+          disabled={!formData?.profile_type?.length}
         />
       </View>
     </View>
