@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import EntityManager from "@/manager/EntityManager";
+import ProjectItemView from "../view/ProjectItemView";
 
 type Props = {
   projectId: any;
@@ -25,7 +26,7 @@ const ProjectItemSection = ({ projectId }: Props) => {
     return <></>;
   }
 
-  return (<></>);
+  return (<ProjectItemView projectId={projectId} />);
 };
 
 const styles = StyleSheet.create({
