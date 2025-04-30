@@ -33,9 +33,16 @@ pm2 save
 # Google maps
 AIzaSyB91uv-OuWw6iNMjVZmuHJsRVDHP9baCq0
 
+# GENERAL DOCS
 https://github.com/mitsio-motu/InstitutFrancaisAPI/blob/feature/jam-project/test/test.rest
 https://docs.google.com/spreadsheets/d/1sodzaVigD26XOopcXfLRykl51wPM5pKecS0i1QEDWMc/edit?hl=fr&gid=0#gid=0
 https://www.notion.so/mitsio-motu/6be2f5f83e9c4128bca022a247c71604?v=83a79228da8e4016ac17d79fcaf0316d&p=111198dd221a8093a3f2ce6ce2a04b59&pm=s
+
+# Hophoet feedback
+https://docs.google.com/spreadsheets/d/1q7osx0gzONv_ZLisLiUDJU6UqphqBvXejlyeCUTTD44/edit?gid=664353314#gid=664353314
+
+# Ghislain feedback
+https://docs.google.com/spreadsheets/d/1q7osx0gzONv_ZLisLiUDJU6UqphqBvXejlyeCUTTD44/edit?gid=485245944#gid=485245944
 
 Test users:
 Id: 62 / test888@yopmail.com / Test@12345678
