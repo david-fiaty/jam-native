@@ -124,21 +124,21 @@ const JamForm = ({ jamId }: Props) => {
         <TextView>{i18n.t('Title')}*</TextView>
         <InputTextField
           value={formData?.title}
-          onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['required'])}
+          onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['string'])}
         />
         {FormManager.renderError('title')}
 
         <TextView>{i18n.t('Description')}*</TextView>
         <InputTextareaField
           value={formData?.caption}
-          onChangeText={(value: string) => FormManager.updateField(resource, 'caption', value, ['required'])}
+          onChangeText={(value: string) => FormManager.updateField(resource, 'caption', value, ['string'])}
         />
         {FormManager.renderError('caption')}
 
         <TextView>{i18n.t('Location type')}*</TextView>
         <LocationTypeField
           value={formData?.location_type}
-          onChangeValue={(option: any) => FormManager.updateField(resource, 'location_type', option.value, ['required'])}
+          onChangeValue={(option: any) => FormManager.updateField(resource, 'location_type', option.value, ['string'])}
         />
         {FormManager.renderError('location_type')}
 
@@ -148,7 +148,7 @@ const JamForm = ({ jamId }: Props) => {
           onChangeValue={(value: any) => FormManager.updateField(resource, 'period', {
             ...(formData?.period || {}),
             ...{ start_datetime: DataManager.formatDate(value) },
-          }, ['required'])}
+          }, ['string', 'date'])}
         />
         {FormManager.renderError('period')}
 
@@ -158,7 +158,7 @@ const JamForm = ({ jamId }: Props) => {
           onChangeValue={(value: any) => FormManager.updateField(resource, 'period', {
             ...(formData?.period || {}),
             ...{ end_datetime: DataManager.formatDate(value) },
-          }, ['required'])}
+          }, ['string', 'date'])}
         />
         {FormManager.renderError('period')}
 
@@ -196,7 +196,7 @@ const JamForm = ({ jamId }: Props) => {
         <TextView>{i18n.t('Country')}*</TextView>
         <CountryField
           value={formData?.countries}
-          onChangeValue={(option: any) => FormManager.updateField(resource, 'country', option.value, ['required'])}
+          onChangeValue={(option: any) => FormManager.updateField(resource, 'country', option.value, ['string'])}
         />
         {FormManager.renderError('countries')}
 
