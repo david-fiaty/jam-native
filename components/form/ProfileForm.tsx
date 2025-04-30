@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import { useRouter } from 'expo-router';
-import { useDispatch, useSelector } from "react-redux";
-import { setFormData } from "@/redux/slices/FormSlice";
+import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
-import { Config } from "@/constants/Config";
 import ProfileImageField from "../field/ProfileImageField";
 import ButtonView from "../view/ButtonView";
 import i18n from "@/translation/i18n";
@@ -24,20 +21,10 @@ import FormManager from "@/manager/FormManager";
 const resource: string = 'profile';
 
 const ProfileForm = () => {
-  const dispatch = useDispatch();
-  const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
   const formData = useSelector((state: any) => state.form?.[resource]);
-
-  const updateField = (key: string, value: any) => {
-    dispatch(setFormData<any>({
-      resource: resource,
-      key: key,
-      value: value,
-    }));
-  };
 
   const submitForm = async () => {
     setIsProcessing(true);
