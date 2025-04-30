@@ -291,6 +291,7 @@ const SignupForm = () => {
           label={i18n.t('Continue')}
           isProcessing={isProcessing}
           onPress={submitForm}
+          disabled={!formData?.profile_type?.length}
         />
       </View>
     </View>

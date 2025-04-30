@@ -48,7 +48,7 @@ class FormManager {
   }
   
   renderError(key: string) {
-    let formErrors: any[] = [...Store.getState().form.errors];
+    let formErrors: any[] = Store.getState().form.errors;
     let fieldError: any = formErrors.find((o: any) => o.key === key);
 
     if (fieldError) {
