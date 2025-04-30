@@ -18,6 +18,9 @@ const SearchProfilesList = ({ data, filter }: Props) => {
   const [currentData, setCurrentData] = useState<any[]>([]);
 
   const onItemPress = (row: any) => {
+    console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
+    console.log(Object.keys(row));
+    
     router.push({
       pathname: '/profile-item',
       params:  { profileId: row?.item?.id, title: row?.item?.title },
