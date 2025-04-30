@@ -5,36 +5,40 @@ import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
 
 class FormManager {
-  renderError(key: string) {
-    return <FIeldErrorView fieldKey={key} />;
-  }
-
   updateField(resource: string, key: any, value: any, rules: any[] = []) {
     let errors: any[] = [];
 
     if (rules.length > 0) errors = this.validateFied(key, value, rules);
 
-    if (errors.length) {
-      console.log({
-        ...{ resource: resource },
-        ...errors[0],
-      });
-
-      /*
-      Store.dispatch(setFormErrors<any>({
-        ...{ resource: resource },
-        ...errors[0],
-      }));
-      */
-    }
-    else {
-      Store.dispatch(setFormData<any>({
-        resource: resource,
-        key: key,
-        value: value,
-      }));
-    }
+    if (errors.length) this.addError(resource, key, value, errors)
+    else this.addValue(resource, key, value);
   };
+
+  addValue(resource: string, key: any, value: any) {
+    Store.dispatch(setFormData<any>({
+      resource: resource,
+      key: key,
+      value: value,
+    }));
+  }
+
+  addError(resource: string, key: any, value: any, errors: any[]) {
+    console.log({
+      ...{ resource: resource },
+      ...errors[0],
+    });
+
+    /*
+    Store.dispatch(setFormErrors<any>({
+      ...{ resource: resource },
+      ...errors[0],
+    }));
+    */
+  }
+  
+  renderError(key: string) {
+    return <FIeldErrorView fieldKey={key} />;
+  }
 
   validateFied(key: string, value: any, rules: any[]) {
     let fieldRules: any = this.getValidationRules();
