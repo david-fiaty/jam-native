@@ -12,8 +12,14 @@ class FormManager {
       errors = this.validateFied(key, value, rules);
     }
 
-    if (errors.length) this.addError(resource, key, value, errors)
-    else this.addValue(resource, key, value);
+    if (errors.length) {
+      this.addError(resource, key, value, errors);
+    }
+    else {
+      this.clearError(resource, key);
+    }
+
+    this.addValue(resource, key, value);
   };
 
   addValue(resource: string, key: any, value: any) {
@@ -25,7 +31,8 @@ class FormManager {
   }
 
   addError(resource: string, key: any, value: any, errors: any[]) {
-    let formErrors: any[] = this.clearError(resource, key);
+    this.clearError(resource, key);
+    let formErrors: any[] = [...Store.getState().form.errors];
     
     Store.dispatch(setFormErrors<any>([...formErrors, {
       ...{ resource: resource },
@@ -34,7 +41,10 @@ class FormManager {
   }
 
   clearError(resource: string, key: any) {
-    return [...Store.getState().form.errors].filter((o: any) => o.resource !== resource && o.key !== key);
+    let formErrors: any[] = [...Store.getState().form.errors];
+    formErrors = formErrors.filter((o: any) => o.resource !== resource && o.key !== key);
+    
+    Store.dispatch(setFormErrors<any>(formErrors));
   }
   
   renderError(key: string) {
