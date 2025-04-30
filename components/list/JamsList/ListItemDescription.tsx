@@ -12,6 +12,9 @@ const ListItemDescription = ({ row }: Props) => {
   return (
     row?.item?.caption?.length > 0 && (
       <BoxView style={styles.container}>
+        {row?.item?.title?.length > 0 && (
+          <TextView>{row.item.title}</TextView>
+        )}
         <TextView>{row?.item?.caption}</TextView>
       </BoxView>
     )
