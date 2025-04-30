@@ -48,7 +48,7 @@ class FormManager {
   }
   
   renderError(key: string) {
-    let formErrors: any[] = [...Store.getState().form.errors];
+    let formErrors: any[] = Store.getState().form.errors;
     let fieldError: any = formErrors.find((o: any) => o.key === key);
 
     if (fieldError) {
@@ -77,12 +77,20 @@ class FormManager {
 
   getValidationRules() {
     return {
-      required: {
+      string: {
         run: (value: any) => {
           return value && typeof value == 'string' && value.trim().length > 0;
         },
         error: () => {
-          return i18n.t('Invalid empty value');
+          return i18n.t('A value is required');
+        },
+      },
+      array: {
+        run: (value: any) => {
+          return value && Array.isArray(value) && value.length > 0;
+        },
+        error: () => {
+          return i18n.t('A selection is required');
         },
       },
       number: {
@@ -97,7 +105,7 @@ class FormManager {
       email: {
         run: (value: any) => {
           let pattern: any = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-          return value && pattern.test(value);
+          return value && typeof value == 'string' && pattern.test(value);
         },
         error: () => {
           return i18n.t('Invalid email value');
@@ -132,7 +140,7 @@ class FormManager {
       domain: {
         run: (value: any) => {
           let pattern: any = /^((?!-)[A-Za-z0-9-]{1, 63}(?<!-)\\.)+[A-Za-z]{2, 6}$/;
-          return value && pattern.test(value);
+          return value && typeof value == 'string' && pattern.test(value);
         },
         error: () => {
           return i18n.t('Invalid domain value');

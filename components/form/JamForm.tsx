@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Colors } from "@/constants/Colors";
-import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
@@ -39,7 +38,6 @@ const resource: string = 'jam';
 const JamForm = ({ jamId }: Props) => {
   jamId = jamId || 0;
 
-  const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
@@ -108,7 +106,7 @@ const JamForm = ({ jamId }: Props) => {
       scroll={true}
     >
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
-        <TextView>{i18n.t('What kind of Jam is it?')}</TextView>
+        <TextView>{i18n.t('What kind of Jam is it?')}*</TextView>
         <ListView
           data={jamCategories}
           numColumns={4}
@@ -124,43 +122,45 @@ const JamForm = ({ jamId }: Props) => {
         <TextView>{i18n.t('Title')}*</TextView>
         <InputTextField
           value={formData?.title}
-          onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['required'])}
+          onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['string'])}
         />
         {FormManager.renderError('title')}
 
-        <TextView>{i18n.t('Description')}</TextView>
+        <TextView>{i18n.t('Description')}*</TextView>
         <InputTextareaField
           value={formData?.caption}
-          onChangeText={(value: string) => FormManager.updateField(resource, 'caption', value)}
+          onChangeText={(value: string) => FormManager.updateField(resource, 'caption', value, ['string'])}
         />
         {FormManager.renderError('caption')}
 
-        <TextView>{i18n.t('Location type')}</TextView>
-        
+        <TextView>{i18n.t('Location type')}*</TextView>
         <LocationTypeField
           value={formData?.location_type}
-          onChangeValue={(option: any) => FormManager.updateField(resource, 'location_type', option.value)}
+          onChangeValue={(option: any) => FormManager.updateField(resource, 'location_type', option.value, ['string'])}
         />
+        {FormManager.renderError('location_type')}
 
-        <TextView>{i18n.t('Start date')}</TextView>
+        <TextView>{i18n.t('Start date')}*</TextView>
         <DatePickerField
           value={formData?.period?.start_datetime}
           onChangeValue={(value: any) => FormManager.updateField(resource, 'period', {
             ...(formData?.period || {}),
             ...{ start_datetime: DataManager.formatDate(value) },
-          })}
+          }, ['date'])}
         />
+        {FormManager.renderError('period')}
 
-        <TextView>{i18n.t('End date')}</TextView>
+        <TextView>{i18n.t('End date')}*</TextView>
         <DatePickerField
           value={formData?.period?.end_datetime}
           onChangeValue={(value: any) => FormManager.updateField(resource, 'period', {
             ...(formData?.period || {}),
             ...{ end_datetime: DataManager.formatDate(value) },
-          })}
+          }, ['date'])}
         />
+        {FormManager.renderError('period')}
 
-        <TextView>{i18n.t('Location')}</TextView>
+        <TextView>{i18n.t('Location')}*</TextView>
         <LocationPickerField
           resource={resource}
           placeholder={i18n.t('Select your location')}
@@ -188,13 +188,16 @@ const JamForm = ({ jamId }: Props) => {
             value: formData?.geolocation_longitude,
           }}
         />
+        {FormManager.renderError('geolocation_latitude')}
+        {FormManager.renderError('geolocation_longitude')}
 
-        <TextView>{i18n.t('Country')}</TextView>
+        <TextView>{i18n.t('Country')}*</TextView>
         <CountryField
           value={formData?.countries}
-          onChangeValue={(option: any) => FormManager.updateField(resource, 'country', option.value)}
+          onChangeValue={(option: any) => FormManager.updateField(resource, 'country', option.value, ['string'])}
         />
-    
+        {FormManager.renderError('countries')}
+
         <TextView>{i18n.t('Select your sectors')}</TextView>
         <SectorsField
           resource={resource}
@@ -207,6 +210,7 @@ const JamForm = ({ jamId }: Props) => {
             field: 'sectors_ids',
           })}
         />
+        {FormManager.renderError('sectors_ids')}
 
         <DividerView theme="white" />
         
@@ -219,6 +223,7 @@ const JamForm = ({ jamId }: Props) => {
             field: "collaborators_ids",
           })}
         />
+        {FormManager.renderError('collaborators_ids')}
 
         <DividerView theme="white" />
 
@@ -234,6 +239,7 @@ const JamForm = ({ jamId }: Props) => {
             </BoxView>
           }
         />
+        {FormManager.renderError('upload_medias')}
 
         <DividerView theme="white" />
         
