@@ -1,4 +1,4 @@
-import FIeldErrorView from "@/components/view/FieldErrorView";
+import FieldErrorView from "@/components/view/FieldErrorView";
 import TextView from "@/components/view/TextView";
 import { setFormData, setFormErrors } from "@/redux/slices/FormSlice";
 import Store from "@/redux/Store";
@@ -25,16 +25,27 @@ class FormManager {
   }
 
   addError(resource: string, key: any, value: any, errors: any[]) {
-    let formErrors: any[] = [...Store.getState().form.errors];
+    let formErrors: any[] = this.clearError(resource, key);
     
     Store.dispatch(setFormErrors<any>([...formErrors, {
       ...{ resource: resource },
       ...errors[0],
     }]));
   }
+
+  clearError(resource: string, key: any) {
+    return [...Store.getState().form.errors].filter((o: any) => o.resource !== resource && o.key !== key);
+  }
   
   renderError(key: string) {
-    return <FIeldErrorView fieldKey={key} />;
+    let formErrors: any[] = [...Store.getState().form.errors];
+    let fieldError: any = formErrors.find((o: any) => o.key === key);
+
+    if (fieldError) {
+      return <FieldErrorView message={fieldError.message} />;
+    }
+
+    return <></>;
   }
 
   validateFied(key: string, value: any, rules: any[]) {
