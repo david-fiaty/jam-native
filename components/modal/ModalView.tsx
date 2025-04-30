@@ -30,6 +30,12 @@ const ModalView = ({ currentSection, style }: Props) => {
   };
 
   const renderBackButton = () => {
+    let activeModalsCount: number = modalState.active.length;
+    let currentModalIndex: number = modalState.active.findIndex((o: any) => o.id === currentModal?.id);
+
+
+
+
     if (currentModal?.showTitle === true && currentModal?.showBackButton === true) {
       return <ModalBackButton currentModal={currentModal} />;
     }
