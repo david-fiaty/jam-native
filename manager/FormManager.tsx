@@ -1,4 +1,4 @@
-import { setFormData } from "@/redux/slices/FormSlice";
+import { setFormData, setFormErrors } from "@/redux/slices/FormSlice";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
 
@@ -6,12 +6,15 @@ class FormManager {
   updateField(resource: string, key: any, value: any, rules: any[] = []) {
     let errors: any[] = [];
 
-    if (rules.length > 0) { 
-      errors = this.validateFied(key, value, rules);
-      console.log('field errors -------->', errors);
-    }
+    if (rules.length > 0) errors = this.validateFied(key, value, rules);
 
-    if (!errors.length) {
+    if (errors.length) {
+      Store.dispatch(setFormErrors<any>({
+        ...{ resource: resource },
+        ...errors[0],
+      }));
+    }
+    else {
       Store.dispatch(setFormData<any>({
         resource: resource,
         key: key,
@@ -27,7 +30,7 @@ class FormManager {
     for (const rule of rules) {
       if (!fieldRules[rule].run(value)) {
         errors.push({
-          field: key,
+          key: key,
           value: value,
           message: fieldRules[rule].error(),
         });
