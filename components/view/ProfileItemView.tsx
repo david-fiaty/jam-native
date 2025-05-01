@@ -11,6 +11,7 @@ import TagView from "./TagView";
 import i18n from "@/translation/i18n";
 import DividerView from "./DividerView";
 import StaticData from "@/constants/StaticData";
+import ProfileJamsList from "../list/ProfileJamsList";
 
 type Props = BaseProps & {
   profileId: any;
@@ -76,8 +77,12 @@ const ProfileItemView = ({ profileId }: Props) => {
       <DividerView />
 
       <TextView style={styles.sectionTitle}>{i18n.t('Jams')}</TextView>
-      <BoxView direction="row" align="center" justify="flex-start" style={styles.profilejams}>
-        <TextView>JAMS</TextView>
+      <BoxView direction="row" align="center" justify="flex-start" style={styles.profileJams}>
+        <ProfileJamsList 
+          idArray={[18, 20, 32, 33, 37]} 
+          //onAddButtonPress={() => ScreenManager.toggleModal("JamForm")}
+        />   
+
       </BoxView>
 
       <TextView style={styles.sectionTitle}>{i18n.t('Country')}</TextView>
