@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
   },
   profileSectors: {
     width: '100%',
+    flexWrap: 'wrap',
   },
   profileDescription: {
     width: '100%',
