@@ -47,6 +47,10 @@ const ProfileItemView = ({ profileId }: Props) => {
           <TextView>{profileItem?.profile_type}</TextView>
         </View>
       </BoxView>
+
+      <BoxView direction="row" align="center" justify="flex-start">
+        <TextView>profile sectors ids</TextView>
+      </BoxView>
     </BoxView>
   );
 };
@@ -81,6 +85,9 @@ const styles = StyleSheet.create({
   profileTitle: {
     fontWeight: 'bold',
     fontSize: 16,
+  },
+  profileSectors: {
+    width: '100%',
   },
 });
 
