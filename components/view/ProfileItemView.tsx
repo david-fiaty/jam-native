@@ -67,7 +67,7 @@ const ProfileItemView = ({ profileId }: Props) => {
 
         <View style={styles.profileHeaderRight}>
           <TextView style={styles.profileTitle}>{profileItem?.profile_name}</TextView>
-          <TextView>
+          <TextView style={styles.profileType}>
             {(StaticData.profileTypes.find((o: any) => o.id === profileItem?.profile_type))?.label}
           </TextView>
         </View>
@@ -120,7 +120,11 @@ const styles = StyleSheet.create({
   },
   profileTitle: {
     fontWeight: 'bold',
-    fontSize: 15,
+    fontSize: 16,
+  },
+  profileType: {
+    fontSize: 13,
+    paddingTop: 2,
   },
   sectionTitle: {
     fontWeight: 'bold',
