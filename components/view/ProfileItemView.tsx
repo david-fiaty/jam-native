@@ -20,19 +20,20 @@ const ProfileItemView = ({ profileId }: Props) => {
   const [sectorsData, setSectorsData] = useState<any>([]);
 
   const renderProfileSectors = (sectorsIds?: any)  => {
-    console.log(sectorsData?.[0]?.id)
+    let data: any[] = [];
 
-    if (sectorsIds?.length) {
-      return (sectorsIds || []).map((id: any) => {
-        return (
-          <TagView key={id}>
-            {id}
-          </TagView>
-        );
-      });
-    }
+    sectorsData.map((item: any) => {
+      if ((sectorsIds || []).includes(item.id)) {
+        data.push(<TagView key={item.id}>{item.name}</TagView>);  
+      }
+      else if (item?.sub_sectors?.length > 0) {
+        item.sub_sectors.map((subitem: any) => {
+          data.push(<TagView key={subitem.id}>{subitem.name}</TagView>);  
+        });
+      }
+    });
 
-    return <></>;
+    return data;
   };
 
   useEffect(() => {
@@ -66,7 +67,6 @@ const ProfileItemView = ({ profileId }: Props) => {
       </BoxView>
 
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileSectors}>
-        <TextView>{JSON.stringify(profileItem?.sectors || {})}</TextView>
         {renderProfileSectors(profileItem?.sectors)}
       </BoxView>
 
