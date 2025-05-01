@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import TextView from './TextView';
 import EntityManager from "@/manager/EntityManager";
@@ -29,19 +29,22 @@ const ProfileItemView = ({ profileId }: Props) => {
 
   return (
     <BoxView direction="column" align="flex-start" justify="flex-start" style={styles.container}>
-      <TextView>{profileItem?.profile_type}</TextView>
+      <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.profileHeader}>
+        <View style={styles.profileHeaderLeft}>
+          <ImageView
+            uri={MediaManager.getImageUrl('/media/files/609b6904-41df-4fb4-9b14-e75d8697f444.jpg')}
+            //uri={MediaManager.getImageUrl(profileItem?.profile_picture?.url)} // Todo - Enable this
+            resizeMode="cover"
+            width={100}
+            height={100}
+            style={styles.profileImage}
+          />
+        </View>
 
-      <>{profileItem?.profile_picture?.url}</>
-
-      
-      <ImageView
-        uri={MediaManager.getImageUrl('/media/files/609b6904-41df-4fb4-9b14-e75d8697f444.jpg')}
-        //uri={MediaManager.getImageUrl(profileItem?.profile_picture?.url)} // Todo - Enable this
-        resizeMode="cover"
-        width={100}
-        height={100}
-        style={styles.profileImage}
-      />
+        <View style={styles.profileHeaderRight}>
+          <TextView>{profileItem?.profile_type}</TextView>
+        </View>
+      </BoxView>
     </BoxView>
   );
 };
@@ -52,10 +55,24 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
   },
+  profileHeader: {
+    width: '100%',
+    backgroundColor: 'black',
+    gap: 0,
+  },
+  profileHeaderLeft: {
+    backgroundColor: 'yellow',
+    width: 100,
+  },
+  profileHeaderRight: {
+    backgroundColor: 'green',
+    flex: 1,
+  },
   profileImage: {
     width: 100,
     height: 100,
     borderRadius: 100,
+    alignSelf: 'flex-start',
   },
 });
 
