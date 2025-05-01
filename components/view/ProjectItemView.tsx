@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import TextView from './TextView';
 import EntityManager from "@/manager/EntityManager";
+import BoxView from "./BoxView";
 
 type Props = BaseProps & {
   projectId: any;
@@ -21,15 +22,18 @@ const ProjectItemView = ({ projectId }: Props) => {
     })();
   }, [isLoaded, projectId]);
 
-  console.log(projectItem)
-
   return (
-    <TextView>{projectId}</TextView>
+    <BoxView direction="column" align="flex-start" justify="flex-start" style={styles.container}>
+      <TextView>{projectId}</TextView>
+    </BoxView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'red',
+    flex: 1,
+    width: '100%',
   },
 });
 
