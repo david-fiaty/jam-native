@@ -1,9 +1,6 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useState, useEffect } from "react";
+import { StyleSheet } from 'react-native';
 import { BaseProps } from '@/constants/Types';
-import { Colors } from '@/constants/Colors';
-import { Layout } from '@/constants/Layout';
-import IconView from './IconView';
-import BoxView from './BoxView';
 import TextView from './TextView';
 
 type Props = BaseProps & {
@@ -11,6 +8,16 @@ type Props = BaseProps & {
 };
 
 const ProjectItemView = ({ projectId }: Props) => {
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
+  useEffect(() => {
+    (async () => {
+      if (!isLoaded) {
+        setIsLoaded(true);
+      }  
+    })();
+  }, [isLoaded]);
+
   return (
     <TextView>{projectId}</TextView>
   );
