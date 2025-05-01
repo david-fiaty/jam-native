@@ -96,12 +96,13 @@ const styles = StyleSheet.create({
   profileHeader: {
     width: '100%',
     gap: 0,
+    marginVertical: Layout.space.base/1.5,
   },
   profileHeaderLeft: {
     width: profileImageSize,
   },
   profileHeaderRight: {
-    paddingHorizontal: Layout.space.base,
+    paddingHorizontal: Layout.space.base*1.5,
     paddingTop: Layout.space.base*2, // Todo - Vertical align middle
     flex: 1,
     height: '100%',
