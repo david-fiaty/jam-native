@@ -88,21 +88,17 @@ const ProfileItemView = ({ profileId }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'red',
     flex: 1,
     width: '100%',
   },
   profileHeader: {
     width: '100%',
-    backgroundColor: 'black',
     gap: 0,
   },
   profileHeaderLeft: {
-    backgroundColor: 'yellow',
     width: 100,
   },
   profileHeaderRight: {
-    backgroundColor: 'green',
     paddingHorizontal: Layout.space.base,
     flex: 1,
     height: '100%',
