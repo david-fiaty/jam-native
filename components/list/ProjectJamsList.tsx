@@ -18,6 +18,7 @@ import IconView from "../view/IconView";
 type Props = {
   selectedIds?: any;
   resource?: any;
+  canEdit?: boolean;
   onAddButtonPress?: () => void;
   onDeleteButtonPress: (row: any) => void;
 };
@@ -25,6 +26,7 @@ type Props = {
 const ProjectJamsList = ({
   selectedIds,
   resource,
+  canEdit,
   onAddButtonPress,
   onDeleteButtonPress
 }: Props) => {
@@ -57,7 +59,7 @@ const ProjectJamsList = ({
     let isSelected: boolean = findItemIndex(row) !== -1;
     let output = null;
 
-    if (row?.item?.id == "addItem") {
+    if (row?.item?.id == "addItem" && canEdit === true) {
       output = (
         <AddItemButton
           label={i18n.t("Add")}
@@ -85,7 +87,7 @@ const ProjectJamsList = ({
             style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
           />
 
-          {isSelected && (
+          {isSelected && canEdit === true && (
             <TouchableOpacity
               style={styles.deleteItem}
               onPress={() => onDeleteButtonPress(row)}
