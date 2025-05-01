@@ -64,6 +64,7 @@ const ProfileItemView = ({ profileId }: Props) => {
       </BoxView>
 
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileSectors}>
+        <TextView>{JSON.stringify(profileItem?.sectors || {})}</TextView>
         {renderProfileSectors(profileItem?.sectors)}
       </BoxView>
 
