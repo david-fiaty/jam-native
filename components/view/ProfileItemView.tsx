@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   },
   profileTitle: {
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 15,
   },
   profileType: {
     fontSize: 13,
