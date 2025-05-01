@@ -32,4 +32,3 @@ export const Config: any = {
     },
   },
 };
-
