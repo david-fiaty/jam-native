@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import TextView from './TextView';
@@ -19,50 +19,18 @@ const ProfileItemView = ({ profileId }: Props) => {
   const [profileSectors, setProfileSectors] = useState<any>([]);
   const [sectorsData, setSectorsData] = useState<any>([]);
 
-  const renderProfileSectors = async (sectorsIds?: any[]) => {
-    return (sectorsIds || []).map((id: any) => {
-      return (
-        <TagView key={id}>
-          {id}
-        </TagView>
-      );
-    });
-  };
-
-  const getProfileSectors = async () => {
-
-    console.log(profileItem?.sectors);
-
-    return [];
-
-
-    let data: any[] = [];
-
-    sectorsData.map((o: any) => {
-      console.log(o.id)
-      if ((profileItem?.sectors || []).includes(o.id)) {
-        data.push(o);
-      }
-    });
-
-    return data;
-  };
-
-  const getSelectedSectors = (sectorsIds?: any) => {
-    let selectedIds: any[] = sectorsIds?.length ? sectorsIds : [];
-    let result: any[] = [];
-
-    for (const item of sectorsData) {
-      if (selectedIds.includes(item.id)) {
-        for (const subitem of item?.sub_sectors || []) {
-          if (selectedIds.includes(subitem.id)) {
-            result.push(subitem);
-          }
-        }
-      }
+  const renderProfileSectors = (sectorsIds?: any)  => {
+    if (sectorsIds?.length) {
+      return (sectorsIds || []).map((id: any) => {
+        return (
+          <TagView key={id}>
+            {id}
+          </TagView>
+        );
+      });
     }
 
-    return result;
+    return [];
   };
 
   useEffect(() => {
@@ -96,9 +64,7 @@ const ProfileItemView = ({ profileId }: Props) => {
       </BoxView>
 
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileSectors}>
-        <TextView>{JSON.stringify(profileItem?.sectors || {})}</TextView>
-        {renderProfileSectors(profileItem?.sectors || [])}
-
+        {renderProfileSectors(profileItem?.sectors)}
       </BoxView>
 
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileDescription}>
