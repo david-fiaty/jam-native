@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from 'react-native';
 import { BaseProps } from '@/constants/Types';
+import { Layout } from "@/constants/Layout";
 import TextView from './TextView';
 import EntityManager from "@/manager/EntityManager";
 import BoxView from "./BoxView";
 import ImageView from "./ImageView";
 import MediaManager from "@/manager/MediaManager";
-import { Layout } from "@/constants/Layout";
 import TagView from "./TagView";
 import i18n from "@/translation/i18n";
 import DividerView from "./DividerView";
+import StaticData from "@/constants/StaticData";
 
 type Props = BaseProps & {
   profileId: any;
@@ -66,7 +67,9 @@ const ProfileItemView = ({ profileId }: Props) => {
 
         <View style={styles.profileHeaderRight}>
           <TextView style={styles.profileTitle}>{profileItem?.profile_name}</TextView>
-          <TextView>{profileItem?.profile_type}</TextView>
+          <TextView>
+            {(StaticData.profileTypes.find((o: any) => o.id === profileItem?.profile_type))?.label}
+          </TextView>
         </View>
       </BoxView>
 
