@@ -67,9 +67,9 @@ const ProfileItemView = ({ profileId }: Props) => {
         </View>
       </BoxView>
 
-      <TextView style={styles.sectionTitle}>{i18n.t('Sectors')}</TextView>
-      <BoxView direction="row" align="center" justify="flex-start" style={styles.profileSectors}>
-        {renderProfileSectors(profileItem?.sectors)}
+      <TextView style={styles.sectionTitle}>{i18n.t('Country')}</TextView>
+      <BoxView direction="row" align="center" justify="flex-start" style={styles.profileDescription}>
+      <TextView>{profileItem?.scope_country_code ? profileItem.scope_country_code : i18n.t('Unavailable')}</TextView>
       </BoxView>
 
       <TextView style={styles.sectionTitle}>{i18n.t('Description')}</TextView>
@@ -77,28 +77,28 @@ const ProfileItemView = ({ profileId }: Props) => {
         <TextView>{profileItem?.profile_description}</TextView>
       </BoxView>
 
-      <TextView>{profileItem?.scope_country_code}</TextView>
+      <TextView style={styles.sectionTitle}>{i18n.t('Sectors')}</TextView>
+      <BoxView direction="row" align="center" justify="flex-start" style={styles.profileSectors}>
+        {renderProfileSectors(profileItem?.sectors)}
+      </BoxView>
+
     </BoxView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'red',
     flex: 1,
     width: '100%',
   },
   profileHeader: {
     width: '100%',
-    backgroundColor: 'black',
     gap: 0,
   },
   profileHeaderLeft: {
-    backgroundColor: 'yellow',
     width: 100,
   },
   profileHeaderRight: {
-    backgroundColor: 'green',
     paddingHorizontal: Layout.space.base,
     flex: 1,
     height: '100%',
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontWeight: 'bold',
     fontSize: 14,
-    marginTop: Layout.space.base,
+    marginTop: Layout.space.base/1.5,
   },
   profileSectors: {
     width: '100%',
