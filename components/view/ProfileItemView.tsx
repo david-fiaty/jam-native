@@ -17,12 +17,11 @@ type Props = BaseProps & {
   profileId: any;
 };
 
-const profileImageSize: number = 90;
+const profileImageSize: number = 100;
 
 const ProfileItemView = ({ profileId }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [profileItem, setProfileItem] = useState<any>(null);
-  const [profileSectors, setProfileSectors] = useState<any>([]);
   const [sectorsData, setSectorsData] = useState<any>([]);
 
   const renderProfileSectors = (sectorsIds?: any)  => {
@@ -83,12 +82,12 @@ const ProfileItemView = ({ profileId }: Props) => {
 
       <DividerView />
 
-      <TextView style={styles.sectionTitle}>{i18n.t('Jams')} ({profileItem?.number_of_jams || 0})</TextView>
+      <TextView style={styles.sectionTitle}>{i18n.t('Profile Jams')} ({profileItem?.number_of_jams || 0})</TextView>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileJams}>
         <ProfileJamsList 
           idArray={[18, 20, 32, 33, 37]} 
-          // Todo - Remove this when sub routing working, or implement
-          onListItemPress={(row: any) => console.log(row)}
+          // Todo - Remove this when sub routing working, or implement modal toggle
+          onListItemPress={(row: any) => console.log('Profile jam click event --->', row)}
           //onAddButtonPress={() => ScreenManager.toggleModal("JamForm")}
         />   
 
