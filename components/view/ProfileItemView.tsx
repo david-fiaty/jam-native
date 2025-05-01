@@ -17,7 +17,7 @@ type Props = BaseProps & {
   profileId: any;
 };
 
-const profileImageSize: number = 90;
+const profileImageSize: number = 100;
 
 const ProfileItemView = ({ profileId }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
