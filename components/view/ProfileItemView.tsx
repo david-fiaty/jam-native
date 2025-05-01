@@ -108,8 +108,7 @@ const styles = StyleSheet.create({
     width: profileImageSize,
   },
   profileHeaderRight: {
-    paddingLeft: Layout.space.base*1.5,
-    paddingRight: Layout.space.base,
+    paddingHorizontal: Layout.space.base*1,
     paddingTop: Layout.space.base*2, // Todo - Vertical align middle
     flex: 1,
     height: '100%',
