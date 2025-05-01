@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import TextView from './TextView';
@@ -7,6 +7,7 @@ import BoxView from "./BoxView";
 import ImageView from "./ImageView";
 import MediaManager from "@/manager/MediaManager";
 import { Layout } from "@/constants/Layout";
+import TagView from "./TagView";
 
 type Props = BaseProps & {
   profileId: any;
@@ -15,18 +16,35 @@ type Props = BaseProps & {
 const ProfileItemView = ({ profileId }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [profileItem, setProfileItem] = useState<any>(null);
+  const [profileSectors, setProfileSectors] = useState<any>([]);
+  const [sectorsData, setSectorsData] = useState<any>([]);
+
+  const renderProfileSectors = (sectorsIds?: any)  => {
+    let data: any[] = [];
+
+    sectorsData.map((item: any) => {
+      if ((sectorsIds || []).includes(item.id)) {
+        data.push(<TagView key={item.id}>{item.name}</TagView>);  
+      }
+      else if (item?.sub_sectors?.length > 0) {
+        item.sub_sectors.map((subitem: any) => {
+          data.push(<TagView key={subitem.id}>{subitem.name}</TagView>);  
+        });
+      }
+    });
+
+    return data;
+  };
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
+        setSectorsData(await EntityManager.getSectors());
         setProfileItem((await EntityManager.getProfiles({ items_ids: [profileId] }))?.[0]);
         setIsLoaded(true);
-      }  
+      }
     })();
   }, [isLoaded, profileId]);
-
-  
-  console.log(profileItem)
 
   return (
     <BoxView direction="column" align="flex-start" justify="flex-start" style={styles.container}>
@@ -47,6 +65,16 @@ const ProfileItemView = ({ profileId }: Props) => {
           <TextView>{profileItem?.profile_type}</TextView>
         </View>
       </BoxView>
+
+      <BoxView direction="row" align="center" justify="flex-start" style={styles.profileSectors}>
+        {renderProfileSectors(profileItem?.sectors)}
+      </BoxView>
+
+      <BoxView direction="row" align="center" justify="flex-start" style={styles.profileDescription}>
+        <TextView>{profileItem?.profile_description}</TextView>
+      </BoxView>
+
+      <TextView>{profileItem?.scope_country_code}</TextView>
     </BoxView>
   );
 };
@@ -81,6 +109,12 @@ const styles = StyleSheet.create({
   profileTitle: {
     fontWeight: 'bold',
     fontSize: 16,
+  },
+  profileSectors: {
+    width: '100%',
+  },
+  profileDescription: {
+    width: '100%',
   },
 });
 
