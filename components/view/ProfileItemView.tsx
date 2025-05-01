@@ -57,8 +57,8 @@ const ProfileItemView = ({ profileId }: Props) => {
       direction="column" 
       align="flex-start" 
       justify="flex-start" 
-      style={styles.container}
       scroll={true}
+      style={styles.container}
     >
       <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.profileHeader}>
         <View style={styles.profileHeaderLeft}>
@@ -83,13 +83,12 @@ const ProfileItemView = ({ profileId }: Props) => {
 
       <DividerView />
 
-      <TextView style={styles.sectionTitle}>{i18n.t('Jams')}</TextView>
+      <TextView style={styles.sectionTitle}>{i18n.t('Jams')} ({profileItem?.number_of_jams || 0})</TextView>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileJams}>
         <ProfileJamsList 
           idArray={[18, 20, 32, 33, 37]} 
           // Todo - Remove this when sub routing working, or implement
           onListItemPress={(row: any) => console.log(row)}
-          
           //onAddButtonPress={() => ScreenManager.toggleModal("JamForm")}
         />   
 
@@ -118,6 +117,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
+    paddingBottom: Layout.space.base*3,
   },
   profileHeader: {
     width: '100%',
