@@ -48,9 +48,15 @@ const ProfileItemView = ({ profileId }: Props) => {
         </View>
       </BoxView>
 
-      <BoxView direction="row" align="center" justify="flex-start">
+      <BoxView direction="row" align="center" justify="flex-start" style={styles.profileSectors}>
         <TextView>profile sectors ids</TextView>
       </BoxView>
+
+      <BoxView direction="row" align="center" justify="flex-start" style={styles.profileDescription}>
+        <TextView>{profileItem?.profile_description}</TextView>
+      </BoxView>
+
+      <TextView>{profileItem?.scope_country_code}</TextView>
     </BoxView>
   );
 };
@@ -87,6 +93,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   profileSectors: {
+    width: '100%',
+  },
+  profileDescription: {
     width: '100%',
   },
 });
