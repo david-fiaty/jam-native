@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
 import { BaseProps } from '@/constants/Types';
 import TextView from './TextView';
+import EntityManager from "@/manager/EntityManager";
 
 type Props = BaseProps & {
   projectId: any;
@@ -9,14 +10,18 @@ type Props = BaseProps & {
 
 const ProjectItemView = ({ projectId }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [projectItem, setProjectItem] = useState<any>(null);
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
+        setProjectItem((await EntityManager.getProjects({ items_ids: [projectId] }))?.[0]);
         setIsLoaded(true);
       }  
     })();
-  }, [isLoaded]);
+  }, [isLoaded, projectId]);
+
+  console.log(projectItem)
 
   return (
     <TextView>{projectId}</TextView>
