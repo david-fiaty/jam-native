@@ -67,6 +67,11 @@ const ProfileItemView = ({ profileId }: Props) => {
         </View>
       </BoxView>
 
+      <TextView style={styles.sectionTitle}>{i18n.t('Country')}</TextView>
+      <BoxView direction="row" align="center" justify="flex-start" style={styles.profileDescription}>
+      <TextView>{profileItem?.scope_country_code} profile country</TextView>
+      </BoxView>
+
       <TextView style={styles.sectionTitle}>{i18n.t('Description')}</TextView>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileDescription}>
         <TextView>{profileItem?.profile_description}</TextView>
@@ -77,7 +82,6 @@ const ProfileItemView = ({ profileId }: Props) => {
         {renderProfileSectors(profileItem?.sectors)}
       </BoxView>
 
-      <TextView>{profileItem?.scope_country_code}</TextView>
     </BoxView>
   );
 };
@@ -116,7 +120,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontWeight: 'bold',
     fontSize: 14,
-    marginTop: Layout.space.base,
+    marginTop: Layout.space.base/1.5,
   },
   profileSectors: {
     width: '100%',
