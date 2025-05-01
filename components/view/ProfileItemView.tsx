@@ -69,7 +69,7 @@ const ProfileItemView = ({ profileId }: Props) => {
 
       <TextView style={styles.sectionTitle}>{i18n.t('Country')}</TextView>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileDescription}>
-      <TextView>{profileItem?.scope_country_code} profile country</TextView>
+      <TextView>{profileItem?.scope_country_code ? profileItem.scope_country_code : i18n.t('Unavailable')}</TextView>
       </BoxView>
 
       <TextView style={styles.sectionTitle}>{i18n.t('Description')}</TextView>
