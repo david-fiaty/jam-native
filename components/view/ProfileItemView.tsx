@@ -30,7 +30,7 @@ const ProfileItemView = ({ profileId }: Props) => {
       });
     }
 
-    return [];
+    return <></>;
   };
 
   useEffect(() => {
