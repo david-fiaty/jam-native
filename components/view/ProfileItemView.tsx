@@ -71,6 +71,7 @@ const ProfileItemView = ({ profileId }: Props) => {
           <TextView style={styles.profileType}>
             {(StaticData.profileTypes.find((o: any) => o.id === profileItem?.profile_type))?.label}
           </TextView>
+          {renderProfileSectors(profileItem?.sectors)[0]}
         </View>
       </BoxView>
 
@@ -122,7 +123,7 @@ const styles = StyleSheet.create({
   },
   profileHeaderRight: {
     paddingHorizontal: Layout.space.base*1,
-    paddingTop: Layout.space.base*2, // Todo - Vertical align middle
+    paddingTop: Layout.space.base*1.2, // Todo - Vertical align middle
     flex: 1,
     height: '100%',
   },
@@ -138,6 +139,7 @@ const styles = StyleSheet.create({
   profileType: {
     fontSize: 13,
     paddingTop: 2,
+    paddingBottom: 4,
   },
   sectionTitle: {
     fontWeight: 'bold',
