@@ -17,23 +17,63 @@ const ProfileItemView = ({ profileId }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [profileItem, setProfileItem] = useState<any>(null);
   const [profileSectors, setProfileSectors] = useState<any>([]);
+  const [sectorsData, setSectorsData] = useState<any>([]);
+
+  const renderProfileSectors = async (sectorsIds?: any[]) => {
+    return (sectorsIds || []).map((id: any) => {
+      return (
+        <TagView key={id}>
+          {id}
+        </TagView>
+      );
+    });
+  };
 
   const getProfileSectors = async () => {
-    //setSectorsData(await EntityManager.getSectors());
-    return ['yo'];
+
+    console.log(profileItem?.sectors);
+
+    return [];
+
+
+    let data: any[] = [];
+
+    sectorsData.map((o: any) => {
+      console.log(o.id)
+      if ((profileItem?.sectors || []).includes(o.id)) {
+        data.push(o);
+      }
+    });
+
+    return data;
+  };
+
+  const getSelectedSectors = (sectorsIds?: any) => {
+    let selectedIds: any[] = sectorsIds?.length ? sectorsIds : [];
+    let result: any[] = [];
+
+    for (const item of sectorsData) {
+      if (selectedIds.includes(item.id)) {
+        for (const subitem of item?.sub_sectors || []) {
+          if (selectedIds.includes(subitem.id)) {
+            result.push(subitem);
+          }
+        }
+      }
+    }
+
+    return result;
   };
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setProfileSectors(await getProfileSectors());
+        setSectorsData(await EntityManager.getSectors());
         setProfileItem((await EntityManager.getProfiles({ items_ids: [profileId] }))?.[0]);
         setIsLoaded(true);
       }
     })();
   }, [isLoaded, profileId]);
-
-  console.log(profileSectors);
 
   return (
     <BoxView direction="column" align="flex-start" justify="flex-start" style={styles.container}>
@@ -57,11 +97,7 @@ const ProfileItemView = ({ profileId }: Props) => {
 
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileSectors}>
         <TextView>{JSON.stringify(profileItem?.sectors || {})}</TextView>
-        {profileItem?.sectors?.length > 0 && profileItem.sectors.map((id: any) => {
-          <TagView key={id}>
-            {id}
-          </TagView>
-        })}
+        {renderProfileSectors(profileItem?.sectors || [])}
 
       </BoxView>
 
