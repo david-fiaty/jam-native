@@ -8,6 +8,7 @@ import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import DividerView from "./DividerView";
 import ProjectJamsList from "../list/ProjectJamsList";
+import SectorsTagsView from "./SectorsTagsView";
 
 type Props = BaseProps & {
   projectId: any;
@@ -41,7 +42,7 @@ const ProjectItemView = ({ projectId }: Props) => {
 
       <DividerView />
 
-      <TextView style={styles.sectionTitle}>{i18n.t('Project Jams')}</TextView>
+      <TextView style={styles.sectionTitle}>{i18n.t('Jams')}</TextView>
       <ProjectJamsList 
         resource="project"
         selectedIds={projectItem?.jams}
@@ -61,6 +62,11 @@ const ProjectItemView = ({ projectId }: Props) => {
         }}
           */
       />
+
+      <TextView style={styles.sectionTitle}>{i18n.t('Sectors')}</TextView>
+      <BoxView direction="row" align="center" justify="flex-start" style={styles.projectSectors}>
+        <SectorsTagsView idArray={projectItem?.sectors} />
+      </BoxView>
     </BoxView>
   );
 };
@@ -84,6 +90,10 @@ const styles = StyleSheet.create({
   projectDescription: {
     width: '100%',
     marginTop: Layout.space.base/1.5,
+  },
+  projectSectors: {
+    width: '100%',
+    flexWrap: 'wrap',
   },
 });
 
