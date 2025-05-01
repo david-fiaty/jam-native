@@ -20,6 +20,8 @@ const ProfileItemView = ({ profileId }: Props) => {
   const [sectorsData, setSectorsData] = useState<any>([]);
 
   const renderProfileSectors = (sectorsIds?: any)  => {
+    console.log(sectorsData?.[0]?.id)
+
     if (sectorsIds?.length) {
       return (sectorsIds || []).map((id: any) => {
         return (
