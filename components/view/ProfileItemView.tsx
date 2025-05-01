@@ -6,6 +6,7 @@ import EntityManager from "@/manager/EntityManager";
 import BoxView from "./BoxView";
 import ImageView from "./ImageView";
 import MediaManager from "@/manager/MediaManager";
+import { Layout } from "@/constants/Layout";
 
 type Props = BaseProps & {
   profileId: any;
@@ -42,6 +43,7 @@ const ProfileItemView = ({ profileId }: Props) => {
         </View>
 
         <View style={styles.profileHeaderRight}>
+          <TextView style={styles.profileTitle}>{profileItem?.profile_name}</TextView>
           <TextView>{profileItem?.profile_type}</TextView>
         </View>
       </BoxView>
@@ -66,13 +68,19 @@ const styles = StyleSheet.create({
   },
   profileHeaderRight: {
     backgroundColor: 'green',
+    paddingHorizontal: Layout.space.base,
     flex: 1,
+    height: '100%',
   },
   profileImage: {
     width: 100,
     height: 100,
     borderRadius: 100,
     alignSelf: 'flex-start',
+  },
+  profileTitle: {
+    fontWeight: 'bold',
+    fontSize: 16,
   },
 });
 
