@@ -67,9 +67,9 @@ class SearchManager {
     ]);
 
     return {
-      jam: jam,
-      profile: profile,
-      project: project,
+      jam: jam || [],
+      profile: profile || [],
+      project: project || [],
     };
   }
 
@@ -81,9 +81,9 @@ class SearchManager {
     ]);
 
     return {
-      jam: jam,
-      profile: profile,
-      project: project,
+      jam: jam || [],
+      profile: profile || [],
+      project: project || [],
     };
   }
 };
