@@ -75,9 +75,14 @@ const ProfileItemView = ({ profileId }: Props) => {
 
       <DividerView />
 
+      <TextView style={styles.sectionTitle}>{i18n.t('Jams')}</TextView>
+      <BoxView direction="row" align="center" justify="flex-start" style={styles.profilejams}>
+        <TextView>JAMS</TextView>
+      </BoxView>
+
       <TextView style={styles.sectionTitle}>{i18n.t('Country')}</TextView>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileDescription}>
-      <TextView>{profileItem?.scope_country_code ? profileItem.scope_country_code : i18n.t('Unavailable')}</TextView>
+        <TextView>{profileItem?.scope_country_code ? profileItem.scope_country_code : i18n.t('Unavailable')}</TextView>
       </BoxView>
 
       <TextView style={styles.sectionTitle}>{i18n.t('Description')}</TextView>
@@ -130,6 +135,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 13,
     marginTop: Layout.space.base/1.5,
+  },
+  profileJams: {
+    width: '100%',
   },
   profileSectors: {
     width: '100%',
