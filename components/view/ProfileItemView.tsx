@@ -35,7 +35,7 @@ const ProfileItemView = ({ profileId }: Props) => {
 
       
       <ImageView
-        uri={MediaManager.getImageUrl('/media/files/bb4669ed-8bb6-454b-a740-503ce42f935f.png')}
+        uri={MediaManager.getImageUrl('/media/files/609b6904-41df-4fb4-9b14-e75d8697f444.jpg')}
         //uri={MediaManager.getImageUrl(profileItem?.profile_picture?.url)} // Todo - Enable this
         resizeMode="cover"
         width={100}
