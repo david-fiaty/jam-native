@@ -111,11 +111,11 @@ const styles = StyleSheet.create({
   },
   profileTitle: {
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 15,
   },
   sectionTitle: {
     fontWeight: 'bold',
-    fontSize: 14,
+    fontSize: 13,
     marginTop: Layout.space.base/1.5,
   },
   profileSectors: {
