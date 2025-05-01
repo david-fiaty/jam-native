@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from 'react-native';
 import { BaseProps } from '@/constants/Types';
+import { Layout } from "@/constants/Layout";
 import TextView from './TextView';
 import EntityManager from "@/manager/EntityManager";
 import BoxView from "./BoxView";
 import ImageView from "./ImageView";
 import MediaManager from "@/manager/MediaManager";
-import { Layout } from "@/constants/Layout";
 import TagView from "./TagView";
 import i18n from "@/translation/i18n";
 import DividerView from "./DividerView";
+import StaticData from "@/constants/StaticData";
 
 type Props = BaseProps & {
   profileId: any;
@@ -66,7 +67,9 @@ const ProfileItemView = ({ profileId }: Props) => {
 
         <View style={styles.profileHeaderRight}>
           <TextView style={styles.profileTitle}>{profileItem?.profile_name}</TextView>
-          <TextView>{profileItem?.profile_type}</TextView>
+          <TextView style={styles.profileType}>
+            {(StaticData.profileTypes.find((o: any) => o.id === profileItem?.profile_type))?.label}
+          </TextView>
         </View>
       </BoxView>
 
@@ -105,7 +108,7 @@ const styles = StyleSheet.create({
     width: profileImageSize,
   },
   profileHeaderRight: {
-    paddingHorizontal: Layout.space.base*1.5,
+    paddingHorizontal: Layout.space.base*1,
     paddingTop: Layout.space.base*2, // Todo - Vertical align middle
     flex: 1,
     height: '100%',
@@ -118,6 +121,10 @@ const styles = StyleSheet.create({
   profileTitle: {
     fontWeight: 'bold',
     fontSize: 15,
+  },
+  profileType: {
+    fontSize: 13,
+    paddingTop: 2,
   },
   sectionTitle: {
     fontWeight: 'bold',
