@@ -40,6 +40,7 @@ const ProfileItemView = ({ profileId }: Props) => {
         resizeMode="cover"
         width={100}
         height={100}
+        style={styles.profileImage}
       />
     </BoxView>
   );
@@ -50,6 +51,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     flex: 1,
     width: '100%',
+  },
+  profileImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 100,
   },
 });
 
