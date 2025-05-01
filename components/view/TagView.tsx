@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
     borderRadius: Layout.radius.round,
     paddingVertical: Layout.space.base/2.5,
     paddingHorizontal: Layout.space.base/1.5,
-    alignSelf: 'flex-start',
   },
 });
 
