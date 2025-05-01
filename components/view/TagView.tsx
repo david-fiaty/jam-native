@@ -32,9 +32,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.secondary,
     borderRadius: Layout.radius.round,
-    paddingVertical: Layout.space.base/2,
-    paddingHorizontal: Layout.space.base/1.2,
-    alignSelf: 'flex-start',
+    paddingVertical: Layout.space.base/2.5,
+    paddingHorizontal: Layout.space.base/1.5,
   },
 });
 

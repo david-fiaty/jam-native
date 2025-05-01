@@ -8,6 +8,7 @@ import ImageView from "./ImageView";
 import MediaManager from "@/manager/MediaManager";
 import { Layout } from "@/constants/Layout";
 import TagView from "./TagView";
+import i18n from "@/translation/i18n";
 
 type Props = BaseProps & {
   profileId: any;
@@ -66,10 +67,12 @@ const ProfileItemView = ({ profileId }: Props) => {
         </View>
       </BoxView>
 
+      <TextView style={styles.sectionTitle}>{i18n.t('Sectors')}</TextView>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileSectors}>
         {renderProfileSectors(profileItem?.sectors)}
       </BoxView>
 
+      <TextView style={styles.sectionTitle}>{i18n.t('Description')}</TextView>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileDescription}>
         <TextView>{profileItem?.profile_description}</TextView>
       </BoxView>
@@ -109,6 +112,11 @@ const styles = StyleSheet.create({
   profileTitle: {
     fontWeight: 'bold',
     fontSize: 16,
+  },
+  sectionTitle: {
+    fontWeight: 'bold',
+    fontSize: 14,
+    marginTop: Layout.space.base,
   },
   profileSectors: {
     width: '100%',
