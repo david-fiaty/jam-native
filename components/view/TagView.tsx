@@ -15,7 +15,7 @@ type Props = BaseProps & {
 const TagView = ({ onDeleteButtonPress, canEdit, children}: Props) => {
   return (
     <BoxView direction="row" align="center" justify="between" style={styles.container}>
-      <TextView>
+      <TextView style={styles.text}>
         {children}
       </TextView>
 
@@ -33,7 +33,10 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.secondary,
     borderRadius: Layout.radius.round,
     paddingVertical: Layout.space.base/2.5,
-    paddingHorizontal: Layout.space.base/1.5,
+    paddingHorizontal: Layout.space.base/2,
+  },
+  text: {
+    fontSize: 12.5,
   },
 });
 
