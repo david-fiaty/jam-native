@@ -80,6 +80,7 @@ const ProfileItemView = ({ profileId }: Props) => {
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileJams}>
         <ProfileJamsList 
           idArray={[18, 20, 32, 33, 37]} 
+          
           //onAddButtonPress={() => ScreenManager.toggleModal("JamForm")}
         />   
 
