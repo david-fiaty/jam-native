@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     borderRadius: Layout.radius.round,
     paddingVertical: Layout.space.base/2.5,
     paddingHorizontal: Layout.space.base/2,
+    alignSelf: 'flex-start',
   },
   text: {
     fontSize: 12.5,

@@ -11,6 +11,7 @@ import TagView from "./TagView";
 import i18n from "@/translation/i18n";
 import DividerView from "./DividerView";
 import StaticData from "@/constants/StaticData";
+import ProfileJamsList from "../list/ProfileJamsList";
 
 type Props = BaseProps & {
   profileId: any;
@@ -70,14 +71,27 @@ const ProfileItemView = ({ profileId }: Props) => {
           <TextView style={styles.profileType}>
             {(StaticData.profileTypes.find((o: any) => o.id === profileItem?.profile_type))?.label}
           </TextView>
+          {renderProfileSectors(profileItem?.sectors)[0]}
         </View>
       </BoxView>
 
       <DividerView />
 
+      <TextView style={styles.sectionTitle}>{i18n.t('Jams')}</TextView>
+      <BoxView direction="row" align="center" justify="flex-start" style={styles.profileJams}>
+        <ProfileJamsList 
+          idArray={[18, 20, 32, 33, 37]} 
+          // Todo - Remove this when sub routing working, or implement
+          onListItemPress={(row: any) => console.log(row)}
+          
+          //onAddButtonPress={() => ScreenManager.toggleModal("JamForm")}
+        />   
+
+      </BoxView>
+
       <TextView style={styles.sectionTitle}>{i18n.t('Country')}</TextView>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileDescription}>
-      <TextView>{profileItem?.scope_country_code ? profileItem.scope_country_code : i18n.t('Unavailable')}</TextView>
+        <TextView>{profileItem?.scope_country_code ? profileItem.scope_country_code : i18n.t('Unavailable')}</TextView>
       </BoxView>
 
       <TextView style={styles.sectionTitle}>{i18n.t('Description')}</TextView>
@@ -109,7 +123,7 @@ const styles = StyleSheet.create({
   },
   profileHeaderRight: {
     paddingHorizontal: Layout.space.base*1,
-    paddingTop: Layout.space.base*2, // Todo - Vertical align middle
+    paddingTop: Layout.space.base*1.2, // Todo - Vertical align middle
     flex: 1,
     height: '100%',
   },
@@ -125,11 +139,15 @@ const styles = StyleSheet.create({
   profileType: {
     fontSize: 13,
     paddingTop: 2,
+    paddingBottom: 4,
   },
   sectionTitle: {
     fontWeight: 'bold',
     fontSize: 13,
     marginTop: Layout.space.base/1.5,
+  },
+  profileJams: {
+    width: '100%',
   },
   profileSectors: {
     width: '100%',
