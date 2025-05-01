@@ -80,6 +80,8 @@ const ProfileItemView = ({ profileId }: Props) => {
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileJams}>
         <ProfileJamsList 
           idArray={[18, 20, 32, 33, 37]} 
+          // Todo - Remove this when sub routing working, or implement
+          onListItemPress={(row: any) => console.log(row)}
           
           //onAddButtonPress={() => ScreenManager.toggleModal("JamForm")}
         />   
