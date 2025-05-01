@@ -74,6 +74,7 @@ const CountriesField = ({ resource, field, label, onPressEvent, onDeleteEvent }:
             return (
               <TagView
                 key={item.id}
+                canEdit={true}
                 onDeleteButtonPress={() => deleteItem(item)}  
               >
                 {item?.name}
