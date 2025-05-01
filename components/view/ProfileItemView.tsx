@@ -4,6 +4,8 @@ import { BaseProps } from '@/constants/Types';
 import TextView from './TextView';
 import EntityManager from "@/manager/EntityManager";
 import BoxView from "./BoxView";
+import ImageView from "./ImageView";
+import MediaManager from "@/manager/MediaManager";
 
 type Props = BaseProps & {
   profileId: any;
@@ -28,6 +30,17 @@ const ProfileItemView = ({ profileId }: Props) => {
   return (
     <BoxView direction="column" align="flex-start" justify="flex-start" style={styles.container}>
       <TextView>{profileItem?.profile_type}</TextView>
+
+      <>{profileItem?.profile_picture?.url}</>
+
+      
+      <ImageView
+        uri={MediaManager.getImageUrl('/media/files/bb4669ed-8bb6-454b-a740-503ce42f935f.png')}
+        //uri={MediaManager.getImageUrl(profileItem?.profile_picture?.url)} // Todo - Enable this
+        resizeMode="cover"
+        width={100}
+        height={100}
+      />
     </BoxView>
   );
 };
