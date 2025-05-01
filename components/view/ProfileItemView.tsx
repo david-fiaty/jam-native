@@ -53,7 +53,13 @@ const ProfileItemView = ({ profileId }: Props) => {
   }, [isLoaded, profileId]);
 
   return (
-    <BoxView direction="column" align="flex-start" justify="flex-start" style={styles.container}>
+    <BoxView 
+      direction="column" 
+      align="flex-start" 
+      justify="flex-start" 
+      style={styles.container}
+      scroll={true}
+    >
       <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.profileHeader}>
         <View style={styles.profileHeaderLeft}>
           <ImageView
