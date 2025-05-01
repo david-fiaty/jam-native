@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from 'react-native';
 import { BaseProps } from '@/constants/Types';
+import { Layout } from "@/constants/Layout";
 import TextView from './TextView';
 import EntityManager from "@/manager/EntityManager";
 import BoxView from "./BoxView";
 import ImageView from "./ImageView";
 import MediaManager from "@/manager/MediaManager";
-import { Layout } from "@/constants/Layout";
 import TagView from "./TagView";
+import i18n from "@/translation/i18n";
+import DividerView from "./DividerView";
+import StaticData from "@/constants/StaticData";
 
 type Props = BaseProps & {
   profileId: any;
 };
+
+const profileImageSize: number = 90;
 
 const ProfileItemView = ({ profileId }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -54,64 +59,81 @@ const ProfileItemView = ({ profileId }: Props) => {
             uri={MediaManager.getImageUrl('/media/files/609b6904-41df-4fb4-9b14-e75d8697f444.jpg')}
             //uri={MediaManager.getImageUrl(profileItem?.profile_picture?.url)} // Todo - Enable this
             resizeMode="cover"
-            width={100}
-            height={100}
+            width={profileImageSize}
+            height={profileImageSize}
             style={styles.profileImage}
           />
         </View>
 
         <View style={styles.profileHeaderRight}>
           <TextView style={styles.profileTitle}>{profileItem?.profile_name}</TextView>
-          <TextView>{profileItem?.profile_type}</TextView>
+          <TextView style={styles.profileType}>
+            {(StaticData.profileTypes.find((o: any) => o.id === profileItem?.profile_type))?.label}
+          </TextView>
         </View>
       </BoxView>
 
-      <BoxView direction="row" align="center" justify="flex-start" style={styles.profileSectors}>
-        {renderProfileSectors(profileItem?.sectors)}
+      <DividerView />
+
+      <TextView style={styles.sectionTitle}>{i18n.t('Country')}</TextView>
+      <BoxView direction="row" align="center" justify="flex-start" style={styles.profileDescription}>
+      <TextView>{profileItem?.scope_country_code ? profileItem.scope_country_code : i18n.t('Unavailable')}</TextView>
       </BoxView>
 
+      <TextView style={styles.sectionTitle}>{i18n.t('Description')}</TextView>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileDescription}>
         <TextView>{profileItem?.profile_description}</TextView>
       </BoxView>
 
-      <TextView>{profileItem?.scope_country_code}</TextView>
+      <TextView style={styles.sectionTitle}>{i18n.t('Sectors')}</TextView>
+      <BoxView direction="row" align="center" justify="flex-start" style={styles.profileSectors}>
+        {renderProfileSectors(profileItem?.sectors)}
+      </BoxView>
+
     </BoxView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'red',
     flex: 1,
     width: '100%',
   },
   profileHeader: {
     width: '100%',
-    backgroundColor: 'black',
     gap: 0,
+    marginVertical: Layout.space.base/1.5,
   },
   profileHeaderLeft: {
-    backgroundColor: 'yellow',
-    width: 100,
+    width: profileImageSize,
   },
   profileHeaderRight: {
-    backgroundColor: 'green',
-    paddingHorizontal: Layout.space.base,
+    paddingHorizontal: Layout.space.base*1,
+    paddingTop: Layout.space.base*2, // Todo - Vertical align middle
     flex: 1,
     height: '100%',
   },
   profileImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 100,
-    alignSelf: 'flex-start',
+    width: profileImageSize,
+    height: profileImageSize,
+    borderRadius: profileImageSize,
   },
   profileTitle: {
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 15,
+  },
+  profileType: {
+    fontSize: 13,
+    paddingTop: 2,
+  },
+  sectionTitle: {
+    fontWeight: 'bold',
+    fontSize: 13,
+    marginTop: Layout.space.base/1.5,
   },
   profileSectors: {
     width: '100%',
+    flexWrap: 'wrap',
   },
   profileDescription: {
     width: '100%',
