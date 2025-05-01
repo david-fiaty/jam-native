@@ -70,7 +70,6 @@ const SectorsField = ({ resource, field, value, placeholder, onPress, onChangeVa
     }
 
     setCurrentValue(getSelectedSectors(selectedIds));
-
     onChangeValue(formData?.[field]);
   }
 
@@ -108,6 +107,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress, onChangeVa
             return (
               <TagView
                 key={item.id}
+                canEdit={true}
                 onDeleteButtonPress={() => deleteItem(item)}  
               >
                 {item?.name}
