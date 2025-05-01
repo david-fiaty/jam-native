@@ -9,6 +9,7 @@ import MediaManager from "@/manager/MediaManager";
 import { Layout } from "@/constants/Layout";
 import TagView from "./TagView";
 import i18n from "@/translation/i18n";
+import DividerView from "./DividerView";
 
 type Props = BaseProps & {
   profileId: any;
@@ -68,6 +69,8 @@ const ProfileItemView = ({ profileId }: Props) => {
           <TextView>{profileItem?.profile_type}</TextView>
         </View>
       </BoxView>
+
+      <DividerView />
 
       <TextView style={styles.sectionTitle}>{i18n.t('Country')}</TextView>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileDescription}>
