@@ -7,6 +7,7 @@ import BoxView from "./BoxView";
 import ImageView from "./ImageView";
 import MediaManager from "@/manager/MediaManager";
 import { Layout } from "@/constants/Layout";
+import TagView from "./TagView";
 
 type Props = BaseProps & {
   profileId: any;
@@ -15,18 +16,24 @@ type Props = BaseProps & {
 const ProfileItemView = ({ profileId }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [profileItem, setProfileItem] = useState<any>(null);
+  const [profileSectors, setProfileSectors] = useState<any>([]);
+
+  const getProfileSectors = async () => {
+    //setSectorsData(await EntityManager.getSectors());
+    return ['yo'];
+  };
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
+        setProfileSectors(await getProfileSectors());
         setProfileItem((await EntityManager.getProfiles({ items_ids: [profileId] }))?.[0]);
         setIsLoaded(true);
-      }  
+      }
     })();
   }, [isLoaded, profileId]);
 
-  
-  console.log(profileItem)
+  console.log(profileSectors);
 
   return (
     <BoxView direction="column" align="flex-start" justify="flex-start" style={styles.container}>
@@ -49,7 +56,13 @@ const ProfileItemView = ({ profileId }: Props) => {
       </BoxView>
 
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileSectors}>
-        <TextView>profile sectors ids</TextView>
+        <TextView>{JSON.stringify(profileItem?.sectors || {})}</TextView>
+        {profileItem?.sectors?.length > 0 && profileItem.sectors.map((id: any) => {
+          <TagView key={id}>
+            {id}
+          </TagView>
+        })}
+
       </BoxView>
 
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileDescription}>
