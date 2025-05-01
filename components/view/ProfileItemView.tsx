@@ -57,8 +57,8 @@ const ProfileItemView = ({ profileId }: Props) => {
       direction="column" 
       align="flex-start" 
       justify="flex-start" 
-      style={styles.container}
       scroll={true}
+      style={styles.container}
     >
       <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.profileHeader}>
         <View style={styles.profileHeaderLeft}>
@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
+    paddingBottom: Layout.space.base*2,
   },
   profileHeader: {
     width: '100%',
