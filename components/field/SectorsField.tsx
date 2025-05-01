@@ -70,7 +70,6 @@ const SectorsField = ({ resource, field, value, placeholder, onPress, onChangeVa
     }
 
     setCurrentValue(getSelectedSectors(selectedIds));
-
     onChangeValue(formData?.[field]);
   }
 
