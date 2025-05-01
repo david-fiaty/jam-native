@@ -1,23 +1,86 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useState, useEffect } from "react";
+import { StyleSheet, View } from 'react-native';
 import { BaseProps } from '@/constants/Types';
-import { Colors } from '@/constants/Colors';
-import { Layout } from '@/constants/Layout';
-import IconView from './IconView';
-import BoxView from './BoxView';
 import TextView from './TextView';
+import EntityManager from "@/manager/EntityManager";
+import BoxView from "./BoxView";
+import ImageView from "./ImageView";
+import MediaManager from "@/manager/MediaManager";
+import { Layout } from "@/constants/Layout";
 
 type Props = BaseProps & {
   profileId: any;
 };
 
 const ProfileItemView = ({ profileId }: Props) => {
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [profileItem, setProfileItem] = useState<any>(null);
+
+  useEffect(() => {
+    (async () => {
+      if (!isLoaded) {
+        setProfileItem((await EntityManager.getProfiles({ items_ids: [profileId] }))?.[0]);
+        setIsLoaded(true);
+      }  
+    })();
+  }, [isLoaded, profileId]);
+
+  
+  console.log(profileItem)
+
   return (
-    <TextView>{profileId}</TextView>
+    <BoxView direction="column" align="flex-start" justify="flex-start" style={styles.container}>
+      <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.profileHeader}>
+        <View style={styles.profileHeaderLeft}>
+          <ImageView
+            uri={MediaManager.getImageUrl('/media/files/609b6904-41df-4fb4-9b14-e75d8697f444.jpg')}
+            //uri={MediaManager.getImageUrl(profileItem?.profile_picture?.url)} // Todo - Enable this
+            resizeMode="cover"
+            width={100}
+            height={100}
+            style={styles.profileImage}
+          />
+        </View>
+
+        <View style={styles.profileHeaderRight}>
+          <TextView style={styles.profileTitle}>{profileItem?.profile_name}</TextView>
+          <TextView>{profileItem?.profile_type}</TextView>
+        </View>
+      </BoxView>
+    </BoxView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'red',
+    flex: 1,
+    width: '100%',
+  },
+  profileHeader: {
+    width: '100%',
+    backgroundColor: 'black',
+    gap: 0,
+  },
+  profileHeaderLeft: {
+    backgroundColor: 'yellow',
+    width: 100,
+  },
+  profileHeaderRight: {
+    backgroundColor: 'green',
+    paddingHorizontal: Layout.space.base,
+    flex: 1,
+    height: '100%',
+  },
+  profileImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 100,
+    alignSelf: 'flex-start',
+  },
+  profileTitle: {
+    fontWeight: 'bold',
+    fontSize: 16,
   },
 });
 
