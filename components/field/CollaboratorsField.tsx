@@ -62,6 +62,7 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress, onCh
               return (
                 <TagView
                   key={item.id}
+                  canEdit={true}
                   onDeleteButtonPress={() => deleteItem(item)}  
                 >
                   {item?.profile_name}
