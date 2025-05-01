@@ -1,16 +1,21 @@
 import { StyleSheet } from 'react-native';
 import { Layout } from '@/constants/Layout';
+import { Colors } from '@/constants/Colors';
 import BoxView from '@/components/view/BoxView';
 import IconView from '@/components/view/IconView';
 import TextView from '@/components/view/TextView';
 import ModalManager from '@/manager/ModalManager';
-import { Colors } from '@/constants/Colors';
 
 type Props = {
   currentModal: any;
+  visible?: boolean;
 };
 
-const ModalBackButton = ({ currentModal }: Props) => {
+const ModalBackButton = ({ currentModal, visible }: Props) => {
+  if (!visible === true) {
+    return <></>;
+  }
+
   return (
     <BoxView
       direction="row"

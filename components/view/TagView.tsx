@@ -8,18 +8,22 @@ import TextView from './TextView';
 
 type Props = BaseProps & {
   onDeleteButtonPress?: () => void;
+  canEdit?: boolean;
   children?: any;
 };
 
-const TagView = ({ onDeleteButtonPress, children}: Props) => {
+const TagView = ({ onDeleteButtonPress, canEdit, children}: Props) => {
   return (
     <BoxView direction="row" align="center" justify="between" style={styles.container}>
       <TextView>
         {children}
       </TextView>
-      <TouchableOpacity onPress={onDeleteButtonPress}>
-        <IconView name="delete" theme="secondary" size={12} />
-      </TouchableOpacity>
+
+      {canEdit === true && (
+        <TouchableOpacity onPress={onDeleteButtonPress}>
+          <IconView name="delete" theme="secondary" size={12} />
+        </TouchableOpacity>
+      )}
     </BoxView>
   );
 };

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
+import { setFormData } from "@/redux/slices/FormSlice";
 import ProfileImageField from "../field/ProfileImageField";
 import ButtonView from "../view/ButtonView";
 import i18n from "@/translation/i18n";
@@ -21,6 +22,7 @@ import FormManager from "@/manager/FormManager";
 const resource: string = 'profile';
 
 const ProfileForm = () => {
+  const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
@@ -52,12 +54,12 @@ const ProfileForm = () => {
       if (!isLoaded) {
         setProfileId(await UserManager.getProfileId());
 
-        FormManager.updateField(resource, null, {
+        dispatch(setFormData<any>({
           resource: resource,
           key: null,
           value: await UserManager.getProfileData(),
-        });
-      
+        }));
+
         setIsLoaded(true);
       }
     })();
