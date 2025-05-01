@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
   },
   profileHeaderRight: {
     paddingHorizontal: Layout.space.base,
+    paddingTop: Layout.space.base*2, // Todo - Vertical align middle
     flex: 1,
     height: '100%',
   },
