@@ -14,6 +14,8 @@ type Props = BaseProps & {
   profileId: any;
 };
 
+const profileImageSize: number = 90;
+
 const ProfileItemView = ({ profileId }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [profileItem, setProfileItem] = useState<any>(null);
@@ -55,8 +57,8 @@ const ProfileItemView = ({ profileId }: Props) => {
             uri={MediaManager.getImageUrl('/media/files/609b6904-41df-4fb4-9b14-e75d8697f444.jpg')}
             //uri={MediaManager.getImageUrl(profileItem?.profile_picture?.url)} // Todo - Enable this
             resizeMode="cover"
-            width={100}
-            height={100}
+            width={profileImageSize}
+            height={profileImageSize}
             style={styles.profileImage}
           />
         </View>
@@ -94,28 +96,29 @@ const styles = StyleSheet.create({
   profileHeader: {
     width: '100%',
     gap: 0,
+    marginVertical: Layout.space.base/1.5,
   },
   profileHeaderLeft: {
-    width: 100,
+    width: profileImageSize,
   },
   profileHeaderRight: {
-    paddingHorizontal: Layout.space.base,
+    paddingHorizontal: Layout.space.base*1.5,
+    paddingTop: Layout.space.base*2, // Todo - Vertical align middle
     flex: 1,
     height: '100%',
   },
   profileImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 100,
-    alignSelf: 'flex-start',
+    width: profileImageSize,
+    height: profileImageSize,
+    borderRadius: profileImageSize,
   },
   profileTitle: {
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 15,
   },
   sectionTitle: {
     fontWeight: 'bold',
-    fontSize: 14,
+    fontSize: 13,
     marginTop: Layout.space.base/1.5,
   },
   profileSectors: {
