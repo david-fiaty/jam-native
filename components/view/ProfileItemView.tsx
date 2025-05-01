@@ -67,14 +67,14 @@ const ProfileItemView = ({ profileId }: Props) => {
         </View>
       </BoxView>
 
-      <TextView style={styles.sectionTitle}>{i18n.t('Sectors')}</TextView>
-      <BoxView direction="row" align="center" justify="flex-start" style={styles.profileSectors}>
-        {renderProfileSectors(profileItem?.sectors)}
-      </BoxView>
-
       <TextView style={styles.sectionTitle}>{i18n.t('Description')}</TextView>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileDescription}>
         <TextView>{profileItem?.profile_description}</TextView>
+      </BoxView>
+
+      <TextView style={styles.sectionTitle}>{i18n.t('Sectors')}</TextView>
+      <BoxView direction="row" align="center" justify="flex-start" style={styles.profileSectors}>
+        {renderProfileSectors(profileItem?.sectors)}
       </BoxView>
 
       <TextView>{profileItem?.scope_country_code}</TextView>
