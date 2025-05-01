@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    paddingBottom: Layout.space.base*2,
+    paddingBottom: Layout.space.base*3,
   },
   profileHeader: {
     width: '100%',
