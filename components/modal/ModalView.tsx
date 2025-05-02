@@ -163,7 +163,7 @@ const ModalView = ({ currentSection, style }: Props) => {
   useEffect(() => {
     setCurrentModal(getActiveModal());
   }, [modalState]);
-
+  
   return (
     <Modal
       coverScreen={false}
