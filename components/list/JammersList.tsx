@@ -41,7 +41,7 @@ const JammersList = ({ jamId }: Props) => {
                 row={row}  
                 onListItemPress={(o: any) => router.push({
                   pathname: '/profile-item',
-                  params:  { profileId: row?.item?.id, title: row?.item?.title },
+                  params:  { profileId: o?.item?.id, title: o?.item?.title },
                 })}  
               />
             )}
