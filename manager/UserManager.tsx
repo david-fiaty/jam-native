@@ -9,6 +9,8 @@ import DataManager from './DataManager';
 import * as Location from 'expo-location';
 import * as Device from "expo-device";
 import i18n from '@/translation/i18n';
+import { setActiveModals } from '@/redux/slices/ModalSlice';
+import { setActiveSections } from '@/redux/slices/SectionSlice';
 
 class UserManager {
   async sendSignupCode(data: any) {
@@ -52,7 +54,8 @@ class UserManager {
 
   logout() {
     SessionManager.setTokenData({});
-    // Todo - Also reset active screen to avoid redirect on relogin
+    Store.dispatch(setActiveModals([]));
+    Store.dispatch(setActiveSections([]));
   }
 
   async getUserData() { 
