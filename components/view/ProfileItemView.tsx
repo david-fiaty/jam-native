@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from 'react-native';
+import { useRouter } from "expo-router";
 import { BaseProps } from '@/constants/Types';
 import { Layout } from "@/constants/Layout";
 import TextView from './TextView';
@@ -21,6 +22,7 @@ type Props = BaseProps & {
 const profileImageSize: number = 100;
 
 const ProfileItemView = ({ profileId }: Props) => {
+  const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [profileItem, setProfileItem] = useState<any>(null);
   const [sectorsData, setSectorsData] = useState<any>([]);
@@ -86,10 +88,11 @@ const ProfileItemView = ({ profileId }: Props) => {
       <TextView style={styles.sectionTitle}>{i18n.t('Jams')} ({profileItem?.number_of_jams || 0})</TextView>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileJams}>
         <ProfileJamsList 
-          idArray={[18, 20, 32, 33, 37]} 
-          // Todo - Remove this when sub routing working, or implement modal toggle
-          onListItemPress={(row: any) => console.log('Profile jam click event --->', row)}
-          //onAddButtonPress={() => ScreenManager.toggleModal("JamForm")}
+          idArray={[18, 20, 32, 33, 37]} // Todo - Remove test when item request adjusted
+          onListItemPress={(row: any) => router.push({
+            pathname: '/jam-item',
+            params:  { jamId: row?.item?.id, title: row?.item?.title },
+          })}
         />   
 
       </BoxView>
