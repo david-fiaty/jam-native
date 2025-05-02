@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { View } from "react-native";
+import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
@@ -14,6 +15,7 @@ type Props = {
 };
 
 const JammersList = ({ jamId }: Props) => {
+  const router = useRouter();
   const [profiles, setProfiles] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
@@ -34,7 +36,15 @@ const JammersList = ({ jamId }: Props) => {
         {profiles?.length > 0 &&
           <ListView
             data={profiles}
-            renderItem={(row: any) => <ProfileListItem item={row.item} />}
+            renderItem={(row: any) => (
+              <ProfileListItem 
+                row={row}  
+                onListItemPress={(o: any) => router.push({
+                  pathname: '/profile-item',
+                  params:  { profileId: row?.item?.id, title: row?.item?.title },
+                })}  
+              />
+            )}
           />
         }
 
