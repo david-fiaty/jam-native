@@ -28,7 +28,12 @@ class SectionManager {
       Store.dispatch(setActiveSections(activeSections));
     }
       
-    router.dismissTo(`/${activeSections[previousSectionIndex]}`);
+    if (activeSections[previousSectionIndex]?.length > 0) {
+      router.dismissTo(`/${activeSections[previousSectionIndex]}`);
+    }
+    else {
+      router.dismissTo('/');
+    }
   }
 
   getSection(sectionId: any, renderer: boolean = true) {

@@ -12,7 +12,7 @@ https://expo.dev/preview/update?message=Update%20ApiManager.tsx&updateRuntimeVer
 eas init --id "bc105b9c-d776-42e2-bd2e-2ebcff179748"
 
 # Build expo
-eas update --branch dev-factoring-5
+eas update --branch dev-factoring-6
 eas update --branch dev-features-12 --platform ios
 eas update --branch dev-features-12 --platform android
 
@@ -49,7 +49,6 @@ Id: 62 / test888@yopmail.com / Test@12345678
 id: 3 / mitsiomotu@yopmail.com / Password1234
 hophoet@gmail.com / Password1234
 
-
 # Mobile server
 /home/mitsio/mobile/
 ssh root@207.180.209.247
@@ -68,8 +67,9 @@ rm -rf !("folder_to_keep")
 # Google Maps Issues
 https://github.com/react-native-maps/react-native-maps/discussions/4741#discussioncomment-12582128
 
-
-
+# Latest fixes:
+- Gestion logout
+- Gestion phone back button
 
 "scripts": {
   "dev": "npm start --tunnel",
