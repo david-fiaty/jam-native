@@ -26,7 +26,9 @@ const ModalView = ({ currentSection, style }: Props) => {
   const modalState: any = useSelector((state: any) => state.modal);
 
   const canShowModal = () => {
-    return currentModal !== null && currentModal?.sectionId === currentSection?.id;
+    return currentModal !== null 
+      && currentModal?.visible === true
+      && currentModal?.sectionId === currentSection?.id;
   };
 
   const renderBackButton = () => {
@@ -147,6 +149,7 @@ const ModalView = ({ currentSection, style }: Props) => {
           showBackButton: true,
           params: {},
           sectionId: null,
+          visible: false,
           effect: {
             in: 'slideInUp', 
             out: 'slideOutDown',
@@ -160,6 +163,9 @@ const ModalView = ({ currentSection, style }: Props) => {
   useEffect(() => {
     setCurrentModal(getActiveModal());
   }, [modalState]);
+
+  console.log('-----');
+  console.log(currentModal);
 
   return (
     <Modal
