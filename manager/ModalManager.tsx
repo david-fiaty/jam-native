@@ -20,7 +20,6 @@ class ModalManager {
         id: modalId,
         params: params,
         sectionId: sectionId,
-        visible: true,
       });
     }
 
