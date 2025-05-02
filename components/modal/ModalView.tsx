@@ -164,9 +164,6 @@ const ModalView = ({ currentSection, style }: Props) => {
     setCurrentModal(getActiveModal());
   }, [modalState]);
 
-  console.log('-----');
-  console.log(currentModal);
-
   return (
     <Modal
       coverScreen={false}

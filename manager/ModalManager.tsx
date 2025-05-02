@@ -14,9 +14,6 @@ class ModalManager {
 
     if (activeModals.length > 0 && activeModals[activeModals.length - 1].id === modalId) {
       activeModals.pop();
-      if (activeModals.length > 0) {
-        activeModals[activeModals.length - 1].visible = true;
-      }
     } 
     else {
       activeModals.push({
@@ -25,10 +22,6 @@ class ModalManager {
         sectionId: sectionId,
         visible: true,
       });
-
-      if (activeModals.length > 1) {
-        activeModals[activeModals.length - 2].visible = false;
-      }
     }
 
     Store.dispatch(setActiveModals(activeModals));
