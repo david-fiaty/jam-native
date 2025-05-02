@@ -14,11 +14,6 @@ class ModalManager {
 
     if (activeModals.length > 0 && activeModals[activeModals.length - 1].id === modalId) {
       activeModals.pop();
-      if (activeModals.length > 0) {
-        let lastModal: any = [...activeModals[activeModals.length - 1]];
-        lastModal.visible = true;
-        activeModals[activeModals.length - 1] = lastModal;
-      }
     } 
     else {
       activeModals.push({
@@ -27,12 +22,6 @@ class ModalManager {
         sectionId: sectionId,
         visible: true,
       });
-
-      if (activeModals.length > 1) {
-        let beforeLastModal: any = [...activeModals[activeModals.length - 2]];
-        beforeLastModal.visible = false;
-        activeModals[activeModals.length - 2] = beforeLastModal;
-      }
     }
 
     Store.dispatch(setActiveModals(activeModals));
