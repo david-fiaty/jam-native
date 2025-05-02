@@ -15,7 +15,9 @@ class ModalManager {
     if (activeModals.length > 0 && activeModals[activeModals.length - 1].id === modalId) {
       activeModals.pop();
       if (activeModals.length > 0) {
-        activeModals[activeModals.length - 1].visible = true;
+        let lastModal: any = [...activeModals[activeModals.length - 1]];
+        lastModal.visible = true;
+        activeModals[activeModals.length - 1] = lastModal;
       }
     } 
     else {
@@ -27,7 +29,9 @@ class ModalManager {
       });
 
       if (activeModals.length > 1) {
-        activeModals[activeModals.length - 2].visible = false;
+        let beforeLastModal: any = [...activeModals[activeModals.length - 2]];
+        beforeLastModal.visible = false;
+        activeModals[activeModals.length - 2] = beforeLastModal;
       }
     }
 
