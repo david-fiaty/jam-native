@@ -26,7 +26,7 @@ const ProfileListItem = ({ row, selected, onListItemPress }: Props) => {
       <BoxView direction="row" align="center" justify="flex-start" style={styles.container}>
         <IconView 
           name="user" 
-          theme="tertiary" 
+          theme="secondary" 
           size={16}
           padding={6}
         />
