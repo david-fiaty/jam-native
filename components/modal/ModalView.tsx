@@ -25,6 +25,14 @@ const ModalView = ({ currentSection, style }: Props) => {
   const [currentModal, setCurrentModal] = useState<any>(null);
   const modalState: any = useSelector((state: any) => state.modal);
 
+  const isLastModal = (modalId: string) => {
+    let activeModals: any[] = modalState.active;
+    let modalIndex: number = activeModals.findIndex((o: any) => o.id === modalId);
+
+    console.log('isLastModal', modalIndex === activeModals.length - 1)
+    return modalIndex === activeModals.length - 1;
+  }
+
   const canShowModal = () => {
     return currentModal !== null && currentModal?.sectionId === currentSection?.id;
   };
