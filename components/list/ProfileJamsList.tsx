@@ -19,11 +19,12 @@ type Props = {
   isAddable?: boolean;
   isDeletable?: boolean;
   multiSelect?: boolean;
+  emptyMessage?: any;
   onAddButtonPress?: () => void,
   onListItemPress?: (row: any) => void;
 };
 
-const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDeletable, multiSelect, onAddButtonPress, onListItemPress }: Props) => {
+const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDeletable, multiSelect, emptyMessage, onAddButtonPress, onListItemPress }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const [profileJams, setProfileJams] = useState<any>([]);
@@ -81,8 +82,6 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
     })();
   }, [isLoaded, idArray, addButton]);
 
-  if (!isLoaded) return <SpinnerView />;
-
   return (
     <View style={styles.container}>
       <BoxView direction="row" align="center" justify="space-between">
@@ -101,6 +100,8 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
           </TouchableOpacity> 
         )}
       </BoxView>
+
+      {isLoaded && !idArray?.length && emptyMessage && <TextView>{emptyMessage}</TextView>}
 
       {profileJams?.length > 0 && (
         <ListView

@@ -12,8 +12,6 @@ import SearchJamsList from "../list/SearchJamsList";
 import SearchProfilesList from "../list/SearchProfilesList";
 import SearchProjectsList from "../list/SearchProjectsList";
 
-const defaultTab: string = 'jam';
-
 const SearchView = () => {
   const [activeTab, setActiveTab] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -41,7 +39,6 @@ const SearchView = () => {
   useEffect(() => {
     (async () => {
       setSearchData(await SearchManager.getResults());
-      setActiveTab(searchState.activeTab || defaultTab)
     })();
 
     if (!activeTab) setActiveTab(StaticData.searchTabs[0].id);
@@ -49,7 +46,7 @@ const SearchView = () => {
     if (!isLoaded) {
       setIsLoaded(true);
     }
-  }, [isLoaded, searchState, defaultTab]);
+  }, [isLoaded, searchState]);
 
   return (
     <>

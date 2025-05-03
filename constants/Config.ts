@@ -25,10 +25,10 @@ export const Config: any = {
   forceLogin: {
     enabled: true,
     credentials: {
-      //email: 'mitsiomotu@yopmail.com',
-      //password: 'Password1234',
-      email: 'zomi3@yopmail.com',
-      password: 'Zomi3',
+      email: 'mitsiomotu@yopmail.com',
+      password: 'Password1234',
+      //email: 'zomi3@yopmail.com',
+      //password: 'Zomi3',
     },
   },
 };
