@@ -23,6 +23,7 @@ const SectionView = () => {
   const sectionState: any = useSelector((state: any) => state.section);
   const modalState: any = useSelector((state: any) => state.modal);
   const sectionId: any = path.split('/').pop();
+
   const activeSections: any = sectionState.active.includes(sectionId) ? sectionState.active : [...sectionState.active, sectionId];
 
   const isModalTitleVisible = () => {
