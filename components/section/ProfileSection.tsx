@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
+import { setFormData } from "@/redux/slices/FormSlice";
 import ProfileForm from "../form/ProfileForm";
 import BoxView from "../view/BoxView";
 import ProfileProjectsList from "../list/ProfileProjectsList";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import ProfileJamsList from "../list/ProfileJamsList";
+import TextView from "../view/TextView";
 
 const resource: string = 'profile';
 
 const ProfileSection = () => {
+  const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
   const formData = useSelector((state: any) => state.form?.[resource]);
@@ -19,10 +22,17 @@ const ProfileSection = () => {
     (async () => {
       if (!isLoaded) {
         setProfileId(await UserManager.getProfileId());
+
+        dispatch(setFormData<any>({
+          resource: resource,
+          key: null,
+          value: await UserManager.getProfileData(),
+        }));
+
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, formData]);
+  }, [isLoaded]);
 
   return (
     <BoxView
@@ -87,7 +97,7 @@ const ProfileSection = () => {
           idArray={formData?.liked_jams}
         />
       )}
-      
+
     </BoxView>
   );
 };
