@@ -61,21 +61,8 @@ const ProfileSection = () => {
       }}
       */
       />
+      <DividerView />
 
-      <ProfileProjectsList
-        title={i18n.t("Saved Projects")}
-        allButton={formData?.saved_projects?.length > 0}
-        emptyMessage={i18n.t('There are no saved projects.')}
-        idArray={formData?.saved_projects || []}
-      />
-    
-      <ProfileProjectsList
-        title={i18n.t("Liked Projects")}
-        allButton={formData?.liked_projects?.length > 0}
-        emptyMessage={i18n.t('There are no liked proects.')}
-        idArray={formData?.liked_projects || []}
-      />
-  
       <ProfileJamsList
         title={i18n.t("Your Jams")}
         allButton={formData?.profile_jams?.length > 0}
@@ -83,22 +70,38 @@ const ProfileSection = () => {
         idArray={formData?.profile_jams}
       //onAddButtonPress={() => ScreenManager.toggleModal("JamForm")}
       />
+      <DividerView />
 
-      {formData?.saved_jams?.length > 0 && (
-        <ProfileJamsList
-          title={i18n.t("Saved Jams")}
-          allButton={formData?.saved_jams?.length > 0}
-          idArray={formData?.saved_jams}
-        />
-      )}
+      <ProfileProjectsList
+        title={i18n.t("Saved Projects")}
+        allButton={formData?.saved_projects?.length > 0}
+        emptyMessage={i18n.t('There are no saved projects.')}
+        idArray={formData?.saved_projects || []}
+      />
+      <DividerView />
+    
+      <ProfileProjectsList
+        title={i18n.t("Liked Projects")}
+        allButton={formData?.liked_projects?.length > 0}
+        emptyMessage={i18n.t('There are no liked proects.')}
+        idArray={formData?.liked_projects || []}
+      />
+      <DividerView />
 
-      {formData?.liked_jams?.length > 0 && (
-        <ProfileJamsList
-          title={i18n.t("Liked Jams")}
-          allButton={formData?.liked_jams?.length > 0}
-          idArray={formData?.liked_jams}
-        />
-      )}
+      <ProfileJamsList
+        title={i18n.t("Saved Jams")}
+        allButton={formData?.saved_jams?.length > 0}
+        idArray={formData?.saved_jams || []}
+        emptyMessage={i18n.t('There are no saved Jams.')}
+      />
+      <DividerView />
+  
+      <ProfileJamsList
+        title={i18n.t("Liked Jams")}
+        allButton={formData?.liked_jams?.length > 0}
+        idArray={formData?.liked_jams || []}
+        emptyMessage={i18n.t('There are no liked Jams.')}
+      />
 
     </BoxView>
   );
