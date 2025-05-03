@@ -46,7 +46,7 @@ const ProfileSection = () => {
     >
       <ProfileHeaderView profileItem={formData} />
       <DividerView />
-      
+
       <ProfileProjectsList
         title={i18n.t("Your Projects")}
         addButton={true}
@@ -62,13 +62,12 @@ const ProfileSection = () => {
       */
       />
 
-      {formData?.saved_projects?.length > 0 && (
-        <ProfileProjectsList
-          title={i18n.t("Saved Projects")}
-          allButton={formData?.saved_projects?.length > 0}
-          idArray={formData?.saved_projects}
-        />
-      )}
+      <ProfileProjectsList
+        title={i18n.t("Saved Projects")}
+        allButton={formData?.saved_projects?.length > 0}
+        idArray={formData?.saved_projects}
+      />
+    
 
       {formData?.liked_projects?.length > 0 && (
         <ProfileProjectsList
