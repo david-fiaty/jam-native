@@ -20,10 +20,18 @@ const SectionView = () => {
   const params = useLocalSearchParams();
   const dispatch = useDispatch();
   const [currentSection, setCurrentSection] = useState<any>(null);
+  const [sectionStack, setSectionStack] = useState<any[]>([]);
   const sectionState: any = useSelector((state: any) => state.section);
   const modalState: any = useSelector((state: any) => state.modal);
   const sectionId: any = path.split('/').pop();
-  const activeSections: any = sectionState.active.includes(sectionId) ? sectionState.active : [...sectionState.active, sectionId];
+
+  const getSectionStack = () => {
+    if (sectionState.active.includes(sectionId)) {
+      return sectionState.active;
+    }
+    
+    return [...sectionState.active, sectionId];
+  };
 
   const isModalTitleVisible = () => {
     return modalState.active.length > 0 && modalState[modalState.active.length -1]?.showTitle === true;
@@ -37,10 +45,9 @@ const SectionView = () => {
 
   useEffect(() => {
     setCurrentSection(SectionManager.getSection(sectionId || Config.defaultSection));
-    dispatch(setActiveSections(activeSections));
-  }, [sectionId, activeSections]);
-
-  console.log(activeSections)
+    setSectionStack(getSectionStack());
+    dispatch(setActiveSections(getSectionStack()));
+  }, [sectionId]);
 
   return (
     <>
