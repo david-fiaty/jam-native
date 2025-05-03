@@ -9,6 +9,7 @@ import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import ProfileJamsList from "../list/ProfileJamsList";
 import TextView from "../view/TextView";
+import ProfileHeaderView from "../view/ProfileHeaderView";
 
 const resource: string = 'profile';
 
@@ -42,6 +43,7 @@ const ProfileSection = () => {
       style={Layout.screenContent}
       scroll={true}
     >
+      <ProfileHeaderView profileItem={formData} />
 
       <ProfileProjectsList
         title={i18n.t("Your Projects")}
