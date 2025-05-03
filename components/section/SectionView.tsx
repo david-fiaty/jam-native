@@ -26,20 +26,10 @@ const SectionView = () => {
   const sectionId: any = path.split('/').pop();
 
   const getSectionStack = () => {
-    /*
-    if (sectionState.active.find((o: any) => o.id === sectionId)) {
-      return sectionState.active;
-    }
-    else {
-      return [...sectionState.active, SectionManager.getSection(sectionId, false)];
-    }
-    */
-
-
     if (sectionState.active.includes(sectionId)) {
       return sectionState.active;
     }
-
+    
     return [...sectionState.active, sectionId];
   };
 
