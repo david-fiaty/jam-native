@@ -59,8 +59,8 @@ const SectionView = () => {
     dispatch(setActiveSections(activeSections));
   }, [sectionId]);
 
-  console.log('----------------------------------------');
-  console.log(sectionStack)
+  //console.log('----------------------------------------');
+  //console.log(sectionStack)
 
 
   return (
