@@ -20,10 +20,27 @@ const SectionView = () => {
   const params = useLocalSearchParams();
   const dispatch = useDispatch();
   const [currentSection, setCurrentSection] = useState<any>(null);
+  const [sectionStack, setSectionStack] = useState<any[]>([]);
   const sectionState: any = useSelector((state: any) => state.section);
   const modalState: any = useSelector((state: any) => state.modal);
   const sectionId: any = path.split('/').pop();
-  const activeSections: any = sectionState.active.includes(sectionId) ? sectionState.active : [...sectionState.active, sectionId];
+
+  const getSectionStack = () => {
+    let section: any = SectionManager.getSection(sectionId, false);
+    let isStacked: any = sectionState.active.find((o: any) => o.id === sectionId);
+    
+    if (section && isStacked) {
+      return sectionState.active;
+    }
+    else if (section) {
+      return [...sectionState.active, {
+        ...section,
+        ...{ params: params },
+      }];
+    }
+
+    return [];
+  };
 
   const isModalTitleVisible = () => {
     return modalState.active.length > 0 && modalState[modalState.active.length -1]?.showTitle === true;
@@ -31,21 +48,25 @@ const SectionView = () => {
 
   const showBackButton = () => {
     return currentSection?.showTitle === true 
-    && currentSection?.showBackButton === true 
-    && (!modalState.active.length || !isModalTitleVisible());
+      && currentSection?.showBackButton === true 
+      && (!modalState.active.length || !isModalTitleVisible());
   };
 
   useEffect(() => {
+    let activeSections: any [] = getSectionStack();
     setCurrentSection(SectionManager.getSection(sectionId || Config.defaultSection));
+    setSectionStack(activeSections);
     dispatch(setActiveSections(activeSections));
-  }, [sectionId, activeSections]);
+  }, [sectionId]);
+
+  //console.log('----------------------------------------');
+  //console.log(sectionStack)
+
 
   return (
     <>
       <MessageView />
-      
       {currentSection?.showHeader === true && <SectionHeader style={styles.header} />}
-
       {showBackButton() === true && <SectionBackButton currentSection={currentSection} />}
 
       <BoxView
@@ -54,7 +75,7 @@ const SectionView = () => {
         justify="center"
         style={styles.container}
       >
-        {currentSection?.render(params)}
+        {currentSection?.render(currentSection?.params || {})}
   
         <ModalView currentSection={currentSection} style={styles.modal} />
       </BoxView>
