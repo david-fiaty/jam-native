@@ -83,18 +83,21 @@ class SectionManager {
         id: 'about',
         title: i18n.t('About'),
         showFooter: false,
+        backButtonRoute: '/',
         render: (params: any) => <AboutSection {...params} />,
       },
       {
         id: 'legal',
         title: i18n.t('Legal'),
         showFooter: false,
+        backButtonRoute: '/',
         render: (params: any) => <LegalSection {...params} />,
       },
       {
         id: 'privacy',
         title: i18n.t('Privacy'),
         showFooter: false,
+        backButtonRoute: '/',
         render: (params: any) => <PrivacySection {...params} />,
       },
       {
@@ -143,6 +146,8 @@ class SectionManager {
           showHeader: true,
           showFooter: true,
           showBackButton: true,
+          backButtonRoute: null,
+          params: {},
         },
         ...o,
       };

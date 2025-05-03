@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     gap: Layout.space.base*2,
     marginTop: Layout.space.base,
+    marginBottom: Layout.space.base*2,
   },
   disabled: {
     color: Colors.secondary,
