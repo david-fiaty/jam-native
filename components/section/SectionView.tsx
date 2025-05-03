@@ -59,12 +59,14 @@ const SectionView = () => {
     dispatch(setActiveSections(activeSections));
   }, [sectionId]);
 
+  console.log('----------------------------------------');
+  console.log(sectionStack)
+
+
   return (
     <>
       <MessageView />
-      
       {currentSection?.showHeader === true && <SectionHeader style={styles.header} />}
-
       {showBackButton() === true && <SectionBackButton currentSection={currentSection} />}
 
       <BoxView
