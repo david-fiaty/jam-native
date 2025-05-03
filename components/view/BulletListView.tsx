@@ -11,7 +11,7 @@ const bulletSize: number = 5.5;
 
 const BulletListView = ({ data }: Props) => {
   return (
-    <View>
+    <View style={styles.container}>
       {data.map((row: any) => (
         <BoxView direction="row" align="center" justify="fleex-start">
           <View style={styles.bullet}></View>
@@ -23,6 +23,10 @@ const BulletListView = ({ data }: Props) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    margin: 0,
+    padding: 0,
+  },
   bullet: {
     width: bulletSize,
     height: bulletSize,
