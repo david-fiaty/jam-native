@@ -53,11 +53,12 @@ const SectionView = () => {
   };
 
   useEffect(() => {
+    let activeSections: any [] = getSectionStack();
     setCurrentSection(SectionManager.getSection(sectionId || Config.defaultSection));
-    setSectionStack(getSectionStack());
-    dispatch(setActiveSections(getSectionStack()));
+    setSectionStack(activeSections);
+    dispatch(setActiveSections(activeSections));
   }, [sectionId]);
-  
+
   return (
     <>
       <MessageView />
