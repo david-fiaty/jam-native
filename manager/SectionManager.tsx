@@ -24,12 +24,24 @@ class SectionManager {
 
     if (activeSections.length > 0) {
       let previousSection: any = activeSections[activeSections.length - 1];
-      if (previousSection.backButtonRoute !== null) router.dismissTo(`/${previousSection.backButtonRoute}`)
-      else router.dismissTo(`/${previousSection.id}`);
+      if (previousSection.backButtonRoute !== null) {
+        router.dismissTo(this.getPreviousRoute(previousSection));
+      }
+      else if (previousSection?.id) {
+        router.dismissTo(`/${previousSection.id}`);
+      }
+      else {
+        router.dismissTo('/');
+      } 
     }
     else {
+      console.log('d');
       router.dismissTo('/');
     }
+  }
+
+  getPreviousRoute(section: any) {
+    return section.backButtonRoute === '/' ? '/' : `/${section.backButtonRoute}`;
   }
 
   getSection(sectionId: any, renderer: boolean = true) {
