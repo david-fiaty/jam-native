@@ -101,7 +101,9 @@ const ProfileProjectsList = ({
     })();
   }, [isLoaded, idArray, addButton, projectsImages]);
 
-  if (!isLoaded) return <SpinnerView />;
+  if (isLoaded && !idArray?.length) {
+    return <TextView>No data</TextView>
+  }
 
   return (
     <View style={styles.container}>
