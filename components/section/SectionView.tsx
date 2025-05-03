@@ -57,8 +57,7 @@ const SectionView = () => {
     setSectionStack(getSectionStack());
     dispatch(setActiveSections(getSectionStack()));
   }, [sectionId]);
-
-  console.log(sectionStack);
+  
   return (
     <>
       <MessageView />
