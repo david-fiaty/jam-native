@@ -16,6 +16,7 @@ import JamItemSection from "@/components/section/JamItemSection";
 import ProfileItemSection from "@/components/section/ProfileItemSection";
 import ProjectItemSection from "@/components/section/ProjectItemSection";
 import ProfileFormSection from "@/components/section/ProfileFormSection";
+import AddProjectForm from "@/components/form/AddProjectForm";
 
 class SectionManager {
   previousSection(router: any) {
@@ -156,6 +157,11 @@ class SectionManager {
         id: 'password',
         title: i18n.t('Password'),
         render: (params: any) => <PasswordForm {...params} />,
+      },
+      {
+        id: 'add-project',
+        title: i18n.t('Add project'),
+        render: (params: any) => <AddProjectForm {...params} />,
       },
     ].map((o: any) => {
       return {
