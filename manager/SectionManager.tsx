@@ -15,6 +15,7 @@ import PrivacySection from "@/components/section/PrivacySection";
 import JamItemSection from "@/components/section/JamItemSection";
 import ProfileItemSection from "@/components/section/ProfileItemSection";
 import ProjectItemSection from "@/components/section/ProjectItemSection";
+import ProfileFormSection from "@/components/section/ProfileFormSection";
 
 class SectionManager {
   previousSection(router: any) {
@@ -138,8 +139,13 @@ class SectionManager {
       },
       {
         id: 'profile',
-        title: i18n.t('Profile'),
+        title: i18n.t('Your profile'),
         render: (params: any) => <ProfileSection {...params} />,
+      },
+      {
+        id: 'profile-form',
+        title: i18n.t('Edit Profile'),
+        render: (params: any) => <ProfileFormSection {...params} />,
       },
       {
         id: 'account',
