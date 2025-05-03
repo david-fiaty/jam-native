@@ -26,7 +26,21 @@ const SectionView = () => {
   const sectionId: any = path.split('/').pop();
 
   const getSectionStack = () => {
-    return sectionState.active.includes(sectionId) ? sectionState.active : [...sectionState.active, sectionId];
+    /*
+    if (sectionState.active.find((o: any) => o.id === sectionId)) {
+      return sectionState.active;
+    }
+    else {
+      return [...sectionState.active, SectionManager.getSection(sectionId, false)];
+    }
+    */
+
+
+    if (sectionState.active.includes(sectionId)) {
+      return sectionState.active;
+    }
+
+    return [...sectionState.active, sectionId];
   };
 
   const isModalTitleVisible = () => {
@@ -44,8 +58,6 @@ const SectionView = () => {
     setSectionStack(getSectionStack());
     dispatch(setActiveSections(getSectionStack()));
   }, [sectionId]);
-
-  console.log(sectionStack)
 
   return (
     <>
