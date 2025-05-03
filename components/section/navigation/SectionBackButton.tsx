@@ -13,6 +13,11 @@ type Props = {
 
 const SectionBackButton = ({ currentSection }: Props) => {
   const router = useRouter();
+
+  const onPress = () => {
+    if (currentSection?.backButtonRoute !== null) router.dismissTo(currentSection.backButtonRoute)
+    else SectionManager.previousSection(router);
+  }
   
   return (
     <BoxView
@@ -20,7 +25,7 @@ const SectionBackButton = ({ currentSection }: Props) => {
       align="center"
       justify="flex-start"
       style={styles.container}
-      onPress={() => SectionManager.previousSection(router)}
+      onPress={onPress}
     >
       <IconView
         name="previous"

@@ -2,6 +2,7 @@ import { StyleSheet, View } from 'react-native';
 import TextView from './TextView';
 import { Colors } from '@/constants/Colors';
 import BoxView from './BoxView';
+import { Layout } from '@/constants/Layout';
 
 type Props = {
   data?: any;
@@ -18,10 +19,16 @@ const BulletListView = ({ data, bulletHidden }: Props) => {
           key={`list-item-${i}`}
           direction="row" 
           align="center" 
-          style={styles.item}
+          justify="flex-start"
+          style={styles.listItem}
         >
-          {bulletHidden !== true && <View style={styles.bullet}></View>}
-          <TextView>{row}</TextView>
+          <BoxView style={styles.listItemLeft}>
+            {bulletHidden !== true && <View style={styles.listBullet} />}
+          </BoxView>
+          
+          <BoxView style={styles.listItemRight}>
+            <TextView>{row}</TextView>
+          </BoxView>
         </BoxView>
       ))}
     </View>
@@ -35,10 +42,16 @@ const styles = StyleSheet.create({
     margin: 0,
     padding: 0,
   },
-  item: {
+  listItem: {
+    width: '100%',
+  },
+  listItemLeft: {
+    width: Layout.space.base/3,
+  },
+  listItemRight: {
     flexWrap: 'wrap',
   },
-  bullet: {
+  listBullet: {
     width: bulletSize,
     height: bulletSize,
     borderRadius: bulletSize,
