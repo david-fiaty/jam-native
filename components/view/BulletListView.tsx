@@ -22,11 +22,11 @@ const BulletListView = ({ data, bulletHidden }: Props) => {
           justify="flex-start"
           style={styles.listItem}
         >
-          <BoxView style={styles.listItemLeft}>
+          <BoxView direction="row" align="center" justify="flex-end" style={styles.listItemLeft}>
             {bulletHidden !== true && <View style={styles.listBullet} />}
           </BoxView>
           
-          <BoxView style={styles.listItemRight}>
+          <BoxView direction="row" align="center" justify="flex-start" style={styles.listItemRight}>
             <TextView>{row}</TextView>
           </BoxView>
         </BoxView>
