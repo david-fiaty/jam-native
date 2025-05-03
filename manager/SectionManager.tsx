@@ -29,7 +29,7 @@ class SectionManager {
     }
       
     if (activeSections[previousSectionIndex]?.length > 0) {
-      router.dismissTo(`/${activeSections[previousSectionIndex]?.id}`);
+      router.dismissTo(`/${activeSections[previousSectionIndex]}`);
     }
     else {
       router.dismissTo('/');
