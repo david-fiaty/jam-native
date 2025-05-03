@@ -9,7 +9,7 @@ class ModalManager {
     let sectionId: any = null;
 
     if (activeSections.length > 0) {
-      sectionId = activeSections[activeSections.length - 1];
+      sectionId = activeSections[activeSections.length - 1].id;
     }
 
     if (activeModals.length > 0 && activeModals[activeModals.length - 1].id === modalId) {
