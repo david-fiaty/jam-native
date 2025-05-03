@@ -5,16 +5,17 @@ import BoxView from './BoxView';
 
 type Props = {
   data?: any;
+  bulletHidden: boolean;
 };
 
 const bulletSize: number = 5.5;
 
-const BulletListView = ({ data }: Props) => {
+const BulletListView = ({ data, bulletHidden }: Props) => {
   return (
     <View style={styles.container}>
       {data.map((row: any) => (
-        <BoxView direction="row" align="center" justify="fleex-start">
-          <View style={styles.bullet}></View>
+        <BoxView direction="row" align="center" justify="flex-start">
+          {bulletHidden !== true && <View style={styles.bullet}></View>}
           <TextView>{row}</TextView>
         </BoxView>
       ))}
