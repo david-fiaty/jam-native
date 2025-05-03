@@ -1,4 +1,5 @@
 import { setActiveSections } from "@/redux/slices/SectionSlice";
+import { setActiveModals } from "@/redux/slices/ModalSlice";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
 import AboutSection from "@/components/section/AboutSection";
@@ -31,11 +32,14 @@ class SectionManager {
         router.dismissTo(`/${previousSection.id}`);
       }
       else {
+        Store.dispatch(setActiveModals([]));
+        Store.dispatch(setActiveSections([]));
         router.dismissTo('/');
       } 
     }
     else {
-      console.log('d');
+      Store.dispatch(setActiveModals([]));
+      Store.dispatch(setActiveSections([]));
       router.dismissTo('/');
     }
   }
