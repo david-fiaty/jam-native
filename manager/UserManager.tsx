@@ -78,6 +78,7 @@ class UserManager {
   }
 
   async getProfileData(options?: any) {
+    options = options || {};
     let profileId: number = await this.getProfileId();
     let defaults = {};
     let profileData = [];
