@@ -9,7 +9,13 @@ const LegalSection = () => {
   const router = useRouter();
 
   return (
-    <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.screenContent}>
+    <BoxView 
+      direction="column" 
+      align="flex-start" 
+      justify="flex-start" 
+      style={styles.container}
+      scroll={true}
+    >
       <TextView style={styles.title}>Terms of Use</TextView>
       <TextView>
         By using the JAM application, you agree to comply with all terms and conditions stated in this legal notice. JAMMM reserves the right to modify these terms at any time without prior notice. Continued use of the application constitutes your acceptance of any changes made to the terms.
@@ -31,6 +37,10 @@ const LegalSection = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    height: '100%',
+  },
   title: {
     fontWeight: 'bold',
     marginTop: Layout.space.base,
