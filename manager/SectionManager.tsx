@@ -18,18 +18,14 @@ import ProjectItemSection from "@/components/section/ProjectItemSection";
 class SectionManager {
   previousSection(router: any) {
     let activeSections: any = [...Store.getState().section.active];
-    let previousSectionIndex: number = 0;
-
-    if (activeSections.length > 1) previousSectionIndex = activeSections.length - 2;
-    else if (activeSections.length > 0) previousSectionIndex = activeSections.length - 1;
+  
+    activeSections.pop();
+    Store.dispatch(setActiveSections(activeSections));
 
     if (activeSections.length > 0) {
-      activeSections.pop();
-      Store.dispatch(setActiveSections(activeSections));
-    }
-      
-    if (activeSections[previousSectionIndex]?.length > 0) {
-      router.dismissTo(`/${activeSections[previousSectionIndex]}`);
+      let previousSection: any = activeSections[activeSections.length - 1];
+      if (previousSection.backButtonRoute !== null) router.dismissTo(`/${previousSection.backButtonRoute}`)
+      else router.dismissTo(`/${previousSection.id}`);
     }
     else {
       router.dismissTo('/');
