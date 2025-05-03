@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
 import { BaseProps } from '@/constants/Types';
 import { Layout } from '@/constants/Layout';
 import TextView from './TextView';
@@ -9,14 +10,17 @@ import BoxView from "./BoxView";
 import StaticData from '@/constants/StaticData';
 import TagView from "./TagView";
 import EntityManager from "@/manager/EntityManager";
+import i18n from "@/translation/i18n";
 
 const profileImageSize: number = 100;
 
 type Props = BaseProps & {
   profileItem?: any;
+  canEdit?: boolean;
 };
 
-const ProfileHeaderView = ({ profileItem }: Props) => {
+const ProfileHeaderView = ({ profileItem, canEdit }: Props) => {
+  const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any>([]);
 
@@ -59,12 +63,24 @@ const ProfileHeaderView = ({ profileItem }: Props) => {
         />
       </View>
 
-      <View style={styles.profileHeaderRight}>
+      <View style={styles.profileHeaderMiddle}>
         <TextView style={styles.profileTitle}>{profileItem?.profile_name}</TextView>
         <TextView style={styles.profileType}>
           {(StaticData.profileTypes.find((o: any) => o.id === profileItem?.profile_type))?.label}
         </TextView>
         {renderProfileSectors(profileItem?.sectors)[0]}
+      </View>
+
+      <View style={styles.profileHeaderRight}>
+        {canEdit === true && (
+          <TouchableOpacity
+            onPress={() =>
+              router.push('/profile-form')
+            }
+          >
+            <TextView underline={true}>{i18n.t("Edit")}</TextView>
+          </TouchableOpacity>
+        )}
       </View>
     </BoxView>
   );
@@ -74,16 +90,19 @@ const styles = StyleSheet.create({
   profileHeader: {
     width: '100%',
     gap: 0,
-    marginVertical: Layout.space.base/1.5,
+    marginVertical: Layout.space.base / 1.5,
   },
   profileHeaderLeft: {
     width: profileImageSize,
   },
-  profileHeaderRight: {
+  profileHeaderMiddle: {
     paddingHorizontal: Layout.space.base * 1,
     paddingTop: Layout.space.base * 1.2, // Todo - Vertical align middle
     flex: 1,
     height: '100%',
+  },
+  profileHeaderRight: {
+    width: 'auto',
   },
   profileImage: {
     width: profileImageSize,
