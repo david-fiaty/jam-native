@@ -13,6 +13,7 @@ import ProfileJamsList from "../list/ProfileJamsList";
 import TextView from "../view/TextView";
 import ProfileHeaderView from "../view/ProfileHeaderView";
 import DividerView from "../view/DividerView";
+import ModalManager from "@/manager/ModalManager";
 
 const resource: string = 'profile';
 
@@ -69,7 +70,7 @@ const ProfileSection = () => {
         allButton={formData?.profile_jams?.length > 0}
         addButton={true}
         idArray={formData?.profile_jams}
-      //onAddButtonPress={() => ScreenManager.toggleModal("JamForm")}
+        onAddButtonPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
       />
       <DividerView />
 
