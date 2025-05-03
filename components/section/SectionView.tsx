@@ -42,6 +42,13 @@ const SectionView = () => {
     return [];
   };
 
+  const getCurrentSection = () => {
+    return {
+      ...SectionManager.getSection(sectionId || Config.defaultSection),
+      ...{ params: params },
+    };
+  };
+
   const isModalTitleVisible = () => {
     return modalState.active.length > 0 && modalState[modalState.active.length -1]?.showTitle === true;
   };
@@ -54,13 +61,12 @@ const SectionView = () => {
 
   useEffect(() => {
     let activeSections: any [] = getSectionStack();
-    setCurrentSection(SectionManager.getSection(sectionId || Config.defaultSection));
+    setCurrentSection(getCurrentSection());
     setSectionStack(activeSections);
     dispatch(setActiveSections(activeSections));
   }, [sectionId]);
 
-  //console.log('----------------------------------------');
-  //console.log(sectionStack)
+  console.log(currentSection)
 
 
   return (
