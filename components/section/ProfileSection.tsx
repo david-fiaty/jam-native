@@ -6,6 +6,7 @@ import BoxView from "../view/BoxView";
 import ProfileProjectsList from "../list/ProfileProjectsList";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
+import ProfileJamsList from "../list/ProfileJamsList";
 
 const resource: string = 'profile';
 
@@ -62,6 +63,31 @@ const ProfileSection = () => {
           idArray={formData?.liked_projects}
         />
       )}
+
+      <ProfileJamsList
+        title={i18n.t("Your Jams")}
+        allButton={formData?.profile_jams?.length > 0}
+        addButton={true}
+        idArray={formData?.profile_jams}
+      //onAddButtonPress={() => ScreenManager.toggleModal("JamForm")}
+      />
+
+      {formData?.saved_jams?.length > 0 && (
+        <ProfileJamsList
+          title={i18n.t("Saved Jams")}
+          allButton={formData?.saved_jams?.length > 0}
+          idArray={formData?.saved_jams}
+        />
+      )}
+
+      {formData?.liked_jams?.length > 0 && (
+        <ProfileJamsList
+          title={i18n.t("Liked Jams")}
+          allButton={formData?.liked_jams?.length > 0}
+          idArray={formData?.liked_jams}
+        />
+      )}
+      
     </BoxView>
   );
 };
