@@ -21,10 +21,14 @@ const SearchView = () => {
   const renderTab = (row: any) => {
     const tabStyle: any = row.id == activeTab ? styles.activeTab : {};
 
+    const onTabPress = (tabId: string) => {
+      setActiveTab(tabId);
+    };
+
     return (
       <TouchableOpacity 
         key={row.id}
-        onPress={() => setActiveTab(row.id)} 
+        onPress={() => onTabPress(row.id)} 
         style={styles.tabItem}
       >
         <TextView style={tabStyle}>{row.label}</TextView>

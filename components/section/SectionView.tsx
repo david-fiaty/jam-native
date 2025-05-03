@@ -66,9 +66,6 @@ const SectionView = () => {
     dispatch(setActiveSections(activeSections));
   }, [sectionId]);
 
-  console.log(currentSection)
-
-
   return (
     <>
       <MessageView />
