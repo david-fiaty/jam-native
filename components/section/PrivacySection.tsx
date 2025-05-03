@@ -4,6 +4,7 @@ import { Layout } from '@/constants/Layout';
 import TextView from '../view/TextView';
 import BoxView from '../view/BoxView';
 import BottomLinks from './navigation/BottomLinks';
+import BulletListView from '../view/BulletListView';
 
 const PrivacySection = () => {
   const router = useRouter();
@@ -16,6 +17,8 @@ const PrivacySection = () => {
     style={styles.container}
     scroll={true}
   >
+      <BulletListView data={['a', 'b', 'c']} />
+
       <TextView style={styles.title}>Introduction</TextView>
       <TextView>
         Jamm is a web and mobile platform that allows artists to share their projects, events, and achievements.
