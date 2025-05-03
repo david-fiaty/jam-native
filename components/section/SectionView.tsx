@@ -38,6 +38,8 @@ const SectionView = () => {
         ...{ params: params },
       }];
     }
+
+    return [];
   };
 
   const isModalTitleVisible = () => {
@@ -56,6 +58,7 @@ const SectionView = () => {
     dispatch(setActiveSections(getSectionStack()));
   }, [sectionId]);
 
+  console.log(sectionStack);
   return (
     <>
       <MessageView />
