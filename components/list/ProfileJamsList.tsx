@@ -102,7 +102,7 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
       </BoxView>
 
       {isLoaded && !idArray?.length && emptyMessage && <TextView>{emptyMessage}</TextView>}
-      
+
       {profileJams?.length > 0 && (
         <ListView
           data={profileJams}
