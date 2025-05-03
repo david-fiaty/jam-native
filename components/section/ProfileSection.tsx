@@ -4,13 +4,11 @@ import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { setFormData } from "@/redux/slices/FormSlice";
-import ProfileForm from "../form/ProfileForm";
 import BoxView from "../view/BoxView";
 import ProfileProjectsList from "../list/ProfileProjectsList";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import ProfileJamsList from "../list/ProfileJamsList";
-import TextView from "../view/TextView";
 import ProfileHeaderView from "../view/ProfileHeaderView";
 import DividerView from "../view/DividerView";
 import ModalManager from "@/manager/ModalManager";
@@ -48,7 +46,7 @@ const ProfileSection = () => {
       style={styles.container}
       scroll={true}
     >
-      <ProfileHeaderView profileItem={formData} />
+      <ProfileHeaderView profileItem={formData} canEdit={true} />
       <DividerView />
 
       <ProfileProjectsList
