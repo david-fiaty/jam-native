@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
+import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { setFormData } from "@/redux/slices/FormSlice";
@@ -16,6 +17,7 @@ import DividerView from "../view/DividerView";
 const resource: string = 'profile';
 
 const ProfileSection = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
@@ -53,14 +55,12 @@ const ProfileSection = () => {
         addButton={true}
         allButton={formData?.profile_projects?.length > 0}
         idArray={formData?.profile_projects || []}
-      /*
-      onAddButtonPress={() => {
-        ScreenManager.toggleModal("AddProjectForm", {
-          profileId: profileId,
-          profileJams: formData?.profile_jams || [],
-        });
-      }}
-      */
+        onAddButtonPress={() => {
+          router.push('/add-project', {
+            profileId: profileId,
+            profileJams: formData?.profile_jams || [],
+          });
+        }}
       />
       <DividerView />
 

@@ -5,7 +5,6 @@ import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
-import BackButton from "../button/BackButton";
 import DividerView from "../view/DividerView";
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
@@ -82,11 +81,6 @@ const AddProjectForm = () => {
       scroll={true}
       style={Layout.screenContent}
     >
-      <BackButton
-        title={i18n.t("Create a project")}
-        onPress={() => ScreenManager.toggleModal("AddProjectForm")}
-      />
-
       <View style={Layout.formContainer}>
         <TextView>{i18n.t("Name")}</TextView>
         <InputTextField
