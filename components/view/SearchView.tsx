@@ -12,6 +12,8 @@ import SearchJamsList from "../list/SearchJamsList";
 import SearchProfilesList from "../list/SearchProfilesList";
 import SearchProjectsList from "../list/SearchProjectsList";
 
+const defaultTab: string = 'jam';
+
 const SearchView = () => {
   const [activeTab, setActiveTab] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -21,10 +23,14 @@ const SearchView = () => {
   const renderTab = (row: any) => {
     const tabStyle: any = row.id == activeTab ? styles.activeTab : {};
 
+    const onTabPress = (tabId: string) => {
+      setActiveTab(tabId);
+    };
+
     return (
       <TouchableOpacity 
         key={row.id}
-        onPress={() => setActiveTab(row.id)} 
+        onPress={() => onTabPress(row.id)} 
         style={styles.tabItem}
       >
         <TextView style={tabStyle}>{row.label}</TextView>
@@ -35,6 +41,7 @@ const SearchView = () => {
   useEffect(() => {
     (async () => {
       setSearchData(await SearchManager.getResults());
+      setActiveTab(searchState.activeTab || defaultTab)
     })();
 
     if (!activeTab) setActiveTab(StaticData.searchTabs[0].id);
@@ -42,7 +49,7 @@ const SearchView = () => {
     if (!isLoaded) {
       setIsLoaded(true);
     }
-  }, [isLoaded, searchState]);
+  }, [isLoaded, searchState, defaultTab]);
 
   return (
     <>
