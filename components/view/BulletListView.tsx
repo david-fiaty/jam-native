@@ -5,10 +5,10 @@ import BoxView from './BoxView';
 
 type Props = {
   data?: any;
-  bulletHidden: boolean;
+  bulletHidden?: boolean;
 };
 
-const bulletSize: number = 5.5;
+const bulletSize: number = 4;
 
 const BulletListView = ({ data, bulletHidden }: Props) => {
   return (
