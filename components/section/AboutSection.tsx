@@ -9,7 +9,13 @@ const AboutSection = () => {
   const router = useRouter();
 
   return (
-    <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.screenContent}>
+    <BoxView 
+      direction="column" 
+      align="flex-start" 
+      justify="flex-start" 
+      style={styles.container}
+      scroll={true}
+    >
       <TextView style={styles.title}>Create more, Together.</TextView>
       <TextView>
         JAM! is a project by Mitsio Motu, the Institut Francais and Sixteen Sixteen Club. It is created to drive a new community of creatives to make a better world for themselves by connecting and creating together.
@@ -36,6 +42,10 @@ const AboutSection = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    height: '100%',
+  },
   title: {
     fontWeight: 'bold',
     marginTop: Layout.space.base,
