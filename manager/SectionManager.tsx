@@ -35,7 +35,6 @@ class SectionManager {
       } 
     }
     else {
-      console.log('d');
       router.dismissTo('/');
     }
   }
