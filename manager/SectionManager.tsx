@@ -143,6 +143,7 @@ class SectionManager {
           showHeader: true,
           showFooter: true,
           showBackButton: true,
+          params: {},
         },
         ...o,
       };
