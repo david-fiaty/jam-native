@@ -76,7 +76,7 @@ const ProfileSection = () => {
       <ProfileProjectsList
         title={i18n.t("Saved Projects")}
         allButton={formData?.saved_projects?.length > 0}
-        emptyMessage={i18n.t('There are no saved projects.')}
+        emptyMessage={i18n.t('You have no saved projects.')}
         idArray={formData?.saved_projects || []}
       />
       <DividerView />
@@ -84,7 +84,7 @@ const ProfileSection = () => {
       <ProfileProjectsList
         title={i18n.t("Liked Projects")}
         allButton={formData?.liked_projects?.length > 0}
-        emptyMessage={i18n.t('There are no liked proects.')}
+        emptyMessage={i18n.t('You have no liked proects.')}
         idArray={formData?.liked_projects || []}
       />
       <DividerView />
@@ -93,7 +93,7 @@ const ProfileSection = () => {
         title={i18n.t("Saved Jams")}
         allButton={formData?.saved_jams?.length > 0}
         idArray={formData?.saved_jams || []}
-        emptyMessage={i18n.t('There are no saved Jams.')}
+        emptyMessage={i18n.t('You have no saved Jams.')}
       />
       <DividerView />
   
@@ -101,7 +101,7 @@ const ProfileSection = () => {
         title={i18n.t("Liked Jams")}
         allButton={formData?.liked_jams?.length > 0}
         idArray={formData?.liked_jams || []}
-        emptyMessage={i18n.t('There are no liked Jams.')}
+        emptyMessage={i18n.t('You have no liked Jams.')}
       />
 
     </BoxView>
