@@ -26,11 +26,20 @@ const SectionView = () => {
   const sectionId: any = path.split('/').pop();
 
   const getSectionStack = () => {
-    if (sectionState.active.includes(sectionId)) {
+    let section: any = SectionManager.getSection(sectionId, false);
+    let isStacked: any = sectionState.active.find((o: any) => o.id === sectionId);
+    
+    if (section && isStacked) {
       return sectionState.active;
     }
-    
-    return [...sectionState.active, sectionId];
+    else if (section) {
+      return [...sectionState.active, {
+        ...section,
+        ...{ params: params },
+      }];
+    }
+
+    return [];
   };
 
   const isModalTitleVisible = () => {
@@ -39,8 +48,8 @@ const SectionView = () => {
 
   const showBackButton = () => {
     return currentSection?.showTitle === true 
-    && currentSection?.showBackButton === true 
-    && (!modalState.active.length || !isModalTitleVisible());
+      && currentSection?.showBackButton === true 
+      && (!modalState.active.length || !isModalTitleVisible());
   };
 
   useEffect(() => {
@@ -48,7 +57,7 @@ const SectionView = () => {
     setSectionStack(getSectionStack());
     dispatch(setActiveSections(getSectionStack()));
   }, [sectionId]);
-
+  
   return (
     <>
       <MessageView />
@@ -63,7 +72,7 @@ const SectionView = () => {
         justify="center"
         style={styles.container}
       >
-        {currentSection?.render(params)}
+        {currentSection?.render(currentSection?.params || {})}
   
         <ModalView currentSection={currentSection} style={styles.modal} />
       </BoxView>

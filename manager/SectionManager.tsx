@@ -20,6 +20,10 @@ class SectionManager {
     let activeSections: any = [...Store.getState().section.active];
     let previousSectionIndex: number = 0;
 
+    console.log('----------------------------------------');
+    console.log(activeSections)
+
+
     if (activeSections.length > 1) previousSectionIndex = activeSections.length - 2;
     else if (activeSections.length > 0) previousSectionIndex = activeSections.length - 1;
 
@@ -29,7 +33,7 @@ class SectionManager {
     }
       
     if (activeSections[previousSectionIndex]?.length > 0) {
-      router.dismissTo(`/${activeSections[previousSectionIndex]}`);
+      router.dismissTo(`/${activeSections[previousSectionIndex].id}`);
     }
     else {
       router.dismissTo('/');
