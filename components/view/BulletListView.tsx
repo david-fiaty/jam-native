@@ -13,8 +13,13 @@ const bulletSize: number = 4;
 const BulletListView = ({ data, bulletHidden }: Props) => {
   return (
     <View style={styles.container}>
-      {data.map((row: any) => (
-        <BoxView direction="row" align="center" style={styles.item}>
+      {data.map((row: any, i: number) => (
+        <BoxView 
+          key={`list-item-${i}`}
+          direction="row" 
+          align="center" 
+          style={styles.item}
+        >
           {bulletHidden !== true && <View style={styles.bullet}></View>}
           <TextView>{row}</TextView>
         </BoxView>
