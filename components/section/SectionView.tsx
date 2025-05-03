@@ -26,7 +26,7 @@ const SectionView = () => {
   const sectionId: any = path.split('/').pop();
 
   const getSectionStack = () => {
-    let section: any = SectionManager.getSection(sectionId);
+    let section: any = SectionManager.getSection(sectionId, false);
     let isStacked: any = sectionState.active.find((o: any) => o.id === sectionId);
     
     if (section && isStacked) {
