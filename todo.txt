@@ -70,6 +70,7 @@ https://github.com/react-native-maps/react-native-maps/discussions/4741#discussi
 # Latest fixes:
 - Gestion logout
 - Gestion phone back button
+- Finalisation systeme de navigation
 
 "scripts": {
   "dev": "npm start --tunnel",
