@@ -20,6 +20,7 @@ type Props = {
   isAddable?: boolean;
   isDeletable?: boolean;
   multiSelect?: boolean;
+  emptyMessage?: any;
   onAddButtonPress?: () => void;
   onListItemPress?: (row: any) => void;
 };
@@ -32,6 +33,7 @@ const ProfileProjectsList = ({
   isAddable,
   isDeletable,
   multiSelect,
+  emptyMessage,
   onAddButtonPress,
   onListItemPress,
 }: Props) => {
@@ -101,10 +103,6 @@ const ProfileProjectsList = ({
     })();
   }, [isLoaded, idArray, addButton, projectsImages]);
 
-  if (isLoaded && !idArray?.length) {
-    return <TextView>No data</TextView>
-  }
-
   return (
     <View style={styles.container}>
       <BoxView direction="row" align="center" justify="space-between">
@@ -123,6 +121,8 @@ const ProfileProjectsList = ({
           </TouchableOpacity>
         )}
       </BoxView>
+
+      {isLoaded && !idArray?.length && emptyMessage && <TextView>{emptyMessage}</TextView>}
 
       {profileProjects?.length > 0 && (
         <ListView
