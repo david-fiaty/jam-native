@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import TextView from '../view/TextView';
@@ -27,16 +27,18 @@ const PrivacySection = () => {
       </TextView>
 
       <TextView style={styles.title}>Data Collection</TextView>
-      <TextView>
-        We collect various personal information, including:
-        - Name, surname (for personal profiles)
-        - Email address
-        - Phone number
-        - Location (latitude and longitude)
-        - Profile information (description, profile picture, etc.)
-        - Links to social media (Instagram, Facebook, LinkedIn)
-        - Specific information related to the type of profile (organization, venue, artist)
-      </TextView>
+      <View>
+        <TextView>We collect various personal information, including:</TextView>
+        <BulletListView data= {[
+          'Name, surname (for personal profiles)',
+          'Email address',
+          'Phone number',
+          'Location (latitude and longitude)',
+          'Profile information (description, profile picture, etc.)',
+          'Links to social media (Instagram, Facebook, LinkedIn)',
+          'Specific information related to the type of profile (organization, venue, artist)',
+        ]} />
+      </View>
 
       <TextView style={styles.title}>Use of Data</TextView>
       <TextView>
