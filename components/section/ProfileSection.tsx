@@ -51,7 +51,7 @@ const ProfileSection = () => {
         title={i18n.t("Your Projects")}
         addButton={true}
         allButton={formData?.profile_projects?.length > 0}
-        idArray={formData?.profile_projects}
+        idArray={formData?.profile_projects || []}
       /*
       onAddButtonPress={() => {
         ScreenManager.toggleModal("AddProjectForm", {
@@ -65,18 +65,17 @@ const ProfileSection = () => {
       <ProfileProjectsList
         title={i18n.t("Saved Projects")}
         allButton={formData?.saved_projects?.length > 0}
-        idArray={formData?.saved_projects}
+        emptyMessage={i18n.t('There are no saved projects.')}
+        idArray={formData?.saved_projects || []}
       />
     
-
-      {formData?.liked_projects?.length > 0 && (
-        <ProfileProjectsList
-          title={i18n.t("Liked Projects")}
-          allButton={formData?.liked_projects?.length > 0}
-          idArray={formData?.liked_projects}
-        />
-      )}
-
+      <ProfileProjectsList
+        title={i18n.t("Liked Projects")}
+        allButton={formData?.liked_projects?.length > 0}
+        emptyMessage={i18n.t('There are no liked proects.')}
+        idArray={formData?.liked_projects || []}
+      />
+  
       <ProfileJamsList
         title={i18n.t("Your Jams")}
         allButton={formData?.profile_jams?.length > 0}
