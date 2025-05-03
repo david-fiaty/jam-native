@@ -23,9 +23,6 @@ const BulletListView = ({ data }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-
-  },
   bullet: {
     width: bulletSize,
     height: bulletSize,
