@@ -9,7 +9,13 @@ const PrivacySection = () => {
   const router = useRouter();
 
   return (
-    <BoxView direction="column" align="flex-start" justify="flex-start" style={Layout.screenContent}>
+    <BoxView 
+    direction="column" 
+    align="flex-start" 
+    justify="flex-start" 
+    style={styles.container}
+    scroll={true}
+  >
       <TextView style={styles.title}>Introduction</TextView>
       <TextView>
         Jamm is a web and mobile platform that allows artists to share their projects, events, and achievements.
@@ -93,6 +99,10 @@ const PrivacySection = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    height: '100%',
+  },
   title: {
     fontWeight: 'bold',
     marginTop: Layout.space.base,
