@@ -10,15 +10,13 @@ const PrivacySection = () => {
   const router = useRouter();
 
   return (
-    <BoxView 
-    direction="column" 
-    align="flex-start" 
-    justify="flex-start" 
-    style={styles.container}
-    scroll={true}
-  >
-      <BulletListView data={['a', 'b', 'c']} />
-
+    <BoxView
+      direction="column"
+      align="flex-start"
+      justify="flex-start"
+      style={styles.container}
+      scroll={true}
+    >
       <TextView style={styles.title}>Introduction</TextView>
       <TextView>
         Jamm is a web and mobile platform that allows artists to share their projects, events, and achievements.
@@ -29,7 +27,7 @@ const PrivacySection = () => {
       <TextView style={styles.title}>Data Collection</TextView>
       <View>
         <TextView>We collect various personal information, including:</TextView>
-        <BulletListView data= {[
+        <BulletListView data={[
           'Name, surname (for personal profiles)',
           'Email address',
           'Phone number',
