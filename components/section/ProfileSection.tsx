@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { setFormData } from "@/redux/slices/FormSlice";
@@ -41,7 +42,7 @@ const ProfileSection = () => {
       direction="column"
       align="center"
       justify="center"
-      style={Layout.screenContent}
+      style={styles.container}
       scroll={true}
     >
       <ProfileHeaderView profileItem={formData} />
@@ -106,5 +107,12 @@ const ProfileSection = () => {
     </BoxView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    paddingBottom: Layout.space.base*2,
+  },
+});
 
 export default ProfileSection;
