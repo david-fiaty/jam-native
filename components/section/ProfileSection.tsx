@@ -10,6 +10,7 @@ import UserManager from "@/manager/UserManager";
 import ProfileJamsList from "../list/ProfileJamsList";
 import TextView from "../view/TextView";
 import ProfileHeaderView from "../view/ProfileHeaderView";
+import DividerView from "../view/DividerView";
 
 const resource: string = 'profile';
 
@@ -44,7 +45,8 @@ const ProfileSection = () => {
       scroll={true}
     >
       <ProfileHeaderView profileItem={formData} />
-
+      <DividerView />
+      
       <ProfileProjectsList
         title={i18n.t("Your Projects")}
         addButton={true}
