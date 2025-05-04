@@ -55,8 +55,6 @@ const ProfileItemView = ({ profileId }: Props) => {
     })();
   }, [isLoaded, profileId]);
 
-  console.log(profileItem?.profile_jams)
-
   return (
     <BoxView 
       direction="column" 
