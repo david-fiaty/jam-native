@@ -35,7 +35,6 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress, onCh
 
     setCurrentValue(selectedIds);
     onChangeValue(formData?.[field]);
-  
   };
 
   useEffect(() => {
@@ -50,6 +49,8 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress, onCh
 
         onChangeValue(formData?.[field]);
     })();    
+
+    setCurrentValue(value);
   }, [isLoaded, value, formData, field]);
 
   return (
