@@ -9,6 +9,7 @@ import IconView from "../view/IconView";
 import SpinnerView from '../view/SpinnerView';
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
+import { Colors } from '@/constants/Colors';
 
 type Props = {
   resource: string;
@@ -61,6 +62,7 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress, onCh
             { currentValue.map((item: any) => {
               return (
                 <TagView
+                  theme="white"
                   key={item.id}
                   canEdit={true}
                   onDeleteButtonPress={() => deleteItem(item)}  
@@ -84,8 +86,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: Layout.space.base,
-    marginTop: Layout.space.base,
-    marginBottom: Layout.space.base,
+    padding: Layout.space.base,
+    backgroundColor: Colors.secondary,
+    borderWidth: Layout.borderWidth.base, 
+    borderColor: Colors.secondary, 
+    borderRadius: Layout.radius.round,
+    justifyContent: 'flex-start',
   },
 });
 
