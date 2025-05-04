@@ -214,6 +214,7 @@ const JamForm = ({ jamId }: Props) => {
 
         <DividerView theme="white" />
         
+        <TextView>{i18n.t('Select collaborators')}</TextView>
         <CollaboratorsField
           resource={resource}
           field="collaborators_ids"
