@@ -206,7 +206,7 @@ const JamForm = ({ jamId }: Props) => {
           value={formData?.sectors_ids}
           onChangeValue={(value: string) => FormManager.updateField(resource, 'sectors_ids', value)}
           onPress={() => ModalManager.toggleModal('SectorsList', {
-            resource: 'jam',
+            resource: resource,
             field: 'sectors_ids',
           })}
         />
