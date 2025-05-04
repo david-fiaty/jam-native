@@ -49,7 +49,7 @@ const ProfileItemView = ({ profileId }: Props) => {
     (async () => {
       if (!isLoaded) {
         setSectorsData(await EntityManager.getSectors());
-        setProfileItem((await EntityManager.getProfiles({ items_ids: [profileId] }))?.[0]);
+        setProfileItem((await EntityManager.getProfile(profileId)));
         setIsLoaded(true);
       }
     })();
@@ -63,14 +63,13 @@ const ProfileItemView = ({ profileId }: Props) => {
       scroll={true}
       style={styles.container}
     >
-
       <ProfileHeaderView profileItem={profileItem} />
       <DividerView />
 
       <TextView style={styles.sectionTitle}>{i18n.t('Jams')} ({profileItem?.number_of_jams || 0})</TextView>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileJams}>
         <ProfileJamsList 
-          idArray={[18, 20, 32, 33, 37]} // Todo - Remove test when item request adjusted
+          idArray={profileItem?.profile_jams?.map((o: any) => o.id)} // Todo - API should send ids, not full objects
           onListItemPress={(row: any) => router.push({
             pathname: '/jam-item',
             params:  { jamId: row?.item?.id, title: row?.item?.title },
