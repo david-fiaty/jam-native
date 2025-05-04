@@ -23,6 +23,19 @@ class EntityManager {
     return response;
   }
 
+  async getProfile(profileId: number, options?: any) {
+    options = options || {};
+    let defaults = {};
+    let profileData = [];
+    let variables: any = { '[profile_id]': profileId };
+
+    if (profileId > 0) {
+      profileData = await DataManager.get('getProfile', {...defaults, ...options}, variables);
+    }
+
+    return profileData || {};
+  }
+
   async updateJam(entityId: number, options: any) {
     let defaults: any = {};
     let variables: any = { '[entity_id]': entityId };
