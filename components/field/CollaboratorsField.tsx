@@ -54,7 +54,7 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress, onCh
 
   return (
     <>
-      { /*!currentValue?.length*/ true && (
+      { !currentValue?.length && (
         <TouchableOpacity
           onPress={onPress}
         >
