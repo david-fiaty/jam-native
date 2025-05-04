@@ -27,7 +27,7 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress, onCh
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const deleteItem = (item: any) => {
-    // Todo - Fix delete items error
+    // Todo - Fix delete items
 
     // Selected IDs
     let selectedIds: any[] = [...(value?.length > 0 ? value : [])];
