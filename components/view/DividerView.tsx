@@ -1,7 +1,6 @@
 import { StyleSheet, Text } from 'react-native';
 import { Divider } from '@rneui/themed';
 import { BaseProps } from '@/constants/Types';
-import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 
 type Props = BaseProps & {
@@ -10,10 +9,10 @@ type Props = BaseProps & {
 };
 
 const DividerView = ({theme, style}: Props) => {
-  const dividerStyle = theme ? theme : Colors.white;
+  const dividerStyle = theme ? Layout.theme[theme] : Layout.theme.white;
 
   return (
-    <Divider style={[styles.container, styles[dividerStyle], style]} />
+    <Divider style={[styles.container, dividerStyle, style]} />
   );
 };
 
@@ -22,26 +21,7 @@ const styles: any = StyleSheet.create({
     width: '100%',
     marginVertical: Layout.space.base/4,
   },
-  primary: {
-    borderWidth: Layout.borderWidth.base,
-    borderColor: Colors.primary,
-    backgroundColor: Colors.primary,
-  },
-  secondary: {
-    borderWidth: Layout.borderWidth.base,
-    borderColor: Colors.secondary,
-    backgroundColor: Colors.secondary,
-  },
-  tertiary: {
-    borderWidth: Layout.borderWidth.base,
-    borderColor: Colors.tertiary,
-    backgroundColor: Colors.tertiary,
-  },
-  white: {
-    borderWidth: Layout.borderWidth.base,
-    borderColor: Colors.white,
-    backgroundColor: Colors.white,
-  }
+  white: Layout.theme.white,
 });
 
 export default DividerView;
