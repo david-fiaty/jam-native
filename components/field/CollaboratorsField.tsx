@@ -48,7 +48,7 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress, onCh
           setIsLoaded(true);
         }
 
-        //onChangeValue(formData?.[field]);
+        onChangeValue(formData?.[field]);
     })();    
   }, [isLoaded, value, formData, field]);
 
