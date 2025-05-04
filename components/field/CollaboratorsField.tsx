@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useSelector } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
@@ -10,6 +10,7 @@ import SpinnerView from '../view/SpinnerView';
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
 import { Colors } from '@/constants/Colors';
+import InputTextField from './InputTextField';
 
 type Props = {
   resource: string;
@@ -47,33 +48,37 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress, onCh
   }, [isLoaded, formData, field]);
 
   return (
-    <View style={styles.container}>
-      <BoxView
-        direction="row"
-        align="center"
-        onPress={onPress}
-      >
-        <IconView name="plus" theme="secondary" radius="round" />
-        <TextView>{i18n.t('Add collaborators')}</TextView>
-      </BoxView>
+    <>
+      {!currentValue?.length && (
+        <TouchableOpacity
+          onPress={onPress}
+        >
+          <InputTextField
+            value={value}
+            readOnly={true}
+            placeholder={placeholder}
+            rightIcon={<IconView name="plus" theme="transparent" />}
+          />
+        </TouchableOpacity>
+      )}
 
-        { currentValue?.length > 0 && (
-          <View style={styles.preview}> 
-            { currentValue.map((item: any) => {
-              return (
-                <TagView
-                  theme="white"
-                  key={item.id}
-                  canEdit={true}
-                  onDeleteButtonPress={() => deleteItem(item)}  
-                >
-                  {item?.profile_name}
-                </TagView>
-              );
-            }) }
-          </View>
-        )}
-    </View>
+      {currentValue?.length > 0 && (
+        <View style={styles.preview}> 
+          { currentValue.map((item: any) => {
+            return (
+              <TagView
+                theme="white"
+                key={item.id}
+                canEdit={true}
+                onDeleteButtonPress={() => deleteItem(item)}  
+              >
+                {item?.profile_name}
+              </TagView>
+            );
+          })}
+        </View>
+      )}
+    </>
   );
 };
 
