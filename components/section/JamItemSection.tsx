@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import JamsList from '../list/JamsList';
 import EntityManager from "@/manager/EntityManager";
+import SpinnerView from "../view/SpinnerView";
 
 type Props = {
   jamId: any;
@@ -21,6 +22,8 @@ const JamItemSection = ({ jamId }: Props) => {
       }
     })();
   }, [isLoaded, jamId]);
+
+  if (!isLoaded) return <SpinnerView />;
 
   if (!jamId || isNaN(jamId)) {
     return <></>;
