@@ -109,6 +109,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress, onChangeVa
           {currentValue.map((item: any) => {
             return (
               <TagView
+                theme="white"
                 key={item.id}
                 canEdit={true}
                 onDeleteButtonPress={() => deleteItem(item)}  
