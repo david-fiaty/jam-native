@@ -23,6 +23,29 @@ const borderWidth: any = {
   big: 1,
 };
 
+const theme: any = {
+  primary: {
+    borderWidth: borderWidth.base,
+    borderColor: Colors.primary,
+    backgroundColor: Colors.primary,
+  },
+  secondary: {
+    borderWidth: borderWidth.base,
+    borderColor: Colors.secondary,
+    backgroundColor: Colors.secondary,
+  },
+  tertiary: {
+    borderWidth: borderWidth.base,
+    borderColor: Colors.tertiary,
+    backgroundColor: Colors.tertiary,
+  },
+  white: {
+    borderWidth: borderWidth.base,
+    borderColor: Colors.white,
+    backgroundColor: Colors.white,
+  }
+};
+
 const logo: any = {
   size: 48,
 };
@@ -66,6 +89,7 @@ const mapStyle: any = [
 ];
 
 export const Layout = {
+  theme: theme,
   space: space,
   radius: radius,
   fontSize: fontSize,

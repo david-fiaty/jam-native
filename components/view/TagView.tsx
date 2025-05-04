@@ -1,20 +1,22 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { BaseProps } from '@/constants/Types';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 import IconView from './IconView';
 import BoxView from './BoxView';
 import TextView from './TextView';
 
-type Props = BaseProps & {
-  onDeleteButtonPress?: () => void;
+type Props = {
+  theme?: any;
   canEdit?: boolean;
   children?: any;
+  onDeleteButtonPress?: () => void;
 };
 
-const TagView = ({ onDeleteButtonPress, canEdit, children}: Props) => {
+const TagView = ({ theme, canEdit, children, onDeleteButtonPress }: Props) => {
+  const tagStyle = theme ? Layout.theme[theme] : Layout.theme.secondary;
+
   return (
-    <BoxView direction="row" align="center" justify="between" style={styles.container}>
+    <BoxView direction="row" align="center" justify="between" style={[styles.container, tagStyle]}>
       <TextView style={styles.text}>
         {children}
       </TextView>
@@ -36,6 +38,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: Layout.space.base/2,
     alignSelf: 'flex-start',
   },
+  primary: Layout.theme.primary,
+  secondary: Layout.theme.secondary,
+  tertiary: Layout.theme.tertiary,
+  white: Layout.theme.white,
   text: {
     fontSize: 12.5,
   },

@@ -1,19 +1,19 @@
 import { StyleSheet } from 'react-native';
 import { Input } from '@rneui/themed';
-import { BaseProps } from '@/constants/Types';
+import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
 import BoxView from '../view/BoxView';
-import { Layout } from '@/constants/Layout';
 
-type Props = BaseProps & {
-  value?: string,
-  placeholder?: string,
-  containerStyle?: object,
-  disabled?: boolean, 
+type Props = {
+  value?: string;
+  placeholder?: string;
+  containerStyle?: object;
+  disabled?: boolean; 
+  readOnly?: boolean;
   onChangeText?: (value: any) => void;
 };
 
-const InputTextareaField = ({value, placeholder, containerStyle, disabled, onChangeText}: Props) => {
+const InputTextareaField = ({value, placeholder, containerStyle, disabled, readOnly, onChangeText}: Props) => {
   return (
     <BoxView style={styles.container}>
       <Input
@@ -27,6 +27,7 @@ const InputTextareaField = ({value, placeholder, containerStyle, disabled, onCha
         editable={!disabled}
         value={value}
         onChangeText={onChangeText}
+        readOnly={readOnly}
       />
     </BoxView>
   );
