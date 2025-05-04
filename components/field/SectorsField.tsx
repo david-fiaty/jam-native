@@ -90,6 +90,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress, onChangeVa
 
   return (
     <>
+    { !currentValue?.length && (
       <TouchableOpacity
         onPress={onPress}
       >
@@ -100,6 +101,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress, onChangeVa
           rightIcon={<IconView name="plus" theme="transparent" />}
         />
       </TouchableOpacity>
+    )}
 
       { currentValue?.length > 0 && (
         <View style={styles.preview}>
