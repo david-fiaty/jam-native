@@ -25,6 +25,11 @@ eas build -p android --clear-cache --profile preview
 # Run
 npm start --tunnel
 
+# Update stack
+npm install [expo version]
+eas update
+npm install -g eas-cli
+
 # No hang up
 pm2 start "npx expo start --web" --name jam-mobile
 pm2 startup
