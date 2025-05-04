@@ -129,9 +129,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: Layout.space.base,
-    marginTop: Layout.space.base,
-    marginBottom: Layout.space.base,
-  
+    padding: Layout.space.base,
     backgroundColor: Colors.secondary,
     borderWidth: Layout.borderWidth.base, 
     borderColor: Colors.secondary, 
