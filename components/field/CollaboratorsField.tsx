@@ -27,12 +27,15 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress, onCh
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const deleteItem = (item: any) => {
-    const selectedIds = [...formData?.[field] || []];
-    const index = selectedIds.findIndex((v) => v === item.id);
-    if (index !== -1) selectedIds.splice(index, 1);
+    // Selected IDs
+    let selectedIds: any[] = [...(value?.length > 0 ? value : [])];
+
+    // Delete target item
+    selectedIds = selectedIds.filter((n: number) => n !== item.id);
 
     setCurrentValue(selectedIds);
-    onChangeValue(selectedIds);
+    onChangeValue(formData?.[field]);
+  
   };
 
   useEffect(() => {
@@ -44,12 +47,14 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress, onCh
 
           setIsLoaded(true);
         }
+
+        //onChangeValue(formData?.[field]);
     })();    
-  }, [isLoaded, formData, field]);
+  }, [isLoaded, value, formData, field]);
 
   return (
     <>
-      {!currentValue?.length && (
+      { /*!currentValue?.length*/ true && (
         <TouchableOpacity
           onPress={onPress}
         >
