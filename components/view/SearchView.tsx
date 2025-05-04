@@ -38,16 +38,17 @@ const SearchView = () => {
 
   useEffect(() => {
     (async () => {
-      setSearchData(await SearchManager.getResults());
+      if (!isLoaded) {
+        setSearchData(await SearchManager.getResults());
+        setIsLoaded(true);
+      }
     })();
 
     if (!activeTab) setActiveTab(StaticData.searchTabs[0].id);
-
-    if (!isLoaded) {
-      setIsLoaded(true);
-    }
   }, [isLoaded, searchState]);
 
+  if (!isLoaded) return <SpinnerView />;
+  
   return (
     <>
       {/* Search filters */}
