@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useSelector } from "react-redux";
 import { Layout } from '@/constants/Layout';
+import { Colors } from '@/constants/Colors';
 import SpinnerView from '../view/SpinnerView';
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
@@ -90,20 +91,22 @@ const SectorsField = ({ resource, field, value, placeholder, onPress, onChangeVa
 
   return (
     <>
-      <TouchableOpacity
-        onPress={onPress}
-      >
-        <InputTextField
-          value={value}
-          readOnly={true}
-          placeholder={placeholder}
-          rightIcon={<IconView name="plus" theme="transparent" />}
-        />
-      </TouchableOpacity>
+      {!currentValue?.length && (
+        <TouchableOpacity
+          onPress={onPress}
+        >
+          <InputTextField
+            value={value}
+            readOnly={true}
+            placeholder={placeholder}
+            rightIcon={<IconView name="plus" theme="transparent" />}
+          />
+        </TouchableOpacity>
+      )}
 
-      { currentValue?.length > 0 && (
+      {currentValue?.length > 0 && (
         <View style={styles.preview}>
-          { currentValue.map((item: any) => {
+          {currentValue.map((item: any) => {
             return (
               <TagView
                 key={item.id}
@@ -113,7 +116,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress, onChangeVa
                 {item?.name}
               </TagView>
             );
-          }) }
+          })}
         </View>
       )}
     </>
@@ -126,8 +129,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: Layout.space.base,
-    marginTop: Layout.space.base,
-    marginBottom: Layout.space.base,
+    padding: Layout.space.base,
+    backgroundColor: Colors.secondary,
+    borderWidth: Layout.borderWidth.base, 
+    borderColor: Colors.secondary, 
+    borderRadius: Layout.radius.round,
+    justifyContent: 'flex-start',
   },
 });
 
