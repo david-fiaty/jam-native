@@ -6,6 +6,7 @@ import ListView from "../view/ListView";
 import i18n from "@/translation/i18n";
 import JamListItem from "./ListItem/JamListItem";
 import TextView from "../view/TextView";
+import SpinnerView from "../view/SpinnerView";
 
 type Props = {
   data?: any;
@@ -37,6 +38,8 @@ const SearchJamsList = ({ data, filter }: Props) => {
 
     if (!isLoaded) setIsLoaded(true);
   }, [isLoaded, data, filter]);
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <View style={styles.container}>
