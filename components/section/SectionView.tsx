@@ -27,16 +27,15 @@ const SectionView = () => {
 
   const getSectionStack = () => {
     let section: any = SectionManager.getSection(sectionId, false);
-    let isStacked: any = sectionState.active.find((o: any) => o.id === sectionId);
     
-    if (section && isStacked) {
-      return sectionState.active;
-    }
-    else if (section) {
-      return [...sectionState.active, {
-        ...section,
-        ...{ params: params },
-      }];
+    if (section) {
+      return [
+        ...sectionState.active, 
+        {
+          ...section,
+          ...{ params: params },
+        },
+      ];
     }
 
     return [];
