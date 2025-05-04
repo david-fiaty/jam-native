@@ -11,6 +11,7 @@ import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
 import SignupForm from '../form/SignupForm';
+import SpinnerView from '../view/SpinnerView';
 
 const SignupSection = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,8 @@ const SignupSection = () => {
         }
     })();
   }, [isLoaded]);
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView 

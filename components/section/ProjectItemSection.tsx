@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import EntityManager from "@/manager/EntityManager";
 import ProjectItemView from "../view/ProjectItemView";
+import SpinnerView from "../view/SpinnerView";
 
 type Props = {
   projectId: any;
@@ -21,6 +22,8 @@ const ProjectItemSection = ({ projectId }: Props) => {
       }
     })();
   }, [isLoaded, projectId]);
+
+  if (!isLoaded) return <SpinnerView />;
   
   if (!projectId || isNaN(projectId)) {
     return <></>;

@@ -12,6 +12,7 @@ import ProfileJamsList from "../list/ProfileJamsList";
 import ProfileHeaderView from "../view/ProfileHeaderView";
 import DividerView from "../view/DividerView";
 import ModalManager from "@/manager/ModalManager";
+import SpinnerView from "../view/SpinnerView";
 
 const resource: string = 'profile';
 
@@ -37,6 +38,8 @@ const ProfileSection = () => {
       }
     })();
   }, [isLoaded]);
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView
