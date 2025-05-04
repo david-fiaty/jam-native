@@ -117,7 +117,7 @@ const CollaboratorsList = ({ resource, field }: Props) => {
               <ProfileListItem 
                 row={row}
                 selected={selectedProfiles.includes(row.item.id)}
-                onPress={() => toggleProfile(row.item.id)}
+                onListItemPress={(o: any) => toggleProfile(o.item.id)}  
               />
             )}
           />
