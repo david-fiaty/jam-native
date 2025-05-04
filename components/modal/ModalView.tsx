@@ -27,7 +27,8 @@ const ModalView = ({ currentSection, style }: Props) => {
   const modalState: any = useSelector((state: any) => state.modal);
   
   const containerStyle: any = {
-    top: modalState.active.length > 1 ? -Layout.space.base*3.6 : 0,
+    //top: modalState.active.length > 1 ? -Layout.space.base*3.6 : 0, Todo - Fix submodal display
+    top: 0,
   };
 
   const canShowModal = () => {
