@@ -27,8 +27,10 @@ class SectionManager {
 
     if (activeSections.length > 0) {
       let previousSection: any = activeSections[activeSections.length - 1];
+      let sectionParams: any = previousSection?.params || {};
+
       if (previousSection.backButtonRoute !== null) {
-        router.dismissTo(this.getPreviousRoute(previousSection));
+        router.dismissTo(this.getPreviousRoute(previousSection), sectionParams);
       }
       else if (previousSection?.id) {
         router.dismissTo(`/${previousSection.id}`);

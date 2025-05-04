@@ -3,12 +3,10 @@ import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
-import BackButton from "../button/BackButton";
 import InputTextField from '../field/InputTextField';
 import ButtonView from '../view/ButtonView';
 import DividerView from '../view/DividerView';
 import UserManager from '@/manager/UserManager';
-import ScreenManager from '@/manager/ScreenManager';
 
 const PasswordForm = () => {
   const router = useRouter();
@@ -25,10 +23,7 @@ const PasswordForm = () => {
     };
 
     if (result?.error) message.content = i18n.t(result.error)
-    else updateField(null, null)
-
-    ScreenManager.showMessage(message);
-    setIsProcessing(false);
+    else updateField(null, null);
   
     setIsProcessing(false);
   }  
@@ -42,11 +37,6 @@ const PasswordForm = () => {
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
-      <BackButton
-        title={i18n.t('Change password')}
-        onPress={() => ScreenManager.popScreen(router)}
-      />
-      
       <InputTextField 
         placeholder={i18n.t('Old password')} 
         onChangeText={(value: string) => updateField("old_password", value)}
