@@ -8,6 +8,7 @@ import IconView from '@/components/view/IconView';
 import BoxView from '@/components/view/BoxView';
 import ModalManager from '@/manager/ModalManager';
 import UserManager from "@/manager/UserManager";
+import SectionManager from "@/manager/SectionManager";
 
 type Props = {
   style?: any;
@@ -40,7 +41,7 @@ const SectionFooter = ({ style }: Props) => {
         size={16}
         padding={4}
         theme={getIconTheme('JamsMapView')}
-        onPress={() => isLoggedIn ? ModalManager.toggleModal('JamsMapView') : router.push('/login')}
+        onPress={() => isLoggedIn ? ModalManager.toggleModal('JamsMapView') : SectionManager.push(router, 'login')}
       />
 
       <IconView
@@ -49,7 +50,7 @@ const SectionFooter = ({ style }: Props) => {
         size={16}
         padding={4}
         theme={getIconTheme('JamForm')}
-        onPress={() => isLoggedIn ? ModalManager.toggleModal('JamForm', { resource: 'jam' }) : router.push('/login')}
+        onPress={() => isLoggedIn ? ModalManager.toggleModal('JamForm', { resource: 'jam' }) : SectionManager.push(router, 'login')}
       />
 
       <IconView
@@ -58,7 +59,7 @@ const SectionFooter = ({ style }: Props) => {
         size={16}
         padding={4}
         theme={getIconTheme('SearchView')}
-        onPress={() => isLoggedIn ? ModalManager.toggleModal('SearchView') : router.push('/login')}
+        onPress={() => isLoggedIn ? ModalManager.toggleModal('SearchView') : SectionManager.push(router, 'login')}
       />
     </BoxView>
   );

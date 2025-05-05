@@ -6,6 +6,7 @@ import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 import UserManager from '@/manager/UserManager';
 import BoxView from '../view/BoxView';
+import SectionManager from '@/manager/SectionManager';
 
 const SettingsMenu = () => {
   const router = useRouter();
@@ -13,34 +14,26 @@ const SettingsMenu = () => {
   const data: any[] = [
     {
       label: i18n.t('Your profile'),
-      onPress: (row: any) => {
-        router.push('/profile');
-      },
+      onPress: (row: any) => SectionManager.push(router, 'profile'),
     },
     {
       label: i18n.t('Account information'),
-      onPress: (row: any) => {
-        router.push('/account');
-      },
+      onPress: (row: any) => SectionManager.push(router, 'account'),
     },
     {
       label: i18n.t('Change password'),
-      onPress: (row: any) => {
-        router.push('/password');
-      },
+      onPress: (row: any) => SectionManager.push(router, 'password'),
     },
     {
       label: i18n.t('Language'),
-      onPress: (row: any) => {
-        router.push('/language');
-      },
+      onPress: (row: any) => SectionManager.push(router, 'language'),
     },
     {
       label: i18n.t('Logout'),
       path: null,
       onPress: (row: any) => {
         UserManager.logout();
-        router.replace('/');
+        SectionManager.replace(router, '/');
       },
     },
   ];
