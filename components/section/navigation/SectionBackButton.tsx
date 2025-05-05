@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { useSelector } from "react-redux";
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
@@ -7,15 +8,26 @@ import IconView from '@/components/view/IconView';
 import TextView from '@/components/view/TextView';
 import SectionManager from '@/manager/SectionManager';
 
-type Props = {
-  currentSection: any;
-};
-
-const SectionBackButton = ({ currentSection }: Props) => {
+const SectionBackButton = () => {
   const router = useRouter();
+  const sectionState: any = useSelector((state: any) => state.section);
 
   const onPress = () => {
-    SectionManager.back(router);
+    let activeSections: any[] = sectionState.active;
+
+    console.log(activeSections);
+    
+    /*
+    let activeSections: any[] = sectionState.active;
+    let targetSection: any = {};
+
+
+    if (activeSections.length > 1) {
+      targetSection = activeSections[activeSections.length - 2];
+    }
+    */
+
+    //SectionManager.back(router);
   }
   
   return (
@@ -33,7 +45,8 @@ const SectionBackButton = ({ currentSection }: Props) => {
       />
   
       <TextView style={styles.title}>
-        {currentSection.title}
+        Back
+        {/*currentSection.title*/}
       </TextView>
 
     </BoxView>
