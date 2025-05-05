@@ -197,7 +197,7 @@ const SectionView = () => {
     <>
       <MessageView />
       {currentSection?.showHeader === true && <SectionHeader style={styles.header} />}
-      {showBackButton() === true && <SectionBackButton currentSection={currentSection} />}
+      {showBackButton() === true && <SectionBackButton />}
 
       <BoxView
         direction="column"
