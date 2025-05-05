@@ -6,6 +6,7 @@ import ListView from "../view/ListView";
 import i18n from "@/translation/i18n";
 import ProfileListItem from "./ListItem/ProfileListItem";
 import TextView from "../view/TextView";
+import SectionManager from "@/manager/SectionManager";
 
 type Props = {
   data?: any;
@@ -18,10 +19,7 @@ const SearchProfilesList = ({ data, filter }: Props) => {
   const [currentData, setCurrentData] = useState<any[]>([]);
 
   const onItemPress = (row: any) => {
-    router.push({
-      pathname: '/profile-item',
-      params:  { profileId: row?.item?.id, title: row?.item?.title },
-    });
+    SectionManager.push(router, 'profile-item', { profileId: row?.item?.id, title: row?.item?.title });
   };
 
   const renderEmptyMessage = () => {

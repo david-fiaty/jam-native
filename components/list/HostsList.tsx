@@ -9,6 +9,7 @@ import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import EntityManager from '@/manager/EntityManager';
 import ProfileListItem from './ListItem/ProfileListItem';
+import SectionManager from '@/manager/SectionManager';
 
 type Props = {
   jamId?: any;
@@ -39,10 +40,7 @@ const HostsList = ({ jamId }: Props) => {
             renderItem={(row: any) => (
               <ProfileListItem 
                 row={row}  
-                onListItemPress={(o: any) => router.push({
-                  pathname: '/profile-item',
-                  params:  { profileId: o?.item?.id, title: o?.item?.title },
-                })}  
+                onListItemPress={(o: any) => SectionManager.push(router, 'profile-item', { profileId: o?.item?.id, title: o?.item?.title })}  
               />
             )}
           />
