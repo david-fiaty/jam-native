@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useLocalSearchParams } from "expo-router";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { usePathname } from 'expo-router';
-import { setActiveSections } from "@/redux/slices/SectionSlice";
 import { StyleSheet } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import { Layout } from "@/constants/Layout";
@@ -32,35 +30,18 @@ import AddProjectForm from "@/components/form/AddProjectForm";
 
 const SectionView = () => { 
   const path = usePathname();
-  const params = useLocalSearchParams();
-  const dispatch = useDispatch();
   const [currentSection, setCurrentSection] = useState<any>(null);
-  const [sectionStack, setSectionStack] = useState<any[]>([]);
   const sectionState: any = useSelector((state: any) => state.section);
   const modalState: any = useSelector((state: any) => state.modal);
   const sectionId: any = path.split('/').pop();
 
-  const getSectionStack = () => {
-    let section: any = getSection(sectionId, false);
-    let isStacked: any = sectionState.active.find((o: any) => o.id === sectionId);
-    
-    if (section && isStacked) {
-      return sectionState.active;
-    }
-    else if (section) {
-      return [...sectionState.active, {
-        ...section,
-        ...{ params: params },
-      }];
-    }
-
-    return [];
-  };
-
   const getCurrentSection = () => {
+    let activeSections: any[] = [...sectionState.active];
+    let targetSection: any = getSection(sectionId || Config.defaultSection);
+
     return {
-      ...getSection(sectionId || Config.defaultSection),
-      ...{ params: params },
+      ...targetSection,
+      ...activeSections[activeSections.length - 1],
     };
   };
 
@@ -76,7 +57,7 @@ const SectionView = () => {
 
   const getSection = (sectionId: any, renderer: boolean = true) => {
     return getSections(renderer).find((o: any) => o.id === sectionId);
-  }
+  };
 
   const getSections = (renderer: boolean = true) => {
     let config: any[] = getConfig();
@@ -86,7 +67,7 @@ const SectionView = () => {
     }
 
     return config;
-  }
+  };
 
   const getConfig = () => {
     return [
@@ -200,14 +181,11 @@ const SectionView = () => {
         ...o,
       };
     });
-  }
+  };
 
   useEffect(() => {
-    let activeSections: any [] = getSectionStack();
     setCurrentSection(getCurrentSection());
-    setSectionStack(activeSections);
-    dispatch(setActiveSections(activeSections));
-  }, [sectionId]);
+  }, [sectionId, sectionState]);
 
   return (
     <>
