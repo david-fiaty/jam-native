@@ -32,7 +32,8 @@ const SectionBackButton = () => {
       />
   
       <TextView style={styles.title}>
-        {currentSection.title}
+        Back
+        {/*currentSection.title*/}
       </TextView>
 
     </BoxView>
