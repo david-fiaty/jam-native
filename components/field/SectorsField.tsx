@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from '@/redux/slices/FormSlice';
 import { Layout } from '@/constants/Layout';
-import { Colors } from '@/constants/Colors';
 import SpinnerView from '../view/SpinnerView';
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
@@ -109,7 +108,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
       )}
 
       {currentValue?.length > 0 && (
-        <View style={styles.preview}>
+        <View style={Layout.fieldSelectionPreview}>
           {currentValue.map((item: any) => {
             return (
               <TagView
@@ -129,20 +128,5 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  preview: {
-    width: '100%',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: Layout.space.base,
-    padding: Layout.space.base,
-    backgroundColor: Colors.secondary,
-    borderWidth: Layout.borderWidth.base, 
-    borderColor: Colors.secondary, 
-    borderRadius: Layout.radius.round,
-    justifyContent: 'flex-start',
-  },
-});
 
 export default SectorsField;

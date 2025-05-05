@@ -67,7 +67,7 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Pr
       )}
 
       {currentValue?.length > 0 && (
-        <View style={styles.preview}> 
+        <View style={Layout.fieldSelectionPreview}> 
           { currentValue.map((item: any) => {
             return (
               <TagView
@@ -91,18 +91,6 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Pr
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-  },
-  preview: {
-    width: '100%',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: Layout.space.base,
-    padding: Layout.space.base,
-    backgroundColor: Colors.secondary,
-    borderWidth: Layout.borderWidth.base, 
-    borderColor: Colors.secondary, 
-    borderRadius: Layout.radius.round,
-    justifyContent: 'flex-start',
   },
 });
 

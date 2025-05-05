@@ -139,8 +139,8 @@ const MediaPickerField = ({ value, preview, placeholder, onSelectItem, onDeleteI
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setIsLoaded(true);
         setSelectedMedia(await getSelectedMedia());
+        setIsLoaded(true);
       }
     })();
   }, [isLoaded]);
@@ -161,7 +161,7 @@ const MediaPickerField = ({ value, preview, placeholder, onSelectItem, onDeleteI
       )}
 
       { selectedMedia?.length > 0 && preview &&
-        <View style={styles.preview}>
+        <View style={Layout.fieldSelectionPreview}>
           { selectedMedia.map((data: any) => {
             if (data?.uri) return renderImagePreview(data);
           })}
@@ -174,18 +174,6 @@ const MediaPickerField = ({ value, preview, placeholder, onSelectItem, onDeleteI
 };
 
 const styles = StyleSheet.create({
-  preview: {
-    width: '100%',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: Layout.space.base,
-    padding: Layout.space.base,
-    backgroundColor: Colors.secondary,
-    borderWidth: Layout.borderWidth.base, 
-    borderColor: Colors.secondary, 
-    borderRadius: Layout.radius.round,
-    justifyContent: 'flex-start',
-  },
   mediaPreview: {
     borderRadius: Layout.radius.round,
   },
