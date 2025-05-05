@@ -5,7 +5,7 @@ import Store from "@/redux/Store";
 class SectionManager {
   push(router: any, sectionId: string, params?: any) {
     let activeSections: any[] = [...Store.getState().section.active];
-    
+
     activeSections.push({
       id: sectionId,
       params: params || {},
@@ -33,17 +33,20 @@ class SectionManager {
   }
 
   back(router: any) {
-    let activeSections: any = [...Store.getState().section.active];
-    let currentSection: any = null;
+    let sectionConfig: any[] = Store.getState().section.config;
+    let activeSections: any[] = [...Store.getState().section.active];
   
     activeSections.pop();
     Store.dispatch(setActiveSections(activeSections));
 
     if (activeSections.length > 0) {
-      currentSection = activeSections[activeSections.length -1];
+      let targetSection: any = activeSections[activeSections.length - 1];
+      let targetSectionConfig: any = sectionConfig.find((o: any) => o.id === targetSection.id);
+      let targetSectionPath: string = targetSectionConfig.backButtonRoute ? targetSectionConfig.backButtonRoute : targetSection.id; 
+
       router.dismissTo({
-        pathname: `/${currentSection.id}`,
-        params: currentSection?.params || {},
+        pathname: `/${targetSectionPath}`,
+        params: targetSection?.params || {},
       });
     }
     else {
