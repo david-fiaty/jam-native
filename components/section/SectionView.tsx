@@ -39,14 +39,6 @@ const SectionView = () => {
     let activeSections: any[] = [...sectionState.active];
     let targetSection: any = getSection(sectionId || Config.defaultSection);
 
-    console.log('activeSections ----> ', activeSections);
-    console.log('activeSections ----> ', targetSection);
-
-    console.log('resultdSection ----> ', {
-      ...targetSection,
-      ...activeSections[activeSections.length - 1],
-    });
-
     return {
       ...targetSection,
       ...activeSections[activeSections.length - 1],
