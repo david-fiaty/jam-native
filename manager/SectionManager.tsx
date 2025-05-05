@@ -19,7 +19,14 @@ import ProfileFormSection from "@/components/section/ProfileFormSection";
 import AddProjectForm from "@/components/form/AddProjectForm";
 
 class SectionManager {
-  previousSection(router: any) {
+  push(router: any, sectionId: string, params?: any) {
+    router.push({
+      pathname: `/${sectionId}`,
+      params: params,
+    });
+  }
+
+  back(router: any) {
     let activeSections: any = [...Store.getState().section.active];
   
     activeSections.pop();

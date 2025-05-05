@@ -8,6 +8,7 @@ import i18n from "@/translation/i18n";
 import ProjectListItem from "./ListItem/ProjectListItem";
 import TextView from "../view/TextView";
 import ScreenManager from "@/manager/ScreenManager";
+import SectionManager from "@/manager/SectionManager";
 
 type Props = {
   data?: any;
@@ -22,10 +23,7 @@ const SearchProjectsList = ({ data, filter }: Props) => {
   const [currentData, setCurrentData] = useState<any[]>([]);
 
   const onItemPress = (row: any) => {
-    router.push({
-      pathname: '/project-item',
-      params:  { projectId: row?.item?.id, title: row?.item?.title },
-    });
+    SectionManager.push(router, 'project-item', { projectId: row?.item?.id, title: row?.item?.title });
   };
 
   const renderEmptyMessage = () => {

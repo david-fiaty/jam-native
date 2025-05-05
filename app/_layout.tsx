@@ -39,7 +39,7 @@ const RootLayout = () => {
   });
 
   const backAction = () => {  
-    SectionManager.previousSection(router);
+    SectionManager.back(router);
     return true;
   };
 
