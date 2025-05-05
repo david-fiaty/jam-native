@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { usePathname } from 'expo-router';
+import { setSectionConfig } from "@/redux/slices/SectionSlice";
 import { StyleSheet } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import { Layout } from "@/constants/Layout";
@@ -30,6 +31,7 @@ import AddProjectForm from "@/components/form/AddProjectForm";
 
 const SectionView = () => { 
   const path = usePathname();
+  const dispatch = useDispatch();
   const [currentSection, setCurrentSection] = useState<any>(null);
   const sectionState: any = useSelector((state: any) => state.section);
   const modalState: any = useSelector((state: any) => state.modal);
@@ -185,6 +187,10 @@ const SectionView = () => {
 
   useEffect(() => {
     setCurrentSection(getCurrentSection());
+    
+    if (!sectionState.config.length) {
+      dispatch(setSectionConfig(getSections(false)));
+    }
   }, [sectionId, sectionState]);
 
   return (
