@@ -187,7 +187,7 @@ const SectionView = () => {
 
   useEffect(() => {
     setCurrentSection(getCurrentSection());
-    
+
     if (!sectionState.config.length) {
       dispatch(setSectionConfig(getSections(false)));
     }
@@ -197,7 +197,7 @@ const SectionView = () => {
     <>
       <MessageView />
       {currentSection?.showHeader === true && <SectionHeader style={styles.header} />}
-      {showBackButton() === true && <SectionBackButton currentSection={currentSection} />}
+      {showBackButton() === true && <SectionBackButton />}
 
       <BoxView
         direction="column"
