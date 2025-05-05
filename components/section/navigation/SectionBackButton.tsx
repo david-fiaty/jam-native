@@ -15,7 +15,7 @@ const SectionBackButton = ({ currentSection }: Props) => {
   const router = useRouter();
 
   const onPress = () => {
-    SectionManager.previousSection(router);
+    SectionManager.back(router);
   }
   
   return (

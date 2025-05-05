@@ -4,6 +4,7 @@ import { Colors } from '@/constants/Colors';
 import i18n from '@/translation/i18n';
 import TextView from '../view/TextView';
 import { Config } from '@/constants/Config';
+import SectionManager from '@/manager/SectionManager';
 
 type Props = {
   onPress: any,
@@ -11,7 +12,7 @@ type Props = {
 
 const SkipButton = ({onPress}: Props) => {
   const router = useRouter();
-  onPress = onPress ? onPress : router.push(Config.mainRoute);
+  onPress = onPress ? onPress : SectionManager.push(router, Config.mainRoute);
 
   return (
     <TouchableOpacity onPress={onPress}>

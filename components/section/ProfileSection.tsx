@@ -13,6 +13,7 @@ import ProfileHeaderView from "../view/ProfileHeaderView";
 import DividerView from "../view/DividerView";
 import ModalManager from "@/manager/ModalManager";
 import SpinnerView from "../view/SpinnerView";
+import SectionManager from "@/manager/SectionManager";
 
 const resource: string = 'profile';
 
@@ -57,12 +58,7 @@ const ProfileSection = () => {
         addButton={true}
         allButton={formData?.profile_projects?.length > 0}
         idArray={formData?.profile_projects || []}
-        onAddButtonPress={() => {
-          router.push('/add-project', {
-            profileId: profileId,
-            profileJams: formData?.profile_jams || [],
-          });
-        }}
+        onAddButtonPress={() => SectionManager.push(router, 'add-project', { profileId: profileId, profileJams: formData?.profile_jams || [] })}
       />
       <DividerView />
 

@@ -7,6 +7,7 @@ import { Colors } from '@/constants/Colors';
 import BoxView from '@/components/view/BoxView';
 import TextView from '@/components/view/TextView';
 import i18n from '@/translation/i18n';
+import SectionManager from '@/manager/SectionManager';
 
 const BottomLinks = () => {
   const router = useRouter();
@@ -19,7 +20,7 @@ const BottomLinks = () => {
 
   if (sectionId != 'about') {
     aboutLink = (
-      <TouchableOpacity onPress={() => router.push('/about')}>
+      <TouchableOpacity onPress={() => SectionManager.push(router, 'about')}>
         {aboutLink}
       </TouchableOpacity>
     );
@@ -27,7 +28,7 @@ const BottomLinks = () => {
 
   if (sectionId != 'legal') {
     legalLink = (
-      <TouchableOpacity onPress={() => router.push('/legal')}>
+      <TouchableOpacity onPress={() => SectionManager.push(router, 'legal')}>
         {legalLink}
       </TouchableOpacity>
     );
@@ -35,7 +36,7 @@ const BottomLinks = () => {
 
   if (sectionId != 'privacy') {
     privacyLink = (
-      <TouchableOpacity onPress={() => router.push('/privacy')}>
+      <TouchableOpacity onPress={() => SectionManager.push(router, 'privacy')}>
         {privacyLink}
       </TouchableOpacity>
     );

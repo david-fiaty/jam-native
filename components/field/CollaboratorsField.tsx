@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useSelector } from "react-redux";
 import { Layout } from '@/constants/Layout';
+import { Colors } from '@/constants/Colors';
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
@@ -9,7 +10,6 @@ import IconView from "../view/IconView";
 import SpinnerView from '../view/SpinnerView';
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
-import { Colors } from '@/constants/Colors';
 import InputTextField from './InputTextField';
 
 type Props = {
