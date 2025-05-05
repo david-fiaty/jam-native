@@ -45,16 +45,6 @@ const SectionView = () => {
     };
   };
 
-  const isModalTitleVisible = () => {
-    return modalState.active.length > 0 && modalState[modalState.active.length -1]?.showTitle === true;
-  };
-
-  const showBackButton = () => {
-    return currentSection?.showTitle === true 
-      && currentSection?.showBackButton === true 
-      && (!modalState.active.length || !isModalTitleVisible());
-  };
-
   const getSection = (sectionId: any, renderer: boolean = true) => {
     return getSections(renderer).find((o: any) => o.id === sectionId);
   };
@@ -181,6 +171,16 @@ const SectionView = () => {
         ...o,
       };
     });
+  };
+  
+  const isModalTitleVisible = () => {
+    return modalState.active.length > 0 && modalState[modalState.active.length -1]?.showTitle === true;
+  };
+
+  const showBackButton = () => {
+    return currentSection?.showTitle === true 
+      && currentSection?.showBackButton === true 
+      && (!modalState.active.length || !isModalTitleVisible());
   };
 
   useEffect(() => {
