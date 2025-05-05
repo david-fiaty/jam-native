@@ -5,7 +5,7 @@ import Store from "@/redux/Store";
 class SectionManager {
   push(router: any, sectionId: string, params?: any) {
     let activeSections: any[] = [...Store.getState().section.active];
-
+    
     activeSections.push({
       id: sectionId,
       params: params || {},
