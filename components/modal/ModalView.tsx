@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useSelector } from "react-redux";
+import { Layout } from '@/constants/Layout';
 import Modal from "react-native-modal";
 import ModalBackButton from './ModalBackButton';
 import i18n from '@/translation/i18n';
@@ -15,27 +16,18 @@ import JammersList from "@/components/list/JammersList";
 import SectorsList from "@/components/list/SectorsList";
 import LocationMapView from "@/components/view/LocationMapView";
 import CollaboratorsList from "@/components/list/CollaboratorsList";
-import { Layout } from '@/constants/Layout';
 
 type Props = {
+  currentSection?: any;
   style?: any;
 };
 
-const ModalView = ({ style }: Props) => {
-  const [currentSection, setCurrentSection] = useState<any>(null);
+const ModalView = ({ currentSection, style }: Props) => {
   const [currentModal, setCurrentModal] = useState<any>(null);
   const modalState: any = useSelector((state: any) => state.modal);
-  const sectionState: any = useSelector((state: any) => state.section);
   
   const containerStyle: any = {
     top: modalState.active.length > 1 ? -Layout.space.base*3.6 : 0,
-  };
-
-  const getCurrentSection = () => {
-    let activeSections: any = sectionState.active;
-    let targetSection: any = sectionState.config.find((o: any) => o.id === activeSections[activeSections.length - 1]?.id);
-
-    return targetSection;
   };
 
   const canShowModal = () => {
@@ -43,6 +35,7 @@ const ModalView = ({ style }: Props) => {
   };
 
   const renderBackButton = () => {
+    // Todo - Fix parent modal visibility
     const activeModalsCount: number = modalState.active.length;
     const currentModalIndex: number = modalState.active.findIndex((o: any) => o.id === currentModal?.id);
   
@@ -170,7 +163,6 @@ const ModalView = ({ style }: Props) => {
   };
 
   useEffect(() => {
-    setCurrentSection(getCurrentSection());
     setCurrentModal(getActiveModal());
   }, [modalState]);
 
