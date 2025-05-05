@@ -11,6 +11,7 @@ import StaticData from '@/constants/StaticData';
 import TagView from "./TagView";
 import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
+import SectionManager from "@/manager/SectionManager";
 
 const profileImageSize: number = 100;
 
@@ -73,11 +74,7 @@ const ProfileHeaderView = ({ profileItem, canEdit }: Props) => {
 
       <View style={styles.profileHeaderRight}>
         {canEdit === true && (
-          <TouchableOpacity
-            onPress={() =>
-              router.push('/profile-form')
-            }
-          >
+          <TouchableOpacity onPress={() => SectionManager.push(router, 'profile-form')}>
             <TextView underline={true}>{i18n.t("Edit")}</TextView>
           </TouchableOpacity>
         )}
