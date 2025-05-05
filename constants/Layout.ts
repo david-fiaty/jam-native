@@ -172,5 +172,17 @@ export const Layout = {
   backButtonContainer: {
     marginLeft: space.base*1.5,
   },
+  fieldSelectionPreview: {
+    width: '100%',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: space.base,
+    padding: space.base,
+    backgroundColor: Colors.secondary,
+    borderWidth: borderWidth.base, 
+    borderColor: Colors.secondary, 
+    borderRadius: radius.round,
+    justifyContent: 'flex-start',
+  },
 };
 
