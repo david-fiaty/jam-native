@@ -228,17 +228,12 @@ const JamForm = ({ jamId }: Props) => {
 
         <DividerView theme="white" />
 
+        <TextView>{i18n.t('Select media')}</TextView>
         <MediaPickerField
           preview={true}
           value={formData?.upload_medias}
           onSelectItem={(data: any) => FormManager.updateField(resource, 'upload_medias', data)}
           onDeleteItem={(data: any) => FormManager.updateField(resource, 'upload_medias', data)}
-          label={
-            <BoxView direction="row" align="center">
-              <IconView name="plus" theme="secondary" radius="round" />
-              <TextView>{i18n.t('Add media')}</TextView>
-            </BoxView>
-          }
         />
         {FormManager.renderError('upload_medias')}
 

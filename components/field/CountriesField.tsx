@@ -69,7 +69,7 @@ const CountriesField = ({ resource, field, label, onPressEvent, onDeleteEvent }:
       </BoxView>
 
       { selectedCountries?.length > 0 && (
-        <View style={styles.preview}>
+        <View style={Layout.fieldSelectionPreview}>
           { selectedCountries.map((item: any) => {
             return (
               <TagView
@@ -90,14 +90,6 @@ const CountriesField = ({ resource, field, label, onPressEvent, onDeleteEvent }:
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-  },
-  preview: {
-    width: '100%',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: Layout.space.base,
-    marginTop: Layout.space.base,
-    marginBottom: Layout.space.base,
   },
 });
 
