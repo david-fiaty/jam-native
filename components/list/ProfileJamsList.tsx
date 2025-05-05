@@ -10,6 +10,7 @@ import SpinnerView from "../view/SpinnerView";
 import BoxView from "../view/BoxView";
 import JamListItem from "./ListItem/JamListItem";
 import ScreenManager from "@/manager/ScreenManager";
+import SectionManager from "@/manager/SectionManager";
 
 type Props = {
   title?: any,
@@ -56,10 +57,7 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
       onListItemPress(row);
     }
     else {
-      router.push({
-        pathname: '/jam-item',
-        params:  { jamId: row?.item?.id, title: row?.item?.title },
-      });
+      SectionManager.push(router, 'jam-item', { jamId: row?.item?.id, title: row?.item?.title });
     }
   };
 
