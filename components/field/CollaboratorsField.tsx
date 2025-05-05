@@ -1,16 +1,14 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setFormData } from '@/redux/slices/FormSlice';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
-import i18n from "@/translation/i18n";
-import BoxView from "../view/BoxView";
-import TextView from "../view/TextView";
 import IconView from "../view/IconView";
-import SpinnerView from '../view/SpinnerView';
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from './InputTextField';
+import SpinnerView from '../view/SpinnerView';
 
 type Props = {
   resource: string;
@@ -18,40 +16,40 @@ type Props = {
   value?: any;
   placeholder?: any;
   onPress?: () => void;
-  onChangeValue: (value: any) => void;
 };
 
-const CollaboratorsField = ({ resource, field, value, placeholder, onPress, onChangeValue }: Props) => {
+const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Props) => {
+  const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const deleteItem = (item: any) => {
-    // Todo - Fix delete items
-
-    // Selected IDs
     let selectedIds: any[] = [...(value?.length > 0 ? value : [])];
-
-    // Delete target item
     selectedIds = selectedIds.filter((n: number) => n !== item.id);
 
     setCurrentValue(selectedIds);
-    onChangeValue(formData?.[field]);
+    
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: field, 
+      value: selectedIds, 
+    }));
   };
 
   useEffect(() => {
     (async () => {
-        if (!isLoaded) {
-          if (formData?.[field]?.length) {
-            setCurrentValue(await EntityManager.getProfiles({ items_ids: formData[field] }));
-          }
+      if (formData?.[field]?.length) {
+        setCurrentValue(await EntityManager.getProfiles({ items_ids: formData[field] }));
+      }
 
-          setIsLoaded(true);
-        }
-
-        onChangeValue(formData?.[field]);
+      if (!isLoaded) {
+        setIsLoaded(true);
+      }
     })();    
   }, [isLoaded, value, formData, field]);
+
+  if (!isLoaded) return <SpinnerView size="small" />;
 
   return (
     <>
@@ -83,7 +81,7 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress, onCh
             );
           })}
 
-          <IconView name="plus" theme="transparent" onPress={onPress}/>
+          <IconView name="plus" theme="transparent" onPress={onPress} />
         </View>
       )}
     </>

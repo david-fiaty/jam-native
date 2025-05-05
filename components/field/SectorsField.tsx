@@ -119,7 +119,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress, onChangeVa
             );
           })}
 
-          <IconView name="plus" theme="transparent" onPress={onPress}/>
+          <IconView name="plus" theme="transparent" onPress={onPress} />
         </View>
       )}
     </>
