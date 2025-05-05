@@ -42,10 +42,10 @@ class SectionManager {
     if (activeSections.length > 0) {
       let targetSection: any = activeSections[activeSections.length - 1];
       let targetSectionConfig: any = sectionConfig.find((o: any) => o.id === targetSection.id);
-      let targetSectionPath: string = targetSectionConfig.backButtonRoute ? targetSectionConfig.backButtonRoute : targetSection.id; 
+      let targetSectionPath: string = targetSectionConfig.backButtonRoute ? targetSectionConfig.backButtonRoute : `/${targetSection.id}`; 
 
       router.dismissTo({
-        pathname: `/${targetSectionPath}`,
+        pathname: targetSectionPath,
         params: targetSection?.params || {},
       });
     }
