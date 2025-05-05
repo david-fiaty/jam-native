@@ -18,16 +18,24 @@ import CollaboratorsList from "@/components/list/CollaboratorsList";
 import { Layout } from '@/constants/Layout';
 
 type Props = {
-  currentSection?: any;
   style?: any;
 };
 
-const ModalView = ({ currentSection, style }: Props) => {
+const ModalView = ({ style }: Props) => {
+  const [currentSection, setCurrentSection] = useState<any>(null);
   const [currentModal, setCurrentModal] = useState<any>(null);
   const modalState: any = useSelector((state: any) => state.modal);
+  const sectionState: any = useSelector((state: any) => state.section);
   
   const containerStyle: any = {
     top: modalState.active.length > 1 ? -Layout.space.base*3.6 : 0,
+  };
+
+  const getCurrentSection = () => {
+    let activeSections: any = sectionState.active;
+    let targetSection: any = sectionState.config.find((o: any) => o.id === activeSections[activeSections.length - 1]?.id);
+
+    return targetSection;
   };
 
   const canShowModal = () => {
@@ -163,6 +171,7 @@ const ModalView = ({ currentSection, style }: Props) => {
   };
 
   useEffect(() => {
+    setCurrentSection(getCurrentSection());
     setCurrentModal(getActiveModal());
   }, [modalState]);
 
