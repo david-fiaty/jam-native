@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useSelector } from "react-redux";
+import { Layout } from '@/constants/Layout';
 import Modal from "react-native-modal";
 import ModalBackButton from './ModalBackButton';
 import i18n from '@/translation/i18n';
@@ -15,7 +16,6 @@ import JammersList from "@/components/list/JammersList";
 import SectorsList from "@/components/list/SectorsList";
 import LocationMapView from "@/components/view/LocationMapView";
 import CollaboratorsList from "@/components/list/CollaboratorsList";
-import { Layout } from '@/constants/Layout';
 
 type Props = {
   currentSection?: any;
@@ -27,8 +27,7 @@ const ModalView = ({ currentSection, style }: Props) => {
   const modalState: any = useSelector((state: any) => state.modal);
   
   const containerStyle: any = {
-    //top: modalState.active.length > 1 ? -Layout.space.base*3.6 : 0, Todo - Fix submodal display
-    top: 0,
+    top: modalState.active.length > 1 ? -Layout.space.base*3.6 : 0,
   };
 
   const canShowModal = () => {
