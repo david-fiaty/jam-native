@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
 import { useSelector } from "react-redux";
 import { useRouter } from 'expo-router';
@@ -10,25 +11,23 @@ import SectionManager from '@/manager/SectionManager';
 
 const SectionBackButton = () => {
   const router = useRouter();
+  const [currentSection, setCurrentSection] = useState<any>(null);
   const sectionState: any = useSelector((state: any) => state.section);
 
   const onPress = () => {
-    let activeSections: any[] = sectionState.active;
+    SectionManager.back(router);
+  };
 
-    console.log(activeSections);
-    
-    /*
-    let activeSections: any[] = sectionState.active;
-    let targetSection: any = {};
+  const getCurrentSection = () => {
+    let activeSections: any = sectionState.active;
+    let targetSection: any = sectionState.config.find((o: any) => o.id === activeSections[activeSections.length - 1]?.id);
 
+    return targetSection;
+  };
 
-    if (activeSections.length > 1) {
-      targetSection = activeSections[activeSections.length - 2];
-    }
-    */
-
-    //SectionManager.back(router);
-  }
+  useEffect(() => {
+    setCurrentSection(getCurrentSection());
+  }, [sectionState]);
   
   return (
     <BoxView
@@ -45,8 +44,7 @@ const SectionBackButton = () => {
       />
   
       <TextView style={styles.title}>
-        Back
-        {/*currentSection.title*/}
+        { currentSection?.title }
       </TextView>
 
     </BoxView>
