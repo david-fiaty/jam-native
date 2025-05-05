@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setFormData } from '@/redux/slices/FormSlice';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
 import SpinnerView from '../view/SpinnerView';
@@ -15,10 +16,10 @@ type Props = {
   value?: any;
   placeholder?: any;
   onPress: () => void;
-  onChangeValue: (value: any) => void;
 };
 
-const SectorsField = ({ resource, field, value, placeholder, onPress, onChangeValue }: Props) => {
+const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) => {
+  const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [currentValue, setCurrentValue] = useState<any>([]);
@@ -71,7 +72,12 @@ const SectorsField = ({ resource, field, value, placeholder, onPress, onChangeVa
     }
 
     setCurrentValue(getSelectedSectors(selectedIds));
-    onChangeValue(formData?.[field]);
+
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: field, 
+      value: selectedIds, 
+    }));
   }
 
   useEffect(() => {
@@ -80,8 +86,6 @@ const SectorsField = ({ resource, field, value, placeholder, onPress, onChangeVa
         setSectorsData(await EntityManager.getSectors());
         setIsLoaded(true);
       }
-
-      onChangeValue(formData?.[field]);
     })();
 
     setCurrentValue(getSelectedSectors(value));
