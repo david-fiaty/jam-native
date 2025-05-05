@@ -22,7 +22,14 @@ class SectionManager {
   push(router: any, sectionId: string, params?: any) {
     router.push({
       pathname: `/${sectionId}`,
-      params: params,
+      params: params || {},
+    });
+  }
+
+  replace(router: any, sectionId: string, params?: any) {
+    router.replace({
+      pathname: `/${sectionId}`,
+      params: params || {},
     });
   }
 
