@@ -15,10 +15,9 @@ type Props = {
   value?: any;
   placeholder?: any;
   onPress?: () => void;
-  //onChangeValue?: (value: any) => void;
 };
 
-const CollaboratorsField = ({ resource, field, value, placeholder, onPress /*, onChangeValue*/ }: Props) => {
+const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState<any>([]);
@@ -53,7 +52,6 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress /*, o
       if (formData?.[field]?.length) {
         setCurrentValue(await EntityManager.getProfiles({ items_ids: formData[field] }));
       }
-        //onChangeValue(formData?.[field]);
     })();    
   }, [isLoaded, value, formData, field]);
 
