@@ -39,7 +39,14 @@ const SectionView = () => {
 
   const getCurrentSection = () => {
     let activeSections: any[] = [...sectionState.active];
-    let targetSection: any = getSection(sectionId || Config.defaultSection);
+    let targetSectionId: string = sectionId || Config.defaultSection;
+    let targetSection: any = {};
+
+    if (activeSections.length > 0) {
+      targetSectionId = activeSections[activeSections.length - 1].id;
+    }
+
+    targetSection = getSection(targetSectionId);
 
     return {
       ...targetSection,
@@ -187,7 +194,7 @@ const SectionView = () => {
 
   useEffect(() => {
     setCurrentSection(getCurrentSection());
-    
+
     if (!sectionState.config.length) {
       dispatch(setSectionConfig(getSections(false)));
     }
