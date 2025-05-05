@@ -24,8 +24,6 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Pr
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const deleteItem = (item: any) => {
-    // Todo - Fix delete items
-    // Selected IDs
     let selectedIds: any[] = [...(value?.length > 0 ? value : [])];
     selectedIds = selectedIds.filter((n: number) => n !== item.id);
 
@@ -36,15 +34,6 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Pr
       key: field, 
       value: selectedIds, 
     }));
-    
-
-    /*
-    // Delete target item
-    selectedIds = selectedIds.filter((n: number) => n !== item.id);
-
-    setCurrentValue(selectedIds);
-    onChangeValue(formData?.[field]);
-    */
   };
 
   useEffect(() => {
