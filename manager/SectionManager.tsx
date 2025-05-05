@@ -32,14 +32,7 @@ class SectionManager {
     });
   }
 
-  back(router: any, sectionId: string, params?: any) {
-    router.dismissTo({
-      pathname: `/${sectionId}`,
-      params: params || {},
-    });
-
-
-    /*
+  back(router: any) {
     let sectionConfig: any[] = Store.getState().section.config;
     let activeSections: any[] = [...Store.getState().section.active];
   
@@ -61,7 +54,6 @@ class SectionManager {
       Store.dispatch(setActiveSections([]));
       router.dismissTo('/');
     }
-      */
   }
 
   getPreviousRoute(section: any) {
