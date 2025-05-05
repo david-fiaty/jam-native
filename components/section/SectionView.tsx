@@ -76,7 +76,7 @@ const SectionView = () => {
 
   const getSection = (sectionId: any, renderer: boolean = true) => {
     return getSections(renderer).find((o: any) => o.id === sectionId);
-  }
+  };
 
   const getSections = (renderer: boolean = true) => {
     let config: any[] = getConfig();
@@ -86,7 +86,7 @@ const SectionView = () => {
     }
 
     return config;
-  }
+  };
 
   const getConfig = () => {
     return [
@@ -200,7 +200,7 @@ const SectionView = () => {
         ...o,
       };
     });
-  }
+  };
 
   useEffect(() => {
     let activeSections: any [] = getSectionStack();
