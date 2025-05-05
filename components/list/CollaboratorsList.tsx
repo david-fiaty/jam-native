@@ -92,11 +92,13 @@ const CollaboratorsList = ({ resource, field }: Props) => {
         if (formData?.[field]?.length && !selectedProfiles.length) {
           setSelectedProfiles(formData[field]);
         }
+
+        setIsLoaded(true);
       }
     })();
-
-    setIsLoaded(true);
   }, [profiles, formData, field, activeModal, selectedProfiles]);
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
