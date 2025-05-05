@@ -13,7 +13,20 @@ const SectionBackButton = () => {
   const sectionState: any = useSelector((state: any) => state.section);
 
   const onPress = () => {
-    console.log('----', [...sectionState.active].pop());
+    let activeSections: any[] = sectionState.active;
+
+    console.log(activeSections);
+    
+    /*
+    let activeSections: any[] = sectionState.active;
+    let targetSection: any = {};
+
+
+    if (activeSections.length > 1) {
+      targetSection = activeSections[activeSections.length - 2];
+    }
+    */
+
     //SectionManager.back(router);
   }
   
