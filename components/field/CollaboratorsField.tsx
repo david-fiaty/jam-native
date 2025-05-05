@@ -8,6 +8,7 @@ import IconView from "../view/IconView";
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from './InputTextField';
+import SpinnerView from '../view/SpinnerView';
 
 type Props = {
   resource: string;
@@ -41,8 +42,14 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Pr
       if (formData?.[field]?.length) {
         setCurrentValue(await EntityManager.getProfiles({ items_ids: formData[field] }));
       }
+
+      if (!isLoaded) {
+        setIsLoaded(true);
+      }
     })();    
   }, [isLoaded, value, formData, field]);
+
+  if (!isLoaded) return <SpinnerView size="small" />;
 
   return (
     <>
