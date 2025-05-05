@@ -118,6 +118,8 @@ const SectorsField = ({ resource, field, value, placeholder, onPress, onChangeVa
               </TagView>
             );
           })}
+
+          <IconView name="plus" theme="transparent" onPress={onPress}/>
         </View>
       )}
     </>

@@ -82,6 +82,8 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress, onCh
               </TagView>
             );
           })}
+
+          <IconView name="plus" theme="transparent" onPress={onPress}/>
         </View>
       )}
     </>
