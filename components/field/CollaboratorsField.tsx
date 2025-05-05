@@ -83,7 +83,7 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress, onCh
             );
           })}
 
-          <IconView name="plus" theme="transparent" onPress={onPress}/>
+          <IconView name="plus" theme="transparent" onPress={onPress} />
         </View>
       )}
     </>
