@@ -4,6 +4,15 @@ import Store from "@/redux/Store";
 
 class SectionManager {
   push(router: any, sectionId: string, params?: any) {
+    let activeSections: any[] = [...Store.getState().section.active];
+
+    activeSections.push({
+      id: sectionId,
+      params: params || {},
+    })
+
+    Store.dispatch(setActiveSections(activeSections));
+
     router.push({
       pathname: `/${sectionId}`,
       params: params || {},
@@ -11,6 +20,12 @@ class SectionManager {
   }
 
   replace(router: any, sectionId: string, params?: any) {
+    let activeSections: any[] = [...Store.getState().section.active];
+
+    activeSections.pop();
+
+    Store.dispatch(setActiveSections(activeSections));
+
     router.replace({
       pathname: `/${sectionId}`,
       params: params || {},
@@ -19,25 +34,17 @@ class SectionManager {
 
   back(router: any) {
     let activeSections: any = [...Store.getState().section.active];
+    let currentSection: any = null;
   
     activeSections.pop();
     Store.dispatch(setActiveSections(activeSections));
 
     if (activeSections.length > 0) {
-      let previousSection: any = activeSections[activeSections.length - 1];
-      let sectionParams: any = previousSection?.params || {};
-
-      if (previousSection.backButtonRoute !== null) {
-        router.dismissTo(this.getPreviousRoute(previousSection), sectionParams);
-      }
-      else if (previousSection?.id) {
-        router.dismissTo(`/${previousSection.id}`);
-      }
-      else {
-        Store.dispatch(setActiveModals([]));
-        Store.dispatch(setActiveSections([]));
-        router.dismissTo('/');
-      } 
+      currentSection = activeSections[activeSections.length -1];
+      router.dismissTo({
+        pathname: `/${currentSection.id}`,
+        params: currentSection?.params || {},
+      });
     }
     else {
       Store.dispatch(setActiveModals([]));
