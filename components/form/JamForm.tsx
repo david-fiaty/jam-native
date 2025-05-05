@@ -220,7 +220,7 @@ const JamForm = ({ jamId }: Props) => {
           field="collaborators_ids"
           placeholder={i18n.t('Select collaborators')}
           value={formData?.collaborators_ids}
-          onChangeValue={(value: string) => FormManager.updateField(resource, 'collaborators_ids', value)}
+          //onChangeValue={(value: string) => FormManager.updateField(resource, 'collaborators_ids', value)}
           onPress={() => ModalManager.toggleModal('CollaboratorsList', {
             resource: resource,
             field: "collaborators_ids",
