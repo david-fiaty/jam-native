@@ -7,16 +7,17 @@ import BoxView from "../view/BoxView";
 import SpinnerView from '../view/SpinnerView';
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
+import TextView from '../view/TextView';
 
 type Props = BaseProps & {
   resource: string;
   field: string;
-  label?: any;
-  onPressEvent?: () => void;
-  onDeleteEvent: (item: any) => void;
+  value?: any;
+  placeholder?: any;
+  onPress?: () => void;
 };
 
-const CountriesField = ({ resource, field, label, onPressEvent, onDeleteEvent }: Props) => {
+const CountriesField = ({ resource, field, value, placeholder, onPress }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [countriesData, setCountriesData] = useState<any>([]);
   const [selectedCountries, setSelectedCountries] = useState<any>([]);
@@ -54,6 +55,8 @@ const CountriesField = ({ resource, field, label, onPressEvent, onDeleteEvent }:
       setSelectedCountries(getSelectedCountries());
     })();
   }, [isLoaded]);
+
+  return <TextView>countries</TextView>
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
