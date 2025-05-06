@@ -3,11 +3,9 @@ import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import ListView from "../view/ListView";
-import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
 import ProjectListItem from "./ListItem/ProjectListItem";
 import TextView from "../view/TextView";
-import ScreenManager from "@/manager/ScreenManager";
 import SectionManager from "@/manager/SectionManager";
 
 type Props = {
@@ -19,7 +17,6 @@ const SearchProjectsList = ({ data, filter }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [projectsImages, setProjectsImages] = useState<any>({});
   const [currentData, setCurrentData] = useState<any[]>([]);
 
   const onItemPress = (row: any) => {
@@ -33,19 +30,13 @@ const SearchProjectsList = ({ data, filter }: Props) => {
   };
 
   useEffect(() => {
-    if (data?.length > 0) {
-      data.map((item: any) => {
-        EntityManager.getProjectImageUrl(item).then((value: any) => {
-          if (value && !projectsImages?.[item?.id])
-            setProjectsImages({ ...projectsImages, ...{ [item?.id]: value } });
-        });
-      });
-
-      setCurrentData(data);
-    }
-
-    if (!isLoaded) setIsLoaded(true);
-  }, [isLoaded, data, filter]);
+    (async () => {
+      if (!isLoaded) {
+        setCurrentData(data);
+        setIsLoaded(true)
+      }
+    })();
+  }, [isLoaded, data]);
 
   return (
     <View style={styles.container}>
@@ -58,7 +49,6 @@ const SearchProjectsList = ({ data, filter }: Props) => {
         renderItem={(row: any) => (
           <ProjectListItem
             row={row}
-            images={projectsImages}
             onListItemPress={(row: any) => onItemPress(row)}
           />
         )}
