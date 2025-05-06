@@ -42,7 +42,7 @@ const ProjectItemView = ({ projectId }: Props) => {
 
       <DividerView />
 
-      <TextView style={styles.sectionTitle}>{i18n.t('Jams')}</TextView>
+      <TextView style={styles.sectionTitle}>{i18n.t('Jams')} ({projectItem?.jams?.length || 0})</TextView>
       <ProjectJamsList 
         resource="project"
         selectedIds={projectItem?.jams}
