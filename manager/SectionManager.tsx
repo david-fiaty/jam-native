@@ -23,13 +23,12 @@ class SectionManager {
 
   back(router: any) {
     let activeSections: any[] = [...Store.getState().section.active];
-    activeSections.pop();
-
+    
     Store.dispatch(setActiveSections(activeSections));
 
     if (activeSections.length > 0 && activeSections[activeSections.length - 1].backButtonRoute !== null) {
       router.dismissTo({
-        pathname: `/${activeSections[activeSections.length - 1]?.backButtonRoute || ''}`,
+        pathname: `/${activeSections[activeSections.length - 1].backButtonRoute}`,
         params: activeSections[activeSections.length - 1]?.params || {},
       });
     }
