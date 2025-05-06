@@ -3,7 +3,6 @@ import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import { BaseProps } from '@/constants/Types';
 import BoxView from "../view/BoxView";
-import BackButton from "../button/BackButton";
 import ProjectsList from "../list/ProjectsList";
 import i18n from "@/translation/i18n";
 import ScreenManager from "@/manager/ScreenManager";
@@ -21,12 +20,6 @@ const ProjectScreen = ({ idArray, title }: Props) => {
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={false} style={[Layout.screenContent, styles.container]}>
-      <BoxView direction="column" align="center" style={Layout.backButtonContainer}>
-        <BackButton
-          title={screenTitle}
-          onPress={() => ScreenManager.popScreen(router)}
-        />
-      </BoxView>
       <BoxView style={Layout.mainContent}>
         <ProjectsList idArray={idArray} />
       </BoxView>

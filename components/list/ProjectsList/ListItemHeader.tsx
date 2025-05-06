@@ -6,11 +6,11 @@ import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
 import TextView from "@/components/view/TextView";
 import IconView from "@/components/view/IconView";
-import ScreenManager from "@/manager/ScreenManager";
 import UserManager from "@/manager/UserManager";
 import i18n from "@/translation/i18n";
 import JamStatusButton from "@/components/button/JamStatusButton";
 import ModalManager from "@/manager/ModalManager";
+import SectionManager from "@/manager/SectionManager";
 
 type Props = BaseProps & {
   row?: any;
@@ -38,7 +38,7 @@ const ListItemHeader = ({ row }: Props) => {
           onPress={() =>
             isLoggedIn
               ? ModalManager.toggleModal("HostsList", { jamId: row?.item?.id })
-              : ScreenManager.pushScreen(router, '/login')
+              : SectionManager.push(router, 'login')
           }
         >
           <TextView>
@@ -56,7 +56,7 @@ const ListItemHeader = ({ row }: Props) => {
           onPress={() =>
             isLoggedIn
               ? ModalManager.toggleModal("MoreJamActionsView", { entityId: row?.item?.id })
-              : ScreenManager.pushScreen(router, '/login')
+              : SectionManager.push(router, 'login')
           }
         />
       </BoxView>
