@@ -12,7 +12,7 @@ type Props = {
 
 const SkipButton = ({onPress}: Props) => {
   const router = useRouter();
-  onPress = onPress ? onPress : SectionManager.push(router, Config.mainRoute);
+  onPress = onPress ? onPress : SectionManager.push(router, Config.mainSection);
 
   return (
     <TouchableOpacity onPress={onPress}>

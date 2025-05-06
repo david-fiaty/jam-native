@@ -19,6 +19,7 @@ import SectorsField from "../field/SectorsField";
 import ModalManager from "@/manager/ModalManager";
 import LocationPickerField from "../field/LocationPickerField";
 import FormManager from "@/manager/FormManager";
+import SectionManager from "@/manager/SectionManager";
 
 const resource: string = 'signup';
 
@@ -51,7 +52,7 @@ const SignupForm = () => {
       });
     }
     else {
-      router.replace(Config.mainRoute);
+      SectionManager.push(router, Config.mainSection);
     }
 
     setIsProcessing(false);
