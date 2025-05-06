@@ -37,19 +37,19 @@ const ProjectListItem = ({ row, isAddable, isDeletable, isSelected, multiSelect,
 
   
   const getProjectImages = async (row: any) => {
-    let urls: any[] = [];
+    let urlArray: any[] = [];
 
     if (row.item?.jams?.length > 0) {
       let projectJams: any = await EntityManager.getJams({ items_ids: row.item.jams });
 
       projectJams.map((o: any) => {
         if (o?.medias?.[0]?.url?.length) {
-          urls.push(MediaManager.getImageUrl(o.medias[0].url));
+          urlArray.push(MediaManager.getImageUrl(o.medias[0].url));
         }
       }); 
     }
     
-    return urls;
+    return urlArray;
   };
 
   const renderItem = () => {
