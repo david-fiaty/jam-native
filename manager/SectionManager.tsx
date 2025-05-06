@@ -54,7 +54,6 @@ class SectionManager {
     let activeSections: any[] = [...Store.getState().section.active];
 
     activeSections.pop();
-
     Store.dispatch(setActiveSections(activeSections));
 
     router.replace({
