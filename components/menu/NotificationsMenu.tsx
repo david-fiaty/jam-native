@@ -19,7 +19,7 @@ const NotificationsMenu = () => {
   const renderItem = (row: any) => (
     <TouchableOpacity 
       key={row.item.id} 
-      onPress={() => ScreenManager.pushScreen(router, '/notification', { entityId: row.item.id })}
+      onPress={() => {/* Todo - Implement notification detail view */} }
     >
       <View style={Layout.menuItem}>
         <TextView>
