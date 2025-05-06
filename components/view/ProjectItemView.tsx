@@ -35,14 +35,13 @@ const ProjectItemView = ({ projectId }: Props) => {
       scroll={true}
       style={styles.container}
     >
-      <BoxView direction="column" align="flex-start" justify="flex-start" style={styles.projectDescription}>
-        <TextView style={styles.projectTitle}>{projectItem?.name}</TextView>
-        <TextView>{projectItem?.description}</TextView>
-      </BoxView>
+      <TextView style={styles.sectionTitle}>{i18n.t('Title')}</TextView>
+      <TextView>{projectItem?.name}</TextView>
+    
+      <TextView style={styles.sectionTitle}>{i18n.t('Description')}</TextView>
+      <TextView>{projectItem?.description}</TextView>
 
-      <DividerView />
-
-      <TextView style={styles.sectionTitle}>{i18n.t('Jams')}</TextView>
+      <TextView style={styles.sectionTitle}>{i18n.t('Jams')} ({projectItem?.jams?.length || 0})</TextView>
       <ProjectJamsList 
         resource="project"
         selectedIds={projectItem?.jams}
