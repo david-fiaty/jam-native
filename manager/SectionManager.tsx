@@ -19,63 +19,6 @@ class SectionManager {
     });
   }
 
-  replace(router: any, sectionId: string, params?: any) {
-    let activeSections: any[] = [...Store.getState().section.active];
-
-    activeSections.pop();
-
-    Store.dispatch(setActiveSections(activeSections));
-
-    router.replace({
-      pathname: `/${sectionId}`,
-      params: params || {},
-    });
-  }
-
-  back(router: any) {
-    let sectionConfig: any[] = Store.getState().section.config;
-    let activeSections: any[] = [...Store.getState().section.active];
-
-    if (activeSections.length > 1) { 
-      activeSections.pop();
-      Store.dispatch(setActiveSections(activeSections));
-
-      if (activeSections[activeSections.length - 1].backButtonRoute !== null) {
-        router.dismissTo({
-          pathname: activeSections[activeSections.length - 1].backButtonRoute,
-          params: activeSections[activeSections.length - 1]?.params || {},
-        });
-      }
-      else {
-        router.dismissTo({
-          pathname: `/${activeSections[activeSections.length - 1].id}`,
-          params: activeSections[activeSections.length - 1]?.params || {},
-        });
-      } 
-    }
-    else if (activeSections.length > 0) {
-      if (activeSections[activeSections.length - 1].backButtonRoute !== null) {
-        router.dismissTo({
-          pathname: activeSections[activeSections.length - 1].backButtonRoute,
-          params: activeSections[activeSections.length - 1]?.params || {},
-        });
-      }
-      else {
-        router.dismissTo({
-          pathname: `/${activeSections[activeSections.length - 1].id}`,
-          params: activeSections[activeSections.length - 1]?.params || {},
-        });
-      } 
-    }
-    else {
-      router.dismissTo({
-        pathname: `/`,
-        params: {},
-      });
-    }
-  }
-
-  /*
   back(router: any) {
     let sectionConfig: any[] = Store.getState().section.config;
     let activeSections: any[] = [...Store.getState().section.active];
@@ -107,7 +50,18 @@ class SectionManager {
     }
   }
 
-  */
+  replace(router: any, sectionId: string, params?: any) {
+    let activeSections: any[] = [...Store.getState().section.active];
+
+    activeSections.pop();
+
+    Store.dispatch(setActiveSections(activeSections));
+
+    router.replace({
+      pathname: `/${sectionId}`,
+      params: params || {},
+    });
+  }
 }
 
 export default (new SectionManager());
