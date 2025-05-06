@@ -5,12 +5,16 @@ import Store from "@/redux/Store";
 class SectionManager {
   push(router: any, sectionId: string, params?: any) {
     let activeSections: any[] = [...Store.getState().section.active];
+    let sectionConfig: any[] = [...Store.getState().section.config];
 
     activeSections.push({
-      id: sectionId,
-      params: params || {},
-    })
-
+      ...sectionConfig.find((o: any) => o.id === sectionId),
+      ...{
+        id: sectionId,
+        params: params || {},
+      }
+    });
+      
     Store.dispatch(setActiveSections(activeSections));
 
     router.push({
