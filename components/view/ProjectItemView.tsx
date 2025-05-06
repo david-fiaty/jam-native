@@ -33,7 +33,7 @@ const ProjectItemView = ({ projectId }: Props) => {
       scroll={true}
       style={styles.container}
     >
-      <TextView style={styles.sectionTitle}>{i18n.t('Title')}</TextView>
+      <TextView style={styles.sectionTitle}>{i18n.t('Name')}</TextView>
       <TextView>{projectItem?.name}</TextView>
     
       <TextView style={styles.sectionTitle}>{i18n.t('Description')}</TextView>

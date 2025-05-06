@@ -84,13 +84,13 @@ const AddProjectForm = () => {
       <View style={Layout.formContainer}>
         <TextView>{i18n.t("Name")}</TextView>
         <InputTextField
-          value={formData?.title}
+          value={formData?.name}
           onChangeText={(value: string) => updateField("name", value)}
         />
 
         <TextView>{i18n.t("Description")}</TextView>
         <InputTextareaField
-          value={formData?.caption}
+          value={formData?.description}
           onChangeText={(value: string) => updateField("description", value)}
         />
 
