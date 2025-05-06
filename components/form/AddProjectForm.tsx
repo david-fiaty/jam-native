@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View } from "react-native";
+import { Modal, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
@@ -16,7 +16,6 @@ import ProjectJamsList from "../list/ProjectJamsList";
 import TextView from "../view/TextView";
 import EntityManager from "@/manager/EntityManager";
 import SectorsField from "../field/SectorsField";
-import IconView from "../view/IconView";
 import PrivacyStatusField from "../field/PrivacyStatusField";
 import DatePickerField from "../field/DatePickerField";
 import CountriesField from "../field/CountriesField";
@@ -129,7 +128,9 @@ const AddProjectForm = () => {
         <CountriesField
           resource={resource}
           field="scope_countries_codes"
-          onPress={() => ScreenManager.toggleModal('CountriesList', {
+          placeholder={i18n.t('Select countries')}
+          value={formData?.scope_countries_codes}
+          onPress={() => ModalManager.toggleModal('CountriesList', {
             resource: resource,
             field: 'scope_countries_codes',
           })}
