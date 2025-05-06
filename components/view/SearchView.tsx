@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { TouchableOpacity, ScrollView } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentTab } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import BoxView from "./BoxView";
@@ -13,16 +14,16 @@ import SearchProfilesList from "../list/SearchProfilesList";
 import SearchProjectsList from "../list/SearchProjectsList";
 
 const SearchView = () => {
-  const [activeTab, setActiveTab] = useState<any>(null);
+  const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [searchData, setSearchData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search);
   
   const renderTab = (row: any) => {
-    const tabStyle: any = row.id == activeTab ? styles.activeTab : {};
+    const tabStyle: any = row.id == searchState.currentTab ? styles.currentTab : {};
 
     const onTabPress = (tabId: string) => {
-      setActiveTab(tabId);
+      dispatch(setCurrentTab(tabId));
     };
 
     return (
@@ -44,7 +45,7 @@ const SearchView = () => {
       }
     })();
 
-    if (!activeTab) setActiveTab(StaticData.searchTabs[0].id);
+    if (!searchState.currentTab) dispatch(setCurrentTab(StaticData.searchTabs[0].id));
   }, [isLoaded, searchState]);
 
   if (!isLoaded) return <SpinnerView />;
@@ -62,26 +63,26 @@ const SearchView = () => {
       </BoxView>
 
       {/* Jams list */}
-      {['jam', 'looking', 'call', 'event'].includes(activeTab) && (
+      {['jam', 'looking', 'call', 'event'].includes(searchState.currentTab) && (
         <SearchJamsList 
           data={searchData?.jam}
-          filter={activeTab} 
+          filter={searchState.currentTab} 
         />
       )}
 
       {/* Jammers list */}
-      {['jammer', 'venue', 'organization', 'personal'].includes(activeTab) && 
+      {['jammer', 'venue', 'organization', 'personal'].includes(searchState.currentTab) && 
         <SearchProfilesList
           data={searchData?.profile}
-          filter={activeTab} 
+          filter={searchState.currentTab} 
         />
       }
 
       {/* Projects list */}
-      {['project'].includes(activeTab) && 
+      {['project'].includes(searchState.currentTab) && 
         <SearchProjectsList
           data={searchData?.project}
-          filter={activeTab} 
+          filter={searchState.currentTab} 
         />
       }
     </>
@@ -102,7 +103,7 @@ const styles = {
     borderBottomWidth: Layout.borderWidth.base,
     borderBottomColor: Colors.primary,
   },
-  activeTab: { 
+  currentTab: { 
     fontWeight: 'bold',
   },
 };

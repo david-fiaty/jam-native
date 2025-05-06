@@ -11,8 +11,13 @@ import UserManager from '@/manager/UserManager';
 import EntityManager from '@/manager/EntityManager';
 import ButtonView from '../view/ButtonView';
 import DividerView from '../view/DividerView';
+import ModalManager from '@/manager/ModalManager';
 
 const AddJamToProjectForm = () => {
+
+  // Todo - Implement component
+  return <></>;
+  
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
@@ -64,7 +69,7 @@ const AddJamToProjectForm = () => {
     >
       <BackButton
         title={i18n.t('Add Jam to project')}
-        onPress={() => ScreenManager.toggleModal('AddJamToProjectForm')}
+        onPress={() => ModalManager.toggleModal('AddJamToProjectForm')}
       />
         <TextView>{i18n.t('Select a project from your profile:')}</TextView>
         <DividerView theme="secondary" />

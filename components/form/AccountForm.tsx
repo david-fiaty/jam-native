@@ -5,14 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
-import BackButton from "../button/BackButton";
 import InputTextField from '../field/InputTextField';
 import SpinnerView from '../view/SpinnerView';
 import ButtonView from '../view/ButtonView';
 import DividerView from '../view/DividerView';
 import UserManager from '@/manager/UserManager';
 import DataManager from '@/manager/DataManager';
-import ScreenManager from '@/manager/ScreenManager';
 
 const AccountForm = () => {
   const resource: string = 'account';
@@ -69,11 +67,6 @@ const AccountForm = () => {
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
-      <BackButton
-        title={i18n.t('Account information')}
-        onPress={() => ScreenManager.popScreen(router)}
-      />
-    
       <InputTextField 
         placeholder={i18n.t('User name')} 
         value={formData?.username}

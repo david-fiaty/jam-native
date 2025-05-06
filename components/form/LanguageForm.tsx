@@ -3,11 +3,9 @@ import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
 import i18next from 'i18next';
 import BoxView from "../view/BoxView";
-import BackButton from "../button/BackButton";
 import SelectListBase from '../base/SelectListBase';
 import StaticData from '@/constants/StaticData';
 import UserManager from '@/manager/UserManager';
-import ScreenManager from '@/manager/ScreenManager';
 
 const LanguageForm = () => {
   const router = useRouter();
@@ -20,10 +18,6 @@ const LanguageForm = () => {
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
-      <BackButton
-        title={i18n.t('Language')}
-        onPress={() => ScreenManager.popScreen(router)}
-      />
       <SelectListBase
         value={UserManager.getLanguage()}
         data={data} 

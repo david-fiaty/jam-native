@@ -16,47 +16,6 @@ class ScreenManager {
     this.statusBar = this.getStatusBarSize();
   }
 
-  pushScreen(router: any, path: string, params?: any) {
-    let activeModals: any = [...Store.getState().modal.active];
-    let lastVisibleIndex = activeModals.map((o: any) => o?.visible).lastIndexOf(true);
-
-    if (lastVisibleIndex !== -1) {
-      activeModals[lastVisibleIndex] = {...activeModals[lastVisibleIndex], ...{visible: false}};
-    }
-
-    Store.dispatch(setActiveModal(activeModals));
-    this.setCurrentRoute(path);
-
-    router.push({
-      pathname: path,
-      params: params,
-    });
-  }
-
-  popScreen(router: any) {
-    let activeModals: any = [...Store.getState().modal.active];
-    let activeRoutes: any = [...Store.getState().route.active];
-    let lastHiddenIndex = activeModals.map((o: any) => o?.visible).lastIndexOf(false);
-
-    if (lastHiddenIndex !== -1 && activeRoutes.length < 2) {
-      activeModals[lastHiddenIndex] = {...activeModals[lastHiddenIndex], ...{visible: true}};
-    }
-
-    Store.dispatch(setActiveModal(activeModals));
-    this.setCurrentRoute(null);
-
-    router.back();
-  }
-
-  replaceScreen(router: any, path: string, params?: any) {
-    this.toggleModal(null); // Todo - Double check this
-    
-    router.replace({
-      pathname: path,
-      params: params,
-    });
-  }
-
   toggleModal(name: any, params?: any) {
     let activeModals: any = [...Store.getState().modal.active];
     let modalIndex: any = activeModals.findIndex((o: any) => o.name == name);
