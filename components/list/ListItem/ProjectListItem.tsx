@@ -1,7 +1,6 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
 import { Layout } from "@/constants/Layout";
-import { BaseProps } from "@/constants/Types";
 import i18n from "@/translation/i18n";
 import ImageView from "@/components/view/ImageView";
 import ScreenManager from "@/manager/ScreenManager";
@@ -10,8 +9,9 @@ import NoImageView from "@/components/view/NoImageView";
 import MediaManager from "@/manager/MediaManager";
 import IconView from "@/components/view/IconView";
 import TextView from "@/components/view/TextView";
+import EntityManager from "@/manager/EntityManager";
 
-type Props = BaseProps & {
+type Props = {
   row?: any;
   isAddable?: boolean;
   isDeletable?: boolean;
@@ -22,7 +22,9 @@ type Props = BaseProps & {
 };
 
 const ProjectListItem = ({ row, isAddable, isDeletable, isSelected, multiSelect, onListItemPress, onAddButtonPress }: Props) => {
-  const [imageUrl, setImageUrl] = useState<any>(null);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [projectImages, setProjectImages] = useState<any>([]);
+  
   const numColumns = 3;
   const imageSize = MediaManager.getThumbnailSize();
   multiSelect = typeof multiSelect == 'boolean' ? multiSelect : true;
@@ -31,6 +33,19 @@ const ProjectListItem = ({ row, isAddable, isDeletable, isSelected, multiSelect,
     if (onListItemPress) {
       onListItemPress(row);
     }
+  };
+
+  
+  const getProjectImages = async (row: any) => {
+    let urls: any[] = [];
+
+    if (row.item?.jams?.length > 0) {
+      let projectJams: any = await EntityManager.getJams({ items_ids: row.item.jams });
+
+      //console.log(projectJams);
+    }
+    
+    return '';
   };
 
   const renderItem = () => {
@@ -95,6 +110,16 @@ const ProjectListItem = ({ row, isAddable, isDeletable, isSelected, multiSelect,
 
     return output;
   }
+
+  useEffect(() => {
+    (async () => {
+      if (!isLoaded) {
+        setProjectImages(getProjectImages(row));
+        setIsLoaded(true);
+      }
+    })();
+  }, [isLoaded, row]);
+
 
   return renderItem();
 };
