@@ -125,25 +125,14 @@ const AddProjectForm = () => {
           }
         />
 
+        <TextView>{i18n.t('Select countries')}</TextView>
         <CountriesField
           resource={resource}
           field="scope_countries_codes"
-          label={
-            <>
-              <IconView name="plus" theme="secondary" radius="round" />
-              <TextView>{i18n.t('Add countries')}</TextView>
-            </>
-          }
-          onPressEvent={() => ScreenManager.toggleModal('CountriesList', {
+          onPress={() => ScreenManager.toggleModal('CountriesList', {
             resource: resource,
             field: 'scope_countries_codes',
           })}
-          onDeleteEvent={(item: any) => {
-            const countriesCodes = [...formData?.scope_countries_codes || []];
-            const index = countriesCodes.findIndex((v) => v === item.code);
-            if (index !== -1) countriesCodes.splice(index, 1);
-            updateField('scope_countries_codes', countriesCodes);
-          }}
         />
 
         <TextView>{i18n.t('Select your sectors')}</TextView>

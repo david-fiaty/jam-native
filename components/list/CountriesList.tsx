@@ -1,101 +1,149 @@
-import { useState, useEffect } from "react";
-import { View, TouchableOpacity, StyleSheet } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet } from "react-native";
+import { useDispatch, useSelector } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
+import { Colors } from '@/constants/Colors';
 import TextView from "../view/TextView";
-import BackButton from "../button/BackButton";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
 import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
-import EntityManager from "@/manager/EntityManager";
+import EntityManager from '@/manager/EntityManager';
+import InputTextField from '../field/InputTextField';
+import ProfileListItem from './ListItem/ProfileListItem';
 
-const CountriesList = () => {
+type Props = {
+  resource: string;
+  field?: any;
+};
+
+const CountriesList = ({ resource, field }: Props) => {
   const dispatch = useDispatch();
-  const [countriesData, setCountriesData] = useState<any>(null);
+  const [profiles, setProfiles] = useState<any>(null);
+  const [selectedProfiles, setSelectedProfiles] = useState<any>([]);
+  const [searchValue, setSearchValue] = useState<string>('');
+  const [isSearching, setIsSearching] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const activeModal: any = ScreenManager.getActiveModal();
-  const resource: string = activeModal.params.resource;
-  const fieldName: string = activeModal.params.field;
   const formData: any = useSelector((state: any) => state.form[resource]);
 
-  const updateSelection = (item: any) => {
-    let selection: any[] = [...formData?.[fieldName] || []];
-    let index: number = selection.findIndex((v: any) => v == item.code);
+  const clearSearch = () => {
+    setIsSearching(true);
+    
+    EntityManager.listProfiles().then((items: any) => {
+      setProfiles(items);
+      setIsSearching(false);
+      setSearchValue('');
+    });
+  };
 
-    if (index === -1) selection.push(item.code)
-    else selection.splice(index, 1);
+  const renderSearchIcon = () => {
+    if (!isSearching && searchValue) {
+      return (
+        <IconView 
+          name="delete" 
+          theme="clear" 
+          onPress={clearSearch}
+        />
+      );
+    }
+    else if (isSearching) {
+      return <SpinnerView size="small" />;
+    }
+
+    return <></>;
+  };
+
+  const onSubmitEditing = () => {
+    setIsSearching(true);
+    let options = searchValue.length ? { query_text: searchValue } : {};
+
+    EntityManager.listProfiles(options).then((items: any) => {
+      setIsSearching(false);
+      setProfiles(items);
+    });
+  };
+
+  const toggleProfile = (entityId: number) => {
+    let profileList = [...selectedProfiles];
+    if (profileList.includes(entityId)) {
+      profileList = profileList.filter((value: number) => value !== entityId);
+    }
+    else {
+      profileList.push(entityId);
+    }
+    
+    setSelectedProfiles(profileList);
 
     dispatch(setFormData<any>({ 
       resource: resource,
-      key: fieldName, 
-      value: selection,
+      key: field, 
+      value: profileList,
     }));
-  };
-
-  const renderItem = (item: any) => {
-    let isSelected: boolean = formData?.[fieldName]?.includes(item.code);
-
-    return (
-      <TouchableOpacity 
-        key={item?.id}
-        onPress={() => updateSelection(item)} 
-      >
-        <BoxView direction="row" align="center" justify="flex-start" style={styles.listItem}>
-          <IconView name="arrow" theme="clear" size={10} />
-          <TextView key={item?.id}>
-            {item?.name}
-          </TextView>
-          
-          {isSelected && <IconView name="checkmark" theme="clear" size={15} /> }
-        </BoxView>
-      </TouchableOpacity>
-    );
   };
 
   useEffect(() => {
     (async () => {
-      if (!countriesData) setCountriesData(await EntityManager.getCountries());
-      setIsLoaded(true);
+      if (!isLoaded) { 
+        if (!profiles) setProfiles(await EntityManager.listProfiles());
+        if (formData?.[field]?.length && !selectedProfiles.length) {
+          setSelectedProfiles(formData[field]);
+        }
+
+        setIsLoaded(true);
+      }
     })();
-  }, [countriesData]);
+  }, [profiles, formData, field, activeModal, selectedProfiles]);
 
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView
-      align="flex-start"
-      justify="flex-start"
-      style={Layout.screenContent}
-    >
-      <BackButton
-        title={i18n.t('Add countries')}
-        onPress={() => ScreenManager.toggleModal('CountriesList')}
+    <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
+      <InputTextField 
+        value={searchValue}
+        containerStyle={styles.inputTextFieldContainer}
+        placeholder={i18n.t('Search...')} 
+        onChangeText={(text: string) => setSearchValue(text)}
+        onSubmitEditing={onSubmitEditing}
+        rightIcon={renderSearchIcon()}
       />
 
-      <View style={styles.container}>
-        {countriesData?.length > 0 && (
+      <View style={Layout.borderedListContainer}>
+        {profiles?.length > 0 &&
           <ListView
-            data={countriesData}
-            renderItem={(row: any) => renderItem(row.item)}
+            data={profiles}
+            renderItem={(row: any) => (
+              <ProfileListItem 
+                row={row}
+                selected={selectedProfiles.includes(row.item.id)}
+                onListItemPress={(o: any) => toggleProfile(o.item.id)}  
+              />
+            )}
           />
-        )}
+        }
+
+        {!profiles?.length && 
+          <TextView>{i18n.t('No collaborators found.')}</TextView>
+        }
       </View>
     </BoxView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%'
+  inputTextFieldContainer: {
+    backgroundColor: Colors.white,
+    borderWidth: Layout.borderWidth.base,
+    borderRadius: Layout.radius.round,
+    borderColor: Colors.primary,
   },
-  listItem: {
-    marginLeft: 0,
-    paddingVertical: Layout.space.base,
-  },
+  wecomeMessage: {
+    textTransform: 'uppercase',
+    fontSize: Layout.fontSize.base,
+  }
 });
 
 export default CountriesList;
