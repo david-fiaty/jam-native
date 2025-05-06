@@ -11,6 +11,7 @@ import SpinnerView from "../view/SpinnerView";
 import BoxView from "../view/BoxView";
 import ProjectListItem from "./ListItem/ProjectListItem";
 import ScreenManager from "@/manager/ScreenManager";
+import SectionManager from "@/manager/SectionManager";
 
 type Props = {
   title?: any;
@@ -69,9 +70,8 @@ const ProfileProjectsList = ({
       onListItemPress(row);
     }
     else {
-      ScreenManager.pushScreen(router, '/project', {
-        idArray: [row.item.id],
-        title: row?.item?.title,
+      SectionManager.push(router, 'project-item', {
+        projectId: row.item.id,
       });
     }
   };
@@ -109,14 +109,7 @@ const ProfileProjectsList = ({
         { title && <TextView style={styles.title}>{title}</TextView> }
 
         {allButton && (
-          <TouchableOpacity
-            onPress={() => 
-              ScreenManager.pushScreen(router, '/project', {
-                idArray: idArray,
-                title: title,
-              })
-            }
-          >
+          <TouchableOpacity onPress={() => {/* Todo - Implement project list */ } }>
             <TextView style={styles.link}>{i18n.t("View all")}</TextView>
           </TouchableOpacity>
         )}
