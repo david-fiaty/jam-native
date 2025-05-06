@@ -53,9 +53,6 @@ const ProjectListItem = ({ row, isAddable, isDeletable, isSelected, multiSelect,
   };
 
   const renderItem = () => {
-
-    return <TextView>{row?.item?.id}</TextView>;
-
     let output = null;
     let imageStyle = (isSelected ? styles.selectedItem : {}); // Todo - Is this needed?
 
@@ -67,7 +64,7 @@ const ProjectListItem = ({ row, isAddable, isDeletable, isSelected, multiSelect,
         onPress={onAddButtonPress}
       />;
     }
-    else if (!imageUrl || imageUrl == 'undefined') {
+    else if (!projectImages.length) {
       output = (
         <View style={styles.item}>
           <NoImageView 
@@ -82,7 +79,7 @@ const ProjectListItem = ({ row, isAddable, isDeletable, isSelected, multiSelect,
       output = (
         <View style={styles.item}>
           <ImageView
-            uri={imageUrl}
+            uri={projectImages[0]}
             width={imageSize.width}
             height={imageSize.height}
             resizeMode="cover"
@@ -118,7 +115,7 @@ const ProjectListItem = ({ row, isAddable, isDeletable, isSelected, multiSelect,
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setProjectImages(getProjectImages(row));
+        setProjectImages(await getProjectImages(row));
         setIsLoaded(true);
       }
     })();
