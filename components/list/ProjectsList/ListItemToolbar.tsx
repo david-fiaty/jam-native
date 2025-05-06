@@ -11,6 +11,7 @@ import UserManager from "@/manager/UserManager";
 import EntityManager from "@/manager/EntityManager";
 import i18n from "@/translation/i18n";
 import ModalManager from "@/manager/ModalManager";
+import SectionManager from "@/manager/SectionManager";
 
 type Props = BaseProps & {
   row?: any;
@@ -42,7 +43,7 @@ const ListItemToolbar = ({ row }: Props) => {
         onPress={() =>
           isLoggedIn
             ? ModalManager.toggleModal("JammersList", { jamId: row?.item?.id })
-            : ScreenManager.pushScreen(router, '/login')
+            : SectionManager.push(router, 'login')
         }
       >
         <IconView name="users" theme="tertiary" />
@@ -59,7 +60,7 @@ const ListItemToolbar = ({ row }: Props) => {
           onPress={() =>
             isLoggedIn
               ? ModalManager.toggleModal("SavedJamAction", { jamId: row?.item?.id })
-              : ScreenManager.pushScreen(router, '/login')
+              : SectionManager.push(router, 'login')
           }
         />
 
@@ -70,7 +71,7 @@ const ListItemToolbar = ({ row }: Props) => {
           onPress={() =>
             isLoggedIn
               ? EntityManager.shareJam(row?.item?.id)
-              : ScreenManager.pushScreen(router, '/login')
+              : SectionManager.push(router, 'login')
           }
         />
       </BoxView>

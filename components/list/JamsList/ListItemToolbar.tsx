@@ -12,6 +12,7 @@ import i18n from "@/translation/i18n";
 import ScreenManager from "@/manager/ScreenManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import ModalManager from "@/manager/ModalManager";
+import SectionManager from "@/manager/SectionManager";
 
 type Props = {
   row?: any;
@@ -44,7 +45,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
 
   const saveJam = async () => {
     if (!isLoggedIn) {
-      ScreenManager.pushScreen(router, '/login');
+      SectionManager.push(router, 'login');
     }
     else {
       setIsSaveProcessing(true);
@@ -79,7 +80,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
 
   const likeJam = async () => {
     if (!isLoggedIn) {
-      ScreenManager.pushScreen(router, '/login');
+      SectionManager.push(router, 'login');
     }
     else {
       setIsLikeProcessing(true);
@@ -114,7 +115,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
 
   const shareJam = async () => {
     if (!isLoggedIn) {
-      ScreenManager.pushScreen(router, '/login');
+      SectionManager.push(router, 'login');
     }
     else {
       setIsShareProcessing(true);
