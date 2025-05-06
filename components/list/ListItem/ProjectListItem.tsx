@@ -1,6 +1,6 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { useState, useEffect } from "react";
 import { Layout } from "@/constants/Layout";
-import { BaseProps } from "@/constants/Types";
 import i18n from "@/translation/i18n";
 import ImageView from "@/components/view/ImageView";
 import ScreenManager from "@/manager/ScreenManager";
@@ -8,10 +8,11 @@ import AddItemButton from "@/components/button/AddItemButton";
 import NoImageView from "@/components/view/NoImageView";
 import MediaManager from "@/manager/MediaManager";
 import IconView from "@/components/view/IconView";
+import TextView from "@/components/view/TextView";
+import EntityManager from "@/manager/EntityManager";
 
-type Props = BaseProps & {
+type Props = {
   row?: any;
-  images?: any;
   isAddable?: boolean;
   isDeletable?: boolean;
   isSelected?: boolean;
@@ -20,18 +21,38 @@ type Props = BaseProps & {
   onListItemPress?: (row: any) => void;
 };
 
-const ProjectListItem = ({ row, images, isAddable, isDeletable, isSelected, multiSelect, onListItemPress, onAddButtonPress }: Props) => {
+const ProjectListItem = ({ row, isAddable, isDeletable, isSelected, multiSelect, onListItemPress, onAddButtonPress }: Props) => {
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [projectImages, setProjectImages] = useState<any>([]);
+  
   const numColumns = 3;
   const imageSize = MediaManager.getThumbnailSize();
   multiSelect = typeof multiSelect == 'boolean' ? multiSelect : true;
 
-  const onItemPress = (row: any) => {
+  const onItemPress = () => {
     if (onListItemPress) {
       onListItemPress(row);
     }
   };
 
-  const renderItem = (row: any, imageUrl?: any) => {
+  
+  const getProjectImages = async (row: any) => {
+    let urlArray: any[] = [];
+
+    if (row.item?.jams?.length > 0) {
+      let projectJams: any = await EntityManager.getJams({ items_ids: row.item.jams });
+
+      projectJams.map((o: any) => {
+        if (o?.medias?.[0]?.url?.length) {
+          urlArray.push(MediaManager.getImageUrl(o.medias[0].url));
+        }
+      }); 
+    }
+    
+    return urlArray;
+  };
+
+  const renderItem = () => {
     let output = null;
     let imageStyle = (isSelected ? styles.selectedItem : {}); // Todo - Is this needed?
 
@@ -43,7 +64,7 @@ const ProjectListItem = ({ row, images, isAddable, isDeletable, isSelected, mult
         onPress={onAddButtonPress}
       />;
     }
-    else if (!imageUrl || imageUrl == 'undefined') {
+    else if (!projectImages.length) {
       output = (
         <View style={styles.item}>
           <NoImageView 
@@ -58,7 +79,7 @@ const ProjectListItem = ({ row, images, isAddable, isDeletable, isSelected, mult
       output = (
         <View style={styles.item}>
           <ImageView
-            uri={imageUrl}
+            uri={projectImages[0]}
             width={imageSize.width}
             height={imageSize.height}
             resizeMode="cover"
@@ -70,7 +91,7 @@ const ProjectListItem = ({ row, images, isAddable, isDeletable, isSelected, mult
 
     if (parseInt(row?.item?.id) > 0) {
       output = (
-        <TouchableOpacity key={row.item.id} onPress={() => onItemPress(row)}>
+        <TouchableOpacity key={row.item.id} onPress={onItemPress}>
           {output}
 
           {isAddable && isSelected && (
@@ -91,7 +112,16 @@ const ProjectListItem = ({ row, images, isAddable, isDeletable, isSelected, mult
     return output;
   }
 
-  return renderItem(row, images?.[row?.item?.id]);
+  useEffect(() => {
+    (async () => {
+      if (!isLoaded) {
+        setProjectImages(await getProjectImages(row));
+        setIsLoaded(true);
+      }
+    })();
+  }, [isLoaded, row]);
+
+  return renderItem();
 };
 
 const styles = StyleSheet.create({
