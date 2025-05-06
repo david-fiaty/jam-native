@@ -20,8 +20,8 @@ const SectionBackButton = () => {
 
   const getCurrentSection = () => {
     let activeSections: any = sectionState.active;
-    let targetSection: any = sectionState.config.find((o: any) => o.id === activeSections[activeSections.length - 1]?.id);
-
+    let targetSection: any = activeSections[activeSections.length - 1];
+    
     return targetSection;
   };
 
