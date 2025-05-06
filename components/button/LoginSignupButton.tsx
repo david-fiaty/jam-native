@@ -21,7 +21,7 @@ const LoginSignupButton = () => {
           </TextView>
         </View>
       </TouchableOpacity>
-      <SkipButton onPress={ async () => SectionManager.push(router, Config.mainRoute)} />
+      <SkipButton onPress={ async () => SectionManager.push(router, Config.mainSection)} />
     </BoxView>
   );
 };

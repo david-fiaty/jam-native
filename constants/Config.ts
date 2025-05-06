@@ -16,7 +16,7 @@ export const Config: any = {
   messageDisplayDuration: 3500,
   maxSlieshowImages: 10,
   maxNotificationsDisplay: 14,
-  mainRoute: 'jams',
+  mainSection: 'jams',
   defaultSection: 'welcome',
   defaultLocation: {
     latitude: 8.6195,

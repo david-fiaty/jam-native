@@ -11,6 +11,7 @@ import IconView from '@/components/view/IconView';
 import ModalManager from '@/manager/ModalManager';
 import UserManager from "@/manager/UserManager";
 import SearchField from "@/components/field/SearchField";
+import SectionManager from "@/manager/SectionManager";
 
 type Props = {
   style?: any;
@@ -42,7 +43,7 @@ const SectionHeader = ({ style } : Props) => {
   return (
     <BoxView direction="row" style={[styles.container, style]}>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.headerLeft}>
-        <TouchableOpacity onPress={() => router.replace(Config.mainRoute)}>
+        <TouchableOpacity onPress={() => SectionManager.push(router, Config.mainSection)}>
           <LogoView size={Layout.logo.size} />
         </TouchableOpacity>
       </BoxView>
