@@ -210,8 +210,6 @@ const JamForm = ({ jamId }: Props) => {
           })}
         />
         {FormManager.renderError('sectors_ids')}
-
-        <DividerView theme="white" />
         
         <TextView>{i18n.t('Select collaborators')}</TextView>
         <CollaboratorsField
@@ -225,8 +223,6 @@ const JamForm = ({ jamId }: Props) => {
           })}
         />
         {FormManager.renderError('collaborators_ids')}
-
-        <DividerView theme="white" />
 
         <TextView>{i18n.t('Select media')}</TextView>
         <MediaPickerField

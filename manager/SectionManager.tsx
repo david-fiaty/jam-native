@@ -39,25 +39,28 @@ class SectionManager {
     activeSections.pop();
     Store.dispatch(setActiveSections(activeSections));
 
-    if (activeSections.length > 0) {
-      let targetSection: any = activeSections[activeSections.length - 1];
-      let targetSectionConfig: any = sectionConfig.find((o: any) => o.id === targetSection.id);
-      let targetSectionPath: string = targetSectionConfig.backButtonRoute ? targetSectionConfig.backButtonRoute : `/${targetSection.id}`; 
+    if (activeSections.length > 0) { 
+      let targetSection: any = sectionConfig.find((o: any) => o.id === activeSections[activeSections.length - 1].id);
 
-      router.dismissTo({
-        pathname: targetSectionPath,
-        params: targetSection?.params || {},
-      });
+      if (targetSection.backButtonRoute !== null) {
+        router.dismissTo({
+          pathname: targetSection.backButtonRoute,
+          params: targetSection?.params || {},
+        });
+      } 
+      else {
+        router.dismissTo({
+          pathname: `/${targetSection.id}`,
+          params: targetSection?.params || {},
+        });
+      }
     }
     else {
-      Store.dispatch(setActiveModals([]));
-      Store.dispatch(setActiveSections([]));
-      router.dismissTo('/');
+      router.dismissTo({
+        pathname: `/`,
+        params: {},
+      });
     }
-  }
-
-  getPreviousRoute(section: any) {
-    return section.backButtonRoute === '/' ? '/' : `/${section.backButtonRoute}`;
   }
 }
 
