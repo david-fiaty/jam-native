@@ -21,6 +21,7 @@ import PrivacyStatusField from "../field/PrivacyStatusField";
 import DatePickerField from "../field/DatePickerField";
 import CountriesField from "../field/CountriesField";
 import DataManager from "@/manager/DataManager";
+import ModalManager from "@/manager/ModalManager";
 
 const AddProjectForm = () => {
   const resource: string = 'project';
@@ -124,7 +125,6 @@ const AddProjectForm = () => {
           }
         />
 
-        <DividerView theme="secondary" />
         <CountriesField
           resource={resource}
           field="scope_countries_codes"
@@ -146,26 +146,16 @@ const AddProjectForm = () => {
           }}
         />
 
-        <DividerView theme="secondary" />
+        <TextView>{i18n.t('Select your sectors')}</TextView>
         <SectorsField
           resource={resource}
           field="sectors_ids"
-          label={
-            <>
-              <IconView name="plus" theme="secondary" radius="round" />
-              <TextView>{i18n.t('Add industries')}</TextView>
-            </>
-          }
-          onPressEvent={() => ScreenManager.toggleModal('SectorsList', {
+          placeholder={i18n.t('Select your sectors')}
+          value={formData?.sectors_ids}
+          onPress={() => ModalManager.toggleModal('SectorsList', {
             resource: resource,
             field: 'sectors_ids',
           })}
-          onDeleteEvent={(item: any) => {
-            const sectorsIds = [...formData?.sectors_ids || []];
-            const index = sectorsIds.findIndex((v) => v === item.id);
-            if (index !== -1) sectorsIds.splice(index, 1);
-            updateField('sectors_ids', sectorsIds);
-          }}
         />
 
         <DividerView theme="secondary" />
