@@ -121,7 +121,6 @@ const ProjectListItem = ({ row, isAddable, isDeletable, isSelected, multiSelect,
     })();
   }, [isLoaded, row]);
 
-
   return renderItem();
 };
 
