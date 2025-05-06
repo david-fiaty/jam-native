@@ -9,7 +9,6 @@ import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
 import BoxView from "../view/BoxView";
 import JamListItem from "./ListItem/JamListItem";
-import ScreenManager from "@/manager/ScreenManager";
 import SectionManager from "@/manager/SectionManager";
 
 type Props = {
