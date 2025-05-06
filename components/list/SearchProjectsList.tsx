@@ -33,9 +33,10 @@ const SearchProjectsList = ({ data, filter }: Props) => {
     (async () => {
       if (!isLoaded) {
         setCurrentData(data);
+        setIsLoaded(true)
       }
     })();
-  }, [isLoaded, data, filter]);
+  }, [isLoaded, data]);
 
   return (
     <View style={styles.container}>
