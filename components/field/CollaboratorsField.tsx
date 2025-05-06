@@ -3,7 +3,6 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from '@/redux/slices/FormSlice';
 import { Layout } from '@/constants/Layout';
-import { Colors } from '@/constants/Colors';
 import IconView from "../view/IconView";
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
