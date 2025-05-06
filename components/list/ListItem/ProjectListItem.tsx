@@ -1,4 +1,5 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { useState, useEffect } from "react";
 import { Layout } from "@/constants/Layout";
 import { BaseProps } from "@/constants/Types";
 import i18n from "@/translation/i18n";
@@ -8,10 +9,10 @@ import AddItemButton from "@/components/button/AddItemButton";
 import NoImageView from "@/components/view/NoImageView";
 import MediaManager from "@/manager/MediaManager";
 import IconView from "@/components/view/IconView";
+import TextView from "@/components/view/TextView";
 
 type Props = BaseProps & {
   row?: any;
-  images?: any;
   isAddable?: boolean;
   isDeletable?: boolean;
   isSelected?: boolean;
@@ -20,18 +21,22 @@ type Props = BaseProps & {
   onListItemPress?: (row: any) => void;
 };
 
-const ProjectListItem = ({ row, images, isAddable, isDeletable, isSelected, multiSelect, onListItemPress, onAddButtonPress }: Props) => {
+const ProjectListItem = ({ row, isAddable, isDeletable, isSelected, multiSelect, onListItemPress, onAddButtonPress }: Props) => {
+  const [imageUrl, setImageUrl] = useState<any>(null);
   const numColumns = 3;
   const imageSize = MediaManager.getThumbnailSize();
   multiSelect = typeof multiSelect == 'boolean' ? multiSelect : true;
 
-  const onItemPress = (row: any) => {
+  const onItemPress = () => {
     if (onListItemPress) {
       onListItemPress(row);
     }
   };
 
-  const renderItem = (row: any, imageUrl?: any) => {
+  const renderItem = () => {
+
+    return <TextView>{row?.item?.id}</TextView>;
+
     let output = null;
     let imageStyle = (isSelected ? styles.selectedItem : {}); // Todo - Is this needed?
 
@@ -70,7 +75,7 @@ const ProjectListItem = ({ row, images, isAddable, isDeletable, isSelected, mult
 
     if (parseInt(row?.item?.id) > 0) {
       output = (
-        <TouchableOpacity key={row.item.id} onPress={() => onItemPress(row)}>
+        <TouchableOpacity key={row.item.id} onPress={onItemPress}>
           {output}
 
           {isAddable && isSelected && (
@@ -91,7 +96,7 @@ const ProjectListItem = ({ row, images, isAddable, isDeletable, isSelected, mult
     return output;
   }
 
-  return renderItem(row, images?.[row?.item?.id]);
+  return renderItem();
 };
 
 const styles = StyleSheet.create({
