@@ -39,7 +39,7 @@ class SectionManager {
     if (activeSections.length > 1) { 
       activeSections.pop();
       Store.dispatch(setActiveSections(activeSections));
-      
+
       if (activeSections[activeSections.length - 1].backButtonRoute !== null) {
         router.dismissTo({
           pathname: activeSections[activeSections.length - 1].backButtonRoute,
@@ -52,6 +52,26 @@ class SectionManager {
           params: activeSections[activeSections.length - 1]?.params || {},
         });
       } 
+    }
+    else if (activeSections.length > 0) {
+      if (activeSections[activeSections.length - 1].backButtonRoute !== null) {
+        router.dismissTo({
+          pathname: activeSections[activeSections.length - 1].backButtonRoute,
+          params: activeSections[activeSections.length - 1]?.params || {},
+        });
+      }
+      else {
+        router.dismissTo({
+          pathname: `/${activeSections[activeSections.length - 1].id}`,
+          params: activeSections[activeSections.length - 1]?.params || {},
+        });
+      } 
+    }
+    else {
+      router.dismissTo({
+        pathname: `/`,
+        params: {},
+      });
     }
   }
 
