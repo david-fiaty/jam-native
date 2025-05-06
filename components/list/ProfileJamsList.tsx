@@ -9,7 +9,6 @@ import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
 import BoxView from "../view/BoxView";
 import JamListItem from "./ListItem/JamListItem";
-import ScreenManager from "@/manager/ScreenManager";
 import SectionManager from "@/manager/SectionManager";
 
 type Props = {
@@ -88,9 +87,8 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
         { allButton && (
           <TouchableOpacity
             onPress={() => 
-              ScreenManager.pushScreen(router, '/jam', {
+              SectionManager.push(router, 'jams', {
                 idArray: idArray,
-                title: title,
               })
             }
           >
