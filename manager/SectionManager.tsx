@@ -6,13 +6,11 @@ class SectionManager {
   push(router: any, sectionId: string, params?: any) {
     let activeSections: any[] = [...Store.getState().section.active];
     let sectionConfig: any[] = [...Store.getState().section.config];
+    let targetSection: any = sectionConfig.find((o: any) => o.id === sectionId); 
 
     activeSections.push({
-      ...sectionConfig.find((o: any) => o.id === sectionId),
-      ...{
-        id: sectionId,
-        params: params || {},
-      }
+      ...targetSection,
+      ...{ params: params || {} },
     });
       
     Store.dispatch(setActiveSections(activeSections));
