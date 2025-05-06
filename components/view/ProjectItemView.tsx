@@ -1,16 +1,14 @@
 import { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
-import { BaseProps } from '@/constants/Types';
+import { Layout } from "@/constants/Layout";
 import TextView from './TextView';
 import EntityManager from "@/manager/EntityManager";
 import BoxView from "./BoxView";
-import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
-import DividerView from "./DividerView";
 import ProjectJamsList from "../list/ProjectJamsList";
 import SectorsTagsView from "./SectorsTagsView";
 
-type Props = BaseProps & {
+type Props = {
   projectId: any;
 };
 
