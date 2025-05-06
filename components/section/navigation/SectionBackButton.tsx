@@ -21,7 +21,7 @@ const SectionBackButton = () => {
   const getCurrentSection = () => {
     let activeSections: any = sectionState.active;
     let targetSection: any = activeSections[activeSections.length - 1];
-    
+  
     return targetSection;
   };
 
