@@ -36,9 +36,6 @@ class SectionManager {
         });
       } 
       else {
-        Store.dispatch(setActiveSections([]));
-        Store.dispatch(setActiveModals([]));
-        
         router.dismissTo({
           pathname: `/${targetSection.id}`,
           params: targetSection?.params || {},
