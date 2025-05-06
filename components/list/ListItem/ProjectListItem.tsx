@@ -42,10 +42,14 @@ const ProjectListItem = ({ row, isAddable, isDeletable, isSelected, multiSelect,
     if (row.item?.jams?.length > 0) {
       let projectJams: any = await EntityManager.getJams({ items_ids: row.item.jams });
 
-      //console.log(projectJams);
+      projectJams.map((o: any) => {
+        if (o?.medias?.[0]?.url?.length) {
+          urls.push(MediaManager.getImageUrl(o.medias[0].url));
+        }
+      }); 
     }
     
-    return '';
+    return urls;
   };
 
   const renderItem = () => {
