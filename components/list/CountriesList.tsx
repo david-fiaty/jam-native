@@ -51,16 +51,19 @@ const CountriesList = ({ resource, field }: Props) => {
     return <></>;
   };
 
-  const onSubmitEditing = () => {
+  const triggerSearch = (value?: any) => {
     let results: any = countriesData;
+    let needle: string = value || searchValue || null;
 
-    if (searchValue && searchValue?.length > 0) {
+    setSearchValue(needle);
+    if (needle) {
       setIsSearching(true);
+      
       results = countriesData.filter((o: any) => {
-        return o.name.toLowerCase().includes(searchValue.toLowerCase()); // Todo - Remove spaces before comparing
+        return o.name.replace(/\s+/g, '').toLowerCase().includes(needle.replace(/\s+/g, '').toLowerCase()); 
       });
       setIsSearching(false);
-    }
+    } 
     
     setSearchResults(results);
   };
@@ -126,8 +129,8 @@ const CountriesList = ({ resource, field }: Props) => {
         value={searchValue}
         containerStyle={styles.searchFieldContainer}
         placeholder={i18n.t('Search...')}
-        onChangeText={(text: string) => setSearchValue(text)}
-        onSubmitEditing={onSubmitEditing}
+        onChangeText={(text: string) => triggerSearch(text)}
+        onSubmitEditing={triggerSearch}
         rightIcon={renderSearchIcon()}
       />
 
