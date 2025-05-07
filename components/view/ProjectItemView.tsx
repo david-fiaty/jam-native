@@ -1,16 +1,14 @@
 import { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
-import { BaseProps } from '@/constants/Types';
+import { Layout } from "@/constants/Layout";
 import TextView from './TextView';
 import EntityManager from "@/manager/EntityManager";
 import BoxView from "./BoxView";
-import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
-import DividerView from "./DividerView";
 import ProjectJamsList from "../list/ProjectJamsList";
 import SectorsTagsView from "./SectorsTagsView";
 
-type Props = BaseProps & {
+type Props = {
   projectId: any;
 };
 
@@ -35,14 +33,13 @@ const ProjectItemView = ({ projectId }: Props) => {
       scroll={true}
       style={styles.container}
     >
-      <BoxView direction="column" align="flex-start" justify="flex-start" style={styles.projectDescription}>
-        <TextView style={styles.projectTitle}>{projectItem?.name}</TextView>
-        <TextView>{projectItem?.description}</TextView>
-      </BoxView>
+      <TextView style={styles.sectionTitle}>{i18n.t('Name')}</TextView>
+      <TextView>{projectItem?.name}</TextView>
+    
+      <TextView style={styles.sectionTitle}>{i18n.t('Description')}</TextView>
+      <TextView>{projectItem?.description}</TextView>
 
-      <DividerView />
-
-      <TextView style={styles.sectionTitle}>{i18n.t('Jams')}</TextView>
+      <TextView style={styles.sectionTitle}>{i18n.t('Jams')} ({projectItem?.jams?.length || 0})</TextView>
       <ProjectJamsList 
         resource="project"
         selectedIds={projectItem?.jams}
