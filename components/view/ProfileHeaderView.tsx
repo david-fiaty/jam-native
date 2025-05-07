@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   },
   profileHeaderMiddle: {
     paddingHorizontal: Layout.space.base * 1,
-    paddingTop: Layout.space.base * 1.2, // Todo - Vertical align middle
+    paddingTop: Layout.space.base * 1.2,
     flex: 1,
     height: '100%',
   },
