@@ -40,9 +40,9 @@ const CountriesList = ({ resource, field }: Props) => {
   const renderSearchIcon = () => {
     if (!isSearching && searchValue) {
       return (
-        <IconView 
-          name="delete" 
-          theme="clear" 
+        <IconView
+          name="delete"
+          theme="clear"
           onPress={clearSearch}
         />
       );
@@ -71,19 +71,40 @@ const CountriesList = ({ resource, field }: Props) => {
     else {
       idArray.push(entityId);
     }
-    
+
     setSelectedIds(idArray);
 
-    dispatch(setFormData<any>({ 
+    dispatch(setFormData<any>({
       resource: resource,
-      key: field, 
+      key: field,
       value: idArray,
     }));
   };
 
+  const renderItem = (row: any) => {
+    return (
+      <TouchableOpacity
+        style={styles.listItem}
+        onPress={() => toggleProfile(row.item.id)}
+      >
+        <BoxView direction="row" align="center" justify="flex-start">
+          <TextView>{row.item.name}</TextView>
+          {selectedIds.includes(row.item.id) &&
+            <IconView
+              name="checkmark"
+              theme="clear"
+              size={14}
+              padding={0}
+            />
+          }
+        </BoxView>
+      </TouchableOpacity>
+    );
+  };
+
   useEffect(() => {
     (async () => {
-      if (!isLoaded) { 
+      if (!isLoaded) {
         setCountriesData(await EntityManager.getCountries());
 
         setIsLoaded(true);
@@ -95,10 +116,10 @@ const CountriesList = ({ resource, field }: Props) => {
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
-      <InputTextField 
+      <InputTextField
         value={searchValue}
         containerStyle={styles.searchFieldContainer}
-        placeholder={i18n.t('Search...')} 
+        placeholder={i18n.t('Search...')}
         onChangeText={(text: string) => setSearchValue(text)}
         onSubmitEditing={onSubmitEditing}
         rightIcon={renderSearchIcon()}
@@ -108,24 +129,7 @@ const CountriesList = ({ resource, field }: Props) => {
         {countriesData?.length > 0 &&
           <ListView
             data={countriesData}
-            renderItem={(row: any) => (
-              <TouchableOpacity 
-                style={styles.listItem}
-                onPress={() => toggleProfile(row.item.id)}
-              >
-                <BoxView direction="row" align="center" justify="flex-start">
-                  <TextView>{row.item.name}</TextView>
-                  { true &&
-                    <IconView 
-                      name="checkmark" 
-                      theme="clear" 
-                      size={14} 
-                      padding={0}
-                    />
-                  }
-                </BoxView>
-              </TouchableOpacity>
-            )}
+            renderItem={(row: any) => renderItem(row)}
           />
         }
       </View>
@@ -141,7 +145,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.primary,
   },
   listItem: {
-    padding: Layout.space.base/1.2,
+    padding: Layout.space.base / 1.2,
   }
 });
 
