@@ -80,9 +80,9 @@ const AddProjectForm = () => {
       align="flex-start"
       justify="flex-start"
       scroll={true}
-      style={Layout.screenContent}
+      style={Layout.formContainer}
     >
-      <View style={Layout.formContainer}>
+      <View style={[Layout.formContainer, styles.container]}>
         <TextView>{i18n.t("Name")}</TextView>
         <InputTextField
           value={formData?.name}
@@ -179,6 +179,10 @@ const AddProjectForm = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    height: '100%',
+  },
   subtmitButtoncontainer: {
     width: '100%',
     marginTop: Layout.space.base,
