@@ -12,9 +12,50 @@ import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
 import TextView from "../view/TextView";
 import JamListItem from "../list/ListItem/JamListItem";
+import UserManager from "@/manager/UserManager";
+import ProfileJamsList from "../list/ProfileJamsList";
 
-const SelectJamsForm = () => {
-  return <TextView>Select jams form</TextView>
+type Props = {
+  resource: string;
+  profileId: any;
+};
+
+const SelectJamsForm = ({ resource, profileId }: Props) => {
+  const [selectedIds, setSelectedIds] = useState<any>([]);
+  const [profileItem, setProfileItem] = useState<any>(null);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const formData: any = useSelector((state: any) => state.form[resource]);
+
+  const updateSelection = (row: any) => {
+    let selectedIdsList = [...selectedIds];
+    let index: number = selectedIdsList.findIndex((id: any) => id == row.item.id);
+
+    if (index === -1) selectedIdsList.push(row.item.id);
+    else selectedIdsList.splice(index, 1);
+
+    setSelectedIds(selectedIdsList);
+  };
+
+
+  useEffect(() => {
+    (async () => {
+      if (!isLoaded) {
+        setProfileItem(await UserManager.getProfileData());
+        setIsLoaded(true);
+      }
+    })();
+  }, [isLoaded]);
+
+  if (!isLoaded) return <SpinnerView />;
+
+  return (
+    <ProfileJamsList 
+      idArray={profileItem?.profile_jams?.map((o: any) => o.id)} // Todo - API should send ids, not full objects
+      onListItemPress={(row: any) => updateSelection(row)} 
+      //onListItemPress={(row: any) => SectionManager.push(router, 'jam-item', { jamId: row?.item?.id, title: row?.item?.title })}
+    />   
+
+  );
 
   /*
   const dispatch = useDispatch();
