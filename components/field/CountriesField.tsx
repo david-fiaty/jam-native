@@ -21,6 +21,7 @@ const CountriesField = ({ resource, field, value, placeholder, onPress }: Props)
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState<any>([]);
+  const [countriesData, setCountriesData] = useState<any[]>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const deleteItem = (item: any) => {
@@ -43,6 +44,7 @@ const CountriesField = ({ resource, field, value, placeholder, onPress }: Props)
       }
 
       if (!isLoaded) {
+        setCountriesData(await EntityManager.getCountries());
         setIsLoaded(true);
       }
     })();    
@@ -75,7 +77,7 @@ const CountriesField = ({ resource, field, value, placeholder, onPress }: Props)
                 canEdit={true}
                 onDeleteButtonPress={() => deleteItem(item)}  
               >
-                {item?.profile_name}
+                {item?.name}
               </TagView>
             );
           })}
