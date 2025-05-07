@@ -156,6 +156,7 @@ const AddProjectForm = () => {
             <AddItemButton
               label={i18n.t("Add Jams")}
               onPress={() => ModalManager.toggleModal("SelectJamsForm", {
+                field: 'jams_ids',
                 resource: resource,
                 profileId: profileId,
               })}
