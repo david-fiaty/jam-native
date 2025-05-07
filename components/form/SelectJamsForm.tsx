@@ -48,6 +48,8 @@ const SelectJamsForm = ({ resource, profileId }: Props) => {
 
   if (!isLoaded) return <SpinnerView />;
 
+  console.log(selectedIds);
+
   return (
     <ProfileJamsList 
       idArray={profileItem?.profile_jams?.map((o: any) => o.id)} // Todo - API should send ids, not full objects
