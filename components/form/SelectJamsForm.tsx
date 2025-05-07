@@ -14,6 +14,9 @@ import TextView from "../view/TextView";
 import JamListItem from "../list/ListItem/JamListItem";
 
 const SelectJamsForm = () => {
+  return <TextView>Select jams form</TextView>
+
+  /*
   const dispatch = useDispatch();
   const [profileJams, setProfileJams] = useState<any>([]);
   const [selectedIds, setSelectedIds] = useState<any>([]);
@@ -119,6 +122,7 @@ const SelectJamsForm = () => {
       />
     </BoxView>
   );
+  */
 };
 
 const styles = StyleSheet.create({
