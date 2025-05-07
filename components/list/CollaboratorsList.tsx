@@ -10,7 +10,6 @@ import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
 import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
-import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from '../field/InputTextField';
 import ProfileListItem from './ListItem/ProfileListItem';
@@ -27,7 +26,6 @@ const CollaboratorsList = ({ resource, field }: Props) => {
   const [searchValue, setSearchValue] = useState<string>('');
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const activeModal: any = ScreenManager.getActiveModal();
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const clearSearch = () => {
@@ -96,7 +94,7 @@ const CollaboratorsList = ({ resource, field }: Props) => {
         setIsLoaded(true);
       }
     })();
-  }, [profiles, formData, field, activeModal, selectedProfiles]);
+  }, [profiles, formData, field, selectedProfiles]);
 
   if (!isLoaded) return <SpinnerView />;
 
