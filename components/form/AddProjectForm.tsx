@@ -158,7 +158,7 @@ const AddProjectForm = () => {
               onPress={() => ModalManager.toggleModal("SelectJamsForm", {
                 resource: resource,
                 profileId: profileId,
-                profileJams: profileJams,
+                //profileJams: profileJams,
               })}
             />
           </BoxView>
