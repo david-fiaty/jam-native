@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
@@ -13,7 +13,6 @@ import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from '../field/InputTextField';
-import ProfileListItem from './ListItem/ProfileListItem';
 
 type Props = {
   resource: string;
@@ -23,7 +22,8 @@ type Props = {
 const CountriesList = ({ resource, field }: Props) => {
   const dispatch = useDispatch();
   const [profiles, setProfiles] = useState<any>(null);
-  const [selectedProfiles, setSelectedProfiles] = useState<any>([]);
+  const [countriesData, setCountriesData] = useState<any[]>([]);
+  const [selectedIds, setSelectedIds] = useState<any>([]);
   const [searchValue, setSearchValue] = useState<string>('');
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -32,12 +32,9 @@ const CountriesList = ({ resource, field }: Props) => {
 
   const clearSearch = () => {
     setIsSearching(true);
-    
-    EntityManager.listProfiles().then((items: any) => {
-      setProfiles(items);
-      setIsSearching(false);
-      setSearchValue('');
-    });
+    setCountriesData(countriesData);
+    setIsSearching(false);
+    setSearchValue('');
   };
 
   const renderSearchIcon = () => {
@@ -61,42 +58,38 @@ const CountriesList = ({ resource, field }: Props) => {
     setIsSearching(true);
     let options = searchValue.length ? { query_text: searchValue } : {};
 
-    EntityManager.listProfiles(options).then((items: any) => {
-      setIsSearching(false);
-      setProfiles(items);
-    });
+    return countriesData.map((o: any) => {
+      return o; // Todo - Implement country search value filtering
+    })
   };
 
   const toggleProfile = (entityId: number) => {
-    let profileList = [...selectedProfiles];
-    if (profileList.includes(entityId)) {
-      profileList = profileList.filter((value: number) => value !== entityId);
+    let idArray = [...selectedIds];
+    if (idArray.includes(entityId)) {
+      idArray = idArray.filter((value: number) => value !== entityId);
     }
     else {
-      profileList.push(entityId);
+      idArray.push(entityId);
     }
     
-    setSelectedProfiles(profileList);
+    setSelectedIds(idArray);
 
     dispatch(setFormData<any>({ 
       resource: resource,
       key: field, 
-      value: profileList,
+      value: idArray,
     }));
   };
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) { 
-        if (!profiles) setProfiles(await EntityManager.listProfiles());
-        if (formData?.[field]?.length && !selectedProfiles.length) {
-          setSelectedProfiles(formData[field]);
-        }
+        setCountriesData(await EntityManager.getCountries());
 
         setIsLoaded(true);
       }
     })();
-  }, [profiles, formData, field, activeModal, selectedProfiles]);
+  }, [formData, field]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -104,7 +97,7 @@ const CountriesList = ({ resource, field }: Props) => {
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <InputTextField 
         value={searchValue}
-        containerStyle={styles.inputTextFieldContainer}
+        containerStyle={styles.searchFieldContainer}
         placeholder={i18n.t('Search...')} 
         onChangeText={(text: string) => setSearchValue(text)}
         onSubmitEditing={onSubmitEditing}
@@ -112,21 +105,28 @@ const CountriesList = ({ resource, field }: Props) => {
       />
 
       <View style={Layout.borderedListContainer}>
-        {profiles?.length > 0 &&
+        {countriesData?.length > 0 &&
           <ListView
-            data={profiles}
+            data={countriesData}
             renderItem={(row: any) => (
-              <ProfileListItem 
-                row={row}
-                selected={selectedProfiles.includes(row.item.id)}
-                onListItemPress={(o: any) => toggleProfile(o.item.id)}  
-              />
+              <TouchableOpacity 
+                style={styles.listItem}
+                onPress={() => toggleProfile(row.item.id)}
+              >
+                <BoxView direction="row" align="center" justify="flex-start">
+                  <TextView>{row.item.name}</TextView>
+                  { true &&
+                    <IconView 
+                      name="checkmark" 
+                      theme="clear" 
+                      size={14} 
+                      padding={0}
+                    />
+                  }
+                </BoxView>
+              </TouchableOpacity>
             )}
           />
-        }
-
-        {!profiles?.length && 
-          <TextView>{i18n.t('No collaborators found.')}</TextView>
         }
       </View>
     </BoxView>
@@ -134,15 +134,14 @@ const CountriesList = ({ resource, field }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  inputTextFieldContainer: {
+  searchFieldContainer: {
     backgroundColor: Colors.white,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
     borderColor: Colors.primary,
   },
-  wecomeMessage: {
-    textTransform: 'uppercase',
-    fontSize: Layout.fontSize.base,
+  listItem: {
+    padding: Layout.space.base/1.2,
   }
 });
 
