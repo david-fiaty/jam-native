@@ -21,16 +21,15 @@ import DatePickerField from "../field/DatePickerField";
 import CountriesField from "../field/CountriesField";
 import DataManager from "@/manager/DataManager";
 import ModalManager from "@/manager/ModalManager";
+import UserManager from "@/manager/UserManager";
 
 const AddProjectForm = () => {
   const resource: string = 'project';
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const activeModal: any = ScreenManager.getActiveModal();
+  const [profileId, setProfileId] = useState<number>(0);
   const formData: any = useSelector((state: any) => state.form[resource]);
-  const profileId: any = activeModal.params?.profileId; 
-  const profileJams: any = activeModal.params?.profileJams; 
 
   const updateField = (key: any, value: any) => {
     dispatch(setFormData<any>({ 
@@ -58,6 +57,8 @@ const AddProjectForm = () => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
+        setProfileId(await UserManager.getProfileId());
+        
         dispatch(setFormData<any>({ 
           resource: resource,
           key: null, 
@@ -154,7 +155,7 @@ const AddProjectForm = () => {
           <BoxView direction="column" align="center" justify="center">
             <AddItemButton
               label={i18n.t("Add Jams")}
-              onPress={() => ScreenManager.toggleModal("SelectJamsForm", {
+              onPress={() => ModalManager.toggleModal("SelectJamsForm", {
                 resource: resource,
                 profileId: profileId,
                 profileJams: profileJams,
