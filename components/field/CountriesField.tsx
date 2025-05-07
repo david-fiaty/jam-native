@@ -1,89 +1,89 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { useSelector } from "react-redux";
-import { BaseProps } from "@/constants/Types";
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { useDispatch, useSelector } from "react-redux";
+import { setFormData } from '@/redux/slices/FormSlice';
 import { Layout } from '@/constants/Layout';
-import BoxView from "../view/BoxView";
-import SpinnerView from '../view/SpinnerView';
+import IconView from "../view/IconView";
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
+import InputTextField from './InputTextField';
+import SpinnerView from '../view/SpinnerView';
 
-type Props = BaseProps & {
+type Props = {
   resource: string;
   field: string;
-  label?: any;
-  onPressEvent?: () => void;
-  onDeleteEvent: (item: any) => void;
+  value?: any;
+  placeholder?: any;
+  onPress?: () => void;
 };
 
-const CountriesField = ({ resource, field, label, onPressEvent, onDeleteEvent }: Props) => {
+const CountriesField = ({ resource, field, value, placeholder, onPress }: Props) => {
+  const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [countriesData, setCountriesData] = useState<any>([]);
-  const [selectedCountries, setSelectedCountries] = useState<any>([]);
+  const [currentValue, setCurrentValue] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
-  const fieldName: string = field;
-
-  const getSelectedCountries = (countriesIds?: any) => {
-    let selectedCodes: any[] = countriesIds || formData?.[fieldName] || [];
-    let result: any[] = [];
-
-    for (const item of countriesData) {
-      if (selectedCodes.includes(item.code)) result.push(item);
-    }
-
-    return result;
-  };
 
   const deleteItem = (item: any) => {
-    let selectedCodes: any[] = [...(formData?.[fieldName] || [])];
-    let index: number = selectedCodes.findIndex((v: any) => v == item.code);
+    let selectedIds: any[] = [...(value?.length > 0 ? value : [])];
+    selectedIds = selectedIds.filter((n: number) => n !== item.id);
 
-    if (index !== -1) selectedCodes.splice(index, 1);
-
-    setSelectedCountries(getSelectedCountries(selectedCodes));
-    if (onDeleteEvent) onDeleteEvent(item);
-  }
+    setCurrentValue(selectedIds);
+    
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: field, 
+      value: selectedIds, 
+    }));
+  };
 
   useEffect(() => {
     (async () => {
+      if (formData?.[field]?.length) {
+        setCurrentValue(await EntityManager.getProfiles({ items_ids: formData[field] }));
+      }
+
       if (!isLoaded) {
-        setCountriesData(await EntityManager.getCountries());
         setIsLoaded(true);
       }
-      
-      setSelectedCountries(getSelectedCountries());
-    })();
-  }, [isLoaded]);
+    })();    
+  }, [isLoaded, value, formData, field]);
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
   return (
-    <View style={styles.container}>
-      <BoxView
-        direction="row"
-        align="center"
-        onPress={onPressEvent}
-        style={styles.container}
-      >
-        {label}      
-      </BoxView>
+    <>
+      { !currentValue?.length && (
+        <TouchableOpacity
+          onPress={onPress}
+        >
+          <InputTextField
+            value={value}
+            readOnly={true}
+            placeholder={placeholder}
+            rightIcon={<IconView name="plus" theme="transparent" />}
+          />
+        </TouchableOpacity>
+      )}
 
-      { selectedCountries?.length > 0 && (
-        <View style={Layout.fieldSelectionPreview}>
-          { selectedCountries.map((item: any) => {
+      {currentValue?.length > 0 && (
+        <View style={Layout.fieldSelectionPreview}> 
+          { currentValue.map((item: any) => {
             return (
               <TagView
+                theme="white"
                 key={item.id}
                 canEdit={true}
                 onDeleteButtonPress={() => deleteItem(item)}  
               >
-                {item?.name}
+                {item?.profile_name}
               </TagView>
             );
-          }) }
+          })}
+
+          <IconView name="plus" theme="transparent" onPress={onPress} />
         </View>
       )}
-    </View>
+    </>
   );
 };
 

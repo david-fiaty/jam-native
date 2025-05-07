@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View } from "react-native";
+import { Modal, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
@@ -12,11 +12,10 @@ import ButtonView from "../view/ButtonView";
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
 import AddItemButton from "../button/AddItemButton";
-import ProjectJamsList from "../list/ProjectJamsList";
+import ProjectJamsField from "../field/ProjectJamsField";
 import TextView from "../view/TextView";
 import EntityManager from "@/manager/EntityManager";
 import SectorsField from "../field/SectorsField";
-import IconView from "../view/IconView";
 import PrivacyStatusField from "../field/PrivacyStatusField";
 import DatePickerField from "../field/DatePickerField";
 import CountriesField from "../field/CountriesField";
@@ -125,25 +124,16 @@ const AddProjectForm = () => {
           }
         />
 
+        <TextView>{i18n.t('Select countries')}</TextView>
         <CountriesField
           resource={resource}
           field="scope_countries_codes"
-          label={
-            <>
-              <IconView name="plus" theme="secondary" radius="round" />
-              <TextView>{i18n.t('Add countries')}</TextView>
-            </>
-          }
-          onPressEvent={() => ScreenManager.toggleModal('CountriesList', {
+          placeholder={i18n.t('Select countries')}
+          value={formData?.scope_countries_codes}
+          onPress={() => ModalManager.toggleModal('CountriesList', {
             resource: resource,
             field: 'scope_countries_codes',
           })}
-          onDeleteEvent={(item: any) => {
-            const countriesCodes = [...formData?.scope_countries_codes || []];
-            const index = countriesCodes.findIndex((v) => v === item.code);
-            if (index !== -1) countriesCodes.splice(index, 1);
-            updateField('scope_countries_codes', countriesCodes);
-          }}
         />
 
         <TextView>{i18n.t('Select your sectors')}</TextView>
@@ -172,7 +162,7 @@ const AddProjectForm = () => {
           </BoxView>
         )}
 
-        { formData?.jams_ids?.length > 0 && (
+        {/* formData?.jams_ids?.length > 0 && (
           <BoxView direction="column" align="flex-start" justify="flex-start">
             <TextView>{i18n.t('Selected Jams')}</TextView>
             <ProjectJamsList 
@@ -191,7 +181,7 @@ const AddProjectForm = () => {
               }}
             />
           </BoxView>
-        ) }
+        )*/ }
 
         <DividerView />
 
