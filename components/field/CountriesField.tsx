@@ -39,12 +39,16 @@ const CountriesField = ({ resource, field, value, placeholder, onPress }: Props)
 
   useEffect(() => {
     (async () => {
-      if (formData?.[field]?.length) {
-        setCurrentValue(await EntityManager.getProfiles({ items_ids: formData[field] }));
-      }
-
       if (!isLoaded) {
-        setCountriesData(await EntityManager.getCountries());
+        let countries: any[] = await EntityManager.getCountries();
+        setCountriesData(countries);
+
+        if (formData[field]?.length > 0) {
+          setCurrentValue(formData[field].map((v: any) => {
+            return countries.find((item: any) => item.id === v);
+          }));
+        }
+        
         setIsLoaded(true);
       }
     })();    
@@ -73,7 +77,7 @@ const CountriesField = ({ resource, field, value, placeholder, onPress }: Props)
             return (
               <TagView
                 theme="white"
-                key={item.id}
+                key={item?.id}
                 canEdit={true}
                 onDeleteButtonPress={() => deleteItem(item)}  
               >
