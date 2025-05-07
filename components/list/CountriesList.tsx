@@ -55,12 +55,10 @@ const CountriesList = ({ resource, field }: Props) => {
     let results: any = countriesData;
 
     if (searchValue && searchValue?.length > 0) {
-      
       setIsSearching(true);
       results = countriesData.filter((o: any) => {
         return o.name.toLowerCase().includes(searchValue.toLowerCase()); // Todo - Remove spaces before comparing
       });
-
       setIsSearching(false);
     }
     
