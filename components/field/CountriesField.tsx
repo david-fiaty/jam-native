@@ -49,10 +49,9 @@ const CountriesField = ({ resource, field, value, placeholder, onPress }: Props)
 
   useEffect(() => {
     (async () => {
-      setCurrentValue(getSelectedCountries());        
-
       if (!isLoaded) {
         let countries: any[] = await EntityManager.getCountries();
+        setCurrentValue(getSelectedCountries());        
         setCountriesData(countries);
         setIsLoaded(true);
       }
@@ -79,14 +78,14 @@ const CountriesField = ({ resource, field, value, placeholder, onPress }: Props)
       {currentValue?.length > 0 && (
         <View style={Layout.fieldSelectionPreview}> 
           { currentValue.map((item: any) => {
-            return (
+            return item?.id && (
               <TagView
                 theme="white"
-                key={item?.id}
+                key={item.id}
                 canEdit={true}
                 onDeleteButtonPress={() => deleteItem(item)}  
               >
-                {item?.name}
+                {item.name}
               </TagView>
             );
           })}
