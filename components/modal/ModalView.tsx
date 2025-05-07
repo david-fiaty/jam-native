@@ -154,7 +154,7 @@ const ModalView = ({ currentSection, style }: Props) => {
       },
       {
         id: 'SelectJamsForm',
-        title: i18n.t('Select project Jams'),
+        title: i18n.t('Add Jams to project'),
         render: (params: any) => <SelectJamsForm {...params} />,
       },
     ].map((o: any) => {
