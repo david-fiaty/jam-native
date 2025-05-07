@@ -32,7 +32,6 @@ const JamListItem = ({ row, isAddable, isDeletable, isSelected, multiSelect, onL
   const renderItem = (row: any) => {
     let imageSize = MediaManager.getThumbnailSize();
     let output = null;
-    let imageStyle = (isSelected ? styles.selectedItem : {}); // Todo - Is this needed?
 
     if (row?.item?.id == "addItem") {
       output = <AddItemButton
