@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Modal, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
@@ -147,54 +147,26 @@ const AddProjectForm = () => {
             field: 'sectors_ids',
           })}
         />
-
-        <DividerView theme="secondary" />
-        { !formData?.jams_ids?.length && (
-          <BoxView direction="column" align="center" justify="center">
-            <AddItemButton
-              label={i18n.t("Add Jams")}
-              onPress={() => ScreenManager.toggleModal("SelectJamsForm", {
-                resource: resource,
-                profileId: profileId,
-                profileJams: profileJams,
-              })}
-            />
-          </BoxView>
-        )}
-
-        {/* formData?.jams_ids?.length > 0 && (
-          <BoxView direction="column" align="flex-start" justify="flex-start">
-            <TextView>{i18n.t('Selected Jams')}</TextView>
-            <ProjectJamsList 
-              resource={resource}
-              selectedIds={formData?.jams_ids}
-              onAddButtonPress={() => ScreenManager.toggleModal("SelectJamsForm", {
-                resource: resource,
-                profileId: formData?.id,
-                profileJams: profileJams,
-              })}
-              onDeleteButtonPress={(row: any) => {
-                let selectedIds: any = [...formData?.jams_ids];
-                let index: number = selectedIds.findIndex((id: any) => id == row?.item?.id);
-                selectedIds.splice(index, 1);
-                updateField("jams_ids", selectedIds);
-              }}
-            />
-          </BoxView>
-        )*/ }
-
-        <DividerView />
-
-        <ButtonView
-          label={i18n.t("Submit")}
-          isProcessing={isProcessing}
-          onPress={submitForm}
-        />
+        
+        <View style={styles.subtmitButtoncontainer}>
+          <ButtonView
+            label={i18n.t("Submit")}
+            isProcessing={isProcessing}
+            onPress={submitForm}
+          />
+        </View>
 
         <DividerView />
       </View>
     </BoxView>
   );
 };
+
+const styles = StyleSheet.create({
+  subtmitButtoncontainer: {
+    width: '100%',
+    marginTop: Layout.space.base,
+  },
+});
 
 export default AddProjectForm;
