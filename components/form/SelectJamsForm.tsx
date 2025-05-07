@@ -1,6 +1,6 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
@@ -18,22 +18,30 @@ import ProfileJamsList from "../list/ProfileJamsList";
 type Props = {
   resource: string;
   profileId: any;
+  field: string;
 };
 
-const SelectJamsForm = ({ resource, profileId }: Props) => {
+const SelectJamsForm = ({ resource, profileId, field }: Props) => {
+  const dispatch = useDispatch();
   const [selectedIds, setSelectedIds] = useState<any>([]);
   const [profileItem, setProfileItem] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
-  const updateSelection = (row: any) => {
-    let selectedIdsList = [...selectedIds];
-    let index: number = selectedIdsList.findIndex((id: any) => id == row.item.id);
+  const toggleItem = (row: any) => {
+    let idArray = [...selectedIds];
+    let index: number = idArray.findIndex((id: any) => id == row.item.id);
 
-    if (index === -1) selectedIdsList.push(row.item.id);
-    else selectedIdsList.splice(index, 1);
+    if (index === -1) idArray.push(row.item.id);
+    else idArray.splice(index, 1);
 
-    setSelectedIds(selectedIdsList);
+    setSelectedIds(idArray);
+
+    dispatch(setFormData<any>({
+      resource: resource,
+      key: field,
+      value: idArray,
+    }));
   };
 
 
@@ -53,7 +61,7 @@ const SelectJamsForm = ({ resource, profileId }: Props) => {
   return (
     <ProfileJamsList 
       idArray={profileItem?.profile_jams?.map((o: any) => o.id)} // Todo - API should send ids, not full objects
-      onListItemPress={(row: any) => updateSelection(row)} 
+      onListItemPress={(row: any) => toggleItem(row)} 
       //onListItemPress={(row: any) => SectionManager.push(router, 'jam-item', { jamId: row?.item?.id, title: row?.item?.title })}
     />   
 
