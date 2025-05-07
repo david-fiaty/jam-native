@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import { Modal, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
@@ -21,15 +21,16 @@ import DatePickerField from "../field/DatePickerField";
 import CountriesField from "../field/CountriesField";
 import DataManager from "@/manager/DataManager";
 import ModalManager from "@/manager/ModalManager";
-import UserManager from "@/manager/UserManager";
 
 const AddProjectForm = () => {
   const resource: string = 'project';
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const [profileId, setProfileId] = useState<number>(0);
+  const activeModal: any = ScreenManager.getActiveModal();
   const formData: any = useSelector((state: any) => state.form[resource]);
+  const profileId: any = activeModal.params?.profileId; 
+  const profileJams: any = activeModal.params?.profileJams; 
 
   const updateField = (key: any, value: any) => {
     dispatch(setFormData<any>({ 
@@ -57,8 +58,6 @@ const AddProjectForm = () => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setProfileId(await UserManager.getProfileId());
-        
         dispatch(setFormData<any>({ 
           resource: resource,
           key: null, 
@@ -149,39 +148,53 @@ const AddProjectForm = () => {
           })}
         />
 
-        <DividerView theme="white" />
-
+        <DividerView theme="secondary" />
         { !formData?.jams_ids?.length && (
           <BoxView direction="column" align="center" justify="center">
             <AddItemButton
               label={i18n.t("Add Jams")}
-              onPress={() => ModalManager.toggleModal("SelectJamsForm", {
+              onPress={() => ScreenManager.toggleModal("SelectJamsForm", {
                 resource: resource,
                 profileId: profileId,
+                profileJams: profileJams,
               })}
             />
           </BoxView>
         )}
-        
-        <View style={styles.subtmitButtoncontainer}>
-          <ButtonView
-            label={i18n.t("Submit")}
-            isProcessing={isProcessing}
-            onPress={submitForm}
-          />
-        </View>
+
+        {/* formData?.jams_ids?.length > 0 && (
+          <BoxView direction="column" align="flex-start" justify="flex-start">
+            <TextView>{i18n.t('Selected Jams')}</TextView>
+            <ProjectJamsList 
+              resource={resource}
+              selectedIds={formData?.jams_ids}
+              onAddButtonPress={() => ScreenManager.toggleModal("SelectJamsForm", {
+                resource: resource,
+                profileId: formData?.id,
+                profileJams: profileJams,
+              })}
+              onDeleteButtonPress={(row: any) => {
+                let selectedIds: any = [...formData?.jams_ids];
+                let index: number = selectedIds.findIndex((id: any) => id == row?.item?.id);
+                selectedIds.splice(index, 1);
+                updateField("jams_ids", selectedIds);
+              }}
+            />
+          </BoxView>
+        )*/ }
+
+        <DividerView />
+
+        <ButtonView
+          label={i18n.t("Submit")}
+          isProcessing={isProcessing}
+          onPress={submitForm}
+        />
 
         <DividerView />
       </View>
     </BoxView>
   );
 };
-
-const styles = StyleSheet.create({
-  subtmitButtoncontainer: {
-    width: '100%',
-    marginTop: Layout.space.base,
-  },
-});
 
 export default AddProjectForm;
