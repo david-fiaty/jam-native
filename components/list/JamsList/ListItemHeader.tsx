@@ -15,7 +15,6 @@ const ListItemHeader = ({ row }: Props) => {
   const collaboratorsCount = parseInt(row?.item?.collaborators?.length);
 
   const renderHosts = () => {
-    // Todo - Get profile user name
     if (collaboratorsCount > 0) {
       return (
         <TouchableOpacity onPress={() => ModalManager.toggleModal('HostsList', { jamId: row?.item?.id })}>

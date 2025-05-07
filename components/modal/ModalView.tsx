@@ -37,7 +37,6 @@ const ModalView = ({ currentSection, style }: Props) => {
   };
 
   const renderBackButton = () => {
-    // Todo - Fix parent modal visibility
     const activeModalsCount: number = modalState.active.length;
     const currentModalIndex: number = modalState.active.findIndex((o: any) => o.id === currentModal?.id);
   
