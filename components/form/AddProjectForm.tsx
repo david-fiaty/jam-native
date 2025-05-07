@@ -12,7 +12,7 @@ import ButtonView from "../view/ButtonView";
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
 import AddItemButton from "../button/AddItemButton";
-import ProjectJamsList from "../list/ProjectJamsList";
+import ProjectJamsField from "../field/ProjectJamsField";
 import TextView from "../view/TextView";
 import EntityManager from "@/manager/EntityManager";
 import SectorsField from "../field/SectorsField";
@@ -162,7 +162,7 @@ const AddProjectForm = () => {
           </BoxView>
         )}
 
-        { formData?.jams_ids?.length > 0 && (
+        {/* formData?.jams_ids?.length > 0 && (
           <BoxView direction="column" align="flex-start" justify="flex-start">
             <TextView>{i18n.t('Selected Jams')}</TextView>
             <ProjectJamsList 
@@ -181,7 +181,7 @@ const AddProjectForm = () => {
               }}
             />
           </BoxView>
-        ) }
+        )*/ }
 
         <DividerView />
 
