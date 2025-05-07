@@ -53,12 +53,21 @@ const CountriesList = ({ resource, field }: Props) => {
   };
 
   const onSubmitEditing = () => {
-    setIsSearching(true);
-    let options = searchValue.length ? { query_text: searchValue } : {};
+    let results: any = countriesData;
 
-    return countriesData.map((o: any) => {
-      return o; // Todo - Implement country search value filtering
-    })
+    if (searchValue && searchValue?.length > 0) {
+      
+      setIsSearching(true);
+      results = countriesData.filter((o: any) => {
+        return o.name.toLowerCase().includes(searchValue.toLowerCase());
+      });
+
+      console.log(results)
+
+      setIsSearching(false);
+    }
+    
+    return results;
   };
 
   const toggleProfile = (entityId: number) => {
