@@ -147,6 +147,21 @@ const AddProjectForm = () => {
             field: 'sectors_ids',
           })}
         />
+
+        <DividerView theme="white" />
+
+        { !formData?.jams_ids?.length && (
+          <BoxView direction="column" align="center" justify="center">
+            <AddItemButton
+              label={i18n.t("Add Jams")}
+              onPress={() => ScreenManager.toggleModal("SelectJamsForm", {
+                resource: resource,
+                profileId: profileId,
+                profileJams: profileJams,
+              })}
+            />
+          </BoxView>
+        )}
         
         <View style={styles.subtmitButtoncontainer}>
           <ButtonView
