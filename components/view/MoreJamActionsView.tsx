@@ -64,15 +64,13 @@ const MoreJamActionsView = ({ jamId }: Props) => {
     {
       label: i18n.t('Add Jam to project'),
       icon: 'plus',
-      //canDisplay: () => true,
-      canDisplay: () => isEntityOwner, // Todo - Enable this
+      canDisplay: () => isEntityOwner, 
       onPress: () => ScreenManager.toggleModal('AddJamToProjectForm', { jamId: jamId }),
     },
     {
       label: i18n.t('Edit Jam'),
       icon: 'edit',
-      //canDisplay: () => true,
-      canDisplay: () => isEntityOwner, // Todo - Enable this
+      canDisplay: () => isEntityOwner,
       onPress: () => ScreenManager.toggleModal('JamForm', { jamId: jamId }),
     },
     {

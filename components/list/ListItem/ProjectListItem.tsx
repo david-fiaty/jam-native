@@ -54,8 +54,7 @@ const ProjectListItem = ({ row, isAddable, isDeletable, isSelected, multiSelect,
 
   const renderItem = () => {
     let output = null;
-    let imageStyle = (isSelected ? styles.selectedItem : {}); // Todo - Is this needed?
-
+    
     if (row?.item?.id == "addItem") {
       output = <AddItemButton
         label={i18n.t('Add')}
