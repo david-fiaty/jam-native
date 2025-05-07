@@ -22,6 +22,7 @@ const CountriesList = ({ resource, field }: Props) => {
   const dispatch = useDispatch();
   const [profiles, setProfiles] = useState<any>(null);
   const [countriesData, setCountriesData] = useState<any[]>([]);
+  const [searchResults, setSearchResults] = useState<any[]>([]);
   const [selectedCountries, setSelectedCountries] = useState<any>([]);
   const [searchValue, setSearchValue] = useState<string>('');
   const [isSearching, setIsSearching] = useState<boolean>(false);
@@ -29,9 +30,7 @@ const CountriesList = ({ resource, field }: Props) => {
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const clearSearch = () => {
-    setIsSearching(true);
-    setCountriesData(countriesData);
-    setIsSearching(false);
+    setSearchResults(countriesData);
     setSearchValue('');
   };
 
@@ -62,12 +61,10 @@ const CountriesList = ({ resource, field }: Props) => {
         return o.name.toLowerCase().includes(searchValue.toLowerCase());
       });
 
-      console.log(results)
-
       setIsSearching(false);
     }
     
-    return results;
+    setSearchResults(results);
   };
 
   const toggleProfile = (entityId: number) => {
@@ -112,7 +109,9 @@ const CountriesList = ({ resource, field }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setCountriesData(await EntityManager.getCountries());
+        let countries: any = await EntityManager.getCountries(); 
+        setCountriesData(countries);
+        setSearchResults(countries);
         if (formData?.[field]?.length) {
           setSelectedCountries(formData[field]);
         }
@@ -135,9 +134,9 @@ const CountriesList = ({ resource, field }: Props) => {
       />
 
       <View style={Layout.borderedListContainer}>
-        {countriesData?.length > 0 &&
+        {searchResults?.length > 0 &&
           <ListView
-            data={countriesData}
+            data={searchResults}
             renderItem={(row: any) => renderItem(row)}
           />
         }
