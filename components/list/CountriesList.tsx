@@ -10,7 +10,6 @@ import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
 import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
-import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from '../field/InputTextField';
 
@@ -23,11 +22,10 @@ const CountriesList = ({ resource, field }: Props) => {
   const dispatch = useDispatch();
   const [profiles, setProfiles] = useState<any>(null);
   const [countriesData, setCountriesData] = useState<any[]>([]);
-  const [selectedIds, setSelectedIds] = useState<any>([]);
+  const [selectedCountries, setSelectedCountries] = useState<any>([]);
   const [searchValue, setSearchValue] = useState<string>('');
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const activeModal: any = ScreenManager.getActiveModal();
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const clearSearch = () => {
@@ -64,7 +62,7 @@ const CountriesList = ({ resource, field }: Props) => {
   };
 
   const toggleProfile = (entityId: number) => {
-    let idArray = [...selectedIds];
+    let idArray = [...selectedCountries];
     if (idArray.includes(entityId)) {
       idArray = idArray.filter((value: number) => value !== entityId);
     }
@@ -72,7 +70,7 @@ const CountriesList = ({ resource, field }: Props) => {
       idArray.push(entityId);
     }
 
-    setSelectedIds(idArray);
+    setSelectedCountries(idArray);
 
     dispatch(setFormData<any>({
       resource: resource,
@@ -89,7 +87,7 @@ const CountriesList = ({ resource, field }: Props) => {
       >
         <BoxView direction="row" align="center" justify="flex-start">
           <TextView>{row.item.name}</TextView>
-          {selectedIds.includes(row.item.id) &&
+          {selectedCountries.includes(row.item.id) &&
             <IconView
               name="checkmark"
               theme="clear"
@@ -106,7 +104,6 @@ const CountriesList = ({ resource, field }: Props) => {
     (async () => {
       if (!isLoaded) {
         setCountriesData(await EntityManager.getCountries());
-
         setIsLoaded(true);
       }
     })();
