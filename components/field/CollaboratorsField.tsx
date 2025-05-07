@@ -3,7 +3,6 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from '@/redux/slices/FormSlice';
 import { Layout } from '@/constants/Layout';
-import { Colors } from '@/constants/Colors';
 import IconView from "../view/IconView";
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
@@ -39,7 +38,7 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Pr
 
   useEffect(() => {
     (async () => {
-      if (formData?.[field]?.length) {
+      if (formData?.[field]?.length > 0) {
         setCurrentValue(await EntityManager.getProfiles({ items_ids: formData[field] }));
       }
 
