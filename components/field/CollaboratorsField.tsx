@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from '@/redux/slices/FormSlice';
 import { Layout } from '@/constants/Layout';
@@ -86,11 +86,5 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Pr
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-  },
-});
 
 export default CollaboratorsField;

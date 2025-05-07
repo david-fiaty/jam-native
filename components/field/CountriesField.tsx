@@ -37,22 +37,27 @@ const CountriesField = ({ resource, field, value, placeholder, onPress }: Props)
     }));
   };
 
+  const getSelectedCountries = () => {
+    if (formData[field]?.length > 0) {
+      return formData[field].map((v: any) => {
+        return countriesData.find((item: any) => item.id === v);
+      });
+    }
+
+    return [];
+  };
+
   useEffect(() => {
     (async () => {
+      setCurrentValue(getSelectedCountries());        
+
       if (!isLoaded) {
         let countries: any[] = await EntityManager.getCountries();
         setCountriesData(countries);
-
-        if (formData[field]?.length > 0) {
-          setCurrentValue(formData[field].map((v: any) => {
-            return countries.find((item: any) => item.id === v);
-          }));
-        }
-        
         setIsLoaded(true);
       }
     })();    
-  }, [isLoaded, value, formData, field]);
+  }, [isLoaded, formData, field]);
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
