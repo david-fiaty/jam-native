@@ -104,6 +104,9 @@ const CountriesList = ({ resource, field }: Props) => {
     (async () => {
       if (!isLoaded) {
         setCountriesData(await EntityManager.getCountries());
+        if (formData?.[field]?.length) {
+          setSelectedCountries(formData[field]);
+        }
         setIsLoaded(true);
       }
     })();
