@@ -1,6 +1,5 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
-import { useRouter } from "expo-router";
 import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
@@ -31,10 +30,8 @@ const ProjectJamsField = ({
   onDeleteButtonPress
 }: Props) => {
   const dispatch = useDispatch();
-  const router = useRouter();
   const [selectedJams, setSelectedJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const activeModal: any = ScreenManager.getActiveModal();
   const [projectJams, setProjectJams] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
   const imageSize = MediaManager.getThumbnailSize();
