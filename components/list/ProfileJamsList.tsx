@@ -56,7 +56,7 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
       onListItemPress(row);
     }
     else {
-      SectionManager.push(router, 'jam-item', { jamId: row?.item?.id, title: row?.item?.title });
+      SectionManager.push(router, 'jam-item', { jamId: JSON.stringify([row?.item?.id]), title: row?.item?.title });
     }
   };
 
