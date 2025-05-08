@@ -60,12 +60,11 @@ const SelectJamsForm = ({ resource, profileId, field }: Props) => {
     })();
   }, [isLoaded, field, formData]);
 
-  if (!isLoaded) return <SpinnerView />;
-
   return (
     <BoxView direction="column" align="flex-start" justify="flex-start" style={[Layout.formContainer, styles.container]}>
       <ProfileJamsList
-        idArray={profileItem?.profile_jams?.map((o: any) => o.id)} // Todo - API should send ids, not full objects
+        idArray={[18, 20, 32, 33, 37]}
+        //idArray={profileItem?.profile_jams?.map((o: any) => o.id)} // Todo - API should send ids, not full objects
         onListItemPress={(row: any) => toggleItem(row)}
       />
     </BoxView>

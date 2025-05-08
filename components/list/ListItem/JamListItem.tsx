@@ -17,15 +17,22 @@ type Props = BaseProps & {
   multiSelect?: boolean;
   onAddButtonPress?: () => void;
   onListItemPress?: (row: any) => void;
+  onDeleteItemPress?: (row: any) => void;
 };
 
-const JamListItem = ({ row, isAddable, isDeletable, isSelected, multiSelect, onListItemPress, onAddButtonPress }: Props) => {
+const JamListItem = ({ row, isAddable, isDeletable, isSelected, multiSelect, onListItemPress, onAddButtonPress, onDeleteItemPress }: Props) => {
   const numColumns = 3;
   multiSelect = typeof multiSelect == 'boolean' ? multiSelect : true;
 
   const onItemPress = (row: any) => {
     if (onListItemPress) {
       onListItemPress(row);
+    }
+  };
+
+  const deleteItem = (row: any) => {
+    if (onDeleteItemPress) {
+      onDeleteItemPress(row);
     }
   };
 
@@ -79,7 +86,7 @@ const JamListItem = ({ row, isAddable, isDeletable, isSelected, multiSelect, onL
 
           {isDeletable && isSelected && (
             <View style={styles.checkIcon}>
-              <IconView name="delete" theme="primary" size={12} padding={3.5} />
+              <IconView name="delete" theme="primary" size={12} padding={3.5} onPress={() => deleteItem(row)}/>
             </View>
           )}
         </TouchableOpacity>
