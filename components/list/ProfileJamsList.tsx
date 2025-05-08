@@ -28,9 +28,10 @@ type Props = {
   emptyMessage?: any;
   onAddButtonPress?: () => void,
   onListItemPress?: (row: any) => void;
+  onDeleteItemPress?: (row: any) => void;
 };
 
-const ProfileJamsList = ({ resource, field,       title, idArray, addButton, allButton, isAddable, isDeletable, multiSelect, emptyMessage, onAddButtonPress, onListItemPress }: Props) => {
+const ProfileJamsList = ({ resource, field,       title, idArray, addButton, allButton, isAddable, isDeletable, multiSelect, emptyMessage, onAddButtonPress, onListItemPress, onDeleteItemPress }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const dispatch = useDispatch();
@@ -38,14 +39,10 @@ const ProfileJamsList = ({ resource, field,       title, idArray, addButton, all
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedIds, setSelectedIds] = useState<any>([]);
 
-  const findItemIndex = (row: any) => {
-    return selectedIds.findIndex((id: any) => id == row.item.id);
-  };
-
   const toggleItem = (row: any) => {
     if (multiSelect === true) {
       let selectedIdsList = [...selectedIds];
-      let index: number = findItemIndex(row);
+      let index: number = selectedIdsList.findIndex((id: any) => id == row.item.id);
 
       if (index === -1) selectedIdsList.push(row.item.id);
       else selectedIdsList.splice(index, 1);
@@ -100,8 +97,6 @@ const ProfileJamsList = ({ resource, field,       title, idArray, addButton, all
 
   if (!isLoaded) return <SpinnerView />; 
 
-  console.log(selectedIds)
-
   return (
     <View style={styles.container}>
       <BoxView direction="row" align="center" justify="space-between" style={styles.title}>
@@ -129,6 +124,7 @@ const ProfileJamsList = ({ resource, field,       title, idArray, addButton, all
             multiSelect={multiSelect}
             onAddButtonPress={onAddButtonPress}
             onListItemPress={(row: any) => onItemPress(row)}
+            onDeleteItemPress={onDeleteItemPress}
             isSelected={(selectedIds.findIndex((id: any) => id == row.item.id)) !== -1}
           />
         )}
