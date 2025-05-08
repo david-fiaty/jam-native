@@ -28,10 +28,9 @@ type Props = {
   emptyMessage?: any;
   onAddButtonPress?: () => void,
   onListItemPress?: (row: any) => void;
-  onDeleteItemPress?: (row: any) => void;
 };
 
-const ProfileJamsList = ({ resource, field,       title, idArray, addButton, allButton, isAddable, isDeletable, multiSelect, emptyMessage, onAddButtonPress, onListItemPress, onDeleteItemPress }: Props) => {
+const ProfileJamsList = ({ resource, field,       title, idArray, addButton, allButton, isAddable, isDeletable, multiSelect, emptyMessage, onAddButtonPress, onListItemPress }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const dispatch = useDispatch();
@@ -64,8 +63,8 @@ const ProfileJamsList = ({ resource, field,       title, idArray, addButton, all
     }
   };
 
-  const deleteItem = (item: any) => {
-    let itemIds: any[] = [...selectedIds].filter((n: number) => n !== item.id);
+  const deleteItem = (row: any) => {
+    let itemIds: any[] = [...selectedIds].filter((n: number) => n !== row.item.id);
 
     setSelectedIds(itemIds);
     
@@ -124,7 +123,7 @@ const ProfileJamsList = ({ resource, field,       title, idArray, addButton, all
             multiSelect={multiSelect}
             onAddButtonPress={onAddButtonPress}
             onListItemPress={(row: any) => onItemPress(row)}
-            onDeleteItemPress={onDeleteItemPress}
+            onDeleteItemPress={deleteItem}
             isSelected={(selectedIds.findIndex((id: any) => id == row.item.id)) !== -1}
           />
         )}
