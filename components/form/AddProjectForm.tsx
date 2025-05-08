@@ -23,6 +23,7 @@ import DataManager from "@/manager/DataManager";
 import ModalManager from "@/manager/ModalManager";
 import UserManager from "@/manager/UserManager";
 import FormManager from "@/manager/FormManager";
+import ProfileJamsList from "../list/ProfileJamsList";
 
 const AddProjectForm = () => {
   const resource: string = 'project';
@@ -152,18 +153,16 @@ const AddProjectForm = () => {
 
         <DividerView theme="white" />
 
-        { !formData?.jams_ids?.length && (
-          <BoxView direction="column" align="center" justify="center" style={styles.addButtonContainer}>
-            <AddItemButton
-              label={i18n.t("Add Jams")}
-              onPress={() => ModalManager.toggleModal("SelectJamsForm", {
-                field: 'jams_ids',
-                resource: resource,
-                profileId: profileId,
-              })}
-            />
-          </BoxView>
-        )}
+        <ProfileJamsList
+          idArray={[18, 20, 32, 33, 37]} // Todo - API should send ids, not full objects
+          onListItemPress={(row: any) => {}}
+          addButton={true}
+          onAddButtonPress={() => ModalManager.toggleModal("SelectJamsForm", {
+            field: 'jams_ids',
+            resource: resource,
+            profileId: profileId,
+          })}
+        />
         
         <View style={styles.subtmitButtoncontainer}>
           <ButtonView
