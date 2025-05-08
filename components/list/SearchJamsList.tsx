@@ -21,7 +21,7 @@ const SearchJamsList = ({ data, filter }: Props) => {
   const [currentData, setCurrentData] = useState<any[]>([]);
 
   const onItemPress = (row: any) => {
-    SectionManager.push(router, 'jam-item', { jamId: row?.item?.id, title: row?.item?.title });
+    SectionManager.push(router, 'jam-item', { jamId: JSON.stringify([row?.item?.id]), title: row?.item?.title });
   }
 
   const renderEmptyMessage = () => {
