@@ -35,7 +35,7 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
     return selectedIds.findIndex((id: any) => id == row.item.id);
   };
 
-  const updateSelection = (row: any) => {
+  const toggleItem = (row: any) => {
     if (multiSelect === true) {
       let selectedIdsList = [...selectedIds];
       let index: number = findItemIndex(row);
@@ -52,7 +52,7 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
 
   const onItemPress = (row: any) => {
     if (onListItemPress) {
-      updateSelection(row);
+      toggleItem(row);
       onListItemPress(row);
     }
     else {
