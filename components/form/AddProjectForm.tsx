@@ -23,6 +23,7 @@ import DataManager from "@/manager/DataManager";
 import ModalManager from "@/manager/ModalManager";
 import UserManager from "@/manager/UserManager";
 import FormManager from "@/manager/FormManager";
+import ProfileJamsList from "../list/ProfileJamsList";
 
 const AddProjectForm = () => {
   const resource: string = 'project';
@@ -83,7 +84,6 @@ const AddProjectForm = () => {
       scroll={true}
       style={Layout.formContainer}
     >
-      <View style={[Layout.formContainer, styles.container]}>
         <TextView>{i18n.t("Name")}</TextView>
         <InputTextField
           value={formData?.name}
@@ -153,18 +153,16 @@ const AddProjectForm = () => {
 
         <DividerView theme="white" />
 
-        { !formData?.jams_ids?.length && (
-          <BoxView direction="column" align="center" justify="center">
-            <AddItemButton
-              label={i18n.t("Add Jams")}
-              onPress={() => ModalManager.toggleModal("SelectJamsForm", {
-                field: 'jams_ids',
-                resource: resource,
-                profileId: profileId,
-              })}
-            />
-          </BoxView>
-        )}
+        <ProfileJamsList
+          idArray={[18, 20, 32, 33, 37]} // Todo - API should send ids, not full objects
+          onListItemPress={(row: any) => {}}
+          addButton={true}
+          onAddButtonPress={() => ModalManager.toggleModal("SelectJamsForm", {
+            field: 'jams_ids',
+            resource: resource,
+            profileId: profileId,
+          })}
+        />
         
         <View style={styles.subtmitButtoncontainer}>
           <ButtonView
@@ -173,9 +171,6 @@ const AddProjectForm = () => {
             onPress={submitForm}
           />
         </View>
-
-        <DividerView />
-      </View>
     </BoxView>
   );
 };
@@ -185,9 +180,13 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  addButtonContainer: {
+    width: '100%',
+  },
   subtmitButtoncontainer: {
     width: '100%',
     marginTop: Layout.space.base,
+    marginBottom: Layout.space.base*2,
   },
 });
 
