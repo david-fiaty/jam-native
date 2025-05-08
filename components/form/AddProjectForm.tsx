@@ -5,14 +5,11 @@ import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
-import DividerView from "../view/DividerView";
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import ButtonView from "../view/ButtonView";
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
-import AddItemButton from "../button/AddItemButton";
-import ProjectJamsField from "../field/ProjectJamsField";
 import TextView from "../view/TextView";
 import EntityManager from "@/manager/EntityManager";
 import SectorsField from "../field/SectorsField";
@@ -151,12 +148,12 @@ const AddProjectForm = () => {
           })}
         />
 
-        <DividerView theme="white" />
-
         <ProfileJamsList
+          title={<TextView>{i18n.t('Project Jams')}</TextView>}
+          addButton={true}
+          isDeletable={true}
           idArray={[18, 20, 32, 33, 37]} // Todo - API should send ids, not full objects
           onListItemPress={(row: any) => {}}
-          addButton={true}
           onAddButtonPress={() => ModalManager.toggleModal("SelectJamsForm", {
             field: 'jams_ids',
             resource: resource,
