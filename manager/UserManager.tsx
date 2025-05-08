@@ -82,7 +82,9 @@ class UserManager {
     let profileId: number = await this.getProfileId();
     let defaults = {};
     let profileData = [];
-    let variables: any = { '[profile_id]': profileId };
+    //let variables: any = { '[profile_id]': profileId };
+
+    let variables: any = { '[profile_id]': 10 }; // Todo - Remove test
 
     if (profileId > 0) {
       profileData = await DataManager.get('getProfile', {...defaults, ...options}, variables);
