@@ -128,7 +128,6 @@ const ProfileProjectsList = ({
           renderItem={(row: any) => (
             <ProjectListItem 
               row={row}
-              images={projectsImages}
               isAddable={isAddable}
               isDeletable={isDeletable}
               multiSelect={multiSelect}
