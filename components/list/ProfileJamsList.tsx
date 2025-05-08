@@ -1,6 +1,8 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useRouter } from "expo-router";
+import { setFormData } from '@/redux/slices/FormSlice';
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
@@ -12,6 +14,10 @@ import JamListItem from "./ListItem/JamListItem";
 import SectionManager from "@/manager/SectionManager";
 
 type Props = {
+  resource: string;
+  field: string;
+
+
   title?: any,
   idArray?: any,
   addButton?: boolean,
@@ -24,9 +30,10 @@ type Props = {
   onListItemPress?: (row: any) => void;
 };
 
-const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDeletable, multiSelect, emptyMessage, onAddButtonPress, onListItemPress }: Props) => {
+const ProfileJamsList = ({ resource, field,       title, idArray, addButton, allButton, isAddable, isDeletable, multiSelect, emptyMessage, onAddButtonPress, onListItemPress }: Props) => {
   const numColumns = 3;
   const router = useRouter();
+  const dispatch = useDispatch();
   const [profileJams, setProfileJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedIds, setSelectedIds] = useState<any>([]);
@@ -58,6 +65,18 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
     else {
       SectionManager.push(router, 'jam-item', { jamId: JSON.stringify([row?.item?.id]), title: row?.item?.title });
     }
+  };
+
+  const deleteItem = (item: any) => {
+    let itemIds: any[] = [...selectedIds].filter((n: number) => n !== item.id);
+
+    setSelectedIds(itemIds);
+    
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: field, 
+      value: itemIds, 
+    }));
   };
 
   useEffect(() => {
