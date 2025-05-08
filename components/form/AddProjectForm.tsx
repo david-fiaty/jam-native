@@ -83,7 +83,6 @@ const AddProjectForm = () => {
       scroll={true}
       style={Layout.formContainer}
     >
-      <View style={[Layout.formContainer, styles.container]}>
         <TextView>{i18n.t("Name")}</TextView>
         <InputTextField
           value={formData?.name}
@@ -154,7 +153,7 @@ const AddProjectForm = () => {
         <DividerView theme="white" />
 
         { !formData?.jams_ids?.length && (
-          <BoxView direction="column" align="center" justify="center">
+          <BoxView direction="column" align="center" justify="center" style={styles.addButtonContainer}>
             <AddItemButton
               label={i18n.t("Add Jams")}
               onPress={() => ModalManager.toggleModal("SelectJamsForm", {
@@ -173,9 +172,6 @@ const AddProjectForm = () => {
             onPress={submitForm}
           />
         </View>
-
-        <DividerView />
-      </View>
     </BoxView>
   );
 };
@@ -185,9 +181,13 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  addButtonContainer: {
+    width: '100%',
+  },
   subtmitButtoncontainer: {
     width: '100%',
     marginTop: Layout.space.base,
+    marginBottom: Layout.space.base*2,
   },
 });
 
