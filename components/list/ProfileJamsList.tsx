@@ -16,12 +16,10 @@ import SectionManager from "@/manager/SectionManager";
 type Props = {
   resource: string;
   field: string;
-
-
-  title?: any,
-  idArray?: any,
-  addButton?: boolean,
-  allButton?: boolean,
+  title?: any;
+  idArray?: any;
+  addButton?: boolean;
+  allButton?: boolean;
   isAddable?: boolean;
   isDeletable?: boolean;
   multiSelect?: boolean;
@@ -30,13 +28,25 @@ type Props = {
   onListItemPress?: (row: any) => void;
 };
 
-const ProfileJamsList = ({ resource, field,       title, idArray, addButton, allButton, isAddable, isDeletable, multiSelect, emptyMessage, onAddButtonPress, onListItemPress }: Props) => {
+const ProfileJamsList = ({ resource, field, title, idArray, addButton, allButton, isAddable, isDeletable, multiSelect, emptyMessage, onAddButtonPress, onListItemPress }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const dispatch = useDispatch();
   const [profileJams, setProfileJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedIds, setSelectedIds] = useState<any>([]);
+
+  const onItemPress = (row: any) => {
+    if (onListItemPress) {
+      onListItemPress(row);
+    }
+    else if (isDeletable !== true) {
+      SectionManager.push(router, 'jam-item', { jamId: JSON.stringify([row?.item?.id]), title: row?.item?.title });
+    }
+    else {
+      toggleItem(row);
+    }
+  };
 
   const toggleItem = (row: any) => {
     if (multiSelect === true) {
@@ -53,15 +63,7 @@ const ProfileJamsList = ({ resource, field,       title, idArray, addButton, all
     }
   };
 
-  const onItemPress = (row: any) => {
-    if (onListItemPress) {
-      toggleItem(row);
-      onListItemPress(row);
-    }
-    else {
-      SectionManager.push(router, 'jam-item', { jamId: JSON.stringify([row?.item?.id]), title: row?.item?.title });
-    }
-  };
+  
 
   const deleteItem = (row: any) => {
     let itemIds: any[] = [...selectedIds].filter((n: number) => n !== row.item.id);
