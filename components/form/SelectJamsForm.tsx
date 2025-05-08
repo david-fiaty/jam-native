@@ -30,9 +30,6 @@ const SelectJamsForm = ({ resource, profileId, field }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
-
-  profileId = 10; // Todo - Remove test
-
   const toggleItem = (row: any) => {
     let idArray = [...selectedIds];
     let index: number = idArray.findIndex((id: any) => id == row.item.id);
