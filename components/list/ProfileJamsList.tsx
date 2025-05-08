@@ -38,14 +38,10 @@ const ProfileJamsList = ({ resource, field,       title, idArray, addButton, all
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedIds, setSelectedIds] = useState<any>([]);
 
-  const findItemIndex = (row: any) => {
-    return selectedIds.findIndex((id: any) => id == row.item.id);
-  };
-
   const toggleItem = (row: any) => {
     if (multiSelect === true) {
       let selectedIdsList = [...selectedIds];
-      let index: number = findItemIndex(row);
+      let index: number = selectedIdsList.findIndex((id: any) => id == row.item.id);
 
       if (index === -1) selectedIdsList.push(row.item.id);
       else selectedIdsList.splice(index, 1);
@@ -67,8 +63,8 @@ const ProfileJamsList = ({ resource, field,       title, idArray, addButton, all
     }
   };
 
-  const deleteItem = (item: any) => {
-    let itemIds: any[] = [...selectedIds].filter((n: number) => n !== item.id);
+  const deleteItem = (row: any) => {
+    let itemIds: any[] = [...selectedIds].filter((n: number) => n !== row.item.id);
 
     setSelectedIds(itemIds);
     
@@ -100,8 +96,6 @@ const ProfileJamsList = ({ resource, field,       title, idArray, addButton, all
 
   if (!isLoaded) return <SpinnerView />; 
 
-  console.log(selectedIds)
-
   return (
     <View style={styles.container}>
       <BoxView direction="row" align="center" justify="space-between" style={styles.title}>
@@ -129,6 +123,7 @@ const ProfileJamsList = ({ resource, field,       title, idArray, addButton, all
             multiSelect={multiSelect}
             onAddButtonPress={onAddButtonPress}
             onListItemPress={(row: any) => onItemPress(row)}
+            onDeleteItemPress={deleteItem}
             isSelected={(selectedIds.findIndex((id: any) => id == row.item.id)) !== -1}
           />
         )}
