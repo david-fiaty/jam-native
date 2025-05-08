@@ -79,12 +79,14 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
     })();
   }, [isLoaded, idArray, addButton]);
 
+  if (!isLoaded) return <SpinnerView size="small" />; 
+
   return (
     <View style={styles.container}>
       <BoxView direction="row" align="center" justify="space-between">
         { title && <TextView style={styles.title}>{title}</TextView> }
 
-        { allButton && (
+        { idArray?.length > 0 && allButton && (
           <TouchableOpacity
             onPress={() => 
               SectionManager.push(router, 'jams', {
@@ -96,29 +98,26 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
           </TouchableOpacity> 
         )}
       </BoxView>
-
-      {isLoaded && !idArray?.length && emptyMessage && <TextView>{emptyMessage}</TextView>}
-
-      {profileJams?.length > 0 && (
-        <ListView
-          data={profileJams}
-          numColumns={numColumns}
-          contentContainerStyle={{ gap: Layout.space.base }}
-          columnWrapperStyle={{ gap: Layout.space.base }}
-          scrollEnabled={false}
-          renderItem={(row: any) => (
-            <JamListItem 
-              row={row} 
-              isAddable={isAddable}
-              isDeletable={isDeletable}
-              multiSelect={multiSelect}
-              onAddButtonPress={onAddButtonPress}
-              onListItemPress={(row: any) => onItemPress(row)}
-              isSelected={(selectedIds.findIndex((id: any) => id == row.item.id)) !== -1}
-            />
-          )}
-        />
-      )}
+    
+      <ListView
+        data={profileJams}
+        numColumns={numColumns}
+        contentContainerStyle={{ gap: Layout.space.base }}
+        columnWrapperStyle={{ gap: Layout.space.base }}
+        scrollEnabled={false}
+        emptyMessage={<TextView>{i18n.t('No data available.')}</TextView>}
+        renderItem={(row: any) => (
+          <JamListItem 
+            row={row} 
+            isAddable={isAddable}
+            isDeletable={isDeletable}
+            multiSelect={multiSelect}
+            onAddButtonPress={onAddButtonPress}
+            onListItemPress={(row: any) => onItemPress(row)}
+            isSelected={(selectedIds.findIndex((id: any) => id == row.item.id)) !== -1}
+          />
+        )}
+      />
     </View>
   );
 };

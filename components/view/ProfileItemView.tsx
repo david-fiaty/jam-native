@@ -65,11 +65,12 @@ const ProfileItemView = ({ profileId }: Props) => {
       style={styles.container}
     >
       <ProfileHeaderView profileItem={profileItem} />
-      <DividerView />
+      <DividerView theme="secondary" />
 
-      <TextView style={styles.sectionTitle}>{i18n.t('Jams')} ({profileItem?.number_of_jams || 0})</TextView>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileJams}>
         <ProfileJamsList 
+          allButton={true}
+          title={<TextView style={styles.sectionTitle}>{i18n.t('Jams')} ({profileItem?.number_of_jams || 0})</TextView>}
           idArray={profileItem?.profile_jams?.map((o: any) => o.id)} // Todo - API should send ids, not full objects
           onListItemPress={(row: any) => SectionManager.push(router, 'jam-item', { jamId: row?.item?.id, title: row?.item?.title })}
         />   
@@ -83,7 +84,7 @@ const ProfileItemView = ({ profileId }: Props) => {
 
       <TextView style={styles.sectionTitle}>{i18n.t('Description')}</TextView>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileDescription}>
-        <TextView>{profileItem?.profile_description}</TextView>
+        <TextView>{profileItem?.profile_description ? profileItem?.profile_description : i18n.t('Unavailable')}</TextView>
       </BoxView>
 
       <TextView style={styles.sectionTitle}>{i18n.t('Sectors')}</TextView>
