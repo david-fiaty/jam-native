@@ -65,11 +65,11 @@ const ProfileItemView = ({ profileId }: Props) => {
       style={styles.container}
     >
       <ProfileHeaderView profileItem={profileItem} />
-      <DividerView />
+      <DividerView theme="secondary" />
 
-      <TextView style={styles.sectionTitle}>{i18n.t('Jams')} ({profileItem?.number_of_jams || 0})</TextView>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileJams}>
         <ProfileJamsList 
+          title={<TextView style={styles.sectionTitle}>{i18n.t('Jams')} ({profileItem?.number_of_jams || 0})</TextView>}
           idArray={profileItem?.profile_jams?.map((o: any) => o.id)} // Todo - API should send ids, not full objects
           onListItemPress={(row: any) => SectionManager.push(router, 'jam-item', { jamId: row?.item?.id, title: row?.item?.title })}
         />   
