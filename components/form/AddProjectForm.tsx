@@ -162,6 +162,7 @@ const AddProjectForm = () => {
             resource: resource,
             profileId: profileId,
           })}
+          onDeleteItemPress={(row) => console.log(row)}
         />
         
         <View style={styles.subtmitButtoncontainer}>
