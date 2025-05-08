@@ -34,7 +34,6 @@ const ProjectJamsList = ({
   const router = useRouter();
   const [selectedJams, setSelectedJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const activeModal: any = ScreenManager.getActiveModal();
   const [projectJams, setProjectJams] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
   const imageSize = MediaManager.getThumbnailSize();
