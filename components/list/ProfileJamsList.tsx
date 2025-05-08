@@ -83,17 +83,11 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
 
   return (
     <View style={styles.container}>
-      <BoxView direction="row" align="center" justify="space-between">
-        { title && <TextView style={styles.title}>{title}</TextView> }
+      <BoxView direction="row" align="center" justify="space-between" style={styles.title}>
+        { title && <TextView>{title}</TextView> }
 
-        { idArray?.length > 0 && allButton && (
-          <TouchableOpacity
-            onPress={() => 
-              SectionManager.push(router, 'jams', {
-                idArray: idArray,
-              })
-            }
-          >
+        { profileJams?.length > 0 && allButton && (
+          <TouchableOpacity onPress={() => SectionManager.push(router, 'jams', { idArray: idArray })}>
             <TextView underline={true}>{i18n.t("View all")}</TextView>
           </TouchableOpacity> 
         )}

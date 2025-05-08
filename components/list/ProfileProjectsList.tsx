@@ -102,10 +102,12 @@ const ProfileProjectsList = ({
     })();
   }, [isLoaded, idArray, addButton, projectsImages]);
 
+  if (!isLoaded) return <SpinnerView size="small" />; 
+
   return (
     <View style={styles.container}>
-      <BoxView direction="row" align="center" justify="space-between">
-        { title && <TextView style={styles.title}>{title}</TextView> }
+      <BoxView direction="row" align="center" justify="space-between" style={styles.title}>
+        { title && <TextView>{title}</TextView> }
 
         {allButton && (
           <TouchableOpacity onPress={() => {/* Todo - Implement project list */ } }>
