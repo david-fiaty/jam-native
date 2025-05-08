@@ -22,6 +22,7 @@ import CountriesField from "../field/CountriesField";
 import DataManager from "@/manager/DataManager";
 import ModalManager from "@/manager/ModalManager";
 import UserManager from "@/manager/UserManager";
+import FormManager from "@/manager/FormManager";
 
 const AddProjectForm = () => {
   const resource: string = 'project';
@@ -86,22 +87,23 @@ const AddProjectForm = () => {
         <TextView>{i18n.t("Name")}</TextView>
         <InputTextField
           value={formData?.name}
-          onChangeText={(value: string) => updateField("name", value)}
+          onChangeText={(value: string) => FormManager.updateField(resource, 'name', value, ['string'])}
         />
+        {FormManager.renderError('name')}
 
         <TextView>{i18n.t("Description")}</TextView>
         <InputTextareaField
           value={formData?.description}
-          onChangeText={(value: string) => updateField("description", value)}
+          onChangeText={(value: string) => FormManager.updateField(resource, 'description', value, ['string'])}
         />
+        {FormManager.renderError('description')}
 
         <TextView>{i18n.t("Privacy status")}</TextView>
         <PrivacyStatusField
           value={formData?.privacy_status}
-          onChangeValue={(option: any) =>
-            updateField("privacy_status", option.value)
-          }
+          onChangeValue={(option: any) => FormManager.updateField(resource, 'privay_status', option.value, ['string'])}
         />
+        {FormManager.renderError('privacy_status')}
 
         <TextView>{i18n.t('Start date')}</TextView>
         <DatePickerField

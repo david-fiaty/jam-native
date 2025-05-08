@@ -16,7 +16,7 @@ const FIeldErrorView = ({ message }: Props) => {
 const styles = StyleSheet.create({
   container: {
     color: 'red',
-    fontSize: 12.5,
+    fontSize: 13.5,
   },
 });
 
