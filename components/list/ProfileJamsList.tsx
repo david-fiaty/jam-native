@@ -86,7 +86,7 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
       <BoxView direction="row" align="center" justify="space-between">
         { title && <TextView style={styles.title}>{title}</TextView> }
 
-        { idArray?.length > 0 && allButton && (
+        { profileJams?.length > 0 && allButton && (
           <TouchableOpacity
             onPress={() => 
               SectionManager.push(router, 'jams', {
