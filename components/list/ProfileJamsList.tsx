@@ -81,6 +81,8 @@ const ProfileJamsList = ({ title, idArray, addButton, allButton, isAddable, isDe
 
   if (!isLoaded) return <SpinnerView />; 
 
+  console.log(selectedIds)
+
   return (
     <View style={styles.container}>
       <BoxView direction="row" align="center" justify="space-between" style={styles.title}>
