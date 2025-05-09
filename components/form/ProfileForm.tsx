@@ -92,12 +92,12 @@ const ProfileForm = () => {
           <InputTextField
             value={formData?.profile_personal?.first_name}
             placeholder={i18n.t('Enter your first name')}
-            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal', {
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal.first_name', {
               ...(formData?.profile_personal || {}),
               ...{ first_name: value },
             }, ['string'])}
           />
-          {FormManager.renderError('profile_personal')}
+          {FormManager.renderError('profile_personal.first_name')}
 
           <TextView>
             {i18n.t('Last name')}
@@ -105,12 +105,12 @@ const ProfileForm = () => {
           <InputTextField
             value={formData?.profile_personal?.last_name}
             placeholder={i18n.t('Enter your last name')}
-            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal', {
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal.last_name', {
               ...(formData?.profile_personal || {}),
               ...{ last_name: value },
             }, ['string'])}
           />
-          {FormManager.renderError('profile_personal')}
+          {FormManager.renderError('profile_personal.last_name')}
         </>
       )}
 
@@ -123,12 +123,12 @@ const ProfileForm = () => {
           <InputTextField
             value={formData?.profile_organization?.organization_name}
             placeholder={i18n.t('Enter your organization name')}
-            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
-              ...(formData?.profile_personal || {}),
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization.organization_name', {
+              ...(formData?.profile_organization || {}),
               ...{ organization_name: value },
             }, ['string'])}
           />
-          {FormManager.renderError('profile_organization')}
+          {FormManager.renderError('profile_organization.organization_name')}
 
           <TextView>
             {i18n.t('Creation year')}
@@ -137,12 +137,12 @@ const ProfileForm = () => {
             keyboardType="number-pad"
             value={formData?.profile_organization?.creation_year}
             placeholder={i18n.t('Enter the creation year')}
-            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
-              ...(formData?.profile_personal || {}),
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization.creation_year', {
+              ...(formData?.profile_organization || {}),
               ...{ creation_year: value },
             })}
           />
-          {FormManager.renderError('profile_organization')}
+          {FormManager.renderError('profile_organization.creation_year')}
         </>
       )}
 
@@ -155,12 +155,12 @@ const ProfileForm = () => {
           <InputTextField
             value={formData?.profile_venue?.venue_name}
             placeholder={i18n.t('Enter the venue name')}
-            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue.venue_name', {
               ...(formData?.profile_venue || {}),
               ...{ venue_name: value },
             }, ['string'])}
           />
-          {FormManager.renderError('profile_venue')}
+          {FormManager.renderError('profile_venue.venue_name')}
 
           <TextView>
             {i18n.t('Creation year')}
@@ -169,12 +169,12 @@ const ProfileForm = () => {
             keyboardType="number-pad"
             value={formData?.profile_venue?.creation_year}
             placeholder={i18n.t('Enter the creation year')}
-            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue.creation_year', {
               ...(formData?.profile_venue || {}),
               ...{ creation_year: value },
             }, ['number'])}
           />
-          {FormManager.renderError('profile_venue')}
+          {FormManager.renderError('profile_venue.creation_year')}
         </>
       )}
 
