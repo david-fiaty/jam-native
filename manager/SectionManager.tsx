@@ -3,13 +3,16 @@ import { setActiveModals } from "@/redux/slices/ModalSlice";
 import Store from "@/redux/Store";
 
 class SectionManager {
-  push(router: any, sectionId: string, params?: any) {
+  push(router: any, sectionId: string, params?: any, title?: any) {
     let activeSections: any[] = [...Store.getState().section.active];
+    let sectionConfig: any[] = [...Store.getState().section.config];
+    let targetSection: any = sectionConfig.find((o: any) => o.id === sectionId);
 
     activeSections.push({
-      id: sectionId,
-      params: params || {},
-    })
+      ...targetSection,
+      ...{ params: params || {} },
+      ...{ title: title || targetSection.title },
+    });
 
     Store.dispatch(setActiveSections(activeSections));
 
