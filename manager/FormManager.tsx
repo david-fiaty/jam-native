@@ -23,9 +23,12 @@ class FormManager {
   };
 
   addValue(resource: string, key: any, value: any) {
+    let keyParts: any[] = key.split('.');
+    let targetKey = keyParts[keyParts.length - 1];
+
     Store.dispatch(setFormData<any>({
       resource: resource,
-      key: key,
+      key: targetKey,
       value: value,
     }));
   }
