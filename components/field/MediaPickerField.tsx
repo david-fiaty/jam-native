@@ -12,6 +12,7 @@ import SpinnerView from "../view/SpinnerView";
 import InputTextField from "./InputTextField";
 
 type Props = BaseProps & {
+  title?: any;
   value?: any,
   preview?: boolean;
   placeholder?: any;
@@ -19,7 +20,7 @@ type Props = BaseProps & {
   onDeleteItem?: (data: any) => void;
 };
 
-const MediaPickerField = ({ value, preview, placeholder, onSelectItem, onDeleteItem}: Props) => {  
+const MediaPickerField = ({ title, value, preview, placeholder, onSelectItem, onDeleteItem}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
