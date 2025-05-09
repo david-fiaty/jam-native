@@ -23,12 +23,9 @@ class FormManager {
   };
 
   addValue(resource: string, key: any, value: any) {
-    let keyParts: any[] = key.split('.');
-    let targetKey = keyParts[keyParts.length - 1];
-
     Store.dispatch(setFormData<any>({
       resource: resource,
-      key: targetKey,
+      key: this.getFieldKey(key),
       value: value,
     }));
   }
@@ -76,6 +73,17 @@ class FormManager {
     }
 
     return errors;
+  }
+
+  getFieldKey(key: string) {
+    let keyParts: any[] = key.split('.');
+    let targetKey = keyParts[keyParts.length - 1];
+
+    return targetKey;
+  }
+
+  isPathKey(key: string) {
+    return key.split('.').length > 0;
   }
 
   getValidationRules() {
