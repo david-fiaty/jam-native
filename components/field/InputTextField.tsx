@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet } from "react-native";
 import { Input } from "@rneui/themed";
 import { BaseProps } from "@/constants/Types";
@@ -36,8 +36,6 @@ const InputTextField = ({
   onSubmitEditing,
   onBlur,
 }: Props) => {
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-
   const disabledStyle: any = {
     opacity: disabled ? 0.4: 1,
   }
