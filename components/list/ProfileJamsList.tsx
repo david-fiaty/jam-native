@@ -14,8 +14,8 @@ import JamListItem from "./ListItem/JamListItem";
 import SectionManager from "@/manager/SectionManager";
 
 type Props = {
-  resource: string;
-  field: string;
+  resource?: string;
+  field?: string;
   title?: any;
   idArray?: any;
   addButton?: boolean;
