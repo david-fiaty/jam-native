@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -14,6 +14,7 @@ import DividerView from "../view/DividerView";
 import ModalManager from "@/manager/ModalManager";
 import SpinnerView from "../view/SpinnerView";
 import SectionManager from "@/manager/SectionManager";
+import TextView from "../view/TextView";
 
 const resource: string = 'profile';
 
@@ -50,7 +51,14 @@ const ProfileSection = () => {
       style={styles.container}
       scroll={true}
     >
-      <ProfileHeaderView profileItem={formData} canEdit={true} />
+      <TouchableOpacity 
+        onPress={() => SectionManager.push(router, 'profile-form')}
+        style={styles.profileEditButton}
+      >
+        <TextView underline={true}>{i18n.t("Edit")}</TextView>
+      </TouchableOpacity>
+
+      <ProfileHeaderView profileItem={formData} />
       <DividerView />
 
       <ProfileProjectsList
@@ -70,7 +78,7 @@ const ProfileSection = () => {
         //idArray={formData?.profile_jams}
         idArray={formData?.profile_jams?.map((o: any) => o.id)} // Todo - API should send ids, not full objects
         onAddButtonPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
-                
+
         // Todo - API should send ids, not full objects
         onListItemPress={(row: any) => SectionManager.push(router, 'jam-item', { jamId: JSON.stringify(formData?.profile_jams?.map((o: any) => o.id)), title: row?.item?.title })}
       />
@@ -83,7 +91,7 @@ const ProfileSection = () => {
         idArray={formData?.saved_projects || []}
       />
       <DividerView />
-    
+
       <ProfileProjectsList
         title={i18n.t("Liked Projects")}
         allButton={formData?.liked_projects?.length > 0}
@@ -99,7 +107,7 @@ const ProfileSection = () => {
         emptyMessage={i18n.t('You have no saved Jams.')}
       />
       <DividerView />
-  
+
       <ProfileJamsList
         title={i18n.t("Liked Jams")}
         allButton={formData?.liked_jams?.length > 0}
@@ -113,8 +121,14 @@ const ProfileSection = () => {
 
 const styles = StyleSheet.create({
   container: {
+    position: 'relative',
     width: '100%',
-    paddingBottom: Layout.space.base*2,
+    paddingBottom: Layout.space.base * 2,
+  },
+  profileEditButton: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
   },
 });
 
