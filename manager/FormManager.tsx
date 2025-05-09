@@ -1,6 +1,5 @@
-import FieldErrorView from "@/components/view/FieldErrorView";
-import TextView from "@/components/view/TextView";
 import { setFormData, setFormErrors } from "@/redux/slices/FormSlice";
+import FieldErrorView from "@/components/view/FieldErrorView";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
 
@@ -25,7 +24,7 @@ class FormManager {
   addValue(resource: string, key: any, value: any) {
     Store.dispatch(setFormData<any>({
       resource: resource,
-      key: key,
+      key: this.getFieldKey(key),
       value: value,
     }));
   }
@@ -59,20 +58,36 @@ class FormManager {
   }
 
   validateFied(key: string, value: any, rules: any[]) {
+    let fieldValue: any = value;
     let fieldRules: any = this.getValidationRules();
     let errors: any = [];
 
+    if (this.isPathKey(key)) {
+      fieldValue = fieldValue[this.getFieldKey(key)];
+    }
+
     for (const rule of rules) {
-      if (!fieldRules[rule].run(value)) {
+      if (!fieldRules[rule].run(fieldValue)) {
         errors.push({
           key: key,
-          value: value,
+          value: fieldValue,
           message: fieldRules[rule].error(),
         });
       }
     }
 
     return errors;
+  }
+
+  getFieldKey(key: string) {
+    let keyParts: any[] = key.split('.');
+    let targetKey = keyParts[keyParts.length - 1];
+
+    return targetKey;
+  }
+
+  isPathKey(key: string) {
+    return key.split('.').length > 0;
   }
 
   getValidationRules() {
