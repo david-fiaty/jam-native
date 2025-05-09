@@ -1,8 +1,7 @@
 import { View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { BaseProps } from '@/constants/Types';
 
-type Props = BaseProps & {
+type Props = {
   name: any,
   size?: number,
   containerStyle?: object,
@@ -53,6 +52,7 @@ const icons = {
   exit: ({iconStyle, size}: IconProps) => <Ionicons name="exit-outline" size={size} style={iconStyle} />,
   refresh: ({iconStyle, size}: IconProps) => <Ionicons name="refresh-outline" size={size} style={iconStyle} />,
   upload: ({iconStyle, size}: IconProps) => <Ionicons name="cloud-upload-outline" size={size} style={iconStyle} />,
+  image: ({iconStyle, size}: IconProps) => <Ionicons name="image-outline" size={size} style={iconStyle} />,
 };
 
 const IconBase = ({name, size, containerStyle, iconStyle}: Props) => {
