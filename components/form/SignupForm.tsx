@@ -93,12 +93,12 @@ const SignupForm = () => {
           <InputTextField
             value={formData?.profile_personal?.first_name}
             placeholder={i18n.t('Enter your first name')}
-            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal', {
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal.first_name', {
               ...(formData?.profile_personal || {}),
               ...{ first_name: value },
             }, ['string'])}
           />
-          {FormManager.renderError('profile_personal')}
+          {FormManager.renderError('profile_personal.first_name')}
 
           <TextView>
             {i18n.t('Last name')}
