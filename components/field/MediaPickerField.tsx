@@ -1,26 +1,24 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { BaseProps } from '@/constants/Types';
-import { Colors } from "@/constants/Colors";
 import { Layout } from '@/constants/Layout';
 import * as ImagePicker from 'expo-image-picker';
 import ImageView from '../view/ImageView';
+import TextView from '../view/TextView';
+import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
 import MediaManager from '@/manager/MediaManager';
 import DataManager from "@/manager/DataManager";
-import SpinnerView from "../view/SpinnerView";
-import InputTextField from "./InputTextField";
 
 type Props = BaseProps & {
-  title?: any;
+  label?: JSX.Element, 
   value?: any,
-  preview?: boolean;
-  placeholder?: any;
-  onSelectItem?: (data: any) => void;
-  onDeleteItem?: (data: any) => void;
+  preview?: boolean
+  onSelectItem?: (data: any) => void,
+  onDeleteItem?: (data: any) => void,
 };
 
-const MediaPickerField = ({ title, value, preview, placeholder, onSelectItem, onDeleteItem}: Props) => {  
+const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -140,41 +138,36 @@ const MediaPickerField = ({ title, value, preview, placeholder, onSelectItem, on
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setSelectedMedia(await getSelectedMedia());
         setIsLoaded(true);
+        setSelectedMedia(await getSelectedMedia());
       }
     })();
   }, [isLoaded]);
   
-  if (!isLoaded) return <SpinnerView size="small" />;
 
   return (
-    <>
-      {!selectedMedia?.length && (
-        <TouchableOpacity onPress={pickImage}>
-          <InputTextField
-            value={value}
-            readOnly={true}
-            placeholder={placeholder}
-            rightIcon={<IconView name="plus" theme="transparent" />}
-          />
-        </TouchableOpacity>
-      )}
+    <View style={styles.container}>
+      <TouchableOpacity onPress={pickImage}>
+        <TextView>{label}</TextView>
+      </TouchableOpacity>
 
       { selectedMedia?.length > 0 && preview &&
-        <View style={Layout.fieldSelectionPreview}>
+        <BoxView direction="row" align="flex-start" justify="left" style={styles.previewContainer}>
           { selectedMedia.map((data: any) => {
             if (data?.uri) return renderImagePreview(data);
           })}
-
-          <IconView name="plus" theme="transparent" onPress={pickImage} />
-        </View>
+        </BoxView>
       }
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {},
+  previewContainer: {
+    paddingVertical: Layout.space.base,
+    gap: Layout.space.base*1,
+  },
   mediaPreview: {
     borderRadius: Layout.radius.round,
   },
