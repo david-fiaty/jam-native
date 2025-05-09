@@ -39,6 +39,7 @@ class FormManager {
     }]));
   }
 
+  // Todo - Fix errors not clearing up
   clearError(resource: string, key: any) {
     let formErrors: any[] = [...Store.getState().form.errors];
     formErrors = formErrors.filter((o: any) => o.resource !== resource && o.key !== key);
