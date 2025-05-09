@@ -9,6 +9,7 @@ import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
 import MediaManager from '@/manager/MediaManager';
 import DataManager from "@/manager/DataManager";
+import InputTextField from "./InputTextField";
 
 type Props = BaseProps & {
   label?: JSX.Element, 
@@ -147,9 +148,20 @@ const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: P
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={pickImage}>
-        <TextView>{label}</TextView>
-      </TouchableOpacity>
+      { label && (
+        <TouchableOpacity onPress={pickImage}>
+          <TextView>{label}</TextView>
+        </TouchableOpacity>
+      )}
+
+      { !label && (
+        <TouchableOpacity onPress={pickImage}>           
+          <InputTextField
+            readOnly={true}
+            rightIcon={<IconView name="image" theme="transparent" />}
+          />
+        </TouchableOpacity>
+      )}
 
       { selectedMedia?.length > 0 && preview &&
         <BoxView direction="row" align="flex-start" justify="left" style={styles.previewContainer}>
