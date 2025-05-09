@@ -178,7 +178,15 @@ class EntityManager {
   }
 
   async addJam(entityData: any) {
-    return await DataManager.post('addJam', entityData);
+    let response: any = await DataManager.post('addJam', entityData);
+    let success: boolean = false;
+
+    if (response?.id > 0) success = true;
+
+    return {
+      success: success,
+      response: response,
+    };
   }
 
   async addProject(entityData: any) {
