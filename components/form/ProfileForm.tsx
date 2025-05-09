@@ -32,6 +32,7 @@ const ProfileForm = () => {
     setIsProcessing(true);
     let result: any = await UserManager.updateProfile(formData);
 
+    // Todo - Implement profile update submission
     console.log('-------');
     console.log(Object.keys(formData));
 
