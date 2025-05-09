@@ -59,8 +59,8 @@ class FormManager {
   }
 
   validateFied(key: string, value: any, rules: any[]) {
-    let fieldRules: any = this.getValidationRules();
     let fieldValue: any = value;
+    let fieldRules: any = this.getValidationRules();
     let errors: any = [];
 
     if (this.isPathKey(key)) {
