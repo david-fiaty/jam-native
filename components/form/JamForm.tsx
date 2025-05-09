@@ -46,11 +46,15 @@ const JamForm = ({ jamId }: Props) => {
 
   const submitForm = async () => {
     setIsProcessing(true);
-    let media: any = MediaManager.prepareUpload(formData?.upload_medias);
+    //let media: any = MediaManager.prepareUpload(formData?.upload_medias);
 
-    let result: any = jamId > 0
-      ? await EntityManager.updateJam(jamId, { ...formData, ...{ upload_medias: media } })
-      : await EntityManager.addJam(formData);
+    console.log('formData ----->', formData);
+
+    let result: any = await EntityManager.addJam(formData);
+
+    console.log('result ---->', result);
+
+    /*
 
     let message: any = {
       title: jamId > 0 ? i18n.t('Update Jam') : i18n.t('Create Jam'),
@@ -61,6 +65,8 @@ const JamForm = ({ jamId }: Props) => {
     else FormManager.updateField(resource, null, null);
 
     ScreenManager.showMessage(message);
+    */
+
     setIsProcessing(false);
   };
 
