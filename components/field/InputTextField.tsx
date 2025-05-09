@@ -42,6 +42,15 @@ const InputTextField = ({
     opacity: disabled ? 0.4: 1,
   };
 
+  const changeTextEvent = (fieldValue: any) => {
+    setCurrentValue(fieldValue);
+    if (onChangeText) onChangeText(fieldValue);
+  };
+
+  const submitEditingEvent = () => {
+    if (onSubmitEditing) onSubmitEditing()
+    else if (onChangeText) onChangeText(currentValue); 
+  };
 
   useEffect(() => {
     setCurrentValue(value);
@@ -65,8 +74,8 @@ const InputTextField = ({
         spellCheck={spellCheck}
         value={currentValue}
         readOnly={readOnly}
-        onChangeText={onChangeText}
-        onSubmitEditing={onSubmitEditing}
+        onChangeText={changeTextEvent}
+        onSubmitEditing={submitEditingEvent}
         onBlur={onBlur}
       />
     </BoxView>
