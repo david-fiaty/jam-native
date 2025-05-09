@@ -5,9 +5,7 @@ type Props = {
 };
 
 const JamItemSection = ({ jamId }: Props) => {
-  jamId = JSON.parse(jamId);
-
-  return (<JamsList idArray={jamId} />);
+  return <JamsList idArray={JSON.parse(jamId)} />;
 };
 
 export default JamItemSection;
