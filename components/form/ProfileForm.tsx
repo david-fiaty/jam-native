@@ -32,6 +32,13 @@ const ProfileForm = () => {
     setIsProcessing(true);
     let result: any = await UserManager.updateProfile(formData);
 
+    console.log('-------');
+    console.log(Object.keys(formData));
+
+    //console.log(result);
+
+    return;
+
     if (result?.error) {
       ScreenManager.showMessage({
         title: i18n.t('Profile update'),
