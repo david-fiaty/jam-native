@@ -46,27 +46,23 @@ const JamForm = ({ jamId }: Props) => {
 
   const submitForm = async () => {
     setIsProcessing(true);
-    //let media: any = MediaManager.prepareUpload(formData?.upload_medias);
 
-    console.log('formData ----->', formData);
-
-    let result: any = await EntityManager.addJam(formData);
-
-    console.log('result ---->', result);
-
-    /*
+    // Todo - Handle media
+    //let media: any = MediaManager.prepareUpload(formData?.upload_medias); 
 
     let message: any = {
-      title: jamId > 0 ? i18n.t('Update Jam') : i18n.t('Create Jam'),
+      title: i18n.t('Create Jam'),
       content: i18n.t('Jam data successfully submitted.'),
     };
 
-    if (result?.error) message.content = i18n.t(result.error)
-    else FormManager.updateField(resource, null, null);
+    let result: any = await EntityManager.addJam(formData);
 
+    if (result.success === false) {
+      message.content = i18n.t('Invalid data submission.')
+    }
+ 
     ScreenManager.showMessage(message);
-    */
-
+ 
     setIsProcessing(false);
   };
 
