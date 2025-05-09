@@ -1,4 +1,3 @@
-import { useLocalSearchParams } from "expo-router";
 import JamsList from '../list/JamsList';
 
 type Props = {
@@ -6,10 +5,7 @@ type Props = {
 };
 
 const JamItemSection = ({ jamId }: Props) => {
-  const router = useLocalSearchParams();
-  jamId = JSON.parse(router.jamId as string);
-
-  return (<JamsList idArray={jamId} />);
+  return <JamsList idArray={JSON.parse(jamId)} />;
 };
 
 export default JamItemSection;
