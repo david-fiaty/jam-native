@@ -158,7 +158,7 @@ const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: P
         <TouchableOpacity onPress={pickImage}>           
           <InputTextField
             readOnly={true}
-            rightIcon={<IconView name="plus" theme="transparent" />}
+            rightIcon={<IconView name="image" theme="transparent" />}
           />
         </TouchableOpacity>
       )}
