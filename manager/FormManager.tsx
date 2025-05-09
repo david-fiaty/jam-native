@@ -1,6 +1,5 @@
-import FieldErrorView from "@/components/view/FieldErrorView";
-import TextView from "@/components/view/TextView";
 import { setFormData, setFormErrors } from "@/redux/slices/FormSlice";
+import FieldErrorView from "@/components/view/FieldErrorView";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
 
