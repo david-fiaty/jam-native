@@ -11,7 +11,7 @@ class SectionManager {
     activeSections.push({
       ...targetSection,
       ...{ params: params || {} },
-      ...{ title: title || targetSection.title },
+      ...{ title: params?.title || targetSection.title },
     });
 
     Store.dispatch(setActiveSections(activeSections));
