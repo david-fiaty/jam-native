@@ -48,8 +48,6 @@ const JamForm = ({ jamId }: Props) => {
     setIsProcessing(true);
     //let media: any = MediaManager.prepareUpload(formData?.upload_medias);
 
-    console.log('formData ----->', formData);
-
     let result: any = await EntityManager.addJam(formData);
 
     console.log('result ---->', result);
