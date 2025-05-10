@@ -3,6 +3,10 @@ import { Layout } from "@/constants/Layout";
 import TextView from '@/components/view/TextView';
 import BoxView from '@/components/view/BoxView';
 import IconView from '@/components/view/IconView';
+import ImageView from "@/components/view/ImageView";
+import MediaManager from "@/manager/MediaManager";
+
+const profileImageSize: number = 80;
 
 type Props = {
   row?: any;
@@ -23,9 +27,20 @@ const ProfileListItem = ({ row, selected, onListItemPress }: Props) => {
       onPress={() => onItemPress(row)}
     >
       <BoxView direction="row" align="center" justify="flex-start" style={styles.container}>
+        {row?.item?.profile_picture?.url?.length > 0 && (      
+          <ImageView
+            uri={MediaManager.getImageUrl(row.item.profile_picture.url)}
+            resizeMode="cover"
+            width={profileImageSize}
+            height={profileImageSize}
+            style={styles.profileImage}
+          />
+        )}
+        
+        
         <IconView 
           name="user" 
-          theme="tertiary" 
+          theme="secondary" 
           size={16}
           padding={6}
         />
@@ -48,6 +63,11 @@ const styles = StyleSheet.create({
     ...{
       padding: Layout.space.base/1.3,
     },
+  },
+  profileImage: {
+    width: profileImageSize,
+    height: profileImageSize,
+    borderRadius: profileImageSize,
   },
 });
 

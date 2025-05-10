@@ -52,7 +52,7 @@ const ProfileHeaderView = ({ profileItem }: Props) => {
       <View style={styles.profileHeaderLeft}>
         {profileItem?.profile_picture?.url?.length > 0 && (
           <ImageView
-            uri={MediaManager.getImageUrl(profileItem?.profile_picture?.url)}
+            uri={MediaManager.getImageUrl(profileItem.profile_picture.url)}
             resizeMode="cover"
             width={profileImageSize}
             height={profileImageSize}
