@@ -26,10 +26,9 @@ const SettingsMenu = () => {
     },
     {
       label: i18n.t('Logout'),
-      path: null,
       onPress: () => {
         UserManager.logout();
-        SectionManager.replace(router, '/');
+        SectionManager.replace(router, '');
       },
     },
   ];
