@@ -106,6 +106,7 @@ const JamForm = () => {
           columnWrapperStyle={Layout.listColumnWrapper}
           renderItem={(row: any) => renderJamCategory(row)}
         />
+        {FormManager.renderError('type')}
 
         <DividerView theme="white" />
 
