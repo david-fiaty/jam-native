@@ -12,7 +12,7 @@ class FormManager {
     }
 
     if (errors.length) {
-      this.addError(resource, key, value, errors);
+      this.addClientError(resource, key, value, errors);
     }
     else {
       this.clearError(resource, key);
@@ -29,7 +29,7 @@ class FormManager {
     }));
   }
 
-  addError(resource: string, key: any, value: any, errors: any[]) {
+  addClientError(resource: string, key: any, value: any, errors: any[]) {
     this.clearError(resource, key);
     let formErrors: any[] = [...Store.getState().form.errors];
     
