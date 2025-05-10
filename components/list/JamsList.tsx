@@ -52,6 +52,9 @@ const JamsList = ({ idArray }: Props) => {
         contentContainerStyle={Layout.listContainer}
         renderItem={renderItem}
         keyExtractor={(item: any) => item.id.toString()}
+        onEndReached={() => {
+          // Todo - Implement infinite scroll call
+        }}
       />
     </BoxView>
   );
