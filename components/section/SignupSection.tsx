@@ -53,7 +53,6 @@ const SignupSection = () => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: Layout.space.base*4,
     width: '100%',
   },
   slogan: {
