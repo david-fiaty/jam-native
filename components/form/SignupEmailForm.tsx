@@ -36,9 +36,8 @@ const SignupEmailForm = () => {
         content: i18n.t('Invalid data submitted.'),
       });
     }
-
-    if (result?.session?.length > 0) {
-      FormManager.updateField(resource, 'session', result.session);
+    else {
+      FormManager.updateField(resource, 'session', result.response.session);
     }
 
     setIsProcessing(false);
