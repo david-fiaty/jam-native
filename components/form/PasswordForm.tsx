@@ -8,6 +8,7 @@ import ButtonView from '../view/ButtonView';
 import DividerView from '../view/DividerView';
 import UserManager from '@/manager/UserManager';
 import FormManager from '@/manager/FormManager';
+import ScreenManager from '@/manager/ScreenManager';
 
 const resource: string = 'password';
 
@@ -16,37 +17,42 @@ const PasswordForm = () => {
   const formData = useSelector((state: any) => state.form[resource]);
 
   const submitForm = async () => {
-    // Todo - Implement password confirmation
     setIsProcessing(true);
-    let result: any = await UserManager.changePassword(formData);
+
     let message: any = {
       title: i18n.t('Change password'),
-      content: i18n.t('The password was successfully updated.'),
+      content: i18n.t('Password successfully updated.'),
     };
 
-    if (result?.error) message.content = i18n.t(result.error)
-  
+    let result: any = await UserManager.changePassword(formData);
+
+    if (result.success === false) {
+      message.content = i18n.t('Invalid data submission.');
+      FormManager.addServerErrors(resource, result.response);
+    }
+ 
+    ScreenManager.showMessage(message);
     setIsProcessing(false);
-  }  
+  };
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.formContainer}>
       <InputTextField 
         placeholder={i18n.t('Old password')} 
-        onChangeText={(value: string) => FormManager.updateField(resource, "old_password", value)}
+        onChangeText={(value: string) => FormManager.updateField(resource, "old_password", value, ['string'])}
       />
       {FormManager.renderError('old_password')}
 
       <DividerView theme="secondary" />
       <InputTextField 
         placeholder={i18n.t('New password')} 
-        onChangeText={(value: string) => FormManager.updateField(resource, "new_password", value)}
+        onChangeText={(value: string) => FormManager.updateField(resource, "new_password", value, ['string'])}
       />
       {FormManager.renderError('new_password')}
 
       <InputTextField 
         placeholder={i18n.t('Confirm new password')} 
-        onChangeText={(value: string) => FormManager.updateField(resource, "confirm_password", value)}
+        onChangeText={(value: string) => FormManager.updateField(resource, "confirm_password", value, ['string'])}
       />
       {FormManager.renderError('confirm_password')}
 
