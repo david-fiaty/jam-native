@@ -48,7 +48,7 @@ const SignupForm = () => {
       ScreenManager.showMessage({
         title: i18n.t('User registration'),
         //content: result.error, // Todo - Implement field error management
-        content: i18n.t('There was an error with the submission. Please check your data and try again.'),
+        content: i18n.t('Invalid data submission.'),
       });
     }
     else {
