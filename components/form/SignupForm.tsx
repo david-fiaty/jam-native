@@ -27,8 +27,8 @@ const SignupForm = () => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const formData = useSelector((state: any) => state.form?.[resource]);
-  const signupData: any = useSelector((state: any) => state.signup);
+  const formData = useSelector((state: any) => state.form[resource]);
+  const signupData: any = useSelector((state: any) => state.form[resource]);
 
   const submitForm = async () => {
     let { password, password_confirmation, ...profileData } = formData;
@@ -48,7 +48,7 @@ const SignupForm = () => {
       ScreenManager.showMessage({
         title: i18n.t('User registration'),
         //content: result.error, // Todo - Implement field error management
-        content: i18n.t('There was an error with the submission. Please check your data and try again.'),
+        content: i18n.t('Invalid data submission.'),
       });
     }
     else {
