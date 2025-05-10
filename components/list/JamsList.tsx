@@ -23,7 +23,13 @@ const JamsList = ({ idArray }: Props) => {
   const searchState: any = useSelector((state: any) => state.search);
 
   const renderItem = useCallback((row: any) => {
-    return <ListItem row={row} sectorsData={sectors} profileData={profileData} />;
+    return (
+      <ListItem 
+        row={row} 
+        sectorsData={sectors} 
+        profileData={profileData} 
+      />
+    );
   }, [sectors, profileData]);
 
   useEffect(() => {
