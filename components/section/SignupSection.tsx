@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import SignupCodeForm from '../form/SignupCodeForm';
 import SignupEmailForm from '../form/SignupEmailForm';
@@ -14,9 +14,12 @@ import SpinnerView from '../view/SpinnerView';
 const resource: string = 'signup';
 
 const SignupSection = () => {
-  const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
+
+  const containerStyle: any = {
+    paddingTop: formData?.success === true ? Layout.space.base*4 : 0,
+  };
 
   const resetForm = () => {
     //dispatch(setValue(null));
@@ -38,7 +41,7 @@ const SignupSection = () => {
       direction="column" 
       align="center" 
       justify="center" 
-      style={[styles.container]}
+      style={[styles.container, containerStyle]}
       scroll={formData?.success === true}
     >    
       <LogoView size={80} />    
