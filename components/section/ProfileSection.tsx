@@ -51,13 +51,6 @@ const ProfileSection = () => {
       style={styles.container}
       scroll={true}
     >
-      <TouchableOpacity 
-        onPress={() => SectionManager.push(router, 'profile-form')}
-        style={styles.profileEditButton}
-      >
-        <TextView underline={true}>{i18n.t("Edit")}</TextView>
-      </TouchableOpacity>
-
       <ProfileHeaderView profileItem={formData} />
       <DividerView />
 
@@ -124,11 +117,6 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: '100%',
     paddingBottom: Layout.space.base * 2,
-  },
-  profileEditButton: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
   },
 });
 
