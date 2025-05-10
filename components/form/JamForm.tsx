@@ -58,6 +58,8 @@ const JamForm = ({ jamId }: Props) => {
     let result: any = await EntityManager.addJam(formData);
     if (result.success === false) message.content = i18n.t('Invalid data submission.')
  
+      console.log(result);
+
     ScreenManager.showMessage(message);
     setIsProcessing(false);
   };
