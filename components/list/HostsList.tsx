@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { View } from "react-native";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
@@ -15,15 +15,28 @@ type Props = {
   jamId?: any;
 };
 
-const HostsList = ({ jamId }: Props) => {  
+const HostsList = ({ jamId }: Props) => {
   const router = useRouter();
   const [profiles, setProfiles] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
+  const onItemPress = (row: any) => {
+    SectionManager.push(router, 'profile-item', { profileId: row?.item?.id, title: row?.item?.title })
+  };
+
+  const renderItem = useCallback((row: any) => {
+    return (
+      <ProfileListItem
+        row={row}
+        onListItemPress={(row: any) => onItemPress(row)}
+      />
+    );
+  }, []);
+
   useEffect(() => {
     (async () => {
-      let data: any = await EntityManager.getJams({items_ids: [jamId]});
-      setProfiles(await EntityManager.getProfiles({items_ids: data?.[0]?.collaborators}));
+      let data: any = await EntityManager.getJams({ items_ids: [jamId] });
+      setProfiles(await EntityManager.getProfiles({ items_ids: data?.[0]?.collaborators }));
       setIsLoaded(true);
     })();
 
@@ -37,16 +50,11 @@ const HostsList = ({ jamId }: Props) => {
         {profiles?.length > 0 &&
           <ListView
             data={profiles}
-            renderItem={(row: any) => (
-              <ProfileListItem 
-                row={row}  
-                onListItemPress={(o: any) => SectionManager.push(router, 'profile-item', { profileId: o?.item?.id, title: o?.item?.title })}  
-              />
-            )}
+            renderItem={(row: any) => renderItem(row)}
           />
         }
 
-        {!profiles?.length && 
+        {!profiles?.length &&
           <TextView>{i18n.t('No hosts available for this Jam.')}</TextView>
         }
       </View>

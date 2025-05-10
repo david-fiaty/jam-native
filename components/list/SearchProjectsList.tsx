@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import ListView from "../view/ListView";
@@ -29,6 +29,15 @@ const SearchProjectsList = ({ data, filter }: Props) => {
     }
   };
 
+  const renderItem = useCallback((row: any) => {
+    return (
+      <ProjectListItem
+        row={row}
+        onListItemPress={(row: any) => onItemPress(row)}
+      />
+    );
+  }, []);
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
@@ -46,12 +55,7 @@ const SearchProjectsList = ({ data, filter }: Props) => {
         contentContainerStyle={{ gap: Layout.space.base }}
         columnWrapperStyle={{ gap: Layout.space.base }}
         scrollEnabled={false}
-        renderItem={(row: any) => (
-          <ProjectListItem
-            row={row}
-            onListItemPress={(row: any) => onItemPress(row)}
-          />
-        )}
+        renderItem={(row: any) => renderItem(row)}
       />
     </View>
   );
