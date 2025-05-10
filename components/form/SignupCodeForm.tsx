@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { StyleSheet } from 'react-native';
 import { useRouter } from "expo-router";
 import { useSelector, useDispatch } from "react-redux";
-import { setValue } from '@/redux/slices/SignupSlice';
 import { Config } from "@/constants/Config";
 import i18n from "@/translation/i18n";
 import InputTextField from '@/components/field/InputTextField';

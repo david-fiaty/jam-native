@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
-import { setValue } from '@/redux/slices/SignupSlice';
 import { Layout } from '@/constants/Layout';
 import SignupCodeForm from '../form/SignupCodeForm';
 import SignupEmailForm from '../form/SignupEmailForm';
@@ -20,7 +19,7 @@ const SignupSection = () => {
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const resetForm = () => {
-    dispatch(setValue(null));
+    //dispatch(setValue(null));
   }
 
   useEffect(() => {
