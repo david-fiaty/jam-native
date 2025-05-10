@@ -22,6 +22,24 @@ class SectionManager {
     });
   }
 
+  replace(router: any, sectionId: string, params?: any) {
+    let activeSections: any[] = [...Store.getState().section.active];
+    let sectionConfig: any[] = [...Store.getState().section.config];
+    let targetSection: any = sectionConfig.find((o: any) => o.id === sectionId);
+
+    activeSections.push({
+      ...targetSection,
+      ...{ params: (Object.keys(params || {}).length > 0 ? params : {}) },
+    });
+
+    Store.dispatch(setActiveSections(activeSections));
+
+    router.replace({
+      pathname: `/${sectionId}`,
+      params: params || {},
+    });
+  }
+
   back(router: any) {
     let sectionConfig: any[] = Store.getState().section.config;
     let activeSections: any[] = [...Store.getState().section.active];
@@ -51,18 +69,6 @@ class SectionManager {
         params: {},
       });
     }
-  }
-
-  replace(router: any, sectionId: string, params?: any) {
-    let activeSections: any[] = [...Store.getState().section.active];
-
-    activeSections.pop();
-    Store.dispatch(setActiveSections(activeSections));
-
-    router.replace({
-      pathname: `/${sectionId}`,
-      params: params || {},
-    });
   }
 }
 
