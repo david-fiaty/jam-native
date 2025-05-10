@@ -14,32 +14,27 @@ const SettingsMenu = () => {
   const data: any[] = [
     {
       label: i18n.t('Your profile'),
-      onPress: (row: any) => SectionManager.push(router, 'profile'),
-    },
-    {
-      label: i18n.t('Account information'),
-      onPress: (row: any) => SectionManager.push(router, 'account'),
+      onPress: () => SectionManager.push(router, 'profile'),
     },
     {
       label: i18n.t('Change password'),
-      onPress: (row: any) => SectionManager.push(router, 'password'),
+      onPress: () => SectionManager.push(router, 'password'),
     },
     {
       label: i18n.t('Language'),
-      onPress: (row: any) => SectionManager.push(router, 'language'),
+      onPress: () => SectionManager.push(router, 'language'),
     },
     {
       label: i18n.t('Logout'),
-      path: null,
-      onPress: (row: any) => {
+      onPress: () => {
         UserManager.logout();
-        SectionManager.replace(router, '/');
+        SectionManager.replace(router, '');
       },
     },
   ];
   
   const renderItem = (row: any) => (
-    <TouchableOpacity onPress={() => row.item.onPress(row)}>
+    <TouchableOpacity onPress={() => row.item.onPress()}>
       <View style={Layout.menuItem}>
         <TextView>{row.item.label}</TextView>
       </View>

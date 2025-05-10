@@ -20,7 +20,6 @@ import LoginSection from "@/components/section/LoginSection";
 import WelcomeSection from "@/components/section/WelcomeSection";
 import SignupSection from "@/components/section/SignupSection";
 import ProfileSection from "@/components/section/ProfileSection";
-import AccountForm from "@/components/form/AccountForm";
 import PasswordForm from "@/components/form/PasswordForm";
 import PrivacySection from "@/components/section/PrivacySection";
 import JamItemSection from "@/components/section/JamItemSection";
@@ -28,6 +27,7 @@ import ProfileItemSection from "@/components/section/ProfileItemSection";
 import ProjectItemSection from "@/components/section/ProjectItemSection";
 import ProfileFormSection from "@/components/section/ProfileFormSection";
 import AddProjectForm from "@/components/form/AddProjectForm";
+import LanguageForm from "../form/LanguageForm";
 
 const SectionView = () => { 
   const path = usePathname();
@@ -162,14 +162,14 @@ const SectionView = () => {
         render: (params: any) => <ProfileFormSection {...params} />,
       },
       {
-        id: 'account',
-        title: i18n.t('Account'),
-        render: (params: any) => <AccountForm {...params} />,
+        id: 'password',
+        title: i18n.t('Change password'),
+        render: (params: any) => <PasswordForm {...params} />,
       },
       {
-        id: 'password',
-        title: i18n.t('Password'),
-        render: (params: any) => <PasswordForm {...params} />,
+        id: 'language',
+        title: i18n.t('Change language'),
+        render: (params: any) => <LanguageForm {...params} />,
       },
       {
         id: 'add-project',
