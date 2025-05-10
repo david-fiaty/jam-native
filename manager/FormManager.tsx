@@ -45,7 +45,6 @@ class FormManager {
     for (const [key, message] of Object.entries(errors)) {
       formErrors.push({
         key: key,
-        value: '',
         message: message[0],
       });
     }
@@ -90,7 +89,6 @@ class FormManager {
       if (!fieldRules[rule].run(fieldValue)) {
         errors.push({
           key: targetKey,
-          value: fieldValue,
           message: fieldRules[rule].error(),
         });
       }
