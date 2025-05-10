@@ -29,15 +29,9 @@ import MediaManager from "@/manager/MediaManager";
 import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
 
-type Props = {
-  jamId?: any;
-};
-
 const resource: string = 'jam';
 
-const JamForm = ({ jamId }: Props) => {
-  jamId = jamId || 0;
-
+const JamForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
@@ -91,7 +85,7 @@ const JamForm = ({ jamId }: Props) => {
       }      
     })();
     
-  }, [isLoaded, profileId, resource, formData, jamId]);
+  }, [isLoaded, profileId, resource]);
 
   if (!isLoaded) return <SpinnerView />;
 
