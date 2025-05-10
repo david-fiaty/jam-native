@@ -29,15 +29,9 @@ import MediaManager from "@/manager/MediaManager";
 import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
 
-type Props = {
-  jamId?: any;
-};
-
 const resource: string = 'jam';
 
-const JamForm = ({ jamId }: Props) => {
-  jamId = jamId || 0;
-
+const JamForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
@@ -85,20 +79,15 @@ const JamForm = ({ jamId }: Props) => {
     (async () => {
       if (!isLoaded) {
         let profileId: number = await UserManager.getProfileId();
-        let jamData: any = jamId == 0 ? formData : await EntityManager.getJams({ items_ids: [jamId] });
-
         setProfileId(profileId);
-        
-        FormManager.updateField(resource, null, {
-          ...(jamId > 0 ? jamData?.[0] : formData),
-          ...{ profile_id: profileId },
-          ...{ collaborators: [3] },
-        });
-      }
-
-      setIsLoaded(true);
+        FormManager.updateField(resource, 'profile_id', profileId);
+        setIsLoaded(true);
+      }      
     })();
-  }, [isLoaded, profileId, resource, formData, jamId]);
+    
+  }, [isLoaded, profileId, resource]);
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView
@@ -107,7 +96,7 @@ const JamForm = ({ jamId }: Props) => {
       scroll={true}
     >
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
-        <TextView>{i18n.t('What kind of Jam is it?')}*</TextView>
+        <TextView>{i18n.t('What kind of Jam is it?')} *</TextView>
         <ListView
           data={jamCategories}
           numColumns={4}
@@ -117,31 +106,32 @@ const JamForm = ({ jamId }: Props) => {
           columnWrapperStyle={Layout.listColumnWrapper}
           renderItem={(row: any) => renderJamCategory(row)}
         />
+        {FormManager.renderError('type')}
 
         <DividerView theme="white" />
 
-        <TextView>{i18n.t('Title')}*</TextView>
+        <TextView>{i18n.t('Title')}</TextView>
         <InputTextField
           value={formData?.title}
-          onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['string'])}
+          onChangeText={(value: string) => FormManager.updateField(resource, 'title', value)}
         />
         {FormManager.renderError('title')}
 
-        <TextView>{i18n.t('Description')}*</TextView>
+        <TextView>{i18n.t('Description')} *</TextView>
         <InputTextareaField
           value={formData?.caption}
           onChangeText={(value: string) => FormManager.updateField(resource, 'caption', value, ['string'])}
         />
         {FormManager.renderError('caption')}
 
-        <TextView>{i18n.t('Location type')}*</TextView>
+        <TextView>{i18n.t('Location type')} *</TextView>
         <LocationTypeField
           value={formData?.location_type}
           onChangeValue={(option: any) => FormManager.updateField(resource, 'location_type', option.value, ['string'])}
         />
         {FormManager.renderError('location_type')}
 
-        <TextView>{i18n.t('Start date')}*</TextView>
+        <TextView>{i18n.t('Start date')} *</TextView>
         <DatePickerField
           value={formData?.period?.start_datetime}
           onChangeValue={(value: any) => FormManager.updateField(resource, 'period', {
@@ -151,7 +141,7 @@ const JamForm = ({ jamId }: Props) => {
         />
         {FormManager.renderError('period')}
 
-        <TextView>{i18n.t('End date')}*</TextView>
+        <TextView>{i18n.t('End date')} *</TextView>
         <DatePickerField
           value={formData?.period?.end_datetime}
           onChangeValue={(value: any) => FormManager.updateField(resource, 'period', {
@@ -161,7 +151,7 @@ const JamForm = ({ jamId }: Props) => {
         />
         {FormManager.renderError('period')}
 
-        <TextView>{i18n.t('Location')}*</TextView>
+        <TextView>{i18n.t('Location')} *</TextView>
         <LocationPickerField
           resource={resource}
           placeholder={i18n.t('Select your location')}
@@ -191,10 +181,10 @@ const JamForm = ({ jamId }: Props) => {
         />
         {FormManager.renderError('geolocation_latitude')}
 
-        <TextView>{i18n.t('Country')}*</TextView>
+        <TextView>{i18n.t('Country')}</TextView>
         <CountryField
           value={formData?.countries}
-          onChangeValue={(option: any) => FormManager.updateField(resource, 'country', option.value, ['string'])}
+          onChangeValue={(option: any) => FormManager.updateField(resource, 'country', option.value)}
         />
         {FormManager.renderError('countries')}
 
