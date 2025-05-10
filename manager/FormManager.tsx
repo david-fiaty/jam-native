@@ -39,6 +39,23 @@ class FormManager {
     }]));
   }
 
+  addServerErrors(resource: string, errors: any) {
+    let formErrors: any[] = [...Store.getState().form.errors];
+
+    for (const [key, message] of Object.entries(errors)) {
+      formErrors.push({
+        key: key,
+        value: '',
+        message: message[0],
+      });
+    }
+  
+    Store.dispatch(setFormErrors<any>([...formErrors, {
+      ...{ resource: resource },
+      ...formErrors,
+    }]));
+  }
+
   // Todo - Fix errors not clearing up
   clearError(resource: string, key: any) {
     let formErrors: any[] = [...Store.getState().form.errors];
