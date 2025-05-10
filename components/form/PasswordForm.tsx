@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useRouter } from 'expo-router';
+import { useSelector } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
@@ -7,50 +7,54 @@ import InputTextField from '../field/InputTextField';
 import ButtonView from '../view/ButtonView';
 import DividerView from '../view/DividerView';
 import UserManager from '@/manager/UserManager';
+import FormManager from '@/manager/FormManager';
+import ScreenManager from '@/manager/ScreenManager';
+
+const resource: string = 'password';
 
 const PasswordForm = () => {
-  const router = useRouter();
   const [isProcessing, setIsProcessing] = useState(false);
-  const [formData, setFormData] = useState({});
+  const formData = useSelector((state: any) => state.form[resource]);
 
   const submitForm = async () => {
-    // Todo - Implement password confirmation
     setIsProcessing(true);
-    let result: any = await UserManager.changePassword(formData);
+
     let message: any = {
       title: i18n.t('Change password'),
-      content: i18n.t('The password was successfully updated.'),
+      content: i18n.t('Password successfully updated.'),
     };
 
-    if (result?.error) message.content = i18n.t(result.error)
-    else updateField(null, null);
-  
-    setIsProcessing(false);
-  }  
+    let result: any = await UserManager.changePassword(formData);
 
-  const updateField = (key?: any, value?: any) => {
-    setFormData({
-      ...formData,
-      ...{ [key]: value },
-    });
+    if (result.success === false) {
+      message.content = i18n.t('Invalid data submission.');
+      FormManager.addServerErrors(resource, result.response);
+    }
+ 
+    ScreenManager.showMessage(message);
+    setIsProcessing(false);
   };
 
   return (
-    <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
+    <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.formContainer}>
       <InputTextField 
         placeholder={i18n.t('Old password')} 
-        onChangeText={(value: string) => updateField("old_password", value)}
+        onChangeText={(value: string) => FormManager.updateField(resource, "old_password", value, ['string'])}
       />
+      {FormManager.renderError('old_password')}
 
       <DividerView theme="secondary" />
       <InputTextField 
         placeholder={i18n.t('New password')} 
-        onChangeText={(value: string) => updateField("new_password", value)}
+        onChangeText={(value: string) => FormManager.updateField(resource, "new_password", value, ['string'])}
       />
+      {FormManager.renderError('new_password')}
 
       <InputTextField 
         placeholder={i18n.t('Confirm new password')} 
+        onChangeText={(value: string) => FormManager.updateField(resource, "confirm_password", value, ['string'])}
       />
+      {FormManager.renderError('confirm_password')}
 
       <DividerView />
       <ButtonView 

@@ -63,7 +63,13 @@ class UserManager {
   }
 
   async changePassword(data: any) { 
-    return await DataManager.put('changePassword', data);
+    let response: any = await DataManager.put('changePassword', data); 
+    let success: boolean = false;
+
+    return {
+      success: success,
+      response: response,
+    };
   }
 
   async getProfileId() {

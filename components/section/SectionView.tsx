@@ -20,7 +20,6 @@ import LoginSection from "@/components/section/LoginSection";
 import WelcomeSection from "@/components/section/WelcomeSection";
 import SignupSection from "@/components/section/SignupSection";
 import ProfileSection from "@/components/section/ProfileSection";
-import AccountForm from "@/components/form/AccountForm";
 import PasswordForm from "@/components/form/PasswordForm";
 import PrivacySection from "@/components/section/PrivacySection";
 import JamItemSection from "@/components/section/JamItemSection";
@@ -162,13 +161,8 @@ const SectionView = () => {
         render: (params: any) => <ProfileFormSection {...params} />,
       },
       {
-        id: 'account',
-        title: i18n.t('Account'),
-        render: (params: any) => <AccountForm {...params} />,
-      },
-      {
         id: 'password',
-        title: i18n.t('Password'),
+        title: i18n.t('Change password'),
         render: (params: any) => <PasswordForm {...params} />,
       },
       {
