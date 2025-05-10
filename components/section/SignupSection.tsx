@@ -12,10 +12,12 @@ import BoxView from '../view/BoxView';
 import SignupForm from '../form/SignupForm';
 import SpinnerView from '../view/SpinnerView';
 
+const resource: string = 'signup';
+
 const SignupSection = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const formData: any = useSelector((state: any) => state.signup);
+  const formData: any = useSelector((state: any) => state.form[resource]);
 
   const resetForm = () => {
     dispatch(setValue(null));

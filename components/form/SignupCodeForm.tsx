@@ -13,6 +13,7 @@ import BoxView from "@/components/view/BoxView";
 import LinkView from "@/components/view/LinkView";
 import SkipButton from "@/components/button/SkipButton";
 import SectionManager from "@/manager/SectionManager";
+import FormManager from "@/manager/FormManager";
 
 const resource: string = 'signup';
 
@@ -21,13 +22,6 @@ const SignupCodeForm = () => {
   const router = useRouter();
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
-
-  const updateData = (key: any, value: any) => {
-    dispatch(setValue({
-      key: key,
-      value: value,
-    }));
-  };
 
   const submitData = async () => {
     setIsProcessing(true);
@@ -38,7 +32,7 @@ const SignupCodeForm = () => {
     });
 
     if (result?.message) {
-      updateData('success', true);
+      FormManager.updateField(resource, 'success', true);
     }
 
     setIsProcessing(false);
@@ -54,7 +48,7 @@ const SignupCodeForm = () => {
       <InputTextField
         value={formData?.code || ''}
         placeholder={i18n.t('Verification code')}
-        onChangeText={(value: string) => updateData('code', value)}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'code', value)}
       />
 
       <ButtonView
