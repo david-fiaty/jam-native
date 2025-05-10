@@ -29,15 +29,9 @@ import MediaManager from "@/manager/MediaManager";
 import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
 
-type Props = {
-  jamId?: any;
-};
-
 const resource: string = 'jam';
 
-const JamForm = ({ jamId }: Props) => {
-  jamId = jamId || 0;
-
+const JamForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
@@ -85,20 +79,15 @@ const JamForm = ({ jamId }: Props) => {
     (async () => {
       if (!isLoaded) {
         let profileId: number = await UserManager.getProfileId();
-        let jamData: any = jamId == 0 ? formData : await EntityManager.getJams({ items_ids: [jamId] });
-
         setProfileId(profileId);
-        
-        FormManager.updateField(resource, null, {
-          ...(jamId > 0 ? jamData?.[0] : formData),
-          ...{ profile_id: profileId },
-          ...{ collaborators: [3] },
-        });
-      }
-
-      setIsLoaded(true);
+        FormManager.updateField(resource, 'profile_id', profileId);
+        setIsLoaded(true);
+      }      
     })();
-  }, [isLoaded, profileId, resource, formData, jamId]);
+    
+  }, [isLoaded, profileId, resource]);
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView
@@ -120,10 +109,10 @@ const JamForm = ({ jamId }: Props) => {
 
         <DividerView theme="white" />
 
-        <TextView>{i18n.t('Title')}*</TextView>
+        <TextView>{i18n.t('Title')}</TextView>
         <InputTextField
           value={formData?.title}
-          onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['string'])}
+          onChangeText={(value: string) => FormManager.updateField(resource, 'title', value)}
         />
         {FormManager.renderError('title')}
 
