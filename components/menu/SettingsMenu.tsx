@@ -17,10 +17,6 @@ const SettingsMenu = () => {
       onPress: (row: any) => SectionManager.push(router, 'profile'),
     },
     {
-      label: i18n.t('Account information'),
-      onPress: (row: any) => SectionManager.push(router, 'account'),
-    },
-    {
       label: i18n.t('Change password'),
       onPress: (row: any) => SectionManager.push(router, 'password'),
     },
