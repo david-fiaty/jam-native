@@ -21,35 +21,14 @@ type Props = BaseProps & {
   profileId: any;
 };
 
-const profileImageSize: number = 100;
-
 const ProfileItemView = ({ profileId }: Props) => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [profileItem, setProfileItem] = useState<any>(null);
-  const [sectorsData, setSectorsData] = useState<any>([]);
-
-  const renderProfileSectors = (sectorsIds?: any)  => {
-    let data: any[] = [];
-
-    sectorsData.map((item: any) => {
-      if ((sectorsIds || []).includes(item.id)) {
-        data.push(<TagView key={item.id}>{item.name}</TagView>);  
-      }
-      else if (item?.sub_sectors?.length > 0) {
-        item.sub_sectors.map((subitem: any) => {
-          data.push(<TagView key={subitem.id}>{subitem.name}</TagView>);  
-        });
-      }
-    });
-
-    return data;
-  };
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setSectorsData(await EntityManager.getSectors());
         setProfileItem((await EntityManager.getProfile(profileId)));
         setIsLoaded(true);
       }
