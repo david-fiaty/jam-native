@@ -51,13 +51,6 @@ const ProfileSection = () => {
       style={styles.container}
       scroll={true}
     >
-      <TouchableOpacity 
-        onPress={() => SectionManager.push(router, 'profile-form')}
-        style={styles.profileEditButton}
-      >
-        <TextView underline={true}>{i18n.t("Edit")}</TextView>
-      </TouchableOpacity>
-
       <ProfileHeaderView profileItem={formData} />
       <DividerView />
 
@@ -87,7 +80,7 @@ const ProfileSection = () => {
       <ProfileProjectsList
         title={i18n.t("Saved Projects")}
         allButton={formData?.saved_projects?.length > 0}
-        emptyMessage={i18n.t('You have no saved projects.')}
+        emptyMessage={i18n.t('No data available.')}
         idArray={formData?.saved_projects || []}
       />
       <DividerView />
@@ -95,7 +88,7 @@ const ProfileSection = () => {
       <ProfileProjectsList
         title={i18n.t("Liked Projects")}
         allButton={formData?.liked_projects?.length > 0}
-        emptyMessage={i18n.t('You have no liked proects.')}
+        emptyMessage={i18n.t('No data available.')}
         idArray={formData?.liked_projects || []}
       />
       <DividerView />
@@ -104,7 +97,7 @@ const ProfileSection = () => {
         title={i18n.t("Saved Jams")}
         allButton={formData?.saved_jams?.length > 0}
         idArray={formData?.saved_jams || []}
-        emptyMessage={i18n.t('You have no saved Jams.')}
+        emptyMessage={i18n.t('No data available.')}
       />
       <DividerView />
 
@@ -112,7 +105,7 @@ const ProfileSection = () => {
         title={i18n.t("Liked Jams")}
         allButton={formData?.liked_jams?.length > 0}
         idArray={formData?.liked_jams || []}
-        emptyMessage={i18n.t('You have no liked Jams.')}
+        emptyMessage={i18n.t('No data available.')}
       />
 
     </BoxView>
@@ -124,11 +117,6 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: '100%',
     paddingBottom: Layout.space.base * 2,
-  },
-  profileEditButton: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
   },
 });
 

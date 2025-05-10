@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
@@ -22,13 +22,22 @@ const SearchJamsList = ({ data, filter }: Props) => {
 
   const onItemPress = (row: any) => {
     SectionManager.push(router, 'jam-item', { jamId: JSON.stringify([row?.item?.id]), title: row?.item?.title });
-  }
+  };
 
   const renderEmptyMessage = () => {
     if (isLoaded && !currentData?.length) {
       return <TextView>{i18n.t("No results found for this search.")}</TextView>;
     }
   };
+
+  const renderItem = useCallback((row: any) => {
+    return (
+      <JamListItem
+        row={row}
+        onListItemPress={(row: any) => onItemPress(row)}
+      />
+    );
+  }, []);
 
   useEffect(() => {
     if (filter && filter != 'jam') setCurrentData(data.filter((o: any) => o.type == filter))
@@ -47,12 +56,7 @@ const SearchJamsList = ({ data, filter }: Props) => {
         contentContainerStyle={{ gap: Layout.space.base }}
         columnWrapperStyle={{ gap: Layout.space.base }}
         scrollEnabled={false}
-        renderItem={(row: any) => (
-          <JamListItem 
-            row={row}
-            onListItemPress={(row: any) => onItemPress(row)}
-          />
-        )}
+        renderItem={(row: any) => renderItem(row)}
       />
     </View>
   );

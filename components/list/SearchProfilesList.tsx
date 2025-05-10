@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
@@ -28,6 +28,15 @@ const SearchProfilesList = ({ data, filter }: Props) => {
     }
   };
 
+  const renderItem = useCallback((row: any) => {
+    return (
+      <ProfileListItem
+        row={row}
+        onListItemPress={(row: any) => onItemPress(row)}
+      />
+    );
+  }, []);
+
   useEffect(() => {
     if (filter && filter != 'jammer') setCurrentData(data.filter((o: any) => o.profile_type == filter))
     else setCurrentData(data);
@@ -35,17 +44,12 @@ const SearchProfilesList = ({ data, filter }: Props) => {
     if (!isLoaded) setIsLoaded(true);
   }, [isLoaded, data, filter]);
 
-  return (      
+  return (
     <View style={styles.container}>
       <ListView
         data={currentData}
         scrollEnabled={false}
-        renderItem={(row: any) => (
-          <ProfileListItem 
-            row={row} 
-            onListItemPress={(row: any) => onItemPress(row)}
-          />
-        )}
+        renderItem={(row: any) => renderItem(row)}
       />
     </View>
   );

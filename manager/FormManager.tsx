@@ -12,7 +12,7 @@ class FormManager {
     }
 
     if (errors.length) {
-      this.addError(resource, key, value, errors);
+      this.addClientError(resource, key, value, errors);
     }
     else {
       this.clearError(resource, key);
@@ -29,13 +29,29 @@ class FormManager {
     }));
   }
 
-  addError(resource: string, key: any, value: any, errors: any[]) {
+  addClientError(resource: string, key: any, value: any, errors: any[]) {
     this.clearError(resource, key);
     let formErrors: any[] = [...Store.getState().form.errors];
     
     Store.dispatch(setFormErrors<any>([...formErrors, {
       ...{ resource: resource },
       ...errors[0],
+    }]));
+  }
+
+  addServerErrors(resource: string, errors: any) {
+    let formErrors: any[] = [...Store.getState().form.errors];
+
+    for (const [key, message] of Object.entries(errors)) {
+      formErrors.push({
+        key: key,
+        message: message[0],
+      });
+    }
+  
+    Store.dispatch(setFormErrors<any>([...formErrors, {
+      ...{ resource: resource },
+      ...formErrors,
     }]));
   }
 
@@ -73,7 +89,6 @@ class FormManager {
       if (!fieldRules[rule].run(fieldValue)) {
         errors.push({
           key: targetKey,
-          value: fieldValue,
           message: fieldRules[rule].error(),
         });
       }
@@ -100,7 +115,7 @@ class FormManager {
           return value && typeof value == 'string' && value.trim().length > 0;
         },
         error: () => {
-          return i18n.t('A value is required');
+          return i18n.t('A value is required.');
         },
       },
       array: {
@@ -108,7 +123,7 @@ class FormManager {
           return value && Array.isArray(value) && value.length > 0;
         },
         error: () => {
-          return i18n.t('A selection is required');
+          return i18n.t('A selection is required.');
         },
       },
       number: {
@@ -117,7 +132,7 @@ class FormManager {
           return value && pattern.test(value);
         },
         error: () => {
-          return i18n.t('Invalid number value');
+          return i18n.t('Invalid number value.');
         },
       },
       email: {
@@ -126,7 +141,7 @@ class FormManager {
           return value && typeof value == 'string' && pattern.test(value);
         },
         error: () => {
-          return i18n.t('Invalid email value');
+          return i18n.t('Invalid email value.');
         },
       },
       date: {
@@ -139,7 +154,7 @@ class FormManager {
           }
         },
         error: () => {
-          return i18n.t('Invalid date value');
+          return i18n.t('Invalid date value.');
         },
       },
       url: {
@@ -152,7 +167,7 @@ class FormManager {
           }
         },
         error: () => {
-          return i18n.t('Invalid URL value');
+          return i18n.t('Invalid URL value.');
         },
       },
       domain: {
@@ -161,7 +176,7 @@ class FormManager {
           return value && typeof value == 'string' && pattern.test(value);
         },
         error: () => {
-          return i18n.t('Invalid domain value');
+          return i18n.t('Invalid domain value.');
         },
       },
     };
