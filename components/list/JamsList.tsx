@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { StyleSheet } from 'react-native';
 import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -22,9 +22,9 @@ const JamsList = ({ idArray }: Props) => {
   const [profileData, setProfileData] = useState<any>(null);
   const searchState: any = useSelector((state: any) => state.search);
 
-  const renderItem = (row: any) => {
+  const renderItem = useCallback((row: any) => {
     return <ListItem row={row} sectorsData={sectors} profileData={profileData} />;
-  };
+  }, [sectors, profileData]);
 
   useEffect(() => {
     (async () => {
@@ -52,6 +52,9 @@ const JamsList = ({ idArray }: Props) => {
         contentContainerStyle={Layout.listContainer}
         renderItem={renderItem}
         keyExtractor={(item: any) => item.id.toString()}
+        onEndReached={() => {
+          // Todo - Implement infinite scroll call
+        }}
       />
     </BoxView>
   );

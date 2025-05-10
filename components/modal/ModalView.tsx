@@ -36,9 +36,14 @@ const ModalView = ({ currentSection, style }: Props) => {
     return currentModal !== null && currentModal?.sectionId === currentSection?.id;
   };
 
+
+  const getCurrentModalIndex = () => {
+    return modalState.active.findIndex((o: any) => o.id === currentModal?.id);
+  };
+
   const renderBackButton = () => {
     const activeModalsCount: number = modalState.active.length;
-    const currentModalIndex: number = modalState.active.findIndex((o: any) => o.id === currentModal?.id);
+    const currentModalIndex: number = getCurrentModalIndex();
   
     if (currentModal?.showTitle === true && currentModal?.showBackButton === true) {
       return <ModalBackButton currentModal={currentModal} visible={activeModalsCount !== currentModalIndex} />;

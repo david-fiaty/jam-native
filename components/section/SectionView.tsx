@@ -149,6 +149,12 @@ const SectionView = () => {
         id: 'profile',
         title: i18n.t('Your profile'),
         render: (params: any) => <ProfileSection {...params} />,
+        toolbarButtons: [
+          {
+            label: i18n.t('Edit'),
+            sectionId: 'profile-form',
+          },
+        ]
       },
       {
         id: 'profile-form',
@@ -179,6 +185,7 @@ const SectionView = () => {
           showBackButton: true,
           backButtonRoute: null,
           params: {},
+          toolbarButtons: [],
         },
         ...o,
       };
