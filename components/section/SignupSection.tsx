@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
-import { setValue } from '@/redux/slices/SignupSlice';
 import { Layout } from '@/constants/Layout';
 import SignupCodeForm from '../form/SignupCodeForm';
 import SignupEmailForm from '../form/SignupEmailForm';
@@ -12,13 +11,15 @@ import BoxView from '../view/BoxView';
 import SignupForm from '../form/SignupForm';
 import SpinnerView from '../view/SpinnerView';
 
+const resource: string = 'signup';
+
 const SignupSection = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const formData: any = useSelector((state: any) => state.signup);
+  const formData: any = useSelector((state: any) => state.form[resource]);
 
   const resetForm = () => {
-    dispatch(setValue(null));
+    //dispatch(setValue(null));
   }
 
   useEffect(() => {
