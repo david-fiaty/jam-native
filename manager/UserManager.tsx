@@ -15,8 +15,14 @@ import { setActiveSections } from '@/redux/slices/SectionSlice';
 class UserManager {
   async sendSignupCode(data: any) {
     let response = await DataManager.post('sendSignupCode', data);
-    
-    return response;
+    let success: boolean = false;
+
+    if (response?.session?.length > 0) success = true;
+
+    return {
+      success: success,
+      response: response,
+    };
   }
 
   async verifySignupCode(data: any) {

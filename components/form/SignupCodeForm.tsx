@@ -20,7 +20,7 @@ const SignupCodeForm = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const formData: any = useSelector((state: any) => state[resource]);
+  const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateData = (key: any, value: any) => {
     dispatch(setValue({
