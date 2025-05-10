@@ -190,7 +190,6 @@ const JamForm = ({ jamId }: Props) => {
           }}
         />
         {FormManager.renderError('geolocation_latitude')}
-        {FormManager.renderError('geolocation_longitude')}
 
         <TextView>{i18n.t('Country')}*</TextView>
         <CountryField
