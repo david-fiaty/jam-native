@@ -39,20 +39,20 @@ const PasswordForm = () => {
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.formContainer}>
       <InputTextField 
         placeholder={i18n.t('Old password')} 
-        onChangeText={(value: string) => FormManager.updateField(resource, "old_password", value)}
+        onChangeText={(value: string) => FormManager.updateField(resource, "old_password", value, ['string'])}
       />
       {FormManager.renderError('old_password')}
 
       <DividerView theme="secondary" />
       <InputTextField 
         placeholder={i18n.t('New password')} 
-        onChangeText={(value: string) => FormManager.updateField(resource, "new_password", value)}
+        onChangeText={(value: string) => FormManager.updateField(resource, "new_password", value, ['string'])}
       />
       {FormManager.renderError('new_password')}
 
       <InputTextField 
         placeholder={i18n.t('Confirm new password')} 
-        onChangeText={(value: string) => FormManager.updateField(resource, "confirm_password", value)}
+        onChangeText={(value: string) => FormManager.updateField(resource, "confirm_password", value, ['string'])}
       />
       {FormManager.renderError('confirm_password')}
 
