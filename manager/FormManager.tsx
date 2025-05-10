@@ -12,7 +12,7 @@ class FormManager {
     }
 
     if (errors.length) {
-      this.addError(resource, key, value, errors);
+      this.addClientError(resource, key, value, errors);
     }
     else {
       this.clearError(resource, key);
@@ -29,13 +29,30 @@ class FormManager {
     }));
   }
 
-  addError(resource: string, key: any, value: any, errors: any[]) {
+  addClientError(resource: string, key: any, value: any, errors: any[]) {
     this.clearError(resource, key);
     let formErrors: any[] = [...Store.getState().form.errors];
     
     Store.dispatch(setFormErrors<any>([...formErrors, {
       ...{ resource: resource },
       ...errors[0],
+    }]));
+  }
+
+  addServerErrors(resource: string, errors: any) {
+    let formErrors: any[] = [...Store.getState().form.errors];
+
+    for (const [key, message] of Object.entries(errors)) {
+      formErrors.push({
+        key: key,
+        value: '',
+        message: message[0],
+      });
+    }
+  
+    Store.dispatch(setFormErrors<any>([...formErrors, {
+      ...{ resource: resource },
+      ...formErrors,
     }]));
   }
 
