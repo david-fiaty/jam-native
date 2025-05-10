@@ -56,7 +56,10 @@ const JamForm = ({ jamId }: Props) => {
     };
 
     let result: any = await EntityManager.addJam(formData);
-    if (result.success === false) message.content = i18n.t('Invalid data submission.')
+    if (result.success === false) {
+      message.content = i18n.t('Invalid data submission.');
+      FormManager.addServerErrors(resource, result.response);
+    }
  
     ScreenManager.showMessage(message);
     setIsProcessing(false);
@@ -187,7 +190,6 @@ const JamForm = ({ jamId }: Props) => {
           }}
         />
         {FormManager.renderError('geolocation_latitude')}
-        {FormManager.renderError('geolocation_longitude')}
 
         <TextView>{i18n.t('Country')}*</TextView>
         <CountryField
