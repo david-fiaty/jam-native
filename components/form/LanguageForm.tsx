@@ -1,4 +1,3 @@
-import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
 import i18next from 'i18next';
@@ -8,7 +7,6 @@ import StaticData from '@/constants/StaticData';
 import UserManager from '@/manager/UserManager';
 
 const LanguageForm = () => {
-  const router = useRouter();
   const data = StaticData.languages;
 
   const changeLanguage = (language: any) => {
@@ -17,7 +15,7 @@ const LanguageForm = () => {
   };
 
   return (
-    <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.screenContent}>
+    <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.formContainer}>
       <SelectListBase
         value={UserManager.getLanguage()}
         data={data} 

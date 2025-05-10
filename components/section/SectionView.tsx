@@ -27,6 +27,7 @@ import ProfileItemSection from "@/components/section/ProfileItemSection";
 import ProjectItemSection from "@/components/section/ProjectItemSection";
 import ProfileFormSection from "@/components/section/ProfileFormSection";
 import AddProjectForm from "@/components/form/AddProjectForm";
+import LanguageForm from "../form/LanguageForm";
 
 const SectionView = () => { 
   const path = usePathname();
@@ -164,6 +165,11 @@ const SectionView = () => {
         id: 'password',
         title: i18n.t('Change password'),
         render: (params: any) => <PasswordForm {...params} />,
+      },
+      {
+        id: 'language',
+        title: i18n.t('Change language'),
+        render: (params: any) => <LanguageForm {...params} />,
       },
       {
         id: 'add-project',
