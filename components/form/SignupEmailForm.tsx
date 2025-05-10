@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useRouter } from "expo-router";
-import { useSelector, useDispatch } from "react-redux";
-import { setValue } from '@/redux/slices/SignupSlice';
-import { Layout } from '@/constants/Layout';
+import { useSelector } from "react-redux";
+import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import i18n from "@/translation/i18n";
 import InputTextField from '@/components/field/InputTextField';
@@ -14,29 +13,31 @@ import BoxView from "@/components/view/BoxView";
 import LinkView from "@/components/view/LinkView";
 import SkipButton from "@/components/button/SkipButton";
 import SectionManager from "@/manager/SectionManager";
+import FormManager from "@/manager/FormManager";
+import SpinnerView from "../view/SpinnerView";
+import ScreenManager from "@/manager/ScreenManager";
+
+const resource: string = 'signup';
 
 const SignupEmailForm = () => {
-  const dispatch = useDispatch();
   const router = useRouter();
-  const formData: any = useSelector((state: any) => state.signup);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  
-  const updateData = (key: any, value: any) => {
-    dispatch(setValue({
-      key: key,
-      value: value,
-    }));
-  };
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const formData: any = useSelector((state: any) => state.form[resource]);
 
   const submitData = async () => {
     setIsProcessing(true);
 
-    let result: any = await UserManager.sendSignupCode({
-      email: formData?.email,
-    });
+    let result: any = await UserManager.sendSignupCode({ email: formData?.email });
 
-    if (result?.session?.length > 0) {
-      updateData('session', result.session);
+    if (result.success === false) {
+      ScreenManager.showMessage({
+        title: i18n.t('Registration error'),
+        content: i18n.t('Invalid data submitted.'),
+      });
+    }
+    else {
+      FormManager.updateField(resource, 'session', result.response.session);
     }
 
     setIsProcessing(false);
@@ -50,15 +51,24 @@ const SignupEmailForm = () => {
     return formData?.email?.length && formData?.session?.length;
   };
 
+  useEffect(() => {
+    if (!isLoaded) {
+      setIsLoaded(true);
+    }
+  }, [isLoaded]);
+
+  if (!isLoaded) return <SpinnerView />;
+
   return (
-    <>
+    <View style={[Layout.formContainer, styles.container]}>
       <TextView style={styles.label}>{i18n.t('Email')}</TextView>
       <InputTextField
         value={formData?.email || ''}
         placeholder={i18n.t('Enter your email address')}
-        onChangeText={(value: string) => updateData('email', value)}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'email', value, ['string', 'email'])}
         disabled={isEmailFieldDisabled()}
       />
+      {FormManager.renderError('email')}
 
       {!isEmailFieldDisabled() && (
         <ButtonView
@@ -87,11 +97,14 @@ const SignupEmailForm = () => {
           </BoxView>
         </>
       )}
-    </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+  },
   label: {
     alignSelf: 'flex-start',
   },

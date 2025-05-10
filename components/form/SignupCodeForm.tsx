@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { StyleSheet } from 'react-native';
 import { useRouter } from "expo-router";
 import { useSelector, useDispatch } from "react-redux";
-import { setValue } from '@/redux/slices/SignupSlice';
-import { Layout } from '@/constants/Layout';
 import { Config } from "@/constants/Config";
 import i18n from "@/translation/i18n";
 import InputTextField from '@/components/field/InputTextField';
@@ -14,19 +12,15 @@ import BoxView from "@/components/view/BoxView";
 import LinkView from "@/components/view/LinkView";
 import SkipButton from "@/components/button/SkipButton";
 import SectionManager from "@/manager/SectionManager";
+import FormManager from "@/manager/FormManager";
+
+const resource: string = 'signup';
 
 const SignupCodeForm = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const formData: any = useSelector((state: any) => state.signup);
-
-  const updateData = (key: any, value: any) => {
-    dispatch(setValue({
-      key: key,
-      value: value,
-    }));
-  };
+  const formData: any = useSelector((state: any) => state.form[resource]);
 
   const submitData = async () => {
     setIsProcessing(true);
@@ -37,7 +31,7 @@ const SignupCodeForm = () => {
     });
 
     if (result?.message) {
-      updateData('success', true);
+      FormManager.updateField(resource, 'success', true);
     }
 
     setIsProcessing(false);
@@ -53,7 +47,7 @@ const SignupCodeForm = () => {
       <InputTextField
         value={formData?.code || ''}
         placeholder={i18n.t('Verification code')}
-        onChangeText={(value: string) => updateData('code', value)}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'code', value)}
       />
 
       <ButtonView
