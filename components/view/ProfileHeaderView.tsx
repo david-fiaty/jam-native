@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from 'react-native';
-import { BaseProps } from '@/constants/Types';
 import { Layout } from '@/constants/Layout';
 import TextView from './TextView';
 import MediaManager from '@/manager/MediaManager';
@@ -13,7 +12,7 @@ import IconView from "./IconView";
 
 const profileImageSize: number = 100;
 
-type Props = BaseProps & {
+type Props = {
   profileItem?: any;
 };
 
