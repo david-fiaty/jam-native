@@ -36,7 +36,6 @@ const ModalView = ({ currentSection, style }: Props) => {
     return currentModal !== null && currentModal?.sectionId === currentSection?.id;
   };
 
-
   const getCurrentModalIndex = () => {
     return modalState.active.findIndex((o: any) => o.id === currentModal?.id);
   };
