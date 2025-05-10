@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 import { useRouter } from "expo-router";
 import { useSelector, useDispatch } from "react-redux";
 import { setValue } from '@/redux/slices/SignupSlice';
-import { Layout } from '@/constants/Layout';
 import { Config } from "@/constants/Config";
 import i18n from "@/translation/i18n";
 import InputTextField from '@/components/field/InputTextField';
@@ -15,11 +14,13 @@ import LinkView from "@/components/view/LinkView";
 import SkipButton from "@/components/button/SkipButton";
 import SectionManager from "@/manager/SectionManager";
 
+const resource: string = 'signup';
+
 const SignupCodeForm = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const formData: any = useSelector((state: any) => state.signup);
+  const formData: any = useSelector((state: any) => state[resource]);
 
   const updateData = (key: any, value: any) => {
     dispatch(setValue({
