@@ -48,7 +48,7 @@ const SectionBackButton = () => {
         {currentSection?.title}
       </TextView>
 
-      {currentSection.toolbarButtons.length > 0 && (
+      {currentSection?.toolbarButtons?.length > 0 && (
         <BoxView direction="row" align="center" justify="flex-end" style={styles.toolbar}>
           {currentSection.toolbarButtons.map((o: any, i: number) => (
             <TouchableOpacity
