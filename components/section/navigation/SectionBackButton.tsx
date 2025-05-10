@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useSelector } from "react-redux";
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
@@ -22,14 +22,14 @@ const SectionBackButton = () => {
   const getCurrentSection = () => {
     let activeSections: any = sectionState.active;
     let targetSection: any = activeSections[activeSections.length - 1];
-    
+
     return targetSection;
   };
 
   useEffect(() => {
     setCurrentSection(getCurrentSection());
   }, [sectionState]);
-  
+
   return (
     <BoxView
       direction="row"
@@ -43,19 +43,23 @@ const SectionBackButton = () => {
         theme="clear"
         padding={0}
       />
-  
+
       <TextView style={styles.title}>
-        { currentSection?.title }
+        {currentSection?.title}
       </TextView>
 
-      {currentSection.toolbarButtons.length > 0 && currentSection.toolbarButtons.map((o: any, i) => (
-        <TouchableOpacity 
-          key={`button-${i}`}
-          onPress={() => SectionManager.push(router, o.sectionId)}
-        >
-          <TextView underline={true}>{o.label}</TextView>
-        </TouchableOpacity>
-      ))}
+      {currentSection.toolbarButtons.length > 0 && (
+        <BoxView direction="row" align="center" justify="flex-end" style={styles.toolbar}>
+          {currentSection.toolbarButtons.map((o: any, i: number) => (
+            <TouchableOpacity
+              key={`button-${i}`}
+              onPress={() => SectionManager.push(router, o.sectionId)}
+            >
+              <TextView underline={true}>{o.label}</TextView>
+            </TouchableOpacity>
+          ))}
+        </BoxView>
+      )}
 
     </BoxView>
   );
@@ -66,10 +70,14 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     width: '100%',
     padding: Layout.space.base,
-    paddingLeft: Layout.space.base*1.5,
+    paddingLeft: Layout.space.base * 1.5,
   },
   title: {
     fontWeight: 'bold',
+  },
+  toolbar: {
+    flex: 1,
+    paddingRight: Layout.space.base,
   },
 });
 
