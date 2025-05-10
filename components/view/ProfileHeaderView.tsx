@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from 'react-native';
-import { useRouter } from 'expo-router';
 import { BaseProps } from '@/constants/Types';
 import { Layout } from '@/constants/Layout';
 import TextView from './TextView';
@@ -10,6 +9,7 @@ import BoxView from "./BoxView";
 import StaticData from '@/constants/StaticData';
 import TagView from "./TagView";
 import EntityManager from "@/manager/EntityManager";
+import IconView from "./IconView";
 
 const profileImageSize: number = 100;
 
@@ -18,7 +18,6 @@ type Props = BaseProps & {
 };
 
 const ProfileHeaderView = ({ profileItem }: Props) => {
-  const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any>([]);
 
@@ -51,14 +50,24 @@ const ProfileHeaderView = ({ profileItem }: Props) => {
   return (
     <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.profileHeader}>
       <View style={styles.profileHeaderLeft}>
-        <ImageView
-          uri={MediaManager.getImageUrl('/media/files/609b6904-41df-4fb4-9b14-e75d8697f444.jpg')}
-          //uri={MediaManager.getImageUrl(profileItem?.profile_picture?.url)} // Todo - Enable this
-          resizeMode="cover"
-          width={profileImageSize}
-          height={profileImageSize}
-          style={styles.profileImage}
-        />
+        {profileItem?.profile_picture?.url?.length > 0 && (
+          <ImageView
+            uri={MediaManager.getImageUrl(profileItem?.profile_picture?.url)}
+            resizeMode="cover"
+            width={profileImageSize}
+            height={profileImageSize}
+            style={styles.profileImage}
+          />
+        )}
+
+        {!profileItem?.profile_picture?.url?.length && (
+          <IconView 
+            name="user" 
+            theme="tertiary" 
+            size={16}
+            padding={6}
+          />
+        )}
       </View>
 
       <View style={styles.profileHeaderRight}>

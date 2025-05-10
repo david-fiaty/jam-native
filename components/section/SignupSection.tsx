@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
-import { useSelector, useDispatch } from "react-redux";
-import { setValue } from '@/redux/slices/SignupSlice';
+import { useSelector } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import SignupCodeForm from '../form/SignupCodeForm';
 import SignupEmailForm from '../form/SignupEmailForm';
@@ -12,13 +11,18 @@ import BoxView from '../view/BoxView';
 import SignupForm from '../form/SignupForm';
 import SpinnerView from '../view/SpinnerView';
 
+const resource: string = 'signup';
+
 const SignupSection = () => {
-  const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const formData: any = useSelector((state: any) => state.signup);
+  const formData: any = useSelector((state: any) => state.form[resource]);
+
+  const containerStyle: any = {
+    paddingTop: formData?.success === true ? Layout.space.base*4 : 0,
+  };
 
   const resetForm = () => {
-    dispatch(setValue(null));
+    //dispatch(setValue(null));
   }
 
   useEffect(() => {
@@ -37,7 +41,7 @@ const SignupSection = () => {
       direction="column" 
       align="center" 
       justify="center" 
-      style={[styles.container]}
+      style={[styles.container, containerStyle]}
       scroll={formData?.success === true}
     >    
       <LogoView size={80} />    
@@ -52,7 +56,6 @@ const SignupSection = () => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: Layout.space.base*4,
     width: '100%',
   },
   slogan: {
