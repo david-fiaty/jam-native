@@ -59,7 +59,6 @@ const SignupEmailForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(formData);
   return (
     <View style={[Layout.formContainer, styles.container]}>
       <TextView style={styles.label}>{i18n.t('Email')}</TextView>
