@@ -162,7 +162,7 @@ const SectionView = () => {
       },
       {
         id: 'password',
-        title: i18n.t('Password'),
+        title: i18n.t('Change password'),
         render: (params: any) => <PasswordForm {...params} />,
       },
       {
