@@ -7,7 +7,7 @@ const FormSlice = createSlice({
     profile: {},
     project: {},
     signup: {},
-    account: {},
+    password: {},
     errors: [],
   },
   reducers: {
