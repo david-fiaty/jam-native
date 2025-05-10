@@ -13,6 +13,7 @@ type Props = BaseProps & {
   columnWrapperStyle?: object;
   showsHorizontalScrollIndicator?: boolean;
   emptyMessage?: any;
+  onEndReached?: () => void;
   keyExtractor?: ((row: any) => string);
   renderItem: ((item: any) => JSX.Element);
 };
@@ -26,6 +27,7 @@ const ListView = ({
   columnWrapperStyle,
   showsHorizontalScrollIndicator,
   emptyMessage,
+  onEndReached,
   keyExtractor,
   renderItem,
   style,
@@ -50,6 +52,7 @@ const ListView = ({
       keyExtractor={keyExtractor}
       renderItem={renderItem}
       ListEmptyComponent={() => emptyMessage}
+      onEndReached={onEndReached}
     />
   );
 };
