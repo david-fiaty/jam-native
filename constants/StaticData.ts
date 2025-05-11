@@ -28,6 +28,16 @@ const StaticData = {
       value: 'en',
     },
   ],
+  authTabs: [
+    {
+      id: 'email',
+      label: i18n.t('Email'),
+    },
+    {
+      id: 'phone',
+      label: i18n.t('Phone'),
+    },
+  ],
   searchTabs: [
     {
       id: 'jam',
