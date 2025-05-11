@@ -12,6 +12,8 @@ import SignupForm from '../form/SignupForm';
 import SpinnerView from '../view/SpinnerView';
 import StaticData from '@/constants/StaticData';
 import TabsView from '../view/TabsView';
+import SignupPhoneForm from '../form/signup-phone/SignupPhoneForm';
+import SignupPhoneCodeForm from '../form/signup-phone/SignupPhoneCodeForm';
 
 const resource: string = 'signup';
 
@@ -56,6 +58,14 @@ const SignupSection = () => {
         <>
           {formData?.success !== true && <SignupEmailForm />}
           {formData?.success !== true && formData?.session?.length > 0 && <SignupEmailCodeForm />}
+          {formData?.success === true && <SignupForm />}
+        </>
+      )}
+
+      {currentTab === 'phone' && (
+        <>
+          {formData?.success !== true && <SignupPhoneForm />}
+          {formData?.success !== true && formData?.session?.length > 0 && <SignupPhoneCodeForm />}
           {formData?.success === true && <SignupForm />}
         </>
       )}
