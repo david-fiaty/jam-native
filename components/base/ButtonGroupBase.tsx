@@ -1,10 +1,11 @@
-import { ButtonGroup } from "@rneui/themed";
 import React, { useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
+import { ButtonGroup } from "@rneui/themed";
 
 type Props = {
   value?: any;
   data?: object;
+  disabled?: boolean;
   onChangeValue?: (option: any) => void;
 };
 
@@ -12,7 +13,7 @@ const component1 = () => <Text>Hello</Text>
 const component2 = () => <Text>World</Text>
 const component3 = () => <Text>ButtonGroup</Text>
 
-const ButtonGroupBase = ({value, data, onChangeValue}: Props) => {
+const ButtonGroupBase = ({value, data, disabled, onChangeValue}: Props) => {
   const [selectedValue, setSelectedValue] = useState<any>(null);
   const buttons = [{ element: component1 }, { element: component2 }, { element: component3 }]
 
@@ -28,6 +29,7 @@ const ButtonGroupBase = ({value, data, onChangeValue}: Props) => {
         onPress={onChange}
         selectedIndex={selectedValue}
         buttons={buttons}
+        disabled={disabled}
       />
     </View>
   );
