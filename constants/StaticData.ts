@@ -32,6 +32,7 @@ const StaticData = {
     {
       id: 'email',
       label: i18n.t('Email'),
+      default: true,
     },
     {
       id: 'phone',
