@@ -48,7 +48,7 @@ const ProfileHeaderView = ({ profileItem }: Props) => {
 
   return (
     <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.profileHeader}>
-      <View style={styles.profileHeaderLeft}>
+      <BoxView direction="row" align="center" justify="center" style={styles.profileHeaderLeft}>
         {profileItem?.profile_picture?.url?.length > 0 && (
           <ImageView
             uri={MediaManager.getImageUrl(profileItem.profile_picture.url)}
@@ -62,12 +62,12 @@ const ProfileHeaderView = ({ profileItem }: Props) => {
         {!profileItem?.profile_picture?.url?.length && (
           <IconView 
             name="user" 
-            theme="tertiary" 
-            size={16}
-            padding={6}
+            theme="secondary" 
+            size={26}
+            padding={28}
           />
         )}
-      </View>
+      </BoxView>
 
       <View style={styles.profileHeaderRight}>
         <TextView style={styles.profileTitle}>{profileItem?.profile_name}</TextView>
@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
   },
   profileHeaderLeft: {
     width: profileImageSize,
+    height: '100%',
   },
   profileHeaderRight: {
     paddingHorizontal: Layout.space.base * 1,
