@@ -12,6 +12,7 @@ import SearchManager from "@/manager/SearchManager";
 import SearchJamsList from "../list/SearchJamsList";
 import SearchProfilesList from "../list/SearchProfilesList";
 import SearchProjectsList from "../list/SearchProjectsList";
+import TabsView from "./TabsView";
 
 const SearchView = () => {
   const dispatch = useDispatch();
@@ -19,24 +20,6 @@ const SearchView = () => {
   const [searchData, setSearchData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search);
   
-  const renderTab = (row: any) => {
-    const tabStyle: any = row.id == searchState.currentTab ? styles.currentTab : {};
-
-    const onTabPress = (tabId: string) => {
-      dispatch(setCurrentTab(tabId));
-    };
-
-    return (
-      <TouchableOpacity 
-        key={row.id}
-        onPress={() => onTabPress(row.id)} 
-        style={styles.tabItem}
-      >
-        <TextView style={tabStyle}>{row.label}</TextView>
-      </TouchableOpacity>
-    );
-  };
-
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
@@ -52,15 +35,12 @@ const SearchView = () => {
   
   return (
     <>
-      {/* Search filters */}
-      <BoxView direction="row" align="center" justify="flex-start" style={styles.tabContainer}>
-        <ScrollView 
-          horizontal={true}
-          style={styles.tabContainer}
-        >
-          {StaticData.searchTabs.map((o: any) => renderTab(o))}
-        </ScrollView>
-      </BoxView>
+      {/* Search tabs */}
+      <TabsView 
+        tabs={StaticData.searchTabs} 
+        currentTab={searchState.currentTab} 
+        onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
+      />
 
       {/* Jams list */}
       {['jam', 'looking', 'call', 'event'].includes(searchState.currentTab) && (
