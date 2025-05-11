@@ -11,7 +11,7 @@ import SpinnerView from "../view/SpinnerView";
 import BoxView from "../view/BoxView";
 import BackButton from "../button/BackButton";
 import TextView from "../view/TextView";
-import JamListItem from "../list/ListItem/JamListItem";
+import JamListItem from "../list/list-item/JamListItem";
 import UserManager from "@/manager/UserManager";
 import ProfileJamsList from "../list/ProfileJamsList";
 
