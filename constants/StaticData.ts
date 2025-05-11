@@ -167,6 +167,38 @@ const StaticData = {
       label: i18n.t('Public'),
     },
   ],
+  countryPhoneCodes: [
+    {
+      'code': 'bj',
+      'name': i18n.t('Benin'),
+      'prefix': '229',
+    },
+    {
+      'code': 'bf',
+      'name': i18n.t('Burkina Faso'),
+      'prefix': '226',
+    },
+    {
+      'code': 'fr',
+      'name': i18n.t('France'),
+      'prefix': '33',
+    },
+    {
+      'code': 'gh',
+      'name': i18n.t('Ghana'),
+      'prefix': '233',
+    },
+    {
+      'code': 'ci',
+      'name': i18n.t('Ivory Coast'),
+      'prefix': '225',
+    },
+    {
+      'code': 'tg',
+      'name': i18n.t('Togo'),
+      'prefix': '228',
+    },
+  ],
 };
 
 export default StaticData;
