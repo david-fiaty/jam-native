@@ -14,9 +14,6 @@ class FormManager {
     if (errors.length) {
       this.addClientError(resource, key, value, errors);
     }
-    else {
-      this.clearError(resource, key);
-    }
 
     this.addValue(resource, key, value);
   };
@@ -24,13 +21,12 @@ class FormManager {
   addValue(resource: string, key: any, value: any) {
     Store.dispatch(setFormData<any>({
       resource: resource,
-      key: this.getFieldKey(key),
+      key: this.getTargetKey(key),
       value: value,
     }));
   }
 
   addClientError(resource: string, key: any, value: any, errors: any[]) {
-    this.clearError(resource, key);
     let formErrors: any[] = [...Store.getState().form.errors];
     
     Store.dispatch(setFormErrors<any>([...formErrors, {
@@ -64,8 +60,9 @@ class FormManager {
   }
   
   renderError(key: string) {
+    let targetKey: string = this.getTargetKey(key);
     let formErrors: any[] = Store.getState().form.errors;
-    let fieldError: any = formErrors.find((o: any) => o.key === key);
+    let fieldError: any = formErrors.find((o: any) => o.key === targetKey);
 
     if (fieldError) {
       return <FieldErrorView message={fieldError.message} />;
@@ -81,7 +78,7 @@ class FormManager {
     let errors: any = [];
 
     if (this.isPathKey(key)) {
-      targetKey = this.getFieldKey(key);
+      targetKey = this.getTargetKey(key);
       fieldValue = fieldValue[targetKey];
     }
 
@@ -97,7 +94,7 @@ class FormManager {
     return errors;
   }
 
-  getFieldKey(key: string) {
+  getTargetKey(key: string) {
     let keyParts: any[] = key.split('.');
     let targetKey = keyParts[keyParts.length - 1];
 
@@ -105,7 +102,7 @@ class FormManager {
   }
 
   isPathKey(key: string) {
-    return key.split('.').length > 0;
+    return key.split('.').length > 1;
   }
 
   getValidationRules() {
