@@ -8,7 +8,7 @@ class FormManager {
     let errors: any[] = [];
 
     if (rules.length > 0) {
-      errors = this.validateFied(key, value, rules);
+      errors = this.validateFied(resource, key, value, rules);
     }
 
     if (errors.length) {
@@ -51,7 +51,6 @@ class FormManager {
     }]));
   }
 
-  // Todo - Fix errors not clearing up
   clearError(resource: string, key: any) {
     let formErrors: any[] = [...Store.getState().form.errors];
     formErrors = formErrors.filter((o: any) => o.resource !== resource && o.key !== key);
@@ -71,7 +70,7 @@ class FormManager {
     return <></>;
   }
 
-  validateFied(key: string, value: any, rules: any[]) {
+  validateFied(resource: string, key: string, value: any, rules: any[]) {
     let fieldValue: any = value;
     let fieldRules: any = this.getValidationRules();
     let targetKey: string = key;
@@ -88,6 +87,9 @@ class FormManager {
           key: targetKey,
           message: fieldRules[rule].error(),
         });
+      }
+      else {
+        this.clearError(resource, targetKey);
       }
     }
 
