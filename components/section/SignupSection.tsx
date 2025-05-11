@@ -10,25 +10,24 @@ import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
 import SignupForm from '../form/SignupForm';
 import SpinnerView from '../view/SpinnerView';
+import StaticData from '@/constants/StaticData';
+import TabsView from '../view/TabsView';
 
 const resource: string = 'signup';
 
 const SignupSection = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [currentTab, setCurrentTab] = useState<any>(null);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const containerStyle: any = {
     paddingTop: formData?.success === true ? Layout.space.base*4 : 0,
   };
 
-  const resetForm = () => {
-    //dispatch(setValue(null));
-  }
-
   useEffect(() => {
     (async () => {
         if (!isLoaded) {
-          //resetForm(); Todo - Enable this and fix reset issue
+          setCurrentTab((StaticData.authTabs.find((o: any) => o?.default === true))?.id);
           setIsLoaded(true);
         }
     })();
@@ -47,9 +46,19 @@ const SignupSection = () => {
       <LogoView size={80} />    
       <TextView style={styles.slogan}>{i18n.t('Create your JAM account')}</TextView> 
       
-      {formData?.success !== true && <SignupEmailForm />}
-      {formData?.success !== true && formData?.session?.length > 0 && <SignupCodeForm />}
-      {formData?.success === true && <SignupForm />}
+      <TabsView 
+        tabs={StaticData.authTabs} 
+        currentTab={currentTab} 
+        onItemPress={(tabId: string) => setCurrentTab(tabId)}
+      />
+
+      {currentTab === 'email' && (
+        <>
+          {formData?.success !== true && <SignupEmailForm />}
+          {formData?.success !== true && formData?.session?.length > 0 && <SignupCodeForm />}
+          {formData?.success === true && <SignupForm />}
+        </>
+      )}
     </BoxView>
   );
 };
