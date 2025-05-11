@@ -59,7 +59,7 @@ const LoginSection = () => {
     (async () => {
         if (!isLoaded) {
           //resetForm(); Todo - Enable this and fix reset issue
-          setCurrentTab(StaticData.authTabs.find((o: any) => o?.default === true));
+          setCurrentTab((StaticData.authTabs.find((o: any) => o?.default === true))?.id);
           setIsLoaded(true);
         }
     })();
