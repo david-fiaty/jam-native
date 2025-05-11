@@ -72,7 +72,7 @@ const ModalView = ({ currentSection, style }: Props) => {
         return {
           ...modalConfig,
           ...activeModal,
-        }
+        };
       }
     }
 
