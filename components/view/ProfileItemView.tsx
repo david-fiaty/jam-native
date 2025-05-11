@@ -12,6 +12,7 @@ import ProfileJamsList from "../list/ProfileJamsList";
 import SectorsTagsView from "./SectorsTagsView";
 import ProfileHeaderView from "./ProfileHeaderView";
 import SectionManager from "@/manager/SectionManager";
+import SpinnerView from "./SpinnerView";
 
 type Props = BaseProps & {
   profileId: any;
@@ -30,6 +31,8 @@ const ProfileItemView = ({ profileId }: Props) => {
       }
     })();
   }, [isLoaded, profileId]);
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView 
