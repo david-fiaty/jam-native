@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useSelector } from "react-redux";
 import { Layout } from '@/constants/Layout';
-import SignupCodeForm from '../form/signup-email/SignupCodeForm';
-import SignupEmailForm from '../form/signup-email/SignupEmailForm';
+import SignupEmailCodeForm from '../form/signup-email/SignupEmailCodeForm';
+import SignupEmailForm from '../form/signup-email/SignupEmailCodeForm';
 import LogoView from '../view/LogoView';
 import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
@@ -55,7 +55,7 @@ const SignupSection = () => {
       {currentTab === 'email' && (
         <>
           {formData?.success !== true && <SignupEmailForm />}
-          {formData?.success !== true && formData?.session?.length > 0 && <SignupCodeForm />}
+          {formData?.success !== true && formData?.session?.length > 0 && <SignupEmailCodeForm />}
           {formData?.success === true && <SignupForm />}
         </>
       )}
