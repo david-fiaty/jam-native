@@ -6,16 +6,13 @@ import { Layout } from "@/constants/Layout";
 import TextView from './TextView';
 import EntityManager from "@/manager/EntityManager";
 import BoxView from "./BoxView";
-import ImageView from "./ImageView";
-import MediaManager from "@/manager/MediaManager";
-import TagView from "./TagView";
 import i18n from "@/translation/i18n";
 import DividerView from "./DividerView";
-import StaticData from "@/constants/StaticData";
 import ProfileJamsList from "../list/ProfileJamsList";
 import SectorsTagsView from "./SectorsTagsView";
 import ProfileHeaderView from "./ProfileHeaderView";
 import SectionManager from "@/manager/SectionManager";
+import SpinnerView from "./SpinnerView";
 
 type Props = BaseProps & {
   profileId: any;
@@ -34,6 +31,8 @@ const ProfileItemView = ({ profileId }: Props) => {
       }
     })();
   }, [isLoaded, profileId]);
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView 
@@ -68,6 +67,7 @@ const ProfileItemView = ({ profileId }: Props) => {
 
       <TextView style={styles.sectionTitle}>{i18n.t('Sectors')}</TextView>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileSectors}>
+        {/* Todo - Endpoint should return entity ids, not full objects */}
         <SectorsTagsView idArray={profileItem?.sectors} />
       </BoxView>
 
