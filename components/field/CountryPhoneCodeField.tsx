@@ -25,7 +25,7 @@ const CountryPhoneCodeField = ({value, disabled, onChangeValue}: Props) => {
   return (
     <BoxView direction="column" align="left" style={styles.container}>
       <SelectListBase 
-        placeholder={i18n.t('Select a phone code')}
+        placeholder={i18n.t('Select a country phone code')}
         value={value}
         data={buildOptions(countryCodes)}  
         onChangeValue={onChangeValue}
