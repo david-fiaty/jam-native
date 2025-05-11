@@ -85,19 +85,23 @@ const LoginSection = () => {
         onItemPress={(tabId: string) => setCurrentTab(tabId)}
       />
       
-      <InputTextField 
-        containerStyle={styles.inputTextFieldContainer}
-        placeholder={i18n.t('Email address')} 
-        onChangeText={(text: string) => setEmail(text)}
-      />
+      {currentTab === 'email' && (
+        <>
+          <InputTextField 
+            containerStyle={styles.inputTextFieldContainer}
+            placeholder={i18n.t('Email address')} 
+            onChangeText={(text: string) => setEmail(text)}
+          />
 
-      <InputTextField 
-        containerStyle={styles.inputTextFieldContainer}
-        placeholder={i18n.t('Password')} 
-        secureTextEntry={true} 
-        spellCheck={false}
-        onChangeText={(text: string) => setPassword(text)}
-      />
+          <InputTextField 
+            containerStyle={styles.inputTextFieldContainer}
+            placeholder={i18n.t('Password')} 
+            secureTextEntry={true} 
+            spellCheck={false}
+            onChangeText={(text: string) => setPassword(text)}
+          />
+        </>
+      )}
 
       <ButtonView 
         label={i18n.t('Continue')} 
