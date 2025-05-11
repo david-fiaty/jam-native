@@ -44,6 +44,7 @@ const StaticData = {
       id: 'jam',
       label: i18n.t('Jams'),
       numColumns: 2,
+      default: true,
     },
     {
       id: 'looking',
