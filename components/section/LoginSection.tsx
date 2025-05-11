@@ -23,8 +23,6 @@ import TabsView from '../view/TabsView';
 import StaticData from '@/constants/StaticData';
 import SpinnerView from '../view/SpinnerView';
 
-const defaultTab: string = 'email';
-
 const LoginSection = () => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -61,7 +59,7 @@ const LoginSection = () => {
     (async () => {
         if (!isLoaded) {
           //resetForm(); Todo - Enable this and fix reset issue
-          setCurrentTab(defaultTab);
+          setCurrentTab(StaticData.authTabs.find((o: any) => o?.default === true));
           setIsLoaded(true);
         }
     })();
