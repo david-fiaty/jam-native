@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
@@ -19,9 +19,14 @@ import ButtonView from '../view/ButtonView';
 import ScreenManager from '@/manager/ScreenManager';
 import DividerView from '../view/DividerView';
 import SectionManager from '@/manager/SectionManager';
+import TabsView from '../view/TabsView';
+import StaticData from '@/constants/StaticData';
+import SpinnerView from '../view/SpinnerView';
 
 const LoginSection = () => {
   const router = useRouter();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [currentTab, setCurrentTab] = useState<any>(null);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [isProcessing, setIsProcessing] = useState(false);
@@ -50,6 +55,18 @@ const LoginSection = () => {
     }
   }  
 
+  useEffect(() => {
+    (async () => {
+        if (!isLoaded) {
+          //resetForm(); Todo - Enable this and fix reset issue
+          setCurrentTab((StaticData.authTabs.find((o: any) => o?.default === true))?.id);
+          setIsLoaded(true);
+        }
+    })();
+  }, [isLoaded]);
+
+  if (!isLoaded) return <SpinnerView />;
+
   return (
     <BoxView 
       direction="column" 
@@ -61,6 +78,12 @@ const LoginSection = () => {
       <TextView style={styles.slogan}>{i18n.t('Welcome back')}</TextView> 
 
       <DividerView />
+  
+      <TabsView 
+        tabs={StaticData.authTabs} 
+        currentTab={currentTab} 
+        onItemPress={(tabId: string) => setCurrentTab(tabId)}
+      />
       
       <InputTextField 
         containerStyle={styles.inputTextFieldContainer}
