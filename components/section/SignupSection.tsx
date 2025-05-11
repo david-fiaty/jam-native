@@ -14,7 +14,6 @@ import StaticData from '@/constants/StaticData';
 import TabsView from '../view/TabsView';
 
 const resource: string = 'signup';
-const defaultTab: string = 'email';
 
 const SignupSection = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -25,15 +24,10 @@ const SignupSection = () => {
     paddingTop: formData?.success === true ? Layout.space.base*4 : 0,
   };
 
-  const resetForm = () => {
-    //dispatch(setValue(null));
-  }
-
   useEffect(() => {
     (async () => {
         if (!isLoaded) {
-          //resetForm(); Todo - Enable this and fix reset issue
-          setCurrentTab(defaultTab);
+          setCurrentTab((StaticData.authTabs.find((o: any) => o?.default === true))?.id);
           setIsLoaded(true);
         }
     })();
@@ -58,9 +52,13 @@ const SignupSection = () => {
         onItemPress={(tabId: string) => setCurrentTab(tabId)}
       />
 
-      {formData?.success !== true && <SignupEmailForm />}
-      {formData?.success !== true && formData?.session?.length > 0 && <SignupCodeForm />}
-      {formData?.success === true && <SignupForm />}
+      {currentTab === 'email' && (
+        <>
+          {formData?.success !== true && <SignupEmailForm />}
+          {formData?.success !== true && formData?.session?.length > 0 && <SignupCodeForm />}
+          {formData?.success === true && <SignupForm />}
+        </>
+      )}
     </BoxView>
   );
 };
