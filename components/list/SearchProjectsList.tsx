@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
@@ -7,6 +7,7 @@ import i18n from "@/translation/i18n";
 import ProjectListItem from "./list-item/ProjectListItem";
 import TextView from "../view/TextView";
 import SectionManager from "@/manager/SectionManager";
+import BoxView from "../view/BoxView";
 
 type Props = {
   data?: any;
@@ -48,7 +49,13 @@ const SearchProjectsList = ({ data, filter }: Props) => {
   }, [isLoaded, data]);
 
   return (
-    <View style={styles.container}>
+    <BoxView
+      direction="column"
+      align="flex-start"
+      justify="flex-start"
+      scroll={true}
+      style={styles.container}
+    >
       <ListView
         data={currentData}
         numColumns={numColumns}
@@ -57,7 +64,7 @@ const SearchProjectsList = ({ data, filter }: Props) => {
         scrollEnabled={false}
         renderItem={(row: any) => renderItem(row)}
       />
-    </View>
+    </BoxView>
   );
 };
 
