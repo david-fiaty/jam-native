@@ -16,7 +16,7 @@ import FormManager from "@/manager/FormManager";
 
 const resource: string = 'signup';
 
-const SignupCodeForm = () => {
+const SignupEmailCodeForm = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
@@ -80,4 +80,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignupCodeForm;
+export default SignupEmailCodeForm;
