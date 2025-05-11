@@ -61,7 +61,7 @@ class FormManager {
   renderError(key: string) {
     let targetKey: string = this.getTargetKey(key);
     let formErrors: any[] = Store.getState().form.errors;
-    let fieldError: any = formErrors.find((o: any) => o.key === targetKey);
+    let fieldError: any = formErrors.findLast((o: any) => o.key === targetKey);
 
     if (fieldError) {
       return <FieldErrorView message={fieldError.message} />;

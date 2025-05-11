@@ -92,8 +92,6 @@ const JamForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(formErrors);
-
   return (
     <BoxView
       align="flex-start"
@@ -129,14 +127,14 @@ const JamForm = () => {
         />
         {FormManager.renderError('caption')}
 
-        <TextView>{i18n.t('Location type')} *</TextView>
+        <TextView>{i18n.t('Location type')}</TextView>
         <LocationTypeField
           value={formData?.location_type}
           onChangeValue={(option: any) => FormManager.updateField(resource, 'location_type', option.value, ['string'])}
         />
         {FormManager.renderError('location_type')}
 
-        <TextView>{i18n.t('Start date')} *</TextView>
+        <TextView>{i18n.t('Start date')}</TextView>
         <DatePickerField
           value={formData?.period?.start_datetime}
           onChangeValue={(value: any) => FormManager.updateField(resource, 'period', {
@@ -146,7 +144,7 @@ const JamForm = () => {
         />
         {FormManager.renderError('period')}
 
-        <TextView>{i18n.t('End date')} *</TextView>
+        <TextView>{i18n.t('End date')}</TextView>
         <DatePickerField
           value={formData?.period?.end_datetime}
           onChangeValue={(value: any) => FormManager.updateField(resource, 'period', {
