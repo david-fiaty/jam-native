@@ -8,6 +8,7 @@ import JamListItem from "./list-item/JamListItem";
 import TextView from "../view/TextView";
 import SpinnerView from "../view/SpinnerView";
 import SectionManager from "@/manager/SectionManager";
+import BoxView from "../view/BoxView";
 
 type Props = {
   data?: any;
@@ -49,7 +50,13 @@ const SearchJamsList = ({ data, filter }: Props) => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <View style={styles.container}>
+    <BoxView 
+      direction="column"
+      align="flex-start"
+      justify="flex-start"
+      scroll={true}
+      style={styles.container} 
+    >
       <ListView
         data={currentData}
         numColumns={numColumns}
@@ -58,7 +65,7 @@ const SearchJamsList = ({ data, filter }: Props) => {
         scrollEnabled={false}
         renderItem={(row: any) => renderItem(row)}
       />
-    </View>
+    </BoxView>
   );
 };
 
