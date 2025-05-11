@@ -9,7 +9,7 @@ import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
 import BoxView from "../view/BoxView";
-import ProjectListItem from "./ListItem/ProjectListItem";
+import ProjectListItem from "./list-item/ProjectListItem";
 import SectionManager from "@/manager/SectionManager";
 
 type Props = {

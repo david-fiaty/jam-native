@@ -6,7 +6,7 @@ import BoxView from '../view/BoxView';
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
-import ActionListItem from '../list/ListItem/ActionListItem';
+import ActionListItem from '../list/list-item/ActionListItem';
 import DataManager from '@/manager/DataManager';
 import UserManager from '@/manager/UserManager';
 

@@ -8,7 +8,7 @@ import BoxView from "../view/BoxView";
 import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import EntityManager from '@/manager/EntityManager';
-import ProfileListItem from './ListItem/ProfileListItem';
+import ProfileListItem from './list-item/ProfileListItem';
 import SectionManager from '@/manager/SectionManager';
 
 type Props = {

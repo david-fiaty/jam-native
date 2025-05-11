@@ -10,7 +10,7 @@ import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
 import BoxView from "../view/BoxView";
-import JamListItem from "./ListItem/JamListItem";
+import JamListItem from "./list-item/JamListItem";
 import SectionManager from "@/manager/SectionManager";
 
 type Props = {
