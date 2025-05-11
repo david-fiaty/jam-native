@@ -51,7 +51,7 @@ class FormManager {
     }]));
   }
 
-  clearError(resource: string, key: any) {
+  clearErrors(resource: string, key: any) {
     let formErrors: any[] = [...Store.getState().form.errors];
     formErrors = formErrors.filter((o: any) => o.resource !== resource && o.key !== key);
     
@@ -89,7 +89,7 @@ class FormManager {
         });
       }
       else {
-        this.clearError(resource, targetKey);
+        this.clearErrors(resource, targetKey);
       }
     }
 
