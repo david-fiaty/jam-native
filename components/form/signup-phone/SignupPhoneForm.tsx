@@ -17,6 +17,7 @@ import FormManager from "@/manager/FormManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import CountryPhoneCodeField from "@/components/field/CountryPhoneCodeField";
+import ButtonGroupBase from "@/components/base/ButtonGroupBase";
 
 const resource: string = 'signup';
 
@@ -78,6 +79,8 @@ const SignupPhoneForm = () => {
         //disabled={isEmailFieldDisabled()}
       />
       {FormManager.renderError('phone')}
+
+      <ButtonGroupBase />
 
       {!isEmailFieldDisabled() && (
         <ButtonView
