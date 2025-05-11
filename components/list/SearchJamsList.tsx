@@ -4,10 +4,11 @@ import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import ListView from "../view/ListView";
 import i18n from "@/translation/i18n";
-import JamListItem from "./ListItem/JamListItem";
+import JamListItem from "./list-item/JamListItem";
 import TextView from "../view/TextView";
 import SpinnerView from "../view/SpinnerView";
 import SectionManager from "@/manager/SectionManager";
+import BoxView from "../view/BoxView";
 
 type Props = {
   data?: any;
@@ -49,7 +50,13 @@ const SearchJamsList = ({ data, filter }: Props) => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <View style={styles.container}>
+    <BoxView 
+      direction="column"
+      align="flex-start"
+      justify="flex-start"
+      scroll={true}
+      style={styles.container} 
+    >
       <ListView
         data={currentData}
         numColumns={numColumns}
@@ -58,7 +65,7 @@ const SearchJamsList = ({ data, filter }: Props) => {
         scrollEnabled={false}
         renderItem={(row: any) => renderItem(row)}
       />
-    </View>
+    </BoxView>
   );
 };
 
