@@ -28,7 +28,7 @@ const SearchView = () => {
       }
     })();
 
-    if (!searchState.currentTab) dispatch(setCurrentTab(StaticData.searchTabs[0].id));
+    if (!searchState.currentTab) dispatch(setCurrentTab((StaticData.searchTabs.find((o: any) => o?.default === true))?.id));
   }, [isLoaded, searchState]);
 
   if (!isLoaded) return <SpinnerView />;
