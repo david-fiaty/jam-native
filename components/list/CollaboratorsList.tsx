@@ -12,7 +12,7 @@ import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from '../field/InputTextField';
-import ProfileListItem from './ListItem/ProfileListItem';
+import ProfileListItem from './list-item/ProfileListItem';
 
 type Props = {
   resource: string;
