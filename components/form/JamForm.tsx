@@ -38,6 +38,9 @@ const JamForm = () => {
   const formData = useSelector((state: any) => state.form[resource]);
   const jamCategories = StaticData.jamCategories;
 
+
+  const formErrors = useSelector((state: any) => state.form.errors);
+
   const submitForm = async () => {
     setIsProcessing(true);
 
@@ -88,6 +91,8 @@ const JamForm = () => {
   }, [isLoaded, profileId, resource]);
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(formErrors);
 
   return (
     <BoxView
