@@ -22,7 +22,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [currentValue, setCurrentValue] = useState<any>([]);
-  const formData: any = useSelector((state: any) => state.form[resource]);
+  const formData: any = useSelector((state: any) => state.form[resource].data);
   
   const getSelectedSectors = (sectorsIds?: any) => {
     let selectedIds: any[] = sectorsIds?.length ? sectorsIds : [];

@@ -14,7 +14,7 @@ const resource: string = 'password';
 
 const PasswordForm = () => {
   const [isProcessing, setIsProcessing] = useState(false);
-  const formData = useSelector((state: any) => state.form[resource]);
+  const formData = useSelector((state: any) => state.form[resource].data);
 
   const submitForm = async () => {
     setIsProcessing(true);

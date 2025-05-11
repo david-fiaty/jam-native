@@ -27,7 +27,7 @@ const CountriesList = ({ resource, field }: Props) => {
   const [searchValue, setSearchValue] = useState<string>('');
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const formData: any = useSelector((state: any) => state.form[resource]);
+  const formData: any = useSelector((state: any) => state.form[resource].data);
 
   const clearSearch = () => {
     setSearchResults(countriesData);

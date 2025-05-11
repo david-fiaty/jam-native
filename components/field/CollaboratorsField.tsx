@@ -21,7 +21,7 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Pr
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState<any>([]);
-  const formData: any = useSelector((state: any) => state.form[resource]);
+  const formData: any = useSelector((state: any) => state.form[resource].data);
 
   const deleteItem = (item: any) => {
     let selectedIds: any[] = [...(value?.length > 0 ? value : [])];

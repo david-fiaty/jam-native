@@ -15,7 +15,7 @@ type Props = {
 
 const LocationPickerField = ({ resource, placeholder, latitude, longitude, onPress, onChangeValue}: Props) => {
   const value = latitude?.value && longitude?.value ? `${latitude.value},${longitude.value}` : '';
-  const formData: any = useSelector((state: any) => state.form[resource]);
+  const formData: any = useSelector((state: any) => state.form[resource].data);
 
   useEffect(() => {
     onChangeValue(formData);

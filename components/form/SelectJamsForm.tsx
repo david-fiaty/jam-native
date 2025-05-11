@@ -28,7 +28,7 @@ const SelectJamsForm = ({ resource, profileId, field }: Props) => {
   const [selectedIds, setSelectedIds] = useState<any>([]);
   const [profileItem, setProfileItem] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const formData: any = useSelector((state: any) => state.form[resource]);
+  const formData: any = useSelector((state: any) => state.form[resource].data);
 
   const toggleItem = (row: any) => {
     let idArray = [...selectedIds];

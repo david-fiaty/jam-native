@@ -20,7 +20,7 @@ const SectorsList = ({ resource, field }: Props) => {
   const dispatch = useDispatch();
   const [sectorsData, setSectorsData] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const formData: any = useSelector((state: any) => state.form[resource]);
+  const formData: any = useSelector((state: any) => state.form[resource].data);
 
   const updateSelection = (item: any, subItem: any) => {
     let selection: any[] = [...formData?.[field] || []];

@@ -15,7 +15,7 @@ const resource: string = 'signup';
 
 const SignupSection = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const formData: any = useSelector((state: any) => state.form[resource]);
+  const formData: any = useSelector((state: any) => state.form[resource].data);
 
   const containerStyle: any = {
     paddingTop: formData?.success === true ? Layout.space.base*4 : 0,
