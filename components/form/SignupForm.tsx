@@ -28,7 +28,7 @@ const SignupForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const formData = useSelector((state: any) => state.form[resource]);
-  const signupData: any = useSelector((state: any) => state.form[resource]);
+  const signupData: any = useSelector((state: any) => state.form[resource].data);
 
   const submitForm = async () => {
     let { password, password_confirmation, ...profileData } = formData;

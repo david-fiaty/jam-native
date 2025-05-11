@@ -14,7 +14,6 @@ import DividerView from "../view/DividerView";
 import ModalManager from "@/manager/ModalManager";
 import SpinnerView from "../view/SpinnerView";
 import SectionManager from "@/manager/SectionManager";
-import TextView from "../view/TextView";
 
 const resource: string = 'profile';
 
@@ -23,7 +22,7 @@ const ProfileSection = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
-  const formData = useSelector((state: any) => state.form?.[resource]);
+  const formData = useSelector((state: any) => state.form[resource].data);
 
   useEffect(() => {
     (async () => {

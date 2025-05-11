@@ -8,7 +8,7 @@ class FormManager {
     let errors: any[] = [];
 
     if (rules.length > 0) {
-      errors = this.validateFied(key, value, rules);
+      errors = this.validateField(key, value, rules);
     }
 
     if (errors.length) {
@@ -24,13 +24,14 @@ class FormManager {
   addValue(resource: string, key: any, value: any) {
     Store.dispatch(setFormData<any>({
       resource: resource,
-      key: this.getFieldKey(key),
+      key: this.getTargetKey(key),
       value: value,
     }));
   }
 
   addClientError(resource: string, key: any, value: any, errors: any[]) {
-    this.clearError(resource, key);
+    let targetKey: string = this.getTargetKey(key);
+    this.clearError(resource, targetKey);
     let formErrors: any[] = [...Store.getState().form.errors];
     
     Store.dispatch(setFormErrors<any>([...formErrors, {
@@ -57,15 +58,17 @@ class FormManager {
 
   // Todo - Fix errors not clearing up
   clearError(resource: string, key: any) {
+    let targetKey: string = this.getTargetKey(key);
     let formErrors: any[] = [...Store.getState().form.errors];
-    formErrors = formErrors.filter((o: any) => o.resource !== resource && o.key !== key);
+    formErrors = formErrors.filter((o: any) => o.resource !== resource && o.key !== targetKey);
     
     Store.dispatch(setFormErrors<any>(formErrors));
   }
   
   renderError(key: string) {
+    let targetKey: string = this.getTargetKey(key);
     let formErrors: any[] = Store.getState().form.errors;
-    let fieldError: any = formErrors.find((o: any) => o.key === key);
+    let fieldError: any = formErrors.find((o: any) => o.key === targetKey);
 
     if (fieldError) {
       return <FieldErrorView message={fieldError.message} />;
@@ -74,14 +77,14 @@ class FormManager {
     return <></>;
   }
 
-  validateFied(key: string, value: any, rules: any[]) {
+  validateField(key: string, value: any, rules: any[]) {
     let fieldValue: any = value;
-    let fieldRules: any = this.getValidationRules();
     let targetKey: string = key;
     let errors: any = [];
+    let fieldRules: any = this.getValidationRules();
 
     if (this.isPathKey(key)) {
-      targetKey = this.getFieldKey(key);
+      targetKey = this.getTargetKey(key);
       fieldValue = fieldValue[targetKey];
     }
 
@@ -97,7 +100,7 @@ class FormManager {
     return errors;
   }
 
-  getFieldKey(key: string) {
+  getTargetKey(key: string) {
     let keyParts: any[] = key.split('.');
     let targetKey = keyParts[keyParts.length - 1];
 

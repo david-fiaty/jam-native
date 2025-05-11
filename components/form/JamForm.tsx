@@ -35,7 +35,7 @@ const JamForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
-  const formData = useSelector((state: any) => state.form[resource]);
+  const formData = useSelector((state: any) => state.form[resource].data);
   const jamCategories = StaticData.jamCategories;
 
   const submitForm = async () => {
