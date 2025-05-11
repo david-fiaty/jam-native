@@ -16,6 +16,7 @@ import SectionManager from "@/manager/SectionManager";
 import FormManager from "@/manager/FormManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
+import CountryPhoneCodeField from "@/components/field/CountryPhoneCodeField";
 
 const resource: string = 'signup';
 
@@ -61,6 +62,14 @@ const SignupPhoneForm = () => {
 
   return (
     <View style={[Layout.formContainer, styles.container]}>
+      <TextView style={styles.label}>{i18n.t('Country')}</TextView>
+      <CountryPhoneCodeField
+        value={formData?.country || ''}
+        //onChangeText={(value: string) => FormManager.updateField(resource, 'country', value, ['string'])}
+      />
+      {FormManager.renderError('country')}
+
+
       <TextView style={styles.label}>{i18n.t('Email')}</TextView>
       <InputTextField
         value={formData?.email || ''}

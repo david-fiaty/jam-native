@@ -10,14 +10,14 @@ type Props = {
   onChangeValue?: (option: any) => void;
 };
 
-const ProfileTypeField = ({value, disabled, onChangeValue}: Props) => {
-  const profileTypes = StaticData.profileTypes;
+const CountryPhoneCodeField = ({value, disabled, onChangeValue}: Props) => {
+  const countryCodes = StaticData.countryPhoneCodes;
 
   const buildOptions = (optionsData: any) => {    
     return [...(optionsData || [])].map((item: any) => {
       return {
-        value: item?.id,
-        label: item?.label,
+        value: item.code,
+        label: `${item.name} (+${item.prefix})`,
       }
     });
   };
@@ -25,9 +25,9 @@ const ProfileTypeField = ({value, disabled, onChangeValue}: Props) => {
   return (
     <BoxView direction="column" align="left" style={styles.container}>
       <SelectListBase 
-        placeholder={i18n.t('Select a profile type')}
+        placeholder={i18n.t('Select a country phone code')}
         value={value}
-        data={buildOptions(profileTypes)}  
+        data={buildOptions(countryCodes)}  
         onChangeValue={onChangeValue}
         disabled={disabled}
       />
@@ -41,4 +41,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileTypeField;
+export default CountryPhoneCodeField;
