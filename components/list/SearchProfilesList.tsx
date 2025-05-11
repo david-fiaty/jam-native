@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import ListView from "../view/ListView";
@@ -7,6 +7,7 @@ import i18n from "@/translation/i18n";
 import ProfileListItem from "./list-item/ProfileListItem";
 import TextView from "../view/TextView";
 import SectionManager from "@/manager/SectionManager";
+import BoxView from "../view/BoxView";
 
 type Props = {
   data?: any;
@@ -45,13 +46,19 @@ const SearchProfilesList = ({ data, filter }: Props) => {
   }, [isLoaded, data, filter]);
 
   return (
-    <View style={styles.container}>
+    <BoxView 
+      direction="column"
+      align="flex-start"
+      justify="flex-start"
+      scroll={true}
+      style={styles.container} 
+    >
       <ListView
         data={currentData}
         scrollEnabled={false}
         renderItem={(row: any) => renderItem(row)}
       />
-    </View>
+    </BoxView>
   );
 };
 
