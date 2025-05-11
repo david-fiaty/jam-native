@@ -24,14 +24,9 @@ const SignupSection = () => {
     paddingTop: formData?.success === true ? Layout.space.base*4 : 0,
   };
 
-  const resetForm = () => {
-    //dispatch(setValue(null));
-  }
-
   useEffect(() => {
     (async () => {
         if (!isLoaded) {
-          //resetForm(); Todo - Enable this and fix reset issue
           setCurrentTab((StaticData.authTabs.find((o: any) => o?.default === true))?.id);
           setIsLoaded(true);
         }
