@@ -19,6 +19,7 @@ import ScreenManager from "@/manager/ScreenManager";
 import CountryPhoneCodeField from "@/components/field/CountryPhoneCodeField";
 import PhoneServiceField from "@/components/field/PhoneServiceField";
 import StaticData from "@/constants/StaticData";
+import IconView from "@/components/view/IconView";
 
 const resource: string = 'signup';
 
@@ -86,6 +87,7 @@ const SignupPhoneForm = () => {
         placeholder={i18n.t('Enter your phone nnumber')}
         keyboardType="number-pad"
         onChangeText={(value: string) => FormManager.updateField(resource, 'phone', value, ['number'])}
+        rightIcon={<IconView name="phone" theme="transparent" />}
         //disabled={isEmailFieldDisabled()}
       />
       {FormManager.renderError('phone')}
