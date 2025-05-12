@@ -171,6 +171,7 @@ const StaticData = {
     {
       id: 'sms',
       label: i18n.t('SMS'),
+      default: true,
     },
     {
       id: 'whatsapp',
