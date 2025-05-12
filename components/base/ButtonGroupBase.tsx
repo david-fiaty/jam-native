@@ -10,7 +10,7 @@ type Props = {
 };
 
 const ButtonGroupBase = ({value, data, disabled, onChangeValue}: Props) => {
-  const [selectedValue, setSelectedValue] = useState<any>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const buttons = [
     { 
       element: () => <Text>Hello</Text>,
@@ -20,7 +20,7 @@ const ButtonGroupBase = ({value, data, disabled, onChangeValue}: Props) => {
     }, 
     { 
       element: () => <Text>ButtonGroup</Text>,
-    }
+    },
   ];
 
   const onChange = ((index: any) => {
@@ -33,7 +33,7 @@ const ButtonGroupBase = ({value, data, disabled, onChangeValue}: Props) => {
     <View style={styles.container}>
       <ButtonGroup 
         onPress={onChange}
-        selectedIndex={selectedValue}
+        selectedIndex={selectedIndex}
         buttons={buttons}
         disabled={disabled}
       />
