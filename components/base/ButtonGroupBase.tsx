@@ -11,6 +11,19 @@ type Props = {
 
 const ButtonGroupBase = ({value, data, disabled, onChangeValue}: Props) => {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
+
+  const buildOptions = (optionsData: any) => {
+    console.log(optionsData)
+    return []
+    return (optionsData || []).map((item: any) => {
+      return {
+        value: item?.code?.toLowerCase(),
+        label: item?.name,
+      }
+    });
+  };
+
+
   const buttons = [
     { 
       id: 'hello',
@@ -38,7 +51,7 @@ const ButtonGroupBase = ({value, data, disabled, onChangeValue}: Props) => {
       <ButtonGroup 
         onPress={onChange}
         selectedIndex={selectedIndex}
-        buttons={buttons}
+        buttons={buildOptions(data)}
         disabled={disabled}
       />
     </View>
