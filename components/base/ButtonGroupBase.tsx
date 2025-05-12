@@ -17,7 +17,7 @@ const ButtonGroupBase = ({value, data, disabled, onChangeValue}: Props) => {
       return {
         ...o,
         ...{ element: () => <Text>{o.label}</Text>},
-      }
+      };
     });
   };
 
