@@ -13,13 +13,16 @@ const ButtonGroupBase = ({value, data, disabled, onChangeValue}: Props) => {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const buttons = [
     { 
+      id: 'hello',
       element: () => <Text>Hello</Text>,
     }, 
     { 
+      id: 'world',
       element: () => <Text>World</Text>,
     }, 
     { 
-      element: () => <Text>ButtonGroup</Text>,
+      id: 'group',
+      element: () => <Text>Group</Text>,
     },
   ];
 
