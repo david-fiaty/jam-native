@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
-import { ButtonGroup } from "@rneui/themed";
+import { StyleSheet, View } from "react-native";
+import { ButtonGroup } from "@rneui/base";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
+import TextView from "../view/TextView";
 
 type Props = {
   value?: any;
@@ -19,7 +20,7 @@ const ButtonGroupBase = ({value, data, disabled, containerStyle, onChangeValue}:
     return optionsData.map((o: any) => {
       return {
         ...o,
-        ...{ element: () => <Text>{o.label}</Text>},
+        ...{ element: () => <TextView>{o.label}</TextView>},
       };
     });
   };
@@ -40,6 +41,8 @@ const ButtonGroupBase = ({value, data, disabled, containerStyle, onChangeValue}:
         disabled={disabled}
         containerStyle={[styles.groupContainer, containerStyle]}
         buttonContainerStyle={styles.buttonContainer}
+        //selectedButtonStyle={{backgroundColor: 'white', }}
+        //selectedTextStyle={{ color: Colors.white }}
       />
     </View>
   );
@@ -47,18 +50,19 @@ const ButtonGroupBase = ({value, data, disabled, containerStyle, onChangeValue}:
 
 const styles = StyleSheet.create({
   container: {
+    /*
     backgroundColor: Colors.secondary,
     borderWidth: Layout.borderWidth.base, 
     borderColor: Colors.secondary, 
     borderRadius: Layout.radius.round,
+    */
   },
   groupContainer: {
-    backgroundColor: 'gray',
     padding: 0,
     margin: 0,
   },
   buttonContainer: {
-    backgroundColor: 'green',
+    backgroundColor: Colors.secondary,
     padding: 0,
     margin: 0,
   },
