@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
   label: {
     alignSelf: 'flex-start',
   },
+  
 });
 
 export default SignupEmailForm;
