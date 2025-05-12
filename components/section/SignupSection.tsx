@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useSelector } from "react-redux";
 import { Layout } from '@/constants/Layout';
-
 import LogoView from '../view/LogoView';
 import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
