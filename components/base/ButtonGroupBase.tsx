@@ -9,13 +9,19 @@ type Props = {
   onChangeValue?: (option: any) => void;
 };
 
-const component1 = () => <Text>Hello</Text>
-const component2 = () => <Text>World</Text>
-const component3 = () => <Text>ButtonGroup</Text>
-
 const ButtonGroupBase = ({value, data, disabled, onChangeValue}: Props) => {
   const [selectedValue, setSelectedValue] = useState<any>(null);
-  const buttons = [{ element: component1 }, { element: component2 }, { element: component3 }]
+  const buttons = [
+    { 
+      element: () => <Text>Hello</Text>,
+    }, 
+    { 
+      element: () => <Text>World</Text>,
+    }, 
+    { 
+      element: () => <Text>ButtonGroup</Text>,
+    }
+  ];
 
   const onChange = ((index: any) => {
     console.log(index);
