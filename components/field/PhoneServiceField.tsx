@@ -13,7 +13,7 @@ type Props = {
 
 const PhoneServiceField = ({value, disabled, onChangeValue}: Props) => {
   const phoneServices = StaticData.phoneServices;
-  
+
   return (    
     <ButtonGroupBase
       value={value}
