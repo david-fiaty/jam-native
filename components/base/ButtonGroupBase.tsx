@@ -44,9 +44,9 @@ const ButtonGroupBase = ({value, data, disabled, containerStyle, onChangeValue}:
 
   return (
     <ButtonGroup 
+      buttons={buildOptions()}
       onPress={onChange}
       selectedIndex={selectedIndex}
-      buttons={buildOptions()}
       disabled={disabled}
       containerStyle={[styles.groupContainer, containerStyle]}
       buttonContainerStyle={styles.buttonContainer}
