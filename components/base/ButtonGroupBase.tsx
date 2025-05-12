@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { ButtonGroup } from "@rneui/base";
 import { Layout } from "@/constants/Layout";
@@ -35,6 +35,12 @@ const ButtonGroupBase = ({value, data, disabled, containerStyle, onChangeValue}:
     setSelectedIndex(index);
     if (onChangeValue) onChangeValue(data[index]);
   });
+
+  useEffect(() => {
+    if (value) {
+      setSelectedIndex(data.findIndex((o: any) => o.id === value));
+    }
+  }, [value, data]);
 
   return (
     <ButtonGroup 
