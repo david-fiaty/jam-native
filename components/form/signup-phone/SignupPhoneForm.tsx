@@ -39,7 +39,7 @@ const SignupPhoneForm = () => {
     };
 
     let result: any = await UserManager.sendSignupCode(payload);
-
+  
     if (result.success === false) {
       FormManager.addServerErrors(resource, { phone: [i18n.t('Invalid phone number provided.')] });
 
