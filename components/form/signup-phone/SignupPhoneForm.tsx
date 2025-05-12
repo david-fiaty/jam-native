@@ -37,14 +37,13 @@ const SignupPhoneForm = () => {
       phone_service: formData?.phone_service,
     };
 
-    /*
-    
-
-    let result: any = await UserManager.sendSignupCode({ email: formData?.email });
+    let result: any = await UserManager.sendSignupCode(payload);
 
     if (result.success === false) {
+      FormManager.addServerErrors(resource, { phone: [i18n.t('Invalid phone number provided.')] });
+
       ScreenManager.showMessage({
-        title: i18n.t('Registration error'),
+        title: i18n.t('Signup error'),
         content: i18n.t('Invalid data submitted.'),
       });
     }
@@ -53,7 +52,6 @@ const SignupPhoneForm = () => {
     }
 
     setIsProcessing(false);
-    */
   };
 
   const isSubmitButtonDisabled = () => {
