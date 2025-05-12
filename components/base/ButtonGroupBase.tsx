@@ -33,18 +33,16 @@ const ButtonGroupBase = ({value, data, disabled, containerStyle, onChangeValue}:
   });
 
   return (
-    <View style={styles.container}>
-      <ButtonGroup 
-        onPress={onChange}
-        selectedIndex={selectedIndex}
-        buttons={buildOptions(data)}
-        disabled={disabled}
-        containerStyle={[styles.groupContainer, containerStyle]}
-        buttonContainerStyle={styles.buttonContainer}
-        //selectedButtonStyle={{backgroundColor: 'white', }}
-        //selectedTextStyle={{ color: Colors.white }}
-      />
-    </View>
+    <ButtonGroup 
+      onPress={onChange}
+      selectedIndex={selectedIndex}
+      buttons={buildOptions(data)}
+      disabled={disabled}
+      containerStyle={[styles.groupContainer, containerStyle]}
+      buttonContainerStyle={styles.buttonContainer}
+      //selectedButtonStyle={{backgroundColor: 'white', }}
+      //selectedTextStyle={{ color: Colors.white }}
+    />
   );
 };
 
@@ -58,8 +56,11 @@ const styles = StyleSheet.create({
     */
   },
   groupContainer: {
-    padding: 0,
-    margin: 0,
+    marginLeft: 0,
+    marginRight: 0,
+    marginTop: 0,
+    marginBottom: 0,
+    borderRadius: Layout.radius.round,
   },
   buttonContainer: {
     backgroundColor: Colors.secondary,
