@@ -1,8 +1,4 @@
-import { StyleSheet } from 'react-native';
-import BoxView from '../view/BoxView';
-import SelectListBase from '../base/SelectListBase';
 import StaticData from '@/constants/StaticData';
-import i18n from '@/translation/i18n';
 import ButtonGroupBase from '../base/ButtonGroupBase';
 
 type Props = {
