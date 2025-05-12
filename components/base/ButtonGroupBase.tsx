@@ -25,7 +25,8 @@ const ButtonGroupBase = ({value, data, disabled, onChangeValue}: Props) => {
 
   const onChange = ((index: any) => {
     console.log(index);
-    //setSelectedValue(option.value);
+    setSelectedIndex(index);
+    
     //if (onChangeValue) onChangeValue(option);
   });
 
