@@ -20,7 +20,13 @@ const ButtonGroupBase = ({value, data, disabled, containerStyle, onChangeValue}:
     return optionsData.map((o: any) => {
       return {
         ...o,
-        ...{ element: () => <TextView>{o.label}</TextView>},
+        ...{ element: (target: any) => {
+          return (
+            <TextView style={target.isSelected ? styles.selectedItem : {}}>
+              {o.label}
+            </TextView>
+          );
+        }},
       };
     });
   };
@@ -40,8 +46,6 @@ const ButtonGroupBase = ({value, data, disabled, containerStyle, onChangeValue}:
       disabled={disabled}
       containerStyle={[styles.groupContainer, containerStyle]}
       buttonContainerStyle={styles.buttonContainer}
-      //selectedButtonStyle={{backgroundColor: 'white', }}
-      //selectedTextStyle={{ color: Colors.white }}
     />
   );
 };
@@ -66,6 +70,9 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.secondary,
     padding: 0,
     margin: 0,
+  },
+  selectedItem: {
+    color: Colors.white,
   },
 });
 
