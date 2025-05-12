@@ -85,7 +85,7 @@ const SignupPhoneForm = () => {
         value={formData?.phone || ''}
         placeholder={i18n.t('Enter your phone nnumber')}
         keyboardType="number-pad"
-        onChangeText={(value: string) => FormManager.updateField(resource, 'phone', value, ['string'])}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'phone', value, ['number'])}
         //disabled={isEmailFieldDisabled()}
       />
       {FormManager.renderError('phone')}
