@@ -29,6 +29,9 @@ const SignupPhoneForm = () => {
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const submitData = async () => {
+    console.log('formData', formData);
+
+    /*
     setIsProcessing(true);
 
     let result: any = await UserManager.sendSignupCode({ email: formData?.email });
@@ -44,6 +47,7 @@ const SignupPhoneForm = () => {
     }
 
     setIsProcessing(false);
+    */
   };
 
   const isSubmitButtonDisabled = () => {
@@ -63,8 +67,6 @@ const SignupPhoneForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(formData)
-
   return (
     <View style={[Layout.formContainer, styles.container]}>
       <TextView style={styles.label}>{i18n.t('Country')}</TextView>
@@ -73,7 +75,6 @@ const SignupPhoneForm = () => {
         onChangeValue={(option: any) => FormManager.updateField(resource, 'country', option.value, ['string'])}
       />
       {FormManager.renderError('country')}
-
 
       <TextView style={styles.label}>{i18n.t('Phone')}</TextView>
       <InputTextField
@@ -96,7 +97,7 @@ const SignupPhoneForm = () => {
           label={i18n.t('Continue')}
           isProcessing={isProcessing}
           onPress={submitData}
-          disabled={isSubmitButtonDisabled()}
+          //disabled={isSubmitButtonDisabled()}
         />
       )}
 
