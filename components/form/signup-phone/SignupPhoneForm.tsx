@@ -18,6 +18,7 @@ import SpinnerView from "@/components/view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import CountryPhoneCodeField from "@/components/field/CountryPhoneCodeField";
 import PhoneServiceField from "@/components/field/PhoneServiceField";
+import StaticData from "@/constants/StaticData";
 
 const resource: string = 'signup';
 
@@ -55,9 +56,10 @@ const SignupPhoneForm = () => {
 
   useEffect(() => {
     if (!isLoaded) {
+      FormManager.updateField(resource, 'phone_service', (StaticData.phoneServices.find((o: any) => o.default === true))?.id);
       setIsLoaded(true);
     }
-  }, [isLoaded]);
+  }, [isLoaded, resource]);
 
   if (!isLoaded) return <SpinnerView />;
 
