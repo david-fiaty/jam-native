@@ -53,6 +53,7 @@ const icons = {
   refresh: ({iconStyle, size}: IconProps) => <Ionicons name="refresh-outline" size={size} style={iconStyle} />,
   upload: ({iconStyle, size}: IconProps) => <Ionicons name="cloud-upload-outline" size={size} style={iconStyle} />,
   image: ({iconStyle, size}: IconProps) => <Ionicons name="image-outline" size={size} style={iconStyle} />,
+  phone: ({iconStyle, size}: IconProps) => <Ionicons name="keypad-outline" size={size} style={iconStyle} />,
 };
 
 const IconBase = ({name, size, containerStyle, iconStyle}: Props) => {
