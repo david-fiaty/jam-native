@@ -82,7 +82,7 @@ const SignupPhoneForm = () => {
 
       <TextView style={styles.label}>{i18n.t('Phone service')}</TextView>
       <PhoneServiceField 
-        onChangeValue={((option: any) => console.log('----', option))}
+        onChangeValue={((option: any) => FormManager.updateField(resource, 'phone_service', option.id, ['string']))}
       />
 
       {!isEmailFieldDisabled() && (
