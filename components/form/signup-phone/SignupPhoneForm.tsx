@@ -80,7 +80,7 @@ const SignupPhoneForm = () => {
       />
       {FormManager.renderError('country')}
 
-      <TextView style={styles.label}>{i18n.t('Phone')}</TextView>
+      <TextView style={styles.label}>{i18n.t('Phone number')}</TextView>
       <InputTextField
         value={formData?.phone || ''}
         placeholder={i18n.t('Enter your phone nnumber')}
