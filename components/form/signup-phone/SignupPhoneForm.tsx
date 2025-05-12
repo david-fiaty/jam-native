@@ -29,19 +29,16 @@ const SignupPhoneForm = () => {
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const submitData = async () => {
-
+    setIsProcessing(true);
+    
     let payload: any = {
-      country_code: `+${(StaticData.countryPhoneCodes.find((o: any) => o.code === formData?.country))?.prefix}`,
+      country_code: (StaticData.countryPhoneCodes.find((o: any) => o.code === formData?.country))?.prefix,
       phone_without_country_code: formData?.phone,
       phone_service: formData?.phone_service,
     };
 
-
-    console.log('formData', payload);
-
-
     /*
-    setIsProcessing(true);
+    
 
     let result: any = await UserManager.sendSignupCode({ email: formData?.email });
 
