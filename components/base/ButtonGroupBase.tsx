@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { ButtonGroup } from "@rneui/base";
 import { Layout } from "@/constants/Layout";
@@ -7,7 +7,7 @@ import TextView from "../view/TextView";
 
 type Props = {
   value?: any;
-  data?: object;
+  data: any[];
   disabled?: boolean;
   containerStyle?: any
   onChangeValue?: (option: any) => void;
@@ -16,8 +16,8 @@ type Props = {
 const ButtonGroupBase = ({value, data, disabled, containerStyle, onChangeValue}: Props) => {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
-  const buildOptions = (optionsData: any) => {
-    return optionsData.map((o: any) => {
+  const buildOptions = () => {
+    return data.map((o: any) => {
       return {
         ...o,
         ...{ element: (target: any) => {
@@ -32,17 +32,21 @@ const ButtonGroupBase = ({value, data, disabled, containerStyle, onChangeValue}:
   };
 
   const onChange = ((index: any) => {
-    console.log(index);
     setSelectedIndex(index);
-    
-    //if (onChangeValue) onChangeValue(option);
+    if (onChangeValue) onChangeValue(data[index]);
   });
+
+  useEffect(() => {
+    if (value) {
+      setSelectedIndex(data.findIndex((o: any) => o.id === value));
+    }
+  }, [value, data]);
 
   return (
     <ButtonGroup 
+      buttons={buildOptions()}
       onPress={onChange}
       selectedIndex={selectedIndex}
-      buttons={buildOptions(data)}
       disabled={disabled}
       containerStyle={[styles.groupContainer, containerStyle]}
       buttonContainerStyle={styles.buttonContainer}
