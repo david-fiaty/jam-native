@@ -80,6 +80,7 @@ const SignupPhoneForm = () => {
       />
       {FormManager.renderError('phone')}
 
+      <TextView style={styles.label}>{i18n.t('Receive the confirmation code by')}</TextView>
       <PhoneServiceField />
 
       {!isEmailFieldDisabled() && (
