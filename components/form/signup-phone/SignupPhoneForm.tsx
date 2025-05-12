@@ -61,12 +61,14 @@ const SignupPhoneForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
+  console.log(formData)
+
   return (
     <View style={[Layout.formContainer, styles.container]}>
       <TextView style={styles.label}>{i18n.t('Country')}</TextView>
       <CountryPhoneCodeField
         value={formData?.country || ''}
-        //onChangeText={(value: string) => FormManager.updateField(resource, 'country', value, ['string'])}
+        onChangeValue={(option: any) => FormManager.updateField(resource, 'country', option.value, ['string'])}
       />
       {FormManager.renderError('country')}
 
@@ -75,6 +77,7 @@ const SignupPhoneForm = () => {
       <InputTextField
         value={formData?.phone || ''}
         placeholder={i18n.t('Enter your phone nnumber')}
+        keyboardType="number-pad"
         onChangeText={(value: string) => FormManager.updateField(resource, 'phone', value, ['string'])}
         //disabled={isEmailFieldDisabled()}
       />
