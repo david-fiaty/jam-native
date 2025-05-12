@@ -18,6 +18,8 @@ import SpinnerView from "@/components/view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import CountryPhoneCodeField from "@/components/field/CountryPhoneCodeField";
 import PhoneServiceField from "@/components/field/PhoneServiceField";
+import StaticData from "@/constants/StaticData";
+import IconView from "@/components/view/IconView";
 
 const resource: string = 'signup';
 
@@ -29,12 +31,20 @@ const SignupPhoneForm = () => {
 
   const submitData = async () => {
     setIsProcessing(true);
+    
+    let payload: any = {
+      country_code: (StaticData.countryPhoneCodes.find((o: any) => o.code === formData?.country))?.prefix,
+      phone_without_country_code: formData?.phone,
+      phone_service: formData?.phone_service,
+    };
 
-    let result: any = await UserManager.sendSignupCode({ email: formData?.email });
+    let result: any = await UserManager.sendSignupCode(payload);
 
     if (result.success === false) {
+      FormManager.addServerErrors(resource, { phone: [i18n.t('Invalid phone number provided.')] });
+
       ScreenManager.showMessage({
-        title: i18n.t('Registration error'),
+        title: i18n.t('Signup error'),
         content: i18n.t('Invalid data submitted.'),
       });
     }
@@ -55,13 +65,12 @@ const SignupPhoneForm = () => {
 
   useEffect(() => {
     if (!isLoaded) {
+      FormManager.updateField(resource, 'phone_service', (StaticData.phoneServices.find((o: any) => o.default === true))?.id);
       setIsLoaded(true);
     }
-  }, [isLoaded]);
+  }, [isLoaded, resource]);
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(formData)
 
   return (
     <View style={[Layout.formContainer, styles.container]}>
@@ -72,13 +81,13 @@ const SignupPhoneForm = () => {
       />
       {FormManager.renderError('country')}
 
-
-      <TextView style={styles.label}>{i18n.t('Phone')}</TextView>
+      <TextView style={styles.label}>{i18n.t('Phone number')}</TextView>
       <InputTextField
         value={formData?.phone || ''}
         placeholder={i18n.t('Enter your phone nnumber')}
         keyboardType="number-pad"
-        onChangeText={(value: string) => FormManager.updateField(resource, 'phone', value, ['string'])}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'phone', value, ['number'])}
+        rightIcon={<IconView name="phone" theme="transparent" />}
         //disabled={isEmailFieldDisabled()}
       />
       {FormManager.renderError('phone')}
@@ -94,7 +103,7 @@ const SignupPhoneForm = () => {
           label={i18n.t('Continue')}
           isProcessing={isProcessing}
           onPress={submitData}
-          disabled={isSubmitButtonDisabled()}
+          //disabled={isSubmitButtonDisabled()}
         />
       )}
 

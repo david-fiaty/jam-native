@@ -17,7 +17,7 @@ const CountryPhoneCodeField = ({value, disabled, onChangeValue}: Props) => {
     return [...(optionsData || [])].map((item: any) => {
       return {
         value: item.code,
-        label: `${item.name} (+${item.prefix})`,
+        label: `${item.name} (${item.prefix})`,
       }
     });
   };
