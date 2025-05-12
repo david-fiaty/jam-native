@@ -17,7 +17,7 @@ import FormManager from "@/manager/FormManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import CountryPhoneCodeField from "@/components/field/CountryPhoneCodeField";
-import ButtonGroupBase from "@/components/base/ButtonGroupBase";
+import PhoneServiceField from "@/components/field/PhoneServiceField";
 
 const resource: string = 'signup';
 
@@ -61,12 +61,14 @@ const SignupPhoneForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
+  console.log(formData)
+
   return (
     <View style={[Layout.formContainer, styles.container]}>
       <TextView style={styles.label}>{i18n.t('Country')}</TextView>
       <CountryPhoneCodeField
         value={formData?.country || ''}
-        //onChangeText={(value: string) => FormManager.updateField(resource, 'country', value, ['string'])}
+        onChangeValue={(option: any) => FormManager.updateField(resource, 'country', option.value, ['string'])}
       />
       {FormManager.renderError('country')}
 
@@ -75,12 +77,17 @@ const SignupPhoneForm = () => {
       <InputTextField
         value={formData?.phone || ''}
         placeholder={i18n.t('Enter your phone nnumber')}
+        keyboardType="number-pad"
         onChangeText={(value: string) => FormManager.updateField(resource, 'phone', value, ['string'])}
         //disabled={isEmailFieldDisabled()}
       />
       {FormManager.renderError('phone')}
 
-      <ButtonGroupBase />
+      <TextView style={styles.label}>{i18n.t('Phone service')}</TextView>
+      <PhoneServiceField 
+        value={formData?.phone_service || ''}
+        onChangeValue={((option: any) => FormManager.updateField(resource, 'phone_service', option.id, ['string']))}
+      />
 
       {!isEmailFieldDisabled() && (
         <ButtonView

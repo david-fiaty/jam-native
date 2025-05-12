@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useSelector } from "react-redux";
 import { Layout } from '@/constants/Layout';
-import SignupEmailCodeForm from '../form/signup-email/SignupEmailCodeForm';
-import SignupEmailForm from '../form/signup-email/SignupEmailCodeForm';
 import LogoView from '../view/LogoView';
 import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
@@ -12,6 +10,8 @@ import SignupForm from '../form/SignupForm';
 import SpinnerView from '../view/SpinnerView';
 import StaticData from '@/constants/StaticData';
 import TabsView from '../view/TabsView';
+import SignupEmailCodeForm from '../form/signup-email/SignupEmailCodeForm';
+import SignupEmailForm from '../form/signup-email/SignupEmailForm';
 import SignupPhoneForm from '../form/signup-phone/SignupPhoneForm';
 import SignupPhoneCodeForm from '../form/signup-phone/SignupPhoneCodeForm';
 
