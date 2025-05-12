@@ -29,7 +29,9 @@ const PhoneServiceField = ({value, disabled, onChangeValue}: Props) => {
   
   return (
     <BoxView direction="column" align="left" style={styles.container}>
-      <ButtonGroupBase />
+      <ButtonGroupBase
+        data={phoneServices}
+      />
       
       { /*<SelectListBase 
         placeholder={i18n.t('Select a phone service')}
