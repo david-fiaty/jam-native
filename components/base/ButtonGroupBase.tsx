@@ -1,41 +1,82 @@
-import { ButtonGroup } from "@rneui/themed";
-import React, { useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, View } from "react-native";
+import { ButtonGroup } from "@rneui/base";
+import { Layout } from "@/constants/Layout";
+import { Colors } from "@/constants/Colors";
+import TextView from "../view/TextView";
 
 type Props = {
   value?: any;
-  data?: object;
+  data: any[];
+  disabled?: boolean;
+  containerStyle?: any
   onChangeValue?: (option: any) => void;
 };
 
-const component1 = () => <Text>Hello</Text>
-const component2 = () => <Text>World</Text>
-const component3 = () => <Text>ButtonGroup</Text>
+const ButtonGroupBase = ({value, data, disabled, containerStyle, onChangeValue}: Props) => {
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
-const ButtonGroupBase = ({value, data, onChangeValue}: Props) => {
-  const [selectedValue, setSelectedValue] = useState<any>(null);
-  const buttons = [{ element: component1 }, { element: component2 }, { element: component3 }]
+  const buildOptions = () => {
+    return data.map((o: any) => {
+      return {
+        ...o,
+        ...{ element: (target: any) => {
+          return (
+            <TextView style={target.isSelected ? styles.selectedItem : {}}>
+              {o.label}
+            </TextView>
+          );
+        }},
+      };
+    });
+  };
 
   const onChange = ((index: any) => {
-    console.log(index);
-    //setSelectedValue(option.value);
-    //if (onChangeValue) onChangeValue(option);
+    setSelectedIndex(index);
+    if (onChangeValue) onChangeValue(data[index]);
   });
 
+  useEffect(() => {
+    if (value) {
+      setSelectedIndex(data.findIndex((o: any) => o.id === value));
+    }
+  }, [value, data]);
+
   return (
-    <View style={styles.container}>
-      <ButtonGroup 
-        onPress={onChange}
-        selectedIndex={selectedValue}
-        buttons={buttons}
-      />
-    </View>
+    <ButtonGroup 
+      buttons={buildOptions()}
+      onPress={onChange}
+      selectedIndex={selectedIndex}
+      disabled={disabled}
+      containerStyle={[styles.groupContainer, containerStyle]}
+      buttonContainerStyle={styles.buttonContainer}
+    />
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    /*
+    backgroundColor: Colors.secondary,
+    borderWidth: Layout.borderWidth.base, 
+    borderColor: Colors.secondary, 
+    borderRadius: Layout.radius.round,
+    */
+  },
+  groupContainer: {
+    marginLeft: 0,
+    marginRight: 0,
+    marginTop: 0,
+    marginBottom: 0,
+    borderRadius: Layout.radius.round,
+  },
+  buttonContainer: {
+    backgroundColor: Colors.secondary,
+    padding: 0,
+    margin: 0,
+  },
+  selectedItem: {
+    color: Colors.white,
   },
 });
 

@@ -167,6 +167,16 @@ const StaticData = {
       label: i18n.t('Public'),
     },
   ],
+  phoneServices: [
+    {
+      id: 'sms',
+      label: i18n.t('SMS'),
+    },
+    {
+      id: 'whatsapp',
+      label: i18n.t('Whatsapp'),
+    },
+  ],
   countryPhoneCodes: [
     {
       'code': 'bj',

@@ -61,7 +61,7 @@ const SignupEmailForm = () => {
 
   return (
     <View style={[Layout.formContainer, styles.container]}>
-      <TextView style={styles.label}>{i18n.t('Email')}</TextView>
+      <TextView style={styles.label}>{i18n.t('Email address')}</TextView>
       <InputTextField
         value={formData?.email || ''}
         placeholder={i18n.t('Enter your email address')}
@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
   label: {
     alignSelf: 'flex-start',
   },
+  
 });
 
 export default SignupEmailForm;
