@@ -13,31 +13,13 @@ const ButtonGroupBase = ({value, data, disabled, onChangeValue}: Props) => {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
   const buildOptions = (optionsData: any) => {
-    console.log(optionsData)
-    return []
-    return (optionsData || []).map((item: any) => {
+    return optionsData.map((o: any) => {
       return {
-        value: item?.code?.toLowerCase(),
-        label: item?.name,
+        ...o,
+        ...{ element: () => <Text>{o.label}</Text>},
       }
     });
   };
-
-
-  const buttons = [
-    { 
-      id: 'hello',
-      element: () => <Text>Hello</Text>,
-    }, 
-    { 
-      id: 'world',
-      element: () => <Text>World</Text>,
-    }, 
-    { 
-      id: 'group',
-      element: () => <Text>Group</Text>,
-    },
-  ];
 
   const onChange = ((index: any) => {
     console.log(index);
