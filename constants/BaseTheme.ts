@@ -30,9 +30,6 @@ const BaseTheme = createTheme({
         fontSize: Layout.fontSize.base,
       },
     },
-    Dropdown: {
-
-    },
   },
 });
 
