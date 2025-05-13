@@ -31,17 +31,15 @@ const LoginSection = () => {
   const [password, setPassword] = useState<string>('');
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const getLoginData = () => {
-    return Config.forceLogin.enabled === true ? Config.forceLogin.credentials :  {
+  const submitForm = async () => {
+    setIsProcessing(true);
+    
+    let payload: any = Config.forceLogin.enabled === true ? Config.forceLogin.credentials : {
       email: email,
       password: password,
     };
-  };
 
-  const submitForm = async () => {
-    setIsProcessing(true);
-    let data: any = getLoginData();
-    let result: any = await UserManager.login(data);
+    let result: any = await UserManager.login(payload);
     setIsProcessing(false);
 
     if (result?.error) {
