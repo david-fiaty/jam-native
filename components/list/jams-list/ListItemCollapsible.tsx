@@ -30,7 +30,8 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
   const getFirstSubSector = () => {
     let firstSector: any = sectorsData?.find((o: any) => o.id == row?.item?.sectors?.[0]);
 
-    console.log(firstSector?.sub_sectors)
+    // Todo - Implement subsectors display 
+    //console.log(firstSector?.sub_sectors)
 
     return firstSector?.name;
   };
