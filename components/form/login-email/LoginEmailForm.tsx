@@ -43,7 +43,7 @@ const LoginEmailForm = () => {
   };
 
   const isSubmitDisabled = () => {
-    return !formData?.email?.length || !formData?.password?.length;
+    return !Config.forceLogin.enabled === true && (!formData?.email?.length || !formData?.password?.length);
   };
 
   useEffect(() => {
