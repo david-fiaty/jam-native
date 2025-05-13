@@ -26,6 +26,10 @@ const SignupSection = () => {
     paddingTop: formData?.success === true ? Layout.space.base*4 : 0,
   };
 
+  const isTabsVisible = () => {
+    return !formData?.success === true && !formData?.session?.length;
+  };
+
   useEffect(() => {
     (async () => {
         if (!isLoaded) {
@@ -48,7 +52,7 @@ const SignupSection = () => {
       <LogoView size={80} />    
       <TextView style={styles.slogan}>{i18n.t('Create your JAM account')}</TextView> 
       
-      {!formData?.success === true && (
+      {isTabsVisible() === true && (
         <TabsView 
           tabs={StaticData.authTabs} 
           currentTab={currentTab} 
