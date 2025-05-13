@@ -12,7 +12,7 @@ import ScreenManager from '@/manager/ScreenManager';
 
 const resource: string = 'password';
 
-const PasswordForm = () => {
+const ResetPasswordForm = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const formData = useSelector((state: any) => state.form[resource]);
 
@@ -66,4 +66,4 @@ const PasswordForm = () => {
   );
 };
 
-export default PasswordForm;
+export default ResetPasswordForm;

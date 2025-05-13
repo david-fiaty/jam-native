@@ -18,7 +18,7 @@ const SettingsMenu = () => {
     },
     {
       label: i18n.t('Change password'),
-      onPress: () => SectionManager.push(router, 'password'),
+      onPress: () => SectionManager.push(router, 'change-password'),
     },
     {
       label: i18n.t('Language'),
