@@ -8,10 +8,11 @@ type Props = {
   value?: any;
   disabled?: any;
   containerStyle?: any;
+  elementStyle?: any;
   onChangeValue?: (option: any) => void;
 };
 
-const CountryPhoneCodeField = ({value, disabled, containerStyle, onChangeValue}: Props) => {
+const CountryPhoneCodeField = ({value, disabled, containerStyle, elementStyle, onChangeValue}: Props) => {
   const countryCodes = StaticData.countryPhoneCodes;
 
   const buildOptions = (optionsData: any) => {    
@@ -31,6 +32,7 @@ const CountryPhoneCodeField = ({value, disabled, containerStyle, onChangeValue}:
         data={buildOptions(countryCodes)}  
         onChangeValue={onChangeValue}
         disabled={disabled}
+        elementStyle={elementStyle}
         containerStyle={containerStyle}
       />
     </BoxView>
