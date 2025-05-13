@@ -45,6 +45,7 @@ const SignupPhoneCodeForm = () => {
     <>
       <TextView style={styles.label}>{i18n.t('Verification sent, check your email inbox')}</TextView>
       <InputTextField
+        keyboardType="number-pad"
         value={formData?.code || ''}
         placeholder={i18n.t('Verification code')}
         onChangeText={(value: string) => FormManager.updateField(resource, 'code', value)}
