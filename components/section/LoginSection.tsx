@@ -8,21 +8,18 @@ import LogoView from '../view/LogoView';
 import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
-import InputTextField from '../field/InputTextField';
 import SkipButton from '../button/SkipButton';
 import GoogleLoginButton from '../button/GoogleLoginButton';
 import FacebookLoginButton from '../button/FacebookLoginButton';
 import InstagramLoginButton from '../button/InstagramLoginButton';
-import UserManager from '@/manager/UserManager';
 import LinkView from '../view/LinkView';
-import ButtonView from '../view/ButtonView';
-import ScreenManager from '@/manager/ScreenManager';
 import DividerView from '../view/DividerView';
 import SectionManager from '@/manager/SectionManager';
 import TabsView from '../view/TabsView';
 import StaticData from '@/constants/StaticData';
 import SpinnerView from '../view/SpinnerView';
 import LoginEmailForm from '../form/login-email/LoginEmailForm';
+import LoginPhoneForm from '../form/login-phone/LoginPhoneForm';
 
 const LoginSection = () => {
   const router = useRouter();
@@ -60,6 +57,8 @@ const LoginSection = () => {
       />
       
       {currentTab === 'email' && <LoginEmailForm />}
+
+      {currentTab === 'phone' && <LoginPhoneForm />}
 
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
         <BoxView direction="row" align="center" justify="flex-start">
