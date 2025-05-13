@@ -29,7 +29,7 @@ const SignupPhoneForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
-  const submitData = async () => {
+  const submitForm = async () => {
     setIsProcessing(true);
     
     let payload: any = {
@@ -55,12 +55,8 @@ const SignupPhoneForm = () => {
     setIsProcessing(false);
   };
 
-  const isSubmitButtonDisabled = () => {
-    return !formData?.email?.length;
-  };
-
-  const isEmailFieldDisabled = () => {
-    return formData?.email?.length && formData?.session?.length;
+  const isSubmitDisabled = () => {
+    return !formData?.country?.length || !formData?.phone?.length || !formData?.phone_service?.length;
   };
 
   useEffect(() => {
@@ -97,34 +93,29 @@ const SignupPhoneForm = () => {
         value={formData?.phone_service || ''}
         onChangeValue={((option: any) => FormManager.updateField(resource, 'phone_service', option.id, ['string']))}
       />
+  
+      <ButtonView
+        label={i18n.t('Continue')}
+        isProcessing={isProcessing}
+        onPress={submitForm}
+        disabled={isSubmitDisabled()}
+      />
 
-      {!isEmailFieldDisabled() && (
-        <ButtonView
-          label={i18n.t('Continue')}
-          isProcessing={isProcessing}
-          onPress={submitData}
-          //disabled={isSubmitButtonDisabled()}
-        />
-      )}
+      <BoxView
+        direction="row"
+        align="center"
+        justify="space-between"
+        style={{ width: "100%" }}
+      >
+        <BoxView direction="row" align="center" justify="flex-start">
+          <TextView>{i18n.t("You have an account?")}</TextView>
+          <LinkView onPress={() => SectionManager.push(router, 'login')}>
+            {i18n.t("Sign in")}
+          </LinkView>
+        </BoxView>
+        <SkipButton onPress={() => SectionManager.push(router, Config.mainSection)} />
+      </BoxView>
 
-      {!isEmailFieldDisabled() && (
-        <>
-          <BoxView
-            direction="row"
-            align="center"
-            justify="space-between"
-            style={{ width: "100%" }}
-          >
-            <BoxView direction="row" align="center" justify="flex-start">
-              <TextView>{i18n.t("You have an account?")}</TextView>
-              <LinkView onPress={() => SectionManager.push(router, 'login')}>
-                {i18n.t("Sign in")}
-              </LinkView>
-            </BoxView>
-            <SkipButton onPress={() => SectionManager.push(router, Config.mainSection)} />
-          </BoxView>
-        </>
-      )}
     </View>
   );
 }

@@ -14,10 +14,15 @@ import SignupEmailCodeForm from '../form/signup-email/SignupEmailCodeForm';
 import SignupEmailForm from '../form/signup-email/SignupEmailForm';
 import SignupPhoneForm from '../form/signup-phone/SignupPhoneForm';
 import SignupPhoneCodeForm from '../form/signup-phone/SignupPhoneCodeForm';
+import FormManager from '@/manager/FormManager';
+
+type Props = {
+  reset?: boolean;
+};
 
 const resource: string = 'signup';
 
-const SignupSection = () => {
+const SignupSection = ({ reset }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [currentTab, setCurrentTab] = useState<any>(null);
   const formData: any = useSelector((state: any) => state.form[resource]);
@@ -26,14 +31,20 @@ const SignupSection = () => {
     paddingTop: formData?.success === true ? Layout.space.base*4 : 0,
   };
 
+  const isTabsVisible = () => {
+    return !formData?.success === true && !formData?.session?.length;
+  };
+
   useEffect(() => {
     (async () => {
         if (!isLoaded) {
           setCurrentTab((StaticData.authTabs.find((o: any) => o?.default === true))?.id);
+
+          if (reset) FormManager.resetForm(resource);
           setIsLoaded(true);
         }
     })();
-  }, [isLoaded]);
+  }, [isLoaded, reset, resource]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -48,11 +59,13 @@ const SignupSection = () => {
       <LogoView size={80} />    
       <TextView style={styles.slogan}>{i18n.t('Create your JAM account')}</TextView> 
       
-      <TabsView 
-        tabs={StaticData.authTabs} 
-        currentTab={currentTab} 
-        onItemPress={(tabId: string) => setCurrentTab(tabId)}
-      />
+      {isTabsVisible() === true && (
+        <TabsView 
+          tabs={StaticData.authTabs} 
+          currentTab={currentTab} 
+          onItemPress={(tabId: string) => setCurrentTab(tabId)}
+        />
+      )}
 
       {currentTab === 'email' && (
         <>
