@@ -44,6 +44,7 @@ const LoginSection = () => {
       align="center" 
       justify="center" 
       style={Layout.screenContent}
+      //scroll={true} // Todo - Fix content positioning when this is enabled 
     >
       <LogoView size={80} />    
       <TextView style={styles.slogan}>{i18n.t('Welcome back')}</TextView> 
