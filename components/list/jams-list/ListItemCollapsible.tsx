@@ -30,9 +30,11 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
   const getFirstSubSector = () => {
     let firstSector: any = sectorsData?.find((o: any) => o.id == row?.item?.sectors?.[0]);
 
-    console.log(firstSector?.sub_sectors)
+    if (firstSector) {
+      return firstSector?.sub_sectors[0]?.name;
+    }
 
-    return firstSector?.name;
+    return i18n.t("Unavailable");
   };
 
   const renderLocation = () => {
