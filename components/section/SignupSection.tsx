@@ -48,11 +48,13 @@ const SignupSection = () => {
       <LogoView size={80} />    
       <TextView style={styles.slogan}>{i18n.t('Create your JAM account')}</TextView> 
       
-      <TabsView 
-        tabs={StaticData.authTabs} 
-        currentTab={currentTab} 
-        onItemPress={(tabId: string) => setCurrentTab(tabId)}
-      />
+      {!formData?.success === true && (
+        <TabsView 
+          tabs={StaticData.authTabs} 
+          currentTab={currentTab} 
+          onItemPress={(tabId: string) => setCurrentTab(tabId)}
+        />
+      )}
 
       {currentTab === 'email' && (
         <>
