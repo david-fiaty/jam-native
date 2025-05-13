@@ -77,7 +77,7 @@ const LoginPhoneForm = () => {
       <TextView style={styles.label}>{i18n.t('Country')}</TextView>
       <CountryPhoneCodeField
         value={formData?.country || ''}
-        containerStyle={styles.selectListFieldContainer}
+        elementStyle={styles.selectListField}
         onChangeValue={(option: any) => FormManager.updateField(resource, 'country', option.value, ['string'])}
       />
       {FormManager.renderError('country')}
@@ -129,8 +129,9 @@ const styles = StyleSheet.create({
     borderRadius: Layout.radius.round,
     borderColor: Colors.primary,
   },
-  selectListFieldContainer: {
-
+  selectListField: {
+    backgroundColor: Colors.white,
+    borderColor: Colors.primary,
   },
 });
 

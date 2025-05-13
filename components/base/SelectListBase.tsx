@@ -11,15 +11,18 @@ type Props = {
   placeholder?: string;
   disabled?: any;
   containerStyle?: any;
+  elementStyle?: any;
   onChangeValue?: (option: any) => void;
 };
 
-const SelectListBase = ({value, data, placeholder, disabled, containerStyle, onChangeValue}: Props) => {
+const SelectListBase = ({value, data, placeholder, disabled, elementStyle, containerStyle, onChangeValue}: Props) => {
   const [selectedValue, setSelectedValue] = useState<any>(null);
   const [isFocus, setIsFocus] = useState<boolean>(false);
-  const elementStyle: any = {
+  
+  elementStyle = {
     ...styles.element,
     ...(disabled === true ? styles.disabled : {}),
+    ...(elementStyle || {}),
   };
 
   if (value && !selectedValue) setSelectedValue(value);
