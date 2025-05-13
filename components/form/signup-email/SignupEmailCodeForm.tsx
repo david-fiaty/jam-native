@@ -65,7 +65,7 @@ const SignupEmailCodeForm = () => {
         style={{ width: "100%" }}
       >
         <BoxView direction="row" align="center" justify="flex-start">
-          <LinkView onPress={() => SectionManager.push(router, 'signup')}>
+          <LinkView onPress={() => SectionManager.push(router, 'signup', { reset: true })}>
             {i18n.t("Didn't receive code?")}
           </LinkView>
         </BoxView>

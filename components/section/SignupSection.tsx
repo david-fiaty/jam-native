@@ -14,10 +14,15 @@ import SignupEmailCodeForm from '../form/signup-email/SignupEmailCodeForm';
 import SignupEmailForm from '../form/signup-email/SignupEmailForm';
 import SignupPhoneForm from '../form/signup-phone/SignupPhoneForm';
 import SignupPhoneCodeForm from '../form/signup-phone/SignupPhoneCodeForm';
+import FormManager from '@/manager/FormManager';
+
+type Props = {
+  reset?: boolean;
+};
 
 const resource: string = 'signup';
 
-const SignupSection = () => {
+const SignupSection = ({ reset }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [currentTab, setCurrentTab] = useState<any>(null);
   const formData: any = useSelector((state: any) => state.form[resource]);
@@ -34,10 +39,12 @@ const SignupSection = () => {
     (async () => {
         if (!isLoaded) {
           setCurrentTab((StaticData.authTabs.find((o: any) => o?.default === true))?.id);
+
+          if (reset) FormManager.resetForm(resource);
           setIsLoaded(true);
         }
     })();
-  }, [isLoaded]);
+  }, [isLoaded, reset, resource]);
 
   if (!isLoaded) return <SpinnerView />;
 
