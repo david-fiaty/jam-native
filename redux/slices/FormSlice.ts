@@ -6,6 +6,7 @@ const FormSlice = createSlice({
     jam: {}, 
     profile: {},
     project: {},
+    login: {},
     signup: {},
     password: {},
     errors: [],
