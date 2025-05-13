@@ -33,7 +33,7 @@ const LoginSection = () => {
 
   const submitForm = async () => {
     setIsProcessing(true);
-    
+
     let payload: any = Config.forceLogin.enabled === true ? Config.forceLogin.credentials : {
       email: email,
       password: password,
@@ -55,11 +55,10 @@ const LoginSection = () => {
 
   useEffect(() => {
     (async () => {
-        if (!isLoaded) {
-          //resetForm(); Todo - Enable this and fix reset issue
-          setCurrentTab((StaticData.authTabs.find((o: any) => o?.default === true))?.id);
-          setIsLoaded(true);
-        }
+      if (!isLoaded) {
+        setCurrentTab((StaticData.authTabs.find((o: any) => o?.default === true))?.id);
+        setIsLoaded(true);
+      }
     })();
   }, [isLoaded]);
 
@@ -104,10 +103,7 @@ const LoginSection = () => {
       <ButtonView 
         label={i18n.t('Continue')} 
         isProcessing={isProcessing} 
-        onPress={() => {
-          setIsProcessing(true);
-          submitForm();
-        }} 
+        onPress={submitForm} 
       />
 
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
