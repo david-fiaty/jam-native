@@ -16,31 +16,39 @@ import SectionManager from "@/manager/SectionManager";
 import FormManager from "@/manager/FormManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
+import { Colors } from "@/constants/Colors";
 
 const resource: string = 'signup';
 
-const LoginEmailFOrm = () => {
+const LoginEmailForm = () => {
   const router = useRouter();
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
-  const submitData = async () => {
+
+  const submitForm = async () => {
     setIsProcessing(true);
 
-    let result: any = await UserManager.sendSignupCode({ email: formData?.email });
+    let payload: any = Config.forceLogin.enabled === true ? Config.forceLogin.credentials : {
+      email: email,
+      password: password,
+    };
 
-    if (result.success === false) {
+    let result: any = await UserManager.login(payload);
+    setIsProcessing(false);
+
+    if (result?.error) {
       ScreenManager.showMessage({
-        title: i18n.t('Registration error'),
-        content: i18n.t('Invalid data submitted.'),
+        title: i18n.t('Profile login'),
+        content: result.error,
       });
     }
     else {
-      FormManager.updateField(resource, 'session', result.response.session);
+      SectionManager.push(router, Config.mainSection);
     }
-
-    setIsProcessing(false);
   };
 
   const isSubmitButtonDisabled = () => {
@@ -61,42 +69,25 @@ const LoginEmailFOrm = () => {
 
   return (
     <View style={[Layout.formContainer, styles.container]}>
-      <TextView style={styles.label}>{i18n.t('Email address')}</TextView>
       <InputTextField
-        value={formData?.email || ''}
-        placeholder={i18n.t('Enter your email address')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'email', value, ['string', 'email'])}
-        disabled={isEmailFieldDisabled()}
+        containerStyle={styles.inputTextFieldContainer}
+        placeholder={i18n.t('Email address')}
+        onChangeText={(text: string) => setEmail(text)}
       />
-      {FormManager.renderError('email')}
 
-      {!isEmailFieldDisabled() && (
-        <ButtonView
-          label={i18n.t('Continue')}
-          isProcessing={isProcessing}
-          onPress={submitData}
-          disabled={isSubmitButtonDisabled()}
-        />
-      )}
+      <InputTextField
+        containerStyle={styles.inputTextFieldContainer}
+        placeholder={i18n.t('Password')}
+        secureTextEntry={true}
+        spellCheck={false}
+        onChangeText={(text: string) => setPassword(text)}
+      />
 
-      {!isEmailFieldDisabled() && (
-        <>
-          <BoxView
-            direction="row"
-            align="center"
-            justify="space-between"
-            style={{ width: "100%" }}
-          >
-            <BoxView direction="row" align="center" justify="flex-start">
-              <TextView>{i18n.t("You have an account?")}</TextView>
-              <LinkView onPress={() => SectionManager.push(router, 'login')}>
-                {i18n.t("Sign in")}
-              </LinkView>
-            </BoxView>
-            <SkipButton onPress={() => SectionManager.push(router, Config.mainSection)} />
-          </BoxView>
-        </>
-      )}
+      <ButtonView
+        label={i18n.t('Continue')}
+        isProcessing={isProcessing}
+        onPress={submitForm}
+      />
     </View>
   );
 }
@@ -108,7 +99,12 @@ const styles = StyleSheet.create({
   label: {
     alignSelf: 'flex-start',
   },
-  
+  inputTextFieldContainer: {
+    backgroundColor: Colors.white,
+    borderWidth: Layout.borderWidth.base,
+    borderRadius: Layout.radius.round,
+    borderColor: Colors.primary,
+  },
 });
 
-export default LoginEmailFOrm;
+export default LoginEmailForm;
