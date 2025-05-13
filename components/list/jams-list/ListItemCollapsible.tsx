@@ -16,6 +16,16 @@ type Props = BaseProps & {
 };
 
 const ListItemCollapsible = ({ row, sectorsData }: Props) => {
+
+  const getSector = () => {
+    return sectorsData?.find((o: any) => o.id == row?.item?.sectors?.[0])?.name || i18n.t("Unavailable");
+  };
+
+  
+  const getSubSector = () => {
+    return sectorsData?.find((o: any) => o.id == row?.item?.sectors?.[0])?.name || i18n.t("Unavailable");
+  };
+
   const renderLocation = () => {
     return (
       <BoxView
@@ -80,14 +90,15 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
         <IconView name="arrow" size={12} theme="transparent" />
         <TextView>
           {i18n.t("Industry")}:{" "}
-          {sectorsData?.find((o: any) => o.id == row?.item?.sectors?.[0])
-            ?.name || i18n.t("Unavailable")}
+          {getSector()}
         </TextView>
       </BoxView>
     );
   };
 
   const renderSubsector = () => {
+    //console.log('sectors', row?.item?.sectors)
+    //console.log('sub_sectors', row?.item?.sub_sectors)
     return (
       <BoxView
         direction="row"
@@ -98,7 +109,7 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
         <IconView name="arrow" size={12} theme="transparent" />
         <TextView>
           {i18n.t("Sector")}:{" "}
-          {row?.item?.sectors?.[0]?.name || i18n.t("Unavailable")}
+          {getSubSector()}
         </TextView>
       </BoxView>
     );
