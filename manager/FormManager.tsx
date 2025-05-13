@@ -1,9 +1,13 @@
-import { setFormData, setFormErrors } from "@/redux/slices/FormSlice";
+import { setFormData, setFormErrors, resetFormData } from "@/redux/slices/FormSlice";
 import FieldErrorView from "@/components/view/FieldErrorView";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
 
 class FormManager {
+  resetForm(resource: any) {
+    Store.dispatch(resetFormData(resource));
+  }
+
   updateField(resource: string, key: any, value: any, rules: any[] = []) {
     let errors: any[] = [];
 
