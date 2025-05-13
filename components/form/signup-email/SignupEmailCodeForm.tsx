@@ -45,6 +45,7 @@ const SignupEmailCodeForm = () => {
     <>
       <TextView style={styles.label}>{i18n.t('Verification sent, check your email inbox')}</TextView>
       <InputTextField
+        keyboardType="number-pad"
         value={formData?.code || ''}
         placeholder={i18n.t('Verification code')}
         onChangeText={(value: string) => FormManager.updateField(resource, 'code', value)}
@@ -64,7 +65,7 @@ const SignupEmailCodeForm = () => {
         style={{ width: "100%" }}
       >
         <BoxView direction="row" align="center" justify="flex-start">
-          <LinkView onPress={() => SectionManager.push(router, 'signup')}>
+          <LinkView onPress={() => SectionManager.push(router, 'signup', { reset: true })}>
             {i18n.t("Didn't receive code?")}
           </LinkView>
         </BoxView>
