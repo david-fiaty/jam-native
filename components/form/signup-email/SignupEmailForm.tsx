@@ -43,12 +43,12 @@ const SignupEmailForm = () => {
     setIsProcessing(false);
   };
 
-  const isSubmitButtonDisabled = () => {
-    return !formData?.email?.length;
+  const isEmailDisabled = () => {
+    return formData?.email?.length && formData?.session?.length;
   };
 
-  const isEmailFieldDisabled = () => {
-    return formData?.email?.length && formData?.session?.length;
+  const isSubmitDisabled = () => {
+    return !formData?.email?.length;
   };
 
   useEffect(() => {
@@ -66,36 +66,34 @@ const SignupEmailForm = () => {
         value={formData?.email || ''}
         placeholder={i18n.t('Enter your email address')}
         onChangeText={(value: string) => FormManager.updateField(resource, 'email', value, ['string', 'email'])}
-        disabled={isEmailFieldDisabled()}
+        disabled={isEmailDisabled()}
       />
       {FormManager.renderError('email')}
 
-      {!isEmailFieldDisabled() && (
+      {!isEmailDisabled() && (
         <ButtonView
           label={i18n.t('Continue')}
           isProcessing={isProcessing}
           onPress={submitData}
-          disabled={isSubmitButtonDisabled()}
+          disabled={isSubmitDisabled()}
         />
       )}
 
-      {!isEmailFieldDisabled() && (
-        <>
-          <BoxView
-            direction="row"
-            align="center"
-            justify="space-between"
-            style={{ width: "100%" }}
-          >
-            <BoxView direction="row" align="center" justify="flex-start">
-              <TextView>{i18n.t("You have an account?")}</TextView>
-              <LinkView onPress={() => SectionManager.push(router, 'login')}>
-                {i18n.t("Sign in")}
-              </LinkView>
-            </BoxView>
-            <SkipButton onPress={() => SectionManager.push(router, Config.mainSection)} />
+      {!isEmailDisabled() && (  
+        <BoxView
+          direction="row"
+          align="center"
+          justify="space-between"
+          style={{ width: "100%" }}
+        >
+          <BoxView direction="row" align="center" justify="flex-start">
+            <TextView>{i18n.t("You have an account?")}</TextView>
+            <LinkView onPress={() => SectionManager.push(router, 'login')}>
+              {i18n.t("Sign in")}
+            </LinkView>
           </BoxView>
-        </>
+          <SkipButton onPress={() => SectionManager.push(router, Config.mainSection)} />
+        </BoxView>
       )}
     </View>
   );
@@ -108,7 +106,6 @@ const styles = StyleSheet.create({
   label: {
     alignSelf: 'flex-start',
   },
-  
 });
 
 export default SignupEmailForm;
