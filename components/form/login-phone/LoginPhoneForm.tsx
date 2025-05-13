@@ -20,8 +20,9 @@ import CountryPhoneCodeField from "@/components/field/CountryPhoneCodeField";
 import PhoneServiceField from "@/components/field/PhoneServiceField";
 import StaticData from "@/constants/StaticData";
 import IconView from "@/components/view/IconView";
+import { Colors } from "@/constants/Colors";
 
-const resource: string = 'signup';
+const resource: string = 'login';
 
 const LoginPhoneForm = () => {
   const router = useRouter();
@@ -65,7 +66,6 @@ const LoginPhoneForm = () => {
 
   useEffect(() => {
     if (!isLoaded) {
-      FormManager.updateField(resource, 'phone_service', (StaticData.phoneServices.find((o: any) => o.default === true))?.id);
       setIsLoaded(true);
     }
   }, [isLoaded, resource]);
@@ -77,6 +77,7 @@ const LoginPhoneForm = () => {
       <TextView style={styles.label}>{i18n.t('Country')}</TextView>
       <CountryPhoneCodeField
         value={formData?.country || ''}
+        containerStyle={styles.selectListFieldContainer}
         onChangeValue={(option: any) => FormManager.updateField(resource, 'country', option.value, ['string'])}
       />
       {FormManager.renderError('country')}
@@ -86,17 +87,22 @@ const LoginPhoneForm = () => {
         value={formData?.phone || ''}
         placeholder={i18n.t('Enter your phone nnumber')}
         keyboardType="number-pad"
+        containerStyle={styles.inputTextFieldContainer} // Todo - Fis styles not working
         onChangeText={(value: string) => FormManager.updateField(resource, 'phone', value, ['number'])}
         rightIcon={<IconView name="phone" theme="transparent" />}
         //disabled={isEmailFieldDisabled()}
       />
       {FormManager.renderError('phone')}
 
-      <TextView style={styles.label}>{i18n.t('Phone service')}</TextView>
-      <PhoneServiceField 
-        value={formData?.phone_service || ''}
-        onChangeValue={((option: any) => FormManager.updateField(resource, 'phone_service', option.id, ['string']))}
+      <TextView style={styles.label}>{i18n.t('Password')}</TextView>
+      <InputTextField
+        placeholder={i18n.t('Password')}
+        secureTextEntry={true}
+        spellCheck={false}
+        containerStyle={styles.inputTextFieldContainer}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'password', value, ['string'])}
       />
+      {FormManager.renderError('password')}
 
       {!isEmailFieldDisabled() && (
         <ButtonView
@@ -105,25 +111,6 @@ const LoginPhoneForm = () => {
           onPress={submitData}
           //disabled={isSubmitButtonDisabled()}
         />
-      )}
-
-      {!isEmailFieldDisabled() && (
-        <>
-          <BoxView
-            direction="row"
-            align="center"
-            justify="space-between"
-            style={{ width: "100%" }}
-          >
-            <BoxView direction="row" align="center" justify="flex-start">
-              <TextView>{i18n.t("You have an account?")}</TextView>
-              <LinkView onPress={() => SectionManager.push(router, 'login')}>
-                {i18n.t("Sign in")}
-              </LinkView>
-            </BoxView>
-            <SkipButton onPress={() => SectionManager.push(router, Config.mainSection)} />
-          </BoxView>
-        </>
       )}
     </View>
   );
@@ -135,6 +122,15 @@ const styles = StyleSheet.create({
   },
   label: {
     alignSelf: 'flex-start',
+  },
+  inputTextFieldContainer: {
+    backgroundColor: Colors.white,
+    borderWidth: Layout.borderWidth.base,
+    borderRadius: Layout.radius.round,
+    borderColor: Colors.primary,
+  },
+  selectListFieldContainer: {
+
   },
 });
 

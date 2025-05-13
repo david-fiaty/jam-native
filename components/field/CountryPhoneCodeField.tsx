@@ -7,10 +7,11 @@ import i18n from '@/translation/i18n';
 type Props = {
   value?: any;
   disabled?: any;
+  containerStyle?: any;
   onChangeValue?: (option: any) => void;
 };
 
-const CountryPhoneCodeField = ({value, disabled, onChangeValue}: Props) => {
+const CountryPhoneCodeField = ({value, disabled, containerStyle, onChangeValue}: Props) => {
   const countryCodes = StaticData.countryPhoneCodes;
 
   const buildOptions = (optionsData: any) => {    
@@ -30,6 +31,7 @@ const CountryPhoneCodeField = ({value, disabled, onChangeValue}: Props) => {
         data={buildOptions(countryCodes)}  
         onChangeValue={onChangeValue}
         disabled={disabled}
+        containerStyle={containerStyle}
       />
     </BoxView>
   );
