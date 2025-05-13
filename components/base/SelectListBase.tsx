@@ -10,10 +10,11 @@ type Props = {
   data?: object;
   placeholder?: string;
   disabled?: any;
+  containerStyle?: any;
   onChangeValue?: (option: any) => void;
 };
 
-const SelectListBase = ({value, data, placeholder, disabled, onChangeValue}: Props) => {
+const SelectListBase = ({value, data, placeholder, disabled, containerStyle, onChangeValue}: Props) => {
   const [selectedValue, setSelectedValue] = useState<any>(null);
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const elementStyle: any = {
@@ -39,6 +40,7 @@ const SelectListBase = ({value, data, placeholder, disabled, onChangeValue}: Pro
         selectedTextStyle={styles.selectedTextStyle}
         iconStyle={styles.iconStyle}
         itemTextStyle={styles.itemTextStyle}
+        containerStyle={containerStyle}
         search={false}
         disable={disabled}
         maxHeight={300}

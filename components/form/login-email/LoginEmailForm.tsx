@@ -4,21 +4,17 @@ import { useRouter } from "expo-router";
 import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
+import { Colors } from "@/constants/Colors";
 import i18n from "@/translation/i18n";
 import InputTextField from '@/components/field/InputTextField';
-import TextView from '@/components/view/TextView';
 import ButtonView from '@/components/view/ButtonView';
 import UserManager from "@/manager/UserManager";
-import BoxView from "@/components/view/BoxView";
-import LinkView from "@/components/view/LinkView";
-import SkipButton from "@/components/button/SkipButton";
 import SectionManager from "@/manager/SectionManager";
 import FormManager from "@/manager/FormManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
-import { Colors } from "@/constants/Colors";
 
-const resource: string = 'signup';
+const resource: string = 'login';
 
 const LoginEmailForm = () => {
   const router = useRouter();
