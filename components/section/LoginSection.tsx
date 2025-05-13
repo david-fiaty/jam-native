@@ -60,7 +60,13 @@ const LoginSection = () => {
 
       {currentTab === 'phone' && <LoginPhoneForm />}
 
-      <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
+      <BoxView direction="row" align="center" justify="space-between" style={styles.linkContainer}>
+        <LinkView onPress={() => SectionManager.push(router, 'reset-password')}>
+          {i18n.t('Forgot password')}
+        </LinkView>
+      </BoxView>
+
+      <BoxView direction="row" align="center" justify="space-between" style={styles.linkContainer}>
         <BoxView direction="row" align="center" justify="flex-start">
           <TextView>{i18n.t('Don\'t have an account?')}</TextView>
           <LinkView onPress={() => SectionManager.push(router, 'signup')}>
@@ -86,6 +92,9 @@ const styles = StyleSheet.create({
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
     borderColor: Colors.primary,
+  },
+  linkContainer: {
+    width: '100%',
   },
   slogan: {
     textTransform: 'uppercase',
