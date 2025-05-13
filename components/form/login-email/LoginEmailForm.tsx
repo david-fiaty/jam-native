@@ -30,8 +30,8 @@ const LoginEmailForm = () => {
     setIsProcessing(true);
 
     let payload: any = Config.forceLogin.enabled === true ? Config.forceLogin.credentials : formData;
-
     let result: any = await UserManager.login(payload);
+    
     setIsProcessing(false);
 
     if (result?.error) {
