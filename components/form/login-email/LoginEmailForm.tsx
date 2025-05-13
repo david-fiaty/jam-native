@@ -4,21 +4,18 @@ import { useRouter } from "expo-router";
 import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
+import { Colors } from "@/constants/Colors";
 import i18n from "@/translation/i18n";
 import InputTextField from '@/components/field/InputTextField';
-import TextView from '@/components/view/TextView';
 import ButtonView from '@/components/view/ButtonView';
 import UserManager from "@/manager/UserManager";
-import BoxView from "@/components/view/BoxView";
-import LinkView from "@/components/view/LinkView";
-import SkipButton from "@/components/button/SkipButton";
 import SectionManager from "@/manager/SectionManager";
 import FormManager from "@/manager/FormManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
-import { Colors } from "@/constants/Colors";
+import TextView from "@/components/view/TextView";
 
-const resource: string = 'signup';
+const resource: string = 'login';
 
 const LoginEmailForm = () => {
   const router = useRouter();
@@ -30,8 +27,8 @@ const LoginEmailForm = () => {
     setIsProcessing(true);
 
     let payload: any = Config.forceLogin.enabled === true ? Config.forceLogin.credentials : formData;
-
     let result: any = await UserManager.login(payload);
+    
     setIsProcessing(false);
 
     if (result?.error) {
@@ -55,19 +52,23 @@ const LoginEmailForm = () => {
 
   return (
     <View style={[Layout.formContainer, styles.container]}>
+      <TextView style={styles.label}>{i18n.t('Email')}</TextView>
       <InputTextField
         containerStyle={styles.inputTextFieldContainer}
-        placeholder={i18n.t('Email address')}
+        placeholder={i18n.t('Enter your email address')}
         onChangeText={(value: string) => FormManager.updateField(resource, 'email', value, ['string', 'email'])}
       />
+      {FormManager.renderError('email')}
 
+      <TextView style={styles.label}>{i18n.t('Password')}</TextView>
       <InputTextField
         containerStyle={styles.inputTextFieldContainer}
-        placeholder={i18n.t('Password')}
+        placeholder={i18n.t('Enter your password')}
         secureTextEntry={true}
         spellCheck={false}
         onChangeText={(value: string) => FormManager.updateField(resource, 'password', value, ['string'])}
       />
+      {FormManager.renderError('password')}
 
       <ButtonView
         label={i18n.t('Continue')}
