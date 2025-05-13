@@ -112,25 +112,6 @@ const LoginPhoneForm = () => {
           //disabled={isSubmitButtonDisabled()}
         />
       )}
-
-      {!isEmailFieldDisabled() && (
-        <>
-          <BoxView
-            direction="row"
-            align="center"
-            justify="space-between"
-            style={{ width: "100%" }}
-          >
-            <BoxView direction="row" align="center" justify="flex-start">
-              <TextView>{i18n.t("You have an account?")}</TextView>
-              <LinkView onPress={() => SectionManager.push(router, 'login')}>
-                {i18n.t("Sign in")}
-              </LinkView>
-            </BoxView>
-            <SkipButton onPress={() => SectionManager.push(router, Config.mainSection)} />
-          </BoxView>
-        </>
-      )}
     </View>
   );
 }
