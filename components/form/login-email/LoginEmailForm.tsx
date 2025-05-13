@@ -30,8 +30,8 @@ const LoginEmailForm = () => {
     setIsProcessing(true);
 
     let payload: any = Config.forceLogin.enabled === true ? Config.forceLogin.credentials : formData;
-
     let result: any = await UserManager.login(payload);
+    
     setIsProcessing(false);
 
     if (result?.error) {
@@ -60,6 +60,7 @@ const LoginEmailForm = () => {
         placeholder={i18n.t('Email address')}
         onChangeText={(value: string) => FormManager.updateField(resource, 'email', value, ['string', 'email'])}
       />
+      {FormManager.renderError('email')}
 
       <InputTextField
         containerStyle={styles.inputTextFieldContainer}
@@ -68,6 +69,7 @@ const LoginEmailForm = () => {
         spellCheck={false}
         onChangeText={(value: string) => FormManager.updateField(resource, 'password', value, ['string'])}
       />
+      {FormManager.renderError('password')}
 
       <ButtonView
         label={i18n.t('Continue')}
