@@ -22,36 +22,13 @@ import SectionManager from '@/manager/SectionManager';
 import TabsView from '../view/TabsView';
 import StaticData from '@/constants/StaticData';
 import SpinnerView from '../view/SpinnerView';
+import LoginEmailForm from '../form/login-email/LoginEmailForm';
 
 const LoginSection = () => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [currentTab, setCurrentTab] = useState<any>(null);
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
   const [isProcessing, setIsProcessing] = useState(false);
-
-  const submitForm = async () => {
-    setIsProcessing(true);
-
-    let payload: any = Config.forceLogin.enabled === true ? Config.forceLogin.credentials : {
-      email: email,
-      password: password,
-    };
-
-    let result: any = await UserManager.login(payload);
-    setIsProcessing(false);
-
-    if (result?.error) {
-      ScreenManager.showMessage({
-        title: i18n.t('Profile login'),
-        content: result.error,
-      });
-    }
-    else {
-      SectionManager.push(router, Config.mainSection);
-    }
-  }  
 
   useEffect(() => {
     (async () => {
@@ -82,29 +59,7 @@ const LoginSection = () => {
         onItemPress={(tabId: string) => setCurrentTab(tabId)}
       />
       
-      {currentTab === 'email' && (
-        <>
-          <InputTextField 
-            containerStyle={styles.inputTextFieldContainer}
-            placeholder={i18n.t('Email address')} 
-            onChangeText={(text: string) => setEmail(text)}
-          />
-
-          <InputTextField 
-            containerStyle={styles.inputTextFieldContainer}
-            placeholder={i18n.t('Password')} 
-            secureTextEntry={true} 
-            spellCheck={false}
-            onChangeText={(text: string) => setPassword(text)}
-          />
-        </>
-      )}
-
-      <ButtonView 
-        label={i18n.t('Continue')} 
-        isProcessing={isProcessing} 
-        onPress={submitForm} 
-      />
+      {currentTab === 'email' && <LoginEmailForm />}
 
       <BoxView direction="row" align="center" justify="space-between" style={{width: '100%'}}>
         <BoxView direction="row" align="center" justify="flex-start">
