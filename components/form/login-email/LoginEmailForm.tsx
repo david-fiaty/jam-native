@@ -13,6 +13,7 @@ import SectionManager from "@/manager/SectionManager";
 import FormManager from "@/manager/FormManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
+import TextView from "@/components/view/TextView";
 
 const resource: string = 'login';
 
@@ -51,16 +52,18 @@ const LoginEmailForm = () => {
 
   return (
     <View style={[Layout.formContainer, styles.container]}>
+      <TextView style={styles.label}>{i18n.t('Email')}</TextView>
       <InputTextField
         containerStyle={styles.inputTextFieldContainer}
-        placeholder={i18n.t('Email address')}
+        placeholder={i18n.t('Enter your email address')}
         onChangeText={(value: string) => FormManager.updateField(resource, 'email', value, ['string', 'email'])}
       />
       {FormManager.renderError('email')}
 
+      <TextView style={styles.label}>{i18n.t('Password')}</TextView>
       <InputTextField
         containerStyle={styles.inputTextFieldContainer}
-        placeholder={i18n.t('Password')}
+        placeholder={i18n.t('Enter your password')}
         secureTextEntry={true}
         spellCheck={false}
         onChangeText={(value: string) => FormManager.updateField(resource, 'password', value, ['string'])}
