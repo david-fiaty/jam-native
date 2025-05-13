@@ -42,6 +42,10 @@ const LoginEmailForm = () => {
     }
   };
 
+  const isSubmitDisabled = () => {
+    return !formData?.email?.length || !formData?.password?.length;
+  };
+
   useEffect(() => {
     if (!isLoaded) {
       setIsLoaded(true);
@@ -74,6 +78,7 @@ const LoginEmailForm = () => {
         label={i18n.t('Continue')}
         isProcessing={isProcessing}
         onPress={submitForm}
+        disabled={isSubmitDisabled()}
       />
     </View>
   );
