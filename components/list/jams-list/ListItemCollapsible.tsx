@@ -18,12 +18,21 @@ type Props = BaseProps & {
 const ListItemCollapsible = ({ row, sectorsData }: Props) => {
 
   const getFirstSector = () => {
-    return sectorsData?.find((o: any) => o.id == row?.item?.sectors?.[0])?.name || i18n.t("Unavailable");
-  };
+    let firstSector: any = sectorsData?.find((o: any) => o.id == row?.item?.sectors?.[0]);
 
+    if (firstSector) {
+      return firstSector?.name;
+    }
+
+    return i18n.t("Unavailable");
+  };
   
   const getFirstSubSector = () => {
-    return sectorsData?.find((o: any) => o.id == row?.item?.sectors?.[0])?.name || i18n.t("Unavailable");
+    let firstSector: any = sectorsData?.find((o: any) => o.id == row?.item?.sectors?.[0]);
+
+    console.log(firstSector?.sub_sectors)
+
+    return firstSector?.name;
   };
 
   const renderLocation = () => {
