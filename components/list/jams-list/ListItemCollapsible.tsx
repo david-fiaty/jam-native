@@ -17,12 +17,12 @@ type Props = BaseProps & {
 
 const ListItemCollapsible = ({ row, sectorsData }: Props) => {
 
-  const getSector = () => {
+  const getFirstSector = () => {
     return sectorsData?.find((o: any) => o.id == row?.item?.sectors?.[0])?.name || i18n.t("Unavailable");
   };
 
   
-  const getSubSector = () => {
+  const getFirstSubSector = () => {
     return sectorsData?.find((o: any) => o.id == row?.item?.sectors?.[0])?.name || i18n.t("Unavailable");
   };
 
@@ -90,15 +90,13 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
         <IconView name="arrow" size={12} theme="transparent" />
         <TextView>
           {i18n.t("Industry")}:{" "}
-          {getSector()}
+          {getFirstSector()}
         </TextView>
       </BoxView>
     );
   };
 
   const renderSubsector = () => {
-    //console.log('sectors', row?.item?.sectors)
-    //console.log('sub_sectors', row?.item?.sub_sectors)
     return (
       <BoxView
         direction="row"
@@ -109,7 +107,7 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
         <IconView name="arrow" size={12} theme="transparent" />
         <TextView>
           {i18n.t("Sector")}:{" "}
-          {getSubSector()}
+          {getFirstSubSector()}
         </TextView>
       </BoxView>
     );
