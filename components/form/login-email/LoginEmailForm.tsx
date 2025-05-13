@@ -22,20 +22,14 @@ const resource: string = 'signup';
 
 const LoginEmailForm = () => {
   const router = useRouter();
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
-
   const submitForm = async () => {
     setIsProcessing(true);
 
-    let payload: any = Config.forceLogin.enabled === true ? Config.forceLogin.credentials : {
-      email: email,
-      password: password,
-    };
+    let payload: any = Config.forceLogin.enabled === true ? Config.forceLogin.credentials : formData;
 
     let result: any = await UserManager.login(payload);
     setIsProcessing(false);
@@ -51,14 +45,6 @@ const LoginEmailForm = () => {
     }
   };
 
-  const isSubmitButtonDisabled = () => {
-    return !formData?.email?.length;
-  };
-
-  const isEmailFieldDisabled = () => {
-    return formData?.email?.length && formData?.session?.length;
-  };
-
   useEffect(() => {
     if (!isLoaded) {
       setIsLoaded(true);
@@ -72,7 +58,7 @@ const LoginEmailForm = () => {
       <InputTextField
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Email address')}
-        onChangeText={(text: string) => setEmail(text)}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'email', value, ['string', 'email'])}
       />
 
       <InputTextField
@@ -80,7 +66,7 @@ const LoginEmailForm = () => {
         placeholder={i18n.t('Password')}
         secureTextEntry={true}
         spellCheck={false}
-        onChangeText={(text: string) => setPassword(text)}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'password', value, ['string'])}
       />
 
       <ButtonView
