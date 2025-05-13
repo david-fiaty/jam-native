@@ -25,7 +25,6 @@ const LoginSection = () => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [currentTab, setCurrentTab] = useState<any>(null);
-  const [isProcessing, setIsProcessing] = useState(false);
 
   useEffect(() => {
     (async () => {
