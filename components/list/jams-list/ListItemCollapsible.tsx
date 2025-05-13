@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import { BaseProps } from "@/constants/Types";
 import { Layout } from "@/constants/Layout";
 import { Colors } from "@/constants/Colors";
 import BoxView from "@/components/view/BoxView";
@@ -10,33 +9,12 @@ import StaticData from "@/constants/StaticData";
 import i18n from "@/translation/i18n";
 import DataManager from "@/manager/DataManager";
 
-type Props = BaseProps & {
-  row?: any,
-  sectorsData?: any,
+type Props = {
+  row?: any;
+  sectorsData?: any;
 };
 
 const ListItemCollapsible = ({ row, sectorsData }: Props) => {
-
-  const getFirstSector = () => {
-    let firstSector: any = sectorsData?.find((o: any) => o.id == row?.item?.sectors?.[0]);
-
-    if (firstSector) {
-      return firstSector?.name;
-    }
-
-    return i18n.t("Unavailable");
-  };
-  
-  const getFirstSubSector = () => {
-    let firstSector: any = sectorsData?.find((o: any) => o.id == row?.item?.sectors?.[0]);
-
-    if (firstSector) {
-      return firstSector?.sub_sectors[0]?.name;
-    }
-
-    return i18n.t("Unavailable");
-  };
-
   const renderLocation = () => {
     return (
       <BoxView
@@ -91,6 +69,8 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
   };
 
   const renderSector = () => {
+    let firstSector: any = sectorsData?.find((o: any) => o.id == row?.item?.sectors?.[0]);
+
     return (
       <BoxView
         direction="row"
@@ -101,13 +81,15 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
         <IconView name="arrow" size={12} theme="transparent" />
         <TextView>
           {i18n.t("Industry")}:{" "}
-          {getFirstSector()}
+          {firstSector ? firstSector?.sub_sectors[0]?.name : i18n.t("Unavailable")}
         </TextView>
       </BoxView>
     );
   };
 
   const renderSubsector = () => {
+    let firstSector: any = sectorsData?.find((o: any) => o.id == row?.item?.sectors?.[0]);
+
     return (
       <BoxView
         direction="row"
@@ -118,7 +100,7 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
         <IconView name="arrow" size={12} theme="transparent" />
         <TextView>
           {i18n.t("Sector")}:{" "}
-          {getFirstSubSector()}
+          {firstSector ? firstSector?.sub_sectors[0]?.name : i18n.t("Unavailable")}
         </TextView>
       </BoxView>
     );
