@@ -35,11 +35,11 @@ const ListView = ({
   style,
 }: Props) => {
 
-  const ref = useRef();
+  const listRef = useRef<any>();
 
   return (
     <FlatList
-      ref={ref}
+      ref={listRef}
       data={data || []}
       numColumns={numColumns || 1}
       initialNumToRender={data?.length || Config.paginationSize}
