@@ -69,9 +69,9 @@ const JamsList = ({ idArray }: Props) => {
         contentContainerStyle={Layout.listContainer}
         renderItem={renderItem}
         keyExtractor={(item: any) => item.id.toString()}
-        onEndReached={() => {
-          // Todo - Implement infinite scroll call
-        }}
+        //keyExtractor={(row: any, index?: number) => `${row.id}-${index}`} 
+        //onEndReachedThreshold={0.5}
+        //onEndReached={async () => await loadSearchData()} // Todo - Implement infinite scroll
       />
     </BoxView>
   );
