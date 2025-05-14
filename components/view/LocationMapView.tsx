@@ -19,6 +19,7 @@ type Props = {
 
 const LocationMapView = ({ resource, latitude, longitude }: Props) => {
   const dispatch = useDispatch();
+  const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
@@ -57,14 +58,41 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
     };
   };
 
+  const getInitialRegion = () => {
+    let latitude: any = Config.defaultLocation.latitude;
+    let longitude: any = Config.defaultLocation.longitude;
+    let latitudeDelta: any = 0.2;
+    let longitudeDelta: any = 0.2;
+
+    if (selectedLocation?.latitude && selectedLocation?.longitude) {
+      latitude = selectedLocation.latitude;
+      longitude = selectedLocation.longitude; 
+    }
+    else if (currentLocation?.latitude && currentLocation?.longitude) {
+      latitude = currentLocation.latitude;
+      longitude = currentLocation.longitude; 
+    }
+
+    return {
+      latitude: latitude,
+      longitude: longitude,
+      latitudeDelta: latitudeDelta,
+      longitudeDelta: longitudeDelta,
+    };
+  };
+
   useEffect(() => {
     (async () => {
+      setCurrentLocation(await UserManager.getLocation());
+      setSelectedLocation(await getSelectedLocation());
+
       if (!isLoaded) {
-        setSelectedLocation(await getSelectedLocation());
         setIsLoaded(true);
       }
     })();
   }, [isLoaded]);
+
+  if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
   
   return (
     <BoxView 
@@ -81,6 +109,7 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
             customMapStyle={Layout.mapStyle}
             showsUserLocation={true}
             onPress={onMapPress}
+            initialRegion={getInitialRegion()}
           >
             <Marker
               pinColor={Colors.tertiary}

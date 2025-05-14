@@ -13,8 +13,9 @@ type Props = BaseProps & {
   columnWrapperStyle?: object;
   showsHorizontalScrollIndicator?: boolean;
   emptyMessage?: any;
+  onEndReachedThreshold?: any;
   onEndReached?: () => void;
-  keyExtractor?: ((row: any) => string);
+  keyExtractor?: ((row: any, index?: number) => string);
   renderItem: ((item: any) => JSX.Element);
 };
 
@@ -27,17 +28,18 @@ const ListView = ({
   columnWrapperStyle,
   showsHorizontalScrollIndicator,
   emptyMessage,
+  onEndReachedThreshold,
   onEndReached,
   keyExtractor,
   renderItem,
   style,
 }: Props) => {
 
-  const ref = useRef();
+  const listRef = useRef<any>();
 
   return (
     <FlatList
-      ref={ref}
+      ref={listRef}
       data={data || []}
       numColumns={numColumns || 1}
       initialNumToRender={data?.length || Config.paginationSize}
@@ -49,10 +51,11 @@ const ListView = ({
       maxToRenderPerBatch={Config.paginationSize}
       removeClippedSubviews={true}
       windowSize={5}
+      onEndReachedThreshold={onEndReachedThreshold}
+      onEndReached={onEndReached}
       keyExtractor={keyExtractor}
       renderItem={renderItem}
       ListEmptyComponent={() => emptyMessage}
-      onEndReached={onEndReached}
     />
   );
 };

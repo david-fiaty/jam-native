@@ -6,7 +6,6 @@ import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
-import ScreenManager from "@/manager/ScreenManager";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import SearchManager from "@/manager/SearchManager";
@@ -20,10 +19,15 @@ const JamsMapView = () => {
   const markerImage = require('@/assets/images/logo-55.png');
   
   const getInitialRegion = () => {
-    let latitude = currentLocation?.coords?.latitude || Config.defaultLocation.latitude;
-    let longitude = currentLocation?.coords?.longitude || Config.defaultLocation.longitude;
-    let latitudeDelta = 0.16;
-    let longitudeDelta = latitudeDelta * (ScreenManager.window.width/ScreenManager.window.height);
+    let latitude: any = Config.defaultLocation.latitude;
+    let longitude: any = Config.defaultLocation.longitude;
+    let latitudeDelta: any = 0.2;
+    let longitudeDelta: any = 0.2;
+
+    if (currentLocation?.latitude && currentLocation?.longitude) {
+      latitude = currentLocation.latitude;
+      longitude = currentLocation.longitude; 
+    }
 
     return {
       latitude: latitude,
@@ -75,7 +79,7 @@ const JamsMapView = () => {
     }
   }, [isLoaded, searchState]);
 
-  if (!isLoaded) return <SpinnerView />;
+  if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
 
   return (
     <TouchableWithoutFeedback>
@@ -90,7 +94,6 @@ const JamsMapView = () => {
           showsMyLocationButton={true}
         >
           {searchData?.map((item: any) => renderJamMarker(item))}
-          {/* searchResult?.jam?.map((item: any) => renderJamMarker(item)) */}
         </MapView>
       </View>
     </TouchableWithoutFeedback>
