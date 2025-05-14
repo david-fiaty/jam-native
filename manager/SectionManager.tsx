@@ -1,5 +1,4 @@
 import { setActiveSections } from "@/redux/slices/SectionSlice";
-import { setActiveModals } from "@/redux/slices/ModalSlice";
 import Store from "@/redux/Store";
 
 class SectionManager {
