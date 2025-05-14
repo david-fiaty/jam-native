@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { usePathname } from 'expo-router';
-import { setSectionConfig } from "@/redux/slices/SectionSlice";
+import { setActiveSections, setSectionConfig } from "@/redux/slices/SectionSlice";
 import { StyleSheet } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import { Layout } from "@/constants/Layout";
-import { Config } from "@/constants/Config";
 import BoxView from '../view/BoxView';
 import SectionHeader from '../section/navigation/SectionHeader';
 import SectionFooter from '../section/navigation/SectionFooter';
@@ -40,7 +39,7 @@ const SectionView = () => {
 
   const getCurrentSection = () => {
     let activeSections: any[] = [...sectionState.active];
-    let targetSection: any = getSection(sectionId || Config.defaultSection);
+    let targetSection: any = getSection(sectionId);
 
     return {
       ...targetSection,
@@ -57,9 +56,18 @@ const SectionView = () => {
       && currentSection?.showBackButton === true 
       && (!modalState.active.length || !isModalTitleVisible());
   };
+  
+  const getDefaultSection = (renderer: boolean = true) => {
+    return getSections(renderer).find((o: any) => o.default === true);
+  };
 
   const getSection = (sectionId: any, renderer: boolean = true) => {
-    return getSections(renderer).find((o: any) => o.id === sectionId);
+    if (sectionId) { 
+      return getSections(renderer).find((o: any) => o.id === sectionId);
+    }
+    else {
+      return getDefaultSection(renderer);
+    }
   };
 
   const getSections = (renderer: boolean = true) => {
@@ -81,6 +89,7 @@ const SectionView = () => {
         showHeader: false,
         showFooter: false,
         showBackButton: false,
+        default: true,
         render: (params: any) => <WelcomeSection {...params} />,
       },
       {
@@ -204,6 +213,11 @@ const SectionView = () => {
     if (!sectionState.config.length) {
       dispatch(setSectionConfig(getSections(false)));
     }
+
+    if (!sectionState.active?.length) {
+      dispatch(setActiveSections([getDefaultSection(false)]));
+    }
+
   }, [sectionId, sectionState]);
 
   return (
