@@ -29,7 +29,8 @@ const ModalView = ({ currentSection, style }: Props) => {
   const modalState: any = useSelector((state: any) => state.modal);
   
   const containerStyle: any = {
-    top: modalState.active.length > 1 ? -Layout.space.base*3.6 : 0,
+    top: 0,
+    //top: modalState.active.length > 1 ? -Layout.space.base*3.6 : 0, // Todo - Fix modal height when many modals opened
   };
 
   const canShowModal = () => {
