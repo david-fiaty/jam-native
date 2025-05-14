@@ -58,14 +58,17 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
     };
   };
 
-  
   const getInitialRegion = () => {
     let latitude: any = Config.defaultLocation.latitude;
     let longitude: any = Config.defaultLocation.longitude;
     let latitudeDelta: any = 0.2;
     let longitudeDelta: any = 0.2;
 
-    if (currentLocation?.latitude && currentLocation?.longitude) {
+    if (selectedLocation?.latitude && selectedLocation?.longitude) {
+      latitude = selectedLocation.latitude;
+      longitude = selectedLocation.longitude; 
+    }
+    else if (currentLocation?.latitude && currentLocation?.longitude) {
       latitude = currentLocation.latitude;
       longitude = currentLocation.longitude; 
     }
