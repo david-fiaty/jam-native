@@ -4,6 +4,7 @@ import { useFonts } from 'expo-font';
 import { Provider } from 'react-redux';
 import { Colors } from '@/constants/Colors';
 import { Platform, BackHandler } from 'react-native';
+import { setActiveSections } from "@/redux/slices/SectionSlice";
 import * as ExpoSplashScreen from 'expo-splash-screen';
 import Store from "@/redux/Store";
 import SectionManager from '@/manager/SectionManager';
