@@ -81,7 +81,7 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
         <IconView name="arrow" size={12} theme="transparent" />
         <TextView>
           {i18n.t("Industry")}:{" "}
-          {firstSector ? firstSector?.sub_sectors[0]?.name : i18n.t("Unavailable")}
+          {firstSector ? firstSector?.name : i18n.t("Unavailable")}
         </TextView>
       </BoxView>
     );
