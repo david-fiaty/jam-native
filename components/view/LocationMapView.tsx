@@ -114,7 +114,7 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
             <Marker
               pinColor={Colors.tertiary}
               title={i18n.t("Selected location")}
-              description={i18n.t("This is your current location")} // Todo - Reverse geocoding
+              description={i18n.t("This is the selected location")} // Todo - Reverse geocoding
               coordinate={{
                 latitude: parseFloat(selectedLocation?.latitude),
                 longitude: parseFloat(selectedLocation?.longitude),
