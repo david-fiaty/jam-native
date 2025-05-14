@@ -13,8 +13,9 @@ type Props = BaseProps & {
   columnWrapperStyle?: object;
   showsHorizontalScrollIndicator?: boolean;
   emptyMessage?: any;
+  onEndReachedThreshold?: any;
   onEndReached?: () => void;
-  keyExtractor?: ((row: any) => string);
+  keyExtractor?: ((row: any, index?: number) => string);
   renderItem: ((item: any) => JSX.Element);
 };
 
@@ -27,6 +28,7 @@ const ListView = ({
   columnWrapperStyle,
   showsHorizontalScrollIndicator,
   emptyMessage,
+  onEndReachedThreshold,
   onEndReached,
   keyExtractor,
   renderItem,
@@ -49,10 +51,11 @@ const ListView = ({
       maxToRenderPerBatch={Config.paginationSize}
       removeClippedSubviews={true}
       windowSize={5}
+      onEndReachedThreshold={onEndReachedThreshold}
+      onEndReached={onEndReached}
       keyExtractor={keyExtractor}
       renderItem={renderItem}
       ListEmptyComponent={() => emptyMessage}
-      onEndReached={onEndReached}
     />
   );
 };
