@@ -80,7 +80,7 @@ const JamsMapView = () => {
     }
   }, [isLoaded, searchState]);
 
-  if (!isLoaded) return <SpinnerView />;
+  if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
 
   return (
     <TouchableWithoutFeedback>
