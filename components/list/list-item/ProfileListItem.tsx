@@ -6,7 +6,7 @@ import IconView from '@/components/view/IconView';
 import ImageView from "@/components/view/ImageView";
 import MediaManager from "@/manager/MediaManager";
 
-const profileImageSize: number = 38;
+const profileImageSize: number = 34;
 
 type Props = {
   row?: any;
@@ -42,7 +42,7 @@ const ProfileListItem = ({ row, selected, onListItemPress }: Props) => {
             name="user"
             theme="secondary"
             size={14}
-            padding={12}
+            padding={10}
           />
         )}
 
