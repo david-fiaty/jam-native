@@ -32,12 +32,23 @@ const JamsList = ({ idArray }: Props) => {
     );
   }, [sectors, profileData]);
 
+  const loadSearchData = async () => {
+    let data: any[] = [];
+    
+    if (idArray && idArray?.length > 0) {
+      data = await EntityManager.getJams({ items_ids: idArray });
+    }
+    else {
+      data = (await SearchManager.getResults())?.jam;
+    }
+
+    setSearchData(data);
+  };
+
   useEffect(() => {
     (async () => {
-      if (idArray && idArray?.length > 0) setSearchData(await EntityManager.getJams({ items_ids: idArray }))
-      else setSearchData((await SearchManager.getResults())?.jam);
-
       if (!isLoaded) {
+        await loadSearchData();
         setSectors(await EntityManager.getSectors());
         setProfileData(await UserManager.getProfileData());
         setIsLoaded(true);
