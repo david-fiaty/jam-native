@@ -21,20 +21,19 @@ const JamsMapView = () => {
   const getInitialRegion = () => {
     let latitude: any = Config.defaultLocation.latitude;
     let longitude: any = Config.defaultLocation.longitude;
+    let latitudeDelta: any = 0.2;
+    let longitudeDelta: any = 0.2;
 
     if (currentLocation?.latitude && currentLocation?.longitude) {
       latitude = currentLocation.latitude;
       longitude = currentLocation.longitude; 
     }
 
-    let latitudeDelta: any = 0.4;
-    let longitudeDelta: any = 0.4;
-
     return {
-      latitude: parseFloat(latitude),
-      longitude: parseFloat(longitude),
-      latitudeDelta: parseFloat(latitudeDelta),
-      longitudeDelta: parseFloat(longitudeDelta),
+      latitude: latitude,
+      longitude: longitude,
+      latitudeDelta: latitudeDelta,
+      longitudeDelta: longitudeDelta,
     };
   };
 
