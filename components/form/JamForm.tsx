@@ -38,9 +38,6 @@ const JamForm = () => {
   const formData = useSelector((state: any) => state.form[resource]);
   const jamCategories = StaticData.jamCategories;
 
-
-  const formErrors = useSelector((state: any) => state.form.errors);
-
   const submitForm = async () => {
     setIsProcessing(true);
 
