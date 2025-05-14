@@ -1,6 +1,5 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { usePathname } from 'expo-router';
-import { useRoute } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
