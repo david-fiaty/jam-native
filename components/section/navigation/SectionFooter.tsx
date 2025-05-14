@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from 'expo-router';
 import { useSelector } from "react-redux";
 import { Layout } from '@/constants/Layout';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import IconView from '@/components/view/IconView';
 import BoxView from '@/components/view/BoxView';
