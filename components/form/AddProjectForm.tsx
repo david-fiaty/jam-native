@@ -73,8 +73,6 @@ const AddProjectForm = () => {
   }, [isLoaded, resource, profileId, formData]);
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(formData)
   
   return (
     <BoxView
@@ -150,6 +148,7 @@ const AddProjectForm = () => {
           })}
         />
 
+        <TextView>ytyt</TextView>
         <ProfileJamsList
           resource={resource}
           field="jams_ids"
