@@ -63,8 +63,6 @@ const ProfileJamsList = ({ resource, field, title, idArray, addButton, allButton
     }
   };
 
-  
-
   const deleteItem = (row: any) => {
     let itemIds: any[] = [...selectedIds].filter((n: number) => n !== row.item.id);
 
@@ -82,7 +80,7 @@ const ProfileJamsList = ({ resource, field, title, idArray, addButton, allButton
       if (!isLoaded) {
         let jams: any = [];
 
-        if (idArray.length) {
+        if (idArray && idArray.length) {
           jams = await EntityManager.getJams({ items_ids: idArray });
         }
 
