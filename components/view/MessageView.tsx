@@ -3,11 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 import { setMessage } from '@/redux/slices/MessageSlice';
-import { BaseProps } from '@/constants/Types';
 import ScreenManager from '@/manager/ScreenManager';
 import IconView from './IconView';
 
-type Props = BaseProps & {
+type Props = {
   title?: string;
 };
 

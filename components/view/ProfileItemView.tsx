@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from 'react-native';
 import { useRouter } from "expo-router";
-import { BaseProps } from '@/constants/Types';
 import { Layout } from "@/constants/Layout";
 import TextView from './TextView';
 import EntityManager from "@/manager/EntityManager";
@@ -14,7 +13,7 @@ import ProfileHeaderView from "./ProfileHeaderView";
 import SectionManager from "@/manager/SectionManager";
 import SpinnerView from "./SpinnerView";
 
-type Props = BaseProps & {
+type Props = {
   profileId: any;
 };
 
