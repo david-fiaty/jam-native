@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { Input } from '@rneui/themed';
 import { Layout } from '@/constants/Layout';
-import { Colors } from '@/constants/Colors';
 import BoxView from '../view/BoxView';
 
 type Props = {
@@ -20,7 +19,7 @@ const InputTextareaField = ({value, placeholder, containerStyle, disabled, readO
         style={styles.element}
         containerStyle={[Layout.formField, styles.element]}
         placeholder={placeholder}
-        placeholderTextColor={Colors.primary}
+        placeholderTextColor={Layout.colors.primary}
         multiline={true}
         textAlignVertical="top"
         numberOfLines={10}

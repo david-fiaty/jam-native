@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import { Colors } from '@/constants/Colors';
 import BoxView from '@/components/view/BoxView';
 import IconView from '@/components/view/IconView';
 import TextView from '@/components/view/TextView';
@@ -40,7 +39,7 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.white,
+    backgroundColor: Layout.colors.white,
     width: '100%',
     padding: Layout.space.base,
     paddingLeft: 0,

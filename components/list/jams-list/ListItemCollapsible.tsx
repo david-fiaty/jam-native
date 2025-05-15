@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import { Layout } from "@/constants/Layout";
-import { Colors } from "@/constants/Colors";
 import BoxView from "@/components/view/BoxView";
 import TextView from "@/components/view/TextView";
 import CollapsibleView from "@/components/view/CollapsibleView";
@@ -140,7 +139,7 @@ const styles = StyleSheet.create({
   detail: {
     width: "100%",
     gap: 0,
-    backgroundColor: Colors.secondary,
+    backgroundColor: Layout.colors.secondary,
     padding: Layout.space.base/2,
     borderRadius: Layout.radius.round,
   },

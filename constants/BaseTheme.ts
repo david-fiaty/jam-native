@@ -1,24 +1,23 @@
 import { createTheme } from '@rneui/themed';
-import { Colors } from '@/constants/Colors';
 import { Layout } from './Layout';
 
 const BaseTheme = createTheme({
   lightColors: {
-    primary: Colors.primary,
+    primary: Layout.colors.primary,
   },
   components: {
     Button: {
       titleStyle: {
-        color: Colors.white,
+        color: Layout.colors.white,
         fontWeight: 'normal',
       },
       buttonStyle: {
-        backgroundColor: Colors.primary,
+        backgroundColor: Layout.colors.primary,
         borderRadius: Layout.radius.round,
       },
     },
     Input: {
-      placeholderTextColor: Colors.primary,
+      placeholderTextColor: Layout.colors.primary,
       containerStyle: Layout.formField,
       inputContainerStyle: {
         borderBottomWidth: 0,
@@ -26,7 +25,7 @@ const BaseTheme = createTheme({
       inputStyle: {
         padding: 0,
         margin: 0,
-        color: Colors.primary,
+        color: Layout.colors.primary,
         fontSize: Layout.fontSize.base,
       },
     },

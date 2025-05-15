@@ -1,6 +1,5 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import { Colors } from '@/constants/Colors';
 import i18n from '@/translation/i18n';
 import TextView from '../view/TextView';
 
@@ -20,14 +19,14 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     borderRadius: Layout.radius.round,
-    backgroundColor: Colors.primary,
+    backgroundColor: Layout.colors.primary,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     height: Layout.space.base*4.3,
   },
   label: {
-    color: Colors.white,
+    color: Layout.colors.white,
     fontWeight: 'bold',
     textTransform: 'uppercase',
   },

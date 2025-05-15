@@ -1,6 +1,5 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 import { Config } from '@/constants/Config';
 import SkipButton from '../button/SkipButton';
@@ -29,16 +28,16 @@ const LoginSignupButton = () => {
 const styles = StyleSheet.create({
   containerStyle: {
     borderWidth: Layout.borderWidth.base, 
-    borderColor: Colors.primary,
+    borderColor: Layout.colors.primary,
     borderRadius: 30,
     padding: Layout.space.base,
   },
   buttonStyle: {
-    backgroundColor: Colors.white,
+    backgroundColor: Layout.colors.white,
   },
   titleStyle: {
     textTransform: 'uppercase',
-    color: Colors.primary,
+    color: Layout.colors.primary,
   },
 });
 

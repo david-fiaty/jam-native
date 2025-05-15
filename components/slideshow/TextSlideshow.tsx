@@ -1,6 +1,5 @@
 import { StyleSheet, View } from "react-native";
 import { Layout } from "@/constants/Layout";
-import { Colors } from "@/constants/Colors";
 import Slick from "react-native-slick";
 import TextView from "../view/TextView";
 import ScreenManager from "@/manager/ScreenManager";
@@ -62,10 +61,10 @@ const styles = StyleSheet.create({
     height: Layout.space.base,
   },
   dot: {
-    backgroundColor: Colors.secondary,
+    backgroundColor: Layout.colors.secondary,
   },
   activeDot: {
-    backgroundColor: Colors.primary,
+    backgroundColor: Layout.colors.primary,
   },
 });
 

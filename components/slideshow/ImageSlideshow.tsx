@@ -1,7 +1,6 @@
 import { memo } from "react";
 import { StyleSheet, View } from "react-native";
 import { Layout } from "@/constants/Layout";
-import { Colors } from "@/constants/Colors";
 import { Config } from "@/constants/Config";
 import Slick from "react-native-slick";
 import ImageView from "../view/ImageView";
@@ -63,7 +62,7 @@ const ImageSlideshow = ({ data }: Props) => {
 const styles = StyleSheet.create({
   container: {
     height: height,
-    backgroundColor: Colors.secondary,
+    backgroundColor: Layout.colors.secondary,
   },
   item: {
     flex: 1,
@@ -83,10 +82,10 @@ const styles = StyleSheet.create({
     height: Layout.space.base,
   },
   dot: {
-    backgroundColor: Colors.secondary,
+    backgroundColor: Layout.colors.secondary,
   },
   activeDot: {
-    backgroundColor: Colors.primary,
+    backgroundColor: Layout.colors.primary,
   },
 });
 

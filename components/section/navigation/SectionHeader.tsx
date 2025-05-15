@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import { Config } from "@/constants/Config";
-import { Colors } from '@/constants/Colors';
 import BoxView from '@/components/view/BoxView';
 import LogoView from '@/components/view/LogoView';
 import IconView from '@/components/view/IconView';
@@ -81,7 +80,7 @@ const styles = StyleSheet.create({
     gap: 0,
     marginTop: Layout.space.base*1.5,
     marginBottom: Layout.space.base*1.5,
-    backgroundColor: Colors.white,
+    backgroundColor: Layout.colors.white,
   },
   headerLeft: {
     width: '42%',
