@@ -148,7 +148,6 @@ const AddProjectForm = () => {
           })}
         />
 
-        <TextView>ytyt</TextView>
         <ProfileJamsList
           resource={resource}
           field="jams_ids"
