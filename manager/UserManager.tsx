@@ -1,6 +1,8 @@
 import { Platform } from 'react-native';
 import { useLocales } from 'expo-localization';
 import { setLikedJams, setSavedJams, setLikedProjects, setSavedProjects } from '@/redux/slices/UserSlice';
+import { setActiveModals } from '@/redux/slices/ModalSlice';
+import { setActiveSections } from '@/redux/slices/SectionSlice';
 import { setLanguage } from '@/redux/slices/AppSlice';
 import { Config } from '@/constants/Config';
 import Store from '@/redux/Store';
@@ -9,8 +11,7 @@ import DataManager from './DataManager';
 import * as Location from 'expo-location';
 import * as Device from "expo-device";
 import i18n from '@/translation/i18n';
-import { setActiveModals } from '@/redux/slices/ModalSlice';
-import { setActiveSections } from '@/redux/slices/SectionSlice';
+
 
 class UserManager {
   async sendSignupCode(data: any) {
