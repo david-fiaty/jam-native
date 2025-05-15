@@ -155,7 +155,7 @@ const AddProjectForm = () => {
           isDeletable={true}
           multiSelect={true}
           title={<TextView>{i18n.t('Project Jams')}</TextView>}
-          idArray={[18, 20, 32, 33, 37]} // Todo - API should send ids, not full objects
+          idArray={formData?.profile_jams}
           onAddButtonPress={() => ModalManager.toggleModal("SelectJamsForm", {
             field: 'jams_ids',
             resource: resource,
