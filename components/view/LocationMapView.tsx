@@ -4,7 +4,6 @@ import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
-import { Colors } from "@/constants/Colors";
 import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
 import i18n from "@/translation/i18n";
@@ -112,7 +111,7 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
             initialRegion={getInitialRegion()}
           >
             <Marker
-              pinColor={Colors.tertiary}
+              pinColor={Layout.colors.tertiary}
               title={i18n.t("Selected location")}
               description={i18n.t("This is the selected location")} // Todo - Reverse geocoding
               coordinate={{

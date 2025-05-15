@@ -1,8 +1,7 @@
 import { StyleSheet, View } from 'react-native';
-import TextView from './TextView';
-import { Colors } from '@/constants/Colors';
-import BoxView from './BoxView';
 import { Layout } from '@/constants/Layout';
+import TextView from './TextView';
+import BoxView from './BoxView';
 
 type Props = {
   data?: any;
@@ -55,7 +54,7 @@ const styles = StyleSheet.create({
     width: bulletSize,
     height: bulletSize,
     borderRadius: bulletSize,
-    backgroundColor: Colors.primary,
+    backgroundColor: Layout.colors.primary,
   },
 });
 

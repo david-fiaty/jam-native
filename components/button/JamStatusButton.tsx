@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
 
 type Props = {
-  active?: boolean,
+  active?: boolean;
 };
 
 const JamStatusButton = ({active}: Props) => {
@@ -31,7 +30,7 @@ const styles = StyleSheet.create({
     width: Layout.space.base*2.5,
   },
   dot: {
-    backgroundColor: Colors.primary,
+    backgroundColor: Layout.colors.primary,
     width: Layout.space.base*0.75,
     height: Layout.space.base*0.75,
     borderRadius: Layout.radius.round,
@@ -42,17 +41,17 @@ const styles = StyleSheet.create({
     minWidth: 50,
     textAlign: 'center',
     borderRadius: Layout.radius.round,
-    color: Colors.white,
+    color: Layout.colors.white,
     fontSize: 11,
-    backgroundColor: Colors.primary,
+    backgroundColor: Layout.colors.primary,
     paddingTop: 0,
     paddingBottom: 2,
   },
   active: {
-    backgroundColor: Colors.primary,
+    backgroundColor: Layout.colors.primary,
   },
   inactive: {
-    backgroundColor: Colors.tertiary,
+    backgroundColor: Layout.colors.tertiary,
   },
 });
 

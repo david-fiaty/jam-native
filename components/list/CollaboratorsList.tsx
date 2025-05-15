@@ -3,7 +3,6 @@ import { View, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
-import { Colors } from '@/constants/Colors';
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
@@ -133,10 +132,10 @@ const CollaboratorsList = ({ resource, field }: Props) => {
 
 const styles = StyleSheet.create({
   inputTextFieldContainer: {
-    backgroundColor: Colors.white,
+    backgroundColor: Layout.colors.white,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
-    borderColor: Colors.primary,
+    borderColor: Layout.colors.primary,
   },
   wecomeMessage: {
     textTransform: 'uppercase',

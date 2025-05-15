@@ -2,7 +2,6 @@ import { StyleSheet, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import ImageView from './ImageView';
 import BoxView from './BoxView';
-import { Colors } from '@/constants/Colors';
 
 type Props = {
   width?: any;
@@ -33,7 +32,7 @@ const NoImageView = ({width, height, rounded, containerStyle}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.secondary,
+    backgroundColor: Layout.colors.secondary,
     borderRadius: Layout.radius.round,
   },
   image: {

@@ -2,9 +2,8 @@ import React, { useEffect } from 'react';
 import { Stack, useRouter } from 'expo-router';
 import { useFonts } from 'expo-font';
 import { Provider } from 'react-redux';
-import { Colors } from '@/constants/Colors';
+import { Layout } from '@/constants/Layout';
 import { Platform, BackHandler } from 'react-native';
-import { setActiveSections } from "@/redux/slices/SectionSlice";
 import * as ExpoSplashScreen from 'expo-splash-screen';
 import Store from "@/redux/Store";
 import SectionManager from '@/manager/SectionManager';
@@ -20,10 +19,10 @@ const RootLayout = () => {
     statusBarStyle: 'dark',
     animation: 'fade',
     headerShown: false,
-    statusBarBackgroundColor: Colors.white,
-    headerTintColor: Colors.white,    
+    statusBarBackgroundColor: Layout.colors.white,
+    headerTintColor: Layout.colors.white,    
     headerStyle: {
-      backgroundColor: Colors.white, 
+      backgroundColor: Layout.colors.white, 
     },
   };
 

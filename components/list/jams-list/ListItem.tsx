@@ -1,5 +1,4 @@
 import { StyleSheet, View } from "react-native";
-import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
 import ListItemHeader from "./ListItemHeader";
 import ListItemImage from "./ListItemImage";
@@ -32,7 +31,7 @@ const styles = StyleSheet.create({
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
     marginBottom: Layout.space.base*1.5,
-    borderColor: Colors.primary,
+    borderColor: Layout.colors.primary,
   },
 });
 
