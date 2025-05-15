@@ -13,8 +13,6 @@ type Props = {
   field: string;
 };
 
-const numColumns = 3;
-
 const SelectJamsForm = ({ resource, field }: Props) => {
   const dispatch = useDispatch();
   const [selectedIds, setSelectedIds] = useState<any>([]);
