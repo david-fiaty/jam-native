@@ -60,6 +60,8 @@ const SelectJamsForm = ({ resource, profileId, field }: Props) => {
     })();
   }, [isLoaded, field, formData]);
 
+  if (!isLoaded) return <SpinnerView />;
+
   return (
     <BoxView direction="column" align="flex-start" justify="flex-start" style={[Layout.formContainer, styles.container]}>
       <ProfileJamsList
