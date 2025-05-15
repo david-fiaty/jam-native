@@ -1,9 +1,8 @@
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Divider } from '@rneui/themed';
-import { BaseProps } from '@/constants/Types';
 import { Layout } from '@/constants/Layout';
 
-type Props = BaseProps & {
+type Props = {
   theme?: string, 
   style?: object,
 };

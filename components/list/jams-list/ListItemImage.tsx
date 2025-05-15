@@ -1,9 +1,8 @@
 import { memo } from "react";
-import { BaseProps } from "@/constants/Types";
 import ImageSlideshow from "@/components/slideshow/ImageSlideshow";
 
-type Props = BaseProps & {
-  row?: any,
+type Props = {
+  row?: any;
 };
 
 const ListItemImage = ({ row }: Props) => {

@@ -1,15 +1,14 @@
 import { StyleSheet, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import { BaseProps } from '@/constants/Types';
 import ImageView from './ImageView';
 import BoxView from './BoxView';
 import { Colors } from '@/constants/Colors';
 
-type Props = BaseProps & {
-  width?: any,
-  height?: any,
-  rounded?: boolean,
-  containerStyle?: any,
+type Props = {
+  width?: any;
+  height?: any;
+  rounded?: boolean;
+  containerStyle?: any;
 };
 
 const NoImageView = ({width, height, rounded, containerStyle}: Props) => {

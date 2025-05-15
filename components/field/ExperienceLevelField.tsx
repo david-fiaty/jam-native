@@ -1,12 +1,10 @@
 import { StyleSheet } from 'react-native';
-import { BaseProps } from '@/constants/Types';
 import BoxView from '../view/BoxView';
 import SelectListBase from '../base/SelectListBase';
 import StaticData from '@/constants/StaticData';
-import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 
-type Props = BaseProps & {
+type Props = {
   label?: any;
   value?: any;
   onChangeValue?: (option: any) => void;
