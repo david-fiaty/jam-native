@@ -11,7 +11,6 @@ export default () => {
     if (rootNavigationState?.key && !isLoaded) {
       setIsLoaded(true);
       SectionManager.push(router, 'welcome');
-      router.push('/welcome');
     }
   }, [isLoaded, rootNavigationState]);
 
