@@ -160,7 +160,6 @@ const AddProjectForm = () => {
           onAddButtonPress={() => ModalManager.toggleModal("SelectJamsForm", {
             field: 'jams_ids',
             resource: resource,
-            profileId: profileId,
           })}
         />
         
