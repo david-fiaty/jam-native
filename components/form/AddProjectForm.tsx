@@ -28,7 +28,6 @@ const AddProjectForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
-  const [profileItem, setProfileItem] = useState<any>(null);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateField = (key: any, value: any) => {
@@ -58,7 +57,6 @@ const AddProjectForm = () => {
     (async () => {
       if (!isLoaded) { 
         setProfileId(await UserManager.getProfileId());
-        setProfileItem(await UserManager.getProfileData());
         
         dispatch(setFormData<any>({ 
           resource: resource,
@@ -76,7 +74,7 @@ const AddProjectForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(profileItem?.profile_jams)
+  console.log(formData)
   
   return (
     <BoxView
@@ -159,7 +157,7 @@ const AddProjectForm = () => {
           isDeletable={true}
           multiSelect={true}
           title={<TextView>{i18n.t('Project Jams')}</TextView>}
-          idArray={profileItem?.profile_jams}
+          idArray={formData?.jams_ids}
           onAddButtonPress={() => ModalManager.toggleModal("SelectJamsForm", {
             field: 'jams_ids',
             resource: resource,
