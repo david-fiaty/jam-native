@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { BaseProps } from '@/constants/Types';
 import { Layout } from '@/constants/Layout';
 import * as ImagePicker from 'expo-image-picker';
 import ImageView from '../view/ImageView';
@@ -11,7 +10,7 @@ import MediaManager from '@/manager/MediaManager';
 import DataManager from "@/manager/DataManager";
 import InputTextField from "./InputTextField";
 
-type Props = BaseProps & {
+type Props = {
   label?: JSX.Element, 
   value?: any,
   preview?: boolean

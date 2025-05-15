@@ -1,11 +1,10 @@
 import { StyleSheet } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import { BaseProps } from '@/constants/Types';
 import ImageView from './ImageView';
 
-type Props = BaseProps & {
-  size: any,
-  style?: object,
+type Props = {
+  size: any;
+  style?: object;
 };
 
 const path: any = require('@/assets/images/logo-512.png'); 

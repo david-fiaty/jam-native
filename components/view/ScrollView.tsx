@@ -1,7 +1,11 @@
 import { Pressable, ScrollView } from 'react-native';
-import { BaseProps } from '@/constants/Types';
 
-const ScrollBoxView = ({style, children}: BaseProps) => {
+type Props = {
+  style?: any;
+  children?: any;
+};
+
+const ScrollBoxView = ({style, children}: Props) => {
   return (
     <ScrollView 
       style={style}

@@ -1,5 +1,4 @@
 import { StyleSheet, View } from "react-native";
-import { BaseProps } from "@/constants/Types";
 import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
 import ListItemHeader from "./ListItemHeader";
@@ -9,7 +8,7 @@ import ListItemTitle from "./ListItemTitle";
 import ListItemDescription from "./ListItemDescription";
 import ListItemCollapsible from "./ListItemCollapsible";
 
-type Props = BaseProps & {
+type Props = {
   row?: any;
   sectorsData?: any;
   profileData?: any;

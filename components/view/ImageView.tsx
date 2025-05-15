@@ -1,17 +1,16 @@
 import { Image, StyleSheet } from 'react-native';
-import { BaseProps } from '@/constants/Types';
 import { Config } from '@/constants/Config';
 import CachedImage from 'expo-cached-image'
 import SpinnerView from './SpinnerView';
 
-type Props = BaseProps & {
-  path?: any,
-  uri?: any,
-  width?: string | number,
-  height?: string | number,
-  resizeMethod?: any,
-  resizeMode?: any,
-  style?: object, 
+type Props = {
+  path?: any;
+  uri?: any;
+  width?: string | number;
+  height?: string | number;
+  resizeMethod?: any;
+  resizeMode?: any;
+  style?: object;
 };
 
 const ImageView = ({path, uri, width, height, resizeMethod, resizeMode, style}: Props) => {
