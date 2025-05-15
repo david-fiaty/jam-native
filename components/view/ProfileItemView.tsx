@@ -48,7 +48,7 @@ const ProfileItemView = ({ profileId }: Props) => {
         <ProfileJamsList 
           allButton={true}
           title={<TextView style={styles.sectionTitle}>{i18n.t('Jams')} ({profileItem?.number_of_jams || 0})</TextView>}
-          idArray={profileItem?.profile_jams?.map((o: any) => o.id)} // Todo - API should send ids, not full objects
+          idArray={profileItem?.profile_jams}
           onListItemPress={(row: any) => SectionManager.push(router, 'jam-item', { jamId: JSON.stringify([row?.item?.id]), title: row?.item?.title })}
         />   
 

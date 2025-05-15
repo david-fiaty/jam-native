@@ -65,15 +65,11 @@ const ProfileSection = () => {
 
       <ProfileJamsList
         title={i18n.t("Your Jams")}
-        allButton={(formData?.profile_jams?.map((o: any) => o.id))?.length > 0} // Todo - API should send ids, not full objects
-        //allButton={formData?.profile_jams?.length > 0}
+        allButton={formData?.profile_jams?.length > 0}
         addButton={true}
-        //idArray={formData?.profile_jams}
-        idArray={formData?.profile_jams?.map((o: any) => o.id)} // Todo - API should send ids, not full objects
+        idArray={formData?.profile_jams}
         onAddButtonPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
-
-        // Todo - API should send ids, not full objects
-        onListItemPress={(row: any) => SectionManager.push(router, 'jam-item', { jamId: JSON.stringify(formData?.profile_jams?.map((o: any) => o.id)), title: row?.item?.title })}
+        onListItemPress={(row: any) => SectionManager.push(router, 'jam-item', { jamId: JSON.stringify(formData?.profile_jams), title: row?.item?.title })}
       />
       <DividerView />
 
