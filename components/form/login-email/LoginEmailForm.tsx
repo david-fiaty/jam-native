@@ -4,7 +4,6 @@ import { useRouter } from "expo-router";
 import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
-import { Colors } from "@/constants/Colors";
 import i18n from "@/translation/i18n";
 import InputTextField from '@/components/field/InputTextField';
 import ButtonView from '@/components/view/ButtonView';
@@ -92,10 +91,10 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
   inputTextFieldContainer: {
-    backgroundColor: Colors.white,
+    backgroundColor: Layout.colors.white,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
-    borderColor: Colors.primary,
+    borderColor: Layout.colors.primary,
   },
 });
 

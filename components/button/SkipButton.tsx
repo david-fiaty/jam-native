@@ -1,9 +1,9 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Colors } from '@/constants/Colors';
+import { Layout } from '@/constants/Layout';
+import { Config } from '@/constants/Config';
 import i18n from '@/translation/i18n';
 import TextView from '../view/TextView';
-import { Config } from '@/constants/Config';
 import SectionManager from '@/manager/SectionManager';
 
 type Props = {
@@ -27,14 +27,14 @@ const SkipButton = ({onPress}: Props) => {
 
 const styles = StyleSheet.create({
   containerStyle: {
-    borderColor: Colors.primary,
+    borderColor: Layout.colors.primary,
   },
   buttonStyle: {
-    backgroundColor: Colors.white,
+    backgroundColor: Layout.colors.white,
     padding: 0,
   },
   titleStyle: {
-    color: Colors.primary,
+    color: Layout.colors.primary,
   },
 });
 

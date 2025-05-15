@@ -2,7 +2,6 @@ import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
-import { Colors } from "@/constants/Colors";
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
 import ListView from "../view/ListView";
@@ -153,7 +152,7 @@ const styles = StyleSheet.create({
   },
   link: {
     borderBottomWidth: Layout.borderWidth.base,
-    borderBottomColor: Colors.primary,
+    borderBottomColor: Layout.colors.primary,
   },
   item: {
     flexDirection: "column",

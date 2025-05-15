@@ -2,7 +2,6 @@ import MapView , { Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-nativ
 import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useSelector } from "react-redux";
-import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
@@ -105,7 +104,7 @@ const styles = StyleSheet.create({
     padding: 0,
     width: '100%',
     flexGrow: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: Layout.colors.white,
   },
   map: {
     flex: 1,

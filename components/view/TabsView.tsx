@@ -1,5 +1,4 @@
 import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
-import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 import BoxView from './BoxView';
 import TextView from './TextView';
@@ -50,7 +49,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Layout.space.base,
     paddingBottom: Layout.space.base,
     borderBottomWidth: Layout.borderWidth.base,
-    borderBottomColor: Colors.primary,
+    borderBottomColor: Layout.colors.primary,
   },
   currentTab: { 
     fontWeight: 'bold',

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
-import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
@@ -253,16 +252,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: Colors.secondary,
+    backgroundColor: Layout.colors.secondary,
     padding: Layout.space.base,
     borderWidth: Layout.borderWidth.big,
     borderRadius: Layout.radius.round,
-    borderColor: Colors.secondary,
+    borderColor: Layout.colors.secondary,
     width: Layout.space.base * 7,
     height: Layout.space.base * 7,
   },
   categoryItemSelected: {
-    borderColor: Colors.primary,
+    borderColor: Layout.colors.primary,
   },
   fieldContainer: {
     maxWidth: '100%',

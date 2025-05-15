@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { usePathname } from 'expo-router';
 import { setActiveSections, setSectionConfig } from "@/redux/slices/SectionSlice";
 import { StyleSheet } from 'react-native';
-import { Colors } from '@/constants/Colors';
 import { Layout } from "@/constants/Layout";
 import BoxView from '../view/BoxView';
 import SectionHeader from '../section/navigation/SectionHeader';
@@ -245,12 +244,12 @@ const SectionView = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: Layout.colors.white,
     paddingHorizontal: Layout.space.base*1.5,
   },
   modal: {
     paddingHorizontal: Layout.space.base*1.5,
-    backgroundColor: Colors.white,
+    backgroundColor: Layout.colors.white,
     zIndex: 10,
   },
   header: {

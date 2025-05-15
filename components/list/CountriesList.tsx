@@ -3,7 +3,6 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
-import { Colors } from '@/constants/Colors';
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
@@ -147,10 +146,10 @@ const CountriesList = ({ resource, field }: Props) => {
 
 const styles = StyleSheet.create({
   searchFieldContainer: {
-    backgroundColor: Colors.white,
+    backgroundColor: Layout.colors.white,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
-    borderColor: Colors.primary,
+    borderColor: Layout.colors.primary,
   },
   listItem: {
     padding: Layout.space.base / 1.2,
