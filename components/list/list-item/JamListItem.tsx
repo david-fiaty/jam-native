@@ -1,6 +1,5 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { Layout } from "@/constants/Layout";
-import { BaseProps } from "@/constants/Types";
 import i18n from "@/translation/i18n";
 import ImageView from "@/components/view/ImageView";
 import ScreenManager from "@/manager/ScreenManager";
@@ -9,7 +8,7 @@ import NoImageView from "@/components/view/NoImageView";
 import MediaManager from "@/manager/MediaManager";
 import IconView from "@/components/view/IconView";
 
-type Props = BaseProps & {
+type Props = {
   row?: any;
   isAddable?: boolean;
   isDeletable?: boolean;

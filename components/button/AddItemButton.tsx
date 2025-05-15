@@ -1,6 +1,5 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { Layout } from "@/constants/Layout";
-import { Colors } from "@/constants/Colors";
 import TextView from "../view/TextView";
 import IconView from "../view/IconView";
 import MediaManager from "@/manager/MediaManager";
@@ -32,7 +31,7 @@ const AddItemButton = ({ label, width, height, onPress }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.secondary,
+    backgroundColor: Layout.colors.secondary,
     borderRadius: Layout.space.base,
     alignItems: "center",
     justifyContent: "center",

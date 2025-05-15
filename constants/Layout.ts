@@ -1,4 +1,11 @@
-import { Colors } from './Colors';
+const colors = {
+  primary: '#0A00AA',
+  secondary: '#E1E0F4',
+  tertiary: '#FAA000',
+  white: '#FFFFFF',
+  black: '#000000',
+  gray: '#dedede',
+};
 
 const space: any = {
   small: 5,
@@ -26,23 +33,23 @@ const borderWidth: any = {
 const theme: any = {
   primary: {
     borderWidth: borderWidth.base,
-    borderColor: Colors.primary,
-    backgroundColor: Colors.primary,
+    borderColor: colors.primary,
+    backgroundColor: colors.primary,
   },
   secondary: {
     borderWidth: borderWidth.base,
-    borderColor: Colors.secondary,
-    backgroundColor: Colors.secondary,
+    borderColor: colors.secondary,
+    backgroundColor: colors.secondary,
   },
   tertiary: {
     borderWidth: borderWidth.base,
-    borderColor: Colors.tertiary,
-    backgroundColor: Colors.tertiary,
+    borderColor: colors.tertiary,
+    backgroundColor: colors.tertiary,
   },
   white: {
     borderWidth: borderWidth.base,
-    borderColor: Colors.white,
-    backgroundColor: Colors.white,
+    borderColor: colors.white,
+    backgroundColor: colors.white,
   }
 };
 
@@ -55,7 +62,7 @@ const mapStyle: any = [
     "elementType": "geometry",
     "stylers": [
       {
-        "color": Colors.white,
+        "color": colors.white,
       }
     ]
   },
@@ -64,7 +71,7 @@ const mapStyle: any = [
     "elementType": "geometry.fill",
     "stylers": [
       {
-        "color": Colors.secondary,
+        "color": colors.secondary,
       }
     ]
   },
@@ -73,7 +80,7 @@ const mapStyle: any = [
     "elementType": "geometry.fill",
     "stylers": [
       {
-        "color": Colors.gray,
+        "color": colors.gray,
       }
     ]
   },
@@ -82,13 +89,14 @@ const mapStyle: any = [
     "elementType": "geometry.stroke",
     "stylers": [
       {
-        "color": Colors.gray,
+        "color": colors.gray,
       }
     ]
   }
 ];
 
 export const Layout = {
+  colors: colors,
   theme: theme,
   space: space,
   radius: radius,
@@ -119,7 +127,7 @@ export const Layout = {
     justifyContent: 'flex-start',
     padding: space.base,
     borderBottomWidth: borderWidth.base,
-    borderBottomColor: Colors.primary,
+    borderBottomColor: colors.primary,
   },
   menuItemLabel: {
     flexDirection: 'row',
@@ -130,22 +138,22 @@ export const Layout = {
     width: '100%',
     height: '100%',
     flexGrow: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: colors.white,
   },
   mainContent: {
     width: '100%',
-    backgroundColor: Colors.white,
+    backgroundColor: colors.white,
     zIndex: 0,
   },
   formContainer: {
     width: "100%",
     gap: space.base,
-    backgroundColor: Colors.white,
+    backgroundColor: colors.white,
   },
   formField: {
-    backgroundColor: Colors.secondary,
+    backgroundColor: colors.secondary,
     borderWidth: borderWidth.base, 
-    borderColor: Colors.secondary, 
+    borderColor: colors.secondary, 
     borderRadius: radius.round,
     flexDirection: 'row',
     alignItems: 'center',
@@ -156,7 +164,7 @@ export const Layout = {
     width: '100%',
     borderWidth: borderWidth.base,
     borderRadius: radius.round,
-    borderColor: Colors.primary,
+    borderColor: colors.primary,
     padding: space.base/2,
   },
   listContainer: {
@@ -178,9 +186,9 @@ export const Layout = {
     flexWrap: 'wrap',
     gap: space.base,
     padding: space.base,
-    backgroundColor: Colors.secondary,
+    backgroundColor: colors.secondary,
     borderWidth: borderWidth.base, 
-    borderColor: Colors.secondary, 
+    borderColor: colors.secondary, 
     borderRadius: radius.round,
     justifyContent: 'flex-start',
   },

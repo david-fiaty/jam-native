@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
-import { Colors } from '@/constants/Colors';
 import { Config } from '@/constants/Config';
 import LogoView from '../view/LogoView';
 import BoxView from '../view/BoxView';
@@ -88,10 +87,10 @@ const LoginSection = () => {
 
 const styles = StyleSheet.create({
   inputTextFieldContainer: {
-    backgroundColor: Colors.white,
+    backgroundColor: Layout.colors.white,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
-    borderColor: Colors.primary,
+    borderColor: Layout.colors.primary,
   },
   linkContainer: {
     width: '100%',

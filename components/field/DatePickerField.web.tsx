@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { StyleSheet, Platform, TouchableOpacity, View } from 'react-native';
-import { BaseProps } from '@/constants/Types';
 import InputTextField from '../field/InputTextField';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
@@ -9,7 +8,7 @@ import Datetime from 'react-datetime';
 import "react-datetime/css/react-datetime.css";
 import { Config } from '@/constants/Config';
 
-type Props = BaseProps & {
+type Props = {
   placeholder?: string,
   value?: string,
   onChangeValue?: (value: any) => void,

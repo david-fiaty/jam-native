@@ -2,7 +2,6 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import { usePathname } from 'expo-router';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
-import { Colors } from '@/constants/Colors';
 import BoxView from '@/components/view/BoxView';
 import TextView from '@/components/view/TextView';
 import i18n from '@/translation/i18n';
@@ -58,7 +57,7 @@ const styles = StyleSheet.create({
     marginBottom: Layout.space.base*2,
   },
   disabled: {
-    color: Colors.secondary,
+    color: Layout.colors.secondary,
   },
 });
 
