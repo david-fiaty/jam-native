@@ -1,24 +1,6 @@
-import { StyleSheet } from 'react-native';
-import { ThemeProvider } from '@rneui/themed';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Colors } from '@/constants/Colors';
-import BaseTheme from "@/constants/BaseTheme";
-import SectionView from '@/components/section/SectionView';
+import { Redirect } from 'expo-router';
 
 export default () => {
-  return (
-    <ThemeProvider theme={BaseTheme}>
-      <SafeAreaView style={styles.container}>
-        <SectionView />
-      </SafeAreaView>
-    </ThemeProvider>
-  );
+  return <Redirect href="/welcome" />
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.white,
-  },
-});
 
