@@ -28,7 +28,7 @@ const SettingsMenu = () => {
       label: i18n.t('Logout'),
       onPress: () => {
         UserManager.logout();
-        SectionManager.replace(router, '');
+        SectionManager.replace(router, 'welcome');
       },
     },
   ];
