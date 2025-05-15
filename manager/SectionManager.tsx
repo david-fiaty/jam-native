@@ -64,7 +64,7 @@ class SectionManager {
     }
     else {
       router.dismissTo({
-        pathname: `/`,
+        pathname: `/welcome`,
         params: {},
       });
     }
