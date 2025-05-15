@@ -50,6 +50,8 @@ class SectionManager {
       let targetSection: any = sectionConfig.find((o: any) => o.id === activeSections[activeSections.length - 1].id);
 
       if (targetSection.backButtonRoute !== null) {
+        Store.dispatch(setActiveSections([]));
+        
         router.dismissTo({
           pathname: targetSection.backButtonRoute,
           params: targetSection?.params || {},
