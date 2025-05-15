@@ -1,24 +1,18 @@
-import { StyleSheet } from 'react-native';
-import { ThemeProvider } from '@rneui/themed';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Colors } from '@/constants/Colors';
-import BaseTheme from "@/constants/BaseTheme";
-import SectionView from '@/components/section/SectionView';
+import { useState, useEffect } from 'react';
+import { useRouter, useRootNavigationState } from 'expo-router';
 
 export default () => {
-  return (
-    <ThemeProvider theme={BaseTheme}>
-      <SafeAreaView style={styles.container}>
-        <SectionView />
-      </SafeAreaView>
-    </ThemeProvider>
-  );
-}
+  const router = useRouter();
+  const rootNavigationState = useRootNavigationState();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.white,
-  },
-});
+  useEffect(() => {
+    if (rootNavigationState?.key && !isLoaded) {
+      setIsLoaded(true);
+      router.push('/welcome');
+    }
+  }, [isLoaded, rootNavigationState]);
+
+  return null;
+}
 
