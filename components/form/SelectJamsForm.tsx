@@ -1,29 +1,21 @@
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { StyleSheet } from "react-native";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
-import i18n from "@/translation/i18n";
-import ScreenManager from "@/manager/ScreenManager";
-import ListView from "../view/ListView";
-import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
 import BoxView from "../view/BoxView";
-import BackButton from "../button/BackButton";
-import TextView from "../view/TextView";
-import JamListItem from "../list/list-item/JamListItem";
 import UserManager from "@/manager/UserManager";
 import ProfileJamsList from "../list/ProfileJamsList";
 
 type Props = {
   resource: string;
-  profileId: any;
   field: string;
 };
 
 const numColumns = 3;
 
-const SelectJamsForm = ({ resource, profileId, field }: Props) => {
+const SelectJamsForm = ({ resource, field }: Props) => {
   const dispatch = useDispatch();
   const [selectedIds, setSelectedIds] = useState<any>([]);
   const [profileItem, setProfileItem] = useState<any>(null);
