@@ -55,11 +55,14 @@ const CountriesList = ({ resource, field }: Props) => {
     let needle: string = value || searchValue || null;
 
     setSearchValue(needle);
+
     if (needle) {
       setIsSearching(true);
+      
       results = countriesData.filter((o: any) => {
         return o.name.replace(/\s+/g, '').toLowerCase().includes(needle.replace(/\s+/g, '').toLowerCase()); 
       });
+
       setIsSearching(false);
     } 
     
