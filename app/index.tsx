@@ -10,7 +10,8 @@ export default () => {
   useEffect(() => {
     if (rootNavigationState?.key && !isLoaded) {
       setIsLoaded(true);
-      SectionManager.push(router, 'welcome');
+      //SectionManager.push(router, 'welcome');
+      router.push('/welcome');
     }
   }, [isLoaded, rootNavigationState]);
 
