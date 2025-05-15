@@ -22,8 +22,9 @@ import UserManager from "@/manager/UserManager";
 import FormManager from "@/manager/FormManager";
 import ProfileJamsList from "../list/ProfileJamsList";
 
+const resource: string = 'project';
+
 const AddProjectForm = () => {
-  const resource: string = 'project';
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
