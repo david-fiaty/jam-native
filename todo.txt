@@ -169,6 +169,22 @@ const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude
 
 
 
+    "liked_jams": [
+        39
+    ],
+    "saved_jams": [
+        32
+    ],
+    "liked_projects": [],
+    "saved_projects": [],
+    "profile_jams": [
+        32,
+        37,
+        39
+    ],
+    "profile_projects": []
+
+
 
 {
     "tokens": {

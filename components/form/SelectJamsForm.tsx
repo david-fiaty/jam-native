@@ -67,8 +67,7 @@ const SelectJamsForm = ({ resource, profileId, field }: Props) => {
         field="jams_ids"
         isAddable={true}
         multiSelect={true}
-        idArray={[18, 20, 32, 33, 37]}
-        //idArray={profileItem?.profile_jams?.map((o: any) => o.id)} // Todo - API should send ids, not full objects
+        idArray={profileItem?.profile_jams}
         onListItemPress={(row: any) => toggleItem(row)}
       />
     </BoxView>
