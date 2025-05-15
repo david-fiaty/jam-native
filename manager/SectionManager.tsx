@@ -47,12 +47,11 @@ class SectionManager {
     Store.dispatch(setActiveSections(activeSections));
 
     if (activeSections.length > 0) { 
-      let targetSectionIndex: number = sectionConfig.findIndex((o: any) => o.id === activeSections[activeSections.length - 1].id);
-      let targetSection: any = sectionConfig[targetSectionIndex];
-      
+      let targetSection: any = sectionConfig.find((o: any) => o.id === activeSections[activeSections.length - 1].id);
+
       if (targetSection.backButtonRoute !== null) {
         Store.dispatch(setActiveSections([]));
-
+        
         router.dismissTo({
           pathname: targetSection.backButtonRoute,
           params: targetSection?.params || {},
@@ -71,10 +70,6 @@ class SectionManager {
         params: {},
       });
     }
-  }
-
-  rewindTo(sectionId: string) {
-
   }
 }
 
