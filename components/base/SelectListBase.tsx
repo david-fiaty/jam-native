@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
-import { Colors } from "@/constants/Colors";
-import TextView from "../view/TextView";
 import { Layout } from "@/constants/Layout";
+import TextView from "../view/TextView";
 
 type Props = {
   value?: any;
@@ -50,7 +49,7 @@ const SelectListBase = ({value, data, placeholder, disabled, elementStyle, conta
         labelField="label"
         valueField="value"
         placeholder={placeholder}
-        iconColor={Colors.primary}
+        iconColor={Layout.colors.primary}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
         onChange={onChange}
@@ -82,14 +81,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: Layout.space.base,
   },
   placeholderStyle: {
-    color: Colors.primary,
+    color: Layout.colors.primary,
     fontSize: Layout.fontSize.base,
   },
   itemTextStyle: {
     padding: Layout.space.base,
   },
   selectedTextStyle: {
-    color: Colors.primary,
+    color: Layout.colors.primary,
     fontSize: Layout.fontSize.base,
   },
   iconStyle: {},

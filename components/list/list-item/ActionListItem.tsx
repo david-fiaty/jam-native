@@ -1,11 +1,10 @@
 import { TouchableOpacity, StyleSheet } from "react-native";
 import { Layout } from "@/constants/Layout";
-import { BaseProps } from "@/constants/Types";
 import TextView from '@/components/view/TextView';
 import BoxView from '@/components/view/BoxView';
 import IconView from '@/components/view/IconView';
 
-type Props = BaseProps & {
+type Props = {
   item?: any;
 };
 

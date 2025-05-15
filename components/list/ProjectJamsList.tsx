@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
-import { Colors } from "@/constants/Colors";
 import i18n from "@/translation/i18n";
 import ImageView from "../view/ImageView";
 import ScreenManager from "@/manager/ScreenManager";
@@ -148,7 +147,7 @@ const styles = StyleSheet.create({
   },
   link: {
     borderBottomWidth: Layout.borderWidth.base,
-    borderBottomColor: Colors.primary,
+    borderBottomColor: Layout.colors.primary,
   },
   item: {
     flexDirection: "column",

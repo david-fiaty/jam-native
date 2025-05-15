@@ -1,10 +1,9 @@
 import { useRef } from "react";
 import { StyleSheet, FlatList } from "react-native";
-import { BaseProps } from "@/constants/Types";
 import { Config } from "@/constants/Config";
 import ScreenManager from "@/manager/ScreenManager";
 
-type Props = BaseProps & {
+type Props = {
   data: any;
   numColumns?: number;
   scrollEnabled?: boolean;

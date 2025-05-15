@@ -3,7 +3,6 @@ import { useRouter } from 'expo-router';
 import { useSelector } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import { StyleSheet } from 'react-native';
-import { Colors } from '@/constants/Colors';
 import IconView from '@/components/view/IconView';
 import BoxView from '@/components/view/BoxView';
 import ModalManager from '@/manager/ModalManager';
@@ -67,9 +66,9 @@ const SectionFooter = ({ style }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.white,
+    backgroundColor: Layout.colors.white,
     borderTopWidth: Layout.borderWidth.base,
-    borderTopColor: Colors.primary,
+    borderTopColor: Layout.colors.primary,
     padding: Layout.space.base,
   },
 });

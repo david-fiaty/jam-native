@@ -1,11 +1,7 @@
 import { useState, useEffect } from "react";
-import { TouchableOpacity, ScrollView } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
-import { Colors } from "@/constants/Colors";
-import BoxView from "./BoxView";
-import TextView from "./TextView";
 import StaticData from "@/constants/StaticData";
 import SpinnerView from "./SpinnerView";
 import SearchManager from "@/manager/SearchManager";
@@ -81,7 +77,7 @@ const styles = {
     paddingHorizontal: Layout.space.base,
     paddingBottom: Layout.space.base,
     borderBottomWidth: Layout.borderWidth.base,
-    borderBottomColor: Colors.primary,
+    borderBottomColor: Layout.colors.primary,
   },
   currentTab: { 
     fontWeight: 'bold',

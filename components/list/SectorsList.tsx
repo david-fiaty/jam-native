@@ -3,7 +3,6 @@ import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
-import { Colors } from "@/constants/Colors";
 import TextView from "../view/TextView";
 import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
@@ -141,12 +140,12 @@ const styles = StyleSheet.create({
     paddingVertical: Layout.space.base/2.2,
   },
   itemHeader: {
-    backgroundColor: Colors.secondary,
+    backgroundColor: Layout.colors.secondary,
     padding: Layout.space.base,
     borderRadius: Layout.radius.round,
   },
   itemHeaderOpened: {
-    backgroundColor: Colors.secondary,
+    backgroundColor: Layout.colors.secondary,
   },
 });
 

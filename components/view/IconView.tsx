@@ -1,11 +1,9 @@
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import IconBase from '../base/IconBase';
 import { Layout } from '@/constants/Layout';
-import { Colors } from '@/constants/Colors';
+import IconBase from '../base/IconBase';
 import TextView from '../view/TextView';
-import { BaseProps } from '@/constants/Types';
 
-type Props = BaseProps & {
+type Props = {
   name?: string;
   size?: number; 
   padding?: any;
@@ -68,28 +66,28 @@ const styles: any = StyleSheet.create({
     justifyContent: 'center',
   },
   iconStyle: {
-    color: Colors.white,
-    backgroundColor: Colors.primary,
+    color: Layout.colors.white,
+    backgroundColor: Layout.colors.primary,
     borderRadius: Layout.radius.circle,
   },
   primary: {
-    color: Colors.white,
-    backgroundColor: Colors.primary,
+    color: Layout.colors.white,
+    backgroundColor: Layout.colors.primary,
   },
   secondary: {
-    color: Colors.primary,
-    backgroundColor: Colors.secondary,
+    color: Layout.colors.primary,
+    backgroundColor: Layout.colors.secondary,
   },
   tertiary: {
-    color: Colors.primary,
-    backgroundColor: Colors.tertiary,
+    color: Layout.colors.primary,
+    backgroundColor: Layout.colors.tertiary,
   },
   clear: {
-    color: Colors.primary,
-    backgroundColor: Colors.white,
+    color: Layout.colors.primary,
+    backgroundColor: Layout.colors.white,
   },
   transparent: {
-    color: Colors.primary,
+    color: Layout.colors.primary,
     backgroundColor: 'transparent',
   },
 });

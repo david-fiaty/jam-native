@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, View } from "react-native";
-import { BaseProps } from "@/constants/Types";
+import { StyleSheet } from "react-native";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
@@ -10,7 +9,7 @@ import ImageView from "../view/ImageView";
 import IconView from "../view/IconView";
 import MediaManager from '@/manager/MediaManager';
 
-type Props = BaseProps & {
+type Props = {
   value?: any;
   storage?: any,
   onChangeValue?: (data: any) => void;

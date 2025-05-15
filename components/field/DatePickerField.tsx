@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { StyleSheet, Platform, TouchableOpacity } from 'react-native';
-import { BaseProps } from '@/constants/Types';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import InputTextField from '../field/InputTextField';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
 
-type Props = BaseProps & {
+type Props = {
   placeholder?: string,
   value?: string,
   onChangeValue?: (value: any) => void,

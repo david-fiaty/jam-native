@@ -1,9 +1,7 @@
-import { BaseProps } from "@/constants/Types";
-import TextView from "../view/TextView";
 import InputTextField from "./InputTextField";
 import i18n from "@/translation/i18n";
 
-type Props = BaseProps & {
+type Props = {
   value?: string;
   label?: any
   disabled?: boolean;

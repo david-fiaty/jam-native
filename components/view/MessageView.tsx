@@ -1,13 +1,11 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 import { setMessage } from '@/redux/slices/MessageSlice';
-import { BaseProps } from '@/constants/Types';
 import ScreenManager from '@/manager/ScreenManager';
 import IconView from './IconView';
 
-type Props = BaseProps & {
+type Props = {
   title?: string;
 };
 
@@ -44,8 +42,8 @@ const styles = StyleSheet.create({
     left: 0, 
     right: 0,
     zIndex: ScreenManager.getModalZIndex(),
-    backgroundColor: Colors.primary,
-    color: Colors.white,
+    backgroundColor: Layout.colors.primary,
+    color: Layout.colors.white,
     padding: Layout.space.base*1.6,
     marginTop: statusBarHeight,
     marginHorizontal: Layout.space.base*1.5,
@@ -58,12 +56,12 @@ const styles = StyleSheet.create({
     right: 0,
   },
   title: {
-    color: Colors.white,
+    color: Layout.colors.white,
     fontWeight: 'bold',
     marginBottom: Layout.space.base/2,
   },
   content: {
-    color: Colors.white,
+    color: Layout.colors.white,
   },
 });
 
