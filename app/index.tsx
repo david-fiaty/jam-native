@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useRootNavigationState } from 'expo-router';
-import SectionManager from '@/manager/SectionManager';
 
 export default () => {
   const router = useRouter();
@@ -10,7 +9,6 @@ export default () => {
   useEffect(() => {
     if (rootNavigationState?.key && !isLoaded) {
       setIsLoaded(true);
-      //SectionManager.push(router, 'welcome');
       router.push('/welcome');
     }
   }, [isLoaded, rootNavigationState]);
