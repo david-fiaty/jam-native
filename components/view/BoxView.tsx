@@ -1,9 +1,8 @@
 import { ReactNode } from 'react';
-import { StyleSheet, View, ScrollView, Pressable, Touchable, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, ScrollView, Pressable, TouchableOpacity } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import { BaseProps } from '@/constants/Types';
 
-type Props = BaseProps & {
+type Props = {
   direction?: string,
   align?: string,
   justify?: string,

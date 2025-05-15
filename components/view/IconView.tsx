@@ -3,9 +3,8 @@ import IconBase from '../base/IconBase';
 import { Layout } from '@/constants/Layout';
 import { Colors } from '@/constants/Colors';
 import TextView from '../view/TextView';
-import { BaseProps } from '@/constants/Types';
 
-type Props = BaseProps & {
+type Props = {
   name?: string;
   size?: number; 
   padding?: any;

@@ -1,9 +1,8 @@
 import { StyleSheet, Text } from 'react-native';
-import { BaseProps } from '@/constants/Types';
 import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 
-type Props = BaseProps & {
+type Props = {
   underline?: boolean;
   style?: any;
   children?: any;

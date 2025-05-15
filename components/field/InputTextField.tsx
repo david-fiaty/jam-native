@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { Input } from "@rneui/themed";
-import { BaseProps } from "@/constants/Types";
 import { Colors } from "@/constants/Colors";
 import BoxView from "../view/BoxView";
 
-type Props = BaseProps & {
+type Props = {
   keyboardType?: any;
   value?: string;
   placeholder?: string;
