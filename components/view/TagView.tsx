@@ -1,5 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Colors } from '@/constants/Colors';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import IconView from './IconView';
 import BoxView from './BoxView';
@@ -32,7 +31,7 @@ const TagView = ({ theme, canEdit, children, onDeleteButtonPress }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.secondary,
+    backgroundColor: Layout.colors.secondary,
     borderRadius: Layout.radius.round,
     paddingVertical: Layout.space.base/2.5,
     paddingHorizontal: Layout.space.base/2,

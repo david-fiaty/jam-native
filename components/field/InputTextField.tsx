@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { Input } from "@rneui/themed";
-import { Colors } from "@/constants/Colors";
+import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 
 type Props = {
@@ -64,7 +64,7 @@ const InputTextField = ({
         leftIcon={leftIcon}
         rightIcon={rightIcon}
         placeholder={placeholder}
-        placeholderTextColor={Colors.primary}
+        placeholderTextColor={Layout.colors.primary}
         inputContainerStyle={styles.inputContainerStyle}
         containerStyle={containerStyle ?? {}}
         multiline={false}

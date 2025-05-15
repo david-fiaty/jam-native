@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { ButtonGroup } from "@rneui/base";
 import { Layout } from "@/constants/Layout";
-import { Colors } from "@/constants/Colors";
 import TextView from "../view/TextView";
 
 type Props = {
@@ -56,12 +55,6 @@ const ButtonGroupBase = ({value, data, disabled, containerStyle, onChangeValue}:
 
 const styles = StyleSheet.create({
   container: {
-    /*
-    backgroundColor: Colors.secondary,
-    borderWidth: Layout.borderWidth.base, 
-    borderColor: Colors.secondary, 
-    borderRadius: Layout.radius.round,
-    */
   },
   groupContainer: {
     marginLeft: 0,
@@ -71,12 +64,12 @@ const styles = StyleSheet.create({
     borderRadius: Layout.radius.round,
   },
   buttonContainer: {
-    backgroundColor: Colors.secondary,
+    backgroundColor: Layout.colors.secondary,
     padding: 0,
     margin: 0,
   },
   selectedItem: {
-    color: Colors.white,
+    color: Layout.colors.white,
   },
 });
 

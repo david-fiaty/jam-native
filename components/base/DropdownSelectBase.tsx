@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
-import { Colors } from "@/constants/Colors";
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
@@ -55,11 +54,11 @@ export default DropdownSelectBase;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.secondary,
+    backgroundColor: Layout.colors.secondary,
     width: '100%',
   },
   dropdown: {
-    backgroundColor: Colors.secondary,
+    backgroundColor: Layout.colors.secondary,
     borderRadius: Layout.radius.round,
   },
   icon: {
@@ -67,7 +66,7 @@ const styles = StyleSheet.create({
   },
   label: {
     position: 'absolute',
-    backgroundColor: Colors.white,
+    backgroundColor: Layout.colors.white,
     left: 22,
     top: 8,
     zIndex: ScreenManager.getModalZIndex(),

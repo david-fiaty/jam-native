@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 
 type Props = {
@@ -21,10 +20,10 @@ const LinkView = ({ onPress, style, children }: Props) => {
 
 const styles = StyleSheet.create({
   content: {
-    color: Colors.primary,
+    color: Layout.colors.primary,
     fontSize: Layout.fontSize.base,
     borderBottomWidth: Layout.borderWidth.base,
-    borderBottomColor: Colors.primary,
+    borderBottomColor: Layout.colors.primary,
   },
 });
 

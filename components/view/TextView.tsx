@@ -1,5 +1,4 @@
 import { StyleSheet, Text } from 'react-native';
-import { Colors } from '@/constants/Colors';
 import { Layout } from '@/constants/Layout';
 
 type Props = {
@@ -22,13 +21,13 @@ const TextView = ({underline, style, children}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    color: Colors.primary,
+    color: Layout.colors.primary,
     fontSize: Layout.fontSize.base,
     lineHeight: Layout.lineHeight,
   },
   underline: {
     borderBottomWidth: Layout.borderWidth.base,
-    borderBottomColor: Colors.primary,
+    borderBottomColor: Layout.colors.primary,
   },
 });
 
