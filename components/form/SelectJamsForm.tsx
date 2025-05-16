@@ -36,6 +36,8 @@ const SelectJamsForm = ({ resource, field, title, idArray, addButton, allButton,
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedIds, setSelectedIds] = useState<any>([]);
 
+  if (idArray?.length > 0 && !Array.isArray(idArray)) idArray = JSON.parse(idArray);
+
   const onItemPress = (row: any) => {
     if (onListItemPress) {
       onListItemPress(row);
