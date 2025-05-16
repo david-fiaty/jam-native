@@ -77,8 +77,6 @@ const AddProjectForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(profileData?.profile_jams);
-
   return (
     <BoxView
       align="flex-start"
@@ -160,6 +158,7 @@ const AddProjectForm = () => {
         addButton={true}
         onAddButtonPress={() => ModalManager.toggleModal("SelectJamsForm", {
           field: 'jams_ids',
+          idArray: JSON.stringify(profileData?.profile_jams || []),
           resource: resource,
         })}
       />
