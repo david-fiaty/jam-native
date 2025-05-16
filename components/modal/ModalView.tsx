@@ -17,7 +17,7 @@ import SectorsList from "@/components/list/SectorsList";
 import LocationMapView from "@/components/view/LocationMapView";
 import CollaboratorsList from "@/components/list/CollaboratorsList";
 import CountriesList from '../list/CountriesList';
-import SelectJamsForm from '../form/SelectJamsForm';
+import SelectProjectJamsForm from '../form/SelectProjectJamsForm';
 
 type Props = {
   currentSection?: any;
@@ -156,9 +156,9 @@ const ModalView = ({ currentSection, style }: Props) => {
         render: (params: any) => <LocationMapView {...params} />,
       },
       {
-        id: 'SelectJamsForm',
+        id: 'SelectProjectJamsForm',
         title: i18n.t('Select project Jams'),
-        render: (params: any) => <SelectJamsForm {...params} />,
+        render: (params: any) => <SelectProjectJamsForm {...params} />,
       },
     ].map((o: any) => {
       return {

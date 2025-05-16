@@ -154,7 +154,7 @@ const AddProjectForm = () => {
         resource="project"
         idArray={formData?.jams_ids}
         addButton={true}
-        onAddButtonPress={() => ModalManager.toggleModal("SelectJamsForm", {
+        onAddButtonPress={() => ModalManager.toggleModal("SelectProjectJamsForm", {
           field: 'jams_ids',
           resource: resource,
         })}
