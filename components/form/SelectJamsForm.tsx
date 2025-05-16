@@ -24,7 +24,7 @@ type Props = {
   isDeletable?: boolean;
   multiSelect?: boolean;
   emptyMessage?: any;
-  onAddButtonPress?: () => void,
+  onAddButtonPress?: () => void;
   onListItemPress?: (row: any) => void;
 };
 
