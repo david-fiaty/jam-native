@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from '@/redux/slices/FormSlice';
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
@@ -12,8 +12,8 @@ import BoxView from "../view/BoxView";
 import JamListItem from "../list/list-item/JamListItem";
 
 type Props = {
-  resource?: string;
-  field?: string;
+  resource?: any;
+  field?: any;
   idArray?: any;
   addButton?: boolean;
   multiSelect?: boolean;
@@ -28,6 +28,7 @@ const SelectJamsForm = ({ resource, field, idArray, addButton, multiSelect, empt
   const [profileJams, setProfileJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedIds, setSelectedIds] = useState<any>([]);
+  const formData: any = useSelector((state: any) => state.form[resource]);
 
   if (idArray?.length > 0 && !Array.isArray(idArray)) idArray = JSON.parse(idArray);
 
@@ -41,18 +42,26 @@ const SelectJamsForm = ({ resource, field, idArray, addButton, multiSelect, empt
   };
 
   const toggleItem = (row: any) => {
+    let selectedIdsList = [...selectedIds];
+    
     if (multiSelect === true) {
-      let selectedIdsList = [...selectedIds];
       let index: number = selectedIdsList.findIndex((id: any) => id == row.item.id);
 
       if (index === -1) selectedIdsList.push(row.item.id);
       else selectedIdsList.splice(index, 1);
 
-      setSelectedIds(selectedIdsList);
     }
     else {
-      setSelectedIds([row.item.id]);
+      selectedIdsList = [row.item.id];
     }
+
+    setSelectedIds(selectedIdsList);
+
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: field, 
+      value: selectedIdsList, 
+    }));
   };
 
   const deleteItem = (row: any) => {
@@ -80,11 +89,15 @@ const SelectJamsForm = ({ resource, field, idArray, addButton, multiSelect, empt
           jams.push({ id: "addItem" });
         }
 
+        if (formData?.[field]) {
+          setSelectedIds(formData[field]);
+        }
+
         setProfileJams(jams);
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, idArray, addButton]);
+  }, [isLoaded, idArray, addButton, formData, field]);
 
   if (!isLoaded) return <SpinnerView />; 
 
