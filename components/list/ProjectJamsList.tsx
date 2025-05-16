@@ -15,7 +15,7 @@ import MediaManager from "@/manager/MediaManager";
 import IconView from "../view/IconView";
 
 type Props = {
-  selectedIds?: any;
+  idArray?: any;
   resource?: any;
   canEdit?: boolean;
   onAddButtonPress?: () => void;
@@ -23,7 +23,7 @@ type Props = {
 };
 
 const ProjectJamsList = ({
-  selectedIds,
+  idArray,
   resource,
   canEdit,
   onAddButtonPress,
@@ -109,8 +109,8 @@ const ProjectJamsList = ({
   };
 
   useEffect(() => {
-    if (selectedIds?.length) {
-      EntityManager.getJams({ items_ids: selectedIds }).then((data: any) => {
+    if (idArray?.length) {
+      EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
         data.push({ id: "addItem" });
         setProjectJams(data);
         setIsLoaded(true);
