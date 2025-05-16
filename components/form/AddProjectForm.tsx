@@ -29,6 +29,7 @@ const AddProjectForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
+  const [profileData, setProfileData] = useState<any>(null);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateField = (key: any, value: any) => {
@@ -58,6 +59,7 @@ const AddProjectForm = () => {
     (async () => {
       if (!isLoaded) {
         setProfileId(await UserManager.getProfileId());
+        setProfileData(await UserManager.getProfileData());
 
         dispatch(setFormData<any>({
           resource: resource,
@@ -74,6 +76,8 @@ const AddProjectForm = () => {
   }, [isLoaded, resource, profileId, formData]);
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(profileData?.profile_jams);
 
   return (
     <BoxView
