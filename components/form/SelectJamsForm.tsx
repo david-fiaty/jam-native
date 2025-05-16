@@ -16,10 +16,8 @@ import JamListItem from "../list/list-item/JamListItem";
 type Props = {
   resource?: string;
   field?: string;
-  title?: any;
   idArray?: any;
   addButton?: boolean;
-  allButton?: boolean;
   isAddable?: boolean;
   isDeletable?: boolean;
   multiSelect?: boolean;
@@ -28,7 +26,7 @@ type Props = {
   onListItemPress?: (row: any) => void;
 };
 
-const SelectJamsForm = ({ resource, field, title, idArray, addButton, allButton, isAddable, isDeletable, multiSelect, emptyMessage, onAddButtonPress, onListItemPress }: Props) => {
+const SelectJamsForm = ({ resource, field, idArray, addButton, isAddable, isDeletable, multiSelect, emptyMessage, onAddButtonPress, onListItemPress }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const dispatch = useDispatch();
@@ -99,17 +97,12 @@ const SelectJamsForm = ({ resource, field, title, idArray, addButton, allButton,
   if (!isLoaded) return <SpinnerView />; 
 
   return (
-    <View style={styles.container}>
-      <BoxView direction="row" align="center" justify="space-between" style={styles.title}>
-        { title && <TextView>{title}</TextView> }
-
-        { profileJams?.length > 0 && allButton && (
-          <TouchableOpacity onPress={() => SectionManager.push(router, 'jams', { idArray: idArray })}>
-            <TextView underline={true}>{i18n.t("View all")}</TextView>
-          </TouchableOpacity> 
-        )}
-      </BoxView>
-    
+    <BoxView 
+      direction="column"
+      align="flex-start"
+      justify="flex-start"
+      style={[Layout.formContainer, styles.container]}
+    >
       <ListView
         data={profileJams}
         numColumns={numColumns}
@@ -130,13 +123,14 @@ const SelectJamsForm = ({ resource, field, title, idArray, addButton, allButton,
           />
         )}
       />
-    </View>
+    </BoxView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     width: "100%",
+    height: "100%",
   },
   title: {
     fontWeight: "bold",
