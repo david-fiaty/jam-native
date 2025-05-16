@@ -1,137 +1,133 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useRouter } from "expo-router";
-import { useDispatch, useSelector } from "react-redux";
+import { setFormData } from '@/redux/slices/FormSlice';
 import { Layout } from "@/constants/Layout";
+import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
-import ImageView from "../view/ImageView";
-import ScreenManager from "@/manager/ScreenManager";
 import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
-import AddItemButton from "../button/AddItemButton";
-import NoImageView from "../view/NoImageView";
-import MediaManager from "@/manager/MediaManager";
-import IconView from "../view/IconView";
+import BoxView from "../view/BoxView";
+import JamListItem from "./list-item/JamListItem";
+import SectionManager from "@/manager/SectionManager";
 
 type Props = {
+  resource?: string;
+  field?: string;
+  title?: any;
   idArray?: any;
-  resource?: any;
-  canEdit?: boolean;
-  onAddButtonPress?: () => void;
-  onDeleteButtonPress: (row: any) => void;
+  addButton?: boolean;
+  allButton?: boolean;
+  isAddable?: boolean;
+  isDeletable?: boolean;
+  multiSelect?: boolean;
+  emptyMessage?: any;
+  onAddButtonPress?: () => void,
+  onListItemPress?: (row: any) => void;
 };
 
-const ProjectJamsList = ({
-  idArray,
-  resource,
-  canEdit,
-  onAddButtonPress,
-  onDeleteButtonPress
-}: Props) => {
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const [selectedJams, setSelectedJams] = useState<any>([]);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [projectJams, setProjectJams] = useState<any>([]);
-  const formData: any = useSelector((state: any) => state.form[resource]);
-  const imageSize = MediaManager.getThumbnailSize();
+const ProjectJamsList = ({ resource, field, title, idArray, addButton, allButton, isAddable, isDeletable, multiSelect, emptyMessage, onAddButtonPress, onListItemPress }: Props) => {
   const numColumns = 3;
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const [profileJams, setProfileJams] = useState<any>([]);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [selectedIds, setSelectedIds] = useState<any>([]);
 
-  const findItemIndex = (row: any) => {
-    return selectedJams.findIndex((id: any) => id == row.item.id);
+  const onItemPress = (row: any) => {
+    if (onListItemPress) {
+      onListItemPress(row);
+    }
+    else if (isDeletable !== true) {
+      SectionManager.push(router, 'jam-item', { jamId: JSON.stringify([row?.item?.id]), title: row?.item?.title });
+    }
+    else {
+      toggleItem(row);
+    }
   };
 
   const toggleItem = (row: any) => {
-    let selectedJamsList: any = [...selectedJams];
-    let index: number = findItemIndex(row);
+    if (multiSelect === true) {
+      let selectedIdsList = [...selectedIds];
+      let index: number = selectedIdsList.findIndex((id: any) => id == row.item.id);
 
-    if (index === -1) selectedJamsList.push(row.item.id);
-    else selectedJamsList.splice(index, 1);
+      if (index === -1) selectedIdsList.push(row.item.id);
+      else selectedIdsList.splice(index, 1);
 
-    selectedJamsList = selectedJamsList.filter((n: any) => n);
-    setSelectedJams(selectedJamsList);
+      setSelectedIds(selectedIdsList);
+    }
+    else {
+      setSelectedIds([row.item.id]);
+    }
   };
 
-  const renderItem = (row: any) => {
-    let isSelected: boolean = findItemIndex(row) !== -1;
-    let output = null;
+  const deleteItem = (row: any) => {
+    let itemIds: any[] = [...selectedIds].filter((n: number) => n !== row.item.id);
 
-    if (row?.item?.id == "addItem" && canEdit === true) {
-      output = (
-        <AddItemButton
-          label={i18n.t("Add")}
-          width={imageSize.width}
-          height={imageSize.height}
-          onPress={onAddButtonPress}
-        />
-      );
-    } else if (!row?.item?.medias?.[0]?.url) {
-      output = (
-        <NoImageView
-          width={imageSize.width}
-          height={imageSize.height}
-          rounded={true}
-        />
-      );
-    } else {
-      output = (
-        <View style={styles.item}>
-          <ImageView
-            uri={MediaManager.getImageUrl(row.item.medias[0].url)}
-            width={imageSize.width}
-            height={imageSize.height}
-            resizeMode="cover"
-            style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
-          />
-
-          {isSelected && canEdit === true && (
-            <TouchableOpacity
-              style={styles.deleteItem}
-              onPress={() => onDeleteButtonPress(row)}
-            >
-              <IconView name="delete" theme="primary" size={12} padding={3.5} />
-            </TouchableOpacity>
-          )}
-        </View>
-      );
-    }
-
-    if (parseInt(row?.item?.id) > 0) {
-      output = (
-        <TouchableOpacity key={row.item.id} onPress={() => toggleItem(row)}>
-          {output}
-        </TouchableOpacity>
-      );
-    }
-
-    return output;
+    setSelectedIds(itemIds);
+    
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: field, 
+      value: itemIds, 
+    }));
   };
 
   useEffect(() => {
-    if (idArray?.length) {
-      EntityManager.getJams({ items_ids: idArray }).then((data: any) => {
-        data.push({ id: "addItem" });
-        setProjectJams(data);
-        setIsLoaded(true);
-      });
-    }
-  });
+    (async () => {
+      if (!isLoaded) {
+        let jams: any = [];
 
-  if (!isLoaded) return <SpinnerView />;
+        if (idArray && idArray.length) {
+          jams = await EntityManager.getJams({ items_ids: idArray });
+        }
+
+        if (addButton === true) {
+          jams.push({ id: "addItem" });
+        }
+
+        setProfileJams(jams);
+        setIsLoaded(true);
+      }
+    })();
+  }, [isLoaded, idArray, addButton]);
+
+  if (!isLoaded) return <SpinnerView />; 
 
   return (
     <View style={styles.container}>
-      {projectJams?.length > 0 && (
-        <ListView
-          data={projectJams}
-          numColumns={numColumns}
-          contentContainerStyle={{ gap: Layout.space.base }}
-          columnWrapperStyle={{ gap: Layout.space.base }}
-          scrollEnabled={false}
-          renderItem={(row: any) => renderItem(row)}
-        />
-      )}
+      <BoxView direction="row" align="center" justify="space-between" style={styles.title}>
+        { title && <TextView>{title}</TextView> }
+
+        { profileJams?.length > 0 && allButton && (
+          <TouchableOpacity onPress={() => SectionManager.push(router, 'jams', { idArray: idArray })}>
+            <TextView underline={true}>{i18n.t("View all")}</TextView>
+          </TouchableOpacity> 
+        )}
+      </BoxView>
+    
+      <ListView
+        data={profileJams}
+        numColumns={numColumns}
+        contentContainerStyle={{ gap: Layout.space.base }}
+        columnWrapperStyle={{ gap: Layout.space.base }}
+        scrollEnabled={false}
+        emptyMessage={<TextView>{i18n.t('No data available.')}</TextView>}
+        renderItem={(row: any) => (
+          <JamListItem 
+            row={row} 
+            isAddable={isAddable}
+            isDeletable={isDeletable}
+            multiSelect={multiSelect}
+            onAddButtonPress={onAddButtonPress}
+            onListItemPress={(row: any) => onItemPress(row)}
+            onDeleteItemPress={deleteItem}
+            isSelected={(selectedIds.findIndex((id: any) => id == row.item.id)) !== -1}
+          />
+        )}
+      />
     </View>
   );
 };
@@ -145,18 +141,9 @@ const styles = StyleSheet.create({
     marginBottom: Layout.space.base,
     flex: 1,
   },
-  link: {
-    borderBottomWidth: Layout.borderWidth.base,
-    borderBottomColor: Layout.colors.primary,
-  },
   item: {
     flexDirection: "column",
     gap: Layout.space.small,
-  },
-  deleteItem: {
-    position: "absolute",
-    top: 5,
-    right: 5,
   },
   image: {
     borderRadius: Layout.space.base,
