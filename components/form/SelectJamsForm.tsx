@@ -90,6 +90,8 @@ const SelectJamsForm = ({ resource, field, idArray, addButton, isAddable, isDele
 
   if (!isLoaded) return <SpinnerView />; 
 
+  console.log(selectedIds);
+  
   return (
     <BoxView 
       direction="column"
