@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet } from "react-native";
 import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -14,7 +14,6 @@ import DividerView from "../view/DividerView";
 import ModalManager from "@/manager/ModalManager";
 import SpinnerView from "../view/SpinnerView";
 import SectionManager from "@/manager/SectionManager";
-import TextView from "../view/TextView";
 
 const resource: string = 'profile';
 

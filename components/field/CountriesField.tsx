@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from '@/redux/slices/FormSlice';
 import { Layout } from '@/constants/Layout';
@@ -26,7 +26,7 @@ const CountriesField = ({ resource, field, value, placeholder, onPress }: Props)
 
   const deleteItem = (item: any) => {
     let selectedIds: any[] = [...(value?.length > 0 ? value : [])];
-    selectedIds = selectedIds.filter((n: number) => n !== item.id);
+    selectedIds = selectedIds.filter((n: number) => n !== item.code);
 
     setCurrentValue(selectedIds);
     
@@ -38,23 +38,20 @@ const CountriesField = ({ resource, field, value, placeholder, onPress }: Props)
   };
 
   const getSelectedCountries = () => {
-    if (formData[field]?.length > 0) {
-      return formData[field].map((v: any) => {
-        return countriesData.find((item: any) => item.id === v);
-      });
-    }
-
-    return [];
+    return (formData?.[field] || []).map((v: any) => {
+      return countriesData.find((item: any) => item.code === v);
+    });
   };
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
         let countries: any[] = await EntityManager.getCountries();
-        setCurrentValue(getSelectedCountries());        
         setCountriesData(countries);
         setIsLoaded(true);
       }
+
+      setCurrentValue(getSelectedCountries());        
     })();    
   }, [isLoaded, formData, field]);
 
@@ -78,6 +75,7 @@ const CountriesField = ({ resource, field, value, placeholder, onPress }: Props)
       {currentValue?.length > 0 && (
         <View style={Layout.fieldSelectionPreview}> 
           { currentValue.map((item: any) => {
+            
             return item?.id && (
               <TagView
                 theme="white"
@@ -96,11 +94,5 @@ const CountriesField = ({ resource, field, value, placeholder, onPress }: Props)
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-  },
-});
 
 export default CountriesField;

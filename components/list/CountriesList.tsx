@@ -55,24 +55,27 @@ const CountriesList = ({ resource, field }: Props) => {
     let needle: string = value || searchValue || null;
 
     setSearchValue(needle);
+
     if (needle) {
       setIsSearching(true);
+      
       results = countriesData.filter((o: any) => {
         return o.name.replace(/\s+/g, '').toLowerCase().includes(needle.replace(/\s+/g, '').toLowerCase()); 
       });
+
       setIsSearching(false);
     } 
     
     setSearchResults(results);
   };
 
-  const toggleProfile = (entityId: number) => {
+  const toggleItem = (row: any) => {
     let idArray = [...selectedCountries];
-    if (idArray.includes(entityId)) {
-      idArray = idArray.filter((value: number) => value !== entityId);
+    if (idArray.includes(row.item.code)) {
+      idArray = idArray.filter((value: number) => value !== row.item.code);
     }
     else {
-      idArray.push(entityId);
+      idArray.push(row.item.code);
     }
 
     setSelectedCountries(idArray);
@@ -88,11 +91,11 @@ const CountriesList = ({ resource, field }: Props) => {
     return (
       <TouchableOpacity
         style={styles.listItem}
-        onPress={() => toggleProfile(row.item.id)}
+        onPress={() => toggleItem(row)}
       >
         <BoxView direction="row" align="center" justify="flex-start">
           <TextView>{row.item.name}</TextView>
-          {selectedCountries.includes(row.item.id) &&
+          {selectedCountries.includes(row.item.code) &&
             <IconView
               name="checkmark"
               theme="clear"
