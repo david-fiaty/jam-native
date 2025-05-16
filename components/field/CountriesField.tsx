@@ -26,7 +26,7 @@ const CountriesField = ({ resource, field, value, placeholder, onPress }: Props)
 
   const deleteItem = (item: any) => {
     let selectedIds: any[] = [...(value?.length > 0 ? value : [])];
-    selectedIds = selectedIds.filter((n: number) => n !== item.id);
+    selectedIds = selectedIds.filter((n: number) => n !== item.code);
 
     setCurrentValue(selectedIds);
     
