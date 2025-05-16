@@ -32,10 +32,10 @@ const AddProjectForm = () => {
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateField = (key: any, value: any) => {
-    dispatch(setFormData<any>({ 
+    dispatch(setFormData<any>({
       resource: resource,
-      key: key, 
-      value: value, 
+      key: key,
+      value: value,
     }));
   };
 
@@ -56,25 +56,25 @@ const AddProjectForm = () => {
 
   useEffect(() => {
     (async () => {
-      if (!isLoaded) { 
+      if (!isLoaded) {
         setProfileId(await UserManager.getProfileId());
-        
-        dispatch(setFormData<any>({ 
+
+        dispatch(setFormData<any>({
           resource: resource,
-          key: null, 
+          key: null,
           value: {
             ...formData,
             ...{ profile_id: profileId },
-          }, 
+          },
         }));
-        
+
         setIsLoaded(true);
       }
     })();
   }, [isLoaded, resource, profileId, formData]);
 
   if (!isLoaded) return <SpinnerView />;
-  
+
   return (
     <BoxView
       align="flex-start"
@@ -82,117 +82,91 @@ const AddProjectForm = () => {
       scroll={true}
       style={Layout.formContainer}
     >
-        <TextView>{i18n.t("Name")}</TextView>
-        <InputTextField
-          value={formData?.name}
-          onChangeText={(value: string) => FormManager.updateField(resource, 'name', value, ['string'])}
-        />
-        {FormManager.renderError('name')}
+      <TextView>{i18n.t("Name")}</TextView>
+      <InputTextField
+        value={formData?.name}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'name', value, ['string'])}
+      />
+      {FormManager.renderError('name')}
 
-        <TextView>{i18n.t("Description")}</TextView>
-        <InputTextareaField
-          value={formData?.description}
-          onChangeText={(value: string) => FormManager.updateField(resource, 'description', value, ['string'])}
-        />
-        {FormManager.renderError('description')}
+      <TextView>{i18n.t("Description")}</TextView>
+      <InputTextareaField
+        value={formData?.description}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'description', value, ['string'])}
+      />
+      {FormManager.renderError('description')}
 
-        <TextView>{i18n.t("Privacy status")}</TextView>
-        <PrivacyStatusField
-          value={formData?.privacy_status}
-          onChangeValue={(option: any) => FormManager.updateField(resource, 'privay_status', option.value, ['string'])}
-        />
-        {FormManager.renderError('privacy_status')}
+      <TextView>{i18n.t("Privacy status")}</TextView>
+      <PrivacyStatusField
+        value={formData?.privacy_status}
+        onChangeValue={(option: any) => FormManager.updateField(resource, 'privay_status', option.value, ['string'])}
+      />
+      {FormManager.renderError('privacy_status')}
 
-        <TextView>{i18n.t('Start date')}</TextView>
-        <DatePickerField
-          value={formData?.period?.start_datetime}
-          onChangeValue={(value: any) =>
-            updateField('period', {
-              ...(formData?.period || {}),
-              ...{ start_datetime: DataManager.formatDate(value) },
-            })
-          }
-        />
-
-        <TextView>{i18n.t('End date')}</TextView>
-        <DatePickerField
-          value={formData?.period?.end_datetime}
-          onChangeValue={(value: any) =>
-            updateField('period', {
-              ...(formData?.period || {}),
-              ...{ end_datetime: DataManager.formatDate(value) },
-            })
-          }
-        />
-
-        <TextView>{i18n.t('Select countries')}</TextView>
-        <CountriesField
-          resource={resource}
-          field="scope_countries_codes"
-          placeholder={i18n.t('Select countries')}
-          value={formData?.scope_countries_codes}
-          onPress={() => ModalManager.toggleModal('CountriesList', {
-            resource: resource,
-            field: 'scope_countries_codes',
-          })}
-        />
-
-        <TextView>{i18n.t('Select your sectors')}</TextView>
-        <SectorsField
-          resource={resource}
-          field="sectors_ids"
-          placeholder={i18n.t('Select your sectors')}
-          value={formData?.sectors_ids}
-          onPress={() => ModalManager.toggleModal('SectorsList', {
-            resource: resource,
-            field: 'sectors_ids',
-          })}
-        />
-
-        <ProjectJamsList 
-        resource="project"
-        idArray={formData?.jams_ids}
-
-        // Todo - Implement project events
-        /*
-        onAddButtonPress={() => ScreenManager.toggleModal("SelectJamsForm", {
-          resource: resource,
-          profileId: formData?.id,
-          profileJams: profileJams,
-        })}
-        onDeleteButtonPress={(row: any) => {
-          let selectedIds: any = [...formData?.jams_ids];
-          let index: number = selectedIds.findIndex((id: any) => id == row?.item?.id);
-          selectedIds.splice(index, 1);
-          updateField("jams_ids", selectedIds);
-        }}
-          */
+      <TextView>{i18n.t('Start date')}</TextView>
+      <DatePickerField
+        value={formData?.period?.start_datetime}
+        onChangeValue={(value: any) =>
+          updateField('period', {
+            ...(formData?.period || {}),
+            ...{ start_datetime: DataManager.formatDate(value) },
+          })
+        }
       />
 
+      <TextView>{i18n.t('End date')}</TextView>
+      <DatePickerField
+        value={formData?.period?.end_datetime}
+        onChangeValue={(value: any) =>
+          updateField('period', {
+            ...(formData?.period || {}),
+            ...{ end_datetime: DataManager.formatDate(value) },
+          })
+        }
+      />
 
-        { /*
-        <ProfileJamsList
-          resource={resource}
-          field="jams_ids"
-          addButton={true}
-          isDeletable={true}
-          multiSelect={true}
-          title={<TextView>{i18n.t('Project Jams')}</TextView>}
-          idArray={formData?.jams_ids}
-          onAddButtonPress={() => ModalManager.toggleModal("SelectJamsForm", {
-            field: 'jams_ids',
-            resource: resource,
-          })}
+      <TextView>{i18n.t('Select countries')}</TextView>
+      <CountriesField
+        resource={resource}
+        field="scope_countries_codes"
+        placeholder={i18n.t('Select countries')}
+        value={formData?.scope_countries_codes}
+        onPress={() => ModalManager.toggleModal('CountriesList', {
+          resource: resource,
+          field: 'scope_countries_codes',
+        })}
+      />
+
+      <TextView>{i18n.t('Select your sectors')}</TextView>
+      <SectorsField
+        resource={resource}
+        field="sectors_ids"
+        placeholder={i18n.t('Select your sectors')}
+        value={formData?.sectors_ids}
+        onPress={() => ModalManager.toggleModal('SectorsList', {
+          resource: resource,
+          field: 'sectors_ids',
+        })}
+      />
+
+      <TextView>{i18n.t('Project Jams')}</TextView>
+      <ProjectJamsList
+        resource="project"
+        idArray={formData?.jams_ids}
+        addButton={true}
+        onAddButtonPress={() => ModalManager.toggleModal("SelectJamsForm", {
+          field: 'jams_ids',
+          resource: resource,
+        })}
+      />
+
+      <View style={styles.subtmitButtoncontainer}>
+        <ButtonView
+          label={i18n.t("Submit")}
+          isProcessing={isProcessing}
+          onPress={submitForm}
         />
-        */}
-        
-        <View style={styles.subtmitButtoncontainer}>
-          <ButtonView
-            label={i18n.t("Submit")}
-            isProcessing={isProcessing}
-            onPress={submitForm}
-          />
-        </View>
+      </View>
     </BoxView>
   );
 };
@@ -208,7 +182,7 @@ const styles = StyleSheet.create({
   subtmitButtoncontainer: {
     width: '100%',
     marginTop: Layout.space.base,
-    marginBottom: Layout.space.base*2,
+    marginBottom: Layout.space.base * 2,
   },
 });
 
