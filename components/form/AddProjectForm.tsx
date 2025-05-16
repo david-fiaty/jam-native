@@ -159,6 +159,7 @@ const AddProjectForm = () => {
         onAddButtonPress={() => ModalManager.toggleModal("SelectJamsForm", {
           field: 'jams_ids',
           idArray: JSON.stringify(profileData?.profile_jams || []),
+          multiSelect: true,
           resource: resource,
         })}
       />
