@@ -28,7 +28,7 @@ type Props = {
   onListItemPress?: (row: any) => void;
 };
 
-const SelectProjectJamsForm = ({ resource, field, title, idArray, addButton, allButton, isAddable, isDeletable, multiSelect, emptyMessage, onAddButtonPress, onListItemPress }: Props) => {
+const SelectJamsForm = ({ resource, field, title, idArray, addButton, allButton, isAddable, isDeletable, multiSelect, emptyMessage, onAddButtonPress, onListItemPress }: Props) => {
   const numColumns = 3;
   const router = useRouter();
   const dispatch = useDispatch();
@@ -150,4 +150,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SelectProjectJamsForm;
+export default SelectJamsForm;
