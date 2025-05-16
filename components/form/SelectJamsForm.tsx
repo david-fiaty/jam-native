@@ -1,66 +1,127 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { setFormData } from "@/redux/slices/FormSlice";
+import { useDispatch } from "react-redux";
+import { useRouter } from "expo-router";
+import { setFormData } from '@/redux/slices/FormSlice';
 import { Layout } from "@/constants/Layout";
+import TextView from "../view/TextView";
+import i18n from "@/translation/i18n";
+import ListView from "../view/ListView";
+import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
 import BoxView from "../view/BoxView";
-import UserManager from "@/manager/UserManager";
-import ProfileJamsList from "../list/ProfileJamsList";
+import SectionManager from "@/manager/SectionManager";
+import JamListItem from "../list/list-item/JamListItem";
 
 type Props = {
-  resource: string;
-  field: string;
+  resource?: string;
+  field?: string;
+  idArray?: any;
+  addButton?: boolean;
+  isAddable?: boolean;
+  isDeletable?: boolean;
+  multiSelect?: boolean;
+  emptyMessage?: any;
+  onAddButtonPress?: () => void;
+  onListItemPress?: (row: any) => void;
 };
 
-const SelectJamsForm = ({ resource, field }: Props) => {
+const SelectJamsForm = ({ resource, field, idArray, addButton, isAddable, isDeletable, multiSelect, emptyMessage, onAddButtonPress, onListItemPress }: Props) => {
+  const numColumns = 3;
+  const router = useRouter();
   const dispatch = useDispatch();
-  const [selectedIds, setSelectedIds] = useState<any>([]);
-  const [profileItem, setProfileItem] = useState<any>(null);
+  const [profileJams, setProfileJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const formData: any = useSelector((state: any) => state.form[resource]);
+  const [selectedIds, setSelectedIds] = useState<any>([]);
+
+  if (idArray?.length > 0 && !Array.isArray(idArray)) idArray = JSON.parse(idArray);
+
+  const onItemPress = (row: any) => {
+    if (onListItemPress) {
+      onListItemPress(row);
+    }
+    else if (isDeletable !== true) {
+      SectionManager.push(router, 'jam-item', { jamId: JSON.stringify([row?.item?.id]), title: row?.item?.title });
+    }
+    else {
+      toggleItem(row);
+    }
+  };
 
   const toggleItem = (row: any) => {
-    let idArray = [...selectedIds];
-    let index: number = idArray.findIndex((id: any) => id == row.item.id);
+    if (multiSelect === true) {
+      let selectedIdsList = [...selectedIds];
+      let index: number = selectedIdsList.findIndex((id: any) => id == row.item.id);
 
-    if (index === -1) idArray.push(row.item.id);
-    else idArray.splice(index, 1);
+      if (index === -1) selectedIdsList.push(row.item.id);
+      else selectedIdsList.splice(index, 1);
 
-    setSelectedIds(idArray);
+      setSelectedIds(selectedIdsList);
+    }
+    else {
+      setSelectedIds([row.item.id]);
+    }
+  };
 
-    dispatch(setFormData<any>({
+  const deleteItem = (row: any) => {
+    let itemIds: any[] = [...selectedIds].filter((n: number) => n !== row.item.id);
+
+    setSelectedIds(itemIds);
+    
+    dispatch(setFormData<any>({ 
       resource: resource,
-      key: field,
-      value: idArray,
+      key: field, 
+      value: itemIds, 
     }));
   };
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setProfileItem(await UserManager.getProfileData());
+        let jams: any = [];
 
-        if (formData?.[field]?.length) {
-          setSelectedIds(formData[field]);
+        if (idArray && idArray.length) {
+          jams = await EntityManager.getJams({ items_ids: idArray });
         }
 
+        if (addButton === true) {
+          jams.push({ id: "addItem" });
+        }
+
+        setProfileJams(jams);
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, field, formData]);
+  }, [isLoaded, idArray, addButton]);
 
-  if (!isLoaded) return <SpinnerView />;
+  if (!isLoaded) return <SpinnerView />; 
 
   return (
-    <BoxView direction="column" align="flex-start" justify="flex-start" style={[Layout.formContainer, styles.container]}>
-      <ProfileJamsList
-        resource={resource}
-        field="jams_ids"
-        isAddable={true}
-        multiSelect={true}
-        idArray={profileItem?.profile_jams}
-        onListItemPress={(row: any) => toggleItem(row)}
+    <BoxView 
+      direction="column"
+      align="flex-start"
+      justify="flex-start"
+      style={[Layout.formContainer, styles.container]}
+    >
+      <ListView
+        data={profileJams}
+        numColumns={numColumns}
+        contentContainerStyle={{ gap: Layout.space.base }}
+        columnWrapperStyle={{ gap: Layout.space.base }}
+        scrollEnabled={false}
+        emptyMessage={<TextView>{i18n.t('No data available.')}</TextView>}
+        renderItem={(row: any) => (
+          <JamListItem 
+            row={row} 
+            isAddable={isAddable}
+            isDeletable={isDeletable}
+            multiSelect={multiSelect}
+            onAddButtonPress={onAddButtonPress}
+            onListItemPress={(row: any) => onItemPress(row)}
+            onDeleteItemPress={deleteItem}
+            isSelected={(selectedIds.findIndex((id: any) => id == row.item.id)) !== -1}
+          />
+        )}
       />
     </BoxView>
   );
@@ -68,11 +129,20 @@ const SelectJamsForm = ({ resource, field }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    height: '100%',
-  },
-  titleContainer: {
     width: "100%",
+    height: "100%",
+  },
+  title: {
+    fontWeight: "bold",
+    marginBottom: Layout.space.base,
+    flex: 1,
+  },
+  item: {
+    flexDirection: "column",
+    gap: Layout.space.small,
+  },
+  image: {
+    borderRadius: Layout.space.base,
   },
 });
 
