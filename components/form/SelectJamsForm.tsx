@@ -106,6 +106,7 @@ const SelectJamsForm = ({ resource, field, idArray, addButton, multiSelect, empt
           <JamListItem 
             row={row} 
             multiSelect={multiSelect}
+            isAddable={true}
             onAddButtonPress={onAddButtonPress}
             onListItemPress={(row: any) => onItemPress(row)}
             onDeleteItemPress={deleteItem}
