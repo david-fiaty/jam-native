@@ -16,15 +16,13 @@ type Props = {
   field?: string;
   idArray?: any;
   addButton?: boolean;
-  isAddable?: boolean;
-  isDeletable?: boolean;
   multiSelect?: boolean;
   emptyMessage?: any;
   onAddButtonPress?: () => void;
   onListItemPress?: (row: any) => void;
 };
 
-const SelectJamsForm = ({ resource, field, idArray, addButton, isAddable, isDeletable, multiSelect, emptyMessage, onAddButtonPress, onListItemPress }: Props) => {
+const SelectJamsForm = ({ resource, field, idArray, addButton, multiSelect, emptyMessage, onAddButtonPress, onListItemPress }: Props) => {
   const numColumns = 3;
   const dispatch = useDispatch();
   const [profileJams, setProfileJams] = useState<any>([]);
@@ -90,8 +88,6 @@ const SelectJamsForm = ({ resource, field, idArray, addButton, isAddable, isDele
 
   if (!isLoaded) return <SpinnerView />; 
 
-  console.log(selectedIds);
-  
   return (
     <BoxView 
       direction="column"
@@ -109,13 +105,11 @@ const SelectJamsForm = ({ resource, field, idArray, addButton, isAddable, isDele
         renderItem={(row: any) => (
           <JamListItem 
             row={row} 
-            isAddable={isAddable}
-            isDeletable={isDeletable}
             multiSelect={multiSelect}
             onAddButtonPress={onAddButtonPress}
             onListItemPress={(row: any) => onItemPress(row)}
             onDeleteItemPress={deleteItem}
-            isSelected={(selectedIds.findIndex((id: any) => id == row.item.id)) !== -1}
+            isSelected={selectedIds.includes(row.item.id)}
           />
         )}
       />
