@@ -21,6 +21,7 @@ import ModalManager from "@/manager/ModalManager";
 import UserManager from "@/manager/UserManager";
 import FormManager from "@/manager/FormManager";
 import ProjectJamsList from "../list/ProjectJamsList";
+import ProjectJamsField from "../field/ProjectJamsField";
 
 const resource: string = 'project';
 
@@ -152,6 +153,7 @@ const AddProjectForm = () => {
       />
 
       <TextView>{i18n.t('Project Jams')}</TextView>
+      <ProjectJamsField />
       <ProjectJamsList
         resource="project"
         idArray={formData?.jams_ids}
