@@ -20,7 +20,7 @@ import DataManager from "@/manager/DataManager";
 import ModalManager from "@/manager/ModalManager";
 import UserManager from "@/manager/UserManager";
 import FormManager from "@/manager/FormManager";
-import ProfileJamsList from "../list/ProfileJamsList";
+import ProjectJamsList from "../list/ProjectJamsList";
 
 const resource: string = 'project';
 
@@ -149,6 +149,28 @@ const AddProjectForm = () => {
           })}
         />
 
+        <ProjectJamsList 
+        resource="project"
+        idArray={formData?.jams_ids}
+
+        // Todo - Implement project events
+        /*
+        onAddButtonPress={() => ScreenManager.toggleModal("SelectJamsForm", {
+          resource: resource,
+          profileId: formData?.id,
+          profileJams: profileJams,
+        })}
+        onDeleteButtonPress={(row: any) => {
+          let selectedIds: any = [...formData?.jams_ids];
+          let index: number = selectedIds.findIndex((id: any) => id == row?.item?.id);
+          selectedIds.splice(index, 1);
+          updateField("jams_ids", selectedIds);
+        }}
+          */
+      />
+
+
+        { /*
         <ProfileJamsList
           resource={resource}
           field="jams_ids"
@@ -162,6 +184,7 @@ const AddProjectForm = () => {
             resource: resource,
           })}
         />
+        */}
         
         <View style={styles.subtmitButtoncontainer}>
           <ButtonView
