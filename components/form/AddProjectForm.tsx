@@ -82,7 +82,7 @@ const AddProjectForm = () => {
       align="flex-start"
       justify="flex-start"
       scroll={true}
-      style={Layout.formContainer}
+      style={[Layout.formContainer, styles.container]}
     >
       <TextView>{i18n.t("Name")}</TextView>
       <InputTextField
