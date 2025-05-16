@@ -1,7 +1,6 @@
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { StyleSheet } from "react-native";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useRouter } from "expo-router";
 import { setFormData } from '@/redux/slices/FormSlice';
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
@@ -10,7 +9,6 @@ import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
 import BoxView from "../view/BoxView";
-import SectionManager from "@/manager/SectionManager";
 import JamListItem from "../list/list-item/JamListItem";
 
 type Props = {
@@ -28,7 +26,6 @@ type Props = {
 
 const SelectJamsForm = ({ resource, field, idArray, addButton, isAddable, isDeletable, multiSelect, emptyMessage, onAddButtonPress, onListItemPress }: Props) => {
   const numColumns = 3;
-  const router = useRouter();
   const dispatch = useDispatch();
   const [profileJams, setProfileJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -39,9 +36,6 @@ const SelectJamsForm = ({ resource, field, idArray, addButton, isAddable, isDele
   const onItemPress = (row: any) => {
     if (onListItemPress) {
       onListItemPress(row);
-    }
-    else if (isDeletable !== true) {
-      SectionManager.push(router, 'jam-item', { jamId: JSON.stringify([row?.item?.id]), title: row?.item?.title });
     }
     else {
       toggleItem(row);
