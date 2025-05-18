@@ -37,7 +37,7 @@ const ProjectJamsField = ({ resource, field, value, placeholder, onPress }: Prop
   return (
     <ProjectJamsList
       resource={resource}
-      idArray={formData?.jams_ids}
+      idArray={currentValue}
       addButton={true}
       onAddButtonPress={() => ModalManager.toggleModal("SelectJamsForm", {
         field: 'jams_ids',
