@@ -66,6 +66,8 @@ const ProjectJamsList = ({ resource, field, title, idArray, addButton, allButton
 
   const deleteItem = (row: any) => {
     let itemIds: any[] = [...(formData?.[field] || [])].filter((n: number) => n !== row.item.id);
+    
+    setSelectedIds([...(selectedIds || [])].filter((n: number) => n !== row.item.id));
 
     dispatch(setFormData<any>({ 
       resource: resource,
