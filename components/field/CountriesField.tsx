@@ -62,6 +62,7 @@ const CountriesField = ({ resource, field, value, placeholder, onPress }: Props)
       { !currentValue?.length && (
         <TouchableOpacity
           onPress={onPress}
+          style={Layout.formField}
         >
           <InputTextField
             value={value}
