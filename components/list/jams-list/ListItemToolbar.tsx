@@ -24,6 +24,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
   const [isLikeProcessing, setIsLikeProcessing] = useState<boolean>(false);
   const [isSaveProcessing, setIsSaveProcessing] = useState<boolean>(false);
   const [isShareProcessing, setIsShareProcessing] = useState<boolean>(false);
+  const [isCommentProcessing, setIsCommentProcessing] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const userState: any = useSelector((state: any) => state.user);
 
@@ -124,6 +125,10 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
     }
   };
 
+  const commentJam = async () => {
+    console.log('comment jam')
+  };
+
   const renderLikeButton = () => {
     return (
       <BoxView
@@ -203,6 +208,25 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
     );
   };
 
+  const renderCommentButton = () => {
+    if (isCommentProcessing) return <SpinnerView size="small" />;
+
+    return (
+      <BoxView
+        direction="row"
+        align="center"
+      >
+        <IconView 
+          name="chat"
+          theme="tertiary"
+          size={12}
+          padding={6}
+          onPress={commentJam}
+        />
+      </BoxView>
+    );
+  };
+
   const renderComponent = () => {
     return (
       <BoxView
@@ -217,6 +241,10 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
         </BoxView>
   
         <BoxView direction="row" align="center" justify="flex-end">
+          <BoxView align="center">
+            {renderCommentButton()}
+          </BoxView>
+
           <BoxView align="center">
             {renderSaveButton()}
           </BoxView>
