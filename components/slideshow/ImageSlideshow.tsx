@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import Slick from "react-native-slick";
@@ -15,9 +15,13 @@ type Props = {
 
 const width: number = ScreenManager.window.width - Layout.space.base * 2;
 const height: number = 346;
-const dotSize: number = 8;
+const dotSize: number = 18;
 
 const ImageSlideshow = ({ data }: Props) => {
+  const onDotPress = () => {
+    console.log('on dot press event')
+  };
+
   const renderItem = (item: any, index: number) => (
     <View style={styles.item} key={`dot-${index}`}>
       <ImageView
@@ -30,16 +34,20 @@ const ImageSlideshow = ({ data }: Props) => {
   );
 
   const renderDot = () => {
-    return <View style={styles.dot}></View>;
+    return (
+      <TouchableOpacity onPress={onDotPress} style={styles.dot} />
+    );
   };
 
   const renderActiveDot = () => {
-    return <View style={styles.activeDot}></View>;
+    return (
+      <TouchableOpacity onPress={onDotPress} style={styles.activeDot} />
+    );
   };
 
   if (data?.length > Config.maxSlieshowImages) {
     data = data.slice(Config.maxSlieshowImages - 1);
-  } 
+  }
 
   if (data?.length > 0) {
     return (
@@ -88,11 +96,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   pagination: {
-    bottom: -Layout.space.base*2.85,
+    bottom: -Layout.space.base * 2.85,
     left: 0,
     right: 0,
     height: Layout.space.base,
-    gap: Layout.space.base/1.5,
+    gap: Layout.space.base / 1.5,
   },
   dot: {
     backgroundColor: Layout.colors.secondary,
