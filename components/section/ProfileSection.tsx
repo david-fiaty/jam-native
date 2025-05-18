@@ -80,26 +80,10 @@ const ProfileSection = () => {
       />
       <DividerView />
 
-      <ProfileProjectsList
-        title={i18n.t("Liked Projects")}
-        allButton={formData?.liked_projects?.length > 0}
-        emptyMessage={i18n.t('No data available.')}
-        idArray={formData?.liked_projects || []}
-      />
-      <DividerView />
-
       <ProfileJamsList
         title={i18n.t("Saved Jams")}
         allButton={formData?.saved_jams?.length > 0}
         idArray={formData?.saved_jams || []}
-        emptyMessage={i18n.t('No data available.')}
-      />
-      <DividerView />
-
-      <ProfileJamsList
-        title={i18n.t("Liked Jams")}
-        allButton={formData?.liked_jams?.length > 0}
-        idArray={formData?.liked_jams || []}
         emptyMessage={i18n.t('No data available.')}
       />
 
