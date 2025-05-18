@@ -43,13 +43,13 @@ const ProjectJamsField = ({ resource, field, value, placeholder, onPress }: Prop
       resource={resource}
       idArray={currentValue}
       addButton={true}
+      isDeletable={true}
       onAddButtonPress={() => ModalManager.toggleModal("SelectJamsForm", {
         field: 'jams_ids',
         idArray: JSON.stringify(profileData?.profile_jams || []),
         multiSelect: true,
         resource: resource,
       })}
-      onListItemPress={(row: any) => console.log(row.item.id) }
     />
   );
 };
