@@ -32,7 +32,7 @@ const ProjectJamsList = ({ resource, field, title, idArray, addButton, allButton
   const numColumns = 3;
   const router = useRouter();
   const dispatch = useDispatch();
-  const [profileJams, setProfileJams] = useState<any>([]);
+  const [projectJams, setProjectJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedIds, setSelectedIds] = useState<any>([]);
 
@@ -88,7 +88,7 @@ const ProjectJamsList = ({ resource, field, title, idArray, addButton, allButton
           jams.push({ id: "addItem" });
         }
 
-        setProfileJams(jams);
+        setProjectJams(jams);
         setIsLoaded(true);
       }
     })();
@@ -101,7 +101,7 @@ const ProjectJamsList = ({ resource, field, title, idArray, addButton, allButton
       <BoxView direction="row" align="center" justify="space-between" style={styles.title}>
         { title && <TextView>{title}</TextView> }
 
-        { profileJams?.length > 0 && allButton && (
+        { projectJams?.length > 0 && allButton && (
           <TouchableOpacity onPress={() => SectionManager.push(router, 'jams', { idArray: idArray })}>
             <TextView underline={true}>{i18n.t("View all")}</TextView>
           </TouchableOpacity> 
@@ -109,7 +109,7 @@ const ProjectJamsList = ({ resource, field, title, idArray, addButton, allButton
       </BoxView>
     
       <ListView
-        data={profileJams}
+        data={projectJams}
         numColumns={numColumns}
         contentContainerStyle={{ gap: Layout.space.base }}
         columnWrapperStyle={{ gap: Layout.space.base }}
