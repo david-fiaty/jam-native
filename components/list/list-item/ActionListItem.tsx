@@ -9,8 +9,12 @@ type Props = {
 };
 
 const ActionListItem = ({ item }: Props) => {
+  const onItemPress = () => {
+    if (item?.onPress) item.onPress();
+  };
+
   return (
-    <TouchableOpacity onPress={item?.onPress}>
+    <TouchableOpacity onPress={onItemPress}>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.container}>
         <IconView 
           name={item?.icon} 
@@ -18,6 +22,7 @@ const ActionListItem = ({ item }: Props) => {
           size={12}
           padding={6.5}
         />
+
         <TextView>{item?.label}</TextView>
       </BoxView>
     </TouchableOpacity>
