@@ -57,8 +57,8 @@ const AddProjectForm = () => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
+        FormManager.resetForm(resource);
         setProfileId(await UserManager.getProfileId());
-
         dispatch(setFormData<any>({
           resource: resource,
           key: null,
