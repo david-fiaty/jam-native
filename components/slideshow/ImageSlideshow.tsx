@@ -18,6 +18,7 @@ const dotSize: number = 18;
 
 const ImageSlideshow = ({ data }: Props) => {
   const onDotPress = () => {
+    // Todo - Implement dot press event
     console.log('on dot press event')
   };
 
