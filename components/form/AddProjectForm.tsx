@@ -20,7 +20,6 @@ import DataManager from "@/manager/DataManager";
 import ModalManager from "@/manager/ModalManager";
 import UserManager from "@/manager/UserManager";
 import FormManager from "@/manager/FormManager";
-import ProjectJamsList from "../list/ProjectJamsList";
 import ProjectJamsField from "../field/ProjectJamsField";
 
 const resource: string = 'project';
@@ -30,7 +29,6 @@ const AddProjectForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
-  const [profileData, setProfileData] = useState<any>(null);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateField = (key: any, value: any) => {
@@ -60,7 +58,6 @@ const AddProjectForm = () => {
     (async () => {
       if (!isLoaded) {
         setProfileId(await UserManager.getProfileId());
-        setProfileData(await UserManager.getProfileData());
 
         dispatch(setFormData<any>({
           resource: resource,
@@ -153,17 +150,10 @@ const AddProjectForm = () => {
       />
 
       <TextView>{i18n.t('Project Jams')}</TextView>
-      <ProjectJamsField />
-      <ProjectJamsList
-        resource="project"
-        idArray={formData?.jams_ids}
-        addButton={true}
-        onAddButtonPress={() => ModalManager.toggleModal("SelectJamsForm", {
-          field: 'jams_ids',
-          idArray: JSON.stringify(profileData?.profile_jams || []),
-          multiSelect: true,
-          resource: resource,
-        })}
+      <ProjectJamsField 
+        resource={resource}
+        field="jams_ids"
+        value={formData?.jams_ids}
       />
 
       <View style={styles.subtmitButtoncontainer}>
