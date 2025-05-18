@@ -3,7 +3,6 @@ import { Layout } from "@/constants/Layout";
 import ListItemHeader from "./ListItemHeader";
 import ListItemImage from "./ListItemImage";
 import ListItemToolbar from "./ListItemToolbar";
-import ListItemTitle from "./ListItemTitle";
 import ListItemDescription from "./ListItemDescription";
 import ListItemCollapsible from "./ListItemCollapsible";
 
@@ -19,7 +18,6 @@ const ListItem = ({ row, sectorsData, profileData }: Props) => {
       <ListItemHeader row={row} />
       <ListItemImage row={row} />
       <ListItemToolbar row={row} profileData={profileData} />
-      <ListItemTitle row={row} />
       <ListItemDescription row={row} />
       <ListItemCollapsible row={row} sectorsData={sectorsData} />
     </View>
