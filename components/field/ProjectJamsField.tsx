@@ -28,13 +28,11 @@ const ProjectJamsField = ({ resource, field, value, placeholder, onPress }: Prop
         setIsLoaded(true);
       }
 
-      //setCurrentValue(getSelectedCountries());        
+      setCurrentValue(formData?.[field]);        
     })();    
   }, [isLoaded, formData, field]);
 
   if (!isLoaded) return <SpinnerView size="small" />;
-
-  console.log(formData);
 
   return (
     <ProjectJamsList
