@@ -56,8 +56,6 @@ const ImageSlideshow = ({ data }: Props) => {
           paginationStyle={styles.pagination}
           dot={renderDot()}
           activeDot={renderActiveDot()}
-          dotStyle={styles.dot}
-          activeDotStyle={styles.activeDot}
         >
           {data?.map((item: any, index: number) => {
             return renderItem(item, index);
@@ -101,6 +99,7 @@ const styles = StyleSheet.create({
     right: 0,
     height: Layout.space.base,
     gap: Layout.space.base / 1.5,
+    zIndex: 100,
   },
   dot: {
     backgroundColor: Layout.colors.secondary,
