@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
 import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -21,7 +21,7 @@ const JamsList = ({ idArray }: Props) => {
   const [profileData, setProfileData] = useState<any>(null);
   const searchState: any = useSelector((state: any) => state.search);
 
-  const renderItem = useCallback((row: any) => {
+  const renderItem = (row: any) => {
     return (
       <ListItem 
         row={row} 
@@ -29,7 +29,7 @@ const JamsList = ({ idArray }: Props) => {
         profileData={profileData} 
       />
     );
-  }, [sectors, profileData]);
+  };
 
   const loadSearchData = async () => {
     let data: any[] = [];
