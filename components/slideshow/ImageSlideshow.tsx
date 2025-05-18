@@ -13,8 +13,9 @@ type Props = {
   data?: any;
 };
 
-const width = ScreenManager.window.width - Layout.space.base * 2;
-const height = 346;
+const width: number = ScreenManager.window.width - Layout.space.base * 2;
+const height: number = 346;
+const dotSize: number = 8;
 
 const ImageSlideshow = ({ data }: Props) => {
   const renderItem = (item: any, index: number) => (
@@ -91,19 +92,19 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     height: Layout.space.base,
-    gap: Layout.space.base/2,
+    gap: Layout.space.base/1.5,
   },
   dot: {
     backgroundColor: Layout.colors.secondary,
-    width: 10,
-    height: 10,
-    borderRadius: 10,
+    width: dotSize,
+    height: dotSize,
+    borderRadius: dotSize,
   },
   activeDot: {
     backgroundColor: Layout.colors.primary,
-    width: 10,
-    height: 10,
-    borderRadius: 10,
+    width: dotSize,
+    height: dotSize,
+    borderRadius: dotSize,
   },
 });
 
