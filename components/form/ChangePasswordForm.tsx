@@ -54,7 +54,6 @@ const ChangePasswordForm = () => {
       />
       {FormManager.renderError('old_password')}
 
-      <DividerView theme="secondary" />
       <TextView>{i18n.t('New password')}</TextView>
       <InputTextField 
         placeholder={i18n.t('Your new password')} 
