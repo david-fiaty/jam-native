@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     height: Layout.space.base,
+    gap: Layout.space.base/2,
   },
   dot: {
     backgroundColor: Layout.colors.secondary,
