@@ -7,7 +7,6 @@ import ImageView from "../view/ImageView";
 import ScreenManager from "@/manager/ScreenManager";
 import NoImageView from "../view/NoImageView";
 import MediaManager from "@/manager/MediaManager";
-import TextView from "../view/TextView";
 
 type Props = {
   data?: any;
