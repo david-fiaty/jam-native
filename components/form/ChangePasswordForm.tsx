@@ -11,6 +11,7 @@ import FormManager from '@/manager/FormManager';
 import ScreenManager from '@/manager/ScreenManager';
 import TabsView from '../view/TabsView';
 import StaticData from '@/constants/StaticData';
+import TextView from '../view/TextView';
 
 const resource: string = 'password';
 
@@ -46,21 +47,24 @@ const ChangePasswordForm = () => {
         onItemPress={(tabId: string) => setCurrentTab(tabId)}
       />
 
+      <TextView>{i18n.t('Old password')}</TextView>
       <InputTextField 
-        placeholder={i18n.t('Old password')} 
+        placeholder={i18n.t('Your old password')} 
         onChangeText={(value: string) => FormManager.updateField(resource, "old_password", value, ['string'])}
       />
       {FormManager.renderError('old_password')}
 
       <DividerView theme="secondary" />
+      <TextView>{i18n.t('New password')}</TextView>
       <InputTextField 
-        placeholder={i18n.t('New password')} 
+        placeholder={i18n.t('Your new password')} 
         onChangeText={(value: string) => FormManager.updateField(resource, "new_password", value, ['string'])}
       />
       {FormManager.renderError('new_password')}
 
+      <TextView>{i18n.t('Confirm password')}</TextView>
       <InputTextField 
-        placeholder={i18n.t('Confirm new password')} 
+        placeholder={i18n.t('Confirm your new password')} 
         onChangeText={(value: string) => FormManager.updateField(resource, "confirm_password", value, ['string'])}
       />
       {FormManager.renderError('confirm_password')}
