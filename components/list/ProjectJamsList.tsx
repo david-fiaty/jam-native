@@ -77,7 +77,6 @@ const ProjectJamsList = ({ resource, field, title, idArray, addButton, allButton
 
   useEffect(() => {
     (async () => {
-      if (!isLoaded) {
         let jams: any = [];
 
         if (idArray && idArray.length) {
@@ -90,7 +89,6 @@ const ProjectJamsList = ({ resource, field, title, idArray, addButton, allButton
 
         setProjectJams(jams);
         setIsLoaded(true);
-      }
     })();
   }, [isLoaded, idArray, addButton]);
 
