@@ -36,7 +36,6 @@ const ImageSlideshow = ({ data }: Props) => {
     return <TextView>+</TextView>;
   };
 
-
   if (data?.length > Config.maxSlieshowImages) {
     data = data.slice(Config.maxSlieshowImages - 1);
   } 
