@@ -72,14 +72,6 @@ const ProfileSection = () => {
       />
       <DividerView />
 
-      <ProfileProjectsList
-        title={i18n.t("Saved Projects")}
-        allButton={formData?.saved_projects?.length > 0}
-        emptyMessage={i18n.t('No data available.')}
-        idArray={formData?.saved_projects || []}
-      />
-      <DividerView />
-
       <ProfileJamsList
         title={i18n.t("Saved Jams")}
         allButton={formData?.saved_jams?.length > 0}

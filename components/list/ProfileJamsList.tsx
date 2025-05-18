@@ -102,7 +102,7 @@ const ProfileJamsList = ({ resource, field, title, idArray, addButton, allButton
         { title && <TextView>{title}</TextView> }
 
         { profileJams?.length > 0 && allButton && (
-          <TouchableOpacity onPress={() => SectionManager.push(router, 'jams', { idArray: idArray })}>
+          <TouchableOpacity onPress={() => SectionManager.push(router, 'jams', { idArray: idArray }, i18n.t('Your Jams'))}>
             <TextView underline={true}>{i18n.t("View all")}</TextView>
           </TouchableOpacity> 
         )}
