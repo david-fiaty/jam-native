@@ -1,6 +1,6 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "expo-router";
 import { setFormData } from '@/redux/slices/FormSlice';
 import { Layout } from "@/constants/Layout";
@@ -14,8 +14,8 @@ import JamListItem from "./list-item/JamListItem";
 import SectionManager from "@/manager/SectionManager";
 
 type Props = {
-  resource?: string;
-  field?: string;
+  resource: string;
+  field: string;
   title?: any;
   idArray?: any;
   addButton?: boolean;
@@ -35,6 +35,7 @@ const ProjectJamsList = ({ resource, field, title, idArray, addButton, allButton
   const [projectJams, setProjectJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedIds, setSelectedIds] = useState<any>([]);
+  const formData: any = useSelector((state: any) => state.form[resource]);
 
   const onItemPress = (row: any) => {
     if (onListItemPress) {
@@ -64,10 +65,10 @@ const ProjectJamsList = ({ resource, field, title, idArray, addButton, allButton
   };
 
   const deleteItem = (row: any) => {
-    let itemIds: any[] = [...selectedIds].filter((n: number) => n !== row.item.id);
-
-    setSelectedIds(itemIds);
+    let itemIds: any[] = [...(formData?.[field] || [])].filter((n: number) => n !== row.item.id);
     
+    setSelectedIds(itemIds);
+
     dispatch(setFormData<any>({ 
       resource: resource,
       key: field, 
