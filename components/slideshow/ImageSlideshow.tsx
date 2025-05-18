@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import Slick from "react-native-slick";
@@ -12,14 +12,16 @@ type Props = {
   data?: any;
 };
 
-const width = ScreenManager.window.width - Layout.space.base * 2;
-const height = 346;
+const width: number = ScreenManager.window.width - Layout.space.base * 2;
+const height: number = 346;
+const dotSize: number = 8;
 
 const ImageSlideshow = ({ data }: Props) => {
-  if (data?.length > Config.maxSlieshowImages) {
-    data = data.slice(Config.maxSlieshowImages - 1);
-  } 
-  
+  const onDotPress = () => {
+    // Todo - Implement dot press event
+    console.log('on dot press event')
+  };
+
   const renderItem = (item: any, index: number) => (
     <View style={styles.item} key={`dot-${index}`}>
       <ImageView
@@ -31,13 +33,29 @@ const ImageSlideshow = ({ data }: Props) => {
     </View>
   );
 
+  const renderDot = () => {
+    return (
+      <TouchableOpacity onPress={onDotPress} style={styles.dot} />
+    );
+  };
+
+  const renderActiveDot = () => {
+    return (
+      <TouchableOpacity onPress={onDotPress} style={styles.activeDot} />
+    );
+  };
+
+  if (data?.length > Config.maxSlieshowImages) {
+    data = data.slice(Config.maxSlieshowImages - 1);
+  }
+
   if (data?.length > 0) {
     return (
       <View style={styles.container}>
         <Slick
           paginationStyle={styles.pagination}
-          dotStyle={styles.dot}
-          activeDotStyle={styles.activeDot}
+          dot={renderDot()}
+          activeDot={renderActiveDot()}
         >
           {data?.map((item: any, index: number) => {
             return renderItem(item, index);
@@ -76,16 +94,24 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   pagination: {
-    bottom: -Layout.space.base*2.85,
+    bottom: -Layout.space.base * 2.85,
     left: 0,
     right: 0,
     height: Layout.space.base,
+    gap: Layout.space.base / 1.5,
+    zIndex: 100,
   },
   dot: {
     backgroundColor: Layout.colors.secondary,
+    width: dotSize,
+    height: dotSize,
+    borderRadius: dotSize,
   },
   activeDot: {
     backgroundColor: Layout.colors.primary,
+    width: dotSize,
+    height: dotSize,
+    borderRadius: dotSize,
   },
 });
 
