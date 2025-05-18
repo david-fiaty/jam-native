@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import SpinnerView from '../view/SpinnerView';
 import ProjectJamsList from '../list/ProjectJamsList';
 import ModalManager from '@/manager/ModalManager';
@@ -15,7 +14,6 @@ type Props = {
 };
 
 const ProjectJamsField = ({ resource, field, value, placeholder, onPress }: Props) => {
-  const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState<any>([]);
   const [profileData, setProfileData] = useState<any>(null);
@@ -41,6 +39,7 @@ const ProjectJamsField = ({ resource, field, value, placeholder, onPress }: Prop
   return (
     <ProjectJamsList
       resource={resource}
+      field={field}
       idArray={currentValue}
       addButton={true}
       isDeletable={true}
@@ -53,11 +52,5 @@ const ProjectJamsField = ({ resource, field, value, placeholder, onPress }: Prop
     />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-
-  },
-});
 
 export default ProjectJamsField;
