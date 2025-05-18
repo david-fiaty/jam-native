@@ -7,6 +7,7 @@ import ImageView from "../view/ImageView";
 import ScreenManager from "@/manager/ScreenManager";
 import NoImageView from "../view/NoImageView";
 import MediaManager from "@/manager/MediaManager";
+import TextView from "../view/TextView";
 
 type Props = {
   data?: any;
@@ -16,10 +17,6 @@ const width = ScreenManager.window.width - Layout.space.base * 2;
 const height = 346;
 
 const ImageSlideshow = ({ data }: Props) => {
-  if (data?.length > Config.maxSlieshowImages) {
-    data = data.slice(Config.maxSlieshowImages - 1);
-  } 
-  
   const renderItem = (item: any, index: number) => (
     <View style={styles.item} key={`dot-${index}`}>
       <ImageView
@@ -31,11 +28,20 @@ const ImageSlideshow = ({ data }: Props) => {
     </View>
   );
 
+  const renderDot = () => {
+    return <TextView>o</TextView>;
+  };
+
+  if (data?.length > Config.maxSlieshowImages) {
+    data = data.slice(Config.maxSlieshowImages - 1);
+  } 
+
   if (data?.length > 0) {
     return (
       <View style={styles.container}>
         <Slick
           paginationStyle={styles.pagination}
+          dot={renderDot()}
           dotStyle={styles.dot}
           activeDotStyle={styles.activeDot}
         >
