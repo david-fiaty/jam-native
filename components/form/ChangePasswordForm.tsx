@@ -9,12 +9,15 @@ import DividerView from '../view/DividerView';
 import UserManager from '@/manager/UserManager';
 import FormManager from '@/manager/FormManager';
 import ScreenManager from '@/manager/ScreenManager';
+import TabsView from '../view/TabsView';
+import StaticData from '@/constants/StaticData';
 
 const resource: string = 'password';
 
 const ChangePasswordForm = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const formData = useSelector((state: any) => state.form[resource]);
+  const [currentTab, setCurrentTab] = useState<any>(null);
 
   const submitForm = async () => {
     setIsProcessing(true);
@@ -37,6 +40,12 @@ const ChangePasswordForm = () => {
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.formContainer}>
+      <TabsView 
+        tabs={StaticData.authTabs} 
+        currentTab={currentTab} 
+        onItemPress={(tabId: string) => setCurrentTab(tabId)}
+      />
+
       <InputTextField 
         placeholder={i18n.t('Old password')} 
         onChangeText={(value: string) => FormManager.updateField(resource, "old_password", value, ['string'])}
