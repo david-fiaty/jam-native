@@ -29,11 +29,11 @@ const ImageSlideshow = ({ data }: Props) => {
   );
 
   const renderDot = () => {
-    return <TextView>o</TextView>;
+    return <View style={styles.dot}></View>;
   };
 
   const renderActiveDot = () => {
-    return <TextView>+</TextView>;
+    return <View style={styles.activeDot}></View>;
   };
 
   if (data?.length > Config.maxSlieshowImages) {
@@ -94,9 +94,15 @@ const styles = StyleSheet.create({
   },
   dot: {
     backgroundColor: Layout.colors.secondary,
+    width: 10,
+    height: 10,
+    borderRadius: 10,
   },
   activeDot: {
     backgroundColor: Layout.colors.primary,
+    width: 10,
+    height: 10,
+    borderRadius: 10,
   },
 });
 
