@@ -21,6 +21,10 @@ const ProjectJamsField = ({ resource, field, value, placeholder, onPress }: Prop
   const [profileData, setProfileData] = useState<any>(null);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
+  const getCurrentValue = () => {
+    return formData?.[field] || [];
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
@@ -28,7 +32,7 @@ const ProjectJamsField = ({ resource, field, value, placeholder, onPress }: Prop
         setIsLoaded(true);
       }
 
-      setCurrentValue(formData?.[field]);        
+      setCurrentValue(getCurrentValue());        
     })();    
   }, [isLoaded, formData, field]);
 
@@ -45,6 +49,7 @@ const ProjectJamsField = ({ resource, field, value, placeholder, onPress }: Prop
         multiSelect: true,
         resource: resource,
       })}
+      onListItemPress={(row: any) => console.log(row.item.id) }
     />
   );
 };
