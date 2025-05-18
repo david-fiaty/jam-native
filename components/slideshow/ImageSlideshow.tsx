@@ -32,6 +32,11 @@ const ImageSlideshow = ({ data }: Props) => {
     return <TextView>o</TextView>;
   };
 
+  const renderActiveDot = () => {
+    return <TextView>+</TextView>;
+  };
+
+
   if (data?.length > Config.maxSlieshowImages) {
     data = data.slice(Config.maxSlieshowImages - 1);
   } 
@@ -42,6 +47,7 @@ const ImageSlideshow = ({ data }: Props) => {
         <Slick
           paginationStyle={styles.pagination}
           dot={renderDot()}
+          activeDot={renderActiveDot()}
           dotStyle={styles.dot}
           activeDotStyle={styles.activeDot}
         >
