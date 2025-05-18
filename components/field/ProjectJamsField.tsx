@@ -34,9 +34,11 @@ const ProjectJamsField = ({ resource, field, value, placeholder, onPress }: Prop
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
+  console.log(formData);
+
   return (
     <ProjectJamsList
-      resource="project"
+      resource={resource}
       idArray={formData?.jams_ids}
       addButton={true}
       onAddButtonPress={() => ModalManager.toggleModal("SelectJamsForm", {
