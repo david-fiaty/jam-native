@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
@@ -12,6 +12,7 @@ import ScreenManager from '@/manager/ScreenManager';
 import TabsView from '../view/TabsView';
 import StaticData from '@/constants/StaticData';
 import TextView from '../view/TextView';
+import SpinnerView from '../view/SpinnerView';
 
 const resource: string = 'password';
 
@@ -19,6 +20,7 @@ const ChangePasswordForm = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const formData = useSelector((state: any) => state.form[resource]);
   const [currentTab, setCurrentTab] = useState<any>(null);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const submitForm = async () => {
     setIsProcessing(true);
@@ -38,6 +40,18 @@ const ChangePasswordForm = () => {
     ScreenManager.showMessage(message);
     setIsProcessing(false);
   };
+
+  useEffect(() => {
+    (async () => {
+      if (!isLoaded) {
+        FormManager.resetForm(resource);
+        setCurrentTab((StaticData.authTabs.find((o: any) => o?.default === true))?.id);
+        setIsLoaded(true);
+      }
+    })();
+  }, [isLoaded, resource]);
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.formContainer}>
