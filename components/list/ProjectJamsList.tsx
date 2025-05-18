@@ -65,25 +65,14 @@ const ProjectJamsList = ({ resource, field, title, idArray, addButton, allButton
   };
 
   const deleteItem = (row: any) => {
-
-    console.log('aaa', formData)
     let itemIds: any[] = [...(formData?.[field] || [])].filter((n: number) => n !== row.item.id);
-
-    console.log('bbb', itemIds)
-
-
-    return 
-    /*
-    let itemIds: any[] = [...selectedIds].filter((n: number) => n !== row.item.id);
-
     setSelectedIds(itemIds);
-    
+
     dispatch(setFormData<any>({ 
       resource: resource,
       key: field, 
       value: itemIds, 
     }));
-    */
   };
 
   useEffect(() => {
