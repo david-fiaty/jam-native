@@ -37,7 +37,7 @@ const CountriesField = ({ resource, field, value, placeholder, onPress }: Props)
     }));
   };
 
-  const getSelectedCountries = () => {
+  const getCurrentValue = () => {
     return (formData?.[field] || []).map((v: any) => {
       return countriesData.find((item: any) => item.code === v);
     });
@@ -51,7 +51,7 @@ const CountriesField = ({ resource, field, value, placeholder, onPress }: Props)
         setIsLoaded(true);
       }
 
-      setCurrentValue(getSelectedCountries());        
+      setCurrentValue(getCurrentValue());        
     })();    
   }, [isLoaded, formData, field]);
 
