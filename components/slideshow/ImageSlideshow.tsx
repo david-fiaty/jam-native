@@ -14,7 +14,7 @@ type Props = {
 
 const width: number = ScreenManager.window.width - Layout.space.base * 2;
 const height: number = 346;
-const dotSize: number = 18;
+const dotSize: number = 8;
 
 const ImageSlideshow = ({ data }: Props) => {
   const onDotPress = () => {
