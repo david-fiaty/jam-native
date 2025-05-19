@@ -27,8 +27,9 @@ type Props = {
 const ModalView = ({ currentSection, style }: Props) => {
   const [currentModal, setCurrentModal] = useState<any>(null);
   const modalState: any = useSelector((state: any) => state.modal);
-  
+
   const containerStyle: any = {
+    //top: 0,
     top: modalState.active.length > 1 ? -Layout.space.base*3.6 : 0, // Todo - Fix modal height when many modals opened
   };
 
@@ -180,7 +181,7 @@ const ModalView = ({ currentSection, style }: Props) => {
   useEffect(() => {
     setCurrentModal(getActiveModal());
   }, [modalState]);
-
+  
   return (
     <Modal
       coverScreen={false}
@@ -201,6 +202,7 @@ const ModalView = ({ currentSection, style }: Props) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+    height: '100%',
     padding: 0,
     margin: 0,
     flexDirection: 'column',
