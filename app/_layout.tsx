@@ -67,7 +67,9 @@ const RootLayout = () => {
       backAction,
     );
 
-    UserManager.setLanguage(loadLanguage());
+    (async () => {
+      await UserManager.setLanguage(loadLanguage());
+    })();
 
     return () => backHandler.remove();
   }, [isLoaded, isError]);
