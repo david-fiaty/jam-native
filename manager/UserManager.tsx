@@ -4,6 +4,7 @@ import { setActiveModals } from '@/redux/slices/ModalSlice';
 import { setActiveSections } from '@/redux/slices/SectionSlice';
 import { setLanguage } from '@/redux/slices/AppSlice';
 import { Config } from '@/constants/Config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Store from '@/redux/Store';
 import SessionManager from './SessionManager';
 import DataManager from './DataManager';
@@ -182,6 +183,17 @@ class UserManager {
     let userLanguage: string = Store.getState().app.language;
 
     return userLanguage || Config.fallbackLanguage;
+  };
+
+  async getStoredLanguage() {
+    try {
+      let language = await AsyncStorage.getItem('language');
+      return language || Config.fallbackLanguage;
+    }
+    catch (error) {
+      console.log(error);
+      return Config.fallbackLanguage;
+    }
   };
 
   async updateLikedJams(entityId: number) {
