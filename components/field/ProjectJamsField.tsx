@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
-import SpinnerView from '../view/SpinnerView';
 import ProjectJamsList from '../list/ProjectJamsList';
 import ModalManager from '@/manager/ModalManager';
 import UserManager from '@/manager/UserManager';
@@ -33,8 +32,6 @@ const ProjectJamsField = ({ resource, field, value, placeholder, onPress }: Prop
       setCurrentValue(getCurrentValue());        
     })();    
   }, [isLoaded, formData, field]);
-
-  if (!isLoaded) return <SpinnerView size="small" />;
 
   return (
     <ProjectJamsList
