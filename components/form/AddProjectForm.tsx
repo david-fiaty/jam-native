@@ -57,8 +57,9 @@ const AddProjectForm = () => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
+        //FormManager.resetForm(resource); // Todo - Fix form reset on web
         setProfileId(await UserManager.getProfileId());
-
+        
         dispatch(setFormData<any>({
           resource: resource,
           key: null,

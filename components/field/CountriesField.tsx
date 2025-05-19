@@ -7,7 +7,6 @@ import IconView from "../view/IconView";
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from './InputTextField';
-import SpinnerView from '../view/SpinnerView';
 
 type Props = {
   resource: string;
@@ -49,13 +48,12 @@ const CountriesField = ({ resource, field, value, placeholder, onPress }: Props)
         let countries: any[] = await EntityManager.getCountries();
         setCountriesData(countries);
         setIsLoaded(true);
-      }
-
-      setCurrentValue(getCurrentValue());        
+      }   
     })();    
-  }, [isLoaded, formData, field]);
 
-  if (!isLoaded) return <SpinnerView size="small" />;
+    setCurrentValue(getCurrentValue());     
+
+  }, [isLoaded, formData, field]);
 
   return (
     <>
