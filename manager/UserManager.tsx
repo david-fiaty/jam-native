@@ -2,7 +2,6 @@ import { Platform } from 'react-native';
 import { setLikedJams, setSavedJams, setLikedProjects, setSavedProjects } from '@/redux/slices/UserSlice';
 import { setActiveModals } from '@/redux/slices/ModalSlice';
 import { setActiveSections } from '@/redux/slices/SectionSlice';
-import { setLanguage } from '@/redux/slices/AppSlice';
 import { Config } from '@/constants/Config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Store from '@/redux/Store';
@@ -176,11 +175,12 @@ class UserManager {
   }
 
   setLanguage(languageCode: string) {
-    Store.dispatch(setLanguage(languageCode));
+
+    //Store.dispatch(setLanguage(languageCode));
   }
 
   getLanguage() {
-    let userLanguage: string = Store.getState().app.language;
+    let userLanguage: string = 'en';
 
     return userLanguage || Config.fallbackLanguage;
   };
