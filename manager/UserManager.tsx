@@ -10,6 +10,7 @@ import DataManager from './DataManager';
 import * as Location from 'expo-location';
 import * as Device from "expo-device";
 import i18n from '@/translation/i18n';
+import i18next from 'i18next';
 
 class UserManager {
   async sendSignupCode(data: any) {
@@ -181,6 +182,8 @@ class UserManager {
     else {
       await AsyncStorage.setItem(Config.languageStorageKey, languageCode);
     }
+
+    i18next.changeLanguage(languageCode);
   }
 
   async getLanguage() {
@@ -191,6 +194,7 @@ class UserManager {
     }
     catch (error) {
       console.log(error);
+      
       return Config.fallbackLanguage;
     }
   };
