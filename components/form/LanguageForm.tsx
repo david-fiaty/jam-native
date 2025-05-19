@@ -12,7 +12,6 @@ const LanguageForm = () => {
   const data = StaticData.languages;
 
   const changeLanguage = async (language: any) => {
-    i18next.changeLanguage(language.value);
     await UserManager.setLanguage(language.value);
   };
 
