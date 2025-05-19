@@ -179,13 +179,7 @@ class UserManager {
     //Store.dispatch(setLanguage(languageCode));
   }
 
-  getLanguage() {
-    let userLanguage: string = 'en';
-
-    return userLanguage || Config.fallbackLanguage;
-  };
-
-  async getStoredLanguage() {
+  async getLanguage() {
     try {
       let language = await AsyncStorage.getItem('language');
       return language || Config.fallbackLanguage;
