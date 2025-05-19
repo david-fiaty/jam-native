@@ -11,9 +11,9 @@ const LanguageForm = () => {
   const [currentlLanguage, setCurrentLanguage] = useState<any[]>([]);
   const data = StaticData.languages;
 
-  const changeLanguage = (language: any) => {
+  const changeLanguage = async (language: any) => {
     i18next.changeLanguage(language.value);
-    UserManager.setLanguage(language.value);
+    await UserManager.setLanguage(language.value);
   };
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const LanguageForm = () => {
         value={currentlLanguage}
         data={data} 
         placeholder={i18n.t('English')} 
-        onChangeValue={((option: any) => changeLanguage(option))}
+        onChangeValue={async (option: any) => await changeLanguage(option)}
       />
     </BoxView>
   );
