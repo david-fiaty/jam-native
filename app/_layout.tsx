@@ -47,7 +47,7 @@ const RootLayout = () => {
     return true;
   };
 
-  const getLanguage = () => {
+  const loadLanguage = () => {
     let storedLanguage: string = 'en'; // Todo - Retrieve from local/async storage
 
     if (Array.isArray(locales) && locales.length > 0) {
@@ -67,7 +67,7 @@ const RootLayout = () => {
       backAction,
     );
 
-    UserManager.setLanguage(getLanguage());
+    UserManager.setLanguage(loadLanguage());
 
     return () => backHandler.remove();
   }, [isLoaded, isError]);
