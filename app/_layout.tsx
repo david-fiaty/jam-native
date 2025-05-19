@@ -1,17 +1,21 @@
 import React, { useEffect } from 'react';
 import { Stack, useRouter } from 'expo-router';
+import { useLocales } from 'expo-localization';
 import { useFonts } from 'expo-font';
 import { Provider } from 'react-redux';
-import { Layout } from '@/constants/Layout';
 import { Platform, BackHandler } from 'react-native';
+import { Layout } from '@/constants/Layout';
+import { Config } from '@/constants/Config';
 import * as ExpoSplashScreen from 'expo-splash-screen';
 import Store from "@/redux/Store";
 import SectionManager from '@/manager/SectionManager';
+import UserManager from '@/manager/UserManager';
 
 ExpoSplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
   const router = useRouter();
+  const locales = useLocales();
 
   const defaults: any = Platform.OS == 'ios' ? {
     headerShown: false,
@@ -43,6 +47,14 @@ const RootLayout = () => {
     return true;
   };
 
+  const loadLanguage = () => {
+    if (Array.isArray(locales) && locales.length > 0) {
+      return locales[0].languageCode; 
+    }
+  
+    return Config.fallbackLanguage;
+  };
+
   useEffect(() => {
     if (isLoaded || isError) {
       ExpoSplashScreen.hideAsync();
@@ -52,6 +64,10 @@ const RootLayout = () => {
       'hardwareBackPress',
       backAction,
     );
+
+    (async () => {
+      await UserManager.setLanguage(loadLanguage());
+    })();
 
     return () => backHandler.remove();
   }, [isLoaded, isError]);

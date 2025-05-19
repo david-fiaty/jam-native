@@ -19,6 +19,9 @@ import StaticData from '@/constants/StaticData';
 import SpinnerView from '../view/SpinnerView';
 import LoginEmailForm from '../form/login-email/LoginEmailForm';
 import LoginPhoneForm from '../form/login-phone/LoginPhoneForm';
+import FormManager from '@/manager/FormManager';
+
+const resource: string = 'login';
 
 const LoginSection = () => {
   const router = useRouter();
@@ -28,11 +31,12 @@ const LoginSection = () => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
+        //FormManager.resetForm(resource); // Todo - Fix form reset on web
         setCurrentTab((StaticData.authTabs.find((o: any) => o?.default === true))?.id);
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded]);
+  }, [isLoaded, resource]);
 
   if (!isLoaded) return <SpinnerView />;
 

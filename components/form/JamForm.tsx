@@ -77,6 +77,7 @@ const JamForm = () => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
+        //FormManager.resetForm(resource); // Todo - Fix form reset on web
         let profileId: number = await UserManager.getProfileId();
         setProfileId(profileId);
         FormManager.updateField(resource, 'profile_id', profileId);

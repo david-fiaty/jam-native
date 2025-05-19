@@ -27,6 +27,7 @@ const FormSlice = createSlice({
     },
     resetFormData: (state: any, action: any) => {
       state[action.payload] = {};
+      state.errors = state.errors.filter((o: any) => o.resource !== action.payload);
     },
     setFormErrors: (state: any, action: any) => {
       state.errors = action.payload;
