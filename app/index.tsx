@@ -1,17 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useRouter, useRootNavigationState } from 'expo-router';
 
 export default () => {
   const router = useRouter();
   const rootNavigationState = useRootNavigationState();
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const hasRedirected = useRef<boolean>(false);
 
   useEffect(() => {
-    if (rootNavigationState?.key && !isLoaded) {
-      setIsLoaded(true);
+    if (rootNavigationState?.key && !hasRedirected.current) {
+      hasRedirected.current = true;
       router.push('/welcome');
     }
-  }, [isLoaded, rootNavigationState]);
+  }, [rootNavigationState]);
 
   return null;
 }
