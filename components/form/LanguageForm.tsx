@@ -24,7 +24,7 @@ const LanguageForm = () => {
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.formContainer}>
       <SelectListBase
-        value={currentlLanguage}
+        value={currentlLanguage} // Todo - Fix current language not selected
         data={data} 
         placeholder={i18n.t('Select a language')} 
         onChangeValue={async (option: any) => await changeLanguage(option)}
