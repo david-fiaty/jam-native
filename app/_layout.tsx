@@ -47,14 +47,12 @@ const RootLayout = () => {
     return true;
   };
 
-  const getLanguage = () => {
-    let storedLanguage: string = 'en'; // Todo - Retrieve from local/async storage
-
+  const loadLanguage = () => {
     if (Array.isArray(locales) && locales.length > 0) {
       return locales[0].languageCode; 
     }
   
-    return storedLanguage || Config.fallbackLanguage;
+    return Config.fallbackLanguage;
   };
 
   useEffect(() => {
@@ -67,7 +65,9 @@ const RootLayout = () => {
       backAction,
     );
 
-    UserManager.setLanguage(getLanguage());
+    (async () => {
+      await UserManager.setLanguage(loadLanguage());
+    })();
 
     return () => backHandler.remove();
   }, [isLoaded, isError]);
