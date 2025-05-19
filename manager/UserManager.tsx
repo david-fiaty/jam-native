@@ -191,6 +191,7 @@ class UserManager {
     }
     catch (error) {
       console.log(error);
+      
       return Config.fallbackLanguage;
     }
   };
