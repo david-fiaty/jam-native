@@ -9,6 +9,7 @@ export const Config: any = {
   storageKey: '@jam',
   defaultLanguage: 'en',
   fallbackLanguage: 'en',
+  languageStorageKey: 'language',
   appNamespace: 'jam-native',
   logoImageSize: 512,
   paginationSize: 10,

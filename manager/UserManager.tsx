@@ -2,8 +2,8 @@ import { Platform } from 'react-native';
 import { setLikedJams, setSavedJams, setLikedProjects, setSavedProjects } from '@/redux/slices/UserSlice';
 import { setActiveModals } from '@/redux/slices/ModalSlice';
 import { setActiveSections } from '@/redux/slices/SectionSlice';
-import { setLanguage } from '@/redux/slices/AppSlice';
 import { Config } from '@/constants/Config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Store from '@/redux/Store';
 import SessionManager from './SessionManager';
 import DataManager from './DataManager';
@@ -174,14 +174,25 @@ class UserManager {
     return location;
   }
 
-  setLanguage(languageCode: string) {
-    Store.dispatch(setLanguage(languageCode));
+  async setLanguage(languageCode: string) {
+    if (Platform.OS === 'web') {
+      localStorage.setItem(Config.languageStorageKey, languageCode);
+    } 
+    else {
+      await AsyncStorage.setItem(Config.languageStorageKey, languageCode);
+    }
   }
 
-  getLanguage() {
-    let userLanguage: string = Store.getState().app.language;
+  async getLanguage() {
+    try {
+      let language = Platform.OS === 'web' ? localStorage.getItem(Config.languageStorageKey) : await AsyncStorage.getItem(Config.languageStorageKey);
 
-    return userLanguage || Config.fallbackLanguage;
+      return language || Config.fallbackLanguage;
+    }
+    catch (error) {
+      console.log(error);
+      return Config.fallbackLanguage;
+    }
   };
 
   async updateLikedJams(entityId: number) {
