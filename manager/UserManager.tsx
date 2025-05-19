@@ -175,20 +175,19 @@ class UserManager {
   }
 
   async setLanguage(languageCode: string) {
-    let storageKey: string = 'language';
-    
     if (Platform.OS === 'web') {
-      localStorage.setItem(storageKey, languageCode);
+      localStorage.setItem(Config.languageStorageKey, languageCode);
     } 
     else {
-      await AsyncStorage.setItem(storageKey, languageCode);
+      await AsyncStorage.setItem(Config.languageStorageKey, languageCode);
     }
   }
 
   async getLanguage() {
     try {
-      let storageKey: string = 'language';
-      let language = Platform.OS === 'web' ? localStorage.getItem(storageKey) : await AsyncStorage.getItem(storageKey);
+      let language = Platform.OS === 'web' 
+        ? localStorage.getItem(Config.languageStorageKey) 
+        : await AsyncStorage.getItem(Config.languageStorageKey);
 
       return language || Config.fallbackLanguage;
     }
