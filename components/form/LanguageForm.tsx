@@ -20,13 +20,12 @@ const LanguageForm = () => {
     (async () => {
       setCurrentLanguage(await UserManager.getLanguage());
     })();
-
   }, []);
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.formContainer}>
       <SelectListBase
-        value={UserManager.getLanguage()}
+        value={currentlLanguage}
         data={data} 
         placeholder={i18n.t('English')} 
         onChangeValue={((option: any) => changeLanguage(option))}
