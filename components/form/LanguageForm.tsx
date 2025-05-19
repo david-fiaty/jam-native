@@ -26,7 +26,7 @@ const LanguageForm = () => {
       <SelectListBase
         value={currentlLanguage}
         data={data} 
-        placeholder={i18n.t('English')} 
+        placeholder={i18n.t('Select a language')} 
         onChangeValue={async (option: any) => await changeLanguage(option)}
       />
     </BoxView>
