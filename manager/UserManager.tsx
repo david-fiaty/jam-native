@@ -178,10 +178,10 @@ class UserManager {
     let storageKey: string = 'language';
     
     if (Platform.OS === 'web') {
-      localStorage.getItem(storageKey);
+      localStorage.setItem(storageKey, languageCode);
     } 
     else {
-      await AsyncStorage.getItem(storageKey);
+      await AsyncStorage.setItem(storageKey, languageCode);
     }
   }
 
