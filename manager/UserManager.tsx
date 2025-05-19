@@ -145,10 +145,6 @@ class UserManager {
     return profileProjects.includes(entityId);
   }
 
-  setLanguage(languageCode: string) {
-    Store.dispatch(setLanguage(languageCode));
-  }
-
   async getLocation() {
     if (Platform.OS === "android" && !Device.isDevice) {
       console.log(i18n.t("Location features are not available for virtual devices"));
@@ -180,14 +176,13 @@ class UserManager {
     return location;
   }
 
+  setLanguage(languageCode: string) {
+    Store.dispatch(setLanguage(languageCode));
+  }
+
   getLanguage() {
     let userLanguage: string = Store.getState().app.language;
-    let locales = useLocales();
 
-    if (Array.isArray(locales) && locales.length > 0) {
-      return locales[0].languageCode; 
-    }
-  
     return userLanguage || Config.fallbackLanguage;
   };
 
