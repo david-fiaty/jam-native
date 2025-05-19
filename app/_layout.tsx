@@ -57,7 +57,6 @@ const RootLayout = () => {
     return userLanguage || Config.fallbackLanguage;
   };
 
-
   useEffect(() => {
     if (isLoaded || isError) {
       ExpoSplashScreen.hideAsync();
