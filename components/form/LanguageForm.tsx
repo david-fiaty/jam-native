@@ -12,7 +12,7 @@ const LanguageForm = () => {
   const data = StaticData.languages;
 
   const changeLanguage = async (language: any) => {
-    setCurrentLanguage(language);
+    setCurrentLanguage(language);  // Todo - Test language selection
     await UserManager.setLanguage(language.value);
   };
 
@@ -25,7 +25,7 @@ const LanguageForm = () => {
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.formContainer}>
       <SelectListBase
-        value={currentlLanguage} // Todo - Fix current language not selected
+        value={currentlLanguage}
         data={data} 
         placeholder={i18n.t('Select a language')} 
         onChangeValue={async (option: any) => await changeLanguage(option)}
