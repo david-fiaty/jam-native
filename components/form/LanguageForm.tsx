@@ -12,6 +12,7 @@ const LanguageForm = () => {
   const data = StaticData.languages;
 
   const changeLanguage = async (language: any) => {
+    setCurrentLanguage(language);
     await UserManager.setLanguage(language.value);
   };
 
