@@ -3,7 +3,6 @@ import { TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from '@/redux/slices/FormSlice';
 import { Layout } from '@/constants/Layout';
-import SpinnerView from '../view/SpinnerView';
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from './InputTextField';
@@ -89,8 +88,6 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
 
     setCurrentValue(getSelectedSectors(value));
   }, [isLoaded, value, formData, field]);
-
-  if (!isLoaded) return <SpinnerView size="small" />;
 
   return (
     <>
