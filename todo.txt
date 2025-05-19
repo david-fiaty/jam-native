@@ -168,6 +168,18 @@ console.log(JSON.stringify(obj, 0, 2));
 const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
 
 
+  getLanguage() {
+    let userLanguage: string = Store.getState().app.language;
+    let locales = useLocales();
+
+    if (Array.isArray(locales) && locales.length > 0) {
+      return locales[0].languageCode; 
+    }
+  
+    return userLanguage || Config.fallbackLanguage;
+  };
+
+
 
     "liked_jams": [
         39
