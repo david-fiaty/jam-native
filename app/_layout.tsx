@@ -48,13 +48,11 @@ const RootLayout = () => {
   };
 
   const loadLanguage = () => {
-    let storedLanguage: string = 'en'; // Todo - Retrieve from local/async storage
-
     if (Array.isArray(locales) && locales.length > 0) {
       return locales[0].languageCode; 
     }
   
-    return storedLanguage || Config.fallbackLanguage;
+    return Config.fallbackLanguage;
   };
 
   useEffect(() => {
