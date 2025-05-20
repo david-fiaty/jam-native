@@ -57,9 +57,7 @@ const ImageSlideshow = ({ data }: Props) => {
           dot={renderDot()}
           activeDot={renderActiveDot()}
         >
-          {data?.map((item: any, index: number) => {
-            return renderItem(item, index);
-          })}
+          {data?.map((item: any, index: number) => renderItem(item, index))}
         </Slick>
       </View>
     );
