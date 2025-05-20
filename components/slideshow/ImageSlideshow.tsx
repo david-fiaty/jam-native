@@ -53,13 +53,17 @@ const ImageSlideshow = ({ data }: Props) => {
   );
 
   const renderDots = () => {
-    return [...Array(itemsCount)].map((_, index) => (
-      <TouchableOpacity
-        key={index}
-        onPress={() => onDotPress(index)}
-        style={activeIndex === index ? styles.activeDot : styles.dot}
-      />
-    ));
+    if (itemsCount > 1) {
+      return [...Array(itemsCount)].map((_, index) => (
+        <TouchableOpacity
+          key={index}
+          onPress={() => onDotPress(index)}
+          style={activeIndex === index ? styles.activeDot : styles.dot}
+        />
+      ));
+    }
+
+    return <></>;
   };
 
   const onMomentumScrollEnd = (e: any, state: any) => {
@@ -71,7 +75,6 @@ const ImageSlideshow = ({ data }: Props) => {
       setItemsCount(data?.length || 0);
       setIsLoaded(true);
     }
-
   }, [isLoaded, data]);
 
   return (

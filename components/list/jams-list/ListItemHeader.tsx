@@ -4,7 +4,6 @@ import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
 import TextView from "@/components/view/TextView";
 import IconView from "@/components/view/IconView";
-import i18n from "@/translation/i18n";
 import JamStatusButton from "@/components/button/JamStatusButton";
 import ModalManager from '@/manager/ModalManager';
 
@@ -12,9 +11,21 @@ type Props = {
   row?: any;
 };
 
+const maxOwnerNameLength: number = 28;
+
 const ListItemHeader = ({ row }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const collaboratorsCount = parseInt(row?.item?.collaborators?.length);
+
+  const renderOwnerName = () => {
+    let ownerName: string = row?.item?.profile?.profile_name;
+
+    if (ownerName.length > maxOwnerNameLength) {  
+      ownerName = ownerName.substring(0, maxOwnerNameLength) + '...';
+    } 
+
+    return ownerName;
+  };
 
   useEffect(() => {
     (async () => {
@@ -29,7 +40,7 @@ const ListItemHeader = ({ row }: Props) => {
     return (
       <TouchableOpacity onPress={() => ModalManager.toggleModal('HostsList', { jamId: row?.item?.id })}>
         <TextView>
-          @{row?.item?.profile?.profile_name}  {collaboratorsCount > 0 && `+${collaboratorsCount}`}
+          @{renderOwnerName()}  {collaboratorsCount > 0 && `+${collaboratorsCount}`}
         </TextView>
       </TouchableOpacity>
     );
