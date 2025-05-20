@@ -1,19 +1,18 @@
 import { useState, useEffect } from "react";
 import { Layout } from '@/constants/Layout';
 import i18n from "@/translation/i18n";
-import i18next from 'i18next';
 import BoxView from "../view/BoxView";
 import SelectListBase from '../base/SelectListBase';
 import StaticData from '@/constants/StaticData';
 import UserManager from '@/manager/UserManager';
 
 const LanguageForm = () => {
-  const [currentlLanguage, setCurrentLanguage] = useState<any[]>([]);
+  const [currentlLanguage, setCurrentLanguage] = useState<string>('');
   const data = StaticData.languages;
 
-  const changeLanguage = async (language: any) => {
-    setCurrentLanguage(language);  // Todo - Test language selection
-    await UserManager.setLanguage(language.value);
+  const changeLanguage = async (languageCode: string) => {
+    setCurrentLanguage(languageCode);  // Todo - Test language selection
+    await UserManager.setLanguage(languageCode);
   };
 
   useEffect(() => {
@@ -28,7 +27,7 @@ const LanguageForm = () => {
         value={currentlLanguage}
         data={data} 
         placeholder={i18n.t('Select a language')} 
-        onChangeValue={async (option: any) => await changeLanguage(option)}
+        onChangeValue={async (option: any) => await changeLanguage(option.value)}
       />
     </BoxView>
   );
