@@ -42,7 +42,7 @@ const ImageSlideshow = ({ data }: Props) => {
   };
 
   const renderItem = (item: any, index: number) => (
-    <View style={styles.item} key={`dot-${index}`}>
+    <View style={styles.slideshowItem} key={`dot-${index}`}>
       <ImageView
         uri={MediaManager.getImageUrl(item?.url)}
         resizeMode="cover"
@@ -118,16 +118,10 @@ const styles = StyleSheet.create({
     height: height,
     backgroundColor: Layout.colors.secondary,
   },
-  item: {
+  slideshowItem: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-  },
-  title: {
-    textTransform: "uppercase",
-  },
-  content: {
-    textAlign: "center",
   },
   dotsContaier: {
     zIndex: 100,
