@@ -75,7 +75,6 @@ const ImageSlideshow = ({ data }: Props) => {
       setItemsCount(data?.length || 0);
       setIsLoaded(true);
     }
-
   }, [isLoaded, data]);
 
   return (
