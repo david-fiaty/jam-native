@@ -68,17 +68,8 @@ ps aux | grep node
 shopt -s extglob
 rm -rf !("folder_to_keep")
 
-
 # Google Maps Issues
 https://github.com/react-native-maps/react-native-maps/discussions/4741#discussioncomment-12582128
-
-# Latest fixes:
-- Gestion logout
-- Gestion phone back button
-- Finalisation systeme de navigation
-
-"scripts": {
-  "dev": "npm start --tunnel",
 
 # Flatlist scrollto
 https://gist.github.com/voratham/de4ef03472d9e1f03a7c26c7619d126f
@@ -116,17 +107,21 @@ https://withfra.me/react-native-tutorials/how-to-use-svg-in-react-native
 https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-7948f1a6f949
 
 # Finish
-- Double check collaborators and sectors add/preview process
+- Fix nav issue when submodal opened
+- Add image slideshow dot press events + effects
+- Review language switch handling
 - Media upload submit process in profile form, where is media field?
-
 - Profile image upload bug?
-- Apply search state to main jams list (missing live refresh)
 - Add no result messages in lists that need it
+- add jam owner item host to jam hosts list
+- update jam visual state after action save/like
+- finish change password form
+- test all api submissions
+- review form errors + api responses handling
 
 - Extract languages and translate
 - Static images @2x..
 - Check internet connexion available
-
 
 # Issues  
   - Copy Jam link cannot be implemented (missing URL in payload, maybe irrelevant on native)

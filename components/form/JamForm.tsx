@@ -49,6 +49,7 @@ const JamForm = () => {
     };
 
     let result: any = await EntityManager.addJam(formData);
+
     if (result.success === false) {
       message.content = i18n.t('Invalid data submission.');
       FormManager.addServerErrors(resource, result.response);
@@ -110,10 +111,10 @@ const JamForm = () => {
 
         <DividerView theme="white" />
 
-        <TextView>{i18n.t('Title')}</TextView>
+        <TextView>{i18n.t('Title')} *</TextView>
         <InputTextField
           value={formData?.title}
-          onChangeText={(value: string) => FormManager.updateField(resource, 'title', value)}
+          onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['string'])}
         />
         {FormManager.renderError('title')}
 
@@ -123,6 +124,15 @@ const JamForm = () => {
           onChangeText={(value: string) => FormManager.updateField(resource, 'caption', value, ['string'])}
         />
         {FormManager.renderError('caption')}
+
+        <TextView>{i18n.t('Select media')} *</TextView>
+        <MediaPickerField
+          preview={true}
+          value={formData?.upload_medias}
+          onSelectItem={(data: any) => FormManager.updateField(resource, 'upload_medias', data, ['array'])}
+          onDeleteItem={(data: any) => FormManager.updateField(resource, 'upload_medias', data, ['array'])}
+        />
+        {FormManager.renderError('upload_medias')}
 
         <TextView>{i18n.t('Location type')}</TextView>
         <LocationTypeField
@@ -213,17 +223,6 @@ const JamForm = () => {
           })}
         />
         {FormManager.renderError('collaborators_ids')}
-
-        <TextView>{i18n.t('Select media')}</TextView>
-        <MediaPickerField
-          preview={true}
-          value={formData?.upload_medias}
-          onSelectItem={(data: any) => FormManager.updateField(resource, 'upload_medias', data)}
-          onDeleteItem={(data: any) => FormManager.updateField(resource, 'upload_medias', data)}
-        />
-        {FormManager.renderError('upload_medias')}
-
-        <DividerView theme="white" />
         
         <View style={styles.submitButtonContainer}>
           <ButtonView

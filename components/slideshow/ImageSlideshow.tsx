@@ -1,4 +1,4 @@
-import { memo } from "react";
+import React, { memo, useState, useEffect, useRef } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
@@ -7,6 +7,7 @@ import ImageView from "../view/ImageView";
 import ScreenManager from "@/manager/ScreenManager";
 import NoImageView from "../view/NoImageView";
 import MediaManager from "@/manager/MediaManager";
+import BoxView from "../view/BoxView";
 
 type Props = {
   data?: any;
@@ -14,16 +15,34 @@ type Props = {
 
 const width: number = ScreenManager.window.width - Layout.space.base * 2;
 const height: number = 346;
-const dotSize: number = 8;
+const dotSize: number = 18;
 
 const ImageSlideshow = ({ data }: Props) => {
-  const onDotPress = () => {
-    // Todo - Implement dot press event
-    console.log('on dot press event')
+  const slideshowRef = useRef<any>();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [imagesCount, setImagesCount] = useState<number>(0);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+
+  if (data?.length > Config.maxSlieshowImages) {
+    data = data.slice(Config.maxSlieshowImages - 1);
+  }
+
+  const onDotPress = (nextIndex: number) => {
+    let newIndex: number = 0;
+
+    if (nextIndex > activeIndex) {
+      newIndex = nextIndex + activeIndex;
+    }
+    else {
+      newIndex = nextIndex - activeIndex;
+    }
+
+    slideshowRef.current?.scrollBy(newIndex);
+    setActiveIndex(newIndex);
   };
 
   const renderItem = (item: any, index: number) => (
-    <View style={styles.item} key={`dot-${index}`}>
+    <View style={styles.slideshowItem} key={`dot-${index}`}>
       <ImageView
         uri={MediaManager.getImageUrl(item?.url)}
         resizeMode="cover"
@@ -33,82 +52,96 @@ const ImageSlideshow = ({ data }: Props) => {
     </View>
   );
 
-  const renderDot = () => {
-    return (
-      <TouchableOpacity onPress={onDotPress} style={styles.dot} />
-    );
+  const renderDots = () => {
+    return [...Array(imagesCount)].map((_, index) => (
+      <TouchableOpacity
+        key={index}
+        onPress={() => onDotPress(index)}
+        style={activeIndex === index ? styles.activeDot : styles.dot}
+      />
+    ));
   };
 
-  const renderActiveDot = () => {
-    return (
-      <TouchableOpacity onPress={onDotPress} style={styles.activeDot} />
-    );
+  const onMomentumScrollEnd = (e: any, state: any) => {
+    setActiveIndex(state.index);
   };
 
-  if (data?.length > Config.maxSlieshowImages) {
-    data = data.slice(Config.maxSlieshowImages - 1);
-  }
+  useEffect(() => {
+    if (!isLoaded) {
+      setImagesCount(data?.length || 0);
+      setIsLoaded(true);
+    }
 
-  if (data?.length > 0) {
-    return (
-      <View style={styles.container}>
-        <Slick
-          paginationStyle={styles.pagination}
-          dot={renderDot()}
-          activeDot={renderActiveDot()}
-        >
-          {data?.map((item: any, index: number) => {
-            return renderItem(item, index);
-          })}
-        </Slick>
-      </View>
-    );
-  }
+  }, [isLoaded, data]);
 
   return (
-    <NoImageView
-      width={width}
-      height={height}
-      containerStyle={{
-        height: height,
-        borderRadius: 0,
-      }}
-    />
+    <View style={styles.container}>
+      {data?.length > 0 && (
+        <>
+          <View style={styles.slideshowContainer}>
+            <Slick
+              ref={slideshowRef}
+              showsPagination={false}
+              onMomentumScrollEnd={onMomentumScrollEnd}
+            >
+              {data?.map((item: any, index: number) => renderItem(item, index))}
+            </Slick>
+          </View>
+
+          <BoxView
+            direction="row"
+            justify="center"
+            align="center"
+            style={styles.dotsContaier}
+          >
+            {renderDots()}
+          </BoxView>
+        </>
+      )}
+
+      {!data?.length && (
+        <NoImageView
+          width={width}
+          height={height}
+          containerStyle={{
+            height: height,
+            borderRadius: 0,
+          }}
+        />
+      )}
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    position: 'relative',
+  },
+  slideshowContainer: {
     height: height,
     backgroundColor: Layout.colors.secondary,
   },
-  item: {
+  slideshowItem: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
-  title: {
-    textTransform: "uppercase",
-  },
-  content: {
-    textAlign: "center",
-  },
-  pagination: {
-    bottom: -Layout.space.base * 2.85,
-    left: 0,
-    right: 0,
-    height: Layout.space.base,
-    gap: Layout.space.base / 1.5,
+  dotsContaier: {
     zIndex: 100,
+    width: '100%',
   },
   dot: {
-    backgroundColor: Layout.colors.secondary,
+    backgroundColor: Layout.colors.white,
+    borderColor: Layout.colors.primary,
+    borderWidth: Layout.borderWidth.base,
     width: dotSize,
     height: dotSize,
     borderRadius: dotSize,
   },
   activeDot: {
     backgroundColor: Layout.colors.primary,
+    borderColor: Layout.colors.primary,
+    borderWidth: Layout.borderWidth.base,
     width: dotSize,
     height: dotSize,
     borderRadius: dotSize,

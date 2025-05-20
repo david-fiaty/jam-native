@@ -1,4 +1,5 @@
 import { StyleSheet, TouchableOpacity } from "react-native";
+import { useState, useEffect } from "react";
 import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
 import TextView from "@/components/view/TextView";
@@ -12,21 +13,25 @@ type Props = {
 };
 
 const ListItemHeader = ({ row }: Props) => {
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const collaboratorsCount = parseInt(row?.item?.collaborators?.length);
 
-  const renderHosts = () => {
-    if (collaboratorsCount > 0) {
-      return (
-        <TouchableOpacity onPress={() => ModalManager.toggleModal('HostsList', { jamId: row?.item?.id })}>
-          <TextView>
-            @{i18n.t("host")} +{collaboratorsCount}
-          </TextView>
-        </TouchableOpacity>
-      );
-    }
+  useEffect(() => {
+    (async () => {
+      if (!isLoaded) {
+        setIsLoaded(true);
+      }
+    })();
 
+  }, [isLoaded]);
+
+  const renderHosts = () => {
     return (
-      <TextView>@{i18n.t("host")}</TextView>
+      <TouchableOpacity onPress={() => ModalManager.toggleModal('HostsList', { jamId: row?.item?.id })}>
+        <TextView>
+          @{row?.item?.profile?.profile_name}  {collaboratorsCount > 0 && `+${collaboratorsCount}`}
+        </TextView>
+      </TouchableOpacity>
     );
   };
 
