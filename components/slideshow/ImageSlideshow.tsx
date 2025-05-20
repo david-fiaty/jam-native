@@ -36,9 +36,9 @@ const ImageSlideshow = ({ data }: Props) => {
     else {
       newIndex = nextIndex - activeIndex;
     }
-    
+
     slideshowRef.current?.scrollBy(newIndex);
-    setActiveIndex(newIndex); 
+    setActiveIndex(newIndex);
   };
 
   const renderItem = (item: any, index: number) => (
@@ -53,20 +53,13 @@ const ImageSlideshow = ({ data }: Props) => {
   );
 
   const renderDots = () => {
-    return (
-      <BoxView 
-        direction="horizontal"  
-        style={styles.dotsContaier}
-      >
-        {[...Array(imagesCount)].map((_, index) => (
-          <TouchableOpacity
-            key={index}
-            onPress={() => onDotPress(index)}
-            style={activeIndex === index ? styles.activeDot : styles.dot}
-          />
-        ))}
-      </BoxView>
-    );
+    return [...Array(imagesCount)].map((_, index) => (
+      <TouchableOpacity
+        key={index}
+        onPress={() => onDotPress(index)}
+        style={activeIndex === index ? styles.activeDot : styles.dot}
+      />
+    ));
   };
 
   const onMomentumScrollEnd = (e: any, state: any) => {
@@ -89,14 +82,16 @@ const ImageSlideshow = ({ data }: Props) => {
             ref={slideshowRef}
             showsPagination={false}
             onMomentumScrollEnd={onMomentumScrollEnd}
-          //paginationStyle={styles.pagination}
-          //dot={renderDot()}
-          //activeDot={renderActiveDot()}
           >
             {data?.map((item: any, index: number) => renderItem(item, index))}
           </Slick>
 
-          {renderDots()}
+          <BoxView
+            direction="row"
+            style={styles.dotsContaier}
+          >
+            {renderDots()}
+          </BoxView>
         </View>
       )}
 
@@ -131,15 +126,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   dotsContaier: {
-    /*
-    bottom: -Layout.space.base * 2.85,
-    left: 0,
-    right: 0,
-    height: Layout.space.base,
-    gap: Layout.space.base / 1.5,
     zIndex: 100,
-    */
     backgroundColor: 'red',
+    width: '100%',
   },
   dot: {
     backgroundColor: Layout.colors.secondary,
