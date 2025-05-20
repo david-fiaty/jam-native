@@ -20,7 +20,7 @@ const dotSize: number = 9;
 const ImageSlideshow = ({ data }: Props) => {
   const slideshowRef = useRef<any>();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [imagesCount, setImagesCount] = useState<number>(0);
+  const [itemsCount, setItemsCount] = useState<number>(0);
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   if (data?.length > Config.maxSlieshowImages) {
@@ -53,7 +53,7 @@ const ImageSlideshow = ({ data }: Props) => {
   );
 
   const renderDots = () => {
-    return [...Array(imagesCount)].map((_, index) => (
+    return [...Array(itemsCount)].map((_, index) => (
       <TouchableOpacity
         key={index}
         onPress={() => onDotPress(index)}
@@ -68,7 +68,7 @@ const ImageSlideshow = ({ data }: Props) => {
 
   useEffect(() => {
     if (!isLoaded) {
-      setImagesCount(data?.length || 0);
+      setItemsCount(data?.length || 0);
       setIsLoaded(true);
     }
 
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     zIndex: 100,
     width: '100%',
     position: 'absolute',
-    bottom: -Layout.space.base*2.9,
+    bottom: -Layout.space.base * 2.9,
     gap: dotSize,
   },
   dot: {

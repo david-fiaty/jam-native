@@ -1,52 +1,105 @@
-import { StyleSheet, View } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Layout } from "@/constants/Layout";
 import Slick from "react-native-slick";
 import TextView from "../view/TextView";
 import ScreenManager from "@/manager/ScreenManager";
+import BoxView from "../view/BoxView";
 
 type Props = {
-  data?: [] | object;
+  data?: any;
 };
 
 const width = ScreenManager.window.width - Layout.space.base * 2;
 const height = 122;
+const dotSize: number = 9;
 
-const TextSlideshow = ({data}: Props) => {
-  const SlideshowItem = data?.map((item: any, index: number) => {
-    return (
-      <View style={styles.item} key={`dot-${index}`}>
-        <TextView style={styles.title}>{item.title}</TextView>
-        <TextView style={styles.content}>{item.content}</TextView>
-      </View>
-    );
-  });
+const TextSlideshow = ({ data }: Props) => {
+  const slideshowRef = useRef<any>();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [itemsCount, setItemsCount] = useState<number>(0);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+
+  const onDotPress = (nextIndex: number) => {
+    let newIndex: number = 0;
+
+    if (nextIndex > activeIndex) {
+      newIndex = nextIndex + activeIndex;
+    }
+    else {
+      newIndex = nextIndex - activeIndex;
+    }
+
+    slideshowRef.current?.scrollBy(newIndex);
+    setActiveIndex(newIndex);
+  };
+
+  const renderItem = () => {
+    return data?.map((item: any, index: number) => {
+      return (
+        <View style={styles.item} key={`dot-${index}`}>
+          <TextView style={styles.title}>{item.title}</TextView>
+          <TextView style={styles.content}>{item.content}</TextView>
+        </View>
+      );
+    });
+  };
+
+  const renderDots = () => {
+    return [...Array(itemsCount)].map((_, index) => (
+      <TouchableOpacity
+        key={index}
+        onPress={() => onDotPress(index)}
+        style={activeIndex === index ? styles.activeDot : styles.dot}
+      />
+    ));
+  };
+
+  useEffect(() => {
+    if (!isLoaded) {
+      setItemsCount(data?.length || 0);
+      setIsLoaded(true);
+    }
+
+  }, [isLoaded, data]);
 
   return (
-    <View style={styles.container}>
-      <Slick 
-        paginationStyle={styles.pagination}
-        dotStyle={styles.dot}
-        activeDotStyle={styles.activeDot}
+    <>
+      <View style={styles.slideshowContainer}>
+        <Slick
+          paginationStyle={styles.dotsContaier}
+          dotStyle={styles.dot}
+          activeDotStyle={styles.activeDot}
+        >
+          {renderItem()}
+        </Slick>
+      </View>
+
+      <BoxView
+        direction="row"
+        justify="center"
+        align="center"
+        style={styles.dotsContaier}
       >
-        {SlideshowItem}
-      </Slick>
-    </View>
+        {renderDots()}
+      </BoxView>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { 
+  slideshowContainer: {
     height: height,
     width: width,
     marginTop: Layout.space.base,
-    marginBottom: Layout.space.base*2,
+    marginBottom: Layout.space.base * 2,
   },
   item: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     gap: Layout.space.base,
-    padding: Layout.space.base*2,
+    padding: Layout.space.base * 2,
   },
   title: {
     textTransform: 'uppercase',
@@ -54,17 +107,28 @@ const styles = StyleSheet.create({
   content: {
     textAlign: 'center',
   },
-  pagination: {
-    bottom: 0, 
-    left: 0,
-    right: 0,
-    height: Layout.space.base,
+  dotsContaier: {
+    zIndex: 100,
+    width: '100%',
+    position: 'absolute',
+    bottom: 0,
+    gap: dotSize,
   },
   dot: {
-    backgroundColor: Layout.colors.secondary,
+    backgroundColor: Layout.colors.white,
+    borderColor: Layout.colors.primary,
+    borderWidth: Layout.borderWidth.base,
+    width: dotSize,
+    height: dotSize,
+    borderRadius: dotSize,
   },
   activeDot: {
     backgroundColor: Layout.colors.primary,
+    borderColor: Layout.colors.primary,
+    borderWidth: Layout.borderWidth.base,
+    width: dotSize,
+    height: dotSize,
+    borderRadius: dotSize,
   },
 });
 
