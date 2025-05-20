@@ -88,6 +88,8 @@ const ImageSlideshow = ({ data }: Props) => {
 
           <BoxView
             direction="row"
+            justify="center"
+            align="center"
             style={styles.dotsContaier}
           >
             {renderDots()}
