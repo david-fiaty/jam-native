@@ -42,7 +42,7 @@ const ImageSlideshow = ({ data }: Props) => {
   };
 
   const renderItem = (item: any, index: number) => (
-    <View style={styles.item} key={`dot-${index}`}>
+    <View style={styles.slideshowItem} key={`dot-${index}`}>
       <ImageView
         uri={MediaManager.getImageUrl(item?.url)}
         resizeMode="cover"
@@ -75,24 +75,28 @@ const ImageSlideshow = ({ data }: Props) => {
   }, [isLoaded, data]);
 
   return (
-    <>
+    <View style={styles.container}>
       {data?.length > 0 && (
-        <View style={styles.container}>
-          <Slick
-            ref={slideshowRef}
-            showsPagination={false}
-            onMomentumScrollEnd={onMomentumScrollEnd}
-          >
-            {data?.map((item: any, index: number) => renderItem(item, index))}
-          </Slick>
+        <>
+          <View style={styles.slideshowContainer}>
+            <Slick
+              ref={slideshowRef}
+              showsPagination={false}
+              onMomentumScrollEnd={onMomentumScrollEnd}
+            >
+              {data?.map((item: any, index: number) => renderItem(item, index))}
+            </Slick>
+          </View>
 
           <BoxView
             direction="row"
+            justify="center"
+            align="center"
             style={styles.dotsContaier}
           >
             {renderDots()}
           </BoxView>
-        </View>
+        </>
       )}
 
       {!data?.length && (
@@ -105,39 +109,39 @@ const ImageSlideshow = ({ data }: Props) => {
           }}
         />
       )}
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    position: 'relative',
+  },
+  slideshowContainer: {
     height: height,
     backgroundColor: Layout.colors.secondary,
   },
-  item: {
+  slideshowItem: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
-  title: {
-    textTransform: "uppercase",
-  },
-  content: {
-    textAlign: "center",
-  },
   dotsContaier: {
     zIndex: 100,
-    backgroundColor: 'red',
     width: '100%',
   },
   dot: {
-    backgroundColor: Layout.colors.secondary,
+    backgroundColor: Layout.colors.white,
+    borderColor: Layout.colors.primary,
+    borderWidth: Layout.borderWidth.base,
     width: dotSize,
     height: dotSize,
     borderRadius: dotSize,
   },
   activeDot: {
     backgroundColor: Layout.colors.primary,
+    borderColor: Layout.colors.primary,
+    borderWidth: Layout.borderWidth.base,
     width: dotSize,
     height: dotSize,
     borderRadius: dotSize,
