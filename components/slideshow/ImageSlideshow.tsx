@@ -99,6 +99,7 @@ const ImageSlideshow = ({ data }: Props) => {
       {data?.length > 0 && (
         <View style={styles.container}>
           <Slick
+            ref={slideshowRef}
             showsPagination={false}
             onMomentumScrollEnd={onMomentumScrollEnd}
           //paginationStyle={styles.pagination}
