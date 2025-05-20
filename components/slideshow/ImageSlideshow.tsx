@@ -42,45 +42,45 @@ const ImageSlideshow = ({ data }: Props) => {
 
   const renderDot = () => {
     return (
-      <TouchableOpacity 
-        onPress={onDotPress} 
-        style={styles.dot} 
+      <TouchableOpacity
+        onPress={onDotPress}
+        style={styles.dot}
       />
     );
   };
 
   const renderActiveDot = () => {
     return (
-      <TouchableOpacity 
-        onPress={onDotPress} 
-        style={styles.activeDot} 
+      <TouchableOpacity
+        onPress={onDotPress}
+        style={styles.activeDot}
       />
     );
   };
 
-const renderDots = () => {
-  return (
-    <View>
-      {[...Array(slideCount)].map((_, index) => (
-        <TouchableOpacity
-          key={index}
-          onPress={() => slickRef.current?.scrollBy(index - activeIndex)}
-          style={[
-            styles.dot,
-            activeIndex === index && styles.activeDot,
-          ]}
-        />
-      ))}
-    </View>
-  );
-};
+  const renderDots = () => {
+    return (
+      <View>
+        {[...Array(slideCount)].map((_, index) => (
+          <TouchableOpacity
+            key={index}
+            onPress={() => slickRef.current?.scrollBy(index - activeIndex)}
+            style={[
+              styles.dot,
+              activeIndex === index && styles.activeDot,
+            ]}
+          />
+        ))}
+      </View>
+    );
+  };
 
   useEffect(() => {
     if (!isLoaded) {
       setImagesCount(data?.length || 0);
       setIsLoaded(true);
     }
-    
+
   }, [isLoaded, data]);
 
   return (
@@ -89,9 +89,9 @@ const renderDots = () => {
         <View style={styles.container}>
           <Slick
             showsPagination={false}
-            //paginationStyle={styles.pagination}
-            //dot={renderDot()}
-            //activeDot={renderActiveDot()}
+          //paginationStyle={styles.pagination}
+          //dot={renderDot()}
+          //activeDot={renderActiveDot()}
           >
             {data?.map((item: any, index: number) => renderItem(item, index))}
           </Slick>
