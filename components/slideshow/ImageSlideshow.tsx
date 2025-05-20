@@ -38,7 +38,7 @@ const ImageSlideshow = ({ data }: Props) => {
     }
     
     slideshowRef.current?.scrollBy(newIndex);
-    //setActiveIndex(newIndex); // Todo - Enable or remove
+    setActiveIndex(newIndex); 
   };
 
   const renderItem = (item: any, index: number) => (
@@ -52,24 +52,6 @@ const ImageSlideshow = ({ data }: Props) => {
     </View>
   );
 
-  const renderDot = () => {
-    return (
-      <TouchableOpacity
-        onPress={onDotPress}
-        style={styles.dot}
-      />
-    );
-  };
-
-  const renderActiveDot = () => {
-    return (
-      <TouchableOpacity
-        onPress={onDotPress}
-        style={styles.activeDot}
-      />
-    );
-  };
-
   const renderDots = () => {
     return (
       <BoxView 
@@ -80,10 +62,7 @@ const ImageSlideshow = ({ data }: Props) => {
           <TouchableOpacity
             key={index}
             onPress={() => onDotPress(index)}
-            style={[
-              styles.dot,
-              activeIndex === index && styles.activeDot,
-            ]}
+            style={activeIndex === index ? styles.activeDot : styles.dot}
           />
         ))}
       </BoxView>
