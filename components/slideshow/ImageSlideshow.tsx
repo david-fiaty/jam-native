@@ -129,6 +129,8 @@ const styles = StyleSheet.create({
   dotsContaier: {
     zIndex: 100,
     width: '100%',
+    position: 'absolute',
+    bottom: -Layout.space.base*3.3,
   },
   dot: {
     backgroundColor: Layout.colors.white,
