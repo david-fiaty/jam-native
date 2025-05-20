@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
     width: '100%',
     position: 'absolute',
     bottom: -Layout.space.base*2.9,
+    gap: dotSize,
   },
   dot: {
     backgroundColor: Layout.colors.white,
