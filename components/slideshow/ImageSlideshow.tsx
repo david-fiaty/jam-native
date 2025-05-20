@@ -87,7 +87,7 @@ const ImageSlideshow = ({ data }: Props) => {
           </Slick>
 
           <BoxView
-            direction="horizontal"
+            direction="row"
             style={styles.dotsContaier}
           >
             {renderDots()}
@@ -126,15 +126,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   dotsContaier: {
-    /*
-    bottom: -Layout.space.base * 2.85,
-    left: 0,
-    right: 0,
-    height: Layout.space.base,
-    gap: Layout.space.base / 1.5,
     zIndex: 100,
-    */
     backgroundColor: 'red',
+    width: '100%',
   },
   dot: {
     backgroundColor: Layout.colors.secondary,
