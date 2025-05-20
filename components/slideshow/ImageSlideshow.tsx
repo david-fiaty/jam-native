@@ -42,7 +42,7 @@ const ImageSlideshow = ({ data }: Props) => {
   };
 
   const renderItem = (item: any, index: number) => (
-    <View style={styles.item} key={`dot-${index}`}>
+    <View style={styles.slideshowItem} key={`dot-${index}`}>
       <ImageView
         uri={MediaManager.getImageUrl(item?.url)}
         resizeMode="cover"
@@ -75,7 +75,7 @@ const ImageSlideshow = ({ data }: Props) => {
   }, [isLoaded, data]);
 
   return (
-    <>
+    <View style={styles.container}>
       {data?.length > 0 && (
         <>
           <View style={styles.slideshowContainer}>
@@ -109,25 +109,22 @@ const ImageSlideshow = ({ data }: Props) => {
           }}
         />
       )}
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    position: 'relative',
+  },
   slideshowContainer: {
     height: height,
     backgroundColor: Layout.colors.secondary,
   },
-  item: {
+  slideshowItem: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-  },
-  title: {
-    textTransform: "uppercase",
-  },
-  content: {
-    textAlign: "center",
   },
   dotsContaier: {
     zIndex: 100,
