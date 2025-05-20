@@ -17,6 +17,10 @@ const height: number = 346;
 const dotSize: number = 8;
 
 const ImageSlideshow = ({ data }: Props) => {
+  if (data?.length > Config.maxSlieshowImages) {
+    data = data.slice(Config.maxSlieshowImages - 1);
+  }
+
   const onDotPress = () => {
     // Todo - Implement dot press event
     console.log('on dot press event')
@@ -45,35 +49,31 @@ const ImageSlideshow = ({ data }: Props) => {
     );
   };
 
-  if (data?.length > Config.maxSlieshowImages) {
-    data = data.slice(Config.maxSlieshowImages - 1);
-  }
-
-  if (data?.length > 0) {
-    return (
-      <View style={styles.container}>
-        <Slick
-          paginationStyle={styles.pagination}
-          dot={renderDot()}
-          activeDot={renderActiveDot()}
-        >
-          {data?.map((item: any, index: number) => {
-            return renderItem(item, index);
-          })}
-        </Slick>
-      </View>
-    );
-  }
-
   return (
-    <NoImageView
-      width={width}
-      height={height}
-      containerStyle={{
-        height: height,
-        borderRadius: 0,
-      }}
-    />
+    <>
+      {data?.length > 0 && (
+        <View style={styles.container}>
+          <Slick
+            paginationStyle={styles.pagination}
+            dot={renderDot()}
+            activeDot={renderActiveDot()}
+          >
+            {data?.map((item: any, index: number) => renderItem(item, index))}
+          </Slick>
+        </View>
+      )}
+
+      {!data?.length && (
+        <NoImageView
+          width={width}
+          height={height}
+          containerStyle={{
+            height: height,
+            borderRadius: 0,
+          }}
+        />
+      )}
+    </>
   );
 };
 
