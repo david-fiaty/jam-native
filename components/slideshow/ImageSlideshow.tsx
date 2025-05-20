@@ -1,4 +1,4 @@
-import { memo } from "react";
+import React, { memo, useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
@@ -17,6 +17,9 @@ const height: number = 346;
 const dotSize: number = 8;
 
 const ImageSlideshow = ({ data }: Props) => {
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [imagesCount, setImagesCount] = useState<number>(0);
+
   if (data?.length > Config.maxSlieshowImages) {
     data = data.slice(Config.maxSlieshowImages - 1);
   }
@@ -39,7 +42,10 @@ const ImageSlideshow = ({ data }: Props) => {
 
   const renderDot = () => {
     return (
-      <TouchableOpacity onPress={onDotPress} style={styles.dot} />
+      <TouchableOpacity 
+        onPress={onDotPress} 
+        style={styles.dot} 
+      />
     );
   };
 
@@ -52,14 +58,40 @@ const ImageSlideshow = ({ data }: Props) => {
     );
   };
 
+const renderDots = () => {
+  return (
+    <View>
+      {[...Array(slideCount)].map((_, index) => (
+        <TouchableOpacity
+          key={index}
+          onPress={() => slickRef.current?.scrollBy(index - activeIndex)}
+          style={[
+            styles.dot,
+            activeIndex === index && styles.activeDot,
+          ]}
+        />
+      ))}
+    </View>
+  );
+};
+
+  useEffect(() => {
+    if (!isLoaded) {
+      setImagesCount(data?.length || 0);
+      setIsLoaded(true);
+    }
+    
+  }, [isLoaded, data]);
+
   return (
     <>
       {data?.length > 0 && (
         <View style={styles.container}>
           <Slick
-            paginationStyle={styles.pagination}
-            dot={renderDot()}
-            activeDot={renderActiveDot()}
+            showsPagination={false}
+            //paginationStyle={styles.pagination}
+            //dot={renderDot()}
+            //activeDot={renderActiveDot()}
           >
             {data?.map((item: any, index: number) => renderItem(item, index))}
           </Slick>
