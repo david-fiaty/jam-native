@@ -34,16 +34,12 @@ const TextSlideshow = ({ data }: Props) => {
     setActiveIndex(newIndex);
   };
 
-  const renderItem = () => {
-    return data?.map((item: any, index: number) => {
-      return (
-        <View style={styles.item} key={`dot-${index}`}>
-          <TextView style={styles.title}>{item.title}</TextView>
-          <TextView style={styles.content}>{item.content}</TextView>
-        </View>
-      );
-    });
-  };
+  const renderItem = (item: any, index: number) => (
+    <View style={styles.item} key={`dot-${index}`}>
+      <TextView style={styles.title}>{item.title}</TextView>
+      <TextView style={styles.content}>{item.content}</TextView>
+    </View>
+  );
 
   const renderDots = () => {
     return [...Array(itemsCount)].map((_, index) => (
@@ -55,6 +51,10 @@ const TextSlideshow = ({ data }: Props) => {
     ));
   };
 
+  const onMomentumScrollEnd = (e: any, state: any) => {
+    setActiveIndex(state.index);
+  };
+
   useEffect(() => {
     if (!isLoaded) {
       setItemsCount(data?.length || 0);
@@ -64,16 +64,14 @@ const TextSlideshow = ({ data }: Props) => {
   }, [isLoaded, data]);
 
   return (
-    <>
-      <View style={styles.slideshowContainer}>
-        <Slick
-          paginationStyle={styles.dotsContaier}
-          dotStyle={styles.dot}
-          activeDotStyle={styles.activeDot}
-        >
-          {renderItem()}
-        </Slick>
-      </View>
+    <View style={styles.slideshowContainer}>
+      <Slick
+        ref={slideshowRef}
+        showsPagination={false}
+        onMomentumScrollEnd={onMomentumScrollEnd}
+      >
+        {data?.map((item: any, index: number) => renderItem(item, index))}
+      </Slick>
 
       <BoxView
         direction="row"
@@ -83,7 +81,7 @@ const TextSlideshow = ({ data }: Props) => {
       >
         {renderDots()}
       </BoxView>
-    </>
+    </View>
   );
 };
 
