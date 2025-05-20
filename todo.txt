@@ -109,19 +109,18 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 # Finish
 - Fix nav issue when submodal opened
 - Review language switch handling
-- Media upload submit process in profile form, where is media field?
-- Profile image upload bug?
-- Add no result messages in lists that need it
+- Profile/jam image upload
 - add jam owner item host to jam hosts list
 - update jam visual state after action save/like
 - finish change password form
-- test all api submissions
-- review form errors + api responses handling
 - Image slideshow dots effects like insta?
 
+- review form errors + api responses handling
+- verify results count in desktop vs mobile endpoints
 - Extract languages and translate
 - Static images @2x..
 - Check internet connexion available
+- Implement global crash handling
 
 # Issues  
   - Copy Jam link cannot be implemented (missing URL in payload, maybe irrelevant on native)
