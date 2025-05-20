@@ -11,14 +11,14 @@ type Props = {
   row?: any;
 };
 
-const maxOwnerNameLength: number = 30;
+const maxOwnerNameLength: number = 28;
 
 const ListItemHeader = ({ row }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const collaboratorsCount = parseInt(row?.item?.collaborators?.length);
 
   const renderOwnerName = () => {
-    let ownerName: string = row?.item?.profile?.profile_name + 'xxxxxxxxxxxxsas';
+    let ownerName: string = row?.item?.profile?.profile_name;
 
     if (ownerName.length > maxOwnerNameLength) {  
       ownerName = ownerName.substring(0, maxOwnerNameLength) + '...';
