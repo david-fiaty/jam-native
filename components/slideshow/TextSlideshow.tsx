@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     height: height,
     width: width,
     marginTop: Layout.space.base,
-    marginBottom: Layout.space.base * 2,
+    marginBottom: Layout.space.base,
   },
   item: {
     flex: 1,
