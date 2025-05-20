@@ -27,10 +27,18 @@ const ImageSlideshow = ({ data }: Props) => {
     data = data.slice(Config.maxSlieshowImages - 1);
   }
 
-  const onDotPress = (index) => {
-    // Todo - Implement dot press event
-    console.log('on dot press event')
-    slideshowRef.current?.scrollBy(index - activeIndex)
+  const onDotPress = (nextIndex: number) => {
+    let newIndex: number = 0;
+
+    if (nextIndex > activeIndex) {
+      newIndex = nextIndex + activeIndex;
+    }
+    else {
+      newIndex = nextIndex - activeIndex;
+    }
+    
+    slideshowRef.current?.scrollBy(newIndex);
+    setActiveIndex(newIndex); 
   };
 
   const renderItem = (item: any, index: number) => (
@@ -44,24 +52,6 @@ const ImageSlideshow = ({ data }: Props) => {
     </View>
   );
 
-  const renderDot = () => {
-    return (
-      <TouchableOpacity
-        onPress={onDotPress}
-        style={styles.dot}
-      />
-    );
-  };
-
-  const renderActiveDot = () => {
-    return (
-      <TouchableOpacity
-        onPress={onDotPress}
-        style={styles.activeDot}
-      />
-    );
-  };
-
   const renderDots = () => {
     return (
       <BoxView 
@@ -72,10 +62,7 @@ const ImageSlideshow = ({ data }: Props) => {
           <TouchableOpacity
             key={index}
             onPress={() => onDotPress(index)}
-            style={[
-              styles.dot,
-              activeIndex === index && styles.activeDot,
-            ]}
+            style={activeIndex === index ? styles.activeDot : styles.dot}
           />
         ))}
       </BoxView>
