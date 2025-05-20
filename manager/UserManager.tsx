@@ -188,7 +188,9 @@ class UserManager {
 
   async getLanguage() {
     try {
-      let language = Platform.OS === 'web' ? localStorage.getItem(Config.languageStorageKey) : await AsyncStorage.getItem(Config.languageStorageKey);
+      let language = Platform.OS === 'web' 
+        ? localStorage.getItem(Config.languageStorageKey) 
+        : await AsyncStorage.getItem(Config.languageStorageKey);
 
       return language || Config.fallbackLanguage;
     }

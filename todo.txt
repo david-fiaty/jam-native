@@ -108,17 +108,15 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 
 # Finish
 - Fix nav issue when submodal opened
-- Review language switch handling
 - Profile/jam image upload
 - add jam owner item host to jam hosts list
 - update jam visual state after action save/like
 - finish change password form
-- Image slideshow dots effects like insta?
 
+- Image slideshow dots effects like insta?
 - review form errors + api responses handling
 - verify results count in desktop vs mobile endpoints
 - Extract languages and translate
-- Static images @2x..
 - Check internet connexion available
 - Implement global crash handling
 
