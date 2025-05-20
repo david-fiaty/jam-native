@@ -75,7 +75,7 @@ const ImageSlideshow = ({ data }: Props) => {
   }, [isLoaded, data]);
 
   return (
-    <>
+    <View style={styles.container}>
       {data?.length > 0 && (
         <>
           <View style={styles.slideshowContainer}>
@@ -109,11 +109,14 @@ const ImageSlideshow = ({ data }: Props) => {
           }}
         />
       )}
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    position: 'relative',
+  },
   slideshowContainer: {
     height: height,
     backgroundColor: Layout.colors.secondary,
