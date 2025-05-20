@@ -45,7 +45,10 @@ const ImageSlideshow = ({ data }: Props) => {
 
   const renderActiveDot = () => {
     return (
-      <TouchableOpacity onPress={onDotPress} style={styles.activeDot} />
+      <TouchableOpacity 
+        onPress={onDotPress} 
+        style={styles.activeDot} 
+      />
     );
   };
 
