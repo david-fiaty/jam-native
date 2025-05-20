@@ -27,10 +27,18 @@ const ImageSlideshow = ({ data }: Props) => {
     data = data.slice(Config.maxSlieshowImages - 1);
   }
 
-  const onDotPress = (index) => {
-    // Todo - Implement dot press event
-    console.log('on dot press event')
-    slideshowRef.current?.scrollBy(index - activeIndex)
+  const onDotPress = (nextIndex: number) => {
+    let newIndex: number = 0;
+
+    if (nextIndex > activeIndex) {
+      newIndex = nextIndex + activeIndex;
+    }
+    else {
+      newIndex = nextIndex - activeIndex;
+    }
+    
+    slideshowRef.current?.scrollBy(newIndex);
+    //setActiveIndex(newIndex); // Todo - Enable or remove
   };
 
   const renderItem = (item: any, index: number) => (
