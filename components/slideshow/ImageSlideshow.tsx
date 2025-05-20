@@ -15,7 +15,7 @@ type Props = {
 
 const width: number = ScreenManager.window.width - Layout.space.base * 2;
 const height: number = 346;
-const dotSize: number = 18;
+const dotSize: number = 9;
 
 const ImageSlideshow = ({ data }: Props) => {
   const slideshowRef = useRef<any>();
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     zIndex: 100,
     width: '100%',
     position: 'absolute',
-    bottom: -Layout.space.base*3.3,
+    bottom: -Layout.space.base*2.9,
   },
   dot: {
     backgroundColor: Layout.colors.white,
