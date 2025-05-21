@@ -91,8 +91,8 @@ class UserManager {
   async getProfileData(options?: any) {
     options = options || {};
     let profileId: number = await this.getProfileId();
-    let defaults = {};
-    let profileData = [];
+    let defaults: any = {};
+    let profileData: any = {};
     let localProfileData: any = null;
     let variables: any = { '[profile_id]': profileId };
 
