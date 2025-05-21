@@ -158,26 +158,6 @@ class EntityManager {
     return await DataManager.find('listJams', 'id', entityId);
   }
 
-  async saveJam(entityId: any) {
-    let profileId = await UserManager.getProfileId();
-    let response = await DataManager.post('saveJam', {
-      profile_id: profileId,
-      save_items_ids: [entityId],
-    });
-
-    return response;
-  }
-
-  async unsaveJam(entityId: any) {
-    let profileId = await UserManager.getProfileId();
-    let response = await DataManager.post('unsaveJam', {
-      profile_id: profileId,
-      unsave_items_ids: [entityId],
-    });
-
-    return response;
-  }
-
   async addJam(entityData: any) {
     let response: any = await DataManager.post('addJam', entityData);
     let success: boolean = false;
@@ -237,6 +217,56 @@ class EntityManager {
     if (!response?.error) {
       success = true;
       message = i18n.t('The Jam was unliked.')
+    }
+
+    return {
+      success: success,
+      response: response,
+      message: message,
+    };
+  }
+
+  async saveJam(entityId: any) {
+    let profileId = await UserManager.getProfileId();
+    let success: boolean = false;
+    let message: any = {
+      title: i18n.t('Save Jam'),
+      content: i18n.t('Could not perform this action. Please try again.'),
+    };
+
+    let response = await DataManager.post('saveJam', {
+      profile_id: profileId,
+      save_items_ids: [entityId],
+    });
+
+    if (!response?.error) {
+      success = true;
+      message = i18n.t('The Jam was saved.')
+    }
+
+    return {
+      success: success,
+      response: response,
+      message: message,
+    };
+  }
+
+  async unsaveJam(entityId: any) {
+    let profileId = await UserManager.getProfileId();
+    let success: boolean = false;
+    let message: any = {
+      title: i18n.t('Unsave Jam'),
+      content: i18n.t('Could not perform this action. Please try again.'),
+    };
+
+    let response = await DataManager.post('unsaveJam', {
+      profile_id: profileId,
+      unsave_items_ids: [entityId],
+    });
+
+    if (!response?.error) {
+      success = true;
+      message = i18n.t('The Jam was unsaved.')
     }
 
     return {
