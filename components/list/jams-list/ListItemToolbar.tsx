@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
 import IconView from "@/components/view/IconView";
@@ -26,14 +25,13 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
   const [isShareProcessing, setIsShareProcessing] = useState<boolean>(false);
   const [isCommentProcessing, setIsCommentProcessing] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const userState: any = useSelector((state: any) => state.user);
 
   const isJamLiked = () => {
-    return profileData?.liked_jams?.includes(row.item.id) || userState.likedJams.includes(row.item.id);
+    return profileData?.liked_jams?.includes(row.item.id);
   };
 
   const isJamSaved = () => {
-    return profileData?.saved_jams?.includes(row.item.id) || userState.savedJams.includes(row.item.id);
+    return profileData?.saved_jams?.includes(row.item.id);
   };
 
   const getLikeIconTheme = () => {
@@ -60,7 +58,6 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
       }
 
       setIsSaveProcessing(false);
-      await UserManager.updateSavedJams(row.item.id);
       ScreenManager.showMessage(result.message);
     }
   };
@@ -81,7 +78,6 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
       }
 
       setIsLikeProcessing(false);
-      await UserManager.updateLikedJams(row.item.id);
       ScreenManager.showMessage(result.message);
     }
   };
