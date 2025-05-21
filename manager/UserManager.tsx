@@ -94,13 +94,24 @@ class UserManager {
     let profileId: number = await this.getProfileId();
     let defaults = {};
     let profileData = [];
+    let localProfileData: any = null;
     let variables: any = { '[profile_id]': profileId };
 
     if (profileId > 0) {
       profileData = await DataManager.get('getProfile', {...defaults, ...options}, variables);
     }
 
-    return profileData || {};
+    if (Platform.OS === 'web') {
+      localProfileData = localStorage.getItem(Config.storageKeys.profileData);
+    }
+    else {
+      localProfileData = await AsyncStorage.getItem(Config.storageKeys.profileData);
+    }
+
+    return {
+      ...(profileData || {}),
+      ...(localProfileData || {}),
+    };
   }
 
   async updateProfile(data: any) {
@@ -177,10 +188,10 @@ class UserManager {
 
   async setLanguage(languageCode: string) {
     if (Platform.OS === 'web') {
-      localStorage.setItem(Config.languageStorageKey, languageCode);
+      localStorage.setItem(Config.storageKeys.currentLanguage, languageCode);
     } 
     else {
-      await AsyncStorage.setItem(Config.languageStorageKey, languageCode);
+      await AsyncStorage.setItem(Config.storageKeys.currentLanguage, languageCode);
     }
 
     i18next.changeLanguage(languageCode);
@@ -189,8 +200,8 @@ class UserManager {
   async getLanguage() {
     try {
       let language = Platform.OS === 'web' 
-        ? localStorage.getItem(Config.languageStorageKey) 
-        : await AsyncStorage.getItem(Config.languageStorageKey);
+        ? localStorage.getItem(Config.storageKeys.currentLanguage) 
+        : await AsyncStorage.getItem(Config.storageKeys.currentLanguage);
 
       return language || Config.fallbackLanguage;
     }
