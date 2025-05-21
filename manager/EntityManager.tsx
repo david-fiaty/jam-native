@@ -3,7 +3,6 @@ import { Config } from '@/constants/Config';
 import DataManager from './DataManager';
 import UserManager from './UserManager';
 import MediaManager from './MediaManager';
-import i18n from '@/translation/i18n';
 
 class EntityManager {
   async listProfiles(options?: any) {
@@ -172,108 +171,6 @@ class EntityManager {
 
   async addProject(entityData: any) {
     return await DataManager.post('addProject', entityData);
-  }
-
-  async likeJam(entityId: any) {
-    let profileId = await UserManager.getProfileId();
-    let success: boolean = false;
-    let message: any = {
-      title: i18n.t('Like Jam'),
-      content: i18n.t('Could not perform this action. Please try again.'),
-    };
-
-    let response = await DataManager.post('likeJam', {
-      profile_id: profileId,
-      item_id: entityId,
-      like_action: 'like',
-    });
-
-    if (!response?.error) {
-      success = true;
-      message.content = i18n.t('The Jam was liked.')
-    }
-
-    return {
-      success: success,
-      response: response,
-      message: message,
-    };
-  }
-
-  async unlikeJam(entityId: any) {
-    let profileId = await UserManager.getProfileId();
-    let success: boolean = false;
-    let message: any = {
-      title: i18n.t('Unlike Jam'),
-      content: i18n.t('Could not perform this action. Please try again.'),
-    };
-
-    let response = await DataManager.post('likeJam', {
-      profile_id: profileId,
-      item_id: entityId,
-      like_action: 'unlike',
-    });
-
-    if (!response?.error) {
-      success = true;
-      message.content = i18n.t('The Jam was unliked.')
-    }
-
-    return {
-      success: success,
-      response: response,
-      message: message,
-    };
-  }
-
-  async saveJam(entityId: any) {
-    let profileId = await UserManager.getProfileId();
-    let success: boolean = false;
-    let message: any = {
-      title: i18n.t('Save Jam'),
-      content: i18n.t('Could not perform this action. Please try again.'),
-    };
-
-    let response = await DataManager.post('saveJam', {
-      profile_id: profileId,
-      save_items_ids: [entityId],
-    });
-
-    if (!response?.error) {
-      success = true;
-      message.content = i18n.t('The Jam was saved.')
-    }
-
-    return {
-      success: success,
-      response: response,
-      message: message,
-    };
-  }
-
-  async unsaveJam(entityId: any) {
-    let profileId = await UserManager.getProfileId();
-    let success: boolean = false;
-    let message: any = {
-      title: i18n.t('Unsave Jam'),
-      content: i18n.t('Could not perform this action. Please try again.'),
-    };
-
-    let response = await DataManager.post('unsaveJam', {
-      profile_id: profileId,
-      unsave_items_ids: [entityId],
-    });
-
-    if (!response?.error) {
-      success = true;
-      message.content = i18n.t('The Jam was unsaved.')
-    }
-
-    return {
-      success: success,
-      response: response,
-      message: message,
-    };
   }
 
   async likeProject(entityId: any) {
