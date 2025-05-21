@@ -212,23 +212,31 @@ class EntityManager {
     };
   }
 
+  async unlikeJam(entityId: any) {
+    let success: boolean = false;
+    let profileId = await UserManager.getProfileId();
+    let response = await DataManager.post('likeJam', {
+      profile_id: profileId,
+      item_id: entityId,
+      like_action: 'unlike',
+    });
+
+    if (!response?.error) {
+      success = true;
+    }
+
+    return {
+      success: success,
+      response: response,
+    };
+  }
+
   async likeProject(entityId: any) {
     let profileId = await UserManager.getProfileId();
     let response = await DataManager.post('likeProject', {
       profile_id: profileId,
       item_id: entityId,
       like_action: 'like',
-    });
-
-    return response;
-  }
-
-  async unlikeJam(entityId: any) {
-    let profileId = await UserManager.getProfileId();
-    let response = await DataManager.post('likeJam', {
-      profile_id: profileId,
-      item_id: entityId,
-      like_action: 'unlike',
     });
 
     return response;
