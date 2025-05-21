@@ -24,6 +24,15 @@ const HostsList = ({ jamId }: Props) => {
     SectionManager.push(router, 'profile-item', { profileId: row?.item?.id, title: row?.item?.title })
   };
 
+  const getProfiles = async () => {
+    let jamData: any = (await EntityManager.getJams({ items_ids: [jamId] }))?.[0];
+    let jamHosts: any = await EntityManager.getProfiles({
+      items_ids: [jamData.profile.id, ...jamData?.collaborators || []], 
+    });
+
+    return jamHosts;  
+  };
+
   const renderItem = useCallback((row: any) => {
     return (
       <ProfileListItem
@@ -35,8 +44,7 @@ const HostsList = ({ jamId }: Props) => {
 
   useEffect(() => {
     (async () => {
-      let data: any = await EntityManager.getJams({ items_ids: [jamId] });
-      setProfiles(await EntityManager.getProfiles({ items_ids: data?.[0]?.collaborators }));
+      setProfiles(await getProfiles());
       setIsLoaded(true);
     })();
 
