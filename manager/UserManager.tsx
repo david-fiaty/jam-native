@@ -223,7 +223,7 @@ class UserManager {
 
     if (!response?.error) {
       success = true;
-      message.content = i18n.t('The Jam was liked.')
+      message.content = i18n.t('The Jam was liked.');
     }
 
     return {
@@ -249,7 +249,7 @@ class UserManager {
 
     if (!response?.error) {
       success = true;
-      message.content = i18n.t('The Jam was unliked.')
+      message.content = i18n.t('The Jam was unliked.');
     }
 
     return {
@@ -274,7 +274,7 @@ class UserManager {
 
     if (!response?.error) {
       success = true;
-      message.content = i18n.t('The Jam was saved.')
+      message.content = i18n.t('The Jam was saved.');
     }
 
     return {
@@ -299,7 +299,7 @@ class UserManager {
 
     if (!response?.error) {
       success = true;
-      message.content = i18n.t('The Jam was unsaved.')
+      message.content = i18n.t('The Jam was unsaved.');
     }
 
     return {
