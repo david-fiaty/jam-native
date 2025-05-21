@@ -162,7 +162,7 @@ const SectionView = () => {
             label: i18n.t('Edit'),
             sectionId: 'profile-form',
           },
-        ]
+        ],
       },
       {
         id: 'profile-form',
