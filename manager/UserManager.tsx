@@ -1,5 +1,4 @@
 import { Platform } from 'react-native';
-import { setLikedJams, setSavedJams, setLikedProjects, setSavedProjects } from '@/redux/slices/UserSlice';
 import { setActiveModals } from '@/redux/slices/ModalSlice';
 import { setActiveSections } from '@/redux/slices/SectionSlice';
 import { Config } from '@/constants/Config';
@@ -212,40 +211,106 @@ class UserManager {
     }
   };
 
-  async updateLikedJams(entityId: number) {
-    let likedJams: any[] = [...Store.getState()?.user?.likedJams];
-    
-    if (likedJams.includes(entityId)) likedJams = likedJams.filter((v: any) => v !== entityId)
-    else likedJams.push(entityId);
+  async likeJam(entityId: any) {
+    let profileId = await this.getProfileId();
+    let success: boolean = false;
+    let message: any = {
+      title: i18n.t('Like Jam'),
+      content: i18n.t('Could not perform this action. Please try again.'),
+    };
 
-    Store.dispatch(setLikedJams(likedJams));
+    let response = await DataManager.post('likeJam', {
+      profile_id: profileId,
+      item_id: entityId,
+      like_action: 'like',
+    });
+
+    if (!response?.error) {
+      success = true;
+      message.content = i18n.t('The Jam was liked.')
+    }
+
+    return {
+      success: success,
+      response: response,
+      message: message,
+    };
   }
 
-  async updateSavedJams(entityId: number) {
-    let savedJams: any[] = [...Store.getState()?.user?.savedJams];
-    
-    if (savedJams.includes(entityId)) savedJams = savedJams.filter((v: any) => v !== entityId)
-    else savedJams.push(entityId);
+  async unlikeJam(entityId: any) {
+    let profileId = await this.getProfileId();
+    let success: boolean = false;
+    let message: any = {
+      title: i18n.t('Unlike Jam'),
+      content: i18n.t('Could not perform this action. Please try again.'),
+    };
 
-    Store.dispatch(setSavedJams(savedJams));
+    let response = await DataManager.post('likeJam', {
+      profile_id: profileId,
+      item_id: entityId,
+      like_action: 'unlike',
+    });
+
+    if (!response?.error) {
+      success = true;
+      message.content = i18n.t('The Jam was unliked.')
+    }
+
+    return {
+      success: success,
+      response: response,
+      message: message,
+    };
   }
 
-  async updateLikedProjects(entityId: number) {
-    let likedProjects: any[] = [...Store.getState()?.user?.likedProjects];
-    
-    if (likedProjects.includes(entityId)) likedProjects = likedProjects.filter((v: any) => v !== entityId)
-    else likedProjects.push(entityId);
+  async saveJam(entityId: any) {
+    let profileId = await this.getProfileId();
+    let success: boolean = false;
+    let message: any = {
+      title: i18n.t('Save Jam'),
+      content: i18n.t('Could not perform this action. Please try again.'),
+    };
 
-    Store.dispatch(setLikedProjects(likedProjects));
+    let response = await DataManager.post('saveJam', {
+      profile_id: profileId,
+      save_items_ids: [entityId],
+    });
+
+    if (!response?.error) {
+      success = true;
+      message.content = i18n.t('The Jam was saved.')
+    }
+
+    return {
+      success: success,
+      response: response,
+      message: message,
+    };
   }
 
-  async updateSavedProjects(entityId: number) {
-    let savedProjects: any[] = [...Store.getState()?.user?.savedProjects];
-    
-    if (savedProjects.includes(entityId)) savedProjects = savedProjects.filter((v: any) => v !== entityId)
-    else savedProjects.push(entityId);
+  async unsaveJam(entityId: any) {
+    let profileId = await this.getProfileId();
+    let success: boolean = false;
+    let message: any = {
+      title: i18n.t('Unsave Jam'),
+      content: i18n.t('Could not perform this action. Please try again.'),
+    };
 
-    Store.dispatch(setSavedProjects(savedProjects));
+    let response = await DataManager.post('unsaveJam', {
+      profile_id: profileId,
+      unsave_items_ids: [entityId],
+    });
+
+    if (!response?.error) {
+      success = true;
+      message.content = i18n.t('The Jam was unsaved.')
+    }
+
+    return {
+      success: success,
+      response: response,
+      message: message,
+    };
   }
 }
 
