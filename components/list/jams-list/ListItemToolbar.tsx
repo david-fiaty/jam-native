@@ -53,10 +53,10 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
       let result: any = {};
 
       if (isJamSaved()) {
-        result = await EntityManager.unsaveJam(row.item.id);
+        result = await UserManager.unsaveJam(row.item.id);
       }
       else {
-        result = await EntityManager.saveJam(row.item.id);
+        result = await UserManager.saveJam(row.item.id);
       }
 
       setIsSaveProcessing(false);
@@ -74,10 +74,10 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
       let result: any = {};
 
       if (isJamLiked()) {
-        result = await EntityManager.unlikeJam(row.item.id);
+        result = await UserManager.unlikeJam(row.item.id);
       }
       else {
-        result = await EntityManager.likeJam(row.item.id);
+        result = await UserManager.likeJam(row.item.id);
       }
 
       setIsLikeProcessing(false);
