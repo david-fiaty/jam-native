@@ -78,12 +78,8 @@ class UserManager {
   }
 
   async getProfileId() {
-    let profileId: number = Store.getState()?.user?.profileId || 0;
-
-    if (profileId === 0) {
-      let userAccount: any = await DataManager.get('currentUser');
-      profileId = parseInt(userAccount?.profiles?.[0]?.id || 0);
-    }
+    let userAccount: any = await DataManager.get('currentUser');
+    let profileId: number = parseInt(userAccount?.profiles?.[0]?.id || 0);
 
     return profileId;
   }
