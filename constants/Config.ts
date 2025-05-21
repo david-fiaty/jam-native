@@ -11,8 +11,7 @@ export const Config: any = {
   fallbackLanguage: 'en',
   storageKeys: {
     currentLanguage: 'language',
-    likedJams: 'liked_jams',
-    savedJams: 'saved_jams',
+    profileData: 'profileData',
   },
   appNamespace: 'jam-native',
   logoImageSize: 512,
