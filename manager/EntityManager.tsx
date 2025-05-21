@@ -3,6 +3,7 @@ import { Config } from '@/constants/Config';
 import DataManager from './DataManager';
 import UserManager from './UserManager';
 import MediaManager from './MediaManager';
+import i18n from '@/translation/i18n';
 
 class EntityManager {
   async listProfiles(options?: any) {
@@ -194,8 +195,13 @@ class EntityManager {
   }
 
   async likeJam(entityId: any) {
-    let success: boolean = false;
     let profileId = await UserManager.getProfileId();
+    let success: boolean = false;
+    let message: any = {
+      title: i18n.t('Like Jam'),
+      content: i18n.t('Could not perform this action. Please try again.'),
+    };
+
     let response = await DataManager.post('likeJam', {
       profile_id: profileId,
       item_id: entityId,
@@ -204,17 +210,24 @@ class EntityManager {
 
     if (!response?.error) {
       success = true;
+      message = i18n.t('The Jam was liked.')
     }
 
     return {
       success: success,
       response: response,
+      message: message,
     };
   }
 
   async unlikeJam(entityId: any) {
-    let success: boolean = false;
     let profileId = await UserManager.getProfileId();
+    let success: boolean = false;
+    let message: any = {
+      title: i18n.t('Unlike Jam'),
+      content: i18n.t('Could not perform this action. Please try again.'),
+    };
+
     let response = await DataManager.post('likeJam', {
       profile_id: profileId,
       item_id: entityId,
@@ -223,11 +236,13 @@ class EntityManager {
 
     if (!response?.error) {
       success = true;
+      message = i18n.t('The Jam was unliked.')
     }
 
     return {
       success: success,
       response: response,
+      message: message,
     };
   }
 
