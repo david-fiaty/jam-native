@@ -190,7 +190,7 @@ class EntityManager {
 
     if (!response?.error) {
       success = true;
-      message = i18n.t('The Jam was liked.')
+      message.content = i18n.t('The Jam was liked.')
     }
 
     return {
@@ -216,7 +216,7 @@ class EntityManager {
 
     if (!response?.error) {
       success = true;
-      message = i18n.t('The Jam was unliked.')
+      message.content = i18n.t('The Jam was unliked.')
     }
 
     return {
@@ -241,7 +241,7 @@ class EntityManager {
 
     if (!response?.error) {
       success = true;
-      message = i18n.t('The Jam was saved.')
+      message.content = i18n.t('The Jam was saved.')
     }
 
     return {
@@ -266,7 +266,7 @@ class EntityManager {
 
     if (!response?.error) {
       success = true;
-      message = i18n.t('The Jam was unsaved.')
+      message.content = i18n.t('The Jam was unsaved.')
     }
 
     return {
