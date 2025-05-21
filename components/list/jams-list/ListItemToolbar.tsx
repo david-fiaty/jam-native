@@ -60,7 +60,6 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
       }
 
       setIsSaveProcessing(false);
-      await UserManager.updateSavedJams(row.item.id);
       ScreenManager.showMessage(result.message);
     }
   };
@@ -81,7 +80,6 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
       }
 
       setIsLikeProcessing(false);
-      await UserManager.updateLikedJams(row.item.id);
       ScreenManager.showMessage(result.message);
     }
   };
