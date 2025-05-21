@@ -194,6 +194,7 @@ class EntityManager {
   }
 
   async likeJam(entityId: any) {
+    let success: boolean = false;
     let profileId = await UserManager.getProfileId();
     let response = await DataManager.post('likeJam', {
       profile_id: profileId,
@@ -201,7 +202,14 @@ class EntityManager {
       like_action: 'like',
     });
 
-    return response;
+    if (!response?.error) {
+      success = true;
+    }
+
+    return {
+      success: success,
+      response: response,
+    };
   }
 
   async likeProject(entityId: any) {
