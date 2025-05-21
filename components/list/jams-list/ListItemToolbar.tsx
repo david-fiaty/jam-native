@@ -51,31 +51,17 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
     else {
       setIsSaveProcessing(true);
       let result: any = {};
-      let message: any = {};
 
       if (isJamSaved()) {
         result = await EntityManager.unsaveJam(row.item.id);
-        message = {
-          title: i18n.t('Unsave Jam'),
-          content: i18n.t('The Jam was unsaved.'),
-        };
       }
       else {
         result = await EntityManager.saveJam(row.item.id);
-        message = {
-          title: i18n.t('Save Jam'),
-          content: i18n.t('The Jam was saved.'),
-        };
       }
 
-      if (result?.error) {
-        message.content = i18n.t(result.error);
-      }
-      else {
-        setIsSaveProcessing(false);
-        await UserManager.updateSavedJams(row.item.id);
-        ScreenManager.showMessage(message);
-      }
+      setIsSaveProcessing(false);
+      await UserManager.updateSavedJams(row.item.id);
+      ScreenManager.showMessage(result.message);
     }
   };
 
