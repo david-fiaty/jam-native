@@ -108,7 +108,6 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 
 # Finish
 - Profile/jam image upload
-- add jam owner item host to jam hosts list
 - update jam visual state after action save/like
 
 - Image slideshow dots effects like insta?
