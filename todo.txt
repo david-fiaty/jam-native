@@ -107,9 +107,7 @@ https://withfra.me/react-native-tutorials/how-to-use-svg-in-react-native
 https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-7948f1a6f949
 
 # Finish
-- Fix nav issue when submodal opened
 - Profile/jam image upload
-- add jam owner item host to jam hosts list
 - update jam visual state after action save/like
 
 - Image slideshow dots effects like insta?
