@@ -44,7 +44,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
     return isJamSaved() ? "primary" : "tertiary";
   };
 
-  const saveJam = async () => {
+  const toggleSaveButton = async () => {
     if (!isLoggedIn) {
       SectionManager.push(router, 'login');
     }
@@ -79,38 +79,24 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
     }
   };
 
-  const likeJam = async () => {
+  const toggleLikeButton = async () => {
     if (!isLoggedIn) {
       SectionManager.push(router, 'login');
     }
     else {
       setIsLikeProcessing(true);
       let result: any = {};
-      let message: any = {};
 
       if (isJamLiked()) {
         result = await EntityManager.unlikeJam(row.item.id);
-        message = {
-          title: i18n.t('Unlike Jam'),
-          content: i18n.t('The Jam was unliked.'),
-        };
       }
       else {
         result = await EntityManager.likeJam(row.item.id);
-        message = {
-          title: i18n.t('Like Jam'),
-          content: i18n.t('The Jam was liked.'),
-        };
       }
 
-      if (result?.error) {
-        message.content = i18n.t(result.error);
-      }
-      else {
-        setIsLikeProcessing(false);
-        await UserManager.updateLikedJams(row.item.id);
-        ScreenManager.showMessage(message);
-      }
+      setIsLikeProcessing(false);
+      await UserManager.updateLikedJams(row.item.id);
+      ScreenManager.showMessage(result.message);
     }
   };
 
@@ -147,7 +133,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
             theme={getLikeIconTheme()}
             size={12}
             padding={6}
-            onPress={likeJam}
+            onPress={toggleLikeButton}
           />
         )}
       </BoxView>
@@ -177,7 +163,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
           theme={getSaveIconTheme()}
           size={12}
           padding={6}
-          onPress={saveJam}
+          onPress={toggleSaveButton}
         />
       </BoxView>
     );
