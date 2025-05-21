@@ -26,10 +26,20 @@ type Props = {
 
 const ModalView = ({ currentSection, style }: Props) => {
   const [currentModal, setCurrentModal] = useState<any>(null);
+  const [containerStyle, setContainerStyle] = useState<any>({});
   const modalState: any = useSelector((state: any) => state.modal);
+  const sectionState: any = useSelector((state: any) => state.section);
 
-  const containerStyle: any = {
-    top: modalState.active.length > 1 ? -Layout.space.base*3.6 : 0,
+  const getContainerStyle = () => {
+    let top: number = 0;
+
+    if (sectionState.active.length > 4 && modalState.active.length > 1) {
+      //top = -Layout.space.base*3.6;
+    }
+
+    return {
+      top: top,
+    };
   };
 
   const canShowModal = () => {
@@ -178,6 +188,7 @@ const ModalView = ({ currentSection, style }: Props) => {
   };
 
   useEffect(() => {
+    setContainerStyle(getContainerStyle());
     setCurrentModal(getActiveModal());
   }, [modalState]);
   

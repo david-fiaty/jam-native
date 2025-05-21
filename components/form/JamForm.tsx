@@ -95,6 +95,7 @@ const JamForm = () => {
       align="flex-start"
       justify="flex-start"
       scroll={true}
+      style={[Layout.formContainer, styles.container]}
     >
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
         <TextView>{i18n.t('What kind of Jam is it?')} *</TextView>
@@ -239,6 +240,10 @@ const JamForm = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    height: '100%',
+  },
   formContainer: {
     maxWidth: '100%',
     flexShrink: 1,

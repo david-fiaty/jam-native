@@ -31,7 +31,7 @@ const MoreJamActionsView = ({ jamId }: Props) => {
   };
 
   const likeJam = async () => {
-    let result: any = await EntityManager.likeJam(jamId);
+    let result: any = await UserManager.likeJam(jamId);
     
     let message: any = {
       title: i18n.t('Like Jam'),
