@@ -112,10 +112,13 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 
 - Image slideshow dots effects like insta?
 - review form errors + api responses handling
-- verify results count in desktop vs mobile endpoints
-- Extract languages and translate
+
 - Check internet connexion available
 - Implement global crash handling
+
+- verify results count in desktop vs mobile endpoints
+- Extract languages and translate
+
 
 # Issues  
   - Copy Jam link cannot be implemented (missing URL in payload, maybe irrelevant on native)
