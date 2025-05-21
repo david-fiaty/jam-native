@@ -33,7 +33,6 @@ const ListItemHeader = ({ row }: Props) => {
         setIsLoaded(true);
       }
     })();
-
   }, [isLoaded]);
 
   const renderHosts = () => {
@@ -90,7 +89,7 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: Layout.space.base * 1.2,
     paddingVertical: Layout.space.base,
-    height: 39,
+    height: Layout.space.base*4,
   },
 });
 
