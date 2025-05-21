@@ -98,7 +98,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
   };
 
   const commentJam = async () => {
-    console.log('comment jam')
+    console.log('comment jam'); // Todo - Implement comment action
   };
 
   const renderLikeButton = () => {
