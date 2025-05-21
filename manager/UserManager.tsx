@@ -177,10 +177,10 @@ class UserManager {
 
   async setLanguage(languageCode: string) {
     if (Platform.OS === 'web') {
-      localStorage.setItem(Config.languageStorageKey, languageCode);
+      localStorage.setItem(Config.storageKeys.currentLanguage, languageCode);
     } 
     else {
-      await AsyncStorage.setItem(Config.languageStorageKey, languageCode);
+      await AsyncStorage.setItem(Config.storageKeys.currentLanguage, languageCode);
     }
 
     i18next.changeLanguage(languageCode);
@@ -189,8 +189,8 @@ class UserManager {
   async getLanguage() {
     try {
       let language = Platform.OS === 'web' 
-        ? localStorage.getItem(Config.languageStorageKey) 
-        : await AsyncStorage.getItem(Config.languageStorageKey);
+        ? localStorage.getItem(Config.storageKeys.currentLanguage) 
+        : await AsyncStorage.getItem(Config.storageKeys.currentLanguage);
 
       return language || Config.fallbackLanguage;
     }
