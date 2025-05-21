@@ -94,13 +94,24 @@ class UserManager {
     let profileId: number = await this.getProfileId();
     let defaults = {};
     let profileData = [];
+    let localProfileData: any = null;
     let variables: any = { '[profile_id]': profileId };
 
     if (profileId > 0) {
       profileData = await DataManager.get('getProfile', {...defaults, ...options}, variables);
     }
 
-    return profileData || {};
+    if (Platform.OS === 'web') {
+      localProfileData = localStorage.getItem(Config.storageKeys.profileData);
+    }
+    else {
+      localProfileData = await AsyncStorage.getItem(Config.storageKeys.profileData);
+    }
+
+    return {
+      ...(profileData || {}),
+      ...(localProfileData || {}),
+    };
   }
 
   async updateProfile(data: any) {
