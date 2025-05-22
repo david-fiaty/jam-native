@@ -208,7 +208,7 @@ class UserManager {
   };
 
   async likeJam(entityId: any) {
-    let profileId = await this.getProfileId();
+    let profileData: any = await this.getProfileData();
     let success: boolean = false;
     let message: any = {
       title: i18n.t('Like Jam'),
@@ -216,7 +216,7 @@ class UserManager {
     };
 
     let response = await DataManager.post('likeJam', {
-      profile_id: profileId,
+      profile_id: profileData.id,
       item_id: entityId,
       like_action: 'like',
     });
@@ -224,7 +224,11 @@ class UserManager {
     if (!response?.error) {
       success = true;
       message.content = i18n.t('The Jam was liked.');
+
+
     }
+
+    console.log(Object.keys(profileData));
 
     return {
       success: success,
@@ -234,7 +238,7 @@ class UserManager {
   }
 
   async unlikeJam(entityId: any) {
-    let profileId = await this.getProfileId();
+    let profileData: any = await this.getProfileData();
     let success: boolean = false;
     let message: any = {
       title: i18n.t('Unlike Jam'),
@@ -242,7 +246,7 @@ class UserManager {
     };
 
     let response = await DataManager.post('likeJam', {
-      profile_id: profileId,
+      profile_id: profileData.id,
       item_id: entityId,
       like_action: 'unlike',
     });
@@ -260,7 +264,7 @@ class UserManager {
   }
 
   async saveJam(entityId: any) {
-    let profileId = await this.getProfileId();
+    let profileData: any = await this.getProfileData();
     let success: boolean = false;
     let message: any = {
       title: i18n.t('Save Jam'),
@@ -268,7 +272,7 @@ class UserManager {
     };
 
     let response = await DataManager.post('saveJam', {
-      profile_id: profileId,
+      profile_id: profileData.id,
       save_items_ids: [entityId],
     });
 
@@ -285,7 +289,7 @@ class UserManager {
   }
 
   async unsaveJam(entityId: any) {
-    let profileId = await this.getProfileId();
+    let profileData: any = await this.getProfileData();
     let success: boolean = false;
     let message: any = {
       title: i18n.t('Unsave Jam'),
@@ -293,7 +297,7 @@ class UserManager {
     };
 
     let response = await DataManager.post('unsaveJam', {
-      profile_id: profileId,
+      profile_id: profileData.id,
       unsave_items_ids: [entityId],
     });
 
