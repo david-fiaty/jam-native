@@ -15,10 +15,11 @@ import SectionManager from "@/manager/SectionManager";
 
 type Props = {
   row?: any;
-  profileData?: any
+  profileData?: any;
+  onListItemAction?: () => void;
 };
 
-const ListItemToolbar = ({ row, profileData }: Props) => {
+const ListItemToolbar = ({ row, profileData, onListItemAction }: Props) => {
   const router = useRouter();
   const [isLikeProcessing, setIsLikeProcessing] = useState<boolean>(false);
   const [isSaveProcessing, setIsSaveProcessing] = useState<boolean>(false);
@@ -57,6 +58,8 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
         result = await UserManager.saveJam(row.item.id);
       }
 
+      if (onListItemAction) onListItemAction();
+
       setIsSaveProcessing(false);
       ScreenManager.showMessage(result.message);
     }
@@ -77,6 +80,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
         result = await UserManager.likeJam(row.item.id);
       }
 
+      if (onListItemAction) onListItemAction();
       setIsLikeProcessing(false);
       ScreenManager.showMessage(result.message);
     }
