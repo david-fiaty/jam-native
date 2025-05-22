@@ -44,12 +44,16 @@ const JamsList = ({ idArray }: Props) => {
     setSearchData(data);
   };
 
+  const getProfileData = async () => {
+    return await UserManager.getProfileData();
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
         await loadSearchData();
         setSectors(await EntityManager.getSectors());
-        setProfileData(await UserManager.getProfileData());
+        setProfileData(await getProfileData());
         setIsLoaded(true);
       }
     })();
