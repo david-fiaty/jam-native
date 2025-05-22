@@ -331,7 +331,7 @@ class UserManager {
       references = [...new Set([...localProfileData?.[key] || [], value])];
     }
     else if (action == 'delete') {
-      references = [...localProfileData?.[key] || []].filter((v: any) => v == value);
+      references = [...localProfileData?.[key] || []].filter((v: any) => v != value);
     } 
 
     localProfileData = {

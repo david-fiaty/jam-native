@@ -10,14 +10,19 @@ type Props = {
   row?: any;
   sectorsData?: any;
   profileData?: any;
+  onListItemAction?: () => void;
 };
 
-const ListItem = ({ row, sectorsData, profileData }: Props) => {
+const ListItem = ({ row, sectorsData, profileData, onListItemAction }: Props) => {
   return (
     <View style={styles.container}>
       <ListItemHeader row={row} />
       <ListItemImage row={row} />
-      <ListItemToolbar row={row} profileData={profileData} />
+      <ListItemToolbar 
+        row={row} 
+        profileData={profileData} 
+        onListItemAction={onListItemAction}
+      />
       <ListItemDescription row={row} />
       <ListItemCollapsible row={row} sectorsData={sectorsData} />
     </View>

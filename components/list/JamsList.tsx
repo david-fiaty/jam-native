@@ -21,12 +21,21 @@ const JamsList = ({ idArray }: Props) => {
   const [profileData, setProfileData] = useState<any>(null);
   const searchState: any = useSelector((state: any) => state.search);
 
+  const getProfileData = async () => {
+    return await UserManager.getProfileData();
+  };
+
+  const onListItemAction = async () => {
+    setProfileData(await getProfileData());
+  };
+
   const renderItem = (row: any) => {
     return (
       <ListItem 
         row={row} 
         sectorsData={sectors} 
         profileData={profileData} 
+        onListItemAction={onListItemAction}
       />
     );
   };
@@ -42,10 +51,6 @@ const JamsList = ({ idArray }: Props) => {
     }
 
     setSearchData(data);
-  };
-
-  const getProfileData = async () => {
-    return await UserManager.getProfileData();
   };
 
   useEffect(() => {
