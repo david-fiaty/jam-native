@@ -42,7 +42,6 @@ const JammersList = ({ jamId, jammersIds }: Props) => {
 
   }, [isLoaded, jamId, jammersIds]);
 
-
   if (!isLoaded) return <SpinnerView />;
 
   return (
