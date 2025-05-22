@@ -13,9 +13,10 @@ import SectionManager from '@/manager/SectionManager';
 
 type Props = {
   jamId?: any;
+  jammersIds?: any;
 };
 
-const JammersList = ({ jamId }: Props) => {
+const JammersList = ({ jamId, jammersIds }: Props) => {
   const router = useRouter();
   const [profiles, setProfiles] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -35,12 +36,11 @@ const JammersList = ({ jamId }: Props) => {
 
   useEffect(() => {
     (async () => {
-      let data: any = await EntityManager.getJams({ items_ids: [jamId] });
-      setProfiles(await EntityManager.getProfiles({ items_ids: data?.[0]?.jammers }));
+      setProfiles(await EntityManager.getProfiles({ items_ids: jammersIds }));
       setIsLoaded(true);
     })();
 
-  }, [isLoaded, jamId]);
+  }, [isLoaded, jamId, jammersIds]);
 
   if (!isLoaded) return <SpinnerView />;
 
