@@ -96,12 +96,8 @@ class UserManager {
       profileData = await DataManager.get('getProfile', { ...defaults, ...options }, variables);
     }
 
-    if (Platform.OS === 'web') {
-      localProfileData = localStorage.getItem(Config.storageKeys.profileData);
-    }
-    else {
-      localProfileData = await AsyncStorage.getItem(Config.storageKeys.profileData);
-    }
+    if (Platform.OS === 'web') localProfileData = localStorage.getItem(Config.storageKeys.profileData)
+    else localProfileData = await AsyncStorage.getItem(Config.storageKeys.profileData);
 
     return {
       ...(profileData || {}),
@@ -209,7 +205,6 @@ class UserManager {
 
   async likeJam(entityId: any) {
     let profileData: any = await this.getProfileData();
-    let localProfileData: any = {};
     let success: boolean = false;
     let message: any = {
       title: i18n.t('Like Jam'),
@@ -226,8 +221,7 @@ class UserManager {
       success = true;
       message.content = i18n.t('The Jam was liked.');
 
-      if (Platform.OS === 'web') localProfileData = localStorage.getItem(Config.storageKeys.profileData) || {}
-      else localProfileData = (await AsyncStorage.getItem(Config.storageKeys.profileData)) || {};
+      this.updateLocalProfileData('liked_jams', entityId);
     }
 
     return {
@@ -235,6 +229,35 @@ class UserManager {
       response: response,
       message: message,
     };
+  }
+
+  async updateLocalProfileData (key: string, value: any) {
+    let localProfileData: any = '{}';
+
+    if (Platform.OS === 'web') {
+      localProfileData = localStorage.getItem(Config.storageKeys.profileData) || '{}';
+    }
+    else {
+      localProfileData = (await AsyncStorage.getItem(Config.storageKeys.profileData)) || '{}';
+    }
+
+    localProfileData = JSON.parse(localProfileData);
+
+    localProfileData = {
+      ...localProfileData,
+      ...{ [key]: [...new Set([...localProfileData?.[key] || [], value])] },
+    };
+
+    localProfileData = JSON.stringify(localProfileData);
+
+    if (Platform.OS === 'web') {
+      localStorage.setItem(Config.storageKeys.profileData, localProfileData);
+    }
+    else {
+      await AsyncStorage.setItem(Config.storageKeys.profileData, localProfileData);
+    }
+
+    console.log('localProfileData --- ', await AsyncStorage.getItem(Config.storageKeys.profileData));
   }
 
   async unlikeJam(entityId: any) {
