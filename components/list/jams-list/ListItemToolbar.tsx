@@ -127,10 +127,12 @@ const ListItemToolbar = ({ row, profileData, onListItemAction }: Props) => {
   };
 
   const renderJammersButton = () => {
+    let jammersIds: any [] = [...row?.item?.jammers || []];
+
     return (
-      <TouchableOpacity onPress={() => ModalManager.toggleModal('JammersList', { jamId: row?.item?.id })}>
+      <TouchableOpacity onPress={() => ModalManager.toggleModal('JammersList', { jamId: row?.item?.id, jammersIds: jammersIds })}>
         <TextView>
-          {parseInt(row?.item?.jammers?.length)} {i18n.t("jammers")}
+          {jammersIds.length} {i18n.t("jammers")}
         </TextView>
       </TouchableOpacity>
     );
