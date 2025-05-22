@@ -121,8 +121,8 @@ const ListItemToolbar = ({ row, profileData, onListItemAction }: Props) => {
   const renderJammersButton = () => {
     let jammersIds: any [] = [...row?.item?.jammers || []];
 
-    //if (isJamLiked()) jammersIds = [...new Set([...jammersIds, profileData.id])];
-    //else jammersIds = jammersIds.filter((v: any) => v != profileData.id); 
+    if (isJamLiked()) jammersIds = [...new Set([...jammersIds, profileData.id])];
+    else jammersIds = jammersIds.filter((v: any) => v != profileData.id); 
 
     return (
       <TouchableOpacity onPress={() => ModalManager.toggleModal('JammersList', { jamId: row?.item?.id, jammersIds: jammersIds })}>
