@@ -108,7 +108,6 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 
 # Finish
 - Profile/jam image upload
-- update jam visual state after action save/like
 - Fix modal margin top in jam form submodals
 - Jams list: move view more/less button
 
