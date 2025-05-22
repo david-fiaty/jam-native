@@ -51,12 +51,8 @@ const ListItemToolbar = ({ row, profileData, onListItemAction }: Props) => {
       setIsSaveProcessing(true);
       let result: any = {};
 
-      if (isJamSaved()) {
-        result = await UserManager.unsaveJam(row.item.id);
-      }
-      else {
-        result = await UserManager.saveJam(row.item.id);
-      }
+      if (isJamSaved()) result = await UserManager.unsaveJam(row.item.id)
+      else result = await UserManager.saveJam(row.item.id);
 
       if (onListItemAction) onListItemAction();
 
@@ -73,12 +69,8 @@ const ListItemToolbar = ({ row, profileData, onListItemAction }: Props) => {
       setIsLikeProcessing(true);
       let result: any = {};
 
-      if (isJamLiked()) {
-        result = await UserManager.unlikeJam(row.item.id);
-      }
-      else {
-        result = await UserManager.likeJam(row.item.id);
-      }
+      if (isJamLiked()) result = await UserManager.unlikeJam(row.item.id)
+      else result = await UserManager.likeJam(row.item.id);
 
       if (onListItemAction) onListItemAction();
       setIsLikeProcessing(false);
