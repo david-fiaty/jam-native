@@ -15,10 +15,11 @@ import SectionManager from "@/manager/SectionManager";
 
 type Props = {
   row?: any;
-  profileData?: any
+  profileData?: any;
+  onListItemAction?: () => void;
 };
 
-const ListItemToolbar = ({ row, profileData }: Props) => {
+const ListItemToolbar = ({ row, profileData, onListItemAction }: Props) => {
   const router = useRouter();
   const [isLikeProcessing, setIsLikeProcessing] = useState<boolean>(false);
   const [isSaveProcessing, setIsSaveProcessing] = useState<boolean>(false);
@@ -57,6 +58,8 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
         result = await UserManager.saveJam(row.item.id);
       }
 
+      if (onListItemAction) onListItemAction();
+
       setIsSaveProcessing(false);
       ScreenManager.showMessage(result.message);
     }
@@ -77,6 +80,7 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
         result = await UserManager.likeJam(row.item.id);
       }
 
+      if (onListItemAction) onListItemAction();
       setIsLikeProcessing(false);
       ScreenManager.showMessage(result.message);
     }
@@ -123,10 +127,15 @@ const ListItemToolbar = ({ row, profileData }: Props) => {
   };
 
   const renderJammersButton = () => {
+    let jammersIds: any [] = [...row?.item?.jammers || []];
+
+    if (isJamLiked()) jammersIds = [...new Set([...jammersIds, profileData.id])];
+    else jammersIds = jammersIds.filter((v: any) => v != profileData.id); 
+
     return (
-      <TouchableOpacity onPress={() => ModalManager.toggleModal('JammersList', { jamId: row?.item?.id })}>
+      <TouchableOpacity onPress={() => ModalManager.toggleModal('JammersList', { jamId: row?.item?.id, jammersIds: jammersIds })}>
         <TextView>
-          {parseInt(row?.item?.jammers?.length)} {i18n.t("jammers")}
+          {jammersIds.length} {i18n.t("jammers")}
         </TextView>
       </TouchableOpacity>
     );
