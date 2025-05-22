@@ -26,7 +26,7 @@ class UserManager {
 
   async verifySignupCode(data: any) {
     let response = await DataManager.post('verifySignupCode', data);
-    
+
     return response;
   }
 
@@ -35,7 +35,7 @@ class UserManager {
     if (response?.tokens?.access_token?.length) {
       await SessionManager.setTokenData(response.tokens);
     }
-    
+
     return response;
   }
 
@@ -63,12 +63,12 @@ class UserManager {
     Store.dispatch(setActiveSections([]));
   }
 
-  async getUserData() { 
+  async getUserData() {
     return await DataManager.get('currentUser');
   }
 
-  async changePassword(data: any) { 
-    let response: any = await DataManager.put('changePassword', data); 
+  async changePassword(data: any) {
+    let response: any = await DataManager.put('changePassword', data);
     let success: boolean = false;
 
     return {
@@ -78,12 +78,8 @@ class UserManager {
   }
 
   async getProfileId() {
-    let profileId: number = Store.getState()?.user?.profileId || 0;
-
-    if (profileId === 0) {
-      let userAccount: any = await DataManager.get('currentUser');
-      profileId = parseInt(userAccount?.profiles?.[0]?.id || 0);
-    }
+    let userAccount: any = await DataManager.get('currentUser');
+    let profileId: number = parseInt(userAccount?.profiles?.[0]?.id || 0);
 
     return profileId;
   }
@@ -91,21 +87,17 @@ class UserManager {
   async getProfileData(options?: any) {
     options = options || {};
     let profileId: number = await this.getProfileId();
-    let defaults = {};
-    let profileData = [];
+    let defaults: any = {};
+    let profileData: any = {};
     let localProfileData: any = null;
     let variables: any = { '[profile_id]': profileId };
 
     if (profileId > 0) {
-      profileData = await DataManager.get('getProfile', {...defaults, ...options}, variables);
+      profileData = await DataManager.get('getProfile', { ...defaults, ...options }, variables);
     }
 
-    if (Platform.OS === 'web') {
-      localProfileData = localStorage.getItem(Config.storageKeys.profileData);
-    }
-    else {
-      localProfileData = await AsyncStorage.getItem(Config.storageKeys.profileData);
-    }
+    if (Platform.OS === 'web') localProfileData = localStorage.getItem(Config.storageKeys.profileData)
+    else localProfileData = await AsyncStorage.getItem(Config.storageKeys.profileData);
 
     return {
       ...(profileData || {}),
@@ -118,7 +110,7 @@ class UserManager {
     let profileId: number = await this.getProfileId();
     let variables: any = { '[profile_id]': profileId };
 
-    return await DataManager.put('updateProfile', {...defaults, ...data}, variables); 
+    return await DataManager.put('updateProfile', { ...defaults, ...data }, variables);
   }
 
   async getNotifications(options?: any) {
@@ -132,8 +124,8 @@ class UserManager {
     };
 
     if (profileId > 0) {
-      userNotifications = await DataManager.get('notifications', {...defaults, ...options}, 
-        {'[profile_id]': profileId},
+      userNotifications = await DataManager.get('notifications', { ...defaults, ...options },
+        { '[profile_id]': profileId },
       );
     }
 
@@ -146,7 +138,7 @@ class UserManager {
 
     return profileJams.includes(entityId);
   }
-  
+
   async isProjectOwner(entityId: number) {
     let profileData: any = await this.getProfileData();
     let profileProjects: any = profileData?.profile_projects || [];
@@ -188,7 +180,7 @@ class UserManager {
   async setLanguage(languageCode: string) {
     if (Platform.OS === 'web') {
       localStorage.setItem(Config.storageKeys.currentLanguage, languageCode);
-    } 
+    }
     else {
       await AsyncStorage.setItem(Config.storageKeys.currentLanguage, languageCode);
     }
@@ -198,21 +190,21 @@ class UserManager {
 
   async getLanguage() {
     try {
-      let language = Platform.OS === 'web' 
-        ? localStorage.getItem(Config.storageKeys.currentLanguage) 
+      let language = Platform.OS === 'web'
+        ? localStorage.getItem(Config.storageKeys.currentLanguage)
         : await AsyncStorage.getItem(Config.storageKeys.currentLanguage);
 
       return language || Config.fallbackLanguage;
     }
     catch (error) {
       console.log(error);
-      
+
       return Config.fallbackLanguage;
     }
   };
 
   async likeJam(entityId: any) {
-    let profileId = await this.getProfileId();
+    let profileData: any = await this.getProfileData();
     let success: boolean = false;
     let message: any = {
       title: i18n.t('Like Jam'),
@@ -220,14 +212,16 @@ class UserManager {
     };
 
     let response = await DataManager.post('likeJam', {
-      profile_id: profileId,
+      profile_id: profileData.id,
       item_id: entityId,
       like_action: 'like',
     });
 
     if (!response?.error) {
       success = true;
-      message.content = i18n.t('The Jam was liked.')
+      message.content = i18n.t('The Jam was liked.');
+
+      this.updateLocalProfileReference('liked_jams', 'add', entityId);
     }
 
     return {
@@ -238,7 +232,7 @@ class UserManager {
   }
 
   async unlikeJam(entityId: any) {
-    let profileId = await this.getProfileId();
+    let profileData: any = await this.getProfileData();
     let success: boolean = false;
     let message: any = {
       title: i18n.t('Unlike Jam'),
@@ -246,14 +240,16 @@ class UserManager {
     };
 
     let response = await DataManager.post('likeJam', {
-      profile_id: profileId,
+      profile_id: profileData.id,
       item_id: entityId,
       like_action: 'unlike',
     });
 
     if (!response?.error) {
       success = true;
-      message.content = i18n.t('The Jam was unliked.')
+      message.content = i18n.t('The Jam was unliked.');
+      
+      this.updateLocalProfileReference('liked_jams', 'delete', entityId);
     }
 
     return {
@@ -264,7 +260,7 @@ class UserManager {
   }
 
   async saveJam(entityId: any) {
-    let profileId = await this.getProfileId();
+    let profileData: any = await this.getProfileData();
     let success: boolean = false;
     let message: any = {
       title: i18n.t('Save Jam'),
@@ -272,13 +268,15 @@ class UserManager {
     };
 
     let response = await DataManager.post('saveJam', {
-      profile_id: profileId,
+      profile_id: profileData.id,
       save_items_ids: [entityId],
     });
 
     if (!response?.error) {
       success = true;
-      message.content = i18n.t('The Jam was saved.')
+      message.content = i18n.t('The Jam was saved.');
+
+      this.updateLocalProfileReference('saved_jams', 'add', entityId);
     }
 
     return {
@@ -289,7 +287,8 @@ class UserManager {
   }
 
   async unsaveJam(entityId: any) {
-    let profileId = await this.getProfileId();
+    let profileData: any = await this.getProfileData();
+    let localProfileData: any = {};
     let success: boolean = false;
     let message: any = {
       title: i18n.t('Unsave Jam'),
@@ -297,13 +296,15 @@ class UserManager {
     };
 
     let response = await DataManager.post('unsaveJam', {
-      profile_id: profileId,
+      profile_id: profileData.id,
       unsave_items_ids: [entityId],
     });
 
     if (!response?.error) {
       success = true;
-      message.content = i18n.t('The Jam was unsaved.')
+      message.content = i18n.t('The Jam was unsaved.');
+
+      this.updateLocalProfileReference('saved_jams', 'delete', entityId);
     }
 
     return {
@@ -311,6 +312,41 @@ class UserManager {
       response: response,
       message: message,
     };
+  }
+
+  async updateLocalProfileReference (key: string, action: string, value: any) {
+    let localProfileData: any = '{}';
+    let references = [];
+
+    if (Platform.OS === 'web') {
+      localProfileData = localStorage.getItem(Config.storageKeys.profileData) || '{}';
+    }
+    else {
+      localProfileData = (await AsyncStorage.getItem(Config.storageKeys.profileData)) || '{}';
+    }
+
+    localProfileData = JSON.parse(localProfileData);
+
+    if (action == 'add') {
+      references = [...new Set([...localProfileData?.[key] || [], value])];
+    }
+    else if (action == 'delete') {
+      references = [...localProfileData?.[key] || []].filter((v: any) => v == value);
+    } 
+
+    localProfileData = {
+      ...localProfileData,
+      ...{ [key]: references },
+    };
+
+    localProfileData = JSON.stringify(localProfileData);
+
+    if (Platform.OS === 'web') {
+      localStorage.setItem(Config.storageKeys.profileData, localProfileData);
+    }
+    else {
+      await AsyncStorage.setItem(Config.storageKeys.profileData, localProfileData);
+    }
   }
 }
 
