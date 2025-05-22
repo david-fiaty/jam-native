@@ -256,8 +256,6 @@ class UserManager {
     else {
       await AsyncStorage.setItem(Config.storageKeys.profileData, localProfileData);
     }
-
-    console.log('localProfileData --- ', await AsyncStorage.getItem(Config.storageKeys.profileData));
   }
 
   async unlikeJam(entityId: any) {
