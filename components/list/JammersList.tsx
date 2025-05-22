@@ -45,20 +45,18 @@ const JammersList = ({ jamId, jammersIds }: Props) => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
-      <View style={Layout.borderedListContainer}>
-        {profiles?.length > 0 &&
-          <ListView
-            data={profiles}
-            renderItem={(row: any) => renderItem(row)}
-          />
-        }
+    <View style={Layout.borderedListContainer}>
+      {profiles?.length > 0 &&
+        <ListView
+          data={profiles}
+          renderItem={(row: any) => renderItem(row)}
+        />
+      }
 
-        {!profiles?.length &&
-          <TextView>{i18n.t('No jammers available for this Jam.')}</TextView>
-        }
-      </View>
-    </BoxView>
+      {!profiles?.length &&
+        <TextView>{i18n.t('No jammers available for this Jam.')}</TextView>
+      }
+    </View>
   );
 };
 
