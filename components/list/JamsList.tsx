@@ -21,12 +21,17 @@ const JamsList = ({ idArray }: Props) => {
   const [profileData, setProfileData] = useState<any>(null);
   const searchState: any = useSelector((state: any) => state.search);
 
+  const onListItemAction = () => {
+    console.log('onListItemAction', profileData);
+  };
+
   const renderItem = (row: any) => {
     return (
       <ListItem 
         row={row} 
         sectorsData={sectors} 
         profileData={profileData} 
+        onListItemAction={onListItemAction}
       />
     );
   };
