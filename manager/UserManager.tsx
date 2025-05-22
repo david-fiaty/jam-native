@@ -26,7 +26,7 @@ class UserManager {
 
   async verifySignupCode(data: any) {
     let response = await DataManager.post('verifySignupCode', data);
-    
+
     return response;
   }
 
@@ -35,7 +35,7 @@ class UserManager {
     if (response?.tokens?.access_token?.length) {
       await SessionManager.setTokenData(response.tokens);
     }
-    
+
     return response;
   }
 
@@ -63,12 +63,12 @@ class UserManager {
     Store.dispatch(setActiveSections([]));
   }
 
-  async getUserData() { 
+  async getUserData() {
     return await DataManager.get('currentUser');
   }
 
-  async changePassword(data: any) { 
-    let response: any = await DataManager.put('changePassword', data); 
+  async changePassword(data: any) {
+    let response: any = await DataManager.put('changePassword', data);
     let success: boolean = false;
 
     return {
@@ -93,7 +93,7 @@ class UserManager {
     let variables: any = { '[profile_id]': profileId };
 
     if (profileId > 0) {
-      profileData = await DataManager.get('getProfile', {...defaults, ...options}, variables);
+      profileData = await DataManager.get('getProfile', { ...defaults, ...options }, variables);
     }
 
     if (Platform.OS === 'web') {
@@ -114,7 +114,7 @@ class UserManager {
     let profileId: number = await this.getProfileId();
     let variables: any = { '[profile_id]': profileId };
 
-    return await DataManager.put('updateProfile', {...defaults, ...data}, variables); 
+    return await DataManager.put('updateProfile', { ...defaults, ...data }, variables);
   }
 
   async getNotifications(options?: any) {
@@ -128,8 +128,8 @@ class UserManager {
     };
 
     if (profileId > 0) {
-      userNotifications = await DataManager.get('notifications', {...defaults, ...options}, 
-        {'[profile_id]': profileId},
+      userNotifications = await DataManager.get('notifications', { ...defaults, ...options },
+        { '[profile_id]': profileId },
       );
     }
 
@@ -142,7 +142,7 @@ class UserManager {
 
     return profileJams.includes(entityId);
   }
-  
+
   async isProjectOwner(entityId: number) {
     let profileData: any = await this.getProfileData();
     let profileProjects: any = profileData?.profile_projects || [];
@@ -184,7 +184,7 @@ class UserManager {
   async setLanguage(languageCode: string) {
     if (Platform.OS === 'web') {
       localStorage.setItem(Config.storageKeys.currentLanguage, languageCode);
-    } 
+    }
     else {
       await AsyncStorage.setItem(Config.storageKeys.currentLanguage, languageCode);
     }
@@ -194,21 +194,22 @@ class UserManager {
 
   async getLanguage() {
     try {
-      let language = Platform.OS === 'web' 
-        ? localStorage.getItem(Config.storageKeys.currentLanguage) 
+      let language = Platform.OS === 'web'
+        ? localStorage.getItem(Config.storageKeys.currentLanguage)
         : await AsyncStorage.getItem(Config.storageKeys.currentLanguage);
 
       return language || Config.fallbackLanguage;
     }
     catch (error) {
       console.log(error);
-      
+
       return Config.fallbackLanguage;
     }
   };
 
   async likeJam(entityId: any) {
     let profileData: any = await this.getProfileData();
+    let localProfileData: any = {};
     let success: boolean = false;
     let message: any = {
       title: i18n.t('Like Jam'),
@@ -225,10 +226,9 @@ class UserManager {
       success = true;
       message.content = i18n.t('The Jam was liked.');
 
-
+      if (Platform.OS === 'web') localProfileData = localStorage.getItem(Config.storageKeys.profileData) || {}
+      else localProfileData = (await AsyncStorage.getItem(Config.storageKeys.profileData)) || {};
     }
-
-    console.log(Object.keys(profileData));
 
     return {
       success: success,
@@ -239,6 +239,7 @@ class UserManager {
 
   async unlikeJam(entityId: any) {
     let profileData: any = await this.getProfileData();
+    let localProfileData: any = {};
     let success: boolean = false;
     let message: any = {
       title: i18n.t('Unlike Jam'),
@@ -254,6 +255,9 @@ class UserManager {
     if (!response?.error) {
       success = true;
       message.content = i18n.t('The Jam was unliked.');
+
+      if (Platform.OS === 'web') localProfileData = localStorage.getItem(Config.storageKeys.profileData) || {}
+      else localProfileData = (await AsyncStorage.getItem(Config.storageKeys.profileData)) || {};
     }
 
     return {
@@ -265,6 +269,7 @@ class UserManager {
 
   async saveJam(entityId: any) {
     let profileData: any = await this.getProfileData();
+    let localProfileData: any = {};
     let success: boolean = false;
     let message: any = {
       title: i18n.t('Save Jam'),
@@ -279,6 +284,9 @@ class UserManager {
     if (!response?.error) {
       success = true;
       message.content = i18n.t('The Jam was saved.');
+
+      if (Platform.OS === 'web') localProfileData = localStorage.getItem(Config.storageKeys.profileData) || {}
+      else localProfileData = (await AsyncStorage.getItem(Config.storageKeys.profileData)) || {};
     }
 
     return {
@@ -290,6 +298,7 @@ class UserManager {
 
   async unsaveJam(entityId: any) {
     let profileData: any = await this.getProfileData();
+    let localProfileData: any = {};
     let success: boolean = false;
     let message: any = {
       title: i18n.t('Unsave Jam'),
@@ -304,6 +313,9 @@ class UserManager {
     if (!response?.error) {
       success = true;
       message.content = i18n.t('The Jam was unsaved.');
+
+      if (Platform.OS === 'web') localProfileData = localStorage.getItem(Config.storageKeys.profileData) || {}
+      else localProfileData = (await AsyncStorage.getItem(Config.storageKeys.profileData)) || {};
     }
 
     return {
