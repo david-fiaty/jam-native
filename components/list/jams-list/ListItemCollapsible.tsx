@@ -14,6 +14,18 @@ type Props = {
 };
 
 const ListItemCollapsible = ({ row, sectorsData }: Props) => {
+
+  const renderDescription = () => {
+    return (
+      row?.item?.caption?.length > 0 && (
+        <BoxView style={styles.descriptionContainer}>
+          {row?.item?.title?.length > 0 && <TextView>{row.item.title}</TextView>}
+          <TextView>{row?.item?.caption}</TextView>
+        </BoxView>
+      )
+    );
+  };
+
   const renderLocation = () => {
     return (
       <BoxView
@@ -116,6 +128,7 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
             align="flex-start"
             style={styles.detailsContainer}
           >
+            {renderDescription()}
             {renderLocation()}
             {renderStart()}
             {renderEnd()}
@@ -131,6 +144,9 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
 const styles = StyleSheet.create({
   container: {
     padding: Layout.space.base,
+  },
+  descriptionContainer: {
+    //paddingHorizontal: Layout.space.base*1.2,
   },
   detailsContainer: {
     gap: Layout.space.base,
