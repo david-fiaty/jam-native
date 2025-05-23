@@ -32,7 +32,7 @@ class SearchManager {
     return index;
   }
 
-  async getResults(): any {
+  async getResults() {
     let searchState: any = Store.getState().search;
     let itemsIds = [];
 
