@@ -8,6 +8,7 @@ import ScreenManager from "@/manager/ScreenManager";
 import NoImageView from "../view/NoImageView";
 import MediaManager from "@/manager/MediaManager";
 import BoxView from "../view/BoxView";
+import SpinnerView from "../view/SpinnerView";
 
 type Props = {
   data?: any;
@@ -79,39 +80,39 @@ const ImageSlideshow = ({ data }: Props) => {
 
   return (
     <View style={styles.container}>
-      {data?.length > 0 && (
-        <>
-          <View style={styles.slideshowContainer}>
-            <Slick
-              ref={slideshowRef}
-              showsPagination={false}
-              onMomentumScrollEnd={onMomentumScrollEnd}
-            >
-              {data?.map((item: any, index: number) => renderItem(item, index))}
-            </Slick>
-          </View>
+      <View style={styles.slideshowContainer}>
+        {!isLoaded && <SpinnerView />}
 
-          <BoxView
-            direction="row"
-            justify="center"
-            align="center"
-            style={styles.dotsContaier}
+        {isLoaded && data?.length > 0 && (
+          <Slick
+            ref={slideshowRef}
+            showsPagination={false}
+            onMomentumScrollEnd={onMomentumScrollEnd}
           >
-            {renderDots()}
-          </BoxView>
-        </>
-      )}
+            {data?.map((item: any, index: number) => renderItem(item, index))}
+          </Slick>
+        )}
 
-      {!data?.length && (
-        <NoImageView
-          width={width}
-          height={height}
-          containerStyle={{
-            height: height,
-            borderRadius: 0,
-          }}
-        />
-      )}
+        {!data?.length && (
+          <NoImageView
+            width={width}
+            height={height}
+            containerStyle={{
+              height: height,
+              borderRadius: 0,
+            }}
+          />
+        )}
+      </View>
+
+      <BoxView
+        direction="row"
+        justify="center"
+        align="center"
+        style={styles.dotsContaier}
+      >
+        {renderDots()}
+      </BoxView>
     </View>
   );
 };
