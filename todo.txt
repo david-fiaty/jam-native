@@ -122,7 +122,6 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - verify results count in desktop vs mobile endpoints
 - Extract languages and translate
 
-
 # Issues  
   - Copy Jam link cannot be implemented (missing URL in payload, maybe irrelevant on native)
   - Errors with jam images having double extension .jpg.png or .png.png => error handling is additional performance load
