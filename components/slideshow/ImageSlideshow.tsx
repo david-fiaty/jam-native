@@ -92,6 +92,17 @@ const ImageSlideshow = ({ data }: Props) => {
             {data?.map((item: any, index: number) => renderItem(item, index))}
           </Slick>
         )}
+
+        {!data?.length && (
+          <NoImageView
+            width={width}
+            height={height}
+            containerStyle={{
+              height: height,
+              borderRadius: 0,
+            }}
+          />
+        )}
       </View>
 
       <BoxView
@@ -102,17 +113,6 @@ const ImageSlideshow = ({ data }: Props) => {
       >
         {renderDots()}
       </BoxView>
-
-      {!data?.length && (
-        <NoImageView
-          width={width}
-          height={height}
-          containerStyle={{
-            height: height,
-            borderRadius: 0,
-          }}
-        />
-      )}
     </View>
   );
 };
