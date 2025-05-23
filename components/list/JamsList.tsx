@@ -62,7 +62,6 @@ const JamsList = ({ idArray }: Props) => {
         setIsLoaded(true);
       }
     })();
-
   }, [isLoaded, sectors, idArray, searchState]);
 
   if (!isLoaded) return <SpinnerView />;
