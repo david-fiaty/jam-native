@@ -58,7 +58,8 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   content: {
-    marginTop: Layout.space.base,
+    margin: 0,
+    padding: 0,
     width: '100%',
   },
   topButton: {
