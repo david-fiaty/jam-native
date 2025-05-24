@@ -20,7 +20,7 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
       row?.item?.caption?.length > 0 && (
         <BoxView style={styles.descriptionContainer}>
           {row?.item?.title?.length > 0 && <TextView>{row.item.title}</TextView>}
-          <TextView>{row?.item?.caption}</TextView>
+          <TextView>{row?.item?.caption.slice(0, 80)}...</TextView>
         </BoxView>
       )
     );
