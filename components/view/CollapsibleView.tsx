@@ -18,11 +18,11 @@ const CollapsibleView = ({ label, openedLabel, content, headerStyle, preview }: 
   if (!isCollapsed && openedLabel) {
     buttonLabel = openedLabel;
   }
-
-  console.log(preview)
   
   return (
     <View style={styles.container}>
+      {preview}
+
       {isCollapsed && (
         <TouchableOpacity
           onPress={() => setIsCollapsed((prev) => !prev)}
