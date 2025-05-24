@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
   topButton: {
     margin: 0,
     padding: 0,
+    marginTop: Layout.space.base,
   },
   bottomButton: {
     margin: 0,
