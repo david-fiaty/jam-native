@@ -11,26 +11,35 @@ type Props = {
 };
 
 const CollapsibleView = ({label, openedLabel, content, headerStyle}: Props) => {
-  const [collapsed, setCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   let buttonLabel = label;
   
-  if (!collapsed && openedLabel) {
+  if (!isCollapsed && openedLabel) {
     buttonLabel = openedLabel;
   }
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => setCollapsed((prev) => !prev)}>
-        <View style={headerStyle}>{buttonLabel}</View>
-      </TouchableOpacity>
+      {isCollapsed && (
+        <TouchableOpacity onPress={() => setIsCollapsed((prev) => !prev)}>
+          <View style={headerStyle}>{buttonLabel}</View>
+        </TouchableOpacity>
+      )}
+
       <Collapsible 
-        collapsed={collapsed} 
+        collapsed={isCollapsed} 
         align="center"
       >
         <View style={styles.content}>
           {content}
         </View>
       </Collapsible>
+
+      {!isCollapsed && (
+        <TouchableOpacity onPress={() => setIsCollapsed((prev) => !prev)}>
+          <View style={headerStyle}>{buttonLabel}</View>
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
