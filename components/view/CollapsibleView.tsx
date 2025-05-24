@@ -8,7 +8,7 @@ type Props = {
   openedLabel?: any;
   content?: any;
   headerStyle?: any;
-  preview?: boolean;
+  preview?: any;
 };
 
 const CollapsibleView = ({ label, openedLabel, content, headerStyle, preview }: Props) => {
@@ -18,6 +18,8 @@ const CollapsibleView = ({ label, openedLabel, content, headerStyle, preview }: 
   if (!isCollapsed && openedLabel) {
     buttonLabel = openedLabel;
   }
+
+  console.log(preview)
   
   return (
     <View style={styles.container}>
