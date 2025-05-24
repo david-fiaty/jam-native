@@ -21,7 +21,7 @@ const CollapsibleView = ({ label, openedLabel, content, headerStyle, preview }: 
   
   return (
     <View style={styles.container}>
-      {preview}
+      {isCollapsed && preview}
 
       {isCollapsed && (
         <TouchableOpacity
