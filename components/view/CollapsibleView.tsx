@@ -10,10 +10,10 @@ type Props = {
   headerStyle?: any,
 };
 
-const CollapsibleView = ({label, openedLabel, content, headerStyle}: Props) => {
+const CollapsibleView = ({ label, openedLabel, content, headerStyle }: Props) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   let buttonLabel = label;
-  
+
   if (!isCollapsed && openedLabel) {
     buttonLabel = openedLabel;
   }
@@ -21,13 +21,16 @@ const CollapsibleView = ({label, openedLabel, content, headerStyle}: Props) => {
   return (
     <View style={styles.container}>
       {isCollapsed && (
-        <TouchableOpacity onPress={() => setIsCollapsed((prev) => !prev)}>
+        <TouchableOpacity
+          onPress={() => setIsCollapsed((prev) => !prev)}
+          style={styles.topButton}
+        >
           <View style={headerStyle}>{buttonLabel}</View>
         </TouchableOpacity>
       )}
 
-      <Collapsible 
-        collapsed={isCollapsed} 
+      <Collapsible
+        collapsed={isCollapsed}
         align="center"
       >
         <View style={styles.content}>
@@ -36,7 +39,10 @@ const CollapsibleView = ({label, openedLabel, content, headerStyle}: Props) => {
       </Collapsible>
 
       {!isCollapsed && (
-        <TouchableOpacity onPress={() => setIsCollapsed((prev) => !prev)}>
+        <TouchableOpacity
+          onPress={() => setIsCollapsed((prev) => !prev)}
+          style={styles.bottomButton}
+        >
           <View style={headerStyle}>{buttonLabel}</View>
         </TouchableOpacity>
       )}
@@ -51,6 +57,15 @@ const styles = StyleSheet.create({
   content: {
     marginTop: Layout.space.base,
     width: '100%',
+  },
+  topButton: {
+    margin: 0,
+    padding: 0,
+  },
+  bottomButton: {
+    margin: 0,
+    padding: 0,
+    marginTop: Layout.space.base,
   },
 });
 
