@@ -14,6 +14,35 @@ type Props = {
 };
 
 const ListItemCollapsible = ({ row, sectorsData }: Props) => {
+
+  const renderPreview = () => {
+    let previewText: string = '';
+
+    if (row?.item?.caption?.length > 0) {
+      previewText = row?.item?.caption.trim().replace(/[\t\n\r]+/g, ' ').slice(0, 80);
+    }
+
+    return (
+      row?.item?.caption?.length > 0 && (
+        <BoxView style={styles.descriptionContainer}>
+          {row?.item?.title?.length > 0 && <TextView>{row.item.title}</TextView>}
+          <TextView>{previewText}...</TextView>
+        </BoxView>
+      )
+    );
+  };
+
+  const renderDescription = () => {
+    return (
+      row?.item?.caption?.length > 0 && (
+        <BoxView style={styles.descriptionContainer}>
+          {row?.item?.title?.length > 0 && <TextView>{row.item.title}</TextView>}
+          <TextView>{row?.item?.caption}</TextView>
+        </BoxView>
+      )
+    );
+  };
+
   const renderLocation = () => {
     return (
       <BoxView
@@ -110,12 +139,14 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
       <CollapsibleView
         label={<TextView>{i18n.t("View more.")}</TextView>}
         openedLabel={<TextView>{i18n.t("View less.")}</TextView>}
+        preview={renderPreview()}
         content={
           <BoxView
             direction="column"
             align="flex-start"
             style={styles.detailsContainer}
           >
+            {renderDescription()}
             {renderLocation()}
             {renderStart()}
             {renderEnd()}
@@ -131,6 +162,9 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
 const styles = StyleSheet.create({
   container: {
     padding: Layout.space.base,
+  },
+  descriptionContainer: {
+    //paddingHorizontal: Layout.space.base*1.2,
   },
   detailsContainer: {
     gap: Layout.space.base,
