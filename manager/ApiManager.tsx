@@ -78,6 +78,10 @@ class ApiManager {
   }
 
   async processResponse(response: any) {
+    if (!response.ok) {
+      throw new Error("Failed to fetch feed data");
+    }
+    
     return await response.json();
   }
 
