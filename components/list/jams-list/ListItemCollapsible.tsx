@@ -16,7 +16,11 @@ type Props = {
 const ListItemCollapsible = ({ row, sectorsData }: Props) => {
 
   const renderPreview = () => {
-    let previewText: string = row?.item?.caption.replace(/[\t\n\r]+/g, ' ').slice(0, 80);
+    let previewText: string = '';
+
+    if (row?.item?.caption?.length > 0) {
+      previewText = row?.item?.caption.trim().replace(/[\t\n\r]+/g, ' ').slice(0, 80);
+    }
 
     return (
       row?.item?.caption?.length > 0 && (
