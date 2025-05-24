@@ -161,10 +161,13 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: Layout.space.base,
+    paddingTop: 0,
+    paddingBottom: Layout.space.base,
+    paddingHorizontal: Layout.space.base,
   },
   descriptionContainer: {
-    //paddingHorizontal: Layout.space.base*1.2,
+    margin: 0,
+    padding: 0,
   },
   detailsContainer: {
     gap: Layout.space.base,
