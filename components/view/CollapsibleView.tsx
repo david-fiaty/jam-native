@@ -4,20 +4,21 @@ import { Layout } from '@/constants/Layout';
 import Collapsible from 'react-native-collapsible';
 
 type Props = {
-  label?: any,
-  openedLabel?: any,
-  content?: any,
-  headerStyle?: any,
+  label?: any;
+  openedLabel?: any;
+  content?: any;
+  headerStyle?: any;
+  preview?: boolean;
 };
 
-const CollapsibleView = ({ label, openedLabel, content, headerStyle }: Props) => {
+const CollapsibleView = ({ label, openedLabel, content, headerStyle, preview }: Props) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   let buttonLabel = label;
 
   if (!isCollapsed && openedLabel) {
     buttonLabel = openedLabel;
   }
-
+  
   return (
     <View style={styles.container}>
       {isCollapsed && (
