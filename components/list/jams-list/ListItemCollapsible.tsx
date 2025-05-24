@@ -122,7 +122,7 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
       <CollapsibleView
         label={<TextView>{i18n.t("View more.")}</TextView>}
         openedLabel={<TextView>{i18n.t("View less.")}</TextView>}
-        preview={true}
+        preview={'xxx'}
         content={
           <BoxView
             direction="column"
