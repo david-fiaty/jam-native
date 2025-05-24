@@ -16,11 +16,13 @@ type Props = {
 const ListItemCollapsible = ({ row, sectorsData }: Props) => {
 
   const renderPreview = () => {
+    let previewText: string = row?.item?.caption.replace(/[\t\n\r]+/g, ' ').slice(0, 80);
+
     return (
       row?.item?.caption?.length > 0 && (
         <BoxView style={styles.descriptionContainer}>
           {row?.item?.title?.length > 0 && <TextView>{row.item.title}</TextView>}
-          <TextView>{row?.item?.caption.slice(0, 80)}...</TextView>
+          <TextView>{previewText}...</TextView>
         </BoxView>
       )
     );
