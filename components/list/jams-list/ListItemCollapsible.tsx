@@ -15,6 +15,17 @@ type Props = {
 
 const ListItemCollapsible = ({ row, sectorsData }: Props) => {
 
+  const renderPreview = () => {
+    return (
+      row?.item?.caption?.length > 0 && (
+        <BoxView style={styles.descriptionContainer}>
+          {row?.item?.title?.length > 0 && <TextView>{row.item.title}</TextView>}
+          <TextView>{row?.item?.caption}</TextView>
+        </BoxView>
+      )
+    );
+  };
+
   const renderDescription = () => {
     return (
       row?.item?.caption?.length > 0 && (
@@ -122,7 +133,7 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
       <CollapsibleView
         label={<TextView>{i18n.t("View more.")}</TextView>}
         openedLabel={<TextView>{i18n.t("View less.")}</TextView>}
-        preview={'xxx'}
+        preview={renderPreview()}
         content={
           <BoxView
             direction="column"
