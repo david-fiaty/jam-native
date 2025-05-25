@@ -73,7 +73,7 @@ class ApiManager {
       return await this.processResponse(response);
     } 
     catch (error) {
-      console.error(error);
+      console.error(error, url);
     }
   }
 
