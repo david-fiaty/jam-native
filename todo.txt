@@ -119,7 +119,6 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Check internet connexion available
 - Implement global crash handling
 
-- verify results count in desktop vs mobile endpoints
 - Extract languages and translate
 
 # Issues  
