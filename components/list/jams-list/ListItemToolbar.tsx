@@ -124,10 +124,10 @@ const ListItemToolbar = ({ row, profileData, onListItemAction }: Props) => {
     if (isJamLiked()) jammersIds = [...new Set([...jammersIds, profileData.id])];
     else jammersIds = jammersIds.filter((v: any) => v != profileData.id); 
 
-    return (
+    return jammersIds.length > 0 && (
       <TouchableOpacity onPress={() => ModalManager.toggleModal('JammersList', { jamId: row?.item?.id, jammersIds: jammersIds })}>
         <TextView>
-          {jammersIds.length} {i18n.t("jammers")}
+          {jammersIds.length} {jammersIds.length == 1 ? i18n.t("jammer") : i18n.t("jammers")}
         </TextView>
       </TouchableOpacity>
     );
