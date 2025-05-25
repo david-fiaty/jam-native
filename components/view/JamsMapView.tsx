@@ -97,7 +97,7 @@ const JamsMapView = ({ idArray }: Props) => {
   }, [isLoaded, searchState]);
 
   if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
-
+  
   return (
     <TouchableWithoutFeedback>
       <View style={styles.container}>
