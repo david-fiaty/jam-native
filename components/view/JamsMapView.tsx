@@ -8,8 +8,13 @@ import SpinnerView from "./SpinnerView";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import SearchManager from "@/manager/SearchManager";
+import EntityManager from "@/manager/EntityManager";
 
-const JamsMapView = () => {
+type Props = {
+  idArray?: any;
+};
+
+const JamsMapView = ({ idArray }: Props) => {
   const mapRef = useRef<any>();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -67,10 +72,23 @@ const JamsMapView = () => {
     return null;
   };
 
+  const loadSearchData = async () => {
+    let data: any[] = [];
+    
+    if (idArray && idArray?.length > 0) {
+      data = await EntityManager.getJams({ items_ids: idArray });
+    }
+    else {
+      data = (await SearchManager.getResults())?.jam;
+    }
+
+    setSearchData(data);
+  };
+
   useEffect(() => {
     (async () => {
+      await loadSearchData();
       setCurrentLocation(await UserManager.getLocation());
-      setSearchData((await SearchManager.getResults())?.jam);
     })();
 
     if (!isLoaded) {
@@ -79,7 +97,7 @@ const JamsMapView = () => {
   }, [isLoaded, searchState]);
 
   if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
-
+  
   return (
     <TouchableWithoutFeedback>
       <View style={styles.container}>
