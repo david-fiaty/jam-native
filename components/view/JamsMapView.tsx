@@ -89,7 +89,6 @@ const JamsMapView = ({ idArray }: Props) => {
     (async () => {
       await loadSearchData();
       setCurrentLocation(await UserManager.getLocation());
-      setSearchData((await SearchManager.getResults())?.jam);
     })();
 
     if (!isLoaded) {
