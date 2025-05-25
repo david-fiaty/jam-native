@@ -34,7 +34,7 @@ const ModalView = ({ currentSection, style }: Props) => {
     let top: number = 0;
 
     if (sectionState.active.length > 4 && modalState.active.length > 1) {
-      // Todo - Enable or remove
+      // Todo - Fix modal top position in search jams => jam modals
       //top = -Layout.space.base*3.6; 
     }
 
