@@ -34,7 +34,8 @@ const ModalView = ({ currentSection, style }: Props) => {
     let top: number = 0;
 
     if (sectionState.active.length > 4 && modalState.active.length > 1) {
-      //top = -Layout.space.base*3.6;
+      // Todo - Enable or remove
+      //top = -Layout.space.base*3.6; 
     }
 
     return {
