@@ -39,7 +39,6 @@ const SectionHeader = ({ style } : Props) => {
     })();
   }, [isLoaded]);
   
-
   return (
     <BoxView direction="row" style={[styles.container, style]}>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.headerLeft}>
