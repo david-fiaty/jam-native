@@ -111,7 +111,6 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Fix modal margin top in jam form submodals
 - Fix jammers list count missing 1
 - Image slideshow : display + dots effects
-- Finish user notifications
 - Social login
 
 
