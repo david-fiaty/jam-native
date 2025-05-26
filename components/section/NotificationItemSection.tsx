@@ -11,8 +11,10 @@ type Props = {
 };
 
 const NotificationItemSection = ({ notificationId }: Props) => {
-  const [notificationsData, setNotificationsData] = useState<any>([]);
+  const [notificationItem, setNotificationItem] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
+  notificationId = JSON.parse(notificationId)[0];
 
   useEffect(() => {
     if (!isLoaded) {
@@ -21,15 +23,13 @@ const NotificationItemSection = ({ notificationId }: Props) => {
           data = data.slice(Config.maxNotificationsDisplay - 1);
         }
 
-        setNotificationsData(data);
+        setNotificationItem(data.find((o: any) => o.id == notificationId));
         setIsLoaded(true);
       });
     }
-  }, [isLoaded]);
+  }, [isLoaded, notificationId]);
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(notificationsData)
 
   return (
     <BoxView
@@ -38,7 +38,7 @@ const NotificationItemSection = ({ notificationId }: Props) => {
       justify="center"
       style={styles.container}
     >
-      <TextView>Notification {notificationId}</TextView>
+      <TextView>Notification {notificationItem?.id}</TextView>
     </BoxView>
   );
 };
