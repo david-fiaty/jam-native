@@ -34,10 +34,11 @@ const SectionHeader = ({ style } : Props) => {
   useEffect(() => {
     (async () => {
       setIsLoggedIn(await UserManager.isLoggedIn());
-      setNotificationsCount(await UserManager.getNotifications());
+      setNotificationsCount((await UserManager.getNotifications())?.length);
       setIsLoaded(true);
     })();
   }, [isLoaded]);
+  
 
   return (
     <BoxView direction="row" style={[styles.container, style]}>
