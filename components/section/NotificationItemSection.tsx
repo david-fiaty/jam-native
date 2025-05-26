@@ -1,0 +1,54 @@
+import { useState, useEffect } from "react";
+import { StyleSheet } from "react-native";
+import { Config } from "@/constants/Config";
+import BoxView from '../view/BoxView';
+import TextView from "../view/TextView";
+import UserManager from "@/manager/UserManager";
+import SpinnerView from "../view/SpinnerView";
+
+type Props = {
+  notificationId: any;
+};
+
+const NotificationItemSection = ({ notificationId }: Props) => {
+  const [notificationItem, setNotificationItem] = useState<any>(null);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
+  notificationId = JSON.parse(notificationId)[0];
+
+  useEffect(() => {
+    if (!isLoaded) {
+      UserManager.getNotifications().then((data: any) => {
+        if (data?.length > Config.maxNotificationsDisplay) {
+          data = data.slice(Config.maxNotificationsDisplay - 1);
+        }
+
+        setNotificationItem(data.find((o: any) => o.id == notificationId));
+        setIsLoaded(true);
+      });
+    }
+  }, [isLoaded, notificationId]);
+
+  if (!isLoaded) return <SpinnerView />;
+
+  return (
+    <BoxView
+      direction="column"
+      align="center"
+      justify="center"
+      style={styles.container}
+    >
+      <TextView>Notification {notificationItem?.id}</TextView>
+    </BoxView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    position: 'relative',
+    width: '100%',
+    height: '100%',
+  },
+});
+
+export default NotificationItemSection;
