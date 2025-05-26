@@ -113,12 +113,10 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Image slideshow : display + dots effects
 - Social login
 
-
 - review form errors + api responses handling
 
 - Check internet connexion available
 - Implement global crash handling
-
 - Extract languages and translate
 
 # Todo 
