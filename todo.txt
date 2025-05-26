@@ -121,13 +121,6 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 
 - Extract languages and translate
 
-# Issues  
-  - Copy Jam link cannot be implemented (missing URL in payload, maybe irrelevant on native)
-  - Errors with jam images having double extension .jpg.png or .png.png => error handling is additional performance load
-
-# New release:
-  - Amelioration selection Jams dans add project form 
-
 # Todo 
 - Implement image cache : https://github.com/echowaves/expo-cached-image
 - Implement reverse geocoding
