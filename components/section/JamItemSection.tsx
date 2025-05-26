@@ -1,11 +1,30 @@
+import { StyleSheet } from "react-native";
 import JamsList from '../list/JamsList';
+import BoxView from '../view/BoxView';
 
 type Props = {
   jamId: any;
 };
 
 const JamItemSection = ({ jamId }: Props) => {
-  return <JamsList idArray={JSON.parse(jamId)} />;
+  return (
+    <BoxView
+      direction="column"
+      align="center"
+      justify="center"
+      style={styles.container}
+    >
+      <JamsList idArray={JSON.parse(jamId)} />
+    </BoxView>
+  );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    position: 'relative',
+    width: '100%',
+    height: '100%',
+  },
+});
 
 export default JamItemSection;
