@@ -110,10 +110,11 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Profile/jam image upload
 - Fix modal margin top in jam form submodals
 - Fix jammers list count missing 1
+- Image slideshow : display + dots effects
 - Finish user notifications
 - Social login
 
-- Image slideshow dots effects like insta?
+
 - review form errors + api responses handling
 
 - Check internet connexion available
