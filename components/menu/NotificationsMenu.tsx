@@ -9,7 +9,7 @@ import i18n from '@/translation/i18n';
 import UserManager from "@/manager/UserManager";
 import SpinnerView from "../view/SpinnerView";
 import BoxView from "../view/BoxView";
-import ScreenManager from "@/manager/ScreenManager";
+import SectionManager from "@/manager/SectionManager";
 
 const NotificationsMenu = () => {
   const router = useRouter();
