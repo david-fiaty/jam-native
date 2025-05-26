@@ -110,29 +110,17 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Profile/jam image upload
 - Fix modal margin top in jam form submodals
 - Fix jammers list count missing 1
+- Image slideshow : display + dots effects
 - Finish user notifications
-- Check jams map items count
+- Social login
 
-- Image slideshow dots effects like insta?
+
 - review form errors + api responses handling
 
 - Check internet connexion available
 - Implement global crash handling
 
 - Extract languages and translate
-
-# Issues  
-  - Copy Jam link cannot be implemented (missing URL in payload, maybe irrelevant on native)
-  - Errors with jam images having double extension .jpg.png or .png.png => error handling is additional performance load
-
-# New release:
-  - Amelioration selection Jams dans add project form 
-
-# Questions
-  - What are the notification types a user can get
-  - What are the jam types a user can get
-  - How to display jams and projects with title
-  - Where are project list and project detail view
 
 # Todo 
 - Implement image cache : https://github.com/echowaves/expo-cached-image
