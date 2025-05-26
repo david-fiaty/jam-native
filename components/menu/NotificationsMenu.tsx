@@ -19,7 +19,8 @@ const NotificationsMenu = () => {
   const renderItem = (row: any) => (
     <TouchableOpacity
       key={row.item.id}
-      onPress={() => SectionManager.push(router, 'notification-item', { notificationId: JSON.stringify([row?.item?.id]), title: row.item?.content?.content_data?.title })}
+      // Todo - Missing specs for notification detail view, implement or remove
+      //onPress={() => SectionManager.push(router, 'notification-item', { notificationId: JSON.stringify([row?.item?.id]), title: row.item?.content?.content_data?.title })}
     >
       <View style={Layout.menuItem}>
         <TextView>
