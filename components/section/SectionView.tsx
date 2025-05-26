@@ -26,6 +26,7 @@ import ProfileFormSection from "@/components/section/ProfileFormSection";
 import AddProjectForm from "@/components/form/AddProjectForm";
 import LanguageForm from "../form/LanguageForm";
 import ResetPasswordForm from "../form/ResetPasswordForm";
+import NotificationItemSection from "./NotificationItemSection";
 
 const SectionView = () => { 
   const path = usePathname();
@@ -152,6 +153,12 @@ const SectionView = () => {
         title: i18n.t('Project'),
         showBackButton: true,
         render: (params: any) => <ProjectItemSection {...params} />,
+      },
+      {
+        id: 'notification-item',
+        title: i18n.t('Notification'),
+        showBackButton: true,
+        render: (params: any) => <NotificationItemSection {...params} />,
       },
       {
         id: 'profile',
