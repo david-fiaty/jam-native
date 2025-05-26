@@ -111,7 +111,6 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Fix modal margin top in jam form submodals
 - Fix jammers list count missing 1
 - Finish user notifications
-- Check jams map items count
 - Social login
 
 - Image slideshow dots effects like insta?
