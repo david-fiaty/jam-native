@@ -32,14 +32,17 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
     let previewText: string = '';
 
     if (row?.item?.caption?.length > 0) {
-      previewText = row?.item?.caption.trim().replace(/[\t\n\r]+/g, ' ').slice(0, 80);
+      previewText = row?.item?.caption.trim().replace(/[\t\n\r]+/g, ' ');
+      //previewText = previewText.slice(0, 80);
+
+      previewText = truncateText(previewText, 86);
     }
 
     return (
       row?.item?.caption?.length > 0 && (
         <BoxView style={styles.descriptionContainer}>
           {row?.item?.title?.length > 0 && <TextView>{row.item.title}</TextView>}
-          <TextView>{previewText}...</TextView>
+          <TextView>{previewText}</TextView>
         </BoxView>
       )
     );
