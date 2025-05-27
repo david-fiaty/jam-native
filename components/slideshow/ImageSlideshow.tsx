@@ -1,14 +1,13 @@
 import React, { memo, useState, useEffect, useRef } from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Layout } from "@/constants/Layout";
-import { Config } from "@/constants/Config";
 import Slick from "react-native-slick";
 import ImageView from "../view/ImageView";
 import ScreenManager from "@/manager/ScreenManager";
 import NoImageView from "../view/NoImageView";
 import MediaManager from "@/manager/MediaManager";
-import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
+import SlideshowDots from "./SlideshowDots";
 
 type Props = {
   data?: any;
@@ -16,20 +15,12 @@ type Props = {
 
 const width: number = ScreenManager.window.width - Layout.space.base * 2;
 const height: number = 346;
-const dotSize: number = 9;
 
 const ImageSlideshow = ({ data }: Props) => {
   const slideshowRef = useRef<any>();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [itemsCount, setItemsCount] = useState<number>(0);
   const [activeIndex, setActiveIndex] = useState<number>(0);
-
-  // Todo - Enable and fix or remove
-  /*
-  if (data?.length > Config.maxSlieshowImages) {
-    data = data.slice(Config.maxSlieshowImages - 1);
-  }
-  */
 
   const onDotPress = (index: number) => {
     slideshowRef.current?.scrollBy(index - activeIndex);
@@ -46,26 +37,17 @@ const ImageSlideshow = ({ data }: Props) => {
     </View>
   );
 
-  const renderDots = () => {
-    if (itemsCount > 1) {
-      return [...Array(itemsCount)].map((_, index) => {        
-        let dotStyle: any = activeIndex === index ? styles.activeDot : styles.dot;
-        
-        if (index < (activeIndex - 1) || index > (activeIndex + 2)) {
-          dotStyle = {...dotStyle, ...styles.hiddenDot};
-        }
-
-        return (
-          <TouchableOpacity
-            key={index}
-            onPress={() => onDotPress(index)}
-            style={dotStyle}
-          />
-        )
-      });
-    }
-
-    return <></>;
+  const renderNoImage = () => {
+    return (
+      <NoImageView
+        width={width}
+        height={height}
+        containerStyle={{
+          height: height,
+          borderRadius: 0,
+        }}
+      />
+    );
   };
 
   const onMomentumScrollEnd = (e: any, state: any) => {
@@ -95,26 +77,14 @@ const ImageSlideshow = ({ data }: Props) => {
           </Slick>
         )}
 
-        {!data?.length && (
-          <NoImageView
-            width={width}
-            height={height}
-            containerStyle={{
-              height: height,
-              borderRadius: 0,
-            }}
-          />
-        )}
+        {!data?.length && renderNoImage()}
       </View>
 
-      <BoxView
-        direction="row"
-        justify="center"
-        align="center"
-        style={styles.dotsContaier}
-      >
-        {renderDots()}
-      </BoxView>
+      <SlideshowDots
+        activeIndex={activeIndex}
+        itemsCount={itemsCount}
+        onDotPress={(index) => onDotPress(index)}
+      />
     </View>
   );
 };
@@ -132,33 +102,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  dotsContaier: {
-    zIndex: 100,
-    width: '100%',
-    position: 'absolute',
-    bottom: -Layout.space.base * 2.9,
-    gap: dotSize,
-  },
-  dot: {
-    backgroundColor: Layout.colors.white,
-    borderColor: Layout.colors.primary,
-    borderWidth: Layout.borderWidth.base,
-    width: dotSize,
-    height: dotSize,
-    borderRadius: dotSize,
-  },
-  activeDot: {
-    backgroundColor: Layout.colors.primary,
-    borderColor: Layout.colors.primary,
-    borderWidth: Layout.borderWidth.base,
-    width: dotSize,
-    height: dotSize,
-    borderRadius: dotSize,
-  },
-  hiddenDot: {
-    display: 'none',
-    //backgroundColor: 'red',
-  }
 });
 
 export default memo(ImageSlideshow);
