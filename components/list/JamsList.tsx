@@ -50,7 +50,7 @@ const JamsList = ({ idArray }: Props) => {
       data = (await SearchManager.getResults())?.jam;
     }
 
-    setSearchData(data);
+    setSearchData([...searchData, ...data]);
   };
 
   useEffect(() => {
@@ -78,9 +78,9 @@ const JamsList = ({ idArray }: Props) => {
         keyExtractor={(item: any) => item.id.toString()}
         
         // Todo - Implement infinite scroll
-        //keyExtractor={(row: any, index?: number) => `${row.id}-${index}`} 
-        //onEndReachedThreshold={0.5}
-        //onEndReached={async () => await loadSearchData()} 
+        keyExtractor={(row: any, index?: number) => `${row.id}-${index}`} 
+        onEndReachedThreshold={0.5}
+        onEndReached={async () => await loadSearchData()} 
       />
     </BoxView>
   );
