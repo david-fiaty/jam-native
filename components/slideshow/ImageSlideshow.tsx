@@ -7,8 +7,8 @@ import ImageView from "../view/ImageView";
 import ScreenManager from "@/manager/ScreenManager";
 import NoImageView from "../view/NoImageView";
 import MediaManager from "@/manager/MediaManager";
-import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
+import SlideshowDots from "./SlideshowDots";
 
 type Props = {
   data?: any;
@@ -16,7 +16,6 @@ type Props = {
 
 const width: number = ScreenManager.window.width - Layout.space.base * 2;
 const height: number = 346;
-const dotSize: number = 9;
 
 const ImageSlideshow = ({ data }: Props) => {
   const slideshowRef = useRef<any>();
@@ -45,28 +44,6 @@ const ImageSlideshow = ({ data }: Props) => {
       />
     </View>
   );
-
-  const renderDots = () => {
-    if (itemsCount > 1) {
-      return [...Array(itemsCount)].map((_, index) => {        
-        let dotStyle: any = activeIndex === index ? styles.activeDot : styles.dot;
-        
-        if (index < (activeIndex - 1) || index > (activeIndex + 2)) {
-          dotStyle = {...dotStyle, ...styles.hiddenDot};
-        }
-
-        return (
-          <TouchableOpacity
-            key={index}
-            onPress={() => onDotPress(index)}
-            style={dotStyle}
-          />
-        )
-      });
-    }
-
-    return <></>;
-  };
 
   const onMomentumScrollEnd = (e: any, state: any) => {
     setActiveIndex(state.index);
@@ -107,14 +84,11 @@ const ImageSlideshow = ({ data }: Props) => {
         )}
       </View>
 
-      <BoxView
-        direction="row"
-        justify="center"
-        align="center"
-        style={styles.dotsContaier}
-      >
-        {renderDots()}
-      </BoxView>
+      <SlideshowDots
+        activeIndex={activeIndex}
+        itemsCount={itemsCount}
+        onDotPress={(index) => onDotPress(index)}
+      />
     </View>
   );
 };
@@ -132,33 +106,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  dotsContaier: {
-    zIndex: 100,
-    width: '100%',
-    position: 'absolute',
-    bottom: -Layout.space.base * 2.9,
-    gap: dotSize,
-  },
-  dot: {
-    backgroundColor: Layout.colors.white,
-    borderColor: Layout.colors.primary,
-    borderWidth: Layout.borderWidth.base,
-    width: dotSize,
-    height: dotSize,
-    borderRadius: dotSize,
-  },
-  activeDot: {
-    backgroundColor: Layout.colors.primary,
-    borderColor: Layout.colors.primary,
-    borderWidth: Layout.borderWidth.base,
-    width: dotSize,
-    height: dotSize,
-    borderRadius: dotSize,
-  },
-  hiddenDot: {
-    display: 'none',
-    //backgroundColor: 'red',
-  }
 });
 
 export default memo(ImageSlideshow);
