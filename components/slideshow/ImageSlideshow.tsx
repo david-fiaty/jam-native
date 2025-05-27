@@ -49,11 +49,13 @@ const ImageSlideshow = ({ data }: Props) => {
   const renderDots = () => {
     if (itemsCount > 1) {
       return [...Array(itemsCount)].map((_, index) => {        
+        let dotStyle: any = activeIndex === index ? styles.activeDot : styles.dot; 
+
         return (
           <TouchableOpacity
             key={index}
             onPress={() => onDotPress(index)}
-            style={activeIndex === index ? styles.activeDot : styles.dot}
+            style={dotStyle}
           />
         )
       });
