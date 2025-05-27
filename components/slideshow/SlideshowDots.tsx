@@ -16,28 +16,6 @@ const dotSize: number = 9;
 
 const SlideshowDots = ({ activeIndex, itemsCount, onDotPress }: Props) => {
 
-  const renderDots = () => {
-    if (itemsCount > 1) {
-      return [...Array(itemsCount)].map((_, index) => {
-        let dotStyle: any = activeIndex === index ? styles.activeDot : styles.dot;
-
-        if (index < (activeIndex - 1) || index > (activeIndex + 2)) {
-          dotStyle = { ...dotStyle, ...styles.hiddenDot };
-        }
-
-        return (
-          <TouchableOpacity
-            key={index}
-            onPress={() => onDotPress(index)}
-            style={dotStyle}
-          />
-        )
-      });
-    }
-
-    return <></>;
-  };
-
   const renderDot = () => {
     return (
       <View style={styles.test}>
@@ -65,7 +43,29 @@ const SlideshowDots = ({ activeIndex, itemsCount, onDotPress }: Props) => {
     );
   };
 
-  return renderDot();
+  const renderDots = () => {
+    if (itemsCount > 1) {
+      return [...Array(itemsCount)].map((_, index) => {
+        let dotStyle: any = activeIndex === index ? styles.activeDot : styles.dot;
+
+        if (index < (activeIndex - 1) || index > (activeIndex + 2)) {
+          dotStyle = { ...dotStyle, ...styles.hiddenDot };
+        }
+
+        return (
+          <TouchableOpacity
+            key={index}
+            onPress={() => onDotPress(index)}
+            style={dotStyle}
+          />
+        )
+      });
+    }
+
+    return <></>;
+  };
+
+  //return renderDot(); // Todo - Implement effect or remove
   
   return (
     <BoxView
