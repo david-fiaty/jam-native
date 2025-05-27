@@ -237,6 +237,7 @@ const ListItemToolbar = ({ row, profileData, onListItemAction }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: Layout.space.base/2,
     padding: Layout.space.base*1.2,
   },
   spinnerContainer: {
