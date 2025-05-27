@@ -1,10 +1,6 @@
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
-
-import React from 'react';
-import Svg, { Rect, Mask, Circle } from 'react-native-svg';
-
 
 type Props = {
   activeIndex: number;
@@ -15,34 +11,6 @@ type Props = {
 const dotSize: number = 9;
 
 const SlideshowDots = ({ activeIndex, itemsCount, onDotPress }: Props) => {
-
-  const renderDot = () => {
-    return (
-      <View style={styles.test}>
-        <Svg height="100%" width="100%">
-          <Mask id="mask">
-            <Rect x="0" y="0" width="100%" height="100%" fill="white" />
-            <Circle
-              cx="50%"
-              cy="50%"
-              r="20"
-              fill="black"
-            />
-          </Mask>
-
-          <Rect
-            x="0"
-            y="0"
-            width="100%"
-            height="100%"
-            fill="rgba(0, 0, 0, 0.8)"
-            mask="url(#mask)"
-          />
-        </Svg>
-      </View>
-    );
-  };
-
   const renderDots = () => {
     if (itemsCount > 1) {
       return [...Array(itemsCount)].map((_, index) => {
@@ -64,8 +32,6 @@ const SlideshowDots = ({ activeIndex, itemsCount, onDotPress }: Props) => {
 
     return <></>;
   };
-
-  //return renderDot(); // Todo - Implement effect or remove
   
   return (
     <BoxView
