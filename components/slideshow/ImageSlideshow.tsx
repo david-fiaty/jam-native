@@ -49,7 +49,11 @@ const ImageSlideshow = ({ data }: Props) => {
   const renderDots = () => {
     if (itemsCount > 1) {
       return [...Array(itemsCount)].map((_, index) => {        
-        let dotStyle: any = activeIndex === index ? styles.activeDot : styles.dot; 
+        let dotStyle: any = activeIndex === index ? styles.activeDot : styles.dot;
+        
+        if (index < (activeIndex - 1) || index > (activeIndex + 2)) {
+          dotStyle = {...dotStyle, ...styles.hiddenDot};
+        }
 
         return (
           <TouchableOpacity
@@ -153,6 +157,7 @@ const styles = StyleSheet.create({
   },
   hiddenDot: {
     display: 'none',
+    //backgroundColor: 'red',
   }
 });
 
