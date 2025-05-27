@@ -33,18 +33,16 @@ const ImageSlideshow = ({ data }: Props) => {
 
   const onDotPress = (index: number) => {
     slideshowRef.current?.scrollBy(index - activeIndex);
-    
   };
 
   const renderItem = (item: any, index: number) => (
-    <View style={styles.slideshowItem} key={`dot-${index}`}>
-      <ImageView
-        uri={MediaManager.getImageUrl(item?.url)}
-        resizeMode="cover"
-        width={width}
-        height={height}
-      />
-    </View>
+    <ImageView
+      uri={MediaManager.getImageUrl(item?.url)}
+      resizeMode="cover"
+      width={width}
+      height={height}
+      key={`dot-${index}`}
+    />
   );
 
   const renderDots = () => {
@@ -119,11 +117,6 @@ const styles = StyleSheet.create({
   slideshowContainer: {
     height: height,
     backgroundColor: Layout.colors.secondary,
-  },
-  slideshowItem: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
   },
   dotsContaier: {
     zIndex: 100,
