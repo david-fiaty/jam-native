@@ -49,8 +49,7 @@ const styles = StyleSheet.create({
   dotsContaier: {
     zIndex: 100,
     width: '100%',
-    position: 'absolute',
-    bottom: -Layout.space.base * 2.9,
+    paddingTop: Layout.space.base,
     gap: dotSize/1.1,
   },
   dot: {
