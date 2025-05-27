@@ -11,7 +11,7 @@ const LanguageForm = () => {
   const data = StaticData.languages;
 
   const changeLanguage = async (languageCode: string) => {
-    setCurrentLanguage(languageCode);  // Todo - Test language selection
+    setCurrentLanguage(languageCode);
     await UserManager.setLanguage(languageCode);
   };
 
