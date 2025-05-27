@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { StyleSheet, View } from "react-native";
 import { Layout } from "@/constants/Layout";
 import Slick from "react-native-slick";
@@ -104,4 +104,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(ImageSlideshow);
+export default ImageSlideshow;
