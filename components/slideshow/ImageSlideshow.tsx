@@ -70,7 +70,7 @@ const ImageSlideshow = ({ data }: Props) => {
           <Slick
             ref={slideshowRef}
             showsPagination={false}
-            loop={false}
+            loop={true}
             onMomentumScrollEnd={onMomentumScrollEnd}
           >
             {data?.map((item: any, index: number) => renderItem(item, index))}
