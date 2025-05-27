@@ -1,14 +1,13 @@
 import React, { memo, useState, useEffect, useRef } from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Layout } from "@/constants/Layout";
-import { Config } from "@/constants/Config";
 import Slick from "react-native-slick";
 import ImageView from "../view/ImageView";
 import ScreenManager from "@/manager/ScreenManager";
 import NoImageView from "../view/NoImageView";
 import MediaManager from "@/manager/MediaManager";
-import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
+import SlideshowDots from "./SlideshowDots";
 
 type Props = {
   data?: any;
@@ -16,7 +15,6 @@ type Props = {
 
 const width: number = ScreenManager.window.width - Layout.space.base * 2;
 const height: number = 346;
-const dotSize: number = 9;
 
 const ImageSlideshow = ({ data }: Props) => {
   const slideshowRef = useRef<any>();
@@ -24,25 +22,8 @@ const ImageSlideshow = ({ data }: Props) => {
   const [itemsCount, setItemsCount] = useState<number>(0);
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
-  // Todo - Enable and fix or remove
-  /*
-  if (data?.length > Config.maxSlieshowImages) {
-    data = data.slice(Config.maxSlieshowImages - 1);
-  }
-  */
-
-  const onDotPress = (nextIndex: number) => {
-    let newIndex: number = 0;
-
-    if (nextIndex > activeIndex) {
-      newIndex = nextIndex + activeIndex;
-    }
-    else {
-      newIndex = nextIndex - activeIndex;
-    }
-
-    slideshowRef.current?.scrollBy(newIndex);
-    setActiveIndex(newIndex);
+  const onDotPress = (index: number) => {
+    slideshowRef.current?.scrollBy(index - activeIndex);
   };
 
   const renderItem = (item: any, index: number) => (
@@ -56,18 +37,17 @@ const ImageSlideshow = ({ data }: Props) => {
     </View>
   );
 
-  const renderDots = () => {
-    if (itemsCount > 1) {
-      return [...Array(itemsCount)].map((_, index) => (
-        <TouchableOpacity
-          key={index}
-          onPress={() => onDotPress(index)}
-          style={activeIndex === index ? styles.activeDot : styles.dot}
-        />
-      ));
-    }
-
-    return <></>;
+  const renderNoImage = () => {
+    return (
+      <NoImageView
+        width={width}
+        height={height}
+        containerStyle={{
+          height: height,
+          borderRadius: 0,
+        }}
+      />
+    );
   };
 
   const onMomentumScrollEnd = (e: any, state: any) => {
@@ -90,39 +70,28 @@ const ImageSlideshow = ({ data }: Props) => {
           <Slick
             ref={slideshowRef}
             showsPagination={false}
+            loop={false}
             onMomentumScrollEnd={onMomentumScrollEnd}
           >
             {data?.map((item: any, index: number) => renderItem(item, index))}
           </Slick>
         )}
 
-        {!data?.length && (
-          <NoImageView
-            width={width}
-            height={height}
-            containerStyle={{
-              height: height,
-              borderRadius: 0,
-            }}
-          />
-        )}
+        {!data?.length && renderNoImage()}
       </View>
 
-      <BoxView
-        direction="row"
-        justify="center"
-        align="center"
-        style={styles.dotsContaier}
-      >
-        {renderDots()}
-      </BoxView>
+      <SlideshowDots
+        activeIndex={activeIndex}
+        itemsCount={itemsCount}
+        onDotPress={(index) => onDotPress(index)}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    position: 'relative',
+    flex: 1,
   },
   slideshowContainer: {
     height: height,
@@ -132,29 +101,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-  },
-  dotsContaier: {
-    zIndex: 100,
-    width: '100%',
-    position: 'absolute',
-    bottom: -Layout.space.base * 2.9,
-    gap: dotSize,
-  },
-  dot: {
-    backgroundColor: Layout.colors.white,
-    borderColor: Layout.colors.primary,
-    borderWidth: Layout.borderWidth.base,
-    width: dotSize,
-    height: dotSize,
-    borderRadius: dotSize,
-  },
-  activeDot: {
-    backgroundColor: Layout.colors.primary,
-    borderColor: Layout.colors.primary,
-    borderWidth: Layout.borderWidth.base,
-    width: dotSize,
-    height: dotSize,
-    borderRadius: dotSize,
   },
 });
 
