@@ -38,7 +38,7 @@ const SlideshowDots = ({ activeIndex, itemsCount, onDotPress }: Props) => {
     return <></>;
   };
 
-  const test = () => {
+  const renderDot = () => {
     return (
       <View style={styles.test}>
         <Svg height="100%" width="100%">
@@ -65,7 +65,7 @@ const SlideshowDots = ({ activeIndex, itemsCount, onDotPress }: Props) => {
     );
   };
 
-  return test();
+  return renderDot();
   
   return (
     <BoxView
