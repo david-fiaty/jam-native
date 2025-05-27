@@ -31,18 +31,9 @@ const ImageSlideshow = ({ data }: Props) => {
   }
   */
 
-  const onDotPress = (nextIndex: number) => {
-    let newIndex: number = 0;
-
-    if (nextIndex > activeIndex) {
-      newIndex = nextIndex + activeIndex;
-    }
-    else {
-      newIndex = nextIndex - activeIndex;
-    }
-
-    slideshowRef.current?.scrollBy(newIndex);
-    setActiveIndex(newIndex);
+  const onDotPress = (index: number) => {
+    slideshowRef.current?.scrollBy(index - activeIndex);
+    
   };
 
   const renderItem = (item: any, index: number) => (
@@ -90,6 +81,7 @@ const ImageSlideshow = ({ data }: Props) => {
           <Slick
             ref={slideshowRef}
             showsPagination={false}
+            loop={false}
             onMomentumScrollEnd={onMomentumScrollEnd}
           >
             {data?.map((item: any, index: number) => renderItem(item, index))}
