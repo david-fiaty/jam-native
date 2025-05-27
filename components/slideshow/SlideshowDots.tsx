@@ -48,7 +48,7 @@ const SlideshowDots = ({ activeIndex, itemsCount, onDotPress }: Props) => {
       return [...Array(itemsCount)].map((_, index) => {
         let dotStyle: any = activeIndex === index ? styles.activeDot : styles.dot;
 
-        if (index < (activeIndex - 1) || index > (activeIndex + 2)) {
+        if (itemsCount > 3 && (index < (activeIndex - 1) || index > (activeIndex + 2))) {
           dotStyle = { ...dotStyle, ...styles.hiddenDot };
         }
 
