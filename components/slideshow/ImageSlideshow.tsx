@@ -24,29 +24,39 @@ const ImageSlideshow = ({ data }: Props) => {
   const [itemsCount, setItemsCount] = useState<number>(0);
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
+  // Todo - Enable and fix or remove
+  /*
+  if (data?.length > Config.maxSlieshowImages) {
+    data = data.slice(Config.maxSlieshowImages - 1);
+  }
+  */
+
   const onDotPress = (index: number) => {
     slideshowRef.current?.scrollBy(index - activeIndex);
   };
 
   const renderItem = (item: any, index: number) => (
-    <ImageView
-      uri={MediaManager.getImageUrl(item?.url)}
-      resizeMode="cover"
-      width={width}
-      height={height}
-      key={`dot-${index}`}
-    />
+    <View style={styles.slideshowItem} key={`dot-${index}`}>
+      <ImageView
+        uri={MediaManager.getImageUrl(item?.url)}
+        resizeMode="cover"
+        width={width}
+        height={height}
+      />
+    </View>
   );
 
   const renderDots = () => {
     if (itemsCount > 1) {
-      return [...Array(itemsCount)].map((_, index) => (
-        <TouchableOpacity
-          key={index}
-          onPress={() => onDotPress(index)}
-          style={activeIndex === index ? styles.activeDot : styles.dot}
-        />
-      ));
+      return [...Array(itemsCount)].map((_, index) => {        
+        return (
+          <TouchableOpacity
+            key={index}
+            onPress={() => onDotPress(index)}
+            style={activeIndex === index ? styles.activeDot : styles.dot}
+          />
+        )
+      });
     }
 
     return <></>;
@@ -111,6 +121,11 @@ const styles = StyleSheet.create({
     height: height,
     backgroundColor: Layout.colors.secondary,
   },
+  slideshowItem: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   dotsContaier: {
     zIndex: 100,
     width: '100%',
@@ -134,6 +149,9 @@ const styles = StyleSheet.create({
     height: dotSize,
     borderRadius: dotSize,
   },
+  hiddenDot: {
+    display: 'none',
+  }
 });
 
 export default memo(ImageSlideshow);
