@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { StyleSheet, View } from "react-native";
 import { Layout } from "@/constants/Layout";
 import Slick from "react-native-slick";
@@ -13,7 +13,7 @@ type Props = {
   data?: any;
 };
 
-const width: number = ScreenManager.window.width - Layout.space.base * 2;
+const width: number = ScreenManager.window.width - Layout.space.base*3;
 const height: number = 346;
 
 const ImageSlideshow = ({ data }: Props) => {
@@ -104,4 +104,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(ImageSlideshow);
+export default ImageSlideshow;
