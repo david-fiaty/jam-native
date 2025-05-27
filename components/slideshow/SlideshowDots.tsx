@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   dotsContaier: {
     zIndex: 100,
     width: '100%',
-    paddingTop: Layout.space.base,
+    paddingTop: Layout.space.base*1.3,
     gap: dotSize,
   },
   dot: {
