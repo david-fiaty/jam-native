@@ -1,24 +1,23 @@
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 
 type Props = {
   activeIndex: number;
   itemsCount: number;
-  onDotPress: (index: number) => void; 
+  onDotPress: (index: number) => void;
 };
 
-const dotSize: number = 9;
+const dotSize: number = 8.5;
 
 const SlideshowDots = ({ activeIndex, itemsCount, onDotPress }: Props) => {
-
   const renderDots = () => {
     if (itemsCount > 1) {
-      return [...Array(itemsCount)].map((_, index) => {        
+      return [...Array(itemsCount)].map((_, index) => {
         let dotStyle: any = activeIndex === index ? styles.activeDot : styles.dot;
-        
-        if (index < (activeIndex - 1) || index > (activeIndex + 2)) {
-          dotStyle = {...dotStyle, ...styles.hiddenDot};
+
+        if (itemsCount > 3 && (index < (activeIndex - 1) || index > (activeIndex + 2))) {
+          dotStyle = { ...dotStyle, ...styles.hiddenDot };
         }
 
         return (
@@ -33,7 +32,7 @@ const SlideshowDots = ({ activeIndex, itemsCount, onDotPress }: Props) => {
 
     return <></>;
   };
-
+  
   return (
     <BoxView
       direction="row"
@@ -52,7 +51,7 @@ const styles = StyleSheet.create({
     width: '100%',
     position: 'absolute',
     bottom: -Layout.space.base * 2.9,
-    gap: dotSize,
+    gap: dotSize/1.1,
   },
   dot: {
     backgroundColor: Layout.colors.white,
