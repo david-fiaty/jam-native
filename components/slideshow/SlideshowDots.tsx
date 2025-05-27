@@ -8,7 +8,7 @@ type Props = {
   onDotPress: (index: number) => void;
 };
 
-const dotSize: number = 8.5;
+const dotSize: number = 8;
 
 const SlideshowDots = ({ activeIndex, itemsCount, onDotPress }: Props) => {
   const renderDots = () => {
