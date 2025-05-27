@@ -24,13 +24,6 @@ const ImageSlideshow = ({ data }: Props) => {
   const [itemsCount, setItemsCount] = useState<number>(0);
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
-  // Todo - Enable and fix or remove
-  /*
-  if (data?.length > Config.maxSlieshowImages) {
-    data = data.slice(Config.maxSlieshowImages - 1);
-  }
-  */
-
   const onDotPress = (index: number) => {
     slideshowRef.current?.scrollBy(index - activeIndex);
   };
