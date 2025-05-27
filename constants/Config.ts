@@ -18,7 +18,6 @@ export const Config: any = {
   paginationSize: 1000,
   dateFormat: 'MMM Do YYYY HH:mm',
   messageDisplayDuration: 3500,
-  maxSlieshowImages: 10,
   maxNotificationsDisplay: 14,
   mainSection: 'jams',
   defaultLocation: {
