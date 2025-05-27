@@ -8,7 +8,7 @@ type Props = {
   onDotPress: (index: number) => void;
 };
 
-const dotSize: number = 8.5;
+const dotSize: number = 8.2;
 
 const SlideshowDots = ({ activeIndex, itemsCount, onDotPress }: Props) => {
   const renderDots = () => {
@@ -49,9 +49,8 @@ const styles = StyleSheet.create({
   dotsContaier: {
     zIndex: 100,
     width: '100%',
-    position: 'absolute',
-    bottom: -Layout.space.base * 2.9,
-    gap: dotSize/1.1,
+    paddingTop: Layout.space.base,
+    gap: dotSize,
   },
   dot: {
     backgroundColor: Layout.colors.white,
