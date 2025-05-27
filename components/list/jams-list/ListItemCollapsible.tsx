@@ -15,6 +15,19 @@ type Props = {
 
 const ListItemCollapsible = ({ row, sectorsData }: Props) => {
 
+  const truncateText = (text: string, maxLength: number) => {
+    if (text.length <= maxLength) return text;
+
+    let truncated = text.slice(0, maxLength);
+    let lastSpaceIndex = truncated.lastIndexOf(' ');
+
+    if (lastSpaceIndex > 0) {
+      truncated = truncated.slice(0, lastSpaceIndex);
+    }
+
+    return truncated + '...';
+  };
+
   const renderPreview = () => {
     let previewText: string = '';
 
@@ -75,7 +88,7 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
           {i18n.t("Start")}:{" "}
           {DataManager.formatDate(row?.item?.period?.start_datetime) || i18n.t("Unavailable")}
         </TextView>
-      </BoxView>      
+      </BoxView>
     );
   };
 
@@ -177,7 +190,7 @@ const styles = StyleSheet.create({
     width: "100%",
     gap: 0,
     backgroundColor: Layout.colors.secondary,
-    padding: Layout.space.base/2,
+    padding: Layout.space.base / 2,
     borderRadius: Layout.radius.round,
   },
 });
