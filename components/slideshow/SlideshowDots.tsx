@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     zIndex: 100,
     width: '100%',
     paddingTop: Layout.space.base,
-    gap: dotSize/1.1,
+    gap: dotSize,
   },
   dot: {
     backgroundColor: Layout.colors.white,
