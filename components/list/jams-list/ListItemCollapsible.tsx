@@ -15,18 +15,34 @@ type Props = {
 
 const ListItemCollapsible = ({ row, sectorsData }: Props) => {
 
+  const truncateText = (text: string, maxLength: number) => {
+    if (text.length <= maxLength) return text;
+
+    let truncated = text.slice(0, maxLength);
+    let lastSpaceIndex = truncated.lastIndexOf(' ');
+
+    if (lastSpaceIndex > 0) {
+      truncated = truncated.slice(0, lastSpaceIndex);
+    }
+
+    return truncated + '...';
+  };
+
   const renderPreview = () => {
     let previewText: string = '';
 
     if (row?.item?.caption?.length > 0) {
-      previewText = row?.item?.caption.trim().replace(/[\t\n\r]+/g, ' ').slice(0, 80);
+      previewText = row?.item?.caption.trim().replace(/[\t\n\r]+/g, ' ');
+      //previewText = previewText.slice(0, 80);
+
+      previewText = truncateText(previewText, 86);
     }
 
     return (
       row?.item?.caption?.length > 0 && (
         <BoxView style={styles.descriptionContainer}>
           {row?.item?.title?.length > 0 && <TextView>{row.item.title}</TextView>}
-          <TextView>{previewText}...</TextView>
+          <TextView>{previewText}</TextView>
         </BoxView>
       )
     );
@@ -75,7 +91,7 @@ const ListItemCollapsible = ({ row, sectorsData }: Props) => {
           {i18n.t("Start")}:{" "}
           {DataManager.formatDate(row?.item?.period?.start_datetime) || i18n.t("Unavailable")}
         </TextView>
-      </BoxView>      
+      </BoxView>
     );
   };
 
@@ -177,7 +193,7 @@ const styles = StyleSheet.create({
     width: "100%",
     gap: 0,
     backgroundColor: Layout.colors.secondary,
-    padding: Layout.space.base/2,
+    padding: Layout.space.base / 2,
     borderRadius: Layout.radius.round,
   },
 });
