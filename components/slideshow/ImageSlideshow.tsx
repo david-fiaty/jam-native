@@ -13,7 +13,7 @@ type Props = {
   data?: any;
 };
 
-const width: number = ScreenManager.window.width - Layout.space.base * 2;
+const width: number = ScreenManager.window.width - Layout.space.base*3;
 const height: number = 346;
 
 const ImageSlideshow = ({ data }: Props) => {
