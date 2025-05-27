@@ -47,7 +47,7 @@ const SlideshowDots = ({ activeIndex, itemsCount, onDotPress }: Props) => {
             <Circle
               cx="50%"
               cy="50%"
-              r="80"
+              r="20"
               fill="black"
             />
           </Mask>
@@ -87,6 +87,8 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+    width: 50,
+    height: 50,
   },
   dotsContaier: {
     zIndex: 100,
