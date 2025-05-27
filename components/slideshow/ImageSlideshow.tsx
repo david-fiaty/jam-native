@@ -31,18 +31,8 @@ const ImageSlideshow = ({ data }: Props) => {
   }
   */
 
-  const onDotPress = (nextIndex: number) => {
-    let newIndex: number = 0;
-
-    if (nextIndex > activeIndex) {
-      newIndex = nextIndex + activeIndex;
-    }
-    else {
-      newIndex = nextIndex - activeIndex;
-    }
-
-    slideshowRef.current?.scrollBy(newIndex);
-    setActiveIndex(newIndex);
+  const onDotPress = (index: number) => {
+    slideshowRef.current?.scrollBy(index - activeIndex);
   };
 
   const renderItem = (item: any, index: number) => (
@@ -58,13 +48,21 @@ const ImageSlideshow = ({ data }: Props) => {
 
   const renderDots = () => {
     if (itemsCount > 1) {
-      return [...Array(itemsCount)].map((_, index) => (
-        <TouchableOpacity
-          key={index}
-          onPress={() => onDotPress(index)}
-          style={activeIndex === index ? styles.activeDot : styles.dot}
-        />
-      ));
+      return [...Array(itemsCount)].map((_, index) => {        
+        let dotStyle: any = activeIndex === index ? styles.activeDot : styles.dot;
+        
+        if (index < (activeIndex - 1) || index > (activeIndex + 2)) {
+          dotStyle = {...dotStyle, ...styles.hiddenDot};
+        }
+
+        return (
+          <TouchableOpacity
+            key={index}
+            onPress={() => onDotPress(index)}
+            style={dotStyle}
+          />
+        )
+      });
     }
 
     return <></>;
@@ -90,6 +88,7 @@ const ImageSlideshow = ({ data }: Props) => {
           <Slick
             ref={slideshowRef}
             showsPagination={false}
+            loop={false}
             onMomentumScrollEnd={onMomentumScrollEnd}
           >
             {data?.map((item: any, index: number) => renderItem(item, index))}
@@ -122,7 +121,7 @@ const ImageSlideshow = ({ data }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'relative',
+    flex: 1,
   },
   slideshowContainer: {
     height: height,
@@ -156,6 +155,10 @@ const styles = StyleSheet.create({
     height: dotSize,
     borderRadius: dotSize,
   },
+  hiddenDot: {
+    display: 'none',
+    //backgroundColor: 'red',
+  }
 });
 
 export default memo(ImageSlideshow);
