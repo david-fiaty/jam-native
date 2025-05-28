@@ -109,8 +109,14 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 # Finish
 - Profile/jam image upload
 - Fix modal margin top in jam form submodals
-- Fix jammers list count missing 1
 - Social login
+- Disable phone countries not available for sms
+- Login email field => trim field value
+- Fix select lists width in web login/registration forms
+- Fix select lists width in add jam forms
+- Fix sectors list display
+- Check web google maps
+- 
 
 - review form error api responses handling
 - Extract languages and translate
@@ -195,43 +201,6 @@ https://dev.jammm.app/backend/api/v1/profiles/?items_ids=3,9,10,11,16,17,84,1957
   });
 
 
-const getModals = () => {
-  return Modals.map(({component, ...rest}) => ({...rest}));
-};
-
-
-  useEffect(() => {
-    (async () => {
-      
-      const activeModal: any = getActiveModal(screenState);
-
-      if (activeModal) {
-        setCurrentScreen(activeModal);
-        setAnimatedStyle(animationStyles[activeModal.effect]);
-        animationEffects[activeModal.effect](true);
-      } else if (currentScreen) {
-        animationEffects[currentScreen.effect](false);
-        setCurrentScreen(null);
-        setAnimatedStyle(animationStyles[currentScreen.effect]);
-      }  
-    })();
-
-  }, [screenState, currentScreen]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   const getSelectedMedia = () => {
     let mediaList: any = [...selectedMedia || []];
 
@@ -241,7 +210,8 @@ const getModals = () => {
     for (const url of (value || [])) {
       console.log(url);
     }
-*/
+    */
+
     /*
     let url: string = MediaManager.getImageUrl(value?.[0].url);
 
@@ -258,8 +228,6 @@ const getModals = () => {
 */
     
   }; 
-
-
 
 
   /*
