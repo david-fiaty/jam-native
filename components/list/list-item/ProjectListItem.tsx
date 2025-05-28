@@ -40,7 +40,7 @@ const ProjectListItem = ({ row, isAddable, isDeletable, isSelected, multiSelect,
     let urlArray: any[] = [];
 
     if (row.item?.jams?.length > 0) {
-      let projectJams: any = await EntityManager.getJams({ items_ids: row.item.jams });
+      let projectJams: any = await EntityManager.getJams(row.item.jams);
 
       projectJams.map((o: any) => {
         if (o?.medias?.[0]?.url?.length) {

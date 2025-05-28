@@ -17,7 +17,7 @@ const ProfileItemSection = ({ profileId }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setProfileItem((await EntityManager.getProfiles({ items_ids: [profileId] }))?.[0]);
+        setProfileItem((await EntityManager.getProfiles([profileId]))?.[0]);
         setIsLoaded(true);
       }
     })();
