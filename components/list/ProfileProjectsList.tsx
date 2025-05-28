@@ -81,7 +81,7 @@ const ProfileProjectsList = ({
         let images: any = {};
 
         if (idArray.length) {
-          projects = await EntityManager.getProjects({ items_ids: idArray });
+          projects = await EntityManager.getProjects(idArray);
         }
 
         (projects || []).map((item: any) => {

@@ -39,7 +39,7 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Pr
   useEffect(() => {
     (async () => {
       if (formData?.[field]?.length > 0) {
-        setCurrentValue(await EntityManager.getProfiles({ items_ids: formData[field] }));
+        setCurrentValue(await EntityManager.getProfiles(formData[field]));
       }
 
       if (!isLoaded) {

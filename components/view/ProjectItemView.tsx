@@ -19,7 +19,7 @@ const ProjectItemView = ({ projectId }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setProjectItem((await EntityManager.getProjects({ items_ids: [projectId] }))?.[0]);
+        setProjectItem((await EntityManager.getProjects([projectId]))?.[0]);
         setIsLoaded(true);
       }
     })();
