@@ -75,9 +75,9 @@ class SearchManager {
 
   async sendItemRequest(itemsIds: any) {
     const [jam, profile, project] = await Promise.all([
-      EntityManager.getJams({ items_ids: itemsIds.jam }), 
-      EntityManager.getProfiles({ items_ids: itemsIds.profile }),
-      EntityManager.getProjects({ items_ids: itemsIds.project }),
+      EntityManager.getJams(itemsIds.jam), 
+      EntityManager.getProfiles(itemsIds.profile),
+      EntityManager.getProjects(itemsIds.project),
     ]);
 
     return {

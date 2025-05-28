@@ -17,7 +17,7 @@ const ProjectItemSection = ({ projectId }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setProjectItem((await EntityManager.getJams({ items_ids: [projectId] }))?.[0]);
+        setProjectItem((await EntityManager.getJams([projectId]))?.[0]); // Todo - Check project ID is not a bug
         setIsLoaded(true);
       }
     })();
