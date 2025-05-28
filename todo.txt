@@ -195,43 +195,6 @@ https://dev.jammm.app/backend/api/v1/profiles/?items_ids=3,9,10,11,16,17,84,1957
   });
 
 
-const getModals = () => {
-  return Modals.map(({component, ...rest}) => ({...rest}));
-};
-
-
-  useEffect(() => {
-    (async () => {
-      
-      const activeModal: any = getActiveModal(screenState);
-
-      if (activeModal) {
-        setCurrentScreen(activeModal);
-        setAnimatedStyle(animationStyles[activeModal.effect]);
-        animationEffects[activeModal.effect](true);
-      } else if (currentScreen) {
-        animationEffects[currentScreen.effect](false);
-        setCurrentScreen(null);
-        setAnimatedStyle(animationStyles[currentScreen.effect]);
-      }  
-    })();
-
-  }, [screenState, currentScreen]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   const getSelectedMedia = () => {
     let mediaList: any = [...selectedMedia || []];
 
@@ -241,7 +204,8 @@ const getModals = () => {
     for (const url of (value || [])) {
       console.log(url);
     }
-*/
+    */
+
     /*
     let url: string = MediaManager.getImageUrl(value?.[0].url);
 
@@ -258,8 +222,6 @@ const getModals = () => {
 */
     
   }; 
-
-
 
 
   /*
