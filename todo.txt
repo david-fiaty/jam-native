@@ -117,6 +117,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Fix sectors list display
 - Fix profile and search views scroll
 - Check web google maps
+- Image slideshow => 2 sync horizontal flat lists?
 
 - review form error api responses handling
 - Extract languages and translate
