@@ -44,15 +44,6 @@ const JammersList = ({ jamId, jammersIds }: Props) => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log('---', jamId)
-  console.log(typeof jammersIds)
-console.log(jammersIds.join(','))
-  /*
-  if (jammersIds?.length) {
-    console.log(jammersIds.length.join(','))
-  }
-    */
-
   return (
     <View style={Layout.borderedListContainer}>
       {profiles?.length > 0 &&
