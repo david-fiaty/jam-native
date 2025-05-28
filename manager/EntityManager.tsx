@@ -16,8 +16,12 @@ class EntityManager {
     return await DataManager.get('listProfiles', {...defaults, ...options}); 
   }
 
-  async getProfiles(options?: any) {
+  async getProfiles(idArray: any) {
     let defaults: any = {};
+    let options: any = {
+      items_ids: idArray,
+    };
+
     let response: any = await DataManager.get('getProfiles', {...defaults, ...options}); 
 
     return response;
@@ -81,9 +85,11 @@ class EntityManager {
     return await DataManager.get('listProjects', {...defaults, ...options}); 
   }
 
-  async getProjects(options?: any) {
-    options = options || {};
+  async getProjects(idArray: any) {
     let defaults = {};
+    let options = {
+      items_ids: idArray,
+    };
     
     return await DataManager.get('getProjects', {...defaults, ...options}); 
   }

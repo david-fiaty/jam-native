@@ -35,7 +35,7 @@ const JammersList = ({ jamId, jammersIds }: Props) => {
 
   useEffect(() => {
     (async () => {
-      setProfiles(await EntityManager.getProfiles({ items_ids: jammersIds }));
+      setProfiles(await EntityManager.getProfiles(jammersIds));
       setIsLoaded(true);
     })();
 
