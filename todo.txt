@@ -110,7 +110,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Profile/jam image upload
 - Fix modal margin top in jam form submodals
 - Social login
-- Block phone countries not available for sms
+- Disable phone countries not available for sms
 
 - review form error api responses handling
 - Extract languages and translate
