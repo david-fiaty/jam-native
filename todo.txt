@@ -112,6 +112,11 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Social login
 - Disable phone countries not available for sms
 - Login email field => trim field value
+- Fix select lists width in web login/registration forms
+- Fix select lists width in add jam forms
+- Fix sectors list display
+- Check web google maps
+- 
 
 - review form error api responses handling
 - Extract languages and translate
