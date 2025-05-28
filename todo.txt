@@ -111,6 +111,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Fix modal margin top in jam form submodals
 - Social login
 - Disable phone countries not available for sms
+- Login email field => trim field value
 
 - review form error api responses handling
 - Extract languages and translate
