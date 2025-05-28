@@ -50,7 +50,7 @@ const JamsList = ({ idArray }: Props) => {
       data = (await SearchManager.getResults())?.jam;
     }
 
-    setSearchData([...searchData, ...data]);
+    setSearchData(prevData => [...prevData, ...data]);
   };
 
   useEffect(() => {
@@ -77,7 +77,7 @@ const JamsList = ({ idArray }: Props) => {
         renderItem={renderItem}        
         keyExtractor={(row: any, index?: number) => `${row.id}-${index}`} 
         onEndReachedThreshold={0.5}
-        onEndReached={async () => await loadSearchData()} 
+        onEndReached={() => loadSearchData()} 
       />
     </BoxView>
   );
