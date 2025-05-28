@@ -81,7 +81,7 @@ const ProjectJamsList = ({ resource, field, title, idArray, addButton, allButton
         let jams: any = [];
 
         if (idArray && idArray.length) {
-          jams = await EntityManager.getJams({ items_ids: idArray });
+          jams = await EntityManager.getJams(idArray);
         }
 
         if (addButton === true) {

@@ -54,11 +54,22 @@ class EntityManager {
     return await DataManager.get('listJams', {...defaults, ...options}); 
   }
 
+  async getJams(idArray: any) {
+    let defaults = {};
+    let options = {
+      items_ids: idArray,
+    };
+
+    return await DataManager.get('getJams', {...defaults, ...options}); 
+  }
+
+  /*
   async getJams(options?: any) {
     let defaults = {};
 
     return await DataManager.get('getJams', {...defaults, ...options}); 
   }
+    */
 
   async listProjects(options?: any) {
     let profileId = await UserManager.getProfileId();
@@ -85,7 +96,7 @@ class EntityManager {
   }
 
   async getProjectImageUrl(entity: any) {
-    let projectJams = await this.getJams({items_ids: entity?.jams});
+    let projectJams = await this.getJams(entity?.jams);
     let projectImages = projectJams.map((item: any) => item?.medias?.[0]?.url).filter((value: any) => (value));
 
     if (projectImages?.[0]?.length) {
@@ -218,7 +229,7 @@ class EntityManager {
   }
 
   async shareJam(entityId: any) {
-    let entity = await this.getJams({items_ids: [entityId]});
+    let entity = await this.getJams([entityId]);
     let message: string = '';
 
     if (entity?.title?.length) {
