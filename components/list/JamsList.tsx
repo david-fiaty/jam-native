@@ -74,10 +74,7 @@ const JamsList = ({ idArray }: Props) => {
       <ListView
         data={searchData}
         contentContainerStyle={Layout.listContainer}
-        renderItem={renderItem}
-        keyExtractor={(item: any) => item.id.toString()}
-        
-        // Todo - Implement infinite scroll
+        renderItem={renderItem}        
         keyExtractor={(row: any, index?: number) => `${row.id}-${index}`} 
         onEndReachedThreshold={0.5}
         onEndReached={async () => await loadSearchData()} 
