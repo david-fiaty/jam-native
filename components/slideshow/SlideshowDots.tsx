@@ -47,7 +47,7 @@ const SlideshowDots = ({ activeIndex, itemsCount, onDotPress }: Props) => {
 
 const styles = StyleSheet.create({
   dotsContaier: {
-    zIndex: 100,
+    //zIndex: 100,
     width: '100%',
     paddingTop: Layout.space.base*1.3,
     gap: dotSize,
