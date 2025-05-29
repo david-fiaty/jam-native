@@ -1,200 +1,76 @@
-import { StyleSheet } from "react-native";
-import { Layout } from "@/constants/Layout";
-import BoxView from "@/components/view/BoxView";
-import TextView from "@/components/view/TextView";
-import CollapsibleView from "@/components/view/CollapsibleView";
-import IconView from "@/components/view/IconView";
-import StaticData from "@/constants/StaticData";
-import i18n from "@/translation/i18n";
-import DataManager from "@/manager/DataManager";
+import React, { useState } from 'react';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { Layout } from '@/constants/Layout';
+import Collapsible from 'react-native-collapsible';
 
 type Props = {
-  row?: any;
-  sectorsData?: any;
+  label?: any;
+  openedLabel?: any;
+  content?: any;
+  headerStyle?: any;
+  preview?: any;
 };
 
-const ListItemCollapsible = ({ row, sectorsData }: Props) => {
+const ListItemCollapsible = ({ label, openedLabel, content, headerStyle, preview }: Props) => {
+  const [isCollapsed, setIsCollapsed] = useState(true);
+  let buttonLabel = label;
 
-  const truncateText = (text: string, maxLength: number) => {
-    if (text.length <= maxLength) return text;
-
-    let truncated = text.slice(0, maxLength);
-    let lastSpaceIndex = truncated.lastIndexOf(' ');
-
-    if (lastSpaceIndex > 0) {
-      truncated = truncated.slice(0, lastSpaceIndex);
-    }
-
-    return truncated + '...';
-  };
-
-  const renderPreview = () => {
-    let previewText: string = '';
-
-    if (row?.item?.caption?.length > 0) {
-      previewText = row?.item?.caption.trim().replace(/[\t\n\r]+/g, ' ');
-      //previewText = previewText.slice(0, 80);
-
-      previewText = truncateText(previewText, 86);
-    }
-
-    return (
-      row?.item?.caption?.length > 0 && (
-        <BoxView style={styles.descriptionContainer}>
-          {row?.item?.title?.length > 0 && <TextView>{row.item.title}</TextView>}
-          <TextView>{previewText}</TextView>
-        </BoxView>
-      )
-    );
-  };
-
-  const renderDescription = () => {
-    return (
-      row?.item?.caption?.length > 0 && (
-        <BoxView style={styles.descriptionContainer}>
-          {row?.item?.title?.length > 0 && <TextView>{row.item.title}</TextView>}
-          <TextView>{row?.item?.caption}</TextView>
-        </BoxView>
-      )
-    );
-  };
-
-  const renderLocation = () => {
-    return (
-      <BoxView
-        direction="row"
-        align="center"
-        justify="flex-start"
-        style={styles.detail}
-      >
-        <IconView name="arrow" size={12} theme="transparent" />
-        <TextView>
-          {i18n.t("Location")}:{" "}
-          {StaticData.locationTypes.find(
-            (o: any) => o.id == row?.item?.location_type
-          )?.label || i18n.t("Unavailable")}
-        </TextView>
-      </BoxView>
-    );
-  };
-
-  const renderStart = () => {
-    return (
-      <BoxView
-        direction="row"
-        align="center"
-        justify="flex-start"
-        style={styles.detail}
-      >
-        <IconView name="arrow" size={12} theme="transparent" />
-        <TextView>
-          {i18n.t("Start")}:{" "}
-          {DataManager.formatDate(row?.item?.period?.start_datetime) || i18n.t("Unavailable")}
-        </TextView>
-      </BoxView>
-    );
-  };
-
-  const renderEnd = () => {
-    return (
-      <BoxView
-        direction="row"
-        align="center"
-        justify="flex-start"
-        style={styles.detail}
-      >
-        <IconView name="arrow" size={12} theme="transparent" />
-        <TextView>
-          {i18n.t("End")}:{" "}
-          {DataManager.formatDate(row?.item?.period?.end_datetime) || i18n.t("Unavailable")}
-        </TextView>
-      </BoxView>
-    );
-  };
-
-  const renderSector = () => {
-    let firstSector: any = sectorsData?.find((o: any) => o.id == row?.item?.sectors?.[0]);
-
-    return (
-      <BoxView
-        direction="row"
-        align="center"
-        justify="flex-start"
-        style={styles.detail}
-      >
-        <IconView name="arrow" size={12} theme="transparent" />
-        <TextView>
-          {i18n.t("Industry")}:{" "}
-          {firstSector ? firstSector?.name : i18n.t("Unavailable")}
-        </TextView>
-      </BoxView>
-    );
-  };
-
-  const renderSubsector = () => {
-    let firstSector: any = sectorsData?.find((o: any) => o.id == row?.item?.sectors?.[0]);
-
-    return (
-      <BoxView
-        direction="row"
-        align="center"
-        justify="flex-start"
-        style={styles.detail}
-      >
-        <IconView name="arrow" size={12} theme="transparent" />
-        <TextView>
-          {i18n.t("Sector")}:{" "}
-          {firstSector ? firstSector?.sub_sectors[0]?.name : i18n.t("Unavailable")}
-        </TextView>
-      </BoxView>
-    );
-  };
-
+  if (!isCollapsed && openedLabel) {
+    buttonLabel = openedLabel;
+  }
+  
   return (
-    <BoxView style={styles.container}>
-      <CollapsibleView
-        label={<TextView>{i18n.t("View more.")}</TextView>}
-        openedLabel={<TextView>{i18n.t("View less.")}</TextView>}
-        preview={renderPreview()}
-        content={
-          <BoxView
-            direction="column"
-            align="flex-start"
-            style={styles.detailsContainer}
-          >
-            {renderDescription()}
-            {renderLocation()}
-            {renderStart()}
-            {renderEnd()}
-            {renderSector()}
-            {renderSubsector()}
-          </BoxView>
-        }
-      />
-    </BoxView>
+    <View style={styles.container}>
+      {isCollapsed && preview}
+
+      {isCollapsed && (
+        <TouchableOpacity
+          onPress={() => setIsCollapsed((prev) => !prev)}
+          style={styles.topButton}
+        >
+          <View style={headerStyle}>{buttonLabel}</View>
+        </TouchableOpacity>
+      )}
+
+      <Collapsible
+        collapsed={isCollapsed}
+        align="center"
+      >
+        <View style={styles.content}>
+          {content}
+        </View>
+      </Collapsible>
+
+      {!isCollapsed && (
+        <TouchableOpacity
+          onPress={() => setIsCollapsed((prev) => !prev)}
+          style={styles.bottomButton}
+        >
+          <View style={headerStyle}>{buttonLabel}</View>
+        </TouchableOpacity>
+      )}
+    </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 0,
-    paddingBottom: Layout.space.base,
-    paddingHorizontal: Layout.space.base,
+    width: '100%',
   },
-  descriptionContainer: {
+  content: {
     margin: 0,
     padding: 0,
+    width: '100%',
   },
-  detailsContainer: {
-    gap: Layout.space.base,
-    width: "100%",
+  topButton: {
+    margin: 0,
+    padding: 0,
+    marginTop: Layout.space.base,
   },
-  detail: {
-    width: "100%",
-    gap: 0,
-    backgroundColor: Layout.colors.secondary,
-    padding: Layout.space.base / 2,
-    borderRadius: Layout.radius.round,
+  bottomButton: {
+    margin: 0,
+    padding: 0,
+    marginTop: Layout.space.base,
   },
 });
 
