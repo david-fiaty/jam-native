@@ -13,7 +13,7 @@ type Props = {
   sectorsData?: any;
 };
 
-const ListItemCollapsible = ({ row, sectorsData }: Props) => {
+const ListItemDetails = ({ row, sectorsData }: Props) => {
 
   const truncateText = (text: string, maxLength: number) => {
     if (text.length <= maxLength) return text;
@@ -198,4 +198,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ListItemCollapsible;
+export default ListItemDetails;

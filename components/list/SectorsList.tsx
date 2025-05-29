@@ -106,6 +106,8 @@ const SectorsList = ({ resource, field }: Props) => {
     
   }, [isLoaded, sectorsData]);
 
+  console.log(sectorsData);
+
   return (
     <BoxView
       align="flex-start"
