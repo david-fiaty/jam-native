@@ -9,6 +9,7 @@ import EntityManager from "@/manager/EntityManager";
 import ListItem from "./jams-list/ListItem";
 import UserManager from "@/manager/UserManager";
 import SearchManager from "@/manager/SearchManager";
+import { Config } from "@/constants/Config";
 
 type Props = {
   idArray?: any;
@@ -77,7 +78,7 @@ const JamsList = ({ idArray }: Props) => {
         renderItem={renderItem}        
         keyExtractor={(row: any, index?: number) => `${row.id}-${index}`} 
         onEndReachedThreshold={0.5}
-        onEndReached={() => loadSearchData()} 
+        onEndReached={() => Config.infiniteScrollEnabled === true && loadSearchData()} 
       />
     </BoxView>
   );

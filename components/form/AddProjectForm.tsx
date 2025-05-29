@@ -59,7 +59,7 @@ const AddProjectForm = () => {
       if (!isLoaded) {
         //FormManager.resetForm(resource); // Todo - Fix form reset on web
         setProfileId(await UserManager.getProfileId());
-        
+
         dispatch(setFormData<any>({
           resource: resource,
           key: null,
@@ -83,87 +83,89 @@ const AddProjectForm = () => {
       scroll={true}
       style={[Layout.formContainer, styles.container]}
     >
-      <TextView>{i18n.t("Name")}</TextView>
-      <InputTextField
-        value={formData?.name}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'name', value, ['string'])}
-      />
-      {FormManager.renderError('name')}
-
-      <TextView>{i18n.t("Description")}</TextView>
-      <InputTextareaField
-        value={formData?.description}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'description', value, ['string'])}
-      />
-      {FormManager.renderError('description')}
-
-      <TextView>{i18n.t("Privacy status")}</TextView>
-      <PrivacyStatusField
-        value={formData?.privacy_status}
-        onChangeValue={(option: any) => FormManager.updateField(resource, 'privay_status', option.value, ['string'])}
-      />
-      {FormManager.renderError('privacy_status')}
-
-      <TextView>{i18n.t('Start date')}</TextView>
-      <DatePickerField
-        value={formData?.period?.start_datetime}
-        onChangeValue={(value: any) =>
-          updateField('period', {
-            ...(formData?.period || {}),
-            ...{ start_datetime: DataManager.formatDate(value) },
-          })
-        }
-      />
-
-      <TextView>{i18n.t('End date')}</TextView>
-      <DatePickerField
-        value={formData?.period?.end_datetime}
-        onChangeValue={(value: any) =>
-          updateField('period', {
-            ...(formData?.period || {}),
-            ...{ end_datetime: DataManager.formatDate(value) },
-          })
-        }
-      />
-
-      <TextView>{i18n.t('Select countries')}</TextView>
-      <CountriesField
-        resource={resource}
-        field="scope_countries_codes"
-        placeholder={i18n.t('Select countries')}
-        value={formData?.scope_countries_codes}
-        onPress={() => ModalManager.toggleModal('CountriesList', {
-          resource: resource,
-          field: 'scope_countries_codes',
-        })}
-      />
-
-      <TextView>{i18n.t('Select your sectors')}</TextView>
-      <SectorsField
-        resource={resource}
-        field="sectors_ids"
-        placeholder={i18n.t('Select your sectors')}
-        value={formData?.sectors_ids}
-        onPress={() => ModalManager.toggleModal('SectorsList', {
-          resource: resource,
-          field: 'sectors_ids',
-        })}
-      />
-
-      <TextView>{i18n.t('Project Jams')}</TextView>
-      <ProjectJamsField 
-        resource={resource}
-        field="jams_ids"
-        value={formData?.jams_ids}
-      />
-
-      <View style={styles.subtmitButtoncontainer}>
-        <ButtonView
-          label={i18n.t("Submit")}
-          isProcessing={isProcessing}
-          onPress={submitForm}
+      <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
+        <TextView>{i18n.t("Name")}</TextView>
+        <InputTextField
+          value={formData?.name}
+          onChangeText={(value: string) => FormManager.updateField(resource, 'name', value, ['string'])}
         />
-      </View>
+        {FormManager.renderError('name')}
+
+        <TextView>{i18n.t("Description")}</TextView>
+        <InputTextareaField
+          value={formData?.description}
+          onChangeText={(value: string) => FormManager.updateField(resource, 'description', value, ['string'])}
+        />
+        {FormManager.renderError('description')}
+
+        <TextView>{i18n.t("Privacy status")}</TextView>
+        <PrivacyStatusField
+          value={formData?.privacy_status}
+          onChangeValue={(option: any) => FormManager.updateField(resource, 'privay_status', option.value, ['string'])}
+        />
+        {FormManager.renderError('privacy_status')}
+
+        <TextView>{i18n.t('Start date')}</TextView>
+        <DatePickerField
+          value={formData?.period?.start_datetime}
+          onChangeValue={(value: any) =>
+            updateField('period', {
+              ...(formData?.period || {}),
+              ...{ start_datetime: DataManager.formatDate(value) },
+            })
+          }
+        />
+
+        <TextView>{i18n.t('End date')}</TextView>
+        <DatePickerField
+          value={formData?.period?.end_datetime}
+          onChangeValue={(value: any) =>
+            updateField('period', {
+              ...(formData?.period || {}),
+              ...{ end_datetime: DataManager.formatDate(value) },
+            })
+          }
+        />
+
+        <TextView>{i18n.t('Select countries')}</TextView>
+        <CountriesField
+          resource={resource}
+          field="scope_countries_codes"
+          placeholder={i18n.t('Select countries')}
+          value={formData?.scope_countries_codes}
+          onPress={() => ModalManager.toggleModal('CountriesList', {
+            resource: resource,
+            field: 'scope_countries_codes',
+          })}
+        />
+
+        <TextView>{i18n.t('Select your sectors')}</TextView>
+        <SectorsField
+          resource={resource}
+          field="sectors_ids"
+          placeholder={i18n.t('Select your sectors')}
+          value={formData?.sectors_ids}
+          onPress={() => ModalManager.toggleModal('SectorsList', {
+            resource: resource,
+            field: 'sectors_ids',
+          })}
+        />
+
+        <TextView>{i18n.t('Project Jams')}</TextView>
+        <ProjectJamsField
+          resource={resource}
+          field="jams_ids"
+          value={formData?.jams_ids}
+        />
+
+        <View style={styles.subtmitButtoncontainer}>
+          <ButtonView
+            label={i18n.t("Submit")}
+            isProcessing={isProcessing}
+            onPress={submitForm}
+          />
+        </View>
+      </BoxView>
     </BoxView>
   );
 };
@@ -172,6 +174,11 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
+  },
+  formContainer: {
+    maxWidth: '100%',
+    flexShrink: 1,
+    paddingTop: Layout.space.base,
   },
   addButtonContainer: {
     width: '100%',
