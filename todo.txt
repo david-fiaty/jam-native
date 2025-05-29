@@ -112,7 +112,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Social login
 - Disable phone countries not available for sms
 - Login email field => trim field value
-- Fix select lists width in web login/registration forms
+- Fix select lists width in web 
 - Fix profile and search views scroll
 - Check web google maps
 - Image slideshow => 2 sync horizontal flat lists?
