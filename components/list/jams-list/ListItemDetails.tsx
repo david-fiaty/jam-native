@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
 import TextView from "@/components/view/TextView";
-import CollapsibleView from "@/components/view/CollapsibleView";
+import ListItemCollapsible from "./ListItemCollapsible";
 import IconView from "@/components/view/IconView";
 import StaticData from "@/constants/StaticData";
 import i18n from "@/translation/i18n";
@@ -152,7 +152,7 @@ const ListItemDetails = ({ row, sectorsData }: Props) => {
 
   return (
     <BoxView style={styles.container}>
-      <CollapsibleView
+      <ListItemCollapsible
         label={<TextView>{i18n.t("View more.")}</TextView>}
         openedLabel={<TextView>{i18n.t("View less.")}</TextView>}
         preview={renderPreview()}
