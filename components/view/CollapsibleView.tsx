@@ -4,51 +4,33 @@ import { Layout } from '@/constants/Layout';
 import Collapsible from 'react-native-collapsible';
 
 type Props = {
-  label?: any;
-  openedLabel?: any;
-  content?: any;
-  headerStyle?: any;
-  preview?: any;
+  label?: any,
+  openedLabel?: any,
+  content?: any,
+  headerStyle?: any,
 };
 
-const CollapsibleView = ({ label, openedLabel, content, headerStyle, preview }: Props) => {
-  const [isCollapsed, setIsCollapsed] = useState(true);
+const CollapsibleView = ({label, openedLabel, content, headerStyle}: Props) => {
+  const [collapsed, setCollapsed] = useState(true);
   let buttonLabel = label;
-
-  if (!isCollapsed && openedLabel) {
+  
+  if (!collapsed && openedLabel) {
     buttonLabel = openedLabel;
   }
-  
+
   return (
     <View style={styles.container}>
-      {isCollapsed && preview}
-
-      {isCollapsed && (
-        <TouchableOpacity
-          onPress={() => setIsCollapsed((prev) => !prev)}
-          style={styles.topButton}
-        >
-          <View style={headerStyle}>{buttonLabel}</View>
-        </TouchableOpacity>
-      )}
-
-      <Collapsible
-        collapsed={isCollapsed}
+      <TouchableOpacity onPress={() => setCollapsed((prev) => !prev)}>
+        <View style={headerStyle}>{buttonLabel}</View>
+      </TouchableOpacity>
+      <Collapsible 
+        collapsed={collapsed} 
         align="center"
       >
         <View style={styles.content}>
           {content}
         </View>
       </Collapsible>
-
-      {!isCollapsed && (
-        <TouchableOpacity
-          onPress={() => setIsCollapsed((prev) => !prev)}
-          style={styles.bottomButton}
-        >
-          <View style={headerStyle}>{buttonLabel}</View>
-        </TouchableOpacity>
-      )}
     </View>
   );
 }
@@ -58,19 +40,8 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   content: {
-    margin: 0,
-    padding: 0,
+    marginTop: Layout.space.base,
     width: '100%',
-  },
-  topButton: {
-    margin: 0,
-    padding: 0,
-    marginTop: Layout.space.base,
-  },
-  bottomButton: {
-    margin: 0,
-    padding: 0,
-    marginTop: Layout.space.base,
   },
 });
 
