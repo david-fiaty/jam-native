@@ -3,7 +3,7 @@ import { Layout } from "@/constants/Layout";
 import ListItemHeader from "./ListItemHeader";
 import ListItemImage from "./ListItemImage";
 import ListItemToolbar from "./ListItemToolbar";
-import ListItemCollapsible from "./ListItemCollapsible";
+import ListItemDetails from "./ListItemDetails";
 
 type Props = {
   row?: any;
@@ -22,7 +22,7 @@ const ListItem = ({ row, sectorsData, profileData, onListItemAction }: Props) =>
         profileData={profileData} 
         onListItemAction={onListItemAction}
       />
-      <ListItemCollapsible row={row} sectorsData={sectorsData} />
+      <ListItemDetails row={row} sectorsData={sectorsData} />
     </View>
   );
 };
