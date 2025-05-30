@@ -96,7 +96,7 @@ const JamsMapView = ({ idArray }: Props) => {
     }
   }, [isLoaded, searchState]);
 
-  //if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
+  if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
 
   return (
     <LoadScript googleMapsApiKey={Config.mapApiKey}>
