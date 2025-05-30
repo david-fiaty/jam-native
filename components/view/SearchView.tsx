@@ -13,7 +13,7 @@ import TabsView from "./TabsView";
 const SearchView = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [searchData, setSearchData] = useState<any[]>([]);
+  const [searchData, setSearchData] = useState<any>([]);
   const searchState: any = useSelector((state: any) => state.search);
   
   useEffect(() => {
