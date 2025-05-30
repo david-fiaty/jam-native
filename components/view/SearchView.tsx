@@ -9,6 +9,7 @@ import SearchJamsList from "../list/SearchJamsList";
 import SearchProfilesList from "../list/SearchProfilesList";
 import SearchProjectsList from "../list/SearchProjectsList";
 import TabsView from "./TabsView";
+import BoxView from "./BoxView";
 
 const SearchView = () => {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const SearchView = () => {
   if (!isLoaded) return <SpinnerView />;
   
   return (
-    <>
+    <BoxView style={styles.container}>
       {/* Search tabs */}
       <TabsView 
         tabs={StaticData.searchTabs} 
@@ -61,7 +62,7 @@ const SearchView = () => {
           filter={searchState.currentTab} 
         />
       }
-    </>
+    </BoxView>
   );
 };
 
