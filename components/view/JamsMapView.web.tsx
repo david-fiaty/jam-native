@@ -34,8 +34,8 @@ const JamsMapView = ({ idArray }: Props) => {
     }
 
     return {
-      latitude: latitude,
-      longitude: longitude,
+      lat: latitude,
+      lng: longitude,
       //latitudeDelta: latitudeDelta,
       //longitudeDelta: longitudeDelta,
     };
