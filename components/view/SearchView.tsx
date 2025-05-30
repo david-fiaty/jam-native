@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
-import { Layout } from "@/constants/Layout";
 import StaticData from "@/constants/StaticData";
 import SpinnerView from "./SpinnerView";
 import SearchManager from "@/manager/SearchManager";
@@ -9,7 +8,6 @@ import SearchJamsList from "../list/SearchJamsList";
 import SearchProfilesList from "../list/SearchProfilesList";
 import SearchProjectsList from "../list/SearchProjectsList";
 import TabsView from "./TabsView";
-import BoxView from "./BoxView";
 
 const SearchView = () => {
   const dispatch = useDispatch();
@@ -31,7 +29,7 @@ const SearchView = () => {
   if (!isLoaded) return <SpinnerView />;
   
   return (
-    <BoxView style={styles.container}>
+    <>
       {/* Search tabs */}
       <TabsView 
         tabs={StaticData.searchTabs} 
@@ -62,27 +60,8 @@ const SearchView = () => {
           filter={searchState.currentTab} 
         />
       }
-    </BoxView>
+    </>
   );
-};
-
-const styles = {
-  container: {
-    width: '100%',
-  },
-  tabContainer: {
-    marginTop: Layout.space.base/2,
-    marginBottom: Layout.space.base,
-  },
-  tabItem: {
-    paddingHorizontal: Layout.space.base,
-    paddingBottom: Layout.space.base,
-    borderBottomWidth: Layout.borderWidth.base,
-    borderBottomColor: Layout.colors.primary,
-  },
-  currentTab: { 
-    fontWeight: 'bold',
-  },
 };
 
 export default SearchView;
