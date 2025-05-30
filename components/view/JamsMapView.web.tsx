@@ -42,10 +42,10 @@ const JamsMapView = ({ idArray }: Props) => {
   };
 
   const getMarkerCoordinate = (item: any) => {
-    return {
-      latitude: parseFloat(item?.geolocation_latitude),
-      longitude: parseFloat(item?.geolocation_longitude),
-    };
+    const lat = item?.geolocation_latitude;
+    const lng = item?.geolocation_longitude;
+
+    return { lat, lng };
   };
 
   const getMarkerTitle = (item: any) => {
@@ -59,12 +59,9 @@ const JamsMapView = ({ idArray }: Props) => {
   const renderJamMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
       return (
-        <Marker
+        <Marker 
           key={item.id}
-          title={getMarkerTitle(item)}
-          description={getMarkerDescription(item)}
-          coordinate={getMarkerCoordinate(item)}
-          icon={markerImage}
+          position={getMarkerCoordinate(item)}
         />
       );
     }
