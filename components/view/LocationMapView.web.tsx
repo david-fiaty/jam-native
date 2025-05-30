@@ -68,7 +68,7 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
     }
   }, [isLoaded]);
 
-  if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
+  //if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
 
   return (
     <LoadScript googleMapsApiKey={Config.mapApiKey}>
