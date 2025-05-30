@@ -33,6 +33,9 @@ const ModalView = ({ currentSection, style }: Props) => {
   const getContainerStyle = () => {
     let top: number = 0;
 
+    console.log('active sections', sectionState.active.length)
+    console.log('active modals', modalState.active.length)
+
     if (sectionState.active.length > 4 && modalState.active.length > 1) {
       // Todo - Fix modal top position in search jams => jam modals
       //top = -Layout.space.base*3.6; 
