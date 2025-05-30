@@ -21,7 +21,7 @@ const JamsMapView = ({ idArray }: Props) => {
   const [searchData, setSearchData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search);
   const markerImage = require('@/assets/images/logo-55.png');
-  
+
   const getInitialRegion = () => {
     let latitude: any = Config.defaultLocation.latitude;
     let longitude: any = Config.defaultLocation.longitude;
@@ -30,14 +30,14 @@ const JamsMapView = ({ idArray }: Props) => {
 
     if (currentLocation?.latitude && currentLocation?.longitude) {
       latitude = currentLocation.latitude;
-      longitude = currentLocation.longitude; 
+      longitude = currentLocation.longitude;
     }
 
     return {
       latitude: latitude,
       longitude: longitude,
-      latitudeDelta: latitudeDelta,
-      longitudeDelta: longitudeDelta,
+      //latitudeDelta: latitudeDelta,
+      //longitudeDelta: longitudeDelta,
     };
   };
 
@@ -64,7 +64,7 @@ const JamsMapView = ({ idArray }: Props) => {
           title={getMarkerTitle(item)}
           description={getMarkerDescription(item)}
           coordinate={getMarkerCoordinate(item)}
-          icon={markerImage} 
+          icon={markerImage}
         />
       );
     }
@@ -74,7 +74,7 @@ const JamsMapView = ({ idArray }: Props) => {
 
   const loadSearchData = async () => {
     let data: any[] = [];
-    
+
     if (idArray && idArray?.length > 0) {
       data = await EntityManager.getJams(idArray);
     }
@@ -96,23 +96,25 @@ const JamsMapView = ({ idArray }: Props) => {
     }
   }, [isLoaded, searchState]);
 
-  if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
-  
+  //if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
+
   return (
     <LoadScript googleMapsApiKey={Config.mapApiKey}>
-      <View style={[Layout.screenContent, styles.container]}>
-        <GoogleMap 
-          mapContainerStyle={styles.map} 
-          center={getInitialRegion()} 
-          zoom={7} 
-          options={{
-            styles: Layout.mapStyle,
-            disableDefaultUI: true,
-          }}
-        >
-          {searchData?.map((item: any) => renderJamMarker(item))}
-        </GoogleMap>
-      </View>
+      <TouchableWithoutFeedback>
+        <View style={[Layout.screenContent, styles.container]}>
+          <GoogleMap
+            mapContainerStyle={styles.map}
+            center={getInitialRegion()}
+            zoom={7}
+            options={{
+              styles: Layout.mapStyle,
+              disableDefaultUI: true,
+            }}
+          >
+            {searchData?.map((item: any) => renderJamMarker(item))}
+          </GoogleMap>
+        </View>
+      </TouchableWithoutFeedback>
     </LoadScript>
   );
 };
