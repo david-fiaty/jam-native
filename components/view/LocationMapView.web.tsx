@@ -1,11 +1,11 @@
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { Config } from "@/constants/Config";
 import { useDispatch } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
-
-const containerStyle = { width: "100%", height: "100%" };
-const center = { lat: 37.7749, lng: -122.4194 };
+import { Layout } from "@/constants/Layout";
+import UserManager from "@/manager/UserManager";
 
 type Props = {
   resource: string,
@@ -14,41 +14,95 @@ type Props = {
 };
 
 const LocationMapView = ({ resource, latitude, longitude }: Props) => {
+  const mapRef = useRef<any>();
   const dispatch = useDispatch();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
+  const [currentLocation, setCurrentLocation] = useState<any>(null);
+
+  const getInitialRegion = () => {
+    let latitude: any = Config.defaultLocation.latitude;
+    let longitude: any = Config.defaultLocation.longitude;
+    let latitudeDelta: any = 0.2;
+    let longitudeDelta: any = 0.2;
+
+    if (currentLocation?.latitude && currentLocation?.longitude) {
+      latitude = currentLocation.latitude;
+      longitude = currentLocation.longitude;
+    }
+
+    return {
+      lat: latitude,
+      lng: longitude,
+      //latitudeDelta: latitudeDelta,
+      //longitudeDelta: longitudeDelta,
+    };
+  };
 
   const onMapPress = async (event: any) => {
     const lat = event.latLng.lat();
     const lng = event.latLng.lng();
     setSelectedLocation({ lat, lng });
 
-    dispatch(setFormData<any>({ 
+    dispatch(setFormData<any>({
       resource: resource,
-      key: latitude.field, 
-      value: lat, 
+      key: latitude.field,
+      value: lat,
     }));
 
-    dispatch(setFormData<any>({ 
+    dispatch(setFormData<any>({
       resource: resource,
-      key: longitude.field, 
-      value: lng, 
+      key: longitude.field,
+      value: lng,
     }));
   };
 
+  useEffect(() => {
+    (async () => {
+      setCurrentLocation(await UserManager.getLocation());
+    })();
+
+    if (!isLoaded) {
+      setIsLoaded(true);
+    }
+  }, [isLoaded]);
+
+
+
   return (
     <LoadScript googleMapsApiKey={Config.mapApiKey}>
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={10}
-        onClick={(e: any) => onMapPress(e)}
-      >
-        {selectedLocation && (
-          <Marker position={selectedLocation} />
-        )}
-      </GoogleMap>
+      <TouchableWithoutFeedback>
+        <View style={[Layout.screenContent, styles.container]}>
+          <GoogleMap
+            mapContainerStyle={styles.map}
+            center={getInitialRegion()}
+            zoom={7}
+            onClick={(e: any) => onMapPress(e)}
+            options={{
+              styles: Layout.mapStyle,
+              disableDefaultUI: true,
+            }}
+          >
+            {selectedLocation && (
+              <Marker position={selectedLocation} />
+            )}
+          </GoogleMap>
+        </View>
+      </TouchableWithoutFeedback>
     </LoadScript>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 0,
+    width: '100%',
+    flexGrow: 1,
+    backgroundColor: Layout.colors.white,
+  },
+  map: {
+    flex: 1,
+  },
+});
 
 export default LocationMapView;
