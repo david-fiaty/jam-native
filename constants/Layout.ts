@@ -155,10 +155,7 @@ export const Layout = {
     borderWidth: borderWidth.base, 
     borderColor: colors.secondary, 
     borderRadius: radius.round,
-    flexDirection: 'row',
-    alignItems: 'center',
     height: space.base*4,
-    justifyContent: 'flex-start',
   },
   borderedListContainer: {
     width: '100%',
