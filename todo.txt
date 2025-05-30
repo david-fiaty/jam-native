@@ -110,7 +110,6 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Profile/jam image upload
 - Fix modal margin top in jam form submodals
 - Social login
-- Fix input line height
 - Disable phone countries not available for sms
 - Login email field => trim field value
 - Fix profile and search views scroll
