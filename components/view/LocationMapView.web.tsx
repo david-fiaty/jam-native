@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import UserManager from "@/manager/UserManager";
+import SpinnerView from "./SpinnerView";
 
 type Props = {
   resource: string,
@@ -67,7 +68,7 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
     }
   }, [isLoaded]);
 
-
+  if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
 
   return (
     <LoadScript googleMapsApiKey={Config.mapApiKey}>
