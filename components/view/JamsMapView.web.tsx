@@ -1,34 +1,50 @@
-import { useState, useEffect } from "react";
-import { StyleSheet, View } from "react-native";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { useState, useEffect, useRef } from "react";
+import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useSelector } from "react-redux";
-import { Config } from "@/constants/Config";
 import { Layout } from "@/constants/Layout";
+import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
-import UserManager from "@/manager/UserManager";
 import i18n from "@/translation/i18n";
+import UserManager from "@/manager/UserManager";
+import SearchManager from "@/manager/SearchManager";
+import EntityManager from "@/manager/EntityManager";
 
-const JamsMapView = () => {
+type Props = {
+  idArray?: any;
+};
+
+const JamsMapView = ({ idArray }: Props) => {
+  const mapRef = useRef<any>();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const searchResult = JSON.parse(useSelector((state: any) => state.search.current));
+  const [searchData, setSearchData] = useState<any[]>([]);
+  const searchState: any = useSelector((state: any) => state.search);
   const markerImage = require('@/assets/images/logo-55.png');
-  const mapStyle: string = Layout.mapStyle;
-  
-  const getCenter = () => {
-    let latitude = currentLocation?.coords?.latitude || Config.defaultLocation.latitude;
-    let longitude = currentLocation?.coords?.longitude || Config.defaultLocation.longitude;
+
+  const getInitialRegion = () => {
+    let latitude: any = Config.defaultLocation.latitude;
+    let longitude: any = Config.defaultLocation.longitude;
+    let latitudeDelta: any = 0.2;
+    let longitudeDelta: any = 0.2;
+
+    if (currentLocation?.latitude && currentLocation?.longitude) {
+      latitude = currentLocation.latitude;
+      longitude = currentLocation.longitude;
+    }
 
     return {
       lat: latitude,
       lng: longitude,
-    }
+      //latitudeDelta: latitudeDelta,
+      //longitudeDelta: longitudeDelta,
+    };
   };
 
   const getMarkerCoordinate = (item: any) => {
     return {
-      lat: parseFloat(item?.geolocation_latitude),
-      lng: parseFloat(item?.geolocation_longitude),
+      latitude: parseFloat(item?.geolocation_latitude),
+      longitude: parseFloat(item?.geolocation_longitude),
     };
   };
 
@@ -46,9 +62,9 @@ const JamsMapView = () => {
         <Marker
           key={item.id}
           title={getMarkerTitle(item)}
-          //description={getMarkerDescription(item)}
-          position={getMarkerCoordinate(item)}
-          icon={markerImage} 
+          description={getMarkerDescription(item)}
+          coordinate={getMarkerCoordinate(item)}
+          icon={markerImage}
         />
       );
     }
@@ -56,32 +72,49 @@ const JamsMapView = () => {
     return null;
   };
 
+  const loadSearchData = async () => {
+    let data: any[] = [];
+
+    if (idArray && idArray?.length > 0) {
+      data = await EntityManager.getJams(idArray);
+    }
+    else {
+      data = (await SearchManager.getResults())?.jam;
+    }
+
+    setSearchData(data);
+  };
+
   useEffect(() => {
     (async () => {
+      await loadSearchData();
       setCurrentLocation(await UserManager.getLocation());
     })();
-  
-    setIsLoaded(true);
-  }, [isLoaded]);
-  
-  if (!isLoaded) return <SpinnerView />;
-  
+
+    if (!isLoaded) {
+      setIsLoaded(true);
+    }
+  }, [isLoaded, searchState]);
+
+  //if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
+
   return (
     <LoadScript googleMapsApiKey={Config.mapApiKey}>
-      <View style={[Layout.screenContent, styles.container]}>
-        <GoogleMap 
-          mapContainerStyle={styles.map} 
-          center={getCenter()} 
-          zoom={7} 
-          options={{
-            styles: mapStyle,
-            disableDefaultUI: true,
-          }}
-        >
-            { /*<Marker position={getCenter()} /> */}
-            {searchResult?.jam?.map((item: any) => renderJamMarker(item))}
-        </GoogleMap>
-      </View>
+      <TouchableWithoutFeedback>
+        <View style={[Layout.screenContent, styles.container]}>
+          <GoogleMap
+            mapContainerStyle={styles.map}
+            center={getInitialRegion()}
+            zoom={7}
+            options={{
+              styles: Layout.mapStyle,
+              disableDefaultUI: true,
+            }}
+          >
+            {searchData?.map((item: any) => renderJamMarker(item))}
+          </GoogleMap>
+        </View>
+      </TouchableWithoutFeedback>
     </LoadScript>
   );
 };
@@ -89,6 +122,9 @@ const JamsMapView = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 0,
+    width: '100%',
+    flexGrow: 1,
+    backgroundColor: Layout.colors.white,
   },
   map: {
     flex: 1,
