@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
@@ -53,6 +53,7 @@ const SearchProjectsList = ({ data, filter }: Props) => {
       direction="column"
       align="flex-start"
       justify="flex-start"
+      scroll={Platform.OS === 'web' ? true : false}
       style={styles.container}
     >
       <ListView
