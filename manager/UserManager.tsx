@@ -148,7 +148,7 @@ class UserManager {
   }
 
   async getLocation() {
-    if (Platform.OS === "android" && !Device.isDevice) {
+    if (ScreenManager.isAndroid() && !Device.isDevice) {
       console.log(i18n.t("Location features are not available for virtual devices"));
       return null;
     }

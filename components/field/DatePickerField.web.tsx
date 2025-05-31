@@ -7,6 +7,7 @@ import Datetime from 'react-datetime';
 
 import "react-datetime/css/react-datetime.css";
 import { Config } from '@/constants/Config';
+import ScreenManager from '@/manager/ScreenManager';
 
 type Props = {
   placeholder?: string,
@@ -17,7 +18,7 @@ type Props = {
 const DatePickerField = ({placeholder, value, onChangeValue}: Props) => {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
-  const display = Platform.OS === 'ios' ? 'spinner' : 'default';
+  const display = ScreenManager.isIos() ? 'spinner' : 'default';
 
   const showDatePicker = () => {
     setShow(!show);

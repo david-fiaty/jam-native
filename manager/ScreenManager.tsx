@@ -156,6 +156,14 @@ class ScreenManager {
     return Platform.OS === 'web';
   }
 
+  isIos() {
+    return Platform.OS === 'ios';
+  }
+
+  isAndroid() {
+    return Platform.OS === 'android';
+  }
+
   isMobile() {
     return !this.isWeb() && !this.isTablet(); 
   }
