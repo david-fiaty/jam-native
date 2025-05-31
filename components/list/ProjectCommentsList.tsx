@@ -31,6 +31,7 @@ const ProjectCommentsList = ({ entityId, entityType }: Props) => {
 
   if (!isLoaded) return <SpinnerView />;
 
+  // Todo - Implement projects comments
   console.log(entityData)
 
   return (
