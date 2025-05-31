@@ -3,13 +3,14 @@ import { Stack, useRouter } from 'expo-router';
 import { useLocales } from 'expo-localization';
 import { useFonts } from 'expo-font';
 import { Provider } from 'react-redux';
-import { Platform, BackHandler } from 'react-native';
+import { BackHandler } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import { Config } from '@/constants/Config';
 import * as ExpoSplashScreen from 'expo-splash-screen';
 import Store from "@/redux/Store";
 import SectionManager from '@/manager/SectionManager';
 import UserManager from '@/manager/UserManager';
+import ScreenManager from '@/manager/ScreenManager';
 
 ExpoSplashScreen.preventAutoHideAsync();
 
@@ -17,7 +18,7 @@ const RootLayout = () => {
   const router = useRouter();
   const locales = useLocales();
 
-  const defaults: any = Platform.OS == 'ios' ? {
+  const defaults: any = ScreenManager.isIos() ? {
     headerShown: false,
   } : { 
     statusBarStyle: 'dark',

@@ -8,6 +8,7 @@ import ProjectListItem from "./list-item/ProjectListItem";
 import TextView from "../view/TextView";
 import SectionManager from "@/manager/SectionManager";
 import BoxView from "../view/BoxView";
+import ScreenManager from "@/manager/ScreenManager";
 
 type Props = {
   data?: any;
@@ -53,7 +54,7 @@ const SearchProjectsList = ({ data, filter }: Props) => {
       direction="column"
       align="flex-start"
       justify="flex-start"
-      scroll={Platform.OS === 'web' ? true : false}
+      scroll={ScreenManager.isWeb() ? true : false}
       style={styles.container}
     >
       <ListView
