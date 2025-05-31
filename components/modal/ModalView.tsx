@@ -18,6 +18,8 @@ import LocationMapView from "@/components/view/LocationMapView";
 import CollaboratorsList from "@/components/list/CollaboratorsList";
 import CountriesList from '../list/CountriesList';
 import SelectJamsForm from '../form/SelectJamsForm';
+import JamCommentsList from '../list/JamCommentsList';
+import ProjectCommentsList from '../list/ProjectCommentsList';
 
 type Props = {
   currentSection?: any;
@@ -144,6 +146,16 @@ const ModalView = ({ currentSection, style }: Props) => {
         id: 'JammersList',
         title: i18n.t('Jammers'),
         render: (params: any) => <JammersList {...params} />,
+      },
+      {
+        id: 'JamCommentsList',
+        title: i18n.t('Comments'),
+        render: (params: any) => <JamCommentsList {...params} />,
+      },
+      {
+        id: 'ProjectCommentsList',
+        title: i18n.t('Comments'),
+        render: (params: any) => <ProjectCommentsList {...params} />,
       },
       {
         id: 'SectorsList',
