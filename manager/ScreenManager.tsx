@@ -152,12 +152,12 @@ class ScreenManager {
     return true;
   }
 
-  isDesktop() {
+  isWeb() {
     return Platform.OS === 'web';
   }
 
   isMobile() {
-    return !this.isDesktop() && !this.isTablet(); 
+    return !this.isWeb() && !this.isTablet(); 
   }
 };
 

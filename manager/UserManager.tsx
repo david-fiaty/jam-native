@@ -10,6 +10,7 @@ import * as Location from 'expo-location';
 import * as Device from "expo-device";
 import i18n from '@/translation/i18n';
 import i18next from 'i18next';
+import ScreenManager from './ScreenManager';
 
 class UserManager {
   async sendSignupCode(data: any) {
@@ -96,7 +97,7 @@ class UserManager {
       profileData = await DataManager.get('getProfile', { ...defaults, ...options }, variables);
     }
 
-    if (Platform.OS === 'web') localProfileData = localStorage.getItem(Config.storageKeys.profileData)
+    if (ScreenManager.isWeb()) localProfileData = localStorage.getItem(Config.storageKeys.profileData)
     else localProfileData = await AsyncStorage.getItem(Config.storageKeys.profileData);
 
     return {
@@ -178,7 +179,7 @@ class UserManager {
   }
 
   async setLanguage(languageCode: string) {
-    if (Platform.OS === 'web') {
+    if (ScreenManager.isWeb()) {
       localStorage.setItem(Config.storageKeys.currentLanguage, languageCode);
     }
     else {
@@ -190,7 +191,7 @@ class UserManager {
 
   async getLanguage() {
     try {
-      let language = Platform.OS === 'web'
+      let language = ScreenManager.isWeb()
         ? localStorage.getItem(Config.storageKeys.currentLanguage)
         : await AsyncStorage.getItem(Config.storageKeys.currentLanguage);
 
@@ -318,7 +319,7 @@ class UserManager {
     let localProfileData: any = '{}';
     let references = [];
 
-    if (Platform.OS === 'web') {
+    if (ScreenManager.isWeb()) {
       localProfileData = localStorage.getItem(Config.storageKeys.profileData) || '{}';
     }
     else {
@@ -341,7 +342,7 @@ class UserManager {
 
     localProfileData = JSON.stringify(localProfileData);
 
-    if (Platform.OS === 'web') {
+    if (ScreenManager.isWeb()) {
       localStorage.setItem(Config.storageKeys.profileData, localProfileData);
     }
     else {
