@@ -107,7 +107,6 @@ https://withfra.me/react-native-tutorials/how-to-use-svg-in-react-native
 https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-7948f1a6f949
 
 # Finish
-- Fix profile and search views scroll
 - Check web jams google maps markers
 
 - Profile/project/jam image upload

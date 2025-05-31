@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import ListView from "../view/ListView";
@@ -50,12 +50,11 @@ const SearchProfilesList = ({ data, filter }: Props) => {
       direction="column"
       align="flex-start"
       justify="flex-start"
-      scroll={true}
+      scroll={Platform.OS === 'web' ? true : false}
       style={styles.container} 
     >
       <ListView
         data={currentData}
-        scrollEnabled={false}
         renderItem={(row: any) => renderItem(row)}
       />
     </BoxView>
