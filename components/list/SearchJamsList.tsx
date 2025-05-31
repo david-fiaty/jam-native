@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { StyleSheet, Platform } from "react-native";
+import { StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import ListView from "../view/ListView";
@@ -9,6 +9,7 @@ import TextView from "../view/TextView";
 import SpinnerView from "../view/SpinnerView";
 import SectionManager from "@/manager/SectionManager";
 import BoxView from "../view/BoxView";
+import ScreenManager from "@/manager/ScreenManager";
 
 type Props = {
   data?: any;
@@ -58,7 +59,7 @@ const SearchJamsList = ({ data, filter }: Props) => {
       direction="column"
       align="flex-start"
       justify="flex-start"
-      scroll={Platform.OS === 'web' ? true : false}
+      scroll={ScreenManager.isWeb() ? true : false}
       style={styles.container} 
     >
       <ListView
