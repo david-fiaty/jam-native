@@ -32,7 +32,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   };
 
   const onEndReached = async () => {
-    if (Config.infiniteScrollEnabled === true && !disableInfiniteScroll) {
+    if (Config.infiniteScrollEnabled === true && disableInfiniteScroll !== true) {
       await loadSearchData();
     }
   };
