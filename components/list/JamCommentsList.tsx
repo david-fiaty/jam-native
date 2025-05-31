@@ -24,8 +24,8 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
     return (entityData?.comments || []).map((o: any) => {
       return (
         <>
-        <TextView>{o.comment_text}</TextView>
-        <TextView>--------</TextView>
+          <TextView>{o.comment_text}</TextView>
+          <TextView>--------</TextView>
         </>
       )
     });
