@@ -23,7 +23,10 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
   const renderComments = () => {
     return (entityData?.comments || []).map((o: any) => {
       return (
-        <TextView>{o.caption}</TextView>
+        <>
+        <TextView>{o.comment_text}</TextView>
+        <TextView>--------</TextView>
+        </>
       )
     });
   };
@@ -39,8 +42,6 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log('--- comments ---', entityData)
-
   return (
     <BoxView
       direction="column"
@@ -48,10 +49,6 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
       justify="flex-start"
       style={Layout.screenContent}
     >
-      <TextView>Comments view</TextView>
-      <TextView>{entityId}</TextView>
-      <TextView>{entityType}</TextView>
-      
       {renderComments()}
     </BoxView>
   );
