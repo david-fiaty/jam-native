@@ -14,9 +14,10 @@ import BoxView from '../view/BoxView';
 type Props = {
   entityId: any;
   entityType: any;
+  commentsData?: any;
 };
 
-const CommentsList = ({ entityId, entityType }: Props) => {
+const CommentsList = ({ entityId, entityType, commentsData }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
