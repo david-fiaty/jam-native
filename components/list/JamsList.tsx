@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
 import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
+import { Config } from "@/constants/Config";
 import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
@@ -9,7 +10,6 @@ import EntityManager from "@/manager/EntityManager";
 import ListItem from "./jams-list/ListItem";
 import UserManager from "@/manager/UserManager";
 import SearchManager from "@/manager/SearchManager";
-import { Config } from "@/constants/Config";
 
 type Props = {
   idArray?: any;

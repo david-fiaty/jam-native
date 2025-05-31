@@ -16,19 +16,22 @@ type Props = {
   entityType: any;
 };
 
-const CommentsList = ({ entityId, entityType }: Props) => {
+const JamCommentsList = ({ entityId, entityType }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [entityData, setEntityData] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
+        setEntityData(await EntityManager.getJams(entityId));
         setIsLoaded(true);
       }
     })();
-
-  }, [isLoaded]);
+  }, [isLoaded, entityId]);
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(entityData)
 
   return (
     <BoxView
@@ -44,4 +47,4 @@ const CommentsList = ({ entityId, entityType }: Props) => {
   );
 };
 
-export default CommentsList;
+export default JamCommentsList;
