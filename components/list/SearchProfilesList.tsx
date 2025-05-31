@@ -55,7 +55,6 @@ const SearchProfilesList = ({ data, filter }: Props) => {
     >
       <ListView
         data={currentData}
-        scrollEnabled={false}
         renderItem={(row: any) => renderItem(row)}
       />
     </BoxView>
