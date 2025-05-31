@@ -30,6 +30,12 @@ const JamsList = ({ idArray }: Props) => {
     setProfileData(await getProfileData());
   };
 
+  const onEndReached = async () => {
+    if (Config.infiniteScrollEnabled === true) {
+      await loadSearchData();
+    }
+  };
+
   const renderItem = (row: any) => {
     return (
       <ListItem 
@@ -78,7 +84,7 @@ const JamsList = ({ idArray }: Props) => {
         renderItem={renderItem}        
         keyExtractor={(row: any, index?: number) => `${row.id}-${index}`} 
         onEndReachedThreshold={0.5}
-        onEndReached={() => Config.infiniteScrollEnabled === true && loadSearchData()} 
+        onEndReached={onEndReached} 
       />
     </BoxView>
   );
