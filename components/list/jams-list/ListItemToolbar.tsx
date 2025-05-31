@@ -89,10 +89,6 @@ const ListItemToolbar = ({ row, profileData, onListItemAction }: Props) => {
     }
   };
 
-  const commentJam = async () => {
-    console.log('comment jam'); // Todo - Implement comment action
-  };
-
   const renderLikeButton = () => {
     return (
       <BoxView
@@ -177,7 +173,7 @@ const ListItemToolbar = ({ row, profileData, onListItemAction }: Props) => {
     );
   };
 
-  const renderCommentButton = () => {
+  const renderCommentsButton = () => {
     if (isCommentProcessing) return <SpinnerView size="small" />;
 
     return (
@@ -190,7 +186,10 @@ const ListItemToolbar = ({ row, profileData, onListItemAction }: Props) => {
           theme="tertiary"
           size={12}
           padding={6}
-          onPress={commentJam}
+          onPress={() => ModalManager.toggleModal('JamCommentsList', { 
+            entityId: row?.item?.id, 
+            entityType: 'jam' 
+          })}
         />
       </BoxView>
     );
@@ -211,7 +210,7 @@ const ListItemToolbar = ({ row, profileData, onListItemAction }: Props) => {
   
         <BoxView direction="row" align="center" justify="flex-end">
           <BoxView align="center">
-            {renderCommentButton()}
+            {renderCommentsButton()}
           </BoxView>
 
           <BoxView align="center">
