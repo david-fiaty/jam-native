@@ -13,9 +13,10 @@ import { Config } from "@/constants/Config";
 
 type Props = {
   idArray?: any;
+  disableInfiniteScroll?: boolean;
 };
 
-const JamsList = ({ idArray }: Props) => {
+const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   const [sectors, setSectors] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [searchData, setSearchData] = useState<any[]>([]);
@@ -31,7 +32,7 @@ const JamsList = ({ idArray }: Props) => {
   };
 
   const onEndReached = async () => {
-    if (Config.infiniteScrollEnabled === true) {
+    if (Config.infiniteScrollEnabled === true && !disableInfiniteScroll) {
       await loadSearchData();
     }
   };
