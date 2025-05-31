@@ -110,7 +110,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Fix profile and search views scroll
 - Check web jams google maps markers
 
-- Profile/jam image upload
+- Profile/project/jam image upload
 - Social login
 
 - Login email field => trim field value
