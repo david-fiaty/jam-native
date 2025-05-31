@@ -186,7 +186,7 @@ const ListItemToolbar = ({ row, profileData, onListItemAction }: Props) => {
           theme="tertiary"
           size={12}
           padding={6}
-          onPress={() => ModalManager.toggleModal('CommentsList', { 
+          onPress={() => ModalManager.toggleModal('JamCommentsList', { 
             entityId: row?.item?.id, 
             entityType: 'jam' 
           })}
