@@ -109,7 +109,6 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 # Finish
 - Fix profile and search views scroll
 - Check web jams google maps markers
-- Fix duplicate item in jam item view
 
 - Profile/jam image upload
 - Social login
