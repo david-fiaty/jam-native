@@ -18,20 +18,29 @@ type Props = {
 
 const JamCommentsList = ({ entityId, entityType }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [entityData, setEntityData] = useState<boolean>(false);
+  const [entityData, setEntityData] = useState<any[]>([]);
+
+  const renderComments = () => {
+    return (entityData?.comments || []).map((o: any) => {
+      return (
+        <>
+          <TextView>{o.comment_text}</TextView>
+          <TextView>--------</TextView>
+        </>
+      )
+    });
+  };
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setEntityData(await EntityManager.getJams(entityId));
+        setEntityData((await EntityManager.getJams(entityId))?.[0]);
         setIsLoaded(true);
       }
     })();
   }, [isLoaded, entityId]);
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(entityData)
 
   return (
     <BoxView
@@ -40,9 +49,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
       justify="flex-start"
       style={Layout.screenContent}
     >
-      <TextView>Comments view</TextView>
-      <TextView>{entityId}</TextView>
-      <TextView>{entityType}</TextView>
+      {renderComments()}
     </BoxView>
   );
 };
