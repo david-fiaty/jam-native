@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
@@ -53,7 +53,7 @@ const SearchProjectsList = ({ data, filter }: Props) => {
       direction="column"
       align="flex-start"
       justify="flex-start"
-      scroll={true}
+      scroll={Platform.OS === 'web' ? true : false}
       style={styles.container}
     >
       <ListView
@@ -61,7 +61,6 @@ const SearchProjectsList = ({ data, filter }: Props) => {
         numColumns={numColumns}
         contentContainerStyle={{ gap: Layout.space.base }}
         columnWrapperStyle={{ gap: Layout.space.base }}
-        scrollEnabled={false}
         renderItem={(row: any) => renderItem(row)}
       />
     </BoxView>
