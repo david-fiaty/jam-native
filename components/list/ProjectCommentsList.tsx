@@ -16,7 +16,7 @@ type Props = {
   entityType: any;
 };
 
-const JamCommentsList = ({ entityId, entityType }: Props) => {
+const ProjectCommentsList = ({ entityId, entityType }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [entityData, setEntityData] = useState<boolean>(false);
 
@@ -47,4 +47,4 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
   );
 };
 
-export default JamCommentsList;
+export default ProjectCommentsList;
