@@ -22,7 +22,11 @@ const SearchJamsList = ({ data, filter }: Props) => {
   const [currentData, setCurrentData] = useState<any[]>([]);
 
   const onItemPress = (row: any) => {
-    SectionManager.push(router, 'jam-item', { jamId: JSON.stringify([row?.item?.id]), title: row?.item?.title });
+    SectionManager.push(router, 'jam-item', { 
+      jamId: JSON.stringify([row?.item?.id]), 
+      title: row?.item?.title,
+      disableInfiniteScroll: true,
+    });
   };
 
   const renderEmptyMessage = () => {

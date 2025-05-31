@@ -13,9 +13,10 @@ import { Config } from "@/constants/Config";
 
 type Props = {
   idArray?: any;
+  disableInfiniteScroll?: boolean;
 };
 
-const JamsList = ({ idArray }: Props) => {
+const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   const [sectors, setSectors] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [searchData, setSearchData] = useState<any[]>([]);
@@ -28,6 +29,12 @@ const JamsList = ({ idArray }: Props) => {
 
   const onListItemAction = async () => {
     setProfileData(await getProfileData());
+  };
+
+  const onEndReached = async () => {
+    if (Config.infiniteScrollEnabled === true && disableInfiniteScroll !== true) {
+      await loadSearchData();
+    }
   };
 
   const renderItem = (row: any) => {
@@ -51,7 +58,12 @@ const JamsList = ({ idArray }: Props) => {
       data = (await SearchManager.getResults())?.jam;
     }
 
-    setSearchData(prevData => [...prevData, ...data]);
+    if (Config.infiniteScrollEnabled === true && disableInfiniteScroll !== true) {
+      setSearchData(prevData => [...prevData, ...data]);
+    }
+    else {
+      setSearchData(data); 
+    }
   };
 
   useEffect(() => {
@@ -78,7 +90,7 @@ const JamsList = ({ idArray }: Props) => {
         renderItem={renderItem}        
         keyExtractor={(row: any, index?: number) => `${row.id}-${index}`} 
         onEndReachedThreshold={0.5}
-        onEndReached={() => Config.infiniteScrollEnabled === true && loadSearchData()} 
+        onEndReached={onEndReached} 
       />
     </BoxView>
   );

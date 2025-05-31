@@ -68,7 +68,11 @@ const ProfileSection = () => {
         addButton={true}
         idArray={formData?.profile_jams}
         onAddButtonPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
-        onListItemPress={(row: any) => SectionManager.push(router, 'jam-item', { jamId: JSON.stringify(formData?.profile_jams), title: row?.item?.title })}
+        onListItemPress={(row: any) => SectionManager.push(router, 'jam-item', { 
+          jamId: JSON.stringify(formData?.profile_jams), 
+          title: row?.item?.title,
+          disableInfiniteScroll: true,
+        })}
       />
       <DividerView />
 
