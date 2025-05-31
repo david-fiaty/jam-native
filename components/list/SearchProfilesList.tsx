@@ -50,7 +50,6 @@ const SearchProfilesList = ({ data, filter }: Props) => {
       direction="column"
       align="flex-start"
       justify="flex-start"
-      scroll={true}
       style={styles.container} 
     >
       <ListView
