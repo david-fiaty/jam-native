@@ -33,8 +33,8 @@ const ModalView = ({ currentSection, style }: Props) => {
   const getContainerStyle = () => {
     let top: number = 0;
     
-    if (sectionState.active.length > 4 && modalState.active.length > 1) {
-      //top = -Layout.space.base*3.6; 
+    if (sectionState.active.length > 3 && modalState.active.length > 1) {
+      top = -Layout.space.base*3.6; 
     }
 
     return {
