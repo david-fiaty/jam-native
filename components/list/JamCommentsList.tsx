@@ -34,9 +34,9 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
   const renderProfileImage = (row: any) => {
     return (
       <>
-        {row?.item?.profile_picture?.url?.length > 0 && (
+        {row?.item?.profile?.profile_picture?.url?.length > 0 && (
           <ImageView
-            uri={MediaManager.getImageUrl(row.item.profile_picture.url)}
+            uri={MediaManager.getImageUrl(row.item.profile.profile_picture.url)}
             resizeMode="cover"
             width={profileImageSize}
             height={profileImageSize}
@@ -44,7 +44,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
           />
         )}
 
-        {!row?.item?.profile_picture?.url?.length && (
+        {!row?.item?.profile?.profile_picture?.url?.length && (
           <IconView
             name="user"
             theme="secondary"
@@ -72,7 +72,9 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
         >
           {renderProfileImage({
             item: {
-              profile_picture: profileData?.profile_picture,
+              profile: {
+                profile_picture: profileData?.profile_picture,
+              },
             }
           })}
         </BoxView>
