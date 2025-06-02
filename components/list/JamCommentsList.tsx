@@ -22,9 +22,8 @@ const profileImageSize: number = 34;
 
 const JamCommentsList = ({ entityId, entityType }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [entityData, setEntityData] = useState<any[]>([]);
   const [formData, setFormData] = useState<any>({});
-  const [listData, setListData] = useState<any>([]);
-  const [commentsData, setCommentsData] = useState<any>([]);
 
   const renderProfileImage = (row: any) => {
     return (
@@ -125,12 +124,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        let entityData: any = (await EntityManager.getJams(entityId))?.[0]; 
-    
-        setCommentsData([
-          ...entityData?.comments || [],
-        ]);
-
+        setEntityData((await EntityManager.getJams(entityId))?.[0]);
         setIsLoaded(true);
       }
     })();
@@ -145,14 +139,16 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
       justify="flex-start"
       style={Layout.screenContent}
     >
-      {commentsData?.length > 0 &&
+      {renderCommentForm()}
+
+      {entityData?.comments?.length > 0 &&
         <ListView
-          data={commentsData}
+          data={entityData?.comments}
           renderItem={(row: any) => renderItem(row)}
         />
       }
 
-      {!commentsData.length &&
+      {!entityData?.comments?.length &&
         <TextView>{i18n.t('No comments available.')}</TextView>
       }
     </BoxView>
