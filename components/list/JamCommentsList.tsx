@@ -82,6 +82,11 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
   };
 
   const renderItem = (row: any) => {
+    if (row.index === 0) {
+      return <TextView>xxx</TextView>
+    }
+  
+
     return (
       <BoxView
         key={row.item.id}
@@ -139,14 +144,15 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
       justify="flex-start"
       style={Layout.screenContent}
     >
-      {renderCommentForm()}
-
       {!entityData?.comments?.length &&
         <TextView>{i18n.t('No comments available.')}</TextView>
       }
     
       <ListView
-        data={entityData?.comments}
+        data={[
+          ...[renderCommentForm()],
+          ...(entityData?.comments || []),
+        ]}
         renderItem={(row: any) => renderItem(row)}
       />
     
