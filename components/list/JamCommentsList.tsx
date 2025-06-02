@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { View, StyleSheet } from "react-native";
-import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
+import { useRouter } from "expo-router";
+import moment from 'moment';
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
 import ListView from "../view/ListView";
@@ -67,7 +68,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
           style={styles.commentContainerRight}
         >
           <TextView style={styles.profileName}>@{row.item.profile.profile_name}</TextView>
-          <TextView style={styles.commentDate}>@{row.item.created_at}</TextView>
+          <TextView style={styles.commentDate}>{moment(row.item.created_at).fromNow()}</TextView>
           <TextView>{row.item.comment_text}</TextView>
         </BoxView>
       </BoxView>
