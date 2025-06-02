@@ -83,9 +83,8 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
 
   const renderItem = (row: any) => {
     if (row.index === 0) {
-      return <TextView>xxx</TextView>
+      return renderCommentForm();
     }
-  
 
     return (
       <BoxView
