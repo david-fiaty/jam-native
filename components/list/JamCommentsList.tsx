@@ -125,7 +125,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
 
                   <ButtonView
                     label={i18n.t('Cancel')}
-                    onPress={() => console.log('close button press')}
+                    onPress={() => setIsFormExpanded(false)}
                   />
                 </BoxView>
               </>
