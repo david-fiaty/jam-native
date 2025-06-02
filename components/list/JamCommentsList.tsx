@@ -13,6 +13,7 @@ import MediaManager from '@/manager/MediaManager';
 import IconView from '../view/IconView';
 import InputTextareaField from '../field/InputTextareaField';
 import UserManager from '@/manager/UserManager';
+import ButtonView from '../view/ButtonView';
 
 type Props = {
   entityId: any;
@@ -90,6 +91,14 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
             //value={formData?.comment_text}
             //onChangeText={(value: string) => FormManager.updateField(resource, 'description', value, ['string'])}
           />
+
+          <ButtonView
+            label={i18n.t('Comment')}
+            //isProcessing={isProcessing}
+            //onPress={submitData}
+            //disabled={isSubmitDisabled()}
+          />
+
         </BoxView>
       </BoxView>
     );
@@ -169,7 +178,6 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
         ]}
         renderItem={(row: any) => renderItem(row)}
       />
-    
     </BoxView>
   );
 };
@@ -189,7 +197,7 @@ const styles = StyleSheet.create({
   },
   commentContainerLeft: {
     backgroundColor: Layout.colors.white,
-    width: '10%'
+    width: '10%',
   },
   commentContainerRight: {
     width: '78%',
