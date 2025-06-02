@@ -29,6 +29,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
   const [entityData, setEntityData] = useState<any[]>([]);
   const [profileData, setProfileData] = useState<any>(null);
   const [isFormExpanded, setIsFormExpanded] = useState<boolean>(false);
+  const [isSubmitProcessing, setIsSubmitProcessing] = useState<boolean>(false);
   const [formData, setFormData] = useState<any>({});
 
   const getProfileData = async () => {
@@ -105,8 +106,11 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
               <>
                 <InputTextareaField
                   placeholder={i18n.t('Add a comment...')}
-                //value={formData?.comment_text}
-                //onChangeText={(value: string) => FormManager.updateField(resource, 'description', value, ['string'])}
+                  value={formData?.comment_text}
+                  onChangeText={(value: string) => { setFormData({
+                    ...formData,
+                    ...{comment_text: value},
+                  })}}
                 />
 
                 <BoxView
@@ -123,10 +127,9 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
 
                   <ButtonView
                     label={i18n.t('Submit')}
-                    //isProcessing={isProcessing}
-                    //onPress={submitData}
-                    //disabled={isSubmitDisabled()}
+                    onPress={submitComment}
                     containerStyle={[styles.buttonStyle, styles.submitButtonStyle]}
+                    isProcessing={isSubmitProcessing}
                   />
                 </BoxView>
               </>
@@ -179,6 +182,23 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
       </BoxView>
     );
   };
+
+  const submitComment = async () => {
+    setIsSubmitProcessing(true);
+    
+    // Todo - Implement submit comment
+    console.log('on comment submit');
+
+    let payload: any = { 
+      profile_id: profileData.id,
+      item_id: entityId,
+      comment_text: formData?.comment_text,
+    };
+
+    //let result: any = await UserManager.register(payload);
+    
+    setIsSubmitProcessing(false);
+  }
 
   useEffect(() => {
     (async () => {
