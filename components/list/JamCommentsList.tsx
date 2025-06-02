@@ -28,6 +28,37 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
   const [entityData, setEntityData] = useState<any[]>([]);
   const [formData, setFormData] = useState<any>({});
 
+  const renderCommentForm = () => {
+    return (
+      <BoxView
+        direction="row"
+        align="flex-start"
+        justify="flex-start"
+      >
+        <BoxView
+          direction="row"
+          align="flex-start"
+          justify="flex-start"
+          style={styles.commentContainerLeft}
+        >
+          {renderProfileImage({})}
+        </BoxView>
+
+        <BoxView
+          direction="row"
+          align="center"
+          justify="flex-start"
+          style={styles.commentContainerLeft}
+        >
+          <InputTextareaField
+            //value={formData?.comment_text}
+            //onChangeText={(value: string) => FormManager.updateField(resource, 'description', value, ['string'])}
+          />
+        </BoxView>
+      </BoxView>
+    );
+  };
+
   const renderProfileImage = (row: any) => {
     return (
       <>
@@ -111,18 +142,8 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
       justify="flex-start"
       style={Layout.screenContent}
     >
-      <BoxView
-        direction="row"
-        align="center"
-        justify="flex-start"
-      //style={styles.commentContainerLeft}
-      >
-        {renderProfileImage({})}
-        <InputTextareaField
-        //value={formData?.comment_text}
-        //onChangeText={(value: string) => FormManager.updateField(resource, 'description', value, ['string'])}
-        />
-      </BoxView>
+      {renderCommentForm()}
+
       {entityData?.comments?.length > 0 &&
         <ListView
           data={entityData?.comments}
