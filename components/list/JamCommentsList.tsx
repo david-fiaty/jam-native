@@ -70,9 +70,10 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
           direction="row"
           align="center"
           justify="flex-start"
-          style={styles.commentContainerLeft}
+          style={styles.commentContainerRight}
         >
           <InputTextareaField
+            placeholder={i18n.t('Add a comment...')}
             //value={formData?.comment_text}
             //onChangeText={(value: string) => FormManager.updateField(resource, 'description', value, ['string'])}
           />
@@ -164,13 +165,16 @@ const styles = StyleSheet.create({
     ...Layout.listItem,
     ...{
       paddingVertical: Layout.space.base * 1.5,
+      width: '100%',
     },
   },
   commentContainerLeft: {
-    backgroundColor: 'white',
+    backgroundColor: Layout.colors.white,
+    width: '10%'
   },
   commentContainerRight: {
-    backgroundColor: 'white',
+    //flex: 1,
+    width: '78%'
   },
   profileName: {
     color: Layout.colors.secondary,
