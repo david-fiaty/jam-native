@@ -4,13 +4,14 @@ import { Layout } from '@/constants/Layout';
 import Collapsible from 'react-native-collapsible';
 
 type Props = {
-  label?: any,
-  openedLabel?: any,
-  content?: any,
-  headerStyle?: any,
+  label?: any;
+  openedLabel?: any;
+  content?: any;
+  headerStyle?: any;
+  onLabelPress?: () => void;
 };
 
-const CollapsibleView = ({label, openedLabel, content, headerStyle}: Props) => {
+const CollapsibleView = ({label, openedLabel, content, headerStyle, onLabelPress}: Props) => {
   const [collapsed, setCollapsed] = useState(true);
   let buttonLabel = label;
   
@@ -18,9 +19,14 @@ const CollapsibleView = ({label, openedLabel, content, headerStyle}: Props) => {
     buttonLabel = openedLabel;
   }
 
+  const onPress = () => {
+    setCollapsed((prev) => !prev);
+    if (onLabelPress) onLabelPress();
+  };
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => setCollapsed((prev) => !prev)}>
+      <TouchableOpacity onPress={onPress}>
         <View style={headerStyle}>{buttonLabel}</View>
       </TouchableOpacity>
       <Collapsible 
