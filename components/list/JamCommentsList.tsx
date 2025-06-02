@@ -76,7 +76,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
             <TextView style={styles.profileName}>@{row.item.profile.profile_name}</TextView>
             <TextView style={styles.commentDate}>{moment(row.item.created_at).fromNow()}</TextView>
           </BoxView>
-          
+
           <TextView>{row.item.comment_text}</TextView>
         </BoxView>
       </BoxView>
@@ -123,17 +123,16 @@ const styles = StyleSheet.create({
     },
   },
   commentContainerLeft: {
-    backgroundColor: 'red',
+    backgroundColor: 'white',
   },
   commentContainerRight: {
-    backgroundColor: 'green',
-  },
-  commentDate: {
-    fontSize: 13,
+    backgroundColor: 'white',
   },
   profileName: {
     color: Layout.colors.secondary,
-    fontSize: 13,
+  },
+  commentDate: {
+    fontSize: 11.5,
   },
   profileImage: {
     width: profileImageSize,
