@@ -12,6 +12,7 @@ import ImageView from '../view/ImageView';
 import MediaManager from '@/manager/MediaManager';
 import IconView from '../view/IconView';
 import InputTextareaField from '../field/InputTextareaField';
+import UserManager from '@/manager/UserManager';
 
 type Props = {
   entityId: any;
@@ -23,14 +24,19 @@ const profileImageSize: number = 34;
 const JamCommentsList = ({ entityId, entityType }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [entityData, setEntityData] = useState<any[]>([]);
+  const [profileData, setProfileData] = useState<any>(null);
   const [formData, setFormData] = useState<any>({});
+
+  const getProfileData = async () => {
+    return await UserManager.getProfileData();
+  };
 
   const renderProfileImage = (row: any) => {
     return (
       <>
-        {row?.item?.profile_picture?.url?.length > 0 && (
+        {row?.item?.profile?.profile_picture?.url?.length > 0 && (
           <ImageView
-            uri={MediaManager.getImageUrl(row.item.profile_picture.url)}
+            uri={MediaManager.getImageUrl(row.item.profile.profile_picture.url)}
             resizeMode="cover"
             width={profileImageSize}
             height={profileImageSize}
@@ -38,7 +44,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
           />
         )}
 
-        {!row?.item?.profile_picture?.url?.length && (
+        {!row?.item?.profile?.profile_picture?.url?.length && (
           <IconView
             name="user"
             theme="secondary"
@@ -64,7 +70,13 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
           justify="flex-start"
           style={styles.commentContainerLeft}
         >
-          {renderProfileImage({})}
+          {renderProfileImage({
+            item: {
+              profile: {
+                profile_picture: profileData?.profile_picture,
+              },
+            }
+          })}
         </BoxView>
 
         <BoxView
@@ -130,6 +142,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
+        setProfileData(await getProfileData());
         setEntityData((await EntityManager.getJams(entityId))?.[0]);
         setIsLoaded(true);
       }
@@ -179,7 +192,7 @@ const styles = StyleSheet.create({
     width: '10%'
   },
   commentContainerRight: {
-    width: '78%'
+    width: '78%',
   },
   commentFormContainer: {
     marginBottom: Layout.space.base*1.5,
