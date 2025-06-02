@@ -94,7 +94,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
           style={styles.commentContainerRight}
         >
           <CollapsibleView
-            label={(
+            label={!isFormExpanded && (
               <TouchableWithoutFeedback onPress={() => toggleForm}>
                 <InputTextField
                   placeholder={i18n.t('Add a comment...')}
@@ -110,12 +110,26 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
                 //onChangeText={(value: string) => FormManager.updateField(resource, 'description', value, ['string'])}
                 />
 
-                <ButtonView
-                  label={i18n.t('Comment')}
-                //isProcessing={isProcessing}
-                //onPress={submitData}
-                //disabled={isSubmitDisabled()}
-                />
+                <BoxView
+                  direction="row"
+                  align="center"
+                  justify="space-between"
+                  style={styles.commentFormActions}
+                >
+                  { /*
+                  <ButtonView
+                    label={i18n.t('Comment')}
+                  //isProcessing={isProcessing}
+                  //onPress={submitData}
+                  //disabled={isSubmitDisabled()}
+                  />
+                  */}
+
+                  <ButtonView
+                    label={i18n.t('Cancel')}
+                    onPress={toggleForm}
+                  />
+                </BoxView>
               </>
             )}
           />
@@ -223,6 +237,9 @@ const styles = StyleSheet.create({
   },
   commentFormContainer: {
     marginBottom: Layout.space.base * 1.5,
+  },
+  commentFormActions: {
+    width: '100%',
   },
   profileName: {
     fontWeight: 'bold',
