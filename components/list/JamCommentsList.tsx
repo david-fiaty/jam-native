@@ -99,6 +99,8 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
               </TouchableWithoutFeedback>
             )}
             openedLabel={<></>}
+            isExpanded={isFormExpanded}
+            onLabelPress={() => setIsFormExpanded(true)}
             content={(
               <>
                 <InputTextareaField
