@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
@@ -10,11 +10,16 @@ import EntityManager from '@/manager/EntityManager';
 import ProfileListItem from './list-item/ProfileListItem';
 import SectionManager from '@/manager/SectionManager';
 import BoxView from '../view/BoxView';
+import ImageView from '../view/ImageView';
+import MediaManager from '@/manager/MediaManager';
+import IconView from '../view/IconView';
 
 type Props = {
   entityId: any;
   entityType: any;
 };
+
+const profileImageSize: number = 34;
 
 const JamCommentsList = ({ entityId, entityType }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -22,10 +27,36 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
 
   const renderItem = (row: any) => {
     return (
-      <View key={row.item.id}>
+      <BoxView
+        key={row.item.id}
+        direction="row"
+        align="center"
+        justify="flex-start"
+        style={styles.commentContainer}
+      >
+        {row?.item?.profile_picture?.url?.length > 0 && (
+          <ImageView
+            uri={MediaManager.getImageUrl(row.item.profile_picture.url)}
+            resizeMode="cover"
+            width={profileImageSize}
+            height={profileImageSize}
+            style={styles.profileImage}
+          />
+        )}
+
+        {!row?.item?.profile_picture?.url?.length && (
+          <IconView
+            name="user"
+            theme="secondary"
+            size={14}
+            padding={10}
+          />
+        )}
+
         <TextView>{row.item.comment_text}</TextView>
+        <TextView>{row.item.profile.profile_name}</TextView>
         <TextView>--------</TextView>
-      </View>
+      </BoxView>
     );
   };
 
@@ -60,5 +91,20 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
     </BoxView>
   );
 };
+
+const styles = StyleSheet.create({
+  commentContainer: {
+    ...Layout.listItem,
+    ...{
+      padding: Layout.space.base / 1.3,
+    },
+  },
+  profileImage: {
+    width: profileImageSize,
+    height: profileImageSize,
+    borderRadius: profileImageSize,
+  },
+});
+
 
 export default JamCommentsList;
