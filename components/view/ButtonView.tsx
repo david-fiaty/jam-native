@@ -8,26 +8,27 @@ type Props = {
   disabled?: boolean;
   onPress?: () => void;
   isProcessing?: boolean;
+  containerStyle?: any;
 };
 
-const ButtonView = ({label, disabled, onPress, isProcessing}: Props) => {
+const ButtonView = ({label, disabled, onPress, isProcessing, containerStyle}: Props) => {
   if (isProcessing) {
     return (
-      <View style={[styles.container, styles.processing]}>
+      <View style={[styles.container, containerStyle, styles.processing]}>
         <SpinnerView color="white" size="small" />
       </View>
     );
   }
   else if (disabled === true) {
     return (
-      <View style={[styles.container, styles.disabled]}>
+      <View style={[styles.container, containerStyle, styles.disabled]}>
         <TextView style={styles.label}>{label}</TextView>
       </View>
     );
   }
   else {
     return (
-      <TouchableOpacity onPress={onPress} style={styles.container}>
+      <TouchableOpacity onPress={onPress} style={[styles.container, containerStyle]}>
         <TextView style={styles.label}>{label}</TextView>
       </TouchableOpacity>
     );
