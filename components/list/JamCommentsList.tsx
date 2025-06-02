@@ -22,7 +22,6 @@ const profileImageSize: number = 34;
 
 const JamCommentsList = ({ entityId, entityType }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [entityData, setEntityData] = useState<any[]>([]);
   const [formData, setFormData] = useState<any>({});
   const [listData, setListData] = useState<any>([]);
   const [commentsData, setCommentsData] = useState<any>([]);
@@ -127,10 +126,11 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
     (async () => {
       if (!isLoaded) {
         let entityData: any = (await EntityManager.getJams(entityId))?.[0]; 
-        setEntityData(entityData);
+    
         setCommentsData([
           ...entityData?.comments || [],
         ]);
+
         setIsLoaded(true);
       }
     })();
@@ -145,8 +145,6 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
       justify="flex-start"
       style={Layout.screenContent}
     >
-      {renderCommentForm()}
-
       {commentsData?.length > 0 &&
         <ListView
           data={commentsData}
