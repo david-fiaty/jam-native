@@ -26,7 +26,7 @@ const CollapsibleView = ({label, openedLabel, content, headerStyle, isExpanded, 
   };
 
   useEffect(() => {
-    if (typeof isExpanded !== 'undefined') setCollapsed(!isExpanded); 
+    if (isExpanded === true) setCollapsed(false); 
     
     console.log(isExpanded)
   }, [isExpanded]);
