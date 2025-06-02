@@ -107,10 +107,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
                 <InputTextareaField
                   placeholder={i18n.t('Add a comment...')}
                   value={formData?.comment_text}
-                  onChangeText={(value: string) => { setFormData({
-                    ...formData,
-                    ...{comment_text: value},
-                  })}}
+                  onChangeText={(value: string) => { setFormData({comment_text: value})}}
                 />
 
                 <BoxView
@@ -194,6 +191,8 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
       item_id: entityId,
       comment_text: formData?.comment_text,
     };
+
+    console.log('comment payload', payload)
 
     //let result: any = await UserManager.register(payload);
     
