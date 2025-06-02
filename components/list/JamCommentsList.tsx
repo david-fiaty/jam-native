@@ -56,6 +56,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
         direction="row"
         align="flex-start"
         justify="flex-start"
+        style={styles.commentFormContainer}
       >
         <BoxView
           direction="row"
@@ -176,8 +177,11 @@ const styles = StyleSheet.create({
     //flex: 1,
     width: '78%'
   },
+  commentFormContainer: {
+    marginBottom: Layout.space.base*1.5,
+  },
   profileName: {
-    color: Layout.colors.secondary,
+    fontWeight: 'bold',
   },
   commentDate: {
     fontSize: 11.5,
