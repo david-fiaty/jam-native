@@ -35,10 +35,6 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
     return await UserManager.getProfileData();
   };
 
-  const toggleForm = () => {
-    setIsFormExpanded(!isFormExpanded);
-  };
-
   const renderProfileImage = (row: any) => {
     return (
       <>
@@ -94,14 +90,15 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
           style={styles.commentContainerRight}
         >
           <CollapsibleView
-            label={!isFormExpanded && (
-              <TouchableWithoutFeedback onPress={() => toggleForm()}>
+            label={(
+              <TouchableWithoutFeedback onPress={() => setIsFormExpanded(true)}>
                 <InputTextField
                   placeholder={i18n.t('Add a comment...')}
                   disabled={true}
                 />
               </TouchableWithoutFeedback>
             )}
+            openedLabel={<></>}
             content={(
               <>
                 <InputTextareaField
@@ -127,7 +124,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
 
                   <ButtonView
                     label={i18n.t('Cancel')}
-                    onPress={() => toggleForm()}
+                    onPress={() => setIsFormExpanded(false)}
                   />
                 </BoxView>
               </>
