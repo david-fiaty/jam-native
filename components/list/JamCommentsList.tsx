@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
 import { Layout } from "@/constants/Layout";
 import moment from 'moment';
 import TextView from "../view/TextView";
@@ -15,6 +15,7 @@ import InputTextareaField from '../field/InputTextareaField';
 import UserManager from '@/manager/UserManager';
 import ButtonView from '../view/ButtonView';
 import CollapsibleView from '../view/CollapsibleView';
+import InputTextField from '../field/InputTextField';
 
 type Props = {
   entityId: any;
@@ -65,53 +66,61 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
 
   const renderCommentForm = () => {
     return (
-      <CollapsibleView
-        label={<TextView>label</TextView>}
-        content={
-          <BoxView
-            direction="row"
-            align="flex-start"
-            justify="flex-start"
-            style={styles.commentFormContainer}
-          >
-            <BoxView
-              direction="row"
-              align="flex-start"
-              justify="flex-start"
-              style={styles.commentContainerLeft}
-            >
-              {renderProfileImage({
-                item: {
-                  profile: {
-                    profile_picture: profileData?.profile_picture,
-                  },
-                },
-              })}
-            </BoxView>
+      <BoxView
+        direction="row"
+        align="flex-start"
+        justify="flex-start"
+        style={styles.commentFormContainer}
+      >
+        <BoxView
+          direction="row"
+          align="flex-start"
+          justify="flex-start"
+          style={styles.commentContainerLeft}
+        >
+          {renderProfileImage({
+            item: {
+              profile: {
+                profile_picture: profileData?.profile_picture,
+              },
+            }
+          })}
+        </BoxView>
 
-            <BoxView
-              direction="column"
-              align="center"
-              justify="flex-start"
-              style={styles.commentContainerRight}
-            >
-              <InputTextareaField
-                placeholder={i18n.t('Add a comment...')}
-              //value={formData?.comment_text}
-              //onChangeText={(value: string) => FormManager.updateField(resource, 'description', value, ['string'])}
-              />
+        <BoxView
+          direction="column"
+          align="center"
+          justify="flex-start"
+          style={styles.commentContainerRight}
+        >
+          <CollapsibleView
+            label={(
+              <TouchableWithoutFeedback onPress={() => toggleForm}>
+                <InputTextField
+                  placeholder={i18n.t('Add a comment...')}
+                  disabled={true}
+                />
+              </TouchableWithoutFeedback>
+            )}
+            content={(
+              <>
+                <InputTextareaField
+                  placeholder={i18n.t('Add a comment...')}
+                //value={formData?.comment_text}
+                //onChangeText={(value: string) => FormManager.updateField(resource, 'description', value, ['string'])}
+                />
 
-              <ButtonView
-                label={i18n.t('Comment')}
-              //isProcessing={isProcessing}
-              //onPress={submitData}
-              //disabled={isSubmitDisabled()}
-              />
-
-            </BoxView>
-          </BoxView>
-        }
-      />
+                <ButtonView
+                  label={i18n.t('Comment')}
+                //isProcessing={isProcessing}
+                //onPress={submitData}
+                //disabled={isSubmitDisabled()}
+                />
+              </>
+            )}
+          />
+        </BoxView>
+      </BoxView>
     );
   };
 
