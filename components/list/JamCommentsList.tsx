@@ -1,15 +1,12 @@
-import { useState, useEffect, useCallback } from 'react';
-import { View, StyleSheet } from "react-native";
+import { useState, useEffect} from 'react';
+import { StyleSheet } from "react-native";
 import { Layout } from "@/constants/Layout";
-import { useRouter } from "expo-router";
 import moment from 'moment';
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
 import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import EntityManager from '@/manager/EntityManager';
-import ProfileListItem from './list-item/ProfileListItem';
-import SectionManager from '@/manager/SectionManager';
 import BoxView from '../view/BoxView';
 import ImageView from '../view/ImageView';
 import MediaManager from '@/manager/MediaManager';
@@ -27,6 +24,31 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [entityData, setEntityData] = useState<any[]>([]);
   const [formData, setFormData] = useState<any>({});
+
+  const renderProfileImage = (row: any) => {
+    return (
+      <>
+        {row?.item?.profile_picture?.url?.length > 0 && (
+          <ImageView
+            uri={MediaManager.getImageUrl(row.item.profile_picture.url)}
+            resizeMode="cover"
+            width={profileImageSize}
+            height={profileImageSize}
+            style={styles.profileImage}
+          />
+        )}
+
+        {!row?.item?.profile_picture?.url?.length && (
+          <IconView
+            name="user"
+            theme="secondary"
+            size={14}
+            padding={10}
+          />
+        )}
+      </>
+    );
+  };
 
   const renderCommentForm = () => {
     return (
@@ -56,31 +78,6 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
           />
         </BoxView>
       </BoxView>
-    );
-  };
-
-  const renderProfileImage = (row: any) => {
-    return (
-      <>
-        {row?.item?.profile_picture?.url?.length > 0 && (
-          <ImageView
-            uri={MediaManager.getImageUrl(row.item.profile_picture.url)}
-            resizeMode="cover"
-            width={profileImageSize}
-            height={profileImageSize}
-            style={styles.profileImage}
-          />
-        )}
-
-        {!row?.item?.profile_picture?.url?.length && (
-          <IconView
-            name="user"
-            theme="secondary"
-            size={14}
-            padding={10}
-          />
-        )}
-      </>
     );
   };
 
