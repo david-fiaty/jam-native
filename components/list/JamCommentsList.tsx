@@ -143,7 +143,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
       direction="column"
       align="flex-start"
       justify="flex-start"
-      style={Layout.screenContent}
+      style={[Layout.screenContent, styles.container]}
     >
       {!entityData?.comments?.length &&
         <TextView>{i18n.t('No comments available.')}</TextView>
@@ -162,6 +162,11 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    paddingBottom: Layout.space.base*4,
+    width: '100%',
+    height: '100%'
+  },
   commentContainer: {
     ...Layout.listItem,
     ...{
@@ -174,7 +179,6 @@ const styles = StyleSheet.create({
     width: '10%'
   },
   commentContainerRight: {
-    //flex: 1,
     width: '78%'
   },
   commentFormContainer: {
