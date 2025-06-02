@@ -141,16 +141,15 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
     >
       {renderCommentForm()}
 
-      {entityData?.comments?.length > 0 &&
-        <ListView
-          data={entityData?.comments}
-          renderItem={(row: any) => renderItem(row)}
-        />
-      }
-
       {!entityData?.comments?.length &&
         <TextView>{i18n.t('No comments available.')}</TextView>
       }
+    
+      <ListView
+        data={entityData?.comments}
+        renderItem={(row: any) => renderItem(row)}
+      />
+    
     </BoxView>
   );
 };
