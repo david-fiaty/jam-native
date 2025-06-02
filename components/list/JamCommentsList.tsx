@@ -29,6 +29,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
   const [entityData, setEntityData] = useState<any[]>([]);
   const [profileData, setProfileData] = useState<any>(null);
   const [isFormExpanded, setIsFormExpanded] = useState<boolean>(false);
+  const [isSubmitProcessing, setIsSubmitProcessing] = useState<boolean>(false);
   const [formData, setFormData] = useState<any>({});
 
   const getProfileData = async () => {
@@ -119,6 +120,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
                     label={i18n.t('Cancel')}
                     onPress={() => setIsFormExpanded(false)}
                     containerStyle={[styles.buttonStyle, styles.cancelButtonStyle]}
+                    isProcessing={isSubmitProcessing}
                   />
 
                   <ButtonView
@@ -127,6 +129,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
                     //onPress={submitData}
                     //disabled={isSubmitDisabled()}
                     containerStyle={[styles.buttonStyle, styles.submitButtonStyle]}
+                    isProcessing={isSubmitProcessing}
                   />
                 </BoxView>
               </>
