@@ -31,7 +31,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
       <BoxView
         key={row.item.id}
         direction="row"
-        align="center"
+        align="flex-start"
         justify="flex-start"
         style={styles.commentContainer}
       >
