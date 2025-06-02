@@ -14,6 +14,7 @@ import BoxView from '../view/BoxView';
 import ImageView from '../view/ImageView';
 import MediaManager from '@/manager/MediaManager';
 import IconView from '../view/IconView';
+import InputTextareaField from '../field/InputTextareaField';
 
 type Props = {
   entityId: any;
@@ -25,6 +26,32 @@ const profileImageSize: number = 34;
 const JamCommentsList = ({ entityId, entityType }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [entityData, setEntityData] = useState<any[]>([]);
+  const [formData, setFormData] = useState<any>({});
+
+  const renderProfileImage = (row: any) => {
+    return (
+      <>
+        {row?.item?.profile_picture?.url?.length > 0 && (
+          <ImageView
+            uri={MediaManager.getImageUrl(row.item.profile_picture.url)}
+            resizeMode="cover"
+            width={profileImageSize}
+            height={profileImageSize}
+            style={styles.profileImage}
+          />
+        )}
+
+        {!row?.item?.profile_picture?.url?.length && (
+          <IconView
+            name="user"
+            theme="secondary"
+            size={14}
+            padding={10}
+          />
+        )}
+      </>
+    );
+  };
 
   const renderItem = (row: any) => {
     return (
@@ -41,24 +68,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
           justify="flex-start"
           style={styles.commentContainerLeft}
         >
-          {row?.item?.profile_picture?.url?.length > 0 && (
-            <ImageView
-              uri={MediaManager.getImageUrl(row.item.profile_picture.url)}
-              resizeMode="cover"
-              width={profileImageSize}
-              height={profileImageSize}
-              style={styles.profileImage}
-            />
-          )}
-
-          {!row?.item?.profile_picture?.url?.length && (
-            <IconView
-              name="user"
-              theme="secondary"
-              size={14}
-              padding={10}
-            />
-          )}
+          {renderProfileImage(row)}
         </BoxView>
 
         <BoxView
@@ -101,6 +111,18 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
       justify="flex-start"
       style={Layout.screenContent}
     >
+      <BoxView
+        direction="row"
+        align="center"
+        justify="flex-start"
+      //style={styles.commentContainerLeft}
+      >
+        {renderProfileImage({})}
+        <InputTextareaField
+        //value={formData?.comment_text}
+        //onChangeText={(value: string) => FormManager.updateField(resource, 'description', value, ['string'])}
+        />
+      </BoxView>
       {entityData?.comments?.length > 0 &&
         <ListView
           data={entityData?.comments}
@@ -119,7 +141,7 @@ const styles = StyleSheet.create({
   commentContainer: {
     ...Layout.listItem,
     ...{
-      paddingVertical: Layout.space.base*1.5,
+      paddingVertical: Layout.space.base * 1.5,
     },
   },
   commentContainerLeft: {
@@ -140,6 +162,5 @@ const styles = StyleSheet.create({
     borderRadius: profileImageSize,
   },
 });
-
 
 export default JamCommentsList;
