@@ -90,6 +90,9 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
           style={styles.commentContainerRight}
         >
           <CollapsibleView
+            openedLabel={<></>}
+            isExpanded={isFormExpanded}
+            onLabelPress={() => setIsFormExpanded(true)}
             label={(
               <TouchableWithoutFeedback onPress={() => setIsFormExpanded(true)}>
                 <InputTextField
@@ -98,9 +101,6 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
                 />
               </TouchableWithoutFeedback>
             )}
-            openedLabel={<></>}
-            isExpanded={isFormExpanded}
-            onLabelPress={() => setIsFormExpanded(true)}
             content={(
               <>
                 <InputTextareaField
@@ -112,17 +112,15 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
                 <BoxView
                   direction="row"
                   align="center"
-                  justify="space-between"
+                  justify="center"
                   style={styles.commentFormActions}
-                >
-                  { /*
+                >            
                   <ButtonView
                     label={i18n.t('Comment')}
                   //isProcessing={isProcessing}
                   //onPress={submitData}
                   //disabled={isSubmitDisabled()}
                   />
-                  */}
 
                   <ButtonView
                     label={i18n.t('Cancel')}
