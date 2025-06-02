@@ -95,7 +95,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
         >
           <CollapsibleView
             label={!isFormExpanded && (
-              <TouchableWithoutFeedback onPress={() => toggleForm}>
+              <TouchableWithoutFeedback onPress={() => toggleForm()}>
                 <InputTextField
                   placeholder={i18n.t('Add a comment...')}
                   disabled={true}
@@ -127,7 +127,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
 
                   <ButtonView
                     label={i18n.t('Cancel')}
-                    onPress={toggleForm}
+                    onPress={() => toggleForm()}
                   />
                 </BoxView>
               </>
@@ -240,6 +240,7 @@ const styles = StyleSheet.create({
   },
   commentFormActions: {
     width: '100%',
+    marginTop: Layout.space.base,
   },
   profileName: {
     fontWeight: 'bold',
