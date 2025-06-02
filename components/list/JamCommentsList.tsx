@@ -1,5 +1,5 @@
-import { useState, useEffect} from 'react';
-import { StyleSheet } from "react-native";
+import { useState, useEffect } from 'react';
+import { StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
 import { Layout } from "@/constants/Layout";
 import moment from 'moment';
 import TextView from "../view/TextView";
@@ -14,6 +14,8 @@ import IconView from '../view/IconView';
 import InputTextareaField from '../field/InputTextareaField';
 import UserManager from '@/manager/UserManager';
 import ButtonView from '../view/ButtonView';
+import CollapsibleView from '../view/CollapsibleView';
+import InputTextField from '../field/InputTextField';
 
 type Props = {
   entityId: any;
@@ -26,6 +28,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [entityData, setEntityData] = useState<any[]>([]);
   const [profileData, setProfileData] = useState<any>(null);
+  const [isFormExpanded, setIsFormExpanded] = useState<boolean>(false);
   const [formData, setFormData] = useState<any>({});
 
   const getProfileData = async () => {
@@ -86,19 +89,47 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
           justify="flex-start"
           style={styles.commentContainerRight}
         >
-          <InputTextareaField
-            placeholder={i18n.t('Add a comment...')}
-            //value={formData?.comment_text}
-            //onChangeText={(value: string) => FormManager.updateField(resource, 'description', value, ['string'])}
-          />
+          <CollapsibleView
+            label={(
+              <TouchableWithoutFeedback onPress={() => setIsFormExpanded(true)}>
+                <InputTextField
+                  placeholder={i18n.t('Add a comment...')}
+                  disabled={true}
+                />
+              </TouchableWithoutFeedback>
+            )}
+            openedLabel={<></>}
+            content={(
+              <>
+                <InputTextareaField
+                  placeholder={i18n.t('Add a comment...')}
+                //value={formData?.comment_text}
+                //onChangeText={(value: string) => FormManager.updateField(resource, 'description', value, ['string'])}
+                />
 
-          <ButtonView
-            label={i18n.t('Comment')}
-            //isProcessing={isProcessing}
-            //onPress={submitData}
-            //disabled={isSubmitDisabled()}
-          />
+                <BoxView
+                  direction="row"
+                  align="center"
+                  justify="space-between"
+                  style={styles.commentFormActions}
+                >
+                  { /*
+                  <ButtonView
+                    label={i18n.t('Comment')}
+                  //isProcessing={isProcessing}
+                  //onPress={submitData}
+                  //disabled={isSubmitDisabled()}
+                  />
+                  */}
 
+                  <ButtonView
+                    label={i18n.t('Cancel')}
+                    onPress={() => setIsFormExpanded(false)}
+                  />
+                </BoxView>
+              </>
+            )}
+          />
         </BoxView>
       </BoxView>
     );
@@ -169,7 +200,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
       {!entityData?.comments?.length &&
         <TextView>{i18n.t('No comments available.')}</TextView>
       }
-    
+
       <ListView
         data={[
           ...[renderCommentForm()],
@@ -183,7 +214,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingBottom: Layout.space.base*4,
+    paddingBottom: Layout.space.base * 4,
     width: '100%',
     height: '100%'
   },
@@ -202,7 +233,11 @@ const styles = StyleSheet.create({
     width: '78%',
   },
   commentFormContainer: {
-    marginBottom: Layout.space.base*1.5,
+    marginBottom: Layout.space.base * 1.5,
+  },
+  commentFormActions: {
+    width: '100%',
+    marginTop: Layout.space.base,
   },
   profileName: {
     fontWeight: 'bold',
