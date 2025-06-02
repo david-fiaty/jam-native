@@ -128,7 +128,9 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
       if (!isLoaded) {
         let entityData: any = (await EntityManager.getJams(entityId))?.[0]; 
         setEntityData(entityData);
-        setCommentsData(entityData?.comments || []);
+        setCommentsData([
+          ...entityData?.comments || [],
+        ]);
         setIsLoaded(true);
       }
     })();
