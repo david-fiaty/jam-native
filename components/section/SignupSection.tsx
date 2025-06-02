@@ -36,10 +36,10 @@ const SignupSection = ({ reset }: Props) => {
   };
 
   useEffect(() => {
+    setCurrentTab((StaticData.authTabs.find((o: any) => o?.default === true))?.id);
+    
     (async () => {
         if (!isLoaded) {
-          setCurrentTab((StaticData.authTabs.find((o: any) => o?.default === true))?.id);
-
           //if (reset) FormManager.resetForm(resource); // Todo - Fix form reset on web
           setIsLoaded(true);
         }
