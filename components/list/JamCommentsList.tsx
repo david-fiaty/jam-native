@@ -114,17 +114,19 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
                   align="center"
                   justify="center"
                   style={styles.commentFormActions}
-                >            
-                  <ButtonView
-                    label={i18n.t('Comment')}
-                  //isProcessing={isProcessing}
-                  //onPress={submitData}
-                  //disabled={isSubmitDisabled()}
-                  />
-
+                >
                   <ButtonView
                     label={i18n.t('Cancel')}
                     onPress={() => setIsFormExpanded(false)}
+                    containerStyle={{ width: 'auto' }}
+                  />
+                  
+                  <ButtonView
+                    label={i18n.t('Comment')}
+                    //isProcessing={isProcessing}
+                    //onPress={submitData}
+                    //disabled={isSubmitDisabled()}
+                    containerStyle={{ width: 'auto' }}
                   />
                 </BoxView>
               </>
