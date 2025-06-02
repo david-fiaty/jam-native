@@ -34,28 +34,41 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
         justify="flex-start"
         style={styles.commentContainer}
       >
-        {row?.item?.profile_picture?.url?.length > 0 && (
-          <ImageView
-            uri={MediaManager.getImageUrl(row.item.profile_picture.url)}
-            resizeMode="cover"
-            width={profileImageSize}
-            height={profileImageSize}
-            style={styles.profileImage}
-          />
-        )}
+        <BoxView
+          direction="row"
+          align="center"
+          justify="flex-start"
+          style={styles.commentContainerLeft}
+        >
+          {row?.item?.profile_picture?.url?.length > 0 && (
+            <ImageView
+              uri={MediaManager.getImageUrl(row.item.profile_picture.url)}
+              resizeMode="cover"
+              width={profileImageSize}
+              height={profileImageSize}
+              style={styles.profileImage}
+            />
+          )}
 
-        {!row?.item?.profile_picture?.url?.length && (
-          <IconView
-            name="user"
-            theme="secondary"
-            size={14}
-            padding={10}
-          />
-        )}
+          {!row?.item?.profile_picture?.url?.length && (
+            <IconView
+              name="user"
+              theme="secondary"
+              size={14}
+              padding={10}
+            />
+          )}
+        </BoxView>
 
-        <TextView>{row.item.comment_text}</TextView>
-        <TextView>{row.item.profile.profile_name}</TextView>
-        <TextView>--------</TextView>
+        <BoxView
+          direction="column"
+          align="center"
+          justify="flex-start"
+          style={styles.commentContainerRight}
+        >
+          <TextView>{row.item.comment_text}</TextView>
+          <TextView>{row.item.profile.profile_name}</TextView>
+        </BoxView>
       </BoxView>
     );
   };
@@ -98,6 +111,12 @@ const styles = StyleSheet.create({
     ...{
       padding: Layout.space.base / 1.3,
     },
+  },
+  commentContainerLeft: {
+    backgroundColor: 'red',
+  },
+  commentContainerRight: {
+    backgroundColor: 'green',
   },
   profileImage: {
     width: profileImageSize,
