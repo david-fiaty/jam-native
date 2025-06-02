@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   commentContainer: {
     ...Layout.listItem,
     ...{
-      padding: Layout.space.base / 1.3,
+      padding: Layout.space.base,
     },
   },
   commentContainerLeft: {
