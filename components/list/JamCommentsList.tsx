@@ -81,7 +81,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
         </BoxView>
 
         <BoxView
-          direction="row"
+          direction="column"
           align="center"
           justify="flex-start"
           style={styles.commentContainerRight}
@@ -136,7 +136,6 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
             direction="row"
             align="center"
             justify="flex-start"
-            style={styles.commentContainerRight}
           >
             <TextView style={styles.profileName}>@{row.item.profile.profile_name}</TextView>
             <TextView style={styles.commentDate}>{moment(row.item.created_at).fromNow()}</TextView>
