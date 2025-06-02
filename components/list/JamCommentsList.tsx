@@ -90,6 +90,9 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
           style={styles.commentContainerRight}
         >
           <CollapsibleView
+            openedLabel={<></>}
+            isExpanded={isFormExpanded}
+            onLabelPress={() => setIsFormExpanded(true)}
             label={(
               <TouchableWithoutFeedback onPress={() => setIsFormExpanded(true)}>
                 <InputTextField
@@ -98,9 +101,6 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
                 />
               </TouchableWithoutFeedback>
             )}
-            openedLabel={<></>}
-            isExpanded={isFormExpanded}
-            onLabelPress={() => setIsFormExpanded(true)}
             content={(
               <>
                 <InputTextareaField
@@ -112,21 +112,21 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
                 <BoxView
                   direction="row"
                   align="center"
-                  justify="space-between"
+                  justify="center"
                   style={styles.commentFormActions}
                 >
-                  { /*
-                  <ButtonView
-                    label={i18n.t('Comment')}
-                  //isProcessing={isProcessing}
-                  //onPress={submitData}
-                  //disabled={isSubmitDisabled()}
-                  />
-                  */}
-
                   <ButtonView
                     label={i18n.t('Cancel')}
                     onPress={() => setIsFormExpanded(false)}
+                    containerStyle={[styles.buttonStyle, styles.cancelButtonStyle]}
+                  />
+
+                  <ButtonView
+                    label={i18n.t('Submit')}
+                    //isProcessing={isProcessing}
+                    //onPress={submitData}
+                    //disabled={isSubmitDisabled()}
+                    containerStyle={[styles.buttonStyle, styles.submitButtonStyle]}
                   />
                 </BoxView>
               </>
@@ -240,6 +240,17 @@ const styles = StyleSheet.create({
   commentFormActions: {
     width: '100%',
     marginTop: Layout.space.base,
+  },
+  buttonStyle: {
+    width: 'auto',
+    height: Layout.space.base*3,
+    paddingHorizontal: Layout.space.base,
+  },
+  cancelButtonStyle: {
+    
+  },
+  submitButtonStyle: {
+    
   },
   profileName: {
     fontWeight: 'bold',
