@@ -243,6 +243,8 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     width: 'auto',
+    height: Layout.space.base*3,
+    paddingHorizontal: Layout.space.base,
   },
   cancelButtonStyle: {
     
