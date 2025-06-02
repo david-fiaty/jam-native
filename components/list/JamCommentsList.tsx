@@ -118,15 +118,15 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
                   <ButtonView
                     label={i18n.t('Cancel')}
                     onPress={() => setIsFormExpanded(false)}
-                    containerStyle={{ width: 'auto' }}
+                    containerStyle={[styles.buttonStyle, styles.cancelButtonStyle]}
                   />
-                  
+
                   <ButtonView
-                    label={i18n.t('Comment')}
+                    label={i18n.t('Submit')}
                     //isProcessing={isProcessing}
                     //onPress={submitData}
                     //disabled={isSubmitDisabled()}
-                    containerStyle={{ width: 'auto' }}
+                    containerStyle={[styles.buttonStyle, styles.submitButtonStyle]}
                   />
                 </BoxView>
               </>
@@ -240,6 +240,15 @@ const styles = StyleSheet.create({
   commentFormActions: {
     width: '100%',
     marginTop: Layout.space.base,
+  },
+  buttonStyle: {
+    width: 'auto',
+  },
+  cancelButtonStyle: {
+    
+  },
+  submitButtonStyle: {
+    
   },
   profileName: {
     fontWeight: 'bold',
