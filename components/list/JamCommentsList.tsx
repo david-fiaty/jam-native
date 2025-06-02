@@ -100,6 +100,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
             )}
             openedLabel={<></>}
             onLabelPress={() => setIsFormExpanded(true)}
+            isExpanded={isFormExpanded}
             content={(
               <>
                 <InputTextareaField
@@ -125,7 +126,8 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
 
                   <ButtonView
                     label={i18n.t('Cancel')}
-                    onPress={() => setIsFormExpanded(false)}
+                    onPress={() => console.log('close button press')}
+                    //onPress={() => setIsFormExpanded(false)}
                   />
                 </BoxView>
               </>
