@@ -120,14 +120,11 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
                     label={i18n.t('Cancel')}
                     onPress={() => setIsFormExpanded(false)}
                     containerStyle={[styles.buttonStyle, styles.cancelButtonStyle]}
-                    isProcessing={isSubmitProcessing}
                   />
 
                   <ButtonView
                     label={i18n.t('Submit')}
-                    //isProcessing={isProcessing}
-                    //onPress={submitData}
-                    //disabled={isSubmitDisabled()}
+                    onPress={submitComment}
                     containerStyle={[styles.buttonStyle, styles.submitButtonStyle]}
                     isProcessing={isSubmitProcessing}
                   />
@@ -182,6 +179,13 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
       </BoxView>
     );
   };
+
+  const submitComment = () => {
+    setIsSubmitProcessing(true);
+      // Todo - Implement submit comment
+      console.log('on comment submit');
+    setIsSubmitProcessing(false);
+  }
 
   useEffect(() => {
     (async () => {
