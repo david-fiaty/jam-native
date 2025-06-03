@@ -20,6 +20,7 @@ import CountriesList from '../list/CountriesList';
 import SelectJamsForm from '../form/SelectJamsForm';
 import JamCommentsList from '../list/JamCommentsList';
 import ProjectCommentsList from '../list/ProjectCommentsList';
+import VenueTypesList from '../list/VenueTypesList';
 
 type Props = {
   currentSection?: any;
@@ -166,6 +167,11 @@ const ModalView = ({ currentSection, style }: Props) => {
         id: 'CollaboratorsList',
         title: i18n.t('Collaborators'),
         render: (params: any) => <CollaboratorsList {...params} />,
+      },
+      {
+        id: 'VenueTypesList',
+        title: i18n.t('Venue types'),
+        render: (params: any) => <VenueTypesList {...params} />,
       },
       {
         id: 'CountriesList',

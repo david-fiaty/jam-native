@@ -169,12 +169,12 @@ const SignupForm = () => {
           </TextView>
           <VenueTypesField
             resource={resource}
-            field="collaborators_ids"
-            placeholder={i18n.t('Select collaborators')}
-            value={formData?.collaborators_ids}
-            onPress={() => ModalManager.toggleModal('CollaboratorsList', {
+            field="venue_types"
+            placeholder={i18n.t('Select venue types')}
+            value={formData?.venue_types}
+            onPress={() => ModalManager.toggleModal('VenueTypesList', {
               resource: resource,
-              field: "collaborators_ids",
+              field: "venue_types",
             })}
           />
 
