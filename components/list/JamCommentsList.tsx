@@ -114,7 +114,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
                   direction="row"
                   align="center"
                   justify="center"
-                  style={styles.commentFormActions}
+                  style={styles.commentFormButtonsContainer}
                 >
                   <ButtonView
                     label={i18n.t('Cancel')}
@@ -278,7 +278,7 @@ const styles = StyleSheet.create({
   commentFormContainer: {
     marginBottom: Layout.space.base * 1.5,
   },
-  commentFormActions: {
+  commentFormButtonsContainer: {
     width: '100%',
     marginTop: Layout.space.base,
   },
