@@ -16,6 +16,7 @@ import UserManager from '@/manager/UserManager';
 import ButtonView from '../view/ButtonView';
 import CollapsibleView from '../view/CollapsibleView';
 import InputTextField from '../field/InputTextField';
+import CommentManager from '@/manager/CommentManager';
 
 type Props = {
   entityId: any;
@@ -62,7 +63,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
     );
   };
 
-  const renderAddCommentForm = () => {
+  const renderCommentForm = (row?: any) => {
     return (
       <BoxView
         direction="row"
@@ -91,26 +92,33 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
           justify="flex-start"
           style={styles.commentContainerRight}
         >
-          <CollapsibleView
-            openedLabel={<></>}
-            isExpanded={isFormExpanded}
-            onLabelPress={() => setIsFormExpanded(true)}
-            label={(
-              <TouchableWithoutFeedback onPress={() => setIsFormExpanded(true)}>
-                <InputTextField
-                  placeholder={i18n.t('Add a comment...')}
-                  disabled={true}
-                />
-              </TouchableWithoutFeedback>
-            )}
-            content={renderCommentForm()}
-          />
+          {!row?.length && (
+            <CollapsibleView
+              openedLabel={<></>}
+              isExpanded={isFormExpanded}
+              onLabelPress={() => setIsFormExpanded(true)}
+              label={(
+                <TouchableWithoutFeedback onPress={() => setIsFormExpanded(true)}>
+                  <InputTextField
+                    placeholder={i18n.t('Add a comment...')}
+                    disabled={true}
+                  />
+                </TouchableWithoutFeedback>
+              )}
+              content={renderCommentFormFields(row)}
+            />
+          )}
+
+          {row?.length && (
+            // Todo - Render edit comment form fields
+            <TextView>Edit comment form fields</TextView>
+          )}
         </BoxView>
       </BoxView>
     );
   };
 
-  const renderCommentForm = (row?: any) => {
+  const renderCommentFormFields = (row?: any) => {
     return (
       <>
         <InputTextareaField
@@ -144,7 +152,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
 
   const renderItem = (row: any) => {
     if (row.index === 0) {
-      return renderAddCommentForm();
+      return renderCommentForm();
     }
 
     return (
@@ -231,7 +239,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
     return (
       <ListView
         data={[
-          ...[renderAddCommentForm()],
+          ...[renderCommentForm()],
           ...(entityComments || []),
         ]}
         renderItem={(row: any) => renderItem(row)}
