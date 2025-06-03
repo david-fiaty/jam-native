@@ -91,20 +91,22 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
           justify="flex-start"
           style={styles.commentContainerRight}
         >
-          <CollapsibleView
-            openedLabel={<></>}
-            isExpanded={isFormExpanded}
-            onLabelPress={() => setIsFormExpanded(true)}
-            label={(
-              <TouchableWithoutFeedback onPress={() => setIsFormExpanded(true)}>
-                <InputTextField
-                  placeholder={i18n.t('Add a comment...')}
-                  disabled={true}
-                />
-              </TouchableWithoutFeedback>
-            )}
-            content={renderCommentFormFields(row)}
-          />
+          {!row?.length && (
+            <CollapsibleView
+              openedLabel={<></>}
+              isExpanded={isFormExpanded}
+              onLabelPress={() => setIsFormExpanded(true)}
+              label={(
+                <TouchableWithoutFeedback onPress={() => setIsFormExpanded(true)}>
+                  <InputTextField
+                    placeholder={i18n.t('Add a comment...')}
+                    disabled={true}
+                  />
+                </TouchableWithoutFeedback>
+              )}
+              content={renderCommentFormFields(row)}
+            />
+          )}
         </BoxView>
       </BoxView>
     );
