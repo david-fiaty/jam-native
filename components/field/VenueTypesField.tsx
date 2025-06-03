@@ -70,7 +70,8 @@ const VenueTypesField = ({ resource, field, value, placeholder, onPress }: Props
       {currentValue?.length > 0 && (
         <View style={Layout.fieldSelectionPreview}> 
           { currentValue.map((id: any) => {
-              let item: any = venueTypes.find((o: any) => o.id === id)
+            let item: any = venueTypes.find((o: any) => o.id === id);
+            
             return (
               <TagView
                 theme="white"
