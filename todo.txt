@@ -106,16 +106,15 @@ https://withfra.me/react-native-tutorials/how-to-use-svg-in-react-native
 # Grid layout
 https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-7948f1a6f949
 
-# Finish
-- Venue registration => handle venue types selection
-- Venue profile => display venue types selection
-- Check web jams google maps markers
+# Finish 
+- Venue type field => handle hierarchy in registration and profile forms
+- Check jams google maps markers
 - Profile edit form: center spinner vertically
+- Fix web console error on input field value
 
 - Profile/project/jam image upload
 - Social login
 
-- Login email field => trim field value
 - Disable phone countries not available for sms
 - review form error api responses handling
 - Extract languages and translate
@@ -123,7 +122,13 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 # Finish optional
 - Check internet connexion available
 - Implement global crash handling
+- Trim textarea fields like input text fields?
 
+# New release
+- Avancement comments feature
+- Suppression espace dans email registration field affichant une erreur de validation
+- Ajoute venue type field dans registration et profile forms
+- Bug fix jams map n'affichant pas les jams sur web
 
 # Todo 
 - Implement image cache : https://github.com/echowaves/expo-cached-image

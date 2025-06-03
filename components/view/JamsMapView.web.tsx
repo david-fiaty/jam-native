@@ -42,8 +42,8 @@ const JamsMapView = ({ idArray }: Props) => {
   };
 
   const getMarkerCoordinate = (item: any) => {
-    const lat = item?.geolocation_latitude;
-    const lng = item?.geolocation_longitude;
+    const lat = parseFloat(item?.geolocation_latitude);
+    const lng = parseFloat(item?.geolocation_longitude);
 
     return { lat, lng };
   };
@@ -93,7 +93,9 @@ const JamsMapView = ({ idArray }: Props) => {
     }
   }, [isLoaded, searchState]);
 
+  // Todo - Enable spinner
   //if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
+  //if (!searchData?.length) return <SpinnerView />;
 
   return (
     <LoadScript googleMapsApiKey={Config.mapApiKey}>
