@@ -62,7 +62,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
     );
   };
 
-  const renderCommentForm = () => {
+  const renderCommentForm = (row?: any) => {
     return (
       <BoxView
         direction="row"
