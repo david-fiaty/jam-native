@@ -3,13 +3,12 @@ import { View, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
-import TextView from "../view/TextView";
-import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import EntityManager from '@/manager/EntityManager';
 import ProfileListItem from './list-item/ProfileListItem';
+import TextView from '../view/TextView';
 
 type Props = {
   resource: string;
@@ -18,74 +17,54 @@ type Props = {
 
 const VenueTypesList = ({ resource, field }: Props) => {
   const dispatch = useDispatch();
-  const [profiles, setProfiles] = useState<any>(null);
-  const [selectedProfiles, setSelectedProfiles] = useState<any>([]);
-  const [searchValue, setSearchValue] = useState<string>('');
-  const [isSearching, setIsSearching] = useState<boolean>(false);
+  const [venues, setVenues] = useState<any>(null);
+  const [selectedVenues, setSelectedVenues] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
-  const onSubmitEditing = () => {
-    setIsSearching(true);
-    let options = searchValue.length ? { query_text: searchValue } : {};
-
-    EntityManager.listProfiles(options).then((items: any) => {
-      setIsSearching(false);
-      setProfiles(items);
-    });
-  };
-
-  const toggleProfile = (entityId: number) => {
-    let profileList = [...selectedProfiles];
-    if (profileList.includes(entityId)) {
-      profileList = profileList.filter((value: number) => value !== entityId);
+  const toggleItem = (entityId: number) => {
+    let venueList = [...selectedVenues];
+    if (venueList.includes(entityId)) {
+      venueList = venueList.filter((value: number) => value !== entityId);
     }
     else {
-      profileList.push(entityId);
+      venueList.push(entityId);
     }
     
-    setSelectedProfiles(profileList);
+    setSelectedVenues(venueList);
 
     dispatch(setFormData<any>({ 
       resource: resource,
       key: field, 
-      value: profileList,
+      value: venueList,
     }));
   };
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) { 
-        if (!profiles) setProfiles(await EntityManager.listProfiles());
-        if (formData?.[field]?.length && !selectedProfiles.length) {
-          setSelectedProfiles(formData[field]);
+        if (!venues) setVenues(await EntityManager.listProfiles());
+        if (formData?.[field]?.length && !selectedVenues.length) {
+          setSelectedVenues(formData[field]);
         }
 
         setIsLoaded(true);
       }
     })();
-  }, [profiles, formData, field, selectedProfiles]);
+  }, [venues, formData, field, selectedVenues]);
 
   if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <View style={Layout.borderedListContainer}>
-        {profiles?.length > 0 &&
+        {venues?.length > 0 &&
           <ListView
-            data={profiles}
+            data={venues}
             renderItem={(row: any) => (
-              <ProfileListItem 
-                row={row}
-                selected={selectedProfiles.includes(row.item.id)}
-                onListItemPress={(o: any) => toggleProfile(o.item.id)}  
-              />
+              <TextView>{row.item.id}</TextView>
             )}
           />
-        }
-
-        {!profiles?.length && 
-          <TextView>{i18n.t('No collaborators found.')}</TextView>
         }
       </View>
     </BoxView>
@@ -93,16 +72,6 @@ const VenueTypesList = ({ resource, field }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  inputTextFieldContainer: {
-    backgroundColor: Layout.colors.white,
-    borderWidth: Layout.borderWidth.base,
-    borderRadius: Layout.radius.round,
-    borderColor: Layout.colors.primary,
-  },
-  wecomeMessage: {
-    textTransform: 'uppercase',
-    fontSize: Layout.fontSize.base,
-  }
 });
 
 export default VenueTypesList;
