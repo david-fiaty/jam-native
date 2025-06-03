@@ -16,6 +16,7 @@ import UserManager from '@/manager/UserManager';
 import ButtonView from '../view/ButtonView';
 import CollapsibleView from '../view/CollapsibleView';
 import InputTextField from '../field/InputTextField';
+import CommentManager from '@/manager/CommentManager';
 
 type Props = {
   entityId: any;
