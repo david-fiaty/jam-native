@@ -28,6 +28,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [entityComments, setEntityComments] = useState<any[]>([]);
   const [profileData, setProfileData] = useState<any>(null);
+  const [entityData, setEntityData] = useState<any>(null);
   const [isFormExpanded, setIsFormExpanded] = useState<boolean>(false);
   const [isSubmitProcessing, setIsSubmitProcessing] = useState<boolean>(false);
   const [formData, setFormData] = useState<any>({});
@@ -180,7 +181,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
             direction="row"
             align="center"
             justify="flex-start"
-            style={styles.commentToolbaarContainer}
+            style={styles.commentToolbarContainer}
           >
             {true && (
               <TextView>{row?.item?.sub_ids?.length || 0} {i18n.t('replies')}</TextView>
@@ -227,6 +228,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
         let entityData: any = (await EntityManager.getJams(entityId))?.[0];
         let commentsData: any[] = await EntityManager.getComments(entityData.comments.map((o: any) => o.id));
 
+        setEntityData(entityData);
         setEntityComments(commentsData);
         setIsLoaded(true);
       }
@@ -234,6 +236,8 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
   }, [isLoaded, entityId]);
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log('entity comments', entityData?.comments);
 
   return (
     <BoxView
@@ -284,7 +288,7 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: Layout.space.base,
   },
-  commentToolbaarContainer: {
+  commentToolbarContainer: {
     
   },
   buttonStyle: {
