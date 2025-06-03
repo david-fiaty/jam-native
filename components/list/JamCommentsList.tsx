@@ -180,7 +180,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
             direction="row"
             align="center"
             justify="flex-start"
-            style={styles.commentActionsContainer}
+            style={styles.commentToolbaarContainer}
           >
             {true && (
               <TextView>{row?.item?.sub_ids?.length || 0} {i18n.t('replies')}</TextView>
@@ -284,7 +284,7 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: Layout.space.base,
   },
-  commentActionsContainer: {
+  commentToolbaarContainer: {
     
   },
   buttonStyle: {
