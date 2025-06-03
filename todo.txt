@@ -115,7 +115,6 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Profile/project/jam image upload
 - Social login
 
-- Login email field => trim field value
 - Disable phone countries not available for sms
 - review form error api responses handling
 - Extract languages and translate
@@ -126,6 +125,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 
 # New release
 - Avancement comments feature
+- Suppression espace dans email registration field affichant une erreur de validation
 - Ajoute venue type field dans registration et profile forms
 - Bug fix jams map n'affichant pas les jams sur web
 
