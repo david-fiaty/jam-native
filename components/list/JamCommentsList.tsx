@@ -218,7 +218,19 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
     //let result: any = await UserManager.register(payload);
 
     setIsSubmitProcessing(false);
-  }
+  };
+
+  const renderComments = () => {
+    return (
+      <ListView
+        data={[
+          ...[renderCommentForm()],
+          ...(entityComments || []),
+        ]}
+        renderItem={(row: any) => renderItem(row)}
+      />
+    );
+  };
 
   useEffect(() => {
     (async () => {
@@ -250,13 +262,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
         <TextView>{i18n.t('No comments available.')}</TextView>
       }
 
-      <ListView
-        data={[
-          ...[renderCommentForm()],
-          ...(entityComments || []),
-        ]}
-        renderItem={(row: any) => renderItem(row)}
-      />
+      {renderComments()}
     </BoxView>
   );
 };
@@ -289,7 +295,7 @@ const styles = StyleSheet.create({
     marginTop: Layout.space.base,
   },
   commentToolbarContainer: {
-    
+
   },
   buttonStyle: {
     width: 'auto',
