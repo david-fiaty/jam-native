@@ -175,6 +175,7 @@ const ListItemToolbar = ({ row, profileData, onListItemAction }: Props) => {
 
   const renderCommentsButton = () => {
     if (isCommentProcessing) return <SpinnerView size="small" />;
+    let commentsCount: number = row?.item?.comments?.length || 0; // Todo - Show comments count
 
     return (
       <BoxView

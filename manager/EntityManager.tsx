@@ -67,6 +67,15 @@ class EntityManager {
     return await DataManager.get('getJams', {...defaults, ...options}); 
   }
 
+  async getComments(idArray: any) {
+    let defaults = {};
+    let options = {
+      items_ids: idArray,
+    };
+
+    return await DataManager.get('getComments', {...defaults, ...options}); 
+  }
+
   /*
   async getJams(options?: any) {
     let defaults = {};
