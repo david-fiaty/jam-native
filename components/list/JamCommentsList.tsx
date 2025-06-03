@@ -284,7 +284,7 @@ const styles = StyleSheet.create({
     marginTop: Layout.space.base,
   },
   commentActionsContainer: {
- 
+    backgroundColor: Layout.colors.secondary,
   },
   buttonStyle: {
     width: 'auto',
