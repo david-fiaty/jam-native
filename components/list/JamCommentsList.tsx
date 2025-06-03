@@ -185,7 +185,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
             {true && (
               <TextView>{row?.item?.sub_ids?.length || 0} {i18n.t('replies')}</TextView>
             )}
-            
+
             <TouchableOpacity onPress={() => console.log('on comment reply press')}>
               <TextView>{i18n.t('Reply')}</TextView>
             </TouchableOpacity>
@@ -297,7 +297,7 @@ const styles = StyleSheet.create({
     marginTop: Layout.space.base,
   },
   commentActionsContainer: {
-    backgroundColor: Layout.colors.secondary,
+    
   },
   buttonStyle: {
     width: 'auto',
