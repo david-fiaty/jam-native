@@ -7,7 +7,6 @@ import BoxView from "../view/BoxView";
 import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import EntityManager from '@/manager/EntityManager';
-import ProfileListItem from './list-item/ProfileListItem';
 import TextView from '../view/TextView';
 import IconView from '../view/IconView';
 
@@ -18,7 +17,7 @@ type Props = {
 
 const VenueTypesList = ({ resource, field }: Props) => {
   const dispatch = useDispatch();
-  const [venues, setVenues] = useState<any>(null);
+  const [venueTypes, setVenueTypes] = useState<any[]>([]);
   const [selectedVenues, setSelectedVenues] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
@@ -71,7 +70,7 @@ const VenueTypesList = ({ resource, field }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        if (!venues) setVenues(await EntityManager.getVenueTypes());
+        if (!venueTypes) setVenueTypes(await EntityManager.getVenueTypes());
         if (formData?.[field]?.length && !selectedVenues.length) {
           setSelectedVenues(formData[field]);
         }
@@ -79,16 +78,16 @@ const VenueTypesList = ({ resource, field }: Props) => {
         setIsLoaded(true);
       }
     })();
-  }, [venues, formData, field, selectedVenues]);
+  }, [venueTypes, formData, field, selectedVenues]);
 
   if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <View style={Layout.borderedListContainer}>
-        {venues?.length > 0 &&
+        {venueTypes?.length > 0 &&
           <ListView
-            data={venues}
+            data={venueTypes}
             renderItem={(row: any) => renderItem(row)}
           />
         }
@@ -101,7 +100,7 @@ const styles = StyleSheet.create({
   container: {
     ...Layout.listItem,
     ...{
-      padding: Layout.space.base*0.9,
+      padding: Layout.space.base,
     },
   },
 });
