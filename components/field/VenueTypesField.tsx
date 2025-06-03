@@ -20,6 +20,7 @@ type Props = {
 const VenueTypesField = ({ resource, field, value, placeholder, onPress }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [venueTypes, setVenueTypes] = useState<any>(null);
   const [currentValue, setCurrentValue] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
@@ -38,12 +39,13 @@ const VenueTypesField = ({ resource, field, value, placeholder, onPress }: Props
 
   useEffect(() => {
     (async () => {
-      if (formData?.[field]?.length > 0) {
-        setCurrentValue(await EntityManager.getProfiles(formData[field]));
+      if (!isLoaded) {
+        if (!venueTypes) setVenueTypes(await EntityManager.getVenueTypes());
+        setIsLoaded(true);
       }
 
-      if (!isLoaded) {
-        setIsLoaded(true);
+      if (formData?.[field]?.length > 0) {
+        setCurrentValue(formData[field]);
       }
     })();    
   }, [isLoaded, value, formData, field]);
@@ -67,7 +69,9 @@ const VenueTypesField = ({ resource, field, value, placeholder, onPress }: Props
 
       {currentValue?.length > 0 && (
         <View style={Layout.fieldSelectionPreview}> 
-          { currentValue.map((item: any) => {
+          { currentValue.map((id: any) => {
+            let item: any = venueTypes.find((o: any) => o.id === id);
+            
             return (
               <TagView
                 theme="white"
@@ -75,7 +79,7 @@ const VenueTypesField = ({ resource, field, value, placeholder, onPress }: Props
                 canEdit={true}
                 onDeleteButtonPress={() => deleteItem(item)}  
               >
-                {item?.profile_name}
+                {item?.name}
               </TagView>
             );
           })}
