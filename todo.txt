@@ -107,8 +107,7 @@ https://withfra.me/react-native-tutorials/how-to-use-svg-in-react-native
 https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-7948f1a6f949
 
 # Finish
-- Venue registration => handle venue types selection
-- Venue profile => display venue types selection
+- Venue type field => handle hierarchy in registration and profile forms
 - Check web jams google maps markers
 - Profile edit form: center spinner vertically
 
