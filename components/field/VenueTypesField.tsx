@@ -20,6 +20,7 @@ type Props = {
 const VenueTypesField = ({ resource, field, value, placeholder, onPress }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [venueTypes, setVenueTypes] = useState<any[]>([]);
   const [currentValue, setCurrentValue] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
@@ -36,10 +37,16 @@ const VenueTypesField = ({ resource, field, value, placeholder, onPress }: Props
     }));
   };
 
+  const getSelectedValues = async () => {
+    let test = await EntityManager.getVenueTypes();
+
+    return test;
+  };
+
   useEffect(() => {
     (async () => {
       if (formData?.[field]?.length > 0) {
-        setCurrentValue(await EntityManager.getProfiles(formData[field]));
+        setCurrentValue(await getSelectedValues());
       }
 
       if (!isLoaded) {
@@ -49,6 +56,8 @@ const VenueTypesField = ({ resource, field, value, placeholder, onPress }: Props
   }, [isLoaded, value, formData, field]);
 
   if (!isLoaded) return <SpinnerView size="small" />;
+
+  console.log()
 
   return (
     <>
