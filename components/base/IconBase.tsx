@@ -28,6 +28,7 @@ const icons = {
   user: ({iconStyle, size}: IconProps) => <Ionicons name="person-outline" size={size} style={iconStyle} />,
   users: ({iconStyle, size}: IconProps) => <Ionicons name="people-outline" size={size} style={iconStyle} />,
   actions: ({iconStyle, size}: IconProps) => <Ionicons name="ellipsis-horizontal-sharp" size={size} style={iconStyle} />,
+  toolbar: ({iconStyle, size}: IconProps) => <Ionicons name="ellipsis-horizontal-sharp" size={size} style={iconStyle} />,
   copy: ({iconStyle, size}: IconProps) => <Ionicons name="copy-outline" size={size} style={iconStyle} />,
   email: ({iconStyle, size}: IconProps) => <Ionicons name="mail-outline" size={size} style={iconStyle} />,
   facebook: ({iconStyle, size}: IconProps) => <Ionicons name="logo-facebook" size={size} style={iconStyle} />,
