@@ -1,8 +1,12 @@
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
+import moment from 'moment';
 import MediaManager from "./MediaManager";
 import ImageView from "@/components/view/ImageView";
 import IconView from "@/components/view/IconView";
+import BoxView from "@/components/view/BoxView";
+import TextView from "@/components/view/TextView";
+import { TouchableOpacity } from "react-native";
 
 const profileImageSize: number = 34;
 
