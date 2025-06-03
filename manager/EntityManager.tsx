@@ -150,8 +150,10 @@ class EntityManager {
   }
 
   async getVenueTypes() {
-    let language = await UserManager.getLanguage();
-    let options = { lang: language };
+    // Todo - Add language
+    // let language = await UserManager.getLanguage();
+    //let options: any = { lang: language };
+    let options: any = {};
 
     return await DataManager.get('venueTypes', options); 
   }
