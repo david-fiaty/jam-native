@@ -62,7 +62,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
     );
   };
 
-  const renderCommentForm = () => {
+  const renderAddCommentForm = () => {
     return (
       <BoxView
         direction="row"
@@ -103,44 +103,48 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
                 />
               </TouchableWithoutFeedback>
             )}
-            content={(
-              <>
-                <InputTextareaField
-                  placeholder={i18n.t('Add a comment...')}
-                  value={formData?.comment_text}
-                  onChangeText={(value: string) => { setFormData({ comment_text: value }) }}
-                />
-
-                <BoxView
-                  direction="row"
-                  align="center"
-                  justify="center"
-                  style={styles.commentFormButtonsContainer}
-                >
-                  <ButtonView
-                    label={i18n.t('Cancel')}
-                    onPress={() => setIsFormExpanded(false)}
-                    containerStyle={[styles.buttonStyle, styles.cancelButtonStyle]}
-                  />
-
-                  <ButtonView
-                    label={i18n.t('Submit')}
-                    onPress={submitComment}
-                    containerStyle={[styles.buttonStyle, styles.submitButtonStyle]}
-                    isProcessing={isSubmitProcessing}
-                  />
-                </BoxView>
-              </>
-            )}
+            content={renderCommentForm()}
           />
         </BoxView>
       </BoxView>
     );
   };
 
+  const renderCommentForm = () => {
+    return (
+      <>
+        <InputTextareaField
+          placeholder={i18n.t('Add a comment...')}
+          value={formData?.comment_text}
+          onChangeText={(value: string) => { setFormData({ comment_text: value }) }}
+        />
+
+        <BoxView
+          direction="row"
+          align="center"
+          justify="center"
+          style={styles.commentFormButtonsContainer}
+        >
+          <ButtonView
+            label={i18n.t('Cancel')}
+            onPress={() => setIsFormExpanded(false)}
+            containerStyle={[styles.buttonStyle, styles.cancelButtonStyle]}
+          />
+
+          <ButtonView
+            label={i18n.t('Submit')}
+            onPress={submitComment}
+            containerStyle={[styles.buttonStyle, styles.submitButtonStyle]}
+            isProcessing={isSubmitProcessing}
+          />
+        </BoxView>
+      </>
+    );
+  };
+
   const renderItem = (row: any) => {
     if (row.index === 0) {
-      return renderCommentForm();
+      return renderAddCommentForm();
     }
 
     return (
@@ -227,7 +231,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
     return (
       <ListView
         data={[
-          ...[renderCommentForm()],
+          ...[renderAddCommentForm()],
           ...(entityComments || []),
         ]}
         renderItem={(row: any) => renderItem(row)}
