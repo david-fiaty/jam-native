@@ -189,11 +189,11 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
             <TouchableOpacity onPress={() => console.log('on comment edit press')}>
               <TextView>{i18n.t('Edit')}</TextView>
             </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => console.log('on comment delete press')}>
-              <TextView>{i18n.t('Delete')}</TextView>
-            </TouchableOpacity>
           </BoxView>
+
+          {row?.item?.sub_ids?.length > 0 && (
+            <TextView>{row?.item?.sub_ids?.length} {i18n.t('replies')}</TextView>
+          )}
         </BoxView>
 
         <BoxView
