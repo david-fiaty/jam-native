@@ -88,7 +88,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
           direction="column"
           align="center"
           justify="flex-start"
-          style={styles.commentContainerRight}
+          style={styles.commentContainerCenter}
         >
           <CollapsibleView
             openedLabel={<></>}
@@ -163,7 +163,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
           direction="column"
           align="flex-start"
           justify="flex-start"
-          style={styles.commentContainerRight}
+          style={styles.commentContainerCenter}
         >
           <BoxView
             direction="row"
@@ -194,6 +194,15 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
               <TextView>{i18n.t('Delete')}</TextView>
             </TouchableOpacity>
           </BoxView>
+        </BoxView>
+
+        <BoxView
+          direction="column"
+          align="flex-start"
+          justify="flex-start"
+          style={styles.commentContainerRight}
+        >
+          <IconView name="toolbar" theme="transparent" />
         </BoxView>
       </BoxView>
     );
@@ -273,8 +282,11 @@ const styles = StyleSheet.create({
     backgroundColor: Layout.colors.white,
     width: '10%',
   },
+  commentContainerCenter: {
+    width: '68%',
+  },
   commentContainerRight: {
-    width: '78%',
+    width: '10%',
   },
   commentFormContainer: {
     marginBottom: Layout.space.base * 1.5,
