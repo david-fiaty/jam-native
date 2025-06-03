@@ -70,7 +70,7 @@ class CommentManager {
     };
   }
 
-  renderCommentForm = (row?: any, onLabelPress?: any) => {
+  renderCommentForm = (profileData: any, row?: any, onLabelPress?: any) => {
     return (
       <BoxView
         direction="row"
