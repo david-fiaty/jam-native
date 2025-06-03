@@ -19,6 +19,7 @@ import LocationPickerField from "../field/LocationPickerField";
 import ProfileTypeField from "../field/ProfileTypeField";
 import FormManager from "@/manager/FormManager";
 import BoxView from "../view/BoxView";
+import VenueTypesField from "../field/VenueTypesField";
 
 const resource: string = 'profile';
 
@@ -78,7 +79,8 @@ const ProfileForm = () => {
 
   return (
     <BoxView
-      align="flex-start"
+      direction="column"
+      align="center"
       justify="flex-start"
       scroll={true}
       style={[Layout.formContainer, styles.container]}
@@ -176,6 +178,21 @@ const ProfileForm = () => {
               }, ['string'])}
             />
             {FormManager.renderError('profile_venue.venue_name')}
+
+            <TextView>
+              {i18n.t('Venue types')}
+            </TextView>
+            
+            <VenueTypesField
+              resource={resource}
+              field="venue_types"
+              placeholder={i18n.t('Select venue types')}
+              value={formData?.venue_types}
+              onPress={() => ModalManager.toggleModal('VenueTypesList', {
+                resource: resource,
+                field: "venue_types",
+              })}
+            />
 
             <TextView>
               {i18n.t('Creation year')}
@@ -302,6 +319,7 @@ const styles = StyleSheet.create({
     paddingTop: Layout.space.base,
     paddingBottom: Layout.space.base * 2,
     width: '100%',
+    height: '100%',
   },
   formContainer: {
     maxWidth: '100%',
