@@ -27,7 +27,6 @@ import DataManager from "@/manager/DataManager";
 import MediaManager from "@/manager/MediaManager";
 import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
-import VenueTypesField from "../field/VenueTypesField";
 
 const resource: string = 'jam';
 
@@ -112,19 +111,6 @@ const JamForm = () => {
         {FormManager.renderError('type')}
 
         <DividerView theme="white" />
-
-          <VenueTypesField
-            resource={resource}
-            field="venue_types"
-            placeholder={i18n.t('Select venue types')}
-            value={formData?.venue_types}
-            onPress={() => ModalManager.toggleModal('VenueTypesList', {
-              resource: resource,
-              field: "venue_types",
-            })}
-          />
-
-
 
         <TextView>{i18n.t('Title')} *</TextView>
         <InputTextField
