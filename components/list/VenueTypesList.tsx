@@ -43,7 +43,7 @@ const VenueTypesList = ({ resource, field }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) { 
-        if (!venues) setVenues(await EntityManager.listProfiles());
+        if (!venues) setVenues(await EntityManager.getVenueTypes());
         if (formData?.[field]?.length && !selectedVenues.length) {
           setSelectedVenues(formData[field]);
         }
@@ -62,7 +62,7 @@ const VenueTypesList = ({ resource, field }: Props) => {
           <ListView
             data={venues}
             renderItem={(row: any) => (
-              <TextView>{row.item.id}</TextView>
+              <TextView>{row.item.name}</TextView>
             )}
           />
         }
