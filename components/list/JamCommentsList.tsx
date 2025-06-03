@@ -88,7 +88,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
           direction="column"
           align="center"
           justify="flex-start"
-          style={styles.commentContainerCenter}
+          style={styles.commentContainerRight}
         >
           <CollapsibleView
             openedLabel={<></>}
@@ -163,7 +163,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
           direction="column"
           align="flex-start"
           justify="flex-start"
-          style={styles.commentContainerCenter}
+          style={styles.commentContainerRight}
         >
           <BoxView
             direction="row"
@@ -180,8 +180,12 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
             direction="row"
             align="center"
             justify="flex-start"
-            style={styles.commentActionsContainer}
+            style={styles.commentToolbaarContainer}
           >
+            {true && (
+              <TextView>{row?.item?.sub_ids?.length || 0} {i18n.t('replies')}</TextView>
+            )}
+
             <TouchableOpacity onPress={() => console.log('on comment reply press')}>
               <TextView>{i18n.t('Reply')}</TextView>
             </TouchableOpacity>
@@ -189,20 +193,8 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
             <TouchableOpacity onPress={() => console.log('on comment edit press')}>
               <TextView>{i18n.t('Edit')}</TextView>
             </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => console.log('on comment delete press')}>
-              <TextView>{i18n.t('Delete')}</TextView>
-            </TouchableOpacity>
           </BoxView>
-        </BoxView>
 
-        <BoxView
-          direction="column"
-          align="flex-start"
-          justify="flex-start"
-          style={styles.commentContainerRight}
-        >
-          <IconView name="toolbar" theme="transparent" />
         </BoxView>
       </BoxView>
     );
@@ -282,11 +274,8 @@ const styles = StyleSheet.create({
     backgroundColor: Layout.colors.white,
     width: '10%',
   },
-  commentContainerCenter: {
-    width: '68%',
-  },
   commentContainerRight: {
-    width: '10%',
+    width: '78%',
   },
   commentFormContainer: {
     marginBottom: Layout.space.base * 1.5,
@@ -295,8 +284,8 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: Layout.space.base,
   },
-  commentActionsContainer: {
-    backgroundColor: Layout.colors.secondary,
+  commentToolbaarContainer: {
+    
   },
   buttonStyle: {
     width: 'auto',
