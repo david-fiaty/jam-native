@@ -108,7 +108,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
             />
           )}
 
-          {!row?.length && (
+          {row?.length && (
             // Todo - Render edit comment form fields
             <TextView>Edit comment form fields</TextView>
           )}
