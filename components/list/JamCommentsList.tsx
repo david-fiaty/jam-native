@@ -191,8 +191,8 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
             </TouchableOpacity>
           </BoxView>
 
-          {row?.item?.sub_ids?.length > 0 && (
-            <TextView>{row?.item?.sub_ids?.length} {i18n.t('replies')}</TextView>
+          {true && (
+            <TextView>{row?.item?.sub_ids?.length || 0} {i18n.t('replies')}</TextView>
           )}
         </BoxView>
 
