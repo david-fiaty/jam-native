@@ -106,10 +106,11 @@ https://withfra.me/react-native-tutorials/how-to-use-svg-in-react-native
 # Grid layout
 https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-7948f1a6f949
 
-# Finish
+# Finish 
 - Venue type field => handle hierarchy in registration and profile forms
-- Check web jams google maps markers
+- Check jams google maps markers
 - Profile edit form: center spinner vertically
+- Fix web console error on input field value
 
 - Profile/project/jam image upload
 - Social login
