@@ -182,6 +182,10 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
             justify="flex-start"
             style={styles.commentActionsContainer}
           >
+            {true && (
+              <TextView>{row?.item?.sub_ids?.length || 0} {i18n.t('replies')}</TextView>
+            )}
+            
             <TouchableOpacity onPress={() => console.log('on comment reply press')}>
               <TextView>{i18n.t('Reply')}</TextView>
             </TouchableOpacity>
@@ -191,9 +195,6 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
             </TouchableOpacity>
           </BoxView>
 
-          {true && (
-            <TextView>{row?.item?.sub_ids?.length || 0} {i18n.t('replies')}</TextView>
-          )}
         </BoxView>
 
         <BoxView
