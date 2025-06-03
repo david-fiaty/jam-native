@@ -26,7 +26,7 @@ const profileImageSize: number = 34;
 
 const JamCommentsList = ({ entityId, entityType }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [entityData, setEntityData] = useState<any[]>([]);
+  const [entityComments, setEntityComments] = useState<any[]>([]);
   const [profileData, setProfileData] = useState<any>(null);
   const [isFormExpanded, setIsFormExpanded] = useState<boolean>(false);
   const [isSubmitProcessing, setIsSubmitProcessing] = useState<boolean>(false);
@@ -203,7 +203,11 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
     (async () => {
       if (!isLoaded) {
         setProfileData(await getProfileData());
-        setEntityData((await EntityManager.getJams(entityId))?.[0]);
+
+        let entityData: any = (await EntityManager.getJams(entityId))?.[0];
+        let commentsData: any [] = await EntityManager.getComments(entityData.comments.map((o: any) => o.id));
+
+        setEntityComments(commentsData);
         setIsLoaded(true);
       }
     })();
@@ -218,14 +222,14 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
       justify="flex-start"
       style={[Layout.screenContent, styles.container]}
     >
-      {!entityData?.comments?.length &&
+      {!entityComments.length &&
         <TextView>{i18n.t('No comments available.')}</TextView>
       }
 
       <ListView
         data={[
           ...[renderCommentForm()],
-          ...(entityData?.comments || []),
+          ...(entityComments || []),
         ]}
         renderItem={(row: any) => renderItem(row)}
       />
