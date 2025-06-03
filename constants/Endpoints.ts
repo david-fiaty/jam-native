@@ -19,6 +19,11 @@ const Endpoints = {
     cacheable: false,
     dataKey: null, 
   },
+  getComments: {
+    path: '/comments/',
+    cacheable: false,
+    dataKey: null, 
+  },
   getProfiles: {
     path: '/profiles/',
     cacheable: false,
