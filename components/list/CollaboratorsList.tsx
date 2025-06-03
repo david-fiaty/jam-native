@@ -64,7 +64,7 @@ const CollaboratorsList = ({ resource, field }: Props) => {
     });
   };
 
-  const toggleProfile = (entityId: number) => {
+  const toggleItem = (entityId: number) => {
     let profileList = [...selectedProfiles];
     if (profileList.includes(entityId)) {
       profileList = profileList.filter((value: number) => value !== entityId);
@@ -116,7 +116,7 @@ const CollaboratorsList = ({ resource, field }: Props) => {
               <ProfileListItem 
                 row={row}
                 selected={selectedProfiles.includes(row.item.id)}
-                onListItemPress={(o: any) => toggleProfile(o.item.id)}  
+                onListItemPress={(o: any) => toggleItem(o.item.id)}  
               />
             )}
           />
@@ -137,10 +137,6 @@ const styles = StyleSheet.create({
     borderRadius: Layout.radius.round,
     borderColor: Layout.colors.primary,
   },
-  wecomeMessage: {
-    textTransform: 'uppercase',
-    fontSize: Layout.fontSize.base,
-  }
 });
 
 export default CollaboratorsList;
