@@ -107,6 +107,11 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
               content={renderCommentFormFields(row)}
             />
           )}
+
+          {!row?.length && (
+            // Todo - Render edit comment form fields
+            <></>
+          )}
         </BoxView>
       </BoxView>
     );
