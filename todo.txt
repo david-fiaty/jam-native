@@ -124,6 +124,10 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Check internet connexion available
 - Implement global crash handling
 
+# New release
+- Avancement comments feature
+- Ajoute venue type field dans registration et profile forms
+- Bug fix jams map n'affichant pas les jams sur web
 
 # Todo 
 - Implement image cache : https://github.com/echowaves/expo-cached-image
