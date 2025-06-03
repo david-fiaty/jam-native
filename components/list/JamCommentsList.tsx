@@ -103,38 +103,42 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
                 />
               </TouchableWithoutFeedback>
             )}
-            content={(
-              <>
-                <InputTextareaField
-                  placeholder={i18n.t('Add a comment...')}
-                  value={formData?.comment_text}
-                  onChangeText={(value: string) => { setFormData({ comment_text: value }) }}
-                />
-
-                <BoxView
-                  direction="row"
-                  align="center"
-                  justify="center"
-                  style={styles.commentFormButtonsContainer}
-                >
-                  <ButtonView
-                    label={i18n.t('Cancel')}
-                    onPress={() => setIsFormExpanded(false)}
-                    containerStyle={[styles.buttonStyle, styles.cancelButtonStyle]}
-                  />
-
-                  <ButtonView
-                    label={i18n.t('Submit')}
-                    onPress={submitComment}
-                    containerStyle={[styles.buttonStyle, styles.submitButtonStyle]}
-                    isProcessing={isSubmitProcessing}
-                  />
-                </BoxView>
-              </>
-            )}
+            content={renderCommentFormFields(row)}
           />
         </BoxView>
       </BoxView>
+    );
+  };
+
+  const renderCommentFormFields = (row?: any) => {
+    return (
+      <>
+        <InputTextareaField
+          placeholder={i18n.t('Add a comment...')}
+          value={formData?.comment_text}
+          onChangeText={(value: string) => { setFormData({ comment_text: value }) }}
+        />
+
+        <BoxView
+          direction="row"
+          align="center"
+          justify="center"
+          style={styles.commentFormButtonsContainer}
+        >
+          <ButtonView
+            label={i18n.t('Cancel')}
+            onPress={() => setIsFormExpanded(false)}
+            containerStyle={[styles.buttonStyle, styles.cancelButtonStyle]}
+          />
+
+          <ButtonView
+            label={i18n.t('Submit')}
+            onPress={submitComment}
+            containerStyle={[styles.buttonStyle, styles.submitButtonStyle]}
+            isProcessing={isSubmitProcessing}
+          />
+        </BoxView>
+      </>
     );
   };
 
