@@ -79,7 +79,8 @@ const ProfileForm = () => {
 
   return (
     <BoxView
-      align="flex-start"
+      direction="column"
+      align="center"
       justify="flex-start"
       scroll={true}
       style={[Layout.formContainer, styles.container]}
@@ -318,6 +319,7 @@ const styles = StyleSheet.create({
     paddingTop: Layout.space.base,
     paddingBottom: Layout.space.base * 2,
     width: '100%',
+    height: '100%',
   },
   formContainer: {
     maxWidth: '100%',
