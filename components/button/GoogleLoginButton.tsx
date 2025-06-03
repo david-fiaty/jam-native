@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import BoxView from '../view/BoxView';
 import i18n from '@/translation/i18n';
@@ -8,16 +8,31 @@ import ImageView from '../view/ImageView';
 const source = require('@/assets/images/google-logo.png'); 
 
 const GoogleLoginButton = () => {
+
+  const onPress = () => {
+    // Todo - Implement google login buton
+    console.log('on google button press');
+  };
+
   return (
-    <BoxView direction="row" align="center" justify="flex-start" style={styles.container}>
-      <ImageView 
-        path={source} 
-        width={32}
-        height={32}
-        resizeMode="cover"
-      />
-      <TextView>{i18n.t('Continue with Google')}</TextView>
-    </BoxView>
+    <TouchableOpacity 
+      onPress={onPress} 
+      style={styles.container}
+    >
+      <BoxView 
+        direction="row" 
+        align="center" 
+        justify="flex-start" 
+      >
+        <ImageView 
+          path={source} 
+          width={32}
+          height={32}
+          resizeMode="cover"
+        />
+        <TextView>{i18n.t('Continue with Google')}</TextView>
+      </BoxView>
+    </TouchableOpacity>
   );
 };
 
