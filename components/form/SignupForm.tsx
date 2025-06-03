@@ -20,6 +20,7 @@ import ModalManager from "@/manager/ModalManager";
 import LocationPickerField from "../field/LocationPickerField";
 import FormManager from "@/manager/FormManager";
 import SectionManager from "@/manager/SectionManager";
+import VenueTypesField from "../field/VenueTypesField";
 
 const resource: string = 'signup';
 
@@ -70,7 +71,7 @@ const SignupForm = () => {
 
   return (
     <View style={[Layout.formContainer, styles.container]}>
-      
+
       <ProfileImageField
         value={formData?.upload_profile_picture?.url}
         onChangeValue={(mediaList: any) => FormManager.updateField(resource, 'upload_profile_picture', { url: mediaList[0]?.uri })}
@@ -81,7 +82,7 @@ const SignupForm = () => {
       <ProfileTypeField
         value={formData?.profile_type}
         onChangeValue={(option: any) => FormManager.updateField(resource, 'profile_type', option.value, ['string'])}
-      />  
+      />
       {FormManager.renderError('profile_type')}
 
       {/* Personal profile */}
@@ -162,6 +163,20 @@ const SignupForm = () => {
             }, ['string'])}
           />
           {FormManager.renderError('profile_venue.venue_name')}
+
+          <TextView>
+            {i18n.t('Venue types')}
+          </TextView>
+          <VenueTypesField
+            resource={resource}
+            field="venue_types"
+            placeholder={i18n.t('Select venue types')}
+            value={formData?.venue_types}
+            onPress={() => ModalManager.toggleModal('VenueTypesList', {
+              resource: resource,
+              field: "venue_types",
+            })}
+          />
 
           <TextView>
             {i18n.t('Creation year')}
