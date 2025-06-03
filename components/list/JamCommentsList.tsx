@@ -107,7 +107,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
                 <InputTextareaField
                   placeholder={i18n.t('Add a comment...')}
                   value={formData?.comment_text}
-                  onChangeText={(value: string) => { setFormData({comment_text: value})}}
+                  onChangeText={(value: string) => { setFormData({ comment_text: value }) }}
                 />
 
                 <BoxView
@@ -182,7 +182,15 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
             justify="flex-start"
           >
             <TouchableOpacity onPress={() => console.log('on comment reply press')}>
-              <TextView>{i18n.t('Reply')} | {i18n.t('Edit')} | {i18n.t('Delete')}</TextView> 
+              <TextView>{i18n.t('Reply')}</TextView>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => console.log('on comment edit press')}>
+              <TextView>{i18n.t('Edit')}</TextView>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => console.log('on comment delete press')}>
+              <TextView>{i18n.t('Delete')}</TextView>
             </TouchableOpacity>
           </BoxView>
         </BoxView>
@@ -192,11 +200,11 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
 
   const submitComment = async () => {
     setIsSubmitProcessing(true);
-    
+
     // Todo - Implement submit comment
     console.log('on comment submit');
 
-    let payload: any = { 
+    let payload: any = {
       profile_id: profileData.id,
       item_id: entityId,
       comment_text: formData?.comment_text,
@@ -205,7 +213,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
     console.log('comment payload', payload)
 
     //let result: any = await UserManager.register(payload);
-    
+
     setIsSubmitProcessing(false);
   }
 
@@ -215,7 +223,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
         setProfileData(await getProfileData());
 
         let entityData: any = (await EntityManager.getJams(entityId))?.[0];
-        let commentsData: any [] = await EntityManager.getComments(entityData.comments.map((o: any) => o.id));
+        let commentsData: any[] = await EntityManager.getComments(entityData.comments.map((o: any) => o.id));
 
         setEntityComments(commentsData);
         setIsLoaded(true);
@@ -276,14 +284,14 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     width: 'auto',
-    height: Layout.space.base*3,
+    height: Layout.space.base * 3,
     paddingHorizontal: Layout.space.base,
   },
   cancelButtonStyle: {
-    
+
   },
   submitButtonStyle: {
-    
+
   },
   profileName: {
     fontWeight: 'bold',
