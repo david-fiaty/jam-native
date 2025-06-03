@@ -16,6 +16,7 @@ import UserManager from '@/manager/UserManager';
 import ButtonView from '../view/ButtonView';
 import CollapsibleView from '../view/CollapsibleView';
 import InputTextField from '../field/InputTextField';
+import CommentManager from '@/manager/CommentManager';
 
 type Props = {
   entityId: any;
@@ -62,7 +63,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
     );
   };
 
-  const renderCommentForm = () => {
+  const renderCommentForm = (row?: any) => {
     return (
       <BoxView
         direction="row"
@@ -91,50 +92,61 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
           justify="flex-start"
           style={styles.commentContainerRight}
         >
-          <CollapsibleView
-            openedLabel={<></>}
-            isExpanded={isFormExpanded}
-            onLabelPress={() => setIsFormExpanded(true)}
-            label={(
-              <TouchableWithoutFeedback onPress={() => setIsFormExpanded(true)}>
-                <InputTextField
-                  placeholder={i18n.t('Add a comment...')}
-                  disabled={true}
-                />
-              </TouchableWithoutFeedback>
-            )}
-            content={(
-              <>
-                <InputTextareaField
-                  placeholder={i18n.t('Add a comment...')}
-                  value={formData?.comment_text}
-                  onChangeText={(value: string) => { setFormData({ comment_text: value }) }}
-                />
-
-                <BoxView
-                  direction="row"
-                  align="center"
-                  justify="center"
-                  style={styles.commentFormButtonsContainer}
-                >
-                  <ButtonView
-                    label={i18n.t('Cancel')}
-                    onPress={() => setIsFormExpanded(false)}
-                    containerStyle={[styles.buttonStyle, styles.cancelButtonStyle]}
+          {!row?.length && (
+            <CollapsibleView
+              openedLabel={<></>}
+              isExpanded={isFormExpanded}
+              onLabelPress={() => setIsFormExpanded(true)}
+              label={(
+                <TouchableWithoutFeedback onPress={() => setIsFormExpanded(true)}>
+                  <InputTextField
+                    placeholder={i18n.t('Add a comment...')}
+                    disabled={true}
                   />
+                </TouchableWithoutFeedback>
+              )}
+              content={renderCommentFormFields(row)}
+            />
+          )}
 
-                  <ButtonView
-                    label={i18n.t('Submit')}
-                    onPress={submitComment}
-                    containerStyle={[styles.buttonStyle, styles.submitButtonStyle]}
-                    isProcessing={isSubmitProcessing}
-                  />
-                </BoxView>
-              </>
-            )}
-          />
+          {row?.length && (
+            // Todo - Render edit comment form fields
+            <TextView>Edit comment form fields</TextView>
+          )}
         </BoxView>
       </BoxView>
+    );
+  };
+
+  const renderCommentFormFields = (row?: any) => {
+    return (
+      <>
+        <InputTextareaField
+          placeholder={i18n.t('Add a comment...')}
+          value={formData?.comment_text}
+          onChangeText={(value: string) => { setFormData({ comment_text: value }) }}
+        />
+
+        <BoxView
+          direction="row"
+          align="center"
+          justify="center"
+          style={styles.commentFormButtonsContainer}
+        >
+          <ButtonView
+            label={i18n.t('Cancel')}
+            onPress={() => setIsFormExpanded(false)}
+            containerStyle={[styles.buttonStyle, styles.cancelButtonStyle]}
+          />
+
+          <ButtonView
+            label={i18n.t('Submit')}
+            onPress={submitComment}
+            containerStyle={[styles.buttonStyle, styles.submitButtonStyle]}
+            isProcessing={isSubmitProcessing}
+          />
+        </BoxView>
+      </>
     );
   };
 
