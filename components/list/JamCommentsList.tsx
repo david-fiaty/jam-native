@@ -180,6 +180,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
             direction="row"
             align="center"
             justify="flex-start"
+            style={styles.commentActionsContainer}
           >
             <TouchableOpacity onPress={() => console.log('on comment reply press')}>
               <TextView>{i18n.t('Reply')}</TextView>
@@ -281,6 +282,9 @@ const styles = StyleSheet.create({
   commentFormButtonsContainer: {
     width: '100%',
     marginTop: Layout.space.base,
+  },
+  commentActionsContainer: {
+ 
   },
   buttonStyle: {
     width: 'auto',
