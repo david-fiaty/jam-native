@@ -129,6 +129,13 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Ajoute venue type field dans registration et profile forms
 - Bug fix jams map n'affichant pas les jams sur web
 
+# questions
+- Is delete comment feature needed? => missing endpoint?
+- Is report comment feature needed? => missing endpoint?
+
+
+
+
 # Todo 
 - Implement image cache : https://github.com/echowaves/expo-cached-image
 - Implement reverse geocoding
