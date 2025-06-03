@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
@@ -9,6 +9,7 @@ import SpinnerView from "../view/SpinnerView";
 import EntityManager from '@/manager/EntityManager';
 import ProfileListItem from './list-item/ProfileListItem';
 import TextView from '../view/TextView';
+import IconView from '../view/IconView';
 
 type Props = {
   resource: string;
@@ -30,19 +31,46 @@ const VenueTypesList = ({ resource, field }: Props) => {
     else {
       venueList.push(entityId);
     }
-    
+
     setSelectedVenues(venueList);
 
-    dispatch(setFormData<any>({ 
+    dispatch(setFormData<any>({
       resource: resource,
-      key: field, 
+      key: field,
       value: venueList,
     }));
   };
 
+  const renderItem = (row: any) => {
+    let selected: boolean = selectedVenues.includes(row.item.id);
+
+    return (
+      <TouchableOpacity
+        key={row?.item?.id}
+        onPress={() => toggleItem(row?.item?.id)}
+      >
+        <BoxView 
+          direction="row" 
+          align="center" 
+          justify="flex-start"
+          style={styles.container}
+        >
+          <TextView>{row?.item?.name}</TextView>
+          {selected &&
+            <IconView
+              name="checkmark"
+              theme="clear"
+              size={14}
+            />
+          }
+        </BoxView>
+      </TouchableOpacity>
+    );
+  };
+
   useEffect(() => {
     (async () => {
-      if (!isLoaded) { 
+      if (!isLoaded) {
         if (!venues) setVenues(await EntityManager.getVenueTypes());
         if (formData?.[field]?.length && !selectedVenues.length) {
           setSelectedVenues(formData[field]);
@@ -61,9 +89,7 @@ const VenueTypesList = ({ resource, field }: Props) => {
         {venues?.length > 0 &&
           <ListView
             data={venues}
-            renderItem={(row: any) => (
-              <TextView>{row.item.name}</TextView>
-            )}
+            renderItem={(row: any) => renderItem(row)}
           />
         }
       </View>
@@ -72,6 +98,12 @@ const VenueTypesList = ({ resource, field }: Props) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    ...Layout.listItem,
+    ...{
+      padding: Layout.space.base / 1.3,
+    },
+  },
 });
 
 export default VenueTypesList;
