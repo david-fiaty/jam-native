@@ -6,11 +6,9 @@ import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
-import IconView from "../view/IconView";
 import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import EntityManager from '@/manager/EntityManager';
-import InputTextField from '../field/InputTextField';
 import ProfileListItem from './list-item/ProfileListItem';
 
 type Props = {
@@ -26,33 +24,6 @@ const VenueTypesList = ({ resource, field }: Props) => {
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
-
-  const clearSearch = () => {
-    setIsSearching(true);
-    
-    EntityManager.listProfiles().then((items: any) => {
-      setProfiles(items);
-      setIsSearching(false);
-      setSearchValue('');
-    });
-  };
-
-  const renderSearchIcon = () => {
-    if (!isSearching && searchValue) {
-      return (
-        <IconView 
-          name="delete" 
-          theme="clear" 
-          onPress={clearSearch}
-        />
-      );
-    }
-    else if (isSearching) {
-      return <SpinnerView size="small" />;
-    }
-
-    return <></>;
-  };
 
   const onSubmitEditing = () => {
     setIsSearching(true);
@@ -99,15 +70,6 @@ const VenueTypesList = ({ resource, field }: Props) => {
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
-      <InputTextField 
-        value={searchValue}
-        containerStyle={styles.inputTextFieldContainer}
-        placeholder={i18n.t('Search...')} 
-        onChangeText={(text: string) => setSearchValue(text)}
-        onSubmitEditing={onSubmitEditing}
-        rightIcon={renderSearchIcon()}
-      />
-
       <View style={Layout.borderedListContainer}>
         {profiles?.length > 0 &&
           <ListView
