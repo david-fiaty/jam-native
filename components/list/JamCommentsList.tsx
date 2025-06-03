@@ -175,6 +175,14 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
           </BoxView>
 
           <TextView>{row?.item?.comment_text}</TextView>
+
+          <BoxView
+            direction="row"
+            align="center"
+            justify="flex-start"
+          >
+            <TextView>{i18n.t('Reply')}</TextView>
+          </BoxView>
         </BoxView>
       </BoxView>
     );
