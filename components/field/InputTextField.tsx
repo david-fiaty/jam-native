@@ -42,6 +42,8 @@ const InputTextField = ({
   };
 
   const changeTextEvent = (fieldValue: any) => {
+    fieldValue = fieldValue.trim().replace(/[\s\u200B-\u200D\uFEFF]+$/g, '');
+
     setCurrentValue(fieldValue);
     if (onChangeText) onChangeText(fieldValue);
   };
