@@ -111,6 +111,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Venue registration => handle venue types selection
 - Venue profile => display venue types selection
 - Check web jams google maps markers
+- Profile edit form: center spinner vertically
 
 - Profile/project/jam image upload
 - Social login
