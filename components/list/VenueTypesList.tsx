@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   container: {
     ...Layout.listItem,
     ...{
-      padding: Layout.space.base / 1.3,
+      padding: Layout.space.base*0.9,
     },
   },
 });
