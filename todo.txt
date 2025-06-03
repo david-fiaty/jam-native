@@ -122,6 +122,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 # Finish optional
 - Check internet connexion available
 - Implement global crash handling
+- Trim textarea fields like input text fields?
 
 # New release
 - Avancement comments feature
