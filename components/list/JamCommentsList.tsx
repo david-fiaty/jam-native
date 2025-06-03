@@ -220,7 +220,10 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
     setIsSubmitProcessing(false);
   };
 
-  const renderComments = () => {
+  const renderComments = (rows: any) => {
+
+    console.log('render comments', rows);
+
     return (
       <ListView
         data={[
@@ -249,8 +252,6 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log('entity comments', entityData?.comments);
-
   return (
     <BoxView
       direction="column"
@@ -262,7 +263,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
         <TextView>{i18n.t('No comments available.')}</TextView>
       }
 
-      {renderComments()}
+      {renderComments(entityData?.comments)}
     </BoxView>
   );
 };
