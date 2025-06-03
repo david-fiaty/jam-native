@@ -202,7 +202,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
           justify="flex-start"
           style={styles.commentContainerRight}
         >
-          <IconView name="actions" theme="transparent" />
+          <IconView name="toolbar" theme="transparent" />
         </BoxView>
       </BoxView>
     );
