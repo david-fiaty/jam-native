@@ -6,11 +6,11 @@ const CommentSlice = createSlice({
     active: null,
   },
   reducers: {
-    setComment: (state, action) => {
-      return action.payload;
+    setActiveComment: (state, action) => {
+      state.active = action.payload;
     },
   },
 });
 
-export const { setComment } = CommentSlice.actions;
+export const { setActiveComment } = CommentSlice.actions;
 export default CommentSlice.reducer;
