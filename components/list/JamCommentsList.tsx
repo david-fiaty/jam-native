@@ -6,7 +6,6 @@ import i18n from "@/translation/i18n";
 import SpinnerView from "../view/SpinnerView";
 import EntityManager from '@/manager/EntityManager';
 import BoxView from '../view/BoxView';
-import UserManager from '@/manager/UserManager';
 import CommentManager from '@/manager/CommentManager';
 
 type Props = {
@@ -16,24 +15,12 @@ type Props = {
 
 const JamCommentsList = ({ entityId, entityType }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [entityComments, setEntityComments] = useState<any[]>([]);
-  const [profileData, setProfileData] = useState<any>(null);
   const [entityData, setEntityData] = useState<any>(null);
-
-  const getProfileData = async () => {
-    return await UserManager.getProfileData();
-  };
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setProfileData(await getProfileData());
-
-        let entityData: any = (await EntityManager.getJams(entityId))?.[0];
-        let commentsData: any[] = await EntityManager.getComments(entityData.comments.map((o: any) => o.id));
-
-        setEntityData(entityData);
-        setEntityComments(commentsData);
+        setEntityData((await EntityManager.getJams(entityId))?.[0]);
         setIsLoaded(true);
       }
     })();
@@ -48,11 +35,11 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
       justify="flex-start"
       style={[Layout.screenContent, styles.container]}
     >
-      {!entityComments.length &&
+      {!entityData?.comments.length &&
         <TextView>{i18n.t('No comments available.')}</TextView>
       }
 
-      {CommentManager.renderComments(entityData?.comments, profileData)}
+      {CommentManager.renderComments(entityData?.comments)}
     </BoxView>
   );
 };
