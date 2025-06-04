@@ -175,16 +175,24 @@ class CommentManager {
   }
 
   toggleCommentForm(row?: any) {
-    let commentState: any = Store.getState().comment;
+    let activeComment: any = {...Store.getState().form.comment.active};
     let commentId: number = row?.item?.id || 0;
 
-    console.log('toggle comment form', commentId);
-    console.log('comment state', commentState);
-    
-    Store.dispatch(setActiveComment({
-      id: commentId,
-      comment_text: 'new comment...',
-    }));
+    if (Object.keys(activeComment).length > 0) {
+      activeComment = {
+        ...activeComment,
+        ...{ isEditing: !activeComment.isEditing },
+      };
+    }
+    else {
+      activeComment = {
+        id: commentId,
+        comment_text: 'new comment...',
+        isEditing: true,
+      };
+    }
+
+    Store.dispatch(setActiveComment(activeComment));
   }
 
   renderCommentFormFields(item?: any) {
@@ -206,7 +214,7 @@ class CommentManager {
         >
           <ButtonView
             label={i18n.t('Cancel')}
-            //onPress={() => this.collapseCommentForm()}
+            onPress={() => this.toggleCommentForm()}
             containerStyle={[styles.buttonStyle, styles.cancelButtonStyle]}
           />
 
