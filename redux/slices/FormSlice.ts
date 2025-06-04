@@ -9,7 +9,6 @@ const FormSlice = createSlice({
     login: {},
     signup: {},
     password: {},
-    comment: {},
     errors: [],
   },
   reducers: {
