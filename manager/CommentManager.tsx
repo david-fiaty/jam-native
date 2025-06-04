@@ -195,7 +195,7 @@ class CommentManager {
     Store.dispatch(setActiveComment(activeComment));
   }
 
-  renderCommentFormFields(item?: any) {
+  renderCommentFormFields(row?: any) {
     let commentState: any = Store.getState().form.comment;
 
     return (
