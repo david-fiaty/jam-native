@@ -146,7 +146,7 @@ class CommentManager {
             <CollapsibleView
               openedLabel={<></>}
               isExpanded={commentState.expanded}
-              onLabelPress={() => /*this.expandCommentForm()*/ {} }
+              onLabelPress={() => /*this.expandCommentForm()*/ console.log('on label press')}
               label={(
                 <TouchableWithoutFeedback onPress={() => /*this.expandCommentForm()*/ {} }>
                   <InputTextField
