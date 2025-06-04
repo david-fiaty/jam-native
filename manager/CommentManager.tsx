@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity, TouchableWithoutFeedback } from "react-native";
-import { setComment } from "@/redux/slices/CommentSlice";
+import { setActiveComment } from "@/redux/slices/CommentSlice";
 import { Layout } from "@/constants/Layout";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
@@ -181,7 +181,7 @@ class CommentManager {
     console.log('toggle comment form', commentId);
     console.log('comment state', commentState);
     
-    Store.dispatch(setComment({
+    Store.dispatch(setActiveComment({
       id: commentId,
       comment_text: 'new comment...',
     }));
