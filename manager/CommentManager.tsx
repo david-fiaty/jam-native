@@ -113,7 +113,6 @@ class CommentManager {
 
   renderCommentForm(row?: any) {
     let activeComment: any = Store.getState().comment;
-    let commentId: any = activeComment?.id || null;
     let isEditing: boolean = activeComment?.isEditing === true ? true : false;
 
     return (
@@ -216,7 +215,7 @@ class CommentManager {
 
           <ButtonView
             label={i18n.t('Submit')}
-            //onPress={submitComment}
+            onPress={() => this.submitComment()}
             containerStyle={[styles.buttonStyle, styles.submitButtonStyle]}
             isProcessing={commentState.processing}
           />
@@ -248,6 +247,12 @@ class CommentManager {
         )}
       </>
     );
+  }
+
+  async submitComment() {
+    let commentState: any = Store.getState().comment;
+
+    console.log('submit comment', commentState);
   }
 
   async loadProfileData() {
