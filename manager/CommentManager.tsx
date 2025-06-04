@@ -147,6 +147,7 @@ class CommentManager {
             <CollapsibleView
               openedLabel={<></>}
               isExpanded={isEditing}
+              content={this.renderCommentFormFields()}
               onLabelPress={() => this.toggleCommentForm()}
               label={(
                 <TouchableWithoutFeedback>
@@ -156,7 +157,6 @@ class CommentManager {
                   />
                 </TouchableWithoutFeedback>
               )}
-              content={this.renderCommentFormFields()}
             />
           )}
 
