@@ -21,11 +21,13 @@ import EntityManager from "./EntityManager";
 const profileImageSize: number = 34;
 
 class CommentManager {
+  entityId: any;
   entityType: any;
   profileData: any;
   commentsData: any;
 
   async renderComments(itemsIds: any[], entityId: any, entityType: string) {
+    this.entityId = entityId;
     this.entityType = entityType
     this.profileData = await this.loadProfileData();
     this.commentsData = await this.loadCommentsData(itemsIds);
