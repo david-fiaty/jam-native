@@ -187,7 +187,7 @@ class CommentManager {
     else {
       activeComment = {
         id: commentId,
-        comment_text: 'new comment...',
+        comment_text: '',
         isEditing: true,
       };
     }
