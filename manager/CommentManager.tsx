@@ -112,7 +112,7 @@ class CommentManager {
   }
 
   renderCommentForm(row?: any) {
-    let activeComment: any = Store.getState().form.comment.active;
+    let activeComment: any = Store.getState().form.comment;
     let commentId: any = activeComment?.id || null;
     let isEditing: boolean = false;
 
@@ -175,7 +175,7 @@ class CommentManager {
   }
 
   toggleCommentForm(row?: any) {
-    let activeComment: any = {...Store.getState().form.comment.active};
+    let activeComment: any = {...Store.getState().form.comment};
     let commentId: number = row?.item?.id || 0;
 
     console.log(activeComment);
