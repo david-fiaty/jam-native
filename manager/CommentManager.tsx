@@ -112,7 +112,13 @@ class CommentManager {
   }
 
   renderCommentForm(row?: any) {
-    let commentState: any = Store.getState().form.comment;
+    let activeComment: any = Store.getState().form.comment.active;
+    let commentId: any = activeComment?.id || null;
+    let isExpanded: boolean = false;
+
+    if (commentId !== null) {
+      isExpanded = true;      
+    }
 
     return (
       <BoxView
@@ -145,7 +151,7 @@ class CommentManager {
           {!row?.length && (
             <CollapsibleView
               openedLabel={<></>}
-              isExpanded={commentState.expanded}
+              isExpanded={isExpanded}
               onLabelPress={() => this.toggleCommentForm()}
               label={(
                 <TouchableWithoutFeedback>
@@ -177,6 +183,7 @@ class CommentManager {
     
     Store.dispatch(setComment({
       id: commentId,
+      comment_text: 'new comment...',
     }));
   }
 
