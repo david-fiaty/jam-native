@@ -113,7 +113,6 @@ class CommentManager {
 
   renderCommentForm(row?: any) {
     let activeComment: any = Store.getState().comment;
-    let commentId: any = activeComment?.id || null;
     let isEditing: boolean = activeComment?.isEditing === true ? true : false;
 
     return (
@@ -148,6 +147,7 @@ class CommentManager {
             <CollapsibleView
               openedLabel={<></>}
               isExpanded={isEditing}
+              content={this.renderCommentFormFields()}
               onLabelPress={() => this.toggleCommentForm()}
               label={(
                 <TouchableWithoutFeedback>
@@ -157,7 +157,6 @@ class CommentManager {
                   />
                 </TouchableWithoutFeedback>
               )}
-              content={this.renderCommentFormFields(row)}
             />
           )}
 
@@ -192,14 +191,14 @@ class CommentManager {
   }
 
   renderCommentFormFields(row?: any) {
-    let commentState: any = Store.getState().comment;
+    let activeComment: any = Store.getState().comment;
 
     return (
       <>
         <InputTextareaField
           placeholder={i18n.t('Add a comment...')}
-        //value={formData?.comment_text}
-        //onChangeText={(value: string) => FormManager.updateField(resource, 'comment_text', value, ['string'])}
+          value={activeComment?.comment_text || ''}
+          onChangeText={(value: string) => this.setCommentText(value)}
         />
 
         <BoxView
@@ -216,9 +215,9 @@ class CommentManager {
 
           <ButtonView
             label={i18n.t('Submit')}
-            //onPress={submitComment}
+            onPress={() => this.submitComment()}
             containerStyle={[styles.buttonStyle, styles.submitButtonStyle]}
-            isProcessing={commentState.processing}
+            isProcessing={activeComment.processing}
           />
         </BoxView>
       </>
@@ -248,6 +247,21 @@ class CommentManager {
         )}
       </>
     );
+  }
+
+  setCommentText(value: string) {
+    let activeComment: any = {...Store.getState().comment};
+
+    Store.dispatch(setActiveComment({
+      ...activeComment,
+      ...{ comment_text: value },
+    }));
+  }
+
+  async submitComment() {
+    let activeComment: any = Store.getState().comment;
+
+    console.log('submit comment', activeComment);
   }
 
   async loadProfileData() {
