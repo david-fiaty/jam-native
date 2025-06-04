@@ -146,9 +146,9 @@ class CommentManager {
             <CollapsibleView
               openedLabel={<></>}
               isExpanded={commentState.expanded}
-              onLabelPress={() => this.toggleCommentForm(row)}
+              onLabelPress={() => this.toggleCommentForm()}
               label={(
-                <TouchableWithoutFeedback onPress={() => /*this.expandCommentForm()*/ {} }>
+                <TouchableWithoutFeedback>
                   <InputTextField
                     placeholder={i18n.t('Add a comment...')}
                     disabled={true}
@@ -168,8 +168,16 @@ class CommentManager {
     );
   }
 
-  toggleCommentForm(row: any) {
-    console.log('toggle comment form', Object.keys(row));
+  toggleCommentForm(row?: any) {
+    let commentState: any = Store.getState().comment;
+    let commentId: number = row?.item?.id || 0;
+
+    console.log('toggle comment form', commentId);
+    console.log('comment state', commentState);
+    
+    Store.dispatch(setComment({
+      id: commentId,
+    }));
   }
 
   renderCommentFormFields(item?: any) {
