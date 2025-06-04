@@ -2,15 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const CommentSlice = createSlice({
   name: 'comment',
-  initialState: {
-    active: null,
-  },
+  initialState: {},
   reducers: {
-    setComment: (state, action) => {
+    setActiveComment: (state, action) => {
       return action.payload;
     },
   },
 });
 
-export const { setComment } = CommentSlice.actions;
+export const { setActiveComment } = CommentSlice.actions;
 export default CommentSlice.reducer;
