@@ -16,11 +16,14 @@ type Props = {
 const JamCommentsList = ({ entityId, entityType }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [entityData, setEntityData] = useState<any>(null);
+  const [entityComments, setEntityComments] = useState<any>(null);
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setEntityData((await EntityManager.getJams(entityId))?.[0]);
+        let entityData: any = (await EntityManager.getJams(entityId))?.[0];
+        setEntityData(entityData);
+        setEntityComments(await CommentManager.renderComments('jam', entityId, entityData?.comments));
         setIsLoaded(true);
       }
     })();
@@ -39,7 +42,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
         <TextView>{i18n.t('No comments available.')}</TextView>
       }
 
-      {CommentManager.renderComments(entityData?.comments)}
+      {entityComments}
     </BoxView>
   );
 };
