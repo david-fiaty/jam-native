@@ -147,6 +147,7 @@ class CommentManager {
             <CollapsibleView
               openedLabel={<></>}
               isExpanded={isEditing}
+              content={this.renderCommentFormFields()}
               onLabelPress={() => this.toggleCommentForm()}
               label={(
                 <TouchableWithoutFeedback>
@@ -156,7 +157,6 @@ class CommentManager {
                   />
                 </TouchableWithoutFeedback>
               )}
-              content={this.renderCommentFormFields(row)}
             />
           )}
 
@@ -197,7 +197,7 @@ class CommentManager {
       <>
         <InputTextareaField
           placeholder={i18n.t('Add a comment...')}
-          value={activeComment?.comment_text}
+          value={activeComment?.comment_text || ''}
           onChangeText={(value: string) => this.setCommentText(value)}
         />
 
