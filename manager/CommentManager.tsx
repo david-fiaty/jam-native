@@ -1,4 +1,5 @@
 import { TouchableOpacity, TouchableWithoutFeedback } from "react-native";
+import Store from "@/redux/Store";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import moment from 'moment';
@@ -70,7 +71,7 @@ class CommentManager {
     };
   }
 
-  renderCommentForm = (profileData: any, row?: any, onLabelPress?: any) => {
+  renderCommentForm(profileData: any, row?: any)  {
     return (
       <BoxView
         direction="row"
