@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity, TouchableWithoutFeedback } from "react-native";
-import { setFormData } from "@/redux/slices/FormSlice";
+import { setComment } from "@/redux/slices/CommentSlice";
 import { Layout } from "@/constants/Layout";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
@@ -27,7 +27,7 @@ class CommentManager {
   profileData: any;
   commentsData: any;
 
-  async renderComments(itemsIds: any[], entityId: any, entityType: string) {
+  async renderComments(entityType: string, entityId: any, itemsIds: any) {
     this.entityId = entityId;
     this.entityType = entityType
     this.profileData = await this.loadProfileData();
@@ -49,7 +49,7 @@ class CommentManager {
   }
 
   renderComment(row: any) {
-        return (
+    return (
       <BoxView
         key={row.item.id}
         direction="row"
@@ -142,6 +142,7 @@ class CommentManager {
             <CollapsibleView
               openedLabel={<></>}
               isExpanded={commentState.expanded}
+              /*
               onLabelPress={() => this.expandCommentForm()}
               label={(
                 <TouchableWithoutFeedback onPress={() => this.expandCommentForm()}>
@@ -151,6 +152,7 @@ class CommentManager {
                   />
                 </TouchableWithoutFeedback>
               )}
+              */
               content={this.renderCommentFormFields(item)}
             />
           )}
@@ -164,15 +166,15 @@ class CommentManager {
     );
   }
 
-  renderCommentFormFields (item?: any) {
+  renderCommentFormFields(item?: any) {
     let commentState: any = Store.getState().form.comment;
 
     return (
       <>
         <InputTextareaField
           placeholder={i18n.t('Add a comment...')}
-          //value={formData?.comment_text}
-          //onChangeText={(value: string) => FormManager.updateField(resource, 'comment_text', value, ['string'])}
+        //value={formData?.comment_text}
+        //onChangeText={(value: string) => FormManager.updateField(resource, 'comment_text', value, ['string'])}
         />
 
         <BoxView
@@ -184,7 +186,7 @@ class CommentManager {
 
           <ButtonView
             label={i18n.t('Cancel')}
-            onPress={() => this.collapseCommentForm()}
+            //onPress={() => this.collapseCommentForm()}
             containerStyle={[styles.buttonStyle, styles.cancelButtonStyle]}
           />
 
