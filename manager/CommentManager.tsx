@@ -114,10 +114,10 @@ class CommentManager {
   renderCommentForm(row?: any) {
     let activeComment: any = Store.getState().form.comment.active;
     let commentId: any = activeComment?.id || null;
-    let isExpanded: boolean = false;
+    let isEditing: boolean = false;
 
     if (commentId !== null) {
-      isExpanded = true;      
+      isEditing = activeComment.isEditing;      
     }
 
     return (
@@ -151,7 +151,7 @@ class CommentManager {
           {!row?.length && (
             <CollapsibleView
               openedLabel={<></>}
-              isExpanded={isExpanded}
+              isExpanded={isEditing}
               onLabelPress={() => this.toggleCommentForm()}
               label={(
                 <TouchableWithoutFeedback>
