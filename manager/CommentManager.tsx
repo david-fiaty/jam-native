@@ -114,11 +114,7 @@ class CommentManager {
   renderCommentForm(row?: any) {
     let activeComment: any = Store.getState().comment;
     let commentId: any = activeComment?.id || null;
-    let isEditing: boolean = false;
-
-    if (commentId !== null) {
-      isEditing = activeComment.isEditing;      
-    }
+    let isEditing: boolean = activeComment?.isEditing === true ? true : false;
 
     return (
       <BoxView
@@ -177,8 +173,6 @@ class CommentManager {
   toggleCommentForm(row?: any) {
     let activeComment: any = {...Store.getState().comment};
     let commentId: number = row?.item?.id || 0;
-
-    console.log(activeComment);
 
     if (Object.keys(activeComment).length > 0) {
       activeComment = {
