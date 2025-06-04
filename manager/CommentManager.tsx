@@ -142,13 +142,33 @@ class CommentManager {
           justify="flex-start"
           style={styles.commentContainerRight}
         >
-          {this.renderCommentFormFields(row)}
+          {!row?.length && (
+            <CollapsibleView
+              openedLabel={<></>}
+              isExpanded={commentState.expanded}
+              onLabelPress={() => /*this.expandCommentForm()*/ {} }
+              label={(
+                <TouchableWithoutFeedback onPress={() => /*this.expandCommentForm()*/ {} }>
+                  <InputTextField
+                    placeholder={i18n.t('Add a comment...')}
+                    disabled={true}
+                  />
+                </TouchableWithoutFeedback>
+              )}
+              content={this.renderCommentFormFields(row)}
+            />
+          )}
+
+          {row?.length && (
+            // Todo - Render edit comment form fields
+            <TextView>Edit comment form fields</TextView>
+          )}
         </BoxView>
       </BoxView>
     );
   }
 
-  renderCommentFormFields(row?: any) {
+  renderCommentFormFields(item?: any) {
     let commentState: any = Store.getState().form.comment;
 
     return (
