@@ -191,14 +191,14 @@ class CommentManager {
   }
 
   renderCommentFormFields(row?: any) {
-    let commentState: any = Store.getState().comment;
+    let activeComment: any = Store.getState().comment;
 
     return (
       <>
         <InputTextareaField
           placeholder={i18n.t('Add a comment...')}
-        //value={formData?.comment_text}
-        //onChangeText={(value: string) => FormManager.updateField(resource, 'comment_text', value, ['string'])}
+          value={activeComment?.comment_text}
+          onChangeText={(value: string) => this.setCommentText(value)}
         />
 
         <BoxView
@@ -217,7 +217,7 @@ class CommentManager {
             label={i18n.t('Submit')}
             onPress={() => this.submitComment()}
             containerStyle={[styles.buttonStyle, styles.submitButtonStyle]}
-            isProcessing={commentState.processing}
+            isProcessing={activeComment.processing}
           />
         </BoxView>
       </>
@@ -249,10 +249,19 @@ class CommentManager {
     );
   }
 
-  async submitComment() {
-    let commentState: any = Store.getState().comment;
+  setCommentText(value: string) {
+    let activeComment: any = {...Store.getState().comment};
 
-    console.log('submit comment', commentState);
+    Store.dispatch(setActiveComment({
+      ...activeComment,
+      ...{ comment_text: value },
+    }));
+  }
+
+  async submitComment() {
+    let activeComment: any = Store.getState().comment;
+
+    console.log('submit comment', activeComment);
   }
 
   async loadProfileData() {
