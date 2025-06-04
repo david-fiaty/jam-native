@@ -49,6 +49,10 @@ class CommentManager {
   }
 
   renderComment(row: any) {
+    if (row.index === 0) {
+      return this.renderCommentForm(row);
+    }
+
     return (
       <BoxView
         key={row.item.id}
@@ -107,7 +111,7 @@ class CommentManager {
     );
   }
 
-  renderCommentForm(item?: any) {
+  renderCommentForm(row?: any) {
     let commentState: any = Store.getState().form.comment;
 
     return (
@@ -138,32 +142,42 @@ class CommentManager {
           justify="flex-start"
           style={styles.commentContainerRight}
         >
-          {!item?.length && (
+          {!row?.length && (
             <CollapsibleView
               openedLabel={<></>}
               isExpanded={commentState.expanded}
-              /*
-              onLabelPress={() => this.expandCommentForm()}
+              onLabelPress={() => this.toggleCommentForm()}
               label={(
-                <TouchableWithoutFeedback onPress={() => this.expandCommentForm()}>
+                <TouchableWithoutFeedback>
                   <InputTextField
                     placeholder={i18n.t('Add a comment...')}
                     disabled={true}
                   />
                 </TouchableWithoutFeedback>
               )}
-              */
-              content={this.renderCommentFormFields(item)}
+              content={this.renderCommentFormFields(row)}
             />
           )}
 
-          {item?.length && (
+          {row?.length && (
             // Todo - Render edit comment form fields
             <TextView>Edit comment form fields</TextView>
           )}
         </BoxView>
       </BoxView>
     );
+  }
+
+  toggleCommentForm(row?: any) {
+    let commentState: any = Store.getState().comment;
+    let commentId: number = row?.item?.id || 0;
+
+    console.log('toggle comment form', commentId);
+    console.log('comment state', commentState);
+    
+    Store.dispatch(setComment({
+      id: commentId,
+    }));
   }
 
   renderCommentFormFields(item?: any) {
@@ -183,7 +197,6 @@ class CommentManager {
           justify="center"
           style={styles.commentFormButtonsContainer}
         >
-
           <ButtonView
             label={i18n.t('Cancel')}
             //onPress={() => this.collapseCommentForm()}
