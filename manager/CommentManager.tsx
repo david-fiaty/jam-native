@@ -6,7 +6,9 @@ import ImageView from "@/components/view/ImageView";
 import IconView from "@/components/view/IconView";
 import BoxView from "@/components/view/BoxView";
 import TextView from "@/components/view/TextView";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, TouchableWithoutFeedback } from "react-native";
+import CollapsibleView from "@/components/view/CollapsibleView";
+import InputTextField from "@/components/field/InputTextField";
 
 const profileImageSize: number = 34;
 
@@ -66,6 +68,61 @@ class CommentManager {
         borderRadius: profileImageSize,
       },
     };
+  }
+
+  renderCommentForm = (profileData: any, row?: any, onLabelPress?: any) => {
+    return (
+      <BoxView
+        direction="row"
+        align="flex-start"
+        justify="flex-start"
+        style={this.getStyles().commentFormContainer}
+      >
+        <BoxView
+          direction="row"
+          align="flex-start"
+          justify="flex-start"
+          style={this.getStyles().commentContainerLeft}
+        >
+          {this.renderProfileImage({
+            item: {
+              profile: {
+                profile_picture: profileData?.profile_picture,
+              },
+            }
+          })}
+        </BoxView>
+
+        <BoxView
+          direction="column"
+          align="center"
+          justify="flex-start"
+          style={this.getStyles().commentContainerRight}
+        >
+          {!row?.length && (
+            <CollapsibleView
+              openedLabel={<></>}
+              isExpanded={isFormExpanded}
+              onLabelPress={() => setIsFormExpanded(true)}
+              label={(
+                <TouchableWithoutFeedback onPress={() => setIsFormExpanded(true)}>
+                  <InputTextField
+                    placeholder={i18n.t('Add a comment...')}
+                    disabled={true}
+                  />
+                </TouchableWithoutFeedback>
+              )}
+              content={renderCommentFormFields(row)}
+            />
+          )}
+
+          {row?.length && (
+            // Todo - Render edit comment form fields
+            <TextView>Edit comment form fields</TextView>
+          )}
+        </BoxView>
+      </BoxView>
+    );
   }
 
   renderProfileImage(row: any) {
