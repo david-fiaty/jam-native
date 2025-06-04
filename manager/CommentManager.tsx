@@ -48,8 +48,63 @@ class CommentManager {
     );
   }
 
-  renderComment(item: any) {
-    return <></>;
+  renderComment(row: any) {
+        return (
+      <BoxView
+        key={row.item.id}
+        direction="row"
+        align="flex-start"
+        justify="flex-start"
+        style={styles.commentContainer}
+      >
+        <BoxView
+          direction="row"
+          align="center"
+          justify="flex-start"
+          style={styles.commentContainerLeft}
+        >
+          {this.renderProfileImage(row)}
+        </BoxView>
+
+        <BoxView
+          direction="column"
+          align="flex-start"
+          justify="flex-start"
+          style={styles.commentContainerRight}
+        >
+          <BoxView
+            direction="row"
+            align="center"
+            justify="flex-start"
+          >
+            <TextView style={styles.profileName}>@{row?.item?.profile?.profile_name}</TextView>
+            <TextView style={styles.commentDate}>{moment(row?.item?.created_at).fromNow()}</TextView>
+          </BoxView>
+
+          <TextView>{row?.item?.comment_text}</TextView>
+
+          <BoxView
+            direction="row"
+            align="center"
+            justify="flex-start"
+            style={styles.commentToolbarContainer}
+          >
+            {true && (
+              <TextView>{row?.item?.sub_ids?.length || 0} {i18n.t('replies')}</TextView>
+            )}
+
+            <TouchableOpacity onPress={() => console.log('on comment reply press')}>
+              <TextView>{i18n.t('Reply')}</TextView>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => console.log('on comment edit press')}>
+              <TextView>{i18n.t('Edit')}</TextView>
+            </TouchableOpacity>
+          </BoxView>
+
+        </BoxView>
+      </BoxView>
+    );
   }
 
   renderCommentForm(item?: any) {
