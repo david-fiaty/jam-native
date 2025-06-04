@@ -49,6 +49,10 @@ class CommentManager {
   }
 
   renderComment(row: any) {
+    if (row.index === 0) {
+      return this.renderCommentForm(row);
+    }
+
     return (
       <BoxView
         key={row.item.id}
@@ -107,7 +111,7 @@ class CommentManager {
     );
   }
 
-  renderCommentForm(item?: any) {
+  renderCommentForm(row?: any) {
     let commentState: any = Store.getState().form.comment;
 
     return (
@@ -138,35 +142,13 @@ class CommentManager {
           justify="flex-start"
           style={styles.commentContainerRight}
         >
-          {!item?.length && (
-            <CollapsibleView
-              openedLabel={<></>}
-              isExpanded={commentState.expanded}
-              /*
-              onLabelPress={() => this.expandCommentForm()}
-              label={(
-                <TouchableWithoutFeedback onPress={() => this.expandCommentForm()}>
-                  <InputTextField
-                    placeholder={i18n.t('Add a comment...')}
-                    disabled={true}
-                  />
-                </TouchableWithoutFeedback>
-              )}
-              */
-              content={this.renderCommentFormFields(item)}
-            />
-          )}
-
-          {item?.length && (
-            // Todo - Render edit comment form fields
-            <TextView>Edit comment form fields</TextView>
-          )}
+          {this.renderCommentFormFields(row)}
         </BoxView>
       </BoxView>
     );
   }
 
-  renderCommentFormFields(item?: any) {
+  renderCommentFormFields(row?: any) {
     let commentState: any = Store.getState().form.comment;
 
     return (
