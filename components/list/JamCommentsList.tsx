@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
+import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import moment from 'moment';
 import TextView from "../view/TextView";
@@ -17,6 +18,7 @@ import ButtonView from '../view/ButtonView';
 import CollapsibleView from '../view/CollapsibleView';
 import InputTextField from '../field/InputTextField';
 import CommentManager from '@/manager/CommentManager';
+import FormManager from '@/manager/FormManager';
 
 type Props = {
   entityId: any;
@@ -25,6 +27,8 @@ type Props = {
 
 const profileImageSize: number = 34;
 
+const resource: string = 'comment';
+
 const JamCommentsList = ({ entityId, entityType }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [entityComments, setEntityComments] = useState<any[]>([]);
@@ -32,7 +36,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
   const [entityData, setEntityData] = useState<any>(null);
   const [isFormExpanded, setIsFormExpanded] = useState<boolean>(false);
   const [isSubmitProcessing, setIsSubmitProcessing] = useState<boolean>(false);
-  const [formData, setFormData] = useState<any>({});
+  const formData = useSelector((state: any) => state.form[resource]);
 
   const getProfileData = async () => {
     return await UserManager.getProfileData();
@@ -99,7 +103,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
         <InputTextareaField
           placeholder={i18n.t('Add a comment...')}
           value={formData?.comment_text}
-          onChangeText={(value: string) => { setFormData({ comment_text: value }) }}
+          onChangeText={(value: string) => FormManager.updateField(resource, 'comment_text', value, ['string']) }
         />
 
         <BoxView
