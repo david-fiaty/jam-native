@@ -18,12 +18,14 @@ import ButtonView from '../view/ButtonView';
 import CollapsibleView from '../view/CollapsibleView';
 import InputTextField from '../field/InputTextField';
 import CommentManager from '@/manager/CommentManager';
+import FormManager from '@/manager/FormManager';
 
 type Props = {
   entityId: any;
   entityType: any;
 };
 
+const resource: string = 'comment';
 const profileImageSize: number = 34;
 
 const JamCommentsList = ({ entityId, entityType }: Props) => {
@@ -31,9 +33,9 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
   const [entityComments, setEntityComments] = useState<any[]>([]);
   const [profileData, setProfileData] = useState<any>(null);
   const [entityData, setEntityData] = useState<any>(null);
-  const [formData, setFormData] = useState<any>({});
   const [isFormExpanded, setIsFormExpanded] = useState<boolean>(false);
   const [isSubmitProcessing, setIsSubmitProcessing] = useState<boolean>(false);
+  const formData = useSelector((state: any) => state.form[resource]);
 
   const getProfileData = async () => {
     return await UserManager.getProfileData();
@@ -100,10 +102,7 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
         <InputTextareaField
           placeholder={i18n.t('Add a comment...')}
           value={formData?.comment_text}
-          onChangeText={(value: string) => setFormData({
-            ...formData,
-            ...{ comment_text: value}
-          })}
+          onChangeText={(value: string) => FormManager.updateField(resource, 'comment_text', value, ['string'])}
         />
 
         <BoxView
