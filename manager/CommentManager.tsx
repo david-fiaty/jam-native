@@ -18,7 +18,23 @@ import ListView from "@/components/view/ListView";
 
 const profileImageSize: number = 34;
 
+
+let commentsData: any[] = await EntityManager.getComments(entityData.comments.map((o: any) => o.id));
+
+
+  const getProfileData = async () => {
+    return await UserManager.getProfileData();
+  };
+
 class CommentManager {
+
+
+
+
+
+
+
+  
 
   renderComments = (entityComments: any, profileData: any) => {
     return (
