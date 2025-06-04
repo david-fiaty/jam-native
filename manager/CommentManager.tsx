@@ -178,6 +178,8 @@ class CommentManager {
     let activeComment: any = {...Store.getState().form.comment.active};
     let commentId: number = row?.item?.id || 0;
 
+    console.log(activeComment);
+
     if (Object.keys(activeComment).length > 0) {
       activeComment = {
         ...activeComment,
