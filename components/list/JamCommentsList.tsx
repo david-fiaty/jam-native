@@ -307,7 +307,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   commentDate: {
-    fontSize: 11.5,
+    
   },
   profileImage: {
     width: profileImageSize,
