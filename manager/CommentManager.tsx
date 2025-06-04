@@ -1,3 +1,4 @@
+import { TouchableOpacity, TouchableWithoutFeedback } from "react-native";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import moment from 'moment';
@@ -6,7 +7,6 @@ import ImageView from "@/components/view/ImageView";
 import IconView from "@/components/view/IconView";
 import BoxView from "@/components/view/BoxView";
 import TextView from "@/components/view/TextView";
-import { TouchableOpacity, TouchableWithoutFeedback } from "react-native";
 import CollapsibleView from "@/components/view/CollapsibleView";
 import InputTextField from "@/components/field/InputTextField";
 
