@@ -7,7 +7,7 @@ const CommentSlice = createSlice({
   },
   reducers: {
     setActiveComment: (state, action) => {
-      state.active = action.payload;
+      return action.payload;
     },
   },
 });
