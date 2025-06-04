@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
 import { useSelector } from "react-redux";
+import { setFormData } from '@/redux/slices/FormSlice';
 import { Layout } from "@/constants/Layout";
 import moment from 'moment';
 import TextView from "../view/TextView";
