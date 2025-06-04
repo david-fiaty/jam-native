@@ -156,7 +156,7 @@ class CommentManager {
                   />
                 </TouchableWithoutFeedback>
               )}
-              content={this.renderCommentFormFields(row)}
+              content={this.renderCommentFormFields()}
             />
           )}
 
@@ -197,7 +197,7 @@ class CommentManager {
       <>
         <InputTextareaField
           placeholder={i18n.t('Add a comment...')}
-          value={activeComment?.comment_text}
+          value={activeComment?.comment_text || ''}
           onChangeText={(value: string) => this.setCommentText(value)}
         />
 
