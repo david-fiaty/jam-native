@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity, TouchableWithoutFeedback } from "react-native";
-import { setComment } from "@/redux/slices/CommentSlice";
+import { setActiveComment } from "@/redux/slices/CommentSlice";
 import { Layout } from "@/constants/Layout";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
@@ -112,7 +112,9 @@ class CommentManager {
   }
 
   renderCommentForm(row?: any) {
-    let commentState: any = Store.getState().form.comment;
+    let activeComment: any = Store.getState().comment;
+    let commentId: any = activeComment?.id || null;
+    let isEditing: boolean = activeComment?.isEditing === true ? true : false;
 
     return (
       <BoxView
@@ -145,7 +147,7 @@ class CommentManager {
           {!row?.length && (
             <CollapsibleView
               openedLabel={<></>}
-              isExpanded={commentState.expanded}
+              isExpanded={isEditing}
               onLabelPress={() => this.toggleCommentForm()}
               label={(
                 <TouchableWithoutFeedback>
@@ -169,19 +171,28 @@ class CommentManager {
   }
 
   toggleCommentForm(row?: any) {
-    let commentState: any = Store.getState().comment;
+    let activeComment: any = {...Store.getState().comment};
     let commentId: number = row?.item?.id || 0;
 
-    console.log('toggle comment form', commentId);
-    console.log('comment state', commentState);
-    
-    Store.dispatch(setComment({
-      id: commentId,
-    }));
+    if (Object.keys(activeComment).length > 0) {
+      activeComment = {
+        ...activeComment,
+        ...{ isEditing: !activeComment.isEditing },
+      };
+    }
+    else {
+      activeComment = {
+        id: commentId,
+        comment_text: '',
+        isEditing: true,
+      };
+    }
+
+    Store.dispatch(setActiveComment(activeComment));
   }
 
-  renderCommentFormFields(item?: any) {
-    let commentState: any = Store.getState().form.comment;
+  renderCommentFormFields(row?: any) {
+    let commentState: any = Store.getState().comment;
 
     return (
       <>
@@ -199,7 +210,7 @@ class CommentManager {
         >
           <ButtonView
             label={i18n.t('Cancel')}
-            //onPress={() => this.collapseCommentForm()}
+            onPress={() => this.toggleCommentForm()}
             containerStyle={[styles.buttonStyle, styles.cancelButtonStyle]}
           />
 
