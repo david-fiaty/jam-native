@@ -33,11 +33,15 @@ class CommentManager {
     this.profileData = await this.loadProfileData();
     this.commentsData = await this.loadCommentsData(itemsIds);
 
+    return this.renderCommentsList(this.commentsData);
+  }
+
+  renderCommentsList(data: any) {
     return (
       <ListView
         data={[
           ...[this.renderCommentForm()],
-          ...(this.commentsData || []),
+          ...(data || []),
         ]}
         renderItem={(item: any) => this.renderComment(item)}
       />
