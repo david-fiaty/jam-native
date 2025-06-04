@@ -3,11 +3,11 @@ import { createSlice } from '@reduxjs/toolkit';
 const CommentSlice = createSlice({
   name: 'comment',
   initialState: {
-
+    active: null,
   },
   reducers: {
     setComment: (state, action) => {
-      state = action.payload;
+      return action.payload;
     },
   },
 });
