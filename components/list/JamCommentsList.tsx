@@ -18,7 +18,6 @@ import ButtonView from '../view/ButtonView';
 import CollapsibleView from '../view/CollapsibleView';
 import InputTextField from '../field/InputTextField';
 import CommentManager from '@/manager/CommentManager';
-import FormManager from '@/manager/FormManager';
 
 type Props = {
   entityId: any;
@@ -26,8 +25,6 @@ type Props = {
 };
 
 const profileImageSize: number = 34;
-
-const resource: string = 'comment';
 
 const JamCommentsList = ({ entityId, entityType }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
