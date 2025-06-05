@@ -18,6 +18,7 @@ import ButtonView from "@/components/view/ButtonView";
 import ListView from "@/components/view/ListView";
 import UserManager from "./UserManager";
 import EntityManager from "./EntityManager";
+import CommentForm from "@/components/form/CommentForm";
 
 const profileImageSize: number = 34;
 
@@ -157,7 +158,7 @@ class CommentManager {
           justify="flex-start"
           style={styles.commentContainerRight}
         >
-          <CollapsibleView
+          <CommentForm
             openedLabel={<></>}
             isExpanded={activeComment?.showForm}
             content={this.renderCommentFormFields()}
