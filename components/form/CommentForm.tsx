@@ -89,8 +89,8 @@ const CommentForm = ({ commentData, profileImage, styles }: Props) => {
   }
 
   useEffect(() => {
-    if (typeof isExpanded !== 'undefined') setCollapsed(!isExpanded);
-  }, [isExpanded]);
+    
+  }, []);
 
   return (
     <BoxView
