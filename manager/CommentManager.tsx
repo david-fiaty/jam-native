@@ -113,7 +113,6 @@ class CommentManager {
 
   renderCommentForm(row?: any) {
     let activeComment: any = Store.getState().comment;
-    let isEditing: boolean = activeComment?.isEditing === true ? true : false;
 
     return (
       <BoxView
@@ -146,7 +145,7 @@ class CommentManager {
           {!row?.length && (
             <CollapsibleView
               openedLabel={<></>}
-              isExpanded={isEditing}
+              isExpanded={activeComment?.isEditing}
               content={this.renderCommentFormFields()}
               onLabelPress={() => this.toggleCommentForm()}
               label={(
