@@ -13,13 +13,18 @@ import ButtonView from '../view/ButtonView';
 type Props = {
   commentData?: any;
   profileImage?: JSX.Element;
-  styles?: any;
+  globalStyles?: any;
 };
 
-const CommentForm = ({ commentData, profileImage, styles }: Props) => {
+const CommentForm = ({ commentData, profileImage, globalStyles }: Props) => {
   const dispatch = useDispatch();
   const [collapsed, setCollapsed] = useState(true);
   const commentState: any = useSelector((state: any) => state.comment);
+
+  const componentStyles: any = {
+    ...styles,
+    ...globalStyles,
+  };
 
   const setCommentText = (value: string) => {
     let activeComment: any = { ...commentState };
@@ -54,42 +59,38 @@ const CommentForm = ({ commentData, profileImage, styles }: Props) => {
           collapsed={collapsed}
           align="center"
         >
-          <View
-          //style={styles.content}
+          <InputTextareaField
+            placeholder={i18n.t('Add a comment...')}
+            value={activeComment?.comment_text || ''}
+            onChangeText={(value: string) => setCommentText(value)}
+          />
+
+          <BoxView
+            direction="row"
+            align="center"
+            justify="center"
+            style={componentStyles.commentFormButtonsContainer}
           >
-            <InputTextareaField
-              placeholder={i18n.t('Add a comment...')}
-              value={activeComment?.comment_text || ''}
-              onChangeText={(value: string) => setCommentText(value)}
+            <ButtonView
+              label={i18n.t('Cancel')}
+              onPress={() => setCollapsed(true)}
+              containerStyle={[componentStyles.buttonStyle, componentStyles.cancelButtonStyle]}
             />
 
-            <BoxView
-              direction="row"
-              align="center"
-              justify="center"
-              style={styles.commentFormButtonsContainer}
-            >
-              <ButtonView
-                label={i18n.t('Cancel')}
-                onPress={() => setCollapsed(true)}
-                containerStyle={[styles.buttonStyle, styles.cancelButtonStyle]}
-              />
-
-              <ButtonView
-                label={i18n.t('Submit')}
-                onPress={() => submitComment()}
-                containerStyle={[styles.buttonStyle, styles.submitButtonStyle]}
-                isProcessing={activeComment.processing}
-              />
-            </BoxView>
-          </View>
+            <ButtonView
+              label={i18n.t('Submit')}
+              onPress={() => submitComment()}
+              containerStyle={[componentStyles.buttonStyle, componentStyles.submitButtonStyle]}
+              isProcessing={activeComment.processing}
+            />
+          </BoxView>
         </Collapsible>
       </>
     );
   }
 
   useEffect(() => {
-    
+
   }, []);
 
   return (
@@ -97,13 +98,13 @@ const CommentForm = ({ commentData, profileImage, styles }: Props) => {
       direction="row"
       align="flex-start"
       justify="flex-start"
-      style={styles.commentFormContainer}
+      style={componentStyles.commentFormContainer}
     >
       <BoxView
         direction="row"
         align="flex-start"
         justify="flex-start"
-        style={styles.commentContainerLeft}
+        style={componentStyles.commentContainerLeft}
       >
         {profileImage}
       </BoxView>
@@ -112,7 +113,7 @@ const CommentForm = ({ commentData, profileImage, styles }: Props) => {
         direction="column"
         align="center"
         justify="flex-start"
-        style={styles.commentContainerRight}
+        style={componentStyles.commentContainerRight}
       >
         {renderCommentForm(commentData)}
       </BoxView>
@@ -120,13 +121,11 @@ const CommentForm = ({ commentData, profileImage, styles }: Props) => {
   );
 }
 
-/*
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+    height: '100%',
   },
-
 });
-*/
 
 export default CommentForm;
