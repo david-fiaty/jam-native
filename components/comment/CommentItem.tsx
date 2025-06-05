@@ -69,12 +69,9 @@ const CommentItem = ({ commentData, profileImage, globalStyles }: Props) => {
           justify="flex-start"
           style={componentStyles.commentToolbarContainer}
         >
-          {true && (
+          {true && ( // Todo - Show only if there are replies
             <CollapsibleView
-              //
-              //isExpanded={true}
               content={renderReplies(commentData)}
-              //onLabelPress={() => this.toggleCommentForm()}
               label={(
                 <BoxView direction="row" align="center" justify="flex-start">
                   <IconView name="collapsed" theme="transparent" padding={0} /> 
