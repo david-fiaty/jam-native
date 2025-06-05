@@ -11,35 +11,15 @@ import i18n from '@/translation/i18n';
 import ButtonView from '../view/ButtonView';
 
 type Props = {
+  commentData: any;
   profileImage?: JSX.Element;
   styles?: any;
-
-  label?: any;
-  openedLabel?: any;
-  content?: any;
-  headerStyle?: any;
-  isExpanded?: boolean;
-  onLabelPress?: () => void;
 };
 
-const profileImageSize: number = 34;
-
-const CommentForm = ({ profileImage, styles,       label, openedLabel, content, headerStyle, isExpanded, onLabelPress }: Props) => {
+const CommentForm = ({ commentData, profileImage, styles }: Props) => {
   const dispatch = useDispatch();
   const [collapsed, setCollapsed] = useState(true);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const commentState: any = useSelector((state: any) => state.comment);
-
-  let buttonLabel = label;
-
-  if (!collapsed && openedLabel) {
-    buttonLabel = openedLabel;
-  }
-
-  const onPress = () => {
-    setCollapsed((prev) => !prev);
-    if (onLabelPress) onLabelPress();
-  };
 
   const setCommentText = (value: string) => {
     let activeComment: any = { ...commentState };
@@ -61,31 +41,49 @@ const CommentForm = ({ profileImage, styles,       label, openedLabel, content, 
 
     return (
       <>
-        <InputTextareaField
-          placeholder={i18n.t('Add a comment...')}
-          value={activeComment?.comment_text || ''}
-          onChangeText={(value: string) => setCommentText(value)}
-        />
+        {collapsed && (
+          <TouchableWithoutFeedback onPress={() => setCollapsed(false)}>
+            <InputTextField
+              placeholder={i18n.t('Add a comment...')}
+              disabled={true}
+            />
+          </TouchableWithoutFeedback>
+        )}
 
-        <BoxView
-          direction="row"
+        <Collapsible
+          collapsed={collapsed}
           align="center"
-          justify="center"
-          style={styles.commentFormButtonsContainer}
         >
-          <ButtonView
-            label={i18n.t('Cancel')}
-            onPress={() => setCollapsed(false)}
-            containerStyle={[styles.buttonStyle, styles.cancelButtonStyle]}
-          />
+          <View
+          //style={styles.content}
+          >
+            <InputTextareaField
+              placeholder={i18n.t('Add a comment...')}
+              value={activeComment?.comment_text || ''}
+              onChangeText={(value: string) => setCommentText(value)}
+            />
 
-          <ButtonView
-            label={i18n.t('Submit')}
-            onPress={() => submitComment()}
-            containerStyle={[styles.buttonStyle, styles.submitButtonStyle]}
-            isProcessing={activeComment.processing}
-          />
-        </BoxView>
+            <BoxView
+              direction="row"
+              align="center"
+              justify="center"
+              style={styles.commentFormButtonsContainer}
+            >
+              <ButtonView
+                label={i18n.t('Cancel')}
+                onPress={() => setCollapsed(true)}
+                containerStyle={[styles.buttonStyle, styles.cancelButtonStyle]}
+              />
+
+              <ButtonView
+                label={i18n.t('Submit')}
+                onPress={() => submitComment()}
+                containerStyle={[styles.buttonStyle, styles.submitButtonStyle]}
+                isProcessing={activeComment.processing}
+              />
+            </BoxView>
+          </View>
+        </Collapsible>
       </>
     );
   }
@@ -93,22 +91,6 @@ const CommentForm = ({ profileImage, styles,       label, openedLabel, content, 
   useEffect(() => {
     if (typeof isExpanded !== 'undefined') setCollapsed(!isExpanded);
   }, [isExpanded]);
-
-  return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={onPress}>
-        <View style={headerStyle}>{buttonLabel}</View>
-      </TouchableOpacity>
-      <Collapsible
-        collapsed={collapsed}
-        align="center"
-      >
-        <View style={styles.content}>
-          {content}
-        </View>
-      </Collapsible>
-    </View>
-  );
 
   return (
     <BoxView
@@ -132,20 +114,7 @@ const CommentForm = ({ profileImage, styles,       label, openedLabel, content, 
         justify="flex-start"
         style={styles.commentContainerRight}
       >
-        <CommentForm
-          openedLabel={<></>}
-          isExpanded={activeComment?.showForm}
-          content={this.renderCommentFormFields()}
-          onLabelPress={() => this.toggleCommentForm()}
-          label={(
-            <TouchableWithoutFeedback>
-              <InputTextField
-                placeholder={i18n.t('Add a comment...')}
-                disabled={true}
-              />
-            </TouchableWithoutFeedback>
-          )}
-        />
+        {renderCommentForm(commentData)}
       </BoxView>
     </BoxView>
   );
