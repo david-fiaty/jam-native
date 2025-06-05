@@ -124,11 +124,10 @@ class CommentManager {
   }
 
   renderCommentForm(row?: any) {
-    let activeComment: any = Store.getState().comment;
-
     return (
       <CommentForm 
-      
+        profileImage={this.renderProfileImage(row)}
+        styles={styles}
       />
     );
   }
