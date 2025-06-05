@@ -26,10 +26,9 @@ const CommentItem = ({ commentData, profileImage, globalStyles }: Props) => {
         this is the comment replies list component for a commment
       </TextView>
     );
-  }
+  };
 
   return (
-
     <BoxView
       key={commentData.id}
       direction="row"
