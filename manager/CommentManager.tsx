@@ -94,7 +94,22 @@ class CommentManager {
             style={styles.commentToolbarContainer}
           >
             {true && (
-              <TextView>{row?.item?.sub_ids?.length || 0} {i18n.t('replies')}</TextView>
+              <CollapsibleView
+                //
+                //isExpanded={true}
+                content={this.renderCommentReplies(row)}
+                //onLabelPress={() => this.toggleCommentForm()}
+                label={(
+                  <>
+                    <TextView>+ {row?.item?.sub_ids?.length || 0} {i18n.t('replies')}</TextView>
+                  </>
+                )}
+                openedLabel={
+                  <>
+                    <TextView>- {row?.item?.sub_ids?.length || 0} {i18n.t('replies')}</TextView>
+                  </>
+                }
+              />
             )}
 
             <TouchableOpacity onPress={() => console.log('on comment reply press')}>
@@ -113,7 +128,6 @@ class CommentManager {
 
   renderCommentForm(row?: any) {
     let activeComment: any = Store.getState().comment;
-    let isEditing: boolean = activeComment?.isEditing === true ? true : false;
 
     return (
       <BoxView
@@ -143,51 +157,60 @@ class CommentManager {
           justify="flex-start"
           style={styles.commentContainerRight}
         >
-          {!row?.length && (
-            <CollapsibleView
-              openedLabel={<></>}
-              isExpanded={isEditing}
-              content={this.renderCommentFormFields()}
-              onLabelPress={() => this.toggleCommentForm()}
-              label={(
-                <TouchableWithoutFeedback>
-                  <InputTextField
-                    placeholder={i18n.t('Add a comment...')}
-                    disabled={true}
-                  />
-                </TouchableWithoutFeedback>
-              )}
-            />
-          )}
-
-          {row?.length && (
-            // Todo - Render edit comment form fields
-            <TextView>Edit comment form fields</TextView>
-          )}
+          <CollapsibleView
+            openedLabel={<></>}
+            isExpanded={activeComment?.showForm}
+            content={this.renderCommentFormFields()}
+            onLabelPress={() => this.toggleCommentForm()}
+            label={(
+              <TouchableWithoutFeedback>
+                <InputTextField
+                  placeholder={i18n.t('Add a comment...')}
+                  disabled={true}
+                />
+              </TouchableWithoutFeedback>
+            )}
+          />
         </BoxView>
       </BoxView>
     );
   }
 
+  renderCommentReplies(row: any) {
+    console.log('----- render comment replies', row);
+
+    return (
+      <TextView>
+        this is the comment replies list component for a commment
+      </TextView>
+    );
+  }
+
   toggleCommentForm(row?: any) {
-    let activeComment: any = {...Store.getState().comment};
+    let activeComment: any = { ...Store.getState().comment };
     let commentId: number = row?.item?.id || 0;
+
+    console.log('--- active comment', activeComment);
 
     if (Object.keys(activeComment).length > 0) {
       activeComment = {
         ...activeComment,
-        ...{ isEditing: !activeComment.isEditing },
+        ...{ showForm: !activeComment.showForm },
       };
     }
     else {
       activeComment = {
         id: commentId,
         comment_text: '',
-        isEditing: true,
+        showForm: true,
       };
     }
 
     Store.dispatch(setActiveComment(activeComment));
+  }
+
+  toggleCommentReplies(row?: any) {
+    console.log('------ toggle comment replies')
   }
 
   renderCommentFormFields(row?: any) {
@@ -250,7 +273,7 @@ class CommentManager {
   }
 
   setCommentText(value: string) {
-    let activeComment: any = {...Store.getState().comment};
+    let activeComment: any = { ...Store.getState().comment };
 
     Store.dispatch(setActiveComment({
       ...activeComment,
