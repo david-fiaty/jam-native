@@ -12,6 +12,7 @@ import ButtonView from '../view/ButtonView';
 
 type Props = {
   profileImage?: JSX.Element;
+  styles?: any;
 
   label?: any;
   openedLabel?: any;
@@ -23,7 +24,7 @@ type Props = {
 
 const profileImageSize: number = 34;
 
-const CommentForm = ({ profileImage,  label, openedLabel, content, headerStyle, isExpanded, onLabelPress }: Props) => {
+const CommentForm = ({ profileImage, styles,       label, openedLabel, content, headerStyle, isExpanded, onLabelPress }: Props) => {
   const dispatch = useDispatch();
   const [collapsed, setCollapsed] = useState(true);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -150,61 +151,13 @@ const CommentForm = ({ profileImage,  label, openedLabel, content, headerStyle, 
   );
 }
 
+/*
 const styles = StyleSheet.create({
   container: {
     width: '100%',
   },
-  content: {
-    marginTop: Layout.space.base,
-    width: '100%',
-  },
 
-  commentContainer: {
-    ...Layout.listItem,
-    ...{
-      paddingVertical: Layout.space.base * 1.5,
-      width: '100%',
-    },
-  },
-  commentContainerLeft: {
-    backgroundColor: Layout.colors.white,
-    width: '10%',
-  },
-  commentContainerRight: {
-    width: '78%',
-  },
-  commentFormContainer: {
-    marginBottom: Layout.space.base * 1.5,
-  },
-  commentFormButtonsContainer: {
-    width: '100%',
-    marginTop: Layout.space.base,
-  },
-  commentToolbarContainer: {
-
-  },
-  buttonStyle: {
-    width: 'auto',
-    height: Layout.space.base * 3,
-    paddingHorizontal: Layout.space.base,
-  },
-  cancelButtonStyle: {
-
-  },
-  submitButtonStyle: {
-
-  },
-  profileName: {
-    fontWeight: 'bold',
-  },
-  commentDate: {
-    fontSize: 11.5,
-  },
-  profileImage: {
-    width: profileImageSize,
-    height: profileImageSize,
-    borderRadius: profileImageSize,
-  },
 });
+*/
 
 export default CommentForm;
