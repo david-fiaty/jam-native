@@ -126,7 +126,7 @@ class CommentManager {
   renderCommentForm(row?: any) {
     return (
       <CommentForm 
-        commentData={row.item}
+        commentData={row?.item}
         profileImage={this.renderProfileImage(row)}
         styles={styles}
       />
@@ -134,7 +134,7 @@ class CommentManager {
   }
 
   renderCommentReplies(row: any) {
-    console.log('----- render comment replies', row);
+    //console.log('----- render comment replies', row);
 
     return (
       <TextView>
@@ -147,7 +147,7 @@ class CommentManager {
     let activeComment: any = { ...Store.getState().comment };
     let commentId: number = row?.item?.id || 0;
 
-    console.log('--- active comment', activeComment);
+    //console.log('--- active comment', activeComment);
 
     if (Object.keys(activeComment).length > 0) {
       activeComment = {
