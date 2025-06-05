@@ -77,7 +77,7 @@ const CommentItem = ({ commentData, profileImage, globalStyles }: Props) => {
               //onLabelPress={() => this.toggleCommentForm()}
               label={(
                 <BoxView direction="row" align="center" justify="flex-start">
-                  <IconView name="collapsed" theme="transparent" /> 
+                  <IconView name="collapsed" theme="transparent" padding={0} /> 
                   <TextView>
                     {commentData?.sub_ids?.length || 0} {i18n.t('replies')}
                   </TextView>
@@ -85,7 +85,7 @@ const CommentItem = ({ commentData, profileImage, globalStyles }: Props) => {
               )}
               openedLabel={
                 <BoxView direction="row" align="center" justify="flex-start">
-                  <IconView name="expanded" theme="transparent" />
+                  <IconView name="expanded" theme="transparent" padding={0} />
                   <TextView>
                     {commentData?.sub_ids?.length || 0} {i18n.t('replies')}
                   </TextView>
