@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
 import { Input } from '@rneui/themed';
 import { Layout } from '@/constants/Layout';
@@ -7,12 +8,39 @@ type Props = {
   value?: string;
   placeholder?: string;
   containerStyle?: object;
-  disabled?: boolean; 
+  disabled?: boolean;
   readOnly?: boolean;
+  onSubmitEditing?: () => void;
   onChangeText?: (value: any) => void;
 };
 
-const InputTextareaField = ({value, placeholder, containerStyle, disabled, readOnly, onChangeText}: Props) => {
+const InputTextareaField = ({
+  value,
+  placeholder,
+  containerStyle,
+  disabled,
+  readOnly,
+  onChangeText,
+  onSubmitEditing,
+}: Props) => {
+  const [currentValue, setCurrentValue] = useState<any>('');
+
+  const changeTextEvent = (fieldValue: any) => {
+    fieldValue = fieldValue.trim().replace(/[\s\u200B-\u200D\uFEFF]+$/g, '');
+
+    setCurrentValue(fieldValue);
+    if (onChangeText) onChangeText(fieldValue);
+  };
+
+  const submitEditingEvent = () => {
+    if (onSubmitEditing) onSubmitEditing()
+    else if (onChangeText) onChangeText(currentValue);
+  };
+
+  useEffect(() => {
+    setCurrentValue(value);
+  }, [value]);
+
   return (
     <BoxView style={styles.container}>
       <Input
@@ -24,8 +52,9 @@ const InputTextareaField = ({value, placeholder, containerStyle, disabled, readO
         textAlignVertical="top"
         numberOfLines={10}
         editable={!disabled}
-        value={value}
-        onChangeText={onChangeText}
+        value={currentValue}
+        onChangeText={changeTextEvent}
+        onSubmitEditing={submitEditingEvent}
         readOnly={readOnly}
       />
     </BoxView>
@@ -38,8 +67,8 @@ const styles = StyleSheet.create({
   },
   element: {
     width: '100%',
-    paddingTop: Layout.space.base/2,
-    height: Layout.space.base*12,
+    paddingTop: Layout.space.base / 2,
+    height: Layout.space.base * 12,
   },
 });
 

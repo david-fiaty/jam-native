@@ -277,7 +277,7 @@ const styles: any = {
   container: {
     paddingBottom: Layout.space.base * 4,
     width: '100%',
-    height: '100%'
+    height: '100%',
   },
   commentContainer: {
     ...Layout.listItem,
