@@ -5,6 +5,7 @@ import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
 import CollapsibleView from '../view/CollapsibleView';
 import i18n from '@/translation/i18n';
+import IconView from '../view/IconView';
 
 type Props = {
   commentData?: any;
@@ -75,14 +76,20 @@ const CommentItem = ({ commentData, profileImage, globalStyles }: Props) => {
               content={renderReplies(commentData)}
               //onLabelPress={() => this.toggleCommentForm()}
               label={(
-                <>
-                  <TextView>+ {commentData?.sub_ids?.length || 0} {i18n.t('replies')}</TextView>
-                </>
+                <BoxView direction="row" align="center" justify="flex-start">
+                  <IconView name="collapsed" theme="transparent" /> 
+                  <TextView>
+                    {commentData?.sub_ids?.length || 0} {i18n.t('replies')}
+                  </TextView>
+                </BoxView>
               )}
               openedLabel={
-                <>
-                  <TextView>- {commentData?.sub_ids?.length || 0} {i18n.t('replies')}</TextView>
-                </>
+                <BoxView direction="row" align="center" justify="flex-start">
+                  <IconView name="expanded" theme="transparent" />
+                  <TextView>
+                    {commentData?.sub_ids?.length || 0} {i18n.t('replies')}
+                  </TextView>
+                </BoxView>
               }
             />
           )}
