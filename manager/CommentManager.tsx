@@ -14,7 +14,8 @@ import CollapsibleView from "@/components/view/CollapsibleView";
 import ListView from "@/components/view/ListView";
 import UserManager from "./UserManager";
 import EntityManager from "./EntityManager";
-import CommentForm from "@/components/form/CommentForm";
+import CommentForm from "@/components/comment/CommentForm";
+import CommentItem from "@/components/comment/CommentItem";
 
 const profileImageSize: number = 34;
 
@@ -50,124 +51,33 @@ class CommentManager {
       return this.renderCommentForm(row);
     }
 
-    return (
-      <BoxView
-        key={row.item.id}
-        direction="row"
-        align="flex-start"
-        justify="flex-start"
-        style={styles.commentContainer}
-      >
-        <BoxView
-          direction="row"
-          align="center"
-          justify="flex-start"
-          style={styles.commentContainerLeft}
-        >
-          {this.renderProfileImage(row)}
-        </BoxView>
-
-        <BoxView
-          direction="column"
-          align="flex-start"
-          justify="flex-start"
-          style={styles.commentContainerRight}
-        >
-          <BoxView
-            direction="row"
-            align="center"
-            justify="flex-start"
-          >
-            <TextView style={styles.profileName}>@{row?.item?.profile?.profile_name}</TextView>
-            <TextView style={styles.commentDate}>{moment(row?.item?.created_at).fromNow()}</TextView>
-          </BoxView>
-
-          <TextView>{row?.item?.comment_text}</TextView>
-
-          <BoxView
-            direction="row"
-            align="center"
-            justify="flex-start"
-            style={styles.commentToolbarContainer}
-          >
-            {true && (
-              <CollapsibleView
-                //
-                //isExpanded={true}
-                content={this.renderCommentReplies(row)}
-                //onLabelPress={() => this.toggleCommentForm()}
-                label={(
-                  <>
-                    <TextView>+ {row?.item?.sub_ids?.length || 0} {i18n.t('replies')}</TextView>
-                  </>
-                )}
-                openedLabel={
-                  <>
-                    <TextView>- {row?.item?.sub_ids?.length || 0} {i18n.t('replies')}</TextView>
-                  </>
-                }
-              />
-            )}
-
-            <TouchableOpacity onPress={() => console.log('on comment reply press')}>
-              <TextView>{i18n.t('Reply')}</TextView>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => console.log('on comment edit press')}>
-              <TextView>{i18n.t('Edit')}</TextView>
-            </TouchableOpacity>
-          </BoxView>
-
-        </BoxView>
-      </BoxView>
-    );
+    return this.renderCommentItem(row);
   }
 
   renderCommentForm(row?: any) {
     return (
-      <CommentForm 
+      <CommentForm
         commentData={row?.item}
-        profileImage={this.renderProfileImage(row)}
-        styles={styles}
+        globalStyles={styles}
+        profileImage={this.renderProfileImage({
+          item: {
+            profile: {
+              profile_picture: this.profileData?.profile_picture,
+            },
+          }
+        })}
       />
     );
   }
 
-  renderCommentReplies(row: any) {
-    //console.log('----- render comment replies', row);
-
+  renderCommentItem(row?: any) {
     return (
-      <TextView>
-        this is the comment replies list component for a commment
-      </TextView>
+      <CommentItem
+        commentData={row?.item}
+        globalStyles={styles}
+        profileImage={this.renderProfileImage(row)}
+      />
     );
-  }
-
-  toggleCommentForm(row?: any) {
-    let activeComment: any = { ...Store.getState().comment };
-    let commentId: number = row?.item?.id || 0;
-
-    //console.log('--- active comment', activeComment);
-
-    if (Object.keys(activeComment).length > 0) {
-      activeComment = {
-        ...activeComment,
-        ...{ showForm: !activeComment.showForm },
-      };
-    }
-    else {
-      activeComment = {
-        id: commentId,
-        comment_text: '',
-        showForm: true,
-      };
-    }
-
-    Store.dispatch(setActiveComment(activeComment));
-  }
-
-  toggleCommentReplies(row?: any) {
-    console.log('------ toggle comment replies')
   }
 
   renderProfileImage(row: any) {
@@ -222,7 +132,8 @@ const styles: any = {
     width: '10%',
   },
   commentContainerRight: {
-    width: '78%',
+    //width: '78%',
+    //width: '100%',
   },
   commentFormContainer: {
     marginBottom: Layout.space.base * 1.5,
