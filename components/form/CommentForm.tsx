@@ -11,7 +11,7 @@ import i18n from '@/translation/i18n';
 import ButtonView from '../view/ButtonView';
 
 type Props = {
-  commentData: any;
+  commentData?: any;
   profileImage?: JSX.Element;
   styles?: any;
 };
@@ -42,12 +42,12 @@ const CommentForm = ({ commentData, profileImage, styles }: Props) => {
     return (
       <>
         {collapsed && (
-          <TouchableWithoutFeedback onPress={() => setCollapsed(false)}>
+          <TouchableOpacity onPress={() => setCollapsed(false)}>
             <InputTextField
               placeholder={i18n.t('Add a comment...')}
               disabled={true}
             />
-          </TouchableWithoutFeedback>
+          </TouchableOpacity>
         )}
 
         <Collapsible
