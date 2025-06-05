@@ -56,10 +56,16 @@ class CommentManager {
 
   renderCommentForm(row?: any) {
     return (
-      <CommentForm 
+      <CommentForm
         commentData={row?.item}
-        profileImage={this.renderProfileImage(row)}
         globalStyles={styles}
+        profileImage={this.renderProfileImage({
+          item: {
+            profile: {
+              profile_picture: this.profileData?.profile_picture,
+            },
+          }
+        })}
       />
     );
   }
@@ -68,8 +74,8 @@ class CommentManager {
     return (
       <CommentItem
         commentData={row?.item}
-        profileImage={this.renderProfileImage(row)}
         globalStyles={styles}
+        profileImage={this.renderProfileImage(row)}
       />
     );
   }
@@ -126,7 +132,8 @@ const styles: any = {
     width: '10%',
   },
   commentContainerRight: {
-    width: '78%',
+    //width: '78%',
+    //width: '100%',
   },
   commentFormContainer: {
     marginBottom: Layout.space.base * 1.5,
