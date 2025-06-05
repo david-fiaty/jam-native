@@ -134,6 +134,7 @@ const styles: any = {
   commentContainerRight: {
     //width: '78%',
     //width: '100%',
+    backgroundColor: 'red',
   },
   commentFormContainer: {
     marginBottom: Layout.space.base * 1.5,
