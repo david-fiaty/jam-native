@@ -59,7 +59,7 @@ class CommentManager {
       <CommentForm 
         commentData={row?.item}
         profileImage={this.renderProfileImage(row)}
-        styles={styles}
+        globalStyles={styles}
       />
     );
   }
@@ -69,7 +69,7 @@ class CommentManager {
       <CommentItem
         commentData={row?.item}
         profileImage={this.renderProfileImage(row)}
-        styles={styles}
+        globalStyles={styles}
       />
     );
   }
