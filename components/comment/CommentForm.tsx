@@ -42,10 +42,8 @@ const CommentForm = ({ commentData, profileImage, globalStyles }: Props) => {
   };
 
   const renderCommentForm = (row?: any) => {
-    let activeComment: any = { ...commentState };
-
     return (
-      <>
+      <View>
         {collapsed && (
           <TouchableOpacity onPress={() => setCollapsed(false)}>
             <InputTextField
@@ -61,7 +59,7 @@ const CommentForm = ({ commentData, profileImage, globalStyles }: Props) => {
         >
           <InputTextareaField
             placeholder={i18n.t('Add a comment...')}
-            value={activeComment?.comment_text || ''}
+            value={commentState?.comment_text || ''}
             onChangeText={(value: string) => setCommentText(value)}
           />
 
@@ -81,11 +79,11 @@ const CommentForm = ({ commentData, profileImage, globalStyles }: Props) => {
               label={i18n.t('Submit')}
               onPress={() => submitComment()}
               containerStyle={[componentStyles.buttonStyle, componentStyles.submitButtonStyle]}
-              isProcessing={activeComment.processing}
+              isProcessing={commentState.processing}
             />
           </BoxView>
         </Collapsible>
-      </>
+      </View>
     );
   }
 
@@ -109,14 +107,7 @@ const CommentForm = ({ commentData, profileImage, globalStyles }: Props) => {
         {profileImage}
       </BoxView>
 
-      <BoxView
-        direction="column"
-        align="center"
-        justify="flex-start"
-        style={componentStyles.commentContainerRight}
-      >
-        {renderCommentForm(commentData)}
-      </BoxView>
+      {renderCommentForm(commentData)}
     </BoxView>
   );
 }
