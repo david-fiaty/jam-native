@@ -14,7 +14,7 @@ import CollapsibleView from "@/components/view/CollapsibleView";
 import ListView from "@/components/view/ListView";
 import UserManager from "./UserManager";
 import EntityManager from "./EntityManager";
-import CommentForm from "@/components/form/CommentForm";
+import CommentForm from "@/components/comment/CommentForm";
 
 const profileImageSize: number = 34;
 
