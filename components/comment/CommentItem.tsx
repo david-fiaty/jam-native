@@ -9,10 +9,14 @@ import i18n from '@/translation/i18n';
 type Props = {
   commentData?: any;
   profileImage?: JSX.Element;
-  styles?: any;
+  globalStyles?: any;
 };
 
-const CommentItem = ({ commentData, profileImage, styles }: Props) => {
+const CommentItem = ({ commentData, profileImage, globalStyles }: Props) => {
+  const componentStyles: any = {
+    ...styles,
+    ...globalStyles,
+  };
 
   const renderReplies = (row: any) => {
     //console.log('----- render comment replies', row);
@@ -31,13 +35,13 @@ const CommentItem = ({ commentData, profileImage, styles }: Props) => {
       direction="row"
       align="flex-start"
       justify="flex-start"
-      style={styles.commentContainer}
+      style={componentStyles.commentContainer}
     >
       <BoxView
         direction="row"
         align="center"
         justify="flex-start"
-        style={styles.commentContainerLeft}
+        style={componentStyles.commentContainerLeft}
       >
         {profileImage}
       </BoxView>
@@ -46,15 +50,15 @@ const CommentItem = ({ commentData, profileImage, styles }: Props) => {
         direction="column"
         align="flex-start"
         justify="flex-start"
-        style={styles.commentContainerRight}
+        style={componentStyles.commentContainerRight}
       >
         <BoxView
           direction="row"
           align="center"
           justify="flex-start"
         >
-          <TextView style={styles.profileName}>@{commentData?.profile?.profile_name}</TextView>
-          <TextView style={styles.commentDate}>{moment(commentData?.created_at).fromNow()}</TextView>
+          <TextView style={componentStyles.profileName}>@{commentData?.profile?.profile_name}</TextView>
+          <TextView style={componentStyles.commentDate}>{moment(commentData?.created_at).fromNow()}</TextView>
         </BoxView>
 
         <TextView>{commentData?.comment_text}</TextView>
@@ -63,7 +67,7 @@ const CommentItem = ({ commentData, profileImage, styles }: Props) => {
           direction="row"
           align="center"
           justify="flex-start"
-          style={styles.commentToolbarContainer}
+          style={componentStyles.commentToolbarContainer}
         >
           {true && (
             <CollapsibleView
@@ -97,5 +101,12 @@ const CommentItem = ({ commentData, profileImage, styles }: Props) => {
     </BoxView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    height: '100%',  
+  },
+});
 
 export default CommentItem;
