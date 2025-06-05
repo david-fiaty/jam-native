@@ -45,7 +45,7 @@ const CommentForm = ({ commentData, profileImage, globalStyles }: Props) => {
     let activeComment: any = { ...commentState };
 
     return (
-      <>
+      <View>
         {collapsed && (
           <TouchableOpacity onPress={() => setCollapsed(false)}>
             <InputTextField
@@ -85,7 +85,7 @@ const CommentForm = ({ commentData, profileImage, globalStyles }: Props) => {
             />
           </BoxView>
         </Collapsible>
-      </>
+      </View>
     );
   }
 
