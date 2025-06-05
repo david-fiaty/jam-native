@@ -3,7 +3,6 @@ import { StyleSheet, View, TouchableOpacity, TouchableWithoutFeedback } from 're
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveComment } from '@/redux/slices/CommentSlice';
 import { Layout } from '@/constants/Layout';
-import Store from '@/redux/Store';
 import Collapsible from 'react-native-collapsible';
 import BoxView from '../view/BoxView';
 import InputTextField from '../field/InputTextField';
