@@ -27,18 +27,15 @@ const CommentForm = ({ commentData, profileImage, globalStyles }: Props) => {
   };
 
   const setCommentText = (value: string) => {
-    let activeComment: any = { ...commentState };
-
     dispatch(setActiveComment({
-      ...activeComment,
+      ...commentState,
       ...{ comment_text: value },
     }));
   };
 
   const submitComment = async () => {
-    let activeComment: any = { ...commentState };
 
-    console.log('submit comment', activeComment);
+    console.log('submit comment', commentState);
   };
 
   const renderCommentForm = (row?: any) => {
