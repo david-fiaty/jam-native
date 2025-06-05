@@ -41,6 +41,8 @@ const icons = {
   view: ({iconStyle, size}: IconProps) => <Ionicons name="albums-outline" size={size} style={iconStyle} />,
   previous: ({iconStyle, size}: IconProps) => <Ionicons name="chevron-back" size={size} style={iconStyle} />,
   next: ({iconStyle, size}: IconProps) => <Ionicons name="chevron-forward" size={size} style={iconStyle} />,
+  collapsed: ({iconStyle, size}: IconProps) => <Ionicons name="chevron-forward" size={size} style={iconStyle} />,
+  expanded: ({iconStyle, size}: IconProps) => <Ionicons name="chevron-down" size={size} style={iconStyle} />,
   link: ({iconStyle, size}: IconProps) => <Ionicons name="link-outline" size={size} style={iconStyle} />,
   infinite: ({iconStyle, size}: IconProps) => <Ionicons name="infinite-outline" size={size} style={iconStyle} />,
   stack: ({iconStyle, size}: IconProps) => <Ionicons name="albums-outline" size={size} style={iconStyle} />,
