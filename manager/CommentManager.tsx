@@ -27,7 +27,7 @@ class CommentManager {
   profileData: any;
   commentsData: any;
 
-  async renderComments(entityType: string, entityId: any, itemsIds: any) {
+  async renderComments(entityType: string, entityId: any, itemsIds: any, updateCommentState: any) {
     this.entityId = entityId;
     this.entityType = entityType
     this.profileData = await this.loadProfileData();
@@ -277,7 +277,7 @@ const styles: any = {
   container: {
     paddingBottom: Layout.space.base * 4,
     width: '100%',
-    height: '100%'
+    height: '100%',
   },
   commentContainer: {
     ...Layout.listItem,
