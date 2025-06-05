@@ -142,27 +142,20 @@ class CommentManager {
           justify="flex-start"
           style={styles.commentContainerRight}
         >
-          {!row?.length && (
-            <CollapsibleView
-              openedLabel={<></>}
-              isExpanded={activeComment?.isEditing}
-              content={this.renderCommentFormFields()}
-              onLabelPress={() => this.toggleCommentForm()}
-              label={(
-                <TouchableWithoutFeedback>
-                  <InputTextField
-                    placeholder={i18n.t('Add a comment...')}
-                    disabled={true}
-                  />
-                </TouchableWithoutFeedback>
-              )}
-            />
-          )}
-
-          {row?.length && (
-            // Todo - Render edit comment form fields
-            <TextView>Edit comment form fields</TextView>
-          )}
+          <CollapsibleView
+            openedLabel={<></>}
+            isExpanded={activeComment?.showForm}
+            content={this.renderCommentFormFields()}
+            onLabelPress={() => this.toggleCommentForm()}
+            label={(
+              <TouchableWithoutFeedback>
+                <InputTextField
+                  placeholder={i18n.t('Add a comment...')}
+                  disabled={true}
+                />
+              </TouchableWithoutFeedback>
+            )}
+          />
         </BoxView>
       </BoxView>
     );
@@ -175,14 +168,14 @@ class CommentManager {
     if (Object.keys(activeComment).length > 0) {
       activeComment = {
         ...activeComment,
-        ...{ isEditing: !activeComment.isEditing },
+        ...{ showForm: !activeComment.showForm },
       };
     }
     else {
       activeComment = {
         id: commentId,
         comment_text: '',
-        isEditing: true,
+        showForm: true,
       };
     }
 
