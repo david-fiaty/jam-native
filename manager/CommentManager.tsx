@@ -126,6 +126,7 @@ class CommentManager {
   renderCommentForm(row?: any) {
     return (
       <CommentForm 
+        commentData={row.item}
         profileImage={this.renderProfileImage(row)}
         styles={styles}
       />
