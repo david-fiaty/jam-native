@@ -59,42 +59,38 @@ const CommentForm = ({ commentData, profileImage, globalStyles }: Props) => {
           collapsed={collapsed}
           align="center"
         >
-          <View
-          //style={componentStyles.content}
+          <InputTextareaField
+            placeholder={i18n.t('Add a comment...')}
+            value={activeComment?.comment_text || ''}
+            onChangeText={(value: string) => setCommentText(value)}
+          />
+
+          <BoxView
+            direction="row"
+            align="center"
+            justify="center"
+            style={componentStyles.commentFormButtonsContainer}
           >
-            <InputTextareaField
-              placeholder={i18n.t('Add a comment...')}
-              value={activeComment?.comment_text || ''}
-              onChangeText={(value: string) => setCommentText(value)}
+            <ButtonView
+              label={i18n.t('Cancel')}
+              onPress={() => setCollapsed(true)}
+              containerStyle={[componentStyles.buttonStyle, componentStyles.cancelButtonStyle]}
             />
 
-            <BoxView
-              direction="row"
-              align="center"
-              justify="center"
-              style={componentStyles.commentFormButtonsContainer}
-            >
-              <ButtonView
-                label={i18n.t('Cancel')}
-                onPress={() => setCollapsed(true)}
-                containerStyle={[componentStyles.buttonStyle, componentStyles.cancelButtonStyle]}
-              />
-
-              <ButtonView
-                label={i18n.t('Submit')}
-                onPress={() => submitComment()}
-                containerStyle={[componentStyles.buttonStyle, componentStyles.submitButtonStyle]}
-                isProcessing={activeComment.processing}
-              />
-            </BoxView>
-          </View>
+            <ButtonView
+              label={i18n.t('Submit')}
+              onPress={() => submitComment()}
+              containerStyle={[componentStyles.buttonStyle, componentStyles.submitButtonStyle]}
+              isProcessing={activeComment.processing}
+            />
+          </BoxView>
         </Collapsible>
       </>
     );
   }
 
   useEffect(() => {
-    
+
   }, []);
 
   return (
@@ -128,7 +124,7 @@ const CommentForm = ({ commentData, profileImage, globalStyles }: Props) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: '100%',  
+    height: '100%',
   },
 });
 
