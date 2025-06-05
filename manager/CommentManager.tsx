@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, TouchableWithoutFeedback } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { setActiveComment } from "@/redux/slices/CommentSlice";
 import { Layout } from "@/constants/Layout";
 import Store from "@/redux/Store";
@@ -11,10 +11,6 @@ import IconView from "@/components/view/IconView";
 import BoxView from "@/components/view/BoxView";
 import TextView from "@/components/view/TextView";
 import CollapsibleView from "@/components/view/CollapsibleView";
-import InputTextField from "@/components/field/InputTextField";
-import InputTextareaField from "@/components/field/InputTextareaField";
-import FormManager from "./FormManager";
-import ButtonView from "@/components/view/ButtonView";
 import ListView from "@/components/view/ListView";
 import UserManager from "./UserManager";
 import EntityManager from "./EntityManager";
