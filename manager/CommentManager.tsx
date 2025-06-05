@@ -131,49 +131,9 @@ class CommentManager {
     let activeComment: any = Store.getState().comment;
 
     return (
-      <BoxView
-        direction="row"
-        align="flex-start"
-        justify="flex-start"
-        style={styles.commentFormContainer}
-      >
-        <BoxView
-          direction="row"
-          align="flex-start"
-          justify="flex-start"
-          style={styles.commentContainerLeft}
-        >
-          {this.renderProfileImage({
-            item: {
-              profile: {
-                profile_picture: this.profileData?.profile_picture,
-              },
-            }
-          })}
-        </BoxView>
-
-        <BoxView
-          direction="column"
-          align="center"
-          justify="flex-start"
-          style={styles.commentContainerRight}
-        >
-          <CommentForm
-            openedLabel={<></>}
-            isExpanded={activeComment?.showForm}
-            content={this.renderCommentFormFields()}
-            onLabelPress={() => this.toggleCommentForm()}
-            label={(
-              <TouchableWithoutFeedback>
-                <InputTextField
-                  placeholder={i18n.t('Add a comment...')}
-                  disabled={true}
-                />
-              </TouchableWithoutFeedback>
-            )}
-          />
-        </BoxView>
-      </BoxView>
+      <CommentForm 
+      
+      />
     );
   }
 
@@ -214,40 +174,6 @@ class CommentManager {
     console.log('------ toggle comment replies')
   }
 
-  renderCommentFormFields(row?: any) {
-    let activeComment: any = Store.getState().comment;
-
-    return (
-      <>
-        <InputTextareaField
-          placeholder={i18n.t('Add a comment...')}
-          value={activeComment?.comment_text || ''}
-          onChangeText={(value: string) => this.setCommentText(value)}
-        />
-
-        <BoxView
-          direction="row"
-          align="center"
-          justify="center"
-          style={styles.commentFormButtonsContainer}
-        >
-          <ButtonView
-            label={i18n.t('Cancel')}
-            onPress={() => this.toggleCommentForm()}
-            containerStyle={[styles.buttonStyle, styles.cancelButtonStyle]}
-          />
-
-          <ButtonView
-            label={i18n.t('Submit')}
-            onPress={() => this.submitComment()}
-            containerStyle={[styles.buttonStyle, styles.submitButtonStyle]}
-            isProcessing={activeComment.processing}
-          />
-        </BoxView>
-      </>
-    );
-  }
-
   renderProfileImage(row: any) {
     return (
       <>
@@ -271,21 +197,6 @@ class CommentManager {
         )}
       </>
     );
-  }
-
-  setCommentText(value: string) {
-    let activeComment: any = { ...Store.getState().comment };
-
-    Store.dispatch(setActiveComment({
-      ...activeComment,
-      ...{ comment_text: value },
-    }));
-  }
-
-  async submitComment() {
-    let activeComment: any = Store.getState().comment;
-
-    console.log('submit comment', activeComment);
   }
 
   async loadProfileData() {
