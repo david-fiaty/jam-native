@@ -1,34 +1,22 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet } from "react-native";
-import { useSelector, useDispatch } from 'react-redux';
 import { Layout } from "@/constants/Layout";
-import Store from '@/redux/Store';
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
 import SpinnerView from "../view/SpinnerView";
 import EntityManager from '@/manager/EntityManager';
 import BoxView from '../view/BoxView';
 import CommentManager from '@/manager/CommentManager';
-import { setActiveComment } from '@/redux/slices/CommentSlice';
 
 type Props = {
   entityId: any;
   entityType: any;
 };
 
-const resource: string = 'comment';
-
 const JamCommentsList = ({ entityId, entityType }: Props) => {
-  const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [entityData, setEntityData] = useState<any>(null);
   const [entityComments, setEntityComments] = useState<any>(null);
-  const commentState: any = useSelector((state: any) => state[resource]);
-
-  const updateCommentState = (payload: any) => {
-    console.log('update comment state', payload);
-    dispatch(setActiveComment(payload)); 
-  };
 
   useEffect(() => {
     (async () => {
@@ -37,11 +25,11 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
         let commentIds: any[] = (entityData?.comments || []).map((o: any) => o.id);
 
         setEntityData(entityData);
-        setEntityComments(await CommentManager.renderComments('jam', entityId, commentIds, updateCommentState));
+        setEntityComments(await CommentManager.renderComments('jam', entityId, commentIds));
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, entityId, commentState]);
+  }, [isLoaded, entityId]);
 
   if (!isLoaded) return <SpinnerView />;
 

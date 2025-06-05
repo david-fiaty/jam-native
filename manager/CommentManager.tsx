@@ -27,7 +27,7 @@ class CommentManager {
   profileData: any;
   commentsData: any;
 
-  async renderComments(entityType: string, entityId: any, itemsIds: any, updateCommentState: any) {
+  async renderComments(entityType: string, entityId: any, itemsIds: any) {
     this.entityId = entityId;
     this.entityType = entityType
     this.profileData = await this.loadProfileData();
