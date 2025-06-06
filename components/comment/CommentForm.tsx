@@ -40,7 +40,7 @@ const CommentForm = ({ commentData, profileImage, globalStyles }: Props) => {
 
   const renderCommentForm = (row?: any) => {
     return (
-      <>
+      <View style={componentStyles.commentFormContainer}>
         {collapsed && (
           <TouchableOpacity onPress={() => setCollapsed(false)}>
             <InputTextField
@@ -80,7 +80,7 @@ const CommentForm = ({ commentData, profileImage, globalStyles }: Props) => {
             />
           </BoxView>
         </Collapsible>
-      </>
+      </View>
     );
   }
 

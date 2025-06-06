@@ -121,28 +121,25 @@ const styles: any = {
     height: '100%',
   },
   commentContainer: {
-    ...Layout.listItem,
-    ...{
-      paddingVertical: Layout.space.base * 1.5,
-      width: '100%',
-    },
+    marginBottom: Layout.space.base * 2,
+    padding: 0,
+    flex: 1,
+    width: '100%',
   },
   commentContainerLeft: {
-    backgroundColor: Layout.colors.white,
-    width: '10%',
+    
   },
   commentContainerRight: {
-    //width: '78%',
-    //width: '100%',
+    flex: 1,
   },
   commentFormContainer: {
-    marginBottom: Layout.space.base * 1.5,
+    width: '90%',
   },
   commentFormButtonsContainer: {
     width: '100%',
-    marginTop: Layout.space.base,
+    paddingTop: Layout.space.base,
   },
-  commentToolbarContainer: {
+  commentActionsContainer: {
 
   },
   buttonStyle: {
