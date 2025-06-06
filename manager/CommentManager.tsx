@@ -133,9 +133,10 @@ const styles: any = {
   commentContainerRight: {
     //flex: 1,
     width: 200,
+    backgroundColor: 'white',
   },
   commentActionsContainer: {
-
+    backgroundColor: 'blue',
   },
   commentFormContainer: {
     width: '90%',
