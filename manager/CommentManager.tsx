@@ -126,16 +126,17 @@ const styles: any = {
     width: '100%',
     backgroundColor: 'gray',
     borderWidth: 3,
+    gap: 0,
   },
   commentContainerLeft: {
     
   },
   commentContainerRight: {
-    //flex: 1,
-    width: 200,
+    flex: 1,
+    backgroundColor: 'white',
   },
   commentActionsContainer: {
-
+    backgroundColor: 'blue',
   },
   commentFormContainer: {
     width: '90%',
