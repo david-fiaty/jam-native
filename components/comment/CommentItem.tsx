@@ -90,16 +90,7 @@ const CommentItem = ({ commentData, profileImage, globalStyles }: Props) => {
               }
             />
           )}
-
-          <TouchableOpacity onPress={() => console.log('on comment reply press')}>
-            <TextView>{i18n.t('Reply')}</TextView>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => console.log('on comment edit press')}>
-            <TextView>{i18n.t('Edit')}</TextView>
-          </TouchableOpacity>
         </BoxView>
-
       </BoxView>
     </BoxView>
   );
