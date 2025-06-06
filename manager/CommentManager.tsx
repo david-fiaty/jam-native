@@ -124,15 +124,15 @@ const styles: any = {
   commentContainerRight: {
     flex: 1,
   },
+  commentActionsContainer: {
+
+  },
   commentFormContainer: {
     width: '90%',
   },
   commentFormButtonsContainer: {
     width: '100%',
     paddingTop: Layout.space.base,
-  },
-  commentActionsContainer: {
-
   },
   buttonStyle: {
     width: 'auto',
