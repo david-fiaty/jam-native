@@ -126,7 +126,6 @@ const styles: any = {
     padding: 0,
     flex: 1,
     width: '100%',
-
   },
   commentContainerLeft: {
     backgroundColor: 'yellow',
@@ -140,6 +139,7 @@ const styles: any = {
   },
   commentFormButtonsContainer: {
     width: '100%',
+    paddingTop: Layout.space.base,
   },
   commentToolbarContainer: {
 
