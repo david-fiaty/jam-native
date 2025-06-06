@@ -1,5 +1,6 @@
 import React from "react";
 import { Layout } from "@/constants/Layout";
+import { View } from "react-native";
 import MediaManager from "./MediaManager";
 import ImageView from "@/components/view/ImageView";
 import IconView from "@/components/view/IconView";
@@ -28,13 +29,16 @@ class CommentManager {
 
   renderCommentsList(data: any) {
     return (
-      <ListView
-        data={[
-          ...[this.renderCommentForm()],
-          ...(data || []),
-        ]}
-        renderItem={(item: any) => this.renderComment(item)}
-      />
+      <View style={styles.container}>
+        <ListView
+          data={[
+            ...[this.renderCommentForm()],
+            ...(data || []),
+          ]}
+          renderItem={(item: any) => this.renderComment(item)}
+          contentContainerStyle={styles.commentsList}
+        />
+      </View>
     );
   }
 
@@ -108,21 +112,27 @@ class CommentManager {
 
 const styles: any = {
   container: {
-    paddingBottom: Layout.space.base * 4,
+    flex: 1,
     width: '100%',
-    height: '100%',
+    backgroundColor: 'yellow',
+  },
+  commentsList: {
+    width: '100%',
   },
   commentContainer: {
     marginBottom: Layout.space.base * 3,
     padding: 0,
     flex: 1,
     width: '100%',
+    backgroundColor: 'gray',
+    borderWidth: 3,
   },
   commentContainerLeft: {
     
   },
   commentContainerRight: {
     //flex: 1,
+    width: 200,
   },
   commentActionsContainer: {
 
