@@ -74,7 +74,7 @@ const CommentItem = ({ commentData, profileImage, globalStyles }: Props) => {
               content={renderReplies(commentData)}
               label={(
                 <BoxView direction="row" align="center" justify="flex-start">
-                  <IconView name="collapsed" theme="transparent" padding={0} /> 
+                  <IconView name="collapsed" theme="transparent" padding={0} />
                   <TextView>
                     {commentData?.sub_ids?.length || 0} {i18n.t('replies')}
                   </TextView>
@@ -99,7 +99,13 @@ const CommentItem = ({ commentData, profileImage, globalStyles }: Props) => {
         justify="flex-start"
         style={componentStyles.commentActionsContainer}
       >
-        <TextView>xxx</TextView>
+        <IconView
+          name="actions"
+          theme="clear"
+          size={16}
+          padding={0}
+          //onPress={() => ModalManager.toggleModal('MoreJamActionsView', { jamId: row?.item?.id })}
+        />
       </BoxView>
     </BoxView>
   );
@@ -108,7 +114,7 @@ const CommentItem = ({ commentData, profileImage, globalStyles }: Props) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: '100%',  
+    height: '100%',
   },
 });
 
