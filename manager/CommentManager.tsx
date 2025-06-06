@@ -122,7 +122,7 @@ const styles: any = {
     
   },
   commentContainerRight: {
-    flex: 1,
+    //flex: 1,
   },
   commentActionsContainer: {
 
