@@ -1,16 +1,8 @@
 import React from "react";
-import { TouchableOpacity } from "react-native";
-import { setActiveComment } from "@/redux/slices/CommentSlice";
 import { Layout } from "@/constants/Layout";
-import Store from "@/redux/Store";
-import i18n from "@/translation/i18n";
-import moment from 'moment';
 import MediaManager from "./MediaManager";
 import ImageView from "@/components/view/ImageView";
 import IconView from "@/components/view/IconView";
-import BoxView from "@/components/view/BoxView";
-import TextView from "@/components/view/TextView";
-import CollapsibleView from "@/components/view/CollapsibleView";
 import ListView from "@/components/view/ListView";
 import UserManager from "./UserManager";
 import EntityManager from "./EntityManager";
@@ -121,7 +113,7 @@ const styles: any = {
     height: '100%',
   },
   commentContainer: {
-    marginBottom: Layout.space.base * 2,
+    marginBottom: Layout.space.base * 3,
     padding: 0,
     flex: 1,
     width: '100%',
