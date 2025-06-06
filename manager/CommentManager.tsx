@@ -1,16 +1,9 @@
 import React from "react";
-import { TouchableOpacity } from "react-native";
-import { setActiveComment } from "@/redux/slices/CommentSlice";
 import { Layout } from "@/constants/Layout";
-import Store from "@/redux/Store";
-import i18n from "@/translation/i18n";
-import moment from 'moment';
+import { View } from "react-native";
 import MediaManager from "./MediaManager";
 import ImageView from "@/components/view/ImageView";
 import IconView from "@/components/view/IconView";
-import BoxView from "@/components/view/BoxView";
-import TextView from "@/components/view/TextView";
-import CollapsibleView from "@/components/view/CollapsibleView";
 import ListView from "@/components/view/ListView";
 import UserManager from "./UserManager";
 import EntityManager from "./EntityManager";
@@ -36,13 +29,16 @@ class CommentManager {
 
   renderCommentsList(data: any) {
     return (
-      <ListView
-        data={[
-          ...[this.renderCommentForm()],
-          ...(data || []),
-        ]}
-        renderItem={(item: any) => this.renderComment(item)}
-      />
+      <View style={styles.container}>
+        <ListView
+          data={[
+            ...[this.renderCommentForm()],
+            ...(data || []),
+          ]}
+          renderItem={(item: any) => this.renderComment(item)}
+          contentContainerStyle={styles.commentsList}
+        />
+      </View>
     );
   }
 
@@ -116,21 +112,31 @@ class CommentManager {
 
 const styles: any = {
   container: {
-    paddingBottom: Layout.space.base * 4,
+    flex: 1,
     width: '100%',
-    height: '100%',
+    backgroundColor: 'yellow',
+  },
+  commentsList: {
+    width: '100%',
   },
   commentContainer: {
-    marginBottom: Layout.space.base * 2,
+    marginBottom: Layout.space.base * 3,
     padding: 0,
     flex: 1,
     width: '100%',
+    backgroundColor: 'gray',
+    borderWidth: 3,
+    gap: 0,
   },
   commentContainerLeft: {
     
   },
   commentContainerRight: {
     flex: 1,
+    backgroundColor: 'white',
+  },
+  commentActionsContainer: {
+    backgroundColor: 'blue',
   },
   commentFormContainer: {
     width: '90%',
@@ -138,9 +144,6 @@ const styles: any = {
   commentFormButtonsContainer: {
     width: '100%',
     paddingTop: Layout.space.base,
-  },
-  commentActionsContainer: {
-
   },
   buttonStyle: {
     width: 'auto',

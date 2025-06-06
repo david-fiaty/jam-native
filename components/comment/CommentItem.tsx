@@ -67,7 +67,7 @@ const CommentItem = ({ commentData, profileImage, globalStyles }: Props) => {
           direction="row"
           align="center"
           justify="flex-start"
-          style={componentStyles.commentActionsContainer}
+          style={componentStyles.commentContainerRight}
         >
           {true && ( // Todo - Show only if there are replies
             <CollapsibleView
@@ -90,16 +90,16 @@ const CommentItem = ({ commentData, profileImage, globalStyles }: Props) => {
               }
             />
           )}
-
-          <TouchableOpacity onPress={() => console.log('on comment reply press')}>
-            <TextView>{i18n.t('Reply')}</TextView>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => console.log('on comment edit press')}>
-            <TextView>{i18n.t('Edit')}</TextView>
-          </TouchableOpacity>
         </BoxView>
+      </BoxView>
 
+      <BoxView
+        direction="column"
+        align="flex-start"
+        justify="flex-start"
+        style={componentStyles.commentActionsContainer}
+      >
+        <TextView>xxx</TextView>
       </BoxView>
     </BoxView>
   );
