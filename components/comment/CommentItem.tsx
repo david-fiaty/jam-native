@@ -99,7 +99,7 @@ const CommentItem = ({ commentData, profileImage, globalStyles }: Props) => {
         justify="flex-start"
         style={componentStyles.commentActionsContainer}
       >
-        <TextView>x</TextView>
+        <TextView>xxx</TextView>
       </BoxView>
     </BoxView>
   );
