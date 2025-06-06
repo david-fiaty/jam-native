@@ -67,7 +67,7 @@ const CommentItem = ({ commentData, profileImage, globalStyles }: Props) => {
           direction="row"
           align="center"
           justify="flex-start"
-          style={componentStyles.commentActionsContainer}
+          style={componentStyles.commentContainerRight}
         >
           {true && ( // Todo - Show only if there are replies
             <CollapsibleView
@@ -91,6 +91,15 @@ const CommentItem = ({ commentData, profileImage, globalStyles }: Props) => {
             />
           )}
         </BoxView>
+      </BoxView>
+
+      <BoxView
+        direction="column"
+        align="flex-start"
+        justify="flex-start"
+        style={componentStyles.commentActionsContainer}
+      >
+        <TextView>x</TextView>
       </BoxView>
     </BoxView>
   );
