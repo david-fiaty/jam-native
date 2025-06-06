@@ -128,11 +128,10 @@ const styles: any = {
     width: '100%',
   },
   commentContainerLeft: {
-    backgroundColor: 'yellow',
+    
   },
   commentContainerRight: {
     flex: 1,
-    backgroundColor: 'green',
   },
   commentFormContainer: {
     width: '90%',
