@@ -102,7 +102,7 @@ const CommentItem = ({ commentData, profileImage, globalStyles }: Props) => {
         <IconView
           name="actions"
           theme="clear"
-          size={16}
+          size={18}
           padding={0}
           //onPress={() => ModalManager.toggleModal('MoreJamActionsView', { jamId: row?.item?.id })}
         />
