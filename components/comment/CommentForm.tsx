@@ -40,7 +40,7 @@ const CommentForm = ({ commentData, profileImage, globalStyles }: Props) => {
 
   const renderCommentForm = (row?: any) => {
     return (
-      <View>
+      <View style={componentStyles.commentFormContainer}>
         {collapsed && (
           <TouchableOpacity onPress={() => setCollapsed(false)}>
             <InputTextField
@@ -90,10 +90,11 @@ const CommentForm = ({ commentData, profileImage, globalStyles }: Props) => {
 
   return (
     <BoxView
+      key={commentData.id}
       direction="row"
       align="flex-start"
       justify="flex-start"
-      style={componentStyles.commentFormContainer}
+      style={componentStyles.commentContainer}
     >
       <BoxView
         direction="row"
@@ -104,7 +105,14 @@ const CommentForm = ({ commentData, profileImage, globalStyles }: Props) => {
         {profileImage}
       </BoxView>
 
-      {renderCommentForm(commentData)}
+      <BoxView
+        direction="column"
+        align="flex-start"
+        justify="flex-start"
+        style={componentStyles.commentContainerRight}
+      >
+        {renderCommentForm(commentData)}
+      </BoxView>
     </BoxView>
   );
 }
