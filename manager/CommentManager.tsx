@@ -141,7 +141,7 @@ const styles: any = {
     width: '100%',
     paddingTop: Layout.space.base,
   },
-  commentToolbarContainer: {
+  commentActionsContainer: {
 
   },
   buttonStyle: {
