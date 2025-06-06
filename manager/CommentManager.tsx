@@ -121,7 +121,7 @@ const styles: any = {
     height: '100%',
   },
   commentContainer: {
-    marginBottom: Layout.space.base * 1.5,
+    marginBottom: Layout.space.base * 2,
     padding: 0,
     flex: 1,
     width: '100%',
