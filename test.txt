@@ -20,7 +20,7 @@ Content-Type: application/json
     "geolocation_latitude": "9",
     "geolocation_longitude": "2",
 
-    "profile_id": 4318,
+    "profile_id": 1,
     "callaborators_ids": [1, 4318],
     "period": {"start_datetime":"2018-11-20T15:58:44-06:00", "end_datetime":"2018-11-20T15:58:44-06:01" },
     "projects": [1, 2]
@@ -28,7 +28,8 @@ Content-Type: application/json
 
 ###  Update Jam
 # To send files in 'upload_medias', you should use formdata and not json payload
-PUT http://0.0.0.0:8000/api/v1/jams/78/
+#TBR --> strange return when in this case "You do not have permission to update this Jam. The profile ID must match the Jam creator's profile id."
+PUT http://0.0.0.0:8000/api/v1/jams/1/
 Content-Type: application/json
 
 {
@@ -111,16 +112,40 @@ Content-Type: application/json
     "like_action": "unlike"
 }
 
+### Get comments of a jam
+GET http://0.0.0.0:8000/api/v1/jams/1/comments/
+Content-Type: application/json
+
 ### Add comment to jam
 POST http://0.0.0.0:8000/api/v1/jams/comments/create/
 Content-Type: application/json
 
 {
-    "profile_id": 4311,
-    "item_id": 70,
-    "comment_text": "Test",
-    "main_comment_id": 1
+    "profile_id": 1,
+    "item_id": 1,
+    "comment_text": "Test"
 }
+
+### Add subcomment to jam
+POST http://0.0.0.0:8000/api/v1/jams/comments/create/
+Content-Type: application/json
+
+{
+    "profile_id": 1,
+    "item_id": 1,
+    "comment_text": "Test",
+    "main_comment_id": 12
+}
+
+### Delete comments by profile and items IDs
+DELETE http://0.0.0.0:8000/api/v1/comments/
+Content-Type: application/json
+
+{
+  "profile_id": 1,
+  "items_ids": [8]
+}
+
 
 ### Get profile jams
 GET http://0.0.0.0:8000/api/v1/profiles/1/jams/
@@ -248,6 +273,10 @@ Content-Type: application/json
     "like_action": "unlike"
 }
 
+### Get comments of a project
+GET http://0.0.0.0:8000/api/v1/projects/1/comments/
+Content-Type: application/json
+
 ### Add comment to Project
 POST http://0.0.0.0:8000/api/v1/projects/comments/create/
 Content-Type: application/json
@@ -256,8 +285,18 @@ Content-Type: application/json
 {
     "profile_id": 1,
     "item_id": 1,
+    "comment_text": "Test"
+}
+
+### Add subcomment to Project
+POST http://0.0.0.0:8000/api/v1/projects/comments/create/
+Content-Type: application/json
+
+{
+    "profile_id": 1,
+    "item_id": 1,
     "comment_text": "Test",
-    "main_comment_id": 1
+    "main_comment_id": 12
 }
 
 ### Get profile projects
@@ -276,6 +315,10 @@ Content-Type: application/json
 
 ##### COMMENT #####
 
+### Get list of comments
+GET http://0.0.0.0:8000/api/v1/comments/?items_ids=1,2
+Content-Type: application/json
+
 ### Update specific comment
 PUT http://0.0.0.0:8000/api/v1/comments/1/
 Content-Type: application/json
@@ -293,7 +336,7 @@ GET http://0.0.0.0:8000/api/v1/profiles/?items_ids=1,2
 Content-Type: application/json
 
 ### Get specific profile
-GET http://0.0.0.0:8000/api/v1/profiles/4329/
+GET http://0.0.0.0:8000/api/v1/profiles/1/
 Content-Type: application/json
 
 ### Create new profile
@@ -327,7 +370,7 @@ Content-Type: application/json
     "whatsapp_number": "+22824242424",
     "phone_number": "+22824242424",
     "website_link": "https://www.google.fr",
-    "instagram_id": "1234",
+    "instagram_username": "1234",
     "facebook_link": "https://wwww.facebook.com",
     "linkedin_link": "https://wwww.linkedin.com",
     "profile_type": "personal",
@@ -365,7 +408,7 @@ Content-Type: application/json
     "whatsapp_number": "+22824242424",
     "phone_number": "+22824242424",
     "website_link": "https://www.google.fr",
-    "instagram_id": "1234",
+    "instagram_username": "1234",
     "facebook_link": "https://wwww.facebook.com",
     "linkedin_link": "https://wwww.linkedin.com",
     "profile_type": "organization",
@@ -385,7 +428,7 @@ Content-Type: application/json
 # /!\ possible values for the field indoor_or_outdoor: indoor | outdoor | indoor_outdoor /!\
 # /!\ ask Ghislain to set up upload_indoor_images, upload_outdoor_images, and upload_technical_sheet /!\
 # /!\ ask Ghislain to set up upload_profile_picture, and upload_other_docs /!\
-PUT http://0.0.0.0:8000/api/v1/profiles/4341/
+PUT http://0.0.0.0:8000/api/v1/profiles/1/
 Content-Type: application/json
 
 {
@@ -405,7 +448,7 @@ Content-Type: application/json
     "whatsapp_number": "+22824242424",
     "phone_number": "+22824242424",
     "website_link": "https://www.google.fr",
-    "instagram_id": "1234",
+    "instagram_username": "1234",
     "facebook_link": "https://wwww.facebook.com",
     "linkedin_link": "https://wwww.linkedin.com",
     "profile_type": "venue",
@@ -598,6 +641,38 @@ GET http://0.0.0.0:8000/api/v1/profiles/feed/?profile_id=1&profile_type=all&disp
 ##### ADMIN #####
 
 ### Report an item authenticated
+
+# reporting_cause choices
+# You can also let it blank like this ex
+# 'spam'
+# 'insults'
+# 'harassment'
+# 'hate_speech'
+# 'threats'
+# 'violence'
+# 'graphic_violence'
+# 'sexual_content'
+# 'pornography'
+# 'nudity'
+# 'child_abuse'
+# 'self_harm'
+# 'illegal_activity'
+# 'drug_related'
+# 'terrorism'
+# 'privacy_violation'
+# 'personal_data'
+# 'impersonation'
+# 'intellectual_property'
+# 'misinformation'
+# 'other'
+
+# reporting_content_type choices
+# 'user'
+# 'profile'
+# 'jam'
+# 'project'
+# 'comment'
+
 POST http://0.0.0.0:8000/api/v1/report-items/
 Content-Type: application/json
 
@@ -611,14 +686,15 @@ Content-Type: application/json
 }
 
 ### Report an item anonymous
+
 POST http://0.0.0.0:8000/api/v1/report-items/
 Content-Type: application/json
 
 {
     "reporting_person_is_anonymous": true,
     "reporting_profile_id": null,
-    "reporting_content_type": "project",
-    "reporting_content_id": 1,
+    "reporting_content_type": "comment",
+    "reporting_content_id": 12,
     "reporting_cause": "",
     "reporting_comment": "ABCD"
 }
@@ -825,7 +901,7 @@ Content-Type: application/json
 
 {
     "provider": "instagram",
-    "authorization_code": "AQAtHtT7Ne0Z10KMi3uIPama3YK8DLq9L2BWMkGb4rsqXTWx8qjBKBvoQ1ppqcaMD9s5BR-38yq9p8XlCCyB1pTGv92jWEurn_qu-eVyT2ub9dff50Wq0pep5iv4PjcxpWpQqSM9RHWrvKOtX_LVNdTEWBdYXRY4ospqVH4yqLWI9aUk-KKpQAjefjP2psiuC8Is6gjob5Ctz_DkmW43MuxdAOmsRmhRO9pvAMvDv-iouA"
+    "authorization_code": "AQDLikh1zByWThk3oEBT8xuCfJxcc4eHelDnGTU7pn7aomtavUzKygYgc-MzGRkiTumzdTI7kz0sz2S7ftLdjIBqTUO-VVEqSDfcPbP-DgrP_v6np1ws2xY4wArYp5OaN3_KhHXD78AVmyoiaH2RkkYKinKkfhmuEk0rn7bbqfU6_YUnMGv0UYugQdclXd-eOnBwitFF0JM_4bBtanxEgJhYpbZLYBBvKdmnPgl8HSbyiw"
 }
 
 ### Social register second step (instagram)

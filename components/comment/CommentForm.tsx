@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveComment } from '@/redux/slices/CommentSlice';
-import { Layout } from '@/constants/Layout';
 import Collapsible from 'react-native-collapsible';
 import BoxView from '../view/BoxView';
 import InputTextField from '../field/InputTextField';
