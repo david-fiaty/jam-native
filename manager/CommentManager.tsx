@@ -9,6 +9,7 @@ import UserManager from "./UserManager";
 import EntityManager from "./EntityManager";
 import CommentForm from "@/components/comment/CommentForm";
 import CommentItem from "@/components/comment/CommentItem";
+import TextView from "@/components/view/TextView";
 
 const profileImageSize: number = 34;
 
@@ -31,12 +32,12 @@ class CommentManager {
     return (
       <View style={styles.container}>
         <ListView
+          renderItem={(item: any) => this.renderComment(item)}
+          contentContainerStyle={styles.commentsList}
           data={[
             ...[this.renderCommentForm()],
             ...(data || []),
           ]}
-          renderItem={(item: any) => this.renderComment(item)}
-          contentContainerStyle={styles.commentsList}
         />
       </View>
     );
@@ -74,6 +75,12 @@ class CommentManager {
         commentData={row?.item}
         globalStyles={styles}
         profileImage={this.renderProfileImage(row)}
+        // Todo - Render comment replies
+        commentReplies={
+          <TextView>
+            this is the comment replies list component for a comment
+          </TextView>
+        } 
       />
     );
   }
@@ -128,7 +135,7 @@ const styles: any = {
     gap: 0,
   },
   commentContainerLeft: {
-    
+
   },
   commentContainerRight: {
     paddingLeft: Layout.space.base,
