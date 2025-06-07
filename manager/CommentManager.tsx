@@ -50,9 +50,10 @@ class CommentManager {
     return this.renderCommentItem(row);
   }
 
-  renderCommentForm(row?: any) {
+  renderCommentForm(entityId: any, row?: any) {
     return (
       <CommentForm
+        entityId={entityId}
         commentData={row?.item}
         globalStyles={styles}
         profileImage={this.renderProfileImage({
