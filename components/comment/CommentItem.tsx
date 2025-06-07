@@ -13,10 +13,11 @@ type Props = {
   entityId?: any;
   commentData?: any;
   profileImage?: JSX.Element;
+  commentReplies?: JSX.Element;
   globalStyles?: any;
 };
 
-const CommentItem = ({ entityId, commentData, profileImage, globalStyles }: Props) => {
+const CommentItem = ({ entityId, commentData, profileImage, commentReplies, globalStyles }: Props) => {
   const router = useRouter();
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   
@@ -40,14 +41,6 @@ const CommentItem = ({ entityId, commentData, profileImage, globalStyles }: Prop
     setIsProcessing(true);
     console.log('edit comment', entityId);
     setIsProcessing(false);
-  };
-
-  const renderReplies = (row: any) => {
-    return (
-      <TextView>
-        this is the comment replies list component for a comment
-      </TextView>
-    );
   };
 
   return (
@@ -100,7 +93,7 @@ const CommentItem = ({ entityId, commentData, profileImage, globalStyles }: Prop
         >
           {true && ( // Todo - Show only if there are replies
             <CollapsibleView
-              content={renderReplies(commentData)}
+              content={commentReplies}
               label={(
                 <BoxView direction="row" align="center" justify="flex-start">
                   <IconView name="collapsed" theme="transparent" padding={0} />
