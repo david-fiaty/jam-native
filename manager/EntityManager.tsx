@@ -76,13 +76,17 @@ class EntityManager {
     return await DataManager.get('getComments', {...defaults, ...options}); 
   }
 
-  /*
-  async getJams(options?: any) {
+  async addComment(itemId: any, commentText: string) {
+    let profileId = await UserManager.getProfileId();
     let defaults = {};
+    let options = {
+      item_id: itemId,
+      profile_id: profileId,
+      comment_text: commentText,
+    };
 
-    return await DataManager.get('getJams', {...defaults, ...options}); 
+    return await DataManager.post('addComment', {...defaults, ...options}); 
   }
-    */
 
   async listProjects(options?: any) {
     let profileId = await UserManager.getProfileId();
@@ -223,7 +227,6 @@ class EntityManager {
     return response;
   }
 
-
   async unsaveProject(entityId: any) {
     let profileId = await UserManager.getProfileId();
     let response = await DataManager.post('unsaveProject', {
@@ -233,7 +236,6 @@ class EntityManager {
 
     return response;
   }
-
 
   async deleteJam(entityId: any) {
     let profileId = await UserManager.getProfileId();
