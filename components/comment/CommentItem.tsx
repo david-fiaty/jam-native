@@ -1,5 +1,4 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { Layout } from '@/constants/Layout';
 import moment from 'moment';
 import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
