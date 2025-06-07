@@ -53,6 +53,7 @@ class CommentManager {
   renderCommentForm(row?: any) {
     return (
       <CommentForm
+        entityId={this.entityId}
         commentData={row?.item}
         globalStyles={styles}
         profileImage={this.renderProfileImage({
