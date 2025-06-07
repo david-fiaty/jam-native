@@ -10,6 +10,8 @@ import InputTextareaField from '../field/InputTextareaField';
 import i18n from '@/translation/i18n';
 import ButtonView from '../view/ButtonView';
 import EntityManager from '@/manager/EntityManager';
+import FormManager from '@/manager/FormManager';
+import ScreenManager from '@/manager/ScreenManager';
 
 type Props = {
   entityId?: any;
@@ -17,6 +19,8 @@ type Props = {
   profileImage?: JSX.Element;
   globalStyles?: any;
 };
+
+const resource: string = 'comment';
 
 const CommentForm = ({ entityId, commentData, profileImage, globalStyles }: Props) => {
   const dispatch = useDispatch();
@@ -41,10 +45,17 @@ const CommentForm = ({ entityId, commentData, profileImage, globalStyles }: Prop
 
     let result: any = await EntityManager.addComment(entityId, commentState?.comment_text);
 
-    console.log(result);
+    let message: any = {
+      title: i18n.t('Add comment'),
+      content: i18n.t('The comment was successfully added.'),
+    };
 
-
-    
+    if (result.success === false) {
+      message.content = i18n.t('Invalid data submission.');
+      FormManager.addServerErrors(resource, result.response);
+    }
+ 
+    ScreenManager.showMessage(message);
     setIsProcessing(false);
   };
 
