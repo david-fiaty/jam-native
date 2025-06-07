@@ -77,15 +77,23 @@ class EntityManager {
   }
 
   async addComment(entityId: any, commentText: string) {
-    let profileId = await UserManager.getProfileId();
-    let defaults = {};
-    let options = {
+    let profileId: any = await UserManager.getProfileId();
+    let success: boolean = false
+    let defaults: any = {};
+    let options:any = {
       item_id: entityId,
       profile_id: profileId,
       comment_text: commentText,
     };
 
-    return await DataManager.post('addComment', {...defaults, ...options}); 
+    let response: any = await DataManager.post('addComment', {...defaults, ...options}); 
+
+    if (response?.comment?.id > 0) success = true;
+
+    return {
+      success: success,
+      response: response,
+    };
   }
 
   async listProjects(options?: any) {
