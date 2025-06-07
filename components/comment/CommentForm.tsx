@@ -38,9 +38,13 @@ const CommentForm = ({ entityId, commentData, profileImage, globalStyles }: Prop
 
   const submitComment = async () => {
     setIsProcessing(true);
-    console.log('submit comment', commentState);
 
-    EntityManager.addComment(entityId, commentState?.comment_text)
+    let result: any = await EntityManager.addComment(entityId, commentState?.comment_text);
+
+    console.log(result);
+
+
+    
     setIsProcessing(false);
   };
 
@@ -82,7 +86,7 @@ const CommentForm = ({ entityId, commentData, profileImage, globalStyles }: Prop
               label={i18n.t('Submit')}
               onPress={() => submitComment()}
               containerStyle={[componentStyles.buttonStyle, componentStyles.submitButtonStyle]}
-              isProcessing={commentState.processing}
+              isProcessing={isProcessing}
             />
           </BoxView>
         </Collapsible>
