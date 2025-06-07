@@ -139,7 +139,7 @@ const styles: any = {
 
   },
   commentFormContainer: {
-    width: '90%',
+    width: '100%',
   },
   commentFormButtonsContainer: {
     width: '100%',
