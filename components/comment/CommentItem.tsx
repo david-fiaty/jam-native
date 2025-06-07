@@ -30,7 +30,6 @@ const CommentItem = ({ entityId, commentData, profileImage, globalStyles }: Prop
   };
 
   const editComment = async () => {
-    // Todo - Implement edit comment
     setIsProcessing(true);
     console.log('edit comment', entityId);
     setIsProcessing(false);
