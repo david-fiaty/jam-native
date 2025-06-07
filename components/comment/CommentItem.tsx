@@ -7,15 +7,26 @@ import i18n from '@/translation/i18n';
 import IconView from '../view/IconView';
 
 type Props = {
+  entityId?: any;
   commentData?: any;
   profileImage?: JSX.Element;
   globalStyles?: any;
 };
 
-const CommentItem = ({ commentData, profileImage, globalStyles }: Props) => {
+const CommentItem = ({ entityId, commentData, profileImage, globalStyles }: Props) => {
   const componentStyles: any = {
     ...styles,
     ...globalStyles,
+  };
+
+  const deleteComment = async () => {
+    // Todo - Implement delete comment
+    console.log('delete comment', entityId)
+  };
+
+  const editComment = async () => {
+    // Todo - Implement edit comment
+    console.log('edit comment', entityId)
   };
 
   const renderReplies = (row: any) => {
