@@ -1,5 +1,4 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { Layout } from '@/constants/Layout';
 import moment from 'moment';
 import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
@@ -20,11 +19,9 @@ const CommentItem = ({ commentData, profileImage, globalStyles }: Props) => {
   };
 
   const renderReplies = (row: any) => {
-    //console.log('----- render comment replies', row);
-
     return (
       <TextView>
-        this is the comment replies list component for a commment
+        this is the comment replies list component for a comment
       </TextView>
     );
   };
@@ -67,7 +64,7 @@ const CommentItem = ({ commentData, profileImage, globalStyles }: Props) => {
           direction="row"
           align="center"
           justify="flex-start"
-          style={componentStyles.commentContainerRight}
+          style={componentStyles.commentRepliesContainer}
         >
           {true && ( // Todo - Show only if there are replies
             <CollapsibleView
