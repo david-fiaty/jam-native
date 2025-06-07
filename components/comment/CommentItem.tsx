@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import moment from 'moment';
 import BoxView from '../view/BoxView';
@@ -14,6 +15,8 @@ type Props = {
 };
 
 const CommentItem = ({ entityId, commentData, profileImage, globalStyles }: Props) => {
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  
   const componentStyles: any = {
     ...styles,
     ...globalStyles,
@@ -21,12 +24,16 @@ const CommentItem = ({ entityId, commentData, profileImage, globalStyles }: Prop
 
   const deleteComment = async () => {
     // Todo - Implement delete comment
-    console.log('delete comment', entityId)
+    setIsProcessing(true);
+    console.log('delete comment', entityId);
+    setIsProcessing(false);
   };
 
   const editComment = async () => {
     // Todo - Implement edit comment
-    console.log('edit comment', entityId)
+    setIsProcessing(true);
+    console.log('edit comment', entityId);
+    setIsProcessing(false);
   };
 
   const renderReplies = (row: any) => {
