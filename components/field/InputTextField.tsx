@@ -42,7 +42,7 @@ const InputTextField = ({
   };
 
   const changeTextEvent = (fieldValue: any) => {
-    fieldValue = fieldValue.trim().replace(/[\s\u200B-\u200D\uFEFF]+$/g, '');
+    fieldValue = fieldValue.trim();
 
     setCurrentValue(fieldValue);
     if (onChangeText) onChangeText(fieldValue);

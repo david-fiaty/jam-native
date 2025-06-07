@@ -114,6 +114,8 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Fix web console error on input field value
 - Profile/project/jam image upload
 - Check submit button width isProcessing in forms
+- Registration email field: fix extra space in selected email suggestion 
+  .replace(/[\s\u200B-\u200D\uFEFF]+$/g, '')
 
 - Disable phone countries not available for sms
 - review form error api responses handling
