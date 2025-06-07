@@ -9,16 +9,23 @@ import InputTextField from '../field/InputTextField';
 import InputTextareaField from '../field/InputTextareaField';
 import i18n from '@/translation/i18n';
 import ButtonView from '../view/ButtonView';
+import EntityManager from '@/manager/EntityManager';
+import FormManager from '@/manager/FormManager';
+import ScreenManager from '@/manager/ScreenManager';
 
 type Props = {
+  entityId?: any;
   commentData?: any;
   profileImage?: JSX.Element;
   globalStyles?: any;
 };
 
-const CommentForm = ({ commentData, profileImage, globalStyles }: Props) => {
+const resource: string = 'comment';
+
+const CommentForm = ({ entityId, commentData, profileImage, globalStyles }: Props) => {
   const dispatch = useDispatch();
   const [collapsed, setCollapsed] = useState(true);
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const commentState: any = useSelector((state: any) => state.comment);
 
   const componentStyles: any = {
@@ -34,8 +41,22 @@ const CommentForm = ({ commentData, profileImage, globalStyles }: Props) => {
   };
 
   const submitComment = async () => {
+    setIsProcessing(true);
 
-    console.log('submit comment', commentState);
+    let result: any = await EntityManager.addComment(entityId, commentState?.comment_text);
+
+    let message: any = {
+      title: i18n.t('Add comment'),
+      content: i18n.t('The comment was successfully added.'),
+    };
+
+    if (result.success === false) {
+      message.content = i18n.t('Invalid data submission.');
+      FormManager.addServerErrors(resource, result.response);
+    }
+ 
+    ScreenManager.showMessage(message);
+    setIsProcessing(false);
   };
 
   const renderCommentForm = (row?: any) => {
@@ -76,7 +97,7 @@ const CommentForm = ({ commentData, profileImage, globalStyles }: Props) => {
               label={i18n.t('Submit')}
               onPress={() => submitComment()}
               containerStyle={[componentStyles.buttonStyle, componentStyles.submitButtonStyle]}
-              isProcessing={commentState.processing}
+              isProcessing={isProcessing}
             />
           </BoxView>
         </Collapsible>
