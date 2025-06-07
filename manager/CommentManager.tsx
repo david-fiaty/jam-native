@@ -114,7 +114,6 @@ const styles: any = {
   container: {
     flex: 1,
     width: '100%',
-    backgroundColor: 'yellow',
   },
   commentsList: {
     width: '100%',
@@ -124,22 +123,23 @@ const styles: any = {
     padding: 0,
     flex: 1,
     width: '100%',
-    backgroundColor: 'gray',
-    borderWidth: 3,
     gap: 0,
   },
   commentContainerLeft: {
     
   },
   commentContainerRight: {
+    paddingLeft: Layout.space.base,
     flex: 1,
-    backgroundColor: 'white',
+  },
+  commentRepliesContainer: {
+    gap: 0,
   },
   commentActionsContainer: {
-    backgroundColor: 'blue',
+
   },
   commentFormContainer: {
-    width: '90%',
+    width: '100%',
   },
   commentFormButtonsContainer: {
     width: '100%',
