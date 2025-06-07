@@ -9,16 +9,19 @@ import InputTextField from '../field/InputTextField';
 import InputTextareaField from '../field/InputTextareaField';
 import i18n from '@/translation/i18n';
 import ButtonView from '../view/ButtonView';
+import EntityManager from '@/manager/EntityManager';
 
 type Props = {
+  entityId?: any;
   commentData?: any;
   profileImage?: JSX.Element;
   globalStyles?: any;
 };
 
-const CommentForm = ({ commentData, profileImage, globalStyles }: Props) => {
+const CommentForm = ({ entityId, commentData, profileImage, globalStyles }: Props) => {
   const dispatch = useDispatch();
   const [collapsed, setCollapsed] = useState(true);
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const commentState: any = useSelector((state: any) => state.comment);
 
   const componentStyles: any = {
@@ -34,8 +37,11 @@ const CommentForm = ({ commentData, profileImage, globalStyles }: Props) => {
   };
 
   const submitComment = async () => {
-
+    setIsProcessing(true);
     console.log('submit comment', commentState);
+
+    EntityManager.addComment(itemId, commentState?.comment_text)
+    setIsProcessing(false);
   };
 
   const renderCommentForm = (row?: any) => {
