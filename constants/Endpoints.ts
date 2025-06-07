@@ -119,6 +119,11 @@ const Endpoints = {
     cacheable: false,
     dataKey: null,
   },
+  addComment: {
+    path: '/jams/comments/create/',
+    cacheable: false,
+    dataKey: null,
+  },
   addJam: {
     path: '/jams/',
     cacheable: false,
