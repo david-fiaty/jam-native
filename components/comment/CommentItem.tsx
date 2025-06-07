@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { useRouter } from "expo-router";
 import moment from 'moment';
 import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
 import CollapsibleView from '../view/CollapsibleView';
 import i18n from '@/translation/i18n';
 import IconView from '../view/IconView';
+import SectionManager from '@/manager/SectionManager';
 
 type Props = {
   entityId?: any;
@@ -15,11 +17,16 @@ type Props = {
 };
 
 const CommentItem = ({ entityId, commentData, profileImage, globalStyles }: Props) => {
+  const router = useRouter();
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   
   const componentStyles: any = {
     ...styles,
     ...globalStyles,
+  };
+
+  const viewProfile = (row: any) => {
+    SectionManager.push(router, 'profile-item', { profileId: commentData?.profile?.id });
   };
 
   const deleteComment = async () => {
@@ -57,7 +64,9 @@ const CommentItem = ({ entityId, commentData, profileImage, globalStyles }: Prop
         justify="flex-start"
         style={componentStyles.commentContainerLeft}
       >
-        {profileImage}
+        <TouchableOpacity onPress={viewProfile}>
+          {profileImage}
+        </TouchableOpacity>
       </BoxView>
 
       <BoxView
@@ -71,8 +80,14 @@ const CommentItem = ({ entityId, commentData, profileImage, globalStyles }: Prop
           align="center"
           justify="flex-start"
         >
-          <TextView style={componentStyles.profileName}>@{commentData?.profile?.profile_name}</TextView>
-          <TextView style={componentStyles.commentDate}>{moment(commentData?.created_at).fromNow()}</TextView>
+          <TouchableOpacity onPress={viewProfile}>
+            <TextView style={componentStyles.profileName}>
+              @{commentData?.profile?.profile_name}
+            </TextView>
+          </TouchableOpacity>
+          <TextView style={componentStyles.commentDate}>
+            {moment(commentData?.created_at).fromNow()}
+          </TextView>
         </BoxView>
 
         <TextView>{commentData?.comment_text}</TextView>
@@ -118,7 +133,6 @@ const CommentItem = ({ entityId, commentData, profileImage, globalStyles }: Prop
           theme="clear"
           size={18}
           padding={0}
-          //onPress={() => ModalManager.toggleModal('MoreJamActionsView', { jamId: row?.item?.id })}
         />
       </BoxView>
     </BoxView>
