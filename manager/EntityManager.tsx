@@ -85,7 +85,7 @@ class EntityManager {
       comment_text: commentText,
     };
 
-    return await DataManager.get('getComments', {...defaults, ...options}); 
+    return await DataManager.post('addComment', {...defaults, ...options}); 
   }
 
   /*
