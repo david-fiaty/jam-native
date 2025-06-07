@@ -114,7 +114,6 @@ const styles: any = {
   container: {
     flex: 1,
     width: '100%',
-    backgroundColor: 'yellow',
   },
   commentsList: {
     width: '100%',
@@ -124,8 +123,6 @@ const styles: any = {
     padding: 0,
     flex: 1,
     width: '100%',
-    backgroundColor: 'gray',
-    borderWidth: 3,
     gap: 0,
   },
   commentContainerLeft: {
@@ -133,10 +130,9 @@ const styles: any = {
   },
   commentContainerRight: {
     flex: 1,
-    backgroundColor: 'white',
   },
   commentActionsContainer: {
-    backgroundColor: 'blue',
+
   },
   commentFormContainer: {
     width: '90%',
