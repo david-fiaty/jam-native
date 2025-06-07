@@ -40,7 +40,7 @@ const CommentForm = ({ entityId, commentData, profileImage, globalStyles }: Prop
     setIsProcessing(true);
     console.log('submit comment', commentState);
 
-    EntityManager.addComment(itemId, commentState?.comment_text)
+    EntityManager.addComment(entityId, commentState?.comment_text)
     setIsProcessing(false);
   };
 
