@@ -1,5 +1,4 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { Layout } from '@/constants/Layout';
 import moment from 'moment';
 import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
@@ -20,11 +19,9 @@ const CommentItem = ({ commentData, profileImage, globalStyles }: Props) => {
   };
 
   const renderReplies = (row: any) => {
-    //console.log('----- render comment replies', row);
-
     return (
       <TextView>
-        this is the comment replies list component for a commment
+        this is the comment replies list component for a comment
       </TextView>
     );
   };
@@ -67,14 +64,14 @@ const CommentItem = ({ commentData, profileImage, globalStyles }: Props) => {
           direction="row"
           align="center"
           justify="flex-start"
-          style={componentStyles.commentContainerRight}
+          style={componentStyles.commentRepliesContainer}
         >
           {true && ( // Todo - Show only if there are replies
             <CollapsibleView
               content={renderReplies(commentData)}
               label={(
                 <BoxView direction="row" align="center" justify="flex-start">
-                  <IconView name="collapsed" theme="transparent" padding={0} /> 
+                  <IconView name="collapsed" theme="transparent" padding={0} />
                   <TextView>
                     {commentData?.sub_ids?.length || 0} {i18n.t('replies')}
                   </TextView>
@@ -99,7 +96,13 @@ const CommentItem = ({ commentData, profileImage, globalStyles }: Props) => {
         justify="flex-start"
         style={componentStyles.commentActionsContainer}
       >
-        <TextView>xxx</TextView>
+        <IconView
+          name="actions"
+          theme="clear"
+          size={18}
+          padding={0}
+          //onPress={() => ModalManager.toggleModal('MoreJamActionsView', { jamId: row?.item?.id })}
+        />
       </BoxView>
     </BoxView>
   );
@@ -108,7 +111,7 @@ const CommentItem = ({ commentData, profileImage, globalStyles }: Props) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: '100%',  
+    height: '100%',
   },
 });
 
