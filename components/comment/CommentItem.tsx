@@ -64,7 +64,9 @@ const CommentItem = ({ entityId, commentData, profileImage, globalStyles }: Prop
         justify="flex-start"
         style={componentStyles.commentContainerLeft}
       >
-        {profileImage}
+        <TouchableOpacity onPress={viewProfile}>
+          {profileImage}
+        </TouchableOpacity>
       </BoxView>
 
       <BoxView
@@ -131,7 +133,6 @@ const CommentItem = ({ entityId, commentData, profileImage, globalStyles }: Prop
           theme="clear"
           size={18}
           padding={0}
-          //onPress={() => ModalManager.toggleModal('MoreJamActionsView', { jamId: row?.item?.id })}
         />
       </BoxView>
     </BoxView>
