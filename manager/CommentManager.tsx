@@ -77,7 +77,6 @@ class CommentManager {
         profileImage={this.renderProfileImage(row)}
         // Todo - Render comment replies
         commentReplies={
-
           <TextView>
             this is the comment replies list component for a comment
           </TextView>
