@@ -1,4 +1,3 @@
-import { Platform } from 'react-native';
 import { setActiveModals } from '@/redux/slices/ModalSlice';
 import { setActiveSections } from '@/redux/slices/SectionSlice';
 import { Config } from '@/constants/Config';
