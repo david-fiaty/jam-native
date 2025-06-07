@@ -129,7 +129,11 @@ const styles: any = {
     
   },
   commentContainerRight: {
+    paddingLeft: Layout.space.base,
     flex: 1,
+  },
+  commentRepliesContainer: {
+    gap: 0,
   },
   commentActionsContainer: {
 
