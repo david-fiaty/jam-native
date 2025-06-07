@@ -76,11 +76,11 @@ class EntityManager {
     return await DataManager.get('getComments', {...defaults, ...options}); 
   }
 
-  async addComment(itemId: any, commentText: string) {
+  async addComment(entityId: any, commentText: string) {
     let profileId = await UserManager.getProfileId();
     let defaults = {};
     let options = {
-      item_id: itemId,
+      item_id: entityId,
       profile_id: profileId,
       comment_text: commentText,
     };
