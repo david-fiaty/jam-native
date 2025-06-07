@@ -20,11 +20,9 @@ const CommentItem = ({ commentData, profileImage, globalStyles }: Props) => {
   };
 
   const renderReplies = (row: any) => {
-    //console.log('----- render comment replies', row);
-
     return (
       <TextView>
-        this is the comment replies list component for a commment
+        this is the comment replies list component for a comment
       </TextView>
     );
   };
