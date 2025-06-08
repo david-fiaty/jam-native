@@ -29,7 +29,11 @@ class CommentManager {
   }
 
   async renderCommentsList(itemsIds: any[]) {
-    let data: any[] = await this.loadCommentsData(itemsIds);
+    let data: any[] = [];
+
+    if (itemsIds.length > 0) {
+      data = await this.loadCommentsData(itemsIds);
+    }
 
     return (
       <View style={styles.container}>
@@ -86,11 +90,7 @@ class CommentManager {
     let commentItem: any = this.entityComments.find((o: any) => o.id === row.item.id);
     let repliesIds: any = commentItem.sub_ids;
     
-    if (repliesIds.length) {
-      return this.renderCommentsList(repliesIds);
-    }
-
-    return <></>;
+    return this.renderCommentsList(repliesIds);
   }
 
   renderProfileImage(row: any) {
