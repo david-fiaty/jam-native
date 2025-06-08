@@ -23,12 +23,11 @@ class CommentManager {
     this.entityType = entityType
     this.profileData = await this.loadProfileData();
 
-    return await this.renderCommentsList(entityComments);
+    return await this.renderCommentsList((entityComments || []).map((o: any) => o.id));
   }
 
-  async renderCommentsList(entityComments: any) {
-    let itemsIds: any[] = (entityComments || []).map((o: any) => o.id);
-    let data: any[] = await this.loadCommentsData(itemsIds);
+  async renderCommentsList(itemsIds: any[]) {
+    let data: any = await this.loadCommentsData(itemsIds);
 
     return (
       <View style={styles.container}>
