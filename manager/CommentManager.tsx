@@ -29,7 +29,11 @@ class CommentManager {
   }
 
   async renderCommentsList(itemsIds: any[]) {
-    let data: any[] = await this.loadCommentsData(itemsIds);
+    let data: any[] = [];
+
+    if (itemsIds.length > 0) {
+      data = await this.loadCommentsData(itemsIds);
+    }
 
     return (
       <View style={styles.container}>
