@@ -22,10 +22,9 @@ const JamCommentsList = ({ entityId, entityType }: Props) => {
     (async () => {
       if (!isLoaded) {
         let entityData: any = (await EntityManager.getJams(entityId))?.[0];
-        let commentIds: any[] = (entityData?.comments || []).map((o: any) => o.id);
 
         setEntityData(entityData);
-        setEntityComments(await CommentManager.renderComments('jam', entityId, commentIds));
+        setEntityComments(await CommentManager.renderComments('jam', entityId, entityData?.comments));
         setIsLoaded(true);
       }
     })();
