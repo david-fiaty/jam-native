@@ -85,7 +85,7 @@ class CommentManager {
   renderCommentReplies(row: any) {
     let commentItem: any = this.entityComments.find((o: any) => o.id === row.item.id);
     let repliesIds: any = commentItem.sub_ids;
-
+    
     if (repliesIds.length) {
       return this.renderCommentsList(repliesIds);
     }
