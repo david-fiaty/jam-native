@@ -98,7 +98,7 @@ const CommentItem = ({ entityId, commentData, profileImage, commentReplies, glob
                 <BoxView direction="row" align="center" justify="flex-start">
                   <IconView name="collapsed" theme="transparent" padding={0} />
                   <TextView>
-                    {commentData?.sub_ids?.length || 0} {i18n.t('replies')}
+                    {i18n.t('Replies')}
                   </TextView>
                 </BoxView>
               )}
