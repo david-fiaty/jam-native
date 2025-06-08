@@ -77,22 +77,20 @@ class CommentManager {
         commentData={row?.item}
         globalStyles={styles}
         profileImage={this.renderProfileImage(row)}
-        // Todo - Render comment replies
         commentReplies={this.renderCommentReplies(row)} 
       />
     );
   }
 
   renderCommentReplies(row: any) {
-    let repliesIds: any = (this.entityComments.find((o: any) => o.id === row.item.id)).sub_ids;
-    
-    console.log('replies ids', repliesIds);
+    let commentItem: any = this.entityComments.find((o: any) => o.id === row.item.id);
+    let repliesIds: any = commentItem.sub_ids;
 
-    return (
-      <TextView>
-        this is the comment replies list component for a comment
-      </TextView>
-    );
+    if (repliesIds.length) {
+      return this.renderCommentsList(repliesIds);
+    }
+
+    return <></>;
   }
 
   renderProfileImage(row: any) {
