@@ -13,7 +13,7 @@ type Props = {
   entityId?: any;
   commentData?: any;
   profileImage?: JSX.Element;
-  commentReplies?: JSX.Element;
+  commentReplies?: any;
   globalStyles?: any;
 };
 
