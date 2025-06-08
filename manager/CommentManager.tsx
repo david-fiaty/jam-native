@@ -17,17 +17,19 @@ class CommentManager {
   entityId: any;
   entityType: any;
   profileData: any;
+  entityComments: any;
 
   async renderComments(entityType: string, entityId: any, entityComments: any) {
     this.entityId = entityId;
-    this.entityType = entityType
+    this.entityType = entityType;
+    this.entityComments = entityComments;
     this.profileData = await this.loadProfileData();
 
     return await this.renderCommentsList((entityComments || []).map((o: any) => o.id));
   }
 
   async renderCommentsList(itemsIds: any[]) {
-    let data: any = await this.loadCommentsData(itemsIds);
+    let data: any[] = await this.loadCommentsData(itemsIds);
 
     return (
       <View style={styles.container}>
