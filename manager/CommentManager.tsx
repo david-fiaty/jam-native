@@ -17,18 +17,24 @@ class CommentManager {
   entityId: any;
   entityType: any;
   profileData: any;
-  commentsData: any;
+  entityComments: any;
 
-  async renderComments(entityType: string, entityId: any, itemsIds: any) {
+  async renderComments(entityType: string, entityId: any, entityComments: any) {
     this.entityId = entityId;
-    this.entityType = entityType
+    this.entityType = entityType;
+    this.entityComments = entityComments;
     this.profileData = await this.loadProfileData();
-    this.commentsData = await this.loadCommentsData(itemsIds);
 
-    return this.renderCommentsList(this.commentsData);
+    return await this.renderCommentsList((entityComments || []).map((o: any) => o.id));
   }
 
-  renderCommentsList(data: any) {
+  async renderCommentsList(itemsIds: any[]) {
+    let data: any[] = [];
+
+    if (itemsIds.length > 0) {
+      data = await this.loadCommentsData(itemsIds);
+    }
+
     return (
       <View style={styles.container}>
         <ListView
@@ -75,14 +81,16 @@ class CommentManager {
         commentData={row?.item}
         globalStyles={styles}
         profileImage={this.renderProfileImage(row)}
-        // Todo - Render comment replies
-        commentReplies={
-          <TextView>
-            this is the comment replies list component for a comment
-          </TextView>
-        } 
+        commentReplies={this.renderCommentReplies(row)} 
       />
     );
+  }
+
+  renderCommentReplies(row: any) {
+    let commentItem: any = this.entityComments.find((o: any) => o.id === row.item.id);
+    let repliesIds: any = commentItem.sub_ids;
+    
+    return this.renderCommentsList(repliesIds);
   }
 
   renderProfileImage(row: any) {
