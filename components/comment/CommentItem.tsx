@@ -97,17 +97,13 @@ const CommentItem = ({ entityId, commentData, profileImage, commentReplies, glob
               label={(
                 <BoxView direction="row" align="center" justify="flex-start">
                   <IconView name="collapsed" theme="transparent" padding={0} />
-                  <TextView>
-                    {i18n.t('Replies')}
-                  </TextView>
+                  <TextView>{i18n.t('Replies')}</TextView>
                 </BoxView>
               )}
               openedLabel={
                 <BoxView direction="row" align="center" justify="flex-start">
                   <IconView name="expanded" theme="transparent" padding={0} />
-                  <TextView>
-                    {commentData?.sub_ids?.length || 0} {i18n.t('replies')}
-                  </TextView>
+                  <TextView>{i18n.t('Replies')}</TextView>
                 </BoxView>
               }
             />
