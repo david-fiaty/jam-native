@@ -110,13 +110,12 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Social login
 - Venue type field => handle hierarchy in registration and profile forms
 - Check jams google maps markers
-- Profile edit form: center spinner vertically
-- Fix web console error on input field value
 - Profile/project/jam image upload
 - Check submit button width isProcessing in forms
+- Profile edit form: center spinner vertically
+- Fix web console error on input field value
 - Registration email field: fix extra space in selected email suggestion 
   .replace(/[\s\u200B-\u200D\uFEFF]+$/g, '')
-
 - Disable phone countries not available for sms
 - review form error api responses handling
 - Extract languages and translate
