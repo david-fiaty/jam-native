@@ -23,7 +23,7 @@ const resource: string = 'comment';
 
 const AddCommentForm = ({ entityId, commentData, profileImage, globalStyles }: Props) => {
   const dispatch = useDispatch();
-  const [collapsed, setCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const commentState: any = useSelector((state: any) => state.comment);
 
@@ -61,8 +61,8 @@ const AddCommentForm = ({ entityId, commentData, profileImage, globalStyles }: P
   const renderAddCommentForm = (row?: any) => {
     return (
       <View style={componentStyles.commentFormContainer}>
-        {collapsed && (
-          <TouchableOpacity onPress={() => setCollapsed(false)}>
+        {isCollapsed && (
+          <TouchableOpacity onPress={() => setIsCollapsed(false)}>
             <InputTextField
               placeholder={i18n.t('Add a comment...')}
               disabled={true}
@@ -71,7 +71,7 @@ const AddCommentForm = ({ entityId, commentData, profileImage, globalStyles }: P
         )}
 
         <Collapsible
-          collapsed={collapsed}
+          collapsed={isCollapsed}
           align="center"
         >
           <InputTextareaField
@@ -88,7 +88,7 @@ const AddCommentForm = ({ entityId, commentData, profileImage, globalStyles }: P
           >
             <ButtonView
               label={i18n.t('Cancel')}
-              onPress={() => setCollapsed(true)}
+              onPress={() => setIsCollapsed(true)}
               containerStyle={[componentStyles.buttonStyle, componentStyles.cancelButtonStyle]}
             />
 
