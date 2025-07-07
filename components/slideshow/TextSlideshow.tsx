@@ -25,6 +25,7 @@ const TextSlideshow = ({ data }: Props) => {
     <Slick
       style={styles.wrapper}
       showsButtons={false}
+      paginationStyle={styles.pagination}
     >
       {data?.map((item: any, index: number) => renderItem(item, index))}
     </Slick>
@@ -43,6 +44,9 @@ const styles = StyleSheet.create({
   text: {
     color: Layout.colors.primary,
     padding: Layout.space.base * 2,
+  },
+  pagination: {
+    top: 0,
   },
 });
 
