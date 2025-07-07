@@ -4,18 +4,18 @@ const StaticData = {
   welcomeSlideshow: [
     {
       id: 1,
-      title: i18n.t('Create better, together'),
-      content: i18n.t('Welcome to the Jam app. Jam is a place to explore and experience artists and creatives from different backgrounds in West Africa.'),
+      title: i18n.t('Create better together'),
+      content: i18n.t('JAM! is a place to explore and experience creatives from different backgrounds in West Africa.'),
     },
     {
       id: 2,
-      title: i18n.t('Everything you need'),
-      content: i18n.t('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'),
+      title: i18n.t('A Powerful Tool'),
+      content: i18n.t('JAM! is a tool for networking, exchange and collaboration between artists, venues, communities and organisations across the Lagos - Abidjan axis.'),
     },
     {
       id: 3,
-      title: i18n.t('The place to excel'),
-      content: i18n.t('Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.'),
+      title: i18n.t('Experience and Incubate Tomorrow\'s Culture'),
+      content: i18n.t('JAM! Is a social network and a map, all rolled up in one - a digital incubator that is constantly updated thanks to you, its members.'),
     },
   ],
   languages: [
