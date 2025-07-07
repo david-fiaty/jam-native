@@ -58,6 +58,8 @@ const icons = {
   image: ({iconStyle, size}: IconProps) => <Ionicons name="image-outline" size={size} style={iconStyle} />,
   phone: ({iconStyle, size}: IconProps) => <Ionicons name="keypad-outline" size={size} style={iconStyle} />,
   chat: ({iconStyle, size}: IconProps) => <Ionicons name="chatbox-outline" size={size} style={iconStyle} />,
+  see: ({iconStyle, size}: IconProps) => <Ionicons name="eye-outline" size={size} style={iconStyle} />,
+  blind: ({iconStyle, size}: IconProps) => <Ionicons name="eye-off-outline" size={size} style={iconStyle} />,
 };
 
 const IconBase = ({name, size, containerStyle, iconStyle}: Props) => {
