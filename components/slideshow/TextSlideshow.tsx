@@ -14,7 +14,7 @@ const TextSlideshow = ({ data }: Props) => {
     return (
       <View 
         key={`dot-${index}`}
-        style={styles.slide3}
+        style={styles.slide}
       >
         <Text style={styles.text}>
           {item.content}
@@ -43,41 +43,14 @@ const TextSlideshow = ({ data }: Props) => {
 var styles = StyleSheet.create({
   wrapper: {
   },
-  slide1: {
+  slide: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#9DD6EB',
   },
-  slide2: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#97CAE5',
-  },
-  slide3: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#92BBD9',
-  },
   text: {
-    color: '#fff',
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
-  item: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    //gap: Layout.space.base,
-    //padding: Layout.space.base * 2,
-  },
-  title: {
-    textTransform: 'uppercase',
-  },
-  content: {
-    textAlign: 'center',
+
   },
 });
 
