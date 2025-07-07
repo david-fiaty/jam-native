@@ -33,6 +33,7 @@ const TextSlideshow = ({ data }: Props) => {
 
 const styles = StyleSheet.create({
   wrapper: {
+    
   },
   slide: {
     //flex: 1,
