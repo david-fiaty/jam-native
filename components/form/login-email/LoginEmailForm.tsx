@@ -13,6 +13,7 @@ import FormManager from "@/manager/FormManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import TextView from "@/components/view/TextView";
+import InputPasswordField from "@/components/field/InputPasswordField";
 
 const resource: string = 'login';
 
@@ -64,7 +65,7 @@ const LoginEmailForm = () => {
       {FormManager.renderError('email')}
 
       <TextView style={styles.label}>{i18n.t('Password')}</TextView>
-      <InputTextField
+      <InputPasswordField
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Enter your password')}
         secureTextEntry={true}
