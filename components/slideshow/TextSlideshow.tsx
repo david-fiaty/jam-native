@@ -9,7 +9,7 @@ type Props = {
 
 const dotSize: number = 8;
 const slideHeight: number = 90;
-const wrapperHeight: number = 130;
+const wrapperHeight: number = 120;
 const pagerHeight: number = 20;
 
 const TextSlideshow = ({ data }: Props) => {
