@@ -19,7 +19,11 @@ const TextSlideshow = ({ data }: Props) => {
         key={`dot-${index}`}
         style={styles.slide}
       >
-        <Text style={styles.text}>
+        <Text style={styles.title}>
+          {item.title}
+        </Text>
+
+        <Text style={styles.content}>
           {item.content}
         </Text>
       </View>      
@@ -49,10 +53,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: slideHeight,
   },
-  text: {
+  title: {
     color: Layout.colors.primary,
-    padding: Layout.space.base * 2,
     textAlign: 'center',
+    textTransform: 'uppercase',
+    width: '100%',
+  },
+  content: {
+    color: Layout.colors.primary,
+    textAlign: 'center',
+    width: '100%',
   },
   pager: {
     top: slideHeight,
