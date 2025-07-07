@@ -44,8 +44,6 @@ const InputPasswordField = ({
   };
 
   const changeTextEvent = (fieldValue: any) => {
-    fieldValue = fieldValue.trim();
-
     setCurrentValue(fieldValue);
     if (onChangeText) onChangeText(fieldValue);
   };
