@@ -68,8 +68,6 @@ const LoginEmailForm = () => {
       <InputPasswordField
         containerStyle={styles.inputTextFieldContainer}
         placeholder={i18n.t('Enter your password')}
-        secureTextEntry={true}
-        spellCheck={false}
         onChangeText={(value: string) => FormManager.updateField(resource, 'password', value, ['string'])}
       />
       {FormManager.renderError('password')}
