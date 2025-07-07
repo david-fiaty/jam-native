@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 import { Input } from "@rneui/themed";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
+import IconView from "../view/IconView";
 
 type Props = {
   keyboardType?: any;
@@ -53,6 +54,12 @@ const InputPasswordField = ({
     else if (onChangeText) onChangeText(currentValue); 
   };
 
+  const renderRightIcon = () => {
+    return (
+      <IconView name="see" theme="transparent" />
+    );
+  };
+
   useEffect(() => {
     setCurrentValue(value);
   }, [value]);
@@ -64,7 +71,7 @@ const InputPasswordField = ({
         textAlignVertical="center"
         numberOfLines={1}
         leftIcon={leftIcon}
-        rightIcon={rightIcon}
+        rightIcon={renderRightIcon()}
         placeholder={placeholder}
         placeholderTextColor={Layout.colors.primary}
         inputContainerStyle={styles.inputContainerStyle}
