@@ -8,7 +8,6 @@ type Props = {
 };
 
 const TextSlideshow = ({ data }: Props) => {
-
   const renderItem = (item: any, index: number) => {
     return (
       <View 
@@ -43,6 +42,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: Layout.colors.primary,
+    padding: Layout.space.base * 2,
   },
 });
 
