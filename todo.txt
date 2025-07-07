@@ -49,6 +49,9 @@ https://docs.google.com/spreadsheets/d/1q7osx0gzONv_ZLisLiUDJU6UqphqBvXejlyeCUTT
 # Ghislain feedback
 https://docs.google.com/spreadsheets/d/1q7osx0gzONv_ZLisLiUDJU6UqphqBvXejlyeCUTTD44/edit?gid=485245944#gid=485245944
 
+# Global feedback
+https://docs.google.com/spreadsheets/d/1q7osx0gzONv_ZLisLiUDJU6UqphqBvXejlyeCUTTD44/edit?pli=1&gid=664353314#gid=664353314
+
 Test users:
 Id: 62 / test888@yopmail.com / Test@12345678
 id: 3 / mitsiomotu@yopmail.com / Password1234
