@@ -22,31 +22,35 @@ const TextSlideshow = ({ data }: Props) => {
   };
 
   return (
-    <Slick
-      style={styles.wrapper}
-      showsButtons={false}
-      paginationStyle={styles.pagination}
-    >
-      {data?.map((item: any, index: number) => renderItem(item, index))}
-    </Slick>
+    <View style={styles.wrapper}>
+      <Slick
+        showsButtons={false}
+        paginationStyle={styles.pagination}
+      >
+        {data?.map((item: any, index: number) => renderItem(item, index))}
+      </Slick>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   wrapper: {
-    
+    height: 130,
   },
   slide: {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#9DD6EB',
+    height: 90,
   },
   text: {
     color: Layout.colors.primary,
     padding: Layout.space.base * 2,
   },
   pagination: {
-    top: 0,
+    top: 90,
+    backgroundColor: 'red',
+    height: 20,
   },
 });
 
