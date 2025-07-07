@@ -1,8 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { Layout } from '@/constants/Layout';
 import React from 'react';
 import Slick from 'react-native-slick';
-import TextView from '../view/TextView';
+import { Layout } from '@/constants/Layout';
 
 type Props = {
   data?: any;
@@ -21,13 +20,6 @@ const TextSlideshow = ({ data }: Props) => {
         </Text>
       </View>      
     );
-
-    return (
-      <View style={styles.item} key={`dot-${index}`}>
-        <TextView style={styles.title}>{item.title}</TextView>
-        <TextView style={styles.content}>{item.content}</TextView>
-      </View>
-    );
   };
 
   return (
@@ -40,7 +32,7 @@ const TextSlideshow = ({ data }: Props) => {
   );
 };
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   wrapper: {
   },
   slide: {
@@ -50,7 +42,7 @@ var styles = StyleSheet.create({
     backgroundColor: '#9DD6EB',
   },
   text: {
-
+    color: Layout.colors.primary,
   },
 });
 
