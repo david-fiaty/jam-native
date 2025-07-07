@@ -9,6 +9,8 @@ type Props = {
 
 const dotSize: number = 8;
 const slideHeight: number = 90;
+const wrapperHeight: number = 130;
+const pagerHeight: number = 20;
 
 const TextSlideshow = ({ data }: Props) => {
   const renderItem = (item: any, index: number) => {
@@ -28,7 +30,7 @@ const TextSlideshow = ({ data }: Props) => {
     <View style={styles.wrapper}>
       <Slick
         showsButtons={false}
-        paginationStyle={styles.pagination}
+        paginationStyle={styles.pager}
         dot={<View style={styles.dot} />}
         activeDot={<View style={styles.activeDot} />}
       >
@@ -40,7 +42,7 @@ const TextSlideshow = ({ data }: Props) => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    height: 130,
+    height: wrapperHeight,
   },
   slide: {
     justifyContent: 'center',
@@ -52,9 +54,9 @@ const styles = StyleSheet.create({
     padding: Layout.space.base * 2,
     textAlign: 'center',
   },
-  pagination: {
+  pager: {
     top: slideHeight,
-    height: 20,
+    height: pagerHeight,
   },
   dot: {
     backgroundColor: Layout.colors.white,
