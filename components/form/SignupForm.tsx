@@ -21,6 +21,7 @@ import LocationPickerField from "../field/LocationPickerField";
 import FormManager from "@/manager/FormManager";
 import SectionManager from "@/manager/SectionManager";
 import VenueTypesField from "../field/VenueTypesField";
+import InputPasswordField from "../field/InputPasswordField";
 
 const resource: string = 'signup';
 
@@ -255,8 +256,7 @@ const SignupForm = () => {
           <TextView>
             {i18n.t('Password')}*
           </TextView>
-          <InputTextField
-            secureTextEntry={true}
+          <InputPasswordField
             value={formData?.password}
             placeholder={i18n.t('Password')}
             onChangeText={(value: string) => FormManager.updateField(resource, 'password', value, ['string'])}

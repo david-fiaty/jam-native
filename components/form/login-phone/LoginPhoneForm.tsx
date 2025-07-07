@@ -14,6 +14,7 @@ import ScreenManager from "@/manager/ScreenManager";
 import CountryPhoneCodeField from "@/components/field/CountryPhoneCodeField";
 import StaticData from "@/constants/StaticData";
 import IconView from "@/components/view/IconView";
+import InputPasswordField from "@/components/field/InputPasswordField";
 
 const resource: string = 'login';
 
@@ -88,10 +89,8 @@ const LoginPhoneForm = () => {
       {FormManager.renderError('phone')}
 
       <TextView style={styles.label}>{i18n.t('Password')}</TextView>
-      <InputTextField
+      <InputPasswordField
         placeholder={i18n.t('Password')}
-        secureTextEntry={true}
-        spellCheck={false}
         containerStyle={styles.inputTextFieldContainer}
         onChangeText={(value: string) => FormManager.updateField(resource, 'password', value, ['string'])}
       />
