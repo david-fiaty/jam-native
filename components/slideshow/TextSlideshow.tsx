@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     color: Layout.colors.primary,
     textAlign: 'center',
     width: '100%',
-    paddingHorizontal: Layout.space.base*2,
+    paddingHorizontal: Layout.space.base*2.1,
   },
   pager: {
     top: slideHeight + Layout.space.base,
