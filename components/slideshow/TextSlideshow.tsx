@@ -8,8 +8,8 @@ type Props = {
 };
 
 const dotSize: number = 8;
-const slideHeight: number = 90;
-const wrapperHeight: number = 120;
+const slideHeight: number = 100;
+const wrapperHeight: number = 130;
 const pagerHeight: number = 20;
 
 const TextSlideshow = ({ data }: Props) => {
@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textTransform: 'uppercase',
     width: '100%',
+    marginBottom: Layout.space.base,
   },
   content: {
     color: Layout.colors.primary,
