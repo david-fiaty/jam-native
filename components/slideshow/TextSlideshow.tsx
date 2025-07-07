@@ -7,6 +7,11 @@ type Props = {
   data?: any;
 };
 
+const dotSize: number = 8;
+const slideHeight: number = 90;
+const wrapperHeight: number = 120;
+const pagerHeight: number = 20;
+
 const TextSlideshow = ({ data }: Props) => {
   const renderItem = (item: any, index: number) => {
     return (
@@ -25,7 +30,9 @@ const TextSlideshow = ({ data }: Props) => {
     <View style={styles.wrapper}>
       <Slick
         showsButtons={false}
-        paginationStyle={styles.pagination}
+        paginationStyle={styles.pager}
+        dot={<View style={styles.dot} />}
+        activeDot={<View style={styles.activeDot} />}
       >
         {data?.map((item: any, index: number) => renderItem(item, index))}
       </Slick>
@@ -35,22 +42,39 @@ const TextSlideshow = ({ data }: Props) => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    height: 130,
+    height: wrapperHeight,
   },
   slide: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#9DD6EB',
-    height: 90,
+    height: slideHeight,
   },
   text: {
     color: Layout.colors.primary,
     padding: Layout.space.base * 2,
+    textAlign: 'center',
   },
-  pagination: {
-    top: 90,
-    backgroundColor: 'red',
-    height: 20,
+  pager: {
+    top: slideHeight,
+    height: pagerHeight,
+  },
+  dot: {
+    backgroundColor: Layout.colors.white,
+    borderColor: Layout.colors.primary,
+    borderWidth: Layout.borderWidth.base,
+    width: dotSize,
+    height: dotSize,
+    borderRadius: dotSize,
+    marginHorizontal: 3,
+  },
+  activeDot: {
+    backgroundColor: Layout.colors.primary,
+    borderColor: Layout.colors.primary,
+    borderWidth: Layout.borderWidth.base,
+    width: dotSize,
+    height: dotSize,
+    borderRadius: dotSize,
+    marginHorizontal: 3,
   },
 });
 
