@@ -4,6 +4,7 @@ import BoxView from '../view/BoxView';
 import SelectListBase from '../base/SelectListBase';
 import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
+import i18n from "@/translation/i18n";
 
 type Props = {
   value?: any,
@@ -41,6 +42,7 @@ const CountryField = ({value, onChangeValue}: Props) => {
         value={value}
         data={buildOptions(countriesData)} 
         onChangeValue={onChangeValue}
+        placeholder={i18n.t('Select a country')}
       />
     </BoxView>
   );
