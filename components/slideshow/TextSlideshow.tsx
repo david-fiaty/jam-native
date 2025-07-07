@@ -47,6 +47,7 @@ const TextSlideshow = ({ data }: Props) => {
 const styles = StyleSheet.create({
   wrapper: {
     height: wrapperHeight,
+    marginTop: Layout.space.base,
   },
   slide: {
     justifyContent: 'center',
