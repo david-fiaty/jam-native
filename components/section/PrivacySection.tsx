@@ -18,7 +18,7 @@ const PrivacySection = () => {
       >
         <TextView style={styles.title}>{i18n.t('Introduction')}</TextView>
         <TextView>
-          {i18n.t('Jamm is a web and mobile platform that allows artists to share their projects, events, and achievements. We are committed to protecting the privacy and security of our users personal data. This privacy policy describes how we collect, use, and protect your personal information.')}
+          {i18n.t('JAM! is a web and mobile platform that allows artists to share their projects, events, and achievements. We are committed to protecting the privacy and security of our users personal data. This privacy policy describes how we collect, use, and protect your personal information.')}
         </TextView>
 
         <TextView style={styles.title}>{i18n.t('Data Collection')}</TextView>
@@ -39,7 +39,7 @@ const PrivacySection = () => {
         <View>
           <TextView>{i18n.t('We use your data for:')}</TextView>
           <BulletListView data={[
-            i18n.t('Personalizing your experience on Jamm'),
+            i18n.t('Personalizing your experience on JAM!'),
             i18n.t('Managing events and interactions between users'),
             i18n.t('Offering targeted advertising'),
             i18n.t('Continuously improving the user experience'),
@@ -96,7 +96,7 @@ const PrivacySection = () => {
           {i18n.t('We reserve the right to modify this privacy policy at any time. In case of significant changes, we will notify you by email.')}
         </TextView>
 
-        <TextView style={styles.title}>{i18n.t('How to request deletion of your data on Jamm')}</TextView>
+        <TextView style={styles.title}>{i18n.t('How to request deletion of your data on JAM!')}</TextView>
         <TextView>
           {i18n.t('If you want to delete your data associated with the Jammm app, please contact us at contact@jammm.app . We will remove all data within 7 days.')}
         </TextView>
