@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { Input } from "@rneui/themed";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
@@ -37,6 +37,7 @@ const InputPasswordField = ({
   onBlur,
 }: Props) => {
   const [currentValue, setCurrentValue] = useState<any>('');
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const disabledStyle: any = {
     opacity: disabled ? 0.4: 1,
@@ -55,8 +56,12 @@ const InputPasswordField = ({
   };
 
   const renderRightIcon = () => {
+    let iconName: string = isVisible ? 'blind' : 'see';
+
     return (
-      <IconView name="see" theme="transparent" />
+      <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
+        <IconView name={iconName} theme="transparent" />
+      </TouchableOpacity>
     );
   };
 
@@ -78,7 +83,7 @@ const InputPasswordField = ({
         containerStyle={containerStyle ?? {}}
         multiline={false}
         editable={!disabled}
-        secureTextEntry={secureTextEntry}
+        secureTextEntry={!isVisible}
         spellCheck={spellCheck}
         value={currentValue}
         readOnly={readOnly}
