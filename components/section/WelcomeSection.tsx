@@ -9,13 +9,11 @@ import BoxView from '../view/BoxView';
 
 const WelcomeSection = () => {
   return (
-
     <BoxView
       direction="column"
       align="center"
       justify="center"
       style={styles.container}
-
     >
       <LogoView size={110} />
 
