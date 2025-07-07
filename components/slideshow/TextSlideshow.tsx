@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#9DD6EB',
-    height: 122,
   },
   text: {
     color: Layout.colors.primary,
