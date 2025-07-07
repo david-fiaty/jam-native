@@ -7,6 +7,9 @@ type Props = {
   data?: any;
 };
 
+const dotSize: number = 8;
+const slideHeight: number = 90;
+
 const TextSlideshow = ({ data }: Props) => {
   const renderItem = (item: any, index: number) => {
     return (
@@ -42,7 +45,7 @@ const styles = StyleSheet.create({
   slide: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 90,
+    height: slideHeight,
   },
   text: {
     color: Layout.colors.primary,
@@ -50,25 +53,25 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   pagination: {
-    top: 90,
+    top: slideHeight,
     height: 20,
   },
   dot: {
     backgroundColor: Layout.colors.white,
     borderColor: Layout.colors.primary,
     borderWidth: Layout.borderWidth.base,
-    width: 9,
-    height: 9,
-    borderRadius: 9,
+    width: dotSize,
+    height: dotSize,
+    borderRadius: dotSize,
     marginHorizontal: 3,
   },
   activeDot: {
     backgroundColor: Layout.colors.primary,
     borderColor: Layout.colors.primary,
     borderWidth: Layout.borderWidth.base,
-    width: 9,
-    height: 9,
-    borderRadius: 9,
+    width: dotSize,
+    height: dotSize,
+    borderRadius: dotSize,
     marginHorizontal: 3,
   },
 });
