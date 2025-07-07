@@ -1,7 +1,6 @@
 export const Config: any = {
   dataCacheEnabled: false,
   imageCacheEnabled: false,
-  apiEnabled: false,
   infiniteScrollEnabled: false,
   apiUrl: 'https://dev.jammm.app/backend/api/v1',
   imageUrl: 'https://dev.jammm.app/backend',
@@ -10,10 +9,6 @@ export const Config: any = {
   storageKey: '@jam',
   defaultLanguage: 'en',
   fallbackLanguage: 'en',
-  storageKeys: {
-    currentLanguage: 'language',
-    profileData: 'profileData',
-  },
   appNamespace: 'jam-native',
   logoImageSize: 512,
   paginationSize: 1000,
@@ -24,6 +19,10 @@ export const Config: any = {
   defaultLocation: {
     latitude: 8.6195,
     longitude: 0.8248,
+  },
+  storageKeys: {
+    currentLanguage: 'language',
+    profileData: 'profileData',
   },
   forceLogin: {
     enabled: true,
