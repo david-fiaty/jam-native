@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
+import { Layout } from '@/constants/Layout';
 import React from 'react';
 import Slick from 'react-native-slick';
-import { Layout } from '@/constants/Layout';
 
 type Props = {
   data?: any;
