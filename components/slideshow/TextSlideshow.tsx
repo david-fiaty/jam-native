@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
   slide: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#9DD6EB',
     height: 90,
   },
   text: {
@@ -49,7 +48,6 @@ const styles = StyleSheet.create({
   },
   pagination: {
     top: 90,
-    backgroundColor: 'red',
     height: 20,
   },
 });
