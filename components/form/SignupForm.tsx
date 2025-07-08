@@ -266,8 +266,7 @@ const SignupForm = () => {
           <TextView>
             {i18n.t('Password confirmation')}*
           </TextView>
-          <InputTextField
-            secureTextEntry={true}
+          <InputPasswordField
             value={formData?.password_confirmation}
             placeholder={i18n.t('Password confirmation')}
             onChangeText={(value: string) => FormManager.updateField(resource, 'password_confirmation', value)}
