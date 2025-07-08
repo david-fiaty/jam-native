@@ -16,7 +16,7 @@ class FormManager {
     }
 
     if (errors.length) {
-      this.addClientError(resource, key, value, errors);
+      this.addClientError(resource, errors);
     }
 
     this.addValue(resource, key, value);
@@ -30,7 +30,16 @@ class FormManager {
     }));
   }
 
-  addClientError(resource: string, key: any, value: any, errors: any[]) {
+  addClientError(resource: string, errors: any[]) {
+    let formErrors: any[] = [...Store.getState().form.errors];
+    
+    Store.dispatch(setFormErrors<any>([...formErrors, {
+      ...{ resource: resource },
+      ...errors[0],
+    }]));
+  }
+
+  addPasswordMatchError(resource: string, errors: any[]) {
     let formErrors: any[] = [...Store.getState().form.errors];
     
     Store.dispatch(setFormErrors<any>([...formErrors, {
