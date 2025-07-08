@@ -4,6 +4,11 @@
   let merge = require(`../translation/merge/${id}.json`);
 
 
+  for (const [key, val] of Object.entries(extract)) {
+    
+  }
+
+
 });
 
 
