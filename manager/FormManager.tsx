@@ -43,14 +43,12 @@ class FormManager {
     let formErrors: any[] = [...Store.getState().form.errors];
 
     if (confirmationValue != passwordValue) {
-      let matchError: any = {
-        key: confirmationkey,
-        message: i18n.t('The password confirmation is invalid'),
-      };
-
       formErrors = [...formErrors, {
         ...{ resource: resource },
-        ...matchError,
+        ...{
+          key: confirmationkey,
+          message: i18n.t('The password confirmation is invalid'),
+        },
       }];
     }
     else {
