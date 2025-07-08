@@ -3,9 +3,17 @@
   let extract = require(`../translation/extract/${id}/translation.json`);
   let merge = require(`../translation/merge/${id}.json`);
 
+  //console.log(Object.keys(merge))
+
 
   for (const [key, val] of Object.entries(extract)) {
-    
+    let index = Object.keys(merge).findIndex(v => v == key);
+    if (index !== -1) {
+
+    }
+    else {
+
+    }
   }
 
 
