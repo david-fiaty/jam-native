@@ -1,4 +1,11 @@
-//console.log('hello world')
+// Extract strings
+['en', 'fr'].map(id => {
+  let source = require(`../translation/extract/${id}/translation.json`);
+  let target = require(`../translation/resources/${id}`);
+  console.log(target)
+
+});
+
 
 /*
 const { exec } = require('child_process');
