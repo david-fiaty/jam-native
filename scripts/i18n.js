@@ -2,6 +2,9 @@ const fs = require('fs');
 const path = require('path');
 
 // Extract strings
+
+
+// Process strings
 ['en', 'fr'].map(id => {
   let extract = require(`../translation/extract/${id}/translation.json`);
   let merge = require(`../translation/merge/${id}.json`);
