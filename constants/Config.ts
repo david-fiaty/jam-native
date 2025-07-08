@@ -23,6 +23,7 @@ export const Config: any = {
   storageKeys: {
     currentLanguage: 'language',
     profileData: 'profileData',
+    tokenData: 'tokenData',
   },
   forceLogin: {
     enabled: false,
