@@ -29,6 +29,7 @@ const SignupForm = () => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const [isPasswordMatch, setIsPasswordMatch] = useState<boolean>(false);
   const formData = useSelector((state: any) => state.form[resource]);
   const signupData: any = useSelector((state: any) => state.form[resource]);
 
@@ -266,11 +267,13 @@ const SignupForm = () => {
           <TextView>
             {i18n.t('Password confirmation')}*
           </TextView>
-          <InputTextField
-            secureTextEntry={true}
+          <InputPasswordField
             value={formData?.password_confirmation}
             placeholder={i18n.t('Password confirmation')}
-            onChangeText={(value: string) => FormManager.updateField(resource, 'password_confirmation', value)}
+            onChangeText={(value: string) => {
+              FormManager.updateField(resource, 'password_confirmation', value);
+              FormManager.validatePasswordMatch(resource, 'password_confirmation', value, formData?.password);
+            }}
           />
           {FormManager.renderError('password_confirmation')}
 
