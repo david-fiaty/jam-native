@@ -1,8 +1,7 @@
 // Extract strings
 ['en', 'fr'].map(id => {
-  let source = require(`../translation/extract/${id}/translation.json`);
-  let target = require(`../translation/resources/${id}`);
-  console.log(target)
+  let extract = require(`../translation/extract/${id}/translation.json`);
+  console.log(extract)
 
 });
 
