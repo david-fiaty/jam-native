@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+
 // Extract strings
 ['en', 'fr'].map(id => {
   let extract = require(`../translation/extract/${id}/translation.json`);
@@ -6,8 +9,10 @@
 
   for (const [key, val] of Object.entries(extract)) {
     let index = Object.keys(merge).findIndex(v => v == key);
-    
-    if (index === -1 || !merge[key].length) {
+    if (index === -1) {
+      output[key] = val;
+    }
+    else if (index !== -1 && !merge[key].length) {
       output[key] = val;
     }
     else {
@@ -15,7 +20,12 @@
     }
   }
 
-  console.log(output)
+  try {
+    fs.writeFileSync(`./translation/output/${id}.json`,  JSON.stringify(output, null, 2), 'utf8');
+  } catch (err) {
+    console.error('Error writing file:', err);
+  }
+
 });
 
 
