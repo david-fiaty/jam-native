@@ -36,7 +36,7 @@ const StaticData = {
     },
     {
       id: 'phone',
-      label: i18n.t('Phone'),
+      label: i18n.t('Whatsapp'),
     },
   ],
   searchTabs: [
