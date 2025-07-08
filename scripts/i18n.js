@@ -4,14 +4,10 @@
   let merge = require(`../translation/merge/${id}.json`);
   let output = {...merge};
 
-  console.log(merge)
-
   for (const [key, val] of Object.entries(extract)) {
     let index = Object.keys(merge).findIndex(v => v == key);
-    if (index === -1) {
-      output[key] = val;
-    }
-    else if (index !== -1 && !merge[key].length) {
+    
+    if (index === -1 || !merge[key].length) {
       output[key] = val;
     }
     else {
@@ -19,7 +15,7 @@
     }
   }
 
-  //console.log(output)
+  console.log(output)
 });
 
 
