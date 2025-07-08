@@ -10,7 +10,8 @@
     "web": "npx expo start --web",
     "test": "jest --watchAll",
     "lint": "expo lint",
-    "extract": "i18next './**/*.{js,jsx,ts,tsx}' '!**/node_modules/**'"
+    "extract": "i18next './**/*.{js,jsx,ts,tsx}' '!**/node_modules/**'",
+    "i18n": "node scripts/i18n.js"
   },
   "jest": {
     "preset": "jest-expo"
