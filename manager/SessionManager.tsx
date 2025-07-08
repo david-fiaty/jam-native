@@ -1,5 +1,5 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Config } from '@/constants/Config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class SessionManager {
   async isTokenValid() {
