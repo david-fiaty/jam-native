@@ -16,6 +16,9 @@ const path = require('path');
     else if (index !== -1 && !merge[key].length) {
       output[key] = val;
     }
+    else if (id == 'en') {
+      output[key] = val;
+    }
     else {
       output[key] = merge[key];
     }
