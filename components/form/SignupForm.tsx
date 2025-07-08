@@ -234,7 +234,7 @@ const SignupForm = () => {
             {i18n.t('Sectors')}
           </TextView>
           <SectorsField
-            resource="profile"
+            resource={resource}
             field="sectors_ids"
             placeholder={i18n.t('Select your sectors')}
             value={formData?.sectors_ids}
