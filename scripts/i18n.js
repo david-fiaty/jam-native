@@ -2,22 +2,27 @@
 ['en', 'fr'].map(id => {
   let extract = require(`../translation/extract/${id}/translation.json`);
   let merge = require(`../translation/merge/${id}.json`);
+  let output = {...merge};
 
-  //console.log(Object.keys(merge))
-
+  console.log(merge)
 
   for (const [key, val] of Object.entries(extract)) {
     let index = Object.keys(merge).findIndex(v => v == key);
-    if (index !== -1) {
-
+    if (index === -1) {
+      output[key] = val;
+    }
+    else if (index !== -1 && !merge[key].length) {
+      output[key] = val;
     }
     else {
-
+      output[key] = merge[key];
     }
   }
 
-
+  //console.log(output)
 });
+
+
 
 
 /*
