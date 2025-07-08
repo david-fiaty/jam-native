@@ -9,8 +9,9 @@ const path = require('path');
 
   for (const [key, val] of Object.entries(extract)) {
     let index = Object.keys(merge).findIndex(v => v == key);
+
     if (index === -1) {
-      output[key] = val;
+      output[key] = key;
     }
     else if (index !== -1 && !merge[key].length) {
       output[key] = val;
