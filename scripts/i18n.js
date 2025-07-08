@@ -3,19 +3,6 @@ const { exec } = require('child_process');
 
 const override = true;
 
-// Extract strings
-exec("i18next './**/*.{js,jsx,ts,tsx}' '!**/node_modules/**'", (error, stdout, stderr) => {
-  if (error) {
-    console.error(`Error: ${error.message}`);
-    return;
-  }
-  if (stderr) {
-    console.error(`Stderr: ${stderr}`);
-    return;
-  }
-  console.log(`Output:\n${stdout}`);
-});
-
 // Process strings
 ['en', 'fr'].map(id => {
   let extract = require(`../translation/extract/${id}/translation.json`);
