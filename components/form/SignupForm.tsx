@@ -239,7 +239,7 @@ const SignupForm = () => {
             placeholder={i18n.t('Select your sectors')}
             value={formData?.sectors_ids}
             onPress={() => ModalManager.toggleModal('SectorsList', {
-              resource: 'profile',
+              resource: resource,
               field: 'sectors_ids',
             })}
           />
