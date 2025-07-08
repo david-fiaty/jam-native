@@ -63,10 +63,6 @@ class UserManager {
     Store.dispatch(setActiveSections([]));
   }
 
-  async getUserData() {
-    return await DataManager.get('currentUser');
-  }
-
   async changePassword(data: any) {
     let response: any = await DataManager.put('changePassword', data);
     let success: boolean = false;
