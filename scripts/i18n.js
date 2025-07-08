@@ -16,9 +16,6 @@ exec("i18next './**/*.{js,jsx,ts,tsx}' '!**/node_modules/**'", (error, stdout, s
   console.log(`Output:\n${stdout}`);
 });
 
-
-
-/*
 // Process strings
 ['en', 'fr'].map(id => {
   let extract = require(`../translation/extract/${id}/translation.json`);
@@ -41,8 +38,4 @@ exec("i18next './**/*.{js,jsx,ts,tsx}' '!**/node_modules/**'", (error, stdout, s
   } catch (err) {
     console.error('Error writing file:', err);
   }
-
 });
-
-
-*/
