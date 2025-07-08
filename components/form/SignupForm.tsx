@@ -270,7 +270,12 @@ const SignupForm = () => {
           <InputPasswordField
             value={formData?.password_confirmation}
             placeholder={i18n.t('Password confirmation')}
-            onChangeText={(value: string) => FormManager.updateField(resource, 'password_confirmation', value)}
+            onChangeText={(value: string) => {
+              FormManager.updateField(resource, 'password_confirmation', value)
+              if (formData?.password !== value) {
+                
+              }
+            }}
           />
           {FormManager.renderError('password_confirmation')}
 
