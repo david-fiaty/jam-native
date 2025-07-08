@@ -1,5 +1,6 @@
 //console.log('hello world')
 
+/*
 const { exec } = require('child_process');
 
 exec('ls -la', (error, stdout, stderr) => {
@@ -15,6 +16,7 @@ exec('ls -la', (error, stdout, stderr) => {
 
   console.log(`Output:\n${stdout}`);
 });
+*/
 
 /*
 const fs = require('fs');
