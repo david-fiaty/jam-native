@@ -32,20 +32,30 @@ class FormManager {
 
   addClientError(resource: string, errors: any[]) {
     let formErrors: any[] = [...Store.getState().form.errors];
-    
+
     Store.dispatch(setFormErrors<any>([...formErrors, {
       ...{ resource: resource },
       ...errors[0],
     }]));
   }
 
-  addPasswordMatchError(resource: string, errors: any[]) {
+  validatePasswordMatch(resource: string, confirmationkey: string, confirmationValue: string, passwordValue: string) {
     let formErrors: any[] = [...Store.getState().form.errors];
-    
-    Store.dispatch(setFormErrors<any>([...formErrors, {
-      ...{ resource: resource },
-      ...errors[0],
-    }]));
+
+    if (confirmationValue != passwordValue) {
+      let matchError: any = {
+        key: confirmationkey,
+        message: i18n.t('The password confirmation is invalid'),
+      };
+
+      Store.dispatch(setFormErrors<any>([...formErrors, {
+        ...{ resource: resource },
+        ...matchError,
+      }]));
+    }
+    else {
+      Store.dispatch(setFormErrors<any>(formErrors.filter((o: any) => o.key != confirmationkey)));
+    }
   }
 
   addServerErrors(resource: string, errors: any) {
@@ -57,7 +67,7 @@ class FormManager {
         message: message[0],
       });
     }
-  
+
     Store.dispatch(setFormErrors<any>([...formErrors, {
       ...{ resource: resource },
       ...formErrors,
@@ -67,10 +77,10 @@ class FormManager {
   clearErrors(resource: string, key: any) {
     let formErrors: any[] = [...Store.getState().form.errors];
     formErrors = formErrors.filter((o: any) => o.resource !== resource && o.key !== key);
-    
+
     Store.dispatch(setFormErrors<any>(formErrors));
   }
-  
+
   renderError(key: string, message?: any) {
     let targetKey: string = this.getTargetKey(key);
     let formErrors: any[] = Store.getState().form.errors;
