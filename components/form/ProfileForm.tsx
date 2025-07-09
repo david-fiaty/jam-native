@@ -186,11 +186,13 @@ const ProfileForm = () => {
             <VenueTypesField
               resource={resource}
               field="venue_types"
+              parent="profile_venue"
               placeholder={i18n.t('Select venue types')}
               value={formData?.venue_types}
               onPress={() => ModalManager.toggleModal('VenueTypesList', {
                 resource: resource,
                 field: "venue_types",
+                parent: "profile_venue",
               })}
             />
 
