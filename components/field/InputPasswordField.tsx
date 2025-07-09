@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { Input } from "@rneui/themed";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
+import IconView from "../view/IconView";
 
 type Props = {
   keyboardType?: any;
@@ -20,7 +21,7 @@ type Props = {
   onBlur?: () => void;
 };
 
-const InputTextField = ({
+const InputPasswordField = ({
   keyboardType,
   value,
   placeholder,
@@ -36,6 +37,7 @@ const InputTextField = ({
   onBlur,
 }: Props) => {
   const [currentValue, setCurrentValue] = useState<any>('');
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const disabledStyle: any = {
     opacity: disabled ? 0.4: 1,
@@ -51,6 +53,16 @@ const InputTextField = ({
     else if (onChangeText) onChangeText(currentValue); 
   };
 
+  const renderRightIcon = () => {
+    let iconName: string = isVisible ? 'blind' : 'see';
+
+    return (
+      <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
+        <IconView name={iconName} theme="transparent" />
+      </TouchableOpacity>
+    );
+  };
+
   useEffect(() => {
     setCurrentValue(value);
   }, [value]);
@@ -62,15 +74,15 @@ const InputTextField = ({
         textAlignVertical="center"
         numberOfLines={1}
         leftIcon={leftIcon}
-        rightIcon={rightIcon}
+        rightIcon={renderRightIcon()}
         placeholder={placeholder}
         placeholderTextColor={Layout.colors.primary}
         inputContainerStyle={styles.inputContainerStyle}
         containerStyle={containerStyle ?? {}}
         multiline={false}
         editable={!disabled}
-        secureTextEntry={secureTextEntry}
-        spellCheck={spellCheck}
+        secureTextEntry={!isVisible}
+        spellCheck={false}
         value={currentValue}
         readOnly={readOnly}
         onChangeText={changeTextEvent}
@@ -91,4 +103,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default InputTextField;
+export default InputPasswordField;

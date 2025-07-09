@@ -26,8 +26,6 @@ const InputTextareaField = ({
   const [currentValue, setCurrentValue] = useState<any>('');
 
   const changeTextEvent = (fieldValue: any) => {
-    fieldValue = fieldValue.trim();
-
     setCurrentValue(fieldValue);
     if (onChangeText) onChangeText(fieldValue);
   };

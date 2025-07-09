@@ -7,7 +7,7 @@ import IconView from "@/components/view/IconView";
 import ListView from "@/components/view/ListView";
 import UserManager from "./UserManager";
 import EntityManager from "./EntityManager";
-import CommentForm from "@/components/comment/CommentForm";
+import AddCommentForm from "@/components/comment/AddCommentForm";
 import CommentItem from "@/components/comment/CommentItem";
 import TextView from "@/components/view/TextView";
 
@@ -41,7 +41,7 @@ class CommentManager {
           renderItem={(item: any) => this.renderComment(item)}
           contentContainerStyle={styles.commentsList}
           data={[
-            ...[this.renderCommentForm()],
+            ...[this.renderAddCommentForm()],
             ...(data || []),
           ]}
         />
@@ -51,15 +51,15 @@ class CommentManager {
 
   renderComment(row: any) {
     if (row.index === 0) {
-      return this.renderCommentForm(row);
+      return this.renderAddCommentForm(row);
     }
 
     return this.renderCommentItem(row);
   }
 
-  renderCommentForm(row?: any) {
+  renderAddCommentForm(row?: any) {
     return (
-      <CommentForm
+      <AddCommentForm
         entityId={this.entityId}
         commentData={row?.item}
         globalStyles={styles}

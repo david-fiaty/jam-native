@@ -1,106 +1,116 @@
-import React, { useState, useEffect, useRef } from "react";
-import { StyleSheet, View } from "react-native";
-import { Layout } from "@/constants/Layout";
-import Slick from "react-native-slick";
-import ImageView from "../view/ImageView";
-import ScreenManager from "@/manager/ScreenManager";
-import NoImageView from "../view/NoImageView";
-import MediaManager from "@/manager/MediaManager";
-import SpinnerView from "../view/SpinnerView";
-import SlideshowDots from "./SlideshowDots";
+import { StyleSheet, Text, View } from 'react-native';
+import { Layout } from '@/constants/Layout';
+import React from 'react';
+import Slick from 'react-native-slick';
+import ImageView from '../view/ImageView';
+import MediaManager from '@/manager/MediaManager';
+import ScreenManager from '@/manager/ScreenManager';
+import NoImageView from '../view/NoImageView';
 
 type Props = {
   data?: any;
 };
 
-const width: number = ScreenManager.window.width - Layout.space.base*3;
-const height: number = 346;
+const dotSize: number = 8;
+const slideHeight: number = 336;
+const wrapperHeight: number = 346;
+const pagerHeight: number = 20;
+const slideWidth: number = ScreenManager.window.width - Layout.space.base * 3;
 
 const ImageSlideshow = ({ data }: Props) => {
-  const slideshowRef = useRef<any>();
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [itemsCount, setItemsCount] = useState<number>(0);
-  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const renderItem = (item: any, index: number) => {
+    if (!data?.length) {
+      return (
+        <View
+          key={`dot-${index}`}
+          style={styles.slide}
+        >
+          <NoImageView
+            width={slideWidth}
+            height={slideHeight}
+            containerStyle={{
+              height: slideHeight,
+              borderRadius: 0,
+            }}
+          />
+        </View>
+      );
+    }
 
-  const onDotPress = (index: number) => {
-    slideshowRef.current?.scrollBy(index - activeIndex);
-  };
-
-  const renderItem = (item: any, index: number) => (
-    <View style={styles.slideshowItem} key={`dot-${index}`}>
-      <ImageView
-        uri={MediaManager.getImageUrl(item?.url)}
-        resizeMode="cover"
-        width={width}
-        height={height}
-      />
-    </View>
-  );
-
-  const renderNoImage = () => {
     return (
-      <NoImageView
-        width={width}
-        height={height}
-        containerStyle={{
-          height: height,
-          borderRadius: 0,
-        }}
-      />
+      <View
+        key={`dot-${index}`}
+        style={styles.slide}
+      >
+        <ImageView
+          uri={MediaManager.getImageUrl(item?.url)}
+          resizeMode="cover"
+          width={slideWidth}
+          height={slideHeight}
+        />
+      </View>
     );
   };
 
-  const onMomentumScrollEnd = (e: any, state: any) => {
-    setActiveIndex(state.index);
-  };
-
-  useEffect(() => {
-    if (!isLoaded) {
-      setItemsCount(data?.length || 0);
-      setIsLoaded(true);
-    }
-  }, [isLoaded, data]);
-
   return (
-    <View style={styles.container}>
-      <View style={styles.slideshowContainer}>
-        {!isLoaded && <SpinnerView />}
-
-        {isLoaded && data?.length > 0 && (
-          <Slick
-            ref={slideshowRef}
-            showsPagination={false}
-            loop={true}
-            onMomentumScrollEnd={onMomentumScrollEnd}
-          >
-            {data?.map((item: any, index: number) => renderItem(item, index))}
-          </Slick>
-        )}
-
-        {!data?.length && renderNoImage()}
-      </View>
-
-      <SlideshowDots
-        activeIndex={activeIndex}
-        itemsCount={itemsCount}
-        onDotPress={(index) => onDotPress(index)}
-      />
+    <View style={styles.wrapper}>
+      <Slick
+        showsButtons={false}
+        paginationStyle={styles.pager}
+        dot={<View style={styles.dot} />}
+        activeDot={<View style={styles.activeDot} />}
+      >
+        {data?.map((item: any, index: number) => renderItem(item, index))}
+      </Slick>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  wrapper: {
+    height: wrapperHeight,
+    marginTop: Layout.space.base,
   },
-  slideshowContainer: {
-    height: height,
-    backgroundColor: Layout.colors.secondary,
+  slide: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: slideHeight,
   },
-  slideshowItem: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+  title: {
+    color: Layout.colors.primary,
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    width: '100%',
+    marginBottom: Layout.space.base,
+    paddingHorizontal: Layout.space.base * 3,
+  },
+  content: {
+    color: Layout.colors.primary,
+    textAlign: 'center',
+    width: '100%',
+    paddingHorizontal: Layout.space.base * 2.1,
+  },
+  pager: {
+    top: slideHeight + Layout.space.base,
+    height: pagerHeight,
+  },
+  dot: {
+    backgroundColor: Layout.colors.white,
+    borderColor: Layout.colors.primary,
+    borderWidth: Layout.borderWidth.base,
+    width: dotSize,
+    height: dotSize,
+    borderRadius: dotSize,
+    marginHorizontal: 3,
+  },
+  activeDot: {
+    backgroundColor: Layout.colors.primary,
+    borderColor: Layout.colors.primary,
+    borderWidth: Layout.borderWidth.base,
+    width: dotSize,
+    height: dotSize,
+    borderRadius: dotSize,
+    marginHorizontal: 3,
   },
 });
 

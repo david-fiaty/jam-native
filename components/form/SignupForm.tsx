@@ -21,6 +21,7 @@ import LocationPickerField from "../field/LocationPickerField";
 import FormManager from "@/manager/FormManager";
 import SectionManager from "@/manager/SectionManager";
 import VenueTypesField from "../field/VenueTypesField";
+import InputPasswordField from "../field/InputPasswordField";
 
 const resource: string = 'signup';
 
@@ -28,6 +29,7 @@ const SignupForm = () => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const [isPasswordMatch, setIsPasswordMatch] = useState<boolean>(false);
   const formData = useSelector((state: any) => state.form[resource]);
   const signupData: any = useSelector((state: any) => state.form[resource]);
 
@@ -94,7 +96,7 @@ const SignupForm = () => {
           <InputTextField
             value={formData?.profile_personal?.first_name}
             placeholder={i18n.t('Enter your first name')}
-            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal.first_name', {
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal', {
               ...(formData?.profile_personal || {}),
               ...{ first_name: value },
             }, ['string'])}
@@ -107,7 +109,7 @@ const SignupForm = () => {
           <InputTextField
             value={formData?.profile_personal?.last_name}
             placeholder={i18n.t('Enter your last name')}
-            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal.last_name', {
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal', {
               ...(formData?.profile_personal || {}),
               ...{ last_name: value },
             }, ['string'])}
@@ -125,8 +127,8 @@ const SignupForm = () => {
           <InputTextField
             value={formData?.profile_organization?.organization_name}
             placeholder={i18n.t('Enter your organization name')}
-            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization.organization_name', {
-              ...(formData?.profile_personal || {}),
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
+              ...(formData?.profile_organization || {}),
               ...{ organization_name: value },
             }, ['string'])}
           />
@@ -139,7 +141,7 @@ const SignupForm = () => {
             keyboardType="number-pad"
             value={formData?.profile_organization?.creation_year}
             placeholder={i18n.t('Enter the creation year')}
-            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization.creation_year', {
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
               ...(formData?.profile_organization || {}),
               ...{ creation_year: value },
             })}
@@ -157,7 +159,7 @@ const SignupForm = () => {
           <InputTextField
             value={formData?.profile_venue?.venue_name}
             placeholder={i18n.t('Enter the venue name')}
-            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue.venue_name', {
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
               ...(formData?.profile_venue || {}),
               ...{ venue_name: value },
             }, ['string'])}
@@ -170,13 +172,16 @@ const SignupForm = () => {
           <VenueTypesField
             resource={resource}
             field="venue_types"
+            parent="profile_venue"
             placeholder={i18n.t('Select venue types')}
-            value={formData?.venue_types}
+            value={formData?.profile_venue?.venue_types}
             onPress={() => ModalManager.toggleModal('VenueTypesList', {
               resource: resource,
               field: "venue_types",
+              parent: "profile_venue",
             })}
           />
+          {FormManager.renderError('profile_venue.venue_types')}
 
           <TextView>
             {i18n.t('Creation year')}
@@ -185,7 +190,7 @@ const SignupForm = () => {
             keyboardType="number-pad"
             value={formData?.profile_venue?.creation_year}
             placeholder={i18n.t('Enter the creation year')}
-            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue.creation_year', {
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
               ...(formData?.profile_venue || {}),
               ...{ creation_year: value },
             }, ['number'])}
@@ -203,7 +208,6 @@ const SignupForm = () => {
           <InputTextField
             value={formData?.profile_name}
             placeholder={i18n.t('Profile name')}
-            // Todo - Add nospace validation
             onChangeText={(value: string) => FormManager.updateField(resource, 'profile_name', value, ['string'])}
           />
           {FormManager.renderError('profile_name')}
@@ -232,12 +236,12 @@ const SignupForm = () => {
             {i18n.t('Sectors')}
           </TextView>
           <SectorsField
-            resource="profile"
+            resource={resource}
             field="sectors_ids"
             placeholder={i18n.t('Select your sectors')}
             value={formData?.sectors_ids}
             onPress={() => ModalManager.toggleModal('SectorsList', {
-              resource: 'profile',
+              resource: resource,
               field: 'sectors_ids',
             })}
           />
@@ -255,8 +259,7 @@ const SignupForm = () => {
           <TextView>
             {i18n.t('Password')}*
           </TextView>
-          <InputTextField
-            secureTextEntry={true}
+          <InputPasswordField
             value={formData?.password}
             placeholder={i18n.t('Password')}
             onChangeText={(value: string) => FormManager.updateField(resource, 'password', value, ['string'])}
@@ -266,11 +269,13 @@ const SignupForm = () => {
           <TextView>
             {i18n.t('Password confirmation')}*
           </TextView>
-          <InputTextField
-            secureTextEntry={true}
+          <InputPasswordField
             value={formData?.password_confirmation}
             placeholder={i18n.t('Password confirmation')}
-            onChangeText={(value: string) => FormManager.updateField(resource, 'password_confirmation', value)}
+            onChangeText={(value: string) => {
+              FormManager.updateField(resource, 'password_confirmation', value);
+              FormManager.validatePasswordMatch(resource, 'password_confirmation', value, formData?.password);
+            }}
           />
           {FormManager.renderError('password_confirmation')}
 

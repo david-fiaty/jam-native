@@ -109,7 +109,7 @@ const ProfileForm = () => {
             <InputTextField
               value={formData?.profile_personal?.first_name}
               placeholder={i18n.t('Enter your first name')}
-              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal.first_name', {
+              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal', {
                 ...(formData?.profile_personal || {}),
                 ...{ first_name: value },
               }, ['string'])}
@@ -122,7 +122,7 @@ const ProfileForm = () => {
             <InputTextField
               value={formData?.profile_personal?.last_name}
               placeholder={i18n.t('Enter your last name')}
-              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal.last_name', {
+              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal', {
                 ...(formData?.profile_personal || {}),
                 ...{ last_name: value },
               }, ['string'])}
@@ -140,7 +140,7 @@ const ProfileForm = () => {
             <InputTextField
               value={formData?.profile_organization?.organization_name}
               placeholder={i18n.t('Enter your organization name')}
-              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization.organization_name', {
+              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
                 ...(formData?.profile_organization || {}),
                 ...{ organization_name: value },
               }, ['string'])}
@@ -154,7 +154,7 @@ const ProfileForm = () => {
               keyboardType="number-pad"
               value={formData?.profile_organization?.creation_year}
               placeholder={i18n.t('Enter the creation year')}
-              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization.creation_year', {
+              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
                 ...(formData?.profile_organization || {}),
                 ...{ creation_year: value },
               })}
@@ -172,7 +172,7 @@ const ProfileForm = () => {
             <InputTextField
               value={formData?.profile_venue?.venue_name}
               placeholder={i18n.t('Enter the venue name')}
-              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue.venue_name', {
+              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
                 ...(formData?.profile_venue || {}),
                 ...{ venue_name: value },
               }, ['string'])}
@@ -186,11 +186,13 @@ const ProfileForm = () => {
             <VenueTypesField
               resource={resource}
               field="venue_types"
+              parent="profile_venue"
               placeholder={i18n.t('Select venue types')}
               value={formData?.venue_types}
               onPress={() => ModalManager.toggleModal('VenueTypesList', {
                 resource: resource,
                 field: "venue_types",
+                parent: "profile_venue",
               })}
             />
 
@@ -201,7 +203,7 @@ const ProfileForm = () => {
               keyboardType="number-pad"
               value={formData?.profile_venue?.creation_year}
               placeholder={i18n.t('Enter the creation year')}
-              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue.creation_year', {
+              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
                 ...(formData?.profile_venue || {}),
                 ...{ creation_year: value },
               }, ['number'])}
@@ -248,12 +250,12 @@ const ProfileForm = () => {
               {i18n.t('Sectors')}
             </TextView>
             <SectorsField
-              resource="profile"
+              resource={resource}
               field="sectors_ids"
               placeholder={i18n.t('Select your sectors')}
               value={formData?.sectors_ids}
               onPress={() => ModalManager.toggleModal('SectorsList', {
-                resource: 'profile',
+                resource: resource,
                 field: 'sectors_ids',
               })}
             />

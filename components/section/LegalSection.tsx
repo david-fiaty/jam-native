@@ -16,13 +16,13 @@ const LegalSection = () => {
         scroll={true}
       >
         <TextView style={styles.title}>{i18n.t('Terms of Use')}</TextView>
-        <TextView>{i18n.t('By using the JAM application, you agree to comply with all terms and conditions stated in this legal notice. JAMMM reserves the right to modify these terms at any time without prior notice. Continued use of the application constitutes your acceptance of any changes made to the terms.')}</TextView>
+        <TextView>{i18n.t('By using the JAM! application, you agree to comply with all terms and conditions stated in this legal notice. JAM! reserves the right to modify these terms at any time without prior notice. Continued use of the application constitutes your acceptance of any changes made to the terms.')}</TextView>
 
         <TextView style={styles.title}>{i18n.t('Data Privacy')}</TextView>
-        <TextView>{i18n.t('JAMMM is committed to protecting your personal data in compliance with applicable data protection laws. Any personal information collected through the application is used solely for the purpose of providing and improving our services. We do not share your data with third parties without your explicit consent, except where required by law.')}</TextView>
+        <TextView>{i18n.t('JAM! is committed to protecting your personal data in compliance with applicable data protection laws. Any personal information collected through the application is used solely for the purpose of providing and improving our services. We do not share your data with third parties without your explicit consent, except where required by law.')}</TextView>
 
         <TextView style={styles.title}>{i18n.t('Intellectual Property')}</TextView>
-        <TextView>{i18n.t('All content, trademarks, and other intellectual property displayed within the JAMMM application are the exclusive property of JAMMM or its partners. Unauthorized reproduction, modification, or distribution of any content without prior written permission is strictly prohibited and may result in legal action.')}</TextView>
+        <TextView>{i18n.t('All content, trademarks, and other intellectual property displayed within the JAM! application are the exclusive property of JAM! or its partners. Unauthorized reproduction, modification, or distribution of any content without prior written permission is strictly prohibited and may result in legal action.')}</TextView>
       </BoxView>
       <BottomLinks />
     </>
