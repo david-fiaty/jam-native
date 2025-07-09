@@ -1,115 +1,76 @@
-import React, { useState, useEffect, useRef } from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { Layout } from "@/constants/Layout";
-import Slick from "react-native-slick";
-import TextView from "../view/TextView";
-import ScreenManager from "@/manager/ScreenManager";
-import BoxView from "../view/BoxView";
+import { StyleSheet, Text, View } from 'react-native';
+import { Layout } from '@/constants/Layout';
+import React from 'react';
+import Slick from 'react-native-slick';
 
 type Props = {
   data?: any;
 };
 
-const width = ScreenManager.window.width - Layout.space.base * 2;
-const height = 122;
-const dotSize: number = 9;
+const dotSize: number = 8;
+const slideHeight: number = 100;
+const wrapperHeight: number = 140;
+const pagerHeight: number = 20;
 
 const TextSlideshow = ({ data }: Props) => {
-  const slideshowRef = useRef<any>();
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [itemsCount, setItemsCount] = useState<number>(0);
-  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const renderItem = (item: any, index: number) => {
+    return (
+      <View 
+        key={`dot-${index}`}
+        style={styles.slide}
+      >
+        <Text style={styles.title}>
+          {item.title}
+        </Text>
 
-  const onDotPress = (nextIndex: number) => {
-    let newIndex: number = 0;
-
-    if (nextIndex > activeIndex) {
-      newIndex = nextIndex + activeIndex;
-    }
-    else {
-      newIndex = nextIndex - activeIndex;
-    }
-
-    slideshowRef.current?.scrollBy(newIndex);
-    setActiveIndex(newIndex);
+        <Text style={styles.content}>
+          {item.content}
+        </Text>
+      </View>      
+    );
   };
-
-  const renderItem = (item: any, index: number) => (
-    <View style={styles.item} key={`dot-${index}`}>
-      <TextView style={styles.title}>{item.title}</TextView>
-      <TextView style={styles.content}>{item.content}</TextView>
-    </View>
-  );
-
-  const renderDots = () => {
-    return [...Array(itemsCount)].map((_, index) => (
-      <TouchableOpacity
-        key={index}
-        onPress={() => onDotPress(index)}
-        style={activeIndex === index ? styles.activeDot : styles.dot}
-      />
-    ));
-  };
-
-  const onMomentumScrollEnd = (e: any, state: any) => {
-    setActiveIndex(state.index);
-  };
-
-  useEffect(() => {
-    if (!isLoaded) {
-      setItemsCount(data?.length || 0);
-      setIsLoaded(true);
-    }
-  }, [isLoaded, data]);
 
   return (
-    <View style={styles.slideshowContainer}>
+    <View style={styles.wrapper}>
       <Slick
-        ref={slideshowRef}
-        showsPagination={false}
-        onMomentumScrollEnd={onMomentumScrollEnd}
+        showsButtons={false}
+        paginationStyle={styles.pager}
+        dot={<View style={styles.dot} />}
+        activeDot={<View style={styles.activeDot} />}
       >
         {data?.map((item: any, index: number) => renderItem(item, index))}
       </Slick>
-
-      <BoxView
-        direction="row"
-        justify="center"
-        align="center"
-        style={styles.dotsContaier}
-      >
-        {renderDots()}
-      </BoxView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  slideshowContainer: {
-    height: height,
-    width: width,
+  wrapper: {
+    height: wrapperHeight,
     marginTop: Layout.space.base,
-    marginBottom: Layout.space.base,
   },
-  item: {
-    flex: 1,
-    alignItems: 'center',
+  slide: {
     justifyContent: 'center',
-    gap: Layout.space.base,
-    padding: Layout.space.base * 2,
+    alignItems: 'center',
+    height: slideHeight,
   },
   title: {
+    color: Layout.colors.primary,
+    textAlign: 'center',
     textTransform: 'uppercase',
+    width: '100%',
+    marginBottom: Layout.space.base,
+    paddingHorizontal: Layout.space.base*3,
   },
   content: {
+    color: Layout.colors.primary,
     textAlign: 'center',
-  },
-  dotsContaier: {
-    zIndex: 100,
     width: '100%',
-    position: 'absolute',
-    bottom: 0,
-    gap: dotSize,
+    paddingHorizontal: Layout.space.base*2.1,
+  },
+  pager: {
+    top: slideHeight + Layout.space.base,
+    height: pagerHeight,
   },
   dot: {
     backgroundColor: Layout.colors.white,
@@ -118,6 +79,7 @@ const styles = StyleSheet.create({
     width: dotSize,
     height: dotSize,
     borderRadius: dotSize,
+    marginHorizontal: 3,
   },
   activeDot: {
     backgroundColor: Layout.colors.primary,
@@ -126,6 +88,7 @@ const styles = StyleSheet.create({
     width: dotSize,
     height: dotSize,
     borderRadius: dotSize,
+    marginHorizontal: 3,
   },
 });
 

@@ -21,9 +21,9 @@ type Props = {
 
 const resource: string = 'comment';
 
-const CommentForm = ({ entityId, commentData, profileImage, globalStyles }: Props) => {
+const AddCommentForm = ({ entityId, commentData, profileImage, globalStyles }: Props) => {
   const dispatch = useDispatch();
-  const [collapsed, setCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const commentState: any = useSelector((state: any) => state.comment);
 
@@ -58,11 +58,11 @@ const CommentForm = ({ entityId, commentData, profileImage, globalStyles }: Prop
     setIsProcessing(false);
   };
 
-  const renderCommentForm = (row?: any) => {
+  const renderAddCommentForm = (row?: any) => {
     return (
       <View style={componentStyles.commentFormContainer}>
-        {collapsed && (
-          <TouchableOpacity onPress={() => setCollapsed(false)}>
+        {isCollapsed && (
+          <TouchableOpacity onPress={() => setIsCollapsed(false)}>
             <InputTextField
               placeholder={i18n.t('Add a comment...')}
               disabled={true}
@@ -71,7 +71,7 @@ const CommentForm = ({ entityId, commentData, profileImage, globalStyles }: Prop
         )}
 
         <Collapsible
-          collapsed={collapsed}
+          collapsed={isCollapsed}
           align="center"
         >
           <InputTextareaField
@@ -88,7 +88,7 @@ const CommentForm = ({ entityId, commentData, profileImage, globalStyles }: Prop
           >
             <ButtonView
               label={i18n.t('Cancel')}
-              onPress={() => setCollapsed(true)}
+              onPress={() => setIsCollapsed(true)}
               containerStyle={[componentStyles.buttonStyle, componentStyles.cancelButtonStyle]}
             />
 
@@ -131,7 +131,7 @@ const CommentForm = ({ entityId, commentData, profileImage, globalStyles }: Prop
         justify="flex-start"
         style={componentStyles.commentContainerRight}
       >
-        {renderCommentForm(commentData)}
+        {renderAddCommentForm(commentData)}
       </BoxView>
     </BoxView>
   );
@@ -144,4 +144,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CommentForm;
+export default AddCommentForm;
