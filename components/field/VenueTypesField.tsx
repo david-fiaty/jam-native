@@ -48,10 +48,8 @@ const VenueTypesField = ({ resource, field, parent, value, placeholder, onPress 
         if (!venueTypes) setVenueTypes(await EntityManager.getVenueTypes());
         setIsLoaded(true);
       }
-
-      if (formData?.[field]?.length > 0) {
-        setCurrentValue(formData?.[parent]?.[field] || {});
-      }
+      
+      setCurrentValue(formData?.[parent]?.[field] || []);
     })();    
   }, [isLoaded, value, formData, parent, field]);
 
