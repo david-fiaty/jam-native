@@ -211,7 +211,6 @@ const SignupForm = () => {
           <InputTextField
             value={formData?.profile_name}
             placeholder={i18n.t('Profile name')}
-            // Todo - Add nospace validation
             onChangeText={(value: string) => FormManager.updateField(resource, 'profile_name', value, ['string'])}
           />
           {FormManager.renderError('profile_name')}
