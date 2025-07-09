@@ -54,7 +54,7 @@ const JamForm = () => {
       message.content = i18n.t('Invalid data submission.');
       FormManager.addServerErrors(resource, result.response);
     }
- 
+
     ScreenManager.showMessage(message);
     setIsProcessing(false);
   };
@@ -83,9 +83,9 @@ const JamForm = () => {
         setProfileId(profileId);
         FormManager.updateField(resource, 'profile_id', profileId);
         setIsLoaded(true);
-      }      
+      }
     })();
-    
+
   }, [isLoaded, profileId, resource]);
 
   if (!isLoaded) return <SpinnerView />;
@@ -135,12 +135,46 @@ const JamForm = () => {
         />
         {FormManager.renderError('upload_medias')}
 
-        <TextView>{i18n.t('Location type')}</TextView>
+        <TextView>{i18n.t('Location type')} *</TextView>
         <LocationTypeField
           value={formData?.location_type}
           onChangeValue={(option: any) => FormManager.updateField(resource, 'location_type', option.value, ['string'])}
         />
         {FormManager.renderError('location_type')}
+
+        {['physical', 'online_physical'].includes(formData?.location_type) && (
+          <>
+            <TextView>{i18n.t('Location')} *</TextView>
+            <LocationPickerField
+              resource={resource}
+              placeholder={i18n.t('Select your location')}
+              onChangeValue={(data: any) => {
+                FormManager.updateField(resource, 'geolocation_latitude', data?.geolocation_latitude);
+                FormManager.updateField(resource, 'geolocation_longitude', data?.geolocation_longitude);
+              }}
+              onPress={() => ModalManager.toggleModal('LocationMapView', {
+                resource: resource,
+                latitude: {
+                  field: 'geolocation_latitude',
+                  value: formData?.geolocation_latitude,
+                },
+                longitude: {
+                  field: 'geolocation_longitude',
+                  value: formData?.geolocation_longitude,
+                },
+              })}
+              latitude={{
+                field: 'geolocation_latitude',
+                value: formData?.geolocation_latitude,
+              }}
+              longitude={{
+                field: 'geolocation_longitude',
+                value: formData?.geolocation_longitude,
+              }}
+            />
+            {FormManager.renderError('geolocation_latitude')}
+          </>
+        )}
 
         <TextView>{i18n.t('Start date')}</TextView>
         <DatePickerField
@@ -162,36 +196,6 @@ const JamForm = () => {
         />
         {FormManager.renderError('period')}
 
-        <TextView>{i18n.t('Location')} *</TextView>
-        <LocationPickerField
-          resource={resource}
-          placeholder={i18n.t('Select your location')}
-          onChangeValue={(data: any) => {
-            FormManager.updateField(resource, 'geolocation_latitude', data?.geolocation_latitude);
-            FormManager.updateField(resource, 'geolocation_longitude', data?.geolocation_longitude);
-          }}
-          onPress={() => ModalManager.toggleModal('LocationMapView', {
-            resource: resource,
-            latitude: {
-              field: 'geolocation_latitude',
-              value: formData?.geolocation_latitude,
-            },
-            longitude: {
-              field: 'geolocation_longitude',
-              value: formData?.geolocation_longitude,
-            },
-          })}
-          latitude={{
-            field: 'geolocation_latitude',
-            value: formData?.geolocation_latitude,
-          }}
-          longitude={{
-            field: 'geolocation_longitude',
-            value: formData?.geolocation_longitude,
-          }}
-        />
-        {FormManager.renderError('geolocation_latitude')}
-
         <TextView>{i18n.t('Country')}</TextView>
         <CountryField
           value={formData?.countries}
@@ -211,7 +215,7 @@ const JamForm = () => {
           })}
         />
         {FormManager.renderError('sectors_ids')}
-        
+
         <TextView>{i18n.t('Select collaborators')}</TextView>
         <CollaboratorsField
           resource={resource}
@@ -224,7 +228,7 @@ const JamForm = () => {
           })}
         />
         {FormManager.renderError('collaborators_ids')}
-        
+
         <View style={styles.submitButtonContainer}>
           <ButtonView
             label={i18n.t('Post')}
