@@ -33,8 +33,6 @@ const ListItemDetails = ({ row, sectorsData }: Props) => {
 
     if (row?.item?.caption?.length > 0) {
       previewText = row?.item?.caption.trim().replace(/[\t\n\r]+/g, ' ');
-      //previewText = previewText.slice(0, 80);
-
       previewText = truncateText(previewText, 86);
     }
 
@@ -67,9 +65,8 @@ const ListItemDetails = ({ row, sectorsData }: Props) => {
         justify="flex-start"
         style={styles.detail}
       >
-        <IconView name="arrow" size={12} theme="transparent" />
         <TextView>
-          {i18n.t("Location")}:{" "}
+          <TextView style={styles.detailLabel}>{`${i18n.t("Location")} `}</TextView>
           {StaticData.locationTypes.find(
             (o: any) => o.id == row?.item?.location_type
           )?.label || i18n.t("Unavailable")}
@@ -86,9 +83,8 @@ const ListItemDetails = ({ row, sectorsData }: Props) => {
         justify="flex-start"
         style={styles.detail}
       >
-        <IconView name="arrow" size={12} theme="transparent" />
         <TextView>
-          {i18n.t("Start")}:{" "}
+          <TextView style={styles.detailLabel}>{`${i18n.t("Start")} `}</TextView>
           {DataManager.formatDate(row?.item?.period?.start_datetime) || i18n.t("Unavailable")}
         </TextView>
       </BoxView>
@@ -103,9 +99,8 @@ const ListItemDetails = ({ row, sectorsData }: Props) => {
         justify="flex-start"
         style={styles.detail}
       >
-        <IconView name="arrow" size={12} theme="transparent" />
         <TextView>
-          {i18n.t("End")}:{" "}
+          <TextView style={styles.detailLabel}>{`${i18n.t("End")} `}</TextView>
           {DataManager.formatDate(row?.item?.period?.end_datetime) || i18n.t("Unavailable")}
         </TextView>
       </BoxView>
@@ -122,9 +117,8 @@ const ListItemDetails = ({ row, sectorsData }: Props) => {
         justify="flex-start"
         style={styles.detail}
       >
-        <IconView name="arrow" size={12} theme="transparent" />
         <TextView>
-          {i18n.t("Industry")}:{" "}
+          <TextView style={styles.detailLabel}>{`${i18n.t("Industry")} `}</TextView>
           {firstSector ? firstSector?.name : i18n.t("Unavailable")}
         </TextView>
       </BoxView>
@@ -141,9 +135,8 @@ const ListItemDetails = ({ row, sectorsData }: Props) => {
         justify="flex-start"
         style={styles.detail}
       >
-        <IconView name="arrow" size={12} theme="transparent" />
         <TextView>
-          {i18n.t("Sector")}:{" "}
+          <TextView style={styles.detailLabel}>{`${i18n.t("Sector")} `}</TextView>
           {firstSector ? firstSector?.sub_sectors[0]?.name : i18n.t("Unavailable")}
         </TextView>
       </BoxView>
@@ -193,9 +186,13 @@ const styles = StyleSheet.create({
     width: "100%",
     gap: 0,
     backgroundColor: Layout.colors.secondary,
-    padding: Layout.space.base / 2,
+    paddingVertical: Layout.space.base / 2,
+    paddingHorizontal: Layout.space.base,
     borderRadius: Layout.radius.round,
   },
+  detailLabel: {
+    fontWeight: 'bold',
+  }
 });
 
 export default ListItemDetails;
