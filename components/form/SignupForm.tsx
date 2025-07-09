@@ -71,12 +71,6 @@ const SignupForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-
-
-  console.log('formData', JSON.stringify(formData, null, 2))
-
-  
-
   return (
     <View style={[Layout.formContainer, styles.container]}>
 
@@ -178,13 +172,16 @@ const SignupForm = () => {
           <VenueTypesField
             resource={resource}
             field="venue_types"
+            parent="profile_venue"
             placeholder={i18n.t('Select venue types')}
-            value={formData?.venue_types}
+            value={formData?.profile_venue?.venue_types}
             onPress={() => ModalManager.toggleModal('VenueTypesList', {
               resource: resource,
               field: "venue_types",
+              parent: "profile_venue",
             })}
           />
+          {FormManager.renderError('profile_venue.venue_types')}
 
           <TextView>
             {i18n.t('Creation year')}
@@ -211,7 +208,6 @@ const SignupForm = () => {
           <InputTextField
             value={formData?.profile_name}
             placeholder={i18n.t('Profile name')}
-            // Todo - Add nospace validation
             onChangeText={(value: string) => FormManager.updateField(resource, 'profile_name', value, ['string'])}
           />
           {FormManager.renderError('profile_name')}
