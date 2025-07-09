@@ -178,13 +178,16 @@ const SignupForm = () => {
           <VenueTypesField
             resource={resource}
             field="venue_types"
+            parent="profile_venue"
             placeholder={i18n.t('Select venue types')}
-            value={formData?.venue_types}
+            value={formData?.profile_venue?.venue_types}
             onPress={() => ModalManager.toggleModal('VenueTypesList', {
               resource: resource,
               field: "venue_types",
+              parent: "profile_venue"
             })}
           />
+          {FormManager.renderError('profile_venue.venue_types')}
 
           <TextView>
             {i18n.t('Creation year')}
