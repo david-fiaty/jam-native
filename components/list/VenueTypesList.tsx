@@ -13,9 +13,10 @@ import IconView from '../view/IconView';
 type Props = {
   resource: string;
   field?: any;
+  parent?: any;
 };
 
-const VenueTypesList = ({ resource, field }: Props) => {
+const VenueTypesList = ({ resource, field, parent }: Props) => {
   const dispatch = useDispatch();
   const [venueTypes, setVenueTypes] = useState<any>(null);
   const [selectedVenues, setSelectedVenues] = useState<any>([]);
@@ -23,21 +24,26 @@ const VenueTypesList = ({ resource, field }: Props) => {
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const toggleItem = (entityId: number) => {
-    let venueList = [...selectedVenues];
-    if (venueList.includes(entityId)) {
-      venueList = venueList.filter((value: number) => value !== entityId);
+    let selectedIds: any[] = [...selectedVenues];
+    let currentData: any = {...formData};
+    
+    if (selectedIds.includes(entityId)) {
+      selectedIds = selectedIds.filter((value: number) => value !== entityId);
     }
     else {
-      venueList.push(entityId);
+      selectedIds.push(entityId);
     }
 
-    setSelectedVenues(venueList);
+    setSelectedVenues(selectedIds);
 
     dispatch(setFormData<any>({
       resource: resource,
-      key: field,
-      value: venueList,
-    }));
+      key: parent,
+      value: {
+        ...(currentData?.[parent] || {}),
+        ...{ [field]: selectedIds},
+      },
+    }));  
   };
 
   const renderItem = (row: any) => {
