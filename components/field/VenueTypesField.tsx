@@ -32,17 +32,14 @@ const VenueTypesField = ({ resource, field, parent, value, placeholder, onPress 
 
     setCurrentValue(selectedIds);
 
-    currentData = {
-      ...currentData,
-      ...{
-        [parent] : {
-          ...(currentData?.[parent] || {}),
-          ...{ [field] : selectedIds },
-        },
+    dispatch(setFormData<any>({
+      resource: resource,
+      key: parent,
+      value: {
+        ...(currentData?.[parent] || {}),
+        ...{ [field]: selectedIds},
       },
-    }
-
-    dispatch(setFormData<any>(currentData));
+    }));  
   };
 
   useEffect(() => {

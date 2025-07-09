@@ -71,12 +71,6 @@ const SignupForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-
-
-  console.log('formData', JSON.stringify(formData, null, 2))
-
-  
-
   return (
     <View style={[Layout.formContainer, styles.container]}>
 
@@ -184,7 +178,7 @@ const SignupForm = () => {
             onPress={() => ModalManager.toggleModal('VenueTypesList', {
               resource: resource,
               field: "venue_types",
-              parent: "profile_venue"
+              parent: "profile_venue",
             })}
           />
           {FormManager.renderError('profile_venue.venue_types')}
