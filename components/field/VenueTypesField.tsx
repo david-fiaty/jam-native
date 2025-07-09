@@ -12,12 +12,13 @@ import SpinnerView from '../view/SpinnerView';
 type Props = {
   resource: string;
   field: string;
+  parent: string;
   value?: any;
   placeholder?: any;
   onPress?: () => void;
 };
 
-const VenueTypesField = ({ resource, field, value, placeholder, onPress }: Props) => {
+const VenueTypesField = ({ resource, field, parent, value, placeholder, onPress }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [venueTypes, setVenueTypes] = useState<any>(null);
@@ -25,16 +26,23 @@ const VenueTypesField = ({ resource, field, value, placeholder, onPress }: Props
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const deleteItem = (item: any) => {
+    let currentData: any = {...formData};
     let selectedIds: any[] = [...(value?.length > 0 ? value : [])];
     selectedIds = selectedIds.filter((n: number) => n !== item.id);
 
     setCurrentValue(selectedIds);
-    
-    dispatch(setFormData<any>({ 
-      resource: resource,
-      key: field, 
-      value: selectedIds, 
-    }));
+
+    currentData = {
+      ...currentData,
+      ...{
+        [parent] : {
+          ...(currentData?.[parent] || {}),
+          ...{ [field] : selectedIds },
+        },
+      },
+    }
+
+    dispatch(setFormData<any>(currentData));
   };
 
   useEffect(() => {
@@ -45,10 +53,10 @@ const VenueTypesField = ({ resource, field, value, placeholder, onPress }: Props
       }
 
       if (formData?.[field]?.length > 0) {
-        setCurrentValue(formData[field]);
+        setCurrentValue(formData?.[parent]?.[field] || {});
       }
     })();    
-  }, [isLoaded, value, formData, field]);
+  }, [isLoaded, value, formData, parent, field]);
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
