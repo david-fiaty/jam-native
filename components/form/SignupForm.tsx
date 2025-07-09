@@ -71,6 +71,12 @@ const SignupForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
+
+
+  console.log('formData', JSON.stringify(formData, null, 2))
+
+  
+
   return (
     <View style={[Layout.formContainer, styles.container]}>
 
@@ -96,7 +102,7 @@ const SignupForm = () => {
           <InputTextField
             value={formData?.profile_personal?.first_name}
             placeholder={i18n.t('Enter your first name')}
-            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal.first_name', {
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal', {
               ...(formData?.profile_personal || {}),
               ...{ first_name: value },
             }, ['string'])}
@@ -109,7 +115,7 @@ const SignupForm = () => {
           <InputTextField
             value={formData?.profile_personal?.last_name}
             placeholder={i18n.t('Enter your last name')}
-            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal.last_name', {
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal', {
               ...(formData?.profile_personal || {}),
               ...{ last_name: value },
             }, ['string'])}
@@ -127,8 +133,8 @@ const SignupForm = () => {
           <InputTextField
             value={formData?.profile_organization?.organization_name}
             placeholder={i18n.t('Enter your organization name')}
-            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization.organization_name', {
-              ...(formData?.profile_personal || {}),
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
+              ...(formData?.profile_organization || {}),
               ...{ organization_name: value },
             }, ['string'])}
           />
@@ -141,7 +147,7 @@ const SignupForm = () => {
             keyboardType="number-pad"
             value={formData?.profile_organization?.creation_year}
             placeholder={i18n.t('Enter the creation year')}
-            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization.creation_year', {
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
               ...(formData?.profile_organization || {}),
               ...{ creation_year: value },
             })}
@@ -159,7 +165,7 @@ const SignupForm = () => {
           <InputTextField
             value={formData?.profile_venue?.venue_name}
             placeholder={i18n.t('Enter the venue name')}
-            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue.venue_name', {
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
               ...(formData?.profile_venue || {}),
               ...{ venue_name: value },
             }, ['string'])}
@@ -187,7 +193,7 @@ const SignupForm = () => {
             keyboardType="number-pad"
             value={formData?.profile_venue?.creation_year}
             placeholder={i18n.t('Enter the creation year')}
-            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue.creation_year', {
+            onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
               ...(formData?.profile_venue || {}),
               ...{ creation_year: value },
             }, ['number'])}
