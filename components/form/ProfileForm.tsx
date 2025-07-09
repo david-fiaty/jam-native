@@ -109,7 +109,7 @@ const ProfileForm = () => {
             <InputTextField
               value={formData?.profile_personal?.first_name}
               placeholder={i18n.t('Enter your first name')}
-              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal.first_name', {
+              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal', {
                 ...(formData?.profile_personal || {}),
                 ...{ first_name: value },
               }, ['string'])}
@@ -122,7 +122,7 @@ const ProfileForm = () => {
             <InputTextField
               value={formData?.profile_personal?.last_name}
               placeholder={i18n.t('Enter your last name')}
-              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal.last_name', {
+              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal', {
                 ...(formData?.profile_personal || {}),
                 ...{ last_name: value },
               }, ['string'])}
@@ -140,7 +140,7 @@ const ProfileForm = () => {
             <InputTextField
               value={formData?.profile_organization?.organization_name}
               placeholder={i18n.t('Enter your organization name')}
-              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization.organization_name', {
+              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
                 ...(formData?.profile_organization || {}),
                 ...{ organization_name: value },
               }, ['string'])}
@@ -154,7 +154,7 @@ const ProfileForm = () => {
               keyboardType="number-pad"
               value={formData?.profile_organization?.creation_year}
               placeholder={i18n.t('Enter the creation year')}
-              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization.creation_year', {
+              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
                 ...(formData?.profile_organization || {}),
                 ...{ creation_year: value },
               })}
@@ -172,7 +172,7 @@ const ProfileForm = () => {
             <InputTextField
               value={formData?.profile_venue?.venue_name}
               placeholder={i18n.t('Enter the venue name')}
-              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue.venue_name', {
+              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
                 ...(formData?.profile_venue || {}),
                 ...{ venue_name: value },
               }, ['string'])}
@@ -201,7 +201,7 @@ const ProfileForm = () => {
               keyboardType="number-pad"
               value={formData?.profile_venue?.creation_year}
               placeholder={i18n.t('Enter the creation year')}
-              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue.creation_year', {
+              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
                 ...(formData?.profile_venue || {}),
                 ...{ creation_year: value },
               }, ['number'])}
