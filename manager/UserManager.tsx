@@ -82,7 +82,11 @@ class UserManager {
   }
 
   getProfileTypeLabel(profileType: string) {
-    return (StaticData.profileTypes.find((o: any) => o.id === profileType))?.label;
+    if (profileType?.length > 0) {
+      return (StaticData.profileTypes.find((o: any) => o.id === profileType))?.label;
+    }
+
+    return i18n.t('Unavailable');
   }
 
   async getProfileData(options?: any) {
