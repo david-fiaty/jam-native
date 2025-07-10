@@ -5,6 +5,7 @@ import BoxView from '@/components/view/BoxView';
 import IconView from '@/components/view/IconView';
 import ImageView from "@/components/view/ImageView";
 import MediaManager from "@/manager/MediaManager";
+import UserManager from "@/manager/UserManager";
 
 const profileImageSize: number = 34;
 
