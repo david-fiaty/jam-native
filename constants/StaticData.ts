@@ -77,13 +77,13 @@ const StaticData = {
       numColumns: 1,
     },
     {
-      id: 'project',
-      label: i18n.t('Projects'),
+      id: 'venue',
+      label: i18n.t('Venues'),
       numColumns: 2,
     },
     {
-      id: 'venue',
-      label: i18n.t('Venues'),
+      id: 'project',
+      label: i18n.t('Projects'),
       numColumns: 2,
     },
   ],
