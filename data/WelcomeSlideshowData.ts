@@ -2,7 +2,7 @@ const WelcomeSlidehowData = [
   {
     id: 1,
     title: 'Create more together',
-    content: 'Welcome to the Jam app. Jam is a place to explore and experience artists and creatives from different backgrounds in West Africa.',
+    content: 'Welcome to the JAM! app. JAM! is a place to explore and experience artists and creatives from different backgrounds in West Africa.',
   },
   {
     id: 2,
