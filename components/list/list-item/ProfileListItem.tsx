@@ -15,6 +15,8 @@ type Props = {
 };
 
 const ProfileListItem = ({ row, selected, onListItemPress }: Props) => {
+
+  console.log(row.item)
   const onItemPress = (row: any) => {
     if (onListItemPress) {
       onListItemPress(row);
