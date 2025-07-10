@@ -10,6 +10,7 @@ import * as Device from "expo-device";
 import i18n from '@/translation/i18n';
 import i18next from 'i18next';
 import ScreenManager from './ScreenManager';
+import StaticData from '@/constants/StaticData';
 
 class UserManager {
   async sendSignupCode(data: any) {
@@ -78,6 +79,10 @@ class UserManager {
     let profileId: number = parseInt(userAccount?.profiles?.[0]?.id || 0);
 
     return profileId;
+  }
+
+  getProfileTypeLabel(profileType: string) {
+    return (StaticData.profileTypes.find((o: any) => o.id === profileType))?.label;
   }
 
   async getProfileData(options?: any) {
