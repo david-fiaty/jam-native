@@ -5,7 +5,6 @@ import BoxView from '@/components/view/BoxView';
 import IconView from '@/components/view/IconView';
 import ImageView from "@/components/view/ImageView";
 import MediaManager from "@/manager/MediaManager";
-import UserManager from "@/manager/UserManager";
 
 const profileImageSize: number = 34;
 
@@ -48,11 +47,6 @@ const ProfileListItem = ({ row, selected, onListItemPress }: Props) => {
         )}
 
         <TextView>{row?.item?.profile_name}</TextView>
-
-        { /*
-        <TextView>{UserManager.getProfileTypeLabel(row?.item?.profile_type)}</TextView>
-        */}
-
         {selected &&
           <IconView
             name="checkmark"
@@ -71,12 +65,6 @@ const styles = StyleSheet.create({
     ...{
       padding: Layout.space.base / 1.3,
     },
-  },
-  listItemLeft: {
-
-  },
-  listItemRight: {
-
   },
   profileImage: {
     width: profileImageSize,
