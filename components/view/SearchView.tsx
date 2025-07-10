@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
+import { Layout } from "@/constants/Layout";
 import StaticData from "@/constants/StaticData";
 import SpinnerView from "./SpinnerView";
 import SearchManager from "@/manager/SearchManager";
@@ -9,7 +10,6 @@ import SearchProfilesList from "../list/SearchProfilesList";
 import SearchProjectsList from "../list/SearchProjectsList";
 import TabsView from "./TabsView";
 import BoxView from "./BoxView";
-import { Layout } from "@/constants/Layout";
 
 const SearchView = () => {
   const dispatch = useDispatch();
