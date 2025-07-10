@@ -78,10 +78,6 @@ class ApiManager {
   }
 
   async processResponse(response: any) {
-    if (!response.ok) {
-      throw new Error("Failed to fetch endpoint data");
-    }
-    
     return await response.json();
   }
 
