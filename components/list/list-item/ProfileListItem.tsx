@@ -53,6 +53,7 @@ const ProfileListItem = ({ row, selected, onListItemPress }: Props) => {
         )}
 
         <TextView>{row?.item?.profile_name}</TextView>
+        <TextView>{UserManager.getProfileTypeLabel(row?.item?.profile_type)}</TextView>
 
         {selected &&
           <IconView
