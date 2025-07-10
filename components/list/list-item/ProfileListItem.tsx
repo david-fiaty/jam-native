@@ -5,6 +5,7 @@ import BoxView from '@/components/view/BoxView';
 import IconView from '@/components/view/IconView';
 import ImageView from "@/components/view/ImageView";
 import MediaManager from "@/manager/MediaManager";
+import UserManager from "@/manager/UserManager";
 
 const profileImageSize: number = 34;
 
@@ -26,7 +27,12 @@ const ProfileListItem = ({ row, selected, onListItemPress }: Props) => {
       key={row?.item?.id}
       onPress={() => onItemPress(row)}
     >
-      <BoxView direction="row" align="center" justify="flex-start" style={styles.container}>
+      <BoxView 
+        direction="row" 
+        align="center" 
+        justify="flex-start" 
+        style={styles.container}
+      >
         {row?.item?.profile_picture?.url?.length > 0 && (
           <ImageView
             uri={MediaManager.getImageUrl(row.item.profile_picture.url)}
@@ -47,6 +53,8 @@ const ProfileListItem = ({ row, selected, onListItemPress }: Props) => {
         )}
 
         <TextView>{row?.item?.profile_name}</TextView>
+        <TextView>{UserManager.getProfileTypeLabel(row?.item?.profile_type)}</TextView>
+
         {selected &&
           <IconView
             name="checkmark"
