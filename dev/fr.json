@@ -294,6 +294,7 @@
   "Private": "Privé",
   "Public": "Public",
   "SMS": "SMS",
+  
   "Location features are not available for virtual devices": "Location features are not available for virtual devices",
   "Could not perform this action. Please try again.": "Could not perform this action. Please try again.",
   "The Jam was liked.": "The Jam was liked.",
@@ -307,11 +308,8 @@
   "Create better, together": "Create better, together",
   "Welcome to the Jam app. Jam is a place to explore and experience artists and creatives from different backgrounds in West Africa.": "Welcome to the Jam app. Jam is a place to explore and experience artists and creatives from different backgrounds in West Africa.",
   "Everything you need": "Everything you need",
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   "The place to excel": "The place to excel",
-  "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.",
-  "Ivory Coast": "Ivory Coast",
-
+  
 
   "A value is required.": "Une valeur est requise.",
   "A selection is required.": "Une sélection est requise.",
