@@ -10,6 +10,7 @@ import * as Device from "expo-device";
 import i18n from '@/translation/i18n';
 import i18next from 'i18next';
 import ScreenManager from './ScreenManager';
+import StaticData from '@/constants/StaticData';
 
 class UserManager {
   async sendSignupCode(data: any) {
@@ -78,6 +79,16 @@ class UserManager {
     let profileId: number = parseInt(userAccount?.profiles?.[0]?.id || 0);
 
     return profileId;
+  }
+
+  getProfileTypeLabel(profileType: string) {
+    let label: any = '';
+
+    if (profileType?.length > 0) {
+      label = (StaticData.profileTypes.find((o: any) => o.id === profileType))?.label;
+    }
+
+    return label?.length > 0 ? label: i18n.t('Unavailable');
   }
 
   async getProfileData(options?: any) {
