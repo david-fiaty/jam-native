@@ -27,7 +27,12 @@ const ProfileListItem = ({ row, selected, onListItemPress }: Props) => {
       key={row?.item?.id}
       onPress={() => onItemPress(row)}
     >
-      <BoxView direction="row" align="center" justify="flex-start" style={styles.container}>
+      <BoxView 
+        direction="row" 
+        align="center" 
+        justify="flex-start" 
+        style={styles.container}
+      >
         {row?.item?.profile_picture?.url?.length > 0 && (
           <ImageView
             uri={MediaManager.getImageUrl(row.item.profile_picture.url)}
@@ -48,6 +53,7 @@ const ProfileListItem = ({ row, selected, onListItemPress }: Props) => {
         )}
 
         <TextView>{row?.item?.profile_name}</TextView>
+
         {selected &&
           <IconView
             name="checkmark"
