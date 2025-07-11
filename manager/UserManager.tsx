@@ -54,7 +54,7 @@ class UserManager {
       await SessionManager.setTokenData(response.tokens);
     }
     else if (response?.non_field_errors?.length > 0) {
-      message = response.non_field_errors;
+      message = response.non_field_errors[0];
     }
     else {
       message = i18n.t('Invalid data submission.');
