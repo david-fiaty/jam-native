@@ -32,7 +32,7 @@ const LoginEmailForm = () => {
     if (result?.success === false) {
       ScreenManager.showMessage({
         title: i18n.t('Profile login'),
-        content: result.error,
+        content: i18n.t('Invalid user name or password.'),
       });
     }
     else {
