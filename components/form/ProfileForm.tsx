@@ -34,18 +34,9 @@ const ProfileForm = () => {
     setIsProcessing(true);
     let result: any = await UserManager.updateProfile(formData);
 
-    // Todo - Implement profile update submission
-    console.log('-------');
-    console.log(Object.keys(formData));
-
-    //console.log(result);
-
-    return;
-
-    if (result?.error) {
+    if (result?.success === false) {
       ScreenManager.showMessage({
         title: i18n.t('Profile update'),
-        //content: result.error, // Todo - Implement field error management
         content: i18n.t('There was an error with the submission. Please check your data and try again.'),
       });
     }
