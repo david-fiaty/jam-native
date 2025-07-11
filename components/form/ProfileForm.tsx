@@ -180,9 +180,8 @@ const ProfileForm = () => {
             {FormManager.renderError('profile_venue.venue_name')}
 
             <TextView>
-              {i18n.t('Venue types')}
+              {i18n.t('Venue types')}*
             </TextView>
-            
             <VenueTypesField
               resource={resource}
               field="venue_types"
