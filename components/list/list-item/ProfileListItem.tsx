@@ -21,6 +21,22 @@ const ProfileListItem = ({ row, selected, onListItemPress }: Props) => {
     }
   };
 
+  const getDisplayName = (item: any) => {
+    let displayName: string = '';
+
+    if (item?.profile_type == 'personal') {
+      displayName = `${item?.profile_personal?.first_name || ''} ${item?.profile_personal?.last_name || ''}`
+    }
+    else if (item?.profile_type == 'venue') {
+      displayName = item?.profile_venue?.venue_name;
+    }
+    else if (item?.profile_type == 'organization') {
+      displayName = item?.profile_organization?.organization_name;
+    }
+
+    return displayName.trim().length > 0 ? displayName : item?.profile_name;
+  };
+
   return (
     <TouchableOpacity
       key={row?.item?.id}
@@ -51,7 +67,7 @@ const ProfileListItem = ({ row, selected, onListItemPress }: Props) => {
           />
         )}
 
-        <TextView>{row?.item?.profile_name}</TextView>
+        <TextView>{getDisplayName(row?.item)}</TextView>
 
         {selected &&
           <IconView
