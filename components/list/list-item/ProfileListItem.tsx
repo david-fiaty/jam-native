@@ -5,7 +5,6 @@ import BoxView from '@/components/view/BoxView';
 import IconView from '@/components/view/IconView';
 import ImageView from "@/components/view/ImageView";
 import MediaManager from "@/manager/MediaManager";
-import UserManager from "@/manager/UserManager";
 
 const profileImageSize: number = 34;
 
@@ -20,6 +19,22 @@ const ProfileListItem = ({ row, selected, onListItemPress }: Props) => {
     if (onListItemPress) {
       onListItemPress(row);
     }
+  };
+
+  const getDisplayName = (item: any) => {
+    let displayName: string = '';
+
+    if (item?.profile_type == 'personal') {
+      displayName = `${item?.profile_personal?.first_name || ''} ${item?.profile_personal?.last_name || ''}`
+    }
+    else if (item?.profile_type == 'venue') {
+      displayName = item?.profile_venue?.venue_name;
+    }
+    else if (item?.profile_type == 'organization') {
+      displayName = item?.profile_organization?.organization_name;
+    }
+
+    return displayName.trim().length > 0 ? displayName : item?.profile_name;
   };
 
   return (
@@ -52,8 +67,7 @@ const ProfileListItem = ({ row, selected, onListItemPress }: Props) => {
           />
         )}
 
-        <TextView>{row?.item?.profile_name}</TextView>
-        <TextView>{UserManager.getProfileTypeLabel(row?.item?.profile_type)}</TextView>
+        <TextView>{getDisplayName(row?.item)}</TextView>
 
         {selected &&
           <IconView
