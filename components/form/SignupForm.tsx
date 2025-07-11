@@ -203,7 +203,7 @@ const SignupForm = () => {
       {formData?.profile_type?.length && (
         <>
           <TextView>
-            {i18n.t('Profile name (with no spaces)')}
+            {i18n.t('Profile name (with no spaces)')}*
           </TextView>
           <InputTextField
             value={formData?.profile_name}
