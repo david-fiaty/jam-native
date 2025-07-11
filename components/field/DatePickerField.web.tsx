@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, Platform, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Config } from '@/constants/Config';
 import InputTextField from '../field/InputTextField';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
 import Datetime from 'react-datetime';
-
-import "react-datetime/css/react-datetime.css";
-import { Config } from '@/constants/Config';
 import ScreenManager from '@/manager/ScreenManager';
+import "react-datetime/css/react-datetime.css";
 
 type Props = {
   placeholder?: string,
