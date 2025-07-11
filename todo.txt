@@ -113,6 +113,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 # TODO 
 - Account profile view: fix add jam profile modal height
 - Account profile form: fix about textarea height
+- Check globally form submission backend field errors display
 
 # Finish OLD
 - Social login
