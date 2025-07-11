@@ -46,17 +46,41 @@ class UserManager {
   }
 
   async register(data: any) {
-    let response = await DataManager.post('register', data);
-    let success = response?.tokens?.access_token?.length > 0;
+    let response: any = await DataManager.post('register', data);
+    let success: boolean = response?.tokens?.access_token?.length > 0;
+    let message: string = '';
 
     if (success) {
       await SessionManager.setTokenData(response.tokens);
+    }
+    else if (response?.non_field_errors?.length > 0) {
+      message = response.non_field_errors[0];
+    }
+    else {
+      message = i18n.t('Invalid data submission.');
     }
 
     return {
       success: success,
       data: response,
-    }
+      message: message,
+    };
+  }
+
+  async updateProfile(data: any) {
+    let defaults: any = {};
+    let profileId: number = await this.getProfileId();
+    let variables: any = { '[profile_id]': profileId };
+    let success: boolean = false;
+
+    let response: any = await DataManager.put('updateProfile', { ...defaults, ...data }, variables);
+
+    if (response?.id > 0) success = true;
+
+    return {
+      success: success,
+      data: response,
+    };
   }
 
   async isLoggedIn() {
@@ -131,14 +155,6 @@ class UserManager {
       ...(profileData || {}),
       ...(localProfileData || {}),
     };
-  }
-
-  async updateProfile(data: any) {
-    let defaults: any = {};
-    let profileId: number = await this.getProfileId();
-    let variables: any = { '[profile_id]': profileId };
-
-    return await DataManager.put('updateProfile', { ...defaults, ...data }, variables);
   }
 
   async getNotifications(options?: any) {
