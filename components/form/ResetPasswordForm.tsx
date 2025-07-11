@@ -9,6 +9,7 @@ import DividerView from '../view/DividerView';
 import UserManager from '@/manager/UserManager';
 import FormManager from '@/manager/FormManager';
 import ScreenManager from '@/manager/ScreenManager';
+import InputPasswordField from '../field/InputPasswordField';
 
 const resource: string = 'password';
 
@@ -37,20 +38,20 @@ const ResetPasswordForm = () => {
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.formContainer}>
-      <InputTextField 
+      <InputPasswordField
         placeholder={i18n.t('Old password')} 
         onChangeText={(value: string) => FormManager.updateField(resource, "old_password", value, ['string'])}
       />
       {FormManager.renderError('old_password')}
 
       <DividerView theme="secondary" />
-      <InputTextField 
+      <InputPasswordField 
         placeholder={i18n.t('New password')} 
         onChangeText={(value: string) => FormManager.updateField(resource, "new_password", value, ['string'])}
       />
       {FormManager.renderError('new_password')}
 
-      <InputTextField 
+      <InputPasswordField
         placeholder={i18n.t('Confirm new password')} 
         onChangeText={(value: string) => FormManager.updateField(resource, "confirm_password", value, ['string'])}
       />

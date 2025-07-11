@@ -67,6 +67,22 @@ class UserManager {
     };
   }
 
+  async updateProfile(data: any) {
+    let defaults: any = {};
+    let profileId: number = await this.getProfileId();
+    let variables: any = { '[profile_id]': profileId };
+    let success: boolean = false;
+
+    let response: any = await DataManager.put('updateProfile', { ...defaults, ...data }, variables);
+
+    if (response?.id > 0) success = true;
+
+    return {
+      success: success,
+      data: response,
+    };
+  }
+
   async isLoggedIn() {
     return await SessionManager.isTokenValid();
   }
@@ -139,14 +155,6 @@ class UserManager {
       ...(profileData || {}),
       ...(localProfileData || {}),
     };
-  }
-
-  async updateProfile(data: any) {
-    let defaults: any = {};
-    let profileId: number = await this.getProfileId();
-    let variables: any = { '[profile_id]': profileId };
-
-    return await DataManager.put('updateProfile', { ...defaults, ...data }, variables);
   }
 
   async getNotifications(options?: any) {
