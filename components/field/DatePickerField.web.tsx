@@ -7,6 +7,7 @@ import IconView from '../view/IconView';
 import Datetime from 'react-datetime';
 import ScreenManager from '@/manager/ScreenManager';
 import "react-datetime/css/react-datetime.css";
+import TextView from '../view/TextView';
 
 type Props = {
   placeholder?: string,
@@ -27,10 +28,9 @@ const DatePickerField = ({placeholder, value, onChangeValue}: Props) => {
     setShow(false);
   };
 
-  const handleConfirm = (date: any) => {
-    if (date) setDate(date);
-    if (onChangeValue) onChangeValue(date);
-    hideDatePicker();
+  const handleConfirm = (value: any) => {
+    if (value) setDate(value);
+    if (onChangeValue) onChangeValue(value);
   };
 
   return (
@@ -52,7 +52,12 @@ const DatePickerField = ({placeholder, value, onChangeValue}: Props) => {
             input={false}
             dateFormat={Config.dateFormat} 
             value={date}
+            onChange={handleConfirm}
           />
+
+          <TouchableOpacity onPress={hideDatePicker}>
+            <TextView>Close</TextView>
+          </TouchableOpacity>
         </View>
       )}
     </>
