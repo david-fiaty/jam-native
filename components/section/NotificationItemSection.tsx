@@ -35,10 +35,10 @@ const NotificationItemSection = ({ notificationId }: Props) => {
     <BoxView
       direction="column"
       align="center"
-      justify="center"
+      justify="flex-start"
       style={styles.container}
     >
-      <TextView>Notification {notificationItem?.id}</TextView>
+      <TextView>{notificationItem?.content?.content_data?.caption}</TextView>
     </BoxView>
   );
 };
