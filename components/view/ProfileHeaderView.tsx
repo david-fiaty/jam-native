@@ -70,7 +70,7 @@ const ProfileHeaderView = ({ profileItem }: Props) => {
       </BoxView>
 
       <View style={styles.profileHeaderRight}>
-        <TextView style={styles.profileTitle}>{profileItem?.profile_name}</TextView>
+        <TextView style={styles.profileTitle}>{UserManager.getProfileDisplayName(profileItem)}</TextView>
         <TextView style={styles.profileType}>
           {UserManager.getProfileTypeLabel(profileItem?.profile_type)}
         </TextView>

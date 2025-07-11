@@ -91,6 +91,22 @@ class UserManager {
     return label?.length > 0 ? label: i18n.t('Unavailable');
   }
 
+  getProfileDisplayName(item: any) {
+    let displayName: string = '';
+
+    if (item?.profile_type == 'personal') {
+      displayName = `${item?.profile_personal?.first_name || ''} ${item?.profile_personal?.last_name || ''}`
+    }
+    else if (item?.profile_type == 'venue') {
+      displayName = item?.profile_venue?.venue_name;
+    }
+    else if (item?.profile_type == 'organization') {
+      displayName = item?.profile_organization?.organization_name;
+    }
+
+    return displayName.trim().length > 0 ? displayName : item?.profile_name;
+  }
+
   async getProfileData(options?: any) {
     options = options || {};
     let profileId: number = await this.getProfileId();
