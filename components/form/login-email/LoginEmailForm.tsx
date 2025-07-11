@@ -28,10 +28,8 @@ const LoginEmailForm = () => {
 
     let payload: any = Config.forceLogin.enabled === true ? Config.forceLogin.credentials : formData;
     let result: any = await UserManager.login(payload);
-    
-    setIsProcessing(false);
 
-    if (result?.error) {
+    if (result?.success === false) {
       ScreenManager.showMessage({
         title: i18n.t('Profile login'),
         content: result.error,
