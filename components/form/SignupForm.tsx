@@ -47,8 +47,6 @@ const SignupForm = () => {
 
     let result: any = await UserManager.register(payload);
 
-    console.log(result)
-
     if (result.success === false) {
       ScreenManager.showMessage({
         title: i18n.t('User registration'),
