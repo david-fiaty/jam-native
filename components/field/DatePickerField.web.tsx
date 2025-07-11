@@ -8,6 +8,7 @@ import Datetime from 'react-datetime';
 import ScreenManager from '@/manager/ScreenManager';
 import "react-datetime/css/react-datetime.css";
 import TextView from '../view/TextView';
+import { Layout } from '@/constants/Layout';
 
 type Props = {
   placeholder?: string,
@@ -55,8 +56,8 @@ const DatePickerField = ({placeholder, value, onChangeValue}: Props) => {
             onChange={handleConfirm}
           />
 
-          <TouchableOpacity onPress={hideDatePicker}>
-            <TextView>Close</TextView>
+          <TouchableOpacity onPress={hideDatePicker} style={styles.closeButton}>
+            <IconView name="close" theme="secondary" size={16} />
           </TouchableOpacity>
         </View>
       )}
@@ -69,7 +70,12 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   calendarContainer: {
-    
+    position: 'relative',
+  },
+  closeButton: {
+    position: 'absolute',
+    top: Layout.space.base,
+    right: Layout.space.base,
   },
 });
 
