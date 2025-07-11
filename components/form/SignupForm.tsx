@@ -47,11 +47,11 @@ const SignupForm = () => {
 
     let result: any = await UserManager.register(payload);
 
+    console.log(result)
     if (result.success === false) {
       ScreenManager.showMessage({
         title: i18n.t('User registration'),
-        //content: result.error, // Todo - Implement field error management
-        content: i18n.t('Invalid data submission.'),
+        content: result.message,
       });
     }
     else {
