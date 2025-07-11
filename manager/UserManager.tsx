@@ -46,17 +46,25 @@ class UserManager {
   }
 
   async register(data: any) {
-    let response = await DataManager.post('register', data);
-    let success = response?.tokens?.access_token?.length > 0;
+    let response: any = await DataManager.post('register', data);
+    let success: boolean = response?.tokens?.access_token?.length > 0;
+    let message: string = '';
 
     if (success) {
       await SessionManager.setTokenData(response.tokens);
+    }
+    else if (response?.non_field_errors?.length > 0) {
+      message = response.non_field_errors;
+    }
+    else {
+      message = i18n.t('Invalid data submission.');
     }
 
     return {
       success: success,
       data: response,
-    }
+      message: message,
+    };
   }
 
   async isLoggedIn() {
