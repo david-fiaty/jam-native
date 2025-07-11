@@ -180,9 +180,8 @@ const ProfileForm = () => {
             {FormManager.renderError('profile_venue.venue_name')}
 
             <TextView>
-              {i18n.t('Venue types')}
+              {i18n.t('Venue types')}*
             </TextView>
-            
             <VenueTypesField
               resource={resource}
               field="venue_types"
@@ -217,7 +216,7 @@ const ProfileForm = () => {
         {formData?.profile_type?.length && (
           <>
             <TextView>
-              {i18n.t('Profile name (with no spaces)')}
+              {i18n.t('Profile name (with no spaces)')}*
             </TextView>
             <InputTextField
               value={formData?.profile_name}
@@ -248,7 +247,7 @@ const ProfileForm = () => {
             {FormManager.renderError('address')}
 
             <TextView>
-              {i18n.t('Sectors')}
+              {i18n.t('Sectors')}*
             </TextView>
             <SectorsField
               resource={resource}
