@@ -16,19 +16,20 @@ const NotificationsMenu = () => {
   const [notificationsData, setNotificationsData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const renderItem = (row: any) => (
-    <TouchableOpacity
-      key={row.item.id}
-      // Todo - Missing specs for notification detail view, implement or remove
-      //onPress={() => SectionManager.push(router, 'notification-item', { notificationId: JSON.stringify([row?.item?.id]), title: row.item?.content?.content_data?.title })}
-    >
-      <View style={Layout.menuItem}>
-        <TextView>
-          {row.item?.content?.content_data?.title}
-        </TextView>
-      </View>
-    </TouchableOpacity>
-  );
+  const renderItem = (row: any) => {
+    return (
+      <TouchableOpacity
+        key={row.item.id}
+        onPress={() => SectionManager.push(router, 'notification-item', { notificationId: JSON.stringify([row?.item?.id]), title: row.item?.content?.content_data?.title })}
+      >
+        <View style={Layout.menuItem}>
+          <TextView>
+            {row.item?.content?.content_data?.title}
+          </TextView>
+        </View>
+      </TouchableOpacity>
+    );
+  };
 
   useEffect(() => {
     if (!isLoaded) {
