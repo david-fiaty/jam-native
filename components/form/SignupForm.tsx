@@ -233,7 +233,7 @@ const SignupForm = () => {
           {FormManager.renderError('address')}
 
           <TextView>
-            {i18n.t('Sectors')}
+            {i18n.t('Sectors')}*
           </TextView>
           <SectorsField
             resource={resource}
@@ -273,7 +273,7 @@ const SignupForm = () => {
             value={formData?.password_confirmation}
             placeholder={i18n.t('Password confirmation')}
             onChangeText={(value: string) => {
-              FormManager.updateField(resource, 'password_confirmation', value);
+              FormManager.updateField(resource, 'password_confirmation', value, ['string']);
               FormManager.validatePasswordMatch(resource, 'password_confirmation', value, formData?.password);
             }}
           />
