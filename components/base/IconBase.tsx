@@ -36,6 +36,7 @@ const icons = {
   google: ({iconStyle, size}: IconProps) => <Ionicons name="logo-instagram" size={size} style={iconStyle} />,
   layers: ({iconStyle, size}: IconProps) => <Ionicons name="layers-outline" size={size} style={iconStyle} />,
   delete: ({iconStyle, size}: IconProps) => <Ionicons name="close-outline" size={size} style={iconStyle} />,
+  close: ({iconStyle, size}: IconProps) => <Ionicons name="close-outline" size={size} style={iconStyle} />,
   report: ({iconStyle, size}: IconProps) => <Ionicons name="alert-circle-outline" size={size} style={iconStyle} />,
   edit: ({iconStyle, size}: IconProps) => <Ionicons name="create-outline" size={size} style={iconStyle} />,
   view: ({iconStyle, size}: IconProps) => <Ionicons name="albums-outline" size={size} style={iconStyle} />,
