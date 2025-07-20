@@ -217,6 +217,7 @@ const SectionView = () => {
     if (!sectionState.active?.length) {
       dispatch(setActiveSections([getDefaultSection(false)]));
     }
+
   }, [sectionId, sectionState]);
 
   return (

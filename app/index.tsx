@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useRouter, useRootNavigationState } from 'expo-router';
 import SessionManager from '@/manager/SessionManager';
 import UserManager from '@/manager/UserManager';
+import i18next from 'i18next';
 
 export default () => {
   const router = useRouter();
@@ -13,6 +14,10 @@ export default () => {
       hasRedirected.current = true;
       router.push('/welcome');
     }
+
+    UserManager.getLanguage().then((code: string) => {
+      i18next.changeLanguage(code);
+    })
   }, [rootNavigationState]);
 
   return null;
