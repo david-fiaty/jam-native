@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useRouter, useRootNavigationState } from 'expo-router';
+import SessionManager from '@/manager/SessionManager';
 
 export default () => {
   const router = useRouter();
