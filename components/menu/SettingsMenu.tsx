@@ -10,29 +10,31 @@ import SectionManager from '@/manager/SectionManager';
 
 const SettingsMenu = () => {
   const router = useRouter();
-  
-  const data: any[] = [
-    {
-      label: i18n.t('Your profile'),
-      onPress: () => SectionManager.push(router, 'profile'),
-    },
-    {
-      label: i18n.t('Change password'),
-      onPress: () => SectionManager.push(router, 'reset-password'),
-    },
-    {
-      label: i18n.t('Language'),
-      onPress: () => SectionManager.push(router, 'language'),
-    },
-    {
-      label: i18n.t('Logout'),
-      onPress: () => {
-        UserManager.logout();
-        SectionManager.replace(router, 'welcome');
+
+  const getData = () => {
+    return [
+      {
+        label: i18n.t('Your profile'),
+        onPress: () => SectionManager.push(router, 'profile'),
       },
-    },
-  ];
-  
+      {
+        label: i18n.t('Change password'),
+        onPress: () => SectionManager.push(router, 'reset-password'),
+      },
+      {
+        label: i18n.t('Language'),
+        onPress: () => SectionManager.push(router, 'language'),
+      },
+      {
+        label: i18n.t('Logout'),
+        onPress: () => {
+          UserManager.logout();
+          SectionManager.replace(router, 'welcome');
+        },
+      },
+    ];
+  };
+
   const renderItem = (row: any) => (
     <TouchableOpacity onPress={() => row.item.onPress()}>
       <View style={Layout.menuItem}>
@@ -42,14 +44,14 @@ const SettingsMenu = () => {
   );
 
   return (
-    <BoxView 
+    <BoxView
       align="flex-start"
       justify="flex-start"
       style={Layout.menuContainer}
     >
-      <ListView 
-        data={data} 
-        renderItem={(row: any) => renderItem(row)}   
+      <ListView
+        data={getData()}
+        renderItem={(row: any) => renderItem(row)}
       />
     </BoxView>
   );
