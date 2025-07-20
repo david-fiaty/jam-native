@@ -13,8 +13,8 @@ import MessageView from "../view/MessageView";
 import Sections from "@/constants/Sections";
 
 const SectionView = () => { 
-  const path = usePathname();
   const dispatch = useDispatch();
+  const path = usePathname();
   const [currentSection, setCurrentSection] = useState<any>(null);
   const sectionState: any = useSelector((state: any) => state.section);
   const modalState: any = useSelector((state: any) => state.modal);
