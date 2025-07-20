@@ -4,7 +4,6 @@ import { Config } from "@/constants/Config";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import SelectListBase from '../base/SelectListBase';
-import StaticData from '@/constants/StaticData';
 import UserManager from '@/manager/UserManager';
 import ScreenManager from "@/manager/ScreenManager";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -12,7 +11,6 @@ import i18next from 'i18next';
 
 const LanguageForm = () => {
   const [currentlLanguage, setCurrentLanguage] = useState<string>('');
-  const data = StaticData.languages;
 
   const getLanguages = () => {
     return [
