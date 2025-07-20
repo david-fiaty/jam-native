@@ -4,7 +4,6 @@ import { Config } from "@/constants/Config";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import SelectListBase from '../base/SelectListBase';
-import StaticData from '@/constants/StaticData';
 import UserManager from '@/manager/UserManager';
 import ScreenManager from "@/manager/ScreenManager";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -12,7 +11,19 @@ import i18next from 'i18next';
 
 const LanguageForm = () => {
   const [currentlLanguage, setCurrentLanguage] = useState<string>('');
-  const data = StaticData.languages;
+
+  const getLanguages = () => {
+    return [
+      {
+        label: i18n.t('French'),
+        value: 'fr',
+      },
+      {
+        label: i18n.t('English'),
+        value: 'en',
+      },
+    ];
+  };
 
   const changeLanguage = async (languageCode: string) => {
     setCurrentLanguage(languageCode);
@@ -40,8 +51,8 @@ const LanguageForm = () => {
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.formContainer}>
       <SelectListBase
         value={currentlLanguage}
-        data={data} 
-        placeholder={i18n.t('Select a language')} 
+        data={getLanguages()}
+        placeholder={i18n.t('Select a language')}
         onChangeValue={async (option: any) => await changeLanguage(option.value)}
       />
     </BoxView>
