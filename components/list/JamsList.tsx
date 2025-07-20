@@ -10,6 +10,7 @@ import EntityManager from "@/manager/EntityManager";
 import ListItem from "./jams-list/ListItem";
 import UserManager from "@/manager/UserManager";
 import SearchManager from "@/manager/SearchManager";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type Props = {
   idArray?: any;
@@ -51,7 +52,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   const loadSearchData = async () => {
     let data: any[] = [];
     
-    if (idArray && idArray?.length > 0) {
+    if (Array.isArray(idArray) && idArray?.length > 0) {
       data = await EntityManager.getJams(idArray);
     }
     else {
