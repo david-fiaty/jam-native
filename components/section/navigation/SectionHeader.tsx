@@ -48,7 +48,7 @@ const SectionHeader = ({ style } : Props) => {
       </BoxView>
 
       <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>      
-        {isLoggedIn && <SearchField />}
+        <SearchField />
 
         {isLoggedIn && (
           <IconView
