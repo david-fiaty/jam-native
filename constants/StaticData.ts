@@ -18,16 +18,6 @@ const StaticData = {
       content: i18n.t('JAM! Is a social network and a map, all rolled up in one - a digital incubator that is constantly updated thanks to you, its members.'),
     },
   ],
-  languages: [
-    {
-      label: i18n.t('French'),
-      value: 'fr',
-    },
-    {
-      label: i18n.t('English'),
-      value: 'en',
-    },
-  ],
   authTabs: [
     {
       id: 'email',
