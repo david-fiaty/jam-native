@@ -57,7 +57,7 @@ const SectionView = () => {
     setCurrentSection(getCurrentSection());
 
     if (!sectionState.config.length) {
-      dispatch(setSectionConfig(getSections(false)));
+      dispatch(setSectionConfig(Sections.getSections(false)));
     }
 
     if (!sectionState.active?.length) {
