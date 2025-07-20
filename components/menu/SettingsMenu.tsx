@@ -38,7 +38,7 @@ const SettingsMenu = () => {
   const renderItem = (row: any) => (
     <TouchableOpacity onPress={() => row.item.onPress()}>
       <View style={Layout.menuItem}>
-        <TextView>{row.item.label}</TextView>
+        <TextView>{i18n.t(row.item.label)}</TextView>
       </View>
     </TouchableOpacity>
   );
