@@ -4,6 +4,7 @@ import BoxView from '@/components/view/BoxView';
 import IconView from '@/components/view/IconView';
 import TextView from '@/components/view/TextView';
 import ModalManager from '@/manager/ModalManager';
+import i18n from '@/translation/i18n';
 
 type Props = {
   currentModal: any;
@@ -30,7 +31,7 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
       />
 
       <TextView style={styles.title}>
-        {currentModal?.title}
+        {i18n.t(currentModal?.title)}
       </TextView>
 
     </BoxView>
