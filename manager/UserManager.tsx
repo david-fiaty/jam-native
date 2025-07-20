@@ -8,7 +8,6 @@ import DataManager from './DataManager';
 import * as Location from 'expo-location';
 import * as Device from "expo-device";
 import i18n from '@/translation/i18n';
-import i18next from 'i18next';
 import ScreenManager from './ScreenManager';
 import StaticData from '@/constants/StaticData';
 
@@ -219,17 +218,6 @@ class UserManager {
     }
 
     return location;
-  }
-
-  async setLanguage(languageCode: string) {
-    if (ScreenManager.isWeb()) {
-      localStorage.setItem(Config.storageKeys.currentLanguage, languageCode);
-    }
-    else {
-      await AsyncStorage.setItem(Config.storageKeys.currentLanguage, languageCode);
-    }
-
-    i18next.changeLanguage(languageCode);
   }
 
   async getLanguage() {
