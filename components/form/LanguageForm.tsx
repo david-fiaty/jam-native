@@ -11,6 +11,7 @@ import i18next from 'i18next';
 
 const LanguageForm = () => {
   const [currentlLanguage, setCurrentLanguage] = useState<string>('');
+  const [languageChanged, setLanguageChanged] = useState(0);
 
   const getLanguages = () => {
     return [
@@ -45,7 +46,17 @@ const LanguageForm = () => {
     (async () => {
       setCurrentLanguage(await UserManager.getLanguage());
     })();
-  }, [currentlLanguage]);
+
+    const onLanguageChanged = () => {
+      setLanguageChanged(prev => prev + 1);
+    };
+
+    i18n.on('languageChanged', onLanguageChanged);
+
+    return () => {
+      i18n.off('languageChanged', onLanguageChanged);
+    };
+  }, [i18n]);
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.formContainer}>
