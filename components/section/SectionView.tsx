@@ -212,22 +212,13 @@ const SectionView = () => {
   useEffect(() => {
     setCurrentSection(getCurrentSection());
 
-    if (!sectionState.config.length) {
+    if (!sectionState.config.length || prevUserState.current !== userState) {
       dispatch(setSectionConfig(getSections(false)));
     }
 
     if (!sectionState.active?.length) {
       dispatch(setActiveSections([getDefaultSection(false)]));
     }
-
-
-    if (prevUserState.current !== userState) {
-      console.log('Config changed!', {
-        from: prevUserState.current,
-        to: userState,
-      });
-    }
-
   }, [sectionId, sectionState, userState]);
 
   return (
