@@ -8,7 +8,6 @@ import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
 import SignupForm from '../form/SignupForm';
 import SpinnerView from '../view/SpinnerView';
-import StaticData from '@/constants/StaticData';
 import TabsView from '../view/TabsView';
 import SignupEmailCodeForm from '../form/signup-email/SignupEmailCodeForm';
 import SignupEmailForm from '../form/signup-email/SignupEmailForm';
