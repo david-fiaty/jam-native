@@ -28,8 +28,20 @@ const LoginSection = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [currentTab, setCurrentTab] = useState<any>(null);
 
+  const tabsData: any = [
+    {
+      id: 'email',
+      label: i18n.t('Email'),
+      default: true,
+    },
+    {
+      id: 'phone',
+      label: i18n.t('Whatsapp'),
+    },
+  ];
+
   useEffect(() => {
-    setCurrentTab((StaticData.authTabs.find((o: any) => o?.default === true))?.id);
+    setCurrentTab((tabsData.find((o: any) => o?.default === true))?.id);
     
     (async () => {
       if (!isLoaded) {
@@ -37,7 +49,7 @@ const LoginSection = () => {
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, resource]);
+  }, [isLoaded, resource, tabsData]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -54,7 +66,7 @@ const LoginSection = () => {
       <DividerView />
   
       <TabsView 
-        tabs={StaticData.authTabs} 
+        tabs={tabsData} 
         currentTab={currentTab} 
         onItemPress={(tabId: string) => setCurrentTab(tabId)}
       />
