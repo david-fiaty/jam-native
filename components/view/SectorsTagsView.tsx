@@ -14,6 +14,11 @@ const SectorsTagsView = ({ idArray }: Props) => {
   const renderSectors = (sectorsIds?: any)  => {
     let data: any[] = [];
 
+    // Todo - Render profile sectors
+    (sectorsIds || []).map((item: any) => {
+      console.log(item);
+    });
+
     sectorsData.map((item: any) => {
       if ((sectorsIds || []).includes(item.id)) {
         data.push(<TagView key={item.id}>{item.name}</TagView>);  
