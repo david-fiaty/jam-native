@@ -33,34 +33,6 @@ const StaticData = {
       label: i18n.t('Online/Physical'),
     },
   ],
-  notificationTypes: [
-    {
-      id: 'like-jam',
-      label: i18n.t('Liked Jam'),
-    },
-  ],
-  jamCategories: [
-    {
-      id: 'call',
-      label: i18n.t('Call'),
-      icon: 'megaphone',
-    },
-    {
-      id: 'looking',
-      label: i18n.t('Looking'),
-      icon: 'link',
-    },
-    {
-      id: 'event',
-      label: i18n.t('Event'),
-      icon: 'users',
-    },
-    {
-      id: 'random',
-      label: i18n.t('Random'),
-      icon: 'infinite',
-    },
-  ],
   privacyStatus: [
     {
       id: 'private',
