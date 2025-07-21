@@ -14,20 +14,13 @@ const SectorsTagsView = ({ idArray }: Props) => {
   const renderSectors = (sectorsIds?: any)  => {
     let data: any[] = [];
 
-    // Todo - Render profile sectors
-    (sectorsIds || []).map((item: any) => {
-      console.log(item);
-    });
-
-    sectorsData.map((item: any) => {
-      if ((sectorsIds || []).includes(item.id)) {
-        data.push(<TagView key={item.id}>{item.name}</TagView>);  
-      }
-      else if (item?.sub_sectors?.length > 0) {
-        item.sub_sectors.map((subitem: any) => {
-          data.push(<TagView key={subitem.id}>{subitem.name}</TagView>);  
-        });
-      }
+    (sectorsIds || []).map((subSectorId: any) => {
+      sectorsData.map((sector: any) => {
+        let subSector: any = sector.sub_sectors.find((o: any) => o.id == subSectorId);
+        if (subSector) {
+          data.push(<TagView key={subSector.id}>{subSector.name}</TagView>);  
+        }
+      });
     });
 
     return data;
