@@ -55,7 +55,7 @@ const SectionHeader = ({ style }: Props) => {
             name="user"
             size={14}
             padding={6}
-            onPress={() => ModalManager.toggleModal('SettingsMenu')}
+            onPress={() => SectionManager.push(router, 'login')}
           />
         )}
 
