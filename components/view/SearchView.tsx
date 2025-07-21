@@ -10,6 +10,7 @@ import SearchProfilesList from "../list/SearchProfilesList";
 import SearchProjectsList from "../list/SearchProjectsList";
 import TabsView from "./TabsView";
 import BoxView from "./BoxView";
+import i18n from "@/translation/i18n";
 
 const SearchView = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,55 @@ const SearchView = () => {
   const [searchData, setSearchData] = useState<any>([]);
   const searchState: any = useSelector((state: any) => state.search);
   
+  const searchTabs: any[] = [
+    {
+      id: 'jam',
+      label: i18n.t('Jams'),
+      numColumns: 2,
+      default: true,
+    },
+    {
+      id: 'looking',
+      label: i18n.t('Lookings'),
+      numColumns: 2,
+    },
+    {
+      id: 'call',
+      label: i18n.t('Calls'),
+      numColumns: 2,
+    },
+    {
+      id: 'event',
+      label: i18n.t('Events'),
+      numColumns: 2,
+    },
+    {
+      id: 'jammer',
+      label: i18n.t('Jammers'),
+      numColumns: 1,
+    },
+    {
+      id: 'personal',
+      label: i18n.t('Artists'),
+      numColumns: 1,
+    },
+    {
+      id: 'organization',
+      label: i18n.t('Organization'),
+      numColumns: 1,
+    },
+    {
+      id: 'venue',
+      label: i18n.t('Venues'),
+      numColumns: 2,
+    },
+    {
+      id: 'project',
+      label: i18n.t('Projects'),
+      numColumns: 2,
+    },
+  ];
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
@@ -25,8 +75,8 @@ const SearchView = () => {
       }
     })();
 
-    if (!searchState.currentTab) dispatch(setCurrentTab((StaticData.searchTabs.find((o: any) => o?.default === true))?.id));
-  }, [isLoaded, searchState]);
+    if (!searchState.currentTab) dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
+  }, [isLoaded, searchState, searchTabs]);
 
   if (!isLoaded) return <SpinnerView />;
   
@@ -39,7 +89,7 @@ const SearchView = () => {
     >
       {/* Search tabs */}
       <TabsView 
-        tabs={StaticData.searchTabs} 
+        tabs={searchTabs} 
         currentTab={searchState.currentTab} 
         onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
       />

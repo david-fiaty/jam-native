@@ -29,6 +29,18 @@ const SignupPhoneForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
+  const phoneServices: any[] = [
+    {
+      id: 'sms',
+      label: i18n.t('SMS'),
+      default: true,
+    },
+    {
+      id: 'whatsapp',
+      label: i18n.t('Whatsapp'),
+    },
+  ];
+
   const submitForm = async () => {
     setIsProcessing(true);
     
@@ -61,10 +73,10 @@ const SignupPhoneForm = () => {
 
   useEffect(() => {
     if (!isLoaded) {
-      FormManager.updateField(resource, 'phone_service', (StaticData.phoneServices.find((o: any) => o.default === true))?.id);
+      FormManager.updateField(resource, 'phone_service', (phoneServices.find((o: any) => o.default === true))?.id);
       setIsLoaded(true);
     }
-  }, [isLoaded, resource]);
+  }, [isLoaded, resource, phoneServices]);
 
   if (!isLoaded) return <SpinnerView />;
 
