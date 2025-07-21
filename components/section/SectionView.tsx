@@ -35,6 +35,7 @@ const SectionView = () => {
   const [currentSection, setCurrentSection] = useState<any>(null);
   const sectionState: any = useSelector((state: any) => state.section);
   const modalState: any = useSelector((state: any) => state.modal);
+  const userState: any = useSelector((state: any) => state.user);
   const sectionId: any = path.split('/').pop();
 
   const getCurrentSection = () => {
@@ -218,7 +219,7 @@ const SectionView = () => {
     if (!sectionState.active?.length) {
       dispatch(setActiveSections([getDefaultSection(false)]));
     }
-  }, [sectionId, sectionState]);
+  }, [sectionId, sectionState, userState]);
 
   return (
     <>
