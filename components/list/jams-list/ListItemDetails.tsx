@@ -67,7 +67,7 @@ const ListItemDetails = ({ row, sectorsData }: Props) => {
       >
         <TextView>
           <TextView style={styles.detailLabel}>{`${i18n.t("Location")} `}</TextView>
-          {locationTypes.find(
+          {StaticData.locationTypes.find(
             (o: any) => o.id == row?.item?.location_type
           )?.label || i18n.t("Unavailable")}
         </TextView>
