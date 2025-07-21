@@ -12,7 +12,6 @@ export default () => {
   const hasRedirected = useRef<boolean>(false);
 
   const getLanguage = async () => {
-    Config
     try {
       let language = ScreenManager.isWeb()
         ? localStorage.getItem(Config.storageKeys.currentLanguage)
