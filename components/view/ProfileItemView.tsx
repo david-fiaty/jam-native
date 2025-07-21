@@ -70,7 +70,6 @@ const ProfileItemView = ({ profileId }: Props) => {
 
       <TextView style={styles.sectionTitle}>{i18n.t('Sectors')}</TextView>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.profileSectors}>
-        {/* Todo - Endpoint should return entity ids, not full objects */}
         <SectorsTagsView idArray={profileItem?.sectors} />
       </BoxView>
 
