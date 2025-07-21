@@ -212,7 +212,7 @@ const SectionView = () => {
   useEffect(() => {
     setCurrentSection(getCurrentSection());
 
-    if (!sectionState.config.length || prevUserState.current !== userState) {
+    if (!sectionState.config.length || prevUserState.current.currentLanguage !== userState.currentLanguage) {
       dispatch(setSectionConfig(getSections(false)));
     }
 
