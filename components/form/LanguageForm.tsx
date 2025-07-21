@@ -6,7 +6,6 @@ import { Config } from "@/constants/Config";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import SelectListBase from '../base/SelectListBase';
-import UserManager from '@/manager/UserManager';
 import ScreenManager from "@/manager/ScreenManager";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import i18next from 'i18next';
@@ -29,17 +28,17 @@ const LanguageForm = () => {
     ];
   };
 
-  const setLanguage = async (languageCode: string) => {
+  const setLanguage = async (code: string) => {
     if (ScreenManager.isWeb()) {
-      localStorage.setItem(Config.storageKeys.currentLanguage, languageCode);
+      localStorage.setItem(Config.storageKeys.currentLanguage, code);
     }
     else {
-      await AsyncStorage.setItem(Config.storageKeys.currentLanguage, languageCode);
+      await AsyncStorage.setItem(Config.storageKeys.currentLanguage, code);
     }
 
-    dispatch(setCurrentLanguage(languageCode))
+    dispatch(setCurrentLanguage(code))
 
-    i18next.changeLanguage(languageCode);
+    i18next.changeLanguage(code);
   };
 
   useEffect(() => {
