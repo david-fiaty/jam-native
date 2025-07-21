@@ -34,18 +34,9 @@ const ProfileForm = () => {
     setIsProcessing(true);
     let result: any = await UserManager.updateProfile(formData);
 
-    // Todo - Implement profile update submission
-    console.log('-------');
-    console.log(Object.keys(formData));
-
-    //console.log(result);
-
-    return;
-
-    if (result?.error) {
+    if (result?.success === false) {
       ScreenManager.showMessage({
         title: i18n.t('Profile update'),
-        //content: result.error, // Todo - Implement field error management
         content: i18n.t('There was an error with the submission. Please check your data and try again.'),
       });
     }
@@ -180,22 +171,22 @@ const ProfileForm = () => {
             {FormManager.renderError('profile_venue.venue_name')}
 
             <TextView>
-              {i18n.t('Venue types')}
+              {i18n.t('Venue types')}*
             </TextView>
-            
             <VenueTypesField
               resource={resource}
               field="venue_types"
               parent="profile_venue"
               placeholder={i18n.t('Select venue types')}
-              value={formData?.venue_types}
+              value={formData?.profile_venue?.venue_types}
               onPress={() => ModalManager.toggleModal('VenueTypesList', {
                 resource: resource,
                 field: "venue_types",
                 parent: "profile_venue",
               })}
             />
-
+            {FormManager.renderError('profile_venue.venue_types')}
+            
             <TextView>
               {i18n.t('Creation year')}
             </TextView>
@@ -216,7 +207,7 @@ const ProfileForm = () => {
         {formData?.profile_type?.length && (
           <>
             <TextView>
-              {i18n.t('Profile name (with no spaces)')}
+              {i18n.t('Profile name (with no spaces)')}*
             </TextView>
             <InputTextField
               value={formData?.profile_name}
@@ -247,7 +238,7 @@ const ProfileForm = () => {
             {FormManager.renderError('address')}
 
             <TextView>
-              {i18n.t('Sectors')}
+              {i18n.t('Sectors')}*
             </TextView>
             <SectorsField
               resource={resource}

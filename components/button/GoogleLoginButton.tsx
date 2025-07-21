@@ -1,5 +1,6 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Layout } from '@/constants/Layout';
+import Constants from 'expo-constants';
 import BoxView from '../view/BoxView';
 import i18n from '@/translation/i18n';
 import TextView from '../view/TextView';
@@ -7,11 +8,13 @@ import ImageView from '../view/ImageView';
 
 const source = require('@/assets/images/google-logo.png'); 
 
+const config = Constants.expoConfig;
+
 const GoogleLoginButton = () => {
 
   const onPress = () => {
     // Todo - Implement google login buton
-    console.log('on google button press');
+    console.log('on google button press', config?.android?.package);
   };
 
   return (

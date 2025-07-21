@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import ModalReducer from './slices/ModalSlice';
 import SearchReducer from './slices/SearchSlice';
 import MessageReducer from './slices/MessageSlice';
-import AppReducer from './slices/AppSlice';
+import UserReducer from './slices/UserSlice';
 import FormReducer from './slices/FormSlice';
 import SectionReducer from './slices/SectionSlice';
 import CommentReducer from './slices/CommentSlice';
@@ -12,7 +12,7 @@ const Store = configureStore({
     modal: ModalReducer,
     search: SearchReducer,
     message: MessageReducer,
-    app: AppReducer,
+    user: UserReducer,
     form: FormReducer,
     section: SectionReducer,
     comment: CommentReducer,

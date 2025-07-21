@@ -8,8 +8,8 @@ import DataManager from './DataManager';
 import * as Location from 'expo-location';
 import * as Device from "expo-device";
 import i18n from '@/translation/i18n';
-import i18next from 'i18next';
 import ScreenManager from './ScreenManager';
+import StaticData from '@/constants/StaticData';
 
 class UserManager {
   async sendSignupCode(data: any) {
@@ -32,29 +32,58 @@ class UserManager {
 
   async login(data: any) {
     let response = await DataManager.post('login', data);
-    if (response?.tokens?.access_token?.length) {
-      await SessionManager.setTokenData(response.tokens);
-    }
-
-    return response;
-  }
-
-  async register(data: any) {
-    let response = await DataManager.post('register', data);
     let success = response?.tokens?.access_token?.length > 0;
 
     if (success) {
-      await SessionManager.setTokenData(response.tokens);
+      SessionManager.setTokenData(response.tokens);
     }
 
     return {
       success: success,
       data: response,
+    };
+  }
+
+  async register(data: any) {
+    let response: any = await DataManager.post('register', data);
+    let success: boolean = response?.tokens?.access_token?.length > 0;
+    let message: string = '';
+
+    if (success) {
+      SessionManager.setTokenData(response.tokens);
     }
+    else if (response?.non_field_errors?.length > 0) {
+      message = response.non_field_errors[0];
+    }
+    else {
+      message = i18n.t('Invalid data submission.');
+    }
+
+    return {
+      success: success,
+      data: response,
+      message: message,
+    };
+  }
+
+  async updateProfile(data: any) {
+    let defaults: any = {};
+    let profileId: number = await this.getProfileId();
+    let variables: any = { '[profile_id]': profileId };
+    let success: boolean = false;
+
+    let response: any = await DataManager.put('updateProfile', { ...defaults, ...data }, variables);
+
+    if (response?.id > 0) success = true;
+
+    return {
+      success: success,
+      data: response,
+    };
   }
 
   async isLoggedIn() {
-    return await SessionManager.isTokenValid();
+    return Object.keys(SessionManager.getTokenData()).length > 0;
   }
 
   logout() {
@@ -80,6 +109,32 @@ class UserManager {
     return profileId;
   }
 
+  getProfileTypeLabel(profileType: string) {
+    let label: any = '';
+
+    if (profileType?.length > 0) {
+      label = (StaticData.profileTypes.find((o: any) => o.id === profileType))?.label;
+    }
+
+    return label?.length > 0 ? label: i18n.t('Unavailable');
+  }
+
+  getProfileDisplayName(item: any) {
+    let displayName: string = '';
+
+    if (item?.profile_type == 'personal') {
+      displayName = `${item?.profile_personal?.first_name || ''} ${item?.profile_personal?.last_name || ''}`
+    }
+    else if (item?.profile_type == 'venue') {
+      displayName = item?.profile_venue?.venue_name;
+    }
+    else if (item?.profile_type == 'organization') {
+      displayName = item?.profile_organization?.organization_name;
+    }
+
+    return displayName.trim().length > 0 ? displayName : item?.profile_name;
+  }
+
   async getProfileData(options?: any) {
     options = options || {};
     let profileId: number = await this.getProfileId();
@@ -99,14 +154,6 @@ class UserManager {
       ...(profileData || {}),
       ...(localProfileData || {}),
     };
-  }
-
-  async updateProfile(data: any) {
-    let defaults: any = {};
-    let profileId: number = await this.getProfileId();
-    let variables: any = { '[profile_id]': profileId };
-
-    return await DataManager.put('updateProfile', { ...defaults, ...data }, variables);
   }
 
   async getNotifications(options?: any) {
@@ -171,17 +218,6 @@ class UserManager {
     }
 
     return location;
-  }
-
-  async setLanguage(languageCode: string) {
-    if (ScreenManager.isWeb()) {
-      localStorage.setItem(Config.storageKeys.currentLanguage, languageCode);
-    }
-    else {
-      await AsyncStorage.setItem(Config.storageKeys.currentLanguage, languageCode);
-    }
-
-    i18next.changeLanguage(languageCode);
   }
 
   async getLanguage() {

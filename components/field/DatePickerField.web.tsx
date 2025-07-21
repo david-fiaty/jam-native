@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { StyleSheet, Platform, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Config } from '@/constants/Config';
 import InputTextField from '../field/InputTextField';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
 import Datetime from 'react-datetime';
-
-import "react-datetime/css/react-datetime.css";
-import { Config } from '@/constants/Config';
 import ScreenManager from '@/manager/ScreenManager';
+import "react-datetime/css/react-datetime.css";
+import TextView from '../view/TextView';
+import { Layout } from '@/constants/Layout';
 
 type Props = {
   placeholder?: string,
@@ -28,10 +29,9 @@ const DatePickerField = ({placeholder, value, onChangeValue}: Props) => {
     setShow(false);
   };
 
-  const handleConfirm = (date: any) => {
-    if (date) setDate(date);
-    if (onChangeValue) onChangeValue(date);
-    hideDatePicker();
+  const handleConfirm = (value: any) => {
+    if (value) setDate(value);
+    if (onChangeValue) onChangeValue(value);
   };
 
   return (
@@ -53,7 +53,12 @@ const DatePickerField = ({placeholder, value, onChangeValue}: Props) => {
             input={false}
             dateFormat={Config.dateFormat} 
             value={date}
+            onChange={handleConfirm}
           />
+
+          <TouchableOpacity onPress={hideDatePicker} style={styles.closeButton}>
+            <IconView name="close" theme="secondary" size={16} />
+          </TouchableOpacity>
         </View>
       )}
     </>
@@ -65,7 +70,12 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   calendarContainer: {
-    
+    position: 'relative',
+  },
+  closeButton: {
+    position: 'absolute',
+    top: Layout.space.base,
+    right: Layout.space.base,
   },
 });
 

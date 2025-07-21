@@ -1,4 +1,4 @@
-export default {
+{
   "Jam is now added": "Le Jam a été ajouté",
   "Adding Jam failed, please try again": "Échec de l'ajout du Jam, veuillez réessayer",
   "Share Jam": "Partager le Jam",
@@ -313,4 +313,4 @@ export default {
   "Invalid domain value.": "Domaine invalide.",
   "replies": "reponses",
   "Reply": "Répondre"
-};
+}
