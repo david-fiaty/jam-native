@@ -9,6 +9,8 @@ import SpinnerView from "./SpinnerView";
 import i18n from "@/translation/i18n";
 import BoxView from "./BoxView";
 import UserManager from "@/manager/UserManager";
+import ButtonView from "./ButtonView";
+import ModalManager from "@/manager/ModalManager";
 
 type Props = {
   resource: string,
@@ -22,20 +24,24 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const onMapPress = async (event: MapPressEvent) => {
-    setSelectedLocation(event.nativeEvent.coordinate);
-
+  const updateSelectedLocation = () => {
     dispatch(setFormData<any>({ 
       resource: resource,
       key: latitude.field, 
-      value: event.nativeEvent.coordinate.latitude, 
+      value: selectedLocation.latitude, 
     }));
 
     dispatch(setFormData<any>({ 
       resource: resource,
       key: longitude.field, 
-      value: event.nativeEvent.coordinate.longitude, 
+      value: selectedLocation.longitude, 
     }));
+
+    ModalManager.toggleModal('LocationMapView');
+  };
+
+  const onMapPress = async (event: MapPressEvent) => {
+    setSelectedLocation(event.nativeEvent.coordinate);
   };
 
   const getSelectedLocation = async () => {
@@ -122,6 +128,12 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
           </MapView>
         </View>
       </TouchableWithoutFeedback>
+  
+      <ButtonView
+        label={i18n.t('Submit')}
+        onPress={() => updateSelectedLocation()} 
+        containerStyle={styles.confirmButton}  
+      />
     </BoxView>
   );
 };
@@ -130,6 +142,11 @@ const styles = StyleSheet.create({
   container: {
     padding: 0,
     paddingTop: Layout.space.base*1.5,
+    position: 'relative',
+  },
+  confirmButton: {
+    bottom: '9%',
+    position: 'absolute',
   },
   mapContainer: {
     width: '100%',
