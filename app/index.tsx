@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { setCurrentLanguage } from '@/redux/slices/UserSlice';
 import { Config } from '@/constants/Config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import UserManager from '@/manager/UserManager';
 import i18next from 'i18next';
 import ScreenManager from '@/manager/ScreenManager';
 

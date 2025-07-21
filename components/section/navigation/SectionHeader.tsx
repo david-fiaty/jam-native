@@ -16,7 +16,7 @@ type Props = {
   style?: any;
 };
 
-const SectionHeader = ({ style } : Props) => {
+const SectionHeader = ({ style }: Props) => {
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [notificationsCount, setNotificationsCount] = useState<number>(0);
@@ -38,7 +38,7 @@ const SectionHeader = ({ style } : Props) => {
       setIsLoaded(true);
     })();
   }, [isLoaded]);
-  
+
   return (
     <BoxView direction="row" style={[styles.container, style]}>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.headerLeft}>
@@ -47,12 +47,21 @@ const SectionHeader = ({ style } : Props) => {
         </TouchableOpacity>
       </BoxView>
 
-      <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>      
+      <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>
         <SearchField />
+
+        {!isLoggedIn && (
+          <IconView
+            name="user"
+            size={14}
+            padding={6}
+            onPress={() => SectionManager.push(router, 'login')}
+          />
+        )}
 
         {isLoggedIn && (
           <IconView
-            label={notificationsCount > 0 ? ` ${notificationsCount}+` : ` 0 `} 
+            label={notificationsCount > 0 ? ` ${notificationsCount}+` : ` 0 `}
             size={13}
             padding={4.5}
             theme={getIconTheme('NotificationsMenu')}
@@ -78,8 +87,8 @@ const SectionHeader = ({ style } : Props) => {
 const styles = StyleSheet.create({
   container: {
     gap: 0,
-    marginTop: Layout.space.base*1.5,
-    marginBottom: Layout.space.base*1.5,
+    marginTop: Layout.space.base * 1.5,
+    marginBottom: Layout.space.base * 1.5,
     backgroundColor: Layout.colors.white,
   },
   headerLeft: {
