@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { usePathname } from 'expo-router';
 import { setActiveSections, setSectionConfig } from "@/redux/slices/SectionSlice";
@@ -27,7 +27,6 @@ import AddProjectForm from "@/components/form/AddProjectForm";
 import LanguageForm from "../form/LanguageForm";
 import ResetPasswordForm from "../form/ResetPasswordForm";
 import NotificationItemSection from "./NotificationItemSection";
-import UserManager from "@/manager/UserManager";
 
 const SectionView = () => { 
   const path = usePathname();
@@ -35,6 +34,8 @@ const SectionView = () => {
   const [currentSection, setCurrentSection] = useState<any>(null);
   const sectionState: any = useSelector((state: any) => state.section);
   const modalState: any = useSelector((state: any) => state.modal);
+  const userState: any = useSelector((state: any) => state.user);
+  const prevUserState: any = useRef(userState);
   const sectionId: any = path.split('/').pop();
 
   const getCurrentSection = () => {
@@ -218,7 +219,16 @@ const SectionView = () => {
     if (!sectionState.active?.length) {
       dispatch(setActiveSections([getDefaultSection(false)]));
     }
-  }, [sectionId, sectionState]);
+
+
+    if (prevUserState.current !== userState) {
+      console.log('Config changed!', {
+        from: prevUserState.current,
+        to: userState,
+      });
+    }
+
+  }, [sectionId, sectionState, userState]);
 
   return (
     <>
