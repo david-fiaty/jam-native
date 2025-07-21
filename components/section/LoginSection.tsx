@@ -15,7 +15,6 @@ import LinkView from '../view/LinkView';
 import DividerView from '../view/DividerView';
 import SectionManager from '@/manager/SectionManager';
 import TabsView from '../view/TabsView';
-import StaticData from '@/constants/StaticData';
 import SpinnerView from '../view/SpinnerView';
 import LoginEmailForm from '../form/login-email/LoginEmailForm';
 import LoginPhoneForm from '../form/login-phone/LoginPhoneForm';
