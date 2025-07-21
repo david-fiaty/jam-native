@@ -1,54 +1,6 @@
 import i18n from "@/translation/i18n";
 
 const StaticData = {
-  searchTabs: [
-    {
-      id: 'jam',
-      label: i18n.t('Jams'),
-      numColumns: 2,
-      default: true,
-    },
-    {
-      id: 'looking',
-      label: i18n.t('Lookings'),
-      numColumns: 2,
-    },
-    {
-      id: 'call',
-      label: i18n.t('Calls'),
-      numColumns: 2,
-    },
-    {
-      id: 'event',
-      label: i18n.t('Events'),
-      numColumns: 2,
-    },
-    {
-      id: 'jammer',
-      label: i18n.t('Jammers'),
-      numColumns: 1,
-    },
-    {
-      id: 'personal',
-      label: i18n.t('Artists'),
-      numColumns: 1,
-    },
-    {
-      id: 'organization',
-      label: i18n.t('Organization'),
-      numColumns: 1,
-    },
-    {
-      id: 'venue',
-      label: i18n.t('Venues'),
-      numColumns: 2,
-    },
-    {
-      id: 'project',
-      label: i18n.t('Projects'),
-      numColumns: 2,
-    },
-  ],
   profileTypes: [
     {
       id: null,
