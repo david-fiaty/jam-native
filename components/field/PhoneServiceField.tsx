@@ -1,5 +1,6 @@
 import StaticData from '@/constants/StaticData';
 import ButtonGroupBase from '../base/ButtonGroupBase';
+import i18n from '@/translation/i18n';
 
 type Props = {
   value?: any;
@@ -7,14 +8,26 @@ type Props = {
   onChangeValue?: (option: any) => void;
 };
 
-const PhoneServiceField = ({value, disabled, onChangeValue}: Props) => {
-  return (    
+const PhoneServiceField = ({ value, disabled, onChangeValue }: Props) => {
+  const phoneServices: any[] = [
+    {
+      id: 'sms',
+      label: i18n.t('SMS'),
+      default: true,
+    },
+    {
+      id: 'whatsapp',
+      label: i18n.t('Whatsapp'),
+    },
+  ];
+
+  return (
     <ButtonGroupBase
       value={value}
-      data={StaticData.phoneServices}
+      data={phoneServices}
       onChangeValue={onChangeValue}
       disabled={disabled}
-    />  
+    />
   );
 };
 
