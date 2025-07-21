@@ -1,34 +1,6 @@
 import i18n from "@/translation/i18n";
 
 const StaticData = {
-  welcomeSlideshow: [
-    {
-      id: 1,
-      title: i18n.t('Create better together'),
-      content: i18n.t('JAM! is a place to explore and experience creatives from different backgrounds in West Africa.'),
-    },
-    {
-      id: 2,
-      title: i18n.t('A Powerful Tool'),
-      content: i18n.t('JAM! is a tool for networking, exchange and collaboration between artists, venues, communities and organisations across the Lagos - Abidjan axis.'),
-    },
-    {
-      id: 3,
-      title: i18n.t('Experience and Incubate Tomorrow\'s Culture'),
-      content: i18n.t('JAM! Is a social network and a map, all rolled up in one - a digital incubator that is constantly updated thanks to you, its members.'),
-    },
-  ],
-  authTabs: [
-    {
-      id: 'email',
-      label: i18n.t('Email'),
-      default: true,
-    },
-    {
-      id: 'phone',
-      label: i18n.t('Whatsapp'),
-    },
-  ],
   searchTabs: [
     {
       id: 'jam',
