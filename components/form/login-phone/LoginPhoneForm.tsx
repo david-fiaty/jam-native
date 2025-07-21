@@ -83,8 +83,6 @@ const LoginPhoneForm = () => {
         keyboardType="number-pad"
         containerStyle={styles.inputTextFieldContainer} // Todo - Fix styles not working
         onChangeText={(value: string) => FormManager.updateField(resource, 'phone', value, ['number'])}
-        rightIcon={<IconView name="phone" theme="transparent" />}
-        //disabled={isEmailFieldDisabled()}
       />
       {FormManager.renderError('phone')}
 
