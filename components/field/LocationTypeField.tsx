@@ -10,8 +10,6 @@ type Props = {
 };
 
 const LocationTypeField = ({value, onChangeValue}: Props) => {
-  const locationTypes = StaticData.locationTypes;
-
   const buildOptions = (optionsData: any) => {    
     return [...(optionsData || [])].map((item: any) => {
       return {
@@ -25,7 +23,7 @@ const LocationTypeField = ({value, onChangeValue}: Props) => {
     <BoxView direction="column" align="center" style={styles.container}>
       <SelectListBase 
         value={value}
-        data={buildOptions(locationTypes)} 
+        data={buildOptions(StaticData.locationTypes)} 
         onChangeValue={onChangeValue}
         placeholder={i18n.t('Select a location type')}
       />

@@ -8,7 +8,6 @@ import i18n from '@/translation/i18n';
 import BoxView from '../view/BoxView';
 import SignupForm from '../form/SignupForm';
 import SpinnerView from '../view/SpinnerView';
-import StaticData from '@/constants/StaticData';
 import TabsView from '../view/TabsView';
 import SignupEmailCodeForm from '../form/signup-email/SignupEmailCodeForm';
 import SignupEmailForm from '../form/signup-email/SignupEmailForm';
@@ -27,6 +26,18 @@ const SignupSection = ({ reset }: Props) => {
   const [currentTab, setCurrentTab] = useState<any>(null);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
+  const tabsData: any = [
+    {
+      id: 'email',
+      label: i18n.t('Email'),
+      default: true,
+    },
+    {
+      id: 'phone',
+      label: i18n.t('Whatsapp'),
+    },
+  ];
+
   const containerStyle: any = {
     paddingTop: formData?.success === true ? Layout.space.base*4 : 0,
   };
@@ -36,7 +47,7 @@ const SignupSection = ({ reset }: Props) => {
   };
 
   useEffect(() => {
-    setCurrentTab((StaticData.authTabs.find((o: any) => o?.default === true))?.id);
+    setCurrentTab((tabsData.find((o: any) => o?.default === true))?.id);
     
     (async () => {
         if (!isLoaded) {
@@ -44,7 +55,7 @@ const SignupSection = ({ reset }: Props) => {
           setIsLoaded(true);
         }
     })();
-  }, [isLoaded, reset, resource]);
+  }, [isLoaded, reset, resource, tabsData]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -61,7 +72,7 @@ const SignupSection = ({ reset }: Props) => {
       
       {isTabsVisible() === true && (
         <TabsView 
-          tabs={StaticData.authTabs} 
+          tabs={tabsData} 
           currentTab={currentTab} 
           onItemPress={(tabId: string) => setCurrentTab(tabId)}
         />

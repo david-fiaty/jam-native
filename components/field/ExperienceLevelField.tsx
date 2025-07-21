@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native';
 import BoxView from '../view/BoxView';
 import SelectListBase from '../base/SelectListBase';
-import StaticData from '@/constants/StaticData';
 import i18n from '@/translation/i18n';
 
 type Props = {
@@ -11,7 +10,16 @@ type Props = {
 };
 
 const ExperienceLevelField = ({label, value, onChangeValue}: Props) => {
-  const experienceLevels = StaticData.experienceLevels;
+  const experienceLevels: any[] = [
+    {
+      id: null,
+      label: i18n.t('Select a level of experience'),
+    },
+    {
+      id: 'less_than_1_year',
+      label: i18n.t('Less than 1 year'),
+    },
+  ];
 
   const buildOptions = (optionsData: any) => {    
     return [...(optionsData || [])].map((item: any) => {
