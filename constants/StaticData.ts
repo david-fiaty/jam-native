@@ -33,16 +33,6 @@ const StaticData = {
       label: i18n.t('Online/Physical'),
     },
   ],
-  privacyStatus: [
-    {
-      id: 'private',
-      label: i18n.t('Private'),
-    },
-    {
-      id: 'public',
-      label: i18n.t('Public'),
-    },
-  ],
   phoneServices: [
     {
       id: 'sms',
