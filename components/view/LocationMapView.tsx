@@ -24,20 +24,24 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const onMapPress = async (event: MapPressEvent) => {
-    setSelectedLocation(event.nativeEvent.coordinate);
-
+  const updateSelectedLocation = () => {
     dispatch(setFormData<any>({ 
       resource: resource,
       key: latitude.field, 
-      value: event.nativeEvent.coordinate.latitude, 
+      value: selectedLocation.latitude, 
     }));
 
     dispatch(setFormData<any>({ 
       resource: resource,
       key: longitude.field, 
-      value: event.nativeEvent.coordinate.longitude, 
+      value: selectedLocation.longitude, 
     }));
+
+    ModalManager.toggleModal('LocationMapView');
+  };
+
+  const onMapPress = async (event: MapPressEvent) => {
+    setSelectedLocation(event.nativeEvent.coordinate);
   };
 
   const getSelectedLocation = async () => {
@@ -127,7 +131,7 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
   
       <ButtonView
         label={i18n.t('Submit')}
-        onPress={() => ModalManager.toggleModal('LocationMapView')} 
+        onPress={() => updateSelectedLocation()} 
         containerStyle={styles.confirmButton}  
       />
     </BoxView>
