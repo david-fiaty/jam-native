@@ -18,7 +18,6 @@ import ListView from "../view/ListView";
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
 import UserManager from "@/manager/UserManager";
-import StaticData from "@/constants/StaticData";
 import DatePickerField from "../field/DatePickerField";
 import LocationTypeField from "../field/LocationTypeField";
 import EntityManager from "@/manager/EntityManager";
@@ -35,7 +34,28 @@ const JamForm = () => {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
   const formData = useSelector((state: any) => state.form[resource]);
-  const jamCategories = StaticData.jamCategories;
+  const jamCategories: any = [
+    {
+      id: 'call',
+      label: i18n.t('Call'),
+      icon: 'megaphone',
+    },
+    {
+      id: 'looking',
+      label: i18n.t('Looking'),
+      icon: 'link',
+    },
+    {
+      id: 'event',
+      label: i18n.t('Event'),
+      icon: 'users',
+    },
+    {
+      id: 'random',
+      label: i18n.t('Random'),
+      icon: 'infinite',
+    },
+  ];
 
   const submitForm = async () => {
     setIsProcessing(true);
