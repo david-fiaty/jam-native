@@ -9,6 +9,7 @@ import SpinnerView from "./SpinnerView";
 import i18n from "@/translation/i18n";
 import BoxView from "./BoxView";
 import UserManager from "@/manager/UserManager";
+import ButtonView from "./ButtonView";
 
 type Props = {
   resource: string,
@@ -122,6 +123,13 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
           </MapView>
         </View>
       </TouchableWithoutFeedback>
+  
+      <ButtonView
+        label={i18n.t('Submit')}
+        //onPress={() => submitComment()}
+        containerStyle={styles.confirmButton}  
+      />
+    
     </BoxView>
   );
 };
@@ -130,6 +138,10 @@ const styles = StyleSheet.create({
   container: {
     padding: 0,
     paddingTop: Layout.space.base*1.5,
+    position: 'relative',
+  },
+  confirmButton: {
+    position: 'absolute',
   },
   mapContainer: {
     width: '100%',
