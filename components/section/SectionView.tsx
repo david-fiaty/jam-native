@@ -31,6 +31,7 @@ import NotificationItemSection from "./NotificationItemSection";
 const SectionView = () => { 
   const path = usePathname();
   const dispatch = useDispatch();
+  const [currentSection, setCurrentSection] = useState<any>(null);
   const sectionState: any = useSelector((state: any) => state.section);
   const modalState: any = useSelector((state: any) => state.modal);
   const sectionId: any = path.split('/').pop();
@@ -50,8 +51,6 @@ const SectionView = () => {
   };
 
   const showBackButton = () => {
-    let currentSection: any = getCurrentSection();
-
     return currentSection?.showTitle === true 
       && currentSection?.showBackButton === true 
       && (!modalState.active.length || !isModalTitleVisible());
@@ -209,6 +208,8 @@ const SectionView = () => {
   };
 
   useEffect(() => {
+    setCurrentSection(getCurrentSection());
+
     if (!sectionState.config.length) {
       dispatch(setSectionConfig(getSections(false)));
     }
@@ -222,7 +223,7 @@ const SectionView = () => {
   return (
     <>
       <MessageView />
-      {getCurrentSection()?.showHeader === true && <SectionHeader style={styles.header} />}
+      {currentSection?.showHeader === true && <SectionHeader style={styles.header} />}
       {showBackButton() === true && <SectionBackButton />}
 
       <BoxView
@@ -231,12 +232,12 @@ const SectionView = () => {
         justify="center"
         style={styles.container}
       >
-        {getCurrentSection()?.render(getCurrentSection()?.params || {})}
+        {currentSection?.render(currentSection?.params || {})}
   
-        <ModalView currentSection={getCurrentSection()} style={styles.modal} />
+        <ModalView currentSection={currentSection} style={styles.modal} />
       </BoxView>
       
-      {getCurrentSection()?.showFooter === true && <SectionFooter style={styles.footer} />}
+      {currentSection?.showFooter === true && <SectionFooter style={styles.footer} />}
     </>
   );
 };
