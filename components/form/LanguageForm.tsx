@@ -1,17 +1,19 @@
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentLanguage } from "@/redux/slices/UserSlice";
 import { Layout } from '@/constants/Layout';
 import { Config } from "@/constants/Config";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import SelectListBase from '../base/SelectListBase';
-import UserManager from '@/manager/UserManager';
 import ScreenManager from "@/manager/ScreenManager";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import i18next from 'i18next';
 
 const LanguageForm = () => {
-  const [currentlLanguage, setCurrentLanguage] = useState<string>('');
+  const dispatch = useDispatch();
   const [languageChanged, setLanguageChanged] = useState(0);
+  const userState: any = useSelector((state: any) => state.user);
 
   const getLanguages = () => {
     return [
@@ -26,27 +28,20 @@ const LanguageForm = () => {
     ];
   };
 
-  const changeLanguage = async (languageCode: string) => {
-    setCurrentLanguage(languageCode);
-    await setLanguage(languageCode);
-  };
-
-  const setLanguage = async (languageCode: string) => {
+  const setLanguage = async (code: string) => {
     if (ScreenManager.isWeb()) {
-      localStorage.setItem(Config.storageKeys.currentLanguage, languageCode);
+      localStorage.setItem(Config.storageKeys.currentLanguage, code);
     }
     else {
-      await AsyncStorage.setItem(Config.storageKeys.currentLanguage, languageCode);
+      await AsyncStorage.setItem(Config.storageKeys.currentLanguage, code);
     }
 
-    i18next.changeLanguage(languageCode);
+    dispatch(setCurrentLanguage(code))
+
+    i18next.changeLanguage(code);
   };
 
   useEffect(() => {
-    (async () => {
-      setCurrentLanguage(await UserManager.getLanguage());
-    })();
-
     const onLanguageChanged = () => {
       setLanguageChanged(prev => prev + 1);
     };
@@ -61,10 +56,10 @@ const LanguageForm = () => {
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.formContainer}>
       <SelectListBase
-        value={currentlLanguage}
+        value={userState.currentLanguage}
         data={getLanguages()}
         placeholder={i18n.t('Select a language')}
-        onChangeValue={async (option: any) => await changeLanguage(option.value)}
+        onChangeValue={async (option: any) => await setLanguage(option.value)}
       />
     </BoxView>
   );
