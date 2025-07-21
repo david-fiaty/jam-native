@@ -220,21 +220,6 @@ class UserManager {
     return location;
   }
 
-  async getLanguage() {
-    try {
-      let language = ScreenManager.isWeb()
-        ? localStorage.getItem(Config.storageKeys.currentLanguage)
-        : await AsyncStorage.getItem(Config.storageKeys.currentLanguage);
-
-      return language || Config.fallbackLanguage;
-    }
-    catch (error) {
-      console.log(error);
-
-      return Config.fallbackLanguage;
-    }
-  };
-
   async likeJam(entityId: any) {
     let profileData: any = await this.getProfileData();
     let success: boolean = false;
