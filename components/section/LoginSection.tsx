@@ -40,11 +40,10 @@ const LoginSection = () => {
   ];
 
   useEffect(() => {
-    setCurrentTab((tabsData.find((o: any) => o?.default === true))?.id);
-    
     (async () => {
       if (!isLoaded) {
         //FormManager.resetForm(resource); // Todo - Fix form reset on web
+        setCurrentTab((tabsData.find((o: any) => o?.default === true))?.id);
         setIsLoaded(true);
       }
     })();
