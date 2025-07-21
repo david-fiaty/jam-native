@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import BoxView from '../view/BoxView';
 import SelectListBase from '../base/SelectListBase';
 import StaticData from '@/constants/StaticData';
+import i18n from '@/translation/i18n';
 
 type Props = {
   value?: any,
@@ -9,7 +10,16 @@ type Props = {
 };
 
 const PrivacyStatusField = ({value, onChangeValue}: Props) => {
-  const profileTypes = StaticData.privacyStatus;
+  const privacyStatuses: any[] = [
+    {
+      id: 'private',
+      label: i18n.t('Private'),
+    },
+    {
+      id: 'public',
+      label: i18n.t('Public'),
+    },
+  ];
 
   const buildOptions = (optionsData: any) => {    
     return [...(optionsData || [])].map((item: any) => {
@@ -24,7 +34,7 @@ const PrivacyStatusField = ({value, onChangeValue}: Props) => {
     <BoxView direction="column" align="center" style={styles.container}>
       <SelectListBase 
         value={value}
-        data={buildOptions(profileTypes)} 
+        data={buildOptions(privacyStatuses)} 
         onChangeValue={onChangeValue}
       />
     </BoxView>

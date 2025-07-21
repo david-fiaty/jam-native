@@ -27,6 +27,7 @@ import AddProjectForm from "@/components/form/AddProjectForm";
 import LanguageForm from "../form/LanguageForm";
 import ResetPasswordForm from "../form/ResetPasswordForm";
 import NotificationItemSection from "./NotificationItemSection";
+import UserManager from "@/manager/UserManager";
 
 const SectionView = () => { 
   const path = usePathname();
@@ -217,7 +218,6 @@ const SectionView = () => {
     if (!sectionState.active?.length) {
       dispatch(setActiveSections([getDefaultSection(false)]));
     }
-
   }, [sectionId, sectionState]);
 
   return (
