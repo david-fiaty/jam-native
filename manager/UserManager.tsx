@@ -83,10 +83,7 @@ class UserManager {
   }
 
   async isLoggedIn() {
-    // Todo - Implement token check
-
-
-
+    return Object.keys(SessionManager.getTokenData()).length > 0;
   }
 
   logout() {
