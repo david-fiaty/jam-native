@@ -126,7 +126,7 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
   
       <ButtonView
         label={i18n.t('Submit')}
-        //onPress={() => submitComment()}
+        //onPress={() => submitComment()} // Todo - Applay confirm event
         containerStyle={styles.confirmButton}  
       />
     </BoxView>
