@@ -83,7 +83,10 @@ class UserManager {
   }
 
   async isLoggedIn() {
-    return await SessionManager.isTokenValid();
+    // Todo - Implement token check
+
+
+
   }
 
   logout() {
