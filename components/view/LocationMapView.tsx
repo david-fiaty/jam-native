@@ -129,7 +129,6 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
         //onPress={() => submitComment()}
         containerStyle={styles.confirmButton}  
       />
-    
     </BoxView>
   );
 };
@@ -141,6 +140,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   confirmButton: {
+    bottom: 0,
     position: 'absolute',
   },
   mapContainer: {
