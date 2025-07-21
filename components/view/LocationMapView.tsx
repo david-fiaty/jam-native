@@ -10,6 +10,7 @@ import i18n from "@/translation/i18n";
 import BoxView from "./BoxView";
 import UserManager from "@/manager/UserManager";
 import ButtonView from "./ButtonView";
+import ModalManager from "@/manager/ModalManager";
 
 type Props = {
   resource: string,
@@ -126,7 +127,7 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
   
       <ButtonView
         label={i18n.t('Submit')}
-        //onPress={() => submitComment()} // Todo - Applay confirm event
+        onPress={() => ModalManager.toggleModal('LocationMapView')} 
         containerStyle={styles.confirmButton}  
       />
     </BoxView>
@@ -140,7 +141,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   confirmButton: {
-    bottom: 0,
+    bottom: '9%',
     position: 'absolute',
   },
   mapContainer: {
