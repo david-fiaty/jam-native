@@ -33,17 +33,6 @@ const StaticData = {
       label: i18n.t('Online/Physical'),
     },
   ],
-  phoneServices: [
-    {
-      id: 'sms',
-      label: i18n.t('SMS'),
-      default: true,
-    },
-    {
-      id: 'whatsapp',
-      label: i18n.t('Whatsapp'),
-    },
-  ],
   countryPhoneCodes: [
     {
       "name": i18n.t("Afghanistan"),
