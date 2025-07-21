@@ -10,8 +10,6 @@ type Props = {
 };
 
 const LocationTypeField = ({value, onChangeValue}: Props) => {
-  const locationTypes = StaticData.locationTypes;
-
   const buildOptions = (optionsData: any) => {    
     return [...(optionsData || [])].map((item: any) => {
       return {
