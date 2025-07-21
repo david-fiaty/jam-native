@@ -210,10 +210,8 @@ const SectionView = () => {
   useEffect(() => {
     setCurrentSection(getCurrentSection());
 
-    let sectionsData = getSections(false);
-
     if (!sectionState.config.length) {
-      dispatch(setSectionConfig(sectionsData));
+      dispatch(setSectionConfig(getSections(false)));
     }
 
     if (!sectionState.active?.length) {
