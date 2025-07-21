@@ -3,7 +3,6 @@ import { Divider } from '@rneui/base';
 import LoginSignupButton from '../button/LoginSignupButton';
 import LogoView from '../view/LogoView';
 import TextSlideshow from '../slideshow/TextSlideshow';
-import StaticData from '@/constants/StaticData';
 import BottomLinks from './navigation/BottomLinks';
 import BoxView from '../view/BoxView';
 import i18n from '@/translation/i18n';
