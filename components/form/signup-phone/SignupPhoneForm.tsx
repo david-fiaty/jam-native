@@ -95,8 +95,6 @@ const SignupPhoneForm = () => {
         placeholder={i18n.t('Enter your phone number')}
         keyboardType="number-pad"
         onChangeText={(value: string) => FormManager.updateField(resource, 'phone', value, ['number'])}
-        rightIcon={<IconView name="phone" theme="transparent" />}
-        //disabled={isEmailFieldDisabled()}
       />
       {FormManager.renderError('phone')}
 
