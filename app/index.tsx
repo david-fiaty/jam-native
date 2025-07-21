@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import { useRouter, useRootNavigationState } from 'expo-router';
-import SessionManager from '@/manager/SessionManager';
 import UserManager from '@/manager/UserManager';
 import i18next from 'i18next';
 
