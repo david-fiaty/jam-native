@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentLanguage } from "@/redux/slices/UserSlice";
 import { Layout } from '@/constants/Layout';
 import { Config } from "@/constants/Config";
 import i18n from "@/translation/i18n";
@@ -10,8 +12,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import i18next from 'i18next';
 
 const LanguageForm = () => {
-  const [currentlLanguage, setCurrentLanguage] = useState<string>('');
+  const dispatch = useDispatch();
   const [languageChanged, setLanguageChanged] = useState(0);
+  const userState: any = useSelector((state: any) => state.user);
 
   const getLanguages = () => {
     return [
@@ -39,14 +42,12 @@ const LanguageForm = () => {
       await AsyncStorage.setItem(Config.storageKeys.currentLanguage, languageCode);
     }
 
+    dispatch(setCurrentLanguage(languageCode))
+
     i18next.changeLanguage(languageCode);
   };
 
   useEffect(() => {
-    (async () => {
-      setCurrentLanguage(await UserManager.getLanguage());
-    })();
-
     const onLanguageChanged = () => {
       setLanguageChanged(prev => prev + 1);
     };
