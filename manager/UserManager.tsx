@@ -35,7 +35,7 @@ class UserManager {
     let success = response?.tokens?.access_token?.length > 0;
 
     if (success) {
-      await SessionManager.setTokenData(response.tokens);
+      SessionManager.setTokenData(response.tokens);
     }
 
     return {
@@ -50,7 +50,7 @@ class UserManager {
     let message: string = '';
 
     if (success) {
-      await SessionManager.setTokenData(response.tokens);
+      SessionManager.setTokenData(response.tokens);
     }
     else if (response?.non_field_errors?.length > 0) {
       message = response.non_field_errors[0];
