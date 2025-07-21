@@ -47,10 +47,12 @@ const AddProjectForm = () => {
       content: i18n.t('The project was successfully created.'),
     };
 
-    if (result?.error) message.content = i18n.t(result.error)
-    else updateField(null, null)
+    if (result.success === false) {
+      message.content = i18n.t('Invalid data submission');
+    }
 
     ScreenManager.showMessage(message);
+
     setIsProcessing(false);
   };
 
@@ -84,21 +86,21 @@ const AddProjectForm = () => {
       style={[Layout.formContainer, styles.container]}
     >
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
-        <TextView>{i18n.t("Name")}</TextView>
+        <TextView>{i18n.t("Name")}*</TextView>
         <InputTextField
           value={formData?.name}
           onChangeText={(value: string) => FormManager.updateField(resource, 'name', value, ['string'])}
         />
         {FormManager.renderError('name')}
 
-        <TextView>{i18n.t("Description")}</TextView>
+        <TextView>{i18n.t("Description")}*</TextView>
         <InputTextareaField
           value={formData?.description}
           onChangeText={(value: string) => FormManager.updateField(resource, 'description', value, ['string'])}
         />
         {FormManager.renderError('description')}
 
-        <TextView>{i18n.t("Privacy status")}</TextView>
+        <TextView>{i18n.t("Privacy status")}*</TextView>
         <PrivacyStatusField
           value={formData?.privacy_status}
           onChangeValue={(option: any) => FormManager.updateField(resource, 'privay_status', option.value, ['string'])}

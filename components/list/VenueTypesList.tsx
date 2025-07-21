@@ -77,14 +77,12 @@ const VenueTypesList = ({ resource, field, parent }: Props) => {
     (async () => {
       if (!isLoaded) {
         if (!venueTypes) setVenueTypes(await EntityManager.getVenueTypes());
-        if (formData?.[field]?.length && !selectedVenues.length) {
-          setSelectedVenues(formData[field]);
-        }
-
+        
+        setSelectedVenues(formData?.[parent]?.[field] || []);
         setIsLoaded(true);
       }
     })();
-  }, [venueTypes, formData, field, selectedVenues]);
+  }, [venueTypes, formData, field, parent, selectedVenues]);
 
   if (!isLoaded) return <SpinnerView />;
 

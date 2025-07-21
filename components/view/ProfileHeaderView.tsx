@@ -5,10 +5,10 @@ import TextView from './TextView';
 import MediaManager from '@/manager/MediaManager';
 import ImageView from './ImageView';
 import BoxView from "./BoxView";
-import StaticData from '@/constants/StaticData';
 import TagView from "./TagView";
 import EntityManager from "@/manager/EntityManager";
 import IconView from "./IconView";
+import UserManager from "@/manager/UserManager";
 
 const profileImageSize: number = 100;
 
@@ -70,9 +70,9 @@ const ProfileHeaderView = ({ profileItem }: Props) => {
       </BoxView>
 
       <View style={styles.profileHeaderRight}>
-        <TextView style={styles.profileTitle}>{profileItem?.profile_name}</TextView>
+        <TextView style={styles.profileTitle}>{UserManager.getProfileDisplayName(profileItem)}</TextView>
         <TextView style={styles.profileType}>
-          {(StaticData.profileTypes.find((o: any) => o.id === profileItem?.profile_type))?.label}
+          {UserManager.getProfileTypeLabel(profileItem?.profile_type)}
         </TextView>
         {renderProfileSectors(profileItem?.sectors)[0]}
       </View>

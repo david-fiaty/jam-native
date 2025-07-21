@@ -80,7 +80,7 @@ const SignupPhoneForm = () => {
       <TextView style={styles.label}>{i18n.t('Phone number')}</TextView>
       <InputTextField
         value={formData?.phone || ''}
-        placeholder={i18n.t('Enter your phone nnumber')}
+        placeholder={i18n.t('Enter your phone number')}
         keyboardType="number-pad"
         onChangeText={(value: string) => FormManager.updateField(resource, 'phone', value, ['number'])}
         rightIcon={<IconView name="phone" theme="transparent" />}

@@ -210,7 +210,15 @@ class EntityManager {
   }
 
   async addProject(entityData: any) {
-    return await DataManager.post('addProject', entityData);
+    let response: any =  await DataManager.post('addProject', entityData);
+    let success: boolean = false;
+
+    if (response?.id > 0) success = true;
+  
+    return {
+      success: success,
+      response: response,
+    };
   }
 
   async likeProject(entityId: any) {

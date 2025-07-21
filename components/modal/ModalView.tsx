@@ -110,7 +110,7 @@ const ModalView = ({ currentSection, style }: Props) => {
     return [
       {
         id: 'JamForm',
-        title: i18n.t('Create a jam'),
+        title: i18n.t('Create a Jam'),
         render: (params: any) => <JamForm {...params} />,
       },
       {

@@ -109,7 +109,14 @@ https://withfra.me/react-native-tutorials/how-to-use-svg-in-react-native
 # Grid layout
 https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-7948f1a6f949
 
-# Finish 
+
+# TODO 
+- Account profile view: fix add jam profile modal height
+- Account profile form: fix about textarea height
+- Check globally form submission backend field errors display
+- Fix space issue/validation on registration email address suggestion selection
+
+# Finish OLD
 - Social login
 - Venue type field => handle hierarchy in registration and profile forms
 - Check jams google maps markers
