@@ -29,11 +29,6 @@ const LanguageForm = () => {
     ];
   };
 
-  const changeLanguage = async (languageCode: string) => {
-    setCurrentLanguage(languageCode);
-    await setLanguage(languageCode);
-  };
-
   const setLanguage = async (languageCode: string) => {
     if (ScreenManager.isWeb()) {
       localStorage.setItem(Config.storageKeys.currentLanguage, languageCode);
@@ -62,10 +57,10 @@ const LanguageForm = () => {
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.formContainer}>
       <SelectListBase
-        value={currentlLanguage}
+        value={userState.currentLanguage}
         data={getLanguages()}
         placeholder={i18n.t('Select a language')}
-        onChangeValue={async (option: any) => await changeLanguage(option.value)}
+        onChangeValue={async (option: any) => await setLanguage(option.value)}
       />
     </BoxView>
   );
