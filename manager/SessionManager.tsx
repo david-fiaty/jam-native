@@ -4,17 +4,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Store from "@/redux/Store";
 
 class SessionManager {
-  async setTokenData(data: any) {
+  setTokenData(data: any) {
     Store.dispatch(setTokenData(data));
   }
 
-  async getTokenData() {
-    try {
-      let json: any = await AsyncStorage.getItem(Config.storageKeys.tokenData);
-      return (json) ? JSON.parse(json) : {};
-    } catch (error) {
-      console.log(error);
-    }
+  getTokenData() {
+    let userState: any = Store.getState().user;
+    let tokenData: any = userState.tokenData;
+
+    return tokenData;
   }
 }
 
