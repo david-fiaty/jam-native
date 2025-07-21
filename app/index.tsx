@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useRouter, useRootNavigationState } from 'expo-router';
+import { useDispatch } from "react-redux";
+import { setCurrentLanguage } from '@/redux/slices/UserSlice';
 import { Config } from '@/constants/Config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import UserManager from '@/manager/UserManager';
@@ -7,23 +9,18 @@ import i18next from 'i18next';
 import ScreenManager from '@/manager/ScreenManager';
 
 export default () => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const rootNavigationState = useRootNavigationState();
   const hasRedirected = useRef<boolean>(false);
 
-  const getLanguage = async () => {
-    try {
-      let language = ScreenManager.isWeb()
-        ? localStorage.getItem(Config.storageKeys.currentLanguage)
-        : await AsyncStorage.getItem(Config.storageKeys.currentLanguage);
+  const setLanguage = async () => {
+    let code: any = ScreenManager.isWeb()
+      ? localStorage.getItem(Config.storageKeys.currentLanguage)
+      : await AsyncStorage.getItem(Config.storageKeys.currentLanguage);
 
-      return language || Config.fallbackLanguage;
-    }
-    catch (error) {
-      console.log(error);
-
-      return Config.fallbackLanguage;
-    }
+    dispatch(setCurrentLanguage(code || Config.fallbackLanguage));
+    i18next.changeLanguage(code);
   };
 
   useEffect(() => {
@@ -32,9 +29,9 @@ export default () => {
       router.push('/welcome');
     }
 
-    getLanguage().then((code: string) => {
-      i18next.changeLanguage(code);
-    })
+    (async () => {
+      await setLanguage();
+    })();
   }, [rootNavigationState]);
 
   return null;
