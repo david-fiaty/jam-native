@@ -3,6 +3,7 @@ import { TouchableOpacity, View, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from '@/redux/slices/FormSlice';
 import { Layout } from '@/constants/Layout';
+import { MultiSelect } from 'react-native-element-dropdown';
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from './InputTextField';
@@ -98,16 +99,18 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
   return (
 
     <BoxView direction="column" align="left" style={styles.container}>
-      <SelectListBase
+      <MultiSelect
+        value={[]}
         //value={value}
+        labelField="label"
+        valueField="value"
         data={sectorsData.map((o: any) => {
           return {
             value: o?.id,
             label: o?.name,
           }
         })}
-      //onChangeValue={onChangeValue}
-      //disabled={disabled}
+        onChange={(o: any) => console.log(o)}
       />
     </BoxView>
   );
