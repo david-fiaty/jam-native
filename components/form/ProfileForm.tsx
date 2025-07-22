@@ -39,6 +39,8 @@ const ProfileForm = () => {
         title: i18n.t('Profile update'),
         content: i18n.t('There was an error with the submission. Please check your data and try again.'),
       });
+
+      setIsProcessing(false);
     }
     else {
       ScreenManager.showMessage({

@@ -34,6 +34,8 @@ const LoginEmailForm = () => {
         title: i18n.t('Profile login'),
         content: i18n.t('Invalid user name or password.'),
       });
+
+      setIsProcessing(false);
     }
     else {
       SectionManager.push(router, Config.mainSection);
