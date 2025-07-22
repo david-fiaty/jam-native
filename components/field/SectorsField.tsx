@@ -120,7 +120,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
             );
           })}
 
-          <IconView name="plus" theme="transparent" onPress={onPress} />
+          <IconView name="down" theme="transparent" onPress={onPress} />
         </View>
       )}
     </>
