@@ -25,7 +25,7 @@ export const Config: any = {
     profileData: 'profileData',
   },
   forceLogin: {
-    enabled: false,
+    enabled: true,
     credentials: {
       email: 'mitsiomotu@yopmail.com',
       password: 'Password1234',
