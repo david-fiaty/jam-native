@@ -9,6 +9,9 @@ import InputTextField from './InputTextField';
 import IconView from '../view/IconView';
 import TextView from '../view/TextView';
 import ListView from '../view/ListView';
+import BoxView from '../view/BoxView';
+import SelectListBase from '../base/SelectListBase';
+import i18n from '@/translation/i18n';
 
 type Props = {
   resource: string;
@@ -93,6 +96,23 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
   }, [isLoaded, value, formData, field]);
 
   return (
+
+    <BoxView direction="column" align="left" style={styles.container}>
+      <SelectListBase
+        //value={value}
+        data={sectorsData.map((o: any) => {
+          return {
+            value: o?.id,
+            label: o?.name,
+          }
+        })}
+      //onChangeValue={onChangeValue}
+      //disabled={disabled}
+      />
+    </BoxView>
+  );
+
+  return (
     <View style={styles.container}>
       <View style={styles.fieldContainer}>
         <IconView name="down" theme="transparent" onPress={onPress} iconStyle={styles.toggle} />
@@ -103,7 +123,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
           <ListView
             data={sectorsData}
             renderItem={(row: any) => (
-              <TextView key={row?.item?.id}>{row?.item?.name}</TextView>
+              <TextView key={row?.item?.name}>{row?.item?.name}</TextView>
             )}
           />
         </View>
