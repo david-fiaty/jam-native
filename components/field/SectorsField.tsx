@@ -7,6 +7,7 @@ import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from './InputTextField';
 import IconView from '../view/IconView';
+import TextView from '../view/TextView';
 
 type Props = {
   resource: string;
@@ -21,8 +22,9 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const [currentValue, setCurrentValue] = useState<any>([]);
+  const [isOptionsListVisible, setIsOptionsListVisible] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
-  
+
   const getSelectedSectors = (sectorsIds?: any) => {
     let selectedIds: any[] = sectorsIds?.length ? sectorsIds : [];
     let result: any[] = [];
@@ -66,15 +68,15 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
         if (!hasSelectedSubitems) {
           selectedIds = selectedIds.filter((n: number) => n !== id);
         }
-      }    
+      }
     }
 
     setCurrentValue(getSelectedSectors(selectedIds));
 
-    dispatch(setFormData<any>({ 
+    dispatch(setFormData<any>({
       resource: resource,
-      key: field, 
-      value: selectedIds, 
+      key: field,
+      value: selectedIds,
     }));
   }
 
@@ -88,6 +90,17 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
 
     setCurrentValue(getSelectedSectors(value));
   }, [isLoaded, value, formData, field]);
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.fieldContainer}>
+        <IconView name="down" theme="transparent" onPress={onPress} iconStyle={styles.toggle} />
+      </View>
+      <View style={styles.optionsListContainer}>
+        <TextView>xxxx</TextView>
+      </View>
+    </View>
+  )
 
   return (
     <>
@@ -106,21 +119,21 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
       )}
 
       {currentValue?.length > 0 && (
-        <View style={Layout.fieldSelectionPreview}>
+        <View style={[Layout.fieldSelectionPreview, styles.preview]}>
           {currentValue.map((item: any) => {
             return (
               <TagView
                 theme="white"
                 key={item.id}
                 canEdit={true}
-                onDeleteButtonPress={() => deleteItem(item)}  
+                onDeleteButtonPress={() => deleteItem(item)}
               >
                 {item?.name}
               </TagView>
             );
           })}
 
-          <IconView name="down" theme="transparent" onPress={onPress} />
+          <IconView name="down" theme="transparent" onPress={onPress} iconStyle={styles.toggle} />
         </View>
       )}
     </>
@@ -131,7 +144,27 @@ export default SectorsField;
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    height: '100%',
+    position: 'relative',
+  },
+  fieldContainer: {
+    gap: Layout.space.base,
+    padding: Layout.space.base,
+    backgroundColor: Layout.colors.secondary,
+    borderWidth: Layout.borderWidth.base,
+    borderColor: Layout.colors.secondary,
+    borderRadius: Layout.radius.round,
+    alignItems: 'space-between',
+    flexWrap: 'wrap',
+  },
+  optionsListContainer: {
+    position: 'relative',
+  },
+  preview: {
+    //flexShrink: 1,
+    //backgroundColor: 'red',
+  },
+  toggle: {
+    position: 'absolute',
+    right: 0,
   },
 });
