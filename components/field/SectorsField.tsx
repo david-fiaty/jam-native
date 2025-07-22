@@ -8,6 +8,7 @@ import EntityManager from '@/manager/EntityManager';
 import InputTextField from './InputTextField';
 import IconView from '../view/IconView';
 import TextView from '../view/TextView';
+import ListView from '../view/ListView';
 
 type Props = {
   resource: string;
@@ -96,9 +97,17 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
       <View style={styles.fieldContainer}>
         <IconView name="down" theme="transparent" onPress={onPress} iconStyle={styles.toggle} />
       </View>
-      <View style={styles.optionsListContainer}>
-        <TextView>xxxx</TextView>
-      </View>
+
+      {sectorsData?.length > 0 && (
+        <View style={styles.optionsListContainer}>
+          <ListView
+            data={sectorsData}
+            renderItem={(row: any) => (
+              <TextView key={row?.item?.id}>{row?.item?.name}</TextView>
+            )}
+          />
+        </View>
+      )}
     </View>
   )
 
