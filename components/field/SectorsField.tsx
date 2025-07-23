@@ -41,7 +41,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
         labelField="label"
         valueField="value"
         inside={selectedSectors.length > 0}
-        style={!selectedSectors.length ? styles.element : {}}
+        style={!selectedSectors.length ? styles.element : styles.preview}
         iconStyle={selectedSectors.length > 0 ? styles.iconRight : {}}
         placeholderStyle={styles.placeholderStyle}
         iconColor={Layout.colors.primary}
@@ -65,7 +65,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
           return (
             <TagView
               key={o?.value}
-              theme="secondary"
+              theme="white"
               canEdit={true}
               containerStyle={styles.tagItem}
               onDeleteButtonPress={() => unSelect && unSelect(o)}
@@ -86,6 +86,13 @@ const styles = StyleSheet.create({
     ...Layout.formField,
     ...{ padding: Layout.space.base },
   },
+  preview: {
+    backgroundColor: Layout.colors.secondary,
+    borderWidth: Layout.borderWidth.base, 
+    borderColor: Layout.colors.secondary, 
+    borderRadius: Layout.radius.round,
+    padding: Layout.space.base,
+  },
   listItem: {
     paddingHorizontal: Layout.space.base,
     paddingVertical: Layout.space.base * 1.35,
@@ -102,6 +109,6 @@ const styles = StyleSheet.create({
   iconRight: {
     position: 'absolute',
     top: 0,
-    right: Layout.space.base,
+    right: 0,
   },
 });
