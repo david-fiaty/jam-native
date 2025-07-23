@@ -81,19 +81,6 @@ const styles = StyleSheet.create({
     ...Layout.formField,
     ...{ padding: Layout.space.base },
   },
-  fieldContainer: {
-    gap: Layout.space.base,
-    padding: Layout.space.base,
-    backgroundColor: Layout.colors.secondary,
-    borderWidth: Layout.borderWidth.base,
-    borderColor: Layout.colors.secondary,
-    borderRadius: Layout.radius.round,
-    alignItems: 'space-between',
-    flexWrap: 'wrap',
-  },
-  optionsListContainer: {
-    position: 'relative',
-  },
   listItem: {
     paddingHorizontal: Layout.space.base,
     paddingVertical: Layout.space.base*1.2,
@@ -102,12 +89,4 @@ const styles = StyleSheet.create({
     color: Layout.colors.primary,
     fontSize: Layout.fontSize.base,
   },
-  itemTextStyle: {
-    padding: Layout.space.base,
-  },
-  selectedTextStyle: {
-    color: Layout.colors.primary,
-    fontSize: Layout.fontSize.base,
-  },
-  iconStyle: {},
 });
