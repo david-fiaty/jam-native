@@ -120,6 +120,18 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
             label: o?.name,
           }
         })}
+        renderSelectedItem={(o, unSelect) => {
+          return (
+            <TagView
+              key={o?.value}
+              //theme="white"
+              canEdit={true}
+              onDeleteButtonPress={() => unSelect && unSelect(o)}
+            >
+              {o?.label}
+            </TagView>
+          );
+        }}
       />
     </BoxView>
   );
@@ -188,7 +200,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   element: {
-    ...Layout.formField, 
+    ...Layout.formField,
     ...{ padding: Layout.space.base },
   },
   fieldContainer: {
