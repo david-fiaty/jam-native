@@ -55,7 +55,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
             <BoxView direction="row" align="center" justify="space-between" style={styles.listItem}>
               <TextView>{o?.label}</TextView>
 
-              { selectedSectors.includes(o?.value) && <IconView name="checkmark" theme="clear" size={15} />}
+              { selectedSectors.includes(o?.value) && <IconView name="checkmark" theme="clear" size={13} padding={0} />}
             </BoxView>
           );
         }}
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   },
   listItem: {
     paddingHorizontal: Layout.space.base,
-    paddingVertical: Layout.space.base * 1.2,
+    paddingVertical: Layout.space.base * 1.35,
   },
   placeholderStyle: {
     color: Layout.colors.primary,
