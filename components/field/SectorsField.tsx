@@ -104,16 +104,22 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
     <BoxView direction="column" align="left" style={styles.container}>
       <MultiSelect
         value={selectedSectors}
-        //value={value}
         labelField="label"
         valueField="value"
+        style={styles.element}
+        placeholderStyle={styles.placeholderStyle}
+        //selectedTextStyle={styles.selectedTextStyle}
+        //iconStyle={styles.iconStyle}
+        //itemTextStyle={styles.itemTextStyle}
+        //containerStyle={containerStyle}
+        iconColor={Layout.colors.primary}
+        onChange={(o: any) => setSeletedSectors(o)}
         data={sectorsData.map((o: any) => {
           return {
             value: o?.id,
             label: o?.name,
           }
         })}
-        onChange={(o: any) => setSeletedSectors(o)}
       />
     </BoxView>
   );
@@ -181,6 +187,10 @@ const styles = StyleSheet.create({
   container: {
     position: 'relative',
   },
+  element: {
+    ...Layout.formField, 
+    ...{ padding: Layout.space.base },
+  },
   fieldContainer: {
     gap: Layout.space.base,
     padding: Layout.space.base,
@@ -202,4 +212,16 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
   },
+  placeholderStyle: {
+    color: Layout.colors.primary,
+    fontSize: Layout.fontSize.base,
+  },
+  itemTextStyle: {
+    padding: Layout.space.base,
+  },
+  selectedTextStyle: {
+    color: Layout.colors.primary,
+    fontSize: Layout.fontSize.base,
+  },
+  iconStyle: {},
 });
