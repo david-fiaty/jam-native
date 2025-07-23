@@ -25,7 +25,8 @@ type Props = {
 const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [sectorsData, setSectorsData] = useState<any>([]);
+  const [sectorsData, setSectorsData] = useState<any[]>([]);
+  const [selectedSectors, setSeletedSectors] = useState<any[]>([]);
   const [currentValue, setCurrentValue] = useState<any>([]);
   const [isOptionsListVisible, setIsOptionsListVisible] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
@@ -96,11 +97,13 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
     setCurrentValue(getSelectedSectors(value));
   }, [isLoaded, value, formData, field]);
 
+  console.log(selectedSectors)
+
   return (
 
     <BoxView direction="column" align="left" style={styles.container}>
       <MultiSelect
-        value={[]}
+        value={selectedSectors}
         //value={value}
         labelField="label"
         valueField="value"
@@ -110,7 +113,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
             label: o?.name,
           }
         })}
-        onChange={(o: any) => console.log(o)}
+        onChange={(o: any) => setSeletedSectors(o)}
       />
     </BoxView>
   );
