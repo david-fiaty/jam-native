@@ -26,6 +26,8 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateSelection = (itemId: any) => {
+    let selectedIds: any[] = [...selectedSectors];
+    
     setSeletedSectors(itemId);
   };
 
