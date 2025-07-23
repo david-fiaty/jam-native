@@ -8,6 +8,7 @@ import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
 import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
+import IconView from '../view/IconView';
 
 type Props = {
   resource: string;
@@ -49,11 +50,14 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
             label: o?.name,
           }
         })}
-        renderItem={(o: any) => (
-          <BoxView direction="row">
-            <TextView style={styles.listItem}>{o?.label}</TextView>
-          </BoxView>
-        )}
+        renderItem={(o: any) => {
+          return (
+            <BoxView direction="row" align="center" justify="space-between">
+              <TextView style={styles.listItem}>{o?.label}</TextView>
+              <IconView name="checkmark" theme="clear" size={15} />
+            </BoxView>
+          );
+        }}
         renderSelectedItem={(o, unSelect) => {
           return (
             <TagView
@@ -83,7 +87,7 @@ const styles = StyleSheet.create({
   },
   listItem: {
     paddingHorizontal: Layout.space.base,
-    paddingVertical: Layout.space.base*1.2,
+    paddingVertical: Layout.space.base * 1.2,
   },
   placeholderStyle: {
     color: Layout.colors.primary,
