@@ -25,6 +25,10 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
   const [selectedSectors, setSeletedSectors] = useState<any[]>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
+  const updateSelection = (itemId: any) => {
+    setSeletedSectors(itemId);
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
@@ -45,7 +49,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
         iconStyle={selectedSectors.length > 0 ? styles.iconRight : {}}
         placeholderStyle={styles.placeholderStyle}
         iconColor={Layout.colors.primary}
-        onChange={(o: any) => setSeletedSectors(o)}
+        onChange={(o: any) => updateSelection(o)}
         data={sectorsData.map((o: any) => {
           return {
             value: o?.id,
@@ -87,6 +91,7 @@ const styles = StyleSheet.create({
     ...{ padding: Layout.space.base },
   },
   preview: {
+    position: 'relative',
     backgroundColor: Layout.colors.secondary,
     borderWidth: Layout.borderWidth.base, 
     borderColor: Layout.colors.secondary, 
@@ -107,8 +112,6 @@ const styles = StyleSheet.create({
     marginBottom: Layout.space.base,
   },
   iconRight: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
+    alignSelf: 'flex-start',
   },
 });
