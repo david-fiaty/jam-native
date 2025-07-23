@@ -54,7 +54,8 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
           return (
             <BoxView direction="row" align="center" justify="space-between" style={styles.listItem}>
               <TextView>{o?.label}</TextView>
-              <IconView name="checkmark" theme="clear" size={15} />
+
+              { selectedSectors.includes(o?.value) && <IconView name="checkmark" theme="clear" size={15} />}
             </BoxView>
           );
         }}
