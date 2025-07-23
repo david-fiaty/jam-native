@@ -112,8 +112,6 @@ const styles = StyleSheet.create({
     marginBottom: Layout.space.base,
   },
   iconRight: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
+    alignSelf: 'flex-start',
   },
 });
