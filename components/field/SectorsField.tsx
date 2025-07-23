@@ -6,13 +6,7 @@ import { Layout } from '@/constants/Layout';
 import { MultiSelect } from 'react-native-element-dropdown';
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
-import InputTextField from './InputTextField';
-import IconView from '../view/IconView';
-import TextView from '../view/TextView';
-import ListView from '../view/ListView';
 import BoxView from '../view/BoxView';
-import SelectListBase from '../base/SelectListBase';
-import i18n from '@/translation/i18n';
 
 type Props = {
   resource: string;
@@ -27,8 +21,6 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any[]>([]);
   const [selectedSectors, setSeletedSectors] = useState<any[]>([]);
-  const [currentValue, setCurrentValue] = useState<any>([]);
-  const [isOptionsListVisible, setIsOptionsListVisible] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const getSelectedSectors = (sectorsIds?: any) => {
@@ -48,43 +40,6 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
     return result;
   };
 
-  const getSubitemIds = (itemId: number) => {
-    let idArray: any[] = [];
-    let item: any = sectorsData.find((o: any) => o.id == itemId);
-
-    for (const row of item?.sub_sectors || []) {
-      idArray.push(row.id);
-    }
-
-    return idArray;
-  };
-
-  const deleteItem = (item: any) => {
-    // Selected IDs
-    let selectedIds: any[] = [...(value?.length > 0 ? value : [])];
-
-    // Delete target item
-    selectedIds = selectedIds.filter((n: number) => n !== item.id);
-
-    // Delete childless parents
-    for (const id of selectedIds) {
-      let subitemIds: any[] = getSubitemIds(id);
-      if (subitemIds.length > 0) {
-        let hasSelectedSubitems: boolean = selectedIds.some(n => subitemIds.includes(n));
-        if (!hasSelectedSubitems) {
-          selectedIds = selectedIds.filter((n: number) => n !== id);
-        }
-      }
-    }
-
-    setCurrentValue(getSelectedSectors(selectedIds));
-
-    dispatch(setFormData<any>({
-      resource: resource,
-      key: field,
-      value: selectedIds,
-    }));
-  }
 
   useEffect(() => {
     (async () => {
@@ -93,14 +48,9 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
         setIsLoaded(true);
       }
     })();
-
-    setCurrentValue(getSelectedSectors(value));
   }, [isLoaded, value, formData, field]);
 
-  console.log(selectedSectors)
-
   return (
-
     <BoxView direction="column" align="left" style={styles.container}>
       <MultiSelect
         value={selectedSectors}
@@ -120,7 +70,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
           return (
             <TagView
               key={o?.value}
-              //theme="white"
+              theme="secondary"
               canEdit={true}
               onDeleteButtonPress={() => unSelect && unSelect(o)}
             >
