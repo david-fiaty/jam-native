@@ -52,8 +52,8 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
         })}
         renderItem={(o: any) => {
           return (
-            <BoxView direction="row" align="center" justify="space-between">
-              <TextView style={styles.listItem}>{o?.label}</TextView>
+            <BoxView direction="row" align="center" justify="space-between" style={styles.listItem}>
+              <TextView>{o?.label}</TextView>
               <IconView name="checkmark" theme="clear" size={15} />
             </BoxView>
           );
