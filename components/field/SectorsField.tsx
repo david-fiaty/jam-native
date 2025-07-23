@@ -25,8 +25,14 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
   const [selectedSectors, setSeletedSectors] = useState<any[]>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
-  const updateSelection = (itemId: any) => {
-    setSeletedSectors(itemId);
+  const updateSelection = (selectedIds: any[]) => {
+    setSeletedSectors(selectedIds);
+
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: field, 
+      value: selectedIds, 
+    }));
   };
 
   const deleteItem = (item: any, deleteCallback: any) => {
@@ -37,6 +43,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
     (async () => {
       if (!isLoaded) {
         setSectorsData(await EntityManager.getSectors());
+        setSeletedSectors(formData?.[field] || []);
         setIsLoaded(true);
       }
     })();
@@ -53,7 +60,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
         iconStyle={selectedSectors.length > 0 ? styles.iconRight : {}}
         placeholderStyle={styles.placeholderStyle}
         iconColor={Layout.colors.primary}
-        onChange={(o: any) => updateSelection(o)}
+        onChange={(selectedIds: any) => updateSelection(selectedIds)}
         data={sectorsData.map((o: any) => {
           return {
             value: o?.id,
@@ -64,8 +71,14 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
           return (
             <BoxView direction="row" align="center" justify="space-between" style={styles.listItem}>
               <TextView>{o?.label}</TextView>
-
-              { selectedSectors.includes(o?.value) && <IconView name="checkmark" theme="clear" size={13} padding={0} />}
+              { selectedSectors.includes(o?.value) && (
+                <IconView 
+                  name="checkmark" 
+                  theme="clear" 
+                  size={13} 
+                  padding={0} 
+                />
+              )}
             </BoxView>
           );
         }}
