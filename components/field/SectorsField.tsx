@@ -40,8 +40,8 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
         value={selectedSectors}
         labelField="label"
         valueField="value"
-        //inside={true}
-        style={styles.element}
+        inside={selectedSectors.length > 0}
+        style={!selectedSectors.length ? styles.element : {}}
         placeholderStyle={styles.placeholderStyle}
         iconColor={Layout.colors.primary}
         onChange={(o: any) => setSeletedSectors(o)}
@@ -104,7 +104,7 @@ export default SectorsField;
 
 const styles = StyleSheet.create({
   container: {
-    position: 'relative',
+    
   },
   element: {
     ...Layout.formField,
