@@ -26,10 +26,13 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateSelection = (selectedIds: any[]) => {
-
-    console.log('----', selectedIds)
-    
     setSeletedSectors(selectedIds);
+
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: field, 
+      value: selectedIds, 
+    }));
   };
 
   const deleteItem = (item: any, deleteCallback: any) => {
@@ -48,7 +51,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
   return (
     <BoxView direction="column" align="left">
       <MultiSelect
-        value={selectedSectors}
+        value={formData?.[field] || []}
         labelField="label"
         valueField="value"
         inside={selectedSectors.length > 0}
