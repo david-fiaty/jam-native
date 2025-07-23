@@ -7,6 +7,8 @@ import { MultiSelect } from 'react-native-element-dropdown';
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
 import BoxView from '../view/BoxView';
+import TextView from '../view/TextView';
+import IconView from '../view/IconView';
 
 type Props = {
   resource: string;
@@ -48,6 +50,15 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
             label: o?.name,
           }
         })}
+        renderItem={(o: any) => {
+          return (
+            <BoxView direction="row" align="center" justify="space-between" style={styles.listItem}>
+              <TextView>{o?.label}</TextView>
+
+              { selectedSectors.includes(o?.value) && <IconView name="checkmark" theme="clear" size={13} padding={0} />}
+            </BoxView>
+          );
+        }}
         renderSelectedItem={(o, unSelect) => {
           return (
             <TagView
@@ -75,37 +86,13 @@ const styles = StyleSheet.create({
     ...Layout.formField,
     ...{ padding: Layout.space.base },
   },
-  fieldContainer: {
-    gap: Layout.space.base,
-    padding: Layout.space.base,
-    backgroundColor: Layout.colors.secondary,
-    borderWidth: Layout.borderWidth.base,
-    borderColor: Layout.colors.secondary,
-    borderRadius: Layout.radius.round,
-    alignItems: 'space-between',
-    flexWrap: 'wrap',
-  },
-  optionsListContainer: {
-    position: 'relative',
-  },
-  preview: {
-    //flexShrink: 1,
-    //backgroundColor: 'red',
-  },
-  toggle: {
-    position: 'absolute',
-    right: 0,
+  listItem: {
+    paddingHorizontal: Layout.space.base,
+    paddingVertical: Layout.space.base * 1.35,
+    backgroundColor: Layout.colors.white,
   },
   placeholderStyle: {
     color: Layout.colors.primary,
     fontSize: Layout.fontSize.base,
   },
-  itemTextStyle: {
-    padding: Layout.space.base,
-  },
-  selectedTextStyle: {
-    color: Layout.colors.primary,
-    fontSize: Layout.fontSize.base,
-  },
-  iconStyle: {},
 });
