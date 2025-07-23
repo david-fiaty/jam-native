@@ -31,7 +31,6 @@ const ListView = ({
   onEndReached,
   keyExtractor,
   renderItem,
-  style,
 }: Props) => {
 
   const listRef = useRef<any>();
