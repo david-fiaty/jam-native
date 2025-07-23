@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
   listItem: {
     paddingHorizontal: Layout.space.base,
     paddingVertical: Layout.space.base * 1.35,
+    backgroundColor: Layout.colors.white,
   },
   placeholderStyle: {
     color: Layout.colors.primary,
