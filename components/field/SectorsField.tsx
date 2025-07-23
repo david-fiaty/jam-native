@@ -29,6 +29,10 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
     setSeletedSectors(itemId);
   };
 
+  const deleteItem = (item: any, deleteCallback: any) => {
+    deleteCallback(item);
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
@@ -72,7 +76,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
               theme="white"
               canEdit={true}
               containerStyle={styles.tagItem}
-              onDeleteButtonPress={() => unSelect && unSelect(o)}
+              onDeleteButtonPress={() => deleteItem(o, unSelect)}
             >
               {o?.label}
             </TagView>
