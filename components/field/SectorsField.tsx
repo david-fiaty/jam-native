@@ -66,6 +66,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
               key={o?.value}
               theme="secondary"
               canEdit={true}
+              containerStyle={styles.tagItem}
               onDeleteButtonPress={() => unSelect && unSelect(o)}
             >
               {o?.label}
@@ -118,5 +119,9 @@ const styles = StyleSheet.create({
   placeholderStyle: {
     color: Layout.colors.primary,
     fontSize: Layout.fontSize.base,
+  },
+  tagItem: {
+    marginRight: Layout.space.base,
+    marginBottom: Layout.space.base,
   },
 });
