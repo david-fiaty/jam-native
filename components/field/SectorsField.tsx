@@ -42,6 +42,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
         valueField="value"
         inside={selectedSectors.length > 0}
         style={!selectedSectors.length ? styles.element : {}}
+        iconStyle={selectedSectors.length > 0 ? styles.iconRight : {}}
         placeholderStyle={styles.placeholderStyle}
         iconColor={Layout.colors.primary}
         onChange={(o: any) => setSeletedSectors(o)}
@@ -97,5 +98,10 @@ const styles = StyleSheet.create({
   tagItem: {
     marginRight: Layout.space.base,
     marginBottom: Layout.space.base,
+  },
+  iconRight: {
+    position: 'absolute',
+    top: 0,
+    right: Layout.space.base,
   },
 });
