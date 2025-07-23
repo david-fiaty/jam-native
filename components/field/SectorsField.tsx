@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
     borderColor: Layout.colors.secondary, 
     borderRadius: Layout.radius.round,
     padding: Layout.space.base,
+    paddingBottom: -Layout.space.base,
   },
   listItem: {
     paddingHorizontal: Layout.space.base,
