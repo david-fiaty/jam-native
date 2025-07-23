@@ -23,24 +23,6 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
   const [selectedSectors, setSeletedSectors] = useState<any[]>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
-  const getSelectedSectors = (sectorsIds?: any) => {
-    let selectedIds: any[] = sectorsIds?.length ? sectorsIds : [];
-    let result: any[] = [];
-
-    for (const item of sectorsData) {
-      if (selectedIds.includes(item.id)) {
-        for (const subitem of item?.sub_sectors || []) {
-          if (selectedIds.includes(subitem.id)) {
-            result.push(subitem);
-          }
-        }
-      }
-    }
-
-    return result;
-  };
-
-
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
