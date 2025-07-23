@@ -40,6 +40,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
         value={selectedSectors}
         labelField="label"
         valueField="value"
+        //inside={true}
         style={styles.element}
         placeholderStyle={styles.placeholderStyle}
         iconColor={Layout.colors.primary}
