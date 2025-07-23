@@ -108,10 +108,6 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
         valueField="value"
         style={styles.element}
         placeholderStyle={styles.placeholderStyle}
-        //selectedTextStyle={styles.selectedTextStyle}
-        //iconStyle={styles.iconStyle}
-        //itemTextStyle={styles.itemTextStyle}
-        //containerStyle={containerStyle}
         iconColor={Layout.colors.primary}
         onChange={(o: any) => setSeletedSectors(o)}
         data={sectorsData.map((o: any) => {
@@ -120,64 +116,20 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
             label: o?.name,
           }
         })}
+        renderSelectedItem={(o, unSelect) => {
+          return (
+            <TagView
+              key={o?.value}
+              //theme="white"
+              canEdit={true}
+              onDeleteButtonPress={() => unSelect && unSelect(o)}
+            >
+              {o?.label}
+            </TagView>
+          );
+        }}
       />
     </BoxView>
-  );
-
-  return (
-    <View style={styles.container}>
-      <View style={styles.fieldContainer}>
-        <IconView name="down" theme="transparent" onPress={onPress} iconStyle={styles.toggle} />
-      </View>
-
-      {sectorsData?.length > 0 && (
-        <View style={styles.optionsListContainer}>
-          <ListView
-            data={sectorsData}
-            renderItem={(row: any) => (
-              <TextView key={row?.item?.name}>{row?.item?.name}</TextView>
-            )}
-          />
-        </View>
-      )}
-    </View>
-  )
-
-  return (
-    <>
-      {!currentValue?.length && (
-        <TouchableOpacity
-          onPress={onPress}
-          style={Layout.formField}
-        >
-          <InputTextField
-            value={value}
-            readOnly={true}
-            placeholder={placeholder}
-            rightIcon={<IconView name="plus" theme="transparent" />}
-          />
-        </TouchableOpacity>
-      )}
-
-      {currentValue?.length > 0 && (
-        <View style={[Layout.fieldSelectionPreview, styles.preview]}>
-          {currentValue.map((item: any) => {
-            return (
-              <TagView
-                theme="white"
-                key={item.id}
-                canEdit={true}
-                onDeleteButtonPress={() => deleteItem(item)}
-              >
-                {item?.name}
-              </TagView>
-            );
-          })}
-
-          <IconView name="down" theme="transparent" onPress={onPress} iconStyle={styles.toggle} />
-        </View>
-      )}
-    </>
   );
 };
 
@@ -188,7 +140,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   element: {
-    ...Layout.formField, 
+    ...Layout.formField,
     ...{ padding: Layout.space.base },
   },
   fieldContainer: {
