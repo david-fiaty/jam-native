@@ -43,6 +43,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
     (async () => {
       if (!isLoaded) {
         setSectorsData(await EntityManager.getSectors());
+        setSeletedSectors(formData?.[field] || []);
         setIsLoaded(true);
       }
     })();
@@ -51,7 +52,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
   return (
     <BoxView direction="column" align="left">
       <MultiSelect
-        value={formData?.[field] || []}
+        value={selectedSectors}
         labelField="label"
         valueField="value"
         inside={selectedSectors.length > 0}
