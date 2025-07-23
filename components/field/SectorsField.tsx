@@ -29,8 +29,8 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
     setSeletedSectors(itemId);
   };
 
-  const deleteItem = (itemId: any, deleteCallback: any) => {
-    deleteCallback(itemId);
+  const deleteItem = (item: any, deleteCallback: any) => {
+    deleteCallback(item);
   };
 
   useEffect(() => {
