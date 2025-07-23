@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
     ...{ padding: Layout.space.base },
   },
   preview: {
+    position: 'relative',
     backgroundColor: Layout.colors.secondary,
     borderWidth: Layout.borderWidth.base, 
     borderColor: Layout.colors.secondary, 
