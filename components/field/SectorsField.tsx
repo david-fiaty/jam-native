@@ -35,13 +35,14 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
   }, [isLoaded, value, formData, field]);
 
   return (
-    <BoxView direction="column" align="left" style={styles.container}>
+    <BoxView direction="column" align="left">
       <MultiSelect
         value={selectedSectors}
         labelField="label"
         valueField="value"
         inside={selectedSectors.length > 0}
         style={!selectedSectors.length ? styles.element : {}}
+        iconStyle={selectedSectors.length > 0 ? styles.iconRight : {}}
         placeholderStyle={styles.placeholderStyle}
         iconColor={Layout.colors.primary}
         onChange={(o: any) => setSeletedSectors(o)}
@@ -66,6 +67,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
               key={o?.value}
               theme="secondary"
               canEdit={true}
+              containerStyle={styles.tagItem}
               onDeleteButtonPress={() => unSelect && unSelect(o)}
             >
               {o?.label}
@@ -77,35 +79,9 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
   );
 };
 
-/*
-
-
-      { selectedSectors?.length > 0 && (
-        <View style={Layout.fieldSelectionPreview}>
-          {selectedSectors.map((o: any) => {
-            return (
-              <TagView
-                theme="white"
-                key={o?.value}
-                canEdit={true}
-                //onDeleteButtonPress={() => deleteItem(item)}  
-              >
-                {o?.label}
-              </TagView>
-            );
-          })}
-
-          <IconView name="plus" theme="transparent" onPress={onPress} />
-        </View>
-)} 
-        
-*/
 export default SectorsField;
 
 const styles = StyleSheet.create({
-  container: {
-    
-  },
   element: {
     ...Layout.formField,
     ...{ padding: Layout.space.base },
@@ -118,5 +94,14 @@ const styles = StyleSheet.create({
   placeholderStyle: {
     color: Layout.colors.primary,
     fontSize: Layout.fontSize.base,
+  },
+  tagItem: {
+    marginRight: Layout.space.base,
+    marginBottom: Layout.space.base,
+  },
+  iconRight: {
+    position: 'absolute',
+    top: 0,
+    right: Layout.space.base,
   },
 });
