@@ -40,6 +40,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
         value={selectedSectors}
         labelField="label"
         valueField="value"
+        //inside={true}
         style={styles.element}
         placeholderStyle={styles.placeholderStyle}
         iconColor={Layout.colors.primary}
@@ -76,6 +77,29 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
   );
 };
 
+/*
+
+
+      { selectedSectors?.length > 0 && (
+        <View style={Layout.fieldSelectionPreview}>
+          {selectedSectors.map((o: any) => {
+            return (
+              <TagView
+                theme="white"
+                key={o?.value}
+                canEdit={true}
+                //onDeleteButtonPress={() => deleteItem(item)}  
+              >
+                {o?.label}
+              </TagView>
+            );
+          })}
+
+          <IconView name="plus" theme="transparent" onPress={onPress} />
+        </View>
+)} 
+        
+*/
 export default SectorsField;
 
 const styles = StyleSheet.create({
