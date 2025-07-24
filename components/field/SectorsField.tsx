@@ -97,7 +97,6 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
             </BoxView>
           );
         }}
-
         renderSelectedItem={(o, unSelect) => {
           return (
             <TagView
