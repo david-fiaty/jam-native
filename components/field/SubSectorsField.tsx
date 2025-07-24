@@ -36,11 +36,16 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
 
   const getSectorsData = async () => {
     let data: any[] = await EntityManager.getSectors();
-    let listOptions: any[] = data.map((o: any) => {
-      return {
-        value: o?.id,
-        label: o?.name,
-      }
+    let selectedIds: any[] = formData?.[field] || [];
+    let listOptions: any[] = [];
+
+    data.filter((o: any) => selectedIds.includes(o?.id)).map((x: any) => {
+      (x?.sub_sectors || []).map((y: any) => {
+        listOptions.push({
+          value: y?.id,
+          label: y?.name,
+        });
+      });
     });
 
     return listOptions;
@@ -67,8 +72,8 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
   };
 
   const loadComponent = async () => {
-    let listOptions: any[] = await getSectorsData(); 
-    
+    let listOptions: any[] = await getSectorsData();
+
     setSectorsData(listOptions);
     setSeletedSectors(getSelectedSectors(listOptions));
   };
@@ -102,12 +107,12 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
           return (
             <BoxView direction="row" align="center" justify="space-between" style={styles.listItem}>
               <TextView style={isSelected ? styles.selectedItem : {}}>{o?.label}</TextView>
-              { isSelected && (
-                <IconView 
-                  name="checkmark" 
-                  theme="clear" 
-                  size={13} 
-                  padding={0} 
+              {isSelected && (
+                <IconView
+                  name="checkmark"
+                  theme="clear"
+                  size={13}
+                  padding={0}
                 />
               )}
             </BoxView>
