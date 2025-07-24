@@ -246,7 +246,6 @@ const JamForm = () => {
           </>
         )}
 
-
         <TextView>{i18n.t('Select collaborators')}</TextView>
         <CollaboratorsField
           resource={resource}

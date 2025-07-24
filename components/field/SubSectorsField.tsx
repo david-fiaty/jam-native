@@ -27,20 +27,27 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
   const updateSelection = (selectedIds: any[]) => {
     setSeletedSectors(selectedIds);
 
-    dispatch(setFormData<any>({ 
+    dispatch(setFormData<any>({
       resource: resource,
-      key: field, 
-      value: selectedIds, 
+      key: field,
+      value: selectedIds,
     }));
   };
 
   const getSectorsData = () => {
-    return sectorsData.map((o: any) => {
-      return {
-        value: o?.id,
-        label: o?.name,
-      }
+    let data: any[] = [];
+
+    (formData?.[field] || []).map((id: any) => {
+      let sector: any = sectorsData.find((o: any) => o.id == id);
+      (sector?.sub_sectors || []).map((o: any) => {
+        data.push({
+          value: o?.id,
+          label: o?.name,
+        });
+      });
     });
+
+    return data;
   };
 
   const deleteItem = (item: any, deleteCallback: any) => {
@@ -49,10 +56,10 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
 
     deleteCallback(item);
 
-    dispatch(setFormData<any>({ 
+    dispatch(setFormData<any>({
       resource: resource,
-      key: field, 
-      value: selectedIds, 
+      key: field,
+      value: selectedIds,
     }));
   };
 
@@ -86,12 +93,12 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
           return (
             <BoxView direction="row" align="center" justify="space-between" style={styles.listItem}>
               <TextView style={isSelected ? styles.selectedItem : {}}>{o?.label}</TextView>
-              { isSelected && (
-                <IconView 
-                  name="checkmark" 
-                  theme="clear" 
-                  size={13} 
-                  padding={0} 
+              {isSelected && (
+                <IconView
+                  name="checkmark"
+                  theme="clear"
+                  size={13}
+                  padding={0}
                 />
               )}
             </BoxView>
@@ -125,8 +132,8 @@ const styles = StyleSheet.create({
   preview: {
     position: 'relative',
     backgroundColor: Layout.colors.secondary,
-    borderWidth: Layout.borderWidth.base, 
-    borderColor: Layout.colors.secondary, 
+    borderWidth: Layout.borderWidth.base,
+    borderColor: Layout.colors.secondary,
     borderRadius: Layout.radius.round,
     padding: Layout.space.base,
     paddingBottom: -Layout.space.base,
