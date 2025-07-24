@@ -50,9 +50,9 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
     return listOptions;
   };
 
-  const getSelectedSectors = (listOptions: any[]) => {
+  const getSelectedSectors = () => {
     let selectedIds: any[] = formData?.[field] || [];
-    let optionsIds: any[] = listOptions.map((o: any) => o.value);
+    let optionsIds: any[] = sectorsData.map((o: any) => o.value);
 
     return selectedIds.filter((id: any) => optionsIds.includes(id));
   };
@@ -73,14 +73,14 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        let listOptions: any[] = await getSectorsData() || [];
-        setSectorsData(listOptions);
-        setSeletedSectors(getSelectedSectors(listOptions));
+        setSectorsData(await getSectorsData() || []);
         setIsLoaded(true);
       }
+
+      setSeletedSectors(getSelectedSectors());
     })();
   }, [isLoaded]);
-  
+
   return (
     <BoxView direction="column" align="left">
       <MultiSelect
