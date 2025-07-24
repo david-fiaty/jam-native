@@ -34,13 +34,23 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
     }));
   };
 
-  const getSectorsData = () => {
-    return sectorsData.map((o: any) => {
+  const getSectorsData = async () => {
+    let data: any[] = await EntityManager.getSectors();
+    let listOptions: any[] = data.map((o: any) => {
       return {
         value: o?.id,
         label: o?.name,
       }
     });
+
+    return listOptions;
+  };
+
+  const getSelectedSectors = (listOptions: any[]) => {
+    let selectedIds: any[] = formData?.[field] || [];
+    let optionsIds: any[] = listOptions.map((o: any) => o.value);
+
+    return selectedIds.filter((id: any) => optionsIds.includes(id));
   };
 
   const deleteItem = (item: any, deleteCallback: any) => {
@@ -59,12 +69,13 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setSectorsData(await EntityManager.getSectors());
-        setSeletedSectors(formData?.[field] || []);
+        let listOptions: any[] = await getSectorsData() || [];
+        setSectorsData(listOptions);
+        setSeletedSectors(getSelectedSectors(listOptions));
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, value, formData, field]);
+  }, [isLoaded]);
 
   return (
     <BoxView direction="column" align="left">
@@ -79,19 +90,19 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
         placeholderStyle={styles.placeholderStyle}
         iconColor={Layout.colors.primary}
         onChange={(selectedIds: any) => updateSelection(selectedIds)}
-        data={getSectorsData()}
+        data={sectorsData}
         renderItem={(o: any) => {
           let isSelected: boolean = selectedSectors.includes(o?.value);
 
           return (
             <BoxView direction="row" align="center" justify="space-between" style={styles.listItem}>
               <TextView style={isSelected ? styles.selectedItem : {}}>{o?.label}</TextView>
-              { isSelected && (
-                <IconView 
-                  name="checkmark" 
-                  theme="clear" 
-                  size={13} 
-                  padding={0} 
+              {isSelected && (
+                <IconView
+                  name="checkmark"
+                  theme="clear"
+                  size={13}
+                  padding={0}
                 />
               )}
             </BoxView>

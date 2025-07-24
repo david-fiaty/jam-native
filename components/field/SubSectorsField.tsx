@@ -34,20 +34,27 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
     }));
   };
 
-  const getSectorsData = () => {
-    let data: any[] = [];
+  const getSectorsData = async () => {
+    let data: any[] = await EntityManager.getSectors();
+    let listOptions: any[] = [];
 
-    (formData?.[field] || []).map((id: any) => {
-      let sector: any = sectorsData.find((o: any) => o.id == id);
-      (sector?.sub_sectors || []).map((o: any) => {
-        data.push({
-          value: o?.id,
-          label: o?.name,
+    data.map((x: any) => {
+      (x?.sub_sectors || []).map((y: any) => {
+        listOptions.push({
+          value: y?.id,
+          label: y?.name,
         });
       });
     });
 
-    return data;
+    return listOptions;
+  };
+
+  const getSelectedSectors = (listOptions: any[]) => {
+    let selectedIds: any[] = formData?.[field] || [];
+    let optionsIds: any[] = listOptions.map((o: any) => o.value);
+
+    return selectedIds.filter((id: any) => optionsIds.includes(id));
   };
 
   const deleteItem = (item: any, deleteCallback: any) => {
@@ -66,13 +73,14 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setSectorsData(await EntityManager.getSectors());
-        setSeletedSectors(formData?.[field] || []);
+        let listOptions: any[] = await getSectorsData() || [];
+        setSectorsData(listOptions);
+        setSeletedSectors(getSelectedSectors(listOptions));
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, value, formData, field]);
-
+  }, [isLoaded]);
+  
   return (
     <BoxView direction="column" align="left">
       <MultiSelect
@@ -86,7 +94,7 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
         placeholderStyle={styles.placeholderStyle}
         iconColor={Layout.colors.primary}
         onChange={(selectedIds: any) => updateSelection(selectedIds)}
-        data={getSectorsData()}
+        data={sectorsData}
         renderItem={(o: any) => {
           let isSelected: boolean = selectedSectors.includes(o?.value);
 
