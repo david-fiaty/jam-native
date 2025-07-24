@@ -17,7 +17,7 @@ type Props = {
   placeholder?: any;
 };
 
-const SectorsField = ({ resource, field, value, placeholder }: Props) => {
+const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any[]>([]);
@@ -109,7 +109,7 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   );
 };
 
-export default SectorsField;
+export default SubSectorsField;
 
 const styles = StyleSheet.create({
   element: {
