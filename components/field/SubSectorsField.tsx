@@ -66,6 +66,8 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
     })();
   }, [isLoaded, value, formData, field]);
 
+  console.log(sectorsData)
+
   return (
     <BoxView direction="column" align="left">
       <MultiSelect
