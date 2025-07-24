@@ -45,6 +45,10 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
     });
   };
 
+  const getSelectedSectors = () => {
+    return formData?.[field] || [];
+  };
+
   /*
   const getSectorsData = () => {
     let data: any[] = [];
@@ -80,11 +84,11 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
     (async () => {
       if (!isLoaded) {
         setSectorsData(await getSectorsData());
-        setSeletedSectors(formData?.[field] || []);
+        setSeletedSectors(getSelectedSectors());
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, value, formData, field]);
+  }, [isLoaded]);
 
   return (
     <BoxView direction="column" align="left">
