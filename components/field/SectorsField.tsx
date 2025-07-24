@@ -81,20 +81,23 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
         onChange={(selectedIds: any) => updateSelection(selectedIds)}
         data={getSectorsData()}
         renderItem={(o: any) => {
+          let isSelected: boolean = selectedSectors.includes(o?.value);
+
           return (
             <BoxView direction="row" align="center" justify="space-between" style={styles.listItem}>
-              <TextView>{o?.label}</TextView>
-              {selectedSectors.includes(o?.value) && (
-                <IconView
-                  name="checkmark"
-                  theme="clear"
-                  size={13}
-                  padding={0}
+              <TextView style={isSelected ? styles.selectedItem : {}}>{o?.label}</TextView>
+              { isSelected && (
+                <IconView 
+                  name="checkmark" 
+                  theme="clear" 
+                  size={13} 
+                  padding={0} 
                 />
               )}
             </BoxView>
           );
         }}
+
         renderSelectedItem={(o, unSelect) => {
           return (
             <TagView
@@ -141,6 +144,9 @@ const styles = StyleSheet.create({
   tagItem: {
     marginRight: Layout.space.base,
     marginBottom: Layout.space.base,
+  },
+  selectedItem: {
+    fontWeight: 'bold',
   },
   iconRight: {
     alignSelf: 'flex-start',
