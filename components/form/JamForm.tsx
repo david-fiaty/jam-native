@@ -233,14 +233,18 @@ const JamForm = () => {
         />
         {FormManager.renderError('sectors_ids')}
 
-        <TextView>{i18n.t('Sub sectors')}</TextView>
-        <SubSectorsField
-          resource={resource}
-          field="sectors_ids"
-          placeholder={i18n.t('Select your sub sectors')}
-          value={formData?.sectors_ids}
-        />
-        {FormManager.renderError('sectors_ids')}
+        {formData?.sectors_ids?.length > 0 && (
+          <>
+            <TextView>{i18n.t('Sub sectors')}</TextView>
+            <SubSectorsField
+              resource={resource}
+              field="sectors_ids"
+              placeholder={i18n.t('Select your sub sectors')}
+              value={formData?.sectors_ids}
+            />
+            {FormManager.renderError('sectors_ids')}
+          </>
+        )}
 
 
         <TextView>{i18n.t('Select collaborators')}</TextView>

@@ -27,11 +27,20 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   const updateSelection = (selectedIds: any[]) => {
     setSeletedSectors(selectedIds);
 
-    dispatch(setFormData<any>({ 
+    dispatch(setFormData<any>({
       resource: resource,
-      key: field, 
-      value: selectedIds, 
+      key: field,
+      value: selectedIds,
     }));
+  };
+
+  const getSectorsData = () => {
+    return sectorsData.map((o: any) => {
+      return {
+        value: o?.id,
+        label: o?.name,
+      }
+    });
   };
 
   const deleteItem = (item: any, deleteCallback: any) => {
@@ -40,10 +49,10 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
 
     deleteCallback(item);
 
-    dispatch(setFormData<any>({ 
+    dispatch(setFormData<any>({
       resource: resource,
-      key: field, 
-      value: selectedIds, 
+      key: field,
+      value: selectedIds,
     }));
   };
 
@@ -70,17 +79,14 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
         placeholderStyle={styles.placeholderStyle}
         iconColor={Layout.colors.primary}
         onChange={(selectedIds: any) => updateSelection(selectedIds)}
-        data={sectorsData.map((o: any) => {
-          return {
-            value: o?.id,
-            label: o?.name,
-          }
-        })}
+        data={getSectorsData()}
         renderItem={(o: any) => {
+          let isSelected: boolean = selectedSectors.includes(o?.value);
+
           return (
             <BoxView direction="row" align="center" justify="space-between" style={styles.listItem}>
-              <TextView>{o?.label}</TextView>
-              { selectedSectors.includes(o?.value) && (
+              <TextView style={isSelected ? styles.selectedItem : {}}>{o?.label}</TextView>
+              { isSelected && (
                 <IconView 
                   name="checkmark" 
                   theme="clear" 
@@ -91,6 +97,7 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
             </BoxView>
           );
         }}
+
         renderSelectedItem={(o, unSelect) => {
           return (
             <TagView
@@ -119,8 +126,8 @@ const styles = StyleSheet.create({
   preview: {
     position: 'relative',
     backgroundColor: Layout.colors.secondary,
-    borderWidth: Layout.borderWidth.base, 
-    borderColor: Layout.colors.secondary, 
+    borderWidth: Layout.borderWidth.base,
+    borderColor: Layout.colors.secondary,
     borderRadius: Layout.radius.round,
     padding: Layout.space.base,
     paddingBottom: -Layout.space.base,
@@ -137,6 +144,9 @@ const styles = StyleSheet.create({
   tagItem: {
     marginRight: Layout.space.base,
     marginBottom: Layout.space.base,
+  },
+  selectedItem: {
+    fontWeight: 'bold',
   },
   iconRight: {
     alignSelf: 'flex-start',
