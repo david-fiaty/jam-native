@@ -15,10 +15,9 @@ type Props = {
   field: string;
   value?: any;
   placeholder?: any;
-  onPress: () => void;
 };
 
-const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) => {
+const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any[]>([]);
@@ -64,6 +63,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
         value={selectedSectors}
         labelField="label"
         valueField="value"
+        placeholder={placeholder}
         inside={selectedSectors.length > 0}
         style={!selectedSectors.length ? styles.element : styles.preview}
         iconStyle={selectedSectors.length > 0 ? styles.iconRight : {}}
