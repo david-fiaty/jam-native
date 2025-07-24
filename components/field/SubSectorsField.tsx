@@ -35,8 +35,11 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
   };
 
   const getSectorsData = () => {
+    (formData?.[field] || []).map((id: any) => {
+      let sector: any = sectorsData.find((o: any) => o.id == id);
 
-    console.log(formData?.[field]);
+      console.log('----', sector);
+    });
 
     return sectorsData.map((o: any) => {
       return {
