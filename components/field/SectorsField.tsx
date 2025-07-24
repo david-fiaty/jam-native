@@ -45,6 +45,10 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
     });
   };
 
+  const getSelectedSectors = () => {
+    return formData?.[field] || [];
+  };
+
   const deleteItem = (item: any, deleteCallback: any) => {
     let selectedIds: any[] = [...selectedSectors];
     selectedIds = selectedIds.filter((id: any) => id != item?.value);
@@ -62,11 +66,11 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
     (async () => {
       if (!isLoaded) {
         setSectorsData(await getSectorsData());
-        setSeletedSectors(formData?.[field] || []);
+        setSeletedSectors(getSelectedSectors());
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, value, formData, field]);
+  }, [isLoaded]);
 
   return (
     <BoxView direction="column" align="left">
