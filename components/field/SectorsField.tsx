@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { TouchableOpacity, View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from '@/redux/slices/FormSlice';
 import { Layout } from '@/constants/Layout';
@@ -38,7 +38,7 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
   const deleteItem = (item: any, deleteCallback: any) => {
     let selectedIds: any[] = [...selectedSectors];
     selectedIds = selectedIds.filter((id: any) => id != item?.value);
-    
+
     deleteCallback(item);
 
     dispatch(setFormData<any>({ 
