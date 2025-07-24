@@ -66,17 +66,12 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
     }));
   };
 
-  const loadComponent = async () => {
-    let listOptions: any[] = await getSectorsData(); 
-
-    setSectorsData(listOptions);
-    setSeletedSectors(getSelectedSectors(listOptions));
-  };
-
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        await loadComponent();
+        let listOptions: any[] = await getSectorsData() || [];
+        setSectorsData(listOptions);
+        setSeletedSectors(getSelectedSectors(listOptions));
         setIsLoaded(true);
       }
     })();
@@ -102,12 +97,12 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
           return (
             <BoxView direction="row" align="center" justify="space-between" style={styles.listItem}>
               <TextView style={isSelected ? styles.selectedItem : {}}>{o?.label}</TextView>
-              { isSelected && (
-                <IconView 
-                  name="checkmark" 
-                  theme="clear" 
-                  size={13} 
-                  padding={0} 
+              {isSelected && (
+                <IconView
+                  name="checkmark"
+                  theme="clear"
+                  size={13}
+                  padding={0}
                 />
               )}
             </BoxView>
