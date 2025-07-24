@@ -36,13 +36,14 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
 
   const getSectorsData = async () => {
     let data: any[] = await EntityManager.getSectors();
-
-    return data.map((o: any) => {
+    let listOptions: any[] = data.map((o: any) => {
       return {
         value: o?.id,
         label: o?.name,
       }
     });
+
+    return listOptions;
   };
 
   const getSelectedSectors = (listOptions: any[]) => {
@@ -67,6 +68,7 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
 
   const loadComponent = async () => {
     let listOptions: any[] = await getSectorsData(); 
+
     setSectorsData(listOptions);
     setSeletedSectors(getSelectedSectors(listOptions));
   };
