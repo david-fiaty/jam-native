@@ -13,7 +13,7 @@ const TextView = ({underline, style, children}: Props) => {
   };
 
   return (
-    <Text style={[styles.container, style, containerStyle]}>
+    <Text style={[styles.container, containerStyle, style]}>
       {children}
     </Text>
   );

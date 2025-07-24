@@ -17,7 +17,7 @@ type Props = {
   placeholder?: any;
 };
 
-const SectorsField = ({ resource, field, value, placeholder }: Props) => {
+const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any[]>([]);
@@ -36,11 +36,15 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
 
   const getSectorsData = async () => {
     let data: any[] = await EntityManager.getSectors();
-    let listOptions: any[] = data.map((o: any) => {
-      return {
-        value: o?.id,
-        label: o?.name,
-      }
+    let listOptions: any[] = [];
+
+    data.map((x: any) => {
+      (x?.sub_sectors || []).map((y: any) => {
+        listOptions.push({
+          value: y?.id,
+          label: y?.name,
+        });
+      });
     });
 
     return listOptions;
@@ -76,7 +80,7 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
       }
     })();
   }, [isLoaded]);
-
+  
   return (
     <BoxView direction="column" align="left">
       <MultiSelect
@@ -126,7 +130,7 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   );
 };
 
-export default SectorsField;
+export default SubSectorsField;
 
 const styles = StyleSheet.create({
   element: {
