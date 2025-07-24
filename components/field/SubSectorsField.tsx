@@ -34,11 +34,11 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
     }));
   };
 
-  const getSectorsData = async () => {
+  const getSectorsData = async (selectedIds: any[]) => {
     let data: any[] = await EntityManager.getSectors();
     let listOptions: any[] = [];
 
-    data.map((x: any) => {
+    data.filter((o: any) => selectedIds.includes(o?.id)).map((x: any) => {
       (x?.sub_sectors || []).map((y: any) => {
         listOptions.push({
           value: y?.id,
@@ -72,14 +72,10 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
 
   useEffect(() => {
     (async () => {
-      if (!isLoaded) {
-        setSectorsData(await getSectorsData() || []);
-        setIsLoaded(true);
-      }
-
+      setSectorsData(await getSectorsData(formData?.[field] || []));
       setSeletedSectors(getSelectedSectors());
     })();
-  }, [isLoaded]);
+  }, [formData, field]);
 
   return (
     <BoxView direction="column" align="left">
