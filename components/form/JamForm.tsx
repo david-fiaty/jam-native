@@ -26,6 +26,7 @@ import DataManager from "@/manager/DataManager";
 import MediaManager from "@/manager/MediaManager";
 import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
+import SubSectorsField from "../field/SubSectorsField";
 
 const resource: string = 'jam';
 
@@ -223,18 +224,24 @@ const JamForm = () => {
         />
         {FormManager.renderError('countries')}
 
-        <TextView>{i18n.t('Select your sectors')}</TextView>
+        <TextView>{i18n.t('Sectors')}</TextView>
         <SectorsField
           resource={resource}
           field="sectors_ids"
           placeholder={i18n.t('Select your sectors')}
           value={formData?.sectors_ids}
-          onPress={() => ModalManager.toggleModal('SectorsList', {
-            resource: resource,
-            field: 'sectors_ids',
-          })}
         />
         {FormManager.renderError('sectors_ids')}
+
+        <TextView>{i18n.t('Sub sectors')}</TextView>
+        <SubSectorsField
+          resource={resource}
+          field="sectors_ids"
+          placeholder={i18n.t('Select your sub sectors')}
+          value={formData?.sectors_ids}
+        />
+        {FormManager.renderError('sectors_ids')}
+
 
         <TextView>{i18n.t('Select collaborators')}</TextView>
         <CollaboratorsField
