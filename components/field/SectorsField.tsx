@@ -36,7 +36,16 @@ const SectorsField = ({ resource, field, value, placeholder, onPress }: Props) =
   };
 
   const deleteItem = (item: any, deleteCallback: any) => {
+    let selectedIds: any[] = [...selectedSectors];
+    selectedIds = selectedIds.filter((id: any) => id != item?.value);
+    
     deleteCallback(item);
+
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: field, 
+      value: selectedIds, 
+    }));
   };
 
   useEffect(() => {
