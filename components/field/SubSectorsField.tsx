@@ -34,6 +34,15 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
     }));
   };
 
+  const getSectorsData = () => {
+    return sectorsData.map((o: any) => {
+      return {
+        value: o?.id,
+        label: o?.name,
+      }
+    });
+  };
+
   const deleteItem = (item: any, deleteCallback: any) => {
     let selectedIds: any[] = [...selectedSectors];
     selectedIds = selectedIds.filter((id: any) => id != item?.value);
@@ -70,12 +79,7 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
         placeholderStyle={styles.placeholderStyle}
         iconColor={Layout.colors.primary}
         onChange={(selectedIds: any) => updateSelection(selectedIds)}
-        data={sectorsData.map((o: any) => {
-          return {
-            value: o?.id,
-            label: o?.name,
-          }
-        })}
+        data={getSectorsData()}
         renderItem={(o: any) => {
           return (
             <BoxView direction="row" align="center" justify="space-between" style={styles.listItem}>
