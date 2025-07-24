@@ -80,6 +80,7 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
       }
     })();
   }, [isLoaded]);
+  
   return (
     <BoxView direction="column" align="left">
       <MultiSelect
