@@ -27,45 +27,31 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
   const updateSelection = (selectedIds: any[]) => {
     setSeletedSectors(selectedIds);
 
-    dispatch(setFormData<any>({ 
+    dispatch(setFormData<any>({
       resource: resource,
-      key: field, 
-      value: selectedIds, 
+      key: field,
+      value: selectedIds,
     }));
   };
 
   const getSectorsData = async () => {
     let data: any[] = await EntityManager.getSectors();
-
-    return data.map((o: any) => {
+    let listOptions: any[] = data.map((o: any) => {
       return {
         value: o?.id,
         label: o?.name,
       }
     });
+
+    return listOptions;
   };
 
-  const getSelectedSectors = () => {
-    return formData?.[field] || [];
+  const getSelectedSectors = (listOptions: any[]) => {
+    let selectedIds: any[] = formData?.[field] || [];
+    let optionsIds: any[] = listOptions.map((o: any) => o.value);
+
+    return selectedIds.filter((id: any) => optionsIds.includes(id));
   };
-
-  /*
-  const getSectorsData = () => {
-    let data: any[] = [];
-
-    (formData?.[field] || []).map((id: any) => {
-      let sector: any = sectorsData.find((o: any) => o.id == id);
-      (sector?.sub_sectors || []).map((o: any) => {
-        data.push({
-          value: o?.id,
-          label: o?.name,
-        });
-      });
-    });
-
-    return data;
-  };
-*/
 
   const deleteItem = (item: any, deleteCallback: any) => {
     let selectedIds: any[] = [...selectedSectors];
@@ -73,18 +59,24 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
 
     deleteCallback(item);
 
-    dispatch(setFormData<any>({ 
+    dispatch(setFormData<any>({
       resource: resource,
-      key: field, 
-      value: selectedIds, 
+      key: field,
+      value: selectedIds,
     }));
+  };
+
+  const loadComponent = async () => {
+    let listOptions: any[] = await getSectorsData(); 
+    
+    setSectorsData(listOptions);
+    setSeletedSectors(getSelectedSectors(listOptions));
   };
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setSectorsData(await getSectorsData());
-        setSeletedSectors(getSelectedSectors());
+        await loadComponent();
         setIsLoaded(true);
       }
     })();
@@ -149,8 +141,8 @@ const styles = StyleSheet.create({
   preview: {
     position: 'relative',
     backgroundColor: Layout.colors.secondary,
-    borderWidth: Layout.borderWidth.base, 
-    borderColor: Layout.colors.secondary, 
+    borderWidth: Layout.borderWidth.base,
+    borderColor: Layout.colors.secondary,
     borderRadius: Layout.radius.round,
     padding: Layout.space.base,
     paddingBottom: -Layout.space.base,

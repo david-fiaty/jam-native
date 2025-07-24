@@ -36,17 +36,21 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
 
   const getSectorsData = async () => {
     let data: any[] = await EntityManager.getSectors();
-
-    return data.map((o: any) => {
+    let listOptions: any[] = data.map((o: any) => {
       return {
         value: o?.id,
         label: o?.name,
       }
     });
+
+    return listOptions;
   };
 
-  const getSelectedSectors = () => {
-    return formData?.[field] || [];
+  const getSelectedSectors = (listOptions: any[]) => {
+    let selectedIds: any[] = formData?.[field] || [];
+    let optionsIds: any[] = listOptions.map((o: any) => o.value);
+
+    return selectedIds.filter((id: any) => optionsIds.includes(id));
   };
 
   const deleteItem = (item: any, deleteCallback: any) => {
@@ -62,11 +66,17 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
     }));
   };
 
+  const loadComponent = async () => {
+    let listOptions: any[] = await getSectorsData(); 
+
+    setSectorsData(listOptions);
+    setSeletedSectors(getSelectedSectors(listOptions));
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setSectorsData(await getSectorsData());
-        setSeletedSectors(getSelectedSectors());
+        await loadComponent();
         setIsLoaded(true);
       }
     })();
