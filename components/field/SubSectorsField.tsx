@@ -50,8 +50,7 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
     return listOptions;
   };
 
-  const getSelectedSectors = () => {
-    let selectedIds: any[] = formData?.[field] || [];
+  const getSelectedSectors = (selectedIds: any[]) => {
     let optionsIds: any[] = sectorsData.map((o: any) => o.value);
 
     return selectedIds.filter((id: any) => optionsIds.includes(id));
@@ -73,7 +72,7 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
   useEffect(() => {
     (async () => {
       setSectorsData(await getSectorsData(formData?.[field] || []));
-      setSeletedSectors(getSelectedSectors());
+      setSeletedSectors(getSelectedSectors(formData?.[field] || []));
     })();
   }, [formData, field]);
 
