@@ -36,10 +36,9 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
 
   const getSectorsData = async () => {
     let data: any[] = await EntityManager.getSectors();
-    let selectedIds: any[] = formData?.[field] || [];
     let listOptions: any[] = [];
 
-    data.filter((o: any) => selectedIds.includes(o?.id)).map((x: any) => {
+    data.map((x: any) => {
       (x?.sub_sectors || []).map((y: any) => {
         listOptions.push({
           value: y?.id,
@@ -71,22 +70,17 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
     }));
   };
 
-  const loadComponent = async () => {
-    let listOptions: any[] = await getSectorsData();
-
-    setSectorsData(listOptions);
-    setSeletedSectors(getSelectedSectors(listOptions));
-  };
-
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        await loadComponent();
+        let listOptions: any[] = await getSectorsData() || [];
+        setSectorsData(listOptions);
+        setSeletedSectors(getSelectedSectors(listOptions));
         setIsLoaded(true);
       }
     })();
   }, [isLoaded]);
-
+  
   return (
     <BoxView direction="column" align="left">
       <MultiSelect
