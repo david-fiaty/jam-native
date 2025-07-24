@@ -34,8 +34,10 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
     }));
   };
 
-  const getSectorsData = () => {
-    return sectorsData.map((o: any) => {
+  const getSectorsData = async () => {
+    let data: any[] = await EntityManager.getSectors();
+
+    return data.map((o: any) => {
       return {
         value: o?.id,
         label: o?.name,
@@ -77,7 +79,7 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setSectorsData(await EntityManager.getSectors());
+        setSectorsData(await getSectorsData());
         setSeletedSectors(formData?.[field] || []);
         setIsLoaded(true);
       }
@@ -97,7 +99,7 @@ const SubSectorsField = ({ resource, field, value, placeholder }: Props) => {
         placeholderStyle={styles.placeholderStyle}
         iconColor={Layout.colors.primary}
         onChange={(selectedIds: any) => updateSelection(selectedIds)}
-        data={getSectorsData()}
+        data={sectorsData}
         renderItem={(o: any) => {
           let isSelected: boolean = selectedSectors.includes(o?.value);
 
