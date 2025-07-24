@@ -7,12 +7,16 @@ import TextView from './TextView';
 type Props = {
   theme?: any;
   canEdit?: boolean;
+  containerStyle?: any;
   children?: any;
   onDeleteButtonPress?: () => void;
 };
 
-const TagView = ({ theme, canEdit, children, onDeleteButtonPress }: Props) => {
-  const tagStyle = theme ? Layout.theme[theme] : Layout.theme.secondary;
+const TagView = ({ theme, canEdit, containerStyle, children, onDeleteButtonPress }: Props) => {
+  const tagStyle = {
+    ...(theme ? Layout.theme[theme] : Layout.theme.secondary),
+    ...(containerStyle || {}),
+  };
 
   return (
     <BoxView direction="row" align="center" justify="between" style={[styles.container, tagStyle]}>
