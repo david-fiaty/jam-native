@@ -23,14 +23,10 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any[]>([]);
-  const [selectedSectors, setSeletedSectors] = useState<any[]>([]);
   const [subSectorsData, setSubSectorsData] = useState<any[]>([]);
-  const [selectedSubSectors, setSeletedSubSectors] = useState<any[]>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateSelection = (selectedIds: any[]) => {
-    setSeletedSectors(selectedIds);
-
     dispatch(setFormData<any>({
       resource: resource,
       key: field,
@@ -79,7 +75,7 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   };
 
   const deleteItem = (item: any, deleteCallback: any) => {
-    let selectedIds: any[] = [...selectedSectors];
+let selectedIds: any[] = formData?.[field] || [];
     selectedIds = selectedIds.filter((id: any) => id != item?.value);
 
     deleteCallback(item);
@@ -92,7 +88,7 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   };
 
   const renderItem = (item: any) => {
-    let isSelected: boolean = selectedSectors.includes(item?.value);
+    let isSelected: boolean = (formData?.[field] || []).includes(item?.value);
 
     return (
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItem}>
@@ -129,8 +125,6 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
         let sectorsList: any = await EntityManager.getSectors();
         setSectorsData(getSectorsData(sectorsList));
         setSubSectorsData(getSubSectorsData(sectorsList));
-        setSeletedSectors(getSelectedSectors());
-        setSeletedSubSectors(getSelectedSubSectors());
         setIsLoaded(true);
       }
     })();
