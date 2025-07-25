@@ -64,9 +64,16 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
     return listOptions;
   };
 
-  const getSelectedSectors = (listOptions: any[]) => {
+  const getSelectedSectors = () => {
     let selectedIds: any[] = formData?.[field] || [];
-    let optionsIds: any[] = listOptions.map((o: any) => o.value);
+    let optionsIds: any[] = sectorsData.map((o: any) => o.value);
+
+    return selectedIds.filter((id: any) => optionsIds.includes(id));
+  };
+
+  const getSelectedSubSectors = () => {
+    let selectedIds: any[] = formData?.[field] || [];
+    let optionsIds: any[] = subSectorsData.map((o: any) => o.value);
 
     return selectedIds.filter((id: any) => optionsIds.includes(id));
   };
@@ -122,6 +129,8 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
         let sectorsList: any = await EntityManager.getSectors();
         setSectorsData(getSectorsData(sectorsList));
         setSubSectorsData(getSubSectorsData(sectorsList));
+        setSeletedSectors(getSelectedSectors());
+        setSeletedSubSectors(getSelectedSubSectors());
         setIsLoaded(true);
       }
     })();
@@ -132,13 +141,13 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
       <BoxView direction="column" align="left">
         <TextView>{i18n.t('Sectors')}</TextView>
         <MultiSelect
-          value={selectedSectors}
+          value={getSelectedSectors()}
           labelField="label"
           valueField="value"
           placeholder={i18n.t('Select your sectors')}
-          inside={selectedSectors.length > 0}
-          style={!selectedSectors.length ? styles.element : styles.preview}
-          iconStyle={selectedSectors.length > 0 ? styles.iconRight : {}}
+          inside={getSelectedSectors().length > 0}
+          style={!getSelectedSectors().length ? styles.element : styles.preview}
+          iconStyle={getSelectedSectors().length > 0 ? styles.iconRight : {}}
           placeholderStyle={styles.placeholderStyle}
           iconColor={Layout.colors.primary}
           onChange={(selectedIds: any) => updateSelection(selectedIds)}
@@ -153,13 +162,13 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
         <BoxView direction="column" align="left">
           <TextView>{i18n.t('Sub sectors')}</TextView>
           <MultiSelect
-            value={selectedSubSectors}
+            value={getSelectedSubSectors()}
             labelField="label"
             valueField="value"
             placeholder={i18n.t('Select your sub sectors')}
-            inside={selectedSubSectors.length > 0}
-            style={!selectedSubSectors.length ? styles.element : styles.preview}
-            iconStyle={selectedSubSectors.length > 0 ? styles.iconRight : {}}
+            inside={getSelectedSubSectors().length > 0}
+            style={!getSelectedSubSectors().length ? styles.element : styles.preview}
+            iconStyle={getSelectedSubSectors().length > 0 ? styles.iconRight : {}}
             placeholderStyle={styles.placeholderStyle}
             iconColor={Layout.colors.primary}
             onChange={(selectedIds: any) => updateSelection(selectedIds)}
