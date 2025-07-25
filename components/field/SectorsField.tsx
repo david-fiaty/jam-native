@@ -23,13 +23,11 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any[]>([]);
-  const [selectedSectors, setSeletedSectors] = useState<any[]>([]);
   const [subSectorsData, setSubSectorsData] = useState<any[]>([]);
-  const [selectedSubSectors, setSeletedSubSectors] = useState<any[]>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateSelection = (selectedIds: any[]) => {
-    setSeletedSectors(selectedIds);
+    selectedIds = [...new Set([...(formData?.[field] || []), ...selectedIds])];
 
     dispatch(setFormData<any>({
       resource: resource,
@@ -64,15 +62,22 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
     return listOptions;
   };
 
-  const getSelectedSectors = (listOptions: any[]) => {
+  const getSelectedSectors = () => {
     let selectedIds: any[] = formData?.[field] || [];
-    let optionsIds: any[] = listOptions.map((o: any) => o.value);
+    let optionsIds: any[] = sectorsData.map((o: any) => o.value);
+
+    return selectedIds.filter((id: any) => optionsIds.includes(id));
+  };
+
+  const getSelectedSubSectors = () => {
+    let selectedIds: any[] = formData?.[field] || [];
+    let optionsIds: any[] = subSectorsData.map((o: any) => o.value);
 
     return selectedIds.filter((id: any) => optionsIds.includes(id));
   };
 
   const deleteItem = (item: any, deleteCallback: any) => {
-    let selectedIds: any[] = [...selectedSectors];
+    let selectedIds: any[] = formData?.[field] || [];
     selectedIds = selectedIds.filter((id: any) => id != item?.value);
 
     deleteCallback(item);
@@ -85,7 +90,7 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   };
 
   const renderItem = (item: any) => {
-    let isSelected: boolean = selectedSectors.includes(item?.value);
+    let isSelected: boolean = (formData?.[field] || []).includes(item?.value);
 
     return (
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItem}>
@@ -130,15 +135,15 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   return (
     <>
       <BoxView direction="column" align="left">
-        <TextView>{i18n.t('Sectors')}</TextView>
+        <TextView>{i18n.t('Activity sectors')}*</TextView>
         <MultiSelect
-          value={selectedSectors}
+          value={getSelectedSectors()}
           labelField="label"
           valueField="value"
           placeholder={i18n.t('Select your sectors')}
-          inside={selectedSectors.length > 0}
-          style={!selectedSectors.length ? styles.element : styles.preview}
-          iconStyle={selectedSectors.length > 0 ? styles.iconRight : {}}
+          inside={getSelectedSectors().length > 0}
+          style={!getSelectedSectors().length ? styles.element : styles.preview}
+          iconStyle={getSelectedSectors().length > 0 ? styles.iconRight : {}}
           placeholderStyle={styles.placeholderStyle}
           iconColor={Layout.colors.primary}
           onChange={(selectedIds: any) => updateSelection(selectedIds)}
@@ -151,15 +156,15 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
 
       {formData?.[field]?.length > 0 && (
         <BoxView direction="column" align="left">
-          <TextView>{i18n.t('Sub sectors')}</TextView>
+          <TextView>{i18n.t('Activity sub sectors')}*</TextView>
           <MultiSelect
-            value={selectedSubSectors}
+            value={getSelectedSubSectors()}
             labelField="label"
             valueField="value"
             placeholder={i18n.t('Select your sub sectors')}
-            inside={selectedSubSectors.length > 0}
-            style={!selectedSubSectors.length ? styles.element : styles.preview}
-            iconStyle={selectedSubSectors.length > 0 ? styles.iconRight : {}}
+            inside={getSelectedSubSectors().length > 0}
+            style={!getSelectedSubSectors().length ? styles.element : styles.preview}
+            iconStyle={getSelectedSubSectors().length > 0 ? styles.iconRight : {}}
             placeholderStyle={styles.placeholderStyle}
             iconColor={Layout.colors.primary}
             onChange={(selectedIds: any) => updateSelection(selectedIds)}
