@@ -154,7 +154,6 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
           {FormManager.renderError('sectors_ids')}
         </BoxView>
       )}
-
     </>
   );
 };
