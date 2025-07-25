@@ -9,6 +9,8 @@ import EntityManager from '@/manager/EntityManager';
 import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
 import IconView from '../view/IconView';
+import i18n from '@/translation/i18n';
+import FormManager from '@/manager/FormManager';
 
 type Props = {
   resource: string;
@@ -22,6 +24,8 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any[]>([]);
   const [selectedSectors, setSeletedSectors] = useState<any[]>([]);
+  const [subSectorsData, setSubSectorsData] = useState<any[]>([]);
+  const [selectedSubSectors, setSeletedSubSectors] = useState<any[]>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateSelection = (selectedIds: any[]) => {
@@ -34,13 +38,27 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
     }));
   };
 
-  const getSectorsData = async () => {
-    let data: any[] = await EntityManager.getSectors();
-    let listOptions: any[] = data.map((o: any) => {
+  const getSectorsData = (sectorsList: any[]) => {
+    let listOptions: any[] = sectorsList.map((o: any) => {
       return {
         value: o?.id,
         label: o?.name,
       }
+    });
+
+    return listOptions;
+  };
+
+  const getSubSectorsData = (sectorsList: any[]) => {
+    let listOptions: any[] = [];
+
+    sectorsList.map((x: any) => {
+      (x?.sub_sectors || []).map((y: any) => {
+        listOptions.push({
+          value: y?.id,
+          label: y?.name,
+        });
+      });
     });
 
     return listOptions;
@@ -66,63 +84,95 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
     }));
   };
 
+  const renderItem = (item: any) => {
+    let isSelected: boolean = selectedSectors.includes(item?.value);
+
+    return (
+      <BoxView direction="row" align="center" justify="space-between" style={styles.listItem}>
+        <TextView style={isSelected ? styles.selectedItem : {}}>{item?.label}</TextView>
+        {isSelected && (
+          <IconView
+            name="checkmark"
+            theme="clear"
+            size={13}
+            padding={0}
+          />
+        )}
+      </BoxView>
+    );
+  };
+
+  const renderSelectedItem = (item: any, deleteCallback: any) => {
+    return (
+      <TagView
+        key={item?.value}
+        theme="white"
+        canEdit={true}
+        containerStyle={styles.tagItem}
+        onDeleteButtonPress={() => deleteItem(item, deleteCallback)}
+      >
+        {item?.label}
+      </TagView>
+    );
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        let listOptions: any[] = await getSectorsData() || [];
-        setSectorsData(listOptions);
-        setSeletedSectors(getSelectedSectors(listOptions));
+        let sectorsList: any = await EntityManager.getSectors();
+        setSectorsData(getSectorsData(sectorsList));
+        setSubSectorsData(getSubSectorsData(sectorsList));
+
+        //setSeletedSectors(getSelectedSectors(listOptions));
         setIsLoaded(true);
       }
     })();
   }, [isLoaded]);
 
   return (
-    <BoxView direction="column" align="left">
-      <MultiSelect
-        value={selectedSectors}
-        labelField="label"
-        valueField="value"
-        placeholder={placeholder}
-        inside={selectedSectors.length > 0}
-        style={!selectedSectors.length ? styles.element : styles.preview}
-        iconStyle={selectedSectors.length > 0 ? styles.iconRight : {}}
-        placeholderStyle={styles.placeholderStyle}
-        iconColor={Layout.colors.primary}
-        onChange={(selectedIds: any) => updateSelection(selectedIds)}
-        data={sectorsData}
-        renderItem={(o: any) => {
-          let isSelected: boolean = selectedSectors.includes(o?.value);
+    <>
+      <BoxView direction="column" align="left">
+        <TextView>{i18n.t('Sectors')}</TextView>
+        <MultiSelect
+          value={selectedSectors}
+          labelField="label"
+          valueField="value"
+          placeholder={placeholder}
+          inside={selectedSectors.length > 0}
+          style={!selectedSectors.length ? styles.element : styles.preview}
+          iconStyle={selectedSectors.length > 0 ? styles.iconRight : {}}
+          placeholderStyle={styles.placeholderStyle}
+          iconColor={Layout.colors.primary}
+          onChange={(selectedIds: any) => updateSelection(selectedIds)}
+          data={sectorsData}
+          renderItem={(o: any) => renderItem(o)}
+          renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
+        />
+        {FormManager.renderError('sectors_ids')}
+      </BoxView>
 
-          return (
-            <BoxView direction="row" align="center" justify="space-between" style={styles.listItem}>
-              <TextView style={isSelected ? styles.selectedItem : {}}>{o?.label}</TextView>
-              {isSelected && (
-                <IconView
-                  name="checkmark"
-                  theme="clear"
-                  size={13}
-                  padding={0}
-                />
-              )}
-            </BoxView>
-          );
-        }}
-        renderSelectedItem={(o, unSelect) => {
-          return (
-            <TagView
-              key={o?.value}
-              theme="white"
-              canEdit={true}
-              containerStyle={styles.tagItem}
-              onDeleteButtonPress={() => deleteItem(o, unSelect)}
-            >
-              {o?.label}
-            </TagView>
-          );
-        }}
-      />
-    </BoxView>
+      {formData?.[field]?.length > 0 && (
+        <BoxView direction="column" align="left">
+          <TextView>{i18n.t('Sub sectors')}</TextView>
+          <MultiSelect
+            value={selectedSectors}
+            labelField="label"
+            valueField="value"
+            placeholder={placeholder}
+            inside={selectedSectors.length > 0}
+            style={!selectedSectors.length ? styles.element : styles.preview}
+            iconStyle={selectedSectors.length > 0 ? styles.iconRight : {}}
+            placeholderStyle={styles.placeholderStyle}
+            iconColor={Layout.colors.primary}
+            onChange={(selectedIds: any) => updateSelection(selectedIds)}
+            data={sectorsData}
+            renderItem={(o: any) => renderItem(o)}
+            renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
+          />
+          {FormManager.renderError('sectors_ids')}
+        </BoxView>
+      )}
+    </>
   );
 };
 
