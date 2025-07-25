@@ -50,11 +50,14 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
 
   const getSubSectorsOptions = () => {
     let listOptions: any[] = [];
-    let data: any[] = [];
 
-    if (!Array.isArray(formData?.[field]) || !formData?.[field]?.length) return [];
+    if (!Array.isArray(formData?.[field]) || !formData?.[field]?.length) {
+      return listOptions;
+    }
 
-    data.map((x: any) => {
+    sectorsData
+      .filter((o: any) => formData[field].includes(o.id))
+      .map((x: any) => {
       (x?.sub_sectors || []).map((y: any) => {
         listOptions.push({
           value: y?.id,
