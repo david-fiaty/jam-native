@@ -133,7 +133,7 @@ let selectedIds: any[] = formData?.[field] || [];
   return (
     <>
       <BoxView direction="column" align="left">
-        <TextView>{i18n.t('Sectors')}</TextView>
+        <TextView>{i18n.t('Activity sectors')}*</TextView>
         <MultiSelect
           value={getSelectedSectors()}
           labelField="label"
@@ -154,7 +154,7 @@ let selectedIds: any[] = formData?.[field] || [];
 
       {formData?.[field]?.length > 0 && (
         <BoxView direction="column" align="left">
-          <TextView>{i18n.t('Sub sectors')}</TextView>
+          <TextView>{i18n.t('Activity sub sectors')}</TextView>
           <MultiSelect
             value={getSelectedSubSectors()}
             labelField="label"
