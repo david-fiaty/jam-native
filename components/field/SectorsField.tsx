@@ -23,7 +23,8 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any[]>([]);
-  const [subSectorsData, setSubSectorsData] = useState<any[]>([]);
+  const [sectorsOptions, setSectorsOptions] = useState<any[]>([]);
+  const [subSectorsOptions, setSubSectorsOptions] = useState<any[]>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateSelection = (selectedIds: any[]) => {
@@ -36,7 +37,7 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
     }));
   };
 
-  const getSectorsData = (sectorsList: any[]) => {
+  const getSectorsOptions = (sectorsList: any[]) => {
     let listOptions: any[] = sectorsList.map((o: any) => {
       return {
         value: o?.id,
@@ -47,10 +48,16 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
     return listOptions;
   };
 
-  const getSubSectorsData = (sectorsList: any[]) => {
+  const getSubSectorsOptions = () => {
     let listOptions: any[] = [];
 
-    sectorsList.map((x: any) => {
+    if (!Array.isArray(formData?.[field]) || !formData?.[field]?.length) {
+      return listOptions;
+    }
+
+    sectorsData
+      .filter((o: any) => formData[field].includes(o.id))
+      .map((x: any) => {
       (x?.sub_sectors || []).map((y: any) => {
         listOptions.push({
           value: y?.id,
@@ -64,14 +71,14 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
 
   const getSelectedSectors = () => {
     let selectedIds: any[] = formData?.[field] || [];
-    let optionsIds: any[] = sectorsData.map((o: any) => o.value);
+    let optionsIds: any[] = sectorsOptions.map((o: any) => o.value);
 
     return selectedIds.filter((id: any) => optionsIds.includes(id));
   };
 
   const getSelectedSubSectors = () => {
     let selectedIds: any[] = formData?.[field] || [];
-    let optionsIds: any[] = subSectorsData.map((o: any) => o.value);
+    let optionsIds: any[] = getSubSectorsOptions().map((o: any) => o.value);
 
     return selectedIds.filter((id: any) => optionsIds.includes(id));
   };
@@ -125,8 +132,8 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
     (async () => {
       if (!isLoaded) {
         let sectorsList: any = await EntityManager.getSectors();
-        setSectorsData(getSectorsData(sectorsList));
-        setSubSectorsData(getSubSectorsData(sectorsList));
+        setSectorsData(sectorsList);
+        setSectorsOptions(getSectorsOptions(sectorsList));
         setIsLoaded(true);
       }
     })();
@@ -147,7 +154,7 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
           placeholderStyle={styles.placeholderStyle}
           iconColor={Layout.colors.primary}
           onChange={(selectedIds: any) => updateSelection(selectedIds)}
-          data={sectorsData}
+          data={sectorsOptions}
           renderItem={(o: any) => renderItem(o)}
           renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
         />
@@ -168,7 +175,7 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
             placeholderStyle={styles.placeholderStyle}
             iconColor={Layout.colors.primary}
             onChange={(selectedIds: any) => updateSelection(selectedIds)}
-            data={subSectorsData}
+            data={getSubSectorsOptions()}
             renderItem={(o: any) => renderItem(o)}
             renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
           />
