@@ -22,6 +22,7 @@ type Props = {
 const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [sectorsData, setSectorsData] = useState<any[]>([]);
   const [sectorsOptions, setSectorsOptions] = useState<any[]>([]);
   const [subSectorsOptions, setSubSectorsOptions] = useState<any[]>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
@@ -47,10 +48,13 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
     return listOptions;
   };
 
-  const getSubSectorsOptions = (sectorsList: any[]) => {
+  const getSubSectorsOptions = () => {
     let listOptions: any[] = [];
+    let data: any[] = [];
 
-    sectorsList.map((x: any) => {
+    if (!Array.isArray(formData?.[field]) || !formData?.[field]?.length) return [];
+
+    data.map((x: any) => {
       (x?.sub_sectors || []).map((y: any) => {
         listOptions.push({
           value: y?.id,
@@ -125,8 +129,8 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
     (async () => {
       if (!isLoaded) {
         let sectorsList: any = await EntityManager.getSectors();
+        setSectorsData(sectorsList);
         setSectorsOptions(getSectorsOptions(sectorsList));
-        setSubSectorsOptions(getSubSectorsOptions(sectorsList));
         setIsLoaded(true);
       }
     })();
@@ -168,7 +172,7 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
             placeholderStyle={styles.placeholderStyle}
             iconColor={Layout.colors.primary}
             onChange={(selectedIds: any) => updateSelection(selectedIds)}
-            data={subSectorsOptions}
+            data={getSubSectorsOptions([])}
             renderItem={(o: any) => renderItem(o)}
             renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
           />
