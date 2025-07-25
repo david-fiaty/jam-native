@@ -75,7 +75,7 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   };
 
   const deleteItem = (item: any, deleteCallback: any) => {
-let selectedIds: any[] = formData?.[field] || [];
+    let selectedIds: any[] = formData?.[field] || [];
     selectedIds = selectedIds.filter((id: any) => id != item?.value);
 
     deleteCallback(item);
