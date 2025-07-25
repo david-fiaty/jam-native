@@ -226,7 +226,6 @@ const JamForm = () => {
         <SectorsField
           resource={resource}
           field="sectors_ids"
-          placeholder={i18n.t('Select your sectors')}
           value={formData?.sectors_ids}
         />
 
