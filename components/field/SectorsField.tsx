@@ -38,13 +38,27 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
     }));
   };
 
-  const getSectorsData = async () => {
-    let data: any[] = await EntityManager.getSectors();
-    let listOptions: any[] = data.map((o: any) => {
+  const getSectorsData = (sectorsList: any[]) => {
+    let listOptions: any[] = sectorsList.map((o: any) => {
       return {
         value: o?.id,
         label: o?.name,
       }
+    });
+
+    return listOptions;
+  };
+
+  const getSubSectorsData = (sectorsList: any[]) => {
+    let listOptions: any[] = [];
+
+    sectorsList.map((x: any) => {
+      (x?.sub_sectors || []).map((y: any) => {
+        listOptions.push({
+          value: y?.id,
+          label: y?.name,
+        });
+      });
     });
 
     return listOptions;
@@ -105,9 +119,11 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        let listOptions: any[] = await getSectorsData() || [];
-        setSectorsData(listOptions);
-        setSeletedSectors(getSelectedSectors(listOptions));
+        let sectorsList: any = await EntityManager.getSectors();
+        setSectorsData(getSectorsData(sectorsList));
+        setSubSectorsData(getSubSectorsData(sectorsList));
+
+        //setSeletedSectors(getSelectedSectors(listOptions));
         setIsLoaded(true);
       }
     })();
