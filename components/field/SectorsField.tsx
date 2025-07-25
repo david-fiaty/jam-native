@@ -9,6 +9,8 @@ import EntityManager from '@/manager/EntityManager';
 import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
 import IconView from '../view/IconView';
+import i18n from '@/translation/i18n';
+import FormManager from '@/manager/FormManager';
 
 type Props = {
   resource: string;
@@ -21,12 +23,12 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any[]>([]);
-  const [selectedSectors, setSeletedSectors] = useState<any[]>([]);
+  const [sectorsOptions, setSectorsOptions] = useState<any[]>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateSelection = (selectedIds: any[]) => {
-    setSeletedSectors(selectedIds);
-
+    selectedIds = [...new Set([...(formData?.[field] || []), ...selectedIds])];
+    
     dispatch(setFormData<any>({
       resource: resource,
       key: field,
@@ -34,9 +36,8 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
     }));
   };
 
-  const getSectorsData = async () => {
-    let data: any[] = await EntityManager.getSectors();
-    let listOptions: any[] = data.map((o: any) => {
+  const getSectorsOptions = (sectorsList: any[]) => {
+    let listOptions: any[] = sectorsList.map((o: any) => {
       return {
         value: o?.id,
         label: o?.name,
@@ -46,15 +47,43 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
     return listOptions;
   };
 
-  const getSelectedSectors = (listOptions: any[]) => {
+  const getSubSectorsOptions = () => {
+    let listOptions: any[] = [];
+
+    if (!Array.isArray(formData?.[field]) || !formData?.[field]?.length) {
+      return listOptions;
+    }
+
+    sectorsData
+      .filter((o: any) => formData[field].includes(o.id))
+      .map((x: any) => {
+      (x?.sub_sectors || []).map((y: any) => {
+        listOptions.push({
+          value: y?.id,
+          label: y?.name,
+        });
+      });
+    });
+
+    return listOptions;
+  };
+
+  const getSelectedSectors = () => {
     let selectedIds: any[] = formData?.[field] || [];
-    let optionsIds: any[] = listOptions.map((o: any) => o.value);
+    let optionsIds: any[] = sectorsOptions.map((o: any) => o.value);
+
+    return selectedIds.filter((id: any) => optionsIds.includes(id));
+  };
+
+  const getSelectedSubSectors = () => {
+    let selectedIds: any[] = formData?.[field] || [];
+    let optionsIds: any[] = getSubSectorsOptions().map((o: any) => o.value);
 
     return selectedIds.filter((id: any) => optionsIds.includes(id));
   };
 
   const deleteItem = (item: any, deleteCallback: any) => {
-    let selectedIds: any[] = [...selectedSectors];
+    let selectedIds: any[] = formData?.[field] || [];
     selectedIds = selectedIds.filter((id: any) => id != item?.value);
 
     deleteCallback(item);
@@ -66,63 +95,93 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
     }));
   };
 
+  const renderItem = (item: any) => {
+    let isSelected: boolean = (formData?.[field] || []).includes(item?.value);
+
+    return (
+      <BoxView direction="row" align="center" justify="space-between" style={styles.listItem}>
+        <TextView style={isSelected ? styles.selectedItem : {}}>{item?.label}</TextView>
+        {isSelected && (
+          <IconView
+            name="checkmark"
+            theme="clear"
+            size={13}
+            padding={0}
+          />
+        )}
+      </BoxView>
+    );
+  };
+
+  const renderSelectedItem = (item: any, deleteCallback: any) => {
+    return (
+      <TagView
+        key={item?.value}
+        theme="white"
+        canEdit={true}
+        containerStyle={styles.tagItem}
+        onDeleteButtonPress={() => deleteItem(item, deleteCallback)}
+      >
+        {item?.label}
+      </TagView>
+    );
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        let listOptions: any[] = await getSectorsData() || [];
-        setSectorsData(listOptions);
-        setSeletedSectors(getSelectedSectors(listOptions));
+        let sectorsList: any = await EntityManager.getSectors();
+        setSectorsData(sectorsList);
+        setSectorsOptions(getSectorsOptions(sectorsList));
         setIsLoaded(true);
       }
     })();
   }, [isLoaded]);
 
   return (
-    <BoxView direction="column" align="left">
-      <MultiSelect
-        value={selectedSectors}
-        labelField="label"
-        valueField="value"
-        placeholder={placeholder}
-        inside={selectedSectors.length > 0}
-        style={!selectedSectors.length ? styles.element : styles.preview}
-        iconStyle={selectedSectors.length > 0 ? styles.iconRight : {}}
-        placeholderStyle={styles.placeholderStyle}
-        iconColor={Layout.colors.primary}
-        onChange={(selectedIds: any) => updateSelection(selectedIds)}
-        data={sectorsData}
-        renderItem={(o: any) => {
-          let isSelected: boolean = selectedSectors.includes(o?.value);
+    <>
+      <BoxView direction="column" align="left">
+        <TextView>{i18n.t('Activity sectors')}*</TextView>
+        <MultiSelect
+          value={getSelectedSectors()}
+          labelField="label"
+          valueField="value"
+          placeholder={i18n.t('Select your sectors')}
+          inside={getSelectedSectors().length > 0}
+          style={!getSelectedSectors().length ? styles.element : styles.preview}
+          iconStyle={getSelectedSectors().length > 0 ? styles.iconRight : {}}
+          placeholderStyle={styles.placeholderStyle}
+          iconColor={Layout.colors.primary}
+          onChange={(selectedIds: any) => updateSelection(selectedIds)}
+          data={sectorsOptions}
+          renderItem={(o: any) => renderItem(o)}
+          renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
+        />
+        {FormManager.renderError('sectors_ids')}
+      </BoxView>
 
-          return (
-            <BoxView direction="row" align="center" justify="space-between" style={styles.listItem}>
-              <TextView style={isSelected ? styles.selectedItem : {}}>{o?.label}</TextView>
-              {isSelected && (
-                <IconView
-                  name="checkmark"
-                  theme="clear"
-                  size={13}
-                  padding={0}
-                />
-              )}
-            </BoxView>
-          );
-        }}
-        renderSelectedItem={(o, unSelect) => {
-          return (
-            <TagView
-              key={o?.value}
-              theme="white"
-              canEdit={true}
-              containerStyle={styles.tagItem}
-              onDeleteButtonPress={() => deleteItem(o, unSelect)}
-            >
-              {o?.label}
-            </TagView>
-          );
-        }}
-      />
-    </BoxView>
+      {formData?.[field]?.length > 0 && (
+        <BoxView direction="column" align="left">
+          <TextView>{i18n.t('Activity sub sectors')}*</TextView>
+          <MultiSelect
+            value={getSelectedSubSectors()}
+            labelField="label"
+            valueField="value"
+            placeholder={i18n.t('Select your sub sectors')}
+            inside={getSelectedSubSectors().length > 0}
+            style={!getSelectedSubSectors().length ? styles.element : styles.preview}
+            iconStyle={getSelectedSubSectors().length > 0 ? styles.iconRight : {}}
+            placeholderStyle={styles.placeholderStyle}
+            iconColor={Layout.colors.primary}
+            onChange={(selectedIds: any) => updateSelection(selectedIds)}
+            data={getSubSectorsOptions()}
+            renderItem={(o: any) => renderItem(o)}
+            renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
+          />
+          {FormManager.renderError('sectors_ids')}
+        </BoxView>
+      )}
+    </>
   );
 };
 
