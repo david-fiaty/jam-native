@@ -122,8 +122,6 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
         let sectorsList: any = await EntityManager.getSectors();
         setSectorsData(getSectorsData(sectorsList));
         setSubSectorsData(getSubSectorsData(sectorsList));
-
-        //setSeletedSectors(getSelectedSectors(listOptions));
         setIsLoaded(true);
       }
     })();
@@ -155,17 +153,17 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
         <BoxView direction="column" align="left">
           <TextView>{i18n.t('Sub sectors')}</TextView>
           <MultiSelect
-            value={selectedSectors}
+            value={selectedSubSectors}
             labelField="label"
             valueField="value"
             placeholder={placeholder}
-            inside={selectedSectors.length > 0}
-            style={!selectedSectors.length ? styles.element : styles.preview}
-            iconStyle={selectedSectors.length > 0 ? styles.iconRight : {}}
+            inside={selectedSubSectors.length > 0}
+            style={!selectedSubSectors.length ? styles.element : styles.preview}
+            iconStyle={selectedSubSectors.length > 0 ? styles.iconRight : {}}
             placeholderStyle={styles.placeholderStyle}
             iconColor={Layout.colors.primary}
             onChange={(selectedIds: any) => updateSelection(selectedIds)}
-            data={sectorsData}
+            data={subSectorsData}
             renderItem={(o: any) => renderItem(o)}
             renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
           />
