@@ -78,7 +78,7 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
 
   const getSelectedSubSectors = () => {
     let selectedIds: any[] = formData?.[field] || [];
-    let optionsIds: any[] = subSectorsOptions.map((o: any) => o.value);
+    let optionsIds: any[] = getSubSectorsOptions().map((o: any) => o.value);
 
     return selectedIds.filter((id: any) => optionsIds.includes(id));
   };
@@ -175,7 +175,7 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
             placeholderStyle={styles.placeholderStyle}
             iconColor={Layout.colors.primary}
             onChange={(selectedIds: any) => updateSelection(selectedIds)}
-            data={getSubSectorsOptions([])}
+            data={getSubSectorsOptions()}
             renderItem={(o: any) => renderItem(o)}
             renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
           />
