@@ -66,6 +66,38 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
     }));
   };
 
+  const renderItem = (item: any) => {
+    let isSelected: boolean = selectedSectors.includes(item?.value);
+
+    return (
+      <BoxView direction="row" align="center" justify="space-between" style={styles.listItem}>
+        <TextView style={isSelected ? styles.selectedItem : {}}>{item?.label}</TextView>
+        {isSelected && (
+          <IconView
+            name="checkmark"
+            theme="clear"
+            size={13}
+            padding={0}
+          />
+        )}
+      </BoxView>
+    );
+  };
+
+  const renderSelectedItem = (item: any, deleteCallback: any) => {
+    return (
+      <TagView
+        key={item?.value}
+        theme="white"
+        canEdit={true}
+        containerStyle={styles.tagItem}
+        onDeleteButtonPress={() => deleteItem(item, deleteCallback)}
+      >
+        {item?.label}
+      </TagView>
+    );
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
@@ -91,36 +123,8 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
         iconColor={Layout.colors.primary}
         onChange={(selectedIds: any) => updateSelection(selectedIds)}
         data={sectorsData}
-        renderItem={(o: any) => {
-          let isSelected: boolean = selectedSectors.includes(o?.value);
-
-          return (
-            <BoxView direction="row" align="center" justify="space-between" style={styles.listItem}>
-              <TextView style={isSelected ? styles.selectedItem : {}}>{o?.label}</TextView>
-              {isSelected && (
-                <IconView
-                  name="checkmark"
-                  theme="clear"
-                  size={13}
-                  padding={0}
-                />
-              )}
-            </BoxView>
-          );
-        }}
-        renderSelectedItem={(o, unSelect) => {
-          return (
-            <TagView
-              key={o?.value}
-              theme="white"
-              canEdit={true}
-              containerStyle={styles.tagItem}
-              onDeleteButtonPress={() => deleteItem(o, unSelect)}
-            >
-              {o?.label}
-            </TagView>
-          );
-        }}
+        renderItem={(o: any) => renderItem(o)}
+        renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
       />
     </BoxView>
   );
