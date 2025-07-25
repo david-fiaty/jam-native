@@ -9,6 +9,8 @@ import EntityManager from '@/manager/EntityManager';
 import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
 import IconView from '../view/IconView';
+import i18n from '@/translation/i18n';
+import FormManager from '@/manager/FormManager';
 
 type Props = {
   resource: string;
@@ -110,23 +112,50 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   }, [isLoaded]);
 
   return (
-    <BoxView direction="column" align="left">
-      <MultiSelect
-        value={selectedSectors}
-        labelField="label"
-        valueField="value"
-        placeholder={placeholder}
-        inside={selectedSectors.length > 0}
-        style={!selectedSectors.length ? styles.element : styles.preview}
-        iconStyle={selectedSectors.length > 0 ? styles.iconRight : {}}
-        placeholderStyle={styles.placeholderStyle}
-        iconColor={Layout.colors.primary}
-        onChange={(selectedIds: any) => updateSelection(selectedIds)}
-        data={sectorsData}
-        renderItem={(o: any) => renderItem(o)}
-        renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
-      />
-    </BoxView>
+    <>
+      <BoxView direction="column" align="left">
+        <TextView>{i18n.t('Sectors')}</TextView>
+        <MultiSelect
+          value={selectedSectors}
+          labelField="label"
+          valueField="value"
+          placeholder={placeholder}
+          inside={selectedSectors.length > 0}
+          style={!selectedSectors.length ? styles.element : styles.preview}
+          iconStyle={selectedSectors.length > 0 ? styles.iconRight : {}}
+          placeholderStyle={styles.placeholderStyle}
+          iconColor={Layout.colors.primary}
+          onChange={(selectedIds: any) => updateSelection(selectedIds)}
+          data={sectorsData}
+          renderItem={(o: any) => renderItem(o)}
+          renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
+        />
+        {FormManager.renderError('sectors_ids')}
+      </BoxView>
+
+      {formData?.[field]?.length > 0 && (
+        <BoxView direction="column" align="left">
+          <TextView>{i18n.t('Sub sectors')}</TextView>
+          <MultiSelect
+            value={selectedSectors}
+            labelField="label"
+            valueField="value"
+            placeholder={placeholder}
+            inside={selectedSectors.length > 0}
+            style={!selectedSectors.length ? styles.element : styles.preview}
+            iconStyle={selectedSectors.length > 0 ? styles.iconRight : {}}
+            placeholderStyle={styles.placeholderStyle}
+            iconColor={Layout.colors.primary}
+            onChange={(selectedIds: any) => updateSelection(selectedIds)}
+            data={sectorsData}
+            renderItem={(o: any) => renderItem(o)}
+            renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
+          />
+          {FormManager.renderError('sectors_ids')}
+        </BoxView>
+      )}
+
+    </>
   );
 };
 
