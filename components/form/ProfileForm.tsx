@@ -239,20 +239,11 @@ const ProfileForm = () => {
             />
             {FormManager.renderError('address')}
 
-            <TextView>
-              {i18n.t('Sectors')}*
-            </TextView>
             <SectorsField
               resource={resource}
               field="sectors_ids"
-              placeholder={i18n.t('Select your sectors')}
               value={formData?.sectors_ids}
-              onPress={() => ModalManager.toggleModal('SectorsList', {
-                resource: resource,
-                field: 'sectors_ids',
-              })}
             />
-            {FormManager.renderError('sectors_ids')}
 
             <TextView>
               {i18n.t('Country')}
