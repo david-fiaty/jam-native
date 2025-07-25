@@ -24,6 +24,8 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any[]>([]);
   const [selectedSectors, setSeletedSectors] = useState<any[]>([]);
+  const [subSectorsData, setSubSectorsData] = useState<any[]>([]);
+  const [selectedSubSectors, setSeletedSubSectors] = useState<any[]>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateSelection = (selectedIds: any[]) => {
