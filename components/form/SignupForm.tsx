@@ -231,9 +231,6 @@ const SignupForm = () => {
           />
           {FormManager.renderError('address')}
 
-          <TextView>
-            {i18n.t('Sectors')}*
-          </TextView>
           <SectorsField
             resource={resource}
             field="sectors_ids"
