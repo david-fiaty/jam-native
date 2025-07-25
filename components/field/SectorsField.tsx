@@ -27,6 +27,8 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateSelection = (selectedIds: any[]) => {
+    selectedIds = [...new Set([...(formData?.[field] || []), ...selectedIds])];
+
     dispatch(setFormData<any>({
       resource: resource,
       key: field,
@@ -154,7 +156,7 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
 
       {formData?.[field]?.length > 0 && (
         <BoxView direction="column" align="left">
-          <TextView>{i18n.t('Activity sub sectors')}</TextView>
+          <TextView>{i18n.t('Activity sub sectors')}*</TextView>
           <MultiSelect
             value={getSelectedSubSectors()}
             labelField="label"
