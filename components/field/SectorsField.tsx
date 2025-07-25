@@ -135,7 +135,7 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
           value={selectedSectors}
           labelField="label"
           valueField="value"
-          placeholder={placeholder}
+          placeholder={i18n.t('Select your sectors')}
           inside={selectedSectors.length > 0}
           style={!selectedSectors.length ? styles.element : styles.preview}
           iconStyle={selectedSectors.length > 0 ? styles.iconRight : {}}
@@ -156,7 +156,7 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
             value={selectedSubSectors}
             labelField="label"
             valueField="value"
-            placeholder={placeholder}
+            placeholder={i18n.t('Select your sub sectors')}
             inside={selectedSubSectors.length > 0}
             style={!selectedSubSectors.length ? styles.element : styles.preview}
             iconStyle={selectedSubSectors.length > 0 ? styles.iconRight : {}}
