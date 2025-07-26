@@ -103,7 +103,7 @@ const AddProjectForm = () => {
         <TextView>{i18n.t("Privacy status")}*</TextView>
         <PrivacyStatusField
           value={formData?.privacy_status}
-          onChangeValue={(option: any) => FormManager.updateField(resource, 'privay_status', option.value, ['string'])}
+          onChangeValue={(option: any) => FormManager.updateField(resource, 'privacy_status', option.value, ['string'])}
         />
         {FormManager.renderError('privacy_status')}
 
