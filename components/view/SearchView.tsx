@@ -76,6 +76,7 @@ const SearchView = () => {
 
       if (prevSearchState.current.searchValue != searchState.searchValue) {
         setSearchData(await SearchManager.getResults()); 
+        prevSearchState.current = searchState;
       }
     })();
 
