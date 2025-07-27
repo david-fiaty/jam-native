@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSearchValue } from '@/redux/slices/SearchSlice';
 import * as Animatable from 'react-native-animatable';
 import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
@@ -10,22 +11,22 @@ import BoxView from '../view/BoxView';
 import SearchManager from '@/manager/SearchManager';
 
 const SearchField = () => {
+  const dispatch = useDispatch();
   const searchState = useSelector((state: any) => state.search);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   const onChangeText = async (value: string) => {
     setIsProcessing(true);
-    setCurrentSearchValue(value);
+    dispatch(setSearchValue(value));
     await SearchManager.loadResults(value);
     setIsProcessing(false);
   };
 
   const clearSearch = async () => {
     setIsProcessing(true);
-    setCurrentSearchValue('');
+    dispatch(setSearchValue(''));
     await SearchManager.resetSearch();
     setIsProcessing(false);
   };
@@ -38,7 +39,7 @@ const SearchField = () => {
     if (isProcessing) {
       return <SpinnerView size="small" />;
     }
-    else if (currentSearchValue?.length > 0) {
+    else if (searchState?.searchValue?.length > 0) {
       return (
         <IconView 
           name="delete" 
@@ -85,7 +86,7 @@ const SearchField = () => {
         duration={isExpanded ? 300 : 600}
       >
         <InputTextField 
-          value={currentSearchValue}
+          value={searchState?.searchValue || ''}
           placeholder={i18n.t('Search...')}
           onChangeText={onChangeText}
           rightIcon={renderRightIcon()}
@@ -93,7 +94,7 @@ const SearchField = () => {
         /> 
       </Animatable.View>
 
-      {!currentSearchValue?.length && (
+      {!searchState?.searchValue?.length && (
         <Animatable.View 
           style={[styles.searchIcon, styles.searchIconAnimate, (!isExpanded ? styles.searchIconVisible : {})]}
           transition="opacity"
