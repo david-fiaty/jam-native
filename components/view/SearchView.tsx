@@ -79,7 +79,9 @@ const SearchView = () => {
       }
     })();
 
-    if (!searchState.currentTab) dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
+    if (!searchState.currentTab) {
+      dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
+    }
   }, [isLoaded, searchState, searchTabs]);
 
   if (!isLoaded) return <SpinnerView />;
