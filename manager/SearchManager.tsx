@@ -9,7 +9,6 @@ class SearchManager {
 
     if (searchValue?.length) {
       results = await this.sendListRequest(searchValue);
-      Store.dispatch(setSearchValue(searchValue));
       Store.dispatch(setResultIndex(this.buildIndex(results)));
     }
     else if (searchState.defaultIndex.length) {
