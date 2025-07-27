@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
-import StaticData from "@/constants/StaticData";
 import SpinnerView from "./SpinnerView";
 import SearchManager from "@/manager/SearchManager";
 import SearchJamsList from "../list/SearchJamsList";
