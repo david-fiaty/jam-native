@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
@@ -16,6 +16,7 @@ const SearchView = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [searchData, setSearchData] = useState<any>([]);
   const searchState: any = useSelector((state: any) => state.search);
+  const prevSearchState: any = useRef(searchState);
   
   const searchTabs: any[] = [
     {
@@ -71,6 +72,10 @@ const SearchView = () => {
       if (!isLoaded) {
         setSearchData(await SearchManager.getResults());
         setIsLoaded(true);
+      }
+
+      if (prevSearchState.current.searchValue != searchState.searchValue) {
+        setSearchData(await SearchManager.getResults()); 
       }
     })();
 
