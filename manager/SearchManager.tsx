@@ -13,13 +13,13 @@ class SearchManager {
         Store.dispatch(setCurrentResults(searchState.defaultResults));
       }
       else {
-        let results: any = JSON.stringify(await this.sendListRequest() || '{}');
+        let results: any = JSON.stringify(await this.sendListRequest() || {});
         Store.dispatch(setDefaultResults(results));
         Store.dispatch(setCurrentResults(results));
       }
     }
     else {
-      let results: any = JSON.stringify(await this.sendListRequest(searchValue) || '{}');
+      let results: any = JSON.stringify(await this.sendListRequest(searchValue) || {});
       Store.dispatch(setCurrentResults(results));
     }
   }
