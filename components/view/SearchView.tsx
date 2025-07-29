@@ -12,7 +12,7 @@ import i18n from "@/translation/i18n";
 
 const SearchView = () => {
   const dispatch = useDispatch();
-  const [searchData, setSearchData] = useState<any>([]);
+  const [searchData, setSearchData] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search);
   
   const searchTabs: any[] = [
@@ -64,12 +64,8 @@ const SearchView = () => {
     },
   ];
 
-  const loadSearchData = () => {
-    setSearchData(SearchManager.getResults() || {});
-  };
-
   useEffect(() => {
-    loadSearchData();
+    setSearchData(SearchManager.getResults() || {});
     
     if (!searchState.currentTab) {
       dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
