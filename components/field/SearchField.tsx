@@ -70,7 +70,7 @@ const SearchField = () => {
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       setDebounceValue(currentValue);
-    }, 500);
+    }, 1000);
 
     return () => clearTimeout(delayDebounce);
   }, [currentValue]);
