@@ -17,7 +17,6 @@ type Props = {
 const JamsMapView = ({ idArray }: Props) => {
   const mapRef = useRef<any>();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [searchData, setSearchData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search);
   const markerImage = require('@/assets/images/logo-55.png');
@@ -78,13 +77,9 @@ const JamsMapView = ({ idArray }: Props) => {
     (async () => {
       setCurrentLocation(await UserManager.getLocation());
     })();
+  }, [searchState]);
 
-    if (!isLoaded) {
-      setIsLoaded(true);
-    }
-  }, [isLoaded, searchState]);
-
-  if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
+  if (!currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
   
   return (
     <TouchableWithoutFeedback>
