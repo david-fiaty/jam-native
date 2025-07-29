@@ -13,13 +13,13 @@ class SearchManager {
         Store.dispatch(setCurrentResults(searchState.defaultResults));
       }
       else {
-        let results: any = JSON.stringify(await this.sendListRequest() || {});
+        let results: any = JSON.stringify(await this.sendRequest() || {});
         Store.dispatch(setDefaultResults(results));
         Store.dispatch(setCurrentResults(results));
       }
     }
     else {
-      let results: any = JSON.stringify(await this.sendListRequest(searchValue) || {});
+      let results: any = JSON.stringify(await this.sendRequest(searchValue) || {});
       Store.dispatch(setCurrentResults(results));
     }
   }
@@ -37,7 +37,7 @@ class SearchManager {
     Store.dispatch(setCurrentResults(searchState.defaultResults));
   }
 
-  async sendListRequest(searchValue?: string) {
+  async sendRequest(searchValue?: string) {
     let payload: any = {};
 
     if (searchValue?.length) payload = { query_text: searchValue };
