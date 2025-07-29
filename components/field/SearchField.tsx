@@ -24,7 +24,7 @@ const SearchField = () => {
     setIsProcessing(false);
   };
 
-  const clearSearch = async () => {
+  const clearSearch = () => {
     setIsProcessing(true);
     SearchManager.resetResults();
     setIsProcessing(false);
