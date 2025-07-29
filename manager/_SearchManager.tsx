@@ -4,11 +4,6 @@ import Store from '@/redux/Store';
 
 class SearchManager {
   async loadResults(searchValue?: string, filter?: string) {
-
-  }
-
-  /*
-  async loadResults(searchValue?: string, filter?: string) {
     let searchState: any = Store.getState().search;
     let results: any = [];
 
@@ -25,7 +20,6 @@ class SearchManager {
     
     return results;
   } 
-    */
 
   buildIndex (results: any) {
     let index: any = {};

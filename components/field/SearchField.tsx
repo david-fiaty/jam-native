@@ -15,6 +15,8 @@ const SearchField = () => {
   const searchState = useSelector((state: any) => state.search);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const [currentValue, setCurrentValue] = useState<any>('');
+  const [debouncedValue, setDebouncedValue] = useState<any>('');
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   const onChangeText = async (value: string) => {
@@ -41,9 +43,9 @@ const SearchField = () => {
     }
     else if (searchState?.searchValue?.length > 0) {
       return (
-        <IconView 
-          name="delete" 
-          theme="secondary" 
+        <IconView
+          name="delete"
+          theme="secondary"
           size={18}
           padding={0}
           onPress={clearSearch}
@@ -52,9 +54,9 @@ const SearchField = () => {
     }
     else {
       return (
-        <IconView 
-          name="next" 
-          theme="secondary" 
+        <IconView
+          name="next"
+          theme="secondary"
           size={18}
           padding={0}
           onPress={toggleSearch}
@@ -64,49 +66,57 @@ const SearchField = () => {
   };
 
   useEffect(() => {
-    (async () => {    
+    (async () => {
       if (!isLoaded) {
         await SearchManager.loadResults();
         setIsLoaded(true);
       }
+
+      const delayDebounce = setTimeout(() => {
+        setDebouncedValue(currentValue);
+      }, 500);
+
+      return () => clearTimeout(delayDebounce);
     })();
 
-  }, [isLoaded]);
+  }, [isLoaded, currentValue]);
+
+  console.log('--- debouncedValue ----', debouncedValue)
 
   return (
-    <BoxView 
-      direction="row" 
-      align="center" 
-      justify="flex-end" 
+    <BoxView
+      direction="row"
+      align="center"
+      justify="flex-end"
       style={styles.container}
     >
-      <Animatable.View 
+      <Animatable.View
         style={[styles.fieldInput, styles.fieldAnimate, (isExpanded ? styles.fieldExpanded : {})]}
         transition="width"
         duration={isExpanded ? 300 : 600}
       >
-        <InputTextField 
+        <InputTextField
           value={searchState?.searchValue || ''}
           placeholder={i18n.t('Search...')}
           onChangeText={onChangeText}
           rightIcon={renderRightIcon()}
           containerStyle={styles.fieldContainer}
-        /> 
+        />
       </Animatable.View>
 
       {!searchState?.searchValue?.length && (
-        <Animatable.View 
+        <Animatable.View
           style={[styles.searchIcon, styles.searchIconAnimate, (!isExpanded ? styles.searchIconVisible : {})]}
           transition="opacity"
-          duration={isExpanded ? 100: 1000}
-        >      
-          <IconView 
-            name="search" 
-            theme="clear" 
+          duration={isExpanded ? 100 : 1000}
+        >
+          <IconView
+            name="search"
+            theme="clear"
             size={22}
             padding={0}
             onPress={toggleSearch}
-          /> 
+          />
         </Animatable.View>
       )}
 
