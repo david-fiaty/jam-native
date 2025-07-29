@@ -67,10 +67,14 @@ const SearchView = () => {
     },
   ];
 
+  const loadSearchData = () => {
+    setSearchData(SearchManager.getResults() || {});
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setSearchData(await SearchManager.getResults());
+        loadSearchData();
         setIsLoaded(true);
       }
 
