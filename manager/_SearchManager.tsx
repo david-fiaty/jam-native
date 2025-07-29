@@ -1,40 +1,8 @@
-import { setSearchValue, setDefaultIndex, setResultIndex, setCurrentResults, setDefaultResults } from "@/redux/slices/SearchSlice";
+import { setSearchValue, setDefaultIndex, setResultIndex } from "@/redux/slices/SearchSlice";
 import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 
 class SearchManager {
-  async loadResults(searchValue?: any, filter?: string) {
-    let searchState: any = Store.getState().search;
-    let defaultResults: any = JSON.parse(searchState.defaultResults);
-
-    if (!searchValue?.length && Object.keys(defaultResults).length > 0) {
-      Store.dispatch(setCurrentResults(searchState.defaultResults));  
-    } 
-    else if (!searchValue?.length && !Object.keys(defaultResults).length) {
-      let results: any = JSON.stringify(await this.sendListRequest() || '{}');
-      Store.dispatch(setDefaultResults(results));
-      Store.dispatch(setCurrentResults(results));  
-    }
-    else if (searchValue?.length > 0) {
-      let results: any = JSON.stringify(await this.sendListRequest(searchValue) || '{}');
-      Store.dispatch(setCurrentResults(results));  
-    }
-  }
-
-  getResults() {
-    let searchState: any = Store.getState().search;
-    let results: any = JSON.parse(searchState.currentResults);
-
-    return results;
-  }
-
-  resetResults() {
-    let searchState: any = Store.getState().search;
-    Store.dispatch(setSearchValue(''));
-    Store.dispatch(setCurrentResults(searchState.defaultResults));
-  }
-
-  /*
   async loadResults(searchValue?: string, filter?: string) {
     let searchState: any = Store.getState().search;
     let results: any = [];
@@ -52,22 +20,31 @@ class SearchManager {
     
     return results;
   } 
-    */
 
-  buildIndex(results: any) {
+  buildIndex (results: any) {
     let index: any = {};
 
     for (const [key, data] of Object.entries(results)) {
       index[key] = (data || []).map((o: any) => o.id);
     }
-
+    
     return index;
+  }
+
+  async getResults() {
+    let searchState: any = Store.getState().search;
+    let itemsIds = [];
+
+    if (searchState.resultIndex.length > 0) itemsIds = searchState.resultIndex
+    else itemsIds = searchState.defaultIndex;
+        
+    return await this.sendItemRequest(itemsIds);
   }
 
   async resetSearch() {
     Store.dispatch(setSearchValue(''));
     Store.dispatch(setResultIndex([]));
-    await this.loadResults();
+    await this.loadResults(); 
   }
 
   async getDefaultResults() {
@@ -83,7 +60,7 @@ class SearchManager {
     if (searchValue?.length) payload = { query_text: searchValue };
 
     const [jam, profile, project] = await Promise.all([
-      EntityManager.listJams(payload),
+      EntityManager.listJams(payload), 
       EntityManager.listProfiles(payload),
       EntityManager.listProjects(payload),
     ]);
@@ -97,7 +74,7 @@ class SearchManager {
 
   async sendItemRequest(itemsIds: any) {
     const [jam, profile, project] = await Promise.all([
-      EntityManager.getJams(itemsIds.jam),
+      EntityManager.getJams(itemsIds.jam), 
       EntityManager.getProfiles(itemsIds.profile),
       EntityManager.getProjects(itemsIds.project),
     ]);
