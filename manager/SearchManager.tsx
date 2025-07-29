@@ -21,6 +21,19 @@ class SearchManager {
     }
   }
 
+  getResults() {
+    let searchState: any = Store.getState().search;
+    let results: any = JSON.parse(searchState.currentResults);
+
+    return results;
+  }
+
+  resetResults() {
+    let searchState: any = Store.getState().search;
+    Store.dispatch(setSearchValue(''));
+    Store.dispatch(setCurrentResults(searchState.defaultResults));
+  }
+
   /*
   async loadResults(searchValue?: string, filter?: string) {
     let searchState: any = Store.getState().search;
@@ -49,16 +62,6 @@ class SearchManager {
     }
 
     return index;
-  }
-
-  async getResults() {
-    let searchState: any = Store.getState().search;
-    let itemsIds = [];
-
-    if (searchState.resultIndex.length > 0) itemsIds = searchState.resultIndex
-    else itemsIds = searchState.defaultIndex;
-
-    return await this.sendItemRequest(itemsIds);
   }
 
   async resetSearch() {
