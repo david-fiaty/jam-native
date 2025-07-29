@@ -8,7 +8,6 @@ import SpinnerView from "./SpinnerView";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import SearchManager from "@/manager/SearchManager";
-import EntityManager from "@/manager/EntityManager";
 
 type Props = {
   idArray?: any;
