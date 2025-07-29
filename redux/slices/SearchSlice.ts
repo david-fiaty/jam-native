@@ -7,8 +7,8 @@ const SearchSlice = createSlice({
     resultIndex: [],
     defaultIndex: [],
     currentTab: null,
-    currentResults: '',
-    defaultResults: '',
+    currentResults: '{}',
+    defaultResults: '{}',
   },
   reducers: {
     setSearchValue: (state, action) => {
