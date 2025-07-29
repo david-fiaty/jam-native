@@ -5,17 +5,18 @@ import Store from '@/redux/Store';
 class SearchManager {
   async loadResults(searchValue?: any, filter?: string) {
     let searchState: any = Store.getState().search;
+    let defaultResults: any = JSON.parse(searchState.defaultResults);
 
-    if (!searchValue?.length && searchState.defaultResults.length > 0) {
+    if (!searchValue?.length && Object.keys(defaultResults).length > 0) {
       Store.dispatch(setCurrentResults(searchState.defaultResults));  
     } 
-    else if (!searchValue?.length && !searchState.defaultResults.length) {
-      let results: any = JSON.stringify(await this.sendListRequest() || '');
+    else if (!searchValue?.length && !Object.keys(defaultResults).length) {
+      let results: any = JSON.stringify(await this.sendListRequest() || '{}');
       Store.dispatch(setDefaultResults(results));
       Store.dispatch(setCurrentResults(results));  
     }
     else if (searchValue?.length > 0) {
-      let results: any = JSON.stringify(await this.sendListRequest() || '');
+      let results: any = JSON.stringify(await this.sendListRequest(searchValue) || '{}');
       Store.dispatch(setCurrentResults(results));  
     }
   }
