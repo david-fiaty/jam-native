@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
-import { setSearchValue } from '@/redux/slices/SearchSlice';
+import { StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux';
 import * as Animatable from 'react-native-animatable';
 import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
@@ -11,25 +10,23 @@ import BoxView from '../view/BoxView';
 import SearchManager from '@/manager/SearchManager';
 
 const SearchField = () => {
-  const dispatch = useDispatch();
   const searchState = useSelector((state: any) => state.search);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState<any>('');
-  const [debouncedValue, setDebouncedValue] = useState<any>('');
+  const [debounceValue, setDebounceValue] = useState<any>('');
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   const onChangeText = async (value: string) => {
     setIsProcessing(true);
-    dispatch(setSearchValue(value));
-    //await SearchManager.loadResults(value);
+    setCurrentValue(value);
+    await SearchManager.loadResults(value);
     setIsProcessing(false);
   };
 
   const clearSearch = async () => {
     setIsProcessing(true);
-    dispatch(setSearchValue(''));
-    await SearchManager.resetSearch();
+    SearchManager.resetResults();
     setIsProcessing(false);
   };
 
@@ -66,22 +63,27 @@ const SearchField = () => {
   };
 
   useEffect(() => {
-    (async () => {
-      if (!isLoaded) {
-        await SearchManager.loadResults();
-        setIsLoaded(true);
-      }
+    if (searchState?.searchValue?.length > 0) {
+      setCurrentValue(searchState.searchValue);
+      setIsLoaded(true);
+    }
+  }, [isLoaded, searchState]);
 
-      const delayDebounce = setTimeout(() => {
-        setDebouncedValue(currentValue);
-      }, 500);
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      setDebounceValue(currentValue);
+    }, 500);
 
-      return () => clearTimeout(delayDebounce);
-    })();
+    return () => clearTimeout(delayDebounce);
+  }, [currentValue]);
 
-  }, [isLoaded, currentValue]);
-
-  console.log('--- debouncedValue ----', debouncedValue)
+  useEffect(() => {
+    if (debounceValue.length > 0) {
+      (async () => {
+        await onChangeText(debounceValue);
+      })();
+    }
+  }, [debounceValue]);
 
   return (
     <BoxView
@@ -96,7 +98,7 @@ const SearchField = () => {
         duration={isExpanded ? 300 : 600}
       >
         <InputTextField
-          value={searchState?.searchValue || ''}
+          value={currentValue}
           placeholder={i18n.t('Search...')}
           onChangeText={onChangeText}
           rightIcon={renderRightIcon()}
@@ -104,7 +106,7 @@ const SearchField = () => {
         />
       </Animatable.View>
 
-      {!searchState?.searchValue?.length && (
+      {!currentValue?.length && (
         <Animatable.View
           style={[styles.searchIcon, styles.searchIconAnimate, (!isExpanded ? styles.searchIconVisible : {})]}
           transition="opacity"
