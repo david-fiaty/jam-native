@@ -69,13 +69,10 @@ const JamsMapView = ({ idArray }: Props) => {
     return null;
   };
 
-  const loadSearchData = async () => {
-    setSearchData(SearchManager.getResults()?.jams || []);
-  };
-
   useEffect(() => {
+    setSearchData(SearchManager.getResults()?.jams || []);
+
     (async () => {
-      loadSearchData();
       setCurrentLocation(await UserManager.getLocation());
     })();
 
