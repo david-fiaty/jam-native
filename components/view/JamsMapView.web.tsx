@@ -4,11 +4,9 @@ import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
-import SpinnerView from "./SpinnerView";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import SearchManager from "@/manager/SearchManager";
-import EntityManager from "@/manager/EntityManager";
 
 type Props = {
   idArray?: any;
@@ -17,7 +15,6 @@ type Props = {
 const JamsMapView = ({ idArray }: Props) => {
   const mapRef = useRef<any>();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [searchData, setSearchData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search);
   const markerImage = require('@/assets/images/logo-55.png');
@@ -75,15 +72,7 @@ const JamsMapView = ({ idArray }: Props) => {
     (async () => {
       setCurrentLocation(await UserManager.getLocation());
     })();
-
-    if (!isLoaded) {
-      setIsLoaded(true);
-    }
-  }, [isLoaded, searchState]);
-
-  // Todo - Enable spinner
-  //if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
-  //if (!searchData?.length) return <SpinnerView />;
+  }, [searchState]);
 
   return (
     <LoadScript googleMapsApiKey={Config.mapApiKey}>
