@@ -1,10 +1,18 @@
-import { setSearchValue, setDefaultIndex, setResultIndex } from "@/redux/slices/SearchSlice";
+import { setSearchValue, setDefaultIndex, setResultIndex, setCurrentResults, setDefaultResults } from "@/redux/slices/SearchSlice";
 import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 
 class SearchManager {
   async loadResults(searchValue?: string, filter?: string) {
+    let searchState: any = Store.getState().search;
+    let results: any = await this.sendListRequest(searchValue);
 
+    if (!searchValue?.length) {
+      Store.dispatch(setDefaultResults(JSON.stringify(results)));
+    }
+    else {
+      Store.dispatch(setCurrentResults(JSON.stringify(results)));
+    }
   }
 
   /*
