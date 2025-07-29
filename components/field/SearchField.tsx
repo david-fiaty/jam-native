@@ -22,7 +22,7 @@ const SearchField = () => {
   const onChangeText = async (value: string) => {
     setIsProcessing(true);
     dispatch(setSearchValue(value));
-    await SearchManager.loadResults(value);
+    //await SearchManager.loadResults(value);
     setIsProcessing(false);
   };
 
