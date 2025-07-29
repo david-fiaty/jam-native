@@ -50,14 +50,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   };
 
   const loadSearchData = async () => {
-    let data: any[] = [];
-    
-    if (Array.isArray(idArray) && idArray?.length > 0) {
-      data = await EntityManager.getJams(idArray);
-    }
-    else {
-      data = (await SearchManager.getResults())?.jam;
-    }
+    let data: any[] = SearchManager.getResults()?.jams || [];
 
     if (Config.infiniteScrollEnabled === true && disableInfiniteScroll !== true) {
       setSearchData(prevData => [...prevData, ...data]);

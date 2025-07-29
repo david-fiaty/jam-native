@@ -72,22 +72,10 @@ const JamsMapView = ({ idArray }: Props) => {
     return null;
   };
 
-  const loadSearchData = async () => {
-    let data: any[] = [];
-    
-    if (idArray && idArray?.length > 0) {
-      data = await EntityManager.getJams(idArray);
-    }
-    else {
-      data = (await SearchManager.getResults())?.jam;
-    }
-
-    setSearchData(data);
-  };
-
   useEffect(() => {
+    setSearchData(SearchManager.getResults()?.jams || []);
+
     (async () => {
-      await loadSearchData();
       setCurrentLocation(await UserManager.getLocation());
     })();
 
