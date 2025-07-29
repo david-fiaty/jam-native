@@ -37,7 +37,7 @@ const SearchField = () => {
     if (isProcessing) {
       return <SpinnerView size="small" />;
     }
-    else if (searchState?.searchValue?.length > 0) {
+    else if (currentValue?.length > 0) {
       return (
         <IconView
           name="delete"
