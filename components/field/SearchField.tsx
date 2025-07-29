@@ -11,7 +11,6 @@ import SearchManager from '@/manager/SearchManager';
 
 const SearchField = () => {
   const searchState = useSelector((state: any) => state.search);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState<any>('');
   const [debounceValue, setDebounceValue] = useState<any>('');
@@ -65,9 +64,8 @@ const SearchField = () => {
   useEffect(() => {
     if (searchState?.searchValue?.length > 0) {
       setCurrentValue(searchState.searchValue);
-      setIsLoaded(true);
     }
-  }, [isLoaded, searchState]);
+  }, [searchState]);
 
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
