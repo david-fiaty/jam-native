@@ -71,7 +71,7 @@ const JamsMapView = ({ idArray }: Props) => {
   };
 
   useEffect(() => {
-    setSearchData(SearchManager.getResults()?.jams || []);
+    setSearchData(SearchManager.getResults()?.jam || []);
 
     (async () => {
       setCurrentLocation(await UserManager.getLocation());
