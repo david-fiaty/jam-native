@@ -1,4 +1,4 @@
-import { setSearchValue, setCurrentResults, setDefaultResults } from "@/redux/slices/SearchSlice";
+import { setCurrentResults, setDefaultResults } from "@/redux/slices/SearchSlice";
 import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 
@@ -22,19 +22,6 @@ class SearchManager {
       let results: any = JSON.stringify(await this.sendRequest(searchValue) || {});
       Store.dispatch(setCurrentResults(results));
     }
-  }
-
-  getResults() {
-    let searchState: any = Store.getState().search;
-    let results: any = JSON.parse(searchState.currentResults);
-
-    return results;
-  }
-
-  resetResults() {
-    let searchState: any = Store.getState().search;
-    Store.dispatch(setSearchValue(''));
-    Store.dispatch(setCurrentResults(searchState.defaultResults));
   }
 
   async sendRequest(searchValue?: string) {
