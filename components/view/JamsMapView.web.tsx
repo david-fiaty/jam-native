@@ -67,7 +67,7 @@ const JamsMapView = ({ idArray }: Props) => {
   };
 
   useEffect(() => {
-    setSearchData(SearchManager.getResults()?.jam || []);
+    //setSearchData(SearchManager.getResults()?.jam || []);
 
     (async () => {
       setCurrentLocation(await UserManager.getLocation());
@@ -87,7 +87,7 @@ const JamsMapView = ({ idArray }: Props) => {
               disableDefaultUI: true,
             }}
           >
-            {searchData?.map((item: any) => renderJamMarker(item))}
+            {(JSON.parse(searchState.currentResults) || [])?.map((item: any) => renderJamMarker(item))}
           </GoogleMap>
         </View>
       </TouchableWithoutFeedback>

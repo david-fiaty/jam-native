@@ -62,7 +62,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        loadSearchData();
+        //loadSearchData();
         setSectors(await EntityManager.getSectors());
         setProfileData(await getProfileData());
         setIsLoaded(true);
@@ -78,7 +78,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
       style={styles.container}
     >
       <ListView
-        data={searchData}
+        data={JSON.parse(searchState.currentResults || [])}
         contentContainerStyle={Layout.listContainer}
         renderItem={renderItem}        
         keyExtractor={(row: any, index?: number) => `${row.id}-${index}`} 
