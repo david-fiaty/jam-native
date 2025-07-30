@@ -7,7 +7,6 @@ import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
-import SearchManager from "@/manager/SearchManager";
 
 type Props = {
   idArray?: any;
@@ -16,7 +15,6 @@ type Props = {
 const JamsMapView = ({ idArray }: Props) => {
   const mapRef = useRef<any>();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
-  const [searchData, setSearchData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search);
   const markerImage = require('@/assets/images/logo-55.png');
   
@@ -71,8 +69,6 @@ const JamsMapView = ({ idArray }: Props) => {
   };
 
   useEffect(() => {
-    setSearchData(SearchManager.getResults()?.jam || []);
-
     (async () => {
       setCurrentLocation(await UserManager.getLocation());
     })();
@@ -92,7 +88,7 @@ const JamsMapView = ({ idArray }: Props) => {
           showsUserLocation={true}
           showsMyLocationButton={true}
         >
-          {searchData?.map((item: any) => renderJamMarker(item))}
+          {(JSON.parse(searchState.currentResults) || [])?.jam?.map((item: any) => renderJamMarker(item))}
         </MapView>
       </View>
     </TouchableWithoutFeedback>
