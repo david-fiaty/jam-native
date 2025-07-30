@@ -26,7 +26,12 @@ const SearchField = () => {
 
   const clearSearch = () => {
     setIsProcessing(true);
-    SearchManager.resetResults();
+
+    
+    //Store.dispatch(setSearchValue(''));
+    //Store.dispatch(setCurrentResults(searchState.defaultResults));
+
+
     setIsProcessing(false);
   };
 
