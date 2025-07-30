@@ -9,7 +9,6 @@ import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import ListItem from "./jams-list/ListItem";
 import UserManager from "@/manager/UserManager";
-import SearchManager from "@/manager/SearchManager";
 
 type Props = {
   idArray?: any;
@@ -19,7 +18,6 @@ type Props = {
 const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   const [sectors, setSectors] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [searchData, setSearchData] = useState<any[]>([]);
   const [profileData, setProfileData] = useState<any>(null);
   const searchState: any = useSelector((state: any) => state.search);
 
@@ -31,23 +29,18 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
     setProfileData(await getProfileData());
   };
 
-  const onEndReached = async () => {
-    if (Config.infiniteScrollEnabled === true && disableInfiniteScroll !== true) {
-      await loadSearchData();
-    }
-  };
-
   const renderItem = (row: any) => {
     return (
-      <ListItem 
-        row={row} 
-        sectorsData={sectors} 
-        profileData={profileData} 
+      <ListItem
+        row={row}
+        sectorsData={sectors}
+        profileData={profileData}
         onListItemAction={onListItemAction}
       />
     );
   };
 
+  /*
   const loadSearchData = () => {
     let data: any[] = SearchManager.getResults()?.jam || [];
 
@@ -58,32 +51,40 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
       setSearchData(data); 
     }
   };
+  */
+
+  /*
+  const onEndReached = async () => {
+    if (Config.infiniteScrollEnabled === true && disableInfiniteScroll !== true) {
+      await loadSearchData();
+    }
+  };
+  */
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        loadSearchData();
         setSectors(await EntityManager.getSectors());
         setProfileData(await getProfileData());
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, sectors, idArray, searchState]);
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
-  
+
   return (
-    <BoxView 
-      direction="column" 
+    <BoxView
+      direction="column"
       style={styles.container}
     >
       <ListView
-        data={searchData}
+        data={(JSON.parse(searchState.currentResults))?.jam || []}
         contentContainerStyle={Layout.listContainer}
-        renderItem={renderItem}        
-        keyExtractor={(row: any, index?: number) => `${row.id}-${index}`} 
+        renderItem={renderItem}
+        keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
         onEndReachedThreshold={0.5}
-        onEndReached={onEndReached} 
+        onEndReached={onEndReached}
       />
     </BoxView>
   );
@@ -92,7 +93,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: '100%',  
+    height: '100%',
   },
 });
 
