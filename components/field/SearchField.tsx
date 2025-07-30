@@ -25,10 +25,7 @@ const SearchField = () => {
   };
 
   const clearSearch = async () => {
-    setIsProcessing(true);
-    setCurrentValue('');
-    await SearchManager.loadResults();
-    setIsProcessing(false);
+    await onChangeText('');
   };
 
   const toggleSearch = () => {
