@@ -10,7 +10,6 @@ import EntityManager from "@/manager/EntityManager";
 import ListItem from "./jams-list/ListItem";
 import UserManager from "@/manager/UserManager";
 import SearchManager from "@/manager/SearchManager";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type Props = {
   idArray?: any;
