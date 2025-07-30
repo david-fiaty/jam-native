@@ -84,7 +84,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
         renderItem={renderItem}
         keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
         onEndReachedThreshold={0.5}
-        onEndReached={onEndReached}
+        //onEndReached={onEndReached}
       />
     </BoxView>
   );
