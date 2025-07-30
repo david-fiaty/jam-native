@@ -61,9 +61,9 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   };
 
   useEffect(() => {
-    loadSearchData();
     (async () => {
       if (!isLoaded) {
+        loadSearchData();
         setSectors(await EntityManager.getSectors());
         setProfileData(await getProfileData());
         setIsLoaded(true);
