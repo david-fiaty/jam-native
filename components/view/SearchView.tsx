@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
-import StaticData from "@/constants/StaticData";
-import SpinnerView from "./SpinnerView";
 import SearchManager from "@/manager/SearchManager";
 import SearchJamsList from "../list/SearchJamsList";
 import SearchProfilesList from "../list/SearchProfilesList";
@@ -15,7 +13,7 @@ import i18n from "@/translation/i18n";
 const SearchView = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [searchData, setSearchData] = useState<any>([]);
+  const [searchData, setSearchData] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search);
   
   const searchTabs: any[] = [
@@ -68,17 +66,15 @@ const SearchView = () => {
   ];
 
   useEffect(() => {
-    (async () => {
-      if (!isLoaded) {
-        setSearchData(await SearchManager.getResults());
-        setIsLoaded(true);
-      }
-    })();
-
-    if (!searchState.currentTab) dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
-  }, [isLoaded, searchState, searchTabs]);
-
-  if (!isLoaded) return <SpinnerView />;
+    if (!isLoaded) { 
+      setSearchData(SearchManager.getResults() || {});
+      setIsLoaded(true)
+    }
+    
+    if (!searchState.currentTab) {
+      dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
+    }
+  }, [searchState, searchTabs, isLoaded]);
   
   return (
     <BoxView

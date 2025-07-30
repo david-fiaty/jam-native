@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
 import * as Animatable from 'react-native-animatable';
 import IconView from "../view/IconView";
@@ -11,22 +11,21 @@ import SearchManager from '@/manager/SearchManager';
 
 const SearchField = () => {
   const searchState = useSelector((state: any) => state.search);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const [currentSearchValue, setCurrentSearchValue] = useState<any>('');
+  const [currentValue, setCurrentValue] = useState<any>('');
+  const [debounceValue, setDebounceValue] = useState<any>('');
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   const onChangeText = async (value: string) => {
     setIsProcessing(true);
-    setCurrentSearchValue(value);
+    setCurrentValue(value);
     await SearchManager.loadResults(value);
     setIsProcessing(false);
   };
 
-  const clearSearch = async () => {
+  const clearSearch = () => {
     setIsProcessing(true);
-    setCurrentSearchValue('');
-    await SearchManager.resetSearch();
+    SearchManager.resetResults();
     setIsProcessing(false);
   };
 
@@ -38,11 +37,11 @@ const SearchField = () => {
     if (isProcessing) {
       return <SpinnerView size="small" />;
     }
-    else if (currentSearchValue?.length > 0) {
+    else if (currentValue?.length > 0) {
       return (
-        <IconView 
-          name="delete" 
-          theme="secondary" 
+        <IconView
+          name="delete"
+          theme="secondary"
           size={18}
           padding={0}
           onPress={clearSearch}
@@ -51,9 +50,9 @@ const SearchField = () => {
     }
     else {
       return (
-        <IconView 
-          name="next" 
-          theme="secondary" 
+        <IconView
+          name="next"
+          theme="secondary"
           size={18}
           padding={0}
           onPress={toggleSearch}
@@ -63,49 +62,61 @@ const SearchField = () => {
   };
 
   useEffect(() => {
-    (async () => {    
-      if (!isLoaded) {
-        await SearchManager.loadResults();
-        setIsLoaded(true);
-      }
-    })();
+    if (searchState?.searchValue?.length > 0) {
+      setCurrentValue(searchState.searchValue);
+    }
+  }, [searchState]);
 
-  }, [isLoaded]);
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      setDebounceValue(currentValue);
+    }, 1000);
+
+    return () => clearTimeout(delayDebounce);
+  }, [currentValue]);
+
+  useEffect(() => {
+    if (debounceValue.length > 0) {
+      (async () => {
+        await onChangeText(debounceValue);
+      })();
+    }
+  }, [debounceValue]);
 
   return (
-    <BoxView 
-      direction="row" 
-      align="center" 
-      justify="flex-end" 
+    <BoxView
+      direction="row"
+      align="center"
+      justify="flex-end"
       style={styles.container}
     >
-      <Animatable.View 
+      <Animatable.View
         style={[styles.fieldInput, styles.fieldAnimate, (isExpanded ? styles.fieldExpanded : {})]}
         transition="width"
         duration={isExpanded ? 300 : 600}
       >
-        <InputTextField 
-          value={currentSearchValue}
+        <InputTextField
+          value={currentValue}
           placeholder={i18n.t('Search...')}
           onChangeText={onChangeText}
           rightIcon={renderRightIcon()}
           containerStyle={styles.fieldContainer}
-        /> 
+        />
       </Animatable.View>
 
-      {!currentSearchValue?.length && (
-        <Animatable.View 
+      {!currentValue?.length && (
+        <Animatable.View
           style={[styles.searchIcon, styles.searchIconAnimate, (!isExpanded ? styles.searchIconVisible : {})]}
           transition="opacity"
-          duration={isExpanded ? 100: 1000}
-        >      
-          <IconView 
-            name="search" 
-            theme="clear" 
+          duration={isExpanded ? 100 : 1000}
+        >
+          <IconView
+            name="search"
+            theme="clear"
             size={22}
             padding={0}
             onPress={toggleSearch}
-          /> 
+          />
         </Animatable.View>
       )}
 
