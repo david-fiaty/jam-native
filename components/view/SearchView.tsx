@@ -68,7 +68,7 @@ const SearchView = () => {
   useEffect(() => {
     if (!isLoaded) { 
       setSearchData(SearchManager.getResults() || {});
-      setIsLoaded(true)
+      setIsLoaded(true);
     }
     
     if (!searchState.currentTab) {
