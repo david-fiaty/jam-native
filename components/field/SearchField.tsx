@@ -8,6 +8,7 @@ import i18n from '@/translation/i18n';
 import SpinnerView from '../view/SpinnerView';
 import BoxView from '../view/BoxView';
 import SearchManager from '@/manager/SearchManager';
+import { Config } from '@/constants/Config';
 
 const SearchField = () => {
   const searchState = useSelector((state: any) => state.search);
@@ -70,7 +71,7 @@ const SearchField = () => {
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       setDebounceValue(currentValue);
-    }, 1000);
+    }, Config.searchDebounceDuration);
 
     return () => clearTimeout(delayDebounce);
   }, [currentValue]);
