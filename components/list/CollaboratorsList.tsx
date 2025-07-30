@@ -87,8 +87,9 @@ const CollaboratorsList = ({ resource, field }: Props) => {
     if (!searchState.searchValue?.length) {
       return (JSON.parse(searchState.currentResults))?.profile || [];
     }
-    
-    return await EntityManager.listProfiles();
+    else {
+      return await EntityManager.listProfiles();
+    }
   };
 
   useEffect(() => {
