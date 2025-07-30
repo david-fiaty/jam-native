@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
+import { Config } from '@/constants/Config';
 import * as Animatable from 'react-native-animatable';
 import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
@@ -8,7 +9,6 @@ import i18n from '@/translation/i18n';
 import SpinnerView from '../view/SpinnerView';
 import BoxView from '../view/BoxView';
 import SearchManager from '@/manager/SearchManager';
-import { Config } from '@/constants/Config';
 
 const SearchField = () => {
   const searchState = useSelector((state: any) => state.search);
@@ -26,7 +26,12 @@ const SearchField = () => {
 
   const clearSearch = () => {
     setIsProcessing(true);
-    SearchManager.resetResults();
+
+    
+    //Store.dispatch(setSearchValue(''));
+    //Store.dispatch(setCurrentResults(searchState.defaultResults));
+
+
     setIsProcessing(false);
   };
 
