@@ -52,18 +52,12 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   const loadSearchData = () => {
     let data: any[] = SearchManager.getResults()?.jam || [];
 
-    console.log(Object.keys(SearchManager.getResults()));
-
-    setSearchData([]); 
-
-    /*
     if (Config.infiniteScrollEnabled === true && disableInfiniteScroll !== true) {
       setSearchData(prevData => [...prevData, ...data]);
     }
     else {
       setSearchData(data); 
     }
-    */
   };
 
   useEffect(() => {
