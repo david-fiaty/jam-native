@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
+import { Config } from '@/constants/Config';
 import * as Animatable from 'react-native-animatable';
 import IconView from "../view/IconView";
 import InputTextField from "../field/InputTextField";
@@ -25,7 +26,12 @@ const SearchField = () => {
 
   const clearSearch = () => {
     setIsProcessing(true);
-    SearchManager.resetResults();
+
+    
+    //Store.dispatch(setSearchValue(''));
+    //Store.dispatch(setCurrentResults(searchState.defaultResults));
+
+
     setIsProcessing(false);
   };
 
@@ -70,7 +76,7 @@ const SearchField = () => {
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       setDebounceValue(currentValue);
-    }, 1000);
+    }, Config.searchDebounceDuration);
 
     return () => clearTimeout(delayDebounce);
   }, [currentValue]);
