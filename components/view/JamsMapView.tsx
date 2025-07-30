@@ -92,7 +92,7 @@ const JamsMapView = ({ idArray }: Props) => {
           showsUserLocation={true}
           showsMyLocationButton={true}
         >
-          {(JSON.parse(searchState.currentResults) || [])?.map((item: any) => renderJamMarker(item))}
+          {(JSON.parse(searchState.currentResults) || [])?.jam?.map((item: any) => renderJamMarker(item))}
         </MapView>
       </View>
     </TouchableWithoutFeedback>
