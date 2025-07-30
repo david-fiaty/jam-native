@@ -49,21 +49,27 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
     );
   };
 
-  const loadSearchData = async () => {
-    let data: any[] = SearchManager.getResults()?.jams || [];
+  const loadSearchData = () => {
+    let data: any[] = SearchManager.getResults()?.jam || [];
 
+    console.log(Object.keys(SearchManager.getResults()));
+
+    setSearchData([]); 
+
+    /*
     if (Config.infiniteScrollEnabled === true && disableInfiniteScroll !== true) {
       setSearchData(prevData => [...prevData, ...data]);
     }
     else {
       setSearchData(data); 
     }
+    */
   };
 
   useEffect(() => {
+    loadSearchData();
     (async () => {
       if (!isLoaded) {
-        await loadSearchData();
         setSectors(await EntityManager.getSectors());
         setProfileData(await getProfileData());
         setIsLoaded(true);
