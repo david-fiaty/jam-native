@@ -20,7 +20,7 @@ type Props = {
 
 const CollaboratorsList = ({ resource, field }: Props) => {
   const dispatch = useDispatch();
-  const [profiles, setProfiles] = useState<any>(null);
+  const [profilesData, setProfilesData] = useState<any>(null);
   const [selectedProfiles, setSelectedProfiles] = useState<any>([]);
   const [searchValue, setSearchValue] = useState<string>('');
   const [isSearching, setIsSearching] = useState<boolean>(false);
@@ -31,7 +31,7 @@ const CollaboratorsList = ({ resource, field }: Props) => {
     setIsSearching(true);
     
     EntityManager.listProfiles().then((items: any) => {
-      setProfiles(items);
+      setProfilesData(items);
       setIsSearching(false);
       setSearchValue('');
     });
@@ -60,7 +60,7 @@ const CollaboratorsList = ({ resource, field }: Props) => {
 
     EntityManager.listProfiles(options).then((items: any) => {
       setIsSearching(false);
-      setProfiles(items);
+      setProfilesData(items);
     });
   };
 
@@ -85,7 +85,7 @@ const CollaboratorsList = ({ resource, field }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) { 
-        if (!profiles) setProfiles(await EntityManager.listProfiles());
+        if (!profilesData) setProfilesData(await EntityManager.listProfiles());
         if (formData?.[field]?.length && !selectedProfiles.length) {
           setSelectedProfiles(formData[field]);
         }
@@ -93,7 +93,7 @@ const CollaboratorsList = ({ resource, field }: Props) => {
         setIsLoaded(true);
       }
     })();
-  }, [profiles, formData, field, selectedProfiles]);
+  }, [profilesData, formData, field, selectedProfiles]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -109,9 +109,9 @@ const CollaboratorsList = ({ resource, field }: Props) => {
       />
 
       <View style={Layout.borderedListContainer}>
-        {profiles?.length > 0 &&
+        {profilesData?.length > 0 &&
           <ListView
-            data={profiles}
+            data={profilesData}
             renderItem={(row: any) => (
               <ProfileListItem 
                 row={row}
@@ -122,7 +122,7 @@ const CollaboratorsList = ({ resource, field }: Props) => {
           />
         }
 
-        {!profiles?.length && 
+        {!profilesData?.length && 
           <TextView>{i18n.t('No collaborators found.')}</TextView>
         }
       </View>
