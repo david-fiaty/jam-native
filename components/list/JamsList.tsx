@@ -10,7 +10,6 @@ import EntityManager from "@/manager/EntityManager";
 import ListItem from "./jams-list/ListItem";
 import UserManager from "@/manager/UserManager";
 import SearchManager from "@/manager/SearchManager";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type Props = {
   idArray?: any;
@@ -49,8 +48,8 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
     );
   };
 
-  const loadSearchData = async () => {
-    let data: any[] = SearchManager.getResults()?.jams || [];
+  const loadSearchData = () => {
+    let data: any[] = SearchManager.getResults()?.jam || [];
 
     if (Config.infiniteScrollEnabled === true && disableInfiniteScroll !== true) {
       setSearchData(prevData => [...prevData, ...data]);
@@ -63,7 +62,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        await loadSearchData();
+        loadSearchData();
         setSectors(await EntityManager.getSectors());
         setProfileData(await getProfileData());
         setIsLoaded(true);

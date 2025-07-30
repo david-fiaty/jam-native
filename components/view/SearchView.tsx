@@ -12,6 +12,7 @@ import i18n from "@/translation/i18n";
 
 const SearchView = () => {
   const dispatch = useDispatch();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [searchData, setSearchData] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search);
   
@@ -65,12 +66,15 @@ const SearchView = () => {
   ];
 
   useEffect(() => {
-    setSearchData(SearchManager.getResults() || {});
+    if (!isLoaded) { 
+      setSearchData(SearchManager.getResults() || {});
+      setIsLoaded(true)
+    }
     
     if (!searchState.currentTab) {
       dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
     }
-  }, [searchState, searchTabs]);
+  }, [searchState, searchTabs, isLoaded]);
   
   return (
     <BoxView
