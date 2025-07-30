@@ -78,7 +78,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
       style={styles.container}
     >
       <ListView
-        data={JSON.parse(searchState.currentResults || [])}
+        data={(JSON.parse(searchState.currentResults))?.jam || []}
         contentContainerStyle={Layout.listContainer}
         renderItem={renderItem}        
         keyExtractor={(row: any, index?: number) => `${row.id}-${index}`} 
