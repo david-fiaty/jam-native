@@ -8,7 +8,6 @@ import SpinnerView from "./SpinnerView";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import SearchManager from "@/manager/SearchManager";
-import EntityManager from "@/manager/EntityManager";
 
 type Props = {
   idArray?: any;
@@ -17,7 +16,6 @@ type Props = {
 const JamsMapView = ({ idArray }: Props) => {
   const mapRef = useRef<any>();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [searchData, setSearchData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search);
   const markerImage = require('@/assets/images/logo-55.png');
@@ -72,31 +70,15 @@ const JamsMapView = ({ idArray }: Props) => {
     return null;
   };
 
-  const loadSearchData = async () => {
-    let data: any[] = [];
-    
-    if (idArray && idArray?.length > 0) {
-      data = await EntityManager.getJams(idArray);
-    }
-    else {
-      data = (await SearchManager.getResults())?.jam;
-    }
-
-    setSearchData(data);
-  };
-
   useEffect(() => {
+    setSearchData(SearchManager.getResults()?.jam || []);
+
     (async () => {
-      await loadSearchData();
       setCurrentLocation(await UserManager.getLocation());
     })();
+  }, [searchState]);
 
-    if (!isLoaded) {
-      setIsLoaded(true);
-    }
-  }, [isLoaded, searchState]);
-
-  if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
+  if (!currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
   
   return (
     <TouchableWithoutFeedback>

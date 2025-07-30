@@ -13,7 +13,6 @@ import NotificationsMenu from "@/components/menu/NotificationsMenu";
 import HostsList from "@/components/list/HostsList";
 import MoreJamActionsView from "@/components/view/MoreJamActionsView";
 import JammersList from "@/components/list/JammersList";
-import SectorsList from "@/components/list/SectorsList";
 import LocationMapView from "@/components/view/LocationMapView";
 import CollaboratorsList from "@/components/list/CollaboratorsList";
 import CountriesList from '../list/CountriesList';
@@ -157,11 +156,6 @@ const ModalView = ({ currentSection, style }: Props) => {
         id: 'ProjectCommentsList',
         title: i18n.t('Comments'),
         render: (params: any) => <ProjectCommentsList {...params} />,
-      },
-      {
-        id: 'SectorsList',
-        title: i18n.t('Sectors'),
-        render: (params: any) => <SectorsList {...params} />,
       },
       {
         id: 'CollaboratorsList',
