@@ -24,14 +24,10 @@ const SearchField = () => {
     setIsProcessing(false);
   };
 
-  const clearSearch = () => {
+  const clearSearch = async () => {
     setIsProcessing(true);
-
-    
-    //Store.dispatch(setSearchValue(''));
-    //Store.dispatch(setCurrentResults(searchState.defaultResults));
-
-
+    setCurrentValue('');
+    await SearchManager.loadResults();
     setIsProcessing(false);
   };
 
