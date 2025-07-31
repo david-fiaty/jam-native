@@ -131,6 +131,7 @@ const AddProjectForm = () => {
 
         <TextView>{i18n.t('Select countries')}</TextView>
         <CountriesField
+          multiple={true}
           resource={resource}
           field="scope_countries_codes"
           placeholder={i18n.t('Select countries')}
@@ -138,6 +139,7 @@ const AddProjectForm = () => {
           onPress={() => ModalManager.toggleModal('CountriesList', {
             resource: resource,
             field: 'scope_countries_codes',
+            multiple: true,
           })}
         />
 
