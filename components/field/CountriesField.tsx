@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from '@/redux/slices/FormSlice';
 import { Layout } from '@/constants/Layout';
@@ -7,7 +7,6 @@ import IconView from "../view/IconView";
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from './InputTextField';
-import TextView from '../view/TextView';
 
 type Props = {
   resource: string;
@@ -75,7 +74,7 @@ const CountriesField = ({ resource, field, value, placeholder, multiple, onPress
         )}
 
         {currentValue?.length > 0 && (
-          <View style={Layout.fieldSelectionPreview}>
+          <View style={styles.preview}>
             {currentValue.map((item: any) => {
 
               return item?.id && (
@@ -90,7 +89,9 @@ const CountriesField = ({ resource, field, value, placeholder, multiple, onPress
               );
             })}
 
-            <IconView name="plus" theme="transparent" onPress={onPress} />
+            <View style={styles.iconRight}>
+            <IconView name="down" theme="transparent" onPress={onPress} />
+            </View>
           </View>
         )}
       </>
@@ -112,5 +113,27 @@ const CountriesField = ({ resource, field, value, placeholder, multiple, onPress
     );
   }
 };
+
+
+const styles = StyleSheet.create({
+  element: {
+    ...Layout.formField,
+    ...{ padding: Layout.space.base },
+  },
+  preview: {
+    position: 'relative',
+    backgroundColor: Layout.colors.secondary,
+    borderWidth: Layout.borderWidth.base,
+    borderColor: Layout.colors.secondary,
+    borderRadius: Layout.radius.round,
+    padding: Layout.space.base,
+    paddingBottom: -Layout.space.base,
+  },
+  iconRight: {
+    position: 'absolute',
+    top: 0,
+    right: Layout.space.base,
+  }
+});
 
 export default CountriesField;
