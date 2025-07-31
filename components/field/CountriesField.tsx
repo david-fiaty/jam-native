@@ -98,7 +98,17 @@ const CountriesField = ({ resource, field, value, placeholder, multiple, onPress
   }
   else {
     return (
-      <TextView>xxxx</TextView>
+      <TouchableOpacity
+        onPress={onPress}
+        style={Layout.formField}
+      >
+        <InputTextField
+          readOnly={true}
+          placeholder={placeholder}
+          rightIcon={<IconView name="down" theme="transparent" />}
+          value={value}
+        />
+      </TouchableOpacity>
     );
   }
 };
