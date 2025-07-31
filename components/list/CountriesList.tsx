@@ -114,12 +114,13 @@ const CountriesList = ({ resource, field }: Props) => {
         let countries: any = await EntityManager.getCountries(); 
         setCountriesData(countries);
         setSearchResults(countries);
-        if (formData?.[field]?.length) {
-          setSelectedCountries(formData[field]);
-        }
         setIsLoaded(true);
       }
     })();
+  }, [isLoaded]);
+
+  useEffect(() => {
+    if (formData?.[field]?.length) setSelectedCountries(formData[field]);
   }, [formData, field]);
 
   if (!isLoaded) return <SpinnerView />;
@@ -131,7 +132,6 @@ const CountriesList = ({ resource, field }: Props) => {
         containerStyle={styles.searchFieldContainer}
         placeholder={i18n.t('Search...')}
         onChangeText={(text: string) => triggerSearch(text)}
-        onSubmitEditing={triggerSearch}
         rightIcon={renderSearchIcon()}
       />
 
