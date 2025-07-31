@@ -132,7 +132,6 @@ const CountriesList = ({ resource, field }: Props) => {
         containerStyle={styles.searchFieldContainer}
         placeholder={i18n.t('Search...')}
         onChangeText={(text: string) => triggerSearch(text)}
-        onSubmitEditing={triggerSearch}
         rightIcon={renderSearchIcon()}
       />
 
