@@ -7,6 +7,7 @@ import IconView from "../view/IconView";
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from './InputTextField';
+import TextView from '../view/TextView';
 
 type Props = {
   resource: string;
@@ -29,11 +30,11 @@ const CountriesField = ({ resource, field, value, placeholder, multiple, onPress
     selectedIds = selectedIds.filter((n: number) => n !== item.code);
 
     setCurrentValue(selectedIds);
-    
-    dispatch(setFormData<any>({ 
+
+    dispatch(setFormData<any>({
       resource: resource,
-      key: field, 
-      value: selectedIds, 
+      key: field,
+      value: selectedIds,
     }));
   };
 
@@ -49,50 +50,57 @@ const CountriesField = ({ resource, field, value, placeholder, multiple, onPress
         let countries: any[] = await EntityManager.getCountries();
         setCountriesData(countries);
         setIsLoaded(true);
-      }   
-    })();    
+      }
+    })();
 
-    setCurrentValue(getCurrentValue());     
+    setCurrentValue(getCurrentValue());
 
   }, [isLoaded, formData, field]);
 
-  return (
-    <>
-      { !currentValue?.length && (
-        <TouchableOpacity
-          onPress={onPress}
-          style={Layout.formField}
-        >
-          <InputTextField
-            value={value}
-            readOnly={true}
-            placeholder={placeholder}
-            rightIcon={<IconView name="plus" theme="transparent" />}
-          />
-        </TouchableOpacity>
-      )}
+  if (multiple === true) {
+    return (
+      <>
+        {!currentValue?.length && (
+          <TouchableOpacity
+            onPress={onPress}
+            style={Layout.formField}
+          >
+            <InputTextField
+              value={value}
+              readOnly={true}
+              placeholder={placeholder}
+              rightIcon={<IconView name="plus" theme="transparent" />}
+            />
+          </TouchableOpacity>
+        )}
 
-      {currentValue?.length > 0 && (
-        <View style={Layout.fieldSelectionPreview}> 
-          { currentValue.map((item: any) => {
-            
-            return item?.id && (
-              <TagView
-                theme="white"
-                key={item.id}
-                canEdit={true}
-                onDeleteButtonPress={() => deleteItem(item)}  
-              >
-                {item.name}
-              </TagView>
-            );
-          })}
+        {currentValue?.length > 0 && (
+          <View style={Layout.fieldSelectionPreview}>
+            {currentValue.map((item: any) => {
 
-          <IconView name="plus" theme="transparent" onPress={onPress} />
-        </View>
-      )}
-    </>
-  );
+              return item?.id && (
+                <TagView
+                  theme="white"
+                  key={item.id}
+                  canEdit={true}
+                  onDeleteButtonPress={() => deleteItem(item)}
+                >
+                  {item.name}
+                </TagView>
+              );
+            })}
+
+            <IconView name="plus" theme="transparent" onPress={onPress} />
+          </View>
+        )}
+      </>
+    );
+  }
+  else {
+    return (
+      <TextView>xxxx</TextView>
+    );
+  }
 };
 
 export default CountriesField;
