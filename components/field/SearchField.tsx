@@ -110,7 +110,6 @@ const SearchField = () => {
           />
         </Animatable.View>
       )}
-
     </BoxView>
   );
 };
