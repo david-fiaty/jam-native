@@ -90,7 +90,7 @@ const CountriesList = ({ resource, field, multiple }: Props) => {
     dispatch(setFormData<any>({
       resource: resource,
       key: field,
-      value: idArray,
+      value: multiple === true ? idArray : idArray[0],
     }));
   };
 

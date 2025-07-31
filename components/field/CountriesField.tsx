@@ -38,9 +38,13 @@ const CountriesField = ({ resource, field, value, placeholder, multiple, onPress
   };
 
   const getCurrentValue = () => {
-    return (formData?.[field] || []).map((v: any) => {
-      return countriesData.find((item: any) => item.code === v);
-    });
+    if (multiple === true) {
+      return (formData?.[field] || []).map((v: any) => {
+        return countriesData.find((item: any) => item.code === v);
+      });
+    }
+
+    return formData?.[field] || '';
   };
 
   useEffect(() => {
@@ -114,7 +118,6 @@ const CountriesField = ({ resource, field, value, placeholder, multiple, onPress
     );
   }
 };
-
 
 const styles = StyleSheet.create({
   element: {
