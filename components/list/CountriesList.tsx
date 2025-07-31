@@ -114,15 +114,14 @@ const CountriesList = ({ resource, field }: Props) => {
         let countries: any = await EntityManager.getCountries(); 
         setCountriesData(countries);
         setSearchResults(countries);
-        if (formData?.[field]?.length) {
-          setSelectedCountries(formData[field]);
-        }
         setIsLoaded(true);
       }
     })();
-  }, [formData, field]);
+  }, [isLoaded]);
 
-  console.log(countriesData?.length)
+  useEffect(() => {
+    if (formData?.[field]?.length) setSelectedCountries(formData[field]);
+  }, [formData, field]);
 
   if (!isLoaded) return <SpinnerView />;
 
