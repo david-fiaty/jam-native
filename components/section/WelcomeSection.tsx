@@ -26,7 +26,6 @@ const WelcomeSection = () => {
     },
   ];
 
-
   return (
     <BoxView
       direction="column"

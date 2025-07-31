@@ -14,7 +14,7 @@ export const Config: any = {
   paginationSize: 1000,
   dateFormat: 'MMM Do YYYY HH:mm',
   messageDisplayDuration: 3500,
-  searchDebounceDuration: 500,
+  searchDebounceDuration: 1000,
   maxNotificationsDisplay: 14,
   mainSection: 'jams',
   defaultLocation: {
