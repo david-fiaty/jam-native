@@ -217,7 +217,6 @@ const JamForm = () => {
         {FormManager.renderError('period')}
 
         <TextView>{i18n.t('Country')}</TextView>
-        
         <CountriesField
           resource={resource}
           field="country"
