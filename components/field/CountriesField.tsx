@@ -112,7 +112,7 @@ const CountriesField = ({ resource, field, value, placeholder, multiple, onPress
           readOnly={true}
           placeholder={placeholder}
           rightIcon={<IconView name="down" theme="transparent" />}
-          value={value}
+          value={countriesData.find((o: any) => o.code == value)?.name || ''}
         />
       </TouchableOpacity>
     );
