@@ -82,6 +82,7 @@ const CountriesField = ({ resource, field, value, placeholder, multiple, onPress
                   theme="white"
                   key={item.id}
                   canEdit={true}
+                  containerStyle={styles.tagItem}
                   onDeleteButtonPress={() => deleteItem(item)}
                 >
                   {item.name}
@@ -131,9 +132,13 @@ const styles = StyleSheet.create({
   },
   iconRight: {
     position: 'absolute',
-    top: 0,
+    top: '50%',
     right: Layout.space.base,
-  }
+  },
+  tagItem: {
+    marginRight: Layout.space.base,
+    marginBottom: Layout.space.base,
+  },
 });
 
 export default CountriesField;
