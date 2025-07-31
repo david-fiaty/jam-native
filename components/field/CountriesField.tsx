@@ -13,10 +13,11 @@ type Props = {
   field: string;
   value?: any;
   placeholder?: any;
+  multiple?: boolean;
   onPress?: () => void;
 };
 
-const CountriesField = ({ resource, field, value, placeholder, onPress }: Props) => {
+const CountriesField = ({ resource, field, value, placeholder, multiple, onPress }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState<any>([]);
