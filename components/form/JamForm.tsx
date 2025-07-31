@@ -25,7 +25,7 @@ import DataManager from "@/manager/DataManager";
 import MediaManager from "@/manager/MediaManager";
 import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
-import CountriesField from "../field/_CountriesField";
+import CountriesField from "../field/CountriesField";
 
 const resource: string = 'jam';
 
