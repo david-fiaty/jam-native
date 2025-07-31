@@ -15,9 +15,10 @@ import InputTextField from '../field/InputTextField';
 type Props = {
   resource: string;
   field?: any;
+  multiple?: boolean;
 };
 
-const CountriesList = ({ resource, field }: Props) => {
+const CountriesList = ({ resource, field, multiple }: Props) => {
   const dispatch = useDispatch();
   const [profiles, setProfiles] = useState<any>(null);
   const [countriesData, setCountriesData] = useState<any[]>([]);
