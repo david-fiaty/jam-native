@@ -19,7 +19,6 @@ const SearchField = () => {
 
   const onChangeText = async (value: string) => {
     setIsProcessing(true);
-    setCurrentValue(value);
     await SearchManager.loadResults(value);
     setIsProcessing(false);
   };
@@ -36,7 +35,7 @@ const SearchField = () => {
     if (isProcessing) {
       return <SpinnerView size="small" />;
     }
-    else if (currentValue?.length > 0) {
+    else if (searchState.searchValue?.length > 0) {
       return (
         <IconView
           name="delete"
@@ -61,18 +60,12 @@ const SearchField = () => {
   };
 
   useEffect(() => {
-    if (searchState?.searchValue?.length > 0) {
-      setCurrentValue(searchState.searchValue);
-    }
-  }, [searchState]);
-
-  useEffect(() => {
     const delayDebounce = setTimeout(() => {
-      setDebounceValue(currentValue);
+      setDebounceValue(searchState.searchValue);
     }, Config.searchDebounceDuration);
 
     return () => clearTimeout(delayDebounce);
-  }, [currentValue]);
+  }, [searchState]);
 
   useEffect(() => {
     if (debounceValue.length > 0) {
@@ -95,7 +88,7 @@ const SearchField = () => {
         duration={isExpanded ? 300 : 600}
       >
         <InputTextField
-          value={currentValue}
+          value={searchState.searchValue}
           placeholder={i18n.t('Search...')}
           onChangeText={onChangeText}
           rightIcon={renderRightIcon()}
@@ -103,7 +96,7 @@ const SearchField = () => {
         />
       </Animatable.View>
 
-      {!currentValue?.length && (
+      {!searchState.searchValue?.length && (
         <Animatable.View
           style={[styles.searchIcon, styles.searchIconAnimate, (!isExpanded ? styles.searchIconVisible : {})]}
           transition="opacity"
