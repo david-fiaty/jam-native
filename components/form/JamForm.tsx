@@ -6,7 +6,6 @@ import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
 import MediaPickerField from "../field/MediaPickerField";
 import LocationPickerField from "../field/LocationPickerField";
-import CountryField from "../field/CountryField";
 import SectorsField from "../field/SectorsField";
 import DividerView from "../view/DividerView";
 import SpinnerView from "../view/SpinnerView";
@@ -26,6 +25,7 @@ import DataManager from "@/manager/DataManager";
 import MediaManager from "@/manager/MediaManager";
 import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
+import CountriesField from "../field/_CountriesField";
 
 const resource: string = 'jam';
 
@@ -217,11 +217,17 @@ const JamForm = () => {
         {FormManager.renderError('period')}
 
         <TextView>{i18n.t('Country')}</TextView>
-        <CountryField
+        <CountriesField
+          resource={resource}
+          field="country"
+          placeholder={i18n.t('Select countries')}
           value={formData?.countries}
-          onChangeValue={(option: any) => FormManager.updateField(resource, 'country', option.value)}
+          onPress={() => ModalManager.toggleModal('CountriesList', {
+            resource: resource,
+            field: 'country',
+          })}
         />
-        {FormManager.renderError('countries')}
+        {FormManager.renderError('country')}
 
         <SectorsField
           resource={resource}
