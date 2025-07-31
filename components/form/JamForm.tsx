@@ -218,13 +218,15 @@ const JamForm = () => {
 
         <TextView>{i18n.t('Country')}</TextView>
         <CountriesField
+          multiple={false}
           resource={resource}
           field="country"
-          placeholder={i18n.t('Select countries')}
-          value={formData?.countries}
+          placeholder={i18n.t('Select a country')}
+          value={formData?.country}
           onPress={() => ModalManager.toggleModal('CountriesList', {
             resource: resource,
             field: 'country',
+            multiple: false,
           })}
         />
         {FormManager.renderError('country')}
