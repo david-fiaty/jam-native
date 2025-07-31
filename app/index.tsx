@@ -28,12 +28,15 @@ export default () => {
       hasRedirected.current = true;
       router.push('/welcome');
     }
+  }, [rootNavigationState]);
 
+  useEffect(() => {
     (async () => {
       await setLanguage();
       await SearchManager.loadResults();
     })();
-  }, [rootNavigationState]);
+  }, []);
+
 
   return null;
 }
