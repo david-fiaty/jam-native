@@ -26,7 +26,6 @@ import MediaManager from "@/manager/MediaManager";
 import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
 import CountriesField from "../field/CountriesField";
-import CountryField from "../field/CountryField";
 
 const resource: string = 'jam';
 
@@ -218,14 +217,7 @@ const JamForm = () => {
         {FormManager.renderError('period')}
 
         <TextView>{i18n.t('Country')}</TextView>
-
-    
-        <CountryField
-          value={formData?.countries}
-          onChangeValue={(option: any) => FormManager.updateField(resource, 'country', option.value)}
-        />
-
-
+        
         <CountriesField
           resource={resource}
           field="country"
