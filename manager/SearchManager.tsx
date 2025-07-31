@@ -29,7 +29,9 @@ class SearchManager {
   async sendRequest(searchValue?: string) {
     let payload: any = {};
 
-    if (searchValue?.length) payload = { query_text: searchValue };
+    if (searchValue?.length) {
+      payload = { query_text: searchValue};
+    }
 
     const [jam, profile, project] = await Promise.all([
       EntityManager.listJams(payload),
