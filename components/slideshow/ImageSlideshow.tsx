@@ -20,6 +20,7 @@ const slideWidth: number = ScreenManager.window.width - Layout.space.base * 3;
 const ImageSlideshow = ({ data }: Props) => {
   const renderItem = (item: any, index: number) => {
     if (!data?.length) {
+      console.log('no image');
       return (
         <View
           key={`dot-${index}`}
@@ -75,6 +76,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: slideHeight,
+    width: slideWidth,
   },
   title: {
     color: Layout.colors.primary,
