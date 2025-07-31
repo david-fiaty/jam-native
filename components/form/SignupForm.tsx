@@ -14,7 +14,6 @@ import SpinnerView from "../view/SpinnerView";
 import TextView from "../view/TextView";
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
-import CountryField from "../field/CountryField";
 import SectorsField from "../field/SectorsField";
 import ModalManager from "@/manager/ModalManager";
 import LocationPickerField from "../field/LocationPickerField";
@@ -22,6 +21,7 @@ import FormManager from "@/manager/FormManager";
 import SectionManager from "@/manager/SectionManager";
 import VenueTypesField from "../field/VenueTypesField";
 import InputPasswordField from "../field/InputPasswordField";
+import CountriesField from "../field/CountriesField";
 
 const resource: string = 'signup';
 
@@ -240,9 +240,17 @@ const SignupForm = () => {
           <TextView>
             {i18n.t('Country')}
           </TextView>
-          <CountryField
+          <CountriesField
+            multiple={false}
+            resource={resource}
+            field="scope_country_code"
+            placeholder={i18n.t('Select a country')}
             value={formData?.scope_country_code}
-            onChangeValue={(o: any) => FormManager.updateField(resource, 'scope_country_code', o.value, ['string'])}
+            onPress={() => ModalManager.toggleModal('CountriesList', {
+              resource: resource,
+              field: 'scope_country_code',
+              multiple: false,
+            })}
           />
           {FormManager.renderError('scope_country_code')}
 
