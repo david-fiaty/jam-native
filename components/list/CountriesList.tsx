@@ -72,11 +72,17 @@ const CountriesList = ({ resource, field, multiple }: Props) => {
 
   const toggleItem = (row: any) => {
     let idArray = [...selectedCountries];
-    if (idArray.includes(row.item.code)) {
-      idArray = idArray.filter((value: number) => value !== row.item.code);
+
+    if (multiple === true) {
+      if (idArray.includes(row.item.code)) {
+        idArray = idArray.filter((value: number) => value !== row.item.code);
+      }
+      else {
+        idArray.push(row.item.code);
+      }
     }
     else {
-      idArray.push(row.item.code);
+      idArray = [row.item.code];
     }
 
     setSelectedCountries(idArray);
