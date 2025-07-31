@@ -122,6 +122,8 @@ const CountriesList = ({ resource, field }: Props) => {
     })();
   }, [formData, field]);
 
+  console.log(countriesData?.length)
+
   if (!isLoaded) return <SpinnerView />;
 
   return (
