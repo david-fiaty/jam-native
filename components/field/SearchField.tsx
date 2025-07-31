@@ -13,7 +13,6 @@ import SearchManager from '@/manager/SearchManager';
 const SearchField = () => {
   const searchState = useSelector((state: any) => state.search);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const [currentValue, setCurrentValue] = useState<any>('');
   const [debounceValue, setDebounceValue] = useState<any>('');
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
@@ -111,7 +110,6 @@ const SearchField = () => {
           />
         </Animatable.View>
       )}
-
     </BoxView>
   );
 };
