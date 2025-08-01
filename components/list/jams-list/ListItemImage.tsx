@@ -18,19 +18,38 @@ const slideWidth: number = ScreenManager.window.width - Layout.space.base * 3;
 const ListItemImage = ({ row }: Props) => {
   if (!row?.item?.medias?.length) {
     return (
-      <NoImageView
-        width={slideWidth}
-        height={slideHeight}
-        containerStyle={{
-          height: slideHeight,
-          borderRadius: 0,
-        }}
-      />
+      <View
+
+        style={styles.slide}
+      >
+        <NoImageView
+          width={slideWidth}
+          height={slideHeight}
+          containerStyle={{
+            height: slideHeight,
+            borderRadius: 0,
+          }}
+        />
+
+      </View>
     );
   }
   else {
     return <ImageSlideshow data={row?.item?.medias} />;
   }
 };
+
+const styles = StyleSheet.create({
+  wrapper: {
+    height: wrapperHeight,
+    marginTop: Layout.space.base,
+  },
+  slide: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: slideHeight,
+    width: slideWidth,
+  },
+});
 
 export default memo(ListItemImage);
