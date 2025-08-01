@@ -15,9 +15,10 @@ import InputTextField from '../field/InputTextField';
 type Props = {
   resource: string;
   field?: any;
+  multiple?: boolean;
 };
 
-const CountriesList = ({ resource, field }: Props) => {
+const CountriesList = ({ resource, field, multiple }: Props) => {
   const dispatch = useDispatch();
   const [profiles, setProfiles] = useState<any>(null);
   const [countriesData, setCountriesData] = useState<any[]>([]);
@@ -71,11 +72,17 @@ const CountriesList = ({ resource, field }: Props) => {
 
   const toggleItem = (row: any) => {
     let idArray = [...selectedCountries];
-    if (idArray.includes(row.item.code)) {
-      idArray = idArray.filter((value: number) => value !== row.item.code);
+
+    if (multiple === true) {
+      if (idArray.includes(row.item.code)) {
+        idArray = idArray.filter((value: number) => value !== row.item.code);
+      }
+      else {
+        idArray.push(row.item.code);
+      }
     }
     else {
-      idArray.push(row.item.code);
+      idArray = [row.item.code];
     }
 
     setSelectedCountries(idArray);
@@ -83,7 +90,7 @@ const CountriesList = ({ resource, field }: Props) => {
     dispatch(setFormData<any>({
       resource: resource,
       key: field,
-      value: idArray,
+      value: multiple === true ? idArray : idArray[0],
     }));
   };
 

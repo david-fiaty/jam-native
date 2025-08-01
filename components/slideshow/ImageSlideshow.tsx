@@ -5,38 +5,19 @@ import Slick from 'react-native-slick';
 import ImageView from '../view/ImageView';
 import MediaManager from '@/manager/MediaManager';
 import ScreenManager from '@/manager/ScreenManager';
-import NoImageView from '../view/NoImageView';
 
 type Props = {
   data?: any;
 };
 
 const dotSize: number = 8;
-const slideHeight: number = 336;
+const slideHeight: number = Layout.imageSlideshow.height;
 const wrapperHeight: number = 346;
 const pagerHeight: number = 20;
 const slideWidth: number = ScreenManager.window.width - Layout.space.base * 3;
 
 const ImageSlideshow = ({ data }: Props) => {
   const renderItem = (item: any, index: number) => {
-    if (!data?.length) {
-      return (
-        <View
-          key={`dot-${index}`}
-          style={styles.slide}
-        >
-          <NoImageView
-            width={slideWidth}
-            height={slideHeight}
-            containerStyle={{
-              height: slideHeight,
-              borderRadius: 0,
-            }}
-          />
-        </View>
-      );
-    }
-
     return (
       <View
         key={`dot-${index}`}
@@ -75,6 +56,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: slideHeight,
+    width: slideWidth,
   },
   title: {
     color: Layout.colors.primary,
