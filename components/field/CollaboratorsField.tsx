@@ -90,7 +90,6 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Pr
   );
 };
 
-
 const styles = StyleSheet.create({
   element: {
     ...Layout.formField,
