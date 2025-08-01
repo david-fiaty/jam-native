@@ -9,7 +9,7 @@ type Props = {
 };
 
 const slideHeight: number = Layout.imageSlideshow.height;
-const slideWidth: number = ScreenManager.window.width - Layout.space.base * 3;
+const slideWidth: number = (ScreenManager.window.width - Layout.space.base * 3) - 2;
 
 const ListItemImage = ({ row }: Props) => {
   if (!row?.item?.medias?.length) {
