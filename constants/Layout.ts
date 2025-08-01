@@ -189,5 +189,8 @@ export const Layout = {
     borderRadius: radius.round,
     justifyContent: 'flex-start',
   },
+  imageSlideshow: {
+    height: 336,
+  }
 };
 
