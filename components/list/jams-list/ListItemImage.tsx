@@ -1,5 +1,4 @@
-import { memo } from "react";
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import ImageSlideshow from "@/components/slideshow/ImageSlideshow";
 import NoImageView from "@/components/view/NoImageView";
 import ScreenManager from "@/manager/ScreenManager";
@@ -44,4 +43,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(ListItemImage);
+export default ListItemImage;
