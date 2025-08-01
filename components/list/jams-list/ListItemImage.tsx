@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     //alignItems: 'center',
     height: slideHeight,
     width: slideWidth,
-    marginTop: Layout.space.base*5,
+    marginTop: Layout.space.base,
   },
 });
 
