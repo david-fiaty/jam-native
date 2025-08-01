@@ -18,10 +18,7 @@ const slideWidth: number = ScreenManager.window.width - Layout.space.base * 3;
 const ListItemImage = ({ row }: Props) => {
   if (!row?.item?.medias?.length) {
     return (
-      <View
-
-        style={styles.slide}
-      >
+      <View style={styles.slide}>
         <NoImageView
           width={slideWidth}
           height={slideHeight}
@@ -30,7 +27,6 @@ const ListItemImage = ({ row }: Props) => {
             borderRadius: 0,
           }}
         />
-
       </View>
     );
   }
@@ -40,10 +36,6 @@ const ListItemImage = ({ row }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  wrapper: {
-    height: wrapperHeight,
-    marginTop: Layout.space.base,
-  },
   slide: {
     justifyContent: 'center',
     alignItems: 'center',
