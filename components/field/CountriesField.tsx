@@ -95,7 +95,7 @@ const CountriesField = ({ resource, field, value, placeholder, multiple, onPress
             })}
 
             <View style={styles.iconRight}>
-            <IconView name="down" theme="transparent" onPress={onPress} />
+              <IconView name="down" theme="transparent" onPress={onPress} />
             </View>
           </View>
         )}
