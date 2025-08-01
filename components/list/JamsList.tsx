@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
 import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
-import { Config } from "@/constants/Config";
 import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
@@ -38,6 +37,12 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
         onListItemAction={onListItemAction}
       />
     );
+  };
+
+  const getListData = () => {
+    let data: any [] = JSON.parse(searchState.currentResults)?.jam || [];
+
+    return data;
   };
 
   /*
@@ -79,7 +84,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
       style={styles.container}
     >
       <ListView
-        data={(JSON.parse(searchState.currentResults))?.jam || []}
+        data={getListData()}
         contentContainerStyle={Layout.listContainer}
         renderItem={renderItem}
         keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
