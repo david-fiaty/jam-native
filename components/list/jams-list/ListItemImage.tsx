@@ -33,11 +33,10 @@ const ListItemImage = ({ row }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    //justifyContent: 'center',
-    //alignItems: 'center',
     height: slideHeight,
     width: slideWidth,
     marginTop: Layout.space.base,
+    marginBottom: Layout.space.base,
   },
 });
 
