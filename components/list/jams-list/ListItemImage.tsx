@@ -9,10 +9,7 @@ type Props = {
 };
 
 const slideHeight: number = 336;
-const wrapperHeight: number = 346;
-const pagerHeight: number = 20;
 const slideWidth: number = ScreenManager.window.width - Layout.space.base * 3;
-
 
 const ListItemImage = ({ row }: Props) => {
   if (!row?.item?.medias?.length) {
