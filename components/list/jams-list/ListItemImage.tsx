@@ -1,12 +1,43 @@
-import { memo } from "react";
+import { StyleSheet, View } from 'react-native';
 import ImageSlideshow from "@/components/slideshow/ImageSlideshow";
+import NoImageView from "@/components/view/NoImageView";
+import ScreenManager from "@/manager/ScreenManager";
+import { Layout } from "@/constants/Layout";
 
 type Props = {
   row?: any;
 };
 
+const slideHeight: number = 336;
+const slideWidth: number = ScreenManager.window.width - Layout.space.base * 3;
+
 const ListItemImage = ({ row }: Props) => {
-  return <ImageSlideshow data={row?.item.medias} />;
+  if (!row?.item?.medias?.length) {
+    return (
+      <View style={styles.slide}>
+        <NoImageView
+          width={slideWidth}
+          height={slideHeight}
+          containerStyle={{
+            height: slideHeight,
+            borderRadius: 0,
+          }}
+        />
+      </View>
+    );
+  }
+  else {
+    return <ImageSlideshow data={row?.item?.medias} />;
+  }
 };
 
-export default memo(ListItemImage);
+const styles = StyleSheet.create({
+  slide: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: slideHeight,
+    width: slideWidth,
+  },
+});
+
+export default ListItemImage;
