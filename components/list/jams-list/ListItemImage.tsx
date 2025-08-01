@@ -1,20 +1,20 @@
 import { StyleSheet, View } from 'react-native';
+import { Layout } from "@/constants/Layout";
 import ImageSlideshow from "@/components/slideshow/ImageSlideshow";
 import NoImageView from "@/components/view/NoImageView";
 import ScreenManager from "@/manager/ScreenManager";
-import { Layout } from "@/constants/Layout";
 
 type Props = {
   row?: any;
 };
 
-const slideHeight: number = 336;
-const slideWidth: number = ScreenManager.window.width - Layout.space.base * 3;
+const slideHeight: number = Layout.imageSlideshow.height;
+const slideWidth: number = (ScreenManager.window.width - Layout.space.base * 3) - 2;
 
 const ListItemImage = ({ row }: Props) => {
   if (!row?.item?.medias?.length) {
     return (
-      <View style={styles.slide}>
+      <View style={styles.container}>
         <NoImageView
           width={slideWidth}
           height={slideHeight}
@@ -32,11 +32,11 @@ const ListItemImage = ({ row }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  slide: {
-    justifyContent: 'center',
-    alignItems: 'center',
+  container: {
     height: slideHeight,
     width: slideWidth,
+    marginTop: Layout.space.base,
+    marginBottom: Layout.space.base,
   },
 });
 

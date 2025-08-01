@@ -11,7 +11,7 @@ type Props = {
 };
 
 const dotSize: number = 8;
-const slideHeight: number = 336;
+const slideHeight: number = Layout.imageSlideshow.height;
 const wrapperHeight: number = 346;
 const pagerHeight: number = 20;
 const slideWidth: number = ScreenManager.window.width - Layout.space.base * 3;
