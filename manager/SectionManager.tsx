@@ -28,7 +28,7 @@ class SectionManager {
     let targetSection: any = sectionConfig.find((o: any) => o.id === sectionId);
 
     if (activeSections?.length > 0 && activeSections.at(-1)?.id == sectionId) {
-      console.log('second');
+      activeSections.pop();
     }
 
     activeSections.push({
