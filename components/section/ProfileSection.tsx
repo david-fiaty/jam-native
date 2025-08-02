@@ -20,7 +20,6 @@ const resource: string = 'profile';
 const ProfileSection = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
   const formData = useSelector((state: any) => state.form?.[resource]);
 
@@ -34,8 +33,6 @@ const ProfileSection = () => {
           key: null,
           value: await UserManager.getProfileData(),
         }));
-
-        //setIsLoaded(true);
       }
     })();
   }, [formData, resource]);
