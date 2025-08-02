@@ -41,7 +41,7 @@ const LanguageForm = () => {
 
     dispatch(setCurrentLanguage(code))
     i18next.changeLanguage(code);
-    SectionManager.push(router, 'language');
+    SectionManager.replace(router, 'language');
   };
 
   useEffect(() => {
