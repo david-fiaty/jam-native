@@ -37,7 +37,6 @@ class UserManager {
 
     if (success) {
       SessionManager.setTokenData(response.tokens);
-      Store.dispatch(setProfileData(response.user.profiles[0]));
     }
 
     return {
