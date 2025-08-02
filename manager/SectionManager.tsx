@@ -30,6 +30,7 @@ class SectionManager {
     activeSections.push({
       ...targetSection,
       ...{ params: (Object.keys(params || {}).length > 0 ? params : {}) },
+      ...{ title: (params?.title?.length > 0 ? i18n.t(params.title) : i18n.t(targetSection.title))},
     });
 
     Store.dispatch(setActiveSections(activeSections));
