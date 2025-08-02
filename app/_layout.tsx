@@ -35,7 +35,6 @@ const RootLayout = () => {
     showHeaderButtons: true,
     showHeaderSearch: true,
     isRoot: false,
-    unmountOnBlur: false,
   };
 
   const [isLoaded, isError] = useFonts({
