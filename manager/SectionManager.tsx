@@ -27,9 +27,14 @@ class SectionManager {
     let sectionConfig: any[] = [...Store.getState().section.config];
     let targetSection: any = sectionConfig.find((o: any) => o.id === sectionId);
 
+    if (activeSections?.length > 0 && activeSections.at(-1)?.id == sectionId) {
+      activeSections = activeSections.filter((o: any) => o.id != sectionId);
+    }
+
     activeSections.push({
       ...targetSection,
       ...{ params: (Object.keys(params || {}).length > 0 ? params : {}) },
+      ...{ title: (params?.title?.length > 0 ? i18n.t(params.title) : i18n.t(targetSection.title))},
     });
 
     Store.dispatch(setActiveSections(activeSections));
