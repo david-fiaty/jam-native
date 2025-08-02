@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentLanguage } from "@/redux/slices/UserSlice";
 import { Layout } from '@/constants/Layout';
@@ -9,9 +10,11 @@ import SelectListBase from '../base/SelectListBase';
 import ScreenManager from "@/manager/ScreenManager";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import i18next from 'i18next';
+import SectionManager from "@/manager/SectionManager";
 
 const LanguageForm = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const [languageChanged, setLanguageChanged] = useState(0);
   const userState: any = useSelector((state: any) => state.user);
 
@@ -37,8 +40,8 @@ const LanguageForm = () => {
     }
 
     dispatch(setCurrentLanguage(code))
-
     i18next.changeLanguage(code);
+    SectionManager.replace(router, 'language');
   };
 
   useEffect(() => {
