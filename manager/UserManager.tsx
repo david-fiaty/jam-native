@@ -1,5 +1,6 @@
 import { setActiveModals } from '@/redux/slices/ModalSlice';
 import { setActiveSections } from '@/redux/slices/SectionSlice';
+import { setProfileData } from '@/redux/slices/UserSlice';
 import { Config } from '@/constants/Config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Store from '@/redux/Store';
@@ -133,6 +134,12 @@ class UserManager {
     }
 
     return displayName.trim().length > 0 ? displayName : item?.profile_name;
+  }
+
+  async loadProfileData(options?: any) {
+    let profileData: any = await this.getProfileData(options) || {};
+
+    Store.dispatch(setProfileData(profileData))
   }
 
   async getProfileData(options?: any) {
