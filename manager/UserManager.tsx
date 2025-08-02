@@ -136,13 +136,6 @@ class UserManager {
     return displayName.trim().length > 0 ? displayName : item?.profile_name;
   }
 
-  async loadProfileData(options?: any) {
-    let profileData: any = await this.getProfileData(options) || {};
-
-    console.log(profileData)
-    Store.dispatch(setProfileData(profileData));
-  }
-
   async getProfileData(options?: any) {
     options = options || {};
     let profileId: number = await this.getProfileId();
