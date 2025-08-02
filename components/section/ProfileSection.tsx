@@ -40,8 +40,6 @@ const ProfileSection = () => {
 
   if (!Object.keys(formData)?.length) return <SpinnerView />;
 
-  console.log(userState)
-
   return (
     <BoxView
       direction="column"
