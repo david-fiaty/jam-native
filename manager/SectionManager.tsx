@@ -27,6 +27,10 @@ class SectionManager {
     let sectionConfig: any[] = [...Store.getState().section.config];
     let targetSection: any = sectionConfig.find((o: any) => o.id === sectionId);
 
+    if (activeSections?.length > 0 && activeSections.at(-1)?.id == sectionId) {
+      console.log('second');
+    }
+
     activeSections.push({
       ...targetSection,
       ...{ params: (Object.keys(params || {}).length > 0 ? params : {}) },
