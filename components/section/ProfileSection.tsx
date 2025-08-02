@@ -32,15 +32,13 @@ const ProfileSection = () => {
         dispatch(setFormData<any>({
           resource: resource,
           key: null,
-          value: await UserManager.getProfileData(),
+          value: userState.profileData,
         }));
       }
     })();
-  }, [formData, resource]);
+  }, [userState, formData, resource]);
 
   if (!Object.keys(formData)?.length) return <SpinnerView />;
-
-  console.log(userState)
 
   return (
     <BoxView
