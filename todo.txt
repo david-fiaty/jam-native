@@ -52,6 +52,9 @@ https://docs.google.com/spreadsheets/d/1q7osx0gzONv_ZLisLiUDJU6UqphqBvXejlyeCUTT
 # Global feedback
 https://docs.google.com/spreadsheets/d/1q7osx0gzONv_ZLisLiUDJU6UqphqBvXejlyeCUTTD44/edit?pli=1&gid=664353314#gid=664353314
 
+# NEW PROFILE & NOTIFICATIONS
+https://www.figma.com/design/9gWmK7TnjDeFidQliB1mkO/JAM-MOBILE?node-id=0-1
+
 Test users:
 Id: 62 / test888@yopmail.com / Test@12345678
 id: 3 / mitsiomotu@yopmail.com / Password1234
