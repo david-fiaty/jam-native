@@ -28,7 +28,7 @@ class SectionManager {
     let targetSection: any = sectionConfig.find((o: any) => o.id === sectionId);
 
     if (activeSections?.length > 0 && activeSections.at(-1)?.id == sectionId) {
-      activeSections.pop();
+      activeSections = activeSections.filter((o: any) => o.id != sectionId);
     }
 
     activeSections.push({
