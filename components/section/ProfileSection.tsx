@@ -26,7 +26,7 @@ const ProfileSection = () => {
 
   useEffect(() => {
     (async () => {
-      if (!isLoaded) {
+      if (!Object.keys(formData)?.length) {
         setProfileId(await UserManager.getProfileId());
 
         dispatch(setFormData<any>({
@@ -35,12 +35,12 @@ const ProfileSection = () => {
           value: await UserManager.getProfileData(),
         }));
 
-        setIsLoaded(true);
+        //setIsLoaded(true);
       }
     })();
-  }, [isLoaded]);
+  }, [formData, resource]);
 
-  if (!isLoaded) return <SpinnerView />;
+  if (!Object.keys(formData)?.length) return <SpinnerView />;
 
   return (
     <BoxView
