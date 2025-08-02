@@ -139,7 +139,8 @@ class UserManager {
   async loadProfileData(options?: any) {
     let profileData: any = await this.getProfileData(options) || {};
 
-    Store.dispatch(setProfileData(profileData))
+    console.log(profileData)
+    Store.dispatch(setProfileData(profileData));
   }
 
   async getProfileData(options?: any) {
