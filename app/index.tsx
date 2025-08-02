@@ -34,7 +34,6 @@ export default () => {
   useEffect(() => {
     (async () => {
       await setLanguage();
-      await UserManager.loadProfileData();
       await SearchManager.loadResults();
     })();
   }, []);
