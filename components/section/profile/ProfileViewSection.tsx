@@ -20,6 +20,9 @@ import TextView from "@/components/view/TextView";
 import ImageView from "@/components/view/ImageView";
 import MediaManager from "@/manager/MediaManager";
 import IconView from "@/components/view/IconView";
+import Collapsible from "react-native-collapsible";
+import CollapsibleView from "@/components/view/CollapsibleView";
+import { color } from "@rneui/base";
 
 const resource: string = 'profile';
 const profileImageSize: number = 100;
@@ -28,6 +31,7 @@ const ProfileSection = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [profileId, setProfileId] = useState<number>(0);
+  const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
   const formData = useSelector((state: any) => state.form?.[resource]);
   const userState = useSelector((state: any) => state.user);
 
@@ -123,6 +127,33 @@ const ProfileSection = () => {
         </TextView>
       </ProfileViewField>
 
+      <CollapsibleView
+        label={(
+          <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeader}>
+            <TextView style={styles.collapsibleLabel}>
+              {i18n.t('View more')} ({UserManager.getProfileTypeLabel(formData?.profile_type)})  
+            </TextView>
+            <IconView name="collapsed" theme="white" padding={0} />
+          </BoxView>
+        )}
+        openedLabel={
+          <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeader}>
+            <TextView style={styles.collapsibleLabel}>
+              {i18n.t('View more')} ({UserManager.getProfileTypeLabel(formData?.profile_type)})  
+            </TextView>
+            <IconView name="expanded" theme="white" padding={0} />
+          </BoxView>
+        }
+        content={<TextView>Collapsible content</TextView>}
+      />
+
+
+
+
+
+
+
+
       <DividerView />
 
       <ProfileProjectsList
@@ -183,6 +214,16 @@ const styles = StyleSheet.create({
   profileTitle: {
     fontWeight: 'bold',
     fontSize: 15,
+  },
+  collapsibleHeader: {
+    backgroundColor: Layout.colors.primary,
+    borderWidth: Layout.borderWidth.base,
+    borderRadius: Layout.radius.round,
+    borderColor: Layout.colors.primary,
+    padding: Layout.space.base,
+  },
+  collapsibleLabel: {
+    color: Layout.colors.white,
   },
 });
 
