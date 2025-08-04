@@ -133,7 +133,7 @@ const ProfileSection = () => {
             <TextView style={styles.collapsibleLabelClosed}>
               {i18n.t('View more')} ({UserManager.getProfileTypeLabel(formData?.profile_type)})  
             </TextView>
-            <IconView name="collapsed" theme="white" padding={0} />
+            <IconView name="collapsed" theme="transparent" padding={0} />
           </BoxView>
         )}
         openedLabel={
