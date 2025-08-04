@@ -33,29 +33,71 @@ const ProfileSection = () => {
   const formData = useSelector((state: any) => state.form?.[resource]);
   const userState = useSelector((state: any) => state.user);
 
+  const renderHeader = () => {
+    return (
+      <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.profileHeader}>
+        <BoxView direction="row" align="center" justify="center" style={styles.profileHeaderLeft}>
+          {formData?.profile_picture?.url?.length > 0 && (
+            <ImageView
+              uri={MediaManager.getImageUrl(formData.profile_picture.url)}
+              resizeMode="cover"
+              width={profileImageSize}
+              height={profileImageSize}
+              style={styles.profileImage}
+            />
+          )}
+
+          {!formData?.profile_picture?.url?.length && (
+            <IconView
+              name="user"
+              theme="secondary"
+              size={26}
+              padding={28}
+            />
+          )}
+        </BoxView>
+
+        <View style={styles.profileHeaderRight}>
+          <ProfileViewField label={i18n.t('Profile ID (Username)')}>
+            <TextView>
+              {formData?.profile_name}
+            </TextView>
+          </ProfileViewField>
+
+          <ProfileViewField>
+            <TextView>
+              {formData?.email || i18n.t('Email unavailable')}
+            </TextView>
+          </ProfileViewField>
+        </View>
+      </BoxView>
+    );
+  };
+
+
   const renderSectors = () => {
     return (
-        <TextView>
-          {[20, 13, 6, 36, 31].map((id: any, i: number) => (
-            <TextView key={id}>
-              {(sectorsData.find((o: any) => o.id == id))?.name}
-              {i < 4 && (<TextView>, </TextView>)}
-            </TextView>
-          ))}
-        </TextView>
+      <TextView>
+        {[20, 13, 6, 36, 31].map((id: any, i: number) => (
+          <TextView key={id}>
+            {(sectorsData.find((o: any) => o.id == id))?.name}
+            {i < 4 && (<TextView>, </TextView>)}
+          </TextView>
+        ))}
+      </TextView>
     );
   };
 
   const renderSubSectors = () => {
     return (
-        <TextView>
-          {[20, 13, 6, 36, 31].map((id: any, i: number) => (
-            <TextView key={id}>
-              {(sectorsData.find((o: any) => o.id == id))?.name}
-              {i < 4 && (<TextView>, </TextView>)}
-            </TextView>
-          ))}
-        </TextView>
+      <TextView>
+        {[20, 13, 6, 36, 31].map((id: any, i: number) => (
+          <TextView key={id}>
+            {(sectorsData.find((o: any) => o.id == id))?.name}
+            {i < 4 && (<TextView>, </TextView>)}
+          </TextView>
+        ))}
+      </TextView>
     );
   };
 
@@ -99,42 +141,7 @@ const ProfileSection = () => {
         </TextView>
       </ProfileViewField>
 
-      <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.profileHeader}>
-        <BoxView direction="row" align="center" justify="center" style={styles.profileHeaderLeft}>
-          {formData?.profile_picture?.url?.length > 0 && (
-            <ImageView
-              uri={MediaManager.getImageUrl(formData.profile_picture.url)}
-              resizeMode="cover"
-              width={profileImageSize}
-              height={profileImageSize}
-              style={styles.profileImage}
-            />
-          )}
-
-          {!formData?.profile_picture?.url?.length && (
-            <IconView
-              name="user"
-              theme="secondary"
-              size={26}
-              padding={28}
-            />
-          )}
-        </BoxView>
-
-        <View style={styles.profileHeaderRight}>
-          <ProfileViewField label={i18n.t('Profile ID (Username)')}>
-            <TextView>
-              {formData?.profile_name}
-            </TextView>
-          </ProfileViewField>
-
-          <ProfileViewField>
-            <TextView>
-              {formData?.email || i18n.t('Email unavailable')}
-            </TextView>
-          </ProfileViewField>
-        </View>
-      </BoxView>
+      {renderHeader()}
 
       <ProfileViewField label={i18n.t('Industries')}>
         {renderSectors()}
