@@ -286,7 +286,9 @@ const styles = StyleSheet.create({
   profileHeaderLeft: {
     width: profileImageSize,
     height: '100%',
-    backgroundColor: 'red',
+    borderColor: Layout.colors.secondary,
+    borderWidth: Layout.borderWidth.base,
+    borderRadius: Layout.radius.round,
   },
   profileHeaderRight: {
     flex: 1,
