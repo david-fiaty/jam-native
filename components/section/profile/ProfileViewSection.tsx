@@ -14,6 +14,9 @@ import DividerView from "@/components/view/DividerView";
 import ModalManager from "@/manager/ModalManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import SectionManager from "@/manager/SectionManager";
+import ProfileViewField from "./ProfileViewField";
+import InputTextField from "@/components/field/InputTextField";
+import TextView from "@/components/view/TextView";
 
 const resource: string = 'profile';
 
@@ -49,6 +52,10 @@ const ProfileSection = () => {
       style={styles.container}
       scroll={true}
     >
+      <ProfileViewField>
+        <TextView>Profile view field</TextView>
+      </ProfileViewField>
+
       <ProfileHeaderView profileItem={formData} />
       <DividerView />
 
