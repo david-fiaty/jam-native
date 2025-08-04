@@ -28,7 +28,6 @@ const ProfileSection = () => {
   const dispatch = useDispatch();
   const [profileId, setProfileId] = useState<number>(0);
   const [sectorsData, setSectorsData] = useState<any>([]);
-  const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
   const formData = useSelector((state: any) => state.form?.[resource]);
   const userState = useSelector((state: any) => state.user);
 
