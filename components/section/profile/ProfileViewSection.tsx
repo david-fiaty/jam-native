@@ -189,7 +189,7 @@ const ProfileSection = () => {
   return (
     <BoxView
       direction="column"
-      align="center"
+      align="flex-start"
       justify="center"
       style={styles.container}
       scroll={true}
@@ -238,12 +238,15 @@ const ProfileSection = () => {
         content={renderCollapsibleFields()}
       />
 
-
-
-
-
-
-
+      <TextView style={styles.groupTitle}>
+        {`${UserManager.getProfileDisplayName(formData)}'s`} {i18n.t('Projects')}
+      </TextView>
+      <ProfileProjectsList
+        addButton={true}
+        allButton={formData?.profile_projects?.length > 0}
+        idArray={formData?.profile_projects || []}
+        onAddButtonPress={() => SectionManager.push(router, 'add-project', { profileId: profileId, profileJams: formData?.profile_jams || [] })}
+      />
 
       <DividerView />
 
@@ -281,6 +284,10 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: '100%',
     paddingBottom: Layout.space.base * 2,
+  },
+  groupTitle: {
+    fontWeight: 'bold',
+    marginTop: Layout.space.base,
   },
   profileHeader: {
     width: '100%',
