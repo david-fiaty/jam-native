@@ -35,7 +35,7 @@ const ProfileSection = () => {
 
   const renderHeader = () => {
     return (
-      <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.profileHeader}>
+      <>
         <BoxView direction="row" align="center" justify="center" style={styles.profileHeaderLeft}>
           {formData?.profile_picture?.url?.length > 0 && (
             <ImageView
@@ -70,7 +70,7 @@ const ProfileSection = () => {
             </TextView>
           </ProfileViewField>
         </View>
-      </BoxView>
+      </>
     );
   };
 
@@ -141,8 +141,10 @@ const ProfileSection = () => {
         </TextView>
       </ProfileViewField>
 
-      {renderHeader()}
-
+      <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.profileHeader}>
+        {renderHeader()}
+      </BoxView>
+      
       <ProfileViewField label={i18n.t('Industries')}>
         {renderSectors()}
       </ProfileViewField>
