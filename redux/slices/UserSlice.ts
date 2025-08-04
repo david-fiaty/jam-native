@@ -5,6 +5,7 @@ const UserSlice = createSlice({
   initialState: {
     tokenData: {},
     currentLanguage: 'en',
+    profileData: {},
   },
   reducers: {
     setTokenData: (state, action) => {
@@ -13,8 +14,11 @@ const UserSlice = createSlice({
     setCurrentLanguage: (state, action) => {
       state.currentLanguage = action.payload;
     },
+    setProfileData: (state, action) => {
+      state.profileData = action.payload;
+    },
   },
 });
 
-export const { setTokenData, setCurrentLanguage } = UserSlice.actions;
+export const { setTokenData, setCurrentLanguage, setProfileData } = UserSlice.actions;
 export default UserSlice.reducer;

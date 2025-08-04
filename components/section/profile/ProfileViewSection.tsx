@@ -4,15 +4,15 @@ import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { setFormData } from "@/redux/slices/FormSlice";
-import BoxView from "../view/BoxView";
-import ProfileProjectsList from "../list/ProfileProjectsList";
+import BoxView from "@/components/view/BoxView";
+import ProfileProjectsList from "@/components/list/ProfileProjectsList";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
-import ProfileJamsList from "../list/ProfileJamsList";
-import ProfileHeaderView from "../view/ProfileHeaderView";
-import DividerView from "../view/DividerView";
+import ProfileJamsList from "@/components/list/ProfileJamsList";
+import ProfileHeaderView from "@/components/view/ProfileHeaderView";
+import DividerView from "@/components/view/DividerView";
 import ModalManager from "@/manager/ModalManager";
-import SpinnerView from "../view/SpinnerView";
+import SpinnerView from "@/components/view/SpinnerView";
 import SectionManager from "@/manager/SectionManager";
 
 const resource: string = 'profile';
@@ -20,27 +20,26 @@ const resource: string = 'profile';
 const ProfileSection = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
   const formData = useSelector((state: any) => state.form?.[resource]);
+  const userState = useSelector((state: any) => state.user);
 
   useEffect(() => {
     (async () => {
-      if (!isLoaded) {
+      if (!Object.keys(formData)?.length) {
         setProfileId(await UserManager.getProfileId());
 
         dispatch(setFormData<any>({
           resource: resource,
           key: null,
+          //value: userState.profileData, // Todo - Enable this
           value: await UserManager.getProfileData(),
         }));
-
-        setIsLoaded(true);
       }
     })();
-  }, [isLoaded]);
+  }, [userState, formData, resource]);
 
-  if (!isLoaded) return <SpinnerView />;
+  //if (!Object.keys(formData)?.length) return <SpinnerView />;
 
   return (
     <BoxView
