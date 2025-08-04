@@ -1,5 +1,6 @@
 import { setActiveModals } from '@/redux/slices/ModalSlice';
 import { setActiveSections } from '@/redux/slices/SectionSlice';
+import { setProfileData } from '@/redux/slices/UserSlice';
 import { Config } from '@/constants/Config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Store from '@/redux/Store';
