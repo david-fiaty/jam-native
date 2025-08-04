@@ -52,8 +52,14 @@ const ProfileSection = () => {
       style={styles.container}
       scroll={true}
     >
-      <ProfileViewField label={'xxx'} b>
+      <ProfileViewField>
         <TextView style={styles.profileTitle}>
+          {UserManager.getProfileDisplayName(formData)}
+        </TextView>
+      </ProfileViewField>
+
+      <ProfileViewField label={i18n.t('Profile ID (Username)')}>
+        <TextView>
           {UserManager.getProfileDisplayName(formData)}
         </TextView>
       </ProfileViewField>
