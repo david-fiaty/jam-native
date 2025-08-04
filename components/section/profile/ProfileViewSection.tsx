@@ -289,6 +289,8 @@ const styles = StyleSheet.create({
     borderColor: Layout.colors.secondary,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
+    padding: Layout.space.base,
+    backgroundColor: 'red',
   },
   profileHeaderRight: {
     flex: 1,
