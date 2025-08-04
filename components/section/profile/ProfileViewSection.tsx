@@ -64,6 +64,12 @@ const ProfileSection = () => {
         </TextView>
       </ProfileViewField>
 
+      <ProfileViewField label={i18n.t('Email')}>
+        <TextView>
+          {formData?.email}
+        </TextView>
+      </ProfileViewField>
+
       <ProfileHeaderView profileItem={formData} />
       <DividerView />
 
