@@ -189,7 +189,7 @@ const ProfileSection = () => {
   return (
     <BoxView
       direction="column"
-      align="center"
+      align="flex-start"
       justify="center"
       style={styles.container}
       scroll={true}
@@ -238,40 +238,34 @@ const ProfileSection = () => {
         content={renderCollapsibleFields()}
       />
 
-
-
-
-
-
-
-
-      <DividerView />
-
+      <TextView style={styles.groupTitle}>
+        {`${UserManager.getProfileDisplayName(formData)}'s`} {i18n.t('Projects')}
+      </TextView>
       <ProfileProjectsList
-        title={i18n.t("Your Projects")}
         addButton={true}
         allButton={formData?.profile_projects?.length > 0}
         idArray={formData?.profile_projects || []}
         onAddButtonPress={() => SectionManager.push(router, 'add-project', { profileId: profileId, profileJams: formData?.profile_jams || [] })}
       />
-      <DividerView />
 
+      <TextView style={styles.groupTitle}>
+        {`${UserManager.getProfileDisplayName(formData)}'s`} {i18n.t('Jams')}
+      </TextView>
       <ProfileJamsList
-        title={i18n.t("Your Jams")}
         allButton={formData?.profile_jams?.length > 0}
         addButton={true}
         idArray={formData?.profile_jams || []}
         onAddButtonPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
       />
-      <DividerView />
 
+      <TextView style={styles.groupTitle}>
+        {i18n.t('Saved Jams')}
+      </TextView>
       <ProfileJamsList
-        title={i18n.t("Saved Jams")}
         allButton={formData?.saved_jams?.length > 0}
         idArray={formData?.saved_jams || []}
         emptyMessage={i18n.t('No data available.')}
-      />
-
+      />      
     </BoxView>
   );
 };
@@ -281,6 +275,10 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: '100%',
     paddingBottom: Layout.space.base * 2,
+  },
+  groupTitle: {
+    fontWeight: 'bold',
+    marginTop: Layout.space.base,
   },
   profileHeader: {
     width: '100%',
