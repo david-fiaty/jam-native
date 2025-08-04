@@ -129,16 +129,16 @@ const ProfileSection = () => {
 
       <CollapsibleView
         label={(
-          <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeader}>
-            <TextView style={styles.collapsibleLabel}>
+          <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeaderClosed}>
+            <TextView style={styles.collapsibleLabelClosed}>
               {i18n.t('View more')} ({UserManager.getProfileTypeLabel(formData?.profile_type)})  
             </TextView>
             <IconView name="collapsed" theme="white" padding={0} />
           </BoxView>
         )}
         openedLabel={
-          <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeader}>
-            <TextView style={styles.collapsibleLabel}>
+          <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeaderOpened}>
+            <TextView style={styles.collapsibleLabelOpened}>
               {i18n.t('View more')} ({UserManager.getProfileTypeLabel(formData?.profile_type)})  
             </TextView>
             <IconView name="expanded" theme="white" padding={0} />
@@ -215,14 +215,24 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 15,
   },
-  collapsibleHeader: {
-    backgroundColor: Layout.colors.primary,
+  collapsibleHeaderClosed: {
+    backgroundColor: Layout.colors.secondary,
+    borderColor: Layout.colors.secondary,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
-    borderColor: Layout.colors.primary,
     padding: Layout.space.base,
   },
-  collapsibleLabel: {
+  collapsibleHeaderOpened: {
+    backgroundColor: Layout.colors.primary,
+    borderColor: Layout.colors.primary,
+    borderWidth: Layout.borderWidth.base,
+    borderRadius: Layout.radius.round,
+    padding: Layout.space.base,
+  },
+  collapsibleLabelClosed: {
+    color: Layout.colors.primary,
+  },
+  collapsibleLabelOpened: {
     color: Layout.colors.white,
   },
 });
