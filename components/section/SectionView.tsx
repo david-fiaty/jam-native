@@ -17,12 +17,12 @@ import LegalSection from "@/components/section/LegalSection";
 import LoginSection from "@/components/section/LoginSection";
 import WelcomeSection from "@/components/section/WelcomeSection";
 import SignupSection from "@/components/section/SignupSection";
-import ProfileSection from "@/components/section/ProfileSection";
+import ProfileViewSection from "@/components/section/profile/ProfileViewSection";
 import PrivacySection from "@/components/section/PrivacySection";
 import JamItemSection from "@/components/section/JamItemSection";
 import ProfileItemSection from "@/components/section/ProfileItemSection";
 import ProjectItemSection from "@/components/section/ProjectItemSection";
-import ProfileFormSection from "@/components/section/ProfileFormSection";
+import ProfileFormSection from "@/components/section/profile/ProfileFormSection";
 import AddProjectForm from "@/components/form/AddProjectForm";
 import LanguageForm from "../form/LanguageForm";
 import ResetPasswordForm from "../form/ResetPasswordForm";
@@ -165,7 +165,7 @@ const SectionView = () => {
       {
         id: 'profile',
         title: i18n.t('Your profile'),
-        render: (params: any) => <ProfileSection {...params} />,
+        render: (params: any) => <ProfileViewSection {...params} />,
         toolbarButtons: [
           {
             label: i18n.t('Edit'),

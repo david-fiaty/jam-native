@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import i18next from 'i18next';
 import ScreenManager from '@/manager/ScreenManager';
 import SearchManager from '@/manager/SearchManager';
+import UserManager from '@/manager/UserManager';
 
 export default () => {
   const dispatch = useDispatch();
@@ -36,7 +37,6 @@ export default () => {
       await SearchManager.loadResults();
     })();
   }, []);
-
 
   return null;
 }
