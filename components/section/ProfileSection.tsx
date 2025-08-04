@@ -32,13 +32,14 @@ const ProfileSection = () => {
         dispatch(setFormData<any>({
           resource: resource,
           key: null,
-          value: userState.profileData,
+          //value: userState.profileData, // Todo - Enable this
+          value: await UserManager.getProfileData(),
         }));
       }
     })();
   }, [userState, formData, resource]);
 
-  if (!Object.keys(formData)?.length) return <SpinnerView />;
+  //if (!Object.keys(formData)?.length) return <SpinnerView />;
 
   return (
     <BoxView
