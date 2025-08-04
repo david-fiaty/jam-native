@@ -248,6 +248,16 @@ const ProfileSection = () => {
         onAddButtonPress={() => SectionManager.push(router, 'add-project', { profileId: profileId, profileJams: formData?.profile_jams || [] })}
       />
 
+      <TextView style={styles.groupTitle}>
+        {`${UserManager.getProfileDisplayName(formData)}'s`} {i18n.t('Jams')}
+      </TextView>
+      <ProfileJamsList
+        allButton={formData?.profile_jams?.length > 0}
+        addButton={true}
+        idArray={formData?.profile_jams || []}
+        onAddButtonPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
+      />
+
       <DividerView />
 
       <ProfileProjectsList
