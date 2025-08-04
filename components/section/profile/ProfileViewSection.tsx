@@ -9,20 +9,17 @@ import ProfileProjectsList from "@/components/list/ProfileProjectsList";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import ProfileJamsList from "@/components/list/ProfileJamsList";
-import ProfileHeaderView from "@/components/view/ProfileHeaderView";
 import DividerView from "@/components/view/DividerView";
 import ModalManager from "@/manager/ModalManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import SectionManager from "@/manager/SectionManager";
 import ProfileViewField from "./ProfileViewField";
-import InputTextField from "@/components/field/InputTextField";
 import TextView from "@/components/view/TextView";
 import ImageView from "@/components/view/ImageView";
 import MediaManager from "@/manager/MediaManager";
 import IconView from "@/components/view/IconView";
-import Collapsible from "react-native-collapsible";
 import CollapsibleView from "@/components/view/CollapsibleView";
-import { color } from "@rneui/base";
+import EntityManager from "@/manager/EntityManager";
 
 const resource: string = 'profile';
 const profileImageSize: number = 100;
@@ -31,6 +28,7 @@ const ProfileSection = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [profileId, setProfileId] = useState<number>(0);
+  const [sectorsData, setSectorsData] = useState<any>([]);
   const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
   const formData = useSelector((state: any) => state.form?.[resource]);
   const userState = useSelector((state: any) => state.user);
@@ -39,6 +37,7 @@ const ProfileSection = () => {
     (async () => {
       if (!Object.keys(formData)?.length) {
         setProfileId(await UserManager.getProfileId());
+        setSectorsData(await EntityManager.getSectors());
 
         dispatch(setFormData<any>({
           resource: resource,
@@ -50,7 +49,17 @@ const ProfileSection = () => {
     })();
   }, [userState, formData, resource]);
 
+
+  useEffect(() => {
+    (async () => {
+      if (!sectorsData?.length) {
+        setSectorsData(await EntityManager.getSectors());
+      }
+    })();
+  }, [sectorsData]);
+
   //if (!Object.keys(formData)?.length) return <SpinnerView />;
+  console.log(sectorsData)
 
   return (
     <BoxView
