@@ -137,9 +137,11 @@ const ProfileSection = () => {
           </BoxView>
         )}
         openedLabel={
-          <BoxView direction="row" align="center" justify="flex-start">
-            <IconView name="expanded" theme="transparent" padding={0} />
-            <TextView>{i18n.t('Replies')}</TextView>
+          <BoxView direction="row" align="center" justify="space-between" style={{backgroundColor: Layout.colors.primary}}>
+            <TextView style={{color: Layout.colors.white}}>
+              {i18n.t('View more')} ({UserManager.getProfileTypeLabel(formData?.profile_type)})  
+            </TextView>
+            <IconView name="expanded" theme="white" padding={0} />
           </BoxView>
         }
         content={<TextView>Collapsible content</TextView>}
