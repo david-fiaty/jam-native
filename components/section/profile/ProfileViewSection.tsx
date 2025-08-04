@@ -103,7 +103,19 @@ const ProfileSection = () => {
   const renderCollapsibleFields = () => {
     if (formData?.profile_organization) {
       return (
-        <TextView>Profile Organisation Fields</TextView>
+        <BoxView>
+          <ProfileViewField label={i18n.t('Organization name')}>
+            <TextView>
+              {formData?.profile_organization?.organization_name}
+            </TextView>
+          </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Creation year')}>
+            <TextView>
+              {formData?.profile_organization?.creation_year || i18n.t('Unavailable')}
+            </TextView>
+          </ProfileViewField>
+        </BoxView>
       );
     }
     else if (formData?.profile_venue) {
