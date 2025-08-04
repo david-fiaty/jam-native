@@ -33,6 +33,32 @@ const ProfileSection = () => {
   const formData = useSelector((state: any) => state.form?.[resource]);
   const userState = useSelector((state: any) => state.user);
 
+  const renderSectors = () => {
+    return (
+        <TextView>
+          {[20, 13, 6, 36, 31].map((id: any, i: number) => (
+            <TextView key={id}>
+              {(sectorsData.find((o: any) => o.id == id))?.name}
+              {i < 4 && (<TextView>, </TextView>)}
+            </TextView>
+          ))}
+        </TextView>
+    );
+  };
+
+  const renderSubSectors = () => {
+    return (
+        <TextView>
+          {[20, 13, 6, 36, 31].map((id: any, i: number) => (
+            <TextView key={id}>
+              {(sectorsData.find((o: any) => o.id == id))?.name}
+              {i < 4 && (<TextView>, </TextView>)}
+            </TextView>
+          ))}
+        </TextView>
+    );
+  };
+
   useEffect(() => {
     (async () => {
       if (!Object.keys(formData)?.length) {
@@ -111,20 +137,11 @@ const ProfileSection = () => {
       </BoxView>
 
       <ProfileViewField label={i18n.t('Industries')}>
-        <TextView>
-          {[20, 13, 6, 36, 31].map((id: any, i: number) => (
-            <TextView key={id}>
-              {(sectorsData.find((o: any) => o.id == id))?.name}
-              {i < 4 && (<TextView>, </TextView>)}
-            </TextView>
-          ))}
-        </TextView>
+        {renderSectors()}
       </ProfileViewField>
 
       <ProfileViewField label={i18n.t('Sub-industries')}>
-        <TextView>
-          {false || i18n.t('Unavailable')}
-        </TextView>
+        {renderSubSectors()}
       </ProfileViewField>
 
       <ProfileViewField label={i18n.t('Description')}>
