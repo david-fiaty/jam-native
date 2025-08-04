@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -9,25 +9,103 @@ import ProfileProjectsList from "@/components/list/ProfileProjectsList";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import ProfileJamsList from "@/components/list/ProfileJamsList";
-import ProfileHeaderView from "@/components/view/ProfileHeaderView";
 import DividerView from "@/components/view/DividerView";
 import ModalManager from "@/manager/ModalManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import SectionManager from "@/manager/SectionManager";
+import ProfileViewField from "./ProfileViewField";
+import TextView from "@/components/view/TextView";
+import ImageView from "@/components/view/ImageView";
+import MediaManager from "@/manager/MediaManager";
+import IconView from "@/components/view/IconView";
+import CollapsibleView from "@/components/view/CollapsibleView";
+import EntityManager from "@/manager/EntityManager";
 
 const resource: string = 'profile';
+const profileImageSize: number = 100;
 
 const ProfileSection = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [profileId, setProfileId] = useState<number>(0);
+  const [sectorsData, setSectorsData] = useState<any>([]);
+  const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
   const formData = useSelector((state: any) => state.form?.[resource]);
   const userState = useSelector((state: any) => state.user);
+
+  const renderHeader = () => {
+    return (
+      <>
+        <BoxView direction="row" align="center" justify="center" style={styles.profileHeaderLeft}>
+          {formData?.profile_picture?.url?.length > 0 && (
+            <ImageView
+              uri={MediaManager.getImageUrl(formData.profile_picture.url)}
+              resizeMode="cover"
+              width={profileImageSize}
+              height={profileImageSize}
+              style={styles.profileImage}
+            />
+          )}
+
+          {!formData?.profile_picture?.url?.length && (
+            <IconView
+              name="user"
+              theme="secondary"
+              size={26}
+              padding={28}
+            />
+          )}
+        </BoxView>
+
+        <View style={styles.profileHeaderRight}>
+          <ProfileViewField label={i18n.t('Profile ID (Username)')}>
+            <TextView>
+              {formData?.profile_name}
+            </TextView>
+          </ProfileViewField>
+
+          <ProfileViewField>
+            <TextView>
+              {formData?.email || i18n.t('Email unavailable')}
+            </TextView>
+          </ProfileViewField>
+        </View>
+      </>
+    );
+  };
+
+
+  const renderSectors = () => {
+    return (
+      <TextView>
+        {[20, 13, 6, 36, 31].map((id: any, i: number) => (
+          <TextView key={id}>
+            {(sectorsData.find((o: any) => o.id == id))?.name}
+            {i < 4 && (<TextView>, </TextView>)}
+          </TextView>
+        ))}
+      </TextView>
+    );
+  };
+
+  const renderSubSectors = () => {
+    return (
+      <TextView>
+        {[20, 13, 6, 36, 31].map((id: any, i: number) => (
+          <TextView key={id}>
+            {(sectorsData.find((o: any) => o.id == id))?.name}
+            {i < 4 && (<TextView>, </TextView>)}
+          </TextView>
+        ))}
+      </TextView>
+    );
+  };
 
   useEffect(() => {
     (async () => {
       if (!Object.keys(formData)?.length) {
         setProfileId(await UserManager.getProfileId());
+        setSectorsData(await EntityManager.getSectors());
 
         dispatch(setFormData<any>({
           resource: resource,
@@ -39,6 +117,14 @@ const ProfileSection = () => {
     })();
   }, [userState, formData, resource]);
 
+  useEffect(() => {
+    (async () => {
+      if (!sectorsData?.length) {
+        setSectorsData(await EntityManager.getSectors());
+      }
+    })();
+  }, [sectorsData]);
+
   //if (!Object.keys(formData)?.length) return <SpinnerView />;
 
   return (
@@ -49,7 +135,63 @@ const ProfileSection = () => {
       style={styles.container}
       scroll={true}
     >
-      <ProfileHeaderView profileItem={formData} />
+      <ProfileViewField>
+        <TextView style={styles.profileTitle}>
+          {UserManager.getProfileDisplayName(formData)}
+        </TextView>
+      </ProfileViewField>
+
+      <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.profileHeader}>
+        {renderHeader()}
+      </BoxView>
+      
+      <ProfileViewField label={i18n.t('Industries')}>
+        {renderSectors()}
+      </ProfileViewField>
+
+      <ProfileViewField label={i18n.t('Sub-industries')}>
+        {renderSubSectors()}
+      </ProfileViewField>
+
+      <ProfileViewField label={i18n.t('Description')}>
+        <TextView>
+          {formData?.profile_description || i18n.t('Unavailable')}
+        </TextView>
+      </ProfileViewField>
+
+      <ProfileViewField label={i18n.t('Main activities')}>
+        <TextView>
+          {false || i18n.t('Unavailable')}
+        </TextView>
+      </ProfileViewField>
+
+      <CollapsibleView
+        label={(
+          <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeaderClosed}>
+            <TextView style={styles.collapsibleLabelClosed}>
+              {i18n.t('View more')} ({UserManager.getProfileTypeLabel(formData?.profile_type)})
+            </TextView>
+            <IconView name="collapsed" theme="transparent" padding={0} />
+          </BoxView>
+        )}
+        openedLabel={
+          <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeaderOpened}>
+            <TextView style={styles.collapsibleLabelOpened}>
+              {i18n.t('View more')} ({UserManager.getProfileTypeLabel(formData?.profile_type)})
+            </TextView>
+            <IconView name="expanded" theme="white" padding={0} />
+          </BoxView>
+        }
+        content={<TextView>Collapsible content</TextView>}
+      />
+
+
+
+
+
+
+
+
       <DividerView />
 
       <ProfileProjectsList
@@ -86,6 +228,50 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: '100%',
     paddingBottom: Layout.space.base * 2,
+  },
+  profileHeader: {
+    width: '100%',
+    gap: Layout.space.base,
+    marginVertical: Layout.space.base / 1.5,
+  },
+  profileHeaderLeft: {
+    width: profileImageSize,
+    height: '100%',
+    backgroundColor: 'red',
+  },
+  profileHeaderRight: {
+    flex: 1,
+    height: '100%',
+    gap: Layout.space.base,
+  },
+  profileImage: {
+    width: profileImageSize,
+    height: profileImageSize,
+    borderRadius: profileImageSize,
+  },
+  profileTitle: {
+    fontWeight: 'bold',
+    fontSize: 15,
+  },
+  collapsibleHeaderClosed: {
+    backgroundColor: Layout.colors.secondary,
+    borderColor: Layout.colors.secondary,
+    borderWidth: Layout.borderWidth.base,
+    borderRadius: Layout.radius.round,
+    padding: Layout.space.base,
+  },
+  collapsibleHeaderOpened: {
+    backgroundColor: Layout.colors.primary,
+    borderColor: Layout.colors.primary,
+    borderWidth: Layout.borderWidth.base,
+    borderRadius: Layout.radius.round,
+    padding: Layout.space.base,
+  },
+  collapsibleLabelClosed: {
+    color: Layout.colors.primary,
+  },
+  collapsibleLabelOpened: {
+    color: Layout.colors.white,
   },
 });
 
