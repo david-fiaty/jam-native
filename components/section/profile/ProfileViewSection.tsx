@@ -129,9 +129,11 @@ const ProfileSection = () => {
       <CollapsibleView
         content={<TextView>Collapsible content</TextView>}
         label={(
-          <BoxView direction="row" align="center" justify="flex-start">
+          <BoxView direction="row" align="center" justify="space-between">
+            <TextView>
+              {i18n.t('View more')} ({UserManager.getProfileTypeLabel(formData?.profile_type)})  
+            </TextView>
             <IconView name="collapsed" theme="transparent" padding={0} />
-            <TextView>{i18n.t('Replies')}</TextView>
           </BoxView>
         )}
         openedLabel={
