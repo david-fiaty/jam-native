@@ -52,7 +52,7 @@ const ProfileSection = () => {
       style={styles.container}
       scroll={true}
     >
-      <ProfileViewField>
+      <ProfileViewField label={'xxx'} b>
         <TextView style={styles.profileTitle}>
           {UserManager.getProfileDisplayName(formData)}
         </TextView>
