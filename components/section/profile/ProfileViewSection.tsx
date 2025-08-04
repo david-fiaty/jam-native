@@ -129,16 +129,16 @@ const ProfileSection = () => {
 
       <CollapsibleView
         label={(
-          <BoxView direction="row" align="center" justify="space-between" style={{backgroundColor: Layout.colors.primary}}>
-            <TextView style={{color: Layout.colors.white}}>
+          <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeader}>
+            <TextView style={styles.collapsibleLabel}>
               {i18n.t('View more')} ({UserManager.getProfileTypeLabel(formData?.profile_type)})  
             </TextView>
             <IconView name="collapsed" theme="white" padding={0} />
           </BoxView>
         )}
         openedLabel={
-          <BoxView direction="row" align="center" justify="space-between" style={{backgroundColor: Layout.colors.primary}}>
-            <TextView style={{color: Layout.colors.white}}>
+          <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeader}>
+            <TextView style={styles.collapsibleLabel}>
               {i18n.t('View more')} ({UserManager.getProfileTypeLabel(formData?.profile_type)})  
             </TextView>
             <IconView name="expanded" theme="white" padding={0} />
@@ -214,6 +214,13 @@ const styles = StyleSheet.create({
   profileTitle: {
     fontWeight: 'bold',
     fontSize: 15,
+  },
+  collapsibleHeader: {
+    backgroundColor: Layout.colors.primary,
+    padding: Layout.space.base,
+  },
+  collapsibleLabel: {
+    color: Layout.colors.white,
   },
 });
 
