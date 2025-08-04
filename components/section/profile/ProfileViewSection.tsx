@@ -74,7 +74,6 @@ const ProfileSection = () => {
     );
   };
 
-
   const renderSectors = () => {
     return (
       <TextView>
@@ -99,6 +98,66 @@ const ProfileSection = () => {
         ))}
       </TextView>
     );
+  };
+
+  const renderCollapsibleFields = () => {
+    if (formData?.profile_organization) {
+      return (
+        <BoxView>
+          <ProfileViewField label={i18n.t('Organization name')}>
+            <TextView>
+              {formData?.profile_organization?.organization_name}
+            </TextView>
+          </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Creation year')}>
+            <TextView>
+              {formData?.profile_organization?.creation_year || i18n.t('Unavailable')}
+            </TextView>
+          </ProfileViewField>
+        </BoxView>
+      );
+    }
+    else if (formData?.profile_venue) {
+      return (
+        <BoxView>
+          <ProfileViewField label={i18n.t('Venue name')}>
+            <TextView>
+              {formData?.profile_venue?.venue_name}
+            </TextView>
+          </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Venue types')}>
+            <TextView>
+              Venue types
+            </TextView>
+          </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Creation year')}>
+            <TextView>
+              {formData?.profile_venue?.creation_year || i18n.t('Unavailable')}
+            </TextView>
+          </ProfileViewField>
+        </BoxView>
+      );
+    }
+    else if (formData?.profile_personal) {
+      return (
+        <BoxView>
+          <ProfileViewField label={i18n.t('First name')}>
+            <TextView>
+              {formData?.profile_personal?.first_name || i18n.t('Unavailable')}
+            </TextView>
+          </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Last name')}>
+            <TextView>
+              {formData?.profile_personal?.last_name || i18n.t('Unavailable')}
+            </TextView>
+          </ProfileViewField>
+        </BoxView>
+      );
+    }
   };
 
   useEffect(() => {
@@ -144,7 +203,7 @@ const ProfileSection = () => {
       <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.profileHeader}>
         {renderHeader()}
       </BoxView>
-      
+
       <ProfileViewField label={i18n.t('Industries')}>
         {renderSectors()}
       </ProfileViewField>
@@ -156,12 +215,6 @@ const ProfileSection = () => {
       <ProfileViewField label={i18n.t('Description')}>
         <TextView>
           {formData?.profile_description || i18n.t('Unavailable')}
-        </TextView>
-      </ProfileViewField>
-
-      <ProfileViewField label={i18n.t('Main activities')}>
-        <TextView>
-          {false || i18n.t('Unavailable')}
         </TextView>
       </ProfileViewField>
 
@@ -182,7 +235,7 @@ const ProfileSection = () => {
             <IconView name="expanded" theme="white" padding={0} />
           </BoxView>
         }
-        content={<TextView>Collapsible content</TextView>}
+        content={renderCollapsibleFields()}
       />
 
 
