@@ -115,6 +115,11 @@ const ProfileSection = () => {
       <ProfileViewField label={i18n.t('Industries')}>
         <TextView>
           {false || i18n.t('Unavailable')}
+          {[20, 13, 6, 36, 31].map((id: any) => {
+            return (
+              <TextView key={id}>{(sectorsData.find((o: any) => o.id == id))?.name}</TextView>
+            );
+          })}
         </TextView>
       </ProfileViewField>
 
