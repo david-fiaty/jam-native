@@ -21,7 +21,7 @@ import CollapsibleView from "@/components/view/CollapsibleView";
 import EntityManager from "@/manager/EntityManager";
 
 const resource: string = 'profile';
-const profileImageSize: number = 105;
+const profileImageSize: number = 107;
 
 const ProfileSection = () => {
   const router = useRouter();
