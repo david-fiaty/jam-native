@@ -101,9 +101,21 @@ const ProfileSection = () => {
   };
 
   const renderCollapsibleFields = () => {
-    return (
-      <TextView>Collapsible fields content</TextView>
-    );
+    if (formData?.profile_organization) {
+      return (
+        <TextView>Profile Organisation Fields</TextView>
+      );
+    }
+    else if (formData?.profile_venue) {
+      return (
+        <TextView>Profile Organisation Fields</TextView>
+      );
+    }
+    else if (formData?.profile_personal) {
+      return (
+        <TextView>Profile Personal Fields</TextView>
+      );
+    }
   };
 
   useEffect(() => {
