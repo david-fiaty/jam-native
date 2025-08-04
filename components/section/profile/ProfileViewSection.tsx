@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -17,8 +17,12 @@ import SectionManager from "@/manager/SectionManager";
 import ProfileViewField from "./ProfileViewField";
 import InputTextField from "@/components/field/InputTextField";
 import TextView from "@/components/view/TextView";
+import ImageView from "@/components/view/ImageView";
+import MediaManager from "@/manager/MediaManager";
+import IconView from "@/components/view/IconView";
 
 const resource: string = 'profile';
+const profileImageSize: number = 100;
 
 const ProfileSection = () => {
   const router = useRouter();
@@ -53,10 +57,72 @@ const ProfileSection = () => {
       scroll={true}
     >
       <ProfileViewField>
-        <TextView>Profile view field</TextView>
+        <TextView style={styles.profileTitle}>
+          {UserManager.getProfileDisplayName(formData)}
+        </TextView>
       </ProfileViewField>
 
-      <ProfileHeaderView profileItem={formData} />
+      <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.profileHeader}>
+        <BoxView direction="row" align="center" justify="center" style={styles.profileHeaderLeft}>
+          {formData?.profile_picture?.url?.length > 0 && (
+            <ImageView
+              uri={MediaManager.getImageUrl(formData.profile_picture.url)}
+              resizeMode="cover"
+              width={profileImageSize}
+              height={profileImageSize}
+              style={styles.profileImage}
+            />
+          )}
+
+          {!formData?.profile_picture?.url?.length && (
+            <IconView
+              name="user"
+              theme="secondary"
+              size={26}
+              padding={28}
+            />
+          )}
+        </BoxView>
+
+        <View style={styles.profileHeaderRight}>
+          <ProfileViewField label={i18n.t('Profile ID (Username)')}>
+            <TextView>
+              {formData?.profile_name}
+            </TextView>
+          </ProfileViewField>
+
+          <ProfileViewField>
+            <TextView>
+              {formData?.email || i18n.t('Email unavailable')}
+            </TextView>
+          </ProfileViewField>
+        </View>
+      </BoxView>
+
+      <ProfileViewField label={i18n.t('Industries')}>
+        <TextView>
+          {false || i18n.t('Unavailable')}
+        </TextView>
+      </ProfileViewField>
+
+      <ProfileViewField label={i18n.t('Sub-industries')}>
+        <TextView>
+          {false || i18n.t('Unavailable')}
+        </TextView>
+      </ProfileViewField>
+
+      <ProfileViewField label={i18n.t('Description')}>
+        <TextView>
+          {formData?.profile_description || i18n.t('Unavailable')}
+        </TextView>
+      </ProfileViewField>
+
+      <ProfileViewField label={i18n.t('Main activities')}>
+        <TextView>
+          {false || i18n.t('Unavailable')}
+        </TextView>
+      </ProfileViewField>
+
       <DividerView />
 
       <ProfileProjectsList
@@ -93,6 +159,30 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: '100%',
     paddingBottom: Layout.space.base * 2,
+  },
+  profileHeader: {
+    width: '100%',
+    gap: Layout.space.base,
+    marginVertical: Layout.space.base / 1.5,
+  },
+  profileHeaderLeft: {
+    width: profileImageSize,
+    height: '100%',
+    backgroundColor: 'red',
+  },
+  profileHeaderRight: {
+    flex: 1,
+    height: '100%',
+    gap: Layout.space.base,
+  },
+  profileImage: {
+    width: profileImageSize,
+    height: profileImageSize,
+    borderRadius: profileImageSize,
+  },
+  profileTitle: {
+    fontWeight: 'bold',
+    fontSize: 15,
   },
 });
 
