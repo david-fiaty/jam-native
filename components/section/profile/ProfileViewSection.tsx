@@ -120,12 +120,42 @@ const ProfileSection = () => {
     }
     else if (formData?.profile_venue) {
       return (
-        <TextView>Profile Organisation Fields</TextView>
+        <BoxView>
+          <ProfileViewField label={i18n.t('Venue name')}>
+            <TextView>
+              {formData?.profile_venue?.venue_name}
+            </TextView>
+          </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Venue types')}>
+            <TextView>
+              Venue types
+            </TextView>
+          </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Creation year')}>
+            <TextView>
+              {formData?.profile_venue?.creation_year || i18n.t('Unavailable')}
+            </TextView>
+          </ProfileViewField>
+        </BoxView>
       );
     }
     else if (formData?.profile_personal) {
       return (
-        <TextView>Profile Personal Fields</TextView>
+        <BoxView>
+          <ProfileViewField label={i18n.t('First name')}>
+            <TextView>
+              {formData?.profile_personal?.first_name || i18n.t('Unavailable')}
+            </TextView>
+          </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Last name')}>
+            <TextView>
+              {formData?.profile_personal?.last_name || i18n.t('Unavailable')}
+            </TextView>
+          </ProfileViewField>
+        </BoxView>
       );
     }
   };
