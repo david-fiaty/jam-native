@@ -9,20 +9,17 @@ import ProfileProjectsList from "@/components/list/ProfileProjectsList";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import ProfileJamsList from "@/components/list/ProfileJamsList";
-import ProfileHeaderView from "@/components/view/ProfileHeaderView";
 import DividerView from "@/components/view/DividerView";
 import ModalManager from "@/manager/ModalManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import SectionManager from "@/manager/SectionManager";
 import ProfileViewField from "./ProfileViewField";
-import InputTextField from "@/components/field/InputTextField";
 import TextView from "@/components/view/TextView";
 import ImageView from "@/components/view/ImageView";
 import MediaManager from "@/manager/MediaManager";
 import IconView from "@/components/view/IconView";
-import Collapsible from "react-native-collapsible";
 import CollapsibleView from "@/components/view/CollapsibleView";
-import { color } from "@rneui/base";
+import EntityManager from "@/manager/EntityManager";
 
 const resource: string = 'profile';
 const profileImageSize: number = 100;
@@ -31,42 +28,14 @@ const ProfileSection = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [profileId, setProfileId] = useState<number>(0);
+  const [sectorsData, setSectorsData] = useState<any>([]);
   const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
   const formData = useSelector((state: any) => state.form?.[resource]);
   const userState = useSelector((state: any) => state.user);
 
-  useEffect(() => {
-    (async () => {
-      if (!Object.keys(formData)?.length) {
-        setProfileId(await UserManager.getProfileId());
-
-        dispatch(setFormData<any>({
-          resource: resource,
-          key: null,
-          //value: userState.profileData, // Todo - Enable this
-          value: await UserManager.getProfileData(),
-        }));
-      }
-    })();
-  }, [userState, formData, resource]);
-
-  //if (!Object.keys(formData)?.length) return <SpinnerView />;
-
-  return (
-    <BoxView
-      direction="column"
-      align="center"
-      justify="center"
-      style={styles.container}
-      scroll={true}
-    >
-      <ProfileViewField>
-        <TextView style={styles.profileTitle}>
-          {UserManager.getProfileDisplayName(formData)}
-        </TextView>
-      </ProfileViewField>
-
-      <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.profileHeader}>
+  const renderHeader = () => {
+    return (
+      <>
         <BoxView direction="row" align="center" justify="center" style={styles.profileHeaderLeft}>
           {formData?.profile_picture?.url?.length > 0 && (
             <ImageView
@@ -101,18 +70,87 @@ const ProfileSection = () => {
             </TextView>
           </ProfileViewField>
         </View>
-      </BoxView>
+      </>
+    );
+  };
 
-      <ProfileViewField label={i18n.t('Industries')}>
-        <TextView>
-          {false || i18n.t('Unavailable')}
+
+  const renderSectors = () => {
+    return (
+      <TextView>
+        {[20, 13, 6, 36, 31].map((id: any, i: number) => (
+          <TextView key={id}>
+            {(sectorsData.find((o: any) => o.id == id))?.name}
+            {i < 4 && (<TextView>, </TextView>)}
+          </TextView>
+        ))}
+      </TextView>
+    );
+  };
+
+  const renderSubSectors = () => {
+    return (
+      <TextView>
+        {[20, 13, 6, 36, 31].map((id: any, i: number) => (
+          <TextView key={id}>
+            {(sectorsData.find((o: any) => o.id == id))?.name}
+            {i < 4 && (<TextView>, </TextView>)}
+          </TextView>
+        ))}
+      </TextView>
+    );
+  };
+
+  useEffect(() => {
+    (async () => {
+      if (!Object.keys(formData)?.length) {
+        setProfileId(await UserManager.getProfileId());
+        setSectorsData(await EntityManager.getSectors());
+
+        dispatch(setFormData<any>({
+          resource: resource,
+          key: null,
+          //value: userState.profileData, // Todo - Enable this
+          value: await UserManager.getProfileData(),
+        }));
+      }
+    })();
+  }, [userState, formData, resource]);
+
+  useEffect(() => {
+    (async () => {
+      if (!sectorsData?.length) {
+        setSectorsData(await EntityManager.getSectors());
+      }
+    })();
+  }, [sectorsData]);
+
+  //if (!Object.keys(formData)?.length) return <SpinnerView />;
+
+  return (
+    <BoxView
+      direction="column"
+      align="center"
+      justify="center"
+      style={styles.container}
+      scroll={true}
+    >
+      <ProfileViewField>
+        <TextView style={styles.profileTitle}>
+          {UserManager.getProfileDisplayName(formData)}
         </TextView>
       </ProfileViewField>
 
+      <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.profileHeader}>
+        {renderHeader()}
+      </BoxView>
+      
+      <ProfileViewField label={i18n.t('Industries')}>
+        {renderSectors()}
+      </ProfileViewField>
+
       <ProfileViewField label={i18n.t('Sub-industries')}>
-        <TextView>
-          {false || i18n.t('Unavailable')}
-        </TextView>
+        {renderSubSectors()}
       </ProfileViewField>
 
       <ProfileViewField label={i18n.t('Description')}>
@@ -131,7 +169,7 @@ const ProfileSection = () => {
         label={(
           <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeaderClosed}>
             <TextView style={styles.collapsibleLabelClosed}>
-              {i18n.t('View more')} ({UserManager.getProfileTypeLabel(formData?.profile_type)})  
+              {i18n.t('View more')} ({UserManager.getProfileTypeLabel(formData?.profile_type)})
             </TextView>
             <IconView name="collapsed" theme="transparent" padding={0} />
           </BoxView>
@@ -139,7 +177,7 @@ const ProfileSection = () => {
         openedLabel={
           <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeaderOpened}>
             <TextView style={styles.collapsibleLabelOpened}>
-              {i18n.t('View more')} ({UserManager.getProfileTypeLabel(formData?.profile_type)})  
+              {i18n.t('View more')} ({UserManager.getProfileTypeLabel(formData?.profile_type)})
             </TextView>
             <IconView name="expanded" theme="white" padding={0} />
           </BoxView>
