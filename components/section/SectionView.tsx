@@ -17,7 +17,7 @@ import LegalSection from "@/components/section/LegalSection";
 import LoginSection from "@/components/section/LoginSection";
 import WelcomeSection from "@/components/section/WelcomeSection";
 import SignupSection from "@/components/section/SignupSection";
-import ProfileSection from "@/components/section/ProfileSection";
+import ProfileSection from "@/components/section/profile/ProfileSection";
 import PrivacySection from "@/components/section/PrivacySection";
 import JamItemSection from "@/components/section/JamItemSection";
 import ProfileItemSection from "@/components/section/ProfileItemSection";
