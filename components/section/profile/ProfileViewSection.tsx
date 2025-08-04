@@ -111,6 +111,12 @@ const ProfileSection = () => {
         </TextView>
       </ProfileViewField>
 
+      <ProfileViewField label={i18n.t('Description')}>
+        <TextView>
+          {formData?.profile_description || i18n.t('Unavailable')}
+        </TextView>
+      </ProfileViewField>
+
 
       <DividerView />
 
