@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
   },
   profileHeader: {
     width: '100%',
-    gap: 0,
+    gap: Layout.space.base,
     marginVertical: Layout.space.base / 1.5,
   },
   profileHeaderLeft: {
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   profileHeaderRight: {
     flex: 1,
     height: '100%',
-    gap: 10,
+    gap: Layout.space.base,
   },
   profileImage: {
     width: profileImageSize,
