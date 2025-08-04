@@ -5,11 +5,9 @@ import { useFonts } from 'expo-font';
 import { Provider } from 'react-redux';
 import { BackHandler } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import { Config } from '@/constants/Config';
 import * as ExpoSplashScreen from 'expo-splash-screen';
 import Store from "@/redux/Store";
-import SectionManager from '@/manager/SectionManager';
-import UserManager from '@/manager/UserManager';
+import SectionManager from '@/manager/SectionManager'
 import ScreenManager from '@/manager/ScreenManager';
 
 ExpoSplashScreen.preventAutoHideAsync();
@@ -46,14 +44,6 @@ const RootLayout = () => {
   const backAction = () => {  
     SectionManager.back(router);
     return true;
-  };
-
-  const loadLanguage = () => {
-    if (Array.isArray(locales) && locales.length > 0) {
-      return locales[0].languageCode; 
-    }
-  
-    return Config.fallbackLanguage;
   };
 
   useEffect(() => {
