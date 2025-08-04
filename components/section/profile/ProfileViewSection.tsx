@@ -22,7 +22,7 @@ import CollapsibleView from "@/components/view/CollapsibleView";
 import EntityManager from "@/manager/EntityManager";
 
 const resource: string = 'profile';
-const profileImageSize: number = 100;
+const profileImageSize: number = 110;
 
 const ProfileSection = () => {
   const router = useRouter();
@@ -58,7 +58,7 @@ const ProfileSection = () => {
         </BoxView>
 
         <View style={styles.profileHeaderRight}>
-          <ProfileViewField label={i18n.t('Profile ID (Username)')}>
+          <ProfileViewField>
             <TextView>
               {formData?.profile_name}
             </TextView>
