@@ -258,33 +258,14 @@ const ProfileSection = () => {
         onAddButtonPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
       />
 
-      <DividerView />
-
-      <ProfileProjectsList
-        title={i18n.t("Your Projects")}
-        addButton={true}
-        allButton={formData?.profile_projects?.length > 0}
-        idArray={formData?.profile_projects || []}
-        onAddButtonPress={() => SectionManager.push(router, 'add-project', { profileId: profileId, profileJams: formData?.profile_jams || [] })}
-      />
-      <DividerView />
-
+      <TextView style={styles.groupTitle}>
+        {i18n.t('Saved Jams')}
+      </TextView>
       <ProfileJamsList
-        title={i18n.t("Your Jams")}
-        allButton={formData?.profile_jams?.length > 0}
-        addButton={true}
-        idArray={formData?.profile_jams || []}
-        onAddButtonPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
-      />
-      <DividerView />
-
-      <ProfileJamsList
-        title={i18n.t("Saved Jams")}
         allButton={formData?.saved_jams?.length > 0}
         idArray={formData?.saved_jams || []}
         emptyMessage={i18n.t('No data available.')}
-      />
-
+      />      
     </BoxView>
   );
 };
