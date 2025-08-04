@@ -20,6 +20,8 @@ import TextView from "@/components/view/TextView";
 import ImageView from "@/components/view/ImageView";
 import MediaManager from "@/manager/MediaManager";
 import IconView from "@/components/view/IconView";
+import Collapsible from "react-native-collapsible";
+import CollapsibleView from "@/components/view/CollapsibleView";
 
 const resource: string = 'profile';
 const profileImageSize: number = 100;
@@ -28,6 +30,7 @@ const ProfileSection = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [profileId, setProfileId] = useState<number>(0);
+  const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
   const formData = useSelector((state: any) => state.form?.[resource]);
   const userState = useSelector((state: any) => state.user);
 
@@ -122,6 +125,29 @@ const ProfileSection = () => {
           {false || i18n.t('Unavailable')}
         </TextView>
       </ProfileViewField>
+
+      <CollapsibleView
+        content={<TextView>Collapsible content</TextView>}
+        label={(
+          <BoxView direction="row" align="center" justify="flex-start">
+            <IconView name="collapsed" theme="transparent" padding={0} />
+            <TextView>{i18n.t('Replies')}</TextView>
+          </BoxView>
+        )}
+        openedLabel={
+          <BoxView direction="row" align="center" justify="flex-start">
+            <IconView name="expanded" theme="transparent" padding={0} />
+            <TextView>{i18n.t('Replies')}</TextView>
+          </BoxView>
+        }
+      />
+
+
+
+
+
+
+
 
       <DividerView />
 
