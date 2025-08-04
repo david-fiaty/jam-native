@@ -22,6 +22,7 @@ import MediaManager from "@/manager/MediaManager";
 import IconView from "@/components/view/IconView";
 import Collapsible from "react-native-collapsible";
 import CollapsibleView from "@/components/view/CollapsibleView";
+import { color } from "@rneui/base";
 
 const resource: string = 'profile';
 const profileImageSize: number = 100;
@@ -128,11 +129,11 @@ const ProfileSection = () => {
 
       <CollapsibleView
         label={(
-          <BoxView direction="row" align="center" justify="space-between">
-            <TextView>
+          <BoxView direction="row" align="center" justify="space-between" style={{backgroundColor: Layout.colors.primary}}>
+            <TextView style={{color: Layout.colors.white}}>
               {i18n.t('View more')} ({UserManager.getProfileTypeLabel(formData?.profile_type)})  
             </TextView>
-            <IconView name="collapsed" theme="transparent" padding={0} />
+            <IconView name="collapsed" theme="white" padding={0} />
           </BoxView>
         )}
         openedLabel={
