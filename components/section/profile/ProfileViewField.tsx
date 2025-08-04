@@ -11,7 +11,7 @@ type Props = {
 
 const ProfileViewField = ({ label, children }: Props) => {
   return (
-    <BoxView style={[styles.container]} gap={10}>
+    <BoxView style={[styles.container]}>
       {label && (
         <TextView style={styles.label}>{label}</TextView>
       )}
