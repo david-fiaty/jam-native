@@ -64,9 +64,9 @@ const ProfileSection = () => {
         </TextView>
       </ProfileViewField>
 
-      <ProfileViewField label={i18n.t('Email')}>
+      <ProfileViewField>
         <TextView>
-          {formData?.email}
+          {formData?.email || i18n.t('Email unavailable')}
         </TextView>
       </ProfileViewField>
 
