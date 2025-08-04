@@ -49,7 +49,6 @@ const ProfileSection = () => {
     })();
   }, [userState, formData, resource]);
 
-
   useEffect(() => {
     (async () => {
       if (!sectorsData?.length) {
@@ -59,7 +58,6 @@ const ProfileSection = () => {
   }, [sectorsData]);
 
   //if (!Object.keys(formData)?.length) return <SpinnerView />;
-  console.log(sectorsData)
 
   return (
     <BoxView
@@ -114,11 +112,12 @@ const ProfileSection = () => {
 
       <ProfileViewField label={i18n.t('Industries')}>
         <TextView>
-          {[20, 13, 6, 36, 31].map((id: any) => {
-            return (
-              <TextView key={id}>{(sectorsData.find((o: any) => o.id == id))?.name}</TextView>
-            );
-          })}
+          {[20, 13, 6, 36, 31].map((id: any, i: number) => (
+            <TextView key={id}>
+              {(sectorsData.find((o: any) => o.id == id))?.name}
+              {i < 4 && (<TextView>, </TextView>)}
+            </TextView>
+          ))}
         </TextView>
       </ProfileViewField>
 
@@ -144,7 +143,7 @@ const ProfileSection = () => {
         label={(
           <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeaderClosed}>
             <TextView style={styles.collapsibleLabelClosed}>
-              {i18n.t('View more')} ({UserManager.getProfileTypeLabel(formData?.profile_type)})  
+              {i18n.t('View more')} ({UserManager.getProfileTypeLabel(formData?.profile_type)})
             </TextView>
             <IconView name="collapsed" theme="transparent" padding={0} />
           </BoxView>
@@ -152,7 +151,7 @@ const ProfileSection = () => {
         openedLabel={
           <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeaderOpened}>
             <TextView style={styles.collapsibleLabelOpened}>
-              {i18n.t('View more')} ({UserManager.getProfileTypeLabel(formData?.profile_type)})  
+              {i18n.t('View more')} ({UserManager.getProfileTypeLabel(formData?.profile_type)})
             </TextView>
             <IconView name="expanded" theme="white" padding={0} />
           </BoxView>
