@@ -96,10 +96,14 @@ const ProfileSection = () => {
               {formData?.email || i18n.t('Email unavailable')}
             </TextView>
           </ProfileViewField>
-
         </View>
       </BoxView>
 
+      <ProfileViewField label={i18n.t('Industries')}>
+        <TextView>
+          {false || i18n.t('Unavailable')}
+        </TextView>
+      </ProfileViewField>
 
 
 
