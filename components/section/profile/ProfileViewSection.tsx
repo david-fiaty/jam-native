@@ -127,7 +127,6 @@ const ProfileSection = () => {
       </ProfileViewField>
 
       <CollapsibleView
-        content={<TextView>Collapsible content</TextView>}
         label={(
           <BoxView direction="row" align="center" justify="space-between">
             <TextView>
@@ -142,6 +141,7 @@ const ProfileSection = () => {
             <TextView>{i18n.t('Replies')}</TextView>
           </BoxView>
         }
+        content={<TextView>Collapsible content</TextView>}
       />
 
 
