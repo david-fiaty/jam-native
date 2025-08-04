@@ -52,8 +52,10 @@ const ProfileSection = () => {
       style={styles.container}
       scroll={true}
     >
-      <ProfileViewField>
-        <TextView>Profile view field</TextView>
+      <ProfileViewField label={'xxx'} b>
+        <TextView style={styles.profileTitle}>
+          {UserManager.getProfileDisplayName(formData)}
+        </TextView>
       </ProfileViewField>
 
       <ProfileHeaderView profileItem={formData} />
@@ -93,6 +95,10 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: '100%',
     paddingBottom: Layout.space.base * 2,
+  },
+  profileTitle: {
+    fontWeight: 'bold',
+    fontSize: 15,
   },
 });
 
