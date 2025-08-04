@@ -117,6 +117,11 @@ const ProfileSection = () => {
         </TextView>
       </ProfileViewField>
 
+      <ProfileViewField label={i18n.t('Main activities')}>
+        <TextView>
+          {false || i18n.t('Unavailable')}
+        </TextView>
+      </ProfileViewField>
 
       <DividerView />
 
