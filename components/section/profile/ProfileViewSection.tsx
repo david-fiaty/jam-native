@@ -105,7 +105,11 @@ const ProfileSection = () => {
         </TextView>
       </ProfileViewField>
 
-
+      <ProfileViewField label={i18n.t('Sub-industries')}>
+        <TextView>
+          {false || i18n.t('Unavailable')}
+        </TextView>
+      </ProfileViewField>
 
 
       <DividerView />
