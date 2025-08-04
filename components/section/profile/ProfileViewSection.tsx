@@ -60,7 +60,7 @@ const ProfileSection = () => {
 
       <ProfileViewField label={i18n.t('Profile ID (Username)')}>
         <TextView>
-          {UserManager.getProfileDisplayName(formData)}
+          {formData?.profile_name}
         </TextView>
       </ProfileViewField>
 
