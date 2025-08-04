@@ -1,6 +1,5 @@
-import React, { useState, useEffect, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { StyleSheet } from "react-native";
-import { Input } from "@rneui/themed";
 import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
 import TextView from "@/components/view/TextView";
