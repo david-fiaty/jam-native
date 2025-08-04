@@ -74,7 +74,6 @@ const ProfileSection = () => {
     );
   };
 
-
   const renderSectors = () => {
     return (
       <TextView>
@@ -98,6 +97,12 @@ const ProfileSection = () => {
           </TextView>
         ))}
       </TextView>
+    );
+  };
+
+  const renderCollapsibleFields = () => {
+    return (
+      <TextView>Collapsible fields content</TextView>
     );
   };
 
@@ -144,7 +149,7 @@ const ProfileSection = () => {
       <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.profileHeader}>
         {renderHeader()}
       </BoxView>
-      
+
       <ProfileViewField label={i18n.t('Industries')}>
         {renderSectors()}
       </ProfileViewField>
@@ -182,7 +187,7 @@ const ProfileSection = () => {
             <IconView name="expanded" theme="white" padding={0} />
           </BoxView>
         }
-        content={<TextView>Collapsible content</TextView>}
+        content={renderCollapsibleFields()}
       />
 
 
