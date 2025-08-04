@@ -217,6 +217,9 @@ const styles = StyleSheet.create({
   },
   collapsibleHeader: {
     backgroundColor: Layout.colors.primary,
+    borderWidth: Layout.borderWidth.base,
+    borderRadius: Layout.radius.round,
+    borderColor: Layout.colors.primary,
     padding: Layout.space.base,
   },
   collapsibleLabel: {
