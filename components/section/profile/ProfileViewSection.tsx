@@ -188,12 +188,6 @@ const ProfileSection = () => {
         </TextView>
       </ProfileViewField>
 
-      <ProfileViewField label={i18n.t('Main activities')}>
-        <TextView>
-          {false || i18n.t('Unavailable')}
-        </TextView>
-      </ProfileViewField>
-
       <CollapsibleView
         label={(
           <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeaderClosed}>
