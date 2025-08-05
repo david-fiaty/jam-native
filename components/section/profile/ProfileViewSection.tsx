@@ -115,12 +115,16 @@ const ProfileSection = ({ profileId }: Props) => {
     return (
       <TextView>
         {profileSectors.map((sector: any, i: number) => {
-          return (
-            <TextView key={sector.id}>
-              {sector.name}
-              {(i < profileSectors.length - 1) && (<TextView>, </TextView>)}
-            </TextView>
-          );
+          let profileSubSectors: any[] = sector.sub_sectors.filter((o: any) => profileItem.sectors.includes(o.id));
+
+          return profileSubSectors.map((subSector: any, i: number) => {
+            return (
+              <TextView key={subSector.id}>
+                {subSector.name}
+                {(i < profileSubSectors.length - 1) && (<TextView>, </TextView>)}
+              </TextView>
+            );
+          })
         })}
       </TextView>
     );
