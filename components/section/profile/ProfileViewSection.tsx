@@ -112,8 +112,6 @@ const ProfileSection = ({ profileId }: Props) => {
 
     let profileSectors: any[] = sectorsData.filter((o: any) => profileItem.sectors.includes(o.id));
     
-    return (<TextView>xxx</TextView>);
-
     return (
       <TextView>
         {profileSectors.map((sector: any, i: number) => {
