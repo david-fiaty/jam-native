@@ -9,7 +9,6 @@ import ProfileProjectsList from "@/components/list/ProfileProjectsList";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import ProfileJamsList from "@/components/list/ProfileJamsList";
-import DividerView from "@/components/view/DividerView";
 import ModalManager from "@/manager/ModalManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import SectionManager from "@/manager/SectionManager";
@@ -22,14 +21,13 @@ import CollapsibleView from "@/components/view/CollapsibleView";
 import EntityManager from "@/manager/EntityManager";
 
 const resource: string = 'profile';
-const profileImageSize: number = 100;
+const profileImageSize: number = 107;
 
 const ProfileSection = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [profileId, setProfileId] = useState<number>(0);
   const [sectorsData, setSectorsData] = useState<any>([]);
-  const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
   const formData = useSelector((state: any) => state.form?.[resource]);
   const userState = useSelector((state: any) => state.user);
 
@@ -58,9 +56,15 @@ const ProfileSection = () => {
         </BoxView>
 
         <View style={styles.profileHeaderRight}>
-          <ProfileViewField label={i18n.t('Profile ID (Username)')}>
+          <ProfileViewField>
             <TextView>
               {formData?.profile_name}
+            </TextView>
+          </ProfileViewField>
+
+          <ProfileViewField>
+            <TextView>
+              Social links
             </TextView>
           </ProfileViewField>
 
@@ -288,7 +292,11 @@ const styles = StyleSheet.create({
   profileHeaderLeft: {
     width: profileImageSize,
     height: '100%',
-    backgroundColor: 'red',
+    borderColor: Layout.colors.secondary,
+    borderWidth: Layout.borderWidth.base,
+    borderRadius: Layout.radius.round,
+    //padding: Layout.space.base,
+    //backgroundColor: 'red',
   },
   profileHeaderRight: {
     flex: 1,
