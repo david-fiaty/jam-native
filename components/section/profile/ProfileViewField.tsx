@@ -28,11 +28,14 @@ const styles = StyleSheet.create({
     borderWidth: Layout.borderWidth.base,
     borderColor: Layout.colors.secondary,
     borderRadius: Layout.radius.round,
-    padding: Layout.space.base,
+    paddingHorizontal: Layout.space.base/1.4,
+    paddingVertical: Layout.space.base/1.8,
+    gap: 0,
   },
   label: {
-    color: 'black',
+    color: Layout.colors.black,
     fontSize: 12,
+    marginBottom: Layout.space.base/2.3,
   },
 });
 

@@ -21,7 +21,7 @@ import CollapsibleView from "@/components/view/CollapsibleView";
 import EntityManager from "@/manager/EntityManager";
 
 const resource: string = 'profile';
-const profileImageSize: number = 107;
+const profileImageSize: number = 100;
 
 const ProfileSection = () => {
   const router = useRouter();
@@ -63,9 +63,11 @@ const ProfileSection = () => {
           </ProfileViewField>
 
           <ProfileViewField>
-            <TextView>
-              Social links
-            </TextView>
+            <BoxView direction="row" align="center" justify="flex-start">
+              <IconView name="instagram" theme="transparent" size={19} padding={0} onPress={() => console.log('icon pressed')} />
+              <IconView name="facebook" theme="transparent" size={19} padding={0} onPress={() => console.log('icon pressed')} />
+              <IconView name="linkedin" theme="transparent" size={19} padding={0} onPress={() => console.log('icon pressed')} />
+            </BoxView>
           </ProfileViewField>
 
           <ProfileViewField>
@@ -107,7 +109,7 @@ const ProfileSection = () => {
   const renderCollapsibleFields = () => {
     if (formData?.profile_organization) {
       return (
-        <BoxView>
+        <BoxView direction="column">
           <ProfileViewField label={i18n.t('Organization name')}>
             <TextView>
               {formData?.profile_organization?.organization_name}
@@ -119,12 +121,18 @@ const ProfileSection = () => {
               {formData?.profile_organization?.creation_year || i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Address')}>
+            <TextView>
+              {formData?.address || i18n.t('Unavailable')}
+            </TextView>
+          </ProfileViewField>
         </BoxView>
       );
     }
     else if (formData?.profile_venue) {
       return (
-        <BoxView>
+        <BoxView direction="column">
           <ProfileViewField label={i18n.t('Venue name')}>
             <TextView>
               {formData?.profile_venue?.venue_name}
@@ -142,12 +150,18 @@ const ProfileSection = () => {
               {formData?.profile_venue?.creation_year || i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Address')}>
+            <TextView>
+              {formData?.address || i18n.t('Unavailable')}
+            </TextView>
+          </ProfileViewField>
         </BoxView>
       );
     }
     else if (formData?.profile_personal) {
       return (
-        <BoxView>
+        <BoxView direction="column">
           <ProfileViewField label={i18n.t('First name')}>
             <TextView>
               {formData?.profile_personal?.first_name || i18n.t('Unavailable')}
@@ -157,6 +171,12 @@ const ProfileSection = () => {
           <ProfileViewField label={i18n.t('Last name')}>
             <TextView>
               {formData?.profile_personal?.last_name || i18n.t('Unavailable')}
+            </TextView>
+          </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Address')}>
+            <TextView>
+              {formData?.address || i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
         </BoxView>
@@ -222,6 +242,12 @@ const ProfileSection = () => {
         </TextView>
       </ProfileViewField>
 
+      <ProfileViewField label={i18n.t('Main activities')}>
+        <TextView>
+          Activities list
+        </TextView>
+      </ProfileViewField>
+
       <CollapsibleView
         label={(
           <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeaderClosed}>
@@ -269,7 +295,7 @@ const ProfileSection = () => {
         allButton={formData?.saved_jams?.length > 0}
         idArray={formData?.saved_jams || []}
         emptyMessage={i18n.t('No data available.')}
-      />      
+      />
     </BoxView>
   );
 };
@@ -287,7 +313,6 @@ const styles = StyleSheet.create({
   profileHeader: {
     width: '100%',
     gap: Layout.space.base,
-    marginVertical: Layout.space.base / 1.5,
   },
   profileHeaderLeft: {
     width: profileImageSize,
@@ -295,13 +320,13 @@ const styles = StyleSheet.create({
     borderColor: Layout.colors.secondary,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
-    //padding: Layout.space.base,
-    //backgroundColor: 'red',
+    padding: 0,
   },
   profileHeaderRight: {
     flex: 1,
     height: '100%',
     gap: Layout.space.base,
+    padding: 0,
   },
   profileImage: {
     width: profileImageSize,
