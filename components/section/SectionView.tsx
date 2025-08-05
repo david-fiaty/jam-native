@@ -20,14 +20,12 @@ import SignupSection from "@/components/section/SignupSection";
 import ProfileViewSection from "@/components/section/profile/ProfileViewSection";
 import PrivacySection from "@/components/section/PrivacySection";
 import JamItemSection from "@/components/section/JamItemSection";
-import ProfileItemSection from "@/components/section/ProfileItemSection";
 import ProjectItemSection from "@/components/section/ProjectItemSection";
 import ProfileFormSection from "@/components/section/profile/ProfileFormSection";
 import AddProjectForm from "@/components/form/AddProjectForm";
 import LanguageForm from "../form/LanguageForm";
 import ResetPasswordForm from "../form/ResetPasswordForm";
 import NotificationItemSection from "./NotificationItemSection";
-import UserManager from "@/manager/UserManager";
 
 const SectionView = () => { 
   const path = usePathname();
@@ -143,12 +141,6 @@ const SectionView = () => {
         title: i18n.t('Jam'),
         showBackButton: true,
         render: (params: any) => <JamItemSection {...params} />,
-      },
-      {
-        id: 'profile-item',
-        title: i18n.t('Profile'),
-        showBackButton: true,
-        render: (params: any) => <ProfileItemSection {...params} />,
       },
       {
         id: 'project-item',
