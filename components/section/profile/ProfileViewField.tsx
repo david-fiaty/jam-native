@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     gap: 0,
   },
   label: {
-    color: 'black',
+    color: Layout.colors.black,
     fontSize: 12,
     marginBottom: Layout.space.base/2.3,
   },
