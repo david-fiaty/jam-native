@@ -23,7 +23,11 @@ import EntityManager from "@/manager/EntityManager";
 const resource: string = 'profile';
 const profileImageSize: number = 100;
 
-const ProfileSection = () => {
+type Props = {
+  entityId?: any;
+};
+
+const ProfileSection = ({ entityId }: Props) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [profileId, setProfileId] = useState<number>(0);
@@ -187,7 +191,7 @@ const ProfileSection = () => {
   useEffect(() => {
     (async () => {
       if (!Object.keys(formData)?.length) {
-        setProfileId(await UserManager.getProfileId());
+        setProfileId(entityId ? entityId : await UserManager.getProfileId());
         setSectorsData(await EntityManager.getSectors());
 
         dispatch(setFormData<any>({
@@ -198,7 +202,7 @@ const ProfileSection = () => {
         }));
       }
     })();
-  }, [userState, formData, resource]);
+  }, [userState, formData, resource, entityId]);
 
   useEffect(() => {
     (async () => {
