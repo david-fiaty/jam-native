@@ -91,10 +91,10 @@ const ProfileSection = ({ profileId }: Props) => {
 
     return (
       <TextView>
-        {profileItem.sectors.map((id: any, i: number) => {
+        {profileItem.sectors.map((sectorId: any, i: number) => {
           return (
-            <TextView key={id}>
-              {(sectorsData.find((o: any) => o.id == id))?.name}
+            <TextView key={sectorId}>
+              {(sectorsData.find((o: any) => o.id == sectorId))?.name}
               {i < profileItem.sectors.length && (<TextView>, </TextView>)}
             </TextView>
           );
@@ -110,10 +110,10 @@ const ProfileSection = ({ profileId }: Props) => {
 
     return (
       <TextView>
-        {profileItem.sectors.map((id: any, i: number) => {
+        {profileItem.sectors.map((sectorId: any, i: number) => {
           return (
-            <TextView key={id}>
-              {(sectorsData.find((o: any) => o.id == id))?.name}
+            <TextView key={sectorId}>
+              {(sectorsData.find((o: any) => o.id == sectorId))?.name}
               {i < profileItem.sectors.length && (<TextView>, </TextView>)}
             </TextView>
           );
