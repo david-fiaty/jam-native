@@ -24,13 +24,13 @@ const resource: string = 'profile';
 const profileImageSize: number = 100;
 
 type Props = {
-  entityId?: any;
+  profileId?: any;
 };
 
-const ProfileSection = ({ entityId }: Props) => {
+const ProfileSection = ({ profileId }: Props) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const [profileId, setProfileId] = useState<number>(0);
+  const [entityId, setEntityId] = useState<number>(0);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const formData = useSelector((state: any) => state.form?.[resource]);
   const userState = useSelector((state: any) => state.user);
@@ -191,7 +191,7 @@ const ProfileSection = ({ entityId }: Props) => {
   useEffect(() => {
     (async () => {
       if (!Object.keys(formData)?.length) {
-        setProfileId(entityId ? entityId : await UserManager.getProfileId());
+        setEntityId(profileId ? profileId : await UserManager.getProfileId());
         setSectorsData(await EntityManager.getSectors());
 
         dispatch(setFormData<any>({
@@ -202,7 +202,7 @@ const ProfileSection = ({ entityId }: Props) => {
         }));
       }
     })();
-  }, [userState, formData, resource, entityId]);
+  }, [userState, formData, resource, profileId]);
 
   useEffect(() => {
     (async () => {
@@ -279,7 +279,7 @@ const ProfileSection = ({ entityId }: Props) => {
         addButton={true}
         allButton={formData?.profile_projects?.length > 0}
         idArray={formData?.profile_projects || []}
-        onAddButtonPress={() => SectionManager.push(router, 'add-project', { profileId: profileId, profileJams: formData?.profile_jams || [] })}
+        onAddButtonPress={() => SectionManager.push(router, 'add-project', { profileId: entityId, profileJams: formData?.profile_jams || [] })}
       />
 
       <TextView style={styles.groupTitle}>
