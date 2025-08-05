@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   label: {
     color: 'black',
     fontSize: 12,
-    marginBottom: Layout.space.base/2,
+    marginBottom: Layout.space.base/2.3,
   },
 });
 
