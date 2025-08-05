@@ -224,6 +224,12 @@ const ProfileSection = () => {
         </TextView>
       </ProfileViewField>
 
+      <ProfileViewField label={i18n.t('Main activities')}>
+        <TextView>
+          Activities list
+        </TextView>
+      </ProfileViewField>
+
       <CollapsibleView
         label={(
           <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeaderClosed}>
@@ -271,7 +277,7 @@ const ProfileSection = () => {
         allButton={formData?.saved_jams?.length > 0}
         idArray={formData?.saved_jams || []}
         emptyMessage={i18n.t('No data available.')}
-      />      
+      />
     </BoxView>
   );
 };
