@@ -30,7 +30,6 @@ type Props = {
 const ProfileSection = ({ profileId }: Props) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const [entityId, setEntityId] = useState<any>(0);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const formData = useSelector((state: any) => state.form?.[resource]);
   const userState = useSelector((state: any) => state.user);
@@ -191,14 +190,10 @@ const ProfileSection = ({ profileId }: Props) => {
   useEffect(() => {
     (async () => {
       if (!Object.keys(formData)?.length) {
-        setEntityId(profileId ? profileId : await UserManager.getProfileId());
-        setSectorsData(await EntityManager.getSectors());
-
         dispatch(setFormData<any>({
           resource: resource,
           key: null,
-          //value: userState.profileData, // Todo - Enable this
-          value: await UserManager.getProfileData(),
+          value: await UserManager.getProfileData({ profile_id: profileId }),
         }));
       }
     })();
@@ -279,7 +274,7 @@ const ProfileSection = ({ profileId }: Props) => {
         addButton={true}
         allButton={formData?.profile_projects?.length > 0}
         idArray={formData?.profile_projects || []}
-        onAddButtonPress={() => SectionManager.push(router, 'add-project', { profileId: entityId, profileJams: formData?.profile_jams || [] })}
+        onAddButtonPress={() => SectionManager.push(router, 'add-project', { profileId: profileId, profileJams: formData?.profile_jams || [] })}
       />
 
       <TextView style={styles.groupTitle}>
