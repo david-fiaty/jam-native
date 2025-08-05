@@ -89,10 +89,18 @@ const ProfileSection = ({ profileId }: Props) => {
       return <TextView>{i18n.t('Unavailable')}</TextView>
     }
 
+    let profileSectors: any[] = sectorsData.filter((o: any) => profileItem.sectors.includes(o.id));
+    
     return (
       <TextView>
-        {sectorsData.find((o: any) => profileItem.sectors.includes(o.id))?.name}
-        <TextView>, </TextView>
+        {profileSectors.map((sector: any, i: number) => {
+          return (
+            <TextView key={sector.id}>
+              {sector.name}
+              {(i < profileSectors.length - 1) && (<TextView>, </TextView>)}
+            </TextView>
+          );
+        })}
       </TextView>
     );
   };
@@ -102,13 +110,15 @@ const ProfileSection = ({ profileId }: Props) => {
       return <TextView>{i18n.t('Unavailable')}</TextView>
     }
 
+    let profileSectors: any[] = sectorsData.filter((o: any) => profileItem.sectors.includes(o.id));
+    
     return (
       <TextView>
-        {profileItem.sectors.map((sectorId: any, i: number) => {
+        {profileSectors.map((sector: any, i: number) => {
           return (
-            <TextView key={sectorId}>
-              {(sectorsData.find((o: any) => o.id == sectorId))?.name}
-              {i < profileItem.sectors.length && (<TextView>, </TextView>)}
+            <TextView key={sector.id}>
+              {sector.name}
+              {(i < profileSectors.length - 1) && (<TextView>, </TextView>)}
             </TextView>
           );
         })}
