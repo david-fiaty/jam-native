@@ -21,7 +21,7 @@ import CollapsibleView from "@/components/view/CollapsibleView";
 import EntityManager from "@/manager/EntityManager";
 
 const resource: string = 'profile';
-const profileImageSize: number = 100;
+const profileImageSize: number = 111;
 
 type Props = {
   profileId?: any;
@@ -332,7 +332,7 @@ const styles = StyleSheet.create({
   },
   profileHeaderLeft: {
     width: profileImageSize,
-    height: '100%',
+    height: profileImageSize,
     borderColor: Layout.colors.secondary,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
@@ -347,7 +347,7 @@ const styles = StyleSheet.create({
   profileImage: {
     width: profileImageSize,
     height: profileImageSize,
-    borderRadius: profileImageSize,
+    borderRadius: Layout.radius.round,
   },
   profileTitle: {
     fontWeight: 'bold',
