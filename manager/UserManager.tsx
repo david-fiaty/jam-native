@@ -138,7 +138,7 @@ class UserManager {
 
   async getProfileData(params?: any, options?: any) {
     options = options || {};
-    let profileId: number = !params?.profile_id?.length ? await this.getProfileId() : params.profile_id;
+    let profileId: number = !params?.profile_id ? await this.getProfileId() : params.profile_id;
     let variables: any = { '[profile_id]': profileId };
     let defaults: any = {};
     let profileData: any = {};
