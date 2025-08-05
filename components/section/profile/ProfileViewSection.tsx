@@ -9,7 +9,6 @@ import ProfileProjectsList from "@/components/list/ProfileProjectsList";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import ProfileJamsList from "@/components/list/ProfileJamsList";
-import DividerView from "@/components/view/DividerView";
 import ModalManager from "@/manager/ModalManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import SectionManager from "@/manager/SectionManager";
@@ -29,7 +28,6 @@ const ProfileSection = () => {
   const dispatch = useDispatch();
   const [profileId, setProfileId] = useState<number>(0);
   const [sectorsData, setSectorsData] = useState<any>([]);
-  const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
   const formData = useSelector((state: any) => state.form?.[resource]);
   const userState = useSelector((state: any) => state.user);
 
@@ -58,10 +56,18 @@ const ProfileSection = () => {
         </BoxView>
 
         <View style={styles.profileHeaderRight}>
-          <ProfileViewField label={i18n.t('Profile ID (Username)')}>
+          <ProfileViewField>
             <TextView>
               {formData?.profile_name}
             </TextView>
+          </ProfileViewField>
+
+          <ProfileViewField>
+            <BoxView direction="row" align="center" justify="flex-start">
+              <IconView name="instagram" theme="transparent" size={19} padding={0} onPress={() => console.log('icon pressed')} />
+              <IconView name="facebook" theme="transparent" size={19} padding={0} onPress={() => console.log('icon pressed')} />
+              <IconView name="linkedin" theme="transparent" size={19} padding={0} onPress={() => console.log('icon pressed')} />
+            </BoxView>
           </ProfileViewField>
 
           <ProfileViewField>
@@ -73,7 +79,6 @@ const ProfileSection = () => {
       </>
     );
   };
-
 
   const renderSectors = () => {
     return (
@@ -99,6 +104,84 @@ const ProfileSection = () => {
         ))}
       </TextView>
     );
+  };
+
+  const renderCollapsibleFields = () => {
+    if (formData?.profile_organization) {
+      return (
+        <BoxView direction="column">
+          <ProfileViewField label={i18n.t('Organization name')}>
+            <TextView>
+              {formData?.profile_organization?.organization_name}
+            </TextView>
+          </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Creation year')}>
+            <TextView>
+              {formData?.profile_organization?.creation_year || i18n.t('Unavailable')}
+            </TextView>
+          </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Address')}>
+            <TextView>
+              {formData?.address || i18n.t('Unavailable')}
+            </TextView>
+          </ProfileViewField>
+        </BoxView>
+      );
+    }
+    else if (formData?.profile_venue) {
+      return (
+        <BoxView direction="column">
+          <ProfileViewField label={i18n.t('Venue name')}>
+            <TextView>
+              {formData?.profile_venue?.venue_name}
+            </TextView>
+          </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Venue types')}>
+            <TextView>
+              Venue types
+            </TextView>
+          </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Creation year')}>
+            <TextView>
+              {formData?.profile_venue?.creation_year || i18n.t('Unavailable')}
+            </TextView>
+          </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Address')}>
+            <TextView>
+              {formData?.address || i18n.t('Unavailable')}
+            </TextView>
+          </ProfileViewField>
+        </BoxView>
+      );
+    }
+    else if (formData?.profile_personal) {
+      return (
+        <BoxView direction="column">
+          <ProfileViewField label={i18n.t('First name')}>
+            <TextView>
+              {formData?.profile_personal?.first_name || i18n.t('Unavailable')}
+            </TextView>
+          </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Last name')}>
+            <TextView>
+              {formData?.profile_personal?.last_name || i18n.t('Unavailable')}
+            </TextView>
+          </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Address')}>
+            <TextView>
+              {formData?.address || i18n.t('Unavailable')}
+            </TextView>
+          </ProfileViewField>
+        </BoxView>
+      );
+    }
   };
 
   useEffect(() => {
@@ -130,7 +213,7 @@ const ProfileSection = () => {
   return (
     <BoxView
       direction="column"
-      align="center"
+      align="flex-start"
       justify="center"
       style={styles.container}
       scroll={true}
@@ -144,7 +227,7 @@ const ProfileSection = () => {
       <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.profileHeader}>
         {renderHeader()}
       </BoxView>
-      
+
       <ProfileViewField label={i18n.t('Industries')}>
         {renderSectors()}
       </ProfileViewField>
@@ -161,7 +244,7 @@ const ProfileSection = () => {
 
       <ProfileViewField label={i18n.t('Main activities')}>
         <TextView>
-          {false || i18n.t('Unavailable')}
+          Activities list
         </TextView>
       </ProfileViewField>
 
@@ -182,43 +265,37 @@ const ProfileSection = () => {
             <IconView name="expanded" theme="white" padding={0} />
           </BoxView>
         }
-        content={<TextView>Collapsible content</TextView>}
+        content={renderCollapsibleFields()}
       />
 
-
-
-
-
-
-
-
-      <DividerView />
-
+      <TextView style={styles.groupTitle}>
+        {`${UserManager.getProfileDisplayName(formData)}'s`} {i18n.t('Projects')}
+      </TextView>
       <ProfileProjectsList
-        title={i18n.t("Your Projects")}
         addButton={true}
         allButton={formData?.profile_projects?.length > 0}
         idArray={formData?.profile_projects || []}
         onAddButtonPress={() => SectionManager.push(router, 'add-project', { profileId: profileId, profileJams: formData?.profile_jams || [] })}
       />
-      <DividerView />
 
+      <TextView style={styles.groupTitle}>
+        {`${UserManager.getProfileDisplayName(formData)}'s`} {i18n.t('Jams')}
+      </TextView>
       <ProfileJamsList
-        title={i18n.t("Your Jams")}
         allButton={formData?.profile_jams?.length > 0}
         addButton={true}
         idArray={formData?.profile_jams || []}
         onAddButtonPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
       />
-      <DividerView />
 
+      <TextView style={styles.groupTitle}>
+        {i18n.t('Saved Jams')}
+      </TextView>
       <ProfileJamsList
-        title={i18n.t("Saved Jams")}
         allButton={formData?.saved_jams?.length > 0}
         idArray={formData?.saved_jams || []}
         emptyMessage={i18n.t('No data available.')}
       />
-
     </BoxView>
   );
 };
@@ -229,20 +306,27 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingBottom: Layout.space.base * 2,
   },
+  groupTitle: {
+    fontWeight: 'bold',
+    marginTop: Layout.space.base,
+  },
   profileHeader: {
     width: '100%',
     gap: Layout.space.base,
-    marginVertical: Layout.space.base / 1.5,
   },
   profileHeaderLeft: {
     width: profileImageSize,
     height: '100%',
-    backgroundColor: 'red',
+    borderColor: Layout.colors.secondary,
+    borderWidth: Layout.borderWidth.base,
+    borderRadius: Layout.radius.round,
+    padding: 0,
   },
   profileHeaderRight: {
     flex: 1,
     height: '100%',
     gap: Layout.space.base,
+    padding: 0,
   },
   profileImage: {
     width: profileImageSize,
