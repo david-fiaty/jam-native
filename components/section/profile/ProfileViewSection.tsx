@@ -85,12 +85,16 @@ const ProfileSection = ({ profileId }: Props) => {
   };
 
   const renderSectors = () => {
+    if (!profileItem?.sectors?.length ) {
+      return <TextView>{i18n.t('Unavailable')}</TextView>
+    }
+
     return (
       <TextView>
-        {[20, 13, 6, 36, 31].map((id: any, i: number) => (
+        {profileItem.sectors.map((id: any, i: number) => (
           <TextView key={id}>
             {(sectorsData.find((o: any) => o.id == id))?.name}
-            {i < 4 && (<TextView>, </TextView>)}
+            {i < profileItem.sectors.length && (<TextView>, </TextView>)}
           </TextView>
         ))}
       </TextView>
@@ -98,12 +102,16 @@ const ProfileSection = ({ profileId }: Props) => {
   };
 
   const renderSubSectors = () => {
+    if (!profileItem?.sectors?.length ) {
+      return <TextView>{i18n.t('Unavailable')}</TextView>
+    }
+
     return (
       <TextView>
-        {[20, 13, 6, 36, 31].map((id: any, i: number) => (
+        {profileItem.sectors.map((id: any, i: number) => (
           <TextView key={id}>
             {(sectorsData.find((o: any) => o.id == id))?.name}
-            {i < 4 && (<TextView>, </TextView>)}
+            {i < profileItem.sectors.length && (<TextView>, </TextView>)}
           </TextView>
         ))}
       </TextView>
