@@ -109,7 +109,7 @@ const ProfileSection = () => {
   const renderCollapsibleFields = () => {
     if (formData?.profile_organization) {
       return (
-        <BoxView>
+        <BoxView direction="column">
           <ProfileViewField label={i18n.t('Organization name')}>
             <TextView>
               {formData?.profile_organization?.organization_name}
@@ -132,7 +132,7 @@ const ProfileSection = () => {
     }
     else if (formData?.profile_venue) {
       return (
-        <BoxView>
+        <BoxView direction="column">
           <ProfileViewField label={i18n.t('Venue name')}>
             <TextView>
               {formData?.profile_venue?.venue_name}
@@ -161,7 +161,7 @@ const ProfileSection = () => {
     }
     else if (formData?.profile_personal) {
       return (
-        <BoxView>
+        <BoxView direction="column">
           <ProfileViewField label={i18n.t('First name')}>
             <TextView>
               {formData?.profile_personal?.first_name || i18n.t('Unavailable')}
@@ -313,7 +313,6 @@ const styles = StyleSheet.create({
   profileHeader: {
     width: '100%',
     gap: Layout.space.base,
-    marginVertical: Layout.space.base / 1.5,
   },
   profileHeaderLeft: {
     width: profileImageSize,
@@ -321,13 +320,13 @@ const styles = StyleSheet.create({
     borderColor: Layout.colors.secondary,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
-    //padding: Layout.space.base,
-    //backgroundColor: 'red',
+    padding: 0,
   },
   profileHeaderRight: {
     flex: 1,
     height: '100%',
     gap: Layout.space.base,
+    padding: 0,
   },
   profileImage: {
     width: profileImageSize,
