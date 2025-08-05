@@ -29,10 +29,12 @@ const styles = StyleSheet.create({
     borderColor: Layout.colors.secondary,
     borderRadius: Layout.radius.round,
     padding: Layout.space.base/1.4,
+    gap: 0,
   },
   label: {
     color: 'black',
     fontSize: 12,
+    marginBottom: Layout.space.base/2,
   },
 });
 
