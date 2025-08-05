@@ -332,7 +332,7 @@ const styles = StyleSheet.create({
   },
   profileHeaderLeft: {
     width: profileImageSize,
-    height: '100%',
+    height: profileImageSize,
     borderColor: Layout.colors.secondary,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
@@ -347,7 +347,7 @@ const styles = StyleSheet.create({
   profileImage: {
     width: profileImageSize,
     height: profileImageSize,
-    borderRadius: profileImageSize,
+    borderRadius: Layout.radius.round,
   },
   profileTitle: {
     fontWeight: 'bold',
