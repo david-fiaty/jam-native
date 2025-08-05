@@ -64,6 +64,12 @@ const ProfileSection = () => {
 
           <ProfileViewField>
             <TextView>
+              Social links
+            </TextView>
+          </ProfileViewField>
+
+          <ProfileViewField>
+            <TextView>
               {formData?.email || i18n.t('Email unavailable')}
             </TextView>
           </ProfileViewField>
