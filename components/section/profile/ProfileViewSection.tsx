@@ -35,8 +35,6 @@ const ProfileSection = ({ profileId }: Props) => {
   const formData = useSelector((state: any) => state.form?.[resource]);
   const userState = useSelector((state: any) => state.user);
 
-  console.log(entityId)
-
   const renderHeader = () => {
     return (
       <>

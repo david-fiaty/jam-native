@@ -21,7 +21,7 @@ const HostsList = ({ jamId }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const onItemPress = (row: any) => {
-    SectionManager.push(router, 'profile-item', { profileId: row?.item?.id, title: row?.item?.title })
+    SectionManager.push(router, 'profile', { profileId: row?.item?.id, title: row?.item?.title })
   };
 
   const getProfiles = async () => {
