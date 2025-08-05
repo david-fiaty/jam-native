@@ -136,14 +136,14 @@ class UserManager {
     return displayName.trim().length > 0 ? displayName : item?.profile_name;
   }
 
-  async getProfileData(options?: any) {
+  async getProfileData(params?: any, options?: any) {
     options = options || {};
-    let profileId: number = await this.getProfileId();
+    let profileId: number = !params?.profile_id ? await this.getProfileId() : params.profile_id;
+    let variables: any = { '[profile_id]': profileId };
     let defaults: any = {};
     let profileData: any = {};
     let localProfileData: any = null;
-    let variables: any = { '[profile_id]': profileId };
-
+    
     if (profileId > 0) {
       profileData = await DataManager.get('getProfile', { ...defaults, ...options }, variables);
     }
