@@ -63,9 +63,11 @@ const ProfileSection = () => {
           </ProfileViewField>
 
           <ProfileViewField>
-            <TextView>
-              Social links
-            </TextView>
+            <BoxView direction="row">
+              <IconView name="instagram" theme="transparent" size={14} padding={0} />
+              <IconView name="facebook" theme="transparent" size={14} padding={0} />
+              <IconView name="linkedin" theme="transparent" size={14} padding={0} />
+            </BoxView>
           </ProfileViewField>
 
           <ProfileViewField>
