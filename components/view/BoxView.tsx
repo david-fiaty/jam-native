@@ -3,14 +3,14 @@ import { StyleSheet, View, ScrollView, Pressable, TouchableOpacity } from 'react
 import { Layout } from '@/constants/Layout';
 
 type Props = {
-  direction?: string,
-  align?: string,
-  justify?: string,
-  scroll?: boolean,
-  onPress?: () => void,
-  onLayout?: () => void,
-  style?: object,
-  children?: ReactNode,
+  direction?: string;
+  align?: string;
+  justify?: string;
+  scroll?: boolean;
+  onPress?: () => void;
+  onLayout?: () => void;
+  style?: object;
+  children?: ReactNode;
 };
 
 const BoxView = ({direction, align, justify, scroll, onPress, onLayout, style, children}: Props) => {
