@@ -91,14 +91,8 @@ const ProfileSection = ({ profileId }: Props) => {
 
     return (
       <TextView>
-        {profileItem.sectors.map((sectorId: any, i: number) => {
-          return (
-            <TextView key={sectorId}>
-              {(sectorsData.find((o: any) => o.id == sectorId))?.name}
-              {i < profileItem.sectors.length && (<TextView>, </TextView>)}
-            </TextView>
-          );
-        })}
+        {sectorsData.find((o: any) => profileItem.sectors.includes(o.id))?.name}
+        <TextView>, </TextView>
       </TextView>
     );
   };
@@ -277,7 +271,7 @@ const ProfileSection = ({ profileId }: Props) => {
       />
 
       <TextView style={styles.groupTitle}>
-        {`${UserManager.getProfileDisplayName(profileItem)}'s`} {i18n.t('Projects')}
+        {`${UserManager.getProfileDisplayName(profileItem)}' s`} {i18n.t('Projects')}
       </TextView>
       <ProfileProjectsList
         addButton={true}
@@ -287,7 +281,7 @@ const ProfileSection = ({ profileId }: Props) => {
       />
 
       <TextView style={styles.groupTitle}>
-        {`${UserManager.getProfileDisplayName(profileItem)}'s`} {i18n.t('Jams')}
+        {`${UserManager.getProfileDisplayName(profileItem)}' s`} {i18n.t('Jams')}
       </TextView>
       <ProfileJamsList
         allButton={profileItem?.profile_jams?.length > 0}
