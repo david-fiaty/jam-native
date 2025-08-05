@@ -121,6 +121,12 @@ const ProfileSection = () => {
               {formData?.profile_organization?.creation_year || i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Address')}>
+            <TextView>
+              {formData?.address || i18n.t('Unavailable')}
+            </TextView>
+          </ProfileViewField>
         </BoxView>
       );
     }
@@ -144,6 +150,12 @@ const ProfileSection = () => {
               {formData?.profile_venue?.creation_year || i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Address')}>
+            <TextView>
+              {formData?.address || i18n.t('Unavailable')}
+            </TextView>
+          </ProfileViewField>
         </BoxView>
       );
     }
@@ -159,6 +171,12 @@ const ProfileSection = () => {
           <ProfileViewField label={i18n.t('Last name')}>
             <TextView>
               {formData?.profile_personal?.last_name || i18n.t('Unavailable')}
+            </TextView>
+          </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Address')}>
+            <TextView>
+              {formData?.address || i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
         </BoxView>
