@@ -30,7 +30,7 @@ type Props = {
 const ProfileSection = ({ profileId }: Props) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const [entityId, setEntityId] = useState<number>(0);
+  const [entityId, setEntityId] = useState<any>(0);
   const [sectorsData, setSectorsData] = useState<any>([]);
   const formData = useSelector((state: any) => state.form?.[resource]);
   const userState = useSelector((state: any) => state.user);
