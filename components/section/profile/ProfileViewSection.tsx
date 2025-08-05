@@ -64,9 +64,9 @@ const ProfileSection = () => {
 
           <ProfileViewField>
             <BoxView direction="row" align="center" justify="flex-start">
-              <IconView name="instagram" theme="transparent" size={14} padding={0} />
-              <IconView name="facebook" theme="transparent" size={14} padding={0} />
-              <IconView name="linkedin" theme="transparent" size={14} padding={0} />
+              <IconView name="instagram" theme="transparent" size={18} padding={0} />
+              <IconView name="facebook" theme="transparent" size={18} padding={0} />
+              <IconView name="linkedin" theme="transparent" size={18} padding={0} />
             </BoxView>
           </ProfileViewField>
 
