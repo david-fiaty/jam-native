@@ -21,7 +21,7 @@ const SearchProfilesList = ({ data, filter }: Props) => {
   const [currentData, setCurrentData] = useState<any[]>([]);
 
   const onItemPress = (row: any) => {
-    SectionManager.push(router, 'profile-item', { profileId: row?.item?.id, title: row?.item?.title });
+    SectionManager.push(router, 'profile', { profileId: row?.item?.id, title: row?.item?.title });
   };
 
   const renderEmptyMessage = () => {
