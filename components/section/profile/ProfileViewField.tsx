@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     borderWidth: Layout.borderWidth.base,
     borderColor: Layout.colors.secondary,
     borderRadius: Layout.radius.round,
-    padding: Layout.space.base,
+    padding: Layout.space.base/1.4,
   },
   label: {
     color: 'black',
