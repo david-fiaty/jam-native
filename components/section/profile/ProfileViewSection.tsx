@@ -121,6 +121,7 @@ const ProfileSection = ({ profileId }: Props) => {
             return (
               <TextView key={subSector.id}>
                 {subSector.name}
+                {(i < profileSubSectors.length - 1) && (<TextView>, </TextView>)}
               </TextView>
             );
           })
