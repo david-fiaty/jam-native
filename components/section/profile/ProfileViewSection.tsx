@@ -21,7 +21,7 @@ import CollapsibleView from "@/components/view/CollapsibleView";
 import EntityManager from "@/manager/EntityManager";
 
 const resource: string = 'profile';
-const profileImageSize: number = 100;
+const profileImageSize: number = 111;
 
 type Props = {
   profileId?: any;
