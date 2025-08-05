@@ -89,13 +89,15 @@ const ProfileSection = ({ profileId }: Props) => {
       return <TextView>{i18n.t('Unavailable')}</TextView>
     }
 
+    let profileSectors: any[] = sectorsData.filter((o: any) => profileItem.sectors.includes(o.id));
+    
     return (
       <TextView>
-        {profileItem.sectors.map((sectorId: any, i: number) => {
+        {profileSectors.map((sector: any, i: number) => {
           return (
-            <TextView key={sectorId}>
-              {(sectorsData.find((o: any) => o.id == sectorId))?.name}
-              {i < profileItem.sectors.length && (<TextView>, </TextView>)}
+            <TextView key={sector.id}>
+              {sector.name}
+              {(i < profileSectors.length - 1) && (<TextView>, </TextView>)}
             </TextView>
           );
         })}
@@ -108,13 +110,15 @@ const ProfileSection = ({ profileId }: Props) => {
       return <TextView>{i18n.t('Unavailable')}</TextView>
     }
 
+    let profileSectors: any[] = sectorsData.filter((o: any) => profileItem.sectors.includes(o.id));
+    
     return (
       <TextView>
-        {profileItem.sectors.map((sectorId: any, i: number) => {
+        {profileSectors.map((sector: any, i: number) => {
           return (
-            <TextView key={sectorId}>
-              {(sectorsData.find((o: any) => o.id == sectorId))?.name}
-              {i < profileItem.sectors.length && (<TextView>, </TextView>)}
+            <TextView key={sector.id}>
+              {sector.name}
+              {(i < profileSectors.length - 1) && (<TextView>, </TextView>)}
             </TextView>
           );
         })}
@@ -277,7 +281,7 @@ const ProfileSection = ({ profileId }: Props) => {
       />
 
       <TextView style={styles.groupTitle}>
-        {`${UserManager.getProfileDisplayName(profileItem)}'s`} {i18n.t('Projects')}
+        {`${UserManager.getProfileDisplayName(profileItem)}' s`} {i18n.t('Projects')}
       </TextView>
       <ProfileProjectsList
         addButton={true}
@@ -287,7 +291,7 @@ const ProfileSection = ({ profileId }: Props) => {
       />
 
       <TextView style={styles.groupTitle}>
-        {`${UserManager.getProfileDisplayName(profileItem)}'s`} {i18n.t('Jams')}
+        {`${UserManager.getProfileDisplayName(profileItem)}' s`} {i18n.t('Jams')}
       </TextView>
       <ProfileJamsList
         allButton={profileItem?.profile_jams?.length > 0}
