@@ -85,35 +85,39 @@ const ProfileSection = ({ profileId }: Props) => {
   };
 
   const renderSectors = () => {
-    if (!profileItem?.sectors?.length ) {
+    if (!profileItem?.sectors?.length) {
       return <TextView>{i18n.t('Unavailable')}</TextView>
     }
 
     return (
       <TextView>
-        {profileItem.sectors.map((id: any, i: number) => (
-          <TextView key={id}>
-            {(sectorsData.find((o: any) => o.id == id))?.name}
-            {i < profileItem.sectors.length && (<TextView>, </TextView>)}
-          </TextView>
-        ))}
+        {profileItem.sectors.map((id: any, i: number) => {
+          return (
+            <TextView key={id}>
+              {(sectorsData.find((o: any) => o.id == id))?.name}
+              {i < profileItem.sectors.length && (<TextView>, </TextView>)}
+            </TextView>
+          );
+        })}
       </TextView>
     );
   };
 
   const renderSubSectors = () => {
-    if (!profileItem?.sectors?.length ) {
+    if (!profileItem?.sectors?.length) {
       return <TextView>{i18n.t('Unavailable')}</TextView>
     }
 
     return (
       <TextView>
-        {profileItem.sectors.map((id: any, i: number) => (
-          <TextView key={id}>
-            {(sectorsData.find((o: any) => o.id == id))?.name}
-            {i < profileItem.sectors.length && (<TextView>, </TextView>)}
-          </TextView>
-        ))}
+        {profileItem.sectors.map((id: any, i: number) => {
+          return (
+            <TextView key={id}>
+              {(sectorsData.find((o: any) => o.id == id))?.name}
+              {i < profileItem.sectors.length && (<TextView>, </TextView>)}
+            </TextView>
+          );
+        })}
       </TextView>
     );
   };
