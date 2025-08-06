@@ -22,7 +22,7 @@ const JammersList = ({ jamId, jammersIds }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const onItemPress = (row: any) => {
-    SectionManager.push(router, 'profile', { profileId: row?.item?.id, title: row?.item?.title });
+    SectionManager.push(router, 'public-profile', { profileId: row?.item?.id, title: row?.item?.title });
   };
 
   const renderItem = useCallback((row: any) => {
