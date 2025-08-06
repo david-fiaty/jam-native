@@ -210,17 +210,8 @@ const ProfileView = ({ profileId, profileData }: Props) => {
 
   useEffect(() => {
     setProfileItem(profileData);
-  }, [profileData]);
-
-  useEffect(() => {
-    (async () => {
-      if (!sectorsData?.length) {
-        setSectorsData(await EntityManager.getSectors());
-      }
-    })();
-  }, [sectorsData, appState]);
-
-  console.log(appState.sectorsData)
+    setSectorsData(appState.sectorsData);
+  }, [profileData, appState]);
 
   return (
     <BoxView
