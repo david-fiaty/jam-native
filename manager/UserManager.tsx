@@ -53,6 +53,7 @@ class UserManager {
 
     if (success) {
       SessionManager.setTokenData(response.tokens);
+      SessionManager.setProfileData(response.user.profiles[0]);
     }
     else if (response?.non_field_errors?.length > 0) {
       message = response.non_field_errors[0];
