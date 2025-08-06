@@ -27,7 +27,7 @@ const CommentItem = ({ entityId, commentData, profileImage, commentReplies, glob
   };
 
   const viewProfile = (row: any) => {
-    SectionManager.push(router, 'profile', { profileId: commentData?.profile?.id });
+    SectionManager.push(router, 'public-profile', { profileId: commentData?.profile?.id });
   };
 
   const deleteComment = async () => {
