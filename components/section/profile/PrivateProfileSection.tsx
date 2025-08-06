@@ -1,10 +1,6 @@
 import ProfileView from "@/components/view/ProfileView";
 
-type Props = {
-  profileId?: any;
-};
-
-const PrivateProfileSection = ({ profileId }: Props) => {
+const PrivateProfileSection = () => {
   return <ProfileView />;
 };
 
