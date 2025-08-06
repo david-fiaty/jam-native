@@ -10,7 +10,6 @@ import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import ProfileJamsList from "@/components/list/ProfileJamsList";
 import ModalManager from "@/manager/ModalManager";
-import SpinnerView from "@/components/view/SpinnerView";
 import SectionManager from "@/manager/SectionManager";
 import ProfileViewField from "../section/profile/ProfileViewField";
 import TextView from "@/components/view/TextView";
@@ -18,7 +17,6 @@ import ImageView from "@/components/view/ImageView";
 import MediaManager from "@/manager/MediaManager";
 import IconView from "@/components/view/IconView";
 import CollapsibleView from "@/components/view/CollapsibleView";
-import EntityManager from "@/manager/EntityManager";
 
 const resource: string = 'profile';
 const profileImageSize: number = 111;
@@ -33,6 +31,7 @@ const ProfileView = ({ profileId, profileData }: Props) => {
   const dispatch = useDispatch();
   const [sectorsData, setSectorsData] = useState<any[]>([]);
   const [profileItem, setProfileItem] = useState<any>({});
+  const appState = useSelector((state: any) => state.app);
   const formData = useSelector((state: any) => state.form?.[resource]);
 
   const renderHeader = () => {
@@ -210,17 +209,8 @@ const ProfileView = ({ profileId, profileData }: Props) => {
 
   useEffect(() => {
     setProfileItem(profileData);
-  }, [profileData]);
-
-  useEffect(() => {
-    (async () => {
-      if (!sectorsData?.length) {
-        setSectorsData(await EntityManager.getSectors());
-      }
-    })();
-  }, [sectorsData]);
-
-  //if (!Object.keys(formData)?.length) return <SpinnerView />;
+    setSectorsData(appState.sectorsData);
+  }, [profileData, appState]);
 
   return (
     <BoxView
