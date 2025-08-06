@@ -210,12 +210,8 @@ const ProfileView = ({ profileId, profileData }: Props) => {
   };
 
   useEffect(() => {
-    (async () => {
-      if (!Object.keys(profileItem)?.length) {
-        setProfileItem(await UserManager.getProfileData({ profile_id: profileId || null }));
-      }
-    })();
-  }, [userState, formData, resource, profileId, profileItem]);
+    setProfileItem(profileData);
+  }, [profileData]);
 
   useEffect(() => {
     (async () => {
