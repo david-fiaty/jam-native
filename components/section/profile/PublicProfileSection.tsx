@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ProfileView from "@/components/view/ProfileView";
 import UserManager from "@/manager/UserManager";
+import SpinnerView from "@/components/view/SpinnerView";
 
 type Props = {
   profileId?: any;
@@ -16,6 +17,8 @@ const PublicProfileSection = ({ profileId }: Props) => {
       }
     })();
   }, [profileData, profileId]);
+
+  if (!profileData) return <SpinnerView />;
 
   return (
     <ProfileView 
