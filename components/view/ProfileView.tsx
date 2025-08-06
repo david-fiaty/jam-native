@@ -17,7 +17,6 @@ import ImageView from "@/components/view/ImageView";
 import MediaManager from "@/manager/MediaManager";
 import IconView from "@/components/view/IconView";
 import CollapsibleView from "@/components/view/CollapsibleView";
-import EntityManager from "@/manager/EntityManager";
 
 const resource: string = 'profile';
 const profileImageSize: number = 111;
