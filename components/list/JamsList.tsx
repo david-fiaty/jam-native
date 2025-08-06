@@ -15,9 +15,10 @@ type Props = {
 };
 
 const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
-  const [sectors, setSectors] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [sectorsData, setSectorsData] = useState<any>([]);
   const [profileData, setProfileData] = useState<any>(null);
+  const appState = useSelector((state: any) => state.app);
   const searchState: any = useSelector((state: any) => state.search);
 
   const getProfileData = async () => {
@@ -32,7 +33,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
     return (
       <ListItem
         row={row}
-        sectorsData={sectors}
+        sectorsData={sectorsData}
         profileData={profileData}
         onListItemAction={onListItemAction}
       />
@@ -73,12 +74,12 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setSectors(await EntityManager.getSectors());
+        setSectorsData(appState.sectorsData);
         setProfileData(await getProfileData());
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded]);
+  }, [isLoaded, appState]);
 
   if (!isLoaded) return <SpinnerView />;
 
