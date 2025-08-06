@@ -24,6 +24,7 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any[]>([]);
   const [sectorsOptions, setSectorsOptions] = useState<any[]>([]);
+  const appState = useSelector((state: any) => state.app);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateSelection = (selectedIds: any[]) => {
@@ -130,13 +131,12 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        let sectorsList: any = await EntityManager.getSectors();
-        setSectorsData(sectorsList);
-        setSectorsOptions(getSectorsOptions(sectorsList));
+        setSectorsData(appState.sectorsData);
+        setSectorsOptions(getSectorsOptions(appState.sectorsData));
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded]);
+  }, [isLoaded, appState]);
 
   return (
     <>
