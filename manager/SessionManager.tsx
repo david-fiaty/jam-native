@@ -1,11 +1,13 @@
-import { setTokenData } from '@/redux/slices/UserSlice';
-import { Config } from '@/constants/Config';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { setTokenData, setProfileData } from '@/redux/slices/UserSlice';
 import Store from "@/redux/Store";
 
 class SessionManager {
   setTokenData(data: any) {
     Store.dispatch(setTokenData(data));
+  }
+
+  setProfileData(data: any) {
+    Store.dispatch(setProfileData(data));
   }
 
   getTokenData() {
