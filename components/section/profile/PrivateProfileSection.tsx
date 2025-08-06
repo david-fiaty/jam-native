@@ -27,7 +27,7 @@ type Props = {
   profileId?: any;
 };
 
-const ProfileSection = ({ profileId }: Props) => {
+const PrivateProfileSection = ({ profileId }: Props) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [sectorsData, setSectorsData] = useState<any[]>([]);
@@ -375,4 +375,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileSection;
+export default PrivateProfileSection;
