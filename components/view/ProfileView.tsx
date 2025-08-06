@@ -25,9 +25,10 @@ const profileImageSize: number = 111;
 
 type Props = {
   profileId?: any;
+  profileData?: any;
 };
 
-const ProfileView = ({ profileId }: Props) => {
+const ProfileView = ({ profileId, profileData }: Props) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [sectorsData, setSectorsData] = useState<any[]>([]);
@@ -209,12 +210,8 @@ const ProfileView = ({ profileId }: Props) => {
   };
 
   useEffect(() => {
-    (async () => {
-      if (!Object.keys(profileItem)?.length) {
-        setProfileItem(await UserManager.getProfileData({ profile_id: profileId || null }));
-      }
-    })();
-  }, [userState, formData, resource, profileId, profileItem]);
+    setProfileItem(profileData);
+  }, [profileData]);
 
   useEffect(() => {
     (async () => {
