@@ -5,7 +5,7 @@ type Props = {
 };
 
 const PublicProfileSection = ({ profileId }: Props) => {
-  return <ProfileView />;
+  return <ProfileView profileId={profileId}/>;
 };
 
 export default PublicProfileSection;
