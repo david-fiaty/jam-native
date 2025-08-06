@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { setSectorsData } from '@/redux/slices/AppSlice';
 import { useRouter, useRootNavigationState } from 'expo-router';
 import { useDispatch } from "react-redux";
 import { setCurrentLanguage } from '@/redux/slices/UserSlice';
@@ -8,6 +9,7 @@ import i18next from 'i18next';
 import ScreenManager from '@/manager/ScreenManager';
 import SearchManager from '@/manager/SearchManager';
 import UserManager from '@/manager/UserManager';
+import EntityManager from '@/manager/EntityManager';
 
 export default () => {
   const dispatch = useDispatch();
@@ -35,6 +37,7 @@ export default () => {
     (async () => {
       await setLanguage();
       await SearchManager.loadResults();
+      dispatch(setSectorsData(await EntityManager.getSectors()));
     })();
   }, []);
 

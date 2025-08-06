@@ -5,7 +5,6 @@ import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
-import EntityManager from "@/manager/EntityManager";
 import ListItem from "./jams-list/ListItem";
 import UserManager from "@/manager/UserManager";
 
@@ -15,10 +14,12 @@ type Props = {
 };
 
 const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
-  const [sectors, setSectors] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [sectorsData, setSectorsData] = useState<any>([]);
   const [profileData, setProfileData] = useState<any>(null);
+  const appState = useSelector((state: any) => state.app);
   const searchState: any = useSelector((state: any) => state.search);
+  const userState = useSelector((state: any) => state.user);
 
   const getProfileData = async () => {
     return await UserManager.getProfileData();
@@ -32,7 +33,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
     return (
       <ListItem
         row={row}
-        sectorsData={sectors}
+        sectorsData={sectorsData}
         profileData={profileData}
         onListItemAction={onListItemAction}
       />
@@ -73,12 +74,12 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setSectors(await EntityManager.getSectors());
-        setProfileData(await getProfileData());
+        setSectorsData(appState.sectorsData);
+        setProfileData(userState.profileData);
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded]);
+  }, [isLoaded, appState, userState]);
 
   if (!isLoaded) return <SpinnerView />;
 
