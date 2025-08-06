@@ -5,7 +5,6 @@ import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
-import EntityManager from "@/manager/EntityManager";
 import ListItem from "./jams-list/ListItem";
 import UserManager from "@/manager/UserManager";
 
