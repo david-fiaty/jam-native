@@ -32,6 +32,7 @@ const ProfileView = ({ profileId, profileData }: Props) => {
   const dispatch = useDispatch();
   const [sectorsData, setSectorsData] = useState<any[]>([]);
   const [profileItem, setProfileItem] = useState<any>({});
+  const appState = useSelector((state: any) => state.app);
   const formData = useSelector((state: any) => state.form?.[resource]);
 
   const renderHeader = () => {
@@ -217,7 +218,9 @@ const ProfileView = ({ profileId, profileData }: Props) => {
         setSectorsData(await EntityManager.getSectors());
       }
     })();
-  }, [sectorsData]);
+  }, [sectorsData, appState]);
+
+  console.log(appState.sectorsData)
 
   return (
     <BoxView
