@@ -34,7 +34,6 @@ const ProfileView = ({ profileId, profileData }: Props) => {
   const [sectorsData, setSectorsData] = useState<any[]>([]);
   const [profileItem, setProfileItem] = useState<any>({});
   const formData = useSelector((state: any) => state.form?.[resource]);
-  const userState = useSelector((state: any) => state.user);
 
   const renderHeader = () => {
     return (
