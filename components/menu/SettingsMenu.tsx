@@ -15,7 +15,7 @@ const SettingsMenu = () => {
     return [
       {
         label: i18n.t('Your profile'),
-        onPress: () => SectionManager.push(router, 'profile'),
+        onPress: () => SectionManager.push(router, 'private-profile'),
       },
       {
         label: i18n.t('Change password'),

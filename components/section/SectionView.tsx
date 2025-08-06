@@ -17,7 +17,6 @@ import LegalSection from "@/components/section/LegalSection";
 import LoginSection from "@/components/section/LoginSection";
 import WelcomeSection from "@/components/section/WelcomeSection";
 import SignupSection from "@/components/section/SignupSection";
-import ProfileViewSection from "@/components/section/profile/ProfileViewSection";
 import PrivacySection from "@/components/section/PrivacySection";
 import JamItemSection from "@/components/section/JamItemSection";
 import ProjectItemSection from "@/components/section/ProjectItemSection";
@@ -26,6 +25,8 @@ import AddProjectForm from "@/components/form/AddProjectForm";
 import LanguageForm from "../form/LanguageForm";
 import ResetPasswordForm from "../form/ResetPasswordForm";
 import NotificationItemSection from "./NotificationItemSection";
+import PublicProfileSection from "./profile/PublicProfileSection";
+import PrivateProfileSection from "./profile/PrivateProfileSection";
 
 const SectionView = () => { 
   const path = usePathname();
@@ -155,9 +156,20 @@ const SectionView = () => {
         render: (params: any) => <NotificationItemSection {...params} />,
       },
       {
-        id: 'profile',
+        id: 'public-profile',
+        title: i18n.t('Profile'),
+        render: (params: any) => <PublicProfileSection {...params} />,
+        toolbarButtons: [
+          {
+            label: i18n.t('Edit'),
+            sectionId: 'profile-form',
+          },
+        ],
+      },
+      {
+        id: 'private-profile',
         title: i18n.t('Your profile'),
-        render: (params: any) => <ProfileViewSection {...params} />,
+        render: (params: any) => <PrivateProfileSection {...params} />,
         toolbarButtons: [
           {
             label: i18n.t('Edit'),

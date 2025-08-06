@@ -12,7 +12,7 @@ import ProfileJamsList from "@/components/list/ProfileJamsList";
 import ModalManager from "@/manager/ModalManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import SectionManager from "@/manager/SectionManager";
-import ProfileViewField from "./ProfileViewField";
+import ProfileViewField from "../section/profile/ProfileViewField";
 import TextView from "@/components/view/TextView";
 import ImageView from "@/components/view/ImageView";
 import MediaManager from "@/manager/MediaManager";
@@ -21,16 +21,17 @@ import CollapsibleView from "@/components/view/CollapsibleView";
 import EntityManager from "@/manager/EntityManager";
 
 const resource: string = 'profile';
-const profileImageSize: number = 100;
+const profileImageSize: number = 111;
 
 type Props = {
   profileId?: any;
 };
 
-const ProfileSection = ({ profileId }: Props) => {
+const ProfileView = ({ profileId }: Props) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const [sectorsData, setSectorsData] = useState<any>([]);
+  const [sectorsData, setSectorsData] = useState<any[]>([]);
+  const [profileItem, setProfileItem] = useState<any>({});
   const formData = useSelector((state: any) => state.form?.[resource]);
   const userState = useSelector((state: any) => state.user);
 
@@ -38,9 +39,9 @@ const ProfileSection = ({ profileId }: Props) => {
     return (
       <>
         <BoxView direction="row" align="center" justify="center" style={styles.profileHeaderLeft}>
-          {formData?.profile_picture?.url?.length > 0 && (
+          {profileItem?.profile_picture?.url?.length > 0 && (
             <ImageView
-              uri={MediaManager.getImageUrl(formData.profile_picture.url)}
+              uri={MediaManager.getImageUrl(profileItem.profile_picture.url)}
               resizeMode="cover"
               width={profileImageSize}
               height={profileImageSize}
@@ -48,7 +49,7 @@ const ProfileSection = ({ profileId }: Props) => {
             />
           )}
 
-          {!formData?.profile_picture?.url?.length && (
+          {!profileItem?.profile_picture?.url?.length && (
             <IconView
               name="user"
               theme="secondary"
@@ -61,7 +62,7 @@ const ProfileSection = ({ profileId }: Props) => {
         <View style={styles.profileHeaderRight}>
           <ProfileViewField>
             <TextView>
-              {formData?.profile_name}
+              {profileItem?.profile_name}
             </TextView>
           </ProfileViewField>
 
@@ -75,7 +76,7 @@ const ProfileSection = ({ profileId }: Props) => {
 
           <ProfileViewField>
             <TextView>
-              {formData?.email || i18n.t('Email unavailable')}
+              {profileItem?.email || i18n.t('Email unavailable')}
             </TextView>
           </ProfileViewField>
         </View>
@@ -84,61 +85,81 @@ const ProfileSection = ({ profileId }: Props) => {
   };
 
   const renderSectors = () => {
+    if (!profileItem?.sectors?.length) {
+      return <TextView>{i18n.t('Unavailable')}</TextView>
+    }
+
+    let profileSectors: any[] = sectorsData.filter((o: any) => profileItem.sectors.includes(o.id));
+    
     return (
       <TextView>
-        {[20, 13, 6, 36, 31].map((id: any, i: number) => (
-          <TextView key={id}>
-            {(sectorsData.find((o: any) => o.id == id))?.name}
-            {i < 4 && (<TextView>, </TextView>)}
-          </TextView>
-        ))}
+        {profileSectors.map((sector: any, i: number) => {
+          return (
+            <TextView key={sector.id}>
+              {sector.name}
+              {(i < profileSectors.length - 1) && (<TextView>, </TextView>)}
+            </TextView>
+          );
+        })}
       </TextView>
     );
   };
 
   const renderSubSectors = () => {
+    if (!profileItem?.sectors?.length) {
+      return <TextView>{i18n.t('Unavailable')}</TextView>
+    }
+
+    let profileSectors: any[] = sectorsData.filter((o: any) => profileItem.sectors.includes(o.id));
+    
     return (
       <TextView>
-        {[20, 13, 6, 36, 31].map((id: any, i: number) => (
-          <TextView key={id}>
-            {(sectorsData.find((o: any) => o.id == id))?.name}
-            {i < 4 && (<TextView>, </TextView>)}
-          </TextView>
-        ))}
+        {profileSectors.map((sector: any, i: number) => {
+          let profileSubSectors: any[] = sector.sub_sectors.filter((o: any) => profileItem.sectors.includes(o.id));
+
+          return profileSubSectors.map((subSector: any, i: number) => {
+            return (
+              <TextView key={subSector.id}>
+                {subSector.name}
+                {(i < profileSubSectors.length - 1) && (<TextView>, </TextView>)}
+              </TextView>
+            );
+          })
+        })}
       </TextView>
     );
   };
 
   const renderCollapsibleFields = () => {
-    if (formData?.profile_organization) {
+    if (profileItem?.profile_organization) {
       return (
         <BoxView direction="column">
           <ProfileViewField label={i18n.t('Organization name')}>
             <TextView>
-              {formData?.profile_organization?.organization_name}
+              {profileItem?.profile_organization?.organization_name}
             </TextView>
           </ProfileViewField>
 
           <ProfileViewField label={i18n.t('Creation year')}>
             <TextView>
-              {formData?.profile_organization?.creation_year || i18n.t('Unavailable')}
+              {profileItem?.profile_organization?.creation_year || i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
 
           <ProfileViewField label={i18n.t('Address')}>
             <TextView>
-              {formData?.address || i18n.t('Unavailable')}
+              {profileItem?.address || i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
         </BoxView>
       );
     }
-    else if (formData?.profile_venue) {
+    else if (profileItem?.profile_venue) {
       return (
         <BoxView direction="column">
           <ProfileViewField label={i18n.t('Venue name')}>
             <TextView>
-              {formData?.profile_venue?.venue_name}
+              {profileItem?.profile_venue?.venue_name}
             </TextView>
           </ProfileViewField>
 
@@ -150,36 +171,36 @@ const ProfileSection = ({ profileId }: Props) => {
 
           <ProfileViewField label={i18n.t('Creation year')}>
             <TextView>
-              {formData?.profile_venue?.creation_year || i18n.t('Unavailable')}
+              {profileItem?.profile_venue?.creation_year || i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
 
           <ProfileViewField label={i18n.t('Address')}>
             <TextView>
-              {formData?.address || i18n.t('Unavailable')}
+              {profileItem?.address || i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
         </BoxView>
       );
     }
-    else if (formData?.profile_personal) {
+    else if (profileItem?.profile_personal) {
       return (
         <BoxView direction="column">
           <ProfileViewField label={i18n.t('First name')}>
             <TextView>
-              {formData?.profile_personal?.first_name || i18n.t('Unavailable')}
+              {profileItem?.profile_personal?.first_name || i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
 
           <ProfileViewField label={i18n.t('Last name')}>
             <TextView>
-              {formData?.profile_personal?.last_name || i18n.t('Unavailable')}
+              {profileItem?.profile_personal?.last_name || i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
 
           <ProfileViewField label={i18n.t('Address')}>
             <TextView>
-              {formData?.address || i18n.t('Unavailable')}
+              {profileItem?.address || i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
         </BoxView>
@@ -189,15 +210,11 @@ const ProfileSection = ({ profileId }: Props) => {
 
   useEffect(() => {
     (async () => {
-      if (!Object.keys(formData)?.length) {
-        dispatch(setFormData<any>({
-          resource: resource,
-          key: null,
-          value: await UserManager.getProfileData({ profile_id: profileId }),
-        }));
+      if (!Object.keys(profileItem)?.length) {
+        setProfileItem(await UserManager.getProfileData({ profile_id: profileId || null }));
       }
     })();
-  }, [userState, formData, resource, profileId]);
+  }, [userState, formData, resource, profileId, profileItem]);
 
   useEffect(() => {
     (async () => {
@@ -219,7 +236,7 @@ const ProfileSection = ({ profileId }: Props) => {
     >
       <ProfileViewField>
         <TextView style={styles.profileTitle}>
-          {UserManager.getProfileDisplayName(formData)}
+          {UserManager.getProfileDisplayName(profileItem)}
         </TextView>
       </ProfileViewField>
 
@@ -237,7 +254,7 @@ const ProfileSection = ({ profileId }: Props) => {
 
       <ProfileViewField label={i18n.t('Description')}>
         <TextView>
-          {formData?.profile_description || i18n.t('Unavailable')}
+          {profileItem?.profile_description || i18n.t('Unavailable')}
         </TextView>
       </ProfileViewField>
 
@@ -251,7 +268,7 @@ const ProfileSection = ({ profileId }: Props) => {
         label={(
           <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeaderClosed}>
             <TextView style={styles.collapsibleLabelClosed}>
-              {i18n.t('View more')} ({UserManager.getProfileTypeLabel(formData?.profile_type)})
+              {i18n.t('View more')} ({UserManager.getProfileTypeLabel(profileItem?.profile_type)})
             </TextView>
             <IconView name="collapsed" theme="transparent" padding={0} />
           </BoxView>
@@ -259,7 +276,7 @@ const ProfileSection = ({ profileId }: Props) => {
         openedLabel={
           <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeaderOpened}>
             <TextView style={styles.collapsibleLabelOpened}>
-              {i18n.t('View more')} ({UserManager.getProfileTypeLabel(formData?.profile_type)})
+              {i18n.t('View more')} ({UserManager.getProfileTypeLabel(profileItem?.profile_type)})
             </TextView>
             <IconView name="expanded" theme="white" padding={0} />
           </BoxView>
@@ -268,22 +285,22 @@ const ProfileSection = ({ profileId }: Props) => {
       />
 
       <TextView style={styles.groupTitle}>
-        {`${UserManager.getProfileDisplayName(formData)}'s`} {i18n.t('Projects')}
+        {`${UserManager.getProfileDisplayName(profileItem)}' s`} {i18n.t('Projects')}
       </TextView>
       <ProfileProjectsList
         addButton={true}
-        allButton={formData?.profile_projects?.length > 0}
-        idArray={formData?.profile_projects || []}
-        onAddButtonPress={() => SectionManager.push(router, 'add-project', { profileId: profileId, profileJams: formData?.profile_jams || [] })}
+        allButton={profileItem?.profile_projects?.length > 0}
+        idArray={profileItem?.profile_projects || []}
+        onAddButtonPress={() => SectionManager.push(router, 'add-project', { profileId: profileId, profileJams: profileItem?.profile_jams || [] })}
       />
 
       <TextView style={styles.groupTitle}>
-        {`${UserManager.getProfileDisplayName(formData)}'s`} {i18n.t('Jams')}
+        {`${UserManager.getProfileDisplayName(profileItem)}' s`} {i18n.t('Jams')}
       </TextView>
       <ProfileJamsList
-        allButton={formData?.profile_jams?.length > 0}
+        allButton={profileItem?.profile_jams?.length > 0}
         addButton={true}
-        idArray={formData?.profile_jams || []}
+        idArray={profileItem?.profile_jams || []}
         onAddButtonPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
       />
 
@@ -291,8 +308,8 @@ const ProfileSection = ({ profileId }: Props) => {
         {i18n.t('Saved Jams')}
       </TextView>
       <ProfileJamsList
-        allButton={formData?.saved_jams?.length > 0}
-        idArray={formData?.saved_jams || []}
+        allButton={profileItem?.saved_jams?.length > 0}
+        idArray={profileItem?.saved_jams || []}
         emptyMessage={i18n.t('No data available.')}
       />
     </BoxView>
@@ -315,7 +332,7 @@ const styles = StyleSheet.create({
   },
   profileHeaderLeft: {
     width: profileImageSize,
-    height: '100%',
+    height: profileImageSize,
     borderColor: Layout.colors.secondary,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
@@ -330,7 +347,7 @@ const styles = StyleSheet.create({
   profileImage: {
     width: profileImageSize,
     height: profileImageSize,
-    borderRadius: profileImageSize,
+    borderRadius: Layout.radius.round,
   },
   profileTitle: {
     fontWeight: 'bold',
@@ -358,4 +375,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileSection;
+export default ProfileView;
