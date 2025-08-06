@@ -20,6 +20,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   const [profileData, setProfileData] = useState<any>(null);
   const appState = useSelector((state: any) => state.app);
   const searchState: any = useSelector((state: any) => state.search);
+  const userState = useSelector((state: any) => state.user);
 
   const getProfileData = async () => {
     return await UserManager.getProfileData();
@@ -75,11 +76,11 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
     (async () => {
       if (!isLoaded) {
         setSectorsData(appState.sectorsData);
-        setProfileData(await getProfileData());
+        setProfileData(userState.profileData);
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, appState]);
+  }, [isLoaded, appState, userState]);
 
   if (!isLoaded) return <SpinnerView />;
 
