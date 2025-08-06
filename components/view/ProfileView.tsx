@@ -10,7 +10,6 @@ import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import ProfileJamsList from "@/components/list/ProfileJamsList";
 import ModalManager from "@/manager/ModalManager";
-import SpinnerView from "@/components/view/SpinnerView";
 import SectionManager from "@/manager/SectionManager";
 import ProfileViewField from "../section/profile/ProfileViewField";
 import TextView from "@/components/view/TextView";
@@ -219,8 +218,6 @@ const ProfileView = ({ profileId, profileData }: Props) => {
       }
     })();
   }, [sectorsData]);
-
-  //if (!Object.keys(formData)?.length) return <SpinnerView />;
 
   return (
     <BoxView
