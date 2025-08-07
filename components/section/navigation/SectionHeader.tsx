@@ -33,7 +33,7 @@ const SectionHeader = ({ style }: Props) => {
 
   useEffect(() => {
     (async () => {
-      setIsLoggedIn(await UserManager.isLoggedIn());
+      setIsLoggedIn(UserManager.isLoggedIn());
       setNotificationsCount((await UserManager.getNotifications())?.length);
       setIsLoaded(true);
     })();

@@ -227,9 +227,7 @@ const ListItemToolbar = ({ row, profileData, onListItemAction }: Props) => {
   };
 
   useEffect(() => {
-    (async () => {
-      setIsLoggedIn(await UserManager.isLoggedIn());
-    })();
+    setIsLoggedIn(UserManager.isLoggedIn());
   });
 
   return renderComponent();

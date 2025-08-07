@@ -375,21 +375,21 @@ const styles = StyleSheet.create({
   },
   profileTitle: {
     fontWeight: 'bold',
-    fontSize: 15,
+    fontSize: 13.5,
   },
   collapsibleHeaderClosed: {
     backgroundColor: Layout.colors.secondary,
     borderColor: Layout.colors.secondary,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
-    padding: Layout.space.base,
+    padding: Layout.space.base/1.5,
   },
   collapsibleHeaderOpened: {
     backgroundColor: Layout.colors.primary,
     borderColor: Layout.colors.primary,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
-    padding: Layout.space.base,
+    padding: Layout.space.base/1.5,
   },
   collapsibleLabelClosed: {
     color: Layout.colors.primary,
