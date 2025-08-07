@@ -24,6 +24,7 @@ const PublicProfileSection = ({ profileId }: Props) => {
     <ProfileView 
       profileId={profileId} 
       profileData={profileData} 
+      isPublic={true}
     />
   );
 };

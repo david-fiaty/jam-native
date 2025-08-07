@@ -9,6 +9,7 @@ import TextView from "../view/TextView";
 import SectionManager from "@/manager/SectionManager";
 import BoxView from "../view/BoxView";
 import ScreenManager from "@/manager/ScreenManager";
+import UserManager from "@/manager/UserManager";
 
 type Props = {
   data?: any;
@@ -21,7 +22,10 @@ const SearchProfilesList = ({ data, filter }: Props) => {
   const [currentData, setCurrentData] = useState<any[]>([]);
 
   const onItemPress = (row: any) => {
-    SectionManager.push(router, 'public-profile', { profileId: row?.item?.id, title: row?.item?.title });
+    SectionManager.push(router, 'public-profile', { 
+      profileId: row?.item?.id, 
+      title: i18n.t("{{ name }}'s profile", {name: UserManager.getProfileDisplayName(row?.item) }),
+    });
   };
 
   const renderEmptyMessage = () => {
