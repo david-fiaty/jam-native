@@ -10,6 +10,7 @@ import EntityManager from '@/manager/EntityManager';
 import ProfileListItem from './list-item/ProfileListItem';
 import SectionManager from '@/manager/SectionManager';
 import BoxView from '../view/BoxView';
+import UserManager from '@/manager/UserManager';
 
 type Props = {
   jamId?: any;
@@ -22,7 +23,10 @@ const JammersList = ({ jamId, jammersIds }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const onItemPress = (row: any) => {
-    SectionManager.push(router, 'public-profile', { profileId: row?.item?.id, title: row?.item?.title });
+    SectionManager.push(router, 'public-profile', { 
+      profileId: row?.item?.id, 
+      title: i18n.t("{{ name }}'s profile", {name: UserManager.getProfileDisplayName(row?.item) }),
+    });
   };
 
   const renderItem = useCallback((row: any) => {
