@@ -324,11 +324,9 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
       <TextView style={styles.groupTitle}>
         {i18n.t("{{ name }}'s jams", { name: UserManager.getProfileDisplayName(profileItem) })}
       </TextView>
-      <ProfileJamsList
-        allButton={profileItem?.profile_jams?.length > 0}
-        addButton={!isPublic}
+      <ProfileJamsField
         idArray={profileItem?.profile_jams || []}
-        onAddButtonPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
+        emptyMessage={i18n.t('No data available.')}
       />
 
       {!isPublic && (
