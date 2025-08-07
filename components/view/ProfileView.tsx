@@ -24,9 +24,10 @@ const profileImageSize: number = 111;
 type Props = {
   profileId?: any;
   profileData?: any;
+  isOwner?: boolean;
 };
 
-const ProfileView = ({ profileId, profileData }: Props) => {
+const ProfileView = ({ profileId, profileData, isOwner }: Props) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [sectorsData, setSectorsData] = useState<any[]>([]);
@@ -292,7 +293,7 @@ const ProfileView = ({ profileId, profileData }: Props) => {
         label={(
           <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeaderClosed}>
             <TextView style={styles.collapsibleLabelClosed}>
-              {i18n.t('View more')} ({UserManager.getProfileTypeLabel(profileItem?.profile_type)})
+              {i18n.t('View more')} ({isOwner ? UserManager.getProfileDisplayName(profileItem) : UserManager.getProfileTypeLabel(profileItem?.profile_type)})
             </TextView>
             <IconView name="collapsed" theme="transparent" padding={0} />
           </BoxView>
@@ -300,7 +301,7 @@ const ProfileView = ({ profileId, profileData }: Props) => {
         openedLabel={
           <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeaderOpened}>
             <TextView style={styles.collapsibleLabelOpened}>
-              {i18n.t('View more')} ({UserManager.getProfileTypeLabel(profileItem?.profile_type)})
+              {i18n.t('View more')} ({isOwner ? UserManager.getProfileDisplayName(profileItem) : UserManager.getProfileTypeLabel(profileItem?.profile_type)})
             </TextView>
             <IconView name="expanded" theme="white" padding={0} />
           </BoxView>
