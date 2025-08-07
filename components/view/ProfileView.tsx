@@ -309,7 +309,7 @@ const ProfileView = ({ profileId, profileData }: Props) => {
       />
 
       <TextView style={styles.groupTitle}>
-        {`${UserManager.getProfileDisplayName(profileItem)}' s`} {i18n.t('Projects')}
+        {i18n.t("{{ name }}'s projects", {name: UserManager.getProfileDisplayName(profileItem) })}
       </TextView>
       <ProfileProjectsList
         addButton={true}
@@ -319,7 +319,7 @@ const ProfileView = ({ profileId, profileData }: Props) => {
       />
 
       <TextView style={styles.groupTitle}>
-        {`${UserManager.getProfileDisplayName(profileItem)}' s`} {i18n.t('Jams')}
+        {i18n.t("{{ name }}'s jams", {name: UserManager.getProfileDisplayName(profileItem) })}
       </TextView>
       <ProfileJamsList
         allButton={profileItem?.profile_jams?.length > 0}
@@ -329,7 +329,7 @@ const ProfileView = ({ profileId, profileData }: Props) => {
       />
 
       <TextView style={styles.groupTitle}>
-        {i18n.t('Saved Jams')}
+        {i18n.t('Saved jams')}
       </TextView>
       <ProfileJamsList
         allButton={profileItem?.saved_jams?.length > 0}

@@ -80,7 +80,7 @@ const IconView = ({
 
   let output = label ? textIcon : imageIcon;
 
-  if (onPress) {
+  if (onPress && !disabled) {
     output = (
       <TouchableOpacity onPress={onPress}>
         {output}
