@@ -72,6 +72,8 @@ const ProfileView = ({ profileId, profileData }: Props) => {
                 theme="transparent" 
                 size={19} 
                 padding={0} 
+                color="yellow"
+                backgroundColor="red"
                 onPress={() => console.log('icon pressed')} 
               />
 
