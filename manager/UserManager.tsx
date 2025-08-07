@@ -85,7 +85,7 @@ class UserManager {
     };
   }
 
-  async isLoggedIn() {
+  isLoggedIn() {
     return Object.keys(SessionManager.getTokenData()).length > 0;
   }
 
