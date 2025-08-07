@@ -14,6 +14,7 @@ type Props = {
   containerStyle?: object;
   color?: any;
   backgroundColor?: any;
+  disabled?: boolean;
   onPress?: () => void;
 };
 
@@ -28,6 +29,7 @@ const IconView = ({
   containerStyle,
   color,
   backgroundColor,
+  disabled,
   onPress
 }: Props) => {
   const defaultPadding: number = 2;
@@ -50,6 +52,10 @@ const IconView = ({
 
     if (color) {
       iconStyle.color = color; 
+    }
+
+    if (disabled) {
+      iconStyle.opacity = 0.5;
     }
 
     return iconStyle;
