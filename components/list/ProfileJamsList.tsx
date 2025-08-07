@@ -92,7 +92,7 @@ const ProfileJamsList = ({ resource, field, title, idArray, addButton, allButton
     })();
   }, [idArray, profileJams, addButton]);
 
-  if (!profileJams) return <SpinnerView />; 
+  if (!profileJams) return <SpinnerView size="small" />; 
 
   return (
     <View style={styles.container}>
