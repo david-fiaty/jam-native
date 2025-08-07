@@ -338,10 +338,23 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
           </TextView>
           <ProfileJamsField
             idArray={profileItem?.saved_jams || []}
-            emptyMessage={i18n.t('No data available.')}
+            //emptyMessage={i18n.t('No data available.')}
           />
         </>
       )}
+
+      {/* !isPublic && (
+        <>
+          <TextView style={styles.groupTitle}>
+            {i18n.t('Saved jams')}
+          </TextView>
+          <ProfileJamsList
+            allButton={profileItem?.saved_jams?.length > 0}
+            idArray={profileItem?.saved_jams || []}
+            emptyMessage={i18n.t('No data available.')}
+          />
+        </>
+      ) */}
     </BoxView>
   );
 };

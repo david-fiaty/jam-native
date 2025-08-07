@@ -16,10 +16,12 @@ import ScreenManager from "@/manager/ScreenManager";
 type Props = {
   idArray?: any;
   isPublic?: boolean;
+  emptyMessage?: any;
 };
 
-const ProfileJamsField = ({ idArray, isPublic }: Props) => {
-  const numColumns = 3;
+const numColumns = 3;
+
+const ProfileJamsField = ({ idArray, isPublic, emptyMessage }: Props) => {
   const router = useRouter();
   const [profileJams, setProfileJams] = useState<any[]>([]);
 
@@ -85,7 +87,7 @@ const ProfileJamsField = ({ idArray, isPublic }: Props) => {
         contentContainerStyle={{ gap: Layout.space.base }}
         columnWrapperStyle={{ gap: Layout.space.base }}
         scrollEnabled={false}
-        emptyMessage={<TextView>{i18n.t('No data available.')}</TextView>}
+        emptyMessage={<TextView>{emptyMessage}</TextView>}
         renderItem={(row: any) => renderItem(row)}
       />
     </View>
