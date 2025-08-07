@@ -72,14 +72,15 @@ const ProfileView = ({ profileId, profileData }: Props) => {
                 theme="transparent" 
                 size={19} 
                 padding={0} 
-                color="yellow"
-                backgroundColor="red"
+                color="black"
+                disabled={true}
                 onPress={() => console.log('icon pressed')} 
               />
 
               <IconView 
                 name="facebook" 
                 theme="transparent" 
+                color="black"
                 size={19} 
                 padding={0} 
                 onPress={() => console.log('icon pressed')} 
@@ -88,6 +89,7 @@ const ProfileView = ({ profileId, profileData }: Props) => {
               <IconView 
                 name="linkedin" 
                 theme="transparent" 
+                color="black"
                 size={19} 
                 padding={0} 
                 onPress={() => console.log('icon pressed')} 
