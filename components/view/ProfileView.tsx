@@ -11,7 +11,7 @@ import UserManager from "@/manager/UserManager";
 import ProfileJamsList from "@/components/list/ProfileJamsList";
 import ModalManager from "@/manager/ModalManager";
 import SectionManager from "@/manager/SectionManager";
-import ProfileViewField from "../section/profile/ProfileViewField";
+import ProfileViewField from "../field/ProfileViewField";
 import TextView from "@/components/view/TextView";
 import ImageView from "@/components/view/ImageView";
 import MediaManager from "@/manager/MediaManager";
