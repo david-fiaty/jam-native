@@ -5,56 +5,68 @@ import TextView from '../view/TextView';
 
 type Props = {
   name?: string;
-  size?: number; 
+  size?: number;
   padding?: any;
   label?: string;
   theme?: string;
-  radius?: string; 
+  radius?: string;
   iconStyle?: object;
   containerStyle?: object;
   color?: any;
-  backgroundColor: any;
+  backgroundColor?: any;
   onPress?: () => void;
 };
 
 const IconView = ({
-  name, 
-  size, 
-  padding, 
-  label, 
-  theme, 
-  radius = 'circle', 
-  iconStyle, 
-  containerStyle, 
-  color, 
-  backgroundColor, 
+  name,
+  size,
+  padding,
+  label,
+  theme,
+  radius = 'circle',
+  iconStyle,
+  containerStyle,
+  color,
+  backgroundColor,
   onPress
 }: Props) => {
   const defaultPadding: number = 2;
   const iconSize: number = size || 14;
   theme = theme || 'secondary';
 
-  const themeIconStyle = [
-    styles.iconStyle, 
-    styles[theme], 
-    { 
-      borderRadius: Layout.radius[radius],
-      padding: padding >= 0 ? padding : defaultPadding,
-    },
-  ];
+  const getIconStyle = () => {
+    let iconStyle: any = {
+      ...styles.iconStyle,
+      ...styles[theme],
+      ...{
+        borderRadius: Layout.radius[radius],
+        padding: padding >= 0 ? padding : defaultPadding,
+      },
+    };
+
+    if (backgroundColor) {
+      iconStyle.backgroundColor = backgroundColor; 
+    }
+
+    if (color) {
+      iconStyle.color = color; 
+    }
+
+    return iconStyle;
+  };
 
   const imageIcon = (
-    <IconBase 
+    <IconBase
       name={name}
-      iconStyle={[themeIconStyle, iconStyle]} 
+      iconStyle={[getIconStyle(), iconStyle]}
       containerStyle={[styles.containerStyle, containerStyle]}
-      size={iconSize} 
+      size={iconSize}
     />
-  ); 
+  );
 
   const textIcon = (
     <View style={styles.containerStyle}>
-      <TextView style={[themeIconStyle, {fontSize: size}]}>
+      <TextView style={[getIconStyle(), { fontSize: size }]}>
         {label}
       </TextView>
     </View>
