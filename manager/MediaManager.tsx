@@ -1,8 +1,10 @@
+import { Linking } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import { Config } from '@/constants/Config';
 import * as FileSystem from 'expo-file-system';
 import ScreenManager from "@/manager/ScreenManager";
 import DataManager from './DataManager';
+import i18n from '@/translation/i18n';
 
 class MediaManager {
   async getBase64Data(uri: string) {
@@ -21,7 +23,7 @@ class MediaManager {
     return Uint8Array.from(atob(base64data), (char) => char.charCodeAt(0));
   }
 
-  getThumbnailSize () {
+  getThumbnailSize() {
     let windowWidth: any = ScreenManager.window.width;
     let imageDim: number = windowWidth / 3 - Layout.space.base * 1.7;
 
@@ -31,17 +33,17 @@ class MediaManager {
     };
   }
 
-  getImageUrl (path: any) {
+  getImageUrl(path: any) {
     return Config.imageUrl + path;
   }
 
-  prepareUpload = (data: any) => {
+  prepareUpload(data: any) {
     return data.map((item: any) => {
       return DataManager.extract(['base64'], item);
     }); 
   };
 
-  fetchImageAsBase64 = (url: string) => {
+  fetchImageAsBase64(url: string) {
     return new Promise(async (resolve, reject) => {
       try {
         const response = await fetch(url);
@@ -58,7 +60,7 @@ class MediaManager {
     });
   };
   
-  getImageBase64 = async (url: string) => {
+  async getImageBase64(url: string) {
     try {
       return await this.fetchImageAsBase64(url);
     } catch (error) {
@@ -67,6 +69,15 @@ class MediaManager {
     }
   };
   
+  async openUrl(url: string) {
+    let supported = await Linking.canOpenURL(url);
+
+    if (supported) {
+      await Linking.openURL(url);
+    } else {
+      // Todo - Handle invalid link error
+    }
+  }
 }
 
 export default new MediaManager();
