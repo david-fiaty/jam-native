@@ -32,8 +32,7 @@ const ProfileJamsList = ({ resource, field, title, idArray, addButton, allButton
   const numColumns = 3;
   const router = useRouter();
   const dispatch = useDispatch();
-  const [profileJams, setProfileJams] = useState<any>([]);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [profileJams, setProfileJams] = useState<any[]>([]);
   const [selectedIds, setSelectedIds] = useState<any>([]);
 
   const onItemPress = (row: any) => {
@@ -81,24 +80,19 @@ const ProfileJamsList = ({ resource, field, title, idArray, addButton, allButton
 
   useEffect(() => {
     (async () => {
-      if (!isLoaded) {
-        let jams: any = [];
-
-        if (idArray && idArray.length) {
-          jams = await EntityManager.getJams(idArray);
-        }
+      if (!profileJams?.length && Array.isArray(idArray) && idArray?.length > 0) {
+        let jams: any = await EntityManager.getJams(idArray);
 
         if (addButton === true) {
           jams.push({ id: "addItem" });
         }
 
         setProfileJams(jams);
-        setIsLoaded(true);
       }
     })();
-  }, [isLoaded, idArray, addButton]);
+  }, [idArray, profileJams, addButton]);
 
-  if (!isLoaded) return <SpinnerView />; 
+  if (!profileJams) return <SpinnerView />; 
 
   return (
     <View style={styles.container}>
