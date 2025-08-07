@@ -19,6 +19,7 @@ const PrivateProfileSection = () => {
     <ProfileView 
       profileId={profileData?.id} 
       profileData={profileData} 
+      isOwner={UserManager.isLoggedIn()}
     />
   );
 };

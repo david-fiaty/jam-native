@@ -24,9 +24,11 @@ const profileImageSize: number = 111;
 type Props = {
   profileId?: any;
   profileData?: any;
+  isOwner?: boolean;
+  isPublic?: boolean;
 };
 
-const ProfileView = ({ profileId, profileData }: Props) => {
+const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [sectorsData, setSectorsData] = useState<any[]>([]);
@@ -67,9 +69,47 @@ const ProfileView = ({ profileId, profileData }: Props) => {
 
           <ProfileViewField>
             <BoxView direction="row" align="center" justify="flex-start">
-              <IconView name="instagram" theme="transparent" size={19} padding={0} onPress={() => console.log('icon pressed')} />
-              <IconView name="facebook" theme="transparent" size={19} padding={0} onPress={() => console.log('icon pressed')} />
-              <IconView name="linkedin" theme="transparent" size={19} padding={0} onPress={() => console.log('icon pressed')} />
+              <IconView
+                name="instagram"
+                theme="transparent"
+                size={19}
+                padding={0}
+                color="black"
+                disabled={!profileItem?.instagram_username?.length}
+                onPress={() => {
+                  if (!!profileItem?.instagram_username?.length) {
+                    MediaManager.openUrl(profileItem.instagram_username);
+                  }
+                }}
+              />
+
+              <IconView
+                name="facebook"
+                theme="transparent"
+                color="black"
+                size={19}
+                padding={0}
+                disabled={!profileItem?.facebook_link?.length}
+                onPress={() => {
+                  if (!!profileItem?.facebook_link?.length) {
+                    MediaManager.openUrl(profileItem.facebook_link);
+                  }
+                }}
+              />
+
+              <IconView
+                name="linkedin"
+                theme="transparent"
+                color="black"
+                size={19}
+                padding={0}
+                disabled={!profileItem?.linkedin_link?.length}
+                onPress={() => {
+                  if (!!profileItem?.linkedin_link?.length) {
+                    MediaManager.openUrl(profileItem.linkedin_link)
+                  }
+                }}
+              />
             </BoxView>
           </ProfileViewField>
 
@@ -89,7 +129,7 @@ const ProfileView = ({ profileId, profileData }: Props) => {
     }
 
     let profileSectors: any[] = sectorsData.filter((o: any) => profileItem.sectors.includes(o.id));
-    
+
     return (
       <TextView>
         {profileSectors.map((sector: any, i: number) => {
@@ -110,7 +150,7 @@ const ProfileView = ({ profileId, profileData }: Props) => {
     }
 
     let profileSectors: any[] = sectorsData.filter((o: any) => profileItem.sectors.includes(o.id));
-    
+
     return (
       <TextView>
         {profileSectors.map((sector: any, i: number) => {
@@ -254,7 +294,7 @@ const ProfileView = ({ profileId, profileData }: Props) => {
         label={(
           <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeaderClosed}>
             <TextView style={styles.collapsibleLabelClosed}>
-              {i18n.t('View more')} ({UserManager.getProfileTypeLabel(profileItem?.profile_type)})
+              {i18n.t('View more')} ({isOwner ? UserManager.getProfileDisplayName(profileItem) : UserManager.getProfileTypeLabel(profileItem?.profile_type)})
             </TextView>
             <IconView name="collapsed" theme="transparent" padding={0} />
           </BoxView>
@@ -262,7 +302,7 @@ const ProfileView = ({ profileId, profileData }: Props) => {
         openedLabel={
           <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeaderOpened}>
             <TextView style={styles.collapsibleLabelOpened}>
-              {i18n.t('View more')} ({UserManager.getProfileTypeLabel(profileItem?.profile_type)})
+              {i18n.t('View more')} ({isOwner ? UserManager.getProfileDisplayName(profileItem) : UserManager.getProfileTypeLabel(profileItem?.profile_type)})
             </TextView>
             <IconView name="expanded" theme="white" padding={0} />
           </BoxView>
@@ -271,33 +311,37 @@ const ProfileView = ({ profileId, profileData }: Props) => {
       />
 
       <TextView style={styles.groupTitle}>
-        {`${UserManager.getProfileDisplayName(profileItem)}' s`} {i18n.t('Projects')}
+        {i18n.t("{{ name }}'s projects", { name: UserManager.getProfileDisplayName(profileItem) })}
       </TextView>
       <ProfileProjectsList
-        addButton={true}
+        addButton={!isPublic}
         allButton={profileItem?.profile_projects?.length > 0}
         idArray={profileItem?.profile_projects || []}
         onAddButtonPress={() => SectionManager.push(router, 'add-project', { profileId: profileId, profileJams: profileItem?.profile_jams || [] })}
       />
 
       <TextView style={styles.groupTitle}>
-        {`${UserManager.getProfileDisplayName(profileItem)}' s`} {i18n.t('Jams')}
+        {i18n.t("{{ name }}'s jams", { name: UserManager.getProfileDisplayName(profileItem) })}
       </TextView>
       <ProfileJamsList
         allButton={profileItem?.profile_jams?.length > 0}
-        addButton={true}
+        addButton={!isPublic}
         idArray={profileItem?.profile_jams || []}
         onAddButtonPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
       />
 
-      <TextView style={styles.groupTitle}>
-        {i18n.t('Saved Jams')}
-      </TextView>
-      <ProfileJamsList
-        allButton={profileItem?.saved_jams?.length > 0}
-        idArray={profileItem?.saved_jams || []}
-        emptyMessage={i18n.t('No data available.')}
-      />
+      {!isPublic && (
+        <>
+          <TextView style={styles.groupTitle}>
+            {i18n.t('Saved jams')}
+          </TextView>
+          <ProfileJamsList
+            allButton={profileItem?.saved_jams?.length > 0}
+            idArray={profileItem?.saved_jams || []}
+            emptyMessage={i18n.t('No data available.')}
+          />
+        </>
+      )}
     </BoxView>
   );
 };
@@ -337,21 +381,21 @@ const styles = StyleSheet.create({
   },
   profileTitle: {
     fontWeight: 'bold',
-    fontSize: 15,
+    fontSize: 13.5,
   },
   collapsibleHeaderClosed: {
     backgroundColor: Layout.colors.secondary,
     borderColor: Layout.colors.secondary,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
-    padding: Layout.space.base,
+    padding: Layout.space.base / 1.5,
   },
   collapsibleHeaderOpened: {
     backgroundColor: Layout.colors.primary,
     borderColor: Layout.colors.primary,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
-    padding: Layout.space.base,
+    padding: Layout.space.base / 1.5,
   },
   collapsibleLabelClosed: {
     color: Layout.colors.primary,
