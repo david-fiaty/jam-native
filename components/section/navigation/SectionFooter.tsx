@@ -27,9 +27,7 @@ const SectionFooter = ({ style }: Props) => {
   };
 
   useEffect(() => {
-    (async () => {
-      setIsLoggedIn(await UserManager.isLoggedIn());
-    })();
+    setIsLoggedIn(UserManager.isLoggedIn());
   }, []);
 
   return (

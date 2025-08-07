@@ -24,9 +24,11 @@ const profileImageSize: number = 111;
 type Props = {
   profileId?: any;
   profileData?: any;
+  isOwner?: boolean;
+  isPublic?: boolean;
 };
 
-const ProfileView = ({ profileId, profileData }: Props) => {
+const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [sectorsData, setSectorsData] = useState<any[]>([]);
@@ -106,7 +108,7 @@ const ProfileView = ({ profileId, profileData }: Props) => {
                   if (!!profileItem?.linkedin_link?.length) {
                     MediaManager.openUrl(profileItem.linkedin_link)
                   }
-                }} 
+                }}
               />
             </BoxView>
           </ProfileViewField>
@@ -292,7 +294,7 @@ const ProfileView = ({ profileId, profileData }: Props) => {
         label={(
           <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeaderClosed}>
             <TextView style={styles.collapsibleLabelClosed}>
-              {i18n.t('View more')} ({UserManager.getProfileTypeLabel(profileItem?.profile_type)})
+              {i18n.t('View more')} ({isOwner ? UserManager.getProfileDisplayName(profileItem) : UserManager.getProfileTypeLabel(profileItem?.profile_type)})
             </TextView>
             <IconView name="collapsed" theme="transparent" padding={0} />
           </BoxView>
@@ -300,7 +302,7 @@ const ProfileView = ({ profileId, profileData }: Props) => {
         openedLabel={
           <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeaderOpened}>
             <TextView style={styles.collapsibleLabelOpened}>
-              {i18n.t('View more')} ({UserManager.getProfileTypeLabel(profileItem?.profile_type)})
+              {i18n.t('View more')} ({isOwner ? UserManager.getProfileDisplayName(profileItem) : UserManager.getProfileTypeLabel(profileItem?.profile_type)})
             </TextView>
             <IconView name="expanded" theme="white" padding={0} />
           </BoxView>
@@ -309,7 +311,7 @@ const ProfileView = ({ profileId, profileData }: Props) => {
       />
 
       <TextView style={styles.groupTitle}>
-        {i18n.t("{{ name }}'s projects", {name: UserManager.getProfileDisplayName(profileItem) })}
+        {i18n.t("{{ name }}'s projects", { name: UserManager.getProfileDisplayName(profileItem) })}
       </TextView>
       <ProfileProjectsList
         addButton={true}
@@ -319,7 +321,7 @@ const ProfileView = ({ profileId, profileData }: Props) => {
       />
 
       <TextView style={styles.groupTitle}>
-        {i18n.t("{{ name }}'s jams", {name: UserManager.getProfileDisplayName(profileItem) })}
+        {i18n.t("{{ name }}'s jams", { name: UserManager.getProfileDisplayName(profileItem) })}
       </TextView>
       <ProfileJamsList
         allButton={profileItem?.profile_jams?.length > 0}
@@ -328,14 +330,18 @@ const ProfileView = ({ profileId, profileData }: Props) => {
         onAddButtonPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
       />
 
-      <TextView style={styles.groupTitle}>
-        {i18n.t('Saved jams')}
-      </TextView>
-      <ProfileJamsList
-        allButton={profileItem?.saved_jams?.length > 0}
-        idArray={profileItem?.saved_jams || []}
-        emptyMessage={i18n.t('No data available.')}
-      />
+      {!isPublic && (
+        <>
+          <TextView style={styles.groupTitle}>
+            {i18n.t('Saved jams')}
+          </TextView>
+          <ProfileJamsList
+            allButton={profileItem?.saved_jams?.length > 0}
+            idArray={profileItem?.saved_jams || []}
+            emptyMessage={i18n.t('No data available.')}
+          />
+        </>
+      )}
     </BoxView>
   );
 };
@@ -375,21 +381,21 @@ const styles = StyleSheet.create({
   },
   profileTitle: {
     fontWeight: 'bold',
-    fontSize: 15,
+    fontSize: 13.5,
   },
   collapsibleHeaderClosed: {
     backgroundColor: Layout.colors.secondary,
     borderColor: Layout.colors.secondary,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
-    padding: Layout.space.base,
+    padding: Layout.space.base / 1.5,
   },
   collapsibleHeaderOpened: {
     backgroundColor: Layout.colors.primary,
     borderColor: Layout.colors.primary,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
-    padding: Layout.space.base,
+    padding: Layout.space.base / 1.5,
   },
   collapsibleLabelClosed: {
     color: Layout.colors.primary,
