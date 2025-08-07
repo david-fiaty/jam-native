@@ -25,9 +25,10 @@ type Props = {
   profileId?: any;
   profileData?: any;
   isOwner?: boolean;
+  isPublic?: boolean;
 };
 
-const ProfileView = ({ profileId, profileData, isOwner }: Props) => {
+const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [sectorsData, setSectorsData] = useState<any[]>([]);
@@ -107,7 +108,7 @@ const ProfileView = ({ profileId, profileData, isOwner }: Props) => {
                   if (!!profileItem?.linkedin_link?.length) {
                     MediaManager.openUrl(profileItem.linkedin_link)
                   }
-                }} 
+                }}
               />
             </BoxView>
           </ProfileViewField>
@@ -310,7 +311,7 @@ const ProfileView = ({ profileId, profileData, isOwner }: Props) => {
       />
 
       <TextView style={styles.groupTitle}>
-        {i18n.t("{{ name }}'s projects", {name: UserManager.getProfileDisplayName(profileItem) })}
+        {i18n.t("{{ name }}'s projects", { name: UserManager.getProfileDisplayName(profileItem) })}
       </TextView>
       <ProfileProjectsList
         addButton={true}
@@ -320,7 +321,7 @@ const ProfileView = ({ profileId, profileData, isOwner }: Props) => {
       />
 
       <TextView style={styles.groupTitle}>
-        {i18n.t("{{ name }}'s jams", {name: UserManager.getProfileDisplayName(profileItem) })}
+        {i18n.t("{{ name }}'s jams", { name: UserManager.getProfileDisplayName(profileItem) })}
       </TextView>
       <ProfileJamsList
         allButton={profileItem?.profile_jams?.length > 0}
@@ -329,14 +330,18 @@ const ProfileView = ({ profileId, profileData, isOwner }: Props) => {
         onAddButtonPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
       />
 
-      <TextView style={styles.groupTitle}>
-        {i18n.t('Saved jams')}
-      </TextView>
-      <ProfileJamsList
-        allButton={profileItem?.saved_jams?.length > 0}
-        idArray={profileItem?.saved_jams || []}
-        emptyMessage={i18n.t('No data available.')}
-      />
+      {!isPublic && (
+        <>
+          <TextView style={styles.groupTitle}>
+            {i18n.t('Saved jams')}
+          </TextView>
+          <ProfileJamsList
+            allButton={profileItem?.saved_jams?.length > 0}
+            idArray={profileItem?.saved_jams || []}
+            emptyMessage={i18n.t('No data available.')}
+          />
+        </>
+      )}
     </BoxView>
   );
 };
@@ -383,14 +388,14 @@ const styles = StyleSheet.create({
     borderColor: Layout.colors.secondary,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
-    padding: Layout.space.base/1.5,
+    padding: Layout.space.base / 1.5,
   },
   collapsibleHeaderOpened: {
     backgroundColor: Layout.colors.primary,
     borderColor: Layout.colors.primary,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
-    padding: Layout.space.base/1.5,
+    padding: Layout.space.base / 1.5,
   },
   collapsibleLabelClosed: {
     color: Layout.colors.primary,
