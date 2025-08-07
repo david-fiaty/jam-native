@@ -67,32 +67,46 @@ const ProfileView = ({ profileId, profileData }: Props) => {
 
           <ProfileViewField>
             <BoxView direction="row" align="center" justify="flex-start">
-              <IconView 
-                name="instagram" 
-                theme="transparent" 
-                size={19} 
-                padding={0} 
+              <IconView
+                name="instagram"
+                theme="transparent"
+                size={19}
+                padding={0}
                 color="black"
-                disabled={true}
-                onPress={() => console.log('icon pressed')} 
+                disabled={!profileItem?.instagram_username?.length}
+                onPress={() => {
+                  if (!!profileItem?.instagram_username?.length) {
+                    MediaManager.openUrl(profileItem.instagram_username);
+                  }
+                }}
               />
 
-              <IconView 
-                name="facebook" 
-                theme="transparent" 
+              <IconView
+                name="facebook"
+                theme="transparent"
                 color="black"
-                size={19} 
-                padding={0} 
-                onPress={() => console.log('icon pressed')} 
+                size={19}
+                padding={0}
+                disabled={!profileItem?.facebook_link?.length}
+                onPress={() => {
+                  if (!!profileItem?.facebook_link?.length) {
+                    MediaManager.openUrl(profileItem.facebook_link);
+                  }
+                }}
               />
 
-              <IconView 
-                name="linkedin" 
-                theme="transparent" 
+              <IconView
+                name="linkedin"
+                theme="transparent"
                 color="black"
-                size={19} 
-                padding={0} 
-                onPress={() => console.log('icon pressed')} 
+                size={19}
+                padding={0}
+                disabled={!profileItem?.linkedin_link?.length}
+                onPress={() => {
+                  if (!!profileItem?.linkedin_link?.length) {
+                    MediaManager.openUrl(profileItem.linkedin_link)
+                  }
+                }} 
               />
             </BoxView>
           </ProfileViewField>
@@ -113,7 +127,7 @@ const ProfileView = ({ profileId, profileData }: Props) => {
     }
 
     let profileSectors: any[] = sectorsData.filter((o: any) => profileItem.sectors.includes(o.id));
-    
+
     return (
       <TextView>
         {profileSectors.map((sector: any, i: number) => {
@@ -134,7 +148,7 @@ const ProfileView = ({ profileId, profileData }: Props) => {
     }
 
     let profileSectors: any[] = sectorsData.filter((o: any) => profileItem.sectors.includes(o.id));
-    
+
     return (
       <TextView>
         {profileSectors.map((sector: any, i: number) => {
