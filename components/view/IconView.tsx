@@ -12,10 +12,24 @@ type Props = {
   radius?: string; 
   iconStyle?: object;
   containerStyle?: object;
+  color?: any;
+  backgroundColor: any;
   onPress?: () => void;
 };
 
-const IconView = ({name, size, padding, label, theme, radius = 'circle', iconStyle, containerStyle, onPress}: Props) => {
+const IconView = ({
+  name, 
+  size, 
+  padding, 
+  label, 
+  theme, 
+  radius = 'circle', 
+  iconStyle, 
+  containerStyle, 
+  color, 
+  backgroundColor, 
+  onPress
+}: Props) => {
   const defaultPadding: number = 2;
   const iconSize: number = size || 14;
   theme = theme || 'secondary';
