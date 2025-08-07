@@ -334,7 +334,7 @@ const ProfileView = ({ profileId, profileData, isOwner }: Props) => {
       </TextView>
       <ProfileJamsList
         allButton={profileItem?.saved_jams?.length > 0}
-        idArray={profileItem?.saved_jams}
+        idArray={profileItem?.saved_jams || []}
         emptyMessage={i18n.t('No data available.')}
       />
     </BoxView>
