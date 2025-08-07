@@ -80,8 +80,6 @@ const ProfileProjectsList = ({
         let projects: any = [];
         let images: any = {};
 
-        console.log(idArray)
-
         if (idArray.length) {
           projects = await EntityManager.getProjects(idArray);
         }
