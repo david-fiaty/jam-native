@@ -314,7 +314,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
         {i18n.t("{{ name }}'s projects", { name: UserManager.getProfileDisplayName(profileItem) })}
       </TextView>
       <ProfileProjectsList
-        addButton={true}
+        addButton={!isPublic}
         allButton={profileItem?.profile_projects?.length > 0}
         idArray={profileItem?.profile_projects || []}
         onAddButtonPress={() => SectionManager.push(router, 'add-project', { profileId: profileId, profileJams: profileItem?.profile_jams || [] })}
@@ -325,7 +325,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
       </TextView>
       <ProfileJamsList
         allButton={profileItem?.profile_jams?.length > 0}
-        addButton={true}
+        addButton={!isPublic}
         idArray={profileItem?.profile_jams || []}
         onAddButtonPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
       />
