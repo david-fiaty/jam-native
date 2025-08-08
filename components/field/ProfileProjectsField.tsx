@@ -110,15 +110,16 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
 
   return (
     <View style={styles.container}>
-      {profileProjects?.length > 0 && (<ListView
-        data={profileProjects}
-        numColumns={numColumns}
-        contentContainerStyle={{ gap: Layout.space.base }}
-        columnWrapperStyle={{ gap: Layout.space.base }}
-        scrollEnabled={false}
-        emptyMessage={<TextView>{emptyMessage}</TextView>}
-        renderItem={(row: any) => renderItem(row)}
-      />
+      {profileProjects?.length > 0 && (
+        <ListView
+          data={profileProjects}
+          numColumns={numColumns}
+          contentContainerStyle={{ gap: Layout.space.base }}
+          columnWrapperStyle={{ gap: Layout.space.base }}
+          scrollEnabled={false}
+          emptyMessage={<TextView>{emptyMessage}</TextView>}
+          renderItem={(row: any) => renderItem(row)}
+        />
       )}
 
       {!profileProjects?.length && (renderAddButton())}
