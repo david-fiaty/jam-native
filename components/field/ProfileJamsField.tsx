@@ -30,7 +30,7 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
   const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
-    SectionManager.push(router, 'jam-item', {
+    SectionManager.push(router, 'profile-jams', {
       jamId: JSON.stringify([row?.item?.id]),
       title: row?.item?.title,
       disableInfiniteScroll: true,
