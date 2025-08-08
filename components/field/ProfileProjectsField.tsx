@@ -12,16 +12,19 @@ import MediaManager from "@/manager/MediaManager";
 import NoImageView from "../view/NoImageView";
 import ImageView from "../view/ImageView";
 import ScreenManager from "@/manager/ScreenManager";
+import AddItemButton from "../button/AddItemButton";
+import ModalManager from "@/manager/ModalManager";
 
 type Props = {
   idArray?: any;
   isPublic?: boolean;
   emptyMessage?: any;
+  addable?: boolean;
 };
 
 const numColumns = 3;
 
-const ProfileProjectsField = ({ idArray, isPublic, emptyMessage }: Props) => {
+const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Props) => {
   const router = useRouter();
   const [profileProjects, setProfileProjects] = useState<any[]>([]);
 
@@ -39,12 +42,20 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage }: Props) => {
     //let imageUrl: any = EntityManager.getProjectImageUrl(row.item); // Todo - Get project image
     let imageUrl: any = null;
 
-    if (!imageUrl || imageUrl == 'undefined') {
+    if (row?.item?.id == "addItem") {
+      output = <AddItemButton
+        label={i18n.t('Add')}
+        width={imageSize.width}
+        height={imageSize.height}
+        onPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
+      />;
+    }
+    else if (!imageUrl || imageUrl == 'undefined') {
       output = (
         <View style={styles.item}>
-          <NoImageView 
-            width={imageSize.width} 
-            height={imageSize.height} 
+          <NoImageView
+            width={imageSize.width}
+            height={imageSize.height}
             rounded={true}
           />
         </View>
@@ -71,10 +82,20 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage }: Props) => {
     );
   };
 
+  const getProfileProjects = async (entityIds: any[]) => {
+    let data: any[] = await EntityManager.getProjects(entityIds);
+
+    if (!isPublic && addable) {
+      data.push({ id: "addItem" });
+    }
+
+    return data;
+  };
+
   useEffect(() => {
     (async () => {
       if (!profileProjects?.length && Array.isArray(idArray) && idArray?.length > 0) {
-        setProfileProjects(await EntityManager.getProjects(idArray));
+        setProfileProjects(await getProfileProjects(idArray));
       }
     })();
   }, [idArray, profileProjects, isPublic]);
@@ -83,7 +104,7 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage }: Props) => {
 
   return (
     <View style={styles.container}>
-      <ListView
+      {profileProjects?.length > 0 && (<ListView
         data={profileProjects}
         numColumns={numColumns}
         contentContainerStyle={{ gap: Layout.space.base }}
@@ -92,6 +113,9 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage }: Props) => {
         emptyMessage={<TextView>{emptyMessage}</TextView>}
         renderItem={(row: any) => renderItem(row)}
       />
+      )}
+
+      {!profileProjects?.length && (<TextView>Add item button</TextView>)}
     </View>
   );
 };
