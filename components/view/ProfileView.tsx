@@ -259,7 +259,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
 
           <TouchableOpacity onPress={() => {
             SectionManager.push(router, 'profile-projects', {
-              jamId: JSON.stringify(profileItem?.profile_projects),
+              jamId: JSON.stringify(profileItem?.profile_projects || []),
               title: i18n.t('Profile Projects'),
               disableInfiniteScroll: true,
             });
@@ -290,7 +290,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
 
           <TouchableOpacity onPress={() => {
             SectionManager.push(router, 'profile-jams', {
-              jamId: JSON.stringify(profileItem?.profile_jams),
+              jamId: JSON.stringify(profileItem?.profile_jams || []),
               title: groupTitle,
               disableInfiniteScroll: true,
             });
@@ -321,7 +321,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
 
           <TouchableOpacity onPress={() => {
             SectionManager.push(router, 'profile-jams', {
-              jamId: JSON.stringify(profileItem?.saved_jams),
+              jamId: JSON.stringify(profileItem?.saved_jams  || []),
               title: groupTitle,
               disableInfiniteScroll: true,
             });
