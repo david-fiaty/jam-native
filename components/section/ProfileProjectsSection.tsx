@@ -9,7 +9,7 @@ type Props = {
   projectId: any;
 };
 
-const ProjectItemSection = ({ projectId }: Props) => {
+const ProfileProjectsSection = ({ projectId }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [projectItem, setProjectItem] = useState<any>(null);
   projectId = parseInt(projectId);
@@ -39,4 +39,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProjectItemSection;
+export default ProfileProjectsSection;

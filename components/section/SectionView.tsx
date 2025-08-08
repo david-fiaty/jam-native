@@ -18,7 +18,6 @@ import LoginSection from "@/components/section/LoginSection";
 import WelcomeSection from "@/components/section/WelcomeSection";
 import SignupSection from "@/components/section/SignupSection";
 import PrivacySection from "@/components/section/PrivacySection";
-import ProjectItemSection from "@/components/section/ProjectItemSection";
 import ProfileFormSection from "@/components/section/profile/ProfileFormSection";
 import AddProjectForm from "@/components/form/AddProjectForm";
 import LanguageForm from "../form/LanguageForm";
@@ -27,6 +26,7 @@ import NotificationItemSection from "./NotificationItemSection";
 import PublicProfileSection from "./profile/PublicProfileSection";
 import PrivateProfileSection from "./profile/PrivateProfileSection";
 import ProfileJamsSection from "./ProfileJamsSection";
+import ProfileProjectsSection from "./ProfileProjectsSection";
 
 const SectionView = () => { 
   const path = usePathname();
@@ -144,10 +144,10 @@ const SectionView = () => {
         render: (params: any) => <ProfileJamsSection {...params} />,
       },
       {
-        id: 'project-item',
-        title: i18n.t('Project'),
+        id: 'profile-projects',
+        title: i18n.t('Profile Project'),
         showBackButton: true,
-        render: (params: any) => <ProjectItemSection {...params} />,
+        render: (params: any) => <ProfileProjectsSection {...params} />,
       },
       {
         id: 'notification-item',
