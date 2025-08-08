@@ -259,7 +259,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
 
           <TouchableOpacity onPress={() => {
             SectionManager.push(router, 'profile-projects', {
-              jamId: JSON.stringify(profileItem?.profile_projects),
+              jamId: JSON.stringify(profileItem?.profile_projects || []),
               title: i18n.t('Profile Projects'),
               disableInfiniteScroll: true,
             });
@@ -271,6 +271,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
         <ProfileProjectsField
           idArray={profileItem?.profile_projects || []}
           emptyMessage={i18n.t('No data available.')}
+          isPublic={isPublic}
           addable={true}
         />
       </>
@@ -289,7 +290,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
 
           <TouchableOpacity onPress={() => {
             SectionManager.push(router, 'profile-jams', {
-              jamId: JSON.stringify(profileItem?.profile_jams),
+              jamId: JSON.stringify(profileItem?.profile_jams || []),
               title: groupTitle,
               disableInfiniteScroll: true,
             });
@@ -302,13 +303,14 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
           idArray={profileItem?.profile_jams || []}
           emptyMessage={i18n.t('No data available.')}
           addable={true}
+          isPublic={isPublic}
         />
       </>
     );
   };
 
   const renderSavedJams = () => {
-        let groupTitle: string = i18n.t('Saved jams');
+    let groupTitle: string = i18n.t('Saved jams');
 
     return (
       <>
@@ -319,7 +321,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
 
           <TouchableOpacity onPress={() => {
             SectionManager.push(router, 'profile-jams', {
-              jamId: JSON.stringify(profileItem?.saved_jams),
+              jamId: JSON.stringify(profileItem?.saved_jams || []),
               title: groupTitle,
               disableInfiniteScroll: true,
             });
@@ -331,6 +333,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
         <ProfileJamsField
           idArray={profileItem?.saved_jams || []}
           emptyMessage={i18n.t('No data available.')}
+          isPublic={isPublic}
         />
       </>
     );
