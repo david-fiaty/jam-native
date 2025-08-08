@@ -37,20 +37,25 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
     });
   };
 
+  const renderAddButton = () => {
+    return (
+      <AddItemButton
+        label={i18n.t('Add')}
+        width={imageSize.width}
+        height={imageSize.height}
+        onPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
+      />
+    );
+  };
+
   const renderItem = (row: any) => {
     let output: any = null;
     let imageUrl: any = row?.item?.medias?.[0]?.url;
 
     if (row?.item?.id == "addItem") {
-      output = <AddItemButton
-        label={i18n.t('Add')}
-        width={imageSize.width}
-        height={imageSize.height}
-        onPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
-      />;
+      output = renderAddButton();
     }
     else if (!imageUrl || imageUrl == 'undefined') {
-
       output = (
         <View style={styles.item}>
           <NoImageView 
