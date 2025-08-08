@@ -27,6 +27,7 @@ import PublicProfileSection from "./profile/PublicProfileSection";
 import PrivateProfileSection from "./profile/PrivateProfileSection";
 import ProfileJamsSection from "./ProfileJamsSection";
 import ProfileProjectsSection from "./ProfileProjectsSection";
+import JamForm from "../form/JamForm";
 
 const SectionView = () => { 
   const path = usePathname();
@@ -196,6 +197,11 @@ const SectionView = () => {
         id: 'add-project',
         title: i18n.t('Add project'),
         render: (params: any) => <AddProjectForm {...params} />,
+      },
+      {
+        id: 'add-jam',
+        title: i18n.t('Add Jam'),
+        render: (params: any) => <JamForm {...params} />,
       },
     ].map((o: any) => {
       return {
