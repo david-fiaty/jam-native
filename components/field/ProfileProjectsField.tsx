@@ -37,18 +37,24 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
     });
   };
 
+  const renderAddButton = () => {
+    return (
+      <AddItemButton
+        label={i18n.t('Add')}
+        width={imageSize.width}
+        height={imageSize.height}
+        onPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
+      />
+    );
+  };
+
   const renderItem = (row: any) => {
     let output: any = null;
     //let imageUrl: any = EntityManager.getProjectImageUrl(row.item); // Todo - Get project image
     let imageUrl: any = null;
 
     if (row?.item?.id == "addItem") {
-      output = <AddItemButton
-        label={i18n.t('Add')}
-        width={imageSize.width}
-        height={imageSize.height}
-        onPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
-      />;
+      output = renderAddButton();
     }
     else if (!imageUrl || imageUrl == 'undefined') {
       output = (
@@ -115,7 +121,7 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
       />
       )}
 
-      {!profileProjects?.length && (<TextView>Add item button</TextView>)}
+      {!profileProjects?.length && (renderAddButton())}
     </View>
   );
 };
