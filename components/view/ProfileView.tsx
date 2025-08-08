@@ -312,7 +312,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
       />
 
       <TextView style={styles.groupTitle}>
-        {i18n.t("{{ name }}'s projects", { name: UserManager.getProfileDisplayName(profileItem) })}
+        {i18n.t("{{ name }}' s projects", { name: UserManager.getProfileDisplayName(profileItem) })}
       </TextView>
       <ProfileProjectsList
         addButton={!isPublic}
@@ -322,7 +322,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
       />
 
       <TextView style={styles.groupTitle}>
-        {i18n.t("{{ name }}'s jams", { name: UserManager.getProfileDisplayName(profileItem) })}
+        {i18n.t("{{ name }}' s jams", { name: UserManager.getProfileDisplayName(profileItem) })}
       </TextView>
       <ProfileJamsField
         idArray={profileItem?.profile_jams || []}
