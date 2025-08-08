@@ -50,8 +50,7 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
 
   const renderItem = (row: any) => {
     let output: any = null;
-    //let imageUrl: any = EntityManager.getProjectImageUrl(row.item); // Todo - Get project image
-    let imageUrl: any = null;
+    let imageUrl: any = row.item.firstJam?.medias?.[0]?.url;
 
     if (row?.item?.id == "addItem") {
       output = renderAddButton();
@@ -101,7 +100,16 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
   useEffect(() => {
     (async () => {
       if (!profileProjects?.length && Array.isArray(idArray) && idArray?.length > 0) {
-        setProfileProjects(await getProfileProjects(idArray));
+        let projectsData: any = await getProfileProjects(idArray);
+
+        projectsData = await Promise.all(
+          projectsData.map(async (item: any) => ({
+            ...item,
+            firstJam: (await EntityManager.getJams([item?.jams[0]]))?.[0],
+          }))
+        );
+
+        setProfileProjects(projectsData);
       }
     })();
   }, [idArray, profileProjects, isPublic]);
