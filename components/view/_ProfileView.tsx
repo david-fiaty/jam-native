@@ -18,7 +18,6 @@ import MediaManager from "@/manager/MediaManager";
 import IconView from "@/components/view/IconView";
 import CollapsibleView from "@/components/view/CollapsibleView";
 import ProfileJamsField from "../field/ProfileJamsField";
-import ProfileProjectsField from "../field/ProfileProjectsField";
 
 const resource: string = 'profile';
 const profileImageSize: number = 111;
@@ -313,19 +312,23 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
       />
 
       <TextView style={styles.groupTitle}>
-        {i18n.t("{{ name }}' s projects", { name: UserManager.getProfileDisplayName(profileItem) })}
+        {i18n.t("{{ name }}'s projects", { name: UserManager.getProfileDisplayName(profileItem) })}
       </TextView>
-      <ProfileProjectsField
+      <ProfileProjectsList
+        addButton={!isPublic}
+        allButton={profileItem?.profile_projects?.length > 0}
         idArray={profileItem?.profile_projects || []}
-        emptyMessage={i18n.t('No data available.')}
+        onAddButtonPress={() => SectionManager.push(router, 'add-project', { profileId: profileId, profileJams: profileItem?.profile_jams || [] })}
       />
 
       <TextView style={styles.groupTitle}>
-        {i18n.t("{{ name }}' s jams", { name: UserManager.getProfileDisplayName(profileItem) })}
+        {i18n.t("{{ name }}'s jams", { name: UserManager.getProfileDisplayName(profileItem) })}
       </TextView>
-      <ProfileJamsField
+      <ProfileJamsList
+        allButton={profileItem?.profile_jams?.length > 0}
+        addButton={!isPublic}
         idArray={profileItem?.profile_jams || []}
-        emptyMessage={i18n.t('No data available.')}
+        onAddButtonPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
       />
 
       {!isPublic && (
@@ -335,10 +338,23 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
           </TextView>
           <ProfileJamsField
             idArray={profileItem?.saved_jams || []}
-            emptyMessage={i18n.t('No data available.')}
+            //emptyMessage={i18n.t('No data available.')}
           />
         </>
       )}
+
+      {/* !isPublic && (
+        <>
+          <TextView style={styles.groupTitle}>
+            {i18n.t('Saved jams')}
+          </TextView>
+          <ProfileJamsList
+            allButton={profileItem?.saved_jams?.length > 0}
+            idArray={profileItem?.saved_jams || []}
+            emptyMessage={i18n.t('No data available.')}
+          />
+        </>
+      ) */}
     </BoxView>
   );
 };

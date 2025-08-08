@@ -93,7 +93,7 @@ const JamListItem = ({ row, isAddable, isDeletable, isSelected, multiSelect, onL
     }
 
     return output;
-  }
+  };
 
   return renderItem(row);
 };
