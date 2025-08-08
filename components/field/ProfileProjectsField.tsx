@@ -101,7 +101,8 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
   useEffect(() => {
     (async () => {
       if (!profileProjects?.length && Array.isArray(idArray) && idArray?.length > 0) {
-        setProfileProjects(await getProfileProjects(idArray));
+        let projectsData: any = await getProfileProjects(idArray);
+        setProfileProjects(projectsData);
       }
     })();
   }, [idArray, profileProjects, isPublic]);
