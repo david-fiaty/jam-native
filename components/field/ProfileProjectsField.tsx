@@ -97,18 +97,20 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
     return data;
   };
 
+  const addProjectsImages = async (projectsData: any[]) => {
+    return await Promise.all(
+      projectsData.map(async (item: any) => ({
+        ...item,
+        firstJam: (await EntityManager.getJams([item?.jams[0]]))?.[0],
+      }))
+    );
+  };
+
   useEffect(() => {
     (async () => {
       if (!profileProjects?.length && Array.isArray(idArray) && idArray?.length > 0) {
         let projectsData: any = await getProfileProjects(idArray);
-
-        projectsData = await Promise.all(
-          projectsData.map(async (item: any) => ({
-            ...item,
-            firstJam: (await EntityManager.getJams([item?.jams[0]]))?.[0],
-          }))
-        );
-
+        projectsData = await addProjectsImages(projectsData);
         setProfileProjects(projectsData);
       }
     })();
