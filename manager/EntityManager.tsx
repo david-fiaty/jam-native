@@ -121,13 +121,6 @@ class EntityManager {
     return await DataManager.put('addJamToProject', {...defaults, ...options}, variables); 
   }
 
-  async getProjectImageUrl(entity: any) {
-    let projectJams = await this.getJams(entity?.jams);
-    let projectImages = projectJams.map((item: any) => item?.medias?.[0]?.url).filter((value: any) => (value));
-
-    return projectImages?.[0] || null;
-  }
-
   async getSectors(options?: any) {
     //let language = await UserManager.getLanguage();
     // Todo - Fix creates error in components
