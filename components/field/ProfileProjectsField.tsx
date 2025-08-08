@@ -36,7 +36,7 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage }: Props) => {
   const renderItem = (row: any) => {
     let imageSize = MediaManager.getThumbnailSize();
     let output: any = null;
-    //let imageUrl: any = EntityManager.getProjectImageUrl(row.item);
+    //let imageUrl: any = EntityManager.getProjectImageUrl(row.item); // Todo - Get project image
     let imageUrl: any = null;
 
     if (!imageUrl || imageUrl == 'undefined') {
