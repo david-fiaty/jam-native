@@ -321,7 +321,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
 
           <TouchableOpacity onPress={() => {
             SectionManager.push(router, 'profile-jams', {
-              jamId: JSON.stringify(profileItem?.saved_jams  || []),
+              jamId: JSON.stringify(profileItem?.saved_jams || []),
               title: groupTitle,
               disableInfiniteScroll: true,
             });
