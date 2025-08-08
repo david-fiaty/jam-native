@@ -82,8 +82,8 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
     );
   };
 
-  const getProfileJams = async (enttyIds: any[]) => {
-    let data: any[] = await EntityManager.getJams(enttyIds);
+  const getProfileJams = async (entityIds: any[]) => {
+    let data: any[] = await EntityManager.getJams(entityIds);
 
     if (!isPublic && addable) {
       data.push({ id: "addItem" });
