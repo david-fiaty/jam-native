@@ -30,7 +30,7 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
   const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
-    SectionManager.push(router, 'project-item', {
+    SectionManager.push(router, 'profile-projects', {
       projectId: JSON.stringify([row?.item?.id]),
       title: row?.item?.title,
       disableInfiniteScroll: true,
@@ -43,7 +43,7 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
         label={i18n.t('Add')}
         width={imageSize.width}
         height={imageSize.height}
-        onPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
+        onPress={() => SectionManager.push(router, 'add-project')}
       />
     );
   };

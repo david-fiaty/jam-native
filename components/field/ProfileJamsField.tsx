@@ -43,7 +43,7 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
         label={i18n.t('Add')}
         width={imageSize.width}
         height={imageSize.height}
-        onPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
+        onPress={() => SectionManager.push(router, 'add-jam')}
       />
     );
   };
