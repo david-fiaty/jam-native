@@ -18,12 +18,13 @@ import ModalManager from "@/manager/ModalManager";
 type Props = {
   idArray?: any;
   isPublic?: boolean;
+  addable?: boolean;
   emptyMessage?: any;
 };
 
 const numColumns = 3;
 
-const ProfileJamsField = ({ idArray, isPublic, emptyMessage }: Props) => {
+const ProfileJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) => {
   const router = useRouter();
   const [profileJams, setProfileJams] = useState<any[]>([]);
 
@@ -84,7 +85,7 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage }: Props) => {
   const getProfileJams = async (enttyIds: any[]) => {
     let data: any[] = await EntityManager.getJams(enttyIds);
 
-    if (!isPublic) {
+    if (!isPublic && addable) {
       data.push({ id: "addItem" });
     }
 
