@@ -278,17 +278,19 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
   };
 
   const renderProfileJams = () => {
+    let groupTitle: string = i18n.t("{{ name }}' s jams", { name: UserManager.getProfileDisplayName(profileItem) });
+
     return (
       <>
         <BoxView direction="row" align="center" justify="space-between" style={styles.groupTitleContainer}>
           <TextView style={styles.groupTitle}>
-            {i18n.t("{{ name }}' s jams", { name: UserManager.getProfileDisplayName(profileItem) })}
+            {groupTitle}
           </TextView>
 
           <TouchableOpacity onPress={() => {
             SectionManager.push(router, 'profile-jams', {
               jamId: JSON.stringify(profileItem?.profile_jams),
-              title: i18n.t('Profile Jams'),
+              title: groupTitle,
               disableInfiniteScroll: true,
             });
           }}>
@@ -306,17 +308,19 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
   };
 
   const renderSavedJams = () => {
+        let groupTitle: string = i18n.t('Saved jams');
+
     return (
       <>
         <BoxView direction="row" align="center" justify="space-between" style={styles.groupTitleContainer}>
           <TextView style={styles.groupTitle}>
-            {i18n.t('Saved jams')}
+            {groupTitle}
           </TextView>
 
           <TouchableOpacity onPress={() => {
             SectionManager.push(router, 'profile-jams', {
               jamId: JSON.stringify(profileItem?.saved_jams),
-              title: i18n.t('Saved Jams'),
+              title: groupTitle,
               disableInfiniteScroll: true,
             });
           }}>
