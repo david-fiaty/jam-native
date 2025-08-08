@@ -5,11 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { setFormData } from "@/redux/slices/FormSlice";
 import BoxView from "@/components/view/BoxView";
-import ProfileProjectsList from "@/components/list/ProfileProjectsList";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
-import ProfileJamsList from "@/components/list/ProfileJamsList";
-import ModalManager from "@/manager/ModalManager";
 import SectionManager from "@/manager/SectionManager";
 import ProfileViewField from "../field/ProfileViewField";
 import TextView from "@/components/view/TextView";
@@ -256,16 +253,6 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
           <TextView style={styles.groupTitle}>
             {i18n.t("{{ name }}' s projects", { name: UserManager.getProfileDisplayName(profileItem) })}
           </TextView>
-
-          <TouchableOpacity onPress={() => {
-            SectionManager.push(router, 'profile-projects', {
-              jamId: JSON.stringify(profileItem?.profile_projects || []),
-              title: i18n.t('Profile Projects'),
-              disableInfiniteScroll: true,
-            });
-          }}>
-            <TextView underline={true}>{i18n.t("View all")}</TextView>
-          </TouchableOpacity>
         </BoxView>
 
         <ProfileProjectsField
