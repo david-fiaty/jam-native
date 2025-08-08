@@ -2,7 +2,6 @@ import { Share } from 'react-native';
 import { Config } from '@/constants/Config';
 import DataManager from './DataManager';
 import UserManager from './UserManager';
-import MediaManager from './MediaManager';
 
 class EntityManager {
   async listProfiles(options?: any) {
@@ -126,11 +125,7 @@ class EntityManager {
     let projectJams = await this.getJams(entity?.jams);
     let projectImages = projectJams.map((item: any) => item?.medias?.[0]?.url).filter((value: any) => (value));
 
-    if (projectImages?.[0]?.length) {
-      return MediaManager.getImageUrl(projectImages[0]);
-    }
-
-    return null;
+    return projectImages?.[0] || null;
   }
 
   async getSectors(options?: any) {
