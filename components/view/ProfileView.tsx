@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -249,6 +249,89 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
     }
   };
 
+  const renderProfileProjects = () => {
+    return (
+      <>
+        <BoxView direction="row" align="center" justify="space-between" style={styles.groupTitleContainer}>
+          <TextView style={styles.groupTitle}>
+            {i18n.t("{{ name }}' s projects", { name: UserManager.getProfileDisplayName(profileItem) })}
+          </TextView>
+
+          <TouchableOpacity onPress={() => {
+            SectionManager.push(router, 'profile-projects', {
+              jamId: JSON.stringify(profileItem?.profile_projects),
+              title: i18n.t('Profile Projects'),
+              disableInfiniteScroll: true,
+            });
+          }}>
+            <TextView underline={true}>{i18n.t("View all")}</TextView>
+          </TouchableOpacity>
+        </BoxView>
+
+        <ProfileProjectsField
+          idArray={profileItem?.profile_projects || []}
+          emptyMessage={i18n.t('No data available.')}
+          addable={true}
+        />
+      </>
+    );
+  };
+
+  const renderProfileJams = () => {
+    return (
+      <>
+        <BoxView direction="row" align="center" justify="space-between" style={styles.groupTitleContainer}>
+          <TextView style={styles.groupTitle}>
+            {i18n.t("{{ name }}' s jams", { name: UserManager.getProfileDisplayName(profileItem) })}
+          </TextView>
+
+          <TouchableOpacity onPress={() => {
+            SectionManager.push(router, 'profile-jams', {
+              jamId: JSON.stringify(profileItem?.profile_jams),
+              title: i18n.t('Profile Jams'),
+              disableInfiniteScroll: true,
+            });
+          }}>
+            <TextView underline={true}>{i18n.t("View all")}</TextView>
+          </TouchableOpacity>
+        </BoxView>
+
+        <ProfileJamsField
+          idArray={profileItem?.profile_jams || []}
+          emptyMessage={i18n.t('No data available.')}
+          addable={true}
+        />
+      </>
+    );
+  };
+
+  const renderSavedJams = () => {
+    return (
+      <>
+        <BoxView direction="row" align="center" justify="space-between" style={styles.groupTitleContainer}>
+          <TextView style={styles.groupTitle}>
+            {i18n.t('Saved jams')}
+          </TextView>
+
+          <TouchableOpacity onPress={() => {
+            SectionManager.push(router, 'profile-jams', {
+              jamId: JSON.stringify(profileItem?.saved_jams),
+              title: i18n.t('Saved Jams'),
+              disableInfiniteScroll: true,
+            });
+          }}>
+            <TextView underline={true}>{i18n.t("View all")}</TextView>
+          </TouchableOpacity>
+        </BoxView>
+
+        <ProfileJamsField
+          idArray={profileItem?.saved_jams || []}
+          emptyMessage={i18n.t('No data available.')}
+        />
+      </>
+    );
+  };
+
   useEffect(() => {
     setProfileItem(profileData);
     setSectorsData(appState.sectorsData);
@@ -312,35 +395,9 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
         content={renderCollapsibleFields()}
       />
 
-      <TextView style={styles.groupTitle}>
-        {i18n.t("{{ name }}' s projects", { name: UserManager.getProfileDisplayName(profileItem) })}
-      </TextView>
-      <ProfileProjectsField
-        idArray={profileItem?.profile_projects || []}
-        emptyMessage={i18n.t('No data available.')}
-        addable={true}
-      />
-
-      <TextView style={styles.groupTitle}>
-        {i18n.t("{{ name }}' s jams", { name: UserManager.getProfileDisplayName(profileItem) })}
-      </TextView>
-      <ProfileJamsField
-        idArray={profileItem?.profile_jams || []}
-        emptyMessage={i18n.t('No data available.')}
-        addable={true}
-      />
-
-      {!isPublic && (
-        <>
-          <TextView style={styles.groupTitle}>
-            {i18n.t('Saved jams')}
-          </TextView>
-          <ProfileJamsField
-            idArray={profileItem?.saved_jams || []}
-            emptyMessage={i18n.t('No data available.')}
-          />
-        </>
-      )}
+      {renderProfileProjects()}
+      {renderProfileJams()}
+      {!isPublic && renderSavedJams()}
     </BoxView>
   );
 };
@@ -352,9 +409,11 @@ const styles = StyleSheet.create({
     height: '100%',
     paddingBottom: Layout.space.base * 2,
   },
+  groupTitleContainer: {
+    width: '100%',
+  },
   groupTitle: {
     fontWeight: 'bold',
-    marginTop: Layout.space.base,
   },
   profileHeader: {
     width: '100%',
