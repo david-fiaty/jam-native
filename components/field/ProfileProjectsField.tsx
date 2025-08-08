@@ -27,7 +27,7 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage }: Props) => {
 
   const onItemPress = (row: any) => {
     SectionManager.push(router, 'project-item', {
-      jamId: JSON.stringify([row?.item?.id]),
+      projectId: JSON.stringify([row?.item?.id]),
       title: row?.item?.title,
       disableInfiniteScroll: true,
     });
