@@ -37,25 +37,30 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
     });
   };
 
+  const renderAddButton = () => {
+    return (
+      <AddItemButton
+        label={i18n.t('Add')}
+        width={imageSize.width}
+        height={imageSize.height}
+        onPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
+      />
+    );
+  };
+
   const renderItem = (row: any) => {
     let output: any = null;
     let imageUrl: any = row?.item?.medias?.[0]?.url;
 
     if (row?.item?.id == "addItem") {
-      output = <AddItemButton
-        label={i18n.t('Add')}
-        width={imageSize.width}
-        height={imageSize.height}
-        onPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
-      />;
+      output = renderAddButton();
     }
     else if (!imageUrl || imageUrl == 'undefined') {
-
       output = (
         <View style={styles.item}>
-          <NoImageView 
-            width={imageSize.width} 
-            height={imageSize.height} 
+          <NoImageView
+            width={imageSize.width}
+            height={imageSize.height}
             rounded={true}
           />
         </View>
@@ -104,15 +109,19 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
 
   return (
     <View style={styles.container}>
-      <ListView
-        data={profileJams}
-        numColumns={numColumns}
-        contentContainerStyle={{ gap: Layout.space.base }}
-        columnWrapperStyle={{ gap: Layout.space.base }}
-        scrollEnabled={false}
-        emptyMessage={<TextView>{emptyMessage}</TextView>}
-        renderItem={(row: any) => renderItem(row)}
-      />
+      {profileJams?.length > 0 && (
+        <ListView
+          data={profileJams}
+          numColumns={numColumns}
+          contentContainerStyle={{ gap: Layout.space.base }}
+          columnWrapperStyle={{ gap: Layout.space.base }}
+          scrollEnabled={false}
+          emptyMessage={<TextView>{emptyMessage}</TextView>}
+          renderItem={(row: any) => renderItem(row)}
+        />
+      )}
+
+      {!profileJams?.length && (renderAddButton())}
     </View>
   );
 };
