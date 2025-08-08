@@ -27,6 +27,7 @@ const numColumns = 3;
 const ProfileJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) => {
   const router = useRouter();
   const [profileJams, setProfileJams] = useState<any[]>([]);
+  const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
     SectionManager.push(router, 'jam-item', {
@@ -37,7 +38,6 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
   };
 
   const renderItem = (row: any) => {
-    let imageSize = MediaManager.getThumbnailSize();
     let output: any = null;
     let imageUrl: any = row?.item?.medias?.[0]?.url;
 
