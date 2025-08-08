@@ -318,6 +318,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
       <ProfileProjectsField
         idArray={profileItem?.profile_projects || []}
         emptyMessage={i18n.t('No data available.')}
+        addable={true}
       />
 
       <TextView style={styles.groupTitle}>
@@ -326,6 +327,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
       <ProfileJamsField
         idArray={profileItem?.profile_jams || []}
         emptyMessage={i18n.t('No data available.')}
+        addable={true}
       />
 
       {!isPublic && (
@@ -347,6 +349,7 @@ const styles = StyleSheet.create({
   container: {
     position: 'relative',
     width: '100%',
+    height: '100%',
     paddingBottom: Layout.space.base * 2,
   },
   groupTitle: {
