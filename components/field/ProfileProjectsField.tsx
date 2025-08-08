@@ -27,6 +27,7 @@ const numColumns = 3;
 const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Props) => {
   const router = useRouter();
   const [profileProjects, setProfileProjects] = useState<any[]>([]);
+  const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
     SectionManager.push(router, 'project-item', {
@@ -37,7 +38,6 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
   };
 
   const renderItem = (row: any) => {
-    let imageSize = MediaManager.getThumbnailSize();
     let output: any = null;
     //let imageUrl: any = EntityManager.getProjectImageUrl(row.item); // Todo - Get project image
     let imageUrl: any = null;
