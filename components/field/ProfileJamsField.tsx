@@ -12,18 +12,22 @@ import MediaManager from "@/manager/MediaManager";
 import NoImageView from "../view/NoImageView";
 import ImageView from "../view/ImageView";
 import ScreenManager from "@/manager/ScreenManager";
+import AddItemButton from "../button/AddItemButton";
+import ModalManager from "@/manager/ModalManager";
 
 type Props = {
   idArray?: any;
   isPublic?: boolean;
+  addable?: boolean;
   emptyMessage?: any;
 };
 
 const numColumns = 3;
 
-const ProfileJamsField = ({ idArray, isPublic, emptyMessage }: Props) => {
+const ProfileJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) => {
   const router = useRouter();
   const [profileJams, setProfileJams] = useState<any[]>([]);
+  const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
     SectionManager.push(router, 'jam-item', {
@@ -34,11 +38,19 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage }: Props) => {
   };
 
   const renderItem = (row: any) => {
-    let imageSize = MediaManager.getThumbnailSize();
     let output: any = null;
     let imageUrl: any = row?.item?.medias?.[0]?.url;
 
-    if (!imageUrl || imageUrl == 'undefined') {
+    if (row?.item?.id == "addItem") {
+      output = <AddItemButton
+        label={i18n.t('Add')}
+        width={imageSize.width}
+        height={imageSize.height}
+        onPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
+      />;
+    }
+    else if (!imageUrl || imageUrl == 'undefined') {
+
       output = (
         <View style={styles.item}>
           <NoImageView 
@@ -70,11 +82,11 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage }: Props) => {
     );
   };
 
-  const getProfileJams = async (enttyIds: any[]) => {
-    let data: any[] = await EntityManager.getJams(enttyIds);
+  const getProfileJams = async (entityIds: any[]) => {
+    let data: any[] = await EntityManager.getJams(entityIds);
 
-    if (!isPublic) {
-      
+    if (!isPublic && addable) {
+      data.push({ id: "addItem" });
     }
 
     return data;
