@@ -70,10 +70,20 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage }: Props) => {
     );
   };
 
+  const getProfileJams = async (enttyIds: any[]) => {
+    let data: any[] = await EntityManager.getJams(enttyIds);
+
+    if (!isPublic) {
+      
+    }
+
+    return data;
+  };
+
   useEffect(() => {
     (async () => {
       if (!profileJams?.length && Array.isArray(idArray) && idArray?.length > 0) {
-        setProfileJams(await EntityManager.getJams(idArray));
+        setProfileJams(await getProfileJams(idArray));
       }
     })();
   }, [idArray, profileJams, isPublic]);
