@@ -8,7 +8,7 @@ import BoxView from '../view/BoxView';
 import SectionHeader from '../section/navigation/SectionHeader';
 import SectionFooter from '../section/navigation/SectionFooter';
 import ModalView from "../modal/ModalView";
-import SectionBackButton from "./navigation/SectionBackButton";
+import SectionBackButton from "../section/navigation/SectionBackButton";
 import MessageView from "../view/MessageView";
 import i18n from "@/translation/i18n";
 import AboutSection from "@/components/section/AboutSection";
@@ -22,11 +22,11 @@ import ProfileFormSection from "@/components/section/profile/ProfileFormSection"
 import AddProjectForm from "@/components/form/AddProjectForm";
 import LanguageForm from "../form/LanguageForm";
 import ResetPasswordForm from "../form/ResetPasswordForm";
-import NotificationItemSection from "./NotificationItemSection";
-import PublicProfileSection from "./profile/PublicProfileSection";
-import PrivateProfileSection from "./profile/PrivateProfileSection";
-import ProfileJamsSection from "./ProfileJamsSection";
-import ProfileProjectsSection from "./ProfileProjectsSection";
+import NotificationItemSection from "../section/NotificationItemSection";
+import PublicProfileSection from "../section/profile/PublicProfileSection";
+import PrivateProfileSection from "../section/profile/PrivateProfileSection";
+import ProfileJamsSection from "../section/ProfileJamsSection";
+import ProfileProjectsSection from "../section/ProfileProjectsSection";
 import JamForm from "../form/JamForm";
 
 const SectionView = () => { 
