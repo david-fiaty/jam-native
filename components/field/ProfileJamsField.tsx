@@ -58,9 +58,9 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
     else if (!imageUrl || imageUrl == 'undefined') {
       output = (
         <View style={styles.item}>
-          <NoImageView 
-            width={imageSize.width} 
-            height={imageSize.height} 
+          <NoImageView
+            width={imageSize.width}
+            height={imageSize.height}
             rounded={true}
           />
         </View>
@@ -109,15 +109,19 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
 
   return (
     <View style={styles.container}>
-      <ListView
-        data={profileJams}
-        numColumns={numColumns}
-        contentContainerStyle={{ gap: Layout.space.base }}
-        columnWrapperStyle={{ gap: Layout.space.base }}
-        scrollEnabled={false}
-        emptyMessage={<TextView>{emptyMessage}</TextView>}
-        renderItem={(row: any) => renderItem(row)}
-      />
+      {profileJams?.length > 0 && (
+        <ListView
+          data={profileJams}
+          numColumns={numColumns}
+          contentContainerStyle={{ gap: Layout.space.base }}
+          columnWrapperStyle={{ gap: Layout.space.base }}
+          scrollEnabled={false}
+          emptyMessage={<TextView>{emptyMessage}</TextView>}
+          renderItem={(row: any) => renderItem(row)}
+        />
+      )}
+
+      {!profileJams?.length && (renderAddButton())}
     </View>
   );
 };
