@@ -318,6 +318,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
       <ProfileProjectsField
         idArray={profileItem?.profile_projects || []}
         emptyMessage={i18n.t('No data available.')}
+        addable={true}
       />
 
       <TextView style={styles.groupTitle}>
