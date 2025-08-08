@@ -41,11 +41,10 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   };
 
   const getListData = () => {
-    let currentResults: any [] = JSON.parse(searchState.currentResults)?.jam || [];
-    let data: any[] = [];
+    let data: any [] = JSON.parse(searchState.currentResults)?.jam || [];
 
     if (idArray?.length > 0) {
-      data = currentResults.filter((o: any) => idArray.includes(o.id));
+      data = data.filter((o: any) => idArray.includes(o.id));
     }
 
     return data;
