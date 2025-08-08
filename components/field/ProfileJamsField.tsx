@@ -35,9 +35,10 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage }: Props) => {
 
   const renderItem = (row: any) => {
     let imageSize = MediaManager.getThumbnailSize();
-    let output = null;
+    let output: any = null;
+    let imageUrl: any = row?.item?.medias?.[0]?.url;
 
-    if (!row?.item?.medias?.[0]?.url || row?.item?.medias?.[0]?.url == 'undefined') {
+    if (!imageUrl || imageUrl == 'undefined') {
       output = (
         <View style={styles.item}>
           <NoImageView 
@@ -52,7 +53,7 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage }: Props) => {
       output = (
         <View style={styles.item}>
           <ImageView
-            uri={MediaManager.getImageUrl(row.item.medias[0].url)}
+            uri={MediaManager.getImageUrl(imageUrl)}
             width={imageSize.width}
             height={imageSize.height}
             resizeMode="cover"
