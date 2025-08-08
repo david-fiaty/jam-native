@@ -50,7 +50,7 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
 
   const renderItem = (row: any) => {
     let output: any = null;
-    let imageUrl: any = row.item.imageUrl;
+    let imageUrl: any = row.item.firstJam?.medias?.[0]?.url;
 
     if (row?.item?.id == "addItem") {
       output = renderAddButton();
@@ -105,10 +105,10 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
         projectsData = await Promise.all(
           projectsData.map(async (item: any) => ({
             ...item,
-            imageUrl: (await EntityManager.getJams([item?.jams[0]])).medias?.[0]?.url,
+            firstJam: (await EntityManager.getJams([item?.jams[0]]))?.[0],
           }))
         );
-      
+
         setProfileProjects(projectsData);
       }
     })();
