@@ -5,11 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { setFormData } from "@/redux/slices/FormSlice";
 import BoxView from "@/components/view/BoxView";
-import ProfileProjectsList from "@/components/list/ProfileProjectsList";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
-import ProfileJamsList from "@/components/list/ProfileJamsList";
-import ModalManager from "@/manager/ModalManager";
 import SectionManager from "@/manager/SectionManager";
 import ProfileViewField from "../field/ProfileViewField";
 import TextView from "@/components/view/TextView";
@@ -256,21 +253,12 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
           <TextView style={styles.groupTitle}>
             {i18n.t("{{ name }}' s projects", { name: UserManager.getProfileDisplayName(profileItem) })}
           </TextView>
-
-          <TouchableOpacity onPress={() => {
-            SectionManager.push(router, 'profile-projects', {
-              jamId: JSON.stringify(profileItem?.profile_projects),
-              title: i18n.t('Profile Projects'),
-              disableInfiniteScroll: true,
-            });
-          }}>
-            <TextView underline={true}>{i18n.t("View all")}</TextView>
-          </TouchableOpacity>
         </BoxView>
 
         <ProfileProjectsField
           idArray={profileItem?.profile_projects || []}
           emptyMessage={i18n.t('No data available.')}
+          isPublic={isPublic}
           addable={true}
         />
       </>
@@ -278,17 +266,19 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
   };
 
   const renderProfileJams = () => {
+    let groupTitle: string = i18n.t("{{ name }}' s jams", { name: UserManager.getProfileDisplayName(profileItem) });
+
     return (
       <>
         <BoxView direction="row" align="center" justify="space-between" style={styles.groupTitleContainer}>
           <TextView style={styles.groupTitle}>
-            {i18n.t("{{ name }}' s jams", { name: UserManager.getProfileDisplayName(profileItem) })}
+            {groupTitle}
           </TextView>
 
           <TouchableOpacity onPress={() => {
             SectionManager.push(router, 'profile-jams', {
-              jamId: JSON.stringify(profileItem?.profile_jams),
-              title: i18n.t('Profile Jams'),
+              jamId: JSON.stringify(profileItem?.profile_jams || []),
+              title: groupTitle,
               disableInfiniteScroll: true,
             });
           }}>
@@ -300,23 +290,26 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
           idArray={profileItem?.profile_jams || []}
           emptyMessage={i18n.t('No data available.')}
           addable={true}
+          isPublic={isPublic}
         />
       </>
     );
   };
 
   const renderSavedJams = () => {
+    let groupTitle: string = i18n.t('Saved jams');
+
     return (
       <>
         <BoxView direction="row" align="center" justify="space-between" style={styles.groupTitleContainer}>
           <TextView style={styles.groupTitle}>
-            {i18n.t('Saved jams')}
+            {groupTitle}
           </TextView>
 
           <TouchableOpacity onPress={() => {
             SectionManager.push(router, 'profile-jams', {
-              jamId: JSON.stringify(profileItem?.saved_jams),
-              title: i18n.t('Saved Jams'),
+              jamId: JSON.stringify(profileItem?.saved_jams || []),
+              title: groupTitle,
               disableInfiniteScroll: true,
             });
           }}>
@@ -327,6 +320,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
         <ProfileJamsField
           idArray={profileItem?.saved_jams || []}
           emptyMessage={i18n.t('No data available.')}
+          isPublic={isPublic}
         />
       </>
     );
