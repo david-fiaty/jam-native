@@ -6,7 +6,7 @@ type Props = {
   jamId: any;
 };
 
-const JamItemSection = ({ jamId }: Props) => {
+const ProfileJamsSection = ({ jamId }: Props) => {
   return (
     <BoxView
       direction="column"
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default JamItemSection;
+export default ProfileJamsSection;

@@ -12,38 +12,55 @@ import MediaManager from "@/manager/MediaManager";
 import NoImageView from "../view/NoImageView";
 import ImageView from "../view/ImageView";
 import ScreenManager from "@/manager/ScreenManager";
+import AddItemButton from "../button/AddItemButton";
+import ModalManager from "@/manager/ModalManager";
 
 type Props = {
   idArray?: any;
   isPublic?: boolean;
+  addable?: boolean;
   emptyMessage?: any;
 };
 
 const numColumns = 3;
 
-const ProfileJamsField = ({ idArray, isPublic, emptyMessage }: Props) => {
+const ProfileJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) => {
   const router = useRouter();
   const [profileJams, setProfileJams] = useState<any[]>([]);
+  const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
-    SectionManager.push(router, 'jam-item', {
+    SectionManager.push(router, 'profile-jams', {
       jamId: JSON.stringify([row?.item?.id]),
       title: row?.item?.title,
       disableInfiniteScroll: true,
     });
   };
 
+  const renderAddButton = () => {
+    return (
+      <AddItemButton
+        label={i18n.t('Add')}
+        width={imageSize.width}
+        height={imageSize.height}
+        onPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
+      />
+    );
+  };
+
   const renderItem = (row: any) => {
-    let imageSize = MediaManager.getThumbnailSize();
     let output: any = null;
     let imageUrl: any = row?.item?.medias?.[0]?.url;
 
-    if (!imageUrl || imageUrl == 'undefined') {
+    if (row?.item?.id == "addItem") {
+      output = renderAddButton();
+    }
+    else if (!imageUrl || imageUrl == 'undefined') {
       output = (
         <View style={styles.item}>
-          <NoImageView 
-            width={imageSize.width} 
-            height={imageSize.height} 
+          <NoImageView
+            width={imageSize.width}
+            height={imageSize.height}
             rounded={true}
           />
         </View>
@@ -70,11 +87,11 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage }: Props) => {
     );
   };
 
-  const getProfileJams = async (enttyIds: any[]) => {
-    let data: any[] = await EntityManager.getJams(enttyIds);
+  const getProfileJams = async (entityIds: any[]) => {
+    let data: any[] = await EntityManager.getJams(entityIds);
 
-    if (!isPublic) {
-      
+    if (!isPublic && addable) {
+      data.push({ id: "addItem" });
     }
 
     return data;
@@ -92,15 +109,19 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage }: Props) => {
 
   return (
     <View style={styles.container}>
-      <ListView
-        data={profileJams}
-        numColumns={numColumns}
-        contentContainerStyle={{ gap: Layout.space.base }}
-        columnWrapperStyle={{ gap: Layout.space.base }}
-        scrollEnabled={false}
-        emptyMessage={<TextView>{emptyMessage}</TextView>}
-        renderItem={(row: any) => renderItem(row)}
-      />
+      {profileJams?.length > 0 && (
+        <ListView
+          data={profileJams}
+          numColumns={numColumns}
+          contentContainerStyle={{ gap: Layout.space.base }}
+          columnWrapperStyle={{ gap: Layout.space.base }}
+          scrollEnabled={false}
+          emptyMessage={<TextView>{emptyMessage}</TextView>}
+          renderItem={(row: any) => renderItem(row)}
+        />
+      )}
+
+      {!profileJams?.length && (renderAddButton())}
     </View>
   );
 };
