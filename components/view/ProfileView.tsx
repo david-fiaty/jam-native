@@ -256,16 +256,6 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
           <TextView style={styles.groupTitle}>
             {i18n.t("{{ name }}' s projects", { name: UserManager.getProfileDisplayName(profileItem) })}
           </TextView>
-
-          <TouchableOpacity onPress={() => {
-            SectionManager.push(router, 'profile-projects', {
-              jamId: JSON.stringify(profileItem?.profile_projects || []),
-              title: i18n.t('Profile Projects'),
-              disableInfiniteScroll: true,
-            });
-          }}>
-            <TextView underline={true}>{i18n.t("View all")}</TextView>
-          </TouchableOpacity>
         </BoxView>
 
         <ProfileProjectsField
