@@ -12,6 +12,8 @@ import MediaManager from "@/manager/MediaManager";
 import NoImageView from "../view/NoImageView";
 import ImageView from "../view/ImageView";
 import ScreenManager from "@/manager/ScreenManager";
+import AddItemButton from "../button/AddItemButton";
+import ModalManager from "@/manager/ModalManager";
 
 type Props = {
   idArray?: any;
@@ -38,7 +40,16 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage }: Props) => {
     let output: any = null;
     let imageUrl: any = row?.item?.medias?.[0]?.url;
 
-    if (!imageUrl || imageUrl == 'undefined') {
+    if (row?.item?.id == "addItem") {
+      output = <AddItemButton
+        label={i18n.t('Add')}
+        width={imageSize.width}
+        height={imageSize.height}
+        onPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
+      />;
+    }
+    else if (!imageUrl || imageUrl == 'undefined') {
+
       output = (
         <View style={styles.item}>
           <NoImageView 
@@ -74,7 +85,7 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage }: Props) => {
     let data: any[] = await EntityManager.getJams(enttyIds);
 
     if (!isPublic) {
-      
+      data.push({ id: "addItem" });
     }
 
     return data;
