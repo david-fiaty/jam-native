@@ -145,7 +145,7 @@ const SectionView = () => {
       },
       {
         id: 'profile-projects',
-        title: i18n.t('Profile Project'),
+        title: i18n.t('Profile Projects'),
         showBackButton: true,
         render: (params: any) => <ProfileProjectsSection {...params} />,
       },
