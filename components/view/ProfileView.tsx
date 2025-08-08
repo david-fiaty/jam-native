@@ -271,6 +271,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
         <ProfileProjectsField
           idArray={profileItem?.profile_projects || []}
           emptyMessage={i18n.t('No data available.')}
+          isPublic={isPublic}
           addable={true}
         />
       </>
@@ -302,13 +303,14 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
           idArray={profileItem?.profile_jams || []}
           emptyMessage={i18n.t('No data available.')}
           addable={true}
+          isPublic={isPublic}
         />
       </>
     );
   };
 
   const renderSavedJams = () => {
-        let groupTitle: string = i18n.t('Saved jams');
+    let groupTitle: string = i18n.t('Saved jams');
 
     return (
       <>
@@ -331,6 +333,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
         <ProfileJamsField
           idArray={profileItem?.saved_jams || []}
           emptyMessage={i18n.t('No data available.')}
+          isPublic={isPublic}
         />
       </>
     );
