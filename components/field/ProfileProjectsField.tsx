@@ -43,7 +43,7 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
         label={i18n.t('Add')}
         width={imageSize.width}
         height={imageSize.height}
-        onPress={() => ModalManager.toggleModal('JamForm', { resource: 'jam' })}
+        onPress={() => SectionManager.push(router, 'add-project')}
       />
     );
   };
