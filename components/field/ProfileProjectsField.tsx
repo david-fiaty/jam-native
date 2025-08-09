@@ -9,9 +9,6 @@ import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
 import SectionManager from "@/manager/SectionManager";
 import MediaManager from "@/manager/MediaManager";
-import NoImageView from "../view/NoImageView";
-import ImageView from "../view/ImageView";
-import ScreenManager from "@/manager/ScreenManager";
 import AddItemButton from "../button/AddItemButton";
 
 type Props = {
@@ -55,7 +52,10 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
       output = renderAddButton();
     }
     else {
-      output = MediaManager.renderImage(imageUrl);
+      output = MediaManager.renderImage(imageUrl, {
+        numColumns: numColumns,
+        imageSize: imageSize,
+      });
     }
 
     return (
@@ -123,13 +123,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: Layout.space.base,
     flex: 1,
-  },
-  item: {
-    flexDirection: "column",
-    gap: Layout.space.small,
-  },
-  image: {
-    borderRadius: Layout.space.base,
   },
 });
 
