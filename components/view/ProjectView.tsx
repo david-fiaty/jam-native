@@ -10,11 +10,11 @@ import ProjectViewField from "../field/ProjectViewField";
 import ProjectJamsField from "../field/ProjectJamsField";
 
 type Props = {
-  idArray: any;
-  disableInfiniteScroll?: boolean;
+  idArray?: any;
+  isPublic?: boolean;
 };
 
-const ProjectView = ({ idArray }: Props) => {
+const ProjectView = ({ idArray, isPublic }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [projectItem, setProjectItem] = useState<any>(null);
 
@@ -47,6 +47,7 @@ const ProjectView = ({ idArray }: Props) => {
       <ProjectJamsField
         idArray={projectItem?.jams || []}
         emptyMessage={i18n.t('No data available.')}
+        isPublic={isPublic}
         addable={true}
       />
 
