@@ -88,7 +88,6 @@ class MediaManager {
 
     if (!uri || uri == 'undefined') {
       output = (
-        
         <View style={styles.item}>
           <NoImageView
             width={imageSize.width}
