@@ -1,0 +1,32 @@
+import React, { useState, useEffect } from "react";
+import ProfileView from "@/components/view/ProfileView";
+import UserManager from "@/manager/UserManager";
+import SpinnerView from "@/components/view/SpinnerView";
+
+type Props = {
+  profileId?: any;
+};
+
+const PublicProfileSection = ({ profileId }: Props) => {
+  const [profileData, setProfileData] = useState<any>(null);
+
+  useEffect(() => {
+    (async () => {
+      if (!profileData) {
+        setProfileData(await UserManager.getProfileData({ profile_id: profileId || null }));
+      }
+    })();
+  }, [profileData, profileId]);
+
+  if (!profileData) return <SpinnerView />;
+
+  return (
+    <ProfileView 
+      profileId={profileId} 
+      profileData={profileData} 
+      isPublic={true}
+    />
+  );
+};
+
+export default PublicProfileSection;
