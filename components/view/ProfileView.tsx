@@ -3,7 +3,6 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
-import { setFormData } from "@/redux/slices/FormSlice";
 import BoxView from "@/components/view/BoxView";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
@@ -17,7 +16,6 @@ import CollapsibleView from "@/components/view/CollapsibleView";
 import ProfileJamsField from "../field/ProfileJamsField";
 import ProfileProjectsField from "../field/ProfileProjectsField";
 
-const resource: string = 'profile';
 const profileImageSize: number = 111;
 
 type Props = {
@@ -29,11 +27,9 @@ type Props = {
 
 const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
   const router = useRouter();
-  const dispatch = useDispatch();
   const [sectorsData, setSectorsData] = useState<any[]>([]);
   const [profileItem, setProfileItem] = useState<any>({});
   const appState = useSelector((state: any) => state.app);
-  const formData = useSelector((state: any) => state.form?.[resource]);
 
   const renderHeader = () => {
     return (
@@ -259,7 +255,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
           idArray={profileItem?.profile_projects || []}
           emptyMessage={i18n.t('No data available.')}
           isPublic={isPublic}
-          addable={true}
+          addable={!isPublic}
         />
       </>
     );
