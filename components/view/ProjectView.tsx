@@ -10,22 +10,22 @@ import ProjectViewField from "../field/ProjectViewField";
 import ProjectJamsField from "../field/ProjectJamsField";
 
 type Props = {
-  idArray?: any;
+  projectId?: any;
   isPublic?: boolean;
 };
 
-const ProjectView = ({ idArray, isPublic }: Props) => {
+const ProjectView = ({ projectId, isPublic }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [projectItem, setProjectItem] = useState<any>(null);
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setProjectItem((await EntityManager.getProjects(idArray))?.[0]);
+        setProjectItem((await EntityManager.getProjects([projectId]))?.[0]);
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, idArray]);
+  }, [isLoaded, projectId]);
 
   return (
     <BoxView
