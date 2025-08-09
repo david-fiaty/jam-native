@@ -7,23 +7,25 @@ import BoxView from "../view/BoxView";
 import i18n from "@/translation/i18n";
 import ProjectJamsList from "../list/ProjectJamsList";
 import SectorsTagsView from "../view/SectorsTagsView";
+import ProjectViewField from "../field/ProjectViewField";
 
 type Props = {
-  projectId: any;
+  idArray: any;
+  disableInfiniteScroll?: boolean;
 };
 
-const ProjectsList = ({ projectId }: Props) => {
+const ProjectsList = ({ idArray }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [projectItem, setProjectItem] = useState<any>(null);
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setProjectItem((await EntityManager.getProjects([projectId]))?.[0]);
+        setProjectItem((await EntityManager.getProjects(idArray))?.[0]);
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, projectId]);
+  }, [isLoaded, idArray]);
 
   return (
     <BoxView
@@ -33,11 +35,13 @@ const ProjectsList = ({ projectId }: Props) => {
       scroll={true}
       style={styles.container}
     >
-      <TextView style={styles.sectionTitle}>{i18n.t('Name')}</TextView>
-      <TextView>{projectItem?.name}</TextView>
+      <ProjectViewField label={i18n.t('Name')}>
+        <TextView>{projectItem?.name || i18n.t('Unavailable')}</TextView>
+      </ProjectViewField>
     
-      <TextView style={styles.sectionTitle}>{i18n.t('Description')}</TextView>
-      <TextView>{projectItem?.description}</TextView>
+      <ProjectViewField label={i18n.t('Description')}>
+        <TextView>{projectItem?.description || i18n.t('Unavailable')}</TextView>
+      </ProjectViewField>
 
       <TextView style={styles.sectionTitle}>{i18n.t('Jams')} ({projectItem?.jams?.length || 0})</TextView>
       <ProjectJamsList 
