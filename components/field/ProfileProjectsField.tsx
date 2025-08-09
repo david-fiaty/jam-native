@@ -13,7 +13,6 @@ import NoImageView from "../view/NoImageView";
 import ImageView from "../view/ImageView";
 import ScreenManager from "@/manager/ScreenManager";
 import AddItemButton from "../button/AddItemButton";
-import ModalManager from "@/manager/ModalManager";
 
 type Props = {
   idArray?: any;
