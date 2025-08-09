@@ -1,53 +1,118 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from "react-redux";
-import ProjectJamsList from '../list/ProjectJamsList';
-import ModalManager from '@/manager/ModalManager';
-import UserManager from '@/manager/UserManager';
+import { StyleSheet, View, TouchableOpacity } from "react-native"
+import { useRouter } from "expo-router";
+import { Layout } from '@/constants/Layout';
+import ListView from '../view/ListView';
+import TextView from '../view/TextView';
+import SectionManager from '@/manager/SectionManager';
+import MediaManager from '@/manager/MediaManager';
+import AddItemButton from '../button/AddItemButton';
+import i18n from '@/translation/i18n';
+import SpinnerView from '../view/SpinnerView';
+import EntityManager from '@/manager/EntityManager';
+
+const numColumns = 3;
 
 type Props = {
-  resource: string;
-  field: string;
-  value?: any;
-  placeholder?: any;
-  onPress?: () => void;
+  idArray?: any;
+  isPublic?: boolean;
+  addable?: boolean;
+  emptyMessage?: any;
 };
 
-const ProjectJamsField = ({ resource, field, value, placeholder, onPress }: Props) => {
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [currentValue, setCurrentValue] = useState<any>([]);
-  const [profileData, setProfileData] = useState<any>(null);
-  const formData: any = useSelector((state: any) => state.form[resource]);
+const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) => {
+  const router = useRouter();
+  const [projectJams, setProjectJams] = useState<any[]>([]);
+  const imageSize = MediaManager.getThumbnailSize();
 
-  const getCurrentValue = () => {
-    return formData?.[field] || [];
+  const onItemPress = (row: any) => {
+    SectionManager.push(router, 'profile-jams', {
+      jamId: JSON.stringify([row?.item?.id]),
+      title: row?.item?.title,
+      disableInfiniteScroll: true,
+    });
+  };
+
+  const renderAddButton = () => {
+    return (
+      <AddItemButton
+        label={i18n.t('Add')}
+        width={imageSize.width}
+        height={imageSize.height}
+        onPress={() => SectionManager.push(router, 'add-jam')}
+      />
+    );
+  };
+
+  const renderItem = (row: any) => {
+    let output: any = null;
+    let imageUrl: any = row?.item?.medias?.[0]?.url;
+
+    if (row?.item?.id == "addItem") {
+      output = renderAddButton();
+    }
+    else {
+      output = MediaManager.renderImage(imageUrl, {
+        numColumns: numColumns,
+        imageSize: imageSize,
+      });
+    }
+
+    return (
+      <TouchableOpacity onPress={() => onItemPress(row)}>
+        {output}
+      </TouchableOpacity>
+    );
+  };
+
+  const getProjectJams = async (entityIds: any[]) => {
+    let data: any[] = await EntityManager.getJams(entityIds);
+
+    if (!isPublic && addable) {
+      data.push({ id: "addItem" });
+    }
+
+    return data;
   };
 
   useEffect(() => {
     (async () => {
-      if (!isLoaded) {
-        setProfileData(await UserManager.getProfileData());
-        setIsLoaded(true);
+      if (!projectJams?.length && Array.isArray(idArray) && idArray?.length > 0) {
+        setProjectJams(await getProjectJams(idArray));
       }
+    })();
+  }, [idArray, projectJams, isPublic]);
 
-      setCurrentValue(getCurrentValue());        
-    })();    
-  }, [isLoaded, formData, field]);
+  if (!projectJams) return <SpinnerView size="small" />;
 
   return (
-    <ProjectJamsList
-      resource={resource}
-      field={field}
-      idArray={currentValue}
-      addButton={true}
-      isDeletable={true}
-      onAddButtonPress={() => ModalManager.toggleModal("SelectJamsForm", {
-        field: 'jams_ids',
-        idArray: JSON.stringify(profileData?.profile_jams || []),
-        multiSelect: true,
-        resource: resource,
-      })}
-    />
+    <View style={styles.container}>
+      {projectJams?.length > 0 && (
+        <ListView
+          data={projectJams}
+          numColumns={numColumns}
+          contentContainerStyle={{ gap: Layout.space.base }}
+          columnWrapperStyle={{ gap: Layout.space.base }}
+          scrollEnabled={false}
+          emptyMessage={<TextView>{emptyMessage}</TextView>}
+          renderItem={(row: any) => renderItem(row)}
+        />
+      )}
+
+      {!projectJams?.length && (renderAddButton())}
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    width: "100%",
+  },
+  title: {
+    fontWeight: "bold",
+    marginBottom: Layout.space.base,
+    flex: 1,
+  },
+});
 
 export default ProjectJamsField;
