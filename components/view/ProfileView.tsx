@@ -123,15 +123,15 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
       return <TextView>{i18n.t('Unavailable')}</TextView>
     }
 
-    let profileSectors: any[] = sectorsData.filter((o: any) => profileItem.sectors.includes(o.id));
+    let sectors: any[] = sectorsData.filter((o: any) => profileItem.sectors.includes(o.id));
 
     return (
       <TextView>
-        {profileSectors.map((sector: any, i: number) => {
+        {sectors.map((sector: any, i: number) => {
           return (
             <TextView key={sector.id}>
               {sector.name}
-              {(i < profileSectors.length - 1) && (<TextView>, </TextView>)}
+              {(i < sectors.length - 1) && (<TextView>, </TextView>)}
             </TextView>
           );
         })}
@@ -144,18 +144,18 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
       return <TextView>{i18n.t('Unavailable')}</TextView>
     }
 
-    let profileSectors: any[] = sectorsData.filter((o: any) => profileItem.sectors.includes(o.id));
+    let sectors: any[] = sectorsData.filter((o: any) => profileItem.sectors.includes(o.id));
 
     return (
       <TextView>
-        {profileSectors.map((sector: any, i: number) => {
-          let profileSubSectors: any[] = sector.sub_sectors.filter((o: any) => profileItem.sectors.includes(o.id));
+        {sectors.map((sector: any, i: number) => {
+          let subSectors: any[] = sector.sub_sectors.filter((o: any) => profileItem.sectors.includes(o.id));
 
-          return profileSubSectors.map((subSector: any, i: number) => {
+          return subSectors.map((subSector: any, i: number) => {
             return (
               <TextView key={subSector.id}>
                 {subSector.name}
-                {(i < profileSubSectors.length - 1) && (<TextView>, </TextView>)}
+                {(i < subSectors.length - 1) && (<TextView>, </TextView>)}
               </TextView>
             );
           })
