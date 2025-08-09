@@ -1,32 +1,30 @@
-import React, { useState, useEffect } from "react";
-import SpinnerView from "@/components/view/SpinnerView";
-import EntityManager from "@/manager/EntityManager";
-import ProjectView from "@/components/view/ProjectView";
+import { StyleSheet } from "react-native";
+import BoxView from "@/components/view/BoxView";
+import ProjectsList from "@/components/list/ProjectsList";
 
 type Props = {
-  projectId?: any;
+  projectId: any;
 };
 
 const PrivateProjectSection = ({ projectId }: Props) => {
-  const [projectData, setProjectData] = useState<any>(null);
-
-  useEffect(() => {
-    (async () => {
-      if (!projectData) {
-        setProjectData(await EntityManager.getProjects([projectId]));
-      }
-    })();
-  }, [projectData, projectId]);
-
-  if (!projectData) return <SpinnerView />;
-
   return (
-    <ProjectView
-      projectId={projectId} 
-      projectData={projectData}
-      isPublic={false}
-    />
+    <BoxView
+      direction="column"
+      align="center"
+      justify="center"
+      style={styles.container}
+    >
+      <ProjectsList idArray={JSON.parse(projectId)} disableInfiniteScroll={true} />
+    </BoxView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    position: 'relative',
+    width: '100%',
+    height: '100%',
+  },
+});
 
 export default PrivateProjectSection;
