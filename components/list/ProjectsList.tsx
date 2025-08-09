@@ -8,6 +8,7 @@ import i18n from "@/translation/i18n";
 import ProjectJamsList from "../list/ProjectJamsList";
 import SectorsTagsView from "../view/SectorsTagsView";
 import ProjectViewField from "../field/ProjectViewField";
+import ProjectJamsField from "../field/ProjectJamsField";
 
 type Props = {
   idArray: any;
@@ -27,7 +28,6 @@ const ProjectsList = ({ idArray }: Props) => {
     })();
   }, [isLoaded, idArray]);
 
-  console.log(projectItem)
   return (
     <BoxView
       direction="column"
@@ -39,30 +39,16 @@ const ProjectsList = ({ idArray }: Props) => {
       <ProjectViewField label={i18n.t('Name')}>
         <TextView>{projectItem?.name || i18n.t('Unavailable')}</TextView>
       </ProjectViewField>
-    
+
       <ProjectViewField label={i18n.t('Description')}>
         <TextView>{projectItem?.description || i18n.t('Unavailable')}</TextView>
       </ProjectViewField>
 
       <TextView style={styles.sectionTitle}>{i18n.t('Jams')} ({projectItem?.jams?.length || 0})</TextView>
-      <ProjectJamsList 
-        resource="project"
-        idArray={projectItem?.jams}
-
-        // Todo - Implement project events
-        /*
-        onAddButtonPress={() => ScreenManager.toggleModal("SelectJamsForm", {
-          resource: resource,
-          profileId: formData?.id,
-          profileJams: profileJams,
-        })}
-        onDeleteButtonPress={(row: any) => {
-          let selectedIds: any = [...formData?.jams_ids];
-          let index: number = selectedIds.findIndex((id: any) => id == row?.item?.id);
-          selectedIds.splice(index, 1);
-          updateField("jams_ids", selectedIds);
-        }}
-          */
+      <ProjectJamsField
+        idArray={projectItem?.jams || []}
+        emptyMessage={i18n.t('No data available.')}
+        addable={true}
       />
 
       <TextView style={styles.sectionTitle}>{i18n.t('Sectors')}</TextView>
@@ -77,12 +63,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    paddingBottom: Layout.space.base*3,
+    paddingBottom: Layout.space.base * 3,
   },
   sectionTitle: {
     fontWeight: 'bold',
     fontSize: 13,
-    marginTop: Layout.space.base/1.5,
+    marginTop: Layout.space.base / 1.5,
   },
   projectTitle: {
     fontWeight: 'bold',
@@ -91,7 +77,7 @@ const styles = StyleSheet.create({
   },
   projectDescription: {
     width: '100%',
-    marginTop: Layout.space.base/1.5,
+    marginTop: Layout.space.base / 1.5,
   },
   projectSectors: {
     width: '100%',
