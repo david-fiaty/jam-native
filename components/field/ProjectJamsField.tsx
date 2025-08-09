@@ -107,7 +107,7 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
         />
       )}
 
-      {!projectJams?.length && (renderAddButton())}
+      {!projectJams?.length && !isPublic && (renderAddButton())}
     </View>
   );
 };

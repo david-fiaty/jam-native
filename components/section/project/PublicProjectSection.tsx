@@ -15,7 +15,7 @@ const PublicProjectSection = ({ projectId }: Props) => {
       style={styles.container}
     >
       <ProjectView 
-        isPublic={false} 
+        isPublic={true} 
         projectId={projectId}
       />
     </BoxView>
