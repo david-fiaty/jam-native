@@ -81,10 +81,10 @@ class MediaManager {
     }
   }
 
-  renderImage(uri: any) {
+  renderImage(uri: any, params?: any) {
     let output = null;
-    let numColumns: number = 3;
-    let imageSize = this.getThumbnailSize();
+    let numColumns: number = params?.numColumns || 3;
+    let imageSize = params?.imageSize || this.getThumbnailSize();
 
     if (!uri || uri == 'undefined') {
       output = (
