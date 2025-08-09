@@ -10,22 +10,22 @@ import ProjectViewField from "../field/ProjectViewField";
 import ProjectJamsField from "../field/ProjectJamsField";
 
 type Props = {
-  idArray: any;
-  disableInfiniteScroll?: boolean;
+  projectId?: any;
+  isPublic?: boolean;
 };
 
-const ProjectView = ({ idArray }: Props) => {
+const ProjectView = ({ projectId, isPublic }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [projectItem, setProjectItem] = useState<any>(null);
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setProjectItem((await EntityManager.getProjects(idArray))?.[0]);
+        setProjectItem((await EntityManager.getProjects([projectId]))?.[0]);
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, idArray]);
+  }, [isLoaded, projectId]);
 
   return (
     <BoxView
@@ -47,6 +47,7 @@ const ProjectView = ({ idArray }: Props) => {
       <ProjectJamsField
         idArray={projectItem?.jams || []}
         emptyMessage={i18n.t('No data available.')}
+        isPublic={isPublic}
         addable={true}
       />
 
