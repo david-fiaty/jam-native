@@ -11,14 +11,14 @@ import SectionManager from "@/manager/SectionManager";
 import MediaManager from "@/manager/MediaManager";
 import AddItemButton from "../button/AddItemButton";
 
+const numColumns = 3;
+
 type Props = {
   idArray?: any;
   isPublic?: boolean;
   addable?: boolean;
   emptyMessage?: any;
 };
-
-const numColumns = 3;
 
 const ProfileJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) => {
   const router = useRouter();
