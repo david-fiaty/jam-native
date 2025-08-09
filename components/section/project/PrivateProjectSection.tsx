@@ -14,7 +14,10 @@ const PrivateProjectSection = ({ projectId }: Props) => {
       justify="center"
       style={styles.container}
     >
-      <ProjectView idArray={JSON.parse(projectId)} disableInfiniteScroll={true} />
+      <ProjectView 
+        isPublic={false}
+        idArray={JSON.parse(projectId)} 
+      />
     </BoxView>
   );
 };
