@@ -16,7 +16,7 @@ const PublicProjectSection = ({ projectId }: Props) => {
     >
       <ProjectView 
         isPublic={false} 
-        idArray={JSON.parse(projectId)}
+        projectId={projectId}
       />
     </BoxView>
   );
