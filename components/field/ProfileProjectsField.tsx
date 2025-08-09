@@ -9,11 +9,7 @@ import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
 import SectionManager from "@/manager/SectionManager";
 import MediaManager from "@/manager/MediaManager";
-import NoImageView from "../view/NoImageView";
-import ImageView from "../view/ImageView";
-import ScreenManager from "@/manager/ScreenManager";
 import AddItemButton from "../button/AddItemButton";
-import ModalManager from "@/manager/ModalManager";
 
 type Props = {
   idArray?: any;
@@ -30,11 +26,14 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
   const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
-    SectionManager.push(router, 'profile-projects', {
-      projectId: JSON.stringify([row?.item?.id]),
-      title: row?.item?.title,
+    let path: string = isPublic ? 'public-project' : 'private-project';
+    let params: any = {
+      projectId: row?.item?.id,
+      title: i18n.t('Project'),
       disableInfiniteScroll: true,
-    });
+    };
+
+    SectionManager.push(router, path, params);
   };
 
   const renderAddButton = () => {
@@ -55,29 +54,11 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
     if (row?.item?.id == "addItem") {
       output = renderAddButton();
     }
-    else if (!imageUrl || imageUrl == 'undefined') {
-      output = (
-        <View style={styles.item}>
-          <NoImageView
-            width={imageSize.width}
-            height={imageSize.height}
-            rounded={true}
-          />
-        </View>
-      );
-    }
     else {
-      output = (
-        <View style={styles.item}>
-          <ImageView
-            uri={MediaManager.getImageUrl(imageUrl)}
-            width={imageSize.width}
-            height={imageSize.height}
-            resizeMode="cover"
-            style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
-          />
-        </View>
-      );
+      output = MediaManager.renderImage(imageUrl, {
+        numColumns: numColumns,
+        imageSize: imageSize,
+      });
     }
 
     return (
@@ -145,13 +126,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: Layout.space.base,
     flex: 1,
-  },
-  item: {
-    flexDirection: "column",
-    gap: Layout.space.small,
-  },
-  image: {
-    borderRadius: Layout.space.base,
   },
 });
 

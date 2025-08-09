@@ -405,6 +405,7 @@ const styles = StyleSheet.create({
   },
   groupTitleContainer: {
     width: '100%',
+    marginTop: Layout.space.base*1.5,
   },
   groupTitle: {
     fontWeight: 'bold',

@@ -3,7 +3,7 @@ import { ThemeProvider } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Layout } from '@/constants/Layout';
 import BaseTheme from "@/constants/BaseTheme";
-import SectionView from '@/components/section/SectionView';
+import SectionView from '@/components/view/SectionView';
 
 export default () => {
   return (

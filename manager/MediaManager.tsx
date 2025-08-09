@@ -1,10 +1,12 @@
-import { Linking } from 'react-native';
+import { Linking, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import { Config } from '@/constants/Config';
 import * as FileSystem from 'expo-file-system';
 import ScreenManager from "@/manager/ScreenManager";
 import DataManager from './DataManager';
 import i18n from '@/translation/i18n';
+import NoImageView from '@/components/view/NoImageView';
+import ImageView from '@/components/view/ImageView';
 
 class MediaManager {
   async getBase64Data(uri: string) {
@@ -78,6 +80,49 @@ class MediaManager {
       // Todo - Handle invalid link error
     }
   }
+
+  renderImage(uri: any, params?: any) {
+    let output = null;
+    let numColumns: number = params?.numColumns || 3;
+    let imageSize = params?.imageSize || this.getThumbnailSize();
+
+    if (!uri || uri == 'undefined') {
+      output = (
+        <View style={styles.item}>
+          <NoImageView
+            width={imageSize.width}
+            height={imageSize.height}
+            rounded={true}
+          />
+        </View>
+      );
+    }
+    else {
+      output = (
+        <View style={styles.item}>
+          <ImageView
+            uri={this.getImageUrl(uri)}
+            width={imageSize.width}
+            height={imageSize.height}
+            resizeMode="cover"
+            style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
+          />
+        </View>
+      );
+    }
+
+    return output;
+  }
 }
+
+const styles: any = {
+  item: {
+    flexDirection: "column",
+    gap: Layout.space.small,
+  },
+  image: {
+    borderRadius: Layout.space.base,
+  },
+};
 
 export default new MediaManager();
