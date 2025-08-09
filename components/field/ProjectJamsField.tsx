@@ -10,6 +10,7 @@ import AddItemButton from '../button/AddItemButton';
 import i18n from '@/translation/i18n';
 import SpinnerView from '../view/SpinnerView';
 import EntityManager from '@/manager/EntityManager';
+import ModalManager from '@/manager/ModalManager';
 
 const numColumns = 3;
 
@@ -39,7 +40,14 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
         label={i18n.t('Add')}
         width={imageSize.width}
         height={imageSize.height}
-        onPress={() => SectionManager.push(router, 'add-jam')}
+        onPress={() => {
+          ModalManager.toggleModal("SelectJamsForm", {
+                field: 'jams_ids',
+                idArray: JSON.stringify(idArray || []),
+                multiSelect: true,
+                resource: 'project', // Todo - Make dynamic
+              })}
+          }
       />
     );
   };

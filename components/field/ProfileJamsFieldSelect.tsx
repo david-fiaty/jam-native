@@ -11,29 +11,26 @@ import SectionManager from "@/manager/SectionManager";
 import MediaManager from "@/manager/MediaManager";
 import AddItemButton from "../button/AddItemButton";
 
+const numColumns = 3;
+
 type Props = {
   idArray?: any;
   isPublic?: boolean;
-  emptyMessage?: any;
   addable?: boolean;
+  emptyMessage?: any;
 };
 
-const numColumns = 3;
-
-const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Props) => {
+const ProfileJamsFieldSelect = ({ idArray, isPublic, emptyMessage, addable }: Props) => {
   const router = useRouter();
-  const [profileProjects, setProfileProjects] = useState<any[]>([]);
+  const [profileJams, setProfileJams] = useState<any[]>([]);
   const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
-    let path: string = isPublic ? 'public-project' : 'private-project';
-    let params: any = {
-      projectId: JSON.stringify([row?.item?.id]),
-      title: i18n.t('Project'),
+    SectionManager.push(router, 'profile-jams', {
+      jamId: JSON.stringify([row?.item?.id]),
+      title: row?.item?.title,
       disableInfiniteScroll: true,
-    };
-
-    SectionManager.push(router, path, params);
+    });
   };
 
   const renderAddButton = () => {
@@ -42,14 +39,14 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
         label={i18n.t('Add')}
         width={imageSize.width}
         height={imageSize.height}
-        onPress={() => SectionManager.push(router, 'add-project')}
+        onPress={() => SectionManager.push(router, 'add-jam')}
       />
     );
   };
 
   const renderItem = (row: any) => {
     let output: any = null;
-    let imageUrl: any = row.item.firstJam?.medias?.[0]?.url;
+    let imageUrl: any = row?.item?.medias?.[0]?.url;
 
     if (row?.item?.id == "addItem") {
       output = renderAddButton();
@@ -68,8 +65,8 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
     );
   };
 
-  const getProfileProjects = async (entityIds: any[]) => {
-    let data: any[] = await EntityManager.getProjects(entityIds);
+  const getProfileJams = async (entityIds: any[]) => {
+    let data: any[] = await EntityManager.getJams(entityIds);
 
     if (!isPublic && addable) {
       data.push({ id: "addItem" });
@@ -78,32 +75,21 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
     return data;
   };
 
-  const addProjectsImages = async (projectsData: any[]) => {
-    return await Promise.all(
-      projectsData.map(async (item: any) => ({
-        ...item,
-        firstJam: (await EntityManager.getJams([item?.jams[0]]))?.[0],
-      }))
-    );
-  };
-
   useEffect(() => {
     (async () => {
-      if (!profileProjects?.length && Array.isArray(idArray) && idArray?.length > 0) {
-        let projectsData: any = await getProfileProjects(idArray);
-        projectsData = await addProjectsImages(projectsData);
-        setProfileProjects(projectsData);
+      if (!profileJams?.length && Array.isArray(idArray) && idArray?.length > 0) {
+        setProfileJams(await getProfileJams(idArray));
       }
     })();
-  }, [idArray, profileProjects, isPublic]);
+  }, [idArray, profileJams, isPublic]);
 
-  if (!profileProjects) return <SpinnerView size="small" />;
+  if (!profileJams) return <SpinnerView size="small" />;
 
   return (
     <View style={styles.container}>
-      {profileProjects?.length > 0 && (
+      {profileJams?.length > 0 && (
         <ListView
-          data={profileProjects}
+          data={profileJams}
           numColumns={numColumns}
           contentContainerStyle={{ gap: Layout.space.base }}
           columnWrapperStyle={{ gap: Layout.space.base }}
@@ -113,7 +99,7 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
         />
       )}
 
-      {!profileProjects?.length && (renderAddButton())}
+      {!profileJams?.length && (renderAddButton())}
     </View>
   );
 };
@@ -129,4 +115,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileProjectsField;
+export default ProfileJamsFieldSelect;
