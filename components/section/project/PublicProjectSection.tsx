@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import BoxView from "@/components/view/BoxView";
-import ProjectsList from "@/components/list/ProjectsList";
+import ProjectView from "@/components/view/ProjectView";
 
 type Props = {
   projectId: any;
@@ -14,7 +14,7 @@ const PublicProjectSection = ({ projectId }: Props) => {
       justify="center"
       style={styles.container}
     >
-      <ProjectsList idArray={JSON.parse(projectId)} disableInfiniteScroll={true} />
+      <ProjectView idArray={JSON.parse(projectId)} disableInfiniteScroll={true} />
     </BoxView>
   );
 };
