@@ -54,29 +54,8 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
     if (row?.item?.id == "addItem") {
       output = renderAddButton();
     }
-    else if (!imageUrl || imageUrl == 'undefined') {
-      output = (
-        <View style={styles.item}>
-          <NoImageView
-            width={imageSize.width}
-            height={imageSize.height}
-            rounded={true}
-          />
-        </View>
-      );
-    }
     else {
-      output = (
-        <View style={styles.item}>
-          <ImageView
-            uri={MediaManager.getImageUrl(imageUrl)}
-            width={imageSize.width}
-            height={imageSize.height}
-            resizeMode="cover"
-            style={[styles.image, ScreenManager.getGridCellSize(numColumns)]}
-          />
-        </View>
-      );
+      output = MediaManager.renderImage(imageUrl);
     }
 
     return (
