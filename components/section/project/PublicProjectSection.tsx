@@ -1,32 +1,32 @@
 import React, { useState, useEffect } from "react";
-import ProfileView from "@/components/view/ProfileView";
-import UserManager from "@/manager/UserManager";
 import SpinnerView from "@/components/view/SpinnerView";
+import EntityManager from "@/manager/EntityManager";
+import ProjectView from "@/components/view/ProjectView";
 
 type Props = {
-  profileId?: any;
+  projectId?: any;
 };
 
-const PublicProfileSection = ({ profileId }: Props) => {
-  const [profileData, setProfileData] = useState<any>(null);
+const PublicProjectSection = ({ projectId }: Props) => {
+  const [projectData, setProjectData] = useState<any>(null);
 
   useEffect(() => {
     (async () => {
-      if (!profileData) {
-        setProfileData(await UserManager.getProfileData({ profile_id: profileId || null }));
+      if (!projectData) {
+        setProjectData(await EntityManager.getProjects([projectId]));
       }
     })();
-  }, [profileData, profileId]);
+  }, [projectData, projectId]);
 
-  if (!profileData) return <SpinnerView />;
+  if (!projectData) return <SpinnerView />;
 
   return (
-    <ProfileView 
-      profileId={profileId} 
-      profileData={profileData} 
+    <ProjectView
+      projectId={projectId} 
+      projectData={projectData}
       isPublic={true}
     />
   );
 };
 
-export default PublicProfileSection;
+export default PublicProjectSection;
