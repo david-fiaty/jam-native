@@ -1,16 +1,15 @@
-import { useState, useEffect } from 'react';
-import { StyleSheet, View, TouchableOpacity } from "react-native"
+import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
-import { Layout } from '@/constants/Layout';
-import ListView from '../view/ListView';
-import TextView from '../view/TextView';
-import SectionManager from '@/manager/SectionManager';
-import MediaManager from '@/manager/MediaManager';
-import AddItemButton from '../button/AddItemButton';
-import i18n from '@/translation/i18n';
-import SpinnerView from '../view/SpinnerView';
-import EntityManager from '@/manager/EntityManager';
-import ModalManager from '@/manager/ModalManager';
+import { Layout } from "@/constants/Layout";
+import TextView from "../view/TextView";
+import i18n from "@/translation/i18n";
+import ListView from "../view/ListView";
+import EntityManager from "@/manager/EntityManager";
+import SpinnerView from "../view/SpinnerView";
+import SectionManager from "@/manager/SectionManager";
+import MediaManager from "@/manager/MediaManager";
+import AddItemButton from "../button/AddItemButton";
 
 const numColumns = 3;
 
@@ -21,9 +20,9 @@ type Props = {
   emptyMessage?: any;
 };
 
-const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) => {
+const ProfileJamsFieldSelect = ({ idArray, isPublic, emptyMessage, addable }: Props) => {
   const router = useRouter();
-  const [projectJams, setProjectJams] = useState<any[]>([]);
+  const [profileJams, setProfileJams] = useState<any[]>([]);
   const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
@@ -40,14 +39,7 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
         label={i18n.t('Add')}
         width={imageSize.width}
         height={imageSize.height}
-        onPress={() => {
-          ModalManager.toggleModal("SelectJamsForm", {
-                field: 'jams_ids',
-                idArray: JSON.stringify(idArray || []),
-                multiSelect: true,
-                resource: 'project', // Todo - Make dynamic
-              })}
-          }
+        onPress={() => SectionManager.push(router, 'add-jam')}
       />
     );
   };
@@ -73,7 +65,7 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
     );
   };
 
-  const getProjectJams = async (entityIds: any[]) => {
+  const getProfileJams = async (entityIds: any[]) => {
     let data: any[] = await EntityManager.getJams(entityIds);
 
     if (!isPublic && addable) {
@@ -85,19 +77,19 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
 
   useEffect(() => {
     (async () => {
-      if (!projectJams?.length && Array.isArray(idArray) && idArray?.length > 0) {
-        setProjectJams(await getProjectJams(idArray));
+      if (!profileJams?.length && Array.isArray(idArray) && idArray?.length > 0) {
+        setProfileJams(await getProfileJams(idArray));
       }
     })();
-  }, [idArray, projectJams, isPublic]);
+  }, [idArray, profileJams, isPublic]);
 
-  if (!projectJams) return <SpinnerView size="small" />;
+  if (!profileJams) return <SpinnerView size="small" />;
 
   return (
     <View style={styles.container}>
-      {projectJams?.length > 0 && (
+      {profileJams?.length > 0 && (
         <ListView
-          data={projectJams}
+          data={profileJams}
           numColumns={numColumns}
           contentContainerStyle={{ gap: Layout.space.base }}
           columnWrapperStyle={{ gap: Layout.space.base }}
@@ -107,7 +99,7 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
         />
       )}
 
-      {!projectJams?.length && (renderAddButton())}
+      {!profileJams?.length && (renderAddButton())}
     </View>
   );
 };
@@ -123,4 +115,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProjectJamsField;
+export default ProfileJamsFieldSelect;
