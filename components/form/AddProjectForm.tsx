@@ -148,12 +148,13 @@ const AddProjectForm = () => {
           field="sectors_ids"
           value={formData?.sectors_ids}
         />
-        
+
         <TextView>{i18n.t('Project Jams')}</TextView>
         <ProjectJamsField
-          resource={resource}
-          field="jams_ids"
-          value={formData?.jams_ids}
+          idArray={formData?.jams_ids || []}
+          emptyMessage={i18n.t('No data available.')}
+          isPublic={false}
+          addable={true}
         />
 
         <View style={styles.subtmitButtoncontainer}>

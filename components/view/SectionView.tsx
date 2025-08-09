@@ -172,17 +172,6 @@ const SectionView = () => {
         title: i18n.t('Edit Profile'),
         render: (params: any) => <ProfileFormSection {...params} />,
       },
-
-      /*
-      {
-        id: 'profile-projects',
-        title: i18n.t('Profile Projects'),
-        showBackButton: true,
-        render: (params: any) => <ProfileProjectsSection {...params} />,
-      },
-
-      */
-
       {
         id: 'public-project',
         title: i18n.t('Project'),
@@ -204,9 +193,6 @@ const SectionView = () => {
         title: i18n.t('Edit Profile'),
         render: (params: any) => <ProfileFormSection {...params} />,
       },
-
-
-
       {
         id: 'reset-password',
         title: i18n.t('Reset password'),
