@@ -160,12 +160,6 @@ const SectionView = () => {
         id: 'public-profile',
         title: i18n.t('Profile'),
         render: (params: any) => <PublicProfileSection {...params} />,
-        toolbarButtons: [
-          {
-            label: i18n.t('Edit'),
-            sectionId: 'profile-form',
-          },
-        ],
       },
       {
         id: 'private-profile',
