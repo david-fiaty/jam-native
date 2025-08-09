@@ -5,7 +5,6 @@ import TextView from "../view/TextView";
 import EntityManager from "@/manager/EntityManager";
 import BoxView from "../view/BoxView";
 import i18n from "@/translation/i18n";
-import ProjectJamsList from "../list/ProjectJamsList";
 import SectorsTagsView from "../view/SectorsTagsView";
 import ProjectViewField from "../field/ProjectViewField";
 import ProjectJamsField from "../field/ProjectJamsField";
@@ -15,7 +14,7 @@ type Props = {
   disableInfiniteScroll?: boolean;
 };
 
-const ProjectsList = ({ idArray }: Props) => {
+const ProjectView = ({ idArray }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [projectItem, setProjectItem] = useState<any>(null);
 
@@ -85,4 +84,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProjectsList;
+export default ProjectView;

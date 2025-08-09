@@ -26,10 +26,11 @@ import NotificationItemSection from "../section/NotificationItemSection";
 import PublicProfileSection from "../section/profile/PublicProfileSection";
 import PrivateProfileSection from "../section/profile/PrivateProfileSection";
 import ProfileJamsSection from "../section/ProfileJamsSection";
-import ProfileProjectsSection from "../section/ProfileProjectsSection";
 import JamForm from "../form/JamForm";
+import PublicProjectSection from "../section/project/PublicProjectSection";
+import PrivateProjectSection from "../section/project/PrivateProjectSection";
 
-const SectionView = () => { 
+const SectionView = () => {
   const path = usePathname();
   const dispatch = useDispatch();
   const [currentSection, setCurrentSection] = useState<any>(null);
@@ -49,21 +50,21 @@ const SectionView = () => {
   };
 
   const isModalTitleVisible = () => {
-    return modalState.active.length > 0 && modalState[modalState.active.length -1]?.showTitle === true;
+    return modalState.active.length > 0 && modalState[modalState.active.length - 1]?.showTitle === true;
   };
 
   const showBackButton = () => {
-    return currentSection?.showTitle === true 
-      && currentSection?.showBackButton === true 
+    return currentSection?.showTitle === true
+      && currentSection?.showBackButton === true
       && (!modalState.active.length || !isModalTitleVisible());
   };
-  
+
   const getDefaultSection = (renderer: boolean = true) => {
     return getSections(renderer).find((o: any) => o.default === true);
   };
 
   const getSection = (sectionId: any, renderer: boolean = true) => {
-    if (sectionId) { 
+    if (sectionId) {
       return getSections(renderer).find((o: any) => o.id === sectionId);
     }
     else {
@@ -145,12 +146,6 @@ const SectionView = () => {
         render: (params: any) => <ProfileJamsSection {...params} />,
       },
       {
-        id: 'profile-projects',
-        title: i18n.t('Profile Projects'),
-        showBackButton: true,
-        render: (params: any) => <ProfileProjectsSection {...params} />,
-      },
-      {
         id: 'notification-item',
         title: i18n.t('Notification'),
         showBackButton: true,
@@ -160,12 +155,6 @@ const SectionView = () => {
         id: 'public-profile',
         title: i18n.t('Profile'),
         render: (params: any) => <PublicProfileSection {...params} />,
-        toolbarButtons: [
-          {
-            label: i18n.t('Edit'),
-            sectionId: 'profile-form',
-          },
-        ],
       },
       {
         id: 'private-profile',
@@ -183,6 +172,41 @@ const SectionView = () => {
         title: i18n.t('Edit Profile'),
         render: (params: any) => <ProfileFormSection {...params} />,
       },
+
+      /*
+      {
+        id: 'profile-projects',
+        title: i18n.t('Profile Projects'),
+        showBackButton: true,
+        render: (params: any) => <ProfileProjectsSection {...params} />,
+      },
+
+      */
+
+      {
+        id: 'public-project',
+        title: i18n.t('Project'),
+        render: (params: any) => <PublicProjectSection {...params} />,
+      },
+      {
+        id: 'private-project',
+        title: i18n.t('Your project'),
+        render: (params: any) => <PrivateProjectSection {...params} />,
+        toolbarButtons: [
+          {
+            label: i18n.t('Edit'),
+            sectionId: 'project-form',
+          },
+        ],
+      },
+      {
+        id: 'profile-form',
+        title: i18n.t('Edit Profile'),
+        render: (params: any) => <ProfileFormSection {...params} />,
+      },
+
+
+
       {
         id: 'reset-password',
         title: i18n.t('Reset password'),
@@ -244,10 +268,10 @@ const SectionView = () => {
         style={styles.container}
       >
         {currentSection?.render(currentSection?.params || {})}
-  
+
         <ModalView currentSection={currentSection} style={styles.modal} />
       </BoxView>
-      
+
       {currentSection?.showFooter === true && <SectionFooter style={styles.footer} />}
     </>
   );
@@ -257,15 +281,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Layout.colors.white,
-    paddingHorizontal: Layout.space.base*1.5,
+    paddingHorizontal: Layout.space.base * 1.5,
   },
   modal: {
-    paddingHorizontal: Layout.space.base*1.5,
+    paddingHorizontal: Layout.space.base * 1.5,
     backgroundColor: Layout.colors.white,
     zIndex: 10,
   },
   header: {
-    paddingHorizontal: Layout.space.base*1.5,
+    paddingHorizontal: Layout.space.base * 1.5,
     zIndex: 20,
   },
   footer: {

@@ -1,12 +1,12 @@
 import { StyleSheet } from "react-native";
-import BoxView from '../view/BoxView';
-import ProjectsList from "../list/ProjectsList";
+import BoxView from "@/components/view/BoxView";
+import ProjectView from "@/components/view/ProjectView";
 
 type Props = {
   projectId: any;
 };
 
-const ProfileProjectsSection = ({ projectId }: Props) => {
+const PrivateProjectSection = ({ projectId }: Props) => {
   return (
     <BoxView
       direction="column"
@@ -14,7 +14,7 @@ const ProfileProjectsSection = ({ projectId }: Props) => {
       justify="center"
       style={styles.container}
     >
-      <ProjectsList idArray={JSON.parse(projectId)} disableInfiniteScroll={true} />
+      <ProjectView idArray={JSON.parse(projectId)} disableInfiniteScroll={true} />
     </BoxView>
   );
 };
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileProjectsSection;
+export default PrivateProjectSection;
