@@ -8,7 +8,7 @@ import BoxView from "@/components/view/BoxView";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import SectionManager from "@/manager/SectionManager";
-import ProfileViewField from "../field/ProfileViewField";
+import ProjectViewField from "../field/ProjectViewField";
 import TextView from "@/components/view/TextView";
 import ImageView from "@/components/view/ImageView";
 import MediaManager from "@/manager/MediaManager";
@@ -21,13 +21,13 @@ const resource: string = 'profile';
 const profileImageSize: number = 111;
 
 type Props = {
-  profileId?: any;
-  profileData?: any;
+  projectId?: any;
+  projectData?: any;
   isOwner?: boolean;
   isPublic?: boolean;
 };
 
-const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
+const ProjectView = ({ projectId, projectData, isOwner, isPublic }: Props) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [sectorsData, setSectorsData] = useState<any[]>([]);
@@ -60,13 +60,13 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
         </BoxView>
 
         <View style={styles.profileHeaderRight}>
-          <ProfileViewField>
+          <ProjectViewField>
             <TextView>
               {profileItem?.profile_name}
             </TextView>
-          </ProfileViewField>
+          </ProjectViewField>
 
-          <ProfileViewField>
+          <ProjectViewField>
             <BoxView direction="row" align="center" justify="flex-start">
               <IconView
                 name="instagram"
@@ -110,13 +110,13 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
                 }}
               />
             </BoxView>
-          </ProfileViewField>
+          </ProjectViewField>
 
-          <ProfileViewField>
+          <ProjectViewField>
             <TextView>
               {profileItem?.email || i18n.t('Email unavailable')}
             </TextView>
-          </ProfileViewField>
+          </ProjectViewField>
         </View>
       </>
     );
@@ -172,75 +172,75 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
     if (profileItem?.profile_organization) {
       return (
         <BoxView direction="column">
-          <ProfileViewField label={i18n.t('Organization name')}>
+          <ProjectViewField label={i18n.t('Organization name')}>
             <TextView>
               {profileItem?.profile_organization?.organization_name}
             </TextView>
-          </ProfileViewField>
+          </ProjectViewField>
 
-          <ProfileViewField label={i18n.t('Creation year')}>
+          <ProjectViewField label={i18n.t('Creation year')}>
             <TextView>
               {profileItem?.profile_organization?.creation_year || i18n.t('Unavailable')}
             </TextView>
-          </ProfileViewField>
+          </ProjectViewField>
 
-          <ProfileViewField label={i18n.t('Address')}>
+          <ProjectViewField label={i18n.t('Address')}>
             <TextView>
               {profileItem?.address || i18n.t('Unavailable')}
             </TextView>
-          </ProfileViewField>
+          </ProjectViewField>
         </BoxView>
       );
     }
     else if (profileItem?.profile_venue) {
       return (
         <BoxView direction="column">
-          <ProfileViewField label={i18n.t('Venue name')}>
+          <ProjectViewField label={i18n.t('Venue name')}>
             <TextView>
               {profileItem?.profile_venue?.venue_name}
             </TextView>
-          </ProfileViewField>
+          </ProjectViewField>
 
-          <ProfileViewField label={i18n.t('Venue types')}>
+          <ProjectViewField label={i18n.t('Venue types')}>
             <TextView>
               Venue types
             </TextView>
-          </ProfileViewField>
+          </ProjectViewField>
 
-          <ProfileViewField label={i18n.t('Creation year')}>
+          <ProjectViewField label={i18n.t('Creation year')}>
             <TextView>
               {profileItem?.profile_venue?.creation_year || i18n.t('Unavailable')}
             </TextView>
-          </ProfileViewField>
+          </ProjectViewField>
 
-          <ProfileViewField label={i18n.t('Address')}>
+          <ProjectViewField label={i18n.t('Address')}>
             <TextView>
               {profileItem?.address || i18n.t('Unavailable')}
             </TextView>
-          </ProfileViewField>
+          </ProjectViewField>
         </BoxView>
       );
     }
     else if (profileItem?.profile_personal) {
       return (
         <BoxView direction="column">
-          <ProfileViewField label={i18n.t('First name')}>
+          <ProjectViewField label={i18n.t('First name')}>
             <TextView>
               {profileItem?.profile_personal?.first_name || i18n.t('Unavailable')}
             </TextView>
-          </ProfileViewField>
+          </ProjectViewField>
 
-          <ProfileViewField label={i18n.t('Last name')}>
+          <ProjectViewField label={i18n.t('Last name')}>
             <TextView>
               {profileItem?.profile_personal?.last_name || i18n.t('Unavailable')}
             </TextView>
-          </ProfileViewField>
+          </ProjectViewField>
 
-          <ProfileViewField label={i18n.t('Address')}>
+          <ProjectViewField label={i18n.t('Address')}>
             <TextView>
               {profileItem?.address || i18n.t('Unavailable')}
             </TextView>
-          </ProfileViewField>
+          </ProjectViewField>
         </BoxView>
       );
     }
@@ -327,9 +327,9 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
   };
 
   useEffect(() => {
-    setProfileItem(profileData);
+    setProfileItem(projectData);
     setSectorsData(appState.sectorsData);
-  }, [profileData, appState]);
+  }, [projectData, appState]);
 
   return (
     <BoxView
@@ -339,35 +339,35 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
       style={styles.container}
       scroll={true}
     >
-      <ProfileViewField>
+      <ProjectViewField>
         <TextView style={styles.profileTitle}>
           {UserManager.getProfileDisplayName(profileItem)}
         </TextView>
-      </ProfileViewField>
+      </ProjectViewField>
 
       <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.profileHeader}>
         {renderHeader()}
       </BoxView>
 
-      <ProfileViewField label={i18n.t('Industries')}>
+      <ProjectViewField label={i18n.t('Industries')}>
         {renderSectors()}
-      </ProfileViewField>
+      </ProjectViewField>
 
-      <ProfileViewField label={i18n.t('Sub-industries')}>
+      <ProjectViewField label={i18n.t('Sub-industries')}>
         {renderSubSectors()}
-      </ProfileViewField>
+      </ProjectViewField>
 
-      <ProfileViewField label={i18n.t('Description')}>
+      <ProjectViewField label={i18n.t('Description')}>
         <TextView>
           {profileItem?.profile_description || i18n.t('Unavailable')}
         </TextView>
-      </ProfileViewField>
+      </ProjectViewField>
 
-      <ProfileViewField label={i18n.t('Main activities')}>
+      <ProjectViewField label={i18n.t('Main activities')}>
         <TextView>
           Activities list
         </TextView>
-      </ProfileViewField>
+      </ProjectViewField>
 
       <CollapsibleView
         label={(
@@ -459,4 +459,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileView;
+export default ProjectView;
