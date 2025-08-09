@@ -26,18 +26,14 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
   const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
+    let path: string = isPublic ? 'public-project' : 'private-project';
     let params: any = {
       projectId: JSON.stringify([row?.item?.id]),
-      title: row?.item?.title,
+      title: i18n.t('Project'),
       disableInfiniteScroll: true,
     };
 
-    if (isPublic) {
-      SectionManager.push(router, 'public-projects', params);
-    }
-    else {
-      SectionManager.push(router, 'private-projects', params);
-    }
+    SectionManager.push(router, path, params);
   };
 
   const renderAddButton = () => {
