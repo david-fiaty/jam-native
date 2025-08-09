@@ -1,27 +1,32 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import ProfileView from "@/components/view/ProfileView";
-import UserManager from "@/manager/UserManager";
+import SpinnerView from "@/components/view/SpinnerView";
+import EntityManager from "@/manager/EntityManager";
+import ProjectView from "@/components/view/ProjectView";
 
-const PrivateProfileSection = () => {
-  const [profileData, setProfileData] = useState<any>(null);
-  const userState = useSelector((state: any) => state.user);
+type Props = {
+  projectId?: any;
+};
+
+const PrivateProjectSection = ({ projectId }: Props) => {
+  const [projectData, setProjectData] = useState<any>(null);
 
   useEffect(() => {
     (async () => {
-      if (!profileData) {
-        setProfileData(userState.profileData);
+      if (!projectData) {
+        setProjectData(await EntityManager.getProjects([projectId]));
       }
     })();
-  }, [profileData, userState]);
+  }, [projectData, projectId]);
+
+  if (!projectData) return <SpinnerView />;
 
   return (
-    <ProfileView 
-      profileId={profileData?.id} 
-      profileData={profileData} 
-      isOwner={UserManager.isLoggedIn()}
+    <ProjectView
+      projectId={projectId} 
+      projectData={projectData}
+      isPublic={false}
     />
   );
 };
 
-export default PrivateProfileSection;
+export default PrivateProjectSection;
