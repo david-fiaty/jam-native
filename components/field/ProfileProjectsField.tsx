@@ -28,7 +28,7 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
   const onItemPress = (row: any) => {
     let path: string = isPublic ? 'public-project' : 'private-project';
     let params: any = {
-      projectId: JSON.stringify([row?.item?.id]),
+      projectId: row?.item?.id,
       title: i18n.t('Project'),
       disableInfiniteScroll: true,
     };
