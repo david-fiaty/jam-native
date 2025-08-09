@@ -1,34 +1,28 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { useSelector } from "react-redux";
+import { StyleSheet, View, TouchableOpacity } from "react-native"
 import { useRouter } from "expo-router";
 import { Layout } from '@/constants/Layout';
-import ProjectJamsList from '../list/ProjectJamsList';
-import ModalManager from '@/manager/ModalManager';
-import UserManager from '@/manager/UserManager';
 import ListView from '../view/ListView';
 import TextView from '../view/TextView';
 import SectionManager from '@/manager/SectionManager';
 import MediaManager from '@/manager/MediaManager';
 import AddItemButton from '../button/AddItemButton';
 import i18n from '@/translation/i18n';
+import SpinnerView from '../view/SpinnerView';
+import EntityManager from '@/manager/EntityManager';
 
 const numColumns = 3;
 
 type Props = {
-  resource: string;
-  field: string;
-  value?: any;
-  placeholder?: any;
+  idArray?: any;
+  isPublic?: boolean;
+  addable?: boolean;
   emptyMessage?: any;
-  onPress?: () => void;
 };
 
-const ProjectJamsField = ({ resource, field, value, placeholder, emptyMessage, onPress }: Props) => {
+const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) => {
   const router = useRouter();
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [currentValue, setCurrentValue] = useState<any>([]);
-  const formData: any = useSelector((state: any) => state.form[resource]);
+  const [projectJams, setProjectJams] = useState<any[]>([]);
   const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
@@ -71,25 +65,31 @@ const ProjectJamsField = ({ resource, field, value, placeholder, emptyMessage, o
     );
   };
 
-  const getCurrentValue = () => {
-    return formData?.[field] || [];
+  const getProjectJams = async (entityIds: any[]) => {
+    let data: any[] = await EntityManager.getJams(entityIds);
+
+    if (!isPublic && addable) {
+      data.push({ id: "addItem" });
+    }
+
+    return data;
   };
 
   useEffect(() => {
     (async () => {
-      if (!isLoaded) {
-        setIsLoaded(true);
+      if (!projectJams?.length && Array.isArray(idArray) && idArray?.length > 0) {
+        setProjectJams(await getProjectJams(idArray));
       }
+    })();
+  }, [idArray, projectJams, isPublic]);
 
-      setCurrentValue(getCurrentValue());        
-    })();    
-  }, [isLoaded, formData, field]);
+  if (!projectJams) return <SpinnerView size="small" />;
 
   return (
     <View style={styles.container}>
-      {currentValue?.length > 0 && (
+      {projectJams?.length > 0 && (
         <ListView
-          data={currentValue}
+          data={projectJams}
           numColumns={numColumns}
           contentContainerStyle={{ gap: Layout.space.base }}
           columnWrapperStyle={{ gap: Layout.space.base }}
@@ -99,7 +99,7 @@ const ProjectJamsField = ({ resource, field, value, placeholder, emptyMessage, o
         />
       )}
 
-      {!currentValue?.length && (renderAddButton())}
+      {!projectJams?.length && (renderAddButton())}
     </View>
   );
 };
