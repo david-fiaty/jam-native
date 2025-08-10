@@ -11,6 +11,7 @@ import i18n from '@/translation/i18n';
 import SpinnerView from '../view/SpinnerView';
 import EntityManager from '@/manager/EntityManager';
 import ModalManager from '@/manager/ModalManager';
+import IconView from '../view/IconView';
 
 const numColumns = 3;
 
@@ -31,28 +32,34 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
   const onItemPress = (row: any) => {
     if (isPublic) {
       SectionManager.push(router, 'project-jams', {
-        jamId: JSON.stringify([row?.item?.id]),
+        jamId: JSON.stringify([row.item.id]),
         title: row?.item?.title,
         disableInfiniteScroll: true,
       });
     }
     else if (deletable) {
-      updateSelection(row.item.id);
+      updateSelection(row);
     }
   };
 
-  const updateSelection = (entityId: number) => {
+  const updateSelection = (row: any) => {
     let selection: any[] = [...selectedItems];
 
-    if (selection.includes(entityId)) {
-      selection = selection.filter((id: number) => id != entityId)
+    if (selection.includes(row.item.id)) {
+      selection = selection.filter((id: number) => id != row.item.id)
     }
     else {
-      selection.push(entityId);
+      selection.push(row.item.id);
     }
 
     setSelectedItems(selection);
   };
+
+  const deleteItem = (row: any) => {
+    console.log('delete item', row.item.id);
+
+  };
+
 
   const renderAddButton = () => {
     return (
@@ -90,6 +97,16 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
     return (
       <TouchableOpacity onPress={() => onItemPress(row)}>
         {output}
+
+        {selectedItems.includes(row?.item?.id) && (
+          <IconView
+            name="delete"
+            theme="primary"
+            size={12}
+            padding={3.5}
+            onPress={() => deleteItem(row)}
+          />
+        )}
       </TouchableOpacity>
     );
   };
