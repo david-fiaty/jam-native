@@ -51,7 +51,7 @@ const SectionBackButton = () => {
           {currentSection.toolbarButtons.map((o: any, i: number) => (
             <TouchableOpacity
               key={`button-${i}`}
-              onPress={() => SectionManager.push(router, o.sectionId)}
+              onPress={() => SectionManager.push(router, o.sectionId, currentSection?.params)}
             >
               <TextView underline={true}>{o.label}</TextView>
             </TouchableOpacity>
