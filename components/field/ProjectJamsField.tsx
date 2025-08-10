@@ -136,8 +136,6 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
 
   if (!projectJams) return <SpinnerView size="small" />;
 
-  console.log('current selection', selectedItems)
-
   return (
     <View style={styles.container}>
       {projectJams?.length > 0 && (
