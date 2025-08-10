@@ -11,6 +11,8 @@ import ProjectViewField from "../field/ProjectViewField";
 import ProjectJamsField from "../field/ProjectJamsField";
 import UserManager from "@/manager/UserManager";
 import SectionManager from "@/manager/SectionManager";
+import InputTextField from "../field/InputTextField";
+import InputTextareaField from "../field/InputTextareaField";
 
 type Props = {
   projectId?: any;
@@ -70,13 +72,19 @@ const ProjectView = ({ projectId }: Props) => {
       scroll={true}
       style={styles.container}
     >
-      <ProjectViewField label={i18n.t('Name')}>
-        <TextView>{projectItem?.name || i18n.t('Unavailable')}</TextView>
-      </ProjectViewField>
 
-      <ProjectViewField label={i18n.t('Description')}>
-        <TextView>{projectItem?.description || i18n.t('Unavailable')}</TextView>
-      </ProjectViewField>
+      <TextView>{i18n.t('Name')} *</TextView>
+        <InputTextField
+          value={projectItem?.name}
+          //onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['string'])}
+        />
+        {/*FormManager.renderError('name')*/}
+
+        <InputTextareaField
+          value={projectItem?.description}
+          //onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['string'])}
+        />
+        {/*FormManager.renderError('description')*/}
 
       {renderProjectJams()}
 
