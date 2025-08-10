@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import JamsList from '../list/JamsList';
 import BoxView from '../view/BoxView';
 import ProjectsList from "../list/ProjectsList";
 
