@@ -5,7 +5,7 @@ import TextView from "../view/TextView";
 import EntityManager from "@/manager/EntityManager";
 import BoxView from "../view/BoxView";
 import i18n from "@/translation/i18n";
-import ProjectJamsList from "../list/ProjectJamsList";
+import ProjectJamsList from "./ProjectJamsList";
 import SectorsTagsView from "../view/SectorsTagsView";
 import ProjectViewField from "../field/ProjectViewField";
 
