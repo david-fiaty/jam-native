@@ -74,8 +74,7 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
             multiSelect: true,
             resource: 'project', // Todo - Make dynamic
           })
-        }
-        }
+        }}
       />
     );
   };
