@@ -29,16 +29,18 @@ const ProjectView = ({ projectId, isPublic }: Props) => {
           <TextView style={styles.groupTitle}>
             {i18n.t('Jams')} ({projectItem?.jams?.length || 0})
           </TextView>
-    
-          <TouchableOpacity onPress={() => {
-            SectionManager.push(router, 'project-jams', {
-              jamId: JSON.stringify(projectItem?.jams || []),
-              title: i18n.t('Project Jams'),
-              disableInfiniteScroll: true,
-            });
-          }}>
-            <TextView underline={true}>{i18n.t("View all")}</TextView>
-          </TouchableOpacity>
+
+          {isPublic && (
+            <TouchableOpacity onPress={() => {
+              SectionManager.push(router, 'project-jams', {
+                jamId: JSON.stringify(projectItem?.jams || []),
+                title: i18n.t('Project Jams'),
+                disableInfiniteScroll: true,
+              });
+            }}>
+              <TextView underline={true}>{i18n.t("View all")}</TextView>
+            </TouchableOpacity>
+          )}
         </BoxView>
 
         <ProjectJamsField
