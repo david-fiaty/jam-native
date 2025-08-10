@@ -34,8 +34,8 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
         disableInfiniteScroll: true,
       });
     }
-    else {
-      console.log('item press')
+    else if (addable) {
+      console.log('item presssss')
     }
   };
 
