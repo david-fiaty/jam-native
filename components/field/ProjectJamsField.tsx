@@ -11,6 +11,7 @@ import i18n from '@/translation/i18n';
 import SpinnerView from '../view/SpinnerView';
 import EntityManager from '@/manager/EntityManager';
 import ModalManager from '@/manager/ModalManager';
+import IconView from '../view/IconView';
 
 const numColumns = 3;
 
@@ -18,21 +19,47 @@ type Props = {
   idArray?: any;
   isPublic?: boolean;
   addable?: boolean;
+  deletable?: boolean;
   emptyMessage?: any;
 };
 
-const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) => {
+const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable }: Props) => {
   const router = useRouter();
   const [projectJams, setProjectJams] = useState<any[]>([]);
+  const [selectedItems, setSelectedItems] = useState<any[]>([]);
   const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
-    SectionManager.push(router, 'profile-jams', {
-      jamId: JSON.stringify([row?.item?.id]),
-      title: row?.item?.title,
-      disableInfiniteScroll: true,
-    });
+    if (isPublic) {
+      SectionManager.push(router, 'project-jams', {
+        jamId: JSON.stringify([row.item.id]),
+        title: row?.item?.title,
+        disableInfiniteScroll: true,
+      });
+    }
+    else if (deletable) {
+      updateSelection(row);
+    }
   };
+
+  const updateSelection = (row: any) => {
+    let selection: any[] = [...selectedItems];
+
+    if (selection.includes(row.item.id)) {
+      selection = selection.filter((id: number) => id != row.item.id)
+    }
+    else {
+      selection.push(row.item.id);
+    }
+
+    setSelectedItems(selection);
+  };
+
+  const deleteItem = (row: any) => {
+    console.log('delete item', row.item.id);
+
+  };
+
 
   const renderAddButton = () => {
     return (
@@ -42,12 +69,13 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
         height={imageSize.height}
         onPress={() => {
           ModalManager.toggleModal("SelectJamsForm", {
-                field: 'jams_ids',
-                idArray: JSON.stringify(idArray || []),
-                multiSelect: true,
-                resource: 'project', // Todo - Make dynamic
-              })}
-          }
+            field: 'jams_ids',
+            idArray: JSON.stringify(idArray || []),
+            multiSelect: true,
+            resource: 'project', // Todo - Make dynamic
+          })
+        }
+        }
       />
     );
   };
@@ -67,8 +95,23 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
     }
 
     return (
-      <TouchableOpacity onPress={() => onItemPress(row)}>
+      <TouchableOpacity
+        onPress={() => onItemPress(row)}
+        style={styles.item}
+      >
         {output}
+
+        {selectedItems.includes(row?.item?.id) && (
+          <View style={styles.deleteIcon}>
+            <IconView
+              name="delete"
+              theme="primary"
+              size={12}
+              padding={3.5}
+              onPress={() => deleteItem(row)}
+            />
+          </View>
+        )}
       </TouchableOpacity>
     );
   };
@@ -92,6 +135,8 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
   }, [idArray, projectJams, isPublic]);
 
   if (!projectJams) return <SpinnerView size="small" />;
+
+  console.log('current selection', selectedItems)
 
   return (
     <View style={styles.container}>
@@ -121,6 +166,14 @@ const styles = StyleSheet.create({
     marginBottom: Layout.space.base,
     flex: 1,
   },
+  item: {
+    position: 'relative',
+  },
+  deleteIcon: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+  }
 });
 
 export default ProjectJamsField;
