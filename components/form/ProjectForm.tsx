@@ -24,7 +24,7 @@ import ProjectJamsField from "../field/ProjectJamsField";
 
 const resource: string = 'project';
 
-const AddProjectForm = () => {
+const ProjectForm = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
@@ -189,4 +189,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddProjectForm;
+export default ProjectForm;

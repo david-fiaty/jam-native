@@ -19,7 +19,7 @@ import WelcomeSection from "@/components/section/WelcomeSection";
 import SignupSection from "@/components/section/SignupSection";
 import PrivacySection from "@/components/section/PrivacySection";
 import ProfileFormSection from "@/components/section/profile/ProfileFormSection";
-import AddProjectForm from "@/components/form/AddProjectForm";
+import ProjectForm from "@/components/form/ProjectForm";
 import LanguageForm from "../form/LanguageForm";
 import ResetPasswordForm from "../form/ResetPasswordForm";
 import NotificationItemSection from "../section/NotificationItemSection";
@@ -218,12 +218,12 @@ const SectionView = () => {
         render: (params: any) => <LanguageForm {...params} />,
       },
       {
-        id: 'add-project',
+        id: 'project-form',
         title: i18n.t('Add project'),
-        render: (params: any) => <AddProjectForm {...params} />,
+        render: (params: any) => <ProjectForm {...params} />,
       },
       {
-        id: 'add-jam',
+        id: 'jam-form',
         title: i18n.t('Add Jam'),
         render: (params: any) => <JamForm {...params} />,
       },
