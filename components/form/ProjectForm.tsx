@@ -43,9 +43,9 @@ const ProjectView = ({ projectId }: Props) => {
         <ProjectJamsField
           idArray={projectItem?.jams || []}
           emptyMessage={i18n.t('No data available.')}
-          isPublic={isPublic}
-          addable={!isPublic}
-          deletable={!isPublic}
+          isPublic={false}
+          addable={true}
+          deletable={true}
         />
       </>
     );
