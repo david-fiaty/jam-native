@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
 import EntityManager from "@/manager/EntityManager";
@@ -8,6 +9,8 @@ import i18n from "@/translation/i18n";
 import SectorsTagsView from "../view/SectorsTagsView";
 import ProjectViewField from "../field/ProjectViewField";
 import ProjectJamsField from "../field/ProjectJamsField";
+import UserManager from "@/manager/UserManager";
+import SectionManager from "@/manager/SectionManager";
 
 type Props = {
   projectId?: any;
@@ -15,8 +18,38 @@ type Props = {
 };
 
 const ProjectView = ({ projectId, isPublic }: Props) => {
+  const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [projectItem, setProjectItem] = useState<any>(null);
+
+  const renderProjectJams = () => {
+    return (
+      <>
+        <BoxView direction="row" align="center" justify="space-between" style={styles.groupTitleContainer}>
+          <TextView style={styles.groupTitle}>
+            {i18n.t('Jams')} ({projectItem?.jams?.length || 0})
+          </TextView>
+    
+          <TouchableOpacity onPress={() => {
+            SectionManager.push(router, 'project-jams', {
+              jamId: JSON.stringify(projectItem?.jams || []),
+              title: i18n.t('Project Jams'),
+              disableInfiniteScroll: true,
+            });
+          }}>
+            <TextView underline={true}>{i18n.t("View all")}</TextView>
+          </TouchableOpacity>
+        </BoxView>
+
+        <ProjectJamsField
+          idArray={projectItem?.jams || []}
+          emptyMessage={i18n.t('No data available.')}
+          isPublic={isPublic}
+          addable={!isPublic}
+        />
+      </>
+    );
+  };
 
   useEffect(() => {
     (async () => {
@@ -43,15 +76,9 @@ const ProjectView = ({ projectId, isPublic }: Props) => {
         <TextView>{projectItem?.description || i18n.t('Unavailable')}</TextView>
       </ProjectViewField>
 
-      <TextView style={styles.sectionTitle}>{i18n.t('Jams')} ({projectItem?.jams?.length || 0})</TextView>
-      <ProjectJamsField
-        idArray={projectItem?.jams || []}
-        emptyMessage={i18n.t('No data available.')}
-        isPublic={isPublic}
-        addable={true}
-      />
+      {renderProjectJams()}
 
-      <TextView style={styles.sectionTitle}>{i18n.t('Sectors')}</TextView>
+      <TextView style={styles.groupTitle}>{i18n.t('Sectors')}</TextView>
       <BoxView direction="row" align="center" justify="flex-start" style={styles.projectSectors}>
         <SectorsTagsView idArray={projectItem?.sectors} />
       </BoxView>
@@ -65,7 +92,11 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingBottom: Layout.space.base * 3,
   },
-  sectionTitle: {
+  groupTitleContainer: {
+    width: '100%',
+    marginTop: Layout.space.base * 1.5,
+  },
+  groupTitle: {
     fontWeight: 'bold',
     fontSize: 13,
     marginTop: Layout.space.base / 1.5,
