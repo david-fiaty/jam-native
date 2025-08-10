@@ -48,6 +48,7 @@ const ProjectView = ({ projectId, isPublic }: Props) => {
           emptyMessage={i18n.t('No data available.')}
           isPublic={isPublic}
           addable={!isPublic}
+          deletable={!isPublic}
         />
       </>
     );
