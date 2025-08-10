@@ -62,8 +62,6 @@ const ProjectView = ({ projectId }: Props) => {
     })();
   }, [isLoaded, projectId]);
 
-  console.log(projectId)
-
   return (
     <BoxView
       direction="column"
