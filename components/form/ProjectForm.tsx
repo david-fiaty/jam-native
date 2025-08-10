@@ -79,6 +79,10 @@ const ProjectForm = () => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
+    <TextView>PROJECT FORM</TextView>
+  )
+
+  return (
     <BoxView
       align="flex-start"
       justify="flex-start"
