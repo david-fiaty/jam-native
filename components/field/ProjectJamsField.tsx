@@ -95,17 +95,22 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
     }
 
     return (
-      <TouchableOpacity onPress={() => onItemPress(row)}>
+      <TouchableOpacity
+        onPress={() => onItemPress(row)}
+        style={styles.item}
+      >
         {output}
 
         {selectedItems.includes(row?.item?.id) && (
-          <IconView
-            name="delete"
-            theme="primary"
-            size={12}
-            padding={3.5}
-            onPress={() => deleteItem(row)}
-          />
+          <View style={styles.deleteIcon}>
+            <IconView
+              name="delete"
+              theme="primary"
+              size={12}
+              padding={3.5}
+              onPress={() => deleteItem(row)}
+            />
+          </View>
         )}
       </TouchableOpacity>
     );
@@ -161,6 +166,14 @@ const styles = StyleSheet.create({
     marginBottom: Layout.space.base,
     flex: 1,
   },
+  item: {
+    position: 'relative',
+  },
+  deleteIcon: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+  }
 });
 
 export default ProjectJamsField;
