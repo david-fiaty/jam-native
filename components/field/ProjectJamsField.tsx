@@ -30,7 +30,7 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
   const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
-    if (isPublic) {
+    if (isPublic || !deletable) {
       SectionManager.push(router, 'project-jams', {
         jamId: JSON.stringify([row.item.id]),
         title: row?.item?.title,
