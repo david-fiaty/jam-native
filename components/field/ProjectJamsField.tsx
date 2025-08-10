@@ -18,10 +18,11 @@ type Props = {
   idArray?: any;
   isPublic?: boolean;
   addable?: boolean;
+  deletable?: boolean;
   emptyMessage?: any;
 };
 
-const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) => {
+const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable }: Props) => {
   const router = useRouter();
   const [projectJams, setProjectJams] = useState<any[]>([]);
   const [selectedItems, setSelectedItems] = useState<any[]>([]);
@@ -35,7 +36,7 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
         disableInfiniteScroll: true,
       });
     }
-    else if (addable) {
+    else if (deletable) {
       updateSelection(row.item.id);
     }
   };
@@ -113,7 +114,7 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
 
   if (!projectJams) return <SpinnerView size="small" />;
 
-  console.log(selectedItems);
+  console.log('current selection', selectedItems)
 
   return (
     <View style={styles.container}>
