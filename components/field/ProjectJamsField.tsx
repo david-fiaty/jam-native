@@ -24,6 +24,7 @@ type Props = {
 const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) => {
   const router = useRouter();
   const [projectJams, setProjectJams] = useState<any[]>([]);
+  const [selectedItems, setSelectedItems] = useState<any[]>([]);
   const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
@@ -35,8 +36,21 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
       });
     }
     else if (addable) {
-      console.log('item presssss')
+      updateSelection(row.item.id);
     }
+  };
+
+  const updateSelection = (entityId: number) => {
+    let selection: any[] = [...selectedItems];
+
+    if (selection.includes(entityId)) {
+      selection = selection.filter((id: number) => id != entityId)
+    }
+    else {
+      selection.push(entityId);
+    }
+
+    setSelectedItems(selection);
   };
 
   const renderAddButton = () => {
@@ -98,6 +112,8 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
   }, [idArray, projectJams, isPublic]);
 
   if (!projectJams) return <SpinnerView size="small" />;
+
+  console.log(selectedItems);
 
   return (
     <View style={styles.container}>
