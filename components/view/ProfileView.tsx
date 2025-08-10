@@ -15,6 +15,8 @@ import IconView from "@/components/view/IconView";
 import CollapsibleView from "@/components/view/CollapsibleView";
 import ProfileJamsField from "../field/ProfileJamsField";
 import ProfileProjectsField from "../field/ProfileProjectsField";
+import SectorsViewField from "../field/SectorsViewField";
+import SubSectorsViewField from "../field/SubSectorsViewField";
 
 const profileImageSize: number = 111;
 
@@ -352,6 +354,9 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
       <ProfileViewField label={i18n.t('Sub-industries')}>
         {renderSubSectors()}
       </ProfileViewField>
+
+      <SectorsViewField />
+      <SubSectorsViewField />
 
       <ProfileViewField label={i18n.t('Description')}>
         <TextView>
