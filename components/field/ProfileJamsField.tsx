@@ -26,12 +26,26 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
   const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
+    let path: string = isPublic ? 'public-jam' : 'private-jam';
+    let params: any = {
+      projectId: row?.item?.id,
+      title: i18n.t('Jam'),
+      disableInfiniteScroll: true,
+    };
+
+    SectionManager.push(router, path, params);
+  };
+
+  /*
+  const onItemPress = (row: any) => {
     SectionManager.push(router, 'profile-jams', {
       jamId: JSON.stringify([row?.item?.id]),
       title: row?.item?.title,
       disableInfiniteScroll: true,
     });
   };
+
+  */
 
   const renderAddButton = () => {
     return (
