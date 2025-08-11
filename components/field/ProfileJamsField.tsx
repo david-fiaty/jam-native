@@ -28,7 +28,7 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
   const onItemPress = (row: any) => {
     let path: string = isPublic ? 'public-jam' : 'private-jam';
     let params: any = {
-      projectId: row?.item?.id,
+      jamId: row?.item?.id,
       title: i18n.t('Jam'),
       disableInfiniteScroll: true,
     };
