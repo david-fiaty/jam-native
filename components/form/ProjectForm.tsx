@@ -131,12 +131,6 @@ const ProjectForm = ({ projectId }: Props) => {
         />
         {FormManager.renderError('name')}
 
-        <InputTextareaField
-          value={formData?.description}
-        //onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['string'])}
-        />
-        {/*FormManager.renderError('description')*/}
-
         <TextView>{i18n.t("Description")}*</TextView>
         <InputTextareaField
           value={formData?.description}
