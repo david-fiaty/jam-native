@@ -25,7 +25,14 @@ const CulturalActivitiesViewField = ({ idArray }: Props) => {
 
   return (
     <TextView>
-      CULTURAL ACTIVITIES
+      {activitiesData.map((o: any, i: number) => {
+        return (
+          <TextView key={o.id}>
+            {o.name}
+            {(i < o.length - 1) && (<TextView>, </TextView>)}
+          </TextView>
+        );
+      })}
     </TextView>
   );
 };
