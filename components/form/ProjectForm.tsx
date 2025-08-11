@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useDispatch, useSelector } from "react-redux";
+import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
 import EntityManager from "@/manager/EntityManager";
 import BoxView from "../view/BoxView";
 import i18n from "@/translation/i18n";
-import SectorsTagsView from "../view/SectorsTagsView";
-import ProjectFormField from "../field/ProjectFormField";
 import ProjectJamsField from "../field/ProjectJamsField";
 import UserManager from "@/manager/UserManager";
+import ScreenManager from "@/manager/ScreenManager";
 import SectionManager from "@/manager/SectionManager";
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
@@ -23,20 +24,49 @@ const resource: string = 'project';
 
 const ProjectForm = ({ projectId }: Props) => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const [profileId, setProfileId] = useState<number>(0);
   const [projectItem, setProjectItem] = useState<any>(null);
+  const formData: any = useSelector((state: any) => state.form[resource]);
+
+  const updateField = (key: any, value: any) => {
+    dispatch(setFormData<any>({
+      resource: resource,
+      key: key,
+      value: value,
+    }));
+  };
+
+  const submitForm = async () => {
+    setIsProcessing(true);
+    let result: any = await EntityManager.addProject(formData);
+    let message: any = {
+      title: i18n.t('Create project'),
+      content: i18n.t('The project was successfully created.'),
+    };
+
+    if (result.success === false) {
+      message.content = i18n.t('Invalid data submission');
+    }
+
+    ScreenManager.showMessage(message);
+
+    setIsProcessing(false);
+  };
 
   const renderProjectJams = () => {
     return (
       <>
         <BoxView direction="row" align="center" justify="space-between" style={styles.groupTitleContainer}>
           <TextView style={styles.groupTitle}>
-            {i18n.t('Jams')} ({projectItem?.jams?.length || 0})
+            {i18n.t('Jams')} ({formData?.jams?.length || 0})
           </TextView>
 
           <TouchableOpacity onPress={() => {
             SectionManager.push(router, 'project-jams', {
-              jamId: JSON.stringify(projectItem?.jams || []),
+              jamId: JSON.stringify(formData?.jams || []),
               title: i18n.t('Project Jams'),
               disableInfiniteScroll: true,
             });
@@ -46,7 +76,7 @@ const ProjectForm = ({ projectId }: Props) => {
         </BoxView>
 
         <ProjectJamsField
-          idArray={projectItem?.jams || []}
+          idArray={formData?.jams || []}
           emptyMessage={i18n.t('No data available.')}
           isPublic={false}
           addable={true}
@@ -59,7 +89,20 @@ const ProjectForm = ({ projectId }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setProjectItem((await EntityManager.getProjects([projectId]))?.[0]);
+        //setProjectItem((await EntityManager.getProjects([projectId]))?.[0]);
+        let projectData: any = (await EntityManager.getProjects([projectId]))?.[0] || {};
+        //FormManager.resetForm(resource); // Todo - Fix form reset on web
+        setProfileId(await UserManager.getProfileId());
+
+        dispatch(setFormData<any>({
+          resource: resource,
+          key: null,
+          value: {
+            ...projectData,
+            ...{ profile_id: profileId },
+          },
+        }));
+
         setIsLoaded(true);
       }
     })();
@@ -77,13 +120,13 @@ const ProjectForm = ({ projectId }: Props) => {
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
         <TextView>{i18n.t('Name')} *</TextView>
         <InputTextField
-          value={projectItem?.name}
+          value={formData?.name}
         //onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['string'])}
         />
         {/*FormManager.renderError('name')*/}
 
         <InputTextareaField
-          value={projectItem?.description}
+          value={formData?.description}
         //onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['string'])}
         />
         {/*FormManager.renderError('description')*/}
@@ -91,7 +134,7 @@ const ProjectForm = ({ projectId }: Props) => {
         <SectorsField
           resource={resource}
           field="sectors_ids"
-          value={projectItem?.sectors}
+          value={formData?.sectors}
         />
 
         {renderProjectJams()}
