@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
 import TextView from "@/components/view/TextView";
-import ListItemCollapsible from "./ListItemCollapsible";
+import ListItemCollapsible from "@/components/list/jams-list/ListItemCollapsible";
 import IconView from "@/components/view/IconView";
 import StaticData from "@/constants/StaticData";
 import i18n from "@/translation/i18n";
