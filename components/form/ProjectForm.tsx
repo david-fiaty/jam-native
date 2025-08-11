@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
@@ -15,6 +15,13 @@ import SectionManager from "@/manager/SectionManager";
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
 import SectorsField from "../field/SectorsField";
+import FormManager from "@/manager/FormManager";
+import PrivacyStatusField from "../field/PrivacyStatusField";
+import DatePickerField from "../field/DatePickerField";
+import DataManager from "@/manager/DataManager";
+import CountriesField from "../field/CountriesField";
+import ModalManager from "@/manager/ModalManager";
+import ButtonView from "../view/ButtonView";
 
 type Props = {
   projectId?: any;
@@ -116,20 +123,69 @@ const ProjectForm = ({ projectId }: Props) => {
       scroll={true}
       style={[Layout.formContainer, styles.container]}
     >
-
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
-        <TextView>{i18n.t('Name')} *</TextView>
+        <TextView>{i18n.t("Name")}*</TextView>
         <InputTextField
           value={formData?.name}
-        //onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['string'])}
+          onChangeText={(value: string) => FormManager.updateField(resource, 'name', value, ['string'])}
         />
-        {/*FormManager.renderError('name')*/}
+        {FormManager.renderError('name')}
 
         <InputTextareaField
           value={formData?.description}
         //onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['string'])}
         />
         {/*FormManager.renderError('description')*/}
+
+        <TextView>{i18n.t("Description")}*</TextView>
+        <InputTextareaField
+          value={formData?.description}
+          onChangeText={(value: string) => FormManager.updateField(resource, 'description', value, ['string'])}
+        />
+        {FormManager.renderError('description')}
+
+        <TextView>{i18n.t("Privacy status")}*</TextView>
+        <PrivacyStatusField
+          value={formData?.privacy_status}
+          onChangeValue={(option: any) => FormManager.updateField(resource, 'privacy_status', option.value, ['string'])}
+        />
+        {FormManager.renderError('privacy_status')}
+
+        <TextView>{i18n.t('Start date')}</TextView>
+        <DatePickerField
+          value={formData?.period?.start_datetime}
+          onChangeValue={(value: any) =>
+            updateField('period', {
+              ...(formData?.period || {}),
+              ...{ start_datetime: DataManager.formatDate(value) },
+            })
+          }
+        />
+
+        <TextView>{i18n.t('End date')}</TextView>
+        <DatePickerField
+          value={formData?.period?.end_datetime}
+          onChangeValue={(value: any) =>
+            updateField('period', {
+              ...(formData?.period || {}),
+              ...{ end_datetime: DataManager.formatDate(value) },
+            })
+          }
+        />
+
+        <TextView>{i18n.t('Select countries')}</TextView>
+        <CountriesField
+          multiple={true}
+          resource={resource}
+          field="scope_countries_codes"
+          placeholder={i18n.t('Select countries')}
+          value={formData?.scope_countries_codes}
+          onPress={() => ModalManager.toggleModal('CountriesList', {
+            resource: resource,
+            field: 'scope_countries_codes',
+            multiple: true,
+          })}
+        />
 
         <SectorsField
           resource={resource}
@@ -139,6 +195,13 @@ const ProjectForm = ({ projectId }: Props) => {
 
         {renderProjectJams()}
 
+        <View style={styles.subtmitButton}>
+          <ButtonView
+            label={i18n.t("Submit")}
+            isProcessing={isProcessing}
+            onPress={submitForm}
+          />
+        </View>
       </BoxView>
     </BoxView>
   );
@@ -176,6 +239,11 @@ const styles = StyleSheet.create({
   projectSectors: {
     width: '100%',
     flexWrap: 'wrap',
+  },
+  subtmitButton: {
+    width: '100%',
+    marginTop: Layout.space.base,
+    marginBottom: Layout.space.base * 2,
   },
 });
 
