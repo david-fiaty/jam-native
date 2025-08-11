@@ -7,7 +7,7 @@ import EntityManager from "@/manager/EntityManager";
 import BoxView from "../view/BoxView";
 import i18n from "@/translation/i18n";
 import SectorsTagsView from "../view/SectorsTagsView";
-import ProjectViewField from "../field/ProjectViewField";
+import ProjectFormField from "../field/ProjectFormField";
 import ProjectJamsField from "../field/ProjectJamsField";
 import UserManager from "@/manager/UserManager";
 import SectionManager from "@/manager/SectionManager";
@@ -18,7 +18,7 @@ type Props = {
   projectId?: any;
 };
 
-const ProjectView = ({ projectId }: Props) => {
+const ProjectForm = ({ projectId }: Props) => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [projectItem, setProjectItem] = useState<any>(null);
@@ -124,4 +124,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProjectView;
+export default ProjectForm;
