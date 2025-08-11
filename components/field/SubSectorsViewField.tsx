@@ -40,10 +40,6 @@ const SubSectorsViewField = ({ idArray }: Props) => {
     setSectorsData(appState.sectorsData);
   }, [appState]);
 
-  if (!idArray?.length) {
-    return <TextView>{i18n.t('Unavailable')}</TextView>
-  }
-
   return renderComponent();
 };
 
