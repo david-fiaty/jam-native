@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { Layout } from '@/constants/Layout';
 import TextView from '../view/TextView';
 import EntityManager from "@/manager/EntityManager";
 
