@@ -1,58 +1,38 @@
-import { useState, useEffect } from "react";
-import { StyleSheet, TouchableOpacity } from 'react-native';
-import { useRouter } from 'expo-router';
+import { StyleSheet, View } from "react-native";
 import { Layout } from "@/constants/Layout";
-import TextView from "../view/TextView";
+import ListItemHeader from "../list/jams-list/ListItemHeader";
+import ListItemImage from "../list/jams-list/ListItemImage";
+import ListItemToolbar from "../list/jams-list/ListItemToolbar";
+import ListItemDetails from "../list/jams-list/ListItemDetails";
 
 type Props = {
-  jamId?: any;
-  isPublic?: boolean;
+  row?: any;
+  sectorsData?: any;
+  profileData?: any;
+  onListItemAction?: () => void;
 };
 
-const JamView = ({ jamId, isPublic }: Props) => {
-  const router = useRouter();
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-
-  useEffect(() => {
-    (async () => {
-      if (!isLoaded) {
-        setIsLoaded(true);
-      }
-    })();
-  }, [isLoaded, jamId]);
-
+const JamView = ({ row, sectorsData, profileData, onListItemAction }: Props) => {
   return (
-    <TextView>JAM VIEW</TextView>
+    <View style={styles.container}>
+      <ListItemHeader row={row} />
+      <ListItemImage row={row} />
+      <ListItemToolbar 
+        row={row} 
+        profileData={profileData} 
+        onListItemAction={onListItemAction}
+      />
+      <ListItemDetails row={row} sectorsData={sectorsData} />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    width: '100%',
-    paddingBottom: Layout.space.base * 3,
-  },
-  groupTitleContainer: {
-    width: '100%',
-    marginTop: Layout.space.base * 1.5,
-  },
-  groupTitle: {
-    fontWeight: 'bold',
-    fontSize: 13,
-    marginTop: Layout.space.base / 1.5,
-  },
-  projectTitle: {
-    fontWeight: 'bold',
-    fontSize: 15,
-    textTransform: 'capitalize',
-  },
-  projectDescription: {
-    width: '100%',
-    marginTop: Layout.space.base / 1.5,
-  },
-  projectSectors: {
-    width: '100%',
-    flexWrap: 'wrap',
+    borderWidth: Layout.borderWidth.base,
+    borderRadius: Layout.radius.round,
+    marginBottom: Layout.space.base*1.5,
+    borderColor: Layout.colors.primary,
   },
 });
 
