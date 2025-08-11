@@ -8,7 +8,7 @@ type Props = {
 };
 
 const PublicJamSection = ({ jamId }: Props) => {
-
+  console.log(jamId)
   return (<TextView>PUBLIC JAM VIEW</TextView>);
 
   return (
