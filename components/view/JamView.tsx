@@ -1,9 +1,9 @@
 import { StyleSheet, View } from "react-native";
 import { Layout } from "@/constants/Layout";
-import ListItemHeader from "../list/jams-list/ListItemHeader";
-import ListItemImage from "../list/jams-list/ListItemImage";
-import ListItemToolbar from "../list/jams-list/ListItemToolbar";
-import ListItemDetails from "../list/jams-list/ListItemDetails";
+import JamViewHeader from "./jam-view/JamViewHeader";
+import JamViewImage from "./jam-view/JamViewImage";
+import JamViewToolbar from "./jam-view/JamViewToolbar";
+import JamViewDetails from "./jam-view/JamViewDetails";
 
 type Props = {
   row?: any;
@@ -15,14 +15,14 @@ type Props = {
 const JamView = ({ row, sectorsData, profileData, onListItemAction }: Props) => {
   return (
     <View style={styles.container}>
-      <ListItemHeader row={row} />
-      <ListItemImage row={row} />
-      <ListItemToolbar 
+      <JamViewHeader row={row} />
+      <JamViewImage row={row} />
+      <JamViewToolbar
         row={row} 
         profileData={profileData} 
         onListItemAction={onListItemAction}
       />
-      <ListItemDetails row={row} sectorsData={sectorsData} />
+      <JamViewDetails row={row} sectorsData={sectorsData} />
     </View>
   );
 };
