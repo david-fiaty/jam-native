@@ -13,7 +13,7 @@ type Props = {
   sectorsData?: any;
 };
 
-const ListItemDetails = ({ row, sectorsData }: Props) => {
+const JamViewDetails = ({ row, sectorsData }: Props) => {
 
   const truncateText = (text: string, maxLength: number) => {
     if (text.length <= maxLength) return text;
@@ -195,4 +195,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ListItemDetails;
+export default JamViewDetails;

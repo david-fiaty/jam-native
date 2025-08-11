@@ -13,7 +13,7 @@ type Props = {
 
 const maxOwnerNameLength: number = 28;
 
-const ListItemHeader = ({ row }: Props) => {
+const JamViewHeader = ({ row }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const collaboratorsCount = parseInt(row?.item?.collaborators?.length);
 
@@ -93,4 +93,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ListItemHeader;
+export default JamViewHeader;

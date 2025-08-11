@@ -19,7 +19,7 @@ type Props = {
   onListItemAction?: () => void;
 };
 
-const ListItemToolbar = ({ row, profileData, onListItemAction }: Props) => {
+const JamViewToolbar = ({ row, profileData, onListItemAction }: Props) => {
   const router = useRouter();
   const [isLikeProcessing, setIsLikeProcessing] = useState<boolean>(false);
   const [isSaveProcessing, setIsSaveProcessing] = useState<boolean>(false);
@@ -243,4 +243,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ListItemToolbar;
+export default JamViewToolbar;

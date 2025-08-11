@@ -11,7 +11,7 @@ type Props = {
 const slideHeight: number = Layout.imageSlideshow.height;
 const slideWidth: number = (ScreenManager.window.width - Layout.space.base * 3) - 2;
 
-const ListItemImage = ({ row }: Props) => {
+const JamViewImage = ({ row }: Props) => {
   if (!row?.item?.medias?.length) {
     return (
       <View style={styles.container}>
@@ -40,4 +40,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ListItemImage;
+export default JamViewImage;

@@ -11,7 +11,7 @@ type Props = {
   preview?: any;
 };
 
-const ListItemCollapsible = ({ label, openedLabel, content, headerStyle, preview }: Props) => {
+const JamViewCollapsible = ({ label, openedLabel, content, headerStyle, preview }: Props) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   let buttonLabel = label;
 
@@ -74,4 +74,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ListItemCollapsible;
+export default JamViewCollapsible;
