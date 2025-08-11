@@ -21,8 +21,6 @@ const CulturalActivitiesViewField = ({ idArray }: Props) => {
     })();
   }, [idArray, isLoaded]);
 
-  console.log(activitiesData)
-
   return (
     <TextView>
       {activitiesData.map((o: any, i: number) => {
