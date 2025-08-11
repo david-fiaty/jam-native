@@ -223,9 +223,24 @@ const SectionView = () => {
         render: (params: any) => <ProjectForm {...params} />,
       },
       {
-        id: 'jam-form',
+        id: 'add-jam',
         title: i18n.t('Add Jam'),
         render: (params: any) => <JamForm {...params} />,
+      },
+      {
+        id: 'add-project',
+        title: i18n.t('Add Project'),
+        render: (params: any) => <JamForm {...params} />,
+      },
+      {
+        id: 'edit-jam',
+        title: i18n.t('Edit Jam'),
+        render: (params: any) => <ProjectForm {...params} />,
+      },
+      {
+        id: 'edit-project',
+        title: i18n.t('Edit Project'),
+        render: (params: any) => <ProjectForm {...params} />,
       },
     ].map((o: any) => {
       return {
