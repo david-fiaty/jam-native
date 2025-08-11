@@ -39,7 +39,7 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
         label={i18n.t('Add')}
         width={imageSize.width}
         height={imageSize.height}
-        onPress={() => SectionManager.push(router, 'jam-form')}
+        onPress={() => SectionManager.push(router, 'add-jam')}
       />
     );
   };
