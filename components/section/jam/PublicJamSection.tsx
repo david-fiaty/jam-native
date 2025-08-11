@@ -1,32 +1,33 @@
-import React, { useState, useEffect } from "react";
-import ProfileView from "@/components/view/ProfileView";
-import UserManager from "@/manager/UserManager";
-import SpinnerView from "@/components/view/SpinnerView";
+import { StyleSheet } from "react-native";
+import BoxView from "@/components/view/BoxView";
+import JamView from "@/components/view/JamView";
 
 type Props = {
-  profileId?: any;
+  jamId: any;
 };
 
-const PublicProfileSection = ({ profileId }: Props) => {
-  const [profileData, setProfileData] = useState<any>(null);
-
-  useEffect(() => {
-    (async () => {
-      if (!profileData) {
-        setProfileData(await UserManager.getProfileData({ profile_id: profileId || null }));
-      }
-    })();
-  }, [profileData, profileId]);
-
-  if (!profileData) return <SpinnerView />;
-
+const PublicJamSection = ({ jamId }: Props) => {
   return (
-    <ProfileView 
-      profileId={profileId} 
-      profileData={profileData} 
-      isPublic={true}
-    />
+    <BoxView
+      direction="column"
+      align="center"
+      justify="center"
+      style={styles.container}
+    >
+      <JamView 
+        isPublic={true} 
+        jamId={jamId}
+      />
+    </BoxView>
   );
 };
 
-export default PublicProfileSection;
+const styles = StyleSheet.create({
+  container: {
+    position: 'relative',
+    width: '100%',
+    height: '100%',
+  },
+});
+
+export default PublicJamSection;
