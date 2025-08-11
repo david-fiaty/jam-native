@@ -11,6 +11,8 @@ import ProjectViewField from "../field/ProjectViewField";
 import ProjectJamsField from "../field/ProjectJamsField";
 import UserManager from "@/manager/UserManager";
 import SectionManager from "@/manager/SectionManager";
+import SectorsViewField from "../field/SectorsViewField";
+import SubSectorsViewField from "../field/SubSectorsViewField";
 
 type Props = {
   projectId?: any;
@@ -79,12 +81,16 @@ const ProjectView = ({ projectId, isPublic }: Props) => {
         <TextView>{projectItem?.description || i18n.t('Unavailable')}</TextView>
       </ProjectViewField>
 
+      <ProjectViewField label={i18n.t('Industries')}>
+        <SectorsViewField idArray={projectItem?.sectors || []} />
+      </ProjectViewField>
+
+      <ProjectViewField label={i18n.t('Sub-industries')}>
+        <SubSectorsViewField idArray={projectItem?.sectors || []} />
+      </ProjectViewField>
+
       {renderProjectJams()}
 
-      <TextView style={styles.groupTitle}>{i18n.t('Sectors')}</TextView>
-      <BoxView direction="row" align="center" justify="flex-start" style={styles.projectSectors}>
-        <SectorsTagsView idArray={projectItem?.sectors} />
-      </BoxView>
     </BoxView>
   );
 };
