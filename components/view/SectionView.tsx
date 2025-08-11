@@ -198,14 +198,9 @@ const SectionView = () => {
         toolbarButtons: [
           {
             label: i18n.t('Edit'),
-            sectionId: 'project-form',
+            sectionId: 'edit-project',
           },
         ],
-      },
-      {
-        id: 'profile-form',
-        title: i18n.t('Edit Profile'),
-        render: (params: any) => <ProfileFormSection {...params} />,
       },
       {
         id: 'reset-password',
@@ -216,11 +211,6 @@ const SectionView = () => {
         id: 'language',
         title: i18n.t('Change language'),
         render: (params: any) => <LanguageForm {...params} />,
-      },
-      {
-        id: 'project-form',
-        title: i18n.t('Add project'),
-        render: (params: any) => <ProjectForm {...params} />,
       },
       {
         id: 'add-jam',
