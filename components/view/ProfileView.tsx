@@ -355,8 +355,8 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
         {renderSubSectors()}
       </ProfileViewField>
 
-      <SectorsViewField idArray={profileItem?.sectors} />
-      <SubSectorsViewField idArray={profileItem?.sectors} />
+      <SectorsViewField idArray={profileItem?.sectors || []} />
+      <SubSectorsViewField idArray={profileItem?.sectors || []} />
 
       <ProfileViewField label={i18n.t('Description')}>
         <TextView>
