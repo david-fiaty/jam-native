@@ -13,10 +13,13 @@ import UserManager from "@/manager/UserManager";
 import SectionManager from "@/manager/SectionManager";
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
+import SectorsField from "../field/SectorsField";
 
 type Props = {
   projectId?: any;
 };
+
+const resource: string = 'project';
 
 const ProjectForm = ({ projectId }: Props) => {
   const router = useRouter();
@@ -68,27 +71,31 @@ const ProjectForm = ({ projectId }: Props) => {
       align="flex-start"
       justify="flex-start"
       scroll={true}
-      style={styles.container}
+      style={[Layout.formContainer, styles.container]}
     >
 
-      <TextView>{i18n.t('Name')} *</TextView>
+      <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
+        <TextView>{i18n.t('Name')} *</TextView>
         <InputTextField
           value={projectItem?.name}
-          //onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['string'])}
+        //onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['string'])}
         />
         {/*FormManager.renderError('name')*/}
 
         <InputTextareaField
           value={projectItem?.description}
-          //onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['string'])}
+        //onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['string'])}
         />
         {/*FormManager.renderError('description')*/}
 
-      {renderProjectJams()}
+        <SectorsField
+          resource={resource}
+          field="sectors_ids"
+          value={projectItem?.sectors}
+        />
 
-      <TextView style={styles.groupTitle}>{i18n.t('Sectors')}</TextView>
-      <BoxView direction="row" align="center" justify="flex-start" style={styles.projectSectors}>
-        <SectorsTagsView idArray={projectItem?.sectors} />
+        {renderProjectJams()}
+
       </BoxView>
     </BoxView>
   );
@@ -99,6 +106,11 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     paddingBottom: Layout.space.base * 3,
+  },
+  formContainer: {
+    maxWidth: '100%',
+    flexShrink: 1,
+    paddingTop: Layout.space.base,
   },
   groupTitleContainer: {
     width: '100%',
