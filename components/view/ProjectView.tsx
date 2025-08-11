@@ -90,7 +90,6 @@ const ProjectView = ({ projectId, isPublic }: Props) => {
       </ProjectViewField>
 
       {renderProjectJams()}
-
     </BoxView>
   );
 };
