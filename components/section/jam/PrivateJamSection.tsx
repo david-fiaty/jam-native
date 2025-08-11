@@ -1,27 +1,37 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import ProfileView from "@/components/view/ProfileView";
-import UserManager from "@/manager/UserManager";
+import { StyleSheet } from "react-native";
+import BoxView from "@/components/view/BoxView";
+import JamView from "@/components/view/JamView";
+import TextView from "@/components/view/TextView";
 
-const PrivateProfileSection = () => {
-  const [profileData, setProfileData] = useState<any>(null);
-  const userState = useSelector((state: any) => state.user);
+type Props = {
+  jamId: any;
+};
 
-  useEffect(() => {
-    (async () => {
-      if (!profileData) {
-        setProfileData(userState.profileData);
-      }
-    })();
-  }, [profileData, userState]);
+const PrivateJamSection = ({ jamId }: Props) => {
+  
+  return (<TextView>PUBLIC JAM VIEW</TextView>);
 
   return (
-    <ProfileView 
-      profileId={profileData?.id} 
-      profileData={profileData} 
-      isOwner={UserManager.isLoggedIn()}
-    />
+    <BoxView
+      direction="column"
+      align="center"
+      justify="center"
+      style={styles.container}
+    >
+      <JamView 
+        isPublic={true} 
+        jamId={jamId}
+      />
+    </BoxView>
   );
 };
 
-export default PrivateProfileSection;
+const styles = StyleSheet.create({
+  container: {
+    position: 'relative',
+    width: '100%',
+    height: '100%',
+  },
+});
+
+export default PrivateJamSection;
