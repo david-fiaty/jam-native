@@ -12,6 +12,23 @@ const CulturalActivitiesViewField = ({ idArray }: Props) => {
   const [activitiesData, setActivitiesData] = useState<any[]>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
+  const renderComponent = () => {
+    let activities: any[] = activitiesData.filter((o: any) => idArray.includes(o.id));
+
+    return (
+      <TextView>
+        {activities.map((o: any, i: number) => {
+          return (
+            <TextView key={o.id}>
+              {o.name}
+              {(i < activities.length - 1) && (<TextView>, </TextView>)}
+            </TextView>
+          );
+        })}
+      </TextView>
+    );
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
@@ -21,18 +38,7 @@ const CulturalActivitiesViewField = ({ idArray }: Props) => {
     })();
   }, [idArray, isLoaded]);
 
-  return (
-    <TextView>
-      {activitiesData.map((o: any, i: number) => {
-        return (
-          <TextView key={o.id}>
-            {o.name}
-            {(i < o.length - 1) && (<TextView>, </TextView>)}
-          </TextView>
-        );
-      })}
-    </TextView>
-  );
+  return renderComponent();
 };
 
 export default CulturalActivitiesViewField;
