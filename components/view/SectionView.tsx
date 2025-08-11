@@ -198,14 +198,9 @@ const SectionView = () => {
         toolbarButtons: [
           {
             label: i18n.t('Edit'),
-            sectionId: 'project-form',
+            sectionId: 'edit-project',
           },
         ],
-      },
-      {
-        id: 'profile-form',
-        title: i18n.t('Edit Profile'),
-        render: (params: any) => <ProfileFormSection {...params} />,
       },
       {
         id: 'reset-password',
@@ -218,14 +213,24 @@ const SectionView = () => {
         render: (params: any) => <LanguageForm {...params} />,
       },
       {
-        id: 'project-form',
-        title: i18n.t('Add project'),
+        id: 'add-jam',
+        title: i18n.t('Add Jam'),
+        render: (params: any) => <JamForm {...params} />,
+      },
+      {
+        id: 'add-project',
+        title: i18n.t('Add Project'),
+        render: (params: any) => <JamForm {...params} />,
+      },
+      {
+        id: 'edit-jam',
+        title: i18n.t('Edit Jam'),
         render: (params: any) => <ProjectForm {...params} />,
       },
       {
-        id: 'jam-form',
-        title: i18n.t('Add Jam'),
-        render: (params: any) => <JamForm {...params} />,
+        id: 'edit-project',
+        title: i18n.t('Edit Project'),
+        render: (params: any) => <ProjectForm {...params} />,
       },
     ].map((o: any) => {
       return {
