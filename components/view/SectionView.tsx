@@ -31,6 +31,8 @@ import PublicProjectSection from "../section/project/PublicProjectSection";
 import PrivateProjectSection from "../section/project/PrivateProjectSection";
 import ProjectJamsSection from "../section/ProjectJamsSection";
 import ProfileProjectsSection from "../section/ProfileProjectsSection";
+import PublicJamSection from "../section/jam/PublicJamSection";
+import PrivateJamSection from "../section/jam/PrivateJamSection";
 
 const SectionView = () => {
   const path = usePathname();
@@ -166,9 +168,41 @@ const SectionView = () => {
         render: (params: any) => <NotificationItemSection {...params} />,
       },
       {
+        id: 'public-jam',
+        title: i18n.t('Jam'),
+        render: (params: any) => <PublicJamSection {...params} />,
+      },
+      {
+        id: 'public-project',
+        title: i18n.t('Project'),
+        render: (params: any) => <PublicProjectSection {...params} />,
+      },
+      {
         id: 'public-profile',
         title: i18n.t('Profile'),
         render: (params: any) => <PublicProfileSection {...params} />,
+      },
+      {
+        id: 'private-jam',
+        title: i18n.t('Your Jam'),
+        render: (params: any) => <PrivateJamSection {...params} />,
+        toolbarButtons: [
+          {
+            label: i18n.t('Edit Jam'),
+            sectionId: 'edit-jam',
+          },
+        ],
+      },
+      {
+        id: 'private-project',
+        title: i18n.t('Your project'),
+        render: (params: any) => <PrivateProjectSection {...params} />,
+        toolbarButtons: [
+          {
+            label: i18n.t('Edit Project'),
+            sectionId: 'edit-project',
+          },
+        ],
       },
       {
         id: 'private-profile',
@@ -185,22 +219,6 @@ const SectionView = () => {
         id: 'profile-form',
         title: i18n.t('Edit Profile'),
         render: (params: any) => <ProfileFormSection {...params} />,
-      },
-      {
-        id: 'public-project',
-        title: i18n.t('Project'),
-        render: (params: any) => <PublicProjectSection {...params} />,
-      },
-      {
-        id: 'private-project',
-        title: i18n.t('Your project'),
-        render: (params: any) => <PrivateProjectSection {...params} />,
-        toolbarButtons: [
-          {
-            label: i18n.t('Edit Project'),
-            sectionId: 'edit-project',
-          },
-        ],
       },
       {
         id: 'reset-password',
@@ -225,7 +243,7 @@ const SectionView = () => {
       {
         id: 'edit-jam',
         title: i18n.t('Edit Jam'),
-        render: (params: any) => <ProjectForm {...params} />,
+        render: (params: any) => <JamForm {...params} />,
       },
       {
         id: 'edit-project',
