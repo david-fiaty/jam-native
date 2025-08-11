@@ -17,6 +17,7 @@ import ProfileJamsField from "../field/ProfileJamsField";
 import ProfileProjectsField from "../field/ProfileProjectsField";
 import SectorsViewField from "../field/SectorsViewField";
 import SubSectorsViewField from "../field/SubSectorsViewField";
+import CulturalActivitiesViewField from "../field/CulturalActivitiesViewField";
 
 const profileImageSize: number = 111;
 
@@ -313,9 +314,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
       </ProfileViewField>
 
       <ProfileViewField label={i18n.t('Main activities')}>
-        <TextView>
-          Activities list
-        </TextView>
+        <CulturalActivitiesViewField idArray={[]} />
       </ProfileViewField>
 
       <CollapsibleView
