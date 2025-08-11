@@ -11,15 +11,14 @@ import ProjectViewField from "../field/ProjectViewField";
 import ProjectJamsField from "../field/ProjectJamsField";
 import UserManager from "@/manager/UserManager";
 import SectionManager from "@/manager/SectionManager";
-import SectorsViewField from "../field/SectorsViewField";
-import SubSectorsViewField from "../field/SubSectorsViewField";
+import InputTextField from "../field/InputTextField";
+import InputTextareaField from "../field/InputTextareaField";
 
 type Props = {
   projectId?: any;
-  isPublic?: boolean;
 };
 
-const ProjectView = ({ projectId, isPublic }: Props) => {
+const ProjectView = ({ projectId }: Props) => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [projectItem, setProjectItem] = useState<any>(null);
@@ -32,25 +31,23 @@ const ProjectView = ({ projectId, isPublic }: Props) => {
             {i18n.t('Jams')} ({projectItem?.jams?.length || 0})
           </TextView>
 
-          {isPublic && (
-            <TouchableOpacity onPress={() => {
-              SectionManager.push(router, 'project-jams', {
-                jamId: JSON.stringify(projectItem?.jams || []),
-                title: i18n.t('Project Jams'),
-                disableInfiniteScroll: true,
-              });
-            }}>
-              <TextView underline={true}>{i18n.t("View all")}</TextView>
-            </TouchableOpacity>
-          )}
+          <TouchableOpacity onPress={() => {
+            SectionManager.push(router, 'project-jams', {
+              jamId: JSON.stringify(projectItem?.jams || []),
+              title: i18n.t('Project Jams'),
+              disableInfiniteScroll: true,
+            });
+          }}>
+            <TextView underline={true}>{i18n.t("View all")}</TextView>
+          </TouchableOpacity>
         </BoxView>
 
         <ProjectJamsField
           idArray={projectItem?.jams || []}
           emptyMessage={i18n.t('No data available.')}
-          isPublic={isPublic}
-          addable={false}
-          deletable={false}
+          isPublic={false}
+          addable={true}
+          deletable={true}
         />
       </>
     );
@@ -73,24 +70,26 @@ const ProjectView = ({ projectId, isPublic }: Props) => {
       scroll={true}
       style={styles.container}
     >
-      <ProjectViewField label={i18n.t('Name')}>
-        <TextView>{projectItem?.name || i18n.t('Unavailable')}</TextView>
-      </ProjectViewField>
 
-      <ProjectViewField label={i18n.t('Description')}>
-        <TextView>{projectItem?.description || i18n.t('Unavailable')}</TextView>
-      </ProjectViewField>
+      <TextView>{i18n.t('Name')} *</TextView>
+        <InputTextField
+          value={projectItem?.name}
+          //onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['string'])}
+        />
+        {/*FormManager.renderError('name')*/}
 
-      <ProjectViewField label={i18n.t('Industries')}>
-        <SectorsViewField idArray={projectItem?.sectors || []} />
-      </ProjectViewField>
-
-      <ProjectViewField label={i18n.t('Sub-industries')}>
-        <SubSectorsViewField idArray={projectItem?.sectors || []} />
-      </ProjectViewField>
+        <InputTextareaField
+          value={projectItem?.description}
+          //onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['string'])}
+        />
+        {/*FormManager.renderError('description')*/}
 
       {renderProjectJams()}
 
+      <TextView style={styles.groupTitle}>{i18n.t('Sectors')}</TextView>
+      <BoxView direction="row" align="center" justify="flex-start" style={styles.projectSectors}>
+        <SectorsTagsView idArray={projectItem?.sectors} />
+      </BoxView>
     </BoxView>
   );
 };

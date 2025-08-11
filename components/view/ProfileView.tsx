@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { useRouter } from 'expo-router';
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
 import i18n from "@/translation/i18n";
@@ -15,6 +15,8 @@ import IconView from "@/components/view/IconView";
 import CollapsibleView from "@/components/view/CollapsibleView";
 import ProfileJamsField from "../field/ProfileJamsField";
 import ProfileProjectsField from "../field/ProfileProjectsField";
+import SectorsViewField from "../field/SectorsViewField";
+import SubSectorsViewField from "../field/SubSectorsViewField";
 
 const profileImageSize: number = 111;
 
@@ -27,9 +29,7 @@ type Props = {
 
 const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
   const router = useRouter();
-  const [sectorsData, setSectorsData] = useState<any[]>([]);
   const [profileItem, setProfileItem] = useState<any>({});
-  const appState = useSelector((state: any) => state.app);
 
   const renderHeader = () => {
     return (
@@ -115,52 +115,6 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
           </ProfileViewField>
         </View>
       </>
-    );
-  };
-
-  const renderSectors = () => {
-    if (!profileItem?.sectors?.length) {
-      return <TextView>{i18n.t('Unavailable')}</TextView>
-    }
-
-    let sectors: any[] = sectorsData.filter((o: any) => profileItem.sectors.includes(o.id));
-
-    return (
-      <TextView>
-        {sectors.map((sector: any, i: number) => {
-          return (
-            <TextView key={sector.id}>
-              {sector.name}
-              {(i < sectors.length - 1) && (<TextView>, </TextView>)}
-            </TextView>
-          );
-        })}
-      </TextView>
-    );
-  };
-
-  const renderSubSectors = () => {
-    if (!profileItem?.sectors?.length) {
-      return <TextView>{i18n.t('Unavailable')}</TextView>
-    }
-
-    let sectors: any[] = sectorsData.filter((o: any) => profileItem.sectors.includes(o.id));
-
-    return (
-      <TextView>
-        {sectors.map((sector: any, i: number) => {
-          let subSectors: any[] = sector.sub_sectors.filter((o: any) => profileItem.sectors.includes(o.id));
-
-          return subSectors.map((subSector: any, i: number) => {
-            return (
-              <TextView key={subSector.id}>
-                {subSector.name}
-                {(i < subSectors.length - 1) && (<TextView>, </TextView>)}
-              </TextView>
-            );
-          })
-        })}
-      </TextView>
     );
   };
 
@@ -324,8 +278,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
 
   useEffect(() => {
     setProfileItem(profileData);
-    setSectorsData(appState.sectorsData);
-  }, [profileData, appState]);
+  }, [profileData]);
 
   return (
     <BoxView
@@ -346,11 +299,11 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
       </BoxView>
 
       <ProfileViewField label={i18n.t('Industries')}>
-        {renderSectors()}
+        <SectorsViewField idArray={profileItem?.sectors || []} />
       </ProfileViewField>
 
       <ProfileViewField label={i18n.t('Sub-industries')}>
-        {renderSubSectors()}
+        <SubSectorsViewField idArray={profileItem?.sectors || []} />
       </ProfileViewField>
 
       <ProfileViewField label={i18n.t('Description')}>

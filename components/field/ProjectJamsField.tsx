@@ -30,7 +30,7 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
   const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
-    if (isPublic) {
+    if (isPublic || !deletable) {
       SectionManager.push(router, 'project-jams', {
         jamId: JSON.stringify([row.item.id]),
         title: row?.item?.title,
@@ -56,10 +56,10 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
   };
 
   const deleteItem = (row: any) => {
+    // Todo - Implement delete item logic
     console.log('delete item', row.item.id);
 
   };
-
 
   const renderAddButton = () => {
     return (
@@ -74,8 +74,7 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
             multiSelect: true,
             resource: 'project', // Todo - Make dynamic
           })
-        }
-        }
+        }}
       />
     );
   };
@@ -136,8 +135,6 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
 
   if (!projectJams) return <SpinnerView size="small" />;
 
-  console.log('current selection', selectedItems)
-
   return (
     <View style={styles.container}>
       {projectJams?.length > 0 && (
@@ -171,8 +168,8 @@ const styles = StyleSheet.create({
   },
   deleteIcon: {
     position: 'absolute',
-    top: 0,
-    right: 0,
+    top: Layout.space.base/2,
+    right: Layout.space.base/2,
   }
 });
 
