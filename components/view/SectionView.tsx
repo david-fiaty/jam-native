@@ -176,7 +176,7 @@ const SectionView = () => {
         render: (params: any) => <PrivateProfileSection {...params} />,
         toolbarButtons: [
           {
-            label: i18n.t('Edit'),
+            label: i18n.t('Edit Profile'),
             sectionId: 'profile-form',
           },
         ],
@@ -197,7 +197,7 @@ const SectionView = () => {
         render: (params: any) => <PrivateProjectSection {...params} />,
         toolbarButtons: [
           {
-            label: i18n.t('Edit'),
+            label: i18n.t('Edit Project'),
             sectionId: 'edit-project',
           },
         ],
