@@ -28,20 +28,14 @@ const SearchProfilesList = ({ data, filter }: Props) => {
     });
   };
 
-  const renderEmptyMessage = () => {
-    if (isLoaded && !currentData?.length) {
-      return <TextView>{i18n.t("No results found for this search.")}</TextView>;
-    }
-  };
-
-  const renderItem = useCallback((row: any) => {
+  const renderItem = (row: any) => {
     return (
       <ProfileListItem
         row={row}
         onListItemPress={(row: any) => onItemPress(row)}
       />
     );
-  }, []);
+  };
 
   useEffect(() => {
     if (filter && filter != 'jammer') setCurrentData(data.filter((o: any) => o.profile_type == filter))
