@@ -15,7 +15,7 @@ const PrivateJamSection = ({ jamId }: Props) => {
       style={styles.container}
     >
       <JamView 
-        isPublic={true} 
+        isPublic={false} 
         jamId={jamId}
       />
     </BoxView>
