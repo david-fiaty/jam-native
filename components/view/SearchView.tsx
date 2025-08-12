@@ -10,6 +10,7 @@ import TabsView from "./TabsView";
 import BoxView from "./BoxView";
 import i18n from "@/translation/i18n";
 import TextView from "./TextView";
+import IconView from "./IconView";
 
 const SearchView = () => {
   const dispatch = useDispatch();
@@ -90,8 +91,8 @@ const SearchView = () => {
         justify="space-between"
         style={styles.searchFilters}
       >
-        <TextView>aaa</TextView>
-        <TextView>bbb</TextView>
+        <TextView>{i18n.t('Filtered results')}</TextView>
+        <IconView name="filter" theme="transparent" padding={0} size={16} />
       </BoxView>
 
       {/* Jams list */}
