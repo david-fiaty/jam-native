@@ -105,11 +105,13 @@ const JamForm = ({ jamId, isPublic }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        //FormManager.resetForm(resource); // Todo - Fix form reset on web
+        let jamData: any = {};
         let profileId: number = await UserManager.getProfileId();
         setProfileId(profileId);
 
-        let jamData: any = (await EntityManager.getJams([jamId]))?.[0] || {};
+        if (!isNaN(parseInt(jamId)) && parseInt(jamId) > 0) {
+          jamData = (await EntityManager.getJams([jamId]))?.[0] || {};
+        }
 
         dispatch(setFormData<any>({
           resource: resource,
