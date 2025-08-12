@@ -33,6 +33,7 @@ import PublicJamSection from "../section/jam/PublicJamSection";
 import PrivateJamSection from "../section/jam/PrivateJamSection";
 import ProjectFormSection from "../section/project/ProjectFormSection";
 import JamFormSection from "../section/jam/JamFormSection";
+import SearchFiltersSection from "../section/SearchFiltersSection";
 
 const SectionView = () => {
   const path = usePathname();
@@ -249,6 +250,11 @@ const SectionView = () => {
         id: 'edit-project',
         title: i18n.t('Edit Project'),
         render: (params: any) => <ProjectFormSection {...params} />,
+      },
+      {
+        id: 'search-filters',
+        title: i18n.t('Search Filters'),
+        render: (params: any) => <SearchFiltersSection {...params} />,
       },
     ].map((o: any) => {
       return {
