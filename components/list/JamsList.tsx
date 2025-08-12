@@ -5,8 +5,6 @@ import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
-import ListItem from "./jams-list/ListItem";
-import UserManager from "@/manager/UserManager";
 import JamView from "../view/JamView";
 
 type Props = {
@@ -16,9 +14,7 @@ type Props = {
 
 const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const appState = useSelector((state: any) => state.app);
   const searchState: any = useSelector((state: any) => state.search);
-  const userState = useSelector((state: any) => state.user);
 
   const renderItem = (row: any) => {
     return (
@@ -69,7 +65,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
-  
+
   return (
     <BoxView
       direction="column"
