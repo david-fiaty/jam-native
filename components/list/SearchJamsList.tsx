@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import ListView from "../view/ListView";
@@ -10,38 +10,44 @@ import SpinnerView from "../view/SpinnerView";
 import SectionManager from "@/manager/SectionManager";
 import BoxView from "../view/BoxView";
 import ScreenManager from "@/manager/ScreenManager";
+import MediaManager from "@/manager/MediaManager";
 
 type Props = {
   data?: any;
   filter?: any;
 };
 
+const numColumns = 3;
+
 const SearchJamsList = ({ data, filter }: Props) => {
-  const numColumns = 3;
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [currentData, setCurrentData] = useState<any[]>([]);
+  const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
-    SectionManager.push(router, 'profile-jams', { 
-      jamId: JSON.stringify([row?.item?.id]), 
+    SectionManager.push(router, 'profile-jams', {
+      jamId: JSON.stringify([row?.item?.id]),
       title: row?.item?.title,
       disableInfiniteScroll: true,
     });
   };
 
-  const renderEmptyMessage = () => {
-    if (isLoaded && !currentData?.length) {
-      return <TextView>{i18n.t("No results found for this search.")}</TextView>;
-    }
-  };
-
   const renderItem = (row: any) => {
+    let output: any = null;
+    let imageUrl: any = row?.item?.medias?.[0]?.url;
+
+    if (imageUrl?.length > 0) {
+      output = MediaManager.renderImage(imageUrl, {
+        numColumns: numColumns,
+        imageSize: imageSize,
+      });
+    }
+
     return (
-      <JamListItem
-        row={row}
-        onListItemPress={(row: any) => onItemPress(row)}
-      />
+      <TouchableOpacity onPress={() => onItemPress(row)}>
+        {output}
+      </TouchableOpacity>
     );
   };
 
@@ -55,12 +61,12 @@ const SearchJamsList = ({ data, filter }: Props) => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView 
+    <BoxView
       direction="column"
       align="flex-start"
       justify="flex-start"
       scroll={ScreenManager.isWeb() ? true : false}
-      style={styles.container} 
+      style={styles.container}
     >
       <ListView
         data={currentData}
