@@ -109,7 +109,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
         let profileId: number = await UserManager.getProfileId();
         setProfileId(profileId);
 
-        if (!isNaN(parseInt(jamId))) {
+        if (!isNaN(parseInt(jamId)) && parseInt(jamId) > 0) {
           jamData = (await EntityManager.getJams([jamId]))?.[0] || {};
         }
 
