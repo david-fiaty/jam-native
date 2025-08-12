@@ -9,7 +9,6 @@ import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
 import BoxView from "../view/BoxView";
-import JamListItem from "../list/list-item/JamListItem";
 
 type Props = {
   resource?: any;
@@ -116,6 +115,10 @@ const SelectJamsForm = ({ resource, field, idArray, addButton, multiSelect, empt
         scrollEnabled={false}
         emptyMessage={<TextView>{i18n.t('No data available.')}</TextView>}
         renderItem={(row: any) => (
+          <TextView>{row?.item?.id}</TextView>
+        )}
+        /*
+        renderItem={(row: any) => (
           <JamListItem 
             row={row} 
             multiSelect={multiSelect}
@@ -126,6 +129,7 @@ const SelectJamsForm = ({ resource, field, idArray, addButton, multiSelect, empt
             isSelected={selectedIds.includes(row.item.id)}
           />
         )}
+          */
       />
     </BoxView>
   );
