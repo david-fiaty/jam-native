@@ -5,7 +5,8 @@ import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
-import JamView from "../view/JamView";
+import ListItem from "./jams-list/ListItem";
+import UserManager from "@/manager/UserManager";
 
 type Props = {
   idArray?: any;
@@ -14,13 +15,27 @@ type Props = {
 
 const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [sectorsData, setSectorsData] = useState<any>([]);
+  const [profileData, setProfileData] = useState<any>(null);
+  const appState = useSelector((state: any) => state.app);
   const searchState: any = useSelector((state: any) => state.search);
+  const userState = useSelector((state: any) => state.user);
+
+  const getProfileData = async () => {
+    return await UserManager.getProfileData();
+  };
+
+  const onListItemAction = async () => {
+    setProfileData(await getProfileData());
+  };
 
   const renderItem = (row: any) => {
     return (
-      <JamView 
-        jamId={row?.item?.id}
-        isPublic={false}
+      <ListItem
+        row={row}
+        sectorsData={sectorsData}
+        profileData={profileData}
+        onListItemAction={onListItemAction}
       />
     );
   };
@@ -59,10 +74,12 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
+        setSectorsData(appState.sectorsData);
+        setProfileData(userState.profileData);
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded]);
+  }, [isLoaded, appState, userState]);
 
   if (!isLoaded) return <SpinnerView />;
 
