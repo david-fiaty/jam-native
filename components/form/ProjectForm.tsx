@@ -25,17 +25,17 @@ import ButtonView from "../view/ButtonView";
 
 type Props = {
   projectId?: any;
+  isPublic?: boolean;
 };
 
 const resource: string = 'project';
 
-const ProjectForm = ({ projectId }: Props) => {
+const ProjectForm = ({ projectId, isPublic }: Props) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
-  const [projectItem, setProjectItem] = useState<any>(null);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateField = (key: any, value: any) => {
@@ -96,9 +96,8 @@ const ProjectForm = ({ projectId }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        //setProjectItem((await EntityManager.getProjects([projectId]))?.[0]);
-        let projectData: any = (await EntityManager.getProjects([projectId]))?.[0] || {};
         //FormManager.resetForm(resource); // Todo - Fix form reset on web
+        let projectData: any = (await EntityManager.getProjects([projectId]))?.[0] || {};
         setProfileId(await UserManager.getProfileId());
 
         dispatch(setFormData<any>({

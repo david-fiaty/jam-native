@@ -39,7 +39,7 @@ const JamViewDetails = ({ row, sectorsData }: Props) => {
     return (
       row?.caption?.length > 0 && (
         <BoxView style={styles.descriptionContainer}>
-          {row?.title?.length > 0 && <TextView>{row.item.title}</TextView>}
+          {row?.title?.length > 0 && <TextView>{row?.title}</TextView>}
           <TextView>{previewText}</TextView>
         </BoxView>
       )
@@ -50,7 +50,7 @@ const JamViewDetails = ({ row, sectorsData }: Props) => {
     return (
       row?.caption?.length > 0 && (
         <BoxView style={styles.descriptionContainer}>
-          {row?.title?.length > 0 && <TextView>{row.item.title}</TextView>}
+          {row?.title?.length > 0 && <TextView>{row?.title}</TextView>}
           <TextView>{row?.caption}</TextView>
         </BoxView>
       )

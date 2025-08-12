@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
@@ -27,9 +28,15 @@ import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
 import CountriesField from "../field/CountriesField";
 
+type Props = {
+  jamId?: any;
+  isPublic?: boolean;
+};
+
 const resource: string = 'jam';
 
-const JamForm = () => {
+const JamForm = ({ jamId, isPublic }: Props) => {
+  const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
@@ -101,12 +108,23 @@ const JamForm = () => {
         //FormManager.resetForm(resource); // Todo - Fix form reset on web
         let profileId: number = await UserManager.getProfileId();
         setProfileId(profileId);
-        FormManager.updateField(resource, 'profile_id', profileId);
+
+        let jamData: any = (await EntityManager.getJams([jamId]))?.[0] || {};
+
+        dispatch(setFormData<any>({
+          resource: resource,
+          key: null,
+          value: {
+            ...jamData,
+            ...{ profile_id: profileId },
+          },
+        }));
+
         setIsLoaded(true);
       }
     })();
 
-  }, [isLoaded, profileId, resource]);
+  }, [isLoaded, profileId, jamId, resource]);
 
   if (!isLoaded) return <SpinnerView />;
 

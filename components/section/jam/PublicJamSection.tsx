@@ -1,16 +1,12 @@
 import { StyleSheet } from "react-native";
 import BoxView from "@/components/view/BoxView";
 import JamView from "@/components/view/JamView";
-import TextView from "@/components/view/TextView";
 
 type Props = {
   jamId: any;
 };
 
-const PublicJamSection = ({ jamId }: Props) => {
-  console.log(jamId)
-  return (<TextView>PUBLIC JAM VIEW</TextView>);
-
+const PublicFormSection = ({ jamId }: Props) => {
   return (
     <BoxView
       direction="column"
@@ -34,4 +30,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PublicJamSection;
+export default PublicFormSection;

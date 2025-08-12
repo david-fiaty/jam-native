@@ -28,11 +28,11 @@ const JamViewToolbar = ({ row, profileData, onListItemAction }: Props) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   const isJamLiked = () => {
-    return profileData?.liked_jams?.includes(row?.item?.id);
+    return profileData?.liked_jams?.includes(row?.id);
   };
 
   const isJamSaved = () => {
-    return profileData?.saved_jams?.includes(row?.item?.id);
+    return profileData?.saved_jams?.includes(row?.id);
   };
 
   const getLikeIconTheme = () => {
@@ -51,8 +51,8 @@ const JamViewToolbar = ({ row, profileData, onListItemAction }: Props) => {
       setIsSaveProcessing(true);
       let result: any = {};
 
-      if (isJamSaved()) result = await UserManager.unsaveJam(row?.item?.id)
-      else result = await UserManager.saveJam(row?.item?.id);
+      if (isJamSaved()) result = await UserManager.unsaveJam(row?.id)
+      else result = await UserManager.saveJam(row?.id);
 
       if (onListItemAction) onListItemAction();
 
@@ -69,8 +69,8 @@ const JamViewToolbar = ({ row, profileData, onListItemAction }: Props) => {
       setIsLikeProcessing(true);
       let result: any = {};
 
-      if (isJamLiked()) result = await UserManager.unlikeJam(row?.item?.id)
-      else result = await UserManager.likeJam(row?.item?.id);
+      if (isJamLiked()) result = await UserManager.unlikeJam(row?.id)
+      else result = await UserManager.likeJam(row?.id);
 
       if (onListItemAction) onListItemAction();
       setIsLikeProcessing(false);
