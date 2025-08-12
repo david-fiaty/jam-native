@@ -12,7 +12,7 @@ const slideHeight: number = Layout.imageSlideshow.height;
 const slideWidth: number = (ScreenManager.window.width - Layout.space.base * 3) - 2;
 
 const JamViewImage = ({ row }: Props) => {
-  if (!row?.item?.medias?.length) {
+  if (!row?.medias?.length) {
     return (
       <View style={styles.container}>
         <NoImageView
@@ -27,7 +27,7 @@ const JamViewImage = ({ row }: Props) => {
     );
   }
   else {
-    return <ImageSlideshow data={row?.item?.medias} />;
+    return <ImageSlideshow data={row?.medias} />;
   }
 };
 
