@@ -15,12 +15,12 @@ const maxOwnerNameLength: number = 28;
 
 const JamViewHeader = ({ row }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const collaboratorsCount = parseInt(row?.item?.collaborators?.length);
+  const collaboratorsCount = parseInt(row?.collaborators?.length);
 
   const renderOwnerName = () => {
-    let ownerName: string = row?.item?.profile?.profile_name;
+    let ownerName: string = row?.profile?.profile_name;
 
-    if (ownerName.length > maxOwnerNameLength) {  
+    if (ownerName?.length > maxOwnerNameLength) {  
       ownerName = ownerName.substring(0, maxOwnerNameLength) + '...';
     } 
 
@@ -37,7 +37,7 @@ const JamViewHeader = ({ row }: Props) => {
 
   const renderHosts = () => {
     return (
-      <TouchableOpacity onPress={() => ModalManager.toggleModal('HostsList', { jamId: row?.item?.id })}>
+      <TouchableOpacity onPress={() => ModalManager.toggleModal('HostsList', { jamId: row?.id })}>
         <TextView>
           @{renderOwnerName()}  {collaboratorsCount > 0 && `+${collaboratorsCount}`}
         </TextView>
@@ -46,7 +46,7 @@ const JamViewHeader = ({ row }: Props) => {
   };
 
   const renderStatus = () => {
-    return <JamStatusButton active={row?.item?.is_active} />;
+    return <JamStatusButton active={row?.is_active} />;
   };
 
   const renderActions = () => {
@@ -56,7 +56,7 @@ const JamViewHeader = ({ row }: Props) => {
         theme="clear"
         size={16}
         padding={0}
-        onPress={() => ModalManager.toggleModal('MoreJamActionsView', { jamId: row?.item?.id })}
+        onPress={() => ModalManager.toggleModal('MoreJamActionsView', { jamId: row?.id })}
       />
     );
   };
