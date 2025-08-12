@@ -30,11 +30,12 @@ import CountriesField from "../field/CountriesField";
 
 type Props = {
   jamId?: any;
+  isPublic?: boolean;
 };
 
 const resource: string = 'jam';
 
-const JamForm = ({ jamId }: Props) => {
+const JamForm = ({ jamId, isPublic }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
