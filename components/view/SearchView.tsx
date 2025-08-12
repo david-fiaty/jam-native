@@ -8,6 +8,7 @@ import SearchProjectsList from "../list/SearchProjectsList";
 import TabsView from "./TabsView";
 import BoxView from "./BoxView";
 import i18n from "@/translation/i18n";
+import TextView from "./TextView";
 
 const SearchView = () => {
   const dispatch = useDispatch();
@@ -81,6 +82,8 @@ const SearchView = () => {
         currentTab={searchState.currentTab} 
         onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
       />
+
+      <TextView>ccc</TextView>
 
       {/* Jams list */}
       {['jam', 'looking', 'call', 'event'].includes(searchState.currentTab) && (
