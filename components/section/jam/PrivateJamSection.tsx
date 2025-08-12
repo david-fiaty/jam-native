@@ -8,9 +8,6 @@ type Props = {
 };
 
 const PrivateJamSection = ({ jamId }: Props) => {
-  
-  return (<TextView>PUBLIC JAM VIEW</TextView>);
-
   return (
     <BoxView
       direction="column"
