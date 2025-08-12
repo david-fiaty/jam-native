@@ -28,14 +28,14 @@ const SearchProjectsList = ({ data, filter }: Props) => {
     });
   };
 
-  const renderItem = useCallback((row: any) => {
+  const renderItem = (row: any) => {
     return (
       <ProjectListItem
         row={row}
         onListItemPress={(row: any) => onItemPress(row)}
       />
     );
-  }, []);
+  };
 
   useEffect(() => {
     (async () => {
