@@ -28,11 +28,11 @@ const JamViewToolbar = ({ row, profileData, onListItemAction }: Props) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   const isJamLiked = () => {
-    return profileData?.liked_jams?.includes(row.item.id);
+    return profileData?.liked_jams?.includes(row?.item?.id);
   };
 
   const isJamSaved = () => {
-    return profileData?.saved_jams?.includes(row.item.id);
+    return profileData?.saved_jams?.includes(row?.item?.id);
   };
 
   const getLikeIconTheme = () => {
@@ -51,8 +51,8 @@ const JamViewToolbar = ({ row, profileData, onListItemAction }: Props) => {
       setIsSaveProcessing(true);
       let result: any = {};
 
-      if (isJamSaved()) result = await UserManager.unsaveJam(row.item.id)
-      else result = await UserManager.saveJam(row.item.id);
+      if (isJamSaved()) result = await UserManager.unsaveJam(row?.item?.id)
+      else result = await UserManager.saveJam(row?.item?.id);
 
       if (onListItemAction) onListItemAction();
 
@@ -69,8 +69,8 @@ const JamViewToolbar = ({ row, profileData, onListItemAction }: Props) => {
       setIsLikeProcessing(true);
       let result: any = {};
 
-      if (isJamLiked()) result = await UserManager.unlikeJam(row.item.id)
-      else result = await UserManager.likeJam(row.item.id);
+      if (isJamLiked()) result = await UserManager.unlikeJam(row?.item?.id)
+      else result = await UserManager.likeJam(row?.item?.id);
 
       if (onListItemAction) onListItemAction();
       setIsLikeProcessing(false);
@@ -84,7 +84,7 @@ const JamViewToolbar = ({ row, profileData, onListItemAction }: Props) => {
     }
     else {
       setIsShareProcessing(true);
-      await EntityManager.shareJam(row?.item?.id);
+      await EntityManager.shareJam(row?.id);
       setIsShareProcessing(false);
     }
   };
@@ -115,15 +115,15 @@ const JamViewToolbar = ({ row, profileData, onListItemAction }: Props) => {
   };
 
   const renderJammersButton = () => {
-    let jammersIds: any [] = [...row?.item?.jammers || []];
+    let jammersIds: any [] = [...row?.jammers || []];
 
     if (isJamLiked()) jammersIds = [...new Set([...jammersIds, profileData.id])];
     else jammersIds = jammersIds.filter((v: any) => v != profileData.id); 
 
-    return jammersIds.length > 0 && (
-      <TouchableOpacity onPress={() => ModalManager.toggleModal('JammersList', { jamId: row?.item?.id, jammersIds: jammersIds })}>
+    return jammersIds?.length > 0 && (
+      <TouchableOpacity onPress={() => ModalManager.toggleModal('JammersList', { jamId: row?.id, jammersIds: jammersIds })}>
         <TextView>
-          {jammersIds.length} {jammersIds.length == 1 ? i18n.t("jammer") : i18n.t("jammers")}
+          {jammersIds?.length} {jammersIds?.length == 1 ? i18n.t("jammer") : i18n.t("jammers")}
         </TextView>
       </TouchableOpacity>
     );
@@ -175,7 +175,7 @@ const JamViewToolbar = ({ row, profileData, onListItemAction }: Props) => {
 
   const renderCommentsButton = () => {
     if (isCommentProcessing) return <SpinnerView size="small" />;
-    let commentsCount: number = row?.item?.comments?.length || 0; // Todo - Show comments count
+    let commentsCount: number = row?.comments?.length || 0; // Todo - Show comments count
 
     return (
       <BoxView
@@ -188,7 +188,7 @@ const JamViewToolbar = ({ row, profileData, onListItemAction }: Props) => {
           size={12}
           padding={6}
           onPress={() => ModalManager.toggleModal('JamCommentsList', { 
-            entityId: row?.item?.id, 
+            entityId: row?.id, 
             entityType: 'jam' 
           })}
         />

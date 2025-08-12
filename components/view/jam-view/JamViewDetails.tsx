@@ -16,7 +16,7 @@ type Props = {
 const JamViewDetails = ({ row, sectorsData }: Props) => {
 
   const truncateText = (text: string, maxLength: number) => {
-    if (text.length <= maxLength) return text;
+    if (text?.length <= maxLength) return text;
 
     let truncated = text.slice(0, maxLength);
     let lastSpaceIndex = truncated.lastIndexOf(' ');
@@ -31,15 +31,15 @@ const JamViewDetails = ({ row, sectorsData }: Props) => {
   const renderPreview = () => {
     let previewText: string = '';
 
-    if (row?.item?.caption?.length > 0) {
-      previewText = row?.item?.caption.trim().replace(/[\t\n\r]+/g, ' ');
+    if (row?.caption?.length > 0) {
+      previewText = row?.caption.trim().replace(/[\t\n\r]+/g, ' ');
       previewText = truncateText(previewText, 86);
     }
 
     return (
-      row?.item?.caption?.length > 0 && (
+      row?.caption?.length > 0 && (
         <BoxView style={styles.descriptionContainer}>
-          {row?.item?.title?.length > 0 && <TextView>{row.item.title}</TextView>}
+          {row?.title?.length > 0 && <TextView>{row.item.title}</TextView>}
           <TextView>{previewText}</TextView>
         </BoxView>
       )
@@ -48,10 +48,10 @@ const JamViewDetails = ({ row, sectorsData }: Props) => {
 
   const renderDescription = () => {
     return (
-      row?.item?.caption?.length > 0 && (
+      row?.caption?.length > 0 && (
         <BoxView style={styles.descriptionContainer}>
-          {row?.item?.title?.length > 0 && <TextView>{row.item.title}</TextView>}
-          <TextView>{row?.item?.caption}</TextView>
+          {row?.title?.length > 0 && <TextView>{row.item.title}</TextView>}
+          <TextView>{row?.caption}</TextView>
         </BoxView>
       )
     );
@@ -68,7 +68,7 @@ const JamViewDetails = ({ row, sectorsData }: Props) => {
         <TextView>
           <TextView style={styles.detailLabel}>{`${i18n.t("Location")} `}</TextView>
           {StaticData.locationTypes.find(
-            (o: any) => o.id == row?.item?.location_type
+            (o: any) => o.id == row?.location_type
           )?.label || i18n.t("Unavailable")}
         </TextView>
       </BoxView>
@@ -85,7 +85,7 @@ const JamViewDetails = ({ row, sectorsData }: Props) => {
       >
         <TextView>
           <TextView style={styles.detailLabel}>{`${i18n.t("Start")} `}</TextView>
-          {DataManager.formatDate(row?.item?.period?.start_datetime) || i18n.t("Unavailable")}
+          {DataManager.formatDate(row?.period?.start_datetime) || i18n.t("Unavailable")}
         </TextView>
       </BoxView>
     );
@@ -101,14 +101,14 @@ const JamViewDetails = ({ row, sectorsData }: Props) => {
       >
         <TextView>
           <TextView style={styles.detailLabel}>{`${i18n.t("End")} `}</TextView>
-          {DataManager.formatDate(row?.item?.period?.end_datetime) || i18n.t("Unavailable")}
+          {DataManager.formatDate(row?.period?.end_datetime) || i18n.t("Unavailable")}
         </TextView>
       </BoxView>
     );
   };
 
   const renderSector = () => {
-    let firstSector: any = sectorsData?.find((o: any) => o.id == row?.item?.sectors?.[0]);
+    let firstSector: any = sectorsData?.find((o: any) => o.id == row?.sectors?.[0]);
 
     return (
       <BoxView
@@ -126,7 +126,7 @@ const JamViewDetails = ({ row, sectorsData }: Props) => {
   };
 
   const renderSubsector = () => {
-    let firstSector: any = sectorsData?.find((o: any) => o.id == row?.item?.sectors?.[0]);
+    let firstSector: any = sectorsData?.find((o: any) => o.id == row?.sectors?.[0]);
 
     return (
       <BoxView
