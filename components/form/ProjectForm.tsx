@@ -96,9 +96,12 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        //FormManager.resetForm(resource); // Todo - Fix form reset on web
-        let projectData: any = (await EntityManager.getProjects([projectId]))?.[0] || {};
+        let projectData: any = {};
         setProfileId(await UserManager.getProfileId());
+
+        if (!isNaN(parseInt(projectId)) && parseInt(projectId) > 0) {
+          projectData = (await EntityManager.getProjects([projectId]))?.[0] || {};
+        }
 
         dispatch(setFormData<any>({
           resource: resource,
