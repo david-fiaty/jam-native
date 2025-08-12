@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
@@ -36,14 +36,14 @@ const SearchJamsList = ({ data, filter }: Props) => {
     }
   };
 
-  const renderItem = useCallback((row: any) => {
+  const renderItem = (row: any) => {
     return (
       <JamListItem
         row={row}
         onListItemPress={(row: any) => onItemPress(row)}
       />
     );
-  }, []);
+  };
 
   useEffect(() => {
     if (filter && filter != 'jam') setCurrentData(data.filter((o: any) => o.type == filter))
