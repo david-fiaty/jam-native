@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { StyleSheet } from "react-native";
+import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
@@ -8,8 +10,12 @@ import SearchProjectsList from "../list/SearchProjectsList";
 import TabsView from "./TabsView";
 import BoxView from "./BoxView";
 import i18n from "@/translation/i18n";
+import TextView from "./TextView";
+import IconView from "./IconView";
+import SectionManager from "@/manager/SectionManager";
 
 const SearchView = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const searchState: any = useSelector((state: any) => state.search);
   
@@ -82,6 +88,22 @@ const SearchView = () => {
         onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
       />
 
+      <BoxView
+        direction="row"
+        align="center"
+        justify="space-between"
+        style={styles.searchFilters}
+      >
+        <TextView>{i18n.t('Filtered results')}</TextView>
+        <IconView 
+          name="filter" 
+          theme="transparent" 
+          padding={0} 
+          size={16} 
+          onPress={() => SectionManager.push(router, 'search-filters')}
+        />
+      </BoxView>
+
       {/* Jams list */}
       {['jam', 'looking', 'call', 'event'].includes(searchState.currentTab) && (
         <SearchJamsList 
@@ -108,5 +130,11 @@ const SearchView = () => {
     </BoxView>
   );
 };
+
+const styles = StyleSheet.create({
+  searchFilters: {
+    width: '100%',
+  },
+});
 
 export default SearchView;
