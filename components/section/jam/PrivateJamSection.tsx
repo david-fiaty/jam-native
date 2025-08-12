@@ -1,16 +1,12 @@
 import { StyleSheet } from "react-native";
 import BoxView from "@/components/view/BoxView";
 import JamView from "@/components/view/JamView";
-import TextView from "@/components/view/TextView";
 
 type Props = {
   jamId: any;
 };
 
 const PrivateJamSection = ({ jamId }: Props) => {
-  
-  return (<TextView>PUBLIC JAM VIEW</TextView>);
-
   return (
     <BoxView
       direction="column"
@@ -19,7 +15,7 @@ const PrivateJamSection = ({ jamId }: Props) => {
       style={styles.container}
     >
       <JamView 
-        isPublic={true} 
+        isPublic={false} 
         jamId={jamId}
       />
     </BoxView>
