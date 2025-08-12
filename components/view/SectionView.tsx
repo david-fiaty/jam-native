@@ -25,7 +25,6 @@ import NotificationItemSection from "../section/NotificationItemSection";
 import PublicProfileSection from "../section/profile/PublicProfileSection";
 import PrivateProfileSection from "../section/profile/PrivateProfileSection";
 import ProfileJamsSection from "../section/ProfileJamsSection";
-import JamForm from "../form/JamForm";
 import PublicProjectSection from "../section/project/PublicProjectSection";
 import PrivateProjectSection from "../section/project/PrivateProjectSection";
 import ProjectJamsSection from "../section/ProjectJamsSection";

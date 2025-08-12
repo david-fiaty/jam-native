@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import BoxView from "@/components/view/BoxView";
-import ProjectForm from "@/components/form/ProjectForm";
 import JamForm from "@/components/form/JamForm";
 
 type Props = {
