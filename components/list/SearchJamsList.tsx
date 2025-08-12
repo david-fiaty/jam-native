@@ -23,8 +23,8 @@ const SearchJamsList = ({ data, filter }: Props) => {
   const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
-    SectionManager.push(router, 'profile-jams', {
-      jamId: JSON.stringify([row?.item?.id]),
+    SectionManager.push(router, 'public-jam', {
+      jamId: row?.item?.id,
       title: row?.item?.title,
       disableInfiniteScroll: true,
     });
