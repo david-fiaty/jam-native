@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
@@ -83,7 +84,15 @@ const SearchView = () => {
         onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
       />
 
-      <TextView>ccc</TextView>
+      <BoxView
+        direction="row"
+        align="center"
+        justify="space-between"
+        style={styles.searchFilters}
+      >
+        <TextView>aaa</TextView>
+        <TextView>bbb</TextView>
+      </BoxView>
 
       {/* Jams list */}
       {['jam', 'looking', 'call', 'event'].includes(searchState.currentTab) && (
@@ -111,5 +120,11 @@ const SearchView = () => {
     </BoxView>
   );
 };
+
+const styles = StyleSheet.create({
+  searchFilters: {
+    width: '100%',
+  },
+});
 
 export default SearchView;
