@@ -7,10 +7,7 @@ type Props = {
   jamId: any;
 };
 
-const PublicJamSection = ({ jamId }: Props) => {
-  console.log(jamId)
-  return (<TextView>PUBLIC JAM VIEW</TextView>);
-
+const PublicFormSection = ({ jamId }: Props) => {
   return (
     <BoxView
       direction="column"
@@ -34,4 +31,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PublicJamSection;
+export default PublicFormSection;

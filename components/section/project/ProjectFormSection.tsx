@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import BoxView from "@/components/view/BoxView";
-import ProjectView from "@/components/view/ProjectView";
+import ProjectForm from "@/components/form/ProjectForm";
 
 type Props = {
   projectId: any;
@@ -14,7 +14,7 @@ const ProjectFormSection = ({ projectId }: Props) => {
       justify="center"
       style={styles.container}
     >
-      <ProjectView 
+      <ProjectForm
         isPublic={false}
         projectId={projectId}
       />

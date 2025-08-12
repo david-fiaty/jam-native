@@ -25,11 +25,12 @@ import ButtonView from "../view/ButtonView";
 
 type Props = {
   projectId?: any;
+  isPublic?: boolean;
 };
 
 const resource: string = 'project';
 
-const ProjectForm = ({ projectId }: Props) => {
+const ProjectForm = ({ projectId, isPublic }: Props) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);

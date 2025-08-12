@@ -1,7 +1,6 @@
 import { StyleSheet } from "react-native";
 import BoxView from "@/components/view/BoxView";
 import JamView from "@/components/view/JamView";
-import TextView from "@/components/view/TextView";
 
 type Props = {
   jamId: any;
