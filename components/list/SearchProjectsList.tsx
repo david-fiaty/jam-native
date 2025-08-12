@@ -22,13 +22,10 @@ const SearchProjectsList = ({ data, filter }: Props) => {
   const [currentData, setCurrentData] = useState<any[]>([]);
 
   const onItemPress = (row: any) => {
-    SectionManager.push(router, 'project-item', { projectId: row?.item?.id, title: row?.item?.title });
-  };
-
-  const renderEmptyMessage = () => {
-    if (isLoaded && !currentData?.length) {
-      return <TextView>{i18n.t("No results found for this search.")}</TextView>;
-    }
+    SectionManager.push(router, 'public-project', { 
+      projectId: row?.item?.id, 
+      title: row?.item?.title 
+    });
   };
 
   const renderItem = useCallback((row: any) => {
