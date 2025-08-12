@@ -19,7 +19,6 @@ import WelcomeSection from "@/components/section/WelcomeSection";
 import SignupSection from "@/components/section/SignupSection";
 import PrivacySection from "@/components/section/PrivacySection";
 import ProfileFormSection from "@/components/section/profile/ProfileFormSection";
-import ProjectForm from "@/components/form/ProjectForm";
 import LanguageForm from "../form/LanguageForm";
 import ResetPasswordForm from "../form/ResetPasswordForm";
 import NotificationItemSection from "../section/NotificationItemSection";
@@ -33,6 +32,7 @@ import ProjectJamsSection from "../section/ProjectJamsSection";
 import ProfileProjectsSection from "../section/ProfileProjectsSection";
 import PublicJamSection from "../section/jam/PublicJamSection";
 import PrivateJamSection from "../section/jam/PrivateJamSection";
+import ProjectFormSection from "../section/project/ProjectFormSection";
 
 const SectionView = () => {
   const path = usePathname();
@@ -238,7 +238,7 @@ const SectionView = () => {
       {
         id: 'add-project',
         title: i18n.t('Add Project'),
-        render: (params: any) => <JamForm {...params} />,
+        render: (params: any) => <ProjectFormSection {...params} />,
       },
       {
         id: 'edit-jam',
@@ -248,7 +248,7 @@ const SectionView = () => {
       {
         id: 'edit-project',
         title: i18n.t('Edit Project'),
-        render: (params: any) => <ProjectForm {...params} />,
+        render: (params: any) => <ProjectFormSection {...params} />,
       },
     ].map((o: any) => {
       return {
