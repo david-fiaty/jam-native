@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { setSectorsData } from '@/redux/slices/AppSlice';
+import { setCountriesData, setSectorsData } from '@/redux/slices/AppSlice';
 import { useRouter, useRootNavigationState } from 'expo-router';
 import { useDispatch } from "react-redux";
 import { setCurrentLanguage } from '@/redux/slices/UserSlice';
@@ -8,7 +8,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import i18next from 'i18next';
 import ScreenManager from '@/manager/ScreenManager';
 import SearchManager from '@/manager/SearchManager';
-import UserManager from '@/manager/UserManager';
 import EntityManager from '@/manager/EntityManager';
 
 export default () => {
@@ -38,6 +37,7 @@ export default () => {
       await setLanguage();
       await SearchManager.loadResults();
       dispatch(setSectorsData(await EntityManager.getSectors()));
+      dispatch(setCountriesData(await EntityManager.getCountries()));
     })();
   }, []);
 
