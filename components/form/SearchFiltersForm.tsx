@@ -18,7 +18,7 @@ const SearchFiltersForm = ({ }: Props) => {
   const renderCountriesFilter = () => {
     return countriesData.map((o: any) => {
       return (
-        <TextView key={o.id}>{o.name}</TextView>
+        <TextView key={o.id} style={styles.filterTagDisabled}>{o.name}</TextView>
       );
     });
   };  
@@ -83,13 +83,15 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   filterTagDisabled: {
-    backgroundColor: Layout.colors.primary,
+    backgroundColor: Layout.colors.gray,
+    color: Layout.colors.primary,
     borderRadius: Layout.radius.round,
     paddingVertical: Layout.space.base,
     paddingHorizontal: Layout.space.base,
   },
   filterTagEnabled: {
     backgroundColor: Layout.colors.primary,
+    color: Layout.colors.white,
     borderRadius: Layout.radius.round,
     paddingVertical: Layout.space.base,
     paddingHorizontal: Layout.space.base,
