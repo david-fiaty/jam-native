@@ -170,7 +170,7 @@ return (
     <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
       {renderCountriesFilters()}
       {renderSectorsFilter()}
-      {renderSubSectorsFilter()}
+      {currentFilters?.sectors?.length > 0 && renderSubSectorsFilter()}
     </BoxView>
   </BoxView>
 );
