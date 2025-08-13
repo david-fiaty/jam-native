@@ -32,7 +32,7 @@ const SearchFiltersForm = ({ }: Props) => {
     let searchFilters: any = { ...currentFilters };
 
     if (!searchFilters?.[key]?.length || searchFilters[key].length < filtersConfig[key].length) {
-      searchFilters[key] = [...filtersConfig.countries].map((o: any) => o.id);
+      searchFilters[key] = [...filtersConfig[key]].map((o: any) => o.id);
     }
     else {
       searchFilters[key] = [];
@@ -48,7 +48,7 @@ const SearchFiltersForm = ({ }: Props) => {
       searchFilters[key] = searchFilters[key].filter((v: any) => v != value);
     }
     else {
-      searchFilters[key] = [...searchFilters[key], value];
+      searchFilters[key] = [...(searchFilters?.[key] || []), value];
     }
 
     setCurrentFilters(searchFilters);
@@ -113,6 +113,8 @@ const renderCountriesFilters = () => {
 };
 
 const renderSectorsFilter = () => {
+  let key: string = 'sectors';
+
   return (
     <>
       <TextView style={styles.filterTitle}>
@@ -124,7 +126,8 @@ const renderSectorsFilter = () => {
         justify="flex-start"
         style={styles.filterContainer}
       >
-        <TextView>SECTORS</TextView>
+        {renderAllFiltersTag(key)}
+        {(filtersConfig.sectors || []).map((item: any) => renderFilterTag(key, item))}
       </BoxView>
     </>
   );
