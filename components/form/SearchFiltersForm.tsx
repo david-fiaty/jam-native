@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   },
   filterTitle: {
     color: Layout.colors.black,
-    fontSize: 15,
+    fontSize: 14,
   },
   filterTagDisabled: {
     backgroundColor: Layout.colors.gray,
