@@ -17,8 +17,29 @@ const SearchFiltersForm = ({ }: Props) => {
   const [countriesData, setCountriesData] = useState<any[]>([]);
   const [sectorsData, setSectorsData] = useState<any[]>([]);
   const [currentFilters, setCurrentFilters] = useState<any>({});
+  const [filtersConfig, setFiltersConfig] = useState<any>({});
   const appState = useSelector((state: any) => state.app);
   const searchState = useSelector((state: any) => state.search);
+
+  const getFiltersConfig = () => {
+    return {
+      countries: appState.countriesData,
+      sectors: appState.sectorsData,
+    };
+  };
+
+  const toggleFilters = (key: string) => {
+    let searchFilters: any = { ...currentFilters };
+
+    if (!searchFilters?.[key]?.length || searchFilters[key].length < filtersConfig[key].length)  {
+      searchFilters[key] = [...filtersConfig.countries].map((o: any) => o.id);
+    }
+    else {
+      searchFilters[key] = [];
+    }
+
+    setCurrentFilters(searchFilters);
+  };
 
   const toggleFilter = (key: string, value: string) => {
     let searchFilters: any = { ...currentFilters };
@@ -41,21 +62,44 @@ const SearchFiltersForm = ({ }: Props) => {
     dispatch(setSearchFilters(currentFilters));
   };
 
-  const renderCountriesFilter = () => {
-    return countriesData.map((o: any) => {
-      let isEnabled: any = isFilterEnabled('countries', o.id);
-      let onPress: any = () => toggleFilter('countries', o.id);
+  const renderAllFiltersButton = (key: string) => {
+    let isEnabled: boolean = currentFilters?.[key]?.length === filtersConfig?.[key]?.length;
 
-      return (
-        <TouchableOpacity key={o.id} onPress={onPress}>
-          <TextView
-            style={isEnabled ? styles.filterTagEnabled : styles.filterTagDisabled}
-          >
-            {o.name}
-          </TextView>
-        </TouchableOpacity>
-      );
-    });
+    return (
+      <TouchableOpacity onPress={() => toggleFilters(key)}>
+        <TextView
+          style={isEnabled ? styles.filterTagEnabled : styles.filterTagDisabled}
+        >
+          {i18n.t('All')}
+        </TextView>
+      </TouchableOpacity>
+    );
+  };
+
+  const renderCountriesFilters = () => {
+    return (
+      <>
+        <TextView style={styles.filterTitle}>{i18n.t('Countries')}</TextView>
+        <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.countriesFilter}>
+          {renderAllFiltersButton('countries')}
+
+          {(filtersConfig.countries || []).map((o: any) => {
+            let isEnabled: any = isFilterEnabled('countries', o.id);
+            let onPress: any = () => toggleFilter('countries', o.id);
+
+            return (
+              <TouchableOpacity key={o.id} onPress={onPress}>
+                <TextView
+                  style={isEnabled ? styles.filterTagEnabled : styles.filterTagDisabled}
+                >
+                  {o.name}
+                </TextView>
+              </TouchableOpacity>
+            );
+          })}
+        </BoxView>
+      </>
+    );
   };
 
   const renderSectorsFilter = () => {
@@ -68,11 +112,10 @@ const SearchFiltersForm = ({ }: Props) => {
 
   useEffect(() => {
     if (!isLoaded) {
-      setCountriesData(appState.countriesData);
-      setSectorsData(appState.sectorsData);
+      setFiltersConfig(getFiltersConfig())
       setCurrentFilters(searchState.searchFilters);
     }
-  }, [appState, searchState, isLoaded]);
+  }, [searchState, isLoaded]);
 
   console.log(currentFilters);
 
@@ -84,10 +127,7 @@ const SearchFiltersForm = ({ }: Props) => {
       style={[Layout.formContainer, styles.container]}
     >
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
-        <TextView style={styles.filterTitle}>{i18n.t('Countries')}</TextView>
-        <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.countriesFilter}>
-          {renderCountriesFilter()}
-        </BoxView>
+        {renderCountriesFilters()}
 
         <TextView style={styles.filterTitle}>{i18n.t('Industries')}</TextView>
         <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.countriesFilter}>
