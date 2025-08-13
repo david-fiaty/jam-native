@@ -14,11 +14,17 @@ const SearchFiltersForm = ({ }: Props) => {
   const appState = useSelector((state: any) => state.app);
   const [countriesData, setCountriesData] = useState<any[]>([]);
   const [sectorsData, setSectorsData] = useState<any[]>([]);
-
+  const [currentFilters, setCurrentFilters] = useState<any[]>([]);
+  
   const renderCountriesFilter = () => {
     return countriesData.map((o: any) => {
       return (
-        <TextView key={o.id} style={styles.filterTagDisabled}>{o.name}</TextView>
+        <TextView 
+          key={o.id} 
+          style={styles.filterTagDisabled}
+        >
+          {o.name}
+        </TextView>
       );
     });
   };  
