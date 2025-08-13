@@ -18,22 +18,23 @@ const SearchFiltersForm = ({ }: Props) => {
   const appState = useSelector((state: any) => state.app);
   const searchState = useSelector((state: any) => state.search);
 
-  const toggleFilter = (key: string, field: string) => {
-    let searchFilters: any = { ...searchState.searchFilters };
+  const toggleFilter = (key: string, field: string, value: string) => {
+    let searchFilters: any = {...searchState.searchFilters};
 
-    if (searchFilters[key].includes(field)) {
+    if (isFilterEnabled(key, field, value)) {
       searchFilters[key] = searchFilters[key].pop(field);
     }
     else {
-      searchFilters = {
-        ...searchFilters,
-        ...{
-          [key]: [...new Set([...searchFilters[key], field])],
-        },
-      };
+      searchFilters[key] = [...searchFilters[key], field];
     }
 
     dispatch(setSearchFilters(searchFilters));
+  };
+
+  const isFilterEnabled = (key: string, field: string, value: string) => {
+    return searchState.searchFilters[key]?.[field]
+      && Array.isArray(searchState.searchFilters[key][field]) 
+      && searchState.searchFilters[key][field].includes(value);
   };
 
   const renderCountriesFilter = () => {
@@ -61,6 +62,8 @@ const SearchFiltersForm = ({ }: Props) => {
     setCountriesData(appState.countriesData);
     setSectorsData(appState.sectorsData);
   }, [appState]);
+
+  console.log(searchState.searchFilters);
 
   return (
     <BoxView
