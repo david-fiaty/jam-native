@@ -31,7 +31,7 @@ const SearchFiltersForm = ({ }: Props) => {
   const toggleFilters = (key: string) => {
     let searchFilters: any = { ...currentFilters };
 
-    if (!searchFilters?.[key]?.length)  {
+    if (!searchFilters?.[key]?.length || searchFilters[key].length < filtersConfig[key].length)  {
       searchFilters[key] = [...filtersConfig.countries].map((o: any) => o.id);
     }
     else {
