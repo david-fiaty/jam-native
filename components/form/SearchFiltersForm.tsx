@@ -62,7 +62,7 @@ const SearchFiltersForm = ({ }: Props) => {
     dispatch(setSearchFilters(currentFilters));
   };
 
-  const renderAllFiltersButton = (key: string) => {
+  const renderAllFiltersTag = (key: string) => {
     let isEnabled: boolean = currentFilters?.[key]?.length === filtersConfig?.[key]?.length;
 
     return (
@@ -76,7 +76,7 @@ const SearchFiltersForm = ({ }: Props) => {
     );
   };
 
-  const renderFilterButton = (key: string, item: any) => {
+  const renderFilterTag = (key: string, item: any) => {
     let isEnabled: any = isFilterEnabled(key, item.id);
     let onPress: any = () => toggleFilter(key, item.id);
 
@@ -103,10 +103,10 @@ const renderCountriesFilters = () => {
         direction="row"
         align="flex-start"
         justify="flex-start"
-        style={styles.countriesFilter}
+        style={styles.filterContainer}
       >
-        {renderAllFiltersButton(key)}
-        {(filtersConfig.countries || []).map((item: any) => renderFilterButton(key, item))}
+        {renderAllFiltersTag(key)}
+        {(filtersConfig.countries || []).map((item: any) => renderFilterTag(key, item))}
       </BoxView>
     </>
   );
@@ -122,7 +122,7 @@ const renderSectorsFilter = () => {
         direction="row"
         align="flex-start"
         justify="flex-start"
-        style={styles.countriesFilter}
+        style={styles.filterContainer}
       >
         <TextView>SECTORS</TextView>
       </BoxView>
@@ -140,7 +140,7 @@ const renderSubSectorsFilter = () => {
         direction="row"
         align="flex-start"
         justify="flex-start"
-        style={styles.countriesFilter}
+        style={styles.filterContainer}
       >
         <TextView>SUB SECTORS</TextView>
       </BoxView>
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     flexShrink: 1,
     paddingTop: Layout.space.base,
   },
-  countriesFilter: {
+  filterContainer: {
     width: '100%',
     flexWrap: 'wrap',
     marginBottom: Layout.space.base * 2,
