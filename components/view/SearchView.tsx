@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentTab } from "@/redux/slices/SearchSlice";
+import { setCurrentTab, setSearchFilters } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
 import SearchJamsList from "../list/SearchJamsList";
 import SearchProfilesList from "../list/SearchProfilesList";
