@@ -76,98 +76,101 @@ const SearchFiltersForm = ({ }: Props) => {
     );
   };
 
-  const renderCountriesFilters = () => {
+  const renderFilterButton = (key: string, item: any) => {
+    let isEnabled: any = isFilterEnabled(key, item.id);
+    let onPress: any = () => toggleFilter(key, item.id);
+
     return (
-      <>
-        <TextView style={styles.filterTitle}>
-          {i18n.t('Countries')}
-        </TextView>
-        <BoxView
-          direction="row"
-          align="flex-start"
-          justify="flex-start"
-          style={styles.countriesFilter}
+      <TouchableOpacity key={item.id} onPress={onPress}>
+        <TextView
+          style={isEnabled ? styles.filterTagEnabled : styles.filterTagDisabled}
         >
-          {renderAllFiltersButton('countries')}
-
-          {(filtersConfig.countries || []).map((o: any) => {
-            let isEnabled: any = isFilterEnabled('countries', o.id);
-            let onPress: any = () => toggleFilter('countries', o.id);
-
-            return (
-              <TouchableOpacity key={o.id} onPress={onPress}>
-                <TextView
-                  style={isEnabled ? styles.filterTagEnabled : styles.filterTagDisabled}
-                >
-                  {o.name}
-                </TextView>
-              </TouchableOpacity>
-            );
-          })}
-        </BoxView>
-      </>
+          {item.name}
+        </TextView>
+      </TouchableOpacity>
     );
   };
 
-  const renderSectorsFilter = () => {
-    return (
-      <>
-        <TextView style={styles.filterTitle}>
-          {i18n.t('Industries')}
-        </TextView>
-        <BoxView
-          direction="row"
-          align="flex-start"
-          justify="flex-start"
-          style={styles.countriesFilter}
-        >
-          <TextView>SECTORS</TextView>
-        </BoxView>
-      </>
-    );
-  };
-
-  const renderSubSectorsFilter = () => {
-    return (
-      <>
-        <TextView style={styles.filterTitle}>
-          {i18n.t('Sub Industries')}
-        </TextView>
-        <BoxView
-          direction="row"
-          align="flex-start"
-          justify="flex-start"
-          style={styles.countriesFilter}
-        >
-          <TextView>SUB SECTORS</TextView>
-        </BoxView>
-      </>
-    );
-  };
-
-  useEffect(() => {
-    if (!isLoaded) {
-      setFiltersConfig(getFiltersConfig())
-      setCurrentFilters(searchState.searchFilters);
-    }
-  }, [searchState, isLoaded]);
-
-  console.log(currentFilters);
+const renderCountriesFilters = () => {
+  let key: string = 'countries';
 
   return (
-    <BoxView
-      align="flex-start"
-      justify="flex-start"
-      scroll={true}
-      style={[Layout.formContainer, styles.container]}
-    >
-      <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
-        {renderCountriesFilters()}
-        {renderSectorsFilter()}
-        {renderSubSectorsFilter()}
+    <>
+      <TextView style={styles.filterTitle}>
+        {i18n.t('Countries')}
+      </TextView>
+      <BoxView
+        direction="row"
+        align="flex-start"
+        justify="flex-start"
+        style={styles.countriesFilter}
+      >
+        {renderAllFiltersButton(key)}
+        {(filtersConfig.countries || []).map((item: any) => renderFilterButton(key, item))}
       </BoxView>
-    </BoxView>
+    </>
   );
+};
+
+const renderSectorsFilter = () => {
+  return (
+    <>
+      <TextView style={styles.filterTitle}>
+        {i18n.t('Industries')}
+      </TextView>
+      <BoxView
+        direction="row"
+        align="flex-start"
+        justify="flex-start"
+        style={styles.countriesFilter}
+      >
+        <TextView>SECTORS</TextView>
+      </BoxView>
+    </>
+  );
+};
+
+const renderSubSectorsFilter = () => {
+  return (
+    <>
+      <TextView style={styles.filterTitle}>
+        {i18n.t('Sub Industries')}
+      </TextView>
+      <BoxView
+        direction="row"
+        align="flex-start"
+        justify="flex-start"
+        style={styles.countriesFilter}
+      >
+        <TextView>SUB SECTORS</TextView>
+      </BoxView>
+    </>
+  );
+};
+
+useEffect(() => {
+  if (!isLoaded) {
+    setFiltersConfig(getFiltersConfig())
+    setCurrentFilters(searchState.searchFilters);
+  }
+}, [searchState, isLoaded]);
+
+console.log(currentFilters);
+
+return (
+  <BoxView
+    align="flex-start"
+    justify="flex-start"
+    scroll={true}
+    style={[Layout.formContainer, styles.container]}
+  >
+    <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
+      {renderCountriesFilters()}
+      {renderSectorsFilter()}
+      {renderSubSectorsFilter()}
+    </BoxView>
+  </BoxView>
+);
 };
 
 const styles = StyleSheet.create({
