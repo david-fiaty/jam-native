@@ -31,11 +31,11 @@ const SearchFiltersForm = ({ }: Props) => {
   const toggleFilters = (key: string) => {
     let searchFilters: any = { ...currentFilters };
 
-    if (searchFilters?.[key]?.length > 0) {
-      searchFilters[key] = [];
+    if (!searchFilters?.[key]?.length)  {
+      searchFilters[key] = [...filtersConfig.countries].map((o: any) => o.id);
     }
     else {
-      searchFilters[key] = [...filtersConfig.countries].map((o: any) => o.id);
+      searchFilters[key] = [];
     }
 
     setCurrentFilters(searchFilters);
