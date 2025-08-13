@@ -22,7 +22,7 @@ const SearchFiltersForm = ({ }: Props) => {
     let searchFilters: any = { ...searchState.searchFilters };
 
     if (isFilterEnabled(key, value)) {
-      searchFilters[key] = searchFilters[key].pop(value);
+      searchFilters[key] = searchFilters[key].filter((v: any) => v != value);
     }
     else {
       searchFilters[key] = [...searchFilters[key], value];
