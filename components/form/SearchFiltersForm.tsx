@@ -79,9 +79,8 @@ const styles = StyleSheet.create({
     marginBottom: Layout.space.base,
   },
   filterTitle: {
-    fontWeight: 'bold',
     color: Layout.colors.black,
-    fontSize: 14,
+    fontSize: 15,
   },
   filterTagDisabled: {
     backgroundColor: Layout.colors.gray,
