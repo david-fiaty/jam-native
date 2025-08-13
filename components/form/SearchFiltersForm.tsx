@@ -13,13 +13,15 @@ type Props = {
 
 const SearchFiltersForm = ({ }: Props) => {
   const dispatch = useDispatch();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [countriesData, setCountriesData] = useState<any[]>([]);
   const [sectorsData, setSectorsData] = useState<any[]>([]);
+  const [currentFilters, setCurrentFilters] = useState<any>({});
   const appState = useSelector((state: any) => state.app);
   const searchState = useSelector((state: any) => state.search);
 
   const toggleFilter = (key: string, value: string) => {
-    let searchFilters: any = { ...searchState.searchFilters };
+    let searchFilters: any = { ...currentFilters };
 
     if (isFilterEnabled(key, value)) {
       searchFilters[key] = searchFilters[key].filter((v: any) => v != value);
@@ -28,11 +30,15 @@ const SearchFiltersForm = ({ }: Props) => {
       searchFilters[key] = [...searchFilters[key], value];
     }
 
-    dispatch(setSearchFilters(searchFilters));
+    setCurrentFilters(searchFilters);
   };
 
   const isFilterEnabled = (key: string, value: string) => {
-    return searchState.searchFilters[key].includes(value);
+    return Array.isArray(currentFilters?.[key]) && currentFilters[key].includes(value);
+  };
+
+  const applyFilters = () => {
+    dispatch(setSearchFilters(currentFilters));
   };
 
   const renderCountriesFilter = () => {
@@ -61,11 +67,14 @@ const SearchFiltersForm = ({ }: Props) => {
   };
 
   useEffect(() => {
-    setCountriesData(appState.countriesData);
-    setSectorsData(appState.sectorsData);
-  }, [appState]);
+    if (!isLoaded) {
+      setCountriesData(appState.countriesData);
+      setSectorsData(appState.sectorsData);
+      setCurrentFilters(searchState.searchFilters);
+    }
+  }, [appState, searchState, isLoaded]);
 
-  console.log(searchState.searchFilters);
+  console.log(currentFilters);
 
   return (
     <BoxView
