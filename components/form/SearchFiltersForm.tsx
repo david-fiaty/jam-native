@@ -31,7 +31,7 @@ const SearchFiltersForm = ({ }: Props) => {
     let searchFilters: any = { ...currentFilters };
 
     if (!searchFilters?.[key]?.length || searchFilters[key].length < filtersConfig[key].length) {
-      searchFilters[key] = [...(filtersConfig?.[key] || [])].map((o: any) => o.id);
+      searchFilters[key] = filtersConfig[key].map((o: any) => o.id);
     }
     else {
       searchFilters[key] = [];
