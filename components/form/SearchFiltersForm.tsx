@@ -31,8 +31,8 @@ const SearchFiltersForm = ({ }: Props) => {
   const toggleFilters = (key: string) => {
     let searchFilters: any = { ...currentFilters };
 
-    if (!searchFilters?.[key]?.length || searchFilters[key].length < filtersConfig[key].length)  {
-      searchFilters[key] = [...filtersConfig.countries].map((o: any) => o.id);
+    if (!searchFilters?.[key]?.length || searchFilters[key].length < filtersConfig[key].length) {
+      searchFilters[key] = [...filtersConfig[key]].map((o: any) => o.id);
     }
     else {
       searchFilters[key] = [];
@@ -48,7 +48,7 @@ const SearchFiltersForm = ({ }: Props) => {
       searchFilters[key] = searchFilters[key].filter((v: any) => v != value);
     }
     else {
-      searchFilters[key] = [...searchFilters[key], value];
+      searchFilters[key] = [...(searchFilters?.[key] || []), value];
     }
 
     setCurrentFilters(searchFilters);
@@ -62,7 +62,7 @@ const SearchFiltersForm = ({ }: Props) => {
     dispatch(setSearchFilters(currentFilters));
   };
 
-  const renderAllFiltersButton = (key: string) => {
+  const renderAllFiltersTag = (key: string) => {
     let isEnabled: boolean = currentFilters?.[key]?.length === filtersConfig?.[key]?.length;
 
     return (
@@ -76,71 +76,104 @@ const SearchFiltersForm = ({ }: Props) => {
     );
   };
 
-  const renderCountriesFilters = () => {
+  const renderFilterTag = (key: string, item: any) => {
+    let isEnabled: any = isFilterEnabled(key, item.id);
+    let onPress: any = () => toggleFilter(key, item.id);
+
     return (
-      <>
-        <TextView style={styles.filterTitle}>{i18n.t('Countries')}</TextView>
-        <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.countriesFilter}>
-          {renderAllFiltersButton('countries')}
-
-          {(filtersConfig.countries || []).map((o: any) => {
-            let isEnabled: any = isFilterEnabled('countries', o.id);
-            let onPress: any = () => toggleFilter('countries', o.id);
-
-            return (
-              <TouchableOpacity key={o.id} onPress={onPress}>
-                <TextView
-                  style={isEnabled ? styles.filterTagEnabled : styles.filterTagDisabled}
-                >
-                  {o.name}
-                </TextView>
-              </TouchableOpacity>
-            );
-          })}
-        </BoxView>
-      </>
+      <TouchableOpacity key={item.id} onPress={onPress}>
+        <TextView
+          style={isEnabled ? styles.filterTagEnabled : styles.filterTagDisabled}
+        >
+          {item.name}
+        </TextView>
+      </TouchableOpacity>
     );
   };
 
-  const renderSectorsFilter = () => {
-    return <></>
-  };
-
-  const renderSubSectorsFilter = () => {
-    return <></>
-  };
-
-  useEffect(() => {
-    if (!isLoaded) {
-      setFiltersConfig(getFiltersConfig())
-      setCurrentFilters(searchState.searchFilters);
-    }
-  }, [searchState, isLoaded]);
-
-  console.log(currentFilters);
+const renderCountriesFilters = () => {
+  let key: string = 'countries';
 
   return (
-    <BoxView
-      align="flex-start"
-      justify="flex-start"
-      scroll={true}
-      style={[Layout.formContainer, styles.container]}
-    >
-      <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
-        {renderCountriesFilters()}
-
-        <TextView style={styles.filterTitle}>{i18n.t('Industries')}</TextView>
-        <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.countriesFilter}>
-          {renderSectorsFilter()}
-        </BoxView>
-
-        <TextView style={styles.filterTitle}>{i18n.t('Sub Industries')}</TextView>
-        <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.countriesFilter}>
-          {renderSubSectorsFilter()}
-        </BoxView>
+    <>
+      <TextView style={styles.filterTitle}>
+        {i18n.t('Countries')}
+      </TextView>
+      <BoxView
+        direction="row"
+        align="flex-start"
+        justify="flex-start"
+        style={styles.filterContainer}
+      >
+        {renderAllFiltersTag(key)}
+        {(filtersConfig.countries || []).map((item: any) => renderFilterTag(key, item))}
       </BoxView>
-    </BoxView>
+    </>
   );
+};
+
+const renderSectorsFilter = () => {
+  let key: string = 'sectors';
+
+  return (
+    <>
+      <TextView style={styles.filterTitle}>
+        {i18n.t('Industries')}
+      </TextView>
+      <BoxView
+        direction="row"
+        align="flex-start"
+        justify="flex-start"
+        style={styles.filterContainer}
+      >
+        {renderAllFiltersTag(key)}
+        {(filtersConfig.sectors || []).map((item: any) => renderFilterTag(key, item))}
+      </BoxView>
+    </>
+  );
+};
+
+const renderSubSectorsFilter = () => {
+  return (
+    <>
+      <TextView style={styles.filterTitle}>
+        {i18n.t('Sub Industries')}
+      </TextView>
+      <BoxView
+        direction="row"
+        align="flex-start"
+        justify="flex-start"
+        style={styles.filterContainer}
+      >
+        <TextView>SUB SECTORS</TextView>
+      </BoxView>
+    </>
+  );
+};
+
+useEffect(() => {
+  if (!isLoaded) {
+    setFiltersConfig(getFiltersConfig())
+    setCurrentFilters(searchState.searchFilters);
+  }
+}, [searchState, isLoaded]);
+
+console.log(currentFilters);
+
+return (
+  <BoxView
+    align="flex-start"
+    justify="flex-start"
+    scroll={true}
+    style={[Layout.formContainer, styles.container]}
+  >
+    <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
+      {renderCountriesFilters()}
+      {renderSectorsFilter()}
+      {renderSubSectorsFilter()}
+    </BoxView>
+  </BoxView>
+);
 };
 
 const styles = StyleSheet.create({
@@ -153,10 +186,10 @@ const styles = StyleSheet.create({
     flexShrink: 1,
     paddingTop: Layout.space.base,
   },
-  countriesFilter: {
+  filterContainer: {
     width: '100%',
     flexWrap: 'wrap',
-    marginBottom: Layout.space.base,
+    marginBottom: Layout.space.base * 2,
   },
   filterTitle: {
     color: Layout.colors.black,
