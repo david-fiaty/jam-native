@@ -4,6 +4,7 @@ import { Layout } from "@/constants/Layout";
 import { StyleSheet } from "react-native";
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
+import i18n from '@/translation/i18n';
 
 type Props = {
 
@@ -43,14 +44,17 @@ const SearchFiltersForm = ({ }: Props) => {
       style={[Layout.formContainer, styles.container]}
     >
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
+        <TextView style={styles.filterTitle}>{i18n.t('Countries')}</TextView>
         <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.countriesFilter}>
           {renderCountriesFilter()}
         </BoxView>
 
+        <TextView style={styles.filterTitle}>{i18n.t('Industries')}</TextView>
         <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.countriesFilter}>
           {renderSectorsFilter()}
         </BoxView>
 
+        <TextView style={styles.filterTitle}>{i18n.t('Sub Industries')}</TextView>
         <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.countriesFilter}>
           {renderSubSectorsFilter()}
         </BoxView>
@@ -72,6 +76,9 @@ const styles = StyleSheet.create({
   countriesFilter: {
     width: '100%',
     flexWrap: 'wrap',
+  },
+  filterTitle: {
+    fontWeight: 'bold',
   },
 });
 
