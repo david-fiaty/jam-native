@@ -146,7 +146,12 @@ const SearchFiltersForm = ({ }: Props) => {
           style={styles.filterContainer}
         >
           {renderAllFiltersTag(key)}
-          {(filtersConfig.sectors || []).map((item: any) => renderFilterTag(key, item))}
+          {((filtersConfig.sectors || [])
+            .filter((o: any) => currentFilters.sectors.includes(o.id))
+            .map((sector: any) => {
+              return sector.sub_sectors.map((subSector: any) => renderFilterTag(key, subSector) )
+            })).flat()
+          }
         </BoxView>
       </>
     );
@@ -159,7 +164,7 @@ const SearchFiltersForm = ({ }: Props) => {
     }
   }, [searchState, isLoaded]);
 
-  console.log(filtersConfig.subSectors);
+  console.log(currentFilters);
 
   return (
     <BoxView
