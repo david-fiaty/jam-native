@@ -4,7 +4,7 @@ const colors = {
   tertiary: '#FAA000',
   white: '#FFFFFF',
   black: '#000000',
-  gray: '#dedede',
+  gray: '#e5e5e5',
 };
 
 const space: any = {
