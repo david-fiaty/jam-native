@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
+import { StyleSheet, TouchableOpacity } from "react-native";
+import { setSearchFilters } from '@/redux/slices/SearchSlice';
 import { useSelector, useDispatch } from "react-redux";
 import { Layout } from "@/constants/Layout";
-import { StyleSheet, TouchableOpacity } from "react-native";
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
 import i18n from '@/translation/i18n';
-import { setSearchFilters } from '@/redux/slices/SearchSlice';
 
 type Props = {
 
@@ -25,6 +25,7 @@ const SearchFiltersForm = ({ }: Props) => {
     return {
       countries: appState.countriesData,
       sectors: appState.sectorsData,
+      subSectors: ([...appState.sectorsData].map((sector: any) => sector.sub_sectors)).flat(),
     };
   };
 
@@ -91,89 +92,93 @@ const SearchFiltersForm = ({ }: Props) => {
     );
   };
 
-const renderCountriesFilters = () => {
-  let key: string = 'countries';
+  const renderCountriesFilters = () => {
+    let key: string = 'countries';
+
+    return (
+      <>
+        <TextView style={styles.filterTitle}>
+          {i18n.t('Countries')}
+        </TextView>
+        <BoxView
+          direction="row"
+          align="flex-start"
+          justify="flex-start"
+          style={styles.filterContainer}
+        >
+          {renderAllFiltersTag(key)}
+          {(filtersConfig.countries || []).map((item: any) => renderFilterTag(key, item))}
+        </BoxView>
+      </>
+    );
+  };
+
+  const renderSectorsFilter = () => {
+    let key: string = 'sectors';
+
+    return (
+      <>
+        <TextView style={styles.filterTitle}>
+          {i18n.t('Industries')}
+        </TextView>
+        <BoxView
+          direction="row"
+          align="flex-start"
+          justify="flex-start"
+          style={styles.filterContainer}
+        >
+          {renderAllFiltersTag(key)}
+          {(filtersConfig.sectors || []).map((item: any) => renderFilterTag(key, item))}
+        </BoxView>
+      </>
+    );
+  };
+
+  const renderSubSectorsFilter = () => {
+    let key: string = 'subSectors';
+
+    return (
+      <>
+        <TextView style={styles.filterTitle}>
+          {i18n.t('Sub Industries')}
+        </TextView>
+        <BoxView
+          direction="row"
+          align="flex-start"
+          justify="flex-start"
+          style={styles.filterContainer}
+        >
+          {renderAllFiltersTag(key)}
+          {(filtersConfig.subSectors || []).map((item: any) => renderFilterTag(key, item))}
+
+        </BoxView>
+      </>
+    );
+  };
+
+  useEffect(() => {
+    if (!isLoaded) {
+      setFiltersConfig(getFiltersConfig())
+      setCurrentFilters(searchState.searchFilters);
+    }
+  }, [searchState, isLoaded]);
+
+  console.log(filtersConfig.subSectors);
 
   return (
-    <>
-      <TextView style={styles.filterTitle}>
-        {i18n.t('Countries')}
-      </TextView>
-      <BoxView
-        direction="row"
-        align="flex-start"
-        justify="flex-start"
-        style={styles.filterContainer}
-      >
-        {renderAllFiltersTag(key)}
-        {(filtersConfig.countries || []).map((item: any) => renderFilterTag(key, item))}
+    <BoxView
+      align="flex-start"
+      justify="flex-start"
+      scroll={true}
+      style={[Layout.formContainer, styles.container]}
+    >
+      <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
+        {renderCountriesFilters()}
+        {renderSectorsFilter()}
+        {!!currentFilters?.sectors?.length && renderSubSectorsFilter()}
       </BoxView>
-    </>
-  );
-};
-
-const renderSectorsFilter = () => {
-  let key: string = 'sectors';
-
-  return (
-    <>
-      <TextView style={styles.filterTitle}>
-        {i18n.t('Industries')}
-      </TextView>
-      <BoxView
-        direction="row"
-        align="flex-start"
-        justify="flex-start"
-        style={styles.filterContainer}
-      >
-        {renderAllFiltersTag(key)}
-        {(filtersConfig.sectors || []).map((item: any) => renderFilterTag(key, item))}
-      </BoxView>
-    </>
-  );
-};
-
-const renderSubSectorsFilter = () => {
-  return (
-    <>
-      <TextView style={styles.filterTitle}>
-        {i18n.t('Sub Industries')}
-      </TextView>
-      <BoxView
-        direction="row"
-        align="flex-start"
-        justify="flex-start"
-        style={styles.filterContainer}
-      >
-        <TextView>SUB SECTORS</TextView>
-      </BoxView>
-    </>
-  );
-};
-
-useEffect(() => {
-  if (!isLoaded) {
-    setFiltersConfig(getFiltersConfig())
-    setCurrentFilters(searchState.searchFilters);
-  }
-}, [searchState, isLoaded]);
-
-console.log(currentFilters);
-
-return (
-  <BoxView
-    align="flex-start"
-    justify="flex-start"
-    scroll={true}
-    style={[Layout.formContainer, styles.container]}
-  >
-    <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
-      {renderCountriesFilters()}
-      {renderSectorsFilter()}
-      {!!currentFilters?.sectors?.length && renderSubSectorsFilter()}
     </BoxView>
-  </BoxView>
-);
+  );
 };
 
 const styles = StyleSheet.create({
