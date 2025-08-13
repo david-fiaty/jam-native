@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { Layout } from "@/constants/Layout";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
 import i18n from '@/translation/i18n';
@@ -19,7 +19,7 @@ const SearchFiltersForm = ({ }: Props) => {
   const searchState = useSelector((state: any) => state.search);
 
   const toggleFilter = (key: string, field: string, value: string) => {
-    let searchFilters: any = {...searchState.searchFilters};
+    let searchFilters: any = { ...searchState.searchFilters };
 
     if (isFilterEnabled(key, field, value)) {
       searchFilters[key] = searchFilters[key].pop(field);
@@ -33,19 +33,24 @@ const SearchFiltersForm = ({ }: Props) => {
 
   const isFilterEnabled = (key: string, field: string, value: string) => {
     return searchState.searchFilters[key]?.[field]
-      && Array.isArray(searchState.searchFilters[key][field]) 
+      && Array.isArray(searchState.searchFilters[key][field])
       && searchState.searchFilters[key][field].includes(value);
   };
 
   const renderCountriesFilter = () => {
     return countriesData.map((o: any) => {
+      let isEnabled: any = isFilterEnabled('countries', 'id', o.id);
+      let onPress: any = () => toggleFilter('countries', 'id', o.id);
+      
       return (
-        <TextView
-          key={o.id}
-          style={styles.filterTagDisabled}
-        >
-          {o.name}
-        </TextView>
+        <TouchableOpacity onPress={onPress}>
+          <TextView
+            key={o.id}
+            style={isEnabled ? styles.filterTagEnabled : styles.filterTagDisabled}
+          >
+            {o.name}
+          </TextView>
+        </TouchableOpacity>
       );
     });
   };
