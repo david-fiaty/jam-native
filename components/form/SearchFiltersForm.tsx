@@ -161,6 +161,7 @@ const SearchFiltersForm = ({ }: Props) => {
     if (!isLoaded) {
       setFiltersConfig(getFiltersConfig())
       setCurrentFilters(searchState.searchFilters);
+      setIsLoaded(true);
     }
   }, [searchState, isLoaded]);
 
