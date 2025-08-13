@@ -14,8 +14,6 @@ type Props = {
 const SearchFiltersForm = ({ }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [countriesData, setCountriesData] = useState<any[]>([]);
-  const [sectorsData, setSectorsData] = useState<any[]>([]);
   const [currentFilters, setCurrentFilters] = useState<any>({});
   const [filtersConfig, setFiltersConfig] = useState<any>({});
   const appState = useSelector((state: any) => state.app);
@@ -25,7 +23,7 @@ const SearchFiltersForm = ({ }: Props) => {
     return {
       countries: appState.countriesData,
       sectors: appState.sectorsData,
-      subSectors: ([...appState.sectorsData].map((sector: any) => sector.sub_sectors)).flat(),
+      //subSectors: ([...appState.sectorsData].map((sector: any) => sector.sub_sectors)).flat(),
     };
   };
 
@@ -149,8 +147,7 @@ const SearchFiltersForm = ({ }: Props) => {
           style={styles.filterContainer}
         >
           {renderAllFiltersTag(key)}
-          {(filtersConfig.subSectors || []).map((item: any) => renderFilterTag(key, item))}
-
+          {(filtersConfig.sectors || []).map((item: any) => renderFilterTag(key, item))}
         </BoxView>
       </>
     );
