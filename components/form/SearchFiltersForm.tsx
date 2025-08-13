@@ -48,7 +48,7 @@ const SearchFiltersForm = ({ }: Props) => {
       searchFilters[key] = searchFilters[key].filter((v: any) => v != value);
     }
     else {
-      searchFilters[key] = [...searchFilters[key], value];
+      searchFilters[key] = [...(searchFilters?.[key] || []), value];
     }
 
     setCurrentFilters(searchFilters);
