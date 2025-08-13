@@ -31,7 +31,7 @@ const SearchFiltersForm = ({ }: Props) => {
   const toggleFilters = (key: string) => {
     let searchFilters: any = { ...currentFilters };
 
-    if (!searchFilters?.[key]?.length || searchFilters[key].length < filtersConfig[key].length)  {
+    if (!searchFilters?.[key]?.length || searchFilters[key].length < filtersConfig[key].length) {
       searchFilters[key] = [...filtersConfig.countries].map((o: any) => o.id);
     }
     else {
@@ -79,8 +79,15 @@ const SearchFiltersForm = ({ }: Props) => {
   const renderCountriesFilters = () => {
     return (
       <>
-        <TextView style={styles.filterTitle}>{i18n.t('Countries')}</TextView>
-        <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.countriesFilter}>
+        <TextView style={styles.filterTitle}>
+          {i18n.t('Countries')}
+        </TextView>
+        <BoxView
+          direction="row"
+          align="flex-start"
+          justify="flex-start"
+          style={styles.countriesFilter}
+        >
           {renderAllFiltersButton('countries')}
 
           {(filtersConfig.countries || []).map((o: any) => {
@@ -103,11 +110,39 @@ const SearchFiltersForm = ({ }: Props) => {
   };
 
   const renderSectorsFilter = () => {
-    return <></>
+    return (
+      <>
+        <TextView style={styles.filterTitle}>
+          {i18n.t('Industries')}
+        </TextView>
+        <BoxView
+          direction="row"
+          align="flex-start"
+          justify="flex-start"
+          style={styles.countriesFilter}
+        >
+          <TextView>SECTORS</TextView>
+        </BoxView>
+      </>
+    );
   };
 
   const renderSubSectorsFilter = () => {
-    return <></>
+    return (
+      <>
+        <TextView style={styles.filterTitle}>
+          {i18n.t('Sub Industries')}
+        </TextView>
+        <BoxView
+          direction="row"
+          align="flex-start"
+          justify="flex-start"
+          style={styles.countriesFilter}
+        >
+          <TextView>SUB SECTORS</TextView>
+        </BoxView>
+      </>
+    );
   };
 
   useEffect(() => {
@@ -128,16 +163,8 @@ const SearchFiltersForm = ({ }: Props) => {
     >
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
         {renderCountriesFilters()}
-
-        <TextView style={styles.filterTitle}>{i18n.t('Industries')}</TextView>
-        <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.countriesFilter}>
-          {renderSectorsFilter()}
-        </BoxView>
-
-        <TextView style={styles.filterTitle}>{i18n.t('Sub Industries')}</TextView>
-        <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.countriesFilter}>
-          {renderSubSectorsFilter()}
-        </BoxView>
+        {renderSectorsFilter()}
+        {renderSubSectorsFilter()}
       </BoxView>
     </BoxView>
   );
@@ -156,7 +183,7 @@ const styles = StyleSheet.create({
   countriesFilter: {
     width: '100%',
     flexWrap: 'wrap',
-    marginBottom: Layout.space.base*2,
+    marginBottom: Layout.space.base * 2,
   },
   filterTitle: {
     color: Layout.colors.black,
