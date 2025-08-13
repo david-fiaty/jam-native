@@ -7,11 +7,7 @@ const SearchSlice = createSlice({
     currentTab: null,
     currentResults: '{}',
     defaultResults: '{}',
-    searchFilters: {
-      countries: [],
-      sectors: [],
-      subSectors: [],
-    },
+    searchFilters: {},
   },
   reducers: {
     setSearchValue: (state, action) => {
