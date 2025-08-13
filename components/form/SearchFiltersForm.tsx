@@ -76,10 +76,23 @@ const styles = StyleSheet.create({
   countriesFilter: {
     width: '100%',
     flexWrap: 'wrap',
+    marginBottom: Layout.space.base,
   },
   filterTitle: {
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 14,
+  },
+  filterTagDisabled: {
+    backgroundColor: Layout.colors.primary,
+    borderRadius: Layout.radius.round,
+    paddingVertical: Layout.space.base,
+    paddingHorizontal: Layout.space.base,
+  },
+  filterTagEnabled: {
+    backgroundColor: Layout.colors.primary,
+    borderRadius: Layout.radius.round,
+    paddingVertical: Layout.space.base,
+    paddingHorizontal: Layout.space.base,
   },
 });
 
