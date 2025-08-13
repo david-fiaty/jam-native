@@ -1,41 +1,72 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Layout } from "@/constants/Layout";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
 import i18n from '@/translation/i18n';
+import { setSearchFilters } from '@/redux/slices/SearchSlice';
 
 type Props = {
 
 };
 
 const SearchFiltersForm = ({ }: Props) => {
-  const appState = useSelector((state: any) => state.app);
+  const dispatch = useDispatch();
   const [countriesData, setCountriesData] = useState<any[]>([]);
   const [sectorsData, setSectorsData] = useState<any[]>([]);
+  const appState = useSelector((state: any) => state.app);
+  const searchState = useSelector((state: any) => state.search);
+
+  const toggleFilter = (key: string, value: string) => {
+    let searchFilters: any = { ...searchState.searchFilters };
+
+    if (isFilterEnabled(key, value)) {
+      searchFilters[key] = searchFilters[key].filter((v: any) => v != value);
+    }
+    else {
+      searchFilters[key] = [...searchFilters[key], value];
+    }
+
+    dispatch(setSearchFilters(searchFilters));
+  };
+
+  const isFilterEnabled = (key: string, value: string) => {
+    return searchState.searchFilters[key].includes(value);
+  };
 
   const renderCountriesFilter = () => {
     return countriesData.map((o: any) => {
+      let isEnabled: any = isFilterEnabled('countries', o.id);
+      let onPress: any = () => toggleFilter('countries', o.id);
+
       return (
-        <TextView key={o.id} style={styles.filterTagDisabled}>{o.name}</TextView>
+        <TouchableOpacity key={o.id} onPress={onPress}>
+          <TextView
+            style={isEnabled ? styles.filterTagEnabled : styles.filterTagDisabled}
+          >
+            {o.name}
+          </TextView>
+        </TouchableOpacity>
       );
     });
-  };  
+  };
 
   const renderSectorsFilter = () => {
     return <></>
-  };  
+  };
 
   const renderSubSectorsFilter = () => {
     return <></>
-  };  
+  };
 
   useEffect(() => {
     setCountriesData(appState.countriesData);
     setSectorsData(appState.sectorsData);
   }, [appState]);
-  
+
+  console.log(searchState.searchFilters);
+
   return (
     <BoxView
       align="flex-start"
@@ -79,7 +110,7 @@ const styles = StyleSheet.create({
     marginBottom: Layout.space.base,
   },
   filterTitle: {
-    fontWeight: 'bold',
+    color: Layout.colors.black,
     fontSize: 14,
   },
   filterTagDisabled: {
