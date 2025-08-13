@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
   },
   filterTitle: {
     fontWeight: 'bold',
+    fontSize: 16,
   },
 });
 
