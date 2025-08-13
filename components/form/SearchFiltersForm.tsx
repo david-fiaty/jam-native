@@ -1,21 +1,36 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { StyleSheet } from "react-native";
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
 import i18n from '@/translation/i18n';
+import { setSearchFilters } from '@/redux/slices/SearchSlice';
 
 type Props = {
 
 };
 
 const SearchFiltersForm = ({ }: Props) => {
-  const appState = useSelector((state: any) => state.app);
+  const dispatch = useDispatch();
   const [countriesData, setCountriesData] = useState<any[]>([]);
   const [sectorsData, setSectorsData] = useState<any[]>([]);
-  const [currentFilters, setCurrentFilters] = useState<any[]>([]);
-  
+  const appState = useSelector((state: any) => state.app);
+  const searchState = useSelector((state: any) => state.search);
+
+  const toggleFilter = (key: string, field: string) => {
+    let searchFilters: any = {...searchState.searchFilters};
+
+    searchFilters = {
+      ...searchFilters,
+      ...{
+        [key]: [...new Set([...searchFilters[key], field])],
+      },
+    };
+
+    dispatch(setSearchFilters(searchFilters));
+  };
+
   const renderCountriesFilter = () => {
     return countriesData.map((o: any) => {
       return (
