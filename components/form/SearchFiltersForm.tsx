@@ -23,7 +23,7 @@ const SearchFiltersForm = ({ }: Props) => {
     return {
       countries: appState.countriesData,
       sectors: appState.sectorsData,
-      //subSectors: [...appState.sectorsData].map((sector: any) => sector.sub_sectors),
+      subSectors: [...appState.sectorsData].map((sector: any) => sector.sub_sectors),
     };
   };
 
