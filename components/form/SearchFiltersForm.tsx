@@ -31,7 +31,7 @@ const SearchFiltersForm = ({ }: Props) => {
   const toggleFilters = (key: string) => {
     let searchFilters: any = { ...currentFilters };
 
-    if (searchFilters[key].length > 0) {
+    if (searchFilters?.[key]?.length > 0) {
       searchFilters[key] = [];
     }
     else {
@@ -42,7 +42,7 @@ const SearchFiltersForm = ({ }: Props) => {
   };
 
   const toggleFilter = (key: string, value: string) => {
-    let searchFilters: any = { ...currentFilters };
+    let searchFilters: any = {...currentFilters};
 
     if (isFilterEnabled(key, value)) {
       searchFilters[key] = searchFilters[key].filter((v: any) => v != value);
