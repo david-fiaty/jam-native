@@ -20,6 +20,20 @@ const SearchFiltersForm = ({ }: Props) => {
   const appState = useSelector((state: any) => state.app);
   const searchState = useSelector((state: any) => state.search);
 
+
+  const toggleFilters = (key: string) => {
+    let searchFilters: any = { ...currentFilters };
+
+    if (searchFilters[key].length > 0) {
+      searchFilters[key] = [];
+    }
+    else {
+      searchFilters[key] = [...countriesData].map((o: any) => o.id);
+    }
+
+    setCurrentFilters(searchFilters);
+  };
+
   const toggleFilter = (key: string, value: string) => {
     let searchFilters: any = { ...currentFilters };
 
@@ -41,21 +55,36 @@ const SearchFiltersForm = ({ }: Props) => {
     dispatch(setSearchFilters(currentFilters));
   };
 
-  const renderCountriesFilter = () => {
-    return countriesData.map((o: any) => {
-      let isEnabled: any = isFilterEnabled('countries', o.id);
-      let onPress: any = () => toggleFilter('countries', o.id);
+  const renderCountriesFilters = () => {
+    return (
+      <>
+        <TextView style={styles.filterTitle}>{i18n.t('Countries')}</TextView>
+        <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.countriesFilter}>
+          <TouchableOpacity onPress={() => toggleFilters('countries')}>
+            <TextView
+              style={styles.filterTagDisabled}
+            >
+              {i18n.t('All')}
+            </TextView>
+          </TouchableOpacity>
 
-      return (
-        <TouchableOpacity key={o.id} onPress={onPress}>
-          <TextView
-            style={isEnabled ? styles.filterTagEnabled : styles.filterTagDisabled}
-          >
-            {o.name}
-          </TextView>
-        </TouchableOpacity>
-      );
-    });
+          {countriesData.map((o: any) => {
+            let isEnabled: any = isFilterEnabled('countries', o.id);
+            let onPress: any = () => toggleFilter('countries', o.id);
+
+            return (
+              <TouchableOpacity key={o.id} onPress={onPress}>
+                <TextView
+                  style={isEnabled ? styles.filterTagEnabled : styles.filterTagDisabled}
+                >
+                  {o.name}
+                </TextView>
+              </TouchableOpacity>
+            );
+          })}
+        </BoxView>
+      </>
+    );
   };
 
   const renderSectorsFilter = () => {
@@ -84,10 +113,7 @@ const SearchFiltersForm = ({ }: Props) => {
       style={[Layout.formContainer, styles.container]}
     >
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
-        <TextView style={styles.filterTitle}>{i18n.t('Countries')}</TextView>
-        <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.countriesFilter}>
-          {renderCountriesFilter()}
-        </BoxView>
+        {renderCountriesFilters()}
 
         <TextView style={styles.filterTitle}>{i18n.t('Industries')}</TextView>
         <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.countriesFilter}>
