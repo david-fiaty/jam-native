@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
   countriesFilter: {
     width: '100%',
     flexWrap: 'wrap',
-    marginBottom: Layout.space.base,
+    marginBottom: Layout.space.base*2,
   },
   filterTitle: {
     color: Layout.colors.black,
