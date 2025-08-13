@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
   },
   filterTitle: {
     fontWeight: 'bold',
+    color: Layout.colors.black,
     fontSize: 14,
   },
   filterTagDisabled: {
