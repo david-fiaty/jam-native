@@ -17,9 +17,16 @@ const SearchFiltersForm = ({ }: Props) => {
   const [countriesData, setCountriesData] = useState<any[]>([]);
   const [sectorsData, setSectorsData] = useState<any[]>([]);
   const [currentFilters, setCurrentFilters] = useState<any>({});
+  const [filtersConfig, setFiltersConfig] = useState<any>({});
   const appState = useSelector((state: any) => state.app);
   const searchState = useSelector((state: any) => state.search);
 
+  const getFiltersConfig = () => {
+    return {
+      countries: appState.countriesData,
+      sectors: appState.sectorsData,
+    };
+  };
 
   const toggleFilters = (key: string) => {
     let searchFilters: any = { ...currentFilters };
@@ -28,7 +35,7 @@ const SearchFiltersForm = ({ }: Props) => {
       searchFilters[key] = [];
     }
     else {
-      searchFilters[key] = [...countriesData].map((o: any) => o.id);
+      searchFilters[key] = [...filtersConfig.countries].map((o: any) => o.id);
     }
 
     setCurrentFilters(searchFilters);
@@ -68,7 +75,7 @@ const SearchFiltersForm = ({ }: Props) => {
             </TextView>
           </TouchableOpacity>
 
-          {countriesData.map((o: any) => {
+          {(filtersConfig.countries || []).map((o: any) => {
             let isEnabled: any = isFilterEnabled('countries', o.id);
             let onPress: any = () => toggleFilter('countries', o.id);
 
@@ -97,11 +104,10 @@ const SearchFiltersForm = ({ }: Props) => {
 
   useEffect(() => {
     if (!isLoaded) {
-      setCountriesData(appState.countriesData);
-      setSectorsData(appState.sectorsData);
+      setFiltersConfig(getFiltersConfig())
       setCurrentFilters(searchState.searchFilters);
     }
-  }, [appState, searchState, isLoaded]);
+  }, [searchState, isLoaded]);
 
   console.log(currentFilters);
 
