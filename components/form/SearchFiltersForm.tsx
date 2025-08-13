@@ -18,34 +18,31 @@ const SearchFiltersForm = ({ }: Props) => {
   const appState = useSelector((state: any) => state.app);
   const searchState = useSelector((state: any) => state.search);
 
-  const toggleFilter = (key: string, field: string, value: string) => {
+  const toggleFilter = (key: string, value: string) => {
     let searchFilters: any = { ...searchState.searchFilters };
 
-    if (isFilterEnabled(key, field, value)) {
-      searchFilters[key] = searchFilters[key].pop(field);
+    if (isFilterEnabled(key, value)) {
+      searchFilters[key] = searchFilters[key].pop(value);
     }
     else {
-      searchFilters[key] = [...searchFilters[key], field];
+      searchFilters[key] = [...searchFilters[key], value];
     }
 
     dispatch(setSearchFilters(searchFilters));
   };
 
-  const isFilterEnabled = (key: string, field: string, value: string) => {
-    return searchState.searchFilters[key]?.[field]
-      && Array.isArray(searchState.searchFilters[key][field])
-      && searchState.searchFilters[key][field].includes(value);
+  const isFilterEnabled = (key: string, value: string) => {
+    return searchState.searchFilters[key].includes(value);
   };
 
   const renderCountriesFilter = () => {
     return countriesData.map((o: any) => {
-      let isEnabled: any = isFilterEnabled('countries', 'id', o.id);
-      let onPress: any = () => toggleFilter('countries', 'id', o.id);
-      
+      let isEnabled: any = isFilterEnabled('countries', o.id);
+      let onPress: any = () => toggleFilter('countries', o.id);
+
       return (
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity key={o.id} onPress={onPress}>
           <TextView
-            key={o.id}
             style={isEnabled ? styles.filterTagEnabled : styles.filterTagDisabled}
           >
             {o.name}
