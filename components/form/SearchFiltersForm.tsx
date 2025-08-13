@@ -42,7 +42,7 @@ const SearchFiltersForm = ({ }: Props) => {
   };
 
   const toggleFilter = (key: string, value: string) => {
-    let searchFilters: any = {...currentFilters};
+    let searchFilters: any = { ...currentFilters };
 
     if (isFilterEnabled(key, value)) {
       searchFilters[key] = searchFilters[key].filter((v: any) => v != value);
@@ -62,18 +62,26 @@ const SearchFiltersForm = ({ }: Props) => {
     dispatch(setSearchFilters(currentFilters));
   };
 
+  const renderAllFiltersButton = (key: string) => {
+    let isEnabled: boolean = currentFilters?.[key]?.length === filtersConfig?.[key]?.length;
+
+    return (
+      <TouchableOpacity onPress={() => toggleFilters(key)}>
+        <TextView
+          style={isEnabled ? styles.filterTagEnabled : styles.filterTagDisabled}
+        >
+          {i18n.t('All')}
+        </TextView>
+      </TouchableOpacity>
+    );
+  };
+
   const renderCountriesFilters = () => {
     return (
       <>
         <TextView style={styles.filterTitle}>{i18n.t('Countries')}</TextView>
         <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.countriesFilter}>
-          <TouchableOpacity onPress={() => toggleFilters('countries')}>
-            <TextView
-              style={styles.filterTagDisabled}
-            >
-              {i18n.t('All')}
-            </TextView>
-          </TouchableOpacity>
+          {renderAllFiltersButton('countries')}
 
           {(filtersConfig.countries || []).map((o: any) => {
             let isEnabled: any = isFilterEnabled('countries', o.id);
