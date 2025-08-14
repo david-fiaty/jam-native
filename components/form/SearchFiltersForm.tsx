@@ -8,6 +8,8 @@ import TextView from "../view/TextView";
 import i18n from '@/translation/i18n';
 import InputTextField from '../field/InputTextField';
 import EntityManager from '@/manager/EntityManager';
+import ButtonView from '../view/ButtonView';
+import DividerView from '../view/DividerView';
 
 type Props = {
 
@@ -175,7 +177,7 @@ const SearchFiltersForm = ({ }: Props) => {
           {((filtersConfig.sectors || [])
             .filter((o: any) => currentFilters.sectors.includes(o.id))
             .map((sector: any) => {
-              return sector.sub_sectors.map((subSector: any) => renderFilterTag(key, subSector) )
+              return sector.sub_sectors.map((subSector: any) => renderFilterTag(key, subSector))
             })).flat()
           }
         </BoxView>
@@ -225,8 +227,22 @@ const SearchFiltersForm = ({ }: Props) => {
         {renderKeywordsFilter()}
         {renderCountriesFilter()}
         {renderSectorsFilter()}
-        {renderJamTypesFilter()}
         {!!currentFilters?.sectors?.length && renderSubSectorsFilter()}
+        {renderJamTypesFilter()}
+      </BoxView>
+
+      <DividerView theme="secondary" />
+
+      <BoxView direction="row" align="center" justify="center" style={styles.actionsContainer}>
+        <ButtonView
+          label={i18n.t("Reset")}
+          containerStyle={{ width: '50%', alignSelf: 'flex-start' }}
+        />
+
+        <ButtonView
+          label={i18n.t("Apply")}
+          containerStyle={{ width: '50%', alignSelf: 'flex-start' }}
+        />
       </BoxView>
     </BoxView>
   );
@@ -264,6 +280,10 @@ const styles = StyleSheet.create({
     borderRadius: Layout.radius.round,
     paddingVertical: Layout.space.base,
     paddingHorizontal: Layout.space.base,
+  },
+  actionsContainer: {
+    marginBottom: Layout.space.base*2,
+    width: '100%',
   },
 });
 
