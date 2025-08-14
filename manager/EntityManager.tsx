@@ -2,6 +2,7 @@ import { Share } from 'react-native';
 import { Config } from '@/constants/Config';
 import DataManager from './DataManager';
 import UserManager from './UserManager';
+import i18n from '@/translation/i18n';
 
 class EntityManager {
   async listProfiles(options?: any) {
@@ -12,7 +13,7 @@ class EntityManager {
       profile_type: 'all',
     };
 
-    return await DataManager.get('listProfiles', {...defaults, ...options}); 
+    return await DataManager.get('listProfiles', { ...defaults, ...options });
   }
 
   async getProfiles(idArray: any) {
@@ -21,7 +22,7 @@ class EntityManager {
       items_ids: idArray,
     };
 
-    let response: any = await DataManager.get('getProfiles', {...defaults, ...options}); 
+    let response: any = await DataManager.get('getProfiles', { ...defaults, ...options });
 
     return response;
   }
@@ -33,7 +34,7 @@ class EntityManager {
     let variables: any = { '[profile_id]': profileId };
 
     if (profileId > 0) {
-      profileData = await DataManager.get('getProfile', {...defaults, ...options}, variables);
+      profileData = await DataManager.get('getProfile', { ...defaults, ...options }, variables);
     }
 
     return profileData || {};
@@ -43,7 +44,7 @@ class EntityManager {
     let defaults: any = {};
     let variables: any = { '[entity_id]': entityId };
 
-    return await DataManager.put('updateJam', {...defaults, ...options}, variables); 
+    return await DataManager.put('updateJam', { ...defaults, ...options }, variables);
   }
 
   async listJams(options?: any) {
@@ -54,7 +55,7 @@ class EntityManager {
       jam_type: 'all',
     };
 
-    return await DataManager.get('listJams', {...defaults, ...options}); 
+    return await DataManager.get('listJams', { ...defaults, ...options });
   }
 
   async getJams(idArray: any) {
@@ -63,7 +64,7 @@ class EntityManager {
       items_ids: idArray,
     };
 
-    return await DataManager.get('getJams', {...defaults, ...options}); 
+    return await DataManager.get('getJams', { ...defaults, ...options });
   }
 
   async getComments(idArray: any) {
@@ -72,20 +73,20 @@ class EntityManager {
       items_ids: idArray,
     };
 
-    return await DataManager.get('getComments', {...defaults, ...options}); 
+    return await DataManager.get('getComments', { ...defaults, ...options });
   }
 
   async addComment(entityId: any, commentText: string) {
     let profileId: any = await UserManager.getProfileId();
     let success: boolean = false
     let defaults: any = {};
-    let options:any = {
+    let options: any = {
       item_id: entityId,
       profile_id: profileId,
       comment_text: commentText,
     };
 
-    let response: any = await DataManager.post('addComment', {...defaults, ...options}); 
+    let response: any = await DataManager.post('addComment', { ...defaults, ...options });
 
     if (response?.comment?.id > 0) success = true;
 
@@ -102,7 +103,7 @@ class EntityManager {
       pagination_size: Config.paginationSize,
     };
 
-    return await DataManager.get('listProjects', {...defaults, ...options}); 
+    return await DataManager.get('listProjects', { ...defaults, ...options });
   }
 
   async getProjects(idArray: any) {
@@ -110,15 +111,15 @@ class EntityManager {
     let options = {
       items_ids: idArray,
     };
-    
-    return await DataManager.get('getProjects', {...defaults, ...options}); 
+
+    return await DataManager.get('getProjects', { ...defaults, ...options });
   }
 
   async addJamToProject(projectId: number, options?: any) {
     let defaults: any = {};
     let variables: any = { '[project_id]': projectId };
 
-    return await DataManager.put('addJamToProject', {...defaults, ...options}, variables); 
+    return await DataManager.put('addJamToProject', { ...defaults, ...options }, variables);
   }
 
   async getSectors(options?: any) {
@@ -133,13 +134,13 @@ class EntityManager {
 
     options = options || {};
     let defaults = {};
-    let data: any = await DataManager.get('sectors', {...defaults, ...options}); 
+    let data: any = await DataManager.get('sectors', { ...defaults, ...options });
 
     if (options?.items_ids?.length) {
       data = data.filter((o: any) => options.items_ids.includes(o.id));
     }
-    
-    return data; 
+
+    return data;
   }
 
   async getCountries() {
@@ -148,14 +149,14 @@ class EntityManager {
     let language = 'en';
     let options = { lang: language };
 
-    return await DataManager.get('countries', options); 
+    return await DataManager.get('countries', options);
   }
 
   async getProfessions() {
     let language = await UserManager.getLanguage();
     let options = { lang: language };
 
-    return await DataManager.get('professions', options); 
+    return await DataManager.get('professions', options);
   }
 
   async getVenueTypes() {
@@ -164,14 +165,14 @@ class EntityManager {
     //let options: any = { lang: language };
     let options: any = {};
 
-    return await DataManager.get('venueTypes', options); 
+    return await DataManager.get('venueTypes', options);
   }
 
   async getOrganizationTypes() {
     let language = await UserManager.getLanguage();
     let options = { lang: language };
 
-    return await DataManager.get('organizationTypes', options); 
+    return await DataManager.get('organizationTypes', options);
   }
 
   async getCulturalActivities() {
@@ -179,7 +180,7 @@ class EntityManager {
     //let options = { lang: language };
     let options: any = {};
 
-    return await DataManager.get('culturalActivities', options); 
+    return await DataManager.get('culturalActivities', options);
   }
 
   async findJam(entityId: any) {
@@ -199,11 +200,11 @@ class EntityManager {
   }
 
   async addProject(entityData: any) {
-    let response: any =  await DataManager.post('addProject', entityData);
+    let response: any = await DataManager.post('addProject', entityData);
     let success: boolean = false;
 
     if (response?.id > 0) success = true;
-  
+
     return {
       success: success,
       response: response,
@@ -272,7 +273,7 @@ class EntityManager {
       const result = await Share.share({
         message: message,
       });
-      
+
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
           // shared with activity type of result.activityType
@@ -296,12 +297,37 @@ class EntityManager {
       reporting_content_type: type,
       reporting_content_id: entityId,
       reporting_cause: '',
-      reporting_comment: '',  
+      reporting_comment: '',
     };
 
     let response = await DataManager.post('report', payload);
 
     return response;
+  }
+
+  getJamTypes() {
+    return [
+      {
+        id: 'call',
+        label: i18n.t('Call'),
+        icon: 'megaphone',
+      },
+      {
+        id: 'looking',
+        label: i18n.t('Looking'),
+        icon: 'link',
+      },
+      {
+        id: 'event',
+        label: i18n.t('Event'),
+        icon: 'users',
+      },
+      {
+        id: 'random',
+        label: i18n.t('Random'),
+        icon: 'infinite',
+      },
+    ];
   }
 };
 

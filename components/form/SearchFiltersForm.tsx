@@ -6,6 +6,7 @@ import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
 import i18n from '@/translation/i18n';
+import InputTextField from '../field/InputTextField';
 
 type Props = {
 
@@ -31,7 +32,7 @@ const SearchFiltersForm = ({ }: Props) => {
     let searchFilters: any = { ...currentFilters };
 
     if (!searchFilters?.[key]?.length || searchFilters[key].length < filtersConfig[key].length) {
-      searchFilters[key] = [...(filtersConfig?.[key] || [])].map((o: any) => o.id);
+      searchFilters[key] = filtersConfig[key].map((o: any) => o.id);
     }
     else {
       searchFilters[key] = [];
@@ -87,6 +88,28 @@ const SearchFiltersForm = ({ }: Props) => {
           {item.name}
         </TextView>
       </TouchableOpacity>
+    );
+  };
+
+  const renderKeywordsFilters = () => {
+    let key: string = 'keywords';
+
+    return (
+      <>
+        <TextView style={styles.filterTitle}>
+          {i18n.t('Keywords')}
+        </TextView>
+        <BoxView
+          direction="row"
+          align="flex-start"
+          justify="flex-start"
+          style={styles.filterContainer}
+        >
+          <InputTextField
+            placeholder={i18n.t('Search keywords...')}
+          />
+        </BoxView>
+      </>
     );
   };
 
@@ -176,6 +199,7 @@ const SearchFiltersForm = ({ }: Props) => {
       style={[Layout.formContainer, styles.container]}
     >
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
+        {renderKeywordsFilters()}
         {renderCountriesFilters()}
         {renderSectorsFilter()}
         {!!currentFilters?.sectors?.length && renderSubSectorsFilter()}
@@ -197,7 +221,7 @@ const styles = StyleSheet.create({
   filterContainer: {
     width: '100%',
     flexWrap: 'wrap',
-    marginBottom: Layout.space.base * 2,
+    marginBottom: Layout.space.base * 1.4,
   },
   filterTitle: {
     color: Layout.colors.black,
