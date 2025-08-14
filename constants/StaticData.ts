@@ -1,82 +1,6 @@
 import i18n from "@/translation/i18n";
 
 const StaticData = {
-  welcomeSlideshow: [
-    {
-      id: 1,
-      title: i18n.t('Create better together'),
-      content: i18n.t('JAM! is a place to explore and experience creatives from different backgrounds in West Africa.'),
-    },
-    {
-      id: 2,
-      title: i18n.t('A Powerful Tool'),
-      content: i18n.t('JAM! is a tool for networking, exchange and collaboration between artists, venues, communities and organisations across the Lagos - Abidjan axis.'),
-    },
-    {
-      id: 3,
-      title: i18n.t('Experience and Incubate Tomorrow\'s Culture'),
-      content: i18n.t('JAM! Is a social network and a map, all rolled up in one - a digital incubator that is constantly updated thanks to you, its members.'),
-    },
-  ],
-  authTabs: [
-    {
-      id: 'email',
-      label: i18n.t('Email'),
-      default: true,
-    },
-    {
-      id: 'phone',
-      label: i18n.t('Whatsapp'),
-    },
-  ],
-  searchTabs: [
-    {
-      id: 'jam',
-      label: i18n.t('Jams'),
-      numColumns: 2,
-      default: true,
-    },
-    {
-      id: 'looking',
-      label: i18n.t('Lookings'),
-      numColumns: 2,
-    },
-    {
-      id: 'call',
-      label: i18n.t('Calls'),
-      numColumns: 2,
-    },
-    {
-      id: 'event',
-      label: i18n.t('Events'),
-      numColumns: 2,
-    },
-    {
-      id: 'jammer',
-      label: i18n.t('Jammers'),
-      numColumns: 1,
-    },
-    {
-      id: 'personal',
-      label: i18n.t('Artists'),
-      numColumns: 1,
-    },
-    {
-      id: 'organization',
-      label: i18n.t('Organization'),
-      numColumns: 1,
-    },
-    {
-      id: 'venue',
-      label: i18n.t('Venues'),
-      numColumns: 2,
-    },
-    {
-      id: 'project',
-      label: i18n.t('Projects'),
-      numColumns: 2,
-    },
-  ],
   profileTypes: [
     {
       id: null,
@@ -95,16 +19,6 @@ const StaticData = {
       label: i18n.t('Venue'),
     },
   ],
-  experienceLevels: [
-    {
-      id: null,
-      label: i18n.t('Select a level of experience'),
-    },
-    {
-      id: 'less_than_1_year',
-      label: i18n.t('Less than 1 year'),
-    },
-  ],
   locationTypes: [
     {
       id: 'online',
@@ -117,55 +31,6 @@ const StaticData = {
     {
       id: 'online_physical',
       label: i18n.t('Online/Physical'),
-    },
-  ],
-  notificationTypes: [
-    {
-      id: 'like-jam',
-      label: i18n.t('Liked Jam'),
-    },
-  ],
-  jamCategories: [
-    {
-      id: 'call',
-      label: i18n.t('Call'),
-      icon: 'megaphone',
-    },
-    {
-      id: 'looking',
-      label: i18n.t('Looking'),
-      icon: 'link',
-    },
-    {
-      id: 'event',
-      label: i18n.t('Event'),
-      icon: 'users',
-    },
-    {
-      id: 'random',
-      label: i18n.t('Random'),
-      icon: 'infinite',
-    },
-  ],
-  privacyStatus: [
-    {
-      id: 'private',
-      label: i18n.t('Private'),
-    },
-    {
-      id: 'public',
-      label: i18n.t('Public'),
-    },
-  ],
-  phoneServices: [
-    {
-      id: 'sms',
-      label: i18n.t('SMS'),
-      default: true,
-    },
-    {
-      id: 'whatsapp',
-      label: i18n.t('Whatsapp'),
     },
   ],
   countryPhoneCodes: [
