@@ -22,12 +22,44 @@ const SearchFiltersForm = ({ }: Props) => {
   const searchState = useSelector((state: any) => state.search);
 
   const getFiltersConfig = () => {
-    return {
-      countries: appState.countriesData,
-      sectors: appState.sectorsData,
-      subSectors: ([...appState.sectorsData].map((sector: any) => sector.sub_sectors)).flat(),
-      jamTypes: EntityManager.getJamTypes(),
-    };
+    return [
+      {
+        key: 'countries',
+        label: i18n.t('Countries'),
+        data: appState.countriesData,
+        render: (item: any) => {
+
+        },
+      },
+      {
+        key: 'sectors',
+        label: i18n.t('Industries'),
+        data: appState.sectorsData,
+        render: (item: any) => {
+
+        },
+      },
+      {
+        key: 'subSectors',
+        label: i18n.t('Sub Industries'),
+        data: ([...appState.sectorsData].map((sector: any) => sector.sub_sectors)).flat(),
+        render: (item: any) => {
+
+        },
+      },
+      {
+        key: 'jamTypes',
+        label: i18n.t('Jam Types'),
+        data: EntityManager.getJamTypes(),
+        render: (item: any) => {
+
+        },
+      },
+    ];
+  };
+
+  const renderFilters = () => {
+
   };
 
   const toggleFilters = (key: string) => {
@@ -175,7 +207,7 @@ const SearchFiltersForm = ({ }: Props) => {
           {((filtersConfig.sectors || [])
             .filter((o: any) => currentFilters.sectors.includes(o.id))
             .map((sector: any) => {
-              return sector.sub_sectors.map((subSector: any) => renderFilterTag(key, subSector) )
+              return sector.sub_sectors.map((subSector: any) => renderFilterTag(key, subSector))
             })).flat()
           }
         </BoxView>
