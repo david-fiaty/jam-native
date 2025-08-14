@@ -7,6 +7,7 @@ import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
 import i18n from '@/translation/i18n';
 import InputTextField from '../field/InputTextField';
+import EntityManager from '@/manager/EntityManager';
 
 type Props = {
 
@@ -25,6 +26,7 @@ const SearchFiltersForm = ({ }: Props) => {
       countries: appState.countriesData,
       sectors: appState.sectorsData,
       subSectors: ([...appState.sectorsData].map((sector: any) => sector.sub_sectors)).flat(),
+      jamTypes: EntityManager.getJamTypes(),
     };
   };
 
@@ -91,7 +93,7 @@ const SearchFiltersForm = ({ }: Props) => {
     );
   };
 
-  const renderKeywordsFilters = () => {
+  const renderKeywordsFilter = () => {
     let key: string = 'keywords';
 
     return (
@@ -113,7 +115,7 @@ const SearchFiltersForm = ({ }: Props) => {
     );
   };
 
-  const renderCountriesFilters = () => {
+  const renderCountriesFilter = () => {
     let key: string = 'countries';
 
     return (
@@ -181,6 +183,27 @@ const SearchFiltersForm = ({ }: Props) => {
     );
   };
 
+  const renderJamTypesFilter = () => {
+    let key: string = 'jamTypes';
+
+    return (
+      <>
+        <TextView style={styles.filterTitle}>
+          {i18n.t('Jam Types')}
+        </TextView>
+        <BoxView
+          direction="row"
+          align="flex-start"
+          justify="flex-start"
+          style={styles.filterContainer}
+        >
+          {renderAllFiltersTag(key)}
+          {(filtersConfig.jamTypes || []).map((item: any) => renderFilterTag(key, item))}
+        </BoxView>
+      </>
+    );
+  };
+
   useEffect(() => {
     if (!isLoaded) {
       setFiltersConfig(getFiltersConfig())
@@ -199,9 +222,10 @@ const SearchFiltersForm = ({ }: Props) => {
       style={[Layout.formContainer, styles.container]}
     >
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
-        {renderKeywordsFilters()}
-        {renderCountriesFilters()}
+        {renderKeywordsFilter()}
+        {renderCountriesFilter()}
         {renderSectorsFilter()}
+        {renderJamTypesFilter()}
         {!!currentFilters?.sectors?.length && renderSubSectorsFilter()}
       </BoxView>
     </BoxView>

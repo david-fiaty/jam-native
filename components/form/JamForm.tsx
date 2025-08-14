@@ -76,7 +76,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
         >
           <IconView name={row.item.icon} theme="secondary" />
         </View>
-        <TextView>{row.item.label}</TextView>
+        <TextView>{row.item.name}</TextView>
       </View>
     </TouchableOpacity>
   );
