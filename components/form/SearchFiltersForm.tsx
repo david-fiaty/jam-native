@@ -236,12 +236,12 @@ const SearchFiltersForm = ({ }: Props) => {
       <BoxView direction="row" align="center" justify="center" style={styles.actionsContainer}>
         <ButtonView
           label={i18n.t("Reset")}
-          containerStyle={{ width: '40%' }}
+          containerStyle={{ width: '50%'}}
         />
 
         <ButtonView
           label={i18n.t("Apply")}
-          containerStyle={{ width: '40%' }}
+          containerStyle={{ width: '50%'}}
         />
       </BoxView>
     </BoxView>
