@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { setSearchFilters } from '@/redux/slices/SearchSlice';
 import { useSelector, useDispatch } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -22,53 +22,107 @@ const SearchFiltersForm = ({ }: Props) => {
   const searchState = useSelector((state: any) => state.search);
 
   const getFiltersConfig = () => {
-    return {
-      countries: appState.countriesData,
-      sectors: appState.sectorsData,
-      subSectors: ([...appState.sectorsData].map((sector: any) => sector.sub_sectors)).flat(),
-      jamTypes: EntityManager.getJamTypes(),
-    };
+    return [
+      {
+        key: 'countries',
+        label: i18n.t('Countries'),
+        data: appState.countriesData,
+        render: (item: any) => {
+          return (item?.data || []).map((o: any) => renderFilterTag(o));
+        },
+      },
+      {
+        key: 'sectors',
+        label: i18n.t('Industries'),
+        data: appState.sectorsData,
+        render: (item: any) => {
+          return (item?.data || []).map((o: any) => renderFilterTag(o))
+        },
+      },
+      {
+        key: 'subSectors',
+        label: i18n.t('Sub Industries'),
+        data: ([...appState.sectorsData].map((sector: any) => sector.sub_sectors)).flat(),
+        render: (item: any) => {
+          if (!!currentFilters?.sectors?.length) {
+            return ((item?.data || []).filter((o: any) => currentFilters.sectors.includes(o.id))
+              .map((sector: any) => {
+                return sector.sub_sectors.map((o: any) => renderFilterTag(o))
+              })).flat();
+          }
+        },
+      },
+      {
+        key: 'jamTypes',
+        label: i18n.t('Jam Types'),
+        data: EntityManager.getJamTypes(),
+        render: (item: any) => {
+          return (item?.data || []).map((o: any) => renderFilterTag(o));
+        },
+      },
+    ];
   };
 
-  const toggleFilters = (key: string) => {
+  const renderFilters = () => {
+    return getFiltersConfig().map((item: any) => {
+      return (
+        <View key={item?.key}>
+          <TextView style={styles.filterTitle}>
+            {item.label}
+          </TextView>
+          <BoxView
+            direction="row"
+            align="flex-start"
+            justify="flex-start"
+            style={styles.filterContainer}
+          >
+            {renderAllFiltersTag(item)}
+            {item.render(item)}
+          </BoxView>
+        </View>
+      );
+    });
+  };
+
+  const toggleFilters = (item: any) => {
     let searchFilters: any = { ...currentFilters };
 
-    if (!searchFilters?.[key]?.length || searchFilters[key].length < filtersConfig[key].length) {
-      searchFilters[key] = filtersConfig[key].map((o: any) => o.id);
+    if (!searchFilters?.[item.key]?.length || searchFilters[item.key].length < filtersConfig[item.key].length) {
+      searchFilters[item.key] = filtersConfig.find((o: any) => o.key == item.key).map((o: any) => o.id);
     }
     else {
-      searchFilters[key] = [];
+      searchFilters[item.key] = [];
     }
 
     setCurrentFilters(searchFilters);
   };
 
-  const toggleFilter = (key: string, value: string) => {
+  const toggleFilter = (item: any) => {
     let searchFilters: any = { ...currentFilters };
 
-    if (isFilterEnabled(key, value)) {
-      searchFilters[key] = searchFilters[key].filter((v: any) => v != value);
+    if (isFilterEnabled(item.key)) {
+      searchFilters[item.key] = searchFilters[item.key].filter((v: any) => v != value);
     }
     else {
-      searchFilters[key] = [...(searchFilters?.[key] || []), value];
+      searchFilters[item.key] = [...(searchFilters?.[item.key] || []), value];
     }
 
     setCurrentFilters(searchFilters);
   };
 
-  const isFilterEnabled = (key: string, value: string) => {
-    return Array.isArray(currentFilters?.[key]) && currentFilters[key].includes(value);
+  const isFilterEnabled = (item: any) => {
+    return Array.isArray(currentFilters?.[item.key]) && currentFilters[item.key].includes(value);
   };
 
   const applyFilters = () => {
     dispatch(setSearchFilters(currentFilters));
   };
 
-  const renderAllFiltersTag = (key: string) => {
-    let isEnabled: boolean = currentFilters?.[key]?.length === filtersConfig?.[key]?.length;
+  const renderAllFiltersTag = (item: any) => {
+    let isEnabled: boolean = currentFilters?.[item.key]?.length === filtersConfig?.[item.key]?.length;
 
     return (
-      <TouchableOpacity onPress={() => toggleFilters(key)}>
+      <TouchableOpacity onPress={() => toggleFilters(item)}>
         <TextView
           style={isEnabled ? styles.filterTagEnabled : styles.filterTagDisabled}
         >
@@ -78,9 +132,9 @@ const SearchFiltersForm = ({ }: Props) => {
     );
   };
 
-  const renderFilterTag = (key: string, item: any) => {
-    let isEnabled: any = isFilterEnabled(key, item.id);
-    let onPress: any = () => toggleFilter(key, item.id);
+  const renderFilterTag = (item: any) => {
+    let isEnabled: any = isFilterEnabled(item);
+    let onPress: any = () => toggleFilter(item);
 
     return (
       <TouchableOpacity key={item.id} onPress={onPress}>
@@ -90,117 +144,6 @@ const SearchFiltersForm = ({ }: Props) => {
           {item.name}
         </TextView>
       </TouchableOpacity>
-    );
-  };
-
-  const renderKeywordsFilter = () => {
-    let key: string = 'keywords';
-
-    return (
-      <>
-        <TextView style={styles.filterTitle}>
-          {i18n.t('Keywords')}
-        </TextView>
-        <BoxView
-          direction="row"
-          align="flex-start"
-          justify="flex-start"
-          style={styles.filterContainer}
-        >
-          <InputTextField
-            placeholder={i18n.t('Search keywords...')}
-          />
-        </BoxView>
-      </>
-    );
-  };
-
-  const renderCountriesFilter = () => {
-    let key: string = 'countries';
-
-    return (
-      <>
-        <TextView style={styles.filterTitle}>
-          {i18n.t('Countries')}
-        </TextView>
-        <BoxView
-          direction="row"
-          align="flex-start"
-          justify="flex-start"
-          style={styles.filterContainer}
-        >
-          {renderAllFiltersTag(key)}
-          {(filtersConfig.countries || []).map((item: any) => renderFilterTag(key, item))}
-        </BoxView>
-      </>
-    );
-  };
-
-  const renderSectorsFilter = () => {
-    let key: string = 'sectors';
-
-    return (
-      <>
-        <TextView style={styles.filterTitle}>
-          {i18n.t('Industries')}
-        </TextView>
-        <BoxView
-          direction="row"
-          align="flex-start"
-          justify="flex-start"
-          style={styles.filterContainer}
-        >
-          {renderAllFiltersTag(key)}
-          {(filtersConfig.sectors || []).map((item: any) => renderFilterTag(key, item))}
-        </BoxView>
-      </>
-    );
-  };
-
-  const renderSubSectorsFilter = () => {
-    let key: string = 'subSectors';
-
-    return (
-      <>
-        <TextView style={styles.filterTitle}>
-          {i18n.t('Sub Industries')}
-        </TextView>
-        <BoxView
-          direction="row"
-          align="flex-start"
-          justify="flex-start"
-          style={styles.filterContainer}
-        >
-          {renderAllFiltersTag(key)}
-          {((filtersConfig.sectors || [])
-            .filter((o: any) => currentFilters.sectors.includes(o.id))
-            .map((sector: any) => {
-              return sector.sub_sectors.map((subSector: any) => renderFilterTag(key, subSector) )
-            })).flat()
-          }
-        </BoxView>
-      </>
-    );
-  };
-
-  const renderJamTypesFilter = () => {
-    let key: string = 'jamTypes';
-
-    return (
-      <>
-        <TextView style={styles.filterTitle}>
-          {i18n.t('Jam Types')}
-        </TextView>
-        <BoxView
-          direction="row"
-          align="flex-start"
-          justify="flex-start"
-          style={styles.filterContainer}
-        >
-          {renderAllFiltersTag(key)}
-          {(filtersConfig.jamTypes || []).map((item: any) => renderFilterTag(key, item))}
-        </BoxView>
-      </>
     );
   };
 
@@ -222,11 +165,7 @@ const SearchFiltersForm = ({ }: Props) => {
       style={[Layout.formContainer, styles.container]}
     >
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
-        {renderKeywordsFilter()}
-        {renderCountriesFilter()}
-        {renderSectorsFilter()}
-        {renderJamTypesFilter()}
-        {!!currentFilters?.sectors?.length && renderSubSectorsFilter()}
+        {renderFilters()}
       </BoxView>
     </BoxView>
   );
