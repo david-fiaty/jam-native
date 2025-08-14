@@ -233,7 +233,7 @@ const SearchFiltersForm = ({ }: Props) => {
 
       <DividerView theme="secondary" />
 
-      <BoxView direction="row" align="center" justify="center" style={styles.actionsContainer}>
+      <BoxView direction="row" align="center" justify="space-around" style={styles.actionsContainer}>
         <ButtonView
           label={i18n.t("Reset")}
           containerStyle={{ width: '50%', alignSelf: 'flex-start' }}
@@ -283,7 +283,7 @@ const styles = StyleSheet.create({
   },
   actionsContainer: {
     marginBottom: Layout.space.base*2,
-    width: '100%',
+    width: '80%',
   },
 });
 
