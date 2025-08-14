@@ -309,22 +309,22 @@ class EntityManager {
     return [
       {
         id: 'call',
-        label: i18n.t('Call'),
+        name: i18n.t('Call'),
         icon: 'megaphone',
       },
       {
         id: 'looking',
-        label: i18n.t('Looking'),
+        name: i18n.t('Looking'),
         icon: 'link',
       },
       {
         id: 'event',
-        label: i18n.t('Event'),
+        name: i18n.t('Event'),
         icon: 'users',
       },
       {
         id: 'random',
-        label: i18n.t('Random'),
+        name: i18n.t('Random'),
         icon: 'infinite',
       },
     ];
