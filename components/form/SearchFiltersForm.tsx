@@ -9,6 +9,7 @@ import i18n from '@/translation/i18n';
 import InputTextField from '../field/InputTextField';
 import EntityManager from '@/manager/EntityManager';
 import ButtonView from '../view/ButtonView';
+import DividerView from '../view/DividerView';
 
 type Props = {
 
@@ -229,6 +230,8 @@ const SearchFiltersForm = ({ }: Props) => {
         {!!currentFilters?.sectors?.length && renderSubSectorsFilter()}
         {renderJamTypesFilter()}
       </BoxView>
+
+      <DividerView theme="secondary" />
 
       <BoxView direction="row" align="center" justify="center" style={styles.actionsContainer}>
         <ButtonView
