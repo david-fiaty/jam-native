@@ -236,12 +236,12 @@ const SearchFiltersForm = ({ }: Props) => {
       <BoxView direction="row" align="center" justify="center" style={styles.actionsContainer}>
         <ButtonView
           label={i18n.t("Reset")}
-          containerStyle={{ width: '50%'}}
+          containerStyle={{ width: '50%', alignSelf: 'flex-start' }}
         />
 
         <ButtonView
           label={i18n.t("Apply")}
-          containerStyle={{ width: '50%'}}
+          containerStyle={{ width: '50%', alignSelf: 'flex-start' }}
         />
       </BoxView>
     </BoxView>
@@ -283,6 +283,7 @@ const styles = StyleSheet.create({
   },
   actionsContainer: {
     marginBottom: Layout.space.base*2,
+    width: '100%',
   },
 });
 
