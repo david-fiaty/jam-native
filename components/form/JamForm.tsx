@@ -41,6 +41,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
   const formData = useSelector((state: any) => state.form[resource]);
+  
   const jamCategories: any = [
     {
       id: 'call',
