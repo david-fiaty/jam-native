@@ -18,7 +18,6 @@ class SearchManager {
       }
       else {
         searchResults = await this.sendRequest() || {};
-        searchResults = this.applyFilters(searchResults, searchFilters);
         searchResults = JSON.stringify(searchResults);
         Store.dispatch(setCurrentResults(searchResults));
         Store.dispatch(setDefaultResults(searchResults));
