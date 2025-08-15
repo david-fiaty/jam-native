@@ -3,6 +3,7 @@ import BoxView from '../view/BoxView';
 import SelectListBase from '../base/SelectListBase';
 import StaticData from '@/constants/StaticData';
 import i18n from '@/translation/i18n';
+import EntityManager from '@/manager/EntityManager';
 
 type Props = {
   value?: any,
@@ -14,7 +15,7 @@ const LocationTypeField = ({value, onChangeValue}: Props) => {
     return [...(optionsData || [])].map((item: any) => {
       return {
         value: item?.id,
-        label: item?.label,
+        label: item?.name,
       }
     });
   };
@@ -23,7 +24,7 @@ const LocationTypeField = ({value, onChangeValue}: Props) => {
     <BoxView direction="column" align="center" style={styles.container}>
       <SelectListBase 
         value={value}
-        data={buildOptions(StaticData.locationTypes)} 
+        data={buildOptions(EntityManager.getLocationTypes())} 
         onChangeValue={onChangeValue}
         placeholder={i18n.t('Select a location type')}
       />

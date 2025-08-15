@@ -6,6 +6,10 @@ import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
 import i18n from '@/translation/i18n';
+import InputTextField from '../field/InputTextField';
+import EntityManager from '@/manager/EntityManager';
+import ButtonView from '../view/ButtonView';
+import DividerView from '../view/DividerView';
 
 type Props = {
 
@@ -23,6 +27,8 @@ const SearchFiltersForm = ({ }: Props) => {
     return {
       countries: appState.countriesData,
       sectors: appState.sectorsData,
+      subSectors: ([...appState.sectorsData].map((sector: any) => sector.sub_sectors)).flat(),
+      locationTypes: EntityManager.getLocationTypes(),
     };
   };
 
@@ -30,7 +36,7 @@ const SearchFiltersForm = ({ }: Props) => {
     let searchFilters: any = { ...currentFilters };
 
     if (!searchFilters?.[key]?.length || searchFilters[key].length < filtersConfig[key].length) {
-      searchFilters[key] = [...filtersConfig[key]].map((o: any) => o.id);
+      searchFilters[key] = filtersConfig[key].map((o: any) => o.id);
     }
     else {
       searchFilters[key] = [];
@@ -89,7 +95,29 @@ const SearchFiltersForm = ({ }: Props) => {
     );
   };
 
-  const renderCountriesFilters = () => {
+  const renderKeywordsFilter = () => {
+    let key: string = 'keywords';
+
+    return (
+      <>
+        <TextView style={styles.filterTitle}>
+          {i18n.t('Keywords')}
+        </TextView>
+        <BoxView
+          direction="row"
+          align="flex-start"
+          justify="flex-start"
+          style={styles.filterContainer}
+        >
+          <InputTextField
+            placeholder={i18n.t('Search keywords...')}
+          />
+        </BoxView>
+      </>
+    );
+  };
+
+  const renderCountriesFilter = () => {
     let key: string = 'countries';
 
     return (
@@ -149,9 +177,30 @@ const SearchFiltersForm = ({ }: Props) => {
           {((filtersConfig.sectors || [])
             .filter((o: any) => currentFilters.sectors.includes(o.id))
             .map((sector: any) => {
-              return sector.sub_sectors.map((subSector: any) => renderFilterTag(key, subSector) )
+              return sector.sub_sectors.map((subSector: any) => renderFilterTag(key, subSector))
             })).flat()
           }
+        </BoxView>
+      </>
+    );
+  };
+
+  const renderLocationTypesFilter = () => {
+    let key: string = 'locationTypes';
+
+    return (
+      <>
+        <TextView style={styles.filterTitle}>
+          {i18n.t('Location Types')}
+        </TextView>
+        <BoxView
+          direction="row"
+          align="flex-start"
+          justify="flex-start"
+          style={styles.filterContainer}
+        >
+          {renderAllFiltersTag(key)}
+          {(filtersConfig.jamTypes || []).map((item: any) => renderFilterTag(key, item))}
         </BoxView>
       </>
     );
@@ -161,6 +210,7 @@ const SearchFiltersForm = ({ }: Props) => {
     if (!isLoaded) {
       setFiltersConfig(getFiltersConfig())
       setCurrentFilters(searchState.searchFilters);
+      setIsLoaded(true);
     }
   }, [searchState, isLoaded]);
 
@@ -174,9 +224,26 @@ const SearchFiltersForm = ({ }: Props) => {
       style={[Layout.formContainer, styles.container]}
     >
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
-        {renderCountriesFilters()}
+        {/* renderKeywordsFilter() */}
+        {renderCountriesFilter()}
         {renderSectorsFilter()}
         {!!currentFilters?.sectors?.length && renderSubSectorsFilter()}
+        {renderLocationTypesFilter()}
+      </BoxView>
+
+      <DividerView theme="secondary" />
+
+      <BoxView direction="row" align="center" justify="center" style={styles.actionsContainer}>
+        <ButtonView
+          label={i18n.t("Reset")}
+          containerStyle={styles.actionsButton}
+          theme="gray"
+        />
+
+        <ButtonView
+          label={i18n.t("Apply")}
+          containerStyle={styles.actionsButton}
+        />
       </BoxView>
     </BoxView>
   );
@@ -195,7 +262,7 @@ const styles = StyleSheet.create({
   filterContainer: {
     width: '100%',
     flexWrap: 'wrap',
-    marginBottom: Layout.space.base * 2,
+    marginBottom: Layout.space.base * 1.4,
   },
   filterTitle: {
     color: Layout.colors.black,
@@ -214,6 +281,13 @@ const styles = StyleSheet.create({
     borderRadius: Layout.radius.round,
     paddingVertical: Layout.space.base,
     paddingHorizontal: Layout.space.base,
+  },
+  actionsContainer: {
+    width: '100%',
+    marginBottom: Layout.space.base*2,
+  },
+  actionsButton: {
+    width: '42%',  
   },
 });
 
