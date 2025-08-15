@@ -63,7 +63,14 @@ const SearchFiltersForm = ({ }: Props) => {
   };
 
   const applyFilters = () => {
+    console.log('apply filters')
     dispatch(setSearchFilters(currentFilters));
+  };
+
+  const resetFilters = () => {
+    console.log('reset filters')
+    setCurrentFilters({});
+    dispatch(setSearchFilters({}));
   };
 
   const renderAllFiltersTag = (key: string) => {
@@ -200,7 +207,7 @@ const SearchFiltersForm = ({ }: Props) => {
           style={styles.filterContainer}
         >
           {renderAllFiltersTag(key)}
-          {(filtersConfig.jamTypes || []).map((item: any) => renderFilterTag(key, item))}
+          {(filtersConfig.locationTypes || []).map((item: any) => renderFilterTag(key, item))}
         </BoxView>
       </>
     );
@@ -214,7 +221,7 @@ const SearchFiltersForm = ({ }: Props) => {
     }
   }, [searchState, isLoaded]);
 
-  console.log(currentFilters);
+  console.log(searchState.searchFilters);
 
   return (
     <BoxView
@@ -238,11 +245,13 @@ const SearchFiltersForm = ({ }: Props) => {
           label={i18n.t("Reset")}
           containerStyle={styles.actionsButton}
           theme="gray"
+          onPress={resetFilters}
         />
 
         <ButtonView
           label={i18n.t("Apply")}
           containerStyle={styles.actionsButton}
+          onPress={applyFilters}
         />
       </BoxView>
     </BoxView>
