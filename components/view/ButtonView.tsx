@@ -12,10 +12,31 @@ type Props = {
   containerStyle?: any;
 };
 
-const ButtonView = ({label, theme, disabled, onPress, isProcessing, containerStyle}: Props) => {
+const ButtonView = ({ label, theme, disabled, onPress, isProcessing, containerStyle }: Props) => {
 
-  const themeStyles: any = {
-    backgroundColor: Layout.colors[theme ? theme: 'primary'],
+  const getThemeStyles = () => {
+    if (theme) {
+      return {
+        backgroundColor: Layout.colors[theme],
+      }
+    }
+
+    return {
+      backgroundColor: Layout.colors.primary,
+    };
+  };
+
+
+  const getLabelStyles = () => {
+    if (!theme || theme == 'primary') {
+      return {
+        color: Layout.colors.white,
+      };
+    }
+
+    return {
+      color: Layout.colors.primary,
+    };
   };
 
   if (isProcessing) {
@@ -34,8 +55,8 @@ const ButtonView = ({label, theme, disabled, onPress, isProcessing, containerSty
   }
   else {
     return (
-      <TouchableOpacity onPress={onPress} style={[styles.container, containerStyle, themeStyles]}>
-        <TextView style={styles.label}>{label}</TextView>
+      <TouchableOpacity onPress={onPress} style={[styles.container, containerStyle, getThemeStyles()]}>
+        <TextView style={[styles.label, getLabelStyles()]}>{label}</TextView>
       </TouchableOpacity>
     );
   }
@@ -49,7 +70,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    height: Layout.space.base*4.3,
+    height: Layout.space.base * 4.3,
   },
   label: {
     color: Layout.colors.white,
