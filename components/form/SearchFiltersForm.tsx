@@ -28,7 +28,7 @@ const SearchFiltersForm = ({ }: Props) => {
       countries: appState.countriesData,
       sectors: appState.sectorsData,
       subSectors: ([...appState.sectorsData].map((sector: any) => sector.sub_sectors)).flat(),
-      jamTypes: EntityManager.getJamTypes(),
+      locationTypes: EntityManager.getLocationTypes(),
     };
   };
 
@@ -185,13 +185,13 @@ const SearchFiltersForm = ({ }: Props) => {
     );
   };
 
-  const renderJamTypesFilter = () => {
-    let key: string = 'jamTypes';
+  const renderLocationTypesFilter = () => {
+    let key: string = 'locationTypes';
 
     return (
       <>
         <TextView style={styles.filterTitle}>
-          {i18n.t('Jam Types')}
+          {i18n.t('Location Types')}
         </TextView>
         <BoxView
           direction="row"
@@ -228,7 +228,7 @@ const SearchFiltersForm = ({ }: Props) => {
         {renderCountriesFilter()}
         {renderSectorsFilter()}
         {!!currentFilters?.sectors?.length && renderSubSectorsFilter()}
-        {renderJamTypesFilter()}
+        {renderLocationTypesFilter()}
       </BoxView>
 
       <DividerView theme="secondary" />
