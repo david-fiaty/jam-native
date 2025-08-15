@@ -56,7 +56,7 @@ class SearchManager {
     if (searchFilters) {
       if (searchFilters?.countries?.length) {
         searchResults.jam = searchResults.jam.filter((o: any) => {
-          return searchFilters.countries.every((id: number) => o.countries.includes(id))
+          return searchFilters.countries.some((id: number) => o.countries.includes('ng'))
         });  
       }
     }
