@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     color: Layout.colors.white,
   },
   processing: {
-    backgroundColor: Layout.colors.secondary,
+    opacity: 0.5,
   },
   disabled: {
     opacity: 0.5,
