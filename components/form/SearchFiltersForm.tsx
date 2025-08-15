@@ -283,8 +283,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: Layout.space.base,
   },
   actionsContainer: {
-    marginBottom: Layout.space.base*2,
     width: '100%',
+    marginBottom: Layout.space.base*2,
   },
   actionsButton: {
     width: '42%',  
