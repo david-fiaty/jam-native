@@ -6,6 +6,7 @@ import JamViewCollapsible from "./JamViewCollapsible";
 import StaticData from "@/constants/StaticData";
 import i18n from "@/translation/i18n";
 import DataManager from "@/manager/DataManager";
+import EntityManager from "@/manager/EntityManager";
 
 type Props = {
   row?: any;
@@ -66,7 +67,7 @@ const JamViewDetails = ({ row, sectorsData }: Props) => {
       >
         <TextView>
           <TextView style={styles.detailLabel}>{`${i18n.t("Location")} `}</TextView>
-          {StaticData.locationTypes.find(
+          {EntityManager.getLocationTypes().find(
             (o: any) => o.id == row?.location_type
           )?.label || i18n.t("Unavailable")}
         </TextView>
