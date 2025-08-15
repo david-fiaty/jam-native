@@ -54,13 +54,14 @@ class SearchManager {
 
   applyFilters(searchResults: any, searchFilters: any) {
     if (searchFilters) {
+      if (searchFilters?.countries?.length) {
+        searchResults.jam = searchResults.jam.filter((o: any) => {
+          return searchFilters.countries.every((id: number) => o.countries.includes(id))
+        });  
+      }
 
-
-
-      //b.every(val => a.includes(val));
-      searchResults.jam = searchResults.jam.filter((o: any) => o.id == 18);
+      console.log('search results', searchResults?.length)
       console.log('search filters', searchFilters)
-      //console.log('search results', searchResults)
     }
 
     return searchResults;
