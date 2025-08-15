@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
   },
   label: {
     color: Layout.colors.white,
-    fontWeight: 'bold',
   },
   processing: {
     backgroundColor: Layout.colors.secondary,
