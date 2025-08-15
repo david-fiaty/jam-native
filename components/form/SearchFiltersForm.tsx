@@ -10,6 +10,7 @@ import InputTextField from '../field/InputTextField';
 import EntityManager from '@/manager/EntityManager';
 import ButtonView from '../view/ButtonView';
 import DividerView from '../view/DividerView';
+import SearchManager from '@/manager/SearchManager';
 
 type Props = {
 
@@ -18,6 +19,8 @@ type Props = {
 const SearchFiltersForm = ({ }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [isApplyProcessing, setIsApplyProcessing] = useState<boolean>(false);
+  const [isResetProcessing, setIsResetProcessing] = useState<boolean>(false);
   const [currentFilters, setCurrentFilters] = useState<any>({});
   const [filtersConfig, setFiltersConfig] = useState<any>({});
   const appState = useSelector((state: any) => state.app);
@@ -62,15 +65,19 @@ const SearchFiltersForm = ({ }: Props) => {
     return Array.isArray(currentFilters?.[key]) && currentFilters[key].includes(value);
   };
 
-  const applyFilters = () => {
-    console.log('apply filters')
+  const applyFilters = async () => {
+    setIsApplyProcessing(true);
     dispatch(setSearchFilters(currentFilters));
+    await SearchManager.loadResults(searchState.searchValue, currentFilters);
+    setIsApplyProcessing(false);
   };
 
-  const resetFilters = () => {
-    console.log('reset filters')
+  const resetFilters = async () => {
+    setIsResetProcessing(true);
     setCurrentFilters({});
     dispatch(setSearchFilters({}));
+    await SearchManager.loadResults(searchState.searchValue);
+    setIsResetProcessing(false);
   };
 
   const renderAllFiltersTag = (key: string) => {
@@ -221,7 +228,7 @@ const SearchFiltersForm = ({ }: Props) => {
     }
   }, [searchState, isLoaded]);
 
-  console.log(searchState.searchFilters);
+  console.log(currentFilters);
 
   return (
     <BoxView
@@ -246,12 +253,14 @@ const SearchFiltersForm = ({ }: Props) => {
           containerStyle={styles.actionsButton}
           theme="gray"
           onPress={resetFilters}
+          isProcessing={isResetProcessing}
         />
 
         <ButtonView
           label={i18n.t("Apply")}
           containerStyle={styles.actionsButton}
           onPress={applyFilters}
+          isProcessing={isApplyProcessing}
         />
       </BoxView>
     </BoxView>
