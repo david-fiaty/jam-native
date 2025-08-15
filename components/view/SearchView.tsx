@@ -80,7 +80,6 @@ const SearchView = () => {
     }
   }, [searchState, searchTabs, isLoaded]);
 
-
   if (!isLoaded) return <SpinnerView />;
 
   return (
