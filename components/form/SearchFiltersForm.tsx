@@ -10,6 +10,7 @@ import InputTextField from '../field/InputTextField';
 import EntityManager from '@/manager/EntityManager';
 import ButtonView from '../view/ButtonView';
 import DividerView from '../view/DividerView';
+import SearchManager from '@/manager/SearchManager';
 
 type Props = {
 
@@ -62,13 +63,15 @@ const SearchFiltersForm = ({ }: Props) => {
     return Array.isArray(currentFilters?.[key]) && currentFilters[key].includes(value);
   };
 
-  const applyFilters = () => {
+  const applyFilters = async () => {
     dispatch(setSearchFilters(currentFilters));
+    await SearchManager.loadResults(searchState.searchValue, currentFilters);
   };
 
-  const resetFilters = () => {
+  const resetFilters = async () => {
     setCurrentFilters({});
     dispatch(setSearchFilters({}));
+    await SearchManager.loadResults(searchState.searchValue);
   };
 
   const renderAllFiltersTag = (key: string) => {
@@ -219,7 +222,7 @@ const SearchFiltersForm = ({ }: Props) => {
     }
   }, [searchState, isLoaded]);
 
-  console.log(searchState.searchFilters);
+  console.log(currentFilters);
 
   return (
     <BoxView
