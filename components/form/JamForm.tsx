@@ -41,28 +41,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
   const formData = useSelector((state: any) => state.form[resource]);
-  const jamCategories: any = [
-    {
-      id: 'call',
-      label: i18n.t('Call'),
-      icon: 'megaphone',
-    },
-    {
-      id: 'looking',
-      label: i18n.t('Looking'),
-      icon: 'link',
-    },
-    {
-      id: 'event',
-      label: i18n.t('Event'),
-      icon: 'users',
-    },
-    {
-      id: 'random',
-      label: i18n.t('Random'),
-      icon: 'infinite',
-    },
-  ];
+  const jamCategories: any = EntityManager.getJamTypes();
 
   const submitForm = async () => {
     setIsProcessing(true);
@@ -97,7 +76,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
         >
           <IconView name={row.item.icon} theme="secondary" />
         </View>
-        <TextView>{row.item.label}</TextView>
+        <TextView>{row.item.name}</TextView>
       </View>
     </TouchableOpacity>
   );

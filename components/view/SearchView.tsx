@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from "react-redux";
@@ -13,12 +13,14 @@ import i18n from "@/translation/i18n";
 import TextView from "./TextView";
 import IconView from "./IconView";
 import SectionManager from "@/manager/SectionManager";
+import SpinnerView from "./SpinnerView";
 
 const SearchView = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const searchState: any = useSelector((state: any) => state.search);
-  
+
   const searchTabs: any[] = [
     {
       id: 'jam',
@@ -68,12 +70,18 @@ const SearchView = () => {
     },
   ];
 
-  useEffect(() => {   
-    if (!searchState.currentTab) {
-      dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
+  useEffect(() => {
+    if (!isLoaded) {
+      if (!searchState.currentTab) {
+        dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
+      }
+
+      setIsLoaded(true);
     }
-  }, [searchState, searchTabs]);
-  
+  }, [searchState, searchTabs, isLoaded]);
+
+  if (!isLoaded) return <SpinnerView />;
+
   return (
     <BoxView
       direction="column"
@@ -82,9 +90,9 @@ const SearchView = () => {
       style={Layout.screenContent}
     >
       {/* Search tabs */}
-      <TabsView 
-        tabs={searchTabs} 
-        currentTab={searchState.currentTab} 
+      <TabsView
+        tabs={searchTabs}
+        currentTab={searchState.currentTab}
         onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
       />
 
@@ -95,36 +103,36 @@ const SearchView = () => {
         style={styles.searchFilters}
       >
         <TextView>{i18n.t('Filtered results')}</TextView>
-        <IconView 
-          name="filter" 
-          theme="transparent" 
-          padding={0} 
-          size={16} 
+        <IconView
+          name="filter"
+          theme="transparent"
+          padding={0}
+          size={16}
           onPress={() => SectionManager.push(router, 'search-filters')}
         />
       </BoxView>
 
       {/* Jams list */}
       {['jam', 'looking', 'call', 'event'].includes(searchState.currentTab) && (
-        <SearchJamsList 
+        <SearchJamsList
           data={(JSON.parse(searchState.currentResults) || [])?.jam}
-          filter={searchState.currentTab} 
+          filter={searchState.currentTab}
         />
       )}
 
       {/* Jammers list */}
-      {['jammer', 'venue', 'organization', 'personal'].includes(searchState.currentTab) && 
+      {['jammer', 'venue', 'organization', 'personal'].includes(searchState.currentTab) &&
         <SearchProfilesList
           data={(JSON.parse(searchState.currentResults) || [])?.profile}
-          filter={searchState.currentTab} 
+          filter={searchState.currentTab}
         />
       }
 
       {/* Projects list */}
-      {['project'].includes(searchState.currentTab) && 
+      {['project'].includes(searchState.currentTab) &&
         <SearchProjectsList
           data={(JSON.parse(searchState.currentResults) || [])?.project}
-          filter={searchState.currentTab} 
+          filter={searchState.currentTab}
         />
       }
     </BoxView>
