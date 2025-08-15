@@ -54,6 +54,10 @@ class SearchManager {
 
   applyFilters(searchResults: any, searchFilters: any) {
     if (searchFilters) {
+
+
+
+      //b.every(val => a.includes(val));
       searchResults.jam = searchResults.jam.filter((o: any) => o.id == 18);
       console.log('search filters', searchFilters)
       //console.log('search results', searchResults)
