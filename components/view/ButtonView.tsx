@@ -5,13 +5,19 @@ import SpinnerView from '../view/SpinnerView';
 
 type Props = {
   label?: string;
+  theme?: string;
   disabled?: boolean;
   onPress?: () => void;
   isProcessing?: boolean;
   containerStyle?: any;
 };
 
-const ButtonView = ({label, disabled, onPress, isProcessing, containerStyle}: Props) => {
+const ButtonView = ({label, theme, disabled, onPress, isProcessing, containerStyle}: Props) => {
+
+  const themeStyles: any = {
+    backgroundColor: Layout.colors[theme ? theme: 'primary'],
+  };
+
   if (isProcessing) {
     return (
       <View style={[styles.container, containerStyle, styles.processing]}>
@@ -28,7 +34,7 @@ const ButtonView = ({label, disabled, onPress, isProcessing, containerStyle}: Pr
   }
   else {
     return (
-      <TouchableOpacity onPress={onPress} style={[styles.container, containerStyle]}>
+      <TouchableOpacity onPress={onPress} style={[styles.container, containerStyle, themeStyles]}>
         <TextView style={styles.label}>{label}</TextView>
       </TouchableOpacity>
     );
