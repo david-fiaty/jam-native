@@ -3,25 +3,30 @@ import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 
 class SearchManager {
-  async loadResults(searchValue?: any, filters?: string) {
+  async loadResults(searchValue?: any, filters?: any) {
     let searchState: any = Store.getState().search;
+    let results: any = {};
 
     if (!searchValue?.length) {
       Store.dispatch(setSearchValue(''));
       let defaultResults: any = JSON.parse(searchState.defaultResults);
 
       if (Object.keys(defaultResults).length > 0) {
-        Store.dispatch(setCurrentResults(searchState.defaultResults));
+        results = this.applyFilters(defaultResults, filters);
+        results = JSON.stringify(results);
+        Store.dispatch(setCurrentResults(results));
       }
       else {
-        let results: any = JSON.stringify(await this.sendRequest() || {});
+        results = await this.sendRequest() || {};
+        results = JSON.stringify(results);
         Store.dispatch(setCurrentResults(results));
         Store.dispatch(setDefaultResults(results));
       }
     }
     else {
       Store.dispatch(setSearchValue(searchValue));
-      let results: any = JSON.stringify(await this.sendRequest(searchValue) || {});
+      results = await this.sendRequest(searchValue) || {};
+      results = JSON.stringify(results);
       Store.dispatch(setCurrentResults(results));
     }
   }
@@ -44,6 +49,11 @@ class SearchManager {
       profile: profile || [],
       project: project || [],
     };
+  }
+
+  applyFilters(searchResults: any, filters: any) {
+
+    return searchResults;
   }
 };
 
