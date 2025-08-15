@@ -3,33 +3,33 @@ import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 
 class SearchManager {
-  async loadResults(searchValue?: any, filters?: any) {
+  async loadResults(searchValue?: any, searchFilters?: any) {
     let searchState: any = Store.getState().search;
-    let results: any = {};
+    let searchResults: any = {};
 
     if (!searchValue?.length) {
       Store.dispatch(setSearchValue(''));
       let defaultResults: any = JSON.parse(searchState.defaultResults);
 
       if (Object.keys(defaultResults).length > 0) {
-        results = this.applyFilters(defaultResults, filters);
-        results = JSON.stringify(results);
-        Store.dispatch(setCurrentResults(results));
+        searchResults = this.applyFilters(defaultResults, searchFilters);
+        searchResults = JSON.stringify(searchResults);
+        Store.dispatch(setCurrentResults(searchResults));
       }
       else {
-        results = await this.sendRequest() || {};
-        results = this.applyFilters(results, filters);
-        results = JSON.stringify(results);
-        Store.dispatch(setCurrentResults(results));
-        Store.dispatch(setDefaultResults(results));
+        searchResults = await this.sendRequest() || {};
+        searchResults = this.applyFilters(searchResults, searchFilters);
+        searchResults = JSON.stringify(searchResults);
+        Store.dispatch(setCurrentResults(searchResults));
+        Store.dispatch(setDefaultResults(searchResults));
       }
     }
     else {
       Store.dispatch(setSearchValue(searchValue));
-      results = await this.sendRequest(searchValue) || {};
-      results = this.applyFilters(results, filters);
-      results = JSON.stringify(results);
-      Store.dispatch(setCurrentResults(results));
+      searchResults = await this.sendRequest(searchValue) || {};
+      searchResults = this.applyFilters(searchResults, searchFilters);
+      searchResults = JSON.stringify(searchResults);
+      Store.dispatch(setCurrentResults(searchResults));
     }
   }
 
@@ -53,11 +53,12 @@ class SearchManager {
     };
   }
 
-  applyFilters(searchResults: any, filters: any) {
-    if (filters) {
-
+  applyFilters(searchResults: any, searchFilters: any) {
+    if (searchFilters) {
+      console.log('search filters', searchFilters)
+      //console.log('search results', searchResults)
     }
-    
+
     return searchResults;
   }
 };
