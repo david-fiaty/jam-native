@@ -224,7 +224,7 @@ const SearchFiltersForm = ({ }: Props) => {
       style={[Layout.formContainer, styles.container]}
     >
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
-        {renderKeywordsFilter()}
+        {/* renderKeywordsFilter() */}
         {renderCountriesFilter()}
         {renderSectorsFilter()}
         {!!currentFilters?.sectors?.length && renderSubSectorsFilter()}
@@ -233,10 +233,11 @@ const SearchFiltersForm = ({ }: Props) => {
 
       <DividerView theme="secondary" />
 
-      <BoxView direction="row" align="center" justify="center" style={styles.actionsContainer}>
+      <BoxView direction="row" align="center" justify="space-around" style={styles.actionsContainer}>
         <ButtonView
           label={i18n.t("Reset")}
           containerStyle={{ width: '50%', alignSelf: 'flex-start' }}
+          theme="gray"
         />
 
         <ButtonView
@@ -283,7 +284,7 @@ const styles = StyleSheet.create({
   },
   actionsContainer: {
     marginBottom: Layout.space.base*2,
-    width: '100%',
+    width: '80%',
   },
 });
 

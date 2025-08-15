@@ -5,13 +5,44 @@ import SpinnerView from '../view/SpinnerView';
 
 type Props = {
   label?: string;
+  theme?: string;
   disabled?: boolean;
   onPress?: () => void;
   isProcessing?: boolean;
   containerStyle?: any;
 };
 
-const ButtonView = ({label, disabled, onPress, isProcessing, containerStyle}: Props) => {
+const ButtonView = ({ label, theme, disabled, onPress, isProcessing, containerStyle }: Props) => {
+
+  const getThemeStyles = () => {
+    if (theme) {
+      return {
+        backgroundColor: Layout.colors[theme],
+      }
+    }
+
+    return {
+      backgroundColor: Layout.colors.primary,
+    };
+  };
+
+  const getLabelStyles = () => {
+    if (!theme || theme == 'primary') {
+      return {
+        color: Layout.colors.white,
+      };
+    }
+    else if (!theme || theme == 'gray') {
+      return {
+        color: Layout.colors.black,
+      };
+    }
+
+    return {
+      color: Layout.colors.primary,
+    };
+  };
+
   if (isProcessing) {
     return (
       <View style={[styles.container, containerStyle, styles.processing]}>
@@ -28,8 +59,8 @@ const ButtonView = ({label, disabled, onPress, isProcessing, containerStyle}: Pr
   }
   else {
     return (
-      <TouchableOpacity onPress={onPress} style={[styles.container, containerStyle]}>
-        <TextView style={styles.label}>{label}</TextView>
+      <TouchableOpacity onPress={onPress} style={[styles.container, containerStyle, getThemeStyles()]}>
+        <TextView style={[styles.label, getLabelStyles()]}>{label}</TextView>
       </TouchableOpacity>
     );
   }
@@ -43,14 +74,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    height: Layout.space.base*4.3,
+    height: Layout.space.base * 4.3,
   },
   label: {
     color: Layout.colors.white,
-    fontWeight: 'bold',
   },
   processing: {
-    backgroundColor: Layout.colors.secondary,
+    opacity: 0.5,
   },
   disabled: {
     opacity: 0.5,
