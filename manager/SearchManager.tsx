@@ -18,6 +18,7 @@ class SearchManager {
       }
       else {
         results = await this.sendRequest() || {};
+        results = this.applyFilters(results, filters);
         results = JSON.stringify(results);
         Store.dispatch(setCurrentResults(results));
         Store.dispatch(setDefaultResults(results));
@@ -26,6 +27,7 @@ class SearchManager {
     else {
       Store.dispatch(setSearchValue(searchValue));
       results = await this.sendRequest(searchValue) || {};
+      results = this.applyFilters(results, filters);
       results = JSON.stringify(results);
       Store.dispatch(setCurrentResults(results));
     }
@@ -52,7 +54,10 @@ class SearchManager {
   }
 
   applyFilters(searchResults: any, filters: any) {
+    if (filters) {
 
+    }
+    
     return searchResults;
   }
 };
