@@ -33,6 +33,11 @@ const ButtonView = ({ label, theme, disabled, onPress, isProcessing, containerSt
         color: Layout.colors.white,
       };
     }
+    else if (!theme || theme == 'gray') {
+      return {
+        color: Layout.colors.black,
+      };
+    }
 
     return {
       color: Layout.colors.primary,
