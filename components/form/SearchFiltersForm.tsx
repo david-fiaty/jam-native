@@ -19,6 +19,8 @@ type Props = {
 const SearchFiltersForm = ({ }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [isApplyProcessing, setIsApplyProcessing] = useState<boolean>(false);
+  const [isResetProcessing, setIsResetProcessing] = useState<boolean>(false);
   const [currentFilters, setCurrentFilters] = useState<any>({});
   const [filtersConfig, setFiltersConfig] = useState<any>({});
   const appState = useSelector((state: any) => state.app);
@@ -64,14 +66,18 @@ const SearchFiltersForm = ({ }: Props) => {
   };
 
   const applyFilters = async () => {
+    setIsApplyProcessing(true);
     dispatch(setSearchFilters(currentFilters));
     await SearchManager.loadResults(searchState.searchValue, currentFilters);
+    setIsApplyProcessing(false);
   };
 
   const resetFilters = async () => {
+    setIsResetProcessing(true);
     setCurrentFilters({});
     dispatch(setSearchFilters({}));
     await SearchManager.loadResults(searchState.searchValue);
+    setIsResetProcessing(false);
   };
 
   const renderAllFiltersTag = (key: string) => {
@@ -247,12 +253,14 @@ const SearchFiltersForm = ({ }: Props) => {
           containerStyle={styles.actionsButton}
           theme="gray"
           onPress={resetFilters}
+          isProcessing={isResetProcessing}
         />
 
         <ButtonView
           label={i18n.t("Apply")}
           containerStyle={styles.actionsButton}
           onPress={applyFilters}
+          isProcessing={isApplyProcessing}
         />
       </BoxView>
     </BoxView>
