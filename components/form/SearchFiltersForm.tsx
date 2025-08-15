@@ -237,6 +237,7 @@ const SearchFiltersForm = ({ }: Props) => {
         <ButtonView
           label={i18n.t("Reset")}
           containerStyle={{ width: '50%', alignSelf: 'flex-start' }}
+          theme="gray"
         />
 
         <ButtonView
