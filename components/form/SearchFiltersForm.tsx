@@ -200,7 +200,7 @@ const SearchFiltersForm = ({ }: Props) => {
           style={styles.filterContainer}
         >
           {renderAllFiltersTag(key)}
-          {(filtersConfig.jamTypes || []).map((item: any) => renderFilterTag(key, item))}
+          {(filtersConfig.locationTypes || []).map((item: any) => renderFilterTag(key, item))}
         </BoxView>
       </>
     );
