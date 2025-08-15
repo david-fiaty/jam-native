@@ -63,12 +63,10 @@ const SearchFiltersForm = ({ }: Props) => {
   };
 
   const applyFilters = () => {
-    console.log('apply filters')
     dispatch(setSearchFilters(currentFilters));
   };
 
   const resetFilters = () => {
-    console.log('reset filters')
     setCurrentFilters({});
     dispatch(setSearchFilters({}));
   };
