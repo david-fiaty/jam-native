@@ -26,7 +26,6 @@ const ButtonView = ({ label, theme, disabled, onPress, isProcessing, containerSt
     };
   };
 
-
   const getLabelStyles = () => {
     if (!theme || theme == 'primary') {
       return {
