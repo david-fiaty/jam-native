@@ -305,6 +305,23 @@ class EntityManager {
     return response;
   }
 
+  getLocationTypes() {
+    return [
+      {
+        id: 'online',
+        name: i18n.t('Online'),
+      },
+      {
+        id: 'physical',
+        name: i18n.t('Physical'),
+      },
+      {
+        id: 'online_physical',
+        name: i18n.t('Online/Physical'),
+      },
+    ];
+  }
+
   getJamTypes() {
     return [
       {
