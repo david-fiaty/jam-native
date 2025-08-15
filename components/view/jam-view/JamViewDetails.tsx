@@ -69,7 +69,7 @@ const JamViewDetails = ({ row, sectorsData }: Props) => {
           <TextView style={styles.detailLabel}>{`${i18n.t("Location")} `}</TextView>
           {EntityManager.getLocationTypes().find(
             (o: any) => o.id == row?.location_type
-          )?.label || i18n.t("Unavailable")}
+          )?.name || i18n.t("Unavailable")}
         </TextView>
       </BoxView>
     );

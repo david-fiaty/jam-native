@@ -15,7 +15,7 @@ const LocationTypeField = ({value, onChangeValue}: Props) => {
     return [...(optionsData || [])].map((item: any) => {
       return {
         value: item?.id,
-        label: item?.label,
+        label: item?.name,
       }
     });
   };

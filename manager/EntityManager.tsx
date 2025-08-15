@@ -309,15 +309,15 @@ class EntityManager {
     return [
       {
         id: 'online',
-        label: i18n.t('Online'),
+        name: i18n.t('Online'),
       },
       {
         id: 'physical',
-        label: i18n.t('Physical'),
+        name: i18n.t('Physical'),
       },
       {
         id: 'online_physical',
-        label: i18n.t('Online/Physical'),
+        name: i18n.t('Online/Physical'),
       },
     ];
   }
