@@ -7,6 +7,7 @@ import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
+import FilterToolbarView from "./FilterToolbarView";
 
 type Props = {
   idArray?: any;
@@ -68,6 +69,16 @@ const JamsMapView = ({ idArray }: Props) => {
     return null;
   };
 
+  const getListData = () => {
+    let data: any [] = JSON.parse(searchState.currentResults)?.jam || [];
+
+    if (idArray?.length > 0) {
+      data = data.filter((o: any) => idArray.includes(o.id));
+    }
+
+    return data;
+  };
+
   useEffect(() => {
     (async () => {
       setCurrentLocation(await UserManager.getLocation());
@@ -79,6 +90,7 @@ const JamsMapView = ({ idArray }: Props) => {
   return (
     <TouchableWithoutFeedback>
       <View style={styles.container}>
+        <FilterToolbarView />
         <MapView
           ref={mapRef}
           style={styles.map}
@@ -88,7 +100,7 @@ const JamsMapView = ({ idArray }: Props) => {
           showsUserLocation={true}
           showsMyLocationButton={true}
         >
-          {(JSON.parse(searchState.currentResults) || [])?.jam?.map((item: any) => renderJamMarker(item))}
+          {getListData().map((item: any) => renderJamMarker(item))}
         </MapView>
       </View>
     </TouchableWithoutFeedback>

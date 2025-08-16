@@ -279,7 +279,7 @@ const styles = StyleSheet.create({
     width: '100%',
     flexWrap: 'wrap',
     gap: Layout.space.base/1.2,
-    marginBottom: Layout.space.base,
+    marginBottom: Layout.space.base*1.2,
   },
   filterTitle: {
     color: Layout.colors.black,
