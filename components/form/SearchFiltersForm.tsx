@@ -28,7 +28,7 @@ const SearchFiltersForm = ({ }: Props) => {
 
   const getFiltersConfig = () => {
     return {
-      countries: appState.countriesData,
+      countries: appState.countriesData.map((o: any) => { return {id: o.code, name: o.name }}),
       sectors: appState.sectorsData,
       subSectors: ([...appState.sectorsData].map((sector: any) => sector.sub_sectors)).flat(),
       locationTypes: EntityManager.getLocationTypes(),
@@ -227,6 +227,8 @@ const SearchFiltersForm = ({ }: Props) => {
       setIsLoaded(true);
     }
   }, [searchState, isLoaded]);
+
+  console.log(currentFilters);
 
   return (
     <BoxView
