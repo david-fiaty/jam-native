@@ -53,8 +53,9 @@ const SearchFiltersForm = ({ }: Props) => {
   const toggleFilters = (key: string) => {
     let searchFilters: any = { ...currentFilters };
 
-    if (!searchFilters?.[key]?.length || searchFilters[key].length < filtersConfig[key].length) {
-      searchFilters[key] = filtersConfig[key].map((o: any) => o.id);
+    if (!searchFilters?.[key]?.length || searchFilters?.[key]?.length < filtersConfig?.[key]?.length) {
+      //searchFilters[key] = filtersConfig[key].map((o: any) => o.id);
+      searchFilters[key] = [1,2,3];
     }
     else {
       searchFilters[key] = [];
@@ -67,7 +68,7 @@ const SearchFiltersForm = ({ }: Props) => {
     let searchFilters: any = { ...currentFilters };
 
     if (isFilterEnabled(key, value)) {
-      searchFilters[key] = searchFilters[key].filter((v: any) => v != value);
+      searchFilters[key] = (searchFilters?.[key] || []).filter((v: any) => v != value);
     }
     else {
       searchFilters[key] = [...(searchFilters?.[key] || []), value];
