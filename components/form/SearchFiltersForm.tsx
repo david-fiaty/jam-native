@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { setSearchFilters } from '@/redux/slices/SearchSlice';
 import { useSelector, useDispatch } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -11,6 +11,7 @@ import EntityManager from '@/manager/EntityManager';
 import ButtonView from '../view/ButtonView';
 import DividerView from '../view/DividerView';
 import SearchManager from '@/manager/SearchManager';
+import SpinnerView from '../view/SpinnerView';
 
 type Props = {
 
@@ -37,7 +38,18 @@ const SearchFiltersForm = ({ }: Props) => {
   */
 
   const getFiltersConfig = () => {
-    return [];
+    return [
+      {
+        key: 'countries',
+        label: i18n.t('Countries'),
+        data: appState.countriesData,
+        render: (row: any) => {
+          return <TextView>{row?.name}</TextView>
+          
+          //return (config.data || []).map((row: any) => renderFilterTag(config.key, row));
+        },
+      },
+    ];
   };
 
   const toggleFilters = (key: string) => {
@@ -227,7 +239,7 @@ const SearchFiltersForm = ({ }: Props) => {
 
   const renderFilter = (config: any) => {
     return (
-      <>
+      <View key={config.key}>
         <TextView style={styles.filterTitle}>
           {config?.label}
         </TextView>
@@ -238,9 +250,9 @@ const SearchFiltersForm = ({ }: Props) => {
           style={styles.filterContainer}
         >
           {renderAllFiltersTag(config?.key)}
-          {(config?.data || []).map((row: any) => config.render(row))}
+          {(config?.data || []).map((row: any) => <View key={row.id}>{config.render(row)}</View>)}
         </BoxView>
-      </>
+      </View>
     );
   };
 
@@ -251,6 +263,8 @@ const SearchFiltersForm = ({ }: Props) => {
       setIsLoaded(true);
     }
   }, [searchState, isLoaded]);
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView
