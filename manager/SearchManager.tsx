@@ -58,10 +58,22 @@ class SearchManager {
         searchResults.jam = searchResults.jam.filter((o: any) => {
           return searchFilters.countries.some((id: any) => o.countries.includes(id));
         });
+
+        searchResults.project = searchResults.project.filter((o: any) => {
+          return searchFilters.countries.some((id: any) => o.countries.includes(id));
+        });
       }
 
       if (searchFilters?.sectors?.length) {
         searchResults.jam = searchResults.jam.filter((o: any) => {
+          return [...searchFilters.sectors, ...(searchFilters.subSectors || [])].some((id: number) => o.sectors.includes(id));
+        });
+
+        searchResults.project = searchResults.project.filter((o: any) => {
+          return [...searchFilters.sectors, ...(searchFilters.subSectors || [])].some((id: number) => o.sectors.includes(id));
+        });
+
+        searchResults.profile = searchResults.profile.filter((o: any) => {
           return [...searchFilters.sectors, ...(searchFilters.subSectors || [])].some((id: number) => o.sectors.includes(id));
         });
       }
