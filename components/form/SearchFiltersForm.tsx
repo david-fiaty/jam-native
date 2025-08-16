@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { setSearchFilters } from '@/redux/slices/SearchSlice';
 import { useSelector, useDispatch } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -11,7 +11,6 @@ import EntityManager from '@/manager/EntityManager';
 import ButtonView from '../view/ButtonView';
 import DividerView from '../view/DividerView';
 import SearchManager from '@/manager/SearchManager';
-import SpinnerView from '../view/SpinnerView';
 
 type Props = {
 
@@ -26,36 +25,21 @@ const SearchFiltersForm = ({ }: Props) => {
   const [filtersConfig, setFiltersConfig] = useState<any>({});
   const appState = useSelector((state: any) => state.app);
   const searchState = useSelector((state: any) => state.search);
-  /*
-    const getFiltersConfig = () => {
-      return {
-        countries: appState.countriesData,
-        sectors: appState.sectorsData,
-        subSectors: ([...appState.sectorsData].map((sector: any) => sector.sub_sectors)).flat(),
-        locationTypes: EntityManager.getLocationTypes(),
-      };
-    };
-  */
 
   const getFiltersConfig = () => {
-    return [
-      {
-        key: 'countries',
-        label: i18n.t('Countries'),
-        data: appState.countriesData,
-        render: (key: string, row: any) => {
-          return renderFilterTag(key, row);
-        },
-      },
-    ];
+    return {
+      countries: appState.countriesData,
+      sectors: appState.sectorsData,
+      subSectors: ([...appState.sectorsData].map((sector: any) => sector.sub_sectors)).flat(),
+      locationTypes: EntityManager.getLocationTypes(),
+    };
   };
 
   const toggleFilters = (key: string) => {
     let searchFilters: any = { ...currentFilters };
 
-    if (!searchFilters?.[key]?.length || searchFilters?.[key]?.length < filtersConfig?.[key]?.length) {
-      //searchFilters[key] = filtersConfig[key].map((o: any) => o.id);
-      searchFilters[key] = [1,2,3];
+    if (!searchFilters?.[key]?.length || searchFilters[key].length < filtersConfig[key].length) {
+      searchFilters[key] = filtersConfig[key].map((o: any) => o.id);
     }
     else {
       searchFilters[key] = [];
@@ -68,7 +52,7 @@ const SearchFiltersForm = ({ }: Props) => {
     let searchFilters: any = { ...currentFilters };
 
     if (isFilterEnabled(key, value)) {
-      searchFilters[key] = (searchFilters?.[key] || []).filter((v: any) => v != value);
+      searchFilters[key] = searchFilters[key].filter((v: any) => v != value);
     }
     else {
       searchFilters[key] = [...(searchFilters?.[key] || []), value];
@@ -236,31 +220,6 @@ const SearchFiltersForm = ({ }: Props) => {
     );
   };
 
-  const renderFilter = (config: any) => {
-    return (
-      <View key={config.key}>
-        <TextView style={styles.filterTitle}>
-          {config?.label}
-        </TextView>
-        <BoxView
-          direction="row"
-          align="flex-start"
-          justify="flex-start"
-          style={styles.filterContainer}
-        >
-          {renderAllFiltersTag(config?.key)}
-          {(config?.data || []).map((row: any) => {
-            return (
-              <View key={row.id}>
-                {config.render(config.key, row)}
-              </View>
-            );
-          })}
-        </BoxView>
-      </View>
-    );
-  };
-
   useEffect(() => {
     if (!isLoaded) {
       setFiltersConfig(getFiltersConfig())
@@ -268,8 +227,6 @@ const SearchFiltersForm = ({ }: Props) => {
       setIsLoaded(true);
     }
   }, [searchState, isLoaded]);
-
-  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView
@@ -279,12 +236,11 @@ const SearchFiltersForm = ({ }: Props) => {
       style={[Layout.formContainer, styles.container]}
     >
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
-        {(filtersConfig || []).map((config: any) => renderFilter(config))}
-        {/* renderKeywordsFilter() */}
-        {/* renderCountriesFilter() */}
-        {/* renderSectorsFilter() */}
-        {/* !!currentFilters?.sectors?.length && renderSubSectorsFilter() */}
-        {/* renderLocationTypesFilter()*/}
+        {renderKeywordsFilter()}
+        {renderCountriesFilter()}
+        {renderSectorsFilter()}
+        {!!currentFilters?.sectors?.length && renderSubSectorsFilter()}
+        {renderLocationTypesFilter()}
       </BoxView>
 
       <DividerView theme="secondary" />
@@ -344,10 +300,10 @@ const styles = StyleSheet.create({
   },
   actionsContainer: {
     width: '100%',
-    marginBottom: Layout.space.base * 2,
+    marginBottom: Layout.space.base*2,
   },
   actionsButton: {
-    width: '42%',
+    width: '42%',  
   },
 });
 
