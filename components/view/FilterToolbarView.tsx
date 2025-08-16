@@ -33,6 +33,8 @@ const FilterToolbarView = () => {
 const styles = StyleSheet.create({
   searchFilters: {
     width: '100%',
+    backgroundColor: 'red',
+    padding: Layout.space.base,
   },
 });
 
