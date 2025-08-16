@@ -43,10 +43,8 @@ const SearchFiltersForm = ({ }: Props) => {
         key: 'countries',
         label: i18n.t('Countries'),
         data: appState.countriesData,
-        render: (row: any) => {
-          return <TextView>{row?.name}</TextView>
-          
-          //return (config.data || []).map((row: any) => renderFilterTag(config.key, row));
+        render: (key: string, row: any) => {
+          return renderFilterTag(key, row);
         },
       },
     ];
@@ -253,7 +251,7 @@ const SearchFiltersForm = ({ }: Props) => {
           {(config?.data || []).map((row: any) => {
             return (
               <View key={row.id}>
-                {config.render(row)}
+                {config.render(config.key, row)}
               </View>
             );
           })}
