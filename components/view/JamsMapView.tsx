@@ -7,6 +7,7 @@ import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
+import FilterToolbarView from "./FilterToolbarView";
 
 type Props = {
   idArray?: any;
@@ -89,6 +90,7 @@ const JamsMapView = ({ idArray }: Props) => {
   return (
     <TouchableWithoutFeedback>
       <View style={styles.container}>
+        <FilterToolbarView />
         <MapView
           ref={mapRef}
           style={styles.map}
