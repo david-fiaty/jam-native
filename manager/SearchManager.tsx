@@ -36,7 +36,7 @@ class SearchManager {
     let payload: any = {};
 
     if (searchValue?.length) {
-      payload = { query_text: searchValue};
+      payload = { query_text: searchValue };
     }
 
     const [jam, profile, project] = await Promise.all([
@@ -57,7 +57,13 @@ class SearchManager {
       if (searchFilters?.countries?.length) {
         searchResults.jam = searchResults.jam.filter((o: any) => {
           return searchFilters.countries.some((id: number) => o.countries.includes(id))
-        });  
+        });
+      }
+
+      if (searchFilters?.sectors?.length) {
+        searchResults.jam = searchResults.jam.filter((o: any) => {
+          return [...searchFilters.sectors, ...searchFilters.subSectors].some((id: number) => o.sectors.includes(id))
+        });
       }
     }
 
