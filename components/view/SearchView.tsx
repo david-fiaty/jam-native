@@ -97,6 +97,7 @@ const SearchView = () => {
         onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
       />
 
+      {/* Filter toolbar */}
       <FilterToolbarView />
 
       {/* Jams list */}
