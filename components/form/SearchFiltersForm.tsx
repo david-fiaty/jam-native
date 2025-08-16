@@ -25,14 +25,19 @@ const SearchFiltersForm = ({ }: Props) => {
   const [filtersConfig, setFiltersConfig] = useState<any>({});
   const appState = useSelector((state: any) => state.app);
   const searchState = useSelector((state: any) => state.search);
+  /*
+    const getFiltersConfig = () => {
+      return {
+        countries: appState.countriesData,
+        sectors: appState.sectorsData,
+        subSectors: ([...appState.sectorsData].map((sector: any) => sector.sub_sectors)).flat(),
+        locationTypes: EntityManager.getLocationTypes(),
+      };
+    };
+  */
 
   const getFiltersConfig = () => {
-    return {
-      countries: appState.countriesData,
-      sectors: appState.sectorsData,
-      subSectors: ([...appState.sectorsData].map((sector: any) => sector.sub_sectors)).flat(),
-      locationTypes: EntityManager.getLocationTypes(),
-    };
+    return [];
   };
 
   const toggleFilters = (key: string) => {
@@ -220,6 +225,25 @@ const SearchFiltersForm = ({ }: Props) => {
     );
   };
 
+  const renderFilter = (config: any) => {
+    return (
+      <>
+        <TextView style={styles.filterTitle}>
+          {config?.label}
+        </TextView>
+        <BoxView
+          direction="row"
+          align="flex-start"
+          justify="flex-start"
+          style={styles.filterContainer}
+        >
+          {renderAllFiltersTag(config?.key)}
+          {(config?.data || []).map((row: any) => config.render(row))}
+        </BoxView>
+      </>
+    );
+  };
+
   useEffect(() => {
     if (!isLoaded) {
       setFiltersConfig(getFiltersConfig())
@@ -236,11 +260,12 @@ const SearchFiltersForm = ({ }: Props) => {
       style={[Layout.formContainer, styles.container]}
     >
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
-        {renderKeywordsFilter()}
-        {renderCountriesFilter()}
-        {renderSectorsFilter()}
-        {!!currentFilters?.sectors?.length && renderSubSectorsFilter()}
-        {renderLocationTypesFilter()}
+        {(filtersConfig || []).map((config: any) => renderFilter(config))}
+        {/* renderKeywordsFilter() */}
+        {/* renderCountriesFilter() */}
+        {/* renderSectorsFilter() */}
+        {/* !!currentFilters?.sectors?.length && renderSubSectorsFilter() */}
+        {/* renderLocationTypesFilter()*/}
       </BoxView>
 
       <DividerView theme="secondary" />
@@ -300,10 +325,10 @@ const styles = StyleSheet.create({
   },
   actionsContainer: {
     width: '100%',
-    marginBottom: Layout.space.base*2,
+    marginBottom: Layout.space.base * 2,
   },
   actionsButton: {
-    width: '42%',  
+    width: '42%',
   },
 });
 
