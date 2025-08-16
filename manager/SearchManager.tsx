@@ -18,7 +18,6 @@ class SearchManager {
       }
       else {
         searchResults = await this.sendRequest() || {};
-        searchResults = this.applyFilters(searchResults, searchFilters);
         searchResults = JSON.stringify(searchResults);
         Store.dispatch(setCurrentResults(searchResults));
         Store.dispatch(setDefaultResults(searchResults));
@@ -55,8 +54,11 @@ class SearchManager {
 
   applyFilters(searchResults: any, searchFilters: any) {
     if (searchFilters) {
-      console.log('search filters', searchFilters)
-      //console.log('search results', searchResults)
+      if (searchFilters?.countries?.length) {
+        searchResults.jam = searchResults.jam.filter((o: any) => {
+          return searchFilters.countries.some((id: number) => o.countries.includes(id))
+        });  
+      }
     }
 
     return searchResults;
