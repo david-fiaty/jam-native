@@ -250,7 +250,13 @@ const SearchFiltersForm = ({ }: Props) => {
           style={styles.filterContainer}
         >
           {renderAllFiltersTag(config?.key)}
-          {(config?.data || []).map((row: any) => <View key={row.id}>{config.render(row)}</View>)}
+          {(config?.data || []).map((row: any) => {
+            return (
+              <View key={row.id}>
+                {config.render(row)}
+              </View>
+            );
+          })}
         </BoxView>
       </View>
     );
