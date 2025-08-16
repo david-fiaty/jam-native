@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
   tabContainer: {
     width: '100%',
     marginTop: Layout.space.base/2,
-    marginBottom: Layout.space.base/2,
   },
   tabItem: {
     paddingHorizontal: Layout.space.base,
