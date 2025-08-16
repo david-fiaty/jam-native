@@ -10,6 +10,7 @@ import InputTextField from '../field/InputTextField';
 import EntityManager from '@/manager/EntityManager';
 import ButtonView from '../view/ButtonView';
 import DividerView from '../view/DividerView';
+import SearchManager from '@/manager/SearchManager';
 
 type Props = {
 
@@ -18,6 +19,8 @@ type Props = {
 const SearchFiltersForm = ({ }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [isApplyProcessing, setIsApplyProcessing] = useState<boolean>(false);
+  const [isResetProcessing, setIsResetProcessing] = useState<boolean>(false);
   const [currentFilters, setCurrentFilters] = useState<any>({});
   const [filtersConfig, setFiltersConfig] = useState<any>({});
   const appState = useSelector((state: any) => state.app);
@@ -25,7 +28,7 @@ const SearchFiltersForm = ({ }: Props) => {
 
   const getFiltersConfig = () => {
     return {
-      countries: appState.countriesData,
+      countries: appState.countriesData.map((o: any) => { return {id: o.code, name: o.name }}),
       sectors: appState.sectorsData,
       subSectors: ([...appState.sectorsData].map((sector: any) => sector.sub_sectors)).flat(),
       locationTypes: EntityManager.getLocationTypes(),
@@ -62,8 +65,19 @@ const SearchFiltersForm = ({ }: Props) => {
     return Array.isArray(currentFilters?.[key]) && currentFilters[key].includes(value);
   };
 
-  const applyFilters = () => {
+  const applyFilters = async () => {
+    setIsApplyProcessing(true);
     dispatch(setSearchFilters(currentFilters));
+    await SearchManager.loadResults(searchState.searchValue, currentFilters);
+    setIsApplyProcessing(false);
+  };
+
+  const resetFilters = async () => {
+    setIsResetProcessing(true);
+    setCurrentFilters({});
+    dispatch(setSearchFilters({}));
+    await SearchManager.loadResults(searchState.searchValue);
+    setIsResetProcessing(false);
   };
 
   const renderAllFiltersTag = (key: string) => {
@@ -200,7 +214,7 @@ const SearchFiltersForm = ({ }: Props) => {
           style={styles.filterContainer}
         >
           {renderAllFiltersTag(key)}
-          {(filtersConfig.jamTypes || []).map((item: any) => renderFilterTag(key, item))}
+          {(filtersConfig.locationTypes || []).map((item: any) => renderFilterTag(key, item))}
         </BoxView>
       </>
     );
@@ -214,8 +228,6 @@ const SearchFiltersForm = ({ }: Props) => {
     }
   }, [searchState, isLoaded]);
 
-  console.log(currentFilters);
-
   return (
     <BoxView
       align="flex-start"
@@ -224,7 +236,7 @@ const SearchFiltersForm = ({ }: Props) => {
       style={[Layout.formContainer, styles.container]}
     >
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
-        {/* renderKeywordsFilter() */}
+        {renderKeywordsFilter()}
         {renderCountriesFilter()}
         {renderSectorsFilter()}
         {!!currentFilters?.sectors?.length && renderSubSectorsFilter()}
@@ -238,11 +250,15 @@ const SearchFiltersForm = ({ }: Props) => {
           label={i18n.t("Reset")}
           containerStyle={styles.actionsButton}
           theme="gray"
+          onPress={resetFilters}
+          isProcessing={isResetProcessing}
         />
 
         <ButtonView
           label={i18n.t("Apply")}
           containerStyle={styles.actionsButton}
+          onPress={applyFilters}
+          isProcessing={isApplyProcessing}
         />
       </BoxView>
     </BoxView>
