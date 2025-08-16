@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { TouchableOpacity } from "react-native";
 import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentTab, setSearchFilters } from "@/redux/slices/SearchSlice";
+import { setCurrentTab } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
 import SearchJamsList from "../list/SearchJamsList";
 import SearchProfilesList from "../list/SearchProfilesList";
@@ -10,9 +9,6 @@ import SearchProjectsList from "../list/SearchProjectsList";
 import TabsView from "./TabsView";
 import BoxView from "./BoxView";
 import i18n from "@/translation/i18n";
-import TextView from "./TextView";
-import IconView from "./IconView";
-import SectionManager from "@/manager/SectionManager";
 import SpinnerView from "./SpinnerView";
 import FilterToolbarView from "./FilterToolbarView";
 
