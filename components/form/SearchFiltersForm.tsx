@@ -288,14 +288,14 @@ const styles = StyleSheet.create({
     backgroundColor: Layout.colors.gray,
     color: Layout.colors.primary,
     borderRadius: Layout.radius.round,
-    paddingVertical: Layout.space.base,
+    paddingVertical: Layout.space.base/1.5,
     paddingHorizontal: Layout.space.base,
   },
   filterTagEnabled: {
     backgroundColor: Layout.colors.primary,
     color: Layout.colors.white,
     borderRadius: Layout.radius.round,
-    paddingVertical: Layout.space.base,
+    paddingVertical: Layout.space.base/1.5,
     paddingHorizontal: Layout.space.base,
   },
   actionsContainer: {
