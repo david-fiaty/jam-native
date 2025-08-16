@@ -68,6 +68,16 @@ const JamsMapView = ({ idArray }: Props) => {
     return null;
   };
 
+  const getListData = () => {
+    let data: any [] = JSON.parse(searchState.currentResults)?.jam || [];
+
+    if (idArray?.length > 0) {
+      data = data.filter((o: any) => idArray.includes(o.id));
+    }
+
+    return data;
+  };
+
   useEffect(() => {
     (async () => {
       setCurrentLocation(await UserManager.getLocation());
@@ -88,7 +98,7 @@ const JamsMapView = ({ idArray }: Props) => {
           showsUserLocation={true}
           showsMyLocationButton={true}
         >
-          {(JSON.parse(searchState.currentResults) || [])?.jam?.map((item: any) => renderJamMarker(item))}
+          {getListData().map((item: any) => renderJamMarker(item))}
         </MapView>
       </View>
     </TouchableWithoutFeedback>
