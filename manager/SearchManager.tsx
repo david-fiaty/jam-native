@@ -56,13 +56,19 @@ class SearchManager {
     if (searchFilters) {
       if (searchFilters?.countries?.length) {
         searchResults.jam = searchResults.jam.filter((o: any) => {
-          return searchFilters.countries.some((id: number) => o.countries.includes(id));
+          return searchFilters.countries.some((id: any) => o.countries.includes(id));
         });
       }
 
       if (searchFilters?.sectors?.length) {
         searchResults.jam = searchResults.jam.filter((o: any) => {
           return [...searchFilters.sectors, ...(searchFilters.subSectors || [])].some((id: number) => o.sectors.includes(id));
+        });
+      }
+
+      if (searchFilters?.locationTypes?.length) {
+        searchResults.jam = searchResults.jam.filter((o: any) => {
+          return searchFilters.locationTypes.some((id: any) => o.location_type.includes(id));
         });
       }
     }
