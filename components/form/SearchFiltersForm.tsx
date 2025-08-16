@@ -28,7 +28,7 @@ const SearchFiltersForm = ({ }: Props) => {
 
   const getFiltersConfig = () => {
     return {
-      countries: appState.countriesData,
+      countries: appState.countriesData.map((o: any) => { return {id: o.code, name: o.name }}),
       sectors: appState.sectorsData,
       subSectors: ([...appState.sectorsData].map((sector: any) => sector.sub_sectors)).flat(),
       locationTypes: EntityManager.getLocationTypes(),
@@ -228,8 +228,6 @@ const SearchFiltersForm = ({ }: Props) => {
     }
   }, [searchState, isLoaded]);
 
-  console.log(currentFilters);
-
   return (
     <BoxView
       align="flex-start"
@@ -238,7 +236,7 @@ const SearchFiltersForm = ({ }: Props) => {
       style={[Layout.formContainer, styles.container]}
     >
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
-        {/* renderKeywordsFilter() */}
+        {renderKeywordsFilter()}
         {renderCountriesFilter()}
         {renderSectorsFilter()}
         {!!currentFilters?.sectors?.length && renderSubSectorsFilter()}

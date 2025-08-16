@@ -3,26 +3,32 @@ import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 
 class SearchManager {
-  async loadResults(searchValue?: any, filters?: string) {
+  async loadResults(searchValue?: any, searchFilters?: any) {
     let searchState: any = Store.getState().search;
+    let searchResults: any = {};
 
     if (!searchValue?.length) {
       Store.dispatch(setSearchValue(''));
       let defaultResults: any = JSON.parse(searchState.defaultResults);
 
       if (Object.keys(defaultResults).length > 0) {
-        Store.dispatch(setCurrentResults(searchState.defaultResults));
+        searchResults = this.applyFilters(defaultResults, searchFilters);
+        searchResults = JSON.stringify(searchResults);
+        Store.dispatch(setCurrentResults(searchResults));
       }
       else {
-        let results: any = JSON.stringify(await this.sendRequest() || {});
-        Store.dispatch(setCurrentResults(results));
-        Store.dispatch(setDefaultResults(results));
+        searchResults = await this.sendRequest() || {};
+        searchResults = JSON.stringify(searchResults);
+        Store.dispatch(setCurrentResults(searchResults));
+        Store.dispatch(setDefaultResults(searchResults));
       }
     }
     else {
       Store.dispatch(setSearchValue(searchValue));
-      let results: any = JSON.stringify(await this.sendRequest(searchValue) || {});
-      Store.dispatch(setCurrentResults(results));
+      searchResults = await this.sendRequest(searchValue) || {};
+      searchResults = this.applyFilters(searchResults, searchFilters);
+      searchResults = JSON.stringify(searchResults);
+      Store.dispatch(setCurrentResults(searchResults));
     }
   }
 
@@ -44,6 +50,18 @@ class SearchManager {
       profile: profile || [],
       project: project || [],
     };
+  }
+
+  applyFilters(searchResults: any, searchFilters: any) {
+    if (searchFilters) {
+      if (searchFilters?.countries?.length) {
+        searchResults.jam = searchResults.jam.filter((o: any) => {
+          return searchFilters.countries.some((id: number) => o.countries.includes(id))
+        });  
+      }
+    }
+
+    return searchResults;
   }
 };
 
