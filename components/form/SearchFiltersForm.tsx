@@ -228,8 +228,6 @@ const SearchFiltersForm = ({ }: Props) => {
     }
   }, [searchState, isLoaded]);
 
-  console.log(currentFilters);
-
   return (
     <BoxView
       align="flex-start"
