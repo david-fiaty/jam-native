@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentTab, setSearchFilters } from "@/redux/slices/SearchSlice";
@@ -14,6 +14,7 @@ import TextView from "./TextView";
 import IconView from "./IconView";
 import SectionManager from "@/manager/SectionManager";
 import SpinnerView from "./SpinnerView";
+import FilterToolbarView from "./FilterToolbarView";
 
 const SearchView = () => {
   const router = useRouter();
@@ -96,21 +97,7 @@ const SearchView = () => {
         onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
       />
 
-      <BoxView
-        direction="row"
-        align="center"
-        justify="space-between"
-        style={styles.searchFilters}
-      >
-        <TextView>{i18n.t('Filtered results')}</TextView>
-        <IconView
-          name="filter"
-          theme="transparent"
-          padding={0}
-          size={16}
-          onPress={() => SectionManager.push(router, 'search-filters')}
-        />
-      </BoxView>
+      <FilterToolbarView />
 
       {/* Jams list */}
       {['jam', 'looking', 'call', 'event'].includes(searchState.currentTab) && (
@@ -138,11 +125,5 @@ const SearchView = () => {
     </BoxView>
   );
 };
-
-const styles = StyleSheet.create({
-  searchFilters: {
-    width: '100%',
-  },
-});
 
 export default SearchView;
