@@ -23,6 +23,7 @@ const SearchFiltersForm = ({ }: Props) => {
   const [isApplyProcessing, setIsApplyProcessing] = useState<boolean>(false);
   const [isResetProcessing, setIsResetProcessing] = useState<boolean>(false);
   const [currentFilters, setCurrentFilters] = useState<any>({});
+  const [currentKeywords, setCurrentKeywords] = useState<string>('');
   const [filtersConfig, setFiltersConfig] = useState<any>({});
   const appState = useSelector((state: any) => state.app);
   const searchState = useSelector((state: any) => state.search);
@@ -68,8 +69,9 @@ const SearchFiltersForm = ({ }: Props) => {
 
   const applyFilters = async () => {
     setIsApplyProcessing(true);
+    dispatch(setSearchValue(currentKeywords));
     dispatch(setSearchFilters(currentFilters));
-    await SearchManager.loadResults(searchState.searchValue, currentFilters);
+    await SearchManager.loadResults(currentKeywords, currentFilters);
     setIsApplyProcessing(false);
   };
 
@@ -78,16 +80,16 @@ const SearchFiltersForm = ({ }: Props) => {
     setCurrentFilters({});
     dispatch(setSearchValue(''));
     dispatch(setSearchFilters({}));
-    await SearchManager.loadResults(searchState.searchValue);
+    await SearchManager.loadResults();
     setIsResetProcessing(false);
   };
 
   const onKeywordsChange = async (value: string) => {
-    dispatch(setSearchValue(value));
+    setCurrentKeywords(value);
   };
 
   const clearKeywords = async () => {
-    dispatch(setSearchValue(''));
+    setCurrentKeywords('');
   };
 
   const renderAllFiltersTag = (key: string) => {
@@ -121,7 +123,7 @@ const SearchFiltersForm = ({ }: Props) => {
 
   const renderKeywordsFilter = () => {
     let rightIcon: any = () => {
-      if (searchState.searchValue.length > 0) {
+      if (currentKeywords?.length > 0) {
         return (
           <IconView
             name="delete"
@@ -148,7 +150,7 @@ const SearchFiltersForm = ({ }: Props) => {
           <InputTextField
             placeholder={i18n.t('Search keywords...')}
             onChangeText={onKeywordsChange}
-            value={searchState.searchValue}
+            value={currentKeywords}
             rightIcon={rightIcon()}
           />
         </BoxView>
@@ -248,6 +250,7 @@ const SearchFiltersForm = ({ }: Props) => {
   useEffect(() => {
     if (!isLoaded) {
       setFiltersConfig(getFiltersConfig())
+      setCurrentKeywords(searchState.searchValue);
       setCurrentFilters(searchState.searchFilters);
       setIsLoaded(true);
     }
