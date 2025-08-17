@@ -78,7 +78,7 @@ const SearchFiltersForm = ({ }: Props) => {
   const resetFilters = async () => {
     setIsResetProcessing(true);
     setCurrentFilters({});
-    dispatch(setSearchValue(''));
+    setCurrentKeywords('');
     dispatch(setSearchFilters({}));
     await SearchManager.loadResults();
     setIsResetProcessing(false);
