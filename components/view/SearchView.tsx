@@ -67,6 +67,12 @@ const SearchView = () => {
     },
   ];
 
+  const getListData = () => {
+    let data: any = JSON.parse(searchState.currentResults) || {};
+
+    return data;
+  };
+
   useEffect(() => {
     if (!isLoaded) {
       if (!searchState.currentTab) {
@@ -99,7 +105,7 @@ const SearchView = () => {
       {/* Jams list */}
       {['jam', 'looking', 'call', 'event'].includes(searchState.currentTab) && (
         <SearchJamsList
-          data={(JSON.parse(searchState.currentResults) || [])?.jam}
+          data={getListData()?.jam || []}
           filter={searchState.currentTab}
         />
       )}
@@ -107,7 +113,7 @@ const SearchView = () => {
       {/* Jammers list */}
       {['jammer', 'venue', 'organization', 'personal'].includes(searchState.currentTab) &&
         <SearchProfilesList
-          data={(JSON.parse(searchState.currentResults) || [])?.profile}
+          data={getListData()?.profile || []}
           filter={searchState.currentTab}
         />
       }
@@ -115,7 +121,7 @@ const SearchView = () => {
       {/* Projects list */}
       {['project'].includes(searchState.currentTab) &&
         <SearchProjectsList
-          data={(JSON.parse(searchState.currentResults) || [])?.project}
+          data={getListData()?.project || []}
           filter={searchState.currentTab}
         />
       }
