@@ -56,7 +56,7 @@ const SectionFooter = ({ style }: Props) => {
         size={16}
         padding={4}
         theme={getIconTheme('SearchView')}
-        onPress={() => isLoggedIn ? ModalManager.toggleModal('SearchView') : SectionManager.push(router, 'login')}
+        onPress={() => isLoggedIn ? SectionManager.push(router, 'private-profile') : SectionManager.push(router, 'login')}
       />
     </BoxView>
   );
