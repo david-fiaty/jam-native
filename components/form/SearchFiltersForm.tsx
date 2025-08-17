@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { setSearchFilters } from '@/redux/slices/SearchSlice';
+import { setSearchFilters, setSearchValue } from '@/redux/slices/SearchSlice';
 import { useSelector, useDispatch } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
@@ -11,6 +11,7 @@ import EntityManager from '@/manager/EntityManager';
 import ButtonView from '../view/ButtonView';
 import DividerView from '../view/DividerView';
 import SearchManager from '@/manager/SearchManager';
+import IconView from '../view/IconView';
 
 type Props = {
 
@@ -28,7 +29,7 @@ const SearchFiltersForm = ({ }: Props) => {
 
   const getFiltersConfig = () => {
     return {
-      countries: appState.countriesData.map((o: any) => { return {id: o.code, name: o.name }}),
+      countries: appState.countriesData.map((o: any) => { return { id: o.code, name: o.name } }),
       sectors: appState.sectorsData,
       subSectors: ([...appState.sectorsData].map((sector: any) => sector.sub_sectors)).flat(),
       locationTypes: EntityManager.getLocationTypes(),
@@ -80,6 +81,14 @@ const SearchFiltersForm = ({ }: Props) => {
     setIsResetProcessing(false);
   };
 
+  const onKeywordsChange = async (value: string) => {
+    dispatch(setSearchValue(value));
+  };
+
+  const clearKeywords = async () => {
+    dispatch(setSearchValue(''));
+  };
+
   const renderAllFiltersTag = (key: string) => {
     let isEnabled: boolean = currentFilters?.[key]?.length === filtersConfig?.[key]?.length;
 
@@ -125,6 +134,19 @@ const SearchFiltersForm = ({ }: Props) => {
         >
           <InputTextField
             placeholder={i18n.t('Search keywords...')}
+            onChangeText={onKeywordsChange}
+            value={searchState.searchValue}
+            rightIcon={
+              searchState.searchValue.length > 0 && (
+                <IconView
+                  name="delete"
+                  theme="secondary"
+                  size={18}
+                  padding={0}
+                  onPress={clearKeywords}
+                />
+              )
+            }
           />
         </BoxView>
       </>
@@ -278,8 +300,8 @@ const styles = StyleSheet.create({
   filterContainer: {
     width: '100%',
     flexWrap: 'wrap',
-    gap: Layout.space.base/1.2,
-    marginBottom: Layout.space.base*1.2,
+    gap: Layout.space.base / 1.2,
+    marginBottom: Layout.space.base * 1.2,
   },
   filterTitle: {
     color: Layout.colors.black,
@@ -289,22 +311,22 @@ const styles = StyleSheet.create({
     backgroundColor: Layout.colors.gray,
     color: Layout.colors.primary,
     borderRadius: Layout.radius.round,
-    paddingVertical: Layout.space.base/1.5,
+    paddingVertical: Layout.space.base / 1.5,
     paddingHorizontal: Layout.space.base,
   },
   filterTagEnabled: {
     backgroundColor: Layout.colors.primary,
     color: Layout.colors.white,
     borderRadius: Layout.radius.round,
-    paddingVertical: Layout.space.base/1.5,
+    paddingVertical: Layout.space.base / 1.5,
     paddingHorizontal: Layout.space.base,
   },
   actionsContainer: {
     width: '100%',
-    marginBottom: Layout.space.base*2,
+    marginBottom: Layout.space.base * 2,
   },
   actionsButton: {
-    width: '42%',  
+    width: '42%',
   },
 });
 
