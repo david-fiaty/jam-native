@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
   searchFilters: {
     width: '100%',
     backgroundColor: Layout.colors.secondary,
+    borderRadius: Layout.radius.round,
     padding: Layout.space.base,
   },
 });
