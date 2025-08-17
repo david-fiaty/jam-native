@@ -38,7 +38,7 @@ class SearchManager {
     if (searchValue?.length) {
       payload = { 
         query_text: searchValue, 
-        query_title: searchValue 
+        query_title: searchValue,
       };
     }
 
