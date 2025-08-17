@@ -17,7 +17,7 @@ const FilterToolbarView = () => {
       let resultsCount: number = JSON.parse(searchState.currentResults)?.jam?.length;
       
       return (
-        <TextView>{resultsCount}</TextView>
+        <TextView>({resultsCount})</TextView>
       );
     }
   };
@@ -30,7 +30,7 @@ const FilterToolbarView = () => {
         justify="space-between"
         style={styles.searchFilters}
       >
-        <TextView>{i18n.t('Filter results')} ({renderResultsCount()})</TextView>
+        <TextView>{i18n.t('Filter results')} {renderResultsCount()}</TextView>
         <IconView
           name="filter"
           theme="transparent"
