@@ -53,7 +53,7 @@ const SectionHeader = ({ style }: Props) => {
           theme="clear"
           size={22}
           padding={0}
-          onPress={() => ModalManager.toggleModal('SearchView')}
+          onPress={() => SectionManager.push(router, 'search')}
         />
 
         {!isLoggedIn && (
