@@ -110,6 +110,7 @@ const JamsMapView = ({ idArray }: Props) => {
 const styles = StyleSheet.create({
   container: {
     padding: 0,
+    gap: Layout.space.base,
     width: '100%',
     flexGrow: 1,
     backgroundColor: Layout.colors.white,

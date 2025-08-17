@@ -6,6 +6,7 @@ import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
 import JamView from "../view/JamView";
+import FilterToolbarView from "../view/FilterToolbarView";
 
 type Props = {
   idArray?: any;
@@ -50,6 +51,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
       direction="column"
       style={styles.container}
     >
+      <FilterToolbarView />
       <ListView
         data={getListData()}
         contentContainerStyle={Layout.listContainer}
