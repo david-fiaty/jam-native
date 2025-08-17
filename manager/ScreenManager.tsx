@@ -1,4 +1,5 @@
 import { Dimensions, ScaledSize, StatusBar, Platform } from 'react-native';
+import { setActiveModals } from '@/redux/slices/ModalSlice';
 import { Layout } from '@/constants/Layout';
 import { setMessage } from '@/redux/slices/MessageSlice';
 import { Config } from '@/constants/Config';
@@ -42,7 +43,7 @@ class ScreenManager {
       activeModals.splice(modalIndex, 1);
     }
 
-    Store.dispatch(setActiveModal(activeModals));
+    Store.dispatch(setActiveModals(activeModals));
   }
 
   getActiveModal(): any {
