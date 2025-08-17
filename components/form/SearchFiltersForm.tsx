@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { setSearchFilters } from '@/redux/slices/SearchSlice';
+import { setSearchFilters, setSearchValue } from '@/redux/slices/SearchSlice';
 import { useSelector, useDispatch } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
@@ -11,6 +11,7 @@ import EntityManager from '@/manager/EntityManager';
 import ButtonView from '../view/ButtonView';
 import DividerView from '../view/DividerView';
 import SearchManager from '@/manager/SearchManager';
+import IconView from '../view/IconView';
 
 type Props = {
 
@@ -22,13 +23,14 @@ const SearchFiltersForm = ({ }: Props) => {
   const [isApplyProcessing, setIsApplyProcessing] = useState<boolean>(false);
   const [isResetProcessing, setIsResetProcessing] = useState<boolean>(false);
   const [currentFilters, setCurrentFilters] = useState<any>({});
+  const [currentKeywords, setCurrentKeywords] = useState<string>('');
   const [filtersConfig, setFiltersConfig] = useState<any>({});
   const appState = useSelector((state: any) => state.app);
   const searchState = useSelector((state: any) => state.search);
 
   const getFiltersConfig = () => {
     return {
-      countries: appState.countriesData.map((o: any) => { return {id: o.code, name: o.name }}),
+      countries: appState.countriesData.map((o: any) => { return { id: o.code, name: o.name } }),
       sectors: appState.sectorsData,
       subSectors: ([...appState.sectorsData].map((sector: any) => sector.sub_sectors)).flat(),
       locationTypes: EntityManager.getLocationTypes(),
@@ -67,17 +69,27 @@ const SearchFiltersForm = ({ }: Props) => {
 
   const applyFilters = async () => {
     setIsApplyProcessing(true);
+    dispatch(setSearchValue(currentKeywords));
     dispatch(setSearchFilters(currentFilters));
-    await SearchManager.loadResults(searchState.searchValue, currentFilters);
+    await SearchManager.loadResults(currentKeywords, currentFilters);
     setIsApplyProcessing(false);
   };
 
   const resetFilters = async () => {
     setIsResetProcessing(true);
     setCurrentFilters({});
+    setCurrentKeywords('');
     dispatch(setSearchFilters({}));
-    await SearchManager.loadResults(searchState.searchValue);
+    await SearchManager.loadResults();
     setIsResetProcessing(false);
+  };
+
+  const onKeywordsChange = async (value: string) => {
+    setCurrentKeywords(value);
+  };
+
+  const clearKeywords = async () => {
+    setCurrentKeywords('');
   };
 
   const renderAllFiltersTag = (key: string) => {
@@ -110,7 +122,19 @@ const SearchFiltersForm = ({ }: Props) => {
   };
 
   const renderKeywordsFilter = () => {
-    let key: string = 'keywords';
+    let rightIcon: any = () => {
+      if (currentKeywords?.length > 0) {
+        return (
+          <IconView
+            name="delete"
+            theme="secondary"
+            size={18}
+            padding={0}
+            onPress={clearKeywords}
+          />
+        );
+      }
+    }
 
     return (
       <>
@@ -125,6 +149,9 @@ const SearchFiltersForm = ({ }: Props) => {
         >
           <InputTextField
             placeholder={i18n.t('Search keywords...')}
+            onChangeText={onKeywordsChange}
+            value={currentKeywords}
+            rightIcon={rightIcon()}
           />
         </BoxView>
       </>
@@ -223,6 +250,7 @@ const SearchFiltersForm = ({ }: Props) => {
   useEffect(() => {
     if (!isLoaded) {
       setFiltersConfig(getFiltersConfig())
+      setCurrentKeywords(searchState.searchValue);
       setCurrentFilters(searchState.searchFilters);
       setIsLoaded(true);
     }
@@ -278,8 +306,8 @@ const styles = StyleSheet.create({
   filterContainer: {
     width: '100%',
     flexWrap: 'wrap',
-    gap: Layout.space.base/1.2,
-    marginBottom: Layout.space.base*1.2,
+    gap: Layout.space.base / 1.2,
+    marginBottom: Layout.space.base * 1.2,
   },
   filterTitle: {
     color: Layout.colors.black,
@@ -289,22 +317,22 @@ const styles = StyleSheet.create({
     backgroundColor: Layout.colors.gray,
     color: Layout.colors.primary,
     borderRadius: Layout.radius.round,
-    paddingVertical: Layout.space.base/1.5,
+    paddingVertical: Layout.space.base / 1.5,
     paddingHorizontal: Layout.space.base,
   },
   filterTagEnabled: {
     backgroundColor: Layout.colors.primary,
     color: Layout.colors.white,
     borderRadius: Layout.radius.round,
-    paddingVertical: Layout.space.base/1.5,
+    paddingVertical: Layout.space.base / 1.5,
     paddingHorizontal: Layout.space.base,
   },
   actionsContainer: {
     width: '100%',
-    marginBottom: Layout.space.base*2,
+    marginBottom: Layout.space.base * 2,
   },
   actionsButton: {
-    width: '42%',  
+    width: '42%',
   },
 });
 

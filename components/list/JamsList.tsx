@@ -6,6 +6,7 @@ import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
 import JamView from "../view/JamView";
+import FilterToolbarView from "../view/FilterToolbarView";
 
 type Props = {
   idArray?: any;
@@ -35,27 +36,6 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
     return data;
   };
 
-  /*
-  const loadSearchData = () => {
-    let data: any[] = SearchManager.getResults()?.jam || [];
-
-    if (Config.infiniteScrollEnabled === true && disableInfiniteScroll !== true) {
-      setSearchData(prevData => [...prevData, ...data]);
-    }
-    else {
-      setSearchData(data); 
-    }
-  };
-  */
-
-  /*
-  const onEndReached = async () => {
-    if (Config.infiniteScrollEnabled === true && disableInfiniteScroll !== true) {
-      await loadSearchData();
-    }
-  };
-  */
-
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
@@ -71,6 +51,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
       direction="column"
       style={styles.container}
     >
+      <FilterToolbarView />
       <ListView
         data={getListData()}
         contentContainerStyle={Layout.listContainer}
