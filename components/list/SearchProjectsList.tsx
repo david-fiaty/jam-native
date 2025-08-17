@@ -59,6 +59,7 @@ const SearchProjectsList = ({ data, filter }: Props) => {
         numColumns={numColumns}
         contentContainerStyle={{ gap: Layout.space.base }}
         columnWrapperStyle={{ gap: Layout.space.base }}
+        emptyMessage={<TextView>{i18n.t('No results available')}</TextView>}
         renderItem={(row: any) => renderItem(row)}
       />
     </BoxView>
