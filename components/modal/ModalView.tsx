@@ -184,7 +184,7 @@ const ModalView = ({ currentSection, style }: Props) => {
         render: (params: any) => <SelectJamsForm {...params} />,
       },
       {
-        id: '',
+        id: 'PrivateProfileSection',
         title: i18n.t('Your profile'),
         render: (params: any) => <PrivateProfileSection {...params} />,
       },
