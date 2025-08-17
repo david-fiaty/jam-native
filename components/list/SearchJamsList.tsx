@@ -8,6 +8,8 @@ import SectionManager from "@/manager/SectionManager";
 import BoxView from "../view/BoxView";
 import ScreenManager from "@/manager/ScreenManager";
 import MediaManager from "@/manager/MediaManager";
+import i18n from "@/translation/i18n";
+import TextView from "../view/TextView";
 
 type Props = {
   data?: any;
@@ -49,8 +51,10 @@ const SearchJamsList = ({ data, filter }: Props) => {
   };
 
   useEffect(() => {
-    if (filter && filter != 'jam') setCurrentData(data.filter((o: any) => o.type == filter))
-    else setCurrentData(data);
+    //if (filter && filter != 'jam') setCurrentData(data.filter((o: any) => o.type == filter))
+    //else setCurrentData(data);
+
+    setCurrentData([]);
 
     if (!isLoaded) setIsLoaded(true);
   }, [isLoaded, data, filter]);
@@ -70,6 +74,7 @@ const SearchJamsList = ({ data, filter }: Props) => {
         numColumns={numColumns}
         contentContainerStyle={{ gap: Layout.space.base }}
         columnWrapperStyle={{ gap: Layout.space.base }}
+        emptyMessage={<TextView>{i18n.t('No results available')}</TextView>}
         renderItem={(row: any) => renderItem(row)}
       />
     </BoxView>
