@@ -105,7 +105,7 @@ const SearchView = () => {
       {/* Jams list */}
       {['jam', 'looking', 'call', 'event'].includes(searchState.currentTab) && (
         <SearchJamsList
-          data={getListData()?.jam || []}
+          data={getListData()?.jam}
           filter={searchState.currentTab}
         />
       )}
@@ -113,7 +113,7 @@ const SearchView = () => {
       {/* Jammers list */}
       {['jammer', 'venue', 'organization', 'personal'].includes(searchState.currentTab) &&
         <SearchProfilesList
-          data={getListData()?.profile || []}
+          data={getListData()?.profile}
           filter={searchState.currentTab}
         />
       }
@@ -121,7 +121,7 @@ const SearchView = () => {
       {/* Projects list */}
       {['project'].includes(searchState.currentTab) &&
         <SearchProjectsList
-          data={getListData()?.project || []}
+          data={getListData()?.project}
           filter={searchState.currentTab}
         />
       }
