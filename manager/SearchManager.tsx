@@ -36,7 +36,7 @@ class SearchManager {
     let payload: any = {};
 
     if (searchValue?.length) {
-      payload = { query_text: searchValue };
+      payload = { query_text: searchValue, query_title: searchValue };
     }
 
     const [jam, profile, project] = await Promise.all([
