@@ -48,7 +48,12 @@ const SectionHeader = ({ style }: Props) => {
       </BoxView>
 
       <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>
-        <SearchField />
+        <IconView
+          name="search"
+          size={14}
+          padding={6}
+          onPress={() => SectionManager.push(router, 'login')}
+        />
 
         {!isLoggedIn && (
           <IconView
