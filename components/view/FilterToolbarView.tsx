@@ -1,5 +1,6 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useSelector } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import IconView from './IconView';
 import BoxView from './BoxView';
@@ -9,6 +10,17 @@ import i18n from '@/translation/i18n';
 
 const FilterToolbarView = () => {
   const router = useRouter();
+  const searchState: any = useSelector((state: any) => state.search);
+
+  const renderResultsCount = () => {
+    if (Object.keys(searchState.searchFilters).length > 0 || searchState.searchValue.length > 0) {
+      let resultsCount: number = JSON.parse(searchState.currentResults)?.jam?.length;
+      
+      return (
+        <TextView>{resultsCount}</TextView>
+      );
+    }
+  };
 
   return (
     <TouchableOpacity onPress={() => SectionManager.push(router, 'search-filters')}>
@@ -18,7 +30,7 @@ const FilterToolbarView = () => {
         justify="space-between"
         style={styles.searchFilters}
       >
-        <TextView>{i18n.t('Filter results')}</TextView>
+        <TextView>{i18n.t('Filter results')} ({renderResultsCount()})</TextView>
         <IconView
           name="filter"
           theme="transparent"
