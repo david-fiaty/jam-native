@@ -48,7 +48,13 @@ const SectionHeader = ({ style }: Props) => {
       </BoxView>
 
       <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>
-        <SearchField />
+        <IconView
+          name="search"
+          theme="clear"
+          size={22}
+          padding={0}
+          onPress={() => ModalManager.toggleModal('SearchView')}
+        />
 
         {!isLoggedIn && (
           <IconView
