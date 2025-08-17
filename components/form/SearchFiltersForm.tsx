@@ -120,6 +120,19 @@ const SearchFiltersForm = ({ }: Props) => {
 
   const renderKeywordsFilter = () => {
     let key: string = 'keywords';
+    let rightIcon: any = () => {
+      if (searchState.searchValue.length > 0) {
+        return (
+          <IconView
+            name="delete"
+            theme="secondary"
+            size={18}
+            padding={0}
+            onPress={clearKeywords}
+          />
+        );
+      }
+    }
 
     return (
       <>
@@ -136,17 +149,7 @@ const SearchFiltersForm = ({ }: Props) => {
             placeholder={i18n.t('Search keywords...')}
             onChangeText={onKeywordsChange}
             value={searchState.searchValue}
-            rightIcon={
-              searchState.searchValue.length > 0 && (
-                <IconView
-                  name="delete"
-                  theme="secondary"
-                  size={18}
-                  padding={0}
-                  onPress={clearKeywords}
-                />
-              )
-            }
+            rightIcon={rightIcon()}
           />
         </BoxView>
       </>
