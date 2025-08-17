@@ -20,6 +20,7 @@ import SelectJamsForm from '../form/SelectJamsForm';
 import JamCommentsList from '../list/JamCommentsList';
 import ProjectCommentsList from '../list/ProjectCommentsList';
 import VenueTypesList from '../list/VenueTypesList';
+import PrivateProfileSection from '../section/profile/PrivateProfileSection';
 
 type Props = {
   currentSection?: any;
@@ -181,6 +182,11 @@ const ModalView = ({ currentSection, style }: Props) => {
         id: 'SelectJamsForm',
         title: i18n.t('Select project Jams'),
         render: (params: any) => <SelectJamsForm {...params} />,
+      },
+      {
+        id: '',
+        title: i18n.t('Your profile'),
+        render: (params: any) => <PrivateProfileSection {...params} />,
       },
     ].map((o: any) => {
       return {
