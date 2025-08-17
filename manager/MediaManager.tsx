@@ -25,9 +25,11 @@ class MediaManager {
     return Uint8Array.from(atob(base64data), (char) => char.charCodeAt(0));
   }
 
-  getThumbnailSize() {
+  getThumbnailSize(numColumns?: number) {
+    numColumns = numColumns || 3; 
     let windowWidth: any = ScreenManager.window.width;
-    let imageDim: number = windowWidth / 3 - Layout.space.base * 1.7;
+    let factor: number = numColumns === 2 ? numColumns : 1.7;
+    let imageDim: number = windowWidth / numColumns - (Layout.space.base * factor);
 
     return {
       width: imageDim,
