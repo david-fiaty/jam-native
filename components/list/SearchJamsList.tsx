@@ -16,13 +16,13 @@ type Props = {
   filter?: any;
 };
 
-const numColumns = 3;
+const numColumns = 2;
 
 const SearchJamsList = ({ data, filter }: Props) => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [currentData, setCurrentData] = useState<any[]>([]);
-  const imageSize = MediaManager.getThumbnailSize();
+  const imageSize = MediaManager.getThumbnailSize(numColumns);
 
   const onItemPress = (row: any) => {
     SectionManager.push(router, 'public-jam', {
