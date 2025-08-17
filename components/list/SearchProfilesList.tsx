@@ -9,6 +9,7 @@ import SectionManager from "@/manager/SectionManager";
 import BoxView from "../view/BoxView";
 import ScreenManager from "@/manager/ScreenManager";
 import UserManager from "@/manager/UserManager";
+import TextView from "../view/TextView";
 
 type Props = {
   data?: any;
@@ -53,6 +54,7 @@ const SearchProfilesList = ({ data, filter }: Props) => {
     >
       <ListView
         data={currentData}
+        emptyMessage={<TextView>{i18n.t('No results available')}</TextView>}
         renderItem={(row: any) => renderItem(row)}
       />
     </BoxView>
