@@ -119,7 +119,6 @@ const SearchFiltersForm = ({ }: Props) => {
   };
 
   const renderKeywordsFilter = () => {
-    let key: string = 'keywords';
     let rightIcon: any = () => {
       if (searchState.searchValue.length > 0) {
         return (
