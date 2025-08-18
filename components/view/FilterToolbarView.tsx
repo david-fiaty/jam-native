@@ -7,6 +7,7 @@ import BoxView from './BoxView';
 import TextView from './TextView';
 import SectionManager from '@/manager/SectionManager';
 import i18n from '@/translation/i18n';
+import { Badge } from '@rneui/themed';
 
 const FilterToolbarView = () => {
   const router = useRouter();
@@ -15,9 +16,9 @@ const FilterToolbarView = () => {
   const renderResultsCount = () => {
     if (Object.keys(searchState.searchFilters).length > 0 || searchState.searchValue.length > 0) {
       let resultsCount: number = JSON.parse(searchState.currentResults)?.jam?.length;
-      
+
       return (
-        <TextView>({resultsCount})</TextView>
+        <Badge value={resultsCount} />
       );
     }
   };
@@ -30,7 +31,10 @@ const FilterToolbarView = () => {
         justify="space-between"
         style={styles.searchFilters}
       >
-        <TextView>{i18n.t('Filter results')} {renderResultsCount()}</TextView>
+        <BoxView direction="row" align="center" justify="flex-start">
+          <TextView>{i18n.t('Filter results')}</TextView>
+          {renderResultsCount()}
+        </BoxView>
         <IconView
           name="filter"
           theme="transparent"
