@@ -15,7 +15,7 @@ type Props = {
   onListItemPress?: (row: any) => void;
 };
 
-const ProfileListItem = ({ row, selected, onListItemPress }: Props) => {
+const ProfileListItemView = ({ row, selected, onListItemPress }: Props) => {
   const onItemPress = (row: any) => {
     if (onListItemPress) {
       onListItemPress(row);
@@ -81,4 +81,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default ProfileListItem;
+export default ProfileListItemView;

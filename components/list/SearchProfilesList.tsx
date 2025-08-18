@@ -4,12 +4,12 @@ import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import ListView from "../view/ListView";
 import i18n from "@/translation/i18n";
-import ProfileListItem from "./list-item/ProfileListItem";
 import SectionManager from "@/manager/SectionManager";
 import BoxView from "../view/BoxView";
 import ScreenManager from "@/manager/ScreenManager";
 import UserManager from "@/manager/UserManager";
 import TextView from "../view/TextView";
+import ProfileListItemView from "../view/ProfileListItemView";
 
 type Props = {
   data?: any;
@@ -30,7 +30,7 @@ const SearchProfilesList = ({ data, filter }: Props) => {
 
   const renderItem = (row: any) => {
     return (
-      <ProfileListItem
+      <ProfileListItemView
         row={row}
         onListItemPress={(row: any) => onItemPress(row)}
       />

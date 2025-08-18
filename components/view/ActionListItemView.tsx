@@ -8,7 +8,7 @@ type Props = {
   item?: any;
 };
 
-const ActionListItem = ({ item }: Props) => {
+const ActionListItemView = ({ item }: Props) => {
   const onItemPress = () => {
     if (item?.onPress) item.onPress();
   };
@@ -39,4 +39,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default ActionListItem;
+export default ActionListItemView;

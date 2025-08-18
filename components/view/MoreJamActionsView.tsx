@@ -6,9 +6,9 @@ import BoxView from '../view/BoxView';
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
-import ActionListItem from '../list/list-item/ActionListItem';
 import DataManager from '@/manager/DataManager';
 import UserManager from '@/manager/UserManager';
+import ActionListItemView from './ActionListItemView';
 
 type Props = {
   jamId?: any;
@@ -152,7 +152,7 @@ const MoreJamActionsView = ({ jamId }: Props) => {
       <View style={Layout.borderedListContainer}>
         { actions.map((item: any) => {
           if (item.canDisplay() === true) {
-            return <ActionListItem key={DataManager.createUuid()} item={item} />
+            return <ActionListItemView key={DataManager.createUuid()} item={item} />
           }
         }) }
       </View>

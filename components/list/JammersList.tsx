@@ -7,10 +7,10 @@ import i18n from "@/translation/i18n";
 import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import EntityManager from '@/manager/EntityManager';
-import ProfileListItem from './list-item/ProfileListItem';
 import SectionManager from '@/manager/SectionManager';
 import BoxView from '../view/BoxView';
 import UserManager from '@/manager/UserManager';
+import ProfileListItemView from '../view/ProfileListItemView';
 
 type Props = {
   jamId?: any;
@@ -31,7 +31,7 @@ const JammersList = ({ jamId, jammersIds }: Props) => {
 
   const renderItem = useCallback((row: any) => {
     return (
-      <ProfileListItem
+      <ProfileListItemView
         row={row}
         onListItemPress={(row: any) => onItemPress(row)}
       />
