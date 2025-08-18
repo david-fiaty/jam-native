@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View, Alert } from "react-native";
+import { View, Alert, TouchableOpacity, StyleSheet } from "react-native";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from '../view/BoxView';
@@ -8,7 +8,8 @@ import ScreenManager from "@/manager/ScreenManager";
 import EntityManager from '@/manager/EntityManager';
 import DataManager from '@/manager/DataManager';
 import UserManager from '@/manager/UserManager';
-import ActionListItemView from './ActionListItemView';
+import IconView from './IconView';
+import TextView from './TextView';
 
 type Props = {
   jamId?: any;
@@ -20,7 +21,7 @@ const MoreJamActionsView = ({ jamId }: Props) => {
 
   const saveJam = async () => {
     let result: any = await EntityManager.saveJam(jamId);
-    
+
     let message: any = {
       title: i18n.t('Save Jam'),
       content: i18n.t('Jam successfully saved.'),
@@ -32,7 +33,7 @@ const MoreJamActionsView = ({ jamId }: Props) => {
 
   const likeJam = async () => {
     let result: any = await UserManager.likeJam(jamId);
-    
+
     let message: any = {
       title: i18n.t('Like Jam'),
       content: i18n.t('Jam successfully liked.'),
@@ -64,7 +65,7 @@ const MoreJamActionsView = ({ jamId }: Props) => {
     {
       label: i18n.t('Add Jam to project'),
       icon: 'plus',
-      canDisplay: () => isEntityOwner, 
+      canDisplay: () => isEntityOwner,
       onPress: () => ScreenManager.toggleModal('AddJamToProjectForm', { jamId: jamId }), // Todo - Update component
     },
     {
@@ -79,17 +80,17 @@ const MoreJamActionsView = ({ jamId }: Props) => {
       canDisplay: () => !isEntityOwner,
       onPress: () => {
         Alert.alert(
-          i18n.t('Report'), 
-          i18n.t('This item will be reported. Would you like to proceed?'), 
+          i18n.t('Report'),
+          i18n.t('This item will be reported. Would you like to proceed?'),
           [
             {
               text: i18n.t('No'),
-              onPress: () => {},
+              onPress: () => { },
               style: 'cancel',
             },
             {
               text: i18n.t('Yes'),
-              onPress: async () => { 
+              onPress: async () => {
                 let result: any = await EntityManager.reportItem('jam', jamId);
                 if (result?.error) {
                   ScreenManager.showMessage({
@@ -101,7 +102,7 @@ const MoreJamActionsView = ({ jamId }: Props) => {
             },
           ]
         );
-      }, 
+      },
     },
     {
       label: i18n.t('Delete Jam'),
@@ -109,18 +110,18 @@ const MoreJamActionsView = ({ jamId }: Props) => {
       canDisplay: () => isEntityOwner,
       onPress: () => {
         Alert.alert(
-          i18n.t('Report'), 
-          i18n.t('This item will be deleted. Would you like to proceed?'), 
+          i18n.t('Report'),
+          i18n.t('This item will be deleted. Would you like to proceed?'),
           [
             {
               text: i18n.t('No'),
-              onPress: () => {},
+              onPress: () => { },
               style: 'cancel',
             },
             {
               text: i18n.t('Yes'),
-              onPress: () => { 
-                let result: any = EntityManager.deleteJam(jamId); 
+              onPress: () => {
+                let result: any = EntityManager.deleteJam(jamId);
                 if (result?.error) {
                   ScreenManager.showMessage({
                     title: i18n.t('Delete'),
@@ -135,6 +136,27 @@ const MoreJamActionsView = ({ jamId }: Props) => {
     },
   ];
 
+  const renderItem = (item: any) => {
+    const onItemPress = () => {
+      if (item?.onPress) item.onPress();
+    };
+
+    return (
+      <TouchableOpacity onPress={onItemPress}>
+        <BoxView direction="row" align="center" justify="flex-start" style={styles.listItem}>
+          <IconView
+            name={item?.icon}
+            theme="tertiary"
+            size={12}
+            padding={6.5}
+          />
+
+          <TextView>{item?.label}</TextView>
+        </BoxView>
+      </TouchableOpacity>
+    );
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
@@ -146,18 +168,31 @@ const MoreJamActionsView = ({ jamId }: Props) => {
   }, [isLoaded, jamId]);
 
   if (!isLoaded) return <SpinnerView />;
-  
+
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <View style={Layout.borderedListContainer}>
-        { actions.map((item: any) => {
+        {actions.map((item: any) => {
           if (item.canDisplay() === true) {
-            return <ActionListItemView key={DataManager.createUuid()} item={item} />
+            return (
+              <View key={DataManager.createUuid()}>
+                {renderItem(item)}
+              </View>
+            );
           }
-        }) }
+        })}
       </View>
     </BoxView>
   );
 };
+
+const styles = StyleSheet.create({
+  listItem: {
+    ...Layout.listItem,
+    ...{
+      padding: Layout.space.base/1.3,
+    },
+  },
+});
 
 export default MoreJamActionsView;
