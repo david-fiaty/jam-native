@@ -33,6 +33,7 @@ const SearchFiltersForm = () => {
       sectors: appState.sectorsData,
       subSectors: ([...appState.sectorsData].map((sector: any) => sector.sub_sectors)).flat(),
       locationTypes: EntityManager.getLocationTypes(),
+      jamTypes: EntityManager.getJamTypes(),
     };
   };
 
@@ -232,7 +233,7 @@ const SearchFiltersForm = () => {
     return (
       <>
         <TextView style={styles.filterTitle}>
-          {i18n.t('Location Types')}
+          {i18n.t('Jam Locations')}
         </TextView>
         <BoxView
           direction="row"
@@ -242,6 +243,27 @@ const SearchFiltersForm = () => {
         >
           {renderAllFiltersTag(key)}
           {(filtersConfig.locationTypes || []).map((item: any) => renderFilterTag(key, item))}
+        </BoxView>
+      </>
+    );
+  };
+
+  const renderJamTypesFilter = () => {
+    let key: string = 'jamTypes';
+
+    return (
+      <>
+        <TextView style={styles.filterTitle}>
+          {i18n.t('Jam Types')}
+        </TextView>
+        <BoxView
+          direction="row"
+          align="flex-start"
+          justify="flex-start"
+          style={styles.filterContainer}
+        >
+          {renderAllFiltersTag(key)}
+          {(filtersConfig.jamTypes || []).map((item: any) => renderFilterTag(key, item))}
         </BoxView>
       </>
     );
@@ -268,6 +290,7 @@ const SearchFiltersForm = () => {
         {renderCountriesFilter()}
         {renderSectorsFilter()}
         {!!currentFilters?.sectors?.length && renderSubSectorsFilter()}
+        {searchState.currentTab == 'jam' && renderJamTypesFilter()}
         {searchState.currentTab == 'jam' && renderLocationTypesFilter()}
       </BoxView>
 
