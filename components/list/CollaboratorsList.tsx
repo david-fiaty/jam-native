@@ -11,7 +11,7 @@ import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from '../field/InputTextField';
-import ProfileListItem from './list-item/ProfileListItem';
+import ProfileListItemView from '../view/ProfileListItemView';
 
 type Props = {
   resource: string;
@@ -123,7 +123,7 @@ const CollaboratorsList = ({ resource, field }: Props) => {
           <ListView
             data={profilesData}
             renderItem={(row: any) => (
-              <ProfileListItem 
+              <ProfileListItemView 
                 row={row}
                 selected={selectedProfiles.includes(row.item.id)}
                 onListItemPress={(o: any) => toggleItem(o.item.id)}  

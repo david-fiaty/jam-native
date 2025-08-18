@@ -36,12 +36,10 @@ const SearchJamsList = ({ data, filter }: Props) => {
     let output: any = null;
     let imageUrl: any = row?.item?.medias?.[0]?.url;
 
-    if (imageUrl?.length > 0) {
-      output = MediaManager.renderImage(imageUrl, {
-        numColumns: numColumns,
-        imageSize: imageSize,
-      });
-    }
+    output = MediaManager.renderImage(imageUrl, {
+      numColumns: numColumns,
+      imageSize: imageSize,
+    });
 
     return (
       <TouchableOpacity onPress={() => onItemPress(row)}>
@@ -70,8 +68,8 @@ const SearchJamsList = ({ data, filter }: Props) => {
       <ListView
         data={currentData}
         numColumns={numColumns}
-        contentContainerStyle={{ gap: Layout.space.base }}
-        columnWrapperStyle={{ gap: Layout.space.base }}
+        contentContainerStyle={styles.contentContainerStyle}
+        columnWrapperStyle={styles.columnWrapperStyle}
         emptyMessage={<TextView>{i18n.t('No results available')}</TextView>}
         renderItem={(row: any) => renderItem(row)}
       />
@@ -82,6 +80,14 @@ const SearchJamsList = ({ data, filter }: Props) => {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
+    flexShrink: 1,
+  },
+  contentContainerStyle: { 
+    gap: Layout.space.base, 
+    paddingBottom: Layout.space.base 
+  },
+  columnWrapperStyle: {
+    gap: Layout.space.base,
   },
   title: {
     fontWeight: "bold",
