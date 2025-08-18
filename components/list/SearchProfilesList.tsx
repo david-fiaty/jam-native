@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   },
   contentContainerStyle: { 
     gap: Layout.space.base, 
-    paddingBottom: Layout.space.base 
+    paddingBottom: Layout.space.base,
   },
   title: {
     fontWeight: "bold",
