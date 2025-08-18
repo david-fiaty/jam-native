@@ -33,7 +33,7 @@ const SearchProjectsList = ({ data, filter }: Props) => {
 
   const renderItem = (row: any) => {
     let output: any = null;
-    let imageUrl: any = row.item.firstJam?.medias?.[0]?.url;
+    let imageUrl: any = row?.item?.firstJam?.medias?.[0]?.url;
 
     output = MediaManager.renderImage(imageUrl, {
       numColumns: numColumns,
