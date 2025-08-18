@@ -83,13 +83,13 @@ class SearchManager {
 
       if (searchFilters?.locationTypes?.length) {
         searchResults.jam = searchResults.jam.filter((o: any) => {
-          return searchFilters.locationTypes.some((id: any) => o?.location_type == id);
+          return searchFilters.locationTypes.some((id: any) => o?.location_type?.includes(id));
         });
       }
 
       if (searchFilters?.jamTypes?.length) {
         searchResults.jam = searchResults.jam.filter((o: any) => {
-          return searchFilters.jamTypes.some((id: any) => o?.type == id);
+          return searchFilters.jamTypes.some((id: any) => o?.type?.includes(id));
         });
       }
     }
