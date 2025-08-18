@@ -23,6 +23,7 @@ const ImageView = ({path, uri, width, height, resizeMethod, resizeMode, style}: 
       <ExpoImage
         source={source} 
         contentFit="cover"
+        cachePolicy="memory-disk"
         style={[styles.image, style, {width: width, height: height}]} 
       />   
     );
