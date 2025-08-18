@@ -268,7 +268,7 @@ const SearchFiltersForm = () => {
         {renderCountriesFilter()}
         {renderSectorsFilter()}
         {!!currentFilters?.sectors?.length && renderSubSectorsFilter()}
-        {renderLocationTypesFilter()}
+        {searchState.currentTab == 'jam' && renderLocationTypesFilter()}
       </BoxView>
 
       <DividerView theme="secondary" />
