@@ -74,7 +74,7 @@ const ProfileFormSection = () => {
     <BoxView
       direction="column"
       align="center"
-      justify="center"
+      justify="flex-start"
       style={Layout.screenContent}
       scroll={true}
     >

@@ -53,6 +53,10 @@ const styles = StyleSheet.create({
   },
   currentTab: { 
     fontWeight: 'bold',
+    borderBottomWidth: 3,
+    borderBottomColor: Layout.colors.primary,
+    paddingBottom: Layout.space.base, 
+    marginBottom: -Layout.space.base,
   },
 });
 

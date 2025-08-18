@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
@@ -13,7 +12,6 @@ import SpinnerView from "./SpinnerView";
 import FilterToolbarView from "./FilterToolbarView";
 
 const SearchView = () => {
-  const router = useRouter();
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const searchState: any = useSelector((state: any) => state.search);

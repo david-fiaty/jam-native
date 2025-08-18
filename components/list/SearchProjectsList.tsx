@@ -1,25 +1,27 @@
-import { StyleSheet, Platform } from "react-native";
+import { StyleSheet, Platform, TouchableOpacity } from "react-native";
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import ListView from "../view/ListView";
 import i18n from "@/translation/i18n";
-import ProjectListItem from "./list-item/ProjectListItem";
 import TextView from "../view/TextView";
 import SectionManager from "@/manager/SectionManager";
 import BoxView from "../view/BoxView";
 import ScreenManager from "@/manager/ScreenManager";
+import MediaManager from "@/manager/MediaManager";
 
 type Props = {
   data?: any;
   filter?: any;
 };
 
+  const numColumns = 2;
+
 const SearchProjectsList = ({ data, filter }: Props) => {
-  const numColumns = 3;
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [currentData, setCurrentData] = useState<any[]>([]);
+  const imageSize = MediaManager.getThumbnailSize(numColumns);
 
   const onItemPress = (row: any) => {
     SectionManager.push(router, 'public-project', { 
@@ -29,11 +31,18 @@ const SearchProjectsList = ({ data, filter }: Props) => {
   };
 
   const renderItem = (row: any) => {
+    let output: any = null;
+    let imageUrl: any = row?.item?.medias?.[0]?.url;
+
+    output = MediaManager.renderImage(imageUrl, {
+      numColumns: numColumns,
+      imageSize: imageSize,
+    });
+
     return (
-      <ProjectListItem
-        row={row}
-        onListItemPress={(row: any) => onItemPress(row)}
-      />
+      <TouchableOpacity onPress={() => onItemPress(row)}>
+        {output}
+      </TouchableOpacity>
     );
   };
 
@@ -57,8 +66,8 @@ const SearchProjectsList = ({ data, filter }: Props) => {
       <ListView
         data={currentData}
         numColumns={numColumns}
-        contentContainerStyle={{ gap: Layout.space.base }}
-        columnWrapperStyle={{ gap: Layout.space.base }}
+        contentContainerStyle={styles.contentContainerStyle}
+        columnWrapperStyle={styles.columnWrapperStyle}
         emptyMessage={<TextView>{i18n.t('No results available')}</TextView>}
         renderItem={(row: any) => renderItem(row)}
       />
@@ -69,6 +78,14 @@ const SearchProjectsList = ({ data, filter }: Props) => {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
+    flexShrink: 1,
+  },
+  contentContainerStyle: { 
+    gap: Layout.space.base, 
+    paddingBottom: Layout.space.base 
+  },
+  columnWrapperStyle: {
+    gap: Layout.space.base,
   },
   title: {
     fontWeight: "bold",
