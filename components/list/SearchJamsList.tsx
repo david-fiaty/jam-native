@@ -36,12 +36,10 @@ const SearchJamsList = ({ data, filter }: Props) => {
     let output: any = null;
     let imageUrl: any = row?.item?.medias?.[0]?.url;
 
-    if (imageUrl?.length > 0) {
-      output = MediaManager.renderImage(imageUrl, {
-        numColumns: numColumns,
-        imageSize: imageSize,
-      });
-    }
+    output = MediaManager.renderImage(imageUrl, {
+      numColumns: numColumns,
+      imageSize: imageSize,
+    });
 
     return (
       <TouchableOpacity onPress={() => onItemPress(row)}>
