@@ -10,6 +10,7 @@ import ScreenManager from "@/manager/ScreenManager";
 import MediaManager from "@/manager/MediaManager";
 import i18n from "@/translation/i18n";
 import TextView from "../view/TextView";
+import JamListItem from "./list-item/JamListItem";
 
 type Props = {
   data?: any;
@@ -33,20 +34,11 @@ const SearchJamsList = ({ data, filter }: Props) => {
   };
 
   const renderItem = (row: any) => {
-    let output: any = null;
-    let imageUrl: any = row?.item?.medias?.[0]?.url;
-
-    if (imageUrl?.length > 0) {
-      output = MediaManager.renderImage(imageUrl, {
-        numColumns: numColumns,
-        imageSize: imageSize,
-      });
-    }
-
     return (
-      <TouchableOpacity onPress={() => onItemPress(row)}>
-        {output}
-      </TouchableOpacity>
+      <JamListItem
+        row={row}
+        onListItemPress={(row: any) => onItemPress(row)}
+      />
     );
   };
 
