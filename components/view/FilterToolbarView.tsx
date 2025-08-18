@@ -17,9 +17,7 @@ const FilterToolbarView = () => {
     if (Object.keys(searchState.searchFilters).length > 0 || searchState.searchValue.length > 0) {
       let resultsCount: number = JSON.parse(searchState.currentResults)?.jam?.length;
 
-      return (
-        <Badge value={resultsCount} />
-      );
+      return <Badge value={resultsCount} />;
     }
   };
 
