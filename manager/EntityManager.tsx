@@ -211,6 +211,22 @@ class EntityManager {
     };
   }
 
+  async addProjectsImages(projectsData: any) {
+    return await Promise.all(
+      projectsData.map(async (item: any) => {
+        if (item.id != 'addItem') {
+          return {
+            ...item,
+            firstJam: (await this.getJams([item?.jams[0]]))?.[0],
+          }
+        }
+        else {
+          return item;
+        }
+      })
+    );
+  }
+
   async likeProject(entityId: any) {
     let profileId = await UserManager.getProfileId();
     let response = await DataManager.post('likeProject', {
