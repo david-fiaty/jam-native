@@ -54,6 +54,7 @@ const SearchProfilesList = ({ data, filter }: Props) => {
     >
       <ListView
         data={currentData}
+        contentContainerStyle={styles.contentContainerStyle}
         emptyMessage={<TextView>{i18n.t('No results available')}</TextView>}
         renderItem={(row: any) => renderItem(row)}
       />
@@ -64,6 +65,11 @@ const SearchProfilesList = ({ data, filter }: Props) => {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
+    flexShrink: 1,
+  },
+  contentContainerStyle: { 
+    gap: Layout.space.base, 
+    paddingBottom: Layout.space.base 
   },
   title: {
     fontWeight: "bold",
