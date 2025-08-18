@@ -49,7 +49,7 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
 
   const renderItem = (row: any) => {
     let output: any = null;
-    let imageUrl: any = row.item.firstJam?.medias?.[0]?.url;
+    let imageUrl: any = row?.item?.firstJam?.medias?.[0]?.url;
 
     if (row?.item?.id == "addItem") {
       output = renderAddButton();

@@ -217,7 +217,7 @@ class EntityManager {
         if (item.id != 'addItem') {
           return {
             ...item,
-            firstJam: (await this.getJams([item?.jams[0]]))?.[0],
+            firstJam: (await this.getJams([item?.jams[0]]))?.[0], // Todo - Handle no jam[0] found
           }
         }
         else {
