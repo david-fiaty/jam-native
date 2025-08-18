@@ -215,10 +215,16 @@ class EntityManager {
     return await Promise.all(
       projectsData.map(async (item: any) => {
         if (item.id != 'addItem') {
+          let firstJam: any = null;
+          
+          if (!!item?.jams[0]?.length) {
+            firstJam = (await this.getJams([item?.jams[0]]))?.[0];
+          }
+
           return {
             ...item,
-            firstJam: (await this.getJams([item?.jams[0]]))?.[0],
-          }
+            firstJam: firstJam,
+          };
         }
         else {
           return item;
