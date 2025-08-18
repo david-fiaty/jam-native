@@ -22,6 +22,7 @@ const ImageView = ({path, uri, width, height, resizeMethod, resizeMode, style}: 
     return (
       <ExpoImage
         source={source} 
+        contentFit="cover"
         style={[styles.image, style, {width: width, height: height}]} 
       />   
     );
