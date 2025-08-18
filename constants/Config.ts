@@ -11,7 +11,7 @@ export const Config: any = {
   fallbackLanguage: 'en',
   appNamespace: 'jam-native',
   logoImageSize: 512,
-  paginationSize: 20,
+  paginationSize: 50,
   dateFormat: 'MMM Do YYYY HH:mm',
   messageDisplayDuration: 3500,
   searchDebounceDuration: 1000,
