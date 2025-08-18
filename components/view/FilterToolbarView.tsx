@@ -35,6 +35,7 @@ const FilterToolbarView = () => {
           <TextView>{i18n.t('Filter results')}</TextView>
           {renderResultsCount()}
         </BoxView>
+        
         <IconView
           name="filter"
           theme="transparent"
