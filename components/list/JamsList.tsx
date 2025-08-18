@@ -7,6 +7,8 @@ import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
 import JamView from "../view/JamView";
 import FilterToolbarView from "../view/FilterToolbarView";
+import TextView from "../view/TextView";
+import i18n from "@/translation/i18n";
 
 type Props = {
   idArray?: any;
@@ -58,6 +60,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
         renderItem={renderItem}
         keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
         onEndReachedThreshold={0.5}
+        emptyMessage={<TextView>{i18n.t('No results available')}</TextView>}
         //onEndReached={onEndReached}
       />
     </BoxView>
