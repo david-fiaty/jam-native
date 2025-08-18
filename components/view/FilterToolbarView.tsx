@@ -2,12 +2,12 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useSelector } from "react-redux";
 import { Layout } from '@/constants/Layout';
+import { Badge } from '@rneui/themed';
 import IconView from './IconView';
 import BoxView from './BoxView';
 import TextView from './TextView';
 import SectionManager from '@/manager/SectionManager';
 import i18n from '@/translation/i18n';
-import { Badge } from '@rneui/themed';
 
 const FilterToolbarView = () => {
   const router = useRouter();
