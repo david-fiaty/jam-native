@@ -11,7 +11,7 @@ const PrivateProjectSection = ({ projectId }: Props) => {
     <BoxView
       direction="column"
       align="center"
-      justify="center"
+      justify="flex-start"
       style={styles.container}
     >
       <ProjectView 

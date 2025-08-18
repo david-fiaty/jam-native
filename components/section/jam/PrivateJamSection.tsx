@@ -11,7 +11,7 @@ const PrivateJamSection = ({ jamId }: Props) => {
     <BoxView
       direction="column"
       align="center"
-      justify="center"
+      justify="flex-start"
       style={styles.container}
     >
       <JamView 
