@@ -4,7 +4,6 @@ import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import ListView from "../view/ListView";
 import i18n from "@/translation/i18n";
-import ProjectListItem from "./list-item/ProjectListItem";
 import TextView from "../view/TextView";
 import SectionManager from "@/manager/SectionManager";
 import BoxView from "../view/BoxView";
