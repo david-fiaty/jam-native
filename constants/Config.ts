@@ -1,6 +1,6 @@
 export const Config: any = {
   dataCacheEnabled: false,
-  imageCacheEnabled: false,
+  imageCacheEnabled: true,
   infiniteScrollEnabled: false,
   apiUrl: 'https://dev.jammm.app/backend/api/v1',
   imageUrl: 'https://dev.jammm.app/backend',

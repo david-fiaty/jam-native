@@ -49,7 +49,7 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
 
   const renderItem = (row: any) => {
     let output: any = null;
-    let imageUrl: any = row.item.firstJam?.medias?.[0]?.url;
+    let imageUrl: any = row?.item?.firstJam?.medias?.[0]?.url;
 
     if (row?.item?.id == "addItem") {
       output = renderAddButton();
@@ -78,31 +78,14 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
     return data;
   };
 
-  const addProjectsImages = async (projectsData: any[]) => {
-    return await Promise.all(
-      projectsData.map(async (item: any) => {
-        if (item.id != 'addItem') {
-          return {
-            ...item,
-            firstJam: (await EntityManager.getJams([item?.jams[0]]))?.[0],
-          }
-        }
-        else {
-          return item;
-        }
-      })
-    );
-  };
-
-useEffect(() => {
-  (async () => {
-    if (!profileProjects?.length && Array.isArray(idArray) && idArray?.length > 0) {
-      let projectsData: any = await getProfileProjects(idArray);
-      projectsData = await addProjectsImages(projectsData);
-      setProfileProjects(projectsData);
-    }
-  })();
-}, [idArray, profileProjects, isPublic]);
+  useEffect(() => {
+    (async () => {
+      if (!profileProjects?.length && Array.isArray(idArray) && idArray?.length > 0) {
+        let projectsData: any = await EntityManager.addProjectsImages(await getProfileProjects(idArray));
+        setProfileProjects(projectsData);
+      }
+    })();
+  }, [idArray, profileProjects, isPublic]);
 
 if (!profileProjects) return <SpinnerView size="small" />;
 

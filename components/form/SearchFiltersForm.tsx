@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity } from "react-native";
+import { useRouter } from 'expo-router';
 import { setSearchFilters, setSearchValue } from '@/redux/slices/SearchSlice';
 import { useSelector, useDispatch } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -12,13 +13,11 @@ import ButtonView from '../view/ButtonView';
 import DividerView from '../view/DividerView';
 import SearchManager from '@/manager/SearchManager';
 import IconView from '../view/IconView';
+import SectionManager from '@/manager/SectionManager';
 
-type Props = {
-
-};
-
-const SearchFiltersForm = ({ }: Props) => {
+const SearchFiltersForm = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isApplyProcessing, setIsApplyProcessing] = useState<boolean>(false);
   const [isResetProcessing, setIsResetProcessing] = useState<boolean>(false);
@@ -73,6 +72,7 @@ const SearchFiltersForm = ({ }: Props) => {
     dispatch(setSearchFilters(currentFilters));
     await SearchManager.loadResults(currentKeywords, currentFilters);
     setIsApplyProcessing(false);
+    SectionManager.back(router);
   };
 
   const resetFilters = async () => {

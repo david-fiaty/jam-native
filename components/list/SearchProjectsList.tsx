@@ -9,6 +9,7 @@ import SectionManager from "@/manager/SectionManager";
 import BoxView from "../view/BoxView";
 import ScreenManager from "@/manager/ScreenManager";
 import MediaManager from "@/manager/MediaManager";
+import EntityManager from "@/manager/EntityManager";
 
 type Props = {
   data?: any;
@@ -32,7 +33,7 @@ const SearchProjectsList = ({ data, filter }: Props) => {
 
   const renderItem = (row: any) => {
     let output: any = null;
-    let imageUrl: any = row?.item?.medias?.[0]?.url;
+    let imageUrl: any = row?.item?.firstJam?.medias?.[0]?.url;
 
     output = MediaManager.renderImage(imageUrl, {
       numColumns: numColumns,
@@ -49,7 +50,8 @@ const SearchProjectsList = ({ data, filter }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setCurrentData(data);
+        let projectsData: any[] = await EntityManager.addProjectsImages(data);
+        setCurrentData(projectsData);
         setIsLoaded(true)
       }
     })();
