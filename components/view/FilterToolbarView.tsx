@@ -2,6 +2,7 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useSelector } from "react-redux";
 import { Layout } from '@/constants/Layout';
+import { Badge } from '@rneui/themed';
 import IconView from './IconView';
 import BoxView from './BoxView';
 import TextView from './TextView';
@@ -15,10 +16,8 @@ const FilterToolbarView = () => {
   const renderResultsCount = () => {
     if (Object.keys(searchState.searchFilters).length > 0 || searchState.searchValue.length > 0) {
       let resultsCount: number = JSON.parse(searchState.currentResults)?.jam?.length;
-      
-      return (
-        <TextView>({resultsCount})</TextView>
-      );
+
+      return <Badge value={resultsCount} />;
     }
   };
 
@@ -30,7 +29,11 @@ const FilterToolbarView = () => {
         justify="space-between"
         style={styles.searchFilters}
       >
-        <TextView>{i18n.t('Filter results')} {renderResultsCount()}</TextView>
+        <BoxView direction="row" align="center" justify="flex-start">
+          <TextView>{i18n.t('Filter results')}</TextView>
+          {renderResultsCount()}
+        </BoxView>
+        
         <IconView
           name="filter"
           theme="transparent"
