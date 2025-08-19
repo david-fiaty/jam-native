@@ -53,8 +53,8 @@ const SectionHeader = ({ style }: Props) => {
       <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>
         <IconView
           name="search"
-          size={22}
-          padding={0}
+          size={14}
+          padding={6}
           theme={getIconTheme('SearchView')}
           onPress={() => isLoggedIn ? ModalManager.toggleModal('SearchView') : SectionManager.push(router, 'login')}
         />
