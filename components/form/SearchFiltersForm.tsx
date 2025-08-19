@@ -151,7 +151,7 @@ const SearchFiltersForm = () => {
           <InputTextField
             placeholder={i18n.t('Search keywords...')}
             onChangeText={onKeywordsChange}
-            value={currentKeywords}
+            value={currentKeywords || ''}
             rightIcon={rightIcon()}
           />
         </BoxView>
