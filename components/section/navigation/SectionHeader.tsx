@@ -23,12 +23,16 @@ const SectionHeader = ({ style }: Props) => {
   const modalState: any = useSelector((state: any) => state.modal);
 
   const getIconTheme = (modalId: string) => {
-    if (modalState.active.length > 0 && modalState.active[modalState.active.length - 1].id == modalId) {
+    if (isIconActive(modalId)) {
       return 'primary';
     }
 
     return 'secondary';
   };
+
+  const isIconActive = (modalId: string) => {
+    return modalState.active.length > 0 && modalState.active[modalState.active.length - 1].id == modalId;
+  }
 
   useEffect(() => {
     (async () => {
@@ -49,10 +53,10 @@ const SectionHeader = ({ style }: Props) => {
       <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>
         <IconView
           name="search"
-          theme="clear"
-          size={22}
-          padding={0}
-          onPress={() => isLoggedIn ? SectionManager.push(router, 'search') : SectionManager.push(router, 'login')}
+          size={14}
+          padding={6}
+          theme={getIconTheme('SearchView')}
+          onPress={() => isLoggedIn ? ModalManager.toggleModal('SearchView') : SectionManager.push(router, 'login')}
         />
 
         {!isLoggedIn && (

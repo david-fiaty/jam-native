@@ -20,7 +20,7 @@ const SectionFooter = ({ style }: Props) => {
 
   const getIconTheme = (modalId: string) => {
     if (modalState.active.length > 0 && modalState.active[modalState.active.length - 1].id == modalId) {
-      return 'secondary';
+      return 'primary';
     }
 
     return 'clear';
