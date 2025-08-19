@@ -51,30 +51,12 @@ const SectionHeader = ({ style }: Props) => {
       </BoxView>
 
       <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>
-        <IconView
-          name="search"
-          size={14}
-          padding={6}
-          theme={getIconTheme('SearchView')}
-          onPress={() => isLoggedIn ? ModalManager.toggleModal('SearchView') : SectionManager.push(router, 'login')}
-        />
-
         {!isLoggedIn && (
           <IconView
             name="user"
             size={14}
             padding={6}
             onPress={() => SectionManager.push(router, 'login')}
-          />
-        )}
-
-        {isLoggedIn && (
-          <IconView
-            label={notificationsCount > 0 ? ` ${notificationsCount}+` : ` 0 `}
-            size={13}
-            padding={4.5}
-            theme={getIconTheme('NotificationsMenu')}
-            onPress={() => ModalManager.toggleModal('NotificationsMenu')}
           />
         )}
 
@@ -88,6 +70,23 @@ const SectionHeader = ({ style }: Props) => {
           />
         )}
 
+        {isLoggedIn && (
+          <IconView
+            label={notificationsCount > 0 ? ` ${notificationsCount}+` : ` 0 `}
+            size={13}
+            padding={4.5}
+            theme={getIconTheme('NotificationsMenu')}
+            onPress={() => ModalManager.toggleModal('NotificationsMenu')}
+          />
+        )}
+
+        <IconView
+          name="search"
+          size={14}
+          padding={6}
+          theme={getIconTheme('SearchView')}
+          onPress={() => isLoggedIn ? ModalManager.toggleModal('SearchView') : SectionManager.push(router, 'login')}
+        />
       </BoxView>
     </BoxView>
   );
