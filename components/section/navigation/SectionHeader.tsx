@@ -9,7 +9,6 @@ import LogoView from '@/components/view/LogoView';
 import IconView from '@/components/view/IconView';
 import ModalManager from '@/manager/ModalManager';
 import UserManager from "@/manager/UserManager";
-import SearchField from "@/components/field/SearchField";
 import SectionManager from "@/manager/SectionManager";
 
 type Props = {
@@ -53,7 +52,7 @@ const SectionHeader = ({ style }: Props) => {
           theme="clear"
           size={22}
           padding={0}
-          onPress={() => SectionManager.push(router, 'search')}
+          onPress={() => isLoggedIn ? SectionManager.push(router, 'search') : SectionManager.push(router, 'login')}
         />
 
         {!isLoggedIn && (
