@@ -24,15 +24,17 @@ import PrivateProfileSection from '../section/profile/PrivateProfileSection';
 
 type Props = {
   currentSection?: any;
+  layout?: any;
   style?: any;
 };
 
-const ModalView = ({ currentSection, style }: Props) => {
+const ModalView = ({ currentSection, layout, style }: Props) => {
   const [currentModal, setCurrentModal] = useState<any>(null);
   const [containerStyle, setContainerStyle] = useState<any>({});
   const modalState: any = useSelector((state: any) => state.modal);
   const sectionState: any = useSelector((state: any) => state.section);
 
+  /*
   const getContainerStyle = () => {
     let top: number = 0;
     
@@ -44,6 +46,16 @@ const ModalView = ({ currentSection, style }: Props) => {
       top: top,
     };
   };
+  */
+
+  const getContainerStyle = () => {
+    let top: number = 0;
+
+    return {
+      top: top,
+    };
+  };
+
 
   const canShowModal = () => {
     return currentModal !== null && currentModal?.sectionId === currentSection?.id;
@@ -56,7 +68,7 @@ const ModalView = ({ currentSection, style }: Props) => {
   const renderBackButton = () => {
     const activeModalsCount: number = modalState.active.length;
     const currentModalIndex: number = getCurrentModalIndex();
-  
+
     if (currentModal?.showTitle === true && currentModal?.showBackButton === true) {
       return <ModalBackButton currentModal={currentModal} visible={activeModalsCount !== currentModalIndex} />;
     }
@@ -95,7 +107,7 @@ const ModalView = ({ currentSection, style }: Props) => {
   const getModal = (modalId: any, renderer: boolean = true) => {
     return buildModals(renderer).find((o: any) => o.id === modalId);
   };
-  
+
   const buildModals = (renderer: boolean = true) => {
     let config: any[] = getModals();
 
@@ -196,7 +208,7 @@ const ModalView = ({ currentSection, style }: Props) => {
           params: {},
           sectionId: null,
           effect: {
-            in: 'slideInUp', 
+            in: 'slideInUp',
             out: 'slideOutDown',
           },
         },
@@ -209,7 +221,7 @@ const ModalView = ({ currentSection, style }: Props) => {
     setContainerStyle(getContainerStyle());
     setCurrentModal(getActiveModal());
   }, [modalState]);
-  
+
   return (
     <Modal
       coverScreen={false}
