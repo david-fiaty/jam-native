@@ -51,22 +51,20 @@ const SectionHeader = ({ style }: Props) => {
       </BoxView>
 
       <BoxView direction="row" align="center" justify="flex-end" style={styles.headerRight}>
+        <IconView
+          name="search"
+          size={14}
+          padding={6}
+          theme={getIconTheme('SearchView')}
+          onPress={() => isLoggedIn ? ModalManager.toggleModal('SearchView') : SectionManager.push(router, 'login')}
+        />
+
         {!isLoggedIn && (
           <IconView
             name="user"
             size={14}
             padding={6}
             onPress={() => SectionManager.push(router, 'login')}
-          />
-        )}
-
-        {isLoggedIn && (
-          <IconView
-            name="menu"
-            size={14}
-            padding={6}
-            theme={getIconTheme('SettingsMenu')}
-            onPress={() => ModalManager.toggleModal('SettingsMenu')}
           />
         )}
 
@@ -80,13 +78,16 @@ const SectionHeader = ({ style }: Props) => {
           />
         )}
 
-        <IconView
-          name="search"
-          size={14}
-          padding={6}
-          theme={getIconTheme('SearchView')}
-          onPress={() => isLoggedIn ? ModalManager.toggleModal('SearchView') : SectionManager.push(router, 'login')}
-        />
+        {isLoggedIn && (
+          <IconView
+            name="menu"
+            size={14}
+            padding={6}
+            theme={getIconTheme('SettingsMenu')}
+            onPress={() => ModalManager.toggleModal('SettingsMenu')}
+          />
+        )}
+
       </BoxView>
     </BoxView>
   );
