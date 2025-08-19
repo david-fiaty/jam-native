@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
   wrapper: {
     height: wrapperHeight,
     marginTop: Layout.space.base,
+    width: '100%',
   },
   slide: {
     justifyContent: 'center',

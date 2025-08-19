@@ -22,12 +22,11 @@ const FilterToolbarView = () => {
   };
 
   return (
-    <TouchableOpacity onPress={() => SectionManager.push(router, 'search-filters')}>
+    <TouchableOpacity onPress={() => SectionManager.push(router, 'search-filters')} style={styles.searchFilters}>
       <BoxView
         direction="row"
         align="center"
         justify="space-between"
-        style={styles.searchFilters}
       >
         <BoxView direction="row" align="center" justify="flex-start">
           <TextView>{i18n.t('Filter results')}</TextView>
