@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
@@ -88,7 +89,7 @@ const SearchView = () => {
       direction="column"
       align="center"
       justify="flex-start"
-      style={Layout.screenContent}
+      style={[styles.container, Layout.screenContent]}
     >
       {/* Search tabs */}
       <TabsView
@@ -126,5 +127,12 @@ const SearchView = () => {
     </BoxView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    height: '100%',
+  },
+});
 
 export default SearchView;
