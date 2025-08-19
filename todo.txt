@@ -139,10 +139,9 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Trim textarea fields like input text fields?
 
 # New release
-- Finalisation search screens + search navigation + search state
-- Integration filters UI + update state
+- Integration search screens, navigation, filters state
 - Affichage search images sur 2 colonnes
-- Amelioration performance, integration systeme de cache images 
+- Amelioration performance (cache images in-memory + disk) 
 - Fix welcome screen slider display
 
 
