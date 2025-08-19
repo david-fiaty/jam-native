@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { StyleSheet, FlatList } from "react-native";
+import { FlashList } from "@shopify/flash-list";
 import { Config } from "@/constants/Config";
 import ScreenManager from "@/manager/ScreenManager";
 
