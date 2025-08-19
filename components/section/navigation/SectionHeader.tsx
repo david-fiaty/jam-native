@@ -9,7 +9,6 @@ import LogoView from '@/components/view/LogoView';
 import IconView from '@/components/view/IconView';
 import ModalManager from '@/manager/ModalManager';
 import UserManager from "@/manager/UserManager";
-import SearchField from "@/components/field/SearchField";
 import SectionManager from "@/manager/SectionManager";
 
 type Props = {
