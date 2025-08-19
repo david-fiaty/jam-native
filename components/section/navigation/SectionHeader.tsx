@@ -52,7 +52,7 @@ const SectionHeader = ({ style }: Props) => {
           theme="clear"
           size={22}
           padding={0}
-          onPress={() => SectionManager.push(router, 'search')}
+          onPress={() => isLoggedIn ? SectionManager.push(router, 'search') : SectionManager.push(router, 'login')}
         />
 
         {!isLoggedIn && (
