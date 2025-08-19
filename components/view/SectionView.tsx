@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { usePathname } from 'expo-router';
 import { setActiveSections, setSectionConfig } from "@/redux/slices/SectionSlice";
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Layout } from "@/constants/Layout";
 import BoxView from '../view/BoxView';
 import SectionHeader from '../section/navigation/SectionHeader';
@@ -40,6 +40,7 @@ const SectionView = () => {
   const path = usePathname();
   const dispatch = useDispatch();
   const [currentSection, setCurrentSection] = useState<any>(null);
+  const [sectionHeaderLayout, setSectionHeaderLayout] = useState<any>(null);
   const sectionState: any = useSelector((state: any) => state.section);
   const modalState: any = useSelector((state: any) => state.modal);
   const userState: any = useSelector((state: any) => state.user);
@@ -293,7 +294,15 @@ const SectionView = () => {
   return (
     <>
       <MessageView />
-      {currentSection?.showHeader === true && <SectionHeader style={styles.header} />}
+
+      <View
+        onLayout={(e: any) => {
+          setSectionHeaderLayout(e.nativeEvent.layout);
+        }}
+      >
+        {currentSection?.showHeader === true && <SectionHeader style={styles.header} />}
+      </View>
+
       {showBackButton() === true && <SectionBackButton />}
 
       <BoxView
@@ -304,7 +313,7 @@ const SectionView = () => {
       >
         {currentSection?.render(currentSection?.params || {})}
 
-        <ModalView currentSection={currentSection} style={styles.modal} />
+        <ModalView currentSection={currentSection} style={styles.modal} layout={sectionHeaderLayout} />
       </BoxView>
 
       {currentSection?.showFooter === true && <SectionFooter style={styles.footer} />}
