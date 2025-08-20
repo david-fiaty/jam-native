@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
@@ -13,13 +12,10 @@ import ProfileListItemView from "../view/ProfileListItemView";
 
 type Props = {
   data?: any;
-  filter?: any;
 };
 
-const SearchProfilesList = ({ data, filter }: Props) => {
+const SearchProfilesList = ({ data }: Props) => {
   const router = useRouter();
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [currentData, setCurrentData] = useState<any[]>([]);
 
   const onItemPress = (row: any) => {
     SectionManager.push(router, 'public-profile', { 
@@ -37,13 +33,6 @@ const SearchProfilesList = ({ data, filter }: Props) => {
     );
   };
 
-  useEffect(() => {
-    if (filter && filter != 'jammer') setCurrentData(data.filter((o: any) => o.profile_type == filter))
-    else setCurrentData(data);
-
-    if (!isLoaded) setIsLoaded(true);
-  }, [isLoaded, data, filter]);
-
   return (
     <BoxView 
       direction="column"
@@ -53,7 +42,7 @@ const SearchProfilesList = ({ data, filter }: Props) => {
       style={styles.container} 
     >
       <ListView
-        data={currentData}
+        data={data}
         contentContainerStyle={styles.contentContainerStyle}
         emptyMessage={<TextView>{i18n.t('No results available')}</TextView>}
         renderItem={(row: any) => renderItem(row)}
