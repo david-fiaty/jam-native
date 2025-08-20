@@ -7,14 +7,12 @@ import ListView from '../view/ListView';
 import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 import UserManager from "@/manager/UserManager";
-import SpinnerView from "../view/SpinnerView";
 import BoxView from "../view/BoxView";
 import SectionManager from "@/manager/SectionManager";
 
 const NotificationsMenu = () => {
   const router = useRouter();
   const [notifications, setNotifications] = useState<any>([]);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const renderItem = (row: any) => {
     return (
