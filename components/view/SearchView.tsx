@@ -72,6 +72,20 @@ const SearchView = () => {
     return data;
   };
 
+  const getTabResults = (key: string) => {
+    let data: any = getListData();
+
+    if (key == 'jam') {
+      return data.jam.filter((o: any) => o.type == key);
+    }
+    else if (key == 'profile') {
+      return data.profile.filter((o: any) => o.profile_type == key);
+    }
+    else if (key == 'project') {
+      return data.project;
+    }
+  };
+
   useEffect(() => {
     if (!isLoaded) {
       if (!searchState.currentTab) {
