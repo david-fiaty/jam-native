@@ -33,15 +33,23 @@ const SectionHeader = ({ style }: Props) => {
     return modalState.active.length > 0 && modalState.active[modalState.active.length - 1].id == modalId;
   };
 
-  const getNotifications = async () => {
-    return await UserManager.getNotifications();
+  const loadNotifications = async () => {
+    console.log('load notifs')
+    setNotifications(await UserManager.getNotifications());
   };
 
   useEffect(() => {
-    (async () => {
-      setIsLoggedIn(UserManager.isLoggedIn());
-      setNotifications(await getNotifications());
-    })();
+    setIsLoggedIn(UserManager.isLoggedIn());
+  }, []);
+
+  useEffect(() => {
+    loadNotifications();
+
+    const intervalId = setInterval(() => {
+      loadNotifications();
+    }, Config.notificationUpdateInterval);
+
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
