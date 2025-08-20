@@ -15,18 +15,14 @@ import SearchManager from "@/manager/SearchManager";
 const SearchView = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [currentResults, setCurrentResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search);
   const searchTabs: any[] = SearchManager.getSearchTabs();
 
-  const getCurrentResults = () => {
-    let data: any = JSON.parse(searchState.currentResults) || {};
-
-    return data;
-  };
-
   const getTabResults = (key: string) => {
-    return SearchManager.getTabResults(key, searchState.currentTab, currentResults);
+    let data: any = JSON.parse(searchState.currentResults) || {};
+    let results: any[] = SearchManager.getTabResults(key, searchState.currentTab, data);
+
+    return results;
   };
 
   useEffect(() => {
@@ -35,7 +31,6 @@ const SearchView = () => {
         dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
       }
 
-      setCurrentResults(getCurrentResults());
       setIsLoaded(true);
     }
   }, [searchState, searchTabs, isLoaded]);
