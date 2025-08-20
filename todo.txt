@@ -140,7 +140,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 
 # New release
 - Integration search screens, navigation, filters state
-- Affichage search images sur 2 colonnes
+- Affichage search screen results sur 2 colonnes
 - Amelioration performance (cache images in-memory + disk) 
 - Fix welcome screen slider display
 
