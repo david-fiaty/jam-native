@@ -15,6 +15,7 @@ import FilterToolbarView from "./FilterToolbarView";
 const SearchView = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [currentResults, setCurrentResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search);
 
   const searchTabs: any[] = [
@@ -66,10 +67,24 @@ const SearchView = () => {
     },
   ];
 
-  const getListData = () => {
+  const getCurrentResults = () => {
     let data: any = JSON.parse(searchState.currentResults) || {};
 
     return data;
+  };
+
+  const getTabResults = (key: string) => {
+    let tab: string = searchState.currentTab;
+    let data: any = {...currentResults};
+    
+    if (key == 'jam' && tab && tab != 'jam') { 
+      data[key] = data[key].filter((o: any) => o.type == tab);
+    }
+    else if (key == 'profile' && tab && tab != 'jammer') {
+      data[key] = data[key].filter((o: any) => o.profile_type == tab);
+    }
+
+    return data[key];
   };
 
   useEffect(() => {
@@ -78,6 +93,7 @@ const SearchView = () => {
         dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
       }
 
+      setCurrentResults(getCurrentResults());
       setIsLoaded(true);
     }
   }, [searchState, searchTabs, isLoaded]);
@@ -104,24 +120,21 @@ const SearchView = () => {
       {/* Jams list */}
       {['jam', 'looking', 'call', 'event'].includes(searchState.currentTab) && (
         <SearchJamsList
-          data={getListData()?.jam}
-          filter={searchState.currentTab}
+          data={getTabResults('jam')}
         />
       )}
 
       {/* Jammers list */}
       {['jammer', 'venue', 'organization', 'personal'].includes(searchState.currentTab) &&
         <SearchProfilesList
-          data={getListData()?.profile}
-          filter={searchState.currentTab}
+          data={getTabResults('profile')}
         />
       }
 
       {/* Projects list */}
       {['project'].includes(searchState.currentTab) &&
         <SearchProjectsList
-          data={getListData()?.project}
-          filter={searchState.currentTab}
+          data={getTabResults('project')}
         />
       }
     </BoxView>
