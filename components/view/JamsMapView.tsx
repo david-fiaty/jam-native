@@ -1,22 +1,24 @@
 import MapView , { Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
 import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentTab } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import FilterToolbarView from "./FilterToolbarView";
+import SearchManager from "@/manager/SearchManager";
+import TabsView from "./TabsView";
 
-type Props = {
-  idArray?: any;
-};
-
-const JamsMapView = ({ idArray }: Props) => {
+const JamsMapView = () => {
   const mapRef = useRef<any>();
+  const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const searchState: any = useSelector((state: any) => state.search);
+  const searchTabs: any[] = SearchManager.getSearchTabs();
   const markerImage = require('@/assets/images/logo-55.png');
   
   const getInitialRegion = () => {
@@ -69,28 +71,41 @@ const JamsMapView = ({ idArray }: Props) => {
     return null;
   };
 
-  const getListData = () => {
-    let data: any [] = JSON.parse(searchState.currentResults)?.jam || [];
+  const getTabResults = (key: string) => {
+    let data: any = JSON.parse(searchState.currentResults) || {};
+    let results: any[] = SearchManager.getTabResults(key, searchState.currentTab, data);
 
-    if (idArray?.length > 0) {
-      data = data.filter((o: any) => idArray.includes(o.id));
-    }
-
-    return data;
+    return results || [];
   };
 
   useEffect(() => {
     (async () => {
+      if (!isLoaded) {
+        if (!searchState.currentTab) {
+          dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
+        }
+
+        setIsLoaded(true);
+      }
+
       setCurrentLocation(await UserManager.getLocation());
     })();
-  }, [searchState]);
+  }, [searchState, searchTabs, isLoaded]);
 
-  if (!currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
+  if (!currentLocation?.latitude || !currentLocation?.longitude || !isLoaded) return <SpinnerView />;
   
   return (
     <TouchableWithoutFeedback>
       <View style={styles.container}>
+          
+        <TabsView
+          tabs={searchTabs}
+          currentTab={searchState.currentTab}
+          onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
+        />
+
         <FilterToolbarView />
+
         <MapView
           ref={mapRef}
           style={styles.map}
@@ -100,7 +115,7 @@ const JamsMapView = ({ idArray }: Props) => {
           showsUserLocation={true}
           showsMyLocationButton={true}
         >
-          {getListData().map((item: any) => renderJamMarker(item))}
+          {getTabResults(searchState.currentTab).map((item: any) => renderJamMarker(item))}
         </MapView>
       </View>
     </TouchableWithoutFeedback>
