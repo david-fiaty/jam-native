@@ -13,7 +13,7 @@ import SectionManager from "@/manager/SectionManager";
 
 const NotificationsMenu = () => {
   const router = useRouter();
-  const [notificationsData, setNotificationsData] = useState<any>([]);
+  const [notifications, setNotifications] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const renderItem = (row: any) => {
@@ -31,20 +31,19 @@ const NotificationsMenu = () => {
     );
   };
 
+  const loadNotifications = async () => {
+    setNotifications(await UserManager.getNotifications());
+  };
+
   useEffect(() => {
-    if (!isLoaded) {
-      UserManager.getNotifications().then((data: any) => {
-        if (data?.length > Config.maxNotificationsDisplay) {
-          data = data.slice(Config.maxNotificationsDisplay - 1);
-        }
+    loadNotifications();
 
-        setNotificationsData(data);
-        setIsLoaded(true);
-      });
-    }
-  }, [isLoaded]);
+    const intervalId = setInterval(() => {
+      loadNotifications();
+    }, Config.notificationUpdateInterval);
 
-  if (!isLoaded) return <SpinnerView />;
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <BoxView
@@ -53,7 +52,7 @@ const NotificationsMenu = () => {
       style={Layout.menuContainer}
     >
       <ListView
-        data={notificationsData}
+        data={notifications}
         renderItem={(row: any) => renderItem(row)}
         emptyMessage={<TextView>{i18n.t('No notifications available.')}</TextView>}
       />
