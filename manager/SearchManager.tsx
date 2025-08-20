@@ -1,6 +1,7 @@
 import { setCurrentResults, setDefaultResults, setSearchValue } from "@/redux/slices/SearchSlice";
 import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
+import i18n from "@/translation/i18n";
 
 class SearchManager {
   async loadResults(searchValue?: any, searchFilters?: any) {
@@ -36,8 +37,8 @@ class SearchManager {
     let payload: any = {};
 
     if (searchValue?.length) {
-      payload = { 
-        query_text: searchValue, 
+      payload = {
+        query_text: searchValue,
         query_title: searchValue,
       };
     }
@@ -95,6 +96,71 @@ class SearchManager {
     }
 
     return searchResults;
+  }
+
+  getTabResults(key: string, currentTab: string, currentResults: any) {
+    let tab: string = currentTab;
+    let data: any = {...currentResults};
+    
+    if (key == 'jam' && tab && tab != 'jam') { 
+      data[key] = data[key].filter((o: any) => o.type == tab);
+    }
+    else if (key == 'profile' && tab && tab != 'jammer') {
+      data[key] = data[key].filter((o: any) => o.profile_type == tab);
+    }
+
+    return data[key];
+  }
+
+  getSearchTabs() {
+    return [
+      {
+        id: 'jam',
+        label: i18n.t('Jams'),
+        numColumns: 2,
+        default: true,
+      },
+      {
+        id: 'looking',
+        label: i18n.t('Lookings'),
+        numColumns: 2,
+      },
+      {
+        id: 'call',
+        label: i18n.t('Calls'),
+        numColumns: 2,
+      },
+      {
+        id: 'event',
+        label: i18n.t('Events'),
+        numColumns: 2,
+      },
+      {
+        id: 'jammer',
+        label: i18n.t('Jammers'),
+        numColumns: 1,
+      },
+      {
+        id: 'personal',
+        label: i18n.t('Artists'),
+        numColumns: 1,
+      },
+      {
+        id: 'organization',
+        label: i18n.t('Organization'),
+        numColumns: 1,
+      },
+      {
+        id: 'venue',
+        label: i18n.t('Venues'),
+        numColumns: 2,
+      },
+      {
+        id: 'project',
+        label: i18n.t('Projects'),
+        numColumns: 2,
+      },
+    ];
   }
 };
 
