@@ -8,7 +8,6 @@ import SearchProfilesList from "../list/SearchProfilesList";
 import SearchProjectsList from "../list/SearchProjectsList";
 import TabsView from "./TabsView";
 import BoxView from "./BoxView";
-import i18n from "@/translation/i18n";
 import SpinnerView from "./SpinnerView";
 import FilterToolbarView from "./FilterToolbarView";
 import SearchManager from "@/manager/SearchManager";
@@ -27,17 +26,7 @@ const SearchView = () => {
   };
 
   const getTabResults = (key: string) => {
-    let tab: string = searchState.currentTab;
-    let data: any = {...currentResults};
-    
-    if (key == 'jam' && tab && tab != 'jam') { 
-      data[key] = data[key].filter((o: any) => o.type == tab);
-    }
-    else if (key == 'profile' && tab && tab != 'jammer') {
-      data[key] = data[key].filter((o: any) => o.profile_type == tab);
-    }
-
-    return data[key];
+    return SearchManager.getTabResults(key, searchState.currentTab, currentResults);
   };
 
   useEffect(() => {
