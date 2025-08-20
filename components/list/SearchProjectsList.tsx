@@ -13,12 +13,11 @@ import EntityManager from "@/manager/EntityManager";
 
 type Props = {
   data?: any;
-  filter?: any;
 };
 
-  const numColumns = 2;
+const numColumns = 2;
 
-const SearchProjectsList = ({ data, filter }: Props) => {
+const SearchProjectsList = ({ data }: Props) => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [currentData, setCurrentData] = useState<any[]>([]);

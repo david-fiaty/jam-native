@@ -1,9 +1,7 @@
-import { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import ListView from "../view/ListView";
-import SpinnerView from "../view/SpinnerView";
 import SectionManager from "@/manager/SectionManager";
 import BoxView from "../view/BoxView";
 import ScreenManager from "@/manager/ScreenManager";
@@ -13,15 +11,12 @@ import TextView from "../view/TextView";
 
 type Props = {
   data?: any;
-  filter?: any;
 };
 
 const numColumns = 2;
 
-const SearchJamsList = ({ data, filter }: Props) => {
+const SearchJamsList = ({ data }: Props) => {
   const router = useRouter();
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [currentData, setCurrentData] = useState<any[]>([]);
   const imageSize = MediaManager.getThumbnailSize(numColumns);
 
   const onItemPress = (row: any) => {
@@ -48,15 +43,6 @@ const SearchJamsList = ({ data, filter }: Props) => {
     );
   };
 
-  useEffect(() => {
-    if (filter && filter != 'jam') setCurrentData(data.filter((o: any) => o.type == filter))
-    else setCurrentData(data);
-
-    if (!isLoaded) setIsLoaded(true);
-  }, [isLoaded, data, filter]);
-
-  if (!isLoaded) return <SpinnerView />;
-
   return (
     <BoxView
       direction="column"
@@ -66,7 +52,7 @@ const SearchJamsList = ({ data, filter }: Props) => {
       style={styles.container}
     >
       <ListView
-        data={currentData}
+        data={data}
         numColumns={numColumns}
         contentContainerStyle={styles.contentContainerStyle}
         columnWrapperStyle={styles.columnWrapperStyle}
