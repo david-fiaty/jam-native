@@ -13,6 +13,7 @@ export const Config: any = {
   logoImageSize: 512,
   paginationSize: 50,
   dateFormat: 'MMM Do YYYY HH:mm',
+  notificationUpdateInterval: 10000,
   messageDisplayDuration: 3500,
   searchDebounceDuration: 1000,
   maxNotificationsDisplay: 14,
