@@ -18,8 +18,7 @@ type Props = {
 const SectionHeader = ({ style }: Props) => {
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [notificationsCount, setNotificationsCount] = useState<number>(0);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [notifications, setNotifications] = useState<any>([]);
   const modalState: any = useSelector((state: any) => state.modal);
 
   const getIconTheme = (modalId: string) => {
@@ -32,15 +31,26 @@ const SectionHeader = ({ style }: Props) => {
 
   const isIconActive = (modalId: string) => {
     return modalState.active.length > 0 && modalState.active[modalState.active.length - 1].id == modalId;
-  }
+  };
+
+  const loadNotifications = async () => {
+    console.log('load notifs')
+    setNotifications(await UserManager.getNotifications());
+  };
 
   useEffect(() => {
-    (async () => {
-      setIsLoggedIn(UserManager.isLoggedIn());
-      setNotificationsCount((await UserManager.getNotifications())?.length);
-      setIsLoaded(true);
-    })();
-  }, [isLoaded]);
+    setIsLoggedIn(UserManager.isLoggedIn());
+  }, []);
+
+  useEffect(() => {
+    loadNotifications();
+
+    const intervalId = setInterval(() => {
+      loadNotifications();
+    }, Config.notificationUpdateInterval);
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <BoxView direction="row" style={[styles.container, style]}>
@@ -70,7 +80,7 @@ const SectionHeader = ({ style }: Props) => {
 
         {isLoggedIn && (
           <IconView
-            label={notificationsCount > 0 ? ` ${notificationsCount}+` : ` 0 `}
+            label={notifications?.length > 0 ? ` ${notifications.length}+` : ` 0 `}
             size={13}
             padding={4.5}
             theme={getIconTheme('NotificationsMenu')}
