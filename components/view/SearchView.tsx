@@ -22,7 +22,7 @@ const SearchView = () => {
     let data: any = JSON.parse(searchState.currentResults) || {};
     let results: any[] = SearchManager.getTabResults(key, searchState.currentTab, data);
 
-    return results;
+    return results || [];
   };
 
   useEffect(() => {
