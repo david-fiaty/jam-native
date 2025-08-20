@@ -75,7 +75,7 @@ const SearchView = () => {
 
   const getTabResults = (key: string) => {
     let tab: string = searchState.currentTab;
-    let data: any = getCurrentResults();
+    let data: any = {...currentResults};
     
     if (key == 'jam' && tab && tab != 'jam') { 
       data[key] = data[key].filter((o: any) => o.type == tab);
@@ -93,11 +93,9 @@ const SearchView = () => {
         dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
       }
 
+      setCurrentResults(getCurrentResults());
       setIsLoaded(true);
     }
-
-    setCurrentResults(getCurrentResults());
-    
   }, [searchState, searchTabs, isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
@@ -122,24 +120,21 @@ const SearchView = () => {
       {/* Jams list */}
       {['jam', 'looking', 'call', 'event'].includes(searchState.currentTab) && (
         <SearchJamsList
-          data={currentResults?.jam}
-          //data={getTabResults('jam')}
+          data={getTabResults('jam')}
         />
       )}
 
       {/* Jammers list */}
       {['jammer', 'venue', 'organization', 'personal'].includes(searchState.currentTab) &&
         <SearchProfilesList
-          data={currentResults?.profile}
-          //data={getTabResults('profile')}
+          data={getTabResults('profile')}
         />
       }
 
       {/* Projects list */}
       {['project'].includes(searchState.currentTab) &&
         <SearchProjectsList
-          data={currentResults?.project}
-          //data={getTabResults('project')}
+          data={getTabResults('project')}
         />
       }
     </BoxView>
