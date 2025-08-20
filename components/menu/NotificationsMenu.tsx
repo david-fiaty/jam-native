@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import { Config } from "@/constants/Config";
@@ -19,6 +19,7 @@ const NotificationsMenu = () => {
       <TouchableOpacity
         key={row.item.id}
         onPress={() => SectionManager.push(router, 'notification-item', { notificationId: JSON.stringify([row?.item?.id]), title: row.item?.content?.content_data?.title })}
+        style={styles.notificationViewed}
       >
         <View style={Layout.menuItem}>
           <TextView>
@@ -57,5 +58,12 @@ const NotificationsMenu = () => {
     </BoxView>
   );
 };
+
+const styles = StyleSheet.create({
+  notificationViewed: {
+    opacity: 0.5,
+  },
+});
+
 
 export default NotificationsMenu;
