@@ -24,9 +24,9 @@ const SearchProjectsList = ({ data }: Props) => {
   const imageSize = MediaManager.getThumbnailSize(numColumns);
 
   const onItemPress = (row: any) => {
-    SectionManager.push(router, 'public-project', { 
-      projectId: row?.item?.id, 
-      title: row?.item?.title 
+    SectionManager.push(router, 'public-project', {
+      projectId: row?.item?.id,
+      title: row?.item?.title
     });
   };
 
@@ -49,8 +49,7 @@ const SearchProjectsList = ({ data }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        let projectsData: any[] = await EntityManager.addProjectsImages(data);
-        setCurrentData(projectsData);
+        setCurrentData(await EntityManager.addProjectsImages(data));
         setIsLoaded(true)
       }
     })();
@@ -64,14 +63,19 @@ const SearchProjectsList = ({ data }: Props) => {
       scroll={ScreenManager.isWeb() ? true : false}
       style={styles.container}
     >
-      <ListView
-        data={currentData}
-        numColumns={numColumns}
-        contentContainerStyle={styles.contentContainerStyle}
-        columnWrapperStyle={styles.columnWrapperStyle}
-        emptyMessage={<TextView>{i18n.t('No results available')}</TextView>}
-        renderItem={(row: any) => renderItem(row)}
-      />
+      {!!currentData?.length && (
+        <ListView
+          data={currentData}
+          numColumns={numColumns}
+          contentContainerStyle={styles.contentContainerStyle}
+          columnWrapperStyle={styles.columnWrapperStyle}
+          renderItem={(row: any) => renderItem(row)}
+        />
+      )}
+
+      {!currentData?.length && (
+        <TextView>{i18n.t('No results available')}</TextView>
+      )}
     </BoxView>
   );
 };
@@ -81,9 +85,9 @@ const styles = StyleSheet.create({
     width: "100%",
     flexShrink: 1,
   },
-  contentContainerStyle: { 
-    gap: Layout.space.base, 
-    paddingBottom: Layout.space.base 
+  contentContainerStyle: {
+    gap: Layout.space.base,
+    paddingBottom: Layout.space.base
   },
   columnWrapperStyle: {
     gap: Layout.space.base,

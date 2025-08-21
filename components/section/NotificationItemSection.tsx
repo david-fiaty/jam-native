@@ -19,10 +19,6 @@ const NotificationItemSection = ({ notificationId }: Props) => {
   useEffect(() => {
     if (!isLoaded) {
       UserManager.getNotifications().then((data: any) => {
-        if (data?.length > Config.maxNotificationsDisplay) {
-          data = data.slice(Config.maxNotificationsDisplay - 1);
-        }
-
         setNotificationItem(data.find((o: any) => o.id == notificationId));
         setIsLoaded(true);
       });

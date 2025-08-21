@@ -1,26 +1,51 @@
 import { useState, useEffect } from "react";
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Layout } from '@/constants/Layout';
 import { Config } from "@/constants/Config";
 import ListView from '../view/ListView';
 import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 import UserManager from "@/manager/UserManager";
-import SpinnerView from "../view/SpinnerView";
 import BoxView from "../view/BoxView";
 import SectionManager from "@/manager/SectionManager";
+import ScreenManager from "@/manager/ScreenManager";
+import SpinnerView from "../view/SpinnerView";
 
 const NotificationsMenu = () => {
   const router = useRouter();
-  const [notificationsData, setNotificationsData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [notifications, setNotifications] = useState<any[]>([]);
+  const [viewedIds, setViewedIds] = useState<any>([]);
+
+  const onItemPress = async (row: any) => {
+    await setStorageId(row.item.id);
+
+    SectionManager.push(router, 'notification-item', {
+      notificationId: JSON.stringify([row.item.id]),
+      title: row.item?.content?.content_data?.title
+    });
+  };
+
+  const setStorageId = async (rowId: any) => {
+    let idArray: any[] = [...new Set([...viewedIds, rowId])];
+    setViewedIds(idArray);
+
+    if (ScreenManager.isWeb()) {
+      localStorage.setItem(Config.storageKeys.viewedNotifications, JSON.stringify(idArray));
+    }
+    else {
+      await AsyncStorage.setItem(Config.storageKeys.viewedNotifications, JSON.stringify(idArray));
+    }
+  };
 
   const renderItem = (row: any) => {
     return (
       <TouchableOpacity
         key={row.item.id}
-        onPress={() => SectionManager.push(router, 'notification-item', { notificationId: JSON.stringify([row?.item?.id]), title: row.item?.content?.content_data?.title })}
+        onPress={() => onItemPress(row)}
+        style={viewedIds.includes(row.item.id) ? styles.viewedItem : {}}
       >
         <View style={Layout.menuItem}>
           <TextView>
@@ -31,18 +56,26 @@ const NotificationsMenu = () => {
     );
   };
 
-  useEffect(() => {
-    if (!isLoaded) {
-      UserManager.getNotifications().then((data: any) => {
-        if (data?.length > Config.maxNotificationsDisplay) {
-          data = data.slice(Config.maxNotificationsDisplay - 1);
-        }
+  const loadNotifications = async () => {
+    setNotifications(await UserManager.getNotifications());
+  };
 
-        setNotificationsData(data);
+  useEffect(() => {
+    (async () => {
+      if (!isLoaded) {
+        setViewedIds(await UserManager.getViewedNotifications());
         setIsLoaded(true);
-      });
-    }
+      }
+    })();
   }, [isLoaded]);
+
+  useEffect(() => {
+    loadNotifications();
+
+    const intervalId = setInterval(() => loadNotifications(), Config.notificationUpdateInterval);
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -52,13 +85,25 @@ const NotificationsMenu = () => {
       justify="flex-start"
       style={Layout.menuContainer}
     >
-      <ListView
-        data={notificationsData}
-        renderItem={(row: any) => renderItem(row)}
-        emptyMessage={<TextView>{i18n.t('No notifications available.')}</TextView>}
-      />
+      {!!notifications?.length && (
+        <ListView
+          data={notifications}
+          renderItem={(row: any) => renderItem(row)}
+        />
+      )}
+
+      {!notifications?.length && (
+        <TextView>{i18n.t('No notifications available.')}</TextView>
+      )}
     </BoxView>
   );
 };
+
+const styles = StyleSheet.create({
+  viewedItem: {
+    opacity: 0.5,
+  },
+});
+
 
 export default NotificationsMenu;

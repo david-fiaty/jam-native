@@ -9,7 +9,7 @@ import TextView from './TextView';
 import SectionManager from '@/manager/SectionManager';
 import i18n from '@/translation/i18n';
 
-const FilterToolbarView = () => {
+const SearchFiltersView = () => {
   const router = useRouter();
   const searchState: any = useSelector((state: any) => state.search);
 
@@ -53,4 +53,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FilterToolbarView;
+export default SearchFiltersView;
