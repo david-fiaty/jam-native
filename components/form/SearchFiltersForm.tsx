@@ -69,7 +69,6 @@ const SearchFiltersForm = () => {
 
   const applyFilters = async () => {
     setIsApplyProcessing(true);
-    dispatch(setSearchValue(currentKeywords));
     dispatch(setSearchFilters(currentFilters));
     await SearchManager.loadResults(currentKeywords, currentFilters);
     setIsApplyProcessing(false);

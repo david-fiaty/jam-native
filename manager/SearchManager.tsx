@@ -57,42 +57,46 @@ class SearchManager {
   }
 
   applyFilters(searchResults: any, searchFilters: any) {
-    if (searchFilters) {
-      if (searchFilters?.countries?.length) {
-        searchResults.jam = searchResults.jam.filter((o: any) => {
-          return searchFilters.countries.some((id: any) => o?.countries?.includes(id));
-        });
+    if (!searchFilters) return searchResults;
 
-        searchResults.project = searchResults.project.filter((o: any) => {
-          return searchFilters.countries.some((id: any) => o?.countries?.includes(id));
-        });
-      }
+    if (searchFilters?.countries?.length) {
+      searchResults.jam = searchResults.jam.filter((o: any) => {
+        return searchFilters.countries.some((id: any) => o?.countries?.includes(id));
+      });
 
-      if (searchFilters?.sectors?.length) {
-        searchResults.jam = searchResults.jam.filter((o: any) => {
-          return [...searchFilters.sectors, ...(searchFilters.subSectors || [])].some((id: number) => o?.sectors?.includes(id));
-        });
+      searchResults.project = searchResults.project.filter((o: any) => {
+        return searchFilters.countries.some((id: any) => o?.countries?.includes(id));
+      });
 
-        searchResults.project = searchResults.project.filter((o: any) => {
-          return [...searchFilters.sectors, ...(searchFilters.subSectors || [])].some((id: number) => o?.sectors?.includes(id));
-        });
+      searchResults.profile = searchResults.profile.filter((o: any) => {
+        return searchFilters.countries.some((id: any) => o?.countries?.includes(id));
+      });
+    }
 
-        searchResults.profile = searchResults.profile.filter((o: any) => {
-          return [...searchFilters.sectors, ...(searchFilters.subSectors || [])].some((id: number) => o?.sectors?.includes(id));
-        });
-      }
+    if (searchFilters?.sectors?.length) {
+      searchResults.jam = searchResults.jam.filter((o: any) => {
+        return [...searchFilters.sectors, ...(searchFilters.subSectors || [])].some((id: number) => o?.sectors?.includes(id));
+      });
 
-      if (searchFilters?.locationTypes?.length) {
-        searchResults.jam = searchResults.jam.filter((o: any) => {
-          return searchFilters.locationTypes.some((id: any) => o?.location_type?.includes(id));
-        });
-      }
+      searchResults.project = searchResults.project.filter((o: any) => {
+        return [...searchFilters.sectors, ...(searchFilters.subSectors || [])].some((id: number) => o?.sectors?.includes(id));
+      });
 
-      if (searchFilters?.jamTypes?.length) {
-        searchResults.jam = searchResults.jam.filter((o: any) => {
-          return searchFilters.jamTypes.some((id: any) => o?.type?.includes(id));
-        });
-      }
+      searchResults.profile = searchResults.profile.filter((o: any) => {
+        return [...searchFilters.sectors, ...(searchFilters.subSectors || [])].some((id: number) => o?.sectors?.includes(id));
+      });
+    }
+
+    if (searchFilters?.locationTypes?.length) {
+      searchResults.jam = searchResults.jam.filter((o: any) => {
+        return searchFilters.locationTypes.some((id: any) => o?.location_type?.includes(id));
+      });
+    }
+
+    if (searchFilters?.jamTypes?.length) {
+      searchResults.jam = searchResults.jam.filter((o: any) => {
+        return searchFilters.jamTypes.some((id: any) => o?.type?.includes(id));
+      });
     }
 
     return searchResults;
@@ -100,9 +104,9 @@ class SearchManager {
 
   getTabResults(key: string, currentTab: string, currentResults: any) {
     let tab: string = currentTab;
-    let data: any = {...currentResults};
-    
-    if (key == 'jam' && tab && tab != 'jam') { 
+    let data: any = { ...currentResults };
+
+    if (key == 'jam' && tab && tab != 'jam') {
       data[key] = data[key].filter((o: any) => o.type == tab);
     }
     else if (key == 'profile' && tab && tab != 'jammer') {
