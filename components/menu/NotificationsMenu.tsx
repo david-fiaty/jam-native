@@ -40,19 +40,6 @@ const NotificationsMenu = () => {
     }
   };
 
-  const getStorageIds = async () => {
-    let idArray: any = '';
-
-    if (ScreenManager.isWeb()) {
-      idArray = localStorage.getItem(Config.storageKeys.viewedNotifications);
-    }
-    else {
-      idArray = await AsyncStorage.getItem(Config.storageKeys.viewedNotifications);
-    }
-
-    return JSON.parse(idArray || '[]');
-  };
-
   const renderItem = (row: any) => {
     return (
       <TouchableOpacity
@@ -76,7 +63,7 @@ const NotificationsMenu = () => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setViewedIds(await getStorageIds());
+        setViewedIds(await UserManager.getViewedNotifications());
         setIsLoaded(true);
       }
     })();
