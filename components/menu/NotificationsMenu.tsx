@@ -14,12 +14,19 @@ const NotificationsMenu = () => {
   const router = useRouter();
   const [notifications, setNotifications] = useState<any>([]);
 
+  const onItemPress = (row: any) => {
+    SectionManager.push(router, 'notification-item', { 
+      notificationId: JSON.stringify([row?.item?.id]), 
+      title: row.item?.content?.content_data?.title 
+    });
+  };
+
   const renderItem = (row: any) => {
     return (
       <TouchableOpacity
         key={row.item.id}
-        onPress={() => SectionManager.push(router, 'notification-item', { notificationId: JSON.stringify([row?.item?.id]), title: row.item?.content?.content_data?.title })}
-        style={styles.notificationViewed}
+        onPress={() => onItemPress(row)}
+        //style={styles.notificationViewed}
       >
         <View style={Layout.menuItem}>
           <TextView>
