@@ -1,26 +1,65 @@
 import { useState, useEffect } from "react";
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Layout } from '@/constants/Layout';
 import { Config } from "@/constants/Config";
 import ListView from '../view/ListView';
 import TextView from '../view/TextView';
 import i18n from '@/translation/i18n';
 import UserManager from "@/manager/UserManager";
-import SpinnerView from "../view/SpinnerView";
 import BoxView from "../view/BoxView";
 import SectionManager from "@/manager/SectionManager";
+import ScreenManager from "@/manager/ScreenManager";
+import SpinnerView from "../view/SpinnerView";
 
 const NotificationsMenu = () => {
   const router = useRouter();
-  const [notificationsData, setNotificationsData] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [notifications, setNotifications] = useState<any[]>([]);
+  const [viewedNotifications, setViewedNotifications] = useState<any>([]);
+
+  const onItemPress = async (row: any) => {
+    await setStorageId(row.item.id);
+
+    SectionManager.push(router, 'notification-item', { 
+      notificationId: JSON.stringify([row.item.id]), 
+      title: row.item?.content?.content_data?.title 
+    });
+  };
+
+  const setStorageId = async (rowId: any) => {
+    let idArray: any[] = [...viewedNotifications];
+    idArray.push(rowId);
+    setViewedNotifications(idArray);
+
+    if (ScreenManager.isWeb()) {
+      localStorage.setItem(Config.storageKeys.viewedNotifications, JSON.stringify(idArray));
+    }
+    else {
+      await AsyncStorage.setItem(Config.storageKeys.viewedNotifications, JSON.stringify(idArray));
+    }
+  };
+
+  const getStorageIds = async () => {
+    let idArray: any = '';
+
+    if (ScreenManager.isWeb()) {
+      idArray = localStorage.getItem(Config.storageKeys.viewedNotifications);
+    }
+    else {
+      idArray = await AsyncStorage.getItem(Config.storageKeys.viewedNotifications);
+    }
+
+    return JSON.parse(idArray || '[]');
+  };
 
   const renderItem = (row: any) => {
     return (
       <TouchableOpacity
         key={row.item.id}
-        onPress={() => SectionManager.push(router, 'notification-item', { notificationId: JSON.stringify([row?.item?.id]), title: row.item?.content?.content_data?.title })}
+        onPress={() => onItemPress(row)}
+        style={viewedNotifications.includes(row.item.id) ? styles.viewedNotification : {}}
       >
         <View style={Layout.menuItem}>
           <TextView>
@@ -31,20 +70,30 @@ const NotificationsMenu = () => {
     );
   };
 
-  useEffect(() => {
-    if (!isLoaded) {
-      UserManager.getNotifications().then((data: any) => {
-        if (data?.length > Config.maxNotificationsDisplay) {
-          data = data.slice(Config.maxNotificationsDisplay - 1);
-        }
+  const loadNotifications = async () => {
+    setNotifications(await UserManager.getNotifications());
+  };
 
-        setNotificationsData(data);
+  useEffect(() => {
+    (async () => {
+      if (!isLoaded) {
+        setViewedNotifications(await getStorageIds());
         setIsLoaded(true);
-      });
-    }
+      }
+    })();
   }, [isLoaded]);
 
-  if (!isLoaded) return <SpinnerView />;
+  useEffect(() => {
+    loadNotifications();
+
+    const intervalId = setInterval(() => {
+      loadNotifications();
+    }, Config.notificationUpdateInterval);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  if (!isLoaded) return <SpinnerView />; 
 
   return (
     <BoxView
@@ -53,12 +102,19 @@ const NotificationsMenu = () => {
       style={Layout.menuContainer}
     >
       <ListView
-        data={notificationsData}
+        data={notifications}
         renderItem={(row: any) => renderItem(row)}
         emptyMessage={<TextView>{i18n.t('No notifications available.')}</TextView>}
       />
     </BoxView>
   );
 };
+
+const styles = StyleSheet.create({
+  viewedNotification: {
+    opacity: 0.5,
+  },
+});
+
 
 export default NotificationsMenu;

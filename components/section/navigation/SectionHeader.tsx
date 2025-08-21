@@ -34,7 +34,6 @@ const SectionHeader = ({ style }: Props) => {
   };
 
   const loadNotifications = async () => {
-    console.log('load notifs')
     setNotifications(await UserManager.getNotifications());
   };
 
