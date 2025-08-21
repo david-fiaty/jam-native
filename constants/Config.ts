@@ -24,6 +24,7 @@ export const Config: any = {
   storageKeys: {
     currentLanguage: 'language',
     profileData: 'profileData',
+    viewedNotifications: 'viewedNotifications', 
   },
   forceLogin: {
     enabled: true,
