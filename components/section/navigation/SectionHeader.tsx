@@ -34,10 +34,6 @@ const SectionHeader = ({ style }: Props) => {
     return modalState.active.length > 0 && modalState.active[modalState.active.length - 1].id == modalId;
   };
 
-  const loadNotifications = async () => {
-    setNotifications(await UserManager.getNotifications());
-  };
-
   const getNotificationsCount = () => {
     return notifications.length - viewedNotificationsCount;
   };
@@ -46,14 +42,13 @@ const SectionHeader = ({ style }: Props) => {
     return (await UserManager.getViewedNotifications())?.length || 0;
   };
 
-  useEffect(() => {
-    setIsLoggedIn(UserManager.isLoggedIn());
-  }, []);
+  const loadNotifications = async () => {
+    setNotifications(await UserManager.getNotifications());  
+    setViewedNotificationsCount(await getViewedNotificationsCount());
+  };
 
   useEffect(() => {
-    (async () => {
-      setViewedNotificationsCount(await getViewedNotificationsCount());
-    })();
+    setIsLoggedIn(UserManager.isLoggedIn());
   }, []);
 
   useEffect(() => {
