@@ -18,9 +18,9 @@ const SearchProfilesList = ({ data }: Props) => {
   const router = useRouter();
 
   const onItemPress = (row: any) => {
-    SectionManager.push(router, 'public-profile', { 
-      profileId: row?.item?.id, 
-      title: i18n.t("{{ name }}' s profile", {name: UserManager.getProfileDisplayName(row?.item) }),
+    SectionManager.push(router, 'public-profile', {
+      profileId: row?.item?.id,
+      title: i18n.t("{{ name }}' s profile", { name: UserManager.getProfileDisplayName(row?.item) }),
     });
   };
 
@@ -34,19 +34,24 @@ const SearchProfilesList = ({ data }: Props) => {
   };
 
   return (
-    <BoxView 
+    <BoxView
       direction="column"
       align="flex-start"
       justify="flex-start"
       scroll={ScreenManager.isWeb() ? true : false}
-      style={styles.container} 
+      style={styles.container}
     >
-      <ListView
-        data={data}
-        contentContainerStyle={styles.contentContainerStyle}
-        emptyMessage={<TextView>{i18n.t('No results available')}</TextView>}
-        renderItem={(row: any) => renderItem(row)}
-      />
+      {!!data?.length && (
+        <ListView
+          data={data}
+          contentContainerStyle={styles.contentContainerStyle}
+          renderItem={(row: any) => renderItem(row)}
+        />
+      )}
+
+      {!data?.length && (
+        <TextView>{i18n.t('No results available')}</TextView>
+      )}
     </BoxView>
   );
 };
@@ -56,8 +61,8 @@ const styles = StyleSheet.create({
     width: "100%",
     flexShrink: 1,
   },
-  contentContainerStyle: { 
-    gap: Layout.space.base, 
+  contentContainerStyle: {
+    gap: Layout.space.base,
     paddingBottom: Layout.space.base,
   },
   title: {
