@@ -41,13 +41,15 @@ const NotificationsMenu = () => {
   };
 
   const renderItem = (row: any) => {
+    let stateStyle: any = viewedIds.includes(row.item.id) ? styles.viewedItem : {};
+
     return (
       <TouchableOpacity
         key={row.item.id}
         onPress={() => onItemPress(row)}
-        style={viewedIds.includes(row.item.id) ? styles.viewedItem : {}}
+        style={Layout.menuItem}
       >
-        <View style={Layout.menuItem}>
+        <View style={stateStyle}>
           <TextView>
             {row.item?.content?.content_data?.title}
           </TextView>
