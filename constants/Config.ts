@@ -16,7 +16,6 @@ export const Config: any = {
   notificationUpdateInterval: 10000,
   messageDisplayDuration: 3500,
   searchDebounceDuration: 1000,
-  maxNotificationsDisplay: 14,
   mainSection: 'jams',
   defaultLocation: {
     latitude: 8.6195,
@@ -25,6 +24,7 @@ export const Config: any = {
   storageKeys: {
     currentLanguage: 'language',
     profileData: 'profileData',
+    viewedNotifications: 'viewedNotifications', 
   },
   forceLogin: {
     enabled: true,

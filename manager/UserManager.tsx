@@ -1,6 +1,5 @@
 import { setActiveModals } from '@/redux/slices/ModalSlice';
 import { setActiveSections } from '@/redux/slices/SectionSlice';
-import { setProfileData } from '@/redux/slices/UserSlice';
 import { Config } from '@/constants/Config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Store from '@/redux/Store';
@@ -367,6 +366,19 @@ class UserManager {
     else {
       await AsyncStorage.setItem(Config.storageKeys.profileData, localProfileData);
     }
+  }
+
+  async getViewedNotifications() {
+    let idArray: any = '';
+
+    if (ScreenManager.isWeb()) {
+      idArray = localStorage.getItem(Config.storageKeys.viewedNotifications);
+    }
+    else {
+      idArray = await AsyncStorage.getItem(Config.storageKeys.viewedNotifications);
+    }
+
+    return JSON.parse(idArray || '[]');
   }
 }
 
