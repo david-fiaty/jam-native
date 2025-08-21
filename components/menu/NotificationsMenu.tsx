@@ -85,9 +85,7 @@ const NotificationsMenu = () => {
   useEffect(() => {
     loadNotifications();
 
-    const intervalId = setInterval(() => {
-      loadNotifications();
-    }, Config.notificationUpdateInterval);
+    const intervalId = setInterval(() => loadNotifications(), Config.notificationUpdateInterval);
 
     return () => clearInterval(intervalId);
   }, []);
