@@ -49,8 +49,7 @@ const SearchProjectsList = ({ data }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        let projectsData: any[] = await EntityManager.addProjectsImages(data);
-        setCurrentData(projectsData);
+        setCurrentData(await EntityManager.addProjectsImages(data));
         setIsLoaded(true)
       }
     })();

@@ -8,7 +8,7 @@ import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
-import FilterToolbarView from "./FilterToolbarView";
+import SearchFiltersView from "./SearchFiltersView";
 import SearchManager from "@/manager/SearchManager";
 import TabsView from "./TabsView";
 
@@ -104,7 +104,7 @@ const JamsMapView = () => {
           onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
         />
 
-        <FilterToolbarView />
+        <SearchFiltersView />
 
         <MapView
           ref={mapRef}

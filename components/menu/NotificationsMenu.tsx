@@ -17,7 +17,7 @@ const NotificationsMenu = () => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [notifications, setNotifications] = useState<any[]>([]);
-  const [viewedNotifications, setViewedNotifications] = useState<any>([]);
+  const [viewedIds, setViewedIds] = useState<any>([]);
 
   const onItemPress = async (row: any) => {
     await setStorageId(row.item.id);
@@ -29,9 +29,8 @@ const NotificationsMenu = () => {
   };
 
   const setStorageId = async (rowId: any) => {
-    let idArray: any[] = [...viewedNotifications];
-    idArray.push(rowId);
-    setViewedNotifications(idArray);
+    let idArray: any[] = [...new Set([...viewedIds, rowId])];
+    setViewedIds(idArray);
 
     if (ScreenManager.isWeb()) {
       localStorage.setItem(Config.storageKeys.viewedNotifications, JSON.stringify(idArray));
@@ -59,7 +58,7 @@ const NotificationsMenu = () => {
       <TouchableOpacity
         key={row.item.id}
         onPress={() => onItemPress(row)}
-        style={viewedNotifications.includes(row.item.id) ? styles.viewedNotification : {}}
+        style={viewedIds.includes(row.item.id) ? styles.viewedItem : {}}
       >
         <View style={Layout.menuItem}>
           <TextView>
@@ -77,7 +76,7 @@ const NotificationsMenu = () => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setViewedNotifications(await getStorageIds());
+        setViewedIds(await getStorageIds());
         setIsLoaded(true);
       }
     })();
@@ -111,7 +110,7 @@ const NotificationsMenu = () => {
 };
 
 const styles = StyleSheet.create({
-  viewedNotification: {
+  viewedItem: {
     opacity: 0.5,
   },
 });
