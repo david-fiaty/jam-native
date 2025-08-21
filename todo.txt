@@ -52,7 +52,7 @@ https://docs.google.com/spreadsheets/d/1q7osx0gzONv_ZLisLiUDJU6UqphqBvXejlyeCUTT
 # Global feedback
 https://docs.google.com/spreadsheets/d/1q7osx0gzONv_ZLisLiUDJU6UqphqBvXejlyeCUTTD44/edit?pli=1&gid=664353314#gid=664353314
 
-# NEW PROFILE & NOTIFICATIONS
+# NEW SCREENS
 https://www.figma.com/design/9gWmK7TnjDeFidQliB1mkO/JAM-MOBILE?node-id=0-1&p=f
 
 Test users:
@@ -140,7 +140,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 
 # New release
 - Integration search screens, navigation, filters state
-- Affichage search images sur 2 colonnes
+- Affichage search screen results sur 2 colonnes
 - Amelioration performance (cache images in-memory + disk) 
 - Fix welcome screen slider display
 

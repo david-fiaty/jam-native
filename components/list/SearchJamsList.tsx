@@ -51,14 +51,19 @@ const SearchJamsList = ({ data }: Props) => {
       scroll={ScreenManager.isWeb() ? true : false}
       style={styles.container}
     >
+      {!!data?.length && (
       <ListView
         data={data}
         numColumns={numColumns}
         contentContainerStyle={styles.contentContainerStyle}
         columnWrapperStyle={styles.columnWrapperStyle}
-        emptyMessage={<TextView>{i18n.t('No results available')}</TextView>}
         renderItem={(row: any) => renderItem(row)}
       />
+      )}
+
+      {!data?.length && (
+        <TextView>{i18n.t('No results available')}</TextView>
+      )}
     </BoxView>
   );
 };
