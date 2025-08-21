@@ -19,6 +19,7 @@ const SectionHeader = ({ style }: Props) => {
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [notifications, setNotifications] = useState<any>([]);
+  const [viewedNotificationsCount, setViewedNotificationsCount] = useState<number>(0);
   const modalState: any = useSelector((state: any) => state.modal);
 
   const getIconTheme = (modalId: string) => {
@@ -37,8 +38,22 @@ const SectionHeader = ({ style }: Props) => {
     setNotifications(await UserManager.getNotifications());
   };
 
+  const getNotificationsCount = () => {
+    return notifications.length - viewedNotificationsCount;
+  };
+
+  const getViewedNotificationsCount = async () => {
+    return (await UserManager.getViewedNotifications())?.length || 0;
+  };
+
   useEffect(() => {
     setIsLoggedIn(UserManager.isLoggedIn());
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      setViewedNotificationsCount(await getViewedNotificationsCount());
+    })();
   }, []);
 
   useEffect(() => {
@@ -79,7 +94,7 @@ const SectionHeader = ({ style }: Props) => {
 
         {isLoggedIn && (
           <IconView
-            label={notifications?.length > 0 ? ` ${notifications.length}+` : ` 0 `}
+            label={notifications?.length > 0 ? ` ${getNotificationsCount()}+` : ` 0 `}
             size={13}
             padding={4.5}
             theme={getIconTheme('NotificationsMenu')}
