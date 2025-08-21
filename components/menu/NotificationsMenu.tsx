@@ -11,10 +11,13 @@ import UserManager from "@/manager/UserManager";
 import BoxView from "../view/BoxView";
 import SectionManager from "@/manager/SectionManager";
 import ScreenManager from "@/manager/ScreenManager";
+import SpinnerView from "../view/SpinnerView";
 
 const NotificationsMenu = () => {
   const router = useRouter();
-  const [notifications, setNotifications] = useState<any>([]);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [notifications, setNotifications] = useState<any[]>([]);
+  const [viewedNotifications, setViewedNotifications] = useState<any>([]);
 
   const onItemPress = async (row: any) => {
     await setStorageId(row.item.id);
@@ -26,21 +29,29 @@ const NotificationsMenu = () => {
   };
 
   const setStorageId = async (rowId: any) => {
+    let idArray: any[] = [...viewedNotifications];
+    idArray.push(rowId);
+    setViewedNotifications(idArray);
+
     if (ScreenManager.isWeb()) {
-      localStorage.setItem(Config.storageKeys.viewedNotifications, rowId);
+      localStorage.setItem(Config.storageKeys.viewedNotifications, JSON.stringify(idArray));
     }
     else {
-      await AsyncStorage.setItem(Config.storageKeys.viewedNotifications, rowId);
+      await AsyncStorage.setItem(Config.storageKeys.viewedNotifications, JSON.stringify(idArray));
     }
   };
 
   const getStorageIds = async () => {
+    let idArray: any = '';
+
     if (ScreenManager.isWeb()) {
-      return localStorage.getItem(Config.storageKeys.viewedNotifications);
+      idArray = localStorage.getItem(Config.storageKeys.viewedNotifications);
     }
     else {
-      return await AsyncStorage.getItem(Config.storageKeys.viewedNotifications);
+      idArray = await AsyncStorage.getItem(Config.storageKeys.viewedNotifications);
     }
+
+    return JSON.parse(idArray || '[]');
   };
 
   const renderItem = (row: any) => {
@@ -48,7 +59,7 @@ const NotificationsMenu = () => {
       <TouchableOpacity
         key={row.item.id}
         onPress={() => onItemPress(row)}
-        //style={styles.notificationViewed}
+        style={viewedNotifications.includes(row.item.id) ? styles.viewedNotification : {}}
       >
         <View style={Layout.menuItem}>
           <TextView>
@@ -64,6 +75,15 @@ const NotificationsMenu = () => {
   };
 
   useEffect(() => {
+    (async () => {
+      if (!isLoaded) {
+        setViewedNotifications(await getStorageIds());
+        setIsLoaded(true);
+      }
+    })();
+  }, [isLoaded]);
+
+  useEffect(() => {
     loadNotifications();
 
     const intervalId = setInterval(() => {
@@ -72,6 +92,8 @@ const NotificationsMenu = () => {
 
     return () => clearInterval(intervalId);
   }, []);
+
+  if (!isLoaded) return <SpinnerView />; 
 
   return (
     <BoxView
@@ -89,7 +111,7 @@ const NotificationsMenu = () => {
 };
 
 const styles = StyleSheet.create({
-  notificationViewed: {
+  viewedNotification: {
     opacity: 0.5,
   },
 });
