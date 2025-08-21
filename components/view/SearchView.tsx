@@ -9,7 +9,7 @@ import SearchProjectsList from "../list/SearchProjectsList";
 import TabsView from "./TabsView";
 import BoxView from "./BoxView";
 import SpinnerView from "./SpinnerView";
-import FilterToolbarView from "./FilterToolbarView";
+import SearchFiltersView from "./SearchFiltersView";
 import SearchManager from "@/manager/SearchManager";
 
 const SearchView = () => {
@@ -52,7 +52,7 @@ const SearchView = () => {
       />
 
       {/* Filter toolbar */}
-      <FilterToolbarView />
+      <SearchFiltersView />
 
       {/* Jams list */}
       {['jam', 'looking', 'call', 'event'].includes(searchState.currentTab) && (
