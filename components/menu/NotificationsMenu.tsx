@@ -22,9 +22,9 @@ const NotificationsMenu = () => {
   const onItemPress = async (row: any) => {
     await setStorageId(row.item.id);
 
-    SectionManager.push(router, 'notification-item', { 
-      notificationId: JSON.stringify([row.item.id]), 
-      title: row.item?.content?.content_data?.title 
+    SectionManager.push(router, 'notification-item', {
+      notificationId: JSON.stringify([row.item.id]),
+      title: row.item?.content?.content_data?.title
     });
   };
 
@@ -38,19 +38,6 @@ const NotificationsMenu = () => {
     else {
       await AsyncStorage.setItem(Config.storageKeys.viewedNotifications, JSON.stringify(idArray));
     }
-  };
-
-  const getStorageIds = async () => {
-    let idArray: any = '';
-
-    if (ScreenManager.isWeb()) {
-      idArray = localStorage.getItem(Config.storageKeys.viewedNotifications);
-    }
-    else {
-      idArray = await AsyncStorage.getItem(Config.storageKeys.viewedNotifications);
-    }
-
-    return JSON.parse(idArray || '[]');
   };
 
   const renderItem = (row: any) => {
@@ -76,7 +63,7 @@ const NotificationsMenu = () => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setViewedIds(await getStorageIds());
+        setViewedIds(await UserManager.getViewedNotifications());
         setIsLoaded(true);
       }
     })();
@@ -90,7 +77,7 @@ const NotificationsMenu = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  if (!isLoaded) return <SpinnerView />; 
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView
@@ -98,11 +85,16 @@ const NotificationsMenu = () => {
       justify="flex-start"
       style={Layout.menuContainer}
     >
-      <ListView
-        data={notifications}
-        renderItem={(row: any) => renderItem(row)}
-        emptyMessage={<TextView>{i18n.t('No notifications available.')}</TextView>}
-      />
+      {!!notifications?.length && (
+        <ListView
+          data={notifications}
+          renderItem={(row: any) => renderItem(row)}
+        />
+      )}
+
+      {!notifications?.length && (
+        <TextView>{i18n.t('No notifications available.')}</TextView>
+      )}
     </BoxView>
   );
 };
