@@ -21,6 +21,7 @@ import JamCommentsList from '../list/JamCommentsList';
 import ProjectCommentsList from '../list/ProjectCommentsList';
 import VenueTypesList from '../list/VenueTypesList';
 import PrivateProfileSection from '../section/profile/PrivateProfileSection';
+import ScreenManager from '@/manager/ScreenManager';
 
 type Props = {
   currentSection?: any;
@@ -47,7 +48,7 @@ const ModalView = ({ currentSection, layout, style }: Props) => {
     };
   };
   */
-
+  
   const getContainerStyle = () => {
     let top: number = 0;
 
@@ -55,7 +56,6 @@ const ModalView = ({ currentSection, layout, style }: Props) => {
       top: top,
     };
   };
-
 
   const canShowModal = () => {
     return currentModal !== null && currentModal?.sectionId === currentSection?.id;
