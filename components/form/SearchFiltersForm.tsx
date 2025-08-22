@@ -232,7 +232,7 @@ const SearchFiltersForm = () => {
     return (
       <>
         <TextView style={styles.filterTitle}>
-          {i18n.t('Location Types')}
+          {i18n.t('Locations')}
         </TextView>
         <BoxView
           direction="row"
