@@ -95,7 +95,7 @@ const NotificationsMenu = () => {
       )}
 
       {!notifications?.length && (
-        <TextView>{i18n.t('No notifications available.')}</TextView>
+        <TextView>{i18n.t('No data available.')}</TextView>
       )}
     </BoxView>
   );

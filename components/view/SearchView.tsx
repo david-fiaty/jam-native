@@ -55,21 +55,21 @@ const SearchView = () => {
       <SearchFiltersView />
 
       {/* Jams list */}
-      {['jam', 'looking', 'call', 'event'].includes(searchState.currentTab) && (
+      {SearchManager.isJamTab(searchState.currentTab) && (
         <SearchJamsList
           data={getTabResults('jam')}
         />
       )}
 
-      {/* Jammers list */}
-      {['jammer', 'venue', 'organization', 'personal'].includes(searchState.currentTab) &&
+      {/* Profiles list */}
+      {SearchManager.isProfileTab(searchState.currentTab) &&
         <SearchProfilesList
           data={getTabResults('profile')}
         />
       }
 
       {/* Projects list */}
-      {['project'].includes(searchState.currentTab) &&
+      {SearchManager.isProjectTab(searchState.currentTab) &&
         <SearchProjectsList
           data={getTabResults('project')}
         />

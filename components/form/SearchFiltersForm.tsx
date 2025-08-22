@@ -232,7 +232,7 @@ const SearchFiltersForm = () => {
     return (
       <>
         <TextView style={styles.filterTitle}>
-          {i18n.t('Jam Locations')}
+          {i18n.t('Locations')}
         </TextView>
         <BoxView
           direction="row"
@@ -289,8 +289,7 @@ const SearchFiltersForm = () => {
         {renderCountriesFilter()}
         {renderSectorsFilter()}
         {!!currentFilters?.sectors?.length && renderSubSectorsFilter()}
-        {(!searchState.currentTab?.length || searchState.currentTab == 'jam') && renderJamTypesFilter()}
-        {(!searchState.currentTab?.length || searchState.currentTab == 'jam') && renderLocationTypesFilter()}
+        {(!searchState.currentTab?.length || SearchManager.isJamTab(searchState.currentTab)) && renderJamTypesFilter() && renderLocationTypesFilter()}
       </BoxView>
 
       <DividerView theme="secondary" />
