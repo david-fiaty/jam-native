@@ -36,6 +36,8 @@
     },
     "plugins": [
       "expo-router",
+      "expo-font",
+      "expo-localization",
       [
         "expo-location",
         {
@@ -47,9 +49,7 @@
         {
           "photosPermission": "Allow $(PRODUCT_NAME) to access your media files."
         }
-      ],
-      "expo-font",
-      "expo-localization"
+      ]
     ],
     "experiments": {
       "typedRoutes": true
