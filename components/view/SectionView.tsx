@@ -40,7 +40,6 @@ const SectionView = () => {
   const path = usePathname();
   const dispatch = useDispatch();
   const [currentSection, setCurrentSection] = useState<any>(null);
-  const [sectionHeaderLayout, setSectionHeaderLayout] = useState<any>(null);
   const sectionState: any = useSelector((state: any) => state.section);
   const modalState: any = useSelector((state: any) => state.modal);
   const userState: any = useSelector((state: any) => state.user);
@@ -294,15 +293,7 @@ const SectionView = () => {
   return (
     <>
       <MessageView />
-
-      <View
-        onLayout={(e: any) => {
-          setSectionHeaderLayout(e.nativeEvent.layout);
-        }}
-      >
-        {currentSection?.showHeader === true && <SectionHeader style={styles.header} />}
-      </View>
-
+      {currentSection?.showHeader === true && <SectionHeader style={styles.header} />}
       {showBackButton() === true && <SectionBackButton />}
 
       <BoxView
@@ -312,9 +303,9 @@ const SectionView = () => {
         style={styles.container}
       >
         {currentSection?.render(currentSection?.params || {})}
-
-        <ModalView currentSection={currentSection} style={styles.modal} layout={sectionHeaderLayout} />
       </BoxView>
+
+      <ModalView currentSection={currentSection} style={styles.modal} />
 
       {currentSection?.showFooter === true && <SectionFooter style={styles.footer} />}
     </>
