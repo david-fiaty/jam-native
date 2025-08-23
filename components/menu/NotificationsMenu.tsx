@@ -20,7 +20,7 @@ const NotificationsMenu = () => {
   const [viewedIds, setViewedIds] = useState<any>([]);
 
   const onItemPress = async (row: any) => {
-    await setStorageId(row.item.id);
+    await setItemViewed(row.item.id);
 
     SectionManager.push(router, 'notification-item', {
       notificationId: JSON.stringify([row.item.id]),
@@ -28,7 +28,7 @@ const NotificationsMenu = () => {
     });
   };
 
-  const setStorageId = async (rowId: any) => {
+  const setItemViewed = async (rowId: any) => {
     let idArray: any[] = [...new Set([...viewedIds, rowId])];
     setViewedIds(idArray);
 
