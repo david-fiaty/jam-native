@@ -25,11 +25,10 @@ import ScreenManager from '@/manager/ScreenManager';
 
 type Props = {
   currentSection?: any;
-  layout?: any;
   style?: any;
 };
 
-const ModalView = ({ currentSection, layout, style }: Props) => {
+const ModalView = ({ currentSection, style }: Props) => {
   const [currentModal, setCurrentModal] = useState<any>(null);
   const [containerStyle, setContainerStyle] = useState<any>({});
   const modalState: any = useSelector((state: any) => state.modal);
