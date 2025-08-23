@@ -49,7 +49,7 @@ const ModalView = ({ currentSection, style }: Props) => {
   */
   
   const getContainerStyle = () => {
-    let top: number = 0;
+    let top: number = ScreenManager.getModalPosition().y + Layout.space.base;
 
     return {
       top: top,
