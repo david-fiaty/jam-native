@@ -16,11 +16,12 @@ type Props = {
 
 const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [listData, setListData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search);
 
   const renderItem = (row: any) => {
     return (
-      <JamView 
+      <JamView
         jamId={row?.item?.id}
         isPublic={false}
       />
@@ -28,7 +29,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   };
 
   const getListData = () => {
-    let data: any [] = JSON.parse(searchState.currentResults)?.jam || [];
+    let data: any[] = JSON.parse(searchState.currentResults)?.jam || [];
 
     if (idArray?.length > 0) {
       data = data.filter((o: any) => idArray.includes(o.id));
@@ -40,6 +41,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
+        setListData(getListData());
         setIsLoaded(true);
       }
     })();
@@ -52,15 +54,20 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
       direction="column"
       style={styles.container}
     >
-      <ListView
-        data={getListData()}
-        contentContainerStyle={Layout.listContainer}
-        renderItem={renderItem}
-        keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
-        onEndReachedThreshold={0.5}
-        emptyMessage={<TextView>{i18n.t('No results available')}</TextView>}
-        //onEndReached={onEndReached}
-      />
+      {isLoaded && !!listData?.length && (
+        <ListView
+          data={listData}
+          contentContainerStyle={Layout.listContainer}
+          renderItem={renderItem}
+          keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
+          onEndReachedThreshold={0.5}
+          //onEndReached={onEndReached}
+        />
+      )}
+
+      {isLoaded && !listData?.length && (
+        <TextView>{i18n.t('No results available')}</TextView>
+      )}
     </BoxView>
   );
 };

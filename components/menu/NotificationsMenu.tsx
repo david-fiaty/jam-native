@@ -20,7 +20,7 @@ const NotificationsMenu = () => {
   const [viewedIds, setViewedIds] = useState<any>([]);
 
   const onItemPress = async (row: any) => {
-    await setStorageId(row.item.id);
+    await setItemViewed(row.item.id);
 
     SectionManager.push(router, 'notification-item', {
       notificationId: JSON.stringify([row.item.id]),
@@ -28,7 +28,7 @@ const NotificationsMenu = () => {
     });
   };
 
-  const setStorageId = async (rowId: any) => {
+  const setItemViewed = async (rowId: any) => {
     let idArray: any[] = [...new Set([...viewedIds, rowId])];
     setViewedIds(idArray);
 
@@ -41,13 +41,15 @@ const NotificationsMenu = () => {
   };
 
   const renderItem = (row: any) => {
+    let stateStyle: any = viewedIds.includes(row.item.id) ? styles.viewedItem : {};
+
     return (
       <TouchableOpacity
         key={row.item.id}
         onPress={() => onItemPress(row)}
-        style={viewedIds.includes(row.item.id) ? styles.viewedItem : {}}
+        style={Layout.menuItem}
       >
-        <View style={Layout.menuItem}>
+        <View style={stateStyle}>
           <TextView>
             {row.item?.content?.content_data?.title}
           </TextView>
@@ -93,7 +95,7 @@ const NotificationsMenu = () => {
       )}
 
       {!notifications?.length && (
-        <TextView>{i18n.t('No notifications available.')}</TextView>
+        <TextView>{i18n.t('No data available.')}</TextView>
       )}
     </BoxView>
   );

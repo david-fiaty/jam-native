@@ -21,41 +21,28 @@ import JamCommentsList from '../list/JamCommentsList';
 import ProjectCommentsList from '../list/ProjectCommentsList';
 import VenueTypesList from '../list/VenueTypesList';
 import PrivateProfileSection from '../section/profile/PrivateProfileSection';
+import ScreenManager from '@/manager/ScreenManager';
 
 type Props = {
   currentSection?: any;
-  layout?: any;
   style?: any;
 };
 
-const ModalView = ({ currentSection, layout, style }: Props) => {
+const ModalView = ({ currentSection, style }: Props) => {
   const [currentModal, setCurrentModal] = useState<any>(null);
   const [containerStyle, setContainerStyle] = useState<any>({});
   const modalState: any = useSelector((state: any) => state.modal);
   const sectionState: any = useSelector((state: any) => state.section);
-
-  /*
+  
   const getContainerStyle = () => {
-    let top: number = 0;
-    
-    if (sectionState.active.length > 3 && modalState.active.length > 1) {
-      top = -Layout.space.base*3.6; 
-    }
+    let top: number = ScreenManager.getModalPosition().y + Layout.space.base;
+    let height: number = ScreenManager.getModalSize().height;
 
     return {
       top: top,
+      height: height,
     };
   };
-  */
-
-  const getContainerStyle = () => {
-    let top: number = 0;
-
-    return {
-      top: top,
-    };
-  };
-
 
   const canShowModal = () => {
     return currentModal !== null && currentModal?.sectionId === currentSection?.id;

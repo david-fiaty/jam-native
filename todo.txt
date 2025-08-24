@@ -27,7 +27,6 @@ npm start --tunnel
 
 # Update stack
 npm install [expo version]
-eas update
 npm install -g eas-cli
 
 # No hang up
@@ -397,3 +396,12 @@ const headerVisibleOptions: object = {
       />
     );
   };
+
+
+      [
+        "react-native-maps",
+        {
+          "iosGoogleMapsApiKey": "AIzaSyCAEf0XHIfZFbXXLLANyLGi84RLqwKMKKM",
+          "androidGoogleMapsApiKey": "AIzaSyCAEf0XHIfZFbXXLLANyLGi84RLqwKMKKM"
+        }
+      ]
