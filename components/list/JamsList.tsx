@@ -56,7 +56,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
     >
       {isLoaded && !!listData?.length && (
         <ListView
-          data={getListData()}
+          data={listData}
           contentContainerStyle={Layout.listContainer}
           renderItem={renderItem}
           keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
