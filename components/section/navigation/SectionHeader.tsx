@@ -34,10 +34,6 @@ const SectionHeader = ({ style }: Props) => {
     return modalState.active.length > 0 && modalState.active[modalState.active.length - 1].id == modalId;
   };
 
-  const getNotificationsCount = () => {
-    return notifications.length - viewedNotificationsCount;
-  };
-
   const getViewedNotificationsCount = async () => {
     return (await UserManager.getViewedNotifications())?.length || 0;
   };
@@ -45,6 +41,20 @@ const SectionHeader = ({ style }: Props) => {
   const loadNotifications = async () => {
     setNotifications(await UserManager.getNotifications());  
     setViewedNotificationsCount(await getViewedNotificationsCount());
+  };
+
+  const getNotificationsCount = () => {
+    return notifications.length - viewedNotificationsCount;
+  };
+
+  const renderNotificationsCount = () => {
+    let count: number = getNotificationsCount();
+
+    if (count > 0) {
+      return ` ${count}+`;
+    }
+
+    return ` ${count} `;
   };
 
   useEffect(() => {
@@ -89,7 +99,7 @@ const SectionHeader = ({ style }: Props) => {
 
         {isLoggedIn && (
           <IconView
-            label={getNotificationsCount() > 0 ? ` ${getNotificationsCount()}+` : ` 0 `}
+            label={renderNotificationsCount()}
             size={13}
             padding={4.5}
             theme={getIconTheme('NotificationsMenu')}
