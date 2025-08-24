@@ -51,7 +51,7 @@ const SectionHeader = ({ style }: Props) => {
     let count: number = getNotificationsCount();
 
     if (count > 0) {
-      return ` ${count}+`;
+      return ` ${count}+ `;
     }
 
     return ` ${count} `;
