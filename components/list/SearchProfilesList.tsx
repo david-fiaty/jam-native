@@ -23,7 +23,7 @@ const SearchProfilesList = ({ data }: Props) => {
   const onItemPress = (row: any) => {
     SectionManager.push(router, 'public-profile', {
       profileId: row?.item?.id,
-      title: i18n.t("{{ name }}' s profile", { name: UserManager.getProfileDisplayName(row?.item) }),
+      title: i18n.t("{{ name }}'s profile", { name: UserManager.getProfileDisplayName(row?.item) }),
     });
   };
 

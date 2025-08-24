@@ -10,10 +10,18 @@ type Props = {
 const PublicProfileSection = ({ profileId }: Props) => {
   const [profileData, setProfileData] = useState<any>(null);
 
+  const getProfileData = async () => {
+    let data: any = await UserManager.getProfileData({ profile_id: profileId || null });
+
+    console.log(data)
+
+    return data;
+  };
+
   useEffect(() => {
     (async () => {
       if (!profileData) {
-        setProfileData(await UserManager.getProfileData({ profile_id: profileId || null }));
+        setProfileData(await getProfileData());
       }
     })();
   }, [profileData, profileId]);
