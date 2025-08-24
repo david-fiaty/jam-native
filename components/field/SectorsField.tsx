@@ -5,7 +5,6 @@ import { setFormData } from '@/redux/slices/FormSlice';
 import { Layout } from '@/constants/Layout';
 import { MultiSelect } from 'react-native-element-dropdown';
 import TagView from '../view/TagView';
-import EntityManager from '@/manager/EntityManager';
 import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
 import IconView from '../view/IconView';
