@@ -32,7 +32,6 @@ const ModalView = ({ currentSection, style }: Props) => {
   const [currentModal, setCurrentModal] = useState<any>(null);
   const [containerStyle, setContainerStyle] = useState<any>({});
   const modalState: any = useSelector((state: any) => state.modal);
-  const sectionState: any = useSelector((state: any) => state.section);
   
   const getContainerStyle = () => {
     let top: number = ScreenManager.getModalPosition().y + Layout.space.base;

@@ -291,7 +291,7 @@ const SectionView = () => {
   }, [sectionId, sectionState, userState]);
 
   return (
-    <>
+    <View style={styles.container}>
       <MessageView />
       {currentSection?.showHeader === true && <SectionHeader style={styles.header} />}
       {showBackButton() === true && <SectionBackButton />}
@@ -300,7 +300,7 @@ const SectionView = () => {
         direction="column"
         align="center"
         justify="center"
-        style={styles.container}
+        style={styles.content}
       >
         {currentSection?.render(currentSection?.params || {})}
       </BoxView>
@@ -308,12 +308,15 @@ const SectionView = () => {
       <ModalView currentSection={currentSection} style={styles.modal} />
 
       {currentSection?.showFooter === true && <SectionFooter style={styles.footer} />}
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flexGrow: 1,
+  },
+  content: {
     flex: 1,
     backgroundColor: Layout.colors.white,
     paddingHorizontal: Layout.space.base * 1.5,
