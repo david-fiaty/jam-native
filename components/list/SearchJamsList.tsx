@@ -63,13 +63,13 @@ const SearchJamsList = ({ data }: Props) => {
       style={styles.container}
     >
       {!!data?.length && (
-      <ListView
-        data={data}
-        numColumns={numColumns}
-        contentContainerStyle={styles.contentContainerStyle}
-        columnWrapperStyle={styles.columnWrapperStyle}
-        renderItem={(row: any) => renderItem(row)}
-      />
+        <ListView
+          data={data}
+          numColumns={numColumns}
+          contentContainerStyle={styles.contentContainerStyle}
+          columnWrapperStyle={styles.columnWrapperStyle}
+          renderItem={(row: any) => renderItem(row)}
+        />
       )}
 
       {!data?.length && (
