@@ -1,5 +1,5 @@
-import { StyleSheet, Platform, TouchableOpacity } from "react-native";
-import { useState, useEffect, useCallback } from "react";
+import { StyleSheet, TouchableOpacity } from "react-native";
+import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import ListView from "../view/ListView";
@@ -10,6 +10,7 @@ import BoxView from "../view/BoxView";
 import ScreenManager from "@/manager/ScreenManager";
 import MediaManager from "@/manager/MediaManager";
 import EntityManager from "@/manager/EntityManager";
+import SpinnerView from "../view/SpinnerView";
 
 type Props = {
   data?: any;
@@ -55,6 +56,8 @@ const SearchProjectsList = ({ data }: Props) => {
     })();
   }, [isLoaded, data]);
 
+  if (!isLoaded) return <SpinnerView />;
+
   return (
     <BoxView
       direction="column"
@@ -63,7 +66,7 @@ const SearchProjectsList = ({ data }: Props) => {
       scroll={ScreenManager.isWeb() ? true : false}
       style={styles.container}
     >
-      {!!currentData?.length && (
+      {isLoaded && !!currentData?.length && (
         <ListView
           data={currentData}
           numColumns={numColumns}
@@ -73,7 +76,7 @@ const SearchProjectsList = ({ data }: Props) => {
         />
       )}
 
-      {!currentData?.length && (
+      {isLoaded && !currentData?.length && (
         <TextView>{i18n.t('No results available')}</TextView>
       )}
     </BoxView>
