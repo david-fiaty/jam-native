@@ -89,7 +89,7 @@ const SectionHeader = ({ style }: Props) => {
 
         {isLoggedIn && (
           <IconView
-            label={notifications?.length > 0 ? ` ${getNotificationsCount()}+` : ` 0 `}
+            label={getNotificationsCount() > 0 ? ` ${getNotificationsCount()}+` : ` 0 `}
             size={13}
             padding={4.5}
             theme={getIconTheme('NotificationsMenu')}
