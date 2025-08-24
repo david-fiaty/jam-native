@@ -202,7 +202,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
       <>
         <BoxView direction="row" align="center" justify="space-between" style={styles.groupTitleContainer}>
           <TextView style={styles.groupTitle}>
-            {i18n.t("{{ name }}' s projects", { name: UserManager.getProfileDisplayName(profileItem) })}
+            {i18n.t("{{ name }}'s projects", { name: UserManager.getProfileDisplayName(profileItem) })}
           </TextView>
         </BoxView>
 
@@ -217,7 +217,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
   };
 
   const renderProfileJams = () => {
-    let groupTitle: string = i18n.t("{{ name }}' s jams", { name: UserManager.getProfileDisplayName(profileItem) });
+    let groupTitle: string = i18n.t("{{ name }}'s jams", { name: UserManager.getProfileDisplayName(profileItem) });
 
     return (
       <>
