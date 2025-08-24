@@ -116,6 +116,18 @@ class SearchManager {
     return data[key];
   }
 
+  isJamTab(key: string) {
+    return ['jam', 'looking', 'call', 'event'].includes(key);
+  }
+
+  isProfileTab(key: string) {
+    return ['jammer', 'venue', 'organization', 'personal'].includes(key);
+  }
+
+  isProjectTab(key: string) {
+    return ['project'].includes(key);
+  }
+
   getSearchTabs() {
     return [
       {

@@ -74,6 +74,11 @@ const Endpoints = {
     cacheable: false,
     dataKey: 'new_notifications_to_display',
   },
+  notificationsRead: {
+    path: '/profiles/[profile_id]/notifications/read/',
+    cacheable: false,
+    dataKey: null,
+  },
   login: {
     path: '/login/',
     cacheable: false,

@@ -4,7 +4,7 @@ export const Config: any = {
   infiniteScrollEnabled: false,
   apiUrl: 'https://dev.jammm.app/backend/api/v1',
   imageUrl: 'https://dev.jammm.app/backend',
-  mapApiKey: 'AIzaSyB91uv-OuWw6iNMjVZmuHJsRVDHP9baCq0',
+  mapApiKey: 'AIzaSyCAEf0XHIfZFbXXLLANyLGi84RLqwKMKKM',
   geocodeUrl: 'https://maps.googleapis.com/maps/api/geocode/json',
   storageKey: '@jam',
   defaultLanguage: 'en',
