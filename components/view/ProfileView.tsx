@@ -292,7 +292,7 @@ const ProfileView = ({ profileId, isOwner, isPublic }: Props) => {
       }     
     }
     else {
-      return userState.profileData;
+      return {...userState.profileData};
     }
 
     return data;
