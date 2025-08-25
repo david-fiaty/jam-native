@@ -1,10 +1,44 @@
 import { Share } from 'react-native';
 import { Config } from '@/constants/Config';
+import Store from '@/redux/Store';
 import DataManager from './DataManager';
 import UserManager from './UserManager';
 import i18n from '@/translation/i18n';
 
 class EntityManager {
+  async findJam(jamId: any) {
+    let currentResults: any = Store.getState().search.currentResults;
+    let data = (currentResults.jam || []).find((o: any) => o.id == jamId);
+
+    if (!data) {
+      data = (await this.getJams([jamId]))?.[0];
+    }
+
+    return data;
+  }
+
+  async findProject(projectId: any) {
+    let currentResults: any = Store.getState().search.currentResults;
+    let data = (currentResults.project || []).find((o: any) => o.id == projectId);
+
+    if (!data) {
+      data = (await this.getProjects([projectId]))?.[0];
+    }
+
+    return data;
+  }
+
+  async findProfile(profileId: any) {
+    let currentResults: any = Store.getState().search.currentResults;
+    let data = (currentResults.profile || []).find((o: any) => o.id == profileId);
+
+    if (!data) {
+      data = await UserManager.getProfileData({ profile_id: profileId || null });
+    }
+
+    return data;
+  }
+
   async listProfiles(options?: any) {
     let profileId = await UserManager.getProfileId();
     let defaults = {
@@ -181,10 +215,6 @@ class EntityManager {
     let options: any = {};
 
     return await DataManager.get('culturalActivities', options);
-  }
-
-  async findJam(entityId: any) {
-    return await DataManager.find('listJams', 'id', entityId);
   }
 
   async addJam(entityData: any) {
