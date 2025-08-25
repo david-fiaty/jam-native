@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import { useRouter } from 'expo-router';
 import { useSelector } from 'react-redux';
 import { Layout } from "@/constants/Layout";
 import JamViewHeader from "./jam-view/JamViewHeader";
@@ -16,16 +15,15 @@ type Props = {
 };
 
 const JamView = ({ jamId, isPublic, onListItemAction }: Props) => {
-  const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [jamItem, setJamItem] = useState<any>(null);
+  const [jamData, setJamData] = useState<any>(null);
   const appState = useSelector((state: any) => state.app);
   const userState = useSelector((state: any) => state.user);
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setJamItem((await EntityManager.getJams([jamId]))?.[0]);
+        setJamData(await EntityManager.findJam(jamId));
         setIsLoaded(true);
       }
     })();
@@ -33,14 +31,14 @@ const JamView = ({ jamId, isPublic, onListItemAction }: Props) => {
 
   return (
     <View style={styles.container}>
-      <JamViewHeader row={jamItem} />
-      <JamViewImage row={jamItem} />
+      <JamViewHeader row={jamData} />
+      <JamViewImage row={jamData} />
       <JamViewToolbar
-        row={jamItem} 
+        row={jamData} 
         profileData={userState.profileData} 
         onListItemAction={onListItemAction}
       />
-      <JamViewDetails row={jamItem} sectorsData={appState.sectorsData} />
+      <JamViewDetails row={jamData} sectorsData={appState.sectorsData} />
     </View>
   );
 };

@@ -20,20 +20,20 @@ type Props = {
 const ProjectView = ({ projectId, isPublic }: Props) => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [projectItem, setProjectItem] = useState<any>(null);
+  const [projectData, setProjectData] = useState<any>(null);
 
   const renderProjectJams = () => {
     return (
       <>
         <BoxView direction="row" align="center" justify="space-between" style={styles.groupTitleContainer}>
           <TextView style={styles.groupTitle}>
-            {i18n.t('Jams')} ({projectItem?.jams?.length || 0})
+            {i18n.t('Jams')} ({projectData?.jams?.length || 0})
           </TextView>
 
           {isPublic && (
             <TouchableOpacity onPress={() => {
               SectionManager.push(router, 'project-jams', {
-                jamId: JSON.stringify(projectItem?.jams || []),
+                jamId: JSON.stringify(projectData?.jams || []),
                 title: i18n.t('Project Jams'),
                 disableInfiniteScroll: true,
               });
@@ -44,7 +44,7 @@ const ProjectView = ({ projectId, isPublic }: Props) => {
         </BoxView>
 
         <ProjectJamsField
-          idArray={projectItem?.jams || []}
+          idArray={projectData?.jams || []}
           emptyMessage={i18n.t('No data available.')}
           isPublic={isPublic}
           addable={false}
@@ -54,10 +54,11 @@ const ProjectView = ({ projectId, isPublic }: Props) => {
     );
   };
 
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setProjectItem((await EntityManager.getProjects([projectId]))?.[0]);
+        setProjectData(await EntityManager.findProject(projectId));
         setIsLoaded(true);
       }
     })();
@@ -72,19 +73,19 @@ const ProjectView = ({ projectId, isPublic }: Props) => {
       style={styles.container}
     >
       <ProjectViewField label={i18n.t('Name')}>
-        <TextView>{projectItem?.name || i18n.t('Unavailable')}</TextView>
+        <TextView>{projectData?.name || i18n.t('Unavailable')}</TextView>
       </ProjectViewField>
 
       <ProjectViewField label={i18n.t('Description')}>
-        <TextView>{projectItem?.description || i18n.t('Unavailable')}</TextView>
+        <TextView>{projectData?.description || i18n.t('Unavailable')}</TextView>
       </ProjectViewField>
 
       <ProjectViewField label={i18n.t('Industries')}>
-        <SectorsViewField idArray={projectItem?.sectors || []} />
+        <SectorsViewField idArray={projectData?.sectors || []} />
       </ProjectViewField>
 
       <ProjectViewField label={i18n.t('Sub-industries')}>
-        <SubSectorsViewField idArray={projectItem?.sectors || []} />
+        <SubSectorsViewField idArray={projectData?.sectors || []} />
       </ProjectViewField>
 
       {renderProjectJams()}
