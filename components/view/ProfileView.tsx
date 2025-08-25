@@ -19,6 +19,7 @@ import SectorsViewField from "../field/SectorsViewField";
 import SubSectorsViewField from "../field/SubSectorsViewField";
 import CulturalActivitiesViewField from "../field/CulturalActivitiesViewField";
 import SpinnerView from "./SpinnerView";
+import EntityManager from "@/manager/EntityManager";
 
 const profileImageSize: number = 111;
 
@@ -281,21 +282,12 @@ const ProfileView = ({ profileId, isOwner, isPublic }: Props) => {
   };
 
   const getProfileData = async () => {
-    let data: any = {};
-
     if (isPublic) {
-      let currentResults: any = JSON.parse(searchState.currentResults);
-      data = (currentResults.profile || []).find((o: any) => o.id == profileId);
-
-      if (!data) {
-        data = await UserManager.getProfileData({ profile_id: profileId || null });
-      }     
+      return EntityManager.findProfile(profileId);
     }
     else {
       return {...userState.profileData};
     }
-
-    return data;
   };
 
   useEffect(() => {
