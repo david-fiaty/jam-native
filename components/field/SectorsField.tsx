@@ -163,19 +163,19 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
         <BoxView direction="column" align="left">
           <TextView>{i18n.t('Activity sub sectors')}*</TextView>
           <MultiSelect
-            value={getSelectedSubSectors()}
             labelField="label"
             valueField="value"
+            placeholderStyle={styles.placeholderStyle}
+            iconColor={Layout.colors.primary}
             placeholder={i18n.t('Select your sub sectors')}
+            value={getSelectedSubSectors()}
             inside={getSelectedSubSectors().length > 0}
             style={!getSelectedSubSectors().length ? styles.element : styles.preview}
             iconStyle={getSelectedSubSectors().length > 0 ? styles.iconRight : {}}
-            placeholderStyle={styles.placeholderStyle}
-            iconColor={Layout.colors.primary}
-            onChange={(selectedIds: any) => updateSelection(selectedIds)}
             data={getSubSectorsOptions()}
             renderItem={(o: any) => renderItem(o)}
             renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
+            onChange={(selectedIds: any) => updateSelection(selectedIds)}
           />
           {FormManager.renderError('sectors_ids')}
         </BoxView>
