@@ -12,7 +12,7 @@ class EntityManager {
 
     if (!data) {
       data = (await this.getJams([jamId]))?.[0];
-    }     
+    }
 
     return data;
   }
@@ -23,7 +23,18 @@ class EntityManager {
 
     if (!data) {
       data = (await this.getProjects([projectId]))?.[0];
-    }     
+    }
+
+    return data;
+  }
+
+  async findProfile(profileId: any) {
+    let currentResults: any = Store.getState().search.currentResults;
+    let data = (currentResults.profile || []).find((o: any) => o.id == profileId);
+
+    if (!data) {
+      data = await UserManager.getProfileData({ profile_id: profileId || null });
+    }
 
     return data;
   }
