@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
 import ProfileForm from "@/components/form/ProfileForm";
 
@@ -16,12 +14,20 @@ const ProfileFormSection = ({ profileId }: Props) => {
       direction="column"
       align="center"
       justify="flex-start"
-      style={Layout.screenContent}
+      style={styles.container}
       scroll={true}
     >
       <ProfileForm />
     </BoxView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    position: 'relative',
+    width: '100%',
+    height: '100%',
+  },
+});
 
 export default ProfileFormSection;
