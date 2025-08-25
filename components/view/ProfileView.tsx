@@ -320,8 +320,6 @@ const ProfileView = ({ profileId, isOwner, isPublic }: Props) => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(profileData?.country)
-
   return (
     <BoxView
       direction="column"
