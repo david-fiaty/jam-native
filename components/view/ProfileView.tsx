@@ -282,16 +282,12 @@ const ProfileView = ({ profileId, isOwner, isPublic }: Props) => {
   };
 
   const getProfileData = async () => {
-    let data: any = {};
-
     if (isPublic) {
       return EntityManager.findProfile(profileId);
     }
     else {
       return {...userState.profileData};
     }
-
-    return data;
   };
 
   useEffect(() => {
