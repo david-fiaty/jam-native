@@ -56,25 +56,15 @@ const ProjectView = ({ projectId, isPublic }: Props) => {
     );
   };
 
-  const getProjectData = async () => {    
-    let currentResults: any = JSON.parse(searchState.currentResults);
-    let data = (currentResults.project || []).find((o: any) => o.id == projectId);
-
-    if (!data) {
-      data = (await EntityManager.getProjects([projectId]))?.[0];
-    }     
-
-    return data;
-  };
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setProjectData(await getProjectData());
+        setProjectData(await EntityManager.findProject(projectId));
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded]);
+  }, [isLoaded, projectId]);
 
   return (
     <BoxView
