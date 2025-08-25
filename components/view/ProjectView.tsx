@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { useSelector } from "react-redux";
 import { useRouter } from 'expo-router';
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
@@ -22,7 +21,6 @@ const ProjectView = ({ projectId, isPublic }: Props) => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [projectData, setProjectData] = useState<any>(null);
-  const searchState = useSelector((state: any) => state.search);
 
   const renderProjectJams = () => {
     return (
