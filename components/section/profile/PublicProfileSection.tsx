@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import ProfileView from "@/components/view/ProfileView";
 import UserManager from "@/manager/UserManager";
 import SpinnerView from "@/components/view/SpinnerView";
@@ -9,11 +10,15 @@ type Props = {
 
 const PublicProfileSection = ({ profileId }: Props) => {
   const [profileData, setProfileData] = useState<any>(null);
+  const searchState = useSelector((state: any) => state.search);
 
   const getProfileData = async () => {
-    let data: any = await UserManager.getProfileData({ profile_id: profileId || null });
+    let currentResults: any = JSON.parse(searchState.currentResults);
+    let data: any = (currentResults.profile || []).find((o: any) => o.id == profileId);
 
-    console.log(data)
+    if (!data) {
+      data = await UserManager.getProfileData({ profile_id: profileId || null });
+    }     
 
     return data;
   };
