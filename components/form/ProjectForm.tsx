@@ -100,7 +100,7 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
         setProfileId(await UserManager.getProfileId());
 
         if (!isNaN(parseInt(projectId)) && parseInt(projectId) > 0) {
-          projectData = (await EntityManager.getProjects([projectId]))?.[0] || {};
+          projectData = await EntityManager.findProject(projectId);
         }
 
         dispatch(setFormData<any>({

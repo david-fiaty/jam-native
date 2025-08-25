@@ -18,27 +18,31 @@ import ProfileProjectsField from "../field/ProfileProjectsField";
 import SectorsViewField from "../field/SectorsViewField";
 import SubSectorsViewField from "../field/SubSectorsViewField";
 import CulturalActivitiesViewField from "../field/CulturalActivitiesViewField";
+import SpinnerView from "./SpinnerView";
+import EntityManager from "@/manager/EntityManager";
 
 const profileImageSize: number = 111;
 
 type Props = {
   profileId?: any;
-  profileData?: any;
   isOwner?: boolean;
   isPublic?: boolean;
 };
 
-const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
+const ProfileView = ({ profileId, isOwner, isPublic }: Props) => {
   const router = useRouter();
-  const [profileItem, setProfileItem] = useState<any>({});
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [profileData, setProfileData] = useState<any>({});
+  const searchState = useSelector((state: any) => state.search);
+  const userState = useSelector((state: any) => state.user);
 
   const renderHeader = () => {
     return (
       <>
         <BoxView direction="row" align="center" justify="center" style={styles.profileHeaderLeft}>
-          {profileItem?.profile_picture?.url?.length > 0 && (
+          {profileData?.profile_picture?.url?.length > 0 && (
             <ImageView
-              uri={MediaManager.getImageUrl(profileItem.profile_picture.url)}
+              uri={MediaManager.getImageUrl(profileData.profile_picture.url)}
               resizeMode="cover"
               width={profileImageSize}
               height={profileImageSize}
@@ -46,7 +50,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
             />
           )}
 
-          {!profileItem?.profile_picture?.url?.length && (
+          {!profileData?.profile_picture?.url?.length && (
             <IconView
               name="user"
               theme="secondary"
@@ -59,7 +63,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
         <View style={styles.profileHeaderRight}>
           <ProfileViewField>
             <TextView>
-              {profileItem?.profile_name}
+              {profileData?.profile_name}
             </TextView>
           </ProfileViewField>
 
@@ -71,10 +75,10 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
                 size={19}
                 padding={0}
                 color="black"
-                disabled={!profileItem?.instagram_username?.length}
+                disabled={!profileData?.instagram_username?.length}
                 onPress={() => {
-                  if (!!profileItem?.instagram_username?.length) {
-                    MediaManager.openUrl(profileItem.instagram_username);
+                  if (!!profileData?.instagram_username?.length) {
+                    MediaManager.openUrl(profileData.instagram_username);
                   }
                 }}
               />
@@ -85,10 +89,10 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
                 color="black"
                 size={19}
                 padding={0}
-                disabled={!profileItem?.facebook_link?.length}
+                disabled={!profileData?.facebook_link?.length}
                 onPress={() => {
-                  if (!!profileItem?.facebook_link?.length) {
-                    MediaManager.openUrl(profileItem.facebook_link);
+                  if (!!profileData?.facebook_link?.length) {
+                    MediaManager.openUrl(profileData.facebook_link);
                   }
                 }}
               />
@@ -99,10 +103,10 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
                 color="black"
                 size={19}
                 padding={0}
-                disabled={!profileItem?.linkedin_link?.length}
+                disabled={!profileData?.linkedin_link?.length}
                 onPress={() => {
-                  if (!!profileItem?.linkedin_link?.length) {
-                    MediaManager.openUrl(profileItem.linkedin_link)
+                  if (!!profileData?.linkedin_link?.length) {
+                    MediaManager.openUrl(profileData.linkedin_link)
                   }
                 }}
               />
@@ -111,7 +115,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
 
           <ProfileViewField>
             <TextView>
-              {profileItem?.email || i18n.t('Email unavailable')}
+              {profileData?.email || i18n.t('Email unavailable')}
             </TextView>
           </ProfileViewField>
         </View>
@@ -120,35 +124,35 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
   };
 
   const renderCollapsibleFields = () => {
-    if (profileItem?.profile_organization) {
+    if (profileData?.profile_organization) {
       return (
         <BoxView direction="column">
           <ProfileViewField label={i18n.t('Organization name')}>
             <TextView>
-              {profileItem?.profile_organization?.organization_name}
+              {profileData?.profile_organization?.organization_name}
             </TextView>
           </ProfileViewField>
 
           <ProfileViewField label={i18n.t('Creation year')}>
             <TextView>
-              {profileItem?.profile_organization?.creation_year || i18n.t('Unavailable')}
+              {profileData?.profile_organization?.creation_year || i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
 
           <ProfileViewField label={i18n.t('Address')}>
             <TextView>
-              {profileItem?.address || i18n.t('Unavailable')}
+              {profileData?.address || i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
         </BoxView>
       );
     }
-    else if (profileItem?.profile_venue) {
+    else if (profileData?.profile_venue) {
       return (
         <BoxView direction="column">
           <ProfileViewField label={i18n.t('Venue name')}>
             <TextView>
-              {profileItem?.profile_venue?.venue_name}
+              {profileData?.profile_venue?.venue_name}
             </TextView>
           </ProfileViewField>
 
@@ -160,36 +164,36 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
 
           <ProfileViewField label={i18n.t('Creation year')}>
             <TextView>
-              {profileItem?.profile_venue?.creation_year || i18n.t('Unavailable')}
+              {profileData?.profile_venue?.creation_year || i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
 
           <ProfileViewField label={i18n.t('Address')}>
             <TextView>
-              {profileItem?.address || i18n.t('Unavailable')}
+              {profileData?.address || i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
         </BoxView>
       );
     }
-    else if (profileItem?.profile_personal) {
+    else if (profileData?.profile_personal) {
       return (
         <BoxView direction="column">
           <ProfileViewField label={i18n.t('First name')}>
             <TextView>
-              {profileItem?.profile_personal?.first_name || i18n.t('Unavailable')}
+              {profileData?.profile_personal?.first_name || i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
 
           <ProfileViewField label={i18n.t('Last name')}>
             <TextView>
-              {profileItem?.profile_personal?.last_name || i18n.t('Unavailable')}
+              {profileData?.profile_personal?.last_name || i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
 
           <ProfileViewField label={i18n.t('Address')}>
             <TextView>
-              {profileItem?.address || i18n.t('Unavailable')}
+              {profileData?.address || i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
         </BoxView>
@@ -202,12 +206,12 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
       <>
         <BoxView direction="row" align="center" justify="space-between" style={styles.groupTitleContainer}>
           <TextView style={styles.groupTitle}>
-            {i18n.t("{{ name }}'s projects", { name: UserManager.getProfileDisplayName(profileItem) })}
+            {i18n.t("{{ name }}'s projects", { name: UserManager.getProfileDisplayName(profileData) })}
           </TextView>
         </BoxView>
 
         <ProfileProjectsField
-          idArray={profileItem?.profile_projects || []}
+          idArray={profileData?.profile_projects || []}
           emptyMessage={i18n.t('No data available.')}
           isPublic={isPublic}
           addable={!isPublic}
@@ -217,7 +221,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
   };
 
   const renderProfileJams = () => {
-    let groupTitle: string = i18n.t("{{ name }}'s jams", { name: UserManager.getProfileDisplayName(profileItem) });
+    let groupTitle: string = i18n.t("{{ name }}'s jams", { name: UserManager.getProfileDisplayName(profileData) });
 
     return (
       <>
@@ -228,7 +232,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
 
           <TouchableOpacity onPress={() => {
             SectionManager.push(router, 'profile-jams', {
-              jamId: JSON.stringify(profileItem?.profile_jams || []),
+              jamId: JSON.stringify(profileData?.profile_jams || []),
               title: groupTitle,
               disableInfiniteScroll: true,
             });
@@ -238,7 +242,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
         </BoxView>
 
         <ProfileJamsField
-          idArray={profileItem?.profile_jams || []}
+          idArray={profileData?.profile_jams || []}
           emptyMessage={i18n.t('No data available.')}
           addable={true}
           isPublic={isPublic}
@@ -259,7 +263,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
 
           <TouchableOpacity onPress={() => {
             SectionManager.push(router, 'profile-jams', {
-              jamId: JSON.stringify(profileItem?.saved_jams || []),
+              jamId: JSON.stringify(profileData?.saved_jams || []),
               title: groupTitle,
               disableInfiniteScroll: true,
             });
@@ -269,7 +273,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
         </BoxView>
 
         <ProfileJamsField
-          idArray={profileItem?.saved_jams || []}
+          idArray={profileData?.saved_jams || []}
           emptyMessage={i18n.t('No data available.')}
           isPublic={isPublic}
         />
@@ -277,9 +281,26 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
     );
   };
 
+  const getProfileData = async () => {
+    if (isPublic) {
+      return EntityManager.findProfile(profileId);
+    }
+    else {
+      return {...userState.profileData};
+    }
+  };
+
   useEffect(() => {
-    setProfileItem(profileData);
-  }, [profileData]);
+    (async () => {
+      if (!isLoaded) {
+        setProfileData(await getProfileData());
+        setIsLoaded(true);
+      }
+    })();
+
+  }, [isLoaded]);
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView
@@ -291,7 +312,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
     >
       <ProfileViewField>
         <TextView style={styles.profileTitle}>
-          {UserManager.getProfileDisplayName(profileItem)}
+          {UserManager.getProfileDisplayName(profileData)}
         </TextView>
       </ProfileViewField>
 
@@ -300,30 +321,30 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
       </BoxView>
 
       <ProfileViewField label={i18n.t('Industries')}>
-        <SectorsViewField idArray={profileItem?.sectors || []} />
+        <SectorsViewField idArray={profileData?.sectors || []} />
       </ProfileViewField>
 
       <ProfileViewField label={i18n.t('Sub-industries')}>
-        <SubSectorsViewField idArray={profileItem?.sectors || []} />
+        <SubSectorsViewField idArray={profileData?.sectors || []} />
       </ProfileViewField>
 
       <ProfileViewField label={i18n.t('Description')}>
         <TextView>
-          {profileItem?.profile_description || i18n.t('Unavailable')}
+          {profileData?.profile_description || i18n.t('Unavailable')}
         </TextView>
       </ProfileViewField>
 
       <ProfileViewField label={i18n.t('Main activities')}>
-        {!!profileItem?.profile_organization && <CulturalActivitiesViewField idArray={profileItem?.profile_organization?.main_cultural_activities || []} />}
-        {!!profileItem?.profile_venue && <CulturalActivitiesViewField idArray={profileItem?.profile_venue?.main_cultural_activities || []} />}
-        {!!profileItem?.profile_personal && <CulturalActivitiesViewField idArray={profileItem?.profile_personal?.main_cultural_activities || []} />}
+        {!!profileData?.profile_organization && <CulturalActivitiesViewField idArray={profileData?.profile_organization?.main_cultural_activities || []} />}
+        {!!profileData?.profile_venue && <CulturalActivitiesViewField idArray={profileData?.profile_venue?.main_cultural_activities || []} />}
+        {!!profileData?.profile_personal && <CulturalActivitiesViewField idArray={profileData?.profile_personal?.main_cultural_activities || []} />}
       </ProfileViewField>
 
       <CollapsibleView
         label={(
           <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeaderClosed}>
             <TextView style={styles.collapsibleLabelClosed}>
-              {i18n.t('View more')} ({isOwner ? UserManager.getProfileDisplayName(profileItem) : UserManager.getProfileTypeLabel(profileItem?.profile_type)})
+              {i18n.t('View more')} ({isOwner ? UserManager.getProfileDisplayName(profileData) : UserManager.getProfileTypeLabel(profileData?.profile_type)})
             </TextView>
             <IconView name="collapsed" theme="transparent" padding={0} />
           </BoxView>
@@ -331,7 +352,7 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
         openedLabel={
           <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeaderOpened}>
             <TextView style={styles.collapsibleLabelOpened}>
-              {i18n.t('View more')} ({isOwner ? UserManager.getProfileDisplayName(profileItem) : UserManager.getProfileTypeLabel(profileItem?.profile_type)})
+              {i18n.t('View more')} ({isOwner ? UserManager.getProfileDisplayName(profileData) : UserManager.getProfileTypeLabel(profileData?.profile_type)})
             </TextView>
             <IconView name="expanded" theme="white" padding={0} />
           </BoxView>
