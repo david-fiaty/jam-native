@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { useSelector } from "react-redux";
 import { useRouter } from 'expo-router';
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
@@ -22,7 +21,6 @@ const ProjectView = ({ projectId, isPublic }: Props) => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [projectData, setProjectData] = useState<any>(null);
-  const searchState = useSelector((state: any) => state.search);
 
   const renderProjectJams = () => {
     return (
@@ -56,25 +54,15 @@ const ProjectView = ({ projectId, isPublic }: Props) => {
     );
   };
 
-  const getProjectData = async () => {    
-    let currentResults: any = JSON.parse(searchState.currentResults);
-    let data = (currentResults.project || []).find((o: any) => o.id == projectId);
-
-    if (!data) {
-      data = (await EntityManager.getProjects([projectId]))?.[0];
-    }     
-
-    return data;
-  };
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setProjectData(await getProjectData());
+        setProjectData(await EntityManager.findProject(projectId));
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded]);
+  }, [isLoaded, projectId]);
 
   return (
     <BoxView

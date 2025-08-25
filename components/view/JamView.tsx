@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import { useRouter } from 'expo-router';
 import { useSelector } from 'react-redux';
 import { Layout } from "@/constants/Layout";
 import JamViewHeader from "./jam-view/JamViewHeader";
@@ -16,28 +15,15 @@ type Props = {
 };
 
 const JamView = ({ jamId, isPublic, onListItemAction }: Props) => {
-  const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [jamData, setJamData] = useState<any>(null);
   const appState = useSelector((state: any) => state.app);
   const userState = useSelector((state: any) => state.user);
-  const searchState = useSelector((state: any) => state.search);
-
-  const getJamData = async () => {    
-    let currentResults: any = JSON.parse(searchState.currentResults);
-    let data = (currentResults.jam || []).find((o: any) => o.id == jamId);
-
-    if (!data) {
-      data = (await EntityManager.getJams([jamId]))?.[0];
-    }     
-
-    return data;
-  };
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setJamData(await getJamData());
+        setJamData(await EntityManager.findJam(jamId));
         setIsLoaded(true);
       }
     })();
