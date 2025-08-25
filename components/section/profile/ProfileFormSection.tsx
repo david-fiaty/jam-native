@@ -2,8 +2,6 @@ import { StyleSheet, View } from "react-native";
 import BoxView from "@/components/view/BoxView";
 import ProfileForm from "@/components/form/ProfileForm";
 
-const resource: string = 'profile';
-
 type Props = {
   profileId: any;
 };
