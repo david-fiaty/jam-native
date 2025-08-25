@@ -18,19 +18,22 @@ import ProfileProjectsField from "../field/ProfileProjectsField";
 import SectorsViewField from "../field/SectorsViewField";
 import SubSectorsViewField from "../field/SubSectorsViewField";
 import CulturalActivitiesViewField from "../field/CulturalActivitiesViewField";
+import SpinnerView from "./SpinnerView";
 
 const profileImageSize: number = 111;
 
 type Props = {
   profileId?: any;
-  profileData?: any;
   isOwner?: boolean;
   isPublic?: boolean;
 };
 
-const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
+const ProfileView = ({ profileId, isOwner, isPublic }: Props) => {
   const router = useRouter();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [profileItem, setProfileItem] = useState<any>({});
+  const searchState = useSelector((state: any) => state.search);
+  const userState = useSelector((state: any) => state.user);
 
   const renderHeader = () => {
     return (
@@ -277,9 +280,35 @@ const ProfileView = ({ profileId, profileData, isOwner, isPublic }: Props) => {
     );
   };
 
+  const getProfileData = async () => {
+    let data: any = {};
+
+    if (isPublic) {
+      let currentResults: any = JSON.parse(searchState.currentResults);
+      data = (currentResults.profile || []).find((o: any) => o.id == profileId);
+
+      if (!data) {
+        data = await UserManager.getProfileData({ profile_id: profileId || null });
+      }     
+    }
+    else {
+      return userState.profileData;
+    }
+
+    return data;
+  };
+
   useEffect(() => {
-    setProfileItem(profileData);
-  }, [profileData]);
+    (async () => {
+      if (!isLoaded) {
+        setProfileItem(await getProfileData());
+        setIsLoaded(true);
+      }
+    })();
+
+  }, [isLoaded]);
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView
