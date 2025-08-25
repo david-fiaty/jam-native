@@ -16,21 +16,17 @@ const SubSectorsViewField = ({ idArray }: Props) => {
       return <TextView>{i18n.t('Unavailable')}</TextView>
     }
 
-    let sectors: any[] = sectorsData.filter((o: any) => idArray.includes(o.id));
+    let subSectors: any[] = (sectorsData.filter((o: any) => idArray.includes(o.id)).map((sector: any) => sector.sub_sectors)).flat();
 
     return (
       <TextView>
-        {sectors.map((sector: any, i: number) => {
-          let subSectors: any[] = sector.sub_sectors.filter((o: any) => idArray.includes(o.id));
-
-          return subSectors.map((subSector: any, i: number) => {
-            return (
-              <TextView key={subSector.id}>
-                {subSector.name}
-                {(i < subSectors.length - 1) && (<TextView>, </TextView>)}
-              </TextView>
-            );
-          })
+        {subSectors.map((subSector: any, i: number) => {
+          return (
+            <TextView key={subSector.id}>
+              {subSector.name}
+              {(i < subSectors.length - 1) && (<TextView>, </TextView>)}
+            </TextView>
+          );
         })}
       </TextView>
     );
