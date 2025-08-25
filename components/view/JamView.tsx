@@ -21,23 +21,11 @@ const JamView = ({ jamId, isPublic, onListItemAction }: Props) => {
   const [jamData, setJamData] = useState<any>(null);
   const appState = useSelector((state: any) => state.app);
   const userState = useSelector((state: any) => state.user);
-  const searchState = useSelector((state: any) => state.search);
-
-  const getJamData = async () => {    
-    let currentResults: any = JSON.parse(searchState.currentResults);
-    let data = (currentResults.jam || []).find((o: any) => o.id == jamId);
-
-    if (!data) {
-      data = (await EntityManager.getJams([jamId]))?.[0];
-    }     
-
-    return data;
-  };
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setJamData(await getJamData());
+        setJamData(await EntityManager.findJam(jamId));
         setIsLoaded(true);
       }
     })();
