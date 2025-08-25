@@ -18,14 +18,26 @@ type Props = {
 const JamView = ({ jamId, isPublic, onListItemAction }: Props) => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [jamItem, setJamItem] = useState<any>(null);
+  const [jamData, setJamData] = useState<any>(null);
   const appState = useSelector((state: any) => state.app);
   const userState = useSelector((state: any) => state.user);
+  const searchState = useSelector((state: any) => state.search);
+
+  const getJamData = async () => {    
+    let currentResults: any = JSON.parse(searchState.currentResults);
+    let data = (currentResults.jam || []).find((o: any) => o.id == jamId);
+
+    if (!data) {
+      data = (await EntityManager.getJams([jamId]))?.[0];
+    }     
+
+    return data;
+  };
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setJamItem((await EntityManager.getJams([jamId]))?.[0]);
+        setJamData(await getJamData());
         setIsLoaded(true);
       }
     })();
@@ -33,14 +45,14 @@ const JamView = ({ jamId, isPublic, onListItemAction }: Props) => {
 
   return (
     <View style={styles.container}>
-      <JamViewHeader row={jamItem} />
-      <JamViewImage row={jamItem} />
+      <JamViewHeader row={jamData} />
+      <JamViewImage row={jamData} />
       <JamViewToolbar
-        row={jamItem} 
+        row={jamData} 
         profileData={userState.profileData} 
         onListItemAction={onListItemAction}
       />
-      <JamViewDetails row={jamItem} sectorsData={appState.sectorsData} />
+      <JamViewDetails row={jamData} sectorsData={appState.sectorsData} />
     </View>
   );
 };
