@@ -144,6 +144,12 @@ const ProfileView = ({ profileId, isOwner, isPublic }: Props) => {
               {profileData?.address || i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Country')}>
+            <TextView>
+              {profileData?.country ? JSON.stringify(profileData.country) : i18n.t('Unavailable')}
+            </TextView>
+          </ProfileViewField>
         </BoxView>
       );
     }
@@ -173,6 +179,12 @@ const ProfileView = ({ profileId, isOwner, isPublic }: Props) => {
               {profileData?.address || i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Country')}>
+            <TextView>
+              {profileData?.country ? JSON.stringify(profileData.country) : i18n.t('Unavailable')}
+            </TextView>
+          </ProfileViewField>
         </BoxView>
       );
     }
@@ -194,6 +206,12 @@ const ProfileView = ({ profileId, isOwner, isPublic }: Props) => {
           <ProfileViewField label={i18n.t('Address')}>
             <TextView>
               {profileData?.address || i18n.t('Unavailable')}
+            </TextView>
+          </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Country')}>
+            <TextView>
+              {profileData?.country ? JSON.stringify(profileData.country) : i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
         </BoxView>
@@ -301,6 +319,8 @@ const ProfileView = ({ profileId, isOwner, isPublic }: Props) => {
   }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(profileData?.country)
 
   return (
     <BoxView
