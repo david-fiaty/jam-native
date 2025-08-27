@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useSelector } from "react-redux";
-import { Layout } from '@/constants/Layout';
 import Modal from "react-native-modal";
 import ModalBackButton from './ModalBackButton';
 import i18n from '@/translation/i18n';
@@ -21,7 +20,6 @@ import JamCommentsList from '../list/JamCommentsList';
 import ProjectCommentsList from '../list/ProjectCommentsList';
 import VenueTypesList from '../list/VenueTypesList';
 import PrivateProfileSection from '../section/profile/PrivateProfileSection';
-import ScreenManager from '@/manager/ScreenManager';
 
 type Props = {
   currentSection?: any;
@@ -30,18 +28,7 @@ type Props = {
 
 const ModalView = ({ currentSection, style }: Props) => {
   const [currentModal, setCurrentModal] = useState<any>(null);
-  const [containerStyle, setContainerStyle] = useState<any>({});
   const modalState: any = useSelector((state: any) => state.modal);
-  
-  const getContainerStyle = () => {
-    let top: number = ScreenManager.getModalPosition().y + Layout.space.base;
-    let height: number = ScreenManager.getModalSize().height;
-
-    return {
-      top: top,
-      height: height,
-    };
-  };
 
   const canShowModal = () => {
     return currentModal !== null && currentModal?.sectionId === currentSection?.id;
@@ -204,7 +191,6 @@ const ModalView = ({ currentSection, style }: Props) => {
   };
 
   useEffect(() => {
-    setContainerStyle(getContainerStyle());
     setCurrentModal(getActiveModal());
   }, [modalState]);
 
@@ -216,7 +202,7 @@ const ModalView = ({ currentSection, style }: Props) => {
       animationIn={currentModal?.effect?.in}
       animationOut={currentModal?.effect?.out}
       isVisible={canShowModal()}
-      style={[styles.container, style, containerStyle]}
+      style={[styles.container, style]}
     >
       {renderBackButton()}
 
