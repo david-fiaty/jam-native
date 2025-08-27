@@ -10,6 +10,9 @@
     "newArchEnabled": true,
     "jsEngine": "hermes",
     "ios": {
+      "config": {
+        "googleMapsApiKey": "AIzaSyCYnuOuRjUFuLyJsznPeaEB34-4Ju_zT1Q"
+      },
       "supportsTablet": true,
       "infoPlist": {
         "UIViewControllerBasedStatusBarAppearance": true
@@ -17,6 +20,11 @@
       "bundleIdentifier": "com.davidfiatyorg.jamnative"
     },
     "android": {
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCAEf0XHIfZFbXXLLANyLGi84RLqwKMKKM"
+        }
+      },
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
