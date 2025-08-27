@@ -69,7 +69,7 @@ class SearchManager {
       });
 
       searchResults.profile = searchResults.profile.filter((o: any) => {
-        return searchFilters.countries.some((id: any) => o?.countries?.includes(id));
+        return searchFilters.countries.some((id: any) => o?.country?.includes(id));
       });
     }
 
