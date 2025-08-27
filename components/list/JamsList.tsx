@@ -53,21 +53,15 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
     <BoxView
       direction="column"
       style={styles.container}
-    >
-      {isLoaded && !!listData?.length && (
-        <ListView
-          data={listData}
-          contentContainerStyle={Layout.listContainer}
-          renderItem={renderItem}
-          keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
-          onEndReachedThreshold={0.5}
-          //onEndReached={onEndReached}
-        />
-      )}
-
-      {isLoaded && !listData?.length && (
-        <TextView>{i18n.t('No results available')}</TextView>
-      )}
+    >  
+      <ListView
+        data={listData}
+        contentContainerStyle={Layout.listContainer}
+        renderItem={renderItem}
+        keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
+        onEndReachedThreshold={0.5}
+        //onEndReached={onEndReached}
+      />
     </BoxView>
   );
 };

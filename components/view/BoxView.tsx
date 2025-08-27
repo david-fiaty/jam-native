@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     width: '100%',
-  }
+  },
 });
 
 export default BoxView;
