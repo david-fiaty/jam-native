@@ -26,10 +26,14 @@ export default () => {
   };
 
   useEffect(() => {
-    if (rootNavigationState?.key && !hasRedirected.current) {
-      hasRedirected.current = true;
-      router.push('/welcome');
-    }
+    if (!rootNavigationState?.key) return; 
+    if (hasRedirected.current) return;
+
+    hasRedirected.current = true;
+
+    setTimeout(() => {
+      router.replace("/welcome"); 
+    }, 0);
   }, [rootNavigationState]);
 
   useEffect(() => {
