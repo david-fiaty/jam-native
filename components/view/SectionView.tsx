@@ -298,14 +298,13 @@ const SectionView = () => {
 
       <BoxView
         direction="column"
-        align="center"
-        justify="center"
+        align="flex-start"
+        justify="flex-start"
         style={styles.content}
       >
         {currentSection?.render(currentSection?.params || {})}
+        <ModalView currentSection={currentSection} style={styles.modal} />
       </BoxView>
-
-      <ModalView currentSection={currentSection} style={styles.modal} />
 
       {currentSection?.showFooter === true && <SectionFooter style={styles.footer} />}
     </View>
@@ -320,11 +319,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Layout.colors.white,
     paddingHorizontal: Layout.space.base * 1.5,
+    position: 'relative',
   },
   modal: {
     paddingHorizontal: Layout.space.base * 1.5,
     backgroundColor: Layout.colors.white,
     zIndex: 10,
+    position: 'absolute',
   },
   header: {
     paddingHorizontal: Layout.space.base * 1.5,
