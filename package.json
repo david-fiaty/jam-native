@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "npx expo start",
-    "start": "npx expo start",
+    "start": "npx expo start --no-dev --minify",
     "android": "npx expo start --android",
     "ios": "npx expo start --ios",
     "web": "npx expo start --web",
