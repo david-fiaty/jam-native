@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useSelector } from "react-redux";
-import { Layout } from '@/constants/Layout';
 import Modal from "react-native-modal";
 import ModalBackButton from './ModalBackButton';
 import i18n from '@/translation/i18n';
