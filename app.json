@@ -12,7 +12,8 @@
       "supportsTablet": true,
       "infoPlist": {
         "UIViewControllerBasedStatusBarAppearance": true
-      }
+      },
+      "bundleIdentifier": "com.davidfiatyorg.jamnative"
     },
     "android": {
       "adaptiveIcon": {
