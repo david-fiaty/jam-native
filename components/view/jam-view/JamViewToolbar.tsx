@@ -55,7 +55,6 @@ const JamViewToolbar = ({ row, profileData, onListItemAction }: Props) => {
       else result = await UserManager.saveJam(row?.id);
 
       if (onListItemAction) onListItemAction();
-
       setIsSaveProcessing(false);
       ScreenManager.showMessage(result.message);
     }
