@@ -187,10 +187,13 @@ const JamViewToolbar = ({ row, profileData, onListItemAction }: Props) => {
           theme="tertiary"
           size={12}
           padding={6}
+          /*
+          // Todo - Implement and enable comments
           onPress={() => ModalManager.toggleModal('JamCommentsList', { 
             entityId: row?.id, 
             entityType: 'jam' 
           })}
+          */
         />
       </BoxView>
     );
