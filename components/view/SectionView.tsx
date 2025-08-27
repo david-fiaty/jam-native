@@ -328,9 +328,11 @@ const styles = StyleSheet.create({
   },
   header: {
     paddingHorizontal: Layout.space.base * 1.5,
+    backgroundColor: Layout.colors.white,
     zIndex: 20,
   },
   footer: {
+    backgroundColor: Layout.colors.white,
     zIndex: 20,
   },
 });
