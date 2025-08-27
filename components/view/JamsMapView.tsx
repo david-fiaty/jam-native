@@ -110,8 +110,9 @@ const JamsMapView = () => {
           ref={mapRef}
           style={styles.map}
           provider={PROVIDER_DEFAULT} 
+          mapType="standard"
           initialRegion={getInitialRegion()}
-          customMapStyle={Layout.mapStyle}
+          //customMapStyle={Layout.mapStyle}
           showsUserLocation={true}
           showsMyLocationButton={true}
         >
