@@ -135,55 +135,46 @@ class SearchManager {
         label: i18n.t('Jams'),
         numColumns: 2,
         default: true,
-        entityType: 'jam',
       },
       {
         id: 'looking',
         label: i18n.t('Lookings'),
         numColumns: 2,
-        entityType: 'jam',
       },
       {
         id: 'call',
         label: i18n.t('Calls'),
         numColumns: 2,
-        entityType: 'jam',
       },
       {
         id: 'event',
         label: i18n.t('Events'),
         numColumns: 2,
-        entityType: 'jam',
       },
       {
         id: 'jammer',
         label: i18n.t('Jammers'),
         numColumns: 1,
-        entityType: 'profile',
       },
       {
         id: 'personal',
         label: i18n.t('Artists'),
         numColumns: 1,
-        entityType: 'profile',
       },
       {
         id: 'organization',
         label: i18n.t('Organization'),
         numColumns: 1,
-        entityType: 'profile',
       },
       {
         id: 'venue',
         label: i18n.t('Venues'),
         numColumns: 2,
-        entityType: 'profile',
       },
       {
         id: 'project',
         label: i18n.t('Projects'),
         numColumns: 2,
-        entityType: 'project',
       },
     ];
   }
