@@ -93,7 +93,7 @@ const JamsMapView = () => {
   }, [searchState, searchTabs, isLoaded]);
 
   if (!currentLocation?.latitude || !currentLocation?.longitude || !isLoaded) return <SpinnerView />;
-  
+
   return (
     <TouchableWithoutFeedback>
       <View style={styles.container}>
@@ -115,7 +115,10 @@ const JamsMapView = () => {
           showsUserLocation={true}
           showsMyLocationButton={true}
         >
-          {getTabResults(searchState.currentTab).map((item: any) => renderJamMarker(item))}
+          {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => renderJamMarker(item))}
+          {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => renderJamMarker(item))}
+          {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => renderJamMarker(item))}
+
         </MapView>
       </View>
     </TouchableWithoutFeedback>
