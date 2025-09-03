@@ -55,7 +55,6 @@ const JamViewToolbar = ({ row, profileData, onListItemAction }: Props) => {
       else result = await UserManager.saveJam(row?.id);
 
       if (onListItemAction) onListItemAction();
-
       setIsSaveProcessing(false);
       ScreenManager.showMessage(result.message);
     }
@@ -187,10 +186,13 @@ const JamViewToolbar = ({ row, profileData, onListItemAction }: Props) => {
           theme="tertiary"
           size={12}
           padding={6}
+          /*
+          // Todo - Implement and enable comments
           onPress={() => ModalManager.toggleModal('JamCommentsList', { 
             entityId: row?.id, 
             entityType: 'jam' 
           })}
+          */
         />
       </BoxView>
     );

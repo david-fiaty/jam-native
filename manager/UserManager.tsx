@@ -307,7 +307,6 @@ class UserManager {
 
   async unsaveJam(entityId: any) {
     let profileData: any = await this.getProfileData();
-    let localProfileData: any = {};
     let success: boolean = false;
     let message: any = {
       title: i18n.t('Unsave Jam'),
