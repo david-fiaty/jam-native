@@ -292,6 +292,7 @@ const SectionView = () => {
 
   return (
     <View style={styles.container}>
+      
       <MessageView />
       {currentSection?.showHeader === true && <SectionHeader style={styles.header} />}
       {showBackButton() === true && <SectionBackButton />}
