@@ -1,5 +1,5 @@
 import MapView , { Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
@@ -13,7 +13,6 @@ import SearchManager from "@/manager/SearchManager";
 import TabsView from "./TabsView";
 
 const JamsMapView = () => {
-  const mapRef = useRef<any>();
   const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -107,7 +106,6 @@ const JamsMapView = () => {
         <SearchFiltersView />
 
         <MapView
-          ref={mapRef}
           style={styles.map}
           provider={PROVIDER_DEFAULT} 
           initialRegion={getInitialRegion()}
@@ -118,7 +116,6 @@ const JamsMapView = () => {
           {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => renderJamMarker(item))}
           {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => renderJamMarker(item))}
           {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => renderJamMarker(item))}
-
         </MapView>
       </View>
     </TouchableWithoutFeedback>
