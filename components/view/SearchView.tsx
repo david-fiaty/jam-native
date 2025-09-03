@@ -44,31 +44,26 @@ const SearchView = () => {
       justify="flex-start"
       style={[styles.container, Layout.screenContent]}
     >
-      {/* Search tabs */}
       <TabsView
         tabs={searchTabs}
         currentTab={searchState.currentTab}
         onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
       />
 
-      {/* Filter toolbar */}
       <SearchFiltersView />
 
-      {/* Jams list */}
       {SearchManager.isJamTab(searchState.currentTab) && (
         <SearchJamsList
           data={getTabResults('jam')}
         />
       )}
 
-      {/* Profiles list */}
       {SearchManager.isProfileTab(searchState.currentTab) &&
         <SearchProfilesList
           data={getTabResults('profile')}
         />
       }
 
-      {/* Projects list */}
       {SearchManager.isProjectTab(searchState.currentTab) &&
         <SearchProjectsList
           data={getTabResults('project')}
