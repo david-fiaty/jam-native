@@ -1,19 +1,27 @@
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentTab } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
+import SearchManager from "@/manager/SearchManager";
+import TabsView from "./TabsView";
+import SearchFiltersView from "./SearchFiltersView";
+import SpinnerView from "./SpinnerView";
 
 type Props = {
   idArray?: any;
 };
 
 const JamsMapView = ({ idArray }: Props) => {
+  const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const searchState: any = useSelector((state: any) => state.search);
+  const searchTabs: any[] = SearchManager.getSearchTabs();
   const markerImage = require('@/assets/images/logo-55.png');
 
   const getInitialRegion = () => {
@@ -53,7 +61,7 @@ const JamsMapView = ({ idArray }: Props) => {
   const renderJamMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
       return (
-        <Marker 
+        <Marker
           key={item.id}
           position={getMarkerCoordinate(item)}
         />
@@ -63,16 +71,42 @@ const JamsMapView = ({ idArray }: Props) => {
     return null;
   };
 
+  const getTabResults = (key: string) => {
+    let data: any = JSON.parse(searchState.currentResults) || {};
+    let results: any[] = SearchManager.getTabResults(key, searchState.currentTab, data);
+
+    return results || [];
+  };
+
   useEffect(() => {
     (async () => {
+      if (!isLoaded) {
+        if (!searchState.currentTab) {
+          dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
+        }
+
+        setIsLoaded(true);
+      }
+
       setCurrentLocation(await UserManager.getLocation());
     })();
-  }, [searchState]);
+  }, [searchState, searchTabs, isLoaded]);
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <LoadScript googleMapsApiKey={Config.mapApiKey}>
       <TouchableWithoutFeedback>
         <View style={[Layout.screenContent, styles.container]}>
+
+          <TabsView
+            tabs={searchTabs}
+            currentTab={searchState.currentTab}
+            onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
+          />
+
+          <SearchFiltersView />
+
           <GoogleMap
             mapContainerStyle={styles.map}
             center={getInitialRegion()}
@@ -82,7 +116,9 @@ const JamsMapView = ({ idArray }: Props) => {
               disableDefaultUI: true,
             }}
           >
-            {(JSON.parse(searchState.currentResults) || [])?.jam?.map((item: any) => renderJamMarker(item))}
+            {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => renderJamMarker(item))}
+            {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => renderJamMarker(item))}
+            {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => renderJamMarker(item))}
           </GoogleMap>
         </View>
       </TouchableWithoutFeedback>
@@ -93,6 +129,7 @@ const JamsMapView = ({ idArray }: Props) => {
 const styles = StyleSheet.create({
   container: {
     padding: 0,
+    gap: Layout.space.base,
     width: '100%',
     flexGrow: 1,
     backgroundColor: Layout.colors.white,

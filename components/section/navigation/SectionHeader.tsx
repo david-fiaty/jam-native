@@ -62,14 +62,16 @@ const SectionHeader = ({ style }: Props) => {
   }, []);
 
   useEffect(() => {
-    loadNotifications();
-
-    const intervalId = setInterval(() => {
+    if (isLoggedIn) {
       loadNotifications();
-    }, Config.notificationUpdateInterval);
 
-    return () => clearInterval(intervalId);
-  }, []);
+      const intervalId = setInterval(() => {
+        loadNotifications();
+      }, Config.notificationUpdateInterval);
+
+      return () => clearInterval(intervalId);
+    }
+  }, [isLoggedIn]);
 
   return (
     <BoxView direction="row" style={[styles.container, style]}>
