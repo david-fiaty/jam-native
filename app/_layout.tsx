@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Stack, useRouter } from 'expo-router';
-import { useLocales } from 'expo-localization';
 import { useFonts } from 'expo-font';
 import { Provider } from 'react-redux';
 import { BackHandler } from 'react-native';
@@ -14,7 +13,6 @@ ExpoSplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
   const router = useRouter();
-  const locales = useLocales();
 
   const defaults: any = ScreenManager.isIos() ? {
     headerShown: false,
