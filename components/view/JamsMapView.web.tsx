@@ -8,6 +8,9 @@ import { Config } from "@/constants/Config";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import SearchManager from "@/manager/SearchManager";
+import TabsView from "./TabsView";
+import SearchFiltersView from "./SearchFiltersView";
+import SpinnerView from "./SpinnerView";
 
 type Props = {
   idArray?: any;
@@ -89,10 +92,21 @@ const JamsMapView = ({ idArray }: Props) => {
     })();
   }, [searchState, searchTabs, isLoaded]);
 
+  if (!isLoaded) return <SpinnerView />;
+
   return (
     <LoadScript googleMapsApiKey={Config.mapApiKey}>
       <TouchableWithoutFeedback>
         <View style={[Layout.screenContent, styles.container]}>
+
+          <TabsView
+            tabs={searchTabs}
+            currentTab={searchState.currentTab}
+            onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
+          />
+
+          <SearchFiltersView />
+
           <GoogleMap
             mapContainerStyle={styles.map}
             center={getInitialRegion()}
@@ -115,6 +129,7 @@ const JamsMapView = ({ idArray }: Props) => {
 const styles = StyleSheet.create({
   container: {
     padding: 0,
+    gap: Layout.space.base,
     width: '100%',
     flexGrow: 1,
     backgroundColor: Layout.colors.white,
