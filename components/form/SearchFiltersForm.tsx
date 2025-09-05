@@ -14,6 +14,7 @@ import DividerView from '../view/DividerView';
 import SearchManager from '@/manager/SearchManager';
 import IconView from '../view/IconView';
 import SectionManager from '@/manager/SectionManager';
+import SpinnerView from '../view/SpinnerView';
 
 const SearchFiltersForm = () => {
   const dispatch = useDispatch();
@@ -276,6 +277,8 @@ const SearchFiltersForm = () => {
       setIsLoaded(true);
     }
   }, [searchState, isLoaded]);
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView
