@@ -2,6 +2,7 @@ export const Config: any = {
   dataCacheEnabled: false,
   imageCacheEnabled: true,
   infiniteScrollEnabled: false,
+  defaultRoute: '/welcome',
   apiUrl: 'https://dev.jammm.app/backend/api/v1',
   imageUrl: 'https://dev.jammm.app/backend',
   mapApiKey: 'AIzaSyCAEf0XHIfZFbXXLLANyLGi84RLqwKMKKM',
