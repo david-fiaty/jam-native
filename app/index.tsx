@@ -44,7 +44,7 @@ export default () => {
     hasRedirected.current = true;
 
     setTimeout(() => {
-      router.replace("/welcome"); 
+      router.replace(Config.defaultRoute); 
     }, 0);
   }, [rootNavigationState, appReady]);
 }
