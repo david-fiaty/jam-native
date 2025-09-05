@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { setCountriesData, setSectorsData } from '@/redux/slices/AppSlice';
 import { useRouter, useRootNavigationState } from 'expo-router';
 import { useDispatch } from "react-redux";
@@ -15,6 +15,7 @@ export default () => {
   const router = useRouter();
   const rootNavigationState = useRootNavigationState();
   const hasRedirected = useRef<boolean>(false);
+  const [appReady, setAppReady] = useState<boolean>(false);
 
   const setLanguage = async () => {
     let code: any = ScreenManager.isWeb()
@@ -26,7 +27,18 @@ export default () => {
   };
 
   useEffect(() => {
+    (async () => {
+      await setLanguage();
+      await SearchManager.loadResults();
+      dispatch(setSectorsData(await EntityManager.getSectors()));
+      dispatch(setCountriesData(await EntityManager.getCountries()));
+      setAppReady(true);
+    })();
+  }, []);
+
+  useEffect(() => {
     if (!rootNavigationState?.key) return; 
+    if (!appReady) return;
     if (hasRedirected.current) return;
 
     hasRedirected.current = true;
@@ -34,17 +46,6 @@ export default () => {
     setTimeout(() => {
       router.replace("/welcome"); 
     }, 0);
-  }, [rootNavigationState]);
-
-  useEffect(() => {
-    (async () => {
-      await setLanguage();
-      await SearchManager.loadResults();
-      dispatch(setSectorsData(await EntityManager.getSectors()));
-      dispatch(setCountriesData(await EntityManager.getCountries()));
-    })();
-  }, []);
-
-  return null;
+  }, [rootNavigationState, appReady]);
 }
 
