@@ -65,6 +65,7 @@ const NotificationsMenu = () => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
+        await loadNotifications();
         setViewedIds(await UserManager.getViewedNotifications());
         setIsLoaded(true);
       }
@@ -72,8 +73,6 @@ const NotificationsMenu = () => {
   }, [isLoaded]);
 
   useEffect(() => {
-    loadNotifications();
-
     const intervalId = setInterval(() => loadNotifications(), Config.notificationUpdateInterval);
 
     return () => clearInterval(intervalId);
@@ -94,7 +93,7 @@ const NotificationsMenu = () => {
         />
       )}
 
-      {!notifications?.length && (
+      {isLoaded && !notifications?.length && (
         <TextView>{i18n.t('No data available.')}</TextView>
       )}
     </BoxView>
