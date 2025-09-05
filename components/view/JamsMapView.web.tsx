@@ -10,6 +10,7 @@ import UserManager from "@/manager/UserManager";
 import SearchManager from "@/manager/SearchManager";
 import TabsView from "./TabsView";
 import SearchFiltersView from "./SearchFiltersView";
+import SpinnerView from "./SpinnerView";
 
 type Props = {
   idArray?: any;
@@ -90,6 +91,8 @@ const JamsMapView = ({ idArray }: Props) => {
       setCurrentLocation(await UserManager.getLocation());
     })();
   }, [searchState, searchTabs, isLoaded]);
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <LoadScript googleMapsApiKey={Config.mapApiKey}>
