@@ -4,7 +4,6 @@ import ProfileView from "@/components/view/ProfileView";
 import UserManager from "@/manager/UserManager";
 
 const PrivateProfileSection = () => {
-
   return (
     <ProfileView 
       isOwner={UserManager.isLoggedIn()}

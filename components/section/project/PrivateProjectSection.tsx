@@ -4,9 +4,10 @@ import ProjectView from "@/components/view/ProjectView";
 
 type Props = {
   projectId: any;
+  itemData?: any;
 };
 
-const PrivateProjectSection = ({ projectId }: Props) => {
+const PrivateProjectSection = ({ projectId, itemData }: Props) => {
   return (
     <BoxView
       direction="column"
@@ -17,6 +18,7 @@ const PrivateProjectSection = ({ projectId }: Props) => {
       <ProjectView 
         isPublic={false}
         projectId={projectId}
+        itemData={itemData ? JSON.parse(itemData) : null}
       />
     </BoxView>
   );

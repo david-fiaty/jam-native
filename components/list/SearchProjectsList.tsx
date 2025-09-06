@@ -27,6 +27,7 @@ const SearchProjectsList = ({ data }: Props) => {
   const onItemPress = (row: any) => {
     SectionManager.push(router, 'public-project', {
       projectId: row?.item?.id,
+      itemData: JSON.stringify(row?.item),
       title: row?.item?.title
     });
   };

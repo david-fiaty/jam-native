@@ -4,9 +4,10 @@ import JamView from "@/components/view/JamView";
 
 type Props = {
   jamId: any;
+  itemData?: any;
 };
 
-const PrivateJamSection = ({ jamId }: Props) => {
+const PrivateJamSection = ({ jamId, itemData }: Props) => {
   return (
     <BoxView
       direction="column"
@@ -17,6 +18,7 @@ const PrivateJamSection = ({ jamId }: Props) => {
       <JamView 
         isPublic={false} 
         jamId={jamId}
+        itemData={itemData ? JSON.parse(itemData) : null}
       />
     </BoxView>
   );
