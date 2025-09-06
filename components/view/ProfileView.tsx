@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { useRouter } from 'expo-router';
-import { useSelector } from "react-redux";
+import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
 import i18n from "@/translation/i18n";
@@ -33,8 +33,7 @@ const ProfileView = ({ profileId, isOwner, isPublic }: Props) => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [profileData, setProfileData] = useState<any>({});
-  const searchState = useSelector((state: any) => state.search);
-  const userState = useSelector((state: any) => state.user);
+  const userState = useSelector((state: any) => state.user, shallowEqual);
 
   const renderHeader = () => {
     return (

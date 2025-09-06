@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
@@ -9,7 +8,6 @@ import ScreenManager from "@/manager/ScreenManager";
 import MediaManager from "@/manager/MediaManager";
 import i18n from "@/translation/i18n";
 import TextView from "../view/TextView";
-import SpinnerView from "../view/SpinnerView";
 
 type Props = {
   data?: any;
@@ -19,7 +17,6 @@ const numColumns = 2;
 
 const SearchJamsList = ({ data }: Props) => {
   const router = useRouter();
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const imageSize = MediaManager.getThumbnailSize(numColumns);
 
   const onItemPress = (row: any) => {
@@ -45,14 +42,6 @@ const SearchJamsList = ({ data }: Props) => {
       </TouchableOpacity>
     );
   };
-
-  useEffect(() => {
-    if (!isLoaded) {
-      setIsLoaded(true)
-    }
-  }, [isLoaded]);
-
-  if (!isLoaded) return <SpinnerView />
 
   return (
     <BoxView

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setActiveComment } from '@/redux/slices/CommentSlice';
 import Collapsible from 'react-native-collapsible';
 import BoxView from '../view/BoxView';
@@ -25,7 +25,7 @@ const AddCommentForm = ({ entityId, commentData, profileImage, globalStyles }: P
   const dispatch = useDispatch();
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const commentState: any = useSelector((state: any) => state.comment);
+  const commentState: any = useSelector((state: any) => state.comment, shallowEqual);
 
   const componentStyles: any = {
     ...styles,
