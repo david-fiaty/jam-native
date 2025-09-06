@@ -28,7 +28,7 @@ const SectionBackButton = () => {
     setCurrentSection(getCurrentSection());
   }, [sectionState]);
 
-  return (
+  return !!currentSection?.title && (
     <BoxView
       direction="row"
       align="center"
