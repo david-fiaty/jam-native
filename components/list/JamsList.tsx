@@ -23,6 +23,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
     return (
       <JamView
         jamId={row?.item?.id}
+        itemData={row?.item}
         isPublic={false}
       />
     );

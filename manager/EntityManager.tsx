@@ -8,6 +8,8 @@ import i18n from '@/translation/i18n';
 class EntityManager {
   async findJam(jamId: any) {
     let currentResults: any = Store.getState().search.currentResults;
+
+    console.log(currentResults)
     let data = (currentResults.jam || []).find((o: any) => o.id == jamId);
 
     if (!data) {

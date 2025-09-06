@@ -10,11 +10,12 @@ import EntityManager from "@/manager/EntityManager";
 
 type Props = {
   jamId?: any;
+  itemData?: any;
   isPublic?: boolean;
   onListItemAction?: () => void;
 };
 
-const JamView = ({ jamId, isPublic, onListItemAction }: Props) => {
+const JamView = ({ jamId, itemData, isPublic, onListItemAction }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [jamData, setJamData] = useState<any>(null);
   const appState = useSelector((state: any) => state.app, shallowEqual);
@@ -23,11 +24,11 @@ const JamView = ({ jamId, isPublic, onListItemAction }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setJamData(await EntityManager.findJam(jamId));
+        setJamData(itemData || await EntityManager.findJam(jamId));
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, jamId]);
+  }, [isLoaded, jamId, itemData]);
 
   return (
     <View style={styles.container}>
