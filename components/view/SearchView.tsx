@@ -30,7 +30,7 @@ const SearchView = () => {
       prevSearchState.current = searchState;
     }
     else {
-      results = searchResults?.[key] || [];
+      results = searchResults;
     }
 
     return results[key];
