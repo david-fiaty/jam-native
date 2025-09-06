@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import { useSelector } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 import { Layout } from "@/constants/Layout";
 import JamViewHeader from "./jam-view/JamViewHeader";
 import JamViewImage from "./jam-view/JamViewImage";
@@ -17,8 +17,8 @@ type Props = {
 const JamView = ({ jamId, isPublic, onListItemAction }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [jamData, setJamData] = useState<any>(null);
-  const appState = useSelector((state: any) => state.app);
-  const userState = useSelector((state: any) => state.user);
+  const appState = useSelector((state: any) => state.app, shallowEqual);
+  const userState = useSelector((state: any) => state.user, shallowEqual);
 
   useEffect(() => {
     (async () => {

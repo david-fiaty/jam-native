@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setFormData } from '@/redux/slices/FormSlice';
 import { Layout } from '@/constants/Layout';
 import { MultiSelect } from 'react-native-element-dropdown';
@@ -23,7 +23,7 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [sectorsData, setSectorsData] = useState<any[]>([]);
   const [sectorsOptions, setSectorsOptions] = useState<any[]>([]);
-  const appState = useSelector((state: any) => state.app);
+  const appState = useSelector((state: any) => state.app, shallowEqual);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateSelection = (selectedIds: any[]) => {

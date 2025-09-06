@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { StyleSheet } from 'react-native';
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -6,8 +6,6 @@ import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
 import JamView from "../view/JamView";
-import TextView from "../view/TextView";
-import i18n from "@/translation/i18n";
 
 type Props = {
   idArray?: any;
@@ -17,7 +15,9 @@ type Props = {
 const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [listData, setListData] = useState<any[]>([]);
+  const [searchResults, setSearchResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
+  const prevSearchState: any = useRef();
 
   const renderItem = (row: any) => {
     return (
@@ -28,20 +28,29 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
     );
   };
 
-  const getListData = () => {
-    let data: any[] = JSON.parse(searchState.currentResults)?.jam || [];
+  const getListData = (key: string) => {
+    let results: any = {};
 
-    if (idArray?.length > 0) {
-      data = data.filter((o: any) => idArray.includes(o.id));
+    if (prevSearchState.current !== searchState) {
+      results = JSON.parse(searchState.currentResults) || {};
+      setSearchResults(results);
+      prevSearchState.current = searchState;
+    }
+    else {
+      results = searchResults;
     }
 
-    return data;
+    if (idArray?.length > 0) {
+      results[key] = results[key].filter((o: any) => idArray.includes(o.id));
+    }
+
+    return results[key];
   };
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setListData(getListData());
+        setListData(getListData('jam'));
         setIsLoaded(true);
       }
     })();
