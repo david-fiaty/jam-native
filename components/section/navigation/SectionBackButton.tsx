@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { useSelector } from "react-redux";
+import { useSelector, shallowEqual } from "react-redux";
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import BoxView from '@/components/view/BoxView';
@@ -11,7 +11,7 @@ import SectionManager from '@/manager/SectionManager';
 const SectionBackButton = () => {
   const router = useRouter();
   const [currentSection, setCurrentSection] = useState<any>(null);
-  const sectionState: any = useSelector((state: any) => state.section);
+  const sectionState: any = useSelector((state: any) => state.section, shallowEqual);
 
   const onPress = () => {
     SectionManager.back(router);
@@ -28,7 +28,7 @@ const SectionBackButton = () => {
     setCurrentSection(getCurrentSection());
   }, [sectionState]);
 
-  return (
+  return !!currentSection?.title && (
     <BoxView
       direction="row"
       align="center"

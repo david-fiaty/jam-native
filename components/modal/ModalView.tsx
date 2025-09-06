@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
-import { useSelector } from "react-redux";
+import { useSelector, shallowEqual } from "react-redux";
 import Modal from "react-native-modal";
 import ModalBackButton from './ModalBackButton';
 import i18n from '@/translation/i18n';
@@ -28,7 +28,7 @@ type Props = {
 
 const ModalView = ({ currentSection, style }: Props) => {
   const [currentModal, setCurrentModal] = useState<any>(null);
-  const modalState: any = useSelector((state: any) => state.modal);
+  const modalState: any = useSelector((state: any) => state.modal, shallowEqual);
 
   const canShowModal = () => {
     return currentModal !== null && currentModal?.sectionId === currentSection?.id;

@@ -1,6 +1,7 @@
+import { useState, useRef } from "react";
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useSelector } from "react-redux";
+import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import { Badge } from '@rneui/themed';
 import IconView from './IconView';
@@ -11,14 +12,31 @@ import i18n from '@/translation/i18n';
 
 const SearchFiltersView = () => {
   const router = useRouter();
-  const searchState: any = useSelector((state: any) => state.search);
-
+  const [searchResults, setSearchResults] = useState<any>({});
+  const searchState: any = useSelector((state: any) => state.search, shallowEqual);
+  const prevSearchState: any = useRef();
+  
   const renderResultsCount = () => {
     if (Object.keys(searchState.searchFilters).length > 0 || searchState.searchValue.length > 0) {
-      let resultsCount: number = JSON.parse(searchState.currentResults)?.jam?.length;
+      let resultsCount: number = getResultsCount('jam');
 
       return <Badge value={resultsCount} />;
     }
+  };
+
+  const getResultsCount = (key: string) => {
+    let results: any = {};
+
+    if (prevSearchState.current !== searchState) {
+      results = JSON.parse(searchState.currentResults) || {};
+      setSearchResults(results);
+      prevSearchState.current = searchState;
+    }
+    else {
+      results = searchResults;
+    }
+
+    return results[key].length;
   };
 
   return (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { usePathname } from 'expo-router';
 import { setActiveSections, setSectionConfig } from "@/redux/slices/SectionSlice";
 import { StyleSheet, View } from 'react-native';
@@ -40,9 +40,9 @@ const SectionView = () => {
   const path = usePathname();
   const dispatch = useDispatch();
   const [currentSection, setCurrentSection] = useState<any>(null);
-  const sectionState: any = useSelector((state: any) => state.section);
-  const modalState: any = useSelector((state: any) => state.modal);
-  const userState: any = useSelector((state: any) => state.user);
+  const sectionState: any = useSelector((state: any) => state.section, shallowEqual);
+  const modalState: any = useSelector((state: any) => state.modal, shallowEqual);
+  const userState: any = useSelector((state: any) => state.user, shallowEqual);
   const sectionId: any = path.split('/').pop();
 
   const getCurrentSection = () => {

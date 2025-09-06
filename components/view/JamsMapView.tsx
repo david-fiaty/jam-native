@@ -1,7 +1,7 @@
 import MapView , { Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
@@ -16,7 +16,9 @@ const JamsMapView = () => {
   const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const searchState: any = useSelector((state: any) => state.search);
+  const [searchResults, setSearchResults] = useState<any>({});
+  const searchState: any = useSelector((state: any) => state.search, shallowEqual);
+  const prevSearchState: any = useRef();
   const searchTabs: any[] = SearchManager.getSearchTabs();
   const markerImage = require('@/assets/images/logo-55.png');
   
@@ -71,10 +73,19 @@ const JamsMapView = () => {
   };
 
   const getTabResults = (key: string) => {
-    let data: any = JSON.parse(searchState.currentResults) || {};
-    let results: any[] = SearchManager.getTabResults(key, searchState.currentTab, data);
+    let results: any = {};
 
-    return results || [];
+    if (prevSearchState.current !== searchState) {
+      let data: any = JSON.parse(searchState.currentResults) || {};
+      results[key] = SearchManager.getTabResults(key, searchState.currentTab, data);
+      setSearchResults(results);
+      prevSearchState.current = searchState;
+    }
+    else {
+      results = searchResults;
+    }
+
+    return results[key];
   };
 
   useEffect(() => {

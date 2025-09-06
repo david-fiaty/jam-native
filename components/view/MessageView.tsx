@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { Layout } from '@/constants/Layout';
 import { setMessage } from '@/redux/slices/MessageSlice';
 import ScreenManager from '@/manager/ScreenManager';
@@ -13,7 +13,7 @@ const statusBarHeight: any = ScreenManager.getStatusBarSize().height;
 
 const MessageView = ({ title }: Props) => {
   const dispatch = useDispatch();
-  const messageState = useSelector((state: any) => state.message);
+  const messageState = useSelector((state: any) => state.message, shallowEqual);
 
   if (!Object.keys(messageState).length) return <></>;
 
