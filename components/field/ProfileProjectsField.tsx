@@ -30,6 +30,7 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
     let params: any = {
       projectId: row?.item?.id,
       title: i18n.t('Project'),
+      itemData: JSON.stringify(row?.item),
       disableInfiniteScroll: true,
     };
 
