@@ -25,11 +25,12 @@ const profileImageSize: number = 111;
 
 type Props = {
   profileId?: any;
+  itemData?: any;
   isOwner?: boolean;
   isPublic?: boolean;
 };
 
-const ProfileView = ({ profileId, isOwner, isPublic }: Props) => {
+const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [profileData, setProfileData] = useState<any>({});
@@ -310,12 +311,12 @@ const ProfileView = ({ profileId, isOwner, isPublic }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setProfileData(await getProfileData());
+        setProfileData(itemData || await getProfileData());
         setIsLoaded(true);
       }
     })();
 
-  }, [isLoaded]);
+  }, [isLoaded, itemData]);
 
   if (!isLoaded) return <SpinnerView />;
 
