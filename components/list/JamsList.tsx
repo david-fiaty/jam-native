@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
-import { useSelector } from "react-redux";
+import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
@@ -17,7 +17,7 @@ type Props = {
 const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [listData, setListData] = useState<any[]>([]);
-  const searchState: any = useSelector((state: any) => state.search);
+  const searchState: any = useSelector((state: any) => state.search, shallowEqual);
 
   const renderItem = (row: any) => {
     return (

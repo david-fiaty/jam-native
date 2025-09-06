@@ -33,7 +33,6 @@ const ProfileView = ({ profileId, isOwner, isPublic }: Props) => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [profileData, setProfileData] = useState<any>({});
-  const searchState = useSelector((state: any) => state.search);
   const userState = useSelector((state: any) => state.user);
 
   const renderHeader = () => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from "react-native";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
@@ -25,7 +25,7 @@ const CollaboratorsList = ({ resource, field }: Props) => {
   const [searchValue, setSearchValue] = useState<string>('');
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const searchState: any = useSelector((state: any) => state.search);
+  const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const clearSearch = () => {
