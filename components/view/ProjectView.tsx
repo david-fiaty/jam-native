@@ -14,10 +14,11 @@ import SubSectorsViewField from "../field/SubSectorsViewField";
 
 type Props = {
   projectId?: any;
+  itemData?: any;
   isPublic?: boolean;
 };
 
-const ProjectView = ({ projectId, isPublic }: Props) => {
+const ProjectView = ({ projectId, itemData, isPublic }: Props) => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [projectData, setProjectData] = useState<any>(null);
@@ -54,15 +55,14 @@ const ProjectView = ({ projectId, isPublic }: Props) => {
     );
   };
 
-
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setProjectData(await EntityManager.findProject(projectId));
+        setProjectData(itemData || await EntityManager.findProject(projectId));
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, projectId]);
+  }, [isLoaded, projectId, itemData]);
 
   return (
     <BoxView

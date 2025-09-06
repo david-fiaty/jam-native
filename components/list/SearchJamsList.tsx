@@ -23,6 +23,7 @@ const SearchJamsList = ({ data }: Props) => {
     SectionManager.push(router, 'public-jam', {
       jamId: row?.item?.id,
       title: row?.item?.title,
+      itemData: JSON.stringify(row?.item),
       disableInfiniteScroll: true,
     });
   };

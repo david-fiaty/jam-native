@@ -4,9 +4,10 @@ import JamView from "@/components/view/JamView";
 
 type Props = {
   jamId: any;
+  itemData?: any;
 };
 
-const PublicFormSection = ({ jamId }: Props) => {
+const PublicJamSection = ({ jamId, itemData }: Props) => {
   return (
     <BoxView
       direction="column"
@@ -17,6 +18,7 @@ const PublicFormSection = ({ jamId }: Props) => {
       <JamView 
         isPublic={true} 
         jamId={jamId}
+        itemData={itemData ? JSON.parse(itemData) : null}
       />
     </BoxView>
   );
@@ -30,4 +32,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PublicFormSection;
+export default PublicJamSection;
