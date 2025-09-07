@@ -28,8 +28,6 @@ const SearchView = () => {
       },
     };
 
-    setSearchResults(results);
-
     return results[key];
   };
 
@@ -44,11 +42,11 @@ const SearchView = () => {
   }, [searchState, searchTabs, isLoaded]);
 
   useEffect(() => {
-    if (prevSearchState.current !== searchState) {
+    if (prevSearchState.current?.currentResults !== searchState.currentResults) {
       setSearchResults(JSON.parse(searchState.currentResults) || {});
-    }
 
-    prevSearchState.current = searchState;
+      prevSearchState.current = searchState;
+    }
   }, [searchState]);
 
   if (!isLoaded) return <SpinnerView />;
