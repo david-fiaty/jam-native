@@ -1,12 +1,12 @@
 import { StyleSheet } from "react-native";
-import JamsList from '../list/JamsList';
-import BoxView from '../view/BoxView';
+import BoxView from "@/components/view/BoxView";
+import ProjectsList from "@/components/list/ProjectsList";
 
 type Props = {
-  jamId: any;
+  projectId: any;
 };
 
-const ProfileJamsSection = ({ jamId }: Props) => {
+const ProfileProjectsSection = ({ projectId }: Props) => {
   return (
     <BoxView
       direction="column"
@@ -14,7 +14,7 @@ const ProfileJamsSection = ({ jamId }: Props) => {
       justify="center"
       style={styles.container}
     >
-      <JamsList idArray={JSON.parse(jamId)} disableInfiniteScroll={true} />
+      <ProjectsList idArray={JSON.parse(projectId)} disableInfiniteScroll={true} />
     </BoxView>
   );
 };
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileJamsSection;
+export default ProfileProjectsSection;
