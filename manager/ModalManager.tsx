@@ -4,8 +4,9 @@ import Store from "@/redux/Store";
 class ModalManager {
   toggleModal(modalId: string, params?: any) {
     params = params || {};
-    let activeModals: any[] = [...Store.getState().modal.active];
-    let activeSections: any[] = [...Store.getState().section.active];
+    let storeState: any = Store.getState();
+    let activeModals: any[] = [...storeState.modal.active];
+    let activeSections: any[] = [...storeState.section.active];
     let sectionId: any = null;
 
     if (activeSections.length > 0) {
