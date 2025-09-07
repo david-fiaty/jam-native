@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import { useSelector } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 import { Layout } from "@/constants/Layout";
 import JamViewHeader from "./jam-view/JamViewHeader";
 import JamViewImage from "./jam-view/JamViewImage";
@@ -10,24 +10,25 @@ import EntityManager from "@/manager/EntityManager";
 
 type Props = {
   jamId?: any;
+  itemData?: any;
   isPublic?: boolean;
   onListItemAction?: () => void;
 };
 
-const JamView = ({ jamId, isPublic, onListItemAction }: Props) => {
+const JamView = ({ jamId, itemData, isPublic, onListItemAction }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [jamData, setJamData] = useState<any>(null);
-  const appState = useSelector((state: any) => state.app);
-  const userState = useSelector((state: any) => state.user);
+  const appState = useSelector((state: any) => state.app, shallowEqual);
+  const userState = useSelector((state: any) => state.user, shallowEqual);
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setJamData(await EntityManager.findJam(jamId));
+        setJamData(itemData || await EntityManager.findJam(jamId));
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, jamId]);
+  }, [isLoaded, jamId, itemData]);
 
   return (
     <View style={styles.container}>

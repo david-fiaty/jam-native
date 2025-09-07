@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from 'expo-router';
 import { setSearchFilters, setSearchValue } from '@/redux/slices/SearchSlice';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
@@ -14,6 +14,7 @@ import DividerView from '../view/DividerView';
 import SearchManager from '@/manager/SearchManager';
 import IconView from '../view/IconView';
 import SectionManager from '@/manager/SectionManager';
+import SpinnerView from '../view/SpinnerView';
 
 const SearchFiltersForm = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const SearchFiltersForm = () => {
   const [currentKeywords, setCurrentKeywords] = useState<string>('');
   const [filtersConfig, setFiltersConfig] = useState<any>({});
   const appState = useSelector((state: any) => state.app);
-  const searchState = useSelector((state: any) => state.search);
+  const searchState = useSelector((state: any) => state.search, shallowEqual);
 
   const getFiltersConfig = () => {
     return {
@@ -276,6 +277,8 @@ const SearchFiltersForm = () => {
       setIsLoaded(true);
     }
   }, [searchState, isLoaded]);
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView

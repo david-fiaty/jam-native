@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from 'expo-router';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setCurrentLanguage } from "@/redux/slices/UserSlice";
 import { Layout } from '@/constants/Layout';
 import { Config } from "@/constants/Config";
@@ -16,7 +16,7 @@ const LanguageForm = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [languageChanged, setLanguageChanged] = useState(0);
-  const userState: any = useSelector((state: any) => state.user);
+  const userState: any = useSelector((state: any) => state.user, shallowEqual);
 
   const getLanguages = () => {
     return [

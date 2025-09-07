@@ -25,7 +25,6 @@ const CollaboratorsList = ({ resource, field }: Props) => {
   const [searchValue, setSearchValue] = useState<string>('');
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const searchState: any = useSelector((state: any) => state.search);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const clearSearch = () => {
@@ -84,12 +83,7 @@ const CollaboratorsList = ({ resource, field }: Props) => {
   };
 
   const getProfilesData = async () => {
-    if (!searchState.searchValue?.length) {
-      return (JSON.parse(searchState.currentResults))?.profile || [];
-    }
-    else {
-      return await EntityManager.listProfiles();
-    }
+    return await EntityManager.listProfiles();
   };
 
   useEffect(() => {

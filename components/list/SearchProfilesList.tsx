@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { memo } from "react";
 import { StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
@@ -10,7 +10,6 @@ import ScreenManager from "@/manager/ScreenManager";
 import UserManager from "@/manager/UserManager";
 import TextView from "../view/TextView";
 import ProfileListItemView from "../view/ProfileListItemView";
-import SpinnerView from "../view/SpinnerView";
 
 type Props = {
   data?: any;
@@ -18,11 +17,11 @@ type Props = {
 
 const SearchProfilesList = ({ data }: Props) => {
   const router = useRouter();
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const onItemPress = (row: any) => {
     SectionManager.push(router, 'public-profile', {
       profileId: row?.item?.id,
+      itemData: JSON.stringify(row?.item),
       title: i18n.t("{{ name }}'s profile", { name: UserManager.getProfileDisplayName(row?.item) }),
     });
   };
@@ -35,14 +34,6 @@ const SearchProfilesList = ({ data }: Props) => {
       />
     );
   };
-
-  useEffect(() => {
-    if (!isLoaded) {
-      setIsLoaded(true)
-    }
-  }, [isLoaded]);
-
-  if (!isLoaded) return <SpinnerView />
 
   return (
     <BoxView
@@ -90,4 +81,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SearchProfilesList;
+export default memo(SearchProfilesList);

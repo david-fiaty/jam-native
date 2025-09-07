@@ -1,5 +1,5 @@
+import React, { useState, useEffect, memo } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import ListView from "../view/ListView";
@@ -27,6 +27,7 @@ const SearchProjectsList = ({ data }: Props) => {
   const onItemPress = (row: any) => {
     SectionManager.push(router, 'public-project', {
       projectId: row?.item?.id,
+      itemData: JSON.stringify(row?.item),
       title: row?.item?.title
     });
   };
@@ -109,4 +110,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SearchProjectsList;
+export default memo(SearchProjectsList);
