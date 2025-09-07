@@ -13,12 +13,11 @@ import ButtonView from '../view/ButtonView';
 import DividerView from '../view/DividerView';
 import SearchManager from '@/manager/SearchManager';
 import IconView from '../view/IconView';
-import SectionManager from '@/manager/SectionManager';
 import SpinnerView from '../view/SpinnerView';
+import ModalManager from '@/manager/ModalManager';
 
 const SearchFiltersForm = () => {
   const dispatch = useDispatch();
-  const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isApplyProcessing, setIsApplyProcessing] = useState<boolean>(false);
   const [isResetProcessing, setIsResetProcessing] = useState<boolean>(false);
@@ -73,7 +72,7 @@ const SearchFiltersForm = () => {
     dispatch(setSearchFilters(currentFilters));
     await SearchManager.loadResults(currentKeywords, currentFilters);
     setIsApplyProcessing(false);
-    SectionManager.back(router);
+    ModalManager.toggleModal('SearchFiltersForm');
   };
 
   const resetFilters = async () => {
