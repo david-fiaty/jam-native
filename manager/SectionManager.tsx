@@ -4,8 +4,9 @@ import i18n from "@/translation/i18n";
 
 class SectionManager {
   push(router: any, sectionId: string, params?: any, title?: any) {
-    let activeSections: any[] = [...Store.getState().section.active];
-    let sectionConfig: any[] = [...Store.getState().section.config];
+    let sectionState: any = Store.getState().section;
+    let activeSections: any[] = [...sectionState.active];
+    let sectionConfig: any[] = [...sectionState.config];
     let targetSection: any = sectionConfig.find((o: any) => o.id === sectionId);
 
     activeSections.push({
@@ -23,8 +24,9 @@ class SectionManager {
   }
 
   replace(router: any, sectionId: string, params?: any) {
-    let activeSections: any[] = [...Store.getState().section.active];
-    let sectionConfig: any[] = [...Store.getState().section.config];
+    let sectionState: any = Store.getState().section;
+    let activeSections: any[] = [...sectionState.active];
+    let sectionConfig: any[] = [...sectionState.config];
     let targetSection: any = sectionConfig.find((o: any) => o.id === sectionId);
 
     if (activeSections?.length > 0 && activeSections.at(-1)?.id == sectionId) {
@@ -46,8 +48,9 @@ class SectionManager {
   }
 
   back(router: any) {
-    let sectionConfig: any[] = Store.getState().section.config;
-    let activeSections: any[] = [...Store.getState().section.active];
+    let sectionState: any = Store.getState().section;
+    let sectionConfig: any[] = sectionState.config;
+    let activeSections: any[] = [...sectionState.active];
   
     activeSections.pop();
     Store.dispatch(setActiveSections(activeSections));
