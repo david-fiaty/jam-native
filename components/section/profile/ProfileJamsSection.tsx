@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
-import JamsList from '../list/JamsList';
-import BoxView from '../view/BoxView';
+import JamsList from "@/components/list/JamsList";
+import BoxView from "@/components/view/BoxView";
 
 type Props = {
   jamId: any;

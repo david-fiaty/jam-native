@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
-import BoxView from '../view/BoxView';
-import ProjectsList from "../list/ProjectsList";
+import BoxView from "@/components/view/BoxView";
+import ProjectsList from "@/components/list/ProjectsList";
 
 type Props = {
   projectId: any;
