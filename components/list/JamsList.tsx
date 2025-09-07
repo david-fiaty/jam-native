@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, memo } from "react";
+import { useState, useEffect, useRef } from "react";
 import { StyleSheet } from 'react-native';
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -69,4 +69,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(JamsList);
+export default JamsList;
