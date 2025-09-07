@@ -9,6 +9,7 @@ import BoxView from './BoxView';
 import TextView from './TextView';
 import SectionManager from '@/manager/SectionManager';
 import i18n from '@/translation/i18n';
+import ModalManager from "@/manager/ModalManager";
 
 const SearchFiltersView = () => {
   const router = useRouter();
@@ -40,7 +41,10 @@ const SearchFiltersView = () => {
   };
 
   return (
-    <TouchableOpacity onPress={() => SectionManager.push(router, 'search-filters')} style={styles.searchFilters}>
+    <TouchableOpacity 
+      onPress={() => ModalManager.toggleModal('SearchFiltersForm')} 
+      style={styles.searchFilters}
+    >
       <BoxView
         direction="row"
         align="center"

@@ -30,8 +30,14 @@ export default () => {
     (async () => {
       await setLanguage();
       await SearchManager.loadResults();
-      dispatch(setSectorsData(await EntityManager.getSectors()));
-      dispatch(setCountriesData(await EntityManager.getCountries()));
+  
+      const [sectors, countries] = await Promise.all([
+        EntityManager.getSectors(),
+        EntityManager.getCountries(),
+      ]);
+
+      dispatch(setSectorsData(sectors));
+      dispatch(setCountriesData(countries));
       setAppReady(true);
     })();
   }, []);
