@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from 'expo-router';
-import { useSelector } from "react-redux";
+import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import { StyleSheet } from 'react-native';
 import IconView from '@/components/view/IconView';
@@ -16,7 +16,7 @@ type Props = {
 const SectionFooter = ({ style }: Props) => {
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const modalState: any = useSelector((state: any) => state.modal);
+  const modalState: any = useSelector((state: any) => state.modal, shallowEqual);
 
   const getIconTheme = (modalId: string) => {
     if (modalState.active.length > 0 && modalState.active[modalState.active.length - 1].id == modalId) {

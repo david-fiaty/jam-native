@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { useSelector } from "react-redux";
+import { useSelector, shallowEqual } from "react-redux";
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
 import { Config } from "@/constants/Config";
@@ -20,7 +20,7 @@ const SectionHeader = ({ style }: Props) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [notifications, setNotifications] = useState<any>([]);
   const [viewedNotificationsCount, setViewedNotificationsCount] = useState<number>(0);
-  const modalState: any = useSelector((state: any) => state.modal);
+  const modalState: any = useSelector((state: any) => state.modal, shallowEqual);
 
   const getIconTheme = (modalId: string) => {
     if (isIconActive(modalId)) {

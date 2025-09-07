@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { useRouter } from 'expo-router';
-import { useSelector } from "react-redux";
+import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
 import i18n from "@/translation/i18n";
@@ -25,16 +25,16 @@ const profileImageSize: number = 111;
 
 type Props = {
   profileId?: any;
+  itemData?: any;
   isOwner?: boolean;
   isPublic?: boolean;
 };
 
-const ProfileView = ({ profileId, isOwner, isPublic }: Props) => {
+const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [profileData, setProfileData] = useState<any>({});
-  const searchState = useSelector((state: any) => state.search);
-  const userState = useSelector((state: any) => state.user);
+  const userState = useSelector((state: any) => state.user, shallowEqual);
 
   const renderHeader = () => {
     return (
@@ -311,12 +311,12 @@ const ProfileView = ({ profileId, isOwner, isPublic }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setProfileData(await getProfileData());
+        setProfileData(itemData || await getProfileData());
         setIsLoaded(true);
       }
     })();
 
-  }, [isLoaded]);
+  }, [isLoaded, itemData]);
 
   if (!isLoaded) return <SpinnerView />;
 
