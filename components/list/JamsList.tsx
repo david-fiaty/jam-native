@@ -13,8 +13,6 @@ type Props = {
 };
 
 const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [listData, setListData] = useState<any[]>([]);
   const [searchResults, setSearchResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const prevSearchState: any = useRef();
@@ -46,16 +44,6 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
       prevSearchState.current = searchState;
     }
   }, [searchState]);
-
-  useEffect(() => {
-    (async () => {
-      if (!isLoaded) {
-        setIsLoaded(true);
-      }
-    })();
-  }, [isLoaded]);
-
-  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView
