@@ -1,12 +1,12 @@
 import { StyleSheet } from "react-native";
-import JamsList from '../list/JamsList';
-import BoxView from '../view/BoxView';
+import JamsList from "@/components/list/JamsList";
+import BoxView from "@/components/view/BoxView";
 
 type Props = {
   jamId: any;
 };
 
-const ProjectJamsSection = ({ jamId }: Props) => {
+const ProfileJamsSection = ({ jamId }: Props) => {
   return (
     <BoxView
       direction="column"
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProjectJamsSection;
+export default ProfileJamsSection;
