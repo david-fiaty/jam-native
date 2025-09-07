@@ -6,6 +6,7 @@ import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
 import JamView from "../view/JamView";
+import SearchManager from "@/manager/SearchManager";
 
 type Props = {
   idArray?: any;
@@ -29,17 +30,13 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
     );
   };
 
-  const getListData = (key: string) => {
-    let results: any = {};
-
-    if (prevSearchState.current !== searchState) {
-      results = JSON.parse(searchState.currentResults) || {};
-      setSearchResults(results);
-      prevSearchState.current = searchState;
-    }
-    else {
-      results = searchResults;
-    }
+  const getTabResults = (key: string) => {
+    let results: any = {
+      ...searchResults,
+      ...{
+        [key]: SearchManager.getTabResults(key, searchState.currentTab, searchResults)
+      },
+    };
 
     if (idArray?.length > 0) {
       results[key] = results[key].filter((o: any) => idArray.includes(o.id));
@@ -51,11 +48,18 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setListData(getListData('jam'));
         setIsLoaded(true);
       }
     })();
   }, [isLoaded]);
+
+  useEffect(() => {
+    if (prevSearchState.current?.currentResults !== searchState.currentResults) {
+      setSearchResults(JSON.parse(searchState.currentResults) || {});
+
+      prevSearchState.current = searchState;
+    }
+  }, [searchState]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -65,7 +69,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
       style={styles.container}
     >  
       <ListView
-        data={listData}
+        data={getTabResults('jam')}
         contentContainerStyle={Layout.listContainer}
         renderItem={renderItem}
         keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
