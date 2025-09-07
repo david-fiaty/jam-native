@@ -30,7 +30,7 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
     let params: any = {
       jamId: row?.item?.id,
       title: i18n.t('Jam'),
-      itemData: row?.item,
+      itemData: JSON.stringify(row?.item),
       disableInfiniteScroll: true,
     };
 
