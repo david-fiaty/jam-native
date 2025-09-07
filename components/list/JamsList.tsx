@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, memo } from "react";
 import { StyleSheet } from 'react-native';
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -13,8 +13,6 @@ type Props = {
 };
 
 const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [listData, setListData] = useState<any[]>([]);
   const [searchResults, setSearchResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const prevSearchState: any = useRef();
@@ -30,16 +28,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   };
 
   const getListData = (key: string) => {
-    let results: any = {};
-
-    if (prevSearchState.current !== searchState) {
-      results = JSON.parse(searchState.currentResults) || {};
-      setSearchResults(results);
-      prevSearchState.current = searchState;
-    }
-    else {
-      results = searchResults;
-    }
+    let results: any = {...searchResults};
 
     if (idArray?.length > 0) {
       results[key] = results[key].filter((o: any) => idArray.includes(o.id));
@@ -49,15 +38,12 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   };
 
   useEffect(() => {
-    (async () => {
-      if (!isLoaded) {
-        setListData(getListData('jam'));
-        setIsLoaded(true);
-      }
-    })();
-  }, [isLoaded]);
+    if (prevSearchState.current?.currentResults !== searchState.currentResults) {
+      setSearchResults(JSON.parse(searchState.currentResults) || {});
 
-  if (!isLoaded) return <SpinnerView />;
+      prevSearchState.current = searchState;
+    }
+  }, [searchState]);
 
   return (
     <BoxView
@@ -65,7 +51,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
       style={styles.container}
     >  
       <ListView
-        data={listData}
+        data={getListData('jam')}
         contentContainerStyle={Layout.listContainer}
         renderItem={renderItem}
         keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
@@ -83,4 +69,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default JamsList;
+export default memo(JamsList);
