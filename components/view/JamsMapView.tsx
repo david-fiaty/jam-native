@@ -61,12 +61,25 @@ const JamsMapView = () => {
       return (
         <Marker
           key={item.id}
+          //title={getMarkerTitle(item)}
+          //description={getMarkerDescription(item)}
+          coordinate={getMarkerCoordinate(item)}
+          //icon={markerImage} 
+        >
+          <CustomMarker />
+        </Marker>
+      );
+      /*
+      return (
+        <Marker
+          key={item.id}
           title={getMarkerTitle(item)}
           description={getMarkerDescription(item)}
           coordinate={getMarkerCoordinate(item)}
           icon={markerImage} 
         />
       );
+      */
     }
 
     return null;
@@ -82,6 +95,12 @@ const JamsMapView = () => {
 
     return results[key];
   };
+
+  const CustomMarker = () => (
+  <View style={styles.marker}>
+    <View style={styles.innerCircle} />
+  </View>
+);
 
   useEffect(() => {
     (async () => {
@@ -146,6 +165,21 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1,
+  },
+  marker: {
+    width: 40,
+    height: 40,
+    backgroundColor: "red",
+    borderRadius: 20,
+    transform: [{ rotate: "45deg" }], // makes it look like a drop
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  innerCircle: {
+    width: 16,
+    height: 16,
+    backgroundColor: "white",
+    borderRadius: 8,
   },
 });
 
