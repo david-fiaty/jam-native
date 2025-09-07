@@ -1,3 +1,4 @@
+import React, { memo } from "react";
 import { StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
@@ -80,4 +81,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SearchProfilesList;
+export default memo(SearchProfilesList);
