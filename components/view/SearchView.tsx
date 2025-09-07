@@ -31,6 +31,30 @@ const SearchView = () => {
     return results[key];
   };
 
+  const renderJamsList = () => {
+    return (
+      <SearchJamsList
+        data={getTabResults('jam')}
+      />
+    );
+  };
+
+  const renderProfilesList = () => {
+    return (
+      <SearchProfilesList
+        data={getTabResults('profile')}
+      />
+    );
+  };
+
+  const renderProjectsList = () => {
+    return (
+      <SearchProjectsList
+        data={getTabResults('project')}
+      />
+    );
+  };
+
   useEffect(() => {
     if (!isLoaded) {
       if (!searchState.currentTab) {
@@ -66,23 +90,11 @@ const SearchView = () => {
 
       <SearchFiltersView />
 
-      {SearchManager.isJamTab(searchState.currentTab) && (
-        <SearchJamsList
-          data={getTabResults('jam')}
-        />
-      )}
+      {SearchManager.isJamTab(searchState.currentTab) && renderJamsList()}
 
-      {SearchManager.isProfileTab(searchState.currentTab) &&
-        <SearchProfilesList
-          data={getTabResults('profile')}
-        />
-      }
+      {SearchManager.isProfileTab(searchState.currentTab) && renderProfilesList()}
 
-      {SearchManager.isProjectTab(searchState.currentTab) &&
-        <SearchProjectsList
-          data={getTabResults('project')}
-        />
-      }
+      {SearchManager.isProjectTab(searchState.currentTab) && renderProjectsList()}
     </BoxView>
   );
 };
