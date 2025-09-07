@@ -21,17 +21,14 @@ const SearchView = () => {
   const searchTabs: any[] = SearchManager.getSearchTabs();
 
   const getTabResults = (key: string) => {
-    let results: any = {};
+    let results: any = {
+      ...searchResults,
+      ...{
+        [key]: SearchManager.getTabResults(key, searchState.currentTab, searchResults)
+      },
+    };
 
-    if (prevSearchState.current !== searchState) {
-      let data: any = JSON.parse(searchState.currentResults) || {};
-      results[key] = SearchManager.getTabResults(key, searchState.currentTab, data);
-      setSearchResults(results);
-      prevSearchState.current = searchState;
-    }
-    else {
-      results = searchResults;
-    }
+    setSearchResults(results);
 
     return results[key];
   };
@@ -45,6 +42,14 @@ const SearchView = () => {
       setIsLoaded(true);
     }
   }, [searchState, searchTabs, isLoaded]);
+
+  useEffect(() => {
+    if (prevSearchState.current !== searchState) {
+      setSearchResults(JSON.parse(searchState.currentResults) || {});
+    }
+
+    prevSearchState.current = searchState;
+  }, [searchState]);
 
   if (!isLoaded) return <SpinnerView />;
 
