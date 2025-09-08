@@ -2,8 +2,10 @@ import React, { ReactNode } from "react";
 import { StyleSheet, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import IconView from "./IconView";
+import TextView from "./TextView";
 
 type Props = {
+  title?: string;
   size?: number;
   iconName?: string;
   outerColor?: string;
@@ -11,7 +13,7 @@ type Props = {
   children?: ReactNode;
 };
 
-const MarkerView = ({ size, iconName, outerColor, innerColor, children }: Props) => {
+const MarkerView = ({ title, size, iconName, outerColor, innerColor, children }: Props) => {
   const markerSize: number = size || 60;
   const markerOuterColor: string = outerColor || 'white';
   const markerInnerColor: string = innerColor || 'red';
@@ -42,6 +44,9 @@ const MarkerView = ({ size, iconName, outerColor, innerColor, children }: Props)
 
   return (
     <View style={styles.container}>
+      {title && (
+        <TextView color="white">{title}</TextView>
+      )}
       <View style={[styles.outerCircle, outerCircleStyles]}>
         <View style={[styles.innerCircle, innerCircleStyles]}>
           {iconName && (
