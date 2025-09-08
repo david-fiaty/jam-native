@@ -8,6 +8,7 @@ type Props = {
 
 const MarkerView = ({ size }: Props) => {
   const markerSize = size || 60;
+  
   const outerCircleStyles: any = {
     width: markerSize,
     height: markerSize,
