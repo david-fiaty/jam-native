@@ -18,13 +18,9 @@ const MarkerView = ({ title, size, iconName, titleColor, outerColor, innerColor,
   const markerSize: number = size || 60;
   const markerOuterColor: string = outerColor || 'white';
   const markerInnerColor: string = innerColor || 'red';
-  const markerTitleColor: string = titleColor || 'white';
+  const markerTitleColor: string = titleColor || markerInnerColor;
 
   const iconSize: number = markerSize/3; 
-  
-  const titleStyles: any = {
-
-  };
 
   const outerCircleStyles: any = {
     width: markerSize,
