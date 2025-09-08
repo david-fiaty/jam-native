@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import { StyleSheet, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
+import IconView from "./IconView";
 
 type Props = {  
   size?: any;
@@ -40,6 +41,7 @@ const MarkerView = ({ size, outerColor, innerColor, children }: Props) => {
     <View style={styles.container}>
       <View style={[styles.outerCircle, outerCircleStyles]}>
         <View style={[styles.innerCircle, innerCircleStyles]}>
+          <IconView name="location" size={20} padding={6} />
           {children}
         </View>
       </View>
@@ -50,7 +52,8 @@ const MarkerView = ({ size, outerColor, innerColor, children }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'gray',
+    backgroundColor: 'black',
+    padding: 20,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
@@ -61,7 +64,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   innerCircle: {
-    
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   bottomArrow: {
     width: 0,
