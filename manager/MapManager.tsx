@@ -41,7 +41,9 @@ class MapManager {
 
   getMarkerColor(item: any) {
     let appState: any = Store.getState().app;
-    let sectorsData: any[] = appState.sectorsData; 
+    let sectorsData: any[] = appState.sectorsData;
+    
+    //console.log(item?.sectors)
   
     return 'green';
   };
