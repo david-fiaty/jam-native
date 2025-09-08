@@ -11,6 +11,7 @@ class MapManager {
           coordinate={this.getMarkerCoordinate(item)}
         >
           <MarkerView
+            iconName="user"
             title={this.getMarkerTitle(item)}
             description={this.getMarkerDescription(item)}
           />
@@ -20,7 +21,6 @@ class MapManager {
 
     return null;
   }
-
   
   getMarkerCoordinate(item: any) {
     return {
