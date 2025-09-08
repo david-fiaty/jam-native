@@ -51,8 +51,11 @@ const MarkerView = ({ title, size, iconName, titleColor, outerColor, innerColor,
   return (
     <View style={styles.container}>
       {title && (
-        <TextView color={markerTitleColor}>{title}</TextView>
+        <View style={styles.titleContainer}>
+          <TextView color={markerTitleColor}>{title}</TextView>
+        </View>
       )}
+
       <View style={[styles.outerCircle, outerCircleStyles]}>
         <View style={[styles.innerCircle, innerCircleStyles]}>
           {iconName && (
@@ -80,6 +83,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  titleContainer: {
+    marginBottom: Layout.space.base,
   },
   outerCircle: {
     flexDirection: 'column',
