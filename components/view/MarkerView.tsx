@@ -16,7 +16,7 @@ type Props = {
 };
 
 const MarkerView = ({ title, description, size, iconName, titleColor, outerColor, innerColor, children }: Props) => {
-  const markerSize: number = size || 40;
+  const markerSize: number = size || 35;
   const markerOuterColor: string = outerColor || 'white';
   const markerInnerColor: string = innerColor || 'red';
   const markerTitleColor: string = titleColor || markerInnerColor;
@@ -76,7 +76,6 @@ const MarkerView = ({ title, description, size, iconName, titleColor, outerColor
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'transparent',
-    //padding: 20,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
