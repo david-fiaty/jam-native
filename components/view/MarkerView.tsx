@@ -15,8 +15,9 @@ const MarkerView = ({ size, iconName, outerColor, innerColor, children }: Props)
   const markerSize: number = size || 60;
   const markerOuterColor: string = outerColor || 'white';
   const markerInnerColor: string = innerColor || 'red';
-
+  
   const iconSize: number = markerSize/3; 
+  
   const outerCircleStyles: any = {
     width: markerSize,
     height: markerSize,
