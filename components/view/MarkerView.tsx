@@ -65,9 +65,9 @@ const styles = StyleSheet.create({
     width: 0,
     height: 0,
     borderBottomWidth: 0,
-    backgroundColor: "transparent",
-    borderLeftColor: "transparent",
-    borderRightColor: "transparent",
+    backgroundColor: 'transparent',
+    borderLeftColor: 'transparent',
+    borderRightColor: 'transparent',
   },
 });
 
