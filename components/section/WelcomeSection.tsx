@@ -56,12 +56,16 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   marker: {
+    backgroundColor: 'gray',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   markerCircle: {
-    width: 16,
-    height: 16,
-    backgroundColor: "red",
-    borderRadius: 8,
+    width: 40,
+    height: 40,
+    backgroundColor: "black",
+    borderRadius: 20,
   },
   markerArrow: {
     width: 0,
