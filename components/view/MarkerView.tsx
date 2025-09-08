@@ -12,7 +12,7 @@ type Props = {
 };
 
 const MarkerView = ({ size, iconName, outerColor, innerColor, children }: Props) => {
-  const markerSize: number = size || 60;
+  const markerSize: number = size || 40;
   const markerOuterColor: string = outerColor || 'white';
   const markerInnerColor: string = innerColor || 'red';
   
@@ -26,9 +26,9 @@ const MarkerView = ({ size, iconName, outerColor, innerColor, children }: Props)
   };
 
   const innerCircleStyles: any = {
-    width: markerSize - Layout.space.base,
-    height: markerSize - Layout.space.base,
-    borderRadius: (markerSize - Layout.space.base) / 2,
+    width: markerSize - Layout.space.base/2,
+    height: markerSize - Layout.space.base/2,
+    borderRadius: (markerSize - Layout.space.base/2) / 2,
     backgroundColor: markerInnerColor,
   };
 
