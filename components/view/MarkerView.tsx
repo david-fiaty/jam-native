@@ -36,14 +36,14 @@ const MarkerView = ({ size, outerColor, innerColor }: Props) => {
   };
 
   return (
-      <View style={styles.container}>
-        <View style={[styles.outerCircle, outerCircleStyles]}>
-          <View style={[styles.innerCircle, innerCircleStyles]}>
+    <View style={styles.container}>
+      <View style={[styles.outerCircle, outerCircleStyles]}>
+        <View style={[styles.innerCircle, innerCircleStyles]}>
 
-          </View>
         </View>
-        <View style={[styles.bottomArrow, bottomArrowStyles]} />
       </View>
+      <View style={[styles.bottomArrow, bottomArrowStyles]} />
+    </View>
   );
 };
 
