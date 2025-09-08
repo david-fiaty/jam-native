@@ -11,25 +11,32 @@ const markerSize = 60;
 const MarkerView = ({ size }: Props) => {
 
   const outerCircleStyles: any = {
-
+    width: markerSize,
+    height: markerSize,
+    borderRadius: markerSize/2,
   };
 
   const innerCircleStyles: any = {
-
+    width: markerSize - Layout.space.base,
+    height: markerSize - Layout.space.base,
+    borderRadius: (markerSize - Layout.space.base)/2,
   };
 
   const bottomArrowStyles: any = {
-
+    marginTop: -markerSize/7.5,
+    borderLeftWidth: markerSize/3,
+    borderRightWidth: markerSize/3,
+    borderTopWidth: markerSize/3,
   };
 
   return (
       <View style={styles.container}>
-        <View style={[styles.outerCircle]}>
-          <View style={[styles.innerCircle]}>
+        <View style={[styles.outerCircle, outerCircleStyles]}>
+          <View style={[styles.innerCircle, innerCircleStyles]}>
 
           </View>
         </View>
-        <View style={[styles.bottomArrow]} />
+        <View style={[styles.bottomArrow, bottomArrowStyles]} />
       </View>
   );
 };
@@ -45,24 +52,14 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    width: markerSize,
-    height: markerSize,
-    backgroundColor: "white",
-    borderRadius: markerSize/2,
+    backgroundColor: 'white',
   },
   innerCircle: {
-    width: markerSize - Layout.space.base,
-    height: markerSize - Layout.space.base,
-    backgroundColor: "red",
-    borderRadius: (markerSize - Layout.space.base)/2,
+    backgroundColor: 'red',
   },
   bottomArrow: {
     width: 0,
     height: 0,
-    marginTop: -markerSize/7.5,
-    borderLeftWidth: markerSize/3,
-    borderRightWidth: markerSize/3,
-    borderTopWidth: markerSize/3,
     borderBottomWidth: 0,
     backgroundColor: "transparent",
     borderLeftColor: "transparent",
