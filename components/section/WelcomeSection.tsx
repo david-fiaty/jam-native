@@ -33,6 +33,11 @@ const WelcomeSection = () => {
       justify="center"
       style={styles.container}
     >
+      <View style={styles.marker}>
+        <View style={styles.markerCircle} />
+        <View style={styles.markerArrow} />
+      </View>
+
       <LogoView size={110} />
 
       <TextSlideshow data={slideshowData} />
@@ -49,6 +54,26 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
+  },
+  marker: {
+  },
+  markerCircle: {
+    width: 16,
+    height: 16,
+    backgroundColor: "red",
+    borderRadius: 8,
+  },
+  markerArrow: {
+    width: 0,
+    height: 0,
+    backgroundColor: "transparent",
+    borderLeftWidth: 15,
+    borderRightWidth: 15,
+    borderBottomWidth: 0,
+    borderTopWidth: 20,
+    borderLeftColor: "transparent",
+    borderRightColor: "transparent",
+    borderTopColor: "blue", // Color of the triangle
   },
 });
 
