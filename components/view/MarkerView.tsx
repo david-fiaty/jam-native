@@ -8,18 +8,24 @@ type Props = {
   title?: string;
   size?: number;
   iconName?: string;
+  titleColor?: string;
   outerColor?: string;
   innerColor?: string;
   children?: ReactNode;
 };
 
-const MarkerView = ({ title, size, iconName, outerColor, innerColor, children }: Props) => {
+const MarkerView = ({ title, size, iconName, titleColor, outerColor, innerColor, children }: Props) => {
   const markerSize: number = size || 60;
   const markerOuterColor: string = outerColor || 'white';
   const markerInnerColor: string = innerColor || 'red';
-  
+  const markerTitleColor: string = titleColor || 'white';
+
   const iconSize: number = markerSize/3; 
   
+  const titleStyles: any = {
+
+  };
+
   const outerCircleStyles: any = {
     width: markerSize,
     height: markerSize,
@@ -45,7 +51,7 @@ const MarkerView = ({ title, size, iconName, outerColor, innerColor, children }:
   return (
     <View style={styles.container}>
       {title && (
-        <TextView color="white">{title}</TextView>
+        <TextView color={markerTitleColor}>{title}</TextView>
       )}
       <View style={[styles.outerCircle, outerCircleStyles]}>
         <View style={[styles.innerCircle, innerCircleStyles]}>
