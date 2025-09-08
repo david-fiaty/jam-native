@@ -1,4 +1,4 @@
-import MapView, { Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
 import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
@@ -6,12 +6,11 @@ import { setCurrentTab } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
-import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import SearchFiltersView from "./SearchFiltersView";
 import SearchManager from "@/manager/SearchManager";
 import TabsView from "./TabsView";
-import MarkerView from "./MarkerView";
+import MapManager from "@/manager/MapManager";
 
 const JamsMapView = () => {
   const dispatch = useDispatch();
@@ -21,7 +20,6 @@ const JamsMapView = () => {
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const prevSearchState: any = useRef();
   const searchTabs: any[] = SearchManager.getSearchTabs();
-  const markerImage = require('@/assets/images/logo-55.png');
 
   const getInitialRegion = () => {
     let latitude: any = Config.defaultLocation.latitude;
@@ -40,39 +38,6 @@ const JamsMapView = () => {
       latitudeDelta: latitudeDelta,
       longitudeDelta: longitudeDelta,
     };
-  };
-
-  const getMarkerCoordinate = (item: any) => {
-    return {
-      latitude: parseFloat(item?.geolocation_latitude),
-      longitude: parseFloat(item?.geolocation_longitude),
-    };
-  };
-
-  const getMarkerTitle = (item: any) => {
-    return item?.title || i18n.t('No title available');
-  };
-
-  const getMarkerDescription = (item: any) => {
-    return item?.caption || '';
-  };
-
-  const renderJamMarker = (item: any) => {
-    if (item?.geolocation_longitude && item?.geolocation_latitude) {
-      return (
-        <Marker
-          key={item.id}
-          coordinate={getMarkerCoordinate(item)}
-        >
-          <MarkerView 
-            title={getMarkerTitle(item)}
-            description={getMarkerDescription(item)}
-          />
-        </Marker>
-      );
-    }
-
-    return null;
   };
 
   const getTabResults = (key: string) => {
@@ -130,9 +95,9 @@ const JamsMapView = () => {
           showsUserLocation={true}
           showsMyLocationButton={true}
         >
-          {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => renderJamMarker(item))}
-          {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => renderJamMarker(item))}
-          {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => renderJamMarker(item))}
+          {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => MapManager.renderMarker(item))}
+          {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => MapManager.renderMarker(item))}
+          {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => MapManager.renderMarker(item))}
         </MapView>
       </View>
     </TouchableWithoutFeedback>
