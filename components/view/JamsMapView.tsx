@@ -11,6 +11,7 @@ import UserManager from "@/manager/UserManager";
 import SearchFiltersView from "./SearchFiltersView";
 import SearchManager from "@/manager/SearchManager";
 import TabsView from "./TabsView";
+import MarkerView from "./MarkerView";
 
 const JamsMapView = () => {
   const dispatch = useDispatch();
@@ -65,9 +66,7 @@ const JamsMapView = () => {
           //description={getMarkerDescription(item)}
           coordinate={getMarkerCoordinate(item)}
         >
-          <View style={styles.marker}>
-            <View style={styles.markerCircle} />
-          </View>
+          <MarkerView />
         </Marker>
       );
     }
