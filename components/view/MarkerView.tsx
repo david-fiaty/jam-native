@@ -19,6 +19,7 @@ const MarkerView = ({  }: Props) => {
   );
 };
 
+const markerSize = 60;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'gray',
@@ -30,10 +31,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 60,
-    height: 60,
+    width: markerSize,
+    height: markerSize,
     backgroundColor: "white",
-    borderRadius: 30,
+    borderRadius: markerSize/2,
   },
   innerCircle: {
     width: 50,
