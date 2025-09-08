@@ -18,6 +18,7 @@ const icons = {
   list: ({iconStyle, size}: IconProps) => <Ionicons name="list-outline" size={size} style={iconStyle} />,
   location: ({iconStyle, size}: IconProps) => <Ionicons name="location-outline" size={size} style={iconStyle} />,
   marker: ({iconStyle, size}: IconProps) => <Ionicons name="location" size={size} style={iconStyle} />,
+  building: ({iconStyle, size}: IconProps) => <Ionicons name="business-outline" size={size} style={iconStyle} />,
   calendar: ({iconStyle, size}: IconProps) => <Ionicons name="calendar-clear-outline" size={size} style={iconStyle} />,
   megaphone: ({iconStyle, size}: IconProps) => <Ionicons name="megaphone-outline" size={size} style={iconStyle} />,
   menu: ({iconStyle, size}: IconProps) => <Ionicons name="menu" size={size} style={iconStyle} />,
