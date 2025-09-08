@@ -4,21 +4,27 @@ import { Layout } from '@/constants/Layout';
 
 type Props = {  
   size?: any;
+  outerColor?: string;
+  innerColor?: string;
 };
 
-const MarkerView = ({ size }: Props) => {
+const MarkerView = ({ size, outerColor, innerColor }: Props) => {
   const markerSize = size || 60;
+  const markerOuterColor = outerColor || 'white';
+  const markerInnerColor = innerColor || 'red';
   
   const outerCircleStyles: any = {
     width: markerSize,
     height: markerSize,
     borderRadius: markerSize/2,
+    backgroundColor: markerOuterColor,
   };
 
   const innerCircleStyles: any = {
     width: markerSize - Layout.space.base,
     height: markerSize - Layout.space.base,
     borderRadius: (markerSize - Layout.space.base)/2,
+    backgroundColor: markerInnerColor,
   };
 
   const bottomArrowStyles: any = {
@@ -26,6 +32,7 @@ const MarkerView = ({ size }: Props) => {
     borderLeftWidth: markerSize/2.5,
     borderRightWidth: markerSize/2.5,
     borderTopWidth: markerSize/3,
+    borderTopColor: markerOuterColor, 
   };
 
   return (
@@ -51,10 +58,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
   },
   innerCircle: {
-    backgroundColor: 'red',
+    
   },
   bottomArrow: {
     width: 0,
@@ -63,7 +69,6 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     borderLeftColor: "transparent",
     borderRightColor: "transparent",
-    borderTopColor: "white", 
   },
 });
 
