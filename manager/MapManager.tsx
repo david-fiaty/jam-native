@@ -12,7 +12,7 @@ class MapManager {
           coordinate={this.getMarkerCoordinate(item)}
         >
           <MarkerView
-            iconName="pin"
+            iconName={this.getMarkerIcon(item)}
             title={this.getMarkerTitle(item)}
             description={this.getMarkerDescription(item)}
             innerColor={this.getMarkerColor(item)}
@@ -37,6 +37,10 @@ class MapManager {
 
   getMarkerDescription = (item: any) => {
     return item?.caption || '';
+  };
+
+  getMarkerIcon = (item: any) => {
+    return 'pin';
   };
 
   getMarkerColor(item: any) {
