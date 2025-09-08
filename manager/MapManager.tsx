@@ -1,0 +1,52 @@
+import { Marker } from "react-native-maps";
+import Store from "@/redux/Store";
+import MarkerView from "@/components/view/MarkerView";
+import i18n from "@/translation/i18n";
+
+class MapManager {
+  renderMarker = (item: any) => {
+    if (item?.geolocation_longitude && item?.geolocation_latitude) {
+      return (
+        <Marker
+          key={item.id}
+          coordinate={this.getMarkerCoordinate(item)}
+        >
+          <MarkerView
+            iconName="pin"
+            title={this.getMarkerTitle(item)}
+            description={this.getMarkerDescription(item)}
+            innerColor={this.getMarkerColor(item)}
+          />
+        </Marker>
+      );
+    }
+
+    return null;
+  }
+  
+  getMarkerCoordinate(item: any) {
+    return {
+      latitude: parseFloat(item?.geolocation_latitude),
+      longitude: parseFloat(item?.geolocation_longitude),
+    };
+  }
+
+  getMarkerTitle(item: any) {
+    return item?.title || i18n.t('No title available');
+  };
+
+  getMarkerDescription = (item: any) => {
+    return item?.caption || '';
+  };
+
+  getMarkerColor(item: any) {
+    let appState: any = Store.getState().app;
+    let sectorsData: any[] = appState.sectorsData;
+    
+    //console.log(item?.sectors)
+  
+    return 'green';
+  };
+}
+
+export default (new MapManager());
