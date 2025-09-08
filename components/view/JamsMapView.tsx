@@ -1,4 +1,4 @@
-import MapView , { Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
 import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
@@ -21,7 +21,7 @@ const JamsMapView = () => {
   const prevSearchState: any = useRef();
   const searchTabs: any[] = SearchManager.getSearchTabs();
   const markerImage = require('@/assets/images/logo-55.png');
-  
+
   const getInitialRegion = () => {
     let latitude: any = Config.defaultLocation.latitude;
     let longitude: any = Config.defaultLocation.longitude;
@@ -30,7 +30,7 @@ const JamsMapView = () => {
 
     if (currentLocation?.latitude && currentLocation?.longitude) {
       latitude = currentLocation.latitude;
-      longitude = currentLocation.longitude; 
+      longitude = currentLocation.longitude;
     }
 
     return {
@@ -64,22 +64,12 @@ const JamsMapView = () => {
           //title={getMarkerTitle(item)}
           //description={getMarkerDescription(item)}
           coordinate={getMarkerCoordinate(item)}
-          //icon={markerImage} 
         >
-          <CustomMarker />
+          <View style={styles.marker}>
+            <View style={styles.markerCircle} />
+          </View>
         </Marker>
       );
-      /*
-      return (
-        <Marker
-          key={item.id}
-          title={getMarkerTitle(item)}
-          description={getMarkerDescription(item)}
-          coordinate={getMarkerCoordinate(item)}
-          icon={markerImage} 
-        />
-      );
-      */
     }
 
     return null;
@@ -95,12 +85,6 @@ const JamsMapView = () => {
 
     return results[key];
   };
-
-  const CustomMarker = () => (
-  <View style={styles.marker}>
-    <View style={styles.innerCircle} />
-  </View>
-);
 
   useEffect(() => {
     (async () => {
@@ -129,7 +113,7 @@ const JamsMapView = () => {
   return (
     <TouchableWithoutFeedback>
       <View style={styles.container}>
-          
+
         <TabsView
           tabs={searchTabs}
           currentTab={searchState.currentTab}
@@ -140,7 +124,7 @@ const JamsMapView = () => {
 
         <MapView
           style={styles.map}
-          provider={PROVIDER_DEFAULT} 
+          provider={PROVIDER_DEFAULT}
           initialRegion={getInitialRegion()}
           customMapStyle={Layout.mapStyle}
           showsUserLocation={true}
@@ -175,7 +159,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  innerCircle: {
+  markerCircle: {
     width: 16,
     height: 16,
     backgroundColor: "white",
