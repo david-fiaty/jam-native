@@ -38,7 +38,7 @@ const MarkerView = ({ title, description, size, iconName, titleColor, outerColor
   };
 
   const bottomArrowStyles: any = {
-    marginTop: -markerSize / 5,
+    marginTop: -(markerSize / 5),
     borderLeftWidth: markerSize / 2.5,
     borderRightWidth: markerSize / 2.5,
     borderTopWidth: markerSize / 3,
