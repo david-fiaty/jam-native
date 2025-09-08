@@ -9,8 +9,12 @@ type Props = {
 const MarkerView = ({  }: Props) => {
   return (
       <View style={styles.container}>
-        <View style={styles.circle} />
-        <View style={styles.arrow} />
+        <View style={styles.outerCircle}>
+          <View style={styles.innerCircle}>
+
+          </View>
+        </View>
+        <View style={styles.bottomArrow} />
       </View>
   );
 };
@@ -22,24 +26,33 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  circle: {
+  outerCircle: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
     width: 60,
     height: 60,
     backgroundColor: "black",
     borderRadius: 30,
   },
-  arrow: {
+  innerCircle: {
+    width: 50,
+    height: 50,
+    backgroundColor: "yellow",
+    borderRadius: 25,
+  },
+  bottomArrow: {
     width: 0,
     height: 0,
-    backgroundColor: "transparent",
-    borderLeftWidth: 15,
-    borderRightWidth: 15,
+    marginTop: -7,
+    borderLeftWidth: 17,
+    borderRightWidth: 17,
+    borderTopWidth: 17,
     borderBottomWidth: 0,
-    borderTopWidth: 15,
+    backgroundColor: "transparent",
     borderLeftColor: "transparent",
     borderRightColor: "transparent",
     borderTopColor: "blue", 
-    marginTop: -5,
   },
 });
 
