@@ -74,7 +74,7 @@ const MarkerView = ({ title, size, iconName, titleColor, outerColor, innerColor,
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'black',
+    backgroundColor: '#dddddd',
     padding: 20,
     flexDirection: 'column',
     alignItems: 'center',
