@@ -13,7 +13,7 @@ type IconProps = {
   size?: number, 
 }
 
-const icons = {
+const icons: any = {
   earth: ({iconStyle, size}: IconProps) => <Ionicons name="earth" size={size} style={iconStyle} />,
   list: ({iconStyle, size}: IconProps) => <Ionicons name="list-outline" size={size} style={iconStyle} />,
   location: ({iconStyle, size}: IconProps) => <Ionicons name="location-outline" size={size} style={iconStyle} />,
