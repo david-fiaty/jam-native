@@ -3,46 +3,56 @@ import { StyleSheet, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import IconView from "./IconView";
 
-type Props = {  
+type Props = {
   size?: any;
+  iconName?: string;
   outerColor?: string;
   innerColor?: string;
   children?: ReactNode;
 };
 
-const MarkerView = ({ size, outerColor, innerColor, children }: Props) => {
+const MarkerView = ({ size, iconName, outerColor, innerColor, children }: Props) => {
   const markerSize = size || 60;
   const markerOuterColor = outerColor || 'white';
   const markerInnerColor = innerColor || 'red';
-  
+
   const outerCircleStyles: any = {
     width: markerSize,
     height: markerSize,
-    borderRadius: markerSize/2,
+    borderRadius: markerSize / 2,
     backgroundColor: markerOuterColor,
   };
 
   const innerCircleStyles: any = {
     width: markerSize - Layout.space.base,
     height: markerSize - Layout.space.base,
-    borderRadius: (markerSize - Layout.space.base)/2,
+    borderRadius: (markerSize - Layout.space.base) / 2,
     backgroundColor: markerInnerColor,
   };
 
   const bottomArrowStyles: any = {
-    marginTop: -markerSize/5,
-    borderLeftWidth: markerSize/2.5,
-    borderRightWidth: markerSize/2.5,
-    borderTopWidth: markerSize/3,
-    borderTopColor: markerOuterColor, 
+    marginTop: -markerSize / 5,
+    borderLeftWidth: markerSize / 2.5,
+    borderRightWidth: markerSize / 2.5,
+    borderTopWidth: markerSize / 3,
+    borderTopColor: markerOuterColor,
   };
 
   return (
     <View style={styles.container}>
       <View style={[styles.outerCircle, outerCircleStyles]}>
         <View style={[styles.innerCircle, innerCircleStyles]}>
-          <IconView name="location" size={20} padding={6} />
-          {children}
+          {iconName && (
+            <IconView
+              name={iconName}
+              theme="transparent"
+              color="white"
+              size={20}
+              padding={0}
+            />
+          )}
+
+          {!iconName && children}
         </View>
       </View>
       <View style={[styles.bottomArrow, bottomArrowStyles]} />
