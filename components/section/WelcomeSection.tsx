@@ -62,10 +62,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   markerCircle: {
-    width: 40,
-    height: 40,
+    width: 50,
+    height: 50,
     backgroundColor: "black",
-    borderRadius: 20,
+    borderRadius: 25,
   },
   markerArrow: {
     width: 0,
@@ -77,7 +77,8 @@ const styles = StyleSheet.create({
     borderTopWidth: 20,
     borderLeftColor: "transparent",
     borderRightColor: "transparent",
-    borderTopColor: "blue", // Color of the triangle
+    borderTopColor: "blue", 
+    marginTop: -5,
   },
 });
 
