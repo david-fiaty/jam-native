@@ -16,7 +16,7 @@ type Props = {
 };
 
 const MarkerView = ({ title, description, size, iconName, titleColor, outerColor, innerColor, children }: Props) => {
-  const markerSize: number = size || 60;
+  const markerSize: number = size || 35;
   const markerOuterColor: string = outerColor || 'white';
   const markerInnerColor: string = innerColor || 'red';
   const markerTitleColor: string = titleColor || markerInnerColor;
@@ -38,7 +38,7 @@ const MarkerView = ({ title, description, size, iconName, titleColor, outerColor
   };
 
   const bottomArrowStyles: any = {
-    marginTop: -markerSize / 5,
+    marginTop: -(markerSize / 5),
     borderLeftWidth: markerSize / 2.5,
     borderRightWidth: markerSize / 2.5,
     borderTopWidth: markerSize / 3,
@@ -47,11 +47,11 @@ const MarkerView = ({ title, description, size, iconName, titleColor, outerColor
 
   return (
     <View style={styles.container}>
-      {title && (
+      {/*title && (
         <View style={styles.titleContainer}>
           <TextView color={markerTitleColor}>{title}</TextView>
         </View>
-      )}
+      )*/}
 
       <View style={[styles.outerCircle, outerCircleStyles]}>
         <View style={[styles.innerCircle, innerCircleStyles]}>
@@ -75,8 +75,7 @@ const MarkerView = ({ title, description, size, iconName, titleColor, outerColor
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#dddddd',
-    padding: 20,
+    backgroundColor: 'transparent',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
