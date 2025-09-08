@@ -14,6 +14,7 @@ class MapManager {
             iconName="pin"
             title={this.getMarkerTitle(item)}
             description={this.getMarkerDescription(item)}
+            innerColor={this.getMarkerColor(item)}
           />
         </Marker>
       );
@@ -28,6 +29,10 @@ class MapManager {
       longitude: parseFloat(item?.geolocation_longitude),
     };
   }
+
+  getMarkerColor(item: any) {
+    return 'yellow';
+  };
 
   getMarkerTitle(item: any) {
     return item?.title || i18n.t('No title available');
