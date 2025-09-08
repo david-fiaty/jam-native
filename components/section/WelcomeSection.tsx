@@ -6,6 +6,7 @@ import TextSlideshow from '../slideshow/TextSlideshow';
 import BottomLinks from './navigation/BottomLinks';
 import BoxView from '../view/BoxView';
 import i18n from '@/translation/i18n';
+import MarkerView from '../view/MarkerView';
 
 const WelcomeSection = () => {
   const slideshowData: any[] = [
@@ -33,11 +34,8 @@ const WelcomeSection = () => {
       justify="center"
       style={styles.container}
     >
-      <View style={styles.marker}>
-        <View style={styles.markerCircle} />
-        <View style={styles.markerArrow} />
-      </View>
 
+      <MarkerView />
       <LogoView size={110} />
 
       <TextSlideshow data={slideshowData} />
@@ -54,31 +52,6 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
-  },
-  marker: {
-    backgroundColor: 'gray',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  markerCircle: {
-    width: 50,
-    height: 50,
-    backgroundColor: "black",
-    borderRadius: 25,
-  },
-  markerArrow: {
-    width: 0,
-    height: 0,
-    backgroundColor: "transparent",
-    borderLeftWidth: 15,
-    borderRightWidth: 15,
-    borderBottomWidth: 0,
-    borderTopWidth: 20,
-    borderLeftColor: "transparent",
-    borderRightColor: "transparent",
-    borderTopColor: "blue", 
-    marginTop: -5,
   },
 });
 
