@@ -2,22 +2,27 @@ import React, { ReactNode } from "react";
 import { StyleSheet, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import IconView from "./IconView";
+import TextView from "./TextView";
 
 type Props = {
+  title?: string;
+  description?: string;
   size?: number;
   iconName?: string;
+  titleColor?: string;
   outerColor?: string;
   innerColor?: string;
   children?: ReactNode;
 };
 
-const MarkerView = ({ size, iconName, outerColor, innerColor, children }: Props) => {
+const MarkerView = ({ title, description, size, iconName, titleColor, outerColor, innerColor, children }: Props) => {
   const markerSize: number = size || 60;
   const markerOuterColor: string = outerColor || 'white';
   const markerInnerColor: string = innerColor || 'red';
-  
+  const markerTitleColor: string = titleColor || markerInnerColor;
+
   const iconSize: number = markerSize/3; 
-  
+
   const outerCircleStyles: any = {
     width: markerSize,
     height: markerSize,
@@ -26,9 +31,9 @@ const MarkerView = ({ size, iconName, outerColor, innerColor, children }: Props)
   };
 
   const innerCircleStyles: any = {
-    width: markerSize - Layout.space.base,
-    height: markerSize - Layout.space.base,
-    borderRadius: (markerSize - Layout.space.base) / 2,
+    width: markerSize - Layout.space.base/2,
+    height: markerSize - Layout.space.base/2,
+    borderRadius: (markerSize - Layout.space.base/2) / 2,
     backgroundColor: markerInnerColor,
   };
 
@@ -42,6 +47,12 @@ const MarkerView = ({ size, iconName, outerColor, innerColor, children }: Props)
 
   return (
     <View style={styles.container}>
+      {title && (
+        <View style={styles.titleContainer}>
+          <TextView color={markerTitleColor}>{title}</TextView>
+        </View>
+      )}
+
       <View style={[styles.outerCircle, outerCircleStyles]}>
         <View style={[styles.innerCircle, innerCircleStyles]}>
           {iconName && (
@@ -64,11 +75,14 @@ const MarkerView = ({ size, iconName, outerColor, innerColor, children }: Props)
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'black',
+    backgroundColor: '#dddddd',
     padding: 20,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  titleContainer: {
+    marginBottom: Layout.space.base,
   },
   outerCircle: {
     flexDirection: 'column',

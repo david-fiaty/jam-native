@@ -62,11 +62,12 @@ const JamsMapView = () => {
       return (
         <Marker
           key={item.id}
-          //title={getMarkerTitle(item)}
-          //description={getMarkerDescription(item)}
           coordinate={getMarkerCoordinate(item)}
         >
-          <MarkerView />
+          <MarkerView 
+            title={getMarkerTitle(item)}
+            description={getMarkerDescription(item)}
+          />
         </Marker>
       );
     }
