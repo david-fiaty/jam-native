@@ -1,5 +1,4 @@
-import { ReactNode } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 
 type Props = {  
