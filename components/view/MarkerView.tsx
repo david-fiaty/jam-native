@@ -12,7 +12,7 @@ type Props = {
 };
 
 const MarkerView = ({ size, iconName, outerColor, innerColor, children }: Props) => {
-  const markerSize: number = size || 40;
+  const markerSize: number = size || 60;
   const markerOuterColor: string = outerColor || 'white';
   const markerInnerColor: string = innerColor || 'red';
   
