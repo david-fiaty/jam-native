@@ -6,10 +6,10 @@ type Props = {
   size?: any;
 };
 
-const markerSize = 60;
+
 
 const MarkerView = ({ size }: Props) => {
-
+  const markerSize = size || 40;
   const outerCircleStyles: any = {
     width: markerSize,
     height: markerSize,
@@ -23,9 +23,9 @@ const MarkerView = ({ size }: Props) => {
   };
 
   const bottomArrowStyles: any = {
-    marginTop: -markerSize/7.5,
-    borderLeftWidth: markerSize/3,
-    borderRightWidth: markerSize/3,
+    marginTop: -markerSize/5,
+    borderLeftWidth: markerSize/2.5,
+    borderRightWidth: markerSize/2.5,
     borderTopWidth: markerSize/3,
   };
 
