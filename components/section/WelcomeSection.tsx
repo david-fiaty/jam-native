@@ -35,7 +35,7 @@ const WelcomeSection = () => {
       style={styles.container}
     >
 
-      <MarkerView />
+      <MarkerView iconName="building" />
       <LogoView size={110} />
 
       <TextSlideshow data={slideshowData} />
