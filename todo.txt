@@ -397,11 +397,12 @@ const headerVisibleOptions: object = {
     );
   };
 
-
-      [
-        "react-native-maps",
-        {
-          "iosGoogleMapsApiKey": "AIzaSyCAEf0XHIfZFbXXLLANyLGi84RLqwKMKKM",
-          "androidGoogleMapsApiKey": "AIzaSyCAEf0XHIfZFbXXLLANyLGi84RLqwKMKKM"
-        }
-      ]
+      return (
+        <Marker
+          key={item.id}
+          title={getMarkerTitle(item)}
+          description={getMarkerDescription(item)}
+          coordinate={getMarkerCoordinate(item)}
+          icon={markerImage} 
+        />
+      );

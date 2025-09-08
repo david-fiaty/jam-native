@@ -1,4 +1,4 @@
-import MapView , { Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
 import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
@@ -21,7 +21,7 @@ const JamsMapView = () => {
   const prevSearchState: any = useRef();
   const searchTabs: any[] = SearchManager.getSearchTabs();
   const markerImage = require('@/assets/images/logo-55.png');
-  
+
   const getInitialRegion = () => {
     let latitude: any = Config.defaultLocation.latitude;
     let longitude: any = Config.defaultLocation.longitude;
@@ -30,7 +30,7 @@ const JamsMapView = () => {
 
     if (currentLocation?.latitude && currentLocation?.longitude) {
       latitude = currentLocation.latitude;
-      longitude = currentLocation.longitude; 
+      longitude = currentLocation.longitude;
     }
 
     return {
@@ -61,11 +61,14 @@ const JamsMapView = () => {
       return (
         <Marker
           key={item.id}
-          title={getMarkerTitle(item)}
-          description={getMarkerDescription(item)}
+          //title={getMarkerTitle(item)}
+          //description={getMarkerDescription(item)}
           coordinate={getMarkerCoordinate(item)}
-          icon={markerImage} 
-        />
+        >
+          <View style={styles.marker}>
+            <View style={styles.markerCircle} />
+          </View>
+        </Marker>
       );
     }
 
@@ -110,7 +113,7 @@ const JamsMapView = () => {
   return (
     <TouchableWithoutFeedback>
       <View style={styles.container}>
-          
+
         <TabsView
           tabs={searchTabs}
           currentTab={searchState.currentTab}
@@ -121,7 +124,7 @@ const JamsMapView = () => {
 
         <MapView
           style={styles.map}
-          provider={PROVIDER_DEFAULT} 
+          provider={PROVIDER_DEFAULT}
           initialRegion={getInitialRegion()}
           customMapStyle={Layout.mapStyle}
           showsUserLocation={true}
@@ -146,6 +149,21 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1,
+  },
+  marker: {
+    width: 40,
+    height: 40,
+    backgroundColor: "red",
+    borderRadius: 20,
+    transform: [{ rotate: "45deg" }], // makes it look like a drop
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  markerCircle: {
+    width: 16,
+    height: 16,
+    backgroundColor: "white",
+    borderRadius: 8,
   },
 });
 
