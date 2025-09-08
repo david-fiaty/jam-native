@@ -1,3 +1,4 @@
+import React, { ReactNode } from "react";
 import { StyleSheet, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 
@@ -5,9 +6,10 @@ type Props = {
   size?: any;
   outerColor?: string;
   innerColor?: string;
+  children?: ReactNode;
 };
 
-const MarkerView = ({ size, outerColor, innerColor }: Props) => {
+const MarkerView = ({ size, outerColor, innerColor, children }: Props) => {
   const markerSize = size || 60;
   const markerOuterColor = outerColor || 'white';
   const markerInnerColor = innerColor || 'red';
@@ -38,7 +40,7 @@ const MarkerView = ({ size, outerColor, innerColor }: Props) => {
     <View style={styles.container}>
       <View style={[styles.outerCircle, outerCircleStyles]}>
         <View style={[styles.innerCircle, innerCircleStyles]}>
-
+          {children}
         </View>
       </View>
       <View style={[styles.bottomArrow, bottomArrowStyles]} />
