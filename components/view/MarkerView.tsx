@@ -23,10 +23,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   circle: {
-    width: 50,
-    height: 50,
+    width: 60,
+    height: 60,
     backgroundColor: "black",
-    borderRadius: 25,
+    borderRadius: 30,
   },
   arrow: {
     width: 0,
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 15,
     borderRightWidth: 15,
     borderBottomWidth: 0,
-    borderTopWidth: 20,
+    borderTopWidth: 15,
     borderLeftColor: "transparent",
     borderRightColor: "transparent",
     borderTopColor: "blue", 
