@@ -6,6 +6,7 @@ import TextView from "./TextView";
 
 type Props = {
   title?: string;
+  description?: string;
   size?: number;
   iconName?: string;
   titleColor?: string;
@@ -14,7 +15,7 @@ type Props = {
   children?: ReactNode;
 };
 
-const MarkerView = ({ title, size, iconName, titleColor, outerColor, innerColor, children }: Props) => {
+const MarkerView = ({ title, description, size, iconName, titleColor, outerColor, innerColor, children }: Props) => {
   const markerSize: number = size || 60;
   const markerOuterColor: string = outerColor || 'white';
   const markerInnerColor: string = innerColor || 'red';
