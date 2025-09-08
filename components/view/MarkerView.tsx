@@ -4,7 +4,7 @@ import { Layout } from '@/constants/Layout';
 import IconView from "./IconView";
 
 type Props = {
-  size?: any;
+  size?: number;
   iconName?: string;
   outerColor?: string;
   innerColor?: string;
@@ -12,10 +12,11 @@ type Props = {
 };
 
 const MarkerView = ({ size, iconName, outerColor, innerColor, children }: Props) => {
-  const markerSize = size || 60;
-  const markerOuterColor = outerColor || 'white';
-  const markerInnerColor = innerColor || 'red';
+  const markerSize: number = size || 60;
+  const markerOuterColor: string = outerColor || 'white';
+  const markerInnerColor: string = innerColor || 'red';
 
+  const iconSize: number = markerSize/3; 
   const outerCircleStyles: any = {
     width: markerSize,
     height: markerSize,
@@ -47,7 +48,7 @@ const MarkerView = ({ size, iconName, outerColor, innerColor, children }: Props)
               name={iconName}
               theme="transparent"
               color="white"
-              size={20}
+              size={iconSize}
               padding={0}
             />
           )}
