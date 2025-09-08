@@ -2,24 +2,38 @@ import { ReactNode } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 
-type Props = {
-
+type Props = {  
+  size?: any;
 };
 
-const MarkerView = ({  }: Props) => {
+const markerSize = 60;
+
+const MarkerView = ({ size }: Props) => {
+
+  const outerCircleStyles: any = {
+
+  };
+
+  const innerCircleStyles: any = {
+
+  };
+
+  const bottomArrowStyles: any = {
+
+  };
+
   return (
       <View style={styles.container}>
-        <View style={styles.outerCircle}>
-          <View style={styles.innerCircle}>
+        <View style={[styles.outerCircle]}>
+          <View style={[styles.innerCircle]}>
 
           </View>
         </View>
-        <View style={styles.bottomArrow} />
+        <View style={[styles.bottomArrow]} />
       </View>
   );
 };
 
-const markerSize = 60;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'gray',
