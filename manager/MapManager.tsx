@@ -3,6 +3,7 @@ import { Layout } from "@/constants/Layout";
 import Store from "@/redux/Store";
 import MarkerView from "@/components/view/MarkerView";
 import i18n from "@/translation/i18n";
+import UserManager from "./UserManager";
 
 class MapManager {
   renderMarker = (item: any) => {
@@ -25,6 +26,10 @@ class MapManager {
     return null;
   }
 
+  isProfileMarker(item: any) {
+    return ['organization', 'venue', 'personal'].includes(item?.profile_type);
+  }
+
   getMarkerCoordinate(item: any) {
     return {
       latitude: parseFloat(item?.geolocation_latitude),
@@ -33,6 +38,10 @@ class MapManager {
   }
 
   getMarkerTitle(item: any) {
+    if (this.isProfileMarker(item)) {
+      return UserManager.getProfileDisplayName(item);
+    }
+
     return item?.title || i18n.t('No title available');
   };
 
@@ -41,14 +50,14 @@ class MapManager {
   };
 
   getMarkerIcon = (item: any) => {
-    if (item?.profile_personal) {
+    if (item?.profile_type == 'personal') {
       return 'user';
     }
-    else if (item?.profile_organization) {
-      return 'building';
-    }
-    else if (item?.profile_venue) {
+    else if (item?.profile_type == 'venue') {
       return 'pin';
+    }
+    else if (item?.profile_type == 'organization') {
+      return 'building';
     }
 
     return 'question';
