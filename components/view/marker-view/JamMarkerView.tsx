@@ -46,10 +46,6 @@ const JamMarkerView = ({ title, description, size, iconName, titleColor, outerCo
   };
 
   return (
-    <TextView>jam</TextView>
-  );
-
-  return (
     <View style={styles.container}>
       {/*title && (
         <View style={styles.titleContainer}>
