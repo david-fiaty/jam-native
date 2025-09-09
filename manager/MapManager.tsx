@@ -1,7 +1,6 @@
 import { Marker } from "react-native-maps";
 import { Layout } from "@/constants/Layout";
 import Store from "@/redux/Store";
-import MarkerView from "@/components/view/MarkerView";
 import i18n from "@/translation/i18n";
 import UserManager from "./UserManager";
 import JamMarkerView from "@/components/view/marker-view/JamMarkerView";
