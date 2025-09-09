@@ -1,8 +1,8 @@
 import { Marker } from "react-native-maps";
+import { Layout } from "@/constants/Layout";
 import Store from "@/redux/Store";
 import MarkerView from "@/components/view/MarkerView";
 import i18n from "@/translation/i18n";
-import { Layout } from "@/constants/Layout";
 
 class MapManager {
   renderMarker = (item: any) => {
@@ -41,13 +41,13 @@ class MapManager {
   };
 
   getMarkerIcon = (item: any) => {
-    if (!!item?.profile_personal?.length) {
-      return 'user'
+    if (item?.profile_personal) {
+      return 'user';
     }
-    else if (!!item?.profile_organisation?.length) {
+    else if (item?.profile_organization) {
       return 'building';
     }
-    else if (!!item?.profile_venue?.length) {
+    else if (item?.profile_venue) {
       return 'pin';
     }
 
