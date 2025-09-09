@@ -22,7 +22,6 @@ class MapManager {
         >
           {this.isJamMarker(item) && (
             <JamMarkerView
-              iconName={this.getMarkerIcon(item)}
               title={this.getMarkerTitle(item)}
               description={this.getMarkerDescription(item)}
               backgroundColor={this.getMarkerColor(item)}
