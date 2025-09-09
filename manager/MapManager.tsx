@@ -51,7 +51,7 @@ class MapManager {
       return 'pin';
     }
 
-    return 'pin';
+    return 'question';
   };
 
   getMarkerColor(item: any) {
