@@ -6,6 +6,12 @@ import i18n from "@/translation/i18n";
 import UserManager from "./UserManager";
 
 class MapManager {
+  appState: any;
+
+  constructor() {
+    this.appState = Store.getState().app;
+  }
+
   renderMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
       return (
@@ -73,8 +79,7 @@ class MapManager {
   };
 
   getMarkerColor(item: any) {
-    let appState: any = Store.getState().app;
-    let sectorsData: any[] = appState.sectorsData;
+    let sectorsData: any[] = this.appState.sectorsData;
     let sectorIds: any[] = sectorsData.map((o: any) => o.id);
     let itemSectors: any[] = item?.sectors || [];
     let intersection: any[] = sectorIds.filter((id: number) => itemSectors.includes(id));
