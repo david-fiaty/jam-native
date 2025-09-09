@@ -24,7 +24,7 @@ class MapManager {
 
     return null;
   }
-  
+
   getMarkerCoordinate(item: any) {
     return {
       latitude: parseFloat(item?.geolocation_latitude),
@@ -41,6 +41,16 @@ class MapManager {
   };
 
   getMarkerIcon = (item: any) => {
+    if (!!item?.profile_personal?.length) {
+      return 'user'
+    }
+    else if (!!item?.profile_organisation?.length) {
+      return 'building';
+    }
+    else if (!!item?.profile_venue?.length) {
+      return 'pin';
+    }
+
     return 'pin';
   };
 
@@ -50,12 +60,12 @@ class MapManager {
     let sectorIds: any[] = sectorsData.map((o: any) => o.id);
     let itemSectors: any[] = item?.sectors || [];
     let intersection: any[] = sectorIds.filter((id: number) => itemSectors.includes(id));
-    let firstSectorId: any = intersection?.[0]; 
+    let firstSectorId: any = intersection?.[0];
 
     if (firstSectorId) {
       return (sectorsData.find((o: any) => o.id == firstSectorId))?.color;
     }
-  
+
     return Layout.colors.primary;
   };
 }
