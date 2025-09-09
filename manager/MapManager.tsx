@@ -25,7 +25,7 @@ class MapManager {
               iconName={this.getMarkerIcon(item)}
               title={this.getMarkerTitle(item)}
               description={this.getMarkerDescription(item)}
-              innerColor={this.getMarkerColor(item)}
+              backgroundColor={this.getMarkerColor(item)}
             />
           )}
 
@@ -91,17 +91,22 @@ class MapManager {
   };
 
   getMarkerColor(item: any) {
-    let sectorsData: any[] = this.appState.sectorsData;
-    let sectorIds: any[] = sectorsData.map((o: any) => o.id);
-    let itemSectors: any[] = item?.sectors || [];
-    let intersection: any[] = sectorIds.filter((id: number) => itemSectors.includes(id));
-    let firstSectorId: any = intersection?.[0];
+    if (this.isProfileMarker(item)) {
+      let sectorsData: any[] = this.appState.sectorsData;
+      let sectorIds: any[] = sectorsData.map((o: any) => o.id);
+      let itemSectors: any[] = item?.sectors || [];
+      let intersection: any[] = sectorIds.filter((id: number) => itemSectors.includes(id));
+      let firstSectorId: any = intersection?.[0];
 
-    if (firstSectorId) {
-      return (sectorsData.find((o: any) => o.id == firstSectorId))?.color;
+      if (firstSectorId) {
+        return (sectorsData.find((o: any) => o.id == firstSectorId))?.color;
+      }
+
+      return Layout.colors.primary;
     }
-
-    return Layout.colors.primary;
+    else if (this.isJamMarker(item)) {
+      return 'orange';
+    }
   };
 }
 
