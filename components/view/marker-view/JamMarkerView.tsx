@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import { StyleSheet, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import IconView from "../IconView";
+import TextView from "../TextView";
 
 type Props = {
   title?: string;
@@ -43,6 +44,10 @@ const JamMarkerView = ({ title, description, size, iconName, titleColor, outerCo
     borderTopWidth: markerSize / 3,
     borderTopColor: markerOuterColor,
   };
+
+  return (
+    <TextView>jam</TextView>
+  );
 
   return (
     <View style={styles.container}>
