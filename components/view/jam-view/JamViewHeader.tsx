@@ -1,6 +1,7 @@
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
 import { Layout } from "@/constants/Layout";
+import { Config } from "@/constants/Config";
 import BoxView from "@/components/view/BoxView";
 import TextView from "@/components/view/TextView";
 import IconView from "@/components/view/IconView";
@@ -11,8 +12,6 @@ type Props = {
   row?: any;
 };
 
-const maxOwnerNameLength: number = 28;
-
 const JamViewHeader = ({ row }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const collaboratorsCount = parseInt(row?.collaborators?.length);
@@ -20,8 +19,8 @@ const JamViewHeader = ({ row }: Props) => {
   const renderOwnerName = () => {
     let ownerName: string = row?.profile?.profile_name;
 
-    if (ownerName?.length > maxOwnerNameLength) {  
-      ownerName = ownerName.substring(0, maxOwnerNameLength) + '...';
+    if (ownerName?.length > Config.maxUserNameLength) {  
+      ownerName = ownerName.substring(0, Config.maxUserNameLength) + '...';
     } 
 
     return ownerName;
