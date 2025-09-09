@@ -24,6 +24,7 @@ class MapManager {
           {this.isJamMarker(item) && (
             <JamMarkerView
               title={this.getMarkerTitle(item)}
+              titleColor={this.getMarkerTitleColor(item)}
               description={this.getMarkerDescription(item)}
               backgroundColor={this.getMarkerColor(item)}
             />
@@ -70,11 +71,11 @@ class MapManager {
     }
 
     return title;
-  };
+  }
 
   getMarkerDescription = (item: any) => {
     return item?.caption || '';
-  };
+  }
 
   getMarkerIcon = (item: any) => {
     if (item?.profile_type == 'personal') {
@@ -88,7 +89,7 @@ class MapManager {
     }
 
     return 'question';
-  };
+  }
 
   getMarkerColor(item: any) {
     if (this.isProfileMarker(item)) {
@@ -115,7 +116,11 @@ class MapManager {
         return Layout.colors.tertiary;
       }
     }
-  };
+  }
+
+  getMarkerTitleColor(item: any) {
+    return 'white';
+  }
 }
 
 export default (new MapManager());
