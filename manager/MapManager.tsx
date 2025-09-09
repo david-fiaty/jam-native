@@ -30,6 +30,10 @@ class MapManager {
     return ['organization', 'venue', 'personal'].includes(item?.profile_type);
   }
 
+  isJamMarker(item: any) {
+    return ['personal', 'organization', 'venue'].includes(item?.type);
+  }
+
   getMarkerCoordinate(item: any) {
     return {
       latitude: parseFloat(item?.geolocation_latitude),
@@ -40,6 +44,9 @@ class MapManager {
   getMarkerTitle(item: any) {
     if (this.isProfileMarker(item)) {
       return UserManager.getProfileDisplayName(item);
+    }
+    else if (this.isJamMarker(item)) {
+      return item?.title;
     }
 
     return item?.title || i18n.t('No title available');
