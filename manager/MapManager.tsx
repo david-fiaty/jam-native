@@ -42,14 +42,16 @@ class MapManager {
   }
 
   getMarkerTitle(item: any) {
+    let title: string = i18n.t('No title available');
+
     if (this.isProfileMarker(item)) {
-      return UserManager.getProfileDisplayName(item);
+      title = UserManager.getProfileDisplayName(item);
     }
     else if (this.isJamMarker(item)) {
-      return item?.title;
+      title = item?.title;
     }
 
-    return item?.title || i18n.t('No title available');
+    return title;
   };
 
   getMarkerDescription = (item: any) => {
