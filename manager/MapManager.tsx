@@ -46,9 +46,14 @@ class MapManager {
   getMarkerColor(item: any) {
     let appState: any = Store.getState().app;
     let sectorsData: any[] = appState.sectorsData;
-    let firstSectorId: any = item?.sectors?.[0] || null; 
-    
-    //console.log(item?.sectors)
+    let sectorIds: any[] = sectorsData.map((o: any) => o.id);
+    let itemSectors: any[] = item?.sectors || [];
+    let intersection: any[] = sectorIds.filter((id: number) => itemSectors.includes(id));
+    let firstSectorId: any = intersection?.[0]; 
+
+    if (firstSectorId) {
+      return (sectorsData.find((o: any) => o.id == firstSectorId))?.color;
+    }
   
     return 'green';
   };
