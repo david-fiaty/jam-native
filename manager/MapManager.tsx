@@ -49,7 +49,7 @@ class MapManager {
   }
 
   isJamMarker(item: any) {
-    return ['personal', 'organization', 'venue'].includes(item?.type);
+    return ['call', 'looking', 'event', 'random'].includes(item?.type);
   }
 
   getMarkerCoordinate(item: any) {
