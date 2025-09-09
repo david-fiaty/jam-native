@@ -5,6 +5,7 @@ import i18n from "@/translation/i18n";
 import UserManager from "./UserManager";
 import JamMarkerView from "@/components/view/marker-view/JamMarkerView";
 import ProfileMarkerView from "@/components/view/marker-view/ProfileMarkerView";
+import DataManager from "./DataManager";
 
 class MapManager {
   appState: any;
@@ -104,7 +105,15 @@ class MapManager {
       return Layout.colors.primary;
     }
     else if (this.isJamMarker(item)) {
-      return 'orange';
+      if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'past') {
+        return Layout.colors.gray;
+      }
+      else if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'live') {
+        return Layout.colors.primary;
+      }
+      else if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'coming') {
+        return Layout.colors.tertiary;
+      }
     }
   };
 }
