@@ -4,6 +4,8 @@ import Store from "@/redux/Store";
 import MarkerView from "@/components/view/MarkerView";
 import i18n from "@/translation/i18n";
 import UserManager from "./UserManager";
+import JamMarkerView from "@/components/view/marker-view/JamMarkerView";
+import ProfileMarkerView from "@/components/view/marker-view/ProfileMarkerView";
 
 class MapManager {
   appState: any;
@@ -19,12 +21,23 @@ class MapManager {
           key={item.id}
           coordinate={this.getMarkerCoordinate(item)}
         >
-          <MarkerView
-            iconName={this.getMarkerIcon(item)}
-            title={this.getMarkerTitle(item)}
-            description={this.getMarkerDescription(item)}
-            innerColor={this.getMarkerColor(item)}
-          />
+          {this.isJamMarker(item) && (
+            <JamMarkerView
+              iconName={this.getMarkerIcon(item)}
+              title={this.getMarkerTitle(item)}
+              description={this.getMarkerDescription(item)}
+              innerColor={this.getMarkerColor(item)}
+            />
+          )}
+
+          {this.isProfileMarker(item) && (
+            <ProfileMarkerView
+              iconName={this.getMarkerIcon(item)}
+              title={this.getMarkerTitle(item)}
+              description={this.getMarkerDescription(item)}
+              innerColor={this.getMarkerColor(item)}
+            />
+          )}
         </Marker>
       );
     }
