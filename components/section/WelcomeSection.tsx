@@ -6,7 +6,6 @@ import TextSlideshow from '../slideshow/TextSlideshow';
 import BottomLinks from './navigation/BottomLinks';
 import BoxView from '../view/BoxView';
 import i18n from '@/translation/i18n';
-import MarkerView from '../view/MarkerView';
 
 const WelcomeSection = () => {
   const slideshowData: any[] = [
