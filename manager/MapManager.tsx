@@ -2,6 +2,7 @@ import { Marker } from "react-native-maps";
 import Store from "@/redux/Store";
 import MarkerView from "@/components/view/MarkerView";
 import i18n from "@/translation/i18n";
+import { Layout } from "@/constants/Layout";
 
 class MapManager {
   renderMarker = (item: any) => {
@@ -55,7 +56,7 @@ class MapManager {
       return (sectorsData.find((o: any) => o.id == firstSectorId))?.color;
     }
   
-    return 'green';
+    return Layout.colors.primary;
   };
 }
 
