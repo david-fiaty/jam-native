@@ -6,6 +6,22 @@ import UserManager from './UserManager';
 import i18n from '@/translation/i18n';
 
 class EntityManager {
+  isPastJam(item: any) {
+
+  }
+
+  isComingJam(item: any) {
+
+  }
+
+  isLiveJam(item: any) {
+
+  }
+
+  isActiveJam(item: any) {
+
+  }
+
   async findJam(jamId: any) {
     let currentResults: any = Store.getState().search.currentResults;
     let data = (currentResults.jam || []).find((o: any) => o.id == jamId);
