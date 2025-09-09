@@ -17,11 +17,11 @@ type Props = {
 
 const JamMarkerView = ({ title, description, size, iconName, titleColor, backgroundColor, children }: Props) => {
   const markerSize: number = size || 35;
-  const markerOuterColor: string = outerColor || 'white';
+  const markerBackgroundColor: string = backgroundColor || 'white';
 
   const titleContainerStyles: any = {
     borderRadius: Layout.radius.round,
-    backgroundColor: backgroundColor,
+    backgroundColor: markerBackgroundColor,
     padding: Layout.space.base/2,
   };
 
@@ -30,7 +30,7 @@ const JamMarkerView = ({ title, description, size, iconName, titleColor, backgro
     borderLeftWidth: markerSize / 2.5,
     borderRightWidth: markerSize / 2.5,
     borderTopWidth: markerSize / 3,
-    borderTopColor: markerOuterColor,
+    borderTopColor: markerBackgroundColor,
   };
 
   return (
