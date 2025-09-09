@@ -119,7 +119,19 @@ class MapManager {
   }
 
   getMarkerTitleColor(item: any) {
-    return 'white';
+    if (this.isJamMarker(item)) {
+      if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'past') {
+        return Layout.colors.white;
+      }
+      else if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'live') {
+        return Layout.colors.white;
+      }
+      else if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'coming') {
+        return Layout.colors.primary;
+      }
+    }
+
+    return Layout.colors.primary;
   }
 }
 
