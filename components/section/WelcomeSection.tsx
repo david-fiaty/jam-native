@@ -6,7 +6,6 @@ import TextSlideshow from '../slideshow/TextSlideshow';
 import BottomLinks from './navigation/BottomLinks';
 import BoxView from '../view/BoxView';
 import i18n from '@/translation/i18n';
-import MarkerView from '../view/MarkerView';
 
 const WelcomeSection = () => {
   const slideshowData: any[] = [
@@ -34,12 +33,6 @@ const WelcomeSection = () => {
       justify="center"
       style={styles.container}
     >
-
-      <MarkerView 
-        title={i18n.t('Hello world')}
-        iconName="building" 
-      />
-
       <LogoView size={110} />
 
       <TextSlideshow data={slideshowData} />

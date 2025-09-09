@@ -1,8 +1,8 @@
 import React, { ReactNode } from "react";
 import { StyleSheet, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import IconView from "./IconView";
-import TextView from "./TextView";
+import IconView from "../IconView";
+import TextView from "../TextView";
 
 type Props = {
   title?: string;
@@ -15,7 +15,7 @@ type Props = {
   children?: ReactNode;
 };
 
-const MarkerView = ({ title, description, size, iconName, titleColor, outerColor, innerColor, children }: Props) => {
+const JamMarkerView = ({ title, description, size, iconName, titleColor, outerColor, innerColor, children }: Props) => {
   const markerSize: number = size || 35;
   const markerOuterColor: string = outerColor || 'white';
   const markerInnerColor: string = innerColor || 'red';
@@ -44,6 +44,10 @@ const MarkerView = ({ title, description, size, iconName, titleColor, outerColor
     borderTopWidth: markerSize / 3,
     borderTopColor: markerOuterColor,
   };
+
+  return (
+    <TextView>jam</TextView>
+  );
 
   return (
     <View style={styles.container}>
@@ -103,4 +107,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MarkerView;
+export default JamMarkerView;
