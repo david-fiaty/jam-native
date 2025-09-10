@@ -99,25 +99,43 @@ class MapManager {
   }
 
   getMarkerTitleColor(item: any) {
-    if (this.isJamMarker(item)) {
-      if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'past') {
-        return Layout.colors.white;
-      }
-      else if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'live') {
-        return Layout.colors.white;
-      }
-      else if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'coming') {
-        return Layout.colors.primary;
-      }
-    }
+    return this.getJamMarkersConfig().find((o: any) => o.key == 'coming')?.titleColor;
 
-    return Layout.colors.primary;
+    if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'past') {
+      return Layout.colors.white;
+    }
+    else if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'live') {
+      return Layout.colors.white;
+    }
+    else if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'coming') {
+      return Layout.colors.primary;
+    }
   }
 
   getProfileMarkerIcon = (item: any) => {
     return this.getProfileMarkersConfig().find((o: any) => o.key == item?.profile_type)?.icon;
   }
-  
+
+  getJamMarkersConfig() {
+    return [
+      {
+        key: 'past',
+        titleColor: Layout.colors.white,
+        backgroundColor: Layout.colors.gray,
+      },
+      {
+        key: 'live',
+        titleColor: Layout.colors.white,
+        backgroundColor: Layout.colors.primary,
+      },
+      {
+        key: 'coming',
+        titleColor: Layout.colors.primary,
+        backgroundColor: Layout.colors.tertiary,
+      },
+    ]
+  }
+
   getProfileMarkersConfig() {
     return [
       {
