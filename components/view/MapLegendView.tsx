@@ -9,17 +9,17 @@ type Props = {
 };
 
 const MapLegendView = ({ }: Props) => {
-  const [open, setOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const widthAnim = useRef(new Animated.Value(0)).current; 
 
   const toggleLegend = () => {
     Animated.timing(widthAnim, {
-      toValue: open ? 0 : 200,
+      toValue: isVisible ? 0 : 200,
       duration: 300,
       useNativeDriver: false,
     }).start();
 
-    setOpen(!open);
+    setIsVisible(!isVisible);
   };
 
   return (
