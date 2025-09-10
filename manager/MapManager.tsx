@@ -18,9 +18,9 @@ class MapManager {
           {this.isJamMarker(item) && (
             <JamMarkerView
               title={this.getMarkerTitle(item)}
-              titleColor={this.getMarkerTitleColor(item)}
+              titleColor={this.getJamMarkerTitleColor(item)}
               description={this.getMarkerDescription(item)}
-              backgroundColor={this.getMarkerColor(item)}
+              backgroundColor={this.getJamMarkerBackgroundColor(item)}
             />
           )}
 
@@ -29,7 +29,7 @@ class MapManager {
               iconName={this.getProfileMarkerIcon(item)}
               title={this.getMarkerTitle(item)}
               description={this.getMarkerDescription(item)}
-              innerColor={this.getMarkerColor(item)}
+              innerColor={this.getProfileMarkerInnerColor(item)}
             />
           )}
         </Marker>
@@ -71,53 +71,58 @@ class MapManager {
     return item?.caption || '';
   }
 
-  getMarkerColor(item: any) {
-    if (this.isProfileMarker(item)) {
-      let sectorsData: any[] = Store.getState().app.sectorsData;
-      let sectorIds: any[] = sectorsData.map((o: any) => o.id);
-      let itemSectors: any[] = item?.sectors || [];
-      let intersection: any[] = sectorIds.filter((id: number) => itemSectors.includes(id));
-      let firstSectorId: any = intersection?.[0];
+  getProfileMarkerInnerColor(item: any) {
+    let sectorsData: any[] = Store.getState().app.sectorsData;
+    let sectorIds: any[] = sectorsData.map((o: any) => o.id);
+    let itemSectors: any[] = item?.sectors || [];
+    let intersection: any[] = sectorIds.filter((id: number) => itemSectors.includes(id));
+    let firstSectorId: any = intersection?.[0];
 
-      if (firstSectorId) {
-        return (sectorsData.find((o: any) => o.id == firstSectorId))?.color;
-      }
-
-      return Layout.colors.primary;
-    }
-    else if (this.isJamMarker(item)) {
-      if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'past') {
-        return Layout.colors.gray;
-      }
-      else if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'live') {
-        return Layout.colors.primary;
-      }
-      else if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'coming') {
-        return Layout.colors.tertiary;
-      }
-    }
-  }
-
-  getMarkerTitleColor(item: any) {
-    if (this.isJamMarker(item)) {
-      if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'past') {
-        return Layout.colors.white;
-      }
-      else if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'live') {
-        return Layout.colors.white;
-      }
-      else if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'coming') {
-        return Layout.colors.primary;
-      }
+    if (firstSectorId) {
+      return (sectorsData.find((o: any) => o.id == firstSectorId))?.color;
     }
 
     return Layout.colors.primary;
   }
 
+  getJamMarkerTitleColor(item: any) {
+    let dateStatus: string = DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime);
+    let titleColor: any = this.getJamMarkersConfig().find((o: any) => o.key == dateStatus)?.titleColor;
+
+    return titleColor;
+  }
+
+  getJamMarkerBackgroundColor(item: any) {
+    let dateStatus: string = DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime);
+    let backgroundColor: any = this.getJamMarkersConfig().find((o: any) => o.key == dateStatus)?.backgroundColor;
+
+    return backgroundColor;
+  }
+
   getProfileMarkerIcon = (item: any) => {
     return this.getProfileMarkersConfig().find((o: any) => o.key == item?.profile_type)?.icon;
   }
-  
+
+  getJamMarkersConfig() {
+    return [
+      {
+        key: 'past',
+        titleColor: Layout.colors.white,
+        backgroundColor: Layout.colors.gray,
+      },
+      {
+        key: 'live',
+        titleColor: Layout.colors.white,
+        backgroundColor: Layout.colors.primary,
+      },
+      {
+        key: 'coming',
+        titleColor: Layout.colors.primary,
+        backgroundColor: Layout.colors.tertiary,
+      },
+    ]
+  }
+
   getProfileMarkersConfig() {
     return [
       {
