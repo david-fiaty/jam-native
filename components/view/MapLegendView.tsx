@@ -4,6 +4,8 @@ import { Text, Animated, StyleSheet, TouchableOpacity, View } from "react-native
 import { Layout } from '@/constants/Layout';
 import IconView from './IconView';
 import TextView from "./TextView";
+import MapManager from "@/manager/MapManager";
+import BoxView from "./BoxView";
 
 type Props = {
 
@@ -37,8 +39,18 @@ const MapLegendView = ({ }: Props) => {
         </TouchableOpacity>
       )}
 
-      <Animated.View style={[styles.legendContainer, { width: widthAnim }]}>
-        <TextView>Expanding Box</TextView>
+      <Animated.View style={[styles.legendWrapper, { width: widthAnim }]}>
+        <View style={styles.legendContainer}>
+          {MapManager.getProfileMarkersConfig().map((o: any) => {
+            return (
+              <BoxView key={o.key} direction="row" align="center" justify="flex-start">
+                <IconView name={o.icon} />
+                <TextView>{o.label}</TextView>
+              </BoxView>
+            );
+          })}
+          
+        </View>
         <TouchableOpacity
           style={styles.closeButton}
           onPress={toggleLegend}
@@ -71,14 +83,21 @@ const styles = StyleSheet.create({
     padding: Layout.space.base / 2,
     height: 30,
   },
-  legendContainer: {
+  legendWrapper: {
     position: 'absolute',
-    bottom: Layout.space.base * 5,
-    height: 100,
-    backgroundColor: 'red',
+    bottom: 0,
+    height: 180,
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
+  },
+  legendContainer: {
+    position: 'absolute',
+    left: 0,
+    height: '100%',
+    width: '100%',
+    backgroundColor: Layout.colors.secondary,
+    padding: Layout.space.base,
   },
 });
 

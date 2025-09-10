@@ -26,7 +26,7 @@ class MapManager {
 
           {this.isProfileMarker(item) && (
             <ProfileMarkerView
-              iconName={this.getMarkerIcon(item)}
+              iconName={this.getProfileMarkerIcon(item)}
               title={this.getMarkerTitle(item)}
               description={this.getMarkerDescription(item)}
               innerColor={this.getMarkerColor(item)}
@@ -71,20 +71,6 @@ class MapManager {
     return item?.caption || '';
   }
 
-  getMarkerIcon = (item: any) => {
-    if (item?.profile_type == 'personal') {
-      return 'profile';
-    }
-    else if (item?.profile_type == 'venue') {
-      return 'pin';
-    }
-    else if (item?.profile_type == 'organization') {
-      return 'building';
-    }
-
-    return 'question';
-  }
-
   getMarkerColor(item: any) {
     if (this.isProfileMarker(item)) {
       let sectorsData: any[] = Store.getState().app.sectorsData;
@@ -126,6 +112,30 @@ class MapManager {
     }
 
     return Layout.colors.primary;
+  }
+
+  getProfileMarkerIcon = (item: any) => {
+    return this.getProfileMarkersConfig().find((o: any) => o.key == item?.profile_type)?.icon;
+  }
+  
+  getProfileMarkersConfig() {
+    return [
+      {
+        key: 'personal',
+        label: i18n.t('Artist'),
+        icon: 'profile',
+      },
+      {
+        key: 'venue',
+        label: i18n.t('Venue'),
+        icon: 'pin',
+      },
+      {
+        key: 'organization',
+        label: i18n.t('Organization'),
+        icon: 'building',
+      },
+    ];
   }
 }
 
