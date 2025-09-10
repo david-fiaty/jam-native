@@ -8,44 +8,32 @@ import ProfileMarkerView from "@/components/view/marker-view/ProfileMarkerView";
 import DataManager from "./DataManager";
 
 class MapManager {
-  appState: any;
-
-  constructor() {
-    this.appState = Store.getState().app;
-  }
-
   renderMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
-      if (this.isJamMarker(item)) {
-        return (
-          <Marker
-            key={item.id}
-            coordinate={this.getMarkerCoordinate(item)}
-          >
+      return (
+        <Marker
+          key={item.id}
+          coordinate={this.getMarkerCoordinate(item)}
+        >
+          {this.isJamMarker(item) && (
             <JamMarkerView
               title={this.getMarkerTitle(item)}
               titleColor={this.getMarkerTitleColor(item)}
               description={this.getMarkerDescription(item)}
               backgroundColor={this.getMarkerColor(item)}
             />
-          </Marker>
-        );
-      }
-      else if (this.isProfileMarker(item)) {
-        return (
-          <Marker
-            key={item.id}
-            coordinate={this.getMarkerCoordinate(item)}
-          >
+          )}
+
+          {this.isProfileMarker(item) && (
             <ProfileMarkerView
               iconName={this.getMarkerIcon(item)}
               title={this.getMarkerTitle(item)}
               description={this.getMarkerDescription(item)}
               innerColor={this.getMarkerColor(item)}
             />
-          </Marker>
-        );
-      }
+          )}
+        </Marker>
+      );
     }
 
     return null;
@@ -99,7 +87,7 @@ class MapManager {
 
   getMarkerColor(item: any) {
     if (this.isProfileMarker(item)) {
-      let sectorsData: any[] = this.appState.sectorsData;
+      let sectorsData: any[] = Store.getState().app.sectorsData;
       let sectorIds: any[] = sectorsData.map((o: any) => o.id);
       let itemSectors: any[] = item?.sectors || [];
       let intersection: any[] = sectorIds.filter((id: number) => itemSectors.includes(id));
