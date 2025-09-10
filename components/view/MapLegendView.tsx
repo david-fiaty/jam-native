@@ -68,10 +68,10 @@ const styles = StyleSheet.create({
   },
   legendContainer: {
     height: 100,
-    backgroundColor: "tomato",
-    justifyContent: "center",
-    alignItems: "center",
-    overflow: "hidden",
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden',
   },
 });
 
