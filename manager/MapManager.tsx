@@ -18,9 +18,9 @@ class MapManager {
           {this.isJamMarker(item) && (
             <JamMarkerView
               title={this.getMarkerTitle(item)}
-              titleColor={this.getMarkerTitleColor(item)}
+              titleColor={this.getJamMarkerTitleColor(item)}
               description={this.getMarkerDescription(item)}
-              backgroundColor={this.getMarkerColor(item)}
+              backgroundColor={this.getJamMarkerBackgroundColor(item)}
             />
           )}
 
@@ -98,18 +98,18 @@ class MapManager {
     }
   }
 
-  getMarkerTitleColor(item: any) {
-    return this.getJamMarkersConfig().find((o: any) => o.key == 'coming')?.titleColor;
+  getJamMarkerTitleColor(item: any) {
+    let dateStatus: string = DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime);
+    let titleColor: any = this.getJamMarkersConfig().find((o: any) => o.key == dateStatus)?.titleColor;
 
-    if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'past') {
-      return Layout.colors.white;
-    }
-    else if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'live') {
-      return Layout.colors.white;
-    }
-    else if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'coming') {
-      return Layout.colors.primary;
-    }
+    return titleColor;
+  }
+
+  getJamMarkerBackgroundColor(item: any) {
+    let dateStatus: string = DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime);
+    let backgroundColor: any = this.getJamMarkersConfig().find((o: any) => o.key == dateStatus)?.backgroundColor;
+
+    return backgroundColor;
   }
 
   getProfileMarkerIcon = (item: any) => {
