@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import { StyleSheet, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import IconView from "../IconView";
+import TextView from "../TextView";
 
 type Props = {
   title?: string;
@@ -46,11 +47,11 @@ const ProfileMarkerView = ({ title, description, size, iconName, titleColor, out
 
   return (
     <View style={styles.container}>
-      {/*title && (
+      {title && (
         <View style={styles.titleContainer}>
           <TextView color={markerTitleColor}>{title}</TextView>
         </View>
-      )*/}
+      )}
 
       <View style={[styles.outerCircle, outerCircleStyles]}>
         <View style={[styles.innerCircle, innerCircleStyles]}>
