@@ -29,6 +29,7 @@ const icons: any = {
   share: ({iconStyle, size}: IconProps) => <Ionicons name="share-social-outline" size={size} style={iconStyle} />,
   twitter: ({iconStyle, size}: IconProps) => <Ionicons name="logo-twitter" size={size} style={iconStyle} />,
   user: ({iconStyle, size}: IconProps) => <Ionicons name="person-outline" size={size} style={iconStyle} />,
+  profile: ({iconStyle, size}: IconProps) => <Ionicons name="person" size={size} style={iconStyle} />,
   users: ({iconStyle, size}: IconProps) => <Ionicons name="people-outline" size={size} style={iconStyle} />,
   actions: ({iconStyle, size}: IconProps) => <Ionicons name="ellipsis-horizontal-sharp" size={size} style={iconStyle} />,
   toolbar: ({iconStyle, size}: IconProps) => <Ionicons name="ellipsis-vertical-sharp" size={size} style={iconStyle} />,

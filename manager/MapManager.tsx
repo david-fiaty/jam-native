@@ -5,14 +5,9 @@ import i18n from "@/translation/i18n";
 import UserManager from "./UserManager";
 import JamMarkerView from "@/components/view/marker-view/JamMarkerView";
 import ProfileMarkerView from "@/components/view/marker-view/ProfileMarkerView";
+import DataManager from "./DataManager";
 
 class MapManager {
-  appState: any;
-
-  constructor() {
-    this.appState = Store.getState().app;
-  }
-
   renderMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
       return (
@@ -22,10 +17,10 @@ class MapManager {
         >
           {this.isJamMarker(item) && (
             <JamMarkerView
-              iconName={this.getMarkerIcon(item)}
               title={this.getMarkerTitle(item)}
+              titleColor={this.getMarkerTitleColor(item)}
               description={this.getMarkerDescription(item)}
-              innerColor={this.getMarkerColor(item)}
+              backgroundColor={this.getMarkerColor(item)}
             />
           )}
 
@@ -70,15 +65,15 @@ class MapManager {
     }
 
     return title;
-  };
+  }
 
   getMarkerDescription = (item: any) => {
     return item?.caption || '';
-  };
+  }
 
   getMarkerIcon = (item: any) => {
     if (item?.profile_type == 'personal') {
-      return 'user';
+      return 'profile';
     }
     else if (item?.profile_type == 'venue') {
       return 'pin';
@@ -88,21 +83,50 @@ class MapManager {
     }
 
     return 'question';
-  };
+  }
 
   getMarkerColor(item: any) {
-    let sectorsData: any[] = this.appState.sectorsData;
-    let sectorIds: any[] = sectorsData.map((o: any) => o.id);
-    let itemSectors: any[] = item?.sectors || [];
-    let intersection: any[] = sectorIds.filter((id: number) => itemSectors.includes(id));
-    let firstSectorId: any = intersection?.[0];
+    if (this.isProfileMarker(item)) {
+      let sectorsData: any[] = Store.getState().app.sectorsData;
+      let sectorIds: any[] = sectorsData.map((o: any) => o.id);
+      let itemSectors: any[] = item?.sectors || [];
+      let intersection: any[] = sectorIds.filter((id: number) => itemSectors.includes(id));
+      let firstSectorId: any = intersection?.[0];
 
-    if (firstSectorId) {
-      return (sectorsData.find((o: any) => o.id == firstSectorId))?.color;
+      if (firstSectorId) {
+        return (sectorsData.find((o: any) => o.id == firstSectorId))?.color;
+      }
+
+      return Layout.colors.primary;
+    }
+    else if (this.isJamMarker(item)) {
+      if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'past') {
+        return Layout.colors.gray;
+      }
+      else if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'live') {
+        return Layout.colors.primary;
+      }
+      else if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'coming') {
+        return Layout.colors.tertiary;
+      }
+    }
+  }
+
+  getMarkerTitleColor(item: any) {
+    if (this.isJamMarker(item)) {
+      if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'past') {
+        return Layout.colors.white;
+      }
+      else if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'live') {
+        return Layout.colors.white;
+      }
+      else if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'coming') {
+        return Layout.colors.primary;
+      }
     }
 
     return Layout.colors.primary;
-  };
+  }
 }
 
 export default (new MapManager());

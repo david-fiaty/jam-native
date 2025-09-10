@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import { StyleSheet, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import IconView from "../IconView";
+import TextView from "../TextView";
 
 type Props = {
   title?: string;
@@ -90,7 +91,8 @@ const styles = StyleSheet.create({
   innerCircle: {
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
+    paddingTop: Layout.space.base/1.4,
   },
   bottomArrow: {
     width: 0,

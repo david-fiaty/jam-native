@@ -1,40 +1,28 @@
 import React, { ReactNode } from "react";
 import { StyleSheet, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import IconView from "../IconView";
 import TextView from "../TextView";
+import i18n from "@/translation/i18n";
 
 type Props = {
   title?: string;
   description?: string;
   size?: number;
-  iconName?: string;
   titleColor?: string;
-  outerColor?: string;
-  innerColor?: string;
+  backgroundColor?: string;
   children?: ReactNode;
 };
 
-const JamMarkerView = ({ title, description, size, iconName, titleColor, outerColor, innerColor, children }: Props) => {
+const JamMarkerView = ({ title, description, size, titleColor, backgroundColor, children }: Props) => {
   const markerSize: number = size || 35;
-  const markerOuterColor: string = outerColor || 'white';
-  const markerInnerColor: string = innerColor || 'red';
-  const markerTitleColor: string = titleColor || markerInnerColor;
+  const markerBackgroundColor: string = backgroundColor || 'white';
+  const markerTitleColor: string = titleColor || 'black';
 
-  const iconSize: number = markerSize/3; 
-
-  const outerCircleStyles: any = {
-    width: markerSize,
-    height: markerSize,
-    borderRadius: markerSize / 2,
-    backgroundColor: markerOuterColor,
-  };
-
-  const innerCircleStyles: any = {
-    width: markerSize - Layout.space.base/2,
-    height: markerSize - Layout.space.base/2,
-    borderRadius: (markerSize - Layout.space.base/2) / 2,
-    backgroundColor: markerInnerColor,
+  const titleContainerStyles: any = {
+    borderRadius: Layout.radius.round*2,
+    backgroundColor: markerBackgroundColor,
+    paddingHorizontal: Layout.space.base*1.1,
+    paddingVertical: Layout.space.base/1.5,
   };
 
   const bottomArrowStyles: any = {
@@ -42,31 +30,19 @@ const JamMarkerView = ({ title, description, size, iconName, titleColor, outerCo
     borderLeftWidth: markerSize / 2.5,
     borderRightWidth: markerSize / 2.5,
     borderTopWidth: markerSize / 3,
-    borderTopColor: markerOuterColor,
+    borderTopColor: markerBackgroundColor,
   };
 
   return (
     <View style={styles.container}>
-      {/*title && (
-        <View style={styles.titleContainer}>
-          <TextView color={markerTitleColor}>{title}</TextView>
-        </View>
-      )*/}
-
-      <View style={[styles.outerCircle, outerCircleStyles]}>
-        <View style={[styles.innerCircle, innerCircleStyles]}>
-          {iconName && (
-            <IconView
-              name={iconName}
-              theme="transparent"
-              color="white"
-              size={iconSize}
-              padding={0}
-            />
-          )}
-
-          {!iconName && children}
-        </View>
+      <View style={titleContainerStyles}>
+        <TextView 
+          color={markerTitleColor}
+          size={11.5}
+          bold={true}
+        >
+          {i18n.t('JAM!')}
+        </TextView>
       </View>
       <View style={[styles.bottomArrow, bottomArrowStyles]} />
     </View>
@@ -76,19 +52,6 @@ const JamMarkerView = ({ title, description, size, iconName, titleColor, outerCo
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'transparent',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  titleContainer: {
-    marginBottom: Layout.space.base,
-  },
-  outerCircle: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  innerCircle: {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
