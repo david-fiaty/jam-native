@@ -1,6 +1,6 @@
 
 import React, { useRef, useState } from "react";
-import { View, Text, Button, Animated, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, Animated, StyleSheet, TouchableOpacity } from "react-native";
 import { Layout } from '@/constants/Layout';
 import IconView from './IconView';
 
@@ -10,7 +10,7 @@ type Props = {
 
 const MapLegendView = ({ }: Props) => {
   const [open, setOpen] = useState(false);
-  const widthAnim = useRef(new Animated.Value(0)).current; // initial width
+  const widthAnim = useRef(new Animated.Value(0)).current; 
 
   const toggleLegend = () => {
     Animated.timing(widthAnim, {
