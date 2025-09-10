@@ -47,11 +47,11 @@ const ProfileMarkerView = ({ title, description, size, iconName, titleColor, out
 
   return (
     <View style={styles.container}>
-      {title && (
+      {/*title && (
         <View style={styles.titleContainer}>
           <TextView color={markerTitleColor}>{title}</TextView>
         </View>
-      )}
+      )*/}
 
       <View style={[styles.outerCircle, outerCircleStyles]}>
         <View style={[styles.innerCircle, innerCircleStyles]}>
