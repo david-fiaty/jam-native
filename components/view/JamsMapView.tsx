@@ -124,6 +124,8 @@ const styles = StyleSheet.create({
   legend: {
     position: 'absolute', 
     bottom: 50, 
+    backgroundColor: Layout.colors.white,
+    padding: Layout.space.base,
   },
 });
 
