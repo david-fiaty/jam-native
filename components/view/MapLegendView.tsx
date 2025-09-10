@@ -44,10 +44,11 @@ const MapLegendView = ({ }: Props) => {
 
       <Animated.View style={[styles.legendWrapper, { width: widthAnim }]}>
         <View style={styles.legendContainer}>
-          <TextView>{i18n.t('JAMS!')}</TextView>
+          <TextView>{i18n.t('JAMS')}</TextView>
           {MapManager.getJamMarkersConfig().map((o: any) => {
             return (
               <BoxView key={o.key} direction="row" align="center" justify="flex-start">
+                <TextView>{i18n.t('JAM')}</TextView>
                 <TextView>{o.label}</TextView>
               </BoxView>
             );
