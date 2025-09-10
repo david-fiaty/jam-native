@@ -41,7 +41,7 @@ const JamMarkerView = ({ title, description, size, titleColor, backgroundColor, 
           size={11.5}
           bold={true}
         >
-          {i18n.t('JAM!')}
+          {i18n.t('JAM')}
         </TextView>
       </View>
       <View style={[styles.bottomArrow, bottomArrowStyles]} />
