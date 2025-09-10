@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   },
   legendWrapper: {
     position: 'absolute',
-    bottom: 50,
+    bottom: Layout.space.base * 5,
     height: 180,
     justifyContent: 'center',
     alignItems: 'center',
