@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   },
   legend: {
     position: 'absolute', 
-    bottom: 50, 
+    bottom: Layout.space.base*5, 
     backgroundColor: Layout.colors.white,
     padding: Layout.space.base,
   },
