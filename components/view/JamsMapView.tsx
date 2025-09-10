@@ -1,6 +1,6 @@
 import MapView, { PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
 import { useState, useEffect, useRef } from "react";
-import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
+import { StyleSheet, View, TouchableWithoutFeedback, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
@@ -102,13 +102,13 @@ const JamsMapView = () => {
           {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => MapManager.renderMarker(item))}
           {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => MapManager.renderMarker(item))}
         </MapView>
-        
-        <View style={styles.legend}>
-          <IconView 
-            name="right" 
+
+        <TouchableOpacity style={styles.legend} onPress={() => console.log('open legend panel')}>
+          <IconView
+            name="right"
             theme="transparent"
           />
-        </View>
+        </TouchableOpacity>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -126,10 +126,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   legend: {
-    position: 'absolute', 
-    bottom: Layout.space.base*5, 
+    position: 'absolute',
+    bottom: Layout.space.base * 5,
     backgroundColor: Layout.colors.white,
-    padding: Layout.space.base/2,
+    padding: Layout.space.base / 2,
   },
 });
 
