@@ -31,22 +31,25 @@ const MapLegendView = ({ }: Props) => {
           onPress={toggleLegend}
         >
           <IconView
-            name={isVisible ? 'left' : 'right'}
+            name="right"
             theme="transparent"
           />
         </TouchableOpacity>
       )}
 
       {isVisible && (
-        <TouchableOpacity
-          onPress={toggleLegend}
-        >
-          <Animated.View style={[styles.legendContainer, { width: widthAnim }]}>
-            
-              <TextView>Expanding Box</TextView>
-            
-          </Animated.View>
-        </TouchableOpacity>
+        <Animated.View style={[styles.legendContainer, { width: widthAnim }]}>
+          <TextView>Expanding Box</TextView>
+          <TouchableOpacity
+            style={styles.openButton}
+            onPress={toggleLegend}
+          >
+            <IconView
+              name="right"
+              theme="transparent"
+            />
+          </TouchableOpacity>
+        </Animated.View>
       )}
     </>
   );
