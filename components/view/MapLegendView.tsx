@@ -37,20 +37,18 @@ const MapLegendView = ({ }: Props) => {
         </TouchableOpacity>
       )}
 
-      {isVisible && (
-        <Animated.View style={[styles.legendContainer, { width: widthAnim }]}>
-          <TextView>Expanding Box</TextView>
-          <TouchableOpacity
-            style={styles.openButton}
-            onPress={toggleLegend}
-          >
-            <IconView
-              name="right"
-              theme="transparent"
-            />
-          </TouchableOpacity>
-        </Animated.View>
-      )}
+      <Animated.View style={[styles.legendContainer, { width: widthAnim }]}>
+        <TextView>Expanding Box</TextView>
+        <TouchableOpacity
+          style={styles.closeButton}
+          onPress={toggleLegend}
+        >
+          <IconView
+            name="left"
+            theme="transparent"
+          />
+        </TouchableOpacity>
+      </Animated.View>
     </>
   );
 };
@@ -67,7 +65,11 @@ const styles = StyleSheet.create({
     height: 30,
   },
   closeButton: {
-
+    position: 'absolute',
+    right: 0,
+    backgroundColor: Layout.colors.white,
+    padding: Layout.space.base / 2,
+    height: 30,
   },
   legendContainer: {
     position: 'absolute',
