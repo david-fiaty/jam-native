@@ -8,12 +8,6 @@ import ProfileMarkerView from "@/components/view/marker-view/ProfileMarkerView";
 import DataManager from "./DataManager";
 
 class MapManager {
-  appState: any;
-
-  constructor() {
-    this.appState = Store.getState().app;
-  }
-
   renderMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
       return (
@@ -79,7 +73,7 @@ class MapManager {
 
   getMarkerIcon = (item: any) => {
     if (item?.profile_type == 'personal') {
-      return 'user';
+      return 'profile';
     }
     else if (item?.profile_type == 'venue') {
       return 'pin';
@@ -93,7 +87,7 @@ class MapManager {
 
   getMarkerColor(item: any) {
     if (this.isProfileMarker(item)) {
-      let sectorsData: any[] = this.appState.sectorsData;
+      let sectorsData: any[] = Store.getState().app.sectorsData;
       let sectorIds: any[] = sectorsData.map((o: any) => o.id);
       let itemSectors: any[] = item?.sectors || [];
       let intersection: any[] = sectorIds.filter((id: number) => itemSectors.includes(id));

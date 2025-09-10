@@ -4,15 +4,19 @@ import { Layout } from '@/constants/Layout';
 type Props = {
   underline?: boolean;
   color?: string;
+  size?: any;
+  bold?: boolean;
   style?: any;
   children?: any;
 };
 
-const TextView = ({underline, color, style, children}: Props) => {
+const TextView = ({underline, color, size, bold, style, children}: Props) => {
   const containerStyle: any = {
     ...(underline ? styles.underline : {}),
     ...{
       color: color || Layout.colors.primary,
+      fontSize: size || Layout.fontSize.base,
+      fontWeight: bold ? 'bold' : 'normal',
     }
   };
 
@@ -25,7 +29,6 @@ const TextView = ({underline, color, style, children}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    fontSize: Layout.fontSize.base,
     lineHeight: Layout.lineHeight,
   },
   underline: {
