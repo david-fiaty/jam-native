@@ -38,15 +38,15 @@ const MapLegendView = ({ }: Props) => {
       )}
 
       {isVisible && (
-        <Animated.View style={[styles.box, { width: widthAnim }]}>
-          <TouchableOpacity
-            onPress={toggleLegend}
-          >
+        <TouchableOpacity
+          onPress={toggleLegend}
+        >
+          <Animated.View style={[styles.box, { width: widthAnim }]}>
             <View style={styles.legendContainer}>
               <TextView>Expanding Box</TextView>
             </View>
-          </TouchableOpacity>
-        </Animated.View>
+          </Animated.View>
+        </TouchableOpacity>
       )}
     </>
   );
