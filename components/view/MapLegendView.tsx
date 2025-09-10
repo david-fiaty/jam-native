@@ -1,5 +1,6 @@
 
 import React, { useRef, useState } from "react";
+import { useSelector, shallowEqual } from "react-redux";
 import { Text, Animated, StyleSheet, TouchableOpacity, View } from "react-native";
 import { Layout } from '@/constants/Layout';
 import IconView from './IconView';
@@ -14,7 +15,8 @@ type Props = {
 const MapLegendView = ({ }: Props) => {
   const [isVisible, setIsVisible] = useState(false);
   const widthAnim = useRef(new Animated.Value(0)).current;
-
+  const appState = useSelector((state: any) => state.app, shallowEqual);
+  
   const toggleLegend = () => {
     Animated.timing(widthAnim, {
       toValue: isVisible ? 0 : 200,
@@ -50,6 +52,13 @@ const MapLegendView = ({ }: Props) => {
             );
           })}
           
+          {appState.sectorsData.map((o: any) => {
+            return (
+              <BoxView key={o.id} direction="row" align="center" justify="flex-start">
+                <TextView>{o.name}</TextView>
+              </BoxView>
+            );
+          })}
         </View>
         <TouchableOpacity
           style={styles.closeButton}
