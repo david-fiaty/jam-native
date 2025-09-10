@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   legendContainer: {
     position: 'absolute',
     bottom: 0,
-    height: 100,
+    height: 150,
     backgroundColor: 'red',
     justifyContent: 'center',
     alignItems: 'center',
