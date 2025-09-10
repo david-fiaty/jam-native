@@ -71,20 +71,6 @@ class MapManager {
     return item?.caption || '';
   }
 
-  getMarkerIcon = (item: any) => {
-    if (item?.profile_type == 'personal') {
-      return 'profile';
-    }
-    else if (item?.profile_type == 'venue') {
-      return 'pin';
-    }
-    else if (item?.profile_type == 'organization') {
-      return 'building';
-    }
-
-    return 'question';
-  }
-
   getMarkerColor(item: any) {
     if (this.isProfileMarker(item)) {
       let sectorsData: any[] = Store.getState().app.sectorsData;
@@ -126,6 +112,37 @@ class MapManager {
     }
 
     return Layout.colors.primary;
+  }
+
+  getMarkerIcon = (item: any) => {
+    if (item?.profile_type == 'personal') {
+      return 'profile';
+    }
+    else if (item?.profile_type == 'venue') {
+      return 'pin';
+    }
+    else if (item?.profile_type == 'organization') {
+      return 'building';
+    }
+
+    return 'question';
+  }
+  
+  getMarkerIcons() {
+    return [
+      {
+        key: 'personal',
+        icon: 'profile',
+      },
+      {
+        key: 'venue',
+        icon: 'pin',
+      },
+      {
+        key: 'organization',
+        icon: 'building',
+      },
+    ];
   }
 }
 
