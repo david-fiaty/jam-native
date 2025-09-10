@@ -1,8 +1,9 @@
 
 import React, { useRef, useState } from "react";
-import { Text, Animated, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, Animated, StyleSheet, TouchableOpacity, View } from "react-native";
 import { Layout } from '@/constants/Layout';
 import IconView from './IconView';
+import TextView from "./TextView";
 
 type Props = {
 
@@ -26,7 +27,7 @@ const MapLegendView = ({ }: Props) => {
     <>
       {!isVisible && (
         <TouchableOpacity
-          style={styles.legend}
+          style={styles.openButton}
           onPress={toggleLegend}
         >
           <IconView
@@ -37,15 +38,15 @@ const MapLegendView = ({ }: Props) => {
       )}
 
       {isVisible && (
-        <TouchableOpacity
-          style={styles.legend}
-          onPress={toggleLegend}
-        >
-          <Animated.View style={[styles.box, { width: widthAnim }]}>
-            <Text>Expanding Box</Text>
-          </Animated.View>
-
-        </TouchableOpacity>
+        <Animated.View style={[styles.box, { width: widthAnim }]}>
+          <TouchableOpacity
+            onPress={toggleLegend}
+          >
+            <View style={styles.legendContainer}>
+              <TextView>Expanding Box</TextView>
+            </View>
+          </TouchableOpacity>
+        </Animated.View>
       )}
     </>
   );
@@ -56,18 +57,17 @@ const styles = StyleSheet.create({
     gap: Layout.space.base,
   },
   openButton: {
-
-  },
-  closeButton: {
-
-  },
-
-  legend: {
     position: 'absolute',
     bottom: Layout.space.base * 5,
     backgroundColor: Layout.colors.white,
     padding: Layout.space.base / 2,
     height: 30,
+  },
+  closeButton: {
+
+  },
+  legendContainer: {
+
   },
   box: {
     height: 100,
