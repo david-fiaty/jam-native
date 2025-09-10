@@ -16,7 +16,7 @@ type Props = {
 };
 
 const ProfileMarkerView = ({ title, description, size, iconName, titleColor, outerColor, innerColor, children }: Props) => {
-  const markerSize: number = size || 35;
+  const markerSize: number = size || 32;
   const markerOuterColor: string = outerColor || 'white';
   const markerInnerColor: string = innerColor || 'red';
   const markerTitleColor: string = titleColor || markerInnerColor;
