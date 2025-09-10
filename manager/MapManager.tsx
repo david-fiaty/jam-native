@@ -26,7 +26,7 @@ class MapManager {
 
           {this.isProfileMarker(item) && (
             <ProfileMarkerView
-              iconName={this.getMarkerIcon(item)}
+              iconName={this.getProfileMarkerIcon(item)}
               title={this.getMarkerTitle(item)}
               description={this.getMarkerDescription(item)}
               innerColor={this.getMarkerColor(item)}
@@ -114,22 +114,25 @@ class MapManager {
     return Layout.colors.primary;
   }
 
-  getMarkerIcon = (item: any) => {
-    return this.getMarkerIcons().find((o: any) => o.key == item?.profile_type)?.icon;
+  getProfileMarkerIcon = (item: any) => {
+    return this.getProfileMarkersConfig().find((o: any) => o.key == item?.profile_type)?.icon;
   }
   
-  getMarkerIcons() {
+  getProfileMarkersConfig() {
     return [
       {
         key: 'personal',
+        label: i18n.t('Artist'),
         icon: 'profile',
       },
       {
         key: 'venue',
+        label: i18n.t('Venue'),
         icon: 'pin',
       },
       {
         key: 'organization',
+        label: i18n.t('Organization'),
         icon: 'building',
       },
     ];
