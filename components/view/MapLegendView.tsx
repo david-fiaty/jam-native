@@ -38,7 +38,9 @@ const MapLegendView = ({ }: Props) => {
       )}
 
       <Animated.View style={[styles.legendContainer, { width: widthAnim }]}>
-        <TextView>Expanding Box</TextView>
+        <View style={styles.legend}>
+          <TextView>Expanding Box</TextView>
+        </View>
         <TouchableOpacity
           style={styles.closeButton}
           onPress={toggleLegend}
@@ -79,6 +81,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
+  },
+  legend: {
+    position: 'absolute',
+    left: 0,
+    height: '100%',
+    width: '100%',
+    backgroundColor: 'yellow',
   },
 });
 
