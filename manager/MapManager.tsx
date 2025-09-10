@@ -115,17 +115,7 @@ class MapManager {
   }
 
   getMarkerIcon = (item: any) => {
-    if (item?.profile_type == 'personal') {
-      return 'profile';
-    }
-    else if (item?.profile_type == 'venue') {
-      return 'pin';
-    }
-    else if (item?.profile_type == 'organization') {
-      return 'building';
-    }
-
-    return 'question';
+    return this.getMarkerIcons().find((o: any) => o.key == item?.profile_type)?.icon;
   }
   
   getMarkerIcons() {
