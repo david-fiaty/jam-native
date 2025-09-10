@@ -13,6 +13,7 @@ import TabsView from "./TabsView";
 import MapManager from "@/manager/MapManager";
 import TextView from "./TextView";
 import i18n from "@/translation/i18n";
+import IconView from "./IconView";
 
 const JamsMapView = () => {
   const dispatch = useDispatch();
@@ -103,7 +104,10 @@ const JamsMapView = () => {
         </MapView>
         
         <View style={styles.legend}>
-          <TextView>{i18n.t('>')}</TextView>
+          <IconView 
+            name="right" 
+            theme="transparent"
+          />
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -125,7 +129,7 @@ const styles = StyleSheet.create({
     position: 'absolute', 
     bottom: Layout.space.base*5, 
     backgroundColor: Layout.colors.white,
-    padding: Layout.space.base,
+    padding: Layout.space.base/2,
   },
 });
 
