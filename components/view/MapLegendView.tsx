@@ -4,6 +4,8 @@ import { Text, Animated, StyleSheet, TouchableOpacity, View } from "react-native
 import { Layout } from '@/constants/Layout';
 import IconView from './IconView';
 import TextView from "./TextView";
+import MapManager from "@/manager/MapManager";
+import BoxView from "./BoxView";
 
 type Props = {
 
@@ -39,7 +41,15 @@ const MapLegendView = ({ }: Props) => {
 
       <Animated.View style={[styles.legendWrapper, { width: widthAnim }]}>
         <View style={styles.legendContainer}>
-          <TextView>Expanding Box</TextView>
+          {MapManager.getProfileMarkersConfig().map((o: any) => {
+            return (
+              <BoxView key={o.key} direction="row" align="center" justify="flex-start">
+                <IconView name={o.icon} />
+                <TextView>{o.label}</TextView>
+              </BoxView>
+            );
+          })}
+          
         </View>
         <TouchableOpacity
           style={styles.closeButton}
