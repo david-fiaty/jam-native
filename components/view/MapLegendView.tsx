@@ -7,6 +7,7 @@ import IconView from './IconView';
 import TextView from "./TextView";
 import MapManager from "@/manager/MapManager";
 import BoxView from "./BoxView";
+import i18n from "@/translation/i18n";
 
 type Props = {
 
@@ -43,6 +44,7 @@ const MapLegendView = ({ }: Props) => {
 
       <Animated.View style={[styles.legendWrapper, { width: widthAnim }]}>
         <View style={styles.legendContainer}>
+          <TextView>{i18n.t('PROFILES')}</TextView>
           {MapManager.getProfileMarkersConfig().map((o: any) => {
             return (
               <BoxView key={o.key} direction="row" align="center" justify="flex-start">
@@ -52,6 +54,7 @@ const MapLegendView = ({ }: Props) => {
             );
           })}
           
+          <TextView>{i18n.t('INDUSTRIES')}</TextView>
           {appState.sectorsData.map((o: any) => {
             return (
               <BoxView key={o.id} direction="row" align="center" justify="flex-start">
