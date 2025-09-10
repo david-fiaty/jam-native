@@ -90,7 +90,8 @@ const styles = StyleSheet.create({
   innerCircle: {
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
+    paddingTop: Layout.space.base/1.4,
   },
   bottomArrow: {
     width: 0,
