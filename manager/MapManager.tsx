@@ -16,30 +16,36 @@ class MapManager {
 
   renderMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
-      return (
-        <Marker
-          key={item.id}
-          coordinate={this.getMarkerCoordinate(item)}
-        >
-          {this.isJamMarker(item) && (
+      if (this.isJamMarker(item)) {
+        return (
+          <Marker
+            key={item.id}
+            coordinate={this.getMarkerCoordinate(item)}
+          >
             <JamMarkerView
               title={this.getMarkerTitle(item)}
               titleColor={this.getMarkerTitleColor(item)}
               description={this.getMarkerDescription(item)}
               backgroundColor={this.getMarkerColor(item)}
             />
-          )}
-
-          {this.isProfileMarker(item) && (
+          </Marker>
+        );
+      }
+      else if (this.isProfileMarker(item)) {
+        return (
+          <Marker
+            key={item.id}
+            coordinate={this.getMarkerCoordinate(item)}
+          >
             <ProfileMarkerView
               iconName={this.getMarkerIcon(item)}
               title={this.getMarkerTitle(item)}
               description={this.getMarkerDescription(item)}
               innerColor={this.getMarkerColor(item)}
             />
-          )}
-        </Marker>
-      );
+          </Marker>
+        );
+      }
     }
 
     return null;
