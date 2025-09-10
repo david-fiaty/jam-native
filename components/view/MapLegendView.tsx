@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   legendWrapper: {
     position: 'absolute',
     bottom: 0,
-    height: 150,
+    height: 180,
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
