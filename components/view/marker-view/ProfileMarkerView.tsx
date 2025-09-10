@@ -46,7 +46,6 @@ const ProfileMarkerView = ({ title, description, size, iconName, titleColor, out
   };
 
   return (
-    <View style={styles.wrapper}>
     <View style={styles.container}>
       {/*title && (
         <View style={styles.titleContainer}>
@@ -70,7 +69,6 @@ const ProfileMarkerView = ({ title, description, size, iconName, titleColor, out
         </View>
       </View>
       <View style={[styles.bottomArrow, bottomArrowStyles]} />
-    </View>
     </View>
   );
 };
