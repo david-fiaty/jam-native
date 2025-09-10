@@ -28,7 +28,7 @@ const MapLegendView = ({ }: Props) => {
       onPress={toggleLegend}
     >
       <IconView
-        name="right"
+        name={isVisible ? 'left' : 'right'}
         theme="transparent"
       />
 
@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     bottom: Layout.space.base * 5,
     backgroundColor: Layout.colors.white,
     padding: Layout.space.base / 2,
+    height: 30,
   },
   box: {
     height: 100,
