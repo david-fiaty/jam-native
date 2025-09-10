@@ -12,7 +12,7 @@ const MapLegendView = ({ }: Props) => {
   const [open, setOpen] = useState(false);
   const widthAnim = useRef(new Animated.Value(0)).current; // initial width
 
-  const toggle = () => {
+  const toggleLegend = () => {
     Animated.timing(widthAnim, {
       toValue: open ? 0 : 200,
       duration: 300,
@@ -25,7 +25,7 @@ const MapLegendView = ({ }: Props) => {
   return (
     <TouchableOpacity
       style={styles.legend}
-      onPress={toggle}
+      onPress={toggleLegend}
     >
       <IconView
         name="right"
