@@ -79,7 +79,7 @@ class MapManager {
 
   getMarkerIcon = (item: any) => {
     if (item?.profile_type == 'personal') {
-      return 'user';
+      return 'profile';
     }
     else if (item?.profile_type == 'venue') {
       return 'pin';
