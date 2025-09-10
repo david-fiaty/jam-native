@@ -70,6 +70,8 @@ const styles = StyleSheet.create({
 
   },
   legendContainer: {
+    position: 'absolute',
+    bottom: Layout.space.base * 5,
     height: 100,
     backgroundColor: 'red',
     justifyContent: 'center',
