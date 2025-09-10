@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     left: 0,
     height: '100%',
     width: '100%',
-    backgroundColor: 'yellow',
+    backgroundColor: Layout.colors.secondary,
     padding: Layout.space.base,
   },
 });
