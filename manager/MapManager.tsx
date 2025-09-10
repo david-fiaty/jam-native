@@ -29,7 +29,7 @@ class MapManager {
               iconName={this.getProfileMarkerIcon(item)}
               title={this.getMarkerTitle(item)}
               description={this.getMarkerDescription(item)}
-              innerColor={this.getMarkerColor(item)}
+              innerColor={this.getProfileMarkerInnerColor(item)}
             />
           )}
         </Marker>
@@ -71,31 +71,18 @@ class MapManager {
     return item?.caption || '';
   }
 
-  getMarkerColor(item: any) {
-    if (this.isProfileMarker(item)) {
-      let sectorsData: any[] = Store.getState().app.sectorsData;
-      let sectorIds: any[] = sectorsData.map((o: any) => o.id);
-      let itemSectors: any[] = item?.sectors || [];
-      let intersection: any[] = sectorIds.filter((id: number) => itemSectors.includes(id));
-      let firstSectorId: any = intersection?.[0];
+  getProfileMarkerInnerColor(item: any) {
+    let sectorsData: any[] = Store.getState().app.sectorsData;
+    let sectorIds: any[] = sectorsData.map((o: any) => o.id);
+    let itemSectors: any[] = item?.sectors || [];
+    let intersection: any[] = sectorIds.filter((id: number) => itemSectors.includes(id));
+    let firstSectorId: any = intersection?.[0];
 
-      if (firstSectorId) {
-        return (sectorsData.find((o: any) => o.id == firstSectorId))?.color;
-      }
+    if (firstSectorId) {
+      return (sectorsData.find((o: any) => o.id == firstSectorId))?.color;
+    }
 
-      return Layout.colors.primary;
-    }
-    else if (this.isJamMarker(item)) {
-      if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'past') {
-        return Layout.colors.gray;
-      }
-      else if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'live') {
-        return Layout.colors.primary;
-      }
-      else if (DataManager.dateStatus(item?.period?.start_datetime, item?.period?.end_datetime) == 'coming') {
-        return Layout.colors.tertiary;
-      }
-    }
+    return Layout.colors.primary;
   }
 
   getJamMarkerTitleColor(item: any) {
