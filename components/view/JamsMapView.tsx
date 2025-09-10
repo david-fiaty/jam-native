@@ -11,6 +11,8 @@ import SearchFiltersView from "./SearchFiltersView";
 import SearchManager from "@/manager/SearchManager";
 import TabsView from "./TabsView";
 import MapManager from "@/manager/MapManager";
+import TextView from "./TextView";
+import i18n from "@/translation/i18n";
 
 const JamsMapView = () => {
   const dispatch = useDispatch();
@@ -99,6 +101,10 @@ const JamsMapView = () => {
           {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => MapManager.renderMarker(item))}
           {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => MapManager.renderMarker(item))}
         </MapView>
+        
+        <View style={styles.legend}>
+          <TextView>{i18n.t('>')}</TextView>
+        </View>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -115,20 +121,9 @@ const styles = StyleSheet.create({
   map: {
     flex: 1,
   },
-  marker: {
-    width: 40,
-    height: 40,
-    backgroundColor: "red",
-    borderRadius: 20,
-    transform: [{ rotate: "45deg" }], // makes it look like a drop
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  markerCircle: {
-    width: 16,
-    height: 16,
-    backgroundColor: "white",
-    borderRadius: 8,
+  legend: {
+    position: 'absolute', 
+    bottom: 50, 
   },
 });
 
