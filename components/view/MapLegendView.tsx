@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: Layout.colors.secondary,
     padding: Layout.space.base,
+    gap: Layout.space.base,
   },
 });
 
