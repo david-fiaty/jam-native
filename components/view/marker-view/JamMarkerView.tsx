@@ -1,7 +1,6 @@
 import React, { ReactNode } from "react";
 import { StyleSheet, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import IconView from "../IconView";
 import TextView from "../TextView";
 import i18n from "@/translation/i18n";
 
@@ -20,9 +19,10 @@ const JamMarkerView = ({ title, description, size, titleColor, backgroundColor, 
   const markerTitleColor: string = titleColor || 'black';
 
   const titleContainerStyles: any = {
-    borderRadius: Layout.radius.round,
+    borderRadius: Layout.radius.round*2,
     backgroundColor: markerBackgroundColor,
-    padding: Layout.space.base/2,
+    paddingHorizontal: Layout.space.base*1.1,
+    paddingVertical: Layout.space.base/1.5,
   };
 
   const bottomArrowStyles: any = {
@@ -35,8 +35,12 @@ const JamMarkerView = ({ title, description, size, titleColor, backgroundColor, 
 
   return (
     <View style={styles.container}>
-      <View style={[styles.titleContainer, titleContainerStyles]}>
-        <TextView color={markerTitleColor}>{i18n.t('JAM')}</TextView>
+      <View style={titleContainerStyles}>
+        <TextView 
+          color={markerTitleColor}
+          size={11.5}
+          bold={true}
+        >{i18n.t('JAM!')}</TextView>
       </View>
       <View style={[styles.bottomArrow, bottomArrowStyles]} />
     </View>
@@ -49,9 +53,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  titleContainer: {
-
   },
   bottomArrow: {
     width: 0,
