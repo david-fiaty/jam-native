@@ -1,7 +1,7 @@
 
 import React, { useRef, useState } from "react";
 import { useSelector, shallowEqual } from "react-redux";
-import { Text, Animated, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Animated, StyleSheet, TouchableOpacity, View } from "react-native";
 import { Layout } from '@/constants/Layout';
 import IconView from './IconView';
 import TextView from "./TextView";
@@ -20,8 +20,8 @@ const MapLegendView = ({ }: Props) => {
 
   const toggleLegend = () => {
     Animated.timing(widthAnim, {
-      toValue: isVisible ? 0 : 200,
-      duration: 300,
+      toValue: isVisible ? 0 : 280,
+      duration: 250,
       useNativeDriver: false,
     }).start();
 
@@ -107,8 +107,8 @@ const MapLegendView = ({ }: Props) => {
                   backgroundColor={o.color}
                   color={styles.sectorTag.color}
                   size={styles.sectorTag.fontSize}
-                  paddingHorizontal={5}
-                  paddingVertical={1}
+                  paddingHorizontal={6}
+                  paddingVertical={2}
                   radius={Layout.radius.round}
                 >
                   {o.name}
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
   legendWrapper: {
     position: 'absolute',
     bottom: Layout.space.base * 5,
-    height: 300,
+    height: 360,
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
