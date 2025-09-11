@@ -16,7 +16,7 @@ const MapLegendView = () => {
 
   const toggleLegend = () => {
     Animated.timing(widthAnim, {
-      toValue: isVisible ? 0 : 260,
+      toValue: isVisible ? 0 : 258,
       duration: 300,
       useNativeDriver: false,
     }).start();
@@ -161,12 +161,14 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: Layout.colors.white,
     padding: Layout.space.base,
+    paddingTop: 0,
     gap: Layout.space.base/2,
   },
   sectionTitle: {
     textTransform: 'uppercase',
     color: Layout.colors.gray,
-    fontSize: 11,
+    fontSize: 10,
+    marginTop: Layout.space.base/2,
   },
   textView: {
     color: Layout.colors.gray,
