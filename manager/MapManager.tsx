@@ -1,4 +1,5 @@
-import { Marker } from "react-native-maps";
+import { Marker as NativeMarker } from "react-native-maps";
+import { Marker as WebMarker } from "@react-google-maps/api";
 import { Layout } from "@/constants/Layout";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
@@ -12,7 +13,7 @@ class MapManager {
   renderMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
       return (
-        <Marker
+        <NativeMarker
           key={item.id}
           coordinate={this.getMarkerCoordinate(item)}
         >
@@ -33,7 +34,7 @@ class MapManager {
               innerColor={this.getProfileMarkerInnerColor(item)}
             />
           )}
-        </Marker>
+        </NativeMarker>
       );
     }
 
