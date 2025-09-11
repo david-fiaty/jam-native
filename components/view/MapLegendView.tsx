@@ -17,7 +17,7 @@ const MapLegendView = ({ }: Props) => {
   const [isVisible, setIsVisible] = useState(false);
   const widthAnim = useRef(new Animated.Value(0)).current;
   const appState = useSelector((state: any) => state.app, shallowEqual);
-  
+
   const toggleLegend = () => {
     Animated.timing(widthAnim, {
       toValue: isVisible ? 0 : 200,
@@ -69,32 +69,32 @@ const MapLegendView = ({ }: Props) => {
           {MapManager.getProfileMarkersConfig().map((o: any) => {
             return (
               <BoxView key={o.key} direction="row" align="center" justify="flex-start">
-                <IconView name={o.icon} theme="transparent" color={styles.textView.color}/>
+                <IconView name={o.icon} theme="transparent" color={styles.textView.color} />
                 <TextView style={styles.textView}>{o.label}</TextView>
               </BoxView>
             );
           })}
-          
+
           <TextView style={styles.sectionTitle}>
             {i18n.t('Industries')}
           </TextView>
-          {appState.sectorsData.map((o: any) => {
-            return (
-              <BoxView 
-                key={o.id} 
-                direction="row" 
-                align="center" 
-                justify="flex-start"
-              >
+          <BoxView
+            direction="row"
+            align="center"
+            justify="flex-start"
+          >
+            {appState.sectorsData.map((o: any) => {
+              return (
                 <TextView
+                  key={o.id}
                   backgroundColor={o.color}
                   color={styles.sectorTag.color}
                 >
                   {o.name}
                 </TextView>
-              </BoxView>
-            );
-          })}
+              );
+            })}
+          </BoxView>
         </View>
 
         <TouchableOpacity
