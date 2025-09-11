@@ -78,7 +78,8 @@ const MapLegendView = ({ }: Props) => {
           <TextView style={styles.sectionTitle}>
             {i18n.t('Industries')}
           </TextView>
-          <BoxView
+          <BoxView 
+            style={styles.sectorsContainer}
             direction="row"
             align="center"
             justify="flex-start"
@@ -154,8 +155,16 @@ const styles = StyleSheet.create({
     color: Layout.colors.gray,
     fontSize: 11,
   },
+  sectorsContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
   sectorTag: {
     color: Layout.colors.white,
+    flexShrink: 0, 
+    includeFontPadding: false,
+    textAlignVertical: 'center',
   },
 });
 
