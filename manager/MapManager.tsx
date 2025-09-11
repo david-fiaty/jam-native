@@ -1,4 +1,4 @@
-import { Callout, Marker } from "react-native-maps";
+import { Marker } from "react-native-maps";
 import { Layout } from "@/constants/Layout";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
@@ -6,8 +6,6 @@ import UserManager from "./UserManager";
 import JamMarkerView from "@/components/view/marker-view/JamMarkerView";
 import ProfileMarkerView from "@/components/view/marker-view/ProfileMarkerView";
 import DataManager from "./DataManager";
-import { View } from "react-native";
-import TextView from "@/components/view/TextView";
 
 class MapManager {
   renderMarker = (item: any) => {
@@ -34,25 +32,6 @@ class MapManager {
               innerColor={this.getProfileMarkerInnerColor(item)}
             />
           )}
-
-        <Callout tooltip>
-          <View
-            style={{
-              backgroundColor: "white",
-              padding: 10,
-              borderRadius: 8,
-              elevation: 4, // Android shadow
-              shadowColor: "#000",
-              shadowOffset: { width: 0, height: 2 },
-              shadowOpacity: 0.3,
-              shadowRadius: 4,
-            }}
-          >
-            
-            <TextView>This is a custom callout</TextView>
-          </View>
-        </Callout>
-
         </Marker>
       );
     }
