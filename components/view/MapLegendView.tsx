@@ -16,8 +16,8 @@ const MapLegendView = () => {
 
   const toggleLegend = () => {
     Animated.timing(widthAnim, {
-      toValue: isVisible ? 0 : 280,
-      duration: 250,
+      toValue: isVisible ? 0 : 260,
+      duration: 300,
       useNativeDriver: false,
     }).start();
 
@@ -51,8 +51,8 @@ const MapLegendView = () => {
                   backgroundColor={o.backgroundColor}
                   radius={Layout.radius.round}
                   paddingHorizontal={6}
-                  paddingVertical={2}
-                  size={10}
+                  paddingVertical={1}
+                  size={8.5}
                   bold={true}
                 >
                   {i18n.t('JAM')}
@@ -103,8 +103,8 @@ const MapLegendView = () => {
                   backgroundColor={o.color}
                   color={styles.sectorTag.color}
                   size={styles.sectorTag.fontSize}
-                  paddingHorizontal={6}
-                  paddingVertical={2}
+                  paddingHorizontal={5}
+                  paddingVertical={1}
                   radius={Layout.radius.round}
                 >
                   {o.name}
@@ -148,8 +148,8 @@ const styles = StyleSheet.create({
   },
   legendWrapper: {
     position: 'absolute',
-    bottom: Layout.space.base * 5,
-    height: 312,
+    bottom: 0,
+    height: 302,
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     left: 0,
     height: '100%',
     width: '100%',
-    backgroundColor: Layout.colors.secondary,
+    backgroundColor: Layout.colors.white,
     padding: Layout.space.base,
     gap: Layout.space.base/2,
   },
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     flexShrink: 0, 
     includeFontPadding: false,
     textAlignVertical: 'center',
-    fontSize: 11,
+    fontSize: 10,
     padding: Layout.space.base,
   },
 });
