@@ -94,7 +94,7 @@ const MapLegendView = () => {
             direction="row"
             align="center"
             justify="flex-start"
-            gap={5}
+            gap={3}
           >
             {appState.sectorsData.map((o: any) => {
               return (
