@@ -19,7 +19,7 @@ const JamsMapView = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [searchResults, setSearchResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
-  const prevSearchState: any = useRef();
+  const prevSearchState: any = useRef(null);
   const searchTabs: any[] = SearchManager.getSearchTabs();
 
   const getInitialRegion = () => {

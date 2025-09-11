@@ -38,14 +38,19 @@ const MapLegendView = () => {
         </TouchableOpacity>
       )}
 
-      <Animated.View style={[styles.legendWrapper, { width: widthAnim }]}>
+      <Animated.View style={[styles.legendWrapper, { width: widthAnim, overflow: 'hidden' }]}>
         <View style={styles.legendContainer}>
           <TextView style={styles.sectionTitle}>
             {i18n.t('Jams')}
           </TextView>
           {MapManager.getJamMarkersConfig().map((o: any) => {
             return (
-              <BoxView key={o.key} direction="row" align="center" justify="flex-start">
+              <BoxView 
+                key={o.key} 
+                direction="row" 
+                align="center" 
+                justify="flex-start"
+              >
                 <TextView
                   color={o.titleColor}
                   backgroundColor={o.backgroundColor}
