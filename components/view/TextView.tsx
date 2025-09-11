@@ -18,8 +18,8 @@ const TextView = ({underline, color, backgroundColor, size, bold, style, childre
       color: color || Layout.colors.primary,
       fontSize: size || Layout.fontSize.base,
       fontWeight: bold ? 'bold' : 'normal',
-      backgroundColor: backgroundColor || Layout.colors.white,
-    }
+      backgroundColor: backgroundColor || 'transparent',
+    },
   };
 
   return (
