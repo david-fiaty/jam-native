@@ -24,16 +24,15 @@ import ResetPasswordForm from "../form/ResetPasswordForm";
 import NotificationItemSection from "../section/NotificationItemSection";
 import PublicProfileSection from "../section/profile/PublicProfileSection";
 import PrivateProfileSection from "../section/profile/PrivateProfileSection";
-import ProfileJamsSection from "../section/ProfileJamsSection";
+import ProfileJamsSection from "../section/profile/ProfileJamsSection";
 import PublicProjectSection from "../section/project/PublicProjectSection";
 import PrivateProjectSection from "../section/project/PrivateProjectSection";
-import ProjectJamsSection from "../section/ProjectJamsSection";
-import ProfileProjectsSection from "../section/ProfileProjectsSection";
+import ProjectJamsSection from "../section/project/ProjectJamsSection";
+import ProfileProjectsSection from "../section/profile/ProfileProjectsSection";
 import PublicJamSection from "../section/jam/PublicJamSection";
 import PrivateJamSection from "../section/jam/PrivateJamSection";
 import ProjectFormSection from "../section/project/ProjectFormSection";
 import JamFormSection from "../section/jam/JamFormSection";
-import SearchFiltersSection from "../section/SearchFiltersSection";
 import SearchView from "./SearchView";
 
 const SectionView = () => {
@@ -256,11 +255,6 @@ const SectionView = () => {
         id: 'search',
         title: i18n.t('Search'),
         render: (params: any) => <SearchView {...params} />,
-      },
-      {
-        id: 'search-filters',
-        title: i18n.t('Search Filters'),
-        render: (params: any) => <SearchFiltersSection {...params} />,
       },
     ].map((o: any) => {
       return {

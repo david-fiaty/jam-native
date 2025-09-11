@@ -1,11 +1,12 @@
 import { StyleSheet } from "react-native";
-import BoxView from '../view/BoxView';
-import SearchFiltersForm from "../form/SearchFiltersForm";
+import JamsList from "@/components/list/JamsList";
+import BoxView from "@/components/view/BoxView";
 
 type Props = {
+  jamId: any;
 };
 
-const SearchFiltersSection = ({  }: Props) => {
+const ProjectJamsSection = ({ jamId }: Props) => {
   return (
     <BoxView
       direction="column"
@@ -13,7 +14,7 @@ const SearchFiltersSection = ({  }: Props) => {
       justify="center"
       style={styles.container}
     >
-      <SearchFiltersForm />
+      <JamsList idArray={JSON.parse(jamId)} disableInfiniteScroll={true} />
     </BoxView>
   );
 };
@@ -26,4 +27,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SearchFiltersSection;
+export default ProjectJamsSection;
