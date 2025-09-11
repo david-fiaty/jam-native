@@ -15,7 +15,7 @@ type Props = {
 const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   const [searchResults, setSearchResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
-  const prevSearchState: any = useRef();
+  const prevSearchState: any = useRef(null);
 
   const renderItem = (row: any) => {
     return (
