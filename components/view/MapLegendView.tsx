@@ -9,11 +9,7 @@ import MapManager from "@/manager/MapManager";
 import BoxView from "./BoxView";
 import i18n from "@/translation/i18n";
 
-type Props = {
-
-};
-
-const MapLegendView = ({ }: Props) => {
+const MapLegendView = () => {
   const [isVisible, setIsVisible] = useState(false);
   const widthAnim = useRef(new Animated.Value(0)).current;
   const appState = useSelector((state: any) => state.app, shallowEqual);
@@ -153,7 +149,7 @@ const styles = StyleSheet.create({
   legendWrapper: {
     position: 'absolute',
     bottom: Layout.space.base * 5,
-    height: 360,
+    height: 310,
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
@@ -165,7 +161,7 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: Layout.colors.secondary,
     padding: Layout.space.base,
-    gap: Layout.space.base,
+    gap: Layout.space.base/2,
   },
   sectionTitle: {
     textTransform: 'uppercase',
