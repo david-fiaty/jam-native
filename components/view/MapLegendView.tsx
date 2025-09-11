@@ -68,8 +68,18 @@ const MapLegendView = ({ }: Props) => {
           </TextView>
           {MapManager.getProfileMarkersConfig().map((o: any) => {
             return (
-              <BoxView key={o.key} direction="row" align="center" justify="flex-start">
-                <IconView name={o.icon} theme="transparent" color={styles.textView.color} />
+              <BoxView 
+                key={o.key} 
+                direction="row" 
+                align="center" 
+                justify="flex-start"
+                gap={5}
+              >
+                <IconView 
+                  name={o.icon} 
+                  theme="transparent" 
+                  color={styles.textView.color} 
+                />
                 <TextView style={styles.textView}>{o.label}</TextView>
               </BoxView>
             );
@@ -83,6 +93,7 @@ const MapLegendView = ({ }: Props) => {
             direction="row"
             align="center"
             justify="flex-start"
+            gap={5}
           >
             {appState.sectorsData.map((o: any) => {
               return (
@@ -90,6 +101,10 @@ const MapLegendView = ({ }: Props) => {
                   key={o.id}
                   backgroundColor={o.color}
                   color={styles.sectorTag.color}
+                  size={styles.sectorTag.fontSize}
+                  paddingHorizontal={5}
+                  paddingVertical={1}
+                  radius={Layout.radius.round}
                 >
                   {o.name}
                 </TextView>
@@ -165,6 +180,8 @@ const styles = StyleSheet.create({
     flexShrink: 0, 
     includeFontPadding: false,
     textAlignVertical: 'center',
+    fontSize: 11,
+    padding: Layout.space.base,
   },
 });
 
