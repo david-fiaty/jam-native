@@ -44,27 +44,40 @@ const MapLegendView = ({ }: Props) => {
 
       <Animated.View style={[styles.legendWrapper, { width: widthAnim }]}>
         <View style={styles.legendContainer}>
-          <TextView>{i18n.t('JAMS')}</TextView>
+          <TextView style={styles.sectionTitle}>
+            {i18n.t('Jams')}
+          </TextView>
           {MapManager.getJamMarkersConfig().map((o: any) => {
             return (
               <BoxView key={o.key} direction="row" align="center" justify="flex-start">
-                <TextView>{i18n.t('JAM')}</TextView>
-                <TextView>{o.label}</TextView>
+                <TextView
+                  color={o.titleColor}
+                  backgroundColor={o.backgroundColor}
+                >
+                  {i18n.t('JAM')}
+                </TextView>
+                <TextView style={styles.textView}>
+                  {o.label}
+                </TextView>
               </BoxView>
             );
           })}
 
-          <TextView>{i18n.t('PROFILES')}</TextView>
+          <TextView style={styles.sectionTitle}>
+            {i18n.t('Profiles')}
+          </TextView>
           {MapManager.getProfileMarkersConfig().map((o: any) => {
             return (
               <BoxView key={o.key} direction="row" align="center" justify="flex-start">
-                <IconView name={o.icon} />
-                <TextView>{o.label}</TextView>
+                <IconView name={o.icon} theme="transparent" color={styles.textView.color}/>
+                <TextView style={styles.textView}>{o.label}</TextView>
               </BoxView>
             );
           })}
           
-          <TextView>{i18n.t('INDUSTRIES')}</TextView>
+          <TextView style={styles.sectionTitle}>
+            {i18n.t('Industries')}
+          </TextView>
           {appState.sectorsData.map((o: any) => {
             return (
               <BoxView key={o.id} direction="row" align="center" justify="flex-start">
@@ -73,6 +86,7 @@ const MapLegendView = ({ }: Props) => {
             );
           })}
         </View>
+        
         <TouchableOpacity
           style={styles.closeButton}
           onPress={toggleLegend}
@@ -122,6 +136,13 @@ const styles = StyleSheet.create({
     padding: Layout.space.base,
     gap: Layout.space.base,
   },
+  sectionTitle: {
+    textTransform: 'uppercase',
+    color: Layout.colors.gray,
+  },
+  textView: {
+    color: Layout.colors.gray,
+  }
 });
 
 export default MapLegendView;
