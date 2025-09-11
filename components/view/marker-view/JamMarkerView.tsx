@@ -21,8 +21,8 @@ const JamMarkerView = ({ title, description, size, titleColor, backgroundColor, 
   const titleContainerStyles: any = {
     borderRadius: Layout.radius.round*2,
     backgroundColor: markerBackgroundColor,
-    paddingHorizontal: Layout.space.base*1.1,
-    paddingVertical: Layout.space.base/1.5,
+    paddingHorizontal: Layout.space.base,
+    paddingVertical: Layout.space.base/2,
   };
 
   const bottomArrowStyles: any = {
@@ -38,7 +38,7 @@ const JamMarkerView = ({ title, description, size, titleColor, backgroundColor, 
       <View style={titleContainerStyles}>
         <TextView 
           color={markerTitleColor}
-          size={11.5}
+          size={10}
           bold={true}
         >
           {i18n.t('JAM')}
