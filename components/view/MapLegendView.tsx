@@ -53,6 +53,11 @@ const MapLegendView = ({ }: Props) => {
                 <TextView
                   color={o.titleColor}
                   backgroundColor={o.backgroundColor}
+                  radius={Layout.radius.round}
+                  paddingHorizontal={6}
+                  paddingVertical={2}
+                  size={10}
+                  bold={true}
                 >
                   {i18n.t('JAM')}
                 </TextView>
@@ -165,6 +170,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     textTransform: 'uppercase',
     color: Layout.colors.gray,
+    fontSize: 11,
   },
   textView: {
     color: Layout.colors.gray,
