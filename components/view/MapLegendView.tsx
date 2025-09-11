@@ -38,7 +38,7 @@ const MapLegendView = () => {
         </TouchableOpacity>
       )}
 
-      <Animated.View style={[styles.legendWrapper, { width: widthAnim }]}>
+      <Animated.View style={[styles.legendWrapper, { width: widthAnim, overflow: 'hidden' }]}>
         <View style={styles.legendContainer}>
           <TextView style={styles.sectionTitle}>
             {i18n.t('Jams')}
