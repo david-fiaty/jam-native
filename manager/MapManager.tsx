@@ -6,6 +6,7 @@ import UserManager from "./UserManager";
 import JamMarkerView from "@/components/view/marker-view/JamMarkerView";
 import ProfileMarkerView from "@/components/view/marker-view/ProfileMarkerView";
 import DataManager from "./DataManager";
+import ScreenManager from "./ScreenManager";
 
 class MapManager {
   renderMarker = (item: any) => {
@@ -48,10 +49,21 @@ class MapManager {
   }
 
   getMarkerCoordinate(item: any) {
-    return {
-      latitude: parseFloat(item?.geolocation_latitude),
-      longitude: parseFloat(item?.geolocation_longitude),
-    };
+    let latitude: number = parseFloat(item?.geolocation_latitude);
+    let longitude: number = parseFloat(item?.geolocation_longitude);
+
+    if (ScreenManager.isWeb()) {
+      return {
+        latitude,
+        longitude,
+      };
+    }
+    else {
+      return {
+        latitude: latitude,
+        longitude: longitude,
+      };
+    }
   }
 
   getMarkerTitle(item: any) {
