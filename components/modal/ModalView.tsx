@@ -20,6 +20,7 @@ import JamCommentsList from '../list/JamCommentsList';
 import ProjectCommentsList from '../list/ProjectCommentsList';
 import VenueTypesList from '../list/VenueTypesList';
 import PrivateProfileSection from '../section/profile/PrivateProfileSection';
+import SearchFiltersForm from '../form/SearchFiltersForm';
 
 type Props = {
   currentSection?: any;
@@ -93,6 +94,11 @@ const ModalView = ({ currentSection, style }: Props) => {
 
   const getModals = () => {
     return [
+      {
+        id: 'SearchFiltersForm',
+        title: i18n.t('Search filters'),
+        render: (params: any) => <SearchFiltersForm {...params} />,
+      },
       {
         id: 'JamForm',
         title: i18n.t('Create a Jam'),

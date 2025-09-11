@@ -94,6 +94,20 @@ class DataManager {
     const set2 = new Set(array2 || []);
     return (array1 || []).filter((o: any) => set2.has(o));
   }
+
+  dateStatus(startDate: string, endDate: string) {
+    let now = moment();
+    let start = moment.utc(startDate).local();
+    let end = moment.utc(endDate).local();
+
+    if (now.isBefore(start)) {
+      return 'coming';
+    } else if (now.isAfter(end)) {
+      return 'past';
+    } else {
+      return 'live';
+    }
+  }
 };
 
 export default (new DataManager());

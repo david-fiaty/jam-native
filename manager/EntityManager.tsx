@@ -187,7 +187,8 @@ class EntityManager {
   }
 
   async getProfessions() {
-    let language = await UserManager.getLanguage();
+    //let language = await UserManager.getLanguage();
+    let language = 'en';
     let options = { lang: language };
 
     return await DataManager.get('professions', options);
@@ -203,7 +204,8 @@ class EntityManager {
   }
 
   async getOrganizationTypes() {
-    let language = await UserManager.getLanguage();
+    //let language = await UserManager.getLanguage();
+    let language = 'en';
     let options = { lang: language };
 
     return await DataManager.get('organizationTypes', options);
