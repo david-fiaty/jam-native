@@ -15,7 +15,7 @@ const SearchFiltersView = () => {
   const router = useRouter();
   const [searchResults, setSearchResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
-  const prevSearchState: any = useRef();
+  const prevSearchState: any = useRef(null);
   
   const renderResultsCount = () => {
     if (Object.keys(searchState.searchFilters).length > 0 || searchState.searchValue.length > 0) {
