@@ -11,6 +11,7 @@ import TabsView from "./TabsView";
 import SearchFiltersView from "./SearchFiltersView";
 import SpinnerView from "./SpinnerView";
 import MapManager from "@/manager/MapManager";
+import MapLegendView from "./MapLegendView";
 
 const JamsMapView = () => {
   const dispatch = useDispatch();
@@ -101,6 +102,8 @@ const JamsMapView = () => {
             {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => MapManager.renderMarker(item))}
             {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => MapManager.renderMarker(item))}
           </GoogleMap>
+
+          <MapLegendView />
         </View>
       </TouchableWithoutFeedback>
     </LoadScript>
