@@ -7,21 +7,23 @@ type Props = {
   align?: string;
   justify?: string;
   scroll?: boolean;
+  gap?: any;
   onPress?: () => void;
   onLayout?: () => void;
   style?: object;
   children?: ReactNode;
 };
 
-const BoxView = ({direction, align, justify, scroll, onPress, onLayout, style, children}: Props) => {
+const BoxView = ({direction, align, justify, scroll, gap, onPress, onLayout, style, children}: Props) => {
   const containerStyle = {
     flexDirection: direction,
     alignItems: align,
     justifyContent: justify,
+    gap: gap || Layout.space.base,
   };
 
   let output = (
-    <View style={[styles.container, containerStyle, style]} onLayout={onLayout}>
+    <View style={[containerStyle, style]} onLayout={onLayout}>
       {children}
     </View>
   );
@@ -45,9 +47,6 @@ const BoxView = ({direction, align, justify, scroll, onPress, onLayout, style, c
 };
 
 const styles = StyleSheet.create({
-  container: {
-    gap: Layout.space.base,
-  },
   scrollContainer: {
     width: '100%',
   },

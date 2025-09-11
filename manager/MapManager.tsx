@@ -107,16 +107,19 @@ class MapManager {
     return [
       {
         key: 'past',
+        label: i18n.t('Past'),
         titleColor: Layout.colors.white,
         backgroundColor: Layout.colors.gray,
       },
       {
         key: 'live',
+        label: i18n.t('Live'),
         titleColor: Layout.colors.white,
         backgroundColor: Layout.colors.primary,
       },
       {
         key: 'coming',
+        label: i18n.t('Coming'),
         titleColor: Layout.colors.primary,
         backgroundColor: Layout.colors.tertiary,
       },
