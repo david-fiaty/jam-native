@@ -45,7 +45,12 @@ const MapLegendView = () => {
           </TextView>
           {MapManager.getJamMarkersConfig().map((o: any) => {
             return (
-              <BoxView key={o.key} direction="row" align="center" justify="flex-start">
+              <BoxView 
+                key={o.key} 
+                direction="row" 
+                align="center" 
+                justify="flex-start"
+              >
                 <TextView
                   color={o.titleColor}
                   backgroundColor={o.backgroundColor}
@@ -94,7 +99,7 @@ const MapLegendView = () => {
             direction="row"
             align="center"
             justify="flex-start"
-            gap={3}
+            gap={4}
           >
             {appState.sectorsData.map((o: any) => {
               return (
