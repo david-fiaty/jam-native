@@ -80,13 +80,23 @@ const MapLegendView = ({ }: Props) => {
           </TextView>
           {appState.sectorsData.map((o: any) => {
             return (
-              <BoxView key={o.id} direction="row" align="center" justify="flex-start">
-                <TextView>{o.name}</TextView>
+              <BoxView 
+                key={o.id} 
+                direction="row" 
+                align="center" 
+                justify="flex-start"
+              >
+                <TextView
+                  backgroundColor={o.color}
+                  color={styles.sectorTag.color}
+                >
+                  {o.name}
+                </TextView>
               </BoxView>
             );
           })}
         </View>
-        
+
         <TouchableOpacity
           style={styles.closeButton}
           onPress={toggleLegend}
@@ -142,7 +152,11 @@ const styles = StyleSheet.create({
   },
   textView: {
     color: Layout.colors.gray,
-  }
+    fontSize: 11,
+  },
+  sectorTag: {
+    color: Layout.colors.white,
+  },
 });
 
 export default MapLegendView;
