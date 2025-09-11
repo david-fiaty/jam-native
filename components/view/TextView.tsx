@@ -5,13 +5,16 @@ type Props = {
   underline?: boolean;
   color?: string;
   backgroundColor?: string;
+  paddingHorizontal?: any;
+  paddingVertical?: any;
+  radius?: any;
   size?: any;
   bold?: boolean;
   style?: any;
   children?: any;
 };
 
-const TextView = ({underline, color, backgroundColor, size, bold, style, children}: Props) => {
+const TextView = ({underline, color, backgroundColor, paddingHorizontal, paddingVertical, radius, size, bold, style, children}: Props) => {
   const containerStyle: any = {
     ...(underline ? styles.underline : {}),
     ...{
@@ -19,6 +22,9 @@ const TextView = ({underline, color, backgroundColor, size, bold, style, childre
       fontSize: size || Layout.fontSize.base,
       fontWeight: bold ? 'bold' : 'normal',
       backgroundColor: backgroundColor || 'transparent',
+      paddingHorizontal: paddingHorizontal || 0,
+      paddingVertical: paddingVertical || 0,
+      borderRadius: radius || 0,
     },
   };
 
