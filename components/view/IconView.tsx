@@ -42,7 +42,7 @@ const IconView = ({
       ...styles[theme],
       ...{
         borderRadius: Layout.radius[radius],
-        padding: padding >= 0 ? padding : defaultPadding,
+        padding: padding || defaultPadding,
       },
     };
 
@@ -72,7 +72,12 @@ const IconView = ({
 
   const textIcon = (
     <View style={styles.containerStyle}>
-      <TextView style={[getIconStyle(), { fontSize: size }]}>
+      <TextView 
+        style={getIconStyle()} 
+        size={size} 
+        paddingHorizontal={padding} 
+        paddingVertical={padding}
+      >
         {label}
       </TextView>
     </View>
