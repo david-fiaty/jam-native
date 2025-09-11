@@ -54,6 +54,11 @@ https://docs.google.com/spreadsheets/d/1q7osx0gzONv_ZLisLiUDJU6UqphqBvXejlyeCUTT
 # NEW SCREENS
 https://www.figma.com/design/9gWmK7TnjDeFidQliB1mkO/JAM-MOBILE?node-id=0-1&p=f
 
+# MAP BUGS
+https://github.com/expo/expo/issues/39301?utm_source=chatgpt.com
+https://github.com/react-native-maps/react-native-maps/issues/5688?utm_source=chatgpt.com
+https://github.com/react-native-maps/react-native-maps/issues/5102
+
 Test users:
 Id: 62 / test888@yopmail.com / Test@12345678
 id: 3 / mitsiomotu@yopmail.com / Password1234

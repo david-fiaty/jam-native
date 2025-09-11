@@ -1,7 +1,7 @@
 
 import React, { useRef, useState } from "react";
 import { useSelector, shallowEqual } from "react-redux";
-import { Text, Animated, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Animated, StyleSheet, TouchableOpacity, View } from "react-native";
 import { Layout } from '@/constants/Layout';
 import IconView from './IconView';
 import TextView from "./TextView";
@@ -9,18 +9,14 @@ import MapManager from "@/manager/MapManager";
 import BoxView from "./BoxView";
 import i18n from "@/translation/i18n";
 
-type Props = {
-
-};
-
-const MapLegendView = ({ }: Props) => {
+const MapLegendView = () => {
   const [isVisible, setIsVisible] = useState(false);
   const widthAnim = useRef(new Animated.Value(0)).current;
   const appState = useSelector((state: any) => state.app, shallowEqual);
-  
+
   const toggleLegend = () => {
     Animated.timing(widthAnim, {
-      toValue: isVisible ? 0 : 200,
+      toValue: isVisible ? 0 : 258,
       duration: 300,
       useNativeDriver: false,
     }).start();
@@ -44,25 +40,80 @@ const MapLegendView = ({ }: Props) => {
 
       <Animated.View style={[styles.legendWrapper, { width: widthAnim }]}>
         <View style={styles.legendContainer}>
-          <TextView>{i18n.t('PROFILES')}</TextView>
-          {MapManager.getProfileMarkersConfig().map((o: any) => {
+          <TextView style={styles.sectionTitle}>
+            {i18n.t('Jams')}
+          </TextView>
+          {MapManager.getJamMarkersConfig().map((o: any) => {
             return (
               <BoxView key={o.key} direction="row" align="center" justify="flex-start">
-                <IconView name={o.icon} />
-                <TextView>{o.label}</TextView>
+                <TextView
+                  color={o.titleColor}
+                  backgroundColor={o.backgroundColor}
+                  radius={Layout.radius.round}
+                  paddingHorizontal={6}
+                  paddingVertical={1}
+                  size={8.5}
+                  bold={true}
+                >
+                  {i18n.t('JAM')}
+                </TextView>
+                <TextView style={styles.textView}>
+                  {o.label}
+                </TextView>
               </BoxView>
             );
           })}
-          
-          <TextView>{i18n.t('INDUSTRIES')}</TextView>
-          {appState.sectorsData.map((o: any) => {
+
+          <TextView style={styles.sectionTitle}>
+            {i18n.t('Profiles')}
+          </TextView>
+          {MapManager.getProfileMarkersConfig().map((o: any) => {
             return (
-              <BoxView key={o.id} direction="row" align="center" justify="flex-start">
-                <TextView>{o.name}</TextView>
+              <BoxView 
+                key={o.key} 
+                direction="row" 
+                align="center" 
+                justify="flex-start"
+                gap={5}
+              >
+                <IconView 
+                  name={o.icon} 
+                  theme="transparent" 
+                  color={styles.textView.color} 
+                />
+                <TextView style={styles.textView}>{o.label}</TextView>
               </BoxView>
             );
           })}
+
+          <TextView style={styles.sectionTitle}>
+            {i18n.t('Industries')}
+          </TextView>
+          <BoxView 
+            style={styles.sectorsContainer}
+            direction="row"
+            align="center"
+            justify="flex-start"
+            gap={5}
+          >
+            {appState.sectorsData.map((o: any) => {
+              return (
+                <TextView
+                  key={o.id}
+                  backgroundColor={o.color}
+                  color={styles.sectorTag.color}
+                  size={styles.sectorTag.fontSize}
+                  paddingHorizontal={5}
+                  paddingVertical={1}
+                  radius={Layout.radius.round}
+                >
+                  {o.name}
+                </TextView>
+              );
+            })}
+          </BoxView>
         </View>
+
         <TouchableOpacity
           style={styles.closeButton}
           onPress={toggleLegend}
@@ -97,8 +148,8 @@ const styles = StyleSheet.create({
   },
   legendWrapper: {
     position: 'absolute',
-    bottom: Layout.space.base * 5,
-    height: 180,
+    bottom: 0,
+    height: 302,
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
@@ -108,9 +159,33 @@ const styles = StyleSheet.create({
     left: 0,
     height: '100%',
     width: '100%',
-    backgroundColor: Layout.colors.secondary,
+    backgroundColor: Layout.colors.white,
     padding: Layout.space.base,
-    gap: Layout.space.base,
+    paddingTop: 0,
+    gap: Layout.space.base/2,
+  },
+  sectionTitle: {
+    textTransform: 'uppercase',
+    color: Layout.colors.gray,
+    fontSize: 10,
+    marginTop: Layout.space.base/2,
+  },
+  textView: {
+    color: Layout.colors.gray,
+    fontSize: 11,
+  },
+  sectorsContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  sectorTag: {
+    color: Layout.colors.white,
+    flexShrink: 0, 
+    includeFontPadding: false,
+    textAlignVertical: 'center',
+    fontSize: 10,
+    padding: Layout.space.base,
   },
 });
 
