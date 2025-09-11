@@ -75,8 +75,7 @@ const IconView = ({
       <TextView 
         style={getIconStyle()} 
         size={size} 
-        paddingHorizontal={padding} 
-        paddingVertical={padding}
+        padding={padding}
       >
         {label}
       </TextView>
