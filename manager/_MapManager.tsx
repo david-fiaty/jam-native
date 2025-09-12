@@ -13,7 +13,10 @@ class MapManager {
   renderMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
       return (
-        <>
+        <NativeMarker
+          key={item.id}
+          coordinate={this.getMarkerCoordinate(item)}
+        >
           {this.isJamMarker(item) && (
             <JamMarkerView
               title={this.getMarkerTitle(item)}
@@ -31,7 +34,7 @@ class MapManager {
               innerColor={this.getProfileMarkerInnerColor(item)}
             />
           )}
-        </>
+        </NativeMarker>
       );
     }
 
@@ -44,6 +47,24 @@ class MapManager {
 
   isJamMarker(item: any) {
     return ['call', 'looking', 'event', 'random'].includes(item?.type);
+  }
+
+  getMarkerCoordinate(item: any) {
+    let latitude: number = parseFloat(item?.geolocation_latitude);
+    let longitude: number = parseFloat(item?.geolocation_longitude);
+
+    if (ScreenManager.isWeb()) {
+      return {
+        latitude,
+        longitude,
+      };
+    }
+    else {
+      return {
+        latitude: latitude,
+        longitude: longitude,
+      };
+    }
   }
 
   getMarkerTitle(item: any) {

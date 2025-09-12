@@ -1,4 +1,4 @@
-import { GoogleMap, LoadScript } from "@react-google-maps/api";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
@@ -52,6 +52,27 @@ const JamsMapView = () => {
     return results[key];
   };
 
+  const getMarkerCoordinate = (item: any) => {
+    let latitude: number = parseFloat(item?.geolocation_latitude);
+    let longitude: number = parseFloat(item?.geolocation_longitude);
+
+    return {
+      latitude,
+      longitude,
+    };
+  };
+
+  const renderMarker = (item: any) => {
+    return (
+      <Marker
+        key={item.id}
+        coordinate={getMarkerCoordinate(item)}
+      >
+        {MapManager.renderMarker(item)}
+      </Marker>
+    );
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
@@ -98,9 +119,9 @@ const JamsMapView = () => {
               disableDefaultUI: true,
             }}
           >
-            {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => MapManager.renderMarker(item))}
-            {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => MapManager.renderMarker(item))}
-            {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => MapManager.renderMarker(item))}
+            {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => renderMarker(item))}
+            {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => renderMarker(item))}
+            {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => renderMarker(item))}
           </GoogleMap>
 
           <MapLegendView />
