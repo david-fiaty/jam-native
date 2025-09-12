@@ -53,12 +53,12 @@ const JamsMapView = () => {
   };
 
   const getMarkerCoordinate = (item: any) => {
-    let latitude: number = parseFloat(item?.geolocation_latitude);
-    let longitude: number = parseFloat(item?.geolocation_longitude);
+    const lat = parseFloat(item?.geolocation_latitude);
+    const lng = parseFloat(item?.geolocation_longitude);
 
     return {
-      latitude: latitude,
-      longitude: longitude,
+      latitude: lat,
+      longitude: lng,
     };
   };
 
