@@ -66,7 +66,7 @@ const JamsMapView = () => {
     return (
       <Marker
         key={item.id}
-        coordinate={getMarkerCoordinate(item)}
+        position={getMarkerCoordinate(item)}
       >
         {MapManager.renderMarker(item)}
       </Marker>
