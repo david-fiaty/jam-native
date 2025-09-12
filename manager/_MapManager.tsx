@@ -1,3 +1,5 @@
+import { Marker as NativeMarker } from "react-native-maps";
+import { Marker as WebMarker } from "@react-google-maps/api";
 import { Layout } from "@/constants/Layout";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
@@ -5,30 +7,38 @@ import UserManager from "./UserManager";
 import JamMarkerView from "@/components/view/marker-view/JamMarkerView";
 import ProfileMarkerView from "@/components/view/marker-view/ProfileMarkerView";
 import DataManager from "./DataManager";
+import ScreenManager from "./ScreenManager";
 
 class MapManager {
   renderMarker = (item: any) => {
-    return (
-      <>
-        {this.isJamMarker(item) && (
-          <JamMarkerView
-            title={this.getMarkerTitle(item)}
-            titleColor={this.getJamMarkerTitleColor(item)}
-            description={this.getMarkerDescription(item)}
-            backgroundColor={this.getJamMarkerBackgroundColor(item)}
-          />
-        )}
+    if (item?.geolocation_longitude && item?.geolocation_latitude) {
+      return (
+        <NativeMarker
+          key={item.id}
+          coordinate={this.getMarkerCoordinate(item)}
+        >
+          {this.isJamMarker(item) && (
+            <JamMarkerView
+              title={this.getMarkerTitle(item)}
+              titleColor={this.getJamMarkerTitleColor(item)}
+              description={this.getMarkerDescription(item)}
+              backgroundColor={this.getJamMarkerBackgroundColor(item)}
+            />
+          )}
 
-        {this.isProfileMarker(item) && (
-          <ProfileMarkerView
-            iconName={this.getProfileMarkerIcon(item)}
-            title={this.getMarkerTitle(item)}
-            description={this.getMarkerDescription(item)}
-            innerColor={this.getProfileMarkerInnerColor(item)}
-          />
-        )}
-      </>
-    );
+          {this.isProfileMarker(item) && (
+            <ProfileMarkerView
+              iconName={this.getProfileMarkerIcon(item)}
+              title={this.getMarkerTitle(item)}
+              description={this.getMarkerDescription(item)}
+              innerColor={this.getProfileMarkerInnerColor(item)}
+            />
+          )}
+        </NativeMarker>
+      );
+    }
+
+    return null;
   }
 
   isProfileMarker(item: any) {
@@ -37,6 +47,24 @@ class MapManager {
 
   isJamMarker(item: any) {
     return ['call', 'looking', 'event', 'random'].includes(item?.type);
+  }
+
+  getMarkerCoordinate(item: any) {
+    let latitude: number = parseFloat(item?.geolocation_latitude);
+    let longitude: number = parseFloat(item?.geolocation_longitude);
+
+    if (ScreenManager.isWeb()) {
+      return {
+        latitude,
+        longitude,
+      };
+    }
+    else {
+      return {
+        latitude: latitude,
+        longitude: longitude,
+      };
+    }
   }
 
   getMarkerTitle(item: any) {

@@ -1,4 +1,4 @@
-import MapView, { PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
 import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
@@ -52,6 +52,29 @@ const JamsMapView = () => {
     return results[key];
   };
 
+  const getMarkerCoordinate = (item: any) => {
+    const lat = parseFloat(item?.geolocation_latitude);
+    const lng = parseFloat(item?.geolocation_longitude);
+
+    return {
+      latitude: lat,
+      longitude: lng,
+    };
+  };
+
+  const renderMarker = (item: any) => {
+    if (item?.geolocation_longitude && item?.geolocation_latitude) {
+      return (
+        <Marker
+          key={item.id}
+          coordinate={getMarkerCoordinate(item)}
+        >
+          {MapManager.renderMarker(item)}
+        </Marker>
+      );
+    }
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
@@ -96,9 +119,9 @@ const JamsMapView = () => {
           showsUserLocation={true}
           showsMyLocationButton={true}
         >
-          {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => MapManager.renderMarker(item))}
-          {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => MapManager.renderMarker(item))}
-          {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => MapManager.renderMarker(item))}
+          {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => renderMarker(item))}
+          {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => renderMarker(item))}
+          {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => renderMarker(item))}
         </MapView>
 
         <MapLegendView />
