@@ -8,31 +8,27 @@ import DataManager from "./DataManager";
 
 class MapManager {
   renderMarker = (item: any) => {
-    if (item?.geolocation_longitude && item?.geolocation_latitude) {
-      return (
-        <>
-          {this.isJamMarker(item) && (
-            <JamMarkerView
-              title={this.getMarkerTitle(item)}
-              titleColor={this.getJamMarkerTitleColor(item)}
-              description={this.getMarkerDescription(item)}
-              backgroundColor={this.getJamMarkerBackgroundColor(item)}
-            />
-          )}
+    return (
+      <>
+        {this.isJamMarker(item) && (
+          <JamMarkerView
+            title={this.getMarkerTitle(item)}
+            titleColor={this.getJamMarkerTitleColor(item)}
+            description={this.getMarkerDescription(item)}
+            backgroundColor={this.getJamMarkerBackgroundColor(item)}
+          />
+        )}
 
-          {this.isProfileMarker(item) && (
-            <ProfileMarkerView
-              iconName={this.getProfileMarkerIcon(item)}
-              title={this.getMarkerTitle(item)}
-              description={this.getMarkerDescription(item)}
-              innerColor={this.getProfileMarkerInnerColor(item)}
-            />
-          )}
-        </>
-      );
-    }
-
-    return null;
+        {this.isProfileMarker(item) && (
+          <ProfileMarkerView
+            iconName={this.getProfileMarkerIcon(item)}
+            title={this.getMarkerTitle(item)}
+            description={this.getMarkerDescription(item)}
+            innerColor={this.getProfileMarkerInnerColor(item)}
+          />
+        )}
+      </>
+    );
   }
 
   isProfileMarker(item: any) {
