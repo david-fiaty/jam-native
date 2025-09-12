@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
-import { WebView } from "react-native-webview";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
@@ -35,10 +34,10 @@ const JamsMapView = () => {
     }
 
     return {
-      lat: latitude,
-      lng: longitude,
-      //latitudeDelta: latitudeDelta,
-      //longitudeDelta: longitudeDelta,
+      latitude: latitude,
+      longitude: longitude,
+      latitudeDelta: latitudeDelta,
+      longitudeDelta: longitudeDelta,
     };
   };
 
@@ -76,43 +75,6 @@ const JamsMapView = () => {
     }
   };
 
-  const html = `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <style>
-          html, body, #root {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-          }
-        </style>
-        <script src="https://maps.googleapis.com/maps/api/js?key=${Config.mapApiKey}"></script>
-      </head>
-      <body>
-        <div id="root"></div>
-        <script>
-          function initMap() {
-            const map = new google.maps.Map(document.getElementById("root"), {
-              center: { lat: 6.1692433, lng: 1.2220817 },
-              zoom: 18,
-            });
-            
-            new google.maps.Marker({
-              map: map,
-              position: { lat: 6.1692433, lng: 1.2220817 },
-              title: "hello",
-            });
-          }
-
-          window.onload = initMap;
-        </script>
-      </body>
-    </html>
-  `;
-
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
@@ -138,25 +100,33 @@ const JamsMapView = () => {
   if (!currentLocation?.latitude || !currentLocation?.longitude || !isLoaded) return <SpinnerView />;
 
   return (
-    <View style={styles.container}>
-      <TabsView
-        tabs={searchTabs}
-        currentTab={searchState.currentTab}
-        onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
-      />
+    <TouchableWithoutFeedback>
+      <View style={styles.container}>
 
-      <SearchFiltersView />
-
-      <View style={styles.map}>
-        <WebView
-          originWhitelist={["*"]}
-          source={{ html }}
-          javaScriptEnabled={true}
-          domStorageEnabled={true}
-          style={styles.map}
+        <TabsView
+          tabs={searchTabs}
+          currentTab={searchState.currentTab}
+          onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
         />
+
+        <SearchFiltersView />
+
+        <MapView
+          style={styles.map}
+          provider={PROVIDER_DEFAULT}
+          initialRegion={getInitialRegion()}
+          customMapStyle={Layout.mapStyle}
+          showsUserLocation={true}
+          showsMyLocationButton={true}
+        >
+          {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => renderMarker(item))}
+          {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => renderMarker(item))}
+          {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => renderMarker(item))}
+        </MapView>
+
+        <MapLegendView />
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
