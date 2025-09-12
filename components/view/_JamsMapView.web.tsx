@@ -1,26 +1,28 @@
-import { GoogleMap, LoadScript, Marker, OverlayView } from "@react-google-maps/api";
-import { useState, useEffect, useRef } from "react";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
+import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import SearchManager from "@/manager/SearchManager";
 import TabsView from "./TabsView";
 import SearchFiltersView from "./SearchFiltersView";
 import SpinnerView from "./SpinnerView";
-import MapManager from "@/manager/MapManager";
-import MapLegendView from "./MapLegendView";
 
-const JamsMapView = () => {
+type Props = {
+  idArray?: any;
+};
+
+const JamsMapView = ({ idArray }: Props) => {
   const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [searchResults, setSearchResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
-  const prevSearchState: any = useRef(null);
   const searchTabs: any[] = SearchManager.getSearchTabs();
+  const markerImage = require('@/assets/images/logo-55.png');
 
   const getInitialRegion = () => {
     let latitude: any = Config.defaultLocation.latitude;
@@ -41,17 +43,6 @@ const JamsMapView = () => {
     };
   };
 
-  const getTabResults = (key: string) => {
-    let results: any = {
-      ...searchResults,
-      ...{
-        [key]: SearchManager.getTabResults(key, searchState.currentTab, searchResults)
-      },
-    };
-
-    return results[key];
-  };
-
   const getMarkerCoordinate = (item: any) => {
     const lat = parseFloat(item?.geolocation_latitude);
     const lng = parseFloat(item?.geolocation_longitude);
@@ -59,18 +50,32 @@ const JamsMapView = () => {
     return { lat, lng };
   };
 
-  const renderMarker = (item: any) => {
+  const getMarkerTitle = (item: any) => {
+    return item?.title || i18n.t('No title available');
+  };
+
+  const getMarkerDescription = (item: any) => {
+    return item?.caption || '';
+  };
+
+  const renderJamMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
       return (
-        <OverlayView
+        <Marker
           key={item.id}
           position={getMarkerCoordinate(item)}
-          mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-        >
-          {MapManager.renderMarker(item)}
-        </OverlayView>
+        />
       );
     }
+
+    return null;
+  };
+
+  const getTabResults = (key: string) => {
+    let data: any = JSON.parse(searchState.currentResults) || {};
+    let results: any[] = SearchManager.getTabResults(key, searchState.currentTab, data);
+
+    return results || [];
   };
 
   useEffect(() => {
@@ -86,14 +91,6 @@ const JamsMapView = () => {
       setCurrentLocation(await UserManager.getLocation());
     })();
   }, [searchState, searchTabs, isLoaded]);
-
-  useEffect(() => {
-    if (prevSearchState.current?.currentResults !== searchState.currentResults) {
-      setSearchResults(JSON.parse(searchState.currentResults) || {});
-
-      prevSearchState.current = searchState;
-    }
-  }, [searchState]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -119,12 +116,10 @@ const JamsMapView = () => {
               disableDefaultUI: true,
             }}
           >
-            {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => renderMarker(item))}
-            {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => renderMarker(item))}
-            {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => renderMarker(item))}
+            {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => renderJamMarker(item))}
+            {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => renderJamMarker(item))}
+            {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => renderJamMarker(item))}
           </GoogleMap>
-
-          <MapLegendView />
         </View>
       </TouchableWithoutFeedback>
     </LoadScript>
