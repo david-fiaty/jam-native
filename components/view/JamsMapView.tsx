@@ -101,9 +101,9 @@ const JamsMapView = () => {
             });
             
             new google.maps.Marker({
+              map: map,
               position: { lat: 6.1692433, lng: 1.2220817 },
-              map,
-              title: 'hello',
+              title: "hello",
             });
           }
 
