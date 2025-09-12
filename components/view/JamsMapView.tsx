@@ -109,7 +109,6 @@ const JamsMapView = () => {
           function addMarkers(markers) {
             if (!map) return;
 
-
             new google.maps.Marker({
               position: { lat: 37.7749, lng: -122.4194 },
               map,
@@ -132,7 +131,8 @@ const JamsMapView = () => {
   const onMessage = useCallback((event: any) => {
     if (event.nativeEvent.data === "map-ready") {
       //const js = `addMarkers(${JSON.stringify(markers)}); true;`;
-      //webViewRef.current?.injectJavaScript(js);
+      const js = `addMarkers(${JSON.stringify([])}); true;`;
+      webViewRef.current?.injectJavaScript(js);
     }
   }, []);
 
