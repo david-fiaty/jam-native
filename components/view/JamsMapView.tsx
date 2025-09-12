@@ -63,14 +63,16 @@ const JamsMapView = () => {
   };
 
   const renderMarker = (item: any) => {
-    return (
-      <Marker
-        key={item.id}
-        coordinate={getMarkerCoordinate(item)}
-      >
-        {MapManager.renderMarker(item)}
-      </Marker>
-    );
+    if (item?.geolocation_longitude && item?.geolocation_latitude) {
+      return (
+        <Marker
+          key={item.id}
+          coordinate={getMarkerCoordinate(item)}
+        >
+          {MapManager.renderMarker(item)}
+        </Marker>
+      );
+    }
   };
 
   useEffect(() => {
