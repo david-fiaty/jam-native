@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
-import { WebView } from "react-native-webview";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
@@ -35,10 +34,10 @@ const JamsMapView = () => {
     }
 
     return {
-      lat: latitude,
-      lng: longitude,
-      //latitudeDelta: latitudeDelta,
-      //longitudeDelta: longitudeDelta,
+      latitude: latitude,
+      longitude: longitude,
+      latitudeDelta: latitudeDelta,
+      longitudeDelta: longitudeDelta,
     };
   };
 
@@ -76,41 +75,6 @@ const JamsMapView = () => {
     }
   };
 
-  const html = `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <style>
-          html, body, #root {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-          }
-        </style>
-        <script src="https://maps.googleapis.com/maps/api/js?key=${Config.mapApiKey}"></script>
-      </head>
-      <body>
-        <div id="root"></div>
-        <script>
-          function initMap() {
-            const map = new google.maps.Map(document.getElementById("root"), {
-              center: { lat: 6.1692433, lng: 1.2220817 },
-              zoom: 10,
-            });
-            
-            new google.maps.Marker({
-              position: { lat: 6.1692433, lng: 1.2220817 },
-              map,
-            });
-          }
-          window.onload = initMap;
-        </script>
-      </body>
-    </html>
-  `;
-
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
@@ -134,28 +98,6 @@ const JamsMapView = () => {
   }, [searchState]);
 
   if (!currentLocation?.latitude || !currentLocation?.longitude || !isLoaded) return <SpinnerView />;
-
-  return (
-    <View style={styles.container}>
-      <TabsView
-        tabs={searchTabs}
-        currentTab={searchState.currentTab}
-        onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
-      />
-
-      <SearchFiltersView />
-
-      <View style={styles.map}>
-        <WebView
-          originWhitelist={["*"]}
-          source={{ html }}
-          javaScriptEnabled={true}
-          domStorageEnabled={true}
-          style={styles.map}
-        />
-      </View>
-    </View>
-  );
 
   return (
     <TouchableWithoutFeedback>
