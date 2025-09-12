@@ -97,14 +97,16 @@ const JamsMapView = () => {
           function initMap() {
             const map = new google.maps.Map(document.getElementById("root"), {
               center: { lat: 6.1692433, lng: 1.2220817 },
-              zoom: 10,
+              zoom: 18,
             });
             
             new google.maps.Marker({
               position: { lat: 6.1692433, lng: 1.2220817 },
               map,
+              title: 'hello',
             });
           }
+
           window.onload = initMap;
         </script>
       </body>
@@ -155,36 +157,6 @@ const JamsMapView = () => {
         />
       </View>
     </View>
-  );
-
-  return (
-    <TouchableWithoutFeedback>
-      <View style={styles.container}>
-
-        <TabsView
-          tabs={searchTabs}
-          currentTab={searchState.currentTab}
-          onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
-        />
-
-        <SearchFiltersView />
-
-        <MapView
-          style={styles.map}
-          provider={PROVIDER_DEFAULT}
-          initialRegion={getInitialRegion()}
-          customMapStyle={Layout.mapStyle}
-          showsUserLocation={true}
-          showsMyLocationButton={true}
-        >
-          {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => renderMarker(item))}
-          {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => renderMarker(item))}
-          {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => renderMarker(item))}
-        </MapView>
-
-        <MapLegendView />
-      </View>
-    </TouchableWithoutFeedback>
   );
 };
 
