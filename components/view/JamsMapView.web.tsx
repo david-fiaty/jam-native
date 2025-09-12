@@ -1,4 +1,4 @@
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { GoogleMap, LoadScript, Marker, OverlayView } from "@react-google-maps/api";
 import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
@@ -62,12 +62,13 @@ const JamsMapView = () => {
   const renderMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
       return (
-        <Marker
+        <OverlayView
           key={item.id}
           position={getMarkerCoordinate(item)}
+          mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
         >
           {MapManager.renderMarker(item)}
-        </Marker>
+        </OverlayView>
       );
     }
   };
