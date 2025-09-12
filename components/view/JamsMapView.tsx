@@ -1,5 +1,5 @@
 import MapView, { Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
@@ -21,7 +21,6 @@ const JamsMapView = () => {
   const [searchResults, setSearchResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const prevSearchState: any = useRef(null);
-  const webViewRef = useRef<WebView>(null);
   const searchTabs: any[] = SearchManager.getSearchTabs();
 
   const getInitialRegion = () => {
@@ -97,44 +96,20 @@ const JamsMapView = () => {
         <script>
           function initMap() {
             const map = new google.maps.Map(document.getElementById("root"), {
-              center: { lat: 37.7749, lng: -122.4194 },
+              center: { lat: 6.1692433, lng: 1.2220817 },
               zoom: 10,
             });
-
-            window.ReactNativeWebView.postMessage("map-ready");
-          }
-
-          window.onload = initMap;
-
-          function addMarkers(markers) {
-            if (!map) return;
-
+            
             new google.maps.Marker({
-              position: { lat: 37.7749, lng: -122.4194 },
+              position: { lat: 6.1692433, lng: 1.2220817 },
               map,
             });
-            
-            markers.forEach(m => {
-              new google.maps.Marker({
-                position: { lat: m.lat, lng: m.lng },
-                map,
-                title: m.title || "",
-              });
-            });
           }
-
+          window.onload = initMap;
         </script>
       </body>
     </html>
   `;
-
-  const onMessage = useCallback((event: any) => {
-    if (event.nativeEvent.data === "map-ready") {
-      //const js = `addMarkers(${JSON.stringify(markers)}); true;`;
-      const js = `addMarkers(${JSON.stringify([])}); true;`;
-      webViewRef.current?.injectJavaScript(js);
-    }
-  }, []);
 
   useEffect(() => {
     (async () => {
@@ -172,12 +147,11 @@ const JamsMapView = () => {
 
       <View style={styles.map}>
         <WebView
-          style={styles.map}
           originWhitelist={["*"]}
           source={{ html }}
           javaScriptEnabled={true}
           domStorageEnabled={true}
-          onMessage={onMessage}
+          style={styles.map}
         />
       </View>
     </View>
