@@ -1,5 +1,3 @@
-import { Marker as NativeMarker } from "react-native-maps";
-import { Marker as WebMarker } from "@react-google-maps/api";
 import { Layout } from "@/constants/Layout";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
@@ -7,7 +5,6 @@ import UserManager from "./UserManager";
 import JamMarkerView from "@/components/view/marker-view/JamMarkerView";
 import ProfileMarkerView from "@/components/view/marker-view/ProfileMarkerView";
 import DataManager from "./DataManager";
-import ScreenManager from "./ScreenManager";
 
 class MapManager {
   renderMarker = (item: any) => {
