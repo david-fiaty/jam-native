@@ -13,10 +13,11 @@ type Props = {
   titleColor?: string;
   outerColor?: string;
   innerColor?: string;
+  zoomLevel?: any;
   children?: ReactNode;
 };
 
-const ProfileMarkerView = ({ title, description, size, iconName, titleColor, outerColor, innerColor, children }: Props) => {
+const ProfileMarkerView = ({ title, description, size, iconName, titleColor, outerColor, innerColor, zoomLevel, children }: Props) => {
   const markerSize: number = size || 26;
   const markerOuterColor: string = outerColor || 'white';
   const markerInnerColor: string = innerColor || 'red';
@@ -46,6 +47,7 @@ const ProfileMarkerView = ({ title, description, size, iconName, titleColor, out
     borderTopColor: markerOuterColor,
   };
 
+  console.log('---', zoomLevel);
   return (
     <View style={styles.container}>
       {title && (

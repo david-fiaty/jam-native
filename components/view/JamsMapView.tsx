@@ -17,7 +17,7 @@ const JamsMapView = () => {
   const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [zoom, setZoom] = useState<number>(0);
+  const [zoomLevel, setZoomLevel] = useState<number>(0);
   const [searchResults, setSearchResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const prevSearchState: any = useRef(null);
@@ -70,21 +70,21 @@ const JamsMapView = () => {
           key={item.id}
           coordinate={getMarkerCoordinate(item)}
         >
-          {MapManager.renderMarker(item)}
+          {MapManager.renderMarker(item, zoomLevel)}
         </Marker>
       );
     }
   };
 
   const getZoomLevel = (region: any) => {
-    
-    const angle = region.longitudeDelta;
-    return Math.round(Math.log(360 / angle) / Math.LN2);
+    let angle = region.longitudeDelta;
+    let value = Math.round(Math.log(360 / angle) / Math.LN2); 
+
+    return value;
   };
 
   const onRegionChangeComplete = (region: any) => {
-    const newZoom = getZoomLevel(region);
-    setZoom(newZoom);
+    setZoomLevel(getZoomLevel(region));
   };
 
   useEffect(() => {

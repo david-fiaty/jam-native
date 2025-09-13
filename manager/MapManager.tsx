@@ -7,7 +7,7 @@ import ProfileMarkerView from "@/components/view/marker-view/ProfileMarkerView";
 import DataManager from "./DataManager";
 
 class MapManager {
-  renderMarker = (item: any) => {
+  renderMarker = (item: any, zoomLevel?: any) => {
     return (
       <>
         {this.isJamMarker(item) && (
@@ -16,6 +16,7 @@ class MapManager {
             titleColor={this.getJamMarkerTitleColor(item)}
             description={this.getMarkerDescription(item)}
             backgroundColor={this.getJamMarkerBackgroundColor(item)}
+            zoomLevel={zoomLevel}
           />
         )}
 
@@ -25,6 +26,7 @@ class MapManager {
             title={this.getMarkerTitle(item)}
             description={this.getMarkerDescription(item)}
             innerColor={this.getProfileMarkerInnerColor(item)}
+            zoomLevel={zoomLevel}
           />
         )}
       </>
