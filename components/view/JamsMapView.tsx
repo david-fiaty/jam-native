@@ -22,7 +22,6 @@ const JamsMapView = () => {
   const [searchResults, setSearchResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const prevSearchState: any = useRef(null);
-  const markerRef = useRef(null);
   const searchTabs: any[] = SearchManager.getSearchTabs();
 
   const getInitialRegion = () => {
@@ -70,7 +69,6 @@ const JamsMapView = () => {
       return (
         <Marker
           key={item.id}
-          ref={markerRef}
           coordinate={getMarkerCoordinate(item)}
         >
           {MapManager.renderMarker(item, zoomLevel)}
