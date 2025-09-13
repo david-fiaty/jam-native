@@ -47,7 +47,10 @@ class MapManager {
 
     if (this.isProfileMarker(item)) {
       title = UserManager.getProfileDisplayName(item);
-      title = ScreenManager.isWeb() ? title : DataManager.truncateText(title, 10);
+      if (!ScreenManager.isWeb()) {
+        title = DataManager.truncateText(title, 10);
+        title = String(title).charAt(0).toUpperCase() + String(title).slice(1).toLowerCase(); 
+      }
     }
     else if (this.isJamMarker(item)) {
       title = item?.title;
