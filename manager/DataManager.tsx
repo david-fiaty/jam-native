@@ -108,6 +108,20 @@ class DataManager {
       return 'live';
     }
   }
+
+  truncateText(text: string, maxLength: number, ellipsis?: any) {
+    if (text?.length <= maxLength) return text;
+
+    ellipsis = ellipsis || '...';
+    let truncated = text.slice(0, maxLength);
+    let lastSpaceIndex = truncated.lastIndexOf(' ');
+
+    if (lastSpaceIndex > 0) {
+      truncated = truncated.slice(0, lastSpaceIndex);
+    }
+
+    return truncated + ellipsis;
+  }
 };
 
 export default (new DataManager());

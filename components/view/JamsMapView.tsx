@@ -17,6 +17,7 @@ const JamsMapView = () => {
   const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [zoomLevel, setZoomLevel] = useState<number>(0);
   const [searchResults, setSearchResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const prevSearchState: any = useRef(null);
@@ -69,10 +70,21 @@ const JamsMapView = () => {
           key={item.id}
           coordinate={getMarkerCoordinate(item)}
         >
-          {MapManager.renderMarker(item)}
+          {MapManager.renderMarker(item, zoomLevel)}
         </Marker>
       );
     }
+  };
+
+  const getZoomLevel = (region: any) => {
+    let angle = region.longitudeDelta;
+    let value = Math.round(Math.log(360 / angle) / Math.LN2); 
+
+    return value;
+  };
+
+  const onRegionChangeComplete = (region: any) => {
+    setZoomLevel(getZoomLevel(region));
   };
 
   useEffect(() => {
@@ -118,6 +130,7 @@ const JamsMapView = () => {
           customMapStyle={Layout.mapStyle}
           showsUserLocation={true}
           showsMyLocationButton={true}
+          onRegionChangeComplete={onRegionChangeComplete}
         >
           {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => renderMarker(item))}
           {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => renderMarker(item))}
