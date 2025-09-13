@@ -75,7 +75,7 @@ const JamsMapView = () => {
 
           <Callout>
             <View>
-              <TextView>Hello worlddddddddd dspsifvpsfv asivnpsfvn</TextView>
+              <TextView>Test tooltip callout</TextView>
             </View>
           </Callout>
         </Marker>
