@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { Input } from "@rneui/themed";
+import { Input } from '@rneui/themed';
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
