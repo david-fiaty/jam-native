@@ -47,7 +47,6 @@ const ProfileMarkerView = ({ title, description, size, iconName, titleColor, out
     borderTopColor: markerOuterColor,
   };
 
-  console.log('---', zoomLevel);
   return (
     <View style={styles.container}>
       {title && (

@@ -1,4 +1,5 @@
 import MapView, { Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
+import ClusterMapView from "react-native-map-clustering";
 import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
@@ -12,6 +13,7 @@ import SearchManager from "@/manager/SearchManager";
 import TabsView from "./TabsView";
 import MapManager from "@/manager/MapManager";
 import MapLegendView from "./MapLegendView";
+import TextView from "./TextView";
 
 const JamsMapView = () => {
   const dispatch = useDispatch();
@@ -78,7 +80,7 @@ const JamsMapView = () => {
 
   const getZoomLevel = (region: any) => {
     let angle = region.longitudeDelta;
-    let value = Math.round(Math.log(360 / angle) / Math.LN2); 
+    let value = Math.round(Math.log(360 / angle) / Math.LN2);
 
     return value;
   };
@@ -123,7 +125,7 @@ const JamsMapView = () => {
 
         <SearchFiltersView />
 
-        <MapView
+        <ClusterMapView
           style={styles.map}
           provider={PROVIDER_DEFAULT}
           initialRegion={getInitialRegion()}
@@ -131,11 +133,23 @@ const JamsMapView = () => {
           showsUserLocation={true}
           showsMyLocationButton={true}
           onRegionChangeComplete={onRegionChangeComplete}
+          clusterColor="transparent"
+          renderCluster={(cluster) => {
+            const { coordinate, pointCount } = cluster;
+
+            return (
+              <Marker coordinate={coordinate}>
+                <View style={styles.clusterContainer}>
+                  <TextView>{pointCount}</TextView>
+                </View>
+              </Marker>
+            );
+          }}
         >
           {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => renderMarker(item))}
           {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => renderMarker(item))}
           {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => renderMarker(item))}
-        </MapView>
+        </ClusterMapView>
 
         <MapLegendView />
       </View>
@@ -153,6 +167,17 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1,
+  },
+  clusterContainer: {
+    backgroundColor: "#FF6B6B",
+    borderRadius: 25,
+    padding: 10,
+    borderWidth: 2,
+    borderColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    minWidth: 40,
+    minHeight: 40,
   },
 });
 
