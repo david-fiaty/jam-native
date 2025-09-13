@@ -12,11 +12,12 @@ type Props = {
   titleColor?: string;
   outerColor?: string;
   innerColor?: string;
+  zoomLevel?: any;
   children?: ReactNode;
 };
 
-const ProfileMarkerView = ({ title, description, size, iconName, titleColor, outerColor, innerColor, children }: Props) => {
-  const markerSize: number = size || 32;
+const ProfileMarkerView = ({ title, description, size, iconName, titleColor, outerColor, innerColor, zoomLevel, children }: Props) => {
+  const markerSize: number = size || 26;
   const markerOuterColor: string = outerColor || 'white';
   const markerInnerColor: string = innerColor || 'red';
   const markerTitleColor: string = titleColor || markerInnerColor;
@@ -47,11 +48,16 @@ const ProfileMarkerView = ({ title, description, size, iconName, titleColor, out
 
   return (
     <View style={styles.container}>
-      {/*title && (
+      {title && (
         <View style={styles.titleContainer}>
-          <TextView color={markerTitleColor}>{title}</TextView>
+          <TextView 
+            color={markerTitleColor} 
+            size={styles.titleContainer.fontSize}
+          >
+            {title}
+          </TextView>
         </View>
-      )*/}
+      )}
 
       <View style={[styles.outerCircle, outerCircleStyles]}>
         <View style={[styles.innerCircle, innerCircleStyles]}>
@@ -81,7 +87,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   titleContainer: {
-    marginBottom: Layout.space.base,
+    //marginBottom: Layout.space.base,
+    maxWidth: 60,
+    fontSize: 10,
   },
   outerCircle: {
     flexDirection: 'column',
@@ -91,8 +99,7 @@ const styles = StyleSheet.create({
   innerCircle: {
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'flex-start',
-    paddingTop: Layout.space.base/1.4,
+    justifyContent: 'center',
   },
   bottomArrow: {
     width: 0,

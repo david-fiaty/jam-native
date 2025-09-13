@@ -1,4 +1,4 @@
-import MapView, { PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
 import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
@@ -17,6 +17,7 @@ const JamsMapView = () => {
   const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [zoomLevel, setZoomLevel] = useState<number>(0);
   const [searchResults, setSearchResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const prevSearchState: any = useRef(null);
@@ -50,6 +51,40 @@ const JamsMapView = () => {
     };
 
     return results[key];
+  };
+
+  const getMarkerCoordinate = (item: any) => {
+    const lat = parseFloat(item?.geolocation_latitude);
+    const lng = parseFloat(item?.geolocation_longitude);
+
+    return {
+      latitude: lat,
+      longitude: lng,
+    };
+  };
+
+  const renderMarker = (item: any) => {
+    if (item?.geolocation_longitude && item?.geolocation_latitude) {
+      return (
+        <Marker
+          key={item.id}
+          coordinate={getMarkerCoordinate(item)}
+        >
+          {MapManager.renderMarker(item, zoomLevel)}
+        </Marker>
+      );
+    }
+  };
+
+  const getZoomLevel = (region: any) => {
+    let angle = region.longitudeDelta;
+    let value = Math.round(Math.log(360 / angle) / Math.LN2); 
+
+    return value;
+  };
+
+  const onRegionChangeComplete = (region: any) => {
+    setZoomLevel(getZoomLevel(region));
   };
 
   useEffect(() => {
@@ -95,10 +130,11 @@ const JamsMapView = () => {
           customMapStyle={Layout.mapStyle}
           showsUserLocation={true}
           showsMyLocationButton={true}
+          onRegionChangeComplete={onRegionChangeComplete}
         >
-          {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => MapManager.renderMarker(item))}
-          {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => MapManager.renderMarker(item))}
-          {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => MapManager.renderMarker(item))}
+          {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => renderMarker(item))}
+          {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => renderMarker(item))}
+          {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => renderMarker(item))}
         </MapView>
 
         <MapLegendView />
