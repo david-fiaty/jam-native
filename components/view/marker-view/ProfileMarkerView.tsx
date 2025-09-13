@@ -3,7 +3,6 @@ import { StyleSheet, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import IconView from "../IconView";
 import TextView from "../TextView";
-import DataManager from "@/manager/DataManager";
 
 type Props = {
   title?: string;
@@ -55,7 +54,7 @@ const ProfileMarkerView = ({ title, description, size, iconName, titleColor, out
             color={markerTitleColor} 
             size={styles.titleContainer.fontSize}
           >
-            {DataManager.truncateText(title, 10)}
+            {title}
           </TextView>
         </View>
       )}
