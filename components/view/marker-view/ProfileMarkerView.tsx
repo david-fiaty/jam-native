@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import IconView from "../IconView";
 import TextView from "../TextView";
+import DataManager from "@/manager/DataManager";
 
 type Props = {
   title?: string;
@@ -16,7 +17,7 @@ type Props = {
 };
 
 const ProfileMarkerView = ({ title, description, size, iconName, titleColor, outerColor, innerColor, children }: Props) => {
-  const markerSize: number = size || 32;
+  const markerSize: number = size || 26;
   const markerOuterColor: string = outerColor || 'white';
   const markerInnerColor: string = innerColor || 'red';
   const markerTitleColor: string = titleColor || markerInnerColor;
@@ -53,7 +54,7 @@ const ProfileMarkerView = ({ title, description, size, iconName, titleColor, out
             color={markerTitleColor} 
             size={styles.titleContainer.fontSize}
           >
-            {title}
+            {DataManager.truncateText(title, 10)}
           </TextView>
         </View>
       )}
@@ -98,8 +99,7 @@ const styles = StyleSheet.create({
   innerCircle: {
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'flex-start',
-    paddingTop: Layout.space.base/1.4,
+    justifyContent: 'center',
   },
   bottomArrow: {
     width: 0,
