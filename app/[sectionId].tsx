@@ -7,11 +7,11 @@ import SectionView from '@/components/view/SectionView';
 
 export default () => {
   return (
-    
+    <ThemeProvider theme={BaseTheme}>
       <SafeAreaView style={styles.container}>
         <SectionView />
       </SafeAreaView>
-    
+    </ThemeProvider>
   );
 }
 
