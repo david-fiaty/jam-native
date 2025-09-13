@@ -47,11 +47,16 @@ const ProfileMarkerView = ({ title, description, size, iconName, titleColor, out
 
   return (
     <View style={styles.container}>
-      {/*title && (
+      {title && (
         <View style={styles.titleContainer}>
-          <TextView color={markerTitleColor}>{title}</TextView>
+          <TextView 
+            color={markerTitleColor} 
+            size={styles.titleContainer.fontSize}
+          >
+            {title}
+          </TextView>
         </View>
-      )*/}
+      )}
 
       <View style={[styles.outerCircle, outerCircleStyles]}>
         <View style={[styles.innerCircle, innerCircleStyles]}>
@@ -81,7 +86,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   titleContainer: {
-    marginBottom: Layout.space.base,
+    //marginBottom: Layout.space.base,
+    maxWidth: 60,
+    fontSize: 10,
   },
   outerCircle: {
     flexDirection: 'column',
