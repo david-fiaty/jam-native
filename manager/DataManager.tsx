@@ -109,9 +109,10 @@ class DataManager {
     }
   }
 
-  truncateText(text: string, maxLength: number) {
+  truncateText(text: string, maxLength: number, ellipsis?: any) {
     if (text?.length <= maxLength) return text;
 
+    ellipsis = ellipsis || '...';
     let truncated = text.slice(0, maxLength);
     let lastSpaceIndex = truncated.lastIndexOf(' ');
 
@@ -119,7 +120,7 @@ class DataManager {
       truncated = truncated.slice(0, lastSpaceIndex);
     }
 
-    return truncated + '...';
+    return truncated + ellipsis;
   }
 };
 
