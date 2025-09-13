@@ -10,10 +10,11 @@ type Props = {
   size?: number;
   titleColor?: string;
   backgroundColor?: string;
+  zoomLevel?: any;
   children?: ReactNode;
 };
 
-const JamMarkerView = ({ title, description, size, titleColor, backgroundColor, children }: Props) => {
+const JamMarkerView = ({ title, description, size, titleColor, backgroundColor, zoomLevel, children }: Props) => {
   const markerSize: number = size || 35;
   const markerBackgroundColor: string = backgroundColor || 'white';
   const markerTitleColor: string = titleColor || 'black';

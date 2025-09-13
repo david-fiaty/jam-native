@@ -3,7 +3,6 @@ import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
 import TextView from "@/components/view/TextView";
 import JamViewCollapsible from "./JamViewCollapsible";
-import StaticData from "@/constants/StaticData";
 import i18n from "@/translation/i18n";
 import DataManager from "@/manager/DataManager";
 import EntityManager from "@/manager/EntityManager";
@@ -15,25 +14,12 @@ type Props = {
 
 const JamViewDetails = ({ row, sectorsData }: Props) => {
 
-  const truncateText = (text: string, maxLength: number) => {
-    if (text?.length <= maxLength) return text;
-
-    let truncated = text.slice(0, maxLength);
-    let lastSpaceIndex = truncated.lastIndexOf(' ');
-
-    if (lastSpaceIndex > 0) {
-      truncated = truncated.slice(0, lastSpaceIndex);
-    }
-
-    return truncated + '...';
-  };
-
   const renderPreview = () => {
     let previewText: string = '';
 
     if (row?.caption?.length > 0) {
       previewText = row?.caption.trim().replace(/[\t\n\r]+/g, ' ');
-      previewText = truncateText(previewText, 86);
+      previewText = DataManager.truncateText(previewText, 86);
     }
 
     return (
