@@ -74,7 +74,9 @@ const JamsMapView = () => {
           {MapManager.renderMarker(item, zoomLevel)}
 
           <Callout>
+            <View>
               <TextView>Hello worlddddddddd dspsifvpsfv asivnpsfvn</TextView>
+            </View>
           </Callout>
         </Marker>
       );
