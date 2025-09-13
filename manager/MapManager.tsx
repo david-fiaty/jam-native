@@ -5,6 +5,7 @@ import UserManager from "./UserManager";
 import JamMarkerView from "@/components/view/marker-view/JamMarkerView";
 import ProfileMarkerView from "@/components/view/marker-view/ProfileMarkerView";
 import DataManager from "./DataManager";
+import ScreenManager from "./ScreenManager";
 
 class MapManager {
   renderMarker = (item: any, zoomLevel?: any) => {
@@ -42,10 +43,11 @@ class MapManager {
   }
 
   getMarkerTitle(item: any) {
-    let title: string = i18n.t('No title available');
+    let title: string = '';
 
     if (this.isProfileMarker(item)) {
       title = UserManager.getProfileDisplayName(item);
+      title = ScreenManager.isWeb() ? title : DataManager.truncateText(title, 10);
     }
     else if (this.isJamMarker(item)) {
       title = item?.title;
