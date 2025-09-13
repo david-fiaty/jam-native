@@ -1,15 +1,16 @@
-import { GoogleMap, LoadScript, OverlayView } from "@react-google-maps/api";
+import MapView, { Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
 import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
+import { WebView } from "react-native-webview";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
+import SpinnerView from "./SpinnerView";
 import UserManager from "@/manager/UserManager";
+import SearchFiltersView from "./SearchFiltersView";
 import SearchManager from "@/manager/SearchManager";
 import TabsView from "./TabsView";
-import SearchFiltersView from "./SearchFiltersView";
-import SpinnerView from "./SpinnerView";
 import MapManager from "@/manager/MapManager";
 import MapLegendView from "./MapLegendView";
 
@@ -56,22 +57,61 @@ const JamsMapView = () => {
     const lat = parseFloat(item?.geolocation_latitude);
     const lng = parseFloat(item?.geolocation_longitude);
 
-    return { lat, lng };
+    return {
+      latitude: lat,
+      longitude: lng,
+    };
   };
 
   const renderMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
       return (
-        <OverlayView
+        <Marker
           key={item.id}
-          position={getMarkerCoordinate(item)}
-          mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+          coordinate={getMarkerCoordinate(item)}
         >
           {MapManager.renderMarker(item)}
-        </OverlayView>
+        </Marker>
       );
     }
   };
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <style>
+          html, body, #root {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+          }
+        </style>
+        <script src="https://maps.googleapis.com/maps/api/js?key=${Config.mapApiKey}"></script>
+      </head>
+      <body>
+        <div id="root"></div>
+        <script>
+          function initMap() {
+            const map = new google.maps.Map(document.getElementById("root"), {
+              center: { lat: 6.1692433, lng: 1.2220817 },
+              zoom: 18,
+            });
+            
+            new google.maps.Marker({
+              map: map,
+              position: { lat: 6.1692433, lng: 1.2220817 },
+              title: "hello",
+            });
+          }
+
+          window.onload = initMap;
+        </script>
+      </body>
+    </html>
+  `;
 
   useEffect(() => {
     (async () => {
@@ -95,39 +135,28 @@ const JamsMapView = () => {
     }
   }, [searchState]);
 
-  if (!isLoaded) return <SpinnerView />;
+  if (!currentLocation?.latitude || !currentLocation?.longitude || !isLoaded) return <SpinnerView />;
 
   return (
-    <LoadScript googleMapsApiKey={Config.mapApiKey}>
-      <TouchableWithoutFeedback>
-        <View style={[Layout.screenContent, styles.container]}>
+    <View style={styles.container}>
+      <TabsView
+        tabs={searchTabs}
+        currentTab={searchState.currentTab}
+        onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
+      />
 
-          <TabsView
-            tabs={searchTabs}
-            currentTab={searchState.currentTab}
-            onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
-          />
+      <SearchFiltersView />
 
-          <SearchFiltersView />
-
-          <GoogleMap
-            mapContainerStyle={styles.map}
-            center={getInitialRegion()}
-            zoom={7}
-            options={{
-              styles: Layout.mapStyle,
-              disableDefaultUI: true,
-            }}
-          >
-            {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => renderMarker(item))}
-            {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => renderMarker(item))}
-            {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => renderMarker(item))}
-          </GoogleMap>
-
-          <MapLegendView />
-        </View>
-      </TouchableWithoutFeedback>
-    </LoadScript>
+      <View style={styles.map}>
+        <WebView
+          originWhitelist={["*"]}
+          source={{ html }}
+          javaScriptEnabled={true}
+          domStorageEnabled={true}
+          style={styles.map}
+        />
+      </View>
+    </View>
   );
 };
 
