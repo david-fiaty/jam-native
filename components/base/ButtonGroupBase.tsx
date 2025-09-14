@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import { ButtonGroup } from "@rneui/base";
+import { ButtonGroup } from '@rneui/base';
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
 
