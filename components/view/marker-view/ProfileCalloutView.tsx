@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useRouter } from "expo-router";
 import { Layout } from '@/constants/Layout';
