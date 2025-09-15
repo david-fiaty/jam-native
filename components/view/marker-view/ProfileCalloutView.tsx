@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     marginBottom: Layout.space.base/2,
   },
   showMoreButton: {
-    color: Layout.colors.primary,
+    color: Layout.colors.black,
     backgroundColor: Layout.colors.tertiary,
     borderRadius: Layout.radius.round,
     padding: Layout.space.base/2,
