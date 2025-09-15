@@ -150,9 +150,14 @@ const JamsMapView = () => {
       <SearchFiltersView />
 
       <GoogleMap
-        mapContainerStyle={containerStyle}
+        mapContainerStyle={styles.map}
         center={initialRegion}
         zoom={7}
+        options={{
+          //styles: Layout.mapStyle,
+          //disableDefaultUI: true,
+          mapTypeControl: false, 
+        }}
       >
         {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => renderMarker(item))}
         {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => renderMarker(item))}
