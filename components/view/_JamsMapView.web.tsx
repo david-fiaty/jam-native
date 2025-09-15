@@ -1,24 +1,22 @@
-import MapView, { Callout, Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
+import { GoogleMap, LoadScript, OverlayView, OverlayViewF } from "@react-google-maps/api";
 import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
-import SpinnerView from "./SpinnerView";
 import UserManager from "@/manager/UserManager";
-import SearchFiltersView from "./SearchFiltersView";
 import SearchManager from "@/manager/SearchManager";
 import TabsView from "./TabsView";
+import SearchFiltersView from "./SearchFiltersView";
+import SpinnerView from "./SpinnerView";
 import MapManager from "@/manager/MapManager";
 import MapLegendView from "./MapLegendView";
-import TextView from "./TextView";
 
 const JamsMapView = () => {
   const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [zoomLevel, setZoomLevel] = useState<number>(0);
   const [searchResults, setSearchResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const prevSearchState: any = useRef(null);
@@ -36,10 +34,10 @@ const JamsMapView = () => {
     }
 
     return {
-      latitude: latitude,
-      longitude: longitude,
-      latitudeDelta: latitudeDelta,
-      longitudeDelta: longitudeDelta,
+      lat: latitude,
+      lng: longitude,
+      //latitudeDelta: latitudeDelta,
+      //longitudeDelta: longitudeDelta,
     };
   };
 
@@ -58,40 +56,25 @@ const JamsMapView = () => {
     const lat = parseFloat(item?.geolocation_latitude);
     const lng = parseFloat(item?.geolocation_longitude);
 
-    return {
-      latitude: lat,
-      longitude: lng,
-    };
+    return { lat, lng };
   };
 
   const renderMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
       return (
-        <Marker
+        <OverlayViewF
           key={item.id}
-          coordinate={getMarkerPosition(item)}
+          position={getMarkerPosition(item)}
+          mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+          getPixelPositionOffset={(width, height) => ({
+            x: -(width / 2),  
+            y: -height,
+          })}
         >
-          {MapManager.renderMarker(item, zoomLevel)}
-
-          {/*<Callout>
-            <View>
-              <TextView>Test tooltip callout</TextView>
-            </View>
-          </Callout> */}
-        </Marker>
+          {MapManager.renderMarker(item)}
+        </OverlayViewF>
       );
     }
-  };
-
-  const getZoomLevel = (region: any) => {
-    let angle = region.longitudeDelta;
-    let value = Math.round(Math.log(360 / angle) / Math.LN2);
-
-    return value;
-  };
-
-  const onRegionChangeComplete = (region: any) => {
-    setZoomLevel(getZoomLevel(region));
   };
 
   useEffect(() => {
@@ -116,37 +99,39 @@ const JamsMapView = () => {
     }
   }, [searchState]);
 
-  if (!currentLocation?.latitude || !currentLocation?.longitude || !isLoaded) return <SpinnerView />;
+  if (!isLoaded) return <SpinnerView />;
 
   return (
-    <TouchableWithoutFeedback>
-      <View style={styles.container}>
+    <LoadScript googleMapsApiKey={Config.mapApiKey}>
+      <TouchableWithoutFeedback>
+        <View style={[Layout.screenContent, styles.container]}>
 
-        <TabsView
-          tabs={searchTabs}
-          currentTab={searchState.currentTab}
-          onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
-        />
+          <TabsView
+            tabs={searchTabs}
+            currentTab={searchState.currentTab}
+            onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
+          />
 
-        <SearchFiltersView />
+          <SearchFiltersView />
 
-        <MapView
-          style={styles.map}
-          provider={PROVIDER_DEFAULT}
-          initialRegion={getInitialRegion()}
-          customMapStyle={Layout.mapStyle}
-          showsUserLocation={true}
-          showsMyLocationButton={true}
-          onRegionChangeComplete={onRegionChangeComplete}
-        >
-          {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => renderMarker(item))}
-          {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => renderMarker(item))}
-          {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => renderMarker(item))}
-        </MapView>
+          <GoogleMap
+            mapContainerStyle={styles.map}
+            center={getInitialRegion()}
+            zoom={7}
+            options={{
+              styles: Layout.mapStyle,
+              disableDefaultUI: true,
+            }}
+          >
+            {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => renderMarker(item))}
+            {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => renderMarker(item))}
+            {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => renderMarker(item))}
+          </GoogleMap>
 
-        <MapLegendView />
-      </View>
-    </TouchableWithoutFeedback>
+          <MapLegendView />
+        </View>
+      </TouchableWithoutFeedback>
+    </LoadScript>
   );
 };
 
