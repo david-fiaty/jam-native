@@ -155,8 +155,11 @@ const JamsMapView = () => {
         zoom={7}
         options={{
           //styles: Layout.mapStyle,
-          //disableDefaultUI: true,
+          disableDefaultUI: true,
+          zoomControl: false,
           mapTypeControl: false, 
+          streetViewControl: false,
+          fullscreenControl: true,
         }}
       >
         {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => renderMarker(item))}
