@@ -97,51 +97,75 @@ const JamsMapView = () => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <GoogleMap 
-      mapContainerStyle={containerStyle} 
-      //center={center} 
-      center={getInitialRegion()}
-      zoom={7}>
-      {places.map((place) => (
-        <React.Fragment key={place.id}>
-          <OverlayViewF
-            position={place.position}
-            mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-          >
-            <div
-              onClick={() => setSelectedPlace(place)}
-              style={{
-                background: "white",
-                border: "2px solid #333",
-                borderRadius: "50%",
-                width: "24px",
-                height: "24px",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                cursor: "pointer",
-              }}
-            >
-              📍
-            </div>
-          </OverlayViewF>
+    <View style={[Layout.screenContent, styles.container]}>
 
-          {/* Callout / InfoWindow */}
-          {selectedPlace?.id === place.id && (
-            <InfoWindow
+      <TabsView
+        tabs={searchTabs}
+        currentTab={searchState.currentTab}
+        onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
+      />
+
+      <SearchFiltersView />
+
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        //center={center} 
+        center={getInitialRegion()}
+        zoom={7}>
+        {places.map((place) => (
+          <React.Fragment key={place.id}>
+            <OverlayViewF
               position={place.position}
-              onCloseClick={() => setSelectedPlace(null)}
+              mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
             >
-              <div>
-                <h4>{place.name}</h4>
-                <p>Custom info here</p>
+              <div
+                onClick={() => setSelectedPlace(place)}
+                style={{
+                  background: "white",
+                  border: "2px solid #333",
+                  borderRadius: "50%",
+                  width: "24px",
+                  height: "24px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  cursor: "pointer",
+                }}
+              >
+                📍
               </div>
-            </InfoWindow>
-          )}
-        </React.Fragment>
-      ))}
-    </GoogleMap>
+            </OverlayViewF>
+
+            {/* Callout / InfoWindow */}
+            {selectedPlace?.id === place.id && (
+              <InfoWindow
+                position={place.position}
+                onCloseClick={() => setSelectedPlace(null)}
+              >
+                <div>
+                  <h4>{place.name}</h4>
+                  <p>Custom info here</p>
+                </div>
+              </InfoWindow>
+            )}
+          </React.Fragment>
+        ))}
+      </GoogleMap>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 0,
+    gap: Layout.space.base,
+    width: '100%',
+    flexGrow: 1,
+    backgroundColor: Layout.colors.white,
+  },
+  map: {
+    flex: 1,
+  },
+});
 
 export default JamsMapView;
