@@ -28,11 +28,23 @@ const ProfileCalloutView = ({ item }: Props) => {
   };
 
   return (
-    <View>
-      <TextView>{UserManager.getProfileDisplayName(item)}</TextView>
-      <TextView>{item?.profile_name}</TextView>
-      <TextView>{UserManager.getProfileTypeLabel(item?.profile_type)}</TextView>
-      <TextView>{DataManager.truncateText(item?.profile_description, 50)}</TextView>
+    <View style={styles.container}>
+      <TextView style={styles.fieldTitle}>{i18n.t('Jammer name')}</TextView>
+      <TextView style={styles.fieldValue}>{UserManager.getProfileDisplayName(item)}</TextView>
+
+      <TextView style={styles.fieldTitle}>{i18n.t('User name')}</TextView>
+      <TextView style={styles.fieldValue}>{item?.profile_name}</TextView>
+
+      <TextView style={styles.fieldTitle}>{i18n.t('Type')}</TextView>
+      <TextView style={styles.fieldValue}>{UserManager.getProfileTypeLabel(item?.profile_type)}</TextView>
+
+      {item?.profile_description && (
+        <>
+          <TextView style={styles.fieldTitle}>{i18n.t('Description')}</TextView>
+          <TextView style={styles.fieldValue}>{DataManager.truncateText(item?.profile_description, 50)}</TextView>
+        </>
+      )}
+
       <TouchableOpacity onPress={() => onShowMorePress(item)}>
         {i18n.t('Show more')}
       </TouchableOpacity>
@@ -41,8 +53,18 @@ const ProfileCalloutView = ({ item }: Props) => {
 };
 
 const styles = StyleSheet.create({
-
-  
+  container: {
+    width: '100%',
+    height: '100%',
+  },
+  fieldTitle: {
+    color: Layout.colors.gray,
+    fontSize: 12,
+  },
+  fieldValue: {
+    fontSize: 12,
+    marginBottom: Layout.space.base,
+  },
 });
 
 export default ProfileCalloutView;
