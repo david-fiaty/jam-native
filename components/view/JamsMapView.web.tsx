@@ -12,24 +12,6 @@ import SearchFiltersView from "./SearchFiltersView";
 import SpinnerView from "./SpinnerView";
 import MapManager from "@/manager/MapManager";
 import MapLegendView from "./MapLegendView";
-import DataManager from "@/manager/DataManager";
-import i18n from "@/translation/i18n";
-import SectionManager from "@/manager/SectionManager";
-
-const containerStyle = {
-  width: "100%",
-  height: "100%",
-};
-
-const center = {
-  lat: 37.7749,
-  lng: -122.4194,
-};
-
-const places = [
-  { id: 1, name: "Marker One", position: { lat: 37.7749, lng: -122.4194 } },
-  { id: 2, name: "Marker Two", position: { lat: 37.7849, lng: -122.4094 } },
-];
 
 const JamsMapView = () => {
   const dispatch = useDispatch();
@@ -48,8 +30,6 @@ const JamsMapView = () => {
   const getInitialRegion = () => {
     let latitude: any = Config.defaultLocation.latitude;
     let longitude: any = Config.defaultLocation.longitude;
-    let latitudeDelta: any = 0.2;
-    let longitudeDelta: any = 0.2;
 
     if (currentLocation?.latitude && currentLocation?.longitude) {
       latitude = currentLocation.latitude;
@@ -59,8 +39,6 @@ const JamsMapView = () => {
     return {
       lat: latitude,
       lng: longitude,
-      //latitudeDelta: latitudeDelta,
-      //longitudeDelta: longitudeDelta,
     };
   };
 
