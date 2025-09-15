@@ -103,7 +103,7 @@ const JamsMapView = () => {
 
           {selectedPlace?.id === item.id && (
             <InfoWindow
-              position={getMarkerPosition(item)}
+              position={getMarkerPosition(selectedPlace)}
               onCloseClick={() => setSelectedPlace(null)}
               options={{
                 disableAutoPan: false,
