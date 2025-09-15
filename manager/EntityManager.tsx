@@ -353,21 +353,14 @@ class EntityManager {
     return response;
   }
 
-  getLocationTypes() {
-    return [
-      {
-        id: 'online',
-        name: i18n.t('Online'),
-      },
-      {
-        id: 'physical',
-        name: i18n.t('Physical'),
-      },
-      {
-        id: 'online_physical',
-        name: i18n.t('Online/Physical'),
-      },
-    ];
+  getJamTypeLabel(jamType: string) {
+    let label: any = '';
+
+    if (jamType?.length > 0) {
+      label = (this.getJamTypes().find((o: any) => o.id === jamType))?.name;
+    }
+
+    return label?.length > 0 ? label: i18n.t('Unavailable');
   }
 
   getJamTypes() {
@@ -391,6 +384,23 @@ class EntityManager {
         id: 'random',
         name: i18n.t('Random'),
         icon: 'infinite',
+      },
+    ];
+  }
+
+  getLocationTypes() {
+    return [
+      {
+        id: 'online',
+        name: i18n.t('Online'),
+      },
+      {
+        id: 'physical',
+        name: i18n.t('Physical'),
+      },
+      {
+        id: 'online_physical',
+        name: i18n.t('Online/Physical'),
       },
     ];
   }

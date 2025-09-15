@@ -12,6 +12,9 @@ import SearchFiltersView from "./SearchFiltersView";
 import SpinnerView from "./SpinnerView";
 import MapManager from "@/manager/MapManager";
 import MapLegendView from "./MapLegendView";
+import DataManager from "@/manager/DataManager";
+import i18n from "@/translation/i18n";
+import SectionManager from "@/manager/SectionManager";
 
 const containerStyle = {
   width: "100%",
@@ -30,7 +33,6 @@ const places = [
 
 const JamsMapView = () => {
   const dispatch = useDispatch();
-  //const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [searchResults, setSearchResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const prevSearchState: any = useRef(null);
@@ -82,6 +84,8 @@ const JamsMapView = () => {
 
   const renderMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
+      let pixelOffset: number = 40;
+
       return (
         <React.Fragment key={item.id}>
           <OverlayViewF
@@ -97,15 +101,16 @@ const JamsMapView = () => {
             </div>
           </OverlayViewF>
 
-          {selectedPlace?.id === item.id && (
+          {selectedPlace && selectedPlace?.id === item.id && (
             <InfoWindow
-              position={getMarkerPosition(item)}
+              position={getMarkerPosition(selectedPlace)}
               onCloseClick={() => setSelectedPlace(null)}
+              options={{
+                disableAutoPan: false,
+                pixelOffset: new google.maps.Size(0, -pixelOffset),
+              }}
             >
-              <div>
-                <h4>{'item title'}</h4>
-                <p>Custom info here</p>
-              </div>
+              {MapManager.renderMarkerCallout(item)}
             </InfoWindow>
           )}
         </React.Fragment>
@@ -121,7 +126,6 @@ const JamsMapView = () => {
         }
 
         setInitialRegion(getInitialRegion());
-        //setIsLoaded(true);
       }
 
       setCurrentLocation(await UserManager.getLocation());
@@ -157,7 +161,7 @@ const JamsMapView = () => {
           //styles: Layout.mapStyle,
           disableDefaultUI: true,
           zoomControl: false,
-          mapTypeControl: false, 
+          mapTypeControl: false,
           streetViewControl: false,
           fullscreenControl: true,
         }}
@@ -166,6 +170,8 @@ const JamsMapView = () => {
         {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => renderMarker(item))}
         {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => renderMarker(item))}
       </GoogleMap>
+
+      <MapLegendView />
     </View>
   );
 }
