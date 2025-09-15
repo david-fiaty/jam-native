@@ -30,7 +30,6 @@ const places = [
 
 const JamsMapView = () => {
   const dispatch = useDispatch();
-  //const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [searchResults, setSearchResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const prevSearchState: any = useRef(null);
@@ -121,7 +120,6 @@ const JamsMapView = () => {
         }
 
         setInitialRegion(getInitialRegion());
-        //setIsLoaded(true);
       }
 
       setCurrentLocation(await UserManager.getLocation());
