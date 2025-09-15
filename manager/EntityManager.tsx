@@ -353,6 +353,16 @@ class EntityManager {
     return response;
   }
 
+  getJamOwnerName(item: any) {
+    let ownerName: string = item?.profile?.profile_name;
+
+    if (ownerName?.length > Config.maxUserNameLength) {  
+      ownerName = ownerName.substring(0, Config.maxUserNameLength) + '...';
+    } 
+
+    return ownerName;
+  }
+
   getJamTypeLabel(jamType: string) {
     let label: any = '';
 
