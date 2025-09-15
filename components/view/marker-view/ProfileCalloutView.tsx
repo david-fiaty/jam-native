@@ -45,7 +45,10 @@ const ProfileCalloutView = ({ item }: Props) => {
         </>
       )}
 
-      <TouchableOpacity onPress={() => onShowMorePress(item)}>
+      <TouchableOpacity 
+        onPress={() => onShowMorePress(item)}
+        style={styles.showMoreButton}
+      >
         {i18n.t('Show more')}
       </TouchableOpacity>
     </View>
@@ -63,8 +66,16 @@ const styles = StyleSheet.create({
   },
   fieldValue: {
     fontSize: 12,
-    marginBottom: Layout.space.base,
+    marginBottom: Layout.space.base/2,
   },
+  showMoreButton: {
+    color: Layout.colors.primary,
+    backgroundColor: Layout.colors.tertiary,
+    borderRadius: Layout.radius.round,
+    padding: Layout.space.base/2,
+    textAlign: 'center',
+    alignSelf: 'flex-start',
+  }
 });
 
 export default ProfileCalloutView;
