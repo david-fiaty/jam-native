@@ -15,7 +15,7 @@ type Props = {
 const ProfileCalloutView = ({ item }: Props) => {
   const router = useRouter();
 
-  const onViewMorePress = (row: any) => {
+  const onShowMorePress = (row: any) => {
     let path: string = 'public-jam';
     let params: any = {
       jamId: item?.id,
@@ -33,7 +33,7 @@ const ProfileCalloutView = ({ item }: Props) => {
       <TextView>{item?.profile_name}</TextView>
       <TextView>{UserManager.getProfileTypeLabel(item?.profile_type)}</TextView>
       <TextView>{DataManager.truncateText(item?.profile_description, 50)}</TextView>
-      <TouchableOpacity onPress={() => onViewMorePress(item)}>
+      <TouchableOpacity onPress={() => onShowMorePress(item)}>
         {i18n.t('Show more')}
       </TouchableOpacity>
     </View>
