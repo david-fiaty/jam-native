@@ -81,6 +81,8 @@ const JamsMapView = () => {
 
   const renderMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
+      let pixelOffset: number = 40;
+      
       return (
         <React.Fragment key={item.id}>
           <OverlayViewF
@@ -102,7 +104,7 @@ const JamsMapView = () => {
               onCloseClick={() => setSelectedPlace(null)}
               options={{
                 disableAutoPan: false,
-                pixelOffset: new google.maps.Size(0, -40),
+                pixelOffset: new google.maps.Size(0, -pixelOffset),
               }}
             >
               <div>
