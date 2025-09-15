@@ -110,6 +110,7 @@ class DataManager {
   }
 
   truncateText(text: string, maxLength: number, ellipsis?: any) {
+    if (!text) return '';
     if (text?.length <= maxLength) return text;
 
     ellipsis = ellipsis || '...';
