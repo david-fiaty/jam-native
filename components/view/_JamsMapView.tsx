@@ -53,7 +53,7 @@ const JamsMapView = () => {
     return results[key];
   };
 
-  const getMarkerCoordinate = (item: any) => {
+  const getMarkerPosition = (item: any) => {
     const lat = parseFloat(item?.geolocation_latitude);
     const lng = parseFloat(item?.geolocation_longitude);
 
@@ -68,7 +68,7 @@ const JamsMapView = () => {
       return (
         <Marker
           key={item.id}
-          coordinate={getMarkerCoordinate(item)}
+          coordinate={getMarkerPosition(item)}
         >
           {MapManager.renderMarker(item)}
         </Marker>
