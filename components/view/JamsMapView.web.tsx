@@ -22,24 +22,23 @@ const JamsMapView = () => {
   const [selectedPlace, setSelectedPlace] = useState<any>(null);
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [initialRegion, setInitialRegion] = useState<any>(null);
+  const zoomLevel: number = 7;
+  const pixelOffset: number = 40;
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: Config.mapApiKey,
   });
 
   const getInitialRegion = () => {
-    let latitude: any = Config.defaultLocation.latitude;
-    let longitude: any = Config.defaultLocation.longitude;
+    let lat: any = Config.defaultLocation.latitude;
+    let lng: any = Config.defaultLocation.longitude;
 
     if (currentLocation?.latitude && currentLocation?.longitude) {
-      latitude = currentLocation.latitude;
-      longitude = currentLocation.longitude;
+      lat = currentLocation.latitude;
+      lng = currentLocation.longitude;
     }
 
-    return {
-      lat: latitude,
-      lng: longitude,
-    };
+    return { lat: lat, lng: lng };
   };
 
   const getTabResults = (key: string) => {
@@ -57,13 +56,11 @@ const JamsMapView = () => {
     const lat = parseFloat(item?.geolocation_latitude);
     const lng = parseFloat(item?.geolocation_longitude);
 
-    return { lat, lng };
+    return { lat: lat, lng: lng };
   };
 
   const renderMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
-      let pixelOffset: number = 40;
-
       return (
         <React.Fragment key={item.id}>
           <OverlayViewF
@@ -105,8 +102,6 @@ const JamsMapView = () => {
 
         setInitialRegion(getInitialRegion());
       }
-
-      setCurrentLocation(await UserManager.getLocation());
     })();
   }, [searchState, searchTabs, isLoaded]);
 
@@ -134,7 +129,7 @@ const JamsMapView = () => {
       <GoogleMap
         mapContainerStyle={styles.map}
         center={initialRegion}
-        zoom={7}
+        zoom={zoomLevel}
         options={{
           //styles: Layout.mapStyle,
           disableDefaultUI: true,
