@@ -22,7 +22,7 @@ const JamsMapView = () => {
   const [selectedPlace, setSelectedPlace] = useState<any>(null);
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [initialRegion, setInitialRegion] = useState<any>(null);
-  const zoomLevel: number = 10;
+  const zoomLevel: number = 12;
   const pixelOffset: number = 40;
 
   const { isLoaded } = useJsApiLoader({
