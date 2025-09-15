@@ -37,6 +37,7 @@ const JamsMapView = () => {
   const searchTabs: any[] = SearchManager.getSearchTabs();
   const [selectedPlace, setSelectedPlace] = useState<any>(null);
   const [currentLocation, setCurrentLocation] = useState<any>(null);
+  const [initialRegion, setInitialRegion] = useState<any>(null);
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: Config.mapApiKey,
@@ -119,6 +120,7 @@ const JamsMapView = () => {
           dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
         }
 
+        setInitialRegion(getInitialRegion());
         //setIsLoaded(true);
       }
 
@@ -149,8 +151,7 @@ const JamsMapView = () => {
 
       <GoogleMap
         mapContainerStyle={containerStyle}
-        //center={center} 
-        center={getInitialRegion()}
+        center={initialRegion}
         zoom={7}
       >
         {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => renderMarker(item))}
