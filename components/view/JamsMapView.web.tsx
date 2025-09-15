@@ -22,6 +22,8 @@ const JamsMapView = () => {
   const [selectedPlace, setSelectedPlace] = useState<any>(null);
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [initialRegion, setInitialRegion] = useState<any>(null);
+  const zoomLevel: number = 7;
+  const pixelOffset: number = 40;
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: Config.mapApiKey,
@@ -62,8 +64,6 @@ const JamsMapView = () => {
 
   const renderMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
-      let pixelOffset: number = 40;
-
       return (
         <React.Fragment key={item.id}>
           <OverlayViewF
@@ -134,7 +134,7 @@ const JamsMapView = () => {
       <GoogleMap
         mapContainerStyle={styles.map}
         center={initialRegion}
-        zoom={7}
+        zoom={zoomLevel}
         options={{
           //styles: Layout.mapStyle,
           disableDefaultUI: true,
