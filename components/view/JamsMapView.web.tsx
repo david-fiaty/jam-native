@@ -102,8 +102,6 @@ const JamsMapView = () => {
 
         setInitialRegion(getInitialRegion());
       }
-
-      setCurrentLocation(await UserManager.getLocation());
     })();
   }, [searchState, searchTabs, isLoaded]);
 
