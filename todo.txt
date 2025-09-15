@@ -407,7 +407,7 @@ const headerVisibleOptions: object = {
           key={item.id}
           title={getMarkerTitle(item)}
           description={getMarkerDescription(item)}
-          coordinate={getMarkerCoordinate(item)}
+          coordinate={getMarkerPosition(item)}
           icon={markerImage} 
         />
       );

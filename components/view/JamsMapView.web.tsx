@@ -1,5 +1,5 @@
-import { GoogleMap, LoadScript, OverlayView } from "@react-google-maps/api";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { GoogleMap, useJsApiLoader, OverlayView, InfoWindow, OverlayViewF } from "@react-google-maps/api";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
@@ -13,14 +13,35 @@ import SpinnerView from "./SpinnerView";
 import MapManager from "@/manager/MapManager";
 import MapLegendView from "./MapLegendView";
 
+const containerStyle = {
+  width: "100%",
+  height: "100%",
+};
+
+const center = {
+  lat: 37.7749,
+  lng: -122.4194,
+};
+
+const places = [
+  { id: 1, name: "Marker One", position: { lat: 37.7749, lng: -122.4194 } },
+  { id: 2, name: "Marker Two", position: { lat: 37.7849, lng: -122.4094 } },
+];
+
 const JamsMapView = () => {
   const dispatch = useDispatch();
-  const [currentLocation, setCurrentLocation] = useState<any>(null);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  //const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [searchResults, setSearchResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const prevSearchState: any = useRef(null);
   const searchTabs: any[] = SearchManager.getSearchTabs();
+  const [selectedPlace, setSelectedPlace] = useState<any>(null);
+  const [currentLocation, setCurrentLocation] = useState<any>(null);
+  const [initialRegion, setInitialRegion] = useState<any>(null);
+
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: Config.mapApiKey,
+  });
 
   const getInitialRegion = () => {
     let latitude: any = Config.defaultLocation.latitude;
@@ -52,7 +73,7 @@ const JamsMapView = () => {
     return results[key];
   };
 
-  const getMarkerCoordinate = (item: any) => {
+  const getMarkerPosition = (item: any) => {
     const lat = parseFloat(item?.geolocation_latitude);
     const lng = parseFloat(item?.geolocation_longitude);
 
@@ -62,13 +83,32 @@ const JamsMapView = () => {
   const renderMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
       return (
-        <OverlayView
-          key={item.id}
-          position={getMarkerCoordinate(item)}
-          mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-        >
-          {MapManager.renderMarker(item)}
-        </OverlayView>
+        <React.Fragment key={item.id}>
+          <OverlayViewF
+            position={getMarkerPosition(item)}
+            mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+            getPixelPositionOffset={(width, height) => ({
+              x: -(width / 2),
+              y: -height,
+            })}
+          >
+            <div onClick={() => setSelectedPlace(item)}>
+              {MapManager.renderMarker(item)}
+            </div>
+          </OverlayViewF>
+
+          {selectedPlace?.id === item.id && (
+            <InfoWindow
+              position={getMarkerPosition(item)}
+              onCloseClick={() => setSelectedPlace(null)}
+            >
+              <div>
+                <h4>{'item title'}</h4>
+                <p>Custom info here</p>
+              </div>
+            </InfoWindow>
+          )}
+        </React.Fragment>
       );
     }
   };
@@ -80,7 +120,8 @@ const JamsMapView = () => {
           dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
         }
 
-        setIsLoaded(true);
+        setInitialRegion(getInitialRegion());
+        //setIsLoaded(true);
       }
 
       setCurrentLocation(await UserManager.getLocation());
@@ -98,38 +139,36 @@ const JamsMapView = () => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <LoadScript googleMapsApiKey={Config.mapApiKey}>
-      <TouchableWithoutFeedback>
-        <View style={[Layout.screenContent, styles.container]}>
+    <View style={[Layout.screenContent, styles.container]}>
 
-          <TabsView
-            tabs={searchTabs}
-            currentTab={searchState.currentTab}
-            onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
-          />
+      <TabsView
+        tabs={searchTabs}
+        currentTab={searchState.currentTab}
+        onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
+      />
 
-          <SearchFiltersView />
+      <SearchFiltersView />
 
-          <GoogleMap
-            mapContainerStyle={styles.map}
-            center={getInitialRegion()}
-            zoom={7}
-            options={{
-              styles: Layout.mapStyle,
-              disableDefaultUI: true,
-            }}
-          >
-            {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => renderMarker(item))}
-            {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => renderMarker(item))}
-            {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => renderMarker(item))}
-          </GoogleMap>
-
-          <MapLegendView />
-        </View>
-      </TouchableWithoutFeedback>
-    </LoadScript>
+      <GoogleMap
+        mapContainerStyle={styles.map}
+        center={initialRegion}
+        zoom={7}
+        options={{
+          //styles: Layout.mapStyle,
+          disableDefaultUI: true,
+          zoomControl: false,
+          mapTypeControl: false, 
+          streetViewControl: false,
+          fullscreenControl: true,
+        }}
+      >
+        {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => renderMarker(item))}
+        {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => renderMarker(item))}
+        {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => renderMarker(item))}
+      </GoogleMap>
+    </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
