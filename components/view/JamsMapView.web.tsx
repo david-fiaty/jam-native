@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { GoogleMap, useJsApiLoader, OverlayView, InfoWindow, OverlayViewF } from "@react-google-maps/api";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import { router } from "expo-router";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
@@ -86,20 +85,6 @@ const JamsMapView = () => {
   const renderMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
       let pixelOffset: number = 40;
-      let onButtonPress = (row: any) => {
-        let params: any = {
-          jamId: item?.id,
-          title: i18n.t('Jam'),
-          itemData: JSON.stringify(row?.item),
-          disableInfiniteScroll: true,
-        };
-
-        router.push({
-          pathname: '/public-jam', 
-          params: params,
-        });
-      };
-
 
       return (
         <React.Fragment key={item.id}>
@@ -116,9 +101,9 @@ const JamsMapView = () => {
             </div>
           </OverlayViewF>
 
-          {selectedPlace?.id === item.id && (
+          {selectedPlace && selectedPlace?.id === item.id && (
             <InfoWindow
-              position={getMarkerPosition(item)}
+              position={getMarkerPosition(selectedPlace)}
               onCloseClick={() => setSelectedPlace(null)}
               options={{
                 disableAutoPan: false,
@@ -130,7 +115,9 @@ const JamsMapView = () => {
                 <div>{item?.profile_name}</div>
                 <div>{UserManager.getProfileTypeLabel(item?.profile_type)}</div>
                 <div>{DataManager.truncateText(item?.profile_description, 55)}</div>
-                <button onClick={() => onButtonPress(item)}>{i18n.t('Show more')}</button>
+                <button>
+                  {i18n.t('Show more')}
+                </button>
               </div>
             </InfoWindow>
           )}
@@ -191,6 +178,8 @@ const JamsMapView = () => {
         {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => renderMarker(item))}
         {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => renderMarker(item))}
       </GoogleMap>
+
+      <MapLegendView />
     </View>
   );
 }
