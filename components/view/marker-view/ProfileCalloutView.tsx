@@ -16,15 +16,11 @@ const ProfileCalloutView = ({ item }: Props) => {
   const router = useRouter();
 
   const onShowMorePress = (row: any) => {
-    let path: string = 'public-jam';
-    let params: any = {
-      jamId: item?.id,
-      title: i18n.t('Jam'),
-      itemData: JSON.stringify(item),
-      disableInfiniteScroll: true,
-    };
-
-    SectionManager.push(router, path, params);
+    SectionManager.push(router, 'public-profile', { 
+      profileId: row?.id, 
+      itemData: JSON.stringify(row),
+      title: i18n.t("{{ name }}'s profile", {name: UserManager.getProfileDisplayName(row) }),
+    });
   };
 
   return (
