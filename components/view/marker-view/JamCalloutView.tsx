@@ -7,6 +7,7 @@ import i18n from "@/translation/i18n";
 import SectionManager from "@/manager/SectionManager";
 import UserManager from "@/manager/UserManager";
 import DataManager from "@/manager/DataManager";
+import EntityManager from "@/manager/EntityManager";
 
 type Props = {
   item: any;
@@ -30,13 +31,13 @@ const JamCalloutView = ({ item }: Props) => {
   return (
     <View style={styles.container}>
       <TextView style={styles.fieldTitle}>{i18n.t('Jammer name')}</TextView>
-      <TextView style={styles.fieldValue}>{UserManager.getProfileDisplayName(item)}</TextView>
+      <TextView style={styles.fieldValue}>{EntityManager.getJamOwnerName(item)}</TextView>
 
       <TextView style={styles.fieldTitle}>{i18n.t('User name')}</TextView>
-      <TextView style={styles.fieldValue}>{item?.profile_name}</TextView>
+      <TextView style={styles.fieldValue}>{EntityManager.getJamOwnerName(item)}</TextView>
 
       <TextView style={styles.fieldTitle}>{i18n.t('Type')}</TextView>
-      <TextView style={styles.fieldValue}>{UserManager.getProfileTypeLabel(item?.profile_type)}</TextView>
+      <TextView style={styles.fieldValue}>{EntityManager.getJamTypeLabel(item?.type)}</TextView>
 
       {item?.caption && (
         <>
