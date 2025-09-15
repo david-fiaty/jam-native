@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
     marginBottom: Layout.space.base/2,
   },
   showMoreButton: {
+    fontSize: 12,
     color: Layout.colors.black,
     backgroundColor: Layout.colors.tertiary,
     borderRadius: Layout.radius.round,
