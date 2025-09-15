@@ -34,12 +34,10 @@ const ProfileCalloutView = ({ item }: Props) => {
       <TextView style={styles.fieldTitle}>{i18n.t('Type')}</TextView>
       <TextView style={styles.fieldValue}>{UserManager.getProfileTypeLabel(item?.profile_type)}</TextView>
 
-      {item?.profile_description && (
-        <>
-          <TextView style={styles.fieldTitle}>{i18n.t('Description')}</TextView>
-          <TextView style={styles.fieldValue}>{DataManager.truncateText(item?.profile_description, 50)}</TextView>
-        </>
-      )}
+      <TextView style={styles.fieldTitle}>{i18n.t('Description')}</TextView>
+      <TextView style={styles.fieldValue}>
+        {item?.profile_description ? DataManager.truncateText(item?.profile_description, 50): i18n.t('Unavailable')}
+      </TextView>
 
       <TouchableOpacity 
         onPress={() => onShowMorePress(item)}
