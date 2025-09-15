@@ -101,7 +101,7 @@ const JamsMapView = () => {
             </div>
           </OverlayViewF>
 
-          {selectedPlace?.id === item.id && (
+          {selectedPlace && selectedPlace?.id === item.id && (
             <InfoWindow
               position={getMarkerPosition(selectedPlace)}
               onCloseClick={() => setSelectedPlace(null)}
@@ -114,7 +114,7 @@ const JamsMapView = () => {
                 <div>{UserManager.getProfileDisplayName(item)}</div>
                 <div>{item?.profile_name}</div>
                 <div>{UserManager.getProfileTypeLabel(item?.profile_type)}</div>
-                <div>{DataManager.truncateText(item?.profile_description, 55)}</div>
+                <div>{DataManager.truncateText(item?.profile_description || '', 55)}</div>
                 <button>
                   {i18n.t('Show more')}
                 </button>
