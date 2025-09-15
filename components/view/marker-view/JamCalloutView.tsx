@@ -27,7 +27,7 @@ const JamCalloutView = ({ item }: Props) => {
     SectionManager.push(router, path, params);
   };
 
-      return (
+  return (
     <View style={styles.container}>
       <TextView style={styles.fieldTitle}>{i18n.t('Jammer name')}</TextView>
       <TextView style={styles.fieldValue}>{UserManager.getProfileDisplayName(item)}</TextView>
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   },
   fieldValue: {
     fontSize: 12,
-    marginBottom: Layout.space.base/2,
+    marginBottom: Layout.space.base / 2,
   },
   showMoreButton: {
     fontSize: 12,
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     backgroundColor: Layout.colors.tertiary,
     borderRadius: Layout.radius.round,
     paddingHorizontal: Layout.space.base,
-    paddingVertical: Layout.space.base/2,
+    paddingVertical: Layout.space.base / 2,
     textAlign: 'center',
     alignSelf: 'flex-start',
   },
