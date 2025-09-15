@@ -22,7 +22,7 @@ const JamsMapView = () => {
   const [selectedPlace, setSelectedPlace] = useState<any>(null);
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [initialRegion, setInitialRegion] = useState<any>(null);
-  const zoomLevel: number = 7;
+  const zoomLevel: number = 10;
   const pixelOffset: number = 40;
 
   const { isLoaded } = useJsApiLoader({
@@ -30,18 +30,15 @@ const JamsMapView = () => {
   });
 
   const getInitialRegion = () => {
-    let latitude: any = Config.defaultLocation.latitude;
-    let longitude: any = Config.defaultLocation.longitude;
+    let lat: any = Config.defaultLocation.latitude;
+    let lng: any = Config.defaultLocation.longitude;
 
     if (currentLocation?.latitude && currentLocation?.longitude) {
-      latitude = currentLocation.latitude;
-      longitude = currentLocation.longitude;
+      lat = currentLocation.latitude;
+      lng = currentLocation.longitude;
     }
 
-    return {
-      lat: latitude,
-      lng: longitude,
-    };
+    return { lat, lng };
   };
 
   const getTabResults = (key: string) => {
