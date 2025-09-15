@@ -38,7 +38,7 @@ const JamsMapView = () => {
       lng = currentLocation.longitude;
     }
 
-    return { lat, lng };
+    return { lat: lat, lng: lng };
   };
 
   const getTabResults = (key: string) => {
@@ -56,7 +56,7 @@ const JamsMapView = () => {
     const lat = parseFloat(item?.geolocation_latitude);
     const lng = parseFloat(item?.geolocation_longitude);
 
-    return { lat, lng };
+    return { lat: lat, lng: lng };
   };
 
   const renderMarker = (item: any) => {
