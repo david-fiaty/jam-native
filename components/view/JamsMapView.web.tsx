@@ -100,10 +100,14 @@ const JamsMapView = () => {
             <InfoWindow
               position={getMarkerPosition(item)}
               onCloseClick={() => setSelectedPlace(null)}
+              options={{
+                disableAutoPan: false,
+                pixelOffset: new google.maps.Size(0, -40),
+              }}
             >
               <div>
-                <h4>{'item title'}</h4>
-                <p>Custom info here</p>
+                <h4>{MapManager.getMarkerTitle(item)}</h4>
+                <p>{MapManager.getMarkerDescription(item)}</p>
               </div>
             </InfoWindow>
           )}
@@ -155,7 +159,7 @@ const JamsMapView = () => {
           //styles: Layout.mapStyle,
           disableDefaultUI: true,
           zoomControl: false,
-          mapTypeControl: false, 
+          mapTypeControl: false,
           streetViewControl: false,
           fullscreenControl: true,
         }}
