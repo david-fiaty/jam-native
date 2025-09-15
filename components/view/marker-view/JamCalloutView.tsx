@@ -36,8 +36,11 @@ const JamCalloutView = ({ item }: Props) => {
       <TextView style={styles.fieldTitle}>{i18n.t('User name')}</TextView>
       <TextView style={styles.fieldValue}>{EntityManager.getJamOwnerName(item)}</TextView>
 
-      <TextView style={styles.fieldTitle}>{i18n.t('Type')}</TextView>
-      <TextView style={styles.fieldValue}>{EntityManager.getJamTypeLabel(item?.type)}</TextView>
+      <TextView style={styles.fieldTitle}>{i18n.t('@host')}</TextView>
+      <TextView style={styles.fieldValue}>{EntityManager.getJamOwnerName(item)}</TextView>
+
+      <TextView style={styles.fieldTitle}>{i18n.t('Name')}</TextView>
+      <TextView style={styles.fieldValue}>{item?.title ? item?.title : i18n.t('Unavailable')}</TextView>
 
       <TextView style={styles.fieldTitle}>{i18n.t('Description')}</TextView>
       <TextView style={styles.fieldValue}>
