@@ -1,11 +1,10 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useRouter } from "expo-router";
 import { Layout } from '@/constants/Layout';
 import TextView from "../TextView";
 import i18n from "@/translation/i18n";
 import SectionManager from "@/manager/SectionManager";
-import UserManager from "@/manager/UserManager";
 import DataManager from "@/manager/DataManager";
 import EntityManager from "@/manager/EntityManager";
 
