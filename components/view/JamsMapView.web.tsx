@@ -72,6 +72,31 @@ const JamsMapView = () => {
     return results[key];
   };
 
+  const getMarkerPosition = (item: any) => {
+    const lat = parseFloat(item?.geolocation_latitude);
+    const lng = parseFloat(item?.geolocation_longitude);
+
+    return { lat, lng };
+  };
+
+  const renderMarker = (item: any) => {
+    if (item?.geolocation_longitude && item?.geolocation_latitude) {
+      return (
+        <OverlayViewF
+          key={item.id}
+          position={getMarkerPosition(item)}
+          mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+          getPixelPositionOffset={(width, height) => ({
+            x: -(width / 2),  
+            y: -height,
+          })}
+        >
+          {MapManager.renderMarker(item)}
+        </OverlayViewF>
+      );
+    }
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {

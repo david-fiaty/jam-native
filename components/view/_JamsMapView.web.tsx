@@ -52,7 +52,7 @@ const JamsMapView = () => {
     return results[key];
   };
 
-  const getMarkerCoordinate = (item: any) => {
+  const getMarkerPosition = (item: any) => {
     const lat = parseFloat(item?.geolocation_latitude);
     const lng = parseFloat(item?.geolocation_longitude);
 
@@ -64,7 +64,7 @@ const JamsMapView = () => {
       return (
         <OverlayViewF
           key={item.id}
-          position={getMarkerCoordinate(item)}
+          position={getMarkerPosition(item)}
           mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
           getPixelPositionOffset={(width, height) => ({
             x: -(width / 2),  
