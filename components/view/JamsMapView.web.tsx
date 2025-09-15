@@ -82,17 +82,30 @@ const JamsMapView = () => {
   const renderMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
       return (
-        <OverlayViewF
-          key={item.id}
-          position={getMarkerPosition(item)}
-          mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-          getPixelPositionOffset={(width, height) => ({
-            x: -(width / 2),  
-            y: -height,
-          })}
-        >
-          {MapManager.renderMarker(item)}
-        </OverlayViewF>
+        <React.Fragment key={item.id}>
+          <OverlayViewF
+            position={getMarkerPosition(item)}
+            mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+            getPixelPositionOffset={(width, height) => ({
+              x: -(width / 2),
+              y: -height,
+            })}
+          >
+            {MapManager.renderMarker(item)}
+          </OverlayViewF>
+
+          {selectedPlace?.id === item.id && (
+            <InfoWindow
+              position={getMarkerPosition(item)}
+              onCloseClick={() => setSelectedPlace(null)}
+            >
+              <div>
+                <h4>{'item title'}</h4>
+                <p>Custom info here</p>
+              </div>
+            </InfoWindow>
+          )}
+        </React.Fragment>
       );
     }
   };
@@ -136,45 +149,11 @@ const JamsMapView = () => {
         mapContainerStyle={containerStyle}
         //center={center} 
         center={getInitialRegion()}
-        zoom={7}>
-        {places.map((place) => (
-          <React.Fragment key={place.id}>
-            <OverlayViewF
-              position={place.position}
-              mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-            >
-              <div
-                onClick={() => setSelectedPlace(place)}
-                style={{
-                  background: "white",
-                  border: "2px solid #333",
-                  borderRadius: "50%",
-                  width: "24px",
-                  height: "24px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  cursor: "pointer",
-                }}
-              >
-                📍
-              </div>
-            </OverlayViewF>
-
-            {/* Callout / InfoWindow */}
-            {selectedPlace?.id === place.id && (
-              <InfoWindow
-                position={place.position}
-                onCloseClick={() => setSelectedPlace(null)}
-              >
-                <div>
-                  <h4>{place.name}</h4>
-                  <p>Custom info here</p>
-                </div>
-              </InfoWindow>
-            )}
-          </React.Fragment>
-        ))}
+        zoom={7}
+      >
+        {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => renderMarker(item))}
+        {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => renderMarker(item))}
+        {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => renderMarker(item))}
       </GoogleMap>
     </View>
   );
