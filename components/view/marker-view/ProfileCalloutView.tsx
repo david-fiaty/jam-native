@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
     borderRadius: Layout.radius.round,
     paddingHorizontal: Layout.space.base,
     paddingVertical: Layout.space.base/2,
+    marginTop: Layout.space.base/2,
     textAlign: 'center',
     alignSelf: 'flex-start',
   },
